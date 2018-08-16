@@ -59,7 +59,7 @@ export default class Header extends Component {
                 <button type="button" className="navbar-toggle collapsed">
                   <img src={images.menu} alt="Menu" />
                 </button>
-                <a class="navbar-brand" href="#">
+                <a className="navbar-brand" href="/">
                   <img src={images.headerLogo} alt="logo" />
                 </a>
               </div>
