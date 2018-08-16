@@ -1,0 +1,215 @@
+.menu_home {
+  &:before {
+    background-image: url(../images/home.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top center;
+    left: 0;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+    top: 10px;
+  }
+}
+.menu_home {
+  &:hover {
+    &:before {
+      background-image: url(../images/black_home.svg);
+    }
+  }
+}
+.menu_public {
+  &:before {
+    background-image: url(../images/public.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top center;
+    left: 0;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+    top: 10px;
+  }
+}
+.menu_public {
+  &:hover {
+    &:before {
+      background-image: url(../images/black_public.svg);
+    }
+  }
+}
+.menu_messages {
+  &:before {
+    background-image: url(../images/mail.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top center;
+    left: 0;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+    top: 10px;
+  }
+}
+.menu_messages {
+  &:hover {
+    &:before {
+      background-image: url(../images/black_mail.svg);
+    }
+  }
+}
+.menu_notifications {
+  &:before {
+    background-image: url(../images/white_heart.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top center;
+    left: 0;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+    top: 10px;
+  }
+}
+.menu_notifications {
+  &:hover {
+    &:before {
+      background-image: url(../images/black_heart.svg);
+    }
+  }
+}
+.menu_profile {
+  &:before {
+    background-image: url(../images/person.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top center;
+    left: 0;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+    top: 10px;
+  }
+}
+.menu_profile {
+  &:hover {
+    &:before {
+      background-image: url(../images/black_person.svg);
+    }
+  }
+}
+.menu_news {
+  &:before {
+    background-image: url(../images/grey_news.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top left;
+    left: 15px;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+  }
+}
+.menu_news {
+  &:hover {
+    &:before {
+      background-image: url(../images/news.svg);
+    }
+  }
+}
+.menu_explore {
+  &:before {
+    background-image: url(../images/grey_explore.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top left;
+    left: 15px;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+  }
+}
+.menu_explore {
+  &:hover {
+    &:before {
+      background-image: url(../images/explore.svg);
+    }
+  }
+}
+.menu_participants {
+  &:before {
+    background-image: url(../images/star.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top left;
+    left: 15px;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+  }
+}
+.menu_participants {
+  &:hover {
+    &:before {
+      background-image: url(../images/white_star.svg);
+    }
+  }
+}
+.menu_user {
+  &:before {
+    background-image: url(../images/grey_person.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top left;
+    left: 15px;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+  }
+}
+.menu_user {
+  &:hover {
+    &:before {
+      background-image: url(../images/person.svg);
+    }
+  }
+}
+.menu_pics {
+  &:before {
+    background-image: url(../images/grey_p.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top left;
+    left: 15px;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+  }
+}
+.menu_pics {
+  &:hover {
+    &:before {
+      background-image: url(../images/p.svg);
+    }
+  }
+}

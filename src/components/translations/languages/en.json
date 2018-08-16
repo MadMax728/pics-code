@@ -1,0 +1,54 @@
+{
+  "app_name": "Picstagraph",
+
+  "navigation": {
+    "home": "Home",
+    "profile": "My Profile",
+    "help_title": "We are Here to Help",
+    "help_phone": "123.456.567",
+    "welcome": "Welcome,",
+    "last_login": "Last login",
+    "username": "Santosh"
+  },
+
+  "footer": {
+    "copyright": " 2018 Picstagraph | All rights reserved ",
+    "disclaimer": " Disclaimers and Other Legal Documents ",
+    "privacy": " Privacy & Terms of Use "
+  },
+
+  "user_profile": {
+    "my_profile": "My Profile",
+    "username": "username",
+    "email": "Email Address",
+    "confirm_email": "Confirm Email Address",
+    "phone": "Preferred Phone Number",
+    "security_question": "Security Question {0}",
+    "edit_profile": "Edit Profile",
+    "change_password": "Change Password",
+    "select_one": "Select One",
+    "cancel": "Cancel",
+    "submit": "Save Changes",
+    "invalid_email": "Email Address is invalid. ",
+    "invalid_confirm_email": "Confirm Email Address is invalid. ",
+    "security_question_answer_requirements": "Answer fields should be a minimum of 3 characters to 35 characters. ",
+    "security_question_text_input_label": "Answer",
+    "first_security_question_label": "First Security Question",
+    "second_security_question_label": "Second Security Question",
+    "third_security_question_label": "Third Security Question",
+    "required_question_input_validation_feedback": "Security Question {0} required. ",
+    "required_answer_input_validation_feedback": "Security Answer {0} required. ",
+    "invalid_answer_input_validation_feedback": "Invalid entry. ",
+    "profile_updated_successfully_feedback": "Profile successfully updated. ",
+    "error_codes": {
+      "100": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. ",
+      "120": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. ",
+      "121": "Email Address entered has already been registered. ",
+      "122": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. "
+    }
+  },
+
+  "header": {
+    "logout": "Logout"
+  }
+}

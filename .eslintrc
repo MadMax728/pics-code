@@ -1,0 +1,7 @@
+{
+    "extends": "./packages/eslint-config-picstagraph/configurations/react.js",
+    "root": true,
+    "rules": {
+        "camelcase": "off"
+    }
+}

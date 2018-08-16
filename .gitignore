@@ -1,0 +1,50 @@
+# ios stuff
+.DS_Store
+
+# node.js stuff
+package-lock.json
+bin/
+build/
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+public/dist
+.vscode
+yarn.lock
+
+# ignore any file generated in the src/styles directory because sass is auto-generating it for us.
+src/styles/**/*.css
+
+# ignore the src/styles/index.css file cause its auto-generated
+public/global/css/index.css
+
+# ignore Jest code coverage
+coverage/
+
+#Ignore local enviroment variables
+#.env*.local
+
+
+# resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# visual studio related (in case some prefer that IDE)
+*.psess
+*.vsp
+*.vspx
+*.sap
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+
+*.[Cc]ache
+!*.[Cc]ache/
+
+typings/
+.idea/
+*.sln.iml

@@ -1,0 +1,16 @@
+import * as types from "../constants/actionTypes";
+import initialState from "./initialState";
+
+const {{camelCase name}}Reducer = (state = initialState.{{camelCase name}}, action) => {
+  switch (action.type) {
+    case types.MY_ACTION:
+      return {
+        ...state,
+        value: action.payload
+      };
+    default:
+      return state;
+  }
+};
+
+export default {{camelCase name}}Reducer;

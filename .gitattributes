@@ -1,0 +1,3 @@
+# set default behaviour to automatically normalise line endings
+* text=auto
+*.json       text eol=crlf
