@@ -21,7 +21,7 @@ const Community = () => {
       <div className="campaigns">
         {users.map(user => {
           return (
-            <div className="campaign_wrapper">
+            <div className="campaign_wrapper" key={user.user_name}>
               <div className="col-sm-3 col-xs-3">
                 <img
                   src={user.image}
