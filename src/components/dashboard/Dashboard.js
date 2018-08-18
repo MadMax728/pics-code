@@ -33,9 +33,9 @@ class Dashboard extends Component {
             </div>
             <div className="feed_description padding-15">
               <span className="secondary_title">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
+                {`Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s...
+                text ever since the 1500s...`}
               </span>
             </div>
           </div>
@@ -81,9 +81,9 @@ class Dashboard extends Component {
             </div>
             <div className="feed_description padding-15">
               <span className="secondary_title">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
+                {`Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s...
+                text ever since the 1500s...`}
               </span>
             </div>
           </div>
