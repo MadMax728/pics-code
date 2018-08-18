@@ -9,7 +9,7 @@ class UserProfile extends Component {
           <div className="feed_header">
             <div className="col-sm-1 col-xs-1 no-padding profile_image">
               <img
-                src={images.image}
+                src={images.campaign1}
                 alt="altmage"
                 className="img-circle img-responsive"
               />

@@ -7,7 +7,7 @@ class UserInfo extends Component {
       <div>
         <div className="user_info">
           <div className="col-sm-3 col-md-2 bg-white no-padding">
-            <img src={images.profile_pic} alt="profile" />
+            <img src={images.campaign1} alt="profile" />
           </div>
           <div className="col-sm-9 col-md-10 no-padding-right">
             <div className="bg-white padding-25 float_left">
