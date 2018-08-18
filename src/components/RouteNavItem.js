@@ -31,6 +31,7 @@ class RouteNavItem extends React.Component {
   render() {
     const {
       to,
+      className,
       eventKey,
       children,
       onSelect,
@@ -50,7 +51,7 @@ class RouteNavItem extends React.Component {
 
     return (
       <NavItem
-        className="route-item"
+        className={className}
         eventKey={eventKey}
         onSelect={onSelect}
         onClick={this.pushToHistory}

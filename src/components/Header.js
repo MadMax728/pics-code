@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../constants/images";
-import { Link } from "react-router-dom";
 import { Translations } from "./translations";
 import RouteNavItem from "./RouteNavItem";
-import DateFormat from "./DateFormat";
 import * as routes from "../constants/routes";
 
 export default class Header extends Component {
@@ -84,31 +82,42 @@ export default class Header extends Component {
                   </div>
                 </form>
                 <ul className="nav navbar-nav pull-right">
-                  <li>
-                    <a href="/" className="menu_home">
-                      <span>Home</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/" className="menu_public">
-                      <span>Campaign</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/" className="menu_messages">
-                      <span>Messages</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/" className="menu_notifications">
-                      <span>Notifications</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/" className="menu_profile">
-                      <span>Profile</span>
-                    </a>
-                  </li>
+                  <RouteNavItem
+                    to={routes.ROOT_ROUTE}
+                    className={`menu_home`}
+                    activeAtRoot
+                    closeMenu={this.toggleNav}
+                  >
+                    <span>{Translations.navigation.home}</span>
+                  </RouteNavItem>
+                  <RouteNavItem
+                    to={routes.CAMPAIGN_ROUTE}
+                    className={`menu_public`}
+                    closeMenu={this.toggleNav}
+                  >
+                    <span>{Translations.navigation.campaign}</span>
+                  </RouteNavItem>
+                  <RouteNavItem
+                    to={routes.MESSAGES_ROUTE}
+                    className={`menu_messages`}
+                    closeMenu={this.toggleNav}
+                  >
+                    <span>{Translations.navigation.messages}</span>
+                  </RouteNavItem>
+                  <RouteNavItem
+                    to={routes.NOTIFICATIONS_ROUTE}
+                    className={`menu_notifications`}
+                    closeMenu={this.toggleNav}
+                  >
+                    <span>{Translations.navigation.notifications}</span>
+                  </RouteNavItem>
+                  <RouteNavItem
+                    to={routes.MY_PROFILE_ROUTE}
+                    className={`menu_profile`}
+                    closeMenu={this.toggleNav}
+                  >
+                    <span>{Translations.navigation.profile}</span>
+                  </RouteNavItem>
                 </ul>
               </div>
             </div>

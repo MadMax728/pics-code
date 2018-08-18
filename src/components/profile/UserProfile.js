@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../constants/images";
 
-class Dashboard extends Component {
+class UserProfile extends Component {
   render() {
     return (
       <div>
@@ -79,22 +79,67 @@ class Dashboard extends Component {
                 className="img-responsive"
               />
             </div>
-            <div className="feed_description padding-15">
-              <span className="secondary_title">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s...
-              </span>
+            <div className="feed_description padding-10">
+              <div className="normal_title">Title</div>
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">Start: </span>
+                  <span className="secondary_title">10.10.2000</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Procedure: </span>
+                  <span className="secondary_title">Public</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Target group: </span>
+                  <span className="secondary_title">Female</span>
+                </div>
+              </div>
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">End: </span>
+                  <span className="secondary_title">10.10.2000</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Type: </span>
+                  <span className="secondary_title">Video</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Applications: </span>
+                  <span className="secondary_title">2000/2000</span>
+                </div>
+              </div>
+              <hr />
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">Start: </span>
+                  <span className="secondary_title">10.10.2000</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Procedure: </span>
+                  <span className="secondary_title">Public</span>
+                </div>
+              </div>
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">End: </span>
+                  <span className="secondary_title">10.10.2000</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Type: </span>
+                  <span className="secondary_title">Video</span>
+                </div>
+              </div>
             </div>
           </div>
           <div className="feed_footer padding-15">
             <div className="messages">
               <span className="count">100</span>
-              <img src={images.feed_msg} alt="like" />
+              <img src={images.feed_msg} alt="profile" />
             </div>
             <div className="likes">
               <span className="count">100</span>
-              <img src={images.feed_like} alt="like" />
+              <img src={images.feed_like} alt="profile" />
             </div>
             <div className="show_more_options">
               <a href="/">• • •</a>
@@ -106,4 +151,4 @@ class Dashboard extends Component {
   }
 }
 
-export default Dashboard;
+export default UserProfile;

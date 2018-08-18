@@ -1,0 +1,4 @@
+.navbar-nav .active a {
+    background: transparent !important;
+    color: orange  !important;
+}

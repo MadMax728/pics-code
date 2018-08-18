@@ -59,6 +59,10 @@
           @include gradient();
           color: $white_color;
         }
+        &.active {
+          @include gradient();
+          color: $white_color;
+        }
         span {
           padding-left: 30px;
           padding-top: 2px;
@@ -69,7 +73,7 @@
   }
 }
 .right_bar {
-  > .normal_title {
+  .normal_title {
     margin-bottom: 3px;
     background-color: $white_color;
   }

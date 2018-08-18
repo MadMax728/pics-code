@@ -1,16 +1,55 @@
 import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+import * as routes from "./constants/routes";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Dashboard from "./components/dashboard/Dashboard";
-import UserProfile from "./components/dashboard/UserProfile";
+import { Dashboard } from "./components/dashboard";
+import { UserProfile, UserInfo } from "./components/profile";
+import { SideBar, Languages, About } from "./components/common";
+import { Campaign, FavouriteCampaigns } from "./components/campaign";
 
 class App extends Component {
   render() {
     return (
       <div>
         <Header />
-        {/* <Dashboard /> */}
-        <UserProfile />
+        <section>
+          <div className="container">
+            <div className="row">
+              <Switch>
+                <Route
+                  exact
+                  path={routes.MY_PROFILE_ROUTE}
+                  component={UserInfo}
+                />
+              </Switch>
+              <div className="col-sm-3 col-md-2 left_menu no-padding">
+                <SideBar />
+              </div>
+              <div className="col-sm-5 col-md-7">
+                <Switch>
+                  <Route exact path={routes.ROOT_ROUTE} component={Dashboard} />
+                  <Route
+                    exact
+                    path={routes.CAMPAIGN_ROUTE}
+                    component={Campaign}
+                  />
+                  <Route
+                    exact
+                    path={routes.MY_PROFILE_ROUTE}
+                    component={UserProfile}
+                  />
+                  <Route component={Dashboard} />
+                </Switch>
+              </div>
+              <div className="col-sm-4 col-md-3 right_bar no-padding pull-left">
+                <FavouriteCampaigns />
+                <Languages />
+                <About />
+              </div>
+            </div>
+          </div>
+        </section>
         <Footer />
       </div>
     );
