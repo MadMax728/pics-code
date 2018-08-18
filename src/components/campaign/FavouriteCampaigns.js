@@ -53,7 +53,9 @@ const FavouriteCampaigns = () => {
       <div className="normal_title padding-15">Favourite Campaigns</div>
       <div className="campaigns">
         {campaigns.map(campaign => {
-          return <FavouriteCampaignItem campaign={campaign} />;
+          return (
+            <FavouriteCampaignItem campaign={campaign} key={campaign.id} />
+          );
         })}
       </div>
     </div>
