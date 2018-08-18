@@ -1,5 +1,5 @@
 import React from "react";
-import { SidebarNav } from "../../ui-kit";
+import { LeftSidebarNav } from "../../ui-kit";
 import * as routes from "../../../constants/routes";
 import { Translations } from "../../translations";
 
@@ -37,7 +37,7 @@ const Links = [
 ];
 
 const DashboardNav = () => {
-  return <SidebarNav links={Links} header={`Menu`} />;
+  return <LeftSidebarNav links={Links} header={`Menu`} />;
 };
 
 export default DashboardNav;

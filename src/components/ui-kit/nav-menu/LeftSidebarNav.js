@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
-const SidebarNav = ({ header, links }) => {
+const LeftSidebarNav = ({ header, links }) => {
   return (
     <div className="collapse navbar-collapse no-padding" id="left_menu">
       {header && (
@@ -28,7 +28,7 @@ const SidebarNav = ({ header, links }) => {
   );
 };
 
-SidebarNav.propTypes = {
+LeftSidebarNav.propTypes = {
   header: PropTypes.string,
   links: PropTypes.arrayOf(
     PropTypes.shape({
@@ -41,4 +41,4 @@ SidebarNav.propTypes = {
   ).isRequired
 };
 
-export default SidebarNav;
+export default LeftSidebarNav;

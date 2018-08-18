@@ -127,7 +127,7 @@
   margin-bottom: 5px;
   @include float();
   .feed_header {
-    padding: 15px 0px;
+    padding: 15px 15px;
     @include float();
     .profile_image {
       img {
@@ -178,7 +178,7 @@
     .show_more_options {
       display: inline-block;
       float: right;
-      a {
+      div {
         color: $charcoal_color;
       }
     }

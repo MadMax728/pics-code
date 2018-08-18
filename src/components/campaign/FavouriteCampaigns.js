@@ -1,100 +1,63 @@
-import React, { Component } from "react";
+import React from "react";
 import * as images from "../../constants/images";
+import FavouriteCampaignItem from "./FavouriteCampaignItem";
 
-class FavouriteCampaigns extends Component {
-  render() {
-    return (
-      <div>
-        <div className="normal_title padding-15">Favourite Campaigns</div>
-        <div className="campaigns">
-          <div className="campaign_wrapper">
-            <div className="col-sm-4 col-xs-2">
-              <img
-                src={images.image}
-                alt="altmage"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-sm-8 col-xs-10 no-padding">
-              <div className="normal_title">Title of campaigns</div>
-              <div className="secondary_title">User name</div>
-              <div className="grey_title">01.01.2000 in Category</div>
-            </div>
-          </div>
-          <div className="campaign_wrapper">
-            <div className="col-sm-4 col-xs-2">
-              <img
-                src={images.image}
-                alt="altmage"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-sm-8 col-xs-10 no-padding">
-              <div className="normal_title">Title of campaigns</div>
-              <div className="secondary_title">User name</div>
-              <div className="grey_title">01.01.2000 in Category</div>
-            </div>
-          </div>
-          <div className="campaign_wrapper">
-            <div className="col-sm-4 col-xs-2">
-              <img
-                src={images.image}
-                alt="altmage"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-sm-8 col-xs-10 no-padding">
-              <div className="normal_title">Title of campaigns</div>
-              <div className="secondary_title">User name</div>
-              <div className="grey_title">01.01.2000 in Category</div>
-            </div>
-          </div>
-          <div className="campaign_wrapper">
-            <div className="col-sm-4 col-xs-2">
-              <img
-                src={images.image}
-                alt="altmage"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-sm-8 col-xs-10 no-padding">
-              <div className="normal_title">Title of campaigns</div>
-              <div className="secondary_title">User name</div>
-              <div className="grey_title">01.01.2000 in Category</div>
-            </div>
-          </div>
-          <div className="campaign_wrapper">
-            <div className="col-sm-4 col-xs-2">
-              <img
-                src={images.image}
-                alt="altmage"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-sm-8 col-xs-10 no-padding">
-              <div className="normal_title">Title of campaigns</div>
-              <div className="secondary_title">User name</div>
-              <div className="grey_title">01.01.2000 in Category</div>
-            </div>
-          </div>
-          <div className="campaign_wrapper">
-            <div className="col-sm-4 col-xs-2">
-              <img
-                src={images.image}
-                alt="altmage"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-sm-8 col-xs-10 no-padding">
-              <div className="normal_title">Title of campaigns</div>
-              <div className="secondary_title">User name</div>
-              <div className="grey_title">01.01.2000 in Category</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
+const campaigns = [
+  {
+    user: {
+      name: "Santosh Shinde",
+      image: `${images.campaign1}`
+    },
+    title: "Title of campaigns",
+    category: "01.01.2000 in Category",
+    image: `${images.campaign4}`,
+    desc:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
+    msg_count: 12,
+    like_count: 12,
+    id: 1
+  },
+  {
+    user: {
+      name: "Santosh Shinde",
+      image: `${images.campaign1}`
+    },
+    title: "Title of campaigns",
+    category: "01.01.2000 in Category",
+    image: `${images.campaign2}`,
+    desc:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
+    msg_count: 12,
+    like_count: 12,
+    id: 2
+  },
+  {
+    user: {
+      name: "Santosh Shinde",
+      image: `${images.campaign1}`
+    },
+    title: "Title of campaigns",
+    category: "01.01.2000 in Category",
+    image: `${images.campaign3}`,
+    desc:
+      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
+    msg_count: 12,
+    like_count: 12,
+    id: 3
   }
-}
+];
+
+const FavouriteCampaigns = () => {
+  return (
+    <div>
+      <div className="normal_title padding-15">Favourite Campaigns</div>
+      <div className="campaigns">
+        {campaigns.map(campaign => {
+          return <FavouriteCampaignItem campaign={campaign} />;
+        })}
+      </div>
+    </div>
+  );
+};
 
 export default FavouriteCampaigns;

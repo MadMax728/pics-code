@@ -5,8 +5,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { Dashboard } from "./components/dashboard";
 import { UserProfile, UserInfo } from "./components/profile";
-import { SideBar, Languages, About } from "./components/common";
-import { Campaign, FavouriteCampaigns } from "./components/campaign";
+import { LeftSideBar, RightSideBar } from "./components/common";
+import { Campaign } from "./components/campaign";
 
 class App extends Component {
   render() {
@@ -24,7 +24,7 @@ class App extends Component {
                 />
               </Switch>
               <div className="col-sm-3 col-md-2 left_menu no-padding">
-                <SideBar />
+                <LeftSideBar />
               </div>
               <div className="col-sm-5 col-md-7">
                 <Switch>
@@ -43,9 +43,7 @@ class App extends Component {
                 </Switch>
               </div>
               <div className="col-sm-4 col-md-3 right_bar no-padding pull-left">
-                <FavouriteCampaigns />
-                <Languages />
-                <About />
+                <RightSideBar />
               </div>
             </div>
           </div>

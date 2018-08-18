@@ -3,7 +3,7 @@ import { Route } from "react-router-dom";
 import * as routes from "../../constants/routes";
 import { DashboardNav } from "./nav";
 
-class SideBar extends Component {
+class LeftSideBar extends Component {
   render() {
     return (
       <div>
@@ -13,4 +13,4 @@ class SideBar extends Component {
   }
 }
 
-export default SideBar;
+export default LeftSideBar;
