@@ -9,7 +9,8 @@ import { LeftSideBar, RightSideBar } from "./components/common";
 import { Campaign } from "./components/campaign";
 
 class App extends Component {
-  render() {
+  webRender = () => {
+    //if screen size is less than 767 * 560
     return (
       <div>
         <Header />
@@ -49,6 +50,16 @@ class App extends Component {
           </div>
         </section>
         <Footer />
+      </div>
+    );
+  };
+
+  mobileRender = () => {};
+
+  render() {
+    return (
+      <div>
+        <Route render={this.webRender} />
       </div>
     );
   }
