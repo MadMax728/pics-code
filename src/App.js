@@ -7,8 +7,19 @@ import { Dashboard } from "./components/dashboard";
 import { UserProfile, UserInfo } from "./components/profile";
 import { LeftSideBar, RightSideBar } from "./components/common";
 import { Campaign } from "./components/campaign";
+import Mobile from "./components/mobile/Mobile";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      width: window.innerWidth,
+      height: window.innerHeight
+    };
+
+    console.log("Windows width", this.state);
+  }
+
   webRender = () => {
     //if screen size is less than 767 * 560
     return (
@@ -54,14 +65,31 @@ class App extends Component {
     );
   };
 
-  mobileRender = () => {};
-
-  render() {
+  mobileRender = () => {
     return (
       <div>
-        <Route render={this.webRender} />
+        <Mobile />
       </div>
     );
+  };
+
+  render() {
+    const { width, height } = this.state;
+    const isMobile = width <= 760 && height <= 600;
+    console.log("isMobile", isMobile);
+    if (isMobile) {
+      return (
+        <div>
+          <Route render={this.mobileRender} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Route render={this.webRender} />
+        </div>
+      );
+    }
   }
 }
 
