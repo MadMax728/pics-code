@@ -20,6 +20,21 @@ class App extends Component {
     console.log("Windows width", this.state);
   }
 
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  // make sure to remove the listener
+  // when the component is not mounted anymore
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    console.log("Width123", window.innerWidth);
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
+
   webRender = () => {
     //if screen size is less than 767 * 560
     return (
