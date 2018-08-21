@@ -22,6 +22,12 @@ body {
   @include body_grey();
   font-family: "Helvetica";
 }
+.container {
+  width: 915px;
+  @media (max-width: 914px) {
+    width: 100%;
+  }
+}
 .no-padding {
   padding: 0px;
 }
@@ -36,6 +42,9 @@ body {
 }
 .padding-25 {
   padding: 25px;
+}
+.padding-rl-5 {
+  padding: 0px 5px;
 }
 .size-20 {
   font-size: 20px;

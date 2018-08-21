@@ -1,6 +1,6 @@
 .menu_home {
   &:before {
-    background-image: url(../images/home.svg);
+    background-image: url(../images/black_home.svg);
     height: 20px;
     content: "";
     position: absolute;
@@ -14,15 +14,20 @@
   }
 }
 .menu_home {
+  &.active {
+    &:before {
+      background-image: url(../images/home.svg);
+    }
+  }
   &:hover {
     &:before {
-      background-image: url(../images/black_home.svg);
+      background-image: url(../images/home.svg);
     }
   }
 }
 .menu_public {
   &:before {
-    background-image: url(../images/public.svg);
+    background-image: url(../images/black_public.svg);
     height: 20px;
     content: "";
     position: absolute;
@@ -36,15 +41,20 @@
   }
 }
 .menu_public {
+  &.active {
+    &:before {
+      background-image: url(../images/public.svg);
+    }
+  }
   &:hover {
     &:before {
-      background-image: url(../images/black_public.svg);
+      background-image: url(../images/public.svg);
     }
   }
 }
 .menu_messages {
   &:before {
-    background-image: url(../images/mail.svg);
+    background-image: url(../images/black_mail.svg);
     height: 20px;
     content: "";
     position: absolute;
@@ -58,15 +68,20 @@
   }
 }
 .menu_messages {
+  &.active {
+    &:before {
+      background-image: url(../images/mail.svg);
+    }
+  }
   &:hover {
     &:before {
-      background-image: url(../images/black_mail.svg);
+      background-image: url(../images/mail.svg);
     }
   }
 }
 .menu_notifications {
   &:before {
-    background-image: url(../images/white_heart.svg);
+    background-image: url(../images/black_heart.svg);
     height: 20px;
     content: "";
     position: absolute;
@@ -80,15 +95,20 @@
   }
 }
 .menu_notifications {
+  &.active {
+    &:before {
+      background-image: url(../images/white_heart.svg);
+    }
+  }
   &:hover {
     &:before {
-      background-image: url(../images/black_heart.svg);
+      background-image: url(../images/white_heart.svg);
     }
   }
 }
 .menu_profile {
   &:before {
-    background-image: url(../images/person.svg);
+    background-image: url(../images/black_person.svg);
     height: 20px;
     content: "";
     position: absolute;
@@ -102,9 +122,14 @@
   }
 }
 .menu_profile {
+  &.active {
+    &:before {
+      background-image: url(../images/person.svg);
+    }
+  }
   &:hover {
     &:before {
-      background-image: url(../images/black_person.svg);
+      background-image: url(../images/person.svg);
     }
   }
 }
