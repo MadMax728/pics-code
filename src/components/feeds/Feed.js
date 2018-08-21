@@ -12,11 +12,9 @@ const Feed = ({ campaign }) => {
           campaign.image && (
             <div className="feed_image">
               <div className="embed-responsive embed-responsive-16by9">
-                <img
-                  src={campaign.image}
-                  alt="altmage"
-                  className="img-responsive embed-responsive-item"
-                />
+                <div className="img-responsive embed-responsive-item">
+                  <img src={campaign.image} alt="altmage" />
+                </div>
               </div>
             </div>
           )}
