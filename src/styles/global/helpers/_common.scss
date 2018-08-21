@@ -22,12 +22,6 @@ body {
   @include body_grey();
   font-family: "Helvetica";
 }
-.container {
-  width: 915px;
-  @media (max-width: 914px) {
-    width: 100%;
-  }
-}
 .no-padding {
   padding: 0px;
 }
