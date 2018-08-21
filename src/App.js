@@ -53,7 +53,7 @@ class App extends Component {
               <div className="left_menu no-padding">
                 <LeftSideBar />
               </div>
-              <div className="padding-rl-5 middle-section">
+              <div className="padding-rl-10 middle-section">
                 <Switch>
                   <Route exact path={routes.ROOT_ROUTE} component={Dashboard} />
                   <Route

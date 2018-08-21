@@ -30,11 +30,15 @@ header {
     .navbar-form {
       padding: 0;
       margin: 10px 0px;
+      width: 60%;
+      @media (min-width: 992px) and (max-width: 1199px) {
+        width: 55%;
+      }
+      @media (min-width: 768px) and (max-width: 991px) {
+        width: 40%;
+      }
       .search-input-group {
-        width: 454px;
-        @media (max-width: 914px) {
-          width: 320px;
-        }
+        width: 100%;
         input {
           border-radius: 0;
           border: 0;
@@ -86,7 +90,7 @@ header {
           }
         }
         a {
-          color: $astronaut_blue;
+          color: $white_color;
           text-align: center;
           transition: all ease 0.5s;
           padding-top: 5px;
