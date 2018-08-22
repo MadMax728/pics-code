@@ -14,17 +14,17 @@ class Home extends Component {
                 </button>
               </div>
               <div className="language_link padding-15">
-                <a href="#">Language</a>
+                <a href="/">Language</a>
               </div>
               <div className="clearfix" />
               <div className="mobile_page_logo text-center padding-15">
-                <img src={images.mobile_logo} />
+                <img src={images.mobile_logo} alt="mobile_logo" />
               </div>
               <div className="clearfix" />
               <div className="download_option text-center">
                 <div className="grey_title padding-15">Download App</div>
-                <img src={images.iphone} />
-                <img src={images.andriod} />
+                <img src={images.iphone} alt="iphone" />
+                <img src={images.andriod} alt="andriod" />
               </div>
             </div>
           </div>
