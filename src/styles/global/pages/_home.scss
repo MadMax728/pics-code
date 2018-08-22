@@ -46,6 +46,8 @@
 .left_menu {
   background-color: $white_color;
   z-index: 9;
+  width: 20%;
+  float: left;
   .navbar-nav {
     li {
       width: 100%;
@@ -56,6 +58,10 @@
         font-size: 14px;
         padding: 13px 18px;
         &:hover {
+          @include gradientreverse();
+          color: $white_color;
+        }
+        &.active {
           @include gradient();
           color: $white_color;
         }
@@ -68,8 +74,14 @@
     }
   }
 }
+.middle-section {
+  width: 50%;
+  float: left;
+}
 .right_bar {
-  > .normal_title {
+  width: 30%;
+  float: left;
+  .normal_title {
     margin-bottom: 3px;
     background-color: $white_color;
   }
@@ -120,23 +132,34 @@
 }
 .feed_wrapper {
   background-color: $white_color;
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   @include float();
   .feed_header {
-    padding: 15px 0px;
+    padding: 10px;
     @include float();
     .profile_image {
+      display: inline-block;
+      float: left;
+      margin-right: 16px;
       img {
         width: 45px;
+        height: 45px;
       }
     }
+    .titles_wrapper {
+      display: inline-block;
+      float: left;
+    }
     .like_wrapper {
+      float: right;
       img {
         width: 30px;
       }
     }
   }
   .feed_content {
+    float: left;
+    width: 100%;
     .feed_image {
       img {
         width: 100%;
@@ -174,7 +197,7 @@
     .show_more_options {
       display: inline-block;
       float: right;
-      a {
+      div {
         color: $charcoal_color;
       }
     }

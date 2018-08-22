@@ -3,18 +3,28 @@
 
   "navigation": {
     "home": "Home",
-    "profile": "My Profile",
-    "help_title": "We are Here to Help",
-    "help_phone": "123.456.567",
-    "welcome": "Welcome,",
-    "last_login": "Last login",
-    "username": "Santosh"
+    "profile": "Profile",
+    "campaign": "Campaign",
+    "messages": "Messages",
+    "notifications": "Notifications"
+  },
+
+  "left_sidebar": {
+    "news": "News",
+    "explore": "Explore",
+    "participants": "Participants",
+    "user": "User",
+    "pics": "Pics"
   },
 
   "footer": {
     "copyright": " 2018 Picstagraph | All rights reserved ",
     "disclaimer": " Disclaimers and Other Legal Documents ",
     "privacy": " Privacy & Terms of Use "
+  },
+
+  "loading_messages": {
+    "loading_with_ellipsis": "Loading..."
   },
 
   "user_profile": {
