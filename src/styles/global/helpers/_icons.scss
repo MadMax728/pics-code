@@ -13,13 +13,7 @@
     top: 10px;
   }
 }
-.menu_home {
-  &:hover {
-    &:before {
-      background-image: url(../images/black_home.svg);
-    }
-  }
-}
+
 .menu_public {
   &:before {
     background-image: url(../images/public.svg);
@@ -33,13 +27,6 @@
     background-repeat: no-repeat;
     transition: all ease 0.5s;
     top: 10px;
-  }
-}
-.menu_public {
-  &:hover {
-    &:before {
-      background-image: url(../images/black_public.svg);
-    }
   }
 }
 .menu_messages {
@@ -57,13 +44,6 @@
     top: 10px;
   }
 }
-.menu_messages {
-  &:hover {
-    &:before {
-      background-image: url(../images/black_mail.svg);
-    }
-  }
-}
 .menu_notifications {
   &:before {
     background-image: url(../images/white_heart.svg);
@@ -79,13 +59,7 @@
     top: 10px;
   }
 }
-.menu_notifications {
-  &:hover {
-    &:before {
-      background-image: url(../images/black_heart.svg);
-    }
-  }
-}
+
 .menu_profile {
   &:before {
     background-image: url(../images/person.svg);
@@ -99,13 +73,6 @@
     background-repeat: no-repeat;
     transition: all ease 0.5s;
     top: 10px;
-  }
-}
-.menu_profile {
-  &:hover {
-    &:before {
-      background-image: url(../images/black_person.svg);
-    }
   }
 }
 .menu_news {

@@ -5,7 +5,7 @@ import * as images from "../../constants/images";
 const FeedHeader = ({ campaign }) => {
   return (
     <div className="feed_header">
-      <div className="col-sm-1 col-xs-1 no-padding profile_image">
+      <div className="no-padding profile_image">
         {campaign.user &&
           campaign.user.image && (
             <img
@@ -22,12 +22,12 @@ const FeedHeader = ({ campaign }) => {
           />
         )}
       </div>
-      <div className="col-sm-9 col-xs-7 no-padding">
+      <div className="no-padding titles_wrapper">
         <div className="normal_title">{campaign.title}</div>
         <div className="secondary_title">{campaign.user.name}</div>
         <div className="grey_title">{campaign.category}</div>
       </div>
-      <div className="col-sm-2 col-xs-2 like_wrapper">
+      <div className="like_wrapper">
         <img src={images.blue_heart} alt="like" className="pull-right" />
       </div>
     </div>

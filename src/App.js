@@ -50,10 +50,10 @@ class App extends Component {
                   component={UserInfo}
                 />
               </Switch>
-              <div className="col-sm-3 col-md-2 left_menu no-padding">
+              <div className="left_menu no-padding">
                 <LeftSideBar />
               </div>
-              <div className="col-sm-5 col-md-7">
+              <div className="padding-rl-10 middle-section">
                 <Switch>
                   <Route exact path={routes.ROOT_ROUTE} component={Dashboard} />
                   <Route
@@ -69,7 +69,7 @@ class App extends Component {
                   <Route component={Dashboard} />
                 </Switch>
               </div>
-              <div className="col-sm-4 col-md-3 right_bar no-padding pull-left">
+              <div className="right_bar no-padding pull-left">
                 <RightSideBar />
               </div>
             </div>
