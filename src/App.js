@@ -83,50 +83,9 @@ class App extends Component {
   mobileRender = () => {
     return (
       <div>
-        <Header />
-        <section>
-          <div className="container">
-            <div className="row">
-              <Switch>
-                <Route
-                  exact
-                  path={routes.MY_PROFILE_ROUTE}
-                  component={UserInfo}
-                />
-              </Switch>
-              <div className="left_menu no-padding">
-                <LeftSideBar />
-              </div>
-              <div className="padding-rl-5 middle-section">
-                <Switch>
-                  <Route exact path={routes.ROOT_ROUTE} component={Dashboard} />
-                  <Route
-                    exact
-                    path={routes.CAMPAIGN_ROUTE}
-                    component={Campaign}
-                  />
-                  <Route
-                    exact
-                    path={routes.MY_PROFILE_ROUTE}
-                    component={UserProfile}
-                  />
-                  <Route component={Dashboard} />
-                </Switch>
-              </div>
-              <div className="right_bar no-padding pull-left">
-                <RightSideBar />
-              </div>
-            </div>
-          </div>
-        </section>
-        <Footer />
+        <Mobile />
       </div>
     );
-    // return (
-    //   <div>
-    //     <Mobile />
-    //   </div>
-    // );
   };
 
   render() {

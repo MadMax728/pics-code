@@ -32,3 +32,11 @@ export const campaign2 = `${process.env.REACT_APP_CDN_URL}/campaigns/2.jpg`;
 export const campaign3 = `${process.env.REACT_APP_CDN_URL}/campaigns/3.jpg`;
 
 export const campaign4 = `${process.env.REACT_APP_CDN_URL}/campaigns/4.jpg`;
+
+export const mobile_logo = `${
+  process.env.REACT_APP_CDN_URL
+}/images/mobile_logo.png`;
+
+export const iphone = `${process.env.REACT_APP_CDN_URL}/images/iphone.png`;
+
+export const andriod = `${process.env.REACT_APP_CDN_URL}/images/andriod.png`;
