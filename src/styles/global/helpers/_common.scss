@@ -102,3 +102,125 @@ hr {
     color: $blue_color;
   }
 }
+/************** Form CSS *************************/
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+  float: left;
+  width: 100%;
+  .options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 100%;
+    li {
+      float: left;
+      width: 200px;
+      height: 40px;
+      position: relative;
+      &:last-child {
+        float: right;
+      }
+    }
+    label,
+    input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0px;
+    }
+    input[type="radio"] {
+      opacity: 0.011;
+      z-index: 100;
+      &:checked {
+        & + label {
+          @include gradient();
+          color: $white_color;
+          border: 0;
+        }
+      }
+    }
+    label {
+      padding: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid $nobel_color;
+      font-weight: normal;
+    }
+  }
+  img {
+    width: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+  input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid $nobel_color;
+    border-radius: 0;
+    box-shadow: none;
+    height: 40px;
+    &::placeholder {
+      color: $charcoal_color;
+    }
+    &:focus {
+      border-color: #000;
+      box-shadow: none;
+    }
+  }
+  .error-msg {
+    color: #d0021b;
+    font-size: 12px;
+  }
+  .options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 100%;
+    li {
+      float: left;
+      width: 200px;
+      height: 40px;
+      position: relative;
+      &:last-child {
+        float: right;
+      }
+    }
+    label,
+    input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0px;
+    }
+    input[type="radio"] {
+      opacity: 0.011;
+      z-index: 100;
+      &:checked {
+        & + label {
+          @include gradient();
+          color: $white_color;
+          border: 0;
+        }
+      }
+    }
+    label {
+      padding: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid $nobel_color;
+      font-weight: normal;
+    }
+  }
+}
