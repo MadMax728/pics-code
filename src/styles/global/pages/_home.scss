@@ -1,12 +1,23 @@
 .user_info {
   @include float();
-  margin-bottom: 5px;
-  img {
-    width: 100%;
-    padding: 3px;
+  margin-bottom: 10px;
+  display: flex;
+  .user-image {
+    width: 20%;
+    float: left;
+    img {
+      width: 100%;
+      padding: 3px;
+    }
   }
-  .float_left {
-    @include float();
+  .user-info {
+    width: 80%;
+    float: left;
+    display: flex;
+    .float_left {
+      @include float();
+      margin-left: 10px;
+    }
   }
   .user_name {
     font-size: 24px;
@@ -199,6 +210,72 @@
       float: right;
       div {
         color: $charcoal_color;
+      }
+    }
+  }
+  /*************** Comments CSS ****************/
+  .feed-comment {
+    .comment-wrapper {
+      border-bottom: 1px solid #ededed;
+      float: left;
+      width: 100%;
+      padding: 10px;
+      &:first-child {
+        border-top: 1px solid #ededed;
+      }
+      textarea {
+        height: 38px;
+        border: 0;
+        resize: none;
+        box-shadow: none;
+      }
+      .emoji_wrapper {
+        padding-right: 0px;
+      }
+      .commenter-info {
+        b {
+          font-family: "Helvetica-Bold";
+          color: $charcoal_color;
+          font-size: 14px;
+        }
+        color: $silver_color;
+        font-size: 12px;
+      }
+      .show_more_options {
+        padding-right: 5px;
+        text-align: right;
+        a {
+          color: $charcoal_color;
+        }
+      }
+      .comment-content {
+        @media (max-width: 991px) {
+          float: left;
+        }
+        p {
+          color: $charcoal_color;
+          font-size: 14px;
+          padding-left: 68px;
+          @media (max-width: 991px) {
+            padding-left: 0px;
+          }
+          a {
+            color: $blue_color;
+          }
+          .read-more {
+            color: $silver_color;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .view-more-comments {
+      float: left;
+      width: 100%;
+      a {
+        padding: 13px;
+        display: block;
+        color: $silver_color;
       }
     }
   }
