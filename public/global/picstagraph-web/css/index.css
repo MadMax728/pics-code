@@ -589,7 +589,8 @@ hr {
       padding: 3px; }
   .user_info .user-info {
     width: 80%;
-    float: left; }
+    float: left;
+    display: flex; }
     .user_info .user-info .float_left {
       float: left;
       width: 100%;
@@ -759,7 +760,7 @@ hr {
       color: #9b9b9b;
       font-size: 12px; }
       .feed_wrapper .feed-comment .comment-wrapper .commenter-info b {
-        font-family: 'Helvetica-Bold';
+        font-family: "Helvetica-Bold";
         color: #4a4a4a;
         font-size: 14px; }
     .feed_wrapper .feed-comment .comment-wrapper .show_more_options {
