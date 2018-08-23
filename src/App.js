@@ -92,19 +92,15 @@ class App extends Component {
     const { width, height } = this.state;
     const isMobile = width <= 760 && height <= 600;
     console.log("isMobile", isMobile);
-    if (isMobile) {
-      return (
-        <div>
+    return (
+      <React.Fragment>
+        {isMobile ? (
           <Route render={this.mobileRender} />
-        </div>
-      );
-    } else {
-      return (
-        <div>
+        ) : (
           <Route render={this.webRender} />
-        </div>
-      );
-    }
+        )}
+      </React.Fragment>
+    );
   }
 }
 

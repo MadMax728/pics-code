@@ -46,14 +46,12 @@ const campaigns = [
     id: 3
   }
 ];
-class Dashboard extends Component {
-  render() {
-    return (
-      <div>
-        <NewsFeeds campaigns={campaigns} />
-      </div>
-    );
-  }
-}
+const Dashboard = () => {
+  return (
+    <div>
+      <NewsFeeds campaigns={campaigns} />
+    </div>
+  );
+};
 
 export default Dashboard;
