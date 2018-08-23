@@ -166,7 +166,8 @@
 /*********Common Style ***********/
 body {
   background-color: rgba(198, 198, 198, 0.3);
-  font-family: 'Helvetica'; }
+  font-family: 'Helvetica';
+  color: #4a4a4a; }
 
 .no-padding {
   padding: 0px; }
@@ -183,8 +184,17 @@ body {
 .padding-25 {
   padding: 25px; }
 
+.padding-rl-10 {
+  padding: 0px 10px; }
+
 .size-20 {
   font-size: 20px; }
+
+.padding-r-5 {
+  padding-right: 5px; }
+
+.padding-l-5 {
+  padding-left: 5px; }
 
 hr {
   border: 1px solid #cdcdcd; }
@@ -241,6 +251,131 @@ hr {
   .black_button:hover {
     border: 1px solid #4578b3;
     color: #4578b3; }
+
+/************** Form CSS *************************/
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+  float: left;
+  width: 100%; }
+  .form-group .options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 100%; }
+    .form-group .options li {
+      float: left;
+      width: 200px;
+      height: 40px;
+      position: relative; }
+      .form-group .options li:last-child {
+        float: right; }
+    .form-group .options label, .form-group .options input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0px; }
+    .form-group .options input[type="radio"] {
+      opacity: 0.011;
+      z-index: 100; }
+      .form-group .options input[type="radio"]:checked + label {
+        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+        color: #ffffff;
+        border: 0; }
+    .form-group .options label {
+      padding: 10px;
+      border: 1px solid #CCC;
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid #979797;
+      font-weight: normal; }
+  .form-group img {
+    width: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px; }
+  .form-group input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #979797;
+    border-radius: 0;
+    box-shadow: none;
+    height: 40px; }
+    .form-group input::placeholder {
+      color: #4a4a4a; }
+    .form-group input:focus {
+      border-color: #000;
+      box-shadow: none; }
+  .form-group .error-msg {
+    color: #d0021b;
+    font-size: 12px; }
+  .form-group .options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 100%; }
+    .form-group .options li {
+      float: left;
+      width: 200px;
+      height: 40px;
+      position: relative; }
+      .form-group .options li:last-child {
+        float: right; }
+    .form-group .options label, .form-group .options input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0px; }
+    .form-group .options input[type="radio"] {
+      opacity: 0.011;
+      z-index: 100; }
+      .form-group .options input[type="radio"]:checked + label {
+        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+        color: #ffffff;
+        border: 0; }
+    .form-group .options label {
+      padding: 10px;
+      border: 1px solid #CCC;
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid #979797;
+      font-weight: normal; }
+  .form-group label {
+    font-family: 'Helvetica';
+    font-weight: normal;
+    font-size: 14px;
+    color: #4a4a4a; }
+  .form-group button {
+    height: 35px;
+    padding-top: 7px;
+    width: 110px; }
+
+.col-2 {
+  margin: 0px -15px; }
+
+.form-title {
+  color: #4a4a4a;
+  font-size: 18px;
+  font-family: 'Helvetica-Bold';
+  padding-bottom: 0px; }
+
+.form-subtitle {
+  color: #4a4a4a;
+  font-family: 'Helvetica-Bold';
+  padding-bottom: 15px;
+  border-bottom: 1px solid #4a4a4a;
+  margin-bottom: 20px;
+  padding-top: 25px;
+  float: left;
+  width: 100%; }
 
 header {
   margin-bottom: 10px;
@@ -365,6 +500,38 @@ header {
     border-bottom: 2px solid rgba(198, 198, 198, 0.3); }
     .right_bar .campaigns .campaign_wrapper img {
       width: 60px; }
+.right_bar .community {
+  margin-bottom: 8px;
+  float: left;
+  width: 100%;
+  background-color: #ffffff; }
+  .right_bar .community .community_wrapper {
+    display: flex;
+    padding: 15px 0px;
+    border-bottom: 2px solid rgba(198, 198, 198, 0.3); }
+    @media (max-width: 1199px) {
+      .right_bar .community .community_wrapper {
+        display: block;
+        float: left;
+        width: 100%; } }
+    .right_bar .community .community_wrapper .community-user-image {
+      width: 32%;
+      padding: 0px 15px; }
+      @media (max-width: 1199px) {
+        .right_bar .community .community_wrapper .community-user-image {
+          float: left; } }
+    .right_bar .community .community_wrapper .community-user-name {
+      width: 33%;
+      align-self: center; }
+      @media (max-width: 1199px) {
+        .right_bar .community .community_wrapper .community-user-name {
+          float: left; } }
+    .right_bar .community .community_wrapper .community-subscribe {
+      align-self: center; }
+      .right_bar .community .community_wrapper .community-subscribe button {
+        height: 30px;
+        padding: 6px;
+        width: 90px; }
 .right_bar .right_language {
   float: left;
   width: 100%;
@@ -394,9 +561,10 @@ header {
   background-color: #ffffff;
   margin-bottom: 5px;
   float: left;
-  width: 100%; }
+  width: 100%;
+  /*************** Comments CSS ****************/ }
   .feed_wrapper .feed_header {
-    padding: 15px 0px;
+    padding: 10px;
     float: left;
     width: 100%; }
     .feed_wrapper .feed_header .profile_image img {
@@ -430,6 +598,54 @@ header {
       float: right; }
       .feed_wrapper .feed_footer .show_more_options a {
         color: #4a4a4a; }
+  .feed_wrapper .feed-comment .comment-wrapper {
+    border-bottom: 1px solid #ededed;
+    float: left;
+    width: 100%;
+    padding: 10px; }
+    .feed_wrapper .feed-comment .comment-wrapper:first-child {
+      border-top: 1px solid #ededed; }
+    .feed_wrapper .feed-comment .comment-wrapper textarea {
+      height: 38px;
+      border: 0;
+      resize: none;
+      box-shadow: none; }
+    .feed_wrapper .feed-comment .comment-wrapper .emoji_wrapper {
+      padding-right: 0px; }
+    .feed_wrapper .feed-comment .comment-wrapper .commenter-info {
+      color: #9b9b9b;
+      font-size: 12px; }
+      .feed_wrapper .feed-comment .comment-wrapper .commenter-info b {
+        font-family: 'Helvetica-Bold';
+        color: #4a4a4a;
+        font-size: 14px; }
+    .feed_wrapper .feed-comment .comment-wrapper .show_more_options {
+      padding-right: 5px;
+      text-align: right; }
+      .feed_wrapper .feed-comment .comment-wrapper .show_more_options a {
+        color: #4a4a4a; }
+    @media (max-width: 991px) {
+      .feed_wrapper .feed-comment .comment-wrapper .comment-content {
+        float: left; } }
+    .feed_wrapper .feed-comment .comment-wrapper .comment-content p {
+      color: #4a4a4a;
+      font-size: 14px;
+      padding-left: 68px; }
+      @media (max-width: 991px) {
+        .feed_wrapper .feed-comment .comment-wrapper .comment-content p {
+          padding-left: 0px; } }
+      .feed_wrapper .feed-comment .comment-wrapper .comment-content p a {
+        color: #4578b3; }
+      .feed_wrapper .feed-comment .comment-wrapper .comment-content p .read-more {
+        color: #9b9b9b;
+        font-size: 14px; }
+  .feed_wrapper .feed-comment .view-more-comments {
+    float: left;
+    width: 100%; }
+    .feed_wrapper .feed-comment .view-more-comments a {
+      padding: 13px;
+      display: block;
+      color: #9b9b9b; }
 
 .login-process {
   background: #ffffff; }
@@ -580,6 +796,73 @@ header {
         .login-process footer ul li a {
           color: #9b9b9b;
           padding: 0px 4px; }
+
+.settings-menu li a span {
+  padding-left: 0px !important; }
+.settings-menu li a.active {
+  background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+  color: #ffffff; }
+
+.privacy-form {
+  padding: 35px 100px 25px 100px;
+  background: #ffffff;
+  float: left;
+  width: 100%;
+  margin-bottom: 35px; }
+  .privacy-form .privacy-actions-wrapper .row {
+    margin-bottom: 25px; }
+    .privacy-form .privacy-actions-wrapper .row a {
+      color: #4578b3; }
+  .privacy-form .limitation-wrapper .switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    margin-bottom: 10px; }
+    .privacy-form .limitation-wrapper .switch input {
+      display: none; }
+      .privacy-form .limitation-wrapper .switch input:checked + .slider {
+        background-color: #0f7aba; }
+        .privacy-form .limitation-wrapper .switch input:checked + .slider:before {
+          -webkit-transform: translateX(26px);
+          -ms-transform: translateX(26px);
+          transform: translateX(26px); }
+      .privacy-form .limitation-wrapper .switch input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3; }
+    .privacy-form .limitation-wrapper .switch .slider {
+      position: absolute;
+      cursor: pointer;
+      top: -1px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #9b9b9b;
+      -webkit-transition: .4s;
+      transition: .4s; }
+      .privacy-form .limitation-wrapper .switch .slider::before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 0px;
+        bottom: 0px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+        border: 1px solid #9b9b9b; }
+      .privacy-form .limitation-wrapper .switch .slider.round {
+        border-radius: 34px; }
+        .privacy-form .limitation-wrapper .switch .slider.round:before {
+          border-radius: 50%; }
+
+.edit-profile-form {
+  padding: 35px 100px 25px 100px;
+  background: #ffffff;
+  float: left;
+  width: 100%;
+  margin-bottom: 35px; }
+  .edit-profile-form .form-group .options li {
+    width: 182px; }
 
 header {
   float: left;
