@@ -172,6 +172,7 @@ hr {
     &:focus {
       border-color: #000;
       box-shadow: none;
+      outline: none;
     }
   }
   .error-msg {
@@ -221,6 +222,63 @@ hr {
       z-index: 90;
       border: 1px solid $nobel_color;
       font-weight: normal;
+    }
+  }
+  label {
+    font-family: "Helvetica";
+    font-weight: normal;
+    font-size: 14px;
+    color: $charcoal_color;
+    float: left;
+    width: 100%;
+  }
+  button {
+    height: 35px;
+    padding-top: 7px;
+    width: 110px;
+  }
+  input[type="number"] {
+    padding: 10px;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      opacity: 1;
+    }
+  }
+}
+.col-2 {
+  margin: 0px -15px;
+}
+.form-title {
+  color: $charcoal_color;
+  font-size: 18px;
+  font-family: "Helvetica-Bold";
+  padding-bottom: 0px;
+}
+.form-subtitle {
+  color: $charcoal_color;
+  font-family: "Helvetica-Bold";
+  padding-bottom: 15px;
+  border-bottom: 1px solid $charcoal_color;
+  margin-bottom: 20px;
+  padding-top: 25px;
+  float: left;
+  width: 100%;
+}
+.gradient-button {
+  @include gradient();
+  padding: 2px;
+  border: 0;
+  margin: auto;
+  display: block;
+  span {
+    background: $white_color;
+    color: $blue_color;
+    padding: 10px 120px;
+    display: block;
+    transition: background 0.5s ease;
+    &:hover {
+      background: transparent;
+      color: $white_color;
     }
   }
 }

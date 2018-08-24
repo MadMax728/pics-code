@@ -22,3 +22,9 @@ Added static HTML for
 3. Privacy Page - Privacy.html
 SCSS files added 
 privacy.scss
+
+Date: 24-Aug-18
+Added static HTML for 
+1. Edit profile - HTML file is editprofile.html and css file is _editprofile.scss
+2. Campaigns - HTML file is campaigns.html & campaigns1.html and css file is _campaigns.scss
+1. Bussiness Profile profile - HTML file is bussiness-profile.html and css file is _bussinessprofile.scss

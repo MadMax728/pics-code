@@ -309,7 +309,8 @@ hr {
       color: #4a4a4a; }
     .form-group input:focus {
       border-color: #000;
-      box-shadow: none; }
+      box-shadow: none;
+      outline: none; }
   .form-group .error-msg {
     color: #d0021b;
     font-size: 12px; }
@@ -352,11 +353,17 @@ hr {
     font-family: 'Helvetica';
     font-weight: normal;
     font-size: 14px;
-    color: #4a4a4a; }
+    color: #4a4a4a;
+    float: left;
+    width: 100%; }
   .form-group button {
     height: 35px;
     padding-top: 7px;
     width: 110px; }
+  .form-group input[type=number] {
+    padding: 10px; }
+    .form-group input[type=number]::-webkit-inner-spin-button, .form-group input[type=number]::-webkit-outer-spin-button {
+      opacity: 1; }
 
 .col-2 {
   margin: 0px -15px; }
@@ -376,6 +383,22 @@ hr {
   padding-top: 25px;
   float: left;
   width: 100%; }
+
+.gradient-button {
+  background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+  padding: 2px;
+  border: 0;
+  margin: auto;
+  display: block; }
+  .gradient-button span {
+    background: #ffffff;
+    color: #4578b3;
+    padding: 10px 120px;
+    display: block;
+    transition: background .5s ease; }
+    .gradient-button span:hover {
+      background: transparent;
+      color: #ffffff; }
 
 header {
   margin-bottom: 10px;
@@ -862,7 +885,132 @@ header {
   width: 100%;
   margin-bottom: 35px; }
   .edit-profile-form .form-group .options li {
-    width: 182px; }
+    width: 49%; }
+  .edit-profile-form .form-group input[type=number] {
+    width: 32.33%;
+    float: left;
+    margin-right: 1%; }
+
+.bussiness-profile-form {
+  padding: 25px 20px 25px 20px;
+  background: #ffffff;
+  float: left;
+  width: 100%; }
+  .bussiness-profile-form .business-title {
+    font-size: 18px;
+    padding-top: 25px;
+    padding-bottom: 65px; }
+  .bussiness-profile-form .terms-conditions {
+    color: #9b9b9b;
+    width: 62%;
+    margin: auto;
+    padding-top: 25px; }
+    .bussiness-profile-form .terms-conditions a {
+      color: #4a4a4a; }
+  .bussiness-profile-form .funtions-wrapper {
+    text-align: center; }
+    .bussiness-profile-form .funtions-wrapper img {
+      width: 40px;
+      margin-bottom: 20px; }
+    .bussiness-profile-form .funtions-wrapper .functions-title {
+      margin-bottom: 70px;
+      font-size: 18px; }
+      .bussiness-profile-form .funtions-wrapper .functions-title b {
+        font-family: 'Helvetica-Bold'; }
+
+.campaigns-right button {
+  width: 100%;
+  margin-bottom: 10px; }
+.campaigns-right .normal_title {
+  font-size: 12px;
+  background: #fff;
+  padding: 11px;
+  margin-bottom: 2px; }
+.campaigns-right ul {
+  padding: 0;
+  list-style: none; }
+  .campaigns-right ul li {
+    font-size: 12px;
+    background: #ffffff;
+    margin-bottom: 1px;
+    padding: 11px; }
+.campaigns-right .green-circle {
+  width: 6px;
+  height: 6px;
+  border: 2px solid #7ed321;
+  border-radius: 50%;
+  display: block;
+  margin: 7px auto; }
+
+.status {
+  border-top: 1px solid #4a4a4a;
+  float: left;
+  width: 100%;
+  padding: 15px; }
+  .status .status-wrapper {
+    width: 20%;
+    float: left;
+    text-align: center; }
+    @media (max-width: 991px) {
+      .status .status-wrapper {
+        width: 25%; } }
+    .status .status-wrapper button {
+      padding: 4px 20px; }
+      @media (max-width: 991px) {
+        .status .status-wrapper button {
+          margin-top: 10px; } }
+    .status .status-wrapper .title {
+      font-size: 12px;
+      font-family: 'Helvetica-Bold'; }
+    .status .status-wrapper .subtitle {
+      font-size: 12px; }
+    .status .status-wrapper .green-circle {
+      width: 6px;
+      height: 6px;
+      border: 2px solid #7ed321;
+      border-radius: 50%;
+      display: block;
+      margin: 7px auto; }
+
+.campaign-middle-section .normal_title {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #ffffff; }
+.campaign-middle-section .campaign-block {
+  background: #ffffff;
+  float: left;
+  width: 100%;
+  margin-bottom: 10px; }
+  .campaign-middle-section .campaign-block .indicators {
+    padding: 5px 35px 35px;
+    float: left;
+    width: 100%; }
+    .campaign-middle-section .campaign-block .indicators div {
+      width: 50%;
+      float: left; }
+      .campaign-middle-section .campaign-block .indicators div .blue-block {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7); }
+      .campaign-middle-section .campaign-block .indicators div .grey-block {
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        background: #bfbfbf; }
+.campaign-middle-section .progressbar-wrapper {
+  padding: 0px 35px;
+  float: left;
+  width: 100%;
+  margin-bottom: 35px; }
+  .campaign-middle-section .progressbar-wrapper .progressbar {
+    background-color: #bfbfbf;
+    margin-bottom: 15px; }
+    .campaign-middle-section .progressbar-wrapper .progressbar > div {
+      background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+      width: 40%;
+      /* Adjust with JavaScript */
+      height: 25px; }
 
 header {
   float: left;
