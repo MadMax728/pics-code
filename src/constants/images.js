@@ -3,6 +3,10 @@ export const headerLogo = `${
   process.env.REACT_APP_CDN_URL
 }/images/logo-pic.png`;
 
+export const mobileHeaderLogo = `${
+  process.env.REACT_APP_CDN_URL
+}/images/logo.png`;
+
 export const menu = `${process.env.REACT_APP_CDN_URL}/images/menu.svg`;
 
 export const search = `${process.env.REACT_APP_CDN_URL}/images/search.svg`;

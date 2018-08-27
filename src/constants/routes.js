@@ -8,3 +8,4 @@ export const PICS_ROUTE = "/pics";
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const MESSAGES_ROUTE = "/messages";
 export const CAMPAIGN_ROUTE = "/campaign";
+export const OPEN_ROUTE = "/menu";

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import * as routes from "../../constants/routes";
-import Header from "../Header";
-import Footer from "../Footer";
+import Header from "./Header";
+import Footer from "./Footer";
 import { Home } from "./home";
+import { Cookies } from "./cookies";
+import MobileMenu from "./MobileMenu";
 
 export default class Mobile extends Component {
   constructor(props) {
@@ -16,9 +18,6 @@ export default class Mobile extends Component {
   };
   componenWillUnmount = () => {
     document.removeEventListener("click", this.handleOutsideClick);
-  };
-  toggleNav = () => {
-    this.setState({ navExpanded: !this.state.navExpanded });
   };
 
   toggleUserNav = () => {
@@ -48,6 +47,7 @@ export default class Mobile extends Component {
   render() {
     return (
       <div>
+        <Cookies />
         <Header />
         <section>
           <div className="container">
@@ -55,16 +55,11 @@ export default class Mobile extends Component {
               <div>
                 <Switch>
                   <Route exact path={routes.ROOT_ROUTE} component={Home} />
-                  {/* <Route
-                    exact
-                    path={routes.CAMPAIGN_ROUTE}
-                    component={Campaign}
-                  />
                   <Route
                     exact
-                    path={routes.MY_PROFILE_ROUTE}
-                    component={UserProfile}
-                  /> */}
+                    path={routes.OPEN_ROUTE}
+                    component={MobileMenu}
+                  />
                   <Route component={Home} />
                 </Switch>
               </div>

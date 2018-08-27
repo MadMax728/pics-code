@@ -6,7 +6,8 @@
     "profile": "Profile",
     "campaign": "Campaign",
     "messages": "Messages",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "open": "Open"
   },
 
   "left_sidebar": {
