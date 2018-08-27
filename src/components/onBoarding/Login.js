@@ -21,6 +21,8 @@ class Login extends Component {
     this.setState(updatePassword(e.target.value));
   };
 
+  onSubmitButton = fn => fn(this.state);
+
   render() {
     return (
       <OnboardingSkelton
@@ -29,7 +31,7 @@ class Login extends Component {
         showDownloadStore
       >
         {({ onSubmitLogin }) => (
-          <form onSubmit={() => onSubmitLogin(this.state)}>
+          <form onSubmit={this.onSubmitButton(onSubmitLogin)}>
             <div className="form-group">
               <input
                 type="email"

@@ -26,9 +26,7 @@ class OnboardingSkelton extends Component {
               </a>
             </div>
             <ul className="login-header-menu">
-              <li>
-                <a herf="#">About Us</a>
-              </li>
+              <li>{/* <a herf="#">About Us</a> */}</li>
               <li>
                 <a href="/Register">Register</a>
               </li>
@@ -58,7 +56,7 @@ class OnboardingSkelton extends Component {
         <footer>
           <div className="custom-container">
             <ul>
-              <li>
+              {/* <li>
                 <a href="#">Support</a>
               </li>
               <li>
@@ -75,7 +73,7 @@ class OnboardingSkelton extends Component {
               </li>
               <li>
                 <a href="#">Language</a>
-              </li>
+              </li> */}
             </ul>
           </div>
         </footer>
