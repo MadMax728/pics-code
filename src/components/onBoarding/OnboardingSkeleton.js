@@ -8,8 +8,6 @@ class OnboardingSkelton extends Component {
 
   handleLoginSubmit = state => {
     // sumbmit action
-    debugger;
-    console.log("statevalu", state);
   };
   getStateAndHelpers = {
     onSubmitLogin: data => this.handleLoginSubmit(data)
