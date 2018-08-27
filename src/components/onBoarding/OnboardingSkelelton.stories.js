@@ -3,5 +3,9 @@ import { storiesOf } from "@storybook/react";
 import OnboardingSkelton from "./OnboardingSkeleton";
 
 storiesOf("onBoard", module).add("onBoardSkelton", () => {
-  return <OnboardingSkelton>froms will come here</OnboardingSkelton>;
+  return (
+    <OnboardingSkelton>
+      {() => <div>{"froms will come here"}</div>}
+    </OnboardingSkelton>
+  );
 });
