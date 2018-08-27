@@ -50,7 +50,7 @@ export default class Header extends Component {
   render() {
     return (
       <header>
-        <div class="mobile_logo">
+        <div className="mobile_logo">
           <a href="/">
             <img
               src={images.mobileHeaderLogo}
@@ -60,11 +60,11 @@ export default class Header extends Component {
             />
           </a>
         </div>
-        <div class="mobile_intro_text">
+        <div className="mobile_intro_text">
           <p>Picstagraph</p>
           <p>In der Picstagraph-App offenen</p>
         </div>
-        <div class="text-uppercase padding-15">
+        <div className="text-uppercase padding-15">
           <RouteNavItem to={routes.OPEN_ROUTE} className={`mobile_open_btn`}>
             <span>{Translations.navigation.open}</span>
           </RouteNavItem>
