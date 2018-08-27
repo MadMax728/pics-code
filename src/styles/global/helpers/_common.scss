@@ -102,3 +102,183 @@ hr {
     color: $blue_color;
   }
 }
+/************** Form CSS *************************/
+.form-group {
+  margin-bottom: 20px;
+  position: relative;
+  float: left;
+  width: 100%;
+  .options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 100%;
+    li {
+      float: left;
+      width: 200px;
+      height: 40px;
+      position: relative;
+      &:last-child {
+        float: right;
+      }
+    }
+    label,
+    input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0px;
+    }
+    input[type="radio"] {
+      opacity: 0.011;
+      z-index: 100;
+      &:checked {
+        & + label {
+          @include gradient();
+          color: $white_color;
+          border: 0;
+        }
+      }
+    }
+    label {
+      padding: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid $nobel_color;
+      font-weight: normal;
+    }
+  }
+  img {
+    width: 20px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+  input {
+    width: 100%;
+    background: transparent;
+    border: 1px solid $nobel_color;
+    border-radius: 0;
+    box-shadow: none;
+    height: 40px;
+    &::placeholder {
+      color: $charcoal_color;
+    }
+    &:focus {
+      border-color: #000;
+      box-shadow: none;
+      outline: none;
+    }
+  }
+  .error-msg {
+    color: #d0021b;
+    font-size: 12px;
+  }
+  .options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    float: left;
+    width: 100%;
+    li {
+      float: left;
+      width: 200px;
+      height: 40px;
+      position: relative;
+      &:last-child {
+        float: right;
+      }
+    }
+    label,
+    input {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: 0px;
+    }
+    input[type="radio"] {
+      opacity: 0.011;
+      z-index: 100;
+      &:checked {
+        & + label {
+          @include gradient();
+          color: $white_color;
+          border: 0;
+        }
+      }
+    }
+    label {
+      padding: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      z-index: 90;
+      border: 1px solid $nobel_color;
+      font-weight: normal;
+    }
+  }
+  label {
+    font-family: "Helvetica";
+    font-weight: normal;
+    font-size: 14px;
+    color: $charcoal_color;
+    float: left;
+    width: 100%;
+  }
+  button {
+    height: 35px;
+    padding-top: 7px;
+    width: 110px;
+  }
+  input[type="number"] {
+    padding: 10px;
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      opacity: 1;
+    }
+  }
+}
+.col-2 {
+  margin: 0px -15px;
+}
+.form-title {
+  color: $charcoal_color;
+  font-size: 18px;
+  font-family: "Helvetica-Bold";
+  padding-bottom: 0px;
+}
+.form-subtitle {
+  color: $charcoal_color;
+  font-family: "Helvetica-Bold";
+  padding-bottom: 15px;
+  border-bottom: 1px solid $charcoal_color;
+  margin-bottom: 20px;
+  padding-top: 25px;
+  float: left;
+  width: 100%;
+}
+.gradient-button {
+  @include gradient();
+  padding: 2px;
+  border: 0;
+  margin: auto;
+  display: block;
+  span {
+    background: $white_color;
+    color: $blue_color;
+    padding: 10px 120px;
+    display: block;
+    transition: background 0.5s ease;
+    &:hover {
+      background: transparent;
+      color: $white_color;
+    }
+  }
+}
