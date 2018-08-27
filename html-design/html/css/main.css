@@ -501,7 +501,7 @@ header {
       font-size: 14px;
       padding: 13px 18px; }
       .left_menu .navbar-nav li a:hover {
-        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+        background-image: radial-gradient(circle at 0 100%, #029bd7, #1f58a6);
         color: #ffffff; }
       .left_menu .navbar-nav li a span {
         padding-left: 30px;
