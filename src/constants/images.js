@@ -33,8 +33,10 @@ export const campaign3 = `${process.env.REACT_APP_CDN_URL}/campaigns/3.jpg`;
 
 export const campaign4 = `${process.env.REACT_APP_CDN_URL}/campaigns/4.jpg`;
 
-//login images
-export const loginLogo = `${process.env.REACT_APP_CDN_URL}/images/logo-pic.png`;
+//OnBoard images
+export const loginLogo = `${
+  process.env.REACT_APP_CDN_URL
+}/images/login-logo.png`;
 export const checked = `${process.env.REACT_APP_CDN_URL}/images/checked.svg`;
 export const error = `${process.env.REACT_APP_CDN_URL}/images/error.svg`;
 export const iphone = `${process.env.REACT_APP_CDN_URL}/images/iphone.png`;

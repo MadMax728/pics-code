@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+
+import { OnboardingType } from "../../types";
 import * as images from "../../constants/images";
 
 class OnboardingSkelton extends Component {
   state = {};
+  getStateAndHelpers = () => {
+    //state and helper for onboarding process will come here
+  };
   render() {
-    console.log("process.env.REACT_APP_CDN_URL", process.env.REACT_APP_CDN_URL);
-    console.log("process.env", process.env);
-    console.log("images.loginLog", images.loginLogo);
+    const { topHeader, subHeader, showDownloadStore } = this.props;
     return (
       <div className="login-process">
         <header>
@@ -18,10 +21,10 @@ class OnboardingSkelton extends Component {
             </div>
             <ul className="login-header-menu">
               <li>
-                <a href="#">About Us</a>
+                <a herf="#">About Us</a>
               </li>
               <li>
-                <a href="#">Register</a>
+                <a href="/Register">Register</a>
               </li>
             </ul>
           </div>
@@ -29,43 +32,20 @@ class OnboardingSkelton extends Component {
         <section>
           <div className="custom-container">
             <div className="login-wrapper">
-              <h3 className="text-center">Do what you love</h3>
-              <p>Register for free</p>
-              <form>
-                <div className="form-group">
-                  <input
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder="User name / Email"
-                  />
-                  <img src="images/checked.svg" />
+              <h3 className="text-center">{topHeader}</h3>
+              <p>{subHeader}</p>
+              {this.props.children()}
+              {showDownloadStore && (
+                <div className="app-download">
+                  <div>App download</div>
+                  <a href="https://itunes.apple.com/">
+                    <img src={images.iphone} alt={"iphone"} />
+                  </a>
+                  <a href="https://play.google.com/">
+                    <img src={images.andriod} alt={"android"} />
+                  </a>
                 </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder="Password"
-                  />
-                  <img src="images/error.svg" />
-                </div>
-                <div className="form-group">
-                  <a href="">Forgot password</a>
-                </div>
-                <div className="form-group">
-                  <button className="blue_button">Log in</button>
-                </div>
-              </form>
-              <div className="app-download">
-                <div>App download</div>
-                <a href="#">
-                  <img src="images/iphone.png" />
-                </a>
-                <a href="#">
-                  <img src="images/andriod.png" />
-                </a>
-              </div>
+              )}
             </div>
           </div>
         </section>
@@ -97,5 +77,9 @@ class OnboardingSkelton extends Component {
     );
   }
 }
+
+OnboardingSkelton.propTypes = {
+  ...OnboardingType
+};
 
 export default OnboardingSkelton;

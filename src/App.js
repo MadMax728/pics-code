@@ -8,16 +8,19 @@ import { UserProfile, UserInfo } from "./components/profile";
 import { LeftSideBar, RightSideBar } from "./components/common";
 import { Campaign } from "./components/campaign";
 import Mobile from "./components/mobile/Mobile";
-
+import { LoginRoutes } from "./loginRoutes";
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      isLogin: false,
       width: window.innerWidth,
       height: window.innerHeight
     };
 
+    console.group("Windows width:");
     console.log("Windows width", this.state);
+    console.groupEnd();
   }
 
   componentWillMount() {
@@ -35,9 +38,9 @@ class App extends Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
-  webRender = () => {
-    //if screen size is less than 767 * 560
-    return (
+  //if screen size is less than 767 * 560
+  webRender = () =>
+    this.state.isLogin ? (
       <div>
         <Header />
         <section>
@@ -77,8 +80,11 @@ class App extends Component {
         </section>
         <Footer />
       </div>
+    ) : (
+      LoginRoutes.map(route => (
+        <Route key={route.path} path={route.path} component={route.component} />
+      ))
     );
-  };
 
   mobileRender = () => {
     return (
