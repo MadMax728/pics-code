@@ -58,7 +58,9 @@ class Login extends Component {
               {/* <a href="">Forgot password</a> */}
             </div>
             <div className="form-group">
-              <button className="blue_button">Log in</button>
+              <button type="submit" className="blue_button">
+                Log in
+              </button>
             </div>
           </form>
         )}
