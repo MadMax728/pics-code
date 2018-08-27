@@ -1,4 +1,5 @@
 export const ROOT_ROUTE = "/";
+export const LOGIN = "/login";
 export const MY_PROFILE_ROUTE = "/my-profile";
 export const NEWS_ROUTE = "/news";
 export const EXPLORE_ROUTE = "/expore";

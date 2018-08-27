@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import * as images from "../../constants/images";
 import { NewsFeeds } from "../feeds";
 
@@ -46,14 +46,7 @@ const campaigns = [
     id: 3
   }
 ];
-class Campaign extends Component {
-  render() {
-    return (
-      <div>
-        <NewsFeeds campaigns={campaigns} />
-      </div>
-    );
-  }
-}
+
+const Campaign = () => <NewsFeeds campaigns={campaigns} />;
 
 export default Campaign;
