@@ -495,6 +495,108 @@ hr {
   width: 50%;
   float: left; }
 
+.left_menu_second {
+  background-color: #ffffff;
+  z-index: 9; }
+  .left_menu_second .navbar-nav {
+    border-bottom: 2px solid rgba(198, 198, 198, 0.3); }
+    .left_menu_second .navbar-nav li {
+      width: 100%; }
+      .left_menu_second .navbar-nav li a {
+        background: transparent;
+        font-family: 'Helvetica';
+        color: #4a4a4a;
+        font-size: 14px;
+        padding: 13px 18px; }
+        .left_menu_second .navbar-nav li a.log-out {
+          font-family: 'Helvetica-Bold'; }
+        .left_menu_second .navbar-nav li a:hover {
+          background-image: radial-gradient(circle at 0 100%, #029bd7, #1f58a6);
+          color: #ffffff; }
+        .left_menu_second .navbar-nav li a span {
+          padding-left: 30px;
+          padding-top: 2px;
+          display: inline-block; }
+  .left_menu_second .left-filters .filter-btn-wrapper {
+    border-top: 10px solid rgba(198, 198, 198, 0.3);
+    float: left;
+    width: 100%; }
+    .left_menu_second .left-filters .filter-btn-wrapper .black_button {
+      width: 100%;
+      background: rgba(198, 198, 198, 0.3); }
+  .left_menu_second .left-filters .filter-wrapper {
+    float: left;
+    width: 100%;
+    padding: 15px 20px;
+    border-bottom: 2px solid rgba(198, 198, 198, 0.3); }
+    .left_menu_second .left-filters .filter-wrapper .filter-title {
+      margin-bottom: 25px; }
+    .left_menu_second .left-filters .filter-wrapper .radio-btn {
+      display: block;
+      position: relative;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      font-weight: normal;
+      color: #9b9b9b; }
+      .left_menu_second .left-filters .filter-wrapper .radio-btn.lbl-margin {
+        margin-bottom: 30px; }
+      .left_menu_second .left-filters .filter-wrapper .radio-btn .checkmark {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 12px;
+        width: 12px;
+        background-color: #eee;
+        border-radius: 50%; }
+        .left_menu_second .left-filters .filter-wrapper .radio-btn .checkmark:after {
+          top: 2px;
+          left: 2px;
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: white;
+          content: "";
+          position: absolute;
+          display: none; }
+      .left_menu_second .left-filters .filter-wrapper .radio-btn input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        right: 0px; }
+        .left_menu_second .left-filters .filter-wrapper .radio-btn input ~ .checkmark:after {
+          display: block; }
+    .left_menu_second .left-filters .filter-wrapper input[type=text] {
+      height: 40px;
+      border: 1px solid #9b9b9b;
+      margin-bottom: 25px;
+      padding: 10px;
+      width: 100%; }
+      .left_menu_second .left-filters .filter-wrapper input[type=text]:focus {
+        outline: none;
+        border: 1px solid #4a4a4a; }
+    .left_menu_second .left-filters .filter-wrapper select {
+      height: 40px;
+      width: 100%;
+      border: 1px solid #9b9b9b;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -ms-appearance: none;
+      appearance: none;
+      background-image: url(../images/up-down.svg);
+      background-size: 10px;
+      background-repeat: no-repeat;
+      background-position: top 14px right 10px;
+      padding: 10px; }
+    .left_menu_second .left-filters .filter-wrapper .no-margin {
+      margin: 0px !important; }
+  .left_menu_second .radio-btn:hover input ~ .checkmark {
+    background-color: #ccc; }
+  .left_menu_second .radio-btn input:checked ~ .checkmark {
+    background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7); }
+
 .right_bar {
   width: 30%;
   float: left; }
