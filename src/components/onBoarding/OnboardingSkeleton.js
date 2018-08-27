@@ -6,8 +6,10 @@ import * as images from "../../constants/images";
 class OnboardingSkelton extends Component {
   state = {};
 
-  handleLoginSubmit = () => {
+  handleLoginSubmit = state => {
     // sumbmit action
+    debugger;
+    console.log("statevalu", state);
   };
   getStateAndHelpers = {
     onSubmitLogin: data => this.handleLoginSubmit(data)
@@ -38,7 +40,7 @@ class OnboardingSkelton extends Component {
             <div className="login-wrapper">
               <h3 className="text-center">{topHeader}</h3>
               <p>{subHeader}</p>
-              {this.props.children()}
+              {this.props.children(this.getStateAndHelpers)}
               {showDownloadStore && (
                 <div className="app-download">
                   <div>App download</div>

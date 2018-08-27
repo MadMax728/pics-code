@@ -12,11 +12,15 @@ class Login extends Component {
   };
 
   updateName = e => {
+    e.preventDefault();
     this.setState(updateName(e.target.value));
   };
+
   updatePassword = e => {
+    e.preventDefault();
     this.setState(updatePassword(e.target.value));
   };
+
   render() {
     return (
       <OnboardingSkelton
@@ -25,7 +29,7 @@ class Login extends Component {
         showDownloadStore
       >
         {({ onSubmitLogin }) => (
-          <form>
+          <form onSubmit={() => onSubmitLogin(this.state)}>
             <div className="form-group">
               <input
                 type="email"
@@ -52,12 +56,7 @@ class Login extends Component {
               {/* <a href="">Forgot password</a> */}
             </div>
             <div className="form-group">
-              <button
-                className="blue_button"
-                onClick={onSubmitLogin(this.state)}
-              >
-                Log in
-              </button>
+              <button className="blue_button">Log in</button>
             </div>
           </form>
         )}
