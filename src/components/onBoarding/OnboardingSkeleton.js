@@ -5,8 +5,12 @@ import * as images from "../../constants/images";
 
 class OnboardingSkelton extends Component {
   state = {};
-  getStateAndHelpers = () => {
-    //state and helper for onboarding process will come here
+
+  handleLoginSubmit = () => {
+    // sumbmit action
+  };
+  getStateAndHelpers = {
+    onSubmitLogin: data => this.handleLoginSubmit(data)
   };
   render() {
     const { topHeader, subHeader, showDownloadStore } = this.props;

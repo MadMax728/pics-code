@@ -2,8 +2,21 @@ import React, { Component } from "react";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import * as images from "../../constants/images";
 
+const updateState = key => value => () => ({ [key]: value });
+const updateName = updateState("userName");
+const updatePassword = updateState("password");
 class Login extends Component {
-  state = {};
+  state = {
+    userName: "",
+    password: ""
+  };
+
+  updateName = e => {
+    this.setState(updateName(e.target.value));
+  };
+  updatePassword = e => {
+    this.setState(updatePassword(e.target.value));
+  };
   render() {
     return (
       <OnboardingSkelton
@@ -11,13 +24,15 @@ class Login extends Component {
         subHeader={"Register for free"}
         showDownloadStore
       >
-        {() => (
+        {({ onSubmitLogin }) => (
           <form>
             <div className="form-group">
               <input
                 type="email"
                 className="form-control"
                 id="email"
+                value={this.state.userName}
+                onChange={this.updateName}
                 placeholder="User name / Email"
               />
               <img src={images.checked} alt={"checked"} />
@@ -27,6 +42,8 @@ class Login extends Component {
                 type="password"
                 className="form-control"
                 id="password"
+                value={this.state.password}
+                onChange={this.updatePassword}
                 placeholder="Password"
               />
               <img src={images.error} alt={"error"} />
@@ -35,7 +52,12 @@ class Login extends Component {
               {/* <a href="">Forgot password</a> */}
             </div>
             <div className="form-group">
-              <button className="blue_button">Log in</button>
+              <button
+                className="blue_button"
+                onClick={onSubmitLogin(this.state)}
+              >
+                Log in
+              </button>
             </div>
           </form>
         )}

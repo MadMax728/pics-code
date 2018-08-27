@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import OnBoardingSkelton from "./OnboardingSkeleton";
+import OnboardingSkelton from "./OnboardingSkeleton";
 
 storiesOf("onBoard", module).add("onBoardSkelton", () => {
-  return <OnBoardingSkelton />;
+  return <OnboardingSkelton>froms will come here</OnboardingSkelton>;
 });
