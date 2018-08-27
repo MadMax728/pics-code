@@ -26,9 +26,11 @@ class OnboardingSkelton extends Component {
               </a>
             </div>
             <ul className="login-header-menu">
-              <li>{/* <a herf="#">About Us</a> */}</li>
               <li>
-                <a href="/Register">Register</a>
+                <a href="/aboutUs">About Us</a>
+              </li>
+              <li>
+                <a href="/register">Register</a>
               </li>
             </ul>
           </div>
