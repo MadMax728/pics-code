@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 
 import { OnboardingType } from "../../types";
-import { connect } from "react-redux";
 import * as images from "../../constants/images";
-import { login } from "../../actions";
 class OnboardingSkelton extends Component {
   state = {};
 
-  handleLoginSubmit = state => {
-    // sumbmit action
-    this.props.login(state);
-  };
-  getStateAndHelpers = {
-    onSubmitLogin: data => this.handleLoginSubmit(data)
-  };
+  getStateAndHelpers = {};
   render() {
     const { topHeader, subHeader, showDownloadStore } = this.props;
     return (
@@ -88,7 +80,4 @@ OnboardingSkelton.propTypes = {
   ...OnboardingType
 };
 
-export default connect(
-  null,
-  { login }
-)(OnboardingSkelton);
+export default OnboardingSkelton;

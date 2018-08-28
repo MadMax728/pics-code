@@ -6,3 +6,7 @@ export const OnboardingType = {
   showDownloadStore: bool,
   children: func.isRequired
 };
+
+export const LoginTypes = {
+  login: func
+};

@@ -8,7 +8,10 @@ class MockLogin {
           payload.password &&
           payload.userName.length > 9
         ) {
-          resolve(payload);
+          resolve({
+            ...payload,
+            auth_token: `${payload.userName}-${Math.floor(Math.random())}`
+          });
         } else reject("error in saving pls try again");
       }, 500);
     });

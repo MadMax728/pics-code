@@ -9,19 +9,19 @@ export const callApi = store => next => action => {
       // then perform auth actions
     }
 
-    if (method.includes("Mock")) {
-      endPoint(payload)
+    if (!method.includes("Mock")) {
+      fetch(endPoint, {
+        method,
+        headers,
+        body: JSON.stringify(payload)
+      })
+        .then(response => response.json)
         .then(data => next({ type: successType, data }))
         .catch(error => next({ type: failureType, error }));
     }
-    fetch(endPoint, {
-      method,
-      headers,
-      body: JSON.stringify(payload)
-    })
-      .then(response => response.json)
+    endPoint(payload)
       .then(data => next({ type: successType, data }))
       .catch(error => next({ type: failureType, error }));
+    next(action);
   }
-  next(action);
 };

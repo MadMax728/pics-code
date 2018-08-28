@@ -1,7 +1,9 @@
+import { connect } from "react-redux";
 import React, { Component } from "react";
+import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import * as images from "../../constants/images";
-
+import { LoginTypes } from "../../types";
 const updateState = key => value => () => ({ [key]: value });
 const updateName = updateState("userName");
 const updatePassword = updateState("password");
@@ -21,7 +23,10 @@ class Login extends Component {
     this.setState(updatePassword(e.target.value));
   };
 
-  onSubmitButton = fn => fn(this.state);
+  onSubmitButton = event => {
+    event.preventDefault();
+    this.props.login(this.state);
+  };
 
   render() {
     return (
@@ -30,8 +35,8 @@ class Login extends Component {
         subHeader={"Register for free"}
         showDownloadStore
       >
-        {({ onSubmitLogin }) => (
-          <form onSubmit={this.onSubmitButton(onSubmitLogin)}>
+        {() => (
+          <form>
             <div className="form-group">
               <input
                 type="email"
@@ -58,7 +63,7 @@ class Login extends Component {
               {/* <a href="">Forgot password</a> */}
             </div>
             <div className="form-group">
-              <button type="submit" className="blue_button">
+              <button onClick={this.onSubmitButton} className="blue_button">
                 Log in
               </button>
             </div>
@@ -69,4 +74,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+Login.propTypes = {
+  ...LoginTypes
+};
+export default connect(
+  null,
+  { login }
+)(Login);
