@@ -36,7 +36,7 @@ class Register extends Component {
                 id="password"
                 placeholder="Password"
               />
-              <img src="images/checked.svg" />
+              <img src="images/checked.svg" alt={"checked"} />
             </div>
             <div className="form-group">
               <input
@@ -45,7 +45,7 @@ class Register extends Component {
                 id="password"
                 placeholder="Repeat Password"
               />
-              <img src="images/error.svg" />
+              <img src="images/error.svg" alt={"error"} />
             </div>
             <div className="form-group">
               <ul className="options">
@@ -57,11 +57,11 @@ class Register extends Component {
                     className="black_button"
                     checked
                   />
-                  <label for="male">Male</label>
+                  <label htmlFor="male">Male</label>
                 </li>
                 <li>
                   <input type="radio" id="female" name="amount" />
-                  <label for="female">Female</label>
+                  <label htmlFor="female">Female</label>
                 </li>
               </ul>
             </div>
