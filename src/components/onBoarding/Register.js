@@ -18,7 +18,7 @@ class Register extends Component {
                 id="username"
                 placeholder="User name"
               />
-              <img src="images/checked.svg" />
+              <img src="images/checked.svg" alt={"checked"} />
             </div>
             <div className="form-group">
               <input
@@ -27,7 +27,7 @@ class Register extends Component {
                 id="email"
                 placeholder="Email"
               />
-              <img src="images/error.svg" />
+              <img src="images/error.svg" alt={"checked"} />
             </div>
             <div className="form-group">
               <input
