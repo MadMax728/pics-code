@@ -1,7 +1,45 @@
 import React, { Component } from "react";
 import OnboardingSkelton from "./OnboardingSkeleton";
+
+const updateState = apply => (name, value) => state => ({
+  [name]: apply(state[name], value)
+});
+const toggleState = updateState(p => !p);
+const updateName = updateState((undefined, value) => value);
+const updateEmail = updateState((undefined, value) => value);
+const updatePassword = updateState((undefined, value) => value);
+//const updatePassword = updateState(value => value)
 class Register extends Component {
-  state = {};
+  state = {
+    userName: "",
+    email: "",
+    password: "",
+    maleChecked: true,
+    femaleChecked: false
+  };
+
+  updateUserName = e => {
+    e.preventDefault();
+    this.setState(updateName("userName", e.target.value));
+  };
+
+  updateEmail = e => {
+    e.preventDefault();
+    this.setState(updateEmail("email", e.target.value));
+  };
+
+  updatePassword = e => {
+    //logic for repeat password to match pass
+    e.preventDefault();
+    this.setState(updatePassword("password", e.target.value));
+  };
+
+  updateMaleChecked = e => {
+    // inital checked male
+    e.preventDefault();
+    this.setState(toggleState("maleChecked"));
+  };
+
   render() {
     return (
       <OnboardingSkelton
@@ -9,7 +47,7 @@ class Register extends Component {
         subHeader={"Register for free"}
         showDownloadStore
       >
-        {({ onSubmitLogin }) => (
+        {() => (
           <form>
             <div className="form-group">
               <input
@@ -17,6 +55,8 @@ class Register extends Component {
                 className="form-control"
                 id="username"
                 placeholder="User name"
+                value={this.state.userName}
+                onChange={this.updateUserName}
               />
               <img src="images/checked.svg" alt={"checked"} />
             </div>
@@ -26,6 +66,8 @@ class Register extends Component {
                 className="form-control"
                 id="email"
                 placeholder="Email"
+                value={this.state.email}
+                onChange={this.updateEmail}
               />
               <img src="images/error.svg" alt={"checked"} />
             </div>
@@ -35,6 +77,8 @@ class Register extends Component {
                 className="form-control"
                 id="password"
                 placeholder="Password"
+                value={this.state.password}
+                onChange={this.updatePassword}
               />
               <img src="images/checked.svg" alt={"checked"} />
             </div>
@@ -44,6 +88,8 @@ class Register extends Component {
                 className="form-control"
                 id="password"
                 placeholder="Repeat Password"
+                value={this.state.repeatPassword}
+                onChange={this.updatePassword}
               />
               <img src="images/error.svg" alt={"error"} />
             </div>
@@ -55,12 +101,19 @@ class Register extends Component {
                     id="male"
                     name="amount"
                     className="black_button"
-                    checked
+                    checked={this.state.maleChecked}
+                    onChange={this.updateMaleChecked}
                   />
                   <label htmlFor="male">Male</label>
                 </li>
                 <li>
-                  <input type="radio" id="female" name="amount" />
+                  <input
+                    type="radio"
+                    id="female"
+                    name="amount"
+                    checked={this.state.femaleChecked}
+                    onChange={this.updateMaleChecked}
+                  />
                   <label htmlFor="female">Female</label>
                 </li>
               </ul>
