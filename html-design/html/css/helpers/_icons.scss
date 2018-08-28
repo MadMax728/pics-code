@@ -213,3 +213,45 @@
 		}
 	}
 }
+.menu_company{
+	&:before{
+		background-image: url(../images/shop.svg);
+	    height: 20px;
+	    content: "";
+	    position: absolute;
+	    background-size: contain;
+	    background-position: top left;
+	    left: 15px;
+	    width: 100%;
+	    background-repeat: no-repeat;
+	    transition: all ease 0.5s;
+	}
+}
+.menu_company{
+	&:hover{
+		&:before{
+			background-image: url(../images/white_shop.svg);
+		}
+	}
+}
+.menu_creator{
+	&:before{
+		background-image: url(../images/grey_person.svg);
+	    height: 20px; 
+	    content: "";
+	    position: absolute;
+	    background-size: contain;
+	    background-position: top left;
+	    left: 15px;
+	    width: 100%;
+	    background-repeat: no-repeat;
+	    transition: all ease 0.5s;
+	}
+}
+.menu_creator{
+	&:hover{
+		&:before{
+			background-image: url(../images/person.svg);
+		}
+	}
+}
