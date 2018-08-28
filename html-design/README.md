@@ -27,4 +27,15 @@ Date: 24-Aug-18
 Added static HTML for 
 1. Edit profile - HTML file is editprofile.html and css file is _editprofile.scss
 2. Campaigns - HTML file is campaigns.html & campaigns1.html and css file is _campaigns.scss
-1. Bussiness Profile profile - HTML file is bussiness-profile.html and css file is _bussinessprofile.scss
+3. Bussiness Profile profile - HTML file is bussiness-profile.html and css file is _bussinessprofile.scss
+
+Date: 26-Aug-18
+Added static HTML for 
+1. Ads - HTML file - HTML file is ads.html and ads1.html
+2. Bills & Receipts - HTML file is bills-receipts.html and css file is _bills-receipts.scss
+3. Data Download - HTML file is data-download.html and css file is _data-download.scss
+
+Date 27-Aug-18
+Added static HTML for 
+1. Subscribers / Subscribe/ Likes Popup - HTML file - HTML file is subscriberpopup.html and css file is _subscriberspopup.scss
+2. About page - HTML file - HTML file is about.html and css file is _about.scss
