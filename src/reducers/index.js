@@ -1,14 +1,15 @@
 import { combineReducers } from "redux";
-import { LoginReducer } from "./login";
+import { LoginReducer, RegisterReducer } from "./login";
 
 const rootReducer = combineReducers({
-  login: LoginReducer
+  login: LoginReducer,
+  register: RegisterReducer
 });
 
 //selectors
 export const getIsAuth = ({
   login: {
-    loginResponse: { auth_token }
+    response: { auth_token }
   }
 }) => ({ auth_token });
 export default rootReducer;

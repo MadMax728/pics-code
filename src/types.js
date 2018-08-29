@@ -10,3 +10,7 @@ export const OnboardingType = {
 export const LoginTypes = {
   login: func
 };
+
+export const RegisterTypes = {
+  handleRegisteration: func
+};

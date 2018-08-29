@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { RegisterTypes } from "../../types";
+import { handleRegisteration } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 
 const updateState = apply => (name, value) => state => ({
@@ -40,6 +43,11 @@ class Register extends Component {
     this.setState(toggleState("maleChecked"));
   };
 
+  handleRegisteration = e => {
+    e.preventDefault();
+    this.props.handleRegisteration(this.state);
+  };
+
   render() {
     return (
       <OnboardingSkelton
@@ -58,7 +66,7 @@ class Register extends Component {
                 value={this.state.userName}
                 onChange={this.updateUserName}
               />
-              <img src="images/checked.svg" alt={"checked"} />
+              {/* <img src="images/checked.svg" alt={"checked"} /> */}
             </div>
             <div className="form-group">
               <input
@@ -69,7 +77,7 @@ class Register extends Component {
                 value={this.state.email}
                 onChange={this.updateEmail}
               />
-              <img src="images/error.svg" alt={"checked"} />
+              {/* <img src="images/error.svg" alt={"checked"} /> */}
             </div>
             <div className="form-group">
               <input
@@ -80,7 +88,7 @@ class Register extends Component {
                 value={this.state.password}
                 onChange={this.updatePassword}
               />
-              <img src="images/checked.svg" alt={"checked"} />
+              {/* <img src="images/checked.svg" alt={"checked"} /> */}
             </div>
             <div className="form-group">
               <input
@@ -91,7 +99,7 @@ class Register extends Component {
                 value={this.state.repeatPassword}
                 onChange={this.updatePassword}
               />
-              <img src="images/error.svg" alt={"error"} />
+              {/* <img src="images/error.svg" alt={"error"} /> */}
             </div>
             <div className="form-group">
               <ul className="options">
@@ -119,7 +127,12 @@ class Register extends Component {
               </ul>
             </div>
             <div className="form-group">
-              <button className="blue_button">Register</button>
+              <button
+                className="blue_button"
+                onClick={this.handleRegisteration}
+              >
+                Register
+              </button>
             </div>
           </form>
         )}
@@ -128,4 +141,11 @@ class Register extends Component {
   }
 }
 
-export default Register;
+Register.propTypes = {
+  ...RegisterTypes
+};
+
+export default connect(
+  null,
+  { handleRegisteration }
+)(Register);
