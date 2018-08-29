@@ -84,7 +84,9 @@ class App extends Component {
       </div>
     ) : (
       LoginRoutes.map(route => (
-        <Route key={route.path} path={route.path} component={route.component} />
+        <Switch key={route.path}>
+          <Route exact path={route.path} component={route.component} />
+        </Switch>
       ))
     );
 
@@ -111,6 +113,7 @@ class App extends Component {
   }
 }
 
+App.propTypes = {};
 const mapStateToProps = state => ({
   isAuth: getIsAuth(state)
 });
