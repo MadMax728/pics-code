@@ -4,6 +4,7 @@ import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import * as images from "../../constants/images";
 import { LoginTypes } from "../../types";
+import { withRouter } from "react-router-dom";
 import { getLoginLoading } from "../../reducers";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
 
@@ -29,6 +30,7 @@ class Login extends Component {
   onSubmitButton = event => {
     event.preventDefault();
     this.props.login(this.state);
+    this.props.history.push("/home");
   };
 
   render() {
@@ -87,7 +89,9 @@ Login.propTypes = {
 const mapStateToProps = state => ({
   showLoginLoading: getLoginLoading(state)
 });
-export default connect(
-  mapStateToProps,
-  { login }
-)(Login);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { login }
+  )(Login)
+);

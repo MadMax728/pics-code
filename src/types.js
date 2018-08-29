@@ -19,3 +19,9 @@ export const AppTypes = {
     auth_token: string
   })
 };
+export const homeTypes = {
+  match: shape({
+    params: string,
+    path: string
+  })
+};

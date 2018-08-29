@@ -4,6 +4,7 @@ import { RegisterTypes } from "../../types";
 import { handleRegisteration } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import { getRegisterLoading } from "../../reducers";
+import { withRouter } from "react-router-dom";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
 
 const updateState = apply => (name, value) => state => ({
@@ -39,6 +40,12 @@ class Register extends Component {
     this.setState(updatePassword("password", e.target.value));
   };
 
+  updateRepeatPassword = e => {
+    //logic for repeat password to match pass
+    e.preventDefault();
+    this.setState(updatePassword("repeatPassword", e.target.value));
+  };
+
   updateMaleChecked = e => {
     // inital checked male
     e.preventDefault();
@@ -48,6 +55,7 @@ class Register extends Component {
   handleRegisteration = e => {
     e.preventDefault();
     this.props.handleRegisteration(this.state);
+    this.props.history.push("/");
   };
 
   render = () => (
@@ -98,7 +106,7 @@ class Register extends Component {
               id="password"
               placeholder="Repeat Password"
               value={this.state.repeatPassword}
-              onChange={this.updatePassword}
+              onChange={this.updateRepeatPassword}
             />
             {/* <img src="images/error.svg" alt={"error"} /> */}
           </div>
@@ -152,7 +160,9 @@ Register.propTypes = {
 const mapStateToProps = state => ({
   showRegsiterLoading: getRegisterLoading(state)
 });
-export default connect(
-  mapStateToProps,
-  { handleRegisteration }
-)(Register);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { handleRegisteration }
+  )(Register)
+);
