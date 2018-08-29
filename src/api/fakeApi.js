@@ -13,7 +13,7 @@ class MockLogin {
             auth_token: `${payload.userName}-${Math.floor(Math.random())}`
           });
         } else reject("error in saving pls try again");
-      }, 5000);
+      }, 1000);
     });
   }
 
