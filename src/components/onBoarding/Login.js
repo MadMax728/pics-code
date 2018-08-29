@@ -46,7 +46,7 @@ class Login extends Component {
                 onChange={this.updateName}
                 placeholder="User name / Email"
               />
-              <img src={images.checked} alt={"checked"} />
+              {/* <img src={images.checked} alt={"checked"} /> */}
             </div>
             <div className="form-group">
               <input
@@ -57,7 +57,7 @@ class Login extends Component {
                 onChange={this.updatePassword}
                 placeholder="Password"
               />
-              <img src={images.error} alt={"error"} />
+              {/* <img src={images.error} alt={"error"} /> */}
             </div>
             <div className="form-group">
               {/* <a href="">Forgot password</a> */}

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Switch, Route } from "react-router-dom";
 import * as routes from "./constants/routes";
 import Header from "./components/Header";
@@ -9,6 +10,7 @@ import { LeftSideBar, RightSideBar } from "./components/common";
 import { Campaign } from "./components/campaign";
 import Mobile from "./components/mobile/Mobile";
 import { LoginRoutes } from "./loginRoutes";
+import { getIsAuth } from "./reducers";
 class App extends Component {
   constructor() {
     super();
@@ -40,7 +42,7 @@ class App extends Component {
 
   //if screen size is less than 767 * 560
   webRender = () =>
-    this.state.isLogin ? (
+    this.props.isAuth.auth_token ? (
       <div>
         <Header />
         <section>
@@ -97,7 +99,6 @@ class App extends Component {
   render() {
     const { width, height } = this.state;
     const isMobile = width <= 760 && height <= 600;
-    console.log("isMobile", isMobile);
     return (
       <React.Fragment>
         {isMobile ? (
@@ -110,4 +111,7 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isAuth: getIsAuth(state)
+});
+export default connect(mapStateToProps)(App);

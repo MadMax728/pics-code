@@ -4,7 +4,7 @@ import * as routes from "./constants/routes";
 
 export const LoginRoutes = [
   {
-    path: routes.LOGIN,
+    path: routes.ROOT_ROUTE,
     component: Login
   },
   {
