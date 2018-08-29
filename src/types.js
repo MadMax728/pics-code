@@ -1,4 +1,4 @@
-import { string, bool, func } from "prop-types";
+import { string, bool, func, shape } from "prop-types";
 
 export const OnboardingType = {
   topHeader: string,
@@ -13,4 +13,9 @@ export const LoginTypes = {
 
 export const RegisterTypes = {
   handleRegisteration: func
+};
+export const AppTypes = {
+  isAuth: shape({
+    auth_token: string
+  })
 };

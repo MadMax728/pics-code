@@ -119,7 +119,7 @@ class Register extends Component {
                     type="radio"
                     id="female"
                     name="amount"
-                    checked={this.state.femaleChecked}
+                    checked={!this.state.maleChecked}
                     onChange={this.updateMaleChecked}
                   />
                   <label htmlFor="female">Female</label>
