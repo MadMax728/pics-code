@@ -4,6 +4,9 @@ import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import * as images from "../../constants/images";
 import { LoginTypes } from "../../types";
+import { getLoginLoading } from "../../reducers";
+import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
+
 const updateState = key => value => () => ({ [key]: value });
 const updateName = updateState("userName");
 const updatePassword = updateState("password");
@@ -63,9 +66,13 @@ class Login extends Component {
               {/* <a href="">Forgot password</a> */}
             </div>
             <div className="form-group">
-              <button onClick={this.onSubmitButton} className="blue_button">
-                Log in
-              </button>
+              {!this.props.showLoginLoading ? (
+                <button onClick={this.onSubmitButton} className="blue_button">
+                  Log in
+                </button>
+              ) : (
+                <InlineLoading />
+              )}
             </div>
           </form>
         )}
@@ -77,7 +84,10 @@ class Login extends Component {
 Login.propTypes = {
   ...LoginTypes
 };
+const mapStateToProps = state => ({
+  showLoginLoading: getLoginLoading(state)
+});
 export default connect(
-  null,
+  mapStateToProps,
   { login }
 )(Login);

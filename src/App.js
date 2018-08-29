@@ -10,6 +10,7 @@ import { LeftSideBar, RightSideBar } from "./components/common";
 import { Campaign } from "./components/campaign";
 import Mobile from "./components/mobile/Mobile";
 import { LoginRoutes } from "./loginRoutes";
+import { AppTypes } from "./types";
 import { getIsAuth } from "./reducers";
 class App extends Component {
   constructor() {
@@ -113,7 +114,9 @@ class App extends Component {
   }
 }
 
-App.propTypes = {};
+App.propTypes = {
+  ...AppTypes
+};
 const mapStateToProps = state => ({
   isAuth: getIsAuth(state)
 });
