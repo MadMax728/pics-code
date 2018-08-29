@@ -1,0 +1,19 @@
+.edit-profile-form {
+  padding: 35px 100px 25px 100px;
+  background: $white_color;
+  float: left;
+  width: 100%;
+  margin-bottom: 35px;
+  .form-group {
+    .options {
+      li {
+        width: 49%;
+      }
+    }
+    input[type="number"] {
+      width: 32.33%;
+      float: left;
+      margin-right: 1%;
+    }
+  }
+}
