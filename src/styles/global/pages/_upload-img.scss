@@ -1,0 +1,71 @@
+.upload-image-modal {
+  .modal-content {
+    float: left;
+  }
+  .modal-header {
+    border-bottom: 6px solid #333333;
+    .modal-title {
+      font-family: "Helvetica-Bold";
+      margin-top: 7px;
+    }
+    button {
+      height: 35px;
+      padding-top: 7px;
+    }
+  }
+  .modal-body {
+    padding: 0px;
+    display: flex;
+    .upload-form {
+      border-right: 5px solid #333333;
+      padding: 20px;
+      .profile_image {
+        float: left;
+        img {
+          width: 45px;
+          margin-right: 10px;
+        }
+      }
+      .user-title {
+        padding-top: 4px;
+        padding-bottom: 30px;
+      }
+      label {
+        font-family: "Helvetica-Bold";
+      }
+      input {
+        padding: 10px;
+      }
+      textarea {
+        height: 150px;
+        border: 1px solid #979797;
+        border-radius: 0;
+      }
+      select {
+        border: 1px solid #979797;
+        height: 40px;
+        width: 100%;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        -ms-appearance: none;
+        appearance: none;
+        background-image: url(../images/up-down.svg);
+        background-size: 10px;
+        background-repeat: no-repeat;
+        background-position: top 14px right 10px;
+        padding: 10px;
+      }
+      .no-margin {
+        margin: 0px;
+      }
+    }
+    .add-wrapper {
+      position: absolute;
+      bottom: 15px;
+      right: 15px;
+      img {
+        width: 30px;
+      }
+    }
+  }
+}
