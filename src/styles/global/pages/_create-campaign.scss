@@ -24,6 +24,12 @@
     .right-side {
       background-color: #777777;
     }
+    .create-campaign-feed-wrapper {
+      padding: 40px;
+      .feed_wrapper {
+        border: 1px solid $silver_color;
+      }
+    }
     .box {
       background-color: #e9e9e9;
       padding: 12.25rem 1.25rem;
@@ -60,6 +66,23 @@
       }
     }
     .upload-form {
+      .meter {
+        height: 40px;
+        position: relative;
+        border: 1px solid #ccc;
+        float: left;
+        width: 100%;
+      }
+      .filled-strip {
+        display: block;
+        height: 40px;
+        @include gradient();
+      }
+      .number-clicks {
+        position: absolute;
+        top: 9px;
+        left: 104px;
+      }
       .subtitle {
         font-size: 18px;
         text-decoration: underline;
@@ -159,9 +182,36 @@
         }
       }
     }
+    .dates {
+      li {
+        width: 163px;
+        height: auto;
+        label {
+          position: static;
+          float: left;
+          border: 0;
+        }
+        input {
+          border: 1px solid #979797;
+          position: static;
+          border-right: 0;
+        }
+        .input-group-addon {
+          border-radius: 0;
+          background: #fff;
+          border-top: 1px solid #979797;
+          border-right: 1px solid #979797;
+          border-bottom: 1px solid #979797;
+        }
+      }
+    }
     padding: 0px;
     .create-campaign-wrapper {
       padding: 20px 30px;
+      p {
+        margin-bottom: 25px;
+      }
+
       .title {
         font-family: "Helvetica-Bold";
         font-size: 20px;
