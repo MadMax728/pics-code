@@ -5,10 +5,10 @@ const UserInfo = () => {
   return (
     <div>
       <div className="user_info">
-        <div className="user-image bg-white no-padding">
+        <div className="col-sm-3 col-md-2 bg-white no-padding">
           <img src={images.campaign1} alt="profile" />
         </div>
-        <div className="user-info no-padding-right">
+        <div className="col-sm-9 col-md-10 no-padding-right">
           <div className="bg-white padding-25 float_left">
             <div className="user_name">User Name</div>
             <div className="settings">

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import * as images from "../../constants/images";
 import { NewsFeeds } from "../feeds";
 
