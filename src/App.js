@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import * as routes from "./constants/routes";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import { Dashboard } from "./components/dashboard";
-import { UserProfile, UserInfo } from "./components/profile";
-import { LeftSideBar, RightSideBar } from "./components/common";
-import { Campaign } from "./components/campaign";
+import Home from "./pages/home";
 import Mobile from "./components/mobile/Mobile";
+import Login from "./components/onBoarding/Login";
+import Register from "./components/onBoarding/Register";
 
 class App extends Component {
   constructor() {
@@ -38,45 +35,13 @@ class App extends Component {
   webRender = () => {
     //if screen size is less than 767 * 560
     return (
-      <div>
-        <Header />
-        <section>
-          <div className="container">
-            <div className="row">
-              <Switch>
-                <Route
-                  exact
-                  path={routes.MY_PROFILE_ROUTE}
-                  component={UserInfo}
-                />
-              </Switch>
-              <div className="left_menu no-padding">
-                <LeftSideBar />
-              </div>
-              <div className="padding-rl-10 middle-section">
-                <Switch>
-                  <Route exact path={routes.ROOT_ROUTE} component={Dashboard} />
-                  <Route
-                    exact
-                    path={routes.CAMPAIGN_ROUTE}
-                    component={Campaign}
-                  />
-                  <Route
-                    exact
-                    path={routes.MY_PROFILE_ROUTE}
-                    component={UserProfile}
-                  />
-                  <Route component={Dashboard} />
-                </Switch>
-              </div>
-              <div className="right_bar no-padding pull-left">
-                <RightSideBar />
-              </div>
-            </div>
-          </div>
-        </section>
-        <Footer />
-      </div>
+      <Switch>
+        <Route exact path={routes.ROOT_ROUTE} component={Login} />
+        <Route exact path={routes.REGISTER} component={Register} />
+
+        <Route path={routes.HOME} component={Home} />
+        <Route path={"/home/:page"} component={Home} />
+      </Switch>
     );
   };
 
@@ -92,15 +57,19 @@ class App extends Component {
     const { width, height } = this.state;
     const isMobile = width <= 760 && height <= 600;
     console.log("isMobile", isMobile);
-    return (
-      <React.Fragment>
-        {isMobile ? (
+    if (isMobile) {
+      return (
+        <div>
           <Route render={this.mobileRender} />
-        ) : (
+        </div>
+      );
+    } else {
+      return (
+        <div>
           <Route render={this.webRender} />
-        )}
-      </React.Fragment>
-    );
+        </div>
+      );
+    }
   }
 }
 
