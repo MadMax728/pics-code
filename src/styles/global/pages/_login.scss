@@ -1,0 +1,192 @@
+.login-process {
+  background: $white_color;
+  .custom-container {
+    width: 700px;
+    margin: auto;
+    position: relative;
+  }
+  .login-logo {
+    text-align: center;
+    padding: 13px;
+    width: 100%;
+  }
+  .login-header-menu {
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    top: 20px;
+    li {
+      display: inline-block;
+      a {
+        color: $white_color;
+        font-size: 18px;
+        margin-left: 30px;
+        font-family: "Helvetica-Bold";
+      }
+    }
+  }
+  .login-wrapper {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    color: $charcoal_color;
+    img {
+      width: 20px;
+    }
+    h3 {
+      margin-bottom: 20px;
+      float: left;
+      width: 100%;
+    }
+    p {
+      font-size: 20px;
+      margin-bottom: 25px;
+      float: left;
+      width: 100%;
+    }
+    form {
+      float: left;
+      width: 100%;
+      .form-group {
+        margin-bottom: 20px;
+        position: relative;
+        float: left;
+        width: 100%;
+        .options {
+          list-style-type: none;
+          padding: 0;
+          margin: 0;
+          float: left;
+          width: 100%;
+          li {
+            float: left;
+            width: 200px;
+            height: 40px;
+            position: relative;
+            &:last-child {
+              float: right;
+            }
+          }
+          label,
+          input {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: 0px;
+          }
+          input[type="radio"] {
+            opacity: 0.011;
+            z-index: 100;
+            &:checked {
+              & + label {
+                @include gradient();
+                color: $white_color;
+                border: 0;
+              }
+            }
+          }
+          label {
+            padding: 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            z-index: 90;
+            border: 1px solid $nobel_color;
+            font-weight: normal;
+          }
+        }
+        img {
+          width: 20px;
+          position: absolute;
+          top: 10px;
+          right: 10px;
+        }
+        input {
+          width: 100%;
+          background: transparent;
+          border: 1px solid $nobel_color;
+          border-radius: 0;
+          box-shadow: none;
+          height: 40px;
+          &::placeholder {
+            color: $charcoal_color;
+          }
+        }
+      }
+      a {
+        float: left;
+        margin-left: 18px;
+        color: $blue_color;
+      }
+      button {
+        float: left;
+        display: block;
+        width: 100%;
+        padding: 9px;
+      }
+    }
+    .terms-conditions {
+      color: $silver_color;
+      a {
+        color: $charcoal_color;
+      }
+    }
+    .free-register {
+      padding-top: 24px;
+      border-top: 2px solid #a4a4a4;
+      margin-top: 28px;
+      b {
+        font-family: "Helvetica-Bold";
+        color: $charcoal_color;
+      }
+    }
+    .app-download {
+      float: left;
+      width: 100%;
+      div {
+        color: $silver_color;
+        margin-top: 24px;
+        margin-bottom: 20px;
+      }
+      img {
+        width: 135px;
+      }
+    }
+  }
+  .cookies-section {
+    float: left;
+    background: #ffffff;
+    padding: 25px;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid $charcoal_color;
+    border-bottom: 1px solid $charcoal_color;
+    margin-top: 15px;
+    a {
+      color: $blue_color;
+    }
+    img {
+      width: 12px;
+    }
+  }
+  footer {
+    float: left;
+    width: 100%;
+    margin: 30px 0px;
+    ul {
+      padding: 0px;
+      text-align: center;
+      margin: 0;
+      li {
+        display: inline-block;
+        a {
+          color: $silver_color;
+          padding: 0px 4px;
+        }
+      }
+    }
+  }
+}

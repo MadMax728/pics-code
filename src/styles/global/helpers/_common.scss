@@ -40,8 +40,17 @@ body {
 .padding-rl-10 {
   padding: 0px 10px;
 }
+.padding-left-10 {
+  padding-left: 10px;
+}
 .size-20 {
   font-size: 20px;
+}
+.width-80 {
+  width: 80% !important;
+}
+.no-border {
+  border: 0px !important;
 }
 hr {
   border: 1px solid #cdcdcd;
@@ -281,4 +290,30 @@ hr {
       color: $white_color;
     }
   }
+}
+.read-more {
+  color: $silver_color;
+  font-size: 14px;
+}
+.more-strip {
+  @include gradient();
+  color: #fff;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 9999999;
+  &:hover {
+    color: $white_color;
+    cursor: pointer;
+  }
+}
+.green-circle {
+  width: 8px;
+  height: 8px;
+  border: 2px solid #7ed321;
+  border-radius: 50%;
+  display: block;
+  margin: 7px auto;
 }

@@ -1,0 +1,99 @@
+.about-wrapper {
+  background: $white_color;
+  padding: 20px 30px;
+  margin-bottom: 35px;
+  .section-title {
+    font-family: "Helvetica-Bold";
+    padding-bottom: 15px;
+    border-bottom: 1px solid;
+    margin-bottom: 25px;
+  }
+  .general-info {
+    float: left;
+    margin-bottom: 15px;
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      li {
+        margin-bottom: 35px;
+        @include float();
+        span {
+          width: 50%;
+          float: left;
+          @media (max-width: 991px) {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .personal-interest {
+    .tags-wrapper {
+      a {
+        width: 74px;
+        height: 25px;
+        display: inline-block;
+        border: 1px solid #0f7aba;
+        border-radius: 30px;
+        padding: 2px;
+        text-align: center;
+        margin-right: 6px;
+        color: #0f7aba;
+        margin-bottom: 16px;
+        margin-top: 20px;
+        &:hover {
+          color: $charcoal_color;
+          border: 1px solid $charcoal_color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .inquiry-tag {
+    margin-bottom: 35px;
+    .tags-wrapper {
+      a {
+        width: 74px;
+        height: 25px;
+        display: inline-block;
+        border: 1px solid #0f7aba;
+        border-radius: 30px;
+        padding: 2px;
+        text-align: center;
+        margin-right: 6px;
+        color: #0f7aba;
+        margin-bottom: 16px;
+        margin-top: 20px;
+        &:hover {
+          color: $charcoal_color;
+          border: 1px solid $charcoal_color;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .social-networks {
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      li {
+        padding-bottom: 25px;
+        .social-title {
+          width: 44%;
+          display: inline-block;
+          @media (max-width: 991px) {
+            width: 85%;
+          }
+        }
+        a {
+          color: $charcoal_color;
+        }
+      }
+    }
+  }
+}
+.padding-l-10 {
+  padding-left: 10px;
+}

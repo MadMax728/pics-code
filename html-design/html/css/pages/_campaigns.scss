@@ -103,7 +103,7 @@
 		    margin-bottom: 15px;  
 		   	> div {
 		       @include gradient();
-		       width: 40%; /* Adjust with JavaScript */
+		        /* Adjust with JavaScript */
 		       height: 25px;		        
 		    }		    
 		}
