@@ -9,7 +9,7 @@
 	
 <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#create-campaign1">Create Ads</button>
 <!-- Modal -->
-<div id="create-campaign1" class="modal fade create-campaign-modal" role="dialog">
+<div id="create-campaign1" class="modal fade create-ad-modal" role="dialog">
   	<div class="modal-dialog">
 	    <!-- Modal content-->
 	    <div class="modal-content">
@@ -37,7 +37,16 @@
 						<div class="form-group">
 							<label>Add Location</label>
 							<input type="text" name="location" />
-						</div>
+                        </div>
+                        <div class="form-group">
+                            <label>Add Radius</label>
+                            <select>
+                                <option>10</option>
+                                <option>20</option>
+                                <option>30</option>
+                                <option>30</option>
+                            </select>
+                        </div>	
 						<div class="form-group">
 							<label>Add Category</label>
 							<select>
@@ -47,84 +56,42 @@
 								<option>Category 4</option>
 							</select>
                         </div>	
-                        <div class="subtitle">Application criteria</div>					
                         <div class="form-group">
-                            <label>Procedure</label>
+                            <label>Add Description</label>
+                            <textarea class="form-control"></textarea>
+                        </div>                        					
+                        <div class="form-group">
+                            <label>Add target group</label>
                             <ul class="options">
-                                <li>
-                                    <input type="radio" id="public" name="procedure" class="black_button" checked="">
-                                    <label for="public">Public</label>
+                                <li class="full-width-input-wrapper">
+                                    <input type="radio" id="male-female" name="target" class="black_button" checked="">
+                                    <label for="male-female">Male & Female</label>
                                 </li>
                                 <li>
-                                    <input type="radio" id="anonymous" name="procedure">
-                                    <label for="anonymous">Anonymous</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="form-group">
-                            <label>Type</label>
-                            <ul class="options">
-                                <li>
-                                    <input type="radio" id="video" name="type" class="black_button" checked="">
-                                    <label for="video">Video</label>
-                                </li>
-                                <li>
-                                    <input type="radio" id="image" name="type">
-                                    <label for="image">Image</label>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="form-group">
-                            <label>Target group</label>
-                            <ul class="options target-options">
-                                <li>
-                                    <input type="radio" id="company" name="target" class="black_button" checked="">
-                                    <label for="company">Company</label>
-                                </li>
-                                <li>
-                                    <input type="radio" id="femalemale" name="target">
-                                    <label for="femalemale">Female & Male</label>
+                                    <input type="radio" id="male" name="target" class="black_button">
+                                    <label for="male">Male</label>
                                 </li>
                                 <li>
                                     <input type="radio" id="female" name="target">
                                     <label for="female">Female</label>
                                 </li>
-                                <li>
-                                    <input type="radio" id="male" name="target">
-                                    <label for="male">Male</label>
-                                </li>
                             </ul>
                         </div>
-                        <div class="subtitle">Details of campaigns</div>
+                        <div class="subtitle">Define details</div>
                         <div class="form-group">
-                            <label>Offer</label>
+                            <label>Add call to action button</label>
                             <select>
-                                <option>Offer 1</option>
-                                <option>Offer 2</option>
-                                <option>Offer 3</option>
-                                <option>Offer 4</option>
+                                <option>Yes</option>
+                                <option>No</option>                                
                             </select>
                         </div>  
                         <div class="form-group">
-                            <label>Offer tag</label>
+                            <label>Insert link</label>
                             <input type="text" name="offer-tag" />
-                        </div>        
-                        <div class="form-group">
-                            <label>Inquiry</label>
-                            <select>
-                                <option>Inquiry 1</option>
-                                <option>Inquiry 2</option>
-                                <option>Inquiry 3</option>
-                                <option>Inquiry 4</option>
-                            </select>
-                        </div>  
-                        <div class="form-group">
-                            <label>Inquiry tag</label>
-                            <input type="text" name="inquiry-tag" />
-                        </div>           
+                        </div>                                         
 					</form>
 	        	</div>   
-	        	<div class="col-sm-6 no-padding right-side"> 
+	        	<div class="col-sm-6 no-padding right-side ads-right-section"> 
                         <div class="box">
                             <input type="file" name="file-2[]" id="file-2" class="inputfile inputfile-2" data-multiple-caption="{count} files selected" multiple="">
                             <label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"></path></svg><br/> <span>Upload title image</span></label>
