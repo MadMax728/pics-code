@@ -43,7 +43,7 @@ export default class Header extends Component {
     this.toggleUserNav();
   };
 
-  handleNavClick = evt => {
+  handleNavClick = () => {
     this.toggleUserNav();
   };
 
@@ -83,7 +83,7 @@ export default class Header extends Component {
                 </form>
                 <ul className="nav navbar-nav pull-right">
                   <RouteNavItem
-                    to={routes.ROOT_ROUTE}
+                    to={routes.HOME}
                     className={`menu_home`}
                     activeAtRoot
                     closeMenu={this.toggleNav}

@@ -18,6 +18,7 @@ src/styles/**/*.css
 
 # ignore the src/styles/index.css file cause its auto-generated
 public/global/css/index.css
+public/global/picstagraph-web/css/index.css
 
 # ignore Jest code coverage
 coverage/
