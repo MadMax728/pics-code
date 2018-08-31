@@ -51,22 +51,22 @@ class OnboardingSkelton extends Component {
           <div className="custom-container">
             <ul>
               <li>
-                <a href="#">Support</a>
+                <a href="/support">Support</a>
               </li>
               <li>
-                <a href="#">Data Protechtion & Privacy Policy</a>
+                <a href="/support">Data Protechtion & Privacy Policy</a>
               </li>
               <li>
-                <a href="#">Legal Notice</a>
+                <a href="/support">Legal Notice</a>
               </li>
               <li>
-                <a href="#">General terms & Conditions</a>
+                <a href="/support">General terms & Conditions</a>
               </li>
               <li>
-                <a href="#">NETZDG</a>
+                <a href="/support">NETZDG</a>
               </li>
               <li>
-                <a href="#">Language</a>
+                <a href="/support">Language</a>
               </li>
             </ul>
           </div>

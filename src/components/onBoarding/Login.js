@@ -3,10 +3,9 @@ import React, { Component } from "react";
 import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import * as images from "../../constants/images";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 
 import { LoginTypes } from "../../types";
-import { withRouter } from "react-router-dom";
 import { getLoginLoading } from "../../reducers";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
 
