@@ -1240,6 +1240,8 @@ hr {
       float: left;
       width: 100%;
       margin-left: 10px; }
+  .user_info .user_details {
+    height: 100%; }
   .user_info .user_name {
     font-size: 24px;
     color: #4a4a4a;
@@ -1265,7 +1267,6 @@ hr {
 .left_menu {
   background-color: #ffffff;
   z-index: 9;
-  width: 20%;
   float: left; }
   .left_menu .navbar-nav li {
     width: 100%; }
@@ -1395,7 +1396,6 @@ hr {
     background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7); }
 
 .right_bar {
-  width: 30%;
   float: left; }
   .right_bar .normal_title {
     margin-bottom: 3px;

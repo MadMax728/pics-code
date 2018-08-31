@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as routes from "../constants/routes";
+import { Switch, Route } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Dashboard } from "../components/dashboard";
@@ -14,23 +15,36 @@ class Home extends Component {
     const {
       match: { params, path }
     } = this.props;
-    console.log("path", path);
     return (
       <div>
         <Header />
         <section>
           <div className="container">
             <div className="row">
-              {path === routes.MY_PROFILE_ROUTE && <UserInfo />}
-              <div className="left_menu no-padding">
+              <Route
+                exact
+                path={routes.MY_PROFILE_ROUTE}
+                component={UserInfo}
+              />
+              <div class="col-sm-3 col-md-2 left_menu no-padding">
                 <LeftSideBar />
               </div>
-              <div className="padding-rl-10 middle-section">
-                {path === "/home" && <Dashboard />}
-                {params.page === "campaing" && <Campaign />}
-                {params.page === "profile" && <UserProfile />}
+              <div class="col-sm-5 col-md-7">
+                <Switch>
+                  <Route
+                    exact
+                    path={routes.CAMPAIGN_ROUTE}
+                    component={Campaign}
+                  />
+                  <Route
+                    exact
+                    path={routes.MY_PROFILE_ROUTE}
+                    component={UserProfile}
+                  />
+                  <Route path={routes.ROOT_ROUTE} component={Dashboard} />
+                </Switch>
               </div>
-              <div className="right_bar no-padding pull-left">
+              <div class="col-sm-4 col-md-3 right_bar no-padding">
                 <RightSideBar />
               </div>
             </div>
