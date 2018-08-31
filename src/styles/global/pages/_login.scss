@@ -1,5 +1,7 @@
 .login-process {
   background: $white_color;
+  @include float;
+  height: 100vh;
   .custom-container {
     width: 700px;
     margin: auto;
