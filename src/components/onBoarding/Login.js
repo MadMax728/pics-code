@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import * as images from "../../constants/images";
+import { Link } from "react-router-dom";
+
 import { LoginTypes } from "../../types";
 import { withRouter } from "react-router-dom";
 import { getLoginLoading } from "../../reducers";
@@ -65,7 +67,7 @@ class Login extends Component {
               {/* <img src={images.error} alt={"error"} /> */}
             </div>
             <div className="form-group">
-              {/* <a href="">Forgot password</a> */}
+              <Link to="/forgotPassword">Forgot password</Link>
             </div>
             <div className="form-group">
               {!this.props.showLoginLoading ? (

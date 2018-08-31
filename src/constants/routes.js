@@ -12,3 +12,4 @@ export const PICS_ROUTE = "/pics";
 export const NOTIFICATIONS_ROUTE = "/home/notifications";
 export const MESSAGES_ROUTE = "/home/messages";
 export const CAMPAIGN_ROUTE = "/home/campaing";
+export const FORGOT_PASSWORD = "/forgotPassword";

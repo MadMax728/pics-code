@@ -3,8 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import * as routes from "./constants/routes";
 import Home from "./pages/home";
 import Mobile from "./components/mobile/Mobile";
-import Login from "./components/onBoarding/Login";
-import Register from "./components/onBoarding/Register";
+import { Login, ForgotPassword, Register } from "./components/onBoarding";
 
 class App extends Component {
   constructor() {
@@ -38,6 +37,7 @@ class App extends Component {
       <Switch>
         <Route exact path={routes.ROOT_ROUTE} component={Login} />
         <Route exact path={routes.REGISTER} component={Register} />
+        <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
 
         <Route path={routes.HOME} component={Home} />
         <Route path={"/home/:page"} component={Home} />
