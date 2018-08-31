@@ -574,7 +574,7 @@ header {
       header .navbar-default .navbar-nav li .notification-mega-wrapper nav .nav {
         border: 0px; }
         header .navbar-default .navbar-nav li .notification-mega-wrapper nav .nav li.active a {
-          font-family: 'Helvetica-Bold'; }
+          font-family: "Helvetica-Bold"; }
         header .navbar-default .navbar-nav li .notification-mega-wrapper nav .nav li a {
           color: #4a4a4a !important;
           width: 151px;
