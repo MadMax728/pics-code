@@ -11,3 +11,4 @@ export const NOTIFICATIONS_ROUTE = "/notifications";
 export const MESSAGES_ROUTE = "/home/messages";
 export const FORGOT_PASSWORD = "/forgotPassword";
 export const CAMPAIGN_ROUTE = "/campaign";
+export const RESET_EMAIL = "/resetEmail";

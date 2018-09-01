@@ -3,7 +3,12 @@ import { Switch, Route } from "react-router-dom";
 import * as routes from "./constants/routes";
 import Home from "./pages/home";
 import Mobile from "./components/mobile/Mobile";
-import { Login, ForgotPassword, Register } from "./components/onBoarding";
+import {
+  Login,
+  Register,
+  ResetEmail,
+  ForgotPassword
+} from "./components/onBoarding";
 
 class App extends Component {
   constructor() {
@@ -36,6 +41,8 @@ class App extends Component {
       <Switch>
         <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route exact path={routes.REGISTER_ROUTE} component={Register} />
+        <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
+        <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route path={routes.ROOT_ROUTE} component={Home} />
       </Switch>
     );
@@ -58,13 +65,12 @@ class App extends Component {
           <Route render={this.mobileRender} />
         </div>
       );
-    } else {
-      return (
-        <div>
-          <Route render={this.webRender} />
-        </div>
-      );
     }
+    return (
+      <div>
+        <Route render={this.webRender} />
+      </div>
+    );
   }
 }
 
