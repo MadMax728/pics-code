@@ -40,4 +40,7 @@ export const ResetEmailType = {
   ...histroyType
 };
 
-export const ResetPasswordType = {};
+export const ResetPasswordType = {
+  handleResetPassword: func,
+  ...histroyType
+};

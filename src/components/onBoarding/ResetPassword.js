@@ -96,7 +96,7 @@ class ResetPassword extends Component {
   }
 }
 
-ResetPassword.propType = {
+ResetPassword.propTypes = {
   ...ResetPasswordType
 };
 const ResetEmail = withRouter(
