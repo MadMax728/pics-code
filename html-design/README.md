@@ -52,3 +52,8 @@ Added static HTML for
 1. Create campaign Design - HTML file - HTML files are create-campaign2.html & create-campaign3.html and css file is _create-campaign.scss
 2. Create pics Design - HTML file - HTML file is pics.html and css file is _pics.scss
 3. Create User Design - HTML file - HTML file is user.html and css file is _user.scss
+
+Date 31-Aug-18
+Added static HTML for 
+1. Notification Design - HTML file - Design is create in about.html and css is updated in _header.scss
+2. Create ads Design - HTML file - HTML files are create-ad.html & create-ad1.html and css file is _create-ad.scss

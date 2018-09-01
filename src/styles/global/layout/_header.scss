@@ -66,6 +66,25 @@ header {
     }
     .navbar-nav {
       li {
+        &.open {
+          &:after {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 10px solid $white_color;
+            bottom: -6px;
+            position: absolute;
+            top: initial;
+            right: 40px;
+            left: initial;
+            content: "";
+          }
+          a {
+            background: transparent !important;
+            color: $white_color !important;
+          }
+        }
         &.active {
           a {
             background: transparent !important;
@@ -131,6 +150,100 @@ header {
             padding-top: 30px;
             font-size: 12px;
             line-height: 14px;
+          }
+        }
+        .notification-mega-wrapper {
+          width: 455px;
+          margin: 0;
+          padding: 0;
+          right: -63px;
+          left: initial;
+          top: 60px;
+          border: 0;
+          nav {
+            .nav {
+              border: 0px;
+              li {
+                &.active {
+                  a {
+                    font-family: "Helvetica-Bold";
+                  }
+                }
+                a {
+                  color: $charcoal_color !important;
+                  width: 151px;
+                  height: 45px;
+                  display: inline-block;
+                  float: left;
+                  padding-top: 10px;
+                  border-right: 2px solid #ededed;
+                  border-bottom: 3px solid #ededed;
+                  margin: 0;
+                }
+                &:last-child {
+                  a {
+                    border-right: 0px;
+                  }
+                }
+              }
+            }
+          }
+          .tab-content {
+            .tab-pane {
+              .header-notifications {
+                .notification-wrapper {
+                  padding: 12px;
+                  float: left;
+                  width: 100%;
+                  border-bottom: 2px solid #ededed;
+                  img {
+                    width: 45px;
+                    border-radius: 50%;
+                    float: left;
+                    margin-right: 10px;
+                  }
+                  .user-info {
+                    display: inline-block;
+                    float: left;
+                    .username {
+                      font-family: "Helvetica-Bold";
+                    }
+                    .date {
+                      color: $silver_color;
+                    }
+                  }
+                  .subscribe-btn {
+                    display: inline-block;
+                    float: right;
+                    button {
+                      height: 30px;
+                      width: 90px;
+                      padding-top: 4px;
+                      margin-top: 15px;
+                      padding-left: 5px;
+                      padding-right: 5px;
+                    }
+                    .black_button {
+                      width: auto;
+                      padding-top: 6px;
+                      border: 1px solid $silver_color;
+                      margin-left: 10px;
+                      img {
+                        width: 16px;
+                        margin: auto;
+                      }
+                    }
+                  }
+                  .square-image {
+                    img {
+                      border-radius: 0px;
+                      width: 60px;
+                      float: right;
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }

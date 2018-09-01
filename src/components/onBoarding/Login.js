@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
-import * as images from "../../constants/images";
 import { Link, withRouter } from "react-router-dom";
 
 import { LoginTypes } from "../../types";
@@ -66,7 +65,7 @@ class Login extends Component {
               {/* <img src={images.error} alt={"error"} /> */}
             </div>
             <div className="form-group">
-              <Link to="/forgotPassword">Forgot password</Link>
+              <Link to="/resetEmail">Forgot password</Link>
             </div>
             <div className="form-group">
               {!this.props.showLoginLoading ? (

@@ -14,7 +14,188 @@
     </head>
     
     <body> 
-    	<header><nav class="navbar navbar-default"><div class="container"><div class="row"><div class="navbar-header"><button type="button" class="navbar-toggle collapsed"><img src="images/menu.svg" alt="Menu"></button><a class="navbar-brand" href="/"><img src="images/logo-pic.png" alt="logo"></a></div><div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"><form class="navbar-form navbar-left"><div class="input-group search-input-group"><input type="text" class="form-control" placeholder="Search"><span class="input-group-addon"><button type="submit"><span class="search_icon"><img src="images/search.svg" alt="Search"></span></button></span></div></form><ul class="nav navbar-nav pull-right"><li role="presentation" class="menu_home active"><a role="button" href="#"><span>Home</span></a></li><li role="presentation" class="menu_public"><a role="button" href="#"><span>Campaign</span></a></li><li role="presentation" class="menu_messages"><a role="button" href="#"><span>Messages</span></a></li><li role="presentation" class="menu_notifications"><a role="button" href="#"><span>Notifications</span></a></li><li role="presentation" class="menu_profile"><a role="button" href="#"><span>Profile</span></a></li></ul></div></div></div></nav></header>
+    	<header>
+			<nav class="navbar navbar-default">
+			   <div class="container">
+				  <div class="row">
+					 <div class="navbar-header"><button type="button" class="navbar-toggle collapsed"><img src="images/menu.svg" alt="Menu"></button><a class="navbar-brand" href="/"><img src="images/logo-pic.png" alt="logo"></a></div>
+					 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<form class="navbar-form navbar-left">
+						   <div class="input-group search-input-group"><input type="text" class="form-control" placeholder="Search"><span class="input-group-addon"><button type="submit"><span class="search_icon"><img src="images/search.svg" alt="Search"></span></button></span></div>
+						</form>
+						<ul class="nav navbar-nav pull-right">
+						   <li role="presentation" class="menu_home active"><a role="button" href="#"><span>Home</span></a></li>
+						   <li role="presentation" class="menu_public"><a role="button" href="#"><span>Campaign</span></a></li>
+						   <li role="presentation" class="menu_messages"><a role="button" href="#"><span>Messages</span></a></li>
+						   <li role="presentation" class="menu_notifications dropdown">
+							   <a role="button" href="#" class="dropdown-toggle" data-toggle="dropdown" id="notification-dropdown" aria-haspopup="true" aria-expanded="true"><span>Notifications</span></a>							   
+								<div class="notification-mega-wrapper dropdown-menu" aria-labelledby="notification-dropdown">									
+									<nav>
+										<ul class="nav nav-tabs panel-head">
+											<li class="active">
+												<a class="nav-item" data-toggle="tab" href="#nav-notifications">
+													Notifications
+												</a>
+											</li>
+											<li>
+												<a class="nav-item" data-toggle="tab" href="#nav-like">
+												Like you
+												</a>
+											</li>
+											<li>
+												<a class="nav-item" data-toggle="tab" href="#nav-requests">
+												Requests
+												</a>	
+											</li>											
+										</ul>
+									</nav>
+									<div class="tab-content" id="nav-tabContent">
+										<div class="tab-pane fade active in" id="nav-notifications">
+											<div class="header-notifications">
+												<div class="notification-with-subscribe notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="subscribe-btn">
+														<button class="filled_button">Subscribe</button>
+													</div>
+												</div>
+												<div class="notification-with-image notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="square-image">
+														<img src="images/image.jpg" alt="" />
+													</div>
+												</div>
+												<div class="notification-with-image notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="square-image">
+														<img src="images/image.jpg" alt="" />
+													</div>
+												</div>
+												<div class="notification-with-image notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="square-image">
+														<img src="images/image.jpg" alt="" />
+													</div>
+												</div>
+												<div class="notification-with-image notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="square-image">
+														<img src="images/image.jpg" alt="" />
+													</div>
+												</div>
+												<div class="notification-with-image notification-wrapper">
+													<img src="images/notifications-logo.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">Picstagrah</div>
+														<div class="subtitle">Invoice is ready for donwload</div>
+														<div class="date">01.01.2000</div>
+													</div>													
+												</div>	
+												<div class="notification-with-image notification-wrapper">
+													<img src="images/notifications-logo.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">Picstagrah</div>
+														<div class="subtitle">Invoice is ready for donwload</div>
+														<div class="date">01.01.2000</div>
+													</div>													
+												</div>
+												<div class="notification-with-image notification-wrapper">
+													<img src="images/notifications-logo.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">Picstagrah</div>
+														<div class="subtitle">Invoice is ready for donwload</div>
+														<div class="date">01.01.2000</div>
+													</div>													
+												</div>
+											</div>									
+										</div>
+										<div class="tab-pane fade" id="nav-like">
+											<div class="header-notifications">
+												<div class="notification-with-subscribe notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="subscribe-btn">
+														<button class="blue_button">Like you too</button>
+													</div>
+												</div>
+												<div class="notification-with-subscribe notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="subscribe-btn">
+														<button class="filled_button">Message</button>
+													</div>
+												</div>
+												<div class="notification-with-subscribe notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="subscribe-btn">
+														<button class="filled_button">Message</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="tab-pane fade" id="nav-requests">
+											<div class="header-notifications">
+												<div class="notification-with-subscribe notification-wrapper">
+													<img src="images/image.jpg" alt="" />
+													<div class="user-info">
+														<div class="username">User name </div>
+														<div class="subtitle">Subscribed to your profile</div>
+														<div class="date">01.01.2000</div>
+													</div>
+													<div class="subscribe-btn">
+														<button class="black_button"><img src="images/green-tick.svg" /></button>
+														<button class="black_button"><img src="images/cross.svg" /></button>
+													</div>
+												</div>
+											</div>
+										</div>											
+									</div>									
+								</div>
+							</li>
+						   <li role="presentation" class="menu_profile"><a role="button" href="#"><span>Profile</span></a></li>
+						</ul>
+					 </div>
+				  </div>
+			   </div>
+			</nav>
+		 </header>
 		<section>
 			<div class="container">
 				<div class="row">
@@ -223,6 +404,18 @@
 			</div>
 		</section>
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+		<script>
+			$('.notification-mega-wrapper').on('click', '.nav-tabs a', function(){
+				$(this).closest('.dropdown').addClass('dontClose');
+			})
+
+			$('.menu_notifications').on('hide.bs.dropdown', function(e) {
+				if ( $(this).hasClass('dontClose') ){
+					e.preventDefault();
+				}
+				$(this).removeClass('dontClose');
+			});
+		</script>
 	</body>
 </html>
