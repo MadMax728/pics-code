@@ -18,8 +18,6 @@ class App extends Component {
       width: window.innerWidth,
       height: window.innerHeight
     };
-
-    console.log("Windows width", this.state);
   }
 
   componentWillMount() {
@@ -33,7 +31,6 @@ class App extends Component {
   }
 
   handleWindowSizeChange = () => {
-    console.log("Width123", window.innerWidth);
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
@@ -45,7 +42,7 @@ class App extends Component {
         <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />
-        <Route path={routes.ROOT_ROUTE} component={Home} />
+        <Route path={routes.ROOT_ROUTE} render={this.isAutgeneticated} />
       </Switch>
     );
   };
@@ -54,6 +51,26 @@ class App extends Component {
     return (
       <div>
         <Mobile />
+      </div>
+    );
+  };
+
+  isLoggedIn = () => {
+    return true;
+  };
+
+  isAutgeneticated = () => {
+    if (!this.isLoggedIn()) {
+      return (
+        <div>
+          <Route component={Login} />
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <Route component={Home} />
       </div>
     );
   };
@@ -68,6 +85,7 @@ class App extends Component {
         </div>
       );
     }
+
     return (
       <div>
         <Route render={this.webRender} />
