@@ -1,5 +1,10 @@
 import { string, bool, func, shape } from "prop-types";
 
+const histroyType = {
+  history: shape({
+    push: func
+  })
+};
 export const OnboardingType = {
   topHeader: string,
   subHeader: string,
@@ -25,3 +30,14 @@ export const homeTypes = {
     path: string
   })
 };
+export const ForgotPasswordTypes = {
+  resendEmail: string,
+  handleResetEmail: func
+};
+
+export const ResetEmailType = {
+  handleResetEmail: func,
+  ...histroyType
+};
+
+export const ResetPasswordType = {};

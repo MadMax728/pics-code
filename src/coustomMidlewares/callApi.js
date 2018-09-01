@@ -8,7 +8,7 @@ export const callApi = store => next => action => {
       // then perform auth actions
     }
 
-    next({ type: requestType });
+    next({ type: requestType, payload });
     if (!method.includes("Mock")) {
       fetch(endPoint, {
         method,

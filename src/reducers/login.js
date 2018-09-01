@@ -3,6 +3,7 @@ import * as types from "../actions/types";
 const initialState = {
   loading: false,
   response: {},
+  payload: {},
   error: ""
 };
 
@@ -49,7 +50,10 @@ const RegisterReducer = (state = initialState, action) => {
 const ResetEmail = (state = initialState, action) => {
   switch (action.type) {
     case types.RESET_EMAIL_REQUEST:
-      return Object.assign({}, state, { loading: true });
+      return Object.assign({}, state, {
+        loading: true,
+        payload: action.payload
+      });
     case types.RESET_EMAIL_SUCCESS:
       return Object.assign({}, state, {
         loading: false,

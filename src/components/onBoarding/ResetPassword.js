@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import { handleResetPassword } from "../../actions";
 import OnBoarding from "./OnboardingSkeleton";
+import { ResetPasswordType } from "../../types";
 import { LOGIN_ROUTE } from "../../constants/routes";
 import * as images from "../../constants/images";
 
@@ -95,7 +96,9 @@ class ResetPassword extends Component {
   }
 }
 
-ResetPassword.propType = {};
+ResetPassword.propType = {
+  ...ResetPasswordType
+};
 const ResetEmail = withRouter(
   connect(
     null,

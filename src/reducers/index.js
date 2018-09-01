@@ -9,8 +9,8 @@ import {
 const rootReducer = combineReducers({
   login: LoginReducer,
   register: RegisterReducer,
-  ResetEmail,
-  ResetPassword
+  resetEmail: ResetEmail,
+  resetPassword: ResetPassword
 });
 
 //selectors
@@ -20,6 +20,7 @@ export const getIsAuth = ({
   }
 }) => ({ auth_token });
 
+export const getResendEmail = ({ resetEmail: { payload } }) => payload;
 export const getRegisterLoading = ({ register: { loading } }) => loading;
 
 export const getLoginLoading = ({ login: { loading } }) => loading;
