@@ -31,7 +31,18 @@ class MockLogin {
             auth_token: `${payload.userName}-${Math.floor(Math.random())}`
           });
         } else reject("error in saving pls try again");
-      }, 5000);
+      }, 1000);
+    });
+  }
+
+  static ResetEmail(payload) {
+    payload = Object.assign({}, payload);
+    return new Promise(resolve => {
+      setTimeout(() => {
+        if (payload) {
+          resolve(payload);
+        }
+      }, 1000);
     });
   }
 }

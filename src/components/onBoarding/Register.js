@@ -8,16 +8,16 @@ import { withRouter } from "react-router-dom";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
 import * as images from "../../constants/images";
 import * as CONSTANTS from "../../constants/routes";
+import { emailRegex } from "../../constants/inputMasks";
 
 const updateState = apply => (name, value) => state => ({
   [name]: apply(state[name], value)
 });
 const toggleState = updateState(p => !p);
-const updateName = updateState((undefined, value) => value);
-const updateEmail = updateState((undefined, value) => value);
-const updatePassword = updateState((undefined, value) => value);
+const updateName = updateState((name, value) => value);
+const updateEmail = updateState((name, value) => value);
+const updatePassword = updateState((name, value) => value);
 //const updatePassword = updateState(value => value)
-const emailRegex = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/g;
 
 class Register extends Component {
   state = {

@@ -12,9 +12,6 @@ import { homeTypes } from "../types";
 class Home extends Component {
   state = {};
   render() {
-    const {
-      match: { params, path }
-    } = this.props;
     return (
       <div>
         <Header />

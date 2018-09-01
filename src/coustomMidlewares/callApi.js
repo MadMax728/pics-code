@@ -1,6 +1,5 @@
 export const callApi = store => next => action => {
   if (action.method && action.endPoint) {
-    debugger;
     const { method, headers, payload, types, endPoint } = action;
     const [requestType, successType, failureType] = types;
     // if access_token is there check for access token else if login actions i.e without auth perform with access token
