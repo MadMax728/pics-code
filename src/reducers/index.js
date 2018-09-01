@@ -1,10 +1,16 @@
 import { combineReducers } from "redux";
-import { LoginReducer, RegisterReducer, ResetEmail } from "./login";
+import {
+  LoginReducer,
+  RegisterReducer,
+  ResetEmail,
+  ResetPassword
+} from "./login";
 
 const rootReducer = combineReducers({
   login: LoginReducer,
   register: RegisterReducer,
-  ResetEmail
+  ResetEmail,
+  ResetPassword
 });
 
 //selectors

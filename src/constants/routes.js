@@ -12,3 +12,4 @@ export const MESSAGES_ROUTE = "/home/messages";
 export const FORGOT_PASSWORD = "/forgotPassword";
 export const CAMPAIGN_ROUTE = "/campaign";
 export const RESET_EMAIL = "/resetEmail";
+export const RESET_PASSWORD = "/resetPassword/:token";

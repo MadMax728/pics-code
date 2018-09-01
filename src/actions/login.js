@@ -36,3 +36,17 @@ export const handleResetEmail = payload => {
     payload
   };
 };
+
+export const handleResetPassword = payload => {
+  return {
+    type: type.RESET_PASSWORD,
+    method: "MockPost",
+    endPoint: MockLogin.ResetEmail,
+    types: [
+      type.RESET_PASSWORD_REQUEST,
+      type.RESET_PASSWORD_SUCCESS,
+      type.RESET_PASSWORD_FAILURE
+    ],
+    payload
+  };
+};

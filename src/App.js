@@ -7,6 +7,7 @@ import {
   Login,
   Register,
   ResetEmail,
+  ResetPassword,
   ForgotPassword
 } from "./components/onBoarding";
 
@@ -43,6 +44,7 @@ class App extends Component {
         <Route exact path={routes.REGISTER_ROUTE} component={Register} />
         <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
+        <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />
         <Route path={routes.ROOT_ROUTE} component={Home} />
       </Switch>
     );

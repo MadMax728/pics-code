@@ -64,4 +64,24 @@ const ResetEmail = (state = initialState, action) => {
       return state;
   }
 };
-export { LoginReducer, RegisterReducer, ResetEmail };
+
+//resetPassword
+const ResetPassword = (state = initialState, action) => {
+  switch (action.type) {
+    case types.RESET_PASSWORD_REQUEST:
+      return Object.assign({}, state, { loading: true });
+    case types.RESET_PASSWORD_SUCCESS:
+      return Object.assign({}, state, {
+        loading: false,
+        response: action.data
+      });
+    case types.RESET_PASSWORD_FAILURE:
+      return Object.assign({}, state, {
+        loading: false,
+        response: action.error
+      });
+    default:
+      return state;
+  }
+};
+export { LoginReducer, RegisterReducer, ResetEmail, ResetPassword };
