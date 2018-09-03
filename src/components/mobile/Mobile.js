@@ -6,6 +6,8 @@ import Footer from "./Footer";
 import { Home } from "./home";
 import { Cookies } from "./cookies";
 import MobileMenu from "./MobileMenu";
+import { AboutUs } from "../aboutUs";
+import { LeftSideBar } from "./common";
 
 export default class Mobile extends Component {
   constructor(props) {
@@ -55,11 +57,9 @@ export default class Mobile extends Component {
               <div>
                 <Switch>
                   <Route exact path={routes.ROOT_ROUTE} component={Home} />
-                  <Route
-                    exact
-                    path={routes.OPEN_ROUTE}
-                    component={MobileMenu}
-                  />
+
+                  <LeftSideBar />
+
                   <Route component={Home} />
                 </Switch>
               </div>

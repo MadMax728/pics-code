@@ -3,6 +3,7 @@ import * as images from "../../constants/images";
 import { Translations } from "../translations";
 import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../constants/routes";
+import { Link } from "react-router-dom";
 
 export default class Header extends Component {
   constructor(props) {
@@ -51,25 +52,19 @@ export default class Header extends Component {
     return (
       <header>
         <div className="mobile_logo">
-          <a href="#">
+          <Link to={routes.ROOT_ROUTE}>
             <img
               src={images.mobileHeaderLogo}
               width="20"
               height="20"
               alt="logo"
             />
-          </a>
+          </Link>
         </div>
 
         <div className="mobile_intro_text">
           <p>Picstagraph</p>
           <p>In der Picstagraph-App offenen</p>
-        </div>
-
-        <div className="text-uppercase">
-          <RouteNavItem to={routes.OPEN_ROUTE} className={`mobile_open_btn`}>
-            {Translations.navigation.open}
-          </RouteNavItem>
         </div>
       </header>
     );
