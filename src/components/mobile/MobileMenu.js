@@ -5,6 +5,8 @@ import {
   SideBarMenuServices
 } from "./common/sideBarMenu";
 
+import PropTypes from "prop-types";
+
 export default class MobileMenu extends Component {
   constructor(props) {
     super(props);
@@ -42,16 +44,17 @@ export default class MobileMenu extends Component {
     this.toggleUserNav();
   };
 
+  handleOnSetSidebarClose = () => {
+    this.props.onSetSidebarClose();
+  };
+
   render() {
     return (
       <section>
         <div className="container-fluid">
           <div className="row">
             <div className="back_option padding-15">
-              <button
-                type="button"
-                onClick={() => this.props.onSetSidebarClose()}
-              >
+              <button type="button" onClick={this.handleOnSetSidebarClose}>
                 <img src={images.black_left_arrow} alt="left_arrow" />
                 Back
               </button>

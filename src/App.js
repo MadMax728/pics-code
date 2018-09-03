@@ -49,7 +49,7 @@ class App extends Component {
   };
 
   render() {
-    const { width, height } = this.state;
+    const { width } = this.state;
     const isMobile = width <= 760;
     if (isMobile) {
       return (
