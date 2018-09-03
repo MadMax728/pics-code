@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import * as images from "../../constants/images";
-import { Translations } from "../translations";
-import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../constants/routes";
 import { Link } from "react-router-dom";
 
@@ -44,7 +42,7 @@ export default class Header extends Component {
     this.toggleUserNav();
   };
 
-  handleNavClick = evt => {
+  handleNavClick = () => {
     this.toggleUserNav();
   };
 

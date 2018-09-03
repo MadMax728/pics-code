@@ -5,8 +5,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { Home } from "./home";
 import { Cookies } from "./cookies";
-import MobileMenu from "./MobileMenu";
-import { AboutUs } from "../aboutUs";
 import { LeftSideBar } from "./common";
 
 export default class Mobile extends Component {
@@ -42,7 +40,7 @@ export default class Mobile extends Component {
     this.toggleUserNav();
   };
 
-  handleNavClick = evt => {
+  handleNavClick = () => {
     this.toggleUserNav();
   };
 

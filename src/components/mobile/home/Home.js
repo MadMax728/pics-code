@@ -19,6 +19,15 @@ class Home extends Component {
   onSetSidebarClose() {
     this.setState({ sidebarOpen: false });
   }
+
+  handleOnSetSidebarClose = () => {
+    this.onSetSidebarClose();
+  };
+
+  handleOnSetSidebarOpen = () => {
+    this.onSetSidebarOpen(true);
+  };
+
   render() {
     return (
       <div className="full-height-wrapper">
@@ -28,14 +37,14 @@ class Home extends Component {
               <Sidebar
                 sidebar={
                   <MobileMenu
-                    onSetSidebarClose={() => this.onSetSidebarClose()}
+                    onSetSidebarClose={this.handleOnSetSidebarClose}
                   />
                 }
                 open={this.state.sidebarOpen}
                 onSetOpen={this.onSetSidebarOpen}
                 styles={{ sidebar: { background: "white" } }}
               >
-                <button onClick={() => this.onSetSidebarOpen(true)}>
+                <button onClick={this.handleOnSetSidebarOpen}>
                   <img src={images.menu} alt="burgermenu" />
                 </button>
               </Sidebar>

@@ -40,7 +40,7 @@ export default class MobileMenu extends Component {
     this.toggleUserNav();
   };
 
-  handleNavClick = evt => {
+  handleNavClick = () => {
     this.toggleUserNav();
   };
 
