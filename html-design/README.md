@@ -57,3 +57,7 @@ Date 31-Aug-18
 Added static HTML for 
 1. Notification Design - HTML file - Design is create in about.html and css is updated in _header.scss
 2. Create ads Design - HTML file - HTML files are create-ad.html & create-ad1.html and css file is _create-ad.scss
+
+Date 3rd-Sep-18
+1. Create payment overview Design - HTML file - HTML files are payment-overview.html & payment-overview1.html and css file is _payment.scss
+2. Create messages Design - HTML file - HTML files are messages.html & messages1.html and css file is _messages.scss
