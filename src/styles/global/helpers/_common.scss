@@ -23,7 +23,7 @@ body {
   font-family: "Helvetica";
 }
 .no-padding {
-  padding: 0px;
+  padding: 0px !important;
 }
 .no-padding-right {
   padding-right: 0px;
@@ -45,6 +45,9 @@ body {
 }
 .size-20 {
   font-size: 20px;
+}
+.no-margin {
+  margin: 0px !important;
 }
 .width-80 {
   width: 80% !important;

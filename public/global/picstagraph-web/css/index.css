@@ -175,7 +175,7 @@ body {
   font-family: "Helvetica"; }
 
 .no-padding {
-  padding: 0px; }
+  padding: 0px !important; }
 
 .no-padding-right {
   padding-right: 0px; }
@@ -197,6 +197,9 @@ body {
 
 .size-20 {
   font-size: 20px; }
+
+.no-margin {
+  margin: 0px !important; }
 
 .width-80 {
   width: 80% !important; }
@@ -955,7 +958,7 @@ body {
   font-family: "Helvetica"; }
 
 .no-padding {
-  padding: 0px; }
+  padding: 0px !important; }
 
 .no-padding-right {
   padding-right: 0px; }
@@ -977,6 +980,9 @@ body {
 
 .size-20 {
   font-size: 20px; }
+
+.no-margin {
+  margin: 0px !important; }
 
 .width-80 {
   width: 80% !important; }
@@ -2733,6 +2739,285 @@ hr {
           border-color: #049dff; }
         .create-ad-modal .modal-body .image-wrapper .progress.blue .progress-left .progress-bar {
           animation: loading-2 1.5s linear forwards 1.8s; }
+
+.payment-overview-modal {
+  background: #333; }
+  .payment-overview-modal .modal-dialog {
+    width: 915px; }
+  .payment-overview-modal .modal-content {
+    float: left;
+    width: 100%;
+    box-shadow: none;
+    border: 0px; }
+  .payment-overview-modal .modal-header {
+    border-bottom: 6px solid #333333; }
+    .payment-overview-modal .modal-header .modal-title {
+      font-family: "Helvetica-Bold";
+      margin-top: 7px; }
+    .payment-overview-modal .modal-header button {
+      height: 35px;
+      padding-top: 7px;
+      margin-left: 5px; }
+  .payment-overview-modal .modal-body {
+    display: flex;
+    padding: 0px; }
+    .payment-overview-modal .modal-body .right-side {
+      background-color: #333333; }
+    .payment-overview-modal .modal-body .create-campaign-feed-wrapper {
+      padding: 40px; }
+      .payment-overview-modal .modal-body .create-campaign-feed-wrapper .feed_wrapper {
+        border: 1px solid #9b9b9b; }
+    .payment-overview-modal .modal-body .payment-form {
+      border-right: 6px solid #333333;
+      padding: 20px; }
+      .payment-overview-modal .modal-body .payment-form .creditcard-form {
+        float: left;
+        margin-top: 25px; }
+        .payment-overview-modal .modal-body .payment-form .creditcard-form .form-group {
+          float: left;
+          width: 50%; }
+          .payment-overview-modal .modal-body .payment-form .creditcard-form .form-group label {
+            padding: 0px; }
+          .payment-overview-modal .modal-body .payment-form .creditcard-form .form-group input {
+            width: 90%;
+            border: 1px solid #979797; }
+      .payment-overview-modal .modal-body .payment-form .subtitle {
+        font-size: 18px;
+        text-decoration: underline;
+        margin-bottom: 40px; }
+      .payment-overview-modal .modal-body .payment-form label {
+        font-family: "Helvetica-Bold"; }
+      .payment-overview-modal .modal-body .payment-form input {
+        border: 1px solid #979797;
+        position: static;
+        border-right: 0;
+        padding: 10px; }
+      .payment-overview-modal .modal-body .payment-form .radio {
+        border: 1px solid #4a4a4a;
+        float: left;
+        width: 100%;
+        padding: 14px;
+        margin-top: 0;
+        margin-bottom: 25px; }
+        .payment-overview-modal .modal-body .payment-form .radio input {
+          width: auto;
+          height: auto; }
+    .payment-overview-modal .modal-body .payment-history {
+      border-right: 5px solid #333333;
+      padding: 20px; }
+      .payment-overview-modal .modal-body .payment-history .subtitle {
+        font-size: 18px;
+        margin-bottom: 15px;
+        text-decoration: underline; }
+      .payment-overview-modal .modal-body .payment-history .history-content-wrapper .subtitle {
+        text-decoration: none; }
+      .payment-overview-modal .modal-body .payment-history .history-content-wrapper .content {
+        border: 1px solid #979797;
+        padding: 15px 12px;
+        margin-bottom: 25px; }
+        .payment-overview-modal .modal-body .payment-history .history-content-wrapper .content table {
+          width: 100%; }
+          .payment-overview-modal .modal-body .payment-history .history-content-wrapper .content table tr td {
+            padding: 5px 12px; }
+          .payment-overview-modal .modal-body .payment-history .history-content-wrapper .content table tr:last-child {
+            border-top: 1px solid #cbcbcb; }
+      .payment-overview-modal .modal-body .payment-history .history-content-wrapper .form-content {
+        margin-bottom: 25px; }
+        .payment-overview-modal .modal-body .payment-history .history-content-wrapper .form-content input {
+          height: 40px;
+          width: 48%; }
+        .payment-overview-modal .modal-body .payment-history .history-content-wrapper .form-content button {
+          height: 40px;
+          width: 48%;
+          float: right; }
+    .payment-overview-modal .modal-body .bottom-links {
+      color: #9b9b9b; }
+      .payment-overview-modal .modal-body .bottom-links a {
+        color: #4a4a4a; }
+    .payment-overview-modal .modal-body .bottom-button button {
+      width: 100%;
+      margin-top: 25px; }
+
+.messages-modal {
+  background: #333; }
+  .messages-modal .modal-dialog {
+    width: 915px;
+    height: 530px;
+    background: #fff; }
+    .messages-modal .modal-dialog .modal-content {
+      float: left;
+      width: 100%;
+      box-shadow: none;
+      border: 0px; }
+      .messages-modal .modal-dialog .modal-content .modal-title {
+        padding: 20px;
+        font-family: "Helvetica-Bold";
+        display: inline-block;
+        float: left; }
+      .messages-modal .modal-dialog .modal-content .title-wrapper {
+        height: 60px;
+        border-bottom: 2px solid #333; }
+        .messages-modal .modal-dialog .modal-content .title-wrapper .back {
+          display: inline-block;
+          float: left;
+          padding-top: 17px;
+          padding-left: 15px; }
+      .messages-modal .modal-dialog .modal-content .messages-left {
+        width: 44%;
+        float: left; }
+        .messages-modal .modal-dialog .modal-content .messages-left .edit {
+          float: right;
+          padding-right: 15px;
+          padding-top: 15px; }
+          .messages-modal .modal-dialog .modal-content .messages-left .edit img {
+            width: 15px; }
+        .messages-modal .modal-dialog .modal-content .messages-left .messages-menu {
+          display: flex;
+          border-bottom: 2px solid #333; }
+          .messages-modal .modal-dialog .modal-content .messages-left .messages-menu .menu-item {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0px; }
+        .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper {
+          float: left;
+          height: 346px;
+          overflow: auto;
+          border-bottom: 2px solid #333; }
+          .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper.searched-users {
+            height: 332px; }
+            .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper.searched-users .user-details {
+              margin-top: 5px; }
+          .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper {
+            float: left;
+            width: 100%;
+            border-bottom: 2px solid #333;
+            color: #9b9b9b; }
+            .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper:first-child {
+              color: #4a4a4a; }
+            .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper.new .username:after {
+              background: url(../images/check-circle-blank.svg);
+              content: "";
+              width: 6px;
+              height: 6px;
+              position: absolute;
+              background-size: contain;
+              right: -15px;
+              top: 8px;
+              background-repeat: no-repeat; }
+            .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper .user-img {
+              float: left;
+              width: 100%;
+              padding: 10px; }
+              .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper .user-img img {
+                width: 45px;
+                border-radius: 50%;
+                float: left;
+                margin-right: 10px; }
+            .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper .username {
+              float: left;
+              font-family: "Helvetica-Bold";
+              color: #4a4a4a;
+              position: relative; }
+            .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper .time {
+              float: right; }
+            .messages-modal .modal-dialog .modal-content .messages-left .user-chat-wrapper .chat-wrapper .text {
+              float: left;
+              margin-top: -20px;
+              padding-left: 55px; }
+        .messages-modal .modal-dialog .modal-content .messages-left .search-user {
+          position: relative;
+          border-bottom: 2px solid #333; }
+          .messages-modal .modal-dialog .modal-content .messages-left .search-user input {
+            height: 60px;
+            width: 100%;
+            border: 0;
+            padding: 15px 50px 15px 15px; }
+          .messages-modal .modal-dialog .modal-content .messages-left .search-user button {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            position: absolute;
+            top: 18px;
+            right: 10px; }
+            .messages-modal .modal-dialog .modal-content .messages-left .search-user button img {
+              width: 20px; }
+      .messages-modal .modal-dialog .modal-content .messages-right {
+        width: 56%;
+        float: left; }
+        .messages-modal .modal-dialog .modal-content .messages-right .user-wrapper {
+          display: flex;
+          height: 60px;
+          padding: 7px;
+          border-left: 2px solid #333;
+          border-bottom: 2px solid #333; }
+          .messages-modal .modal-dialog .modal-content .messages-right .user-wrapper .user-img {
+            margin-right: 10px; }
+            .messages-modal .modal-dialog .modal-content .messages-right .user-wrapper .user-img img {
+              width: 45px;
+              border-radius: 50%; }
+          .messages-modal .modal-dialog .modal-content .messages-right .user-wrapper .username {
+            font-family: "Helvetica-Bold"; }
+          .messages-modal .modal-dialog .modal-content .messages-right .user-wrapper .name {
+            color: #9b9b9b; }
+          .messages-modal .modal-dialog .modal-content .messages-right .user-wrapper .delete {
+            position: absolute;
+            right: 15px;
+            top: 15px; }
+            .messages-modal .modal-dialog .modal-content .messages-right .user-wrapper .delete img {
+              width: 15px; }
+        .messages-modal .modal-dialog .modal-content .messages-right .active-chat {
+          float: left;
+          border-left: 2px solid #333; }
+          .messages-modal .modal-dialog .modal-content .messages-right .active-chat .date {
+            font-size: 12px;
+            text-align: center;
+            padding: 15px;
+            float: left;
+            width: 100%; }
+          .messages-modal .modal-dialog .modal-content .messages-right .active-chat .reply {
+            width: 50%;
+            float: right;
+            background: #0f7aba;
+            color: #fff;
+            border-radius: 13px;
+            clear: both;
+            padding: 15px;
+            margin-bottom: 12px;
+            margin-right: 12px; }
+            .messages-modal .modal-dialog .modal-content .messages-right .active-chat .reply .time {
+              float: right; }
+          .messages-modal .modal-dialog .modal-content .messages-right .active-chat .response {
+            width: 60%;
+            float: left;
+            background: rgba(190, 190, 190, 0.35);
+            border-radius: 13px;
+            clear: both;
+            padding: 15px;
+            margin-bottom: 12px;
+            margin-left: 12px; }
+            .messages-modal .modal-dialog .modal-content .messages-right .active-chat .response .time {
+              float: right; }
+        .messages-modal .modal-dialog .modal-content .messages-right .write-chat {
+          float: left;
+          width: 100%;
+          border-left: 2px solid #333;
+          border-top: 2px solid #333;
+          padding-top: 12px;
+          padding-left: 12px;
+          padding-bottom: 10px;
+          height: 60px; }
+          .messages-modal .modal-dialog .modal-content .messages-right .write-chat textarea {
+            width: 90%;
+            float: left;
+            border: 0px;
+            resize: none;
+            outline: none;
+            height: 100%; }
+            .messages-modal .modal-dialog .modal-content .messages-right .write-chat textarea::placeholder {
+              color: #9b9b9b; }
+          .messages-modal .modal-dialog .modal-content .messages-right .write-chat img {
+            float: right;
+            margin-right: 8px; }
 
 header {
   float: left;
