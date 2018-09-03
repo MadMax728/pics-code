@@ -5,7 +5,7 @@ import Home from "./pages/home";
 import Mobile from "./components/mobile/Mobile";
 import Login from "./components/onBoarding/Login";
 import Register from "./components/onBoarding/Register";
-import { UserProfile } from "./components/profile";
+// import { UserProfile } from "./components/profile";
 
 class App extends Component {
   constructor() {
