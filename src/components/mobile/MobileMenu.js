@@ -68,3 +68,7 @@ export default class MobileMenu extends Component {
     );
   }
 }
+
+MobileMenu.propTypes = {
+  onSetSidebarClose: PropTypes.func
+};

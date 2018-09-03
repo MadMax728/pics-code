@@ -1,5 +1,4 @@
 import React from "react";
-import * as images from "../../constants/images";
 
 const ReportedContent = () => {
   return (
