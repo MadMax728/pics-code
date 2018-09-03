@@ -23,10 +23,10 @@ class Home extends Component {
                 path={routes.MY_PROFILE_ROUTE}
                 component={UserInfo}
               />
-              <div className="col-sm-3 col-md-2 left_menu no-padding">
+              <div className="left_menu no-padding">
                 <LeftSideBar />
               </div>
-              <div className="col-sm-5 col-md-7">
+              <div className="middle-section padding-rl-10">
                 <Switch>
                   <Route
                     exact
@@ -41,7 +41,7 @@ class Home extends Component {
                   <Route path={routes.ROOT_ROUTE} component={Dashboard} />
                 </Switch>
               </div>
-              <div className="col-sm-4 col-md-3 right_bar no-padding">
+              <div className="right_bar no-padding">
                 <RightSideBar />
               </div>
             </div>
