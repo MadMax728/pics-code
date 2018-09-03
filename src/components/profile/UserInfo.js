@@ -6,13 +6,13 @@ const UserInfo = () => {
     <div>
       <div className="user_info">
         <div className="col-sm-3 col-md-2 bg-white no-padding">
-          <img src={images.campaign1} alt="profile" />
+          <img src={images.profile_pic} width="100%" alt="profile" />
         </div>
-        <div className="col-sm-9 col-md-10 no-padding-right">
-          <div className="bg-white padding-25 float_left">
+        <div className="col-sm-12 col-md-10 no-padding-right">
+          <div className="bg-white padding-25 user_details">
             <div className="user_name">User Name</div>
             <div className="settings">
-              <img src={images.settings} alt="settings" />
+              <img src={images.settings} alt="profile" />
             </div>
             <div className="clearfix" />
             <div className="col-sm-4 slot_one no-padding">

@@ -83,7 +83,7 @@ export default class Header extends Component {
                 </form>
                 <ul className="nav navbar-nav pull-right">
                   <RouteNavItem
-                    to={routes.HOME}
+                    to={routes.ROOT_ROUTE}
                     className={`menu_home`}
                     activeAtRoot
                     closeMenu={this.toggleNav}

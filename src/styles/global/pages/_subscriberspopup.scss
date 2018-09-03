@@ -1,4 +1,6 @@
-.modal {
+.subscribe-popup {
+  width: 100%;
+  background: rgba(190, 190, 190, 0.5);
   &.right_bar {
     .modal-dialog {
       width: 270px;
@@ -6,6 +8,7 @@
     .modal-normal-title {
       border-bottom: 3px solid rgba(198, 198, 198, 0.3);
       background: $white_color;
+      margin-bottom: 0px;
     }
     .community {
       .community_wrapper {

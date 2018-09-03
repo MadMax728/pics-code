@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import Mobile from "./components/mobile/Mobile";
 import Login from "./components/onBoarding/Login";
 import Register from "./components/onBoarding/Register";
+import { UserProfile } from "./components/profile";
 
 class App extends Component {
   constructor() {
@@ -33,14 +34,11 @@ class App extends Component {
   };
 
   webRender = () => {
-    //if screen size is less than 767 * 560
     return (
       <Switch>
-        <Route exact path={routes.ROOT_ROUTE} component={Login} />
-        <Route exact path={routes.REGISTER} component={Register} />
-
-        <Route path={routes.HOME} component={Home} />
-        <Route path={"/home/:page"} component={Home} />
+        <Route exact path={routes.LOGIN_ROUTE} component={Login} />
+        <Route exact path={routes.REGISTER_ROUTE} component={Register} />
+        <Route path={routes.ROOT_ROUTE} component={Home} />
       </Switch>
     );
   };
@@ -56,7 +54,6 @@ class App extends Component {
   render() {
     const { width, height } = this.state;
     const isMobile = width <= 760 && height <= 600;
-    console.log("isMobile", isMobile);
     if (isMobile) {
       return (
         <div>
