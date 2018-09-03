@@ -1267,6 +1267,7 @@ hr {
 .left_menu {
   background-color: #ffffff;
   z-index: 9;
+  width: 20%;
   float: left; }
   .left_menu .navbar-nav li {
     width: 100%; }
@@ -1396,6 +1397,7 @@ hr {
     background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7); }
 
 .right_bar {
+  width: 30%;
   float: left; }
   .right_bar .normal_title {
     margin-bottom: 3px;

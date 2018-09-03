@@ -60,6 +60,7 @@
 .left_menu {
   background-color: $white_color;
   z-index: 9;
+  width: 20%;
   float: left;
   .navbar-nav {
     li {
@@ -223,6 +224,7 @@
   }
 }
 .right_bar {
+  width: 30%;
   float: left;
   .normal_title {
     margin-bottom: 3px;
