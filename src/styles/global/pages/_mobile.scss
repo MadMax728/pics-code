@@ -30,7 +30,7 @@ header {
   background-color: #fff;
   @include float();
   border-bottom: 1px solid $nobel_color;
-  a {
+  button {
     color: #4a4a4a;
     font-size: 16px;
     img {
@@ -58,25 +58,7 @@ header {
     }
   }
 }
-.mobile_menu_wrapper {
-  background-color: $white_color;
-  @include float();
-  .normal_title {
-    float: left;
-    width: 100%;
-    border-bottom: 1px solid $nobel_color;
-  }
-  .mobile_menu {
-    @include float();
-    border-bottom: 1px solid $nobel_color;
-    color: #4a4a4a;
-    width: 100%;
-    display: block;
-    img {
-      width: 16px;
-    }
-  }
-}
+
 .full-height-wrapper {
   background-color: $white_color;
   height: 100vh;
@@ -104,6 +86,25 @@ header {
     bottom: 4%;
     img {
       width: 200px;
+    }
+  }
+}
+.mobile_menu_wrapper {
+  background-color: $white_color;
+  @include float();
+  .normal_title {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid $nobel_color;
+  }
+  .mobile_menu {
+    @include float();
+    border-bottom: 1px solid $nobel_color;
+    color: #4a4a4a;
+    width: 100%;
+    display: block;
+    img {
+      width: 16px;
     }
   }
 }
