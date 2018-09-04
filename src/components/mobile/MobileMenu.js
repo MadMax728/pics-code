@@ -56,7 +56,7 @@ export default class MobileMenu extends Component {
             <div
               role="button"
               className="back_option padding-15"
-              onClick={this.handleOnSetSidebarClose()}
+              onClick={this.handleOnSetSidebarClose}
             >
               <button type="button">
                 <img src={images.black_left_arrow} alt="left_arrow" />

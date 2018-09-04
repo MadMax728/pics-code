@@ -17,6 +17,7 @@ const Radio = ({
         type="radio"
         name={forUse}
         value={value}
+        id={name}
         // checked={checked}
         // onChange={onChange}
       />
