@@ -7,7 +7,6 @@ import { Dashboard } from "../components/dashboard";
 import { UserProfile, UserInfo } from "../components/profile";
 import { LeftSideBar, RightSideBar } from "../components/common";
 import { Campaign } from "../components/campaign";
-import { homeTypes } from "../types";
 
 class Home extends Component {
   render() {
@@ -51,7 +50,5 @@ class Home extends Component {
     );
   }
 }
-Home.propTypes = {
-  ...homeTypes
-};
+
 export default Home;

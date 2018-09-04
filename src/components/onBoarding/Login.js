@@ -8,6 +8,7 @@ import { LoginTypes } from "../../types";
 import { getLoginLoading } from "../../reducers";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
 import * as images from "../../constants/images";
+import * as routes from "../../constants/routes";
 
 const updateState = key => value => () => ({ [key]: value });
 const updateName = updateState("userName");
@@ -42,7 +43,7 @@ class Login extends Component {
     event.preventDefault();
     if (this.formValid()) {
       this.props.login(this.state);
-      this.props.history.push("/home");
+      this.props.history.push(routes.ROOT_ROUTE);
     }
   };
 
@@ -86,7 +87,7 @@ class Login extends Component {
               )}
             </div>
             <div className="form-group">
-              <Link to="/resetEmail">Forgot password</Link>
+              <Link to={routes.RESET_EMAIL}>Forgot password</Link>
             </div>
             <div className="form-group">
               {!this.props.showLoginLoading ? (
