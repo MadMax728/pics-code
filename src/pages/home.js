@@ -10,7 +10,6 @@ import { Campaign } from "../components/campaign";
 import { homeTypes } from "../types";
 
 class Home extends Component {
-  state = {};
   render() {
     return (
       <div>

@@ -18,8 +18,6 @@ class App extends Component {
       width: window.innerWidth,
       height: window.innerHeight
     };
-
-    console.log("Windows width", this.state);
   }
 
   componentWillMount() {
@@ -33,7 +31,6 @@ class App extends Component {
   }
 
   handleWindowSizeChange = () => {
-    console.log("Width123", window.innerWidth);
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
 
@@ -59,8 +56,8 @@ class App extends Component {
   };
 
   render() {
-    const { width, height } = this.state;
-    const isMobile = width <= 760 && height <= 600;
+    const { width } = this.state;
+    const isMobile = width <= 760;
     if (isMobile) {
       return (
         <div>
