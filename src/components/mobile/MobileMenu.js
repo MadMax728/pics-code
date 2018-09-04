@@ -55,7 +55,7 @@ export default class MobileMenu extends Component {
           <div className="row">
             <div
               role="button"
-              for="backButton"
+              htmlFor="backButton"
               className="back_option padding-15"
               onClick={this.handleOnSetSidebarClose}
             >
