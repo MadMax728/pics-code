@@ -10,6 +10,57 @@
     "open": "Open"
   },
 
+  "left_sidebar_filter": {
+    "relevance": {
+      "name": "Relevance",
+      "type": "radio"
+    },
+    "location": {
+      "name": "Location",
+      "type": "text"
+    },
+    "radius": {
+      "name": "Radius",
+      "type": "select"
+    },
+    "category": {
+      "name": "Category",
+      "type": "select"
+    },
+    "procedure": {
+      "name": "Procedure",
+      "type": "radio"
+    },
+    "content": {
+      "name": "Content",
+      "type": "radio"
+    },
+    "target_group": {
+      "name": "Target group",
+      "type": "select"
+    },
+    "offer": {
+      "name": "Offer",
+      "type": "select"
+    },
+    "offer_tag": {
+      "name": "Offer tag",
+      "type": "text"
+    },
+    "inquiry": {
+      "name": "Inquiry",
+      "type": "select"
+    },
+    "inquiry_tag": {
+      "name": "Inquiry tag",
+      "type": "text"
+    },
+    "reset_filters": {
+      "name": "Reset filters",
+      "type": "button"
+    }
+  },
+
   "mobile_sidebar_information": {
     "aboutus": "About Us",
     "legal_notice": "Legal Notice",

@@ -53,8 +53,11 @@ export default class MobileMenu extends Component {
       <section>
         <div className="container-fluid">
           <div className="row">
-            <div className="back_option padding-15">
-              <button type="button" onClick={this.handleOnSetSidebarClose}>
+            <div
+              className="back_option padding-15"
+              onClick={this.handleOnSetSidebarClose}
+            >
+              <button type="button">
                 <img src={images.black_left_arrow} alt="left_arrow" />
                 Back
               </button>
