@@ -17,7 +17,7 @@ const LeftSidebarFilter = ({ filters }) => {
                 return (
                   <Radio
                     key={item.name}
-                    forUse={filter.name}
+                    foruse={filter.name}
                     name={item.name}
                     className={item.className}
                     value={item.value}
@@ -26,7 +26,7 @@ const LeftSidebarFilter = ({ filters }) => {
               })}
             {filter.type === "select" && (
               <Select
-                forUse={filter.name}
+                foruse={filter.name}
                 name={filter.name}
                 options={filter.items}
                 defaultValue={"select"}
@@ -34,7 +34,7 @@ const LeftSidebarFilter = ({ filters }) => {
             )}
 
             {filter.type === "text" && (
-              <Text forUse={filter.name} name={filter.name} />
+              <Text foruse={filter.name} name={filter.name} />
             )}
           </div>
         );

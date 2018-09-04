@@ -3,20 +3,19 @@ import propTypes from "prop-types";
 
 const Radio = ({
   name,
-  forUse,
+  foruse,
   value,
   checked,
-  key,
   className
   // onChange
 }) => {
   return (
     //eslint-disable-next-line jsx-a11y/no-onchange
-    <label className={className} id={key}>
+    <label className={className}>
       <span>{name}</span>
       <input
         type="radio"
-        name={forUse}
+        name={foruse}
         value={value}
         // checked={checked}
         // onChange={onChange}
@@ -29,11 +28,10 @@ const Radio = ({
 Radio.propTypes = {
   value: propTypes.string,
   name: propTypes.string,
-  forUse: propTypes.string,
+  foruse: propTypes.string,
   // onChange: propTypes.func,
   className: propTypes.string,
-  checked: propTypes.bool,
-  key: propTypes.any
+  checked: propTypes.bool
 };
 
 export default Radio;
