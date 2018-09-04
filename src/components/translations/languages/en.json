@@ -6,7 +6,36 @@
     "profile": "Profile",
     "campaign": "Campaign",
     "messages": "Messages",
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "open": "Open"
+  },
+
+  "mobile_sidebar_information": {
+    "aboutus": "About Us",
+    "legal_notice": "Legal Notice",
+    "support": "Support",
+    "campaigns": "Campaigns",
+    "ads": "Ads",
+    "verification": "Verification"
+  },
+
+  "mobile_sidebar_services": {
+    "terms_conditions": "General Terms and Conditions",
+    "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
+    "terms_use": "Terms of Use",
+    "paltform_policy": "Paltform Policy",
+    "advertising_policy": "Advertising Policy",
+    "campaign_policy": "Campaign policy",
+    "netzDg": "NetzDg",
+    "reported_content": "Reported Content",
+    "payment_method": "Payment Method",
+    "cancellation_policy": "Cancellation Policy",
+    "data_download": "Data Download",
+    "delete_account": "Delete Account",
+    "law_enforcement_agency": "Law Enforcement Agency",
+    "report_problem": "Report Problem",
+    "cookies": "Cookies",
+    "feedback": "Feedback"
   },
 
   "left_sidebar": {
