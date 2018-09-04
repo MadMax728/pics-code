@@ -13,10 +13,10 @@ const LeftSidebarFilter = ({ filters }) => {
           <div className="filter-wrapper" key={filter.name}>
             <div className={filter.className}>{filter.name}</div>
             {filter.type === "radio" &&
-              filter.items.map(({ item, index }) => {
+              filter.items.map(item => {
                 return (
                   <Radio
-                    key={index}
+                    key={item.name}
                     forUse={filter.name}
                     name={item.name}
                     className={item.className}
