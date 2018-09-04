@@ -148,8 +148,8 @@ const DashboardFilter = () => {
   return (
     <div className="left-filters">
       <LeftSidebarFilter filters={Filters} />
-      <div class="filter-btn-wrapper">
-        <button class="black_button">Reset filters</button>
+      <div className="filter-btn-wrapper">
+        <button className="black_button">Reset filters</button>
       </div>
     </div>
   );

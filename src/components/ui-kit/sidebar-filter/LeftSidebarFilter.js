@@ -12,7 +12,7 @@ const LeftSidebarFilter = ({ filters }) => {
         return (
           <div className="filter-wrapper" key={filter.name}>
             <div className={filter.className}>{filter.name}</div>
-            {filter.type == "radio" &&
+            {filter.type === "radio" &&
               filter.items.map(item => {
                 return (
                   <Radio
@@ -24,7 +24,7 @@ const LeftSidebarFilter = ({ filters }) => {
                   />
                 );
               })}
-            {filter.type == "select" && (
+            {filter.type === "select" && (
               <Select
                 forUse={filter.name}
                 name={filter.name}
@@ -33,7 +33,7 @@ const LeftSidebarFilter = ({ filters }) => {
               />
             )}
 
-            {filter.type == "text" && (
+            {filter.type === "text" && (
               <Text forUse={filter.name} name={filter.name} />
             )}
           </div>
