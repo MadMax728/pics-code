@@ -48,6 +48,8 @@ export default class MobileMenu extends Component {
     this.props.onSetSidebarClose();
   };
 
+  handleKeyPress = () => {};
+
   render() {
     return (
       <section>
@@ -58,6 +60,7 @@ export default class MobileMenu extends Component {
               htmlFor="backButton"
               className="back_option padding-15"
               onClick={this.handleOnSetSidebarClose}
+              onKeyPress={this.handleKeyPress}
             >
               <button type="button">
                 <img src={images.black_left_arrow} alt="left_arrow" />
