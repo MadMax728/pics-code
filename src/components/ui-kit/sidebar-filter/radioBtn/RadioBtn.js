@@ -39,11 +39,7 @@ class RadioBtn extends Component {
       >
         {items.map(item => {
           return (
-            <label
-              className={item.className}
-              key={item.name}
-              htmlFor={item.name}
-            >
+            <label className={item.className} key={item.name} htmlFor={name}>
               <span>{item.name}</span>
               <Radio value={item.name} />
               <span className="checkmark" />
@@ -58,7 +54,14 @@ class RadioBtn extends Component {
 Radio.propTypes = {
   onChange: propTypes.func,
   className: propTypes.string,
-  items: propTypes.any
+  items: propTypes.arrayOf(
+    propTypes.shape({
+      name: propTypes.string,
+      value: propTypes.string,
+      checked: propTypes.string,
+      className: propTypes.string
+    }).isRequired
+  ).isRequired
 };
 
 export default RadioBtn;
