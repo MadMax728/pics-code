@@ -39,7 +39,11 @@ class RadioBtn extends Component {
       >
         {items.map(item => {
           return (
-            <label className={item.className} key={item.name}>
+            <label
+              className={item.className}
+              key={item.name}
+              htmlFor={item.name}
+            >
               <span>{item.name}</span>
               <Radio value={item.name} />
               <span className="checkmark" />
