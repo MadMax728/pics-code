@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { OnboardingType } from "../../types";
+import { string, bool, func } from "prop-types";
 import * as images from "../../constants/images";
 class OnboardingSkelton extends Component {
   state = {};
@@ -50,24 +50,24 @@ class OnboardingSkelton extends Component {
         <footer>
           <div className="custom-container">
             <ul>
-              {/* <li>
-                <a href="#">Support</a>
+              <li>
+                <a href="/support">Support</a>
               </li>
               <li>
-                <a href="#">Data Protechtion & Privacy Policy</a>
+                <a href="/support">Data Protechtion & Privacy Policy</a>
               </li>
               <li>
-                <a href="#">Legal Notice</a>
+                <a href="/support">Legal Notice</a>
               </li>
               <li>
-                <a href="#">General terms & Conditions</a>
+                <a href="/support">General terms & Conditions</a>
               </li>
               <li>
-                <a href="#">NETZDG</a>
+                <a href="/support">NETZDG</a>
               </li>
               <li>
-                <a href="#">Language</a>
-              </li> */}
+                <a href="/support">Language</a>
+              </li>
             </ul>
           </div>
         </footer>
@@ -77,7 +77,10 @@ class OnboardingSkelton extends Component {
 }
 
 OnboardingSkelton.propTypes = {
-  ...OnboardingType
+  topHeader: string,
+  subHeader: string,
+  showDownloadStore: bool,
+  children: func.isRequired
 };
 
 export default OnboardingSkelton;

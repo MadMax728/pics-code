@@ -9,7 +9,10 @@ export const USER_ROUTE = "/user";
 export const PICS_ROUTE = "/pics";
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const MESSAGES_ROUTE = "/home/messages";
+export const FORGOT_PASSWORD = "/forgotPassword";
 export const CAMPAIGN_ROUTE = "/campaign";
+export const RESET_EMAIL = "/resetEmail";
+export const RESET_PASSWORD = "/resetPassword/:token";
 
 // Mobile view Side Menu
 

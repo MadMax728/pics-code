@@ -1,26 +1,33 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { RegisterTypes } from "../../types";
+import { func, bool, object } from "prop-types";
 import { handleRegisteration } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import { getRegisterLoading } from "../../reducers";
 import { withRouter } from "react-router-dom";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
+import * as images from "../../constants/images";
+import * as CONSTANTS from "../../constants/routes";
+import { emailRegex } from "../../constants/inputMasks";
 
 const updateState = apply => (name, value) => state => ({
   [name]: apply(state[name], value)
 });
 const toggleState = updateState(p => !p);
-const updateName = updateState((undefined, value) => value);
-const updateEmail = updateState((undefined, value) => value);
-const updatePassword = updateState((undefined, value) => value);
+const updateName = updateState((name, value) => value);
+const updateEmail = updateState((name, value) => value);
+const updatePassword = updateState((name, value) => value);
 //const updatePassword = updateState(value => value)
+
 class Register extends Component {
   state = {
     userName: "",
     email: "",
     password: "",
+    repeatPassword: "",
     maleChecked: true,
+    emailValid: false,
+    isValidPassword: false,
     femaleChecked: false
   };
 
@@ -31,7 +38,11 @@ class Register extends Component {
 
   updateEmail = e => {
     e.preventDefault();
-    this.setState(updateEmail("email", e.target.value));
+    this.setState(updateEmail("email", e.target.value), () => {
+      const isEmailValid = emailRegex.test(this.state.email);
+
+      this.setState({ emailValid: isEmailValid });
+    });
   };
 
   updatePassword = e => {
@@ -43,7 +54,13 @@ class Register extends Component {
   updateRepeatPassword = e => {
     //logic for repeat password to match pass
     e.preventDefault();
-    this.setState(updatePassword("repeatPassword", e.target.value));
+    this.setState(updatePassword("repeatPassword", e.target.value), () => {
+      if (this.state.password === this.state.repeatPassword) {
+        this.setState(() => ({ isValidPassword: true }));
+      } else {
+        this.setState(() => ({ isValidPassword: false }));
+      }
+    });
   };
 
   updateMaleChecked = e => {
@@ -52,10 +69,27 @@ class Register extends Component {
     this.setState(toggleState("maleChecked"));
   };
 
+  formValid = () => {
+    const { email, userName, password, isValidPassword } = this.state;
+    const isEmailValid = emailRegex.test(email);
+    if (
+      userName.length < 0 ||
+      !isEmailValid ||
+      !isValidPassword ||
+      password.length < 0
+    ) {
+      this.setState({ formValid: false });
+      return false;
+    }
+    this.setState({ formValid: true });
+    return true;
+  };
   handleRegisteration = e => {
     e.preventDefault();
-    this.props.handleRegisteration(this.state);
-    this.props.history.push("/");
+    if (this.formValid()) {
+      this.props.handleRegisteration(this.state);
+      this.props.history.push(CONSTANTS.LOGIN_ROUTE);
+    }
   };
 
   render = () => (
@@ -75,7 +109,11 @@ class Register extends Component {
               value={this.state.userName}
               onChange={this.updateUserName}
             />
-            {/* <img src="images/checked.svg" alt={"checked"} /> */}
+            {this.state.userName.length === 0 ? (
+              <img src={images.error} alt={"error"} />
+            ) : (
+              <img src={images.checked} alt={"checked"} />
+            )}
           </div>
           <div className="form-group">
             <input
@@ -86,7 +124,11 @@ class Register extends Component {
               value={this.state.email}
               onChange={this.updateEmail}
             />
-            {/* <img src="images/error.svg" alt={"checked"} /> */}
+            {this.state.email === 0 || !this.state.emailValid ? (
+              <img src={images.error} alt={"error"} />
+            ) : (
+              <img src={images.checked} alt={"checked"} />
+            )}
           </div>
           <div className="form-group">
             <input
@@ -97,7 +139,11 @@ class Register extends Component {
               value={this.state.password}
               onChange={this.updatePassword}
             />
-            {/* <img src="images/checked.svg" alt={"checked"} /> */}
+            {this.state.password.length === 0 ? (
+              <img src={images.error} alt={"error"} />
+            ) : (
+              <img src={images.checked} alt={"checked"} />
+            )}
           </div>
           <div className="form-group">
             <input
@@ -108,7 +154,12 @@ class Register extends Component {
               value={this.state.repeatPassword}
               onChange={this.updateRepeatPassword}
             />
-            {/* <img src="images/error.svg" alt={"error"} /> */}
+            {this.state.repeatPassword.length === 0 ||
+            !this.state.isValidPassword ? (
+              <img src={images.error} alt={"error"} />
+            ) : (
+              <img src={images.checked} alt={"checked"} />
+            )}
           </div>
           <div className="form-group">
             <ul className="options">
@@ -154,7 +205,9 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  ...RegisterTypes
+  handleRegisteration: func,
+  showRegsiterLoading: bool,
+  history: object.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -7,7 +7,6 @@ import { Dashboard } from "../components/dashboard";
 import { UserProfile, UserInfo } from "../components/profile";
 import { LeftSideBar, RightSideBar } from "../components/common";
 import { Campaign } from "../components/campaign";
-import { homeTypes } from "../types";
 
 class Home extends Component {
   render() {
@@ -22,7 +21,7 @@ class Home extends Component {
                 path={routes.MY_PROFILE_ROUTE}
                 component={UserInfo}
               />
-              <div className="left_menu no-padding">
+              <div className="left_menu_second no-padding">
                 <LeftSideBar />
               </div>
               <div className="middle-section padding-rl-10">
@@ -51,7 +50,5 @@ class Home extends Component {
     );
   }
 }
-Home.propTypes = {
-  ...homeTypes
-};
+
 export default Home;
