@@ -78,12 +78,12 @@ LeftSidebarFilter.propTypes = {
   filters: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      onChange: PropTypes.func,
       className: PropTypes.string.isRequired,
       type: PropTypes.string,
       items: PropTypes.any
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  onChange: PropTypes.func
 };
 
 export default LeftSidebarFilter;

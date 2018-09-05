@@ -52,11 +52,14 @@ class RadioBtn extends Component {
 }
 
 Radio.propTypes = {
-  items: propTypes.any,
-  name: propTypes.string,
-  foruse: propTypes.string,
-  onChange: propTypes.func,
-  className: propTypes.string
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      val: PropTypes.string.isRequired,
+      checked: PropTypes.string,
+      className: propTypes.string
+    }).isRequired
+  ).isRequired
 };
 
 export default RadioBtn;
