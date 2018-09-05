@@ -5,6 +5,10 @@ const histroyType = {
     push: func
   })
 };
+const childrenType = {
+  children: func.isRequired
+};
+
 export const OnboardingType = {
   topHeader: string,
   subHeader: string,
@@ -43,4 +47,7 @@ export const ResetEmailType = {
 export const ResetPasswordType = {
   handleResetPassword: func,
   ...histroyType
+};
+export const SearchResultType = {
+  ...childrenType
 };
