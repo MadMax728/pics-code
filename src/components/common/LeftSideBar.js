@@ -3,11 +3,14 @@ import { Route } from "react-router-dom";
 import * as routes from "../../constants/routes";
 import { DashboardNav, DashboardFilter } from "./nav";
 
-const LeftSideBar = () => {
+const LeftSideBar = ({ getFilter }) => {
   return (
     <div>
       <Route path={routes.ROOT_ROUTE} component={DashboardNav} />
-      <Route exact path={routes.ROOT_ROUTE} component={DashboardFilter} />
+      <Route
+        path={routes.ROOT_ROUTE}
+        component={() => <DashboardFilter handleApplyClick={getFilter} />}
+      />
     </div>
   );
 };

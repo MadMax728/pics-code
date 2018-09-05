@@ -1,6 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
-import * as routes from "../../../constants/routes";
 import { Translations } from "../../translations";
 
 const staticData = [
@@ -144,15 +143,48 @@ const Filters = [
   }
 ];
 
-const DashboardFilter = () => {
-  return (
-    <div className="left-filters">
-      <LeftSidebarFilter filters={Filters} />
-      <div className="filter-btn-wrapper">
-        <button className="black_button">Reset filters</button>
+class DashboardFilter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterApply: false
+    };
+  }
+
+  handleResetFilterClick = () => {
+    this.setState({ filterApply: false });
+  };
+
+  handleApplyClick = filterData => {
+    this.setState({ filterApply: true });
+    this.props.handleApplyClick(filterData);
+  };
+
+  render() {
+    return (
+      <div className="left-filters">
+        <LeftSidebarFilter
+          filters={Filters}
+          onChange={this.handleResetFilterClick}
+          filterApply={this.state.filterApply}
+        />
+        <div className="filter-btn-wrapper">
+          {this.state.filterApply ? (
+            <button
+              className="black_button"
+              onClick={this.handleResetFilterClick}
+            >
+              Reset filters
+            </button>
+          ) : (
+            <button className="black_button" onClick={this.handleApplyClick}>
+              Apply
+            </button>
+          )}
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default DashboardFilter;

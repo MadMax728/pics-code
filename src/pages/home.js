@@ -10,6 +10,11 @@ import { Campaign } from "../components/campaign";
 import { homeTypes } from "../types";
 
 class Home extends Component {
+  getFilter(filterData) {
+    //list of array data as object & calling API
+    console.log(filterData);
+  }
+
   render() {
     return (
       <div>
@@ -23,35 +28,7 @@ class Home extends Component {
                 component={UserInfo}
               />
               <div className="left_menu_second no-padding">
-                <LeftSideBar />
-
-                {/* <LeftSideBarFilter /> */}
-
-                {/* <div radioLinks={[]} title={''} clickEvent={this.click}>
-                  <div>Radio filter title</div>
-                  {radioLinks.map(link => {
-                    return (
-                      <label className={link.className}>
-                          <span>{link.text}</span>
-                          <input id={link.id} type="radio" name="relevance" onChnage={clickEvent}/>
-                          <span className="checkmark"></span>
-                       </label>
-                    );
-                  })}
-                </div>
-
-                <div inputLinks={[]} title={''} clickEvent={this.click}>
-                  <div>In filter title</div>
-                  {inputLinks.map(link => {
-                    return (
-                      <label className={link.className}>
-                          <span>{link.text}</span>
-                          <input id={link.id} type="radio" name="relevance" onChnage={clickEvent}/>
-                          <span className="checkmark"></span>
-                       </label>
-                    );
-                  })}
-                </div> */}
+                <LeftSideBar getFilter={this.getFilter} />
               </div>
               <div className="middle-section padding-rl-10">
                 <Switch>
@@ -79,6 +56,7 @@ class Home extends Component {
     );
   }
 }
+
 Home.propTypes = {
   ...homeTypes
 };
