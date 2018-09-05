@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { RegisterTypes } from "../../types";
+import { func, bool, object } from "prop-types";
 import { handleRegisteration } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import { getRegisterLoading } from "../../reducers";
@@ -205,7 +205,9 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  ...RegisterTypes
+  handleRegisteration: func,
+  showRegsiterLoading: bool,
+  history: object.isRequired
 };
 
 const mapStateToProps = state => ({

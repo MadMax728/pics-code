@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { handleResetEmail } from "../../actions";
 import OnBoarding from "./OnboardingSkeleton";
-import { ResetEmailType } from "../../types";
+import { func, shape } from "prop-types";
 import { FORGOT_PASSWORD } from "../../constants/routes";
 import * as images from "../../constants/images";
 import { emailRegex } from "../../constants/inputMasks";
@@ -65,7 +65,10 @@ class ResetMail extends Component {
 }
 
 ResetMail.propTypes = {
-  ...ResetEmailType
+  handleResetEmail: func,
+  history: shape({
+    push: func
+  })
 };
 const ResetEmail = withRouter(
   connect(

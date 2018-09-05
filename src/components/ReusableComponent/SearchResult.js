@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchResultType } from "../../types";
+import { func } from "prop-types";
 class SearchResult extends React.Component {
   state = {
     value: "",
@@ -27,6 +27,6 @@ class SearchResult extends React.Component {
   }
 }
 SearchResult.propTypes = {
-  ...SearchResultType
+  children: func.isRequired
 };
 export default SearchResult;

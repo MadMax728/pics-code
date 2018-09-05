@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { OnboardingType } from "../../types";
+import { string, bool, func } from "prop-types";
 import * as images from "../../constants/images";
 class OnboardingSkelton extends Component {
   state = {};
@@ -77,7 +77,10 @@ class OnboardingSkelton extends Component {
 }
 
 OnboardingSkelton.propTypes = {
-  ...OnboardingType
+  topHeader: string,
+  subHeader: string,
+  showDownloadStore: bool,
+  children: func.isRequired
 };
 
 export default OnboardingSkelton;

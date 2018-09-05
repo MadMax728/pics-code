@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { getResendEmail } from "../../reducers";
-import { ForgotPasswordTypes } from "../../types";
+import { string, func } from "prop-types";
 import { handleResetEmail } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 
@@ -26,7 +26,8 @@ const ForgotPassword = ({ resendEmail, handleResetEmail }) => (
   </OnboardingSkelton>
 );
 ForgotPassword.propTypes = {
-  ...ForgotPasswordTypes
+  resendEmail: string,
+  handleResetEmail: func
 };
 
 const mapStateToProps = state => ({

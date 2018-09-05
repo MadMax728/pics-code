@@ -4,7 +4,7 @@ import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
 import { Link, withRouter } from "react-router-dom";
 
-import { LoginTypes } from "../../types";
+import { func, object, bool } from "prop-types";
 import { getLoginLoading } from "../../reducers";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
 import * as images from "../../constants/images";
@@ -106,7 +106,9 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  ...LoginTypes
+  login: func,
+  showLoginLoading: bool,
+  history: object.isRequired
 };
 const mapStateToProps = state => ({
   showLoginLoading: getLoginLoading(state)
