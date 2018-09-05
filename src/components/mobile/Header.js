@@ -53,8 +53,8 @@ export default class Header extends Component {
           <Link to={routes.ROOT_ROUTE}>
             <img
               src={images.mobileHeaderLogo}
-              width="20"
-              height="20"
+              width="30"
+              height="30"
               alt="logo"
             />
           </Link>
