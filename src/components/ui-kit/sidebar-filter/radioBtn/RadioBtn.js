@@ -28,7 +28,7 @@ class RadioBtn extends Component {
   };
 
   render() {
-    const { items, name, className } = this.props;
+    const { items, name } = this.props;
 
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
@@ -53,10 +53,12 @@ class RadioBtn extends Component {
 }
 
 Radio.propTypes = {
+  onChange: PropTypes.func,
+  className: propTypes.string,
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      value: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      value: PropTypes.string,
       checked: PropTypes.string,
       className: propTypes.string
     }).isRequired
