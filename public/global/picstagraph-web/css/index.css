@@ -3153,3 +3153,96 @@ header {
 
 .modal-backdrop {
   display: none; }
+
+header .cms-logo {
+  margin: 12px auto;
+  max-width: 225px; }
+
+.cms-container {
+  width: 906px;
+  margin: auto; }
+  @media (max-width: 905px) {
+    .cms-container {
+      width: 98%;
+      padding: 0px 15px; } }
+
+.gap-10 {
+  border-bottom: 10px solid rgba(198, 198, 198, 0.3);
+  float: left;
+  width: 100%; }
+
+.cms-middle-section .panel-wrapper {
+  background: #ffffff;
+  margin-bottom: 10px;
+  float: left;
+  width: 100%; }
+  .cms-middle-section .panel-wrapper .title {
+    font-size: 20px;
+    font-family: "Helvetica-Bold";
+    margin-bottom: 20px; }
+  .cms-middle-section .panel-wrapper .sub-title {
+    font-size: 16px;
+    font-family: "Helvetica-Bold";
+    margin-top: 20px;
+    margin-bottom: 30px; }
+  .cms-middle-section .panel-wrapper .policy-points {
+    padding-left: 15px; }
+    .cms-middle-section .panel-wrapper .policy-points .question {
+      font-family: "Helvetica-Bold";
+      margin-bottom: 5px; }
+    .cms-middle-section .panel-wrapper .policy-points .answer {
+      margin-bottom: 25px; }
+  .cms-middle-section .panel-wrapper p {
+    line-height: 21px; }
+  .cms-middle-section .panel-wrapper .content-wrapper {
+    padding: 25px; }
+  .cms-middle-section .panel-wrapper .width-100 {
+    width: 100%; }
+  .cms-middle-section .panel-wrapper .padding-50 {
+    padding: 50px; }
+  .cms-middle-section .panel-wrapper .contact-wrapper {
+    margin-bottom: 25px;
+    line-height: 16px; }
+    .cms-middle-section .panel-wrapper .contact-wrapper a {
+      color: #4a4a4a; }
+  @media (max-width: 991px) {
+    .cms-middle-section .panel-wrapper .logo-big {
+      width: 100%; } }
+
+.cms-middle-section .support-accordion .panel {
+  border: 0;
+  box-shadow: none;
+  margin-bottom: 15px; }
+  .cms-middle-section .support-accordion .panel .panel-heading {
+    background: transparent;
+    border: 0px;
+    padding: 0; }
+    .cms-middle-section .support-accordion .panel .panel-heading .panel-title {
+      font-size: 14px;
+      padding-left: 25px; }
+      .cms-middle-section .support-accordion .panel .panel-heading .panel-title .accordion-toggle {
+        color: #4a4a4a;
+        text-decoration: none;
+        margin-bottom: 5px;
+        display: inline-block;
+        position: relative; }
+  .cms-middle-section .support-accordion .panel .panel-body {
+    border: 0px;
+    padding-left: 25px; }
+
+.panel-heading a:before {
+  background: url(../images/down-arrow.png);
+  content: "";
+  transition: all 0.5s;
+  background-size: contain;
+  background-position: top center;
+  left: -25px;
+  background-repeat: no-repeat;
+  width: 12px;
+  height: 8px;
+  position: absolute; }
+
+.panel-heading.active a:before {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg); }
