@@ -10,7 +10,6 @@ export const login = payload => ({
 });
 
 export const handleRegisteration = payload => {
-  debugger;
   return {
     type: type.REGISTER,
     method: "MockPost",
@@ -19,6 +18,34 @@ export const handleRegisteration = payload => {
       type.REGISTER_REQUEST,
       type.REGISTER_SUCCESS,
       type.REGISTER_FAILURE
+    ],
+    payload
+  };
+};
+
+export const handleResetEmail = payload => {
+  return {
+    type: type.RESET_EMAIL,
+    method: "MockPost",
+    endPoint: MockLogin.ResetEmail,
+    types: [
+      type.RESET_EMAIL_REQUEST,
+      type.RESET_EMAIL_SUCCESS,
+      type.RESET_EMAIL_FAILURE
+    ],
+    payload
+  };
+};
+
+export const handleResetPassword = payload => {
+  return {
+    type: type.RESET_PASSWORD,
+    method: "MockPost",
+    endPoint: MockLogin.ResetEmail,
+    types: [
+      type.RESET_PASSWORD_REQUEST,
+      type.RESET_PASSWORD_SUCCESS,
+      type.RESET_PASSWORD_FAILURE
     ],
     payload
   };

@@ -10,7 +10,6 @@ const Radio = ({
   // onChange
 }) => {
   return (
-    //eslint-disable-next-line jsx-a11y/no-onchange
     <label className={className} htmlFor={name}>
       <span>{name}</span>
       <input
