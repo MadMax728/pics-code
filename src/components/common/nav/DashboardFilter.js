@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../translations";
+import propTypes from "prop-types";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -147,7 +148,8 @@ class DashboardFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterApply: false
+      filterApply: false,
+      filData: []
     };
   }
 
@@ -155,9 +157,13 @@ class DashboardFilter extends Component {
     this.setState({ filterApply: false });
   };
 
-  handleApplyClick = filterData => {
+  handleApplyClick = () => {
     this.setState({ filterApply: true });
-    this.props.handleApplyClick(filterData);
+    this.props.handleApplyClick(this.state.filData);
+  };
+
+  handleOnChange = filterData => {
+    this.setState({ filData: filterData });
   };
 
   render() {
@@ -165,7 +171,7 @@ class DashboardFilter extends Component {
       <div className="left-filters">
         <LeftSidebarFilter
           filters={Filters}
-          onChange={this.handleResetFilterClick}
+          onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
         />
         <div className="filter-btn-wrapper">
@@ -186,5 +192,9 @@ class DashboardFilter extends Component {
     );
   }
 }
+
+DashboardFilter.propTypes = {
+  handleApplyClick: propTypes.func
+};
 
 export default DashboardFilter;

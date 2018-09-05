@@ -15,10 +15,10 @@ class LeftSidebarFilter extends Component {
   handleOnChange = filter => {
     let filterData = this.state.filterData;
     let indexOf = filterData.findIndex(f => {
-      return f.name == filter.values.name;
+      return f.name === filter.values.name;
     });
 
-    if (indexOf == -1) {
+    if (indexOf === -1) {
       filterData.push(filter.values);
     } else {
       filterData.splice(indexOf, 1);

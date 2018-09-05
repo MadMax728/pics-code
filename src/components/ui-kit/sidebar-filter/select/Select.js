@@ -14,8 +14,7 @@ class Select extends Component {
   handleChange = event => {
     this.setState({ defaultValue: event.target.value });
     const { data } = this.state;
-    data[this.state.name] = event.target.value;
-    data["values"] = { name: this.state.name, val: event.target.value };
+    data.values = { name: this.state.name, val: event.target.value };
     this.props.onChange(data);
   };
 
@@ -45,6 +44,7 @@ class Select extends Component {
 
 Select.propTypes = {
   value: propTypes.string,
+  name: propTypes.string,
   options: propTypes.array.isRequired,
   onChange: propTypes.func,
   defaultValue: propTypes.string,
