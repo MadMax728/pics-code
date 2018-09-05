@@ -21,8 +21,36 @@ class Home extends Component {
                 path={routes.MY_PROFILE_ROUTE}
                 component={UserInfo}
               />
-              <div className="left_menu no-padding">
+              <div className="left_menu_second no-padding">
                 <LeftSideBar />
+
+                {/* <LeftSideBarFilter /> */}
+
+                {/* <div radioLinks={[]} title={''} clickEvent={this.click}>
+                  <div>Radio filter title</div>
+                  {radioLinks.map(link => {
+                    return (
+                      <label className={link.className}>
+                          <span>{link.text}</span>
+                          <input id={link.id} type="radio" name="relevance" onChnage={clickEvent}/>
+                          <span className="checkmark"></span>
+                       </label>
+                    );
+                  })}
+                </div>
+
+                <div inputLinks={[]} title={''} clickEvent={this.click}>
+                  <div>In filter title</div>
+                  {inputLinks.map(link => {
+                    return (
+                      <label className={link.className}>
+                          <span>{link.text}</span>
+                          <input id={link.id} type="radio" name="relevance" onChnage={clickEvent}/>
+                          <span className="checkmark"></span>
+                       </label>
+                    );
+                  })}
+                </div> */}
               </div>
               <div className="middle-section padding-rl-10">
                 <Switch>
