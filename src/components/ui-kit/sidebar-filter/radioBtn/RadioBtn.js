@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import propTypes from "prop-types";
 import { RadioGroup, Radio } from "react-radio-group";
 
@@ -53,13 +52,13 @@ class RadioBtn extends Component {
 }
 
 Radio.propTypes = {
-  onChange: PropTypes.func,
+  onChange: propTypes.func,
   className: propTypes.string,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      value: PropTypes.string,
-      checked: PropTypes.string,
+  items: propTypes.arrayOf(
+    propTypes.shape({
+      name: propTypes.string,
+      value: propTypes.string,
+      checked: propTypes.string,
       className: propTypes.string
     }).isRequired
   ).isRequired
