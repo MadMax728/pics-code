@@ -5,7 +5,7 @@ export const headerLogo = `${
 
 export const mobileHeaderLogo = `${
   process.env.REACT_APP_CDN_URL
-}/images/logo.png`;
+}/images/logo-pic.png`;
 
 export const menu = `${process.env.REACT_APP_CDN_URL}/images/menu.svg`;
 
