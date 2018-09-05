@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import propTypes from "prop-types";
 import { RadioGroup, Radio } from "react-radio-group";
 
@@ -27,7 +28,7 @@ class RadioBtn extends Component {
   };
 
   render() {
-    const { items, name, foruse, className } = this.props;
+    const { items, name, className } = this.props;
 
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
@@ -55,7 +56,7 @@ Radio.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      val: PropTypes.string.isRequired,
+      value: PropTypes.string.isRequired,
       checked: PropTypes.string,
       className: propTypes.string
     }).isRequired
