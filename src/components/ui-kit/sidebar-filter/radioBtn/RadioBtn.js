@@ -54,6 +54,7 @@ class RadioBtn extends Component {
 Radio.propTypes = {
   onChange: propTypes.func,
   className: propTypes.string,
+  name: propTypes.string,
   items: propTypes.arrayOf(
     propTypes.shape({
       name: propTypes.string,
