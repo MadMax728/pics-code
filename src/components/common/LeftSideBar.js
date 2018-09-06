@@ -19,13 +19,12 @@ class LeftSideBar extends Component {
   };
 
   render() {
-    const { getFilter } = this.props;
     return (
       <div>
         <Route path={routes.ROOT_ROUTE} component={DashboardNav} />
         <Route
           path={routes.ROOT_ROUTE}
-          exact={routes.ROOT_ROUTE}
+          exact={true}
           component={this.handleDashboardFilter}
         />
       </div>

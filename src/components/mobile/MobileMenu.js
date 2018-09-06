@@ -8,10 +8,6 @@ import {
 import PropTypes from "prop-types";
 
 export default class MobileMenu extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount = () => {
     document.addEventListener("click", this.handleOutsideClick);
   };

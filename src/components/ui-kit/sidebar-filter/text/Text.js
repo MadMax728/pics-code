@@ -19,7 +19,7 @@ class Text extends Component {
   };
 
   render() {
-    const { name, foruse, className } = this.props;
+    const { name, className } = this.props;
     const { value } = this.state;
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange

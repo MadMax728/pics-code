@@ -37,11 +37,15 @@ class RadioBtn extends Component {
         selectedValue={this.state.selectedValue}
         onChange={this.handleChange}
       >
-        {items.map(item => {
+        {items.map((item, index) => {
           return (
-            <label className={item.className} key={item.name} htmlFor={"name"}>
+            <label
+              className={item.className}
+              key={item.name}
+              htmlFor={name + "-" + index}
+            >
               <span>{item.name}</span>
-              <Radio value={item.name} />
+              <Radio value={item.name} id={name + "-" + index} />
               <span className="checkmark" />
             </label>
           );
