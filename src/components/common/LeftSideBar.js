@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../constants/routes";
 import { DashboardNav, DashboardFilter } from "./nav";
+import propTypes from "prop-types";
 
 class LeftSideBar extends Component {
   constructor(props) {
@@ -25,5 +26,9 @@ class LeftSideBar extends Component {
     );
   }
 }
+
+LeftSideBar.propTypes = {
+  getFilter: propTypes.func
+};
 
 export default LeftSideBar;
