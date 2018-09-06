@@ -1,4 +1,4 @@
-import { Translations } from "./Translations";
+import { Translations } from "./translations";
 
 describe("Translation tests", () => {
   it("test a single level item", () => {
