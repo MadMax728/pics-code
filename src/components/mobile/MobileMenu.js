@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import * as images from "../../lib/constants/images";
 import {
-  SideBarMenuInformation,
-  SideBarMenuServices
-} from "./common/sideBarMenu";
+  SideBarMBMenuInformation,
+  SideBarMBMenuServices
+} from "../common/sideBarMBMenu";
 
 import PropTypes from "prop-types";
 
@@ -66,9 +66,9 @@ export default class MobileMenu extends Component {
             </div>
             <div className="mobile_menu_wrapper">
               <div className="normal_title padding-15">Information</div>
-              <SideBarMenuInformation />
+              <SideBarMBMenuInformation />
               <div className="normal_title padding-15">Services</div>
-              <SideBarMenuServices />
+              <SideBarMBMenuServices />
             </div>
           </div>
         </div>

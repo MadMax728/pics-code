@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Translations } from "../../translations";
+import { Translations } from "../../../lib/translations";
 
 class InlineLoading extends React.Component {
   static propTypes = {

@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import * as routes from "../lib/constants/routes";
 import { Switch, Route } from "react-router-dom";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
-import { Dashboard } from "../components/dashboard";
-import { UserProfile, UserInfo } from "../components/profile";
+import Header from "../components/web/Header";
+import Footer from "../components/web/Footer";
+import { Dashboard } from "../components/web/dashboard";
+import { UserProfile, UserInfo } from "../components/web/profile";
 import { LeftSideBar, RightSideBar } from "../components/common";
-import { Campaign } from "../components/campaign";
+import { Campaign } from "../components/web/campaign";
 
 class Home extends Component {
   getFilter(filterData) {
