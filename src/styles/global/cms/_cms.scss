@@ -94,6 +94,23 @@ header {
       }
     }
   }
+  .inputfile {
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    & + label {
+      background-color: rgba(190, 190, 190, 0.35);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-block;
+      overflow: hidden;
+      text-align: center;
+      height: 40px;
+      padding-top: 10px;
+    }
+  }
 }
 .panel-heading a:before {
   background: url(../images/down-arrow.png);
