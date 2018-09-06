@@ -25,6 +25,7 @@ class LeftSideBar extends Component {
         <Route path={routes.ROOT_ROUTE} component={DashboardNav} />
         <Route
           path={routes.ROOT_ROUTE}
+          exact={routes.ROOT_ROUTE}
           component={this.handleDashboardFilter}
         />
       </div>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="5px" height="5px" viewBox="0 0 5 5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>check-circle-blank</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="0%" cy="100%" fx="0%" fy="100%" r="141.421356%" id="radialGradient-1">
+            <stop stop-color="#1F58A6" offset="0%"></stop>
+            <stop stop-color="#029BD7" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="App" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mobile-Portrait" transform="translate(-31.000000, -103.000000)" fill="url(#radialGradient-1)">
+            <g id="check-circle-blank" transform="translate(31.000000, 103.000000)">
+                <path d="M2.5,0 C1.125,0 0,1.125 0,2.5 C0,3.875 1.125,5 2.5,5 C3.875,5 5,3.875 5,2.5 C5,1.125 3.875,0 2.5,0 L2.5,0 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
