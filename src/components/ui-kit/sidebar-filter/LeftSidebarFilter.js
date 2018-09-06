@@ -1,58 +1,89 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Radio } from "./radio";
+import { RadioBtn } from "./radioBtn";
 import { Select } from "./select";
 import { Text } from "./text";
 
-const LeftSidebarFilter = ({ filters }) => {
-  console.log(filters);
-  return (
-    <div>
-      {filters.map(filter => {
-        return (
-          <div className="filter-wrapper" key={filter.name}>
-            <div className={filter.className}>{filter.name}</div>
-            {filter.type === "radio" &&
-              filter.items.map(item => {
-                return (
-                  <Radio
-                    key={item.name}
-                    foruse={filter.name}
-                    name={item.name}
-                    className={item.className}
-                    value={item.value}
-                  />
-                );
-              })}
-            {filter.type === "select" && (
-              <Select
-                foruse={filter.name}
-                name={filter.name}
-                options={filter.items}
-                defaultValue={"select"}
-              />
-            )}
+class LeftSidebarFilter extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterData: []
+    };
+  }
 
-            {filter.type === "text" && (
-              <Text foruse={filter.name} name={filter.name} />
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+  handleOnChange = filter => {
+    let filterData = this.state.filterData;
+    let indexOf = filterData.findIndex(f => {
+      return f.name === filter.values.name;
+    });
+
+    if (indexOf === -1) {
+      filterData.push(filter.values);
+    } else {
+      filterData.splice(indexOf, 1);
+      filterData.push(filter.values);
+    }
+
+    this.setState({
+      filterData: filterData
+    });
+
+    // calling function
+    this.props.onChange(filterData);
+  };
+
+  render() {
+    const { filters } = this.props;
+    return (
+      <div>
+        {filters.map(filter => {
+          return (
+            <div className="filter-wrapper" key={filter.name}>
+              <div className={filter.className}>{filter.name}</div>
+              {filter.type === "radio" && (
+                <RadioBtn
+                  foruse={filter.name}
+                  name={filter.name}
+                  items={filter.items}
+                  onChange={this.handleOnChange}
+                />
+              )}
+              {filter.type === "select" && (
+                <Select
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  onChange={this.handleOnChange}
+                />
+              )}
+
+              {filter.type === "text" && (
+                <Text
+                  foruse={filter.name}
+                  name={filter.name}
+                  onChange={this.handleOnChange}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+}
 
 LeftSidebarFilter.propTypes = {
   filters: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
-      // onClick: PropTypes.func,
       className: PropTypes.string.isRequired,
       type: PropTypes.string,
       items: PropTypes.any
     }).isRequired
-  ).isRequired
+  ).isRequired,
+  onChange: PropTypes.func
 };
 
 export default LeftSidebarFilter;

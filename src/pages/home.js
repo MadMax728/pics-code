@@ -9,6 +9,11 @@ import { LeftSideBar, RightSideBar } from "../components/common";
 import { Campaign } from "../components/campaign";
 
 class Home extends Component {
+  getFilter(filterData) {
+    //list of array data as object & calling API
+    console.log(filterData);
+  }
+
   render() {
     return (
       <div>
@@ -22,7 +27,7 @@ class Home extends Component {
                 component={UserInfo}
               />
               <div className="left_menu_second no-padding">
-                <LeftSideBar />
+                <LeftSideBar getFilter={this.getFilter} />
               </div>
               <div className="middle-section padding-rl-10">
                 <Switch>
