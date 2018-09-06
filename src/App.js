@@ -15,8 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      width: window.innerWidth,
-      height: window.innerHeight
+      width: window.innerWidth
     };
   }
 
@@ -31,7 +30,7 @@ class App extends Component {
   }
 
   handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({ width: window.innerWidth });
   };
 
   webRender = () => {

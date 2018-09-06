@@ -36,7 +36,6 @@ class Text extends Component {
 
 Text.propTypes = {
   name: propTypes.string,
-  foruse: propTypes.string,
   onChange: propTypes.func,
   className: propTypes.string
 };

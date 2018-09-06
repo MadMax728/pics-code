@@ -13,8 +13,8 @@ class LeftSidebarFilter extends Component {
   }
 
   handleOnChange = filter => {
-    let filterData = this.state.filterData;
-    let indexOf = filterData.findIndex(f => {
+    const filterData = this.state.filterData;
+    const indexOf = filterData.findIndex(f => {
       return f.name === filter.values.name;
     });
 
@@ -25,9 +25,7 @@ class LeftSidebarFilter extends Component {
       filterData.push(filter.values);
     }
 
-    this.setState({
-      filterData: filterData
-    });
+    this.setState({ filterData: filterData });
 
     // calling function
     this.props.onChange(filterData);

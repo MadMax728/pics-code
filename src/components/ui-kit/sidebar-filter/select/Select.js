@@ -43,13 +43,11 @@ class Select extends Component {
 }
 
 Select.propTypes = {
-  value: propTypes.string,
   name: propTypes.string,
   options: propTypes.array.isRequired,
   onChange: propTypes.func,
   defaultValue: propTypes.string,
-  disabled: propTypes.bool,
-  customSelect: propTypes.func
+  disabled: propTypes.bool
 };
 
 export default Select;
