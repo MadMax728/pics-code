@@ -39,7 +39,7 @@ class RadioBtn extends Component {
       >
         {items.map(item => {
           return (
-            <label className={item.className} key={item.name} htmlFor={name}>
+            <label className={item.className} key={item.name}>
               <span>{item.name}</span>
               <Radio value={item.name} />
               <span className="checkmark" />
@@ -59,7 +59,7 @@ RadioBtn.propTypes = {
     propTypes.shape({
       name: propTypes.string,
       value: propTypes.string,
-      checked: propTypes.string,
+      checked: propTypes.bool,
       className: propTypes.string
     }).isRequired
   ).isRequired
