@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as images from "../../constants/images";
+import * as images from "../../lib/constants/images";
 import {
   SideBarMenuInformation,
   SideBarMenuServices

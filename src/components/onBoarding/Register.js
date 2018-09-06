@@ -6,9 +6,9 @@ import OnboardingSkelton from "./OnboardingSkeleton";
 import { getRegisterLoading } from "../../reducers";
 import { withRouter } from "react-router-dom";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
-import * as images from "../../constants/images";
-import * as CONSTANTS from "../../constants/routes";
-import { emailRegex } from "../../constants/inputMasks";
+import * as images from "../../lib/constants/images";
+import * as CONSTANTS from "../../lib/constants/routes";
+import { emailRegex } from "../../lib/constants/inputMasks";
 
 const updateState = apply => (name, value) => state => ({
   [name]: apply(state[name], value)

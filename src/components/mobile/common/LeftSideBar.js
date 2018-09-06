@@ -1,6 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import * as routes from "../../../constants/routes";
+import * as routes from "../../../lib/constants/routes";
 import { AboutUs } from "../../aboutUs";
 import { LegalNotice } from "../../legalNotice";
 import { Support } from "../../support";

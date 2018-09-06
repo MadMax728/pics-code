@@ -1,6 +1,6 @@
 import Login from "./components/onBoarding/Login";
 import Register from "./components/onBoarding/Register";
-import * as routes from "./constants/routes";
+import * as routes from "./lib/constants/routes";
 
 export const LoginRoutes = [
   {

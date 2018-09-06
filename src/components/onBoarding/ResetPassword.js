@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import { handleResetPassword } from "../../actions";
 import OnBoarding from "./OnboardingSkeleton";
 import { func, shape } from "prop-types";
-import { LOGIN_ROUTE } from "../../constants/routes";
-import * as images from "../../constants/images";
+import { LOGIN_ROUTE } from "../../lib/constants/routes";
+import * as images from "../../lib/constants/images";
 
 const updateState = apply => (name, value) => state => ({
   [name]: apply(state[name], value)

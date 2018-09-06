@@ -1,6 +1,6 @@
 import React from "react";
 import { LeftSidebarNav } from "../../ui-kit";
-import * as routes from "../../../constants/routes";
+import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../translations";
 
 const Links = [

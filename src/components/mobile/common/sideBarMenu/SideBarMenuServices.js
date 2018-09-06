@@ -1,8 +1,8 @@
 import React from "react";
 import { MobileSidebarMenu } from "../../../ui-kit";
-import * as routes from "../../../../constants/routes";
+import * as routes from "../../../../lib/constants/routes";
 import { Translations } from "../../../translations";
-import * as images from "../../../../constants/images";
+import * as images from "../../../../lib/constants/images";
 
 const Links = [
   {

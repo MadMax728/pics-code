@@ -7,8 +7,8 @@ import { Link, withRouter } from "react-router-dom";
 import { func, object, bool } from "prop-types";
 import { getLoginLoading } from "../../reducers";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
-import * as images from "../../constants/images";
-import * as routes from "../../constants/routes";
+import * as images from "../../lib/constants/images";
+import * as routes from "../../lib/constants/routes";
 
 const updateState = key => value => () => ({ [key]: value });
 const updateName = updateState("userName");

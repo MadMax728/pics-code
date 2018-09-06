@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import { string, bool, func } from "prop-types";
-import * as images from "../../constants/images";
+import * as images from "../../lib/constants/images";
 class OnboardingSkelton extends Component {
   state = {};
 

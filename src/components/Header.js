@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import * as images from "../constants/images";
+import * as images from "../lib/constants/images";
 import { Translations } from "./translations";
 import RouteNavItem from "./RouteNavItem";
-import * as routes from "../constants/routes";
+import * as routes from "../lib/constants/routes";
 
 export default class Header extends Component {
   constructor(props) {

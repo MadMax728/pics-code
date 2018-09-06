@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import * as routes from "./constants/routes";
+import * as routes from "./lib/constants/routes";
 import Home from "./pages/home";
 import Mobile from "./components/mobile/Mobile";
 import {

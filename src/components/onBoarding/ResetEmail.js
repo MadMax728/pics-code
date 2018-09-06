@@ -5,9 +5,9 @@ import { connect } from "react-redux";
 import { handleResetEmail } from "../../actions";
 import OnBoarding from "./OnboardingSkeleton";
 import { func, shape } from "prop-types";
-import { FORGOT_PASSWORD } from "../../constants/routes";
-import * as images from "../../constants/images";
-import { emailRegex } from "../../constants/inputMasks";
+import { FORGOT_PASSWORD } from "../../lib/constants/routes";
+import * as images from "../../lib/constants/images";
+import { emailRegex } from "../../lib/constants/inputMasks";
 
 class ResetMail extends Component {
   state = {

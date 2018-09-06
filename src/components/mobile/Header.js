@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import * as images from "../../constants/images";
-import * as routes from "../../constants/routes";
+import * as images from "../../lib/constants/images";
+import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 
 export default class Header extends Component {

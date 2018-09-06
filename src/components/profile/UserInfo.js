@@ -1,5 +1,5 @@
 import React from "react";
-import * as images from "../../constants/images";
+import * as images from "../../lib/constants/images";
 
 const UserInfo = () => {
   return (

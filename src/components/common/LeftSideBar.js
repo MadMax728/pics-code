@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import * as routes from "../../constants/routes";
+import * as routes from "../../lib/constants/routes";
 import { DashboardNav, DashboardFilter } from "./nav";
 import propTypes from "prop-types";
 
