@@ -3,9 +3,13 @@ import { Switch, Route } from "react-router-dom";
 import * as routes from "./constants/routes";
 import Home from "./pages/home";
 import Mobile from "./components/mobile/Mobile";
-import Login from "./components/onBoarding/Login";
-import Register from "./components/onBoarding/Register";
-// import { UserProfile } from "./components/profile";
+import {
+  Login,
+  Register,
+  ResetEmail,
+  ResetPassword,
+  ForgotPassword
+} from "./components/onBoarding";
 
 class App extends Component {
   constructor() {
@@ -35,7 +39,10 @@ class App extends Component {
       <Switch>
         <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route exact path={routes.REGISTER_ROUTE} component={Register} />
-        <Route path={routes.ROOT_ROUTE} component={Home} />
+        <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
+        <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
+        <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />
+        <Route path={routes.ROOT_ROUTE} render={this.isAutgeneticated} />
       </Switch>
     );
   };
@@ -44,6 +51,26 @@ class App extends Component {
     return (
       <div>
         <Mobile />
+      </div>
+    );
+  };
+
+  isLoggedIn = () => {
+    return true;
+  };
+
+  isAutgeneticated = () => {
+    if (!this.isLoggedIn()) {
+      return (
+        <div>
+          <Route component={Login} />
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <Route component={Home} />
       </div>
     );
   };
@@ -57,13 +84,13 @@ class App extends Component {
           <Route render={this.mobileRender} />
         </div>
       );
-    } else {
-      return (
-        <div>
-          <Route render={this.webRender} />
-        </div>
-      );
     }
+
+    return (
+      <div>
+        <Route render={this.webRender} />
+      </div>
+    );
   }
 }
 

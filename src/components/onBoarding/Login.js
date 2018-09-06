@@ -2,11 +2,13 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import { login } from "../../actions";
 import OnboardingSkelton from "./OnboardingSkeleton";
-import * as images from "../../constants/images";
-import { LoginTypes } from "../../types";
-import { withRouter } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+
+import { func, object, bool } from "prop-types";
 import { getLoginLoading } from "../../reducers";
 import InlineLoading from "../ui-kit/loading-indicator/InlineLoading";
+import * as images from "../../constants/images";
+import * as routes from "../../constants/routes";
 
 const updateState = key => value => () => ({ [key]: value });
 const updateName = updateState("userName");
@@ -14,7 +16,8 @@ const updatePassword = updateState("password");
 class Login extends Component {
   state = {
     userName: "",
-    password: ""
+    password: "",
+    formValid: false
   };
 
   updateName = e => {
@@ -27,10 +30,21 @@ class Login extends Component {
     this.setState(updatePassword(e.target.value));
   };
 
+  formValid = () => {
+    const { userName, password } = this.state;
+    if (userName.length === 0 || password.length === 0) {
+      this.setState(() => ({ formValid: false }));
+      return false;
+    }
+    this.setState(() => ({ formValid: true }));
+    return true;
+  };
   onSubmitButton = event => {
     event.preventDefault();
-    this.props.login(this.state);
-    this.props.history.push("/home");
+    if (this.formValid()) {
+      this.props.login(this.state);
+      this.props.history.push(routes.ROOT_ROUTE);
+    }
   };
 
   render() {
@@ -51,7 +65,11 @@ class Login extends Component {
                 onChange={this.updateName}
                 placeholder="User name / Email"
               />
-              {/* <img src={images.checked} alt={"checked"} /> */}
+              {this.state.userName.length > 0 ? (
+                <img src={images.checked} alt={"checked"} />
+              ) : (
+                <img src={images.error} alt={"error"} />
+              )}
             </div>
             <div className="form-group">
               <input
@@ -62,10 +80,14 @@ class Login extends Component {
                 onChange={this.updatePassword}
                 placeholder="Password"
               />
-              {/* <img src={images.error} alt={"error"} /> */}
+              {this.state.password.length > 0 ? (
+                <img src={images.checked} alt={"checked"} />
+              ) : (
+                <img src={images.error} alt={"error"} />
+              )}
             </div>
             <div className="form-group">
-              {/* <a href="">Forgot password</a> */}
+              <Link to={routes.RESET_EMAIL}>Forgot password</Link>
             </div>
             <div className="form-group">
               {!this.props.showLoginLoading ? (
@@ -84,7 +106,9 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  ...LoginTypes
+  login: func,
+  showLoginLoading: bool,
+  history: object.isRequired
 };
 const mapStateToProps = state => ({
   showLoginLoading: getLoginLoading(state)
