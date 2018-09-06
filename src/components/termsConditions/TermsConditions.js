@@ -1,7 +1,5 @@
 import React from "react";
 
-console.log("ahi abe che");
-
 const TermsConditions = () => {
   return (
     <div>
