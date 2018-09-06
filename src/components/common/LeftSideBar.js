@@ -5,10 +5,6 @@ import { DashboardNav, DashboardFilter } from "./nav";
 import propTypes from "prop-types";
 
 class LeftSideBar extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   handleDashboardFilter = getFilter => {
     return <DashboardFilter handleApplyClick={this.props.getFilter} />;
   };
