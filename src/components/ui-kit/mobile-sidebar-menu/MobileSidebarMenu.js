@@ -22,18 +22,16 @@ const MobileSidebarMenu = ({ links }) => {
 };
 
 MobileSidebarMenu.propTypes = {
-  links: PropTypes.arrayOf(
+  to: PropTypes.string,
+  className: PropTypes.string,
+  text: PropTypes.string,
+  item: PropTypes.arrayOf(
     PropTypes.shape({
-      to: PropTypes.string.isRequired,
+      name: PropTypes.string,
       className: PropTypes.string,
-      text: PropTypes.string.isRequired,
-      image: {
-        name: PropTypes.string,
-        className: PropTypes.string,
-        alt: PropTypes.string
-      }
-    }).isRequired
-  ).isRequired
+      alt: PropTypes.string
+    })
+  )
 };
 
 export default MobileSidebarMenu;
