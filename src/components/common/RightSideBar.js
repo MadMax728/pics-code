@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../lib/constants/routes";
 import { Languages, About } from "./";
-import { FavouriteCampaigns } from "../../components/web/campaign";
-import { Community } from "../../components/web/community";
+import { FavouriteCampaigns } from "../../components/web/campaigns";
+import { Community } from "../../components/web/dashboard";
 
 class RightSideBar extends Component {
   userLanguage = () => {

@@ -1,30 +1,34 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../lib/constants/routes";
-import { AboutUs } from "../../components/web/aboutUs";
-import { LegalNotice } from "../../components/web/legalNotice";
-import { Support } from "../../components/web/support";
-import { Campaign } from "../../components/web/campaign";
-import { Ads } from "../../components/web/ads";
+import {
+  AboutUs,
+  Ads,
+  Cookies,
+  Feedback,
+  NetzDg,
+  LawEnforcementAgency,
+  LegalNotice,
+  Support,
+  TermsConditions,
+  TermsUse
+} from "../../components/web/stand-alone";
+import { Campaign } from "../../components/web/campaigns";
 import { Verification, DeleteAccount } from "../../components/web/User";
 
-import { TermsConditions } from "../../components/web/termsConditions";
-import { TermsUse } from "../../components/web/termsUse";
 import {
   PaltformPolicy,
   AdvertisingPolicy,
   CampaignPolicy,
   CancellationPolicy,
   DataProtectionAndPrivacyPolicy
-} from "../../components/web/Policy";
-import { NetzDg } from "../../components/web/netzDg";
-import { ReportedContent } from "../../components/web/reportedContent";
-import { PaymentMethod } from "../../components/web/paymentMethod";
-import { DataDownload } from "../../components/web/dataDownload";
-import { LawEnforcementAgency } from "../../components/web/lawEnforcementAgency";
-import { ReportProblem } from "../../components/web/reportProblem";
-import { Cookies } from "../../components/web/cookies";
-import { Feedback } from "../../components/web/feedback";
+} from "../web/policy";
+import {
+  DataDownload,
+  PaymentMethod,
+  ReportProblem,
+  ReportedContent
+} from "../../components/web/dashboard";
 
 const LeftSideBarMB = () => {
   return (

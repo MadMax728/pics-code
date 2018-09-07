@@ -42,3 +42,4 @@ export const LAW_ENFORCEMENT_AGENCY_ROUTE = "/law_enforcement_agency";
 export const REPORT_PROBLEM_ROUTE = "/report_problem";
 export const COOKIES_ROUTE = "/cookies";
 export const FEEDBACK_ROUTE = "/feedback";
+export const LANGUAGE_ROUTE = "/language";

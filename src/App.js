@@ -11,6 +11,8 @@ import {
   ForgotPassword
 } from "./components/web/User";
 
+import { AboutUs } from "./components/web/stand-alone";
+
 class App extends Component {
   constructor() {
     super();
@@ -38,6 +40,7 @@ class App extends Component {
       <Switch>
         <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route exact path={routes.REGISTER_ROUTE} component={Register} />
+        <Route exact path={routes.ABOUTUS_ROUTE} component={AboutUs} />
         <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />

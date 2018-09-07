@@ -3,10 +3,10 @@ import * as routes from "../lib/constants/routes";
 import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
-import { Dashboard } from "../components/web/dashboard";
+import { Landing } from "../components/web/dashboard";
 import { UserProfile, UserInfo } from "../components/web/User";
 import { LeftSideBar, RightSideBar } from "../components/common";
-import { Campaign } from "../components/web/campaign";
+import { Campaign } from "../components/web/campaigns";
 
 class Home extends Component {
   getFilter(filterData) {
@@ -41,7 +41,7 @@ class Home extends Component {
                     path={routes.MY_PROFILE_ROUTE}
                     component={UserProfile}
                   />
-                  <Route path={routes.ROOT_ROUTE} component={Dashboard} />
+                  <Route path={routes.ROOT_ROUTE} component={Landing} />
                 </Switch>
               </div>
               <div className="right_bar no-padding">

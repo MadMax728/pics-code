@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 import { string, bool, func } from "prop-types";
 import * as images from "../../../../lib/constants/images";
+import * as routes from "../../../../lib/constants/routes";
+import { Link } from "react-router-dom";
 
 class OnBoardingSkeleton extends Component {
   state = {};
@@ -14,16 +16,16 @@ class OnBoardingSkeleton extends Component {
         <header>
           <div className="custom-container">
             <div className="login-logo">
-              <a href="/">
+              <Link to={routes.ROOT_ROUTE}>
                 <img src={images.loginLogo} alt={"login"} />
-              </a>
+              </Link>
             </div>
             <ul className="login-header-menu">
               <li>
-                <a href="/aboutUs">About Us</a>
+                <Link to={routes.ABOUTUS_ROUTE}>About Us</Link>
               </li>
               <li>
-                <a href="/register">Register</a>
+                <Link to={routes.REGISTER_ROUTE}>Register</Link>
               </li>
             </ul>
           </div>
@@ -52,22 +54,26 @@ class OnBoardingSkeleton extends Component {
           <div className="custom-container">
             <ul>
               <li>
-                <a href="/support">Support</a>
+                <Link to={routes.SUPPORT_ROUTE}>Support</Link>]{" "}
               </li>
               <li>
-                <a href="/support">Data Protechtion & Privacy Policy</a>
+                <Link to={routes.DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}>
+                  Data Protechtion & Privacy Policy
+                </Link>
               </li>
               <li>
-                <a href="/support">Legal Notice</a>
+                <Link to={routes.LEGAL_NOTICE_ROUTE}>Legal Notice</Link>
               </li>
               <li>
-                <a href="/support">General terms & Conditions</a>
+                <Link to={routes.TERMS_CONDITIONS_ROUTE}>
+                  General terms & Conditions
+                </Link>
               </li>
               <li>
-                <a href="/support">NETZDG</a>
+                <Link to={routes.NETZDG_ROUTE}>NETZDG</Link>
               </li>
               <li>
-                <a href="/support">Language</a>
+                <Link to={routes.LANGUAGE_ROUTE}>Language</Link>
               </li>
             </ul>
           </div>

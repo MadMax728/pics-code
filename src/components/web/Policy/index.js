@@ -1,7 +1,7 @@
-export { AdvertisingPolicy } from "./AdvertisingPolicy";
-export { CampaignPolicy } from "./CampaignPolicy";
-export { CancellationPolicy } from "./CancellationPolicy";
+export { AdvertisingPolicy } from "./advertising-policy";
+export { CampaignPolicy } from "./campaign-policy";
+export { CancellationPolicy } from "./cancellation-policy";
 export {
   DataProtectionAndPrivacyPolicy
-} from "./DataProtectionAndPrivacyPolicy";
-export { PaltformPolicy } from "./PaltformPolicy";
+} from "./data-protection-and-privacy-policy";
+export { PaltformPolicy } from "./paltform-policy";
