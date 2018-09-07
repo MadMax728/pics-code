@@ -22,14 +22,18 @@ const MobileSidebarMenu = ({ links }) => {
 };
 
 MobileSidebarMenu.propTypes = {
-  to: PropTypes.string,
-  className: PropTypes.string,
-  text: PropTypes.string,
-  item: PropTypes.arrayOf(
+  links: PropTypes.arrayOf(
     PropTypes.shape({
-      name: PropTypes.string,
+      to: PropTypes.string,
       className: PropTypes.string,
-      alt: PropTypes.string
+      text: PropTypes.string,
+      item: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          className: PropTypes.string,
+          alt: PropTypes.string
+        })
+      )
     })
   )
 };
