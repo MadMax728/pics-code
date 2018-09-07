@@ -9,7 +9,7 @@ import {
   ResetEmail,
   ResetPassword,
   ForgotPassword
-} from "./components/web/onBoarding";
+} from "./components/web/User";
 
 class App extends Component {
   constructor() {

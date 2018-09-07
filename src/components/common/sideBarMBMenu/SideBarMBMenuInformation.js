@@ -36,7 +36,7 @@ const Links = [
     text: Translations.mobile_sidebar_information.support
   },
   {
-    to: routes.CAMPAIGNS_ROUTE,
+    to: routes.CAMPAIGN_ROUTE,
     className: "mobile_menu padding-15",
     image: {
       name: images.black_right_arrow,

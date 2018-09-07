@@ -4,22 +4,23 @@ import * as routes from "../../lib/constants/routes";
 import { AboutUs } from "../../components/web/aboutUs";
 import { LegalNotice } from "../../components/web/legalNotice";
 import { Support } from "../../components/web/support";
-import { Campaigns } from "../../components/web/campaigns";
+import { Campaign } from "../../components/web/campaign";
 import { Ads } from "../../components/web/ads";
-import { Verification } from "../../components/web/verification";
+import { Verification, DeleteAccount } from "../../components/web/User";
 
 import { TermsConditions } from "../../components/web/termsConditions";
-import { DataProtectionAndPrivacyPolicy } from "../../components/web/dataProtectionAndPrivacyPolicy";
 import { TermsUse } from "../../components/web/termsUse";
-import { PaltformPolicy } from "../../components/web/paltformPolicy";
-import { AdvertisingPolicy } from "../../components/web/advertisingPolicy";
-import { CampaignPolicy } from "../../components/web/campaignPolicy";
+import {
+  PaltformPolicy,
+  AdvertisingPolicy,
+  CampaignPolicy,
+  CancellationPolicy,
+  DataProtectionAndPrivacyPolicy
+} from "../../components/web/Policy";
 import { NetzDg } from "../../components/web/netzDg";
 import { ReportedContent } from "../../components/web/reportedContent";
 import { PaymentMethod } from "../../components/web/paymentMethod";
-import { CancellationPolicy } from "../../components/web/cancellationPolicy";
 import { DataDownload } from "../../components/web/dataDownload";
-import { DeleteAccount } from "../../components/web/deleteAccount";
 import { LawEnforcementAgency } from "../../components/web/lawEnforcementAgency";
 import { ReportProblem } from "../../components/web/reportProblem";
 import { Cookies } from "../../components/web/cookies";
@@ -31,7 +32,7 @@ const LeftSideBarMB = () => {
       <Route exact path={routes.ABOUTUS_ROUTE} component={AboutUs} />
       <Route exact path={routes.LEGAL_NOTICE_ROUTE} component={LegalNotice} />
       <Route exact path={routes.SUPPORT_ROUTE} component={Support} />
-      <Route exact path={routes.CAMPAIGNS_ROUTE} component={Campaigns} />
+      <Route exact path={routes.CAMPAIGN_ROUTE} component={Campaign} />
       <Route exact path={routes.ADS_ROUTE} component={Ads} />
       <Route exact path={routes.VERIFICATION_ROUTE} component={Verification} />
 

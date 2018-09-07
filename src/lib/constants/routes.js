@@ -18,9 +18,9 @@ export const RESET_PASSWORD = "/resetPassword/:token";
 
 // Information
 export const ABOUTUS_ROUTE = "/aboutus";
+export const ABOUT_ROUTE = "/about";
 export const LEGAL_NOTICE_ROUTE = "/legal_notice";
 export const SUPPORT_ROUTE = "/support";
-export const CAMPAIGNS_ROUTE = "/campaigns";
 export const ADS_ROUTE = "/ads";
 export const VERIFICATION_ROUTE = "/verification";
 
