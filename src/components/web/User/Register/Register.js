@@ -149,7 +149,7 @@ class Register extends Component {
             <input
               type="password"
               className="form-control"
-              id="password"
+              id="repeat-password"
               placeholder="Repeat Password"
               value={this.state.repeatPassword}
               onChange={this.updateRepeatPassword}
