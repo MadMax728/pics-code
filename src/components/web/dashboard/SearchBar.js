@@ -1,5 +1,5 @@
 import React from "react";
-import Search from "../../ReusableComponent/SearchResult";
+import Search from "../../../containers/searchResult";
 
 const SearchBar = () => {
   return (

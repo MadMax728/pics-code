@@ -3,6 +3,7 @@ import * as images from "../../lib/constants/images";
 import { Translations } from "../../lib/translations";
 import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../lib/constants/routes";
+import { Link } from "react-router-dom";
 
 export default class Header extends Component {
   constructor(props) {
@@ -57,9 +58,9 @@ export default class Header extends Component {
                 <button type="button" className="navbar-toggle collapsed">
                   <img src={images.menu} alt="Menu" />
                 </button>
-                <a className="navbar-brand" href="/">
+                <Link to={routes.ROOT_ROUTE} className="navbar-brand">
                   <img src={images.headerLogo} alt="logo" />
-                </a>
+                </Link>
               </div>
               <div
                 className="collapse navbar-collapse"
