@@ -1,10 +1,9 @@
-export { DeleteAccount } from "./DeleteAccount/DeleteAccount";
-export { ForgotPassword } from "./ForgotPassword/ForgotPassword";
+export { DeleteAccount } from "./Account";
+export { ForgotPassword } from "./ForgotPassword";
 export { Login } from "./Login";
-export { OnBoardingSkeleton } from "./OnBoardingSkeleton/OnBoardingSkeleton";
-export { UserInfo } from "./Profile/UserInfo";
-export { UserProfile } from "./Profile/UserProfile";
-export { Register } from "./Register/Register";
-export { ResetEmail } from "./ResetEmail/ResetEmail";
-export { ResetPassword } from "./ResetPassword/ResetPassword";
-export { Verification } from "./Verification/Verification";
+export { OnBoardingSkeleton } from "./OnBoardingSkeleton";
+export { UserInfo, UserProfile } from "./Profile";
+export { Register } from "./Register";
+export { ResetEmail } from "./ResetEmail";
+export { ResetPassword } from "./ResetPassword";
+export { Verification } from "./Verification";
