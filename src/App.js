@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import * as routes from "./lib/constants/routes";
-import Home from "./containers/home";
+import Home from "./containers/Home";
 import Mobile from "./components/mobile/Mobile";
 import {
   Login,
