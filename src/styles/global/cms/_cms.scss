@@ -1,0 +1,131 @@
+header {
+  .cms-logo {
+    margin: 12px auto;
+    max-width: 225px;
+  }
+}
+.cms-container {
+  width: 906px;
+  margin: auto;
+  @media (max-width: 905px) {
+    width: 98%;
+    padding: 0px 15px;
+  }
+}
+.gap-10 {
+  border-bottom: 10px solid rgba(198, 198, 198, 0.3);
+  @include float();
+}
+.cms-middle-section {
+  .panel-wrapper {
+    background: $white_color;
+    margin-bottom: 10px;
+    @include float();
+    .title {
+      font-size: 20px;
+      font-family: "Helvetica-Bold";
+      margin-bottom: 20px;
+    }
+    .sub-title {
+      font-size: 16px;
+      font-family: "Helvetica-Bold";
+      margin-top: 20px;
+      margin-bottom: 30px;
+    }
+    .policy-points {
+      padding-left: 15px;
+      .question {
+        font-family: "Helvetica-Bold";
+        margin-bottom: 5px;
+      }
+      .answer {
+        margin-bottom: 25px;
+      }
+    }
+    p {
+      line-height: 21px;
+    }
+    .content-wrapper {
+      padding: 25px;
+    }
+    .width-100 {
+      width: 100%;
+    }
+    .padding-50 {
+      padding: 50px;
+    }
+    .contact-wrapper {
+      margin-bottom: 25px;
+      line-height: 16px;
+      a {
+        color: $charcoal_color;
+      }
+    }
+    .logo-big {
+      @media (max-width: 991px) {
+        width: 100%;
+      }
+    }
+  }
+  .support-accordion {
+    .panel {
+      border: 0;
+      box-shadow: none;
+      margin-bottom: 15px;
+      .panel-heading {
+        background: transparent;
+        border: 0px;
+        padding: 0;
+        .panel-title {
+          font-size: 14px;
+          padding-left: 25px;
+          .accordion-toggle {
+            color: $charcoal_color;
+            text-decoration: none;
+            margin-bottom: 5px;
+            display: inline-block;
+            position: relative;
+          }
+        }
+      }
+      .panel-body {
+        border: 0px;
+        padding-left: 25px;
+      }
+    }
+  }
+  .inputfile {
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    & + label {
+      background-color: rgba(190, 190, 190, 0.35);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      cursor: pointer;
+      display: inline-block;
+      overflow: hidden;
+      text-align: center;
+      height: 40px;
+      padding-top: 10px;
+    }
+  }
+}
+.panel-heading a:before {
+  background: url(../images/down-arrow.png);
+  content: "";
+  transition: all 0.5s;
+  background-size: contain;
+  background-position: top center;
+  left: -25px;
+  background-repeat: no-repeat;
+  width: 12px;
+  height: 8px;
+  position: absolute;
+}
+.panel-heading.active a:before {
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  transform: rotate(180deg);
+}

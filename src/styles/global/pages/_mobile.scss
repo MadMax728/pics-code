@@ -1,0 +1,163 @@
+header {
+  @include float();
+  display: flex;
+  align-items: center;
+  .mobile_logo {
+    display: inline-block;
+    float: left;
+    width: 10%;
+    text-align: center;
+    a {
+      img {
+        position: relative;
+        top: -3px;
+      }
+    }
+  }
+  .mobile_intro_text {
+    display: inline-block;
+    float: left;
+    width: 80%;
+    padding: 10px 0px;
+    color: $white_color;
+    p {
+      margin: 0px;
+    }
+  }
+  .mobile_open_btn {
+    display: inline-block;
+    float: left;
+    width: 10%;
+    text-align: center;
+    color: $white_color;
+  }
+}
+.back_option {
+  background-color: #fff;
+  @include float();
+  border-bottom: 1px solid $nobel_color;
+  button {
+    color: #4a4a4a;
+    font-size: 16px;
+    position: static !important;
+    float: left;
+    padding: 0;
+    img {
+      width: 16px;
+      margin-right: 10px;
+    }
+  }
+}
+.mobile_language_option {
+  @include float();
+  background-color: $white_color;
+  border-bottom: 1px solid $nobel_color;
+  .normal_title {
+    border-bottom: 1px solid $nobel_color;
+  }
+  .language_inputs {
+    .input_wrapper {
+      border-bottom: 1px solid $nobel_color;
+      label {
+        font-weight: normal;
+        margin: 0;
+      }
+      input {
+        float: right;
+      }
+    }
+  }
+}
+
+.full-height-wrapper {
+  background-color: $white_color;
+  height: 100vh;
+  .mobile_menu {
+    width: 10%;
+    text-align: center;
+    float: left;
+    button {
+      background-color: transparent;
+      border: 0px;
+    }
+  }
+  .language_link {
+    width: 90%;
+    text-align: center;
+    float: left;
+    padding-right: 13%;
+    position: relative;
+  }
+  .mobile_page_logo {
+    width: 100%;
+    float: right;
+  }
+  .download_option {
+    position: absolute;
+    width: 100%;
+    bottom: 4%;
+    img {
+      width: 130px;
+      margin-right: 10px;
+    }
+    [alt="andriod"] {
+      margin-right: 0px;
+    }
+  }
+}
+.mobile_menu {
+  button {
+    position: absolute;
+    left: 10px;
+    top: 80px;
+  }
+}
+.mobile_menu_wrapper {
+  background-color: $white_color;
+  @include float();
+  .normal_title {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid $nobel_color;
+    text-align: left;
+  }
+  .mobile_menu {
+    text-align: left;
+    @include float();
+    border-bottom: 1px solid $nobel_color;
+    color: #4a4a4a;
+    width: 100%;
+    display: block;
+    img {
+      width: 16px;
+    }
+  }
+}
+.mobile-modal {
+  position: relative;
+  .modal-dialog {
+    width: 100%;
+    margin: 0;
+    .modal-content {
+      border-radius: 0px;
+      @include float();
+      padding-bottom: 15px;
+      .modal-body {
+        p {
+          display: inline-block;
+          float: left;
+          margin: 0px;
+        }
+        button {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+.modal-backdrop {
+  display: none;
+}

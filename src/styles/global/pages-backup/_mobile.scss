@@ -1,0 +1,137 @@
+header {
+  @include float();
+  display: flex;
+  align-items: center;
+  .mobile_logo {
+    display: inline-block;
+    float: left;
+    width: 10%;
+    text-align: center;
+  }
+  .mobile_intro_text {
+    display: inline-block;
+    float: left;
+    width: 80%;
+    padding: 10px 0px;
+    color: $white_color;
+    p {
+      margin: 0px;
+    }
+  }
+  .mobile_open_btn {
+    display: inline-block;
+    float: left;
+    width: 10%;
+    text-align: center;
+    color: $white_color;
+  }
+}
+.back_option {
+  background-color: #fff;
+  @include float();
+  border-bottom: 1px solid $nobel_color;
+  a {
+    color: #4a4a4a;
+    font-size: 16px;
+    img {
+      width: 16px;
+    }
+  }
+}
+.mobile_language_option {
+  @include float();
+  background-color: $white_color;
+  border-bottom: 1px solid $nobel_color;
+  .normal_title {
+    border-bottom: 1px solid $nobel_color;
+  }
+  .language_inputs {
+    .input_wrapper {
+      border-bottom: 1px solid $nobel_color;
+      label {
+        font-weight: normal;
+        margin: 0;
+      }
+      input {
+        float: right;
+      }
+    }
+  }
+}
+.mobile_menu_wrapper {
+  background-color: $white_color;
+  @include float();
+  .normal_title {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid $nobel_color;
+  }
+  .mobile_menu {
+    @include float();
+    border-bottom: 1px solid $nobel_color;
+    color: #4a4a4a;
+    width: 100%;
+    display: block;
+    img {
+      width: 16px;
+    }
+  }
+}
+.full-height-wrapper {
+  background-color: $white_color;
+  height: 100vh;
+  .mobile_menu {
+    width: 10%;
+    text-align: center;
+    float: left;
+    button {
+      background-color: transparent;
+      border: 0px;
+    }
+  }
+  .language_link {
+    width: 90%;
+    text-align: center;
+    float: left;
+  }
+  .mobile_page_logo {
+    width: 90%;
+    float: right;
+  }
+  .download_option {
+    position: absolute;
+    width: 100%;
+    bottom: 4%;
+    img {
+      width: 200px;
+    }
+  }
+}
+.modal {
+  position: relative;
+  .modal-dialog {
+    width: 100%;
+    margin: 0;
+    .modal-content {
+      border-radius: 0px;
+      @include float();
+      padding-bottom: 15px;
+      .modal-body {
+        p {
+          display: inline-block;
+          float: left;
+          margin: 0px;
+        }
+        button {
+          position: absolute;
+          top: 15px;
+          right: 15px;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+.modal-backdrop {
+  display: none;
+}
