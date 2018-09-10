@@ -52,7 +52,6 @@ class LeftSideBar extends Component {
           exact={true}
           component={DashboardNav}
         />
-
         <Route
           path={routes.ROOT_ROUTE}
           exact={true}

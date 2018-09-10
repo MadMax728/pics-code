@@ -30,6 +30,7 @@ const LeftSidebarNav = ({ header, links, ulClassName }) => {
 
 LeftSidebarNav.propTypes = {
   header: PropTypes.string,
+  ulClassName: PropTypes.string,
   links: PropTypes.arrayOf(
     PropTypes.shape({
       to: PropTypes.string.isRequired,

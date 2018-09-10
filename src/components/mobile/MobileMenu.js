@@ -3,7 +3,7 @@ import * as images from "../../lib/constants/images";
 import {
   SideBarMBMenuInformation,
   SideBarMBMenuServices
-} from "../common/sideBarMBMenu";
+} from "../common/sidebar-mb-menu";
 
 import PropTypes from "prop-types";
 
