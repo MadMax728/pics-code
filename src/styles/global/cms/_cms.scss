@@ -20,6 +20,12 @@ header {
   .panel-wrapper {
     background: $white_color;
     margin-bottom: 10px;
+    form {
+      padding-top: 20px;
+      label {
+        font-family: "Helvetica-Bold";
+      }
+    }
     @include float();
     .title {
       font-size: 20px;
@@ -109,6 +115,48 @@ header {
       text-align: center;
       height: 40px;
       padding-top: 10px;
+    }
+  }
+  .capcha-wrapper {
+    display: inline-block;
+    width: auto;
+    margin-right: 20px;
+    @media (max-width: 991px) {
+      width: 50%;
+      margin-right: 0px;
+    }
+    .capcha-img {
+      width: auto;
+      position: static;
+      height: 40px;
+      @media (max-width: 991px) {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+  .button_wrapper {
+    width: auto;
+    @media (max-width: 991px) {
+      width: 50%;
+    }
+    button {
+      height: 40px;
+      width: auto;
+      padding-top: 10px;
+    }
+  }
+  input {
+    padding: 10px;
+  }
+  .full-width-textarea {
+    width: 100%;
+    height: 180px;
+    resize: none;
+    outline: none;
+    padding: 10px;
+    &:focus {
+      border: 1px solid #000;
     }
   }
 }
