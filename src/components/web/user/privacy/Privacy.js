@@ -17,7 +17,10 @@ class Privacy extends Component {
               <div className="row">
                 <div className="col-sm-6">Set my profile to private</div>
                 <div className="col-sm-6 text-right">
-                  <label className="switch">
+                  <label
+                    className="switch"
+                    htmlFor={"Set my profile to private"}
+                  >
                     <input
                       type="checkbox"
                       checked
@@ -30,7 +33,10 @@ class Privacy extends Component {
               <div className="row">
                 <div className="col-sm-6">Personalized advertising</div>
                 <div className="col-sm-6 text-right">
-                  <label className="switch">
+                  <label
+                    className="switch"
+                    htmlFor={"Personalized advertising"}
+                  >
                     <input
                       type="checkbox"
                       checked
@@ -156,7 +162,5 @@ class Privacy extends Component {
     );
   }
 }
-
-const Privacy = () => {};
 
 export default Privacy;
