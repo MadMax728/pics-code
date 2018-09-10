@@ -1,0 +1,28 @@
+.subscribe-popup {
+  width: 100%;
+  background: rgba(190, 190, 190, 0.5);
+  &.right_bar {
+    .modal-dialog {
+      width: 270px;
+    }
+    .modal-normal-title {
+      border-bottom: 3px solid rgba(198, 198, 198, 0.3);
+      background: $white_color;
+      margin-bottom: 0px;
+    }
+    .community {
+      .community_wrapper {
+        .community-user-image {
+          width: 26%;
+          padding-right: 0;
+          img {
+            width: 45px;
+          }
+        }
+        .community-user-name {
+          width: 36%;
+        }
+      }
+    }
+  }
+}

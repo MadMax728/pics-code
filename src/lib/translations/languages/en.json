@@ -1,0 +1,155 @@
+{
+  "app_name": "Picstagraph",
+
+  "navigation": {
+    "home": "Home",
+    "profile": "Profile",
+    "campaign": "Campaign",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "open": "Open"
+  },
+
+  "left_sidebar_filter": {
+    "relevance": {
+      "name": "Relevance",
+      "type": "radio"
+    },
+    "location": {
+      "name": "Location",
+      "type": "text"
+    },
+    "radius": {
+      "name": "Radius",
+      "type": "select"
+    },
+    "category": {
+      "name": "Category",
+      "type": "select"
+    },
+    "procedure": {
+      "name": "Procedure",
+      "type": "radio"
+    },
+    "content": {
+      "name": "Content",
+      "type": "radio"
+    },
+    "target_group": {
+      "name": "Target group",
+      "type": "select"
+    },
+    "offer": {
+      "name": "Offer",
+      "type": "select"
+    },
+    "offer_tag": {
+      "name": "Offer tag",
+      "type": "text"
+    },
+    "inquiry": {
+      "name": "Inquiry",
+      "type": "select"
+    },
+    "inquiry_tag": {
+      "name": "Inquiry tag",
+      "type": "text"
+    },
+    "reset_filters": {
+      "name": "Reset filters",
+      "type": "button"
+    }
+  },
+
+  "mobile_sidebar_information": {
+    "aboutus": "About Us",
+    "legal_notice": "Legal Notice",
+    "support": "Support",
+    "campaigns": "Campaigns",
+    "ads": "Ads",
+    "verification": "Verification"
+  },
+
+  "mobile_sidebar_services": {
+    "terms_conditions": "General Terms and Conditions",
+    "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
+    "terms_use": "Terms of Use",
+    "paltform_policy": "Paltform Policy",
+    "advertising_policy": "Advertising Policy",
+    "campaign_policy": "Campaign policy",
+    "netzDg": "NetzDg",
+    "reported_content": "Reported Content",
+    "payment_method": "Payment Method",
+    "cancellation_policy": "Cancellation Policy",
+    "data_download": "Data Download",
+    "delete_account": "Delete Account",
+    "law_enforcement_agency": "Law Enforcement Agency",
+    "report_problem": "Report Problem",
+    "cookies": "Cookies",
+    "feedback": "Feedback"
+  },
+
+  "left_sidebar": {
+    "news": "News",
+    "explore": "Explore",
+    "participants": "Participants",
+    "user": "User",
+    "pics": "Pics"
+  },
+
+  "left_sidebar_settings": {
+    "edit_profile": "Edit profile",
+    "privacy": "Privacy",
+    "bussiness_profile": "Bussiness profile",
+    "campaign": "Campaign",
+    "ads": "Ads",
+    "bills_and_receipts": "Bills and receipts",
+    "data_download": "Data Download",
+    "logout": "Logout"
+  },
+
+  "footer": {
+    "copyright": " 2018 Picstagraph | All rights reserved ",
+    "disclaimer": " Disclaimers and Other Legal Documents ",
+    "privacy": " Privacy & Terms of Use "
+  },
+
+  "loading_messages": {
+    "loading_with_ellipsis": "Loading..."
+  },
+
+  "user_profile": {
+    "my_profile": "My Profile",
+    "username": "username",
+    "email": "Email Address",
+    "confirm_email": "Confirm Email Address",
+    "phone": "Preferred Phone Number",
+    "security_question": "Security Question {0}",
+    "edit_profile": "Edit Profile",
+    "change_password": "Change Password",
+    "select_one": "Select One",
+    "cancel": "Cancel",
+    "submit": "Save Changes",
+    "invalid_email": "Email Address is invalid. ",
+    "invalid_confirm_email": "Confirm Email Address is invalid. ",
+    "security_question_answer_requirements": "Answer fields should be a minimum of 3 characters to 35 characters. ",
+    "security_question_text_input_label": "Answer",
+    "first_security_question_label": "First Security Question",
+    "second_security_question_label": "Second Security Question",
+    "third_security_question_label": "Third Security Question",
+    "required_question_input_validation_feedback": "Security Question {0} required. ",
+    "required_answer_input_validation_feedback": "Security Answer {0} required. ",
+    "invalid_answer_input_validation_feedback": "Invalid entry. ",
+    "profile_updated_successfully_feedback": "Profile successfully updated. ",
+    "error_codes": {
+      "100": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. ",
+      "120": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. ",
+      "121": "Email Address entered has already been registered. ",
+      "122": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. "
+    }
+  },
+
+  "header": {
+    "logout": "Logout"
+  }
+}

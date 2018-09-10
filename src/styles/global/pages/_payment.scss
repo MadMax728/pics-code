@@ -1,0 +1,135 @@
+.payment-overview-modal {
+  background: #333;
+  .modal-dialog {
+    width: 915px;
+  }
+  .modal-content {
+    @include float();
+    box-shadow: none;
+    border: 0px;
+  }
+  .modal-header {
+    border-bottom: 6px solid #333333;
+    .modal-title {
+      font-family: "Helvetica-Bold";
+      margin-top: 7px;
+    }
+    button {
+      height: 35px;
+      padding-top: 7px;
+      margin-left: 5px;
+    }
+  }
+  .modal-body {
+    display: flex;
+    padding: 0px;
+    .right-side {
+      background-color: #333333;
+    }
+    .create-campaign-feed-wrapper {
+      padding: 40px;
+      .feed_wrapper {
+        border: 1px solid $silver_color;
+      }
+    }
+    .payment-form {
+      border-right: 6px solid #333333;
+      padding: 20px;
+      .creditcard-form {
+        float: left;
+        margin-top: 25px;
+        .form-group {
+          float: left;
+          width: 50%;
+          label {
+            padding: 0px;
+          }
+          input {
+            width: 90%;
+            border: 1px solid #979797;
+          }
+        }
+      }
+      .subtitle {
+        font-size: 18px;
+        text-decoration: underline;
+        margin-bottom: 40px;
+      }
+      label {
+        font-family: "Helvetica-Bold";
+      }
+      input {
+        border: 1px solid #979797;
+        position: static;
+        border-right: 0;
+        padding: 10px;
+      }
+      .radio {
+        border: 1px solid $charcoal_color;
+        float: left;
+        width: 100%;
+        padding: 14px;
+        margin-top: 0;
+        margin-bottom: 25px;
+        input {
+          width: auto;
+          height: auto;
+        }
+      }
+    }
+    .payment-history {
+      border-right: 5px solid #333333;
+      padding: 20px;
+      .subtitle {
+        font-size: 18px;
+        margin-bottom: 15px;
+        text-decoration: underline;
+      }
+      .history-content-wrapper {
+        .subtitle {
+          text-decoration: none;
+        }
+        .content {
+          border: 1px solid $nobel_color;
+          padding: 15px 12px;
+          margin-bottom: 25px;
+          table {
+            width: 100%;
+            tr {
+              td {
+                padding: 5px 12px;
+              }
+              &:last-child {
+                border-top: 1px solid #cbcbcb;
+              }
+            }
+          }
+        }
+        .form-content {
+          margin-bottom: 25px;
+          input {
+            height: 40px;
+            width: 48%;
+          }
+          button {
+            height: 40px;
+            width: 48%;
+            float: right;
+          }
+        }
+      }
+    }
+    .bottom-links {
+      color: $silver_color;
+      a {
+        color: $charcoal_color;
+      }
+    }
+    .bottom-button {
+      button {
+        width: 100%;
+        margin-top: 25px;
+      }
+    }
+  }
+}
