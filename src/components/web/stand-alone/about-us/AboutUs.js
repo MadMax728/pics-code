@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { OnBoardingSkeleton } from "../../User";
+import { OnBoardingSkeleton } from "../../user";
 
 class AboutUs extends Component {
   render() {

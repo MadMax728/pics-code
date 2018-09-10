@@ -9,7 +9,7 @@ import {
   ResetEmail,
   ResetPassword,
   ForgotPassword
-} from "./components/web/User";
+} from "./components/web/user";
 
 import { AboutUs } from "./components/web/stand-alone";
 

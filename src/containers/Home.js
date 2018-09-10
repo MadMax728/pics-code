@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
 import { Landing } from "../components/web/dashboard";
-import { UserProfile, UserInfo } from "../components/web/User";
+import { UserProfile, UserInfo } from "../components/web/user";
 import { LeftSideBar, RightSideBar } from "../components/common";
 import { Campaign } from "../components/web/campaigns";
 

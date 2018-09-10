@@ -3,7 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import { handleResetPassword } from "../../../../actions";
-import { OnBoardingSkeleton } from "../OnBoardingSkeleton";
+import { OnBoardingSkeleton } from "../on-boarding-skeleton";
 import { func, shape } from "prop-types";
 import { LOGIN_ROUTE } from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";

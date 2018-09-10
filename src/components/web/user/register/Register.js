@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { func, bool, object } from "prop-types";
 import { handleRegisteration } from "../../../../actions";
-import { OnBoardingSkeleton } from "../OnBoardingSkeleton";
+import { OnBoardingSkeleton } from "../on-boarding-skeleton";
 import { getRegisterLoading } from "../../../../reducers";
 import { withRouter } from "react-router-dom";
 import InlineLoading from "../../../ui-kit/loading-indicator/InlineLoading";

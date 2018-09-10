@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
 import { login } from "../../../../actions";
-import { OnBoardingSkeleton } from "../OnBoardingSkeleton";
+import { OnBoardingSkeleton } from "../on-boarding-skeleton";
 import { Link, withRouter } from "react-router-dom";
 
 import { func, object, bool } from "prop-types";

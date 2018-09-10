@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getResendEmail } from "../../../../reducers";
 import { string, func } from "prop-types";
 import { handleResetEmail } from "../../../../actions";
-import { OnBoardingSkeleton } from "../OnBoardingSkeleton";
+import { OnBoardingSkeleton } from "../on-boarding-skeleton";
 
 const ForgotPassword = ({ resendEmail, handleResetEmail }) => (
   <OnBoardingSkeleton>

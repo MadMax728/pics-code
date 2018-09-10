@@ -1,4 +1,4 @@
-import { Register, Login } from "./components/web/User";
+import { Register, Login } from "./components/web/user";
 import * as routes from "./lib/constants/routes";
 
 export const LoginRoutes = [

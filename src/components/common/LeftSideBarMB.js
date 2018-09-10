@@ -14,7 +14,7 @@ import {
   TermsUse
 } from "../../components/web/stand-alone";
 import { Campaign } from "../../components/web/campaigns";
-import { Verification, DeleteAccount } from "../../components/web/User";
+import { Verification, DeleteAccount } from "../../components/web/user";
 
 import {
   PaltformPolicy,
