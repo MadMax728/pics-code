@@ -47,6 +47,12 @@ const campaigns = [
   }
 ];
 
-const Campaign = () => <NewsFeeds campaigns={campaigns} />;
+const Campaign = () => {
+  return (
+    <div className={"middle-section padding-rl-10"}>
+      <NewsFeeds campaigns={campaigns} />
+    </div>
+  );
+};
 
 export default Campaign;

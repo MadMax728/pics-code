@@ -4,8 +4,14 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
 import { Landing } from "../components/web/dashboard";
-import { UserProfile, UserInfo } from "../components/web/user";
-import { LeftSideBar, RightSideBar } from "../components/common";
+import {
+  UserProfile,
+  About,
+  Privacy,
+  Information,
+  EditProfile
+} from "../components/web/user";
+import { LeftSideBar, RightSideBar, TopbarInfo } from "../components/common";
 import { Campaign } from "../components/web/campaigns";
 
 class Home extends Component {
@@ -21,15 +27,13 @@ class Home extends Component {
         <section>
           <div className="container">
             <div className="row">
-              <Route
-                exact
-                path={routes.MY_PROFILE_ROUTE}
-                component={UserInfo}
-              />
+              <TopbarInfo />
+
               <div className="left_menu_second no-padding">
                 <LeftSideBar getFilter={this.getFilter} />
               </div>
-              <div className="middle-section padding-rl-10">
+
+              <div>
                 <Switch>
                   <Route
                     exact
@@ -41,6 +45,25 @@ class Home extends Component {
                     path={routes.MY_PROFILE_ROUTE}
                     component={UserProfile}
                   />
+                  <Route exact path={routes.ABOUT_ROUTE} component={About} />
+                  <Route
+                    exact
+                    path={routes.PRIVACY_ROUTE}
+                    component={Privacy}
+                  />
+
+                  <Route
+                    exact
+                    path={routes.INFORMATION_ROUTE}
+                    component={Information}
+                  />
+
+                  <Route
+                    exact
+                    path={routes.EDIT_PROFILE_ROUTE}
+                    component={EditProfile}
+                  />
+
                   <Route path={routes.ROOT_ROUTE} component={Landing} />
                 </Switch>
               </div>

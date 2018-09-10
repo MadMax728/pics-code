@@ -25,7 +25,8 @@ class RightSideBar extends Component {
           component={FavouriteCampaigns}
         />
         <Route path={routes.MY_PROFILE_ROUTE} exact component={Community} />
-        <Route path={routes.ROOT_ROUTE} render={this.userLanguage} />
+        <Route path={routes.ABOUT_ROUTE} exact component={Community} />
+        <Route path={routes.ROOT_ROUTE} exact render={this.userLanguage} />
       </div>
     );
   }

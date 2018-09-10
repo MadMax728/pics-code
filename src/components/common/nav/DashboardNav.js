@@ -37,7 +37,13 @@ const Links = [
 ];
 
 const DashboardNav = () => {
-  return <LeftSidebarNav links={Links} header={`Menu`} />;
+  return (
+    <LeftSidebarNav
+      links={Links}
+      header={`Menu`}
+      ulClassName={"nav navbar-nav pull-right"}
+    />
+  );
 };
 
 export default DashboardNav;

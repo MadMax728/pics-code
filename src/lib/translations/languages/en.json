@@ -97,6 +97,17 @@
     "pics": "Pics"
   },
 
+  "left_sidebar_settings": {
+    "edit_profile": "Edit profile",
+    "privacy": "Privacy",
+    "bussiness_profile": "Bussiness profile",
+    "campaign": "Campaign",
+    "ads": "Ads",
+    "bills_and_receipts": "Bills and receipts",
+    "data_download": "Data Download",
+    "logout": "Logout"
+  },
+
   "footer": {
     "copyright": " 2018 Picstagraph | All rights reserved ",
     "disclaimer": " Disclaimers and Other Legal Documents ",

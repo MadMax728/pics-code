@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 
-const LeftSidebarNav = ({ header, links }) => {
+const LeftSidebarNav = ({ header, links, ulClassName }) => {
   return (
     <div className="collapse navbar-collapse no-padding" id="left_menu">
       {header && (
         <div className="normal_title padding-15 hidden-xs">{header}</div>
       )}
-      <ul className="nav navbar-nav pull-right">
+      <ul className={ulClassName}>
         {links.map(link => {
           return (
             <li key={link.to}>
