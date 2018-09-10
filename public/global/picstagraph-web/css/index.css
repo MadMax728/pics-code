@@ -195,6 +195,12 @@ body {
 .padding-left-10 {
   padding-left: 10px; }
 
+.margin-bottom-50 {
+  margin-bottom: 50px; }
+
+.margin-top-25 {
+  margin-top: 25px; }
+
 .size-20 {
   font-size: 20px; }
 
@@ -977,6 +983,12 @@ body {
 
 .padding-left-10 {
   padding-left: 10px; }
+
+.margin-bottom-50 {
+  margin-bottom: 50px; }
+
+.margin-top-25 {
+  margin-top: 25px; }
 
 .size-20 {
   font-size: 20px; }
@@ -3176,6 +3188,10 @@ header .cms-logo {
   margin-bottom: 10px;
   float: left;
   width: 100%; }
+  .cms-middle-section .panel-wrapper form {
+    padding-top: 20px; }
+    .cms-middle-section .panel-wrapper form label {
+      font-family: "Helvetica-Bold"; }
   .cms-middle-section .panel-wrapper .title {
     font-size: 20px;
     font-family: "Helvetica-Bold";
@@ -3245,6 +3261,45 @@ header .cms-logo {
     text-align: center;
     height: 40px;
     padding-top: 10px; }
+
+.cms-middle-section .capcha-wrapper {
+  display: inline-block;
+  width: auto;
+  margin-right: 20px; }
+  @media (max-width: 991px) {
+    .cms-middle-section .capcha-wrapper {
+      width: 50%;
+      margin-right: 0px; } }
+  .cms-middle-section .capcha-wrapper .capcha-img {
+    width: auto;
+    position: static;
+    height: 40px; }
+    @media (max-width: 991px) {
+      .cms-middle-section .capcha-wrapper .capcha-img {
+        width: 100%;
+        height: auto; } }
+
+.cms-middle-section .button_wrapper {
+  width: auto; }
+  @media (max-width: 991px) {
+    .cms-middle-section .button_wrapper {
+      width: 50%; } }
+  .cms-middle-section .button_wrapper button {
+    height: 40px;
+    width: auto;
+    padding-top: 10px; }
+
+.cms-middle-section input {
+  padding: 10px; }
+
+.cms-middle-section .full-width-textarea {
+  width: 100%;
+  height: 180px;
+  resize: none;
+  outline: none;
+  padding: 10px; }
+  .cms-middle-section .full-width-textarea:focus {
+    border: 1px solid #000; }
 
 .panel-heading a:before {
   background: url(../images/down-arrow.png);
