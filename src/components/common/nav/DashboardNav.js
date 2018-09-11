@@ -5,7 +5,7 @@ import { Translations } from "../../../lib/translations";
 
 const Links = [
   {
-    to: routes.NEWS_ROUTE,
+    to: routes.ROOT_ROUTE,
     className: "menu_news secondary_title",
     activeClassName: "active",
     text: Translations.left_sidebar.news

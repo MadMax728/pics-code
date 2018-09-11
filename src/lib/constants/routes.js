@@ -45,9 +45,14 @@ export const COOKIES_ROUTE = "/cookies";
 export const FEEDBACK_ROUTE = "/feedback";
 export const LANGUAGE_ROUTE = "/language";
 
-// new routes
-export const LOGOUT_ROUTE = "/logout";
-export const BILLS_AND_RECEIPTS_ROUTE = "/bills_and_receipts";
-export const BUSSINESS_PROFILE_ROUTE = "/bussiness_profile";
-export const EDIT_PROFILE_ROUTE = "/edit_profile";
 export const INFORMATION_ROUTE = "/information";
+
+// settings routes
+export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit_profile";
+export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
+export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness_profile";
+export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaign";
+export const SETTINGS_ADS_ROUTE = "/settings/ads";
+export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills_and_receipts";
+export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data_download";
+export const LOGOUT_ROUTE = "/logout";

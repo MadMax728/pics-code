@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-import * as images from "../../../../lib/constants/images";
+import * as images from "../../../../../lib/constants/images";
 
 class Privacy extends Component {
   handleOnChange = () => {};
@@ -51,7 +51,11 @@ class Privacy extends Component {
             <div className="change-email-wrapper">
               <div className="form-group">
                 <label htmlFor="email">Current Email</label>
-                <input type="email" className="form-control" id="email" />
+                <input
+                  type="email"
+                  className="form-control"
+                  id="current_email"
+                />
                 <img src={images.checked} alt={"checked"} />
               </div>
               <div className="form-group">
@@ -59,7 +63,7 @@ class Privacy extends Component {
                 <span className="error-msg pull-right">
                   Please comfirme this change in your email account.{" "}
                 </span>
-                <input type="email" className="form-control" id="email" />
+                <input type="email" className="form-control" id="new_email" />
                 <img src={images.error} alt={"error"} />
               </div>
               <div className="form-group">

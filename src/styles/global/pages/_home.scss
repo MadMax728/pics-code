@@ -115,6 +115,10 @@
           background-image: radial-gradient(circle at 0 100%, #029bd7, #1f58a6);
           color: $white_color;
         }
+        &.active {
+          @include gradient();
+          color: $white_color;
+        }
         span {
           padding-left: 30px;
           padding-top: 2px;

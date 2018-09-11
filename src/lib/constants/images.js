@@ -71,3 +71,15 @@ export const information = `${
   process.env.REACT_APP_CDN_URL
 }/images/information.jpg`;
 export const emoji = `${process.env.REACT_APP_CDN_URL}/images/emoji.jpg`;
+
+export const info = `${process.env.REACT_APP_CDN_URL}/images/info.svg`;
+export const opened_email_envelope = `${
+  process.env.REACT_APP_CDN_URL
+}/images/opened-email-envelope.svg`;
+export const phone_receiver = `${
+  process.env.REACT_APP_CDN_URL
+}/images/phone-receiver.svg`;
+export const grid_world = `${
+  process.env.REACT_APP_CDN_URL
+}/images/grid-world.svg`;
+export const download = `${process.env.REACT_APP_CDN_URL}/images/download.svg`;
