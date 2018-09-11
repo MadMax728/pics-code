@@ -48,7 +48,7 @@ const campaigns = [
 ];
 const Landing = () => {
   return (
-    <div>
+    <div className={"middle-section padding-rl-10"}>
       <NewsFeeds campaigns={campaigns} />
     </div>
   );

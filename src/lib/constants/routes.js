@@ -8,7 +8,7 @@ export const PARTICIPANTS_ROUTE = "/participants";
 export const USER_ROUTE = "/user";
 export const PICS_ROUTE = "/pics";
 export const NOTIFICATIONS_ROUTE = "/notifications";
-export const MESSAGES_ROUTE = "/home/messages";
+export const MESSAGES_ROUTE = "/messages";
 export const FORGOT_PASSWORD = "/forgotPassword";
 export const CAMPAIGN_ROUTE = "/campaign";
 export const RESET_EMAIL = "/resetEmail";
@@ -19,6 +19,7 @@ export const RESET_PASSWORD = "/resetPassword/:token";
 // Information
 export const ABOUTUS_ROUTE = "/aboutus";
 export const ABOUT_ROUTE = "/about";
+export const PRIVACY_ROUTE = "/privacy";
 export const LEGAL_NOTICE_ROUTE = "/legal_notice";
 export const SUPPORT_ROUTE = "/support";
 export const ADS_ROUTE = "/ads";
@@ -43,3 +44,10 @@ export const REPORT_PROBLEM_ROUTE = "/report_problem";
 export const COOKIES_ROUTE = "/cookies";
 export const FEEDBACK_ROUTE = "/feedback";
 export const LANGUAGE_ROUTE = "/language";
+
+// new routes
+export const LOGOUT_ROUTE = "/logout";
+export const BILLS_AND_RECEIPTS_ROUTE = "/bills_and_receipts";
+export const BUSSINESS_PROFILE_ROUTE = "/bussiness_profile";
+export const EDIT_PROFILE_ROUTE = "/edit_profile";
+export const INFORMATION_ROUTE = "/information";

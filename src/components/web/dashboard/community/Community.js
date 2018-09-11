@@ -18,22 +18,24 @@ const Community = () => {
   return (
     <div>
       <div className="normal_title padding-15">Community</div>
-      <div className="campaigns">
+      <div className="community">
         {users.map(user => {
           return (
-            <div className="campaign_wrapper" key={user.user_name}>
-              <div className="col-sm-3 col-xs-3">
+            <div className="community_wrapper" key={user.user_name}>
+              <div className="community-user-image">
                 <img
                   src={user.image}
                   alt="campaign"
                   className="img-circle img-responsive"
                 />
               </div>
-              <div className="col-sm-6 col-xs-6 no-padding">
+              <div className="community-user-name">
                 <div className="normal_title">{user.user_name}</div>
                 <div className="secondary_title">{user.name}</div>
               </div>
-              <div className="col-sm-3 col-xs-3 no-padding" />
+              <div className="community-subscribe">
+                <button className="blue_button">Subscribed</button>
+              </div>
             </div>
           );
         })}

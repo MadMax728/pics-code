@@ -12,6 +12,7 @@ export const menu = `${process.env.REACT_APP_CDN_URL}/images/menu.svg`;
 export const search = `${process.env.REACT_APP_CDN_URL}/images/search.svg`;
 
 export const image = `${process.env.REACT_APP_CDN_URL}/images/image.jpg`;
+export const image_1 = `${process.env.REACT_APP_CDN_URL}/images/image-1.jpg`;
 
 export const blue_heart = `${
   process.env.REACT_APP_CDN_URL
@@ -56,3 +57,17 @@ export const black_left_arrow = `${
 export const black_right_arrow = `${
   process.env.REACT_APP_CDN_URL
 }/images/black_right_arrow.svg`;
+
+export const facebook = `${process.env.REACT_APP_CDN_URL}/images/facebook.jpg`;
+export const insta = `${process.env.REACT_APP_CDN_URL}/images/insta.jpg`;
+export const youtube = `${process.env.REACT_APP_CDN_URL}/images/youtube.jpg`;
+export const linkedin = `${process.env.REACT_APP_CDN_URL}/images/linkedin.jpg`;
+export const twitter = `${process.env.REACT_APP_CDN_URL}/images/twitter.jpg`;
+export const tumblr = `${process.env.REACT_APP_CDN_URL}/images/tumblr.jpg`;
+export const pintrest = `${process.env.REACT_APP_CDN_URL}/images/pintrest.jpg`;
+export const google = `${process.env.REACT_APP_CDN_URL}/images/google.jpg`;
+
+export const information = `${
+  process.env.REACT_APP_CDN_URL
+}/images/information.jpg`;
+export const emoji = `${process.env.REACT_APP_CDN_URL}/images/emoji.jpg`;
