@@ -37,7 +37,44 @@ class LeftSideBar extends Component {
           exact
           component={this.handleDashboardFilter}
         />
-        <Route path={routes.PRIVACY_ROUTE} exact component={SideBarSetting} />
+
+        {/* -------- Settings Routes --------- */}
+
+        <Route
+          path={routes.SETTINGS_PRIVACY_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+        <Route
+          path={routes.SETTINGS_BUSSINESS_PROFILE_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+        <Route
+          path={routes.SETTINGS_EDIT_PROFILE_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+        <Route
+          path={routes.SETTINGS_BILLS_AND_RECEIPTS_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+        <Route
+          path={routes.SETTINGS_DATA_DOWNLOAD_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+        <Route
+          path={routes.SETTINGS_ADS_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+        <Route
+          path={routes.SETTINGS_CAMPAIGN_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
       </div>
     );
   }

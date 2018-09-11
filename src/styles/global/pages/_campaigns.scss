@@ -83,6 +83,7 @@
           width: 10px;
           height: 10px;
           display: inline-block;
+          margin-right: 5px;
           @include gradient();
         }
         .grey-block {
@@ -90,6 +91,7 @@
           height: 10px;
           display: inline-block;
           background: #bfbfbf;
+          margin-right: 5px;
         }
       }
     }
