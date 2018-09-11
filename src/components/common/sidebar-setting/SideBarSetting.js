@@ -59,7 +59,7 @@ const SideBarSetting = () => {
     <LeftSidebarNav
       links={Links}
       header={`Settings`}
-      ulClassName={"nav navbar-nav pull-right settings-menu"}
+      ulClassName={"nav navbar-nav pull-right"}
     />
   );
 };
