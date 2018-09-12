@@ -50,7 +50,7 @@ class Home extends Component {
                   <Route
                     exact
                     path={routes.CAMPAIGN_ROUTE}
-                    compSettingonent={Campaign}
+                    component={Campaign}
                   />
                   <Route
                     exact
