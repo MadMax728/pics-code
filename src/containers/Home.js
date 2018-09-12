@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
 import { Landing } from "../components/web/dashboard";
+import { Users } from "../components/web/user";
 import {
   UserProfile,
   About,
@@ -40,6 +41,12 @@ class Home extends Component {
 
               <div>
                 <Switch>
+                  <Route
+                    exact
+                    path={routes.USER_ROUTE}
+                    compSettingonent={Users}
+                  />
+
                   <Route
                     exact
                     path={routes.CAMPAIGN_ROUTE}

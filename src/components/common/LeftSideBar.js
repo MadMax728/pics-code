@@ -18,7 +18,7 @@ class LeftSideBar extends Component {
         <Route path={routes.MY_PROFILE_ROUTE} exact component={DashboardNav} />
         <Route
           path={routes.NOTIFICATIONS_ROUTE}
-          exact={true}
+          exact
           component={DashboardNav}
         />
         <Route path={routes.MESSAGES_ROUTE} exact component={DashboardNav} />

@@ -18,3 +18,4 @@ export {
   Ads
 } from "./settings";
 export { Information } from "./information";
+export { Users } from "./user-list";
