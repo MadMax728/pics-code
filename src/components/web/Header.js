@@ -4,6 +4,8 @@ import { Translations } from "../../lib/translations";
 import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
+import NavDropdown from "react-bootstrap/lib/NavDropdown";
+import { Notifications } from "../web/dashboard";
 
 export default class Header extends Component {
   constructor(props) {
@@ -105,13 +107,15 @@ export default class Header extends Component {
                   >
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
-                  <RouteNavItem
-                    to={routes.NOTIFICATIONS_ROUTE}
-                    className={`menu_notifications`}
-                    closeMenu={this.toggleNav}
+
+                  <NavDropdown
+                    title={Translations.navigation.notifications}
+                    id="basic-nav-dropdown"
+                    className={`menu_messages`}
                   >
-                    <span>{Translations.navigation.notifications}</span>
-                  </RouteNavItem>
+                    <Notifications />
+                  </NavDropdown>
+
                   <RouteNavItem
                     to={routes.MY_PROFILE_ROUTE}
                     className={`menu_profile`}

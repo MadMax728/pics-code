@@ -83,3 +83,16 @@ export const grid_world = `${
   process.env.REACT_APP_CDN_URL
 }/images/grid-world.svg`;
 export const download = `${process.env.REACT_APP_CDN_URL}/images/download.svg`;
+
+export const pic_1 = `${process.env.REACT_APP_CDN_URL}/images/pic-1.jpg`;
+export const pic_2 = `${process.env.REACT_APP_CDN_URL}/images/pic-2.jpg`;
+export const pic_3 = `${process.env.REACT_APP_CDN_URL}/images/pic-3.jpg`;
+export const pic_4 = `${process.env.REACT_APP_CDN_URL}/images/pic-4.jpg`;
+export const pic_5 = `${process.env.REACT_APP_CDN_URL}/images/pic-5.jpg`;
+export const notifications_logo = `${
+  process.env.REACT_APP_CDN_URL
+}/images/notifications-logo.jpg`;
+export const green_tick = `${
+  process.env.REACT_APP_CDN_URL
+}/images/green-tick.svg`;
+export const cross = `${process.env.REACT_APP_CDN_URL}/images/cross.svg`;

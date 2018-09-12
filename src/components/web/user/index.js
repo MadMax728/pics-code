@@ -19,3 +19,4 @@ export {
 } from "./settings";
 export { Information } from "./information";
 export { Users } from "./user-list";
+export { Pictures } from "./pics-list";

@@ -4,7 +4,6 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
 import { Landing } from "../components/web/dashboard";
-import { Users } from "../components/web/user";
 import {
   UserProfile,
   About,
@@ -15,8 +14,11 @@ import {
   BillsAndReceipts,
   DataDownload,
   SettingCampaign,
-  Ads
+  Ads,
+  Users,
+  Pictures
 } from "../components/web/user";
+
 import { LeftSideBar, RightSideBar, TopbarInfo } from "../components/common";
 import { Campaign } from "../components/web/campaigns";
 
@@ -41,11 +43,9 @@ class Home extends Component {
 
               <div>
                 <Switch>
-                  <Route
-                    exact
-                    path={routes.USER_ROUTE}
-                    compSettingonent={Users}
-                  />
+                  <Route exact path={routes.USER_ROUTE} component={Users} />
+
+                  <Route exact path={routes.PICS_ROUTE} component={Pictures} />
 
                   <Route
                     exact
