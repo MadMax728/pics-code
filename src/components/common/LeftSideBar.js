@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../lib/constants/routes";
-import { DashboardNav, DashboardFilter } from "./nav";
+import {
+  DashboardNav,
+  DashboardFilter,
+  CampaignNav,
+  CampaignFilter
+} from "./nav";
 import propTypes from "prop-types";
 import { SideBarSetting } from "./sidebar-setting";
 
@@ -10,11 +15,16 @@ class LeftSideBar extends Component {
     return <DashboardFilter handleApplyClick={this.props.getFilter} />;
   };
 
+  handleCampaignFilter = () => {
+    return <CampaignFilter handleApplyClick={this.props.getFilter} />;
+  };
   render() {
     return (
       <div>
         <Route path={routes.ROOT_ROUTE} exact component={DashboardNav} />
         <Route path={routes.CAMPAIGN_ROUTE} exact component={DashboardNav} />
+        <Route path={routes.CREATOR_ROUTE} exact component={CampaignNav} />
+        <Route path={routes.COMPANY_ROUTE} exact component={CampaignNav} />
         <Route path={routes.MY_PROFILE_ROUTE} exact component={DashboardNav} />
         <Route
           path={routes.NOTIFICATIONS_ROUTE}
@@ -23,20 +33,38 @@ class LeftSideBar extends Component {
         />
         <Route path={routes.MESSAGES_ROUTE} exact component={DashboardNav} />
         <Route path={routes.EXPLORE_ROUTE} exact component={DashboardNav} />
+
         <Route
           path={routes.PARTICIPANTS_ROUTE}
           exact
           component={DashboardNav}
         />
+
         <Route path={routes.USER_ROUTE} exact component={DashboardNav} />
         <Route path={routes.PICS_ROUTE} exact component={DashboardNav} />
         <Route path={routes.NEWS_ROUTE} exact component={DashboardNav} />
         <Route path={routes.INFORMATION_ROUTE} exact component={DashboardNav} />
+
+        {/* ....... Filters ....... */}
+
         <Route
           path={routes.ROOT_ROUTE}
           exact
           component={this.handleDashboardFilter}
         />
+
+        <Route
+          path={routes.COMPANY_ROUTE}
+          exact
+          component={this.handleCampaignFilter}
+        />
+
+        <Route
+          path={routes.CREATOR_ROUTE}
+          exact
+          component={this.handleCampaignFilter}
+        />
+        {/* ....... Filters ....... */}
 
         {/* -------- Settings Routes --------- */}
 

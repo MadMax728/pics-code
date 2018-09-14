@@ -1,2 +1,2 @@
-export { default as DashboardNav } from "./DashboardNav";
-export { default as DashboardFilter } from "./DashboardFilter";
+export { DashboardNav, DashboardFilter } from "./dashboard";
+export { CampaignNav, CampaignFilter } from "./campaign";

@@ -7,3 +7,7 @@ export { Notifications } from "./notifications";
 export { PaymentMethod } from "./payment-method";
 export { ReportProblem } from "./report-problem";
 export { ReportedContent } from "./reported-content";
+export { Users } from "./user-list";
+export { Pictures } from "./pics-list";
+export { Participants } from "./participants";
+export { Explore } from "./explore";

@@ -94,7 +94,9 @@
     "explore": "Explore",
     "participants": "Participants",
     "user": "User",
-    "pics": "Pics"
+    "pics": "Pics",
+    "company": "Company",
+    "creator": "Creator"
   },
 
   "left_sidebar_settings": {

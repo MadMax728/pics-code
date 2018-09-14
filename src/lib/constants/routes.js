@@ -56,3 +56,7 @@ export const SETTINGS_ADS_ROUTE = "/settings/ads";
 export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills_and_receipts";
 export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data_download";
 export const LOGOUT_ROUTE = "/logout";
+
+// campaig overview
+export const COMPANY_ROUTE = "/campaign/company";
+export const CREATOR_ROUTE = "/campaign/creator";
