@@ -23,9 +23,8 @@ import {
   Ads
 } from "../components/web/user";
 
-import { Company, Creator } from "../components/web/campaigns";
+import { Campaign, Company, Creator } from "../components/web/campaigns";
 import { LeftSideBar, RightSideBar, TopbarInfo } from "../components/common";
-import { Campaign } from "../components/web/campaigns";
 
 class Home extends Component {
   getFilter(filterData) {

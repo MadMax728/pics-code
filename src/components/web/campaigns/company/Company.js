@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import * as images from "../../../../lib/constants/images";
 
 class Company extends Component {
@@ -94,7 +95,7 @@ class Company extends Component {
               <img src={images.feed_like} alt={"feed_like"} />
             </div>
             <div className="show_more_options">
-              <a href="#">• • •</a>
+              <Link to={""}>• • •</Link>
             </div>
           </div>
         </div>
