@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { LeftSidebarFilter } from "../../../components/ui-kit";
-import { Translations } from "../../../lib/translations";
+import { LeftSidebarFilter } from "../../../ui-kit";
+import { Translations } from "../../../../lib/translations";
 import propTypes from "prop-types";
 
 const staticData = [
