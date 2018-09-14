@@ -279,7 +279,7 @@
       .community-subscribe {
         align-self: center;
         button {
-          height: 30px;
+          height: 35px;
           padding: 6px;
           width: 90px;
         }
@@ -321,13 +321,24 @@
   background-color: $white_color;
   margin-bottom: 2px;
   @include float();
+  .status {
+    border-color: rgba(198, 198, 198, 0.3);
+  }
   .feed_header {
     padding: 10px;
     @include float();
+    .normal_title {
+      padding-left: 15px;
+    }
+    .secondary_title {
+      padding-left: 15px;
+    }
+    .grey_title {
+      padding-left: 15px;
+    }
     .profile_image {
       display: inline-block;
       float: left;
-      margin-right: 16px;
       img {
         width: 45px;
         height: 45px;
