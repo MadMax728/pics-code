@@ -1,0 +1,67 @@
+.backoffice-login {
+  a {
+    display: block;
+    width: 100%;
+  }
+}
+.backoffice-feed {
+  .status {
+    border-color: #cdcdcd;
+  }
+}
+.middle-section-search {
+  margin-bottom: 2px;
+  .search-input-group {
+    width: 100%;
+    input {
+      border-radius: 0;
+      border: 0;
+      box-shadow: none;
+      height: 40px;
+    }
+    .input-group-addon {
+      background: #fff;
+      box-shadow: none;
+      height: 40px;
+      border: 0;
+      border-radius: 0px;
+      width: 40px;
+      button {
+        border: 0;
+        background: transparent;
+        img {
+          width: 16px;
+        }
+      }
+    }
+  }
+}
+.backoffice-leftside-bar {
+  .filter-wrapper {
+    ul {
+      padding: 0;
+      list-style-type: none;
+      li {
+        padding: 13px 18px;
+        .label {
+          font-size: 14px;
+          color: $charcoal_color;
+          padding: 0;
+          font-weight: normal;
+        }
+        .value {
+          color: $silver_color;
+        }
+      }
+    }
+  }
+  .filter-btn-wrapper {
+    @include float();
+    background: rgba(198, 198, 198, 0.3);
+    .black_button {
+      width: 100%;
+      background: transparent;
+      margin-top: 10px;
+    }
+  }
+}
