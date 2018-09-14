@@ -15,9 +15,9 @@ yarn.lock
 
 # ignore any file generated in the src/styles directory because sass is auto-generating it for us.
 src/styles/**/*.css
+public/global/picstagraph-web/**/*.css
 
 # ignore the src/styles/index.css file cause its auto-generated
-public/global/css/index.css
 public/global/picstagraph-web/css/index.css
 
 # ignore Jest code coverage
