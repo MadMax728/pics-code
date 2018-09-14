@@ -65,6 +65,10 @@ header {
       }
     }
     .navbar-nav {
+      .dropdown-menu {
+        right: 0 !important;
+        left: auto !important;
+      }
       li {
         &.open {
           &:after {
@@ -150,6 +154,7 @@ header {
             padding-top: 30px;
             font-size: 12px;
             line-height: 14px;
+            color: $white_color !important;
           }
         }
         .notification-mega-wrapper {

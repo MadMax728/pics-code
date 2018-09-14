@@ -13,15 +13,27 @@ class Notifications extends Component {
         {/* you can change the className name if you want */}
         <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
           {/* for Notification Tab */}
-          <Tab eventKey={1} title="Notifications" className={``}>
+          <Tab
+            tabClassName="tab-header"
+            eventKey={1}
+            title={<p className="tab-title">{`Notifications`}</p>}
+          >
             <NotificationsList />
           </Tab>
           {/* for Like you tab */}
-          <Tab eventKey={2} title="Like you" className={``}>
+          <Tab
+            tabClassName="tab-header"
+            eventKey={2}
+            title={<p className="tab-title">{`Like you`}</p>}
+          >
             <LikeYou />
           </Tab>
           {/* for Requests tab */}
-          <Tab eventKey={3} title="Requests" className={``}>
+          <Tab
+            tabClassName="tab-header"
+            eventKey={3}
+            title={<p className="tab-title">{`Requests`}</p>}
+          >
             <Requests />
           </Tab>
         </Tabs>

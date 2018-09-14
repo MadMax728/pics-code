@@ -5,6 +5,7 @@ import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
+
 import { Notifications } from "../web/dashboard";
 
 export default class Header extends Component {
@@ -107,11 +108,11 @@ export default class Header extends Component {
                   >
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
-
                   <NavDropdown
-                    title={Translations.navigation.notifications}
+                    noCaret={true}
+                    title={<span>{Translations.navigation.notifications}</span>}
                     id="basic-nav-dropdown"
-                    className={`menu_messages`}
+                    className={`menu_notifications`}
                   >
                     <Notifications />
                   </NavDropdown>
