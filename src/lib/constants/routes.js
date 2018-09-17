@@ -60,3 +60,6 @@ export const LOGOUT_ROUTE = "/logout";
 // campaig overview
 export const COMPANY_ROUTE = "/campaign/company";
 export const CREATOR_ROUTE = "/campaign/creator";
+
+export const SAVED_ROUTE = "/saved";
+export const NEWS_FEED_ROUTE = "/news_feed";
