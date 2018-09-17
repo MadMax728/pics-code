@@ -49,7 +49,7 @@ class ResetPassword extends Component {
     return (
       <OnBoardingSkeleton
         topHeader={"Reset password"}
-        subHeader={"We will send you an email to resetting your password."}
+        subHeader={"Please enter your new password here."}
       >
         {() => (
           <form>

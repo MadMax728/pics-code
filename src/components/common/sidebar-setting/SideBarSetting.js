@@ -48,7 +48,7 @@ const Links = [
   },
   {
     to: routes.LOGOUT_ROUTE,
-    className: "secondary_title",
+    className: "secondary_title padding",
     activeClassName: "active",
     text: Translations.left_sidebar_settings.logout
   }

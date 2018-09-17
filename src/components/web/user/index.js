@@ -7,7 +7,7 @@ export { Register } from "./register";
 export { ResetEmail } from "./reset-email";
 export { ResetPassword } from "./reset-password";
 export { Verification } from "./verification";
-export { About } from "./about";
+export { About, Saved, NewsFeed } from "./owner";
 export {
   Privacy,
   BusinessProfile,

@@ -8,8 +8,11 @@ class TopbarInfo extends Component {
     return (
       <div>
         <Route exact path={routes.MY_PROFILE_ROUTE} component={UserInfo} />
-        <Route exact path={routes.ABOUT_ROUTE} component={UserInfo} />
         <Route exact path={routes.INFORMATION_ROUTE} component={UserInfo} />
+
+        <Route exact path={routes.NEWS_FEED_ROUTE} component={UserInfo} />
+        <Route exact path={routes.ABOUT_ROUTE} component={UserInfo} />
+        <Route exact path={routes.SAVED_ROUTE} component={UserInfo} />
       </div>
     );
   }

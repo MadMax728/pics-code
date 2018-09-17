@@ -99,6 +99,12 @@
     "creator": "Creator"
   },
 
+  "left_sidebar_owner_menu": {
+    "news_feed": " News Feeds",
+    "about": "About",
+    "saved": "Saved"
+  },
+
   "left_sidebar_settings": {
     "edit_profile": "Edit profile",
     "privacy": "Privacy",

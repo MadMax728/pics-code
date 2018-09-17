@@ -10,10 +10,20 @@ class OnBoardingSkeleton extends Component {
 
   getStateAndHelpers = {};
   render() {
-    const { topHeader, subHeader, showDownloadStore } = this.props;
+    const {
+      topHeader,
+      subHeader,
+      showDownloadStore,
+      showDownCondition,
+      type,
+      showDownCookies
+    } = this.props;
+    const styleForHeight = type === "register" && "155vh";
+    const styleForFlex = type === "register" && "none";
+
     return (
-      <div className="login-process">
-        <header>
+      <div className="login-process" style={{ height: styleForHeight }}>
+        <header style={{ float: styleForFlex }}>
           <div className="custom-container">
             <div className="login-logo">
               <Link to={routes.ROOT_ROUTE}>
@@ -36,12 +46,27 @@ class OnBoardingSkeleton extends Component {
               <h3 className="text-center">{topHeader}</h3>
               <p>{subHeader}</p>
               {this.props.children(this.getStateAndHelpers)}
+
+              {showDownCondition && (
+                <div>
+                  <div className="terms-conditions">
+                    By clicking on register you agree to our
+                    <Link to={""}> General Terms & Conditions</Link>,
+                    <Link to={""}> Terms of Use </Link> and
+                    <Link to={""}> Data Protection & Privacy Policy </Link>.
+                  </div>
+                  <div className="free-register">
+                    Register free as a <b>company</b>
+                  </div>
+                </div>
+              )}
+
               {showDownloadStore && (
                 <div className="app-download">
                   <div>App download</div>
                   <a href="https://itunes.apple.com/">
                     <img src={images.iphone} alt={"iphone"} />
-                  </a>
+                  </a>{" "}
                   <a href="https://play.google.com/">
                     <img src={images.andriod} alt={"android"} />
                   </a>
@@ -50,11 +75,22 @@ class OnBoardingSkeleton extends Component {
             </div>
           </div>
         </section>
+        {showDownCookies && (
+          <section>
+            <div className="custom-container">
+              <div className="cookies-section">
+                For a better user experience we use <Link to={""}>Cookies</Link>
+                . By using picstagraph you do agree.
+                <img src={images.cross} alt={"cross"} />
+              </div>
+            </div>
+          </section>
+        )}
         <footer>
           <div className="custom-container">
             <ul>
               <li>
-                <Link to={routes.SUPPORT_ROUTE}>Support</Link>]{" "}
+                <Link to={routes.SUPPORT_ROUTE}>Support</Link>{" "}
               </li>
               <li>
                 <Link to={routes.DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}>
@@ -87,6 +123,9 @@ OnBoardingSkeleton.propTypes = {
   topHeader: string,
   subHeader: string,
   showDownloadStore: bool,
+  showDownCookies: bool,
+  showDownCondition: bool,
+  type: string,
   children: func.isRequired
 };
 

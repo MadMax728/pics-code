@@ -20,7 +20,9 @@ import {
   BillsAndReceipts,
   DataDownload,
   SettingCampaign,
-  Ads
+  Ads,
+  NewsFeed,
+  Saved
 } from "../components/web/user";
 
 import { Campaign, Company, Creator } from "../components/web/campaigns";
@@ -52,6 +54,14 @@ class Home extends Component {
                     path={routes.EXPLORE_ROUTE}
                     component={Explore}
                   />
+
+                  <Route
+                    exact
+                    path={routes.NEWS_FEED_ROUTE}
+                    component={NewsFeed}
+                  />
+
+                  <Route exact path={routes.SAVED_ROUTE} component={Saved} />
 
                   <Route
                     exact

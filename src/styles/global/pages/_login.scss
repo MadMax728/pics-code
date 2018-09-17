@@ -1,3 +1,11 @@
+.login-height {
+  height: 100vh;
+}
+
+.register-height {
+  height: 155vh;
+}
+
 .login-process {
   background: $white_color;
   @include float;

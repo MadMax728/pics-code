@@ -9,6 +9,7 @@ import {
 } from "./nav";
 import propTypes from "prop-types";
 import { SideBarSetting } from "./sidebar-setting";
+import { SideBarOwnerMenu } from "./sidebar-owner-menu";
 
 class LeftSideBar extends Component {
   handleDashboardFilter = () => {
@@ -65,6 +66,19 @@ class LeftSideBar extends Component {
           component={this.handleCampaignFilter}
         />
         {/* ....... Filters ....... */}
+
+        {/* ...... Owner Menu ...... */}
+
+        <Route
+          path={routes.NEWS_FEED_ROUTE}
+          exact
+          component={SideBarOwnerMenu}
+        />
+
+        <Route path={routes.ABOUT_ROUTE} exact component={SideBarOwnerMenu} />
+
+        <Route path={routes.SAVED_ROUTE} exact component={SideBarOwnerMenu} />
+        {/* ...... Owner Menu ...... */}
 
         {/* -------- Settings Routes --------- */}
 

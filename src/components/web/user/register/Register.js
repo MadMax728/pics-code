@@ -97,6 +97,9 @@ class Register extends Component {
       topHeader={"Do what you love"}
       subHeader={"Register for free"}
       showDownloadStore
+      showDownCondition
+      showDownCookies
+      type={"register"}
     >
       {() => (
         <form>

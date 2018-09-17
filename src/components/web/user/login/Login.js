@@ -53,6 +53,7 @@ class Login extends Component {
         topHeader={"Do what you love"}
         subHeader={"Register for free"}
         showDownloadStore
+        type={"login"}
       >
         {() => (
           <form>
