@@ -12,7 +12,6 @@ import {
 } from "../components/web/dashboard";
 import {
   UserProfile,
-  About,
   Privacy,
   Information,
   EditProfile,
@@ -20,10 +19,11 @@ import {
   BillsAndReceipts,
   DataDownload,
   SettingCampaign,
-  Ads,
-  NewsFeed,
-  Saved
+  Ads
 } from "../components/web/user";
+
+import { OtherNewsFeed, OtherAbout } from "../components/web/other";
+import { OwnerNewsFeed, OwnerAbout, OwnerSaved } from "../components/web/owner";
 
 import { Campaign, Company, Creator } from "../components/web/campaigns";
 import { LeftSideBar, RightSideBar, TopbarInfo } from "../components/common";
@@ -58,10 +58,29 @@ class Home extends Component {
                   <Route
                     exact
                     path={routes.NEWS_FEED_ROUTE}
-                    component={NewsFeed}
+                    component={OwnerNewsFeed}
+                  />
+                  <Route
+                    exact
+                    path={routes.SAVED_ROUTE}
+                    component={OwnerSaved}
+                  />
+                  <Route
+                    exact
+                    path={routes.ABOUT_ROUTE}
+                    component={OwnerAbout}
                   />
 
-                  <Route exact path={routes.SAVED_ROUTE} component={Saved} />
+                  <Route
+                    exact
+                    path={routes.OTHER_NEWS_FEED_ROUTE}
+                    component={OtherNewsFeed}
+                  />
+                  <Route
+                    exact
+                    path={routes.OTHER_ABOUT_ROUTE}
+                    component={OtherAbout}
+                  />
 
                   <Route
                     exact
@@ -97,7 +116,6 @@ class Home extends Component {
                     path={routes.MY_PROFILE_ROUTE}
                     component={UserProfile}
                   />
-                  <Route exact path={routes.ABOUT_ROUTE} component={About} />
 
                   <Route
                     exact

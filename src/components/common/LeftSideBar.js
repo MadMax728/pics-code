@@ -10,6 +10,7 @@ import {
 import propTypes from "prop-types";
 import { SideBarSetting } from "./sidebar-setting";
 import { SideBarOwnerMenu } from "./sidebar-owner-menu";
+import { SideBarOtherMenu } from "./sidebar-other-menu";
 
 class LeftSideBar extends Component {
   handleDashboardFilter = () => {
@@ -78,7 +79,24 @@ class LeftSideBar extends Component {
         <Route path={routes.ABOUT_ROUTE} exact component={SideBarOwnerMenu} />
 
         <Route path={routes.SAVED_ROUTE} exact component={SideBarOwnerMenu} />
+
         {/* ...... Owner Menu ...... */}
+
+        {/* ...... Other Menu ...... */}
+
+        <Route
+          path={routes.OTHER_NEWS_FEED_ROUTE}
+          exact
+          component={SideBarOtherMenu}
+        />
+
+        <Route
+          path={routes.OTHER_ABOUT_ROUTE}
+          exact
+          component={SideBarOtherMenu}
+        />
+
+        {/* ...... Other Menu ...... */}
 
         {/* -------- Settings Routes --------- */}
 

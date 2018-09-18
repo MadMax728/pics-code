@@ -18,7 +18,6 @@ export const RESET_PASSWORD = "/resetPassword/:token";
 
 // Information
 export const ABOUTUS_ROUTE = "/aboutus";
-export const ABOUT_ROUTE = "/about";
 export const PRIVACY_ROUTE = "/privacy";
 export const LEGAL_NOTICE_ROUTE = "/legal_notice";
 export const SUPPORT_ROUTE = "/support";
@@ -63,3 +62,6 @@ export const CREATOR_ROUTE = "/campaign/creator";
 
 export const SAVED_ROUTE = "/saved";
 export const NEWS_FEED_ROUTE = "/news_feed";
+export const OTHER_NEWS_FEED_ROUTE = "/news_feed/:id";
+export const OTHER_ABOUT_ROUTE = "/about/:id";
+export const ABOUT_ROUTE = "/about";

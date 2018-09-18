@@ -10,3 +10,4 @@ export {
 } from "./sidebar-mb-menu";
 export { SearchResult } from "./searchbar-result";
 export { SideBarSetting } from "./sidebar-setting";
+export { TopBarUserInfo } from "./top-bar-user-info";

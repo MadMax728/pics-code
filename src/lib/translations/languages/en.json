@@ -89,6 +89,18 @@
     "feedback": "Feedback"
   },
 
+  "top_bar_info": {
+    "upload": "Upload",
+    "create_campaign": "Create Campaign",
+    "create_ad": "Create Ad",
+    "subscriber": "Subscriber",
+    "subscribed": "Subscribed",
+    "posts": "Posts",
+    "subscribe": "Subscribe",
+    "message": "Message",
+    "like_you": "Like You"
+  },
+
   "left_sidebar": {
     "news": "News",
     "explore": "Explore",
