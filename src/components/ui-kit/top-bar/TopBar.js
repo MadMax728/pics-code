@@ -50,7 +50,7 @@ const TopBar = ({ items }) => {
 };
 
 TopBar.propTypes = {
-  slots: PropTypes.arrayOf(
+  items: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
       private: PropTypes.bool,
