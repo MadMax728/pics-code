@@ -50,18 +50,22 @@ const TopBar = ({ items }) => {
 };
 
 TopBar.propTypes = {
-  name: PropTypes.string,
-  private: PropTypes.bool,
-  more: PropTypes.bool,
-  settings: PropTypes.bool,
   slots: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,
-      val: PropTypes.string,
-      className: PropTypes.string,
-      btnActiveClassName: PropTypes.string,
-      btnText: PropTypes.string,
-      handeleEvent: PropTypes.func
+      private: PropTypes.bool,
+      more: PropTypes.bool,
+      settings: PropTypes.bool,
+      slots: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          val: PropTypes.string,
+          className: PropTypes.string,
+          btnActiveClassName: PropTypes.string,
+          btnText: PropTypes.string,
+          handeleEvent: PropTypes.func
+        })
+      )
     })
   )
 };
