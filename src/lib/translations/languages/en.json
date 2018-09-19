@@ -108,7 +108,8 @@
     "user": "User",
     "pics": "Pics",
     "company": "Company",
-    "creator": "Creator"
+    "creator": "Creator",
+    "information": "Information"
   },
 
   "left_sidebar_owner_menu": {

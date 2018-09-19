@@ -11,6 +11,7 @@ export const NOTIFICATIONS_ROUTE = "/notifications";
 export const MESSAGES_ROUTE = "/messages";
 export const FORGOT_PASSWORD = "/forgotPassword";
 export const CAMPAIGN_ROUTE = "/campaign";
+export const CAMPAIGN_VIEW_ROUTE = "/campaign/:id";
 export const RESET_EMAIL = "/resetEmail";
 export const RESET_PASSWORD = "/resetPassword/:token";
 
@@ -44,7 +45,8 @@ export const COOKIES_ROUTE = "/cookies";
 export const FEEDBACK_ROUTE = "/feedback";
 export const LANGUAGE_ROUTE = "/language";
 
-export const INFORMATION_ROUTE = "/information";
+export const CAMPAIGN_INFORMATION_ROUTE = "/campaign/:id/information";
+export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/:id/participant";
 
 // settings routes
 export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit_profile";

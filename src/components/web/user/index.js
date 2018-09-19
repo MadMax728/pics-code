@@ -19,4 +19,3 @@ export {
   SettingCampaign,
   Ads
 } from "./settings";
-export { Information } from "./information";

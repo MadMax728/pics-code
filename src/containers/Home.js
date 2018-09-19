@@ -3,6 +3,7 @@ import * as routes from "../lib/constants/routes";
 import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
+import { Information, Participant } from "../components/web/campaigns";
 import {
   Landing,
   Users,
@@ -13,7 +14,6 @@ import {
 import {
   UserProfile,
   Privacy,
-  Information,
   EditProfile,
   BusinessProfile,
   BillsAndReceipts,
@@ -26,7 +26,7 @@ import { OtherNewsFeed, OtherAbout } from "../components/web/other";
 import { OwnerNewsFeed, OwnerAbout, OwnerSaved } from "../components/web/owner";
 
 import { Campaign, Company, Creator } from "../components/web/campaigns";
-import { LeftSideBar, RightSideBar, TopbarInfo } from "../components/common";
+import { LeftSideBar, RightSideBar, TopBarInfo } from "../components/common";
 
 class Home extends Component {
   getFilter(filterData) {
@@ -41,7 +41,7 @@ class Home extends Component {
         <section>
           <div className="container">
             <div className="row">
-              <TopbarInfo />
+              <TopBarInfo />
 
               <div className="left_menu_second no-padding">
                 <LeftSideBar getFilter={this.getFilter} />
@@ -119,8 +119,14 @@ class Home extends Component {
 
                   <Route
                     exact
-                    path={routes.INFORMATION_ROUTE}
+                    path={routes.CAMPAIGN_INFORMATION_ROUTE}
                     component={Information}
+                  />
+
+                  <Route
+                    exact
+                    path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
+                    component={Participant}
                   />
 
                   {/* -------- Settings Routes --------- */}
