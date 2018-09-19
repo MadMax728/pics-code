@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../lib/constants/images";
-import {
-  SideBarMBMenuInformation,
-  SideBarMBMenuServices
-} from "../common/sidebar-mb-menu";
+import { SideBarMBMenuInformation, SideBarMBMenuServices } from "../common";
 
 import PropTypes from "prop-types";
 

@@ -3,7 +3,6 @@ import * as routes from "../lib/constants/routes";
 import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
-import { Information, Participant } from "../components/web/campaigns";
 import {
   Landing,
   Users,
@@ -25,7 +24,13 @@ import {
 import { OtherNewsFeed, OtherAbout } from "../components/web/other";
 import { OwnerNewsFeed, OwnerAbout, OwnerSaved } from "../components/web/owner";
 
-import { Campaign, Company, Creator } from "../components/web/campaigns";
+import {
+  Campaign,
+  Company,
+  Creator,
+  Information,
+  Participant
+} from "../components/web/campaigns";
 import { LeftSideBar, RightSideBar, TopBarInfo } from "../components/common";
 
 class Home extends Component {
