@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
-import { TopBarUserInfo, TopBarOtherInfo } from "../../top-bar";
+import { TopBarOwnerInfo } from "../top-bar-owner-info";
+import { TopBarOtherInfo } from "../top-bar-other-info";
 
 class TopBarInfo extends Component {
   render() {
@@ -10,12 +11,16 @@ class TopBarInfo extends Component {
         <Route
           exact
           path={routes.MY_PROFILE_ROUTE}
-          component={TopBarUserInfo}
+          component={TopBarOwnerInfo}
         />
 
-        <Route exact path={routes.NEWS_FEED_ROUTE} component={TopBarUserInfo} />
-        <Route exact path={routes.ABOUT_ROUTE} component={TopBarUserInfo} />
-        <Route exact path={routes.SAVED_ROUTE} component={TopBarUserInfo} />
+        <Route
+          exact
+          path={routes.NEWS_FEED_ROUTE}
+          component={TopBarOwnerInfo}
+        />
+        <Route exact path={routes.ABOUT_ROUTE} component={TopBarOwnerInfo} />
+        <Route exact path={routes.SAVED_ROUTE} component={TopBarOwnerInfo} />
 
         <Route
           exact

@@ -36,30 +36,14 @@ class Creator extends Component {
               <div className="normal_title">Title</div>
               <div className="col-sm-6 no-padding">
                 <div className="info_wrapper">
-                  <span className="normal_title">Start: </span>
-                  <span className="secondary_title">10.10.2000</span>
-                </div>
-                <div className="info_wrapper">
-                  <span className="normal_title">Procedure: </span>
-                  <span className="secondary_title">Public</span>
-                </div>
-                <div className="info_wrapper">
                   <span className="normal_title">Target group: </span>
                   <span className="secondary_title">Female</span>
                 </div>
               </div>
               <div className="col-sm-6 no-padding">
                 <div className="info_wrapper">
-                  <span className="normal_title">End: </span>
-                  <span className="secondary_title">10.10.2000</span>
-                </div>
-                <div className="info_wrapper">
-                  <span className="normal_title">Type: </span>
-                  <span className="secondary_title">Video</span>
-                </div>
-                <div className="info_wrapper">
-                  <span className="normal_title">Applications: </span>
-                  <span className="secondary_title">2000/2000</span>
+                  <span className="normal_title">Followers: </span>
+                  <span className="secondary_title">1010</span>
                 </div>
               </div>
               <hr />

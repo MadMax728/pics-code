@@ -10,4 +10,8 @@ export {
   SideBarCampaignMenu
 } from "./menu";
 export { LeftSideBarMB, LeftSideBar } from "./left-bar";
-export { CampaignFilter, DashboardFilter } from "./filters";
+export {
+  CampaignCompanyFilter,
+  CampaignCreatorFilter,
+  DashboardFilter
+} from "./filters";

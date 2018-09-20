@@ -22,7 +22,7 @@ class RightSideBar extends Component {
         {/* ,,,,,, FavouriteCampaigns ...... */}
 
         <Route path={routes.ROOT_ROUTE} exact component={FavouriteCampaigns} />
-        <Route path={routes.USER_ROUTE} exact component={FavouriteCampaigns} />
+        <Route path={routes.USERS_ROUTE} exact component={FavouriteCampaigns} />
         <Route path={routes.PICS_ROUTE} exact component={FavouriteCampaigns} />
         <Route
           path={routes.PARTICIPANTS_ROUTE}
@@ -75,7 +75,7 @@ class RightSideBar extends Component {
         {/* ,,,,,, userLanguage ...... */}
 
         <Route path={routes.ROOT_ROUTE} exact render={this.userLanguage} />
-        <Route path={routes.USER_ROUTE} exact render={this.userLanguage} />
+        <Route path={routes.USERS_ROUTE} exact render={this.userLanguage} />
         <Route path={routes.PICS_ROUTE} exact render={this.userLanguage} />
         <Route
           path={routes.PARTICIPANTS_ROUTE}

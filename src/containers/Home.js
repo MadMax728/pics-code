@@ -93,7 +93,7 @@ class Home extends Component {
                     component={Participants}
                   />
 
-                  <Route exact path={routes.USER_ROUTE} component={Users} />
+                  <Route exact path={routes.USERS_ROUTE} component={Users} />
 
                   <Route exact path={routes.PICS_ROUTE} component={Pictures} />
 
