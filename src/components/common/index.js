@@ -1,12 +1,17 @@
-export { default as Languages } from "./Languages";
-export { default as About } from "./About";
-export { default as LeftSideBar } from "./LeftSideBar";
-export { default as RightSideBar } from "./RightSideBar";
-export { default as LeftSideBarMB } from "./LeftSideBarMB";
-export { default as TopbarInfo } from "./TopbarInfo";
+export { TopBarInfo, TopBarOtherInfo, TopBarOwnerInfo } from "./top-bar";
+export { Languages, RightAbout, RightSideBar } from "./right-bar";
+export { DashboardNav, CampaignNav } from "./nav-bar";
 export {
+  SideBarSetting,
+  SideBarOwnerMenu,
+  SideBarOtherMenu,
   SideBarMBMenuInformation,
-  SideBarMBMenuServices
-} from "./sidebar-mb-menu";
-export { SearchResult } from "./searchbar-result";
-export { SideBarSetting } from "./sidebar-setting";
+  SideBarMBMenuServices,
+  SideBarCampaignMenu
+} from "./menu";
+export { LeftSideBarMB, LeftSideBar } from "./left-bar";
+export {
+  CampaignCompanyFilter,
+  CampaignCreatorFilter,
+  DashboardFilter
+} from "./filters";

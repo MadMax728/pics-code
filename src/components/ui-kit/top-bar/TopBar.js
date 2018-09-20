@@ -1,0 +1,73 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import * as images from "../../../lib/constants/images";
+
+const TopBar = ({ items }) => {
+  return (
+    <div>
+      <div className="user_info">
+        <div className="user-image bg-white no-padding">
+          <img src={images.campaign1} width="100%" alt="profile" />
+        </div>
+        <div className="user-details no-padding-right padding-l-10">
+          <div className="bg-white padding-25 user_details">
+            <div className="user_name">{items.username}</div>
+
+            {items.private && <div />}
+
+            {items.settings && (
+              <div className="settings">
+                <img src={images.settings} alt="settings" />
+              </div>
+            )}
+
+            {items.more && (
+              <div className="settings">
+                <img src={images.settings} alt="settings" />
+              </div>
+            )}
+
+            <div className="clearfix" />
+            {items.slots.map((slot, index) => (
+              <div className={slot.className} key={index}>
+                <span className="size-20">{slot.val} </span>
+                <span>{slot.name}</span>
+                <div className="clearfix" />
+                <button
+                  className={slot.btnActiveClassName}
+                  onClick={slot.handeleEvent}
+                >
+                  {slot.btnText}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+TopBar.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      private: PropTypes.bool,
+      more: PropTypes.bool,
+      settings: PropTypes.bool,
+      slots: PropTypes.arrayOf(
+        PropTypes.shape({
+          name: PropTypes.string,
+          val: PropTypes.string,
+          className: PropTypes.string,
+          btnActiveClassName: PropTypes.string,
+          btnText: PropTypes.string,
+          handeleEvent: PropTypes.func
+        })
+      )
+    })
+  )
+};
+
+export default TopBar;

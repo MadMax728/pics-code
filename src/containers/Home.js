@@ -12,21 +12,26 @@ import {
 } from "../components/web/dashboard";
 import {
   UserProfile,
-  About,
   Privacy,
-  Information,
   EditProfile,
   BusinessProfile,
   BillsAndReceipts,
   DataDownload,
   SettingCampaign,
-  Ads,
-  NewsFeed,
-  Saved
+  Ads
 } from "../components/web/user";
 
-import { Campaign, Company, Creator } from "../components/web/campaigns";
-import { LeftSideBar, RightSideBar, TopbarInfo } from "../components/common";
+import { OtherNewsFeed, OtherAbout } from "../components/web/other";
+import { OwnerNewsFeed, OwnerAbout, OwnerSaved } from "../components/web/owner";
+
+import {
+  Campaign,
+  Company,
+  Creator,
+  Information,
+  Participant
+} from "../components/web/campaigns";
+import { LeftSideBar, RightSideBar, TopBarInfo } from "../components/common";
 
 class Home extends Component {
   getFilter(filterData) {
@@ -41,7 +46,7 @@ class Home extends Component {
         <section>
           <div className="container">
             <div className="row">
-              <TopbarInfo />
+              <TopBarInfo />
 
               <div className="left_menu_second no-padding">
                 <LeftSideBar getFilter={this.getFilter} />
@@ -58,10 +63,29 @@ class Home extends Component {
                   <Route
                     exact
                     path={routes.NEWS_FEED_ROUTE}
-                    component={NewsFeed}
+                    component={OwnerNewsFeed}
+                  />
+                  <Route
+                    exact
+                    path={routes.SAVED_ROUTE}
+                    component={OwnerSaved}
+                  />
+                  <Route
+                    exact
+                    path={routes.ABOUT_ROUTE}
+                    component={OwnerAbout}
                   />
 
-                  <Route exact path={routes.SAVED_ROUTE} component={Saved} />
+                  <Route
+                    exact
+                    path={routes.OTHER_NEWS_FEED_ROUTE}
+                    component={OtherNewsFeed}
+                  />
+                  <Route
+                    exact
+                    path={routes.OTHER_ABOUT_ROUTE}
+                    component={OtherAbout}
+                  />
 
                   <Route
                     exact
@@ -69,7 +93,7 @@ class Home extends Component {
                     component={Participants}
                   />
 
-                  <Route exact path={routes.USER_ROUTE} component={Users} />
+                  <Route exact path={routes.USERS_ROUTE} component={Users} />
 
                   <Route exact path={routes.PICS_ROUTE} component={Pictures} />
 
@@ -97,12 +121,17 @@ class Home extends Component {
                     path={routes.MY_PROFILE_ROUTE}
                     component={UserProfile}
                   />
-                  <Route exact path={routes.ABOUT_ROUTE} component={About} />
 
                   <Route
                     exact
-                    path={routes.INFORMATION_ROUTE}
+                    path={routes.CAMPAIGN_INFORMATION_ROUTE}
                     component={Information}
+                  />
+
+                  <Route
+                    exact
+                    path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
+                    component={Participant}
                   />
 
                   {/* -------- Settings Routes --------- */}

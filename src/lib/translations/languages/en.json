@@ -58,6 +58,14 @@
     "reset_filters": {
       "name": "Reset filters",
       "type": "button"
+    },
+    "gender": {
+      "name": "Gender",
+      "type": "radio"
+    },
+    "age": {
+      "name": "Age",
+      "type": "select"
     }
   },
 
@@ -89,6 +97,18 @@
     "feedback": "Feedback"
   },
 
+  "top_bar_info": {
+    "upload": "Upload",
+    "create_campaign": "Create Campaign",
+    "create_ad": "Create Ad",
+    "subscriber": "Subscriber",
+    "subscribed": "Subscribed",
+    "posts": "Posts",
+    "subscribe": "Subscribe",
+    "message": "Message",
+    "like_you": "Like You"
+  },
+
   "left_sidebar": {
     "news": "News",
     "explore": "Explore",
@@ -96,7 +116,8 @@
     "user": "User",
     "pics": "Pics",
     "company": "Company",
-    "creator": "Creator"
+    "creator": "Creator",
+    "information": "Information"
   },
 
   "left_sidebar_owner_menu": {
