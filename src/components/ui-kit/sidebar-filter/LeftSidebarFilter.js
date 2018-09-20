@@ -81,7 +81,8 @@ LeftSidebarFilter.propTypes = {
       items: PropTypes.any
     }).isRequired
   ).isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  filterApply: PropTypes.bool
 };
 
 export default LeftSidebarFilter;

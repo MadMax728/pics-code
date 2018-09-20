@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import { DashboardNav, CampaignNav } from "../../nav-bar";
-import { CampaignFilter, DashboardFilter } from "../../filters";
+import {
+  CampaignFilter,
+  DashboardFilter,
+  ParticipantsFilter
+} from "../../filters";
 
 import propTypes from "prop-types";
 import {
@@ -20,6 +24,11 @@ class LeftSideBar extends Component {
   handleCampaignFilter = () => {
     return <CampaignFilter handleApplyClick={this.props.getFilter} />;
   };
+
+  handleParticipantsFilter = () => {
+    return <ParticipantsFilter handleApplyClick={this.props.getFilter} />;
+  };
+
   render() {
     return (
       <div>
@@ -73,6 +82,12 @@ class LeftSideBar extends Component {
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact
           component={SideBarCampaignMenu}
+        />
+
+        <Route
+          path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
+          exact
+          component={this.handleParticipantsFilter}
         />
 
         {/* ...... Campaign Menu ...... */}
