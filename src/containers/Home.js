@@ -3,6 +3,9 @@ import * as routes from "../lib/constants/routes";
 import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
+
+import { Button } from "react-bootstrap";
+
 import {
   Landing,
   Users,
@@ -31,9 +34,29 @@ import {
   Information,
   Participant
 } from "../components/web/campaigns";
-import { LeftSideBar, RightSideBar, TopBarInfo } from "../components/common";
+import {
+  LeftSideBar,
+  RightSideBar,
+  TopBarInfo,
+  Modal
+} from "../components/common";
 
 class Home extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      modalShow: false
+    };
+  }
+
+  handleModalHide = () => {
+    this.setState({ modalShow: false });
+  };
+
+  handleModalShow = () => {
+    this.setState({ modalShow: true });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -42,8 +65,12 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header handleModalShow={this.handleModalShow} />
         <section>
+          <Modal
+            modalShow={this.state.modalShow}
+            handleModalHide={this.handleModalHide}
+          />
           <div className="container">
             <div className="row">
               <TopBarInfo />

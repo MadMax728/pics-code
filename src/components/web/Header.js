@@ -5,6 +5,8 @@ import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
+import NavItem from "react-bootstrap/lib/NavItem";
+import propTypes from "prop-types";
 
 import { Notifications } from "../web/dashboard";
 
@@ -49,6 +51,10 @@ export default class Header extends Component {
 
   handleNavClick = () => {
     this.toggleUserNav();
+  };
+
+  handleModalMessage = () => {
+    this.props.handleModalShow();
   };
 
   render() {
@@ -101,13 +107,15 @@ export default class Header extends Component {
                   >
                     <span>{Translations.navigation.campaign}</span>
                   </RouteNavItem>
-                  <RouteNavItem
-                    to={routes.MESSAGES_ROUTE}
+
+                  <NavItem
                     className={`menu_messages`}
-                    closeMenu={this.toggleNav}
+                    nocaret={"true"}
+                    onClick={this.handleModalMessage}
                   >
                     <span>{Translations.navigation.messages}</span>
-                  </RouteNavItem>
+                  </NavItem>
+
                   <NavDropdown
                     noCaret={true}
                     title={<span>{Translations.navigation.notifications}</span>}
@@ -133,3 +141,7 @@ export default class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  handleModalShow: propTypes.func
+};
