@@ -109,7 +109,7 @@ export default class Header extends Component {
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
                   <NavDropdown
-                    noCaret={true}
+                    noCaret
                     title={<span>{Translations.navigation.notifications}</span>}
                     id="basic-nav-dropdown"
                     className={`menu_notifications`}
