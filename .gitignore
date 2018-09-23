@@ -2,7 +2,6 @@
 .DS_Store
 
 # node.js stuff
-package-lock.json
 bin/
 build/
 node_modules/
@@ -11,7 +10,6 @@ yarn-debug.log
 yarn-error.log
 public/dist
 .vscode
-yarn.lock
 
 # ignore any file generated in the src/styles directory because sass is auto-generating it for us.
 src/styles/**/*.css

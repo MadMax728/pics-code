@@ -1,0 +1,11 @@
+version: "3"
+
+services:
+  picstgraph_web:
+    build: .
+    container_name: 'picstgraph_web'
+    restart: 'always'
+    command: 'npm run start'
+    ports:
+      - "8080:8080"
+    
