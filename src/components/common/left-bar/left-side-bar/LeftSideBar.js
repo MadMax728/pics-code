@@ -2,7 +2,12 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import { DashboardNav, CampaignNav } from "../../nav-bar";
-import { CampaignFilter, DashboardFilter } from "../../filters";
+import {
+  CampaignCompanyFilter,
+  CampaignCreatorFilter,
+  DashboardFilter,
+  ParticipantsFilter
+} from "../../filters";
 
 import propTypes from "prop-types";
 import {
@@ -17,14 +22,23 @@ class LeftSideBar extends Component {
     return <DashboardFilter handleApplyClick={this.props.getFilter} />;
   };
 
-  handleCampaignFilter = () => {
-    return <CampaignFilter handleApplyClick={this.props.getFilter} />;
+  handleCampaignCompanyFilter = () => {
+    return <CampaignCompanyFilter handleApplyClick={this.props.getFilter} />;
   };
+
+  handleCampaignCreatorFilter = () => {
+    return <CampaignCreatorFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleParticipantsFilter = () => {
+    return <ParticipantsFilter handleApplyClick={this.props.getFilter} />;
+  };
+
   render() {
     return (
       <div>
         <Route path={routes.ROOT_ROUTE} exact component={DashboardNav} />
-        <Route path={routes.CAMPAIGN_ROUTE} exact component={DashboardNav} />
+        <Route path={routes.CAMPAIGN_ROUTE} exact component={CampaignNav} />
         <Route path={routes.CREATOR_ROUTE} exact component={CampaignNav} />
         <Route path={routes.COMPANY_ROUTE} exact component={CampaignNav} />
         <Route path={routes.MY_PROFILE_ROUTE} exact component={DashboardNav} />
@@ -42,7 +56,7 @@ class LeftSideBar extends Component {
           component={DashboardNav}
         />
 
-        <Route path={routes.USER_ROUTE} exact component={DashboardNav} />
+        <Route path={routes.USERS_ROUTE} exact component={DashboardNav} />
         <Route path={routes.PICS_ROUTE} exact component={DashboardNav} />
         <Route path={routes.NEWS_ROUTE} exact component={DashboardNav} />
 
@@ -55,9 +69,15 @@ class LeftSideBar extends Component {
         />
 
         <Route
+          path={routes.COMPANY_ROUTE}
+          exact
+          component={this.handleCampaignCompanyFilter}
+        />
+
+        <Route
           path={routes.CREATOR_ROUTE}
           exact
-          component={this.handleCampaignFilter}
+          component={this.handleCampaignCreatorFilter}
         />
         {/* ....... Filters ....... */}
 
@@ -73,6 +93,12 @@ class LeftSideBar extends Component {
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact
           component={SideBarCampaignMenu}
+        />
+
+        <Route
+          path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
+          exact
+          component={this.handleParticipantsFilter}
         />
 
         {/* ...... Campaign Menu ...... */}

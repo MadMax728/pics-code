@@ -58,6 +58,14 @@
     "reset_filters": {
       "name": "Reset filters",
       "type": "button"
+    },
+    "gender": {
+      "name": "Gender",
+      "type": "radio"
+    },
+    "age": {
+      "name": "Age",
+      "type": "select"
     }
   },
 

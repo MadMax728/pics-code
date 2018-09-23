@@ -23,7 +23,7 @@ const Links = [
     text: Translations.left_sidebar.participants
   },
   {
-    to: routes.USER_ROUTE,
+    to: routes.USERS_ROUTE,
     className: "menu_user secondary_title",
     activeClassName: "active",
     text: Translations.left_sidebar.user

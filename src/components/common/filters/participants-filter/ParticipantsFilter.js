@@ -8,7 +8,7 @@ const staticData = [
   { name: "option2", className: "", value: "option2" }
 ];
 
-const contentItems = [
+const genderItems = [
   {
     name: "All",
     className: "radio-btn lbl-margin",
@@ -16,37 +16,16 @@ const contentItems = [
     value: "all"
   },
   {
-    name: "Images",
+    name: "Male",
     className: "radio-btn lbl-margin",
     checked: false,
-    value: "images"
+    value: "male"
   },
   {
-    name: "Videos",
+    name: "Female",
     className: "radio-btn",
     checked: false,
-    value: "videos"
-  }
-];
-
-const procedureItems = [
-  {
-    name: "All",
-    className: "radio-btn lbl-margin",
-    checked: true,
-    value: "all"
-  },
-  {
-    name: "Public",
-    className: "radio-btn lbl-margin",
-    checked: false,
-    value: "public"
-  },
-  {
-    name: "Anonymous",
-    className: "radio-btn",
-    checked: false,
-    value: "anonymous"
+    value: "female"
   }
 ];
 
@@ -65,15 +44,11 @@ const relevanceItems = [
   }
 ];
 
-const targetGroupOptions = staticData;
-
 const radiusItems = staticData;
 
 const categoryItems = staticData;
 
-const offerItems = staticData;
-
-const inquiryItems = staticData;
+const ageItems = staticData;
 
 const Filters = [
   {
@@ -101,50 +76,20 @@ const Filters = [
     items: categoryItems
   },
   {
-    name: Translations.left_sidebar_filter.procedure.name,
+    name: Translations.left_sidebar_filter.gender.name,
     className: "filter-title",
-    type: Translations.left_sidebar_filter.procedure.type,
-    items: procedureItems
+    type: Translations.left_sidebar_filter.gender.type,
+    items: genderItems
   },
   {
-    name: Translations.left_sidebar_filter.content.name,
+    name: Translations.left_sidebar_filter.age.name,
     className: "filter-title",
-    type: Translations.left_sidebar_filter.content.type,
-    items: contentItems
-  },
-  {
-    name: Translations.left_sidebar_filter.target_group.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.target_group.type,
-    items: targetGroupOptions
-  },
-  {
-    name: Translations.left_sidebar_filter.offer.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.offer.type,
-    items: offerItems
-  },
-  {
-    name: Translations.left_sidebar_filter.offer_tag.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.offer_tag.type,
-    items: []
-  },
-  {
-    name: Translations.left_sidebar_filter.inquiry.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.inquiry.type,
-    items: inquiryItems
-  },
-  {
-    name: Translations.left_sidebar_filter.inquiry_tag.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.inquiry_tag.type,
-    items: []
+    type: Translations.left_sidebar_filter.age.type,
+    items: ageItems
   }
 ];
 
-class CampaignFilter extends Component {
+class ParticipantsFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -164,6 +109,16 @@ class CampaignFilter extends Component {
 
   handleOnChange = filterData => {
     this.setState({ filData: filterData });
+  };
+
+  handleFilter = () => {
+    return (
+      <LeftSidebarFilter
+        filters={Filters}
+        onChange={this.handleOnChange}
+        filterApply={this.state.filterApply}
+      />
+    );
   };
 
   render() {
@@ -193,8 +148,8 @@ class CampaignFilter extends Component {
   }
 }
 
-CampaignFilter.propTypes = {
+ParticipantsFilter.propTypes = {
   handleApplyClick: propTypes.func
 };
 
-export default CampaignFilter;
+export default ParticipantsFilter;
