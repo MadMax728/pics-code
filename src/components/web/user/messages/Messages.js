@@ -6,12 +6,44 @@ class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: this.props.messages
+      propsMsg: this.props.messages.messages,
+      messages: this.props.messages.messages,
+      activeIndex: "1",
+      chatData: []
     };
   }
 
+  componentWillMount() {
+    let messages = this.state.propsMsg;
+    messages = messages.filter(msg => msg.msg_type === "Subscribed");
+    this.setState({ messages });
+
+    let chatData = this.state.propsMsg;
+    chatData = chatData.filter(msg => msg.userName === "Sagar");
+    this.setState({ chatData });
+  }
+
+  handleTypeClick = e => {
+    this.setState({ activeIndex: e.currentTarget.dataset.id });
+    let messages = this.state.propsMsg;
+    messages = messages.filter(
+      msg => msg.msg_type === e.currentTarget.dataset.value
+    );
+    this.setState({ messages });
+  };
+
+  handleChatClick = e => {
+    let chatData = this.state.propsMsg;
+    chatData = chatData.filter(
+      msg => msg.userName === e.currentTarget.dataset.value
+    );
+    this.setState({ chatData });
+  };
+
   render() {
-    const { messages } = this.state;
+    const { messages, chatData } = this.state;
+    console.log(chatData);
+
     return (
       <div className="modal-content">
         <div className="modal-body no-padding">
@@ -23,33 +55,72 @@ class Messages extends Component {
               </div>
             </div>
             <div className="messages-menu">
-              <div className="menu-item">
+              <div
+                className={
+                  this.state.activeIndex === "1"
+                    ? "menu-item active"
+                    : "menu-item"
+                }
+                onClick={this.handleTypeClick}
+                data-id="1"
+                data-value="Subscribed"
+              >
                 <img src={images.grey_person} alt={"gray_person1"} />
                 <br />
                 Subscribed
               </div>
-              <div className="menu-item">
+              <div
+                className={
+                  this.state.activeIndex === "2"
+                    ? "menu-item active "
+                    : "menu-item"
+                }
+                onClick={this.handleTypeClick}
+                data-id="2"
+                data-value="Unknown"
+              >
                 <img src={images.grey_person} alt={"grey_person2"} />
                 <br />
                 Unknown
               </div>
-              <div className="menu-item">
+              <div
+                className={
+                  this.state.activeIndex === "3"
+                    ? "menu-item active"
+                    : "menu-item"
+                }
+                onClick={this.handleTypeClick}
+                data-id="3"
+                data-value="Like you"
+              >
                 <img src={images.grey_person} alt={"gray_person3"} />
                 <br />
                 Like you
               </div>
-              <div className="menu-item">
+              <div
+                className={
+                  this.state.activeIndex === "4"
+                    ? "menu-item active"
+                    : "menu-item"
+                }
+                onClick={this.handleTypeClick}
+                data-id="4"
+                data-value="Companies"
+              >
                 <img src={images.grey_person} alt={"grey_person4"} />
                 <br />
                 Companies
               </div>
             </div>
             <div className="user-chat-wrapper">
-              {messages.messages.map((msg, index) => {
+              {messages.map((msg, index) => {
                 return (
                   <div
                     className={!msg.read ? "chat-wrapper new" : "chat-wrapper"}
-                    key={msg.index}
+                    key={index}
+                    data-id={""}
+                    data-value={msg.userName}
+                    onClick={this.handleChatClick}
                   >
                     <div className="user-img">
                       <img src={images.image} alt={msg.index} />
@@ -70,34 +141,34 @@ class Messages extends Component {
               <div className="username-wrapper">
                 <span className="username">User name</span>
                 <br />
-                <span className="name">Name</span>
+                <span className="name">{chatData[0].userName}</span>
               </div>
               <div className="delete">
                 <img src={images.bin} alt={"bin1"} />
               </div>
             </div>
+
             <div className="active-chat">
-              <div className="date">Sunday</div>
-              <div className="reply">
-                This text is an example. This text is an example.
-                <span className="time">09:45</span>
-              </div>
-              <div className="response">
-                This text is an example. This text is an example. This text is
-                an example. This text is an example.
-                <span className="time">09:45</span>
-              </div>
-              <div className="date">Monday</div>
-              <div className="reply">
-                This text is an example. This text is an example.
-                <span className="time">09:45</span>
-              </div>
-              <div className="response">
-                This text is an example. This text is an example. This text is
-                an example. This text is an example.
-                <span className="time">09:45</span>
-              </div>
+              {chatData[0].msg_details.map((cdmsg, index) => {
+                return (
+                  <div key={index}>
+                    {cdmsg.me && (
+                      <div className="reply">
+                        {cdmsg.msg}
+                        <span className="time">{cdmsg.time}</span>
+                      </div>
+                    )}
+                    {!cdmsg.me && (
+                      <div className="response">
+                        {cdmsg.msg}
+                        <span className="time">{cdmsg.time}</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
+
             <div className="write-chat">
               <textarea placeholder="Write a message… " />
               <img src={images.emoji} alt={"emoji1"} />
@@ -117,17 +188,17 @@ Messages.propTypes = {
     headerName: propTypes.string,
     closeBtn: propTypes.bool,
     title: propTypes.string,
-    msg_type: propTypes.string,
     messages: propTypes.arrayOf(
       propTypes.shape({
         userName: propTypes.string,
         read: propTypes.bool,
+        msg_type: propTypes.string,
         last_msg_detail: propTypes.shape({
           msg: propTypes.string,
           time: propTypes.string
         }),
         msg_details: propTypes.arrayOf(
-          propTypes.arrayOf({
+          propTypes.shape({
             msg: propTypes.string,
             time: propTypes.string,
             me: propTypes.bool

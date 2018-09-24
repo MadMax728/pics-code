@@ -4,8 +4,6 @@ import { Switch, Route } from "react-router-dom";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
 
-import { Button } from "react-bootstrap";
-
 import {
   Landing,
   Users,
