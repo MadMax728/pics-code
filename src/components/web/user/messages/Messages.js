@@ -56,6 +56,9 @@ class Messages extends Component {
             </div>
             <div className="messages-menu">
               <div
+                role="button"
+                tabIndex="0"
+                onKeyDown={""}
                 className={
                   this.state.activeIndex === "1"
                     ? "menu-item active"
@@ -70,13 +73,16 @@ class Messages extends Component {
                 Subscribed
               </div>
               <div
+                role="button"
+                tabIndex="0"
+                onKeyDown={""}
                 className={
                   this.state.activeIndex === "2"
                     ? "menu-item active "
                     : "menu-item"
                 }
                 onClick={this.handleTypeClick}
-                data-id="2"
+                data-id="0"
                 data-value="Unknown"
               >
                 <img src={images.grey_person} alt={"grey_person2"} />
@@ -84,6 +90,9 @@ class Messages extends Component {
                 Unknown
               </div>
               <div
+                role="button"
+                tabIndex="-1"
+                onKeyDown={""}
                 className={
                   this.state.activeIndex === "3"
                     ? "menu-item active"
@@ -98,6 +107,9 @@ class Messages extends Component {
                 Like you
               </div>
               <div
+                role="button"
+                tabIndex="-1"
+                onKeyDown={""}
                 className={
                   this.state.activeIndex === "4"
                     ? "menu-item active"
@@ -116,11 +128,14 @@ class Messages extends Component {
               {messages.map((msg, index) => {
                 return (
                   <div
+                    role="button"
+                    tabIndex={index}
                     className={!msg.read ? "chat-wrapper new" : "chat-wrapper"}
-                    key={index}
+                    key={msg.userName}
                     data-id={""}
                     data-value={msg.userName}
                     onClick={this.handleChatClick}
+                    onKeyDown={""}
                   >
                     <div className="user-img">
                       <img src={images.image} alt={msg.index} />
@@ -181,8 +196,6 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
-  modalShow: propTypes.bool,
-  handleModalHide: propTypes.func,
   messages: propTypes.shape({
     header: propTypes.bool,
     headerName: propTypes.string,

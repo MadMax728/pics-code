@@ -33,8 +33,8 @@ const TopBar = ({ items }) => {
             )}
 
             <div className="clearfix" />
-            {items.slots.map((slot, index) => (
-              <div className={slot.className} key={index}>
+            {items.slots.map(slot => (
+              <div className={slot.className} key={slot.name}>
                 <span className="size-20">{slot.val} </span>
                 <span>{slot.name}</span>
                 <div className="clearfix" />
