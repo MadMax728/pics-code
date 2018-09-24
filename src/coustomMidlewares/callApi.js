@@ -4,7 +4,7 @@ export const callApi = store => next => action => {
     const [requestType, successType, failureType] = types;
     // if access_token is there check for access token else if login actions i.e without auth perform with access token
     if (action.auth) {
-      //const {auth_token} = store();
+      // const { auth_token } = store();
       // then perform auth actions
     }
 

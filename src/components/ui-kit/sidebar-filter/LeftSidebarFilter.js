@@ -25,7 +25,7 @@ class LeftSidebarFilter extends Component {
       filterData.push(filter.values);
     }
 
-    this.setState({ filterData: filterData });
+    this.setState({ filterData });
 
     // calling function
     this.props.onChange(filterData);
