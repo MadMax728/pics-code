@@ -71,7 +71,7 @@ class Home extends Component {
           />
           <div className="container">
             <div className="row">
-              <TopBarInfo />
+              <TopBarInfo handleModalShow={this.handleModalShow} />
 
               <div className="left_menu_second no-padding">
                 <LeftSideBar getFilter={this.getFilter} />

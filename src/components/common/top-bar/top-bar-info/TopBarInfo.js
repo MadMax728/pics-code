@@ -3,24 +3,37 @@ import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import { TopBarOwnerInfo } from "../top-bar-owner-info";
 import { TopBarOtherInfo } from "../top-bar-other-info";
+import propTypes from "prop-types";
 
 class TopBarInfo extends Component {
+  TopBarOwnerInfo = () => {
+    return <TopBarOwnerInfo handleModalShow={this.props.handleModalShow} />;
+  };
+
   render() {
     return (
       <div>
         <Route
           exact
           path={routes.MY_PROFILE_ROUTE}
-          component={TopBarOwnerInfo}
+          component={this.TopBarOwnerInfo}
         />
 
         <Route
           exact
           path={routes.NEWS_FEED_ROUTE}
-          component={TopBarOwnerInfo}
+          component={this.TopBarOwnerInfo}
         />
-        <Route exact path={routes.ABOUT_ROUTE} component={TopBarOwnerInfo} />
-        <Route exact path={routes.SAVED_ROUTE} component={TopBarOwnerInfo} />
+        <Route
+          exact
+          path={routes.ABOUT_ROUTE}
+          component={this.TopBarOwnerInfo}
+        />
+        <Route
+          exact
+          path={routes.SAVED_ROUTE}
+          component={this.TopBarOwnerInfo}
+        />
 
         <Route
           exact
@@ -36,5 +49,9 @@ class TopBarInfo extends Component {
     );
   }
 }
+
+TopBarInfo.propTypes = {
+  handleModalShow: propTypes.func
+};
 
 export default TopBarInfo;

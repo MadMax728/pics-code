@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import { MessageModal } from "../message-modal";
+import { UploadModal } from "../upload-modal";
 import propTypes from "prop-types";
 
 class Modal extends Component {
@@ -11,9 +12,18 @@ class Modal extends Component {
     this.state = {};
   }
 
-  handleMessageModal = () => {
+  handleModalMessage = () => {
     return (
       <MessageModal
+        modalShow={this.props.modalShow}
+        handleModalHide={this.props.handleModalHide}
+      />
+    );
+  };
+
+  handleModalUpload = () => {
+    return (
+      <UploadModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
       />
@@ -23,7 +33,8 @@ class Modal extends Component {
   render() {
     return (
       <div>
-        <Route path={routes.ROOT_ROUTE} component={this.handleMessageModal} />
+        <Route path={routes.ROOT_ROUTE} component={this.handleModalMessage} />
+        <Route path={routes.ROOT_ROUTE} component={this.handleModalUpload} />
       </div>
     );
   }

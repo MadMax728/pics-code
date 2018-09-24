@@ -1,13 +1,533 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import propTypes from "prop-types";
+import { Translations } from "../../../../lib/translations";
 
 class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      propsMsg: this.props.messages.messages,
-      messages: this.props.messages.messages,
+      title: "Messages",
+      propsMsg: [
+        {
+          userName: "Sagar",
+          read: false,
+          msg_type: Translations.message_module.type.subscribed,
+          last_msg_detail: {
+            msg: "This thfghfg is an example. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This text is hfghfan example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an examhfghfgple. This text is an example. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This text hfghfghfgis text is an example.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text is an exampgjfdjghfjjjhg. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Arpana",
+          read: false,
+          msg_type: Translations.message_module.type.subscribed,
+          last_msg_detail: {
+            msg: "This text jfghjghjkfghjgmple. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This jdfgjfghjan example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an exampjgdhjfghjexample. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This jgdhyjkmfgjample.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text jgdhyjmnfghjghjnexample. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Sachin",
+          read: true,
+          msg_type: Translations.message_module.type.unknown,
+          last_msg_detail: {
+            msg: "This text jdghyjmnghmhj. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "Thisjdghjkmghfjghj example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg: "This text ijghjghfjghfjghjple. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This jghfjgfjfghjle.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This text ijghjghjghe. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Ashwini",
+          read: true,
+          msg_type: Translations.message_module.type.unknown,
+          last_msg_detail: {
+            msg: "This text is anjghjfghjghhis text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This text is jghfjgfmple.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg: "This text is an examkhjkhjkhjkThis text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This texjghyjkgjkhgmple.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This text isjfghjfghjghjghfje. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Mahesh",
+          read: true,
+          msg_type: Translations.message_module.type.like_you,
+          last_msg_detail: {
+            msg: "This text is anjghfjghjghe. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This text isjgfhjjghfn example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is anjghfjfghjghjexample. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "Thisjfghjfghjfghjan example.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text ijfghjfghjghfjgfhjfghple. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Rakesh",
+          read: true,
+          msg_type: Translations.message_module.type.like_you,
+          last_msg_detail: {
+            msg: "This text is ankghfkhjhjgkghj. This text is an example.",
+            time: "09:50"
+          },
+          msg_details: [
+            {
+              msg: "Thijghfghjghfjfghjfgample.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an example.jdghjfghjfghjfghjf. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This tjgfhjfghjghjkghkljdfgjample.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This tjfghjghfjghfjfghjfghle. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Ramesh",
+          read: true,
+          msg_type: Translations.message_module.type.companies,
+          last_msg_detail: {
+            msg: "This text is an jghfjghfkhjfgkfhis text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This tfghjkfghjdfghjfghample.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg: "This text is ajghfjhfgjkfghjkfs text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This texghyjfghjfghjfghjgple.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This text jghfjfghjfghjfghjfgh text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Raghu",
+          read: true,
+          msg_type: Translations.message_module.type.companies,
+          last_msg_detail: {
+            msg:
+              "This text is an example. This text is an example. This text is an example. This text is an example.",
+            time: "19:45"
+          },
+          msg_details: [
+            {
+              msg: "This text is an example. This text is an example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an example. This text is an example. This text is an example. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This text is an example. This text is an example.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text is an example. This text is an example. This text is an example. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        }
+      ],
+      messages: [
+        {
+          userName: "Sagar",
+          read: false,
+          msg_type: Translations.message_module.type.subscribed,
+          last_msg_detail: {
+            msg: "This thfghfg is an example. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This text is hfghfan example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an examhfghfgple. This text is an example. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This text hfghfghfgis text is an example.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text is an exampgjfdjghfjjjhg. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Arpana",
+          read: false,
+          msg_type: Translations.message_module.type.subscribed,
+          last_msg_detail: {
+            msg: "This text jfghjghjkfghjgmple. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This jdfgjfghjan example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an exampjgdhjfghjexample. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This jgdhyjkmfgjample.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text jgdhyjmnfghjghjnexample. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Sachin",
+          read: true,
+          msg_type: Translations.message_module.type.unknown,
+          last_msg_detail: {
+            msg: "This text jdghyjmnghmhj. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "Thisjdghjkmghfjghj example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg: "This text ijghjghfjghfjghjple. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This jghfjgfjfghjle.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This text ijghjghjghe. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Ashwini",
+          read: true,
+          msg_type: Translations.message_module.type.unknown,
+          last_msg_detail: {
+            msg: "This text is anjghjfghjghhis text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This text is jghfjgfmple.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg: "This text is an examkhjkhjkhjkThis text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This texjghyjkgjkhgmple.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This text isjfghjfghjghjghfje. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Mahesh",
+          read: true,
+          msg_type: Translations.message_module.type.like_you,
+          last_msg_detail: {
+            msg: "This text is anjghfjghjghe. This text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This text isjgfhjjghfn example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is anjghfjfghjghjexample. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "Thisjfghjfghjfghjan example.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text ijfghjfghjghfjgfhjfghple. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Rakesh",
+          read: true,
+          msg_type: Translations.message_module.type.like_you,
+          last_msg_detail: {
+            msg: "This text is ankghfkhjhjgkghj. This text is an example.",
+            time: "09:50"
+          },
+          msg_details: [
+            {
+              msg: "Thijghfghjghfjfghjfgample.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an example.jdghjfghjfghjfghjf. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This tjgfhjfghjghjkghkljdfgjample.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This tjfghjghfjghfjfghjfghle. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Ramesh",
+          read: true,
+          msg_type: Translations.message_module.type.companies,
+          last_msg_detail: {
+            msg: "This text is an jghfjghfkhjfgkfhis text is an example.",
+            time: "09:45"
+          },
+          msg_details: [
+            {
+              msg: "This tfghjkfghjdfghjfghample.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg: "This text is ajghfjhfgjkfghjkfs text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This texghyjfghjfghjfghjgple.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg: "This text jghfjfghjfghjfghjfgh text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        },
+        {
+          userName: "Raghu",
+          read: true,
+          msg_type: Translations.message_module.type.companies,
+          last_msg_detail: {
+            msg:
+              "This text is an example. This text is an example. This text is an example. This text is an example.",
+            time: "19:45"
+          },
+          msg_details: [
+            {
+              msg: "This text is an example. This text is an example.",
+              time: "09:45",
+              me: true
+            },
+            {
+              msg:
+                "This text is an example. This text is an example. This text is an example. This text is an example.",
+              time: "09:47",
+              me: false
+            },
+            {
+              msg: "This text is an example. This text is an example.",
+              time: "09:50",
+              me: true
+            },
+            {
+              msg:
+                "This text is an example. This text is an example. This text is an example. This text is an example.",
+              time: "09:52",
+              me: false
+            }
+          ]
+        }
+      ],
       activeIndex: "1",
       chatData: []
     };
@@ -40,16 +560,17 @@ class Messages extends Component {
     this.setState({ chatData });
   };
 
+  handleOnKeyDown = () => {};
+
   render() {
     const { messages, chatData } = this.state;
-    console.log(chatData);
 
     return (
       <div className="modal-content">
         <div className="modal-body no-padding">
           <div className="messages-left">
             <div className="title-wrapper">
-              <div className="modal-title">{messages.title}</div>
+              <div className="modal-title">{this.state.title}</div>
               <div className="edit">
                 <img src={images.edit} alt={"edit"} />
               </div>
@@ -58,7 +579,7 @@ class Messages extends Component {
               <div
                 role="button"
                 tabIndex="0"
-                onKeyDown={""}
+                onKeyDown={this.handleOnKeyDown}
                 className={
                   this.state.activeIndex === "1"
                     ? "menu-item active"
@@ -75,7 +596,7 @@ class Messages extends Component {
               <div
                 role="button"
                 tabIndex="0"
-                onKeyDown={""}
+                onKeyDown={this.handleOnKeyDown}
                 className={
                   this.state.activeIndex === "2"
                     ? "menu-item active "
@@ -92,7 +613,7 @@ class Messages extends Component {
               <div
                 role="button"
                 tabIndex="-1"
-                onKeyDown={""}
+                onKeyDown={this.handleOnKeyDown}
                 className={
                   this.state.activeIndex === "3"
                     ? "menu-item active"
@@ -109,7 +630,7 @@ class Messages extends Component {
               <div
                 role="button"
                 tabIndex="-1"
-                onKeyDown={""}
+                onKeyDown={this.handleOnKeyDown}
                 className={
                   this.state.activeIndex === "4"
                     ? "menu-item active"
@@ -135,7 +656,7 @@ class Messages extends Component {
                     data-id={""}
                     data-value={msg.userName}
                     onClick={this.handleChatClick}
-                    onKeyDown={""}
+                    onKeyDown={this.handleOnKeyDown}
                   >
                     <div className="user-img">
                       <img src={images.image} alt={msg.index} />
