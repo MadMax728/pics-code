@@ -1,7 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import * as images from "../../../lib/constants/images";
+import * as routes from "../../../lib/constants/routes";
 
 const TopBar = ({ items }) => {
   return (
@@ -18,7 +20,9 @@ const TopBar = ({ items }) => {
 
             {items.settings && (
               <div className="settings">
-                <img src={images.settings} alt="settings" />
+                <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+                  <img src={images.settings} alt="settings" />
+                </Link>
               </div>
             )}
 
