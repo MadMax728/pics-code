@@ -10,6 +10,7 @@ export { Verification } from "./verification";
 export { About } from "./about";
 export { NewsFeed } from "./news-feed";
 export { Saved } from "./saved";
+export { Messages } from "./messages";
 export {
   Privacy,
   BusinessProfile,

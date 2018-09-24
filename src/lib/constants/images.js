@@ -96,3 +96,8 @@ export const green_tick = `${
   process.env.REACT_APP_CDN_URL
 }/images/green-tick.svg`;
 export const cross = `${process.env.REACT_APP_CDN_URL}/images/cross.svg`;
+export const edit = `${process.env.REACT_APP_CDN_URL}/images/edit.svg`;
+export const grey_person = `${
+  process.env.REACT_APP_CDN_URL
+}/images/grey_person.svg`;
+export const bin = `${process.env.REACT_APP_CDN_URL}/images/bin.svg`;

@@ -15,3 +15,5 @@ export {
   CampaignCreatorFilter,
   DashboardFilter
 } from "./filters";
+
+export { Modal } from "./modals";
