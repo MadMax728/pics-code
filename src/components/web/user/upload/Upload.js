@@ -24,11 +24,11 @@ class Upload extends Component {
           </div>
           <form>
             <div className="form-group">
-              <label>Add Location</label>
+              <label htmlFor="Location">Add Location</label>
               <input type="text" name="location" />
             </div>
             <div className="form-group">
-              <label>Add Category</label>
+              <label htmlFor="Category">Add Category</label>
               <select>
                 <option>Category 1</option>
                 <option>Category 2</option>
@@ -37,7 +37,7 @@ class Upload extends Component {
               </select>
             </div>
             <div className="form-group no-margin">
-              <label>Add description</label>
+              <label htmlFor="description">Add description</label>
               <textarea className="form-control" />
             </div>
           </form>
