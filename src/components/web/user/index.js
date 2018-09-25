@@ -11,7 +11,8 @@ export { About } from "./about";
 export { NewsFeed } from "./news-feed";
 export { Saved } from "./saved";
 export { Messages } from "./messages";
-export { Upload } from "./upload";
+export { Upload, UploadHeader } from "./upload";
+export { CreateAds, CreateAdsHeader } from "./create-ads";
 export {
   Privacy,
   BusinessProfile,

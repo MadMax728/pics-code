@@ -12,6 +12,7 @@ class MessageModal extends Component {
   render() {
     return (
       <CustomBootstrapModal
+        modalClassName={"modal fade messages-modal"}
         header={false}
         footer={false}
         modalShow={this.props.modalShow}

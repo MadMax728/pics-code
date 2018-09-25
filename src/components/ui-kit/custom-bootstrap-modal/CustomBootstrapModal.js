@@ -11,7 +11,8 @@ const propTypes = {
   handleModalHide: PropTypes.func.isRequired,
   header: PropTypes.bool.isRequired,
   footer: PropTypes.bool.isRequired,
-  closeBtn: PropTypes.bool.isRequired
+  closeBtn: PropTypes.bool.isRequired,
+  modalClassName: PropTypes.string.isRequired
 };
 
 const CustomBootstrapModal = ({
@@ -22,14 +23,15 @@ const CustomBootstrapModal = ({
   handleModalHide,
   header,
   footer,
-  closeBtn
+  closeBtn,
+  modalClassName
 }) => {
   return (
     <div className="custom-modal">
       <Modal
         show={modalShow}
         onHide={handleModalHide}
-        className="modal fade messages-modal"
+        className={modalClassName}
       >
         {closeBtn && (
           <button onClick={handleModalHide} className={"closeBtn"}>

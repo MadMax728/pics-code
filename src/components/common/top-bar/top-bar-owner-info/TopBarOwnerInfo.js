@@ -17,11 +17,11 @@ class TopBarOwnerInfo extends Component {
   };
 
   handeleCreateCampaign = () => {
-    this.props.handleModalShow(modalType.ads);
+    this.props.handleModalShow(modalType.campaign);
   };
 
   handeleCreateAd = () => {
-    this.props.handleModalShow(modalType.campaign);
+    this.props.handleModalShow(modalType.ads);
   };
 
   componentWillMount() {

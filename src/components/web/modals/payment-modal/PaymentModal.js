@@ -11,6 +11,7 @@ class PaymentModal extends Component {
   render() {
     return (
       <CustomBootstrapModal
+        modalClassName={""}
         header={false}
         footer={false}
         closeBtn={false}
