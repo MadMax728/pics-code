@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import NavItem from "react-bootstrap/lib/NavItem";
 import propTypes from "prop-types";
-
 import { Notifications } from "../web/dashboard";
+import { modalType } from "../../lib/constants/enumerations";
 
 export default class Header extends Component {
   constructor(props) {
@@ -54,7 +54,7 @@ export default class Header extends Component {
   };
 
   handleModalMessage = () => {
-    this.props.handleModalShow();
+    this.props.handleModalShow(modalType.messages);
   };
 
   render() {

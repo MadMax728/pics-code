@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { TopBar } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import propTypes from "prop-types";
+import { modalType } from "../../../../lib/constants/enumerations";
 
 class TopBarOwnerInfo extends Component {
   constructor(props) {
@@ -12,15 +13,15 @@ class TopBarOwnerInfo extends Component {
   }
 
   handeleUpload = () => {
-    this.props.handleModalShow();
+    this.props.handleModalShow(modalType.upload);
   };
 
   handeleCreateCampaign = () => {
-    console.log("handeleCreateCampaign clicked");
+    this.props.handleModalShow(modalType.ads);
   };
 
   handeleCreateAd = () => {
-    console.log("handeleCreateAd clicked");
+    this.props.handleModalShow(modalType.campaign);
   };
 
   componentWillMount() {

@@ -36,14 +36,15 @@ import {
   LeftSideBar,
   RightSideBar,
   TopBarInfo,
-  Modal
+  CustomModal
 } from "../components/common";
 
 class Home extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      modalShow: false
+      modalShow: false,
+      modalType: ""
     };
   }
 
@@ -51,8 +52,8 @@ class Home extends Component {
     this.setState({ modalShow: false });
   };
 
-  handleModalShow = () => {
-    this.setState({ modalShow: true });
+  handleModalShow = e => {
+    this.setState({ modalShow: true, modalType: e });
   };
 
   getFilter(filterData) {
@@ -65,9 +66,10 @@ class Home extends Component {
       <div>
         <Header handleModalShow={this.handleModalShow} />
         <section>
-          <Modal
+          <CustomModal
             modalShow={this.state.modalShow}
             handleModalHide={this.handleModalHide}
+            modalType={this.state.modalType}
           />
           <div className="container">
             <div className="row">

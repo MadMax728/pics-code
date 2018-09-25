@@ -16,4 +16,4 @@ export {
   DashboardFilter
 } from "./filters";
 
-export { Modal } from "./modals";
+export { CustomModal } from "./custom-modal";
