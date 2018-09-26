@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
+import { Link } from "react-router-dom";
 
 const Feed = ({ campaign }) => {
   return (
@@ -10,13 +11,15 @@ const Feed = ({ campaign }) => {
       <div className="feed_content">
         {campaign &&
           campaign.image && (
-            <div className="feed_image">
-              <div className="embed-responsive embed-responsive-16by9">
-                <div className="img-responsive embed-responsive-item">
-                  <img src={campaign.image} alt="altmage" />
+            <Link to={"/campaign/" + campaign.id + "/information"}>
+              <div className="feed_image">
+                <div className="embed-responsive embed-responsive-16by9">
+                  <div className="img-responsive embed-responsive-item">
+                    <img src={campaign.image} alt="altmage" />
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           )}
         {campaign &&
           campaign.desc && (

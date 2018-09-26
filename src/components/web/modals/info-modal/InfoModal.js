@@ -29,9 +29,9 @@ class InfoModal extends Component {
         modalClassName={"modal fade create-ad-modal"}
         header={false}
         footer={false}
-        modalShow={this.props.modalInfoShow}
-        closeBtn={false}
-        handleModalHide={this.props.handleModalInfoHide}
+        modalShow={this.props.modalShow}
+        closeBtn={true}
+        handleModalHide={this.props.handleModalHide}
         modalBodyContent={<Info />}
       />
     );
@@ -39,8 +39,8 @@ class InfoModal extends Component {
 }
 
 InfoModal.propTypes = {
-  modalInfoShow: propTypes.bool,
-  handleModalInfoHide: propTypes.func
+  modalShow: propTypes.bool,
+  handleModalHide: propTypes.func
 };
 
 export default InfoModal;

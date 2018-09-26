@@ -10,9 +10,11 @@ class StepOne extends Component {
 
   render() {
     return (
-      <div>
-        <div>Your ad is pending review whitin the next 48 hours.</div>
-        <div>
+      <div className={"modal-body"}>
+        <div className="col-sm-12">
+          Your ad is pending review whitin the next 48 hours.
+        </div>
+        <div className="col-sm-12">
           <Button className="filled_button">Continue</Button>
         </div>
       </div>

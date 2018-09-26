@@ -7,7 +7,7 @@ class PaymentModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      stepIndex: 2
+      stepIndex: 0
     };
   }
 
