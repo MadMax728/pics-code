@@ -62,7 +62,6 @@ class StepOne extends Component {
                     id="male-female"
                     name="target"
                     className="black_button"
-                    checked=""
                   />
                   <label htmlFor="male-female">Male & Female</label>
                 </li>

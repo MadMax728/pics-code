@@ -20,7 +20,11 @@ class CreateAdsHeader extends Component {
   };
 
   handleContinue = () => {
-    console.log("data saved code");
+    if (this.props.stepIndex < 1) {
+      this.props.handleNext();
+    } else {
+      console.log("data saved code");
+    }
   };
 
   render() {
@@ -37,12 +41,7 @@ class CreateAdsHeader extends Component {
               Back
             </button>
           )}
-          {stepIndex < 1 && (
-            <button className="black_button" onClick={this.handleNext}>
-              Next
-            </button>
-          )}
-          {stepIndex === 1 && (
+          {stepIndex <= 1 && (
             <button className="black_button" onClick={this.handleContinue}>
               Continue
             </button>

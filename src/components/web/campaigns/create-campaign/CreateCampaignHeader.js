@@ -19,15 +19,21 @@ class CreateCampaignHeader extends Component {
     this.props.handleNext();
   };
 
+  handlePreview = () => {};
+
   handleContinue = () => {
-    console.log("data saved code");
+    if (this.props.stepIndex < 2) {
+      this.props.handleNext();
+    } else {
+      console.log("data saved code");
+    }
   };
 
   render() {
     const { stepIndex } = this.props;
     return (
       <div className="row">
-        <div className="col-sm-6 modal-title">Create Ad</div>
+        <div className="col-sm-6 modal-title">Create Campaign</div>
         <div className="col-sm-6 text-right">
           <button className="black_button" onClick={this.handleCancle}>
             Cancel
@@ -37,12 +43,12 @@ class CreateCampaignHeader extends Component {
               Back
             </button>
           )}
-          {stepIndex < 2 && (
-            <button className="black_button" onClick={this.handleNext}>
-              Next
+          {stepIndex !== 0 && (
+            <button className="black_button" onClick={this.handlePreview}>
+              Priview
             </button>
           )}
-          {stepIndex === 2 && (
+          {stepIndex <= 2 && (
             <button className="black_button" onClick={this.handleContinue}>
               Continue
             </button>

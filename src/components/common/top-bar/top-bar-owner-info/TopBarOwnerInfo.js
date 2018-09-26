@@ -24,6 +24,10 @@ class TopBarOwnerInfo extends Component {
     this.props.handleModalShow(modalType.ads);
   };
 
+  handelePayment = () => {
+    this.props.handleModalShow(modalType.payment);
+  };
+
   componentWillMount() {
     const items = {
       username: "User name",
@@ -52,7 +56,7 @@ class TopBarOwnerInfo extends Component {
           className: "col-sm-4 slot_three no-padding",
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.create_ad,
-          handeleEvent: this.handeleCreateAd
+          handeleEvent: this.handelePayment
         }
       ]
     };
