@@ -23,7 +23,7 @@ class StepTwo extends Component {
               <label htmlFor={"credit_card"}>
                 <input type="radio" name="payment-option" />
                 <span>Credit card</span>
-                <img src={images.cards} className="card-img" />
+                <img src={images.cards} className="card-img" alt={"cards"} />
               </label>
               <div className="creditcard-form">
                 <div className="form-group">
