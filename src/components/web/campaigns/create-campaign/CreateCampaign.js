@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StepOne, StepTwo, StepThree } from "./steps";
+import { StepOne, StepTwo, StepThree, Preview } from "./steps";
 import propTypes from "prop-types";
 
 class CreateCampaign extends Component {
@@ -16,6 +16,7 @@ class CreateCampaign extends Component {
         {stepIndex === 0 && <StepOne />}
         {stepIndex === 1 && <StepTwo />}
         {stepIndex === 2 && <StepThree />}
+        {stepIndex === 3 && <Preview />}
       </div>
     );
   }

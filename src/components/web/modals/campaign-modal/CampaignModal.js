@@ -13,7 +13,7 @@ class CampaignModal extends Component {
 
   handleNext = () => {
     const { stepIndex } = this.state;
-    if (stepIndex < 2) {
+    if (stepIndex < 3) {
       this.setState({ stepIndex: stepIndex + 1 });
     }
   };

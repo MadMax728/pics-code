@@ -22,7 +22,7 @@ class CreateCampaignHeader extends Component {
   handlePreview = () => {};
 
   handleContinue = () => {
-    if (this.props.stepIndex < 2) {
+    if (this.props.stepIndex < 3) {
       this.props.handleNext();
     } else {
       console.log("data saved code");
