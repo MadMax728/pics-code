@@ -11,7 +11,7 @@ class Preview extends Component {
   render() {
     return (
       <div className="modal-body">
-        <div className="padding-l-10 middle-section width-80">
+        <div className="padding-l-10 middle-section width-100">
           <div className="information-wrapper">
             <div className="info-inner-wrapper">
               <div className="info-main-title">Title</div>
