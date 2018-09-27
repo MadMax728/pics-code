@@ -33,8 +33,8 @@ const TopBar = ({ items }) => {
             )}
 
             <div className="clearfix" />
-            {items.slots.map((slot, index) => (
-              <div className={slot.className} key={index}>
+            {items.slots.map(slot => (
+              <div className={slot.className} key={slot.name}>
                 <span className="size-20">{slot.val} </span>
                 <span>{slot.name}</span>
                 <div className="clearfix" />
@@ -54,24 +54,22 @@ const TopBar = ({ items }) => {
 };
 
 TopBar.propTypes = {
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      private: PropTypes.bool,
-      more: PropTypes.bool,
-      settings: PropTypes.bool,
-      slots: PropTypes.arrayOf(
-        PropTypes.shape({
-          name: PropTypes.string,
-          val: PropTypes.string,
-          className: PropTypes.string,
-          btnActiveClassName: PropTypes.string,
-          btnText: PropTypes.string,
-          handeleEvent: PropTypes.func
-        })
-      )
-    })
-  )
+  items: PropTypes.shape({
+    name: PropTypes.string,
+    private: PropTypes.bool,
+    more: PropTypes.bool,
+    settings: PropTypes.bool,
+    slots: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        val: PropTypes.string,
+        className: PropTypes.string,
+        btnActiveClassName: PropTypes.string,
+        btnText: PropTypes.string,
+        handeleEvent: PropTypes.func
+      })
+    )
+  })
 };
 
 export default TopBar;

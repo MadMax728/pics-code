@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
+import { Link } from "react-router-dom";
 
 const FeedHeader = ({ campaign }) => {
   return (
@@ -8,11 +9,13 @@ const FeedHeader = ({ campaign }) => {
       <div className="no-padding profile_image">
         {campaign.user &&
           campaign.user.image && (
-            <img
-              src={campaign.user.image}
-              alt="feed"
-              className="img-circle img-responsive"
-            />
+            <Link to={"/profile"}>
+              <img
+                src={campaign.user.image}
+                alt="feed"
+                className="img-circle img-responsive"
+              />
+            </Link>
           )}
         {(!campaign || !campaign.user || !campaign.user.image) && (
           <img
@@ -23,7 +26,9 @@ const FeedHeader = ({ campaign }) => {
         )}
       </div>
       <div className="no-padding titles_wrapper">
-        <div className="normal_title">{campaign.title}</div>
+        <Link to={"/campaign/" + campaign.id + "/information"}>
+          <div className="normal_title">{campaign.title}</div>
+        </Link>
         <div className="secondary_title">{campaign.user.name}</div>
         <div className="grey_title">{campaign.category}</div>
       </div>
