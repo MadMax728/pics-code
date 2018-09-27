@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
+import * as images from "../../../../../../lib/constants/images";
 
 class StepThree extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class StepThree extends Component {
     return (
       <div className="modal-body">
         <div className="col-sm-5 upload-form">
-          <div className="subtitle">Define runtime & budget</div>
+          <div className="subtitle">Define runtime & budget c</div>
           <div className="form-group">
             <ul className="options dates">
               <li>

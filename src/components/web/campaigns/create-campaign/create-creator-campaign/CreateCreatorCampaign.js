@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { StepOne, StepTwo, StepThree, Preview } from "./steps";
+import { StepOne, StepTwo, StepThree } from "./steps";
+import { Preview } from "../preview";
 import propTypes from "prop-types";
 
-class CreateCampaign extends Component {
+class CreateCreatorCampaign extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -22,8 +23,8 @@ class CreateCampaign extends Component {
   }
 }
 
-CreateCampaign.propTypes = {
+CreateCreatorCampaign.propTypes = {
   stepIndex: propTypes.any.isRequired
 };
 
-export default CreateCampaign;
+export default CreateCreatorCampaign;

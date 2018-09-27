@@ -4,4 +4,9 @@ export { Company } from "./company";
 export { Creator } from "./creator";
 export { Information } from "./information";
 export { Participant } from "./participant";
-export { CreateCampaignHeader, CreateCampaign } from "./create-campaign";
+export {
+  CreateCompanyCampaignHeader,
+  CreateCompanyCampaign,
+  CreateCreatorCampaign,
+  CreateCreatorCampaignHeader
+} from "./create-campaign";

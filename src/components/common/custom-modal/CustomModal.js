@@ -50,6 +50,8 @@ class CustomModal extends Component {
       <CampaignModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
+        // true for the company and false for the creator
+        isFor={true}
       />
     );
   };
