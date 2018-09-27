@@ -12,6 +12,7 @@ import {
 import propTypes from "prop-types";
 import {
   SideBarCampaignMenu,
+  SideBarCampaignMenuOnlyImage,
   SideBarOtherMenu,
   SideBarSetting,
   SideBarOwnerMenu
@@ -81,6 +82,18 @@ class LeftSideBar extends Component {
         {/* ....... Filters ....... */}
 
         {/* ...... Campaign Menu ...... */}
+
+        <Route
+          path={routes.CAMPAIGN_INFORMATION_ROUTE}
+          exact
+          component={SideBarCampaignMenuOnlyImage}
+        />
+
+        <Route
+          path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
+          exact
+          component={SideBarCampaignMenuOnlyImage}
+        />
 
         <Route
           path={routes.CAMPAIGN_INFORMATION_ROUTE}
