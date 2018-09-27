@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
+import propTypes from "prop-types";
+import { modalType } from "../../../../../lib/constants/enumerations";
 
 class StepThree extends Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class StepThree extends Component {
   }
 
   handleCommitToBuy = () => {
-    // this.props.handleCommitToBuy();
+    this.props.handleModalInfoShow(modalType.payment_confirmation);
   };
 
   render() {
@@ -134,5 +136,9 @@ class StepThree extends Component {
     );
   }
 }
+
+StepThree.propTypes = {
+  handleModalInfoShow: propTypes.func
+};
 
 export default StepThree;
