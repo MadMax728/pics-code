@@ -17,3 +17,4 @@ export {
 } from "./filters";
 
 export { CustomModal } from "./custom-modal";
+export { InfoModal } from "./info-modal";
