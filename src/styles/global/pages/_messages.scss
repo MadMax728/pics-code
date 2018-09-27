@@ -9,6 +9,11 @@
       width: 100%;
       box-shadow: none;
       border: 0px;
+      .closeBtn {
+        position: absolute;
+        right: -40px;
+        top: -25px;
+      }
       .modal-title {
         padding: 20px;
         font-family: "Helvetica-Bold";
@@ -43,6 +48,10 @@
             flex: 1;
             text-align: center;
             padding: 10px 0px;
+            color: #a7a7a7;
+          }
+          .menu-item.active {
+            color: black;
           }
         }
         .user-chat-wrapper {

@@ -20,3 +20,11 @@ export const PaymentSources = {
   nyce: "nyce",
   pulse: "pulse"
 };
+
+export const modalType = {
+  messages: "messages",
+  upload: "upload",
+  ads: "ads",
+  payment: "payment",
+  campaign: "campaign"
+};

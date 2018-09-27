@@ -101,3 +101,18 @@ export const grey_person = `${
   process.env.REACT_APP_CDN_URL
 }/images/grey_person.svg`;
 export const bin = `${process.env.REACT_APP_CDN_URL}/images/bin.svg`;
+export const plus_button = `${
+  process.env.REACT_APP_CDN_URL
+}/images/plus-button.svg`;
+export const alignment1 = `${
+  process.env.REACT_APP_CDN_URL
+}/images/alignment1.jpg`;
+export const alignment2 = `${
+  process.env.REACT_APP_CDN_URL
+}/images/alignment2.jpg`;
+export const alignment3 = `${
+  process.env.REACT_APP_CDN_URL
+}/images/alignment3.jpg`;
+export const alignment4 = `${
+  process.env.REACT_APP_CDN_URL
+}/images/alignment4.jpg`;
