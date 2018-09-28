@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
 
-class CreateCampaignHeader extends Component {
+class CreateCompanyCampaignHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -22,7 +22,7 @@ class CreateCampaignHeader extends Component {
   handlePreview = () => {};
 
   handleContinue = () => {
-    if (this.props.stepIndex < 2) {
+    if (this.props.stepIndex < 3) {
       this.props.handleNext();
     } else {
       console.log("data saved code");
@@ -59,11 +59,11 @@ class CreateCampaignHeader extends Component {
   }
 }
 
-CreateCampaignHeader.propTypes = {
+CreateCompanyCampaignHeader.propTypes = {
   handleModalHide: propTypes.func,
   stepIndex: propTypes.any.isRequired,
   handleNext: propTypes.func,
   handlePrev: propTypes.func
 };
 
-export default CreateCampaignHeader;
+export default CreateCompanyCampaignHeader;

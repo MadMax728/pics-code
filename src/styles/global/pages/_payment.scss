@@ -34,6 +34,14 @@
     .payment-form {
       border-right: 6px solid #333333;
       padding: 20px;
+      label {
+        span {
+          display: inline-block;
+          padding-left: 5px;
+          position: relative;
+          top: -2px;
+        }
+      }
       .creditcard-form {
         float: left;
         margin-top: 25px;
@@ -128,6 +136,24 @@
       button {
         width: 100%;
         margin-top: 25px;
+      }
+    }
+  }
+}
+.form-group .card-img {
+  position: static;
+  float: right;
+  width: auto;
+}
+.payment-confirmation-modal {
+  background: rgba(0, 0, 0, 0.3);
+  .modal-dialog {
+    width: 265px;
+    .modal-content {
+      float: left;
+      .modal-body {
+        float: left;
+        text-align: center;
       }
     }
   }

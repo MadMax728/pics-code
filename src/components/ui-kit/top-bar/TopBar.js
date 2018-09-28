@@ -15,13 +15,15 @@ const TopBar = ({ items }) => {
         <div className="user-details no-padding-right padding-l-10">
           <div className="bg-white padding-25 user_details">
             <div className="user_name">{items.username}</div>
-
+            <img src={images.tick} alt="tick" className="tick" />
+            <span className="profile-type">Private Profile</span>
             {items.private && <div />}
 
             {items.settings && (
               <div className="settings">
                 <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
                   <img src={images.settings} alt="settings" />
+                  <img src={images.more} alt="more" />
                 </Link>
               </div>
             )}

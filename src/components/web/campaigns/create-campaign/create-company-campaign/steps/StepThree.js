@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
+import * as images from "../../../../../../lib/constants/images";
 
-class StepTwo extends Component {
+class StepThree extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -10,41 +10,44 @@ class StepTwo extends Component {
   render() {
     return (
       <div className="modal-body">
-        <div className="col-sm-5 payment-form">
-          <div className="subtitle">Payment method</div>
+        <div className="col-sm-5 upload-form">
+          <div className="subtitle">Define runtime & budget</div>
           <div className="form-group">
-            <div className="radio">
-              <label htmlFor={"Paypal"}>
-                <input type="radio" name="payment-option" />
-                <span>Paypal</span>
-              </label>
-            </div>
-            <div className="radio">
-              <label htmlFor={"credit_card"}>
-                <input type="radio" name="payment-option" />
-                <span>Credit card</span>
-                <img src={images.cards} className="card-img" alt={"cards"} />
-              </label>
-              <div className="creditcard-form">
-                <div className="form-group">
-                  <label htmlFor={"name_card_holder"}>
-                    Name of card holder
-                  </label>
-                  <input type="text" placeholder="Max Mustermann" />
+            <ul className="options dates">
+              <li>
+                <label htmlFor="Start">Start</label>
+                <div className="input-group date">
+                  <input type="text" className="form-control" />
+                  <span className="input-group-addon">
+                    <span className="glyphicon glyphicon-calendar" />
+                  </span>
                 </div>
-                <div className="form-group">
-                  <label htmlFor={"expiry_date"}>Expiry date</label>
-                  <input type="text" placeholder="00 / 00" />
+              </li>
+              <li>
+                <label htmlFor="End">End</label>
+                <div className="input-group date">
+                  <input type="text" className="form-control" />
+                  <span className="input-group-addon">
+                    <span className="glyphicon glyphicon-calendar" />
+                  </span>
                 </div>
-                <div className="form-group no-margin">
-                  <label htmlFor={"credit_card_no"}>Credit card no.</label>
-                  <input type="text" placeholder="0000 0000 0000 0000" />
-                </div>
-                <div className="form-group no-margin">
-                  <label htmlFor={"cvc"}>CVC</label>
-                  <input type="text" placeholder="000" />
-                </div>
-              </div>
+              </li>
+            </ul>
+          </div>
+          <div className="form-group">
+            <label htmlFor="Define">Define daily budget</label>
+            <select>
+              <option>100 E</option>
+              <option>200 E</option>
+              <option>300 E</option>
+              <option>400 E</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="Maximum">Maximum number of clicks</label>
+            <div className="meter orange nostripes">
+              <span style={{ width: "157px" }} className="filled-strip" />
+              <span className="number-clicks">Max. 1200 clicks</span>
             </div>
           </div>
           <div className="subtitle">Information on payment</div>
@@ -65,7 +68,7 @@ class StepTwo extends Component {
               <div className="no-padding profile_image">
                 <img
                   src={images.image}
-                  alt="feed"
+                  alt="feed1"
                   className="img-circle img-responsive"
                 />
               </div>
@@ -77,7 +80,7 @@ class StepTwo extends Component {
               <div className="like_wrapper">
                 <img
                   src={images.blue_heart}
-                  alt="like"
+                  alt="like1"
                   className="pull-right"
                 />
               </div>
@@ -86,7 +89,7 @@ class StepTwo extends Component {
               <div className="feed_image">
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
-                    <img src={images.image} alt="image1" />
+                    <img src={images.image} alt="altmage1" />
                   </div>
                 </div>
               </div>
@@ -116,4 +119,4 @@ class StepTwo extends Component {
   }
 }
 
-export default StepTwo;
+export default StepThree;

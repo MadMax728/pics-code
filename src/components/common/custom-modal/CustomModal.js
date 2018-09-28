@@ -50,6 +50,8 @@ class CustomModal extends Component {
       <CampaignModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
+        // true for the company and false for the creator
+        isFor={true}
       />
     );
   };
@@ -59,6 +61,7 @@ class CustomModal extends Component {
       <PaymentModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
+        handleModalInfoShow={this.props.handleModalInfoShow}
       />
     );
   };
@@ -90,7 +93,9 @@ class CustomModal extends Component {
 CustomModal.propTypes = {
   modalShow: propTypes.bool.isRequired,
   modalType: propTypes.string.isRequired,
-  handleModalHide: propTypes.func.isRequired
+  handleModalHide: propTypes.func.isRequired,
+
+  handleModalInfoShow: propTypes.func.isRequired
 };
 
 export default CustomModal;

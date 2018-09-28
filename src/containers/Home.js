@@ -36,7 +36,8 @@ import {
   LeftSideBar,
   RightSideBar,
   TopBarInfo,
-  CustomModal
+  CustomModal,
+  InfoModal
 } from "../components/common";
 
 class Home extends Component {
@@ -44,7 +45,9 @@ class Home extends Component {
     super(props, context);
     this.state = {
       modalShow: false,
-      modalType: ""
+      modalType: "",
+      modalInfoShow: false,
+      modalInfoType: ""
     };
   }
 
@@ -54,6 +57,14 @@ class Home extends Component {
 
   handleModalShow = e => {
     this.setState({ modalShow: true, modalType: e });
+  };
+
+  handleModalInfoHide = () => {
+    this.setState({ modalInfoShow: false });
+  };
+
+  handleModalInfoShow = e => {
+    this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
   getFilter(filterData) {
@@ -70,7 +81,17 @@ class Home extends Component {
             modalShow={this.state.modalShow}
             handleModalHide={this.handleModalHide}
             modalType={this.state.modalType}
+            handleModalInfoShow={this.handleModalInfoShow}
+            modalInfoType={this.state.modalInfoType}
           />
+
+          <InfoModal
+            modalInfoShow={this.state.modalInfoShow}
+            handleModalInfoHide={this.handleModalInfoHide}
+            modalInfoType={this.state.modalInfoType}
+            handleModalHide={this.handleModalHide}
+          />
+
           <div className="container">
             <div className="row">
               <TopBarInfo handleModalShow={this.handleModalShow} />

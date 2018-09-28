@@ -7,7 +7,7 @@ class PaymentModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      stepIndex: 0
+      stepIndex: 2
     };
   }
 
@@ -27,6 +27,13 @@ class PaymentModal extends Component {
 
   render() {
     const { stepIndex } = this.state;
+    const {
+      handleModalHide,
+      modalShow,
+      modalInfoShow,
+      handleModalInfoShow
+    } = this.props;
+
     return (
       <CustomBootstrapModal
         modalClassName={
@@ -37,17 +44,23 @@ class PaymentModal extends Component {
         header={true}
         modalHeaderContent={
           <PaymentHeader
-            handleModalHide={this.props.handleModalHide}
+            handleModalHide={handleModalHide}
             handleNext={this.handleNext}
             handlePrev={this.handlePrev}
-            stepIndex={this.state.stepIndex}
+            stepIndex={stepIndex}
           />
         }
         footer={false}
-        modalShow={this.props.modalShow}
+        modalShow={modalShow}
         closeBtn={false}
-        handleModalHide={this.props.handleModalHide}
-        modalBodyContent={<Payment stepIndex={this.state.stepIndex} />}
+        handleModalHide={handleModalHide}
+        modalBodyContent={
+          <Payment
+            stepIndex={stepIndex}
+            modalInfoShow={modalInfoShow}
+            handleModalInfoShow={handleModalInfoShow}
+          />
+        }
       />
     );
   }
@@ -55,7 +68,9 @@ class PaymentModal extends Component {
 
 PaymentModal.propTypes = {
   modalShow: propTypes.bool,
-  handleModalHide: propTypes.func
+  modalInfoShow: propTypes.bool,
+  handleModalHide: propTypes.func,
+  handleModalInfoShow: propTypes.func
 };
 
 export default PaymentModal;

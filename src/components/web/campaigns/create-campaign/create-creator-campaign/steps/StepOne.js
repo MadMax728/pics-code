@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
+import * as images from "../../../../../../lib/constants/images";
 
 class StepOne extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class StepOne extends Component {
             />
           </div>
           <div className="user-title">
-            <div className="normal_title">Title of campaigns</div>
+            <div className="normal_title">Title of campaigns c</div>
             <div className="secondary_title">User name</div>
           </div>
           <form>
@@ -41,42 +41,6 @@ class StepOne extends Component {
               </select>
             </div>
             <div className="subtitle">Application criteria</div>
-            <div className="form-group">
-              <label htmlFor="Procedure">Procedure</label>
-              <ul className="options">
-                <li>
-                  <input
-                    type="radio"
-                    id="public"
-                    name="procedure"
-                    className="black_button"
-                  />
-                  <label htmlFor="public">Public</label>
-                </li>
-                <li>
-                  <input type="radio" id="anonymous" name="procedure" />
-                  <label htmlFor="anonymous">Anonymous</label>
-                </li>
-              </ul>
-            </div>
-            <div className="form-group">
-              <label htmlFor="Type">Type</label>
-              <ul className="options">
-                <li>
-                  <input
-                    type="radio"
-                    id="video"
-                    name="type"
-                    className="black_button"
-                  />
-                  <label htmlFor="video">Video</label>
-                </li>
-                <li>
-                  <input type="radio" id="image" name="type" />
-                  <label htmlFor="image">Image</label>
-                </li>
-              </ul>
-            </div>
             <div className="form-group">
               <label htmlFor="Target_group">Target group</label>
               <ul className="options target-options">

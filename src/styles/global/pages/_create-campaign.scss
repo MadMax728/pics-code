@@ -108,6 +108,13 @@
       input {
         padding: 10px;
       }
+      input[name="street"] {
+        width: 80%;
+      }
+      input[name="number"] {
+        width: 15%;
+        float: right;
+      }
       textarea {
         height: 150px;
         border: 1px solid #979797;

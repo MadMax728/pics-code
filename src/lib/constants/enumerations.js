@@ -26,5 +26,7 @@ export const modalType = {
   upload: "upload",
   ads: "ads",
   payment: "payment",
-  campaign: "campaign"
+  campaign: "campaign",
+  payment_confirmation: "payment_confirmation",
+  preview: "preview"
 };
