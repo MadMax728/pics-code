@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from "react-responsive-carousel";
+import * as images from "../../../../lib/constants/images";
 
 class ContentView extends Component {
   constructor(props) {
@@ -9,16 +11,17 @@ class ContentView extends Component {
 
   render() {
     return (
-      <div className={"modal-body"}>
-        <div className="col-sm-12">
-          Your ad is pending review whitin the next 48 hours.
+      <Carousel showIndicators={false} showThumbs={false} showStatus={false}>
+        <div>
+          <img src={images.image} alt={"image1"} />
         </div>
-        <div className="col-sm-12">
-          <button className="filled_button" onClick={this.handleModalHides}>
-            Continue
-          </button>
+        <div>
+          <img src={images.image_1} alt={"image2"} />
         </div>
-      </div>
+        <div>
+          <img src={images.image} alt={"image3"} />
+        </div>
+      </Carousel>
     );
   }
 }

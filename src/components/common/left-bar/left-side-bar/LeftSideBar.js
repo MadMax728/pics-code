@@ -182,6 +182,18 @@ class LeftSideBar extends Component {
           exact
           component={SideBarSetting}
         />
+
+        <Route
+          path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+
+        <Route
+          path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
       </div>
     );
   }

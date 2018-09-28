@@ -15,12 +15,6 @@ const TopBar = ({ items }) => {
         <div className="user-details no-padding-right padding-l-10">
           <div className="bg-white padding-25 user_details">
             <div className="user_name">{items.username}</div>
-            <button
-              className={"black_button"}
-              onClick={items.handleContentView}
-            >
-              {"Content View"}
-            </button>
 
             {items.private && (
               <img src={images.tick} alt="tick" className="tick" />
@@ -69,7 +63,6 @@ TopBar.propTypes = {
     name: PropTypes.string,
     private: PropTypes.bool,
     more: PropTypes.bool,
-    handleContentView: PropTypes.func,
     settings: PropTypes.bool,
     slots: PropTypes.arrayOf(
       PropTypes.shape({

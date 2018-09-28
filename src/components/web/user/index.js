@@ -24,5 +24,7 @@ export {
   DataDownload,
   EditProfile,
   SettingCampaign,
-  Ads
+  Ads,
+  AdsStatistics,
+  SettingCampaignStatistics
 } from "./settings";

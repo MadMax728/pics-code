@@ -15,9 +15,9 @@ class ContentViewModal extends Component {
         modalClassName={"modal fade messages-modal"}
         header={false}
         footer={false}
-        modalShow={this.props.modalShow}
+        modalShow={this.props.modalInfoShow}
         closeBtn={true}
-        handleModalHide={this.props.handleModalHide}
+        handleModalHide={this.props.handleModalInfoHide}
         modalBodyContent={<ContentView />}
       />
     );
@@ -25,8 +25,8 @@ class ContentViewModal extends Component {
 }
 
 ContentViewModal.propTypes = {
-  modalShow: propTypes.bool,
-  handleModalHide: propTypes.func
+  modalInfoShow: propTypes.bool,
+  handleModalInfoHide: propTypes.func
 };
 
 export default ContentViewModal;
