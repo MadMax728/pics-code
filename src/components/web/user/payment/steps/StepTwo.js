@@ -16,13 +16,14 @@ class StepTwo extends Component {
             <div className="radio">
               <label htmlFor={"Paypal"}>
                 <input type="radio" name="payment-option" />
-                Paypal
+                <span>Paypal</span>
               </label>
             </div>
             <div className="radio">
               <label htmlFor={"credit_card"}>
                 <input type="radio" name="payment-option" />
-                Credit card
+                <span>Credit card</span>
+                <img src={images.cards} className="card-img" alt={"cards"} />
               </label>
               <div className="creditcard-form">
                 <div className="form-group">

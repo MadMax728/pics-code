@@ -90,6 +90,11 @@
   }
 }
 .menu_news {
+  &.active {
+    &:before {
+      background-image: url(../images/news.svg);
+    }
+  }
   &:hover {
     &:before {
       background-image: url(../images/news.svg);
@@ -111,6 +116,11 @@
   }
 }
 .menu_explore {
+  &.active {
+    &:before {
+      background-image: url(../images/explore.svg);
+    }
+  }
   &:hover {
     &:before {
       background-image: url(../images/explore.svg);
@@ -132,6 +142,11 @@
   }
 }
 .menu_participants {
+  &.active {
+    &:before {
+      background-image: url(../images/white_star.svg);
+    }
+  }
   &:hover {
     &:before {
       background-image: url(../images/white_star.svg);
@@ -153,6 +168,11 @@
   }
 }
 .menu_user {
+  &.active {
+    &:before {
+      background-image: url(../images/person.svg);
+    }
+  }
   &:hover {
     &:before {
       background-image: url(../images/person.svg);
@@ -174,6 +194,11 @@
   }
 }
 .menu_pics {
+  &.active {
+    &:before {
+      background-image: url(../images/p.svg);
+    }
+  }
   &:hover {
     &:before {
       background-image: url(../images/p.svg);
@@ -205,6 +230,58 @@
   &:hover {
     &:before {
       background-image: url(../images/person.svg);
+    }
+  }
+}
+.menu_information {
+  &:before {
+    background-image: url(../images/information_grey.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top left;
+    left: 15px;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+  }
+}
+.menu_information {
+  &:hover {
+    &:before {
+      background-image: url(../images/information_white.svg);
+    }
+  }
+  &.active {
+    &:before {
+      background-image: url(../images/information_white.svg);
+    }
+  }
+}
+.menu_company {
+  &:before {
+    background-image: url(../images/company_grey.svg);
+    height: 20px;
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-position: top left;
+    left: 15px;
+    width: 100%;
+    background-repeat: no-repeat;
+    transition: all ease 0.5s;
+  }
+}
+.menu_company {
+  &.active {
+    &:before {
+      background-image: url(../images/company_white.svg);
+    }
+  }
+  &:hover {
+    &:before {
+      background-image: url(../images/company_white.svg);
     }
   }
 }
