@@ -28,5 +28,6 @@ export const modalType = {
   payment: "payment",
   campaign: "campaign",
   payment_confirmation: "payment_confirmation",
-  preview: "preview"
+  preview: "preview",
+  content_view: "content_view"
 };

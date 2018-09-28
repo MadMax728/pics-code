@@ -28,11 +28,21 @@ class TopBarOwnerInfo extends Component {
     this.props.handleModalShow(modalType.payment);
   };
 
+  handelePayment = () => {
+    this.props.handleModalShow(modalType.payment);
+  };
+
+  handleContentView = () => {
+    this.props.handleModalShow(modalType.content_view);
+  };
+
   componentWillMount() {
     const items = {
       username: "User name",
       private: false,
       settings: true,
+      more: false,
+      handleContentView: this.handleContentView,
       slots: [
         {
           name: Translations.top_bar_info.subscriber,

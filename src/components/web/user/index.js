@@ -15,6 +15,8 @@ export { Upload, UploadHeader } from "./upload";
 export { CreateAds, CreateAdsHeader } from "./create-ads";
 export { Payment, PaymentHeader } from "./payment";
 export { PaymentConfirmation } from "./payment-confirmation";
+export { ContentView } from "./content-view";
+
 export {
   Privacy,
   BusinessProfile,

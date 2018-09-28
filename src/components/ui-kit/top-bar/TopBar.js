@@ -15,22 +15,31 @@ const TopBar = ({ items }) => {
         <div className="user-details no-padding-right padding-l-10">
           <div className="bg-white padding-25 user_details">
             <div className="user_name">{items.username}</div>
-            <img src={images.tick} alt="tick" className="tick" />
-            <span className="profile-type">Private Profile</span>
-            {items.private && <div />}
+            <button
+              className={"black_button"}
+              onClick={items.handleContentView}
+            >
+              {"Content View"}
+            </button>
+
+            {items.private && (
+              <img src={images.tick} alt="tick" className="tick" />
+            )}
+            {items.private && (
+              <span className="profile-type">Private Profile</span>
+            )}
 
             {items.settings && (
               <div className="settings">
                 <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
                   <img src={images.settings} alt="settings" />
-                  <img src={images.more} alt="more" />
                 </Link>
               </div>
             )}
 
             {items.more && (
               <div className="settings">
-                <img src={images.settings} alt="settings" />
+                <img src={images.more} alt="more" />
               </div>
             )}
 
@@ -60,6 +69,7 @@ TopBar.propTypes = {
     name: PropTypes.string,
     private: PropTypes.bool,
     more: PropTypes.bool,
+    handleContentView: PropTypes.func,
     settings: PropTypes.bool,
     slots: PropTypes.arrayOf(
       PropTypes.shape({

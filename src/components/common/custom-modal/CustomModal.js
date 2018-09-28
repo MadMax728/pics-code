@@ -6,7 +6,8 @@ import {
   UploadModal,
   AdsModal,
   CampaignModal,
-  PaymentModal
+  PaymentModal,
+  ContentViewModal
 } from "../../web/modals";
 import propTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -21,6 +22,15 @@ class CustomModal extends Component {
   handleModalMessage = () => {
     return (
       <MessageModal
+        modalShow={this.props.modalShow}
+        handleModalHide={this.props.handleModalHide}
+      />
+    );
+  };
+
+  handleModalContentView = () => {
+    return (
+      <ContentViewModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
       />
@@ -77,6 +87,8 @@ class CustomModal extends Component {
           this.handleModalPayment()}
         {this.props.modalType === modalType.campaign &&
           this.handleModalCampaign()}
+        {this.props.modalType === modalType.content_view &&
+          this.handleModalContentView()}
       </div>
     );
   };
