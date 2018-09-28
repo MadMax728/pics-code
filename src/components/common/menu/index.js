@@ -6,3 +6,6 @@ export {
   SideBarMBMenuServices
 } from "./sidebar-mb-menu";
 export { SideBarCampaignMenu } from "./sidebar-campaign-menu";
+export {
+  SideBarCampaignMenuOnlyImage
+} from "./sidebar-campaign-menu-olny-image";

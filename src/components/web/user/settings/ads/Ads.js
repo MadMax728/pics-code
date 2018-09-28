@@ -1,149 +1,178 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import * as images from "../../../../../lib/constants/images";
+import * as routes from "../../../../../lib/constants/routes";
 
 class Ads extends Component {
-  handleOnChange = () => {};
-
   render() {
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <div className="campaign-middle-section">
-            <div className="normal_title padding-15">Ad title</div>
-            <div className="campaign-block">
-              <div className="normal_title padding-15">Total budget</div>
-              <div className="indicators">
-                <div>
-                  <span className="blue-block" />
-                  Budget spent
-                </div>
-                <div>
-                  <span className="grey-block" />
-                  Remaining Budget
-                </div>
+          <div className="feed_wrapper">
+            <div className="feed_header">
+              <div className="col-sm-1 col-xs-1 no-padding profile_image">
+                <img
+                  src={images.image}
+                  alt="image1"
+                  className="img-circle img-responsive"
+                />
               </div>
-              <div className="progressbar-wrapper">
-                <div className="progressbar">
-                  <div style={{ width: "80%" }} />
-                </div>
-                <span className="counter">0,00</span>
+              <div className="col-sm-9 col-xs-7 no-padding">
+                <div className="normal_title">User name</div>
+                <div className="grey_title">Sponsored in Category</div>
               </div>
-            </div>
-            <div className="campaign-block">
-              <div className="normal_title padding-15">Daily budget</div>
-              <div className="indicators">
-                <div>
-                  <span className="blue-block" />
-                  Daily budget spent
-                </div>
-                <div>
-                  <span className="grey-block" />
-                  Remaining daily budget
-                </div>
-              </div>
-              <div className="progressbar-wrapper">
-                <div className="progressbar">
-                  <div style={{ width: "10%" }} />
-                </div>
-                <span className="counter">0,00</span>
+              <div className="col-sm-2 col-xs-2 like_wrapper">
+                <img
+                  src={images.blue_heart}
+                  alt="like1"
+                  className="pull-right"
+                />
               </div>
             </div>
-            <div className="campaign-block">
-              <div className="normal_title padding-15">Performance</div>
-              <div className="indicators">
-                <div>
-                  <span className="blue-block" />
-                  Views
-                </div>
-                <div>
-                  <span className="grey-block" />
-                  Clicks
-                </div>
+            <div className="feed_content">
+              <div className="feed_image">
+                <img
+                  src={images.feed_img}
+                  alt="feed_img1"
+                  className="img-responsive"
+                />
+                <Link to={""} className="more-strip">
+                  More
+                </Link>
               </div>
-              <div className="progressbar-wrapper">
-                <div className="progressbar">
-                  <div style={{ width: "50%" }} />
-                </div>
-                <span className="counter">0,00</span>
+              <div className="feed_description padding-10">
+                <div className="normal_title">Title</div>
+                <span className="secondary_title">
+                  {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...`}
+                  <Link to={""} className="read-more">
+                    read more
+                  </Link>
+                </span>
               </div>
             </div>
-            <div className="campaign-block">
-              <div className="normal_title padding-15">Runtime</div>
-              <div className="indicators">
-                <div>
-                  <span className="blue-block" />
-                  Runtime passed
-                </div>
-                <div>
-                  <span className="grey-block" />
-                  Remaining runtime
+            <div className="feed_footer padding-15">
+              <div className="messages">
+                <span className="count">100</span>
+                <img src={images.feed_msg} alt={"feed_msg"} />
+              </div>
+              <div className="likes">
+                <span className="count">100</span>
+                <img src={images.feed_like} alt={"feed_like3"} />
+              </div>
+              <div className="show_more_options">
+                <Link to={""}>• • •</Link>
+              </div>
+            </div>
+            <div className="status">
+              <div className="status-wrapper">
+                <div className="title">Status</div>
+                <div className="subtitle">
+                  <span className="green-circle" />
                 </div>
               </div>
-              <div className="progressbar-wrapper">
-                <div className="progressbar">
-                  <div style={{ width: "20%" }} />
+              <div className="status-wrapper">
+                <div className="title">Views</div>
+                <div className="subtitle">700</div>
+              </div>
+              <div className="status-wrapper">
+                <div className="title">Clicks</div>
+                <div className="subtitle">20</div>
+              </div>
+              <div className="status-wrapper">
+                <div className="title">Applications</div>
+                <div className="subtitle">0</div>
+              </div>
+              <div className="status-wrapper">
+                <Link to={routes.SETTINGS_ADS_STATISTICS_ROUTE}>
+                  <button className="blue_button">statistics</button>
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="feed_wrapper">
+            <div className="feed_header">
+              <div className="col-sm-1 col-xs-1 no-padding profile_image">
+                <img
+                  src={images.image}
+                  alt="image3"
+                  className="img-circle img-responsive"
+                />
+              </div>
+              <div className="col-sm-9 col-xs-7 no-padding">
+                <div className="normal_title">User name</div>
+                <div className="grey_title">Sponsored in Category</div>
+              </div>
+              <div className="col-sm-2 col-xs-2 like_wrapper">
+                <img
+                  src={images.blue_heart}
+                  alt="like1"
+                  className="pull-right"
+                />
+              </div>
+            </div>
+            <div className="feed_content">
+              <div className="feed_image">
+                <img
+                  src={images.feed_img}
+                  alt="feed_img2"
+                  className="img-responsive"
+                />
+                <span className="more-strip">More</span>
+              </div>
+              <div className="feed_description padding-10">
+                <div className="normal_title">Title</div>
+                <span className="secondary_title">
+                  {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...`}
+                  <Link to={""} className="read-more">
+                    read more
+                  </Link>
+                </span>
+              </div>
+            </div>
+            <div className="feed_footer padding-15">
+              <div className="messages">
+                <span className="count">100</span>
+                <img src={images.feed_msg} alt={"feed_msg2"} />
+              </div>
+              <div className="likes">
+                <span className="count">100</span>
+                <img src={images.feed_like} alt={"feed_like2"} />
+              </div>
+              <div className="show_more_options">
+                <Link to={""}>• • •</Link>
+              </div>
+            </div>
+            <div className="status">
+              <div className="status-wrapper">
+                <div className="title">Status</div>
+                <div className="subtitle">
+                  <span className="green-circle" />
                 </div>
-                <span className="counter">0,00</span>
+              </div>
+              <div className="status-wrapper">
+                <div className="title">Views</div>
+                <div className="subtitle">700</div>
+              </div>
+              <div className="status-wrapper">
+                <div className="title">Clicks</div>
+                <div className="subtitle">20</div>
+              </div>
+              <div className="status-wrapper">
+                <div className="title">Applications</div>
+                <div className="subtitle">0</div>
+              </div>
+              <div className="status-wrapper">
+                <Link to={routes.SETTINGS_ADS_STATISTICS_ROUTE}>
+                  <button className="blue_button">statistics</button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
         <div className="right_bar no-padding pull-left">
           <div className="campaigns-right">
-            <button className="blue_button">Edit ad</button>
-            <button className="black_button">Close ad </button>
-            <div className="normal_title padding-15">Budget & Runtime</div>
-            <ul className="campaign-right-options">
-              <li>
-                <span>Daily budget</span>
-                <span className="pull-right">100 E</span>
-              </li>
-              <li>
-                <span>Total budget spent</span>
-                <span className="pull-right">20 E</span>
-              </li>
-              <li>
-                <span>Total expenses</span>
-                <span className="pull-right">200 E</span>
-              </li>
-              <li>
-                <span>Runtime</span>
-                <span className="pull-right">01.01.2000 - 01.01.2000</span>
-              </li>
-            </ul>
-            <div className="normal_title padding-15">Performance</div>
-            <ul className="campaign-right-options">
-              <li>
-                <span>Views</span>
-                <span className="pull-right">100</span>
-              </li>
-              <li>
-                <span>Clicks</span>
-                <span className="pull-right">100</span>
-              </li>
-            </ul>
-            <div className="normal_title padding-15">Details on ad</div>
-            <ul className="campaign-right-options">
-              <li>
-                <span>Location</span>
-                <span className="pull-right">Example</span>
-              </li>
-              <li>
-                <span>Radius</span>
-                <span className="pull-right">0 Km</span>
-              </li>
-              <li>
-                <span>Category</span>
-                <span className="pull-right">Example</span>
-              </li>
-              <li>
-                <span>Target group</span>
-                <span className="pull-right">Example</span>
-              </li>
-            </ul>
-            <div className="normal_title padding-15">
-              Status
-              <span className="green-circle pull-right" />
-            </div>
+            <button className="blue_button">Create ad</button>
+            <button className="blue_button">What are ads? </button>
           </div>
         </div>
       </div>

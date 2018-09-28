@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
-import {
-  // PreviewModal,
-  PaymentConfirmationModal
-} from "../../web/modals";
+import { ContentViewModal, PaymentConfirmationModal } from "../../web/modals";
 import propTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
 
@@ -15,14 +12,14 @@ class InfoModal extends Component {
     this.state = {};
   }
 
-  // handleModalPreview = () => {
-  //   return (
-  //     <PreviewModal
-  //       modalShow={this.props.modalShow}
-  //       handleModalHide={this.props.handleModalHide}
-  //     />
-  //   );
-  // };
+  handleModalContentView = () => {
+    return (
+      <ContentViewModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+      />
+    );
+  };
 
   handleModalPaymentConfirmation = () => {
     return (
@@ -39,8 +36,8 @@ class InfoModal extends Component {
       <div>
         {this.props.modalInfoType === modalType.payment_confirmation &&
           this.handleModalPaymentConfirmation()}
-        {/* {this.props.modalType === modalType.preview &&
-          this.handleModalPreview()} */}
+        {this.props.modalInfoType === modalType.content_view &&
+          this.handleModalContentView()}
       </div>
     );
   };

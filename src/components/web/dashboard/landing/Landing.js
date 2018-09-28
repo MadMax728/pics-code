@@ -1,6 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import { NewsFeeds } from "../../feeds";
+import PropTypes from "prop-types";
+
+class Landing extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {};
+  }
+
+  render() {
+    const { handleModalInfoShow } = this.props;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        <NewsFeeds
+          campaigns={campaigns}
+          handleModalInfoShow={handleModalInfoShow}
+        />
+      </div>
+    );
+  }
+}
 
 const campaigns = [
   {
@@ -46,12 +67,8 @@ const campaigns = [
     id: 3
   }
 ];
-const Landing = () => {
-  return (
-    <div className={"middle-section padding-rl-10"}>
-      <NewsFeeds campaigns={campaigns} />
-    </div>
-  );
-};
 
+Landing.propTypes = {
+  handleModalInfoShow: PropTypes.func.isRequired
+};
 export default Landing;
