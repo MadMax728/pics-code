@@ -4,3 +4,4 @@ export { AdsModal } from "./ads-modal";
 export { CampaignModal } from "./campaign-modal";
 export { PaymentModal } from "./payment-modal";
 export { PaymentConfirmationModal } from "./payment-confirmation-modal";
+export { ContentViewModal } from "./content-view-modal";
