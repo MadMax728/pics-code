@@ -338,3 +338,61 @@ hr {
 .width-100 {
   width: 100% !important;
 }
+.overflow-scroll {
+  .modal-dialog {
+    height: 92%;
+    .modal-content {
+      height: 100%;
+      overflow: hidden;
+      .modal-body {
+        height: 92%;
+        .modal-body {
+          height: 100%;
+          .upload-form {
+            height: 100%;
+            overflow: auto;
+          }
+        }
+      }
+    }
+  }
+}
+.overflow-scroll {
+  .modal-dialog {
+    height: 92%;
+    .modal-content {
+      height: 100%;
+      overflow: hidden;
+      .modal-body {
+        height: 92%;
+        .modal-body {
+          height: 100%;
+          .payment-history {
+            height: 100%;
+            overflow: auto;
+          }
+        }
+      }
+    }
+  }
+}
+.disp-flex {
+  display: flex;
+}
+.overflow-auto {
+  overflow: auto;
+}
+.payment-overview-modal {
+  .payment-history {
+    height: 600px;
+    overflow: auto;
+  }
+  .payment-form {
+    height: 600px;
+    overflow: auto;
+  }
+}
+.billing-add {
+  height: 600px;
+  overflow: auto;
+}

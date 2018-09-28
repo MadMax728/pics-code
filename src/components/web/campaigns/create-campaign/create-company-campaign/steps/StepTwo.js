@@ -17,7 +17,7 @@ class StepTwo extends Component {
             placeholder="Enter your campaign description here and add images and videos… "
           />
         </div>
-        <div className="col-sm-5 no-padding">
+        <div className="col-sm-5 no-padding disp-flex">
           <div className="editor-options">
             <ul className="editor-row">
               <li>
