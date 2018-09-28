@@ -32,9 +32,14 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor } = this.props;
+    const { stepIndex } = this.state;
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade create-campaign-modal"}
+        modalClassName={
+          stepIndex === 0
+            ? "modal fade create-campaign-modal overflow-scroll"
+            : "modal fade create-campaign-modal"
+        }
         header={true}
         modalHeaderContent={
           isFor ? (

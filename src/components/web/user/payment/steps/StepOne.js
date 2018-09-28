@@ -10,7 +10,7 @@ class StepOne extends Component {
   render() {
     return (
       <div className="modal-body">
-        <div className="col-sm-5 upload-form">
+        <div className="col-sm-5 upload-form billing-add">
           <div className="user-title">
             <div className="subtitle">Billing Address</div>
           </div>
