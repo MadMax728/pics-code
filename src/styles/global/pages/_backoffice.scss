@@ -180,11 +180,26 @@
     tr {
       td {
         border: 1px solid $charcoal_color;
-        padding: 20px;
+        padding: 10px;
+        a {
+          display: inline-block;
+          padding-right: 5px;
+          color: #0f7aba;
+          text-decoration: underline;
+          &:hover {
+            text-decoration: none;
+          }
+        }
+        .green-circle {
+          display: inline-block;
+          float: left;
+          margin-top: 3px;
+          margin-right: 5px;
+        }
       }
       th {
         border: 1px solid $charcoal_color;
-        padding: 20px;
+        padding: 10px;
         font-family: "Helvetica-Bold";
       }
     }

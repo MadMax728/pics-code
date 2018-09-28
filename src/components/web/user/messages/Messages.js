@@ -685,6 +685,7 @@ class Messages extends Component {
             </div>
 
             <div className="active-chat">
+              <div className="date">Sunday</div>
               {chatData[0].msg_details.map((cdmsg, index) => {
                 return (
                   <div key={index}>
@@ -694,6 +695,7 @@ class Messages extends Component {
                         <span className="time">{cdmsg.time}</span>
                       </div>
                     )}
+
                     {!cdmsg.me && (
                       <div className="response">
                         {cdmsg.msg}

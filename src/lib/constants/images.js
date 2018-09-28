@@ -120,6 +120,9 @@ export const cards = `${process.env.REACT_APP_CDN_URL}/images/cards.jpg`;
 
 export const tick = `${process.env.REACT_APP_CDN_URL}/images/check-circle.svg`;
 export const more = `${process.env.REACT_APP_CDN_URL}/images/more.jpg`;
+export const white_close = `${
+  process.env.REACT_APP_CDN_URL
+}/images/white_close.svg`;
 export const testOne = `${process.env.REACT_APP_CDN_URL}/images/1.jpeg`;
 export const testTwo = `${process.env.REACT_APP_CDN_URL}/images/2.jpeg`;
 export const testThree = `${process.env.REACT_APP_CDN_URL}/images/3.jpeg`;
