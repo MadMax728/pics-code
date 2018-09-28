@@ -36,7 +36,7 @@ const CustomBootstrapModal = ({
         {closeBtn && (
           <button onClick={handleModalHide} className={"closeBtn"}>
             <img
-              src={images.cross}
+              src={images.white_close}
               alt={"cross"}
               style={{ height: "10px", width: "10px" }}
             />

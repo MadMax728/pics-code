@@ -13,6 +13,8 @@
         position: absolute;
         right: -40px;
         top: -25px;
+        background: transparent;
+        border: 0;
       }
       .modal-title {
         padding: 20px;
@@ -171,6 +173,7 @@
         .active-chat {
           float: left;
           border-left: 2px solid #333;
+          height: 406px;
           .date {
             font-size: 12px;
             text-align: center;
