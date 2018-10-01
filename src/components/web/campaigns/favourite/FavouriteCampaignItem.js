@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const FavouriteCampaignItem = ({ campaign }) => {
   return (
@@ -12,7 +13,9 @@ const FavouriteCampaignItem = ({ campaign }) => {
         />
       </div>
       <div className="col-sm-8 col-xs-10 no-padding">
-        <div className="normal_title">{campaign.title}</div>
+        <Link to={`/campaign/${campaign.id}/information`}>
+          <div className="normal_title">{campaign.title}</div>
+        </Link>
         <div className="secondary_title">{campaign.user.name}</div>
         <div className="grey_title">{campaign.category}</div>
       </div>

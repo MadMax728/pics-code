@@ -126,7 +126,7 @@ export default class Header extends Component {
                   </NavDropdown>
 
                   <RouteNavItem
-                    to={routes.MY_PROFILE_ROUTE}
+                    to={routes.NEWS_FEED_ROUTE}
                     className={`menu_profile`}
                     closeMenu={this.toggleNav}
                   >

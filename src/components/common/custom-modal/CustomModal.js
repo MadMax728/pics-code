@@ -5,8 +5,7 @@ import {
   MessageModal,
   UploadModal,
   AdsModal,
-  CampaignModal,
-  PaymentModal
+  CampaignModal
 } from "../../web/modals";
 import propTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -41,6 +40,7 @@ class CustomModal extends Component {
       <AdsModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
+        handleModalInfoShow={this.props.handleModalInfoShow}
       />
     );
   };
@@ -52,15 +52,6 @@ class CustomModal extends Component {
         handleModalHide={this.props.handleModalHide}
         // true for the company and false for the creator
         isFor={true}
-      />
-    );
-  };
-
-  handleModalPayment = () => {
-    return (
-      <PaymentModal
-        modalShow={this.props.modalShow}
-        handleModalHide={this.props.handleModalHide}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
     );
@@ -73,8 +64,6 @@ class CustomModal extends Component {
         {this.props.modalType === modalType.messages &&
           this.handleModalMessage()}
         {this.props.modalType === modalType.ads && this.handleModalAds()}
-        {this.props.modalType === modalType.payment &&
-          this.handleModalPayment()}
         {this.props.modalType === modalType.campaign &&
           this.handleModalCampaign()}
       </div>
@@ -94,7 +83,6 @@ CustomModal.propTypes = {
   modalShow: propTypes.bool.isRequired,
   modalType: propTypes.string.isRequired,
   handleModalHide: propTypes.func.isRequired,
-
   handleModalInfoShow: propTypes.func.isRequired
 };
 

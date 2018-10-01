@@ -22,7 +22,7 @@ class CreateCompanyCampaignHeader extends Component {
   handlePreview = () => {};
 
   handleContinue = () => {
-    if (this.props.stepIndex < 3) {
+    if (this.props.stepIndex < 5) {
       this.props.handleNext();
     } else {
       console.log("data saved code");
@@ -43,12 +43,13 @@ class CreateCompanyCampaignHeader extends Component {
               Back
             </button>
           )}
-          {stepIndex !== 0 && (
-            <button className="black_button" onClick={this.handlePreview}>
-              Priview
-            </button>
-          )}
-          {stepIndex <= 2 && (
+          {stepIndex !== 0 &&
+            stepIndex < 3 && (
+              <button className="black_button" onClick={this.handlePreview}>
+                Priview
+              </button>
+            )}
+          {stepIndex <= 4 && (
             <button className="black_button" onClick={this.handleContinue}>
               Continue
             </button>

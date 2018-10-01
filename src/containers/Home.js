@@ -251,7 +251,7 @@ class Home extends Component {
                 </Switch>
               </div>
               <div className="right_bar no-padding">
-                <RightSideBar />
+                <RightSideBar handleModalShow={this.handleModalShow} />
               </div>
             </div>
           </div>

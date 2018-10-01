@@ -32,6 +32,8 @@ export const TEARMS_USE_ROUTE = "/terms_use";
 export const PLATFORM_POLICY_ROUTE = "/paltform_policy";
 export const ADVERTISING_POLICY_ROUTE = "/advertising_policy";
 export const CAMPAIGN_POLICY_ROUTE = "/campaign_policy";
+export const MB_CAMPAIGN_INFORMATION_ROUTE = "/campaign_information";
+export const MB_ABOUT_US_INFORMATION_ROUTE = "/aboutus_information";
 export const NETZDG_ROUTE = "/netzDg";
 export const REPORTED_CONTENT_ROUTE = "/reported_content";
 export const PAYMENT_METHOD_ROUTE = "/payment_method";
@@ -52,9 +54,12 @@ export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit_profile";
 export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
 export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness_profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
+export const SETTINGS_CAMPAIGN_INFORMATION_ROUTE =
+  "/settings/campaigns/information";
 export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
   "/settings/campaigns/statistics";
 export const SETTINGS_ADS_ROUTE = "/settings/ads";
+export const SETTINGS_AdS_INFORMATION_ROUTE = "/settings/ads/information";
 export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/statistics";
 export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills_and_receipts";
 export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data_download";

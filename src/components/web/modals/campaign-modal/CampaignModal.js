@@ -16,9 +16,20 @@ class CampaignModal extends Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({ stepIndex: 0 });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    if (!nextProps.modalShow) {
+      this.setState({ stepIndex: 0 });
+    }
+  }
+
   handleNext = () => {
     const { stepIndex } = this.state;
-    if (stepIndex < 3) {
+    if (stepIndex < 5) {
       this.setState({ stepIndex: stepIndex + 1 });
     }
   };
@@ -31,15 +42,22 @@ class CampaignModal extends Component {
   };
 
   render() {
-    const { isFor } = this.props;
+    const { isFor, handleModalInfoShow } = this.props;
     const { stepIndex } = this.state;
+
+    let modalClassName = "";
+
+    if (stepIndex === 0) {
+      modalClassName = "modal fade create-campaign-modal overflow-scroll";
+    } else if (stepIndex !== 0 && stepIndex < 4) {
+      modalClassName = "modal fade create-campaign-modal";
+    } else if (stepIndex > 3 && stepIndex < 6) {
+      modalClassName = "modal fade payment-overview-modal";
+    }
+
     return (
       <CustomBootstrapModal
-        modalClassName={
-          stepIndex === 0
-            ? "modal fade create-campaign-modal overflow-scroll"
-            : "modal fade create-campaign-modal"
-        }
+        modalClassName={modalClassName}
         header={true}
         modalHeaderContent={
           isFor ? (
@@ -64,9 +82,19 @@ class CampaignModal extends Component {
         handleModalHide={this.props.handleModalHide}
         modalBodyContent={
           isFor ? (
-            <CreateCompanyCampaign stepIndex={this.state.stepIndex} />
+            <CreateCompanyCampaign
+              stepIndex={this.state.stepIndex}
+              isFor={this.props.isFor}
+              forThat={"Campaign"}
+              handleModalInfoShow={handleModalInfoShow}
+            />
           ) : (
-            <CreateCreatorCampaign stepIndex={this.state.stepIndex} />
+            <CreateCreatorCampaign
+              stepIndex={this.state.stepIndex}
+              isFor={this.props.isFor}
+              forThat={"Campaign"}
+              handleModalInfoShow={handleModalInfoShow}
+            />
           )
         }
       />
@@ -77,7 +105,8 @@ class CampaignModal extends Component {
 CampaignModal.propTypes = {
   modalShow: propTypes.bool.isRequired,
   handleModalHide: propTypes.func.isRequired,
-  isFor: propTypes.bool.isRequired
+  isFor: propTypes.bool.isRequired,
+  handleModalInfoShow: propTypes.func
 };
 
 export default CampaignModal;

@@ -14,6 +14,8 @@ class FeedHeader extends Component {
     this.props.handleModalInfoShow(modalType.content_view);
   };
 
+  handleOnKeyDown = () => {};
+
   render() {
     const { campaign } = this.props;
     return (
@@ -23,7 +25,7 @@ class FeedHeader extends Component {
             campaign.user.image && (
               <div
                 onClick={this.handleModalInfoShow}
-                onKeyDown={""}
+                onKeyDown={this.handleOnKeyDown}
                 role="presentation"
               >
                 <img
@@ -57,7 +59,7 @@ class FeedHeader extends Component {
 }
 
 FeedHeader.propTypes = {
-  handleModalInfoShow: PropTypes.func.isRequired,
+  handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,

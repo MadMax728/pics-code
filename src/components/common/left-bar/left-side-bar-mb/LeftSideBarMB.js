@@ -2,7 +2,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import {
-  AboutUs,
+  AboutUsInformation,
   Ads,
   Cookies,
   Feedback,
@@ -11,9 +11,9 @@ import {
   LegalNotice,
   Support,
   TermsConditions,
-  TermsUse
+  TermsUse,
+  CampaignInformation
 } from "../../../../components/web/stand-alone";
-import { Campaign } from "../../../../components/web/campaigns";
 import { Verification, DeleteAccount } from "../../../../components/web/user";
 
 import {
@@ -33,10 +33,18 @@ import {
 const LeftSideBarMB = () => {
   return (
     <div>
-      <Route exact path={routes.ABOUTUS_ROUTE} component={AboutUs} />
+      <Route
+        exact
+        path={routes.MB_ABOUT_US_INFORMATION_ROUTE}
+        component={AboutUsInformation}
+      />
       <Route exact path={routes.LEGAL_NOTICE_ROUTE} component={LegalNotice} />
       <Route exact path={routes.SUPPORT_ROUTE} component={Support} />
-      <Route exact path={routes.CAMPAIGN_ROUTE} component={Campaign} />
+      <Route
+        exact
+        path={routes.MB_CAMPAIGN_INFORMATION_ROUTE}
+        component={CampaignInformation}
+      />
       <Route exact path={routes.ADS_ROUTE} component={Ads} />
       <Route exact path={routes.VERIFICATION_ROUTE} component={Verification} />
 
