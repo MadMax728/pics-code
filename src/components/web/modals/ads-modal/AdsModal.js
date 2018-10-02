@@ -11,9 +11,19 @@ class AdsModal extends Component {
     };
   }
 
+  componentDidMount() {
+    this.setState({ stepIndex: 0 });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.modalShow) {
+      this.setState({ stepIndex: 0 });
+    }
+  }
+
   handleNext = () => {
     const { stepIndex } = this.state;
-    if (stepIndex < 1) {
+    if (stepIndex < 4) {
       this.setState({ stepIndex: stepIndex + 1 });
     }
   };
@@ -27,14 +37,21 @@ class AdsModal extends Component {
 
   render() {
     const { stepIndex } = this.state;
+    const { handleModalInfoShow } = this.props;
+
+    let modalClassName = "";
+
+    if (stepIndex === 0) {
+      modalClassName = "modal fade create-ad-modal";
+    } else if (stepIndex !== 0 && stepIndex < 3) {
+      modalClassName = "modal fade create-campaign-modal";
+    } else if (stepIndex > 2 && stepIndex < 5) {
+      modalClassName = "modal fade payment-overview-modal";
+    }
 
     return (
       <CustomBootstrapModal
-        modalClassName={
-          stepIndex === 0
-            ? "modal fade create-ad-modal"
-            : "modal fade create-campaign-modal"
-        }
+        modalClassName={modalClassName}
         header={true}
         modalHeaderContent={
           <CreateAdsHeader
@@ -48,7 +65,13 @@ class AdsModal extends Component {
         modalShow={this.props.modalShow}
         closeBtn={false}
         handleModalHide={this.props.handleModalHide}
-        modalBodyContent={<CreateAds stepIndex={this.state.stepIndex} />}
+        modalBodyContent={
+          <CreateAds
+            stepIndex={this.state.stepIndex}
+            forThat={"Ads"}
+            handleModalInfoShow={handleModalInfoShow}
+          />
+        }
       />
     );
   }
@@ -56,7 +79,8 @@ class AdsModal extends Component {
 
 AdsModal.propTypes = {
   modalShow: propTypes.bool,
-  handleModalHide: propTypes.func
+  handleModalHide: propTypes.func,
+  handleModalInfoShow: propTypes.func
 };
 
 export default AdsModal;

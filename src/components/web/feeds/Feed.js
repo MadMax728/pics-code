@@ -23,7 +23,7 @@ class Feed extends Component {
         <div className="feed_content">
           {campaign &&
             campaign.image && (
-              <Link to={"/campaign/" + campaign.id + "/information"}>
+              <Link to={`/campaign/${campaign.id}/information`}>
                 <div className="feed_image">
                   <div className="embed-responsive embed-responsive-16by9">
                     <div className="img-responsive embed-responsive-item">
@@ -59,7 +59,7 @@ class Feed extends Component {
 }
 
 Feed.propTypes = {
-  handleModalInfoShow: PropTypes.func.isRequired,
+  handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,

@@ -6,7 +6,7 @@ import * as images from "../../../../lib/constants/images";
 
 const Links = [
   {
-    to: routes.ABOUTUS_ROUTE,
+    to: routes.MB_ABOUT_US_INFORMATION_ROUTE,
     className: "mobile_menu padding-15",
     image: {
       name: images.black_right_arrow,
@@ -36,7 +36,7 @@ const Links = [
     text: Translations.mobile_sidebar_information.support
   },
   {
-    to: routes.CAMPAIGN_ROUTE,
+    to: routes.MB_CAMPAIGN_INFORMATION_ROUTE,
     className: "mobile_menu padding-15",
     image: {
       name: images.black_right_arrow,

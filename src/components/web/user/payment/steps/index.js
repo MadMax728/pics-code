@@ -1,3 +1,3 @@
-export { default as StepOne } from "./StepOne";
-export { default as StepTwo } from "./StepTwo";
-export { default as StepThree } from "./StepThree";
+export { default as PaymentStepOne } from "./PaymentStepOne";
+export { default as PaymentStepTwo } from "./PaymentStepTwo";
+export { default as PaymentStepThree } from "./PaymentStepThree";

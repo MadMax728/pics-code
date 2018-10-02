@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 import propTypes from "prop-types";
 import { modalType } from "../../../../../lib/constants/enumerations";
 
-class StepThree extends Component {
+class PaymentStepThree extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   handleCommitToBuy = () => {
+    console.log(this.props);
+
     this.props.handleModalInfoShow(modalType.payment_confirmation);
   };
 
@@ -137,8 +139,8 @@ class StepThree extends Component {
   }
 }
 
-StepThree.propTypes = {
+PaymentStepThree.propTypes = {
   handleModalInfoShow: propTypes.func
 };
 
-export default StepThree;
+export default PaymentStepThree;

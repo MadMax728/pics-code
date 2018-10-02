@@ -5,6 +5,13 @@ import { Languages } from "../languages";
 import { RightAbout } from "../right-about";
 import { FavouriteCampaigns } from "../../../../components/web/campaigns";
 import { Community } from "../../../../components/web/dashboard";
+import {
+  SettingCampaignRight,
+  SettingAdsRight,
+  SettingCampaignStatisticsRight,
+  SettingAdsStatisticsRight
+} from "../../../../components/web/user/settings";
+import propTypes from "prop-types";
 
 class RightSideBar extends Component {
   userLanguage = () => {
@@ -14,6 +21,16 @@ class RightSideBar extends Component {
         <RightAbout />
       </div>
     );
+  };
+
+  SettingCampaignRight = () => {
+    return (
+      <SettingCampaignRight handleModalShow={this.props.handleModalShow} />
+    );
+  };
+
+  SettingAdsRight = () => {
+    return <SettingAdsRight handleModalShow={this.props.handleModalShow} />;
   };
 
   render() {
@@ -93,9 +110,39 @@ class RightSideBar extends Component {
         />
 
         {/* ,,,,,, userLanguage ...... */}
+
+        {/* ........ Campaign Right bar ........ */}
+
+        <Route
+          path={routes.SETTINGS_CAMPAIGN_ROUTE}
+          exact
+          render={this.SettingCampaignRight}
+        />
+        <Route
+          path={routes.SETTINGS_ADS_ROUTE}
+          exact
+          render={this.SettingAdsRight}
+        />
+
+        <Route
+          path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
+          exact
+          component={SettingCampaignStatisticsRight}
+        />
+        <Route
+          path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
+          exact
+          component={SettingAdsStatisticsRight}
+        />
+
+        {/* ........ Campaign Right bar ........ */}
       </div>
     );
   }
 }
+
+RightSideBar.propTypes = {
+  handleModalShow: propTypes.func
+};
 
 export default RightSideBar;

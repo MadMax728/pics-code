@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 
-class StepOne extends Component {
+class PaymentStepOne extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -99,4 +99,4 @@ class StepOne extends Component {
   }
 }
 
-export default StepOne;
+export default PaymentStepOne;
