@@ -16,4 +16,40 @@
       margin-right: 1%;
     }
   }
+  .edit-profile-title-wrapr {
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+    div.edit-title-wrapr {
+      width: calc(100% - 95px);
+      float: left;
+      .form-subtitle {
+        border: 0;
+        margin: 0;
+      }
+    }
+    div.edit_profile_wrapr {
+      width: 93px;
+      float: left;
+      .image-wrapr {
+        width: 50px;
+        height: 50px;
+        border: 1px solid #1f58a6;
+        border-radius: 50%;
+        margin: 0 auto;
+        margin-bottom: 8px;
+        background: url("../images/pic-1.jpg") no-repeat center 100%;
+        background-size: contain;
+      }
+      a {
+        font-size: 12px;
+        color: #4a4a4a;
+        text-decoration: underline;
+        &:active {
+          color: #4a4a4a;
+        }
+      }
+    }
+  }
 }
