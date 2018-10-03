@@ -19,7 +19,9 @@ import {
   BillsAndReceipts,
   DataDownload,
   SettingCampaign,
-  Ads
+  Ads,
+  AdsStatistics,
+  SettingCampaignStatistics
 } from "../components/web/user";
 
 import { OtherNewsFeed, OtherAbout } from "../components/web/other";
@@ -71,6 +73,10 @@ class Home extends Component {
     //list of array data as object & calling API
     console.log(filterData);
   }
+
+  handleLanding = () => {
+    return <Landing handleModalInfoShow={this.handleModalInfoShow} />;
+  };
 
   render() {
     return (
@@ -145,7 +151,11 @@ class Home extends Component {
 
                   <Route exact path={routes.PICS_ROUTE} component={Pictures} />
 
-                  <Route path={routes.ROOT_ROUTE} exact component={Landing} />
+                  <Route
+                    path={routes.ROOT_ROUTE}
+                    exact
+                    component={this.handleLanding}
+                  />
 
                   <Route
                     path={routes.COMPANY_ROUTE}
@@ -221,15 +231,27 @@ class Home extends Component {
 
                   <Route
                     exact
+                    path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
+                    component={AdsStatistics}
+                  />
+
+                  <Route
+                    exact
                     path={routes.SETTINGS_CAMPAIGN_ROUTE}
                     component={SettingCampaign}
+                  />
+
+                  <Route
+                    exact
+                    path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
+                    component={SettingCampaignStatistics}
                   />
 
                   {/* -------- Settings Routes --------- */}
                 </Switch>
               </div>
               <div className="right_bar no-padding">
-                <RightSideBar />
+                <RightSideBar handleModalShow={this.handleModalShow} />
               </div>
             </div>
           </div>

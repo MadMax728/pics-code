@@ -33,6 +33,7 @@ class TopBarOwnerInfo extends Component {
       username: "User name",
       private: false,
       settings: true,
+      more: false,
       slots: [
         {
           name: Translations.top_bar_info.subscriber,
@@ -56,7 +57,7 @@ class TopBarOwnerInfo extends Component {
           className: "col-sm-4 slot_three no-padding",
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.create_ad,
-          handeleEvent: this.handelePayment
+          handeleEvent: this.handeleCreateAd
         }
       ]
     };

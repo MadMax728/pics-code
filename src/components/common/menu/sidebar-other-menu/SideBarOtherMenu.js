@@ -15,6 +15,12 @@ const Links = [
     className: "secondary_title",
     activeClassName: "active",
     text: Translations.left_sidebar_owner_menu.about
+  },
+  {
+    to: routes.SAVED_ROUTE,
+    className: "secondary_title",
+    activeClassName: "active",
+    text: Translations.left_sidebar_owner_menu.saved
   }
 ];
 

@@ -19,10 +19,12 @@ class CreateCreatorCampaignHeader extends Component {
     this.props.handleNext();
   };
 
-  handlePreview = () => {};
+  handlePreview = () => {
+    this.props.handlePrivewOpen();
+  };
 
   handleContinue = () => {
-    if (this.props.stepIndex < 3) {
+    if (this.props.stepIndex < 5) {
       this.props.handleNext();
     } else {
       console.log("data saved code");
@@ -43,12 +45,13 @@ class CreateCreatorCampaignHeader extends Component {
               Back
             </button>
           )}
-          {stepIndex !== 0 && (
-            <button className="black_button" onClick={this.handlePreview}>
-              Priview
-            </button>
-          )}
-          {stepIndex <= 2 && (
+          {stepIndex !== 0 &&
+            stepIndex < 3 && (
+              <button className="black_button" onClick={this.handlePreview}>
+                Priview
+              </button>
+            )}
+          {stepIndex <= 4 && (
             <button className="black_button" onClick={this.handleContinue}>
               Continue
             </button>
@@ -61,6 +64,7 @@ class CreateCreatorCampaignHeader extends Component {
 
 CreateCreatorCampaignHeader.propTypes = {
   handleModalHide: propTypes.func,
+  handlePrivewOpen: propTypes.func.isRequired,
   stepIndex: propTypes.any.isRequired,
   handleNext: propTypes.func,
   handlePrev: propTypes.func

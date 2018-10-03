@@ -38,13 +38,13 @@ class App extends Component {
   webRender = () => {
     return (
       <Switch>
+        <Route path={routes.ROOT_ROUTE} render={this.isAutgeneticated} />
         <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route exact path={routes.REGISTER_ROUTE} component={Register} />
         <Route exact path={routes.ABOUTUS_ROUTE} component={AboutUs} />
         <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />
-        <Route path={routes.ROOT_ROUTE} render={this.isAutgeneticated} />
       </Switch>
     );
   };
@@ -61,6 +61,10 @@ class App extends Component {
     return true;
   };
 
+  renderRoot = () => {
+    return <Home />;
+  };
+
   isAutgeneticated = () => {
     if (!this.isLoggedIn()) {
       return (
@@ -72,7 +76,7 @@ class App extends Component {
 
     return (
       <div>
-        <Route component={Home} />
+        <Route render={this.renderRoot} />
       </div>
     );
   };

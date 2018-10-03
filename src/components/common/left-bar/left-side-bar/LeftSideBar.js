@@ -12,6 +12,7 @@ import {
 import propTypes from "prop-types";
 import {
   SideBarCampaignMenu,
+  SideBarCampaignMenuOnlyImage,
   SideBarOtherMenu,
   SideBarSetting,
   SideBarOwnerMenu
@@ -41,7 +42,6 @@ class LeftSideBar extends Component {
         <Route path={routes.CAMPAIGN_ROUTE} exact component={CampaignNav} />
         <Route path={routes.CREATOR_ROUTE} exact component={CampaignNav} />
         <Route path={routes.COMPANY_ROUTE} exact component={CampaignNav} />
-        <Route path={routes.MY_PROFILE_ROUTE} exact component={DashboardNav} />
         <Route
           path={routes.NOTIFICATIONS_ROUTE}
           exact
@@ -85,6 +85,18 @@ class LeftSideBar extends Component {
         <Route
           path={routes.CAMPAIGN_INFORMATION_ROUTE}
           exact
+          component={SideBarCampaignMenuOnlyImage}
+        />
+
+        <Route
+          path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
+          exact
+          component={SideBarCampaignMenuOnlyImage}
+        />
+
+        <Route
+          path={routes.CAMPAIGN_INFORMATION_ROUTE}
+          exact
           component={SideBarCampaignMenu}
         />
 
@@ -117,7 +129,11 @@ class LeftSideBar extends Component {
         {/* ...... Owner Menu ...... */}
 
         {/* ...... Other Menu ...... */}
-
+        <Route
+          path={routes.MY_PROFILE_ROUTE}
+          exact
+          component={SideBarOtherMenu}
+        />
         <Route
           path={routes.OTHER_NEWS_FEED_ROUTE}
           exact
@@ -166,6 +182,18 @@ class LeftSideBar extends Component {
         />
         <Route
           path={routes.SETTINGS_CAMPAIGN_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+
+        <Route
+          path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+
+        <Route
+          path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
           exact
           component={SideBarSetting}
         />
