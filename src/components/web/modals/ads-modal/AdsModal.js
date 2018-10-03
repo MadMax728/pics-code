@@ -42,7 +42,7 @@ class AdsModal extends Component {
     let modalClassName = "";
 
     if (stepIndex === 0) {
-      modalClassName = "modal fade create-ad-modal";
+      modalClassName = "modal fade create-ad-modal overflow-scroll";
     } else if (stepIndex !== 0 && stepIndex < 3) {
       modalClassName = "modal fade create-campaign-modal";
     } else if (stepIndex > 2 && stepIndex < 5) {

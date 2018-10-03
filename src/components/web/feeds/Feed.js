@@ -63,7 +63,8 @@ Feed.propTypes = {
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,
-      image: PropTypes.string
+      image: PropTypes.string,
+      isOwner: PropTypes.bool
     }).isRequired,
     title: PropTypes.string,
     category: PropTypes.string,
