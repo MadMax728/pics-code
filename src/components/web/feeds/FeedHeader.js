@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
+import * as routes from "../../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import { modalType } from "../../../lib/constants/enumerations";
 
@@ -10,30 +11,25 @@ class FeedHeader extends Component {
     this.state = {};
   }
 
-  handleModalInfoShow = () => {
-    this.props.handleModalInfoShow(modalType.content_view);
-  };
-
   handleOnKeyDown = () => {};
 
   render() {
     const { campaign } = this.props;
+    const profile_route = campaign.user.isOwner
+      ? `/news_feed`
+      : `/news_feed/${campaign.id}`;
     return (
       <div className="feed_header">
         <div className="no-padding profile_image">
           {campaign.user &&
             campaign.user.image && (
-              <div
-                onClick={this.handleModalInfoShow}
-                onKeyDown={this.handleOnKeyDown}
-                role="presentation"
-              >
+              <Link to={profile_route}>
                 <img
                   src={campaign.user.image}
                   alt="feed"
                   className="img-circle img-responsive"
                 />
-              </div>
+              </Link>
             )}
           {(!campaign || !campaign.user || !campaign.user.image) && (
             <img
@@ -59,11 +55,11 @@ class FeedHeader extends Component {
 }
 
 FeedHeader.propTypes = {
-  handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,
-      image: PropTypes.string
+      image: PropTypes.string,
+      isOwner: PropTypes.bool
     }).isRequired,
     title: PropTypes.string,
     category: PropTypes.string,

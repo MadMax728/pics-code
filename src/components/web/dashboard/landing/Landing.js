@@ -27,7 +27,8 @@ const campaigns = [
   {
     user: {
       name: "Santosh Shinde",
-      image: `${images.campaign1}`
+      image: `${images.campaign1}`,
+      isOwner: true
     },
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
@@ -41,7 +42,8 @@ const campaigns = [
   {
     user: {
       name: "Santosh Shinde",
-      image: `${images.campaign1}`
+      image: `${images.campaign1}`,
+      isOwner: false
     },
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
@@ -55,7 +57,8 @@ const campaigns = [
   {
     user: {
       name: "Santosh Shinde",
-      image: `${images.campaign1}`
+      image: `${images.campaign1}`,
+      isOwner: false
     },
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
