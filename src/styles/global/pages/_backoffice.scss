@@ -151,6 +151,12 @@
       width: 49%;
     }
   }
+  .user_download_wrapr {
+    padding: 15px 20px;
+    display: inline-block;
+    width: 100%;
+    background: white;
+  }
 }
 .title_with_dropdown {
   margin-bottom: 10px;
@@ -243,6 +249,7 @@
     // flex: auto;
   }
 }
+
 .dashboard-tbl {
   table {
     background: $white_color;
