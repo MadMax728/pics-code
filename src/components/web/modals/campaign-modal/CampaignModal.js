@@ -12,7 +12,8 @@ class CampaignModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      stepIndex: 0
+      stepIndex: 0,
+      isPreview: false
     };
   }
 
@@ -26,6 +27,16 @@ class CampaignModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
+
+  handlePrivewOpen = () => {
+    console.log("ahikhvjksn");
+
+    this.setState({ isPreview: true });
+  };
+
+  handlePrivewClose = () => {
+    this.setState({ isPreview: false });
+  };
 
   handleNext = () => {
     const { stepIndex } = this.state;
@@ -43,7 +54,7 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor, handleModalInfoShow } = this.props;
-    const { stepIndex } = this.state;
+    const { stepIndex, isPreview } = this.state;
 
     let modalClassName = "";
 
@@ -58,7 +69,7 @@ class CampaignModal extends Component {
     return (
       <CustomBootstrapModal
         modalClassName={modalClassName}
-        header={true}
+        header={isPreview ? false : true}
         modalHeaderContent={
           isFor ? (
             <CreateCompanyCampaignHeader
@@ -73,6 +84,7 @@ class CampaignModal extends Component {
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
               stepIndex={this.state.stepIndex}
+              handlePrivewOpen={this.handlePrivewOpen}
             />
           )
         }
@@ -94,6 +106,8 @@ class CampaignModal extends Component {
               isFor={this.props.isFor}
               forThat={"Campaign"}
               handleModalInfoShow={handleModalInfoShow}
+              handlePrivewClose={this.handlePrivewClose}
+              isPreview={isPreview}
             />
           )
         }

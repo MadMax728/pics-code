@@ -19,7 +19,9 @@ class CreateCreatorCampaignHeader extends Component {
     this.props.handleNext();
   };
 
-  handlePreview = () => {};
+  handlePreview = () => {
+    this.props.handlePrivewOpen();
+  };
 
   handleContinue = () => {
     if (this.props.stepIndex < 5) {
@@ -62,6 +64,7 @@ class CreateCreatorCampaignHeader extends Component {
 
 CreateCreatorCampaignHeader.propTypes = {
   handleModalHide: propTypes.func,
+  handlePrivewOpen: propTypes.func.isRequired,
   stepIndex: propTypes.any.isRequired,
   handleNext: propTypes.func,
   handlePrev: propTypes.func
