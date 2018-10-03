@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
-import * as routes from "../../../lib/constants/routes";
 import { Link } from "react-router-dom";
-import { modalType } from "../../../lib/constants/enumerations";
 
 class FeedHeader extends Component {
   constructor(props, context) {

@@ -16,7 +16,7 @@ class SettingAdsRight extends Component {
           <button className="blue_button" onClick={this.handleCreateAds}>
             Create ad
           </button>
-          <Link to={routes.SETTINGS_AdS_INFORMATION_ROUTE}>
+          <Link to={routes.INFORMATION_ADVERTISING_ROUTE}>
             <button className="blue_button">What are ads? </button>
           </Link>
         </div>

@@ -11,7 +11,7 @@ import {
   ForgotPassword
 } from "./components/web/user";
 
-import { AboutUs } from "./components/web/stand-alone";
+import { AboutUs } from "./components/web/information";
 
 class App extends Component {
   constructor() {

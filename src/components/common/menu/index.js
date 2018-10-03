@@ -1,6 +1,8 @@
 export { SideBarSetting } from "./sidebar-setting";
 export { SideBarOwnerMenu } from "./sidebar-owner-menu";
 export { SideBarOtherMenu } from "./sidebar-other-menu";
+export { SideBarInformation } from "./sidebar-information";
+export { SideBarService } from "./sidebar-service";
 export {
   SideBarMBMenuInformation,
   SideBarMBMenuServices

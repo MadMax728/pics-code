@@ -29,7 +29,7 @@ const SideBarOtherMenu = () => {
     <LeftSidebarNav
       links={Links}
       header={`Menu`}
-      ulClassName={"nav navbar-nav pull-right"}
+      ulClassName={"nav navbar-nav pull-right settings-menu"}
     />
   );
 };

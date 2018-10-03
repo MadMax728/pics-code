@@ -12,8 +12,8 @@ import {
   Support,
   TermsConditions,
   TermsUse,
-  CampaignInformation
-} from "../../../../components/web/stand-alone";
+  CampaignsInformation
+} from "../../../../components/web/information";
 import { Verification, DeleteAccount } from "../../../../components/web/user";
 
 import {
@@ -43,7 +43,7 @@ const LeftSideBarMB = () => {
       <Route
         exact
         path={routes.MB_CAMPAIGN_INFORMATION_ROUTE}
-        component={CampaignInformation}
+        component={CampaignsInformation}
       />
       <Route exact path={routes.ADS_ROUTE} component={Ads} />
       <Route exact path={routes.VERIFICATION_ROUTE} component={Verification} />
