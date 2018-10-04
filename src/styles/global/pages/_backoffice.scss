@@ -260,6 +260,9 @@
       td {
         border: 1px solid $charcoal_color;
         padding: 10px;
+        @media (max-width: 440px) {
+          font-size: 9px;
+        }
         a {
           display: inline-block;
           padding-right: 5px;
@@ -300,25 +303,38 @@
       }
       td.wid93 {
         width: 93px;
+        @media (max-width: 440px) {
+          width: 15%;
+        }
       }
       th {
         border: 1px solid $charcoal_color;
         padding: 10px;
         font-family: "Helvetica-Bold";
         color: #4a4a4a;
-        padding: 0;
+        @media (max-width: 440px) {
+          text-align: center;
+        }
         label {
           height: 100%;
           border: 0;
           width: 100%;
           padding: 12px 0 14px 11px;
           margin-bottom: 0;
+          @media (max-width: 768px) {
+            padding: 0px;
+            font-size: 9px;
+          }
         }
         select {
           height: 100%;
           border: 0;
           width: 100%;
           padding: 12px 0 14px 11px;
+          @media (max-width: 768px) {
+            padding: 0px;
+            font-size: 9px;
+          }
           &:focus {
             outline: 0;
           }
@@ -342,6 +358,17 @@
       }
       th.wid93 {
         width: 93px;
+        @media (max-width: 440px) {
+          width: 15%;
+          a {
+            font-size: 9px;
+          }
+        }
+        @media (max-width: 320px) {
+          // display: inline-block;
+          // width: 63%;
+          // overflow: hidden;
+        }
       }
     }
   }
@@ -422,7 +449,178 @@
         background-color: white;
         padding: 10px 38px 13px 38px;
         border: solid 1px #979797;
+        margin-right: 10px;
+      }
+      .editor-wrapr {
+        border: 1px solid #545454;
+        .editor-head {
+          border-bottom: 1px solid #545454;
+          height: 41px;
+          padding: 0px 0 5px 0;
+          div {
+            float: left;
+            padding-top: 5px;
+          }
+          .left-style-wrapr {
+            select.font-size {
+              width: 115px;
+              border: 0;
+              font-size: 15px;
+              color: rgba(0, 0, 0, 0.87);
+              padding: 3px 0 0 20px;
+              -webkit-appearance: none;
+              -moz-appearance: none;
+              &:focus {
+                outline: 0;
+              }
+            }
+            span.glyphicon {
+              position: relative;
+              right: 20px;
+              height: 5px;
+              width: 10px;
+              &::before {
+                font-size: 10px;
+              }
+            }
+          }
+          .middle-style-wrapr {
+            width: 239px;
+            text-align: center;
+            // padding: 1px 31.5px 0 31.5px;
+            padding: 5px 13.5px 1px 13.5px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            &::after {
+              content: "";
+              position: absolute;
+              right: 1px;
+              height: 100%;
+              width: 2px;
+              background: rgba(0, 0, 0, 0.12);
+              bottom: -2px;
+            }
+            &::before {
+              content: "";
+              position: absolute;
+              left: 1px;
+              height: 100%;
+              width: 2px;
+              background: rgba(0, 0, 0, 0.12);
+              bottom: -2px;
+            }
+            button {
+              border: 0;
+              background-color: transparent;
+              font-weight: bold;
+              font-size: 20px;
+              flex: 1;
+              color: black;
+            }
+            .bold {
+            }
+            .italic {
+              background: url("../images/italic.PNG") no-repeat center;
+              font-style: italic;
+            }
+            .underline {
+              position: relative;
+              &::after {
+                content: "";
+                position: absolute;
+                bottom: 2px;
+                height: 2px;
+                width: 15px;
+                background: black;
+                left: 36%;
+              }
+            }
+            .color-picker {
+              background: url("../images/alignment2.jpg") no-repeat center;
+              span.glyphicon {
+                position: absolute;
+                height: 5px;
+                width: 10px;
+                right: 16px;
+                top: 13%;
+                &::before {
+                  font-size: 10px;
+                }
+              }
+            }
+          }
+          .right-style-wrapr {
+            padding: 10px 0 8px 26.5px;
+            button {
+              width: 18px;
+              height: 18px;
+              margin-right: 24px;
+              border: 0;
+              &:focus {
+                outline: 0;
+              }
+            }
+            .left-align {
+              background: url("../images/alignment2.jpg") no-repeat center;
+            }
+            .middle-align {
+              background: url("../images/alignment2.jpg") no-repeat center;
+            }
+            .right-align {
+              background: url("../images/alignment2.jpg") no-repeat center;
+            }
+            .justify-align {
+              background: url("../images/alignment2.jpg") no-repeat center;
+            }
+          }
+          .add {
+            float: right;
+            width: 35px;
+            margin: 3px 0px;
+            span {
+              color: #9b9b9b;
+              font-size: 20px;
+            }
+          }
+        }
+        .editor-body {
+          height: 435px;
+          textarea {
+            height: 100%;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            resize: none;
+            border: 0px;
+          }
+        }
       }
     }
+    .form-row.marBtm30 {
+      margin-bottom: 30px;
+    }
+    .form-row.marBtm0 {
+      margin-bottom: 0;
+    }
+  }
+}
+@-moz-document url-prefix() {
+  .create-cms-page-wrapr
+    form.cms-form
+    .form-row
+    .editor-wrapr
+    .editor-head
+    .middle-style-wrapr
+    .underline::after {
+    left: 35%;
+  }
+  .create-cms-page-wrapr
+    form.cms-form
+    .form-row
+    .editor-wrapr
+    .editor-head
+    .right-style-wrapr {
+    padding-top: 5px;
   }
 }

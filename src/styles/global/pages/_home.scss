@@ -93,6 +93,12 @@
   width: 50%;
   float: left;
 }
+.middle-section.width-80 {
+  width: 80%;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+}
 .left_menu_second {
   background-color: $white_color;
   z-index: 9;
