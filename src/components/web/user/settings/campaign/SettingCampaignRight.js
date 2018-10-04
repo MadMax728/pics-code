@@ -16,7 +16,7 @@ class SettingCampaignRight extends Component {
           <button className="blue_button" onClick={this.handleCreateCampaign}>
             Create campaign
           </button>
-          <Link to={routes.SETTINGS_CAMPAIGN_INFORMATION_ROUTE}>
+          <Link to={routes.INFORMATION_CAMPAIGN_ROUTE}>
             <button className="blue_button">What are campaigns? </button>
           </Link>
         </div>

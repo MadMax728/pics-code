@@ -9,4 +9,4 @@ export { NetzDg } from "./netz-dg";
 export { Support } from "./support";
 export { TermsConditions } from "./terms-conditions";
 export { TermsUse } from "./terms-use";
-export { CampaignInformation } from "./campaign-information";
+export { CampaignsInformation } from "./campaigns";

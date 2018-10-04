@@ -54,12 +54,9 @@ export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit_profile";
 export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
 export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness_profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
-export const SETTINGS_CAMPAIGN_INFORMATION_ROUTE =
-  "/settings/campaigns/information";
 export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
   "/settings/campaigns/statistics";
 export const SETTINGS_ADS_ROUTE = "/settings/ads";
-export const SETTINGS_AdS_INFORMATION_ROUTE = "/settings/ads/information";
 export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/statistics";
 export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills_and_receipts";
 export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data_download";
@@ -74,3 +71,29 @@ export const NEWS_FEED_ROUTE = "/news_feed";
 export const OTHER_NEWS_FEED_ROUTE = "/news_feed/:id";
 export const OTHER_ABOUT_ROUTE = "/about/:id";
 export const ABOUT_ROUTE = "/about";
+
+// Information service for web
+
+export const INFORMATION_OUR_MISSION_ROUTE = "/information/our_vision";
+export const INFORMATION_IMPRINT_ROUTE = "/information/imprint";
+export const INFORMATION_CAMPAIGN_ROUTE = "/information/campaigns";
+export const INFORMATION_CAMPAIGN_POLICY_ROUTE = "/information/campaign_policy";
+export const INFORMATION_ADVERTISING_ROUTE = "/information/advertising";
+export const INFORMATION_ADVERTISING_POLICY_ROUTE =
+  "/information/advertising_policy";
+export const INFORMATION_GENERAL_TERMS_AND_CONDITIONS_ROUTE =
+  "/information/general_terms_and_conditions";
+export const INFORMATION_DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE =
+  "/information/data_protection_and_privacy_policy";
+export const INFORMATION_PLATFORM_POLICY_ROUTE = "/information/platform_policy";
+export const INFORMATION_CANCELLATION_POLICY_ROUTE =
+  "/information/cancellation_policy";
+export const INFORMATION_TERMS_OF_USE_ROUTE = "/information/terms_of_use";
+
+export const SERVICE_SUPPORT_ROUTE = "/service/support";
+export const SERVICE_VERIFICATION_ROUTE = "/service/verification";
+export const SERVICE_FEEDBACK_ROUTE = "/service/feedback";
+export const SERVICE_REPORTED_CONTENT_ROUTE = "/service/reported_content";
+export const SERVICE_DELETE_ACCOUNT_ROUTE = "/service/delete_account";
+export const SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE =
+  "/service/law_enforcement_agency";

@@ -10,6 +10,29 @@
     "open": "Open"
   },
 
+  "information_menu": {
+    "our_vision": "Our Vision",
+    "imprint": "Imprint",
+    "campaigns": "Campaigns",
+    "campaign_policy": "Campaign Policy",
+    "advertising": "Advertising",
+    "advertising_policy": "Advertising policy",
+    "general_terms_and_conditions": "General Terms and Conditions",
+    "data_protection_and_privacy_policy": "Data protection and privacy policy",
+    "platform_policy": "Platform policy",
+    "cancellation_policy": "Cancellation policy",
+    "terms_of_use": "Terms of use"
+  },
+
+  "service_menu": {
+    "support": "Support",
+    "verification": "Verification",
+    "feedback": "Feedback",
+    "reported_content": "Reported Content",
+    "delete_account": "Delete account",
+    "law_enforcement_agency": "Law enforcement agency"
+  },
+
   "left_sidebar_filter": {
     "relevance": {
       "name": "Relevance",

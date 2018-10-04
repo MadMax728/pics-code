@@ -18,3 +18,4 @@ export {
 
 export { CustomModal } from "./custom-modal";
 export { InfoModal } from "./info-modal";
+export { HomeRoute } from "./home-route";
