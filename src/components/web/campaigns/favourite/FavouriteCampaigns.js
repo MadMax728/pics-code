@@ -6,7 +6,8 @@ const campaigns = [
   {
     user: {
       name: "Santosh Shinde",
-      image: `${images.campaign1}`
+      image: `${images.campaign2}`,
+      isOwner: true
     },
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
@@ -20,7 +21,8 @@ const campaigns = [
   {
     user: {
       name: "Santosh Shinde",
-      image: `${images.campaign1}`
+      image: `${images.campaign3}`,
+      isOwner: false
     },
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
@@ -34,11 +36,12 @@ const campaigns = [
   {
     user: {
       name: "Santosh Shinde",
-      image: `${images.campaign1}`
+      image: `${images.campaign1}`,
+      isOwner: false
     },
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
-    image: `${images.campaign3}`,
+    image: `${images.campaign4}`,
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
