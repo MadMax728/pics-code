@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-
+import { Link } from "react-router-dom";
 class EditProfile extends Component {
   handleCity = () => {};
 
@@ -11,8 +11,16 @@ class EditProfile extends Component {
       <div className="padding-rl-10 middle-section width-80">
         <div className="edit-profile-form">
           <form action="">
-            <div className="form-title">Edit profile</div>
-            <div className="form-subtitle">General information</div>
+            <div className="edit-profile-title-wrapr">
+              <div className="edit-title-wrapr">
+                <div className="form-title">Edit profile</div>
+                <div className="form-subtitle">General information</div>
+              </div>
+              <div className="edit_profile_wrapr">
+                <div className="image-wrapr" />
+                <Link to={""}>Edit profile image</Link>
+              </div>
+            </div>
             <div className="general-information-wrapper">
               <div className="form-group">
                 <label htmlFor="username">User name</label>

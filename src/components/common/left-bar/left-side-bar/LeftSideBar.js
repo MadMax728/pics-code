@@ -15,7 +15,9 @@ import {
   SideBarCampaignMenuOnlyImage,
   SideBarOtherMenu,
   SideBarSetting,
-  SideBarOwnerMenu
+  SideBarOwnerMenu,
+  SideBarInformation,
+  SideBarService
 } from "../../menu";
 
 class LeftSideBar extends Component {
@@ -197,6 +199,26 @@ class LeftSideBar extends Component {
           exact
           component={SideBarSetting}
         />
+
+        {/* letf side bar information */}
+
+        <Route
+          path={routes.INFORMATION_CAMPAIGN_ROUTE}
+          exact
+          component={SideBarInformation}
+        />
+
+        {/* letf side bar information */}
+
+        {/* letf side bar service */}
+
+        <Route
+          path={routes.INFORMATION_CAMPAIGN_ROUTE}
+          exact
+          component={SideBarService}
+        />
+
+        {/* letf side bar service */}
       </div>
     );
   }
