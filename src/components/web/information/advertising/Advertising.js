@@ -1,13 +1,13 @@
 import React from "react";
 import * as images from "../../../../lib/constants/images";
 
-const CampaignsInformation = () => {
+const Advertising = () => {
   return (
     <div className="padding-rl-10 middle-section width-80">
       <div className="cms-middle-section">
         <div className="panel-wrapper">
           <div className="col-sm-6 content-wrapper">
-            <div className="title">Campaign - Companies</div>
+            <div className="title">Advertising - Companies</div>
             <p>
               This text is an example text. This text is an example text.This
               text is an example text.This text is an example text.This text is
@@ -31,7 +31,7 @@ const CampaignsInformation = () => {
         </div>
         <div className="panel-wrapper">
           <div className="col-sm-6 content-wrapper">
-            <div className="title">Campaign - Creators</div>
+            <div className="title">Advertising - Creators</div>
             <p>
               This text is an example text. This text is an example text.This
               text is an example text.This text is an example text.This text is
@@ -58,4 +58,4 @@ const CampaignsInformation = () => {
   );
 };
 
-export default CampaignsInformation;
+export default Advertising;

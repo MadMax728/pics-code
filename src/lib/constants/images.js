@@ -127,3 +127,15 @@ export const testOne = `${process.env.REACT_APP_CDN_URL}/images/1.jpeg`;
 export const testTwo = `${process.env.REACT_APP_CDN_URL}/images/2.jpeg`;
 export const testThree = `${process.env.REACT_APP_CDN_URL}/images/3.jpeg`;
 export const feed_img = `${process.env.REACT_APP_CDN_URL}/images/feed-img.jpg`;
+
+export const campaign_1 = `${
+  process.env.REACT_APP_CDN_URL
+}/images/campaign-1.jpg`;
+export const campaign_2 = `${
+  process.env.REACT_APP_CDN_URL
+}/images/campaign-2.jpg`;
+export const vision = `${process.env.REACT_APP_CDN_URL}/images/vision.jpg`;
+export const imprint_logo_big = `${
+  process.env.REACT_APP_CDN_URL
+}/images/imprint-logo-big.jpg`;
+export const capcha = `${process.env.REACT_APP_CDN_URL}/images/capcha.jpg`;

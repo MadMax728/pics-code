@@ -32,7 +32,25 @@ import {
   Participant
 } from "../../web/campaigns";
 
-import { CampaignsInformation } from "../../web/information";
+import {
+  CampaignsInformation,
+  Advertising,
+  OurMission,
+  Imprint,
+  CampaignPolicy,
+  AdvertisingPolicy,
+  GeneralTermsAndConditions,
+  DataProtectionAndPrivacyPolicy,
+  PlatformPolicy,
+  CancellationPolicy,
+  TermsOfUse,
+  Support,
+  Verification,
+  Feedback,
+  ReportedContent,
+  DeleteAccount,
+  LawEnforcementAgency
+} from "../../web/information";
 
 class HomeRoute extends Component {
   handleLanding = () => {
@@ -148,11 +166,109 @@ class HomeRoute extends Component {
           {/* -------- Settings Routes --------- */}
 
           {/* -------- Information Routes --------- */}
+
+          <Route
+            exact
+            path={routes.INFORMATION_OUR_MISSION_ROUTE}
+            component={OurMission}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_IMPRINT_ROUTE}
+            component={Imprint}
+          />
+
           <Route
             exact
             path={routes.INFORMATION_CAMPAIGN_ROUTE}
             component={CampaignsInformation}
           />
+
+          <Route
+            exact
+            path={routes.INFORMATION_CAMPAIGN_POLICY_ROUTE}
+            component={CampaignPolicy}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_ADVERTISING_ROUTE}
+            component={Advertising}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_ADVERTISING_POLICY_ROUTE}
+            component={AdvertisingPolicy}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_GENERAL_TERMS_AND_CONDITIONS_ROUTE}
+            component={GeneralTermsAndConditions}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}
+            component={DataProtectionAndPrivacyPolicy}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_PLATFORM_POLICY_ROUTE}
+            component={PlatformPolicy}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_CANCELLATION_POLICY_ROUTE}
+            component={CancellationPolicy}
+          />
+
+          <Route
+            exact
+            path={routes.INFORMATION_TERMS_OF_USE_ROUTE}
+            component={TermsOfUse}
+          />
+
+          <Route
+            exact
+            path={routes.SERVICE_SUPPORT_ROUTE}
+            component={Support}
+          />
+
+          <Route
+            exact
+            path={routes.SERVICE_VERIFICATION_ROUTE}
+            component={Verification}
+          />
+
+          <Route
+            exact
+            path={routes.SERVICE_FEEDBACK_ROUTE}
+            component={Feedback}
+          />
+
+          <Route
+            exact
+            path={routes.SERVICE_REPORTED_CONTENT_ROUTE}
+            component={ReportedContent}
+          />
+
+          <Route
+            exact
+            path={routes.SERVICE_DELETE_ACCOUNT_ROUTE}
+            component={DeleteAccount}
+          />
+
+          <Route
+            exact
+            path={routes.SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE}
+            component={LawEnforcementAgency}
+          />
+
           {/* -------- Information Routes --------- */}
         </Switch>
       </div>

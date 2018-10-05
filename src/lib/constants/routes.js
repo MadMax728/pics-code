@@ -72,7 +72,7 @@ export const OTHER_NEWS_FEED_ROUTE = "/news_feed/:id";
 export const OTHER_ABOUT_ROUTE = "/about/:id";
 export const ABOUT_ROUTE = "/about";
 
-// Information service for web
+// Information and service for web
 
 export const INFORMATION_OUR_MISSION_ROUTE = "/information/our_vision";
 export const INFORMATION_IMPRINT_ROUTE = "/information/imprint";

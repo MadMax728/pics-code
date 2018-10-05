@@ -37,6 +37,15 @@ class LeftSideBar extends Component {
     return <ParticipantsFilter handleApplyClick={this.props.getFilter} />;
   };
 
+  renderInformationService = () => {
+    return (
+      <div>
+        <SideBarInformation />
+        <SideBarService />
+      </div>
+    );
+  };
+
   render() {
     return (
       <div>
@@ -200,12 +209,68 @@ class LeftSideBar extends Component {
           component={SideBarSetting}
         />
 
+        <Route
+          path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
+          exact
+          component={SideBarSetting}
+        />
+
         {/* letf side bar information */}
 
         <Route
+          path={routes.INFORMATION_OUR_MISSION_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_IMPRINT_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
           path={routes.INFORMATION_CAMPAIGN_ROUTE}
           exact
-          component={SideBarInformation}
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_CAMPAIGN_POLICY_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_ADVERTISING_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_ADVERTISING_POLICY_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_GENERAL_TERMS_AND_CONDITIONS_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_PLATFORM_POLICY_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_CANCELLATION_POLICY_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.INFORMATION_TERMS_OF_USE_ROUTE}
+          exact
+          render={this.renderInformationService}
         />
 
         {/* letf side bar information */}
@@ -213,9 +278,34 @@ class LeftSideBar extends Component {
         {/* letf side bar service */}
 
         <Route
-          path={routes.INFORMATION_CAMPAIGN_ROUTE}
+          path={routes.SERVICE_SUPPORT_ROUTE}
           exact
-          component={SideBarService}
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.SERVICE_VERIFICATION_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.SERVICE_FEEDBACK_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.SERVICE_REPORTED_CONTENT_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.SERVICE_DELETE_ACCOUNT_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+        <Route
+          path={routes.SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE}
+          exact
+          render={this.renderInformationService}
         />
 
         {/* letf side bar service */}

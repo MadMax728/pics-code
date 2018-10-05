@@ -73,6 +73,7 @@ class Home extends Component {
               <div>
                 <HomeRoute handleModalInfoShow={this.handleModalInfoShow} />
               </div>
+
               <div className="right_bar no-padding">
                 <RightSideBar handleModalShow={this.handleModalShow} />
               </div>
