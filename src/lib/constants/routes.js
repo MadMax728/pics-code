@@ -97,3 +97,26 @@ export const SERVICE_REPORTED_CONTENT_ROUTE = "/service/reported_content";
 export const SERVICE_DELETE_ACCOUNT_ROUTE = "/service/delete_account";
 export const SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE =
   "/service/law_enforcement_agency";
+
+// Backoffice routes
+export const BACK_OFFICE_LOGIN_ROUTE = "/back_office/login";
+export const LOGIN_PASSWORD_ROUTE = "/back_office/password";
+export const BACK_OFFICE_ROOT_ROUTE = "/back_office";
+export const BACK_OFFICE_CAMPAIGN_ROUTE = "/back_office/campaign";
+export const BACK_OFFICE_NEWS_FEED_ROUTE = "/back_office/news_feed";
+export const BACK_OFFICE_PROFILE_ROUTE = "/back_office/profile";
+
+// Back Office Settings
+export const BACK_OFFICE_SETTINGS_EDIT_PROFILE_ROUTE =
+  "/back_office/settings/edit_profile";
+export const BACK_OFFICE_SETTINGS_PRIVACY_ROUTE =
+  "/back_office/settings/privacy";
+export const BACK_OFFICE_SETTINGS_BUSSINESS_PROFILE_ROUTE =
+  "/back_office/settings/bussiness_profile";
+export const BACK_OFFICE_SETTINGS_CAMPAIGN_ROUTE =
+  "/back_office/settings/campaigns";
+export const BACK_OFFICE_SETTINGS_ADS_ROUTE = "/back_office/settings/ads";
+export const BACK_OFFICE_SETTINGS_BILLS_AND_RECEIPTS_ROUTE =
+  "/back_office/settings/bills_and_receipts";
+export const BACK_OFFICE_SETTINGS_DATA_DOWNLOAD_ROUTE =
+  "/back_office/settings/data_download";

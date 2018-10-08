@@ -1,4 +1,5 @@
 export { SideBarSetting } from "./sidebar-setting";
+export { SideBarSettingBackOffice } from "./sidebar-setting-back-office";
 export { SideBarOwnerMenu } from "./sidebar-owner-menu";
 export { SideBarOtherMenu } from "./sidebar-other-menu";
 export { SideBarInformation } from "./sidebar-information";
