@@ -9,8 +9,6 @@ class Users extends React.Component {
     };
   }
 
-  componentWillMount() {}
-
   render() {
     return (
       <div className="padding-rl-10 middle-section">
