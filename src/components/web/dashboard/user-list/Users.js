@@ -1,6 +1,6 @@
 import React from "react";
 
-import userList from "../../../../mockdata/users";
+import { userList } from "../../../../mockdata";
 class Users extends React.Component {
   constructor() {
     super();

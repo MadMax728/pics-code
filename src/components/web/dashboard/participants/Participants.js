@@ -1,7 +1,7 @@
 import React from "react";
 import * as images from "../../../../lib/constants/images";
 import { NewsFeeds } from "../../feeds";
-import timeLine from "../../../../mockdata/home";
+import { timeLine } from "../../../../mockdata";
 
 const Participants = () => {
   return (

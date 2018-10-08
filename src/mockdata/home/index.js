@@ -1,5 +1,5 @@
 import * as images from "../../lib/constants/images";
-const timeLine = [
+export const timeLine = [
   {
     user: {
       name: "Santosh Shinde",
@@ -46,5 +46,3 @@ const timeLine = [
     id: 3
   }
 ];
-
-export default timeLine;
