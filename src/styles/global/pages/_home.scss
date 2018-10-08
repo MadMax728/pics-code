@@ -92,6 +92,11 @@
 .middle-section {
   width: 50%;
   float: left;
+  &.res767.wid70 {
+    @media (max-width: 767px) {
+      width: 70%;
+    }
+  }
 }
 .middle-section.width-80 {
   width: 80%;
