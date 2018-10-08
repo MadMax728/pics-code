@@ -9,7 +9,7 @@ export {
   SideBarMBMenuServices,
   SideBarCampaignMenu
 } from "./menu";
-export { LeftSideBarMB, LeftSideBar } from "./left-bar";
+export { LeftSideBarMB, LeftSideBar, LeftSideBarBackOffice } from "./left-bar";
 export {
   CampaignCompanyFilter,
   CampaignCreatorFilter,
@@ -19,3 +19,4 @@ export {
 export { CustomModal } from "./custom-modal";
 export { InfoModal } from "./info-modal";
 export { HomeRoute } from "./home-route";
+export { BackOfficeHomeRoute } from "./back-office-home-route";
