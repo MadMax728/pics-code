@@ -4,4 +4,4 @@ export { CancellationPolicy } from "./cancellation-policy";
 export {
   DataProtectionAndPrivacyPolicy
 } from "./data-protection-and-privacy-policy";
-export { PaltformPolicy } from "./paltform-policy";
+export { PlatformPolicy } from "./platform-policy";

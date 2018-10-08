@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 
-class Feedback extends Component {
+class ReportedContent extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -12,7 +12,7 @@ class Feedback extends Component {
         <div className="cms-middle-section">
           <div className="panel-wrapper">
             <div className="content-wrapper">
-              <div className="title">Feedback</div>
+              <div className="title">Reported problem</div>
               <p>
                 This text is an example text. This text is an example text.This
                 text is an example text.This text is an example text.This text
@@ -50,8 +50,34 @@ class Feedback extends Component {
                   </div>
                   <div className="col-sm-6">
                     <div className="form-group">
+                      <label
+                        htmlFor={"The account that you're reporting "}
+                      >{`The account that you're reporting `}</label>
+                      <input type="text" name="account" />
+                    </div>
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-6">
+                    <div className="form-group">
                       <label htmlFor={"Subject"}>Subject</label>
                       <input type="text" name="subject" />
+                    </div>
+                  </div>
+                  <div className="col-sm-6">
+                    <div className="form-group">
+                      <label htmlFor={"Upload evidence (jpeg)"}>
+                        Upload evidence (jpeg)
+                      </label>
+                      <input
+                        type="file"
+                        name="file-1[]"
+                        id="file-1"
+                        className="inputfile inputfile-1"
+                      />
+                      <label htmlFor="file-1">
+                        <span>Select file</span>
+                      </label>
                     </div>
                   </div>
                 </div>
@@ -86,4 +112,4 @@ class Feedback extends Component {
   }
 }
 
-export default Feedback;
+export default ReportedContent;

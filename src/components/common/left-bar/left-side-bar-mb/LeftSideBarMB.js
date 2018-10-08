@@ -3,26 +3,24 @@ import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import {
   AboutUsInformation,
-  Ads,
+  Advertising,
   Cookies,
   Feedback,
   NetzDg,
   LawEnforcementAgency,
   LegalNotice,
   Support,
-  TermsConditions,
-  TermsUse,
-  CampaignsInformation
-} from "../../../../components/web/information";
-import { Verification, DeleteAccount } from "../../../../components/web/user";
-
-import {
-  PaltformPolicy,
+  GeneralTermsAndConditions,
+  TermsOfUse,
+  CampaignsInformation,
+  PlatformPolicy,
   AdvertisingPolicy,
   CampaignPolicy,
   CancellationPolicy,
   DataProtectionAndPrivacyPolicy
-} from "../../../web/policy";
+} from "../../../../components/web/information";
+import { Verification, DeleteAccount } from "../../../../components/web/user";
+
 import {
   DataDownload,
   PaymentMethod,
@@ -45,24 +43,24 @@ const LeftSideBarMB = () => {
         path={routes.MB_CAMPAIGN_INFORMATION_ROUTE}
         component={CampaignsInformation}
       />
-      <Route exact path={routes.ADS_ROUTE} component={Ads} />
+      <Route exact path={routes.ADS_ROUTE} component={Advertising} />
       <Route exact path={routes.VERIFICATION_ROUTE} component={Verification} />
 
       <Route
         exact
         path={routes.TERMS_CONDITIONS_ROUTE}
-        component={TermsConditions}
+        component={GeneralTermsAndConditions}
       />
       <Route
         exact
         path={routes.DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}
         component={DataProtectionAndPrivacyPolicy}
       />
-      <Route exact path={routes.TEARMS_USE_ROUTE} component={TermsUse} />
+      <Route exact path={routes.TEARMS_USE_ROUTE} component={TermsOfUse} />
       <Route
         exact
         path={routes.PLATFORM_POLICY_ROUTE}
-        component={PaltformPolicy}
+        component={PlatformPolicy}
       />
       <Route
         exact
