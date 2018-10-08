@@ -1,9 +1,5 @@
-import React from "react";
-import * as images from "../../../../lib/constants/images";
-import { NewsFeeds } from "../../feeds";
-import timeLine from "../../../../mockdata/home";
-
-const campaigns = [
+import * as images from "../../lib/constants/images";
+const timeLine = [
   {
     user: {
       name: "Santosh Shinde",
@@ -50,12 +46,5 @@ const campaigns = [
     id: 3
   }
 ];
-const Participants = () => {
-  return (
-    <div className={"middle-section padding-rl-10"}>
-      <NewsFeeds campaigns={timeLine} />
-    </div>
-  );
-};
 
-export default Participants;
+export default timeLine;
