@@ -20,3 +20,4 @@ export { CustomModal } from "./custom-modal";
 export { InfoModal } from "./info-modal";
 export { HomeRoute } from "./home-route";
 export { BackOfficeHomeRoute } from "./back-office-home-route";
+export { RightSideBarBackOffice } from "./right-bar";

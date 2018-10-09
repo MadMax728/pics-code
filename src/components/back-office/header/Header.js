@@ -104,7 +104,7 @@ export default class Header extends Component {
                     <span>{Translations.navigation.home}</span>
                   </RouteNavItem>
                   <RouteNavItem
-                    to={routes.BACK_OFFICE_CAMPAIGN_ROUTE}
+                    to={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
                     className={`menu_public`}
                     closeMenu={this.toggleNav}
                   >
