@@ -215,11 +215,23 @@
     "logout": "Logout"
   },
 
+  "register": {},
+
   "login": {
     "header": "Do what you love",
     "subheader": "Register for free",
     "forgot_password": "Forgot password",
     "login": "Log in"
+  },
+
+  "reset_password": {
+    "header": "Reset password",
+    "subheader": "Please enter your new password here."
+  },
+
+  "reset_email": {
+    "header": "Reset password",
+    "subheader": "We will send you an email to resetting your password."
   },
 
   "placeholders": {

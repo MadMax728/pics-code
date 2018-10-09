@@ -11,7 +11,7 @@ import {
   ResetEmail,
   ResetPassword,
   ForgotPassword
-} from "./components/web/user";
+} from "./components/web/auth-flow";
 
 class App extends Component {
   constructor() {
@@ -62,7 +62,6 @@ class App extends Component {
   webRender = () => {
     return (
       <Switch>
-        <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route
           exact
           path={routes.BACK_OFFICE_LOGIN_ROUTE}
