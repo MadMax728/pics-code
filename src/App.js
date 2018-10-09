@@ -4,13 +4,14 @@ import * as routes from "./lib/constants/routes";
 import { LoginPassword, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
+import { Auth } from "./auth";
 import {
   Login,
   Register,
   ResetEmail,
   ResetPassword,
   ForgotPassword
-} from "./components/web/user";
+} from "./components/web/auth-flow";
 
 class App extends Component {
   constructor() {
@@ -35,46 +36,32 @@ class App extends Component {
   };
 
   backOfficeRender = () => {
-    return (
-      <Switch>
-        <Route
-          exact
-          path={routes.BACK_OFFICE_LOGIN_ROUTE}
-          component={LoginLinkSend}
-        />
-        <Route
-          exact
-          path={routes.LOGIN_PASSWORD_ROUTE}
-          component={LoginPassword}
-        />
-        <Route
-          path={routes.ROOT_ROUTE}
-          render={this.isAutgeneticatedBackOffice}
-        />
-      </Switch>
-    );
-  };
-
-  isAutgeneticatedBackOffice = () => {
-    if (!this.isLoggedIn()) {
+    if (Auth.isUserAdmin()) {
       return (
-        <div>
-          <Route component={LoginLinkSend} />
-        </div>
+        <Switch>
+          <Route
+            exact
+            path={routes.BACK_OFFICE_LOGIN_ROUTE}
+            component={LoginLinkSend}
+          />
+          <Route
+            exact
+            path={routes.LOGIN_PASSWORD_ROUTE}
+            component={LoginPassword}
+          />
+          <Route
+            path={routes.BACK_OFFICE_ROOT_ROUTE}
+            render={this.isAdminUserAuthenticated}
+          />
+        </Switch>
       );
     }
-
-    return (
-      <div>
-        <Route component={BackOfficeHome} />
-      </div>
-    );
+    return <div />;
   };
 
   webRender = () => {
     return (
       <Switch>
-        <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route
           exact
           path={routes.BACK_OFFICE_LOGIN_ROUTE}
@@ -89,7 +76,7 @@ class App extends Component {
         <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />
-        <Route path={routes.ROOT_ROUTE} render={this.isAutgeneticated} />
+        <Route path={routes.ROOT_ROUTE} render={this.isUserAuthenticated} />
       </Switch>
     );
   };
@@ -102,16 +89,8 @@ class App extends Component {
     );
   };
 
-  isLoggedIn = () => {
-    return true;
-  };
-
-  isLoggedInBackOffice = () => {
-    return true;
-  };
-
-  isAutgeneticated = () => {
-    if (!this.isLoggedIn()) {
+  isUserAuthenticated = () => {
+    if (!Auth.isUserAuthenticated()) {
       return (
         <div>
           <Route component={Login} />
@@ -122,13 +101,36 @@ class App extends Component {
     return (
       <div>
         <Route component={Home} />
+        <Route render={this.backOfficeRender} />
+      </div>
+    );
+  };
+
+  isAdminUserAuthenticated = () => {
+    if (!Auth.isAdminUserAuthenticated()) {
+      return (
+        <div>
+          <Route
+            exact
+            path={routes.BACK_OFFICE_LOGIN_ROUTE}
+            component={LoginLinkSend}
+          />
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <Route
+          path={routes.BACK_OFFICE_ROOT_ROUTE}
+          component={BackOfficeHome}
+        />
       </div>
     );
   };
 
   render() {
     const { width } = this.state;
-    const isBackoffice = true;
     const isMobile = width <= 760;
     if (isMobile) {
       return (
@@ -137,14 +139,9 @@ class App extends Component {
         </div>
       );
     }
-
     return (
       <div>
-        {isBackoffice ? (
-          <Route render={this.backOfficeRender} />
-        ) : (
-          <Route render={this.webRender} />
-        )}
+        <Route render={this.webRender} />
       </div>
     );
   }
