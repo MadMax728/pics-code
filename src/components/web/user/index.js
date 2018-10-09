@@ -1,5 +1,4 @@
 export { DeleteAccount } from "./account";
-export { OnBoardingSkeleton } from "./on-boarding-skeleton";
 export { UserInfo, UserProfile } from "./profile";
 export { About } from "./about";
 export { NewsFeed } from "./news-feed";

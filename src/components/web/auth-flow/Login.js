@@ -8,6 +8,7 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -134,7 +135,8 @@ const mapDispatchToProps = {
 
 Login.propTypes = {
   submitLogin: PropTypes.func.isRequired,
-  loginData: PropTypes.object
+  loginData: PropTypes.object,
+  history: PropTypes.any
 };
 
 export default connect(

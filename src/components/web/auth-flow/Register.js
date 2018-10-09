@@ -4,6 +4,7 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, Cookies, DownloadStore } from "../common";
+import PropTypes from "prop-types";
 
 class Register extends Component {
   constructor(props) {
@@ -150,5 +151,9 @@ class Register extends Component {
     </div>
   );
 }
+
+Register.propTypes = {
+  history: PropTypes.any
+};
 
 export default Register;

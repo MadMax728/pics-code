@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
+import PropTypes from "prop-types";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 class ResetPassword extends Component {
   constructor(props) {
@@ -111,5 +112,9 @@ class ResetPassword extends Component {
     );
   }
 }
+
+ResetPassword.propTypes = {
+  history: PropTypes.any
+};
 
 export default ResetPassword;

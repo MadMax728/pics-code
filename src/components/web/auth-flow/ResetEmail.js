@@ -3,6 +3,7 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter } from "../common";
+import PropTypes from "prop-types";
 
 class ResetMail extends Component {
   constructor(props) {
@@ -58,5 +59,9 @@ class ResetMail extends Component {
     </div>
   );
 }
+
+ResetMail.propTypes = {
+  history: PropTypes.any
+};
 
 export default ResetMail;
