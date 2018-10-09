@@ -2,7 +2,10 @@ import React, { Component } from "react";
 
 import {
   LeftSideBarBackOffice,
-  BackOfficeHomeRoute
+  CustomModal,
+  InfoModal,
+  BackOfficeHomeRoute,
+  RightSideBarBackOffice
 } from "../components/common";
 
 class BackOfficeHome extends Component {
@@ -22,7 +25,9 @@ class BackOfficeHome extends Component {
                 />
               </div>
 
-              <div className="right_bar no-padding" />
+              <div className="right_bar no-padding">
+                <RightSideBarBackOffice />
+              </div>
             </div>
           </div>
         </section>

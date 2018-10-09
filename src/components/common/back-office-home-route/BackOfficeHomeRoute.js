@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import propTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
-import { Landing } from "../../back-office";
+import { Landing, Campaigns, Ads, ImagesBO } from "../../back-office";
 
 class BackOfficeHomeRoute extends Component {
   handleLanding = () => {
@@ -17,6 +17,17 @@ class BackOfficeHomeRoute extends Component {
             path={routes.BACK_OFFICE_ROOT_ROUTE}
             exact
             component={this.handleLanding}
+          />
+          <Route
+            path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
+            exact
+            component={Campaigns}
+          />
+          <Route path={routes.BACK_OFFICE_ADS_ROUTE} exact component={Ads} />
+          <Route
+            path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
+            exact
+            component={ImagesBO}
           />
         </Switch>
       </div>
