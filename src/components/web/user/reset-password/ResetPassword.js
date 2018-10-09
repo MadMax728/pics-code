@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
-import { connect } from "react-redux";
-
-import { handleResetPassword } from "../../../../actions";
 import { OnBoardingSkeleton } from "../on-boarding-skeleton";
-import { func, shape } from "prop-types";
 import { LOGIN_ROUTE } from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 
@@ -96,16 +91,4 @@ class ResetPassword extends Component {
   }
 }
 
-ResetPassword.propTypes = {
-  handleResetPassword: func,
-  history: shape({
-    push: func
-  })
-};
-const ResetEmail = withRouter(
-  connect(
-    null,
-    { handleResetPassword }
-  )(ResetPassword)
-);
-export default ResetEmail;
+export default ResetPassword;

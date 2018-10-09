@@ -1,10 +1,5 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { func, bool, object } from "prop-types";
-import { handleRegisteration } from "../../../../actions";
 import { OnBoardingSkeleton } from "../on-boarding-skeleton";
-import { getRegisterLoading } from "../../../../reducers";
-import { withRouter } from "react-router-dom";
 import InlineLoading from "../../../ui-kit/loading-indicator/InlineLoading";
 import * as images from "../../../../lib/constants/images";
 import * as CONSTANTS from "../../../../lib/constants/routes";
@@ -207,18 +202,4 @@ class Register extends Component {
   );
 }
 
-Register.propTypes = {
-  handleRegisteration: func,
-  showRegsiterLoading: bool,
-  history: object.isRequired
-};
-
-const mapStateToProps = state => ({
-  showRegsiterLoading: getRegisterLoading(state)
-});
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { handleRegisteration }
-  )(Register)
-);
+export default Register;

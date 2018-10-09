@@ -1,11 +1,7 @@
 import React from "react";
-import { connect } from "react-redux";
-import { getResendEmail } from "../../../../reducers";
-import { string, func } from "prop-types";
-import { handleResetEmail } from "../../../../actions";
 import { OnBoardingSkeleton } from "../on-boarding-skeleton";
 
-const ForgotPassword = ({ resendEmail, handleResetEmail }) => (
+const ForgotPassword = () => (
   <OnBoardingSkeleton>
     {() => (
       <React.Fragment>
@@ -25,15 +21,5 @@ const ForgotPassword = ({ resendEmail, handleResetEmail }) => (
     )}
   </OnBoardingSkeleton>
 );
-ForgotPassword.propTypes = {
-  resendEmail: string,
-  handleResetEmail: func
-};
 
-const mapStateToProps = state => ({
-  resendEmail: getResendEmail(state)
-});
-export default connect(
-  mapStateToProps,
-  { handleResetEmail }
-)(ForgotPassword);
+export default ForgotPassword;

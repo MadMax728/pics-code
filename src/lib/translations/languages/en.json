@@ -213,5 +213,17 @@
 
   "header": {
     "logout": "Logout"
+  },
+
+  "login": {
+    "header": "Do what you love",
+    "subheader": "Register for free",
+    "forgot_password": "Forgot password",
+    "login": "Log in"
+  },
+
+  "placeholders": {
+    "username_email": "User name / Email",
+    "password": "Password"
   }
 }

@@ -1,35 +1,44 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import { login } from "../../../../actions";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import { OnBoardingSkeleton } from "../on-boarding-skeleton";
-import { Link, withRouter } from "react-router-dom";
-
-import { func, object, bool } from "prop-types";
-import { getLoginLoading } from "../../../../reducers";
-import InlineLoading from "../../../ui-kit/loading-indicator/InlineLoading";
+import { submitLogin } from "../../../../actions/login";
+import { InlineLoading } from "../../../ui-kit";
 import * as images from "../../../../lib/constants/images";
 import * as routes from "../../../../lib/constants/routes";
+import { Translations } from "../../../../lib/translations";
 
-const updateState = key => value => () => ({ [key]: value });
-const updateName = updateState("userName");
-const updatePassword = updateState("password");
 class Login extends Component {
-  state = {
-    userName: "",
-    password: "",
-    formValid: false
-  };
+  constructor(props) {
+    super(props);
 
-  updateName = e => {
+    this.state = {
+      userName: "",
+      password: "",
+      formValid: false
+    };
+  }
+
+  /**
+   * getUserEnteredUserName
+   */
+  getUserEnteredUserName = e => {
     e.preventDefault();
-    this.setState(updateName(e.target.value));
+    this.setState({ userName: e.target.value });
   };
 
-  updatePassword = e => {
+  /**
+   * getUserEnterPassword
+   */
+  getUserEnterPassword = e => {
     e.preventDefault();
-    this.setState(updatePassword(e.target.value));
+    this.setState({ password: e.target.value });
   };
 
+  /**
+   * formValid
+   */
   formValid = () => {
     const { userName, password } = this.state;
     if (userName.length === 0 || password.length === 0) {
@@ -39,32 +48,37 @@ class Login extends Component {
     this.setState(() => ({ formValid: true }));
     return true;
   };
-  onSubmitButton = event => {
-    event.preventDefault();
-    if (this.formValid()) {
-      this.props.login(this.state);
-      this.props.history.push(routes.ROOT_ROUTE);
+
+  handleSubmit = event => {
+    if (!this.formValid()) {
+      return false;
     }
+
+    const { userName, password } = this.state;
+
+    this.props.submitLogin({ email: userName, password: password });
+    this.props.history.push(routes.ROOT_ROUTE);
   };
 
   render() {
+    const { loginData } = this.props;
     return (
       <OnBoardingSkeleton
-        topHeader={"Do what you love"}
-        subHeader={"Register for free"}
+        topHeader={Translations.login.header}
+        subHeader={Translations.login.subheader}
         showDownloadStore
         type={"login"}
       >
         {() => (
-          <form>
+          <form onSubmit={this.handleSubmit}>
             <div className="form-group">
               <input
                 type="email"
                 className="form-control"
                 id="email"
                 value={this.state.userName}
-                onChange={this.updateName}
-                placeholder="User name / Email"
+                onChange={this.getUserEnteredUserName}
+                placeholder={Translations.placeholders.username_email}
               />
               {this.state.userName.length > 0 ? (
                 <img src={images.checked} alt={"checked"} />
@@ -78,8 +92,8 @@ class Login extends Component {
                 className="form-control"
                 id="password"
                 value={this.state.password}
-                onChange={this.updatePassword}
-                placeholder="Password"
+                onChange={this.getUserEnterPassword}
+                placeholder={Translations.placeholders.password}
               />
               {this.state.password.length > 0 ? (
                 <img src={images.checked} alt={"checked"} />
@@ -88,12 +102,14 @@ class Login extends Component {
               )}
             </div>
             <div className="form-group">
-              <Link to={routes.RESET_EMAIL}>Forgot password</Link>
+              <Link to={routes.RESET_EMAIL}>
+                {Translations.login.forgot_password}
+              </Link>
             </div>
             <div className="form-group">
-              {!this.props.showLoginLoading ? (
-                <button onClick={this.onSubmitButton} className="blue_button">
-                  Log in
+              {!loginData || !loginData.isLoading ? (
+                <button type="submit" className="blue_button">
+                  {Translations.login.login}
                 </button>
               ) : (
                 <InlineLoading />
@@ -106,17 +122,20 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  login: func,
-  showLoginLoading: bool,
-  history: object.isRequired
-};
 const mapStateToProps = state => ({
-  showLoginLoading: getLoginLoading(state)
+  loginData: state.loginData
 });
-export default withRouter(
-  connect(
-    mapStateToProps,
-    { login }
-  )(Login)
-);
+
+const mapDispatchToProps = {
+  submitLogin
+};
+
+Login.propTypes = {
+  submitLogin: PropTypes.func.isRequired,
+  loginData: PropTypes.object
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import App from "./App";
-import { logger } from "./logging";
+import { logger } from "./loggers";
 import { unregister } from "./registerServiceWorker";
 import { configureStore } from "./store";
 
