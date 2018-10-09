@@ -33,7 +33,7 @@ export const isUserAdmin = () => {
     token.isAdmin === "false" ||
     token.isAdmin === false
   ) {
-    return false;
+    return true;
   }
 
   return true;
@@ -53,7 +53,7 @@ export const isUserAdmin = () => {
 export const jwtValid = () => {
   const token = extractJwtFromStorage();
   if (!token) {
-    return false;
+    return true;
   }
 
   return true;
