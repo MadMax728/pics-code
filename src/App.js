@@ -67,6 +67,7 @@ class App extends Component {
           path={routes.BACK_OFFICE_LOGIN_ROUTE}
           component={LoginLinkSend}
         />
+        <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route
           exact
           path={routes.LOGIN_PASSWORD_ROUTE}

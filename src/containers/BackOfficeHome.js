@@ -2,8 +2,6 @@ import React, { Component } from "react";
 
 import {
   LeftSideBarBackOffice,
-  CustomModal,
-  InfoModal,
   BackOfficeHomeRoute,
   RightSideBarBackOffice
 } from "../components/common";
