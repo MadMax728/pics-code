@@ -3,11 +3,10 @@ import { Header, Footer } from "../components/back-office";
 
 import {
   LeftSideBarBackOffice,
-  RightSideBar,
-  TopBarInfo,
   CustomModal,
   InfoModal,
-  BackOfficeHomeRoute
+  BackOfficeHomeRoute,
+  RightSideBarBackOffice
 } from "../components/common";
 
 class BackOfficeHome extends Component {
@@ -77,7 +76,7 @@ class BackOfficeHome extends Component {
               </div>
 
               <div className="right_bar no-padding">
-                {/* <RightSideBar handleModalShow={this.handleModalShow} /> */}
+                <RightSideBarBackOffice />
               </div>
             </div>
           </div>
