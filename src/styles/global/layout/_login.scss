@@ -1,3 +1,4 @@
+// @include gradient();
 .login-process {
   background: $white_color;
   .custom-container {
@@ -151,6 +152,9 @@
       img {
         width: 135px;
       }
+      a {
+        margin-right: 17px;
+      }
     }
   }
   .cookies-section {
@@ -172,7 +176,7 @@
   footer {
     float: left;
     width: 100%;
-    margin: 30px 0px;
+    margin: 28px 0px;
     ul {
       padding: 0px;
       text-align: center;
