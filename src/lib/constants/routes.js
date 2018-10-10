@@ -133,7 +133,7 @@ export const BACK_OFFICE_ADD_VOUCHER_ROUTE = "/back_office/add_voucher";
 export const BACK_OFFICE_DATA_DOWNLOAD_ROUTE = "/back_office/data_download";
 
 export const BACK_OFFICE_REPORTED_IMAGES_ROUTE = "/back_office/reported/images";
-export const BACK_OFFICE_REPORTED_VIDEO_ROUTE = "/back_office/reported/videos";
+export const BACK_OFFICE_REPORTED_VIDEOS_ROUTE = "/back_office/reported/videos";
 export const BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE =
   "/back_office/reported/campaigns";
 export const BACK_OFFICE_REPORTED_PICS_ROUTE = "/back_office/reported/pics";

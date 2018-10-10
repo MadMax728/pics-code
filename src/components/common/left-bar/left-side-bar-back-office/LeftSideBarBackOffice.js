@@ -41,6 +41,42 @@ class LeftSideBarBackOffice extends Component {
           component={SideBarReviewContentMenu}
         />
 
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
         {/* review menu */}
         <Route
           path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
@@ -68,6 +104,42 @@ class LeftSideBarBackOffice extends Component {
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
           exact
           component={this.handleReportedContentFilter}
         />

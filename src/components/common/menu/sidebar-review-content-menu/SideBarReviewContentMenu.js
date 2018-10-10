@@ -11,7 +11,7 @@ const Links = [
     text: Translations.review_content_menu.images
   },
   {
-    to: routes.BACK_OFFICE_REPORTED_VIDEO_ROUTE,
+    to: routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE,
     className: "secondary_title",
     activeClassName: "active",
     text: Translations.review_content_menu.videos

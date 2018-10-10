@@ -3,4 +3,12 @@ export { Landing } from "./landing";
 export { Header } from "./header";
 export { Campaigns } from "./campaigns";
 export { Ads } from "./ads";
-export { ImagesBO } from "./images-b-o";
+export {
+  ImagesBO,
+  VideosBO,
+  ReportedCampaigns,
+  Pics,
+  ReportedAds,
+  Comments,
+  Users
+} from "./reported";
