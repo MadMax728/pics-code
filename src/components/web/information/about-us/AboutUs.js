@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { OnBoardingSkeleton } from "../../user";
 
 class AboutUs extends Component {
   render() {
     return (
-      <OnBoardingSkeleton showDownloadStore>{() => <div />}</OnBoardingSkeleton>
+      <div>
+        <div className="normal_title padding-15">AboutUsInformation</div>
+      </div>
     );
   }
 }

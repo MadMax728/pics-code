@@ -1,52 +1,35 @@
-import * as type from "./types";
-import { MockLogin } from "../api/fakeApi";
+import * as types from "../lib/constants/actionTypes";
+import * as userService from "../services/userService";
+import { logger } from "../loggers";
 
-export const login = payload => ({
-  type: type.LOGIN,
-  method: "MockPost",
-  endPoint: MockLogin.CreateUser,
-  types: [type.LOGIN_REQUEST, type.LOGIN_SUCCESS, type.LOGIN_FAILURE],
-  payload
+const submitLoginStarted = () => ({
+  type: types.SUBMIT_LOGIN_STARTED
 });
 
-export const handleRegisteration = payload => {
-  return {
-    type: type.REGISTER,
-    method: "MockPost",
-    endPoint: MockLogin.RegisterUser,
-    types: [
-      type.REGISTER_REQUEST,
-      type.REGISTER_SUCCESS,
-      type.REGISTER_FAILURE
-    ],
-    payload
-  };
-};
+const submitLoginSucceeded = data => ({
+  type: types.SUBMIT_LOGIN_SUCCEEDED,
+  payload: data
+});
 
-export const handleResetEmail = payload => {
-  return {
-    type: type.RESET_EMAIL,
-    method: "MockPost",
-    endPoint: MockLogin.ResetEmail,
-    types: [
-      type.RESET_EMAIL_REQUEST,
-      type.RESET_EMAIL_SUCCESS,
-      type.RESET_EMAIL_FAILURE
-    ],
-    payload
-  };
-};
+const submitLoginFailed = error => ({
+  type: types.SUBMIT_LOGIN_FAILED,
+  payload: error,
+  error: true
+});
 
-export const handleResetPassword = payload => {
-  return {
-    type: type.RESET_PASSWORD,
-    method: "MockPost",
-    endPoint: MockLogin.ResetEmail,
-    types: [
-      type.RESET_PASSWORD_REQUEST,
-      type.RESET_PASSWORD_SUCCESS,
-      type.RESET_PASSWORD_FAILURE
-    ],
-    payload
+export const submitLogin = params => {
+  return dispatch => {
+    dispatch(submitLoginStarted());
+
+    return userService.submitLogin(params).then(
+      res => dispatch(submitLoginSucceeded(res.data)),
+      error => {
+        dispatch(submitLoginFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
   };
 };

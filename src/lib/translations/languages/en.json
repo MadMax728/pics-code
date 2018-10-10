@@ -24,6 +24,55 @@
     "terms_of_use": "Terms of use"
   },
 
+  "back_office_menu": {
+    "dashboard": "Dashboard",
+    "cms_managment": "CMS Management",
+    "add_admin": "Add Admin",
+    "add_verification": "Add Verification",
+    "add_voucher": "Add Voucher",
+    "data_download": "Data Download"
+  },
+
+  "review_menu": {
+    "campaigns": "Campaign",
+    "ads": "Ads"
+  },
+
+  "review_content_menu": {
+    "images": "Images",
+    "videos": "Videos",
+    "campaigns": "Campaigns",
+    "pics": "Pics",
+    "ads": "Ads",
+    "comments": "Comments",
+    "user": "User"
+  },
+
+  "review_filter": {
+    "status": {
+      "name": "Status",
+      "type": "select"
+    }
+  },
+
+  "reported_content_filter": {
+    "relevance": {
+      "name": "Relevance",
+      "type": "select"
+    },
+    "status": {
+      "name": "Status",
+      "type": "select"
+    }
+  },
+
+  "right_side_bar_statistics": {
+    "all": "All",
+    "outstanding": "Outstanding",
+    "processed": "Processed",
+    "not_processed": "Not processed"
+  },
+
   "service_menu": {
     "support": "Support",
     "verification": "Verification",
@@ -213,5 +262,29 @@
 
   "header": {
     "logout": "Logout"
+  },
+
+  "register": {},
+
+  "login": {
+    "header": "Do what you love",
+    "subheader": "Register for free",
+    "forgot_password": "Forgot password",
+    "login": "Log in"
+  },
+
+  "reset_password": {
+    "header": "Reset password",
+    "subheader": "Please enter your new password here."
+  },
+
+  "reset_email": {
+    "header": "Reset password",
+    "subheader": "We will send you an email to resetting your password."
+  },
+
+  "placeholders": {
+    "username_email": "User name / Email",
+    "password": "Password"
   }
 }
