@@ -33,7 +33,7 @@
     text-align: center;
     color: $charcoal_color;
     h3 {
-      margin-bottom: 20px;
+      margin-bottom: 15px;
       float: left;
       width: 100%;
     }
@@ -118,6 +118,7 @@
         float: left;
         margin-left: 18px;
         color: $blue_color;
+        text-decoration: underline;
       }
       button {
         float: left;
@@ -171,6 +172,7 @@
     }
     img {
       width: 12px;
+      margin-left: 10px;
     }
   }
   footer {
