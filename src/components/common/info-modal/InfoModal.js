@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
-import { ContentViewModal, PaymentConfirmationModal } from "../../web/modals";
+import {
+  ContentViewModal,
+  PaymentConfirmationModal,
+  ProcessedModal,
+  PostPopUpModal
+} from "../../web/modals";
 import propTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
 
@@ -15,6 +20,24 @@ class InfoModal extends Component {
   handleModalContentView = () => {
     return (
       <ContentViewModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+      />
+    );
+  };
+
+  handleModalProcessed = () => {
+    return (
+      <ProcessedModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+      />
+    );
+  };
+
+  handleModalPostPopUp = () => {
+    return (
+      <PostPopUpModal
         modalInfoShow={this.props.modalInfoShow}
         handleModalInfoHide={this.props.handleModalInfoHide}
       />
@@ -38,6 +61,10 @@ class InfoModal extends Component {
           this.handleModalPaymentConfirmation()}
         {this.props.modalInfoType === modalType.content_view &&
           this.handleModalContentView()}
+        {this.props.modalInfoType === modalType.processed &&
+          this.handleModalProcessed()}
+        {this.props.modalInfoType === modalType.post_pop_up &&
+          this.handleModalPostPopUp()}
       </div>
     );
   };
@@ -55,7 +82,6 @@ InfoModal.propTypes = {
   modalInfoShow: propTypes.bool.isRequired,
   modalInfoType: propTypes.string,
   handleModalInfoHide: propTypes.func.isRequired,
-
   handleModalHide: propTypes.func.isRequired
 };
 

@@ -126,6 +126,7 @@ export const BACK_OFFICE_SETTINGS_DATA_DOWNLOAD_ROUTE =
 
 export const BACK_OFFICE_DASHBOARD_ROUTE = "/back_office/dashboard";
 export const BACK_OFFICE_CMS_MANAGMENT_ROUTE = "/back_office/cms_managment";
+export const BACK_OFFICE_CREATE_CMS_ROUTE = "/back_office/cms_managment/create";
 export const BACK_OFFICE_ADD_ADMIN_ROUTE = "/back_office/add_admin";
 export const BACK_OFFICE_ADD_VERIFICATION_ROUTE =
   "/back_office/add_verification";

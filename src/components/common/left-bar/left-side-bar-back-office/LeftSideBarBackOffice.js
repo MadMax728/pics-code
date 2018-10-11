@@ -22,17 +22,90 @@ class LeftSideBarBackOffice extends Component {
   render() {
     return (
       <div>
+        {/* Setting Menu */}
         <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           exact
           component={SideBarSettingBackOffice}
         />
+
+        <Route
+          path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        {/* Backoffice Menu */}
         <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           exact
           component={SideBarBackOffice}
         />
+        <Route
+          path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
 
+        <Route
+          path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
         {/* Reported content menu */}
 
         <Route

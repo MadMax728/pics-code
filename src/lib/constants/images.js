@@ -139,3 +139,4 @@ export const imprint_logo_big = `${
   process.env.REACT_APP_CDN_URL
 }/images/imprint-logo-big.jpg`;
 export const capcha = `${process.env.REACT_APP_CDN_URL}/images/capcha.jpg`;
+export const close = `${process.env.REACT_APP_CDN_URL}/images/close.svg`;

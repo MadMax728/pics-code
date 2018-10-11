@@ -5,6 +5,11 @@ import * as routes from "../../../lib/constants/routes";
 import {
   Landing,
   Campaigns,
+  CMSManagement,
+  AddAdmin,
+  AddVerification,
+  AddVoucher,
+  DataDownload,
   Ads,
   ImagesBO,
   VideosBO,
@@ -12,7 +17,8 @@ import {
   Pics,
   ReportedAds,
   Comments,
-  Users
+  Users,
+  CreateCMSManagement
 } from "../../back-office";
 
 class BackOfficeHomeRoute extends Component {
@@ -20,26 +26,80 @@ class BackOfficeHomeRoute extends Component {
     return <Landing handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
+  handleAds = () => {
+    return <Ads handleModalInfoShow={this.props.handleModalInfoShow} />;
+  };
+
+  handleImageBO = () => {
+    return <ImagesBO handleModalInfoShow={this.props.handleModalInfoShow} />;
+  };
+
   render() {
     return (
       <div>
         <Switch>
+          {/* backoffice routes */}
           <Route
             path={routes.BACK_OFFICE_ROOT_ROUTE}
             exact
             component={this.handleLanding}
           />
+
+          <Route
+            path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
+            exact
+            component={CMSManagement}
+          />
+
+          <Route
+            path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
+            exact
+            component={CreateCMSManagement}
+          />
+
+          <Route
+            path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
+            exact
+            component={AddAdmin}
+          />
+
+          <Route
+            path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
+            exact
+            component={AddVerification}
+          />
+
+          <Route
+            path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
+            exact
+            component={AddVoucher}
+          />
+
+          <Route
+            path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
+            exact
+            component={DataDownload}
+          />
+
           <Route
             path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
             exact
             component={Campaigns}
           />
-          <Route path={routes.BACK_OFFICE_ADS_ROUTE} exact component={Ads} />
+
+          <Route
+            path={routes.BACK_OFFICE_ADS_ROUTE}
+            exact
+            component={this.handleAds}
+          />
+
+          {/* reported routes */}
           <Route
             path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
             exact
-            component={ImagesBO}
+            component={this.handleImageBO}
           />
+
           <Route
             path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
             exact
