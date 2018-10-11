@@ -48,7 +48,7 @@ const SideBarBackOffice = () => {
       <div className="gap-10" />
       <LeftSidebarNav
         links={Links}
-        header={`Settings`}
+        header={`Backoffice`}
         ulClassName={"nav navbar-nav pull-right settings-menu"}
       />
     </div>

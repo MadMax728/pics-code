@@ -1,3 +1,9 @@
 export { RightAdsList } from "./right-ads-list";
 export { RightCampaignsList } from "./right-campaigns-list";
 export { RightImagesList } from "./right-images-list";
+export { RightVideosList } from "./right-videos-list";
+export { RightReportedCampaignList } from "./right-reported-campaign-list";
+export { RightPicsList } from "./right-pics-list";
+export { RightReportedAdList } from "./right-reported-ad-list";
+export { RightCommentsList } from "./right-comments-list";
+export { RightUsersList } from "./right-users-list";
