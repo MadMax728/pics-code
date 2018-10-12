@@ -1,61 +1,14 @@
 import React from "react";
 import * as images from "../../../../lib/constants/images";
 import FavouriteCampaignItem from "./FavouriteCampaignItem";
-
-const campaigns = [
-  {
-    user: {
-      name: "Santosh Shinde",
-      image: `${images.campaign2}`,
-      isOwner: true
-    },
-    title: "Title of campaigns",
-    category: "01.01.2000 in Category",
-    image: `${images.campaign4}`,
-    desc:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-    msg_count: 12,
-    like_count: 12,
-    id: 1
-  },
-  {
-    user: {
-      name: "Santosh Shinde",
-      image: `${images.campaign3}`,
-      isOwner: false
-    },
-    title: "Title of campaigns",
-    category: "01.01.2000 in Category",
-    image: `${images.campaign2}`,
-    desc:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-    msg_count: 12,
-    like_count: 12,
-    id: 2
-  },
-  {
-    user: {
-      name: "Santosh Shinde",
-      image: `${images.campaign1}`,
-      isOwner: false
-    },
-    title: "Title of campaigns",
-    category: "01.01.2000 in Category",
-    image: `${images.campaign4}`,
-    desc:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
-    msg_count: 12,
-    like_count: 12,
-    id: 3
-  }
-];
+import { favourite_campaigns_list } from "../../../../mock-data";
 
 const FavouriteCampaigns = () => {
   return (
     <div>
       <div className="normal_title padding-15">Favourite Campaigns</div>
       <div className="campaigns">
-        {campaigns.map(campaign => {
+        {favourite_campaigns_list.map(campaign => {
           return (
             <FavouriteCampaignItem campaign={campaign} key={campaign.id} />
           );

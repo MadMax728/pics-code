@@ -13,7 +13,7 @@ class UploadModal extends Component {
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade upload-image-modal"}
-        header={true}
+        header
         modalHeaderContent={
           <UploadHeader handleModalHide={this.props.handleModalHide} />
         }

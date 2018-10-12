@@ -16,7 +16,7 @@ class MessageModal extends Component {
         header={false}
         footer={false}
         modalShow={this.props.modalShow}
-        closeBtn={true}
+        closeBtn
         handleModalHide={this.props.handleModalHide}
         modalBodyContent={<Messages />}
       />

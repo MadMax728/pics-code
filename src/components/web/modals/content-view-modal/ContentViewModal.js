@@ -16,7 +16,7 @@ class ContentViewModal extends Component {
         header={false}
         footer={false}
         modalShow={this.props.modalInfoShow}
-        closeBtn={true}
+        closeBtn
         handleModalHide={this.props.handleModalInfoHide}
         modalBodyContent={<ContentView />}
       />

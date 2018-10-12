@@ -52,7 +52,7 @@ class AdsModal extends Component {
     return (
       <CustomBootstrapModal
         modalClassName={modalClassName}
-        header={true}
+        header
         modalHeaderContent={
           <CreateAdsHeader
             handleModalHide={this.props.handleModalHide}
