@@ -258,7 +258,8 @@
 		@include float();
     	background-color: $white_color;
 		.normal_title{
-			display: inline-block;    		
+			display: inline-block;    	
+		
 		}
 		a{
 			padding-right: 10px;
@@ -289,7 +290,7 @@
 	background-color: $white_color;
 	margin-bottom: 5px;
 	@include float();
-	.feed_header{
+	.secondary_title{
 		padding: 10px;
 		@include float();
 		.profile_image{
@@ -323,6 +324,7 @@
 		.count{
 			padding-right: 5px;
 			font-family: 'Helvetica-Bold';
+			font-weight: bold;
 		}
 		.messages{
 			display: inline-block;

@@ -160,21 +160,27 @@
 }
 .title_with_dropdown {
   margin-bottom: 10px;
-  background: #fff;
+
   margin-top: 10px;
   float: left;
   width: 100%;
   font-family: "Helvetica-Bold";
   font-size: 12px;
+
   span {
-    display: inline-block;
-    padding: 10px;
+    float: left;
+    padding: 12px;
+    width: calc(100% - 195px);
+    background-color: white;
   }
   select {
-    float: right;
+    float: left;
     height: 40px;
     width: 150px;
     font-family: "Helvetica";
+    @media (max-width: 850px) {
+      // float: none;
+    }
   }
   button.expandDrop {
     float: right;
@@ -183,10 +189,28 @@
     border-left: 0;
     width: 45px;
     height: 40px;
+    background-color: white;
     i {
       display: inline-block;
       color: #9b9b9b;
       font-size: 20px;
+    }
+    @media (max-width: 850px) {
+      float: none;
+    }
+  }
+
+  @media (max-width: 767px) {
+    span {
+      width: calc(100% - 250px);
+    }
+  }
+  @media (max-width: 400px) {
+    span {
+      width: calc(100% - 185px);
+    }
+    select {
+      width: 115px;
     }
   }
 }
@@ -272,6 +296,11 @@
       td {
         border: 1px solid $charcoal_color;
         padding: 10px;
+        font-size: 12px;
+        @media (max-width: 767px) {
+          font-size: 10px;
+          text-align: center;
+        }
         @media (max-width: 440px) {
           font-size: 9px;
         }
@@ -286,6 +315,9 @@
           position: relative;
           &:hover {
             text-decoration: none;
+          }
+          @media (max-width: 767px) {
+            font-size: 10px;
           }
         }
         a.link-black {
@@ -307,13 +339,16 @@
           top: 11px;
         }
         span {
-          margin-right: 10px;
+          // margin-right: 10px;
         }
         .green-circle {
           display: inline-block;
           float: left;
           margin-top: 3px;
           margin-right: 5px;
+          @media (max-width: 440px) {
+            float: none;
+          }
         }
       }
       td.wid93 {
@@ -416,6 +451,18 @@
           }
         }
       }
+    }
+  }
+  &.padding-right35 {
+    padding-right: 0px;
+    @media (max-width: 767px) {
+      padding-right: 55px;
+    }
+    @media (max-width: 600px) {
+      padding-right: 35px;
+    }
+    @media (max-width: 400px) {
+      padding-right: 25px;
     }
   }
 }

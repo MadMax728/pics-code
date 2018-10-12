@@ -62,8 +62,8 @@ class PaymentStepThree extends Component {
                     <td>0,00 €</td>
                   </tr>
                   <tr>
-                    <td>Maximum expenses</td>
-                    <td>2000,00 €</td>
+                    <td className="fontBold">Maximum expenses</td>
+                    <td className="fontBold">2000,00 €</td>
                   </tr>
                 </tbody>
               </table>

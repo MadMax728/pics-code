@@ -56,6 +56,12 @@ body{
 hr{
 	border: 1px solid #cdcdcd;
 }
+.margin-r-13{
+	margin-right: 13px;
+}
+.wid40{
+	width: 40px !important;
+}
 /******** Titles Style*******************/
 .normal_title{
 	color:$charcoal_color;
@@ -297,7 +303,7 @@ hr{
 	padding-bottom: 15px;
 	border-bottom: 1px solid $charcoal_color;
 	margin-bottom: 20px;
-	padding-top:25px;
+	padding-top:35px;
 	float: left;
 	width: 100%;
 }

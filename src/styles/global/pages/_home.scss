@@ -45,16 +45,19 @@
   .slot_one {
     button {
       width: 90%;
+      margin-top: 10px;
     }
   }
   .slot_two {
     button {
       width: 90%;
+      margin-top: 10px;
     }
   }
   .slot_three {
     button {
       width: 100%;
+      margin-top: 10px;
     }
   }
 }
@@ -92,6 +95,11 @@
 .middle-section {
   width: 50%;
   float: left;
+  &.res767.wid70 {
+    @media (max-width: 767px) {
+      width: 70%;
+    }
+  }
 }
 .middle-section.width-80 {
   width: 80%;
@@ -297,9 +305,10 @@
     background-color: $white_color;
     .normal_title {
       display: inline-block;
+      margin-right: 15px;
     }
     a {
-      padding-right: 10px;
+      padding-right: 7px;
       color: $blue_color;
     }
   }
@@ -338,6 +347,7 @@
     }
     .secondary_title {
       padding-left: 15px;
+      font-weight: bold;
     }
     .grey_title {
       padding-left: 15px;

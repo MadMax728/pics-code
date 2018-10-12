@@ -19,6 +19,8 @@
       margin-left: 10px;
     }
   }
+  .mar {
+  }
   .user_name {
     font-size: 24px;
     color: $charcoal_color;
@@ -88,9 +90,15 @@
 .middle-section {
   width: 50%;
   float: left;
-}
-.middle-section.width-80 {
-  width: 80%;
+  &.width-80 {
+    width: 80%;
+  }
+  &.res767 {
+    @media (max-width: 767px) {
+      padding: 0px;
+      width: calc(100% - 30px);
+    }
+  }
 }
 .left_menu_second {
   background-color: $white_color;
