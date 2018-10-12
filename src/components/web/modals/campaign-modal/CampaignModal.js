@@ -69,7 +69,7 @@ class CampaignModal extends Component {
     return (
       <CustomBootstrapModal
         modalClassName={modalClassName}
-        header={isPreview ? false : true}
+        header={!isPreview}
         modalHeaderContent={
           isFor ? (
             <CreateCompanyCampaignHeader

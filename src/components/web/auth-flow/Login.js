@@ -55,7 +55,7 @@ class Login extends Component {
 
     const { userName, password } = this.state;
 
-    this.props.submitLogin({ email: userName, password: password });
+    this.props.submitLogin({ email: userName, password });
     this.props.history.push(routes.ROOT_ROUTE);
   };
 

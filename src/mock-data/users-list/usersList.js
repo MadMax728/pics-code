@@ -1,37 +1,39 @@
-export const userList = [
+import * as images from "../../lib/constants/images";
+
+export const users_list = [
   {
     name: "Rolf Hegdal",
     username: "r.hegdal",
-    image: "images/pic-1.jpg"
+    image: images.pic_1
   },
   {
     name: "Rolf Hegdal",
     username: "r.hegdal",
-    image: "images/pic-2.jpg"
+    image: images.pic_2
   },
   {
     name: "Rolf Hegdal",
     username: "r.hegdal",
-    image: "images/pic-2.jpg"
+    image: images.pic_2
   },
   {
     name: "Rolf Hegdal",
     username: "r.hegdal",
-    image: "images/pic-1.jpg"
+    image: images.pic_1
   },
   {
     name: "Rolf Hegdal",
     username: "r.hegdal",
-    image: "images/pic-1.jpg"
+    image: images.pic_2
   },
   {
     name: "Rolf Hegdal",
     username: "r.hegdal",
-    image: "images/pic-1.jpg"
+    image: images.pic_1
   },
   {
     name: "Rolf Hegdal",
     username: "r.hegdal",
-    image: "images/pic-1.jpg"
+    image: images.pic_2
   }
 ];

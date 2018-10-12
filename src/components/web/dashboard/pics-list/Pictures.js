@@ -2,67 +2,48 @@ import React from "react";
 
 import * as images from "../../../../lib/constants/images";
 
-const Pictures = () => {
-  return (
-    <div className="padding-rl-10 middle-section">
-      <div className="col-sm-6 pic-left-block">
-        <div className="pic-block">
-          <img src={images.pic_1} alt={"pic-1"} />
-          <div className="name-wrapper">
-            <div className="username">User name</div>
-            <div className="name">Name</div>
-          </div>
-        </div>
+import { pics_list } from "../../../../mock-data";
+
+class Pictures extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      pics_list: pics_list
+    };
+  }
+
+  render() {
+    const { pics_list } = this.state;
+
+    return (
+      <div className="padding-rl-10 middle-section">
+        {pics_list.map((pic, index) => {
+          const clearfixDiv =
+            index % 2 === 0 ? <div className="clearfix" /> : null;
+          return (
+            <div key={index}>
+              {clearfixDiv}
+              <div
+                className={
+                  index % 2
+                    ? "col-sm-6 pic-right-block"
+                    : "col-sm-6 pic-left-block"
+                }
+              >
+                <div className="pic-block">
+                  <img src={pic.image} alt={pic.image} />
+                  <div className="name-wrapper">
+                    <div className="username">User name</div>
+                    <div className="name">{pic.name}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </div>
-      <div className="col-sm-6 pic-right-block">
-        <div className="pic-block">
-          <img src={images.pic_2} alt={"pic-2"} />
-          <div className="name-wrapper">
-            <div className="username">User name</div>
-            <div className="name">Name</div>
-          </div>
-        </div>
-      </div>
-      <div className="clearfix" />
-      <div className="col-sm-6 pic-left-block">
-        <div className="pic-block">
-          <img src={images.pic_3} alt={"pic-3"} />
-          <div className="name-wrapper">
-            <div className="username">User name</div>
-            <div className="name">Name</div>
-          </div>
-        </div>
-      </div>
-      <div className="col-sm-6 pic-right-block">
-        <div className="pic-block">
-          <img src={images.pic_4} alt={"pic-4"} />
-          <div className="name-wrapper">
-            <div className="username">User name</div>
-            <div className="name">Name</div>
-          </div>
-        </div>
-      </div>
-      <div className="clearfix" />
-      <div className="col-sm-6 pic-left-block">
-        <div className="pic-block">
-          <img src={images.pic_1} alt={"pic-1"} />
-          <div className="name-wrapper">
-            <div className="username">User name</div>
-            <div className="name">Name</div>
-          </div>
-        </div>
-      </div>
-      <div className="col-sm-6 pic-right-block">
-        <div className="pic-block">
-          <img src={images.pic_5} alt={"pic-5"} />
-          <div className="name-wrapper">
-            <div className="username">User name</div>
-            <div className="name">Name</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default Pictures;
