@@ -20,6 +20,7 @@ const LoginPassword = () => {
                   className="form-control"
                   id="password"
                   placeholder="Password"
+                  autoComplete="new-password"
                 />
                 <img src={images.error} alt={"error"} />
               </div>

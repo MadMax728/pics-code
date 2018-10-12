@@ -15,7 +15,7 @@ class PaymentConfirmation extends Component {
   render() {
     return (
       <div className={"modal-body"}>
-        <div className="col-sm-12">
+        <div className="col-sm-12 margin-bottom-10">
           Your ad is pending review whitin the next 48 hours.
         </div>
         <div className="col-sm-12">

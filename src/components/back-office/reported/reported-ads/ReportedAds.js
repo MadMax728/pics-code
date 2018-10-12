@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import * as images from "../../../../lib/constants/images";
+import { ReportedSearchBar } from "../reported-search-bar";
 
-import * as images from "../../../lib/constants/images";
-
-const image_detail = {
+const reported_ad_detail = {
   user: {
     name: "Santosh Shinde",
     image: `${images.campaign1}`,
@@ -12,64 +12,59 @@ const image_detail = {
   title: "Title of campaigns",
   category: "01.01.2000 in Category",
   image: `${images.image}`,
-  clicks: 25,
   desc:
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
   msg_count: 12,
   like_count: 12,
+  start: "10.10.2000",
   date: "10.10.2000",
+  reports: "1",
   procedure: "Procedure",
-  reports: "2",
-  status: "Outstanding",
+  target_group: "Female",
+  end: "10.10.2000",
+  type: "Video",
+  applications: "2000/2000",
+  total_budget: "500€",
+  status: "Processed",
   id: 1
 };
 
-const ImagesBO = () => {
+const ReportedAds = () => {
   return (
     <div className="padding-rl-10 middle-section">
-      <div className="middle-section-search">
-        <form>
-          <div className="input-group search-input-group">
-            <input type="text" className="form-control" placeholder="Search" />
-            <span className="input-group-addon">
-              <button type="submit">
-                <span className="search_icon">
-                  <img src={images.search} alt="Search" />
-                </span>
-              </button>
-            </span>
-          </div>
-        </form>
-      </div>
+      <ReportedSearchBar />
+
       <div className="feed_wrapper">
         <div className="feed_header">
           <div className="col-sm-1 col-xs-1 no-padding profile_image">
             <img
-              src={image_detail.user.image}
+              src={images.image}
               alt="image1"
               className="img-circle img-responsive"
             />
           </div>
           <div className="col-sm-9 col-xs-7 no-padding">
-            <div className="normal_title">{image_detail.user.name}</div>
-            <div className="grey_title">Sponsored in Category</div>
-            <div className="grey_title">{image_detail.category}</div>
+            <div className="normal_title">{reported_ad_detail.user.name}</div>
+            <div className="grey_title">{reported_ad_detail.category}</div>
           </div>
           <div className="col-sm-2 col-xs-2 like_wrapper">
-            <img src={images.blue_heart} alt="like" className="pull-right" />
+            <img src={images.blue_heart} alt="like1" className="pull-right" />
           </div>
         </div>
         <div className="feed_content">
           <div className="feed_image">
             <img
-              src={image_detail.image}
+              src={images.feed_img}
               alt="image2"
               className="img-responsive"
             />
+            <Link to={""} className="more-strip">
+              More
+            </Link>
           </div>
           <div className="feed_description padding-10">
             <span className="secondary_title">
-              {image_detail.desc}
+              {reported_ad_detail.desc}
               <Link to={""} className="read-more">
                 read more
               </Link>
@@ -78,29 +73,29 @@ const ImagesBO = () => {
         </div>
         <div className="feed_footer padding-15">
           <div className="messages">
-            <span className="count">{image_detail.msg_count}</span>
-            <img src={images.feed_msg} alt={"feed_msg"} />
+            <span className="count">{reported_ad_detail.msg_count}</span>
+            <img src={images.feed_msg} alt="feed_msg" />
           </div>
           <div className="likes">
-            <span className="count">{image_detail.like_count}</span>
-            <img src={images.feed_like} alt="feed_like" />
+            <span className="count">{reported_ad_detail.like_count}</span>
+            <img src={images.feed_like} alt={"feed_like"} />
           </div>
           <div className="show_more_options">
-            <Link to="">• • •</Link>
+            <Link to={""}>• • •</Link>
           </div>
         </div>
         <div className="status backoffice-status">
           <div className="status-wrapper">
             <div className="title">Date</div>
-            <div className="subtitle">{image_detail.date}</div>
+            <div className="subtitle">{reported_ad_detail.date}</div>
           </div>
           <div className="status-wrapper">
             <div className="title">Reports</div>
-            <div className="subtitle">{image_detail.reports}</div>
+            <div className="subtitle">{reported_ad_detail.reports}</div>
           </div>
           <div className="status-wrapper">
             <div className="title">Status</div>
-            <div className="subtitle">{image_detail.status}</div>
+            <div className="subtitle">{reported_ad_detail.status}</div>
           </div>
         </div>
       </div>
@@ -108,4 +103,4 @@ const ImagesBO = () => {
   );
 };
 
-export default ImagesBO;
+export default ReportedAds;

@@ -62,6 +62,9 @@ body {
 .margin-bottom-30 {
   margin-bottom: 30px;
 }
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
 .margin-top-25 {
   margin-top: 25px;
 }
@@ -103,6 +106,9 @@ hr {
 .bg-white {
   background-color: $white_color;
 }
+.fontBold {
+  font-weight: bold;
+}
 /*************** Buttons Styles ********************/
 .filled_button {
   font-size: 14px;
@@ -140,6 +146,7 @@ hr {
   &:hover {
     border: 1px solid $blue_color;
     color: $blue_color;
+    background-color: #cacaca2b;
   }
 }
 /************** Form CSS *************************/
@@ -162,6 +169,9 @@ hr {
       &:last-child {
         float: right;
       }
+    }
+    .genderLabel {
+      text-align: center;
     }
     label,
     input {
@@ -300,7 +310,7 @@ hr {
   padding-bottom: 15px;
   border-bottom: 1px solid $charcoal_color;
   margin-bottom: 20px;
-  padding-top: 25px;
+  padding-top: 35px;
   float: left;
   width: 100%;
 }

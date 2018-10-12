@@ -22,21 +22,130 @@ class LeftSideBarBackOffice extends Component {
   render() {
     return (
       <div>
+        {/* Setting Menu */}
         <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           exact
           component={SideBarSettingBackOffice}
         />
+
+        <Route
+          path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        {/* Backoffice Menu */}
         <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           exact
           component={SideBarBackOffice}
         />
+        <Route
+          path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
 
+        <Route
+          path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
         {/* Reported content menu */}
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
+          exact
+          component={SideBarReviewContentMenu}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
           exact
           component={SideBarReviewContentMenu}
         />
@@ -68,6 +177,42 @@ class LeftSideBarBackOffice extends Component {
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
+          exact
+          component={this.handleReportedContentFilter}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
           exact
           component={this.handleReportedContentFilter}
         />
