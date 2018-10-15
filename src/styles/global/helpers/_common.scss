@@ -21,6 +21,12 @@
 body {
   @include body_grey();
   font-family: "Helvetica";
+  @media (max-width: 767px) {
+    section.res767 {
+      background: url("../images/notifications-logo.jpg");
+    }
+    // display: none;
+  }
 }
 .no-padding {
   padding: 0px !important;
@@ -64,6 +70,9 @@ body {
 }
 .margin-bottom-10 {
   margin-bottom: 10px;
+}
+.margin-b-22 {
+  margin-bottom: 22px;
 }
 .margin-top-25 {
   margin-top: 25px;
@@ -370,6 +379,7 @@ hr {
     .modal-content {
       height: 100%;
       overflow: hidden;
+
       .modal-body {
         height: 92%;
         .modal-body {
@@ -424,4 +434,16 @@ hr {
 }
 .mar-btm-5 {
   margin-bottom: 5px;
+}
+
+.post-popup {
+  .modal-dialog {
+    .modal-content {
+      background-color: transparent !important;
+      border: 0px;
+      .modal-body {
+        padding: 0px;
+      }
+    }
+  }
 }

@@ -9,7 +9,10 @@
 .login-process {
   background: $white_color;
   @include float;
-  height: 100vh;
+  padding-bottom: 100px;
+  header {
+    background-color: #1575bb;
+  }
   .custom-container {
     width: 700px;
     margin: auto;
@@ -188,9 +191,12 @@
   footer {
     float: left;
     width: 100%;
-    margin: 28px 0px;
-    position: absolute;
+    padding: 22px 0px;
+    position: fixed;
     bottom: 0px;
+    left: 0px;
+    background-color: white;
+    z-index: 100 !important;
     ul {
       padding: 0px;
       text-align: center;
