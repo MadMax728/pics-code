@@ -6,9 +6,9 @@ const Community = () => {
     <div>
       <div className="normal_title padding-15">Community</div>
       <div className="community">
-        {users_list.map(user => {
+        {users_list.map((user, index) => {
           return (
-            <div className="community_wrapper" key={user.user_name}>
+            <div className="community_wrapper" key={index}>
               <div className="community-user-image">
                 <img
                   src={user.image}

@@ -29,6 +29,8 @@ class BackOfficeHome extends Component {
     console.log(filterData);
   }
 
+  handleModalHide = () => {};
+
   render() {
     return (
       <div>

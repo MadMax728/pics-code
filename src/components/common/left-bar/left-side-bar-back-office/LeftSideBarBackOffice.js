@@ -65,6 +65,60 @@ class LeftSideBarBackOffice extends Component {
           component={SideBarSettingBackOffice}
         />
 
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_EDIT_PROFILE_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_PRIVACY_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_BUSSINESS_PROFILE_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_BILLS_AND_RECEIPTS_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_DATA_DOWNLOAD_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_ADS_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_ADS_STATISTICS_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
+          component={SideBarSettingBackOffice}
+        />
+
         {/* Backoffice Menu */}
         <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
@@ -106,6 +160,61 @@ class LeftSideBarBackOffice extends Component {
           exact
           component={SideBarBackOffice}
         />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_EDIT_PROFILE_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_PRIVACY_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_BUSSINESS_PROFILE_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_BILLS_AND_RECEIPTS_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_DATA_DOWNLOAD_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_ADS_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_ADS_STATISTICS_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_ROUTE}
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          exact
+          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
+          component={SideBarBackOffice}
+        />
+
         {/* Reported content menu */}
 
         <Route

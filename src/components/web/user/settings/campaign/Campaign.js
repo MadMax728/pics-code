@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as images from "../../../../../lib/constants/images";
 import * as routes from "../../../../../lib/constants/routes";
+import propTypes from "prop-types";
 
 class SettingCampaign extends Component {
   handleOnChange = () => {};
 
   render() {
+    const { isBackOffice } = this.props;
     return (
       <div className="padding-rl-10 middle-section">
         <div className="feed_wrapper">
@@ -117,7 +119,13 @@ class SettingCampaign extends Component {
               <div className="subtitle">0</div>
             </div>
             <div className="status-wrapper">
-              <Link to={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}>
+              <Link
+                to={
+                  isBackOffice
+                    ? routes.BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE
+                    : routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE
+                }
+              >
                 <button className="blue_button">statistics</button>
               </Link>
             </div>
@@ -127,5 +135,9 @@ class SettingCampaign extends Component {
     );
   }
 }
+
+SettingCampaign.propTypes = {
+  isBackOffice: propTypes.bool.isRequired
+};
 
 export default SettingCampaign;
