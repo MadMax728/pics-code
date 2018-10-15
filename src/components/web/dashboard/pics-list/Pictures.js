@@ -1,14 +1,12 @@
 import React from "react";
 
-import * as images from "../../../../lib/constants/images";
-
 import { pics_list } from "../../../../mock-data";
 
 class Pictures extends React.Component {
   constructor() {
     super();
     this.state = {
-      pics_list: pics_list
+      pics_list
     };
   }
 

@@ -6,7 +6,7 @@ class Users extends React.Component {
   constructor() {
     super();
     this.state = {
-      users_list: users_list
+      users_list
     };
   }
 
