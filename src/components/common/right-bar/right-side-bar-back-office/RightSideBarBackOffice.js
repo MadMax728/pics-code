@@ -14,9 +14,27 @@ import {
   RightUsersList
 } from "../right-side-list";
 
+import {
+  SettingCampaignRight,
+  SettingAdsRight,
+  SettingCampaignStatisticsRight,
+  SettingAdsStatisticsRight
+} from "../../../../components/web/user/settings";
+import propTypes from "prop-types";
+
 class RightSideBarBackOffice extends Component {
   handleReportedList = () => {
     // return <ReportedContentFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  SettingCampaignRight = () => {
+    return (
+      <SettingCampaignRight handleModalShow={this.props.handleModalShow} />
+    );
+  };
+
+  SettingAdsRight = () => {
+    return <SettingAdsRight handleModalShow={this.props.handleModalShow} />;
   };
 
   render() {
@@ -87,9 +105,36 @@ class RightSideBarBackOffice extends Component {
           exact
           component={RightUsersList}
         />
+
+        {/* ........ back office Campaign and Ads Right bar ........ */}
+
+        <Route
+          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_ROUTE}
+          exact
+          render={this.SettingCampaignRight}
+        />
+        <Route
+          path={routes.BACK_OFFICE_SETTINGS_ADS_ROUTE}
+          exact
+          render={this.SettingAdsRight}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
+          exact
+          component={SettingCampaignStatisticsRight}
+        />
+        <Route
+          path={routes.BACK_OFFICE_SETTINGS_ADS_STATISTICS_ROUTE}
+          exact
+          component={SettingAdsStatisticsRight}
+        />
       </div>
     );
   }
 }
 
+RightSideBarBackOffice.propTypes = {
+  handleModalShow: propTypes.func
+};
 export default RightSideBarBackOffice;

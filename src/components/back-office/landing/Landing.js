@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-
+import { Link } from "react-router-dom";
+import * as routes from "../../../lib/constants/routes";
 class Landing extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -11,10 +12,14 @@ class Landing extends Component {
         <div className="dashboard-middle-section margin-bottom-50">
           <div className="normal_title padding-15">Navigation</div>
           <div className="review-report-btns">
-            <button className="filled_button pull-left">Review</button>
-            <button className="filled_button pull-right">
-              Reported content
-            </button>
+            <Link to={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}>
+              <button className="filled_button pull-left">Review</button>{" "}
+            </Link>
+            <Link to={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}>
+              <button className="filled_button pull-right">
+                Reported content
+              </button>
+            </Link>
           </div>
           <div className="title_with_dropdown">
             <span>Key statistics</span>

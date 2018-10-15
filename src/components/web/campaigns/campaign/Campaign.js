@@ -1,5 +1,4 @@
 import React from "react";
-import * as images from "../../../../lib/constants/images";
 import { NewsFeeds } from "../../feeds";
 import { campaigns_list } from "../../../../mock-data";
 

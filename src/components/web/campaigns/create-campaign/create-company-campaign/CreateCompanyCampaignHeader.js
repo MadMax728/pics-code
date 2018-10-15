@@ -33,8 +33,8 @@ class CreateCompanyCampaignHeader extends Component {
     const { stepIndex } = this.props;
     return (
       <div className="row">
-        <div className="col-sm-6 modal-title">Create Campaign</div>
-        <div className="col-sm-6 text-right">
+        <div className="col-sm-5 modal-title">Create Campaign</div>
+        <div className="col-sm-7 text-right">
           <button className="black_button" onClick={this.handleCancle}>
             Cancel
           </button>

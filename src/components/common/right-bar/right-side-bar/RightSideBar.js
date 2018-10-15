@@ -111,7 +111,7 @@ class RightSideBar extends Component {
 
         {/* ,,,,,, userLanguage ...... */}
 
-        {/* ........ Campaign Right bar ........ */}
+        {/* ........ Campaign and Ads Right bar ........ */}
 
         <Route
           path={routes.SETTINGS_CAMPAIGN_ROUTE}
@@ -134,8 +134,6 @@ class RightSideBar extends Component {
           exact
           component={SettingAdsStatisticsRight}
         />
-
-        {/* ........ Campaign Right bar ........ */}
       </div>
     );
   }

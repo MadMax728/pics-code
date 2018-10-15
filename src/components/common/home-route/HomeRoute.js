@@ -57,6 +57,14 @@ class HomeRoute extends Component {
     return <Landing handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
+  handleSettingCampaign = () => {
+    return <SettingCampaign isBackOffice={false} />;
+  };
+
+  handleAds = () => {
+    return <Ads isBackOffice={false} />;
+  };
+
   render() {
     return (
       <div>
@@ -144,7 +152,11 @@ class HomeRoute extends Component {
             component={DataDownload}
           />
 
-          <Route exact path={routes.SETTINGS_ADS_ROUTE} component={Ads} />
+          <Route
+            exact
+            path={routes.SETTINGS_ADS_ROUTE}
+            component={this.handleAds}
+          />
 
           <Route
             exact
@@ -155,7 +167,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_CAMPAIGN_ROUTE}
-            component={SettingCampaign}
+            component={this.handleSettingCampaign}
           />
 
           <Route

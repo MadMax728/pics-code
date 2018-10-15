@@ -121,6 +121,10 @@ export const BACK_OFFICE_SETTINGS_BILLS_AND_RECEIPTS_ROUTE =
   "/back_office/settings/bills_and_receipts";
 export const BACK_OFFICE_SETTINGS_DATA_DOWNLOAD_ROUTE =
   "/back_office/settings/data_download";
+export const BACK_OFFICE_SETTINGS_ADS_STATISTICS_ROUTE =
+  "/back_office/settings/ads/statistics";
+export const BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
+  "/back_office/settings/campaigns/statistics";
 
 // backoffice menu routes
 
