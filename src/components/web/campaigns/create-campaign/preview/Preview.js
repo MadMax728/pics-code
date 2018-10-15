@@ -105,7 +105,7 @@ class Preview extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="feed_footer">
+                <div className="feed_footer margin-t-15 margin-b-15">
                   <div className="messages">
                     <span className="count">100</span>
                     <img src={images.feed_msg} alt={"feed_msg"} />
