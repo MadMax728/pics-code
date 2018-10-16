@@ -22,6 +22,9 @@ body{
 	@include body_grey(); 
 	font-family: 'Helvetica';	
 	color:$charcoal_color;
+	@media(max-width: 767px){
+		// display: none !important;
+	}
 }
 .no-padding{
 	padding: 0px;
@@ -61,6 +64,12 @@ hr{
 }
 .wid40{
 	width: 40px !important;
+}
+.margin-t-15{
+	margin-top: 15px;
+}
+.margin-b-15{
+	margin-bottom: 15px;
 }
 /******** Titles Style*******************/
 .normal_title{
@@ -325,4 +334,3 @@ hr{
 		}
 	}
 }
-

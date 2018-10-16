@@ -419,12 +419,12 @@
   /*************** Comments CSS ****************/
   .feed-comment {
     .comment-wrapper {
-      border-bottom: 1px solid #ededed;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.8);
       float: left;
       width: 100%;
       padding: 10px;
       &:first-child {
-        border-top: 1px solid #ededed;
+        border-top: 1px solid rgba(0, 0, 0, 0.8);
       }
       textarea {
         height: 38px;
