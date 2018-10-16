@@ -29,7 +29,7 @@ const campaign_detail = {
 
 const Campaigns = () => {
   return (
-    <div className="padding-rl-10 middle-section">
+    <div className="padding-rl-10 middle-section margin-b-22">
       <div className="middle-section-search">
         <form>
           <div className="input-group search-input-group">
