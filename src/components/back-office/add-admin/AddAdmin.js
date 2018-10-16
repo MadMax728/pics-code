@@ -42,21 +42,21 @@ class AddAdmin extends Component {
                   <td>Bobinho</td>
                   <td>Marc Aurel Bopp</td>
                   <td>
-                    <span>1. Rang</span>
+                    <span class="padding-right-10">1. Rang</span>
                   </td>
                 </tr>
                 <tr>
                   <td>Bobinho</td>
                   <td>Marc Aurel Bopp</td>
                   <td>
-                    <span>1. Rang</span>
+                    <span class="padding-right-10">1. Rang</span>
                   </td>
                 </tr>
                 <tr>
                   <td>Bobinho</td>
                   <td>Marc Aurel Bopp</td>
                   <td>
-                    <span>1. Rang</span>
+                    <span class="padding-right-10">1. Rang</span>
                     <Link to={""}>Delete</Link>
                   </td>
                 </tr>

@@ -23,9 +23,9 @@ class Support extends Component {
     const { open, current } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
-        <div className="cms-middle-section">
-          <div className="panel-wrapper">
-            <div className="content-wrapper">
+        <div className="cms-middle-section col-xs-12">
+          <div className="panel-wrapper col-xs-12 no-padding">
+            <div className="content-wrapper padding-rl-23">
               <div className="title">Support</div>
               <div className="sub-title">Generel questions</div>
               <div

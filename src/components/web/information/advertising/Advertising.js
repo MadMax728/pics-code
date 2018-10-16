@@ -4,8 +4,8 @@ import * as images from "../../../../lib/constants/images";
 const Advertising = () => {
   return (
     <div className="padding-rl-10 middle-section width-80">
-      <div className="cms-middle-section">
-        <div className="panel-wrapper">
+      <div className="cms-middle-section col-xs-12">
+        <div className="panel-wrapper mar-btm-5">
           <div className="col-sm-6 content-wrapper">
             <div className="title">Advertising - Companies</div>
             <p>
@@ -29,7 +29,7 @@ const Advertising = () => {
             />
           </div>
         </div>
-        <div className="panel-wrapper">
+        <div className="panel-wrapper mar-btm-5">
           <div className="col-sm-6 content-wrapper">
             <div className="title">Advertising - Creators</div>
             <p>

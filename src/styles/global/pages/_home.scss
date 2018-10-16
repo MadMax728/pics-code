@@ -100,6 +100,69 @@
       width: 70%;
     }
   }
+  .cms-middle-section {
+    &.backWhite {
+      background-color: white;
+    }
+    .panel-wrapper {
+      float: left;
+      height: 360px;
+      @media (max-width: 991px) {
+        // height: 350px;
+      }
+      &.wid100 {
+        height: 100%;
+        min-height: 360px;
+        @media (max-width: 991px) {
+          min-height: 350px;
+        }
+      }
+      .col-sm-6 {
+        height: inherit;
+        img {
+          height: inherit;
+        }
+      }
+      .content-wrapper {
+        background-color: white;
+        height: inherit;
+        .title {
+          font-family: "Helvetica-Bold";
+          font-size: 20px;
+          padding-bottom: 20px;
+          padding-top: 20px;
+        }
+        a {
+          color: #4a4a4a;
+          &.no-underline {
+            text-decoration: none;
+          }
+        }
+        .sub-title {
+          font-family: "Helvetica-Bold";
+          font-size: 16px;
+          padding-top: 7px;
+          padding-bottom: 22px;
+        }
+        ul.policy-points {
+          li {
+            padding-bottom: 17px;
+            .question {
+              font-family: "Helvetica-Bold";
+            }
+          }
+        }
+        .panel-group {
+          .collapse {
+            // padding: 10px 0;
+            &.in {
+              // padding: 10px 0;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .middle-section.width-80 {
   width: 80%;
