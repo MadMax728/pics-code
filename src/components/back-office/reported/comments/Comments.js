@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import * as images from "../../../../lib/constants/images";
-import { ReportedSearchBar } from "../reported-search-bar";
+import { ReportedSearchBar } from "../../reported-search-bar";
 
 const comments_detail = {
   user: {
