@@ -1,5 +1,5 @@
 export { DeleteAccount } from "./account";
-export { UserInfo, UserProfile } from "./profile";
+export { UserProfile } from "./profile";
 export { About } from "./about";
 export { NewsFeed } from "./news-feed";
 export { Saved } from "./saved";

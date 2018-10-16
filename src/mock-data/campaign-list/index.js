@@ -5,3 +5,6 @@ export { favourite_campaigns_list } from "./favourite";
 export { campaigns_list } from "./campaigns";
 export { company_campaigns_list } from "./company";
 export { creator_campaigns_list } from "./creator";
+export { news_feed_campaigns_list } from "./news-feed";
+export { user_profile_campaigns_list } from "./user-profile";
+export { saved_campaigns_list } from "./saved";
