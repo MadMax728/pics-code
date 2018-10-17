@@ -18,18 +18,25 @@ class Creator extends Component {
       <div className={"padding-rl-10 middle-section"}>
         <div className="feed_wrapper">
           {creator_campaigns.map((campaign, index) => {
+            const profile_route = campaign.user.isOwner
+              ? `/news_feed`
+              : `/news_feed/${campaign.id}`;
             return (
               <div key={index}>
                 <div className="feed_header">
                   <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                    <img
-                      src={campaign.user.image}
-                      alt={campaign.user.image}
-                      className="img-circle img-responsive"
-                    />
+                    <Link to={profile_route}>
+                      <img
+                        src={campaign.user.image}
+                        alt={campaign.user.image}
+                        className="img-circle img-responsive"
+                      />
+                    </Link>
                   </div>
                   <div className="col-sm-9 col-xs-7 no-padding">
-                    <div className="normal_title">{campaign.title}</div>
+                    <Link to={"/campaign/" + campaign.id + "/information"}>
+                      <div className="normal_title">{campaign.title}</div>
+                    </Link>
                     <div className="secondary_title">{campaign.user.name}</div>
                     <div className="grey_title">{campaign.category}</div>
                   </div>

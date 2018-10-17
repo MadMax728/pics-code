@@ -2,9 +2,18 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import * as images from "../../../../../lib/constants/images";
+import { dataDownload_list } from "../../../../../mock-data";
 
 class BillsAndReceipts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataDownload: dataDownload_list
+    };
+  }
   render() {
+    const { dataDownload } = this.state;
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="campaign-middle-section">
@@ -12,7 +21,7 @@ class BillsAndReceipts extends Component {
             <table className="table-responsive">
               <thead>
                 <tr>
-                  <th>Nr.</th>
+                  <th>No.</th>
                   <th>Ad / Campaign title</th>
                   <th>Runtime</th>
                   <th>Type</th>
@@ -22,36 +31,25 @@ class BillsAndReceipts extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>2.</td>
-                  <td>Ad / Campaign title</td>
-                  <td>10 days</td>
-                  <td>Ad / Campaign title</td>
-                  <td>50,00 E</td>
-                  <td>
-                    <span className="green-circle" />
-                  </td>
-                  <td>
-                    <Link to={""}>
-                      <img src={images.download} alt={"download-1"} />
-                    </Link>
-                  </td>
-                </tr>
-                <tr>
-                  <td>1.</td>
-                  <td>Ad / Campaign title</td>
-                  <td>10 days</td>
-                  <td>Ad / Campaign title</td>
-                  <td>50,00 E</td>
-                  <td>
-                    <span className="green-circle" />
-                  </td>
-                  <td>
-                    <Link to={""}>
-                      <img src={images.download} alt={"download-2"} />
-                    </Link>
-                  </td>
-                </tr>
+                {dataDownload.map((data, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{data.no}</td>
+                      <td>{data.title}</td>
+                      <td>{data.runtime}</td>
+                      <td>{data.type}</td>
+                      <td>{data.expenses}</td>
+                      <td>
+                        <span className="green-circle" />
+                      </td>
+                      <td>
+                        <Link to={""}>
+                          <img src={images.download} alt={"download-1"} />
+                        </Link>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

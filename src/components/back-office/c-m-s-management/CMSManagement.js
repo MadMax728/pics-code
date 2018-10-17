@@ -1,13 +1,23 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
+import { cmsManagement_list } from "../../../mock-data";
 
 class CMSManagement extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      cmsManagement: cmsManagement_list
+    };
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
+    const { cmsManagement } = this.state;
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -37,20 +47,24 @@ class CMSManagement extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Test</td>
-                  <td>Test</td>
-                  <td>Test</td>
-                  <td>Test</td>
-                  <td>
-                    <Link to={""}>Edit</Link>
-                    <Link to={""}>Preview</Link>
-                  </td>
-                  <td>
-                    <span className="green-circle" />
-                    Active
-                  </td>
-                </tr>
+                {cmsManagement.map((cms, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{cms.title}</td>
+                      <td>{cms.language}</td>
+                      <td>{cms.most_recent_change}</td>
+                      <td>{cms.status}</td>
+                      <td>
+                        <Link to={""}>Edit</Link>
+                        <Link to={""}>Preview</Link>
+                      </td>
+                      <td>
+                        <span className="green-circle" />
+                        Active
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

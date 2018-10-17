@@ -3,13 +3,16 @@ import { LeftSidebarFilter } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import propTypes from "prop-types";
 
-const staticData = [
-  { name: "option1", className: "", value: "option1" },
-  { name: "option2", className: "", value: "option2" }
+const relevanceItems = [
+  { name: "all", className: "", value: "All" },
+  { name: "new", className: "", value: "New" }
 ];
-
-const relevanceItems = staticData;
-const statusItems = staticData;
+const statusItems = [
+  { name: "all", className: "", value: "All" },
+  { name: "outstanding", className: "", value: "Outstanding" },
+  { name: "processed", className: "", value: "Processed" },
+  { name: "not_processed", className: "", value: "Not processed" }
+];
 
 const Filters = [
   {

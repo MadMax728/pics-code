@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { verification_list } from "../../../mock-data";
 
 class AddVerification extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      verifications: verification_list
+    };
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
+    const { verifications } = this.state;
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -33,13 +43,18 @@ class AddVerification extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Bobinho</td>
-                  <td>Marc Aurel Bopp</td>
-                  <td>
-                    <Link to={""}>Remove Verification</Link>
-                  </td>
-                </tr>
+                {verifications.map((verification, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{verification.username}</td>
+                      <td>{verification.name}</td>
+                      <td>
+                        <Link to={""}>Remove Verification</Link>
+                      </td>
+                    </tr>
+                  );
+                })}
+                <tr />
                 <tr>
                   <td>Bobinho</td>
                   <td>Marc Aurel Bopp</td>

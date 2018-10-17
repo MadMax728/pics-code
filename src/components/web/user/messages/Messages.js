@@ -48,151 +48,149 @@ class Messages extends Component {
     const { messages, chatData } = this.state;
 
     return (
-      <div className="modal-content">
-        <div className="modal-body no-padding">
-          <div className="messages-left">
-            <div className="title-wrapper">
-              <div className="modal-title">{this.state.title}</div>
-              <div className="edit">
-                <img src={images.edit} alt={"edit"} />
-              </div>
-            </div>
-            <div className="messages-menu">
-              <div
-                role="button"
-                tabIndex="0"
-                onKeyDown={this.handleOnKeyDown}
-                className={
-                  this.state.activeIndex === "1"
-                    ? "menu-item active"
-                    : "menu-item"
-                }
-                onClick={this.handleTypeClick}
-                data-id="1"
-                data-value="Subscribed"
-              >
-                <img src={images.grey_person} alt={"gray_person1"} />
-                <br />
-                Subscribed
-              </div>
-              <div
-                role="button"
-                tabIndex="0"
-                onKeyDown={this.handleOnKeyDown}
-                className={
-                  this.state.activeIndex === "2"
-                    ? "menu-item active "
-                    : "menu-item"
-                }
-                onClick={this.handleTypeClick}
-                data-id="0"
-                data-value="Unknown"
-              >
-                <img src={images.grey_person} alt={"grey_person2"} />
-                <br />
-                Unknown
-              </div>
-              <div
-                role="button"
-                tabIndex="-1"
-                onKeyDown={this.handleOnKeyDown}
-                className={
-                  this.state.activeIndex === "3"
-                    ? "menu-item active"
-                    : "menu-item"
-                }
-                onClick={this.handleTypeClick}
-                data-id="3"
-                data-value="Like you"
-              >
-                <img src={images.grey_person} alt={"gray_person3"} />
-                <br />
-                Like you
-              </div>
-              <div
-                role="button"
-                tabIndex="-1"
-                onKeyDown={this.handleOnKeyDown}
-                className={
-                  this.state.activeIndex === "4"
-                    ? "menu-item active"
-                    : "menu-item"
-                }
-                onClick={this.handleTypeClick}
-                data-id="4"
-                data-value="Companies"
-              >
-                <img src={images.grey_person} alt={"grey_person4"} />
-                <br />
-                Companies
-              </div>
-            </div>
-            <div className="user-chat-wrapper">
-              {messages.map((msg, index) => {
-                return (
-                  <div
-                    role="button"
-                    tabIndex={index}
-                    className={!msg.read ? "chat-wrapper new" : "chat-wrapper"}
-                    key={msg.userName}
-                    data-id={""}
-                    data-value={msg.userName}
-                    onClick={this.handleChatClick}
-                    onKeyDown={this.handleOnKeyDown}
-                  >
-                    <div className="user-img">
-                      <img src={images.image} alt={msg.index} />
-                      <div className="username">{msg.userName}</div>
-                      <div className="time">{msg.last_msg_detail.time}</div>
-                      <div className="text">{msg.last_msg_detail.msg}</div>
-                    </div>
-                  </div>
-                );
-              })}
+      <div className="modal-body no-padding">
+        <div className="messages-left">
+          <div className="title-wrapper">
+            <div className="modal-title">{this.state.title}</div>
+            <div className="edit">
+              <img src={images.edit} alt={"edit"} />
             </div>
           </div>
-          <div className="messages-right">
-            <div className="user-wrapper">
-              <div className="user-img">
-                <img src={images.image} alt={"image1"} />
-              </div>
-              <div className="username-wrapper">
-                <span className="username">User name</span>
-                <br />
-                <span className="name">{chatData[0].userName}</span>
-              </div>
-              <div className="delete">
-                <img src={images.bin} alt={"bin1"} />
-              </div>
+          <div className="messages-menu">
+            <div
+              role="button"
+              tabIndex="0"
+              onKeyDown={this.handleOnKeyDown}
+              className={
+                this.state.activeIndex === "1"
+                  ? "menu-item active"
+                  : "menu-item"
+              }
+              onClick={this.handleTypeClick}
+              data-id="1"
+              data-value="Subscribed"
+            >
+              <img src={images.grey_person} alt={"gray_person1"} />
+              <br />
+              Subscribed
             </div>
-
-            <div className="active-chat">
-              <div className="date">Sunday</div>
-              {chatData[0].msg_details.map((cdmsg, index) => {
-                return (
-                  <div key={index}>
-                    {cdmsg.me && (
-                      <div className="reply">
-                        {cdmsg.msg}
-                        <span className="time">{cdmsg.time}</span>
-                      </div>
-                    )}
-
-                    {!cdmsg.me && (
-                      <div className="response">
-                        {cdmsg.msg}
-                        <span className="time">{cdmsg.time}</span>
-                      </div>
-                    )}
+            <div
+              role="button"
+              tabIndex="0"
+              onKeyDown={this.handleOnKeyDown}
+              className={
+                this.state.activeIndex === "2"
+                  ? "menu-item active "
+                  : "menu-item"
+              }
+              onClick={this.handleTypeClick}
+              data-id="0"
+              data-value="Unknown"
+            >
+              <img src={images.grey_person} alt={"grey_person2"} />
+              <br />
+              Unknown
+            </div>
+            <div
+              role="button"
+              tabIndex="-1"
+              onKeyDown={this.handleOnKeyDown}
+              className={
+                this.state.activeIndex === "3"
+                  ? "menu-item active"
+                  : "menu-item"
+              }
+              onClick={this.handleTypeClick}
+              data-id="3"
+              data-value="Like you"
+            >
+              <img src={images.grey_person} alt={"gray_person3"} />
+              <br />
+              Like you
+            </div>
+            <div
+              role="button"
+              tabIndex="-1"
+              onKeyDown={this.handleOnKeyDown}
+              className={
+                this.state.activeIndex === "4"
+                  ? "menu-item active"
+                  : "menu-item"
+              }
+              onClick={this.handleTypeClick}
+              data-id="4"
+              data-value="Companies"
+            >
+              <img src={images.grey_person} alt={"grey_person4"} />
+              <br />
+              Companies
+            </div>
+          </div>
+          <div className="user-chat-wrapper">
+            {messages.map((msg, index) => {
+              return (
+                <div
+                  role="button"
+                  tabIndex={index}
+                  className={!msg.read ? "chat-wrapper new" : "chat-wrapper"}
+                  key={msg.userName}
+                  data-id={""}
+                  data-value={msg.userName}
+                  onClick={this.handleChatClick}
+                  onKeyDown={this.handleOnKeyDown}
+                >
+                  <div className="user-img">
+                    <img src={images.image} alt={msg.index} />
+                    <div className="username">{msg.userName}</div>
+                    <div className="time">{msg.last_msg_detail.time}</div>
+                    <div className="text">{msg.last_msg_detail.msg}</div>
                   </div>
-                );
-              })}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <div className="messages-right">
+          <div className="user-wrapper">
+            <div className="user-img">
+              <img src={images.image} alt={"image1"} />
             </div>
+            <div className="username-wrapper">
+              <span className="username">User name</span>
+              <br />
+              <span className="name">{chatData[0].userName}</span>
+            </div>
+            <div className="delete">
+              <img src={images.bin} alt={"bin1"} />
+            </div>
+          </div>
 
-            <div className="write-chat">
-              <textarea placeholder="Write a message… " />
-              <img src={images.emoji} alt={"emoji1"} />
-            </div>
+          <div className="active-chat">
+            <div className="date">Sunday</div>
+            {chatData[0].msg_details.map((cdmsg, index) => {
+              return (
+                <div key={index}>
+                  {cdmsg.me && (
+                    <div className="reply">
+                      {cdmsg.msg}
+                      <span className="time">{cdmsg.time}</span>
+                    </div>
+                  )}
+
+                  {!cdmsg.me && (
+                    <div className="response">
+                      {cdmsg.msg}
+                      <span className="time">{cdmsg.time}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="write-chat">
+            <textarea placeholder="Write a message… " />
+            <img src={images.emoji} alt={"emoji1"} />
           </div>
         </div>
       </div>

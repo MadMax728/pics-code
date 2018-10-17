@@ -97,11 +97,7 @@ class BackOfficeHomeRoute extends Component {
             component={Campaigns}
           />
 
-          <Route
-            path={routes.BACK_OFFICE_ADS_ROUTE}
-            exact
-            component={this.handleAds}
-          />
+          <Route path={routes.BACK_OFFICE_ADS_ROUTE} exact component={Ads} />
 
           {/* reported routes */}
           <Route

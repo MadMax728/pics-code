@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as images from "../../../../lib/constants/images";
+import * as images from "../../../lib/constants/images";
 
 const ReportedSearchBar = () => {
   return (
