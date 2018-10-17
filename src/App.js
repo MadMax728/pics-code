@@ -7,6 +7,7 @@ import { LoginPassword, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
 import { Auth } from "./auth";
+import PropTypes from "prop-types";
 import {
   Login,
   Register,
