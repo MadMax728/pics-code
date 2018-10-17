@@ -55,9 +55,9 @@ export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
 export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness_profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
 export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
-  "/settings/campaigns/statistics";
+  "/settings/campaigns/:id/statistics";
 export const SETTINGS_ADS_ROUTE = "/settings/ads";
-export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/statistics";
+export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/:id/statistics";
 export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills_and_receipts";
 export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data_download";
 export const LOGOUT_ROUTE = "/logout";
@@ -122,9 +122,9 @@ export const BACK_OFFICE_SETTINGS_BILLS_AND_RECEIPTS_ROUTE =
 export const BACK_OFFICE_SETTINGS_DATA_DOWNLOAD_ROUTE =
   "/back_office/settings/data_download";
 export const BACK_OFFICE_SETTINGS_ADS_STATISTICS_ROUTE =
-  "/back_office/settings/ads/statistics";
+  "/back_office/settings/ads/:id/statistics";
 export const BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
-  "/back_office/settings/campaigns/statistics";
+  "/back_office/settings/campaigns/:id/statistics";
 
 // backoffice menu routes
 

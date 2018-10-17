@@ -8,3 +8,5 @@ export { creator_campaigns_list } from "./creator";
 export { news_feed_campaigns_list } from "./news-feed";
 export { user_profile_campaigns_list } from "./user-profile";
 export { saved_campaigns_list } from "./saved";
+export { setting_campaign_list, campaignStatistics } from "./setting-campaign";
+export { backoffice_campaign_list } from "./backoffice-campaign";

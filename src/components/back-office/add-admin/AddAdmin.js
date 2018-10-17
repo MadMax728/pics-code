@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { admin_list } from "../../../mock-data";
 
 class AddAdmin extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      admins: admin_list
+    };
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
+    const { admins } = this.state;
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -38,28 +48,18 @@ class AddAdmin extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Bobinho</td>
-                  <td>Marc Aurel Bopp</td>
-                  <td>
-                    <span class="padding-right-10">1. Rang</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Bobinho</td>
-                  <td>Marc Aurel Bopp</td>
-                  <td>
-                    <span class="padding-right-10">1. Rang</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Bobinho</td>
-                  <td>Marc Aurel Bopp</td>
-                  <td>
-                    <span class="padding-right-10">1. Rang</span>
-                    <Link to={""}>Delete</Link>
-                  </td>
-                </tr>
+                {admins.map((admin, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{admin.username}</td>
+                      <td>{admin.name}</td>
+                      <td>
+                        <span>{admin.status}</span>
+                        <Link to={""}>Delete</Link>
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

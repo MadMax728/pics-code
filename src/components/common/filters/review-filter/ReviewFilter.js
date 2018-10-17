@@ -4,8 +4,10 @@ import { Translations } from "../../../../lib/translations";
 import propTypes from "prop-types";
 
 const staticData = [
-  { name: "option1", className: "", value: "option1" },
-  { name: "option2", className: "", value: "option2" }
+  { name: "all", className: "", value: "All" },
+  { name: "outstanding", className: "", value: "Outstanding" },
+  { name: "processed", className: "", value: "Processed" },
+  { name: "not_processed", className: "", value: "Not processed" }
 ];
 
 const reviewItems = staticData;
