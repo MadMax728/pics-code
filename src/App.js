@@ -36,35 +36,61 @@ class App extends Component {
       return <Redirect to={routes.ROOT_ROUTE} />;
     }
 
-    return "";
+    return null;
   };
 
   handleWindowSizeChange = () => {
     this.setState({ width: window.innerWidth });
   };
 
-  backOfficeRender = () => {
-    if (Auth.isUserAdmin()) {
+  isUserAuthenticated = () => {
+    if (!Auth.isUserAuthenticated()) {
       return (
-        <Switch>
-          <Route
-            exact
-            path={routes.BACK_OFFICE_LOGIN_ROUTE}
-            component={LoginLinkSend}
-          />
-          <Route
-            exact
-            path={routes.LOGIN_PASSWORD_ROUTE}
-            component={LoginPassword}
-          />
-          <Route
-            path={routes.BACK_OFFICE_ROOT_ROUTE}
-            render={this.isAdminUserAuthenticated}
-          />
-        </Switch>
+        <div>
+          <Route component={Login} />
+        </div>
       );
     }
-    return <div />;
+
+    return (
+      <div>
+        <Route component={Home} />
+        {Auth.isUserAdmin() && <Route render={this.backOfficeRender} />}
+      </div>
+    );
+  };
+
+  isAdminUserAuthenticated = () => {
+    if (!Auth.isAdminUserAuthenticated()) {
+      return <Redirect to={routes.BACK_OFFICE_LOGIN_ROUTE} />;
+    }
+
+    return (
+      <div>
+        <Route component={BackOfficeHome} />
+      </div>
+    );
+  };
+
+  backOfficeRender = () => {
+    return (
+      <Switch>
+        <Route
+          exact
+          path={routes.BACK_OFFICE_LOGIN_ROUTE}
+          component={LoginLinkSend}
+        />
+        <Route
+          exact
+          path={routes.LOGIN_PASSWORD_ROUTE}
+          component={LoginPassword}
+        />
+        <Route
+          path={routes.BACK_OFFICE_ROOT_ROUTE}
+          render={this.isAdminUserAuthenticated}
+        />
+      </Switch>
+    );
   };
 
   webRender = () => {
@@ -93,46 +119,6 @@ class App extends Component {
     return (
       <div>
         <Mobile />
-      </div>
-    );
-  };
-
-  isUserAuthenticated = () => {
-    if (!Auth.isUserAuthenticated()) {
-      return (
-        <div>
-          <Route component={Login} />
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <Route component={Home} />
-        <Route render={this.backOfficeRender} />
-      </div>
-    );
-  };
-
-  isAdminUserAuthenticated = () => {
-    if (!Auth.isAdminUserAuthenticated()) {
-      return (
-        <div>
-          <Route
-            exact
-            path={routes.BACK_OFFICE_LOGIN_ROUTE}
-            component={LoginLinkSend}
-          />
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <Route
-          path={routes.BACK_OFFICE_ROOT_ROUTE}
-          component={BackOfficeHome}
-        />
       </div>
     );
   };

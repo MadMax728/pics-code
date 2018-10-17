@@ -2,6 +2,14 @@ import React from "react";
 import { LeftSidebarNav } from "../../../ui-kit";
 import * as routes from "../../../../lib/constants/routes";
 import { Translations } from "../../../../lib/translations";
+import { Auth } from "../../../../auth";
+
+const admin = {
+  to: routes.BACK_OFFICE_ROOT_ROUTE,
+  className: "secondary_title",
+  activeClassName: "active",
+  text: Translations.left_sidebar_settings.admin
+};
 
 const Links = [
   {
@@ -53,6 +61,13 @@ const Links = [
     text: Translations.left_sidebar_settings.logout
   }
 ];
+
+/**
+ * If user is admin and validate with login API
+ */
+if (Auth.isUserAdmin()) {
+  Links.splice(1, 0, admin);
+}
 
 const SideBarSetting = () => {
   return (

@@ -120,7 +120,7 @@ class Login extends Component {
                       onClick={this.handleSubmit}
                       className="blue_button"
                     >
-                      {Translations.login.login} {loginData.isLoading}
+                      {Translations.login.login}
                     </button>
                   )}
                 </div>

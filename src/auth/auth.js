@@ -10,7 +10,8 @@ export const isUserAuthenticated = () => {
  * check user is admin authenticated or not
  */
 export const isAdminUserAuthenticated = () => {
-  const authenticated = isUserAdmin() && jwtValid();
+  const authenticated = isUserAdmin() && jwtAdminValid();
+
   return authenticated;
 };
 
@@ -19,6 +20,13 @@ export const isAdminUserAuthenticated = () => {
  */
 export const logoutUser = () => {
   clearTokensFromStorage();
+};
+
+/**
+ * logout admin
+ */
+export const logoutAdmin = () => {
+  localStorage.removeItem("admin_access_token");
 };
 
 /**
@@ -67,6 +75,26 @@ export const jwtValid = () => {
 };
 
 /**
+ * check jwt is valid or not
+ */
+export const jwtAdminValid = () => {
+  const token = extractJwtFromStorage();
+  if (!token || !token.adminAccessToken || !token.isAdmin) {
+    return false;
+  }
+
+  return true;
+
+  // exp value on jwt seems to be for length of access token not refresh token!
+  // this only decodes the jwt. it does not verify the signature; that's best left to the API server.
+  //let decodedToken = jwt.decode(token.accessToken);
+  //
+  // Verify that the expired date in UTC seconds since unix epoch is greater than now UTC in seconds otherwise if not our token is expired.
+  //let now = new Date();
+  //return decodedToken["exp"] > Math.floor( now.getTime() / 1000 );
+};
+
+/**
  * extract jwt from storage
  */
 export const extractJwtFromStorage = () => {
@@ -82,6 +110,7 @@ export const extractJwtFromStorage = () => {
     userType: localStorage.getItem("user_type"),
     refreshToken: localStorage.getItem("refresh_token"),
     expiresIn: localStorage.getItem("expires_in"),
+    adminAccessToken: localStorage.getItem("admin_access_token"),
     tokenType: localStorage.getItem("token_type")
   };
 };
@@ -121,6 +150,10 @@ export const saveJwtToStorage = authResponse => {
     localStorage.setItem("user_type", authResponse.user_type);
   }
 
+  if (authResponse.hasOwnProperty("admin_access_token")) {
+    localStorage.setItem("admin_access_token", authResponse.admin_access_token);
+  }
+
   return extractJwtFromStorage();
 };
 
@@ -134,4 +167,5 @@ export const removeJwtFromStorage = () => {
   localStorage.removeItem("token_type");
   localStorage.removeItem("is_admin");
   localStorage.removeItem("user_type");
+  localStorage.removeItem("admin_access_token");
 };
