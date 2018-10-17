@@ -77,7 +77,7 @@ class Verification extends Component {
                       />
                     </div>
                     <div className="form-group button_wrapper">
-                      <button className="black_button">Send</button>
+                      <button className="black_button wid120">Send</button>
                     </div>
                   </div>
                 </div>
