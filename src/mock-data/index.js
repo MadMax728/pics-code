@@ -28,3 +28,6 @@ export { cmsManagement_list } from "./c-m-s-management";
 export { admin_list } from "./admin";
 export { verification_list } from "./verification";
 export { voucher_list } from "./voucher";
+export { images_b_o_list } from "./images-b-o";
+export { videos_b_o_list } from "./videos-b-o";
+export { comments_list } from "./comments";
