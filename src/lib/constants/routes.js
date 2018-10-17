@@ -1,5 +1,4 @@
 export const ROOT_ROUTE = "/";
-export const LOGIN_ROUTE = "/login";
 export const REGISTER_ROUTE = "/register";
 export const MY_PROFILE_ROUTE = "/profile";
 export const NEWS_ROUTE = "/news";
@@ -60,7 +59,7 @@ export const SETTINGS_ADS_ROUTE = "/settings/ads";
 export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/statistics";
 export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills_and_receipts";
 export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data_download";
-export const LOGOUT_ROUTE = "/logout";
+export const LOGOUT_ROUTE = "/?logout=true";
 
 // campaig overview
 export const COMPANY_ROUTE = "/campaign/company";

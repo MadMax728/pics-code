@@ -8,7 +8,7 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
-
+import { Auth } from "../../../auth";
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +18,11 @@ class Login extends Component {
       password: ""
     };
   }
+
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutUser();
+  };
 
   /**
    * getUserEnteredUserName
@@ -55,8 +60,9 @@ class Login extends Component {
 
     const { userName, password } = this.state;
 
-    this.props.submitLogin({ email: userName, password });
-    this.props.history.push(routes.ROOT_ROUTE);
+    this.props.submitLogin({ email: userName, password }).then(() => {
+      this.props.history.push(routes.ROOT_ROUTE);
+    });
   };
 
   render() {
@@ -69,7 +75,7 @@ class Login extends Component {
             <div className="login-wrapper">
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
-              <form onSubmit={this.handleSubmit}>
+              <form>
                 <div className="form-group">
                   <input
                     type="email"
@@ -106,12 +112,16 @@ class Login extends Component {
                   </Link>
                 </div>
                 <div className="form-group">
-                  {!loginData || !loginData.isLoading ? (
-                    <button type="submit" className="blue_button">
-                      {Translations.login.login}
-                    </button>
-                  ) : (
+                  {loginData && loginData.isLoading ? (
                     <InlineLoading />
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={this.handleSubmit}
+                      className="blue_button"
+                    >
+                      {Translations.login.login} {loginData.isLoading}
+                    </button>
                   )}
                 </div>
               </form>
