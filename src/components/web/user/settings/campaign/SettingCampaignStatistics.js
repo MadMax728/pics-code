@@ -1,14 +1,24 @@
 import React, { Component } from "react";
+import SettingCampaignStatisticsRight from "./SettingCampaignStatisticsRight";
+import { campaignStatistics } from "../../../../../mock-data";
 
 class SettingCampaignStatistics extends Component {
-  handleOnChange = () => {};
+  constructor(props, context) {
+    super(props, context);
 
+    this.state = {
+      campaign_statistics: campaignStatistics
+    };
+  }
   render() {
+    const { campaign_statistics } = this.state;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
           <div className="campaign-middle-section">
-            <div className="normal_title padding-15">Campaign title</div>
+            <div className="normal_title padding-15">
+              {campaign_statistics.title}
+            </div>
             <div className="campaign-block">
               <div className="normal_title padding-15">Total budget</div>
               <div className="indicators">
@@ -23,9 +33,13 @@ class SettingCampaignStatistics extends Component {
               </div>
               <div className="progressbar-wrapper">
                 <div className="progressbar">
-                  <div style={{ width: "80%" }} />
+                  <div
+                    style={{ width: `${campaign_statistics.budget_spent_per}` }}
+                  />
                 </div>
-                <span className="counter">0,00</span>
+                <span className="counter">
+                  {campaign_statistics.budget_spent_per}
+                </span>
               </div>
             </div>
             <div className="campaign-block">
@@ -42,9 +56,9 @@ class SettingCampaignStatistics extends Component {
               </div>
               <div className="progressbar-wrapper">
                 <div className="progressbar">
-                  <div style={{ width: "50%" }} />
+                  <div style={{ width: `${campaign_statistics.view_per}` }} />
                 </div>
-                <span className="counter">0,00</span>
+                <span className="counter">{campaign_statistics.view_per}</span>
               </div>
             </div>
             <div className="campaign-block">
@@ -61,13 +75,22 @@ class SettingCampaignStatistics extends Component {
               </div>
               <div className="progressbar-wrapper">
                 <div className="progressbar">
-                  <div style={{ width: "20%" }} />
+                  <div
+                    style={{
+                      width: `${campaign_statistics.runtime_passed_per}`
+                    }}
+                  />
                 </div>
-                <span className="counter">0,00</span>
+                <span className="counter">
+                  {campaign_statistics.runtime_passed_per}
+                </span>
               </div>
             </div>
           </div>
         </div>
+        <SettingCampaignStatisticsRight
+          campaignStatistics={campaign_statistics}
+        />
       </div>
     );
   }

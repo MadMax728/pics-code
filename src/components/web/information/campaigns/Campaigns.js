@@ -4,9 +4,9 @@ import * as images from "../../../../lib/constants/images";
 const CampaignsInformation = () => {
   return (
     <div className="padding-rl-10 middle-section width-80">
-      <div className="cms-middle-section">
-        <div className="panel-wrapper">
-          <div className="col-sm-6 content-wrapper">
+      <div className="cms-middle-section col-xs-12 no-padding">
+        <div className="panel-wrapper mar-btm-5">
+          <div className="col-sm-6 content-wrapper padding-rl-23">
             <div className="title">Campaign - Companies</div>
             <p>
               This text is an example text. This text is an example text.This
@@ -29,8 +29,8 @@ const CampaignsInformation = () => {
             />
           </div>
         </div>
-        <div className="panel-wrapper">
-          <div className="col-sm-6 content-wrapper">
+        <div className="panel-wrapper mar-btm-5">
+          <div className="col-sm-6 content-wrapper padding-rl-23">
             <div className="title">Campaign - Creators</div>
             <p>
               This text is an example text. This text is an example text.This

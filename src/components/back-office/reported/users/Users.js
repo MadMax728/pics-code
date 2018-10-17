@@ -1,5 +1,5 @@
 import React from "react";
-import { ReportedSearchBar } from "../reported-search-bar";
+import { ReportedSearchBar } from "../../reported-search-bar";
 import * as images from "../../../../lib/constants/images";
 
 const users_details = [

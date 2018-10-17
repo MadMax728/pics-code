@@ -124,16 +124,16 @@ class RightSideBar extends Component {
           render={this.SettingAdsRight}
         />
 
-        <Route
+        {/* <Route
           path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
           exact
           component={SettingCampaignStatisticsRight}
-        />
-        <Route
+        /> */}
+        {/* <Route
           path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
           exact
           component={SettingAdsStatisticsRight}
-        />
+        /> */}
       </div>
     );
   }

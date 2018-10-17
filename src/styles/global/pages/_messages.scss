@@ -4,6 +4,8 @@
     width: 915px;
     height: 530px;
     background: #fff;
+    top: 17%;
+    margin: 0 auto;
     .modal-content {
       float: left;
       width: 100%;
@@ -33,7 +35,7 @@
         }
       }
       .messages-left {
-        width: 44%;
+        width: 43%;
         float: left;
         .edit {
           float: right;
@@ -140,7 +142,7 @@
         }
       }
       .messages-right {
-        width: 56%;
+        width: 57%;
         float: left;
         .user-wrapper {
           display: flex;
@@ -175,6 +177,7 @@
           border-left: 2px solid #333;
           height: 406px;
           width: 100%;
+          overflow-y: auto;
           .date {
             font-size: 12px;
             text-align: center;

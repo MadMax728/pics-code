@@ -52,7 +52,9 @@ class DeleteAccount extends Component {
                       />
                     </div>
                     <div className="form-group button_wrapper col-md-12 col-sm-6">
-                      <button className="black_button">Delete account</button>
+                      <button className="black_button grayBtn">
+                        Delete account
+                      </button>
                     </div>
                   </div>
                 </div>

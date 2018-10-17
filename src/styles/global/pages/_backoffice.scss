@@ -249,7 +249,7 @@
   }
   select {
     height: 100%;
-    padding: 12px 0 14px 13px;
+    padding: 12px 0 12px 13px;
     color: #4a4a4a;
     flex: 1;
   }
@@ -744,7 +744,7 @@
               font-size: 20px;
             }
           }
-          @media (max-width: 767px) {
+          @media (max-width: 991px) {
             .left-style-wrapr {
               width: 65px;
               select.font-size {
