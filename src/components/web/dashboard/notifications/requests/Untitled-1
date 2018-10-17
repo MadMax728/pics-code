@@ -1,30 +1,27 @@
-
-
-1. Settings 
-    - Campaign
-        - Campaign
-        - Campaign Statistics
-        - Fix Right Side menu for the Campaign Statistics
-    - Ads
-        - Ads
-        - Ads Statistics
-        - Fix Right Side menu for the Ads Statistics    
-    - Data Download
-
-2. Back- Office
-    - CMS Management
-    - Add Admin
-    - Add Verification
-    - Add Voucher
+Implementation of mock-data in Back-Office module,  
+    - Dashboard
     - Reported
-        - Campaign
-        - Ads
+        - Image
+        - Pic
+        - Videos
+        - Users
+        - Comments
 
-2. Fixed bug for the back-office as,
-    - Back-office
-        - Campaign Component
-        - Ads Component
+- Implementation of the generic Component for the CustomBootstrapTable Component.
 
-3. Maintain the folder structure for the Mock Data of Back-Office and Settings modules.
+- Implementation of CustomBootstrapTable for, 
+    - Back - ffice
+        - CMS Management
+        - Add Admin
+        - Add Verification
+        - Add Voucher
 
-4. Fix designing issue for the register, login Component and Message Modal Component.
+- Implementation of CustomBootstrapTable for, 
+    - Settings
+        - Bills and Receipts
+
+Maintain the folder structure for the Mock Data of Back-Office and CustomBootstrapTable modules.
+
+Fix designing issue for the Back Office module's Components.
+
+Thanks.

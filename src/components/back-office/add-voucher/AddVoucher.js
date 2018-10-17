@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { voucher_list } from "../../../mock-data";
+import { CustomBootstrapTable } from "../../ui-kit";
 
 class AddVoucher extends Component {
   constructor(props, context) {
@@ -10,81 +11,163 @@ class AddVoucher extends Component {
     };
   }
 
+  statusFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        <span className="green-circle" /> Active{" "}
+      </div>
+    );
+  };
+
+  codeFormatter = (column, colIndex) => {
+    return (
+      <input
+        type="text"
+        htmlFor="Voucher Code"
+        className="res320"
+        placeholder="Voucher code"
+      />
+    );
+  };
+
+  periodFormatter = (column, colIndex) => {
+    return (
+      <select name="" id="" className="res320">
+        <option value="">Period</option>
+        <option value="">Item1</option>
+        <option value="">Item2</option>
+      </select>
+    );
+  };
+
+  amountFormatter = (column, colIndex) => {
+    return (
+      <select name="" id="" className="res320">
+        <option value="">amount</option>
+        <option value="">Item1</option>
+        <option value="">Item2</option>
+      </select>
+    );
+  };
+
+  typeFormatter = (column, colIndex) => {
+    return (
+      <select name="" id="" className="res320">
+        <option value="">type</option>
+        <option value="">Item1</option>
+        <option value="">Item2</option>
+      </select>
+    );
+  };
+
+  numberFormatter = (column, colIndex) => {
+    return (
+      <select name="" id="" className="res320">
+        <option value="">Number</option>
+        <option value="">Item1</option>
+        <option value="">Item2</option>
+      </select>
+    );
+  };
+
+  addFormatter = (column, colIndex) => {
+    return <Link to={""}>Add</Link>;
+  };
+
+  customTotal = (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">
+      Showing {from} to {to} of {size} Results
+    </span>
+  );
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
     const { vouchers } = this.state;
+    const columns = [
+      {
+        dataField: "code",
+        headerFormatter: this.codeFormatter
+      },
+      {
+        dataField: "period",
+        headerFormatter: this.periodFormatter
+      },
+      {
+        dataField: "amount",
+        headerFormatter: this.amountFormatter
+      },
+      {
+        dataField: "type",
+        headerFormatter: this.typeFormatter
+      },
+      {
+        dataField: "number",
+        headerFormatter: this.numberFormatter
+      },
+      {
+        dataField: "status",
+        headerFormatter: this.addFormatter,
+        headerClasses: "wid93 no-padding res440 res320",
+        formatter: this.statusFormatter
+      }
+    ];
+
+    const pagination = {
+      page: 1, // Specify the current page. It's necessary when remote is enabled
+      sizePerPage: 5, // Specify the size per page. It's necessary when remote is enabled
+      pageStartIndex: 1, // first page will be 0, default is 1
+      paginationSize: 5, // the pagination bar size, default is 5
+      hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
+      prePage: "<", // Previous page button text
+      nextPage: ">", // Next page button text
+      firstPage: "<<", // First page button text
+      lastPage: ">>", // Last page button text
+      showTotal: true, // display pagination information
+      hideSizePerPage: true, // hide the size per page dropdown
+      paginationTotalRenderer: this.customTotal,
+      sizePerPageList: [
+        {
+          text: "5",
+          value: 5
+        },
+        {
+          text: "10",
+          value: 10
+        },
+        {
+          text: "All",
+          value: vouchers.length
+        }
+      ]
+    };
+
+    const defaultSorted = [
+      {
+        dataField: "username",
+        order: "desc"
+      }
+    ];
 
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
           <div className="normal_title padding-15">Add voucher code</div>
           <div className="dashboard-tbl">
-            <table>
-              <thead>
-                <tr>
-                  <th className="blur no-padding">
-                    <input
-                      type="text"
-                      htmlFor="Voucher Code"
-                      className="res320"
-                      placeholder="Voucher code"
-                    />
-                  </th>
-                  <th className="no-padding">
-                    <select name="" id="" className="res320">
-                      <option value="">Period</option>
-                      <option value="">Item1</option>
-                      <option value="">Item2</option>
-                    </select>
-                  </th>
-                  <th className="no-padding">
-                    <select name="" id="" className="res320">
-                      <option value="">Amount</option>
-                      <option value="">Item1</option>
-                      <option value="">Item2</option>
-                    </select>
-                  </th>
-                  <th className="no-padding">
-                    <select name="" id="" className="res320">
-                      <option value="">Type</option>
-                      <option value="">Item1</option>
-                      <option value="">Item2</option>
-                    </select>
-                  </th>
-                  <th className="no-padding">
-                    <select name="" id="" className="res320">
-                      <option value="">Number</option>
-                      <option value="">Item1</option>
-                      <option value="">Item2</option>
-                    </select>
-                  </th>
-                  <th className="wid93 no-padding res440 res320">
-                    <Link to={""}>Add</Link>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {vouchers.map((voucher, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{voucher.code}</td>
-                      <td>{voucher.period}</td>
-                      <td>{voucher.amount}</td>
-                      <td>{voucher.type}</td>
-                      <td>{voucher.number}</td>
-                      <td className="wid93 res440 res320">
-                        <Link to={""} className="active link-black">
-                          Active
-                        </Link>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <CustomBootstrapTable
+              data={vouchers}
+              columns={columns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              defaultSorted={defaultSorted}
+              pagination={pagination}
+              noDataIndication="Table is Empty"
+              id={"code"}
+            />
           </div>
         </div>
       </div>
