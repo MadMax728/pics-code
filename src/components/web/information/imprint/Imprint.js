@@ -20,7 +20,7 @@ const Imprint = () => {
             <div className="contact-wrapper margin-bottom-10">
               <div>
                 Phone DE:{" "}
-                <a href="tel:+49 151 12706187" class="no-underline">
+                <a href="tel:+49 151 12706187" className="no-underline">
                   +49 151 12706187
                 </a>
               </div>
