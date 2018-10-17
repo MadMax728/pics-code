@@ -1,10 +1,13 @@
 import React, { Component } from "react";
+import * as qs from "query-string";
+import { withRouter, Redirect } from "react-router";
 import { Switch, Route } from "react-router-dom";
 import * as routes from "./lib/constants/routes";
 import { LoginPassword, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
 import { Auth } from "./auth";
+import PropTypes from "prop-types";
 import {
   Login,
   Register,
@@ -21,15 +24,20 @@ class App extends Component {
     };
   }
 
-  componentWillMount() {
-    window.addEventListener("resize", this.handleWindowSizeChange);
-  }
+  //logout handler for any user
+  handleLogout = () => {
+    //get the props from props.location
+    //https://stackoverflow.com/questions/35352638/how-to-get-parameter-value-from-query-string
+    const query = qs.parse(this.props.location.search);
+    //check if logout param is exist
+    if (query.logout || query.logout === "true") {
+      Auth.logoutUser();
+      //https://github.com/ReactTraining/react-router/issues/4802
+      return <Redirect to={routes.ROOT_ROUTE} />;
+    }
 
-  // make sure to remove the listener
-  // when the component is not mounted anymore
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);
-  }
+    return "";
+  };
 
   handleWindowSizeChange = () => {
     this.setState({ width: window.innerWidth });
@@ -67,7 +75,6 @@ class App extends Component {
           path={routes.BACK_OFFICE_LOGIN_ROUTE}
           component={LoginLinkSend}
         />
-        <Route exact path={routes.LOGIN_ROUTE} component={Login} />
         <Route
           exact
           path={routes.LOGIN_PASSWORD_ROUTE}
@@ -133,6 +140,7 @@ class App extends Component {
   render() {
     const { width } = this.state;
     const isMobile = width <= 760;
+    this.handleLogout();
     if (isMobile) {
       return (
         <div>
@@ -148,4 +156,9 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  history: PropTypes.any,
+  location: PropTypes.any
+};
+
+export default withRouter(App);

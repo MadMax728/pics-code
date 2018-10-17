@@ -6,7 +6,7 @@ const OurMission = () => {
     <div className="padding-rl-10 middle-section width-80">
       <div className="cms-middle-section">
         <div className="panel-wrapper">
-          <div className="col-sm-6 content-wrapper">
+          <div className="col-sm-6 content-wrapper padding-rl-23">
             <div className="title">Our Vision</div>
             <p>
               This text is an example text. This text is an example text.This

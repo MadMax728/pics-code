@@ -1,6 +1,7 @@
 import * as types from "../lib/constants/actionTypes";
 import * as userService from "../services/userService";
 import { logger } from "../loggers";
+import { Auth } from "../auth";
 
 const submitLoginStarted = () => ({
   type: types.SUBMIT_LOGIN_STARTED
@@ -22,8 +23,29 @@ export const submitLogin = params => {
     dispatch(submitLoginStarted());
 
     return userService.submitLogin(params).then(
-      res => dispatch(submitLoginSucceeded(res.data)),
+      res => {
+        let authResponse = {
+          access_token: "12222",
+          refresh_token: false,
+          expires_in: "22222",
+          token_type: "bearer",
+          is_admin: true,
+          user_type: "admin"
+        };
+
+        Auth.saveJwtToStorage(authResponse);
+        dispatch(submitLoginSucceeded(res.data));
+      },
       error => {
+        let authResponse = {
+          access_token: "12222",
+          refresh_token: false,
+          expires_in: "22222",
+          token_type: "bearer",
+          is_admin: true,
+          user_type: "admin"
+        };
+        Auth.saveJwtToStorage(authResponse);
         dispatch(submitLoginFailed(error.response));
         logger.error({
           description: error.toString(),

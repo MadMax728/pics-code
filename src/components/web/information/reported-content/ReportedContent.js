@@ -9,9 +9,9 @@ class ReportedContent extends Component {
   render() {
     return (
       <div className="padding-rl-10 middle-section width-80">
-        <div className="cms-middle-section">
-          <div className="panel-wrapper">
-            <div className="content-wrapper">
+        <div className="cms-middle-section col-xs-12">
+          <div className="panel-wrapper wid100">
+            <div className="content-wrapper padding-rl-23">
               <div className="title">Reported problem</div>
               <p>
                 This text is an example text. This text is an example text.This
@@ -99,7 +99,7 @@ class ReportedContent extends Component {
                       />
                     </div>
                     <div className="form-group button_wrapper">
-                      <button className="black_button">Send</button>
+                      <button className="black_button wid120">Send</button>
                     </div>
                   </div>
                 </div>

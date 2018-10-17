@@ -19,7 +19,6 @@ export const isAdminUserAuthenticated = () => {
  */
 export const logoutUser = () => {
   clearTokensFromStorage();
-  window.location.assign("http://localhost:8080/login");
 };
 
 /**
@@ -33,7 +32,7 @@ export const isUserAdmin = () => {
     token.isAdmin === "false" ||
     token.isAdmin === false
   ) {
-    return true;
+    return false;
   }
 
   return true;
@@ -53,7 +52,7 @@ export const isUserAdmin = () => {
 export const jwtValid = () => {
   const token = extractJwtFromStorage();
   if (!token) {
-    return true;
+    return false;
   }
 
   return true;
@@ -98,12 +97,29 @@ export const clearTokensFromStorage = () => {
  * save jwt in storage
  */
 export const saveJwtToStorage = authResponse => {
-  localStorage.setItem("access_token", authResponse.access_token);
-  localStorage.setItem("refresh_token", authResponse.refresh_token);
-  localStorage.setItem("expires_in", authResponse.expires_in);
-  localStorage.setItem("token_type", authResponse.token_type);
-  localStorage.setItem("is_admin", authResponse.is_admin);
-  localStorage.setItem("user_type", authResponse.user_type);
+  if (authResponse.access_token) {
+    localStorage.setItem("access_token", authResponse.access_token);
+  }
+
+  if (authResponse.refresh_token) {
+    localStorage.setItem("refresh_token", authResponse.refresh_token);
+  }
+
+  if (authResponse.expires_in) {
+    localStorage.setItem("expires_in", authResponse.expires_in);
+  }
+
+  if (authResponse.token_type) {
+    localStorage.setItem("token_type", authResponse.token_type);
+  }
+
+  if (authResponse.hasOwnProperty("is_admin")) {
+    localStorage.setItem("is_admin", authResponse.is_admin);
+  }
+
+  if (authResponse.hasOwnProperty("user_type")) {
+    localStorage.setItem("user_type", authResponse.user_type);
+  }
 
   return extractJwtFromStorage();
 };
