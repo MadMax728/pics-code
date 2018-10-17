@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { admin_list } from "../../../mock-data";
+import { CustomBootstrapTable } from "../../ui-kit";
 
 class AddAdmin extends Component {
   constructor(props, context) {
@@ -10,12 +11,87 @@ class AddAdmin extends Component {
     };
   }
 
+  statusFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        <span>{cell}</span>
+        <Link to={""}>Delete</Link>
+      </div>
+    );
+  };
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
+  customTotal = (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">
+      Showing {from} to {to} of {size} Results
+    </span>
+  );
+
   render() {
     const { admins } = this.state;
+    const columns = [
+      {
+        dataField: "username",
+        text: "User Name",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "name",
+        text: "Name",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "status",
+        text: "Admin Status",
+        align: "left",
+        headerAlign: "left",
+        sort: false,
+        formatter: this.statusFormatter
+      }
+    ];
+
+    const pagination = {
+      page: 1, // Specify the current page. It's necessary when remote is enabled
+      sizePerPage: 5, // Specify the size per page. It's necessary when remote is enabled
+      pageStartIndex: 1, // first page will be 0, default is 1
+      paginationSize: 5, // the pagination bar size, default is 5
+      hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
+      prePage: "<", // Previous page button text
+      nextPage: ">", // Next page button text
+      firstPage: "<<", // First page button text
+      lastPage: ">>", // Last page button text
+      showTotal: true, // display pagination information
+      hideSizePerPage: true, // hide the size per page dropdown
+      paginationTotalRenderer: this.customTotal,
+      sizePerPageList: [
+        {
+          text: "5",
+          value: 5
+        },
+        {
+          text: "10",
+          value: 10
+        },
+        {
+          text: "All",
+          value: admins.length
+        }
+      ]
+    };
+
+    const defaultSorted = [
+      {
+        dataField: "username",
+        order: "desc"
+      }
+    ];
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -39,29 +115,18 @@ class AddAdmin extends Component {
             </Link>
           </div>
           <div className="dashboard-tbl">
-            <table>
-              <thead>
-                <tr>
-                  <th>User name</th>
-                  <th>Name</th>
-                  <th>Admin status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {admins.map((admin, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{admin.username}</td>
-                      <td>{admin.name}</td>
-                      <td>
-                        <span>{admin.status}</span>
-                        <Link to={""}>Delete</Link>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <CustomBootstrapTable
+              data={admins}
+              columns={columns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              defaultSorted={defaultSorted}
+              pagination={pagination}
+              noDataIndication="Table is Empty"
+              id={"username"}
+            />
           </div>
         </div>
       </div>

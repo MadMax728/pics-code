@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import { cmsManagement_list } from "../../../mock-data";
+import { CustomBootstrapTable } from "../../ui-kit";
 
 class CMSManagement extends Component {
   constructor(props, context) {
@@ -11,12 +12,119 @@ class CMSManagement extends Component {
     };
   }
 
+  optionsFormatter = (cell, row, rowIndex) => {
+    return (
+      <div key={rowIndex}>
+        <Link to={""}>Edit</Link>
+        <Link to={""}>Preview</Link>
+      </div>
+    );
+  };
+
+  // https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
+  // used for formatter
+  statusFormatter = (cell, row, rowIndex) => {
+    return (
+      <div key={rowIndex}>
+        <span className="green-circle" /> Active{" "}
+      </div>
+    );
+  };
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
+  customTotal = (from, to, size) => (
+    <span className="react-bootstrap-table-pagination-total">
+      Showing {from} to {to} of {size} Results
+    </span>
+  );
+
   render() {
     const { cmsManagement } = this.state;
+    const columns = [
+      {
+        dataField: "title",
+        text: "Title of page",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "language",
+        text: "Language",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "most_recent_change",
+        text: "Most recent change",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "created_by",
+        text: "Created by",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "options",
+        text: "Options",
+        align: "left",
+        headerAlign: "left",
+        sort: false,
+        formatter: this.optionsFormatter
+      },
+      {
+        dataField: "status",
+        text: "Status",
+        align: "left",
+        headerAlign: "left",
+        sort: false,
+        formatter: this.statusFormatter
+      }
+    ];
+
+    const pagination = {
+      page: 1, // Specify the current page. It's necessary when remote is enabled
+      sizePerPage: 5, // Specify the size per page. It's necessary when remote is enabled
+      pageStartIndex: 1, // first page will be 0, default is 1
+      paginationSize: 5, // the pagination bar size, default is 5
+      hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
+      prePage: "<", // Previous page button text
+      nextPage: ">", // Next page button text
+      firstPage: "<<", // First page button text
+      lastPage: ">>", // Last page button text
+      showTotal: true, // display pagination information
+      hideSizePerPage: true, // hide the size per page dropdown
+      paginationTotalRenderer: this.customTotal,
+      sizePerPageList: [
+        {
+          text: "5",
+          value: 5
+        },
+        {
+          text: "10",
+          value: 10
+        },
+        {
+          text: "All",
+          value: cmsManagement.length
+        }
+      ]
+    };
+
+    const defaultSorted = [
+      {
+        dataField: "title",
+        order: "desc"
+      }
+    ];
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -35,38 +143,18 @@ class CMSManagement extends Component {
             </select>
           </div>
           <div className="dashboard-tbl">
-            <table>
-              <thead>
-                <tr>
-                  <th>Title of page</th>
-                  <th>Language</th>
-                  <th>Most recent change</th>
-                  <th>Created by</th>
-                  <th>Options</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {cmsManagement.map((cms, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{cms.title}</td>
-                      <td>{cms.language}</td>
-                      <td>{cms.most_recent_change}</td>
-                      <td>{cms.status}</td>
-                      <td>
-                        <Link to={""}>Edit</Link>
-                        <Link to={""}>Preview</Link>
-                      </td>
-                      <td>
-                        <span className="green-circle" />
-                        Active
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+            <CustomBootstrapTable
+              data={cmsManagement}
+              columns={columns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              defaultSorted={defaultSorted}
+              pagination={pagination}
+              noDataIndication="Table is Empty"
+              id={"title"}
+            />
           </div>
         </div>
       </div>
