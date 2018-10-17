@@ -30,10 +30,7 @@ class App extends Component {
     //https://stackoverflow.com/questions/35352638/how-to-get-parameter-value-from-query-string
     const query = qs.parse(this.props.location.search);
     //check if logout param is exist
-    if (
-      query.hasOwnProperty("logout") &&
-      (query.logout || query.logout === "true")
-    ) {
+    if (query.logout || query.logout === "true") {
       Auth.logoutUser();
       //https://github.com/ReactTraining/react-router/issues/4802
       return <Redirect to={routes.ROOT_ROUTE} />;
