@@ -3,7 +3,7 @@ import * as qs from "query-string";
 import { withRouter, Redirect } from "react-router";
 import { Switch, Route } from "react-router-dom";
 import * as routes from "./lib/constants/routes";
-import { LoginPassword, LoginLinkSend } from "./components/back-office";
+import { AdminLogin, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
 import { Auth } from "./auth";
@@ -83,7 +83,7 @@ class App extends Component {
         <Route
           exact
           path={routes.LOGIN_PASSWORD_ROUTE}
-          component={LoginPassword}
+          component={AdminLogin}
         />
         <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
@@ -104,7 +104,7 @@ class App extends Component {
         <Route
           exact
           path={routes.LOGIN_PASSWORD_ROUTE}
-          component={LoginPassword}
+          component={AdminLogin}
         />
         <Route exact path={routes.REGISTER_ROUTE} component={Register} />
         <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />

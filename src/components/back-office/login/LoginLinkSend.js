@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { LoginHeader } from "../header";
+import { AdminHeader } from "../header";
 import * as routes from "../../../lib/constants/routes";
 
 const LoginLinkSend = () => {
   return (
     <div className="login-process">
-      <LoginHeader />
+      <AdminHeader />
       <section>
         <div className="custom-container">
           <div className="login-wrapper backoffice-login">

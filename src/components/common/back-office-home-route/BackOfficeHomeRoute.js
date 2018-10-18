@@ -136,62 +136,6 @@ class BackOfficeHomeRoute extends Component {
             exact
             component={Users}
           />
-
-          {/* back-office settings route */}
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_EDIT_PROFILE_ROUTE}
-            component={settings.EditProfile}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_PRIVACY_ROUTE}
-            component={settings.Privacy}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_BUSSINESS_PROFILE_ROUTE}
-            component={settings.BusinessProfile}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_BILLS_AND_RECEIPTS_ROUTE}
-            component={settings.BillsAndReceipts}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_DATA_DOWNLOAD_ROUTE}
-            component={settings.DataDownload}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_ADS_ROUTE}
-            component={this.handleAds}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_ADS_STATISTICS_ROUTE}
-            component={settings.AdsStatistics}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_ROUTE}
-            component={this.handleSettingCampaign}
-          />
-
-          <Route
-            exact
-            path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
-            component={settings.SettingCampaignStatistics}
-          />
         </Switch>
       </div>
     );

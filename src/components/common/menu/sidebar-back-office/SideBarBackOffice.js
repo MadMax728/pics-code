@@ -45,7 +45,6 @@ const Links = [
 const SideBarBackOffice = () => {
   return (
     <div>
-      <div className="gap-10" />
       <LeftSidebarNav
         links={Links}
         header={`Backoffice`}

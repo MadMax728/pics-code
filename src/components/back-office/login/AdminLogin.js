@@ -1,12 +1,15 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { AdminHeader } from "../header";
 import { Auth } from "../../../auth";
-import { LoginHeader } from "../header";
+import { submitAdminLogin } from "../../../actions/login";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
 import { InlineLoading } from "../../ui-kit";
 
-class LoginPassword extends Component {
+class AdminLogin extends Component {
   constructor(props) {
     super(props);
 
@@ -41,19 +44,27 @@ class LoginPassword extends Component {
     return true;
   };
 
+  /**
+   * Handle submit
+   */
   handleSubmit = event => {
     if (!this.formValid()) {
       return false;
     }
-    Auth.saveJwtToStorage({ admin_access_token: "qeqewqe" });
-    this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
+
+    const { password } = this.state;
+
+    this.props.submitAdminLogin({ password : password}).then(() => {
+      this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
+    });
+
   };
 
   render() {
     const { loginData } = this.props;
     return (
       <div className="login-process">
-        <LoginHeader />
+        <AdminHeader />
         <section>
           <div className="custom-container">
             <div className="login-wrapper backoffice-login">
@@ -93,4 +104,21 @@ class LoginPassword extends Component {
   }
 }
 
-export default LoginPassword;
+const mapStateToProps = state => ({
+  loginData: state.loginData
+});
+
+const mapDispatchToProps = {
+  submitAdminLogin
+};
+
+AdminLogin.propTypes = {
+  submitAdminLogin: PropTypes.func.isRequired,
+  loginData: PropTypes.object,
+  history: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdminLogin);

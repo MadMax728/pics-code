@@ -107,28 +107,6 @@ class RightSideBarBackOffice extends Component {
         />
 
         {/* ........ back office Campaign and Ads Right bar ........ */}
-
-        <Route
-          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_ROUTE}
-          exact
-          render={this.SettingCampaignRight}
-        />
-        <Route
-          path={routes.BACK_OFFICE_SETTINGS_ADS_ROUTE}
-          exact
-          render={this.SettingAdsRight}
-        />
-
-        <Route
-          path={routes.BACK_OFFICE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
-          exact
-          component={SettingCampaignStatisticsRight}
-        />
-        <Route
-          path={routes.BACK_OFFICE_SETTINGS_ADS_STATISTICS_ROUTE}
-          exact
-          component={SettingAdsStatisticsRight}
-        />
       </div>
     );
   }

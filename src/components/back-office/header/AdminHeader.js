@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 
-class LoginHeader extends Component {
+class AdminHeader extends Component {
   render() {
     return (
       <header>
@@ -19,4 +19,4 @@ class LoginHeader extends Component {
   }
 }
 
-export default LoginHeader;
+export default AdminHeader;

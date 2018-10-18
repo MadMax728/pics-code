@@ -55,3 +55,31 @@ export const submitLogin = params => {
     );
   };
 };
+
+export const submitAdminLogin = params => {
+  return dispatch => {
+    dispatch(submitLoginStarted());
+
+    return userService.submitLogin(params).then(
+      res => {
+        let authResponse = {
+          admin_access_token: "deqd"
+        };
+
+        Auth.saveJwtToStorage(authResponse);
+        dispatch(submitLoginSucceeded(res.data));
+      },
+      error => {
+        let authResponse = {
+          admin_access_token: "deqd"
+        };
+        Auth.saveJwtToStorage(authResponse);
+        dispatch(submitLoginFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
