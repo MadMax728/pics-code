@@ -246,6 +246,10 @@ hr {
   .error-msg {
     color: #d0021b;
     font-size: 12px;
+    &.highlight {
+      float: right;
+      padding: 5px 0 0 0;
+    }
   }
   .options {
     list-style-type: none;
