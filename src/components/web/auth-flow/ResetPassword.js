@@ -9,9 +9,10 @@ class ResetPassword extends Component {
     super(props);
 
     this.state = {
-      password: "",
-      repeatPassword: "",
-      form: {}
+      form: {
+        password: "",
+        repeat_password: ""
+      }
     };
   }
 
@@ -37,12 +38,12 @@ class ResetPassword extends Component {
    * formValid
    */
   formValid = () => {
-    const { repeatPassword, password } = this.state;
+    const { form } = this.state;
 
     if (
-      repeatPassword.length === 0 ||
-      password.length === 0 ||
-      repeatPassword !== password
+      form.repeat_password.length === 0 ||
+      form.password.length === 0 ||
+      form.repeat_password !== form.password
     ) {
       return false;
     }
@@ -76,7 +77,7 @@ class ResetPassword extends Component {
                     onChange={this.handleChangeField}
                   />
 
-                  {this.state.password.length === 0 ? (
+                  {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -93,8 +94,8 @@ class ResetPassword extends Component {
                     value={form.repeat_password ? form.repeat_password : ""}
                     onChange={this.handleChangeField}
                   />
-                  {this.state.repeatPassword.length === 0 ||
-                  this.state.password !== this.state.repeatPassword ? (
+                  {form.repeat_password.length === 0 ||
+                  form.password !== form.repeat_password ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, Cookies, DownloadStore } from "../common";
@@ -10,14 +11,14 @@ class Register extends Component {
     super(props);
 
     this.state = {
-      userName: "",
-      email: "",
-      password: "",
-      repeatPassword: "",
-      emailValid: false,
-      isValidPassword: false,
       form: {
-        gender: "male"
+        gender: "male",
+        userName: "",
+        email: "",
+        password: "",
+        repeatPassword: "",
+        emailValid: false,
+        isValidPassword: false
       }
     };
   }
@@ -34,6 +35,7 @@ class Register extends Component {
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state.form);
+    this.props.history.push(routes.ROOT_ROUTE);
   };
 
   render() {
@@ -58,7 +60,7 @@ class Register extends Component {
                     value={form.username ? form.username : ""}
                     onChange={this.handleChangeField}
                   />
-                  {this.state.userName.length === 0 ? (
+                  {form.userName.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -74,7 +76,7 @@ class Register extends Component {
                     value={form.email ? form.email : ""}
                     onChange={this.handleChangeField}
                   />
-                  {this.state.email === 0 || !this.state.emailValid ? (
+                  {form.email === 0 || !form.emailValid ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -91,7 +93,7 @@ class Register extends Component {
                     value={form.password ? form.password : ""}
                     onChange={this.handleChangeField}
                   />
-                  {this.state.password.length === 0 ? (
+                  {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -108,8 +110,7 @@ class Register extends Component {
                     value={form.repeat_password ? form.repeat_password : ""}
                     onChange={this.handleChangeField}
                   />
-                  {this.state.repeatPassword.length === 0 ||
-                  !this.state.isValidPassword ? (
+                  {form.repeatPassword.length === 0 || !form.isValidPassword ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />

@@ -14,8 +14,10 @@ class Login extends Component {
     super(props);
 
     this.state = {
-      userName: "",
-      password: ""
+      form: {
+        userName: "",
+        password: ""
+      }
     };
   }
 
@@ -25,48 +27,46 @@ class Login extends Component {
   };
 
   /**
-   * getUserEnteredUserName
-   */
-  getUserEnteredUserName = e => {
-    e.preventDefault();
-    this.setState({ userName: e.target.value });
-  };
-
-  /**
-   * getUserEnterPassword
-   */
-  getUserEnterPassword = e => {
-    e.preventDefault();
-    this.setState({ password: e.target.value });
-  };
-
-  /**
    * formValid
    */
   formValid = () => {
-    const { userName, password } = this.state;
+    const { form } = this.state;
 
-    if (userName.length === 0 || password.length === 0) {
+    if (form.userName.length === 0 || form.password.length === 0) {
       return false;
     }
 
     return true;
   };
 
-  handleSubmit = event => {
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.form);
     if (!this.formValid()) {
       return false;
     }
 
-    const { userName, password } = this.state;
+    const { form } = this.state;
 
-    this.props.submitLogin({ email: userName, password }).then(() => {
-      this.props.history.push(routes.ROOT_ROUTE);
-    });
+    this.props
+      .submitLogin({ email: form.userName, password: form.password })
+      .then(() => {
+        this.props.history.push(routes.ROOT_ROUTE);
+      });
   };
 
   render() {
     const { loginData } = this.props;
+    const { form } = this.state;
+
     return (
       <div className="login-process">
         <BaseHeader />
@@ -81,11 +81,12 @@ class Login extends Component {
                     type="email"
                     className="form-control"
                     id="email"
-                    value={this.state.userName}
-                    onChange={this.getUserEnteredUserName}
+                    name="userName"
+                    value={form.userName}
+                    onChange={this.handleChangeField}
                     placeholder={Translations.placeholders.username_email}
                   />
-                  {this.state.userName.length > 0 ? (
+                  {form.userName.length > 0 ? (
                     <img src={images.checked} alt={"checked"} />
                   ) : (
                     <img src={images.error} alt={"error"} />
@@ -97,11 +98,12 @@ class Login extends Component {
                     className="form-control"
                     id="password"
                     autoComplete="password"
-                    value={this.state.password}
-                    onChange={this.getUserEnterPassword}
+                    name="password"
+                    value={form.password}
+                    onChange={this.handleChangeField}
                     placeholder={Translations.placeholders.password}
                   />
-                  {this.state.password.length > 0 ? (
+                  {form.password.length > 0 ? (
                     <img src={images.checked} alt={"checked"} />
                   ) : (
                     <img src={images.error} alt={"error"} />

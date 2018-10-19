@@ -10,8 +10,9 @@ class ResetMail extends Component {
     super(props);
 
     this.state = {
-      email: "",
-      form: {}
+      form: {
+        email: ""
+      }
     };
   }
 
