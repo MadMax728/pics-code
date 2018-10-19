@@ -10,24 +10,27 @@ class ResetPassword extends Component {
 
     this.state = {
       password: "",
-      repeatPassword: ""
+      repeatPassword: "",
+      form: {}
     };
   }
 
-  /**
-   * updateRepeatPassword
-   */
-  updateRepeatPassword = e => {
-    e.preventDefault();
-    this.setState({ repeatPassword: e.target.value });
+  // handleChangeField which will be update every from value when change
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
   };
 
-  /**
-   * getUserEnterPassword
-   */
-  getUserEnterPassword = e => {
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
     e.preventDefault();
-    this.setState({ password: e.target.value });
+    console.log(this.state.form);
+    if (!this.formValid()) {
+      return false;
+    }
+    this.props.history.push(routes.ROOT_ROUTE);
   };
 
   /**
@@ -47,15 +50,9 @@ class ResetPassword extends Component {
     return true;
   };
 
-  handleSubmit = event => {
-    if (!this.formValid()) {
-      return false;
-    }
-
-    this.props.history.push(routes.ROOT_ROUTE);
-  };
-
   render() {
+    const { form } = this.state;
+
     return (
       <div className="login-process">
         <BaseHeader />
@@ -73,7 +70,10 @@ class ResetPassword extends Component {
                     className="form-control"
                     id="password"
                     placeholder="Enter new password"
-                    onChange={this.getUserEnterPassword}
+                    autoComplete="Password"
+                    name="password"
+                    value={form.password ? form.password : ""}
+                    onChange={this.handleChangeField}
                   />
 
                   {this.state.password.length === 0 ? (
@@ -88,7 +88,10 @@ class ResetPassword extends Component {
                     className="form-control"
                     id="new-password"
                     placeholder="Repeat password"
-                    onChange={this.updateRepeatPassword}
+                    autoComplete="Repeat Password"
+                    name="repeat_password"
+                    value={form.repeat_password ? form.repeat_password : ""}
+                    onChange={this.handleChangeField}
                   />
                   {this.state.repeatPassword.length === 0 ||
                   this.state.password !== this.state.repeatPassword ? (

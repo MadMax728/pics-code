@@ -22,6 +22,7 @@ class Register extends Component {
     };
   }
 
+  // handleChangeField which will be update every from value when change
   handleChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
@@ -29,6 +30,7 @@ class Register extends Component {
     console.log(this.state.form);
   };
 
+  // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state.form);
@@ -45,7 +47,6 @@ class Register extends Component {
             <div className="login-wrapper">
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
-
               <form>
                 <div className="form-group">
                   <input

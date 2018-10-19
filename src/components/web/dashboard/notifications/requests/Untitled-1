@@ -18,6 +18,12 @@ Today, I have worked on following tasks updated same in asana, pushed the code o
 
 3. Maintain the folder structure for the Mock Data of Back-Office' DashBoard Mock data.
 
-4. Fixed all routes path ("-" insted of "_").
+4. Implementation of take input from user and Maintain the form state of it, 
+    - Register
+    - Login
+    - ResetEmail
+    - ResetPassword
+
+5. Fixed all routes path ("-" insted of "_").
 
 Thanks.

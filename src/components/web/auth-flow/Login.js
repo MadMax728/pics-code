@@ -96,6 +96,7 @@ class Login extends Component {
                     type="password"
                     className="form-control"
                     id="password"
+                    autoComplete="password"
                     value={this.state.password}
                     onChange={this.getUserEnterPassword}
                     placeholder={Translations.placeholders.password}
