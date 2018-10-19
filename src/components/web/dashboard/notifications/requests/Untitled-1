@@ -1,27 +1,29 @@
-Implementation of mock-data in Back-Office module,  
-    - Dashboard
-    - Reported
-        - Image
-        - Pic
-        - Videos
-        - Users
-        - Comments
+Hello Team,
 
-- Implementation of the generic Component for the CustomBootstrapTable Component.
+Today, I have worked on following tasks updated same in asana, pushed the code on mockdata branch and created merge request.
 
-- Implementation of CustomBootstrapTable for, 
+1. Implementation of mock-data in Back-Office module,  
+    - DashBoard
+        - Key statistics
+        - Content statistics
+        - Campaign statistics company
+        - Ad statisitcs
+
+2. Implementation of CustomBootstrapTable for, 
     - Back - ffice
-        - CMS Management
-        - Add Admin
-        - Add Verification
-        - Add Voucher
+        - Key statistics
+        - Content statistics
+        - Campaign statistics company
+        - Ad statisitcs
 
-- Implementation of CustomBootstrapTable for, 
-    - Settings
-        - Bills and Receipts
+3. Maintain the folder structure for the Mock Data of Back-Office' DashBoard Mock data.
 
-Maintain the folder structure for the Mock Data of Back-Office and CustomBootstrapTable modules.
+4. Implementation of take input from user and Maintain the form state of it, 
+    - Register
+    - Login
+    - ResetEmail
+    - ResetPassword
 
-Fix designing issue for the Back Office module's Components.
+5. Fixed all routes path ("-" insted of "_").
 
 Thanks.
