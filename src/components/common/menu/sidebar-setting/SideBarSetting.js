@@ -1,4 +1,5 @@
 import React from "react";
+import * as _ from "lodash";
 import { LeftSidebarNav } from "../../../ui-kit";
 import * as routes from "../../../../lib/constants/routes";
 import { Translations } from "../../../../lib/translations";
@@ -62,14 +63,16 @@ const Links = [
   }
 ];
 
-/**
- * If user is admin and validate with login API
- */
-if (Auth.isUserAdmin()) {
-  Links.splice(1, 0, admin);
-}
-
 const SideBarSetting = () => {
+  /**
+   * If user is admin and validate with login API
+   * If menu is already exist then we don't need to add it
+   */
+  const isNeedAdminMenu = _.find(Links, admin);
+  if (Auth.isUserAdmin() && !isNeedAdminMenu) {
+    Links.splice(1, 0, admin);
+  }
+
   return (
     <LeftSidebarNav
       links={Links}
