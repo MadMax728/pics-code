@@ -69,9 +69,8 @@ const SideBarSetting = () => {
    * If menu is already exist then we don't need to add it
    */
   const isNeedAdminMenu = _.find(Links, admin);
-  if (Auth.isUserAdmin() && !isNeedAdminMenu) {
-    Links.splice(1, 0, admin);
-  }
+
+  if (Auth.isUserAdmin() && !isNeedAdminMenu) Links.splice(1, 0, admin);
 
   return (
     <LeftSidebarNav
