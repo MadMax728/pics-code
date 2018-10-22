@@ -53,7 +53,6 @@ class CreateCreatorCampaign extends Component {
               handleModalInfoShow={handleModalInfoShow}
             />
           ))}
-        )}
       </div>
     );
   }

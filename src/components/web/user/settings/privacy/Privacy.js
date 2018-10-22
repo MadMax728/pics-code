@@ -30,6 +30,8 @@ class Privacy extends Component {
     };
   }
 
+  onKeyPressHandler = () => {};
+
   hanldeIsPrivate = event => {
     const isPrivate = event.target.checked;
     this.setState({ isPrivate: isPrivate });
@@ -110,7 +112,7 @@ class Privacy extends Component {
               <div className="row">
                 <div className="col-sm-6">Set my profile to private</div>
                 <div className="col-sm-6 text-right">
-                  <label className="switch">
+                  <label className="switch" htmlFor={"Privacy"}>
                     <input type="checkbox" onChange={this.hanldeIsPrivate} />
                     <span className="slider round" />
                   </label>
@@ -119,7 +121,7 @@ class Privacy extends Component {
               <div className="row">
                 <div className="col-sm-6">Personalized advertising</div>
                 <div className="col-sm-6 text-right">
-                  <label className="switch">
+                  <label className="switch" htmlFor={"Personalized"}>
                     <input
                       type="checkbox"
                       onChange={this.hanldeIsPersonalized}
@@ -249,9 +251,9 @@ class Privacy extends Component {
                   onChange={this.handleFieldChangeInvoice}
                 />
                 {change_invoicing_address_form.invoice_recipient.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
+                  <img src={images.checked} alt={"checked1"} />
                 ) : (
-                  <img src={images.error} alt={"error"} />
+                  <img src={images.error} alt={"error1"} />
                 )}
               </div>
               <div className="form-group">
@@ -351,13 +353,27 @@ class Privacy extends Component {
               <div className="row">
                 <div className="col-sm-6">Delete search history</div>
                 <div className="col-sm-6 text-right">
-                  <div onClick={this.handleDeleteSearchHisory}>Delete</div>
+                  <div
+                    onClick={this.handleDeleteSearchHisory}
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={this.handleKeyDown}
+                  >
+                    Delete
+                  </div>
                 </div>
               </div>
               <div className="row">
                 <div className="col-sm-6">Deactivate my account</div>
                 <div className="col-sm-6 text-right">
-                  <div onClick={this.handleDeactiveMyAccount}>Deactivate</div>
+                  <div
+                    onClick={this.handleDeactiveMyAccount}
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={this.handleKeyDown}
+                  >
+                    Deactivate
+                  </div>
                 </div>
               </div>
             </div>
