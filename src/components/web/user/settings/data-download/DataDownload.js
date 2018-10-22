@@ -1,7 +1,32 @@
 import React, { Component } from "react";
 
 class DataDownload extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      form: {
+        email: "",
+        password: ""
+      }
+    };
+  }
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.form);
+  };
+
   render() {
+    const { form } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="campaign-middle-section">
@@ -29,18 +54,32 @@ class DataDownload extends Component {
               <div className="col-sm-5 padding-r-5 email-wrapper">
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
-                  <input type="text" className="form-control" id="email" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    name="email"
+                    onChange={this.handleChangeField}
+                  />
                 </div>
               </div>
               <div className="col-sm-5 padding-l-5 padding-r-5">
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="text" className="form-control" id="password" />
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    onChange={this.handleChangeField}
+                  />
                 </div>
               </div>
               <div className="col-sm-2 padding-l-5 btn-wrapper">
                 <div className="form-group">
-                  <button className="blue_button">Download</button>
+                  <button className="blue_button" onClick={this.handleSubmit}>
+                    Download
+                  </button>
                 </div>
               </div>
             </form>
