@@ -26,35 +26,33 @@ class CreateCreatorCampaign extends Component {
 
     return (
       <div>
-        {isPreview ? (
-          <div>
-            <button
-              onClick={handlePrivewClose}
-              className={"closeBtn right-side-close"}
-            >
-              <img
-                src={images.white_close}
-                alt={"cross"}
-                style={{ height: "10px", width: "10px" }}
-              />
-            </button>
-            <Preview />
-          </div>
-        ) : (
-          <div>
-            {stepIndex === 0 && <StepOne />}
-            {stepIndex === 1 && <StepTwo />}
-            {stepIndex === 2 && <StepThree />}
-            {stepIndex === 3 && <PaymentStepOne forThat={forThat} />}
-            {stepIndex === 4 && <PaymentStepTwo forThat={forThat} />}
-            {stepIndex === 5 && (
-              <PaymentStepThree
-                forThat={forThat}
-                handleModalInfoShow={handleModalInfoShow}
-              />
-            )}
-          </div>
+        {isPreview && <Preview />}
+        {isPreview && (
+          <button
+            onClick={handlePrivewClose}
+            className={"closeBtn right-side-close"}
+          >
+            <img
+              src={images.white_close}
+              alt={"cross"}
+              style={{ height: "10px", width: "10px" }}
+            />
+          </button>
         )}
+        {!isPreview && (stepIndex === 0 && <StepOne />)}
+        {!isPreview && (stepIndex === 1 && <StepTwo />)}
+        {!isPreview && (stepIndex === 2 && <StepThree />)}
+        {!isPreview &&
+          (stepIndex === 3 && <PaymentStepOne forThat={forThat} />)}
+        {!isPreview &&
+          (stepIndex === 4 && <PaymentStepTwo forThat={forThat} />)}
+        {!isPreview &&
+          (stepIndex === 5 && (
+            <PaymentStepThree
+              forThat={forThat}
+              handleModalInfoShow={handleModalInfoShow}
+            />
+          ))}
       </div>
     );
   }
