@@ -2,11 +2,55 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
 class EditProfile extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      form: {
+        username: "",
+        name_company: "",
+        dob: "",
+        gender: "male",
+        category: "",
+        location: "",
+        phone_number: "",
+        email: "",
+        website: "",
+        profile_description: "",
+        offer_tag: "",
+        inquiry_tag: "",
+        facebook: "",
+        instagram: "",
+        youtube: "",
+        linkedin: "",
+        twitter: "",
+        tumblr: "",
+        pintrest: "",
+        google: ""
+      }
+    };
+  }
+
   handleCity = () => {};
 
   handleGender = () => {};
 
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.form);
+  };
+
   render() {
+    const { form } = this.state;
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="edit-profile-form">
@@ -31,12 +75,28 @@ class EditProfile extends Component {
             <div className="general-information-wrapper">
               <div className="form-group margin-bottom-30">
                 <label htmlFor="username">User name</label>
-                <input type="text" className="form-control" id="username" />
-                <img src={images.checked} alt={"checked"} />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="username"
+                  name="username"
+                  onChange={this.handleChangeField}
+                />
+                {form.username.length === 0 ? (
+                  <img src={images.error} alt={"error"} />
+                ) : (
+                  <img src={images.checked} alt={"checked"} />
+                )}
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="name">Name/Company</label>
-                <input type="text" className="form-control" id="name" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name_company"
+                  name="name_company"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">

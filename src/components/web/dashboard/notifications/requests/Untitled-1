@@ -24,6 +24,13 @@ Today, I have worked on following tasks updated same in asana, pushed the code o
     - ResetEmail
     - ResetPassword
 
-5. Fixed all routes path ("-" insted of "_").
+5. Fixed all routes path ("-" instead of "_") and test each path.
 
 Thanks.
+
+
+
+Implementation of Mockdata for back office's Dashboard component (Key statistics, Content statistics, Campaign statistics company, Ad statisitcs)
+Implementation of CustomBootstrapTable for back office's Dashboard component (Key statistics, Content statistics, Campaign statistics company, Ad statisitcs)
+Maintain the folder structure for the Mock Data of Back-Office' DashBoard Mock data.
+Implementation of takes user input in Register module, Login module, Reset Password module, Reset Email module.
