@@ -15,6 +15,7 @@ const propTypes = {
   condensed: PropTypes.bool,
   defaultSorted: PropTypes.array,
   pagination: PropTypes.object,
+  isPagination: PropTypes.bool,
   noDataIndication: PropTypes.string,
   wrapperClasses: PropTypes.string
 };
@@ -30,23 +31,39 @@ const CustomBootstrapTable = ({
   defaultSorted,
   noDataIndication,
   wrapperClasses,
-  pagination
+  pagination,
+  isPagination
 }) => {
   return (
     <div>
-      <BootstrapTable
-        keyField={id}
-        wrapperClasses={wrapperClasses}
-        data={data}
-        columns={columns}
-        striped={striped}
-        hover={hover}
-        bordered={bordered}
-        condensed={condensed}
-        defaultSorted={defaultSorted}
-        noDataIndication={noDataIndication}
-        pagination={paginationFactory(pagination)}
-      />
+      {!isPagination ? (
+        <BootstrapTable
+          keyField={id}
+          wrapperClasses={wrapperClasses}
+          data={data}
+          columns={columns}
+          striped={striped}
+          hover={hover}
+          bordered={bordered}
+          condensed={condensed}
+          defaultSorted={defaultSorted}
+          noDataIndication={noDataIndication}
+        />
+      ) : (
+        <BootstrapTable
+          keyField={id}
+          wrapperClasses={wrapperClasses}
+          data={data}
+          columns={columns}
+          striped={striped}
+          hover={hover}
+          bordered={bordered}
+          condensed={condensed}
+          defaultSorted={defaultSorted}
+          noDataIndication={noDataIndication}
+          pagination={paginationFactory(pagination)}
+        />
+      )}
     </div>
   );
 };

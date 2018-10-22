@@ -1,12 +1,273 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
+import {
+  key_statistics,
+  content_statistics,
+  campaign_statistics_company,
+  ads_statisitcs
+} from "../../../mock-data";
+import { CustomBootstrapTable } from "../../ui-kit";
+
 class Landing extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      key_statistics: key_statistics,
+      content_statistics: content_statistics,
+      campaign_statistics_company: campaign_statistics_company,
+      ads_statisitcs: ads_statisitcs
+    };
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
 
   render() {
+    const {
+      key_statistics,
+      content_statistics,
+      campaign_statistics_company,
+      ads_statisitcs
+    } = this.state;
+
+    const keyColumns = [
+      {
+        dataField: "registered_users",
+        text: "Registered users",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "active_users",
+        text: "Active users",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "deactivated_accounts",
+        text: "Deactivated accounts",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "turnover",
+        text: "Turnover",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "reviews",
+        text: "Reviews",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "reported_content",
+        text: "Reported content",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      }
+    ];
+
+    const contentColumns = [
+      {
+        dataField: "lable",
+        text: "Lable",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "images",
+        text: "Images",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "videos",
+        text: "Videos",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "campaign_company",
+        text: "Campaign Company",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "image_campaign",
+        text: "Image Campaign",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "video_campaign",
+        text: "Video Campaign",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "campaign_creator",
+        text: "Campaign Creator",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "pics",
+        text: "Pics",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "ads",
+        text: "Ads",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "total",
+        text: "Total",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      }
+    ];
+
+    const campaignsColumns = [
+      {
+        dataField: "lable",
+        text: "Lable",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "number",
+        text: "Number",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "active_campaign",
+        text: "Active Campaign",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "closed_campaign",
+        text: "Closed Campaign",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "campaigns_temp_closed",
+        text: "Campaign Temp Closed",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "potential_turnover",
+        text: "Potential Turnover",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "total_turnover",
+        text: "Total Turnover",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "average_conv_rate",
+        text: "Average conv rate Total",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      }
+    ];
+
+    const adsColumns = [
+      {
+        dataField: "lable",
+        text: "Lable",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "number",
+        text: "Number",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "active_ads",
+        text: "Active Ads",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "closed_ads",
+        text: "Closed Ads",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "ads_temp_closed",
+        text: "Ads Temp Closed",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "potential_turnover",
+        text: "Potential Turnover",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "total_turnover",
+        text: "Total Turnover",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      },
+      {
+        dataField: "average_conv_rate",
+        text: "Average conv rate Total",
+        align: "left",
+        headerAlign: "left",
+        sort: false
+      }
+    ];
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -30,28 +291,17 @@ class Landing extends Component {
             </select>
           </div>
           <div className="dashboard-tbl">
-            <table>
-              <thead>
-                <tr>
-                  <th>Registered users</th>
-                  <th>Active users</th>
-                  <th>Deactivated accounts</th>
-                  <th>Turnover</th>
-                  <th>Reviews</th>
-                  <th>Reported content</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-              </tbody>
-            </table>
+            <CustomBootstrapTable
+              data={key_statistics}
+              columns={keyColumns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              isPagination={false}
+              noDataIndication="Table is Empty"
+              id={"registered_users"}
+            />
           </div>
           <div className="title_with_dropdown">
             <span>Content statistics</span>
@@ -62,67 +312,17 @@ class Landing extends Component {
             </select>
           </div>
           <div className="dashboard-tbl">
-            <table>
-              <thead>
-                <tr>
-                  <th>Images</th>
-                  <th>Videos</th>
-                  <th>Campaign company</th>
-                  <th>Image campaign</th>
-                  <th>Video campaign</th>
-                  <th>Campaign creator</th>
-                  <th>Pics</th>
-                  <th>Ads</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Total</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>All</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>No category</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>Art & Culture</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-              </tbody>
-            </table>
+            <CustomBootstrapTable
+              data={content_statistics}
+              columns={contentColumns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              isPagination={false}
+              noDataIndication="Table is Empty"
+              id={"lable"}
+            />
           </div>
           <div className="title_with_dropdown">
             <span>Campaign statistics company</span>
@@ -133,57 +333,17 @@ class Landing extends Component {
             </select>
           </div>
           <div className="dashboard-tbl">
-            <table>
-              <thead>
-                <tr>
-                  <th>Number</th>
-                  <th>Active campaigns</th>
-                  <th>Closed campaigns</th>
-                  <th>Campaigns temp. closed</th>
-                  <th>Potential turnover</th>
-                  <th>Total turnover</th>
-                  <th>Average conv. rate</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Total</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>All</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>No category</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>Art & Culture</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-              </tbody>
-            </table>
+            <CustomBootstrapTable
+              data={campaign_statistics_company}
+              columns={campaignsColumns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              isPagination={false}
+              noDataIndication="Table is Empty"
+              id={"lable"}
+            />
           </div>
           <div className="title_with_dropdown">
             <span>Ad statisitcs</span>
@@ -194,57 +354,17 @@ class Landing extends Component {
             </select>
           </div>
           <div className="dashboard-tbl">
-            <table>
-              <thead>
-                <tr>
-                  <th>Number</th>
-                  <th>Active ads</th>
-                  <th>Closed ads</th>
-                  <th>Ads temp. closed</th>
-                  <th>Potential turnover</th>
-                  <th>Total turnover</th>
-                  <th>Average conv. rate</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Total</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>All</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>No category</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-                <tr>
-                  <td>Art & Culture</td>
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                  <td />
-                </tr>
-              </tbody>
-            </table>
+            <CustomBootstrapTable
+              data={ads_statisitcs}
+              columns={adsColumns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              isPagination={false}
+              noDataIndication="Table is Empty"
+              id={"lable"}
+            />
           </div>
         </div>
       </div>
