@@ -65,7 +65,7 @@ class StepOne extends Component {
                   />
                   <label htmlFor="male-female">Male & Female</label>
                 </li>
-                <li>
+                <li className="wid49">
                   <input
                     type="radio"
                     id="male"
@@ -74,7 +74,7 @@ class StepOne extends Component {
                   />
                   <label htmlFor="male">Male</label>
                 </li>
-                <li>
+                <li className="wid49">
                   <input type="radio" id="female" name="target" />
                   <label htmlFor="female">Female</label>
                 </li>

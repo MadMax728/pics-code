@@ -6,8 +6,25 @@ import { Upload, UploadHeader } from "../../user";
 class UploadModal extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {};
+    this.state = {
+      form: {
+        add_location: "",
+        add_category: "",
+        add_decription: ""
+      }
+    };
   }
+
+  handleContinue = () => {
+    console.log(this.state.form);
+  };
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
 
   render() {
     return (
@@ -15,13 +32,16 @@ class UploadModal extends Component {
         modalClassName={"modal fade upload-image-modal"}
         header
         modalHeaderContent={
-          <UploadHeader handleModalHide={this.props.handleModalHide} />
+          <UploadHeader
+            handleModalHide={this.props.handleModalHide}
+            handleContinue={this.handleContinue}
+          />
         }
         footer={false}
         closeBtn={false}
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
-        modalBodyContent={<Upload />}
+        modalBodyContent={<Upload handleChangeField={this.handleChangeField} />}
       />
     );
   }

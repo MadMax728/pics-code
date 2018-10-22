@@ -40,7 +40,7 @@
         margin: 0 auto;
         margin-bottom: 8px;
         background: url("../images/pic-1.jpg") no-repeat center 100%;
-        background-size: contain;
+        background-size: contain !important;
       }
       a {
         font-size: 12px;

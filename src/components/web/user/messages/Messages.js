@@ -9,7 +9,7 @@ class Messages extends Component {
     this.state = {
       title: "Messages",
       propsMsg: messages,
-      messages: messages,
+      messages,
       activeIndex: "1",
       chatData: []
     };

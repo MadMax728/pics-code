@@ -13,10 +13,10 @@ class Landing extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      key_statistics: key_statistics,
-      content_statistics: content_statistics,
-      campaign_statistics_company: campaign_statistics_company,
-      ads_statisitcs: ads_statisitcs
+      key_statistics,
+      content_statistics,
+      campaign_statistics_company,
+      ads_statisitcs
     };
   }
 

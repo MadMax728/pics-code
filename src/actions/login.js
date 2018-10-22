@@ -24,7 +24,7 @@ export const submitLogin = params => {
 
     return userService.submitLogin(params).then(
       res => {
-        let authResponse = {
+        const authResponse = {
           access_token: "12222",
           refresh_token: false,
           expires_in: "22222",
@@ -37,7 +37,7 @@ export const submitLogin = params => {
         dispatch(submitLoginSucceeded(res.data));
       },
       error => {
-        let authResponse = {
+        const authResponse = {
           access_token: "12222",
           refresh_token: false,
           expires_in: "22222",
@@ -62,7 +62,7 @@ export const submitAdminLogin = params => {
 
     return userService.submitLogin(params).then(
       res => {
-        let authResponse = {
+        const authResponse = {
           admin_access_token: "deqd"
         };
 
@@ -70,7 +70,7 @@ export const submitAdminLogin = params => {
         dispatch(submitLoginSucceeded(res.data));
       },
       error => {
-        let authResponse = {
+        const authResponse = {
           admin_access_token: "deqd"
         };
         Auth.saveJwtToStorage(authResponse);

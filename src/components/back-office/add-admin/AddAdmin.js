@@ -7,11 +7,28 @@ class AddAdmin extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      admins: admin_list
+      admins: admin_list,
+      form: {
+        username: "",
+        status: "admin_status1"
+      }
     };
   }
 
-  statusFormatter = (cell, row, rowIndex, formatExtraData) => {
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.form);
+  };
+
+  statusFormatter = (cell, row, rowIndex) => {
     return (
       <div key={rowIndex}>
         <span>{cell}</span>
@@ -100,19 +117,24 @@ class AddAdmin extends Component {
           <div className="title_with_search_dropdown_button">
             <input
               type="search"
-              name=""
-              id=""
+              name="username"
+              id="username"
               placeholder="Search in users"
               className="res440"
+              onChange={this.handleChangeField}
             />
-            <select className="res440">
-              <option>Admin status </option>
-              <option>Option 1 </option>
-              <option>Option 2 </option>
+            <select
+              className="res440"
+              onBlur={this.handleChangeField}
+              name="status"
+            >
+              <option value={"admin_status1"}>Admin status 1 </option>
+              <option value={"admin_status2"}>Admin status 2 </option>
+              <option value={"admin_status3"}>Admin status 3 </option>
             </select>
-            <Link to={""} className="res440">
+            <button className="res440" onClick={this.handleSubmit}>
               Add
-            </Link>
+            </button>
           </div>
           <div className="dashboard-tbl">
             <CustomBootstrapTable

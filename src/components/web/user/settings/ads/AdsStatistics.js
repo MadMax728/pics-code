@@ -7,7 +7,7 @@ class AdsStatistics extends Component {
     super(props, context);
 
     this.state = {
-      adStatistics: adStatistics
+      adStatistics
     };
   }
   render() {

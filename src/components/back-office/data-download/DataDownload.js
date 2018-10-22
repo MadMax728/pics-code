@@ -2,6 +2,29 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 class DataDownload extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      form: {
+        username: ""
+      }
+    };
+  }
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.form);
+  };
+
   componentDidMount() {
     window.scrollTo(0, 0);
   }
@@ -15,14 +38,15 @@ class DataDownload extends Component {
             <div className="title_with_search_dropdown_button">
               <input
                 type="search"
-                name=""
-                id=""
+                name="username"
+                id="username"
                 placeholder="User name"
                 className="flex2"
+                onChange={this.handleChangeField}
               />
-              <Link to={""} className="wid30per">
+              <button className="wid30per" onClick={this.handleSubmit}>
                 Download
-              </Link>
+              </button>
             </div>
           </div>
         </div>
