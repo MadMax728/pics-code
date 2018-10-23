@@ -13,9 +13,40 @@ class CampaignModal extends Component {
     super(props, context);
     this.state = {
       stepIndex: 0,
-      isPreview: false
+      isPreview: false,
+      form: {
+        title: "",
+        location: "",
+        category: "",
+        target_group: "company",
+        gender: "male",
+        offer: "",
+        offer_tag: "",
+        inquiry: "",
+        inquiry_tag: "",
+        description: "",
+        start_date: "",
+        end_date: "",
+        daily_budget: "",
+        invoice_recipient: "",
+        street: "",
+        number: "",
+        postal_code: "",
+        image: ""
+      }
     };
   }
+
+  handleContinue = () => {
+    console.log(this.state.form);
+  };
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
 
   componentDidMount() {
     this.setState({ stepIndex: 0 });
