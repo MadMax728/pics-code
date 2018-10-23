@@ -124,7 +124,7 @@ class Register extends Component {
                         id="male"
                         name="gender"
                         value="male"
-                        defaultChecked={form.gender === "male" ? true : false}
+                        defaultChecked={form.gender === "male"}
                         className="black_button"
                       />
                       <label htmlFor="male">Male</label>
@@ -135,7 +135,7 @@ class Register extends Component {
                         id="female"
                         value="female"
                         name="gender"
-                        defaultChecked={form.gender === "female" ? true : false}
+                        defaultChecked={form.gender === "female"}
                       />
                       <label htmlFor="female">Female</label>
                     </li>

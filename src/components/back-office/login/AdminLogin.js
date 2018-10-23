@@ -54,10 +54,9 @@ class AdminLogin extends Component {
 
     const { password } = this.state;
 
-    this.props.submitAdminLogin({ password : password}).then(() => {
+    this.props.submitAdminLogin({ password }).then(() => {
       this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
     });
-
   };
 
   render() {
