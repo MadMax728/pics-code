@@ -52,8 +52,8 @@ class InlineLoading extends React.Component {
               >
                 <ellipse
                   className="ground"
-                  cx="10"
-                  cy="10"
+                  cx="10.4"
+                  cy="10.4"
                   rx="10"
                   ry="10"
                   fill="#029bd7"
@@ -70,8 +70,8 @@ class InlineLoading extends React.Component {
               >
                 <ellipse
                   className="ground"
-                  cx="10"
-                  cy="10"
+                  cx="11"
+                  cy="11"
                   rx="10"
                   ry="10"
                   fill="#1f58a6"
