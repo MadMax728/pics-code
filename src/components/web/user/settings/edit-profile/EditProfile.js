@@ -9,7 +9,11 @@ class EditProfile extends Component {
       form: {
         username: "",
         name_company: "",
-        dob: "",
+        dob: {
+          day: "",
+          mon: "",
+          year: ""
+        },
         gender: "male",
         category: "",
         location: "",
@@ -22,16 +26,16 @@ class EditProfile extends Component {
         facebook: "",
         instagram: "",
         youtube: "",
-        linkedin: "",
-        twitter: "",
-        tumblr: "",
-        pintrest: "",
-        google: ""
+        twitter: ""
       }
     };
   }
 
-  handleCity = () => {};
+  handleChangeDOB = event => {
+    const { form } = this.state;
+    form.dob[event.target.name] = event.target.value;
+    this.setState({ form });
+  };
 
   handleGender = () => {};
 
@@ -105,26 +109,29 @@ class EditProfile extends Component {
                     <input
                       type="number"
                       name="day"
-                      value="1"
+                      value={form.dob.day}
                       min="1"
                       max="31"
-                      onChange={this.handleCity}
+                      pattern="[0-9]*"
+                      onChange={this.handleChangeDOB}
                     />
                     <input
                       type="number"
-                      name="month"
-                      value="1"
+                      name="mon"
+                      value={form.dob.mon}
                       min="1"
+                      pattern="[0-9]*"
                       max="12"
-                      onChange={this.handleCity}
+                      onChange={this.handleChangeDOB}
                     />
                     <input
                       type="number"
                       name="year"
-                      value="2000"
+                      value={form.dob.year}
                       min="1950"
+                      pattern="[0-9]*"
                       max="2050"
-                      onChange={this.handleCity}
+                      onChange={this.handleChangeDOB}
                     />
                   </div>
                 </div>
@@ -132,19 +139,25 @@ class EditProfile extends Component {
                   <div className="form-group margin-bottom-30">
                     <label htmlFor="country">Gender</label>
                     <ul className="options">
-                      <li>
+                      <li onChange={this.handleChangeField}>
                         <input
                           type="radio"
                           id="male"
-                          name="amount"
+                          name="gender"
+                          value="male"
+                          defaultChecked={form.gender === "male"}
                           className="black_button"
-                          checked
-                          onChange={this.handleGender}
                         />
                         <label htmlFor="male">Male</label>
                       </li>
-                      <li>
-                        <input type="radio" id="female" name="amount" />
+                      <li onChange={this.handleChangeField}>
+                        <input
+                          type="radio"
+                          id="female"
+                          value="female"
+                          name="gender"
+                          defaultChecked={form.gender === "female"}
+                        />
                         <label htmlFor="female">Female</label>
                       </li>
                     </ul>
@@ -153,79 +166,137 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="category">Category</label>
-                <input type="text" className="form-control" id="category" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="category"
+                  name="category"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="location" className="margin-bottom-13">
                   Location
                 </label>
-                <input type="text" className="form-control" id="location" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="location"
+                  name="location"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="phone-number">Phone number</label>
-                <input type="text" className="form-control" id="phone-number" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="phone_number"
+                  name="phone_number"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="email">Email</label>
-                <input type="text" className="form-control" id="email" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="website">Web site</label>
-                <input type="text" className="form-control" id="website" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="website"
+                  name="website"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="description">Profile description</label>
-                <input type="text" className="form-control" id="description" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="profile_description"
+                  name="profile_description"
+                  onChange={this.handleChangeField}
+                />
               </div>
             </div>
             <div className="form-subtitle">Personal interests</div>
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
                 <label htmlFor="offer-tag">Offer tag</label>
-                <input type="text" className="form-control" id="offer-tag" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="offer_tag"
+                  name="offer_tag"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="inquiry-tag">Inquiry tag</label>
-                <input type="text" className="form-control" id="inquiry-tag" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inquiry_tag"
+                  name="inquiry_tag"
+                  onChange={this.handleChangeField}
+                />
               </div>
             </div>
             <div className="form-subtitle">Social Network URL</div>
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
                 <label htmlFor="facebook">Facebook</label>
-                <input type="text" className="form-control" id="facebook" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="facebook"
+                  name="facebook"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="instagram">Instagram</label>
-                <input type="text" className="form-control" id="instagram" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="instagram"
+                  name="instagram"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="youtube">Youtube</label>
-                <input type="text" className="form-control" id="youtube" />
-              </div>
-              <div className="form-group margin-bottom-30">
-                <label htmlFor="linkedin">Linkedin</label>
-                <input type="text" className="form-control" id="linkedin" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="youtube"
+                  name="youtube"
+                  onChange={this.handleChangeField}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="twitter">Twitter</label>
-                <input type="text" className="form-control" id="twitter" />
-              </div>
-              <div className="form-group margin-bottom-30">
-                <label htmlFor="tumblr">Tumblr</label>
-                <input type="text" className="form-control" id="tumblr" />
-              </div>
-              <div className="form-group margin-bottom-30">
-                <label htmlFor="pintrest">Pintrest</label>
-                <input type="text" className="form-control" id="pintrest" />
-              </div>
-              <div className="form-group margin-bottom-30">
-                <label htmlFor="google">Google+</label>
-                <input type="text" className="form-control" id="google" />
+                <input
+                  type="text"
+                  className="form-control"
+                  id="twitter"
+                  name="twitter"
+                  onChange={this.handleChangeField}
+                />
               </div>
             </div>
             <div className="form-group margin-bottom-30">
-              <button className="black_button">save</button>
+              <button className="black_button" onClick={this.handleSubmit}>
+                save
+              </button>
             </div>
           </form>
         </div>

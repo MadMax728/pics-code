@@ -7,19 +7,17 @@ class UploadHeader extends Component {
     this.state = {};
   }
 
-  handleCancleClick = () => {
-    this.props.handleModalHide();
-  };
-
   render() {
     return (
       <div className="row">
         <div className="col-sm-6 modal-title">Upload image</div>
         <div className="col-sm-6 text-right">
-          <button className="black_button" onClick={this.handleCancleClick}>
+          <button className="black_button" onClick={this.props.handleModalHide}>
             Cancel
           </button>
-          <button className="black_button">Continue</button>
+          <button className="black_button" onClick={this.props.handleContinue}>
+            Continue
+          </button>
         </div>
       </div>
     );
@@ -27,7 +25,8 @@ class UploadHeader extends Component {
 }
 
 UploadHeader.propTypes = {
-  handleModalHide: propTypes.func
+  handleModalHide: propTypes.func.isRequired,
+  handleContinue: propTypes.func.isRequired
 };
 
 export default UploadHeader;

@@ -7,9 +7,25 @@ class AddVerification extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      verifications: verification_list
+      verifications: verification_list,
+      form: {
+        username: ""
+      }
     };
   }
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.form);
+  };
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
@@ -99,14 +115,15 @@ class AddVerification extends Component {
           <div className="title_with_search_dropdown_button">
             <input
               type="search"
-              name=""
-              id=""
+              name="username"
+              id="username"
               placeholder="Search in users"
               className="flex2"
+              onChange={this.handleChangeField}
             />
-            <Link to={""} className="wid30per">
+            <button className="wid30per" onClick={this.handleSubmit}>
               Add
-            </Link>
+            </button>
           </div>
           <div className="dashboard-tbl">
             <CustomBootstrapTable

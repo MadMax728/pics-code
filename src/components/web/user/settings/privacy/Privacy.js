@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-
 import * as images from "../../../../../lib/constants/images";
 
 class Privacy extends Component {
@@ -34,13 +32,13 @@ class Privacy extends Component {
 
   hanldeIsPrivate = event => {
     const isPrivate = event.target.checked;
-    this.setState({ isPrivate: isPrivate });
+    this.setState({ isPrivate });
     // call API for isPrivate
   };
 
   hanldeIsPersonalized = event => {
     const isPersonalized = event.target.checked;
-    this.setState({ isPersonalized: isPersonalized });
+    this.setState({ isPersonalized });
     // call API for isPersonalized
   };
 

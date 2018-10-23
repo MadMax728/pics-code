@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
+import propTypes from "prop-types";
 
 class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+
+  handleChangeField = event => {
+    this.props.handleChangeField(event);
+  };
 
   render() {
     return (
@@ -25,20 +30,28 @@ class Upload extends Component {
           <form>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input type="text" name="location" />
+              <input
+                type="text"
+                name="add_location"
+                onChange={this.handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Category">Add Category</label>
-              <select>
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
+              <select name="add_category" onBlur={this.handleChangeField}>
+                <option value={"category_1"}>Category 1</option>
+                <option value={"category_2"}>Category 2</option>
+                <option value={"category_3"}>Category 3</option>
+                <option value={"category_4"}>Category 4</option>
               </select>
             </div>
             <div className="form-group no-margin">
               <label htmlFor="description">Add description</label>
-              <textarea className="form-control" />
+              <textarea
+                className="form-control"
+                name="add_description"
+                onChange={this.handleChangeField}
+              />
             </div>
           </form>
         </div>
@@ -64,5 +77,9 @@ class Upload extends Component {
     );
   }
 }
+
+Upload.propTypes = {
+  handleChangeField: propTypes.func.isRequired
+};
 
 export default Upload;
