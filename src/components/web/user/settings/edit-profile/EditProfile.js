@@ -65,9 +65,9 @@ class EditProfile extends Component {
                 <img src={images.pic_1} className="image-wrapr" alt="avatar" />
                 <div className="input-file-container">
                   <input className="input-file" id="my-file" type="file" />
-                  {/* <label tabindex="0" for="my-file" className="input-file-trigger">
-                    Select a file...
-                  </label> */}
+                  <label className="input-file-trigger">
+                    Edit profile image
+                  </label>
                 </div>
                 {/* <Link to={""}>Edit profile image</Link> */}
               </div>
