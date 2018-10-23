@@ -89,26 +89,32 @@ class AddVoucher extends Component {
     const columns = [
       {
         dataField: "code",
+        text: "Code",
         headerFormatter: this.codeFormatter
       },
       {
         dataField: "period",
+        text: "Period",
         headerFormatter: this.periodFormatter
       },
       {
         dataField: "amount",
+        text: "Amount",
         headerFormatter: this.amountFormatter
       },
       {
         dataField: "type",
+        text: "Type",
         headerFormatter: this.typeFormatter
       },
       {
         dataField: "number",
+        text: "Number",
         headerFormatter: this.numberFormatter
       },
       {
         dataField: "status",
+        text: "Status",
         headerFormatter: this.addFormatter,
         headerClasses: "wid93 no-padding res440 res320",
         formatter: this.statusFormatter

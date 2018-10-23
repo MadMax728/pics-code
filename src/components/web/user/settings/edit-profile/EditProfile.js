@@ -26,11 +26,7 @@ class EditProfile extends Component {
         facebook: "",
         instagram: "",
         youtube: "",
-        linkedin: "",
-        twitter: "",
-        tumblr: "",
-        pintrest: "",
-        google: ""
+        twitter: ""
       }
     };
   }
@@ -280,52 +276,12 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="linkedin">Linkedin</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="linkedin"
-                  name="linkedin"
-                  onChange={this.handleChangeField}
-                />
-              </div>
-              <div className="form-group margin-bottom-30">
                 <label htmlFor="twitter">Twitter</label>
                 <input
                   type="text"
                   className="form-control"
                   id="twitter"
                   name="twitter"
-                  onChange={this.handleChangeField}
-                />
-              </div>
-              <div className="form-group margin-bottom-30">
-                <label htmlFor="tumblr">Tumblr</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="tumblr"
-                  name="tumblr"
-                  onChange={this.handleChangeField}
-                />
-              </div>
-              <div className="form-group margin-bottom-30">
-                <label htmlFor="pintrest">Pintrest</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="pintrest"
-                  name="pintrest"
-                  onChange={this.handleChangeField}
-                />
-              </div>
-              <div className="form-group margin-bottom-30">
-                <label htmlFor="google">Google+</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="google"
-                  name="google"
                   onChange={this.handleChangeField}
                 />
               </div>
