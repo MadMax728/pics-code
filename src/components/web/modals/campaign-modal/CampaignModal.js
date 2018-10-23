@@ -32,6 +32,17 @@ class CampaignModal extends Component {
         street: "",
         number: "",
         postal_code: "",
+        city: "",
+        country: "",
+        vat_identification_number: "",
+        payment_option: "card",
+        card_holder: "",
+        expire_date: "",
+        card_no: "",
+        cvc: "",
+        billing_address: "",
+        payment_method: "",
+        voucher: "",
         image: ""
       }
     };
@@ -85,7 +96,7 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor, handleModalInfoShow } = this.props;
-    const { stepIndex, isPreview } = this.state;
+    const { stepIndex, isPreview, form } = this.state;
 
     let modalClassName = "";
 
@@ -139,6 +150,8 @@ class CampaignModal extends Component {
               handleModalInfoShow={handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
+              handleChangeField={this.handleChangeField}
+              form={form}
             />
           )
         }

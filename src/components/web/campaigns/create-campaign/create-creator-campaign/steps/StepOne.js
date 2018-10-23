@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../../lib/constants/images";
-
+import propTypes from "prop-types";
 class StepOne extends Component {
   constructor(props) {
     super(props);
@@ -8,6 +8,7 @@ class StepOne extends Component {
   }
 
   render() {
+    const { handleChangeField, form } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-6 upload-form">
@@ -25,44 +26,64 @@ class StepOne extends Component {
           <form>
             <div className="form-group">
               <label htmlFor="title">Add title</label>
-              <input type="text" name="title" />
+              <input type="text" name="title" onChange={handleChangeField} />
             </div>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input type="text" name="location" />
+              <input type="text" name="location" onChange={handleChangeField} />
             </div>
             <div className="form-group">
               <label htmlFor="Category">Add Category</label>
-              <select>
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
+              <select onBlur={handleChangeField} name="categoty">
+                <option value="Category 1">Category 1</option>
+                <option value="Category 2">Category 2</option>
+                <option value="Category 3">Category 3</option>
+                <option value="Category 4">Category 4</option>
               </select>
             </div>
             <div className="subtitle">Application criteria</div>
             <div className="form-group">
               <label htmlFor="Target_group">Target group</label>
               <ul className="options target-options">
-                <li>
+                <li onChange={handleChangeField}>
                   <input
                     type="radio"
                     id="company"
-                    name="target"
+                    name="target_group"
                     className="black_button"
+                    value="company"
+                    defaultChecked={form.target_group === "company"}
                   />
                   <label htmlFor="company">Company</label>
                 </li>
-                <li>
-                  <input type="radio" id="femalemale" name="target" />
+                <li onChange={handleChangeField}>
+                  <input
+                    type="radio"
+                    id="femalemale"
+                    name="target_group"
+                    value="female-male"
+                    defaultChecked={form.target_group === "Female & Male"}
+                  />
                   <label htmlFor="femalemale">Female & Male</label>
                 </li>
-                <li>
-                  <input type="radio" id="female" name="target" />
+                <li onChange={handleChangeField}>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    value="female"
+                    defaultChecked={form.gender === "female"}
+                  />
                   <label htmlFor="female">Female</label>
                 </li>
-                <li>
-                  <input type="radio" id="male" name="target" />
+                <li onChange={handleChangeField}>
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value="male"
+                    defaultChecked={form.gender === "male"}
+                  />
                   <label htmlFor="male">Male</label>
                 </li>
               </ul>
@@ -70,29 +91,37 @@ class StepOne extends Component {
             <div className="subtitle">Details of campaigns</div>
             <div className="form-group">
               <label htmlFor="Offer">Offer</label>
-              <select>
-                <option>Offer 1</option>
-                <option>Offer 2</option>
-                <option>Offer 3</option>
-                <option>Offer 4</option>
+              <select onBlur={handleChangeField} name="offier">
+                <option value="Offer 1">Offer 1</option>
+                <option value="Offer 2">Offer 2</option>
+                <option value="Offer 3">Offer 3</option>
+                <option value="Offer 4">Offer 4</option>
               </select>
             </div>
             <div className="form-group">
               <label htmlFor="offer_tag">Offer tag</label>
-              <input type="text" name="offer-tag" />
+              <input
+                type="text"
+                name="offer_tag"
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry">Inquiry</label>
-              <select>
-                <option>Inquiry 1</option>
-                <option>Inquiry 2</option>
-                <option>Inquiry 3</option>
-                <option>Inquiry 4</option>
+              <select onBlur={handleChangeField} name="inquiry">
+                <option value="Inquiry 1">Inquiry 1</option>
+                <option value="Inquiry 2">Inquiry 2</option>
+                <option value="Inquiry 3">Inquiry 3</option>
+                <option value="Inquiry 4">Inquiry 4</option>
               </select>
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry_tag">Inquiry tag</label>
-              <input type="text" name="inquiry-tag" />
+              <input
+                type="text"
+                name="inquiry_tag"
+                onChange={handleChangeField}
+              />
             </div>
           </form>
         </div>
@@ -126,5 +155,10 @@ class StepOne extends Component {
     );
   }
 }
+
+StepOne.propTypes = {
+  handleChangeField: propTypes.func.isRequired,
+  form: propTypes.any.isRequired
+};
 
 export default StepOne;
