@@ -49,7 +49,6 @@ class InlineLoading extends React.Component {
                 width="30px"
                 height="30px"
                 viewBox="0 0 253.313 250.59"
-                enable-background="new 0 0 253.313 250.59"
                 className="loader-star star-small"
               >
                 <g>
@@ -77,7 +76,6 @@ class InlineLoading extends React.Component {
                 width="30px"
                 height="30px"
                 viewBox="0 0 253.313 250.59"
-                enable-background="new 0 0 253.313 250.59"
                 className="loader-star star-big"
               >
                 <g>
