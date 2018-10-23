@@ -187,6 +187,9 @@ hr {
       &:last-child {
         float: right;
       }
+      &.wid49 {
+        width: 49%;
+      }
     }
     .genderLabel {
       text-align: center;
@@ -498,4 +501,88 @@ hr {
     color-stop(0.44, rgba(2, 155, 215, 1)),
     color-stop(0.86, rgba(31, 88, 166, 1))
   );
+}
+
+//loader css
+section.loader-wrapr {
+  position: absolute;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  width: 100%;
+  text-align: center;
+  top: 0px;
+}
+.loader {
+  position: static;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 75px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.loader-14 .loader-star {
+  position: absolute;
+  top: calc(50% - 12px);
+  left: calc(50% - 12px);
+}
+
+.star-small {
+  -webkit-animation: star-small-pulse 1s ease-in-out alternate infinite;
+  animation: star-small-pulse 1s ease-in-out alternate infinite;
+}
+
+.loader-14 .star-big {
+  -webkit-animation: star-big-pulse 2s -0.2s ease-in-out infinite;
+  animation: star-big-pulse 2s -0.2s ease-in-out infinite;
+}
+
+@-webkit-keyframes star-big-pulse {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(5);
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
+@keyframes star-big-pulse {
+  0% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: scale(5);
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
+@-webkit-keyframes star-small-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(2);
+    transform: scale(2);
+  }
+}
+
+@keyframes star-small-pulse {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(2);
+    transform: scale(2);
+  }
 }
