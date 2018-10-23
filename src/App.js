@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as qs from "query-string";
 import { withRouter, Redirect } from "react-router";
 import { Switch, Route } from "react-router-dom";
 import * as routes from "./lib/constants/routes";
@@ -28,9 +27,13 @@ class App extends Component {
   handleLogout = () => {
     //get the props from props.location
     //https://stackoverflow.com/questions/35352638/how-to-get-parameter-value-from-query-string
-    const query = qs.parse(this.props.location.search);
+    // const query = qs.parse(this.props.location.search);
+    //https://github.com/ReactTraining/react-router/issues/4410
+    //https://stackoverflow.com/questions/42862253/how-to-parse-query-string-in-react-router-v4
+    const query = new URLSearchParams(this.props.location.search);
+    const isNeedLogout = query.get("logout");
     //check if logout param is exist
-    if (query.logout || query.logout === "true") {
+    if (isNeedLogout === true || isNeedLogout === "true") {
       Auth.logoutUser();
       //https://github.com/ReactTraining/react-router/issues/4802
       return <Redirect to={routes.ROOT_ROUTE} />;

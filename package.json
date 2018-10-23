@@ -14,7 +14,6 @@
     "google-map-react": "^1.0.3",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",
-    "query-string": "^6.2.0",
     "react": "^16.4.0",
     "react-bootstrap": "^0.32.4",
     "react-bootstrap-table": "^4.3.1",
