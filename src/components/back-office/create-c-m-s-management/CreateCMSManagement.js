@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { Editor } from "react-draft-wysiwyg";
+import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 
@@ -93,51 +95,12 @@ class CreateCMSManagement extends Component {
               </div>
             </div>
             <div className="form-row col-xs-12 res480">
-              <div className="editor-wrapr col-xs-12 no-padding">
-                <div className="editor-head col-xs-12">
-                  <div className="left-style-wrapr">
-                    <select name="" id="" className="font-size">
-                      <option value="">10</option>
-                      <option value="">11</option>
-                      <option value="">12</option>
-                      <option value="">13</option>
-                    </select>
-                    <span className="glyphicon glyphicon-triangle-bottom" />
-                  </div>
-                  <div className="middle-style-wrapr">
-                    <button type="button" className="bold">
-                      B
-                    </button>
-                    <button type="button" className="italic">
-                      I
-                    </button>
-                    <button type="button" className="underline">
-                      U
-                    </button>
-                    <button type="button" className="color-picker">
-                      <span />
-                      <span className="glyphicon glyphicon-triangle-bottom" />
-                    </button>
-                  </div>
-                  <div className="right-style-wrapr">
-                    <button className="left-align" />
-                    <button className="middle-align" />
-                    <button className="right-align" />
-                    <button className="justify-align" />
-                  </div>
-                  <div className="add">
-                    <span className="glyphicon glyphicon-plus-sign" />
-                  </div>
-                </div>
-                <div className="editor-body col-xs-12 no-padding">
-                  <textarea
-                    name="description"
-                    cols="30"
-                    rows="10"
-                    onChange={this.handleChangeField}
-                  />
-                </div>
-              </div>
+              <Editor
+                toolbarOnFocus
+                wrapperClassName="wrapper-class"
+                editorClassName="editor-class"
+                toolbarClassName="toolbar-class"
+              />
             </div>
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
