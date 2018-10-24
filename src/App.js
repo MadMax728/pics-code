@@ -5,6 +5,7 @@ import * as routes from "./lib/constants/routes";
 import { AdminLogin, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
+import * as userService from "./services/userService";
 import { Auth } from "./auth";
 import PropTypes from "prop-types";
 import {
@@ -36,6 +37,7 @@ class App extends Component {
     //check if logout param is exist
     if (isNeedLogout === true || isNeedLogout === "true") {
       Auth.logoutUser();
+      userService.logout();
       //https://github.com/ReactTraining/react-router/issues/4802
       return <Redirect to={routes.ROOT_ROUTE} />;
     }
