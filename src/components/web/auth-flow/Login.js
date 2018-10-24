@@ -75,7 +75,7 @@ class Login extends Component {
             <div className="login-wrapper">
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <input
                     type="email"
@@ -119,8 +119,8 @@ class Login extends Component {
                     <InlineLoading />
                   ) : (
                     <button
-                      type="button"
-                      onClick={this.handleSubmit}
+                      type="submit"
+                      // onClick={this.handleSubmit}
                       className="blue_button"
                     >
                       {Translations.login.login}
