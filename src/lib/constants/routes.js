@@ -59,7 +59,7 @@ export const SETTINGS_ADS_ROUTE = "/settings/ads";
 export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/:id/statistics";
 export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills-and-receipts";
 export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data-download";
-export const LOGOUT_ROUTE = "/logout";
+export const LOGOUT_ROUTE = "/logout"; //?logout=true';
 
 // campaig overview
 export const COMPANY_ROUTE = "/campaign/company";
