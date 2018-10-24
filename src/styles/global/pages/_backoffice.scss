@@ -507,6 +507,11 @@
             width: 100%;
             height: 40px;
           }
+          label {
+            &.htAuto {
+              height: auto;
+            }
+          }
           input,
           select {
             padding: 0 10px;

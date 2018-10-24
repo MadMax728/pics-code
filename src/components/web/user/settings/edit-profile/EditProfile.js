@@ -87,7 +87,6 @@ class EditProfile extends Component {
                 <div className="form-subtitle">General information</div>
               </div>
               <div className="edit_profile_wrapr">
-                {/* <div className="image-wrapr" /> */}
                 <img src={images.pic_1} className="image-wrapr" alt="avatar" />
                 <div className="input-file-container">
                   {/* <input className="input-file" id="my-file" type="file" /> */}
