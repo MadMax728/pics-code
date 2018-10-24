@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-
+import propTypes from "prop-types";
 class PaymentStepTwo extends Component {
   constructor(props) {
     super(props);
@@ -8,20 +8,31 @@ class PaymentStepTwo extends Component {
   }
 
   render() {
+    const { form, handleChangeField } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-5 payment-form">
           <div className="subtitle">Payment method</div>
           <div className="form-group">
-            <div className="radio">
+            <div className="radio" onChange={handleChangeField}>
               <label htmlFor={"Paypal"}>
-                <input type="radio" name="payment-option" />
+                <input
+                  value="paypal"
+                  type="radio"
+                  name="payment_option"
+                  defaultChecked={form.payment_option === "paypal"}
+                />
                 <span>Paypal</span>
               </label>
             </div>
             <div className="radio">
-              <label htmlFor={"credit_card"}>
-                <input type="radio" name="payment-option" />
+              <label htmlFor={"credit_card"} onChange={handleChangeField}>
+                <input
+                  type="radio"
+                  name="payment_option"
+                  value="card"
+                  defaultChecked={form.payment_option === "card"}
+                />
                 <span>Credit card</span>
                 <img src={images.cards} className="card-img" alt={"cards"} />
               </label>
@@ -30,19 +41,38 @@ class PaymentStepTwo extends Component {
                   <label htmlFor={"name_card_holder"}>
                     Name of card holder
                   </label>
-                  <input type="text" placeholder="Max Mustermann" />
+                  <input
+                    type="text"
+                    placeholder="Max Mustermann"
+                    name="card_holder"
+                    onChange={handleChangeField}
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor={"expiry_date"}>Expiry date</label>
-                  <input type="text" placeholder="00 / 00" />
+                  <input
+                    type="text"
+                    placeholder="00 / 00"
+                    name="expire_date"
+                    onChange={handleChangeField}
+                  />
                 </div>
                 <div className="form-group no-margin">
                   <label htmlFor={"credit_card_no"}>Credit card no.</label>
-                  <input type="text" placeholder="0000 0000 0000 0000" />
+                  <input
+                    type="text"
+                    placeholder="0000 0000 0000 0000"
+                    onChange={handleChangeField}
+                    name="card_no"
+                  />
                 </div>
                 <div className="form-group no-margin">
                   <label htmlFor={"cvc"}>CVC</label>
-                  <input type="text" placeholder="000" />
+                  <input
+                    type="text"
+                    placeholder="000"
+                    onChange={handleChangeField}
+                  />
                 </div>
               </div>
             </div>
@@ -115,5 +145,10 @@ class PaymentStepTwo extends Component {
     );
   }
 }
+
+PaymentStepTwo.propTypes = {
+  handleChangeField: propTypes.func.isRequired,
+  form: propTypes.any.isRequired
+};
 
 export default PaymentStepTwo;

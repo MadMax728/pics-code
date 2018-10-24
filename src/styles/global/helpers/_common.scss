@@ -505,13 +505,15 @@ hr {
 
 //loader css
 section.loader-wrapr {
-  position: absolute;
+  position: fixed;
   z-index: 2;
   background: rgba(0, 0, 0, 0.1);
   height: 100vh;
   width: 100%;
   text-align: center;
   top: 0px;
+  left: 0px;
+  width: 100%;
 }
 .loader {
   position: static;
@@ -546,8 +548,8 @@ section.loader-wrapr {
     opacity: 1;
   }
   100% {
-    -webkit-transform: scale(5);
-    transform: scale(5);
+    -webkit-transform: scale(4);
+    transform: scale(4);
     opacity: 0;
   }
 }
@@ -559,8 +561,8 @@ section.loader-wrapr {
     opacity: 1;
   }
   100% {
-    -webkit-transform: scale(5);
-    transform: scale(5);
+    -webkit-transform: scale(4);
+    transform: scale(4);
     opacity: 0;
   }
 }
@@ -584,5 +586,59 @@ section.loader-wrapr {
   100% {
     -webkit-transform: scale(2);
     transform: scale(2);
+  }
+}
+
+//login popup
+.login_pop_up#note {
+  position: absolute;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+  text-align: center;
+  line-height: 2.5;
+  overflow: hidden;
+  color: white;
+  -webkit-box-shadow: 0 0 5px black;
+  -moz-box-shadow: 0 0 5px black;
+  box-shadow: 0 0 5px black;
+  -webkit-transform: translateY(-50px);
+  -webkit-animation: slideDown 2.5s 1s 1 ease forwards;
+  -moz-transform: translateY(-50px);
+  -moz-animation: slideDown 2.5s 1s 1 ease forwards;
+  #close {
+    display: none;
+  }
+}
+@keyframes slideDown {
+  0%,
+  100% {
+    -webkit-transform: translateY(-50px);
+  }
+  10%,
+  90% {
+    -webkit-transform: translateY(0px);
+  }
+}
+@-webkit-keyframes slideDown {
+  0%,
+  100% {
+    -webkit-transform: translateY(-50px);
+  }
+  10%,
+  90% {
+    -webkit-transform: translateY(0px);
+  }
+}
+@-moz-keyframes slideDown {
+  0%,
+  100% {
+    -webkit-transform: translateY(-50px);
+  }
+  10%,
+  90% {
+    -webkit-transform: translateY(0px);
   }
 }

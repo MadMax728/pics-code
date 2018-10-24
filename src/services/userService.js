@@ -5,4 +5,4 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 const api = apiFactory(baseUrl);
 
-export const submitLogin = payload => api.post("/login", payload);
+export const submitLogin = payload => api.post("/auth/login", payload);

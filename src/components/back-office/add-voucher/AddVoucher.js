@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { voucher_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
 
@@ -7,9 +6,29 @@ class AddVoucher extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      vouchers: voucher_list
+      vouchers: voucher_list,
+      form: {
+        voucher_code: "",
+        period: "",
+        amount: "",
+        type: "",
+        number: ""
+      }
     };
   }
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    console.log(this.state.form);
+  };
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
@@ -26,13 +45,20 @@ class AddVoucher extends Component {
         htmlFor="Voucher Code"
         className="res320"
         placeholder="Voucher code"
+        name="voucher_code"
+        onChange={this.handleChangeField}
       />
     );
   };
 
   periodFormatter = (column, colIndex) => {
     return (
-      <select name="" id="" className="res320">
+      <select
+        name="period"
+        id=""
+        className="res320"
+        onBlur={this.handleChangeField}
+      >
         <option value="">Period</option>
         <option value="">Item1</option>
         <option value="">Item2</option>
@@ -42,7 +68,12 @@ class AddVoucher extends Component {
 
   amountFormatter = (column, colIndex) => {
     return (
-      <select name="" id="" className="res320">
+      <select
+        name="amount"
+        id=""
+        className="res320"
+        onBlur={this.handleChangeField}
+      >
         <option value="">amount</option>
         <option value="">Item1</option>
         <option value="">Item2</option>
@@ -52,7 +83,12 @@ class AddVoucher extends Component {
 
   typeFormatter = (column, colIndex) => {
     return (
-      <select name="" id="" className="res320">
+      <select
+        name="type"
+        id=""
+        className="res320"
+        onBlur={this.handleChangeField}
+      >
         <option value="">type</option>
         <option value="">Item1</option>
         <option value="">Item2</option>
@@ -62,7 +98,12 @@ class AddVoucher extends Component {
 
   numberFormatter = (column, colIndex) => {
     return (
-      <select name="" id="" className="res320">
+      <select
+        name="number"
+        id=""
+        className="res320"
+        onBlur={this.handleChangeField}
+      >
         <option value="">Number</option>
         <option value="">Item1</option>
         <option value="">Item2</option>
@@ -71,7 +112,7 @@ class AddVoucher extends Component {
   };
 
   addFormatter = (column, colIndex) => {
-    return <Link to={""}>Add</Link>;
+    return <button onClick={this.handleSubmit}>Add</button>;
   };
 
   customTotal = (from, to, size) => (

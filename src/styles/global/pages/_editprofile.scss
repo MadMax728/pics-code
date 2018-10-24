@@ -32,6 +32,7 @@
     div.edit_profile_wrapr {
       width: 93px;
       float: left;
+      text-align: center;
       .image-wrapr {
         width: 50px;
         height: 50px;
@@ -42,13 +43,23 @@
         // background: url("../images/pic-1.jpg") no-repeat center 100%;
         // background-size: contain;
       }
-      a {
+      a,
+      label {
         font-size: 12px;
         color: #4a4a4a;
         text-decoration: underline;
+        font-weight: normal;
         &:active {
           color: #4a4a4a;
         }
+      }
+      input[type="file"] {
+        height: 0;
+        position: relative;
+        z-index: 1;
+        opacity: 0;
+        -moz-opacity: 0;
+        filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
       }
     }
   }
