@@ -19,7 +19,9 @@ class CreateCompanyCampaignHeader extends Component {
     this.props.handleNext();
   };
 
-  handlePreview = () => {};
+  handlePreview = () => {
+    this.props.handlePrivewOpen();
+  };
 
   handleContinue = () => {
     if (this.props.stepIndex < 5) {
@@ -61,6 +63,7 @@ class CreateCompanyCampaignHeader extends Component {
 }
 
 CreateCompanyCampaignHeader.propTypes = {
+  handlePrivewOpen: propTypes.func.isRequired,
   handleModalHide: propTypes.func,
   stepIndex: propTypes.any.isRequired,
   handleNext: propTypes.func,

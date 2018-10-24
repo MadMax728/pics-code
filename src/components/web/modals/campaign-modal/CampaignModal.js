@@ -18,6 +18,8 @@ class CampaignModal extends Component {
         title: "",
         location: "",
         category: "",
+        procedure: "public",
+        type: "video",
         target_group: "company",
         offer: "",
         offer_tag: "",
@@ -47,11 +49,22 @@ class CampaignModal extends Component {
     };
   }
 
-  handleSubmit = () => {
+  handleCreatorSubmit = () => {
     console.log(this.state.form);
   };
 
-  handleChangeField = event => {
+  handleCreatorChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  handleCompanySubmit = () => {
+    console.log(this.state.form);
+  };
+
+  handleCompanyChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
@@ -95,7 +108,7 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor, handleModalInfoShow } = this.props;
-    const { stepIndex, isPreview, form, handleSubmit } = this.state;
+    const { stepIndex, isPreview, form } = this.state;
 
     let modalClassName = "";
 
@@ -118,6 +131,7 @@ class CampaignModal extends Component {
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
               stepIndex={this.state.stepIndex}
+              handlePrivewOpen={this.handlePrivewOpen}
             />
           ) : (
             <CreateCreatorCampaignHeader
@@ -140,6 +154,11 @@ class CampaignModal extends Component {
               isFor={this.props.isFor}
               forThat={"Campaign"}
               handleModalInfoShow={handleModalInfoShow}
+              handlePrivewClose={this.handlePrivewClose}
+              isPreview={isPreview}
+              handleChangeField={this.handleCompanyChangeField}
+              form={form}
+              handleSubmit={this.handleCompanySubmit}
             />
           ) : (
             <CreateCreatorCampaign
@@ -149,9 +168,9 @@ class CampaignModal extends Component {
               handleModalInfoShow={handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
-              handleChangeField={this.handleChangeField}
+              handleChangeField={this.handleCreatorChangeField}
               form={form}
-              handleSubmit={handleSubmit}
+              handleSubmit={this.handleCreatorSubmit}
             />
           )
         }

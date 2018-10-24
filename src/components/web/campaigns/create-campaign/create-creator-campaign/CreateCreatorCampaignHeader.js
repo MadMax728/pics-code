@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-
 class CreateCreatorCampaignHeader extends Component {
   constructor(props) {
     super(props);
