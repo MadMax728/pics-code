@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../../lib/constants/images";
+import propTypes from "prop-types";
 
 class StepTwo extends Component {
   constructor(props) {
@@ -8,13 +9,17 @@ class StepTwo extends Component {
   }
 
   render() {
+    const { handleChangeField } = this.props;
+
     return (
       <div className="modal-body">
         <div className="col-sm-7 create-campaign-wrapper">
           <div className="title">Title c</div>
           <input
             type="text"
+            name="description"
             placeholder="Enter your campaign description here and add images and videos… "
+            onChange={handleChangeField}
           />
         </div>
         <div className="col-sm-5 no-padding">
@@ -96,5 +101,9 @@ class StepTwo extends Component {
     );
   }
 }
+
+StepTwo.propTypes = {
+  handleChangeField: propTypes.func.isRequired
+};
 
 export default StepTwo;

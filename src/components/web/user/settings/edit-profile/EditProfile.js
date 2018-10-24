@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import { Link } from "react-router-dom";
+import Social from "./Social";
+
 class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -24,9 +25,13 @@ class EditProfile extends Component {
         offer_tag: "",
         inquiry_tag: "",
         facebook: "",
+        isConnectFacebook: false,
         instagram: "",
+        isConnectInstagram: true,
         youtube: "",
-        twitter: ""
+        isConnectYoutube: false,
+        twitter: "",
+        isConnectTwitter: false
       }
     };
   }
@@ -52,6 +57,23 @@ class EditProfile extends Component {
     console.log(this.state.form);
   };
 
+  handleSocialMediaConnect = e => {
+    console.log("handleSocialMediaConnect");
+    console.log(e.target.id);
+  };
+
+  handleSocialMediaChange = e => {
+    console.log("handleSocialMediaChange");
+    console.log(e.target.id);
+  };
+
+  handleSocialMediaRemove = e => {
+    console.log("handleSocialMediaRemove");
+    console.log(e.target.id);
+  };
+
+  handleOnKeyDown = () => {};
+
   render() {
     const { form } = this.state;
 
@@ -67,15 +89,12 @@ class EditProfile extends Component {
               <div className="edit_profile_wrapr">
                 <img src={images.pic_1} className="image-wrapr" alt="avatar" />
                 <div className="input-file-container">
-                  <input className="input-file" id="my-file" type="file" />
-                  <label
-                    className="input-file-trigger"
-                    id="input-file-trigger"
-                    htmlFor="input-file-trigger"
-                  >
-                    Edit profile image
-                  </label>
+                  {/* <input className="input-file" id="my-file" type="file" /> */}
+                  {/* <label tabindex="0" for="my-file" className="input-file-trigger">
+                    Select a file...
+                  </label> */}
                 </div>
+                <div>Edit profile image</div>
               </div>
             </div>
             <div className="general-information-wrapper">
@@ -254,45 +273,62 @@ class EditProfile extends Component {
             </div>
             <div className="form-subtitle">Social Network URL</div>
             <div className="personal-interests-wrapper">
-              <div className="form-group margin-bottom-30">
+              <div className="form-group margin-bottom-30 social-media">
                 <label htmlFor="facebook">Facebook</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="facebook"
-                  name="facebook"
-                  onChange={this.handleChangeField}
-                />
+                <div className="social-link">
+                  <div className="link">www.facebook.com</div>
+                  <Social
+                    handleOnKeyDown={this.handleOnKeyDown}
+                    socialMedia={form.isConnectFacebook}
+                    id={"facebook"}
+                    handleSocialMediaChange={this.handleSocialMediaChange}
+                    handleSocialMediaRemove={this.handleSocialMediaRemove}
+                    handleSocialMediaConnect={this.handleSocialMediaConnect}
+                  />
+                </div>
               </div>
-              <div className="form-group margin-bottom-30">
+
+              <div className="form-group margin-bottom-30 social-media">
                 <label htmlFor="instagram">Instagram</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="instagram"
-                  name="instagram"
-                  onChange={this.handleChangeField}
-                />
+                <div className="social-link">
+                  <div className="link">www.instagram.com</div>
+                  <Social
+                    handleOnKeyDown={this.handleOnKeyDown}
+                    socialMedia={form.isConnectInstagram}
+                    id={"instagram"}
+                    handleSocialMediaChange={this.handleSocialMediaChange}
+                    handleSocialMediaRemove={this.handleSocialMediaRemove}
+                    handleSocialMediaConnect={this.handleSocialMediaConnect}
+                  />
+                </div>
               </div>
-              <div className="form-group margin-bottom-30">
+              <div className="form-group margin-bottom-30 social-media">
                 <label htmlFor="youtube">Youtube</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="youtube"
-                  name="youtube"
-                  onChange={this.handleChangeField}
-                />
+                <div className="social-link">
+                  <div className="link">www.youtube.com</div>
+                  <Social
+                    handleOnKeyDown={this.handleOnKeyDown}
+                    socialMedia={form.isConnectYoutube}
+                    id={"youtube"}
+                    handleSocialMediaChange={this.handleSocialMediaChange}
+                    handleSocialMediaRemove={this.handleSocialMediaRemove}
+                    handleSocialMediaConnect={this.handleSocialMediaConnect}
+                  />
+                </div>
               </div>
-              <div className="form-group margin-bottom-30">
+              <div className="form-group margin-bottom-30 social-media">
                 <label htmlFor="twitter">Twitter</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="twitter"
-                  name="twitter"
-                  onChange={this.handleChangeField}
-                />
+                <div className="social-link">
+                  <div className="link">www.twitter.com</div>
+                  <Social
+                    handleOnKeyDown={this.handleOnKeyDown}
+                    socialMedia={form.isConnectTwitter}
+                    id={"twitter"}
+                    handleSocialMediaChange={this.handleSocialMediaChange}
+                    handleSocialMediaRemove={this.handleSocialMediaRemove}
+                    handleSocialMediaConnect={this.handleSocialMediaConnect}
+                  />
+                </div>
               </div>
             </div>
             <div className="form-group margin-bottom-30">
