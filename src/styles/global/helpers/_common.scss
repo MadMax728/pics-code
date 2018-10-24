@@ -507,7 +507,7 @@ hr {
 section.loader-wrapr {
   position: fixed;
   z-index: 2;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.5);
   height: 100vh;
   width: 100%;
   text-align: center;
@@ -688,4 +688,16 @@ section.loader-wrapr {
       }
     }
   }
+}
+
+//message
+.badge.badge-danger {
+  background-color: #dd1d1d;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 6px 2px 1px 2px;
+  min-height: 21px;
+  min-width: 21px;
+  text-align: center;
 }
