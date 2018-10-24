@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-
+import propTypes from "prop-types";
 class PaymentStepOne extends Component {
   constructor(props) {
     super(props);
@@ -8,6 +8,8 @@ class PaymentStepOne extends Component {
   }
 
   render() {
+    const { handleChangeField } = this.props;
+
     return (
       <div className="modal-body">
         <div className="col-sm-5 upload-form billing-add">
@@ -17,28 +19,40 @@ class PaymentStepOne extends Component {
           <form>
             <div className="form-group">
               <label htmlFor="title">Invoice Recipient</label>
-              <input type="text" name="invoice_recipient" />
+              <input
+                type="text"
+                name="invoice_recipient"
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Location">Street, number</label>
-              <input type="text" name="street" />
-              <input type="text" name="number" />
+              <input type="text" name="street" onChange={handleChangeField} />
+              <input type="text" name="number" onChange={handleChangeField} />
             </div>
             <div className="form-group">
               <label htmlFor="title">Postal Code</label>
-              <input type="text" name="postal_code" />
+              <input
+                type="text"
+                name="postal_code"
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="title">City</label>
-              <input type="text" name="city" />
+              <input type="text" name="city" onChange={handleChangeField} />
             </div>
             <div className="form-group">
               <label htmlFor="title">Country</label>
-              <input type="text" name="country" />
+              <input type="text" name="country" onChange={handleChangeField} />
             </div>
             <div className="form-group">
               <label htmlFor="title">VAT Identification Number</label>
-              <input type="text" name="vat_identification_number" />
+              <input
+                type="text"
+                name="vat_identification_number"
+                onChange={handleChangeField}
+              />
             </div>
           </form>
         </div>
@@ -98,5 +112,9 @@ class PaymentStepOne extends Component {
     );
   }
 }
+
+PaymentStepOne.propTypes = {
+  handleChangeField: propTypes.func.isRequired
+};
 
 export default PaymentStepOne;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../../lib/constants/images";
+import propTypes from "prop-types";
 
 class StepThree extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class StepThree extends Component {
   }
 
   render() {
+    const { handleChangeField } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-5 upload-form">
@@ -36,11 +38,11 @@ class StepThree extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="Define">Define daily budget</label>
-            <select>
-              <option>100 E</option>
-              <option>200 E</option>
-              <option>300 E</option>
-              <option>400 E</option>
+            <select onBlur={handleChangeField} name="daily_budget">
+              <option value="100 E">100 E</option>
+              <option value="200 E">200 E</option>
+              <option value="300 E">300 E</option>
+              <option value="400 E">400 E</option>
             </select>
           </div>
           <div className="form-group">
@@ -118,5 +120,9 @@ class StepThree extends Component {
     );
   }
 }
+
+StepThree.propTypes = {
+  handleChangeField: propTypes.func.isRequired
+};
 
 export default StepThree;

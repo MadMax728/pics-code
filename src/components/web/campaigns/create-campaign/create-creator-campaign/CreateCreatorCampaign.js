@@ -21,7 +21,9 @@ class CreateCreatorCampaign extends Component {
       forThat,
       handleModalInfoShow,
       isPreview,
-      handlePrivewClose
+      handlePrivewClose,
+      form,
+      handleChangeField
     } = this.props;
 
     return (
@@ -39,13 +41,33 @@ class CreateCreatorCampaign extends Component {
             />
           </button>
         )}
-        {!isPreview && (stepIndex === 0 && <StepOne />)}
-        {!isPreview && (stepIndex === 1 && <StepTwo />)}
-        {!isPreview && (stepIndex === 2 && <StepThree />)}
         {!isPreview &&
-          (stepIndex === 3 && <PaymentStepOne forThat={forThat} />)}
+          (stepIndex === 0 && (
+            <StepOne handleChangeField={handleChangeField} form={form} />
+          ))}
         {!isPreview &&
-          (stepIndex === 4 && <PaymentStepTwo forThat={forThat} />)}
+          (stepIndex === 1 && (
+            <StepTwo handleChangeField={handleChangeField} />
+          ))}
+        {!isPreview &&
+          (stepIndex === 2 && (
+            <StepThree handleChangeField={handleChangeField} />
+          ))}
+        {!isPreview &&
+          (stepIndex === 3 && (
+            <PaymentStepOne
+              forThat={forThat}
+              handleChangeField={handleChangeField}
+            />
+          ))}
+        {!isPreview &&
+          (stepIndex === 4 && (
+            <PaymentStepTwo
+              forThat={forThat}
+              handleChangeField={handleChangeField}
+              form={form}
+            />
+          ))}
         {!isPreview &&
           (stepIndex === 5 && (
             <PaymentStepThree
@@ -63,7 +85,9 @@ CreateCreatorCampaign.propTypes = {
   forThat: propTypes.string.isRequired,
   handleModalInfoShow: propTypes.func.isRequired,
   isPreview: propTypes.bool.isRequired,
-  handlePrivewClose: propTypes.func.isRequired
+  handlePrivewClose: propTypes.func.isRequired,
+  handleChangeField: propTypes.func.isRequired,
+  form: propTypes.any.isRequired
 };
 
 export default CreateCreatorCampaign;

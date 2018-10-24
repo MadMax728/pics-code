@@ -430,6 +430,22 @@
             color: #ffffff;
           }
         }
+        button {
+          background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+          color: #ffffff;
+          width: 100%;
+          display: inline-block;
+          padding: 12px 11px 14px 11px;
+          text-align: center;
+          &:active {
+            background-image: radial-gradient(
+              circle at 0 100%,
+              #1f58a6,
+              #029bd7
+            );
+            color: #ffffff;
+          }
+        }
       }
       th.wid93 {
         width: 93px;
@@ -909,4 +925,39 @@
 }
 .login-process .login-wrapper form a.margin-0 {
   margin: 0px;
+}
+.social-media {
+  .social-link {
+    background: #dddd;
+    align-items: center;
+    display: flex;
+    float: left;
+    width: 100%;
+    flex-direction: row;
+    padding: 0 0 0 15px;
+    justify-content: space-between;
+    .link {
+      padding: 10px 0;
+      flex: 1;
+    }
+    .change-trash {
+      flex-direction: row;
+      display: flex;
+    }
+    .trash-icon {
+      background: red;
+      padding: 10px 15px;
+      color: #fff;
+    }
+    .connect-text-red {
+      background: #e24a4a;
+      padding: 10px 15px;
+      color: #fff;
+    }
+    .connect-text-green {
+      background: #4cb74c;
+      padding: 10px 15px;
+      color: #fff;
+    }
+  }
 }
