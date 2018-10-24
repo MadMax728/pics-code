@@ -156,6 +156,8 @@ header {
             font-size: 12px;
             line-height: 14px;
             color: $white_color !important;
+            &.badge.badge-danger {
+            }
           }
         }
         .notification-mega-wrapper {
