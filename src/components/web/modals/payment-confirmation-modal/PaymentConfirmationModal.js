@@ -10,7 +10,7 @@ class PaymentConfirmationModal extends Component {
   }
 
   render() {
-    const { handleModalInfoHide, handleModalHide } = this.props;
+    const { handleModalInfoHide, handleModalHide, modalInfoMsg } = this.props;
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade payment-confirmation-modal"}
@@ -23,6 +23,7 @@ class PaymentConfirmationModal extends Component {
           <PaymentConfirmation
             handleModalInfoHide={handleModalInfoHide}
             handleModalHide={handleModalHide}
+            modalInfoMsg={modalInfoMsg}
           />
         }
       />
@@ -33,7 +34,7 @@ class PaymentConfirmationModal extends Component {
 PaymentConfirmationModal.propTypes = {
   modalInfoShow: propTypes.bool,
   handleModalInfoHide: propTypes.func,
-
+  modalInfoMsg: propTypes.string,
   handleModalHide: propTypes.func
 };
 

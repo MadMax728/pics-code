@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import propTypes from "prop-types";
-import { modalType } from "../../../../../lib/constants/enumerations";
 
 class PaymentStepThree extends Component {
   constructor(props) {
@@ -15,7 +14,7 @@ class PaymentStepThree extends Component {
   handleCommitToBuy = () => {
     console.log(this.props);
     this.props.handleSubmit();
-    this.props.handleModalInfoShow(modalType.payment_confirmation);
+    this.props.handleModalInfoShow();
   };
 
   render() {

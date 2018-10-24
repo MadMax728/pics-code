@@ -110,7 +110,7 @@ class StepOne extends Component {
                     name="target_group"
                     className="black_button"
                     value="company"
-                    defaultChecked={form.target_group == "company"}
+                    defaultChecked={form.target_group === "company"}
                   />
                   <label htmlFor="company">Company</label>
                 </li>

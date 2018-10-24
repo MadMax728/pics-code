@@ -13,10 +13,11 @@ class PaymentConfirmation extends Component {
   };
 
   render() {
+    const { modalInfoMsg } = this.props;
     return (
       <div className={"modal-body"}>
         <div className="col-sm-12 margin-bottom-10">
-          Your ad is pending review whitin the next 48 hours.
+          Your {modalInfoMsg} is pending review whitin the next 48 hours.
         </div>
         <div className="col-sm-12">
           <button className="filled_button" onClick={this.handleModalHides}>
@@ -30,7 +31,8 @@ class PaymentConfirmation extends Component {
 
 PaymentConfirmation.propTypes = {
   handleModalInfoHide: propTypes.func,
-  handleModalHide: propTypes.func
+  handleModalHide: propTypes.func,
+  modalInfoMsg: propTypes.string
 };
 
 export default PaymentConfirmation;

@@ -2,8 +2,6 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on mockdata branch and created merge request.
 
-Fix Enter key issue in login Component.
-
 Implementation of preview for the Company, manage in Create Campaign Modal
 
 Implementation of take input from user and Maintain the form state of it, 
@@ -18,7 +16,22 @@ Implementation of take input from user and Maintain the form state of it,
         - PaymentStep2
         - PaymentStep3
 
-Fixed designing issue for Create CMS Management Component, Add Voucher and Create Create Campaign Modal Step1 Component.
+    - Create Ads Modal for Company
+        - Step1
+        - Step2
+        - Step3
+        - PaymentStep1
+        - PaymentStep2
+        - PaymentStep3
+
+
+Fixed Message info in Payment Confirmation Modal after payment Modal screen for Ad and Campaign.
+
+Maintain the folder stucture for the Create Campaign Steps, Create smart Component for step1, step2, step3 for Creator and Company.
+
+Fixed designing issue for Create Campaign Modal Component, Create Ads Modal Component and Login Component.
+
+Fixed Enter key issue in login Component.
 
 Thanks.
 

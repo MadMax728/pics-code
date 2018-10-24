@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
+import propTypes from "prop-types";
 
 class StepOne extends Component {
   constructor(props) {
@@ -8,6 +9,8 @@ class StepOne extends Component {
   }
 
   render() {
+    const { form, handleChangeField } = this.props;
+
     return (
       <div className="modal-body">
         <div className="col-sm-6 upload-form">
@@ -25,15 +28,15 @@ class StepOne extends Component {
           <form>
             <div className="form-group">
               <label htmlFor="title">Add title</label>
-              <input type="text" name="title" />
+              <input type="text" name="title" onChange={handleChangeField} />
             </div>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input type="text" name="location" />
+              <input type="text" name="location" onChange={handleChangeField} />
             </div>
             <div className="form-group">
               <label htmlFor="Radius">Add Radius</label>
-              <select>
+              <select name="radius" onBlur={handleChangeField}>
                 <option>10</option>
                 <option>20</option>
                 <option>30</option>
@@ -42,7 +45,7 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Category">Add Category</label>
-              <select>
+              <select onBlur={handleChangeField} name="category">
                 <option>Category 1</option>
                 <option>Category 2</option>
                 <option>Category 3</option>
@@ -51,31 +54,45 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Description">Add Description</label>
-              <textarea className="form-control" />
+              <textarea
+                className="form-control"
+                onChange={handleChangeField}
+                name="description"
+              />
             </div>
             <div className="form-group">
               <label htmlFor="target">Add target group</label>
               <ul className="options">
-                <li className="full-width-input-wrapper">
+                <li
+                  className="full-width-input-wrapper wid49"
+                  onChange={handleChangeField}
+                >
                   <input
                     type="radio"
                     id="male-female"
-                    name="target"
+                    name="target_group"
                     className="black_button"
+                    defaultChecked={form.target_group === "male-female"}
                   />
                   <label htmlFor="male-female">Male & Female</label>
                 </li>
-                <li className="wid49">
+                <li className="wid49" onChange={handleChangeField}>
                   <input
                     type="radio"
                     id="male"
-                    name="target"
+                    name="target_group"
                     className="black_button"
+                    defaultChecked={form.target_group === "male"}
                   />
                   <label htmlFor="male">Male</label>
                 </li>
-                <li className="wid49">
-                  <input type="radio" id="female" name="target" />
+                <li className="wid49" onChange={handleChangeField}>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="target_group"
+                    defaultChecked={form.target_group === "female"}
+                  />
                   <label htmlFor="female">Female</label>
                 </li>
               </ul>
@@ -83,14 +100,18 @@ class StepOne extends Component {
             <div className="subtitle">Define details</div>
             <div className="form-group">
               <label htmlFor="call">Add call to action button</label>
-              <select>
+              <select name="call_to_action_button" onBlur={handleChangeField}>
                 <option>Yes</option>
                 <option>No</option>
               </select>
             </div>
             <div className="form-group">
               <label htmlFor="Insert_link">Insert link</label>
-              <input type="text" name="offer-tag" />
+              <input
+                type="text"
+                name="insert_link"
+                onChange={handleChangeField}
+              />
             </div>
           </form>
         </div>
@@ -124,5 +145,10 @@ class StepOne extends Component {
     );
   }
 }
+
+StepOne.propTypes = {
+  handleChangeField: propTypes.func.isRequired,
+  form: propTypes.any.isRequired
+};
 
 export default StepOne;

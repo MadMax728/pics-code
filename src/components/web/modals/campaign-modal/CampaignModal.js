@@ -8,6 +8,8 @@ import {
   CreateCreatorCampaignHeader
 } from "../../campaigns";
 
+import { modalType } from "../../../../lib/constants/enumerations";
+
 class CampaignModal extends Component {
   constructor(props, context) {
     super(props, context);
@@ -106,8 +108,15 @@ class CampaignModal extends Component {
     }
   };
 
+  handleModalInfoShow = () => {
+    this.props.handleModalInfoMsgShow(
+      modalType.payment_confirmation,
+      "Campaign"
+    );
+  };
+
   render() {
-    const { isFor, handleModalInfoShow } = this.props;
+    const { isFor, handleModalHide } = this.props;
     const { stepIndex, isPreview, form } = this.state;
 
     let modalClassName = "";
@@ -127,7 +136,7 @@ class CampaignModal extends Component {
         modalHeaderContent={
           isFor ? (
             <CreateCompanyCampaignHeader
-              handleModalHide={this.props.handleModalHide}
+              handleModalHide={handleModalHide}
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
               stepIndex={this.state.stepIndex}
@@ -135,10 +144,10 @@ class CampaignModal extends Component {
             />
           ) : (
             <CreateCreatorCampaignHeader
-              handleModalHide={this.props.handleModalHide}
+              handleModalHide={handleModalHide}
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
-              stepIndex={this.state.stepIndex}
+              stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
             />
           )
@@ -146,14 +155,14 @@ class CampaignModal extends Component {
         footer={false}
         modalShow={this.props.modalShow}
         closeBtn={false}
-        handleModalHide={this.props.handleModalHide}
+        handleModalHide={handleModalHide}
         modalBodyContent={
           isFor ? (
             <CreateCompanyCampaign
-              stepIndex={this.state.stepIndex}
-              isFor={this.props.isFor}
+              stepIndex={stepIndex}
+              isFor={isFor}
               forThat={"Campaign"}
-              handleModalInfoShow={handleModalInfoShow}
+              handleModalInfoShow={this.handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
               handleChangeField={this.handleCompanyChangeField}
@@ -163,9 +172,9 @@ class CampaignModal extends Component {
           ) : (
             <CreateCreatorCampaign
               stepIndex={this.state.stepIndex}
-              isFor={this.props.isFor}
+              isFor={isFor}
               forThat={"Campaign"}
-              handleModalInfoShow={handleModalInfoShow}
+              handleModalInfoShow={this.handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
               handleChangeField={this.handleCreatorChangeField}
@@ -183,7 +192,7 @@ CampaignModal.propTypes = {
   modalShow: propTypes.bool.isRequired,
   handleModalHide: propTypes.func.isRequired,
   isFor: propTypes.bool.isRequired,
-  handleModalInfoShow: propTypes.func
+  handleModalInfoMsgShow: propTypes.func
 };
 
 export default CampaignModal;
