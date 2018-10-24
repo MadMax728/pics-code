@@ -2,22 +2,11 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on mockdata branch and created merge request.
 
-1. Implementation of take input from user and Maintain the form state of it, 
-    - Back-Office
-        - Add Voucher
-        - CMS Management Create
-    - Create Campaign Modal for Creator
-        - Step1
-        - Step2
-        - Step3
-        - PaymentStep1
-        - PaymentStep2
-
-2. Implementation design of the social media (Facebook, Instagram, Twitter, Youtube) and Create HOC Component for the Connect, Remove, Change.
-
-3. Reviwed the code for Auth 1 and Auth 2.
-
-4. Fixed designing issue for Create CMS Management Component, Add Voucher and Create Create Campaign Modal Step1 Component.
+Implementation of take input from user and Maintain the form state of Back-Office's Add Voucher and CMS Management Create
+Implementation of take input from user and Maintain the form state of Create Campaign Modal for Creator's Step1, Step2, Step3, PaymentStep1, PaymentStep2
+Implementation design of the social media (Facebook, Instagram, Twitter, Youtube) and Create HOC Component for the Connect, Remove, Change.
+Reviwed the code for Auth 1 and Auth 2.
+Fixed designing issue for Create CMS Management Component, Add Voucher and Create Create Campaign Modal Step1 Component.
 
 Thanks.
 
