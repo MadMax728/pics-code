@@ -10,6 +10,7 @@
   background: $white_color;
   @include float;
   padding-bottom: 100px;
+  min-height: 100vh;
   header {
     background-color: #1575bb;
   }
