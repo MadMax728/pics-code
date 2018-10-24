@@ -14,6 +14,7 @@ import {
   ResetPassword,
   ForgotPassword
 } from "./components/web/auth-flow";
+import { PageNotFound } from "./components/web/page-not-found";
 
 class App extends Component {
   constructor() {
@@ -92,6 +93,7 @@ class App extends Component {
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           render={this.isAdminUserAuthenticated}
         />
+        <Route path={routes.PAGE_NOT_FOUND} component={PageNotFound} />
       </Switch>
     );
   };

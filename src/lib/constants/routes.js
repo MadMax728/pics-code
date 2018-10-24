@@ -12,6 +12,7 @@ export const CAMPAIGN_ROUTE = "/campaign";
 export const CAMPAIGN_VIEW_ROUTE = "/campaign/:id";
 export const RESET_EMAIL = "/resetEmail";
 export const RESET_PASSWORD = "/resetPassword/:token";
+export const PAGE_NOT_FOUND = "/page-not-found";
 
 // Mobile view Side Menu
 

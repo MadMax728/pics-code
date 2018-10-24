@@ -642,3 +642,50 @@ section.loader-wrapr {
     -webkit-transform: translateY(0px);
   }
 }
+//page not found
+.page-not-found-wrapr {
+  section.page-not-found {
+    text-align: center;
+    background-color: white;
+    min-height: 100vh;
+
+    // font-family: 'Helvetica-Bold';
+    .heading {
+      font-size: 30px;
+      padding: 60px 0 30px 0;
+    }
+    .sub-heading {
+      font-size: 20px;
+    }
+    .logo-background {
+      background: url("../images/logo-pic.png") no-repeat center;
+      background-color: #0f7bc0;
+      height: 320px;
+      width: 320px;
+      margin: 0 auto;
+      background-size: 100% 100%;
+      margin-top: 100px;
+    }
+  }
+  footer {
+    float: left;
+    width: 100%;
+    margin: 28px 0px;
+    position: absolute;
+    bottom: 0;
+    .page-not-found {
+      ul {
+        padding: 0px;
+        text-align: center;
+        margin: 0;
+        li {
+          display: inline-block;
+          a {
+            color: $silver_color;
+            padding: 0px 4px;
+          }
+        }
+      }
+    }
+  }
+}
