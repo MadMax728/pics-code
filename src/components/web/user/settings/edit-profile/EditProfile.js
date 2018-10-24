@@ -65,15 +65,17 @@ class EditProfile extends Component {
                 <div className="form-subtitle">General information</div>
               </div>
               <div className="edit_profile_wrapr">
-                {/* <div className="image-wrapr" /> */}
                 <img src={images.pic_1} className="image-wrapr" alt="avatar" />
                 <div className="input-file-container">
                   <input className="input-file" id="my-file" type="file" />
-                  {/* <label tabindex="0" for="my-file" className="input-file-trigger">
-                    Select a file...
-                  </label> */}
+                  <label
+                    className="input-file-trigger"
+                    id="input-file-trigger"
+                    htmlFor="input-file-trigger"
+                  >
+                    Edit profile image
+                  </label>
                 </div>
-                {/* <Link to={""}>Edit profile image</Link> */}
               </div>
             </div>
             <div className="general-information-wrapper">
