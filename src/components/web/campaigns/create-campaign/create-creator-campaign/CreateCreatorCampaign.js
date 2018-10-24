@@ -23,7 +23,8 @@ class CreateCreatorCampaign extends Component {
       isPreview,
       handlePrivewClose,
       form,
-      handleChangeField
+      handleChangeField,
+      handleSubmit
     } = this.props;
 
     return (
@@ -73,6 +74,9 @@ class CreateCreatorCampaign extends Component {
             <PaymentStepThree
               forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
+              handleChangeField={handleChangeField}
+              form={form}
+              handleSubmit={handleSubmit}
             />
           ))}
       </div>
@@ -87,7 +91,8 @@ CreateCreatorCampaign.propTypes = {
   isPreview: propTypes.bool.isRequired,
   handlePrivewClose: propTypes.func.isRequired,
   handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired
+  form: propTypes.any.isRequired,
+  handleSubmit: propTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;
