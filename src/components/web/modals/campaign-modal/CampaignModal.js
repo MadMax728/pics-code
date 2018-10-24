@@ -19,7 +19,6 @@ class CampaignModal extends Component {
         location: "",
         category: "",
         target_group: "company",
-        gender: "male",
         offer: "",
         offer_tag: "",
         inquiry: "",
@@ -48,7 +47,7 @@ class CampaignModal extends Component {
     };
   }
 
-  handleContinue = () => {
+  handleSubmit = () => {
     console.log(this.state.form);
   };
 
@@ -96,7 +95,7 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor, handleModalInfoShow } = this.props;
-    const { stepIndex, isPreview, form } = this.state;
+    const { stepIndex, isPreview, form, handleSubmit } = this.state;
 
     let modalClassName = "";
 
@@ -152,6 +151,7 @@ class CampaignModal extends Component {
               isPreview={isPreview}
               handleChangeField={this.handleChangeField}
               form={form}
+              handleSubmit={handleSubmit}
             />
           )
         }
