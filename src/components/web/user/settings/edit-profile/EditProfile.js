@@ -272,7 +272,7 @@ class EditProfile extends Component {
               </div>
             </div>
             <div className="form-subtitle">Social Network URL</div>
-            <div className="personal-interests-wrapper">
+            <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
               <div className="form-group margin-bottom-30 social-media">
                 <label htmlFor="facebook">Facebook</label>
                 <div className="social-link">
