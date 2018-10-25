@@ -928,14 +928,26 @@
 }
 .social-media {
   .social-link {
-    background: #dddd;
     align-items: center;
+    border-bottom: 1px solid #979797;
     display: flex;
     float: left;
     width: 100%;
     flex-direction: row;
-    padding: 0 0 0 15px;
+    padding: 0 0 15px 15px;
     justify-content: space-between;
+    span.fa {
+      color: white;
+      background-color: #6b6a6a;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      text-align: center;
+      padding: 5px 0;
+      &:hover {
+        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+      }
+    }
     .link {
       padding: 10px 0;
       flex: 1;
@@ -943,6 +955,9 @@
     .change-trash {
       flex-direction: row;
       display: flex;
+    }
+    .btn {
+      background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
     }
     .trash-icon {
       background: #dd1d1d;
@@ -958,6 +973,29 @@
       background: #167f52;
       padding: 10px 15px;
       color: #fff;
+    }
+    .btn-blu {
+      background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+      border: 0;
+      color: white;
+      padding-top: 5px;
+    }
+    .hidden-text {
+      position: absolute;
+      right: 0px;
+      display: none;
+      span {
+        padding: 0px 4px 0 6px;
+        border: 1px solid;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+        display: inline-block;
+        margin-left: 20px;
+      }
+      &.dispBlock {
+        display: block;
+      }
     }
   }
 }
