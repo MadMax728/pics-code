@@ -113,6 +113,7 @@ export default class Header extends Component {
                     nocaret={"true"}
                     onClick={this.handleModalMessage}
                   >
+                    <span className="badge badge-danger">100</span>
                     <span>{Translations.navigation.messages}</span>
                   </NavItem>
 

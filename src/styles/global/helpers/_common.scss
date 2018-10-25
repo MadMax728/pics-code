@@ -77,6 +77,9 @@ body {
 .margin-bottom-30 {
   margin-bottom: 30px;
 }
+.margin-bottom-15 {
+  margin-bottom: 15px;
+}
 .margin-bottom-10 {
   margin-bottom: 10px;
 }
@@ -506,8 +509,8 @@ hr {
 //loader css
 section.loader-wrapr {
   position: fixed;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.5);
   height: 100vh;
   width: 100%;
   text-align: center;
@@ -641,4 +644,67 @@ section.loader-wrapr {
   90% {
     -webkit-transform: translateY(0px);
   }
+}
+//page not found
+.page-not-found-wrapr {
+  section.page-not-found {
+    text-align: center;
+    background-color: white;
+    min-height: 100vh;
+
+    // font-family: 'Helvetica-Bold';
+    .heading {
+      font-size: 30px;
+      padding: 60px 0 30px 0;
+    }
+    .sub-heading {
+      font-size: 20px;
+    }
+    .logo-background {
+      background: url("../images/logo-pic.png") no-repeat center;
+      background-color: #0f7bc0;
+      height: 320px;
+      width: 320px;
+      height: 15vh;
+      width: 15vw;
+      margin: 0 auto;
+      background-size: 100% 100%;
+      margin-top: 100px;
+    }
+  }
+  footer {
+    float: left;
+    width: 100%;
+    margin: 28px 0px;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    .page-not-found {
+      ul {
+        padding: 0px;
+        text-align: center;
+        margin: 0;
+        li {
+          display: inline-block;
+          a {
+            color: $silver_color;
+            padding: 0px 4px;
+          }
+        }
+      }
+    }
+  }
+}
+
+//message
+.badge.badge-danger {
+  background-color: #dd1d1d;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  padding: 6px 2px 1px 2px;
+  min-height: 21px;
+  min-width: 21px;
+  text-align: center;
+  font-size: 10px !important;
 }
