@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { convertFromRaw, convertToRaw } from "draft-js";
-import * as toolBarConfig from "../../../lib/constants/toolBarConfig";
+import { toolBarConfig } from "../../../lib/constants/toolBarConfig";
 
 const content = {
   entityMap: {},
