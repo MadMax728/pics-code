@@ -45,7 +45,7 @@ class StepOne extends Component {
             <div className="form-group">
               <label htmlFor="Target_group">Target group</label>
               <ul className="options target-options">
-                <li onChange={handleChangeField}>
+                <li onChange={handleChangeField} className="wid49">
                   <input
                     type="radio"
                     id="company"
@@ -56,7 +56,7 @@ class StepOne extends Component {
                   />
                   <label htmlFor="company">Company</label>
                 </li>
-                <li onChange={handleChangeField}>
+                <li onChange={handleChangeField} className="wid49">
                   <input
                     type="radio"
                     id="femalemale"
@@ -66,23 +66,23 @@ class StepOne extends Component {
                   />
                   <label htmlFor="femalemale">Female & Male</label>
                 </li>
-                <li onChange={handleChangeField}>
+                <li onChange={handleChangeField} className="wid49">
                   <input
                     type="radio"
                     id="female"
-                    name="gender"
+                    name="target_group"
                     value="female"
-                    defaultChecked={form.gender === "female"}
+                    defaultChecked={form.target_group === "female"}
                   />
                   <label htmlFor="female">Female</label>
                 </li>
-                <li onChange={handleChangeField}>
+                <li onChange={handleChangeField} className="wid49">
                   <input
                     type="radio"
                     id="male"
-                    name="gender"
+                    name="target_group"
                     value="male"
-                    defaultChecked={form.gender === "male"}
+                    defaultChecked={form.target_group === "male"}
                   />
                   <label htmlFor="male">Male</label>
                 </li>

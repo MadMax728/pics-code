@@ -5,6 +5,7 @@ import * as routes from "./lib/constants/routes";
 import { AdminLogin, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
+import * as userService from "./services/userService";
 import { Auth } from "./auth";
 import PropTypes from "prop-types";
 import {
@@ -14,6 +15,7 @@ import {
   ResetPassword,
   ForgotPassword
 } from "./components/web/auth-flow";
+import { PageNotFound } from "./components/web/page-not-found";
 
 class App extends Component {
   constructor() {
@@ -35,6 +37,7 @@ class App extends Component {
     //check if logout param is exist
     if (isNeedLogout === true || isNeedLogout === "true") {
       Auth.logoutUser();
+      userService.logout();
       //https://github.com/ReactTraining/react-router/issues/4802
       return <Redirect to={routes.ROOT_ROUTE} />;
     }
@@ -92,6 +95,7 @@ class App extends Component {
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           render={this.isAdminUserAuthenticated}
         />
+        <Route path={routes.PAGE_NOT_FOUND} component={PageNotFound} />
       </Switch>
     );
   };

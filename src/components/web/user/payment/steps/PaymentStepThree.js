@@ -12,11 +12,12 @@ class PaymentStepThree extends Component {
 
   handleCommitToBuy = () => {
     console.log(this.props);
-
+    this.props.handleSubmit();
     this.props.handleModalInfoShow(modalType.payment_confirmation);
   };
 
   render() {
+    const { handleChangeField, form } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-5 payment-history">
@@ -140,7 +141,10 @@ class PaymentStepThree extends Component {
 }
 
 PaymentStepThree.propTypes = {
-  handleModalInfoShow: propTypes.func
+  handleModalInfoShow: propTypes.func,
+  handleChangeField: propTypes.func.isRequired,
+  handleSubmit: propTypes.func.isRequired,
+  form: propTypes.any.isRequired
 };
 
 export default PaymentStepThree;
