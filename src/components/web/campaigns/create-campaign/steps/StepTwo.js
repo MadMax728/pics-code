@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import * as images from "../../../../../../lib/constants/images";
+import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
 
 class StepTwo extends Component {
@@ -10,19 +10,17 @@ class StepTwo extends Component {
 
   render() {
     const { handleChangeField } = this.props;
-
     return (
       <div className="modal-body">
         <div className="col-sm-7 create-campaign-wrapper">
-          <div className="title">Title c</div>
+          <div className="title">Title</div>
           <input
             type="text"
-            name="description"
             placeholder="Enter your campaign description here and add images and videos… "
             onChange={handleChangeField}
           />
         </div>
-        <div className="col-sm-5 no-padding">
+        <div className="col-sm-5 no-padding disp-flex">
           <div className="editor-options">
             <ul className="editor-row">
               <li>

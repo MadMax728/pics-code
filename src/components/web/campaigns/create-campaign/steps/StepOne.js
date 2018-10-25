@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import * as images from "../../../../../../lib/constants/images";
+import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
+
 class StepOne extends Component {
   constructor(props) {
     super(props);
@@ -8,7 +9,7 @@ class StepOne extends Component {
   }
 
   render() {
-    const { handleChangeField, form } = this.props;
+    const { handleChangeField, form, isFor } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-6 upload-form">
@@ -20,7 +21,7 @@ class StepOne extends Component {
             />
           </div>
           <div className="user-title">
-            <div className="normal_title">Title of campaigns c</div>
+            <div className="normal_title">Title of campaigns</div>
             <div className="secondary_title">User name</div>
           </div>
           <form>
@@ -34,14 +35,71 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Category">Add Category</label>
-              <select onBlur={handleChangeField} name="categoty">
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                <option value="Category 3">Category 3</option>
-                <option value="Category 4">Category 4</option>
+              <select name="category" onBlur={handleChangeField}>
+                <option>Category 1</option>
+                <option>Category 2</option>
+                <option>Category 3</option>
+                <option>Category 4</option>
               </select>
             </div>
             <div className="subtitle">Application criteria</div>
+            {isFor && (
+              <div>
+                <div className="form-group">
+                  <label htmlFor="Procedure">Procedure</label>
+                  <ul className="options">
+                    <li onChange={handleChangeField} className="wid49">
+                      <input
+                        type="radio"
+                        id="public"
+                        name="procedure"
+                        className="black_button"
+                        value="public"
+                        defaultChecked={form.procedure === "public"}
+                      />
+                      <label htmlFor="public">Public</label>
+                    </li>
+                    <li onChange={handleChangeField} className="wid49">
+                      <input
+                        type="radio"
+                        id="anonymous"
+                        name="procedure"
+                        value="anonymous"
+                        defaultChecked={form.procedure === "anonymous"}
+                      />
+                      <label htmlFor="anonymous">Anonymous</label>
+                    </li>
+                  </ul>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="Type">Type</label>
+                  <ul className="options">
+                    <li onChange={handleChangeField} className="wid49">
+                      <input
+                        type="radio"
+                        id="video"
+                        name="type"
+                        className="black_button"
+                        value="video"
+                        defaultChecked={form.type === "video"}
+                      />
+                      <label htmlFor="video">Video</label>
+                    </li>
+                    <li onChange={handleChangeField} className="wid49">
+                      <input
+                        type="radio"
+                        id="image"
+                        name="type"
+                        value="image"
+                        defaultChecked={form.type === "image"}
+                      />
+                      <label htmlFor="image">Image</label>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            )}
+
             <div className="form-group">
               <label htmlFor="Target_group">Target group</label>
               <ul className="options target-options">
@@ -59,10 +117,10 @@ class StepOne extends Component {
                 <li onChange={handleChangeField} className="wid49">
                   <input
                     type="radio"
-                    id="femalemale"
-                    name="target_group"
+                    id="female-male"
                     value="female-male"
-                    defaultChecked={form.target_group === "Female & Male"}
+                    name="target_group"
+                    defaultChecked={form.target_group === "female-male"}
                   />
                   <label htmlFor="femalemale">Female & Male</label>
                 </li>
@@ -91,11 +149,11 @@ class StepOne extends Component {
             <div className="subtitle">Details of campaigns</div>
             <div className="form-group">
               <label htmlFor="Offer">Offer</label>
-              <select onBlur={handleChangeField} name="offier">
-                <option value="Offer 1">Offer 1</option>
-                <option value="Offer 2">Offer 2</option>
-                <option value="Offer 3">Offer 3</option>
-                <option value="Offer 4">Offer 4</option>
+              <select name="offer" onBlur={handleChangeField}>
+                <option>Offer 1</option>
+                <option>Offer 2</option>
+                <option>Offer 3</option>
+                <option>Offer 4</option>
               </select>
             </div>
             <div className="form-group">
@@ -108,11 +166,11 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry">Inquiry</label>
-              <select onBlur={handleChangeField} name="inquiry">
-                <option value="Inquiry 1">Inquiry 1</option>
-                <option value="Inquiry 2">Inquiry 2</option>
-                <option value="Inquiry 3">Inquiry 3</option>
-                <option value="Inquiry 4">Inquiry 4</option>
+              <select name="inquiry" onBlur={handleChangeField}>
+                <option>Inquiry 1</option>
+                <option>Inquiry 2</option>
+                <option>Inquiry 3</option>
+                <option>Inquiry 4</option>
               </select>
             </div>
             <div className="form-group">
@@ -158,7 +216,8 @@ class StepOne extends Component {
 
 StepOne.propTypes = {
   handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired
+  form: propTypes.any.isRequired,
+  isFor: propTypes.bool.isRequired
 };
 
 export default StepOne;

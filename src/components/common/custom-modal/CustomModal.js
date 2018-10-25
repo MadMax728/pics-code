@@ -40,7 +40,7 @@ class CustomModal extends Component {
       <AdsModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
-        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
       />
     );
   };
@@ -51,8 +51,8 @@ class CustomModal extends Component {
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
         // true for the company and false for the creator
-        isFor={false}
-        handleModalInfoShow={this.props.handleModalInfoShow}
+        isFor={true}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
       />
     );
   };
@@ -83,7 +83,8 @@ CustomModal.propTypes = {
   modalShow: propTypes.bool.isRequired,
   modalType: propTypes.string.isRequired,
   handleModalHide: propTypes.func.isRequired,
-  handleModalInfoShow: propTypes.func.isRequired
+  handleModalInfoShow: propTypes.func.isRequired,
+  handleModalInfoMsgShow: propTypes.func.isRequired
 };
 
 export default CustomModal;

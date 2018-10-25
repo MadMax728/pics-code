@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
+import propTypes from "prop-types";
 
 class StepTwo extends Component {
   constructor(props) {
@@ -8,6 +9,7 @@ class StepTwo extends Component {
   }
 
   render() {
+    const { handleChangeField } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-5 upload-form">
@@ -36,7 +38,7 @@ class StepTwo extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="Define">Define daily budget</label>
-            <select>
+            <select onBlur={handleChangeField} name="daily_budget">
               <option>100 €</option>
               <option>200 €</option>
               <option>300 €</option>
@@ -118,5 +120,9 @@ class StepTwo extends Component {
     );
   }
 }
+
+StepTwo.propTypes = {
+  handleChangeField: propTypes.func.isRequired
+};
 
 export default StepTwo;

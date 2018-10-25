@@ -8,6 +8,8 @@ import {
   CreateCreatorCampaignHeader
 } from "../../campaigns";
 
+import { modalType } from "../../../../lib/constants/enumerations";
+
 class CampaignModal extends Component {
   constructor(props, context) {
     super(props, context);
@@ -18,6 +20,8 @@ class CampaignModal extends Component {
         title: "",
         location: "",
         category: "",
+        procedure: "public",
+        type: "video",
         target_group: "company",
         offer: "",
         offer_tag: "",
@@ -47,11 +51,22 @@ class CampaignModal extends Component {
     };
   }
 
-  handleSubmit = () => {
+  handleCreatorSubmit = () => {
     console.log(this.state.form);
   };
 
-  handleChangeField = event => {
+  handleCreatorChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
+
+  handleCompanySubmit = () => {
+    console.log(this.state.form);
+  };
+
+  handleCompanyChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
@@ -93,9 +108,16 @@ class CampaignModal extends Component {
     }
   };
 
+  handleModalInfoShow = () => {
+    this.props.handleModalInfoMsgShow(
+      modalType.payment_confirmation,
+      "Campaign"
+    );
+  };
+
   render() {
-    const { isFor, handleModalInfoShow } = this.props;
-    const { stepIndex, isPreview, form, handleSubmit } = this.state;
+    const { isFor, handleModalHide } = this.props;
+    const { stepIndex, isPreview, form } = this.state;
 
     let modalClassName = "";
 
@@ -114,17 +136,18 @@ class CampaignModal extends Component {
         modalHeaderContent={
           isFor ? (
             <CreateCompanyCampaignHeader
-              handleModalHide={this.props.handleModalHide}
+              handleModalHide={handleModalHide}
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
               stepIndex={this.state.stepIndex}
+              handlePrivewOpen={this.handlePrivewOpen}
             />
           ) : (
             <CreateCreatorCampaignHeader
-              handleModalHide={this.props.handleModalHide}
+              handleModalHide={handleModalHide}
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
-              stepIndex={this.state.stepIndex}
+              stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
             />
           )
@@ -132,26 +155,31 @@ class CampaignModal extends Component {
         footer={false}
         modalShow={this.props.modalShow}
         closeBtn={false}
-        handleModalHide={this.props.handleModalHide}
+        handleModalHide={handleModalHide}
         modalBodyContent={
           isFor ? (
             <CreateCompanyCampaign
-              stepIndex={this.state.stepIndex}
-              isFor={this.props.isFor}
+              stepIndex={stepIndex}
+              isFor={isFor}
               forThat={"Campaign"}
-              handleModalInfoShow={handleModalInfoShow}
+              handleModalInfoShow={this.handleModalInfoShow}
+              handlePrivewClose={this.handlePrivewClose}
+              isPreview={isPreview}
+              handleChangeField={this.handleCompanyChangeField}
+              form={form}
+              handleSubmit={this.handleCompanySubmit}
             />
           ) : (
             <CreateCreatorCampaign
               stepIndex={this.state.stepIndex}
-              isFor={this.props.isFor}
+              isFor={isFor}
               forThat={"Campaign"}
-              handleModalInfoShow={handleModalInfoShow}
+              handleModalInfoShow={this.handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
-              handleChangeField={this.handleChangeField}
+              handleChangeField={this.handleCreatorChangeField}
               form={form}
-              handleSubmit={handleSubmit}
+              handleSubmit={this.handleCreatorSubmit}
             />
           )
         }
@@ -164,7 +192,7 @@ CampaignModal.propTypes = {
   modalShow: propTypes.bool.isRequired,
   handleModalHide: propTypes.func.isRequired,
   isFor: propTypes.bool.isRequired,
-  handleModalInfoShow: propTypes.func
+  handleModalInfoMsgShow: propTypes.func
 };
 
 export default CampaignModal;

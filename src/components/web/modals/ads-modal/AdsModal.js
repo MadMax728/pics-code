@@ -2,14 +2,55 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import propTypes from "prop-types";
 import { CreateAds, CreateAdsHeader } from "../../user";
+import { modalType } from "../../../../lib/constants/enumerations";
 
 class AdsModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      stepIndex: 0
+      stepIndex: 0,
+      form: {
+        title: "",
+        location: "",
+        redius: "",
+        category: "",
+        description: "",
+        target_group: "male-female",
+        call_to_action_button: "",
+        insert_link: "",
+        start_date: "",
+        end_date: "",
+        daily_budget: "",
+        invoice_recipient: "",
+        street: "",
+        number: "",
+        postal_code: "",
+        city: "",
+        country: "",
+        vat_identification_number: "",
+        payment_option: "card",
+        card_holder: "",
+        expire_date: "",
+        card_no: "",
+        cvc: "",
+        billing_address: "",
+        payment_method: "",
+        voucher: "",
+        image: ""
+      }
     };
   }
+
+  handleSubmit = () => {
+    console.log(this.state.form);
+  };
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    console.log(this.state.form);
+  };
 
   componentDidMount() {
     this.setState({ stepIndex: 0 });
@@ -18,6 +59,7 @@ class AdsModal extends Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {
       this.setState({ stepIndex: 0 });
+      this.forceUpdate();
     }
   }
 
@@ -35,9 +77,13 @@ class AdsModal extends Component {
     }
   };
 
+  handleModalInfoShow = () => {
+    this.props.handleModalInfoMsgShow(modalType.payment_confirmation, "Ad");
+  };
+
   render() {
-    const { stepIndex } = this.state;
-    const { handleModalInfoShow } = this.props;
+    const { stepIndex, form } = this.state;
+    const { handleModalHide, modalShow } = this.props;
 
     let modalClassName = "";
 
@@ -55,21 +101,24 @@ class AdsModal extends Component {
         header
         modalHeaderContent={
           <CreateAdsHeader
-            handleModalHide={this.props.handleModalHide}
+            handleModalHide={handleModalHide}
             handleNext={this.handleNext}
             handlePrev={this.handlePrev}
-            stepIndex={this.state.stepIndex}
+            stepIndex={stepIndex}
           />
         }
         footer={false}
-        modalShow={this.props.modalShow}
+        modalShow={modalShow}
         closeBtn={false}
-        handleModalHide={this.props.handleModalHide}
+        handleModalHide={handleModalHide}
         modalBodyContent={
           <CreateAds
-            stepIndex={this.state.stepIndex}
+            stepIndex={stepIndex}
             forThat={"Ads"}
-            handleModalInfoShow={handleModalInfoShow}
+            handleModalInfoShow={this.handleModalInfoShow}
+            handleChangeField={this.handleChangeField}
+            form={form}
+            handleSubmit={this.handleSubmit}
           />
         }
       />
@@ -80,7 +129,7 @@ class AdsModal extends Component {
 AdsModal.propTypes = {
   modalShow: propTypes.bool,
   handleModalHide: propTypes.func,
-  handleModalInfoShow: propTypes.func
+  handleModalInfoMsgShow: propTypes.func
 };
 
 export default AdsModal;

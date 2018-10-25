@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import propTypes from "prop-types";
-import { modalType } from "../../../../../lib/constants/enumerations";
 
 class PaymentStepThree extends Component {
   constructor(props) {
@@ -10,10 +9,12 @@ class PaymentStepThree extends Component {
     this.state = {};
   }
 
+  handleRedeemBtn = () => {};
+
   handleCommitToBuy = () => {
     console.log(this.props);
     this.props.handleSubmit();
-    this.props.handleModalInfoShow(modalType.payment_confirmation);
+    this.props.handleModalInfoShow();
   };
 
   render() {
@@ -41,8 +42,10 @@ class PaymentStepThree extends Component {
           <div className="history-content-wrapper">
             <div className="subtitle">Voucher </div>
             <div className="form-content">
-              <input type="text" />
-              <button className="blue_button">Redeem</button>
+              <input type="text" name="voucher" onChange={handleChangeField} />
+              <button className="blue_button" onClick={this.handleRedeemBtn}>
+                Redeem
+              </button>
             </div>
           </div>
           <div className="history-content-wrapper">

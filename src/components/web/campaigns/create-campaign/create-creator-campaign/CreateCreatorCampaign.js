@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StepOne, StepTwo, StepThree } from "./steps";
+import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
 import propTypes from "prop-types";
 import {
@@ -22,6 +22,7 @@ class CreateCreatorCampaign extends Component {
       handleModalInfoShow,
       isPreview,
       handlePrivewClose,
+      isFor,
       form,
       handleChangeField,
       handleSubmit
@@ -44,7 +45,11 @@ class CreateCreatorCampaign extends Component {
         )}
         {!isPreview &&
           (stepIndex === 0 && (
-            <StepOne handleChangeField={handleChangeField} form={form} />
+            <StepOne
+              handleChangeField={handleChangeField}
+              form={form}
+              isFor={isFor}
+            />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
@@ -92,6 +97,7 @@ CreateCreatorCampaign.propTypes = {
   handlePrivewClose: propTypes.func.isRequired,
   handleChangeField: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
+  isFor: propTypes.bool.isRequired,
   handleSubmit: propTypes.func.isRequired
 };
 

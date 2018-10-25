@@ -17,7 +17,8 @@ class Home extends Component {
       modalShow: false,
       modalType: "",
       modalInfoShow: false,
-      modalInfoType: ""
+      modalInfoType: "",
+      modalInfoMsg: ""
     };
   }
 
@@ -37,6 +38,14 @@ class Home extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
+  handleModalInfoMsgShow = (e, forThat) => {
+    this.setState({
+      modalInfoShow: true,
+      modalInfoType: e,
+      modalInfoMsg: forThat
+    });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -53,6 +62,7 @@ class Home extends Component {
             modalType={this.state.modalType}
             handleModalInfoShow={this.handleModalInfoShow}
             modalInfoType={this.state.modalInfoType}
+            handleModalInfoMsgShow={this.handleModalInfoMsgShow}
           />
 
           <InfoModal
@@ -60,6 +70,7 @@ class Home extends Component {
             handleModalInfoHide={this.handleModalInfoHide}
             modalInfoType={this.state.modalInfoType}
             handleModalHide={this.handleModalHide}
+            modalInfoMsg={this.state.modalInfoMsg}
           />
 
           <div className="container">

@@ -50,6 +50,7 @@ class InfoModal extends Component {
         modalInfoShow={this.props.modalInfoShow}
         handleModalInfoHide={this.props.handleModalInfoHide}
         handleModalHide={this.props.handleModalHide}
+        modalInfoMsg={this.props.modalInfoMsg}
       />
     );
   };
@@ -82,7 +83,8 @@ InfoModal.propTypes = {
   modalInfoShow: propTypes.bool.isRequired,
   modalInfoType: propTypes.string,
   handleModalInfoHide: propTypes.func.isRequired,
-  handleModalHide: propTypes.func.isRequired
+  handleModalHide: propTypes.func.isRequired,
+  modalInfoMsg: propTypes.string
 };
 
 export default InfoModal;
