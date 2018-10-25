@@ -979,6 +979,10 @@
       border: 0;
       color: white;
       padding-top: 5px;
+      display: block;
+      &.dispNone {
+        display: none;
+      }
     }
     .hidden-text {
       position: absolute;
