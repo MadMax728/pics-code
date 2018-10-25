@@ -301,7 +301,7 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.instagram.com</div> */}
                   <span className="fa fa-instagram" />
-                  <button type="button" class="btn-blu">
+                  <button type="button" className="btn-blu">
                     Subscribe
                   </button>
                   <div className="hidden-text">
@@ -323,7 +323,7 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.youtube.com</div> */}
                   <span className="fa fa-youtube" />
-                  <button type="button" class="btn-blu">
+                  <button type="button" className="btn-blu">
                     Subscribe
                   </button>
                   <div className="hidden-text">
@@ -345,7 +345,7 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.twitter.com</div> */}
                   <span className="fa fa-twitter" />
-                  <button type="button" class="btn-blu">
+                  <button type="button" className="btn-blu">
                     Subscribe
                   </button>
                   <div className="hidden-text">
