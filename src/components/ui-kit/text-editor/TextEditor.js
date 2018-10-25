@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { convertFromRaw, convertToRaw } from "draft-js";
+import { convertFromRaw } from "draft-js";
 import { toolBarConfig } from "../../../lib/constants/toolBarConfig";
 
 const content = {
@@ -34,7 +34,6 @@ class TextEditor extends Component {
   };
 
   render() {
-    console.log("rawjs", convertFromRaw(content));
     return (
       <Editor
         wrapperClassName="wrapper-class"
