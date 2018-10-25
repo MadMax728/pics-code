@@ -273,61 +273,93 @@ class EditProfile extends Component {
             </div>
             <div className="form-subtitle">Social Network URL</div>
             <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
-              <div className="form-group margin-bottom-30 social-media">
-                <label htmlFor="facebook">Facebook</label>
+              <div className="form-group margin-bottom-15 social-media">
+                {/* <label htmlFor="facebook">Facebook</label> */}
                 <div className="social-link">
-                  <div className="link">www.facebook.com</div>
-                  <Social
+                  {/* <div className="link">www.facebook.com</div> */}
+                  <span className="fa fa-facebook" />
+                  <button type="button" className="btn-blu">
+                    Subscribe
+                  </button>
+                  <div className="hidden-text">
+                    hidden text
+                    <span aria-hidden="true">x</span>
+                  </div>
+                  {/* <Social
                     handleOnKeyDown={this.handleOnKeyDown}
                     socialMedia={form.isConnectFacebook}
                     id={"facebook"}
                     handleSocialMediaChange={this.handleSocialMediaChange}
                     handleSocialMediaRemove={this.handleSocialMediaRemove}
                     handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  />
+                  /> */}
                 </div>
               </div>
 
-              <div className="form-group margin-bottom-30 social-media">
-                <label htmlFor="instagram">Instagram</label>
+              <div className="form-group margin-bottom-15 social-media">
+                {/* <label htmlFor="instagram">Instagram</label> */}
                 <div className="social-link">
-                  <div className="link">www.instagram.com</div>
-                  <Social
+                  {/* <div className="link">www.instagram.com</div> */}
+                  <span className="fa fa-instagram" />
+                  <button type="button" className="btn-blu">
+                    Subscribe
+                  </button>
+                  <div className="hidden-text">
+                    hidden text
+                    <span aria-hidden="true">x</span>
+                  </div>
+                  {/* <Social
                     handleOnKeyDown={this.handleOnKeyDown}
                     socialMedia={form.isConnectInstagram}
                     id={"instagram"}
                     handleSocialMediaChange={this.handleSocialMediaChange}
                     handleSocialMediaRemove={this.handleSocialMediaRemove}
                     handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  />
+                  /> */}
                 </div>
               </div>
-              <div className="form-group margin-bottom-30 social-media">
-                <label htmlFor="youtube">Youtube</label>
+              <div className="form-group margin-bottom-15 social-media">
+                {/* <label htmlFor="youtube">Youtube</label> */}
                 <div className="social-link">
-                  <div className="link">www.youtube.com</div>
-                  <Social
+                  {/* <div className="link">www.youtube.com</div> */}
+                  <span className="fa fa-youtube" />
+                  <button type="button" className="btn-blu">
+                    Subscribe
+                  </button>
+                  <div className="hidden-text">
+                    hidden text
+                    <span aria-hidden="true">x</span>
+                  </div>
+                  {/* <Social
                     handleOnKeyDown={this.handleOnKeyDown}
                     socialMedia={form.isConnectYoutube}
                     id={"youtube"}
                     handleSocialMediaChange={this.handleSocialMediaChange}
                     handleSocialMediaRemove={this.handleSocialMediaRemove}
                     handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  />
+                  /> */}
                 </div>
               </div>
-              <div className="form-group margin-bottom-30 social-media">
-                <label htmlFor="twitter">Twitter</label>
+              <div className="form-group margin-bottom-15 social-media">
+                {/* <label htmlFor="twitter">Twitter</label> */}
                 <div className="social-link">
-                  <div className="link">www.twitter.com</div>
-                  <Social
+                  {/* <div className="link">www.twitter.com</div> */}
+                  <span className="fa fa-twitter" />
+                  <button type="button" className="btn-blu">
+                    Subscribe
+                  </button>
+                  <div className="hidden-text">
+                    hidden text
+                    <span aria-hidden="true">x</span>
+                  </div>
+                  {/* <Social
                     handleOnKeyDown={this.handleOnKeyDown}
                     socialMedia={form.isConnectTwitter}
                     id={"twitter"}
                     handleSocialMediaChange={this.handleSocialMediaChange}
                     handleSocialMediaRemove={this.handleSocialMediaRemove}
                     handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
