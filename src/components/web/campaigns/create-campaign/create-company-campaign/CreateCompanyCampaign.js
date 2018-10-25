@@ -25,7 +25,8 @@ class CreateCompanyCampaign extends Component {
       form,
       isFor,
       handleChangeField,
-      handleSubmit
+      handleSubmit,
+      handleDate
     } = this.props;
 
     return (
@@ -57,7 +58,10 @@ class CreateCompanyCampaign extends Component {
           ))}
         {!isPreview &&
           (stepIndex === 2 && (
-            <StepThree handleChangeField={handleChangeField} />
+            <StepThree
+              handleChangeField={handleChangeField}
+              handleDate={handleDate}
+            />
           ))}
         {!isPreview &&
           (stepIndex === 3 && (
@@ -98,7 +102,8 @@ CreateCompanyCampaign.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   isFor: propTypes.bool.isRequired,
   form: propTypes.any.isRequired,
-  handleSubmit: propTypes.func.isRequired
+  handleSubmit: propTypes.func.isRequired,
+  handleDate: propTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;

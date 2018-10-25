@@ -20,7 +20,8 @@ class CreateAds extends Component {
       forThat,
       form,
       handleChangeField,
-      handleSubmit
+      handleSubmit,
+      handleDate
     } = this.props;
 
     return (
@@ -28,7 +29,12 @@ class CreateAds extends Component {
         {stepIndex === 0 && (
           <StepOne handleChangeField={handleChangeField} form={form} />
         )}
-        {stepIndex === 1 && <StepTwo handleChangeField={handleChangeField} />}
+        {stepIndex === 1 && (
+          <StepTwo
+            handleChangeField={handleChangeField}
+            handleDate={handleDate}
+          />
+        )}
         {stepIndex === 2 && (
           <PaymentStepOne
             forThat={forThat}
@@ -62,7 +68,8 @@ CreateAds.propTypes = {
   handleModalInfoShow: propTypes.func.isRequired,
   handleChangeField: propTypes.func.isRequired,
   handleSubmit: propTypes.func.isRequired,
-  form: propTypes.any.isRequired
+  form: propTypes.any.isRequired,
+  handleDate: propTypes.func.isRequired
 };
 
 export default CreateAds;

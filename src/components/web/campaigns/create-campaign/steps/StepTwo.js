@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
-
+import { TextEditor } from "../../../../ui-kit/text-editor";
 class StepTwo extends Component {
   constructor(props) {
     super(props);
@@ -14,11 +14,7 @@ class StepTwo extends Component {
       <div className="modal-body">
         <div className="col-sm-7 create-campaign-wrapper">
           <div className="title">Title</div>
-          <input
-            type="text"
-            placeholder="Enter your campaign description here and add images and videos… "
-            onChange={handleChangeField}
-          />
+          <TextEditor />
         </div>
         <div className="col-sm-5 no-padding disp-flex">
           <div className="editor-options">

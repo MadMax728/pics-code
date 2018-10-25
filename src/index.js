@@ -7,6 +7,7 @@ import App from "./App";
 import { logger } from "./loggers";
 import { unregister } from "./registerServiceWorker";
 import { configureStore } from "./store";
+import "react-datepicker/dist/react-datepicker.css";
 
 // Unregister the service worker from create-react-app
 unregister();
