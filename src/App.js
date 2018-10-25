@@ -15,8 +15,6 @@ import {
   ResetPassword,
   ForgotPassword
 } from "./components/web/auth-flow";
-import { PageNotFound } from "./components/web/page-not-found";
-
 class App extends Component {
   constructor() {
     super();
@@ -62,6 +60,7 @@ class App extends Component {
       <div>
         <Route component={Home} />
         {Auth.isUserAdmin() && <Route render={this.backOfficeRender} />}
+        {/* <Route exact path={'*'} component={PageNotFound} /> */}
       </div>
     );
   };
@@ -95,7 +94,6 @@ class App extends Component {
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           render={this.isAdminUserAuthenticated}
         />
-        <Route path={"*"} component={PageNotFound} />
       </Switch>
     );
   };
@@ -118,7 +116,6 @@ class App extends Component {
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />
         <Route path={routes.ROOT_ROUTE} render={this.isUserAuthenticated} />
-        <Route path={"*"} component={PageNotFound} />
       </Switch>
     );
   };

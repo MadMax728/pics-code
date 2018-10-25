@@ -51,10 +51,15 @@ import {
   DeleteAccount,
   LawEnforcementAgency
 } from "../../web/information";
+import { PageNotFound } from "../../web/page-not-found";
 
 class HomeRoute extends Component {
   handleLanding = () => {
     return <Landing handleModalInfoShow={this.props.handleModalInfoShow} />;
+  };
+
+  handlePageNotFound = () => {
+    return <PageNotFound className={"page-not-found-wrapr padding72"} />;
   };
 
   handleSettingCampaign = () => {
@@ -280,6 +285,9 @@ class HomeRoute extends Component {
             path={routes.SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE}
             component={LawEnforcementAgency}
           />
+          {window.location.pathname.indexOf("back-office") === -1 && (
+            <Route exact path="/*" render={this.handlePageNotFound} />
+          )}
 
           {/* -------- Information Routes --------- */}
         </Switch>

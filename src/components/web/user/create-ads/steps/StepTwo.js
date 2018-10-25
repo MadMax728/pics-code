@@ -1,12 +1,27 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
+import moment from "moment";
+import DatePicker from "react-datepicker";
 
 class StepTwo extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      start_date: moment(),
+      end_date: moment()
+    };
   }
+
+  handleStartDateChange = date => {
+    this.setState({ start_date: date });
+    this.props.handleDate(date.format("MM/DD/YYYY"), "start_date");
+  };
+
+  handleEndDateChange = date => {
+    this.setState({ end_date: date });
+    this.props.handleDate(date.format("MM/DD/YYYY"), "end_date");
+  };
 
   render() {
     const { handleChangeField } = this.props;
@@ -19,7 +34,10 @@ class StepTwo extends Component {
               <li>
                 <label htmlFor="Start">Start</label>
                 <div className="input-group date">
-                  <input type="text" className="form-control" />
+                  <DatePicker
+                    selected={this.state.start_date}
+                    onChange={this.handleStartDateChange}
+                  />
                   <span className="input-group-addon">
                     <span className="glyphicon glyphicon-calendar" />
                   </span>
@@ -28,7 +46,10 @@ class StepTwo extends Component {
               <li>
                 <label htmlFor="End">End</label>
                 <div className="input-group date">
-                  <input type="text" className="form-control" />
+                  <DatePicker
+                    selected={this.state.end_date}
+                    onChange={this.handleEndDateChange}
+                  />
                   <span className="input-group-addon">
                     <span className="glyphicon glyphicon-calendar" />
                   </span>
@@ -122,7 +143,8 @@ class StepTwo extends Component {
 }
 
 StepTwo.propTypes = {
-  handleChangeField: propTypes.func.isRequired
+  handleChangeField: propTypes.func.isRequired,
+  handleDate: propTypes.func.isRequired
 };
 
 export default StepTwo;

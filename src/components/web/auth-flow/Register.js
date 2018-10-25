@@ -13,15 +13,17 @@ class Register extends Component {
     this.state = {
       form: {
         gender: "male",
-        userName: "",
+        username: "",
         email: "",
         password: "",
-        repeatPassword: "",
+        repeat_password: "",
         emailValid: false,
         isValidPassword: false
       }
     };
   }
+
+  componentDidMount() {}
 
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
@@ -49,7 +51,7 @@ class Register extends Component {
             <div className="login-wrapper">
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <input
                     type="text"
@@ -60,7 +62,7 @@ class Register extends Component {
                     value={form.username ? form.username : ""}
                     onChange={this.handleChangeField}
                   />
-                  {form.userName.length === 0 ? (
+                  {form.username.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -76,7 +78,7 @@ class Register extends Component {
                     value={form.email ? form.email : ""}
                     onChange={this.handleChangeField}
                   />
-                  {form.email === 0 || !form.emailValid ? (
+                  {form.email.length === 0 || form.emailValid ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -110,7 +112,8 @@ class Register extends Component {
                     value={form.repeat_password ? form.repeat_password : ""}
                     onChange={this.handleChangeField}
                   />
-                  {form.repeatPassword.length === 0 || !form.isValidPassword ? (
+                  {form.repeat_password.length === 0 ||
+                  form.repeat_password !== form.password ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -142,7 +145,7 @@ class Register extends Component {
                   </ul>
                 </div>
                 <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
+                  <button className="blue_button" type="submit">
                     Register
                   </button>
                 </div>

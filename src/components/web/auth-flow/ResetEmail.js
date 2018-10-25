@@ -53,7 +53,7 @@ class ResetMail extends Component {
                     value={form.email ? form.email : ""}
                     onChange={this.handleChangeField}
                   />
-                  {!this.state.eamil ? (
+                  {form.email.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />

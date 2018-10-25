@@ -25,7 +25,8 @@ class CreateCreatorCampaign extends Component {
       isFor,
       form,
       handleChangeField,
-      handleSubmit
+      handleSubmit,
+      handleDate
     } = this.props;
 
     return (
@@ -57,7 +58,10 @@ class CreateCreatorCampaign extends Component {
           ))}
         {!isPreview &&
           (stepIndex === 2 && (
-            <StepThree handleChangeField={handleChangeField} />
+            <StepThree
+              handleChangeField={handleChangeField}
+              handleDate={handleDate}
+            />
           ))}
         {!isPreview &&
           (stepIndex === 3 && (
@@ -98,7 +102,8 @@ CreateCreatorCampaign.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
   isFor: propTypes.bool.isRequired,
-  handleSubmit: propTypes.func.isRequired
+  handleSubmit: propTypes.func.isRequired,
+  handleDate: propTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;

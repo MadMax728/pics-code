@@ -8,6 +8,7 @@ import {
   CreateCreatorCampaignHeader
 } from "../../campaigns";
 
+import moment from "moment";
 import { modalType } from "../../../../lib/constants/enumerations";
 
 class CampaignModal extends Component {
@@ -28,8 +29,8 @@ class CampaignModal extends Component {
         inquiry: "",
         inquiry_tag: "",
         description: "",
-        start_date: "",
-        end_date: "",
+        start_date: moment().format("MM/DD/YYYY"),
+        end_date: moment().format("MM/DD/YYYY"),
         daily_budget: "",
         invoice_recipient: "",
         street: "",
@@ -50,6 +51,12 @@ class CampaignModal extends Component {
       }
     };
   }
+
+  handleDate = (date, forThat) => {
+    const { form } = this.state;
+    form[forThat] = date;
+    this.setState({ form });
+  };
 
   handleCreatorSubmit = () => {
     console.log(this.state.form);
@@ -78,7 +85,6 @@ class CampaignModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (!nextProps.modalShow) {
       this.setState({ stepIndex: 0 });
     }
@@ -168,6 +174,7 @@ class CampaignModal extends Component {
               handleChangeField={this.handleCompanyChangeField}
               form={form}
               handleSubmit={this.handleCompanySubmit}
+              handleDate={this.handleDate}
             />
           ) : (
             <CreateCreatorCampaign
@@ -180,6 +187,7 @@ class CampaignModal extends Component {
               handleChangeField={this.handleCreatorChangeField}
               form={form}
               handleSubmit={this.handleCreatorSubmit}
+              handleDate={this.handleDate}
             />
           )
         }

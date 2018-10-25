@@ -2,7 +2,7 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on mockdata branch and created merge request.
 
-1. Implementation of preview for the Company, manage in Create Campaign Modal
+1. Implementation of Page Not Found Functionality.
 2. Implementation of take input from user and Maintain the form state of it, 
     - Create Campaign Modal for Creator
         - PaymentStep3
@@ -23,10 +23,9 @@ Today, I have worked on following tasks updated same in asana, pushed the code o
         - PaymentStep2
         - PaymentStep3
 
-3. Fixed Message info in Payment Confirmation Modal after payment Modal screen for Ad and Campaign.
+3. Fixed bugs in Register Component and Reset Email Component.
 4. Maintain the folder stucture for the Create Campaign Steps, Create smart Component for step1, step2, step3 for Creator and Company.
-5. Fixed designing issue for Create Campaign Modal Component, Create Ads Modal Component and Login Component.
-6. Fixed Enter key issue in login Component.
+5. Fixed designing issue for Page Not Found Component.
 
 Thanks.
 
