@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Editor } from "react-draft-wysiwyg";
 import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
+import { TextEditor } from "../../ui-kit/text-editor";
 
 class CreateCMSManagement extends Component {
   constructor(props, context) {
@@ -95,12 +95,7 @@ class CreateCMSManagement extends Component {
               </div>
             </div>
             <div className="form-row col-xs-12 res480">
-              <Editor
-                toolbarOnFocus
-                wrapperClassName="wrapper-class"
-                editorClassName="editor-class"
-                toolbarClassName="toolbar-class"
-              />
+              <TextEditor />
             </div>
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
