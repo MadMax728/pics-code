@@ -163,7 +163,7 @@ class Register extends Component {
           </div>
         </section>
         <Cookies />
-        <BaseFooter />
+        <BaseFooter className={"custom-container"} />
       </div>
     );
   }

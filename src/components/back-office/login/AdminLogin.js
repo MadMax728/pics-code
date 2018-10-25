@@ -79,7 +79,12 @@ class AdminLogin extends Component {
                     onChange={this.getUserEnterPassword}
                     placeholder={Translations.placeholders.password}
                   />
-                  <img src={images.error} alt={"error"} />
+
+                  {this.state.password.length === 0 ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                    <img src={images.checked} alt={"checked"} />
+                  )}
                 </div>
                 <div className="form-group">
                   {loginData && loginData.isLoading ? (

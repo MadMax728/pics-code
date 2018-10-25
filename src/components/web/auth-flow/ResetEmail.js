@@ -68,7 +68,7 @@ class ResetMail extends Component {
             </div>
           </div>
         </section>
-        <BaseFooter />
+        <BaseFooter className={"custom-container"} />
       </div>
     );
   }

@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
+import propTypes from "prop-types";
 
 class BaseFooter extends Component {
   render() {
+    const { className } = this.props;
+
     return (
       <footer>
-        <div className="custom-container">
+        <div className={className}>
           <ul>
             <li>
               <Link to={routes.SUPPORT_ROUTE}>Support</Link>{" "}
@@ -36,5 +39,9 @@ class BaseFooter extends Component {
     );
   }
 }
+
+BaseFooter.propTypes = {
+  className: propTypes.string.isRequired
+};
 
 export default BaseFooter;

@@ -59,6 +59,8 @@ class AdsModal extends Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {
       this.setState({ stepIndex: 0 });
+      console.log("ahi ave che");
+
       this.forceUpdate();
     }
   }

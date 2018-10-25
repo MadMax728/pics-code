@@ -4,7 +4,6 @@ class PageNotFound extends Component {
   render() {
     return (
       <div className="page-not-found-wrapr">
-        <BaseHeader />
         <section className="page-not-found">
           <div className="container">
             <div className="row">
@@ -14,7 +13,7 @@ class PageNotFound extends Component {
             </div>
           </div>
         </section>
-        <BaseFooter />
+        <BaseFooter className={"page-not-found"} />
       </div>
     );
   }

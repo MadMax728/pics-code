@@ -95,7 +95,7 @@ class App extends Component {
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           render={this.isAdminUserAuthenticated}
         />
-        <Route path={routes.PAGE_NOT_FOUND} component={PageNotFound} />
+        <Route path={"*"} component={PageNotFound} />
       </Switch>
     );
   };
@@ -118,6 +118,7 @@ class App extends Component {
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />
         <Route path={routes.ROOT_ROUTE} render={this.isUserAuthenticated} />
+        <Route path={"*"} component={PageNotFound} />
       </Switch>
     );
   };
