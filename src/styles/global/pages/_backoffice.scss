@@ -498,7 +498,8 @@
       @media (max-width: 480px) {
         margin-bottom: 0px;
       }
-      margin-bottom: 20px; // create-cms-page plugin
+      margin-bottom: 20px;
+      // create-cms-page plugin
       .rdw-editor-wrapper {
         .rdw-editor-toolbar.toolbar-class {
           padding: 6px 0px 0;
@@ -1068,15 +1069,37 @@
     justify-content: space-between;
     span.fa {
       color: white;
-      background-color: #6b6a6a;
       width: 25px;
       height: 25px;
       border-radius: 50%;
       text-align: center;
-      padding: 5px 0;
+      padding: 6px 0;
+      &.fa-facebook {
+        background-color: #3b579d;
+      }
+      &.fa-youtube {
+        background-color: #fd2725;
+      }
+      &.fa-twitter {
+        background-color: #2caae1;
+      }
+      &.fa-instagram {
+        background-image: radial-gradient(
+          circle at 30% 107%,
+          #fdf497 0%,
+          #fdf497 5%,
+          #fd5949 45%,
+          #d6249f 60%,
+          #285aeb 90%
+        );
+      }
       &:hover {
         background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
       }
+    }
+    .social-text {
+      position: absolute;
+      left: 50px;
     }
     .link {
       padding: 10px 0;
@@ -1112,6 +1135,9 @@
       display: block;
       &.dispNone {
         display: none;
+      }
+      &:hover {
+        background-image: radial-gradient(circle at 0 100%, #029bd7, #1f58a6);
       }
     }
     .hidden-text {
