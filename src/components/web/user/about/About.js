@@ -103,38 +103,10 @@ const About = () => {
             </li>
             <li>
               <span>
-                <img src={images.linkedin} alt={"linkedin"} />
-              </span>
-              <span className="social-title">Linkedin</span>
-              <Link to={""}>{aboutInfo.social_network.linkedIn}</Link>
-            </li>
-            <li>
-              <span>
                 <img src={images.twitter} alt={"twitter"} />
               </span>
               <span className="social-title">Twitter</span>
               <Link to={""}>{aboutInfo.social_network.twitter}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.tumblr} alt={"tumblr"} />
-              </span>
-              <span className="social-title">Tumblr</span>
-              <Link to={""}>{aboutInfo.social_network.tumblr}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.pintrest} alt={"pintrest"} />
-              </span>
-              <span className="social-title">Pintrest</span>
-              <Link to={""}>{aboutInfo.social_network.pintrest}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.google} alt={"google"} />
-              </span>
-              <span className="social-title">Google+</span>
-              <Link to={""}>{aboutInfo.social_network.googlePlus}</Link>
             </li>
           </ul>
         </div>
