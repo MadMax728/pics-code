@@ -5,7 +5,9 @@ import {
   ContentViewModal,
   PaymentConfirmationModal,
   ProcessedModal,
-  PostPopUpModal
+  PostPopUpModal,
+  EditProfileModal,
+  SocialConnectModal
 } from "../../web/modals";
 import propTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -55,6 +57,24 @@ class InfoModal extends Component {
     );
   };
 
+  handleModalEditProfile = () => {
+    return (
+      <EditProfileModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+      />
+    );
+  };
+
+  handleModalSocialConnect = () => {
+    return (
+      <SocialConnectModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+      />
+    );
+  };
+
   handleModalRender = () => {
     return (
       <div>
@@ -66,6 +86,10 @@ class InfoModal extends Component {
           this.handleModalProcessed()}
         {this.props.modalInfoType === modalType.post_pop_up &&
           this.handleModalPostPopUp()}
+        {this.props.modalInfoType === modalType.social_connect &&
+          this.handleModalSocialConnect()}
+        {this.props.modalInfoType === modalType.edit_profile &&
+          this.handleModalEditProfile()}
       </div>
     );
   };

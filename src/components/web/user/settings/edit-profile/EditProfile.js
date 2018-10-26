@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import Social from "./Social";
+import PropTypes from "prop-types";
+import { modalType } from "../../../../../lib/constants/enumerations";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -42,8 +43,6 @@ class EditProfile extends Component {
     this.setState({ form });
   };
 
-  handleGender = () => {};
-
   handleChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
@@ -74,6 +73,14 @@ class EditProfile extends Component {
 
   handleOnKeyDown = () => {};
 
+  handleEditProfile = () => {
+    this.props.handleModalInfoShow(modalType.edit_profile);
+  };
+
+  handleSocialConnect = () => {
+    this.props.handleModalInfoShow(modalType.social_connect);
+  };
+
   render() {
     const { form } = this.state;
 
@@ -94,7 +101,14 @@ class EditProfile extends Component {
                     Select a file...
                   </label> */}
                 </div>
-                <div>Edit profile image</div>
+                <div
+                  onClick={this.handleEditProfile}
+                  onKeyDown={this.handleOnKeyDown}
+                  role="button"
+                  tabIndex="0"
+                >
+                  Edit profile image
+                </div>
               </div>
             </div>
             <div className="general-information-wrapper">
@@ -279,7 +293,11 @@ class EditProfile extends Component {
                   {/* <div className="link">www.facebook.com</div> */}
                   <span className="fa fa-facebook" />
                   <span className="social-text">facebook</span>
-                  <button type="button" className="btn-blu">
+                  <button
+                    type="button"
+                    className="btn-blu"
+                    onClick={this.handleSocialConnect}
+                  >
                     Connect
                   </button>
                   <div className="hidden-text">
@@ -378,5 +396,9 @@ class EditProfile extends Component {
     );
   }
 }
+
+EditProfile.propTypes = {
+  handleModalInfoShow: PropTypes.func.isRequired
+};
 
 export default EditProfile;
