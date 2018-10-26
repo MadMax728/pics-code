@@ -281,8 +281,9 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.facebook.com</div> */}
                   <span className="fa fa-facebook" />
+                  <span className="social-text">facebook</span>
                   <button type="button" className="btn-blu">
-                    Subscribe
+                    Connect
                   </button>
                   <div className="hidden-text">
                     hidden text
@@ -304,8 +305,9 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.instagram.com</div> */}
                   <span className="fa fa-instagram" />
+                  <span className="social-text">Instagram</span>
                   <button type="button" className="btn-blu">
-                    Subscribe
+                    Connect
                   </button>
                   <div className="hidden-text">
                     hidden text
@@ -326,8 +328,9 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.youtube.com</div> */}
                   <span className="fa fa-youtube" />
+                  <span className="social-text">YouTube</span>
                   <button type="button" className="btn-blu">
-                    Subscribe
+                    Connect
                   </button>
                   <div className="hidden-text">
                     hidden text
@@ -348,8 +351,9 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.twitter.com</div> */}
                   <span className="fa fa-twitter" />
+                  <span className="social-text">Twitter</span>
                   <button type="button" className="btn-blu">
-                    Subscribe
+                    Connect
                   </button>
                   <div className="hidden-text">
                     hidden text
