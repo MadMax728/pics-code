@@ -60,6 +60,7 @@ class CreateCompanyCampaign extends Component {
           (stepIndex === 2 && (
             <StepThree
               handleChangeField={handleChangeField}
+              form={form}
               handleDate={handleDate}
             />
           ))}
@@ -67,6 +68,7 @@ class CreateCompanyCampaign extends Component {
           (stepIndex === 3 && (
             <PaymentStepOne
               forThat={forThat}
+              form={form}
               handleChangeField={handleChangeField}
             />
           ))}

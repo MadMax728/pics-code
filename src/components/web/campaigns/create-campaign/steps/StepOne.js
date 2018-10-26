@@ -27,15 +27,30 @@ class StepOne extends Component {
           <form>
             <div className="form-group">
               <label htmlFor="title">Add title</label>
-              <input type="text" name="title" onChange={handleChangeField} />
+              <input
+                type="text"
+                value={this.props.form.title}
+                name="title"
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input type="text" name="location" onChange={handleChangeField} />
+              <input
+                type="text"
+                value={this.props.form.location}
+                name="location"
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Category">Add Category</label>
-              <select name="category" onBlur={handleChangeField}>
+              <select
+                name="category"
+                value={this.props.form.category}
+                onChange={handleChangeField}
+              >
+                <option>Select category</option>
                 <option>Category 1</option>
                 <option>Category 2</option>
                 <option>Category 3</option>
@@ -149,7 +164,12 @@ class StepOne extends Component {
             <div className="subtitle">Details of campaigns</div>
             <div className="form-group">
               <label htmlFor="Offer">Offer</label>
-              <select name="offer" onBlur={handleChangeField}>
+              <select
+                name="offer"
+                value={this.props.form.offer}
+                onChange={handleChangeField}
+              >
+                <option>Select offer</option>
                 <option>Offer 1</option>
                 <option>Offer 2</option>
                 <option>Offer 3</option>
@@ -161,12 +181,18 @@ class StepOne extends Component {
               <input
                 type="text"
                 name="offer_tag"
+                value={this.props.form.offer_tag}
                 onChange={handleChangeField}
               />
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry">Inquiry</label>
-              <select name="inquiry" onBlur={handleChangeField}>
+              <select
+                name="inquiry"
+                value={this.props.form.inquiry}
+                onChange={handleChangeField}
+              >
+                <option>Select Inquiry</option>
                 <option>Inquiry 1</option>
                 <option>Inquiry 2</option>
                 <option>Inquiry 3</option>
@@ -178,6 +204,7 @@ class StepOne extends Component {
               <input
                 type="text"
                 name="inquiry_tag"
+                value={this.props.form.inquiry_tag}
                 onChange={handleChangeField}
               />
             </div>

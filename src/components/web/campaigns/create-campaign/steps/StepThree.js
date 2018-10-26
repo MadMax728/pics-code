@@ -26,7 +26,7 @@ class StepThree extends Component {
 
   render() {
     const { handleChangeField } = this.props;
-
+    console.log("formobject", this.props.form);
     return (
       <div className="modal-body">
         <div className="col-sm-5 upload-form">
@@ -61,7 +61,11 @@ class StepThree extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="Define">Define daily budget</label>
-            <select onBlur={handleChangeField} name="daily_budget">
+            <select
+              onChange={handleChangeField}
+              value={this.props.form.daily_budget}
+              name="daily_budget"
+            >
               <option value="100 E">100 E</option>
               <option value="200 E">200 E</option>
               <option value="300 E">300 E</option>
@@ -146,6 +150,7 @@ class StepThree extends Component {
 
 StepThree.propTypes = {
   handleChangeField: propTypes.func.isRequired,
+  form: propTypes.any.isRequired,
   handleDate: propTypes.func.isRequired
 };
 
