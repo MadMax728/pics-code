@@ -1,23 +1,22 @@
 import React, { Component } from "react";
-import { BaseHeader, BaseFooter } from "../common";
+import PropTypes from "prop-types";
 class PageNotFound extends Component {
   render() {
+    const { className } = this.props;
     return (
-      <div className="page-not-found-wrapr">
-        <BaseHeader />
+      <div className={className}>
         <section className="page-not-found">
-          <div className="container">
-            <div className="row">
-              <div className="heading">{`This page isn't available`}</div>
-              <div className="sub-heading">{`The link you followed may be broken, or the page may have been removed `}</div>
-              <div className="logo-background" />
-            </div>
-          </div>
+          <div className="heading">{`This page isn't available`}</div>
+          <div className="sub-heading">{`The link you followed may be broken, or the page may have been removed `}</div>
+          <div className="logo-background" />
         </section>
-        <BaseFooter />
       </div>
     );
   }
 }
+
+PageNotFound.propTypes = {
+  className: PropTypes.string.isRequired
+};
 
 export default PageNotFound;

@@ -3,6 +3,7 @@ import { CustomBootstrapModal } from "../../../ui-kit";
 import propTypes from "prop-types";
 import { CreateAds, CreateAdsHeader } from "../../user";
 import { modalType } from "../../../../lib/constants/enumerations";
+import moment from "moment";
 
 class AdsModal extends Component {
   constructor(props, context) {
@@ -18,8 +19,8 @@ class AdsModal extends Component {
         target_group: "male-female",
         call_to_action_button: "",
         insert_link: "",
-        start_date: "",
-        end_date: "",
+        start_date: moment().format("MM/DD/YYYY"),
+        end_date: moment().format("MM/DD/YYYY"),
         daily_budget: "",
         invoice_recipient: "",
         street: "",
@@ -45,6 +46,12 @@ class AdsModal extends Component {
     console.log(this.state.form);
   };
 
+  handleDate = (date, forThat) => {
+    const { form } = this.state;
+    form[forThat] = date;
+    this.setState({ form });
+  };
+
   handleChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
@@ -59,7 +66,6 @@ class AdsModal extends Component {
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {
       this.setState({ stepIndex: 0 });
-      this.forceUpdate();
     }
   }
 
@@ -119,6 +125,7 @@ class AdsModal extends Component {
             handleChangeField={this.handleChangeField}
             form={form}
             handleSubmit={this.handleSubmit}
+            handleDate={this.handleDate}
           />
         }
       />

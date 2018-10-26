@@ -22,6 +22,7 @@ import {
 } from "../../back-office";
 
 import * as settings from "../../web/user";
+import { PageNotFound } from "../../web/page-not-found";
 
 class BackOfficeHomeRoute extends Component {
   handleLanding = () => {
@@ -42,6 +43,10 @@ class BackOfficeHomeRoute extends Component {
 
   handleAds = () => {
     return <settings.Ads isBackOffice />;
+  };
+
+  handlePageNotFound = () => {
+    return <PageNotFound className={"page-not-found-wrapr"} />;
   };
 
   render() {
@@ -136,6 +141,7 @@ class BackOfficeHomeRoute extends Component {
             exact
             component={Users}
           />
+          <Route exact path="/*" component={this.handlePageNotFound} />
         </Switch>
       </div>
     );

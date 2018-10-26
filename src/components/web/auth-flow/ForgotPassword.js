@@ -22,7 +22,7 @@ const ForgotPassword = () => (
         </div>
       </div>
     </section>
-    <BaseFooter />
+    <BaseFooter className={"custom-container"} />
   </div>
 );
 
