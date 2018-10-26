@@ -278,7 +278,7 @@ class EditProfile extends Component {
                 <div className="social-link">
                   {/* <div className="link">www.facebook.com</div> */}
                   <span className="fa fa-facebook" />
-                  <span className="social-text">facebook</span>
+                  <span className="social-text">Facebook</span>
                   <button type="button" className="btn-blu">
                     Connect
                   </button>
