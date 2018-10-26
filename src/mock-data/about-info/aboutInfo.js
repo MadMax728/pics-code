@@ -57,10 +57,6 @@ export const aboutInfo = {
     facebook: "www.facebook.com",
     instagram: "www.instagram.com",
     youtube: "www.youtube.com",
-    linkedIn: "www.linkedin.com",
-    twitter: "www.twitter.com",
-    tumblr: "www.tumblr.com",
-    pintrest: "www.pintrest.com",
-    googlePlus: "www.google-plus.com"
+    twitter: "www.twitter.com"
   }
 };
