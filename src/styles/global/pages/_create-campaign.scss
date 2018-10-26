@@ -231,17 +231,22 @@
                 width: 2.2rem;
                 font-size: 12px;
               }
-              .react-datepicker__day {
+              .react-datepicker__day,
+              :not(.react-datepicker__day.react-datepicker__day--fri.react-datepicker__day--selected.react-datepicker__day--today) {
                 background: #d8d8d8;
                 border: 1px solid #979797;
               }
-              .react-datepicker__day--selected {
+              .react-datepicker__day.react-datepicker__day--fri.react-datepicker__day--selected.react-datepicker__day--today,
+              .react-datepicker__day.react-datepicker__day--fri.react-datepicker__day--selected {
                 background-image: radial-gradient(
                   circle at 0 100%,
                   #1f58a6,
                   #029bd7
                 );
-                color: white;
+              }
+              // .react-datepicker__day--selected ,
+              .react-datepicker__day.react-datepicker__day--thu.react-datepicker__day--outside-month,
+              .react-datepicker__day.highlighted {
                 border-radius: 0px;
               }
               button.react-datepicker__navigation.react-datepicker__navigation--previous {
@@ -302,7 +307,6 @@
       p {
         margin-bottom: 25px;
       }
-
       .title {
         font-family: "Helvetica-Bold";
         font-size: 20px;
@@ -373,7 +377,10 @@
           .editor-class.rdw-editor-main {
             border: 1px solid #333333;
             border-top: 0px;
-            height: 338px;
+            height: 318px;
+            .DraftEditor-root {
+              height: 95%;
+            }
           }
         }
       }
