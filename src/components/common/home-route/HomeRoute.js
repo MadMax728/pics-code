@@ -58,6 +58,10 @@ class HomeRoute extends Component {
     return <Landing handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
+  handleEditProfile = () => {
+    return <EditProfile handleModalInfoShow={this.props.handleModalInfoShow} />;
+  };
+
   handlePageNotFound = () => {
     return <PageNotFound className={"page-not-found-wrapr padding72"} />;
   };
@@ -130,7 +134,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_EDIT_PROFILE_ROUTE}
-            component={EditProfile}
+            component={this.handleEditProfile}
           />
 
           <Route

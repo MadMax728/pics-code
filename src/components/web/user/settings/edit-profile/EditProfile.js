@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import Social from "./Social";
+import PropTypes from "prop-types";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -74,6 +75,8 @@ class EditProfile extends Component {
 
   handleOnKeyDown = () => {};
 
+  handleEditProfile = () => {};
+
   render() {
     const { form } = this.state;
 
@@ -94,7 +97,7 @@ class EditProfile extends Component {
                     Select a file...
                   </label> */}
                 </div>
-                <div>Edit profile image</div>
+                <div onClick={this.handleEditProfile}>Edit profile image</div>
               </div>
             </div>
             <div className="general-information-wrapper">
@@ -374,5 +377,9 @@ class EditProfile extends Component {
     );
   }
 }
+
+EditProfile.propTypes = {
+  handleModalInfoShow: PropTypes.func.isRequired
+};
 
 export default EditProfile;
