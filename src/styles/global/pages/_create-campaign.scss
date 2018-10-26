@@ -153,6 +153,7 @@
       text-align: right;
       padding-bottom: 15px;
       background: $white_color;
+      height: 100%;
       img {
         width: 30px;
         margin-right: 15px;
@@ -215,6 +216,71 @@
           position: static;
           border-right: 0;
         }
+        .input-group {
+          .react-datepicker-popper {
+            .react-datepicker {
+              .react-datepicker__month {
+                margin-top: 0;
+              }
+              .react-datepicker__day-name {
+                font-weight: bold;
+              }
+              .react-datepicker__day-name,
+              .react-datepicker__day,
+              .react-datepicker__time-name {
+                width: 2.2rem;
+                font-size: 12px;
+              }
+              .react-datepicker__day {
+                background: #d8d8d8;
+                border: 1px solid #979797;
+              }
+              .react-datepicker__day--selected {
+                background-image: radial-gradient(
+                  circle at 0 100%,
+                  #1f58a6,
+                  #029bd7
+                );
+                color: white;
+                border-radius: 0px;
+              }
+              button.react-datepicker__navigation.react-datepicker__navigation--previous {
+                position: absolute;
+                top: 5px;
+                left: 0;
+                height: 10px;
+                border-right-color: #fff;
+                width: 10px;
+              }
+              button.react-datepicker__navigation.react-datepicker__navigation--next {
+                position: absolute;
+                top: 5px;
+                right: 0;
+                height: 10px;
+                border-left-color: #fff;
+                width: 10px;
+              }
+              .react-datepicker__header {
+                padding-top: 0px;
+                border-bottom: 0px;
+                .react-datepicker__current-month {
+                  padding: 8px 0;
+                  background-image: radial-gradient(
+                    circle at 0 100%,
+                    #1f58a6,
+                    #029bd7
+                  );
+                  color: white;
+                  font-size: 12px;
+                }
+              }
+              .react-datepicker__day-names {
+                background-color: white;
+                padding: 3px 0;
+              }
+            }
+          }
+        }
         .input-group-addon {
           border-radius: 0;
           background: #fff;
@@ -222,11 +288,17 @@
           border-right: 1px solid #979797;
           border-bottom: 1px solid #979797;
         }
+        &:nth-child(2) {
+          .react-datepicker-popper {
+            left: -10px !important;
+          }
+        }
       }
     }
     padding: 0px;
     .create-campaign-wrapper {
       padding: 20px 30px;
+      padding: 20px 10px;
       p {
         margin-bottom: 25px;
       }
@@ -234,6 +306,76 @@
       .title {
         font-family: "Helvetica-Bold";
         font-size: 20px;
+        margin-bottom: 20px;
+      }
+      .create-compaign-editor {
+        .wrapper-class.rdw-editor-wrapper {
+          .rdw-editor-toolbar.toolbar-class {
+            border-color: #333333;
+            margin-bottom: 0px;
+            .rdw-option-wrapper {
+              border: 0px;
+              width: 34px;
+            }
+            .rdw-inline-wrapper {
+              order: 2;
+            }
+            .rdw-dropdown-wrapper {
+              order: 1;
+              width: 65px;
+              border: 0;
+              position: relative;
+              a {
+                color: black;
+              }
+              &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 1px;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.12);
+              }
+              .rdw-dropdown-carettoopen {
+                margin-right: 5px;
+              }
+            }
+            .rdw-text-align-wrapper {
+              order: 4;
+              position: relative;
+              &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 1px;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.12);
+              }
+            }
+            .rdw-colorpicker-wrapper {
+              order: 3;
+              &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 1px;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.12);
+              }
+            }
+            .rdw-history-wrapper {
+              order: 5;
+            }
+          }
+          .editor-class.rdw-editor-main {
+            border: 1px solid #333333;
+            border-top: 0px;
+            height: 338px;
+          }
+        }
       }
       input {
         width: 100%;
