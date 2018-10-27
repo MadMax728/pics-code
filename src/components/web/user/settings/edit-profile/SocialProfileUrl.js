@@ -29,7 +29,7 @@ const SocialProfileUrl = ({
         )}
         {publicUrl && (
           <div>
-            <a href={publicUrl} target="_blank">
+            <a href={publicUrl} target="_blank" rel="noopener noreferrer">
               {userName ? userName : "Profile"}
             </a>
             <span aria-hidden="true" onClick={handleSocialClear}>
