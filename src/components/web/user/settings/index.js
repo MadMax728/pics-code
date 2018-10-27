@@ -15,5 +15,4 @@ export {
   SettingAdsRight,
   SettingAdsStatisticsRight
 } from "./ads";
-export { SocialConnect, SocialConnectHeader } from "./social-connect";
 export { EditProfilePic, EditProfilePicHeader } from "./edit-profile-pic";

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../../lib/constants/enumerations";
+import SocialNetworks from "./SocialNetworks";
 
 class EditProfile extends Component {
   constructor(props) {
@@ -24,15 +25,7 @@ class EditProfile extends Component {
         website: "",
         profile_description: "",
         offer_tag: "",
-        inquiry_tag: "",
-        facebook: "",
-        isConnectFacebook: false,
-        instagram: "",
-        isConnectInstagram: true,
-        youtube: "",
-        isConnectYoutube: false,
-        twitter: "",
-        isConnectTwitter: false
+        inquiry_tag: ""
       }
     };
   }
@@ -47,7 +40,6 @@ class EditProfile extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   // handelSubmit called when click on submit
@@ -56,34 +48,14 @@ class EditProfile extends Component {
     console.log(this.state.form);
   };
 
-  handleSocialMediaConnect = e => {
-    console.log("handleSocialMediaConnect");
-    console.log(e.target.id);
-  };
-
-  handleSocialMediaChange = e => {
-    console.log("handleSocialMediaChange");
-    console.log(e.target.id);
-  };
-
-  handleSocialMediaRemove = e => {
-    console.log("handleSocialMediaRemove");
-    console.log(e.target.id);
-  };
-
   handleOnKeyDown = () => {};
 
   handleEditProfile = () => {
     this.props.handleModalInfoShow(modalType.edit_profile);
   };
 
-  handleSocialConnect = () => {
-    this.props.handleModalInfoShow(modalType.social_connect);
-  };
-
   render() {
     const { form } = this.state;
-
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="edit-profile-form">
@@ -98,8 +70,8 @@ class EditProfile extends Component {
                 <div className="input-file-container">
                   {/* <input className="input-file" id="my-file" type="file" /> */}
                   {/* <label tabindex="0" for="my-file" className="input-file-trigger">
-                    Select a file...
-                  </label> */}
+                      Select a file...
+                    </label> */}
                 </div>
                 <div
                   onClick={this.handleEditProfile}
@@ -285,106 +257,7 @@ class EditProfile extends Component {
                 />
               </div>
             </div>
-            <div className="form-subtitle">Social Network URL</div>
-            <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
-              <div className="form-group margin-bottom-15 social-media">
-                {/* <label htmlFor="facebook">Facebook</label> */}
-                <div className="social-link">
-                  {/* <div className="link">www.facebook.com</div> */}
-                  <span className="fa fa-facebook" />
-                  <span className="social-text">facebook</span>
-                  <button
-                    type="button"
-                    className="btn-blu"
-                    onClick={this.handleSocialConnect}
-                  >
-                    Connect
-                  </button>
-                  <div className="hidden-text">
-                    hidden text
-                    <span aria-hidden="true">x</span>
-                  </div>
-                  {/* <Social
-                    handleOnKeyDown={this.handleOnKeyDown}
-                    socialMedia={form.isConnectFacebook}
-                    id={"facebook"}
-                    handleSocialMediaChange={this.handleSocialMediaChange}
-                    handleSocialMediaRemove={this.handleSocialMediaRemove}
-                    handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  /> */}
-                </div>
-              </div>
-
-              <div className="form-group margin-bottom-15 social-media">
-                {/* <label htmlFor="instagram">Instagram</label> */}
-                <div className="social-link">
-                  {/* <div className="link">www.instagram.com</div> */}
-                  <span className="fa fa-instagram" />
-                  <span className="social-text">Instagram</span>
-                  <button type="button" className="btn-blu">
-                    Connect
-                  </button>
-                  <div className="hidden-text">
-                    hidden text
-                    <span aria-hidden="true">x</span>
-                  </div>
-                  {/* <Social
-                    handleOnKeyDown={this.handleOnKeyDown}
-                    socialMedia={form.isConnectInstagram}
-                    id={"instagram"}
-                    handleSocialMediaChange={this.handleSocialMediaChange}
-                    handleSocialMediaRemove={this.handleSocialMediaRemove}
-                    handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  /> */}
-                </div>
-              </div>
-              <div className="form-group margin-bottom-15 social-media">
-                {/* <label htmlFor="youtube">Youtube</label> */}
-                <div className="social-link">
-                  {/* <div className="link">www.youtube.com</div> */}
-                  <span className="fa fa-youtube" />
-                  <span className="social-text">YouTube</span>
-                  <button type="button" className="btn-blu">
-                    Connect
-                  </button>
-                  <div className="hidden-text">
-                    hidden text
-                    <span aria-hidden="true">x</span>
-                  </div>
-                  {/* <Social
-                    handleOnKeyDown={this.handleOnKeyDown}
-                    socialMedia={form.isConnectYoutube}
-                    id={"youtube"}
-                    handleSocialMediaChange={this.handleSocialMediaChange}
-                    handleSocialMediaRemove={this.handleSocialMediaRemove}
-                    handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  /> */}
-                </div>
-              </div>
-              <div className="form-group margin-bottom-15 social-media">
-                {/* <label htmlFor="twitter">Twitter</label> */}
-                <div className="social-link">
-                  {/* <div className="link">www.twitter.com</div> */}
-                  <span className="fa fa-twitter" />
-                  <span className="social-text">Twitter</span>
-                  <button type="button" className="btn-blu">
-                    Connect
-                  </button>
-                  <div className="hidden-text">
-                    hidden text
-                    <span aria-hidden="true">x</span>
-                  </div>
-                  {/* <Social
-                    handleOnKeyDown={this.handleOnKeyDown}
-                    socialMedia={form.isConnectTwitter}
-                    id={"twitter"}
-                    handleSocialMediaChange={this.handleSocialMediaChange}
-                    handleSocialMediaRemove={this.handleSocialMediaRemove}
-                    handleSocialMediaConnect={this.handleSocialMediaConnect}
-                  /> */}
-                </div>
-              </div>
-            </div>
+            <SocialNetworks userId={"123"} />
             <div className="form-group margin-bottom-30">
               <button className="black_button" onClick={this.handleSubmit}>
                 save

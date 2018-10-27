@@ -7,4 +7,3 @@ export { ContentViewModal } from "./content-view-modal";
 export { ProcessedModal } from "./processed-modal";
 export { PostPopUpModal } from "./post-pop-up-modal";
 export { EditProfileModal } from "./edit-profile-modal";
-export { SocialConnectModal } from "./social-connect-modal";
