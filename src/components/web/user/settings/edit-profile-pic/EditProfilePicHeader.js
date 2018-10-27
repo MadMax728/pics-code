@@ -10,7 +10,7 @@ class EditProfilePicHeader extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-sm-6 modal-title">Edit Profile</div>
+        <div className="col-sm-6 modal-title">Edit Profile Image</div>
         <div className="col-sm-6 text-right">
           <button className="black_button" onClick={this.props.handleModalHide}>
             Cancel
