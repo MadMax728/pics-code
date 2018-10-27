@@ -43,6 +43,7 @@ const SocialProfileUrl = ({
 };
 
 SocialProfileUrl.propTypes = {
+  id: propTypes.string.isRequired,
   title: propTypes.string.isRequired,
   publicUrl: propTypes.string,
   isConnectInProgress: propTypes.bool,

@@ -97,8 +97,8 @@ class SocialNetworks extends Component {
     const baseUrl = process.env.REACT_APP_API_BASEURL;
     let authUrl = "";
     switch (provider) {
-      case "twitter":
-        authUrl = `${baseUrl}auth/twitter/connect`;
+      case "facebook":
+        authUrl = `${baseUrl}auth/facebook/connect`;
         break;
       case "twitter":
         authUrl = `${baseUrl}auth/twitter/connect`;
