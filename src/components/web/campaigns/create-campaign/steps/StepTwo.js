@@ -14,7 +14,9 @@ class StepTwo extends Component {
       <div className="modal-body">
         <div className="col-sm-7 create-campaign-wrapper">
           <div className="title">Title</div>
-          <TextEditor />
+          <div className="create-compaign-editor">
+            <TextEditor />
+          </div>
         </div>
         <div className="col-sm-5 no-padding disp-flex">
           <div className="editor-options">
