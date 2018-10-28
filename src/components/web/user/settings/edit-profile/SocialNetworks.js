@@ -81,7 +81,7 @@ class SocialNetworks extends Component {
     }
 
     if (this.socialPopoutClosed) {
-      let pollTimer = window.setInterval(() => {
+      const pollTimer = window.setInterval(() => {
         if (newWindow.closed !== false) {
           // !== is required for compatibility with Opera
           window.clearInterval(pollTimer);
@@ -159,7 +159,7 @@ class SocialNetworks extends Component {
       <div>
         <div className="form-subtitle">Social Network URL</div>
         <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
-          {socialNetworks.map((socialNetwork, index) => {
+          {socialNetworks.map(socialNetwork => {
             return (
               <SocialProfileUrl
                 key={socialNetwork.socialNetworkType}
