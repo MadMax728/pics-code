@@ -32,7 +32,7 @@ const SocialProfileUrl = ({
             <a href={publicUrl} target="_blank" rel="noopener noreferrer">
               {userName ? userName : "Profile"}
             </a>
-            <span aria-hidden="true" onClick={handleSocialClear}>
+            <span id={id} aria-hidden="true" onClick={handleSocialClear}>
               &nbsp; <i className="fa fa-times" />
             </span>
           </div>

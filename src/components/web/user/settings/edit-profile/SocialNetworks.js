@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
+import * as _ from "lodash";
 import SocialProfileUrl from "./SocialProfileUrl";
 
-const socialNetworks = [
+const socialNetworksAll = [
   {
     socialNetworkType: "facebook",
     title: "Facebook",
@@ -34,7 +35,8 @@ class SocialNetworks extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isConnectInProgress: false
+      isConnectInProgress: false,
+      socialNetworks: socialNetworksAll
     };
   }
 
@@ -93,6 +95,11 @@ class SocialNetworks extends Component {
    * social connect to calling popup
    */
   handleSocialConnect = e => {
+    // if connection is in progress
+    if (this.state.isConnectInProgress) {
+      return;
+    }
+
     const provider = e.target.id;
     const baseUrl = process.env.REACT_APP_API_BASEURL;
     let authUrl = "";
@@ -112,7 +119,6 @@ class SocialNetworks extends Component {
     }
     this.setState({ isConnectInProgress: true }, () => {
       // open popup based on auth url
-      console.log(this.state.isConnectInProgress);
       if (authUrl) this.openPopup(authUrl, provider, 500, 500);
     });
   };
@@ -127,9 +133,28 @@ class SocialNetworks extends Component {
   /**
    * This method is called when we clear social network
    */
-  handleSocialClear = () => {};
+  handleSocialClear = e => {
+    const provider = e.currentTarget.id;
+    const { socialNetworks } = this.state;
+    const socialNetwork = _.find(socialNetworks, {
+      socialNetworkType: provider
+    });
+    // Find item index using _.findIndex
+    const index = _.findIndex(socialNetworks, { socialNetworkType: provider });
+
+    if (socialNetwork && socialNetwork.publicUrl) {
+      socialNetwork.publicUrl = "";
+      socialNetwork.userName = "";
+    }
+
+    // Replace item at index using native splice
+    socialNetworks.splice(index, 1, socialNetwork);
+
+    this.setState({ socialNetworks });
+  };
 
   render() {
+    const { socialNetworks } = this.state;
     return (
       <div>
         <div className="form-subtitle">Social Network URL</div>
