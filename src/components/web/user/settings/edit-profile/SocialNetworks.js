@@ -44,25 +44,25 @@ class SocialNetworks extends Component {
   // passes along the socket id so it can be used to send back user
   // data to the appropriate socket on the connected client.
   openPopup = (url, title, w, h) => {
-    let dualScreenLeft =
+    const dualScreenLeft =
       window.screenLeft !== undefined ? window.screenLeft : window.screenX;
-    let dualScreenTop =
+    const dualScreenTop =
       window.screenTop !== undefined ? window.screenTop : window.screenY;
 
-    let width = window.innerWidth
+    const width = window.innerWidth
       ? window.innerWidth
       : document.documentElement.clientWidth
         ? document.documentElement.clientWidth
         : window.screen.width;
-    let height = window.innerHeight
+    const height = window.innerHeight
       ? window.innerHeight
       : document.documentElement.clientHeight
         ? document.documentElement.clientHeight
         : window.screen.height;
 
-    let left = width / 2 - w / 2 + dualScreenLeft;
-    let top = height / 2 - h / 2 + dualScreenTop;
-    let newWindow = window.open(
+    const left = width / 2 - w / 2 + dualScreenLeft;
+    const top = height / 2 - h / 2 + dualScreenTop;
+    const newWindow = window.open(
       url,
       title,
       "scrollbars=yes, width=" +
