@@ -70,6 +70,11 @@ class AdsModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
+  handleResoreState = () => {
+    this.setState({
+      form: {}
+    });
+  };
 
   handleNext = () => {
     const { stepIndex } = this.state;
@@ -122,6 +127,7 @@ class AdsModal extends Component {
         header
         modalHeaderContent={
           <CreateAdsHeader
+            handleResoreState={this.handleResoreState}
             handleModalHide={handleModalHide}
             handleNext={this.handleNext}
             handlePrev={this.handlePrev}
@@ -153,7 +159,8 @@ AdsModal.propTypes = {
   modalShow: propTypes.bool,
   handleModalHide: propTypes.func,
   handleModalInfoMsgShow: propTypes.func,
-  uploadFile: propTypes.func
+  uploadFile: propTypes.func,
+  handleResoreState: propTypes.func
 };
 
 export default AdsModal;

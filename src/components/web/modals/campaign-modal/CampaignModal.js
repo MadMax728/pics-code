@@ -110,7 +110,11 @@ class CampaignModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
-
+  handleResoreState = () => {
+    this.setState({
+      form: {}
+    });
+  };
   handlePrivewOpen = () => {
     console.log("ahikhvjksn");
 
@@ -168,6 +172,7 @@ class CampaignModal extends Component {
               handlePrev={this.handlePrev}
               stepIndex={this.state.stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
+              handleResoreState={this.handleResoreState}
             />
           ) : (
             <CreateCreatorCampaignHeader
