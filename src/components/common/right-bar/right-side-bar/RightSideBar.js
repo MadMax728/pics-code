@@ -33,6 +33,10 @@ class RightSideBar extends Component {
     return <SettingAdsRight handleModalShow={this.props.handleModalShow} />;
   };
 
+  handleCommunity = () => {
+    return <Community handleMessageBar={this.props.handleMessageBar} />;
+  };
+
   render() {
     return (
       <div>
@@ -76,16 +80,41 @@ class RightSideBar extends Component {
 
         {/* ,,,,,, community ...... */}
 
-        <Route path={routes.MY_PROFILE_ROUTE} exact component={Community} />
-        <Route path={routes.NEWS_FEED_ROUTE} exact component={Community} />
+        <Route
+          path={routes.MY_PROFILE_ROUTE}
+          exact
+          component={this.handleCommunity}
+        />
+        <Route
+          path={routes.NEWS_FEED_ROUTE}
+          exact
+          component={this.handleCommunity}
+        />
         <Route
           path={routes.OTHER_NEWS_FEED_ROUTE}
           exact
-          component={Community}
+          component={this.handleCommunity}
         />
-        <Route path={routes.OTHER_ABOUT_ROUTE} exact component={Community} />
-        <Route path={routes.ABOUT_ROUTE} exact component={Community} />
-        <Route path={routes.SAVED_ROUTE} exact component={Community} />
+        <Route
+          path={routes.OTHER_ABOUT_ROUTE}
+          exact
+          component={this.handleCommunity}
+        />
+        <Route
+          path={routes.OTHER_SAVED_ROUTE}
+          exact
+          component={this.handleCommunity}
+        />
+        <Route
+          path={routes.ABOUT_ROUTE}
+          exact
+          component={this.handleCommunity}
+        />
+        <Route
+          path={routes.SAVED_ROUTE}
+          exact
+          component={this.handleCommunity}
+        />
 
         {/* ,,,,,, community ...... */}
 
@@ -140,7 +169,8 @@ class RightSideBar extends Component {
 }
 
 RightSideBar.propTypes = {
-  handleModalShow: propTypes.func
+  handleModalShow: propTypes.func,
+  handleMessageBar: propTypes.func.isRequired
 };
 
 export default RightSideBar;

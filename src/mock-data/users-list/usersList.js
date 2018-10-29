@@ -4,6 +4,7 @@ export const users_list = [
   {
     id: 1,
     name: "Rolf Hegdal",
+    subscribed: true,
     username: "r.hegdal",
     image: images.pic_1,
     date: "10.10.2000",
@@ -13,6 +14,7 @@ export const users_list = [
   {
     id: 2,
     name: "Rolf Hegdal",
+    subscribed: false,
     username: "r.hegdal",
     image: images.pic_2,
     date: "10.10.2000",
@@ -22,6 +24,7 @@ export const users_list = [
   {
     id: 3,
     name: "Rolf Hegdal",
+    subscribed: false,
     username: "r.hegdal",
     image: images.pic_2,
     date: "10.10.2000",
@@ -31,6 +34,7 @@ export const users_list = [
   {
     id: 4,
     name: "Rolf Hegdal",
+    subscribed: true,
     username: "r.hegdal",
     image: images.pic_1,
     date: "10.10.2000",
@@ -40,6 +44,7 @@ export const users_list = [
   {
     id: 5,
     name: "Rolf Hegdal",
+    subscribed: false,
     username: "r.hegdal",
     image: images.pic_2,
     date: "10.10.2000",
@@ -49,6 +54,7 @@ export const users_list = [
   {
     id: 6,
     name: "Rolf Hegdal",
+    subscribed: false,
     username: "r.hegdal",
     image: images.pic_1,
     date: "10.10.2000",
@@ -58,6 +64,7 @@ export const users_list = [
   {
     id: 7,
     name: "Rolf Hegdal",
+    subscribed: false,
     username: "r.hegdal",
     image: images.pic_2,
     date: "10.10.2000",

@@ -7,7 +7,8 @@ import {
   TopBarInfo,
   CustomModal,
   InfoModal,
-  HomeRoute
+  HomeRoute,
+  MessageBar
 } from "../components/common";
 
 class Home extends Component {
@@ -18,7 +19,8 @@ class Home extends Component {
       modalType: "",
       modalInfoShow: false,
       modalInfoType: "",
-      modalInfoMsg: ""
+      modalInfoMsg: "",
+      message: ""
     };
   }
 
@@ -51,11 +53,19 @@ class Home extends Component {
     console.log(filterData);
   }
 
+  handleMessageBar = messages => {
+    this.setState({ message: messages });
+  };
+
   render() {
+    const { message } = this.state;
+
     return (
       <div>
         <Header handleModalShow={this.handleModalShow} />
         <section>
+          <MessageBar message={message} />
+
           <CustomModal
             modalShow={this.state.modalShow}
             handleModalHide={this.handleModalHide}
@@ -86,7 +96,10 @@ class Home extends Component {
               </div>
 
               <div className="right_bar no-padding">
-                <RightSideBar handleModalShow={this.handleModalShow} />
+                <RightSideBar
+                  handleModalShow={this.handleModalShow}
+                  handleMessageBar={this.handleMessageBar}
+                />
               </div>
             </div>
           </div>

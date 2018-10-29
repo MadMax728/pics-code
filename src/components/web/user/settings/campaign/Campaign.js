@@ -23,8 +23,8 @@ class SettingCampaign extends Component {
         <div className="feed_wrapper">
           {setting_campaigns.map((campaign, index) => {
             const profile_route = campaign.user.isOwner
-              ? `/news_feed`
-              : `/news_feed/${campaign.id}`;
+              ? `/news-feed`
+              : `/news-feed/${campaign.id}`;
             return (
               <div key={index}>
                 <div className="feed_header">
