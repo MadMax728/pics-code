@@ -21,24 +21,31 @@ class CreateAds extends Component {
       form,
       handleChangeField,
       handleSubmit,
-      handleDate
+      handleDate,
+      uploadFile
     } = this.props;
 
     return (
       <div>
         {stepIndex === 0 && (
-          <StepOne handleChangeField={handleChangeField} form={form} />
+          <StepOne
+            handleChangeField={handleChangeField}
+            uploadFile={uploadFile}
+            form={form}
+          />
         )}
         {stepIndex === 1 && (
           <StepTwo
             handleChangeField={handleChangeField}
             handleDate={handleDate}
+            form={form}
           />
         )}
         {stepIndex === 2 && (
           <PaymentStepOne
             forThat={forThat}
             handleChangeField={handleChangeField}
+            form={form}
           />
         )}
         {stepIndex === 3 && (
@@ -69,7 +76,8 @@ CreateAds.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   handleSubmit: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
-  handleDate: propTypes.func.isRequired
+  handleDate: propTypes.func.isRequired,
+  uploadFile: propTypes.func.isRequired
 };
 
 export default CreateAds;

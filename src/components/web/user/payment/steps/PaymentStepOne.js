@@ -8,6 +8,7 @@ class PaymentStepOne extends Component {
   }
 
   render() {
+    console.log("invoice_recipient", this.props.form);
     const { handleChangeField } = this.props;
 
     return (
@@ -22,34 +23,57 @@ class PaymentStepOne extends Component {
               <input
                 type="text"
                 name="invoice_recipient"
+                value={this.props.form.invoice_recipient}
                 onChange={handleChangeField}
               />
             </div>
             <div className="form-group">
               <label htmlFor="Location">Street, number</label>
-              <input type="text" name="street" onChange={handleChangeField} />
-              <input type="text" name="number" onChange={handleChangeField} />
+              <input
+                type="text"
+                name="street"
+                value={this.props.form.street}
+                onChange={handleChangeField}
+              />
+              <input
+                type="text"
+                name="number"
+                value={this.props.form.number}
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="title">Postal Code</label>
               <input
                 type="text"
                 name="postal_code"
+                value={this.props.form.postal_code}
                 onChange={handleChangeField}
               />
             </div>
             <div className="form-group">
               <label htmlFor="title">City</label>
-              <input type="text" name="city" onChange={handleChangeField} />
+              <input
+                type="text"
+                name="city"
+                value={this.props.form.city}
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="title">Country</label>
-              <input type="text" name="country" onChange={handleChangeField} />
+              <input
+                type="text"
+                name="country"
+                value={this.props.form.country}
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="title">VAT Identification Number</label>
               <input
                 type="text"
+                value={this.props.form.vat_identification_number}
                 name="vat_identification_number"
                 onChange={handleChangeField}
               />
@@ -114,6 +138,7 @@ class PaymentStepOne extends Component {
 }
 
 PaymentStepOne.propTypes = {
+  form: propTypes.any.isRequired,
   handleChangeField: propTypes.func.isRequired
 };
 

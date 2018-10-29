@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class Feed extends Component {
   constructor(props, context) {
@@ -16,11 +17,15 @@ class Feed extends Component {
   };
 
   handleMessage = e => {
-    this.props.handleFavorite(e);
+    this.props.handleMessage(e);
   };
 
   handleOnKeyDown = () => {};
 
+  handleModalInfoShow = () => {
+    console.log(this.props.handleModalInfoShow);
+    this.props.handleModalInfoShow(modalType.post_pop_up);
+  };
   render() {
     const { campaign, handleModalInfoShow, handleFavorite } = this.props;
 
@@ -59,7 +64,7 @@ class Feed extends Component {
               alt="profile"
               onClick={this.handleMessage}
               role="presentation"
-              id={campaign.id}
+              id={campaign.user.id}
               onKeyDown={this.handleOnKeyDown}
             />
           </div>
@@ -88,7 +93,14 @@ class Feed extends Component {
             )}
           </div>
           <div className="show_more_options">
-            <div>• • •</div>
+            <div
+              onClick={this.handleModalInfoShow}
+              role="button"
+              onKeyDown={this.handleOnKeyDown}
+              tabIndex="0"
+            >
+              • • •
+            </div>
           </div>
         </div>
       </div>
@@ -98,6 +110,7 @@ class Feed extends Component {
 
 Feed.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
+  handleMessage: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
     user: PropTypes.shape({

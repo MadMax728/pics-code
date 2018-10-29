@@ -16,17 +16,17 @@ class StepThree extends Component {
 
   handleStartDateChange = date => {
     this.setState({ start_date: date });
-    this.props.handleDate(date.format("MM/DD/YYYY"), "start_date");
+    this.props.handleDate(date, "start_date");
   };
 
   handleEndDateChange = date => {
     this.setState({ end_date: date });
-    this.props.handleDate(date.format("MM/DD/YYYY"), "end_date");
+    this.props.handleDate(date, "end_date");
   };
 
   render() {
     const { handleChangeField } = this.props;
-
+    console.log("formobject", this.props.form);
     return (
       <div className="modal-body">
         <div className="col-sm-5 upload-form">
@@ -37,7 +37,7 @@ class StepThree extends Component {
                 <label htmlFor="Start">Start</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.state.start_date}
+                    selected={this.props.form.start_date}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -49,7 +49,7 @@ class StepThree extends Component {
                 <label htmlFor="End">End</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.state.end_date}
+                    selected={this.props.form.end_date}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -61,7 +61,11 @@ class StepThree extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="Define">Define daily budget</label>
-            <select onBlur={handleChangeField} name="daily_budget">
+            <select
+              onBlur={handleChangeField}
+              value={this.props.form.daily_budget}
+              name="daily_budget"
+            >
               <option value="100 E">100 E</option>
               <option value="200 E">200 E</option>
               <option value="300 E">300 E</option>
@@ -146,6 +150,7 @@ class StepThree extends Component {
 
 StepThree.propTypes = {
   handleChangeField: propTypes.func.isRequired,
+  form: propTypes.any.isRequired,
   handleDate: propTypes.func.isRequired
 };
 

@@ -2,84 +2,60 @@ import React, { Component } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import Preview from "./Preview";
+import propTypes from "prop-types";
 
 class EditProfilePic extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      image: null,
-      allowZoomOut: false,
-      position: {
-        x: 0.5,
-        y: 0.5
-      },
-      scale: 1,
-      borderRadius: 0,
-      preview: null,
-      width: 250,
-      height: 250
-    };
+    this.state = {};
   }
 
-  handleNewImage = e => {
-    this.setState({ image: e.target.files[0] });
-  };
-
-  handleSave = () => {
-    const img = this.editor.getImageScaledToCanvas().toDataURL();
-    this.setState({ preview: img });
-  };
-
-  handleScale = e => {
-    const scale = parseFloat(e.target.value);
-    this.setState({ scale });
-  };
-
-  logCallback = e => {
-    // eslint-disable-next-line
-    console.log("callback", e);
-  };
-
-  setEditorRef = editor => {
-    if (editor) this.editor = editor;
-  };
-
-  handlePositionChange = position => {
-    this.setState({ position });
-  };
-
-  handleDrop = acceptedFiles => {
-    this.setState({ image: acceptedFiles[0] });
-  };
-
   render() {
-    const { image } = this.state;
+    const {
+      handleNewImage,
+      image,
+      handleDrop,
+      scale,
+      width,
+      height,
+      position,
+      allowZoomOut,
+      setEditorRef,
+      handlePositionChange,
+      handleScale,
+      borderRadius,
+      preview,
+      logCallback,
+      handleSave
+    } = this.props;
+    console.log(image);
+
     return (
       <div className="col-xs-12 upload-profile-wrapr">
         {image !== null ? (
           <Dropzone
-            onDrop={this.handleDrop}
+            onDrop={handleDrop}
             disableClick
             multiple={false}
             style={{
-              width: this.state.width,
-              height: this.state.height,
+              width: width,
+              height: height,
               marginBottom: "35px"
             }}
           >
             <div className="col-xs-12 textCenter">
               <AvatarEditor
-                ref={this.setEditorRef}
-                scale={parseFloat(this.state.scale)}
-                width={this.state.width}
-                height={this.state.height}
-                position={this.state.position}
-                onPositionChange={this.handlePositionChange}
-                borderRadius={100 / this.state.borderRadius}
-                onLoadFailure={this.logCallback("onLoadFailed")}
-                onLoadSuccess={this.logCallback("onLoadSuccess")}
-                onImageReady={this.logCallback("onImageReady")}
-                image={this.state.image}
+                ref={setEditorRef}
+                scale={parseFloat(scale)}
+                width={width}
+                height={height}
+                position={position}
+                onPositionChange={handlePositionChange}
+                borderRadius={100 / borderRadius}
+                onLoadFailure={logCallback("onLoadFailed")}
+                onLoadSuccess={logCallback("onLoadSuccess")}
+                onImageReady={logCallback("onImageReady")}
+                image={image}
                 className="editor-canvas"
               />
             </div>
@@ -94,7 +70,7 @@ class EditProfilePic extends Component {
                 className="inputfile inputfile-2"
                 data-multiple-caption="{count} files selected"
                 multiple=""
-                onChange={this.handleNewImage}
+                onChange={handleNewImage}
               />
               <label htmlFor="file-2">
                 <svg
@@ -114,21 +90,34 @@ class EditProfilePic extends Component {
         <input
           name="scale"
           type="range"
-          onChange={this.handleScale}
-          min={this.state.allowZoomOut ? "0.1" : "1"}
+          onChange={handleScale}
+          min={allowZoomOut ? "0.1" : "1"}
           max="2"
           step="0.01"
           defaultValue="1"
         />
-        <br />
-        <input type="button" onClick={this.handleSave} value="Preview" />
-        <br />
-        {!!this.state.preview && (
-          <img src={this.state.preview} alt={"preview"} />
-        )}
       </div>
     );
   }
 }
+
+EditProfilePic.propTypes = {
+  handleNewImage: propTypes.func,
+  handleDrop: propTypes.func,
+  image: propTypes.any,
+  setEditorRef: propTypes.any,
+  scale: propTypes.any,
+  position: propTypes.any,
+  height: propTypes.any,
+  width: propTypes.any,
+  handlePositionChange: propTypes.func,
+  handleScale: propTypes.func,
+  borderRadius: propTypes.any,
+  preview: propTypes.any,
+  allowZoomOut: propTypes.bool,
+  logCallback: propTypes.any,
+  handleSave: propTypes.any,
+  handleEditor: propTypes.any
+};
 
 export default EditProfilePic;

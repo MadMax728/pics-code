@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Feed from "./Feed";
+import { modalType } from "../../../lib/constants/enumerations";
 
 const propTypes = {
   campaigns: PropTypes.array.isRequired,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
 };
 
 class NewsFeeds extends Component {
@@ -28,6 +30,10 @@ class NewsFeeds extends Component {
     this.setState({ campaigns });
   };
 
+  handleMessage = e => {
+    this.props.handleModalShow(modalType.messages, { id: e.target.id });
+  };
+
   render() {
     const { handleModalInfoShow } = this.props;
     const { campaigns } = this.state;
@@ -39,6 +45,7 @@ class NewsFeeds extends Component {
             campaign={campaign}
             handleModalInfoShow={handleModalInfoShow}
             handleFavorite={this.handleFavorite}
+            handleMessage={this.handleMessage}
           />
         </div>
       );
