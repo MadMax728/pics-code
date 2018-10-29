@@ -14,6 +14,7 @@ export const campaigns_list = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
+    isFavorite: false,
     id: 1
   },
   {
@@ -29,6 +30,7 @@ export const campaigns_list = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
+    isFavorite: true,
     id: 2
   },
   {
@@ -44,6 +46,7 @@ export const campaigns_list = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
+    isFavorite: false,
     id: 3
   }
 ];

@@ -67,6 +67,7 @@ export const COMPANY_ROUTE = "/campaign/company";
 export const CREATOR_ROUTE = "/campaign/creator";
 
 export const SAVED_ROUTE = "/saved";
+export const OTHER_SAVED_ROUTE = "/saved/:id";
 export const NEWS_FEED_ROUTE = "/news-feed";
 export const OTHER_NEWS_FEED_ROUTE = "/news-feed/:id";
 export const OTHER_ABOUT_ROUTE = "/about/:id";

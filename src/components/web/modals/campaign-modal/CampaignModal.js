@@ -81,12 +81,12 @@ class CampaignModal extends Component {
   };
 
   componentDidMount() {
-    this.setState({ stepIndex: 1 });
+    this.setState({ stepIndex: 0 });
   }
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 1 });
+      this.setState({ stepIndex: 0 });
     }
   }
 

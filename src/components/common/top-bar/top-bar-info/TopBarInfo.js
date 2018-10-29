@@ -45,6 +45,12 @@ class TopBarInfo extends Component {
           path={routes.OTHER_ABOUT_ROUTE}
           component={TopBarOtherInfo}
         />
+
+        <Route
+          exact
+          path={routes.OTHER_SAVED_ROUTE}
+          component={TopBarOtherInfo}
+        />
       </div>
     );
   }
