@@ -44,7 +44,7 @@ class StepOne extends Component {
                 type="text"
                 value={this.props.form.location}
                 name="location"
-                onChange={handleChangeField}
+                onBlur={handleChangeField}
               />
             </div>
             <div className="form-group">
@@ -52,7 +52,7 @@ class StepOne extends Component {
               <select
                 name="category"
                 value={this.props.form.category}
-                onChange={handleChangeField}
+                onBlur={handleChangeField}
               >
                 <option>Select category</option>
                 <option>Category 1</option>
@@ -171,7 +171,7 @@ class StepOne extends Component {
               <select
                 name="offer"
                 value={this.props.form.offer}
-                onChange={handleChangeField}
+                onBlur={handleChangeField}
               >
                 <option>Select offer</option>
                 <option>Offer 1</option>
@@ -194,7 +194,7 @@ class StepOne extends Component {
               <select
                 name="inquiry"
                 value={this.props.form.inquiry}
-                onChange={handleChangeField}
+                onBlur={handleChangeField}
               >
                 <option>Select Inquiry</option>
                 <option>Inquiry 1</option>
