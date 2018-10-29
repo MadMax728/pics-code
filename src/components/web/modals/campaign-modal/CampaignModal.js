@@ -11,6 +11,7 @@ import {
 import moment from "moment";
 import { modalType } from "../../../../lib/constants/enumerations";
 
+let contentText = "rghcgbvb";
 class CampaignModal extends Component {
   constructor(props, context) {
     super(props, context);
@@ -29,8 +30,8 @@ class CampaignModal extends Component {
         inquiry: "",
         inquiry_tag: "",
         description: "",
-        start_date: moment().format("MM/DD/YYYY"),
-        end_date: moment().format("MM/DD/YYYY"),
+        start_date: moment(),
+        end_date: moment(),
         daily_budget: "",
         invoice_recipient: "",
         street: "",
@@ -47,7 +48,9 @@ class CampaignModal extends Component {
         billing_address: "",
         payment_method: "",
         voucher: "",
-        image: ""
+        image: "",
+        photo: "",
+        photoFile: null
       }
     };
   }
@@ -57,10 +60,28 @@ class CampaignModal extends Component {
     form[forThat] = date;
     this.setState({ form });
   };
+  uploadFile = (e, forThat) => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    let base64Data;
+    let currentThis = this;
+    reader.readAsDataURL(file);
+    console.log("reader", reader.result);
+    reader.onloadend = function() {
+      const { form } = currentThis.state;
+      form[forThat] = reader.result;
+      currentThis.setState({ form });
+    };
+  };
 
   handleCreatorSubmit = () => {
     console.log(this.state.form);
   };
+
+  handleContentChange(text) {
+    contentText = text.blocks[0].text;
+    console.log("text", contentText);
+  }
 
   handleCreatorChangeField = event => {
     const { form } = this.state;
@@ -173,8 +194,11 @@ class CampaignModal extends Component {
               isPreview={isPreview}
               handleChangeField={this.handleCompanyChangeField}
               form={form}
+              handleContentChange={this.handleContentChange}
               handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
+              contentText={contentText}
+              uploadFile={this.uploadFile}
             />
           ) : (
             <CreateCreatorCampaign

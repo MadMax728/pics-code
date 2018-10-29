@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { convertFromRaw } from "draft-js";
 import { toolBarConfig } from "../../../lib/constants/toolBarConfig";
+import propTypes from "prop-types";
 
 const content = {
   entityMap: {},
@@ -21,19 +21,23 @@ const content = {
 class TextEditor extends Component {
   constructor(props, context) {
     super(props, context);
-    const contentState = convertFromRaw(content);
+    // const contentState = convertFromRaw(content);
     this.state = {
-      contentState
+      contentState: ""
     };
-    console.log("conent", contentState);
+    // console.log("conent", contentState);
   }
+
   onContentStateChange = contentState => {
+    this.props.handleContentChange(contentState);
+
     this.setState({
-      contentState
+      contentState: this.props.contentText
     });
   };
 
   render() {
+    console.log("texteditor value", this.props.contentText);
     return (
       <Editor
         wrapperClassName="wrapper-class"
@@ -45,4 +49,10 @@ class TextEditor extends Component {
     );
   }
 }
+
+TextEditor.propTypes = {
+  handleContentChange: propTypes.func.isRequired,
+  contentText: propTypes.any.isRequired
+};
+
 export default TextEditor;

@@ -8,8 +8,12 @@ class StepOne extends Component {
     this.state = {};
   }
 
+  uploadPhoto = e => {
+    this.props.uploadFile(e, "photo");
+  };
+
   render() {
-    const { handleChangeField, form, isFor } = this.props;
+    const { handleChangeField, form, uploadFile, isFor } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-6 upload-form">
@@ -212,6 +216,7 @@ class StepOne extends Component {
         </div>
         <div className="col-sm-6 no-padding right-side">
           <div className="box">
+            <img src={this.props.form.photo} alt="Edit" />
             <input
               type="file"
               name="file-2[]"
@@ -219,6 +224,7 @@ class StepOne extends Component {
               className="inputfile inputfile-2"
               data-multiple-caption="{count} files selected"
               multiple=""
+              onChange={this.uploadPhoto}
             />
             <label htmlFor="file-2">
               <svg
@@ -244,7 +250,8 @@ class StepOne extends Component {
 StepOne.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
-  isFor: propTypes.bool.isRequired
+  isFor: propTypes.bool.isRequired,
+  uploadFile: propTypes.func.isRequired
 };
 
 export default StepOne;

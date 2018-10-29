@@ -8,6 +8,7 @@ import {
 } from "../../../user/payment/steps";
 import propTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
+import { CreateCompanyCampaignHeader } from "./index";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {
@@ -26,8 +27,12 @@ class CreateCompanyCampaign extends Component {
       isFor,
       handleChangeField,
       handleSubmit,
-      handleDate
+      handleDate,
+      handleContentChange,
+      contentText,
+      uploadFile
     } = this.props;
+    console.log("texteditor value", this.props);
 
     return (
       <div>
@@ -47,6 +52,7 @@ class CreateCompanyCampaign extends Component {
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
+              uploadFile={uploadFile}
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
@@ -54,7 +60,11 @@ class CreateCompanyCampaign extends Component {
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
-            <StepTwo handleChangeField={handleChangeField} />
+            <StepTwo
+              handleChangeField={handleChangeField}
+              contentText={contentText}
+              handleContentChange={handleContentChange}
+            />
           ))}
         {!isPreview &&
           (stepIndex === 2 && (
@@ -105,7 +115,10 @@ CreateCompanyCampaign.propTypes = {
   isFor: propTypes.bool.isRequired,
   form: propTypes.any.isRequired,
   handleSubmit: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired
+  handleDate: propTypes.func.isRequired,
+  handleContentChange: propTypes.func.isRequired,
+  contentText: propTypes.any.isRequired,
+  uploadFile: propTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;

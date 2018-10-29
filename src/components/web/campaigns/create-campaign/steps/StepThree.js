@@ -16,12 +16,12 @@ class StepThree extends Component {
 
   handleStartDateChange = date => {
     this.setState({ start_date: date });
-    this.props.handleDate(date.format("MM/DD/YYYY"), "start_date");
+    this.props.handleDate(date, "start_date");
   };
 
   handleEndDateChange = date => {
     this.setState({ end_date: date });
-    this.props.handleDate(date.format("MM/DD/YYYY"), "end_date");
+    this.props.handleDate(date, "end_date");
   };
 
   render() {
@@ -37,7 +37,7 @@ class StepThree extends Component {
                 <label htmlFor="Start">Start</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.state.start_date}
+                    selected={this.props.form.start_date}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -49,7 +49,7 @@ class StepThree extends Component {
                 <label htmlFor="End">End</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.state.end_date}
+                    selected={this.props.form.end_date}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
