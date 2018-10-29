@@ -16,7 +16,7 @@ class FeedHeader extends Component {
   };
 
   render() {
-    const { campaign } = this.props;
+    const { campaign, handleFavorite } = this.props;
     const profile_route = campaign.user.isOwner
       ? `/news-feed`
       : `/news-feed/${campaign.id}`;

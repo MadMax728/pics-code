@@ -11,8 +11,8 @@ class Feed extends Component {
     this.state = {};
   }
 
-  handleFavorite = id => {
-    this.props.handleFavorite(id);
+  handleFavorite = e => {
+    this.props.handleFavorite(e);
   };
 
   handleMessage = e => {

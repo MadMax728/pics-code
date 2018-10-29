@@ -20,10 +20,10 @@ class NewsFeeds extends Component {
     let id = e.target.id;
     let campaigns = this.state.campaigns;
     console.log(id);
-
     campaigns.filter(
       campaign =>
-        campaign.id === id && (campaign.isFavorite = !campaign.isFavorite)
+        campaign.id === parseInt(id) &&
+        (campaign.isFavorite = !campaign.isFavorite)
     );
     this.setState({ campaigns });
   };
