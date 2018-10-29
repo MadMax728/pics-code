@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import propTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
-import { OtherNewsFeed, OtherAbout } from "../../web/other";
+import { OtherNewsFeed, OtherAbout, OtherSaved } from "../../web/other";
 import { OwnerNewsFeed, OwnerAbout, OwnerSaved } from "../../web/owner";
 import {
   Landing,
@@ -94,6 +94,8 @@ class HomeRoute extends Component {
             component={OtherNewsFeed}
           />
           <Route exact path={routes.OTHER_ABOUT_ROUTE} component={OtherAbout} />
+
+          <Route exact path={routes.OTHER_SAVED_ROUTE} component={OtherSaved} />
 
           <Route
             exact

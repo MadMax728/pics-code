@@ -26,6 +26,7 @@ export const backoffice_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: false,
     id: 2
   },
   {
@@ -53,6 +54,7 @@ export const backoffice_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: true,
     id: 3
   },
   {
@@ -80,6 +82,7 @@ export const backoffice_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: false,
     id: 1
   }
 ];

@@ -24,6 +24,7 @@ export const company_campaigns_list = [
     end: "10.10.2000",
     target_group: "Female",
     procedure: "Public",
+    isFavorite: false,
     id: 1
   },
   {
@@ -49,6 +50,7 @@ export const company_campaigns_list = [
     end: "10.10.2000",
     target_group: "Male",
     procedure: "Public",
+    isFavorite: true,
     id: 2
   },
   {
@@ -74,6 +76,7 @@ export const company_campaigns_list = [
     end: "10.10.2000",
     target_group: "Female",
     procedure: "Public",
+    isFavorite: false,
     id: 3
   }
 ];

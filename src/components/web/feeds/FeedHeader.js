@@ -9,13 +9,18 @@ class FeedHeader extends Component {
     this.state = {};
   }
 
-  handleOnKeyDown = () => {};
+  handleKeyDown = () => {};
+
+  handleFavorite = e => {
+    this.props.handleFavorite(e);
+  };
 
   render() {
     const { campaign } = this.props;
     const profile_route = campaign.user.isOwner
-      ? `/news_feed`
-      : `/news_feed/${campaign.id}`;
+      ? `/news-feed`
+      : `/news-feed/${campaign.id}`;
+
     return (
       <div className="feed_header">
         <div className="no-padding profile_image">
@@ -44,8 +49,29 @@ class FeedHeader extends Component {
           <div className="secondary_title">{campaign.user.name}</div>
           <div className="grey_title">{campaign.category}</div>
         </div>
-        <div className="like_wrapper">
-          <img src={images.blue_heart} alt="like" className="pull-right" />
+
+        <div className="like_wrapper" role="article">
+          {campaign.isFavorite ? (
+            <img
+              src={images.blue_heart}
+              alt="like"
+              className="pull-right"
+              role="presentation"
+              onClick={this.handleFavorite}
+              id={campaign.id}
+              onKeyDown={this.handleKeyDown}
+            />
+          ) : (
+            <img
+              src={images.feed_like}
+              alt="like"
+              className="pull-right"
+              role="presentation"
+              onClick={this.handleFavorite}
+              id={campaign.id}
+              onKeyDown={this.handleKeyDown}
+            />
+          )}
         </div>
       </div>
     );
@@ -53,6 +79,7 @@ class FeedHeader extends Component {
 }
 
 FeedHeader.propTypes = {
+  handleFavorite: PropTypes.func.isRequired,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,
