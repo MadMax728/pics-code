@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as images from "../../../../lib/constants/images";
 import { aboutInfo } from "../../../../mock-data";
+import { SocialNetworks } from "../settings/edit-profile";
 
 const About = () => {
   return (
@@ -77,38 +78,8 @@ const About = () => {
             })}
           </div>
         </div>
-        <div className="social-networks">
-          <div className="section-title">Social Networks</div>
-          <ul>
-            <li>
-              <span>
-                <img src={images.facebook} alt={"facebook"} />
-              </span>
-              <span className="social-title">Facebook</span>
-              <Link to={""}>{aboutInfo.social_network.facebook}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.insta} alt={"insta"} />
-              </span>
-              <span className="social-title">Instagram</span>
-              <Link to={""}>{aboutInfo.social_network.instagram}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.youtube} alt={"youtube"} />
-              </span>
-              <span className="social-title">Youtube</span>
-              <Link to={""}>{aboutInfo.social_network.youtube}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.twitter} alt={"twitter"} />
-              </span>
-              <span className="social-title">Twitter</span>
-              <Link to={""}>{aboutInfo.social_network.twitter}</Link>
-            </li>
-          </ul>
+        <div className="social-wrapper">
+          <SocialNetworks userId={"123"} isOwnerProfile={false} />
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ const SocialProfileUrl = ({
   title,
   icon,
   publicUrl,
+  isOwnerProfile,
   userName,
   isConnectInProgress,
   handleSocialConnect,
@@ -16,25 +17,28 @@ const SocialProfileUrl = ({
       <div className="social-link">
         <span className={`fa ${icon}`} />
         <span className="social-text">{title}</span>
-        {!publicUrl && (
-          <button
-            id={id}
-            type="button"
-            className="btn-blu"
-            disabled={isConnectInProgress}
-            onClick={handleSocialConnect}
-          >
-            Connect
-          </button>
-        )}
+        {!publicUrl &&
+          isOwnerProfile && (
+            <button
+              id={id}
+              type="button"
+              className="btn-blu"
+              disabled={isConnectInProgress}
+              onClick={handleSocialConnect}
+            >
+              Connect
+            </button>
+          )}
         {publicUrl && (
           <div>
             <a href={publicUrl} target="_blank" rel="noopener noreferrer">
               {userName ? userName : "Profile"}
             </a>
-            <span id={id} aria-hidden="true" onClick={handleSocialClear}>
-              &nbsp; <i className="fa fa-times" />
-            </span>
+            {isOwnerProfile && (
+              <span id={id} aria-hidden="true" onClick={handleSocialClear}>
+                &nbsp; <i className="fa fa-times" />
+              </span>
+            )}
           </div>
         )}
       </div>
