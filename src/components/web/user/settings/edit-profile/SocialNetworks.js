@@ -116,6 +116,8 @@ class SocialNetworks extends Component {
       case "youtube":
         authUrl = `${baseUrl}auth/youtube/connect`;
         break;
+      default:
+        authUrl = "";
     }
     this.setState({ isConnectInProgress: true }, () => {
       // open popup based on auth url
