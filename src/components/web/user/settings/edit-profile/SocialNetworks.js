@@ -157,7 +157,7 @@ class SocialNetworks extends Component {
     const { socialNetworks } = this.state;
     const { isOwnerProfile } = this.props;
     return (
-      <div>
+      <div className="social-link-wrapr col-xs-12 no-padding">
         <div className="form-subtitle">Social Network URL</div>
         <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
           {socialNetworks.map(socialNetwork => {

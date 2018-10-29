@@ -78,9 +78,9 @@ const About = () => {
             })}
           </div>
         </div>
-        <div className="social-wrapper">
-          <SocialNetworks userId={"123"} isOwnerProfile={false} />
-        </div>
+      </div>
+      <div className="about-social-wrapr col-xs-12 no-padding">
+        <SocialNetworks userId={"123"} isOwnerProfile={false} />
       </div>
     </div>
   );
