@@ -85,7 +85,12 @@ class HomeRoute extends Component {
   };
 
   handleOwnerNewsFeed = () => {
-    return <OwnerNewsFeed handleModalShow={this.props.handleModalShow} />;
+    return (
+      <OwnerNewsFeed
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   handleExplore = () => {

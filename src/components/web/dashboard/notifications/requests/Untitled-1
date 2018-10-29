@@ -9,7 +9,7 @@ Today, I have worked on following tasks updated same in asana, pushed the code o
 5. Fixed issue for to get cropped Image from actual image and maintain into state.
 6. Implemenatation of Edit Profile image in edit profile modal and set in edit profile Component.
 7. Modified mockdata for the campaigns which needs to requies userId and favorite fields into data for all campaigns and feeds.
-7.
+8. Implemenatation of more modal for the campaigns.
 
 Thanks.
 

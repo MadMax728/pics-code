@@ -106,6 +106,7 @@ class Home extends Component {
               <div>
                 <HomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
+                  handleModalShow={this.handleModalShow}
                   image={image}
                 />
               </div>

@@ -11,12 +11,13 @@ class UserProfile extends Component {
   }
 
   render() {
-    const { handleModalShow } = this.props;
+    const { handleModalShow, handleModalInfoShow } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
         <NewsFeeds
           campaigns={user_profile_campaigns_list}
           handleModalShow={handleModalShow}
+          handleModalInfoShow={handleModalInfoShow}
         />
       </div>
     );
@@ -24,7 +25,8 @@ class UserProfile extends Component {
 }
 
 UserProfile.propTypes = {
-  handleModalShow: PropTypes.func
+  handleModalShow: PropTypes.func,
+  handleModalInfoShow: PropTypes.func
 };
 
 export default UserProfile;
