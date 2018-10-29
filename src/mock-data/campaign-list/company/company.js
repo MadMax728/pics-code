@@ -3,6 +3,7 @@ import * as images from "../../../lib/constants/images";
 export const company_campaigns_list = [
   {
     user: {
+      id: "1",
       name: "Santosh Shinde",
       image: `${images.campaign1}`,
       isOwner: true
@@ -29,6 +30,7 @@ export const company_campaigns_list = [
   },
   {
     user: {
+      id: "2",
       name: "Santosh Shinde",
       image: `${images.campaign2}`,
       isOwner: false
@@ -55,6 +57,7 @@ export const company_campaigns_list = [
   },
   {
     user: {
+      id: "3",
       name: "Santosh Shinde",
       image: `${images.campaign3}`,
       isOwner: false
