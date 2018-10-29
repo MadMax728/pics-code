@@ -43,7 +43,7 @@ class EditProfilePic extends Component {
               marginBottom: "35px"
             }}
           >
-            <div className="col-xs-12 margin-top-46 textCenter">
+            <div className="col-xs-12 textCenter">
               <AvatarEditor
                 ref={setEditorRef}
                 scale={parseFloat(scale)}
@@ -87,7 +87,6 @@ class EditProfilePic extends Component {
           </div>
         )}
         <br />
-        Zoom:
         <input
           name="scale"
           type="range"

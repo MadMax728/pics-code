@@ -30,7 +30,7 @@ class CreateCompanyCampaign extends Component {
     } = this.props;
 
     return (
-      <div>
+      <div className="col-xs-12 no-padding">
         {isPreview && <Preview />}
         {isPreview && (
           <button
