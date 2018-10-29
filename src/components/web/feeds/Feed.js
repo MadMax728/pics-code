@@ -16,7 +16,7 @@ class Feed extends Component {
   };
 
   handleMessage = e => {
-    this.props.handleFavorite(e);
+    this.props.handleMessage(e);
   };
 
   handleOnKeyDown = () => {};
@@ -59,7 +59,7 @@ class Feed extends Component {
               alt="profile"
               onClick={this.handleMessage}
               role="presentation"
-              id={campaign.id}
+              id={campaign.user.id}
               onKeyDown={this.handleOnKeyDown}
             />
           </div>
@@ -98,6 +98,7 @@ class Feed extends Component {
 
 Feed.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
+  handleMessage: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
     user: PropTypes.shape({

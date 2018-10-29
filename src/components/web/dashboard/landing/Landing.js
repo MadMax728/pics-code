@@ -13,7 +13,7 @@ class Landing extends Component {
   }
 
   render() {
-    const { handleModalInfoShow } = this.props;
+    const { handleModalInfoShow, handleModalShow } = this.props;
     const { campaigns } = this.state;
 
     return (
@@ -21,6 +21,7 @@ class Landing extends Component {
         <NewsFeeds
           campaigns={campaigns}
           handleModalInfoShow={handleModalInfoShow}
+          handleModalShow={handleModalShow}
         />
       </div>
     );
@@ -28,6 +29,7 @@ class Landing extends Component {
 }
 
 Landing.propTypes = {
-  handleModalInfoShow: PropTypes.func.isRequired
+  handleModalInfoShow: PropTypes.func.isRequired,
+  handleModalShow: PropTypes.func
 };
 export default Landing;

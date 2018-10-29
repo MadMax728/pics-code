@@ -2,30 +2,14 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on mockdata branch and created merge request.
 
-1. Implementation of Page Not Found Functionality.
-2. Implementation of take input from user and Maintain the form state of it, 
-    - Create Campaign Modal for Creator
-        - PaymentStep3
-
-    - Create Campaign Modal for Company
-        - Step1
-        - Step2
-        - Step3
-        - PaymentStep1
-        - PaymentStep2
-        - PaymentStep3
-
-    - Create Ads Modal for Company
-        - Step1
-        - Step2
-        - Step3
-        - PaymentStep1
-        - PaymentStep2
-        - PaymentStep3
-
-3. Fixed bugs in Register Component and Reset Email Component.
-4. Maintain the folder stucture for the Create Campaign Steps, Create smart Component for step1, step2, step3 for Creator and Company.
-5. Fixed designing issue for Page Not Found Component.
+1. Implemenatation of the subscribe and unsubscribe event for community module.
+2. Implemenatation of like/favorite events for all campaigns and feeds.
+3. Fixed bug Link/redirect/id’s issues throughout application.
+4. Fixed designing issue for Edit-Profile Modal Component.
+5. Fixed issue for to get cropped Image from actual image and maintain into state.
+6. Implemenatation of Edit Profile image in edit profile modal and set in edit profile Component.
+7. Modified mockdata for the campaigns which needs to requies userId and favorite fields into data for all campaigns and feeds.
+7.
 
 Thanks.
 

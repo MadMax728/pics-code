@@ -4,6 +4,7 @@ export const campaigns_list = [
   {
     user: {
       name: "Santosh Shinde",
+      id: "1",
       image: `${images.campaign1}`,
       isOwner: true
     },
@@ -20,6 +21,7 @@ export const campaigns_list = [
   {
     user: {
       name: "Santosh Shinde",
+      id: "2",
       image: `${images.campaign2}`,
       isOwner: false
     },
@@ -36,6 +38,7 @@ export const campaigns_list = [
   {
     user: {
       name: "Santosh Shinde",
+      id: "3",
       image: `${images.campaign3}`,
       isOwner: false
     },

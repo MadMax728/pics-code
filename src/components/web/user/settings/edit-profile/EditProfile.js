@@ -56,6 +56,7 @@ class EditProfile extends Component {
 
   render() {
     const { form } = this.state;
+    const { image } = this.props;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="edit-profile-form">
@@ -66,7 +67,11 @@ class EditProfile extends Component {
                 <div className="form-subtitle">General information</div>
               </div>
               <div className="edit_profile_wrapr">
-                <img src={images.pic_1} className="image-wrapr" alt="avatar" />
+                <img
+                  src={image ? image : images.pic_1}
+                  className="image-wrapr"
+                  alt="avatar"
+                />
                 <div className="input-file-container">
                   {/* <input className="input-file" id="my-file" type="file" /> */}
                   {/* <label tabindex="0" for="my-file" className="input-file-trigger">
@@ -271,7 +276,8 @@ class EditProfile extends Component {
 }
 
 EditProfile.propTypes = {
-  handleModalInfoShow: PropTypes.func.isRequired
+  handleModalInfoShow: PropTypes.func.isRequired,
+  image: PropTypes.any
 };
 
 export default EditProfile;
