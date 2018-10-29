@@ -77,38 +77,57 @@ const About = () => {
             })}
           </div>
         </div>
-        <div className="social-networks">
-          <div className="section-title">Social Networks</div>
-          <ul>
-            <li>
-              <span>
-                <img src={images.facebook} alt={"facebook"} />
-              </span>
-              <span className="social-title">Facebook</span>
-              <Link to={""}>{aboutInfo.social_network.facebook}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.insta} alt={"insta"} />
-              </span>
-              <span className="social-title">Instagram</span>
-              <Link to={""}>{aboutInfo.social_network.instagram}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.youtube} alt={"youtube"} />
-              </span>
-              <span className="social-title">Youtube</span>
-              <Link to={""}>{aboutInfo.social_network.youtube}</Link>
-            </li>
-            <li>
-              <span>
-                <img src={images.twitter} alt={"twitter"} />
-              </span>
-              <span className="social-title">Twitter</span>
-              <Link to={""}>{aboutInfo.social_network.twitter}</Link>
-            </li>
-          </ul>
+      </div>
+      <div className="about-social-wrapr col-xs-12 no-padding">
+        <div class="social-link-wrapr col-xs-12 padding-lr-30">
+          <div class="form-subtitle">Social Network URL</div>
+          <div class="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
+            <div class="form-group margin-bottom-15 social-media">
+              <div class="social-link">
+                <span class="fa fa-facebook" />
+                <span class="social-text">Facebook</span>
+                <div>
+                  <a
+                    href="https://facebook.com/santosh.shinde.735944"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Profile
+                  </a>
+                  <span id="facebook" aria-hidden="true">
+                    &nbsp; <i class="fa fa-times" />
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-15 social-media">
+              <div class="social-link">
+                <span class="fa fa-instagram" />
+                <span class="social-text">Instagram</span>
+                <button id="instagram" type="button" class="btn-blu">
+                  Connect
+                </button>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-15 social-media">
+              <div class="social-link">
+                <span class="fa fa-twitter" />
+                <span class="social-text">Twitter</span>
+                <button id="twitter" type="button" class="btn-blu">
+                  Connect
+                </button>
+              </div>
+            </div>
+            <div class="form-group margin-bottom-15 social-media">
+              <div class="social-link">
+                <span class="fa fa-youtube" />
+                <span class="social-text">Youtube</span>
+                <button id="youtube" type="button" class="btn-blu">
+                  Connect
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

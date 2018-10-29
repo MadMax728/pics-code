@@ -156,7 +156,7 @@ class SocialNetworks extends Component {
   render() {
     const { socialNetworks } = this.state;
     return (
-      <div>
+      <div class="social-link-wrapr col-xs-12">
         <div className="form-subtitle">Social Network URL</div>
         <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
           {socialNetworks.map(socialNetwork => {

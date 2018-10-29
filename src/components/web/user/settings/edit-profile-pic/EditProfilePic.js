@@ -55,7 +55,7 @@ class EditProfilePic extends Component {
   render() {
     const { image } = this.state;
     return (
-      <div>
+      <div className="col-xs-12 upload-profile-wrapr">
         {image !== null ? (
           <Dropzone
             onDrop={this.handleDrop}
@@ -67,7 +67,7 @@ class EditProfilePic extends Component {
               marginBottom: "35px"
             }}
           >
-            <div>
+            <div className="col-xs-12 margin-top-46 textCenter">
               <AvatarEditor
                 ref={this.setEditorRef}
                 scale={parseFloat(this.state.scale)}
@@ -85,7 +85,7 @@ class EditProfilePic extends Component {
             </div>
           </Dropzone>
         ) : (
-          <div className="edit-profile-pic">
+          <div className="edit-profile-pic ">
             <div className="box">
               <input
                 type="file"

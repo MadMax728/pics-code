@@ -1,7 +1,7 @@
 .about-wrapper {
   background: $white_color;
   padding: 20px 30px;
-  margin-bottom: 35px;
+  // margin-bottom: 35px;
   .section-title {
     font-family: "Helvetica-Bold";
     padding-bottom: 15px;
@@ -92,6 +92,14 @@
           color: $charcoal_color;
         }
       }
+    }
+  }
+}
+.about-social-wrapr {
+  background-color: white;
+  .social-link-wrapr {
+    .form-subtitle {
+      padding-top: 0;
     }
   }
 }
