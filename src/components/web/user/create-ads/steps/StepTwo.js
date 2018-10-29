@@ -15,12 +15,12 @@ class StepTwo extends Component {
 
   handleStartDateChange = date => {
     this.setState({ start_date: date });
-    this.props.handleDate(date.format("MM/DD/YYYY"), "start_date");
+    this.props.handleDate(date, "start_date");
   };
 
   handleEndDateChange = date => {
     this.setState({ end_date: date });
-    this.props.handleDate(date.format("MM/DD/YYYY"), "end_date");
+    this.props.handleDate(date, "end_date");
   };
 
   render() {
@@ -35,7 +35,7 @@ class StepTwo extends Component {
                 <label htmlFor="Start">Start</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.state.start_date}
+                    selected={this.props.form.start_date}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -47,7 +47,7 @@ class StepTwo extends Component {
                 <label htmlFor="End">End</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.state.end_date}
+                    selected={this.props.form.end_date}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -144,7 +144,8 @@ class StepTwo extends Component {
 
 StepTwo.propTypes = {
   handleChangeField: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired
+  handleDate: propTypes.func.isRequired,
+  form: propTypes.any.isRequired
 };
 
 export default StepTwo;

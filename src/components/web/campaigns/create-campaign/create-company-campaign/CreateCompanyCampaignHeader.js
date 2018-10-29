@@ -9,6 +9,7 @@ class CreateCompanyCampaignHeader extends Component {
 
   handleCancle = () => {
     this.props.handleModalHide();
+    this.props.handleResoreState();
   };
 
   handleBack = () => {
@@ -67,7 +68,8 @@ CreateCompanyCampaignHeader.propTypes = {
   handleModalHide: propTypes.func,
   stepIndex: propTypes.any.isRequired,
   handleNext: propTypes.func,
-  handlePrev: propTypes.func
+  handlePrev: propTypes.func,
+  handleResoreState: propTypes.func.isRequired
 };
 
 export default CreateCompanyCampaignHeader;

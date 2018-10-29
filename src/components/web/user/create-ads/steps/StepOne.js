@@ -7,9 +7,14 @@ class StepOne extends Component {
     super(props);
     this.state = {};
   }
+  uploadPhoto = e => {
+    this.props.uploadFile(e, "photo");
+  };
 
   render() {
-    const { form, handleChangeField } = this.props;
+    console.log("photo", this.props.form);
+    // console.log("photoFile",this.state.photoFile);
+    const { form, handleChangeField, uploadFile } = this.props;
 
     return (
       <div className="modal-body">
@@ -28,11 +33,21 @@ class StepOne extends Component {
           <form>
             <div className="form-group">
               <label htmlFor="title">Add title</label>
-              <input type="text" name="title" onChange={handleChangeField} />
+              <input
+                type="text"
+                value={this.props.form.title}
+                name="title"
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input type="text" name="location" onChange={handleChangeField} />
+              <input
+                type="text"
+                name="location"
+                value={this.props.form.location}
+                onChange={handleChangeField}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Radius">Add Radius</label>
@@ -56,6 +71,7 @@ class StepOne extends Component {
               <label htmlFor="Description">Add Description</label>
               <textarea
                 className="form-control"
+                value={this.props.form.description}
                 onChange={handleChangeField}
                 name="description"
               />
@@ -71,6 +87,7 @@ class StepOne extends Component {
                     type="radio"
                     id="male-female"
                     name="target_group"
+                    value="male-female"
                     className="black_button"
                     defaultChecked={form.target_group === "male-female"}
                   />
@@ -81,6 +98,7 @@ class StepOne extends Component {
                     type="radio"
                     id="male"
                     name="target_group"
+                    value="male"
                     className="black_button"
                     defaultChecked={form.target_group === "male"}
                   />
@@ -90,6 +108,7 @@ class StepOne extends Component {
                   <input
                     type="radio"
                     id="female"
+                    value="female"
                     name="target_group"
                     defaultChecked={form.target_group === "female"}
                   />
@@ -109,6 +128,8 @@ class StepOne extends Component {
               <label htmlFor="Insert_link">Insert link</label>
               <input
                 type="text"
+                insert_link
+                value={this.props.form.insert_link}
                 name="insert_link"
                 onChange={handleChangeField}
               />
@@ -117,6 +138,7 @@ class StepOne extends Component {
         </div>
         <div className="col-sm-6 no-padding right-side ads-right-section">
           <div className="box">
+            <img src={this.props.form.photo} alt="Edit" />
             <input
               type="file"
               name="file-2[]"
@@ -124,6 +146,7 @@ class StepOne extends Component {
               className="inputfile inputfile-2"
               data-multiple-caption="{count} files selected"
               multiple=""
+              onChange={this.uploadPhoto}
             />
             <label htmlFor="file-2">
               <svg
@@ -148,7 +171,8 @@ class StepOne extends Component {
 
 StepOne.propTypes = {
   handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired
+  form: propTypes.any.isRequired,
+  uploadFile: propTypes.func.isRequired
 };
 
 export default StepOne;

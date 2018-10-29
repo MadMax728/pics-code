@@ -9,14 +9,17 @@ class StepTwo extends Component {
   }
 
   render() {
-    const { handleChangeField } = this.props;
+    console.log("texteditor value", this.props.contentText);
+
+    const { handleChangeField, contentText, handleContentChange } = this.props;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-7 create-campaign-wrapper">
           <div className="title">Title</div>
-          <div className="create-compaign-editor">
-            <TextEditor />
-          </div>
+          <TextEditor
+            handleContentChange={handleContentChange}
+            contentText={contentText}
+          />
         </div>
         <div className="col-sm-5 no-padding disp-flex">
           <div className="editor-options">
@@ -99,7 +102,9 @@ class StepTwo extends Component {
 }
 
 StepTwo.propTypes = {
-  handleChangeField: propTypes.func.isRequired
+  handleChangeField: propTypes.func.isRequired,
+  handleContentChange: propTypes.func.isRequired,
+  contentText: propTypes.any.isRequired
 };
 
 export default StepTwo;

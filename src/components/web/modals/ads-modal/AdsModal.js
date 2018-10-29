@@ -19,8 +19,8 @@ class AdsModal extends Component {
         target_group: "male-female",
         call_to_action_button: "",
         insert_link: "",
-        start_date: moment().format("MM/DD/YYYY"),
-        end_date: moment().format("MM/DD/YYYY"),
+        start_date: moment(),
+        end_date: moment(),
         daily_budget: "",
         invoice_recipient: "",
         street: "",
@@ -37,7 +37,9 @@ class AdsModal extends Component {
         billing_address: "",
         payment_method: "",
         voucher: "",
-        image: ""
+        image: "",
+        photo: "",
+        photoFile: null
       }
     };
   }
@@ -68,12 +70,30 @@ class AdsModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
+  handleResoreState = () => {
+    this.setState({
+      form: {}
+    });
+  };
 
   handleNext = () => {
     const { stepIndex } = this.state;
     if (stepIndex < 4) {
       this.setState({ stepIndex: stepIndex + 1 });
     }
+  };
+  uploadFile = (e, forThat) => {
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    let base64Data;
+    let currentThis = this;
+    reader.readAsDataURL(file);
+    console.log("reader", reader.result);
+    reader.onloadend = function() {
+      const { form } = currentThis.state;
+      form[forThat] = reader.result;
+      currentThis.setState({ form });
+    };
   };
 
   handlePrev = () => {
@@ -107,6 +127,7 @@ class AdsModal extends Component {
         header
         modalHeaderContent={
           <CreateAdsHeader
+            handleResoreState={this.handleResoreState}
             handleModalHide={handleModalHide}
             handleNext={this.handleNext}
             handlePrev={this.handlePrev}
@@ -120,6 +141,7 @@ class AdsModal extends Component {
         modalBodyContent={
           <CreateAds
             stepIndex={stepIndex}
+            uploadFile={this.uploadFile}
             forThat={"Ads"}
             handleModalInfoShow={this.handleModalInfoShow}
             handleChangeField={this.handleChangeField}
@@ -136,7 +158,9 @@ class AdsModal extends Component {
 AdsModal.propTypes = {
   modalShow: propTypes.bool,
   handleModalHide: propTypes.func,
-  handleModalInfoMsgShow: propTypes.func
+  handleModalInfoMsgShow: propTypes.func,
+  uploadFile: propTypes.func,
+  handleResoreState: propTypes.func
 };
 
 export default AdsModal;
