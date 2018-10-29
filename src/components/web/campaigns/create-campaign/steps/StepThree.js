@@ -62,7 +62,7 @@ class StepThree extends Component {
           <div className="form-group">
             <label htmlFor="Define">Define daily budget</label>
             <select
-              onChange={handleChangeField}
+              onBlur={handleChangeField}
               value={this.props.form.daily_budget}
               name="daily_budget"
             >
