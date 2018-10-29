@@ -4,6 +4,7 @@ export const campaigns_list = [
   {
     user: {
       name: "Santosh Shinde",
+      id: "1",
       image: `${images.campaign1}`,
       isOwner: true
     },
@@ -14,11 +15,13 @@ export const campaigns_list = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
+    isFavorite: false,
     id: 1
   },
   {
     user: {
       name: "Santosh Shinde",
+      id: "2",
       image: `${images.campaign2}`,
       isOwner: false
     },
@@ -29,11 +32,13 @@ export const campaigns_list = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
+    isFavorite: true,
     id: 2
   },
   {
     user: {
       name: "Santosh Shinde",
+      id: "3",
       image: `${images.campaign3}`,
       isOwner: false
     },
@@ -44,6 +49,7 @@ export const campaigns_list = [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
+    isFavorite: false,
     id: 3
   }
 ];

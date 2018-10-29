@@ -3,6 +3,7 @@ import * as images from "../../../lib/constants/images";
 export const setting_campaign_list = [
   {
     user: {
+      id: "1",
       name: "Santosh Shinde",
       image: `${images.campaign2}`,
       isOwner: false
@@ -26,10 +27,12 @@ export const setting_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: false,
     id: 2
   },
   {
     user: {
+      id: "2",
       name: "Santosh Shinde",
       image: `${images.campaign3}`,
       isOwner: false
@@ -53,10 +56,12 @@ export const setting_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: false,
     id: 3
   },
   {
     user: {
+      id: "3",
       name: "Santosh Shinde",
       image: `${images.campaign1}`,
       isOwner: true
@@ -80,6 +85,7 @@ export const setting_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: true,
     id: 1
   }
 ];

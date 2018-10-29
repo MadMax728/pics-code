@@ -30,5 +30,6 @@ export const modalType = {
   preview: "preview",
   content_view: "content_view",
   processed: "processed",
-  post_pop_up: "post_pop_up"
+  post_pop_up: "post_pop_up",
+  edit_profile: "edit_profile"
 };

@@ -35,7 +35,7 @@ class CreateCompanyCampaign extends Component {
     console.log("texteditor value", this.props);
 
     return (
-      <div>
+      <div className="col-xs-12 no-padding">
         {isPreview && <Preview />}
         {isPreview && (
           <button

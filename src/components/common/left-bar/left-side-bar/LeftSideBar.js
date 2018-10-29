@@ -157,6 +157,12 @@ class LeftSideBar extends Component {
           component={SideBarOtherMenu}
         />
 
+        <Route
+          path={routes.OTHER_SAVED_ROUTE}
+          exact
+          component={SideBarOtherMenu}
+        />
+
         {/* ...... Other Menu ...... */}
 
         {/* -------- Settings Routes --------- */}

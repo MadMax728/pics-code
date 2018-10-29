@@ -1,5 +1,10 @@
 .create-campaign-modal {
   background: #333;
+  &.editor-modal {
+    & > .modal-dialog {
+      max-width: 915px;
+    }
+  }
   .modal-dialog {
     width: 915px;
   }
@@ -41,8 +46,11 @@
     }
     .box {
       background-color: #e9e9e9;
-      padding: 12.25rem 1.25rem;
+      padding: 15.25rem 1.25rem;
       text-align: center;
+      height: 378px;
+      width: 378px;
+      margin: 0 auto;
       .inputfile {
         width: 0.1px;
         height: 0.1px;
@@ -153,6 +161,7 @@
       text-align: right;
       padding-bottom: 15px;
       background: $white_color;
+      height: 100%;
       img {
         width: 30px;
         margin-right: 15px;
@@ -215,6 +224,124 @@
           position: static;
           border-right: 0;
         }
+        .input-group {
+          .react-datepicker-popper {
+            .react-datepicker {
+              .react-datepicker__month {
+                margin-top: 0;
+              }
+              .react-datepicker__day-name {
+                font-weight: bold;
+              }
+              .react-datepicker__day-name,
+              .react-datepicker__day,
+              .react-datepicker__time-name {
+                width: 2.2rem;
+                font-size: 12px;
+              }
+              .react-datepicker__day,
+              :not(.react-datepicker__day.react-datepicker__day--fri.react-datepicker__day--selected.react-datepicker__day--today) {
+                background: #d8d8d8;
+                border: 1px solid #979797;
+              }
+              .react-datepicker__day.react-datepicker__day--fri.react-datepicker__day--selected.react-datepicker__day--today,
+              .react-datepicker__day.react-datepicker__day--fri.react-datepicker__day--selected {
+                background-image: radial-gradient(
+                  circle at 0 100%,
+                  #1f58a6,
+                  #029bd7
+                );
+              }
+              // .react-datepicker__day--selected ,
+              .react-datepicker__day.react-datepicker__day--thu.react-datepicker__day--outside-month,
+              .react-datepicker__day.highlighted {
+                border-radius: 0px;
+              }
+              button.react-datepicker__navigation.react-datepicker__navigation--previous {
+                position: absolute;
+                top: 5px;
+                left: 10px;
+                height: 10px;
+                border-right-color: transparent;
+                width: 10px;
+                &:before {
+                  content: "";
+                  position: fixed;
+                  border: 10px solid transparent;
+                  border-right: 10px solid white;
+                  width: 10px;
+                  height: 10px;
+                  background: transparent;
+                  left: 0;
+                  z-index: 1000 !important;
+                  top: 6px;
+                }
+                &:after {
+                  content: "";
+                  position: fixed;
+                  border: 5px solid transparent;
+                  border-right: 5px solid #1967b1;
+                  width: 10px;
+                  height: 10px;
+                  background: transparent;
+                  left: 10px;
+                  z-index: 1000 !important;
+                  top: 11px;
+                }
+              }
+              button.react-datepicker__navigation.react-datepicker__navigation--next {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                height: 10px;
+                border-left-color: transparent;
+                width: 10px;
+                &:before {
+                  content: "";
+                  position: fixed;
+                  border: 10px solid transparent;
+                  border-left: 10px solid white;
+                  width: 10px;
+                  height: 10px;
+                  background: transparent;
+                  right: 0;
+                  z-index: 1000 !important;
+                  top: 6px;
+                }
+                &:after {
+                  content: "";
+                  position: fixed;
+                  border: 5px solid transparent;
+                  border-left: 5px solid #088ece;
+                  width: 10px;
+                  height: 10px;
+                  background: transparent;
+                  right: 10px;
+                  z-index: 1000 !important;
+                  top: 11px;
+                }
+              }
+              .react-datepicker__header {
+                padding-top: 0px;
+                border-bottom: 0px;
+                .react-datepicker__current-month {
+                  padding: 8px 0;
+                  background-image: radial-gradient(
+                    circle at 0 100%,
+                    #1f58a6,
+                    #029bd7
+                  );
+                  color: white;
+                  font-size: 12px;
+                }
+              }
+              .react-datepicker__day-names {
+                background-color: white;
+                padding: 3px 0;
+              }
+            }
+          }
+        }
         .input-group-addon {
           border-radius: 0;
           background: #fff;
@@ -222,18 +349,97 @@
           border-right: 1px solid #979797;
           border-bottom: 1px solid #979797;
         }
+        &:nth-child(2) {
+          .react-datepicker-popper {
+            left: -10px !important;
+          }
+        }
       }
     }
     padding: 0px;
     .create-campaign-wrapper {
       padding: 20px 30px;
+      padding: 20px 10px;
       p {
         margin-bottom: 25px;
       }
-
       .title {
         font-family: "Helvetica-Bold";
         font-size: 20px;
+        margin-bottom: 20px;
+      }
+      .create-compaign-editor {
+        .wrapper-class.rdw-editor-wrapper {
+          .rdw-editor-toolbar.toolbar-class {
+            border-color: #333333;
+            margin-bottom: 0px;
+            .rdw-option-wrapper {
+              border: 0px;
+              width: 34px;
+            }
+            .rdw-inline-wrapper {
+              order: 2;
+            }
+            .rdw-dropdown-wrapper {
+              order: 1;
+              width: 65px;
+              border: 0;
+              position: relative;
+              a {
+                color: black;
+              }
+              &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 1px;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.12);
+              }
+              .rdw-dropdown-carettoopen {
+                margin-right: 5px;
+              }
+            }
+            .rdw-text-align-wrapper {
+              order: 4;
+              position: relative;
+              &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 1px;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.12);
+              }
+            }
+            .rdw-colorpicker-wrapper {
+              order: 3;
+              &:after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 1px;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.12);
+              }
+            }
+            .rdw-history-wrapper {
+              order: 5;
+            }
+          }
+          .editor-class.rdw-editor-main {
+            border: 1px solid #333333;
+            border-top: 0px;
+            height: 318px;
+            padding: 0 10px;
+            .DraftEditor-root {
+              height: 95%;
+            }
+          }
+        }
       }
       input {
         width: 100%;
@@ -332,5 +538,690 @@
         color: #fff;
       }
     }
+  }
+  .edit-profile-pic {
+    min-width: 43%;
+    min-height: 378px;
+    width: 378px;
+    height: 378px;
+    margin: 0px auto;
+    margin-top: 46px;
+    input[type="range"] {
+      min-width: 40%;
+      width: 352px;
+      margin: 0 auto;
+    }
+  }
+  .editor-canvas {
+    min-width: 43%;
+    min-height: 378px;
+    width: 378px !important;
+    height: 378px !important;
+    margin: 0px auto;
+  }
+  .upload-profile-wrapr {
+    & > div {
+      width: 100% !important;
+      min-height: 63% !important;
+      text-align: center;
+      margin-top: 46px;
+    }
+    input[type="range"] {
+      width: 352px;
+      margin: 0 auto;
+      margin-top: 20px;
+      appearance: none;
+      -webkit-appearance: none;
+      &:focus {
+        outline: none;
+      }
+    }
+    // input[type=range]::-webkit-slider-runnable-track {
+    // width: 100%;
+    // cursor: pointer;
+    // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+    // background: #3071a9;
+  }
+
+  // input[type=range]:focus::-webkit-slider-runnable-track {
+  // background: #367ebd;
+  // }
+  // input[type=range]::-webkit-slider-runnable-track {
+  // width: 100%;
+  // height: 1.8px;
+  // background: #3071a9;
+  // }
+  // input[type=range]::-moz-range-track {
+  // width: 100%;
+  // height: 1.8px;
+  // cursor: pointer;
+  // box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  //   background: #3071a9;
+  // }
+
+  // input[type=range]::-ms-track {
+  //   width: 100%;
+  //   height: 1.8px;
+  //   cursor: pointer;
+  // background: transparent;
+  // border-color: transparent;
+
+  // border-width: 16px 0;
+  // color: transparent;
+  // }
+  // input[type=range]::-ms-fill-lower {
+  // background: #2a6495;
+  // border-radius: 2.6px;
+  // }
+  // input[type=range]:focus::-ms-fill-lower {
+  // background: #3071a9;
+  // }
+  // input[type=range]::-ms-fill-upper {
+  // background: #3071a9;
+  // border-radius: 2.6px;
+  // }
+  // input[type=range]:focus::-ms-fill-upper {
+  // background: #367ebd;
+  // }
+  $height: 30px;
+  $thumb-height: 13px;
+  $track-height: 3px;
+  // colours
+  $upper-color: rgba(0, 0, 0, 0.8);
+
+  $lower-color: #0199ff;
+  $thumb-color: #0199ff;
+  $thumb-hover-color: #55c2ff;
+  $upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100%
+    50% / 100% $track-height no-repeat transparent;
+  $lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100%
+    50% / 100% $track-height no-repeat transparent;
+
+  // Webkit cannot style progress so we fake it with a long shadow
+  // on the thumb element
+  @function webkit-slider-thumb-shadow($i: 1) {
+    $val: #{$i}px 0 0 -#{($thumb-height - $track-height) / 2} #{$upper-color};
+    @if $i == 1 {
+      @for $k from 2 through 1000 {
+        $val: #{$val}, webkit-slider-thumb-shadow($k);
+      }
+    }
+    @return $val;
+  }
+  input[type="range"] {
+    display: block;
+    appearance: none;
+    height: $height;
+    overflow: hidden;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+    }
+  }
+  // Webkit blue colored
+  input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 10px;
+    background: $lower-background;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    position: relative;
+    top: 40%;
+    margin-top: -8.5px;
+    box-shadow: 1px 0 0 -5px rgba(0, 0, 0, 0.8), 2px 0 0 -5px rgba(0, 0, 0, 0.8),
+      3px 0 0 -5px rgba(0, 0, 0, 0.8), 4px 0 0 -5px rgba(0, 0, 0, 0.8),
+      5px 0 0 -5px rgba(0, 0, 0, 0.8), 6px 0 0 -5px rgba(0, 0, 0, 0.8),
+      7px 0 0 -5px rgba(0, 0, 0, 0.8), 8px 0 0 -5px rgba(0, 0, 0, 0.8),
+      9px 0 0 -5px rgba(0, 0, 0, 0.8), 10px 0 0 -5px rgba(0, 0, 0, 0.8),
+      11px 0 0 -5px rgba(0, 0, 0, 0.8), 12px 0 0 -5px rgba(0, 0, 0, 0.8),
+      13px 0 0 -5px rgba(0, 0, 0, 0.8), 14px 0 0 -5px rgba(0, 0, 0, 0.8),
+      15px 0 0 -5px rgba(0, 0, 0, 0.8), 16px 0 0 -5px rgba(0, 0, 0, 0.8),
+      17px 0 0 -5px rgba(0, 0, 0, 0.8), 18px 0 0 -5px rgba(0, 0, 0, 0.8),
+      19px 0 0 -5px rgba(0, 0, 0, 0.8), 20px 0 0 -5px rgba(0, 0, 0, 0.8),
+      21px 0 0 -5px rgba(0, 0, 0, 0.8), 22px 0 0 -5px rgba(0, 0, 0, 0.8),
+      23px 0 0 -5px rgba(0, 0, 0, 0.8), 24px 0 0 -5px rgba(0, 0, 0, 0.8),
+      25px 0 0 -5px rgba(0, 0, 0, 0.8), 26px 0 0 -5px rgba(0, 0, 0, 0.8),
+      27px 0 0 -5px rgba(0, 0, 0, 0.8), 28px 0 0 -5px rgba(0, 0, 0, 0.8),
+      29px 0 0 -5px rgba(0, 0, 0, 0.8), 30px 0 0 -5px rgba(0, 0, 0, 0.8),
+      31px 0 0 -5px rgba(0, 0, 0, 0.8), 32px 0 0 -5px rgba(0, 0, 0, 0.8),
+      33px 0 0 -5px rgba(0, 0, 0, 0.8), 34px 0 0 -5px rgba(0, 0, 0, 0.8),
+      35px 0 0 -5px rgba(0, 0, 0, 0.8), 36px 0 0 -5px rgba(0, 0, 0, 0.8),
+      37px 0 0 -5px rgba(0, 0, 0, 0.8), 38px 0 0 -5px rgba(0, 0, 0, 0.8),
+      39px 0 0 -5px rgba(0, 0, 0, 0.8), 40px 0 0 -5px rgba(0, 0, 0, 0.8),
+      41px 0 0 -5px rgba(0, 0, 0, 0.8), 42px 0 0 -5px rgba(0, 0, 0, 0.8),
+      43px 0 0 -5px rgba(0, 0, 0, 0.8), 44px 0 0 -5px rgba(0, 0, 0, 0.8),
+      45px 0 0 -5px rgba(0, 0, 0, 0.8), 46px 0 0 -5px rgba(0, 0, 0, 0.8),
+      47px 0 0 -5px rgba(0, 0, 0, 0.8), 48px 0 0 -5px rgba(0, 0, 0, 0.8),
+      49px 0 0 -5px rgba(0, 0, 0, 0.8), 50px 0 0 -5px rgba(0, 0, 0, 0.8),
+      51px 0 0 -5px rgba(0, 0, 0, 0.8), 52px 0 0 -5px rgba(0, 0, 0, 0.8),
+      53px 0 0 -5px rgba(0, 0, 0, 0.8), 54px 0 0 -5px rgba(0, 0, 0, 0.8),
+      55px 0 0 -5px rgba(0, 0, 0, 0.8), 56px 0 0 -5px rgba(0, 0, 0, 0.8),
+      57px 0 0 -5px rgba(0, 0, 0, 0.8), 58px 0 0 -5px rgba(0, 0, 0, 0.8),
+      59px 0 0 -5px rgba(0, 0, 0, 0.8), 60px 0 0 -5px rgba(0, 0, 0, 0.8),
+      61px 0 0 -5px rgba(0, 0, 0, 0.8), 62px 0 0 -5px rgba(0, 0, 0, 0.8),
+      63px 0 0 -5px rgba(0, 0, 0, 0.8), 64px 0 0 -5px rgba(0, 0, 0, 0.8),
+      65px 0 0 -5px rgba(0, 0, 0, 0.8), 66px 0 0 -5px rgba(0, 0, 0, 0.8),
+      67px 0 0 -5px rgba(0, 0, 0, 0.8), 68px 0 0 -5px rgba(0, 0, 0, 0.8),
+      69px 0 0 -5px rgba(0, 0, 0, 0.8), 70px 0 0 -5px rgba(0, 0, 0, 0.8),
+      71px 0 0 -5px rgba(0, 0, 0, 0.8), 72px 0 0 -5px rgba(0, 0, 0, 0.8),
+      73px 0 0 -5px rgba(0, 0, 0, 0.8), 74px 0 0 -5px rgba(0, 0, 0, 0.8),
+      75px 0 0 -5px rgba(0, 0, 0, 0.8), 76px 0 0 -5px rgba(0, 0, 0, 0.8),
+      77px 0 0 -5px rgba(0, 0, 0, 0.8), 78px 0 0 -5px rgba(0, 0, 0, 0.8),
+      79px 0 0 -5px rgba(0, 0, 0, 0.8), 80px 0 0 -5px rgba(0, 0, 0, 0.8),
+      81px 0 0 -5px rgba(0, 0, 0, 0.8), 82px 0 0 -5px rgba(0, 0, 0, 0.8),
+      83px 0 0 -5px rgba(0, 0, 0, 0.8), 84px 0 0 -5px rgba(0, 0, 0, 0.8),
+      85px 0 0 -5px rgba(0, 0, 0, 0.8), 86px 0 0 -5px rgba(0, 0, 0, 0.8),
+      87px 0 0 -5px rgba(0, 0, 0, 0.8), 88px 0 0 -5px rgba(0, 0, 0, 0.8),
+      89px 0 0 -5px rgba(0, 0, 0, 0.8), 90px 0 0 -5px rgba(0, 0, 0, 0.8),
+      91px 0 0 -5px rgba(0, 0, 0, 0.8), 92px 0 0 -5px rgba(0, 0, 0, 0.8),
+      93px 0 0 -5px rgba(0, 0, 0, 0.8), 94px 0 0 -5px rgba(0, 0, 0, 0.8),
+      95px 0 0 -5px rgba(0, 0, 0, 0.8), 96px 0 0 -5px rgba(0, 0, 0, 0.8),
+      97px 0 0 -5px rgba(0, 0, 0, 0.8), 98px 0 0 -5px rgba(0, 0, 0, 0.8),
+      99px 0 0 -5px rgba(0, 0, 0, 0.8), 100px 0 0 -5px rgba(0, 0, 0, 0.8),
+      101px 0 0 -5px rgba(0, 0, 0, 0.8), 102px 0 0 -5px rgba(0, 0, 0, 0.8),
+      103px 0 0 -5px rgba(0, 0, 0, 0.8), 104px 0 0 -5px rgba(0, 0, 0, 0.8),
+      105px 0 0 -5px rgba(0, 0, 0, 0.8), 106px 0 0 -5px rgba(0, 0, 0, 0.8),
+      107px 0 0 -5px rgba(0, 0, 0, 0.8), 108px 0 0 -5px rgba(0, 0, 0, 0.8),
+      109px 0 0 -5px rgba(0, 0, 0, 0.8), 110px 0 0 -5px rgba(0, 0, 0, 0.8),
+      111px 0 0 -5px rgba(0, 0, 0, 0.8), 112px 0 0 -5px rgba(0, 0, 0, 0.8),
+      113px 0 0 -5px rgba(0, 0, 0, 0.8), 114px 0 0 -5px rgba(0, 0, 0, 0.8),
+      115px 0 0 -5px rgba(0, 0, 0, 0.8), 116px 0 0 -5px rgba(0, 0, 0, 0.8),
+      117px 0 0 -5px rgba(0, 0, 0, 0.8), 118px 0 0 -5px rgba(0, 0, 0, 0.8),
+      119px 0 0 -5px rgba(0, 0, 0, 0.8), 120px 0 0 -5px rgba(0, 0, 0, 0.8),
+      121px 0 0 -5px rgba(0, 0, 0, 0.8), 122px 0 0 -5px rgba(0, 0, 0, 0.8),
+      123px 0 0 -5px rgba(0, 0, 0, 0.8), 124px 0 0 -5px rgba(0, 0, 0, 0.8),
+      125px 0 0 -5px rgba(0, 0, 0, 0.8), 126px 0 0 -5px rgba(0, 0, 0, 0.8),
+      127px 0 0 -5px rgba(0, 0, 0, 0.8), 128px 0 0 -5px rgba(0, 0, 0, 0.8),
+      129px 0 0 -5px rgba(0, 0, 0, 0.8), 130px 0 0 -5px rgba(0, 0, 0, 0.8),
+      131px 0 0 -5px rgba(0, 0, 0, 0.8), 132px 0 0 -5px rgba(0, 0, 0, 0.8),
+      133px 0 0 -5px rgba(0, 0, 0, 0.8), 134px 0 0 -5px rgba(0, 0, 0, 0.8),
+      135px 0 0 -5px rgba(0, 0, 0, 0.8), 136px 0 0 -5px rgba(0, 0, 0, 0.8),
+      137px 0 0 -5px rgba(0, 0, 0, 0.8), 138px 0 0 -5px rgba(0, 0, 0, 0.8),
+      139px 0 0 -5px rgba(0, 0, 0, 0.8), 140px 0 0 -5px rgba(0, 0, 0, 0.8),
+      141px 0 0 -5px rgba(0, 0, 0, 0.8), 142px 0 0 -5px rgba(0, 0, 0, 0.8),
+      143px 0 0 -5px rgba(0, 0, 0, 0.8), 144px 0 0 -5px rgba(0, 0, 0, 0.8),
+      145px 0 0 -5px rgba(0, 0, 0, 0.8), 146px 0 0 -5px rgba(0, 0, 0, 0.8),
+      147px 0 0 -5px rgba(0, 0, 0, 0.8), 148px 0 0 -5px rgba(0, 0, 0, 0.8),
+      149px 0 0 -5px rgba(0, 0, 0, 0.8), 150px 0 0 -5px rgba(0, 0, 0, 0.8),
+      151px 0 0 -5px rgba(0, 0, 0, 0.8), 152px 0 0 -5px rgba(0, 0, 0, 0.8),
+      153px 0 0 -5px rgba(0, 0, 0, 0.8), 154px 0 0 -5px rgba(0, 0, 0, 0.8),
+      155px 0 0 -5px rgba(0, 0, 0, 0.8), 156px 0 0 -5px rgba(0, 0, 0, 0.8),
+      157px 0 0 -5px rgba(0, 0, 0, 0.8), 158px 0 0 -5px rgba(0, 0, 0, 0.8),
+      159px 0 0 -5px rgba(0, 0, 0, 0.8), 160px 0 0 -5px rgba(0, 0, 0, 0.8),
+      161px 0 0 -5px rgba(0, 0, 0, 0.8), 162px 0 0 -5px rgba(0, 0, 0, 0.8),
+      163px 0 0 -5px rgba(0, 0, 0, 0.8), 164px 0 0 -5px rgba(0, 0, 0, 0.8),
+      165px 0 0 -5px rgba(0, 0, 0, 0.8), 166px 0 0 -5px rgba(0, 0, 0, 0.8),
+      167px 0 0 -5px rgba(0, 0, 0, 0.8), 168px 0 0 -5px rgba(0, 0, 0, 0.8),
+      169px 0 0 -5px rgba(0, 0, 0, 0.8), 170px 0 0 -5px rgba(0, 0, 0, 0.8),
+      171px 0 0 -5px rgba(0, 0, 0, 0.8), 172px 0 0 -5px rgba(0, 0, 0, 0.8),
+      173px 0 0 -5px rgba(0, 0, 0, 0.8), 174px 0 0 -5px rgba(0, 0, 0, 0.8),
+      175px 0 0 -5px rgba(0, 0, 0, 0.8), 176px 0 0 -5px rgba(0, 0, 0, 0.8),
+      177px 0 0 -5px rgba(0, 0, 0, 0.8), 178px 0 0 -5px rgba(0, 0, 0, 0.8),
+      179px 0 0 -5px rgba(0, 0, 0, 0.8), 180px 0 0 -5px rgba(0, 0, 0, 0.8),
+      181px 0 0 -5px rgba(0, 0, 0, 0.8), 182px 0 0 -5px rgba(0, 0, 0, 0.8),
+      183px 0 0 -5px rgba(0, 0, 0, 0.8), 184px 0 0 -5px rgba(0, 0, 0, 0.8),
+      185px 0 0 -5px rgba(0, 0, 0, 0.8), 186px 0 0 -5px rgba(0, 0, 0, 0.8),
+      187px 0 0 -5px rgba(0, 0, 0, 0.8), 188px 0 0 -5px rgba(0, 0, 0, 0.8),
+      189px 0 0 -5px rgba(0, 0, 0, 0.8), 190px 0 0 -5px rgba(0, 0, 0, 0.8),
+      191px 0 0 -5px rgba(0, 0, 0, 0.8), 192px 0 0 -5px rgba(0, 0, 0, 0.8),
+      193px 0 0 -5px rgba(0, 0, 0, 0.8), 194px 0 0 -5px rgba(0, 0, 0, 0.8),
+      195px 0 0 -5px rgba(0, 0, 0, 0.8), 196px 0 0 -5px rgba(0, 0, 0, 0.8),
+      197px 0 0 -5px rgba(0, 0, 0, 0.8), 198px 0 0 -5px rgba(0, 0, 0, 0.8),
+      199px 0 0 -5px rgba(0, 0, 0, 0.8), 200px 0 0 -5px rgba(0, 0, 0, 0.8),
+      201px 0 0 -5px rgba(0, 0, 0, 0.8), 202px 0 0 -5px rgba(0, 0, 0, 0.8),
+      203px 0 0 -5px rgba(0, 0, 0, 0.8), 204px 0 0 -5px rgba(0, 0, 0, 0.8),
+      205px 0 0 -5px rgba(0, 0, 0, 0.8), 206px 0 0 -5px rgba(0, 0, 0, 0.8),
+      207px 0 0 -5px rgba(0, 0, 0, 0.8), 208px 0 0 -5px rgba(0, 0, 0, 0.8),
+      209px 0 0 -5px rgba(0, 0, 0, 0.8), 210px 0 0 -5px rgba(0, 0, 0, 0.8),
+      211px 0 0 -5px rgba(0, 0, 0, 0.8), 212px 0 0 -5px rgba(0, 0, 0, 0.8),
+      213px 0 0 -5px rgba(0, 0, 0, 0.8), 214px 0 0 -5px rgba(0, 0, 0, 0.8),
+      215px 0 0 -5px rgba(0, 0, 0, 0.8), 216px 0 0 -5px rgba(0, 0, 0, 0.8),
+      217px 0 0 -5px rgba(0, 0, 0, 0.8), 218px 0 0 -5px rgba(0, 0, 0, 0.8),
+      219px 0 0 -5px rgba(0, 0, 0, 0.8), 220px 0 0 -5px rgba(0, 0, 0, 0.8),
+      221px 0 0 -5px rgba(0, 0, 0, 0.8), 222px 0 0 -5px rgba(0, 0, 0, 0.8),
+      223px 0 0 -5px rgba(0, 0, 0, 0.8), 224px 0 0 -5px rgba(0, 0, 0, 0.8),
+      225px 0 0 -5px rgba(0, 0, 0, 0.8), 226px 0 0 -5px rgba(0, 0, 0, 0.8),
+      227px 0 0 -5px rgba(0, 0, 0, 0.8), 228px 0 0 -5px rgba(0, 0, 0, 0.8),
+      229px 0 0 -5px rgba(0, 0, 0, 0.8), 230px 0 0 -5px rgba(0, 0, 0, 0.8),
+      231px 0 0 -5px rgba(0, 0, 0, 0.8), 232px 0 0 -5px rgba(0, 0, 0, 0.8),
+      233px 0 0 -5px rgba(0, 0, 0, 0.8), 234px 0 0 -5px rgba(0, 0, 0, 0.8),
+      235px 0 0 -5px rgba(0, 0, 0, 0.8), 236px 0 0 -5px rgba(0, 0, 0, 0.8),
+      237px 0 0 -5px rgba(0, 0, 0, 0.8), 238px 0 0 -5px rgba(0, 0, 0, 0.8),
+      239px 0 0 -5px rgba(0, 0, 0, 0.8), 240px 0 0 -5px rgba(0, 0, 0, 0.8),
+      241px 0 0 -5px rgba(0, 0, 0, 0.8), 242px 0 0 -5px rgba(0, 0, 0, 0.8),
+      243px 0 0 -5px rgba(0, 0, 0, 0.8), 244px 0 0 -5px rgba(0, 0, 0, 0.8),
+      245px 0 0 -5px rgba(0, 0, 0, 0.8), 246px 0 0 -5px rgba(0, 0, 0, 0.8),
+      247px 0 0 -5px rgba(0, 0, 0, 0.8), 248px 0 0 -5px rgba(0, 0, 0, 0.8),
+      249px 0 0 -5px rgba(0, 0, 0, 0.8), 250px 0 0 -5px rgba(0, 0, 0, 0.8),
+      251px 0 0 -5px rgba(0, 0, 0, 0.8), 252px 0 0 -5px rgba(0, 0, 0, 0.8),
+      253px 0 0 -5px rgba(0, 0, 0, 0.8), 254px 0 0 -5px rgba(0, 0, 0, 0.8),
+      255px 0 0 -5px rgba(0, 0, 0, 0.8), 256px 0 0 -5px rgba(0, 0, 0, 0.8),
+      257px 0 0 -5px rgba(0, 0, 0, 0.8), 258px 0 0 -5px rgba(0, 0, 0, 0.8),
+      259px 0 0 -5px rgba(0, 0, 0, 0.8), 260px 0 0 -5px rgba(0, 0, 0, 0.8),
+      261px 0 0 -5px rgba(0, 0, 0, 0.8), 262px 0 0 -5px rgba(0, 0, 0, 0.8),
+      263px 0 0 -5px rgba(0, 0, 0, 0.8), 264px 0 0 -5px rgba(0, 0, 0, 0.8),
+      265px 0 0 -5px rgba(0, 0, 0, 0.8), 266px 0 0 -5px rgba(0, 0, 0, 0.8),
+      267px 0 0 -5px rgba(0, 0, 0, 0.8), 268px 0 0 -5px rgba(0, 0, 0, 0.8),
+      269px 0 0 -5px rgba(0, 0, 0, 0.8), 270px 0 0 -5px rgba(0, 0, 0, 0.8),
+      271px 0 0 -5px rgba(0, 0, 0, 0.8), 272px 0 0 -5px rgba(0, 0, 0, 0.8),
+      273px 0 0 -5px rgba(0, 0, 0, 0.8), 274px 0 0 -5px rgba(0, 0, 0, 0.8),
+      275px 0 0 -5px rgba(0, 0, 0, 0.8), 276px 0 0 -5px rgba(0, 0, 0, 0.8),
+      277px 0 0 -5px rgba(0, 0, 0, 0.8), 278px 0 0 -5px rgba(0, 0, 0, 0.8),
+      279px 0 0 -5px rgba(0, 0, 0, 0.8), 280px 0 0 -5px rgba(0, 0, 0, 0.8),
+      281px 0 0 -5px rgba(0, 0, 0, 0.8), 282px 0 0 -5px rgba(0, 0, 0, 0.8),
+      283px 0 0 -5px rgba(0, 0, 0, 0.8), 284px 0 0 -5px rgba(0, 0, 0, 0.8),
+      285px 0 0 -5px rgba(0, 0, 0, 0.8), 286px 0 0 -5px rgba(0, 0, 0, 0.8),
+      287px 0 0 -5px rgba(0, 0, 0, 0.8), 288px 0 0 -5px rgba(0, 0, 0, 0.8),
+      289px 0 0 -5px rgba(0, 0, 0, 0.8), 290px 0 0 -5px rgba(0, 0, 0, 0.8),
+      291px 0 0 -5px rgba(0, 0, 0, 0.8), 292px 0 0 -5px rgba(0, 0, 0, 0.8),
+      293px 0 0 -5px rgba(0, 0, 0, 0.8), 294px 0 0 -5px rgba(0, 0, 0, 0.8),
+      295px 0 0 -5px rgba(0, 0, 0, 0.8), 296px 0 0 -5px rgba(0, 0, 0, 0.8),
+      297px 0 0 -5px rgba(0, 0, 0, 0.8), 298px 0 0 -5px rgba(0, 0, 0, 0.8),
+      299px 0 0 -5px rgba(0, 0, 0, 0.8), 300px 0 0 -5px rgba(0, 0, 0, 0.8),
+      301px 0 0 -5px rgba(0, 0, 0, 0.8), 302px 0 0 -5px rgba(0, 0, 0, 0.8),
+      303px 0 0 -5px rgba(0, 0, 0, 0.8), 304px 0 0 -5px rgba(0, 0, 0, 0.8),
+      305px 0 0 -5px rgba(0, 0, 0, 0.8), 306px 0 0 -5px rgba(0, 0, 0, 0.8),
+      307px 0 0 -5px rgba(0, 0, 0, 0.8), 308px 0 0 -5px rgba(0, 0, 0, 0.8),
+      309px 0 0 -5px rgba(0, 0, 0, 0.8), 310px 0 0 -5px rgba(0, 0, 0, 0.8),
+      311px 0 0 -5px rgba(0, 0, 0, 0.8), 312px 0 0 -5px rgba(0, 0, 0, 0.8),
+      313px 0 0 -5px rgba(0, 0, 0, 0.8), 314px 0 0 -5px rgba(0, 0, 0, 0.8),
+      315px 0 0 -5px rgba(0, 0, 0, 0.8), 316px 0 0 -5px rgba(0, 0, 0, 0.8),
+      317px 0 0 -5px rgba(0, 0, 0, 0.8), 318px 0 0 -5px rgba(0, 0, 0, 0.8),
+      319px 0 0 -5px rgba(0, 0, 0, 0.8), 320px 0 0 -5px rgba(0, 0, 0, 0.8),
+      321px 0 0 -5px rgba(0, 0, 0, 0.8), 322px 0 0 -5px rgba(0, 0, 0, 0.8),
+      323px 0 0 -5px rgba(0, 0, 0, 0.8), 324px 0 0 -5px rgba(0, 0, 0, 0.8),
+      325px 0 0 -5px rgba(0, 0, 0, 0.8), 326px 0 0 -5px rgba(0, 0, 0, 0.8),
+      327px 0 0 -5px rgba(0, 0, 0, 0.8), 328px 0 0 -5px rgba(0, 0, 0, 0.8),
+      329px 0 0 -5px rgba(0, 0, 0, 0.8), 330px 0 0 -5px rgba(0, 0, 0, 0.8),
+      331px 0 0 -5px rgba(0, 0, 0, 0.8), 332px 0 0 -5px rgba(0, 0, 0, 0.8),
+      333px 0 0 -5px rgba(0, 0, 0, 0.8), 334px 0 0 -5px rgba(0, 0, 0, 0.8),
+      335px 0 0 -5px rgba(0, 0, 0, 0.8), 336px 0 0 -5px rgba(0, 0, 0, 0.8),
+      337px 0 0 -5px rgba(0, 0, 0, 0.8), 338px 0 0 -5px rgba(0, 0, 0, 0.8),
+      339px 0 0 -5px rgba(0, 0, 0, 0.8), 340px 0 0 -5px rgba(0, 0, 0, 0.8),
+      341px 0 0 -5px rgba(0, 0, 0, 0.8), 342px 0 0 -5px rgba(0, 0, 0, 0.8),
+      343px 0 0 -5px rgba(0, 0, 0, 0.8), 344px 0 0 -5px rgba(0, 0, 0, 0.8),
+      345px 0 0 -5px rgba(0, 0, 0, 0.8), 346px 0 0 -5px rgba(0, 0, 0, 0.8),
+      347px 0 0 -5px rgba(0, 0, 0, 0.8), 348px 0 0 -5px rgba(0, 0, 0, 0.8),
+      349px 0 0 -5px rgba(0, 0, 0, 0.8), 350px 0 0 -5px rgba(0, 0, 0, 0.8),
+      351px 0 0 -5px rgba(0, 0, 0, 0.8), 352px 0 0 -5px rgba(0, 0, 0, 0.8),
+      353px 0 0 -5px rgba(0, 0, 0, 0.8), 354px 0 0 -5px rgba(0, 0, 0, 0.8),
+      355px 0 0 -5px rgba(0, 0, 0, 0.8), 356px 0 0 -5px rgba(0, 0, 0, 0.8),
+      357px 0 0 -5px rgba(0, 0, 0, 0.8), 358px 0 0 -5px rgba(0, 0, 0, 0.8),
+      359px 0 0 -5px rgba(0, 0, 0, 0.8), 360px 0 0 -5px rgba(0, 0, 0, 0.8),
+      361px 0 0 -5px rgba(0, 0, 0, 0.8), 362px 0 0 -5px rgba(0, 0, 0, 0.8),
+      363px 0 0 -5px rgba(0, 0, 0, 0.8), 364px 0 0 -5px rgba(0, 0, 0, 0.8),
+      365px 0 0 -5px rgba(0, 0, 0, 0.8), 366px 0 0 -5px rgba(0, 0, 0, 0.8),
+      367px 0 0 -5px rgba(0, 0, 0, 0.8), 368px 0 0 -5px rgba(0, 0, 0, 0.8),
+      369px 0 0 -5px rgba(0, 0, 0, 0.8), 370px 0 0 -5px rgba(0, 0, 0, 0.8),
+      371px 0 0 -5px rgba(0, 0, 0, 0.8), 372px 0 0 -5px rgba(0, 0, 0, 0.8),
+      373px 0 0 -5px rgba(0, 0, 0, 0.8), 374px 0 0 -5px rgba(0, 0, 0, 0.8),
+      375px 0 0 -5px rgba(0, 0, 0, 0.8), 376px 0 0 -5px rgba(0, 0, 0, 0.8),
+      377px 0 0 -5px rgba(0, 0, 0, 0.8), 378px 0 0 -5px rgba(0, 0, 0, 0.8),
+      379px 0 0 -5px rgba(0, 0, 0, 0.8), 380px 0 0 -5px rgba(0, 0, 0, 0.8),
+      381px 0 0 -5px rgba(0, 0, 0, 0.8), 382px 0 0 -5px rgba(0, 0, 0, 0.8),
+      383px 0 0 -5px rgba(0, 0, 0, 0.8), 384px 0 0 -5px rgba(0, 0, 0, 0.8),
+      385px 0 0 -5px rgba(0, 0, 0, 0.8), 386px 0 0 -5px rgba(0, 0, 0, 0.8),
+      387px 0 0 -5px rgba(0, 0, 0, 0.8), 388px 0 0 -5px rgba(0, 0, 0, 0.8),
+      389px 0 0 -5px rgba(0, 0, 0, 0.8), 390px 0 0 -5px rgba(0, 0, 0, 0.8),
+      391px 0 0 -5px rgba(0, 0, 0, 0.8), 392px 0 0 -5px rgba(0, 0, 0, 0.8),
+      393px 0 0 -5px rgba(0, 0, 0, 0.8), 394px 0 0 -5px rgba(0, 0, 0, 0.8),
+      395px 0 0 -5px rgba(0, 0, 0, 0.8), 396px 0 0 -5px rgba(0, 0, 0, 0.8),
+      397px 0 0 -5px rgba(0, 0, 0, 0.8), 398px 0 0 -5px rgba(0, 0, 0, 0.8),
+      399px 0 0 -5px rgba(0, 0, 0, 0.8), 400px 0 0 -5px rgba(0, 0, 0, 0.8),
+      401px 0 0 -5px rgba(0, 0, 0, 0.8), 402px 0 0 -5px rgba(0, 0, 0, 0.8),
+      403px 0 0 -5px rgba(0, 0, 0, 0.8), 404px 0 0 -5px rgba(0, 0, 0, 0.8),
+      405px 0 0 -5px rgba(0, 0, 0, 0.8), 406px 0 0 -5px rgba(0, 0, 0, 0.8),
+      407px 0 0 -5px rgba(0, 0, 0, 0.8), 408px 0 0 -5px rgba(0, 0, 0, 0.8),
+      409px 0 0 -5px rgba(0, 0, 0, 0.8), 410px 0 0 -5px rgba(0, 0, 0, 0.8),
+      411px 0 0 -5px rgba(0, 0, 0, 0.8), 412px 0 0 -5px rgba(0, 0, 0, 0.8),
+      413px 0 0 -5px rgba(0, 0, 0, 0.8), 414px 0 0 -5px rgba(0, 0, 0, 0.8),
+      415px 0 0 -5px rgba(0, 0, 0, 0.8), 416px 0 0 -5px rgba(0, 0, 0, 0.8),
+      417px 0 0 -5px rgba(0, 0, 0, 0.8), 418px 0 0 -5px rgba(0, 0, 0, 0.8),
+      419px 0 0 -5px rgba(0, 0, 0, 0.8), 420px 0 0 -5px rgba(0, 0, 0, 0.8),
+      421px 0 0 -5px rgba(0, 0, 0, 0.8), 422px 0 0 -5px rgba(0, 0, 0, 0.8),
+      423px 0 0 -5px rgba(0, 0, 0, 0.8), 424px 0 0 -5px rgba(0, 0, 0, 0.8),
+      425px 0 0 -5px rgba(0, 0, 0, 0.8), 426px 0 0 -5px rgba(0, 0, 0, 0.8),
+      427px 0 0 -5px rgba(0, 0, 0, 0.8), 428px 0 0 -5px rgba(0, 0, 0, 0.8),
+      429px 0 0 -5px rgba(0, 0, 0, 0.8), 430px 0 0 -5px rgba(0, 0, 0, 0.8),
+      431px 0 0 -5px rgba(0, 0, 0, 0.8), 432px 0 0 -5px rgba(0, 0, 0, 0.8),
+      433px 0 0 -5px rgba(0, 0, 0, 0.8), 434px 0 0 -5px rgba(0, 0, 0, 0.8),
+      435px 0 0 -5px rgba(0, 0, 0, 0.8), 436px 0 0 -5px rgba(0, 0, 0, 0.8),
+      437px 0 0 -5px rgba(0, 0, 0, 0.8), 438px 0 0 -5px rgba(0, 0, 0, 0.8),
+      439px 0 0 -5px rgba(0, 0, 0, 0.8), 440px 0 0 -5px rgba(0, 0, 0, 0.8),
+      441px 0 0 -5px rgba(0, 0, 0, 0.8), 442px 0 0 -5px rgba(0, 0, 0, 0.8),
+      443px 0 0 -5px rgba(0, 0, 0, 0.8), 444px 0 0 -5px rgba(0, 0, 0, 0.8),
+      445px 0 0 -5px rgba(0, 0, 0, 0.8), 446px 0 0 -5px rgba(0, 0, 0, 0.8),
+      447px 0 0 -5px rgba(0, 0, 0, 0.8), 448px 0 0 -5px rgba(0, 0, 0, 0.8),
+      449px 0 0 -5px rgba(0, 0, 0, 0.8), 450px 0 0 -5px rgba(0, 0, 0, 0.8),
+      451px 0 0 -5px rgba(0, 0, 0, 0.8), 452px 0 0 -5px rgba(0, 0, 0, 0.8),
+      453px 0 0 -5px rgba(0, 0, 0, 0.8), 454px 0 0 -5px rgba(0, 0, 0, 0.8),
+      455px 0 0 -5px rgba(0, 0, 0, 0.8), 456px 0 0 -5px rgba(0, 0, 0, 0.8),
+      457px 0 0 -5px rgba(0, 0, 0, 0.8), 458px 0 0 -5px rgba(0, 0, 0, 0.8),
+      459px 0 0 -5px rgba(0, 0, 0, 0.8), 460px 0 0 -5px rgba(0, 0, 0, 0.8),
+      461px 0 0 -5px rgba(0, 0, 0, 0.8), 462px 0 0 -5px rgba(0, 0, 0, 0.8),
+      463px 0 0 -5px rgba(0, 0, 0, 0.8), 464px 0 0 -5px rgba(0, 0, 0, 0.8),
+      465px 0 0 -5px rgba(0, 0, 0, 0.8), 466px 0 0 -5px rgba(0, 0, 0, 0.8),
+      467px 0 0 -5px rgba(0, 0, 0, 0.8), 468px 0 0 -5px rgba(0, 0, 0, 0.8),
+      469px 0 0 -5px rgba(0, 0, 0, 0.8), 470px 0 0 -5px rgba(0, 0, 0, 0.8),
+      471px 0 0 -5px rgba(0, 0, 0, 0.8), 472px 0 0 -5px rgba(0, 0, 0, 0.8),
+      473px 0 0 -5px rgba(0, 0, 0, 0.8), 474px 0 0 -5px rgba(0, 0, 0, 0.8),
+      475px 0 0 -5px rgba(0, 0, 0, 0.8), 476px 0 0 -5px rgba(0, 0, 0, 0.8),
+      477px 0 0 -5px rgba(0, 0, 0, 0.8), 478px 0 0 -5px rgba(0, 0, 0, 0.8),
+      479px 0 0 -5px rgba(0, 0, 0, 0.8), 480px 0 0 -5px rgba(0, 0, 0, 0.8),
+      481px 0 0 -5px rgba(0, 0, 0, 0.8), 482px 0 0 -5px rgba(0, 0, 0, 0.8),
+      483px 0 0 -5px rgba(0, 0, 0, 0.8), 484px 0 0 -5px rgba(0, 0, 0, 0.8),
+      485px 0 0 -5px rgba(0, 0, 0, 0.8), 486px 0 0 -5px rgba(0, 0, 0, 0.8),
+      487px 0 0 -5px rgba(0, 0, 0, 0.8), 488px 0 0 -5px rgba(0, 0, 0, 0.8),
+      489px 0 0 -5px rgba(0, 0, 0, 0.8), 490px 0 0 -5px rgba(0, 0, 0, 0.8),
+      491px 0 0 -5px rgba(0, 0, 0, 0.8), 492px 0 0 -5px rgba(0, 0, 0, 0.8),
+      493px 0 0 -5px rgba(0, 0, 0, 0.8), 494px 0 0 -5px rgba(0, 0, 0, 0.8),
+      495px 0 0 -5px rgba(0, 0, 0, 0.8), 496px 0 0 -5px rgba(0, 0, 0, 0.8),
+      497px 0 0 -5px rgba(0, 0, 0, 0.8), 498px 0 0 -5px rgba(0, 0, 0, 0.8),
+      499px 0 0 -5px rgba(0, 0, 0, 0.8), 500px 0 0 -5px rgba(0, 0, 0, 0.8),
+      501px 0 0 -5px rgba(0, 0, 0, 0.8), 502px 0 0 -5px rgba(0, 0, 0, 0.8),
+      503px 0 0 -5px rgba(0, 0, 0, 0.8), 504px 0 0 -5px rgba(0, 0, 0, 0.8),
+      505px 0 0 -5px rgba(0, 0, 0, 0.8), 506px 0 0 -5px rgba(0, 0, 0, 0.8),
+      507px 0 0 -5px rgba(0, 0, 0, 0.8), 508px 0 0 -5px rgba(0, 0, 0, 0.8),
+      509px 0 0 -5px rgba(0, 0, 0, 0.8), 510px 0 0 -5px rgba(0, 0, 0, 0.8),
+      511px 0 0 -5px rgba(0, 0, 0, 0.8), 512px 0 0 -5px rgba(0, 0, 0, 0.8),
+      513px 0 0 -5px rgba(0, 0, 0, 0.8), 514px 0 0 -5px rgba(0, 0, 0, 0.8),
+      515px 0 0 -5px rgba(0, 0, 0, 0.8), 516px 0 0 -5px rgba(0, 0, 0, 0.8),
+      517px 0 0 -5px rgba(0, 0, 0, 0.8), 518px 0 0 -5px rgba(0, 0, 0, 0.8),
+      519px 0 0 -5px rgba(0, 0, 0, 0.8), 520px 0 0 -5px rgba(0, 0, 0, 0.8),
+      521px 0 0 -5px rgba(0, 0, 0, 0.8), 522px 0 0 -5px rgba(0, 0, 0, 0.8),
+      523px 0 0 -5px rgba(0, 0, 0, 0.8), 524px 0 0 -5px rgba(0, 0, 0, 0.8),
+      525px 0 0 -5px rgba(0, 0, 0, 0.8), 526px 0 0 -5px rgba(0, 0, 0, 0.8),
+      527px 0 0 -5px rgba(0, 0, 0, 0.8), 528px 0 0 -5px rgba(0, 0, 0, 0.8),
+      529px 0 0 -5px rgba(0, 0, 0, 0.8), 530px 0 0 -5px rgba(0, 0, 0, 0.8),
+      531px 0 0 -5px rgba(0, 0, 0, 0.8), 532px 0 0 -5px rgba(0, 0, 0, 0.8),
+      533px 0 0 -5px rgba(0, 0, 0, 0.8), 534px 0 0 -5px rgba(0, 0, 0, 0.8),
+      535px 0 0 -5px rgba(0, 0, 0, 0.8), 536px 0 0 -5px rgba(0, 0, 0, 0.8),
+      537px 0 0 -5px rgba(0, 0, 0, 0.8), 538px 0 0 -5px rgba(0, 0, 0, 0.8),
+      539px 0 0 -5px rgba(0, 0, 0, 0.8), 540px 0 0 -5px rgba(0, 0, 0, 0.8),
+      541px 0 0 -5px rgba(0, 0, 0, 0.8), 542px 0 0 -5px rgba(0, 0, 0, 0.8),
+      543px 0 0 -5px rgba(0, 0, 0, 0.8), 544px 0 0 -5px rgba(0, 0, 0, 0.8),
+      545px 0 0 -5px rgba(0, 0, 0, 0.8), 546px 0 0 -5px rgba(0, 0, 0, 0.8),
+      547px 0 0 -5px rgba(0, 0, 0, 0.8), 548px 0 0 -5px rgba(0, 0, 0, 0.8),
+      549px 0 0 -5px rgba(0, 0, 0, 0.8), 550px 0 0 -5px rgba(0, 0, 0, 0.8),
+      551px 0 0 -5px rgba(0, 0, 0, 0.8), 552px 0 0 -5px rgba(0, 0, 0, 0.8),
+      553px 0 0 -5px rgba(0, 0, 0, 0.8), 554px 0 0 -5px rgba(0, 0, 0, 0.8),
+      555px 0 0 -5px rgba(0, 0, 0, 0.8), 556px 0 0 -5px rgba(0, 0, 0, 0.8),
+      557px 0 0 -5px rgba(0, 0, 0, 0.8), 558px 0 0 -5px rgba(0, 0, 0, 0.8),
+      559px 0 0 -5px rgba(0, 0, 0, 0.8), 560px 0 0 -5px rgba(0, 0, 0, 0.8),
+      561px 0 0 -5px rgba(0, 0, 0, 0.8), 562px 0 0 -5px rgba(0, 0, 0, 0.8),
+      563px 0 0 -5px rgba(0, 0, 0, 0.8), 564px 0 0 -5px rgba(0, 0, 0, 0.8),
+      565px 0 0 -5px rgba(0, 0, 0, 0.8), 566px 0 0 -5px rgba(0, 0, 0, 0.8),
+      567px 0 0 -5px rgba(0, 0, 0, 0.8), 568px 0 0 -5px rgba(0, 0, 0, 0.8),
+      569px 0 0 -5px rgba(0, 0, 0, 0.8), 570px 0 0 -5px rgba(0, 0, 0, 0.8),
+      571px 0 0 -5px rgba(0, 0, 0, 0.8), 572px 0 0 -5px rgba(0, 0, 0, 0.8),
+      573px 0 0 -5px rgba(0, 0, 0, 0.8), 574px 0 0 -5px rgba(0, 0, 0, 0.8),
+      575px 0 0 -5px rgba(0, 0, 0, 0.8), 576px 0 0 -5px rgba(0, 0, 0, 0.8),
+      577px 0 0 -5px rgba(0, 0, 0, 0.8), 578px 0 0 -5px rgba(0, 0, 0, 0.8),
+      579px 0 0 -5px rgba(0, 0, 0, 0.8), 580px 0 0 -5px rgba(0, 0, 0, 0.8),
+      581px 0 0 -5px rgba(0, 0, 0, 0.8), 582px 0 0 -5px rgba(0, 0, 0, 0.8),
+      583px 0 0 -5px rgba(0, 0, 0, 0.8), 584px 0 0 -5px rgba(0, 0, 0, 0.8),
+      585px 0 0 -5px rgba(0, 0, 0, 0.8), 586px 0 0 -5px rgba(0, 0, 0, 0.8),
+      587px 0 0 -5px rgba(0, 0, 0, 0.8), 588px 0 0 -5px rgba(0, 0, 0, 0.8),
+      589px 0 0 -5px rgba(0, 0, 0, 0.8), 590px 0 0 -5px rgba(0, 0, 0, 0.8),
+      591px 0 0 -5px rgba(0, 0, 0, 0.8), 592px 0 0 -5px rgba(0, 0, 0, 0.8),
+      593px 0 0 -5px rgba(0, 0, 0, 0.8), 594px 0 0 -5px rgba(0, 0, 0, 0.8),
+      595px 0 0 -5px rgba(0, 0, 0, 0.8), 596px 0 0 -5px rgba(0, 0, 0, 0.8),
+      597px 0 0 -5px rgba(0, 0, 0, 0.8), 598px 0 0 -5px rgba(0, 0, 0, 0.8),
+      599px 0 0 -5px rgba(0, 0, 0, 0.8), 600px 0 0 -5px rgba(0, 0, 0, 0.8),
+      601px 0 0 -5px rgba(0, 0, 0, 0.8), 602px 0 0 -5px rgba(0, 0, 0, 0.8),
+      603px 0 0 -5px rgba(0, 0, 0, 0.8), 604px 0 0 -5px rgba(0, 0, 0, 0.8),
+      605px 0 0 -5px rgba(0, 0, 0, 0.8), 606px 0 0 -5px rgba(0, 0, 0, 0.8),
+      607px 0 0 -5px rgba(0, 0, 0, 0.8), 608px 0 0 -5px rgba(0, 0, 0, 0.8),
+      609px 0 0 -5px rgba(0, 0, 0, 0.8), 610px 0 0 -5px rgba(0, 0, 0, 0.8),
+      611px 0 0 -5px rgba(0, 0, 0, 0.8), 612px 0 0 -5px rgba(0, 0, 0, 0.8),
+      613px 0 0 -5px rgba(0, 0, 0, 0.8), 614px 0 0 -5px rgba(0, 0, 0, 0.8),
+      615px 0 0 -5px rgba(0, 0, 0, 0.8), 616px 0 0 -5px rgba(0, 0, 0, 0.8),
+      617px 0 0 -5px rgba(0, 0, 0, 0.8), 618px 0 0 -5px rgba(0, 0, 0, 0.8),
+      619px 0 0 -5px rgba(0, 0, 0, 0.8), 620px 0 0 -5px rgba(0, 0, 0, 0.8),
+      621px 0 0 -5px rgba(0, 0, 0, 0.8), 622px 0 0 -5px rgba(0, 0, 0, 0.8),
+      623px 0 0 -5px rgba(0, 0, 0, 0.8), 624px 0 0 -5px rgba(0, 0, 0, 0.8),
+      625px 0 0 -5px rgba(0, 0, 0, 0.8), 626px 0 0 -5px rgba(0, 0, 0, 0.8),
+      627px 0 0 -5px rgba(0, 0, 0, 0.8), 628px 0 0 -5px rgba(0, 0, 0, 0.8),
+      629px 0 0 -5px rgba(0, 0, 0, 0.8), 630px 0 0 -5px rgba(0, 0, 0, 0.8),
+      631px 0 0 -5px rgba(0, 0, 0, 0.8), 632px 0 0 -5px rgba(0, 0, 0, 0.8),
+      633px 0 0 -5px rgba(0, 0, 0, 0.8), 634px 0 0 -5px rgba(0, 0, 0, 0.8),
+      635px 0 0 -5px rgba(0, 0, 0, 0.8), 636px 0 0 -5px rgba(0, 0, 0, 0.8),
+      637px 0 0 -5px rgba(0, 0, 0, 0.8), 638px 0 0 -5px rgba(0, 0, 0, 0.8),
+      639px 0 0 -5px rgba(0, 0, 0, 0.8), 640px 0 0 -5px rgba(0, 0, 0, 0.8),
+      641px 0 0 -5px rgba(0, 0, 0, 0.8), 642px 0 0 -5px rgba(0, 0, 0, 0.8),
+      643px 0 0 -5px rgba(0, 0, 0, 0.8), 644px 0 0 -5px rgba(0, 0, 0, 0.8),
+      645px 0 0 -5px rgba(0, 0, 0, 0.8), 646px 0 0 -5px rgba(0, 0, 0, 0.8),
+      647px 0 0 -5px rgba(0, 0, 0, 0.8), 648px 0 0 -5px rgba(0, 0, 0, 0.8),
+      649px 0 0 -5px rgba(0, 0, 0, 0.8), 650px 0 0 -5px rgba(0, 0, 0, 0.8),
+      651px 0 0 -5px rgba(0, 0, 0, 0.8), 652px 0 0 -5px rgba(0, 0, 0, 0.8),
+      653px 0 0 -5px rgba(0, 0, 0, 0.8), 654px 0 0 -5px rgba(0, 0, 0, 0.8),
+      655px 0 0 -5px rgba(0, 0, 0, 0.8), 656px 0 0 -5px rgba(0, 0, 0, 0.8),
+      657px 0 0 -5px rgba(0, 0, 0, 0.8), 658px 0 0 -5px rgba(0, 0, 0, 0.8),
+      659px 0 0 -5px rgba(0, 0, 0, 0.8), 660px 0 0 -5px rgba(0, 0, 0, 0.8),
+      661px 0 0 -5px rgba(0, 0, 0, 0.8), 662px 0 0 -5px rgba(0, 0, 0, 0.8),
+      663px 0 0 -5px rgba(0, 0, 0, 0.8), 664px 0 0 -5px rgba(0, 0, 0, 0.8),
+      665px 0 0 -5px rgba(0, 0, 0, 0.8), 666px 0 0 -5px rgba(0, 0, 0, 0.8),
+      667px 0 0 -5px rgba(0, 0, 0, 0.8), 668px 0 0 -5px rgba(0, 0, 0, 0.8),
+      669px 0 0 -5px rgba(0, 0, 0, 0.8), 670px 0 0 -5px rgba(0, 0, 0, 0.8),
+      671px 0 0 -5px rgba(0, 0, 0, 0.8), 672px 0 0 -5px rgba(0, 0, 0, 0.8),
+      673px 0 0 -5px rgba(0, 0, 0, 0.8), 674px 0 0 -5px rgba(0, 0, 0, 0.8),
+      675px 0 0 -5px rgba(0, 0, 0, 0.8), 676px 0 0 -5px rgba(0, 0, 0, 0.8),
+      677px 0 0 -5px rgba(0, 0, 0, 0.8), 678px 0 0 -5px rgba(0, 0, 0, 0.8),
+      679px 0 0 -5px rgba(0, 0, 0, 0.8), 680px 0 0 -5px rgba(0, 0, 0, 0.8),
+      681px 0 0 -5px rgba(0, 0, 0, 0.8), 682px 0 0 -5px rgba(0, 0, 0, 0.8),
+      683px 0 0 -5px rgba(0, 0, 0, 0.8), 684px 0 0 -5px rgba(0, 0, 0, 0.8),
+      685px 0 0 -5px rgba(0, 0, 0, 0.8), 686px 0 0 -5px rgba(0, 0, 0, 0.8),
+      687px 0 0 -5px rgba(0, 0, 0, 0.8), 688px 0 0 -5px rgba(0, 0, 0, 0.8),
+      689px 0 0 -5px rgba(0, 0, 0, 0.8), 690px 0 0 -5px rgba(0, 0, 0, 0.8),
+      691px 0 0 -5px rgba(0, 0, 0, 0.8), 692px 0 0 -5px rgba(0, 0, 0, 0.8),
+      693px 0 0 -5px rgba(0, 0, 0, 0.8), 694px 0 0 -5px rgba(0, 0, 0, 0.8),
+      695px 0 0 -5px rgba(0, 0, 0, 0.8), 696px 0 0 -5px rgba(0, 0, 0, 0.8),
+      697px 0 0 -5px rgba(0, 0, 0, 0.8), 698px 0 0 -5px rgba(0, 0, 0, 0.8),
+      699px 0 0 -5px rgba(0, 0, 0, 0.8), 700px 0 0 -5px rgba(0, 0, 0, 0.8),
+      701px 0 0 -5px rgba(0, 0, 0, 0.8), 702px 0 0 -5px rgba(0, 0, 0, 0.8),
+      703px 0 0 -5px rgba(0, 0, 0, 0.8), 704px 0 0 -5px rgba(0, 0, 0, 0.8),
+      705px 0 0 -5px rgba(0, 0, 0, 0.8), 706px 0 0 -5px rgba(0, 0, 0, 0.8),
+      707px 0 0 -5px rgba(0, 0, 0, 0.8), 708px 0 0 -5px rgba(0, 0, 0, 0.8),
+      709px 0 0 -5px rgba(0, 0, 0, 0.8), 710px 0 0 -5px rgba(0, 0, 0, 0.8),
+      711px 0 0 -5px rgba(0, 0, 0, 0.8), 712px 0 0 -5px rgba(0, 0, 0, 0.8),
+      713px 0 0 -5px rgba(0, 0, 0, 0.8), 714px 0 0 -5px rgba(0, 0, 0, 0.8),
+      715px 0 0 -5px rgba(0, 0, 0, 0.8), 716px 0 0 -5px rgba(0, 0, 0, 0.8),
+      717px 0 0 -5px rgba(0, 0, 0, 0.8), 718px 0 0 -5px rgba(0, 0, 0, 0.8),
+      719px 0 0 -5px rgba(0, 0, 0, 0.8), 720px 0 0 -5px rgba(0, 0, 0, 0.8),
+      721px 0 0 -5px rgba(0, 0, 0, 0.8), 722px 0 0 -5px rgba(0, 0, 0, 0.8),
+      723px 0 0 -5px rgba(0, 0, 0, 0.8), 724px 0 0 -5px rgba(0, 0, 0, 0.8),
+      725px 0 0 -5px rgba(0, 0, 0, 0.8), 726px 0 0 -5px rgba(0, 0, 0, 0.8),
+      727px 0 0 -5px rgba(0, 0, 0, 0.8), 728px 0 0 -5px rgba(0, 0, 0, 0.8),
+      729px 0 0 -5px rgba(0, 0, 0, 0.8), 730px 0 0 -5px rgba(0, 0, 0, 0.8),
+      731px 0 0 -5px rgba(0, 0, 0, 0.8), 732px 0 0 -5px rgba(0, 0, 0, 0.8),
+      733px 0 0 -5px rgba(0, 0, 0, 0.8), 734px 0 0 -5px rgba(0, 0, 0, 0.8),
+      735px 0 0 -5px rgba(0, 0, 0, 0.8), 736px 0 0 -5px rgba(0, 0, 0, 0.8),
+      737px 0 0 -5px rgba(0, 0, 0, 0.8), 738px 0 0 -5px rgba(0, 0, 0, 0.8),
+      739px 0 0 -5px rgba(0, 0, 0, 0.8), 740px 0 0 -5px rgba(0, 0, 0, 0.8),
+      741px 0 0 -5px rgba(0, 0, 0, 0.8), 742px 0 0 -5px rgba(0, 0, 0, 0.8),
+      743px 0 0 -5px rgba(0, 0, 0, 0.8), 744px 0 0 -5px rgba(0, 0, 0, 0.8),
+      745px 0 0 -5px rgba(0, 0, 0, 0.8), 746px 0 0 -5px rgba(0, 0, 0, 0.8),
+      747px 0 0 -5px rgba(0, 0, 0, 0.8), 748px 0 0 -5px rgba(0, 0, 0, 0.8),
+      749px 0 0 -5px rgba(0, 0, 0, 0.8), 750px 0 0 -5px rgba(0, 0, 0, 0.8),
+      751px 0 0 -5px rgba(0, 0, 0, 0.8), 752px 0 0 -5px rgba(0, 0, 0, 0.8),
+      753px 0 0 -5px rgba(0, 0, 0, 0.8), 754px 0 0 -5px rgba(0, 0, 0, 0.8),
+      755px 0 0 -5px rgba(0, 0, 0, 0.8), 756px 0 0 -5px rgba(0, 0, 0, 0.8),
+      757px 0 0 -5px rgba(0, 0, 0, 0.8), 758px 0 0 -5px rgba(0, 0, 0, 0.8),
+      759px 0 0 -5px rgba(0, 0, 0, 0.8), 760px 0 0 -5px rgba(0, 0, 0, 0.8),
+      761px 0 0 -5px rgba(0, 0, 0, 0.8), 762px 0 0 -5px rgba(0, 0, 0, 0.8),
+      763px 0 0 -5px rgba(0, 0, 0, 0.8), 764px 0 0 -5px rgba(0, 0, 0, 0.8),
+      765px 0 0 -5px rgba(0, 0, 0, 0.8), 766px 0 0 -5px rgba(0, 0, 0, 0.8),
+      767px 0 0 -5px rgba(0, 0, 0, 0.8), 768px 0 0 -5px rgba(0, 0, 0, 0.8),
+      769px 0 0 -5px rgba(0, 0, 0, 0.8), 770px 0 0 -5px rgba(0, 0, 0, 0.8),
+      771px 0 0 -5px rgba(0, 0, 0, 0.8), 772px 0 0 -5px rgba(0, 0, 0, 0.8),
+      773px 0 0 -5px rgba(0, 0, 0, 0.8), 774px 0 0 -5px rgba(0, 0, 0, 0.8),
+      775px 0 0 -5px rgba(0, 0, 0, 0.8), 776px 0 0 -5px rgba(0, 0, 0, 0.8),
+      777px 0 0 -5px rgba(0, 0, 0, 0.8), 778px 0 0 -5px rgba(0, 0, 0, 0.8),
+      779px 0 0 -5px rgba(0, 0, 0, 0.8), 780px 0 0 -5px rgba(0, 0, 0, 0.8),
+      781px 0 0 -5px rgba(0, 0, 0, 0.8), 782px 0 0 -5px rgba(0, 0, 0, 0.8),
+      783px 0 0 -5px rgba(0, 0, 0, 0.8), 784px 0 0 -5px rgba(0, 0, 0, 0.8),
+      785px 0 0 -5px rgba(0, 0, 0, 0.8), 786px 0 0 -5px rgba(0, 0, 0, 0.8),
+      787px 0 0 -5px rgba(0, 0, 0, 0.8), 788px 0 0 -5px rgba(0, 0, 0, 0.8),
+      789px 0 0 -5px rgba(0, 0, 0, 0.8), 790px 0 0 -5px rgba(0, 0, 0, 0.8),
+      791px 0 0 -5px rgba(0, 0, 0, 0.8), 792px 0 0 -5px rgba(0, 0, 0, 0.8),
+      793px 0 0 -5px rgba(0, 0, 0, 0.8), 794px 0 0 -5px rgba(0, 0, 0, 0.8),
+      795px 0 0 -5px rgba(0, 0, 0, 0.8), 796px 0 0 -5px rgba(0, 0, 0, 0.8),
+      797px 0 0 -5px rgba(0, 0, 0, 0.8), 798px 0 0 -5px rgba(0, 0, 0, 0.8),
+      799px 0 0 -5px rgba(0, 0, 0, 0.8), 800px 0 0 -5px rgba(0, 0, 0, 0.8),
+      801px 0 0 -5px rgba(0, 0, 0, 0.8), 802px 0 0 -5px rgba(0, 0, 0, 0.8),
+      803px 0 0 -5px rgba(0, 0, 0, 0.8), 804px 0 0 -5px rgba(0, 0, 0, 0.8),
+      805px 0 0 -5px rgba(0, 0, 0, 0.8), 806px 0 0 -5px rgba(0, 0, 0, 0.8),
+      807px 0 0 -5px rgba(0, 0, 0, 0.8), 808px 0 0 -5px rgba(0, 0, 0, 0.8),
+      809px 0 0 -5px rgba(0, 0, 0, 0.8), 810px 0 0 -5px rgba(0, 0, 0, 0.8),
+      811px 0 0 -5px rgba(0, 0, 0, 0.8), 812px 0 0 -5px rgba(0, 0, 0, 0.8),
+      813px 0 0 -5px rgba(0, 0, 0, 0.8), 814px 0 0 -5px rgba(0, 0, 0, 0.8),
+      815px 0 0 -5px rgba(0, 0, 0, 0.8), 816px 0 0 -5px rgba(0, 0, 0, 0.8),
+      817px 0 0 -5px rgba(0, 0, 0, 0.8), 818px 0 0 -5px rgba(0, 0, 0, 0.8),
+      819px 0 0 -5px rgba(0, 0, 0, 0.8), 820px 0 0 -5px rgba(0, 0, 0, 0.8),
+      821px 0 0 -5px rgba(0, 0, 0, 0.8), 822px 0 0 -5px rgba(0, 0, 0, 0.8),
+      823px 0 0 -5px rgba(0, 0, 0, 0.8), 824px 0 0 -5px rgba(0, 0, 0, 0.8),
+      825px 0 0 -5px rgba(0, 0, 0, 0.8), 826px 0 0 -5px rgba(0, 0, 0, 0.8),
+      827px 0 0 -5px rgba(0, 0, 0, 0.8), 828px 0 0 -5px rgba(0, 0, 0, 0.8),
+      829px 0 0 -5px rgba(0, 0, 0, 0.8), 830px 0 0 -5px rgba(0, 0, 0, 0.8),
+      831px 0 0 -5px rgba(0, 0, 0, 0.8), 832px 0 0 -5px rgba(0, 0, 0, 0.8),
+      833px 0 0 -5px rgba(0, 0, 0, 0.8), 834px 0 0 -5px rgba(0, 0, 0, 0.8),
+      835px 0 0 -5px rgba(0, 0, 0, 0.8), 836px 0 0 -5px rgba(0, 0, 0, 0.8),
+      837px 0 0 -5px rgba(0, 0, 0, 0.8), 838px 0 0 -5px rgba(0, 0, 0, 0.8),
+      839px 0 0 -5px rgba(0, 0, 0, 0.8), 840px 0 0 -5px rgba(0, 0, 0, 0.8),
+      841px 0 0 -5px rgba(0, 0, 0, 0.8), 842px 0 0 -5px rgba(0, 0, 0, 0.8),
+      843px 0 0 -5px rgba(0, 0, 0, 0.8), 844px 0 0 -5px rgba(0, 0, 0, 0.8),
+      845px 0 0 -5px rgba(0, 0, 0, 0.8), 846px 0 0 -5px rgba(0, 0, 0, 0.8),
+      847px 0 0 -5px rgba(0, 0, 0, 0.8), 848px 0 0 -5px rgba(0, 0, 0, 0.8),
+      849px 0 0 -5px rgba(0, 0, 0, 0.8), 850px 0 0 -5px rgba(0, 0, 0, 0.8),
+      851px 0 0 -5px rgba(0, 0, 0, 0.8), 852px 0 0 -5px rgba(0, 0, 0, 0.8),
+      853px 0 0 -5px rgba(0, 0, 0, 0.8), 854px 0 0 -5px rgba(0, 0, 0, 0.8),
+      855px 0 0 -5px rgba(0, 0, 0, 0.8), 856px 0 0 -5px rgba(0, 0, 0, 0.8),
+      857px 0 0 -5px rgba(0, 0, 0, 0.8), 858px 0 0 -5px rgba(0, 0, 0, 0.8),
+      859px 0 0 -5px rgba(0, 0, 0, 0.8), 860px 0 0 -5px rgba(0, 0, 0, 0.8),
+      861px 0 0 -5px rgba(0, 0, 0, 0.8), 862px 0 0 -5px rgba(0, 0, 0, 0.8),
+      863px 0 0 -5px rgba(0, 0, 0, 0.8), 864px 0 0 -5px rgba(0, 0, 0, 0.8),
+      865px 0 0 -5px rgba(0, 0, 0, 0.8), 866px 0 0 -5px rgba(0, 0, 0, 0.8),
+      867px 0 0 -5px rgba(0, 0, 0, 0.8), 868px 0 0 -5px rgba(0, 0, 0, 0.8),
+      869px 0 0 -5px rgba(0, 0, 0, 0.8), 870px 0 0 -5px rgba(0, 0, 0, 0.8),
+      871px 0 0 -5px rgba(0, 0, 0, 0.8), 872px 0 0 -5px rgba(0, 0, 0, 0.8),
+      873px 0 0 -5px rgba(0, 0, 0, 0.8), 874px 0 0 -5px rgba(0, 0, 0, 0.8),
+      875px 0 0 -5px rgba(0, 0, 0, 0.8), 876px 0 0 -5px rgba(0, 0, 0, 0.8),
+      877px 0 0 -5px rgba(0, 0, 0, 0.8), 878px 0 0 -5px rgba(0, 0, 0, 0.8),
+      879px 0 0 -5px rgba(0, 0, 0, 0.8), 880px 0 0 -5px rgba(0, 0, 0, 0.8),
+      881px 0 0 -5px rgba(0, 0, 0, 0.8), 882px 0 0 -5px rgba(0, 0, 0, 0.8),
+      883px 0 0 -5px rgba(0, 0, 0, 0.8), 884px 0 0 -5px rgba(0, 0, 0, 0.8),
+      885px 0 0 -5px rgba(0, 0, 0, 0.8), 886px 0 0 -5px rgba(0, 0, 0, 0.8),
+      887px 0 0 -5px rgba(0, 0, 0, 0.8), 888px 0 0 -5px rgba(0, 0, 0, 0.8),
+      889px 0 0 -5px rgba(0, 0, 0, 0.8), 890px 0 0 -5px rgba(0, 0, 0, 0.8),
+      891px 0 0 -5px rgba(0, 0, 0, 0.8), 892px 0 0 -5px rgba(0, 0, 0, 0.8),
+      893px 0 0 -5px rgba(0, 0, 0, 0.8), 894px 0 0 -5px rgba(0, 0, 0, 0.8),
+      895px 0 0 -5px rgba(0, 0, 0, 0.8), 896px 0 0 -5px rgba(0, 0, 0, 0.8),
+      897px 0 0 -5px rgba(0, 0, 0, 0.8), 898px 0 0 -5px rgba(0, 0, 0, 0.8),
+      899px 0 0 -5px rgba(0, 0, 0, 0.8), 900px 0 0 -5px rgba(0, 0, 0, 0.8),
+      901px 0 0 -5px rgba(0, 0, 0, 0.8), 902px 0 0 -5px rgba(0, 0, 0, 0.8),
+      903px 0 0 -5px rgba(0, 0, 0, 0.8), 904px 0 0 -5px rgba(0, 0, 0, 0.8),
+      905px 0 0 -5px rgba(0, 0, 0, 0.8), 906px 0 0 -5px rgba(0, 0, 0, 0.8),
+      907px 0 0 -5px rgba(0, 0, 0, 0.8), 908px 0 0 -5px rgba(0, 0, 0, 0.8),
+      909px 0 0 -5px rgba(0, 0, 0, 0.8), 910px 0 0 -5px rgba(0, 0, 0, 0.8),
+      911px 0 0 -5px rgba(0, 0, 0, 0.8), 912px 0 0 -5px rgba(0, 0, 0, 0.8),
+      913px 0 0 -5px rgba(0, 0, 0, 0.8), 914px 0 0 -5px rgba(0, 0, 0, 0.8),
+      915px 0 0 -5px rgba(0, 0, 0, 0.8), 916px 0 0 -5px rgba(0, 0, 0, 0.8),
+      917px 0 0 -5px rgba(0, 0, 0, 0.8), 918px 0 0 -5px rgba(0, 0, 0, 0.8),
+      919px 0 0 -5px rgba(0, 0, 0, 0.8), 920px 0 0 -5px rgba(0, 0, 0, 0.8),
+      921px 0 0 -5px rgba(0, 0, 0, 0.8), 922px 0 0 -5px rgba(0, 0, 0, 0.8),
+      923px 0 0 -5px rgba(0, 0, 0, 0.8), 924px 0 0 -5px rgba(0, 0, 0, 0.8),
+      925px 0 0 -5px rgba(0, 0, 0, 0.8), 926px 0 0 -5px rgba(0, 0, 0, 0.8),
+      927px 0 0 -5px rgba(0, 0, 0, 0.8), 928px 0 0 -5px rgba(0, 0, 0, 0.8),
+      929px 0 0 -5px rgba(0, 0, 0, 0.8), 930px 0 0 -5px rgba(0, 0, 0, 0.8),
+      931px 0 0 -5px rgba(0, 0, 0, 0.8), 932px 0 0 -5px rgba(0, 0, 0, 0.8),
+      933px 0 0 -5px rgba(0, 0, 0, 0.8), 934px 0 0 -5px rgba(0, 0, 0, 0.8),
+      935px 0 0 -5px rgba(0, 0, 0, 0.8), 936px 0 0 -5px rgba(0, 0, 0, 0.8),
+      937px 0 0 -5px rgba(0, 0, 0, 0.8), 938px 0 0 -5px rgba(0, 0, 0, 0.8),
+      939px 0 0 -5px rgba(0, 0, 0, 0.8), 940px 0 0 -5px rgba(0, 0, 0, 0.8),
+      941px 0 0 -5px rgba(0, 0, 0, 0.8), 942px 0 0 -5px rgba(0, 0, 0, 0.8),
+      943px 0 0 -5px rgba(0, 0, 0, 0.8), 944px 0 0 -5px rgba(0, 0, 0, 0.8),
+      945px 0 0 -5px rgba(0, 0, 0, 0.8), 946px 0 0 -5px rgba(0, 0, 0, 0.8),
+      947px 0 0 -5px rgba(0, 0, 0, 0.8), 948px 0 0 -5px rgba(0, 0, 0, 0.8),
+      949px 0 0 -5px rgba(0, 0, 0, 0.8), 950px 0 0 -5px rgba(0, 0, 0, 0.8),
+      951px 0 0 -5px rgba(0, 0, 0, 0.8), 952px 0 0 -5px rgba(0, 0, 0, 0.8),
+      953px 0 0 -5px rgba(0, 0, 0, 0.8), 954px 0 0 -5px rgba(0, 0, 0, 0.8),
+      955px 0 0 -5px rgba(0, 0, 0, 0.8), 956px 0 0 -5px rgba(0, 0, 0, 0.8),
+      957px 0 0 -5px rgba(0, 0, 0, 0.8), 958px 0 0 -5px rgba(0, 0, 0, 0.8),
+      959px 0 0 -5px rgba(0, 0, 0, 0.8), 960px 0 0 -5px rgba(0, 0, 0, 0.8),
+      961px 0 0 -5px rgba(0, 0, 0, 0.8), 962px 0 0 -5px rgba(0, 0, 0, 0.8),
+      963px 0 0 -5px rgba(0, 0, 0, 0.8), 964px 0 0 -5px rgba(0, 0, 0, 0.8),
+      965px 0 0 -5px rgba(0, 0, 0, 0.8), 966px 0 0 -5px rgba(0, 0, 0, 0.8),
+      967px 0 0 -5px rgba(0, 0, 0, 0.8), 968px 0 0 -5px rgba(0, 0, 0, 0.8),
+      969px 0 0 -5px rgba(0, 0, 0, 0.8), 970px 0 0 -5px rgba(0, 0, 0, 0.8),
+      971px 0 0 -5px rgba(0, 0, 0, 0.8), 972px 0 0 -5px rgba(0, 0, 0, 0.8),
+      973px 0 0 -5px rgba(0, 0, 0, 0.8), 974px 0 0 -5px rgba(0, 0, 0, 0.8),
+      975px 0 0 -5px rgba(0, 0, 0, 0.8), 976px 0 0 -5px rgba(0, 0, 0, 0.8),
+      977px 0 0 -5px rgba(0, 0, 0, 0.8), 978px 0 0 -5px rgba(0, 0, 0, 0.8),
+      979px 0 0 -5px rgba(0, 0, 0, 0.8), 980px 0 0 -5px rgba(0, 0, 0, 0.8),
+      981px 0 0 -5px rgba(0, 0, 0, 0.8), 982px 0 0 -5px rgba(0, 0, 0, 0.8),
+      983px 0 0 -5px rgba(0, 0, 0, 0.8), 984px 0 0 -5px rgba(0, 0, 0, 0.8),
+      985px 0 0 -5px rgba(0, 0, 0, 0.8), 986px 0 0 -5px rgba(0, 0, 0, 0.8),
+      987px 0 0 -5px rgba(0, 0, 0, 0.8), 988px 0 0 -5px rgba(0, 0, 0, 0.8),
+      989px 0 0 -5px rgba(0, 0, 0, 0.8), 990px 0 0 -5px rgba(0, 0, 0, 0.8),
+      991px 0 0 -5px rgba(0, 0, 0, 0.8), 992px 0 0 -5px rgba(0, 0, 0, 0.8),
+      993px 0 0 -5px rgba(0, 0, 0, 0.8), 994px 0 0 -5px rgba(0, 0, 0, 0.8),
+      995px 0 0 -5px rgba(0, 0, 0, 0.8), 996px 0 0 -5px rgba(0, 0, 0, 0.8),
+      997px 0 0 -5px rgba(0, 0, 0, 0.8), 998px 0 0 -5px rgba(0, 0, 0, 0.8),
+      999px 0 0 -5px rgba(0, 0, 0, 0.8), 1000px 0 0 -5px rgba(0, 0, 0, 0.8);
+    transition: background-color 150ms;
+  }
+
+  // Firefox
+  input[type="range"]::-moz-range-track,
+  input[type="range"]::-moz-range-progress {
+    width: 100%;
+    height: 10px;
+    background: $upper-background;
+  }
+
+  input[type="range"]::-moz-range-progress {
+    background: $lower-background;
+  }
+  // Internet Exploder
+  input[type="range"]::-ms-track {
+    width: 100%;
+    height: 10px;
+    border: 0;
+    // color needed to hide track marks
+    color: transparent;
+    background: transparent;
+  }
+  input[type="range"]::-ms-fill-lower {
+    background: $lower-background;
+  }
+  input[type="range"]::-ms-fill-upper {
+    background: $upper-background;
+  }
+
+  // need to change***
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 10px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+  }
+  input[type="range"]::-moz-range-thumb {
+    -moz-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+  }
+  input[type="range"]::-ms-thumb {
+    -ms-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
   }
 }

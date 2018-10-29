@@ -1145,6 +1145,14 @@
         display: block;
       }
     }
+    .social-link {
+      span {
+        border: 1px solid;
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+      }
+    }
   }
 }
 .padding72 {

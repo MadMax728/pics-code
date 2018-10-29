@@ -15,3 +15,4 @@ export {
   SettingAdsRight,
   SettingAdsStatisticsRight
 } from "./ads";
+export { EditProfilePic, EditProfilePicHeader } from "./edit-profile-pic";

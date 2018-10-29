@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import propTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
-import { OtherNewsFeed, OtherAbout } from "../../web/other";
+import { OtherNewsFeed, OtherAbout, OtherSaved } from "../../web/other";
 import { OwnerNewsFeed, OwnerAbout, OwnerSaved } from "../../web/owner";
 import {
   Landing,
@@ -55,7 +55,21 @@ import { PageNotFound } from "../../web/page-not-found";
 
 class HomeRoute extends Component {
   handleLanding = () => {
-    return <Landing handleModalInfoShow={this.props.handleModalInfoShow} />;
+    return (
+      <Landing
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
+  handleEditProfile = () => {
+    return (
+      <EditProfile
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        image={this.props.image}
+      />
+    );
   };
 
   handlePageNotFound = () => {
@@ -70,26 +84,69 @@ class HomeRoute extends Component {
     return <Ads isBackOffice={false} />;
   };
 
+  handleOwnerNewsFeed = () => {
+    return (
+      <OwnerNewsFeed
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
+  };
+
+  handleExplore = () => {
+    return <Explore handleModalShow={this.props.handleModalShow} />;
+  };
+
+  handleOwnerSaved = () => {
+    return <OwnerSaved handleModalShow={this.props.handleModalShow} />;
+  };
+
+  handleOtherNewsFeed = () => {
+    return <OtherNewsFeed handleModalShow={this.props.handleModalShow} />;
+  };
+
+  handleOtherSaved = () => {
+    return <OtherSaved handleModalShow={this.props.handleModalShow} />;
+  };
+
+  handleCampaign = () => {
+    return <Campaign handleModalShow={this.props.handleModalShow} />;
+  };
+
   render() {
     return (
       <div>
         <Switch>
-          <Route exact path={routes.EXPLORE_ROUTE} component={Explore} />
+          <Route
+            exact
+            path={routes.EXPLORE_ROUTE}
+            component={this.handleExplore}
+          />
 
           <Route
             exact
             path={routes.NEWS_FEED_ROUTE}
-            component={OwnerNewsFeed}
+            component={this.handleOwnerNewsFeed}
           />
-          <Route exact path={routes.SAVED_ROUTE} component={OwnerSaved} />
+          <Route
+            exact
+            path={routes.SAVED_ROUTE}
+            component={this.handleOwnerSaved}
+          />
           <Route exact path={routes.ABOUT_ROUTE} component={OwnerAbout} />
 
           <Route
             exact
             path={routes.OTHER_NEWS_FEED_ROUTE}
-            component={OtherNewsFeed}
+            component={this.handleOtherNewsFeed}
           />
           <Route exact path={routes.OTHER_ABOUT_ROUTE} component={OtherAbout} />
+
+          <Route
+            exact
+            path={routes.OTHER_SAVED_ROUTE}
+            component={this.handleOtherSaved}
+          />
 
           <Route
             exact
@@ -111,7 +168,11 @@ class HomeRoute extends Component {
 
           <Route path={routes.CREATOR_ROUTE} exact component={Creator} />
 
-          <Route exact path={routes.CAMPAIGN_ROUTE} component={Campaign} />
+          <Route
+            exact
+            path={routes.CAMPAIGN_ROUTE}
+            component={this.handleCampaign}
+          />
           <Route exact path={routes.MY_PROFILE_ROUTE} component={UserProfile} />
 
           <Route
@@ -130,7 +191,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_EDIT_PROFILE_ROUTE}
-            component={EditProfile}
+            component={this.handleEditProfile}
           />
 
           <Route
@@ -297,7 +358,9 @@ class HomeRoute extends Component {
 }
 
 HomeRoute.propTypes = {
-  handleModalInfoShow: propTypes.func.isRequired
+  handleModalShow: propTypes.func,
+  handleModalInfoShow: propTypes.func,
+  image: propTypes.any
 };
 
 export default HomeRoute;

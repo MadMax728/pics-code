@@ -4,6 +4,7 @@ export const backoffice_campaign_list = [
   {
     user: {
       name: "Santosh Shinde",
+      id: "1",
       image: `${images.campaign2}`,
       isOwner: false
     },
@@ -26,11 +27,13 @@ export const backoffice_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: false,
     id: 2
   },
   {
     user: {
       name: "Santosh Shinde",
+      id: "2",
       image: `${images.campaign3}`,
       isOwner: false
     },
@@ -53,11 +56,13 @@ export const backoffice_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: true,
     id: 3
   },
   {
     user: {
       name: "Santosh Shinde",
+      id: "3",
       image: `${images.campaign1}`,
       isOwner: true
     },
@@ -80,6 +85,7 @@ export const backoffice_campaign_list = [
     procedure: "Public",
     views: "100",
     clicks: "200",
+    isFavorite: false,
     id: 1
   }
 ];

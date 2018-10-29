@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class Feed extends Component {
   constructor(props, context) {
@@ -11,14 +12,29 @@ class Feed extends Component {
     this.state = {};
   }
 
+  handleFavorite = e => {
+    this.props.handleFavorite(e);
+  };
+
+  handleMessage = e => {
+    this.props.handleMessage(e);
+  };
+
+  handleOnKeyDown = () => {};
+
+  handleModalInfoShow = () => {
+    console.log(this.props.handleModalInfoShow);
+    this.props.handleModalInfoShow(modalType.post_pop_up);
+  };
   render() {
-    const { campaign, handleModalInfoShow } = this.props;
+    const { campaign, handleModalInfoShow, handleFavorite } = this.props;
 
     return (
       <div className="feed_wrapper">
         <FeedHeader
           campaign={campaign}
           handleModalInfoShow={handleModalInfoShow}
+          handleFavorite={handleFavorite}
         />
         <div className="feed_content">
           {campaign &&
@@ -41,16 +57,50 @@ class Feed extends Component {
             )}
         </div>
         <div className="feed_footer padding-15">
-          <div className="messages">
+          <div className="messages" role="article">
             <span className="count">{campaign.msg_count}</span>
-            <img src={images.feed_msg} alt="profile" />
+            <img
+              src={images.feed_msg}
+              alt="profile"
+              onClick={this.handleMessage}
+              role="presentation"
+              id={campaign.user.id}
+              onKeyDown={this.handleOnKeyDown}
+            />
           </div>
-          <div className="likes">
+          <div className="likes" role="article">
             <span className="count">{campaign.like_count}</span>
-            <img src={images.feed_like} alt="profile" />
+            {campaign.isFavorite ? (
+              <img
+                src={images.blue_heart}
+                alt="like"
+                className="pull-right"
+                role="presentation"
+                onClick={this.handleFavorite}
+                id={campaign.id}
+                onKeyDown={this.handleOnKeyDown}
+              />
+            ) : (
+              <img
+                src={images.feed_like}
+                alt="like"
+                className="pull-right"
+                role="presentation"
+                onClick={this.handleFavorite}
+                id={campaign.id}
+                onKeyDown={this.handleOnKeyDown}
+              />
+            )}
           </div>
           <div className="show_more_options">
-            <div>• • •</div>
+            <div
+              onClick={this.handleModalInfoShow}
+              role="button"
+              onKeyDown={this.handleOnKeyDown}
+              tabIndex="0"
+            >
+              • • •
+            </div>
           </div>
         </div>
       </div>
@@ -59,6 +109,8 @@ class Feed extends Component {
 }
 
 Feed.propTypes = {
+  handleFavorite: PropTypes.func.isRequired,
+  handleMessage: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
     user: PropTypes.shape({

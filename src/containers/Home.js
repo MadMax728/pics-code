@@ -7,7 +7,8 @@ import {
   TopBarInfo,
   CustomModal,
   InfoModal,
-  HomeRoute
+  HomeRoute,
+  MessageBar
 } from "../components/common";
 
 class Home extends Component {
@@ -18,7 +19,10 @@ class Home extends Component {
       modalType: "",
       modalInfoShow: false,
       modalInfoType: "",
-      modalInfoMsg: ""
+      modalInfoMsg: "",
+      message: "",
+      image: null,
+      data: null
     };
   }
 
@@ -46,16 +50,32 @@ class Home extends Component {
     });
   };
 
+  handleModalShow = (e, data) => {
+    this.setState({ modalShow: true, modalType: e, data: data });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
   }
 
+  handleMessageBar = messages => {
+    this.setState({ message: messages });
+  };
+
+  handleEditImage = image => {
+    this.setState({ image: image });
+  };
+
   render() {
+    const { message, data, image } = this.state;
+
     return (
       <div>
         <Header handleModalShow={this.handleModalShow} />
         <section>
+          <MessageBar message={message} />
+
           <CustomModal
             modalShow={this.state.modalShow}
             handleModalHide={this.handleModalHide}
@@ -71,6 +91,8 @@ class Home extends Component {
             modalInfoType={this.state.modalInfoType}
             handleModalHide={this.handleModalHide}
             modalInfoMsg={this.state.modalInfoMsg}
+            handleEditImage={this.handleEditImage}
+            image={image}
           />
 
           <div className="container">
@@ -82,11 +104,18 @@ class Home extends Component {
               </div>
 
               <div>
-                <HomeRoute handleModalInfoShow={this.handleModalInfoShow} />
+                <HomeRoute
+                  handleModalInfoShow={this.handleModalInfoShow}
+                  handleModalShow={this.handleModalShow}
+                  image={image}
+                />
               </div>
 
               <div className="right_bar no-padding">
-                <RightSideBar handleModalShow={this.handleModalShow} />
+                <RightSideBar
+                  handleModalShow={this.handleModalShow}
+                  handleMessageBar={this.handleMessageBar}
+                />
               </div>
             </div>
           </div>

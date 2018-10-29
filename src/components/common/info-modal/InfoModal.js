@@ -5,7 +5,8 @@ import {
   ContentViewModal,
   PaymentConfirmationModal,
   ProcessedModal,
-  PostPopUpModal
+  PostPopUpModal,
+  EditProfileModal
 } from "../../web/modals";
 import propTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -55,6 +56,18 @@ class InfoModal extends Component {
     );
   };
 
+  handleModalEditProfile = () => {
+    console.log(this.props.image);
+    return (
+      <EditProfileModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+        handleEditImage={this.props.handleEditImage}
+        image={this.props.image}
+      />
+    );
+  };
+
   handleModalRender = () => {
     return (
       <div>
@@ -66,6 +79,8 @@ class InfoModal extends Component {
           this.handleModalProcessed()}
         {this.props.modalInfoType === modalType.post_pop_up &&
           this.handleModalPostPopUp()}
+        {this.props.modalInfoType === modalType.edit_profile &&
+          this.handleModalEditProfile()}
       </div>
     );
   };
@@ -84,7 +99,9 @@ InfoModal.propTypes = {
   modalInfoType: propTypes.string,
   handleModalInfoHide: propTypes.func.isRequired,
   handleModalHide: propTypes.func.isRequired,
-  modalInfoMsg: propTypes.string
+  modalInfoMsg: propTypes.string,
+  handleEditImage: propTypes.func,
+  image: propTypes.any
 };
 
 export default InfoModal;

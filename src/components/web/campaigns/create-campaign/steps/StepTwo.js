@@ -13,7 +13,7 @@ class StepTwo extends Component {
 
     const { handleChangeField, contentText, handleContentChange } = this.props;
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-7 create-campaign-wrapper">
           <div className="title">Title</div>
           <TextEditor

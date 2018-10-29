@@ -2,12 +2,11 @@ import React from "react";
 import { Saved } from "../../user";
 import PropTypes from "prop-types";
 
-const OwnerSaved = handleModalShow => {
+const OtherSaved = handleModalShow => {
   return <Saved handleModalShow={handleModalShow} />;
 };
 
-OwnerSaved.propTypes = {
+OtherSaved.propTypes = {
   handleModalShow: PropTypes.func
 };
-
-export default OwnerSaved;
+export default OtherSaved;
