@@ -54,6 +54,7 @@ SocialProfileUrl.propTypes = {
   userName: propTypes.string,
   icon: propTypes.string.isRequired,
   handleSocialConnect: propTypes.func,
+  isOwnerProfile: propTypes.bool,
   handleSocialClear: propTypes.func
 };
 
