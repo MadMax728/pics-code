@@ -128,9 +128,9 @@ class CampaignModal extends Component {
     let modalClassName = "";
 
     if (stepIndex === 0) {
-      modalClassName = "modal fade create-campaign-modal overflow-scroll";
+      modalClassName = "modal fade create-campaign-modal overflow-scroll ";
     } else if (stepIndex !== 0 && stepIndex < 4) {
-      modalClassName = "modal fade create-campaign-modal";
+      modalClassName = "modal fade create-campaign-modal editor-modal";
     } else if (stepIndex > 3 && stepIndex < 6) {
       modalClassName = "modal fade payment-overview-modal";
     }

@@ -11,7 +11,7 @@ class StepTwo extends Component {
   render() {
     const { handleChangeField } = this.props;
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-7 create-campaign-wrapper">
           <div className="title">Title</div>
           <div className="create-compaign-editor">
