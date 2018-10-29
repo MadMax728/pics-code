@@ -155,8 +155,9 @@ class SocialNetworks extends Component {
 
   render() {
     const { socialNetworks } = this.state;
+    const { isOwnerProfile } = this.props;
     return (
-      <div class="social-link-wrapr col-xs-12">
+      <div className="social-link-wrapr col-xs-12 no-padding">
         <div className="form-subtitle">Social Network URL</div>
         <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
           {socialNetworks.map(socialNetwork => {
@@ -170,6 +171,7 @@ class SocialNetworks extends Component {
                 isConnectInProgress={this.state.isConnectInProgress}
                 handleSocialConnect={this.handleSocialConnect}
                 handleSocialClear={this.handleSocialClear}
+                isOwnerProfile={isOwnerProfile}
               />
             );
           })}
@@ -179,8 +181,14 @@ class SocialNetworks extends Component {
   }
 }
 
+// Specifies the default values for props:
+SocialNetworks.defaultProps = {
+  isOwnerProfile: false
+};
+
 SocialNetworks.propTypes = {
-  userId: propTypes.string.isRequired
+  userId: propTypes.string.isRequired,
+  isOwnerProfile: propTypes.bool
 };
 
 export default SocialNetworks;

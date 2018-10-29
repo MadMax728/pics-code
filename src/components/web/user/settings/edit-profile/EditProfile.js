@@ -257,7 +257,7 @@ class EditProfile extends Component {
                 />
               </div>
             </div>
-            <SocialNetworks userId={"123"} />
+            <SocialNetworks userId={"123"} isOwnerProfile={true} />
             <div className="form-group margin-bottom-30">
               <button className="black_button" onClick={this.handleSubmit}>
                 save
