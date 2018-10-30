@@ -51,7 +51,7 @@ class CustomModal extends Component {
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
         // true for the company and false for the creator
-        isFor={true}
+        isFor
         handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
       />
     );
