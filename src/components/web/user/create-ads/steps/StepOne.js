@@ -138,7 +138,11 @@ class StepOne extends Component {
         </div>
         <div className="col-sm-6 no-padding right-side ads-right-section">
           <div className="box">
-            <img src={this.props.form.photo} alt="Edit" />
+            {this.props.form.photo !== "" ? (
+              <img src={this.props.form.photo} alt="Edit" />
+            ) : (
+              ""
+            )}
             <input
               type="file"
               name="file-2[]"
