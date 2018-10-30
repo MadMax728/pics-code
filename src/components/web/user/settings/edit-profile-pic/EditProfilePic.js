@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
-import Preview from "./Preview";
 import propTypes from "prop-types";
 
 class EditProfilePic extends Component {
@@ -38,8 +37,8 @@ class EditProfilePic extends Component {
             disableClick
             multiple={false}
             style={{
-              width: width,
-              height: height,
+              width,
+              height,
               marginBottom: "35px"
             }}
           >

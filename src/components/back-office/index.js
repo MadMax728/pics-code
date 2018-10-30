@@ -9,7 +9,6 @@ export { AddVerification } from "./add-verification";
 export { AddVoucher } from "./add-voucher";
 export { DataDownload } from "./data-download";
 export { Processed } from "./processed";
-export { PostPopUp } from "./post-pop-up";
 export { CreateCMSManagement } from "./create-c-m-s-management";
 
 export {
