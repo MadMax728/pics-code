@@ -94,6 +94,7 @@ class EditProfilePic extends Component {
             height="19"
             width="19"
             className="min-profile-pic range-slider-pic"
+            alt={"crop-1"}
           />
           <input
             name="scale"
@@ -107,6 +108,7 @@ class EditProfilePic extends Component {
           <img
             src={images.crop_pic}
             height="27"
+            alt={"crop-2"}
             width="27"
             className="max-profile-pic range-slider-pic"
           />
