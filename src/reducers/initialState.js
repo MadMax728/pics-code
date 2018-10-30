@@ -9,6 +9,12 @@ const initialState = {
     changeSucceeded: false,
     isLoading: false,
     error: null
+  },
+  userData: {
+    profile: null,
+    socialNetworks: [],
+    isLoading: false,
+    error: null
   }
 };
 

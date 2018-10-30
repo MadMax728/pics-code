@@ -1,6 +1,8 @@
+import { connect } from "react-redux";
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as _ from "lodash";
+import { getSocialNetwork } from "../../../../../actions/user";
 import SocialProfileUrl from "./SocialProfileUrl";
 
 const socialNetworksAll = [
@@ -36,9 +38,13 @@ class SocialNetworks extends Component {
     super(props);
     this.state = {
       isConnectInProgress: false,
-      socialNetworks: socialNetworksAll
+      socialNetworks: []
     };
   }
+
+  componentDidMount = () => {
+    this.props.getSocialNetwork();
+  };
 
   // Launches the popup by making a request to the server and then
   // passes along the socket id so it can be used to send back user
@@ -137,7 +143,8 @@ class SocialNetworks extends Component {
    */
   handleSocialClear = e => {
     const provider = e.currentTarget.id;
-    const { socialNetworks } = this.state;
+    const { userData } = this.props;
+    const socialNetworks = userData.socialNetworks;
     const socialNetwork = _.find(socialNetworks, {
       socialNetworkType: provider
     });
@@ -156,28 +163,34 @@ class SocialNetworks extends Component {
   };
 
   render() {
-    const { socialNetworks } = this.state;
-    const { isOwnerProfile } = this.props;
+    const { isOwnerProfile, userData } = this.props;
     return (
-      <div className="social-link-wrapr col-xs-12 no-padding">
-        <div className="form-subtitle">Social Network URL</div>
-        <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
-          {socialNetworks.map(socialNetwork => {
-            return (
-              <SocialProfileUrl
-                key={socialNetwork.socialNetworkType}
-                id={socialNetwork.socialNetworkType}
-                title={socialNetwork.title}
-                icon={socialNetwork.icon}
-                publicUrl={socialNetwork.publicUrl}
-                isConnectInProgress={this.state.isConnectInProgress}
-                handleSocialConnect={this.handleSocialConnect}
-                handleSocialClear={this.handleSocialClear}
-                isOwnerProfile={isOwnerProfile}
-              />
-            );
-          })}
-        </div>
+      <div>
+        {userData &&
+          userData.socialNetworks &&
+          userData &&
+          userData.socialNetworks.length && (
+            <div className="social-link-wrapr col-xs-12 no-padding">
+              <div className="form-subtitle">Social Network URL</div>
+              <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
+                {userData.socialNetworks.map(socialNetwork => {
+                  return (
+                    <SocialProfileUrl
+                      key={socialNetwork.socialNetworkType}
+                      id={socialNetwork.socialNetworkType}
+                      title={socialNetwork.title}
+                      icon={socialNetwork.icon}
+                      publicUrl={socialNetwork.publicUrl}
+                      isConnectInProgress={this.state.isConnectInProgress}
+                      handleSocialConnect={this.handleSocialConnect}
+                      handleSocialClear={this.handleSocialClear}
+                      isOwnerProfile={isOwnerProfile}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          )}
       </div>
     );
   }
@@ -188,9 +201,23 @@ SocialNetworks.defaultProps = {
   isOwnerProfile: false
 };
 
-SocialNetworks.propTypes = {
-  userId: propTypes.string.isRequired,
-  isOwnerProfile: propTypes.bool
+const mapStateToProps = state => ({
+  userData: state.userData
+});
+
+const mapDispatchToProps = {
+  getSocialNetwork
 };
 
-export default SocialNetworks;
+SocialNetworks.propTypes = {
+  getSocialNetwork: PropTypes.func.isRequired,
+  userData: PropTypes.object,
+  history: PropTypes.any,
+  userId: PropTypes.string.isRequired,
+  isOwnerProfile: PropTypes.bool
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SocialNetworks);
