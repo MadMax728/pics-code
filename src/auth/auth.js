@@ -126,8 +126,8 @@ export const clearTokensFromStorage = () => {
  * save jwt in storage
  */
 export const saveJwtToStorage = authResponse => {
-  if (authResponse.access_token) {
-    localStorage.setItem("access_token", authResponse.access_token);
+  if (authResponse.token) {
+    localStorage.setItem("access_token", authResponse.token);
   }
 
   if (authResponse.refresh_token) {
