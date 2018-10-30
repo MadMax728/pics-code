@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import ReactTooltip from "react-tooltip";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
-import { modalType } from "../../../lib/constants/enumerations";
 
 class Feed extends Component {
   constructor(props, context) {
@@ -22,10 +22,19 @@ class Feed extends Component {
 
   handleOnKeyDown = () => {};
 
-  handleModalInfoShow = () => {
-    console.log(this.props.handleModalInfoShow);
-    this.props.handleModalInfoShow(modalType.post_pop_up);
+  /**
+   * Tooltp
+   */
+  renderReportTips = () => {
+    return (
+      <div className="post-action-links">
+        <div>Report post</div>
+        <div>Save post</div>
+        <div>locks / unlocks content </div>
+      </div>
+    );
   };
+
   render() {
     const { campaign, handleModalInfoShow, handleFavorite } = this.props;
 
@@ -93,16 +102,22 @@ class Feed extends Component {
             )}
           </div>
           <div className="show_more_options">
-            <div
-              onClick={this.handleModalInfoShow}
-              role="button"
-              onKeyDown={this.handleOnKeyDown}
-              tabIndex="0"
-            >
+            <div data-for="report" role="button" data-tip="tooltip">
               • • •
             </div>
           </div>
         </div>
+        <ReactTooltip
+          id="report"
+          getContent={this.renderReportTips}
+          effect="solid"
+          delayHide={500}
+          delayShow={500}
+          delayUpdate={500}
+          place={"left"}
+          border={true}
+          type={"light"}
+        />
       </div>
     );
   }
