@@ -3,6 +3,15 @@ import propTypes from "prop-types";
 import { ImageCropper } from "../../../../ui-kit";
 
 class EditProfilePic extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.imageCrop = React.createRef();
+  }
+
+  handleSave = () => {
+    this.imageCrop.current.handleSave();
+  };
+
   render() {
     const { image, handleEditImage } = this.props;
 
@@ -12,6 +21,7 @@ class EditProfilePic extends Component {
           image={image}
           handleEditImage={handleEditImage}
           isCircle={true}
+          ref={this.imageCrop}
         />
       </div>
     );

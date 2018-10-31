@@ -9,7 +9,7 @@ import {
 class EditProfileModal extends Component {
   constructor(props, context) {
     super(props, context);
-
+    this.imageCropper = React.createRef();
     this.state = {
       image: null
     };
@@ -20,6 +20,7 @@ class EditProfileModal extends Component {
   }
 
   handleContinue = () => {
+    this.imageCropper.current.handleSave();
     this.props.handleModalInfoHide();
   };
 
@@ -41,7 +42,11 @@ class EditProfileModal extends Component {
         closeBtn={false}
         handleModalHide={handleModalInfoHide}
         modalBodyContent={
-          <EditProfilePic image={image} handleEditImage={handleEditImage} />
+          <EditProfilePic
+            image={image}
+            handleEditImage={handleEditImage}
+            ref={this.imageCropper}
+          />
         }
       />
     );
