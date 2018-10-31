@@ -6,26 +6,30 @@ class Community extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      users_list: users_list
+      users_list
     };
   }
 
   handleSubscribed = e => {
-    let users_list = this.state.users_list;
+    console.log("dasjbdhja");
+
+    const users_list = this.state.users_list;
     users_list.filter(
-      user => user.id === e.target.id && (user.subscribed = !user.subscribed)
+      user =>
+        user.id === parseInt(e.target.id) &&
+        (user.subscribed = !user.subscribed)
     );
     this.setState({ users_list });
 
-    let data = users_list.filter(f => {
-      return f.id === e.target.id;
-    });
+    // let data = users_list.filter(f => {
+    //   return f.id === e.target.id;
+    // });
 
-    if (data[0].subscribed === true) {
-      this.props.handleMessageBar("You have successfully subscribed");
-    } else {
-      this.props.handleMessageBar("You have successfully unsubscribed");
-    }
+    // if (data[0].subscribed === true) {
+    //   this.props.handleMessageBar("You have successfully subscribed");
+    // } else {
+    //   this.props.handleMessageBar("You have successfully unsubscribed");
+    // }
   };
 
   render() {

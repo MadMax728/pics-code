@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
-import Preview from "./Preview";
 import propTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
 
@@ -25,9 +24,7 @@ class EditProfilePic extends Component {
       handlePositionChange,
       handleScale,
       borderRadius,
-      preview,
-      logCallback,
-      handleSave
+      logCallback
     } = this.props;
     console.log(image);
 
@@ -40,8 +37,8 @@ class EditProfilePic extends Component {
             multiple={false}
             className="col-xs-12 uploaded-profile-pic"
             style={{
-              width: width,
-              height: height,
+              width,
+              height,
               marginBottom: "35px"
             }}
           >
@@ -96,6 +93,7 @@ class EditProfilePic extends Component {
             className="min-profile-pic range-slider-pic"
             alt={"crop-1"}
           />
+          <div className="runnable" />
           <input
             name="scale"
             type="range"
@@ -130,10 +128,8 @@ EditProfilePic.propTypes = {
   handlePositionChange: propTypes.func,
   handleScale: propTypes.func,
   borderRadius: propTypes.any,
-  preview: propTypes.any,
   allowZoomOut: propTypes.bool,
   logCallback: propTypes.any,
-  handleSave: propTypes.any,
   handleEditor: propTypes.any
 };
 

@@ -94,23 +94,48 @@ class HomeRoute extends Component {
   };
 
   handleExplore = () => {
-    return <Explore handleModalShow={this.props.handleModalShow} />;
+    return (
+      <Explore
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   handleOwnerSaved = () => {
-    return <OwnerSaved handleModalShow={this.props.handleModalShow} />;
+    return (
+      <OwnerSaved
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   handleOtherNewsFeed = () => {
-    return <OtherNewsFeed handleModalShow={this.props.handleModalShow} />;
+    return (
+      <OtherNewsFeed
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   handleOtherSaved = () => {
-    return <OtherSaved handleModalShow={this.props.handleModalShow} />;
+    return (
+      <OtherSaved
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   handleCampaign = () => {
-    return <Campaign handleModalShow={this.props.handleModalShow} />;
+    return (
+      <Campaign
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   render() {
