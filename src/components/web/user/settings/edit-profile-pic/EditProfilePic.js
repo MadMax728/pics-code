@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import propTypes from "prop-types";
+import * as images from "../../../../../lib/constants/images";
 
 class EditProfilePic extends Component {
   constructor(props) {
@@ -30,19 +31,20 @@ class EditProfilePic extends Component {
     console.log(image);
 
     return (
-      <div className="col-xs-12 upload-profile-wrapr">
+      <div className="col-xs-12 upload-profile-wrapr padding-b-25">
         {image !== null ? (
           <Dropzone
             onDrop={handleDrop}
             disableClick
             multiple={false}
+            className="col-xs-12 uploaded-profile-pic"
             style={{
               width,
               height,
               marginBottom: "35px"
             }}
           >
-            <div className="col-xs-12 textCenter">
+            <div className="col-xs-12 textCenter ">
               <AvatarEditor
                 ref={setEditorRef}
                 scale={parseFloat(scale)}
@@ -85,16 +87,31 @@ class EditProfilePic extends Component {
             </div>
           </div>
         )}
-        <br />
-        <input
-          name="scale"
-          type="range"
-          onChange={handleScale}
-          min={allowZoomOut ? "0.1" : "1"}
-          max="2"
-          step="0.01"
-          defaultValue="1"
-        />
+        <div className="range-wrapr col-xs-12">
+          <img
+            src={images.crop_pic}
+            height="19"
+            width="19"
+            className="min-profile-pic range-slider-pic"
+            alt={"crop-1"}
+          />
+          <input
+            name="scale"
+            type="range"
+            onChange={handleScale}
+            min={allowZoomOut ? "0.1" : "1"}
+            max="2"
+            step="0.01"
+            defaultValue="1"
+          />
+          <img
+            src={images.crop_pic}
+            height="27"
+            alt={"crop-2"}
+            width="27"
+            className="max-profile-pic range-slider-pic"
+          />
+        </div>
       </div>
     );
   }
