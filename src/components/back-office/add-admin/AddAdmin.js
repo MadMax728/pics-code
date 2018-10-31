@@ -25,14 +25,37 @@ class AddAdmin extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
+    let adminData = this.state.admins;
+    let data = {
+      no: 4,
+      username: this.state.form.username,
+      name: "test",
+      status: this.state.form.status
+    };
+    adminData.push(data);
+    this.setState({
+      admins: adminData
+    });
+  };
+  deleteData = e => {
+    let admins_Data = this.state.admins;
+    for (let i = admins_Data.length - 1; i >= 0; i--) {
+      if (admins_Data[i].name === e.target.name) {
+        admins_Data.splice(i, 1);
+      }
+    }
+    this.setState({
+      admins: admins_Data
+    });
   };
 
   statusFormatter = (cell, row, rowIndex) => {
     return (
       <div key={rowIndex}>
         <span>{cell}</span>
-        <Link to={""}>Delete</Link>
+        <button name={row.name} onClick={this.deleteData}>
+          Delete
+        </button>
       </div>
     );
   };

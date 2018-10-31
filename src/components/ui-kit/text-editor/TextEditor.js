@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
 import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { convertFromHTML, EditorState, ContentState } from "draft-js";
+import { convertToHTML } from "draft-convert";
 import { toolBarConfig } from "../../../lib/constants/toolBarConfig";
 import propTypes from "prop-types";
 
@@ -19,32 +21,33 @@ const content = {
   ]
 };
 class TextEditor extends Component {
-  constructor(props, context) {
-    super(props, context);
-    // const contentState = convertFromRaw(content);
-    this.state = {
-      contentState: ""
-    };
-    // console.log("conent", contentState);
+  constructor(props) {
+    super(props);
+
+    let editorState;
+
+    if (props.contentText) {
+      const blocksFromHTML = convertFromHTML(props.contentText);
+      const contentState = ContentState.createFromBlockArray(blocksFromHTML);
+      editorState = EditorState.createWithContent(contentState);
+    } else {
+      editorState = EditorState.createEmpty();
+    }
+
+    this.state = { editorState };
   }
 
-  onContentStateChange = contentState => {
-    this.props.handleContentChange(contentState);
-
-    this.setState({
-      contentState: this.props.contentText
-    });
+  handleChange = editorState => {
+    const content = convertToHTML(editorState.getCurrentContent());
+    console.log(content);
   };
 
   render() {
-    console.log("texteditor value", this.props.contentText);
     return (
       <Editor
-        wrapperClassName="wrapper-class"
-        editorClassName="editor-class"
-        toolbarClassName="toolbar-class"
+        defaultEditorState={this.state.editorState}
+        onEditorStateChange={this.handleChange}
         toolbar={toolBarConfig}
-        onContentStateChange={this.onContentStateChange}
       />
     );
   }
