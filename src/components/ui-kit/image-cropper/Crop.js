@@ -1,4 +1,5 @@
 import React from "react";
+// https://www.npmjs.com/package/react-avatar-editor used for image crop
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import PropTypes from "prop-types";
@@ -17,6 +18,7 @@ const propTypes = {
   handleScale: PropTypes.func,
   borderRadius: PropTypes.any,
   allowZoomOut: PropTypes.bool,
+  isCircle: PropTypes.bool,
   logCallback: PropTypes.any
 };
 
@@ -33,7 +35,8 @@ const Crop = ({
   handleScale,
   borderRadius,
   allowZoomOut,
-  logCallback
+  logCallback,
+  isCircle
 }) => {
   return (
     <div>
@@ -57,7 +60,9 @@ const Crop = ({
               height={height}
               position={position}
               onPositionChange={handlePositionChange}
-              borderRadius={100 / borderRadius}
+              borderRadius={
+                isCircle ? 100 / borderRadius : width / (100 / borderRadius)
+              }
               onLoadFailure={logCallback("onLoadFailed")}
               onLoadSuccess={logCallback("onLoadSuccess")}
               onImageReady={logCallback("onImageReady")}
@@ -67,7 +72,7 @@ const Crop = ({
           </div>
         </Dropzone>
       ) : (
-        <div className="edit-profile-pic ">
+        <div className="edit-profile-pic">
           <div className="box">
             <input
               type="file"
@@ -100,7 +105,10 @@ const Crop = ({
           className="min-profile-pic range-slider-pic"
           alt={"crop-1"}
         />
-        <div className="runnable" />
+        <div
+          className="runnable"
+          style={{ width: `${(scale - 1) * 100 * 2.57}px` }}
+        />
         <input
           name="scale"
           type="range"

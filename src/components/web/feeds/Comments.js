@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
 import { hash_tag_list, username_list } from "../../../mock-data";
-
+import { ToolTip } from "../../ui-kit";
+import ReactTooltip from "react-tooltip";
 class Comments extends Component {
   constructor(props, context) {
     super(props, context);
@@ -253,16 +253,19 @@ class Comments extends Component {
               <img src={images.emoji} alt="like" className="pull-right" />
             </div>
           </form>
-          <ReactTooltip
+          <ToolTip
             id="comments_hash_tag"
             getContent={this.renderHashTagTips}
             effect="solid"
+            delayHide={0}
+            delayShow={0}
+            delayUpdate={0}
             place={"bottom"}
             border={true}
             type={"light"}
           />
 
-          <ReactTooltip
+          <ToolTip
             id="comments_username"
             getContent={this.renderUserNameTips}
             effect="solid"

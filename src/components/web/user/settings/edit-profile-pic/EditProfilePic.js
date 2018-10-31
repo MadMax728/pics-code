@@ -8,7 +8,11 @@ class EditProfilePic extends Component {
 
     return (
       <div className="col-xs-12 upload-profile-wrapr padding-b-25">
-        <ImageCropper image={image} handleEditImage={handleEditImage} />
+        <ImageCropper
+          image={image}
+          handleEditImage={handleEditImage}
+          isCircle={true}
+        />
       </div>
     );
   }

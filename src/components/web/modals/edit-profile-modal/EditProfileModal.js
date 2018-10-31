@@ -11,8 +11,12 @@ class EditProfileModal extends Component {
     super(props, context);
 
     this.state = {
-      image: this.props.image
+      image: null
     };
+  }
+
+  componentDidMount() {
+    this.setState({ image: this.props.image });
   }
 
   handleContinue = () => {
