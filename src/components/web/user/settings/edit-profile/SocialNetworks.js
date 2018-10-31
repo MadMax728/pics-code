@@ -164,12 +164,14 @@ class SocialNetworks extends Component {
 
   render() {
     const { isOwnerProfile, userData } = this.props;
+
     return (
       <div>
         {userData &&
+          !userData.error &&
+          !userData.isLoading &&
           userData.socialNetworks &&
-          userData &&
-          userData.socialNetworks.length && (
+          userData.socialNetworks.length > 0 && (
             <div className="social-link-wrapr col-xs-12 no-padding">
               <div className="form-subtitle">Social Network URL</div>
               <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
