@@ -518,7 +518,7 @@
       &:first-child {
         border-top: 1px solid rgba(0, 0, 0, 0.8);
       }
-      textarea {
+      input {
         height: 38px;
         border: 0;
         resize: none;
@@ -580,4 +580,8 @@
   position: relative;
   top: -3px;
   padding: 0px 5px;
+}
+
+.__react_component_tooltip {
+  pointer-events: auto !important;
 }

@@ -4,12 +4,15 @@ import ReactTooltip from "react-tooltip";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
+import Comments from "./Comments";
 
 class Feed extends Component {
   constructor(props, context) {
     super(props, context);
 
-    this.state = {};
+    this.state = {
+      isComments: false
+    };
   }
 
   handleFavorite = e => {
@@ -21,6 +24,10 @@ class Feed extends Component {
   };
 
   handleOnKeyDown = () => {};
+
+  handleCommentsSections = () => {
+    this.setState({ isComments: !this.state.isComments });
+  };
 
   /**
    * Tooltp
@@ -36,8 +43,13 @@ class Feed extends Component {
   };
 
   render() {
-    const { campaign, handleModalInfoShow, handleFavorite } = this.props;
-
+    const {
+      campaign,
+      handleModalInfoShow,
+      handleFavorite,
+      addComment
+    } = this.props;
+    const { isComments } = this.state;
     return (
       <div className="feed_wrapper">
         <FeedHeader
@@ -68,14 +80,25 @@ class Feed extends Component {
         <div className="feed_footer padding-15">
           <div className="messages" role="article">
             <span className="count">{campaign.msg_count}</span>
-            <img
-              src={images.feed_msg}
-              alt="profile"
-              onClick={this.handleMessage}
-              role="presentation"
-              id={campaign.user.id}
-              onKeyDown={this.handleOnKeyDown}
-            />
+            {campaign.user.isCreator ? (
+              <img
+                src={images.feed_msg}
+                alt="creator-message"
+                onClick={this.handleMessage}
+                role="presentation"
+                id={campaign.user.id}
+                onKeyDown={this.handleOnKeyDown}
+              />
+            ) : (
+              <img
+                src={images.feed_msg}
+                alt="company-comments"
+                onClick={this.handleCommentsSections}
+                role="presentation"
+                id={campaign.user.id}
+                onKeyDown={this.handleOnKeyDown}
+              />
+            )}
           </div>
           <div className="likes" role="article">
             <span className="count">{campaign.like_count}</span>
@@ -107,6 +130,11 @@ class Feed extends Component {
             </div>
           </div>
         </div>
+
+        {/* Comments Section */}
+
+        {isComments && <Comments campaign={campaign} addComment={addComment} />}
+
         <ReactTooltip
           id="report"
           getContent={this.renderReportTips}
@@ -115,7 +143,7 @@ class Feed extends Component {
           delayShow={500}
           delayUpdate={500}
           place={"left"}
-          border={true}
+          border
           type={"light"}
         />
       </div>
@@ -126,6 +154,7 @@ class Feed extends Component {
 Feed.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
   handleMessage: PropTypes.func.isRequired,
+  addComment: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
     user: PropTypes.shape({

@@ -51,7 +51,7 @@ class Home extends Component {
   };
 
   handleModalShow = (e, data) => {
-    this.setState({ modalShow: true, modalType: e, data: data });
+    this.setState({ modalShow: true, modalType: e, data });
   };
 
   getFilter(filterData) {
@@ -64,7 +64,7 @@ class Home extends Component {
   };
 
   handleEditImage = image => {
-    this.setState({ image: image });
+    this.setState({ image });
   };
 
   render() {
