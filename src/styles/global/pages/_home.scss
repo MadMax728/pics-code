@@ -490,11 +490,16 @@
     padding: 0px;
     width: 340px;
     opacity: 1;
+    &.tooltip-wrapr {
+    }
     &::before,
     &::after {
       display: none;
     }
     & > div {
+      &.post-action-links {
+        width: 100% !important;
+      }
       width: 100%;
       text-align: left;
       background: #9b9b9b;

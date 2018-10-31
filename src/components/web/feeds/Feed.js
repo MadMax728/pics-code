@@ -125,7 +125,12 @@ class Feed extends Component {
             )}
           </div>
           <div className="show_more_options">
-            <div data-for="report" role="button" data-tip="tooltip">
+            <div
+              data-for="report"
+              role="button"
+              data-tip="tooltip"
+              data-class="test"
+            >
               • • •
             </div>
           </div>
