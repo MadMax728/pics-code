@@ -10,9 +10,9 @@ const FavouriteCampaignItem = ({ campaign }) => {
   return (
     <div className="campaign_wrapper">
       <div className="col-sm-4 col-xs-2">
-        <Link to={profile_route}>
+        <Link to={`/campaign/${campaign.id}/information`}>
           <img
-            src={campaign.user.image}
+            src={campaign.image}
             alt="campaign"
             className="img-circle img-responsive"
           />
@@ -22,7 +22,9 @@ const FavouriteCampaignItem = ({ campaign }) => {
         <Link to={`/campaign/${campaign.id}/information`}>
           <div className="normal_title">{campaign.title}</div>
         </Link>
-        <div className="secondary_title">{campaign.user.name}</div>
+        <Link to={profile_route}>
+          <div className="secondary_title">{campaign.user.name}</div>
+        </Link>
         <div className="grey_title">{campaign.category}</div>
       </div>
     </div>

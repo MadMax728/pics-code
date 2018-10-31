@@ -24,9 +24,7 @@ class EditProfilePic extends Component {
       handlePositionChange,
       handleScale,
       borderRadius,
-      preview,
-      logCallback,
-      handleSave
+      logCallback
     } = this.props;
     console.log(image);
 
@@ -129,10 +127,8 @@ EditProfilePic.propTypes = {
   handlePositionChange: propTypes.func,
   handleScale: propTypes.func,
   borderRadius: propTypes.any,
-  preview: propTypes.any,
   allowZoomOut: propTypes.bool,
   logCallback: propTypes.any,
-  handleSave: propTypes.any,
   handleEditor: propTypes.any
 };
 

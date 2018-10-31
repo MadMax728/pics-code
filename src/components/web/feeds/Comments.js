@@ -4,7 +4,7 @@ import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
-import { hash_tag_list } from "../../../mock-data";
+import { hash_tag_list, username_list } from "../../../mock-data";
 
 class Comments extends Component {
   constructor(props, context) {
@@ -12,7 +12,9 @@ class Comments extends Component {
 
     this.state = {
       campaign: this.props.campaign,
+      comments: this.props.campaign.comments,
       hashTagList: hash_tag_list,
+      userNameList: username_list,
       form: {
         comment: ""
       }
@@ -22,12 +24,12 @@ class Comments extends Component {
   onKeyHandle = () => {};
 
   handleChangeField = e => {
-    const { form } = this.state;
     const commentArr = e.target.value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
     /* eslint-disable */
 
-    ReactTooltip.hide(findDOMNode(this.refs.comments));
+    ReactTooltip.hide(findDOMNode(this.refs.comments_hash_tag));
+    ReactTooltip.hide(findDOMNode(this.refs.comments_username));
     if (lastText.charAt(0) === "#") {
       this.setState(
         {
@@ -36,7 +38,7 @@ class Comments extends Component {
         () => {
           /* eslint-disable */
 
-          ReactTooltip.show(findDOMNode(this.refs.comments));
+          ReactTooltip.show(findDOMNode(this.refs.comments_hash_tag));
         }
       );
     } else if (lastText.charAt(0) === "@") {
@@ -47,7 +49,7 @@ class Comments extends Component {
         () => {
           /* eslint-disable */
 
-          ReactTooltip.show(findDOMNode(this.refs.comments));
+          ReactTooltip.show(findDOMNode(this.refs.comments_username));
         }
       );
     } else {
@@ -89,7 +91,7 @@ class Comments extends Component {
     this.setState({ form: { ...this.state.form, comment: "" } });
   };
 
-  _commentsCb = item => {
+  _commentsCbHashTag = item => {
     const hashtag = item.hashtag;
     //hashtag = hash_tag_list.filter
     const { form } = this.state;
@@ -103,14 +105,13 @@ class Comments extends Component {
       () => {
         /* eslint-disable */
 
-        ReactTooltip.hide(findDOMNode(this.refs.comments));
+        ReactTooltip.hide(findDOMNode(this.refs.comments_hash_tag));
       }
     );
   };
 
   renderHashTagTips = () => {
     let { hashTagList, form } = this.state;
-    const comment = form.comment;
     const commentArr = form.comment.split(" ");
     const lastText = commentArr[commentArr.length - 1].substring(1);
     hashTagList = hashTagList.filter(item => {
@@ -128,7 +129,7 @@ class Comments extends Component {
             <div
               key={"Commnet_" + item.id}
               onClick={() => {
-                this._commentsCb(item);
+                this._commentsCbHashTag(item);
               }}
               id={item.id}
               onKeyDown={this.onKeyHandle}
@@ -142,8 +143,68 @@ class Comments extends Component {
     );
   };
 
+  _commentsCbUserName = item => {
+    const username = item.username;
+    //hashtag = hash_tag_list.filter
+    const { form } = this.state;
+    const commentArr = form.comment.split(" ");
+    commentArr.pop();
+    form.comment = commentArr.join(" ") + " @" + username;
+    this.setState(
+      {
+        form: { ...form, comment: form.comment }
+      },
+      () => {
+        /* eslint-disable */
+
+        ReactTooltip.hide(findDOMNode(this.refs.comments_username));
+      }
+    );
+  };
+
+  renderUserNameTips = () => {
+    let { userNameList, form } = this.state;
+    const commentArr = form.comment.split(" ");
+    const lastText = commentArr[commentArr.length - 1].substring(1);
+    userNameList = userNameList.filter(item => {
+      return !!(
+        lastText === "@" ||
+        lastText === "" ||
+        item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1 ||
+        item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1
+      );
+    });
+    return (
+      <div>
+        {userNameList.map((item, index) => {
+          return (
+            /* eslint-disable */
+            <div
+              key={"Commnet_" + item.id}
+              onClick={() => {
+                this._commentsCbUserName(item);
+              }}
+              id={item.id}
+              onKeyDown={this.onKeyHandle}
+            >
+              <div>
+                <img
+                  src={item.image}
+                  alt={"image" + `${item.name}`}
+                  style={{ height: "20px", width: "20px" }}
+                />
+              </div>
+              <div>{item.username}</div>
+              <div>{item.name}</div>
+            </div>
+          );
+        })}
+      </div>
+    );
+  };
+
   render() {
-    const { campaign, form } = this.state;
+    const { campaign, form, comments } = this.state;
 
     return (
       <div className="feed-comment" id={campaign.id}>
@@ -170,10 +231,16 @@ class Comments extends Component {
                     value={form.comment}
                   />
                   <div
-                    data-for="comments"
+                    data-for="comments_hash_tag"
                     role="button"
                     data-tip="tooltip"
-                    ref="comments"
+                    ref="comments_hash_tag"
+                  />
+                  <div
+                    data-for="comments_username"
+                    role="button"
+                    data-tip="tooltip"
+                    ref="comments_username"
                   />
                   <input type="submit" hidden />
                 </div>
@@ -184,8 +251,17 @@ class Comments extends Component {
             </div>
           </form>
           <ReactTooltip
-            id="comments"
+            id="comments_hash_tag"
             getContent={this.renderHashTagTips}
+            effect="solid"
+            place={"bottom"}
+            border={true}
+            type={"light"}
+          />
+
+          <ReactTooltip
+            id="comments_username"
+            getContent={this.renderUserNameTips}
             effect="solid"
             place={"bottom"}
             border={true}
@@ -193,8 +269,7 @@ class Comments extends Component {
           />
         </div>
 
-        {campaign.comments.length !== 0 &&
-          campaign.comments.map(this.renderComment)}
+        {comments.length !== 0 && comments.map(this.renderComment)}
 
         <div className="view-more-comments">
           <Link to={""}>View more comments</Link>

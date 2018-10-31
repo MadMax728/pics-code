@@ -51,7 +51,7 @@ class NewsFeeds extends Component {
     campaigns.filter(
       campaign =>
         campaign.id === parseInt(campaignId) &&
-        campaign.comments.push(commentData)
+        campaign.comments.unshift(commentData)
     );
 
     this.setState({ campaigns });
