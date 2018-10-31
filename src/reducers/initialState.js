@@ -12,7 +12,7 @@ const initialState = {
   },
   userData: {
     profile: null,
-    socialNetworks: [],
+    socialNetworks: null,
     isLoading: false,
     error: null
   }
