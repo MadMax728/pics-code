@@ -3,6 +3,36 @@ import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../../lib/constants/enumerations";
 import SocialNetworks from "./SocialNetworks";
+import {
+  Text,
+  NumberInput,
+  RadioBtn
+} from "../../../../ui-kit/CommonUIComponents";
+import { Translations } from "../../../../../lib/translations";
+
+const genderItems = [
+  {
+    name: "Male",
+    className: "",
+    checked: true,
+    value: "male"
+  },
+  {
+    name: "Female",
+    className: "",
+    checked: false,
+    value: "female"
+  }
+];
+
+const genderData = [
+  {
+    name: "gender",
+    className: "",
+    type: Translations.edit_profile.gender.type,
+    items: genderItems
+  }
+];
 
 class EditProfile extends Component {
   constructor(props) {
@@ -32,13 +62,13 @@ class EditProfile extends Component {
 
   handleChangeDOB = event => {
     const { form } = this.state;
-    form.dob[event.target.name] = event.target.value;
+    form.dob[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -72,12 +102,7 @@ class EditProfile extends Component {
                   className="image-wrapr"
                   alt="avatar"
                 />
-                <div className="input-file-container">
-                  {/* <input className="input-file" id="my-file" type="file" /> */}
-                  {/* <label tabindex="0" for="my-file" className="input-file-trigger">
-                      Select a file...
-                    </label> */}
-                </div>
+                <div className="input-file-container" />
                 <div
                   onClick={this.handleEditProfile}
                   onKeyDown={this.handleOnKeyDown}
@@ -91,7 +116,7 @@ class EditProfile extends Component {
             <div className="general-information-wrapper">
               <div className="form-group margin-bottom-30">
                 <label htmlFor="username">User name</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="username"
@@ -106,7 +131,7 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="name">Name/Company</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="name_company"
@@ -118,7 +143,7 @@ class EditProfile extends Component {
                 <div className="col-sm-6 padding-r-5">
                   <div className="form-group margin-bottom-30">
                     <label htmlFor="city">Date of birth</label>
-                    <input
+                    <NumberInput
                       type="number"
                       name="day"
                       value={form.dob.day}
@@ -127,7 +152,7 @@ class EditProfile extends Component {
                       pattern="[0-9]*"
                       onChange={this.handleChangeDOB}
                     />
-                    <input
+                    <NumberInput
                       type="number"
                       name="mon"
                       value={form.dob.mon}
@@ -136,7 +161,7 @@ class EditProfile extends Component {
                       max="12"
                       onChange={this.handleChangeDOB}
                     />
-                    <input
+                    <NumberInput
                       type="number"
                       name="year"
                       value={form.dob.year}
@@ -150,35 +175,20 @@ class EditProfile extends Component {
                 <div className="col-sm-6 padding-l-5">
                   <div className="form-group margin-bottom-30">
                     <label htmlFor="country">Gender</label>
-                    <ul className="options">
-                      <li onChange={this.handleChangeField}>
-                        <input
-                          type="radio"
-                          id="male"
-                          name="gender"
-                          value="male"
-                          defaultChecked={form.gender === "male"}
-                          className="black_button"
-                        />
-                        <label htmlFor="male">Male</label>
-                      </li>
-                      <li onChange={this.handleChangeField}>
-                        <input
-                          type="radio"
-                          id="female"
-                          value="female"
-                          name="gender"
-                          defaultChecked={form.gender === "female"}
-                        />
-                        <label htmlFor="female">Female</label>
-                      </li>
-                    </ul>
+                    <div className="options">
+                      <RadioBtn
+                        foruse={genderData.name}
+                        name="gender"
+                        items={genderItems}
+                        onChange={this.handleChangeField}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="category">Category</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="category"
@@ -190,7 +200,7 @@ class EditProfile extends Component {
                 <label htmlFor="location" className="margin-bottom-13">
                   Location
                 </label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="location"
@@ -200,7 +210,7 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="phone-number">Phone number</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="phone_number"
@@ -210,7 +220,7 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="email">Email</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="email"
@@ -220,7 +230,7 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="website">Web site</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="website"
@@ -230,7 +240,7 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="description">Profile description</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="profile_description"
@@ -243,7 +253,7 @@ class EditProfile extends Component {
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
                 <label htmlFor="offer-tag">Offer tag</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="offer_tag"
@@ -253,7 +263,7 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="inquiry-tag">Inquiry tag</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="inquiry_tag"

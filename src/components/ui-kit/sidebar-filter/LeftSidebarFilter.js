@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { RadioBtn } from "./radioBtn";
-import { Select } from "./select";
-import { Text } from "./text";
+import { RadioBtn, Select, Text } from "../CommonUIComponents";
 
 class LeftSidebarFilter extends Component {
   constructor(props) {
@@ -33,6 +31,7 @@ class LeftSidebarFilter extends Component {
 
   render() {
     const { filters } = this.props;
+    console.log("filters", filters);
     return (
       <div>
         {filters.map(filter => {

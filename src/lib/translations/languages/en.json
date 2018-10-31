@@ -287,5 +287,63 @@
   "placeholders": {
     "username_email": "User name / Email",
     "password": "Password"
+  },
+  "edit_profile": {
+    "username": {
+      "name": "Username",
+      "type": "text"
+    },
+    "category": {
+      "name": "Category",
+      "type": "text"
+    },
+    "email": {
+      "name": "Email",
+      "type": "text"
+    },
+    "inquiry_tag": {
+      "name": "Inquiry-tag",
+      "type": "text"
+    },
+    "location": {
+      "name": "Location",
+      "type": "text"
+    },
+    "name_company": {
+      "name": "Name/Company",
+      "type": "text"
+    },
+    "offer_tag": {
+      "name": "Offer-tag",
+      "type": "text"
+    },
+    "phone_number": {
+      "name": "Phone-number",
+      "type": "text"
+    },
+    "profile_description": {
+      "name": "Profile-description",
+      "type": "text"
+    },
+    "website": {
+      "name": "Website",
+      "type": "text"
+    },
+    "gender": {
+      "name": "Gender",
+      "type": "radio"
+    },
+    "D_O_B_day": {
+      "name": "day",
+      "type": "number"
+    },
+    "D_O_B_week": {
+      "name": "week",
+      "type": "number"
+    },
+    "D_O_B_year": {
+      "name": "year",
+      "type": "number"
+    }
   }
 }
