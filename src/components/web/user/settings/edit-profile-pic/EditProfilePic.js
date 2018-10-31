@@ -93,6 +93,7 @@ class EditProfilePic extends Component {
             className="min-profile-pic range-slider-pic"
             alt={"crop-1"}
           />
+          <div className="runnable" />
           <input
             name="scale"
             type="range"
