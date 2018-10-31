@@ -24,28 +24,14 @@ export const submitLogin = params => {
 
     return userService.submitLogin(params).then(
       res => {
-        const authResponse = {
-          access_token: "12222",
-          refresh_token: false,
-          expires_in: "22222",
-          token_type: "bearer",
-          is_admin: true,
-          user_type: "admin"
-        };
-
-        Auth.saveJwtToStorage(authResponse);
+        if (res.data && res.data.data) Auth.saveJwtToStorage(res.data.data);
         dispatch(submitLoginSucceeded(res.data));
       },
       error => {
-        const authResponse = {
-          access_token: "12222",
-          refresh_token: false,
-          expires_in: "22222",
-          token_type: "bearer",
-          is_admin: true,
-          user_type: "admin"
-        };
-        Auth.saveJwtToStorage(authResponse);
+        Auth.saveJwtToStorage({
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmZWU5YThiLTI4NzItNDg3Yi04NTlmLWRjMmQ0ZTA0MjA3MSIsInVzZXJuYW1lIjoic2FudG9zaDEyMyIsImVtYWlsIjoic2FudG9zaC5zaGluZGVAcGljc3RhZ3JhcGguY29tIiwiZGF0ZUlzc3VlZCI6IjIwMTgtMTAtMzBUMTE6Mzg6NTIuMjUyWiIsImlhdCI6MTU0MDg5OTUzMiwiZXhwIjoyNzUwNDk5NTMyfQ.cFyhfgRhCoHlgbs410JE9sF6NUuaZRnCHL4XRyHN_Kw"
+        });
         dispatch(submitLoginFailed(error.response));
         logger.error({
           description: error.toString(),
