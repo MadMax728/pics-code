@@ -135,7 +135,7 @@ class Comments extends Component {
               onKeyDown={this.onKeyHandle}
             >
               <div>{item.hashtag}</div>
-              <div>{item.posts}</div>
+              <div>{item.posts} Posts</div>
             </div>
           );
         })}
@@ -186,16 +186,19 @@ class Comments extends Component {
               }}
               id={item.id}
               onKeyDown={this.onKeyHandle}
+              className="tag-person-wrapr"
             >
-              <div>
+              <div className="img-wrapr">
                 <img
                   src={item.image}
                   alt={"image" + `${item.name}`}
                   style={{ height: "20px", width: "20px" }}
                 />
               </div>
-              <div>{item.username}</div>
-              <div>{item.name}</div>
+              <div className="person-info-wrapr">
+                <div className="person-name">{item.username}</div>
+                <div className="person-info">{item.name}</div>
+              </div>
             </div>
           );
         })}
