@@ -83,10 +83,10 @@ class AdsModal extends Component {
     }
   };
   uploadFile = (e, forThat) => {
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    const reader = new FileReader();
+    const file = e.target.files[0];
     let base64Data;
-    let currentThis = this;
+    const currentThis = this;
     reader.readAsDataURL(file);
     console.log("reader", reader.result);
     reader.onloadend = function() {

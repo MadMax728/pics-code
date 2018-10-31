@@ -27,7 +27,19 @@ class AddVoucher extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
+    let voucher_data = this.state.vouchers;
+    let data = {
+      no: 1,
+      code: this.state.form.voucher_code,
+      period: this.state.form.period,
+      amount: this.state.form.amount,
+      type: this.state.form.type,
+      number: this.state.form.number
+    };
+    voucher_data.push(data);
+    this.setState({
+      vouchers: voucher_data
+    });
   };
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
@@ -60,8 +72,8 @@ class AddVoucher extends Component {
         onBlur={this.handleChangeField}
       >
         <option value="">Period</option>
-        <option value="">Item1</option>
-        <option value="">Item2</option>
+        <option value="Item1">Item1</option>
+        <option value="Item2">Item2</option>
       </select>
     );
   };
@@ -75,8 +87,8 @@ class AddVoucher extends Component {
         onBlur={this.handleChangeField}
       >
         <option value="">amount</option>
-        <option value="">Item1</option>
-        <option value="">Item2</option>
+        <option value="Item1">Item1</option>
+        <option value="Item2">Item2</option>
       </select>
     );
   };
@@ -90,8 +102,8 @@ class AddVoucher extends Component {
         onBlur={this.handleChangeField}
       >
         <option value="">type</option>
-        <option value="">Item1</option>
-        <option value="">Item2</option>
+        <option value="Item1">Item1</option>
+        <option value="Item2">Item2</option>
       </select>
     );
   };
@@ -105,8 +117,8 @@ class AddVoucher extends Component {
         onBlur={this.handleChangeField}
       >
         <option value="">Number</option>
-        <option value="">Item1</option>
-        <option value="">Item2</option>
+        <option value="Item1">Item1</option>
+        <option value="Item2">Item2</option>
       </select>
     );
   };

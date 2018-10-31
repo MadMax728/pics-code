@@ -31,6 +31,9 @@ export { voucher_list } from "./voucher";
 export { images_b_o_list } from "./images-b-o";
 export { videos_b_o_list } from "./videos-b-o";
 export { comments_list } from "./comments";
+export { hash_tag_list } from "./hash-tags";
+export { username_list } from "./username";
+
 export {
   key_statistics,
   content_statistics,

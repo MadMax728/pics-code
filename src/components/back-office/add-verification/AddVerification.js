@@ -23,14 +23,36 @@ class AddVerification extends Component {
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
+    let verificationData = this.state.verifications;
     e.preventDefault();
-    console.log(this.state.form);
+    let data = {
+      no: 4,
+      username: "username5",
+      name: "abc"
+    };
+    verificationData.push(data);
+    this.setState({
+      verifications: verificationData
+    });
+  };
+  removeVerification = e => {
+    let verification_Data = this.state.verifications;
+    for (let i = verification_Data.length - 1; i >= 0; i--) {
+      if (verification_Data[i].name === e.target.name) {
+        verification_Data.splice(i, 1);
+      }
+    }
+    this.setState({
+      verifications: verification_Data
+    });
   };
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        <Link to={""}>Remove Verification</Link>
+        <button name={row.name} onClick={this.removeVerification}>
+          Remove Verification
+        </button>
       </div>
     );
   };

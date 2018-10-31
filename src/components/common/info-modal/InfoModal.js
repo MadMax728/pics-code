@@ -5,7 +5,6 @@ import {
   ContentViewModal,
   PaymentConfirmationModal,
   ProcessedModal,
-  PostPopUpModal,
   EditProfileModal
 } from "../../web/modals";
 import propTypes from "prop-types";
@@ -36,15 +35,6 @@ class InfoModal extends Component {
     );
   };
 
-  handleModalPostPopUp = () => {
-    return (
-      <PostPopUpModal
-        modalInfoShow={this.props.modalInfoShow}
-        handleModalInfoHide={this.props.handleModalInfoHide}
-      />
-    );
-  };
-
   handleModalPaymentConfirmation = () => {
     return (
       <PaymentConfirmationModal
@@ -57,7 +47,6 @@ class InfoModal extends Component {
   };
 
   handleModalEditProfile = () => {
-    console.log(this.props.image);
     return (
       <EditProfileModal
         modalInfoShow={this.props.modalInfoShow}
@@ -77,8 +66,6 @@ class InfoModal extends Component {
           this.handleModalContentView()}
         {this.props.modalInfoType === modalType.processed &&
           this.handleModalProcessed()}
-        {this.props.modalInfoType === modalType.post_pop_up &&
-          this.handleModalPostPopUp()}
         {this.props.modalInfoType === modalType.edit_profile &&
           this.handleModalEditProfile()}
       </div>

@@ -570,6 +570,7 @@
     }
     .range-wrapr {
       margin: 0 30%;
+      padding-left: 11px;
       input[type="range"] {
         width: 279px;
         margin: 0 auto;
@@ -581,6 +582,7 @@
         height: 20px;
         cursor: pointer;
         border-radius: 0;
+        padding: 0 22px 0 0;
         /* iOS */
         &:focus {
           outline: none;
@@ -646,9 +648,20 @@
       }
       img.min-profile-pic {
         right: 10px;
+        margin-right: 11px;
       }
       img.max-profile-pic {
         left: 10px;
+      }
+      .runnable {
+        position: relative;
+        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+        width: 279px;
+        width: 0px;
+        height: 2px;
+        left: 19px;
+        top: 31px;
+        z-index: 2;
       }
     }
   }
