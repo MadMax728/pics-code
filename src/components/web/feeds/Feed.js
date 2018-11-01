@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import ReactTooltip from "react-tooltip";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
-import { ToolTip } from "../../ui-kit";
 
 class Feed extends Component {
   constructor(props, context) {
@@ -91,7 +91,7 @@ class Feed extends Component {
               />
             ) : (
               <img
-                src={images.feed_msg}
+                src={images.comment}
                 alt="company-comments"
                 onClick={this.handleCommentsSections}
                 role="presentation"
@@ -129,7 +129,7 @@ class Feed extends Component {
               data-for="report"
               role="button"
               data-tip="tooltip"
-              data-class="test"
+              data-class="tooltip-wrapr"
             >
               • • •
             </div>
@@ -140,7 +140,7 @@ class Feed extends Component {
 
         {isComments && <Comments campaign={campaign} addComment={addComment} />}
 
-        <ToolTip
+        <ReactTooltip
           id="report"
           getContent={this.renderReportTips}
           effect="solid"
@@ -148,7 +148,7 @@ class Feed extends Component {
           delayShow={500}
           delayUpdate={500}
           place={"left"}
-          border={true}
+          border
           type={"light"}
         />
       </div>

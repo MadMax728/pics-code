@@ -582,7 +582,7 @@
         height: 20px;
         cursor: pointer;
         border-radius: 0;
-        padding: 0 22px 0 0;
+        padding: 0 5px 0 0;
         /* iOS */
         &:focus {
           outline: none;
@@ -656,12 +656,12 @@
       .runnable {
         position: relative;
         background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
-        width: 279px;
+        width: 285px;
         width: 0px;
         height: 2px;
-        left: 19px;
+        left: 29px;
         top: 31px;
-        z-index: 2;
+        z-index: 1;
       }
     }
   }
