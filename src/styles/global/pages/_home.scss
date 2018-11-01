@@ -323,6 +323,7 @@
       border-bottom: 2px solid $grey_color;
       img {
         width: 60px;
+        height: 60px;
       }
     }
   }
@@ -431,6 +432,19 @@
       float: right;
       img {
         width: 30px;
+        transition: all ease 1s;
+        -webkit-transition: all ease 1s;
+        -moz-transition: all ease 1s;
+        &[src="/global/picstagraph-web/images/blue_heart.svg"] {
+          animation: 1s heartBit;
+          -webkit-animation: 1s heartBit;
+          -moz-animation: 1s heartBit;
+        }
+        &[src="/global/picstagraph-web/images/feed_like.svg"] {
+          animation: 1s NoheartBit;
+          -webkit-animation: 1s NoheartBit;
+          -moz-animation: 1s NoheartBit;
+        }
       }
     }
   }
@@ -469,6 +483,14 @@
       display: inline-block;
       img {
         width: 20px;
+        transition: all ease 1s;
+        -webkit-transition: all ease 1s;
+        -moz-transition: all ease 1s;
+        &[src="/global/picstagraph-web/images/blue_heart.svg"] {
+          animation: 1s heartBit;
+          -webkit-animation: 1s heartBit;
+          -moz-animation: 1s heartBit;
+        }
       }
     }
     .show_more_options {
@@ -635,4 +657,49 @@
 
 .__react_component_tooltip {
   pointer-events: auto !important;
+}
+
+@keyframes heartBit {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes heartBit {
+  0% {
+    -webkit-transform: scale(1);
+  }
+  50% {
+    -webkit-transform: scale(1.3);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-moz-keyframes heartBit {
+  0% {
+    -moz-transform: scale(1);
+  }
+  50% {
+    -moz-transform: scale(1.3);
+  }
+  100% {
+    -moz-transform: scale(1);
+  }
+}
+@keyframes NoheartBit {
+  0% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(0.7);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
