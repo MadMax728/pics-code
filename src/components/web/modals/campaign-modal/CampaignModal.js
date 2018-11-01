@@ -71,7 +71,6 @@ class CampaignModal extends Component {
     let base64Data;
     const currentThis = this;
     reader.readAsDataURL(file);
-    console.log("reader", reader.result);
     reader.onloadend = function() {
       const { form } = currentThis.state;
       form[forThat] = reader.result;
@@ -85,7 +84,6 @@ class CampaignModal extends Component {
 
   handleContentChange(text) {
     contentText = text.blocks[0].text;
-    console.log("text", contentText);
   }
 
   handleCreatorChangeField = event => {

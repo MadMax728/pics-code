@@ -26,7 +26,6 @@ class StepThree extends Component {
 
   render() {
     const { handleChangeField } = this.props;
-    console.log("formobject", this.props.form);
     return (
       <div className="modal-body">
         <div className="col-sm-5 upload-form">

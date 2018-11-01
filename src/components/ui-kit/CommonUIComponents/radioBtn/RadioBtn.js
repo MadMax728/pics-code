@@ -19,7 +19,7 @@ class RadioBtn extends Component {
     });
   }
 
-  handleChange = (value,event) => {
+  handleChange = (value, event) => {
     this.setState({ selectedValue: value });
     const { data } = this.state;
     data.values = { name: event.target.name, val: value };
@@ -28,7 +28,6 @@ class RadioBtn extends Component {
 
   render() {
     const { items, name } = this.props;
-    console.log("items",this.props.items);
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
 

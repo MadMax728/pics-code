@@ -4,7 +4,10 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, Cookies, DownloadStore } from "../common";
+import { Text, RadioButton } from "../../ui-kit/CommonUIComponents";
 import PropTypes from "prop-types";
+import { submitRegister } from "../../../actions/register";
+import connect from "react-redux/es/connect/connect";
 
 class Register extends Component {
   constructor(props) {
@@ -28,19 +31,29 @@ class Register extends Component {
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
     console.log(this.state.form);
   };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
+    const { form } = this.state;
+    let data = {
+      email: form.email,
+      name: "abc",
+      gender: form.gender,
+      password: form.password,
+      repeatPassword: form.repeat_password
+    };
     e.preventDefault();
-    console.log(this.state.form);
-    this.props.history.push(routes.ROOT_ROUTE);
+    this.props.submitRegister(data).then(() => {
+      this.props.history.push(routes.ROOT_ROUTE);
+    });
   };
 
   render() {
+    console.log("registerdata", this.props.registerData);
     const { form } = this.state;
 
     return (
@@ -53,7 +66,7 @@ class Register extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <input
+                  <Text
                     type="text"
                     className="form-control"
                     id="username"
@@ -69,7 +82,7 @@ class Register extends Component {
                   )}
                 </div>
                 <div className="form-group">
-                  <input
+                  <Text
                     type="email"
                     className="form-control"
                     id="email"
@@ -85,7 +98,7 @@ class Register extends Component {
                   )}
                 </div>
                 <div className="form-group">
-                  <input
+                  <Text
                     type="password"
                     className="form-control"
                     id="password"
@@ -102,7 +115,7 @@ class Register extends Component {
                   )}
                 </div>
                 <div className="form-group">
-                  <input
+                  <Text
                     type="password"
                     className="form-control"
                     id="repeat-password"
@@ -121,24 +134,26 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                   <ul className="options">
-                    <li onChange={this.handleChangeField}>
-                      <input
+                    <li>
+                      <RadioButton
                         type="radio"
                         id="male"
                         name="gender"
                         value="male"
                         defaultChecked={form.gender === "male"}
                         className="black_button"
+                        onChange={this.handleChangeField}
                       />
                       <label htmlFor="male">Male</label>
                     </li>
-                    <li onChange={this.handleChangeField}>
-                      <input
+                    <li>
+                      <RadioButton
                         type="radio"
                         id="female"
                         value="female"
                         name="gender"
                         defaultChecked={form.gender === "female"}
+                        onChange={this.handleChangeField}
                       />
                       <label htmlFor="female">Female</label>
                     </li>
@@ -173,7 +188,20 @@ class Register extends Component {
 }
 
 Register.propTypes = {
-  history: PropTypes.any
+  history: PropTypes.any,
+  submitRegister: PropTypes.func.isRequired,
+  registerData: PropTypes.object
 };
 
-export default Register;
+const mapStateToProps = state => ({
+  registerData: state.registerData
+});
+
+const mapDispatchToProps = {
+  submitRegister
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);
