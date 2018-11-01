@@ -32,7 +32,6 @@ class CreateCompanyCampaign extends Component {
       contentText,
       uploadFile
     } = this.props;
-    console.log("texteditor value", this.props);
 
     return (
       <div className="col-xs-12 no-padding">

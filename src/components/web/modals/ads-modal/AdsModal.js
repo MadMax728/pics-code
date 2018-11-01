@@ -88,7 +88,6 @@ class AdsModal extends Component {
     let base64Data;
     const currentThis = this;
     reader.readAsDataURL(file);
-    console.log("reader", reader.result);
     reader.onloadend = function() {
       const { form } = currentThis.state;
       form[forThat] = reader.result;

@@ -19,15 +19,16 @@ class Text extends Component {
   };
 
   render() {
-    const { name, className, id } = this.props;
+    const { name, className, id, type, autoComplete } = this.props;
     const { value } = this.state;
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <input
-        type="text"
+        type={type}
         name={name}
         id={id}
         className={className}
+        autoComplete={autoComplete}
         onChange={this.handleChangeField}
         value={value}
       />
@@ -36,6 +37,8 @@ class Text extends Component {
 }
 
 Text.propTypes = {
+  autoComplete: propTypes.string,
+  type: propTypes.string,
   name: propTypes.string,
   onChange: propTypes.func,
   className: propTypes.string,
