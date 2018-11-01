@@ -19,7 +19,7 @@ class Text extends Component {
   };
 
   render() {
-    const { name, className, id, type, autoComplete } = this.props;
+    const { name, className, id, type, autoComplete, placeholder } = this.props;
     const { value } = this.state;
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
@@ -28,6 +28,7 @@ class Text extends Component {
         name={name}
         id={id}
         className={className}
+        placeholder={placeholder}
         autoComplete={autoComplete}
         onChange={this.handleChangeField}
         value={value}
