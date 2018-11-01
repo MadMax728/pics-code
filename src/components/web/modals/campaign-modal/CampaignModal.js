@@ -48,18 +48,23 @@ class CampaignModal extends Component {
         billing_address: "",
         payment_method: "",
         voucher: "",
-        image: "",
         photo: "",
-        photoFile: null
+        photoFile: null,
+        image: null
       }
     };
   }
+
+  handleEditImage = image => {
+    this.setState({ form: { ...this.state.form, image: image } });
+  };
 
   handleDate = (date, forThat) => {
     const { form } = this.state;
     form[forThat] = date;
     this.setState({ form });
   };
+
   uploadFile = (e, forThat) => {
     const reader = new FileReader();
     const file = e.target.files[0];
@@ -148,6 +153,8 @@ class CampaignModal extends Component {
     const { isFor, handleModalHide } = this.props;
     const { stepIndex, isPreview, form } = this.state;
 
+    console.log(form.image);
+
     let modalClassName = "";
 
     if (stepIndex === 0) {
@@ -202,6 +209,8 @@ class CampaignModal extends Component {
               handleDate={this.handleDate}
               contentText={contentText}
               uploadFile={this.uploadFile}
+              handleEditImage={this.handleEditImage}
+              ref={this.imageCropper}
             />
           ) : (
             <CreateCreatorCampaign
@@ -215,6 +224,7 @@ class CampaignModal extends Component {
               form={form}
               handleSubmit={this.handleCreatorSubmit}
               handleDate={this.handleDate}
+              handleEditImage={this.handleEditImage}
             />
           )
         }

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Crop from "./Crop";
+import EditProfileCrop from "./EditProfileCrop";
+import CampaignAdCrop from "./CampaignAdCrop";
 
 const propTypes = {
   handleNewImage: PropTypes.func,
@@ -30,7 +31,7 @@ class ImageCropper extends Component {
         x: 0.5,
         y: 0.5
       },
-      allowZoomOut: false,
+      allowZoomOut: true,
       borderRadius: 0,
       preview: null,
       scale: 1,
@@ -41,11 +42,15 @@ class ImageCropper extends Component {
 
   handleScale = e => {
     const scale = parseFloat(e.target.value);
-    this.setState({ scale });
+    this.setState({ scale }, () => {
+      this.handleSave();
+    });
   };
 
   handlePositionChange = position => {
-    this.setState({ position });
+    this.setState({ position }, () => {
+      this.handleSave();
+    });
   };
 
   setEditorRef = editor => {
@@ -53,16 +58,20 @@ class ImageCropper extends Component {
   };
 
   handleNewImage = e => {
-    this.setState({ image: e.target.files[0] });
+    this.setState({ image: e.target.files[0] }, () => {
+      this.handleSave();
+    });
   };
 
   handleDrop = acceptedFiles => {
-    this.setState({ image: acceptedFiles[0] });
+    this.setState({ image: acceptedFiles[0] }, () => {
+      this.handleSave();
+    });
   };
 
   logCallback = e => {
     // eslint-disable-next-line
-    console.log("callback", e);
+    // console.log("callback", e);
   };
 
   handleSave = () => {
@@ -83,24 +92,45 @@ class ImageCropper extends Component {
       isCircle
     } = this.state;
 
-    return (
-      <Crop
-        handleNewImage={this.handleNewImage}
-        handleDrop={this.handleDrop}
-        image={image}
-        setEditorRef={this.setEditorRef}
-        scale={scale}
-        position={position}
-        height={height}
-        width={width}
-        handlePositionChange={this.handlePositionChange}
-        handleScale={this.handleScale}
-        borderRadius={borderRadius}
-        allowZoomOut={allowZoomOut}
-        logCallback={this.logCallback}
-        isCircle={isCircle}
-      />
-    );
+    if (isCircle) {
+      return (
+        <EditProfileCrop
+          handleNewImage={this.handleNewImage}
+          handleDrop={this.handleDrop}
+          image={image}
+          setEditorRef={this.setEditorRef}
+          scale={scale}
+          position={position}
+          height={height}
+          width={width}
+          handlePositionChange={this.handlePositionChange}
+          handleScale={this.handleScale}
+          borderRadius={borderRadius}
+          allowZoomOut={allowZoomOut}
+          logCallback={this.logCallback}
+          isCircle={isCircle}
+        />
+      );
+    } else {
+      return (
+        <CampaignAdCrop
+          handleNewImage={this.handleNewImage}
+          handleDrop={this.handleDrop}
+          image={image}
+          setEditorRef={this.setEditorRef}
+          scale={scale}
+          position={position}
+          height={height}
+          width={width}
+          handlePositionChange={this.handlePositionChange}
+          handleScale={this.handleScale}
+          borderRadius={borderRadius}
+          allowZoomOut={allowZoomOut}
+          logCallback={this.logCallback}
+          isCircle={isCircle}
+        />
+      );
+    }
   }
 }
 
