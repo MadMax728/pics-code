@@ -31,7 +31,7 @@ class ImageCropper extends Component {
         x: 0.5,
         y: 0.5
       },
-      allowZoomOut: false,
+      allowZoomOut: true,
       borderRadius: 0,
       preview: null,
       scale: 1,
@@ -42,14 +42,15 @@ class ImageCropper extends Component {
 
   handleScale = e => {
     const scale = parseFloat(e.target.value);
-    this.setState({ scale });
-    if (!this.props.isCircle) {
+    this.setState({ scale }, () => {
       this.handleSave();
-    }
+    });
   };
 
   handlePositionChange = position => {
-    this.setState({ position });
+    this.setState({ position }, () => {
+      this.handleSave();
+    });
   };
 
   setEditorRef = editor => {
@@ -58,14 +59,14 @@ class ImageCropper extends Component {
 
   handleNewImage = e => {
     this.setState({ image: e.target.files[0] }, () => {
-      if (!this.props.isCircle) {
-        this.handleSave();
-      }
+      this.handleSave();
     });
   };
 
   handleDrop = acceptedFiles => {
-    this.setState({ image: acceptedFiles[0] });
+    this.setState({ image: acceptedFiles[0] }, () => {
+      this.handleSave();
+    });
   };
 
   logCallback = e => {
