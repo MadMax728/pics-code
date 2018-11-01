@@ -491,6 +491,11 @@
           -webkit-animation: 1s heartBit;
           -moz-animation: 1s heartBit;
         }
+        &[src="/global/picstagraph-web/images/feed_like.svg"] {
+          animation: 1s NoheartBit;
+          -webkit-animation: 1s NoheartBit;
+          -moz-animation: 1s NoheartBit;
+        }
       }
     }
     .show_more_options {
@@ -701,5 +706,27 @@
   }
   100% {
     transform: scale(1);
+  }
+}
+@-webkit-keyframes NoheartBit {
+  0% {
+    -webkit-transform: scale(1.3);
+  }
+  50% {
+    -webkit-transform: scale(0.7);
+  }
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+@-moz-keyframes NoheartBit {
+  0% {
+    -moz-transform: scale(1.3);
+  }
+  50% {
+    -moz-transform: scale(0.7);
+  }
+  100% {
+    -moz-transform: scale(1);
   }
 }
