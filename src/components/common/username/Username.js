@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { username_list } from "../../../mock-data";
 
 const propTypes = {
-  form: PropTypes.any,
+  value: PropTypes.any.isRequired,
   handleSetSatetToolTipUsername: PropTypes.func.isRequired
 };
 

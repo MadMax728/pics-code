@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { hash_tag_list } from "../../../mock-data";
 
 const propTypes = {
-  form: PropTypes.any,
+  value: PropTypes.any.isRequired,
   handleSetSatetToolTipHashTag: PropTypes.func.isRequired
 };
 
