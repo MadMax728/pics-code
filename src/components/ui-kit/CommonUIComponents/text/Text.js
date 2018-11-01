@@ -43,7 +43,8 @@ Text.propTypes = {
   name: propTypes.string,
   onChange: propTypes.func,
   className: propTypes.string,
-  id: propTypes.string
+  id: propTypes.string,
+  placeholder: propTypes.string
 };
 
 export default Text;
