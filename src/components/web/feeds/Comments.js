@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
 import { hash_tag_list, username_list } from "../../../mock-data";
-
+import { ToolTip } from "../../ui-kit";
+import ReactTooltip from "react-tooltip";
+import { HashTag, Username } from "../../common";
 class Comments extends Component {
   constructor(props, context) {
     super(props, context);
@@ -13,8 +14,6 @@ class Comments extends Component {
     this.state = {
       campaign: this.props.campaign,
       comments: this.props.campaign.comments,
-      hashTagList: hash_tag_list,
-      userNameList: username_list,
       form: {
         comment: ""
       }
@@ -91,13 +90,7 @@ class Comments extends Component {
     this.setState({ form: { ...this.state.form, comment: "" } });
   };
 
-  _commentsCbHashTag = item => {
-    const hashtag = item.hashtag;
-    //hashtag = hash_tag_list.filter
-    const { form } = this.state;
-    const commentArr = form.comment.split(" ");
-    commentArr.pop();
-    form.comment = commentArr.join(" ") + " #" + hashtag;
+  handleSetSatetToolTipHashTag = form => {
     this.setState(
       {
         form: { ...form, comment: form.comment }
@@ -110,46 +103,7 @@ class Comments extends Component {
     );
   };
 
-  renderHashTagTips = () => {
-    let { hashTagList, form } = this.state;
-    const commentArr = form.comment.split(" ");
-    const lastText = commentArr[commentArr.length - 1].substring(1);
-    hashTagList = hashTagList.filter(item => {
-      return !!(
-        lastText === "#" ||
-        lastText === "" ||
-        item.hashtag.toLowerCase().indexOf(lastText.toLowerCase()) > -1
-      );
-    });
-    return (
-      <div>
-        {hashTagList.map((item, index) => {
-          return (
-            /* eslint-disable */
-            <div
-              key={"Commnet_" + item.id}
-              onClick={() => {
-                this._commentsCbHashTag(item);
-              }}
-              id={item.id}
-              onKeyDown={this.onKeyHandle}
-            >
-              <div>{item.hashtag}</div>
-              <div>{item.posts} Posts</div>
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
-
-  _commentsCbUserName = item => {
-    const username = item.username;
-    //hashtag = hash_tag_list.filter
-    const { form } = this.state;
-    const commentArr = form.comment.split(" ");
-    commentArr.pop();
-    form.comment = commentArr.join(" ") + " @" + username;
+  handleSetSatetToolTipUsername = form => {
     this.setState(
       {
         form: { ...form, comment: form.comment }
@@ -162,47 +116,21 @@ class Comments extends Component {
     );
   };
 
-  renderUserNameTips = () => {
-    let { userNameList, form } = this.state;
-    const commentArr = form.comment.split(" ");
-    const lastText = commentArr[commentArr.length - 1].substring(1);
-    userNameList = userNameList.filter(item => {
-      return !!(
-        lastText === "@" ||
-        lastText === "" ||
-        item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1 ||
-        item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1
-      );
-    });
+  renderHashTagTips = () => {
     return (
-      <div>
-        {userNameList.map((item, index) => {
-          return (
-            /* eslint-disable */
-            <div
-              key={"Commnet_" + item.id}
-              onClick={() => {
-                this._commentsCbUserName(item);
-              }}
-              id={item.id}
-              onKeyDown={this.onKeyHandle}
-              className="tag-person-wrapr"
-            >
-              <div className="img-wrapr">
-                <img
-                  src={item.image}
-                  alt={"image" + `${item.name}`}
-                  style={{ height: "20px", width: "20px" }}
-                />
-              </div>
-              <div className="person-info-wrapr">
-                <div className="person-name">{item.username}</div>
-                <div className="person-info">{item.name}</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <HashTag
+        form={this.state.form}
+        handleSetSatetToolTipHashTag={this.handleSetSatetToolTipHashTag}
+      />
+    );
+  };
+
+  renderUserNameTips = () => {
+    return (
+      <Username
+        form={this.state.form}
+        handleSetSatetToolTipUsername={this.handleSetSatetToolTipUsername}
+      />
     );
   };
 
@@ -253,19 +181,25 @@ class Comments extends Component {
               <img src={images.emoji} alt="like" className="pull-right" />
             </div>
           </form>
-          <ReactTooltip
+          <ToolTip
             id="comments_hash_tag"
             getContent={this.renderHashTagTips}
             effect="solid"
+            delayHide={0}
+            delayShow={0}
+            delayUpdate={0}
             place={"bottom"}
             border={true}
             type={"light"}
           />
 
-          <ReactTooltip
+          <ToolTip
             id="comments_username"
             getContent={this.renderUserNameTips}
             effect="solid"
+            delayHide={0}
+            delayShow={0}
+            delayUpdate={0}
             place={"bottom"}
             border={true}
             type={"light"}

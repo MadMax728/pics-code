@@ -47,7 +47,6 @@ class InfoModal extends Component {
   };
 
   handleModalEditProfile = () => {
-    console.log(this.props.image);
     return (
       <EditProfileModal
         modalInfoShow={this.props.modalInfoShow}

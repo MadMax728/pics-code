@@ -6,8 +6,42 @@ export const backoffice_campaign_list = [
       name: "Santosh Shinde",
       id: "1",
       image: `${images.campaign2}`,
-      isOwner: false
+      isOwner: false,
+      // Creator for True and Company for False
+      isCreator: true
     },
+    comments: [
+      {
+        comment_id: 1,
+        comment: "This text is an example1",
+        user: {
+          name: "Sagar",
+          id: 1,
+          image: `${images.campaign1}`
+        },
+        date: "01.01.2000"
+      },
+      {
+        comment_id: 2,
+        comment: "This text is an example2",
+        user: {
+          name: "Vaghela",
+          id: 2,
+          image: `${images.campaign2}`
+        },
+        date: "02.02.2000"
+      },
+      {
+        comment_id: 3,
+        comment: "This text is an example3",
+        user: {
+          name: "Sagar",
+          id: 3,
+          image: `${images.campaign3}`
+        },
+        date: "03.03.2000"
+      }
+    ],
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
     image: `${images.campaign2}`,
@@ -35,8 +69,42 @@ export const backoffice_campaign_list = [
       name: "Santosh Shinde",
       id: "2",
       image: `${images.campaign3}`,
-      isOwner: false
+      isOwner: false,
+      // Creator for True and Company for False
+      isCreator: false
     },
+    comments: [
+      {
+        comment_id: 1,
+        comment: "This text is an example1",
+        user: {
+          name: "Sagar",
+          id: 1,
+          image: `${images.campaign1}`
+        },
+        date: "01.01.2000"
+      },
+      {
+        comment_id: 2,
+        comment: "This text is an example2",
+        user: {
+          name: "Vaghela",
+          id: 2,
+          image: `${images.campaign2}`
+        },
+        date: "02.02.2000"
+      },
+      {
+        comment_id: 3,
+        comment: "This text is an example3",
+        user: {
+          name: "Sagar",
+          id: 3,
+          image: `${images.campaign3}`
+        },
+        date: "03.03.2000"
+      }
+    ],
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
     image: `${images.campaign3}`,
@@ -64,8 +132,42 @@ export const backoffice_campaign_list = [
       name: "Santosh Shinde",
       id: "3",
       image: `${images.campaign1}`,
-      isOwner: true
+      isOwner: true,
+      // Creator for True and Company for False
+      isCreator: false
     },
+    comments: [
+      {
+        comment_id: 1,
+        comment: "This text is an example1",
+        user: {
+          name: "Sagar",
+          id: 1,
+          image: `${images.campaign1}`
+        },
+        date: "01.01.2000"
+      },
+      {
+        comment_id: 2,
+        comment: "This text is an example2",
+        user: {
+          name: "Vaghela",
+          id: 2,
+          image: `${images.campaign2}`
+        },
+        date: "02.02.2000"
+      },
+      {
+        comment_id: 3,
+        comment: "This text is an example3",
+        user: {
+          name: "Sagar",
+          id: 3,
+          image: `${images.campaign3}`
+        },
+        date: "03.03.2000"
+      }
+    ],
     title: "Title of campaigns",
     category: "01.01.2000 in Category",
     image: `${images.campaign1}`,

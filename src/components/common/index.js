@@ -22,3 +22,5 @@ export { HomeRoute } from "./home-route";
 export { BackOfficeHomeRoute } from "./back-office-home-route";
 export { RightSideBarBackOffice } from "./right-bar";
 export { MessageBar } from "./message-bar";
+export { Username } from "./username";
+export { HashTag } from "./hash-tag";
