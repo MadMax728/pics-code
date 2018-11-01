@@ -19,7 +19,7 @@ class Comments extends Component {
   renderComment = comment => {
     return (
       <div className="comment-wrapper" key={comment.comment_id}>
-        <div className="comment-header">
+        <div className="comment-header col-xs-12">
           <div className="col-sm-1 col-xs-1 no-padding profile_image">
             <img
               src={comment.user.image}

@@ -30,9 +30,9 @@ class CreateCompanyCampaign extends Component {
       handleDate,
       handleContentChange,
       contentText,
-      uploadFile
+      uploadFile,
+      handleEditImage
     } = this.props;
-    console.log("texteditor value", this.props);
 
     return (
       <div className="col-xs-12 no-padding">
@@ -56,6 +56,7 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
+              handleEditImage={handleEditImage}
             />
           ))}
         {!isPreview &&
