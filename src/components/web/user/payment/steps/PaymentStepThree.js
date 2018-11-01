@@ -12,7 +12,6 @@ class PaymentStepThree extends Component {
   handleRedeemBtn = () => {};
 
   handleCommitToBuy = () => {
-    console.log(this.props);
     this.props.handleSubmit();
     this.props.handleModalInfoShow();
   };

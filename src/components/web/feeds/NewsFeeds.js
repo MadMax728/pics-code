@@ -22,7 +22,6 @@ class NewsFeeds extends Component {
   handleFavorite = e => {
     const id = e.target.id;
     const campaigns = this.state.campaigns;
-    console.log(id);
     campaigns.filter(
       campaign =>
         campaign.id === parseInt(id) &&

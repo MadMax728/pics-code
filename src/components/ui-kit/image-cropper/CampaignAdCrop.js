@@ -22,7 +22,7 @@ const propTypes = {
   logCallback: PropTypes.any
 };
 
-const Crop = ({
+const CampaignAdCrop = ({
   handleNewImage,
   handleDrop,
   image,
@@ -40,7 +40,7 @@ const Crop = ({
 }) => {
   return (
     <div>
-      {image !== null ? (
+      {image !== null && image !== undefined ? (
         <Dropzone
           onDrop={handleDrop}
           disableClick
@@ -130,6 +130,6 @@ const Crop = ({
   );
 };
 
-Crop.propTypes = propTypes;
+CampaignAdCrop.propTypes = propTypes;
 
-export default Crop;
+export default CampaignAdCrop;

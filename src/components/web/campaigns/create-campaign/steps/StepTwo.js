@@ -9,8 +9,6 @@ class StepTwo extends Component {
   }
 
   render() {
-    console.log("texteditor value", this.props.contentText);
-
     const { handleChangeField, contentText, handleContentChange } = this.props;
     return (
       <div className="col-xs-12 no-padding">

@@ -2,11 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { findDOMNode } from "react-dom";
-import { hash_tag_list, username_list } from "../../../mock-data";
-import { ToolTip } from "../../ui-kit";
-import ReactTooltip from "react-tooltip";
-import { HashTag, Username } from "../../common";
+import { HashTagUsername } from "../../common";
 class Comments extends Component {
   constructor(props, context) {
     super(props, context);
@@ -20,48 +16,10 @@ class Comments extends Component {
     };
   }
 
-  onKeyHandle = () => {};
-
-  handleChangeField = e => {
-    const commentArr = e.target.value.split(" ");
-    const lastText = commentArr[commentArr.length - 1];
-    /* eslint-disable */
-
-    ReactTooltip.hide(findDOMNode(this.refs.comments_hash_tag));
-    ReactTooltip.hide(findDOMNode(this.refs.comments_username));
-    if (lastText.charAt(0) === "#") {
-      this.setState(
-        {
-          form: { ...this.state.form, comment: e.target.value }
-        },
-        () => {
-          /* eslint-disable */
-
-          ReactTooltip.show(findDOMNode(this.refs.comments_hash_tag));
-        }
-      );
-    } else if (lastText.charAt(0) === "@") {
-      this.setState(
-        {
-          form: { ...this.state.form, comment: e.target.value }
-        },
-        () => {
-          /* eslint-disable */
-
-          ReactTooltip.show(findDOMNode(this.refs.comments_username));
-        }
-      );
-    } else {
-      this.setState({
-        form: { ...this.state.form, comment: e.target.value }
-      });
-    }
-  };
-
   renderComment = comment => {
     return (
       <div className="comment-wrapper" key={comment.comment_id}>
-        <div className="comment-header">
+        <div className="comment-header col-xs-12 no-padding">
           <div className="col-sm-1 col-xs-1 no-padding profile_image">
             <img
               src={comment.user.image}
@@ -83,55 +41,18 @@ class Comments extends Component {
     );
   };
 
+  handleSetState = (value, cd) => {
+    this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addComment(this.props.campaign.id, this.refs.comment.value);
-    this.refs.commentForm.reset();
-    this.setState({ form: { ...this.state.form, comment: "" } });
-  };
-
-  handleSetSatetToolTipHashTag = form => {
-    this.setState(
-      {
-        form: { ...form, comment: form.comment }
-      },
-      () => {
-        /* eslint-disable */
-
-        ReactTooltip.hide(findDOMNode(this.refs.comments_hash_tag));
-      }
-    );
-  };
-
-  handleSetSatetToolTipUsername = form => {
-    this.setState(
-      {
-        form: { ...form, comment: form.comment }
-      },
-      () => {
-        /* eslint-disable */
-
-        ReactTooltip.hide(findDOMNode(this.refs.comments_username));
-      }
-    );
-  };
-
-  renderHashTagTips = () => {
-    return (
-      <HashTag
-        form={this.state.form}
-        handleSetSatetToolTipHashTag={this.handleSetSatetToolTipHashTag}
-      />
-    );
-  };
-
-  renderUserNameTips = () => {
-    return (
-      <Username
-        form={this.state.form}
-        handleSetSatetToolTipUsername={this.handleSetSatetToolTipUsername}
-      />
-    );
+    if (this.state.form.comment !== "") {
+      this.props.addComment(this.props.campaign.id, this.state.form.comment);
+      /* eslint-disable */
+      this.refs.commentForm.reset();
+      this.setState({ form: { ...this.state.form, comment: "" } });
+    }
   };
 
   render() {
@@ -151,59 +72,22 @@ class Comments extends Component {
             <div className="col-sm-10 col-xs-7 no-padding">
               <div className="comment-input">
                 <div className="form-group">
-                  <input
+                  <HashTagUsername
                     className="form-control"
                     type="text"
-                    ref="comment"
-                    id="comment"
                     placeholder="Write a comment"
                     name="comment"
-                    onChange={this.handleChangeField}
+                    handleSetState={this.handleSetState}
                     value={form.comment}
                   />
-                  <div
-                    data-for="comments_hash_tag"
-                    role="button"
-                    data-tip="tooltip"
-                    ref="comments_hash_tag"
-                  />
-                  <div
-                    data-for="comments_username"
-                    role="button"
-                    data-tip="tooltip"
-                    ref="comments_username"
-                  />
-                  <input type="submit" hidden />
                 </div>
               </div>
             </div>
             <div className="col-sm-1 col-xs-2 emoji_wrapper">
               <img src={images.emoji} alt="like" className="pull-right" />
             </div>
+            <input type="submit" hidden />
           </form>
-          <ToolTip
-            id="comments_hash_tag"
-            getContent={this.renderHashTagTips}
-            effect="solid"
-            delayHide={0}
-            delayShow={0}
-            delayUpdate={0}
-            place={"bottom"}
-            border={true}
-            type={"light"}
-          />
-
-          <ToolTip
-            id="comments_username"
-            getContent={this.renderUserNameTips}
-            effect="solid"
-            delayHide={0}
-            delayShow={0}
-            delayUpdate={0}
-            place={"bottom"}
-            border={true}
-            type={"light"}
-          />
         </div>
 
         {comments.length !== 0 && comments.map(this.renderComment)}

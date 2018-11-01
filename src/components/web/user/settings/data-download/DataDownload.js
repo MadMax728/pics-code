@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Text } from "../../../../ui-kit/CommonUIComponents";
 
 class DataDownload extends Component {
   constructor(props) {
@@ -14,7 +15,7 @@ class DataDownload extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
     console.log(this.state.form);
   };
@@ -22,7 +23,6 @@ class DataDownload extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
   };
 
   render() {
@@ -54,7 +54,7 @@ class DataDownload extends Component {
               <div className="col-sm-5 padding-r-5 email-wrapper">
                 <div className="form-group">
                   <label htmlFor="email">Email</label>
-                  <input
+                  <Text
                     type="text"
                     className="form-control"
                     id="email"
@@ -66,7 +66,7 @@ class DataDownload extends Component {
               <div className="col-sm-5 padding-l-5 padding-r-5">
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input
+                  <Text
                     type="text"
                     className="form-control"
                     id="password"

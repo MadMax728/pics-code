@@ -26,7 +26,8 @@ class CreateCreatorCampaign extends Component {
       form,
       handleChangeField,
       handleSubmit,
-      handleDate
+      handleDate,
+      handleEditImage
     } = this.props;
 
     return (
@@ -50,6 +51,7 @@ class CreateCreatorCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
+              handleEditImage={handleEditImage}
             />
           ))}
         {!isPreview &&
@@ -103,7 +105,8 @@ CreateCreatorCampaign.propTypes = {
   form: propTypes.any.isRequired,
   isFor: propTypes.bool.isRequired,
   handleSubmit: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired
+  handleDate: propTypes.func.isRequired,
+  handleEditImage: propTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;

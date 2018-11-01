@@ -37,12 +37,16 @@ class AdsModal extends Component {
         billing_address: "",
         payment_method: "",
         voucher: "",
-        image: "",
+        image: null,
         photo: "",
         photoFile: null
       }
     };
   }
+
+  handleEditImage = image => {
+    this.setState({ form: { ...this.state.form, image: image } });
+  };
 
   handleSubmit = () => {
     console.log(this.state.form);
@@ -88,7 +92,6 @@ class AdsModal extends Component {
     let base64Data;
     const currentThis = this;
     reader.readAsDataURL(file);
-    console.log("reader", reader.result);
     reader.onloadend = function() {
       const { form } = currentThis.state;
       form[forThat] = reader.result;
@@ -148,6 +151,7 @@ class AdsModal extends Component {
             form={form}
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}
+            handleEditImage={this.handleEditImage}
           />
         }
       />

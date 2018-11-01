@@ -142,3 +142,4 @@ export const capcha = `${process.env.REACT_APP_CDN_URL}/images/capcha.jpg`;
 export const close = `${process.env.REACT_APP_CDN_URL}/images/close.svg`;
 
 export const crop_pic = `${process.env.REACT_APP_CDN_URL}/images/crop-pic.jpg`;
+export const comment = `${process.env.REACT_APP_CDN_URL}/images/comment.PNG`;

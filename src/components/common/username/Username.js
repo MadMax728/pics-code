@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { username_list } from "../../../mock-data";
 
 const propTypes = {
-  form: PropTypes.any,
+  value: PropTypes.any.isRequired,
   handleSetSatetToolTipUsername: PropTypes.func.isRequired
 };
 
@@ -18,17 +18,17 @@ class Username extends Component {
   _commentsCbUserName = item => {
     const username = item.username;
     //hashtag = hash_tag_list.filter
-    const { form } = this.props;
-    const commentArr = form.comment.split(" ");
+    let { value } = this.props;
+    const commentArr = value.split(" ");
     commentArr.pop();
-    form.comment = commentArr.join(" ") + " @" + username;
-    this.props.handleSetSatetToolTipUsername(form);
+    value = commentArr.join(" ") + " @" + username;
+    this.props.handleSetSatetToolTipUsername(value);
   };
 
   render() {
     let { userNameList } = this.state;
-    const { form } = this.props;
-    const commentArr = form.comment.split(" ");
+    let { value } = this.props;
+    const commentArr = value.split(" ");
     const lastText = commentArr[commentArr.length - 1].substring(1);
     userNameList = userNameList.filter(item => {
       return !!(

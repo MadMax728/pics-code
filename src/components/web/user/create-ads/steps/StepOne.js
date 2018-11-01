@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
+import { ImageCropper } from "../../../../ui-kit";
 
 class StepOne extends Component {
   constructor(props) {
@@ -12,9 +13,7 @@ class StepOne extends Component {
   };
 
   render() {
-    console.log("photo", this.props.form);
-    // console.log("photoFile",this.state.photoFile);
-    const { form, handleChangeField, uploadFile } = this.props;
+    const { form, handleChangeField, uploadFile, handleEditImage } = this.props;
 
     return (
       <div className="modal-body">
@@ -137,33 +136,12 @@ class StepOne extends Component {
           </form>
         </div>
         <div className="col-sm-6 no-padding right-side ads-right-section">
-          <div className="box">
-            {this.props.form.photo !== "" ? (
-              <img src={this.props.form.photo} alt="Edit" />
-            ) : (
-              ""
-            )}
-            <input
-              type="file"
-              name="file-2[]"
-              id="file-2"
-              className="inputfile inputfile-2"
-              data-multiple-caption="{count} files selected"
-              multiple=""
-              onChange={this.uploadPhoto}
-            />
-            <label htmlFor="file-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="17"
-                viewBox="0 0 20 17"
-              >
-                <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
-              </svg>
-              <br /> <span>Upload title image</span>
-            </label>
-          </div>
+          <ImageCropper
+            image={form.image}
+            handleEditImage={handleEditImage}
+            isCircle={false}
+            ref={this.imageCrop}
+          />
           <div className="add-wrapper">
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
@@ -176,7 +154,8 @@ class StepOne extends Component {
 StepOne.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
-  uploadFile: propTypes.func.isRequired
+  uploadFile: propTypes.func.isRequired,
+  handleEditImage: propTypes.func.isRequired
 };
 
 export default StepOne;
