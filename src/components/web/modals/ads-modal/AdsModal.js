@@ -37,12 +37,16 @@ class AdsModal extends Component {
         billing_address: "",
         payment_method: "",
         voucher: "",
-        image: "",
+        image: null,
         photo: "",
         photoFile: null
       }
     };
   }
+
+  handleEditImage = image => {
+    this.setState({ form: { ...this.state.form, image: image } });
+  };
 
   handleSubmit = () => {
     console.log(this.state.form);
@@ -148,6 +152,7 @@ class AdsModal extends Component {
             form={form}
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}
+            handleEditImage={this.handleEditImage}
           />
         }
       />

@@ -55,8 +55,6 @@ class CampaignModal extends Component {
     };
   }
 
-  // handleTempFile =
-
   handleEditImage = image => {
     this.setState({ form: { ...this.state.form, image: image } });
   };
@@ -214,6 +212,7 @@ class CampaignModal extends Component {
               contentText={contentText}
               uploadFile={this.uploadFile}
               handleEditImage={this.handleEditImage}
+              ref={this.imageCropper}
             />
           ) : (
             <CreateCreatorCampaign
