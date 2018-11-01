@@ -6,7 +6,7 @@ import SocialNetworks from "./SocialNetworks";
 import {
   Text,
   NumberInput,
-  RadioBtn
+  RadioButton
 } from "../../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../../lib/translations";
 
@@ -175,14 +175,31 @@ class EditProfile extends Component {
                 <div className="col-sm-6 padding-l-5">
                   <div className="form-group margin-bottom-30">
                     <label htmlFor="country">Gender</label>
-                    <div className="options">
-                      <RadioBtn
-                        foruse={genderData.name}
-                        name="gender"
-                        items={genderItems}
-                        onChange={this.handleChangeField}
-                      />
-                    </div>
+                    <ul className="options">
+                      <li>
+                        <RadioButton
+                          type="radio"
+                          id="male"
+                          name="gender"
+                          value="male"
+                          defaultChecked={form.gender === "male"}
+                          className="black_button"
+                          onChange={this.handleChangeField}
+                        />
+                        <label htmlFor="male">Male</label>
+                      </li>
+                      <li>
+                        <RadioButton
+                          type="radio"
+                          id="female"
+                          value="female"
+                          name="gender"
+                          defaultChecked={form.gender === "female"}
+                          onChange={this.handleChangeField}
+                        />
+                        <label htmlFor="female">Female</label>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </div>

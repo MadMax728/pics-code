@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-import { RadioGroup, Radio } from "react-radio-group";
 
-class RadioBtn extends Component {
+class RadioButton extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +26,7 @@ class RadioBtn extends Component {
   };
 
   render() {
-    const { className, value, name, id } = this.props;
+    const { className, value, name, id, defaultChecked } = this.props;
     return (
       <input
         type="radio"
@@ -36,17 +35,19 @@ class RadioBtn extends Component {
         className={className}
         onChange={this.handleChangeField}
         value={value}
+        defaultChecked={defaultChecked}
       />
     );
   }
 }
 
-RadioBtn.propTypes = {
+RadioButton.propTypes = {
   name: propTypes.string,
   className: propTypes.string,
   value: propTypes.string,
   id: propTypes.string,
-  onChange: propTypes.func
+  onChange: propTypes.func,
+  defaultChecked:propTypes.any
 };
 
-export default RadioBtn;
+export default RadioButton;
