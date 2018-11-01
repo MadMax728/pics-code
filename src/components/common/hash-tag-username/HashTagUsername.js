@@ -9,9 +9,9 @@ import { findDOMNode } from "react-dom";
 const propTypes = {
   className: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
-  form: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
   handleSetState: PropTypes.func.isRequired
 };
 
@@ -23,22 +23,22 @@ class HashTagUsername extends Component {
 
   hashTagShow = () => {
     /* eslint-disable */
-    ReactTooltip.show(findDOMNode(this.refs.comments_hash_tag));
+    ReactTooltip.show(findDOMNode(this.refs.hash_tag));
   };
 
   hashTagHide = () => {
     /* eslint-disable */
-    ReactTooltip.hide(findDOMNode(this.refs.comments_hash_tag));
+    ReactTooltip.hide(findDOMNode(this.refs.hash_tag));
   };
 
   usernameShow = () => {
     /* eslint-disable */
-    ReactTooltip.show(findDOMNode(this.refs.comments_username));
+    ReactTooltip.show(findDOMNode(this.refs.username));
   };
 
   usernameHide = () => {
     /* eslint-disable */
-    ReactTooltip.hide(findDOMNode(this.refs.comments_username));
+    ReactTooltip.hide(findDOMNode(this.refs.username));
   };
 
   none = () => {};
@@ -60,18 +60,18 @@ class HashTagUsername extends Component {
     }
   };
 
-  handleSetSatetToolTipHashTag = form => {
-    this.props.handleSetState(form.comment, this.hashTagHide);
+  handleSetSatetToolTipHashTag = value => {
+    this.props.handleSetState(value, this.hashTagHide);
   };
 
-  handleSetSatetToolTipUsername = form => {
-    this.props.handleSetState(form.comment, this.usernameHide);
+  handleSetSatetToolTipUsername = value => {
+    this.props.handleSetState(value, this.usernameHide);
   };
 
   renderHashTagTips = () => {
     return (
       <HashTag
-        form={this.props.form}
+        value={this.props.value}
         handleSetSatetToolTipHashTag={this.handleSetSatetToolTipHashTag}
       />
     );
@@ -80,14 +80,14 @@ class HashTagUsername extends Component {
   renderUserNameTips = () => {
     return (
       <Username
-        form={this.props.form}
+        value={this.props.value}
         handleSetSatetToolTipUsername={this.handleSetSatetToolTipUsername}
       />
     );
   };
 
   render() {
-    const { form, placeholder, className, name } = this.props;
+    const { value, placeholder, className, name } = this.props;
 
     return (
       <div>
@@ -97,22 +97,22 @@ class HashTagUsername extends Component {
           placeholder={placeholder}
           name={name}
           onChange={this.handleChangeField}
-          value={form.comment}
+          value={value}
         />
         <div
-          data-for="comments_hash_tag"
+          data-for="hash_tag"
           role="button"
           data-tip="tooltip"
-          ref="comments_hash_tag"
+          ref="hash_tag"
         />
         <div
-          data-for="comments_username"
+          data-for="username"
           role="button"
           data-tip="tooltip"
-          ref="comments_username"
+          ref="username"
         />
         <ToolTip
-          id="comments_hash_tag"
+          id="hash_tag"
           getContent={this.renderHashTagTips}
           effect="solid"
           delayHide={0}
@@ -124,7 +124,7 @@ class HashTagUsername extends Component {
         />
 
         <ToolTip
-          id="comments_username"
+          id="username"
           getContent={this.renderUserNameTips}
           effect="solid"
           delayHide={0}

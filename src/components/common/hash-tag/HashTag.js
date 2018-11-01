@@ -20,17 +20,17 @@ class HashTag extends Component {
   _commentsCbHashTag = item => {
     const hashtag = item.hashtag;
     //hashtag = hash_tag_list.filter
-    const { form } = this.props;
-    const commentArr = form.comment.split(" ");
+    let { value } = this.props;
+    const commentArr = value.split(" ");
     commentArr.pop();
-    form.comment = commentArr.join(" ") + " #" + hashtag;
-    this.props.handleSetSatetToolTipHashTag(form);
+    value = commentArr.join(" ") + " #" + hashtag;
+    this.props.handleSetSatetToolTipHashTag(value);
   };
 
   render() {
     let { hashTagList } = this.state;
-    const { form } = this.props;
-    const commentArr = form.comment.split(" ");
+    let { value } = this.props;
+    const commentArr = value.split(" ");
     const lastText = commentArr[commentArr.length - 1].substring(1);
     hashTagList = hashTagList.filter(item => {
       return !!(

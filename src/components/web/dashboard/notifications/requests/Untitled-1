@@ -2,15 +2,27 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on image-cropper branch and created merge request.
 
-1. Implemenatation of the subscribe and unsubscribe event for community module.
-2. Implemenatation of like/favorite events for all campaigns and feeds.
-3. Fixed bug Link/redirect/id’s issues throughout application.
+1. Implemenatation of smart component for combine HashTag-Username functionality .
+2. Implemenatation of the Image-cropper functionality in Create Campaign Modal.
+3. Implemenatation of the Image-cropper functionality in Create Ad Modal.
 4. Fixed designing issue for Edit-Profile Modal Component.
-5. Fixed issue for to get cropped Image from actual image and maintain into state.
-6. Implemenatation of Edit Profile image in edit profile modal and set in edit profile Component.
-7. Modified mockdata for the campaigns which needs to requies userId and favorite fields into data for all campaigns and feeds.
-8. Implemenatation of more modal for the campaigns in root campaigns list.
+5. Fixed designing issue in comment section for campaigns and feeds component.
+6. 
 
 Thanks.
+
+
+Highlighted Points,
+
+Implemenatation of the Image-Crop functionality into Edit Profile, Create Campaign, and Create Ad Modal.
+Implemenatation Text Editore functionality into Create Campaign and Create Ad Modal, and Back-office Create CMS Management.
+Implemenatation of the Comments functionality into all Campaigns and Feeds using Mockdata.
+Implemenatation of the HashTag functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
+Implemenatation of the Username functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
+Implemenatation of the HashTag functionality in Upload Modal Comments.
+Implemenatation of the Username functionality in Upload Modal Comments.
+
+Implemenatation of the UI for form inputs throught out application. For now we have Implemenated in setting's Comments. we will be use whenever needed in future.
+
 
 
