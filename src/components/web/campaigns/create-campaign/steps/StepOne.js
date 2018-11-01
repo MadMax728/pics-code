@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
+import { ImageCropper } from "../../../../ui-kit";
 
 class StepOne extends Component {
   constructor(props) {
@@ -13,7 +14,15 @@ class StepOne extends Component {
   };
 
   render() {
-    const { handleChangeField, form, uploadFile, isFor } = this.props;
+    const {
+      handleChangeField,
+      form,
+      uploadFile,
+      isFor,
+      handleEditImage
+    } = this.props;
+    console.log(form.image);
+
     return (
       <div className="modal-body">
         <div className="col-sm-6 upload-form">
@@ -215,7 +224,13 @@ class StepOne extends Component {
           </form>
         </div>
         <div className="col-sm-6 no-padding right-side">
-          <div className="box">
+          <ImageCropper
+            image={form.image}
+            handleEditImage={handleEditImage}
+            isCircle={false}
+            ref={this.imageCrop}
+          />
+          {/* <div className="box">
             {this.props.form.photo !== "" ? (
               <img src={this.props.form.photo} alt="" />
             ) : (
@@ -241,7 +256,7 @@ class StepOne extends Component {
               </svg>
               <br /> <span>Upload title image</span>
             </label>
-          </div>
+          </div> */}
           <div className="add-wrapper">
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
@@ -255,7 +270,8 @@ StepOne.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
   isFor: propTypes.bool.isRequired,
-  uploadFile: propTypes.func.isRequired
+  uploadFile: propTypes.func.isRequired,
+  handleEditImage: propTypes.func.isRequired
 };
 
 export default StepOne;

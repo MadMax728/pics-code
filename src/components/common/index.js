@@ -24,3 +24,4 @@ export { RightSideBarBackOffice } from "./right-bar";
 export { MessageBar } from "./message-bar";
 export { Username } from "./username";
 export { HashTag } from "./hash-tag";
+export { HashTagUsername } from "./hash-tag-username";
