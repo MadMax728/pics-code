@@ -105,7 +105,8 @@ CreateCreatorCampaign.propTypes = {
   form: propTypes.any.isRequired,
   isFor: propTypes.bool.isRequired,
   handleSubmit: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired
+  handleDate: propTypes.func.isRequired,
+  handleEditImage: propTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;

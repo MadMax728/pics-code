@@ -270,7 +270,8 @@ StepOne.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
   isFor: propTypes.bool.isRequired,
-  uploadFile: propTypes.func.isRequired
+  uploadFile: propTypes.func.isRequired,
+  handleEditImage: propTypes.func.isRequired
 };
 
 export default StepOne;

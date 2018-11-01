@@ -119,7 +119,8 @@ CreateCompanyCampaign.propTypes = {
   handleDate: propTypes.func.isRequired,
   handleContentChange: propTypes.func.isRequired,
   contentText: propTypes.any.isRequired,
-  uploadFile: propTypes.func.isRequired
+  uploadFile: propTypes.func.isRequired,
+  handleEditImage: propTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;
