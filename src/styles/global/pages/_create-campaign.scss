@@ -30,6 +30,15 @@
     display: flex;
     .right-side {
       background-color: #333333;
+      .create-campaign-crop-pic {
+        .edit-profile-pic {
+          margin-top: 0;
+          width: 100%;
+          .box {
+            width: 100%;
+          }
+        }
+      }
     }
     .create-campaign-feed-wrapper {
       padding: 40px;
@@ -559,7 +568,8 @@
     height: 378px !important;
     margin: 0px auto;
   }
-  .upload-profile-wrapr {
+  .upload-profile-wrapr,
+  .create-campaign-crop-pic {
     div.edit-profile-pic,
     div.uploaded-profile-pic {
       width: 100% !important;
@@ -571,6 +581,10 @@
     .range-wrapr {
       margin: 0 30%;
       padding-left: 11px;
+      &.mar50 {
+        margin: 0 50px;
+        width: -webkit-fill-available;
+      }
       input[type="range"] {
         width: 279px;
         margin: 0 auto;

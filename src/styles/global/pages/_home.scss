@@ -622,13 +622,17 @@
         }
       }
       .comment-content {
+        padding-left: 60px;
         @media (max-width: 991px) {
           float: left;
         }
         p {
           color: $charcoal_color;
           font-size: 14px;
-          padding-left: 60px;
+          padding-left: 14px;
+          margin: 0;
+          position: relative;
+          bottom: 10px;
           @media (max-width: 991px) {
             padding-left: 0px;
           }
