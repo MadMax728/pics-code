@@ -3,7 +3,12 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
+import {
+  setNewPassword,
+  submitResetPassword
+} from "../../../actions/forgotPassword";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
+import connect from "react-redux/es/connect/connect";
 class ResetPassword extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +36,14 @@ class ResetPassword extends Component {
     if (!this.formValid()) {
       return false;
     }
-    this.props.history.push(routes.ROOT_ROUTE);
+    let data = {
+      password: this.state.form.password,
+      repeatPassword: this.state.form.repeat_password
+    };
+    this.props.setNewPassword(data).then(() => {
+      console.log("new password", this.props.newPasswordData);
+      this.props.history.push(routes.ROOT_ROUTE);
+    });
   };
 
   /**
@@ -117,8 +129,21 @@ class ResetPassword extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  newPasswordData: state.newPasswordData
+});
+
+const mapDispatchToProps = {
+  setNewPassword
+};
+
 ResetPassword.propTypes = {
+  setNewPassword: PropTypes.func.isRequired,
+  newPasswordData: PropTypes.object,
   history: PropTypes.any
 };
 
-export default ResetPassword;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResetPassword);
