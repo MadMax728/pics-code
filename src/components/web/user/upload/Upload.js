@@ -61,7 +61,7 @@ class Upload extends Component {
         </div>
         <div className="col-sm-6 no-padding">
           <div className="image-wrapper">
-            {/* <div className="progress-bar-wrapper">
+            <div className="progress-bar-wrapper">
               <div className="progress blue">
                 <span className="progress-left">
                   <span className="progress-bar" />
@@ -71,8 +71,8 @@ class Upload extends Component {
                 </span>
                 <div className="progress-value">90%</div>
               </div>
-            </div> */}
-            <ul class="progress">
+            </div>
+            {/* <ul className="progress">
               <li data-percent="90%">
                 <svg viewBox="-10 -10 220 220">
                   <g
@@ -113,8 +113,8 @@ class Upload extends Component {
                   />
                 </svg>
               </li>
-            </ul>
-            <svg width="0" height="0">
+            </ul> */}
+            {/* <svg width="0" height="0">
               <defs>
                 <linearGradient
                   id="cl1"
@@ -183,7 +183,7 @@ class Upload extends Component {
                   <stop offset="100%" stop-color="#029ad6" />
                 </linearGradient>
               </defs>
-            </svg>
+            </svg> */}
           </div>
           <div className="add-wrapper">
             <img src={images.plus_button} alt={"plus_button"} />
