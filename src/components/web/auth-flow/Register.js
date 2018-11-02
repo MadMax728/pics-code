@@ -53,7 +53,6 @@ class Register extends Component {
   };
 
   render() {
-    console.log("registerdata", this.props.registerData);
     const { form } = this.state;
 
     return (

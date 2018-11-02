@@ -13,7 +13,7 @@ class AdsModal extends Component {
       form: {
         title: "",
         location: "",
-        redius: "",
+        radius: "",
         category: "",
         description: "",
         target_group: "male-female",

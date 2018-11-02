@@ -14,6 +14,7 @@ class StepOne extends Component {
 
   render() {
     const { form, handleChangeField, uploadFile, handleEditImage } = this.props;
+    console.log("form", this.props.form);
 
     return (
       <div className="modal-body">
@@ -50,7 +51,12 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Radius">Add Radius</label>
-              <select name="radius" onBlur={handleChangeField}>
+              <select
+                name="radius"
+                value={this.props.form.radius}
+                onChange={handleChangeField}
+                onBlur={handleChangeField}
+              >
                 <option>10</option>
                 <option>20</option>
                 <option>30</option>
@@ -59,7 +65,12 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Category">Add Category</label>
-              <select onBlur={handleChangeField} name="category">
+              <select
+                onChange={handleChangeField}
+                value={this.props.form.category}
+                onBlur={handleChangeField}
+                name="category"
+              >
                 <option>Category 1</option>
                 <option>Category 2</option>
                 <option>Category 3</option>
@@ -118,7 +129,11 @@ class StepOne extends Component {
             <div className="subtitle">Define details</div>
             <div className="form-group">
               <label htmlFor="call">Add call to action button</label>
-              <select name="call_to_action_button" onBlur={handleChangeField}>
+              <select
+                name="call_to_action_button"
+                onChange={handleChangeField}
+                onBlur={handleChangeField}
+              >
                 <option>Yes</option>
                 <option>No</option>
               </select>
