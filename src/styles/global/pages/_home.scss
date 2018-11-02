@@ -484,6 +484,16 @@
       padding-right: 15px;
       img {
         width: 20px;
+        &[src="/global/picstagraph-web/images/comment.PNG"] {
+          transition: all ease 0.5s;
+          -webkit-transition: all ease 0.5s;
+          -moz-transition: all ease 0.5s;
+          &:hover {
+            animation: 0.5s 2 shakeMe;
+            -webkit-animation: 0.5s 2 shakeMe;
+            -moz-animation: 0.5s 2 shakeMe;
+          }
+        }
       }
     }
     .likes {
@@ -660,5 +670,16 @@
   }
   100% {
     -moz-transform: scale(1);
+  }
+}
+@keyframes shakeMe {
+  0% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(-0deg);
+  }
+  100% {
+    transform: rotate(20deg);
   }
 }
