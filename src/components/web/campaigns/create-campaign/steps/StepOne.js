@@ -233,7 +233,7 @@ class StepOne extends Component {
             isCircle={false}
             ref={this.imageCrop}
           />
-          <div className="add-wrapper">
+          <div className="add-wrapper create-camp-ad-wrapr col-xs-12 no-padding">
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
         </div>
