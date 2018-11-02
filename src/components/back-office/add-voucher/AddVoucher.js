@@ -27,8 +27,8 @@ class AddVoucher extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    let voucher_data = this.state.vouchers;
-    let data = {
+    const voucher_data = this.state.vouchers;
+    const data = {
       no: 1,
       code: this.state.form.voucher_code,
       period: this.state.form.period,

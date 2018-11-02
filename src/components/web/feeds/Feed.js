@@ -154,7 +154,7 @@ class Feed extends Component {
               delayShow={500}
               delayUpdate={500}
               place={"left"}
-              border={true}
+              border
               type={"light"}
             />
           </div>

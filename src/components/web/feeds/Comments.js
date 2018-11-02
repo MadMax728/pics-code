@@ -31,10 +31,10 @@ class Comments extends Component {
 
   handleDelete = e => {
     console.log(e.target.id);
-    let id = e.target.id;
-    let comments = this.state.comments;
+    const id = e.target.id;
+    const comments = this.state.comments;
 
-    let indexOf = comments.findIndex(c => {
+    const indexOf = comments.findIndex(c => {
       return c.comment_id === parseInt(id);
     });
 

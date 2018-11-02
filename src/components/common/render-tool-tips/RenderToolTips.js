@@ -31,7 +31,9 @@ class RenderToolTips extends Component {
               key={index}
               onClick={item.handleEvent}
               id={id}
-              onKeyDown={thhis.handleKeyPress}
+              onKeyDown={this.handleKeyPress}
+              role={"button"}
+              tabIndex="0"
             >
               {item.name}
             </div>

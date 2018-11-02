@@ -23,9 +23,9 @@ class AddVerification extends Component {
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
-    let verificationData = this.state.verifications;
+    const verificationData = this.state.verifications;
     e.preventDefault();
-    let data = {
+    const data = {
       no: 4,
       username: "username5",
       name: "abc"
@@ -36,7 +36,7 @@ class AddVerification extends Component {
     });
   };
   removeVerification = e => {
-    let verification_Data = this.state.verifications;
+    const verification_Data = this.state.verifications;
     for (let i = verification_Data.length - 1; i >= 0; i--) {
       if (verification_Data[i].name === e.target.name) {
         verification_Data.splice(i, 1);
