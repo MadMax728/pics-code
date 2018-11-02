@@ -67,7 +67,7 @@ const CampaignAdCrop = ({
               onLoadSuccess={logCallback("onLoadSuccess")}
               onImageReady={logCallback("onImageReady")}
               image={image}
-              className="editor-canvas"
+              className="editor-canvas wid100"
             />
           </div>
         </Dropzone>

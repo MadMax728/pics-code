@@ -38,6 +38,10 @@
             width: 100%;
           }
         }
+        .range-wrapr {
+          background-color: white;
+          padding-bottom: 10px;
+        }
       }
     }
     .create-campaign-feed-wrapper {
@@ -174,6 +178,13 @@
       img {
         width: 30px;
         margin-right: 15px;
+      }
+      &.create-camp-ad-wrapr {
+        border: 0px;
+        img {
+          position: relative;
+          top: -35px;
+        }
       }
     }
     .target-options {
@@ -567,9 +578,13 @@
     width: 378px !important;
     height: 378px !important;
     margin: 0px auto;
+    &.wid100 {
+      width: 100% !important;
+    }
   }
   .upload-profile-wrapr,
   .create-campaign-crop-pic {
+    background-color: white;
     div.edit-profile-pic,
     div.uploaded-profile-pic {
       width: 100% !important;
@@ -577,13 +592,22 @@
       text-align: center;
       margin-top: 46px;
       height: auto !important;
+      &.mar0padd0 {
+        margin-top: 0;
+        margin-bottom: 0 !important;
+        padding: 0;
+        & > div {
+          padding: 0px;
+        }
+      }
     }
     .range-wrapr {
       margin: 0 30%;
       padding-left: 11px;
       &.mar50 {
-        margin: 0 50px;
+        margin: 0;
         width: -webkit-fill-available;
+        padding: 0 40px;
       }
       input[type="range"] {
         width: 279px;
@@ -663,9 +687,11 @@
       img.min-profile-pic {
         right: 10px;
         margin-right: 11px;
+        top: 22px;
       }
       img.max-profile-pic {
         left: 10px;
+        top: 18px;
       }
       .runnable {
         position: relative;

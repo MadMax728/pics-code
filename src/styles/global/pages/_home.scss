@@ -436,14 +436,14 @@
         -webkit-transition: all ease 1s;
         -moz-transition: all ease 1s;
         &[src="/global/picstagraph-web/images/blue_heart.svg"] {
-          animation: 1s heartBit;
-          -webkit-animation: 1s heartBit;
-          -moz-animation: 1s heartBit;
+          animation: 0.5s heartBit;
+          -webkit-animation: 0.5s heartBit;
+          -moz-animation: 0.5s heartBit;
         }
         &[src="/global/picstagraph-web/images/feed_like.svg"] {
-          animation: 1s NoheartBit;
-          -webkit-animation: 1s NoheartBit;
-          -moz-animation: 1s NoheartBit;
+          animation: 0.7s NoheartBit;
+          -webkit-animation: 0.7s NoheartBit;
+          -moz-animation: 0.7s NoheartBit;
         }
       }
     }
@@ -487,14 +487,14 @@
         -webkit-transition: all ease 1s;
         -moz-transition: all ease 1s;
         &[src="/global/picstagraph-web/images/blue_heart.svg"] {
-          animation: 1s heartBit;
-          -webkit-animation: 1s heartBit;
-          -moz-animation: 1s heartBit;
+          animation: 0.5s heartBit;
+          -webkit-animation: 0.5s heartBit;
+          -moz-animation: 0.5s heartBit;
         }
         &[src="/global/picstagraph-web/images/feed_like.svg"] {
-          animation: 1s NoheartBit;
-          -webkit-animation: 1s NoheartBit;
-          -moz-animation: 1s NoheartBit;
+          animation: 0.7s NoheartBit;
+          -webkit-animation: 0.7s NoheartBit;
+          -moz-animation: 0.7s NoheartBit;
         }
       }
     }
