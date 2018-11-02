@@ -40,7 +40,7 @@ const EditProfileCrop = ({
 }) => {
   return (
     <div>
-      {image !== null ? (
+      {!image ? (
         <Dropzone
           onDrop={handleDrop}
           disableClick
