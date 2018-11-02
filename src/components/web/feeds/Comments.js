@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { HashTagUsername } from "../../common";
+import { ThreeDots, RenderToolTips } from "../../common";
+
 class Comments extends Component {
   constructor(props, context) {
     super(props, context);
@@ -12,9 +14,43 @@ class Comments extends Component {
       comments: this.props.campaign.comments,
       form: {
         comment: ""
-      }
+      },
+      ReportTips: [
+        {
+          name: "Report Comment",
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: "Delete",
+          handleEvent: this.handleDelete
+        }
+      ]
     };
   }
+
+  handleReportPost = () => {};
+
+  handleDelete = e => {
+    console.log(e.target.id);
+    let id = e.target.id;
+    let comments = this.state.comments;
+
+    let indexOf = comments.findIndex(c => {
+      return c.comment_id === parseInt(id);
+    });
+
+    if (indexOf !== -1) {
+      comments.splice(indexOf, 1);
+    }
+    this.setState({ comments });
+  };
+
+  /**
+   * Tooltp
+   */
+  renderReportTips = id => {
+    return <RenderToolTips items={this.state.ReportTips} id={id} />;
+  };
 
   renderComment = comment => {
     return (
@@ -31,7 +67,21 @@ class Comments extends Component {
             <b>{comment.user.name}</b> {comment.date} <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
-            <Link to={""}>• • •</Link>
+            <ThreeDots
+              id="comment"
+              role="button"
+              dataTip="tooltip"
+              dataClass="tooltip-wrapr"
+              /* eslint-disable */
+              getContent={() => this.renderReportTips(comment.comment_id)}
+              effect="solid"
+              delayHide={500}
+              delayShow={500}
+              delayUpdate={500}
+              place={"left"}
+              border={true}
+              type={"light"}
+            />
           </div>
         </div>
         <div className="comment-content">
