@@ -15,6 +15,12 @@ class UploadModal extends Component {
     };
   }
 
+  handleSetState = (value, cd) => {
+    this.setState({ form: { ...this.state.form, add_decription: value } }, () =>
+      cd()
+    );
+  };
+
   handleContinue = () => {
     console.log(this.state.form);
   };
@@ -27,6 +33,8 @@ class UploadModal extends Component {
   };
 
   render() {
+    const { form } = this.state;
+
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade upload-image-modal"}
@@ -41,7 +49,13 @@ class UploadModal extends Component {
         closeBtn={false}
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
-        modalBodyContent={<Upload handleChangeField={this.handleChangeField} />}
+        modalBodyContent={
+          <Upload
+            handleChangeField={this.handleChangeField}
+            form={form}
+            handleSetState={this.handleSetState}
+          />
+        }
       />
     );
   }
