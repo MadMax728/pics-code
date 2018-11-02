@@ -41,18 +41,18 @@ class Comments extends Component {
     );
   };
 
-  handleSetState = (comment, cd) => {
-    this.setState({ form: { ...this.state.form, comment: comment } }, () =>
-      cd()
-    );
+  handleSetState = (value, cd) => {
+    this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.addComment(this.props.campaign.id, this.state.form.comment);
-    /* eslint-disable */
-    this.refs.commentForm.reset();
-    this.setState({ form: { ...this.state.form, comment: "" } });
+    if (this.state.form.comment !== "") {
+      this.props.addComment(this.props.campaign.id, this.state.form.comment);
+      /* eslint-disable */
+      this.refs.commentForm.reset();
+      this.setState({ form: { ...this.state.form, comment: "" } });
+    }
   };
 
   render() {
@@ -78,7 +78,7 @@ class Comments extends Component {
                     placeholder="Write a comment"
                     name="comment"
                     handleSetState={this.handleSetState}
-                    form={form}
+                    value={form.comment}
                   />
                 </div>
               </div>

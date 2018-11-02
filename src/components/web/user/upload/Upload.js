@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import propTypes from "prop-types";
+import { HashTagUsername } from "../../../common";
 
 class Upload extends Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class Upload extends Component {
   };
 
   render() {
+    const { form, handleSetState } = this.props;
     return (
       <div className="modal-body">
         <div className="col-sm-6 upload-form">
@@ -47,10 +49,12 @@ class Upload extends Component {
             </div>
             <div className="form-group no-margin">
               <label htmlFor="description">Add description</label>
-              <textarea
+              <HashTagUsername
                 className="form-control"
-                name="add_description"
-                onChange={this.handleChangeField}
+                type="text"
+                name="add_decription"
+                handleSetState={handleSetState}
+                value={form.add_decription}
               />
             </div>
           </form>
@@ -79,7 +83,9 @@ class Upload extends Component {
 }
 
 Upload.propTypes = {
-  handleChangeField: propTypes.func.isRequired
+  handleChangeField: propTypes.func.isRequired,
+  handleSetState: propTypes.func.isRequired,
+  form: propTypes.any.isRequired
 };
 
 export default Upload;

@@ -31,7 +31,6 @@ class LeftSidebarFilter extends Component {
 
   render() {
     const { filters } = this.props;
-    console.log("filters", filters);
     return (
       <div>
         {filters.map(filter => {

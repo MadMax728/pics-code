@@ -13,8 +13,6 @@ class StepOne extends Component {
   };
 
   render() {
-    console.log("photo", this.props.form);
-    // console.log("photoFile",this.state.photoFile);
     const { form, handleChangeField, uploadFile, handleEditImage } = this.props;
 
     return (

@@ -11,6 +11,8 @@ const api = apiFactory(baseUrl);
  */
 export const submitLogin = payload => api.post("/auth/login", payload);
 
+export const submitRegister = payload => api.post("/users", payload);
+
 /**
  *
  * @param {*} payload

@@ -15,6 +15,11 @@ const initialState = {
     socialNetworks: null,
     isLoading: false,
     error: null
+  },
+  registerData: {
+    registeredUser: null,
+    isLoading: false,
+    error: null
   }
 };
 

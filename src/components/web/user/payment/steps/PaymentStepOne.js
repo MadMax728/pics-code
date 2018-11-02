@@ -8,7 +8,6 @@ class PaymentStepOne extends Component {
   }
 
   render() {
-    console.log("invoice_recipient", this.props.form);
     const { handleChangeField } = this.props;
 
     return (

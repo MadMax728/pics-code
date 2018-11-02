@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
+import { Text } from "../../../../ui-kit/CommonUIComponents";
 
 class Privacy extends Component {
   constructor(props) {
@@ -45,7 +46,7 @@ class Privacy extends Component {
   // handleFieldChangeEmail event
   handleFieldChangeEmail = event => {
     const { change_email_form } = this.state;
-    change_email_form[event.target.name] = event.target.value;
+    change_email_form[event.values.name] = event.values.val;
     this.setState({ change_email_form });
     console.log(this.state.change_email_form);
   };
@@ -59,7 +60,7 @@ class Privacy extends Component {
   // handleFieldChangePassword event
   handleFieldChangePassword = event => {
     const { change_password_form } = this.state;
-    change_password_form[event.target.name] = event.target.value;
+    change_password_form[event.values.name] = event.values.val;
     this.setState({ change_password_form });
     console.log(this.state.change_password_form);
   };
@@ -73,7 +74,7 @@ class Privacy extends Component {
   // handleFieldChangeInvoice event
   handleFieldChangeInvoice = event => {
     const { change_invoicing_address_form } = this.state;
-    change_invoicing_address_form[event.target.name] = event.target.value;
+    change_invoicing_address_form[event.values.name] = event.values.val;
     this.setState({ change_invoicing_address_form });
     console.log(this.state.change_invoicing_address_form);
   };
@@ -134,7 +135,7 @@ class Privacy extends Component {
             <div className="change-email-wrapper">
               <div className="form-group">
                 <label htmlFor="email">Current Email</label>
-                <input
+                <Text
                   type="email"
                   className="form-control"
                   id="current_email"
@@ -153,7 +154,7 @@ class Privacy extends Component {
                 <span className="error-msg pull-right">
                   Please comfirme this change in your email account.{" "}
                 </span>
-                <input
+                <Text
                   type="email"
                   className="form-control"
                   id="new_email"
@@ -181,7 +182,7 @@ class Privacy extends Component {
             <div className="change-password-wrapper">
               <div className="form-group">
                 <label htmlFor="c-password">Current Password</label>
-                <input
+                <Text
                   type="password"
                   className="form-control"
                   id="current_password"
@@ -197,7 +198,7 @@ class Privacy extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="n-password">New Password</label>
-                <input
+                <Text
                   type="password"
                   className="form-control"
                   id="new_password"
@@ -213,7 +214,7 @@ class Privacy extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="r-password">Repeat Password</label>
-                <input
+                <Text
                   type="password"
                   className="form-control"
                   id="repeat_password"
@@ -241,7 +242,7 @@ class Privacy extends Component {
             <div className="change-invoiceadd-wrapper">
               <div className="form-group">
                 <label htmlFor="recipient">Invoice recipient</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="invoice_recipient"
@@ -256,7 +257,7 @@ class Privacy extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="street">Street, number</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="street_number"
@@ -271,7 +272,7 @@ class Privacy extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="postal">Postal code</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="postal_code"
@@ -288,7 +289,7 @@ class Privacy extends Component {
                 <div className="col-sm-6 padding-r-5">
                   <div className="form-group">
                     <label htmlFor="city">City</label>
-                    <input
+                    <Text
                       type="text"
                       className="form-control"
                       id="city"
@@ -305,7 +306,7 @@ class Privacy extends Component {
                 <div className="col-sm-6 padding-l-5">
                   <div className="form-group">
                     <label htmlFor="country">Country</label>
-                    <input
+                    <Text
                       type="text"
                       className="form-control"
                       id="country"
@@ -322,7 +323,7 @@ class Privacy extends Component {
               </div>
               <div className="form-group">
                 <label htmlFor="vat">VAT identification number</label>
-                <input
+                <Text
                   type="text"
                   className="form-control"
                   id="vat_identification_number"
