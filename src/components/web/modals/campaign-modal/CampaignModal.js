@@ -56,7 +56,7 @@ class CampaignModal extends Component {
   }
 
   handleEditImage = image => {
-    this.setState({ form: { ...this.state.form, image: image } });
+    this.setState({ form: { ...this.state.form, image } });
   };
 
   handleDate = (date, forThat) => {

@@ -20,7 +20,7 @@ class EditProfilePic extends Component {
         <ImageCropper
           image={image}
           handleEditImage={handleEditImage}
-          isCircle={true}
+          isCircle
           ref={this.imageCrop}
         />
       </div>

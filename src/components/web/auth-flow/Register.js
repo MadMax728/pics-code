@@ -39,7 +39,7 @@ class Register extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     const { form } = this.state;
-    let data = {
+    const data = {
       email: form.email,
       name: "abc",
       gender: form.gender,

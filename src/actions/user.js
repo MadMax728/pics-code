@@ -25,7 +25,7 @@ export const getSocialNetwork = () => {
     const headers = {
       Authorization: storage.accessToken
     };
-    const params = { headers: headers };
+    const params = { headers };
 
     return userService.getSocialNetwork(params).then(
       res => {

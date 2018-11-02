@@ -111,26 +111,25 @@ class ImageCropper extends Component {
           isCircle={isCircle}
         />
       );
-    } else {
-      return (
-        <CampaignAdCrop
-          handleNewImage={this.handleNewImage}
-          handleDrop={this.handleDrop}
-          image={image}
-          setEditorRef={this.setEditorRef}
-          scale={scale}
-          position={position}
-          height={height}
-          width={width}
-          handlePositionChange={this.handlePositionChange}
-          handleScale={this.handleScale}
-          borderRadius={borderRadius}
-          allowZoomOut={allowZoomOut}
-          logCallback={this.logCallback}
-          isCircle={isCircle}
-        />
-      );
     }
+    return (
+      <CampaignAdCrop
+        handleNewImage={this.handleNewImage}
+        handleDrop={this.handleDrop}
+        image={image}
+        setEditorRef={this.setEditorRef}
+        scale={scale}
+        position={position}
+        height={height}
+        width={width}
+        handlePositionChange={this.handlePositionChange}
+        handleScale={this.handleScale}
+        borderRadius={borderRadius}
+        allowZoomOut={allowZoomOut}
+        logCallback={this.logCallback}
+        isCircle={isCircle}
+      />
+    );
   }
 }
 
