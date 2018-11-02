@@ -18,6 +18,8 @@ class RenderToolTips extends Component {
     this.state = {};
   }
 
+  handleKeyPress = () => {};
+
   render() {
     const { items, id } = this.props;
 
@@ -25,7 +27,12 @@ class RenderToolTips extends Component {
       <div className="post-action-links">
         {items.map((item, index) => {
           return (
-            <div key={index} onClick={item.handleEvent} id={id}>
+            <div
+              key={index}
+              onClick={item.handleEvent}
+              id={id}
+              onKeyDown={thhis.handleKeyPress}
+            >
               {item.name}
             </div>
           );

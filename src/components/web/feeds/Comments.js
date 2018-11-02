@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { HashTagUsername } from "../../common";
-import { ThreeDots, RenderToolTips } from "../../common";
+import { ThreeDots, RenderToolTips, HashTagUsername } from "../../common";
 
 class Comments extends Component {
   constructor(props, context) {

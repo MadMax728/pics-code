@@ -184,7 +184,8 @@ Feed.propTypes = {
     image: PropTypes.string,
     desc: PropTypes.string,
     msg_count: PropTypes.number,
-    like_count: PropTypes.number
+    like_count: PropTypes.number,
+    id: PropTypes.number
   }).isRequired
 };
 
