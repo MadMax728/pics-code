@@ -20,6 +20,16 @@ const initialState = {
     registeredUser: null,
     isLoading: false,
     error: null
+  },
+  resetPasswordData: {
+    password: null,
+    isLoading: false,
+    error: null
+  },
+  newPasswordData: {
+    password: null,
+    isLoading: false,
+    error: false
   }
 };
 

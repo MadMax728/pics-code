@@ -15,12 +15,14 @@ export default class Header extends Component {
     super(props);
     this.state = {
       navExpanded: false,
-      userNavExpanded: false
+      userNavExpanded: false,
+      offsetHeight: 0
     };
   }
 
   componentDidMount = () => {
     document.addEventListener("click", this.handleOutsideClick);
+    document.addEventListener("scroll", this.onScroll);
   };
   componenWillUnmount = () => {
     document.removeEventListener("click", this.handleOutsideClick);
@@ -35,6 +37,13 @@ export default class Header extends Component {
 
   setWrapperRef = node => {
     this.wrapperRef = node;
+  };
+
+  onScroll = () => {
+    let offsetHeight = window.pageYOffset;
+    this.setState({
+      offsetHeight: offsetHeight
+    });
   };
 
   handleOutsideClick = e => {
@@ -59,7 +68,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header>
+      <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">

@@ -39,7 +39,8 @@ class Register extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     const { form } = this.state;
-    const data = {
+    let data = {
+      username: form.username,
       email: form.email,
       name: "abc",
       gender: form.gender,
@@ -53,7 +54,6 @@ class Register extends Component {
   };
 
   render() {
-    console.log("registerdata", this.props.registerData);
     const { form } = this.state;
 
     return (
