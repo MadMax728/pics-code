@@ -219,7 +219,12 @@
       padding: 15px 20px;
       border-bottom: 2px solid rgba(198, 198, 198, 0.3);
       .filter-title {
-        margin-bottom: 25px;
+        margin-bottom: 27px;
+      }
+      input {
+        @media (max-width: 991px) {
+          width: 100%;
+        }
       }
       .radio-btn {
         display: block;
@@ -324,6 +329,8 @@
       img {
         width: 60px;
         height: 60px;
+        min-width: 60px;
+        min-height: 60px;
       }
     }
   }
@@ -477,6 +484,16 @@
       padding-right: 15px;
       img {
         width: 20px;
+        &[src="/global/picstagraph-web/images/comment.PNG"] {
+          transition: all ease 0.5s;
+          -webkit-transition: all ease 0.5s;
+          -moz-transition: all ease 0.5s;
+          &:hover {
+            animation: 0.5s 2 shakeMe;
+            -webkit-animation: 0.5s 2 shakeMe;
+            -moz-animation: 0.5s 2 shakeMe;
+          }
+        }
       }
     }
     .likes {
@@ -506,86 +523,7 @@
       }
     }
   }
-  .__react_component_tooltip.type-light.border {
-    border: 1px solid #777;
-    background: rgba(190, 190, 190, 0.5);
-    -webkit-overflow-scrolling: touch;
-    outline: 0;
-    text-align: center;
-    margin-left: -6px;
-    margin-top: 0px;
-    padding: 0px;
-    width: 340px;
-    opacity: 1;
-    &.tooltip-wrapr {
-    }
-    &::before,
-    &::after {
-      display: none;
-    }
-    & > div {
-      &.post-action-links {
-        width: 100% !important;
-      }
-      width: 100%;
-      text-align: left;
-      background: #9b9b9b;
-      & > div {
-        padding: 11px 0 10px 15px;
-        background-color: white;
-        margin-bottom: 1px;
-        font-size: 14px;
-        & > div:first-child {
-          color: #4a4a4a;
-          &.img-wrapr {
-            width: 45px;
-            height: 45px;
-            float: left;
-            margin-right: 10px;
-            img {
-              height: inherit !important;
-              width: inherit !important;
-              border-radius: 50%;
-            }
-          }
-        }
-        & > div:last-child {
-          color: #9b9b9b;
-          &.person-info-wrapr {
-            width: calc(100% - 50px);
-            .person-name {
-              font-family: "Helvetica-Bold";
-              color: #4a4a4a;
-            }
-          }
-        }
-      }
-      &.tag-person-wrapr {
-        .img-wrapr {
-          float: left;
-        }
-      }
-    }
-    .post-action-links {
-      background-color: transparent;
-      position: relative;
-      display: inline-block;
-      top: 40%;
-      width: 300px;
-      div {
-        display: block;
-        background: #ffffff;
-        color: #4a4a4a;
-        padding: 10px 40px;
-        text-align: center;
-        margin-bottom: 2px;
-        font-size: 12px;
-        &:last-child {
-          margin-bottom: 0;
-        }
-      }
-    }
-  }
+
   /*************** Comments CSS ****************/
   .feed-comment {
     .comment-wrapper {
@@ -732,5 +670,16 @@
   }
   100% {
     -moz-transform: scale(1);
+  }
+}
+@keyframes shakeMe {
+  0% {
+    transform: rotate(-20deg);
+  }
+  50% {
+    transform: rotate(-0deg);
+  }
+  100% {
+    transform: rotate(20deg);
   }
 }
