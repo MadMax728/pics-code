@@ -11,7 +11,7 @@ import {
 import moment from "moment";
 import { modalType } from "../../../../lib/constants/enumerations";
 
-let contentText = "rghcgbvb";
+let contentText = "";
 class CampaignModal extends Component {
   constructor(props, context) {
     super(props, context);
@@ -56,7 +56,7 @@ class CampaignModal extends Component {
   }
 
   handleEditImage = image => {
-    this.setState({ form: { ...this.state.form, image: image } });
+    this.setState({ form: { ...this.state.form, image } });
   };
 
   handleDate = (date, forThat) => {

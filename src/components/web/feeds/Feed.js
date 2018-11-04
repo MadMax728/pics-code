@@ -1,19 +1,38 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ReactTooltip from "react-tooltip";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
 import Comments from "./Comments";
+import { ThreeDots, RenderToolTips } from "../../common";
 
 class Feed extends Component {
   constructor(props, context) {
     super(props, context);
-
     this.state = {
-      isComments: false
+      isComments: false,
+      ReportTips: [
+        {
+          name: "Report Post",
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: "Save Post",
+          handleEvent: this.handleSavePost
+        },
+        {
+          name: "locks / unlocks content",
+          handleEvent: this.handleContent
+        }
+      ]
     };
   }
+
+  handleReportPost = () => {};
+
+  handleSavePost = () => {};
+
+  handleContent = () => {};
 
   handleFavorite = e => {
     this.props.handleFavorite(e);
@@ -34,11 +53,10 @@ class Feed extends Component {
    */
   renderReportTips = () => {
     return (
-      <div className="post-action-links">
-        <div>Report post</div>
-        <div>Save post</div>
-        <div>locks / unlocks content </div>
-      </div>
+      <RenderToolTips
+        items={this.state.ReportTips}
+        id={this.props.campaign.id}
+      />
     );
   };
 
@@ -125,32 +143,26 @@ class Feed extends Component {
             )}
           </div>
           <div className="show_more_options">
-            <div
-              data-for="report"
+            <ThreeDots
+              id="report"
               role="button"
-              data-tip="tooltip"
-              data-class="tooltip-wrapr"
-            >
-              • • •
-            </div>
+              dataTip="tooltip"
+              dataClass="tooltip-wrapr"
+              getContent={this.renderReportTips}
+              effect="solid"
+              delayHide={500}
+              delayShow={500}
+              delayUpdate={500}
+              place={"left"}
+              border
+              type={"light"}
+            />
           </div>
         </div>
 
         {/* Comments Section */}
 
         {isComments && <Comments campaign={campaign} addComment={addComment} />}
-
-        <ReactTooltip
-          id="report"
-          getContent={this.renderReportTips}
-          effect="solid"
-          delayHide={500}
-          delayShow={500}
-          delayUpdate={500}
-          place={"left"}
-          border
-          type={"light"}
-        />
       </div>
     );
   }
@@ -172,7 +184,8 @@ Feed.propTypes = {
     image: PropTypes.string,
     desc: PropTypes.string,
     msg_count: PropTypes.number,
-    like_count: PropTypes.number
+    like_count: PropTypes.number,
+    id: PropTypes.number
   }).isRequired
 };
 

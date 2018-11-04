@@ -25,8 +25,8 @@ class AddAdmin extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    let adminData = this.state.admins;
-    let data = {
+    const adminData = this.state.admins;
+    const data = {
       no: 4,
       username: this.state.form.username,
       name: "test",
@@ -38,7 +38,7 @@ class AddAdmin extends Component {
     });
   };
   deleteData = e => {
-    let admins_Data = this.state.admins;
+    const admins_Data = this.state.admins;
     for (let i = admins_Data.length - 1; i >= 0; i--) {
       if (admins_Data[i].name === e.target.name) {
         admins_Data.splice(i, 1);

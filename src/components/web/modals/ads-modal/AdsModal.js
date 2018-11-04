@@ -13,7 +13,7 @@ class AdsModal extends Component {
       form: {
         title: "",
         location: "",
-        redius: "",
+        radius: "",
         category: "",
         description: "",
         target_group: "male-female",
@@ -45,7 +45,7 @@ class AdsModal extends Component {
   }
 
   handleEditImage = image => {
-    this.setState({ form: { ...this.state.form, image: image } });
+    this.setState({ form: { ...this.state.form, image } });
   };
 
   handleSubmit = () => {

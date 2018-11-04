@@ -2,27 +2,25 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on image-cropper branch and created merge request.
 
-1. Implemenatation of smart component for combine HashTag-Username functionality .
-2. Implemenatation of the Image-cropper functionality in Create Campaign Modal.
-3. Implemenatation of the Image-cropper functionality in Create Ad Modal.
-4. Fixed designing issue for Edit-Profile Modal Component.
-5. Fixed designing issue in comment section for campaigns and feeds component.
-6. 
+Implementation of smart component for combine HashTag-Username functionality.
+Implementation of the Image-cropper functionality in Create Campaign Modal.
+Implementation of the Image-cropper functionality in Create Ad Modal.
+Fixed designing issue for Edit-Profile Modal Component.
+Fixed designing issue in comment section for campaigns and feeds component.
+Trying to implement of the HashTag functionality into Upload Modal Component.
 
 Thanks.
 
 
 Highlighted Points,
 
-Implemenatation of the Image-Crop functionality into Edit Profile, Create Campaign, and Create Ad Modal.
-Implemenatation Text Editore functionality into Create Campaign and Create Ad Modal, and Back-office Create CMS Management.
-Implemenatation of the Comments functionality into all Campaigns and Feeds using Mockdata.
-Implemenatation of the HashTag functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
-Implemenatation of the Username functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
-Implemenatation of the HashTag functionality in Upload Modal Comments.
-Implemenatation of the Username functionality in Upload Modal Comments.
-
-Implemenatation of the UI for form inputs throught out application. For now we have Implemenated in setting's Comments. we will be use whenever needed in future.
-
+1. Implementation of the Image-Crop functionality into Edit Profile, Create Campaign, and Create Ad Modal.
+2. Implementation Text Editors functionality into Create Campaign and Create Ad Modal, and Back-office Create CMS Management.
+3. Implementation of the Comments functionality into all Campaigns and Feeds using Mockdata.
+4. Implementation of the HashTag functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
+5. Implementation of the Username functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
+6. Implementation of the HashTag functionality in Upload Modal Comments.
+7. Implementation of the Username functionality in Upload Modal Comments.
+8. Implementation of the UI for form inputs throught out application. For now we have Implemented in setting's Comments. we will be use whenever needed in future.
 
 

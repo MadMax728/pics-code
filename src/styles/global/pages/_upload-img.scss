@@ -22,7 +22,7 @@
     padding: 0px;
     display: flex;
     .upload-form {
-      border-right: 5px solid #333333;
+      border-right: 8px solid #333333;
       padding: 20px;
       .profile_image {
         float: left;
@@ -81,7 +81,9 @@
       }
     }
     .image-wrapper {
-      padding: 30px;
+      padding: 131px 30px;
+      text-align: center;
+      height: 435px;
       .progress-bar-wrapper {
         min-height: 435px;
         display: flex;

@@ -61,6 +61,7 @@ class StepOne extends Component {
               <select
                 name="category"
                 value={this.props.form.category}
+                onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
                 <option>Select category</option>
@@ -180,6 +181,7 @@ class StepOne extends Component {
               <select
                 name="offer"
                 value={this.props.form.offer}
+                onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
                 <option>Select offer</option>
@@ -203,6 +205,7 @@ class StepOne extends Component {
               <select
                 name="inquiry"
                 value={this.props.form.inquiry}
+                onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
                 <option>Select Inquiry</option>
@@ -230,7 +233,7 @@ class StepOne extends Component {
             isCircle={false}
             ref={this.imageCrop}
           />
-          <div className="add-wrapper">
+          <div className="add-wrapper create-camp-ad-wrapr col-xs-12 no-padding">
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
         </div>

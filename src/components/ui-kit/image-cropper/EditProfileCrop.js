@@ -117,6 +117,7 @@ const EditProfileCrop = ({
           max="2"
           step="0.01"
           defaultValue="1"
+          disabled={!(image !== null && image !== undefined)}
         />
         <img
           src={images.crop_pic}

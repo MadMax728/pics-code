@@ -39,7 +39,7 @@ const CampaignAdCrop = ({
   isCircle
 }) => {
   return (
-    <div>
+    <div className="col-xs-12 no-padding create-campaign-crop-pic">
       {image !== null && image !== undefined ? (
         <Dropzone
           onDrop={handleDrop}
@@ -67,7 +67,7 @@ const CampaignAdCrop = ({
               onLoadSuccess={logCallback("onLoadSuccess")}
               onImageReady={logCallback("onImageReady")}
               image={image}
-              className="editor-canvas"
+              className="editor-canvas wid100"
             />
           </div>
         </Dropzone>
@@ -97,7 +97,7 @@ const CampaignAdCrop = ({
           </div>
         </div>
       )}
-      <div className="range-wrapr col-xs-12">
+      <div className="range-wrapr col-xs-12 mar50">
         <img
           src={images.crop_pic}
           height="19"
@@ -117,6 +117,7 @@ const CampaignAdCrop = ({
           max="2"
           step="0.01"
           defaultValue="1"
+          disabled={!(image !== null && image !== undefined)}
         />
         <img
           src={images.crop_pic}
