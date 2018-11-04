@@ -7,6 +7,12 @@ header {
     float: left;
     width: 10%;
     text-align: center;
+    a {
+      img {
+        position: relative;
+        top: -3px;
+      }
+    }
   }
   .mobile_intro_text {
     display: inline-block;
@@ -30,11 +36,15 @@ header {
   background-color: #fff;
   @include float();
   border-bottom: 1px solid $nobel_color;
-  a {
+  button {
     color: #4a4a4a;
     font-size: 16px;
+    position: static !important;
+    float: left;
+    padding: 0;
     img {
       width: 16px;
+      margin-right: 10px;
     }
   }
 }
@@ -58,25 +68,7 @@ header {
     }
   }
 }
-.mobile_menu_wrapper {
-  background-color: $white_color;
-  @include float();
-  .normal_title {
-    float: left;
-    width: 100%;
-    border-bottom: 1px solid $nobel_color;
-  }
-  .mobile_menu {
-    @include float();
-    border-bottom: 1px solid $nobel_color;
-    color: #4a4a4a;
-    width: 100%;
-    display: block;
-    img {
-      width: 16px;
-    }
-  }
-}
+
 .full-height-wrapper {
   background-color: $white_color;
   height: 100vh;
@@ -93,9 +85,11 @@ header {
     width: 90%;
     text-align: center;
     float: left;
+    padding-right: 13%;
+    position: relative;
   }
   .mobile_page_logo {
-    width: 90%;
+    width: 100%;
     float: right;
   }
   .download_option {
@@ -103,11 +97,43 @@ header {
     width: 100%;
     bottom: 4%;
     img {
-      width: 200px;
+      width: 130px;
+      margin-right: 10px;
+    }
+    [alt="andriod"] {
+      margin-right: 0px;
     }
   }
 }
-.modal {
+.mobile_menu {
+  button {
+    position: absolute;
+    left: 10px;
+    top: 80px;
+  }
+}
+.mobile_menu_wrapper {
+  background-color: $white_color;
+  @include float();
+  .normal_title {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid $nobel_color;
+    text-align: left;
+  }
+  .mobile_menu {
+    text-align: left;
+    @include float();
+    border-bottom: 1px solid $nobel_color;
+    color: #4a4a4a;
+    width: 100%;
+    display: block;
+    img {
+      width: 16px;
+    }
+  }
+}
+.mobile-modal {
   position: relative;
   .modal-dialog {
     width: 100%;

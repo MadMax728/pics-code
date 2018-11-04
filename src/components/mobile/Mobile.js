@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import { Switch, Route } from "react-router-dom";
+import * as routes from "../../lib/constants/routes";
+import Header from "./Header";
+import Footer from "./Footer";
+import { Home } from "./home";
+import { Cookies } from "./cookies";
+import { LeftSideBarMB } from "../common";
 
 export default class Mobile extends Component {
   constructor(props) {
@@ -11,9 +18,6 @@ export default class Mobile extends Component {
   };
   componenWillUnmount = () => {
     document.removeEventListener("click", this.handleOutsideClick);
-  };
-  toggleNav = () => {
-    this.setState({ navExpanded: !this.state.navExpanded });
   };
 
   toggleUserNav = () => {
@@ -36,14 +40,31 @@ export default class Mobile extends Component {
     this.toggleUserNav();
   };
 
-  handleNavClick = evt => {
+  handleNavClick = () => {
     this.toggleUserNav();
   };
 
   render() {
     return (
       <div>
-        <h1>Mobile View</h1>
+        <Cookies />
+        <Header />
+        <section>
+          <div className="container">
+            <div className="row">
+              <div>
+                <Switch>
+                  <Route exact path={routes.ROOT_ROUTE} component={Home} />
+
+                  <LeftSideBarMB />
+
+                  <Route component={Home} />
+                </Switch>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Footer />
       </div>
     );
   }

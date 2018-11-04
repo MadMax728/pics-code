@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.2 (57519) - http://www.bohemiancoding.com/sketch -->
+    <title>check-circle</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="0%" cy="100%" fx="0%" fy="100%" r="145.070073%" gradientTransform="translate(0.000000,1.000000),scale(1.000000,0.951504),rotate(-46.423533),translate(-0.000000,-1.000000)" id="radialGradient-1">
+            <stop stop-color="#1F58A6" offset="0%"></stop>
+            <stop stop-color="#029BD7" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Webaplikation" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-390.000000, -103.000000)" fill="url(#radialGradient-1)">
+            <g id="Group-3" transform="translate(55.000000, 70.000000)">
+                <g id="check-circle" transform="translate(335.000000, 33.000000)">
+                    <path d="M7.13628187,0 C3.21132684,0 0,3.375 0,7.5 C0,11.625 3.21132684,15 7.13628187,15 C11.0612369,15 14.2725637,11.625 14.2725637,7.5 C14.2725637,3.375 11.0612369,0 7.13628187,0 L7.13628187,0 Z M5.70902549,11.25 L2.14088456,7.5 L3.13996402,6.45 L5.70902549,9.15 L11.1325997,3.45 L12.1316792,4.5 L5.70902549,11.25 L5.70902549,11.25 Z" id="Shape"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

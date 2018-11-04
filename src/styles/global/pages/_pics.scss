@@ -1,0 +1,28 @@
+.pic-left-block {
+  padding-left: 0px;
+  padding-right: 5px;
+}
+.pic-right-block {
+  padding-right: 0px;
+  padding-left: 5px;
+}
+.pic-block {
+  img {
+    width: 100%;
+  }
+  .name-wrapper {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 10px;
+    .username {
+      font-family: "Helvetica-Bold";
+    }
+  }
+  &:hover {
+    .name-wrapper {
+      @include gradient();
+      color: $white_color;
+    }
+  }
+}

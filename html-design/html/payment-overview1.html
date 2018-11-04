@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Picstagraph</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+      <link rel="stylesheet" href="http://localhost:8080/global/picstagraph-web/css/index.css">
+   </head>
+   <body>
+      <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#payment-overview">Payment Overview</button>
+      <!-- Modal -->
+      <div id="payment-overview" class="modal fade payment-overview-modal" role="dialog">
+         <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+               <div class="modal-header">
+                  <div class="col-sm-4 modal-title no-padding">Create campaign</div>
+                  <div class="col-sm-8 text-right no-padding">
+                     <button class="black_button">Cancel</button>
+                     <button class="black_button">Back</button>
+                     <button class="black_button">Preview</button>
+                     <button class="black_button">Continue</button>
+                  </div>
+               </div>
+               <div class="modal-body">
+                  <div class="col-sm-5 payment-history">
+                        <div class="subtitle">Complete payment transaction</div>
+                        <div class="history-content-wrapper">
+                            <div class="subtitle">Billing address</div>
+                            <div class="content">
+                                Marc Bopp<br/>
+                                Oberer Dorfgraben 15c, 55130 Mainz, Deutschland
+                            </div>
+                        </div>
+                        <div class="history-content-wrapper">
+                            <div class="subtitle">Payment method</div>
+                            <div class="content">
+                                VISA / MasterCard<br/>
+                                Marc Aurel Bopp, **** ***** ***** **00
+                            </div>
+                        </div>
+                        <div class="history-content-wrapper">
+                            <div class="subtitle">Voucher </div>
+                            <div class="form-content">
+                                <input type="text" />
+                                <button class="blue_button">Redeem</button>
+                            </div>
+                        </div>
+                        <div class="history-content-wrapper">
+                            <div class="subtitle">Order overview </div>
+                            <div class="content no-padding">
+                                <table>
+                                    <tr>
+                                        <td>Preliminary amount</td>
+                                        <td>0,00 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Runtime</td>
+                                        <td>7 Days</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Voucher</td>
+                                        <td>0,00 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="fontBold">Maximum expenses</td>
+                                        <td class="fontBold">2000,00 €</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="bottom-links">
+                            By clicking on register you agree to our <a href="#">General Terms & Conditions</a>, <a href="#">Terms of Use</a> and <a href="#">Data Protection</a> & <a href="#">Privacy Policy</a>.
+                        </div>
+                        <div class="bottom-button">
+                            <button class="filled_button">Commit to buy</button>
+                        </div>
+                  </div>
+                  <div class="col-sm-7 disp-flex create-campaign-feed-wrapper">
+                     <div class="feed_wrapper">
+                        <div class="feed_header">
+                           <div class="no-padding profile_image"><img src="images/image.jpg" alt="feed" class="img-circle img-responsive"></div>
+                           <div class="no-padding titles_wrapper">
+                              <div class="normal_title">Title of campaigns</div>
+                              <div class="secondary_title">Santosh Shinde</div>
+                              <div class="grey_title">01.01.2000 in Category</div>
+                           </div>
+                           <div class="like_wrapper"><img src="images/blue_heart.svg" alt="like" class="pull-right"></div>
+                        </div>
+                        <div class="feed_content">
+                           <div class="feed_image">
+                              <div class="embed-responsive embed-responsive-16by9">
+                                 <div class="img-responsive embed-responsive-item"><img src="images/image.jpg" alt="altmage"></div>
+                              </div>
+                           </div>
+                           <div class="feed_description padding-15"><span class="secondary_title">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...</span></div>
+                        </div>
+                        <div class="feed_footer padding-15">
+                           <div class="messages"><span class="count">12</span><img src="images/feed_msg.svg" alt="profile"></div>
+                           <div class="likes"><span class="count">12</span><img src="images/feed_like.svg" alt="profile"></div>
+                           <div class="show_more_options">
+                              <div>• • •</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.js"></script>
+   </body>
+</html>

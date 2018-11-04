@@ -19,6 +19,13 @@ By default the app will attempt to start running on port "**8080**". This can be
 
 See [advanced configuration](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#advanced-configuration) for more settings.
 
+### Running Your Server Application with Docker
+
+```bash
+$ docker-compose build picstgraph_web
+$ docker-compose up
+```
+
 ### Feature Toggles
 
 Some application features can be toggled on and off. See [featureToggles.js](src/featureToggles.js) for details.

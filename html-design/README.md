@@ -35,7 +35,29 @@ Added static HTML for
 2. Bills & Receipts - HTML file is bills-receipts.html and css file is _bills-receipts.scss
 3. Data Download - HTML file is data-download.html and css file is _data-download.scss
 
-Date 27-Aug-18
+Date 28-Aug-18
 Added static HTML for 
-1. Subscribers / Subscribe/ Likes Popup - HTML file - HTML file is subscriberpopup.html and css file is _subscriberspopup.scss
-2. About page - HTML file - HTML file is about.html and css file is _about.scss
+1. Subscribers / Subscribe/ Likes Popup - HTML file is subscriberpopup.html and css file is _subscriberspopup.scss
+2. About page - HTML file is about.html and css file is _about.scss
+
+Date 29-Aug-18
+Added static HTML for 
+1. Information - HTML file is information.html and css file is _information.scss
+2. Upload Image Design - HTML file - HTML files are upload-image.html & upload-image-withprogressbar.html and css file is _upload-image.scss
+3. Create campaign Design - HTML file - HTML files are create-campaign.html & create-campaign1.html and css file is _create-campaign.scss
+
+
+Date 30-Aug-18
+Added static HTML for 
+1. Create campaign Design - HTML file - HTML files are create-campaign2.html & create-campaign3.html and css file is _create-campaign.scss
+2. Create pics Design - HTML file - HTML file is pics.html and css file is _pics.scss
+3. Create User Design - HTML file - HTML file is user.html and css file is _user.scss
+
+Date 31-Aug-18
+Added static HTML for 
+1. Notification Design - HTML file - Design is create in about.html and css is updated in _header.scss
+2. Create ads Design - HTML file - HTML files are create-ad.html & create-ad1.html and css file is _create-ad.scss
+
+Date 3rd-Sep-18
+1. Create payment overview Design - HTML file - HTML files are payment-overview.html & payment-overview1.html and css file is _payment.scss
+2. Create messages Design - HTML file - HTML files are messages.html & messages1.html and css file is _messages.scss

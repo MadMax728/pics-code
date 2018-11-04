@@ -22,6 +22,9 @@ body{
 	@include body_grey(); 
 	font-family: 'Helvetica';	
 	color:$charcoal_color;
+	@media(max-width: 767px){
+		// display: none !important;
+	}
 }
 .no-padding{
 	padding: 0px;
@@ -50,8 +53,23 @@ body{
 .padding-l-5{
 	padding-left: 5px;
 }
+.padding-l-5{
+	padding-left: 5px;
+}
 hr{
 	border: 1px solid #cdcdcd;
+}
+.margin-r-13{
+	margin-right: 13px;
+}
+.wid40{
+	width: 40px !important;
+}
+.margin-t-15{
+	margin-top: 15px;
+}
+.margin-b-15{
+	margin-bottom: 15px;
 }
 /******** Titles Style*******************/
 .normal_title{
@@ -294,7 +312,7 @@ hr{
 	padding-bottom: 15px;
 	border-bottom: 1px solid $charcoal_color;
 	margin-bottom: 20px;
-	padding-top:25px;
+	padding-top:35px;
 	float: left;
 	width: 100%;
 }

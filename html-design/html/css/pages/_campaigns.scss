@@ -49,6 +49,7 @@
 		.title{
 			font-size: 12px;
 			font-family: 'Helvetica-Bold';
+			font-weight: bold;
 		}
 		.subtitle{
 			font-size: 12px;
@@ -67,7 +68,8 @@
 	.normal_title {
 		padding: 10px;
 	    margin-bottom: 10px;
-	    background: $white_color;
+		background: $white_color;
+		font-weight: bold;
 	}
 	.campaign-block{
 		background: $white_color;
@@ -75,6 +77,7 @@
 		margin-bottom: 10px;
 		.indicators{
 			padding: 5px 35px 35px;
+			text-align: center;
 			@include float();	
 			div{				
 				width: 50%;
@@ -105,7 +108,20 @@
 		       @include gradient();
 		        /* Adjust with JavaScript */
 		       height: 25px;		        
-		    }		    
+			}	
+			> div.progress.highlighter{
+				color: white;
+    			text-align: center;
+    			padding: inherit;
+			}	    
+		}
+		.progress-counter-wrapr{
+			display: flex;
+			justify-content: space-between;
+			span.counter{
+				flex: 1;
+			}
+			
 		}
 	}
 }

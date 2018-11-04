@@ -7,9 +7,8 @@ const composeEnhancers = composeWithDevTools({
   // options like actionSanitizer, stateSanitizer
 });
 
-const middleware = [thunk];
-
 export const configureStore = () => {
+  const middleware = [thunk];
   return createStore(
     rootReducer,
     composeEnhancers(applyMiddleware(...middleware))
