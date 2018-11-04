@@ -7,11 +7,11 @@ export const PARTICIPANTS_ROUTE = "/participants";
 export const USERS_ROUTE = "/users";
 export const PICS_ROUTE = "/pics";
 export const NOTIFICATIONS_ROUTE = "/notifications";
-export const FORGOT_PASSWORD = "/forgotPassword";
+export const FORGOT_PASSWORD = "/check-email";
 export const CAMPAIGN_ROUTE = "/campaign";
 export const CAMPAIGN_VIEW_ROUTE = "/campaign/:id";
-export const RESET_EMAIL = "/resetEmail";
-export const RESET_PASSWORD = "/resetPassword/:token";
+export const RESET_EMAIL = "/forgot-password";
+export const RESET_PASSWORD = "/reset-password/:token";
 export const PAGE_NOT_FOUND = "/page-not-found";
 
 // Mobile view Side Menu
