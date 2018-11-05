@@ -7,6 +7,9 @@ import PropTypes from "prop-types";
 import { submitResetPassword } from "../../../actions/forgotPassword";
 import { submitLogin } from "../../../actions";
 import connect from "react-redux/es/connect/connect";
+import { Auth } from "../../../auth";
+import * as userService from "../../../services/userService";
+import { Redirect } from "react-router";
 
 class ResetMail extends Component {
   constructor(props) {
@@ -34,8 +37,7 @@ class ResetMail extends Component {
       email: this.state.form.email
     };
     this.props.submitResetPassword(data).then(res => {
-      console.log("forgitpassword", res);
-      console.log("forgitpassword1", this.props.resetPasswordData);
+      Auth.logoutUser();
       this.props.history.push(routes.ROOT_ROUTE);
     });
   };
