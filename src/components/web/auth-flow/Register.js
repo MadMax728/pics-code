@@ -42,6 +42,7 @@ class Register extends Component {
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
+    e.preventDefault();
     const { form } = this.state;
     let data = {
       username: form.username,
@@ -51,8 +52,8 @@ class Register extends Component {
       password: form.password,
       repeatPassword: form.repeat_password
     };
-    e.preventDefault();
     this.props.submitRegister(data).then(() => {
+      Auth.logoutUser();
       this.props.history.push(routes.ROOT_ROUTE);
     });
   };

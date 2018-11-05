@@ -16,7 +16,7 @@ const ForgotPassword = () => (
           <h3 className="text-center">Didn´t receive an email?</h3>
           {/*<a onClick={handleResetEmail(resendEmail)} onKeyDown={handleResetEmail(resendEmail)} tabIndex={0} role="link" >here</a> */}
           <p>
-            Click <a href="/ref">here</a> to request another mail.
+            Click <a href="/forgot-password">here</a> to request another mail.
             {/*<img src="images/checked.svg" />*/}
           </p>
         </div>

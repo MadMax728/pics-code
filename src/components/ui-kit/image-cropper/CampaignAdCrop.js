@@ -45,7 +45,7 @@ const CampaignAdCrop = ({
           onDrop={handleDrop}
           disableClick
           multiple={false}
-          className="col-xs-12 uploaded-profile-pic"
+          className="col-xs-12 uploaded-profile-pic mar0padd0"
           style={{
             width,
             height,
