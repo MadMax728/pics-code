@@ -73,7 +73,7 @@ class Upload extends Component {
               </div>
             </div> */}
             <ul className="progress">
-              <li data-percent="90%">
+              <li data-percent="100%">
                 <svg viewBox="-10 -10 220 220">
                   <g
                     fill="none"
