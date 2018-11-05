@@ -82,7 +82,7 @@ class ResetPassword extends Component {
                     type="password"
                     className="form-control"
                     id="password"
-                    placeholder="Enter new password"
+                    placeholder={Translations.reset_password.enetr_password}
                     autoComplete="Password"
                     name="password"
                     value={form.password ? form.password : ""}
@@ -100,7 +100,7 @@ class ResetPassword extends Component {
                     type="password"
                     className="form-control"
                     id="new-password"
-                    placeholder="Repeat password"
+                    placeholder={Translations.reset_password.repeat_password}
                     autoComplete="Repeat Password"
                     name="repeat_password"
                     value={form.repeat_password ? form.repeat_password : ""}
@@ -115,7 +115,7 @@ class ResetPassword extends Component {
                 </div>
                 <div className="form-group">
                   <button className="blue_button" onClick={this.handleSubmit}>
-                    Send
+                    {Translations.reset_password.send}
                   </button>
                 </div>
               </form>

@@ -11,8 +11,29 @@ Implementation of auto complete location functionality with managing state value
     - Create Ad modal
     - Upload modal
 
-Bug Fixes,
-    - 
+Bug Fixed,
+    - Add routes and set static/empty component for sight side bar,
+        - About Us
+        - Support
+        - Data Privacy and Protection
+        - Legal Notice
+        - Terms and Conditions
+        - NETZDG
+        - Cookies
+    - Fixed Community component routes for users
+    - Fixed Active class issue for Campaign view details and participant.
+    - Fixed Upload Image Box div for image cropper functionality in Craete Campaign modal and Create ad modal.
+Add Translation json for,
+    - Base Footer Links
+    - Register component
+    - Cookies component
+    - App Download component
+    - Reset Email component
+    - Reset Password component
+    - Forget Password component
+    - Common filter components
+    - Common right about component
+    - Common language component
 
 Thanks.
 

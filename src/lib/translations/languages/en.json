@@ -66,6 +66,21 @@
     }
   },
 
+  "base_footer": {
+    "support": "Support",
+    "data_protection_and_privacy_policy": "Data Protehtion & Privacy Policy",
+    "legal_notice": "Legal Notice",
+    "general_terms_and_conditions": "General terms & Conditions",
+    "netzdg": "NETZDG",
+    "language": "Language",
+    "terms_of_use": "Terms of Use",
+    "better": "For a better user experience we use ",
+    "agree": "By using picstagraph you do agree",
+    "about_us": "About us",
+    "terms_and_condition": "Terms & Condition",
+    "cookies": "Cookies"
+  },
+
   "right_side_bar_statistics": {
     "all": "All",
     "outstanding": "Outstanding",
@@ -265,7 +280,19 @@
     "logout": "Logout"
   },
 
-  "register": {},
+  "register": {
+    "username": "User name",
+    "password": "Password",
+    "repeat_password": "Repeat Password",
+    "email": "Email",
+    "male": "Male",
+    "female": "Female",
+    "register": "Register",
+    "agree": "By clicking on register you agree to our",
+    "company": "Company",
+    "free": "Register free as a",
+    "send": "Send"
+  },
 
   "login": {
     "header": "Do what you love",
@@ -274,10 +301,35 @@
     "login": "Log in"
   },
 
+  "forgot_password": {
+    "email_account": "Check your email account.",
+    "confirm_email": "We sent you a confirmation email with a link.",
+    "reset_email": "Please click on the link to reset your password.",
+    "didnt_receive": "Didn´t receive an email?",
+    "request": "to request another mail.",
+    "click": "Click",
+    "here": "Here"
+  },
+
+  "filter": {
+    "reset_filter": "Reset filters",
+    "apply": "Apply"
+  },
+
+  "languages": {
+    "german": "German",
+    "english": "English"
+  },
+
   "reset_password": {
     "header": "Reset password",
-    "subheader": "Please enter your new password here."
+    "subheader": "Please enter your new password here.",
+    "enter_password": "Enter new password",
+    "repeat_password": "Repeat password",
+    "send": "Send"
   },
+
+  "app_download": "App download",
 
   "reset_email": {
     "header": "Reset password",
