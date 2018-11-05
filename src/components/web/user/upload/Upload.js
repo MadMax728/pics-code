@@ -55,8 +55,8 @@ class Upload extends Component {
     const { isInProgress } = this.state;
 
     return (
-      <div className="modal-body">
-        <div className="col-sm-6 upload-form">
+      <div className="col-xs-12 no-padding">
+        <div className="col-sm-6 upload-form height100">
           <div className="no-padding profile_image">
             <img
               src={images.image}
@@ -123,7 +123,7 @@ class Upload extends Component {
               </label>
             </div>
           ) : (
-            <img src={form.image} alt="upload" />
+            <img src={form.image} alt="upload" class="widthHeightAuto" />
           )}
           {isInProgress && (
             <div className="image-wrapper">
@@ -141,7 +141,7 @@ class Upload extends Component {
             </div>
           )}
 
-          <div className="add-wrapper">
+          <div className="add-wrapper heightAuto">
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
         </div>
