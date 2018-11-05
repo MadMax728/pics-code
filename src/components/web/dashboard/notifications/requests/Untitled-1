@@ -2,11 +2,37 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on image-cropper branch and created merge request.
 
-Implementation of smart component for combine HashTag-Username functionality.
-Implementation of the Image-cropper functionality in Create Campaign Modal.
-Implementation of the Image-cropper functionality in Create Ad Modal.
-Fixed designing issue for Edit-Profile Modal Component.
-Fixed designing issue in comment section for campaigns and feeds component.
-Trying to implement of the HashTag functionality into Upload Modal Component.
+Implementation of smart component for auto complete location functionality.
+Implementation of auto complete location functionality with managing state values,
+    - left side bar filter
+    - Edit Profile
+    - Create Campaign for Creator
+    - Create Campaign for Company
+    - Create Ad modal
+    - Upload modal
+
+Bug Fixed,
+    - Add routes and set static/empty component for right side bar,
+        - About Us
+        - Support
+        - Data Privacy and Protection
+        - Legal Notice
+        - Terms and Conditions
+        - NETZDG
+        - Cookies
+    - Fixed User routing issue in Community component for users
+    - Fixed Active class issue for Campaign view details and participant.
+    - Fixed Upload Image Box div for image cropper functionality in Craete Campaign modal and Create ad modal.
+Add Translation json for,
+    - Base Footer Links
+    - Register component
+    - Cookies component
+    - App Download component
+    - Reset Email component
+    - Reset Password component
+    - Forget Password component
+    - Common filter components
+    - Common right about component
+    - Common language component
 
 Thanks.

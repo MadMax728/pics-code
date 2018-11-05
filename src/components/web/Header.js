@@ -40,9 +40,9 @@ export default class Header extends Component {
   };
 
   onScroll = () => {
-    let offsetHeight = window.pageYOffset;
+    const offsetHeight = window.pageYOffset;
     this.setState({
-      offsetHeight: offsetHeight
+      offsetHeight
     });
   };
 

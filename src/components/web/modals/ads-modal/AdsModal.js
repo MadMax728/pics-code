@@ -13,6 +13,7 @@ class AdsModal extends Component {
       form: {
         title: "",
         location: "",
+        address: "",
         radius: "",
         category: "",
         description: "",
@@ -110,6 +111,12 @@ class AdsModal extends Component {
     this.props.handleModalInfoMsgShow(modalType.payment_confirmation, "Ad");
   };
 
+  handleLocation = (location, address) => {
+    this.setState({
+      form: { ...this.state.form, location, address }
+    });
+  };
+
   render() {
     const { stepIndex, form } = this.state;
     const { handleModalHide, modalShow } = this.props;
@@ -152,6 +159,7 @@ class AdsModal extends Component {
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}
             handleEditImage={this.handleEditImage}
+            handleLocation={this.handleLocation}
           />
         }
       />

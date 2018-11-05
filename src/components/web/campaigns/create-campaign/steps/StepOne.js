@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
-import { ImageCropper } from "../../../../ui-kit";
+import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 
 class StepOne extends Component {
   constructor(props) {
@@ -19,7 +19,8 @@ class StepOne extends Component {
       form,
       uploadFile,
       isFor,
-      handleEditImage
+      handleEditImage,
+      handleLocation
     } = this.props;
     console.log(form.image);
 
@@ -49,11 +50,10 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input
-                type="text"
-                value={this.props.form.location}
-                name="location"
-                onBlur={handleChangeField}
+              <PlaceAutoCompleteLocation
+                className=""
+                handleLocation={handleLocation}
+                value={this.props.form.address}
               />
             </div>
             <div className="form-group">
@@ -247,7 +247,8 @@ StepOne.propTypes = {
   form: propTypes.any.isRequired,
   isFor: propTypes.bool.isRequired,
   uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired
+  handleEditImage: propTypes.func.isRequired,
+  handleLocation: propTypes.func.isRequired
 };
 
 export default StepOne;

@@ -1,5 +1,7 @@
 import React from "react";
 import { BaseHeader, BaseFooter } from "../common";
+import { Translations } from "../../../lib/translations";
+import { Link } from "react-router-dom";
 
 const ForgotPassword = () => (
   <div className="login-process">
@@ -7,16 +9,22 @@ const ForgotPassword = () => (
     <section>
       <div className="custom-container">
         <div className="login-wrapper">
-          <h3 className="text-center">Check your email account. </h3>
+          <h3 className="text-center">
+            {Translations.forgot_password.email_account}{" "}
+          </h3>
           <p>
-            We sent you a confirmation email with a link.
+            {Translations.forgot_password.confirm_email}
             <br />
-            Please click on the link to reset your password.
+            {Translations.forgot_password.reset_email}
           </p>
-          <h3 className="text-center">Didn´t receive an email?</h3>
+          <h3 className="text-center">
+            {Translations.forgot_password.didnt_receive}
+          </h3>
           {/*<a onClick={handleResetEmail(resendEmail)} onKeyDown={handleResetEmail(resendEmail)} tabIndex={0} role="link" >here</a> */}
           <p>
-            Click <a href="/ref">here</a> to request another mail.
+            {Translations.forgot_password.click}{" "}
+            <Link to={"/"}>{Translations.forgot_password.here}</Link>{" "}
+            {Translations.forgot_password.request}
             {/*<img src="images/checked.svg" />*/}
           </p>
         </div>
