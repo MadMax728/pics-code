@@ -123,7 +123,7 @@ class Upload extends Component {
               </label>
             </div>
           ) : (
-            <img src={form.image} alt="upload" class="widthHeightAuto" />
+            <img src={form.image} alt="upload" className="widthHeightAuto" />
           )}
           {isInProgress && (
             <div className="image-wrapper">
