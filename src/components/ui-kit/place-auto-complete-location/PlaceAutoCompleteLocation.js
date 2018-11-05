@@ -47,7 +47,7 @@ class PlaceAutoComplete extends Component {
             />
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
-              {suggestions.map(suggestion => {
+              {suggestions.map((suggestion, index) => {
                 const className = suggestion.active
                   ? "suggestion-item--active"
                   : "suggestion-item";
@@ -57,6 +57,7 @@ class PlaceAutoComplete extends Component {
                   : { backgroundColor: "#ffffff", cursor: "pointer" };
                 return (
                   <div
+                    key={index}
                     {...getSuggestionItemProps(suggestion, {
                       className,
                       style

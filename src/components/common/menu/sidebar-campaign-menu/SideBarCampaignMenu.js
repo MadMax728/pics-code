@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LeftSidebarNav } from "../../../ui-kit";
-import * as routes from "../../../../lib/constants/routes";
 import { Translations } from "../../../../lib/translations";
+import propTypes from "prop-types";
 
 class SideBarCampaignMenu extends Component {
   constructor(props, context) {
@@ -37,5 +37,9 @@ class SideBarCampaignMenu extends Component {
     );
   }
 }
+
+SideBarCampaignMenu.propTypes = {
+  match: propTypes.any
+};
 
 export default SideBarCampaignMenu;
