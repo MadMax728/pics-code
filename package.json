@@ -90,7 +90,8 @@
     "npm-run-all": "^4.1.2",
     "prettier": "^1.9.2",
     "react-test-renderer": "^16.2.0",
-    "storybook-router": "^0.3.2"
+    "storybook-router": "^0.3.2",
+    "uglify-js-brunch": "^2.10.0"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,scss}": [

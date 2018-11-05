@@ -1,5 +1,6 @@
 .create-campaign-modal {
   background: #333;
+
   &.editor-modal {
     & > .modal-dialog {
       max-width: 915px;
@@ -96,6 +97,9 @@
       }
     }
     .upload-form {
+      &.height100 {
+        height: 100%;
+      }
       .meter {
         height: 40px;
         position: relative;
@@ -175,6 +179,9 @@
       padding-bottom: 15px;
       background: $white_color;
       height: 100%;
+      &.heightAuto {
+        height: auto;
+      }
       img {
         width: 30px;
         margin-right: 15px;
