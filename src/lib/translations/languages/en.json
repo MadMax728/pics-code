@@ -89,7 +89,7 @@
     },
     "location": {
       "name": "Location",
-      "type": "text"
+      "type": "auto-complete"
     },
     "radius": {
       "name": "Radius",

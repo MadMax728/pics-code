@@ -2,25 +2,20 @@ Hello Team,
 
 Today, I have worked on following tasks updated same in asana, pushed the code on image-cropper branch and created merge request.
 
-Implementation of smart component for combine HashTag-Username functionality.
-Implementation of the Image-cropper functionality in Create Campaign Modal.
-Implementation of the Image-cropper functionality in Create Ad Modal.
-Fixed designing issue for Edit-Profile Modal Component.
-Fixed designing issue in comment section for campaigns and feeds component.
-Trying to implement of the HashTag functionality into Upload Modal Component.
+Implementation of smart component for auto complete location functionality.
+Implementation of auto complete location functionality with managing state values,
+    - left side bar filter
+    - Edit Profile
+    - Create Campaign for Creator
+    - Create Campaign for Company
+    - Create Ad modal
+    - Upload modal
+
+Bug Fixes,
+    - 
 
 Thanks.
 
 
-Highlighted Points,
-
-1. Implementation of the Image-Crop functionality into Edit Profile, Create Campaign, and Create Ad Modal.
-2. Implementation Text Editors functionality into Create Campaign and Create Ad Modal, and Back-office Create CMS Management.
-3. Implementation of the Comments functionality into all Campaigns and Feeds using Mockdata.
-4. Implementation of the HashTag functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
-5. Implementation of the Username functionality in Comments section functionality into all Campaigns and Feeds using Mockdata.
-6. Implementation of the HashTag functionality in Upload Modal Comments.
-7. Implementation of the Username functionality in Upload Modal Comments.
-8. Implementation of the UI for form inputs throught out application. For now we have Implemented in setting's Comments. we will be use whenever needed in future.
 
 
