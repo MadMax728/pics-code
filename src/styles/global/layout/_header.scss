@@ -75,6 +75,26 @@ header {
         padding: 0;
       }
       li {
+        ul.dropdown-menu {
+          .notification-mega-wrapper {
+            ul {
+              li {
+                a {
+                  &::before {
+                    background: #000000;
+                    bottom: 8px;
+                    left: 51%;
+                    right: 51%;
+                  }
+                  &:hover::before {
+                    left: 28%;
+                    right: 28%;
+                  }
+                }
+              }
+            }
+          }
+        }
         &.open {
           &:after {
             width: 0;
