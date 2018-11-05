@@ -1,5 +1,22 @@
 .upload-image-modal {
   background: #333;
+  &.create-campaign-modal {
+    .modal-body {
+      & > div {
+        & > div.col-sm-6.no-padding:nth-child(2) {
+          img.widthHeightAuto {
+            height: 378px;
+            width: 100%;
+          }
+        }
+      }
+    }
+    .modal-body {
+      .box {
+        width: 100%;
+      }
+    }
+  }
   .modal-dialog {
     width: 915px;
   }

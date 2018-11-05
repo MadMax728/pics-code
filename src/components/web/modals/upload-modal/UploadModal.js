@@ -10,10 +10,15 @@ class UploadModal extends Component {
       form: {
         add_location: "",
         add_category: "",
-        add_decription: ""
+        add_decription: "",
+        image: null
       }
     };
   }
+
+  handleUpload = image => {
+    this.setState({ form: { ...this.state.form, image: image } });
+  };
 
   handleSetState = (value, cd) => {
     this.setState({ form: { ...this.state.form, add_decription: value } }, () =>
@@ -37,7 +42,7 @@ class UploadModal extends Component {
 
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade upload-image-modal"}
+        modalClassName={"modal fade upload-image-modal create-campaign-modal"}
         header
         modalHeaderContent={
           <UploadHeader
@@ -54,6 +59,7 @@ class UploadModal extends Component {
             handleChangeField={this.handleChangeField}
             form={form}
             handleSetState={this.handleSetState}
+            handleUpload={this.handleUpload}
           />
         }
       />
