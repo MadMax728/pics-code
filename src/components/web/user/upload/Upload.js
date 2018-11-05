@@ -77,7 +77,7 @@ class Upload extends Component {
                 <svg viewBox="-10 -10 220 220">
                   <g
                     fill="none"
-                    stroke-width="20"
+                    strokeWidth="20"
                     transform="translate(100,100)"
                   >
                     <path
@@ -109,7 +109,7 @@ class Upload extends Component {
                 <svg viewBox="-10 -10 220 220">
                   <path
                     d="M200,100 C200,44.771525 155.228475,0 100,0 C44.771525,0 0,44.771525 0,100 C0,155.228475 44.771525,200 100,200 C155.228475,200 200,155.228475 200,100 Z"
-                    stroke-dashoffset="629"
+                    strokeDashoffset="629"
                   />
                 </svg>
               </li>
@@ -124,8 +124,8 @@ class Upload extends Component {
                   x2="1"
                   y2="1"
                 >
-                  <stop stop-color="#1f58a6" />
-                  <stop offset="100%" stop-color="#1a64af" />
+                  <stop stopColor="#1f58a6" />
+                  <stop offset="100%" stopColor="#1a64af" />
                 </linearGradient>
                 <linearGradient
                   id="cl2"
@@ -135,8 +135,8 @@ class Upload extends Component {
                   x2="0"
                   y2="1"
                 >
-                  <stop stop-color="#1a64af" />
-                  <stop offset="100%" stop-color="#166fb7" />
+                  <stop stopColor="#1a64af" />
+                  <stop offset="100%" stopColor="#166fb7" />
                 </linearGradient>
                 <linearGradient
                   id="cl3"
@@ -146,8 +146,8 @@ class Upload extends Component {
                   x2="0"
                   y2="1"
                 >
-                  <stop stop-color="#166fb7" />
-                  <stop offset="100%" stop-color="#1177bd" />
+                  <stop stopColor="#166fb7" />
+                  <stop offset="100%" stopColor="#1177bd" />
                 </linearGradient>
                 <linearGradient
                   id="cl4"
@@ -157,8 +157,8 @@ class Upload extends Component {
                   x2="0"
                   y2="0"
                 >
-                  <stop stop-color="#1177bd" />
-                  <stop offset="100%" stop-color="#0e82c5" />
+                  <stop stopColor="#1177bd" />
+                  <stop offset="100%" stopColor="#0e82c5" />
                 </linearGradient>
                 <linearGradient
                   id="cl5"
@@ -168,8 +168,8 @@ class Upload extends Component {
                   x2="0"
                   y2="0"
                 >
-                  <stop stop-color="#0e82c5" />
-                  <stop offset="100%" stop-color="#098aca" />
+                  <stop stopColor="#0e82c5" />
+                  <stop offset="100%" stopColor="#098aca" />
                 </linearGradient>
                 <linearGradient
                   id="cl6"
@@ -179,8 +179,8 @@ class Upload extends Component {
                   x2="1"
                   y2="0"
                 >
-                  <stop stop-color="#098aca" />
-                  <stop offset="100%" stop-color="#029ad6" />
+                  <stop stopColor="#098aca" />
+                  <stop offset="100%" stopColor="#029ad6" />
                 </linearGradient>
               </defs>
             </svg>
