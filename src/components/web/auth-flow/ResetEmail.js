@@ -41,8 +41,7 @@ class ResetMail extends Component {
       email: this.state.form.email
     };
     this.props.submitResetPassword(data).then(res => {
-      Auth.logoutUser();
-      this.props.history.push(routes.ROOT_ROUTE);
+      this.props.history.push(routes.FORGOT_PASSWORD);
     });
   };
 
