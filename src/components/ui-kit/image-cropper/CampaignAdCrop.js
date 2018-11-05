@@ -40,7 +40,7 @@ const CampaignAdCrop = ({
 }) => {
   return (
     <div className="col-xs-12 no-padding create-campaign-crop-pic">
-      {image !== null && image !== undefined ? (
+      {!image ? (
         <Dropzone
           onDrop={handleDrop}
           disableClick
