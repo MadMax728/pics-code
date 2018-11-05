@@ -13,6 +13,12 @@ export const submitLogin = payload => api.post("/auth/login", payload);
 
 export const submitRegister = payload => api.post("/users", payload);
 
+export const setNewPassword = payload =>
+  api.put("/users/set-password", payload);
+
+export const submitResetPassword = payload =>
+  api.put("/users/forgot-password", payload);
+
 /**
  *
  * @param {*} payload

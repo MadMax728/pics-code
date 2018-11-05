@@ -4,6 +4,12 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter } from "../common";
 import PropTypes from "prop-types";
+import { submitResetPassword } from "../../../actions/forgotPassword";
+import { submitLogin } from "../../../actions";
+import connect from "react-redux/es/connect/connect";
+import { Auth } from "../../../auth";
+import * as userService from "../../../services/userService";
+import { Redirect } from "react-router";
 
 class ResetMail extends Component {
   constructor(props) {
@@ -15,6 +21,10 @@ class ResetMail extends Component {
       }
     };
   }
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutUser();
+  };
 
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
@@ -27,13 +37,16 @@ class ResetMail extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
-    this.props.history.push(routes.ROOT_ROUTE);
+    let data = {
+      email: this.state.form.email
+    };
+    this.props.submitResetPassword(data).then(res => {
+      this.props.history.push(routes.FORGOT_PASSWORD);
+    });
   };
 
   render() {
     const { form } = this.state;
-
     return (
       <div className="login-process">
         <BaseHeader />
@@ -73,9 +86,21 @@ class ResetMail extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  resetPasswordData: state.resetPasswordData
+});
+
+const mapDispatchToProps = {
+  submitResetPassword
+};
 
 ResetMail.propTypes = {
+  submitResetPassword: PropTypes.func.isRequired,
+  resetPasswordData: PropTypes.object,
   history: PropTypes.any
 };
 
-export default ResetMail;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ResetMail);

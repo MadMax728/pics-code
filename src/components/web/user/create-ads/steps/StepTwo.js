@@ -59,7 +59,12 @@ class StepTwo extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="Define">Define daily budget</label>
-            <select onBlur={handleChangeField} name="daily_budget">
+            <select
+              onChange={handleChangeField}
+              value={this.props.form.daily_budget}
+              onBlur={handleChangeField}
+              name="daily_budget"
+            >
               <option>100 €</option>
               <option>200 €</option>
               <option>300 €</option>

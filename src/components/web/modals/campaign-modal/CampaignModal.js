@@ -11,7 +11,7 @@ import {
 import moment from "moment";
 import { modalType } from "../../../../lib/constants/enumerations";
 
-let contentText = "rghcgbvb";
+let contentText = "";
 class CampaignModal extends Component {
   constructor(props, context) {
     super(props, context);
