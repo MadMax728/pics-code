@@ -7,6 +7,7 @@ import {
   setNewPassword,
   submitResetPassword
 } from "../../../actions/forgotPassword";
+import { Auth } from "../../../auth";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import connect from "react-redux/es/connect/connect";
 class ResetPassword extends Component {
@@ -20,6 +21,11 @@ class ResetPassword extends Component {
       }
     };
   }
+
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutUser();
+  };
 
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {

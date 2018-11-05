@@ -7,6 +7,7 @@ import { BaseHeader, BaseFooter, Cookies, DownloadStore } from "../common";
 import { Text, RadioButton } from "../../ui-kit/CommonUIComponents";
 import PropTypes from "prop-types";
 import { submitRegister } from "../../../actions/register";
+import { Auth } from "../../../auth";
 import connect from "react-redux/es/connect/connect";
 
 class Register extends Component {
@@ -26,7 +27,10 @@ class Register extends Component {
     };
   }
 
-  componentDidMount() {}
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutUser();
+  };
 
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {

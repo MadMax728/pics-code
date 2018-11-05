@@ -21,6 +21,10 @@ class ResetMail extends Component {
       }
     };
   }
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutUser();
+  };
 
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
