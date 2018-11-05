@@ -12,7 +12,7 @@ Implementation of auto complete location functionality with managing state value
     - Upload modal
 
 Bug Fixed,
-    - Add routes and set static/empty component for sight side bar,
+    - Add routes and set static/empty component for right side bar,
         - About Us
         - Support
         - Data Privacy and Protection
@@ -20,7 +20,7 @@ Bug Fixed,
         - Terms and Conditions
         - NETZDG
         - Cookies
-    - Fixed Community component routes for users
+    - Fixed User routing issue in Community component for users
     - Fixed Active class issue for Campaign view details and participant.
     - Fixed Upload Image Box div for image cropper functionality in Craete Campaign modal and Create ad modal.
 Add Translation json for,
@@ -36,7 +36,4 @@ Add Translation json for,
     - Common language component
 
 Thanks.
-
-
-
 

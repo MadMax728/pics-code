@@ -36,7 +36,7 @@ class LeftSidebarFilter extends Component {
       return f.name === "location";
     });
 
-    let location_value = {
+    const location_value = {
       name: "location",
       val: location
     };

@@ -42,7 +42,7 @@ class PlaceAutoComplete extends Component {
           <div>
             <input
               {...getInputProps({
-                className: className
+                className
               })}
             />
             <div className="autocomplete-dropdown-container">

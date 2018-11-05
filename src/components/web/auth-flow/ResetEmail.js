@@ -30,7 +30,7 @@ class ResetMail extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    let data = {
+    const data = {
       email: this.state.form.email
     };
     this.props.submitResetPassword(data).then(res => {

@@ -35,7 +35,7 @@ class UploadModal extends Component {
 
   handleLocation = (location, address) => {
     this.setState({
-      form: { ...this.state.form, add_location: location, address: address }
+      form: { ...this.state.form, add_location: location, address }
     });
   };
 

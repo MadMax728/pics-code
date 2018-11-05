@@ -36,7 +36,7 @@ class ResetPassword extends Component {
     if (!this.formValid()) {
       return false;
     }
-    let data = {
+    const data = {
       password: this.state.form.password,
       repeatPassword: this.state.form.repeat_password
     };

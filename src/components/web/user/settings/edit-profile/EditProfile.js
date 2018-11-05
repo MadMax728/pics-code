@@ -64,7 +64,7 @@ class EditProfile extends Component {
 
   handleLocation = (location, address) => {
     this.setState({
-      form: { ...this.state.form, location: location, address: address }
+      form: { ...this.state.form, location, address }
     });
   };
 
