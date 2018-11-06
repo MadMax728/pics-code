@@ -253,6 +253,14 @@ hr {
     border-radius: 0;
     box-shadow: none;
     height: 40px;
+    & ~ .autocomplete-dropdown-container {
+      &.show {
+        border: 1px solid #979797;
+        div {
+          padding: 10px 20px;
+        }
+      }
+    }
     &::placeholder {
       color: $charcoal_color;
     }
@@ -410,7 +418,10 @@ button:focus {
 }
 .overflow-scroll {
   .modal-dialog {
-    height: 92%;
+    height: 80vh;
+    min-height: 80vh;
+    margin: 10vh auto;
+    background-color: white;
     .modal-content {
       height: 100%;
       overflow: hidden;

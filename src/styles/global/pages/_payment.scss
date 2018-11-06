@@ -2,11 +2,16 @@
   background: #333;
   .modal-dialog {
     width: 915px;
+    height: 80vh;
+    min-height: 80vh;
+    background-color: white;
+    margin: 10vh auto;
   }
   .modal-content {
     @include float();
     box-shadow: none;
     border: 0px;
+    height: 100%;
   }
   .modal-header {
     border-bottom: 6px solid #333333;
@@ -23,6 +28,16 @@
   }
   .modal-body {
     padding: 0px;
+    height: 91%;
+    .col-xs-12.no-padding {
+      height: 100%;
+      .col-xs-12.no-padding {
+        height: 100%;
+        & > div {
+          height: 100%;
+        }
+      }
+    }
     .right-side {
       background-color: #333333;
     }

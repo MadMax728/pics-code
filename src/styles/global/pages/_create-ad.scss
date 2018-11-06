@@ -147,6 +147,10 @@
   }
   .modal-dialog {
     width: 915px;
+    height: 80vh;
+    min-height: 80vh;
+    margin: 10vh auto;
+    background-color: white;
   }
   .modal-content {
     float: left;
@@ -294,11 +298,7 @@
           border: 12px solid #fff;
           position: absolute;
           top: 0;
-          left: 0; // content: ""; // width: 70%; // height: 70%; // border-radius: 50%;
-          // border: 12px solid #fff;
-          // position: absolute;
-          // top: 15%;
-          // left: 15%;
+          left: 0; // content: ""; // width: 70%; // height: 70%; // border-radius: 50%; // border: 12px solid #fff; // position: absolute; // top: 15%; // left: 15%;
           // z-index: 1;
         }
         > span {
@@ -356,7 +356,8 @@
         }
         &.blue {
           .progress-bar {
-            border-color: #049dff; // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
+            border-color: #049dff;
+            // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
           }
           .progress-left {
             .progress-bar {
