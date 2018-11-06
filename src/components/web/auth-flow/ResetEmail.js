@@ -34,9 +34,22 @@ class ResetMail extends Component {
     console.log(this.state.form);
   };
 
+  formValid = () => {
+    const { form } = this.state;
+
+    if (form.email.length === 0) {
+      return false;
+    }
+
+    return true;
+  };
+
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
+    if (!this.formValid()) {
+      return false;
+    }
     const data = {
       email: this.state.form.email
     };

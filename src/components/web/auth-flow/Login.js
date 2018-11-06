@@ -17,7 +17,8 @@ class Login extends Component {
       form: {
         userName: "",
         password: ""
-      }
+      },
+      error: {}
     };
   }
 
@@ -30,7 +31,16 @@ class Login extends Component {
    * formValid
    */
   formValid = () => {
+    // let errors = {};
+    // let isFormValid = true;
     const { form } = this.state;
+    //
+    // if (!form["username"]) {
+    //   errors["username"] = "username is required.";
+    //   isFormValid = false;
+    // }
+    // this.setState({ error: errors });
+    // return isFormValid;
 
     if (form.userName.length === 0 || form.password.length === 0) {
       return false;
@@ -64,7 +74,7 @@ class Login extends Component {
   render() {
     const { loginData } = this.props;
     const { form } = this.state;
-
+    console.log("error", this.state.error);
     return (
       <div className="login-process">
         <BaseHeader />
@@ -90,6 +100,7 @@ class Login extends Component {
                     <img src={images.error} alt={"error"} />
                   )}
                 </div>
+                <span>{this.state.error.username}</span>
                 <div className="form-group">
                   <input
                     type="password"

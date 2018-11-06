@@ -20,6 +20,13 @@ class BaseHeader extends Component {
                 {Translations.mobile_sidebar_information.aboutus}
               </Link>
             </li>
+            {window.location.href.indexOf("register") === -1 ? (
+              <li>
+                <Link to={routes.REGISTER_ROUTE}>Register</Link>
+              </li>
+            ) : (
+              ""
+            )}
             <li>
               <Link to={routes.REGISTER_ROUTE}>
                 {Translations.register.register}
