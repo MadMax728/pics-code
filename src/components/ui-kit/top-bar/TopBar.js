@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 const TopBar = ({ items }) => {
   return (
@@ -20,7 +21,9 @@ const TopBar = ({ items }) => {
               <img src={images.tick} alt="tick" className="tick" />
             )}
             {items.private && (
-              <span className="profile-type">Private Profile</span>
+              <span className="profile-type">
+                {Translations.top_bar.private_profile}
+              </span>
             )}
 
             {items.settings && (

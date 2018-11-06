@@ -142,6 +142,9 @@ class HomeRoute extends Component {
     );
   };
 
+  handleInformation = () => {
+    return <Information handleModalShow={this.props.handleModalShow} />;
+  };
   render() {
     return (
       <div>
@@ -207,7 +210,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.CAMPAIGN_INFORMATION_ROUTE}
-            component={Information}
+            component={this.handleInformation}
           />
 
           <Route

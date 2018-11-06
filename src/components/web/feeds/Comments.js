@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { ThreeDots, RenderToolTips, HashTagUsername } from "../../common";
+import { Translations } from "../../../lib/translations";
 
 class Comments extends Component {
   constructor(props, context) {
@@ -30,7 +31,6 @@ class Comments extends Component {
   handleReportPost = () => {};
 
   handleDelete = e => {
-    console.log(e.target.id);
     const id = e.target.id;
     const comments = this.state.comments;
 
@@ -142,7 +142,7 @@ class Comments extends Component {
         {comments.length !== 0 && comments.map(this.renderComment)}
 
         <div className="view-more-comments">
-          <Link to={""}>View more comments</Link>
+          <Link to={""}>{Translations.view_more_comments}</Link>
         </div>
       </div>
     );

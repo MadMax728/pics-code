@@ -1,6 +1,8 @@
 {
   "app_name": "Picstagraph",
 
+  "offen": "In der Picstagraph-App offenen",
+
   "subscribe": "Subscribe",
 
   "subscribed": "Subscribed",
@@ -12,6 +14,26 @@
   "message": "Message",
 
   "upload_title_image": "Upload title image",
+
+  "view_more_comments": "View more comments",
+
+  "apply_campaign": "Apply for this campaign",
+
+  "messages_modal": {
+    "unknown": "Unknown",
+    "messages": "Messages",
+    "Companies": "Companies"
+  },
+  "modal_header": {
+    "cancle": "Cancle",
+    "back": "Back",
+    "preview": "Preview",
+    "continue": "Continue",
+    "create_campaign": "Create Campaign",
+    "upload_image": "Upload image",
+    "create_ad": "Create Ad",
+    "edit_profile_image": "Edit Profile Image"
+  },
 
   "notification": {
     "subscribed_to_your_profile": "Subscribed to your profile",
@@ -297,6 +319,10 @@
 
   "header": {
     "logout": "Logout"
+  },
+
+  "top_bar": {
+    "private_profile": "Private Profile"
   },
 
   "register": {

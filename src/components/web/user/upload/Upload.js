@@ -27,7 +27,7 @@ class Upload extends Component {
   }
 
   progressHandler = e => {
-    console.log("ghjdfjkhk");
+    console.log("progressHandler");
   };
 
   handleChangeField = event => {
