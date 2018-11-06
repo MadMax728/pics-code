@@ -18,7 +18,7 @@ class UploadModal extends Component {
   }
 
   handleUpload = image => {
-    this.setState({ form: { ...this.state.form, image: image } });
+    this.setState({ form: { ...this.state.form, image } });
   };
 
   handleSetState = (value, cd) => {

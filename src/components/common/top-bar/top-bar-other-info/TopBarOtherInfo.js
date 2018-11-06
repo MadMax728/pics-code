@@ -67,7 +67,8 @@ class TopBarOtherInfo extends Component {
 }
 
 TopBarOtherInfo.propTypes = {
-  match: propTypes.any
+  match: propTypes.any,
+  handleModalShow: propTypes.func
 };
 
 export default TopBarOtherInfo;

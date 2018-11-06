@@ -7,12 +7,13 @@ import { Translations } from "../../../../lib/translations";
 import { campaign_detail } from "../../../../mock-data";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { ThreeDots, RenderToolTips } from "../../../common";
+import PropTypes from "prop-types";
 
 class Information extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      campaign_detail: campaign_detail,
+      campaign_detail,
       ReportTips: [
         {
           name: "Report Post",
@@ -280,5 +281,9 @@ class Information extends Component {
     );
   }
 }
+
+Information.propTypes = {
+  handleModalShow: PropTypes.func
+};
 
 export default Information;
