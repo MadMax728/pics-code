@@ -166,6 +166,7 @@
       height: 35px;
       padding-top: 7px;
       margin-left: 5px;
+      min-width: 110px;
     }
   }
   .modal-body {
@@ -210,6 +211,8 @@
     .upload-form {
       border-right: 8px solid #333333;
       padding: 20px;
+      height: 73vh;
+      overflow: auto;
       .full-width-input-wrapper {
         width: 100%;
         text-align: center;
@@ -298,8 +301,7 @@
           border: 12px solid #fff;
           position: absolute;
           top: 0;
-          left: 0; // content: ""; // width: 70%; // height: 70%; // border-radius: 50%; // border: 12px solid #fff; // position: absolute; // top: 15%; // left: 15%;
-          // z-index: 1;
+          left: 0; // content: ""; // width: 70%; // height: 70%; // border-radius: 50%; // border: 12px solid #fff; // position: absolute; // top: 15%; // left: 15%; // z-index: 1;
         }
         > span {
           width: 50%;
@@ -356,8 +358,7 @@
         }
         &.blue {
           .progress-bar {
-            border-color: #049dff;
-            // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
+            border-color: #049dff; // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
           }
           .progress-left {
             .progress-bar {
