@@ -66,6 +66,10 @@ export default class Header extends Component {
     this.props.handleModalShow(modalType.messages);
   };
 
+  handleMessage = e => {
+    this.props.handleModalShow(modalType.messages, { id: e.target.id });
+  };
+
   render() {
     return (
       <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
@@ -132,7 +136,7 @@ export default class Header extends Component {
                     id="basic-nav-dropdown"
                     className={`menu_notifications`}
                   >
-                    <Notifications />
+                    <Notifications handleMessage={this.handleMessage} />
                   </NavDropdown>
 
                   <RouteNavItem

@@ -1,6 +1,25 @@
 {
   "app_name": "Picstagraph",
 
+  "subscribe": "Subscribe",
+
+  "subscribed": "Subscribed",
+
+  "like": "Like",
+
+  "like_you_too": "Like you too",
+
+  "message": "Message",
+
+  "upload_title_image": "Upload title image",
+
+  "notification": {
+    "subscribed_to_your_profile": "Subscribed to your profile",
+    "notification": "Notifications",
+    "like_you": "Like You",
+    "request": "Requests"
+  },
+
   "navigation": {
     "home": "Home",
     "profile": "Profile",
