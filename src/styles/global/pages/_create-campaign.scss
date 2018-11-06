@@ -34,11 +34,18 @@
   .modal-body {
     display: flex;
     height: 91%;
+    &.height100 {
+      height: 100%;
+    }
     .col-xs-12.no-padding {
       .col-xs-12.no-padding {
         height: 100%;
         & > div {
           height: 100%;
+          overflow: auto;
+          &:nth-child(2) {
+            // height: auto;
+          }
         }
       }
     }
