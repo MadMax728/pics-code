@@ -10,6 +10,9 @@ import {
 } from "../../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
+import { getUser } from "../../../../../actions/profile";
+import { submitLogin } from "../../../../../actions";
+import connect from "react-redux/es/connect/connect";
 
 const genderItems = [
   {
@@ -58,7 +61,8 @@ class EditProfile extends Component {
         profile_description: "",
         offer_tag: "",
         inquiry_tag: ""
-      }
+      },
+      error: {}
     };
   }
 
@@ -66,6 +70,56 @@ class EditProfile extends Component {
     this.setState({
       form: { ...this.state.form, location, address }
     });
+  };
+  formValid = () => {
+    let errors = {};
+    let isFormValid = true;
+    const { form } = this.state;
+
+    if (form.username.length === 0) {
+      errors["username"] = "username is required.";
+      isFormValid = false;
+    }
+    if (form.name_company.length === 0) {
+      errors["name_company"] = "Company is required.";
+      isFormValid = false;
+    }
+    if (form.location.length === 0) {
+      errors["location"] = "Location is required.";
+      isFormValid = false;
+    }
+    if (form.phone_number.length === 0) {
+      errors["phone_number"] = "Phone number is required.";
+      isFormValid = false;
+    }
+    if (form.email.length === 0) {
+      errors["email"] = "Email is required.";
+      isFormValid = false;
+    }
+    if (form.website.length === 0) {
+      errors["website"] = "Website is required.";
+      isFormValid = false;
+    }
+    if (form.profile_description.length === 0) {
+      errors["profile_description"] = "Profile description is required.";
+      isFormValid = false;
+    }
+    if (form.offer_tag.length === 0) {
+      errors["offer_tag"] = "Offer tag is required.";
+      isFormValid = false;
+    }
+    if (form.inquiry_tag.length === 0) {
+      errors["inquiry_tag"] = "Inquiry tag is required.";
+      isFormValid = false;
+    }
+    this.setState({ error: errors });
+    return isFormValid;
+
+    // if (form.userName.length === 0 || form.password.length === 0) {
+    //   return false;
+    // }
+
+    // return isFormValid;
   };
 
   handleChangeDOB = event => {
@@ -78,12 +132,15 @@ class EditProfile extends Component {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
+    this.formValid();
   };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
+    if (!this.formValid()) {
+      return false;
+    }
   };
 
   handleOnKeyDown = () => {};
@@ -136,6 +193,7 @@ class EditProfile extends Component {
                 ) : (
                   <img src={images.checked} alt={"checked"} />
                 )}
+                <span>{this.state.error.username}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="name">Name/Company</label>
@@ -146,6 +204,7 @@ class EditProfile extends Component {
                   name="name_company"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.name_company}</span>
               </div>
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">
@@ -220,6 +279,7 @@ class EditProfile extends Component {
                   name="category"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.category}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="location" className="margin-bottom-13">
@@ -240,6 +300,7 @@ class EditProfile extends Component {
                   name="phone_number"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.phone_number}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="email">Email</label>
@@ -250,6 +311,7 @@ class EditProfile extends Component {
                   name="email"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.email}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="website">Web site</label>
@@ -260,6 +322,7 @@ class EditProfile extends Component {
                   name="website"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.website}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="description">Profile description</label>
@@ -270,6 +333,7 @@ class EditProfile extends Component {
                   name="profile_description"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.profile_description}</span>
               </div>
             </div>
             <div className="form-subtitle">Personal interests</div>
@@ -283,6 +347,7 @@ class EditProfile extends Component {
                   name="offer_tag"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.offer_tag}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="inquiry-tag">Inquiry tag</label>
@@ -293,6 +358,7 @@ class EditProfile extends Component {
                   name="inquiry_tag"
                   onChange={this.handleChangeField}
                 />
+                <span>{this.state.error.inquiry_tag}</span>
               </div>
             </div>
             <SocialNetworks userId={"123"} isOwnerProfile />
@@ -308,9 +374,23 @@ class EditProfile extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  userDataByUsername: state.userDataByUsername
+});
+
+const mapDispatchToProps = {
+  getUser
+};
+
 EditProfile.propTypes = {
+  getUser: PropTypes.func,
+  userDataByUsername: PropTypes.object,
+  history: PropTypes.any,
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any
 };
 
-export default EditProfile;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(EditProfile);
