@@ -13,7 +13,7 @@ class Information extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      campaign_detail,
+      campaign_detail: campaign_detail,
       ReportTips: [
         {
           name: "Report Post",
