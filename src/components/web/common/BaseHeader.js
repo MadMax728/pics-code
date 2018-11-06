@@ -17,9 +17,13 @@ class BaseHeader extends Component {
             <li>
               <Link to={routes.ABOUTUS_ROUTE}>About Us</Link>
             </li>
-            <li>
-              <Link to={routes.REGISTER_ROUTE}>Register</Link>
-            </li>
+            {window.location.href.indexOf("register") === -1 ? (
+              <li>
+                <Link to={routes.REGISTER_ROUTE}>Register</Link>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </header>
