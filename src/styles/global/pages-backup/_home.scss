@@ -292,6 +292,9 @@
     background-color: $white_color;
     .normal_title {
       display: inline-block;
+      & ~ div {
+        display: inline-block;
+      }
     }
     a {
       padding-right: 10px;
