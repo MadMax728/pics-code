@@ -22,16 +22,13 @@ class BaseHeader extends Component {
             </li>
             {window.location.href.indexOf("register") === -1 ? (
               <li>
-                <Link to={routes.REGISTER_ROUTE}>Register</Link>
+                <Link to={routes.REGISTER_ROUTE}>
+                  {Translations.register.register}
+                </Link>
               </li>
             ) : (
               ""
             )}
-            <li>
-              <Link to={routes.REGISTER_ROUTE}>
-                {Translations.register.register}
-              </Link>
-            </li>
           </ul>
         </div>
       </header>
