@@ -47,11 +47,10 @@ class ResetMail extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-
     if (!this.formValid()) {
       return false;
     }
-    let data = {
+    const data = {
       email: this.state.form.email
     };
     this.props.submitResetPassword(data).then(res => {
@@ -75,7 +74,7 @@ class ResetMail extends Component {
                     type="email"
                     className="form-control"
                     id="email"
-                    placeholder="Email"
+                    placeholder={Translations.register.email}
                     name="email"
                     value={form.email ? form.email : ""}
                     onChange={this.handleChangeField}
@@ -88,7 +87,7 @@ class ResetMail extends Component {
                 </div>
                 <div className="form-group">
                   <button className="blue_button" onClick={this.handleSubmit}>
-                    Send
+                    {Translations.register.send}
                   </button>
                 </div>
               </form>

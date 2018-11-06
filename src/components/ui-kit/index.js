@@ -9,3 +9,4 @@ export { CustomBootstrapTable } from "./custom-bootstrap-table";
 export { RightSidebarStatistics } from "./right-sidebar-statistics";
 export { ImageCropper } from "./image-cropper";
 export { ToolTip } from "./tool-tip";
+export { PlaceAutoCompleteLocation } from "./place-auto-complete-location";

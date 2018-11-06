@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
-import { ImageCropper } from "../../../../ui-kit";
+import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 
 class StepOne extends Component {
   constructor(props) {
@@ -13,11 +13,17 @@ class StepOne extends Component {
   };
 
   render() {
-    const { form, handleChangeField, uploadFile, handleEditImage } = this.props;
+    const {
+      form,
+      handleChangeField,
+      uploadFile,
+      handleEditImage,
+      handleLocation
+    } = this.props;
     console.log("form", this.props.form);
 
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
           <div className="no-padding profile_image">
             <img
@@ -42,11 +48,10 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input
-                type="text"
-                name="location"
-                value={this.props.form.location}
-                onChange={handleChangeField}
+              <PlaceAutoCompleteLocation
+                className=""
+                handleLocation={handleLocation}
+                value={this.props.form.address}
               />
             </div>
             <div className="form-group">
@@ -142,7 +147,6 @@ class StepOne extends Component {
               <label htmlFor="Insert_link">Insert link</label>
               <input
                 type="text"
-                insert_link
                 value={this.props.form.insert_link}
                 name="insert_link"
                 onChange={handleChangeField}
@@ -170,7 +174,8 @@ StepOne.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
   uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired
+  handleEditImage: propTypes.func.isRequired,
+  handleLocation: propTypes.func.isRequired
 };
 
 export default StepOne;

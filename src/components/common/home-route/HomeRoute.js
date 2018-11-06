@@ -49,7 +49,11 @@ import {
   Feedback,
   ReportedContent,
   DeleteAccount,
-  LawEnforcementAgency
+  LawEnforcementAgency,
+  AboutUs,
+  NetzDg,
+  Cookies,
+  LegalNotice
 } from "../../web/information";
 import { PageNotFound } from "../../web/page-not-found";
 
@@ -371,11 +375,30 @@ class HomeRoute extends Component {
             path={routes.SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE}
             component={LawEnforcementAgency}
           />
+
+          <Route exact path={routes.ABOUTUS_ROUTE} component={AboutUs} />
+          <Route exact path={routes.SUPPORT_ROUTE} component={Support} />
+          <Route
+            exact
+            path={routes.DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}
+            component={DataProtectionAndPrivacyPolicy}
+          />
+          <Route
+            exact
+            path={routes.LEGAL_NOTICE_ROUTE}
+            component={LegalNotice}
+          />
+          <Route
+            exact
+            path={routes.TERMS_CONDITIONS_ROUTE}
+            component={GeneralTermsAndConditions}
+          />
+          <Route exact path={routes.NETZDG_ROUTE} component={NetzDg} />
+          <Route exact path={routes.COOKIES_ROUTE} component={Cookies} />
+
           {window.location.pathname.indexOf("back-office") === -1 && (
             <Route exact path="/*" render={this.handlePageNotFound} />
           )}
-
-          {/* -------- Information Routes --------- */}
         </Switch>
       </div>
     );

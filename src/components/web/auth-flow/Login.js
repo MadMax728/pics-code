@@ -31,20 +31,20 @@ class Login extends Component {
    * formValid
    */
   formValid = () => {
-    let errors = {};
-    let isFormValid = true;
+    // let errors = {};
+    // let isFormValid = true;
     const { form } = this.state;
-
-    if (!form["username"]) {
-      errors["username"] = "username is required.";
-      isFormValid = false;
-    }
-    this.setState({ error: errors });
-    return isFormValid;
-
-    // if (form.userName.length === 0 || form.password.length === 0) {
-    //   return false;
+    //
+    // if (!form["username"]) {
+    //   errors["username"] = "username is required.";
+    //   isFormValid = false;
     // }
+    // this.setState({ error: errors });
+    // return isFormValid;
+
+    if (form.userName.length === 0 || form.password.length === 0) {
+      return false;
+    }
 
     return true;
   };

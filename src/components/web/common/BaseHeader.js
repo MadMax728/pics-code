@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
+import { Translations } from "../../../lib/translations";
 
 class BaseHeader extends Component {
   render() {
@@ -15,7 +16,9 @@ class BaseHeader extends Component {
           </div>
           <ul className="login-header-menu">
             <li>
-              <Link to={routes.ABOUTUS_ROUTE}>About Us</Link>
+              <Link to={routes.ABOUTUS_ROUTE}>
+                {Translations.mobile_sidebar_information.aboutus}
+              </Link>
             </li>
             {window.location.href.indexOf("register") === -1 ? (
               <li>
@@ -24,6 +27,11 @@ class BaseHeader extends Component {
             ) : (
               ""
             )}
+            <li>
+              <Link to={routes.REGISTER_ROUTE}>
+                {Translations.register.register}
+              </Link>
+            </li>
           </ul>
         </div>
       </header>

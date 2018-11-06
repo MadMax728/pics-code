@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { users_list } from "../../../../mock-data";
 import propTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 class Community extends Component {
   constructor(props, context) {
@@ -40,18 +41,25 @@ class Community extends Component {
         <div className="normal_title padding-15">Community</div>
         <div className="community">
           {users_list.map((user, index) => {
+            const profile_route = user.isOwner
+              ? `/news-feed`
+              : `/news-feed/${user.id}`;
             return (
               <div className="community_wrapper" key={index}>
                 <div className="community-user-image">
-                  <img
-                    src={user.image}
-                    alt="campaign"
-                    className="img-circle img-responsive"
-                  />
+                  <Link to={profile_route}>
+                    <img
+                      src={user.image}
+                      alt="campaign"
+                      className="img-circle img-responsive"
+                    />
+                  </Link>
                 </div>
                 <div className="community-user-name">
-                  <div className="normal_title">{user.user_name}</div>
-                  <div className="secondary_title">{user.name}</div>
+                  <Link to={profile_route}>
+                    <div className="normal_title">{user.user_name}</div>
+                    <div className="secondary_title">{user.name}</div>
+                  </Link>
                 </div>
                 {user.subscribed ? (
                   <div className="community-subscribe">

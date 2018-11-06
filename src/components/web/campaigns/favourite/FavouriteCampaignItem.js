@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const FavouriteCampaignItem = ({ campaign }) => {
   const profile_route = campaign.user.isOwner
     ? `/news-feed`
-    : `/news-feed/${campaign.id}`;
+    : `/news-feed/${campaign.user.id}`;
 
   return (
     <div className="campaign_wrapper">

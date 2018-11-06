@@ -23,7 +23,8 @@ class CreateAds extends Component {
       handleSubmit,
       handleDate,
       uploadFile,
-      handleEditImage
+      handleEditImage,
+      handleLocation
     } = this.props;
 
     return (
@@ -34,6 +35,7 @@ class CreateAds extends Component {
             uploadFile={uploadFile}
             form={form}
             handleEditImage={handleEditImage}
+            handleLocation={handleLocation}
           />
         )}
         {stepIndex === 1 && (
@@ -80,7 +82,8 @@ CreateAds.propTypes = {
   form: propTypes.any.isRequired,
   handleDate: propTypes.func.isRequired,
   uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired
+  handleEditImage: propTypes.func.isRequired,
+  handleLocation: propTypes.func.isRequired
 };
 
 export default CreateAds;

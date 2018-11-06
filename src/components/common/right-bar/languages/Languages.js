@@ -1,11 +1,22 @@
 import React from "react";
+import { Translations } from "../../../../lib/translations";
+
+const Language = [
+  {
+    name: Translations.languages.german
+  },
+  {
+    name: Translations.languages.english
+  }
+];
 
 const Languages = () => {
   return (
     <div className="right_language padding-15">
       <div className="normal_title">Language:</div>
-      <a href="/">German</a>
-      <a href="/">English</a>
+      {Language.map((lang, index) => {
+        return <div key={index}>{lang.name}</div>;
+      })}
     </div>
   );
 };

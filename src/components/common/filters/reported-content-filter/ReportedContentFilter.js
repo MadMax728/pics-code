@@ -65,11 +65,11 @@ class ReportedContentFilter extends Component {
               className="black_button"
               onClick={this.handleResetFilterClick}
             >
-              Reset filters
+              {Translations.filter.reset_filter}
             </button>
           ) : (
             <button className="black_button" onClick={this.handleApplyClick}>
-              Apply
+              {Translations.filter.apply}
             </button>
           )}
         </div>

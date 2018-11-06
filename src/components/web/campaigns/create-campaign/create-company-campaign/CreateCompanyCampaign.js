@@ -31,7 +31,8 @@ class CreateCompanyCampaign extends Component {
       handleContentChange,
       contentText,
       uploadFile,
-      handleEditImage
+      handleEditImage,
+      handleLocation
     } = this.props;
 
     return (
@@ -57,6 +58,7 @@ class CreateCompanyCampaign extends Component {
               form={form}
               isFor={isFor}
               handleEditImage={handleEditImage}
+              handleLocation={handleLocation}
             />
           ))}
         {!isPreview &&
@@ -120,7 +122,8 @@ CreateCompanyCampaign.propTypes = {
   handleContentChange: propTypes.func.isRequired,
   contentText: propTypes.any.isRequired,
   uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired
+  handleEditImage: propTypes.func.isRequired,
+  handleLocation: propTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;
