@@ -42,7 +42,7 @@ class StepOne extends Component {
               <label htmlFor="title">Add title</label>
               <input
                 type="text"
-                value={this.props.form.title}
+                value={this.props.form.title ? this.props.form.title : ""}
                 name="title"
                 onChange={handleChangeField}
               />

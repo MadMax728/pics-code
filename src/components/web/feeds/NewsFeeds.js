@@ -37,10 +37,6 @@ class NewsFeeds extends Component {
     this.setState({ campaigns });
   };
 
-  handleMessage = e => {
-    this.props.handleModalShow(modalType.messages, { id: e.target.id });
-  };
-
   addComment = (campaignId, comment) => {
     const campaigns = this.state.campaigns;
     const commentData = {

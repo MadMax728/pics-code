@@ -38,10 +38,6 @@ class Feed extends Component {
     this.props.handleFavorite(e);
   };
 
-  handleMessage = e => {
-    this.props.handleMessage(e);
-  };
-
   handleOnKeyDown = () => {};
 
   handleCommentsSections = () => {
@@ -98,25 +94,14 @@ class Feed extends Component {
         <div className="feed_footer padding-15">
           <div className="messages" role="article">
             <span className="count">{campaign.msg_count}</span>
-            {campaign.user.isCreator ? (
-              <img
-                src={images.feed_msg}
-                alt="creator-message"
-                onClick={this.handleMessage}
-                role="presentation"
-                id={campaign.user.id}
-                onKeyDown={this.handleOnKeyDown}
-              />
-            ) : (
-              <img
-                src={images.comment}
-                alt="company-comments"
-                onClick={this.handleCommentsSections}
-                role="presentation"
-                id={campaign.user.id}
-                onKeyDown={this.handleOnKeyDown}
-              />
-            )}
+            <img
+              src={images.comment}
+              alt="company-comments"
+              onClick={this.handleCommentsSections}
+              role="presentation"
+              id={campaign.user.id}
+              onKeyDown={this.handleOnKeyDown}
+            />
           </div>
           <div className="likes" role="article">
             <span className="count">{campaign.like_count}</span>
@@ -170,7 +155,6 @@ class Feed extends Component {
 
 Feed.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
-  handleMessage: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
   campaign: PropTypes.shape({
