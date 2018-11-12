@@ -12,9 +12,9 @@ class Preview extends Component {
     return (
       <div className="col-xs-12 no-padding">
         <div className="padding-l-10 middle-section width-100">
+          <div className="info-main-title">Title</div>
           <div className="information-wrapper">
             <div className="info-inner-wrapper">
-              <div className="info-main-title">Title</div>
               <div className="text">
                 This text is an example.This text is an example.This text is an
                 example.This text is an example.This text is an example.This
