@@ -3,6 +3,15 @@
   &.editor-modal {
     & > .modal-dialog {
       max-width: 915px;
+      .rdw-editor-wrapper {
+        .rdw-editor-main {
+          box-sizing: border-box;
+          border: 1px solid #f1f1f1;
+          border-top: 0px;
+          height: 313px;
+          padding: 0 15px;
+        }
+      }
     }
   }
   .modal-dialog {
@@ -40,19 +49,19 @@
     // &.height100 {
     //   height: 100%;
     // }
-    // .col-xs-12.no-padding {
-    //   .col-xs-12.no-padding {
-    //     // height: 100%;
-    //     & > div {
-    //       // height: 100%;
-    //       // overflow: auto;
-    //       //reverting back
-    //       // &:nth-child(2) {
-    //       //   // height: auto;
-    //       // }
-    //     }
-    //   }
-    // }
+    .col-xs-12.no-padding {
+      .col-xs-12.no-padding {
+        height: 100%;
+        & > div {
+          // height: 100%;
+          // overflow: auto;
+          //reverting back
+          // &:nth-child(2) {
+          //   // height: auto;
+          // }
+        }
+      }
+    }
     .right-side {
       background-color: #333333;
       .create-campaign-crop-pic {
@@ -65,7 +74,7 @@
         }
         .range-wrapr {
           background-color: white;
-          padding-bottom: 10px;
+          padding-bottom: 8px;
         }
       }
     }
@@ -124,12 +133,14 @@
     }
     .upload-form {
       //reverting back
-      // height: 100%;
+      height: 100%;
+      // height: calc(100vh - 125px);
       background-color: white;
       overflow: auto;
+
       // height: -webkit-fill-available;
       &.height100 {
-        height: 100%;
+        // height: 100%;
         background-color: white;
         & ~ div.col-sm-6 {
           height: 100%;
@@ -497,7 +508,8 @@
               order: 5;
             }
           }
-          .editor-class.rdw-editor-main {
+          .editor-class.rdw-editor-main,
+          .rdw-editor-main {
             border: 1px solid #333333;
             border-top: 0px;
             height: 318px;

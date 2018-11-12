@@ -3,7 +3,7 @@
   &.create-campaign-modal {
     .modal-body {
       & > div {
-        height: 100%;
+        height: auto;
         & > div.col-sm-6.no-padding:nth-child(2) {
           img.widthHeightAuto {
             // height: 378px;
