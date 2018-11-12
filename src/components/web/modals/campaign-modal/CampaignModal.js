@@ -106,12 +106,12 @@ class CampaignModal extends Component {
   };
 
   componentDidMount() {
-    this.setState({ stepIndex: 0 });
+    this.setState({ stepIndex: 0, isPreview: false });
   }
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 0 });
+      this.setState({ stepIndex: 0, isPreview: false });
     }
   }
   handleResoreState = () => {
