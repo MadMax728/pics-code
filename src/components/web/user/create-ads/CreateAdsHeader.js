@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
+import { Translations } from "../../../../lib/translations";
 
 class CreateAdsHeader extends Component {
   constructor(props) {
@@ -32,19 +33,21 @@ class CreateAdsHeader extends Component {
     const { stepIndex } = this.props;
     return (
       <div className="row">
-        <div className="col-sm-6 modal-title">Create Ad</div>
+        <div className="col-sm-6 modal-title">
+          {Translations.modal_header.create_ad}
+        </div>
         <div className="col-sm-6 text-right">
           <button className="black_button" onClick={this.handleCancle}>
-            Cancel
+            {Translations.modal_header.cancle}
           </button>
           {stepIndex !== 0 && (
             <button className="black_button" onClick={this.handleBack}>
-              Back
+              {Translations.modal_header.back}
             </button>
           )}
           {stepIndex <= 3 && (
             <button className="black_button" onClick={this.handleContinue}>
-              Continue
+              {Translations.modal_header.continue}
             </button>
           )}
         </div>

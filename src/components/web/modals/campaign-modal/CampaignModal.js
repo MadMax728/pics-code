@@ -120,8 +120,6 @@ class CampaignModal extends Component {
     });
   };
   handlePrivewOpen = () => {
-    console.log("ahikhvjksn");
-
     this.setState({ isPreview: true });
   };
 

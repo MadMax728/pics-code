@@ -4,9 +4,13 @@ import Tab from "react-bootstrap/lib/Tab";
 import { LikeYou } from "./like-you";
 import { Requests } from "./requests";
 import { NotificationsList } from "./notifications-list";
+import { Translations } from "../../../../lib/translations";
+import PropTypes from "prop-types";
 
 class Notifications extends Component {
   render() {
+    const { handleMessage } = this.props;
+
     return (
       <div className="notification-mega-wrapper">
         {" "}
@@ -16,7 +20,11 @@ class Notifications extends Component {
           <Tab
             tabClassName="tab-header"
             eventKey={1}
-            title={<p className="tab-title">{`Notifications`}</p>}
+            title={
+              <p className="tab-title">
+                {Translations.notification.notification}
+              </p>
+            }
           >
             <NotificationsList />
           </Tab>
@@ -24,15 +32,19 @@ class Notifications extends Component {
           <Tab
             tabClassName="tab-header"
             eventKey={2}
-            title={<p className="tab-title">{`Like you`}</p>}
+            title={
+              <p className="tab-title">{Translations.notification.like_you}</p>
+            }
           >
-            <LikeYou />
+            <LikeYou handleMessage={handleMessage} />
           </Tab>
           {/* for Requests tab */}
           <Tab
             tabClassName="tab-header"
             eventKey={3}
-            title={<p className="tab-title">{`Requests`}</p>}
+            title={
+              <p className="tab-title">{Translations.notification.request}</p>
+            }
           >
             <Requests />
           </Tab>
@@ -41,5 +53,9 @@ class Notifications extends Component {
     );
   }
 }
+
+Notifications.propTypes = {
+  handleMessage: PropTypes.func.isRequired
+};
 
 export default Notifications;

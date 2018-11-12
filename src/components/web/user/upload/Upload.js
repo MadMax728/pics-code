@@ -20,14 +20,14 @@ class Upload extends Component {
 
     xhr.addEventListener("progress", function(e) {
       if (e.lengthComputable) {
-        let percentComplete = e.loaded / e.total;
+        const percentComplete = e.loaded / e.total;
         console.log(percentComplete);
       }
     });
   }
 
   progressHandler = e => {
-    console.log("ghjdfjkhk");
+    console.log("progressHandler");
   };
 
   handleChangeField = event => {

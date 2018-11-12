@@ -11,7 +11,8 @@ export {
   saved_campaigns_list,
   setting_campaign_list,
   campaignStatistics,
-  backoffice_campaign_list
+  backoffice_campaign_list,
+  campaign_detail
 } from "./campaign-list";
 export {
   setting_ads_list,
