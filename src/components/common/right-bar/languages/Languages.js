@@ -15,7 +15,11 @@ const Languages = () => {
     <div className="right_language padding-15">
       <div className="normal_title">Language:</div>
       {Language.map((lang, index) => {
-        return <div key={index}>{lang.name}</div>;
+        return (
+          <div key={index} className={"active"}>
+            {lang.name}
+          </div>
+        );
       })}
     </div>
   );

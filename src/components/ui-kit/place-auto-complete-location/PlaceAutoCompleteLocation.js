@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 
-class PlaceAutoComplete extends Component {
+class PlaceAutoCompleteLocation extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -75,10 +75,10 @@ class PlaceAutoComplete extends Component {
   }
 }
 
-PlaceAutoComplete.propTypes = {
+PlaceAutoCompleteLocation.propTypes = {
   handleLocation: propTypes.func.isRequired,
   className: propTypes.string.isRequired,
   value: propTypes.any
 };
 
-export default PlaceAutoComplete;
+export default PlaceAutoCompleteLocation;

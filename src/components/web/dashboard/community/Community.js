@@ -12,8 +12,6 @@ class Community extends Component {
   }
 
   handleSubscribed = e => {
-    console.log("dasjbdhja");
-
     const users_list = this.state.users_list;
     users_list.filter(
       user =>

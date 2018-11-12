@@ -27,6 +27,13 @@ class NewsFeeds extends Component {
         campaign.id === parseInt(id) &&
         (campaign.isFavorite = !campaign.isFavorite)
     );
+    campaigns.filter(
+      campaign =>
+        campaign.id === parseInt(id) &&
+        (campaign.like_count = campaign.isFavorite
+          ? campaign.like_count + 1
+          : campaign.like_count - 1)
+    );
     this.setState({ campaigns });
   };
 

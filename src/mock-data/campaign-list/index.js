@@ -10,3 +10,4 @@ export { user_profile_campaigns_list } from "./user-profile";
 export { saved_campaigns_list } from "./saved";
 export { setting_campaign_list, campaignStatistics } from "./setting-campaign";
 export { backoffice_campaign_list } from "./backoffice-campaign";
+export { campaign_detail } from "./campaign-detail";
