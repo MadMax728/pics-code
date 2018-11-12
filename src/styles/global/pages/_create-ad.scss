@@ -147,10 +147,11 @@
   }
   .modal-dialog {
     width: 915px;
-    height: 80vh;
-    min-height: 80vh;
-    margin: 10vh auto;
-    background-color: white;
+    // reverting back
+    // height: 80vh;
+    // min-height: 80vh;
+    // margin: 10vh auto;
+    // background-color: white;
   }
   .modal-content {
     float: left;
@@ -211,7 +212,9 @@
     .upload-form {
       border-right: 8px solid #333333;
       padding: 20px;
-      height: 73vh;
+      // reverting back
+      // height: 73vh;
+      // height: -webkit-fill-available;
       overflow: auto;
       .full-width-input-wrapper {
         width: 100%;
@@ -358,7 +361,8 @@
         }
         &.blue {
           .progress-bar {
-            border-color: #049dff; // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
+            border-color: #049dff;
+            // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
           }
           .progress-left {
             .progress-bar {
