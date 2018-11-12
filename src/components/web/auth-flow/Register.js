@@ -40,15 +40,15 @@ class Register extends Component {
     let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (form.username.length === 0) {
-      errors["username"] = "username is required.";
+      errors["username"] = "Username is required.";
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors["password"] = "password is required.";
+      errors["password"] = "Password is required.";
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors["email"] = "email is required.";
+      errors["email"] = "Email is required.";
       isFormValid = false;
     }
     let isValidemail = emailRegex.test(form.email);
@@ -57,15 +57,15 @@ class Register extends Component {
       errors["email"] = "Email ID should be valid.";
     }
     if (form.password.length === 0) {
-      errors["repeat_password"] = "password is required.";
+      errors["repeat_password"] = "Password is required.";
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors["password"] = "password is required.";
+      errors["password"] = "Password is required.";
       isFormValid = false;
     }
     if (form.password !== form.repeat_password) {
-      errors["repeat_password"] = "password is not matching.";
+      errors["repeat_password"] = "Password is not matching.";
       isFormValid = false;
     }
 
@@ -106,6 +106,7 @@ class Register extends Component {
     };
 
     this.props.submitRegister(data).then(() => {
+      debugger;
       Auth.logoutUser();
       let errors = {};
       if (
