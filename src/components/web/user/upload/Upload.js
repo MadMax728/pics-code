@@ -15,40 +15,24 @@ class Upload extends Component {
     };
   }
 
-  componentDidMount() {
-    const xhr = new XMLHttpRequest();
-
-    xhr.addEventListener("progress", function(e) {
-      if (e.lengthComputable) {
-        const percentComplete = e.loaded / e.total;
-        console.log(percentComplete);
-      }
-    });
-  }
-
-  progressHandler = e => {
-    console.log("progressHandler");
-  };
-
   handleChangeField = event => {
     this.props.handleChangeField(event);
   };
 
   handleUpload = e => {
-    console.log(e.target);
-
     const reader = new FileReader();
     const file = e.target.files[0];
-
-    console.log(e);
-
-    console.log(file);
 
     const currentThis = this;
     reader.readAsDataURL(file);
     reader.onloadend = function() {
       currentThis.props.handleUpload(reader.result);
     };
+  };
+
+  progressHandler = event => {
+    // var percent = (event.loaded / event.total) * 100;
+    console.log(event.loaded);
   };
 
   render() {
