@@ -119,8 +119,15 @@
     }
     .upload-form {
       height: 100%;
+      background-color: white;
+      overflow: auto;
       &.height100 {
         height: 100%;
+        background-color: white;
+        & ~ div.col-sm-6 {
+          height: 100%;
+          background-color: white;
+        }
       }
       .meter {
         height: 40px;

@@ -3,9 +3,11 @@
   &.create-campaign-modal {
     .modal-body {
       & > div {
+        height: 100%;
         & > div.col-sm-6.no-padding:nth-child(2) {
           img.widthHeightAuto {
-            height: 378px;
+            // height: 378px;
+            height: calc(100% - 65px);
             width: 100%;
           }
         }
@@ -14,6 +16,10 @@
     .modal-body {
       .box {
         width: 100%;
+        max-height: calc(100% - 65px);
+        & ~ .add-wrapper {
+          height: 65px;
+        }
       }
     }
   }
