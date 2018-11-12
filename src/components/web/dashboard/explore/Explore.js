@@ -11,6 +11,8 @@ const Explore = (handleModalShow, handleModalInfoShow) => {
         campaigns={explore_campaigns_list}
         handleModalShow={handleModalShow}
         handleModalInfoShow={handleModalInfoShow}
+        isDescription
+        isInformation={false}
       />
     </div>
   );

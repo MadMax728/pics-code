@@ -11,6 +11,8 @@ const Participants = (handleModalShow, handleModalInfoShow) => {
         campaigns={participants_campaigns_list}
         handleModalShow={handleModalShow}
         handleModalInfoShow={handleModalInfoShow}
+        isDescription
+        isInformation={false}
       />
     </div>
   );

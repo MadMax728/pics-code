@@ -13,6 +13,8 @@ class Participant extends Component {
           campaigns={participants_campaigns_list}
           handleModalShow={handleModalShow}
           handleModalInfoShow={handleModalInfoShow}
+          isDescription
+          isInformation={false}
         />
       </div>
     );

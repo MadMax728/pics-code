@@ -22,6 +22,8 @@ class Landing extends Component {
           campaigns={campaigns}
           handleModalInfoShow={handleModalInfoShow}
           handleModalShow={handleModalShow}
+          isDescription
+          isInformation={false}
         />
       </div>
     );

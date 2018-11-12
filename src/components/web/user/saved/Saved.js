@@ -12,6 +12,8 @@ class Saved extends Component {
           campaigns={saved_campaigns_list}
           handleModalShow={handleModalShow}
           handleModalInfoShow={handleModalInfoShow}
+          isDescription
+          isInformation={false}
         />
       </div>
     );

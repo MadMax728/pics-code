@@ -61,7 +61,9 @@ class Feed extends Component {
       campaign,
       handleModalInfoShow,
       handleFavorite,
-      addComment
+      addComment,
+      isDescription,
+      isInformation
     } = this.props;
     const { isComments } = this.state;
     return (
@@ -70,6 +72,8 @@ class Feed extends Component {
           campaign={campaign}
           handleModalInfoShow={handleModalInfoShow}
           handleFavorite={handleFavorite}
+          isInformation={isInformation}
+          isDescription={isDescription}
         />
         <div className="feed_content">
           {campaign &&
@@ -78,19 +82,85 @@ class Feed extends Component {
                 <div className="feed_image">
                   <div className="embed-responsive embed-responsive-16by9">
                     <div className="img-responsive embed-responsive-item">
-                      <img src={campaign.image} alt="altmage" />
+                      <img
+                        src={campaign.image}
+                        alt="altmage"
+                        className="img-responsive"
+                      />
                     </div>
                   </div>
                 </div>
               </Link>
             )}
           {campaign &&
+            isDescription &&
             campaign.desc && (
               <div className="feed_description padding-15">
                 <span className="secondary_title">{campaign.desc}</span>
               </div>
             )}
         </div>
+        {campaign &&
+          isInformation && (
+            <div className="feed_description padding-10">
+              <div className="normal_title">{campaign.title}</div>
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">Start: </span>
+                  <span className="secondary_title">{campaign.title}</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Procedure: </span>
+                  <span className="secondary_title">{campaign.procedure}</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Target group: </span>
+                  <span className="secondary_title">
+                    {campaign.target_group}
+                  </span>
+                </div>
+              </div>
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">End: </span>
+                  <span className="secondary_title">{campaign.end}</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Type: </span>
+                  <span className="secondary_title">{campaign.type}</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Applications: </span>
+                  <span className="secondary_title">
+                    {campaign.applications}
+                  </span>
+                </div>
+              </div>
+              <hr />
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">Offer: </span>
+                  <span className="secondary_title">{campaign.offer}</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Inquiry: </span>
+                  <span className="secondary_title">{campaign.inquiry}</span>
+                </div>
+              </div>
+              <div className="col-sm-6 no-padding">
+                <div className="info_wrapper">
+                  <span className="normal_title">Offer Tag: </span>
+                  <span className="secondary_title">{campaign.offer_tag}</span>
+                </div>
+                <div className="info_wrapper">
+                  <span className="normal_title">Inquiry Tag: </span>
+                  <span className="secondary_title">
+                    {campaign.inquiry_tag}
+                  </span>
+                </div>
+              </div>
+            </div>
+          )}
         <div className="feed_footer padding-15">
           <div className="messages" role="article">
             <span className="count">{campaign.msg_count}</span>
@@ -157,6 +227,8 @@ Feed.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
   addComment: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
+  isDescription: PropTypes.bool.isRequired,
+  isInformation: PropTypes.bool.isRequired,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,

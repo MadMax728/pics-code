@@ -155,6 +155,24 @@ class HomeRoute extends Component {
     );
   };
 
+  handleCompany = () => {
+    return (
+      <Company
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
+  handleCreator = () => {
+    return (
+      <Creator
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
   render() {
     return (
       <div>
@@ -206,9 +224,17 @@ class HomeRoute extends Component {
             component={this.handleLanding}
           />
 
-          <Route path={routes.COMPANY_ROUTE} exact component={Company} />
+          <Route
+            path={routes.COMPANY_ROUTE}
+            exact
+            component={this.handleCompany}
+          />
 
-          <Route path={routes.CREATOR_ROUTE} exact component={Creator} />
+          <Route
+            path={routes.CREATOR_ROUTE}
+            exact
+            component={this.handleCreator}
+          />
 
           <Route
             exact

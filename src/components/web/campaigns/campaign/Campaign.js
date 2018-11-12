@@ -13,6 +13,8 @@ class Campaign extends Component {
           campaigns={campaigns_list}
           handleModalShow={handleModalShow}
           handleModalInfoShow={handleModalInfoShow}
+          isDescription
+          isInformation={false}
         />
       </div>
     );

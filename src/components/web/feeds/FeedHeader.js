@@ -16,7 +16,7 @@ class FeedHeader extends Component {
   };
 
   render() {
-    const { campaign, handleFavorite } = this.props;
+    const { campaign, isDescription, isInformation } = this.props;
     const profile_route = campaign.user.isOwner
       ? `/news-feed`
       : `/news-feed/${campaign.id}`;
@@ -50,7 +50,14 @@ class FeedHeader extends Component {
           <div className="grey_title">{campaign.category}</div>
         </div>
 
-        <div className="like_wrapper" role="article">
+        <div
+          className={
+            !isDescription && isInformation
+              ? "col-sm-2 col-xs-2 like_wrapper"
+              : "like_wrapper"
+          }
+          role="article"
+        >
           {campaign.isFavorite ? (
             <img
               src={images.blue_heart}
@@ -80,6 +87,8 @@ class FeedHeader extends Component {
 
 FeedHeader.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
+  isDescription: PropTypes.bool.isRequired,
+  isInformation: PropTypes.bool.isRequired,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,

@@ -18,6 +18,8 @@ class UserProfile extends Component {
           campaigns={user_profile_campaigns_list}
           handleModalShow={handleModalShow}
           handleModalInfoShow={handleModalInfoShow}
+          isDescription
+          isInformation={false}
         />
       </div>
     );

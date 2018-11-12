@@ -12,6 +12,8 @@ class NewsFeed extends Component {
           campaigns={news_feed_campaigns_list}
           handleModalShow={handleModalShow}
           handleModalInfoShow={handleModalInfoShow}
+          isDescription
+          isInformation={false}
         />
       </div>
     );
