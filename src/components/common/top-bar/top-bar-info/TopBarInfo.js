@@ -10,6 +10,10 @@ class TopBarInfo extends Component {
     return <TopBarOwnerInfo handleModalShow={this.props.handleModalShow} />;
   };
 
+  TopBarOtherInfo = () => {
+    return <TopBarOtherInfo handleModalShow={this.props.handleModalShow} />;
+  };
+
   render() {
     return (
       <div>
@@ -38,18 +42,18 @@ class TopBarInfo extends Component {
         <Route
           exact
           path={routes.OTHER_NEWS_FEED_ROUTE}
-          component={TopBarOtherInfo}
+          component={this.TopBarOtherInfo}
         />
         <Route
           exact
           path={routes.OTHER_ABOUT_ROUTE}
-          component={TopBarOtherInfo}
+          component={this.TopBarOtherInfo}
         />
 
         <Route
           exact
           path={routes.OTHER_SAVED_ROUTE}
-          component={TopBarOtherInfo}
+          component={this.TopBarOtherInfo}
         />
       </div>
     );

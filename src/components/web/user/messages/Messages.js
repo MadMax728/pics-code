@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import propTypes from "prop-types";
 import { messages } from "../../../../mock-data";
+import { Translations } from "../../../../lib/translations";
 
 class Messages extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: "Messages",
+      title: Translations.messages_modal.messages,
       propsMsg: messages,
       messages,
       activeIndex: "1",
@@ -89,7 +90,7 @@ class Messages extends Component {
             >
               <img src={images.grey_person} alt={"grey_person2"} />
               <br />
-              Unknown
+              {Translations.messages_modal.unknown}
             </div>
             <div
               role="button"
@@ -106,7 +107,7 @@ class Messages extends Component {
             >
               <img src={images.grey_person} alt={"gray_person3"} />
               <br />
-              Like you
+              {Translations.like_you}
             </div>
             <div
               role="button"
@@ -123,7 +124,7 @@ class Messages extends Component {
             >
               <img src={images.grey_person} alt={"grey_person4"} />
               <br />
-              Companies
+              {Translations.messages_modal.companies}
             </div>
           </div>
           <div className="user-chat-wrapper">
@@ -156,7 +157,7 @@ class Messages extends Component {
               <img src={images.image} alt={"image1"} />
             </div>
             <div className="username-wrapper">
-              <span className="username">User name</span>
+              <span className="username">{Translations.register.username}</span>
               <br />
               <span className="name">{chatData[0].userName}</span>
             </div>

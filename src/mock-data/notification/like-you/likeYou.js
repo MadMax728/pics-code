@@ -3,50 +3,85 @@ import * as images from "../../../lib/constants/images";
 export const likeYou_list = [
   {
     isMessage: false,
-    isLikeToo: true,
-    username: "sagar",
+    id: 1,
+    isLike: true,
+    user: {
+      isLikeToo: false,
+      username: "sagar",
+      userId: 1
+    },
     date: "01.01.2000",
     image: images.pic_1
   },
   {
     isMessage: true,
-    isLikeToo: false,
-    username: "vaghela",
+    id: 2,
+    isLike: false,
+    user: {
+      isLikeToo: true,
+      username: "sagar",
+      userId: 1
+    },
     date: "01.01.2000",
     image: images.pic_2
   },
   {
     isMessage: false,
-    isLikeToo: true,
-    username: "santoh",
+    id: 3,
+    isLike: true,
+    user: {
+      isLikeToo: false,
+      username: "sagar",
+      userId: 1
+    },
     date: "01.01.2000",
     image: images.pic_2
   },
   {
     isMessage: true,
-    isLikeToo: false,
-    username: "shinde",
+    id: 4,
+    isLike: false,
+    user: {
+      isLikeToo: true,
+      username: "sagar",
+      userId: 1
+    },
     date: "01.01.2000",
     image: images.pic_1
   },
   {
     isMessage: true,
-    isLikeToo: false,
-    username: "amit",
+    id: 5,
+    isLike: false,
+    user: {
+      isLikeToo: true,
+      username: "sagar",
+      userId: 1
+    },
     date: "01.01.2000",
     image: images.pic_2
   },
   {
     isMessage: false,
-    isLikeToo: true,
-    username: "parmar",
+    id: 6,
+    isLike: true,
+    user: {
+      isLikeToo: true,
+      username: "sagar",
+      userId: 1
+    },
     date: "01.01.2000",
     image: images.pic_1
   },
   {
     isMessage: true,
-    isLikeToo: false,
-    username: "sachin",
+    id: 7,
+    isLike: false,
+    user: {
+      isLikeToo: true,
+      username: "sagar",
+      userId: 1
+    },
     date: "01.01.2000",
     image: images.pic_2
   }
