@@ -131,15 +131,13 @@ class Preview extends Component {
                     />
                   </div>
                   <div className="col-sm-7 col-xs-7 no-padding">
-                    <div className="comment-input">
-                      <div className="form-group">
-                        <textarea
-                          className="form-control"
-                          rows="5"
-                          id="comment"
-                          placeholder="Write a comment"
-                        />
-                      </div>
+                    <div className="form-group comment-input margin-left-20 margin-top-10">
+                      <textarea
+                        className="form-control"
+                        rows="5"
+                        id="comment"
+                        placeholder="Write a comment"
+                      />
                     </div>
                   </div>
                   <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right">
