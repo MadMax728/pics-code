@@ -75,6 +75,12 @@ body {
 .padding-b-25 {
   padding-bottom: 25px;
 }
+.margin-left-20 {
+  margin-left: 20px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
 .margin-bottom-50 {
   margin-bottom: 50px;
 }
@@ -418,16 +424,18 @@ button:focus {
 }
 .overflow-scroll {
   .modal-dialog {
-    height: 80vh;
-    min-height: 80vh;
-    margin: 10vh auto;
-    background-color: white;
+    //reverting back
+    // height: 80vh;
+    // min-height: 80vh;
+    // margin: 10vh auto;
+    height: 92%;
+    // background-color: white;
     .modal-content {
       height: 100%;
       overflow: hidden;
 
       .modal-body {
-        height: 91%;
+        height: 92%;
         .modal-body {
           height: 100%;
           .upload-form {
@@ -441,7 +449,7 @@ button:focus {
 }
 .overflow-scroll {
   .modal-dialog {
-    height: 91%;
+    height: 92%;
     .modal-content {
       height: 100%;
       overflow: hidden;

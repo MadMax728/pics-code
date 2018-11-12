@@ -10,11 +10,11 @@ class Preview extends Component {
 
   render() {
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="padding-l-10 middle-section width-100">
+          <div className="info-main-title">Title</div>
           <div className="information-wrapper">
             <div className="info-inner-wrapper">
-              <div className="info-main-title">Title</div>
               <div className="text">
                 This text is an example.This text is an example.This text is an
                 example.This text is an example.This text is an example.This
@@ -131,15 +131,13 @@ class Preview extends Component {
                     />
                   </div>
                   <div className="col-sm-7 col-xs-7 no-padding">
-                    <div className="comment-input">
-                      <div className="form-group">
-                        <textarea
-                          className="form-control"
-                          rows="5"
-                          id="comment"
-                          placeholder="Write a comment"
-                        />
-                      </div>
+                    <div className="form-group comment-input margin-left-20 margin-top-10">
+                      <textarea
+                        className="form-control"
+                        rows="5"
+                        id="comment"
+                        placeholder="Write a comment"
+                      />
                     </div>
                   </div>
                   <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right">
@@ -151,23 +149,23 @@ class Preview extends Component {
                   </div>
                 </div>
                 <div className="comment-wrapper">
-                  <div className="comment-header">
-                    <div className="no-padding profile_image">
+                  <div className="comment-header col-xs-12 no-padding">
+                    <div className="no-padding profile_image col-xs-1">
                       <img
                         src={images.image}
                         className="img-circle img-responsive"
                         alt={"circle-img-3"}
                       />
                     </div>
-                    <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
+                    <div className="col-xs-8 commenter-info no-padding">
                       <b>User name</b> 01.01.2000 <b>Reply</b>
                     </div>
-                    <div className="col-sm-3 col-md-2 col-xs-2 show_more_options pull-right">
+                    <div className="col-xs-3 show_more_options pull-right no-padding">
                       <Link to={""}>• • •</Link>
                     </div>
                     <br />
                   </div>
-                  <div className="comment-content">
+                  <div className="comment-content col-xs-12 no-padding">
                     <p>
                       This <Link to={""}>#text</Link> is an example. This text
                       is an example. This text is an example from{" "}
@@ -179,23 +177,23 @@ class Preview extends Component {
                   </div>
                 </div>
                 <div className="comment-wrapper">
-                  <div className="comment-header">
-                    <div className="no-padding profile_image">
+                  <div className="comment-header col-xs-12 no-padding">
+                    <div className="no-padding profile_image col-xs-1">
                       <img
                         src={images.image}
                         className="img-circle img-responsive"
                         alt={"circle-img-4"}
                       />
                     </div>
-                    <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
+                    <div className="col-xs-8 commenter-info no-padding">
                       <b>User name</b> 01.01.2000 <b>Reply</b>
                     </div>
-                    <div className="col-sm-3 col-md-2 col-xs-2 show_more_options pull-right">
+                    <div className="col-xs-3 show_more_options pull-right no-padding">
                       <Link to={""}>• • •</Link>
                     </div>
                     <br />
                   </div>
-                  <div className="comment-content">
+                  <div className="comment-content col-xs-12 no-padding">
                     <p>
                       This <Link to={""}>#text</Link> is an example. This text
                       is an example. This text is an example from{" "}
@@ -207,23 +205,23 @@ class Preview extends Component {
                   </div>
                 </div>
                 <div className="comment-wrapper">
-                  <div className="comment-header">
-                    <div className="no-padding profile_image">
+                  <div className="comment-header col-xs-12 no-padding">
+                    <div className="no-padding profile_image col-xs-1">
                       <img
                         src={images.image}
                         className="img-circle img-responsive"
                         alt={"circle-img-5"}
                       />
                     </div>
-                    <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
+                    <div className="col-xs-8 commenter-info no-padding">
                       <b>User name</b> 01.01.2000 <b>Reply</b>
                     </div>
-                    <div className="col-sm-3 col-md-2 col-xs-2 show_more_options pull-right">
+                    <div className="col-xs-3 show_more_options pull-right no-padding">
                       <Link to={""}>• • •</Link>
                     </div>
                     <br />
                   </div>
-                  <div className="comment-content">
+                  <div className="comment-content col-xs-12 no-padding">
                     <p>
                       This <Link to={""}>#text</Link> is an example. This text
                       is an example. This text is an example from{" "}
