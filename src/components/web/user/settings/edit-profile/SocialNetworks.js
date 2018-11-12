@@ -7,6 +7,8 @@ import {
   disconnectNetwork
 } from "../../../../../actions/user";
 import SocialProfileUrl from "./SocialProfileUrl";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const socialNetworksAll = [
   {
@@ -144,27 +146,36 @@ class SocialNetworks extends Component {
   /**
    * This method is called when we clear social network
    */
+
   handleSocialClear = e => {
     const provider = e.currentTarget.id;
+    confirmAlert({
+      message: "Do you want to disconnect?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => this.disconnect(provider)
+        },
+        {
+          label: "No"
+        }
+      ]
+    });
+  };
+
+  disconnect(provider) {
+    // const provider = e.currentTarget.id;
     const { userData } = this.props;
     const socialNetworks = userData.socialNetworks;
     const socialNetwork = _.find(socialNetworks, {
       socialNetworkType: provider
     });
-    // Find item index using _.findIndex
-    const index = _.findIndex(socialNetworks, { socialNetworkType: provider });
-
     if (socialNetwork && socialNetwork.publicUrl) {
-      this.props.disconnectNetwork(provider).then(res => {
+      this.props.disconnectNetwork(provider).then(() => {
         this.props.getSocialNetwork();
       });
-      // socialNetwork.publicUrl = "";
-      // socialNetwork.userName = "";
     }
-
-    // Replace item at index using native splice
-    // socialNetworks.splice(index, 1, socialNetwork);
-  };
+  }
 
   render() {
     const { isOwnerProfile, userData } = this.props;
