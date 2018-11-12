@@ -104,7 +104,6 @@ class SocialNetworks extends Component {
    * social connect to calling popup
    */
   handleSocialConnect = e => {
-    debugger;
     // if connection is in progress
     if (this.state.isConnectInProgress) {
       return;
@@ -156,10 +155,8 @@ class SocialNetworks extends Component {
     const index = _.findIndex(socialNetworks, { socialNetworkType: provider });
 
     if (socialNetwork && socialNetwork.publicUrl) {
-      this.props.disconnectNetwork().then(res => {
-        this.props.getSocialNetwork().then(res => {
-          this.setState({ socialNetworks: this.props.userData.socialNetworks });
-        });
+      this.props.disconnectNetwork(provider).then(res => {
+        this.props.getSocialNetwork();
       });
       // socialNetwork.publicUrl = "";
       // socialNetwork.userName = "";

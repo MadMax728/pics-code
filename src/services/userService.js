@@ -34,5 +34,5 @@ export const logout = payload => api.get("/auth/logout", payload);
 export const getSocialNetwork = payload =>
   api.get("/auth/social-network-details", payload);
 
-export const disconnectNetwork = payload =>
-  api.delete("/auth/instagram/disconnect", payload);
+export const disconnectNetwork = (payload, provider) =>
+  api.delete("/auth/" + provider + "/disconnect", payload);

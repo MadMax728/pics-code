@@ -56,7 +56,7 @@ export const getSocialNetwork = () => {
   };
 };
 
-export const disconnectNetwork = () => {
+export const disconnectNetwork = provider => {
   return dispatch => {
     dispatch(disconnectNetworkStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -66,7 +66,7 @@ export const disconnectNetwork = () => {
     console.log("headers", headers);
     const params = { headers };
 
-    return userService.disconnectNetwork(params).then(
+    return userService.disconnectNetwork(params, provider).then(
       res => {
         dispatch(disconnectNetworkSucceeded(res.data.data));
       },
