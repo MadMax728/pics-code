@@ -2,7 +2,10 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as _ from "lodash";
-import { getSocialNetwork } from "../../../../../actions/user";
+import {
+  getSocialNetwork,
+  disconnectNetwork
+} from "../../../../../actions/user";
 import SocialProfileUrl from "./SocialProfileUrl";
 
 const socialNetworksAll = [
@@ -101,6 +104,7 @@ class SocialNetworks extends Component {
    * social connect to calling popup
    */
   handleSocialConnect = e => {
+    debugger;
     // if connection is in progress
     if (this.state.isConnectInProgress) {
       return;
@@ -152,18 +156,22 @@ class SocialNetworks extends Component {
     const index = _.findIndex(socialNetworks, { socialNetworkType: provider });
 
     if (socialNetwork && socialNetwork.publicUrl) {
-      socialNetwork.publicUrl = "";
-      socialNetwork.userName = "";
+      this.props.disconnectNetwork().then(res => {
+        this.props.getSocialNetwork().then(res => {
+          this.setState({ socialNetworks: this.props.userData.socialNetworks });
+        });
+      });
+      // socialNetwork.publicUrl = "";
+      // socialNetwork.userName = "";
     }
 
     // Replace item at index using native splice
-    socialNetworks.splice(index, 1, socialNetwork);
-
-    this.setState({ socialNetworks });
+    // socialNetworks.splice(index, 1, socialNetwork);
   };
 
   render() {
     const { isOwnerProfile, userData } = this.props;
+    console.log("userData", userData);
 
     return (
       <div>
@@ -208,11 +216,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSocialNetwork
+  getSocialNetwork,
+  disconnectNetwork
 };
 
 SocialNetworks.propTypes = {
   getSocialNetwork: PropTypes.func.isRequired,
+  disconnectNetwork: PropTypes.func,
   userData: PropTypes.object,
   history: PropTypes.any,
   userId: PropTypes.string.isRequired,

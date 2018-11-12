@@ -21,6 +21,24 @@ const socialReducer = (state = initialState.userData, action) => {
         isLoading: false,
         error: action.payload
       };
+    case types.DISCONNECT_NETWORK_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.DISCONNECT_NETWORK_SUCCEEDED:
+      return {
+        ...state,
+        deleted: action.payload,
+        isLoading: false
+      };
+    case types.DISCONNECT_NETWORK_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }

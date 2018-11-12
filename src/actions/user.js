@@ -17,6 +17,20 @@ const getSocialNetworkFailed = error => ({
   payload: error,
   error: true
 });
+const disconnectNetworkStarted = () => ({
+  type: types.DISCONNECT_NETWORK_STARTED
+});
+
+const disconnectNetworkSucceeded = data => ({
+  type: types.DISCONNECT_NETWORK_SUCCEEDED,
+  payload: data
+});
+
+const disconnectNetworkFailed = error => ({
+  type: types.DISCONNECT_NETWORK_FAILED,
+  payload: error,
+  error: true
+});
 
 export const getSocialNetwork = () => {
   return dispatch => {
@@ -33,6 +47,31 @@ export const getSocialNetwork = () => {
       },
       error => {
         dispatch(getSocialNetworkFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+export const disconnectNetwork = () => {
+  return dispatch => {
+    dispatch(disconnectNetworkStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    console.log("headers", headers);
+    const params = { headers };
+
+    return userService.disconnectNetwork(params).then(
+      res => {
+        dispatch(disconnectNetworkSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(disconnectNetworkFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
