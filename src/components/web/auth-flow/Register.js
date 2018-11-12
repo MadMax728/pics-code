@@ -43,7 +43,7 @@ class Register extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     const { form } = this.state;
-    let data = {
+    const data = {
       username: form.username,
       email: form.email,
       name: "abc",
@@ -74,7 +74,7 @@ class Register extends Component {
                     type="text"
                     className="form-control"
                     id="username"
-                    placeholder="User name"
+                    placeholder={Translations.register.username}
                     name="username"
                     value={form.username ? form.username : ""}
                     onChange={this.handleChangeField}
@@ -90,7 +90,7 @@ class Register extends Component {
                     type="email"
                     className="form-control"
                     id="email"
-                    placeholder="Email"
+                    placeholder={Translations.register.email}
                     name="email"
                     value={form.email ? form.email : ""}
                     onChange={this.handleChangeField}
@@ -106,7 +106,7 @@ class Register extends Component {
                     type="password"
                     className="form-control"
                     id="password"
-                    placeholder="Password"
+                    placeholder={Translations.register.password}
                     autoComplete="password"
                     name="password"
                     value={form.password ? form.password : ""}
@@ -123,7 +123,7 @@ class Register extends Component {
                     type="password"
                     className="form-control"
                     id="repeat-password"
-                    placeholder="Repeat Password"
+                    placeholder={Translations.register.repeat_password}
                     autoComplete="repeat-password"
                     name="repeat_password"
                     value={form.repeat_password ? form.repeat_password : ""}
@@ -148,7 +148,7 @@ class Register extends Component {
                         className="black_button"
                         onChange={this.handleChangeField}
                       />
-                      <label htmlFor="male">Male</label>
+                      <label htmlFor="male">{Translations.register.male}</label>
                     </li>
                     <li>
                       <RadioButton
@@ -159,25 +159,43 @@ class Register extends Component {
                         defaultChecked={form.gender === "female"}
                         onChange={this.handleChangeField}
                       />
-                      <label htmlFor="female">Female</label>
+                      <label htmlFor="female">
+                        {Translations.register.female}
+                      </label>
                     </li>
                   </ul>
                 </div>
                 <div className="form-group">
                   <button className="blue_button" type="submit">
-                    Register
+                    {Translations.register.register}
                   </button>
                 </div>
               </form>
               <div>
                 <div className="terms-conditions">
-                  By clicking on register you agree to our
-                  <Link to={""}> General Terms & Conditions</Link>,
-                  <Link to={""}> Terms of Use </Link> and
-                  <Link to={""}> Data Protection & Privacy Policy </Link>.
+                  {Translations.register.agree}
+                  <Link to={routes.TERMS_CONDITIONS_ROUTE}>
+                    {" "}
+                    {Translations.base_footer.general_terms_and_conditions}
+                  </Link>
+                  ,
+                  <Link to={routes.TEARMS_USE_ROUTE}>
+                    {" "}
+                    {Translations.base_footer.terms_of_use}{" "}
+                  </Link>{" "}
+                  and
+                  <Link to={routes.DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}>
+                    {" "}
+                    {
+                      Translations.base_footer
+                        .data_protection_and_privacy_policy
+                    }
+                  </Link>
+                  .
                 </div>
                 <div className="free-register">
-                  Register free as a <b>company</b>
+                  {Translations.register.free}{" "}
+                  <b>{Translations.register.company}</b>
                 </div>
               </div>
               <DownloadStore />

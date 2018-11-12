@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import propTypes from "prop-types";
 import { HashTagUsername } from "../../../common";
+import { PlaceAutoCompleteLocation } from "../../../ui-kit";
 
 class Upload extends Component {
   constructor(props) {
@@ -51,12 +52,12 @@ class Upload extends Component {
   };
 
   render() {
-    const { form, handleSetState } = this.props;
+    const { form, handleSetState, handleLocation } = this.props;
     const { isInProgress } = this.state;
 
     return (
-      <div className="modal-body">
-        <div className="col-sm-6 upload-form">
+      <div className="col-xs-12 no-padding">
+        <div className="col-sm-6 upload-form height100">
           <div className="no-padding profile_image">
             <img
               src={images.image}
@@ -71,10 +72,10 @@ class Upload extends Component {
           <form>
             <div className="form-group">
               <label htmlFor="Location">Add Location</label>
-              <input
-                type="text"
-                name="add_location"
-                onChange={this.handleChangeField}
+              <PlaceAutoCompleteLocation
+                className=""
+                handleLocation={handleLocation}
+                value={this.props.form.address}
               />
             </div>
             <div className="form-group">
@@ -123,7 +124,7 @@ class Upload extends Component {
               </label>
             </div>
           ) : (
-            <img src={form.image} alt="upload" />
+            <img src={form.image} alt="upload" className="widthHeightAuto" />
           )}
           {isInProgress && (
             <div className="image-wrapper">
@@ -141,7 +142,7 @@ class Upload extends Component {
             </div>
           )}
 
-          <div className="add-wrapper">
+          <div className="add-wrapper heightAuto">
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
         </div>
@@ -153,6 +154,7 @@ class Upload extends Component {
 Upload.propTypes = {
   handleChangeField: propTypes.func.isRequired,
   handleSetState: propTypes.func.isRequired,
+  handleLocation: propTypes.func.isRequired,
   form: propTypes.any.isRequired,
   handleUpload: propTypes.func.isRequired
 };

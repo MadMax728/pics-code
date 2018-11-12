@@ -9,6 +9,7 @@ import {
   RadioButton
 } from "../../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../../lib/translations";
+import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
 
 const genderItems = [
   {
@@ -50,6 +51,7 @@ class EditProfile extends Component {
         gender: "male",
         category: "",
         location: "",
+        address: "",
         phone_number: "",
         email: "",
         website: "",
@@ -59,6 +61,12 @@ class EditProfile extends Component {
       }
     };
   }
+
+  handleLocation = (location, address) => {
+    this.setState({
+      form: { ...this.state.form, location, address }
+    });
+  };
 
   handleChangeDOB = event => {
     const { form } = this.state;
@@ -217,12 +225,10 @@ class EditProfile extends Component {
                 <label htmlFor="location" className="margin-bottom-13">
                   Location
                 </label>
-                <Text
-                  type="text"
+
+                <PlaceAutoCompleteLocation
                   className="form-control"
-                  id="location"
-                  name="location"
-                  onChange={this.handleChangeField}
+                  handleLocation={this.handleLocation}
                 />
               </div>
               <div className="form-group margin-bottom-30">

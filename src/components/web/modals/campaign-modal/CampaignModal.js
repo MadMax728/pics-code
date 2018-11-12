@@ -21,6 +21,7 @@ class CampaignModal extends Component {
       form: {
         title: "",
         location: "",
+        address: "",
         category: "",
         procedure: "public",
         type: "video",
@@ -149,6 +150,12 @@ class CampaignModal extends Component {
     );
   };
 
+  handleLocation = (location, address) => {
+    this.setState({
+      form: { ...this.state.form, location, address }
+    });
+  };
+
   render() {
     const { isFor, handleModalHide } = this.props;
     const { stepIndex, isPreview, form } = this.state;
@@ -210,6 +217,7 @@ class CampaignModal extends Component {
               contentText={contentText}
               uploadFile={this.uploadFile}
               handleEditImage={this.handleEditImage}
+              handleLocation={this.handleLocation}
               ref={this.imageCropper}
             />
           ) : (
@@ -225,6 +233,7 @@ class CampaignModal extends Component {
               handleSubmit={this.handleCreatorSubmit}
               handleDate={this.handleDate}
               handleEditImage={this.handleEditImage}
+              handleLocation={this.handleLocation}
             />
           )
         }

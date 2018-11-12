@@ -8,6 +8,7 @@ class UploadModal extends Component {
     super(props, context);
     this.state = {
       form: {
+        address: "",
         add_location: "",
         add_category: "",
         add_decription: "",
@@ -37,12 +38,18 @@ class UploadModal extends Component {
     console.log(this.state.form);
   };
 
+  handleLocation = (location, address) => {
+    this.setState({
+      form: { ...this.state.form, add_location: location, address }
+    });
+  };
+
   render() {
     const { form } = this.state;
 
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade upload-image-modal"}
+        modalClassName={"modal fade upload-image-modal create-campaign-modal"}
         header
         modalHeaderContent={
           <UploadHeader
@@ -59,6 +66,7 @@ class UploadModal extends Component {
             handleChangeField={this.handleChangeField}
             form={form}
             handleSetState={this.handleSetState}
+            handleLocation={this.handleLocation}
             handleUpload={this.handleUpload}
           />
         }
