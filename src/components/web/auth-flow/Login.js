@@ -72,7 +72,6 @@ class Login extends Component {
     this.props
       .submitLogin({ email: form.userName, password: form.password })
       .then(res => {
-        debugger;
         let errors = {};
         console.log("data", this.props.loginData);
         if (

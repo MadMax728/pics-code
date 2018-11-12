@@ -106,7 +106,6 @@ class Register extends Component {
     };
 
     this.props.submitRegister(data).then(() => {
-      debugger;
       Auth.logoutUser();
       let errors = {};
       if (
