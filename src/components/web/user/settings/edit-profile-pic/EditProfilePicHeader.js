@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
+import { Translations } from "../../../../../lib/translations";
 
 class EditProfilePicHeader extends Component {
   constructor(props) {
@@ -10,13 +11,15 @@ class EditProfilePicHeader extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-sm-6 modal-title">Edit Profile Image</div>
+        <div className="col-sm-6 modal-title">
+          {Translations.modal_header.edit_profile_image}
+        </div>
         <div className="col-sm-6 text-right">
           <button className="black_button" onClick={this.props.handleModalHide}>
-            Cancel
+            {Translations.modal_header.cancle}
           </button>
           <button className="black_button" onClick={this.props.handleContinue}>
-            Continue
+            {Translations.modal_header.continue}
           </button>
         </div>
       </div>

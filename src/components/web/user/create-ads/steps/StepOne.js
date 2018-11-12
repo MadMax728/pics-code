@@ -20,7 +20,6 @@ class StepOne extends Component {
       handleEditImage,
       handleLocation
     } = this.props;
-    console.log("form", this.props.form);
 
     return (
       <div className="col-xs-12 no-padding">
