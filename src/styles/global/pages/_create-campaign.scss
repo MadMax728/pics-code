@@ -1,18 +1,32 @@
 .create-campaign-modal {
   background: #333;
-
   &.editor-modal {
     & > .modal-dialog {
       max-width: 915px;
+      .rdw-editor-wrapper {
+        .rdw-editor-main {
+          box-sizing: border-box;
+          border: 1px solid #f1f1f1;
+          border-top: 0px;
+          height: 313px;
+          padding: 0 15px;
+        }
+      }
     }
   }
   .modal-dialog {
     width: 915px;
+    //reverting back
+    // height: 80vh;
+    // min-height: 80vh;
+    // margin: 10vh auto;
+    // background-color: white;
   }
   .modal-content {
     @include float();
     box-shadow: none;
     border: 0px;
+    height: 100%;
   }
   .modal-header {
     border-bottom: 6px solid #333333;
@@ -29,8 +43,27 @@
   }
   .modal-body {
     display: flex;
+    height: 91%;
+    // height: 100%;
+    //reverting back
+    // &.height100 {
+    //   height: 100%;
+    // }
+    .col-xs-12.no-padding {
+      .col-xs-12.no-padding {
+        height: 100%;
+        & > div {
+          // height: 100%;
+          // overflow: auto;
+          //reverting back
+          // &:nth-child(2) {
+          //   // height: auto;
+          // }
+        }
+      }
+    }
     .right-side {
-      background-color: #333333;
+      // background-color: #333333;
       .create-campaign-crop-pic {
         .edit-profile-pic {
           margin-top: 0;
@@ -41,12 +74,14 @@
         }
         .range-wrapr {
           background-color: white;
-          padding-bottom: 10px;
+          padding-bottom: 8px;
         }
       }
     }
     .create-campaign-feed-wrapper {
       padding: 40px;
+      //reverting back
+      // height: 91%;
       .feed_wrapper {
         border: 1px solid $silver_color;
       }
@@ -97,8 +132,20 @@
       }
     }
     .upload-form {
+      //reverting back
+      height: 100%;
+      // height: calc(100vh - 125px);
+      background-color: white;
+      overflow: auto;
+
+      // height: -webkit-fill-available;
       &.height100 {
-        height: 100%;
+        // height: 100%;
+        background-color: white;
+        & ~ div.col-sm-6 {
+          height: 100%;
+          background-color: white;
+        }
       }
       .meter {
         height: 40px;
@@ -190,6 +237,8 @@
         border: 0px;
         img {
           position: relative;
+          top: -44%;
+          //reverting back
           top: -35px;
         }
       }
@@ -387,6 +436,8 @@
     .create-campaign-wrapper {
       padding: 20px 30px;
       padding: 20px 10px;
+      // reverting back
+      // height: 100%;
       p {
         margin-bottom: 25px;
       }
@@ -457,7 +508,8 @@
               order: 5;
             }
           }
-          .editor-class.rdw-editor-main {
+          .editor-class.rdw-editor-main,
+          .rdw-editor-main {
             border: 1px solid #333333;
             border-top: 0px;
             height: 318px;
@@ -480,6 +532,10 @@
       padding: 20px;
       list-style: none;
       min-height: 450px;
+      // height: 450px;
+      // height: 100%;
+      // reverting back
+      height: 91%;
       float: left;
       border-left: 6px solid #333333;
       background: #e9e9e9;
@@ -595,6 +651,7 @@
     div.edit-profile-pic,
     div.uploaded-profile-pic {
       width: 100% !important;
+      // reverting back
       min-height: 63% !important;
       text-align: center;
       margin-top: 46px;

@@ -10,7 +10,7 @@ class PaymentStepTwo extends Component {
   render() {
     const { form, handleChangeField } = this.props;
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-5 payment-form">
           <div className="subtitle">Payment method</div>
           <div className="form-group">

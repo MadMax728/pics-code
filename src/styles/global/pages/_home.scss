@@ -377,6 +377,14 @@
     .normal_title {
       display: inline-block;
       margin-right: 15px;
+      & ~ div {
+        display: inline-block;
+        color: #4578b3;
+        margin-right: 10px;
+        &.active {
+          text-decoration: underline;
+        }
+      }
     }
     a {
       padding-right: 7px;

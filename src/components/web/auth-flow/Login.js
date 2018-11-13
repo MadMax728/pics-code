@@ -17,7 +17,8 @@ class Login extends Component {
       form: {
         userName: "",
         password: ""
-      }
+      },
+      error: {}
     };
   }
 
@@ -30,19 +31,33 @@ class Login extends Component {
    * formValid
    */
   formValid = () => {
+    let errors = {};
+    let isFormValid = true;
     const { form } = this.state;
 
-    if (form.userName.length === 0 || form.password.length === 0) {
-      return false;
+    if (form.userName.length === 0) {
+      errors["username"] = "username is required.";
+      isFormValid = false;
     }
+    if (form.password.length === 0) {
+      errors["password"] = "password is required.";
+      isFormValid = false;
+    }
+    this.setState({ error: errors });
+    return isFormValid;
 
-    return true;
+    // if (form.userName.length === 0 || form.password.length === 0) {
+    //   return false;
+    // }
+
+    // return isFormValid;
   };
 
   handleChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
+    this.formValid();
   };
 
   // handelSubmit called when click on submit
@@ -56,15 +71,24 @@ class Login extends Component {
 
     this.props
       .submitLogin({ email: form.userName, password: form.password })
-      .then(() => {
-        this.props.history.push(routes.ROOT_ROUTE);
+      .then(res => {
+        let errors = {};
+        if (
+          this.props.loginData.error &&
+          this.props.loginData.error.status === 400
+        ) {
+          errors["servererror"] = "Something went wrong";
+          this.setState({ error: errors });
+        } else {
+          this.props.history.push(routes.ROOT_ROUTE);
+        }
+        // this.props.history.push(routes.ROOT_ROUTE);
       });
   };
 
   render() {
     const { loginData } = this.props;
     const { form } = this.state;
-
     return (
       <div className="login-process">
         <BaseHeader />
@@ -74,11 +98,12 @@ class Login extends Component {
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
+                <span>{this.state.error["servererror"]}</span>
                 <div className="form-group">
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
+                    id="text"
                     name="userName"
                     value={form.userName}
                     onChange={this.handleChangeField}
@@ -89,6 +114,7 @@ class Login extends Component {
                   ) : (
                     <img src={images.error} alt={"error"} />
                   )}
+                  <span>{this.state.error.username}</span>
                 </div>
                 <div className="form-group">
                   <input
@@ -106,6 +132,7 @@ class Login extends Component {
                   ) : (
                     <img src={images.error} alt={"error"} />
                   )}
+                  <span>{this.state.error.password}</span>
                 </div>
                 <div className="form-group">
                   <Link to={routes.RESET_EMAIL}>

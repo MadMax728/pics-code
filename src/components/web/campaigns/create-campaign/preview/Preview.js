@@ -10,7 +10,7 @@ class Preview extends Component {
 
   render() {
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="padding-l-10 middle-section width-100">
           <div className="information-wrapper">
             <div className="info-inner-wrapper">

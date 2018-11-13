@@ -22,6 +22,7 @@ const ForgotPassword = () => (
           </h3>
           {/*<a onClick={handleResetEmail(resendEmail)} onKeyDown={handleResetEmail(resendEmail)} tabIndex={0} role="link" >here</a> */}
           <p>
+            Click <a href="/forgot-password">here</a> to request another mail.
             {Translations.forgot_password.click}{" "}
             <Link to={"/"}>{Translations.forgot_password.here}</Link>{" "}
             {Translations.forgot_password.request}

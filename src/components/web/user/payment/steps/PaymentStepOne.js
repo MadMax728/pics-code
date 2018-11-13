@@ -11,7 +11,7 @@ class PaymentStepOne extends Component {
     const { handleChangeField } = this.props;
 
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
           <div className="user-title">
             <div className="subtitle">Billing Address</div>

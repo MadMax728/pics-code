@@ -15,7 +15,7 @@ class PaymentConfirmation extends Component {
   render() {
     const { modalInfoMsg } = this.props;
     return (
-      <div className={"modal-body"}>
+      <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">
           Your {modalInfoMsg} is pending review whitin the next 48 hours.
         </div>

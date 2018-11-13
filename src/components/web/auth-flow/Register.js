@@ -23,7 +23,8 @@ class Register extends Component {
         repeat_password: "",
         emailValid: false,
         isValidPassword: false
-      }
+      },
+      error: {}
     };
   }
 
@@ -32,16 +33,68 @@ class Register extends Component {
     Auth.logoutUser();
   };
 
+  formValid = () => {
+    let errors = {};
+    let isFormValid = true;
+    const { form } = this.state;
+    let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (form.username.length === 0) {
+      errors["username"] = "username is required.";
+      isFormValid = false;
+    }
+    if (form.password.length === 0) {
+      errors["password"] = "password is required.";
+      isFormValid = false;
+    }
+    if (form.password.length === 0) {
+      errors["email"] = "email is required.";
+      isFormValid = false;
+    }
+    let isValidemail = emailRegex.test(form.email);
+    if (!isValidemail) {
+      isFormValid = false;
+      errors["email"] = "Email ID should be valid.";
+    }
+    if (form.password.length === 0) {
+      errors["repeat_password"] = "password is required.";
+      isFormValid = false;
+    }
+    if (form.password.length === 0) {
+      errors["password"] = "password is required.";
+      isFormValid = false;
+    }
+    if (form.password !== form.repeat_password) {
+      errors["repeat_password"] = "password is not matching.";
+      isFormValid = false;
+    }
+
+    this.setState({ error: errors });
+    return isFormValid;
+
+    // if (form.userName.length === 0 || form.password.length === 0) {
+    //   return false;
+    // }
+
+    // return isFormValid;
+  };
+
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
     console.log(this.state.form);
+    this.formValid();
   };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
+    e.preventDefault();
+
+    if (!this.formValid()) {
+      return false;
+    }
     const { form } = this.state;
     const data = {
       username: form.username,
@@ -51,9 +104,19 @@ class Register extends Component {
       password: form.password,
       repeatPassword: form.repeat_password
     };
-    e.preventDefault();
+
     this.props.submitRegister(data).then(() => {
-      this.props.history.push(routes.ROOT_ROUTE);
+      Auth.logoutUser();
+      let errors = {};
+      if (
+        this.props.registerData.error &&
+        this.props.registerData.error.status === 400
+      ) {
+        errors["servererror"] = "Something went wrong";
+        this.setState({ error: errors });
+      } else {
+        this.props.history.push(routes.ROOT_ROUTE);
+      }
     });
   };
 
@@ -70,6 +133,7 @@ class Register extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
+                  <span>{this.state.error["servererror"]}</span>
                   <Text
                     type="text"
                     className="form-control"
@@ -84,7 +148,9 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
+                  <span>{this.state.error.username}</span>
                 </div>
+
                 <div className="form-group">
                   <Text
                     type="email"
@@ -100,7 +166,9 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
+                  <span>{this.state.error.email}</span>
                 </div>
+
                 <div className="form-group">
                   <Text
                     type="password"
@@ -117,6 +185,7 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
+                  <span>{this.state.error.password}</span>
                 </div>
                 <div className="form-group">
                   <Text
@@ -135,6 +204,7 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
+                  <span>{this.state.error.repeat_password}</span>
                 </div>
                 <div className="form-group">
                   <ul className="options">

@@ -27,7 +27,7 @@ class StepThree extends Component {
   render() {
     const { handleChangeField } = this.props;
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
           <div className="subtitle">Define runtime & budget c</div>
           <div className="form-group">

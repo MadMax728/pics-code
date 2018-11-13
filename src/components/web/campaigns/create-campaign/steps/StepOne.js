@@ -24,7 +24,7 @@ class StepOne extends Component {
     } = this.props;
 
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
           <div className="no-padding profile_image">
             <img

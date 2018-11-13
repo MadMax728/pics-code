@@ -18,7 +18,8 @@ class ResetMail extends Component {
     this.state = {
       form: {
         email: ""
-      }
+      },
+      error: {}
     };
   }
   //logout user
@@ -32,16 +33,56 @@ class ResetMail extends Component {
     form[event.target.name] = event.target.value;
     this.setState({ form });
     console.log(this.state.form);
+    this.formValid();
+  };
+
+  formValid = () => {
+    let errors = {};
+    let isFormValid = true;
+    const { form } = this.state;
+    let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if (form.email.length === 0) {
+      errors["email"] = "email is required.";
+      isFormValid = false;
+    }
+    let isValidemail = emailRegex.test(form.email);
+    if (!isValidemail) {
+      isFormValid = false;
+      errors["email"] = "Email ID should be valid.";
+    }
+    this.setState({ error: errors });
+    return isFormValid;
+
+    // const { form } = this.state;
+    //
+    // if (form.email.length === 0) {
+    //   return false;
+    // }
+    //
+    // return true;
   };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
+    if (!this.formValid()) {
+      return false;
+    }
     const data = {
       email: this.state.form.email
     };
     this.props.submitResetPassword(data).then(res => {
-      this.props.history.push(routes.FORGOT_PASSWORD);
+      let errors = {};
+      if (
+        this.props.resetPasswordData.error &&
+        this.props.resetPasswordData.error.status === 400
+      ) {
+        errors["servererror"] = "Something went wrong";
+        this.setState({ error: errors });
+      } else {
+        this.props.history.push(routes.FORGOT_PASSWORD);
+      }
     });
   };
 
@@ -56,9 +97,10 @@ class ResetMail extends Component {
               <h3 className="text-center">{Translations.reset_email.header}</h3>
               <p>{Translations.reset_email.subheader}</p>
               <form>
+                <span>{this.state.error["servererror"]}</span>
                 <div className="form-group">
                   <input
-                    type="email"
+                    type="text"
                     className="form-control"
                     id="email"
                     placeholder={Translations.register.email}
@@ -71,6 +113,7 @@ class ResetMail extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
+                  <span>{this.state.error.email}</span>
                 </div>
                 <div className="form-group">
                   <button className="blue_button" onClick={this.handleSubmit}>

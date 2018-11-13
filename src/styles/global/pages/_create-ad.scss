@@ -147,6 +147,11 @@
   }
   .modal-dialog {
     width: 915px;
+    // reverting back
+    // height: 80vh;
+    // min-height: 80vh;
+    // margin: 10vh auto;
+    // background-color: white;
   }
   .modal-content {
     float: left;
@@ -162,11 +167,15 @@
       height: 35px;
       padding-top: 7px;
       margin-left: 5px;
+      min-width: 110px;
     }
   }
   .modal-body {
     padding: 0px;
     display: flex;
+    .col-xs-12 {
+      height: 100%;
+    }
     .box {
       background-color: #e9e9e9;
       padding: 15.25rem 1.25rem;
@@ -206,6 +215,11 @@
     .upload-form {
       border-right: 8px solid #333333;
       padding: 20px;
+      // reverting back
+      // height: 73vh;
+      // height: -webkit-fill-available;
+      height: 100%;
+      overflow: auto;
       .full-width-input-wrapper {
         width: 100%;
         text-align: center;
@@ -294,12 +308,7 @@
           border: 12px solid #fff;
           position: absolute;
           top: 0;
-          left: 0; // content: ""; // width: 70%; // height: 70%; // border-radius: 50%;
-          // border: 12px solid #fff;
-          // position: absolute;
-          // top: 15%;
-          // left: 15%;
-          // z-index: 1;
+          left: 0; // content: ""; // width: 70%; // height: 70%; // border-radius: 50%; // border: 12px solid #fff; // position: absolute; // top: 15%; // left: 15%; // z-index: 1;
         }
         > span {
           width: 50%;

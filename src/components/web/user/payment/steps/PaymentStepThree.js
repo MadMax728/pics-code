@@ -19,7 +19,7 @@ class PaymentStepThree extends Component {
   render() {
     const { handleChangeField, form } = this.props;
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-5 payment-history">
           <div className="subtitle">Complete payment transaction</div>
           <div className="history-content-wrapper">

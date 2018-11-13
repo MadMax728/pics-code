@@ -30,6 +30,11 @@ const initialState = {
     password: null,
     isLoading: false,
     error: false
+  },
+  userDataByUsername: {
+    user: null,
+    isLoading: false,
+    error: false
   }
 };
 

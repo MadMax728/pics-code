@@ -49,7 +49,7 @@ class Messages extends Component {
     const { messages, chatData } = this.state;
 
     return (
-      <div className="modal-body no-padding">
+      <div className="col-xs-12 no-padding">
         <div className="messages-left">
           <div className="title-wrapper">
             <div className="modal-title">{this.state.title}</div>
