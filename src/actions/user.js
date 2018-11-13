@@ -63,7 +63,6 @@ export const disconnectNetwork = provider => {
     const headers = {
       Authorization: storage.accessToken
     };
-    console.log("headers", headers);
     const params = { headers };
 
     return userService.disconnectNetwork(params, provider).then(
