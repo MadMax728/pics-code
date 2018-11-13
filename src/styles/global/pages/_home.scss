@@ -565,12 +565,14 @@
       .show_more_options {
         padding-right: 5px;
         text-align: right;
+        position: relative;
+        z-index: 1;
         a {
           color: $charcoal_color;
         }
       }
       .comment-content {
-        padding-left: 60px;
+        padding-left: 47px;
         @media (max-width: 991px) {
           float: left;
         }
