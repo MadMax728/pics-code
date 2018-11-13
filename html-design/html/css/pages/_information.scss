@@ -5,6 +5,7 @@
 		padding: 25px 30px 0px 30px;
 	}
 	@include float();
+	
 	.feed_header{
 		padding: 0px;
 		.like_wrapper{
@@ -22,7 +23,7 @@
 	}
 	img{
 		width: 100%;
-		margin-bottom: 15px;
+		// margin-bottom: 15px;
 	}
 	button{ 
 		width: 100%;
