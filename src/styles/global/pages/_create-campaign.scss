@@ -197,8 +197,13 @@
       }
       textarea {
         height: 150px;
+        max-height: 150px;
+        overflow: auto;
         border: 1px solid #979797;
         border-radius: 0;
+        &.form-control {
+          max-width: 100%;
+        }
       }
       select {
         border: 1px solid #979797;
