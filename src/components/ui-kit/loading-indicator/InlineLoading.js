@@ -21,15 +21,15 @@ class InlineLoading extends React.Component {
     }, 250);
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.delayShowing();
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     if (this.timeout) {
       clearInterval(this.timeout);
     }
-  }
+  };
 
   render() {
     const { message } = this.props;

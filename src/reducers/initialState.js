@@ -36,6 +36,15 @@ const initialState = {
     user: null,
     isLoading: false,
     error: false
+  },
+  campaignData: {
+    landingCampaigns: null,
+    participantCampaigns: null,
+    creatorCampaigns: null,
+    companyCampaigns: null,
+    exploreCampaigns: null,
+    isLoading: false,
+    error: false
   }
 };
 

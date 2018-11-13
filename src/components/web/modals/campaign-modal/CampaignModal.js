@@ -105,9 +105,9 @@ class CampaignModal extends Component {
     console.log(this.state.form);
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ stepIndex: 0, isPreview: false });
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {

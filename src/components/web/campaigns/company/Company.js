@@ -1,28 +1,37 @@
 import React, { Component } from "react";
-import { company_campaigns_list } from "../../../../mock-data";
 import { NewsFeeds } from "../../feeds";
 import PropTypes from "prop-types";
-
+import { connect } from "react-redux";
+import { getCompanyCampaignsMock } from "../../../../actions";
 class Company extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      company_campaigns: company_campaigns_list
-    };
+  constructor() {
+    super();
+    this.state = {};
   }
+
+  componentDidMount = () => {
+    this.props.getCompanyCampaignsMock();
+  };
+
   render() {
-    const { company_campaigns } = this.state;
-    const { handleModalShow, handleModalInfoShow } = this.props;
+    const {
+      handleModalShow,
+      handleModalInfoShow,
+      company_campaigns,
+      isLoading
+    } = this.props;
     return (
       <div className={"padding-rl-10 middle-section"}>
-        <NewsFeeds
-          campaigns={company_campaigns}
-          handleModalShow={handleModalShow}
-          handleModalInfoShow={handleModalInfoShow}
-          isDescription={false}
-          isInformation
-        />
+        {company_campaigns &&
+          !isLoading && (
+            <NewsFeeds
+              campaigns={company_campaigns}
+              handleModalShow={handleModalShow}
+              handleModalInfoShow={handleModalInfoShow}
+              isDescription={false}
+              isInformation
+            />
+          )}
       </div>
     );
   }
@@ -30,7 +39,25 @@ class Company extends Component {
 
 Company.propTypes = {
   handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+
+  // remove when actual API Call
+  getCompanyCampaignsMock: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  company_campaigns: PropTypes.any
 };
 
-export default Company;
+const mapStateToProps = state => ({
+  company_campaigns: state.campaignData.companyCampaigns,
+  isLoading: state.campaignData.isLoading
+});
+
+const mapDispatchToProps = {
+  // remove when actual API Call
+  getCompanyCampaignsMock
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Company);

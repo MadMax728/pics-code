@@ -9,14 +9,14 @@ const withPageViewTracking = WrappedComponent => {
       WrappedComponent
     )})`;
 
-    componentDidMount() {
+    componentDidMount = () => {
       const history = this.props.history;
       logger.pageview(`${history.location.pathname}${history.location.search}`);
 
       this.historyUnlisten = history.listen(location => {
         logger.pageview(`${location.pathname}${location.search}`);
       });
-    }
+    };
 
     render() {
       return <WrappedComponent {...this.props} />;

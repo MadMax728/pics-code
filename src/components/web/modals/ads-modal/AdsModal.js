@@ -66,9 +66,9 @@ class AdsModal extends Component {
     console.log(this.state.form);
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ stepIndex: 0 });
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {

@@ -15,9 +15,9 @@ class EditProfileModal extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ image: this.props.image });
-  }
+  };
 
   handleContinue = () => {
     this.imageCropper.current.handleSave();
