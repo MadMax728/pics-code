@@ -14,7 +14,8 @@ const initialState = {
     profile: null,
     socialNetworks: null,
     isLoading: false,
-    error: null
+    error: null,
+    deleted: null
   },
   registerData: {
     registeredUser: null,

@@ -2,8 +2,13 @@ import { connect } from "react-redux";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as _ from "lodash";
-import { getSocialNetwork } from "../../../../../actions/user";
+import {
+  getSocialNetwork,
+  disconnectNetwork
+} from "../../../../../actions/user";
 import SocialProfileUrl from "./SocialProfileUrl";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const socialNetworksAll = [
   {
@@ -141,29 +146,40 @@ class SocialNetworks extends Component {
   /**
    * This method is called when we clear social network
    */
+
   handleSocialClear = e => {
     const provider = e.currentTarget.id;
+    confirmAlert({
+      message: "Do you want to disconnect?",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => this.disconnect(provider)
+        },
+        {
+          label: "No"
+        }
+      ]
+    });
+  };
+
+  disconnect(provider) {
+    // const provider = e.currentTarget.id;
     const { userData } = this.props;
     const socialNetworks = userData.socialNetworks;
     const socialNetwork = _.find(socialNetworks, {
       socialNetworkType: provider
     });
-    // Find item index using _.findIndex
-    const index = _.findIndex(socialNetworks, { socialNetworkType: provider });
-
     if (socialNetwork && socialNetwork.publicUrl) {
-      socialNetwork.publicUrl = "";
-      socialNetwork.userName = "";
+      this.props.disconnectNetwork(provider).then(() => {
+        this.props.getSocialNetwork();
+      });
     }
-
-    // Replace item at index using native splice
-    socialNetworks.splice(index, 1, socialNetwork);
-
-    this.setState({ socialNetworks });
-  };
+  }
 
   render() {
     const { isOwnerProfile, userData } = this.props;
+    console.log("userData", userData);
 
     return (
       <div>
@@ -208,11 +224,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSocialNetwork
+  getSocialNetwork,
+  disconnectNetwork
 };
 
 SocialNetworks.propTypes = {
   getSocialNetwork: PropTypes.func.isRequired,
+  disconnectNetwork: PropTypes.func,
   userData: PropTypes.object,
   history: PropTypes.any,
   userId: PropTypes.string.isRequired,
