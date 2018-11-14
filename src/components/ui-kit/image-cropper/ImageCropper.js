@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import EditProfileCrop from "./EditProfileCrop";
 import CampaignAdCrop from "./CampaignAdCrop";
+import EditProfilePic from "../../web/user/settings/edit-profile-pic/EditProfilePic";
 
 const propTypes = {
   handleNewImage: PropTypes.func,
@@ -46,6 +47,7 @@ class ImageCropper extends Component {
 
     this.setState({ scale }, () => {
       this.handleSave();
+      this.props.handleScale(scale);
     });
   };
 
@@ -60,6 +62,8 @@ class ImageCropper extends Component {
   };
 
   handleNewImage = e => {
+    console.log("iamges upload", e.target.files[0]);
+    this.props.handleActualImg(e.target.files[0]);
     this.setState({ image: e.target.files[0] }, () => {
       this.handleSave();
     });
@@ -135,6 +139,12 @@ class ImageCropper extends Component {
   }
 }
 
-ImageCropper.propTypes = propTypes;
+ImageCropper.propTypes = {
+  handleActualImg: propTypes.any,
+  image: propTypes.any,
+  isCircle: propTypes.any,
+  handleScale: propTypes.func,
+  handleEditImage: propTypes.func
+};
 
 export default ImageCropper;

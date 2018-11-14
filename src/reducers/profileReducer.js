@@ -21,6 +21,42 @@ const profileReducer = (state = initialState.userDataByUsername, action) => {
         isLoading: false,
         error: action.payload
       };
+    case types.UPLOAD_IMAGE_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.UPLOAD_IMAGE_SUCCEEDED:
+      return {
+        ...state,
+        imageData: action.payload,
+        isLoading: false
+      };
+    case types.UPLOAD_IMAGE_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    case types.UPDATE_PROFILE_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.UPDATE_PROFILE_SUCCEEDED:
+      return {
+        ...state,
+        imageData: action.payload,
+        isLoading: false
+      };
+    case types.UPDATE_PROFILE_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }
