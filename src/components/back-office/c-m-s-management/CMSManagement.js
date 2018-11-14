@@ -31,9 +31,9 @@ class CMSManagement extends Component {
     );
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">

@@ -10,7 +10,6 @@ import {
   HomeRoute,
   MessageBar
 } from "../components/common";
-
 class Home extends Component {
   constructor(props, context) {
     super(props, context);

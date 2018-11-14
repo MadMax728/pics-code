@@ -63,9 +63,9 @@ class AddVerification extends Component {
     </span>
   );
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     const { verifications } = this.state;

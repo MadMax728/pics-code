@@ -259,14 +259,14 @@ hr {
     border-radius: 0;
     box-shadow: none;
     height: 40px;
-    & ~ .autocomplete-dropdown-container {
-      &.show {
-        border: 1px solid #979797;
-        div {
-          padding: 10px 20px;
-        }
-      }
-    }
+    // & ~ .autocomplete-dropdown-container {
+    //   &.show {
+    //     border: 1px solid #979797;
+    //     div {
+    //       padding: 10px 20px;
+    //     }
+    //   }
+    // }
     &::placeholder {
       color: $charcoal_color;
     }
@@ -885,4 +885,12 @@ section.loader-wrapr {
   stroke: #fff;
   opacity: 0.9;
   animation: load 10s;
+}
+.autocomplete-dropdown-container {
+  &.show {
+    border: 1px solid #979797;
+    div {
+      padding: 10px 20px;
+    }
+  }
 }

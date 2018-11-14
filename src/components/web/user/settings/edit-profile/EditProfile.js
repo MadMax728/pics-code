@@ -71,44 +71,44 @@ class EditProfile extends Component {
     });
   };
   formValid = () => {
-    let errors = {};
+    const errors = {};
     let isFormValid = true;
     const { form } = this.state;
 
     if (form.username.length === 0) {
-      errors["username"] = "username is required.";
+      errors.username = "username is required.";
       isFormValid = false;
     }
     if (form.name_company.length === 0) {
-      errors["name_company"] = "Company is required.";
+      errors.name_company = "Company is required.";
       isFormValid = false;
     }
     if (form.location.length === 0) {
-      errors["location"] = "Location is required.";
+      errors.location = "Location is required.";
       isFormValid = false;
     }
     if (form.phone_number.length === 0) {
-      errors["phone_number"] = "Phone number is required.";
+      errors.phone_number = "Phone number is required.";
       isFormValid = false;
     }
     if (form.email.length === 0) {
-      errors["email"] = "Email is required.";
+      errors.email = "Email is required.";
       isFormValid = false;
     }
     if (form.website.length === 0) {
-      errors["website"] = "Website is required.";
+      errors.website = "Website is required.";
       isFormValid = false;
     }
     if (form.profile_description.length === 0) {
-      errors["profile_description"] = "Profile description is required.";
+      errors.profile_description = "Profile description is required.";
       isFormValid = false;
     }
     if (form.offer_tag.length === 0) {
-      errors["offer_tag"] = "Offer tag is required.";
+      errors.offer_tag = "Offer tag is required.";
       isFormValid = false;
     }
     if (form.inquiry_tag.length === 0) {
-      errors["inquiry_tag"] = "Inquiry tag is required.";
+      errors.inquiry_tag = "Inquiry tag is required.";
       isFormValid = false;
     }
     this.setState({ error: errors });
@@ -131,7 +131,7 @@ class EditProfile extends Component {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
-    this.formValid();
+    // this.formValid();
   };
 
   // handelSubmit called when click on submit
