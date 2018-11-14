@@ -61,7 +61,6 @@ class Feed extends Component {
       campaign,
       handleModalInfoShow,
       handleFavorite,
-      addComment,
       isDescription,
       isInformation
     } = this.props;
@@ -234,7 +233,7 @@ class Feed extends Component {
 
         {/* Comments Section */}
 
-        {isComments && <Comments campaign={campaign} addComment={addComment} />}
+        {isComments && <Comments campaign={campaign} />}
       </div>
     );
   }
@@ -242,7 +241,6 @@ class Feed extends Component {
 
 Feed.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
-  addComment: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,

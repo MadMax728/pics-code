@@ -142,8 +142,10 @@ class HomeRoute extends Component {
     );
   };
 
-  handleInformation = () => {
-    return <Information handleModalShow={this.props.handleModalShow} />;
+  handleInformation = match => {
+    return (
+      <Information handleModalShow={this.props.handleModalShow} match={match} />
+    );
   };
 
   handleParticipant = () => {
