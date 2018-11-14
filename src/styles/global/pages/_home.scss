@@ -221,6 +221,10 @@
       .filter-title {
         margin-bottom: 27px;
       }
+      .autocomplete-dropdown-container {
+        position: relative;
+        top: -25px;
+      }
       input {
         @media (max-width: 991px) {
           width: 100%;

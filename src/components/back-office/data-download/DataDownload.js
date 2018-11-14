@@ -24,9 +24,9 @@ class DataDownload extends Component {
     console.log(this.state.form);
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     return (

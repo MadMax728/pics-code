@@ -37,19 +37,19 @@ class ResetMail extends Component {
   };
 
   formValid = () => {
-    let errors = {};
+    const errors = {};
     let isFormValid = true;
     const { form } = this.state;
-    let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (form.email.length === 0) {
-      errors["email"] = "Email is required.";
+      errors.email = "Email is required.";
       isFormValid = false;
     }
-    let isValidemail = emailRegex.test(form.email);
+    const isValidemail = emailRegex.test(form.email);
     if (!isValidemail) {
       isFormValid = false;
-      errors["email"] = "Email ID should be valid.";
+      errors.email = "Email ID should be valid.";
     }
     this.setState({ error: errors });
     return isFormValid;
@@ -73,12 +73,12 @@ class ResetMail extends Component {
       email: this.state.form.email
     };
     this.props.submitResetPassword(data).then(res => {
-      let errors = {};
+      const errors = {};
       if (
         this.props.resetPasswordData.error &&
         this.props.resetPasswordData.error.status === 400
       ) {
-        errors["servererror"] = "Something went wrong";
+        errors.servererror = "Something went wrong";
         this.setState({ error: errors });
       } else {
         this.props.history.push(routes.FORGOT_PASSWORD);
@@ -97,7 +97,7 @@ class ResetMail extends Component {
               <h3 className="text-center">{Translations.reset_email.header}</h3>
               <p>{Translations.reset_email.subheader}</p>
               <form>
-                <span>{this.state.error["servererror"]}</span>
+                <span>{this.state.error.servererror}</span>
                 <div className="form-group">
                   <input
                     type="text"

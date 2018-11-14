@@ -34,38 +34,38 @@ class Register extends Component {
   };
 
   formValid = () => {
-    let errors = {};
+    const errors = {};
     let isFormValid = true;
     const { form } = this.state;
-    let emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (form.username.length === 0) {
-      errors["username"] = "Username is required.";
+      errors.username = "Username is required.";
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors["password"] = "Password is required.";
+      errors.password = "Password is required.";
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors["email"] = "Email is required.";
+      errors.email = "Email is required.";
       isFormValid = false;
     }
-    let isValidemail = emailRegex.test(form.email);
+    const isValidemail = emailRegex.test(form.email);
     if (!isValidemail) {
       isFormValid = false;
-      errors["email"] = "Email ID should be valid.";
+      errors.email = "Email ID should be valid.";
     }
     if (form.password.length === 0) {
-      errors["repeat_password"] = "Password is required.";
+      errors.repeat_password = "Password is required.";
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors["password"] = "Password is required.";
+      errors.password = "Password is required.";
       isFormValid = false;
     }
     if (form.password !== form.repeat_password) {
-      errors["repeat_password"] = "Password is not matching.";
+      errors.repeat_password = "Password is not matching.";
       isFormValid = false;
     }
 
@@ -107,12 +107,12 @@ class Register extends Component {
 
     this.props.submitRegister(data).then(() => {
       Auth.logoutUser();
-      let errors = {};
+      const errors = {};
       if (
         this.props.registerData.error &&
         this.props.registerData.error.status === 400
       ) {
-        errors["servererror"] = "Something went wrong";
+        errors.servererror = "Something went wrong";
         this.setState({ error: errors });
       } else {
         this.props.history.push(routes.ROOT_ROUTE);
@@ -133,7 +133,7 @@ class Register extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <span>{this.state.error["servererror"]}</span>
+                  <span>{this.state.error.servererror}</span>
                   <Text
                     type="text"
                     className="form-control"

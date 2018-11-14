@@ -20,9 +20,9 @@ class EditProfileModal extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ image: this.props.image });
-  }
+  };
 
   handleActualImg = actual_img => {
     console.log("ac", actual_img);

@@ -45,7 +45,13 @@ class PlaceAutoCompleteLocation extends Component {
                 className
               })}
             />
-            <div className="autocomplete-dropdown-container">
+            <div
+              className={
+                suggestions.length !== 0
+                  ? "autocomplete-dropdown-container show"
+                  : "autocomplete-dropdown-container"
+              }
+            >
               {loading && <div>Loading...</div>}
               {suggestions.map((suggestion, index) => {
                 const className = suggestion.active
