@@ -7,6 +7,10 @@
     // min-height: 80vh;
     // background-color: white;
     // margin: 10vh auto;
+    @media (max-width: 915px) {
+      width: calc(100% - 4%);
+      margin: 30px 2%;
+    }
   }
   .modal-content {
     @include float();
@@ -20,6 +24,12 @@
     .modal-title {
       font-family: "Helvetica-Bold";
       margin-top: 7px;
+      @media (max-width: 785px) {
+        width: 150px;
+        & ~ .text-right {
+          width: calc(100% - 150px);
+        }
+      }
     }
     button {
       height: 35px;

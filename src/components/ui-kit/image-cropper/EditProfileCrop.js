@@ -108,7 +108,16 @@ const EditProfileCrop = ({
         />
         <div
           className="runnable"
-          style={{ width: `${(scale - 1) * 100 * 2.57}px` }}
+          style={{
+            width:
+              scale === 0.1
+                ? `0px`
+                : scale === 1
+                  ? `${scale * 121.5}px`
+                  : scale < 1
+                    ? `${scale * 120.5}px`
+                    : `${scale * 128}px`
+          }}
         />
         <input
           name="scale"
