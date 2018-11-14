@@ -335,6 +335,12 @@
         height: 60px;
         min-width: 60px;
         min-height: 60px;
+        @media (max-width: 991px) {
+          width: 40px;
+          height: 40px;
+          min-width: 40px;
+          min-height: 40px;
+        }
       }
     }
   }
