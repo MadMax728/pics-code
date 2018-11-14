@@ -38,28 +38,6 @@ class NewsFeeds extends Component {
     this.setState({ campaigns });
   };
 
-  addComment = (campaignId, comment) => {
-    const campaigns = this.state.campaigns;
-    const commentData = {
-      comment_id: Math.random(),
-      comment,
-      user: {
-        name: "Vaghela",
-        id: 2,
-        image: `${images.campaign2}`
-      },
-      date: "02.02.2000"
-    };
-
-    campaigns.filter(
-      campaign =>
-        campaign.id === parseInt(campaignId) &&
-        campaign.comments.unshift(commentData)
-    );
-
-    this.setState({ campaigns });
-  };
-
   render() {
     const { handleModalInfoShow, isInformation, isDescription } = this.props;
     const { campaigns } = this.state;
@@ -72,7 +50,6 @@ class NewsFeeds extends Component {
             handleModalInfoShow={handleModalInfoShow}
             handleFavorite={this.handleFavorite}
             handleMessage={this.handleMessage}
-            addComment={this.addComment}
             isDescription={isDescription}
             isInformation={isInformation}
           />

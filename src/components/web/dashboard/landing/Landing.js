@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import { NewsFeeds } from "../../feeds";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCampaigns, getCampaignsMock } from "../../../../actions";
+import { getCampaigns } from "../../../../actions";
 import { InlineLoading } from "../../../ui-kit";
 
 class Landing extends Component {
   componentDidMount = () => {
-    this.props.getCampaignsMock();
+    this.props.getCampaigns("getCampaigns");
   };
 
   render() {
@@ -29,6 +29,7 @@ class Landing extends Component {
               isInformation={false}
             />
           )}
+        {isLoading && <InlineLoading />}
       </div>
     );
   }
@@ -38,21 +39,19 @@ Landing.propTypes = {
   handleModalInfoShow: PropTypes.func.isRequired,
   handleModalShow: PropTypes.func,
   getCampaigns: PropTypes.func.isRequired,
-  // remove when actual API Call
-  getCampaignsMock: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  campaigns: PropTypes.any
+  campaigns: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  campaigns: state.campaignData.landingCampaigns,
-  isLoading: state.campaignData.isLoading
+  campaigns: state.campaignData.campaigns,
+  isLoading: state.campaignData.isLoading,
+  error: state.campaignData.error
 });
 
 const mapDispatchToProps = {
-  getCampaigns,
-  // remove when actual API Call
-  getCampaignsMock
+  getCampaigns
 };
 
 export default connect(

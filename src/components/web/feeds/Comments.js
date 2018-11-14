@@ -30,6 +30,24 @@ class Comments extends Component {
 
   handleReportPost = () => {};
 
+  addComment = (campaignId, comment) => {
+    const comments = this.state.comments;
+    const commentData = {
+      comment_id: parseInt(Math.random()),
+      comment,
+      user: {
+        name: "Vaghela",
+        id: 2,
+        image: `${images.campaign2}`
+      },
+      date: "02.02.2000"
+    };
+
+    comments.unshift(commentData);
+
+    this.setState({ comments });
+  };
+
   handleDelete = e => {
     const id = e.target.id;
     const comments = this.state.comments;
@@ -97,7 +115,7 @@ class Comments extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.form.comment !== "") {
-      this.props.addComment(this.props.campaign.id, this.state.form.comment);
+      this.addComment(this.props.campaign.id, this.state.form.comment);
       /* eslint-disable */
       this.refs.commentForm.reset();
       this.setState({ form: { ...this.state.form, comment: "" } });
@@ -150,8 +168,7 @@ class Comments extends Component {
 }
 
 Comments.propTypes = {
-  campaign: PropTypes.any,
-  addComment: PropTypes.func
+  campaign: PropTypes.any
 };
 
 export default Comments;
