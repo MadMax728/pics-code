@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Translations } from "../../../../lib/translations";
-import LocalizedStrings from "react-localization";
+import propTypes from "prop-types";
+import { setCookie, getCookie } from "../../../../lib/utils/helpers";
 
 class Languages extends Component {
   constructor(props, context) {
@@ -21,14 +22,22 @@ class Languages extends Component {
     };
   }
 
+  /**
+   * handle english
+   */
   handleEnglish = () => {
-    Translations.setLanguage("en");
-    console.log(Translations);
+    // needs to send language code to handle language
+    // make sure we have props is exist with method handleLanguageSwitch
+    this.props.handleLanguageSwitch("en");
   };
 
+  /**
+   * handle german language
+   */
   handleGerman = () => {
-    Translations.setLanguage("de");
-    console.log(Translations);
+    // needs to send language code to handle language
+    // make sure we have props is exist with method handleLanguageSwitch
+    this.props.handleLanguageSwitch("de");
   };
 
   handleKeyDown = () => {};
@@ -37,7 +46,7 @@ class Languages extends Component {
     const { languages } = this.state;
     return (
       <div className="right_language padding-15">
-        <div className="normal_title">Language:</div>
+        <div className="normal_title">{Translations.base_footer.language}</div>
         {languages.map((lang, index) => {
           return (
             <div
@@ -56,5 +65,9 @@ class Languages extends Component {
     );
   }
 }
+
+Languages.propTypes = {
+  handleLanguageSwitch: propTypes.func.isRequired
+};
 
 export default Languages;
