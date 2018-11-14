@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
+import { setCookie, getCookie } from "../lib/utils/helpers";
+import { Translations } from "../lib/translations";
 import {
   LeftSideBar,
   RightSideBar,
@@ -14,6 +16,7 @@ class Home extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      currentLanguage: "en",
       modalShow: false,
       modalType: "",
       modalInfoShow: false,
@@ -53,6 +56,21 @@ class Home extends Component {
     this.setState({ modalShow: true, modalType: e, data });
   };
 
+  /**
+   * Here we have to handle language set
+   * In localizations and cookie
+   * default we have to consider english - en
+   * Todo - We can modify cookie logic in production mode
+   */
+  handleLanguageSwitch = languageCode => {
+    // set cookie for default language
+    setCookie("interfaceLanguage", languageCode, 90);
+    // set language using language code
+    Translations.setLanguage(languageCode || "en");
+    // we need to update state to re render this component on language switch
+    this.setState({ currentLanguage: Translations.getLanguage() });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -68,7 +86,8 @@ class Home extends Component {
 
   render() {
     const { message, data, image } = this.state;
-
+    // here get current language based on cookie inputs on home render
+    Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div>
         <Header handleModalShow={this.handleModalShow} />
@@ -112,6 +131,7 @@ class Home extends Component {
 
               <div className="right_bar no-padding">
                 <RightSideBar
+                  handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
                   handleMessageBar={this.handleMessageBar}
                 />

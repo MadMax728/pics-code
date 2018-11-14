@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import { Languages } from "../languages";
+import { Translations } from "../../../../lib/translations";
 import { RightAbout } from "../right-about";
 import { FavouriteCampaigns } from "../../../../components/web/campaigns";
 import { Community } from "../../../../components/web/dashboard";
@@ -15,9 +16,10 @@ import propTypes from "prop-types";
 
 class RightSideBar extends Component {
   userLanguage = () => {
+    // here we have to switch language
     return (
       <div>
-        <Languages />
+        <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
         <RightAbout />
       </div>
     );
@@ -170,7 +172,8 @@ class RightSideBar extends Component {
 
 RightSideBar.propTypes = {
   handleModalShow: propTypes.func,
-  handleMessageBar: propTypes.func.isRequired
+  handleMessageBar: propTypes.func.isRequired,
+  handleLanguageSwitch: propTypes.func.isRequired
 };
 
 export default RightSideBar;
