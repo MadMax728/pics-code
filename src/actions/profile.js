@@ -51,8 +51,9 @@ const uploadImageFailed = error => ({
 export const getUser = params => {
   return dispatch => {
     dispatch(getUserStarted());
-
-    return userService.getUser(params).then(
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+    return userService.getUser(params, header).then(
       res => {
         if (res.data && res.data.data) Auth.saveJwtToStorage(res.data.data);
         dispatch(getUserSucceeded(res.data));

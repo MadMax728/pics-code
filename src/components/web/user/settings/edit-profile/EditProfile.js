@@ -12,7 +12,14 @@ import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { getUser, updateUserProfile } from "../../../../../actions/profile";
 import connect from "react-redux/es/connect/connect";
+import jwtDecode from "jwt-decode";
+import { Auth } from "../../../../../auth";
+import * as routes from "../../../../../lib/constants/routes";
+import TagsInput from "react-tagsinput";
+import "react-tagsinput/react-tagsinput.css"; // If using WebPack and style-loader.
 
+const storage = Auth.extractJwtFromStorage();
+let userInfo = jwtDecode(storage.accessToken);
 const genderItems = [
   {
     name: "Male",
@@ -58,68 +65,89 @@ class EditProfile extends Component {
         email: "",
         website: "",
         profile_description: "",
-        offer_tag: "",
-        inquiry_tag: ""
+        offer_tag: [],
+        inquiry_tag: []
       },
-      error: {}
+      error: {},
+      tags: []
     };
   }
+
+  componentWillMount() {
+    let data = {
+      username: userInfo.username
+    };
+    this.props.getUser(data).then(() => {
+      this.setDataOnLoad();
+    });
+  }
+
+  handleOfferTagChange = tags => {
+    const { form } = this.state;
+    form["offer_tag"] = tags;
+    this.setState({ form });
+  };
+  handleInquiryTagChange = tags => {
+    const { form } = this.state;
+    form["inquiry_tag"] = tags;
+    this.setState({ form });
+  };
 
   handleLocation = (location, address) => {
     this.setState({
       form: { ...this.state.form, location, address }
     });
   };
-  formValid = () => {
-    const errors = {};
-    let isFormValid = true;
-    const { form } = this.state;
-
-    if (form.username.length === 0) {
-      errors.username = "username is required.";
-      isFormValid = false;
-    }
-    if (form.name_company.length === 0) {
-      errors.name_company = "Company is required.";
-      isFormValid = false;
-    }
-    if (form.location.length === 0) {
-      errors.location = "Location is required.";
-      isFormValid = false;
-    }
-    if (form.phone_number.length === 0) {
-      errors.phone_number = "Phone number is required.";
-      isFormValid = false;
-    }
-    if (form.email.length === 0) {
-      errors.email = "Email is required.";
-      isFormValid = false;
-    }
-    if (form.website.length === 0) {
-      errors.website = "Website is required.";
-      isFormValid = false;
-    }
-    if (form.profile_description.length === 0) {
-      errors.profile_description = "Profile description is required.";
-      isFormValid = false;
-    }
-    if (form.offer_tag.length === 0) {
-      errors.offer_tag = "Offer tag is required.";
-      isFormValid = false;
-    }
-    if (form.inquiry_tag.length === 0) {
-      errors.inquiry_tag = "Inquiry tag is required.";
-      isFormValid = false;
-    }
-    this.setState({ error: errors });
-    return isFormValid;
-
-    // if (form.userName.length === 0 || form.password.length === 0) {
-    //   return false;
-    // }
-
-    // return isFormValid;
-  };
+  // formValid = () => {
+  //   const errors = {};
+  //   let isFormValid = true;
+  //   const { form } = this.state;
+  //
+  //   if (form.username.length === 0) {
+  //     errors.username = "username is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.name_company.length === 0) {
+  //     errors.name_company = "Company is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.location.length === 0) {
+  //     errors.location = "Location is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.phone_number.length === 0) {
+  //     errors.phone_number = "Phone number is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.email.length === 0) {
+  //     errors.email = "Email is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.website.length === 0) {
+  //     errors.website = "Website is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.profile_description.length === 0) {
+  //     errors.profile_description = "Profile description is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.offer_tag.length === 0) {
+  //     errors.offer_tag = "Offer tag is required.";
+  //     isFormValid = false;
+  //   }
+  //   if (form.inquiry_tag.length === 0) {
+  //     errors.inquiry_tag = "Inquiry tag is required.";
+  //     isFormValid = false;
+  //   }
+  //   this.setState({ error: errors });
+  //   return isFormValid;
+  //
+  //   // if (form.userName.length === 0 || form.password.length === 0) {
+  //   //   return false;
+  //   // }
+  //
+  //   // return isFormValid;
+  // };
 
   handleChangeDOB = event => {
     const { form } = this.state;
@@ -133,22 +161,39 @@ class EditProfile extends Component {
     this.setState({ form });
     // this.formValid();
   };
+  setDataOnLoad = () => {
+    const userData = this.props.userDataByUsername.user.data;
+    this.setState({
+      form: {
+        username: userData.username,
+        email: userData.email,
+        name_company: userData.name,
+        dob: {
+          day: "",
+          mon: "",
+          year: ""
+        },
+        gender: userData.gender,
+        category: userData.category,
+        location: "",
+        address: "",
+        phone_number: "",
+        website: userData.website,
+        profile_description: userData.profileDescription,
+        offer_tag: userData.offerTag,
+        inquiry_tag: userData.inquiryTag
+      }
+    });
+  };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    // if (!this.formValid()) {
-    //   return false;
-    // }
-    // let data = {
-    //   "username": this.state.form.username,
-    //   "profileDescription": this.state.form.profile_description,
-    //   "website": this.state.form.website,
-    // }
     let data = {
-      name: this.state.form.username,
-      offerTag: ["five", "two", "three"],
-      inquiryTag: ["one", "two", "three"],
+      name: this.state.form.name_company,
+      gender: this.state.form.gender,
+      offerTag: this.state.form.offer_tag,
+      inquiryTag: this.state.form.inquiry_tag,
       latitude: this.state.form.location.lat,
       longitude: this.state.form.location.lng,
       profileDescription: this.state.form.profile_description,
@@ -156,7 +201,16 @@ class EditProfile extends Component {
     };
 
     this.props.updateUserProfile(data).then(() => {
-      console.log("data", this.props.userDataByUsername);
+      const errors = {};
+      if (
+        this.props.userDataByUsername.error &&
+        this.props.userDataByUsername.error.status === 400
+      ) {
+        errors.servererror = "Something went wrong";
+        this.setState({ error: errors });
+      } else {
+        this.setDataOnLoad();
+      }
     });
   };
 
@@ -167,7 +221,6 @@ class EditProfile extends Component {
   };
 
   render() {
-    console.log("location", this.state.form.location);
     const { form } = this.state;
     const { image } = this.props;
     return (
@@ -204,6 +257,7 @@ class EditProfile extends Component {
                   className="form-control"
                   id="username"
                   name="username"
+                  value={form.username}
                   onChange={this.handleChangeField}
                 />
                 {form.username.length === 0 ? (
@@ -220,6 +274,7 @@ class EditProfile extends Component {
                   className="form-control"
                   id="name_company"
                   name="name_company"
+                  value={form.name_company}
                   onChange={this.handleChangeField}
                 />
                 <span>{this.state.error.name_company}</span>
@@ -295,6 +350,7 @@ class EditProfile extends Component {
                   className="form-control"
                   id="category"
                   name="category"
+                  value={form.category}
                   onChange={this.handleChangeField}
                 />
                 <span>{this.state.error.category}</span>
@@ -316,6 +372,7 @@ class EditProfile extends Component {
                   className="form-control"
                   id="phone_number"
                   name="phone_number"
+                  value={form.phone_number}
                   onChange={this.handleChangeField}
                 />
                 <span>{this.state.error.phone_number}</span>
@@ -327,6 +384,7 @@ class EditProfile extends Component {
                   className="form-control"
                   id="email"
                   name="email"
+                  value={form.email}
                   onChange={this.handleChangeField}
                 />
                 <span>{this.state.error.email}</span>
@@ -338,6 +396,7 @@ class EditProfile extends Component {
                   className="form-control"
                   id="website"
                   name="website"
+                  value={form.website}
                   onChange={this.handleChangeField}
                 />
                 <span>{this.state.error.website}</span>
@@ -349,6 +408,7 @@ class EditProfile extends Component {
                   className="form-control"
                   id="profile_description"
                   name="profile_description"
+                  value={form.profile_description}
                   onChange={this.handleChangeField}
                 />
                 <span>{this.state.error.profile_description}</span>
@@ -358,23 +418,17 @@ class EditProfile extends Component {
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
                 <label htmlFor="offer-tag">Offer tag</label>
-                <Text
-                  type="text"
-                  className="form-control"
-                  id="offer_tag"
-                  name="offer_tag"
-                  onChange={this.handleChangeField}
+                <TagsInput
+                  value={this.state.form.offer_tag}
+                  onChange={this.handleOfferTagChange}
                 />
                 <span>{this.state.error.offer_tag}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="inquiry-tag">Inquiry tag</label>
-                <Text
-                  type="text"
-                  className="form-control"
-                  id="inquiry_tag"
-                  name="inquiry_tag"
-                  onChange={this.handleChangeField}
+                <TagsInput
+                  value={this.state.form.inquiry_tag}
+                  onChange={this.handleInquiryTagChange}
                 />
                 <span>{this.state.error.inquiry_tag}</span>
               </div>
