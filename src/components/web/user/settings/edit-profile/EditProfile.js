@@ -146,13 +146,13 @@ class EditProfile extends Component {
     //   "website": this.state.form.website,
     // }
     let data = {
-      username: "aatish.pawar",
+      name: this.state.form.username,
       offerTag: ["five", "two", "three"],
       inquiryTag: ["one", "two", "three"],
-      latitude: 18.5204303,
-      longitude: 73.85674369999992,
-      profileDescription: "test",
-      website: "www.picstagraph.com"
+      latitude: this.state.form.location.lat,
+      longitude: this.state.form.location.lng,
+      profileDescription: this.state.form.profile_description,
+      website: this.state.form.website
     };
 
     this.props.updateUserProfile(data).then(() => {
