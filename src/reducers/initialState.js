@@ -38,11 +38,7 @@ const initialState = {
     error: false
   },
   campaignData: {
-    landingCampaigns: null,
-    participantCampaigns: null,
-    creatorCampaigns: null,
-    companyCampaigns: null,
-    exploreCampaigns: null,
+    campaigns: null,
     isLoading: false,
     error: false
   }

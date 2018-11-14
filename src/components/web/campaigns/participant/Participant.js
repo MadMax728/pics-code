@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { NewsFeeds } from "../../feeds";
 import { connect } from "react-redux";
-import { getParticipantCampaignsMock } from "../../../../actions";
+import { getCampaigns } from "../../../../actions";
+import { InlineLoading } from "../../../ui-kit";
 
 import PropTypes from "prop-types";
 
 class Participant extends Component {
   componentDidMount = () => {
-    this.props.getParticipantCampaignsMock();
+    this.props.getCampaigns("getParticipantCampaigns");
   };
 
   render() {
@@ -29,6 +30,7 @@ class Participant extends Component {
               isInformation={false}
             />
           )}
+        {isLoading && <InlineLoading />}
       </div>
     );
   }
@@ -38,19 +40,19 @@ Participant.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
-  getParticipantCampaignsMock: PropTypes.func.isRequired,
+  getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   participants_campaigns_list: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  participants_campaigns_list: state.campaignData.participantCampaigns,
+  participants_campaigns_list: state.campaignData.campaigns,
   isLoading: state.campaignData.isLoading
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getParticipantCampaignsMock
+  getCampaigns
 };
 
 export default connect(

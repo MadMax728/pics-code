@@ -62,7 +62,7 @@ export const campaigns_list = [
       isOwner: false,
       // Creator for True and Company for False
       isCreator: true,
-      isParticipant: true
+      isParticipant: false
     },
     title: "Title of campaigns",
     isExplore: false,
