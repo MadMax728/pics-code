@@ -10,8 +10,7 @@ import {
 } from "../../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
-import { getUser } from "../../../../../actions/profile";
-import { submitLogin } from "../../../../../actions";
+import { getUser, updateUserProfile } from "../../../../../actions/profile";
 import connect from "react-redux/es/connect/connect";
 
 const genderItems = [
@@ -138,9 +137,27 @@ class EditProfile extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    if (!this.formValid()) {
-      return false;
-    }
+    // if (!this.formValid()) {
+    //   return false;
+    // }
+    // let data = {
+    //   "username": this.state.form.username,
+    //   "profileDescription": this.state.form.profile_description,
+    //   "website": this.state.form.website,
+    // }
+    let data = {
+      username: "aatish.pawar",
+      offerTag: ["five", "two", "three"],
+      inquiryTag: ["one", "two", "three"],
+      latitude: 18.5204303,
+      longitude: 73.85674369999992,
+      profileDescription: "test",
+      website: "www.picstagraph.com"
+    };
+
+    this.props.updateUserProfile(data).then(() => {
+      console.log("data", this.props.userDataByUsername);
+    });
   };
 
   handleOnKeyDown = () => {};
@@ -150,6 +167,7 @@ class EditProfile extends Component {
   };
 
   render() {
+    console.log("location", this.state.form.location);
     const { form } = this.state;
     const { image } = this.props;
     return (
@@ -379,7 +397,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getUser
+  getUser,
+  updateUserProfile
 };
 
 EditProfile.propTypes = {
@@ -387,7 +406,8 @@ EditProfile.propTypes = {
   userDataByUsername: PropTypes.object,
   history: PropTypes.any,
   handleModalInfoShow: PropTypes.func.isRequired,
-  image: PropTypes.any
+  image: PropTypes.any,
+  updateUserProfile: PropTypes.any
 };
 
 export default connect(
