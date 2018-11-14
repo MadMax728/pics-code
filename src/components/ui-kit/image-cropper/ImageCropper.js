@@ -42,6 +42,8 @@ class ImageCropper extends Component {
 
   handleScale = e => {
     const scale = parseFloat(e.target.value);
+    console.log(scale);
+
     this.setState({ scale }, () => {
       this.handleSave();
     });
