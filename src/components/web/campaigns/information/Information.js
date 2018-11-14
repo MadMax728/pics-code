@@ -4,7 +4,6 @@ import Comments from "./Comments";
 import * as images from "../../../../lib/constants/images";
 import { Translations } from "../../../../lib/translations";
 
-import { campaign_detail } from "../../../../mock-data";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { ThreeDots, RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
@@ -281,6 +280,7 @@ class Information extends Component {
 Information.propTypes = {
   handleModalShow: PropTypes.func,
   match: PropTypes.any,
+  getCampaignDetails: PropTypes.func.isRequired,
   campaign_detail: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.any
