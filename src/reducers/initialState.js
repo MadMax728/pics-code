@@ -35,7 +35,8 @@ const initialState = {
   userDataByUsername: {
     user: null,
     isLoading: false,
-    error: false
+    error: false,
+    imageData: null
   },
   campaignData: {
     campaigns: null,

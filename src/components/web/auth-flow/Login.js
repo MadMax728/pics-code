@@ -73,7 +73,6 @@ class Login extends Component {
       .submitLogin({ email: form.userName, password: form.password })
       .then(res => {
         const errors = {};
-        console.log("data", this.props.loginData);
         if (
           this.props.loginData.error &&
           this.props.loginData.error.status === 400
