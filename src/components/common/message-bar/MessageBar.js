@@ -9,13 +9,13 @@ class MessageBar extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     // this.timer = setInterval(() =>  this.setState(prevState => ({ isView: !prevState.isView })), 2000);
-  }
+  };
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     // clearInterval(this.timer);
-  }
+  };
 
   render() {
     const { message } = this.props;

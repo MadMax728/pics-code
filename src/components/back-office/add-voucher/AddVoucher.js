@@ -133,9 +133,9 @@ class AddVoucher extends Component {
     </span>
   );
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     const { vouchers } = this.state;

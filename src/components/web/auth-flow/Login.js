@@ -31,16 +31,16 @@ class Login extends Component {
    * formValid
    */
   formValid = () => {
-    let errors = {};
+    const errors = {};
     let isFormValid = true;
     const { form } = this.state;
 
     if (form.userName.length === 0) {
-      errors["username"] = "Username is required.";
+      errors.username = "Username is required.";
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors["password"] = "Password is required.";
+      errors.password = "Password is required.";
       isFormValid = false;
     }
     this.setState({ error: errors });
@@ -72,13 +72,13 @@ class Login extends Component {
     this.props
       .submitLogin({ email: form.userName, password: form.password })
       .then(res => {
-        let errors = {};
+        const errors = {};
         console.log("data", this.props.loginData);
         if (
           this.props.loginData.error &&
           this.props.loginData.error.status === 400
         ) {
-          errors["servererror"] = "Username or password is wrong.";
+          errors.servererror = "Username or password is wrong.";
           this.setState({ error: errors });
         } else {
           this.props.history.push(routes.ROOT_ROUTE);
@@ -99,7 +99,7 @@ class Login extends Component {
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
-                <span>{this.state.error["servererror"]}</span>
+                <span>{this.state.error.servererror}</span>
                 <div className="form-group">
                   <input
                     type="text"

@@ -12,12 +12,12 @@ class RadioBtn extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({
       selectedValue: this.props.items[0].name,
       name: this.props.name
     });
-  }
+  };
 
   handleChange = (value, event) => {
     this.setState({ selectedValue: value });

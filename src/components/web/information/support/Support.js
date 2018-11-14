@@ -9,9 +9,9 @@ class Support extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   handleCollapse = e => {
     this.setState({ open: !this.state.open, current: e.target.id });

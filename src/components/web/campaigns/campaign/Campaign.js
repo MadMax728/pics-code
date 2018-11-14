@@ -9,11 +9,15 @@ class Campaign extends Component {
     const { handleModalShow, handleModalInfoShow } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        <NewsFeeds
-          campaigns={campaigns_list}
-          handleModalShow={handleModalShow}
-          handleModalInfoShow={handleModalInfoShow}
-        />
+        {campaigns_list && (
+          <NewsFeeds
+            campaigns={campaigns_list}
+            handleModalShow={handleModalShow}
+            handleModalInfoShow={handleModalInfoShow}
+            isDescription
+            isInformation={false}
+          />
+        )}
       </div>
     );
   }
