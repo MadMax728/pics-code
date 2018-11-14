@@ -39,6 +39,7 @@ const initialState = {
   },
   campaignData: {
     campaigns: null,
+    campaign: [],
     isLoading: false,
     error: false
   }

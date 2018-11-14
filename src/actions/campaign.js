@@ -5,6 +5,7 @@ import { Auth } from "../auth";
 // remove when no need
 import { campaigns_list } from "../mock-data";
 
+// Get Campaigns
 const getCampaignsStarted = () => ({
   type: types.GET_CAMPAIGNS_STARTED
 });
@@ -73,6 +74,52 @@ export const getCampaigns = prop => {
                             getCampaignsSucceeded(
                               campaigns_list.filter(c => c.isSaved === true)
                             )
+        );
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+// Campaign Details
+const getCampaignDetailsStarted = () => ({
+  type: types.GET_CAMPAIGNS_DETAILS_STARTED
+});
+
+const getCampaignDetailsSucceeded = data => ({
+  type: types.GET_CAMPAIGNS_DETAILS_SUCCEEDED,
+  payload: data
+});
+
+const getCampaignDetailsFailed = error => ({
+  type: types.GET_CAMPAIGNS_DETAILS_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getCampaignDetails = provider => {
+  return dispatch => {
+    dispatch(getCampaignDetailsStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+
+    return campaignService.getCampaignDetails(params, provider).then(
+      res => {
+        dispatch(getCampaignDetailsSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(
+          // getCampaignDetailsFailed(error.response)
+          // remove below code after API working, this is just for set mock data.
+          getCampaignDetailsSucceeded(
+            campaigns_list.filter(c => c.id === parseInt(provider))
+          )
         );
         logger.error({
           description: error.toString(),

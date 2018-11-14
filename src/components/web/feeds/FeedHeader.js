@@ -43,7 +43,12 @@ class FeedHeader extends Component {
           )}
         </div>
         <div className="no-padding titles_wrapper">
-          <Link to={"/campaign/" + campaign.id + "/information"}>
+          <Link
+            to={{
+              pathname: `/campaign/${campaign.id}/information`,
+              state: { _id: campaign.id }
+            }}
+          >
             <div className="normal_title">{campaign.title}</div>
           </Link>
           <div className="secondary_title">{campaign.user.name}</div>
