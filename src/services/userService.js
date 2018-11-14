@@ -1,4 +1,4 @@
-import apiFactory from "../api";
+import apiFactory, { apiAuth } from "../api";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -20,6 +20,12 @@ export const getUser = payload => api.get("/", payload);
 
 export const submitResetPassword = payload =>
   api.put("/users/forgot-password", payload);
+
+export const uploadProfilePicture = (payload, header = {}) =>
+  apiAuth(baseUrl, header).post("/images", payload);
+
+export const updateUserProfile = (payload, header = {}) =>
+  apiAuth(baseUrl, header).put("/users", payload);
 
 /**
  *

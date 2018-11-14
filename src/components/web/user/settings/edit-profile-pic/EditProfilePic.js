@@ -13,7 +13,7 @@ class EditProfilePic extends Component {
   };
 
   render() {
-    const { image, handleEditImage } = this.props;
+    const { image, handleEditImage, handleActualImg, handleScale } = this.props;
 
     return (
       <div className="col-xs-12 upload-profile-wrapr padding-b-25">
@@ -22,6 +22,8 @@ class EditProfilePic extends Component {
           handleEditImage={handleEditImage}
           isCircle
           ref={this.imageCrop}
+          handleActualImg={handleActualImg}
+          handleScale={handleScale}
         />
       </div>
     );
@@ -30,7 +32,9 @@ class EditProfilePic extends Component {
 
 EditProfilePic.propTypes = {
   image: propTypes.any,
-  handleEditImage: propTypes.func
+  handleEditImage: propTypes.func,
+  handleActualImg: propTypes.any,
+  handleScale: propTypes.any
 };
 
 export default EditProfilePic;
