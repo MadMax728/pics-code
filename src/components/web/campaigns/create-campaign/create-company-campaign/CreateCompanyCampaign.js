@@ -37,7 +37,7 @@ class CreateCompanyCampaign extends Component {
 
     return (
       <div>
-        {isPreview && <Preview />}
+        {isPreview && <Preview form={form} />}
         {isPreview && (
           <button
             onClick={handlePrivewClose}

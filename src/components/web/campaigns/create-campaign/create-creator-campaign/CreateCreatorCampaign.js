@@ -33,7 +33,7 @@ class CreateCreatorCampaign extends Component {
 
     return (
       <div className="col-xs-12 no-padding">
-        {isPreview && <Preview />}
+        {isPreview && <Preview form={form} />}
         {isPreview && (
           <button
             onClick={handlePrivewClose}
