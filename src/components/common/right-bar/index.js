@@ -1,4 +1,4 @@
-export { Languages } from "./languages";
-export { RightAbout } from "./right-about";
-export { RightSideBar } from "./right-side-bar";
-export { RightSideBarBackOffice } from "./right-side-bar-back-office";
+export { default as Languages } from "./Languages";
+export { default as RightAbout } from "./RightAbout";
+export { default as RightSideBar } from "./RightSideBar";
+export { default as RightSideBarBackOffice } from "./RightSideBarBackOffice";

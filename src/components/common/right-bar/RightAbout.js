@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as routes from "../../../../lib/constants/routes";
-import { Translations } from "../../../../lib/translations";
+import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 const RightAbout = () => {
   return (

@@ -6,8 +6,8 @@
         height: auto;
         & > div.col-sm-6.no-padding:nth-child(2) {
           img.widthHeightAuto {
-            // height: 378px;
-            height: calc(100% - 65px);
+            height: 378px;
+            max-height: calc(100% - 65px);
             width: 100%;
           }
         }

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Translations } from "../../../../lib/translations";
+import { Translations } from "../../../lib/translations";
 import propTypes from "prop-types";
-import { setCookie, getCookie } from "../../../../lib/utils/helpers";
 
 class Languages extends Component {
   constructor(props, context) {

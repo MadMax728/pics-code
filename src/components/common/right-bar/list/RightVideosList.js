@@ -1,6 +1,6 @@
 import React from "react";
-import { RightSidebarStatistics } from "../../../../ui-kit";
-import { Translations } from "../../../../../lib/translations";
+import { RightSidebarStatistics } from "../../../ui-kit";
+import { Translations } from "../../../../lib/translations";
 
 const statistics = [
   {
@@ -21,13 +21,13 @@ const statistics = [
   }
 ];
 
-const RightImagesList = () => {
+const RightVideosList = () => {
   return (
     <RightSidebarStatistics
       statistics={statistics}
-      header={`Reported Images`}
+      header={`Reported Videos`}
     />
   );
 };
 
-export default RightImagesList;
+export default RightVideosList;

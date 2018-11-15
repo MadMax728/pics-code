@@ -1,18 +1,16 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import * as routes from "../../../../lib/constants/routes";
-import { Languages } from "../languages";
-import { Translations } from "../../../../lib/translations";
-import { RightAbout } from "../right-about";
-import { FavouriteCampaigns } from "../../../../components/web/campaigns";
-import { Community } from "../../../../components/web/dashboard";
+import propTypes from "prop-types";
+import * as routes from "../../../lib/constants/routes";
+import { Languages, RightAbout } from "./";
+import { FavouriteCampaigns } from "../../../components/web/campaigns";
+import { Community } from "../../../components/web/dashboard";
 import {
   SettingCampaignRight,
   SettingAdsRight,
   SettingCampaignStatisticsRight,
   SettingAdsStatisticsRight
-} from "../../../../components/web/user/settings";
-import propTypes from "prop-types";
+} from "../../../components/web/user/settings";
 
 class RightSideBar extends Component {
   userLanguage = () => {

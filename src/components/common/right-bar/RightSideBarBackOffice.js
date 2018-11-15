@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import * as routes from "../../../../lib/constants/routes";
-
+import propTypes from "prop-types";
+import * as routes from "../../../lib/constants/routes";
 import {
   RightCampaignsList,
   RightAdsList,
@@ -12,15 +12,14 @@ import {
   RightReportedAdList,
   RightCommentsList,
   RightUsersList
-} from "../right-side-list";
+} from "./list";
 
 import {
   SettingCampaignRight,
   SettingAdsRight,
   SettingCampaignStatisticsRight,
   SettingAdsStatisticsRight
-} from "../../../../components/web/user/settings";
-import propTypes from "prop-types";
+} from "../../../components/web/user/settings";
 
 class RightSideBarBackOffice extends Component {
   handleReportedList = () => {

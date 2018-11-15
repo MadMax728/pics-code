@@ -1,6 +1,6 @@
 import React from "react";
-import { RightSidebarStatistics } from "../../../../ui-kit";
-import { Translations } from "../../../../../lib/translations";
+import { RightSidebarStatistics } from "../../../ui-kit";
+import { Translations } from "../../../../lib/translations";
 
 const statistics = [
   {
@@ -21,13 +21,13 @@ const statistics = [
   }
 ];
 
-const RightCommentssList = () => {
+const RightReportedCampaignList = () => {
   return (
     <RightSidebarStatistics
       statistics={statistics}
-      header={`Reported Comments`}
+      header={`Reported Campaign`}
     />
   );
 };
 
-export default RightCommentssList;
+export default RightReportedCampaignList;
