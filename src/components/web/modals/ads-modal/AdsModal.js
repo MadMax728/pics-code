@@ -4,6 +4,7 @@ import propTypes from "prop-types";
 import { CreateAds, CreateAdsHeader } from "../../user";
 import { modalType } from "../../../../lib/constants/enumerations";
 import moment from "moment";
+import { CreateCompanyCampaign } from "../../campaigns/create-campaign/create-company-campaign";
 
 class AdsModal extends Component {
   constructor(props, context) {
@@ -57,6 +58,14 @@ class AdsModal extends Component {
     const { form } = this.state;
     form[forThat] = date;
     this.setState({ form });
+  };
+  handleActualImg = actual_img => {
+    console.log("ac", actual_img);
+    this.setState({ actual_img: actual_img });
+  };
+
+  handleScale = scale => {
+    this.setState({ scale: scale });
   };
 
   handleChangeField = event => {
@@ -160,6 +169,8 @@ class AdsModal extends Component {
             handleDate={this.handleDate}
             handleEditImage={this.handleEditImage}
             handleLocation={this.handleLocation}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
           />
         }
       />
