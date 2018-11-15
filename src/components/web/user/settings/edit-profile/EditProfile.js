@@ -18,8 +18,8 @@ import * as routes from "../../../../../lib/constants/routes";
 import TagsInput from "react-tagsinput";
 import "react-tagsinput/react-tagsinput.css"; // If using WebPack and style-loader.
 
-const storage = Auth.extractJwtFromStorage();
-let userInfo = jwtDecode(storage.accessToken);
+// const storage = Auth.extractJwtFromStorage();
+// let userInfo = jwtDecode(storage.accessToken);
 const genderItems = [
   {
     name: "Male",
@@ -74,12 +74,12 @@ class EditProfile extends Component {
   }
 
   componentWillMount() {
-    let data = {
-      username: userInfo.username
-    };
-    this.props.getUser(data).then(() => {
-      this.setDataOnLoad();
-    });
+    // let data = {
+    //   username: userInfo.username
+    // };
+    // this.props.getUser(data).then(() => {
+    //   this.setDataOnLoad();
+    // });
   }
 
   handleOfferTagChange = tags => {
