@@ -29,7 +29,60 @@ class Landing extends Component {
               isInformation={false}
             />
           )}
-        {isLoading && <InlineLoading />}
+        {isLoading && (
+          <div class="feed_wrapper">
+            <div class="feed_header">
+              <div class="col-sm-1 col-xs-1 no-padding profile_image">
+                <img
+                  src="images/image.jpg"
+                  alt="image"
+                  class="img-circle img-responsive"
+                />
+              </div>
+              <div class="col-sm-9 col-xs-7 no-padding">
+                <div class="normal_title">Title of campaigns</div>
+                <div class="secondary_title">User name</div>
+                <div class="grey_title">01.01.2000 in Category</div>
+              </div>
+              <div class="col-sm-2 col-xs-2 like_wrapper">
+                <img
+                  src="images/blue_heart.svg"
+                  alt="like"
+                  class="pull-right"
+                />
+              </div>
+            </div>
+            <div class="feed_content">
+              <div class="feed_image">
+                <img
+                  src="images/image.jpg"
+                  alt="image"
+                  class="img-responsive"
+                />
+              </div>
+              <div class="feed_description padding-15">
+                <span class="secondary_title">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s...
+                </span>
+              </div>
+            </div>
+            <div class="feed_footer padding-15">
+              <div class="messages">
+                <span class="count">100</span>
+                <img src="images/feed_msg.svg" />
+              </div>
+              <div class="likes">
+                <span class="count">100</span>
+                <img src="images/feed_like.svg" />
+              </div>
+              <div class="show_more_options">
+                <a href="#">• • •</a>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

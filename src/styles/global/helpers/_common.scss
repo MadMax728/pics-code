@@ -894,3 +894,76 @@ section.loader-wrapr {
     }
   }
 }
+
+.rdw-editor-wrapper {
+  .rdw-editor-toolbar {
+    border-color: #333333;
+    margin-bottom: 0px;
+    .rdw-option-wrapper {
+      border: 0px;
+      width: 34px;
+    }
+    .rdw-inline-wrapper {
+      order: 2;
+    }
+    .rdw-dropdown-wrapper {
+      order: 1;
+      width: 65px;
+      border: 0;
+      position: relative;
+      a {
+        color: black;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+      .rdw-dropdown-carettoopen {
+        margin-right: 5px;
+      }
+    }
+    .rdw-text-align-wrapper {
+      order: 4;
+      position: relative;
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+    }
+    .rdw-colorpicker-wrapper {
+      order: 3;
+      &:after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 1px;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.12);
+      }
+    }
+    .rdw-history-wrapper {
+      order: 5;
+    }
+  }
+  .editor-class.rdw-editor-main,
+  .rdw-editor-main {
+    border: 1px solid #333333;
+    border-top: 0px;
+    height: 318px;
+    padding: 0 10px;
+    .DraftEditor-root {
+      height: 95%;
+    }
+  }
+}
