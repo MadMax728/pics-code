@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CustomBootstrapModal } from "../../../ui-kit";
+import { CustomBootstrapModal, ImageCropper } from "../../../ui-kit";
 import propTypes from "prop-types";
 import {
   CreateCompanyCampaign,
@@ -52,7 +52,9 @@ class CampaignModal extends Component {
         photo: "",
         photoFile: null,
         image: null
-      }
+      },
+      actual_img: "",
+      scale: ""
     };
   }
 
@@ -147,6 +149,14 @@ class CampaignModal extends Component {
       "Campaign"
     );
   };
+  handleActualImg = actual_img => {
+    console.log("ac", actual_img);
+    this.setState({ actual_img: actual_img });
+  };
+
+  handleScale = scale => {
+    this.setState({ scale: scale });
+  };
 
   handleLocation = (location, address) => {
     this.setState({
@@ -217,6 +227,8 @@ class CampaignModal extends Component {
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
               ref={this.imageCropper}
+              handleActualImg={this.handleActualImg}
+              handleScale={this.handleScale}
             />
           ) : (
             <CreateCreatorCampaign
