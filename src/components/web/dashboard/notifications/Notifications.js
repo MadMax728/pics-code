@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Tabs from "react-bootstrap/lib/Tabs";
 import Tab from "react-bootstrap/lib/Tab";
-import { LikeYou } from "./like-you";
-import { Requests } from "./requests";
-import { NotificationsList } from "./notifications-list";
+import { LikeYou, Requests, NotificationsList } from "./notification";
 import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 

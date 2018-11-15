@@ -62,7 +62,8 @@ class Feed extends Component {
       handleModalInfoShow,
       handleFavorite,
       isDescription,
-      isInformation
+      isInformation,
+      isStatus
     } = this.props;
     const { isComments } = this.state;
     return (
@@ -229,6 +230,34 @@ class Feed extends Component {
               type={"light"}
             />
           </div>
+          {campaign &&
+            isStatus && (
+              <div className="status">
+                <div className="status-wrapper">
+                  <div className="title">Status</div>
+                  <div className="subtitle">
+                    <span className="green-circle" />
+                  </div>
+                </div>
+                <div className="status-wrapper">
+                  <div className="title">Views</div>
+                  <div className="subtitle">{campaign.views}</div>
+                </div>
+                <div className="status-wrapper">
+                  <div className="title">Clicks</div>
+                  <div className="subtitle">{campaign.clicks}</div>
+                </div>
+                <div className="status-wrapper">
+                  <div className="title">Applications</div>
+                  <div className="subtitle">{campaign.applications}</div>
+                </div>
+                <div className="status-wrapper">
+                  <Link to={`/settings/campaigns/${campaign.id}/statistics`}>
+                    <button className="blue_button">statistics</button>
+                  </Link>
+                </div>
+              </div>
+            )}
         </div>
 
         {/* Comments Section */}
@@ -244,6 +273,7 @@ Feed.propTypes = {
   handleModalInfoShow: PropTypes.func,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
+  isStatus: PropTypes.bool.isRequired,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,

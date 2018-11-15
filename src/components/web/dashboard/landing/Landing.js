@@ -27,6 +27,7 @@ class Landing extends Component {
               handleModalShow={handleModalShow}
               isDescription
               isInformation={false}
+              isStatus={false}
             />
           )}
         {isLoading && <InlineLoading />}

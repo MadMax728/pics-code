@@ -8,7 +8,8 @@ const propTypes = {
   handleModalInfoShow: PropTypes.func,
   handleModalShow: PropTypes.func,
   isDescription: PropTypes.bool.isRequired,
-  isInformation: PropTypes.bool.isRequired
+  isInformation: PropTypes.bool.isRequired,
+  isStatus: PropTypes.bool.isRequired
 };
 
 class NewsFeeds extends Component {
@@ -39,7 +40,12 @@ class NewsFeeds extends Component {
   };
 
   render() {
-    const { handleModalInfoShow, isInformation, isDescription } = this.props;
+    const {
+      handleModalInfoShow,
+      isInformation,
+      isDescription,
+      isStatus
+    } = this.props;
     const { campaigns } = this.state;
 
     return campaigns.map(campaign => {
@@ -52,6 +58,7 @@ class NewsFeeds extends Component {
             handleMessage={this.handleMessage}
             isDescription={isDescription}
             isInformation={isInformation}
+            isStatus={isStatus}
           />
         </div>
       );

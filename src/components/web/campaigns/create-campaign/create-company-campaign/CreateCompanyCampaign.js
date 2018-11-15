@@ -9,6 +9,7 @@ import {
 import propTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
 import { CreateCompanyCampaignHeader } from "./index";
+import { ImageCropper } from "../../../../ui-kit/image-cropper";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {
@@ -32,12 +33,14 @@ class CreateCompanyCampaign extends Component {
       contentText,
       uploadFile,
       handleEditImage,
-      handleLocation
+      handleLocation,
+      handleActualImg,
+      handleScale
     } = this.props;
 
     return (
       <div>
-        {isPreview && <Preview />}
+        {isPreview && <Preview form={form} />}
         {isPreview && (
           <button
             onClick={handlePrivewClose}
@@ -59,6 +62,8 @@ class CreateCompanyCampaign extends Component {
               isFor={isFor}
               handleEditImage={handleEditImage}
               handleLocation={handleLocation}
+              handleActualImg={handleActualImg}
+              handleScale={handleScale}
             />
           ))}
         {!isPreview &&
@@ -123,7 +128,9 @@ CreateCompanyCampaign.propTypes = {
   contentText: propTypes.any.isRequired,
   uploadFile: propTypes.func.isRequired,
   handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired
+  handleLocation: propTypes.func.isRequired,
+  handleActualImg: propTypes.func,
+  handleScale: propTypes.func
 };
 
 export default CreateCompanyCampaign;

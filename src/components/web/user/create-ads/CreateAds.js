@@ -6,6 +6,7 @@ import {
   PaymentStepTwo,
   PaymentStepThree
 } from "../../user/payment/steps";
+import { CreateCompanyCampaign } from "../../campaigns/create-campaign/create-company-campaign";
 
 class CreateAds extends Component {
   constructor(props) {
@@ -24,7 +25,9 @@ class CreateAds extends Component {
       handleDate,
       uploadFile,
       handleEditImage,
-      handleLocation
+      handleLocation,
+      handleActualImg,
+      handleScale
     } = this.props;
 
     return (
@@ -36,6 +39,8 @@ class CreateAds extends Component {
             form={form}
             handleEditImage={handleEditImage}
             handleLocation={handleLocation}
+            handleActualImg={handleActualImg}
+            handleScale={handleScale}
           />
         )}
         {stepIndex === 1 && (
@@ -83,7 +88,9 @@ CreateAds.propTypes = {
   handleDate: propTypes.func.isRequired,
   uploadFile: propTypes.func.isRequired,
   handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired
+  handleLocation: propTypes.func.isRequired,
+  handleActualImg: propTypes.func,
+  handleScale: propTypes.func
 };
 
 export default CreateAds;

@@ -27,6 +27,7 @@ class UserProfile extends Component {
               handleModalInfoShow={handleModalInfoShow}
               isDescription
               isInformation={false}
+              isStatus={false}
             />
           )}
         {isLoading && <InlineLoading />}
