@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
 
-import { setting_campaign_list } from "../../../../../mock-data";
+import { campaigns_list } from "../../../../../mock-data";
 
 class SettingCampaign extends Component {
   constructor(props, context) {
     super(props, context);
 
     this.state = {
-      setting_campaigns: setting_campaign_list
+      setting_campaigns: campaigns_list
     };
   }
 
