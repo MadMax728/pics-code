@@ -27,6 +27,7 @@ class Participants extends Component {
               handleModalInfoShow={handleModalInfoShow}
               isDescription
               isInformation={false}
+              isStatus={false}
             />
           )}
         {isLoading && <InlineLoading />}

@@ -32,6 +32,7 @@ class Company extends Component {
               handleModalInfoShow={handleModalInfoShow}
               isDescription={false}
               isInformation
+              isStatus={false}
             />
           )}
         {isLoading && <InlineLoading />}

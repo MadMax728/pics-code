@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
+import { Link } from "react-router-dom";
+import * as routes from "../../../../../lib/constants/routes";
+
 class SettingCampaignStatisticsRight extends Component {
   render() {
     const { campaignStatistics } = this.props;
@@ -8,7 +11,9 @@ class SettingCampaignStatisticsRight extends Component {
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
           <button className="blue_button">Edit campaign</button>
-          <button className="black_button">Close campaign </button>
+          <Link to={routes.SETTINGS_CAMPAIGN_ROUTE}>
+            <button className="black_button">Close campaign </button>
+          </Link>
           <div className="normal_title padding-15">Budget & Runtime</div>
           <ul className="campaign-right-options">
             <li>
