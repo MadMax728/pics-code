@@ -15,7 +15,7 @@ class Information extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      campaignId: this.props.match.match.params.id,
+      campaignId: this.props.match.params.id,
       ReportTips: [
         {
           name: "Report Post",
@@ -78,7 +78,7 @@ class Information extends Component {
     console.log(campaign_detail);
     return (
       <div className="padding-l-10 middle-section width-80">
-        {this.props.campaign_detail &&
+        {campaign_detail &&
           !isLoading && (
             <div className="information-wrapper">
               <div className="info-inner-wrapper">

@@ -1,6 +1,6 @@
-export { CampaignCompanyFilter } from "./campaign-company-filter";
-export { CampaignCreatorFilter } from "./campaign-creator-filter";
-export { DashboardFilter } from "./dashboard-filter";
-export { ParticipantsFilter } from "./participants-filter";
-export { ReviewFilter } from "./review-filter";
-export { ReportedContentFilter } from "./reported-content-filter";
+export { default as CampaignCompanyFilter } from "./CampaignCompanyFilter";
+export { default as CampaignCreatorFilter } from "./CampaignCreatorFilter";
+export { default as DashboardFilter } from "./DashboardFilter";
+export { default as ParticipantsFilter } from "./ParticipantsFilter";
+export { default as ReviewFilter } from "./ReviewFilter";
+export { default as ReportedContentFilter } from "./ReportedContentFilter";

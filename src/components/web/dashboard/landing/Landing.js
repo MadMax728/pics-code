@@ -27,6 +27,7 @@ class Landing extends Component {
               handleModalShow={handleModalShow}
               isDescription
               isInformation={false}
+              isStatus={false}
             />
           )}
         {isLoading && (
@@ -35,7 +36,7 @@ class Landing extends Component {
               <div className="col-sm-1 col-xs-1 no-padding profile_image">
                 <img
                   src="images/image.jpg"
-                  alt="image"
+                  alt="profile_img"
                   className="img-circle img-responsive"
                 />
               </div>
@@ -56,15 +57,15 @@ class Landing extends Component {
               <div className="feed_image">
                 <img
                   src="images/image.jpg"
-                  alt="image"
+                  alt="feed_image"
                   className="img-responsive"
                 />
               </div>
               <div className="feed_description padding-15">
                 <span className="secondary_title">
-                  Lorem Ipsum is simply dummy text of the printing and
+                  {`Lorem Ipsum is simply dummy text of the printing and
                   typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s...
+                  standard dummy text ever since the 1500s...`}
                 </span>
               </div>
             </div>
@@ -73,12 +74,12 @@ class Landing extends Component {
                 <span className="count">100</span>
                 <img src="images/feed_msg.svg" alt="message" />
               </div>
-              <div class="likes">
+              <div className="likes">
                 <span className="count">100</span>
                 <img src="images/feed_like.svg" alt="like" />
               </div>
               <div className="show_more_options">
-                <a href="#">• • •</a>
+                <a>• • •</a>
               </div>
             </div>
           </div>

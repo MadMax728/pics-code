@@ -70,10 +70,12 @@ export const getCampaigns = prop => {
                                 c => c.user.isParticipant === true
                               )
                             )
-                          : prop === "getSavedCampaigns" &&
-                            getCampaignsSucceeded(
-                              campaigns_list.filter(c => c.isSaved === true)
-                            )
+                          : prop === "getSavedCampaigns"
+                            ? getCampaignsSucceeded(
+                                campaigns_list.filter(c => c.isSaved === true)
+                              )
+                            : prop === "getSettingsCampaigns" &&
+                              getCampaignsSucceeded(campaigns_list)
         );
         logger.error({
           description: error.toString(),

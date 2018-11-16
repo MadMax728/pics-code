@@ -9,7 +9,6 @@ export {
   news_feed_campaigns_list,
   user_profile_campaigns_list,
   saved_campaigns_list,
-  setting_campaign_list,
   campaignStatistics,
   backoffice_campaign_list,
   campaign_detail

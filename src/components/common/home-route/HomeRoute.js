@@ -25,7 +25,6 @@ import {
 } from "../../web/user";
 
 import {
-  Campaign,
   Company,
   Creator,
   Information,
@@ -81,7 +80,13 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaign = () => {
-    return <SettingCampaign isBackOffice={false} />;
+    return (
+      <SettingCampaign
+        isBackOffice={false}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
   };
 
   handleAds = () => {
@@ -133,19 +138,17 @@ class HomeRoute extends Component {
     );
   };
 
-  handleCampaign = () => {
+  handleInformation = match => {
     return (
-      <Campaign
+      <Information
         handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
+        match={match.match}
       />
     );
   };
 
-  handleInformation = match => {
-    return (
-      <Information handleModalShow={this.props.handleModalShow} match={match} />
-    );
+  handleSettingCampaignStatistics = match => {
+    return <SettingCampaignStatistics match={match.match} />;
   };
 
   handleParticipant = () => {
@@ -238,11 +241,6 @@ class HomeRoute extends Component {
             component={this.handleCreator}
           />
 
-          <Route
-            exact
-            path={routes.CAMPAIGN_ROUTE}
-            component={this.handleCampaign}
-          />
           <Route exact path={routes.MY_PROFILE_ROUTE} component={UserProfile} />
 
           <Route
@@ -309,7 +307,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
-            component={SettingCampaignStatistics}
+            component={this.handleSettingCampaignStatistics}
           />
           {/* -------- Settings Routes --------- */}
 
