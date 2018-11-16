@@ -8,7 +8,6 @@ export const USERS_ROUTE = "/users";
 export const PICS_ROUTE = "/pics";
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const FORGOT_PASSWORD = "/check-email";
-export const CAMPAIGN_ROUTE = "/campaign";
 export const CAMPAIGN_VIEW_ROUTE = "/campaign/:id";
 export const RESET_EMAIL = "/forgot-password";
 export const RESET_PASSWORD = "/reset-password/:token";
@@ -63,8 +62,11 @@ export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data-download";
 export const LOGOUT_ROUTE = "/?logout=true";
 
 // campaig overview
-export const COMPANY_ROUTE = "/campaign/company";
-export const CREATOR_ROUTE = "/campaign/creator";
+// export const COMPANY_ROUTE = "/campaign/company";
+// export const CREATOR_ROUTE = "/campaign/creator";
+
+// Campign Type
+export const CAMPAIGN_ROUTE = "/campaign/:type";
 
 export const SAVED_ROUTE = "/saved";
 export const OTHER_SAVED_ROUTE = "/saved/:id";

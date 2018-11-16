@@ -61,11 +61,11 @@ class AdsModal extends Component {
   };
   handleActualImg = actual_img => {
     console.log("ac", actual_img);
-    this.setState({ actual_img: actual_img });
+    this.setState({ actual_img });
   };
 
   handleScale = scale => {
-    this.setState({ scale: scale });
+    this.setState({ scale });
   };
 
   handleChangeField = event => {

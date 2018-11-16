@@ -16,10 +16,8 @@ import {
 
 import {
   SettingCampaignRight,
-  SettingAdsRight,
-  SettingCampaignStatisticsRight,
-  SettingAdsStatisticsRight
-} from "../../../components/web/user/settings";
+  SettingAdsRight
+} from "../../../components/web/templates/settings";
 
 class RightSideBarBackOffice extends Component {
   handleReportedList = () => {
