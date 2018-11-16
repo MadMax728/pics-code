@@ -7,10 +7,8 @@ import { FavouriteCampaigns } from "../../../components/web/campaigns";
 import { Community } from "../../../components/web/dashboard";
 import {
   SettingCampaignRight,
-  SettingAdsRight,
-  SettingCampaignStatisticsRight,
-  SettingAdsStatisticsRight
-} from "../../../components/web/user/settings";
+  SettingAdsRight
+} from "../../../components/web/templates/settings";
 
 class RightSideBar extends Component {
   userLanguage = () => {

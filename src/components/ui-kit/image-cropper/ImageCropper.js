@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import EditProfileCrop from "./EditProfileCrop";
 import CampaignAdCrop from "./CampaignAdCrop";
-import EditProfilePic from "../../web/user/settings/edit-profile-pic/EditProfilePic";
+import EditProfilePic from "../../web/templates/settings/edit-profile-pic/EditProfilePic";
 
 const propTypes = {
   handleNewImage: PropTypes.func,

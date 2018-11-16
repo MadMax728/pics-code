@@ -84,12 +84,12 @@ class EditProfile extends Component {
 
   handleOfferTagChange = tags => {
     const { form } = this.state;
-    form["offer_tag"] = tags;
+    form.offer_tag = tags;
     this.setState({ form });
   };
   handleInquiryTagChange = tags => {
     const { form } = this.state;
-    form["inquiry_tag"] = tags;
+    form.inquiry_tag = tags;
     this.setState({ form });
   };
 
@@ -189,7 +189,7 @@ class EditProfile extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    let data = {
+    const data = {
       name: this.state.form.name_company,
       gender: this.state.form.gender,
       offerTag: this.state.form.offer_tag,

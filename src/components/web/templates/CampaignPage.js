@@ -53,6 +53,7 @@ class CampaignPage extends Component {
 CampaignPage.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
+  type: PropTypes.string.isRequired,
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   campaigns: PropTypes.any,
