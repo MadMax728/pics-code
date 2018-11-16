@@ -21,7 +21,7 @@ import {
   CreateCMSManagement
 } from "../../back-office";
 
-import * as settings from "../../web/user";
+import * as settings from "../../web/templates";
 import { PageNotFound } from "../../web/page-not-found";
 
 class BackOfficeHomeRoute extends Component {
@@ -38,11 +38,11 @@ class BackOfficeHomeRoute extends Component {
   };
 
   handleSettingCampaign = () => {
-    return <settings.SettingCampaign isBackOffice />;
+    return <settings.SettingCampaignPage isBackOffice />;
   };
 
   handleAds = () => {
-    return <settings.Ads isBackOffice />;
+    return <settings.AdsPage isBackOffice />;
   };
 
   handlePageNotFound = () => {
