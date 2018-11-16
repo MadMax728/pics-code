@@ -32,6 +32,7 @@
     "react-ga": "^2.5.3",
     "react-localization": "^1.0.10",
     "react-places-autocomplete": "^7.2.0",
+    "react-player": "^1.6.6",
     "react-radio-group": "^3.0.3",
     "react-redux": "^5.0.6",
     "react-responsive-carousel": "^3.1.42",

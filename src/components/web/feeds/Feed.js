@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
+import { ImageItem, VideoItem } from "../../ui-kit";
 import Comments from "./Comments";
 import { ThreeDots, RenderToolTips } from "../../common";
 
@@ -56,6 +57,30 @@ class Feed extends Component {
     );
   };
 
+  /**
+   * Decide to render
+   */
+  renderContents = (campaign, isDescription, isInformation) => {
+    switch (campaign.type) {
+      case "video":
+        return <VideoItem item={campaign.video} />;
+      case "image":
+        return (
+          <ImageItem
+            item={campaign.image}
+            isOtherCardExist={!isDescription && isInformation}
+          />
+        );
+      default:
+        return (
+          <ImageItem
+            item={campaign.image}
+            isOtherCardExist={!isDescription && isInformation}
+          />
+        );
+    }
+  };
+
   render() {
     const {
       campaign,
@@ -76,34 +101,11 @@ class Feed extends Component {
           isDescription={isDescription}
         />
         <div className="feed_content">
-          {campaign &&
-            campaign.image && (
-              <Link to={`/campaign/${campaign.id}/information`}>
-                <div className="feed_image">
-                  <div
-                    className={
-                      !isDescription && isInformation
-                        ? " "
-                        : "embed-responsive embed-responsive-16by9"
-                    }
-                  >
-                    <div
-                      className={
-                        !isDescription && isInformation
-                          ? " "
-                          : "img-responsive embed-responsive-item"
-                      }
-                    >
-                      <img
-                        src={campaign.image}
-                        alt="altmage"
-                        className="img-responsive"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            )}
+          {campaign && (
+            <Link to={`/campaign/${campaign.id}/information`}>
+              {this.renderContents(campaign, isInformation, isDescription)}
+            </Link>
+          )}
           {campaign &&
             isDescription &&
             campaign.desc && (

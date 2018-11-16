@@ -1,4 +1,5 @@
 import * as images from "../../../lib/constants/images";
+import * as videos from "../../../lib/constants/videos";
 
 export const campaigns_list = [
   {
@@ -46,7 +47,9 @@ export const campaigns_list = [
       }
     ],
     category: "01.01.2000 in Category",
-    image: `${images.campaign1}`,
+    image: `${images.campaign2}`,
+    video: `${videos.demo}`,
+    type: "video",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
@@ -109,6 +112,7 @@ export const campaigns_list = [
     ],
     category: "01.01.2000 in Category",
     image: `${images.campaign2}`,
+    type: "image",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
