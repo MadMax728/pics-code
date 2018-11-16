@@ -3,10 +3,9 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
-import { ImageItem, VideoItem } from "../../ui-kit";
+import { ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import Comments from "./Comments";
 import { RenderToolTips } from "../../common";
-import { ThreeDots } from "../../ui-kit";
 
 class Feed extends Component {
   constructor(props, context) {

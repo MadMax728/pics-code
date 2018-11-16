@@ -6,11 +6,10 @@ import { Translations } from "../../../../lib/translations";
 
 import { modalType } from "../../../../lib/constants/enumerations";
 import { RenderToolTips } from "../../../common";
-import { ThreeDots } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { getCampaignDetails } from "../../../../actions";
 import { connect } from "react-redux";
-import { InlineLoading } from "../../../ui-kit";
+import { InlineLoading, ThreeDots } from "../../../ui-kit";
 
 class InformationPage extends Component {
   constructor(props, context) {
