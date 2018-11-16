@@ -239,6 +239,7 @@ export const campaigns_list = [
       }
     ],
     category: "01.01.2000 in Category",
+    type: "image",
     image: `${images.campaign4}`,
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
@@ -303,6 +304,7 @@ export const campaigns_list = [
     ],
     category: "01.01.2000 in Category",
     image: `${images.campaign_1}`,
+    type: "image",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
@@ -366,6 +368,7 @@ export const campaigns_list = [
     ],
     category: "01.01.2000 in Category",
     image: `${images.campaign_2}`,
+    type: "image",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,

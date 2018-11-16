@@ -4,33 +4,34 @@ import { connect } from "react-redux";
 import { getCampaigns } from "../../../actions";
 import PropTypes from "prop-types";
 import { InlineLoading, VideoItem } from "../../ui-kit";
-
+import { CampaignCard } from "../misc";
 class ExploreRoot extends Component {
   componentDidMount = () => {
     this.props.getCampaigns("getExploreCampaigns");
   };
 
+  renderExploreList = () => {
+    const { explore_campaigns_list, isLoading } = this.props;
+    return explore_campaigns_list.map(campaign => {
+      return (
+        <div key={campaign.id}>
+          <CampaignCard
+            campaign={campaign}
+            isDescription
+            isInformation={false}
+            isStatus={false}
+          />
+        </div>
+      );
+    });
+  };
+
   render() {
-    const {
-      handleModalShow,
-      handleModalInfoShow,
-      explore_campaigns_list,
-      isLoading
-    } = this.props;
+    const { explore_campaigns_list, isLoading } = this.props;
 
     return (
       <div className={"middle-section padding-rl-10"}>
-        {explore_campaigns_list &&
-          !isLoading && (
-            <NewsFeeds
-              campaigns={explore_campaigns_list}
-              handleModalShow={handleModalShow}
-              handleModalInfoShow={handleModalInfoShow}
-              isDescription
-              isInformation={false}
-              isStatus={false}
-            />
-          )}
+        {explore_campaigns_list && !isLoading && this.renderExploreList()}
         {isLoading && <InlineLoading />}
       </div>
     );
