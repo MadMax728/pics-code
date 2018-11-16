@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
-
+import propTypes from "prop-types";
+import moment from "moment";
 class Preview extends Component {
   constructor(props) {
     super(props);
@@ -9,28 +10,33 @@ class Preview extends Component {
   }
 
   render() {
+    const { form } = this.props;
     return (
       <div className="col-xs-12 no-padding">
         <div className="padding-l-10 middle-section width-100">
-          <div className="info-main-title">Title</div>
+          <div className="info-main-title">{form.title && form.title}</div>
           <div className="information-wrapper">
             <div className="info-inner-wrapper">
-              <div className="text">
+              {/* <div className="text">
                 This text is an example.This text is an example.This text is an
                 example.This text is an example.This text is an example.This
                 text is an example.This text is an example.This text is an
                 example.This text is an example.This text is an example.This
                 text is an example.
-              </div>
+              </div> */}
               <img src={images.information} alt={"information"} />
-              <div className="text">
+              {/* {
+                form.image && <img src={form.image} alt={"information"} />
+              } */}
+              <div className="text paddTop20">
+                {/* {form.description && form.description} */}
                 This text is an example.This text is an example.This text is an
                 example.This text is an example.This text is an example.This
                 text is an example.This text is an example.This text is an
                 example.This text is an example.This text is an example.This
                 text is an example.
               </div>
-              <button className="filled_button">Apply for this campaign</button>
+              {/* <button className="filled_button">Apply for this campaign</button> */}
               <div className="feed_wrapper">
                 <div className="feed_header">
                   <div className="col-sm-1 col-xs-1 no-padding profile_image">
@@ -41,16 +47,23 @@ class Preview extends Component {
                     />
                   </div>
                   <div className="col-sm-9 col-xs-7 no-padding">
-                    <div className="normal_title">Title of campaigns</div>
-                    <div className="secondary_title">User name</div>
-                    <div className="grey_title">01.01.2000 in Category</div>
+                    <div className="normal_title">
+                      {form.title && form.title}
+                    </div>
+                    <div className="secondary_title">
+                      {form.username && "UserName"}
+                    </div>
+                    <div className="grey_title">
+                      {moment().format("MM.DD.YYYY")} in{" "}
+                      {form.category && form.category}
+                    </div>
                   </div>
                   <div className="col-sm-2 col-xs-2 like_wrapper">
-                    <img
+                    {/* <img
                       src={images.blue_heart}
                       alt="like-1"
                       className="pull-right"
-                    />
+                    /> */}
                   </div>
                 </div>
                 <div className="feed_content">
@@ -58,25 +71,33 @@ class Preview extends Component {
                     <div className="col-sm-6 no-padding">
                       <div className="info_wrapper">
                         <span className="normal_title">Start: </span>
-                        <span className="secondary_title">10.10.2000</span>
+                        <span className="secondary_title">
+                          {form.start_date.format("MM.DD.YYYY")}
+                        </span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Procedure: </span>
-                        <span className="secondary_title">Public</span>
+                        <span className="secondary_title">
+                          {form.procedure}
+                        </span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Target group: </span>
-                        <span className="secondary_title">Female</span>
+                        <span className="secondary_title">
+                          {form.target_group}
+                        </span>
                       </div>
                     </div>
                     <div className="col-sm-6 no-padding">
                       <div className="info_wrapper">
                         <span className="normal_title">End: </span>
-                        <span className="secondary_title">10.10.2000</span>
+                        <span className="secondary_title">
+                          {form.end_date.format("MM.DD.YYYY")}
+                        </span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Type: </span>
-                        <span className="secondary_title">Video</span>
+                        <span className="secondary_title">{form.type}</span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Applications: </span>
@@ -105,7 +126,7 @@ class Preview extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="feed_footer margin-t-15 margin-b-15">
+                {/* <div className="feed_footer margin-t-15 margin-b-15">
                   <div className="messages">
                     <span className="count">100</span>
                     <img src={images.feed_msg} alt={"feed_msg"} />
@@ -117,10 +138,10 @@ class Preview extends Component {
                   <div className="show_more_options">
                     <Link to={""}>• • •</Link>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
-            <div className="feed_wrapper">
+            {/* <div className="feed_wrapper">
               <div className="feed-comment">
                 <div className="comment-wrapper">
                   <div className="no-padding profile_image">
@@ -236,12 +257,16 @@ class Preview extends Component {
                   <Link to={""}>View more comments</Link>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
     );
   }
 }
+
+Preview.propTypes = {
+  form: propTypes.any.isRequired
+};
 
 export default Preview;

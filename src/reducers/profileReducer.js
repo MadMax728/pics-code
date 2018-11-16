@@ -48,7 +48,7 @@ const profileReducer = (state = initialState.userDataByUsername, action) => {
     case types.UPDATE_PROFILE_SUCCEEDED:
       return {
         ...state,
-        imageData: action.payload,
+        user: action.payload,
         isLoading: false
       };
     case types.UPDATE_PROFILE_FAILED:

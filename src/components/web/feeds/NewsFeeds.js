@@ -8,7 +8,8 @@ const propTypes = {
   handleModalInfoShow: PropTypes.func,
   handleModalShow: PropTypes.func,
   isDescription: PropTypes.bool.isRequired,
-  isInformation: PropTypes.bool.isRequired
+  isInformation: PropTypes.bool.isRequired,
+  isStatus: PropTypes.bool.isRequired
 };
 
 class NewsFeeds extends Component {
@@ -38,30 +39,13 @@ class NewsFeeds extends Component {
     this.setState({ campaigns });
   };
 
-  addComment = (campaignId, comment) => {
-    const campaigns = this.state.campaigns;
-    const commentData = {
-      comment_id: Math.random(),
-      comment,
-      user: {
-        name: "Vaghela",
-        id: 2,
-        image: `${images.campaign2}`
-      },
-      date: "02.02.2000"
-    };
-
-    campaigns.filter(
-      campaign =>
-        campaign.id === parseInt(campaignId) &&
-        campaign.comments.unshift(commentData)
-    );
-
-    this.setState({ campaigns });
-  };
-
   render() {
-    const { handleModalInfoShow, isInformation, isDescription } = this.props;
+    const {
+      handleModalInfoShow,
+      isInformation,
+      isDescription,
+      isStatus
+    } = this.props;
     const { campaigns } = this.state;
 
     return campaigns.map(campaign => {
@@ -72,9 +56,9 @@ class NewsFeeds extends Component {
             handleModalInfoShow={handleModalInfoShow}
             handleFavorite={this.handleFavorite}
             handleMessage={this.handleMessage}
-            addComment={this.addComment}
             isDescription={isDescription}
             isInformation={isInformation}
+            isStatus={isStatus}
           />
         </div>
       );

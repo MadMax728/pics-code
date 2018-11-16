@@ -266,11 +266,19 @@
           position: relative;
           top: -44%;
           //reverting back
-          top: -35px;
+          top: -57px;
           @media (max-width: 915px) {
             top: -32px;
             right: -4px;
           }
+        }
+        input[type="file"] {
+          position: relative;
+          top: -35px;
+          right: -83%;
+          height: 23px;
+          opacity: 0;
+          z-index: 1;
         }
       }
     }
@@ -466,7 +474,7 @@
     padding: 0px;
     .create-campaign-wrapper {
       padding: 20px 30px;
-      padding: 20px 10px;
+      padding: 20px 0px;
       // reverting back
       // height: 100%;
       p {

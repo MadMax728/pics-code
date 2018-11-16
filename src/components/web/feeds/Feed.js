@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
+import { ImageItem, VideoItem } from "../../ui-kit";
 import Comments from "./Comments";
 import { ThreeDots, RenderToolTips } from "../../common";
 
@@ -56,14 +57,38 @@ class Feed extends Component {
     );
   };
 
+  /**
+   * Decide to render
+   */
+  renderContents = (campaign, isDescription, isInformation) => {
+    switch (campaign.type) {
+      case "video":
+        return <VideoItem item={campaign.video} />;
+      case "image":
+        return (
+          <ImageItem
+            item={campaign.image}
+            isOtherCardExist={!isDescription && isInformation}
+          />
+        );
+      default:
+        return (
+          <ImageItem
+            item={campaign.image}
+            isOtherCardExist={!isDescription && isInformation}
+          />
+        );
+    }
+  };
+
   render() {
     const {
       campaign,
       handleModalInfoShow,
       handleFavorite,
-      addComment,
       isDescription,
-      isInformation
+      isInformation,
+      isStatus
     } = this.props;
     const { isComments } = this.state;
     return (
@@ -76,34 +101,11 @@ class Feed extends Component {
           isDescription={isDescription}
         />
         <div className="feed_content">
-          {campaign &&
-            campaign.image && (
-              <Link to={`/campaign/${campaign.id}/information`}>
-                <div className="feed_image">
-                  <div
-                    className={
-                      !isDescription && isInformation
-                        ? " "
-                        : "embed-responsive embed-responsive-16by9"
-                    }
-                  >
-                    <div
-                      className={
-                        !isDescription && isInformation
-                          ? " "
-                          : "img-responsive embed-responsive-item"
-                      }
-                    >
-                      <img
-                        src={campaign.image}
-                        alt="altmage"
-                        className="img-responsive"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            )}
+          {campaign && (
+            <Link to={`/campaign/${campaign.id}/information`}>
+              {this.renderContents(campaign, isInformation, isDescription)}
+            </Link>
+          )}
           {campaign &&
             isDescription &&
             campaign.desc && (
@@ -230,11 +232,39 @@ class Feed extends Component {
               type={"light"}
             />
           </div>
+          {campaign &&
+            isStatus && (
+              <div className="status">
+                <div className="status-wrapper">
+                  <div className="title">Status</div>
+                  <div className="subtitle">
+                    <span className="green-circle" />
+                  </div>
+                </div>
+                <div className="status-wrapper">
+                  <div className="title">Views</div>
+                  <div className="subtitle">{campaign.views}</div>
+                </div>
+                <div className="status-wrapper">
+                  <div className="title">Clicks</div>
+                  <div className="subtitle">{campaign.clicks}</div>
+                </div>
+                <div className="status-wrapper">
+                  <div className="title">Applications</div>
+                  <div className="subtitle">{campaign.applications}</div>
+                </div>
+                <div className="status-wrapper">
+                  <Link to={`/settings/campaigns/${campaign.id}/statistics`}>
+                    <button className="blue_button">statistics</button>
+                  </Link>
+                </div>
+              </div>
+            )}
         </div>
 
         {/* Comments Section */}
 
-        {isComments && <Comments campaign={campaign} addComment={addComment} />}
+        {isComments && <Comments campaign={campaign} />}
       </div>
     );
   }
@@ -242,10 +272,10 @@ class Feed extends Component {
 
 Feed.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
-  addComment: PropTypes.func.isRequired,
   handleModalInfoShow: PropTypes.func,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
+  isStatus: PropTypes.bool.isRequired,
   campaign: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,

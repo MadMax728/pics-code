@@ -2,11 +2,12 @@ import React, { Component } from "react";
 import { NewsFeeds } from "../../feeds";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCreatorCampaignsMock } from "../../../../actions";
+import { getCampaigns } from "../../../../actions";
+import { InlineLoading } from "../../../ui-kit";
 
 class Creator extends Component {
   componentDidMount = () => {
-    this.props.getCreatorCampaignsMock();
+    this.props.getCampaigns("getCreatorCampaigns");
   };
 
   render() {
@@ -27,8 +28,10 @@ class Creator extends Component {
               handleModalInfoShow={handleModalInfoShow}
               isDescription={false}
               isInformation
+              isStatus={false}
             />
           )}
+        {isLoading && <InlineLoading />}
       </div>
     );
   }
@@ -38,19 +41,21 @@ Creator.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
-  getCreatorCampaignsMock: PropTypes.func.isRequired,
+  getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  creator_campaigns: PropTypes.any
+  creator_campaigns: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  creator_campaigns: state.campaignData.creatorCampaigns,
-  isLoading: state.campaignData.isLoading
+  creator_campaigns: state.campaignData.campaigns,
+  isLoading: state.campaignData.isLoading,
+  error: state.campaignData.error
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getCreatorCampaignsMock
+  getCampaigns
 };
 
 export default connect(

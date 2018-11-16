@@ -5,39 +5,77 @@ import { Auth } from "../auth";
 // remove when no need
 import { campaigns_list } from "../mock-data";
 
-const getCampaignsStarted = type => ({
-  type
+// Get Campaigns
+const getCampaignsStarted = () => ({
+  type: types.GET_CAMPAIGNS_STARTED
 });
 
-const getCampaignsSucceeded = (type, data) => ({
-  type,
+const getCampaignsSucceeded = data => ({
+  type: types.GET_CAMPAIGNS_SUCCEEDED,
   payload: data
 });
 
-const getCampaignsFailed = (type, error) => ({
-  type,
+const getCampaignsFailed = error => ({
+  type: types.GET_CAMPAIGNS_FAILED,
   payload: error,
   error: true
 });
 
-export const getCampaigns = () => {
+export const getCampaigns = prop => {
   return dispatch => {
-    dispatch(getCampaignsStarted(types.GET_CAMPAIGNS_STARTED));
+    dispatch(getCampaignsStarted());
     const storage = Auth.extractJwtFromStorage();
     const headers = {
       Authorization: storage.accessToken
     };
     const params = { headers };
 
-    return campaignService.getCampaigns(params).then(
+    return campaignService[prop](params).then(
       res => {
-        dispatch(
-          getCampaignsSucceeded(types.GET_CAMPAIGNS_SUCCEEDED, res.data.data)
-        );
+        dispatch(getCampaignsSucceeded(res.data.data));
       },
       error => {
         dispatch(
-          getCampaignsFailed(types.GET_CAMPAIGNS_FAILED, error.response)
+          // getCampaignsFailed(error.response)
+          // remove below code after API working, this is just for set mock data.
+          prop === "getCampaigns"
+            ? getCampaignsSucceeded(campaigns_list)
+            : prop === "getCompanyCampaigns"
+              ? getCampaignsSucceeded(
+                  campaigns_list.filter(c => c.user.isCreator === false)
+                )
+              : prop === "getCreatorCampaigns"
+                ? getCampaignsSucceeded(
+                    campaigns_list.filter(c => c.user.isCreator === true)
+                  )
+                : prop === "getParticipantCampaigns"
+                  ? getCampaignsSucceeded(
+                      campaigns_list.filter(c => c.user.isParticipant === true)
+                    )
+                  : prop === "getExploreCampaigns"
+                    ? getCampaignsSucceeded(
+                        campaigns_list.filter(c => c.isExplore === true)
+                      )
+                    : prop === "getParticipantsCampaigns"
+                      ? getCampaignsSucceeded(
+                          campaigns_list.filter(
+                            c => c.user.isParticipant === true
+                          )
+                        )
+                      : prop === "getNewsFeedCampaigns"
+                        ? getCampaignsSucceeded(campaigns_list)
+                        : prop === "getUserProfileCampaigns"
+                          ? getCampaignsSucceeded(
+                              campaigns_list.filter(
+                                c => c.user.isParticipant === true
+                              )
+                            )
+                          : prop === "getSavedCampaigns"
+                            ? getCampaignsSucceeded(
+                                campaigns_list.filter(c => c.isSaved === true)
+                              )
+                            : prop === "getSettingsCampaigns" &&
+                              getCampaignsSucceeded(campaigns_list)
         );
         logger.error({
           description: error.toString(),
@@ -48,54 +86,48 @@ export const getCampaigns = () => {
   };
 };
 
-// Remove function when Call Actual API call
-export const getCampaignsMock = () => {
-  return dispatch => {
-    dispatch(
-      getCampaignsSucceeded(types.GET_CAMPAIGNS_SUCCEEDED, campaigns_list)
-    );
-  };
-};
+// Campaign Details
+const getCampaignDetailsStarted = () => ({
+  type: types.GET_CAMPAIGNS_DETAILS_STARTED
+});
 
-export const getCompanyCampaignsMock = () => {
-  return dispatch => {
-    dispatch(
-      getCampaignsSucceeded(
-        types.GET_COMPANY_CAMPAIGNS_SUCCEEDED,
-        campaigns_list.filter(c => c.user.isCreator === false)
-      )
-    );
-  };
-};
+const getCampaignDetailsSucceeded = data => ({
+  type: types.GET_CAMPAIGNS_DETAILS_SUCCEEDED,
+  payload: data
+});
 
-export const getCreatorCampaignsMock = () => {
-  return dispatch => {
-    dispatch(
-      getCampaignsSucceeded(
-        types.GET_CREATOR_CAMPAIGNS_SUCCEEDED,
-        campaigns_list.filter(c => c.user.isCreator === true)
-      )
-    );
-  };
-};
+const getCampaignDetailsFailed = error => ({
+  type: types.GET_CAMPAIGNS_DETAILS_FAILED,
+  payload: error,
+  error: true
+});
 
-export const getParticipantCampaignsMock = () => {
+export const getCampaignDetails = provider => {
   return dispatch => {
-    dispatch(
-      getCampaignsSucceeded(
-        types.GET_PARTICIPANT_CAMPAIGNS_SUCCEEDED,
-        campaigns_list.filter(c => c.user.isParticipant === true)
-      )
-    );
-  };
-};
-export const getExploreCampaignsMock = () => {
-  return dispatch => {
-    dispatch(
-      getCampaignsSucceeded(
-        types.GET_EXPLORE_CAMPAIGNS_SUCCEEDED,
-        campaigns_list.filter(c => c.isExplore === true)
-      )
+    dispatch(getCampaignDetailsStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+
+    return campaignService.getCampaignDetails(params, provider).then(
+      res => {
+        dispatch(getCampaignDetailsSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(
+          // getCampaignDetailsFailed(error.response)
+          // remove below code after API working, this is just for set mock data.
+          getCampaignDetailsSucceeded(
+            campaigns_list.filter(c => c.id === parseInt(provider))
+          )
+        );
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
     );
   };
 };

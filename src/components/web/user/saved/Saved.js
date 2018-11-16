@@ -1,31 +1,36 @@
 import React, { Component } from "react";
 import { NewsFeeds } from "../../feeds";
-import { campaigns_list } from "../../../../mock-data";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getCampaigns } from "../../../../actions";
+import { InlineLoading } from "../../../ui-kit";
 
 class Saved extends Component {
-  constructor(props, context) {
-    super(props, context);
-
-    this.state = {
-      saved_campaigns_list: campaigns_list
-    };
-  }
+  componentDidMount = () => {
+    this.props.getCampaigns("getSavedCampaigns");
+  };
 
   render() {
-    const { handleModalShow, handleModalInfoShow } = this.props;
-    const { saved_campaigns_list } = this.state;
+    const {
+      handleModalShow,
+      handleModalInfoShow,
+      saved_campaigns_list,
+      isLoading
+    } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {saved_campaigns_list && (
-          <NewsFeeds
-            campaigns={saved_campaigns_list}
-            handleModalShow={handleModalShow}
-            handleModalInfoShow={handleModalInfoShow}
-            isDescription
-            isInformation={false}
-          />
-        )}
+        {saved_campaigns_list &&
+          !isLoading && (
+            <NewsFeeds
+              campaigns={saved_campaigns_list}
+              handleModalShow={handleModalShow}
+              handleModalInfoShow={handleModalInfoShow}
+              isDescription
+              isInformation={false}
+              isStatus={false}
+            />
+          )}
+        {isLoading && <InlineLoading />}
       </div>
     );
   }
@@ -33,7 +38,24 @@ class Saved extends Component {
 
 Saved.propTypes = {
   handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+  getCampaigns: PropTypes.func.isRequired,
+  saved_campaigns_list: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.any
 };
 
-export default Saved;
+const mapStateToProps = state => ({
+  saved_campaigns_list: state.campaignData.campaigns,
+  isLoading: state.campaignData.isLoading,
+  error: state.campaignData.error
+});
+
+const mapDispatchToProps = {
+  getCampaigns
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Saved);

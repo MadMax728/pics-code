@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { NewsFeeds } from "../../feeds";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCompanyCampaignsMock } from "../../../../actions";
+import { getCampaigns } from "../../../../actions";
+import { InlineLoading } from "../../../ui-kit";
+
 class Company extends Component {
   constructor() {
     super();
@@ -10,7 +12,7 @@ class Company extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getCompanyCampaignsMock();
+    this.props.getCampaigns("getCompanyCampaigns");
   };
 
   render() {
@@ -30,8 +32,10 @@ class Company extends Component {
               handleModalInfoShow={handleModalInfoShow}
               isDescription={false}
               isInformation
+              isStatus={false}
             />
           )}
+        {isLoading && <InlineLoading />}
       </div>
     );
   }
@@ -40,21 +44,20 @@ class Company extends Component {
 Company.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
-
-  // remove when actual API Call
-  getCompanyCampaignsMock: PropTypes.func.isRequired,
+  getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  company_campaigns: PropTypes.any
+  company_campaigns: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  company_campaigns: state.campaignData.companyCampaigns,
-  isLoading: state.campaignData.isLoading
+  company_campaigns: state.campaignData.campaigns,
+  isLoading: state.campaignData.isLoading,
+  error: state.campaignData.error
 });
 
 const mapDispatchToProps = {
-  // remove when actual API Call
-  getCompanyCampaignsMock
+  getCampaigns
 };
 
 export default connect(

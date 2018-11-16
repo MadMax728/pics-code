@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { NewsFeeds } from "../../feeds";
 import { connect } from "react-redux";
-import { getExploreCampaignsMock } from "../../../../actions";
+import { getCampaigns } from "../../../../actions";
 import PropTypes from "prop-types";
+import { InlineLoading, VideoItem } from "../../../ui-kit";
+
 class Explore extends Component {
   componentDidMount = () => {
-    this.props.getExploreCampaignsMock();
+    this.props.getCampaigns("getExploreCampaigns");
   };
 
   render() {
@@ -26,8 +28,10 @@ class Explore extends Component {
               handleModalInfoShow={handleModalInfoShow}
               isDescription
               isInformation={false}
+              isStatus={false}
             />
           )}
+        {isLoading && <InlineLoading />}
       </div>
     );
   }
@@ -37,19 +41,21 @@ Explore.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
-  getExploreCampaignsMock: PropTypes.func.isRequired,
+  getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  explore_campaigns_list: PropTypes.any
+  explore_campaigns_list: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  explore_campaigns_list: state.campaignData.exploreCampaigns,
-  isLoading: state.campaignData.isLoading
+  explore_campaigns_list: state.campaignData.campaigns,
+  isLoading: state.campaignData.isLoading,
+  error: state.campaignData.error
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getExploreCampaignsMock
+  getCampaigns
 };
 
 export default connect(

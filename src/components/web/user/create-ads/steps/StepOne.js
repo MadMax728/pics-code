@@ -18,7 +18,9 @@ class StepOne extends Component {
       handleChangeField,
       uploadFile,
       handleEditImage,
-      handleLocation
+      handleLocation,
+      handleActualImg,
+      handleScale
     } = this.props;
 
     return (
@@ -159,8 +161,11 @@ class StepOne extends Component {
             handleEditImage={handleEditImage}
             isCircle={false}
             ref={this.imageCrop}
+            handleActualImg={handleActualImg}
+            handleScale={handleScale}
           />
           <div className="add-wrapper">
+            <input type="file" className="img-upload" />
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
         </div>
@@ -174,7 +179,9 @@ StepOne.propTypes = {
   form: propTypes.any.isRequired,
   uploadFile: propTypes.func.isRequired,
   handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired
+  handleLocation: propTypes.func.isRequired,
+  handleActualImg: propTypes.func,
+  handleScale: propTypes.func
 };
 
 export default StepOne;
