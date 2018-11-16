@@ -9,7 +9,7 @@ export const campaigns_list = [
       image: `${images.campaign1}`,
       isOwner: true,
       // Creator for True and Company for False
-      isCreator: true,
+      type: "creator",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -73,7 +73,7 @@ export const campaigns_list = [
       image: `${images.campaign2}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: true,
+      type: "creator",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -136,7 +136,7 @@ export const campaigns_list = [
       image: `${images.campaign3}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -198,7 +198,7 @@ export const campaigns_list = [
       image: `${images.campaign4}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: true
     },
     title: "Title of campaigns",
@@ -260,7 +260,7 @@ export const campaigns_list = [
       image: `${images.campaign_1}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -322,7 +322,7 @@ export const campaigns_list = [
       image: `${images.campaign_2}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: true
     },
     title: "Title of campaigns",

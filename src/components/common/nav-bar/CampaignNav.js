@@ -5,13 +5,13 @@ import { Translations } from "../../../lib/translations";
 
 const Links = [
   {
-    to: routes.COMPANY_ROUTE,
+    to: `/campaign/company`,
     className: "menu_company secondary_title",
     activeClassName: "active",
     text: Translations.left_sidebar.company
   },
   {
-    to: routes.CREATOR_ROUTE,
+    to: `/campaign/creator`,
     className: "menu_creator secondary_title",
     activeClassName: "active",
     text: Translations.left_sidebar.creator

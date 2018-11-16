@@ -24,12 +24,7 @@ import {
   SettingCampaignStatistics
 } from "../../web/user";
 
-import {
-  Company,
-  Creator,
-  Information,
-  Participant
-} from "../../web/campaigns";
+import { Campaign, Information, Participant } from "../../web/campaigns";
 
 import {
   CampaignsInformation,
@@ -160,18 +155,10 @@ class HomeRoute extends Component {
     );
   };
 
-  handleCompany = () => {
+  handleCampaign = match => {
     return (
-      <Company
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        handleModalShow={this.props.handleModalShow}
-      />
-    );
-  };
-
-  handleCreator = () => {
-    return (
-      <Creator
+      <Campaign
+        type={match.match.params.type}
         handleModalInfoShow={this.props.handleModalInfoShow}
         handleModalShow={this.props.handleModalShow}
       />
@@ -230,15 +217,9 @@ class HomeRoute extends Component {
           />
 
           <Route
-            path={routes.COMPANY_ROUTE}
+            path={routes.CAMPAIGN_ROUTE}
             exact
-            component={this.handleCompany}
-          />
-
-          <Route
-            path={routes.CREATOR_ROUTE}
-            exact
-            component={this.handleCreator}
+            component={this.handleCampaign}
           />
 
           <Route exact path={routes.MY_PROFILE_ROUTE} component={UserProfile} />
