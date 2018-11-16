@@ -237,6 +237,7 @@ class StepOne extends Component {
             handleScale={handleScale}
           />
           <div className="add-wrapper create-camp-ad-wrapr col-xs-12 no-padding">
+            <input type="file" class="img-upload" />
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
         </div>

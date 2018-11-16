@@ -433,20 +433,34 @@
     @include float();
     .normal_title {
       padding-left: 15px;
+      &.gray_box {
+      }
     }
     .secondary_title {
       padding-left: 15px;
       font-weight: bold;
+      &.gray_box {
+        min-height: 15px;
+        background-color: #d3d3d3;
+      }
     }
     .grey_title {
       padding-left: 15px;
+      &.gray_box {
+      }
     }
     .profile_image {
       display: inline-block;
       float: left;
       img {
+        cursor: auto;
         width: 45px;
         height: 45px;
+        &.profile_pic_gray {
+          height: 35px;
+          width: 35px;
+          border: 1px solid gray;
+        }
       }
     }
     .titles_wrapper {
@@ -457,6 +471,7 @@
       float: right;
       img {
         width: 30px;
+        cursor: pointer;
         transition: all ease 1s;
         -webkit-transition: all ease 1s;
         -moz-transition: all ease 1s;
@@ -479,6 +494,13 @@
     .feed_image {
       img {
         width: 100%;
+        &.big {
+          height: 40vh;
+          padding: 0 7px;
+          border: 0;
+          position: relative;
+          min-height: 350px;
+        }
       }
     }
     .feed_description {
@@ -495,6 +517,12 @@
     .count {
       padding-right: 5px;
       font-family: "Helvetica-Bold";
+      &.gray_box {
+        background-color: #d3d3d3;
+        width: 55px;
+        height: 17px;
+        float: left;
+      }
     }
     .messages {
       display: inline-block;
@@ -502,6 +530,7 @@
       padding-right: 15px;
       img {
         width: 20px;
+        cursor: pointer;
         &[src="/global/picstagraph-web/images/comment.PNG"],
         &[src="/global/picstagraph-web/images/feed_msg.svg"] {
           transition: all ease 0.5s;
@@ -520,6 +549,7 @@
       display: inline-block;
       img {
         width: 20px;
+        cursor: pointer;
         transition: all ease 1s;
         -webkit-transition: all ease 1s;
         -moz-transition: all ease 1s;
@@ -540,6 +570,9 @@
       float: right;
       div {
         color: $charcoal_color;
+      }
+      a.gray {
+        color: #d3d3d3;
       }
     }
   }

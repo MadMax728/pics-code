@@ -134,10 +134,21 @@ hr {
   color: $charcoal_color;
   font-family: "Helvetica-Bold";
   font-size: 14px;
+  &.gray_box {
+    min-height: 15px;
+    background-color: #d3d3d3;
+    margin-bottom: 2px;
+  }
 }
 .secondary_title {
   font-family: "Helvetica";
   color: $charcoal_color;
+  &.gray_box_big {
+    height: 60px;
+    width: 100%;
+    background: #d3d3d3;
+    display: inline-block;
+  }
 }
 .grey_title {
   font-family: "Helvetica-Light";
@@ -246,6 +257,11 @@ hr {
       font-weight: normal;
     }
   }
+  .react-tagsinput {
+    border: 1px solid transparent;
+    padding-left: 0;
+    padding-top: 0;
+  }
   img {
     width: 20px;
     position: absolute;
@@ -259,14 +275,6 @@ hr {
     border-radius: 0;
     box-shadow: none;
     height: 40px;
-    // & ~ .autocomplete-dropdown-container {
-    //   &.show {
-    //     border: 1px solid #979797;
-    //     div {
-    //       padding: 10px 20px;
-    //     }
-    //   }
-    // }
     &::placeholder {
       color: $charcoal_color;
     }
@@ -899,6 +907,8 @@ section.loader-wrapr {
   .rdw-editor-toolbar {
     border-color: #333333;
     margin-bottom: 0px;
+    border-left: 0;
+    border-right: 0;
     .rdw-option-wrapper {
       border: 0px;
       width: 34px;
@@ -965,5 +975,53 @@ section.loader-wrapr {
     .DraftEditor-root {
       height: 95%;
     }
+  }
+}
+.profile_pic_gray {
+  height: 35px;
+  width: 35px;
+  border: 1px solid gray;
+}
+//gray_box loading animation
+.gray_box {
+  position: relative;
+  width: 100%;
+  &::before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 10%;
+    left: 0;
+    top: 0;
+    background: white;
+    background-image: linear-gradient(to right, #d3d3d3, #e2e2e2);
+    animation: move_gray_box 5s infinite;
+    -webkit-animation: move_gray_box 5s infinite;
+    -moz-animation: move_gray_box 5s infinite;
+    -o-animation: move_gray_box 5s infinite;
+  }
+}
+@keyframes move_gray_box {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 90%;
+  }
+}
+@-webkit-keyframes move_gray_box {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 90%;
+  }
+}
+@-moz-keyframes move_gray_box {
+  0% {
+    left: 0;
+  }
+  100% {
+    left: 90%;
   }
 }

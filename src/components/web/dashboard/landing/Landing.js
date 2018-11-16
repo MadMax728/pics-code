@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCampaigns } from "../../../../actions";
 import { InlineLoading } from "../../../ui-kit";
+import * as images from "../../../../lib/constants/images";
+import { Link } from "react-router-dom";
 
 class Landing extends Component {
   componentDidMount = () => {
@@ -35,51 +37,49 @@ class Landing extends Component {
             <div className="feed_header">
               <div className="col-sm-1 col-xs-1 no-padding profile_image">
                 <img
-                  src="images/image.jpg"
-                  alt="profile_img"
-                  className="img-circle img-responsive"
+                  src={images.profile_pic_gray}
+                  alt="prof_img"
+                  className="img-circle img-responsive profile_pic_gray"
                 />
               </div>
               <div className="col-sm-9 col-xs-7 no-padding">
-                <div className="normal_title">Title of campaigns</div>
-                <div className="secondary_title">User name</div>
-                <div className="grey_title">01.01.2000 in Category</div>
+                <div className="normal_title gray_box" />
+                <div className="secondary_title gray_box" />
+                <div className="grey_title" />
               </div>
               <div className="col-sm-2 col-xs-2 like_wrapper">
                 <img
-                  src="images/blue_heart.svg"
+                  src={images.gray_heart}
                   alt="like"
-                  className="pull-right"
+                  className="pull-right gray_heart"
                 />
               </div>
             </div>
             <div className="feed_content">
               <div className="feed_image">
                 <img
-                  src="images/image.jpg"
+                  src={images.profile_pic_gray}
                   alt="feed_image"
-                  className="img-responsive"
+                  className="img-responsive profile_pic_gray big gray_box"
                 />
               </div>
               <div className="feed_description padding-15">
-                <span className="secondary_title">
-                  {`Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s...`}
-                </span>
+                <span className="secondary_title gray_box gray_box_big" />
               </div>
             </div>
             <div className="feed_footer padding-15">
               <div className="messages">
-                <span className="count">100</span>
-                <img src="images/feed_msg.svg" alt="message" />
+                <span className="count gray_box" />
+                {/* <img src={images.feed_msg} alt="message" /> */}
               </div>
               <div className="likes">
-                <span className="count">100</span>
-                <img src="images/feed_like.svg" alt="like" />
+                <span className="count gray_box" />
+                {/* <img src={images.gray_heart} alt="like" /> */}
               </div>
               <div className="show_more_options">
-                <a>• • •</a>
+                <Link to={""} className="gray">
+                  • • •
+                </Link>
               </div>
             </div>
           </div>

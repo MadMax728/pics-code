@@ -18,6 +18,10 @@ export const blue_heart = `${
   process.env.REACT_APP_CDN_URL
 }/images/blue_heart.svg`;
 
+export const gray_heart = `${
+  process.env.REACT_APP_CDN_URL
+}/images/gray_heart.svg`;
+
 export const feed_msg = `${process.env.REACT_APP_CDN_URL}/images/feed_msg.svg`;
 
 export const feed_like = `${
@@ -143,3 +147,6 @@ export const close = `${process.env.REACT_APP_CDN_URL}/images/close.svg`;
 
 export const crop_pic = `${process.env.REACT_APP_CDN_URL}/images/crop-pic.jpg`;
 export const comment = `${process.env.REACT_APP_CDN_URL}/images/comment.PNG`;
+export const profile_pic_gray = `${
+  process.env.REACT_APP_CDN_URL
+}/images/profile_pic_gray.png`;
