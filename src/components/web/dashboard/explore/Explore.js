@@ -3,7 +3,7 @@ import { NewsFeeds } from "../../feeds";
 import { connect } from "react-redux";
 import { getCampaigns } from "../../../../actions";
 import PropTypes from "prop-types";
-import { InlineLoading } from "../../../ui-kit";
+import { InlineLoading, VideoItem } from "../../../ui-kit";
 
 class Explore extends Component {
   componentDidMount = () => {
