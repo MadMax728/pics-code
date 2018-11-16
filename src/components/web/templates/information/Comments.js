@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../lib/constants/images";
+import * as images from "../../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { RenderToolTips, HashTagUsername } from "../../common";
-import { ThreeDots } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
+import { ThreeDots } from "../../../ui-kit";
+import { RenderToolTips, HashTagUsername } from "../../../common";
+import { Translations } from "../../../../lib/translations";
 
 class Comments extends Component {
   constructor(props, context) {
@@ -57,6 +57,8 @@ class Comments extends Component {
       return c.comment_id === parseInt(id);
     });
 
+    console.log(indexOf);
+
     if (indexOf !== -1) {
       comments.splice(indexOf, 1);
     }
@@ -73,18 +75,18 @@ class Comments extends Component {
   renderComment = comment => {
     return (
       <div className="comment-wrapper" key={comment.comment_id}>
-        <div className="comment-header col-xs-12 no-padding">
-          <div className="col-sm-1 col-xs-1 no-padding profile_image">
+        <div className="comment-header">
+          <div className="no-padding profile_image">
             <img
               src={comment.user.image}
               alt={`comment-${comment.comment_id}`}
               className="img-circle img-responsive"
             />
           </div>
-          <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
+          <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
             <b>{comment.user.name}</b> {comment.date} <b>Reply</b>
           </div>
-          <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
+          <div className="col-sm-3 col-md-2 col-xs-2 show_more_options pull-right">
             <ThreeDots
               id="comment"
               role="button"
@@ -130,14 +132,14 @@ class Comments extends Component {
       <div className="feed-comment" id={campaign.id}>
         <div className="comment-wrapper">
           <form onSubmit={this.handleSubmit} ref="commentForm">
-            <div className="col-sm-1 col-xs-1 no-padding profile_image">
+            <div className="no-padding profile_image">
               <img
                 src={images.image}
                 alt="image1"
                 className="img-circle img-responsive"
               />
             </div>
-            <div className="col-sm-10 col-xs-7 no-padding">
+            <div className="col-sm-7 col-xs-7 no-padding">
               <div className="comment-input">
                 <div className="form-group">
                   <HashTagUsername
@@ -151,7 +153,7 @@ class Comments extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-sm-1 col-xs-2 emoji_wrapper">
+            <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right">
               <img src={images.emoji} alt="like" className="pull-right" />
             </div>
             <input type="submit" hidden />

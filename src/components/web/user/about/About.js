@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as images from "../../../../lib/constants/images";
 import { aboutInfo } from "../../../../mock-data";
-import { SocialNetworks } from "../settings/edit-profile";
+import { SocialNetworks } from "../../templates/settings/edit-profile";
 
 const About = () => {
   return (

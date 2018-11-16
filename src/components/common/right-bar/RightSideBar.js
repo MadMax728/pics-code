@@ -7,10 +7,8 @@ import { FavouriteCampaigns } from "../../../components/web/campaigns";
 import { Community } from "../../../components/web/dashboard";
 import {
   SettingCampaignRight,
-  SettingAdsRight,
-  SettingCampaignStatisticsRight,
-  SettingAdsStatisticsRight
-} from "../../../components/web/user/settings";
+  SettingAdsRight
+} from "../../../components/web/templates/settings";
 
 class RightSideBar extends Component {
   userLanguage = () => {
@@ -52,16 +50,6 @@ class RightSideBar extends Component {
         />
         <Route
           path={routes.EXPLORE_ROUTE}
-          exact
-          component={FavouriteCampaigns}
-        />
-        <Route
-          path={routes.CREATOR_ROUTE}
-          exact
-          component={FavouriteCampaigns}
-        />
-        <Route
-          path={routes.COMPANY_ROUTE}
           exact
           component={FavouriteCampaigns}
         />
@@ -130,8 +118,6 @@ class RightSideBar extends Component {
         />
         <Route path={routes.EXPLORE_ROUTE} exact render={this.userLanguage} />
         <Route path={routes.CAMPAIGN_ROUTE} exact render={this.userLanguage} />
-        <Route path={routes.COMPANY_ROUTE} exact render={this.userLanguage} />
-        <Route path={routes.CREATOR_ROUTE} exact render={this.userLanguage} />
         <Route
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact

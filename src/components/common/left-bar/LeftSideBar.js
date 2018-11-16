@@ -51,8 +51,6 @@ class LeftSideBar extends Component {
       <div>
         <Route path={routes.ROOT_ROUTE} exact component={DashboardNav} />
         <Route path={routes.CAMPAIGN_ROUTE} exact component={CampaignNav} />
-        <Route path={routes.CREATOR_ROUTE} exact component={CampaignNav} />
-        <Route path={routes.COMPANY_ROUTE} exact component={CampaignNav} />
         <Route
           path={routes.NOTIFICATIONS_ROUTE}
           exact
@@ -79,13 +77,13 @@ class LeftSideBar extends Component {
         />
 
         <Route
-          path={routes.COMPANY_ROUTE}
+          path={`/campaign/company`}
           exact
           component={this.handleCampaignCompanyFilter}
         />
 
         <Route
-          path={routes.CREATOR_ROUTE}
+          path={`/campaign/creator`}
           exact
           component={this.handleCampaignCreatorFilter}
         />

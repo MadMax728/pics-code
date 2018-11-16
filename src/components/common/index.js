@@ -29,5 +29,4 @@ export { MessageBar } from "./message-bar";
 export { Username } from "./username";
 export { HashTag } from "./hash-tag";
 export { HashTagUsername } from "./hash-tag-username";
-export { ThreeDots } from "./three-dots";
 export { RenderToolTips } from "./render-tool-tips";

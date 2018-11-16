@@ -50,6 +50,10 @@ export const getSavedCampaigns = payload =>
 export const getSettingsCampaigns = payload =>
   api.get("/campaigns/get-settings-campaigns", payload);
 
+// Campaign Type Creator and Company
+export const getCampaignType = (payload, type) =>
+  api.get("/campaign/" + type, payload);
+
 // Campaign Informatin API
 export const getCampaignDetails = (payload, provider) =>
   api.get("/campaigns/" + provider + "/information", payload);
