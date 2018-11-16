@@ -80,7 +80,7 @@ class Information extends Component {
       <div className="padding-l-10 middle-section width-80">
         {campaign_detail &&
           !isLoading && (
-            <div className="information-wrapper">
+            <div className="information-wrapper ht100">
               <div className="info-inner-wrapper">
                 <div className="info-main-title">{campaign_detail.title}</div>
                 <div className="text">{campaign_detail.desc}</div>
