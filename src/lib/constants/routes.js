@@ -46,6 +46,7 @@ export const FEEDBACK_ROUTE = "/feedback";
 export const LANGUAGE_ROUTE = "/language";
 
 export const BASE_CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/";
+export const BASE_AD_INFORMATION_ROUTE = "/ad/information/";
 export const BASE_CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/";
 export const CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/:id";
 export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/:id";
@@ -57,6 +58,7 @@ export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness-profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
 export const BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
   "/settings/campaigns/statistics/";
+export const BASE_SETTINGS_AD_STATISTICS_ROUTE = "/settings/ads/statistics/";
 export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
   "/settings/campaigns/statistics/:id";
 export const SETTINGS_ADS_ROUTE = "/settings/ads";

@@ -37,3 +37,10 @@ export const mediaTypes = {
   video: "video",
   image: "image"
 };
+
+export const contentTypes = {
+  campaign: "campaign",
+  ad: "ad",
+  video: "video",
+  image: "image"
+};

@@ -43,6 +43,11 @@ const initialState = {
     campaign: [],
     isLoading: false,
     error: false
+  },
+  exploreData: {
+    explores: null,
+    isLoading: false,
+    error: false
   }
 };
 
