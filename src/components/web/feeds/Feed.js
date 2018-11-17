@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import FeedHeader from "./FeedHeader";
 import { Link } from "react-router-dom";
-import { ImageItem, VideoItem } from "../../ui-kit";
+import { ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import Comments from "./Comments";
-import { ThreeDots, RenderToolTips } from "../../common";
+import { RenderToolTips } from "../../common";
 
 class Feed extends Component {
   constructor(props, context) {
@@ -102,7 +103,9 @@ class Feed extends Component {
         />
         <div className="feed_content">
           {campaign && (
-            <Link to={`/campaign/${campaign.id}/information`}>
+            <Link
+              to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}
+            >
               {this.renderContents(campaign, isInformation, isDescription)}
             </Link>
           )}

@@ -19,7 +19,7 @@ export const apiAuth = (baseUrl, header = {}) => {
 };
 
 const buildHeader = (obj = {}) => {
-  let header = {
+  const header = {
     Accept: "application/json",
     "Content-Type": "application/json"
   };

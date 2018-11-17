@@ -32,3 +32,8 @@ export const modalType = {
   processed: "processed",
   edit_profile: "edit_profile"
 };
+
+export const mediaTypes = {
+  video: "video",
+  image: "image"
+};

@@ -21,7 +21,7 @@ const getCampaignsFailed = error => ({
   error: true
 });
 
-export const getCampaigns = prop => {
+export const getCampaigns = (prop, provider) => {
   return dispatch => {
     dispatch(getCampaignsStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -30,7 +30,7 @@ export const getCampaigns = prop => {
     };
     const params = { headers };
 
-    return campaignService[prop](params).then(
+    return campaignService[prop](params, provider).then(
       res => {
         dispatch(getCampaignsSucceeded(res.data.data));
       },
@@ -40,42 +40,38 @@ export const getCampaigns = prop => {
           // remove below code after API working, this is just for set mock data.
           prop === "getCampaigns"
             ? getCampaignsSucceeded(campaigns_list)
-            : prop === "getCompanyCampaigns"
+            : prop === "getCampaignType"
               ? getCampaignsSucceeded(
-                  campaigns_list.filter(c => c.user.isCreator === false)
+                  campaigns_list.filter(c => c.user.type === provider)
                 )
-              : prop === "getCreatorCampaigns"
+              : prop === "getParticipantCampaigns"
                 ? getCampaignsSucceeded(
-                    campaigns_list.filter(c => c.user.isCreator === true)
+                    campaigns_list.filter(c => c.user.isParticipant === true)
                   )
-                : prop === "getParticipantCampaigns"
+                : prop === "getExploreCampaigns"
                   ? getCampaignsSucceeded(
-                      campaigns_list.filter(c => c.user.isParticipant === true)
+                      campaigns_list.filter(c => c.isExplore === true)
                     )
-                  : prop === "getExploreCampaigns"
+                  : prop === "getParticipantsCampaigns"
                     ? getCampaignsSucceeded(
-                        campaigns_list.filter(c => c.isExplore === true)
-                      )
-                    : prop === "getParticipantsCampaigns"
-                      ? getCampaignsSucceeded(
-                          campaigns_list.filter(
-                            c => c.user.isParticipant === true
-                          )
+                        campaigns_list.filter(
+                          c => c.user.isParticipant === true
                         )
-                      : prop === "getNewsFeedCampaigns"
-                        ? getCampaignsSucceeded(campaigns_list)
-                        : prop === "getUserProfileCampaigns"
-                          ? getCampaignsSucceeded(
-                              campaigns_list.filter(
-                                c => c.user.isParticipant === true
-                              )
+                      )
+                    : prop === "getNewsFeedCampaigns"
+                      ? getCampaignsSucceeded(campaigns_list)
+                      : prop === "getUserProfileCampaigns"
+                        ? getCampaignsSucceeded(
+                            campaigns_list.filter(
+                              c => c.user.isParticipant === true
                             )
-                          : prop === "getSavedCampaigns"
-                            ? getCampaignsSucceeded(
-                                campaigns_list.filter(c => c.isSaved === true)
-                              )
-                            : prop === "getSettingsCampaigns" &&
-                              getCampaignsSucceeded(campaigns_list)
+                          )
+                        : prop === "getSavedCampaigns"
+                          ? getCampaignsSucceeded(
+                              campaigns_list.filter(c => c.isSaved === true)
+                            )
+                          : prop === "getSettingsCampaigns" &&
+                            getCampaignsSucceeded(campaigns_list)
         );
         logger.error({
           description: error.toString(),

@@ -4,7 +4,7 @@ import propTypes from "prop-types";
 import {
   EditProfilePic,
   EditProfilePicHeader
-} from "../../../web/user/settings/";
+} from "../../../web/templates/settings/edit-profile-pic";
 import { uploadProfilePicture } from "../../../../actions/profile";
 import axios from "axios";
 import connect from "react-redux/es/connect/connect";
@@ -26,11 +26,11 @@ class EditProfileModal extends Component {
 
   handleActualImg = actual_img => {
     console.log("ac", actual_img);
-    this.setState({ actual_img: actual_img });
+    this.setState({ actual_img });
   };
 
   handleScale = scale => {
-    this.setState({ scale: scale });
+    this.setState({ scale });
   };
 
   handleContinue = () => {

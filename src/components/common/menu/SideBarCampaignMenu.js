@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { LeftSidebarNav } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import propTypes from "prop-types";
+import * as routes from "../../../lib/constants/routes";
 
 class SideBarCampaignMenu extends Component {
   constructor(props, context) {
@@ -9,13 +10,17 @@ class SideBarCampaignMenu extends Component {
     this.state = {
       links: [
         {
-          to: `/campaign/${this.props.match.params.id}/information`,
+          to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
+            this.props.match.params.id
+          }`,
           className: "menu_information secondary_title",
           activeClassName: "active",
           text: Translations.left_sidebar.information
         },
         {
-          to: `/campaign/${this.props.match.params.id}/participant`,
+          to: `${routes.BASE_CAMPAIGN_PARTICIPANT_ROUTE}${
+            this.props.match.params.id
+          }`,
           className: "menu_participants secondary_title",
           activeClassName: "active",
           text: Translations.left_sidebar.participants

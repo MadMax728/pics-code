@@ -11,4 +11,5 @@ export { ImageCropper } from "./image-cropper";
 export { ToolTip } from "./tool-tip";
 export { PlaceAutoCompleteLocation } from "./place-auto-complete-location";
 export { VideoItem } from "./items";
+export { ThreeDots } from "./three-dots";
 export { ImageItem } from "./items";

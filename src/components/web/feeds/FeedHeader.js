@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
+import * as routes from "../../../lib/constants/routes";
 import { Link } from "react-router-dom";
 
 class FeedHeader extends Component {
@@ -18,8 +19,8 @@ class FeedHeader extends Component {
   render() {
     const { campaign, isDescription, isInformation } = this.props;
     const profile_route = campaign.user.isOwner
-      ? `/news-feed`
-      : `/news-feed/${campaign.id}`;
+      ? routes.NEWS_FEED_ROUTE
+      : `${routes.NEWS_FEED_ROUTE}${campaign.id}`;
 
     return (
       <div className="feed_header">
@@ -45,7 +46,9 @@ class FeedHeader extends Component {
         <div className="no-padding titles_wrapper">
           <Link
             to={{
-              pathname: `/campaign/${campaign.id}/information`,
+              pathname: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
+                campaign.id
+              }`,
               state: { _id: campaign.id }
             }}
           >

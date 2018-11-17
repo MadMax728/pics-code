@@ -9,7 +9,7 @@ export const campaigns_list = [
       image: `${images.campaign1}`,
       isOwner: true,
       // Creator for True and Company for False
-      isCreator: true,
+      type: "creator",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -56,6 +56,7 @@ export const campaigns_list = [
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
+    isSaved: false,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
@@ -73,7 +74,7 @@ export const campaigns_list = [
       image: `${images.campaign2}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: true,
+      type: "creator",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -119,6 +120,7 @@ export const campaigns_list = [
     like_count: 12,
     isFavorite: true,
     applications: "2000/2000",
+    isSaved: true,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
@@ -136,7 +138,7 @@ export const campaigns_list = [
       image: `${images.campaign3}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -181,6 +183,7 @@ export const campaigns_list = [
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
+    isSaved: false,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
@@ -198,7 +201,7 @@ export const campaigns_list = [
       image: `${images.campaign4}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: true
     },
     title: "Title of campaigns",
@@ -236,6 +239,7 @@ export const campaigns_list = [
       }
     ],
     category: "01.01.2000 in Category",
+    type: "image",
     image: `${images.campaign4}`,
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
@@ -243,6 +247,7 @@ export const campaigns_list = [
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
+    isSaved: true,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
@@ -260,7 +265,7 @@ export const campaigns_list = [
       image: `${images.campaign_1}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -299,12 +304,14 @@ export const campaigns_list = [
     ],
     category: "01.01.2000 in Category",
     image: `${images.campaign_1}`,
+    type: "image",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
+    isSaved: true,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
@@ -322,7 +329,7 @@ export const campaigns_list = [
       image: `${images.campaign_2}`,
       isOwner: false,
       // Creator for True and Company for False
-      isCreator: false,
+      type: "company",
       isParticipant: true
     },
     title: "Title of campaigns",
@@ -361,12 +368,14 @@ export const campaigns_list = [
     ],
     category: "01.01.2000 in Category",
     image: `${images.campaign_2}`,
+    type: "image",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
+    isSaved: true,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",

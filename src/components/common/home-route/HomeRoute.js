@@ -2,35 +2,37 @@ import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import propTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
-import { OtherNewsFeed, OtherAbout, OtherSaved } from "../../web/other";
-import { OwnerNewsFeed, OwnerAbout, OwnerSaved } from "../../web/owner";
-import {
-  Landing,
-  Users,
-  Explore,
-  Participants,
-  Pictures
-} from "../../web/dashboard";
-import {
-  UserProfile,
-  Privacy,
-  EditProfile,
-  BusinessProfile,
-  BillsAndReceipts,
-  DataDownload,
-  SettingCampaign,
-  Ads,
-  AdsStatistics,
-  SettingCampaignStatistics
-} from "../../web/user";
 
 import {
-  Company,
-  Creator,
-  Information,
-  Participant
-} from "../../web/campaigns";
+  NewsFeedsPage,
+  ExplorePage,
+  ParticipantsPage,
+  UsersPage,
+  PicturesPage,
+  OtherNewsFeedPage,
+  OtherAboutPage,
+  OtherSavedPage,
+  OwnerNewsFeedPage,
+  OwnerAboutPage,
+  OwnerSavedPage,
+  UserProfilePage,
+  PrivacyPage,
+  EditProfilePage,
+  BusinessProfilePage,
+  BillsAndReceiptsPage,
+  DataDownloadPage,
+  SettingCampaignPage,
+  AdsPage,
+  AdsStatisticsPage,
+  SettingCampaignStatisticsPage,
+  CampaignPage,
+  InformationPage,
+  ParticipantPage
+} from "../../web/templates";
 
+import { Campaign, Information, Participant } from "../../web/campaigns";
+
+// Static Pages which is not requre to put in template folder
 import {
   CampaignsInformation,
   Advertising,
@@ -59,7 +61,7 @@ import { PageNotFound } from "../../web/page-not-found";
 class HomeRoute extends Component {
   handleLanding = () => {
     return (
-      <Landing
+      <NewsFeedsPage
         handleModalInfoShow={this.props.handleModalInfoShow}
         handleModalShow={this.props.handleModalShow}
       />
@@ -68,7 +70,7 @@ class HomeRoute extends Component {
 
   handleEditProfile = () => {
     return (
-      <EditProfile
+      <EditProfilePage
         handleModalInfoShow={this.props.handleModalInfoShow}
         image={this.props.image}
       />
@@ -81,7 +83,7 @@ class HomeRoute extends Component {
 
   handleSettingCampaign = () => {
     return (
-      <SettingCampaign
+      <SettingCampaignPage
         isBackOffice={false}
         handleModalInfoShow={this.props.handleModalInfoShow}
         handleModalShow={this.props.handleModalShow}
@@ -90,12 +92,12 @@ class HomeRoute extends Component {
   };
 
   handleAds = () => {
-    return <Ads isBackOffice={false} />;
+    return <AdsPage isBackOffice={false} />;
   };
 
   handleOwnerNewsFeed = () => {
     return (
-      <OwnerNewsFeed
+      <OwnerNewsFeedPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
@@ -104,7 +106,7 @@ class HomeRoute extends Component {
 
   handleExplore = () => {
     return (
-      <Explore
+      <ExplorePage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
@@ -113,7 +115,7 @@ class HomeRoute extends Component {
 
   handleOwnerSaved = () => {
     return (
-      <OwnerSaved
+      <OwnerSavedPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
@@ -122,7 +124,7 @@ class HomeRoute extends Component {
 
   handleOtherNewsFeed = () => {
     return (
-      <OtherNewsFeed
+      <OtherNewsFeedPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
@@ -131,7 +133,7 @@ class HomeRoute extends Component {
 
   handleOtherSaved = () => {
     return (
-      <OtherSaved
+      <OtherSavedPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
@@ -140,7 +142,7 @@ class HomeRoute extends Component {
 
   handleInformation = match => {
     return (
-      <Information
+      <InformationPage
         handleModalShow={this.props.handleModalShow}
         match={match.match}
       />
@@ -148,30 +150,22 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaignStatistics = match => {
-    return <SettingCampaignStatistics match={match.match} />;
+    return <SettingCampaignStatisticsPage match={match.match} />;
   };
 
   handleParticipant = () => {
     return (
-      <Participant
+      <ParticipantPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
     );
   };
 
-  handleCompany = () => {
+  handleCampaign = match => {
     return (
-      <Company
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        handleModalShow={this.props.handleModalShow}
-      />
-    );
-  };
-
-  handleCreator = () => {
-    return (
-      <Creator
+      <CampaignPage
+        type={match.match.params.type}
         handleModalInfoShow={this.props.handleModalInfoShow}
         handleModalShow={this.props.handleModalShow}
       />
@@ -198,14 +192,18 @@ class HomeRoute extends Component {
             path={routes.SAVED_ROUTE}
             component={this.handleOwnerSaved}
           />
-          <Route exact path={routes.ABOUT_ROUTE} component={OwnerAbout} />
+          <Route exact path={routes.ABOUT_ROUTE} component={OwnerAboutPage} />
 
           <Route
             exact
             path={routes.OTHER_NEWS_FEED_ROUTE}
             component={this.handleOtherNewsFeed}
           />
-          <Route exact path={routes.OTHER_ABOUT_ROUTE} component={OtherAbout} />
+          <Route
+            exact
+            path={routes.OTHER_ABOUT_ROUTE}
+            component={OtherAboutPage}
+          />
 
           <Route
             exact
@@ -216,12 +214,12 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.PARTICIPANTS_ROUTE}
-            component={Participants}
+            component={ParticipantsPage}
           />
 
-          <Route exact path={routes.USERS_ROUTE} component={Users} />
+          <Route exact path={routes.USERS_ROUTE} component={UsersPage} />
 
-          <Route exact path={routes.PICS_ROUTE} component={Pictures} />
+          <Route exact path={routes.PICS_ROUTE} component={PicturesPage} />
 
           <Route
             path={routes.ROOT_ROUTE}
@@ -230,18 +228,16 @@ class HomeRoute extends Component {
           />
 
           <Route
-            path={routes.COMPANY_ROUTE}
+            path={routes.CAMPAIGN_ROUTE}
             exact
-            component={this.handleCompany}
+            component={this.handleCampaign}
           />
 
           <Route
-            path={routes.CREATOR_ROUTE}
             exact
-            component={this.handleCreator}
+            path={routes.MY_PROFILE_ROUTE}
+            component={UserProfilePage}
           />
-
-          <Route exact path={routes.MY_PROFILE_ROUTE} component={UserProfile} />
 
           <Route
             exact
@@ -265,25 +261,25 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_PRIVACY_ROUTE}
-            component={Privacy}
+            component={PrivacyPage}
           />
 
           <Route
             exact
             path={routes.SETTINGS_BUSSINESS_PROFILE_ROUTE}
-            component={BusinessProfile}
+            component={BusinessProfilePage}
           />
 
           <Route
             exact
             path={routes.SETTINGS_BILLS_AND_RECEIPTS_ROUTE}
-            component={BillsAndReceipts}
+            component={BillsAndReceiptsPage}
           />
 
           <Route
             exact
             path={routes.SETTINGS_DATA_DOWNLOAD_ROUTE}
-            component={DataDownload}
+            component={DataDownloadPage}
           />
 
           <Route
@@ -295,7 +291,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
-            component={AdsStatistics}
+            component={AdsStatisticsPage}
           />
 
           <Route
