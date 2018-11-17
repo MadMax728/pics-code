@@ -11,7 +11,8 @@ class AdCard extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      isComments: false
+      isComments: false,
+      item: this.props.item
     };
   }
 
@@ -39,15 +40,22 @@ class AdCard extends Component {
 
   handleContent = () => {};
 
-  handleFavorite = e => {};
+  handleFavorite = e => {
+    const item = this.state.item;
+    item.isFavorite = !this.state.item.isFavorite;
+    item.like_count = item.isFavorite
+      ? item.like_count + 1
+      : item.like_count - 1;
+    this.setState({ item });
+  };
 
   handleCommentsSections = () => {
     this.setState({ isComments: !this.state.isComments });
   };
 
   render() {
-    const { item, isStatus, isDescription, isInformation } = this.props;
-    const { isComments } = this.state;
+    const { isStatus, isDescription, isInformation } = this.props;
+    const { isComments, item } = this.state;
 
     return (
       <div className="feed_wrapper">

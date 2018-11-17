@@ -127,6 +127,15 @@ class Upload extends Component {
           )}
 
           <div className="add-wrapper heightAuto">
+            <input
+              type="file"
+              className="img-upload"
+              name="newImage"
+              id="file-2"
+              data-multiple-caption="{count} files selected"
+              multiple=""
+              onChange={this.handleUpload}
+            />
             <img src={images.plus_button} alt={"plus_button"} />
           </div>
         </div>
