@@ -1,4 +1,4 @@
-export { default as SettingCampaign } from "./CampaignPage";
+export { default as SettingCampaignPage } from "./CampaignPage";
 export {
   default as SettingCampaignStatisticsPage
 } from "./SettingCampaignStatisticsPage";

@@ -11,8 +11,8 @@ class CommentCard extends Component {
     super(props, context);
 
     this.state = {
-      campaign: this.props.campaign,
-      comments: this.props.campaign.comments,
+      item: this.props.item,
+      comments: this.props.item.comments,
       form: {
         comment: ""
       },
@@ -31,7 +31,7 @@ class CommentCard extends Component {
 
   handleReportPost = () => {};
 
-  addComment = (campaignId, comment) => {
+  addComment = (itemId, comment) => {
     const comments = this.state.comments;
     const commentData = {
       comment_id: parseInt(Math.random()),
@@ -116,7 +116,7 @@ class CommentCard extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.form.comment !== "") {
-      this.addComment(this.props.campaign.id, this.state.form.comment);
+      this.addComment(this.props.item.id, this.state.form.comment);
       /* eslint-disable */
       this.refs.commentForm.reset();
       this.setState({ form: { ...this.state.form, comment: "" } });
@@ -124,10 +124,10 @@ class CommentCard extends Component {
   };
 
   render() {
-    const { campaign, form, comments } = this.state;
+    const { item, form, comments } = this.state;
 
     return (
-      <div className="feed-comment" id={campaign.id}>
+      <div className="feed-comment" id={item.id}>
         <div className="comment-wrapper">
           <form onSubmit={this.handleSubmit} ref="commentForm">
             <div className="col-sm-1 col-xs-1 no-padding profile_image">
@@ -169,7 +169,7 @@ class CommentCard extends Component {
 }
 
 CommentCard.propTypes = {
-  campaign: PropTypes.any
+  item: PropTypes.any
 };
 
 export default CommentCard;

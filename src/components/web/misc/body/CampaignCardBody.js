@@ -7,12 +7,13 @@ import InformationCard from "../InformationCard";
 const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
   return (
     <div className="feed_content">
-      {campaign.type &&
-        campaign.type === enumerations.mediaTypes.video && (
+      {campaign.mediaType &&
+        campaign.mediaType === enumerations.mediaTypes.video && (
           <VideoItem item={campaign.video} />
         )}
-      {(!campaign.type ||
-        (campaign.type && campaign.type === enumerations.mediaTypes.image)) && (
+      {(!campaign.mediaType ||
+        (campaign.mediaType &&
+          campaign.mediaType === enumerations.mediaTypes.image)) && (
         <ImageItem
           item={campaign.image}
           isOtherCardExist={!isDescription && isInformation}
@@ -25,7 +26,7 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
             <span className="secondary_title">{campaign.desc}</span>
           </div>
         )}
-      {campaign && isInformation && <InformationCard item="campaign" />}
+      {campaign && isInformation && <InformationCard item={campaign} />}
     </div>
   );
 };

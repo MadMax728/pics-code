@@ -30,7 +30,7 @@ class CampaignCard extends Component {
         handleEvent: this.handleContent
       }
     ];
-    return <RenderToolTips items={reportTips} id={this.props.campaign.id} />;
+    return <RenderToolTips items={reportTips} id={this.props.item.id} />;
   };
 
   handleReportPost = () => {};
@@ -46,30 +46,32 @@ class CampaignCard extends Component {
   };
 
   render() {
+    const { item, isStatus, isDescription, isInformation } = this.props;
+    const { isComments } = this.state;
+    console.log(item);
+
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
-          campaign={this.props.campaign}
-          isDescription={this.props.isDescription}
-          isInformation={this.props.isInformation}
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
           handleFavorite={this.handleFavorite}
         />
         <CampaignCardBody
-          campaign={this.props.campaign}
-          isDescription={this.props.isDescription}
-          isInformation={this.props.isInformation}
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
         />
         <CampaignCardFooter
-          campaign={this.props.campaign}
+          campaign={item}
           handleCommentsSections={this.handleCommentsSections}
-          isComments={this.state.isComments}
-          isStatus={this.props.isStatus}
+          isComments={isComments}
+          isStatus={isStatus}
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {this.state.isComments && (
-          <CommentCard campaign={this.props.campaign} />
-        )}
+        {isComments && <CommentCard item={item} />}
       </div>
     );
   }
@@ -79,7 +81,7 @@ CampaignCard.propTypes = {
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,
-  campaign: PropTypes.shape({
+  item: PropTypes.shape({
     user: PropTypes.shape({
       name: PropTypes.string,
       image: PropTypes.string,
