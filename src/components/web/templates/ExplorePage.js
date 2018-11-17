@@ -1,37 +1,48 @@
 import React, { Component } from "react";
 import { NewsFeeds } from "../feeds";
 import { connect } from "react-redux";
-import { getCampaigns } from "../../../actions";
+import { getExplores } from "../../../actions";
 import PropTypes from "prop-types";
 import { InlineLoading, VideoItem } from "../../ui-kit";
-import { CampaignCard } from "../misc";
+import { CampaignCard, AdCard } from "../misc";
+import * as enumerations from "../../../lib/constants/enumerations";
 class ExploreRoot extends Component {
   componentDidMount = () => {
-    this.props.getCampaigns("getExploreCampaigns");
+    this.props.getExplores("getExplores");
   };
 
   renderExploreList = () => {
-    const { explore_campaigns_list, isLoading } = this.props;
-    return explore_campaigns_list.map(campaign => {
+    const { exploreList, isLoading } = this.props;
+    return exploreList.map(explore => {
       return (
-        <div key={campaign.id}>
-          <CampaignCard
-            campaign={campaign}
-            isDescription
-            isInformation={false}
-            isStatus={false}
-          />
+        <div key={explore.id}>
+          {explore.type === enumerations.contentTypes.campaign && (
+            <CampaignCard
+              item={explore}
+              isDescription
+              isInformation={false}
+              isStatus={false}
+            />
+          )}
+          {explore.type === enumerations.contentTypes.ad && (
+            <AdCard
+              item={explore}
+              isDescription
+              isInformation={false}
+              isStatus={false}
+            />
+          )}
         </div>
       );
     });
   };
 
   render() {
-    const { explore_campaigns_list, isLoading } = this.props;
+    const { exploreList, isLoading } = this.props;
 
     return (
       <div className={"middle-section padding-rl-10"}>
-        {explore_campaigns_list && !isLoading && this.renderExploreList()}
+        {exploreList && !isLoading && this.renderExploreList()}
         {isLoading && <InlineLoading />}
       </div>
     );
@@ -42,21 +53,21 @@ ExploreRoot.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
-  getCampaigns: PropTypes.func.isRequired,
+  getExplores: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  explore_campaigns_list: PropTypes.any,
+  exploreList: PropTypes.any,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  explore_campaigns_list: state.campaignData.campaigns,
+  exploreList: state.exploreData.explores,
   isLoading: state.campaignData.isLoading,
   error: state.campaignData.error
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getCampaigns
+  getExplores
 };
 
 export default connect(
