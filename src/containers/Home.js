@@ -90,7 +90,10 @@ class Home extends Component {
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div>
-        <Header handleModalShow={this.handleModalShow} />
+        <Header
+          handleModalShow={this.handleModalShow}
+          history={this.props.history}
+        />
         <section>
           <MessageBar message={message} />
 
