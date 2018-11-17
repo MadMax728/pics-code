@@ -22,7 +22,7 @@ const UserCardBody = ({ user, index }) => {
 
 UserCardBody.propTypes = {
   user: propTypes.object.isRequired,
-  index: propTypes.object.isRequired
+  index: propTypes.number.isRequired
 };
 
 export default UserCardBody;

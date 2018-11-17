@@ -229,8 +229,12 @@ class EditProfile extends Component {
           <form action="">
             <div className="edit-profile-title-wrapr">
               <div className="edit-title-wrapr">
-                <div className="form-title">Edit profile</div>
-                <div className="form-subtitle">General information</div>
+                <div className="form-title">
+                  {Translations.left_sidebar_settings.edit_profile}
+                </div>
+                <div className="form-subtitle">
+                  {Translations.editProfile.general_information}
+                </div>
               </div>
               <div className="edit_profile_wrapr">
                 <img
@@ -245,13 +249,15 @@ class EditProfile extends Component {
                   role="button"
                   tabIndex="0"
                 >
-                  Edit profile image
+                  {Translations.modal_header.edit_profile_image}
                 </div>
               </div>
             </div>
             <div className="general-information-wrapper">
               <div className="form-group margin-bottom-30">
-                <label htmlFor="username">User name</label>
+                <label htmlFor="username">
+                  {Translations.editProfile.username}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -268,7 +274,9 @@ class EditProfile extends Component {
                 <span>{this.state.error.username}</span>
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="name">Name/Company</label>
+                <label htmlFor="name">
+                  {Translations.editProfile.name_company}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -282,7 +290,9 @@ class EditProfile extends Component {
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">
                   <div className="form-group margin-bottom-30">
-                    <label htmlFor="city">Date of birth</label>
+                    <label htmlFor="city">
+                      {Translations.editProfile.D_O_B}
+                    </label>
                     <NumberInput
                       type="number"
                       name="day"
@@ -314,7 +324,9 @@ class EditProfile extends Component {
                 </div>
                 <div className="col-sm-6 padding-l-5">
                   <div className="form-group margin-bottom-30">
-                    <label htmlFor="country">Gender</label>
+                    <label htmlFor="country">
+                      {Translations.editProfile.gender}
+                    </label>
                     <ul className="options">
                       <li>
                         <RadioButton
@@ -344,7 +356,9 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="category">Category</label>
+                <label htmlFor="category">
+                  {Translations.editProfile.category}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -366,7 +380,9 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="phone-number">Phone number</label>
+                <label htmlFor="phone-number">
+                  {Translations.editProfile.phone_number}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -378,7 +394,7 @@ class EditProfile extends Component {
                 <span>{this.state.error.phone_number}</span>
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="email">{Translations.editProfile.email}</label>
                 <Text
                   type="text"
                   className="form-control"
@@ -390,7 +406,9 @@ class EditProfile extends Component {
                 <span>{this.state.error.email}</span>
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="website">Web site</label>
+                <label htmlFor="website">
+                  {Translations.editProfile.website}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -402,7 +420,9 @@ class EditProfile extends Component {
                 <span>{this.state.error.website}</span>
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="description">Profile description</label>
+                <label htmlFor="description">
+                  {Translations.editProfile.profile_description}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -414,10 +434,14 @@ class EditProfile extends Component {
                 <span>{this.state.error.profile_description}</span>
               </div>
             </div>
-            <div className="form-subtitle">Personal interests</div>
+            <div className="form-subtitle">
+              {Translations.editProfile.Personal_interests}
+            </div>
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
-                <label htmlFor="offer-tag">Offer tag</label>
+                <label htmlFor="offer-tag">
+                  {Translations.editProfile.offer_tag}
+                </label>
                 <TagsInput
                   value={this.state.form.offer_tag}
                   onChange={this.handleOfferTagChange}
@@ -425,7 +449,9 @@ class EditProfile extends Component {
                 <span>{this.state.error.offer_tag}</span>
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="inquiry-tag">Inquiry tag</label>
+                <label htmlFor="inquiry-tag">
+                  {Translations.editProfile.inquiry_tag}
+                </label>
                 <TagsInput
                   value={this.state.form.inquiry_tag}
                   onChange={this.handleInquiryTagChange}
