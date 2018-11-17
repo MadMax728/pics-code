@@ -520,5 +520,21 @@
       "name": "year",
       "type": "number"
     }
+  },
+  "editProfile": {
+    "username": "Username",
+    "category": "Category",
+    "email": "Email",
+    "inquiry_tag": "Inquiry-tag",
+    "location": "Location",
+    "name_company": "Name/Company",
+    "offer_tag": "Offer-tag",
+    "phone_number": "Phone-number",
+    "profile_description": "Profile-description",
+    "website": "Website",
+    "gender": "Gender",
+    "D_O_B": "Date of birth",
+    "general_information": "General Information",
+    "Personal_interests": "Personal interests"
   }
 }

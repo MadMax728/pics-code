@@ -12,6 +12,7 @@ import {
   HomeRoute,
   MessageBar
 } from "../components/common";
+import propTypes from "prop-types";
 class Home extends Component {
   constructor(props, context) {
     super(props, context);
@@ -90,7 +91,10 @@ class Home extends Component {
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div>
-        <Header handleModalShow={this.handleModalShow} />
+        <Header
+          handleModalShow={this.handleModalShow}
+          history={this.props.history}
+        />
         <section>
           <MessageBar message={message} />
 
@@ -144,5 +148,8 @@ class Home extends Component {
     );
   }
 }
+Home.propTypes = {
+  history: propTypes.any
+};
 
 export default Home;
