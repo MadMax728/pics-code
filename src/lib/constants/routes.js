@@ -47,6 +47,8 @@ export const LANGUAGE_ROUTE = "/language";
 
 export const BASE_CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/";
 export const BASE_AD_INFORMATION_ROUTE = "/ad/information/";
+export const BASE_IMAGE_INFORMATION_ROUTE = "/image/information/";
+export const BASE_VIDEO_INFORMATION_ROUTE = "/video/information/";
 export const BASE_CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/";
 export const CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/:id";
 export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/:id";

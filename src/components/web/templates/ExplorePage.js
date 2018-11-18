@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { NewsFeeds } from "../feeds";
 import { connect } from "react-redux";
 import { getExplores } from "../../../actions";
 import PropTypes from "prop-types";
-import { InlineLoading, VideoItem } from "../../ui-kit";
-import { CampaignCard, AdCard } from "../misc";
+import { InlineLoading } from "../../ui-kit";
+import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 class ExploreRoot extends Component {
   componentDidMount = () => {
@@ -31,6 +30,12 @@ class ExploreRoot extends Component {
               isInformation={false}
               isStatus={false}
             />
+          )}
+          {explore.type === enumerations.contentTypes.image && (
+            <ImageCard item={explore} />
+          )}
+          {explore.type === enumerations.contentTypes.video && (
+            <VideoCard item={explore} />
           )}
         </div>
       );

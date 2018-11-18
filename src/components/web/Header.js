@@ -9,6 +9,7 @@ import NavItem from "react-bootstrap/lib/NavItem";
 import propTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
+import { Redirect } from "react-router";
 
 export default class Header extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export default class Header extends Component {
     this.state = {
       navExpanded: false,
       userNavExpanded: false,
-      offsetHeight: 0
+      offsetHeight: 0,
+      searchText: ""
     };
   }
 
@@ -24,9 +26,9 @@ export default class Header extends Component {
     document.addEventListener("click", this.handleOutsideClick);
     document.addEventListener("scroll", this.onScroll);
   };
-  componenWillUnmount = () => {
+  componentWillUnmount() {
     document.removeEventListener("click", this.handleOutsideClick);
-  };
+  }
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
   };
@@ -61,6 +63,18 @@ export default class Header extends Component {
   handleNavClick = () => {
     this.toggleUserNav();
   };
+  onSearchClick = e => {
+    e.preventDefault();
+    const path = "?" + this.state.searchText;
+    this.props.history.push(path);
+  };
+
+  onInputChange = e => {
+    console.log("target", e.target.value);
+    this.setState({
+      searchText: e.target.value
+    });
+  };
 
   handleModalMessage = () => {
     this.props.handleModalShow(modalType.messages);
@@ -94,9 +108,11 @@ export default class Header extends Component {
                       type="text"
                       className="form-control"
                       placeholder="Search"
+                      onChange={this.onInputChange}
+                      value={this.state.searchText}
                     />
                     <span className="input-group-addon">
-                      <button type="submit">
+                      <button onClick={this.onSearchClick}>
                         <span className="search_icon">
                           <img src={images.search} alt="Search" />
                         </span>
@@ -157,5 +173,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  handleModalShow: propTypes.func
+  handleModalShow: propTypes.func,
+  history: propTypes.any
 };

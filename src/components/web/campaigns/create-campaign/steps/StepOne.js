@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
+import { Translations } from "../../../../../lib/translations";
 
 class StepOne extends Component {
   constructor(props) {
@@ -36,12 +37,16 @@ class StepOne extends Component {
             />
           </div>
           <div className="user-title">
-            <div className="normal_title">Title of campaigns</div>
+            <div className="normal_title">
+              {Translations.create_campaigns.title_of_campaigns}
+            </div>
             <div className="secondary_title">User name</div>
           </div>
           <form>
             <div className="form-group">
-              <label htmlFor="title">Add title</label>
+              <label htmlFor="title">
+                {Translations.create_campaigns.add_title}
+              </label>
               <input
                 type="text"
                 value={this.props.form.title ? this.props.form.title : ""}
@@ -50,7 +55,10 @@ class StepOne extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Location">Add Location</label>
+              <label htmlFor="Location">
+                {Translations.create_campaigns.add_loaction}
+                Add Location
+              </label>
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -58,25 +66,31 @@ class StepOne extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Category">Add Category</label>
+              <label htmlFor="Category">
+                {Translations.create_campaigns.add_category}
+              </label>
               <select
                 name="category"
                 value={this.props.form.category}
                 onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
-                <option>Select category</option>
+                <option>{Translations.create_campaigns.select_category}</option>
                 <option>Category 1</option>
                 <option>Category 2</option>
                 <option>Category 3</option>
                 <option>Category 4</option>
               </select>
             </div>
-            <div className="subtitle">Application criteria</div>
+            <div className="subtitle">
+              {Translations.create_campaigns.application_criteria}
+            </div>
             {isFor && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="Procedure">Procedure</label>
+                  <label htmlFor="Procedure">
+                    {Translations.create_campaigns.procedure}
+                  </label>
                   <ul className="options">
                     <li onChange={handleChangeField} className="wid49">
                       <input
@@ -87,7 +101,9 @@ class StepOne extends Component {
                         value="public"
                         defaultChecked={form.procedure === "public"}
                       />
-                      <label htmlFor="public">Public</label>
+                      <label htmlFor="public">
+                        {Translations.create_campaigns.public}
+                      </label>
                     </li>
                     <li onChange={handleChangeField} className="wid49">
                       <input
@@ -97,12 +113,16 @@ class StepOne extends Component {
                         value="anonymous"
                         defaultChecked={form.procedure === "anonymous"}
                       />
-                      <label htmlFor="anonymous">Anonymous</label>
+                      <label htmlFor="anonymous">
+                        {Translations.create_campaigns.anonymous}
+                      </label>
                     </li>
                   </ul>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="Type">Type</label>
+                  <label htmlFor="Type">
+                    {Translations.create_campaigns.type}
+                  </label>
                   <ul className="options">
                     <li onChange={handleChangeField} className="wid49">
                       <input
@@ -113,7 +133,9 @@ class StepOne extends Component {
                         value="video"
                         defaultChecked={form.type === "video"}
                       />
-                      <label htmlFor="video">Video</label>
+                      <label htmlFor="video">
+                        {Translations.create_campaigns.video}
+                      </label>
                     </li>
                     <li onChange={handleChangeField} className="wid49">
                       <input
@@ -123,7 +145,9 @@ class StepOne extends Component {
                         value="image"
                         defaultChecked={form.type === "image"}
                       />
-                      <label htmlFor="image">Image</label>
+                      <label htmlFor="image">
+                        {Translations.create_campaigns.image}
+                      </label>
                     </li>
                   </ul>
                 </div>
@@ -131,7 +155,9 @@ class StepOne extends Component {
             )}
 
             <div className="form-group">
-              <label htmlFor="Target_group">Target group</label>
+              <label htmlFor="Target_group">
+                {Translations.create_campaigns.target_group}
+              </label>
               <ul className="options target-options">
                 <li onChange={handleChangeField} className="wid49">
                   <input
@@ -142,7 +168,9 @@ class StepOne extends Component {
                     value="company"
                     defaultChecked={form.target_group === "company"}
                   />
-                  <label htmlFor="company">Company</label>
+                  <label htmlFor="company">
+                    {Translations.create_campaigns.company}
+                  </label>
                 </li>
                 <li onChange={handleChangeField} className="wid49">
                   <input
@@ -152,7 +180,9 @@ class StepOne extends Component {
                     name="target_group"
                     defaultChecked={form.target_group === "female-male"}
                   />
-                  <label htmlFor="femalemale">Female & Male</label>
+                  <label htmlFor="femalemale">
+                    {Translations.create_campaigns.male_female}
+                  </label>
                 </li>
                 <li onChange={handleChangeField} className="wid49">
                   <input
@@ -162,7 +192,9 @@ class StepOne extends Component {
                     value="female"
                     defaultChecked={form.target_group === "female"}
                   />
-                  <label htmlFor="female">Female</label>
+                  <label htmlFor="female">
+                    {Translations.create_campaigns.female}
+                  </label>
                 </li>
                 <li onChange={handleChangeField} className="wid49">
                   <input
@@ -172,20 +204,26 @@ class StepOne extends Component {
                     value="male"
                     defaultChecked={form.target_group === "male"}
                   />
-                  <label htmlFor="male">Male</label>
+                  <label htmlFor="male">
+                    {Translations.create_campaigns.male}
+                  </label>
                 </li>
               </ul>
             </div>
-            <div className="subtitle">Details of campaigns</div>
+            <div className="subtitle">
+              {Translations.create_campaigns.details_of_campaigns}
+            </div>
             <div className="form-group">
-              <label htmlFor="Offer">Offer</label>
+              <label htmlFor="Offer">
+                {Translations.create_campaigns.offer}
+              </label>
               <select
                 name="offer"
                 value={this.props.form.offer}
                 onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
-                <option>Select offer</option>
+                <option>{Translations.create_campaigns.select_offer}</option>
                 <option>Offer 1</option>
                 <option>Offer 2</option>
                 <option>Offer 3</option>
@@ -193,7 +231,9 @@ class StepOne extends Component {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="offer_tag">Offer tag</label>
+              <label htmlFor="offer_tag">
+                {Translations.create_campaigns.offer_tag}
+              </label>
               <input
                 type="text"
                 name="offer_tag"
@@ -202,14 +242,16 @@ class StepOne extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Inquiry">Inquiry</label>
+              <label htmlFor="Inquiry">
+                {Translations.create_campaigns.inquiry}
+              </label>
               <select
                 name="inquiry"
                 value={this.props.form.inquiry}
                 onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
-                <option>Select Inquiry</option>
+                <option>{Translations.create_campaigns.select_inquiry}</option>
                 <option>Inquiry 1</option>
                 <option>Inquiry 2</option>
                 <option>Inquiry 3</option>
@@ -217,7 +259,9 @@ class StepOne extends Component {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="Inquiry_tag">Inquiry tag</label>
+              <label htmlFor="Inquiry_tag">
+                {Translations.create_campaigns.inquiry_tag}
+              </label>
               <input
                 type="text"
                 name="inquiry_tag"
@@ -236,10 +280,6 @@ class StepOne extends Component {
             handleActualImg={handleActualImg}
             handleScale={handleScale}
           />
-          <div className="add-wrapper create-camp-ad-wrapr col-xs-12 no-padding">
-            <input type="file" className="img-upload" />
-            <img src={images.plus_button} alt={"plus_button"} />
-          </div>
         </div>
       </div>
     );

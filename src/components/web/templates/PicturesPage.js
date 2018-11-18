@@ -1,5 +1,5 @@
 import React from "react";
-
+import PictureCard from "../../web/misc/PictureCard";
 import { pics_list } from "../../../mock-data";
 
 class PicturesRoot extends React.Component {
@@ -21,21 +21,7 @@ class PicturesRoot extends React.Component {
           return (
             <div key={index}>
               {clearfixDiv}
-              <div
-                className={
-                  index % 2
-                    ? "col-sm-6 pic-right-block"
-                    : "col-sm-6 pic-left-block"
-                }
-              >
-                <div className="pic-block">
-                  <img src={pic.image} alt={pic.image} />
-                  <div className="name-wrapper">
-                    <div className="username">User name</div>
-                    <div className="name">{pic.name}</div>
-                  </div>
-                </div>
-              </div>
+              <PictureCard item={pic} index={index} />
             </div>
           );
         })}

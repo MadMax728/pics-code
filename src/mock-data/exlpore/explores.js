@@ -312,21 +312,9 @@ export const exploreList = [
     image: `${images.campaign_1}`,
     mediaType: "image",
     type: "image",
-    desc:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
     isFavorite: false,
-    applications: "2000/2000",
-    isSaved: true,
-    views: "100",
-    clicks: "200",
-    budget_spent_per: "80%",
-    view_per: "55%",
-    runtime_passed_per: "30%",
-    total_budget_spent: "100 E",
-    remaining_budget: "20 E",
-    runtime: "01.01.2000 - 01.01.2000",
     id: 5
   },
   {
@@ -378,21 +366,9 @@ export const exploreList = [
     video: `${videos.demo}`,
     mediaType: "video",
     type: "video",
-    desc:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
     msg_count: 12,
     like_count: 12,
     isFavorite: false,
-    applications: "2000/2000",
-    isSaved: true,
-    views: "100",
-    clicks: "200",
-    budget_spent_per: "80%",
-    view_per: "55%",
-    runtime_passed_per: "30%",
-    total_budget_spent: "100 E",
-    remaining_budget: "20 E",
-    runtime: "01.01.2000 - 01.01.2000",
     id: 6
   }
 ];

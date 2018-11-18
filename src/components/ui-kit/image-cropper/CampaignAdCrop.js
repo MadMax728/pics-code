@@ -137,6 +137,18 @@ const CampaignAdCrop = ({
           className="max-profile-pic range-slider-pic"
         />
       </div>
+      <div className="add-wrapper create-camp-ad-wrapr col-xs-12 no-padding">
+        <input
+          type="file"
+          className="img-upload"
+          name="newImage"
+          id="file-2"
+          data-multiple-caption="{count} files selected"
+          multiple=""
+          onChange={handleNewImage}
+        />
+        <img src={images.plus_button} alt={"plus_button"} />
+      </div>
     </div>
   );
 };

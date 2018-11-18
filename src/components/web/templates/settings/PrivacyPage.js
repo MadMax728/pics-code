@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import { Text } from "../../../ui-kit/CommonUIComponents";
+import { Translations } from "../../../../lib/translations";
 
 class PrivacyPage extends Component {
   constructor(props) {
@@ -104,7 +105,9 @@ class PrivacyPage extends Component {
       <div className="padding-rl-10 middle-section width-80">
         <div className="privacy-form">
           <form action="">
-            <div className="form-title">Privacy</div>
+            <div className="form-title">
+              {Translations.left_sidebar_settings.privacy}
+            </div>
 
             <div className="form-subtitle">Limitations</div>
             <div className="limitation-wrapper">

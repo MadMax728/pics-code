@@ -1,4 +1,5 @@
 import React from "react";
+import UserCard from "../../web/misc/UserCard";
 
 import { users_list } from "../../../mock-data";
 
@@ -21,22 +22,7 @@ class UsersRoot extends React.Component {
             return (
               <div key={index}>
                 {clearfixDiv}
-                <div
-                  className={
-                    index % 2 === 0
-                      ? "col-sm-6 pic-left-block"
-                      : "col-sm-6 pic-right-block"
-                  }
-                >
-                  <div className="pic-block">
-                    <img src={user.image} alt={"pic-1"} />
-                    <div className="name-wrapper">
-                      <div className="username">{user.username}</div>
-                      <div className="name">{user.name}</div>
-                      <button className="filled_button">Subscribe</button>
-                    </div>
-                  </div>
-                </div>
+                <UserCard item={user} index={index} />
               </div>
             );
           })}
