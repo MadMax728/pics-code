@@ -30,6 +30,9 @@
   },
 
   "create_ads": {
+    "runtime": "Runtime",
+    "runtime_passed": "Runtime passed",
+    "remaining_runtime": "Remaining runtime",
     "title_of_ads": "Title of Ads",
     "add_title": "Add title",
     "add_location": "Add Location",
@@ -56,10 +59,25 @@
     "cost_control": "100 % cost control",
     "cost_per_Click": "Cost per Click: 1,00 €",
     "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
-    "total_budget_can_not_be_exceeded": "Total budget can not be exceeded"
+    "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
+    "clicks": "Clicks",
+    "views": "Views",
+    "type": "Type",
+    "applications": "Applications",
+    "status": "Status",
+    "statistics": "Statistics",
+    "total_budget": "Total budget",
+    "budget_spent": "Budget spent",
+    "remaining_Budget": "Remaining Budget",
+    "daily_budget": "Daily budget",
+    "daily_budget_spent": "Daily budget spent",
+    "remaining_daily_budget": "Remaining daily budget",
+    "Performance": "Performance"
   },
 
   "create_campaigns": {
+    "clicks": "Clicks",
+    "views": "Views",
     "title_of_campaigns": "Title of campaigns",
     "title": "Title",
     "add_title": "Add title",
@@ -96,7 +114,10 @@
     "cost_control": "100 % cost control",
     "cost_per_Click": "Cost per Click: 1,00 €",
     "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
-    "total_budget_can_not_be_exceeded": "Total budget can not be exceeded"
+    "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
+    "applications": "Applications",
+    "status": "Status",
+    "statistics": "Statistics"
   },
 
   "messages_modal": {

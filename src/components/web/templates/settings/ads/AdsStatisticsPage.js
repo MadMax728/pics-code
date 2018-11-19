@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SettingAdsStatisticsRight from "./SettingAdsStatisticsRight";
 import { adStatistics } from "../../../../../mock-data";
+import { Translations } from "../../../../../lib/translations";
 
 class AdsStatisticsPage extends Component {
   constructor(props, context) {
@@ -19,15 +20,17 @@ class AdsStatisticsPage extends Component {
           <div className="campaign-middle-section">
             <div className="normal_title padding-15">{adStatistics.title}</div>
             <div className="campaign-block">
-              <div className="normal_title padding-15">Total budget</div>
+              <div className="normal_title padding-15">
+                {Translations.create_ads.total_budget}
+              </div>
               <div className="indicators">
                 <div>
                   <span className="blue-block" />
-                  Budget spent
+                  {Translations.create_ads.budget_spent}
                 </div>
                 <div>
                   <span className="grey-block" />
-                  Remaining Budget
+                  {Translations.create_ads.remaining_Budget}
                 </div>
               </div>
               <div className="progressbar-wrapper">
@@ -42,15 +45,17 @@ class AdsStatisticsPage extends Component {
               </div>
             </div>
             <div className="campaign-block">
-              <div className="normal_title padding-15">Daily budget</div>
+              <div className="normal_title padding-15">
+                {Translations.create_ads.daily_budget}
+              </div>
               <div className="indicators">
                 <div>
                   <span className="blue-block" />
-                  Daily budget spent
+                  {Translations.create_ads.daily_budget_spent}
                 </div>
                 <div>
                   <span className="grey-block" />
-                  Remaining daily budget
+                  {Translations.create_ads.remaining_daily_budget}
                 </div>
               </div>
               <div className="progressbar-wrapper">
@@ -65,7 +70,9 @@ class AdsStatisticsPage extends Component {
               </div>
             </div>
             <div className="campaign-block">
-              <div className="normal_title padding-15">Performance</div>
+              <div className="normal_title padding-15">
+                {Translations.create_ads.Performance}
+              </div>
               <div className="indicators">
                 <div>
                   <span className="blue-block" />
@@ -88,15 +95,17 @@ class AdsStatisticsPage extends Component {
               </div>
             </div>
             <div className="campaign-block">
-              <div className="normal_title padding-15">Runtime</div>
+              <div className="normal_title padding-15">
+                {Translations.create_ads.runtime}
+              </div>
               <div className="indicators">
                 <div>
                   <span className="blue-block" />
-                  Runtime passed
+                  {Translations.create_ads.runtime_passed}
                 </div>
                 <div>
                   <span className="grey-block" />
-                  Remaining runtime
+                  {Translations.create_ads.remaining_runtime}
                 </div>
               </div>
               <div className="progressbar-wrapper">
