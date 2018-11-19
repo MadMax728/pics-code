@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Translations } from "../../../../lib/translations";
 
 import * as images from "../../../../lib/constants/images";
 import { dataDownload_list } from "../../../../mock-data";
@@ -22,12 +23,12 @@ class BillsAndReceiptsPage extends Component {
               <thead>
                 <tr>
                   <th>No.</th>
-                  <th>Ad / Campaign title</th>
-                  <th>Runtime</th>
-                  <th>Type</th>
-                  <th>Expenses</th>
-                  <th>Status</th>
-                  <th>PDF</th>
+                  <th>{Translations.bill_and_receipts.Ad_Campaign_title}</th>
+                  <th>{Translations.bill_and_receipts.Runtime}</th>
+                  <th>{Translations.bill_and_receipts.Type}</th>
+                  <th>{Translations.bill_and_receipts.Expenses}</th>
+                  <th>{Translations.bill_and_receipts.Status}</th>
+                  <th>{Translations.bill_and_receipts.PDF}</th>
                 </tr>
               </thead>
               <tbody>

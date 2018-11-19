@@ -140,10 +140,14 @@ class PrivacyPage extends Component {
               </div>
             </div>
 
-            <div className="form-subtitle">Change email</div>
+            <div className="form-subtitle">
+              {Translations.privacy.Change_email}
+            </div>
             <div className="change-email-wrapper">
               <div className="form-group">
-                <label htmlFor="email">Current Email</label>
+                <label htmlFor="email">
+                  {Translations.privacy.Current_Email}
+                </label>
                 <Text
                   type="email"
                   className="form-control"
@@ -159,9 +163,12 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="email">New Email</label>
+                <label htmlFor="email">{Translations.privacy.New_Email}</label>
                 <span className="error-msg pull-right">
-                  Please comfirme this change in your email account.{" "}
+                  {
+                    Translations.privacy
+                      .Please_confirm_this_change_in_your_email_account
+                  }
                 </span>
                 <Text
                   type="email"
@@ -187,7 +194,9 @@ class PrivacyPage extends Component {
               </div>
             </div>
 
-            <div className="form-subtitle">Change Password</div>
+            <div className="form-subtitle">
+              {Translations.privacy.Change_Password}
+            </div>
             <div className="change-password-wrapper">
               <div className="form-group">
                 <label htmlFor="c-password">Current Password</label>
@@ -206,7 +215,9 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="n-password">New Password</label>
+                <label htmlFor="n-password">
+                  {Translations.privacy.New_Password}
+                </label>
                 <Text
                   type="password"
                   className="form-control"
@@ -222,7 +233,9 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="r-password">Repeat Password</label>
+                <label htmlFor="r-password">
+                  {Translations.privacy.Repeat_Password}
+                </label>
                 <Text
                   type="password"
                   className="form-control"
@@ -247,7 +260,9 @@ class PrivacyPage extends Component {
               </div>
             </div>
 
-            <div className="form-subtitle">Change invoicing address</div>
+            <div className="form-subtitle">
+              {Translations.privacy.Change_invoicing_address}
+            </div>
             <div className="change-invoiceadd-wrapper">
               <div className="form-group">
                 <label htmlFor="recipient">Invoice recipient</label>
@@ -265,7 +280,9 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="street">Street, number</label>
+                <label htmlFor="street">
+                  {Translations.privacy.Street_number}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -280,7 +297,9 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="postal">Postal code</label>
+                <label htmlFor="postal">
+                  {Translations.privacy.Postal_code}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -297,7 +316,7 @@ class PrivacyPage extends Component {
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">
                   <div className="form-group">
-                    <label htmlFor="city">City</label>
+                    <label htmlFor="city">{Translations.privacy.city}</label>
                     <Text
                       type="text"
                       className="form-control"
@@ -314,7 +333,9 @@ class PrivacyPage extends Component {
                 </div>
                 <div className="col-sm-6 padding-l-5">
                   <div className="form-group">
-                    <label htmlFor="country">Country</label>
+                    <label htmlFor="country">
+                      {Translations.privacy.Country}
+                    </label>
                     <Text
                       type="text"
                       className="form-control"
@@ -331,7 +352,9 @@ class PrivacyPage extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="vat">VAT identification number</label>
+                <label htmlFor="vat">
+                  {Translations.privacy.VAT_identification_number}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
@@ -356,10 +379,12 @@ class PrivacyPage extends Component {
               </div>
             </div>
 
-            <div className="form-subtitle">Actions</div>
+            <div className="form-subtitle">{Translations.privacy.Actions}</div>
             <div className="privacy-actions-wrapper">
               <div className="row">
-                <div className="col-sm-6">Delete search history</div>
+                <div className="col-sm-6">
+                  {Translations.privacy.Delete_search_history}
+                </div>
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeleteSearchHisory}
@@ -367,12 +392,14 @@ class PrivacyPage extends Component {
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}
                   >
-                    Delete
+                    {Translations.privacy.Delete}
                   </div>
                 </div>
               </div>
               <div className="row">
-                <div className="col-sm-6">Deactivate my account</div>
+                <div className="col-sm-6">
+                  {Translations.privacy.Deactivate_my_account}
+                </div>
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeactiveMyAccount}
@@ -380,7 +407,7 @@ class PrivacyPage extends Component {
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}
                   >
-                    Deactivate
+                    {Translations.privacy.Deactivate}
                   </div>
                 </div>
               </div>
