@@ -21,6 +21,14 @@
 
   "favourite_campaigns": "Favourite Campaigns",
 
+  "upload_modal": {
+    "title_of_upload": "Title of Upload",
+    "add_location": "Add Location",
+    "add_category": "Add Category",
+    "add_description": "Add Description",
+    "upload_title_image": "Upload title image"
+  },
+
   "create_ads": {
     "title_of_ads": "Title of Ads",
     "add_title": "Add title",
