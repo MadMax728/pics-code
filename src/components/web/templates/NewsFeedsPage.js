@@ -8,7 +8,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsFeedsRoot extends Component {
   componentDidMount = () => {
-    this.props.getCampaigns("getNewsFeed");
+    this.props.getCampaigns("getNewFeedCampaigns");
   };
 
   renderNewsFeedList = () => {
@@ -62,7 +62,7 @@ NewsFeedsRoot.propTypes = {
   handleModalShow: PropTypes.func,
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  campaigns: PropTypes.any,
+  newsFeedList: PropTypes.any,
   error: PropTypes.any
 };
 

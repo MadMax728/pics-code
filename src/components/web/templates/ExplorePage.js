@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getExplores } from "../../../actions";
 import PropTypes from "prop-types";
-import { InlineLoading } from "../../ui-kit";
+import { CampaignLoading } from "../../ui-kit";
 import { ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
-import { CampaignLoading } from "../../ui-kit";
 
 class ExploreRoot extends Component {
   componentDidMount = () => {
