@@ -109,10 +109,14 @@ class PrivacyPage extends Component {
               {Translations.left_sidebar_settings.privacy}
             </div>
 
-            <div className="form-subtitle">Limitations</div>
+            <div className="form-subtitle">
+              {Translations.privacy.limitations}
+            </div>
             <div className="limitation-wrapper">
               <div className="row">
-                <div className="col-sm-6">Set my profile to private</div>
+                <div className="col-sm-6">
+                  {Translations.privacy.set_my_profile_to_private}
+                </div>
                 <div className="col-sm-6 text-right">
                   <label className="switch" htmlFor={"Privacy"}>
                     <input type="checkbox" onChange={this.hanldeIsPrivate} />
@@ -121,7 +125,9 @@ class PrivacyPage extends Component {
                 </div>
               </div>
               <div className="row">
-                <div className="col-sm-6">Personalized advertising</div>
+                <div className="col-sm-6">
+                  {Translations.privacy.Personalized_advertising}
+                </div>
                 <div className="col-sm-6 text-right">
                   <label className="switch" htmlFor={"Personalized"}>
                     <input

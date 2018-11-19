@@ -1,7 +1,7 @@
-import * as images from "../../../lib/constants/images";
-import * as videos from "../../../lib/constants/videos";
+import * as images from "../../lib/constants/images";
+import * as videos from "../../lib/constants/videos";
 
-export const campaigns_list = [
+export const dashboardList = [
   {
     user: {
       name: "Santosh Shinde",
@@ -328,7 +328,7 @@ export const campaigns_list = [
       type: "company",
       isParticipant: true
     },
-    title: "Title of Video",
+    title: "Title of Images",
     comments: [
       {
         comment_id: 1,
