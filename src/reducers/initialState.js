@@ -48,6 +48,11 @@ const initialState = {
     explores: null,
     isLoading: false,
     error: false
+  },
+  dashboardData: {
+    explores: null,
+    isLoading: false,
+    error: false
   }
 };
 

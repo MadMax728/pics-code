@@ -1,24 +1,22 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const exploreReducer = (state = initialState.exploreData, action) => {
+const dashboardReducer = (state = initialState.dashboardData, action) => {
   switch (action.type) {
-    // Get Explores
-    case types.GET_EXPLORES_STARTED:
-      console.log(types.GET_EXPLORES_STARTED);
-
+    // Get DASHBOARD
+    case types.GET_DASHBOARD_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_EXPLORES_SUCCEEDED:
+    case types.GET_DASHBOARD_SUCCEEDED:
       return {
         ...state,
-        explores: action.payload,
+        dashboard: action.payload,
         isLoading: false
       };
-    case types.GET_EXPLORES_FAILED:
+    case types.GET_DASHBOARD_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -29,4 +27,4 @@ const exploreReducer = (state = initialState.exploreData, action) => {
   }
 };
 
-export default exploreReducer;
+export default dashboardReducer;

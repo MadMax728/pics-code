@@ -38,13 +38,14 @@ export const getCampaigns = (prop, provider) => {
         dispatch(
           // getCampaignsFailed(error.response)
           // remove below code after API working, this is just for set mock data.
+          // getCampaignsSucceeded(campaigns_list)
           prop === "getCampaigns"
             ? getCampaignsSucceeded(campaigns_list)
             : prop === "getCampaignType"
               ? getCampaignsSucceeded(
                   campaigns_list.filter(c => c.user.type === provider)
                 )
-              : prop === "getParticipantCampaigns"
+              : prop === "getParticipant"
                 ? getCampaignsSucceeded(
                     campaigns_list.filter(c => c.user.isParticipant === true)
                   )
