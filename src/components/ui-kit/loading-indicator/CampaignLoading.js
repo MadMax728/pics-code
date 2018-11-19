@@ -30,7 +30,7 @@ class CampaignLoading extends React.Component {
         <div className="feed_content">
           <div className="feed_image">
             <img
-              src={images.profile_pic_gray}
+              src={images.placeholder_pic}
               alt="feed_image"
               className="img-responsive profile_pic_gray big gray_box"
             />

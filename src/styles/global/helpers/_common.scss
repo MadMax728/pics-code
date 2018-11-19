@@ -916,6 +916,11 @@ section.loader-wrapr {
     .rdw-inline-wrapper {
       order: 2;
     }
+    .rdw-block-wrapper {
+      .rdw-dropdown-wrapper {
+        width: 100px;
+      }
+    }
     .rdw-dropdown-wrapper {
       order: 1;
       width: 65px;
