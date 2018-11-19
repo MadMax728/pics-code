@@ -9,9 +9,9 @@
       .range-wrapr {
         background-color: white;
         padding: 0 35px;
-        padding-bottom: 10px;
+        padding-bottom: 10px !important;
         @media (max-width: 915px) {
-          padding: 0 2px;
+          padding: 0 15px;
         }
         img.min-profile-pic.range-slider-pic {
           top: 22px;
@@ -150,9 +150,10 @@
     .add-wrapper {
       img {
         position: relative;
-        top: -57px;
+        top: -35px;
         @media (max-width: 915px) {
-          top: -24px;
+          // top: -24px;
+          left: -15px;
           margin-right: 2px !important;
         }
         @media (max-width: 785px) {
@@ -161,12 +162,16 @@
         }
       }
       input[type="file"] {
-        position: relative;
-        top: -35px;
-        right: -83%;
-        height: 23px;
+        position: absolute;
+        top: -41px;
+        height: 30px;
         opacity: 0;
         z-index: 1;
+        left: calc(100% - 45px);
+        width: 30px;
+        @media (max-width: 915px) {
+          top: -35px;
+        }
       }
     }
   }
@@ -302,7 +307,7 @@
     }
     .add-wrapper {
       width: 100%;
-      border-top: 5px solid;
+      border-top: 0px solid;
       padding-top: 15px;
       text-align: right;
       padding-bottom: 15px;
@@ -399,7 +404,8 @@
         }
         &.blue {
           .progress-bar {
-            border-color: #049dff; // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
+            border-color: #049dff;
+            // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
           }
           .progress-left {
             .progress-bar {
