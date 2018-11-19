@@ -39,7 +39,7 @@ export const getCampaigns = (prop, provider) => {
           // getCampaignsFailed(error.response)
           // remove below code after API working, this is just for set mock data.
           // getCampaignsSucceeded(campaigns_list)
-          prop === "getCampaigns"
+          prop === "getNewFeedCampaigns"
             ? getCampaignsSucceeded(campaigns_list)
             : prop === "getCampaignType"
               ? getCampaignsSucceeded(
