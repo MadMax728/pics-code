@@ -7,7 +7,7 @@ import { getDashboard } from "../../../actions";
 
 class UsersRoot extends React.Component {
   componentDidMount = () => {
-    this.props.getDashboard("getUser");
+    this.props.getDashboard("getDashboardUser");
   };
 
   renderuserList = () => {

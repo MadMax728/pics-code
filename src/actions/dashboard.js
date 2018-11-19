@@ -3,12 +3,7 @@ import * as dashboardService from "../services/dashboardService";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 // remove when no need
-import {
-  dashboardList,
-  exploreList,
-  users_list,
-  pics_list
-} from "../mock-data";
+import { dashboardList, users_list, pics_list } from "../mock-data";
 
 const getDashboardStarted = () => ({
   type: types.GET_DASHBOARD_STARTED
@@ -45,12 +40,12 @@ export const getDashboard = (prop, provider) => {
           prop === "getNews"
             ? getDashboardSucceeded(dashboardList)
             : prop === "getExplore"
-              ? getDashboardSucceeded(exploreList)
+              ? getDashboardSucceeded(dashboardList)
               : prop === "getParticipant"
                 ? getDashboardSucceeded(
                     dashboardList.filter(d => d.user.isParticipant === true)
                   )
-                : prop === "getUser"
+                : prop === "getDashboardUser"
                   ? getDashboardSucceeded(users_list)
                   : prop === "getPic" && getDashboardSucceeded(pics_list)
         );

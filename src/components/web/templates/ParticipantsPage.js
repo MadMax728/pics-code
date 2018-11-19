@@ -1,61 +1,65 @@
 import React, { Component } from "react";
-import { NewsFeeds } from "../feeds";
-import propTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCampaigns } from "../../../actions";
-import { InlineLoading } from "../../ui-kit";
+import { getDashboard } from "../../../actions";
+import { CampaignLoading } from "../../ui-kit";
+import { ImageCard, VideoCard } from "../misc";
+import * as enumerations from "../../../lib/constants/enumerations";
+import PropTypes from "prop-types";
 
-class ParticipantsRoot extends Component {
+class ParticipantsPage extends Component {
   componentDidMount = () => {
-    this.props.getCampaigns("getParticipantsCampaigns");
+    this.props.getDashboard("getParticipant");
+  };
+
+  renderParticipantsList = () => {
+    const { participantsList } = this.props;
+    return participantsList.map(newsFeed => {
+      return (
+        <div key={newsFeed.id}>
+          {newsFeed.type === enumerations.contentTypes.image && (
+            <ImageCard item={newsFeed} />
+          )}
+          {newsFeed.type === enumerations.contentTypes.video && (
+            <VideoCard item={newsFeed} />
+          )}
+        </div>
+      );
+    });
   };
 
   render() {
-    const {
-      handleModalInfoShow,
-      handleModalShow,
-      participants_campaigns_list,
-      isLoading
-    } = this.props;
+    const { participantsList, isLoading } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {participants_campaigns_list &&
-          !isLoading && (
-            <NewsFeeds
-              campaigns={participants_campaigns_list}
-              handleModalShow={handleModalShow}
-              handleModalInfoShow={handleModalInfoShow}
-              isDescription
-              isInformation={false}
-              isStatus={false}
-            />
-          )}
-        {isLoading && <InlineLoading />}
+        {participantsList && !isLoading && this.renderParticipantsList()}
+        {isLoading && <CampaignLoading />}
       </div>
     );
   }
 }
 
-ParticipantsRoot.propTypes = {
-  handleModalShow: propTypes.func,
-  handleModalInfoShow: propTypes.func,
-  getCampaigns: propTypes.func.isRequired,
-  participants_campaigns_list: propTypes.any,
-  isLoading: propTypes.bool.isRequired,
-  error: propTypes.any
+ParticipantsPage.propTypes = {
+  handleModalShow: PropTypes.func,
+  handleModalInfoShow: PropTypes.func,
+  // remove when actual API Call
+  getDashboard: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  participantsList: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  participants_campaigns_list: state.campaignData.campaigns,
-  isLoading: state.campaignData.isLoading,
-  error: state.campaignData.error
+  participantsList: state.dashboardData.dashboard,
+  isLoading: state.dashboardData.isLoading,
+  error: state.dashboardData.error
 });
 
 const mapDispatchToProps = {
-  getCampaigns
+  // remove when actual API Call
+  getDashboard
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ParticipantsRoot);
+)(ParticipantsPage);
