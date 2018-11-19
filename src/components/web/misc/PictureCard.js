@@ -20,7 +20,7 @@ class PictureCard extends Component {
 
 PictureCard.propTypes = {
   item: propTypes.object.isRequired,
-  index: propTypes.object.isRequired
+  index: propTypes.number.isRequired
 };
 
 export default PictureCard;

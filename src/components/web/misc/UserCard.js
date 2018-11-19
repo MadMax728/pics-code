@@ -20,7 +20,7 @@ class UserCard extends Component {
 
 UserCard.propTypes = {
   item: propTypes.object.isRequired,
-  index: propTypes.object.isRequired
+  index: propTypes.number.isRequired
 };
 
 export default UserCard;
