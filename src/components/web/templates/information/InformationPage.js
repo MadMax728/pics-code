@@ -82,7 +82,9 @@ class InformationPage extends Component {
           !isLoading && (
             <div className="information-wrapper ht100">
               <div className="info-inner-wrapper">
-                <div className="info-main-title">{campaign_detail.title}</div>
+                <div className="info-main-title paddindLeft0">
+                  {campaign_detail.title}
+                </div>
                 <div className="text">{campaign_detail.desc}</div>
                 <img src={campaign_detail.image} alt={"information"} />
                 <div className="text">{campaign_detail.desc}</div>
