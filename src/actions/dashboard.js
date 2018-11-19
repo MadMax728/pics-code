@@ -25,7 +25,7 @@ const getDashboardFailed = error => ({
   error: true
 });
 
-export const getCampaigns = (prop, provider) => {
+export const getDashboard = (prop, provider) => {
   return dispatch => {
     dispatch(getDashboardStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -42,7 +42,7 @@ export const getCampaigns = (prop, provider) => {
         dispatch(
           // getDashboardFailed(error.response)
           // remove below code after API working, this is just for set mock data.
-          prop === "getNewsFeed"
+          prop === "getNews"
             ? getDashboardSucceeded(dashboardList)
             : prop === "getExplore"
               ? getDashboardSucceeded(exploreList)
@@ -52,7 +52,7 @@ export const getCampaigns = (prop, provider) => {
                   )
                 : prop === "getUser"
                   ? getDashboardSucceeded(users_list)
-                  : prop === "getPics" && getDashboardSucceeded(pics_list)
+                  : prop === "getPic" && getDashboardSucceeded(pics_list)
         );
         logger.error({
           description: error.toString(),

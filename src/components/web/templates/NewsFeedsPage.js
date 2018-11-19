@@ -1,22 +1,21 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCampaigns } from "../../../actions";
+import { getDashboard } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsFeedsRoot extends Component {
   componentDidMount = () => {
-    this.props.getCampaigns("getNewFeedCampaigns");
+    this.props.getDashboard("getNews");
   };
 
   renderNewsFeedList = () => {
-    const { newsFeedList, isLoading } = this.props;
+    const { newsFeedList } = this.props;
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {isLoading && <CampaignLoading />}
           {newsFeed.type === enumerations.contentTypes.campaign && (
             <CampaignCard
               item={newsFeed}
@@ -46,8 +45,6 @@ class NewsFeedsRoot extends Component {
 
   render() {
     const { newsFeedList, isLoading } = this.props;
-    console.log(isLoading);
-
     return (
       <div className={"middle-section padding-rl-10"}>
         {newsFeedList && !isLoading && this.renderNewsFeedList()}
@@ -60,20 +57,20 @@ class NewsFeedsRoot extends Component {
 NewsFeedsRoot.propTypes = {
   handleModalInfoShow: PropTypes.func.isRequired,
   handleModalShow: PropTypes.func,
-  getCampaigns: PropTypes.func.isRequired,
+  getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   newsFeedList: PropTypes.any,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  newsFeedList: state.campaignData.campaigns,
-  isLoading: state.campaignData.isLoading,
-  error: state.campaignData.error
+  newsFeedList: state.dashboardData.dashboard,
+  isLoading: state.dashboardData.isLoading,
+  error: state.dashboardData.error
 });
 
 const mapDispatchToProps = {
-  getCampaigns
+  getDashboard
 };
 
 export default connect(

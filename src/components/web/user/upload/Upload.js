@@ -139,7 +139,7 @@ class Upload extends Component {
             </div>
           )}
 
-          <div className="add-wrapper heightAuto">
+          <div className="add-wrapper upload-wrapr heightAuto">
             <input
               type="file"
               className="img-upload"
