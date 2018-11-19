@@ -328,7 +328,7 @@ export const campaigns_list = [
       type: "company",
       isParticipant: true
     },
-    title: "Title of Images",
+    title: "Title of Video",
     comments: [
       {
         comment_id: 1,
