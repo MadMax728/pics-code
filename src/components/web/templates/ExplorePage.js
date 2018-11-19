@@ -30,8 +30,6 @@ class ExploreRoot extends Component {
 
   render() {
     const { exploreList, isLoading } = this.props;
-    console.log(isLoading);
-
     return (
       <div className={"middle-section padding-rl-10"}>
         {exploreList && !isLoading && this.renderExploreList()}
