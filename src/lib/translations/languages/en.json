@@ -544,5 +544,10 @@
     "D_O_B": "Date of birth",
     "general_information": "General Information",
     "Personal_interests": "Personal interests"
+  },
+  "privacy": {
+    "limitations": "Limitations",
+    "set_my_profile_to_private": "Set my profile to private",
+    "Personalized_advertising": "Personalized advertising"
   }
 }
