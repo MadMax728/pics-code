@@ -548,6 +548,46 @@
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
-    "Personalized_advertising": "Personalized advertising"
+    "Personalized_advertising": "Personalized advertising",
+    "Change_email": "Change email",
+    "Current_Email": "Current Email",
+    "New_Email": "New Email",
+    "Change_Password": "Change Password",
+    "Current_Password": "Current Password",
+    "New_Password": "New Password",
+    "Repeat_Password": "Repeat Password",
+    "Change_invoicing_address": "Change invoicing address",
+    "Invoice_recipient": "Invoice recipient",
+    "Street_number": "Street, number",
+    "Postal_code": "Postal code",
+    "city": "City",
+    "Country": "Country",
+    "VAT_identification_number": "VAT identification number",
+    "Actions": "Actions",
+    "Delete_search_history": "Delete search history",
+    "Delete": "Delete",
+    "Deactivate_my_account": "Deactivate my account",
+    "Deactivate": "Deactivate",
+    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account."
+  },
+  "Business_profile": {
+    "Business_profile": "Business profile",
+    "Business_profile_content": "By activating the business profile, you will get access to the following functions:",
+    "Create": "Create",
+    "ad": "ad",
+    "Add": "Add",
+    "email": "Email",
+    "phone_number": "phone number",
+    "Website": "Website",
+    "Activate": "Activate business profile",
+    "By_clicking_on_register_you_agree_to_our": "By clicking on register you agree to our"
+  },
+  "bill_and_receipts": {
+    "Ad_Campaign_title": "Ad / Campaign title",
+    "Runtime": "Runtime",
+    "Type": "Type",
+    "Expenses": "Expenses",
+    "Status": "Status",
+    "PDF": "PDF"
   }
 }
