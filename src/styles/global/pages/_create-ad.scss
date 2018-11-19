@@ -11,7 +11,7 @@
         padding: 0 35px;
         padding-bottom: 10px !important;
         @media (max-width: 915px) {
-          padding: 0 15px;
+          padding: 0 2px;
         }
         img.min-profile-pic.range-slider-pic {
           top: 22px;
@@ -156,9 +156,10 @@
           left: -15px;
           margin-right: 2px !important;
         }
-        @media (max-width: 785px) {
-          top: -23px;
+        @media (max-width: 815px) {
+          top: -32px;
           width: 25px !important;
+          left: -2px;
         }
       }
       input[type="file"] {
@@ -171,6 +172,12 @@
         width: 30px;
         @media (max-width: 915px) {
           top: -35px;
+        }
+        @media (max-width: 815px) {
+          top: -32px;
+          width: 25px;
+          height: 25px;
+          left: calc(100% - 30px);
         }
       }
     }
@@ -404,8 +411,7 @@
         }
         &.blue {
           .progress-bar {
-            border-color: #049dff;
-            // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
+            border-color: #049dff; // background: radial-gradient(circle at 0 100%, #1f58a6, #029bd7)
           }
           .progress-left {
             .progress-bar {
