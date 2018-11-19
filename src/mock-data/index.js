@@ -14,6 +14,7 @@ export {
   campaign_detail
 } from "./campaign-list";
 export { exploreList } from "./exlpore";
+export { dashboardList } from "./dashboard";
 export {
   setting_ads_list,
   adStatistics,

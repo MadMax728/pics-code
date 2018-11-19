@@ -5,6 +5,8 @@ const exploreReducer = (state = initialState.exploreData, action) => {
   switch (action.type) {
     // Get Explores
     case types.GET_EXPLORES_STARTED:
+      console.log(types.GET_EXPLORES_STARTED);
+
       return {
         ...state,
         isLoading: true,

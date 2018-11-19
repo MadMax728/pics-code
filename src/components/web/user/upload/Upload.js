@@ -3,6 +3,7 @@ import * as images from "../../../../lib/constants/images";
 import propTypes from "prop-types";
 import { HashTagUsername } from "../../../common";
 import { PlaceAutoCompleteLocation } from "../../../ui-kit";
+import { Translations } from "../../../../lib/translations";
 
 class Upload extends Component {
   constructor(props) {
@@ -50,12 +51,16 @@ class Upload extends Component {
             />
           </div>
           <div className="user-title">
-            <div className="normal_title">Title of campaigns</div>
+            <div className="normal_title">
+              {Translations.upload_modal.title_of_upload}
+            </div>
             <div className="secondary_title">User name</div>
           </div>
           <form>
             <div className="form-group">
-              <label htmlFor="Location">Add Location</label>
+              <label htmlFor="Location">
+                {Translations.upload_modal.add_location}
+              </label>
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -63,7 +68,9 @@ class Upload extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Category">Add Category</label>
+              <label htmlFor="Category">
+                {Translations.upload_modal.add_category}
+              </label>
               <select name="add_category" onBlur={this.handleChangeField}>
                 <option value={"category_1"}>Category 1</option>
                 <option value={"category_2"}>Category 2</option>
@@ -72,7 +79,9 @@ class Upload extends Component {
               </select>
             </div>
             <div className="form-group no-margin">
-              <label htmlFor="description">Add description</label>
+              <label htmlFor="description">
+                {Translations.upload_modal.add_decription}
+              </label>
               <HashTagUsername
                 className="form-control"
                 type="text"
@@ -104,7 +113,11 @@ class Upload extends Component {
                 >
                   <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
                 </svg>
-                <br /> <span>Upload title image</span>
+                <br />{" "}
+                <span>
+                  {Translations.upload_modal.upload_title_image}
+                  Upload title image
+                </span>
               </label>
             </div>
           ) : (
