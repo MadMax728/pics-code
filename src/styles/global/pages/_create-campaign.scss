@@ -266,19 +266,36 @@
           position: relative;
           top: -44%;
           //reverting back
-          top: -57px;
+          top: -34px;
           @media (max-width: 915px) {
             top: -32px;
             right: -4px;
           }
         }
         input[type="file"] {
-          position: relative;
-          top: -35px;
-          right: -83%;
-          height: 23px;
+          position: absolute;
+          top: -32px;
+          height: 26px;
           opacity: 0;
           z-index: 1;
+          left: calc(100% - 45px);
+          width: 30px;
+        }
+      }
+      &.upload-wrapr {
+        img {
+          position: relative;
+          top: -30px;
+        }
+        input[type="file"] {
+          position: relative;
+          top: 7px;
+          right: -83%;
+          height: 30px;
+          opacity: 0;
+          z-index: 1;
+          left: calc(100% - 45px);
+          width: 30px;
         }
       }
     }
