@@ -35,7 +35,7 @@ class ExploreRoot extends Component {
     return (
       <div className={"middle-section padding-rl-10"}>
         {exploreList && !isLoading && this.renderExploreList()}
-        {isLoading && <InlineLoading />}
+        {isLoading && <CampaignLoading />}
       </div>
     );
   }
