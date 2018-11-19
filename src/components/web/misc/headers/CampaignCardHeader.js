@@ -20,6 +20,7 @@ const CampaignCardHeader = ({
   const favorite_icon = campaign.isFavorite
     ? images.blue_heart
     : images.feed_like;
+  console.log(campaign);
   return (
     <div className="feed_header">
       <div className="no-padding profile_image">
@@ -32,17 +33,10 @@ const CampaignCardHeader = ({
         </Link>
       </div>
       <div className="no-padding titles_wrapper">
-        <Link
-          to={{
-            pathname: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`,
-            state: { _id: campaign.id }
-          }}
-        >
-          <div className="normal_title">{campaign.title}</div>
-        </Link>
         <Link to={profile_route}>
-          <div className="secondary_title">{campaign.user.name}</div>
+          <div className="normal_title">{campaign.user.name}</div>
         </Link>
+        <div className="secondary_title">{campaign.location}</div>
         {campaign.category && (
           <div className="grey_title">{campaign.category}</div>
         )}

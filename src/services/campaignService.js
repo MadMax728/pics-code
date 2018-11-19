@@ -10,10 +10,6 @@ const api = apiFactory(baseUrl);
  * @param {*} payload
  */
 
-// Landing/News Campaigns API
-export const getNewFeedCampaigns = payload =>
-  api.get("/campaigns/get-all-getNewsFeed", payload);
-
 // Company Campaigns API
 export const getCompanyCampaigns = payload =>
   api.get("/campaigns/get-all-company-campaigns", payload);
@@ -21,18 +17,6 @@ export const getCompanyCampaigns = payload =>
 // Creator Campaigns API
 export const getCreatorCampaigns = payload =>
   api.get("/campaigns/get-all-creator-campaigns", payload);
-
-// Participant Campaigns API
-export const getParticipantCampaigns = payload =>
-  api.get("/campaigns/get-all-participant-campaigns", payload);
-
-// Explore Campaigns API
-export const getExploreCampaigns = payload =>
-  api.get("/campaigns/get-all-explore-campaigns", payload);
-
-// Participants Campaigns API
-export const getParticipantsCampaigns = payload =>
-  api.get("/campaigns/get-all-participants-campaigns", payload);
 
 // News Feed Campaigns API
 export const getNewsFeedCampaigns = payload =>

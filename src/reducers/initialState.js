@@ -50,7 +50,7 @@ const initialState = {
     error: false
   },
   dashboardData: {
-    explores: null,
+    dashboard: null,
     isLoading: false,
     error: false
   }
