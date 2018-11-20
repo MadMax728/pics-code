@@ -36,9 +36,9 @@ export const isUserAdmin = () => {
   const token = extractJwtFromStorage();
   if (
     !token ||
-    !token.is_admin ||
-    token.is_admin === "false" ||
-    token.is_admin === false
+    !token.isAdmin ||
+    token.isAdmin === "false" ||
+    token.isAdmin === false
   ) {
     return false;
   }
@@ -128,8 +128,8 @@ export const saveJwtToStorage = authResponse => {
     localStorage.setItem("access_token", authResponse.token);
   }
 
-  if (authResponse.hasOwnProperty("is_admin")) {
-    localStorage.setItem("is_admin", authResponse.is_admin);
+  if (authResponse.hasOwnProperty("isAdmin")) {
+    localStorage.setItem("is_admin", authResponse.isAdmin);
   }
 
   if (authResponse.hasOwnProperty("user_type")) {
