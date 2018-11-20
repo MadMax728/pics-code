@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { admin_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
+import { Translations } from "../../../lib/translations";
 
 class AddAdmin extends Component {
   constructor(props, context) {
@@ -75,21 +76,21 @@ class AddAdmin extends Component {
     const columns = [
       {
         dataField: "username",
-        text: "User Name",
+        text: Translations.admin.UserName,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "name",
-        text: "Name",
+        text: Translations.admin.Name,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "status",
-        text: "Admin Status",
+        text: Translations.admin.AdminStatus,
         align: "left",
         headerAlign: "left",
         sort: false,
@@ -136,13 +137,15 @@ class AddAdmin extends Component {
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">Add admin</div>
+          <div className="normal_title padding-15">
+            {Translations.admin.Add_admin}
+          </div>
           <div className="title_with_search_dropdown_button">
             <input
               type="search"
               name="username"
               id="username"
-              placeholder="Search in users"
+              placeholder={Translations.admin.Search_in_users}
               className="res440"
               onChange={this.handleChangeField}
             />
@@ -156,7 +159,7 @@ class AddAdmin extends Component {
               <option value={"admin_status3"}>Admin status 3 </option>
             </select>
             <button className="res440" onClick={this.handleSubmit}>
-              Add
+              {Translations.admin.Add}
             </button>
           </div>
           <div className="dashboard-tbl">

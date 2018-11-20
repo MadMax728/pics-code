@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Translations } from "../../../lib/translations";
 
 class DataDownload extends Component {
   constructor(props) {
@@ -32,19 +33,21 @@ class DataDownload extends Component {
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">Data download</div>
+          <div className="normal_title padding-15">
+            {Translations.admin.Data_download}
+          </div>
           <div className="user_download_wrapr">
             <div className="title_with_search_dropdown_button">
               <input
                 type="search"
                 name="username"
                 id="username"
-                placeholder="User name"
+                placeholder={Translations.admin.UserName}
                 className="flex2"
                 onChange={this.handleChangeField}
               />
               <button className="wid30per" onClick={this.handleSubmit}>
-                Download
+                {Translations.admin.Download}
               </button>
             </div>
           </div>
