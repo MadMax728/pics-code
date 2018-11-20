@@ -10,7 +10,6 @@ export const isUserAuthenticated = () => {
  * check user is admin authenticated or not
  */
 export const isAdminUserAuthenticated = () => {
-  debugger;
   const authenticated = isUserAdmin() && jwtAdminValid();
 
   return authenticated;
