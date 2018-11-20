@@ -37,9 +37,9 @@ export const isUserAdmin = () => {
   const token = extractJwtFromStorage();
   if (
     !token ||
-    !token.is_admin ||
-    token.is_admin === "false" ||
-    token.is_admin === false
+    !token.isAdmin ||
+    token.isAdmin === "false" ||
+    token.isAdmin === false
   ) {
     return false;
   }
@@ -125,7 +125,6 @@ export const clearTokensFromStorage = () => {
  * save jwt in storage
  */
 export const saveJwtToStorage = authResponse => {
-  debugger;
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
