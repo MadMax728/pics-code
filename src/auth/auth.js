@@ -37,9 +37,9 @@ export const isUserAdmin = () => {
   const token = extractJwtFromStorage();
   if (
     !token ||
-    !token.isAdmin ||
-    token.isAdmin === "false" ||
-    token.isAdmin === false
+    !token.is_admin ||
+    token.is_admin === "false" ||
+    token.is_admin === false
   ) {
     return false;
   }
