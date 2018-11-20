@@ -16,7 +16,7 @@ class PaymentStepOne extends Component {
           <div className="user-title">
             <div className="subtitle">Billing Address</div>
           </div>
-          <form>
+          <form className="col-xs-12 no-padding">
             <div className="form-group">
               <label htmlFor="title">Invoice Recipient</label>
               <input

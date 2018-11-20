@@ -6,7 +6,7 @@ import resetPasswordData from "./forgotPasswordReducer";
 import newPasswordData from "./setNewPasswordReducer";
 import userDataByUsername from "./profileReducer";
 import campaignData from "./campaignReducer";
-import exploreData from "./exploreReducer";
+import dashboardData from "./dashboardReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   newPasswordData,
   userDataByUsername,
   campaignData,
-  exploreData
+  dashboardData
 });
 
 export default rootReducer;

@@ -82,7 +82,6 @@ class Login extends Component {
         } else {
           this.props.history.push(routes.ROOT_ROUTE);
         }
-        // this.props.history.push(routes.ROOT_ROUTE);
       });
   };
 

@@ -25,15 +25,12 @@ const AdCardHeader = ({ ad, isDescription, isInformation, handleFavorite }) => {
         </Link>
       </div>
       <div className="col-sm-9 col-xs-7 no-padding">
-        <Link
-          to={{
-            pathname: `${routes.BASE_AD_INFORMATION_ROUTE}${ad.id}`,
-            state: { _id: ad.id }
-          }}
-        >
-          <div className="normal_title">{ad.title}</div>
+        <Link to={profile_route}>
+          <div className="normal_title">{ad.user.name}</div>
         </Link>
-        {ad.category && <div className="grey_title">{ad.category}</div>}
+        {ad.category && (
+          <div className="grey_title">Sponsored in {ad.category}</div>
+        )}
       </div>
       <div className="col-sm-2 col-xs-2 like_wrapper" role="article">
         <img

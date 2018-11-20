@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getExplores } from "../../../actions";
+import { getDashboard } from "../../../actions";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../ui-kit";
 import { ImageCard, VideoCard } from "../misc";
@@ -8,7 +8,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {
   componentDidMount = () => {
-    this.props.getExplores();
+    this.props.getDashboard("getExplore");
   };
 
   renderExploreList = () => {
@@ -16,7 +16,6 @@ class ExploreRoot extends Component {
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
-          {isLoading && <CampaignLoading />}
           {explore.type === enumerations.contentTypes.image && (
             <ImageCard item={explore} />
           )}
@@ -43,21 +42,21 @@ ExploreRoot.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
-  getExplores: PropTypes.func.isRequired,
+  getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   exploreList: PropTypes.any,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  exploreList: state.exploreData.explores,
-  isLoading: state.campaignData.isLoading,
-  error: state.campaignData.error
+  exploreList: state.dashboardData.dashboard,
+  isLoading: state.dashboardData.isLoading,
+  error: state.dashboardData.error
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getExplores
+  getDashboard
 };
 
 export default connect(
