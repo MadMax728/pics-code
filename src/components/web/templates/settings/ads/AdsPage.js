@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as images from "../../../../../lib/constants/images";
 import { setting_ads_list } from "../../../../../mock-data";
+import { Translations } from "../../../../../lib/translations";
 
 class AdsPage extends Component {
   constructor(props, context) {
@@ -76,26 +77,34 @@ class AdsPage extends Component {
                 </div>
                 <div className="status">
                   <div className="status-wrapper">
-                    <div className="title">Status</div>
+                    <div className="title">
+                      {Translations.create_ads.status}
+                    </div>
                     <div className="subtitle">
                       <span className="green-circle" />
                     </div>
                   </div>
                   <div className="status-wrapper">
-                    <div className="title">Views</div>
+                    <div className="title">{Translations.create_ads.views}</div>
                     <div className="subtitle">{ad.views}</div>
                   </div>
                   <div className="status-wrapper">
-                    <div className="title">Clicks</div>
+                    <div className="title">
+                      {Translations.create_ads.clicks}
+                    </div>
                     <div className="subtitle">{ad.clicks}</div>
                   </div>
                   <div className="status-wrapper">
-                    <div className="title">Applications</div>
+                    <div className="title">
+                      {Translations.create_ads.applications}
+                    </div>
                     <div className="subtitle">{ad.applications}</div>
                   </div>
                   <div className="status-wrapper">
                     <Link to={`/settings/ads/${ad.id}/statistics`}>
-                      <button className="blue_button">statistics</button>
+                      <button className="blue_button">
+                        {Translations.create_ads.statistics}
+                      </button>
                     </Link>
                   </div>
                 </div>

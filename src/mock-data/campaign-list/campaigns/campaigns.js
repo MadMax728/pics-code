@@ -14,6 +14,7 @@ export const campaigns_list = [
       isParticipant: false
     },
     title: "Title of campaigns",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -80,6 +81,7 @@ export const campaigns_list = [
       isParticipant: false
     },
     title: "Title of campaigns",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -145,6 +147,7 @@ export const campaigns_list = [
       isParticipant: false
     },
     title: "Title of Ads",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -211,6 +214,7 @@ export const campaigns_list = [
       isParticipant: true
     },
     title: "Title of Ads",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -276,6 +280,7 @@ export const campaigns_list = [
       isParticipant: false
     },
     title: "Title of Image",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -329,6 +334,7 @@ export const campaigns_list = [
       isParticipant: true
     },
     title: "Title of Video",
+    location: "London",
     comments: [
       {
         comment_id: 1,

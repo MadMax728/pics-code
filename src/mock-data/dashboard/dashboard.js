@@ -14,6 +14,7 @@ export const dashboardList = [
       isParticipant: false
     },
     title: "Title of campaigns",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -80,6 +81,7 @@ export const dashboardList = [
       isParticipant: false
     },
     title: "Title of campaigns",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -145,6 +147,7 @@ export const dashboardList = [
       isParticipant: false
     },
     title: "Title of Ads",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -177,10 +180,11 @@ export const dashboardList = [
         date: "03.03.2000"
       }
     ],
-    category: "01.01.2000 in Category",
+    category: "Category",
     image: `${images.campaign3}`,
     video: `${videos.demo}`,
     mediaType: "video",
+    insert_link: "https://www.google.com/",
     type: "ad",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
@@ -211,6 +215,7 @@ export const dashboardList = [
       isParticipant: true
     },
     title: "Title of Ads",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -243,8 +248,9 @@ export const dashboardList = [
         date: "03.03.2000"
       }
     ],
-    category: "01.01.2000 in Category",
+    category: "Category",
     mediaType: "image",
+    insert_link: "https://www.google.com/",
     type: "ad",
     image: `${images.campaign4}`,
     desc:
@@ -276,6 +282,7 @@ export const dashboardList = [
       isParticipant: false
     },
     title: "Title of Image",
+    location: "London",
     comments: [
       {
         comment_id: 1,
@@ -329,6 +336,7 @@ export const dashboardList = [
       isParticipant: true
     },
     title: "Title of Images",
+    location: "London",
     comments: [
       {
         comment_id: 1,

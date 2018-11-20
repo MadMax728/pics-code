@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getCampaigns } from "../../../actions";
+import { getDashboard } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 class ParticipantPage extends Component {
   componentDidMount = () => {
-    this.props.getCampaigns("getParticipant");
+    this.props.getDashboard("getParticipant");
   };
 
   renderParticipantList = () => {
@@ -16,7 +16,6 @@ class ParticipantPage extends Component {
     return participantList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {isLoading && <CampaignLoading />}
           {newsFeed.type === enumerations.contentTypes.image && (
             <ImageCard item={newsFeed} />
           )}
@@ -43,19 +42,21 @@ ParticipantPage.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
-  getCampaigns: PropTypes.func.isRequired,
+  getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  participantList: PropTypes.any
+  participantList: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  participantList: state.campaignData.campaigns,
-  isLoading: state.campaignData.isLoading
+  participantList: state.dashboardData.dashboard,
+  isLoading: state.dashboardData.isLoading,
+  error: state.dashboardData.error
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getCampaigns
+  getDashboard
 };
 
 export default connect(

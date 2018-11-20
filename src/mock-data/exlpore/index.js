@@ -1,1 +1,0 @@
-export { exploreList } from "./explores";

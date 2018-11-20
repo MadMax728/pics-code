@@ -3,7 +3,6 @@ import propTypes from "prop-types";
 import { ImageItem, VideoItem } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import InformationCard from "../InformationCard";
-import { Link } from "react-router-dom";
 
 const AdCardBody = ({ ad, isDescription, isInformation }) => {
   return (
@@ -20,9 +19,14 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
             isOtherCardExist={!isDescription && isInformation}
           />
         )}
-        <Link to={""} className="more-strip zIndex0">
+        <a
+          href={ad.insert_link}
+          target="_blank"
+          className="more-strip zIndex0"
+          rel="noopener noreferrer"
+        >
           More
-        </Link>
+        </a>
       </div>
       {ad &&
         isDescription &&

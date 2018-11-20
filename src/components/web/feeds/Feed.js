@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import Comments from "./Comments";
 import { RenderToolTips } from "../../common";
+import { Translations } from "../../../lib/translations";
 
 class Feed extends Component {
   constructor(props, context) {
@@ -122,17 +123,23 @@ class Feed extends Component {
                 <div className="normal_title">{campaign.title}</div>
                 <div className="col-sm-6 no-padding">
                   <div className="info_wrapper">
-                    <span className="normal_title">Start: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.start}:{" "}
+                    </span>
                     <span className="secondary_title">{campaign.title}</span>
                   </div>
                   <div className="info_wrapper">
-                    <span className="normal_title">Procedure: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.procedure}:{" "}
+                    </span>
                     <span className="secondary_title">
                       {campaign.procedure}
                     </span>
                   </div>
                   <div className="info_wrapper">
-                    <span className="normal_title">Target group: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.target_group}:{" "}
+                    </span>
                     <span className="secondary_title">
                       {campaign.target_group}
                     </span>
@@ -140,15 +147,21 @@ class Feed extends Component {
                 </div>
                 <div className="col-sm-6 no-padding">
                   <div className="info_wrapper">
-                    <span className="normal_title">End: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.end}:{" "}
+                    </span>
                     <span className="secondary_title">{campaign.end}</span>
                   </div>
                   <div className="info_wrapper">
-                    <span className="normal_title">Type: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.type}:{" "}
+                    </span>
                     <span className="secondary_title">{campaign.type}</span>
                   </div>
                   <div className="info_wrapper">
-                    <span className="normal_title">Applications: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.applications}:{" "}
+                    </span>
                     <span className="secondary_title">
                       {campaign.applications}
                     </span>
@@ -157,23 +170,31 @@ class Feed extends Component {
                 <hr />
                 <div className="col-sm-6 no-padding">
                   <div className="info_wrapper">
-                    <span className="normal_title">Offer: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.offer}:{" "}
+                    </span>
                     <span className="secondary_title">{campaign.offer}</span>
                   </div>
                   <div className="info_wrapper">
-                    <span className="normal_title">Inquiry: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.inquiry}:{" "}
+                    </span>
                     <span className="secondary_title">{campaign.inquiry}</span>
                   </div>
                 </div>
                 <div className="col-sm-6 no-padding">
                   <div className="info_wrapper">
-                    <span className="normal_title">Offer Tag: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.offer_tag}:{" "}
+                    </span>
                     <span className="secondary_title">
                       {campaign.offer_tag}
                     </span>
                   </div>
                   <div className="info_wrapper">
-                    <span className="normal_title">Inquiry Tag: </span>
+                    <span className="normal_title">
+                      {Translations.create_campaigns.inquiry_tag}:{" "}
+                    </span>
                     <span className="secondary_title">
                       {campaign.inquiry_tag}
                     </span>
@@ -239,26 +260,36 @@ class Feed extends Component {
             isStatus && (
               <div className="status">
                 <div className="status-wrapper">
-                  <div className="title">Status</div>
+                  <div className="title">
+                    {Translations.create_campaigns.status}
+                  </div>
                   <div className="subtitle">
                     <span className="green-circle" />
                   </div>
                 </div>
                 <div className="status-wrapper">
-                  <div className="title">Views</div>
+                  <div className="title">
+                    {Translations.create_campaigns.views}
+                  </div>
                   <div className="subtitle">{campaign.views}</div>
                 </div>
                 <div className="status-wrapper">
-                  <div className="title">Clicks</div>
+                  <div className="title">
+                    {Translations.create_campaigns.clicks}
+                  </div>
                   <div className="subtitle">{campaign.clicks}</div>
                 </div>
                 <div className="status-wrapper">
-                  <div className="title">Applications</div>
+                  <div className="title">
+                    {Translations.create_campaigns.applications}
+                  </div>
                   <div className="subtitle">{campaign.applications}</div>
                 </div>
                 <div className="status-wrapper">
                   <Link to={`/settings/campaigns/${campaign.id}/statistics`}>
-                    <button className="blue_button">statistics</button>
+                    <button className="blue_button">
+                      {Translations.create_campaigns.statistics}
+                    </button>
                   </Link>
                 </div>
               </div>
