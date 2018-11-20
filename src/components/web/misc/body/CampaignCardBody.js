@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import { ImageItem, VideoItem } from "../../../ui-kit";
+import { ImageItem, VideoItem, ReadMore } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import InformationCard from "../InformationCard";
 
@@ -23,7 +23,9 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
         isDescription &&
         campaign.desc && (
           <div className="feed_description padding-15">
-            <span className="secondary_title">{campaign.desc}</span>
+            <span className="secondary_title">
+              <ReadMore text={campaign.desc} min={50} ideal={50} max={50} />
+            </span>
           </div>
         )}
       {campaign && isInformation && <InformationCard item={campaign} />}

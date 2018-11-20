@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { voucher_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
+import { Translations } from "../../../lib/translations";
 
 class AddVoucher extends Component {
   constructor(props, context) {
@@ -71,7 +72,7 @@ class AddVoucher extends Component {
         className="res320"
         onBlur={this.handleChangeField}
       >
-        <option value="">Period</option>
+        <option value="">{Translations.admin.Period}</option>
         <option value="Item1">Item1</option>
         <option value="Item2">Item2</option>
       </select>
@@ -101,7 +102,7 @@ class AddVoucher extends Component {
         className="res320"
         onBlur={this.handleChangeField}
       >
-        <option value="">type</option>
+        <option value="">{Translations.admin.type}</option>
         <option value="Item1">Item1</option>
         <option value="Item2">Item2</option>
       </select>
@@ -116,7 +117,7 @@ class AddVoucher extends Component {
         className="res320"
         onBlur={this.handleChangeField}
       >
-        <option value="">Number</option>
+        <option value="">{Translations.admin.Number}</option>
         <option value="Item1">Item1</option>
         <option value="Item2">Item2</option>
       </select>
@@ -124,7 +125,9 @@ class AddVoucher extends Component {
   };
 
   addFormatter = (column, colIndex) => {
-    return <button onClick={this.handleSubmit}>Add</button>;
+    return (
+      <button onClick={this.handleSubmit}>{Translations.admin.Add}</button>
+    );
   };
 
   customTotal = (from, to, size) => (
@@ -142,32 +145,32 @@ class AddVoucher extends Component {
     const columns = [
       {
         dataField: "code",
-        text: "Code",
+        text: Translations.admin.Code,
         headerFormatter: this.codeFormatter
       },
       {
         dataField: "period",
-        text: "Period",
+        text: Translations.admin.Period,
         headerFormatter: this.periodFormatter
       },
       {
         dataField: "amount",
-        text: "Amount",
+        text: Translations.admin.amount,
         headerFormatter: this.amountFormatter
       },
       {
         dataField: "type",
-        text: "Type",
+        text: Translations.admin.type,
         headerFormatter: this.typeFormatter
       },
       {
         dataField: "number",
-        text: "Number",
+        text: Translations.admin.Number,
         headerFormatter: this.numberFormatter
       },
       {
         dataField: "status",
-        text: "Status",
+        text: Translations.admin.status,
         headerFormatter: this.addFormatter,
         headerClasses: "wid93 no-padding res440 res320",
         formatter: this.statusFormatter
@@ -213,7 +216,9 @@ class AddVoucher extends Component {
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">Add voucher code</div>
+          <div className="normal_title padding-15">
+            {Translations.admin.Add_voucher_code}
+          </div>
           <div className="dashboard-tbl">
             <CustomBootstrapTable
               data={vouchers}

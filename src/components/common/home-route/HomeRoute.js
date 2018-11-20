@@ -4,17 +4,14 @@ import propTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 
 import {
-  NewsFeedsPage,
+  NewsPage,
+  NewsFeedPage,
+  SavedPage,
   ExplorePage,
   ParticipantsPage,
   UsersPage,
   PicturesPage,
-  OtherNewsFeedPage,
-  OtherAboutPage,
-  OtherSavedPage,
-  OwnerNewsFeedPage,
-  OwnerAboutPage,
-  OwnerSavedPage,
+  AboutPage,
   UserProfilePage,
   PrivacyPage,
   EditProfilePage,
@@ -61,7 +58,7 @@ import { PageNotFound } from "../../web/page-not-found";
 class HomeRoute extends Component {
   handleLanding = () => {
     return (
-      <NewsFeedsPage
+      <NewsPage
         handleModalInfoShow={this.props.handleModalInfoShow}
         handleModalShow={this.props.handleModalShow}
       />
@@ -95,45 +92,21 @@ class HomeRoute extends Component {
     return <AdsPage isBackOffice={false} />;
   };
 
-  handleOwnerNewsFeed = () => {
-    return (
-      <OwnerNewsFeedPage
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-      />
-    );
+  handleNewsFeed = match => {
+    return <NewsFeedPage match={match.match} />;
+  };
+
+  handleSaved = match => {
+    return <SavedPage match={match.match} />;
+  };
+
+  handleAbout = match => {
+    return <AboutPage match={match.match} />;
   };
 
   handleExplore = () => {
     return (
       <ExplorePage
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-      />
-    );
-  };
-
-  handleOwnerSaved = () => {
-    return (
-      <OwnerSavedPage
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-      />
-    );
-  };
-
-  handleOtherNewsFeed = () => {
-    return (
-      <OtherNewsFeedPage
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-      />
-    );
-  };
-
-  handleOtherSaved = () => {
-    return (
-      <OtherSavedPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
       />
@@ -185,30 +158,26 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.NEWS_FEED_ROUTE}
-            component={this.handleOwnerNewsFeed}
+            component={this.handleNewsFeed}
           />
-          <Route
-            exact
-            path={routes.SAVED_ROUTE}
-            component={this.handleOwnerSaved}
-          />
-          <Route exact path={routes.ABOUT_ROUTE} component={OwnerAboutPage} />
+          <Route exact path={routes.SAVED_ROUTE} component={this.handleSaved} />
+          <Route exact path={routes.ABOUT_ROUTE} component={this.handleAbout} />
 
           <Route
             exact
             path={routes.OTHER_NEWS_FEED_ROUTE}
-            component={this.handleOtherNewsFeed}
+            component={this.handleNewsFeed}
           />
           <Route
             exact
             path={routes.OTHER_ABOUT_ROUTE}
-            component={OtherAboutPage}
+            component={this.handleAbout}
           />
 
           <Route
             exact
             path={routes.OTHER_SAVED_ROUTE}
-            component={this.handleOtherSaved}
+            component={this.handleSaved}
           />
 
           <Route

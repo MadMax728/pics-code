@@ -1,9 +1,78 @@
-import React, { Component } from "react";
 import * as types from "../lib/constants/actionTypes";
 import * as userService from "../services/userService";
+import * as profileService from "../services/profileService";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
 
+import { campaigns_list, aboutInfo } from "../mock-data";
+
+// Profile
+const getProfileStarted = () => ({
+  type: types.GET_PROFILE_STARTED
+});
+
+const getProfileSucceeded = data => ({
+  type: types.GET_PROFILE_SUCCEEDED,
+  payload: data
+});
+
+const getProfileFailed = error => ({
+  type: types.GET_PROFILE_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getProfile = (prop, provider) => {
+  return dispatch => {
+    dispatch(getProfileStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+
+    return profileService[prop](params, provider).then(
+      res => {
+        dispatch(getProfileSucceeded(res.data.data));
+      },
+      error => {
+        console.log(campaigns_list.filter(c => c.user.id === "1"));
+
+        dispatch(
+          // getCampaignsFailed(error.response)
+          // remove below code after API working, this is just for set mock data.
+
+          prop === "getNewsFeedOwner"
+            ? getProfileSucceeded(campaigns_list.filter(c => c.user.id === "1"))
+            : prop === "getNewsFeedOther"
+              ? getProfileSucceeded(
+                  campaigns_list.filter(c => c.user.id === provider)
+                )
+              : prop === "getSavedOther"
+                ? getProfileSucceeded(
+                    campaigns_list.filter(
+                      c => c.user.id === provider && c.isSaved
+                    )
+                  )
+                : prop === "getSavedOwner"
+                  ? getProfileSucceeded(
+                      campaigns_list.filter(c => c.user.id === "1" && c.isSaved)
+                    )
+                  : prop === "getAboutOther"
+                    ? getProfileSucceeded(aboutInfo[0])
+                    : prop === "getAboutOwner" &&
+                      getProfileSucceeded(aboutInfo[0])
+        );
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+//  ------------------------------------------------  //
 const getUserStarted = () => ({
   type: types.GET_USER_STARTED
 });
