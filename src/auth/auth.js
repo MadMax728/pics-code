@@ -128,8 +128,8 @@ export const saveJwtToStorage = authResponse => {
     localStorage.setItem("access_token", authResponse.token);
   }
 
-  if (authResponse.hasOwnProperty("is_admin")) {
-    localStorage.setItem("is_admin", authResponse.is_admin);
+  if (authResponse.hasOwnProperty("isAdmin")) {
+    localStorage.setItem("is_admin", authResponse.isAdmin);
   }
 
   if (authResponse.hasOwnProperty("user_type")) {

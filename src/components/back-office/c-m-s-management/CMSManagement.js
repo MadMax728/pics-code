@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import { cmsManagement_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
+import { Translations } from "../../../lib/translations";
 
 class CMSManagement extends Component {
   constructor(props, context) {
@@ -46,35 +47,35 @@ class CMSManagement extends Component {
     const columns = [
       {
         dataField: "title",
-        text: "Title of page",
+        text: Translations.cms.Title_of_page,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "language",
-        text: "Language",
+        text: Translations.cms.Language,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "most_recent_change",
-        text: "Most recent change",
+        text: Translations.cms.Most_recent_change,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "created_by",
-        text: "Created by",
+        text: Translations.cms.Created_by,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "options",
-        text: "Options",
+        text: Translations.cms.Options,
         align: "left",
         headerAlign: "left",
         sort: false,
@@ -82,7 +83,7 @@ class CMSManagement extends Component {
       },
       {
         dataField: "status",
-        text: "Status",
+        text: Translations.cms.Status,
         align: "left",
         headerAlign: "left",
         sort: false,
@@ -130,7 +131,7 @@ class CMSManagement extends Component {
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
           <div className="title_with_dropdown">
-            <span>CMS management</span>
+            <span>{Translations.cms.cms}</span>
             <Link to={routes.BACK_OFFICE_CREATE_CMS_ROUTE}>
               <button className="expandDrop">
                 <i className="glyphicon glyphicon-plus-sign" />
