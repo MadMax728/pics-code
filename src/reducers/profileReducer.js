@@ -57,6 +57,24 @@ const profileReducer = (state = initialState.userDataByUsername, action) => {
         isLoading: false,
         error: action.payload
       };
+    case types.GET_PROFILE_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.GET_PROFILE_SUCCEEDED:
+      return {
+        ...state,
+        items: action.payload,
+        isLoading: false
+      };
+    case types.GET_PROFILE_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }

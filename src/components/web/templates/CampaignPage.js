@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { NewsFeeds } from "../feeds";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCampaigns } from "../../../actions";
-import { InlineLoading } from "../../ui-kit";
+import { CampaignLoading } from "../../ui-kit";
+import { CampaignCard } from "../misc";
+import * as enumerations from "../../../lib/constants/enumerations";
 
 class CampaignPage extends Component {
   constructor(props) {
@@ -24,44 +25,45 @@ class CampaignPage extends Component {
     }
   }
 
-  render() {
-    const {
-      handleModalShow,
-      handleModalInfoShow,
-      campaigns,
-      isLoading
-    } = this.props;
-    return (
-      <div className={"padding-rl-10 middle-section"}>
-        {campaigns &&
-          !isLoading && (
-            <NewsFeeds
-              campaigns={campaigns}
-              handleModalShow={handleModalShow}
-              handleModalInfoShow={handleModalInfoShow}
+  renderCampaignList = () => {
+    const { campaignList } = this.props;
+    return campaignList.map(campaign => {
+      return (
+        <div key={campaign.id}>
+          {campaign.type === enumerations.contentTypes.campaign && (
+            <CampaignCard
+              item={campaign}
               isDescription={false}
               isInformation
               isStatus={false}
             />
           )}
-        {isLoading && <InlineLoading />}
+        </div>
+      );
+    });
+  };
+
+  render() {
+    const { campaignList, isLoading } = this.props;
+    return (
+      <div className={"padding-rl-10 middle-section"}>
+        {campaignList && !isLoading && this.renderCampaignList()}
+        {isLoading && <CampaignLoading />}
       </div>
     );
   }
 }
 
 CampaignPage.propTypes = {
-  handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func,
   type: PropTypes.string.isRequired,
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  campaigns: PropTypes.any,
+  campaignList: PropTypes.any,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  campaigns: state.campaignData.campaigns,
+  campaignList: state.campaignData.campaigns,
   isLoading: state.campaignData.isLoading,
   error: state.campaignData.error
 });

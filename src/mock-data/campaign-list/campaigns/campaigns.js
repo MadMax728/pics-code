@@ -10,7 +10,7 @@ export const campaigns_list = [
       isOwner: true,
       isPrivate: false,
       // Creator for True and Company for False
-      type: "creator",
+      type: "company",
       isParticipant: false
     },
     title: "Title of campaigns",
@@ -58,7 +58,7 @@ export const campaigns_list = [
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
-    isSaved: false,
+    isSaved: true,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
@@ -191,7 +191,7 @@ export const campaigns_list = [
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
-    isSaved: false,
+    isSaved: true,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
