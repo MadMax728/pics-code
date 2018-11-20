@@ -10,6 +10,7 @@ export const isUserAuthenticated = () => {
  * check user is admin authenticated or not
  */
 export const isAdminUserAuthenticated = () => {
+  debugger;
   const authenticated = isUserAdmin() && jwtAdminValid();
 
   return authenticated;
@@ -124,12 +125,13 @@ export const clearTokensFromStorage = () => {
  * save jwt in storage
  */
 export const saveJwtToStorage = authResponse => {
+  debugger;
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
 
-  if (authResponse.hasOwnProperty("is_admin")) {
-    localStorage.setItem("is_admin", authResponse.is_admin);
+  if (authResponse.hasOwnProperty("isAdmin")) {
+    localStorage.setItem("is_admin", authResponse.isAdmin);
   }
 
   if (authResponse.hasOwnProperty("user_type")) {
