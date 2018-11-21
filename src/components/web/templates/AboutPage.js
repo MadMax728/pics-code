@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getProfile } from "../../../actions";
+import { getAbout } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { AboutCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -9,15 +9,17 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class AboutPage extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
-      this.props.getProfile("getAboutOther", this.props.match.params.id);
+      this.props.getAbout("getAboutOther", this.props.match.params.id);
     } else {
-      this.props.getProfile("getAboutOwner");
+      this.props.getAbout("getAboutOwner");
     }
   };
 
   renderAbout = () => {
     const { aboutDetails } = this.props;
-    return aboutDetails && <AboutCard about={aboutDetails} />;
+    return aboutDetails.map((about, index) => {
+      return <AboutCard about={about} key={index} />;
+    });
   };
 
   render() {
@@ -33,20 +35,20 @@ class AboutPage extends Component {
 
 AboutPage.propTypes = {
   match: PropTypes.any.isRequired,
-  getProfile: PropTypes.func.isRequired,
+  getAbout: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   aboutDetails: PropTypes.any,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  aboutDetails: state.userDataByUsername.items,
-  isLoading: state.userDataByUsername.isLoading,
-  error: state.userDataByUsername.error
+  aboutDetails: state.aboutData.about,
+  isLoading: state.aboutData.isLoading,
+  error: state.aboutData.error
 });
 
 const mapDispatchToProps = {
-  getProfile
+  getAbout
 };
 
 export default connect(

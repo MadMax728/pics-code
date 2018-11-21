@@ -6,3 +6,4 @@ export { PaymentConfirmationModal } from "./payment-confirmation-modal";
 export { ContentViewModal } from "./content-view-modal";
 export { ProcessedModal } from "./processed-modal";
 export { EditProfileModal } from "./edit-profile-modal";
+export { ShareModal } from "./share-modal";

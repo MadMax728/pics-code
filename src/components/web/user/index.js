@@ -7,3 +7,4 @@ export { CreateAds, CreateAdsHeader } from "./create-ads";
 export { PaymentConfirmation } from "./payment-confirmation";
 export { ContentView } from "./content-view";
 export { Verification } from "./verification";
+export { Share } from "./share";

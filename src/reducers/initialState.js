@@ -36,8 +36,7 @@ const initialState = {
     user: null,
     isLoading: false,
     error: false,
-    imageData: null,
-    items: null
+    imageData: null
   },
   campaignData: {
     campaigns: null,
@@ -52,6 +51,21 @@ const initialState = {
   },
   dashboardData: {
     dashboard: null,
+    isLoading: false,
+    error: false
+  },
+  aboutData: {
+    about: null,
+    isLoading: false,
+    error: false
+  },
+  newsFeedData: {
+    newsFeed: null,
+    isLoading: false,
+    error: false
+  },
+  savedData: {
+    saved: null,
     isLoading: false,
     error: false
   }

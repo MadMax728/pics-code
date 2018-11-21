@@ -36,6 +36,10 @@
       width: 20px;
       margin-left: 10px;
     }
+    a,
+    .share-wrapr {
+      float: left;
+    }
   }
   .slot_one,
   .slot_two,
@@ -573,6 +577,13 @@
       div {
         color: $charcoal_color;
         display: inline-block;
+        &.share-wrapr {
+          float: left;
+          img {
+            height: 20px;
+            margin-right: 10px;
+          }
+        }
       }
       a {
         float: left;

@@ -1,7 +1,7 @@
 import React from "react";
 import UserCard from "../../web/misc/UserCard";
 import PropTypes from "prop-types";
-import { CampaignLoading } from "../../ui-kit";
+import { UserPicLoading } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 
@@ -33,7 +33,7 @@ class UsersRoot extends React.Component {
     return (
       <div className="padding-rl-10 middle-section">
         {usersList && !isLoading && this.renderuserList()}
-        {isLoading && <CampaignLoading />}
+        {isLoading && <UserPicLoading />}
       </div>
     );
   }

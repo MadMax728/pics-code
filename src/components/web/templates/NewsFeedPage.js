@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getProfile } from "../../../actions";
+import { getNewsFeed } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -9,9 +9,9 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class NewsFeedPage extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
-      this.props.getProfile("getNewsFeedOther", this.props.match.params.id);
+      this.props.getNewsFeed("getNewsFeedOther", this.props.match.params.id);
     } else {
-      this.props.getProfile("getNewsFeedOwner");
+      this.props.getNewsFeed("getNewsFeedOwner");
     }
   };
 
@@ -60,20 +60,20 @@ class NewsFeedPage extends Component {
 
 NewsFeedPage.propTypes = {
   match: PropTypes.any.isRequired,
-  getProfile: PropTypes.func.isRequired,
+  getNewsFeed: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   newsFeedList: PropTypes.any,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  newsFeedList: state.userDataByUsername.items,
-  isLoading: state.userDataByUsername.isLoading,
-  error: state.userDataByUsername.error
+  newsFeedList: state.newsFeedData.newsFeed,
+  isLoading: state.newsFeedData.isLoading,
+  error: state.newsFeedData.error
 });
 
 const mapDispatchToProps = {
-  getProfile
+  getNewsFeed
 };
 
 export default connect(

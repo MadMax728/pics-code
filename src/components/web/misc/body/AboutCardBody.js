@@ -16,43 +16,43 @@ const AboutCardBody = ({ about }) => {
           <ul>
             <li>
               <span>{Translations.about.username}</span>
-              <span>{aboutInfo.general_information.username}</span>
+              <span>{about.general_information.username}</span>
             </li>
             <li>
               <span>{Translations.about.name_company}</span>
-              <span>{aboutInfo.general_information.name}</span>
+              <span>{about.general_information.name}</span>
             </li>
             <li>
               <span>{Translations.about.date_of_birth}</span>
-              <span>{aboutInfo.general_information.dob}</span>
+              <span>{about.general_information.dob}</span>
             </li>
             <li>
               <span>{Translations.about.gender}</span>
-              <span>{aboutInfo.general_information.gender}</span>
+              <span>{about.general_information.gender}</span>
             </li>
             <li>
               <span>{Translations.about.category}</span>
-              <span>{aboutInfo.general_information.category}</span>
+              <span>{about.general_information.category}</span>
             </li>
             <li>
               <span>{Translations.about.location}</span>
-              <span>{aboutInfo.general_information.location}</span>
+              <span>{about.general_information.location}</span>
             </li>
             <li>
               <span>{Translations.about.phone_number}</span>
-              <span>{aboutInfo.general_information.phone_number}</span>
+              <span>{about.general_information.phone_number}</span>
             </li>
             <li>
               <span>{Translations.about.email}</span>
-              <span>{aboutInfo.general_information.email}</span>
+              <span>{about.general_information.email}</span>
             </li>
             <li>
               <span>{Translations.about.web_site}</span>
-              <span>{aboutInfo.general_information.web_site}</span>
+              <span>{about.general_information.web_site}</span>
             </li>
             <li>
               <span>{Translations.about.profile_description}</span>
-              <span>{aboutInfo.general_information.profile_description}</span>
+              <span>{about.general_information.profile_description}</span>
             </li>
           </ul>
         </div>
@@ -62,7 +62,7 @@ const AboutCardBody = ({ about }) => {
           </div>
           <div className="section-subtitle">{Translations.about.offer_tag}</div>
           <div className="tags-wrapper">
-            {aboutInfo.personal_interest.offer_tag.map((offer, index) => {
+            {about.personal_interest.offer_tag.map((offer, index) => {
               return (
                 <Link to={""} key={index}>
                   {offer.name}
@@ -76,7 +76,7 @@ const AboutCardBody = ({ about }) => {
             {Translations.about.inquiry_tag}
           </div>
           <div className="tags-wrapper">
-            {aboutInfo.personal_interest.inquiry_tag.map((inquiry, index) => {
+            {about.personal_interest.inquiry_tag.map((inquiry, index) => {
               return (
                 <Link to={""} key={index}>
                   {inquiry.name}
