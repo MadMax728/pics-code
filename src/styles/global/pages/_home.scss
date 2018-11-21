@@ -387,7 +387,7 @@
     background-color: $white_color;
     .normal_title {
       display: inline-block;
-      margin-right: 15px;
+      margin-right: 10px;
       & ~ div {
         display: inline-block;
         color: #4578b3;
@@ -580,6 +580,8 @@
           height: 20px;
           margin-right: 10px;
         }
+      }
+      .social-media-wrapr {
       }
       a.gray {
         color: #d3d3d3;

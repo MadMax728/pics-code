@@ -14,7 +14,10 @@
   }
   @include float();
   height: calc(100vh - 100px);
-  overflow: auto;
+  &.overflow-y {
+    overflow-y: auto;
+  }
+
   .feed_header {
     padding: 0px;
     margin-bottom: 24px;

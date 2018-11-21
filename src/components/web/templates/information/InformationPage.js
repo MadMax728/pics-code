@@ -81,7 +81,7 @@ class InformationPage extends Component {
         {campaign_detail &&
           !isLoading && (
             <div className="information-wrapper ht100">
-              <div className="info-inner-wrapper">
+              <div className="info-inner-wrapper col-xs-12 no-padding">
                 <div className="info-main-title paddindLeft0">
                   {campaign_detail.title}
                 </div>
@@ -135,8 +135,8 @@ class InformationPage extends Component {
                       )}
                     </div>
                   </div>
-                  <div className="feed_content">
-                    <div className="feed_description">
+                  <div className="feed_content col-xs-12">
+                    <div className="feed_description col-xs-12">
                       <div className="col-sm-6 no-padding">
                         <div className="info_wrapper">
                           <span className="normal_title">Start: </span>
@@ -207,7 +207,7 @@ class InformationPage extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="feed_footer margin-t-15 margin-b-15">
+                  <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
                     <div className="messages">
                       <span className="count">{campaign_detail.msg_count}</span>
                       <img
