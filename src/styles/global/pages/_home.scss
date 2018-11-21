@@ -34,6 +34,7 @@
     float: right;
     img {
       width: 20px;
+      margin-left: 10px;
     }
   }
   .slot_one,
@@ -571,6 +572,14 @@
       float: right;
       div {
         color: $charcoal_color;
+        display: inline-block;
+      }
+      a {
+        float: left;
+        img {
+          height: 20px;
+          margin-right: 10px;
+        }
       }
       a.gray {
         color: #d3d3d3;

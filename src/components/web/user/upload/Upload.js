@@ -56,7 +56,7 @@ class Upload extends Component {
             </div>
             <div className="secondary_title">User name</div>
           </div>
-          <form>
+          <form className="col-xs-12 no-padding">
             <div className="form-group">
               <label htmlFor="Location">
                 {Translations.upload_modal.add_location}
@@ -78,9 +78,9 @@ class Upload extends Component {
                 <option value={"category_4"}>Category 4</option>
               </select>
             </div>
-            <div className="form-group no-margin">
+            <div className="form-group">
               <label htmlFor="description">
-                {Translations.upload_modal.add_decription}
+                {Translations.upload_modal.add_description}
               </label>
               <HashTagUsername
                 className="form-control"
@@ -89,6 +89,14 @@ class Upload extends Component {
                 handleSetState={handleSetState}
                 value={form.add_decription}
               />
+            </div>
+            <div className="form-group no-margin">
+              <label htmlFor="description" className="dispInline">
+                {Translations.upload_modal.advertisement}
+              </label>
+              <div className="check-wrapr">
+                <img src={images.check} alt="share" className="check" />
+              </div>
             </div>
           </form>
         </div>
@@ -114,10 +122,7 @@ class Upload extends Component {
                   <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
                 </svg>
                 <br />{" "}
-                <span>
-                  {Translations.upload_modal.upload_title_image}
-                  Upload title image
-                </span>
+                <span>{Translations.upload_modal.upload_title_image}</span>
               </label>
             </div>
           ) : (
