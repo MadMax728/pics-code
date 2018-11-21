@@ -78,7 +78,7 @@ class InformationPage extends Component {
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaign_detail &&
-          isLoading && (
+          !isLoading && (
             <div className="information-wrapper ht100">
               <div className="info-inner-wrapper col-xs-12 no-padding">
                 <div className="info-main-title paddindLeft0">
@@ -272,7 +272,7 @@ class InformationPage extends Component {
               </div>
             </div>
           )}
-        {!isLoading && (
+        {isLoading && (
           <div className="info-inner-wrapper col-xs-12 no-padding">
             <div className="info-main-title paddindLeft0 gray_box" />
             <div className="text gray_box" />
