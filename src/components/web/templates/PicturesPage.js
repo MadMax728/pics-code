@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { CampaignLoading } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
-import { image } from "../../../lib/constants/images";
 import * as images from "../../../lib/constants/images";
 
 class PicturesRoot extends React.Component {
