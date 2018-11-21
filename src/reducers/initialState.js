@@ -36,12 +36,17 @@ const initialState = {
     user: null,
     isLoading: false,
     error: false,
-    imageData: null,
-    items: null
+    imageData: null
   },
   campaignData: {
     campaigns: null,
     campaign: [],
+    isLoading: false,
+    error: false
+  },
+  adData: {
+    ads: null,
+    ad: [],
     isLoading: false,
     error: false
   },
@@ -52,6 +57,21 @@ const initialState = {
   },
   dashboardData: {
     dashboard: null,
+    isLoading: false,
+    error: false
+  },
+  aboutData: {
+    about: null,
+    isLoading: false,
+    error: false
+  },
+  newsFeedData: {
+    newsFeed: null,
+    isLoading: false,
+    error: false
+  },
+  savedData: {
+    saved: null,
     isLoading: false,
     error: false
   }

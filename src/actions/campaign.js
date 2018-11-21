@@ -85,16 +85,16 @@ export const getCampaigns = (prop, provider) => {
 
 // Campaign Details
 const getCampaignDetailsStarted = () => ({
-  type: types.GET_CAMPAIGNS_DETAILS_STARTED
+  type: types.GET_CAMPAIGN_DETAILS_STARTED
 });
 
 const getCampaignDetailsSucceeded = data => ({
-  type: types.GET_CAMPAIGNS_DETAILS_SUCCEEDED,
+  type: types.GET_CAMPAIGN_DETAILS_SUCCEEDED,
   payload: data
 });
 
 const getCampaignDetailsFailed = error => ({
-  type: types.GET_CAMPAIGNS_DETAILS_FAILED,
+  type: types.GET_CAMPAIGN_DETAILS_FAILED,
   payload: error,
   error: true
 });

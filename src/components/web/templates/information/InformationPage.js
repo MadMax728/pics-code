@@ -75,13 +75,12 @@ class InformationPage extends Component {
 
   render() {
     const { campaign_detail, isLoading } = this.props;
-    console.log(campaign_detail);
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaign_detail &&
           !isLoading && (
             <div className="information-wrapper ht100">
-              <div className="info-inner-wrapper">
+              <div className="info-inner-wrapper col-xs-12 no-padding">
                 <div className="info-main-title paddindLeft0">
                   {campaign_detail.title}
                 </div>
@@ -135,8 +134,8 @@ class InformationPage extends Component {
                       )}
                     </div>
                   </div>
-                  <div className="feed_content">
-                    <div className="feed_description">
+                  <div className="feed_content col-xs-12">
+                    <div className="feed_description col-xs-12">
                       <div className="col-sm-6 no-padding">
                         <div className="info_wrapper">
                           <span className="normal_title">Start: </span>
@@ -207,7 +206,7 @@ class InformationPage extends Component {
                       </div>
                     </div>
                   </div>
-                  <div className="feed_footer margin-t-15 margin-b-15">
+                  <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
                     <div className="messages">
                       <span className="count">{campaign_detail.msg_count}</span>
                       <img
@@ -273,7 +272,44 @@ class InformationPage extends Component {
               </div>
             </div>
           )}
-        {isLoading && <InlineLoading />}
+        {isLoading && (
+          <div className="info-inner-wrapper col-xs-12 no-padding">
+            <div className="info-main-title paddindLeft0 gray_box" />
+            <div className="text gray_box" />
+            <img
+              src={images.placeholder_pic}
+              alt="information"
+              className="gray_img"
+            />
+            <div className="text gray_box" />
+            {/* <button class="filled_button">Apply for this campaign</button> */}
+            <div className="feed_wrapper">
+              <div className="feed_header feed_header_gray_box">
+                <div className="col-sm-1 col-xs-1 no-padding profile_image">
+                  <img
+                    src={images.placeholder_pic}
+                    alt="circle-img-1"
+                    className="img-circle img-responsive"
+                  />
+                </div>
+                <div className="col-sm-9 col-xs-7 no-padding">
+                  <div className="normal_title gray_box" />
+                  <div className="secondary_title gray_box" />
+                  <div className="grey_title gray_box" />
+                </div>
+                <div className="col-sm-2 col-xs-2 like_wrapper">
+                  <img
+                    src="/global/picstagraph-web/images/feed_like.svg"
+                    alt="like"
+                    className="pull-right"
+                    role="presentation"
+                    id="1"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

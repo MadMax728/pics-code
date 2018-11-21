@@ -1,5 +1,9 @@
 export { Button } from "./button";
-export { InlineLoading, CampaignLoading } from "./loading-indicator";
+export {
+  InlineLoading,
+  CampaignLoading,
+  UserPicLoading
+} from "./loading-indicator";
 export { LeftSidebarNav } from "./nav-menu";
 export { TopBar } from "./top-bar";
 export { LeftSidebarFilter } from "./sidebar-filter";

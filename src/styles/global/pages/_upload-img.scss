@@ -54,6 +54,17 @@
           margin-right: 10px;
         }
       }
+      div.description {
+        border: 1px solid #979797;
+        height: auto;
+        margin-top: 10px;
+        min-height: 100px;
+        overflow: auto;
+        padding: 5px;
+        width: 100%;
+        word-break: break-word;
+        max-height: 100px;
+      }
       .user-title {
         padding-top: 4px;
         padding-bottom: 30px;

@@ -28,6 +28,11 @@ class TopBarOwnerInfo extends Component {
     this.props.handleModalShow(modalType.payment);
   };
 
+  handeleShare = () => {
+    // console.log("handle share");
+    this.props.handleModalInfoShow(modalType.share);
+  };
+
   componentWillMount() {
     const items = {
       username: "User name",
@@ -65,12 +70,13 @@ class TopBarOwnerInfo extends Component {
   }
 
   render() {
-    return <TopBar items={this.state.items} />;
+    return <TopBar items={this.state.items} handeleShare={this.handeleShare} />;
   }
 }
 
 TopBarOwnerInfo.propTypes = {
-  handleModalShow: propTypes.func
+  handleModalShow: propTypes.func,
+  handleModalInfoShow: propTypes.func
 };
 
 export default TopBarOwnerInfo;
