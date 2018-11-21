@@ -88,7 +88,7 @@ class Upload extends Component {
               </label>
               <div
                 className="description"
-                contenteditable=""
+                contentEditable=""
                 onInput={this.handleChange}
               />
               <HashTagUsername
