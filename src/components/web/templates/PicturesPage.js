@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { CampaignLoading } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
+import { image } from "../../../lib/constants/images";
+import * as images from "../../../lib/constants/images";
 
 class PicturesRoot extends React.Component {
   componentDidMount = () => {
@@ -29,7 +31,28 @@ class PicturesRoot extends React.Component {
     return (
       <div className="padding-rl-10 middle-section">
         {picsList && !isLoading && this.renderuserList()}
-        {isLoading && <CampaignLoading />}
+        {isLoading && (
+          <div className="col-xs-12 no-padding">
+            <div className="col-sm-6 pic-block-wrapr pic-left-block padding-lr-5">
+              <div class="pic-block gray_content">
+                <img src={images.placeholder_pic} alt="profile_pic" />
+                <div class="name-wrapper gray_box">
+                  <div class="username" />
+                  <div class="name" />
+                </div>
+              </div>
+            </div>
+            <div className="col-sm-6 pic-block-wrapr pic-right-block padding-lr-5">
+              <div class="pic-block gray_content">
+                <img src={images.placeholder_pic} alt="profile_pic" />
+                <div class="name-wrapper gray_box">
+                  <div class="username" />
+                  <div class="name" />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }
