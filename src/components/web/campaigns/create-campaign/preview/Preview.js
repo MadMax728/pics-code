@@ -15,7 +15,7 @@ class Preview extends Component {
       <div className="col-xs-12 no-padding">
         <div className="padding-l-10 middle-section width-100">
           <div className="info-main-title">{form.title && form.title}</div>
-          <div className="information-wrapper">
+          <div className="information-wrapper overflow-y">
             <div className="info-inner-wrapper">
               {/* <div className="text">
                 This text is an example.This text is an example.This text is an
