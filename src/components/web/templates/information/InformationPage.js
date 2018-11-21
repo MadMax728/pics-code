@@ -79,7 +79,7 @@ class InformationPage extends Component {
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaign_detail &&
-          !isLoading && (
+          isLoading && (
             <div className="information-wrapper ht100">
               <div className="info-inner-wrapper col-xs-12 no-padding">
                 <div className="info-main-title paddindLeft0">
@@ -273,7 +273,44 @@ class InformationPage extends Component {
               </div>
             </div>
           )}
-        {isLoading && <InlineLoading />}
+        {!isLoading && (
+          <div class="info-inner-wrapper col-xs-12 no-padding">
+            <div class="info-main-title paddindLeft0 gray_box" />
+            <div class="text gray_box" />
+            <img
+              src={images.placeholder_pic}
+              alt="information"
+              class="gray_img"
+            />
+            <div class="text gray_box" />
+            {/* <button class="filled_button">Apply for this campaign</button> */}
+            <div class="feed_wrapper">
+              <div class="feed_header feed_header_gray_box">
+                <div class="col-sm-1 col-xs-1 no-padding profile_image">
+                  <img
+                    src={images.placeholder_pic}
+                    alt="circle-img-1"
+                    class="img-circle img-responsive"
+                  />
+                </div>
+                <div class="col-sm-9 col-xs-7 no-padding">
+                  <div class="normal_title gray_box" />
+                  <div class="secondary_title gray_box" />
+                  <div class="grey_title gray_box" />
+                </div>
+                <div class="col-sm-2 col-xs-2 like_wrapper">
+                  <img
+                    src="/global/picstagraph-web/images/feed_like.svg"
+                    alt="like"
+                    class="pull-right"
+                    role="presentation"
+                    id="1"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     );
   }

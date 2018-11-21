@@ -5,6 +5,19 @@
   &.paddindLeft0 {
     padding: 30px 30px 0 0px;
   }
+  &.gray_box {
+    background: #d3d3d3;
+  }
+  & ~ .text {
+    &.gray_box {
+      background: #d3d3d3;
+      min-height: 30px;
+      margin: 10px 0;
+    }
+  }
+  & ~ img.gray_img {
+    width: 100%;
+  }
 }
 .information-wrapper {
   background: $white_color;
@@ -23,6 +36,26 @@
     margin-bottom: 24px;
     .like_wrapper {
       padding: 0px;
+    }
+    &.feed_header_gray_box {
+      .gray_box {
+        min-height: 20px;
+        background-color: #d3d3d3;
+      }
+      .normal_title.gray_box {
+      }
+      .secondary_title.gray_box {
+      }
+      .grey_title.gray_box {
+        min-height: 20px;
+        background-color: #d3d3d3;
+      }
+    }
+  }
+  .feed_content.feed_content_gray_box {
+    .feed_description {
+      .info_wrapper {
+      }
     }
   }
   textarea.form-control {
