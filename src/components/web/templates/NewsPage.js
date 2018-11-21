@@ -55,7 +55,6 @@ class NewsRoot extends Component {
 }
 
 NewsRoot.propTypes = {
-  match: PropTypes.any.isRequired,
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   newsFeedList: PropTypes.any,

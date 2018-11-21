@@ -40,4 +40,4 @@ export const getCampaignType = (payload, type) =>
 
 // Campaign Informatin API
 export const getCampaignDetails = (payload, provider) =>
-  api.get("/campaigns/" + provider + "/information", payload);
+  api.get("/campaigns/" + provider, payload);

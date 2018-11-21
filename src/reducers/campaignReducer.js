@@ -24,19 +24,19 @@ const campaignReducer = (state = initialState.campaignData, action) => {
       };
 
     // Campaign Details
-    case types.GET_CAMPAIGNS_DETAILS_STARTED:
+    case types.GET_CAMPAIGN_DETAILS_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_CAMPAIGNS_DETAILS_SUCCEEDED:
+    case types.GET_CAMPAIGN_DETAILS_SUCCEEDED:
       return {
         ...state,
         campaign: action.payload,
         isLoading: false
       };
-    case types.GET_CAMPAIGNS_DETAILS_FAILED:
+    case types.GET_CAMPAIGN_DETAILS_FAILED:
       return {
         ...state,
         isLoading: false,
