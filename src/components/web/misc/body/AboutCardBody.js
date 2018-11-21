@@ -1,61 +1,66 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import * as images from "../../../../lib/constants/images";
-import { aboutInfo } from "../../../../mock-data";
+import propTypes from "prop-types";
 import { SocialNetworks } from "../../templates/settings/edit-profile";
+import { Link } from "react-router-dom";
+import { Translations } from "../../../../lib/translations";
+import { aboutInfo } from "../../../../mock-data";
 
-const About = () => {
+const AboutCardBody = ({ about }) => {
   return (
-    <div className="middle-section padding-rl-10">
+    <div>
       <div className="about-wrapper">
         <div className="general-info">
-          <div className="section-title">General information </div>
+          <div className="section-title">
+            {Translations.about.general_information}
+          </div>
           <ul>
             <li>
-              <span>User name</span>
+              <span>{Translations.about.username}</span>
               <span>{aboutInfo.general_information.username}</span>
             </li>
             <li>
-              <span>Name / Company</span>
+              <span>{Translations.about.name_company}</span>
               <span>{aboutInfo.general_information.name}</span>
             </li>
             <li>
-              <span>Date of Birth</span>
+              <span>{Translations.about.date_of_birth}</span>
               <span>{aboutInfo.general_information.dob}</span>
             </li>
             <li>
-              <span>Gender</span>
+              <span>{Translations.about.gender}</span>
               <span>{aboutInfo.general_information.gender}</span>
             </li>
             <li>
-              <span>Category</span>
+              <span>{Translations.about.category}</span>
               <span>{aboutInfo.general_information.category}</span>
             </li>
             <li>
-              <span>Location</span>
+              <span>{Translations.about.location}</span>
               <span>{aboutInfo.general_information.location}</span>
             </li>
             <li>
-              <span>Phone number</span>
+              <span>{Translations.about.phone_number}</span>
               <span>{aboutInfo.general_information.phone_number}</span>
             </li>
             <li>
-              <span>Email</span>
+              <span>{Translations.about.email}</span>
               <span>{aboutInfo.general_information.email}</span>
             </li>
             <li>
-              <span>Web site</span>
+              <span>{Translations.about.web_site}</span>
               <span>{aboutInfo.general_information.web_site}</span>
             </li>
             <li>
-              <span>Profile description</span>
+              <span>{Translations.about.profile_description}</span>
               <span>{aboutInfo.general_information.profile_description}</span>
             </li>
           </ul>
         </div>
         <div className="personal-interest">
-          <div className="section-title">Personal Interest</div>
-          <div className="section-subtitle">Offer tag</div>
+          <div className="section-title">
+            {Translations.about.personal_interest}
+          </div>
+          <div className="section-subtitle">{Translations.about.offer_tag}</div>
           <div className="tags-wrapper">
             {aboutInfo.personal_interest.offer_tag.map((offer, index) => {
               return (
@@ -67,7 +72,9 @@ const About = () => {
           </div>
         </div>
         <div className="inquiry-tag">
-          <div className="section-subtitle">Inquiry tag</div>
+          <div className="section-subtitle">
+            {Translations.about.inquiry_tag}
+          </div>
           <div className="tags-wrapper">
             {aboutInfo.personal_interest.inquiry_tag.map((inquiry, index) => {
               return (
@@ -86,4 +93,8 @@ const About = () => {
   );
 };
 
-export default About;
+AboutCardBody.propTypes = {
+  about: propTypes.object.isRequired
+};
+
+export default AboutCardBody;

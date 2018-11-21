@@ -6,7 +6,7 @@ import { CampaignLoading } from "../../ui-kit";
 import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
-class NewsFeedsRoot extends Component {
+class NewsRoot extends Component {
   componentDidMount = () => {
     this.props.getDashboard("getNews");
   };
@@ -54,9 +54,8 @@ class NewsFeedsRoot extends Component {
   }
 }
 
-NewsFeedsRoot.propTypes = {
-  handleModalInfoShow: PropTypes.func.isRequired,
-  handleModalShow: PropTypes.func,
+NewsRoot.propTypes = {
+  match: PropTypes.any.isRequired,
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   newsFeedList: PropTypes.any,
@@ -76,4 +75,4 @@ const mapDispatchToProps = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(NewsFeedsRoot);
+)(NewsRoot);

@@ -36,7 +36,8 @@ const initialState = {
     user: null,
     isLoading: false,
     error: false,
-    imageData: null
+    imageData: null,
+    items: null
   },
   campaignData: {
     campaigns: null,

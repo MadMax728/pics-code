@@ -21,6 +21,23 @@
 
   "favourite_campaigns": "Favourite Campaigns",
 
+  "about": {
+    "general_information": "General informations",
+    "username": "User name",
+    "name_company": "Name / Company",
+    "date_of_birth": "Date of Birth",
+    "gender": "Gender",
+    "category": "Category",
+    "location": "Location",
+    "phone_number": "Phone number",
+    "email": "Email",
+    "web_site": "Web site",
+    "profile_description": "Profile description",
+    "personal_interest": "Personal Interest",
+    "offer_tag": "Offer tag",
+    "inquiry_tag": "Inquiry tag"
+  },
+
   "upload_modal": {
     "title_of_upload": "Title of Upload",
     "add_location": "Add Location",
