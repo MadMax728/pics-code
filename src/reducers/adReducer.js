@@ -1,42 +1,42 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const campaignReducer = (state = initialState.campaignData, action) => {
+const adReducer = (state = initialState.adData, action) => {
   switch (action.type) {
-    // Get Campaigns
-    case types.GET_CAMPAIGNS_STARTED:
+    // Get Ads
+    case types.GET_ADS_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_CAMPAIGNS_SUCCEEDED:
+    case types.GET_ADS_SUCCEEDED:
       return {
         ...state,
-        campaigns: action.payload,
+        ads: action.payload,
         isLoading: false
       };
-    case types.GET_CAMPAIGNS_FAILED:
+    case types.GET_ADS_FAILED:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
 
-    // Campaign Details
-    case types.GET_CAMPAIGN_DETAILS_STARTED:
+    // Ad Details
+    case types.GET_AD_DETAILS_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_CAMPAIGN_DETAILS_SUCCEEDED:
+    case types.GET_AD_DETAILS_SUCCEEDED:
       return {
         ...state,
-        campaign: action.payload,
+        ad: action.payload,
         isLoading: false
       };
-    case types.GET_CAMPAIGN_DETAILS_FAILED:
+    case types.GET_AD_DETAILS_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -47,4 +47,4 @@ const campaignReducer = (state = initialState.campaignData, action) => {
   }
 };
 
-export default campaignReducer;
+export default adReducer;

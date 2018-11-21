@@ -44,6 +44,12 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  adData: {
+    ads: null,
+    ad: [],
+    isLoading: false,
+    error: false
+  },
   exploreData: {
     explores: null,
     isLoading: false,
