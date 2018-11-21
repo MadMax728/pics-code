@@ -274,35 +274,35 @@ class InformationPage extends Component {
             </div>
           )}
         {!isLoading && (
-          <div class="info-inner-wrapper col-xs-12 no-padding">
-            <div class="info-main-title paddindLeft0 gray_box" />
-            <div class="text gray_box" />
+          <div className="info-inner-wrapper col-xs-12 no-padding">
+            <div className="info-main-title paddindLeft0 gray_box" />
+            <div className="text gray_box" />
             <img
               src={images.placeholder_pic}
               alt="information"
-              class="gray_img"
+              className="gray_img"
             />
-            <div class="text gray_box" />
+            <div className="text gray_box" />
             {/* <button class="filled_button">Apply for this campaign</button> */}
-            <div class="feed_wrapper">
-              <div class="feed_header feed_header_gray_box">
-                <div class="col-sm-1 col-xs-1 no-padding profile_image">
+            <div className="feed_wrapper">
+              <div className="feed_header feed_header_gray_box">
+                <div className="col-sm-1 col-xs-1 no-padding profile_image">
                   <img
                     src={images.placeholder_pic}
                     alt="circle-img-1"
-                    class="img-circle img-responsive"
+                    className="img-circle img-responsive"
                   />
                 </div>
-                <div class="col-sm-9 col-xs-7 no-padding">
-                  <div class="normal_title gray_box" />
-                  <div class="secondary_title gray_box" />
-                  <div class="grey_title gray_box" />
+                <div className="col-sm-9 col-xs-7 no-padding">
+                  <div className="normal_title gray_box" />
+                  <div className="secondary_title gray_box" />
+                  <div className="grey_title gray_box" />
                 </div>
-                <div class="col-sm-2 col-xs-2 like_wrapper">
+                <div className="col-sm-2 col-xs-2 like_wrapper">
                   <img
                     src="/global/picstagraph-web/images/feed_like.svg"
                     alt="like"
-                    class="pull-right"
+                    className="pull-right"
                     role="presentation"
                     id="1"
                   />
