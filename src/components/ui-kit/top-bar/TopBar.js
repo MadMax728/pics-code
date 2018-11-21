@@ -29,6 +29,9 @@ const TopBar = ({ items }) => {
             {items.settings && (
               <div className="settings">
                 <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+                  <img src={images.share} alt="share" />
+                </Link>
+                <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
                   <img src={images.settings} alt="settings" />
                 </Link>
               </div>

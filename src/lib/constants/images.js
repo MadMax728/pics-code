@@ -30,6 +30,10 @@ export const feed_like = `${
 
 export const settings = `${process.env.REACT_APP_CDN_URL}/images/settings.svg`;
 
+export const share = `${process.env.REACT_APP_CDN_URL}/images/share_icon.png`;
+
+export const check = `${process.env.REACT_APP_CDN_URL}/images/check.svg`;
+
 export const profile_pic = `${
   process.env.REACT_APP_CDN_URL
 }/images/profile_pic.jpg`;

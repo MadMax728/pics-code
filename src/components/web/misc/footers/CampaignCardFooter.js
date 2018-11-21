@@ -1,5 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
+import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 import { ThreeDots } from "../../../ui-kit";
@@ -41,6 +42,10 @@ const CampaignCardFooter = ({
         />
       </div>
       <div className="show_more_options">
+        <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+          <img src={images.share} alt="share" />
+        </Link>
+        <div className="social-media-wrapr" />
         <ThreeDots
           id="report"
           role="button"
