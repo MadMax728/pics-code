@@ -6,7 +6,9 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 
-const TopBar = ({ items }) => {
+const handleKeyDown = () => {};
+
+const TopBar = ({ items, handeleShare }) => {
   return (
     <div>
       <div className="user_info">
@@ -28,9 +30,16 @@ const TopBar = ({ items }) => {
 
             {items.settings && (
               <div className="settings">
-                <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+                <div
+                  className="share-wrapr"
+                  onClick={handeleShare}
+                  onKeyDown={handleKeyDown}
+                  role="button"
+                  tabIndex="0"
+                >
+                  {" "}
                   <img src={images.share} alt="share" />
-                </Link>
+                </div>
                 <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
                   <img src={images.settings} alt="settings" />
                 </Link>
@@ -65,6 +74,7 @@ const TopBar = ({ items }) => {
 };
 
 TopBar.propTypes = {
+  handeleShare: PropTypes.func.isRequired,
   items: PropTypes.shape({
     name: PropTypes.string,
     private: PropTypes.bool,

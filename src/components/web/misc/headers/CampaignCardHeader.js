@@ -20,7 +20,6 @@ const CampaignCardHeader = ({
   const favorite_icon = campaign.isFavorite
     ? images.blue_heart
     : images.feed_like;
-  console.log(campaign);
   return (
     <div className="feed_header">
       <div className="no-padding profile_image">

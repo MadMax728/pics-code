@@ -5,7 +5,8 @@ import {
   ContentViewModal,
   PaymentConfirmationModal,
   ProcessedModal,
-  EditProfileModal
+  EditProfileModal,
+  ShareModal
 } from "../../web/modals";
 import propTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -57,6 +58,15 @@ class InfoModal extends Component {
     );
   };
 
+  handleModalShare = () => {
+    return (
+      <ShareModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+      />
+    );
+  };
+
   handleModalRender = () => {
     return (
       <div>
@@ -68,6 +78,8 @@ class InfoModal extends Component {
           this.handleModalProcessed()}
         {this.props.modalInfoType === modalType.edit_profile &&
           this.handleModalEditProfile()}
+        {this.props.modalInfoType === modalType.share &&
+          this.handleModalShare()}
       </div>
     );
   };

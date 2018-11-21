@@ -17,8 +17,8 @@ class AboutPage extends Component {
 
   renderAbout = () => {
     const { aboutDetails } = this.props;
-    return aboutDetails.map(about => {
-      return <AboutCard about={about} />;
+    return aboutDetails.map((about, index) => {
+      return <AboutCard about={about} key={index} />;
     });
   };
 

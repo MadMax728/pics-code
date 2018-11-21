@@ -30,6 +30,13 @@
   .settings {
     display: inline-block;
     float: right;
+
+    .share-wrapr {
+      img {
+        width: 20px;
+        margin-left: 10px;
+      }
+    }
     img {
       width: 20px;
     }

@@ -6,7 +6,12 @@ import propTypes from "prop-types";
 
 class TopBarInfo extends Component {
   TopBarOwnerInfo = () => {
-    return <TopBarOwnerInfo handleModalShow={this.props.handleModalShow} />;
+    return (
+      <TopBarOwnerInfo
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   TopBarOtherInfo = () => {
@@ -60,7 +65,8 @@ class TopBarInfo extends Component {
 }
 
 TopBarInfo.propTypes = {
-  handleModalShow: propTypes.func
+  handleModalShow: propTypes.func,
+  handleModalInfoShow: propTypes.func
 };
 
 export default TopBarInfo;
