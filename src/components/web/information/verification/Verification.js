@@ -69,14 +69,14 @@ class Verification extends Component {
                 </div>
                 <div className="row">
                   <div className="col-sm-12">
-                    <div className="form-group capcha-wrapper">
+                    <div className="form-group capcha-wrapper col-sm-6">
                       <img
                         src={images.capcha}
                         alt={"capcha"}
                         className="capcha-img"
                       />
                     </div>
-                    <div className="form-group button_wrapper">
+                    <div className="form-group button_wrapper col-sm-6">
                       <button className="black_button wid120">Send</button>
                     </div>
                   </div>
