@@ -6,13 +6,17 @@ import CampaignCardFooter from "./footers/CampaignCardFooter";
 import { Translations } from "../../../lib/translations";
 import { RenderToolTips } from "../../common";
 import CommentCard from "./CommentCard";
+import { like } from "../../../actions/like";
+import { getComments } from "../../../actions/comments";
+import connect from "react-redux/es/connect/connect";
 
 class CampaignCard extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       isComments: false,
-      item: this.props.item
+      item: this.props.item,
+      comments: ""
     };
   }
 
@@ -42,15 +46,28 @@ class CampaignCard extends Component {
 
   handleFavorite = e => {
     const item = this.state.item;
-    item.isFavorite = !this.state.item.isFavorite;
-    item.like_count = item.isFavorite
-      ? item.like_count + 1
-      : item.like_count - 1;
+    item.isSelfLike = !this.state.item.isSelfLike;
+    item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
     this.setState({ item });
+
+    let campaignLike = {
+      typeOfContent: "campaign",
+      typeId: item.id
+    };
+    this.props.like(campaignLike);
   };
 
   handleCommentsSections = () => {
-    this.setState({ isComments: !this.state.isComments });
+    let CampaignId = {
+      typeId: this.state.item.id
+    };
+    this.props.getComments(CampaignId).then(() => {
+      console.log("comments", this.props.commentData);
+      this.setState({
+        isComments: !this.state.isComments,
+        comments: this.props.commentData.comments
+      });
+    });
   };
 
   render() {
@@ -78,30 +95,31 @@ class CampaignCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={item} />}
+        {isComments && <CommentCard item={this.state.comments} />}
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  likeData: state.likeData,
+  commentData: state.commentData
+});
+
+const mapDispatchToProps = {
+  like,
+  getComments
+};
+
 CampaignCard.propTypes = {
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,
-  item: PropTypes.shape({
-    user: PropTypes.shape({
-      name: PropTypes.string,
-      image: PropTypes.string,
-      isOwner: PropTypes.bool
-    }).isRequired,
-    title: PropTypes.string,
-    category: PropTypes.string,
-    image: PropTypes.string,
-    desc: PropTypes.string,
-    msg_count: PropTypes.number,
-    like_count: PropTypes.number,
-    id: PropTypes.number
-  }).isRequired
+  item: PropTypes.object.isRequired,
+  like: PropTypes.func.isRequired
 };
 
-export default CampaignCard;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CampaignCard);

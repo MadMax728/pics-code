@@ -15,12 +15,14 @@ class CampaignPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getCampaigns("getCampaignType", this.state.type);
+    const data = { userType: this.state.type };
+    this.props.getCampaigns("getCampaignType", data);
   };
 
   componentWillReceiveProps(nextProps) {
     if (this.state.type !== nextProps.type) {
-      this.props.getCampaigns("getCampaignType", nextProps.type);
+      const data = { userType: nextProps.type };
+      this.props.getCampaigns("getCampaignType", data);
       this.setState({ type: nextProps.type });
     }
   }
@@ -30,7 +32,9 @@ class CampaignPage extends Component {
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {campaign.type === enumerations.contentTypes.campaign && (
+          {(campaign.postType === enumerations.contentTypes.companyCampaign ||
+            campaign.postType ===
+              enumerations.contentTypes.creatorCampaign) && (
             <CampaignCard
               item={campaign}
               isDescription={false}

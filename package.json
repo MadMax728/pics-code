@@ -40,7 +40,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.4",
     "react-sidebar": "^3.0.2",
-    "react-tagsinput": "^3.19.0",
+    "react-tag-input": "^6.1.0",
     "react-text-mask": "^5.4.1",
     "react-tooltip": "^3.9.0",
     "read-more-react": "^1.0.6",

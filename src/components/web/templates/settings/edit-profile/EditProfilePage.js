@@ -8,6 +8,7 @@ import {
   NumberInput,
   RadioButton
 } from "../../../../ui-kit/CommonUIComponents";
+import { Tags } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { getUser, updateUserProfile } from "../../../../../actions/profile";
@@ -15,8 +16,6 @@ import connect from "react-redux/es/connect/connect";
 import jwtDecode from "jwt-decode";
 import { Auth } from "../../../../../auth";
 import * as routes from "../../../../../lib/constants/routes";
-import TagsInput from "react-tagsinput";
-import "react-tagsinput/react-tagsinput.css"; // If using WebPack and style-loader.
 
 // const storage = Auth.extractJwtFromStorage();
 // let userInfo = jwtDecode(storage.accessToken);
@@ -442,7 +441,8 @@ class EditProfile extends Component {
                 <label htmlFor="offer-tag">
                   {Translations.editProfile.offer_tag}
                 </label>
-                <TagsInput
+
+                <Tags
                   value={this.state.form.offer_tag}
                   onChange={this.handleOfferTagChange}
                 />
@@ -452,7 +452,7 @@ class EditProfile extends Component {
                 <label htmlFor="inquiry-tag">
                   {Translations.editProfile.inquiry_tag}
                 </label>
-                <TagsInput
+                <Tags
                   value={this.state.form.inquiry_tag}
                   onChange={this.handleInquiryTagChange}
                 />

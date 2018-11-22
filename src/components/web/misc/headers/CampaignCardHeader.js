@@ -14,18 +14,20 @@ const CampaignCardHeader = ({
   const like_wrapper = classnames("like_wrapper", {
     "col-sm-2 col-xs-2 like_wrapper": isDescription && isInformation
   });
-  const profile_route = campaign.user.isOwner
+
+  const profile_route = campaign.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}${campaign.id}`;
-  const favorite_icon = campaign.isFavorite
+    : `${routes.NEWS_FEED_ROUTE}/${campaign.createdBy}`;
+  const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
     : images.feed_like;
+
   return (
     <div className="feed_header">
       <div className="no-padding profile_image">
         <Link to={profile_route}>
           <img
-            src={campaign.user.image}
+            src={campaign.profileImage}
             alt="feed"
             className="img-circle img-responsive"
           />
@@ -33,9 +35,9 @@ const CampaignCardHeader = ({
       </div>
       <div className="no-padding titles_wrapper">
         <Link to={profile_route}>
-          <div className="normal_title">{campaign.user.name}</div>
+          <div className="normal_title">{campaign.userName}</div>
         </Link>
-        <div className="secondary_title">{campaign.location}</div>
+        <div className="secondary_title">{"location"}</div>
         {campaign.category && (
           <div className="grey_title">{campaign.category}</div>
         )}
