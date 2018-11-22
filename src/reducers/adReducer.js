@@ -1,39 +1,42 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const loginReducer = (state = initialState.loginData, action) => {
+const adReducer = (state = initialState.adData, action) => {
   switch (action.type) {
-    case types.SUBMIT_LOGIN_STARTED:
+    // Get Ads
+    case types.GET_ADS_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.SUBMIT_LOGIN_SUCCEEDED:
+    case types.GET_ADS_SUCCEEDED:
       return {
         ...state,
-        user: action.payload,
+        ads: action.payload,
         isLoading: false
       };
-    case types.SUBMIT_LOGIN_FAILED:
+    case types.GET_ADS_FAILED:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
-    case types.GENERATE_OTP_STARTED:
+
+    // Ad Details
+    case types.GET_AD_DETAILS_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GENERATE_OTP_SUCCEEDED:
+    case types.GET_AD_DETAILS_SUCCEEDED:
       return {
         ...state,
-        user: action.payload,
+        ad: action.payload,
         isLoading: false
       };
-    case types.GENERATE_OTP_FAILED:
+    case types.GET_AD_DETAILS_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -44,4 +47,4 @@ const loginReducer = (state = initialState.loginData, action) => {
   }
 };
 
-export default loginReducer;
+export default adReducer;

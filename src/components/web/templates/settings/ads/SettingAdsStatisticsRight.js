@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import propTypes from "prop-types";
-
+import { Link } from "react-router-dom";
+import * as routes from "../../../../../lib/constants/routes";
 class SettingAdsStatisticsRight extends Component {
   handleOnChange = () => {};
 
@@ -10,7 +11,9 @@ class SettingAdsStatisticsRight extends Component {
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
           <button className="blue_button">Edit ad</button>
-          <button className="black_button">Close ad </button>
+          <Link to={routes.SETTINGS_ADS_ROUTE}>
+            <button className="black_button">Close ad </button>
+          </Link>
           <div className="normal_title padding-15">Budget & Runtime</div>
           <ul className="campaign-right-options">
             <li>

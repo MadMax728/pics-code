@@ -14,7 +14,7 @@ class AdminLogin extends Component {
     super(props);
 
     this.state = {
-      password: ""
+      otp: ""
     };
   }
 
@@ -28,16 +28,16 @@ class AdminLogin extends Component {
    */
   getUserEnterPassword = e => {
     e.preventDefault();
-    this.setState({ password: e.target.value });
+    this.setState({ otp: e.target.value });
   };
 
   /**
    * formValid
    */
   formValid = () => {
-    const { password } = this.state;
+    const { otp } = this.state;
 
-    if (password.length === 0) {
+    if (otp.length === 0) {
       return false;
     }
 
@@ -52,10 +52,11 @@ class AdminLogin extends Component {
       return false;
     }
 
-    const { password } = this.state;
+    const { otp } = this.state;
 
-    this.props.submitAdminLogin({ password }).then(() => {
-      this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
+    this.props.submitAdminLogin({ otp }).then(() => {
+      if (this.props.loginData.user.success === true)
+        this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
     });
   };
 
@@ -74,13 +75,13 @@ class AdminLogin extends Component {
                   <input
                     type="password"
                     className="form-control"
-                    id="password"
-                    value={this.state.password}
+                    id="otp"
+                    value={this.state.otp}
                     onChange={this.getUserEnterPassword}
                     placeholder={Translations.placeholders.password}
                   />
 
-                  {this.state.password.length === 0 ? (
+                  {this.state.otp.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />

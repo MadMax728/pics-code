@@ -88,6 +88,7 @@ class Upload extends Component {
                 name="add_decription"
                 handleSetState={handleSetState}
                 value={form.add_decription}
+                isText={false}
               />
             </div>
             <div className="form-group no-margin">

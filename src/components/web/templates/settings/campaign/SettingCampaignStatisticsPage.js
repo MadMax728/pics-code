@@ -19,15 +19,15 @@ class SettingCampaignStatisticsPage extends Component {
   };
 
   render() {
-    const { campaign_detail, isLoading } = this.props;
+    const { campaign_details, isLoading } = this.props;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          {campaign_detail &&
+          {campaign_details &&
             !isLoading && (
               <div className="campaign-middle-section">
                 <div className="normal_title padding-15">
-                  {campaign_detail.title}
+                  {campaign_details.title}
                 </div>
                 <div className="campaign-block">
                   <div className="normal_title padding-15">Total budget</div>
@@ -44,11 +44,13 @@ class SettingCampaignStatisticsPage extends Component {
                   <div className="progressbar-wrapper">
                     <div className="progressbar">
                       <div
-                        style={{ width: `${campaign_detail.budget_spent_per}` }}
+                        style={{
+                          width: `${campaign_details.budget_spent_per}`
+                        }}
                       />
                     </div>
                     <span className="counter">
-                      {campaign_detail.budget_spent_per}
+                      {campaign_details.budget_spent_per}
                     </span>
                   </div>
                 </div>
@@ -66,9 +68,9 @@ class SettingCampaignStatisticsPage extends Component {
                   </div>
                   <div className="progressbar-wrapper">
                     <div className="progressbar">
-                      <div style={{ width: `${campaign_detail.view_per}` }} />
+                      <div style={{ width: `${campaign_details.view_per}` }} />
                     </div>
-                    <span className="counter">{campaign_detail.view_per}</span>
+                    <span className="counter">{campaign_details.view_per}</span>
                   </div>
                 </div>
                 <div className="campaign-block">
@@ -87,22 +89,22 @@ class SettingCampaignStatisticsPage extends Component {
                     <div className="progressbar">
                       <div
                         style={{
-                          width: `${campaign_detail.runtime_passed_per}`
+                          width: `${campaign_details.runtime_passed_per}`
                         }}
                       />
                     </div>
                     <span className="counter">
-                      {campaign_detail.runtime_passed_per}
+                      {campaign_details.runtime_passed_per}
                     </span>
                   </div>
                 </div>
               </div>
             )}
         </div>
-        {campaign_detail &&
+        {campaign_details &&
           !isLoading && (
             <SettingCampaignStatisticsRight
-              campaignStatistics={campaign_detail}
+              campaignStatistics={campaign_details}
             />
           )}
         {isLoading && <InlineLoading />}
@@ -114,13 +116,13 @@ class SettingCampaignStatisticsPage extends Component {
 SettingCampaignStatisticsPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
-  campaign_detail: PropTypes.any,
+  campaign_details: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  campaign_detail: state.campaignData.campaign[0],
+  campaign_details: state.campaignData.campaign[0],
   isLoading: state.campaignData.isLoading,
   error: state.campaignData.error
 });

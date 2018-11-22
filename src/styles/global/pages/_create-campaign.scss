@@ -159,7 +159,7 @@
       background-color: white;
       overflow: auto;
       @media (max-height: 650px) {
-        height: calc(100vh - 65px);
+        height: calc(100vh - 90px);
       }
       // height: -webkit-fill-available;
       &.height100 {

@@ -147,6 +147,7 @@ class CommentCard extends Component {
                     name="comment"
                     handleSetState={this.handleSetState}
                     value={form.comment}
+                    isText
                   />
                 </div>
               </div>

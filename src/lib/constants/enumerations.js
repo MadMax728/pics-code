@@ -30,7 +30,8 @@ export const modalType = {
   preview: "preview",
   content_view: "content_view",
   processed: "processed",
-  edit_profile: "edit_profile"
+  edit_profile: "edit_profile",
+  share: "share"
 };
 
 export const mediaTypes = {

@@ -42,9 +42,9 @@ const CampaignCardFooter = ({
         />
       </div>
       <div className="show_more_options">
-        <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+        <div className="share-wrapr">
           <img src={images.share} alt="share" />
-        </Link>
+        </div>
         <div className="social-media-wrapr" />
         <ThreeDots
           id="report"

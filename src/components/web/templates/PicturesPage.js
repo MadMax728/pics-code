@@ -1,7 +1,7 @@
 import React from "react";
 import PictureCard from "../../web/misc/PictureCard";
 import PropTypes from "prop-types";
-import { CampaignLoading } from "../../ui-kit";
+import { UserPicLoading } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 import * as images from "../../../lib/constants/images";
@@ -30,28 +30,7 @@ class PicturesRoot extends React.Component {
     return (
       <div className="padding-rl-10 middle-section">
         {picsList && !isLoading && this.renderuserList()}
-        {isLoading && (
-          <div className="col-xs-12 no-padding">
-            <div className="col-sm-6 pic-block-wrapr pic-left-block padding-lr-5">
-              <div className="pic-block gray_content">
-                <img src={images.placeholder_pic} alt="profile_pic" />
-                <div className="name-wrapper gray_box">
-                  <div className="username" />
-                  <div className="name" />
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-6 pic-block-wrapr pic-right-block padding-lr-5">
-              <div className="pic-block gray_content">
-                <img src={images.placeholder_pic} alt="profile_pic" />
-                <div className="name-wrapper gray_box">
-                  <div className="username" />
-                  <div className="name" />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {isLoading && <UserPicLoading />}
       </div>
     );
   }

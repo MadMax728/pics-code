@@ -12,7 +12,8 @@ const propTypes = {
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.any.isRequired,
-  handleSetState: PropTypes.func.isRequired
+  handleSetState: PropTypes.func.isRequired,
+  isText: PropTypes.bool.isRequired
 };
 
 class HashTagUsername extends Component {
@@ -87,18 +88,28 @@ class HashTagUsername extends Component {
   };
 
   render() {
-    const { value, placeholder, className, name } = this.props;
+    const { value, placeholder, className, name, isText } = this.props;
 
     return (
       <div>
-        <input
-          className={className}
-          type="text"
-          placeholder={placeholder}
-          name={name}
-          onChange={this.handleChangeField}
-          value={value}
-        />
+        {isText ? (
+          <input
+            className={className}
+            placeholder={placeholder}
+            type="text"
+            name={name}
+            onChange={this.handleChangeField}
+            value={value}
+          />
+        ) : (
+          <textarea
+            className={className}
+            placeholder={placeholder}
+            name={name}
+            onChange={this.handleChangeField}
+            value={value}
+          />
+        )}
         <div
           data-for="hash_tag"
           role="button"

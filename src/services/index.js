@@ -1,4 +1,5 @@
 export * from "./userService";
 export * from "./campaignService";
 export * from "./dashboardService";
-export * from "./profileService";
+export * from "./settingsService";
+export * from "./adService";

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getProfile } from "../../../actions";
+import { getSaved } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -9,37 +9,37 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class SavedPage extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
-      this.props.getProfile("getSavedOther", this.props.match.params.id);
+      this.props.getSaved("getSavedOther", this.props.match.params.id);
     } else {
-      this.props.getProfile("getSavedOwner");
+      this.props.getSaved("getSavedOwner");
     }
   };
   renderSavedList = () => {
     const { savedList } = this.props;
-    return savedList.map(newsFeed => {
+    return savedList.map(saved => {
       return (
-        <div key={newsFeed.id}>
-          {newsFeed.type === enumerations.contentTypes.campaign && (
+        <div key={saved.id}>
+          {saved.type === enumerations.contentTypes.campaign && (
             <CampaignCard
-              item={newsFeed}
+              item={saved}
               isDescription
               isInformation={false}
               isStatus={false}
             />
           )}
-          {newsFeed.type === enumerations.contentTypes.ad && (
+          {saved.type === enumerations.contentTypes.ad && (
             <AdCard
-              item={newsFeed}
+              item={saved}
               isDescription
               isInformation={false}
               isStatus={false}
             />
           )}
-          {newsFeed.type === enumerations.contentTypes.image && (
-            <ImageCard item={newsFeed} />
+          {saved.type === enumerations.contentTypes.image && (
+            <ImageCard item={saved} />
           )}
-          {newsFeed.type === enumerations.contentTypes.video && (
-            <VideoCard item={newsFeed} />
+          {saved.type === enumerations.contentTypes.video && (
+            <VideoCard item={saved} />
           )}
         </div>
       );
@@ -59,20 +59,20 @@ class SavedPage extends Component {
 
 SavedPage.propTypes = {
   match: PropTypes.any.isRequired,
-  getProfile: PropTypes.func.isRequired,
+  getSaved: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   savedList: PropTypes.any,
   error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  savedList: state.userDataByUsername.items,
-  isLoading: state.userDataByUsername.isLoading,
-  error: state.userDataByUsername.error
+  savedList: state.savedData.saved,
+  isLoading: state.savedData.isLoading,
+  error: state.savedData.error
 });
 
 const mapDispatchToProps = {
-  getProfile
+  getSaved
 };
 
 export default connect(
