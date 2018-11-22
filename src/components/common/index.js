@@ -30,3 +30,4 @@ export { Username } from "./username";
 export { HashTag } from "./hash-tag";
 export { HashTagUsername } from "./hash-tag-username";
 export { RenderToolTips } from "./render-tool-tips";
+export { Tags } from "./tags";
