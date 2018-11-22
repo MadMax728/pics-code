@@ -7,7 +7,7 @@ import { Translations } from "../../../lib/translations";
 class BaseHeader extends Component {
   render() {
     return (
-      <header className="col-xs-12 no-padding">
+      <header className="col-xs-12">
         <div className="custom-container wid100">
           <div className="login-logo">
             <Link to={routes.ROOT_ROUTE}>

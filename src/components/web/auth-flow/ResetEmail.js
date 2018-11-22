@@ -89,7 +89,7 @@ class ResetMail extends Component {
   render() {
     const { form } = this.state;
     return (
-      <div className="login-process">
+      <div className="login-process col-xs-12 no-padding">
         <BaseHeader />
         <section>
           <div className="custom-container">
