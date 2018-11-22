@@ -222,3 +222,17 @@
     }
   }
 }
+.cookie-wrapr {
+  position: fixed;
+  bottom: 68px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  .custom-container {
+    width: 100%;
+  }
+  .readmore {
+    margin: 0 10px;
+    text-decoration: underline;
+  }
+}
