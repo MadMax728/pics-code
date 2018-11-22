@@ -5,7 +5,7 @@ import * as routes from "../../../lib/constants/routes";
 
 const LoginLinkSend = () => {
   return (
-    <div className="login-process">
+    <div className="login-process col-xs-12 no-padding">
       <AdminHeader />
       <section>
         <div className="custom-container">
