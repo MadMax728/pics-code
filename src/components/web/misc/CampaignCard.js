@@ -78,7 +78,7 @@ class CampaignCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={item} />}
+        {/* {isComments && <CommentCard item={item} />} */}
       </div>
     );
   }
@@ -88,20 +88,7 @@ CampaignCard.propTypes = {
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,
-  item: PropTypes.shape({
-    user: PropTypes.shape({
-      name: PropTypes.string,
-      image: PropTypes.string,
-      isOwner: PropTypes.bool
-    }).isRequired,
-    title: PropTypes.string,
-    category: PropTypes.string,
-    image: PropTypes.string,
-    desc: PropTypes.string,
-    msg_count: PropTypes.number,
-    like_count: PropTypes.number,
-    id: PropTypes.number
-  }).isRequired
+  item: PropTypes.object.isRequired
 };
 
 export default CampaignCard;
