@@ -74,6 +74,11 @@ const initialState = {
     saved: null,
     isLoading: false,
     error: false
+  },
+  likeData: {
+    like: null,
+    isLoading: false,
+    error: false
   }
 };
 

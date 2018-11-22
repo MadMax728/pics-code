@@ -6,6 +6,9 @@ import CampaignCardFooter from "./footers/CampaignCardFooter";
 import { Translations } from "../../../lib/translations";
 import { RenderToolTips } from "../../common";
 import CommentCard from "./CommentCard";
+import { like } from "../../../actions/like";
+import { getUser, updateUserProfile } from "../../../actions";
+import connect from "react-redux/es/connect/connect";
 
 class CampaignCard extends Component {
   constructor(props, context) {
@@ -42,11 +45,15 @@ class CampaignCard extends Component {
 
   handleFavorite = e => {
     const item = this.state.item;
-    item.isFavorite = !this.state.item.isFavorite;
-    item.like_count = item.isFavorite
-      ? item.like_count + 1
-      : item.like_count - 1;
+    item.isSelfLike = !this.state.item.isSelfLike;
+    item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
     this.setState({ item });
+
+    let campaignLike = {
+      typeOfContent: "campaign",
+      typeId: item.id
+    };
+    this.props.like(campaignLike);
   };
 
   handleCommentsSections = () => {
@@ -78,17 +85,29 @@ class CampaignCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {/* {isComments && <CommentCard item={item} />} */}
+        {isComments && <CommentCard item={item} />}
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  likeData: state.likeData
+});
+
+const mapDispatchToProps = {
+  like
+};
+
 CampaignCard.propTypes = {
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,
-  item: PropTypes.object.isRequired
+  item: PropTypes.object.isRequired,
+  like: PropTypes.func.isRequired
 };
 
-export default CampaignCard;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CampaignCard);
