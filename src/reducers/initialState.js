@@ -79,6 +79,11 @@ const initialState = {
     like: null,
     isLoading: false,
     error: false
+  },
+  commentData: {
+    comments: null,
+    isLoading: false,
+    error: false
   }
 };
 

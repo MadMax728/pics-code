@@ -7,7 +7,7 @@ import { Translations } from "../../../lib/translations";
 import { RenderToolTips } from "../../common";
 import CommentCard from "./CommentCard";
 import { like } from "../../../actions/like";
-import { getUser, updateUserProfile } from "../../../actions";
+import { getComments } from "../../../actions/comments";
 import connect from "react-redux/es/connect/connect";
 
 class CampaignCard extends Component {
@@ -15,7 +15,8 @@ class CampaignCard extends Component {
     super(props, context);
     this.state = {
       isComments: false,
-      item: this.props.item
+      item: this.props.item,
+      comments: ""
     };
   }
 
@@ -57,7 +58,16 @@ class CampaignCard extends Component {
   };
 
   handleCommentsSections = () => {
-    this.setState({ isComments: !this.state.isComments });
+    let CampaignId = {
+      typeId: this.state.item.id
+    };
+    this.props.getComments(CampaignId).then(() => {
+      console.log("comments", this.props.commentData);
+      this.setState({
+        isComments: !this.state.isComments,
+        comments: this.props.commentData.comments
+      });
+    });
   };
 
   render() {
@@ -85,18 +95,20 @@ class CampaignCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={item} />}
+        {isComments && <CommentCard item={this.state.comments} />}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  likeData: state.likeData
+  likeData: state.likeData,
+  commentData: state.commentData
 });
 
 const mapDispatchToProps = {
-  like
+  like,
+  getComments
 };
 
 CampaignCard.propTypes = {
