@@ -9,7 +9,7 @@ const apiFactory = baseUrl => {
   return service;
 };
 
-export const apiAuth = (baseUrl, header = {}) => {
+export const api = (baseUrl, header = {}) => {
   const service = axios.create({
     baseURL: baseUrl,
     headers: buildHeader(header)

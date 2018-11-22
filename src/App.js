@@ -54,6 +54,9 @@ class App extends Component {
   };
 
   isUserAuthenticated = () => {
+    if (window.location.href.indexOf("back-office") === -1) {
+      localStorage.removeItem("admin_access_token");
+    }
     if (!Auth.isUserAuthenticated()) {
       return (
         <div>

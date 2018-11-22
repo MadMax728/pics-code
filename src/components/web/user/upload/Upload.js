@@ -36,10 +36,6 @@ class Upload extends Component {
     console.log(event.loaded);
   };
 
-  handleChange = () => {
-    console.log("fjdshfkj");
-  };
-
   render() {
     const { form, handleSetState, handleLocation } = this.props;
     const { isInProgress } = this.state;
@@ -86,17 +82,13 @@ class Upload extends Component {
               <label htmlFor="description">
                 {Translations.upload_modal.add_description}
               </label>
-              <div
-                className="description"
-                contentEditable=""
-                onInput={this.handleChange}
-              />
               <HashTagUsername
                 className="form-control"
                 type="text"
                 name="add_decription"
                 handleSetState={handleSetState}
                 value={form.add_decription}
+                isText={false}
               />
             </div>
             <div className="form-group no-margin">

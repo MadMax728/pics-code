@@ -21,6 +21,24 @@ const loginReducer = (state = initialState.loginData, action) => {
         isLoading: false,
         error: action.payload
       };
+    case types.GENERATE_OTP_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.GENERATE_OTP_SUCCEEDED:
+      return {
+        ...state,
+        user: action.payload,
+        isLoading: false
+      };
+    case types.GENERATE_OTP_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }
