@@ -12,22 +12,13 @@ import { Tags } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { getUser, updateUserProfile } from "../../../../../actions/profile";
-import {
-  getOfferTag,
-  getInquiryTag,
-  addInquiryTag,
-  addOfferTag
-} from "../../../../../actions/tags";
 import connect from "react-redux/es/connect/connect";
 import jwtDecode from "jwt-decode";
 import { Auth } from "../../../../../auth";
 import * as routes from "../../../../../lib/constants/routes";
 
-const storage = Auth.extractJwtFromStorage();
-let userInfo;
-if (storage !== null) {
-  userInfo = jwtDecode(storage.accessToken);
-}
+// const storage = Auth.extractJwtFromStorage();
+// let userInfo = jwtDecode(storage.accessToken);
 const genderItems = [
   {
     name: "Male",
@@ -77,45 +68,25 @@ class EditProfile extends Component {
         inquiry_tag: []
       },
       error: {},
-      tags: [],
-      offerTagSuggestions: [],
-      inquiryTagSuggestions: []
+      tags: []
     };
   }
 
   componentWillMount() {
-    this.props.getOfferTag().then(() => {
-      this.setState({
-        offerTagSuggestions: this.props.tags.offerTags
-      });
-    });
-
-    this.props.getInquiryTag().then(() => {
-      this.setState({
-        inquiryTagSuggestions: this.props.tags.inquiryTags
-      });
-    });
-
-    let data = {
-      username: userInfo.username
-    };
-    this.props.getUser(data).then(() => {
-      this.setDataOnLoad();
-    });
+    // let data = {
+    //   username: userInfo.username
+    // };
+    // this.props.getUser(data).then(() => {
+    //   this.setDataOnLoad();
+    // });
   }
 
   handleOfferTagChange = tags => {
-    // let newTag = tags.map((t)=>{
-    //    return t.id;
-    //  })
     const { form } = this.state;
     form.offer_tag = tags;
     this.setState({ form });
   };
   handleInquiryTagChange = tags => {
-    // let newTag = tags.map((t)=>{
-    //   return t.id;
-    // })
     const { form } = this.state;
     form.inquiry_tag = tags;
     this.setState({ form });
@@ -217,25 +188,6 @@ class EditProfile extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    //-------- Code for add Tag -------//
-    // let offerTag = this.state.form.offer_tag;
-    // let inquiryTag = this.state.form.inquiry_tag;
-    // let existingOfferTags = this.props.tags.offerTags;
-    // let existingInquiryTags = this.props.tags.inquiryTags;
-    //
-    // let newOfferTag = offerTag.filter((obj)=> { return existingOfferTags.indexOf(obj) === -1; });
-    // let newInquiryTag = inquiryTag.filter((obj)=> { return existingInquiryTags.indexOf(obj) === -1; });
-    //
-    // if(newOfferTag !== null){
-    //   this.props.addOfferTag(newOfferTag).then(()=>{
-    //     console.log("add",this.props.tags);
-    //   })
-    // }
-    // if(newInquiryTag !== null){
-    //   this.props.addOfferTag(newInquiryTag).then(()=>{
-    //     console.log("add",this.props.tags);
-    //   })
-    // }
     const data = {
       name: this.state.form.name_company,
       gender: this.state.form.gender,
@@ -256,7 +208,7 @@ class EditProfile extends Component {
         errors.servererror = "Something went wrong";
         this.setState({ error: errors });
       } else {
-        // this.setDataOnLoad();
+        this.setDataOnLoad();
       }
     });
   };
@@ -492,7 +444,6 @@ class EditProfile extends Component {
 
                 <Tags
                   value={this.state.form.offer_tag}
-                  suggestion={this.state.offerTagSuggestions}
                   onChange={this.handleOfferTagChange}
                 />
                 <span>{this.state.error.offer_tag}</span>
@@ -503,7 +454,6 @@ class EditProfile extends Component {
                 </label>
                 <Tags
                   value={this.state.form.inquiry_tag}
-                  suggestion={this.state.inquiryTagSuggestions}
                   onChange={this.handleInquiryTagChange}
                 />
                 <span>{this.state.error.inquiry_tag}</span>
@@ -523,17 +473,12 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername,
-  tags: state.tags
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
   getUser,
-  updateUserProfile,
-  getOfferTag,
-  getInquiryTag,
-  addOfferTag,
-  addInquiryTag
+  updateUserProfile
 };
 
 EditProfile.propTypes = {
@@ -542,12 +487,7 @@ EditProfile.propTypes = {
   history: PropTypes.any,
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any,
-  updateUserProfile: PropTypes.any,
-  getOfferTag: PropTypes.func,
-  getInquiryTag: PropTypes.func,
-  addOfferTag: PropTypes.func,
-  addInquiryTag: PropTypes.func,
-  tags: PropTypes.any
+  updateUserProfile: PropTypes.any
 };
 
 export default connect(

@@ -13,7 +13,6 @@ import savedData from "./savedReducer";
 import adData from "./adReducer";
 import likeData from "./likeReducer";
 import commentData from "./commentReducer";
-import tags from "./tagsReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -29,8 +28,7 @@ const rootReducer = combineReducers({
   savedData,
   adData,
   likeData,
-  commentData,
-  tags
+  commentData
 });
 
 export default rootReducer;

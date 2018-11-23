@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { CampaignCard, AdCard, MediaCard } from "../misc";
+import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsRoot extends Component {
@@ -16,9 +16,7 @@ class NewsRoot extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {(newsFeed.postType === enumerations.contentTypes.companyCampaign ||
-            newsFeed.postType ===
-              enumerations.contentTypes.creatorCampaign) && (
+          {newsFeed.type === enumerations.contentTypes.campaign && (
             <CampaignCard
               item={newsFeed}
               isDescription
@@ -26,7 +24,7 @@ class NewsRoot extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType === enumerations.contentTypes.ad && (
+          {newsFeed.type === enumerations.contentTypes.ad && (
             <AdCard
               item={newsFeed}
               isDescription
@@ -34,8 +32,11 @@ class NewsRoot extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType === enumerations.contentTypes.mediaPost && (
-            <MediaCard item={newsFeed} />
+          {newsFeed.type === enumerations.contentTypes.image && (
+            <ImageCard item={newsFeed} />
+          )}
+          {newsFeed.type === enumerations.contentTypes.video && (
+            <VideoCard item={newsFeed} />
           )}
         </div>
       );

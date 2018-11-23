@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { MediaCard } from "../misc";
+import { ImageCard, VideoCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 import PropTypes from "prop-types";
 
@@ -13,16 +13,15 @@ class ParticipantsPage extends Component {
 
   renderParticipantsList = () => {
     const { participantsList } = this.props;
-    console.log(participantsList);
-
-    return participantsList.map(participant => {
+    return participantsList.map(newsFeed => {
       return (
-        <div key={participant.id}>
-          {participant.postType === enumerations.contentTypes.mediaPost ||
-            (participant.postType ===
-              enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard item={participant} />
-            ))}
+        <div key={newsFeed.id}>
+          {newsFeed.type === enumerations.contentTypes.image && (
+            <ImageCard item={newsFeed} />
+          )}
+          {newsFeed.type === enumerations.contentTypes.video && (
+            <VideoCard item={newsFeed} />
+          )}
         </div>
       );
     });
