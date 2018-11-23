@@ -39,7 +39,7 @@ const CampaignCardHeader = ({
         </Link>
         <div className="secondary_title">{"location"}</div>
         {campaign.category && (
-          <div className="grey_title">{campaign.category}</div>
+          <div className="grey_title">{campaign.category[0].categoryName}</div>
         )}
       </div>
       <div className={like_wrapper} role="article">
