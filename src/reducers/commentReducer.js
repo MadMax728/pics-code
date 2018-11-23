@@ -49,6 +49,7 @@ const commentReducer = (state = initialState.commentData, action) => {
         isLoading: true,
         error: null
       };
+
     case types.PUSH_COMMENT_SUCCEEDED:
       let arr = state[action.payload.id];
       arr.push(action.payload.data);

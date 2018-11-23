@@ -546,7 +546,8 @@ EditProfile.propTypes = {
   getOfferTag: PropTypes.func,
   getInquiryTag: PropTypes.func,
   addOfferTag: PropTypes.func,
-  addInquiryTag: PropTypes.func
+  addInquiryTag: PropTypes.func,
+  tags: PropTypes.any
 };
 
 export default connect(

@@ -74,6 +74,9 @@ class Tags extends Component {
   }
 }
 
-Tags.propTypes = propTypes;
+Tags.propTypes = {
+  suggestion: propTypes.any,
+  tag
+};
 
 export default Tags;
