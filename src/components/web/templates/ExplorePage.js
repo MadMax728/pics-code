@@ -12,7 +12,9 @@ class ExploreRoot extends Component {
   };
 
   renderExploreList = () => {
-    const { exploreList, isLoading } = this.props;
+    const { exploreList } = this.props;
+    console.log(exploreList);
+
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>

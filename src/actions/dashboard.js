@@ -21,8 +21,6 @@ const getDashboardFailed = error => ({
 });
 
 export const getDashboard = (prop, provider) => {
-  console.log("najks,jk");
-
   return dispatch => {
     dispatch(getDashboardStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -42,10 +40,16 @@ export const getDashboard = (prop, provider) => {
           prop === "getNews"
             ? getDashboardSucceeded(dashboardList)
             : prop === "getExplore"
-              ? getDashboardSucceeded(dashboardList)
+              ? getDashboardSucceeded(
+                  dashboardList.filter(
+                    d => d.type === "video" || d.type === "image"
+                  )
+                )
               : prop === "getParticipant"
                 ? getDashboardSucceeded(
-                    dashboardList.filter(d => d.user.isParticipant === true)
+                    dashboardList.filter(
+                      d => d.type === "video" || d.type === "image"
+                    )
                   )
                 : prop === "getDashboardUser"
                   ? getDashboardSucceeded(users_list)
