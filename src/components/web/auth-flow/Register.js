@@ -124,9 +124,9 @@ class Register extends Component {
     const { form } = this.state;
 
     return (
-      <div className="login-process">
+      <div className="login-process col-xs-12 no-padding">
         <BaseHeader />
-        <section className="col-xs-12">
+        <section className="col-xs-12 ht860">
           <div className="custom-container">
             <div className="login-wrapper">
               <h3 className="text-center">{Translations.login.header}</h3>
