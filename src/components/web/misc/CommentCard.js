@@ -12,7 +12,7 @@ class CommentCard extends Component {
 
     this.state = {
       item: this.props.item,
-      comments: this.props.item.comments,
+      comments: this.props.item,
       form: {
         comment: ""
       },
@@ -76,13 +76,13 @@ class CommentCard extends Component {
         <div className="comment-header col-xs-12 no-padding">
           <div className="col-sm-1 col-xs-1 no-padding profile_image">
             <img
-              src={comment.user.image}
+              src={comment.profileImage}
               alt={`comment-${comment.comment_id}`}
               className="img-circle img-responsive"
             />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.user.name}</b> {comment.date} <b>Reply</b>
+            <b>{comment.userName}</b> {comment.date} <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
             <ThreeDots

@@ -1,9 +1,10 @@
-import apiFactory from "../api";
+import apiFactory, { api } from "../api";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
 
-const api = apiFactory(baseUrl);
+// const api = apiFactory(baseUrl);
+// const apiAuth = apiFactory(baseUrl);
 
 /**
  *
@@ -35,8 +36,11 @@ export const getSettingsCampaigns = payload =>
   api.get("/campaigns/get-settings-campaigns", payload);
 
 // Campaign Type Creator and Company
-export const getCampaignType = (payload, type) =>
-  api.get("/campaign/" + type, payload);
+// export const getCampaignType = (payload, type) =>
+//   api.post("/campaigns/get-typewise-campaigns/" + type, payload);
+
+export const getCampaignType = (payload, header = {}) =>
+  api(baseUrl, header).post("/campaigns/get-typewise-campaigns", payload);
 
 // Campaign Informatin API
 export const getCampaignDetails = (payload, provider) =>

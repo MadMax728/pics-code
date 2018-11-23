@@ -13,24 +13,24 @@ const CampaignCardFooter = ({
   renderReportTips,
   handleFavorite
 }) => {
-  const favorite_icon = campaign.isFavorite
+  const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
     : images.feed_like;
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
-        <span className="count">{campaign.msg_count}</span>
+        <span className="count">{campaign.commentCount}</span>
         <img
           src={images.comment}
           alt="company-comments"
           onClick={handleCommentsSections}
           role="presentation"
-          id={campaign.user.id}
+          id={campaign.createdBy}
           onKeyDown={handleCommentsSections}
         />
       </div>
       <div className="likes" role="article">
-        <span className="count">{campaign.like_count}</span>
+        <span className="count">{campaign.likeCount}</span>
         <img
           src={favorite_icon}
           alt="like"

@@ -11,7 +11,7 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.start}:{" "}
           </span>
-          <span className="secondary_title">{item.title}</span>
+          <span className="secondary_title">{item.startDate}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
@@ -31,13 +31,13 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.end}:{" "}
           </span>
-          <span className="secondary_title">{item.end}</span>
+          <span className="secondary_title">{item.endDate}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
             {Translations.create_campaigns.type}:{" "}
           </span>
-          <span className="secondary_title">{item.type}</span>
+          <span className="secondary_title">{item.typeContent}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
@@ -52,7 +52,7 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.offer}:{" "}
           </span>
-          <span className="secondary_title">{item.offer}</span>
+          <span className="secondary_title">{item.offers}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
@@ -66,13 +66,13 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.offer_tag}:{" "}
           </span>
-          <span className="secondary_title">{item.offer_tag}</span>
+          <span className="secondary_title">{item.inquiryTag}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
             {Translations.create_campaigns.inquiry_tag}:{" "}
           </span>
-          <span className="secondary_title">{item.inquiry_tag}</span>
+          <span className="secondary_title">{item.inquiryTag}</span>
         </div>
       </div>
     </div>

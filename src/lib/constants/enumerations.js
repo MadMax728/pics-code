@@ -35,12 +35,13 @@ export const modalType = {
 };
 
 export const mediaTypes = {
-  video: "video",
-  image: "image"
+  video: "Video",
+  image: "Image"
 };
 
 export const contentTypes = {
-  campaign: "campaign",
+  companyCampaign: "companyCampaign",
+  creatorCampaign: "creatorCampaign",
   ad: "ad",
   video: "video",
   image: "image"

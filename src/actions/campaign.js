@@ -25,12 +25,11 @@ export const getCampaigns = (prop, provider) => {
   return dispatch => {
     dispatch(getCampaignsStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return campaignService[prop](params, provider).then(
+    return campaignService[prop](provider, header).then(
       res => {
         dispatch(getCampaignsSucceeded(res.data.data));
       },
