@@ -1,4 +1,4 @@
-export { TopBarInfo, TopBarOtherInfo, TopBarOwnerInfo } from "./top-bar";
+export { TopBarInfo } from "./top-bar";
 export {
   Languages,
   RightAbout,

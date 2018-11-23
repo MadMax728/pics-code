@@ -2,7 +2,6 @@ import React from "react";
 import FavouriteCampaignItem from "./FavouriteCampaignItem";
 import { campaigns_list } from "../../../../mock-data";
 import { Translations } from "../../../../lib/translations";
-import * as enumerations from "../../../../lib/constants/enumerations";
 
 const FavouriteCampaigns = () => {
   return (
@@ -13,11 +12,7 @@ const FavouriteCampaigns = () => {
       <div className="campaigns">
         {campaigns_list.map(campaign => {
           return (
-            (campaign.postType === enumerations.contentTypes.companyCampaign ||
-              campaign.postType ===
-                enumerations.contentTypes.creatorCampaign) && (
-              <FavouriteCampaignItem campaign={campaign} key={campaign.id} />
-            )
+            <FavouriteCampaignItem campaign={campaign} key={campaign.id} />
           );
         })}
       </div>

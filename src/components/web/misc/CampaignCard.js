@@ -7,7 +7,7 @@ import { Translations } from "../../../lib/translations";
 import { RenderToolTips } from "../../common";
 import CommentCard from "./CommentCard";
 import { like } from "../../../actions/like";
-import { getComments, setComments } from "../../../actions/comments";
+import { getComments } from "../../../actions/comments";
 import connect from "react-redux/es/connect/connect";
 
 class CampaignCard extends Component {
@@ -62,23 +62,13 @@ class CampaignCard extends Component {
       typeId: this.state.item.id
     };
     this.props.getComments(CampaignId).then(() => {
+      console.log("comments", this.props.commentData);
       this.setState({
         isComments: !this.state.isComments,
-        comments: this.props.comments
+        comments: this.props.commentData.comments
       });
     });
   };
-
-  // handleCommentsSections = () => {
-  //   let listLoaded = this.props.comments[this.state.item.id] ? true : false;
-  //   this.setState(
-  //     {
-  //       comments: listLoaded ? this.props.comments[this.state.item.id] : [],
-  //       isComments: !this.state.isComments
-  //     },
-  //     () => (!listLoaded ? this.load() : null)
-  //   );
-  // };
 
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
@@ -113,19 +103,17 @@ class CampaignCard extends Component {
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
-  comments: state.commentData.comments
+  commentData: state.commentData
 });
 
 const mapDispatchToProps = {
   like,
-  getComments,
-  setComments
+  getComments
 };
 
 CampaignCard.propTypes = {
-  getComments: PropTypes.func.isRequired,
-  setComments: PropTypes.func.isRequired,
-  comments: PropTypes.object,
+  getComments: PropTypes.any,
+  commentData: PropTypes.any,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,

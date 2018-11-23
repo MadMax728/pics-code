@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 import * as images from "../../../lib/constants/images";
 import { ReportedSearchBar } from "../reported-search-bar";
-import { backoffice_campaign_list } from "../../../mock-data";
+import { campaigns_list } from "../../../mock-data";
 
 class Campaigns extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      campaigns_detail: backoffice_campaign_list
+      campaigns_detail: campaigns_list
     };
   }
 

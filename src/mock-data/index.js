@@ -1,16 +1,6 @@
 export {
-  news_campaigns_list,
-  explore_campaigns_list,
-  participants_campaigns_list,
-  favourite_campaigns_list,
   campaigns_list,
-  company_campaigns_list,
-  creator_campaigns_list,
-  news_feed_campaigns_list,
-  user_profile_campaigns_list,
-  saved_campaigns_list,
   campaignStatistics,
-  backoffice_campaign_list,
   campaign_detail
 } from "./campaign-list";
 export { dashboardList } from "./dashboard";
