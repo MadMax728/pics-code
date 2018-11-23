@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../ui-kit";
-import { ImageCard, VideoCard } from "../misc";
+import { MediaCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {
@@ -13,16 +13,11 @@ class ExploreRoot extends Component {
 
   renderExploreList = () => {
     const { exploreList } = this.props;
-    console.log(exploreList);
-
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
-          {explore.type === enumerations.contentTypes.image && (
-            <ImageCard item={explore} />
-          )}
-          {explore.type === enumerations.contentTypes.video && (
-            <VideoCard item={explore} />
+          {explore.postType === enumerations.contentTypes.mediaPost && (
+            <MediaCard item={explore} />
           )}
         </div>
       );

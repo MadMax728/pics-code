@@ -35,14 +35,13 @@ export const modalType = {
 };
 
 export const mediaTypes = {
-  video: "Video",
-  image: "Image"
+  video: "video",
+  image: "image"
 };
 
 export const contentTypes = {
   companyCampaign: "companyCampaign",
   creatorCampaign: "creatorCampaign",
   ad: "ad",
-  video: "video",
-  image: "image"
+  mediaPost: "mediapost" //:TODO(Api)=>Rename this to mediaPost
 };

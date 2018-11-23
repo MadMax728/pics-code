@@ -5,8 +5,6 @@ import { Auth } from "../auth";
 // remove when no need
 import { campaigns_list } from "../mock-data";
 
-const env = process.env.NODE_ENV;
-
 // Get Campaigns
 const getCampaignsStarted = () => ({
   type: types.GET_CAMPAIGNS_STARTED
@@ -30,25 +28,18 @@ export const getCampaigns = (prop, provider) => {
     const header = {
       Authorization: storage.accessToken
     };
-
-    console.log("env", env);
-
-    if (env === "mock") {
-      return dispatch(getCampaignsSucceeded(campaigns_list));
-    } else {
-      return campaignService[prop](provider, header).then(
-        res => {
-          dispatch(getCampaignsSucceeded(res.data.data));
-        },
-        error => {
-          dispatch(getCampaignsFailed(error));
-          logger.error({
-            description: error.toString(),
-            fatal: true
-          });
-        }
-      );
-    }
+    return campaignService[prop](provider, header).then(
+      res => {
+        dispatch(getCampaignsSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(getCampaignsFailed(error));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
   };
 };
 

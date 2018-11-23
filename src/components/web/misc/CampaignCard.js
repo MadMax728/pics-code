@@ -62,13 +62,43 @@ class CampaignCard extends Component {
       typeId: this.state.item.id
     };
     this.props.getComments(CampaignId).then(() => {
-      console.log("comments", this.props.commentData);
       this.setState({
         isComments: !this.state.isComments,
-        comments: this.props.commentData.comments
+        comments: this.props.comments
       });
     });
   };
+
+  load = data => {
+    let listLoaded = this.props.comments[data.id] ? true : false;
+    this.setState(
+      {
+        commentsArr: listLoaded ? this.props.comments[data.id] : [],
+        postInfo: data,
+        listLoaded
+      },
+      () => (!listLoaded ? this._setComments(data) : null)
+    );
+  };
+
+  //   _setComments = (postInfo) => {
+  //     let cb = {
+  //         success: (res) => {
+  //             this.setState({
+  //                 commentsArr: res.data,
+  //                 listLoaded: true
+  //             });
+  //             this.props.getComments({ id: postInfo.id, data: res.data })
+  //         },
+  //         error: (err) => {
+  //             this.props.getComments({ id: postInfo.id, data: [] })
+  //             this.setState({ listLoaded: true })
+  //         }
+  //     }
+  //     let header = helpers.buildHeader({ authorization: this.props.loginData.token })
+  //     let data = { typeId: postInfo.id }
+  //     API.commentsGetApi(data, cb, header);
+  // }
 
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
@@ -103,7 +133,7 @@ class CampaignCard extends Component {
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
-  commentData: state.commentData
+  comments: state.commentData.comments
 });
 
 const mapDispatchToProps = {
@@ -113,7 +143,7 @@ const mapDispatchToProps = {
 
 CampaignCard.propTypes = {
   getComments: PropTypes.func.isRequired,
-  commentData: PropTypes.object.isRequired,
+  comments: PropTypes.object,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,

@@ -24,12 +24,11 @@ export const getDashboard = (prop, provider) => {
   return dispatch => {
     dispatch(getDashboardStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return dashboardService[prop](params, provider).then(
+    return dashboardService[prop](provider, header).then(
       res => {
         dispatch(getDashboardSucceeded(res.data.data));
       },
