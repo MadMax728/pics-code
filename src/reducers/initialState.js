@@ -84,6 +84,14 @@ const initialState = {
     comments: null,
     isLoading: false,
     error: false
+  },
+  tags: {
+    addedOfferTags: null,
+    addedInquiryTags: null,
+    offerTags: null,
+    inquiryTags: null,
+    isLoading: false,
+    error: false
   }
 };
 
