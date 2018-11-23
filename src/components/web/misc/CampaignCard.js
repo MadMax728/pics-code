@@ -112,6 +112,8 @@ const mapDispatchToProps = {
 };
 
 CampaignCard.propTypes = {
+  getComments: PropTypes.func.isRequired,
+  commentData: PropTypes.object.isRequired,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,

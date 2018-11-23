@@ -5,6 +5,8 @@ import { Auth } from "../auth";
 // remove when no need
 import { campaigns_list } from "../mock-data";
 
+const env = process.env.NODE_ENV;
+
 // Get Campaigns
 const getCampaignsStarted = () => ({
   type: types.GET_CAMPAIGNS_STARTED
@@ -29,56 +31,24 @@ export const getCampaigns = (prop, provider) => {
       Authorization: storage.accessToken
     };
 
-    return campaignService[prop](provider, header).then(
-      res => {
-        dispatch(getCampaignsSucceeded(res.data.data));
-      },
-      error => {
-        dispatch(
-          // getCampaignsFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          // getCampaignsSucceeded(campaigns_list)
-          prop === "getNewFeedCampaigns"
-            ? getCampaignsSucceeded(campaigns_list)
-            : prop === "getCampaignType"
-              ? getCampaignsSucceeded(
-                  campaigns_list.filter(c => c.user.type === provider)
-                )
-              : prop === "getParticipant"
-                ? getCampaignsSucceeded(
-                    campaigns_list.filter(c => c.user.isParticipant === true)
-                  )
-                : prop === "getExploreCampaigns"
-                  ? getCampaignsSucceeded(
-                      campaigns_list.filter(c => c.isExplore === true)
-                    )
-                  : prop === "getParticipantsCampaigns"
-                    ? getCampaignsSucceeded(
-                        campaigns_list.filter(
-                          c => c.user.isParticipant === true
-                        )
-                      )
-                    : prop === "getNewsFeedCampaigns"
-                      ? getCampaignsSucceeded(campaigns_list)
-                      : prop === "getUserProfileCampaigns"
-                        ? getCampaignsSucceeded(
-                            campaigns_list.filter(
-                              c => c.user.isParticipant === true
-                            )
-                          )
-                        : prop === "getSavedCampaigns"
-                          ? getCampaignsSucceeded(
-                              campaigns_list.filter(c => c.isSaved === true)
-                            )
-                          : prop === "getSettingsCampaigns" &&
-                            getCampaignsSucceeded(campaigns_list)
-        );
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
+    console.log("env", env);
+
+    if (env === "mock") {
+      return dispatch(getCampaignsSucceeded(campaigns_list));
+    } else {
+      return campaignService[prop](provider, header).then(
+        res => {
+          dispatch(getCampaignsSucceeded(res.data.data));
+        },
+        error => {
+          dispatch(getCampaignsFailed(error));
+          logger.error({
+            description: error.toString(),
+            fatal: true
+          });
+        }
+      );
+    }
   };
 };
 
