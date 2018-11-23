@@ -10,9 +10,7 @@ class VideoItem extends Component {
     return (
       <div className="feed_image">
         <div className={"embed-responsive embed-responsive-16by9"}>
-          <div
-            className={"img-responsive embed-responsive-item placeholder_back"}
-          >
+          <div className={"img-responsive embed-responsive-item"}>
             <ReactPlayer url={this.props.item} playing={false} />
           </div>
         </div>

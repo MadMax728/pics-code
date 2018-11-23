@@ -16,7 +16,7 @@ class LoginLinkSend extends Component {
   };
   render() {
     return (
-      <div className="login-process col-xs-12 no-padding">
+      <div className="login-process">
         <AdminHeader />
         <section>
           <div className="custom-container">
