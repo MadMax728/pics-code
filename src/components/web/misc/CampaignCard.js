@@ -7,7 +7,7 @@ import { Translations } from "../../../lib/translations";
 import { RenderToolTips } from "../../common";
 import CommentCard from "./CommentCard";
 import { like } from "../../../actions/like";
-import { getComments } from "../../../actions/comments";
+import { getComments, setComments } from "../../../actions/comments";
 import connect from "react-redux/es/connect/connect";
 
 class CampaignCard extends Component {
@@ -69,36 +69,16 @@ class CampaignCard extends Component {
     });
   };
 
-  load = data => {
-    let listLoaded = this.props.comments[data.id] ? true : false;
-    this.setState(
-      {
-        commentsArr: listLoaded ? this.props.comments[data.id] : [],
-        postInfo: data,
-        listLoaded
-      },
-      () => (!listLoaded ? this._setComments(data) : null)
-    );
-  };
-
-  //   _setComments = (postInfo) => {
-  //     let cb = {
-  //         success: (res) => {
-  //             this.setState({
-  //                 commentsArr: res.data,
-  //                 listLoaded: true
-  //             });
-  //             this.props.getComments({ id: postInfo.id, data: res.data })
-  //         },
-  //         error: (err) => {
-  //             this.props.getComments({ id: postInfo.id, data: [] })
-  //             this.setState({ listLoaded: true })
-  //         }
-  //     }
-  //     let header = helpers.buildHeader({ authorization: this.props.loginData.token })
-  //     let data = { typeId: postInfo.id }
-  //     API.commentsGetApi(data, cb, header);
-  // }
+  // handleCommentsSections = () => {
+  //   let listLoaded = this.props.comments[this.state.item.id] ? true : false;
+  //   this.setState(
+  //     {
+  //       comments: listLoaded ? this.props.comments[this.state.item.id] : [],
+  //       isComments: !this.state.isComments
+  //     },
+  //     () => (!listLoaded ? this.load() : null)
+  //   );
+  // };
 
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
@@ -138,11 +118,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   like,
-  getComments
+  getComments,
+  setComments
 };
 
 CampaignCard.propTypes = {
   getComments: PropTypes.func.isRequired,
+  setComments: PropTypes.func.isRequired,
   comments: PropTypes.object,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,

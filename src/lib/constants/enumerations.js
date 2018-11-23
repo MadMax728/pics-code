@@ -42,6 +42,7 @@ export const mediaTypes = {
 export const contentTypes = {
   companyCampaign: "companyCampaign",
   creatorCampaign: "creatorCampaign",
+  companyParticipantCampaign: "companyParticipantCampaign",
   ad: "ad",
   mediaPost: "mediapost" //:TODO(Api)=>Rename this to mediaPost
 };

@@ -4,8 +4,6 @@ import { ImageItem, VideoItem } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 
 const MediaCardBody = ({ item }) => {
-  console.log(item.typeContent.toLowerCase() === enumerations.mediaTypes.image);
-
   return (
     <div className="feed_content">
       <div className="feed_image">
