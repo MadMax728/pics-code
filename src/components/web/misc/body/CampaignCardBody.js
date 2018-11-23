@@ -8,14 +8,12 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
   return (
     <div className="feed_content">
       {campaign.typeContent &&
-        campaign.typeContent.toLowerCase() ===
-          enumerations.mediaTypes.video && (
+        campaign.typeContent === enumerations.mediaTypes.video && (
           <VideoItem item={campaign.mediaUrl} />
         )}
       {(!campaign.typeContent ||
         (campaign.typeContent &&
-          campaign.typeContent.toLowerCase() ===
-            enumerations.mediaTypes.image)) && (
+          campaign.typeContent === enumerations.mediaTypes.image)) && (
         <ImageItem
           item={campaign.mediaUrl}
           isOtherCardExist={!isDescription && isInformation}

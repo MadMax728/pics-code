@@ -25,9 +25,10 @@ export default class Header extends Component {
   componentDidMount = () => {
     document.addEventListener("click", this.handleOutsideClick);
     document.addEventListener("scroll", this.onScroll);
-    document.removeEventListener("click", this.handleOutsideClick);
   };
-
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleOutsideClick);
+  }
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
   };
