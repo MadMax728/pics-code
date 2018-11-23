@@ -4,7 +4,7 @@ import { Translations } from "../../../lib/translations";
 import { Link } from "react-router-dom";
 
 const ForgotPassword = () => (
-  <div className="login-process">
+  <div className="login-process col-xs-12 no-padding">
     <BaseHeader />
     <section>
       <div className="custom-container">

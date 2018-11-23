@@ -5,6 +5,9 @@
     width: 700px;
     margin: auto;
     position: relative;
+    &.wid100 {
+      width: 100%;
+    }
   }
   .login-logo {
     text-align: center;
@@ -158,15 +161,28 @@
       }
     }
   }
+  .cookie-wrapr {
+    position: fixed;
+    bottom: 68px;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    .custom-container {
+      width: 100%;
+    }
+  }
   .cookies-section {
     float: left;
     background: #ffffff;
-    padding: 25px;
+    padding: 18px;
     text-align: center;
     width: 100%;
     border-top: 1px solid $charcoal_color;
     border-bottom: 1px solid $charcoal_color;
+    border: 0;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
     margin-top: 15px;
+
     a {
       color: $blue_color;
     }

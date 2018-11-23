@@ -63,7 +63,7 @@ class AdminLogin extends Component {
   render() {
     const { loginData } = this.props;
     return (
-      <div className="login-process">
+      <div className="login-process col-xs-12 no-padding">
         <AdminHeader />
         <section>
           <div className="custom-container">
