@@ -37,11 +37,15 @@ export const getNewsFeed = (prop, provider) => {
         dispatch(
           // getNewsFeedFailed(error.response)
           // remove below code after API working, this is just for set mock data.
-          getNewsFeedSucceeded(
-            campaigns_list.filter(
-              c => c.id === "502e4528-997b-449e-81ce-839449cbc94d"
-            )
-          )
+
+          prop === "getNewsFeedOwner"
+            ? getNewsFeedSucceeded(
+                campaigns_list.filter(c => c.user.id === "1")
+              )
+            : prop === "getNewsFeedOther" &&
+              getNewsFeedSucceeded(
+                campaigns_list.filter(c => c.user.id === provider)
+              )
         );
         logger.error({
           description: error.toString(),
@@ -134,12 +138,19 @@ export const getSaved = (prop, provider) => {
         dispatch(getSavedSucceeded(res.data.data));
       },
       error => {
+        console.log(campaigns_list.filter(c => c.user.id === "1" && c.isSaved));
+
         dispatch(
           // getSavedFailed(error.response)
           // remove below code after API working, this is just for set mock data.
           prop === "getSavedOther"
-            ? getSavedSucceeded(campaigns_list)
-            : prop === "getSavedOwner" && getSavedSucceeded(campaigns_list)
+            ? getSavedSucceeded(
+                campaigns_list.filter(c => c.user.id === provider && c.isSaved)
+              )
+            : prop === "getSavedOwner" &&
+              getSavedSucceeded(
+                campaigns_list.filter(c => c.user.id === "1" && c.isSaved)
+              )
         );
         logger.error({
           description: error.toString(),
