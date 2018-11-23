@@ -28,20 +28,12 @@ export const getCampaigns = (prop, provider) => {
     const header = {
       Authorization: storage.accessToken
     };
-
     return campaignService[prop](provider, header).then(
       res => {
-        console.log(res.data.data);
-
         dispatch(getCampaignsSucceeded(res.data.data));
       },
       error => {
-        dispatch(
-          // getCampaignsFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          // getCampaignsSucceeded(campaigns_list)
-          getCampaignsSucceeded(campaigns_list)
-        );
+        dispatch(getCampaignsFailed(error));
         logger.error({
           description: error.toString(),
           fatal: true

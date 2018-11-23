@@ -190,112 +190,53 @@ export const campaigns_list = [
     id: 4
   },
   {
-    user: {
-      name: "Narendra Vaghela",
-      id: "3",
-      image: `${images.campaign_1}`,
-      isOwner: false,
-      isPrivate: false,
-      // Creator for True and Company for False
-      type: "company",
-      isParticipant: false
-    },
-    title: "Title of Image",
-    location: "London",
-    comments: [
-      {
-        comment_id: 1,
-        comment: "This text is an example1",
-        user: {
-          name: "Sagar",
-          id: 1,
-          image: `${images.campaign1}`
-        },
-        date: "01.01.2000"
-      },
-      {
-        comment_id: 2,
-        comment: "This text is an example2",
-        user: {
-          name: "Vaghela",
-          id: 2,
-          image: `${images.campaign2}`
-        },
-        date: "02.02.2000"
-      },
-      {
-        comment_id: 3,
-        comment: "This text is an example3",
-        user: {
-          name: "Sagar",
-          id: 3,
-          image: `${images.campaign3}`
-        },
-        date: "03.03.2000"
-      }
+    category: [
+      { categoryName: "Gaming", id: "c4f75d53-72ec-4833-8a81-0cb748fb3343" }
     ],
-    category: "01.01.2000 in Category",
-    image: `${images.campaign_1}`,
-    mediaType: "Image",
-    type: "image",
-    msg_count: 12,
-    like_count: 12,
-    isFavorite: false,
-    id: 5
+    commentCount: 0,
+    coordinate: 50,
+    createdAt: 1542891004333,
+    description: "12t test image",
+    fileName: "1542890997866-Screenshot_20181016-201430.png",
+    id: "67812117-5e4e-4de2-b630-8e5eb76ee8a4",
+    imageName: "1542890997866.screenshot.20181016.201430png.1d11",
+    isSelfLike: false,
+    likeCount: 0,
+    mediaUrl:
+      "https://picstagraph-dev.s3.amazonaws.com/1542890997866-Screenshot_20181016-201430.png",
+    path:
+      "https://picstagraph-dev.s3.amazonaws.com/1542890997866-Screenshot_20181016-201430.png",
+    postType: "mediapost",
+    profileImage:
+      "https://picstagraph-dev.s3.us-east-2.amazonaws.com/1542870327787-IMG_0003.JPG",
+    title: "12t image",
+    typeContent: "image",
+    typeImage: "original",
+    userId: "8db96f31-6c47-485a-b239-587bc9bdfc06",
+    userName: "vishal1"
   },
   {
-    user: {
-      name: "Sachin Jethwa",
-      id: "3",
-      image: `${images.campaign_2}`,
-      isOwner: false,
-      isPrivate: false,
-      // Creator for True and Company for False
-      type: "company",
-      isParticipant: true
-    },
-    title: "Title of Video",
-    location: "London",
-    comments: [
-      {
-        comment_id: 1,
-        comment: "This text is an example1",
-        user: {
-          name: "Sagar",
-          id: 1,
-          image: `${images.campaign1}`
-        },
-        date: "01.01.2000"
-      },
-      {
-        comment_id: 2,
-        comment: "This text is an example2",
-        user: {
-          name: "Vaghela",
-          id: 2,
-          image: `${images.campaign2}`
-        },
-        date: "02.02.2000"
-      },
-      {
-        comment_id: 3,
-        comment: "This text is an example3",
-        user: {
-          name: "Sagar",
-          id: 3,
-          image: `${images.campaign3}`
-        },
-        date: "03.03.2000"
-      }
+    category: [
+      { categoryName: "Gaming", id: "c4f75d53-72ec-4833-8a81-0cb748fb3343" }
     ],
-    category: "01.01.2000 in Category",
-    image: `${images.campaign_2}`,
-    video: `${videos.demo}`,
-    mediaType: "Video",
-    type: "video",
-    msg_count: 12,
-    like_count: 12,
-    isFavorite: false,
-    id: 6
+    commentCount: 0,
+    createdAt: 1542900218229,
+    description: "my six",
+    fileName: "1542900211896-SampleVideo_1280x720_1mb.mp4",
+    id: "a41a59c5-9f75-4380-a49c-121a5bee5918",
+    isSelfLike: false,
+    likeCount: 0,
+    mediaUrl:
+      "https://picstagraph-dev.s3.amazonaws.com/1542900211896-SampleVideo_1280x720_1mb.mp4",
+    path:
+      "https://picstagraph-dev.s3.amazonaws.com/1542900211896-SampleVideo_1280x720_1mb.mp4",
+    postType: "mediapost",
+    profileImage:
+      "https://picstagraph-dev.s3.us-east-2.amazonaws.com/1542870327787-IMG_0003.JPG",
+    title: "my name is",
+    typeContent: "video",
+    userId: "8db96f31-6c47-485a-b239-587bc9bdfc06",
+    userName: "vishal1",
+    videoName: "1542900211896.samplevideo.1280x720.1mbmp4.9426"
   }
 ];
