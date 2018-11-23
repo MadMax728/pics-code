@@ -1088,3 +1088,52 @@ section.loader-wrapr {
   background: url("../images/placeholder_pic.png") no-repeat center;
   background-color: #000000;
 }
+.ReactTags__tags.react-tags-wrapper {
+  .ReactTags__selected {
+    .ReactTags__tagInput {
+      padding-top: 10px;
+      input.ReactTags__tagInputField {
+        padding: 6px 12px;
+        &::-webkit-input-placeholder {
+          color: #4a4a4a;
+        }
+        &::-moz-placeholder {
+          color: #4a4a4a;
+        }
+        &:-ms-input-placeholder {
+          color: #4a4a4a;
+        }
+        &:-moz-placeholder {
+          color: #4a4a4a;
+        }
+      }
+    }
+    span.tag-wrapper.ReactTags__tag.cursor-move {
+      border: 1px solid #0f7aba;
+      border-radius: 37.5px;
+      padding: 2px 25px;
+      margin: 5px 5px;
+      display: inline-block;
+      a.ReactTags__remove {
+        text-decoration: none;
+        cursor: pointer;
+        &::after {
+          position: absolute;
+          width: 10px;
+          height: 10px;
+          font-size: 14px;
+          content: "x";
+        }
+      }
+      &:hover {
+        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+        color: #ffffff;
+        a.ReactTags__remove {
+          &::after {
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
