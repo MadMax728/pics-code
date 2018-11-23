@@ -21,6 +21,8 @@ const getDashboardFailed = error => ({
 });
 
 export const getDashboard = (prop, provider) => {
+  console.log("najks,jk");
+
   return dispatch => {
     dispatch(getDashboardStarted());
     const storage = Auth.extractJwtFromStorage();

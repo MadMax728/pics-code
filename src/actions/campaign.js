@@ -41,9 +41,7 @@ export const getCampaigns = (prop, provider) => {
           prop === "getNewFeedCampaigns"
             ? getCampaignsSucceeded(campaigns_list)
             : prop === "getCampaignType"
-              ? getCampaignsSucceeded(
-                  campaigns_list.filter(c => c.user.type === provider)
-                )
+              ? getCampaignsSucceeded(campaigns_list)
               : prop === "getParticipant"
                 ? getCampaignsSucceeded(
                     campaigns_list.filter(c => c.user.isParticipant === true)

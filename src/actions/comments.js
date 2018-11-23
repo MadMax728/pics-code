@@ -25,7 +25,7 @@ export const getComments = data => {
     const header = { Authorization: storage.accessToken };
     return commentService.getComments(data, header).then(
       res => {
-        dispatch(getCommentSucceeded(res.data.data));
+        dispatch(getCommentSucceeded(res.data.success ? res.data.data : null));
       },
       error => {
         Auth.saveJwtToStorage({
