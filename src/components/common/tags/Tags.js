@@ -67,7 +67,7 @@ class Tags extends Component {
   render() {
     const { tags, suggestions } = this.state;
     return (
-      <div className="">
+      <div>
         <ReactTags
           tags={tags}
           suggestions={suggestions}

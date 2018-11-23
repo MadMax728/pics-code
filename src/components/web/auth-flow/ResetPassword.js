@@ -73,7 +73,7 @@ class ResetPassword extends Component {
     const { form } = this.state;
 
     return (
-      <div className="login-process col-xs-12 no-padding">
+      <div className="login-process">
         <BaseHeader />
         <section>
           <div className="custom-container">

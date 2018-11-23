@@ -7,8 +7,8 @@ import { Translations } from "../../../lib/translations";
 class BaseHeader extends Component {
   render() {
     return (
-      <header className="col-xs-12">
-        <div className="custom-container wid100">
+      <header>
+        <div className="custom-container">
           <div className="login-logo">
             <Link to={routes.ROOT_ROUTE}>
               <img src={images.loginLogo} alt={"login"} />
