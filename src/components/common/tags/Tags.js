@@ -60,7 +60,6 @@ class Tags extends Component {
   render() {
     const { tags, suggestions } = this.state;
     return (
-      <div>
         <ReactTags
           tags={this.props.value}
           suggestions={this.props.suggestion}
@@ -69,7 +68,6 @@ class Tags extends Component {
           handleDrag={this.handleDrag}
           delimiters={delimiters}
         />
-      </div>
     );
   }
 }

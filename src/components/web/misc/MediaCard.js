@@ -6,12 +6,17 @@ import MediaCardFooter from "./footers/MediaCardFooter";
 import CommentCard from "./CommentCard";
 import { Translations } from "../../../lib/translations";
 import { RenderToolTips } from "../../common";
+import { like } from "../../../actions/like";
+import { getComments } from "../../../actions/comments";
+import { connect } from "react-redux";
+
 class MediaCard extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       isComments: false,
-      item: this.props.item
+      item: this.props.item,
+      comments: ""
     };
   }
 
@@ -49,7 +54,7 @@ class MediaCard extends Component {
       typeOfContent: "mediapost",
       typeId: item.id
     };
-    // this.props.like(mediaLike);
+    this.props.like(mediaLike);
   };
 
   handleCommentsSections = () => {
@@ -78,16 +83,30 @@ class MediaCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={item} />}
+        {isComments && <CommentCard item={this.state.comments} />}
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  likeData: state.likeData,
+  comments: state.commentData.comments
+});
+
+const mapDispatchToProps = {
+  like,
+  getComments
+};
+
 MediaCard.propTypes = {
   item: propTypes.object.isRequired,
-  comments: propTypes.object.isRequired,
+  like: propTypes.func.isRequired,
+  comments: propTypes.any,
   getComments: propTypes.func.isRequired
 };
 
-export default MediaCard;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MediaCard);

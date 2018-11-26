@@ -39,7 +39,7 @@ class Text extends Component {
         placeholder={placeholder}
         autoComplete={autoComplete}
         onChange={this.handleChangeField}
-        value={value}
+        value={value || ''}
       />
     );
   }

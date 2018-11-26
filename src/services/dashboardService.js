@@ -19,5 +19,10 @@ export const getExplore = (payload, header = {}) =>
 
 export const getParticipant = (payload, header = {}) =>
   api(baseUrl, header).post("/participants/get-all-participant");
-export const getDashboardUser = payload => api.get("/user", payload);
-export const getPic = payload => api.get("/pic", payload);
+
+export const getDashboardUser  = (payload, header = {}) =>
+  api(baseUrl, header).post("/user");
+
+export const getPic = (payload, header = {}) =>
+  api(baseUrl, header).post("/pics");
+

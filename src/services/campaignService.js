@@ -43,5 +43,5 @@ export const getCampaignType = (payload, header = {}) =>
   api(baseUrl, header).post("/campaigns/get-typewise-campaigns", payload);
 
 // Campaign Informatin API
-export const getCampaignDetails = (payload, provider) =>
-  api.get("/campaigns/" + provider, payload);
+export const getCampaignDetails = (payload, header = {}) =>
+  api(baseUrl, header).post("/campaigns/", payload);

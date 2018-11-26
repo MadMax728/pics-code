@@ -97,7 +97,7 @@ class ResetMail extends Component {
               <h3 className="text-center">{Translations.reset_email.header}</h3>
               <p>{Translations.reset_email.subheader}</p>
               <form>
-                <span>{this.state.error.servererror}</span>
+                <span className="error-msg highlight">{this.state.error.servererror}</span>
                 <div className="form-group">
                   <input
                     type="text"
@@ -113,7 +113,7 @@ class ResetMail extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span>{this.state.error.email}</span>
+                  <span className="error-msg highlight">{this.state.error.email}</span>
                 </div>
                 <div className="form-group">
                   <button className="blue_button" onClick={this.handleSubmit}>

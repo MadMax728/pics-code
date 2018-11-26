@@ -76,13 +76,16 @@ export const getCampaignDetails = provider => {
     return campaignService.getCampaignDetails(params, provider).then(
       res => {
         dispatch(getCampaignDetailsSucceeded(res.data.data));
+        // dispatch(
+        //   campaigns_list.filter(c => c.id === provider)
+        // )
       },
       error => {
         dispatch(
           // getCampaignDetailsFailed(error.response)
           // remove below code after API working, this is just for set mock data.
           getCampaignDetailsSucceeded(
-            campaigns_list.filter(c => c.id === parseInt(provider))
+            campaigns_list.filter(c => c.id === provider)
           )
         );
         logger.error({
