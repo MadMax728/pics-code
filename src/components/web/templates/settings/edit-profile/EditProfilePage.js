@@ -16,9 +16,14 @@ import connect from "react-redux/es/connect/connect";
 import jwtDecode from "jwt-decode";
 import { Auth } from "../../../../../auth";
 import * as routes from "../../../../../lib/constants/routes";
-
-// const storage = Auth.extractJwtFromStorage();
-// let userInfo = jwtDecode(storage.accessToken);
+import {
+  getOfferTag,
+  getInquiryTag,
+  addInquiryTag,
+  addOfferTag
+} from "../../../../../actions/tags";
+const storage = Auth.extractJwtFromStorage();
+let userInfo = jwtDecode(storage.accessToken);
 const genderItems = [
   {
     name: "Male",
@@ -68,17 +73,31 @@ class EditProfile extends Component {
         inquiry_tag: []
       },
       error: {},
-      tags: []
+      tags: [],
+      offerTagSuggestions: [],
+      inquiryTagSuggestions: []
     };
   }
 
   componentWillMount() {
-    // let data = {
-    //   username: userInfo.username
-    // };
-    // this.props.getUser(data).then(() => {
-    //   this.setDataOnLoad();
-    // });
+    this.props.getOfferTag().then(() => {
+      this.setState({
+        offerTagSuggestions: this.props.tags.offerTags
+      });
+    });
+
+    this.props.getInquiryTag().then(() => {
+      this.setState({
+        inquiryTagSuggestions: this.props.tags.inquiryTags
+      });
+    });
+
+    let data = {
+      username: userInfo.username
+    };
+    this.props.getUser(data).then(() => {
+      this.setDataOnLoad();
+    });
   }
 
   handleOfferTagChange = tags => {
@@ -445,6 +464,7 @@ class EditProfile extends Component {
                 <Tags
                   value={this.state.form.offer_tag}
                   onChange={this.handleOfferTagChange}
+                  suggestion={this.state.offerTagSuggestions}
                 />
                 <span>{this.state.error.offer_tag}</span>
               </div>
@@ -455,6 +475,7 @@ class EditProfile extends Component {
                 <Tags
                   value={this.state.form.inquiry_tag}
                   onChange={this.handleInquiryTagChange}
+                  suggestion={this.state.inquiryTagSuggestions}
                 />
                 <span>{this.state.error.inquiry_tag}</span>
               </div>
@@ -473,12 +494,17 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  tags: state.tags
 });
 
 const mapDispatchToProps = {
   getUser,
-  updateUserProfile
+  updateUserProfile,
+  getOfferTag,
+  getInquiryTag,
+  addOfferTag,
+  addInquiryTag
 };
 
 EditProfile.propTypes = {
@@ -487,7 +513,12 @@ EditProfile.propTypes = {
   history: PropTypes.any,
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any,
-  updateUserProfile: PropTypes.any
+  updateUserProfile: PropTypes.any,
+  getOfferTag: PropTypes.func,
+  getInquiryTag: PropTypes.func,
+  addOfferTag: PropTypes.func,
+  addInquiryTag: PropTypes.func,
+  tags: PropTypes.any
 };
 
 export default connect(

@@ -19,14 +19,7 @@ class Tags extends Component {
     super(props);
     this.state = {
       tags: this.props.value,
-      suggestions: [
-        { id: "USA", text: "USA" },
-        { id: "Germany", text: "Germany" },
-        { id: "Austria", text: "Austria" },
-        { id: "Costa Rica", text: "Costa Rica" },
-        { id: "Sri Lanka", text: "Sri Lanka" },
-        { id: "Thailand", text: "Thailand" }
-      ]
+      suggestions: this.props.suggestion
     };
   }
 
@@ -69,8 +62,8 @@ class Tags extends Component {
     return (
       <div>
         <ReactTags
-          tags={tags}
-          suggestions={suggestions}
+          tags={this.props.value}
+          suggestions={this.props.suggestion}
           handleDelete={this.handleDelete}
           handleAddition={this.handleAddition}
           handleDrag={this.handleDrag}
@@ -80,6 +73,12 @@ class Tags extends Component {
     );
   }
 }
+
+Tags.propTypes = {
+  suggestion: propTypes.any,
+  value: PropTypes.any,
+  onChange: PropTypes.func
+};
 
 Tags.propTypes = propTypes;
 

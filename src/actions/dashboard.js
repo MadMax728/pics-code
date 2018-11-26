@@ -24,12 +24,11 @@ export const getDashboard = (prop, provider) => {
   return dispatch => {
     dispatch(getDashboardStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return dashboardService[prop](params, provider).then(
+    return dashboardService[prop](provider, header).then(
       res => {
         dispatch(getDashboardSucceeded(res.data.data));
       },
@@ -40,10 +39,16 @@ export const getDashboard = (prop, provider) => {
           prop === "getNews"
             ? getDashboardSucceeded(dashboardList)
             : prop === "getExplore"
-              ? getDashboardSucceeded(dashboardList)
+              ? getDashboardSucceeded(
+                  dashboardList.filter(
+                    d => d.type === "video" || d.type === "image"
+                  )
+                )
               : prop === "getParticipant"
                 ? getDashboardSucceeded(
-                    dashboardList.filter(d => d.user.isParticipant === true)
+                    dashboardList.filter(
+                      d => d.type === "video" || d.type === "image"
+                    )
                   )
                 : prop === "getDashboardUser"
                   ? getDashboardSucceeded(users_list)
