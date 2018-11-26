@@ -97,7 +97,7 @@ class Login extends Component {
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
-                <span>{this.state.error.servererror}</span>
+                <span className="error-msg highlight">{this.state.error.servererror}</span>
                 <div className="form-group">
                   <input
                     type="text"
@@ -113,7 +113,7 @@ class Login extends Component {
                   ) : (
                     <img src={images.error} alt={"error"} />
                   )}
-                  <span>{this.state.error.username}</span>
+                  <span className="error-msg highlight">{this.state.error.username}</span>
                 </div>
                 <div className="form-group">
                   <input
@@ -131,7 +131,7 @@ class Login extends Component {
                   ) : (
                     <img src={images.error} alt={"error"} />
                   )}
-                  <span>{this.state.error.password}</span>
+                  <span className="error-msg highlight">{this.state.error.password}</span>
                 </div>
                 <div className="form-group">
                   <Link to={routes.RESET_EMAIL}>

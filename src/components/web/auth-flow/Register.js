@@ -133,7 +133,7 @@ class Register extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <span>{this.state.error.servererror}</span>
+                  <span className="error-msg highlight">{this.state.error.servererror}</span>
                   <Text
                     type="text"
                     className="form-control"
@@ -148,7 +148,7 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span>{this.state.error.username}</span>
+                  <span className="error-msg highlight">{this.state.error.username}</span>
                 </div>
 
                 <div className="form-group">
@@ -166,7 +166,7 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span>{this.state.error.email}</span>
+                  <span className="error-msg highlight">{this.state.error.email}</span>
                 </div>
 
                 <div className="form-group">
@@ -185,7 +185,7 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span>{this.state.error.password}</span>
+                  <span className="error-msg highlight">{this.state.error.password}</span>
                 </div>
                 <div className="form-group">
                   <Text
@@ -204,7 +204,7 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span>{this.state.error.repeat_password}</span>
+                  <span className="error-msg highlight">{this.state.error.repeat_password}</span>
                 </div>
                 <div className="form-group">
                   <ul className="options">

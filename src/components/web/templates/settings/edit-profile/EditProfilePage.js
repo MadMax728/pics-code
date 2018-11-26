@@ -82,7 +82,7 @@ class EditProfile extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount = () => {
     this.props.getOfferTag().then(() => {
       this.setState({
         offerTagSuggestions: this.props.tags.offerTags
@@ -185,28 +185,32 @@ class EditProfile extends Component {
     // this.formValid();
   };
   setDataOnLoad = () => {
-    const userData = this.props.userDataByUsername.user.data;
-    this.setState({
-      form: {
-        username: userData.username,
-        email: userData.email,
-        name_company: userData.name,
-        dob: {
-          day: "",
-          mon: "",
-          year: ""
-        },
-        gender: userData.gender,
-        category: userData.category,
-        location: "",
-        address: "",
-        phone_number: "",
-        website: userData.website,
-        profile_description: userData.profileDescription,
-        offer_tag: userData.offerTag,
-        inquiry_tag: userData.inquiryTag
-      }
-    });
+    if (this.props.userDataByUsername.user) {
+      const userData = this.props.userDataByUsername.user.data;
+      console.log(userData);
+      
+      this.setState({
+        form: {
+          username: userData.username,
+          email: userData.email,
+          name_company: userData.name,
+          dob: {
+            day: "",
+            mon: "",
+            year: ""
+          },
+          gender: userData.gender,
+          category: userData.category,
+          location: "",
+          address: "",
+          phone_number: "",
+          website: userData.website,
+          profile_description: userData.profileDescription,
+          offer_tag: userData.offerTag,
+          inquiry_tag: userData.inquiryTag
+        }
+      });
+    }
   };
 
   // handelSubmit called when click on submit
@@ -278,6 +282,7 @@ class EditProfile extends Component {
             </div>
             <div className="general-information-wrapper">
               <div className="form-group margin-bottom-30">
+                <span className="error-msg highlight">{this.state.error.username}</span>
                 <label htmlFor="username">
                   {Translations.editProfile.username}
                 </label>
@@ -294,9 +299,9 @@ class EditProfile extends Component {
                 ) : (
                   <img src={images.checked} alt={"checked"} />
                 )}
-                <span>{this.state.error.username}</span>
               </div>
               <div className="form-group margin-bottom-30">
+              <span className="error-msg highlight">{this.state.error.name_company}</span>
                 <label htmlFor="name">
                   {Translations.editProfile.name_company}
                 </label>
@@ -308,7 +313,6 @@ class EditProfile extends Component {
                   value={form.name_company}
                   onChange={this.handleChangeField}
                 />
-                <span>{this.state.error.name_company}</span>
               </div>
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">
@@ -379,6 +383,7 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="form-group margin-bottom-30">
+              <span className="error-msg highlight">{this.state.error.category}</span>
                 <label htmlFor="category">
                   {Translations.editProfile.category}
                 </label>
@@ -390,7 +395,6 @@ class EditProfile extends Component {
                   value={form.category}
                   onChange={this.handleChangeField}
                 />
-                <span>{this.state.error.category}</span>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="location" className="margin-bottom-13">
@@ -403,6 +407,7 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
+                <span className="error-msg highlight">{this.state.error.phone_number}</span>  
                 <label htmlFor="phone-number">
                   {Translations.editProfile.phone_number}
                 </label>
@@ -414,9 +419,9 @@ class EditProfile extends Component {
                   value={form.phone_number}
                   onChange={this.handleChangeField}
                 />
-                <span>{this.state.error.phone_number}</span>
               </div>
               <div className="form-group margin-bottom-30">
+                <span className="error-msg highlight">{this.state.error.email}</span>
                 <label htmlFor="email">{Translations.editProfile.email}</label>
                 <Text
                   type="text"
@@ -426,9 +431,9 @@ class EditProfile extends Component {
                   value={form.email}
                   onChange={this.handleChangeField}
                 />
-                <span>{this.state.error.email}</span>
               </div>
               <div className="form-group margin-bottom-30">
+                <span className="error-msg highlight">{this.state.error.website}</span>
                 <label htmlFor="website">
                   {Translations.editProfile.website}
                 </label>
@@ -440,9 +445,9 @@ class EditProfile extends Component {
                   value={form.website}
                   onChange={this.handleChangeField}
                 />
-                <span>{this.state.error.website}</span>
               </div>
               <div className="form-group margin-bottom-30">
+                <span className="error-msg highlight">{this.state.error.profile_description}</span>
                 <label htmlFor="description">
                   {Translations.editProfile.profile_description}
                 </label>
@@ -454,7 +459,6 @@ class EditProfile extends Component {
                   value={form.profile_description}
                   onChange={this.handleChangeField}
                 />
-                <span>{this.state.error.profile_description}</span>
               </div>
             </div>
             <div className="form-subtitle">
@@ -462,18 +466,18 @@ class EditProfile extends Component {
             </div>
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
+                <span className="error-msg highlight">{this.state.error.offer_tag}</span>
                 <label htmlFor="offer-tag">
                   {Translations.editProfile.offer_tag}
                 </label>
-
                 <Tags
                   value={this.state.form.offer_tag}
                   onChange={this.handleOfferTagChange}
                   suggestion={this.state.offerTagSuggestions}
                 />
-                <span>{this.state.error.offer_tag}</span>
               </div>
               <div className="form-group margin-bottom-30">
+                <span className="error-msg highlight">{this.state.error.inquiry_tag}</span>
                 <label htmlFor="inquiry-tag">
                   {Translations.editProfile.inquiry_tag}
                 </label>
@@ -482,7 +486,6 @@ class EditProfile extends Component {
                   onChange={this.handleInquiryTagChange}
                   suggestion={this.state.inquiryTagSuggestions}
                 />
-                <span>{this.state.error.inquiry_tag}</span>
               </div>
             </div>
             <SocialNetworks userId={"123"} isOwnerProfile />

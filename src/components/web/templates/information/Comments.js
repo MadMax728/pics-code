@@ -161,7 +161,7 @@ class Comments extends Component {
           </form>
         </div>
 
-        {comments.length !== 0 && comments.map(this.renderComment)}
+        {comments && comments.length !== 0 && comments.map(this.renderComment)}
 
         <div className="view-more-comments">
           <Link to={""}>{Translations.view_more_comments}</Link>

@@ -34,7 +34,7 @@ class CommentCard extends Component {
   addComment = (itemId, comment) => {
     const comments = this.state.comments;
     const commentData = {
-      comment_id: parseInt(Math.random()),
+      id: parseInt(Math.random()),
       comment,
       user: {
         name: "Vaghela",
@@ -54,7 +54,7 @@ class CommentCard extends Component {
     const comments = this.state.comments;
 
     const indexOf = comments.findIndex(c => {
-      return c.comment_id === parseInt(id);
+      return c.id === parseInt(id);
     });
 
     if (indexOf !== -1) {
@@ -72,12 +72,12 @@ class CommentCard extends Component {
 
   renderComment = comment => {
     return (
-      <div className="comment-wrapper" key={comment.comment_id}>
+      <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
           <div className="col-sm-1 col-xs-1 no-padding profile_image">
             <img
               src={comment.profileImage}
-              alt={`comment-${comment.comment_id}`}
+              alt={`comment-${comment.id}`}
               className="img-circle img-responsive"
             />
           </div>
@@ -91,7 +91,7 @@ class CommentCard extends Component {
               dataTip="tooltip"
               dataClass="tooltip-wrapr"
               /* eslint-disable */
-              getContent={() => this.renderReportTips(comment.comment_id)}
+              getContent={() => this.renderReportTips(comment.id)}
               effect="solid"
               delayHide={500}
               delayShow={500}
@@ -125,49 +125,50 @@ class CommentCard extends Component {
 
   render() {
     const { item, form, comments } = this.state;
-    if(item && item.id) {
-      return (
-        <div className="feed-comment" id={item.id}>
-          <div className="comment-wrapper">
-            <form onSubmit={this.handleSubmit} ref="commentForm">
-              <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                <img
-                  src={images.image}
-                  alt="image1"
-                  className="img-circle img-responsive"
-                />
-              </div>
-              <div className="col-sm-10 col-xs-7 no-padding">
-                <div className="comment-input">
-                  <div className="form-group">
-                    <HashTagUsername
-                      className="form-control"
-                      type="text"
-                      placeholder="Write a comment"
-                      name="comment"
-                      handleSetState={this.handleSetState}
-                      value={form.comment}
-                      isText
-                    />
-                  </div>
+
+    console.log(comments);
+    
+
+    return (
+      <div className="feed-comment" id={item.id}>
+        <div className="comment-wrapper">
+          <form onSubmit={this.handleSubmit} ref="commentForm">
+            <div className="col-sm-1 col-xs-1 no-padding profile_image">
+              <img
+                src={images.image}
+                alt="image1"
+                className="img-circle img-responsive"
+              />
+            </div>
+            <div className="col-sm-10 col-xs-7 no-padding">
+              <div className="comment-input">
+                <div className="form-group">
+                  <HashTagUsername
+                    className="form-control"
+                    type="text"
+                    placeholder="Write a comment"
+                    name="comment"
+                    handleSetState={this.handleSetState}
+                    value={form.comment}
+                    isText
+                  />
                 </div>
               </div>
-              <div className="col-sm-1 col-xs-2 emoji_wrapper">
-                <img src={images.emoji} alt="like" className="pull-right" />
-              </div>
-              <input type="submit" hidden />
-            </form>
-          </div>
-  
-          {comments.length !== 0 && comments.map(this.renderComment)}
-  
-          <div className="view-more-comments">
-            <Link to={""}>{Translations.view_more_comments}</Link>
-          </div>
+            </div>
+            <div className="col-sm-1 col-xs-2 emoji_wrapper">
+              <img src={images.emoji} alt="like" className="pull-right" />
+            </div>
+            <input type="submit" hidden />
+          </form>
         </div>
-      );
-    }
-    return '';
+
+        {comments.length !== 0 && comments.map(this.renderComment)}
+
+        <div className="view-more-comments">
+          <Link to={""}>{Translations.view_more_comments}</Link>
+        </div>
+      </div>
+    );
   }
 }
 
