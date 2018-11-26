@@ -92,7 +92,6 @@ const initialState = {
     inquiryTags: null,
     comments: null,
     isLoading: false,
-    isLoading: false,
     error: false
   }
 };
