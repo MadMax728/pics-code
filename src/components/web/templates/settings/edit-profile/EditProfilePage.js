@@ -23,7 +23,10 @@ import {
   addOfferTag
 } from "../../../../../actions/tags";
 const storage = Auth.extractJwtFromStorage();
-let userInfo = jwtDecode(storage.accessToken);
+let userInfo = null;
+if (storage) {
+  userInfo = jwtDecode(storage.accessToken);
+}
 const genderItems = [
   {
     name: "Male",
@@ -92,12 +95,14 @@ class EditProfile extends Component {
       });
     });
 
-    let data = {
-      username: userInfo.username
-    };
-    this.props.getUser(data).then(() => {
-      this.setDataOnLoad();
-    });
+    if (userInfo) {
+      let data = {
+        username: userInfo.username
+      };
+      this.props.getUser(data).then(() => {
+        this.setDataOnLoad();
+      });
+    }
   }
 
   handleOfferTagChange = tags => {
