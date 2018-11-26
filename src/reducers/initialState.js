@@ -81,6 +81,15 @@ const initialState = {
     error: false
   },
   commentData: {
+    comments: {},
+    isLoading: false,
+    error: false
+  },
+  tags: {
+    addedOfferTags: null,
+    addedInquiryTags: null,
+    offerTags: null,
+    inquiryTags: null,
     comments: null,
     isLoading: false,
     error: false
