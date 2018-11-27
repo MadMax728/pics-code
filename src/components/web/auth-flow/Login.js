@@ -36,11 +36,11 @@ class Login extends Component {
     const { form } = this.state;
 
     if (form.userName.length === 0) {
-      errors.username = "Username is required.";
+      errors.username = Translations.login.username_required;
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors.password = "Password is required.";
+      errors.password = Translations.login.password_required;
       isFormValid = false;
     }
     this.setState({ error: errors });
@@ -77,7 +77,7 @@ class Login extends Component {
           this.props.loginData.error &&
           this.props.loginData.error.status === 400
         ) {
-          errors.servererror = "Username or password is wrong.";
+          errors.servererror = Translations.login.invalid_credentials;
           this.setState({ error: errors });
         } else {
           this.props.history.push(routes.ROOT_ROUTE);
@@ -97,7 +97,9 @@ class Login extends Component {
               <h3 className="text-center">{Translations.login.header}</h3>
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
-                <span className="error-msg highlight">{this.state.error.servererror}</span>
+                <div className="form-group">
+                  <span className="error-msg highlight">{this.state.error.servererror}</span>
+                </div>
                 <div className="form-group">
                   <input
                     type="text"

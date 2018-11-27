@@ -468,7 +468,10 @@
     "header": "Do what you love",
     "subheader": "Register for free",
     "forgot_password": "Forgot password",
-    "login": "Log in"
+    "login": "Log in",
+    "username_required": "Username or Email is required.",
+    "password_required": "Password is required.",
+    "invalid_credentials": "Username or password is wrong."
   },
 
   "forgot_password": {

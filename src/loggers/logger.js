@@ -22,7 +22,7 @@ export const initialize = (ga_tracking_id, ga_debug, enable_diagnostics) => {
  * @param {string} message - The message
  * @returns {void}
  */
-export const log = message => {
+export const log = (message) => {
   if (diagnosticsEnabled) {
     console.log(message);
   }
@@ -77,7 +77,7 @@ export const event = args => {
  * @param {Exception} args - An object describing the exception
  * @returns {void}
  */
-export const error = args => {
+export const error = (args) => {
   ReactGA.exception(args);
   log(args.description);
 };
