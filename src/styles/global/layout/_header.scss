@@ -200,7 +200,7 @@ header {
               a {
                 outline: none;
                 padding: 12px;
-                border-bottom: 3px solid #ededed;
+                border-bottom: 3px solid #d6d6d6;
                 margin: 0;
                 .tab-title {
                   margin: 0;
@@ -213,12 +213,12 @@ header {
               }
               &:nth-child(2) {
                 a {
-                  border-right: 3px solid #ededed;
+                  border-right: 3px solid #d6d6d6;
                 }
               }
               &:nth-child(1) {
                 a {
-                  border-right: 3px solid #ededed;
+                  border-right: 3px solid #d6d6d6;
                 }
               }
             }
@@ -239,8 +239,8 @@ header {
                   display: inline-block;
                   float: left;
                   padding-top: 10px;
-                  border-right: 2px solid #ededed;
-                  border-bottom: 3px solid #ededed;
+                  border-right: 2px solid #d6d6d6;
+                  border-bottom: 3px solid #d6d6d6;
                   margin: 0;
                 }
                 &:last-child {
@@ -258,7 +258,10 @@ header {
                   padding: 12px;
                   float: left;
                   width: 100%;
-                  border-bottom: 2px solid #ededed;
+                  border-bottom: 2px solid #d6d6d6;
+                  &:last-child{
+                    border-bottom: 0px;
+                  }
                   img {
                     width: 45px;
                     border-radius: 50%;

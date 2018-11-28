@@ -15,7 +15,7 @@ const AdCardHeader = ({ ad, isDescription, isInformation, handleFavorite }) => {
   const favorite_icon = ad.isFavorite ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
-      <div className="col-sm-1 col-xs-1 no-padding no-padding profile_image">
+      <div className="no-padding profile_image">
         <Link to={profile_route}>
           <img
             src={ad.user.image}
