@@ -486,7 +486,7 @@ button:focus {
     overflow: auto;
   }
   .payment-form {
-    height: 520px;
+    height: 598px;
     overflow: auto;
   }
 }
@@ -1132,4 +1132,12 @@ section.loader-wrapr {
   }
   }
   }
+  }
+
+  .picsta-error {
+    color: #d0021b;
+    display: inline-block;
+    font-size: 12px;
+    float: right;
+    padding: 5px 0 5px 0;
   }
