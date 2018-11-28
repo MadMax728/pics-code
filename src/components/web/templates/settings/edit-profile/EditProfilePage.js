@@ -22,6 +22,9 @@ import {
   addInquiryTag,
   addOfferTag
 } from "../../../../../actions/tags";
+
+import * as enumerations from "../../../../../lib/constants/enumerations";
+
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
 if (storage) {
@@ -73,25 +76,35 @@ class EditProfile extends Component {
         website: "",
         profile_description: "",
         offer_tag: [],
-        inquiry_tag: []
+        inquiry_tag: [],
+        offerTagList: [],
+        inquiryTagList: []
       },
       error: {},
       tags: [],
-      offerTagSuggestions: [],
-      inquiryTagSuggestions: []
+      suggestions: {
+        offerTagList: [],
+        inquiryTagList: []
+      }
     };
   }
 
   componentDidMount = () => {
     this.props.getOfferTag().then(() => {
+      console.log(this.props.tags);
+      
       this.setState({
-        offerTagSuggestions: this.props.tags.offerTags
+        suggestions: {
+          offerTagList: this.props.tags.offerTags
+        }
       });
     });
 
     this.props.getInquiryTag().then(() => {
       this.setState({
-        inquiryTagSuggestions: this.props.tags.inquiryTags
+        suggestions: {
+          inquiryTagList: this.props.tags.inquiryTags
+        }
       });
     });
 
@@ -121,56 +134,6 @@ class EditProfile extends Component {
       form: { ...this.state.form, location, address }
     });
   };
-  // formValid = () => {
-  //   const errors = {};
-  //   let isFormValid = true;
-  //   const { form } = this.state;
-  //
-  //   if (form.username.length === 0) {
-  //     errors.username = "username is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.name_company.length === 0) {
-  //     errors.name_company = "Company is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.location.length === 0) {
-  //     errors.location = "Location is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.phone_number.length === 0) {
-  //     errors.phone_number = "Phone number is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.email.length === 0) {
-  //     errors.email = "Email is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.website.length === 0) {
-  //     errors.website = "Website is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.profile_description.length === 0) {
-  //     errors.profile_description = "Profile description is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.offer_tag.length === 0) {
-  //     errors.offer_tag = "Offer tag is required.";
-  //     isFormValid = false;
-  //   }
-  //   if (form.inquiry_tag.length === 0) {
-  //     errors.inquiry_tag = "Inquiry tag is required.";
-  //     isFormValid = false;
-  //   }
-  //   this.setState({ error: errors });
-  //   return isFormValid;
-  //
-  //   // if (form.userName.length === 0 || form.password.length === 0) {
-  //   //   return false;
-  //   // }
-  //
-  //   // return isFormValid;
-  // };
 
   handleChangeDOB = event => {
     const { form } = this.state;
@@ -207,7 +170,9 @@ class EditProfile extends Component {
           website: userData.website,
           profile_description: userData.profileDescription,
           offer_tag: userData.offerTag,
-          inquiry_tag: userData.inquiryTag
+          inquiry_tag: userData.inquiryTag,
+          offerTagList: userData.offerTagList,
+          inquiryTagList: userData.inquiryTagList
         }
       });
     }
@@ -245,6 +210,45 @@ class EditProfile extends Component {
 
   handleEditProfile = () => {
     this.props.handleModalInfoShow(modalType.edit_profile);
+  };
+
+  handleAddition = (data ,tag) => {
+    const { form, suggestions } = this.state;
+    const indexOf = suggestions[data].findIndex(f => {
+      return f.id === tag.id;
+    });
+
+    if (indexOf === -1) {
+      if (data === enumerations.tagsType.inquiryTagList)
+      {
+        const tagName = {
+          inquiryTagName: tag.name
+        }
+        this.props.addInquiryTag(tagName).then(()=> {
+          
+        })
+      }
+      else if (data === enumerations.tagsType.offerTagList)
+      {
+        const tagName = {
+          offerTagName: tag.name
+        }
+        this.props.addOfferTag(tagName).then(()=> {
+
+        })
+      }
+    } else {
+      if (data === enumerations.tagsType.inquiryTagList){
+        form.inquiry_tag.push(tag.id);
+        form.inquiryTagList.push(tag);
+        this.setState({ form });
+      }
+      else if (data === enumerations.tagsType.offerTagList) {
+        form.offer_tag.push(tag.id);
+        form.offerTagList.push(tag);
+        this.setState({ form });
+      }
+    }
   };
 
   render() {
@@ -471,20 +475,24 @@ class EditProfile extends Component {
                   {Translations.editProfile.offer_tag}
                 </label>
                 <Tags
-                  value={this.state.form.offer_tag}
+                  value={this.state.form.offerTagList}
                   onChange={this.handleOfferTagChange}
-                  suggestion={this.state.offerTagSuggestions}
+                  suggestion={this.state.suggestions.offerTagList}
+                  handleAddition={this.handleAddition}
+                  for={'offerTagList'}
                 />
               </div>
               <div className="form-group margin-bottom-30">
                 <span className="error-msg highlight">{this.state.error.inquiry_tag}</span>
                 <label htmlFor="inquiry-tag">
-                  {Translations.editProfile.inquiry_tag}
+                  {Translations.editProfile.inquiryTagList}
                 </label>
                 <Tags
-                  value={this.state.form.inquiry_tag}
+                  value={this.state.form.inquiryTagList}
                   onChange={this.handleInquiryTagChange}
-                  suggestion={this.state.inquiryTagSuggestions}
+                  suggestion={this.state.suggestions.inquiryTagList}
+                  handleAddition={this.handleAddition}
+                  for={'inquiryTagList'}
                 />
               </div>
             </div>

@@ -111,3 +111,40 @@ export const deleteComment = data => {
     );
   };
 };
+
+
+// Edit Comment
+const editCommentStarted = () => ({
+  type: types.EDIT_COMMENT_STARTED
+});
+
+const editCommentSucceeded = data => ({
+  type: types.EDIT_COMMENT_SUCCEEDED,
+  payload: data
+});
+
+const editCommentFailed = error => ({
+  type: types.EDIT_COMMENT_FAILED,
+  payload: error,
+  error: true
+});
+
+export const editComment = data => {
+  return dispatch => {
+    dispatch(editCommentStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+    return commentService.editComment(data, header).then(
+      res => {
+        dispatch(editCommentSucceeded(res.data.success ? res.data.data : null));
+      },
+      error => {
+        dispatch(editCommentFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

@@ -98,7 +98,7 @@ class CommentCard extends Component {
             />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {moment(comment.createdAt).format('MMMM Do YYYY')}<b>Reply</b>
+            <b>{comment.userName}</b> {moment(comment.createdAt).format('MMMM Do YYYY')} <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
             <ThreeDots

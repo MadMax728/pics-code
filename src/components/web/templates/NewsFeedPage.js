@@ -20,7 +20,7 @@ class NewsFeedPage extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {newsFeed.postType === enumerations.contentTypes.campaign && (
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={newsFeed}
               isDescription
@@ -28,7 +28,7 @@ class NewsFeedPage extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType === enumerations.contentTypes.ad && (
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
               item={newsFeed}
               isDescription

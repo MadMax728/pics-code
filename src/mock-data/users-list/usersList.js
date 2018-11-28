@@ -7,6 +7,7 @@ export const users_list = [
     id: "ae186485-c216-45e1-887b-42e440404d96",
     isAdmin: false,
     isSubscribe: false,
+    name: "sagar vaghela",
     password: "$2b$10$rj8EABm4sPD4UXsl9gT8W.4VewfelCcngdaLBSJ5YlUpHHmbMcbH6",
     profileImage: "5cf0cb89-5b63-4db0-bcd9-aaa627269fd2",
     profileUrl: "https://picstagraph-dev.s3.amazonaws.com/1543216131198-user.png",

@@ -15,7 +15,7 @@ class Community extends Component {
     const users_list = this.state.users_list;
     users_list.filter(
       user =>
-        user.id === parseInt(e.target.id) &&
+        user.id === e.target.id &&
         (user.subscribed = !user.subscribed)
     );
     this.setState({ users_list });
@@ -47,7 +47,7 @@ class Community extends Component {
                 <div className="community-user-image">
                   <Link to={profile_route}>
                     <img
-                      src={user.image}
+                      src={user.profileUrl}
                       alt="campaign"
                       className="img-circle img-responsive"
                     />
@@ -55,7 +55,7 @@ class Community extends Component {
                 </div>
                 <div className="community-user-name">
                   <Link to={profile_route}>
-                    <div className="normal_title">{user.user_name}</div>
+                    <div className="normal_title">{user.username}</div>
                     <div className="secondary_title">{user.name}</div>
                   </Link>
                 </div>

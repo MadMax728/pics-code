@@ -38,9 +38,7 @@ export const getNewsFeed = (prop, provider) => {
           // getNewsFeedFailed(error.response)
           // remove below code after API working, this is just for set mock data.
           getNewsFeedSucceeded(
-            campaigns_list.filter(
-              c => c.id === "502e4528-997b-449e-81ce-839449cbc94d"
-            )
+            campaigns_list
           )
         );
         logger.error({
