@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { modalType } from "../../../../../lib/constants/enumerations";
+import { modalType, tagsType } from "../../../../../lib/constants/enumerations";
 import SocialNetworks from "./SocialNetworks";
 import {
   Text,
@@ -15,15 +15,12 @@ import { getUser, updateUserProfile } from "../../../../../actions/profile";
 import connect from "react-redux/es/connect/connect";
 import jwtDecode from "jwt-decode";
 import { Auth } from "../../../../../auth";
-import * as routes from "../../../../../lib/constants/routes";
 import {
   getOfferTag,
   getInquiryTag,
   addInquiryTag,
   addOfferTag
 } from "../../../../../actions/tags";
-
-import * as enumerations from "../../../../../lib/constants/enumerations";
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;

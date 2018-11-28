@@ -199,7 +199,10 @@ CommentCard.propTypes = {
   item: PropTypes.any,
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  handleComment: PropTypes.func.isRequired
+  handleComment: PropTypes.func.isRequired,
+  comment: PropTypes.any,
+  typeContent: PropTypes.any,
+  itemId: PropTypes.any,
 };
 
 export default connect(

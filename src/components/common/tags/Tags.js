@@ -48,7 +48,7 @@ class Tags extends Component {
           tags={this.props.value}
           suggestions={this.props.suggestion}
           handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
+          handleAddition={this.props.handleAddition}
           delimiters={delimiters}
         />
     );
@@ -58,7 +58,9 @@ class Tags extends Component {
 Tags.propTypes = {
   suggestion: propTypes.any,
   value: PropTypes.any,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  for: propTypes.string,
+  handleAddition: propTypes.func
 };
 
 Tags.propTypes = propTypes;
