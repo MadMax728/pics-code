@@ -40,9 +40,9 @@ export const mediaTypes = {
 };
 
 export const contentTypes = {
-  companyCampaign: "companyCampaign",
-  creatorCampaign: "creatorCampaign",
-  companyParticipantCampaign: "companyParticipantCampaign",
+  companyCampaign: "companycampaign",
+  creatorCampaign: "creatorcampaign",
+  companyParticipantCampaign: "companyparticipantcampaign",
   ad: "ad",
   mediaPost: "mediapost",
   video: "video",

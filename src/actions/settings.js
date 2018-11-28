@@ -134,8 +134,6 @@ export const getSaved = (prop, provider) => {
         dispatch(getSavedSucceeded(res.data.data));
       },
       error => {
-        console.log(campaigns_list.filter(c => c.user.id === "1" && c.isSaved));
-
         dispatch(
           // getSavedFailed(error.response)
           // remove below code after API working, this is just for set mock data.

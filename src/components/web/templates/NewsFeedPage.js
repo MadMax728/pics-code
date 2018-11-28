@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getNewsFeed } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
+import { CampaignCard, AdCard, MediaCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsFeedPage extends Component {
@@ -20,7 +20,7 @@ class NewsFeedPage extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {newsFeed.type === enumerations.contentTypes.campaign && (
+          {newsFeed.postType === enumerations.contentTypes.campaign && (
             <CampaignCard
               item={newsFeed}
               isDescription
@@ -28,7 +28,7 @@ class NewsFeedPage extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.type === enumerations.contentTypes.ad && (
+          {newsFeed.postType === enumerations.contentTypes.ad && (
             <AdCard
               item={newsFeed}
               isDescription
@@ -36,11 +36,8 @@ class NewsFeedPage extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.type === enumerations.contentTypes.image && (
-            <ImageCard item={newsFeed} />
-          )}
-          {newsFeed.type === enumerations.contentTypes.video && (
-            <VideoCard item={newsFeed} />
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.image || newsFeed.postType.toLowerCase() === enumerations.contentTypes.video && (
+            <MediaCard item={newsFeed} />
           )}
         </div>
       );
