@@ -14,6 +14,7 @@
     "draft-js": "^0.10.5",
     "formik": "^0.11.11",
     "google-map-react": "^1.0.3",
+    "husky": "^1.2.0",
     "jwt-decode": "^2.2.0",
     "moment": "^2.22.2",
     "prop-types": "^15.6.1",
@@ -89,7 +90,6 @@
     "eslint-plugin-import": "^2.8.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.11.1",
-    "husky": "^1.2.0",
     "jest-localstorage-mock": "^2.1.0",
     "lint-staged": "^6.0.0",
     "node-sass-chokidar": "0.0.3",
@@ -98,6 +98,11 @@
     "react-test-renderer": "^16.2.0",
     "storybook-router": "^0.3.2",
     "uglify-js-brunch": "^2.10.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css,scss}": [
