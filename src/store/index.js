@@ -1,16 +1,11 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import rootReducer from "../reducers";
 
-const composeEnhancers = composeWithDevTools({
-  // options like actionSanitizer, stateSanitizer
-});
+const enhancer = applyMiddleware(thunk)
+
+//https://stackoverflow.com/questions/51503198/error-error-error-error-you-may-not-call-store-getstate-while-the-reducer
 
 export const configureStore = () => {
-  const middleware = [thunk];
-  return createStore(
-    rootReducer,
-    composeEnhancers(applyMiddleware(...middleware))
-  );
+  return createStore(rootReducer, enhancer);
 };
