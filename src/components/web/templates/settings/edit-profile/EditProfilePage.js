@@ -216,7 +216,7 @@ class EditProfile extends Component {
     });
 
     if (indexOf === -1) {
-      if (data === enumerations.tagsType.inquiryTagList)
+      if (data === tagsType.inquiryTagList)
       {
         const tagName = {
           inquiryTagName: tag.name
@@ -225,7 +225,7 @@ class EditProfile extends Component {
           
         })
       }
-      else if (data === enumerations.tagsType.offerTagList)
+      else if (data === tagsType.offerTagList)
       {
         const tagName = {
           offerTagName: tag.name
@@ -235,12 +235,12 @@ class EditProfile extends Component {
         })
       }
     } else {
-      if (data === enumerations.tagsType.inquiryTagList){
+      if (data === tagsType.inquiryTagList){
         form.inquiry_tag.push(tag.id);
         form.inquiryTagList.push(tag);
         this.setState({ form });
       }
-      else if (data === enumerations.tagsType.offerTagList) {
+      else if (data === tagsType.offerTagList) {
         form.offer_tag.push(tag.id);
         form.offerTagList.push(tag);
         this.setState({ form });
