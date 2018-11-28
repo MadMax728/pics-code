@@ -9,5 +9,5 @@ export const getComments = (payload, header = {}) =>
 export const addComment = (payload, header = {}) =>
   api(baseUrl, header).post("/comments", payload);
 
-export const deleteComment = (payload, id) =>
-  api.get("/comments?id=" + id, payload);
+export const deleteComment = (payload, header = {}) =>
+  api(baseUrl, header).delete("/comments?id=" + payload.id);

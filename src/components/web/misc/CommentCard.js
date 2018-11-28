@@ -63,11 +63,18 @@ class CommentCard extends Component {
     const comments = this.state.comments;
 
     const indexOf = comments.findIndex(c => {
-      return c.id === parseInt(id);
+      return c.id === id;
     });
 
     if (indexOf !== -1) {
-      comments.splice(indexOf, 1);
+      const data = {
+        id: id
+      }
+      this.props.deleteComment(data).then(()=> {
+        comments.splice(indexOf, 1);
+        this.props.handleComment(false);
+      })
+
     }
     this.setState({ comments });
   };
