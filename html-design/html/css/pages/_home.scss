@@ -295,6 +295,9 @@
 		padding: 10px;
 		@include float();
 		.profile_image{
+			&.wid45{
+			  width: 55px;
+			}
 			img{
 				width: 45px;    			
 			}

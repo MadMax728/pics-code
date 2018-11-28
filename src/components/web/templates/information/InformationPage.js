@@ -80,19 +80,19 @@ class InformationPage extends Component {
         {campaign_detail &&
           !isLoading && (
             <div className="information-wrapper ht100">
-              <div className="info-inner-wrapper col-xs-12 no-padding">
+              <div className="info-inner-wrapper col-xs-12">
                 <div className="info-main-title paddindLeft0">
                   {campaign_detail.title}
                 </div>
                 <div className="text">{campaign_detail.description}</div>
                 <img src={campaign_detail.profileImage} alt={"information"} />
-                <div className="text">{campaign_detail.description}</div>
+                <div className="text paddTop20">{campaign_detail.description}</div>
                 <button className="filled_button">
                   {Translations.apply_campaign}
                 </button>
                 <div className="feed_wrapper">
                   <div className="feed_header">
-                    <div className="col-sm-1 col-xs-1 no-padding profile_image">
+                    <div className="no-padding profile_image">
                       <img
                         src={images.image}
                         alt="circle-img-1"

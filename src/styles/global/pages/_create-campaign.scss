@@ -5,7 +5,7 @@
       max-width: 915px;
       @media (max-width: 915px) {
         width: calc(100% - 4%);
-        margin: 30px 2%;
+        margin: 30px 7%;
       }
       .rdw-editor-wrapper {
         .rdw-editor-main {
@@ -196,6 +196,9 @@
       padding: 20px;
       .profile_image {
         float: left;
+        &.wid45{
+          width: 55px;
+        }
         img {
           width: 45px;
           margin-right: 10px;

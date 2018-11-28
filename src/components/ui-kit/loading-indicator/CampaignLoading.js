@@ -7,7 +7,7 @@ class CampaignLoading extends React.Component {
     return (
       <div className="feed_wrapper">
         <div className="feed_header">
-          <div className="col-sm-1 col-xs-1 no-padding profile_image">
+          <div className="no-padding profile_image wid45">
             <img
               src={images.profile_pic_gray}
               alt="prof_img"
@@ -19,7 +19,7 @@ class CampaignLoading extends React.Component {
             <div className="secondary_title gray_box" />
             <div className="grey_title" />
           </div>
-          <div className="col-sm-2 col-xs-2 like_wrapper">
+          <div className="col-sm-2 col-xs-2 like_wrapper no-padding">
             <img
               src={images.gray_heart}
               alt="like"

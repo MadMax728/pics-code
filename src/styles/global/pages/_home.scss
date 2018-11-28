@@ -457,11 +457,16 @@
     .profile_image {
       display: inline-block;
       float: left;
+      &.wid45{
+        width: 55px;
+      }
+
       img {
         cursor: auto;
         width: 45px;
         height: 45px;
-
+        min-width: 45px;
+        min-height: 45px;
         &.profile_pic_gray {
           height: 35px;
           width: 35px;
@@ -497,11 +502,16 @@
   .feed_content {
     float: left;
     width: 100%;
+    video{
+      background: url("../images/play_video_back.png") no-repeat 50% #000;
+      background-size: contain;
+      background-position: center;
+    }
     .feed_image {
       img {
         width: 100%;
         &.big {
-          height: 40vh;
+          min-height: 35vh;
           padding: 0 7px;
           border: 0;
           position: relative;
@@ -544,9 +554,9 @@
           -moz-transition: all ease 0.5s;
           position: relative;
           &:hover {
-            animation: 0.5s 2 shakeMe;
-            -webkit-animation: 0.5s 2 shakeMe;
-            -moz-animation: 0.5s 2 shakeMe;
+            animation: 0.5s shakeMe;
+            -webkit-animation: 0.5s shakeMe;
+            -moz-animation: 0.5s shakeMe;
           }
         }
       }
@@ -788,52 +798,52 @@
 }
 @keyframes shakeMe {
   0% {
-    top: 0px;
+    transform: rotate(0deg);
   }
   25% {
-    top: -5px;
+    transform: rotate(10deg);
   }
   50% {
-    top: 0px;
+    transform: rotate(0deg);
   }
   75% {
-    top: 5px;
+    transform: rotate(-10deg);
   }
   100% {
-    top: 0px;
+    transform: rotate(0deg);
   }
 }
 @-webkit-keyframes shakeMe {
   0% {
-    top: 0px;
+    -webkit-transform: rotate(0deg);
   }
   25% {
-    top: -5px;
+    -webkit-transform: rotate(10deg);
   }
   50% {
-    top: 0px;
+    -webkit-transform: rotate(0deg);
   }
   75% {
-    top: 5px;
+    -webkit-transform: rotate(-10deg);
   }
   100% {
-    top: 0px;
+    -webkit-transform: rotate(0deg);
   }
 }
 @-moz-keyframes shakeMe {
   0% {
-    top: 0px;
+    -moz-transform: rotate(0deg);
   }
   25% {
-    top: -5px;
+    -moz-transform: rotate(10deg);
   }
   50% {
-    top: 0px;
+    -moz-transform: rotate(0deg);
   }
   75% {
-    top: 5px;
+    -moz-transform: rotate(-10deg);
   }
   100% {
-    top: 0px;
+    -moz-transform: rotate(0deg);
   }
 }
