@@ -5,6 +5,9 @@ import { Link } from "react-router-dom";
 import { RenderToolTips, HashTagUsername } from "../../common";
 import { ThreeDots } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import { addComment, deleteComment } from "../../../actions";
+import { connect } from "react-redux";
+import moment from "moment";
 
 class CommentCard extends Component {
   constructor(props, context) {
@@ -13,6 +16,8 @@ class CommentCard extends Component {
     this.state = {
       item: this.props.item,
       comments: this.props.item,
+      itemId: this.props.itemId,
+      typeOfContent: this.props.typeContent,
       form: {
         comment: ""
       },
@@ -31,22 +36,26 @@ class CommentCard extends Component {
 
   handleReportPost = () => {};
 
-  addComment = (itemId, comment) => {
-    const comments = this.state.comments;
-    const commentData = {
-      id: parseInt(Math.random()),
-      comment,
-      user: {
-        name: "Vaghela",
-        id: 2,
-        image: `${images.campaign2}`
-      },
-      date: "02.02.2000"
-    };
-
-    comments.unshift(commentData);
-
-    this.setState({ comments });
+  addComment = (comment) => {
+    const { comments, itemId, typeOfContent } = this.state;
+    const data = {
+      comment: comment,
+      typeOfContent: typeOfContent,
+      typeId: itemId
+    }
+    this.props.addComment(data).then(()=> { 
+        const commentData = {
+          id: this.props.comment.id,
+          comment: this.props.comment.comment,
+          username: this.props.comment.userName,
+          userId: this.props.comment.userId,
+          profileImage: this.props.comment.profileImage,
+          date: this.props.comment.createdAt
+        }
+      comments.unshift(commentData);
+      this.setState({ comments });
+      this.props.handleComment(true);
+    })
   };
 
   handleDelete = e => {
@@ -82,7 +91,7 @@ class CommentCard extends Component {
             />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {comment.date} <b>Reply</b>
+            <b>{comment.userName}</b> {moment(comment.createdAt).format('MMMM Do YYYY')}<b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
             <ThreeDots
@@ -116,7 +125,7 @@ class CommentCard extends Component {
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.form.comment !== "") {
-      this.addComment(this.props.item.id, this.state.form.comment);
+      this.addComment(this.state.form.comment);
       /* eslint-disable */
       this.refs.commentForm.reset();
       this.setState({ form: { ...this.state.form, comment: "" } });
@@ -125,9 +134,6 @@ class CommentCard extends Component {
 
   render() {
     const { item, form, comments } = this.state;
-
-    console.log(comments);
-    
 
     return (
       <div className="feed-comment" id={item.id}>
@@ -172,8 +178,24 @@ class CommentCard extends Component {
   }
 }
 
-CommentCard.propTypes = {
-  item: PropTypes.any
+const mapStateToProps = state => ({
+  comment: state.commentData.comment
+});
+
+const mapDispatchToProps = {
+  addComment,
+  deleteComment
 };
 
-export default CommentCard;
+
+CommentCard.propTypes = {
+  item: PropTypes.any,
+  addComment: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
+  handleComment: PropTypes.func.isRequired
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CommentCard);

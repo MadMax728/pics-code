@@ -82,6 +82,7 @@ const initialState = {
   },
   commentData: {
     comments: {},
+    comment: null,
     isLoading: false,
     error: false
   },
