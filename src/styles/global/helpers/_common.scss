@@ -130,6 +130,9 @@ hr {
   text-align: center;
 }
 /******** Titles Style*******************/
+.float_left{
+  float: left;
+}
 .normal_title {
   color: $charcoal_color;
   font-family: "Helvetica-Bold";
@@ -1141,3 +1144,19 @@ section.loader-wrapr {
     float: right;
     padding: 5px 0 5px 0;
   }
+  .img-circle{
+    &.ht45{
+      height: 45px;
+    }
+  }
+
+  .got_it{
+    background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+    color: white;
+    border: 0;
+    padding: 10px 39px;
+    height: 40px;
+    margin-left: 20px;
+  }
+  //circle animation
+  

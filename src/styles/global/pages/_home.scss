@@ -617,6 +617,7 @@
       float: left;
       width: 100%;
       padding: 10px;
+      min-height: 80px;
       &:first-child {
         border-top: 1px solid rgba(0, 0, 0, 0.8);
       }
@@ -801,13 +802,13 @@
     transform: rotate(0deg);
   }
   25% {
-    transform: rotate(10deg);
+    transform: rotate(20deg);
   }
   50% {
     transform: rotate(0deg);
   }
   75% {
-    transform: rotate(-10deg);
+    transform: rotate(-20deg);
   }
   100% {
     transform: rotate(0deg);
@@ -818,13 +819,13 @@
     -webkit-transform: rotate(0deg);
   }
   25% {
-    -webkit-transform: rotate(10deg);
+    -webkit-transform: rotate(20deg);
   }
   50% {
     -webkit-transform: rotate(0deg);
   }
   75% {
-    -webkit-transform: rotate(-10deg);
+    -webkit-transform: rotate(-20deg);
   }
   100% {
     -webkit-transform: rotate(0deg);
@@ -835,13 +836,13 @@
     -moz-transform: rotate(0deg);
   }
   25% {
-    -moz-transform: rotate(10deg);
+    -moz-transform: rotate(20deg);
   }
   50% {
     -moz-transform: rotate(0deg);
   }
   75% {
-    -moz-transform: rotate(-10deg);
+    -moz-transform: rotate(-20deg);
   }
   100% {
     -moz-transform: rotate(0deg);

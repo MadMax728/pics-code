@@ -358,7 +358,8 @@
 			border-bottom: 1px solid #ededed;			
 			float: left;
 	    	width: 100%;
-	    	padding: 10px;
+			padding: 10px;
+			min-height: 80px;
 	    	&:first-child{
 	    		border-top: 1px solid #ededed;
 			}
