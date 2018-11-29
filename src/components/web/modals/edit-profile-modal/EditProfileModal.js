@@ -42,7 +42,7 @@ class EditProfileModal extends Component {
 
     // axios({
     //   method: 'post',
-    //   url: 'http://picstagraph-backend-dev.us-east-1.elasticbeanstalk.com/api/images',
+    //   url: 'http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/images',
     //   data:Data,
     //   config: { headers: {'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmZWU5YThiLTI4NzItNDg3Yi04NTlmLWRjMmQ0ZTA0MjA3MSIsInVzZXJuYW1lIjoic2FudG9zaDEyMyIsImVtYWlsIjoic2FudG9zaC5zaGluZGVAcGljc3RhZ3JhcGguY29tIiwiZGF0ZUlzc3VlZCI6IjIwMTgtMTAtMzBUMTE6Mzg6NTIuMjUyWiIsImlhdCI6MTU0MDg5OTUzMiwiZXhwIjoyNzUwNDk5NTMyfQ.cFyhfgRhCoHlgbs410JE9sF6NUuaZRnCHL4XRyHN_Kw' }}
     // }).then((res)=>{
