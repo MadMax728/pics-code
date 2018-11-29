@@ -12,7 +12,7 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // Explore API
 export const getNews = (payload, header = {}) =>
-  api(baseUrl, header).post("/newsfeeds/news-feeds");
+  api(baseUrl, header).get("/newsfeeds/news-feeds");
 
 export const getExplore = (payload, header = {}) =>
   api(baseUrl, header).post("/newsfeeds/explore");

@@ -52,13 +52,13 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.offer}:{" "}
           </span>
-          <span className="secondary_title">{item.offerTagList[0].offerTagName}</span>
+          <span className="secondary_title">{item.offerTagList && item.offerTagList[0].offerTagName}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
             {Translations.create_campaigns.inquiry}:{" "}
           </span>
-          <span className="secondary_title">{item.inquiryTagList[0].inquiryTagName}</span>
+          <span className="secondary_title">{item.inquiryTagList && item.inquiryTagList[0].inquiryTagName}</span>
         </div>
       </div>
       <div className="col-sm-6 no-padding">
@@ -66,13 +66,13 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.offer_tag}:{" "}
           </span>
-          <span className="secondary_title">{item.offerTagList[0].offerTagName}</span>
+          <span className="secondary_title">{item.offerTagList && item.offerTagList[0].offerTagName}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
             {Translations.create_campaigns.inquiry_tag}:{" "}
           </span>
-          <span className="secondary_title">{item.inquiryTagList[0].inquiryTagName}</span>
+          <span className="secondary_title">{item.inquiryTagList && item.inquiryTagList[0].inquiryTagName}</span>
         </div>
       </div>
     </div>
