@@ -79,29 +79,22 @@ class EditProfile extends Component {
       },
       error: {},
       tags: [],
-      suggestions: {
-        offerTagList: [],
-        inquiryTagList: []
-      }
+      suggestionsOfferTagList: [],
+      suggestionsInquiryTagList: []
     };
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     this.props.getOfferTag().then(() => {
-      console.log(this.props.tags);
-      
       this.setState({
-        suggestions: {
-          offerTagList: this.props.tags.offerTags
-        }
+        suggestionsOfferTagList: this.props.offerTags
       });
     });
 
     this.props.getInquiryTag().then(() => {
       this.setState({
-        suggestions: {
-          inquiryTagList: this.props.tags.inquiryTags
-        }
+        suggestionsInquiryTagList: this.props.inquiryTags
       });
     });
 
@@ -115,15 +108,48 @@ class EditProfile extends Component {
     }
   }
 
-  handleOfferTagChange = tags => {
-    const { form } = this.state;
-    form.offer_tag = tags;
-    this.setState({ form });
+  handleOfferTagChange = tag => {
+    const { form, suggestionsOfferTagList } = this.state;
+    const indexOf = suggestionsOfferTagList.findIndex(f => {
+      return f.id === tag.id;
+    });
+
+    if (indexOf === -1) {
+      const tagName = {
+        offerTagName: tag.text
+      }
+      this.props.addOfferTag(tagName).then(()=> {
+        form.offer_tag.push(this.props.tags.addedOfferTags.id);
+        form.offerTagList.push(this.props.tags.addedOfferTags);
+        this.setState({ form });
+      })
+    } else {
+      form.offer_tag.push(tag.id);
+      form.offerTagList.push(tag);
+      this.setState({ form });
+    }
   };
-  handleInquiryTagChange = tags => {
-    const { form } = this.state;
-    form.inquiry_tag = tags;
-    this.setState({ form });
+
+  handleInquiryTagChange = tag => {
+    const { form, suggestionsInquiryTagList } = this.state;
+    const indexOf = suggestionsInquiryTagList.findIndex(f => {
+      return f.id === tag.id;
+    });
+
+    if (indexOf === -1) {
+      const tagName = {
+        inquiryTagName: tag.text
+      }
+      this.props.addInquiryTag(tagName).then(()=> {
+        form.inquiry_tag.push(this.props.tags.addedInquiryTags.id);
+        form.inquiryTagList.push(this.props.tags.addedInquiryTags);
+        this.setState({ form });
+      })
+    } else {
+      form.inquiry_tag.push(tag.id);
+      form.inquiryTagList.push(tag);
+      this.setState({ form });
+    }
   };
 
   handleLocation = (location, address) => {
@@ -209,43 +235,14 @@ class EditProfile extends Component {
     this.props.handleModalInfoShow(modalType.edit_profile);
   };
 
-  handleAddition = (data ,tag) => {
-    const { form, suggestions } = this.state;
-    const indexOf = suggestions[data].findIndex(f => {
-      return f.id === tag.id;
-    });
+  handleInquiryTagDelete = id => {
+    const { form } = this.state;
+    this.setState({ form: { ...this.state.form, inquiry_tag: form.inquiry_tag.filter((tag, index) => index !== id), inquiryTagList: form.inquiryTagList.filter((tag, index) => index !== id) } });
+  };
 
-    if (indexOf === -1) {
-      if (data === tagsType.inquiryTagList)
-      {
-        const tagName = {
-          inquiryTagName: tag.name
-        }
-        this.props.addInquiryTag(tagName).then(()=> {
-          
-        })
-      }
-      else if (data === tagsType.offerTagList)
-      {
-        const tagName = {
-          offerTagName: tag.name
-        }
-        this.props.addOfferTag(tagName).then(()=> {
-
-        })
-      }
-    } else {
-      if (data === tagsType.inquiryTagList){
-        form.inquiry_tag.push(tag.id);
-        form.inquiryTagList.push(tag);
-        this.setState({ form });
-      }
-      else if (data === tagsType.offerTagList) {
-        form.offer_tag.push(tag.id);
-        form.offerTagList.push(tag);
-        this.setState({ form });
-      }
-    }
+  handleOfferTagDelete = id => {
+    const { form } = this.state;
+    this.setState({ form: { ...this.state.form, offer_tag: form.offer_tag.filter((tag, index) => index !== id), offerTagList: form.offerTagList.filter((tag, index) => index !== id) } });
   };
 
   render() {
@@ -473,23 +470,21 @@ class EditProfile extends Component {
                 </label>
                 <Tags
                   value={this.state.form.offerTagList}
-                  onChange={this.handleOfferTagChange}
-                  suggestion={this.state.suggestions.offerTagList}
-                  handleAddition={this.handleAddition}
-                  for={'offerTagList'}
+                  suggestion={this.state.suggestionsOfferTagList}
+                  handleAddition={this.handleOfferTagChange}
+                  handleDelete={this.handleOfferTagDelete}
                 />
               </div>
               <div className="form-group margin-bottom-30">
                 <span className="error-msg highlight">{this.state.error.inquiry_tag}</span>
                 <label htmlFor="inquiry-tag">
-                  {Translations.editProfile.inquiryTagList}
+                  {Translations.editProfile.inquiry_tag}
                 </label>
                 <Tags
                   value={this.state.form.inquiryTagList}
-                  onChange={this.handleInquiryTagChange}
-                  suggestion={this.state.suggestions.inquiryTagList}
-                  handleAddition={this.handleAddition}
-                  for={'inquiryTagList'}
+                  suggestion={this.state.suggestionsInquiryTagList}
+                  handleAddition={this.handleInquiryTagChange}
+                  handleDelete={this.handleInquiryTagDelete}
                 />
               </div>
             </div>
@@ -508,7 +503,9 @@ class EditProfile extends Component {
 
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  tags: state.tags
+  offerTags: state.tags.offerTags,
+  inquiryTags: state.tags.inquiryTags,
+  tags: state.tags  
 });
 
 const mapDispatchToProps = {
@@ -531,7 +528,9 @@ EditProfile.propTypes = {
   getInquiryTag: PropTypes.func,
   addOfferTag: PropTypes.func,
   addInquiryTag: PropTypes.func,
-  tags: PropTypes.any
+  tags: PropTypes.any,
+  offerTags: PropTypes.any,
+  inquiryTags: PropTypes.any,
 };
 
 export default connect(
