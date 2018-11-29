@@ -17,11 +17,16 @@ class CommentCard extends Component {
       item: this.props.item,
       comments: this.props.item,
       itemId: this.props.itemId,
+      edit_comment_id: null,
       typeOfContent: this.props.typeContent,
       form: {
         comment: ""
       },
       ReportTips: [
+        {
+          name: "Edit",
+          handleEvent: this.handleEditComment
+        },
         {
           name: "Report Comment",
           handleEvent: this.handleReportPost
@@ -39,8 +44,8 @@ class CommentCard extends Component {
   addComment = (comment) => {
     const { comments, itemId, typeOfContent } = this.state;
     const data = {
-      comment: comment,
-      typeOfContent: typeOfContent,
+      comment,
+      typeOfContent,
       typeId: itemId
     }
     this.props.addComment(data).then(()=> { 
@@ -58,6 +63,11 @@ class CommentCard extends Component {
     })
   };
 
+  handleEditComment = e => {
+    const id = e.target.id;
+    this.setState({edit_comment_id:id});
+  }
+  
   handleDelete = e => {
     const id = e.target.id;
     console.log(id);
@@ -69,7 +79,7 @@ class CommentCard extends Component {
 
     if (indexOf !== -1) {
       const data = {
-        id: id
+        id
       }
       this.props.deleteComment(data).then(()=> {
         comments.splice(indexOf, 1);
@@ -88,6 +98,23 @@ class CommentCard extends Component {
     
     return <RenderToolTips items={this.state.ReportTips} id={id} />;
   };
+
+  renderEditComment = comment => {
+    let html = <p>{comment.comment} {comment.id}</p>;
+    if(comment.id === this.state.edit_comment_id){
+      html =  <HashTagUsername
+                className="form-control"
+                type="text"
+                placeholder="Write a comment"
+                name="comment"
+                handleSetState={this.handleSetState}
+                value={""}
+                isText
+              />
+    }
+    
+    return html;
+  }
 
   renderComment = comment => {
     return (
@@ -122,7 +149,7 @@ class CommentCard extends Component {
           </div>
         </div>
         <div className="comment-content">
-          <p>{comment.comment}</p>
+          {this.renderEditComment(comment)}
         </div>
       </div>
     );
