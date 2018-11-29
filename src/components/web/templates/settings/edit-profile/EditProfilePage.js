@@ -106,7 +106,7 @@ class EditProfile extends Component {
     });
 
     if (userInfo) {
-      let data = {
+      const data = {
         username: userInfo.username
       };
       this.props.getUser(data).then(() => {
@@ -234,8 +234,7 @@ class EditProfile extends Component {
 
         })
       }
-    } else {
-      if (data === tagsType.inquiryTagList){
+    } else if (data === tagsType.inquiryTagList){
         form.inquiry_tag.push(tag.id);
         form.inquiryTagList.push(tag);
         this.setState({ form });
@@ -245,7 +244,6 @@ class EditProfile extends Component {
         form.offerTagList.push(tag);
         this.setState({ form });
       }
-    }
   };
 
   render() {

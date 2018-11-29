@@ -50,7 +50,7 @@ class CampaignCard extends Component {
     item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
     this.setState({ item });
 
-    let campaignLike = {
+    const campaignLike = {
       typeOfContent: "campaign",
       typeId: item.id
     };
@@ -65,7 +65,7 @@ class CampaignCard extends Component {
   }
 
   handleCommentsSections = () => {
-    let CampaignId = {
+    const CampaignId = {
       typeId: this.state.item.id
     };
     this.props.getComments(CampaignId).then(() => {
