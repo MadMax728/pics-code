@@ -2,11 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { WithContext as ReactTags } from "react-tag-input";
 
-const propTypes = {
-  value: PropTypes.any,
-  onChange: PropTypes.func.isRequired
-};
-
 const KeyCodes = {
   comma: 188,
   enter: 13
@@ -15,52 +10,25 @@ const KeyCodes = {
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class Tags extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tags: this.props.value,
-      suggestions: this.props.suggestion,
-      value: []
-    };
-  }
-
-  handleDelete = i => {
-    const { tags } = this.state;
-    this.setState(
-      {
-        tags: tags.filter((tag, index) => index !== i)
-      },
-      () => {
-        this.props.onChange(this.state.tags);
-      }
-    );
-  };
-
-  handleAddition = tag => {
-    this.props.handleAddition(this.props.for, tag);
-  };
-
   render() {
-    console.log(this.props.suggestion);
-    
+    const { value, suggestion, handleAddition, handleDelete } = this.props; 
     return (
         <ReactTags
-          tags={this.props.value}
-          suggestions={this.props.suggestion}
-          handleDelete={this.handleDelete}
-          handleAddition={this.props.handleAddition}
+          tags={value}
+          suggestions={suggestion}
+          handleDelete={handleDelete}
+          handleAddition={handleAddition}
           delimiters={delimiters}
         />
     );
   }
 }
 
-Tags.propTypes = {
-  suggestion: propTypes.any,
+const propTypes = {
+  suggestion: PropTypes.any,
   value: PropTypes.any,
-  onChange: PropTypes.func,
-  for: propTypes.string,
-  handleAddition: propTypes.func
+  handleAddition: PropTypes.func.isRequired,
+  handleDelete: PropTypes.func.isRequired
 };
 
 Tags.propTypes = propTypes;
