@@ -39,10 +39,15 @@ export const mediaTypes = {
   image: "image"
 };
 
+export const tagsType = {
+  inquiryTagList: "inquiryTagList",
+  offerTagList: "offerTagList"
+}
+
 export const contentTypes = {
-  companyCampaign: "companyCampaign",
-  creatorCampaign: "creatorCampaign",
-  companyParticipantCampaign: "companyParticipantCampaign",
+  companyCampaign: "companycampaign",
+  creatorCampaign: "creatorcampaign",
+  companyParticipantCampaign: "companyparticipantcampaign",
   ad: "ad",
   mediaPost: "mediapost",
   video: "video",

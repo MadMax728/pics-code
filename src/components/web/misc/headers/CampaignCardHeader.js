@@ -4,6 +4,7 @@ import classnames from "classnames";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 import { Link } from "react-router-dom";
+import moment from "moment";
 
 const CampaignCardHeader = ({
   campaign,
@@ -37,9 +38,10 @@ const CampaignCardHeader = ({
         <Link to={profile_route}>
           <div className="normal_title">{campaign.userName}</div>
         </Link>
-        <div className="secondary_title">{"location"}</div>
+        <div className="">published a campaign</div>
+        <div className="secondary_title">{campaign.location}</div>
         {campaign.category && (
-          <div className="grey_title">{campaign.category[0].categoryName}</div>
+          <div className="grey_title">{moment(campaign.createdAt).format('MMMM Do YYYY')} in {campaign.category[0].categoryName}</div>
         )}
       </div>
       <div className={like_wrapper} role="article">

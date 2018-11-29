@@ -21,7 +21,7 @@ export const getParticipant = (payload, header = {}) =>
   api(baseUrl, header).post("/participants/get-all-participant");
 
 export const getDashboardUser  = (payload, header = {}) =>
-  api(baseUrl, header).post("/user");
+  api(baseUrl, header).post("/users/get-all-users ");
 
 export const getPic = (payload, header = {}) =>
   api(baseUrl, header).post("/pics");

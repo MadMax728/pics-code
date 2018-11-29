@@ -16,11 +16,9 @@ class ParticipantsPage extends Component {
     return participantsList.map(participant => {
       return (
         <div key={participant.id}>
-          {participant.postType === enumerations.contentTypes.mediaPost ||
-            (participant.postType ===
-              enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard item={participant} />
-            ))}
+          {participant.postType && participant.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && 
+               <MediaCard item={participant} />
+          }
         </div>
       );
     });
