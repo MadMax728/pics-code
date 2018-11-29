@@ -44,6 +44,12 @@ class MediaCard extends Component {
 
   handleContent = () => {};
 
+  handleComment = (commet) => {
+    const item = this.state.item;
+    item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
+    this.setState({ item });
+  }
+  
   handleFavorite = e => {
     const item = this.state.item;
     item.isSelfLike = !this.state.item.isSelfLike;
@@ -83,7 +89,7 @@ class MediaCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={this.state.comments} />}
+        {isComments && <CommentCard item={this.state.comments} itemId={item.id} typeContent={item.typeContent} handleComment={this.handleComment} />}
       </div>
     );
   }
@@ -103,7 +109,8 @@ MediaCard.propTypes = {
   item: propTypes.object.isRequired,
   like: propTypes.func.isRequired,
   comments: propTypes.any,
-  getComments: propTypes.func.isRequired
+  getComments: propTypes.func.isRequired,
+  isParticipant: propTypes.bool.isRequired,
 };
 
 export default connect(

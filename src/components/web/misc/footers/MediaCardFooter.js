@@ -13,7 +13,7 @@ const MediaCardFooter = ({
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
-        <span className="count">{item.msg_count}</span>
+        <span className="count">{item.commentCount}</span>
         <img
           src={images.comment}
           alt="company-comments"

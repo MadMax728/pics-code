@@ -19,7 +19,8 @@ class Tags extends Component {
     super(props);
     this.state = {
       tags: this.props.value,
-      suggestions: this.props.suggestion
+      suggestions: this.props.suggestion,
+      value: []
     };
   }
 
@@ -36,36 +37,18 @@ class Tags extends Component {
   };
 
   handleAddition = tag => {
-    this.setState(
-      state => ({ tags: [...state.tags, tag] }),
-      () => {
-        this.props.onChange(this.state.tags);
-      }
-    );
-  };
-
-  handleDrag = (tag, currPos, newPos) => {
-    const tags = [...this.state.tags];
-    const newTags = tags.slice();
-
-    newTags.splice(currPos, 1);
-    newTags.splice(newPos, 0, tag);
-
-    // re-render
-    this.setState({ tags: newTags }, () => {
-      this.props.onChange(this.state.tags);
-    });
+    this.props.handleAddition(this.props.for, tag);
   };
 
   render() {
-    const { tags, suggestions } = this.state;
+    console.log(this.props.suggestion);
+    
     return (
         <ReactTags
           tags={this.props.value}
           suggestions={this.props.suggestion}
           handleDelete={this.handleDelete}
-          handleAddition={this.handleAddition}
-          handleDrag={this.handleDrag}
+          handleAddition={this.props.handleAddition}
           delimiters={delimiters}
         />
     );
@@ -75,7 +58,9 @@ class Tags extends Component {
 Tags.propTypes = {
   suggestion: propTypes.any,
   value: PropTypes.any,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  for: propTypes.string,
+  handleAddition: propTypes.func
 };
 
 Tags.propTypes = propTypes;

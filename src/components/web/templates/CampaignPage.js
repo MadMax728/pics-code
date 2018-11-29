@@ -32,8 +32,8 @@ class CampaignPage extends Component {
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {(campaign.postType === enumerations.contentTypes.companyCampaign ||
-            campaign.postType ===
+          {(campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
+            campaign.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign) && (
             <CampaignCard
               item={campaign}

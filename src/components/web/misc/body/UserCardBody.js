@@ -1,7 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 
-const UserCardBody = ({ user, index }) => {
+const UserCardBody = ({ user, index, handleSubscribed }) => {
   return (
     <div
       className={
@@ -9,11 +9,27 @@ const UserCardBody = ({ user, index }) => {
       }
     >
       <div className="pic-block">
-        <img src={user.image} alt={"pic-1"} />
+        <img src={user.profileUrl} alt={"pic-1"}/>
         <div className="name-wrapper">
           <div className="username">{user.username}</div>
           <div className="name">{user.name}</div>
-          <button className="filled_button">Subscribe</button>
+          {user.isSubscribe ? (
+            <button
+              className="filled_button"
+              id={user.id}
+              onClick={handleSubscribed}
+            >
+              Subscribe
+                    </button>
+          ) : (
+              <button
+                className="blue_button"
+                id={user.id}
+                onClick={handleSubscribed}
+              >
+                Subscribed
+                    </button>
+            )}
         </div>
       </div>
     </div>
@@ -22,6 +38,7 @@ const UserCardBody = ({ user, index }) => {
 
 UserCardBody.propTypes = {
   user: propTypes.object.isRequired,
+  handleSubscribed: propTypes.func.isRequired,
   index: propTypes.number.isRequired
 };
 

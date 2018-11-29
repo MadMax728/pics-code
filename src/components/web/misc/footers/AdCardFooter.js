@@ -16,7 +16,7 @@ const AdCardFooter = ({
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
-        <span className="count">{ad.msg_count}</span>
+        <span className="count">{ad.commentCount}</span>
         <img
           src={images.comment}
           alt="company-comments"
@@ -27,7 +27,7 @@ const AdCardFooter = ({
         />
       </div>
       <div className="likes" role="article">
-        <span className="count">{ad.like_count}</span>
+        <span className="count">{ad.likeCount}</span>
         <img
           src={favorite_icon}
           alt="like"

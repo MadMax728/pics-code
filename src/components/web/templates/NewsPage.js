@@ -16,26 +16,35 @@ class NewsRoot extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {(newsFeed.postType === enumerations.contentTypes.companyCampaign ||
-            newsFeed.postType ===
-              enumerations.contentTypes.creatorCampaign) && (
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.mediaPost && (
+            <MediaCard item={newsFeed} isParticipant={false} />
+          )}
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={newsFeed}
-              isDescription
-              isInformation={false}
+              isDescription={false}
+              isInformation
               isStatus={false}
             />
           )}
-          {newsFeed.postType === enumerations.contentTypes.ad && (
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign && (
+            <CampaignCard
+              item={newsFeed}
+              isDescription={false}
+              isInformation
+              isStatus={false}
+            />
+          )}
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && (
+            <MediaCard item={newsFeed} isParticipant />
+          )}
+          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
               item={newsFeed}
               isDescription
               isInformation={false}
               isStatus={false}
             />
-          )}
-          {newsFeed.postType === enumerations.contentTypes.mediaPost && (
-            <MediaCard item={newsFeed} />
           )}
         </div>
       );
