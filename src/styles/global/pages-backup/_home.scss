@@ -329,6 +329,7 @@
 .feed_wrapper {
   background-color: $white_color;
   margin-bottom: 2px;
+  
   @include float();
   .feed_header {
     padding: 10px;
@@ -408,6 +409,7 @@
       float: left;
       width: 100%;
       padding: 10px;
+      }
       &:first-child {
         border-top: 1px solid #ededed;
       }
@@ -467,4 +469,4 @@
       }
     }
   }
-}
+

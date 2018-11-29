@@ -42,6 +42,13 @@
 	.feed-comment {
 		.comment-wrapper{
 			padding: 10px 30px;
+			.comment-header{
+			  .profile_image{
+				img{
+				  height: 45px;
+				  width: 45px;
+				}
+			  }
 			img{
 				width: 45px;
 			}
@@ -67,4 +74,5 @@
 			padding: 0px 17px;
 		}
 	}
+}
 }
