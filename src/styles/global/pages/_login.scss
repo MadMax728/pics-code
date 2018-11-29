@@ -67,6 +67,9 @@
         position: relative;
         float: left;
         width: 100%;
+        &.marBtm0{
+          margin-bottom: 0px;
+        }
         .options {
           list-style-type: none;
           padding: 0;
@@ -186,6 +189,8 @@
     bottom: 65px;
     left: 0;
     width: 100%;
+    background-color: white;
+    z-index: 100;
     a {
       color: $blue_color;
     }
@@ -207,6 +212,8 @@
     bottom: 0;
     left: 0;
     width: 100%;
+    background-color: white;
+    z-index: 100;
     ul {
       padding: 0px;
       text-align: center;
