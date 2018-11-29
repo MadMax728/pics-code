@@ -25,7 +25,7 @@ import {
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
 if (storage) {
-  userInfo = jwtDecode(storage.accessToken);
+ userInfo = jwtDecode(storage.accessToken);
 }
 const genderItems = [
   {
