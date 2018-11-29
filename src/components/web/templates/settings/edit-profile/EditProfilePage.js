@@ -85,6 +85,7 @@ class EditProfile extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     this.props.getOfferTag().then(() => {
       this.setState({
         suggestionsOfferTagList: this.props.offerTags
@@ -477,7 +478,7 @@ class EditProfile extends Component {
               <div className="form-group margin-bottom-30">
                 <span className="error-msg highlight">{this.state.error.inquiry_tag}</span>
                 <label htmlFor="inquiry-tag">
-                  {Translations.editProfile.inquiryTagList}
+                  {Translations.editProfile.inquiry_tag}
                 </label>
                 <Tags
                   value={this.state.form.inquiryTagList}

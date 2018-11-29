@@ -23,7 +23,7 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.target_group}:{" "}
           </span>
-          <span className="secondary_title">{item.target_group}</span>
+          <span className="secondary_title">{item.target_group? item.target_group : "Male"}</span>
         </div>
       </div>
       <div className="col-sm-6 no-padding">
@@ -43,7 +43,7 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.applications}:{" "}
           </span>
-          <span className="secondary_title">{item.applications}</span>
+          <span className="secondary_title">{item.applications? item.applications : "22/22"}</span>
         </div>
       </div>
       <hr />
@@ -52,13 +52,13 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.offer}:{" "}
           </span>
-          <span className="secondary_title">{item.offers}</span>
+          <span className="secondary_title">{item.offerTagList[0].offerTagName}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
             {Translations.create_campaigns.inquiry}:{" "}
           </span>
-          <span className="secondary_title">{item.inquiry}</span>
+          <span className="secondary_title">{item.inquiryTagList[0].inquiryTagName}</span>
         </div>
       </div>
       <div className="col-sm-6 no-padding">
@@ -66,13 +66,13 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.offer_tag}:{" "}
           </span>
-          <span className="secondary_title">{item.inquiryTag}</span>
+          <span className="secondary_title">{item.offerTagList[0].offerTagName}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
             {Translations.create_campaigns.inquiry_tag}:{" "}
           </span>
-          <span className="secondary_title">{item.inquiryTag}</span>
+          <span className="secondary_title">{item.inquiryTagList[0].inquiryTagName}</span>
         </div>
       </div>
     </div>

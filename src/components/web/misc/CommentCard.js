@@ -60,6 +60,7 @@ class CommentCard extends Component {
 
   handleDelete = e => {
     const id = e.target.id;
+    console.log(id);
     const comments = this.state.comments;
 
     const indexOf = comments.findIndex(c => {
@@ -83,6 +84,8 @@ class CommentCard extends Component {
    * Tooltp
    */
   renderReportTips = id => {
+    console.log(id);
+    
     return <RenderToolTips items={this.state.ReportTips} id={id} />;
   };
 

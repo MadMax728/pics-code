@@ -6,20 +6,37 @@ import { CampaignLoading } from "../../ui-kit";
 import { AboutCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
+// remove when actual about API calling
+
+import { Auth } from "../../../auth";
+import jwtDecode from "jwt-decode";
+const storage = Auth.extractJwtFromStorage();
+let userInfo = null;
+if (storage) {
+ userInfo = jwtDecode(storage.accessToken);
+}
+// ----------
+
 class AboutPage extends Component {
   componentDidMount = () => {
-    if (this.props.match.params.id) {
-      this.props.getAbout("getAboutOther", this.props.match.params.id);
-    } else {
-      this.props.getAbout("getAboutOwner");
+    // if (this.props.match.params.id) {
+    //   this.props.getAbout("getAboutOther", this.props.match.params.id);
+    // } else {
+    //   this.props.getAbout("getAboutOwner");
+    // }
+
+    if (userInfo) {
+      let data = {
+        username: userInfo.username
+      };
+      this.props.getAbout("getAbout",data)      
     }
+
   };
 
   renderAbout = () => {
     const { aboutDetails } = this.props;
-    return aboutDetails.map((about, index) => {
-      return <AboutCard about={about} key={index} />;
-    });
+      return <AboutCard about={aboutDetails} />;
   };
 
   render() {
