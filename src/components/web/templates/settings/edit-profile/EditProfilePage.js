@@ -237,13 +237,6 @@ class EditProfile extends Component {
   handleInquiryTagDelete = id => {
     const { form } = this.state;
     this.setState({ form: { ...this.state.form, inquiry_tag: form.inquiry_tag.filter((tag, index) => index !== id), inquiryTagList: form.inquiryTagList.filter((tag, index) => index !== id) } });
-
-    // this.setState(
-    //   {
-    //     form: form.inquiry_tag.filter((tag, index) => index !== id),
-    //     form: form.inquiryTagList.filter((tag, index) => index !== id)
-    //   }
-    // );
   };
 
   handleOfferTagDelete = id => {
@@ -534,7 +527,9 @@ EditProfile.propTypes = {
   getInquiryTag: PropTypes.func,
   addOfferTag: PropTypes.func,
   addInquiryTag: PropTypes.func,
-  tags: PropTypes.any
+  tags: PropTypes.any,
+  offerTags: PropTypes.any,
+  inquiryTags: PropTypes.any,
 };
 
 export default connect(
