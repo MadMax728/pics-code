@@ -15,7 +15,7 @@ const CampaignCardFooter = ({
 }) => {
   const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
-    : images.feed_like;
+    : images.feed_like;   
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">

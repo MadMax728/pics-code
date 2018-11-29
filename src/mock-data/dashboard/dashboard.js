@@ -57,6 +57,7 @@ export const dashboardList = [
     postType: "companyCampaign"
   },
   {
+    postType: "ad",
     user: {
       name: "Santosh Shinde",
       id: "3",
@@ -101,11 +102,10 @@ export const dashboardList = [
         date: "03.03.2000"
       }
     ],
-    category: "Category",
+    category: "01.01.2000 in Category",
     image: `${images.campaign3}`,
     video: `${videos.demo}`,
     mediaType: "video",
-    insert_link: "https://www.google.com/",
     type: "ad",
     desc:
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...",
@@ -113,7 +113,7 @@ export const dashboardList = [
     like_count: 12,
     isFavorite: false,
     applications: "2000/2000",
-    isSaved: false,
+    isSaved: true,
     views: "100",
     clicks: "200",
     budget_spent_per: "80%",
@@ -125,6 +125,7 @@ export const dashboardList = [
     id: 3
   },
   {
+    postType: "ad",
     user: {
       name: "Mahesh Gohil",
       id: "4",
@@ -169,9 +170,8 @@ export const dashboardList = [
         date: "03.03.2000"
       }
     ],
-    category: "Category",
+    category: "01.01.2000 in Category",
     mediaType: "image",
-    insert_link: "https://www.google.com/",
     type: "ad",
     image: `${images.campaign4}`,
     desc:
@@ -192,6 +192,7 @@ export const dashboardList = [
     id: 4
   },
   {
+    postType: "mediapost",
     user: {
       name: "Narendra Vaghela",
       id: "3",
@@ -246,6 +247,7 @@ export const dashboardList = [
     id: 5
   },
   {
+    postType: "mediapost",
     user: {
       name: "Sachin Jethwa",
       id: "3",
@@ -256,7 +258,7 @@ export const dashboardList = [
       type: "company",
       isParticipant: true
     },
-    title: "Title of Images",
+    title: "Title of Video",
     location: "London",
     comments: [
       {

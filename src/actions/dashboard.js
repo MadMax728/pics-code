@@ -30,9 +30,10 @@ export const getDashboard = (prop, provider) => {
 
     return dashboardService[prop](provider, header).then(
       res => {
-        dispatch(getDashboardSucceeded(res.data.data));
+          dispatch(getDashboardSucceeded(res.data.data));
       },
       error => {
+        dispatch(getDashboardFailed(error.response))
         dispatch(
           // getDashboardFailed(error.response)
           // remove below code after API working, this is just for set mock data.

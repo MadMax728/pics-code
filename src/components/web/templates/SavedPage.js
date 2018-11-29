@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getSaved } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { CampaignCard, AdCard, ImageCard, VideoCard } from "../misc";
+import { CampaignCard, AdCard, MediaCard } from "../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class SavedPage extends Component {
@@ -19,7 +19,7 @@ class SavedPage extends Component {
     return savedList.map(saved => {
       return (
         <div key={saved.id}>
-          {saved.type === enumerations.contentTypes.campaign && (
+          {saved.postType === enumerations.contentTypes.campaign && (
             <CampaignCard
               item={saved}
               isDescription
@@ -27,7 +27,7 @@ class SavedPage extends Component {
               isStatus={false}
             />
           )}
-          {saved.type === enumerations.contentTypes.ad && (
+          {saved.postType === enumerations.contentTypes.ad && (
             <AdCard
               item={saved}
               isDescription
@@ -35,11 +35,8 @@ class SavedPage extends Component {
               isStatus={false}
             />
           )}
-          {saved.type === enumerations.contentTypes.image && (
-            <ImageCard item={saved} />
-          )}
-          {saved.type === enumerations.contentTypes.video && (
-            <VideoCard item={saved} />
+          {saved.postType.toLowerCase() === enumerations.contentTypes.image || saved.postType.toLowerCase() === enumerations.contentTypes.video && (
+            <MediaCard item={saved} />
           )}
         </div>
       );

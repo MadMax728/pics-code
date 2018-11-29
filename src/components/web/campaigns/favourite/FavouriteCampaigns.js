@@ -13,8 +13,8 @@ const FavouriteCampaigns = () => {
       <div className="campaigns">
         {campaigns_list.map(campaign => {
           return (
-            (campaign.postType === enumerations.contentTypes.companyCampaign ||
-              campaign.postType ===
+            (campaign.postType && campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
+              campaign.postType.toLowerCase() ===
                 enumerations.contentTypes.creatorCampaign) && (
               <FavouriteCampaignItem campaign={campaign} key={campaign.id} />
             )

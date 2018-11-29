@@ -8,7 +8,7 @@ import { RenderToolTips } from "../../common";
 import CommentCard from "./CommentCard";
 import { like } from "../../../actions/like";
 import { getComments } from "../../../actions/comments";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 
 class CampaignCard extends Component {
   constructor(props, context) {
@@ -57,6 +57,13 @@ class CampaignCard extends Component {
     this.props.like(campaignLike);
   };
 
+  
+  handleComment = (commet) => {
+    const item = this.state.item;
+    item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
+    this.setState({ item });
+  }
+
   handleCommentsSections = () => {
     let CampaignId = {
       typeId: this.state.item.id
@@ -72,6 +79,7 @@ class CampaignCard extends Component {
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
     const { isComments, item } = this.state;
+    console.log(item);
 
     return (
       <div className="feed_wrapper">
@@ -94,7 +102,7 @@ class CampaignCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={this.state.comments} />}
+        {isComments && <CommentCard item={this.state.comments} itemId={item.id} typeContent={item.typeContent} handleComment={this.handleComment} />}
       </div>
     );
   }

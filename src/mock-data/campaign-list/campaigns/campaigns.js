@@ -57,6 +57,7 @@ export const campaigns_list = [
     postType: "companyCampaign"
   },
   {
+    postType: "ad",
     user: {
       name: "Santosh Shinde",
       id: "3",
@@ -124,6 +125,7 @@ export const campaigns_list = [
     id: 3
   },
   {
+    postType: "ad",
     user: {
       name: "Mahesh Gohil",
       id: "4",
@@ -190,6 +192,7 @@ export const campaigns_list = [
     id: 4
   },
   {
+    postType: "mediapost",
     user: {
       name: "Narendra Vaghela",
       id: "3",
@@ -244,6 +247,7 @@ export const campaigns_list = [
     id: 5
   },
   {
+    postType: "mediapost",
     user: {
       name: "Sachin Jethwa",
       id: "3",

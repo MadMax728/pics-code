@@ -21,12 +21,6 @@ class SideBarOtherMenu extends Component {
           className: "secondary_title",
           activeClassName: "active",
           text: Translations.left_sidebar_owner_menu.about
-        },
-        {
-          to: `/saved/${this.props.match.params.id}`,
-          className: "secondary_title",
-          activeClassName: "active",
-          text: Translations.left_sidebar_owner_menu.saved
         }
       ]
     };
