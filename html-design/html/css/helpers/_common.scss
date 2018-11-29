@@ -77,6 +77,12 @@ hr{
 	font-family: 'Helvetica-Bold';
 	font-size: 14px;
 }
+.normal_sub_title{
+    float: left;
+    &~a{
+      float: left;
+    }
+  }
 .secondary_title{
 	font-family: 'Helvetica';
 	color:$charcoal_color;

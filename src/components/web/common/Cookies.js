@@ -15,7 +15,8 @@ class Cookies extends Component {
               {Translations.base_footer.cookies}
             </Link>
             .{Translations.base_footer.agree}.
-            <img src={images.cross} alt={"cross"} />
+            {/* <img src={images.cross} alt={"cross"} /> */}
+            <button className="got_it">Got it!</button>
           </div>
         </div>
       </section>
