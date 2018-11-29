@@ -179,8 +179,6 @@ class SocialNetworks extends Component {
 
   render() {
     const { isOwnerProfile, userData } = this.props;
-    console.log("userData", userData);
-
     return (
       <div>
         {userData &&

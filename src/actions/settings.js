@@ -24,18 +24,17 @@ export const getNewsFeed = (prop, provider) => {
   return dispatch => {
     dispatch(getNewsFeedStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return settingsService[prop](params, provider).then(
+    return settingsService[prop](provider, header).then(
       res => {
         dispatch(getNewsFeedSucceeded(res.data.data));
       },
       error => {
+        dispatch(getNewsFeedFailed(error.response));
         dispatch(
-          // getNewsFeedFailed(error.response)
           // remove below code after API working, this is just for set mock data.
           getNewsFeedSucceeded(
             campaigns_list
@@ -70,18 +69,17 @@ export const getAbout = (prop, provider) => {
   return dispatch => {
     dispatch(getAboutStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return settingsService[prop](params, provider).then(
+    return settingsService[prop](provider, header).then(
       res => {
         dispatch(getAboutSucceeded(res.data.data));
       },
       error => {
+        dispatch(getAboutFailed(error.response));
         dispatch(
-          // getCampaignsFailed(error.response)
           // remove below code after API working, this is just for set mock data.
 
           prop === "getAboutOther"
@@ -122,12 +120,11 @@ export const getSaved = (prop, provider) => {
   return dispatch => {
     dispatch(getSavedStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return settingsService[prop](params, provider).then(
+    return settingsService[prop](provider, header).then(
       res => {
         dispatch(getSavedSucceeded(res.data.data));
       },
