@@ -45,6 +45,7 @@
     margin: auto;
     text-align: center;
     color: $charcoal_color;
+    min-height: 810px;
     img {
       width: 20px;
     }
@@ -173,6 +174,9 @@
       }
       img {
         width: 135px;
+      }
+      a{
+        margin: 0 8px;
       }
     }
   }
