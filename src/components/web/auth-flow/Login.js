@@ -140,7 +140,7 @@ class Login extends Component {
                     {Translations.login.forgot_password}
                   </Link>
                 </div>
-                <div className="form-group">
+                <div className="form-group marBtm0">
                   {loginData && loginData.isLoading ? (
                     <InlineLoading />
                   ) : (
