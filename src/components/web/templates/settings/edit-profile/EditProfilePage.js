@@ -25,7 +25,8 @@ import {
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
 if (storage) {
- userInfo = jwtDecode(storage.accessToken);
+  userInfo = JSON.parse(storage.userInfo);
+//  userInfo = jwtDecode(storage.accessToken);
 }
 const genderItems = [
   {
@@ -112,7 +113,7 @@ class EditProfile extends Component {
       this.props.getUser(data).then(() => {
         this.setDataOnLoad();
       });
-    }
+    } 
   }
 
   handleOfferTagChange = tags => {

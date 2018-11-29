@@ -109,7 +109,8 @@ export const extractJwtFromStorage = () => {
     isAdmin: localStorage.getItem("is_admin"),
     userType: localStorage.getItem("user_type"),
     adminAccessToken: localStorage.getItem("admin_access_token"),
-    language: localStorage.getItem("language")
+    language: localStorage.getItem("language"),
+    userInfo: localStorage.getItem("user_info")
   };
 };
 
@@ -126,6 +127,13 @@ export const clearTokensFromStorage = () => {
 export const saveJwtToStorage = authResponse => {
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
+  }
+  console.log(authResponse)
+  if (authResponse.email && authResponse.username && authResponse.language && authResponse.id) {
+    localStorage.setItem("user_info",JSON.stringify({"email":authResponse.email, 
+    "username":authResponse.username, 
+    "language": authResponse.language, 
+    "id": authResponse.id}));
   }
 
   if (authResponse.hasOwnProperty("isAdmin")) {
@@ -158,4 +166,5 @@ export const removeJwtFromStorage = () => {
   localStorage.removeItem("is_admin");
   localStorage.removeItem("user_type");
   localStorage.removeItem("admin_access_token");
+  localStorage.removeItem("user_info");
 };
