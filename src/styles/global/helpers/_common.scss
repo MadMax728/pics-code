@@ -130,6 +130,9 @@ hr {
   text-align: center;
 }
 /******** Titles Style*******************/
+.float_left{
+  float: left;
+}
 .normal_title {
   color: $charcoal_color;
   font-family: "Helvetica-Bold";
@@ -1142,5 +1145,7 @@ section.loader-wrapr {
     padding: 5px 0 5px 0;
   }
   .img-circle{
-    height: 45px;
+    &.ht45{
+      height: 45px;
+    }
   }
