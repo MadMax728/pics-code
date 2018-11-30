@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { RenderToolTips, HashTagUsername } from "../../common";
 import { ThreeDots } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import { addComment, deleteComment } from "../../../actions";
+import { addComment, deleteComment, editComment } from "../../../actions";
 import { connect } from "react-redux";
 import moment from "moment";
 
@@ -17,9 +17,12 @@ class CommentCard extends Component {
       item: this.props.item,
       comments: this.props.item,
       itemId: this.props.itemId,
-      edit_comment_id: null,
       typeOfContent: this.props.typeContent,
       form: {
+        id: null,
+        comment: ""
+      },
+      updateForm: {
         comment: ""
       },
       ReportTips: [
@@ -65,7 +68,8 @@ class CommentCard extends Component {
 
   handleEditComment = e => {
     const id = e.target.id;
-    this.setState({edit_comment_id:id});
+    const { comments } = this.state;
+    this.setState({ updateForm: { ...this.state.updateForm, comment: comments[comments.findIndex(c => c.id === id)].comment, id: id}});
   }
   
   handleDelete = e => {
@@ -95,17 +99,28 @@ class CommentCard extends Component {
   };
 
   renderEditComment = comment => {
+    const { updateForm } = this.state;
     let html = <p>{comment.comment}</p>;
-    if(comment.id === this.state.edit_comment_id){
-      html =  <HashTagUsername
+    if(comment.id === updateForm.id){
+      html =             
+      <form onSubmit={this.handleUpdateSubmit}>
+        <div className="col-sm-10 col-xs-7 no-padding">
+          <div className="comment-input">
+            <div className="form-group">
+              <HashTagUsername
                 className="form-control"
                 type="text"
                 placeholder="Write a comment"
                 name="comment"
-                handleSetState={this.handleSetState}
-                value={""}
+                handleSetState={this.handleUpdateSetState}
+                value={updateForm.comment}
                 isText
               />
+            </div>
+          </div>
+        </div>
+        <input type="submit" hidden />
+      </form>
     }
     
     return html;
@@ -154,6 +169,10 @@ class CommentCard extends Component {
     this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
   };
 
+  handleUpdateSetState = (value, cd) => {
+    this.setState({ updateForm: { ...this.state.updateForm, comment: value } }, () => cd());
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     if (this.state.form.comment !== "") {
@@ -161,6 +180,19 @@ class CommentCard extends Component {
       /* eslint-disable */
       this.refs.commentForm.reset();
       this.setState({ form: { ...this.state.form, comment: "" } });
+    }
+  };
+
+  handleUpdateSubmit = e => {
+    e.preventDefault();
+    const { comments, updateForm } = this.state; 
+    if (updateForm.comment !== "") {
+      this.props.editComment(updateForm).then(() => {
+        comments[comments.findIndex(c => c.id === updateForm.id)].comment = updateForm.comment;
+        /* eslint-disable */
+        this.setState({ comments });
+        this.setState({ updateForm: { ...this.state.updateForm, comment: "", id: null } });
+      });
     }
   };
 
@@ -216,7 +248,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   addComment,
-  deleteComment
+  deleteComment,
+  editComment
 };
 
 
@@ -225,6 +258,7 @@ CommentCard.propTypes = {
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
   handleComment: PropTypes.func.isRequired,
+  editComment: PropTypes.func.isRequired,
   comment: PropTypes.any,
   typeContent: PropTypes.any,
   itemId: PropTypes.any,
