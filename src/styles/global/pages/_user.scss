@@ -10,6 +10,11 @@
       height: 30px;
       padding-top: 6px;
       margin-top: 10px;
+      &:hover{
+        background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+        color: #ffffff;
+        border-color: #ffffff;
+      }
     }
   }
 }
