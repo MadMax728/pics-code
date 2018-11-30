@@ -56,7 +56,7 @@ class MediaCard extends Component {
     item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
     this.setState({ item });
 
-    let mediaLike = {
+    const mediaLike = {
       typeOfContent: "mediapost",
       typeId: item.id
     };
@@ -64,7 +64,7 @@ class MediaCard extends Component {
   };
 
   handleCommentsSections = () => {
-    let itemId = {
+    const itemId = {
       typeId: this.state.item.id
     };
     this.props.getComments(itemId).then(() => {
