@@ -74,7 +74,7 @@ const TopBar = ({ items, handeleShare }) => {
 };
 
 TopBar.propTypes = {
-  handeleShare: PropTypes.func.isRequired,
+  handeleShare: PropTypes.func,
   items: PropTypes.shape({
     name: PropTypes.string,
     private: PropTypes.bool,

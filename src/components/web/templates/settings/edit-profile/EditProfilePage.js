@@ -225,7 +225,14 @@ class EditProfile extends Component {
         errors.servererror = "Something went wrong";
         this.setState({ error: errors });
       } else {
-        this.setDataOnLoad();
+        if (userInfo) {
+          let data = {
+            username: userInfo.username
+          };
+          this.props.getUser(data).then(() => {
+            this.setDataOnLoad();
+          });
+        }
       }
     });
   };
@@ -238,12 +245,20 @@ class EditProfile extends Component {
 
   handleInquiryTagDelete = id => {
     const { form } = this.state;
-    this.setState({ form: { ...this.state.form, inquiry_tag: form.inquiry_tag.filter((tag, index) => index !== id), inquiryTagList: form.inquiryTagList.filter((tag, index) => index !== id) } });
+    this.setState({ form: {
+      ...this.state.form, 
+      inquiry_tag: form.inquiry_tag.filter(tag => tag !== form.inquiryTagList[id].id), 
+      inquiryTagList: form.inquiryTagList.filter(tag => tag.id !== form.inquiryTagList[id].id)}
+    });
   };
 
   handleOfferTagDelete = id => {
-    const { form } = this.state;
-    this.setState({ form: { ...this.state.form, offer_tag: form.offer_tag.filter((tag, index) => index !== id), offerTagList: form.offerTagList.filter((tag, index) => index !== id) } });
+    const { form } = this.state;  
+    this.setState({ form: {
+      ...this.state.form, 
+      offer_tag: form.offer_tag.filter(tag => tag !== form.offerTagList[id].id), 
+      offerTagList: form.offerTagList.filter(tag => tag.id !== form.offerTagList[id].id)}
+    });
   };
 
   render() {

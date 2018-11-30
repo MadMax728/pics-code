@@ -78,19 +78,8 @@ export const getAbout = (prop, provider) => {
         dispatch(getAboutSucceeded(res.data.data));
       },
       error => {
-        dispatch(getAboutFailed(error.response));
-        dispatch(
-          // remove below code after API working, this is just for set mock data.
-
-          prop === "getAboutOther"
-            ? getAboutSucceeded(
-                aboutInfo.filter(a => a.general_information.userId === "1")
-              )
-            : prop === "getAboutOwner" &&
-              getAboutSucceeded(
-                aboutInfo.filter(a => a.general_information.userId === "2")
-              )
-        );
+          dispatch(getAboutFailed(error.response));
+          dispatch(getAboutSucceeded(aboutInfo))
         logger.error({
           description: error.toString(),
           fatal: true

@@ -98,6 +98,7 @@ const EditProfileCrop = ({
           </div>
         </div>
       )}
+      {(image !== null && image !== undefined) &&
       <div className="range-wrapr col-xs-12">
         <img
           src={images.crop_pic}
@@ -119,16 +120,16 @@ const EditProfileCrop = ({
                     : `${scale * 128}px`
           }}
         />
-        <input
-          name="scale"
-          type="range"
-          onChange={handleScale}
-          min={allowZoomOut ? "0.1" : "1"}
-          max="2"
-          step="0.01"
-          defaultValue="1"
-          disabled={!(image !== null && image !== undefined)}
-        />
+          <input
+            name="scale"
+            type="range"
+            onChange={handleScale}
+            min={allowZoomOut ? "0.1" : "1"}
+            max="2"
+            step="0.01"
+            defaultValue="1"
+            disabled={!(image !== null && image !== undefined)}
+          />
         <img
           src={images.crop_pic}
           height="27"
@@ -137,6 +138,7 @@ const EditProfileCrop = ({
           className="max-profile-pic range-slider-pic"
         />
       </div>
+      }
     </div>
   );
 };

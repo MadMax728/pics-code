@@ -79,7 +79,6 @@ class CampaignCard extends Component {
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
     const { isComments, item } = this.state;
-    console.log(item);
 
     return (
       <div className="feed_wrapper">

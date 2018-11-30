@@ -1,6 +1,7 @@
 import React from "react";
 import propTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
+import moment from "moment";
 
 const UserCard = ({ item }) => {
   return (
@@ -11,7 +12,7 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.start}:{" "}
           </span>
-          <span className="secondary_title">{item.startDate}</span>
+          <span className="secondary_title">{moment(item.startDate).format('MMMM Do YYYY')}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">
@@ -31,7 +32,7 @@ const UserCard = ({ item }) => {
           <span className="normal_title">
             {Translations.create_campaigns.end}:{" "}
           </span>
-          <span className="secondary_title">{item.endDate}</span>
+          <span className="secondary_title">{moment(item.endDate).format('MMMM Do YYYY')}</span>
         </div>
         <div className="info_wrapper">
           <span className="normal_title">

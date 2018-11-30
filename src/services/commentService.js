@@ -13,4 +13,4 @@ export const deleteComment = (payload, header = {}) =>
   api(baseUrl, header).delete("/comments?id=" + payload.id);
 
 export const editComment = (payload, header = {}) =>
-  api(baseUrl, header).put("/comments?id=" + payload.id);
+  api(baseUrl, header).put("/comments", payload);
