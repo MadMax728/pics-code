@@ -49,7 +49,6 @@ class ThreeDots extends Component {
         >
           • • •
         </div>
-
         <ToolTip
           id={id}
           getContent={getContent}

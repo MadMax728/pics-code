@@ -36,15 +36,15 @@ class EditProfileModal extends Component {
   handleContinue = () => {
     // let Data = new FormData();
     // Data.append('avatar',this.state.actual_img);
-    // Data.append('typeImage','Crop');
+    // Data.append('typeImage','Original');
     // Data.append('typeOfContent','profile');
     // Data.append('coordinate', '50');
 
     // axios({
     //   method: 'post',
-    //   url: 'http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/images',
+    //   url: 'http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/profile',
     //   data:Data,
-    //   config: { headers: {'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmZWU5YThiLTI4NzItNDg3Yi04NTlmLWRjMmQ0ZTA0MjA3MSIsInVzZXJuYW1lIjoic2FudG9zaDEyMyIsImVtYWlsIjoic2FudG9zaC5zaGluZGVAcGljc3RhZ3JhcGguY29tIiwiZGF0ZUlzc3VlZCI6IjIwMTgtMTAtMzBUMTE6Mzg6NTIuMjUyWiIsImlhdCI6MTU0MDg5OTUzMiwiZXhwIjoyNzUwNDk5NTMyfQ.cFyhfgRhCoHlgbs410JE9sF6NUuaZRnCHL4XRyHN_Kw' }}
+    //   config: { headers: {'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhkYjk2ZjMxLTZjNDctNDg1YS1iMjM5LTU4N2JjOWJkZmMwNiIsInVzZXJuYW1lIjoidmlzaGFsMSIsImVtYWlsIjoidmlzaGFsLnJhdXQxQGdtYWlsLmNvbSIsImRhdGVJc3N1ZWQiOiIyMDE4LTExLTMwVDA1OjEyOjQ5LjU1N1oiLCJsYW5ndWFnZSI6IkVuZ2xpc2giLCJpYXQiOjE1NDM1NTQ3NjksImV4cCI6Mjc1MzE1NDc2OX0.xHEebypOaplj6Q6rOqd5b71HJ-IBOPN6jhVzWwCriaY' }}
     // }).then((res)=>{
     //   console.log("test",res)
     // })
@@ -53,18 +53,19 @@ class EditProfileModal extends Component {
     //    'content':Data
     //  }
 
-    // let data = {
-    //   avatar: this.state.actual_img,
-    //   typeImage: 'Crop',
-    //   typeOfContent: 'profile',
-    //   coordinate: 50
-    // }
-    // this.props.uploadProfilePicture(data)
-    //   .then(()=>{
-    //     console.log("data", this.props.userDataByUsername);
-    //   })
+    
+    let data = {
+      image: this.state.actual_img,
+      typeImage: 'Original',
+    }
+    console.log(data);
 
-    console.log("scale", this.props.image);
+    this.props.uploadProfilePicture(data)
+      .then(()=>{
+        console.log("data", this.props.userDataByUsername);
+      })
+
+    // console.log("scale", this.props.image);
     this.imageCropper.current.handleSave();
 
     this.props.handleModalInfoHide();

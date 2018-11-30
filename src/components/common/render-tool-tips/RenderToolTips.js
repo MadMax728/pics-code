@@ -22,7 +22,6 @@ class RenderToolTips extends Component {
 
   render() {
     const { items, id } = this.props;
-
     return (
       <div className="post-action-links">
         {items.map((item, index) => {
@@ -31,7 +30,7 @@ class RenderToolTips extends Component {
               key={index}
               onClick={item.handleEvent}
               id={id}
-              onKeyDown={this.handleKeyPress}
+              onKeyDown={item.handleEvent}
               role={"button"}
               tabIndex="0"
             >

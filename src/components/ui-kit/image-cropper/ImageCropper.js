@@ -19,7 +19,8 @@ const propTypes = {
   allowZoomOut: PropTypes.bool,
   logCallback: PropTypes.any,
   handleEditImage: PropTypes.func,
-  isCircle: PropTypes.bool
+  isCircle: PropTypes.bool,
+  handleActualImg: PropTypes.any,
 };
 
 class ImageCropper extends Component {
@@ -43,8 +44,6 @@ class ImageCropper extends Component {
 
   handleScale = e => {
     const scale = parseFloat(e.target.value);
-    console.log(scale);
-
     this.setState({ scale }, () => {
       this.handleSave();
       this.props.handleScale(scale);
@@ -139,12 +138,6 @@ class ImageCropper extends Component {
   }
 }
 
-ImageCropper.propTypes = {
-  handleActualImg: propTypes.any,
-  image: propTypes.any,
-  isCircle: propTypes.any,
-  handleScale: propTypes.func,
-  handleEditImage: propTypes.func
-};
+ImageCropper.propTypes = propTypes;
 
 export default ImageCropper;

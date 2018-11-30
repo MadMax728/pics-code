@@ -14,7 +14,6 @@ class EditProfilePic extends Component {
 
   render() {
     const { image, handleEditImage, handleActualImg, handleScale } = this.props;
-
     return (
       <div className="col-xs-12 upload-profile-wrapr padding-b-25">
         <ImageCropper

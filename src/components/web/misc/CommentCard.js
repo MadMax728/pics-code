@@ -70,9 +70,7 @@ class CommentCard extends Component {
   
   handleDelete = e => {
     const id = e.target.id;
-    console.log(id);
     const comments = this.state.comments;
-
     const indexOf = comments.findIndex(c => {
       return c.id === id;
     });
@@ -83,24 +81,21 @@ class CommentCard extends Component {
       }
       this.props.deleteComment(data).then(()=> {
         comments.splice(indexOf, 1);
+        this.setState({ comments });
         this.props.handleComment(false);
       })
-
     }
-    this.setState({ comments });
   };
 
   /**
    * Tooltp
    */
   renderReportTips = id => {
-    console.log(id);
-    
     return <RenderToolTips items={this.state.ReportTips} id={id} />;
   };
 
   renderEditComment = comment => {
-    let html = <p>{comment.comment} {comment.id}</p>;
+    let html = <p>{comment.comment}</p>;
     if(comment.id === this.state.edit_comment_id){
       html =  <HashTagUsername
                 className="form-control"
@@ -132,7 +127,7 @@ class CommentCard extends Component {
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
             <ThreeDots
-              id="comment"
+              id={`comment-${comment.id}`}
               role="button"
               dataTip="tooltip"
               dataClass="tooltip-wrapr"
