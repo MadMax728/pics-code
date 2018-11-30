@@ -86,7 +86,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
+      <header className={this.state.offsetHeight > 200 ? "fixed" : ""}>
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">

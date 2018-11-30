@@ -10,7 +10,7 @@ const FavouriteCampaignItem = ({ campaign }) => {
 
   return (
     <div className="campaign_wrapper">
-      <div className="col-sm-4 col-xs-2">
+      <div className="col-xs-3 col-md-2">
         <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}>
           <img
             src={campaign.profileImage}
@@ -19,7 +19,7 @@ const FavouriteCampaignItem = ({ campaign }) => {
           />
         </Link>
       </div>
-      <div className="col-sm-8 col-xs-10 no-padding">
+      <div className="col-xs-9 col-md-10">
         <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}>
           <div className="normal_title">{campaign.title}</div>
         </Link>

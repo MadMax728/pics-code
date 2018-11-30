@@ -1,4 +1,5 @@
 header {
+  transition: all ease-in .5s;
   &.fixed {
     position: fixed;
     z-index: 1000 !important;

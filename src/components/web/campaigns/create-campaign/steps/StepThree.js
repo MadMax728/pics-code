@@ -108,7 +108,7 @@ class StepThree extends Component {
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
             <div className="feed_header">
-              <div className="no-padding profile_image">
+              <div className="padding-right-15 profile_image">
                 <img
                   src={images.image}
                   alt="feed1"

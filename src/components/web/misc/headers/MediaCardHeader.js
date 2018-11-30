@@ -12,7 +12,7 @@ const MediaCardHeader = ({ item, handleFavorite }) => {
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
-      <div className="no-padding profile_image">
+      <div className="profile_image padding-right-15">
         <Link to={profile_route}>
           <img
             src={item.profileImage}
@@ -21,7 +21,7 @@ const MediaCardHeader = ({ item, handleFavorite }) => {
           />
         </Link>
       </div>
-      <div className="col-sm-9 col-xs-7 no-padding">
+      <div className="col-sm-8 col-xs-7 no-padding">
         <Link
           to={{
             pathname: `${routes.BASE_IMAGE_INFORMATION_ROUTE}${item.id}`,
@@ -34,7 +34,7 @@ const MediaCardHeader = ({ item, handleFavorite }) => {
           <div className="grey_title">{moment(item.createdAt).format('MMMM Do YYYY')} in {item.category[0].categoryName}</div>
         )}
       </div>
-      <div className="col-sm-2 col-xs-2 like_wrapper" role="article">
+      <div className="col-sm-1 col-xs-1 like_wrapper" role="article">
         <img
           src={favorite_icon}
           alt="like"
