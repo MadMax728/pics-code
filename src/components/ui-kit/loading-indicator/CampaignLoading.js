@@ -14,12 +14,12 @@ class CampaignLoading extends React.Component {
               className="img-circle img-responsive profile_pic_gray"
             />
           </div>
-          <div className="col-sm-9 col-xs-7 no-padding">
+          <div className="col-sm-8 col-xs-7 no-padding">
             <div className="normal_title gray_box" />
             <div className="secondary_title gray_box" />
             <div className="grey_title" />
           </div>
-          <div className="col-sm-2 col-xs-2 like_wrapper no-padding">
+          <div className="col-sm-1 col-xs-1 like_wrapper no-padding">
             <img
               src={images.gray_heart}
               alt="like"
