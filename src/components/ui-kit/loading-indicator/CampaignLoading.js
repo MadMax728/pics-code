@@ -19,7 +19,7 @@ class CampaignLoading extends React.Component {
             <div className="secondary_title gray_box" />
             <div className="grey_title" />
           </div>
-          <div className="col-sm-2 col-xs-2 like_wrapper no-padding">
+          <div className="col-sm-1 col-xs-1 like_wrapper no-padding">
             <img
               src={images.gray_heart}
               alt="like"
