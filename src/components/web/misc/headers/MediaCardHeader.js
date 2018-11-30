@@ -21,7 +21,7 @@ const MediaCardHeader = ({ item, handleFavorite }) => {
           />
         </Link>
       </div>
-      <div className="col-sm-9 col-xs-7 no-padding">
+      <div className="col-sm-8 col-xs-7 no-padding">
         <Link
           to={{
             pathname: `${routes.BASE_IMAGE_INFORMATION_ROUTE}${item.id}`,

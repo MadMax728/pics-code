@@ -24,7 +24,7 @@ const AdCardHeader = ({ ad, isDescription, isInformation, handleFavorite }) => {
           />
         </Link>
       </div>
-      <div className="col-sm-9 col-xs-7 no-padding">
+      <div className="col-sm-8 col-xs-7 no-padding">
         <Link to={profile_route}>
           <div className="normal_title">{ad.user.name}</div>
         </Link>
