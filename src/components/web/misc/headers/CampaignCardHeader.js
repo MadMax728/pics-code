@@ -25,7 +25,7 @@ const CampaignCardHeader = ({
 
   return (
     <div className="feed_header">
-      <div className="no-padding profile_image">
+      <div className="profile_image padding-right-15">
         <Link to={profile_route}>
           <img
             src={campaign.profileImage}
@@ -35,10 +35,10 @@ const CampaignCardHeader = ({
         </Link>
       </div>
       <div className="no-padding titles_wrapper">
-        <Link to={profile_route} className="float_left padding-right-10">
+        <Link to={profile_route} className="float_left padding-right-5">
           <div className="normal_title">{campaign.userName}</div>
         </Link>
-        <div className="normal_sub_title float_left">published a campaign</div>
+        <div className="normal_sub_title float_left padding-left-5">published a campaign</div>
         <div className="secondary_title">{campaign.location}</div>
         {campaign.category && (
           <div className="grey_title">{moment(campaign.createdAt).format('MMMM Do YYYY')} in {campaign.category[0].categoryName}</div>
