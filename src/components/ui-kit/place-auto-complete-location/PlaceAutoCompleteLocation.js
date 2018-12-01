@@ -32,51 +32,54 @@ class PlaceAutoCompleteLocation extends Component {
 
   render() {
     const { className } = this.props;
+    const isConnected = navigator.onLine;
     return (
-      <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <div>
-            <input
-              {...getInputProps({
-                className
-              })}
-            />
-            <div
-              className={
-                suggestions.length !== 0
-                  ? "autocomplete-dropdown-container show"
-                  : "autocomplete-dropdown-container"
-              }
-            >
-              {loading && <div>Loading...</div>}
-              {suggestions.map((suggestion, index) => {
-                const className = suggestion.active
-                  ? "suggestion-item--active"
-                  : "suggestion-item";
-                // inline style for demonstration purpose
-                const style = suggestion.active
-                  ? { backgroundColor: "#fafafa", cursor: "pointer" }
-                  : { backgroundColor: "#ffffff", cursor: "pointer" };
-                return (
-                  <div
-                    key={index}
-                    {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style
-                    })}
-                  >
-                    <span>{suggestion.description}</span>
-                  </div>
-                );
-              })}
+      isConnected && (
+        <PlacesAutocomplete
+          value={this.state.address}
+          onChange={this.handleChange}
+          onSelect={this.handleSelect}
+          >
+          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+            <div>
+              <input
+                {...getInputProps({
+                  className
+                })}
+              />
+              <div
+                className={
+                  suggestions.length !== 0
+                    ? "autocomplete-dropdown-container show"
+                    : "autocomplete-dropdown-container"
+                }
+              >
+                {loading && <div>Loading...</div>}
+                {suggestions.map((suggestion, index) => {
+                  const className = suggestion.active
+                    ? "suggestion-item--active"
+                    : "suggestion-item";
+                  // inline style for demonstration purpose
+                  const style = suggestion.active
+                    ? { backgroundColor: "#fafafa", cursor: "pointer" }
+                    : { backgroundColor: "#ffffff", cursor: "pointer" };
+                  return (
+                    <div
+                      key={index}
+                      {...getSuggestionItemProps(suggestion, {
+                        className,
+                        style
+                      })}
+                    >
+                      <span>{suggestion.description}</span>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-        )}
-      </PlacesAutocomplete>
+          )}
+        </PlacesAutocomplete>
+      )
     );
   }
 }
