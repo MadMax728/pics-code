@@ -1,5 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
+import classnames from "classnames";
 
 const MRightActiveChat = (
     { 
@@ -34,12 +35,12 @@ const MRightActiveChat = (
             ));
         };
         return (
-            <div className="active-chat">
+            <div className={classnames("active-chat", { 'nochat' : items.length === 0 })}>
                 <div className="date">{ date }</div>
                 {
                         items && items.length ? (
                             renderMessages()
-                        ) : ''
+                        ) : 'You are ready to chat'
                 }
             </div>
         )
