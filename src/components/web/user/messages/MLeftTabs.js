@@ -10,6 +10,8 @@ const tabs = [
         index: 1,
         title: Translations.message_module.type.subscribed,
         icon: '',
+        height: 21,
+        width: 21,
         image: images.grey_person,
         value: Translations.message_module.type.subscribed,
     },
@@ -18,7 +20,9 @@ const tabs = [
         index: 2,
         title: Translations.message_module.type.unknown,
         icon: '',
-        image: images.grey_person,
+        height: 21,
+        width: 21,
+        image: images.help,
         value: Translations.message_module.type.unknown,
     },
     {
@@ -26,7 +30,9 @@ const tabs = [
         index: 3,
         title: Translations.message_module.type.like_you,
         icon: '',
-        image: images.grey_person,
+        height: 21,
+        width: 21,
+        image: images.white_heart_bordered,
         value: Translations.message_module.type.like_you,
     },
     {
@@ -34,7 +40,9 @@ const tabs = [
         index: 4,
         title: Translations.message_module.type.companies,
         icon: '',
-        image: images.grey_person,
+        height: 21,
+        width: 21,
+        image: images.comapny,
         value: Translations.message_module.type.companies,
     }
 ]
@@ -55,9 +63,9 @@ const MLeftTabs = (
                     data-id={tab.id}
                     data-value={tab.value}
                     >
-                    <img src={tab.image} alt={"user"} />
+                    <img src={tab.image} alt={"user"} height={tab.height} width={tab.width} />
                     <br />
-                    {tab.title}
+                    <div className="message_menu_title">{tab.title}</div>
                 </div>
             ));
         };

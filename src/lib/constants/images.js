@@ -26,6 +26,11 @@ export const white_heart_bordered = `${
   process.env.REACT_APP_CDN_URL
 }/images/white_heart_bordered.svg`;
 
+
+export const white_heart = `${
+  process.env.REACT_APP_CDN_URL
+}/images/white_heart.svg`;
+
 export const comapny = `${
   process.env.REACT_APP_CDN_URL
 }/images/comapny.svg`;
