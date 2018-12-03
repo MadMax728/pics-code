@@ -13,7 +13,6 @@ import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { getUser, updateUserProfile } from "../../../../../actions/profile";
 import connect from "react-redux/es/connect/connect";
-import jwtDecode from "jwt-decode";
 import { Auth } from "../../../../../auth";
 import {
   getOfferTag,
@@ -21,6 +20,8 @@ import {
   addInquiryTag,
   addOfferTag
 } from "../../../../../actions/tags";
+import moment from "moment";
+
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -28,29 +29,6 @@ if (storage) {
   userInfo = JSON.parse(storage.userInfo);
 //  userInfo = jwtDecode(storage.accessToken);
 }
-const genderItems = [
-  {
-    name: "Male",
-    className: "",
-    checked: true,
-    value: "male"
-  },
-  {
-    name: "Female",
-    className: "",
-    checked: false,
-    value: "female"
-  }
-];
-
-const genderData = [
-  {
-    name: "gender",
-    className: "",
-    type: Translations.edit_profile.gender.type,
-    items: genderItems
-  }
-];
 
 class EditProfile extends Component {
   constructor(props) {
@@ -60,16 +38,19 @@ class EditProfile extends Component {
       form: {
         username: "",
         name_company: "",
-        dob: {
+        birthDate: {
           day: "",
           mon: "",
           year: ""
         },
         gender: "male",
         category: "",
-        location: "",
-        address: "",
-        phone_number: "",
+        location: {
+          lat: "",
+          lng: "",
+          address: ""
+        },
+        phoneNumber: "",
         email: "",
         website: "",
         profile_description: "",
@@ -161,7 +142,7 @@ class EditProfile extends Component {
 
   handleChangeDOB = event => {
     const { form } = this.state;
-    form.dob[event.values.name] = event.values.val;
+    form.birthDate[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -169,6 +150,7 @@ class EditProfile extends Component {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
+    console.log(form);
     // this.formValid();
   };
   setDataOnLoad = () => {
@@ -181,16 +163,19 @@ class EditProfile extends Component {
           username: userData.username,
           email: userData.email,
           name_company: userData.name,
-          dob: {
-            day: "",
-            mon: "",
-            year: ""
+          birthDate: {
+            day: moment.unix(userData.birthDate).format('DD'),
+            mon: moment.unix(userData.birthDate).format('MM'),
+            year: moment.unix(userData.birthDate).format('YYYY'),
           },
           gender: userData.gender,
           category: userData.category,
-          location: "",
-          address: "",
-          phone_number: "",
+          location: {
+            lat: userData.location && userData.location.latitude,
+            lng: userData.location && userData.location.longitude,
+            address: userData.location && userData.location.address,
+          },
+          phoneNumber: userData.phoneNumber,
           website: userData.website,
           profile_description: userData.profileDescription,
           offer_tag: userData.offerTag,
@@ -202,6 +187,14 @@ class EditProfile extends Component {
     }
   };
 
+  handlegetDOBDate = () => {
+    const { form } = this.state;
+    if (form.birthDate.day && form.birthDate.mon && form.birthDate.year){
+      const date = form.birthDate.mon + "/" + form.birthDate.day + "/" + form.birthDate.year;
+      return date
+    }
+  }
+
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
@@ -210,8 +203,13 @@ class EditProfile extends Component {
       gender: this.state.form.gender,
       offerTag: this.state.form.offer_tag,
       inquiryTag: this.state.form.inquiry_tag,
-      latitude: this.state.form.location.lat,
-      longitude: this.state.form.location.lng,
+      birthDate: this.handlegetDOBDate(),
+      phoneNumber: this.state.phoneNumber,
+      location: {
+        latitude: this.state.form.location.lat,
+        longitude: this.state.form.location.lng,
+        address: this.state.form.address
+      },
       profileDescription: this.state.form.profile_description,
       website: this.state.form.website
     };
@@ -337,7 +335,7 @@ class EditProfile extends Component {
                     <NumberInput
                       type="number"
                       name="day"
-                      value={form.dob.day}
+                      value={form.birthDate.day}
                       min="1"
                       max="31"
                       pattern="[0-9]*"
@@ -346,7 +344,7 @@ class EditProfile extends Component {
                     <NumberInput
                       type="number"
                       name="mon"
-                      value={form.dob.mon}
+                      value={form.birthDate.mon}
                       min="1"
                       pattern="[0-9]*"
                       max="12"
@@ -355,7 +353,7 @@ class EditProfile extends Component {
                     <NumberInput
                       type="number"
                       name="year"
-                      value={form.dob.year}
+                      value={form.birthDate.year}
                       min="1950"
                       pattern="[0-9]*"
                       max="2050"
@@ -421,16 +419,16 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.phone_number}</span>  
+                <span className="error-msg highlight">{this.state.error.phoneNumber}</span>  
                 <label htmlFor="phone-number">
                   {Translations.editProfile.phone_number}
                 </label>
                 <Text
                   type="text"
                   className="form-control"
-                  id="phone_number"
-                  name="phone_number"
-                  value={form.phone_number}
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  value={form.phoneNumber}
                   onChange={this.handleChangeField}
                 />
               </div>
