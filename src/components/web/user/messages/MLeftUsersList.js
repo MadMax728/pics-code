@@ -39,6 +39,7 @@ const MLeftUsersList = (
 
 
 MLeftUsersList.propTypes = {
+    handleChatClick: propTypes.func,
     items: propTypes.arrayOf(
         propTypes.shape({
           userName: propTypes.string,

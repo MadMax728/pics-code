@@ -69,7 +69,7 @@ const MLeftTabs = (
 };
 
 MLeftTabs.propTypes = {
-    activeIndex: PropTypes.string.isRequired,
+    activeIndex: PropTypes.string,
     handleTypeClick: PropTypes.func.isRequired,
 };
 

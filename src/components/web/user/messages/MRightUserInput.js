@@ -18,7 +18,7 @@ class MRightUserInput extends Component {
     onEnterPress = (e) => {
         e.preventDefault();
         const { text } = this.state;
-        if(e.keyCode == 13 && e.shiftKey == false && this.props.onMessageSubmit && text) {
+        if(e.keyCode === 13 && e.shiftKey === false && this.props.onMessageSubmit && text) {
           this.props.onMessageSubmit(text)
         }
     }

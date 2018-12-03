@@ -61,12 +61,6 @@ MRightActiveChat.propTypes = {
     date: propTypes.string.isRequired,
     me: propTypes.string.isRequired,
 };
-
-MRightActiveChat.defaultProps = {
-    date: 'Today',
-    items: [],
-    me: ''
-};
   
 export default MRightActiveChat;
   
