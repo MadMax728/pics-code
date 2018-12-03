@@ -20,6 +20,9 @@
         top: -25px;
         background: transparent;
         border: 0;
+        @media(max-width: 915px){
+          right: 10px;
+        }
       }
       .modal-title {
         padding: 20px;
