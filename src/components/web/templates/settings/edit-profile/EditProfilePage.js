@@ -21,7 +21,7 @@ import {
   addOfferTag
 } from "../../../../../actions/tags";
 import moment from "moment";
-
+import * as enumerations from "../../../../../lib/constants/enumerations";
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -36,6 +36,7 @@ class EditProfile extends Component {
 
     this.state = {
       form: {
+        image: this.props.image,
         username: "",
         name_company: "",
         birthDate: {
@@ -88,6 +89,11 @@ class EditProfile extends Component {
         this.setDataOnLoad();
       });
     } 
+  }
+
+  static getDerivedStateFromProps = (nextProps) => {
+    // console.log(nextProps.userDataByUsername);
+    return null;
   }
 
   handleOfferTagChange = tag => {
@@ -160,9 +166,11 @@ class EditProfile extends Component {
       
       this.setState({
         form: {
+          profileUrl: userData.profileUrl,
           username: userData.username,
           email: userData.email,
           name_company: userData.name,
+          location: userData.location,
           birthDate: {
             day: moment.unix(userData.birthDate).format('DD'),
             mon: moment.unix(userData.birthDate).format('MM'),
@@ -170,11 +178,6 @@ class EditProfile extends Component {
           },
           gender: userData.gender,
           category: userData.category,
-          location: {
-            lat: userData.location && userData.location.latitude,
-            lng: userData.location && userData.location.longitude,
-            address: userData.location && userData.location.address,
-          },
           phoneNumber: userData.phoneNumber,
           website: userData.website,
           profile_description: userData.profileDescription,
@@ -199,12 +202,13 @@ class EditProfile extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const data = {
+      profileImage: this.props.profile? this.props.profile.id : "",
       name: this.state.form.name_company,
       gender: this.state.form.gender,
       offerTag: this.state.form.offer_tag,
       inquiryTag: this.state.form.inquiry_tag,
       birthDate: this.handlegetDOBDate(),
-      phoneNumber: this.state.phoneNumber,
+      phoneNumber: this.state.form.phoneNumber,
       location: {
         latitude: this.state.form.location.lat,
         longitude: this.state.form.location.lng,
@@ -262,10 +266,12 @@ class EditProfile extends Component {
   render() {
     const { form } = this.state;
     const { image } = this.props;
+    console.log(this.props.profile);
+    
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="edit-profile-form">
-          <form action="">
+            <form onSubmit={this.handleSubmit}>
             <div className="edit-profile-title-wrapr">
               <div className="edit-title-wrapr">
                 <div className="form-title">
@@ -277,7 +283,7 @@ class EditProfile extends Component {
               </div>
               <div className="edit_profile_wrapr">
                 <img
-                  src={image ? image : images.pic_1}
+                  src={image? image : images.pic_1}
                   className="image-wrapr"
                   alt="avatar"
                 />
@@ -373,7 +379,7 @@ class EditProfile extends Component {
                           id="male"
                           name="gender"
                           value="male"
-                          defaultChecked={form.gender === "male"}
+                          defaultChecked={form.gender  === enumerations.gender.male}
                           className="black_button"
                           onChange={this.handleChangeField}
                         />
@@ -385,7 +391,7 @@ class EditProfile extends Component {
                           id="female"
                           value="female"
                           name="gender"
-                          defaultChecked={form.gender === "female"}
+                          defaultChecked={form.gender === enumerations.gender.female}
                           onChange={this.handleChangeField}
                         />
                         <label htmlFor="female">Female</label>
@@ -416,6 +422,7 @@ class EditProfile extends Component {
                 <PlaceAutoCompleteLocation
                   className="form-control"
                   handleLocation={this.handleLocation}
+                  value={form.location.address}
                 />
               </div>
               <div className="form-group margin-bottom-30">
@@ -504,7 +511,7 @@ class EditProfile extends Component {
             </div>
             <SocialNetworks userId={"123"} isOwnerProfile />
             <div className="form-group margin-bottom-30">
-              <button className="black_button" onClick={this.handleSubmit}>
+              <button className="black_button" type="submit">
                 save
               </button>
             </div>
@@ -537,6 +544,7 @@ EditProfile.propTypes = {
   history: PropTypes.any,
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any,
+  profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
   getOfferTag: PropTypes.func,
   getInquiryTag: PropTypes.func,

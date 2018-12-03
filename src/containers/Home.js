@@ -25,6 +25,7 @@ class Home extends Component {
       modalInfoMsg: "",
       message: "",
       image: null,
+      profile: null,
       data: null
     };
   }
@@ -85,8 +86,12 @@ class Home extends Component {
     this.setState({ image });
   };
 
+  handleProfile = profile => {
+    this.setState({ profile });
+  };
+
   render() {
-    const { message, data, image } = this.state;
+    const { message, data, image, profile } = this.state;
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
@@ -114,6 +119,7 @@ class Home extends Component {
             handleModalHide={this.handleModalHide}
             modalInfoMsg={this.state.modalInfoMsg}
             handleEditImage={this.handleEditImage}
+            handleProfile={this.handleProfile}
             image={image}
           />
 
@@ -133,6 +139,7 @@ class Home extends Component {
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalShow={this.handleModalShow}
                   image={image}
+                  profile={profile}
                 />
               </div>
 

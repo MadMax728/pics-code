@@ -40,7 +40,8 @@ class EditProfileModal extends Component {
     Data.append('coordinate', '50');
     this.props.uploadProfilePicture(Data)
       .then(()=>{
-        console.log("data", this.props.userDataByUsername);
+        console.log("data", this.props.userDataByUsername.imageData);
+        this.props.handleProfile(this.props.userDataByUsername.imageData.data);
         this.imageCropper.current.handleSave();
         this.props.handleModalInfoHide();    
       })
