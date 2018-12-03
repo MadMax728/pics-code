@@ -22,6 +22,18 @@ export const gray_heart = `${
   process.env.REACT_APP_CDN_URL
 }/images/gray_heart.svg`;
 
+export const white_heart_bordered = `${
+  process.env.REACT_APP_CDN_URL
+}/images/white_heart_bordered.svg`;
+
+export const comapny = `${
+  process.env.REACT_APP_CDN_URL
+}/images/comapny.svg`;
+
+export const help = `${
+  process.env.REACT_APP_CDN_URL
+}/images/help.svg`;
+
 export const feed_msg = `${process.env.REACT_APP_CDN_URL}/images/feed_msg.svg`;
 
 export const feed_like = `${
