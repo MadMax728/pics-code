@@ -94,6 +94,9 @@
                 }
               }
             }
+            &:focus{
+              outline: 0;
+            }
           }
           .menu-item.active {
             color: black;

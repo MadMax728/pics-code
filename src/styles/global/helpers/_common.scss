@@ -1143,6 +1143,45 @@ section.loader-wrapr {
             background: url("../images/facebook.png") no-repeat center;
           }
         }
+        a{
+          span{
+            color: #fff;
+            display: inline-block;
+            font-size: 20px;
+            padding: 4px 8px;
+            margin-right: 10px;
+            &.fa-facebook {
+              background-color: #3b579d;
+            }
+            &.fa-youtube {
+              background-color: #fd2725;
+            }
+            &.fa-twitter {
+              background-color: #2caae1;
+            }
+            &.fa-instagram {
+              background-image: radial-gradient(
+                circle at 30% 107%,
+                #fdf497 0%,
+                #fdf497 5%,
+                #fd5949 45%,
+                #d6249f 60%,
+                #285aeb 90%
+              );
+            }
+            &.fa-whatsapp {
+              background-color: #29aa00;
+            }
+            &.fa-copy{
+              color: #4a4a4a
+            }
+          }
+        }
+        .social-link-title{
+          display: inline-block;
+          position: relative;
+          top: -4px;
+        }
       }
     }
   }
