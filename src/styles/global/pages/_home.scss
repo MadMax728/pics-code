@@ -35,10 +35,17 @@
     img {
       width: 20px;
       margin-left: 10px;
+      &:focus{
+        outline: 0;
+        border: 0;
+      }
     }
     a,
     .share-wrapr {
       float: left;
+      &:focus{
+        outline: 0;
+      }
     }
   }
   .slot_one,

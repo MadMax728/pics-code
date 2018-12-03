@@ -1096,7 +1096,7 @@ section.loader-wrapr {
 //share pop up
 .share-popup.modal {
   &.in {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.4);
   }
   .modal-dialog {
     margin: 34vh auto;
@@ -1246,7 +1246,7 @@ section.loader-wrapr {
   .img-circle{
     &.ht45{
       height: 45px;
-      width: 45px;
+      min-width: 45px;
     }
   }
 
