@@ -100,7 +100,6 @@ export const updateUserProfile = data => {
 };
 
 export const uploadProfilePicture = params => {
-  console.log(params);
   return dispatch => {
     dispatch(uploadImageStarted());
     const storage = Auth.extractJwtFromStorage();
