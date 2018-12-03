@@ -73,7 +73,7 @@ class Messages extends Component {
             >
               <img src={images.grey_person} alt={"gray_person1"} />
               <br />
-              Subscribed
+              <div className="message_menu_title">Subscribed</div>
             </div>
             <div
               role="button"
@@ -88,9 +88,9 @@ class Messages extends Component {
               data-id="0"
               data-value="Unknown"
             >
-              <img src={images.grey_person} alt={"grey_person2"} />
+              <img src={images.help} alt={"help"} />
               <br />
-              {Translations.messages_modal.unknown}
+              <div className="message_menu_title">{Translations.messages_modal.unknown}</div>
             </div>
             <div
               role="button"
@@ -105,9 +105,9 @@ class Messages extends Component {
               data-id="3"
               data-value="Like you"
             >
-              <img src={images.grey_person} alt={"gray_person3"} />
+              <img src={images.white_heart_bordered} alt={"white_heart_bordered"} height="21" width="21"/>
               <br />
-              {Translations.like_you}
+              <div className="message_menu_title">{Translations.like_you}</div>
             </div>
             <div
               role="button"
@@ -122,9 +122,9 @@ class Messages extends Component {
               data-id="4"
               data-value="Companies"
             >
-              <img src={images.grey_person} alt={"grey_person4"} />
+              <img src={images.comapny} alt={"comapny"} />
               <br />
-              {Translations.messages_modal.companies}
+              <div className="message_menu_title">{Translations.messages_modal.companies}</div>
             </div>
           </div>
           <div className="user-chat-wrapper">

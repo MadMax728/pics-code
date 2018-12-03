@@ -114,7 +114,9 @@ EditProfileModal.propTypes = {
   handleModalInfoHide: propTypes.func,
   modalInfoShow: propTypes.bool,
   handleEditImage: propTypes.func,
-  image: propTypes.any
+  image: propTypes.any,
+  uploadProfilePicture: propTypes.any,
+  userDataByUsername: propTypes.any
 };
 
 export default connect(
