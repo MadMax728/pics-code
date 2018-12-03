@@ -6,6 +6,9 @@
     background: #fff;
     top: 17%;
     margin: 0 auto;
+    @media(max-width: 915px){
+      width: 100%;
+    }
     .modal-content {
       float: left;
       width: 100%;
