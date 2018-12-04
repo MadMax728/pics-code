@@ -94,6 +94,7 @@ EditProfileModal.propTypes = {
   handleEditImage: propTypes.func,
   image: propTypes.any,
   uploadProfilePicture: propTypes.any,
+  handleProfile: propTypes.func,
   userDataByUsername: propTypes.any,
 };
 

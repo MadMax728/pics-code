@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { modalType, tagsType } from "../../../../../lib/constants/enumerations";
+import { modalType, gender } from "../../../../../lib/constants/enumerations";
 import SocialNetworks from "./SocialNetworks";
 import {
   Text,
@@ -21,7 +21,6 @@ import {
   addOfferTag
 } from "../../../../../actions/tags";
 import moment from "moment";
-import * as enumerations from "../../../../../lib/constants/enumerations";
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -379,7 +378,7 @@ class EditProfile extends Component {
                           id="male"
                           name="gender"
                           value="male"
-                          defaultChecked={form.gender  === enumerations.gender.male}
+                          defaultChecked={form.gender  === gender.male}
                           className="black_button"
                           onChange={this.handleChangeField}
                         />
@@ -391,7 +390,7 @@ class EditProfile extends Component {
                           id="female"
                           value="female"
                           name="gender"
-                          defaultChecked={form.gender === enumerations.gender.female}
+                          defaultChecked={form.gender === gender.female}
                           onChange={this.handleChangeField}
                         />
                         <label htmlFor="female">Female</label>
