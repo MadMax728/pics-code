@@ -3,6 +3,7 @@ import { Translations } from "../../../../lib/translations";
 import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from './MLeftUsersList';
 import MLeftTabs from './MLeftTabs';
+import classnames from "classnames";
 
 class MLeftContainer extends Component {
   

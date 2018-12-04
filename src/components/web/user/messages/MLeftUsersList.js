@@ -25,12 +25,12 @@ const MLeftUsersList = (
             ));
         };
         return (
-            <div className="user-chat-wrapper">
+            <div className={classnames("" , {"nomessage" : items.length <= 0})}>
                 {
                     items && items.length ? (
                         latestUserList()
                     ) : (
-                        <div></div>
+                        <div>No message yet</div>
                     )
                 }
             </div>
