@@ -281,11 +281,20 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="edit_profile_wrapr">
-                <img
-                  src={image? image : images.pic_1}
-                  className="image-wrapr"
-                  alt="avatar"
-                />
+                {image && 
+                  <img
+                    src={image? image : images.pic_1}
+                    className="image-wrapr"
+                    alt="avatar"
+                  />
+                }
+                {!image && 
+                  <img
+                    src={form.profileUrl? form.profileUrl : images.pic_1}
+                    className="image-wrapr"
+                    alt="avatar"
+                  />
+                }
                 <div className="input-file-container" />
                 <div
                   onClick={this.handleEditProfile}
