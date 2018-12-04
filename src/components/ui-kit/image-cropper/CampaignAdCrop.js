@@ -68,6 +68,7 @@ const CampaignAdCrop = ({
               onLoadSuccess={logCallback("onLoadSuccess")}
               onImageReady={logCallback("onImageReady")}
               image={image}
+              crossOrigin={`anonymous`}
               className="editor-canvas wid100"
             />
           </div>
@@ -104,6 +105,7 @@ const CampaignAdCrop = ({
           height="19"
           width="19"
           className="min-profile-pic range-slider-pic"
+          crossOrigin={`anonymous`}
           alt={"crop-1"}
         />
         <div
@@ -134,6 +136,7 @@ const CampaignAdCrop = ({
           height="27"
           alt={"crop-2"}
           width="27"
+          crossOrigin={`anonymous`}
           className="max-profile-pic range-slider-pic"
         />
       </div>
