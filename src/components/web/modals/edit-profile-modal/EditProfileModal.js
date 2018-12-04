@@ -93,12 +93,16 @@ class EditProfileModal extends Component {
             .then(()=>{
               if (this.props.userDataByUsername.imageData)
               {
+                const { imageData } = this.props.userDataByUsername;
+                if (imageData && imageData.data && imageData.data.id) {
                 this.props.handleProfile(this.props.userDataByUsername.imageData.data.id);
                 this.imageCropper.current.handleSave();
-                this.props.handleModalInfoHide();  
+                this.props.handleModalInfoHide();
+                }  
               }
             })
         }
+
       })
   };
 
