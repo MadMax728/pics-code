@@ -39,13 +39,15 @@ class EditProfileModal extends Component {
     Data.append('typeOfContent','profile');
     Data.append('coordinate', '50');
     this.props.uploadProfilePicture(Data)
-      .then(()=> {
-        if(this.props.handleProfile && this.props.userDataByUsername && this.props.handleModalInfoHide) {
-          // please fix this and why we are sending profile back
-          this.props.handleProfile(this.props.userDataByUsername);
+      .then(()=>{
+        const { imageData } = this.props.userDataByUsername;
+
+        if (imageData && imageData.data && imageData.data.id) {
+          this.props.handleProfile(imageData.data.id);
           this.imageCropper.current.handleSave();
           this.props.handleModalInfoHide();  
         }
+
       })
   };
 
@@ -94,6 +96,7 @@ EditProfileModal.propTypes = {
   handleEditImage: propTypes.func,
   image: propTypes.any,
   uploadProfilePicture: propTypes.any,
+  handleProfile: propTypes.func,
   userDataByUsername: propTypes.any,
 };
 
