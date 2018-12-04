@@ -6,7 +6,8 @@ import SocialNetworks from "./SocialNetworks";
 import {
   Text,
   NumberInput,
-  RadioButton
+  RadioButton,
+  Select
 } from "../../../../ui-kit/CommonUIComponents";
 import { Tags } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
@@ -18,8 +19,9 @@ import {
   getOfferTag,
   getInquiryTag,
   addInquiryTag,
-  addOfferTag
-} from "../../../../../actions/tags";
+  addOfferTag,
+  getCategory
+} from "../../../../../actions";
 import moment from "moment";
 
 const storage = Auth.extractJwtFromStorage();
@@ -34,6 +36,7 @@ class EditProfile extends Component {
     super(props);
 
     this.state = {
+      categoryList: [],
       form: {
         image: this.props.image,
         username: "",
@@ -69,15 +72,27 @@ class EditProfile extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.props.getOfferTag().then(() => {
-      this.setState({
-        suggestionsOfferTagList: this.props.offerTags
-      });
+      if(this.props.offerTags){
+        this.setState({
+          suggestionsOfferTagList: this.props.offerTags
+        });
+      }
     });
 
     this.props.getInquiryTag().then(() => {
-      this.setState({
-        suggestionsInquiryTagList: this.props.inquiryTags
-      });
+      if(this.props.inquiryTags) {
+        this.setState({
+          suggestionsInquiryTagList: this.props.inquiryTags
+        });
+      }
+    });
+
+    this.props.getCategory().then(() => {
+      if(this.props.categoryList && this.props.categoryList.categories){
+        this.setState({
+          categoryList: this.props.categoryList.categories
+        });
+      }
     });
 
     if (userInfo) {
@@ -192,9 +207,12 @@ class EditProfile extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
+    console.log(this.state.form);
+    
     const data = {
       profileImage: this.props.profile? this.props.profile : "",
       name: this.state.form.name_company,
+      category: this.state.form.category,
       gender: this.state.form.gender,
       offerTag: this.state.form.offer_tag,
       inquiryTag: this.state.form.inquiry_tag,
@@ -254,9 +272,22 @@ class EditProfile extends Component {
     });
   };
 
+  handleCategory = (event) => {
+    this.setState({ form: {
+      ...this.state.form, 
+        category: event.target.value
+      }
+    });
+    console.log(event.target.value);
+    
+    console.log(this.state.form);
+    
+  }
+
   render() {
-    const { form } = this.state;
+    const { form, categoryList } = this.state;
     const { image } = this.props;
+    
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="edit-profile-form">
@@ -377,7 +408,7 @@ class EditProfile extends Component {
                           id="male"
                           name="gender"
                           value="male"
-                          defaultChecked={form.gender  === gender.male}
+                          defaultChecked={form.gender.toLowerCase()  === gender.male}
                           className="black_button"
                           onChange={this.handleChangeField}
                         />
@@ -389,7 +420,7 @@ class EditProfile extends Component {
                           id="female"
                           value="female"
                           name="gender"
-                          defaultChecked={form.gender === gender.female}
+                          defaultChecked={form.gender.toLowerCase() === gender.female}
                           onChange={this.handleChangeField}
                         />
                         <label htmlFor="female">Female</label>
@@ -403,14 +434,20 @@ class EditProfile extends Component {
                 <label htmlFor="category">
                   {Translations.editProfile.category}
                 </label>
-                <Text
-                  type="text"
-                  className="form-control"
-                  id="category"
-                  name="category"
-                  value={form.category}
-                  onChange={this.handleChangeField}
-                />
+                  <select
+                    value={form.category}
+                    className="form-control"
+                    onChange={this.handleCategory}
+                    onBlur={this.handleCategory}
+                    options={categoryList}
+                  >
+                    <option value="">{"select"}</option>
+                    {categoryList.map(option => (
+                      <option value={option.id} key={option.id}>
+                        {option.categoryName}
+                      </option>
+                    ))}
+                  </select>
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="location" className="margin-bottom-13">
@@ -524,7 +561,8 @@ const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
   offerTags: state.tags.offerTags,
   inquiryTags: state.tags.inquiryTags,
-  tags: state.tags  
+  tags: state.tags,
+  categoryList: state.categoryData  
 });
 
 const mapDispatchToProps = {
@@ -533,7 +571,8 @@ const mapDispatchToProps = {
   getOfferTag,
   getInquiryTag,
   addOfferTag,
-  addInquiryTag
+  addInquiryTag,
+  getCategory
 };
 
 EditProfile.propTypes = {
@@ -551,6 +590,8 @@ EditProfile.propTypes = {
   tags: PropTypes.any,
   offerTags: PropTypes.any,
   inquiryTags: PropTypes.any,
+  getCategory: PropTypes.func,
+  categoryList: PropTypes.any
 };
 
 export default connect(
