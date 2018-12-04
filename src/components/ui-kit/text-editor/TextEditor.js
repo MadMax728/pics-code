@@ -39,7 +39,6 @@ class TextEditor extends Component {
 
   handleChange = editorState => {
     const content = convertToHTML(editorState.getCurrentContent());
-    console.log(content);
   };
 
   render() {

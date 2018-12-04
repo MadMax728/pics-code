@@ -24,7 +24,6 @@ class EditProfileModal extends Component {
   };
 
   handleActualImg = actual_img => {
-    console.log("ac", actual_img);
     this.setState({ actual_img });
   };
 

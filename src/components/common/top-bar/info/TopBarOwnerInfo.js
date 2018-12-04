@@ -29,7 +29,6 @@ class TopBarOwnerInfo extends Component {
   };
 
   handeleShare = () => {
-    // console.log("handle share");
     this.props.handleModalInfoShow(modalType.share);
   };
 

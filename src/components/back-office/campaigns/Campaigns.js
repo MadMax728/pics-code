@@ -26,14 +26,14 @@ class Campaigns extends Component {
                 <div className="feed_header">
                   <div className="col-sm-1 col-xs-1 no-padding profile_image">
                     <img
-                      src={campaign.user.image}
+                      src={campaign.profileImage}
                       alt="image1"
                       className="img-circle img-responsive"
                     />
                   </div>
                   <div className="col-sm-9 col-xs-7 no-padding">
                     <div className="normal_title">{campaign.title}</div>
-                    <div className="secondary_title">{campaign.user.name}</div>
+                    <div className="secondary_title">{campaign.userName}</div>
                     <div className="grey_title">{campaign.category}</div>
                   </div>
                   <div className="col-sm-2 col-xs-2 like_wrapper">

@@ -17,7 +17,6 @@ class DataDownloadPage extends Component {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   // handelSubmit called when click on submit

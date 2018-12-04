@@ -61,7 +61,6 @@ class ImageCropper extends Component {
   };
 
   handleNewImage = e => {
-    console.log("iamges upload", e.target.files[0]);
     this.props.handleActualImg(e.target.files[0]);
     this.setState({ image: e.target.files[0] }, () => {
       this.handleSave();
@@ -80,8 +79,6 @@ class ImageCropper extends Component {
   };
 
   handleSave = () => {
-    console.log(this.editor.getImageScaledToCanvas());
-    
     // todo fix
     const img = this.editor.getImageScaledToCanvas().toDataURL();
     this.setState({ preview: img });

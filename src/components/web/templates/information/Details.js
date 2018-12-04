@@ -32,7 +32,6 @@ class Information extends Component {
         }
       ]
     };
-    console.log(this.props);
   }
 
   componentDidMount = () => {

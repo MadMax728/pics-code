@@ -29,7 +29,6 @@ export const getCampaigns = (prop, provider) => {
 
     return campaignService[prop](provider, header).then(
       res => {
-        console.log(res);
         dispatch(getCampaignsSucceeded(res.data.data));
       },
       error => {

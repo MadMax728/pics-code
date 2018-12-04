@@ -60,7 +60,6 @@ class AdsModal extends Component {
     this.setState({ form });
   };
   handleActualImg = actual_img => {
-    console.log("ac", actual_img);
     this.setState({ actual_img });
   };
 
@@ -72,7 +71,6 @@ class AdsModal extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   componentDidMount = () => {

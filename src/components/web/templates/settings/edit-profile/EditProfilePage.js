@@ -90,11 +90,6 @@ class EditProfile extends Component {
     } 
   }
 
-  static getDerivedStateFromProps = (nextProps) => {
-    // console.log(nextProps.userDataByUsername);
-    return null;
-  }
-
   handleOfferTagChange = tag => {
     const { form, suggestionsOfferTagList } = this.state;
     const indexOf = suggestionsOfferTagList.findIndex(f => {
@@ -155,14 +150,11 @@ class EditProfile extends Component {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
-    console.log(form);
     // this.formValid();
   };
   setDataOnLoad = () => {
     if (this.props.userDataByUsername.user) {
       const userData = this.props.userDataByUsername.user.data;
-      console.log(userData);
-      
       this.setState({
         form: {
           profileUrl: userData.profileUrl,
@@ -265,8 +257,6 @@ class EditProfile extends Component {
   render() {
     const { form } = this.state;
     const { image } = this.props;
-    console.log(this.props.profile);
-    
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="edit-profile-form">
