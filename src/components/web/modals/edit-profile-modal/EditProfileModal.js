@@ -53,17 +53,15 @@ class EditProfileModal extends Component {
     //    'content':Data
     //  }
 
-    
-    let data = {
+    const data = {
       image: this.state.actual_img,
-      typeImage: 'Original',
-    }
+      typeImage: "Original"
+    };
     console.log(data);
 
-    this.props.uploadProfilePicture(data)
-      .then(()=>{
-        console.log("data", this.props.userDataByUsername);
-      })
+    this.props.uploadProfilePicture(data).then(() => {
+      console.log("data", this.props.userDataByUsername);
+    });
 
     // console.log("scale", this.props.image);
     this.imageCropper.current.handleSave();
@@ -114,6 +112,8 @@ EditProfileModal.propTypes = {
   handleModalInfoHide: propTypes.func,
   modalInfoShow: propTypes.bool,
   handleEditImage: propTypes.func,
+  uploadProfilePicture: propTypes.func,
+  userDataByUsername: propTypes.any,
   image: propTypes.any
 };
 
