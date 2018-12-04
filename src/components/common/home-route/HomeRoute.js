@@ -70,6 +70,7 @@ class HomeRoute extends Component {
       <EditProfilePage
         handleModalInfoShow={this.props.handleModalInfoShow}
         image={this.props.image}
+        profile={this.props.profile}
       />
     );
   };
@@ -412,7 +413,8 @@ class HomeRoute extends Component {
 HomeRoute.propTypes = {
   handleModalShow: propTypes.func,
   handleModalInfoShow: propTypes.func,
-  image: propTypes.any
+  image: propTypes.any,
+  profile: propTypes.any
 };
 
 export default HomeRoute;

@@ -36,7 +36,7 @@ const AboutCardBody = ({ about }) => {
             </li>
             <li>
               <span>{Translations.about.location}</span>
-              <span>{about.location}</span>
+              <span>{about.location.address}</span>
             </li>
             <li>
               <span>{Translations.about.phone_number}</span>

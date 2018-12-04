@@ -27,7 +27,7 @@ export const getUser = (payload, header = {}) =>
   api(baseUrl, header).get("/users/" + payload.username, payload);
 
 export const uploadProfilePicture = (payload, header = {}) =>
-  api(baseUrl, header).post("/profile", payload);
+  api(baseUrl, header).post("/images/profile", payload);
 
 export const updateUserProfile = (payload, header = {}) =>
   api(baseUrl, header).put("/users", payload);

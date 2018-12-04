@@ -13,6 +13,18 @@ import {
   MessageBar
 } from "../components/common";
 import propTypes from "prop-types";
+
+import { connect } from "react-redux";
+import { getUser } from "../actions";
+
+import * as images from "../lib/constants/images";
+import { Auth } from "../auth";
+const storage = Auth.extractJwtFromStorage();
+let userInfo = null;
+if (storage) {
+  userInfo = JSON.parse(storage.userInfo);
+}
+
 class Home extends Component {
   constructor(props, context) {
     super(props, context);
@@ -25,7 +37,10 @@ class Home extends Component {
       modalInfoMsg: "",
       message: "",
       image: null,
-      data: null
+      profileImage: null,
+      profile: null,
+      data: null,
+      userDetails: null
     };
   }
 
@@ -82,11 +97,29 @@ class Home extends Component {
   };
 
   handleEditImage = image => {
-    this.setState({ image });
+    this.setState({ image: image });
   };
 
+  handleProfile = profile => {
+    this.setState({ profile });
+  };
+
+  componentDidMount = () => {
+    if (userInfo) {
+      const data = {
+        username: userInfo.username
+      };
+      this.props.getUser(data).then(() => {
+        this.setState({
+          image: this.props.userDetails.user.data.profileUrl,
+          userDetails: this.props.userDetails.user.data
+        })
+      });
+    } 
+  }
+
   render() {
-    const { message, data, image } = this.state;
+    const { message, data, image, profile } = this.state;
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
@@ -114,6 +147,7 @@ class Home extends Component {
             handleModalHide={this.handleModalHide}
             modalInfoMsg={this.state.modalInfoMsg}
             handleEditImage={this.handleEditImage}
+            handleProfile={this.handleProfile}
             image={image}
           />
 
@@ -133,6 +167,7 @@ class Home extends Component {
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalShow={this.handleModalShow}
                   image={image}
+                  profile={profile}
                 />
               </div>
 
@@ -152,7 +187,20 @@ class Home extends Component {
   }
 }
 Home.propTypes = {
-  history: propTypes.any
+  history: propTypes.any,
+  getUser: propTypes.func
 };
 
-export default Home;
+const mapStateToProps = state => ({
+  userDetails: state.userDataByUsername,
+});
+
+const mapDispatchToProps = {
+  getUser,
+};
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home);

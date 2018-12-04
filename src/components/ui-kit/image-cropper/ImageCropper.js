@@ -80,6 +80,7 @@ class ImageCropper extends Component {
   };
 
   handleSave = () => {
+    // todo fix
     const img = this.editor.getImageScaledToCanvas().toDataURL();
     this.setState({ preview: img });
     this.props.handleEditImage(img);
