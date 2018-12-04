@@ -1,9 +1,6 @@
 import { Auth } from "../auth";
-
 import * as userService from "../services/userService";
-
 import { logger } from "../loggers";
-
 import * as types from "../lib/constants/actionTypes";
 
 const getOfferTagStarted = () => ({

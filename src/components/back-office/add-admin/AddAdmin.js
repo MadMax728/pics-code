@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { admin_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";

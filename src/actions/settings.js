@@ -2,7 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as settingsService from "../services/settingsService";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
-import { campaigns_list, aboutInfo } from "../mock-data";
 
 // News Feed
 const getNewsFeedStarted = () => ({
@@ -34,12 +33,6 @@ export const getNewsFeed = (prop, provider) => {
       },
       error => {
         dispatch(getNewsFeedFailed(error.response));
-        dispatch(
-          // remove below code after API working, this is just for set mock data.
-          getNewsFeedSucceeded(
-            campaigns_list
-          )
-        );
         logger.error({
           description: error.toString(),
           fatal: true
@@ -79,8 +72,7 @@ export const getAbout = (prop, provider) => {
       },
       error => {
           dispatch(getAboutFailed(error.response));
-          dispatch(getAboutSucceeded(aboutInfo))
-        logger.error({
+      logger.error({
           description: error.toString(),
           fatal: true
         });
@@ -118,13 +110,7 @@ export const getSaved = (prop, provider) => {
         dispatch(getSavedSucceeded(res.data.data));
       },
       error => {
-        dispatch(
-          // getSavedFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          prop === "getSavedOther"
-            ? getSavedSucceeded(campaigns_list)
-            : prop === "getSavedOwner" && getSavedSucceeded(campaigns_list)
-        );
+        dispatch(getSavedFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

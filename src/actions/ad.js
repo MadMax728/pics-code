@@ -2,8 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as adService from "../services/adService";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-// remove when no need
-import { dashboardList } from "../mock-data";
 
 // Get Ads
 const getAdsStarted = () => ({
@@ -36,10 +34,7 @@ export const getAds = (prop, provider) => {
       },
       error => {
         dispatch(
-          // getAdsFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          // getAdsSucceeded(dashboardList)
-          getAdsSucceeded(dashboardList.filter(a => a.type === "ad"))
+          getAdsFailed(error.response)
         );
         logger.error({
           description: error.toString(),
@@ -81,11 +76,7 @@ export const getAdDetails = provider => {
       },
       error => {
         dispatch(
-          // getAdDetailsFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          getAdDetailsSucceeded(
-            dashboardList.filter(c => c.id === parseInt(provider))
-          )
+          getAdDetailsFailed(error.response)
         );
         logger.error({
           description: error.toString(),
