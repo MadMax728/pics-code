@@ -466,6 +466,7 @@
   @include float();
   .status {
     border-color: rgba(198, 198, 198, 0.3);
+    padding: 15px 0 0 0;
   }
   .feed_header {
     padding: 10px;
@@ -567,6 +568,7 @@
   }
   .feed_footer {
     @include float();
+    padding: 15px 0;
     .count {
       padding-right: 5px;
       font-family: "Helvetica-Bold";
@@ -581,6 +583,7 @@
       display: inline-block;
       float: left;
       padding-right: 15px;
+      padding-left: 15px;
       img {
         width: 20px;
         cursor: pointer;
