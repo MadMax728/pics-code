@@ -54,6 +54,8 @@ class InfoModal extends Component {
         handleModalInfoHide={this.props.handleModalInfoHide}
         handleEditImage={this.props.handleEditImage}
         image={this.props.image}
+        profile={this.props.profile}
+        handleProfile={this.props.handleProfile}
       />
     );
   };
@@ -100,7 +102,9 @@ InfoModal.propTypes = {
   handleModalHide: propTypes.func.isRequired,
   modalInfoMsg: propTypes.string,
   handleEditImage: propTypes.func,
-  image: propTypes.any
+  handleProfile: propTypes.func,
+  image: propTypes.any,
+  profile: propTypes.any
 };
 
 export default InfoModal;

@@ -19,8 +19,7 @@ class NumberInput extends Component {
   };
 
   render() {
-    const { name, min, max, pattern, className, id } = this.props;
-    const { value } = this.state;
+    const { name, min, max, pattern, className, id, value } = this.props;
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <input
@@ -32,7 +31,7 @@ class NumberInput extends Component {
         pattern={pattern}
         className={className}
         onChange={this.handleChangeField}
-        value={value}
+        defaultValue={value}
       />
     );
   }

@@ -53,3 +53,8 @@ export const contentTypes = {
   video: "video",
   image: "image"
 };
+
+export const gender = {
+  male: "male",
+  female: "female"
+}

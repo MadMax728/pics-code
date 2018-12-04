@@ -35,7 +35,7 @@ class RadioButton extends Component {
         className={className}
         onChange={this.handleChangeField}
         value={value}
-        defaultChecked={defaultChecked}
+        checked={defaultChecked}
       />
     );
   }
