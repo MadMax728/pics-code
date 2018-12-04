@@ -202,7 +202,7 @@ class EditProfile extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const data = {
-      profileImage: this.props.profile? this.props.profile.id : "",
+      profileImage: this.props.profile? this.props.profile : "",
       name: this.state.form.name_company,
       gender: this.state.form.gender,
       offerTag: this.state.form.offer_tag,
