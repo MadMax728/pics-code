@@ -68,6 +68,7 @@ const EditProfileCrop = ({
               onLoadSuccess={logCallback("onLoadSuccess")}
               onImageReady={logCallback("onImageReady")}
               image={image}
+              crossOrigin={`anonymous`}
               className="editor-canvas"
             />
           </div>
@@ -104,6 +105,7 @@ const EditProfileCrop = ({
           src={images.crop_pic}
           height="19"
           width="19"
+          crossOrigin={`anonymous`}
           className="min-profile-pic range-slider-pic"
           alt={"crop-1"}
         />
@@ -135,6 +137,7 @@ const EditProfileCrop = ({
           height="27"
           alt={"crop-2"}
           width="27"
+          crossOrigin={`anonymous`}
           className="max-profile-pic range-slider-pic"
         />
       </div>
