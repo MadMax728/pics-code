@@ -117,7 +117,7 @@ class Campaigns extends Component {
                     </div>
                   </div>
                 </div>
-                <div className="feed_footer padding-15">
+                <div className="feed_footer">
                   <div className="messages">
                     <span className="count">{campaign.msg_count}</span>
                     <img src={images.feed_msg} alt={"feed_msg"} />

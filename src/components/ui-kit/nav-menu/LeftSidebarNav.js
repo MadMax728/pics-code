@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import classnames from "classnames";
 
 const LeftSidebarNav = ({ header, links, ulClassName }) => {
   return (
@@ -18,7 +19,7 @@ const LeftSidebarNav = ({ header, links, ulClassName }) => {
                 className={link.className}
                 activeClassName={link.activeClassName}
               >
-                <span>{link.text}</span>
+                <span className={classnames("", {"textBold" : link.text.toLowerCase() === 'logout'})}>{link.text}</span>
               </NavLink>
             </li>
           );
