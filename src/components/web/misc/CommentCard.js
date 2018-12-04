@@ -69,7 +69,7 @@ class CommentCard extends Component {
   handleEditComment = e => {
     const id = e.target.id;
     const { comments } = this.state;
-    this.setState({ updateForm: { ...this.state.updateForm, comment: comments[comments.findIndex(c => c.id === id)].comment, id: id}});
+    this.setState({ updateForm: { ...this.state.updateForm, comment: comments[comments.findIndex(c => c.id === id)].comment, id}});
   }
   
   handleDelete = e => {

@@ -15,7 +15,7 @@ export const campaigns_list = [
     campaignName: "vishal10.63b3",
     category: "first",
     startDate: 1539109800,
-    description: "this is vishal 1 campaign",
+    description: "this is vishal 1 test campaign",
     id: "502e4528-997b-449e-81ce-839449cbc94d",
     typeContent: "Video",
     title: "vishal10",

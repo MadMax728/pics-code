@@ -26,7 +26,7 @@ class AboutPage extends Component {
     // }
 
     if (userInfo) {
-      let data = {
+      const data = {
         username: userInfo.username
       };
       this.props.getAbout("getAbout",data)      

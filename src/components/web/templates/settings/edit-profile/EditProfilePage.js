@@ -225,16 +225,14 @@ class EditProfile extends Component {
       ) {
         errors.servererror = "Something went wrong";
         this.setState({ error: errors });
-      } else {
-        if (userInfo) {
-          let data = {
+      } else if (userInfo) {
+          const data = {
             username: userInfo.username
           };
           this.props.getUser(data).then(() => {
             this.setDataOnLoad();
           });
         }
-      }
     });
   };
 
