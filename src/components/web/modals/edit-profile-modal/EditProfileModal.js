@@ -40,10 +40,12 @@ class EditProfileModal extends Component {
     Data.append('coordinate', '50');
     this.props.uploadProfilePicture(Data)
       .then(()=>{
-        console.log("data", this.props.userDataByUsername.user);
-        this.props.handleProfile(this.props.userDataByUsername.user.data);
-        this.imageCropper.current.handleSave();
-        this.props.handleModalInfoHide();    
+        if (this.props.userDataByUsername.imageData)
+        {
+          this.props.handleProfile(this.props.userDataByUsername.imageData.data.id);
+          this.imageCropper.current.handleSave();
+          this.props.handleModalInfoHide();  
+        }
       })
   };
 
@@ -92,6 +94,7 @@ EditProfileModal.propTypes = {
   handleEditImage: propTypes.func,
   image: propTypes.any,
   uploadProfilePicture: propTypes.any,
+  handleProfile: propTypes.func,
   userDataByUsername: propTypes.any,
 };
 

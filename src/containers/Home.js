@@ -14,17 +14,6 @@ import {
 } from "../components/common";
 import propTypes from "prop-types";
 
-import { connect } from "react-redux";
-import { getUser } from "../actions";
-
-import * as images from "../lib/constants/images";
-import { Auth } from "../auth";
-const storage = Auth.extractJwtFromStorage();
-let userInfo = null;
-if (storage) {
-  userInfo = JSON.parse(storage.userInfo);
-}
-
 class Home extends Component {
   constructor(props, context) {
     super(props, context);
@@ -37,10 +26,8 @@ class Home extends Component {
       modalInfoMsg: "",
       message: "",
       image: null,
-      profileImage: null,
       profile: null,
       data: null,
-      userDetails: null
     };
   }
 
@@ -103,20 +90,6 @@ class Home extends Component {
   handleProfile = profile => {
     this.setState({ profile });
   };
-
-  componentDidMount = () => {
-    if (userInfo) {
-      const data = {
-        username: userInfo.username
-      };
-      this.props.getUser(data).then(() => {
-        this.setState({
-          image: this.props.userDetails.user.data.profileUrl,
-          userDetails: this.props.userDetails.user.data
-        })
-      });
-    } 
-  }
 
   render() {
     const { message, data, image, profile } = this.state;
@@ -188,19 +161,8 @@ class Home extends Component {
 }
 Home.propTypes = {
   history: propTypes.any,
-  getUser: propTypes.func
-};
-
-const mapStateToProps = state => ({
-  userDetails: state.userDataByUsername,
-});
-
-const mapDispatchToProps = {
-  getUser,
 };
 
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home);
+
+export default Home;

@@ -39,6 +39,7 @@ class NumberInput extends Component {
 
 NumberInput.propTypes = {
   name: propTypes.string,
+  value: propTypes.any,
   onChange: propTypes.func,
   className: propTypes.string,
   id: propTypes.string,
