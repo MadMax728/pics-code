@@ -144,7 +144,7 @@
     "Companies": "Companies"
   },
   "modal_header": {
-    "cancle": "Cancle",
+    "cancle": "Cancel",
     "back": "Back",
     "preview": "Preview",
     "continue": "Continue",
@@ -364,7 +364,7 @@
     "upload": "Upload",
     "create_campaign": "Create Campaign",
     "create_ad": "Create Ad",
-    "subscriber": "Subscriber",
+    "subscriber": "Subscribers",
     "subscribed": "Subscribed",
     "posts": "Posts",
     "subscribe": "Subscribe",
@@ -572,16 +572,16 @@
     }
   },
   "editProfile": {
-    "username": "Username",
+    "username": "User name",
     "category": "Category",
     "email": "Email",
     "inquiry_tag": "Inquiry-tag",
     "location": "Location",
-    "name_company": "Name/Company",
+    "name_company": "Name / Company",
     "offer_tag": "Offer-tag",
-    "phone_number": "Phone-number",
-    "profile_description": "Profile-description",
-    "website": "Website",
+    "phone_number": "Phone number",
+    "profile_description": "Profile description",
+    "website": "Web site",
     "gender": "Gender",
     "D_O_B": "Date of birth",
     "general_information": "General Information",
@@ -622,7 +622,7 @@
     "phone_number": "phone number",
     "Website": "Website",
     "Activate": "Activate business profile",
-    "By_clicking_on_register_you_agree_to_our": "By clicking on register you agree to our"
+    "By_clicking_on_register_you_agree_to_our": "By clicking on activate you agree to our"
   },
   "bill_and_receipts": {
     "Ad_Campaign_title": "Ad / Campaign title",
