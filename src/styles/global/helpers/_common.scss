@@ -138,6 +138,10 @@ hr {
 .textCenter {
   text-align: center;
 }
+.htWid100{
+  width: 100%;
+  height: 100%;
+}
 .no-btn{
   border: none;
 }
@@ -1265,4 +1269,23 @@ section.loader-wrapr {
     margin-left: 20px;
   }
   //circle animation
+  //video
+  .video-js
+  {
+    &.htWid100{
+      .vjs-big-play-button{
+        left: 38%;
+        top: 38%;
+        border-radius: 51%;
+        height: 100px;
+        width: 100px;
+        span.vjs-icon-placeholder{
+          &::before{
+            top: 25px;
+          }
+        }
+      }
+    } 
+}
+  // .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before,
   
