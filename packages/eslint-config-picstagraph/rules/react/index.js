@@ -6,7 +6,7 @@ module.exports = {
     "react/default-props-match-prop-types": "error",
     "react/jsx-boolean-value": "warn",
     "react/jsx-key": "error",
-    "react/jsx-no-bind": "error",
+    // "react/jsx-no-bind": "error",
     "react/jsx-no-comment-textnodes": "error",
     "react/jsx-no-duplicate-props": ["error", { ignoreCase: true }],
     "react/jsx-no-target-blank": "error",

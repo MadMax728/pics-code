@@ -6,7 +6,6 @@ class VideoPlayer extends Component {
 
   constructor(props, context) {
     super(props, context);
-    this.videoNode = React.createRef();
   }
 
   componentDidMount() {
@@ -44,7 +43,7 @@ class VideoPlayer extends Component {
     return (
       <div>    
         <div data-vjs-player>
-          <video muted ref={this.videoNode} className="video-js"></video>
+          <video muted ref={ node => this.videoNode = node } className="video-js"></video>
         </div>
       </div>
     )
