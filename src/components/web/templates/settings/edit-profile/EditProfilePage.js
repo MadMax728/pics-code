@@ -6,22 +6,14 @@ import SocialNetworks from "./SocialNetworks";
 import {
   Text,
   NumberInput,
-  RadioButton,
-  Select
+  RadioButton
 } from "../../../../ui-kit/CommonUIComponents";
-import { Tags } from "../../../../common";
+import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
 import { getUser, updateUserProfile } from "../../../../../actions/profile";
 import connect from "react-redux/es/connect/connect";
 import { Auth } from "../../../../../auth";
-import {
-  getOfferTag,
-  getInquiryTag,
-  addInquiryTag,
-  addOfferTag,
-  getCategory
-} from "../../../../../actions";
 import moment from "moment";
 
 const storage = Auth.extractJwtFromStorage();
@@ -65,36 +57,11 @@ class EditProfile extends Component {
       },
       error: {},
       tags: [],
-      suggestionsOfferTagList: [],
-      suggestionsInquiryTagList: []
     };
   }
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getOfferTag().then(() => {
-      if(this.props.offerTags){
-        this.setState({
-          suggestionsOfferTagList: this.props.offerTags
-        });
-      }
-    });
-
-    this.props.getInquiryTag().then(() => {
-      if(this.props.inquiryTags) {
-        this.setState({
-          suggestionsInquiryTagList: this.props.inquiryTags
-        });
-      }
-    });
-
-    this.props.getCategory().then(() => {
-      if(this.props.categoryList && this.props.categoryList.categories){
-        this.setState({
-          categoryList: this.props.categoryList.categories
-        });
-      }
-    });
 
     if (userInfo) {
       const data = {
@@ -107,48 +74,27 @@ class EditProfile extends Component {
     } 
   }
 
-  handleOfferTagChange = tag => {
-    const { form, suggestionsOfferTagList } = this.state;
-    const indexOf = suggestionsOfferTagList.findIndex(f => {
-      return f.id === tag.id;
-    });
-
-    if (indexOf === -1) {
-      const tagName = {
-        offerTagName: tag.text
-      }
-      this.props.addOfferTag(tagName).then(()=> {
-        form.offer_tag.push(this.props.tags.addedOfferTags.id);
-        form.offerTagList.push(this.props.tags.addedOfferTags);
-        this.setState({ form });
-      })
-    } else {
-      form.offer_tag.push(tag.id);
-      form.offerTagList.push(tag);
-      this.setState({ form });
-    }
+  handleOfferTagChange = (id, tag) => {
+    const { form } = this.state;
+    form.offer_tag.push(id);
+    form.offerTagList.push(tag);
+    this.setState({ form });
   };
 
-  handleInquiryTagChange = tag => {
-    const { form, suggestionsInquiryTagList } = this.state;
-    const indexOf = suggestionsInquiryTagList.findIndex(f => {
-      return f.id === tag.id;
+  handleInquiryTagDelete = id => {
+    const { form } = this.state;
+    this.setState({ form: {
+      ...this.state.form, 
+      inquiry_tag: form.inquiry_tag.filter(tag => tag !== form.inquiryTagList[id].id), 
+      inquiryTagList: form.inquiryTagList.filter(tag => tag.id !== form.inquiryTagList[id].id)}
     });
+  };
 
-    if (indexOf === -1) {
-      const tagName = {
-        inquiryTagName: tag.text
-      }
-      this.props.addInquiryTag(tagName).then(()=> {
-        form.inquiry_tag.push(this.props.tags.addedInquiryTags.id);
-        form.inquiryTagList.push(this.props.tags.addedInquiryTags);
-        this.setState({ form });
-      })
-    } else {
-      form.inquiry_tag.push(tag.id);
-      form.inquiryTagList.push(tag);
-      this.setState({ form });
-    }
+  handleInquiryTagChange = (id, tag) => {
+    const { form } = this.state;
+    form.inquiry_tag.push(id);
+    form.inquiryTagList.push(tag);
+    this.setState({ form });
   };
 
   handleLocation = (location, address) => {
@@ -256,15 +202,6 @@ class EditProfile extends Component {
     this.props.handleModalInfoShow(modalType.edit_profile);
   };
 
-  handleInquiryTagDelete = id => {
-    const { form } = this.state;
-    this.setState({ form: {
-      ...this.state.form, 
-      inquiry_tag: form.inquiry_tag.filter(tag => tag !== form.inquiryTagList[id].id), 
-      inquiryTagList: form.inquiryTagList.filter(tag => tag.id !== form.inquiryTagList[id].id)}
-    });
-  };
-
   handleOfferTagDelete = id => {
     const { form } = this.state;  
     this.setState({ form: {
@@ -274,14 +211,14 @@ class EditProfile extends Component {
     });
   };
 
-  handleCategory = (event) => {
+  handleCategory = (selected) => {
     const { form } = this.state;
-    form.category = event.target.value
+    form.category = selected;
     this.setState({ form });
   }
 
   render() {
-    const { form, categoryList, isLoading } = this.state;
+    const { form, isLoading } = this.state;
     const { image } = this.props;
 
     return (
@@ -431,20 +368,11 @@ class EditProfile extends Component {
                 <label htmlFor="category">
                   {Translations.editProfile.category}
                 </label>
-                  <select
+                  <SelectCategory
                     value={form.category}
                     className="form-control"
-                    onChange={this.handleCategory}
-                    onBlur={this.handleCategory}
-                    options={categoryList}
-                  >
-                    <option value="">{"select"}</option>
-                    {categoryList.map(option => (
-                      <option value={option.id} key={option.id}>
-                        {option.categoryName}
-                      </option>
-                    ))}
-                  </select>
+                    handleCategory={this.handleCategory}
+                   />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="location" className="margin-bottom-13">
@@ -521,24 +449,26 @@ class EditProfile extends Component {
                 <label htmlFor="offer-tag">
                   {Translations.editProfile.offer_tag}
                 </label>
-                <Tags
+
+                <OfferTags
                   value={this.state.form.offerTagList}
-                  suggestion={this.state.suggestionsOfferTagList}
-                  handleAddition={this.handleOfferTagChange}
-                  handleDelete={this.handleOfferTagDelete}
+                  handleOfferTagChange={this.handleOfferTagChange}
+                  handleOfferTagDelete={this.handleOfferTagDelete}
                 />
+
               </div>
               <div className="form-group margin-bottom-30">
                 <span className="error-msg highlight">{this.state.error.inquiry_tag}</span>
                 <label htmlFor="inquiry-tag">
                   {Translations.editProfile.inquiry_tag}
                 </label>
-                <Tags
+
+                <InquiryTags
                   value={this.state.form.inquiryTagList}
-                  suggestion={this.state.suggestionsInquiryTagList}
-                  handleAddition={this.handleInquiryTagChange}
-                  handleDelete={this.handleInquiryTagDelete}
+                  handleInquiryTagChange={this.handleInquiryTagChange}
+                  handleInquiryTagDelete={this.handleInquiryTagDelete}
                 />
+                
               </div>
             </div>
             <SocialNetworks userId={"123"} isOwnerProfile />
@@ -556,20 +486,11 @@ class EditProfile extends Component {
 
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  offerTags: state.tags.offerTags,
-  inquiryTags: state.tags.inquiryTags,
-  tags: state.tags,
-  categoryList: state.categoryData  
 });
 
 const mapDispatchToProps = {
   getUser,
-  updateUserProfile,
-  getOfferTag,
-  getInquiryTag,
-  addOfferTag,
-  addInquiryTag,
-  getCategory
+  updateUserProfile
 };
 
 EditProfile.propTypes = {
@@ -580,15 +501,6 @@ EditProfile.propTypes = {
   image: PropTypes.any,
   profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
-  getOfferTag: PropTypes.func,
-  getInquiryTag: PropTypes.func,
-  addOfferTag: PropTypes.func,
-  addInquiryTag: PropTypes.func,
-  tags: PropTypes.any,
-  offerTags: PropTypes.any,
-  inquiryTags: PropTypes.any,
-  getCategory: PropTypes.func,
-  categoryList: PropTypes.any
 };
 
 export default connect(

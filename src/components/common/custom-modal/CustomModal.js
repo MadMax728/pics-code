@@ -8,7 +8,8 @@ import {
   CampaignModal
 } from "../../web/modals";
 import propTypes from "prop-types";
-import { modalType } from "../../../lib/constants/enumerations";
+import { modalType, userType } from "../../../lib/constants/enumerations";
+import { Auth } from "../../../auth";
 
 class CustomModal extends Component {
   constructor(props, context) {
@@ -46,12 +47,14 @@ class CustomModal extends Component {
   };
 
   handleModalCampaign = () => {
+    const storage = Auth.extractJwtFromStorage();
+    const isFor = JSON.parse(storage.userInfo).userType.toLowerCase() === userType.company;
     return (
       <CampaignModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
         // true for the company and false for the creator
-        isFor
+        isFor={isFor}
         handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
       />
     );

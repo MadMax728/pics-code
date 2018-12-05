@@ -58,3 +58,9 @@ export const gender = {
   male: "male",
   female: "female"
 }
+
+export const userType = {
+  company: "company",
+  creator: "creator"
+}
+
