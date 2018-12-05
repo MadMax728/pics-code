@@ -11,7 +11,7 @@ import {
 } from "../../../../ui-kit/CommonUIComponents";
 import { Tags } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
-import { PlaceAutoCompleteLocation } from "../../../../ui-kit";
+import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
 import { getUser, updateUserProfile } from "../../../../../actions/profile";
 import connect from "react-redux/es/connect/connect";
 import { Auth } from "../../../../../auth";
@@ -36,6 +36,7 @@ class EditProfile extends Component {
     super(props);
 
     this.state = {
+      isLoading: false,
       categoryList: [],
       form: {
         image: this.props.image,
@@ -99,6 +100,7 @@ class EditProfile extends Component {
       const data = {
         username: userInfo.username
       };
+      this.setState({isLoading: true})
       this.props.getUser(data).then(() => {
         this.setDataOnLoad();
       });
@@ -194,6 +196,7 @@ class EditProfile extends Component {
         }
       });
     }
+    this.setState({isLoading: false})
   };
 
   handlegetDOBDate = () => {
@@ -228,6 +231,7 @@ class EditProfile extends Component {
     };
 
     this.props.updateUserProfile(data).then(() => {
+      this.setState({isLoading: true})
       const errors = {};
       if (
         this.props.userDataByUsername.error &&
@@ -240,7 +244,7 @@ class EditProfile extends Component {
             username: userInfo.username
           };
           this.props.getUser(data).then(() => {
-            this.setDataOnLoad();
+            this.setDataOnLoad()
           });
         }
     });
@@ -271,23 +275,18 @@ class EditProfile extends Component {
   };
 
   handleCategory = (event) => {
-    this.setState({ form: {
-      ...this.state.form, 
-        category: event.target.value
-      }
-    });
-    console.log(event.target.value);
-    
-    console.log(this.state.form);
-    
+    const { form } = this.state;
+    form.category = event.target.value
+    this.setState({ form });
   }
 
   render() {
-    const { form, categoryList } = this.state;
+    const { form, categoryList, isLoading } = this.state;
     const { image } = this.props;
-    
+
     return (
       <div className="padding-rl-10 middle-section width-80">
+      {isLoading && <InlineLoading />}
         <div className="edit-profile-form">
             <form onSubmit={this.handleSubmit}>
             <div className="edit-profile-title-wrapr">
