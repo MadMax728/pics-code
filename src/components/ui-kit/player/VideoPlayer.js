@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import videojs from 'video.js'
 
-export default class VideoPlayer extends React.Component {
+class VideoPlayer extends Component {
   componentDidMount() {
     // instantiate Video.js
     // this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
     //   console.log('onPlayerReady', this)
     // });
-    this.player = videojs(this.videoNode, this.props, () => { 
+    const videoJsOptions = {
+      autoplay: false,
+      controls: true,
+      muted: true,
+      crossOrigin: true,
+      sources: [{
+        src: this.props.item,
+        type: 'video/mp4'
+      }]
+    }
+    this.player = videojs(this.videoNode, videoJsOptions, () => { 
       // `this` will point to the current `PlayVideoComponent` instance
       console.log('onPlayerReady', this)
     })
@@ -33,3 +44,10 @@ export default class VideoPlayer extends React.Component {
     )
   }
 }
+
+VideoPlayer.propTypes = {
+  item: PropTypes.string.isRequired
+};
+
+
+export default VideoPlayer;
