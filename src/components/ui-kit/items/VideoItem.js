@@ -27,7 +27,7 @@ class VideoItem extends Component {
         <div className={"embed-responsive embed-responsive-16by9"}>
           <div className={"img-responsive embed-responsive-item"}>
             {/* <ReactPlayer url={this.props.item} playing={false} controls/> */}
-            <VideoPlayer { ...videoJsOptions } />
+            <VideoPlayer muted { ...videoJsOptions } />
           </div>
         </div>
       </div>
