@@ -18,7 +18,6 @@ class AddVerification extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   // handelSubmit called when click on submit
