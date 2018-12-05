@@ -94,6 +94,11 @@ const initialState = {
     comments: null,
     isLoading: false,
     error: false
+  },
+  categoryData: {
+    categories: null,
+    isLoading: false,
+    error: false
   }
 };
 

@@ -3,7 +3,6 @@ import propTypes from "prop-types";
 import { SocialNetworks } from "../../templates/settings/edit-profile";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../lib/translations";
-import { aboutInfo } from "../../../../mock-data";
 
 const AboutCardBody = ({ about }) => {
   return (

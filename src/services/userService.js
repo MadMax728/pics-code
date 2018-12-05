@@ -62,3 +62,7 @@ export const getSocialNetwork = payload =>
 
 export const disconnectNetwork = (payload, provider) =>
   apiAuth.delete("/auth/" + provider + "/disconnect", payload);
+
+  // Get Category
+export const getCategory = (payload, header = {}) =>
+  api(baseUrl, header).get("/categories", payload);

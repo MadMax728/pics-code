@@ -32,13 +32,11 @@ class ResetPassword extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
     if (!this.formValid()) {
       return false;
     }
@@ -47,7 +45,6 @@ class ResetPassword extends Component {
       repeatPassword: this.state.form.repeat_password
     };
     this.props.setNewPassword(data).then(() => {
-      console.log("new password", this.props.newPasswordData);
       this.props.history.push(routes.ROOT_ROUTE);
     });
   };

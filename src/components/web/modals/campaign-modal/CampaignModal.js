@@ -93,7 +93,6 @@ class CampaignModal extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   handleCompanySubmit = () => {
@@ -104,7 +103,6 @@ class CampaignModal extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   componentDidMount = () => {
@@ -150,7 +148,6 @@ class CampaignModal extends Component {
     );
   };
   handleActualImg = actual_img => {
-    console.log("ac", actual_img);
     this.setState({ actual_img });
   };
 
@@ -167,8 +164,6 @@ class CampaignModal extends Component {
   render() {
     const { isFor, handleModalHide } = this.props;
     const { stepIndex, isPreview, form } = this.state;
-
-    console.log(form.image);
 
     let modalClassName = "";
 

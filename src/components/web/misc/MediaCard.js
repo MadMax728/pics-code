@@ -44,12 +44,12 @@ class MediaCard extends Component {
 
   handleContent = () => {};
 
-  handleComment = (commet) => {
+  handleComment = commet => {
     const item = this.state.item;
     item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
     this.setState({ item });
-  }
-  
+  };
+
   handleFavorite = e => {
     const item = this.state.item;
     item.isSelfLike = !this.state.item.isSelfLike;
@@ -77,19 +77,31 @@ class MediaCard extends Component {
 
   render() {
     const { isComments, item } = this.state;
-
+    const { likeData } = this.props;
     return (
       <div className="feed_wrapper">
-        <MediaCardHeader item={item} handleFavorite={this.handleFavorite} />
+        <MediaCardHeader
+          item={item}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+        />
         <MediaCardBody item={item} />
         <MediaCardFooter
+          isLoading={likeData.isLoading}
           item={item}
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={this.state.comments} itemId={item.id} typeContent={item.typeContent} handleComment={this.handleComment} />}
+        {isComments && (
+          <CommentCard
+            item={this.state.comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+          />
+        )}
       </div>
     );
   }
@@ -111,6 +123,7 @@ MediaCard.propTypes = {
   comments: propTypes.any,
   getComments: propTypes.func.isRequired,
   isParticipant: propTypes.bool.isRequired,
+  likeData: propTypes.any
 };
 
 export default connect(

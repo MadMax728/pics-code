@@ -5,7 +5,13 @@ import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 import { Link } from "react-router-dom";
 
-const AdCardHeader = ({ ad, isDescription, isInformation, handleFavorite }) => {
+const AdCardHeader = ({
+  ad,
+  isDescription,
+  isInformation,
+  handleFavorite,
+  isLoading
+}) => {
   const like_wrapper = classnames("like_wrapper", {
     "col-sm-2 col-xs-2 like_wrapper": isDescription && isInformation
   });
@@ -33,15 +39,16 @@ const AdCardHeader = ({ ad, isDescription, isInformation, handleFavorite }) => {
         )}
       </div>
       <div className="col-sm-1 col-xs-1 like_wrapper" role="article">
-        <img
-          src={favorite_icon}
-          alt="like"
-          className="pull-right"
-          role="presentation"
+        <button
+          type="button"
+          className="pull-right no-btn"
           onClick={handleFavorite}
           id={ad.id}
           onKeyDown={handleFavorite}
-        />
+          disabled={isLoading}
+        >
+          <img src={favorite_icon} alt="like" role="presentation" />
+        </button>
       </div>
     </div>
   );
@@ -51,7 +58,8 @@ AdCardHeader.propTypes = {
   handleFavorite: propTypes.func.isRequired,
   ad: propTypes.object.isRequired,
   isDescription: propTypes.bool.isRequired,
-  isInformation: propTypes.bool.isRequired
+  isInformation: propTypes.bool.isRequired,
+  isLoading: propTypes.bool.isRequired
 };
 
 export default AdCardHeader;

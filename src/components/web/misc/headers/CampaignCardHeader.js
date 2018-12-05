@@ -10,7 +10,8 @@ const CampaignCardHeader = ({
   campaign,
   isDescription,
   isInformation,
-  handleFavorite
+  handleFavorite,
+  isLoading
 }) => {
   const like_wrapper = classnames("like_wrapper", {
     "col-sm-2 col-xs-2 like_wrapper": isDescription && isInformation
@@ -41,19 +42,23 @@ const CampaignCardHeader = ({
         <div className="normal_sub_title ">published a campaign</div>
         <div className="secondary_title">{campaign.location}</div>
         {campaign.category && (
-          <div className="grey_title">{moment(campaign.createdAt).format('MMMM Do YYYY')} in {campaign.category[0].categoryName}</div>
+          <div className="grey_title">
+            {moment(campaign.createdAt).format("MMMM Do YYYY")} in{" "}
+            {campaign.category[0].categoryName}
+          </div>
         )}
       </div>
       <div className={like_wrapper} role="article">
-        <img
-          src={favorite_icon}
-          alt="like"
-          className="pull-right"
-          role="presentation"
+        <button
+          type="button"
+          className="pull-right no-btn"
           onClick={handleFavorite}
           id={campaign.id}
           onKeyDown={handleFavorite}
-        />
+          disabled={isLoading}
+        >
+          <img src={favorite_icon} alt="like" role="presentation" />
+        </button>
       </div>
     </div>
   );
@@ -63,7 +68,8 @@ CampaignCardHeader.propTypes = {
   handleFavorite: propTypes.func.isRequired,
   campaign: propTypes.object.isRequired,
   isDescription: propTypes.bool.isRequired,
-  isInformation: propTypes.bool.isRequired
+  isInformation: propTypes.bool.isRequired,
+  isLoading: propTypes.bool.isRequired
 };
 
 export default CampaignCardHeader;

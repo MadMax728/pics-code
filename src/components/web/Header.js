@@ -70,7 +70,6 @@ export default class Header extends Component {
   };
 
   onInputChange = e => {
-    console.log("target", e.target.value);
     this.setState({
       searchText: e.target.value
     });

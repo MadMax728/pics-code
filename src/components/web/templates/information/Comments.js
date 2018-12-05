@@ -57,8 +57,6 @@ class Comments extends Component {
       return c.comment_id === parseInt(id);
     });
 
-    console.log(indexOf);
-
     if (indexOf !== -1) {
       comments.splice(indexOf, 1);
     }
