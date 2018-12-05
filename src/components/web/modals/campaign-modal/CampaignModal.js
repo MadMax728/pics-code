@@ -27,9 +27,11 @@ class CampaignModal extends Component {
         type: "video",
         target_group: "company",
         offer: "",
-        offer_tag: "",
+        offer_tag: [],
+        offerTagList: [],
         inquiry: "",
-        inquiry_tag: "",
+        inquiry_tag: [],
+        inquiryTagList: [],
         description: "",
         start_date: moment(),
         end_date: moment(),
@@ -161,6 +163,38 @@ class CampaignModal extends Component {
     });
   };
 
+  handleOfferTagChange = (id, tag) => {
+    const { form } = this.state;
+    form.offer_tag.push(id);
+    form.offerTagList.push(tag);
+    this.setState({ form });
+  };
+
+  handleInquiryTagDelete = id => {
+    const { form } = this.state;
+    this.setState({ form: {
+      ...this.state.form, 
+      inquiry_tag: form.inquiry_tag.filter(tag => tag !== form.inquiryTagList[id].id), 
+      inquiryTagList: form.inquiryTagList.filter(tag => tag.id !== form.inquiryTagList[id].id)}
+    });
+  };
+
+  handleOfferTagDelete = id => {
+    const { form } = this.state;  
+    this.setState({ form: {
+      ...this.state.form, 
+      offer_tag: form.offer_tag.filter(tag => tag !== form.offerTagList[id].id), 
+      offerTagList: form.offerTagList.filter(tag => tag.id !== form.offerTagList[id].id)}
+    });
+  };
+
+  handleInquiryTagChange = (id, tag) => {
+    const { form } = this.state;
+    form.inquiry_tag.push(id);
+    form.inquiryTagList.push(tag);
+    this.setState({ form });
+  };
+
   render() {
     const { isFor, handleModalHide } = this.props;
     const { stepIndex, isPreview, form } = this.state;
@@ -224,21 +258,35 @@ class CampaignModal extends Component {
               ref={this.imageCropper}
               handleActualImg={this.handleActualImg}
               handleScale={this.handleScale}
+              handleOfferTagChange={this.handleOfferTagChange}
+              handleOfferTagDelete={this.handleOfferTagDelete}
+              handleInquiryTagChange={this.handleInquiryTagChange}
+              handleInquiryTagDelete={this.handleInquiryTagDelete}
             />
           ) : (
             <CreateCreatorCampaign
-              stepIndex={this.state.stepIndex}
+              stepIndex={stepIndex}
               isFor={isFor}
               forThat={"Campaign"}
               handleModalInfoShow={this.handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
-              handleChangeField={this.handleCreatorChangeField}
+              handleChangeField={this.handleCompanyChangeField}
               form={form}
-              handleSubmit={this.handleCreatorSubmit}
+              handleContentChange={this.handleContentChange}
+              handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
+              contentText={contentText}
+              uploadFile={this.uploadFile}
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
+              ref={this.imageCropper}
+              handleActualImg={this.handleActualImg}
+              handleScale={this.handleScale}
+              handleOfferTagChange={this.handleOfferTagChange}
+              handleOfferTagDelete={this.handleOfferTagDelete}
+              handleInquiryTagChange={this.handleInquiryTagChange}
+              handleInquiryTagDelete={this.handleInquiryTagDelete}
             />
           )
         }

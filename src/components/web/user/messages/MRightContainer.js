@@ -26,7 +26,7 @@ class MRightContainer extends Component {
         this.socket.emit('communication-message-board-join', {
             receiverId: 1,
             senderId: 2,
-            text: text
+            text
         });
     }
 
