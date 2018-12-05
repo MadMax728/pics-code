@@ -122,8 +122,12 @@ MediaCard.propTypes = {
   like: propTypes.func.isRequired,
   comments: propTypes.any,
   getComments: propTypes.func.isRequired,
-  isParticipant: propTypes.bool.isRequired,
+  isParticipant: propTypes.bool,
   likeData: propTypes.any
+};
+
+MediaCard.defaultProps = {
+  isParticipant: false
 };
 
 export default connect(

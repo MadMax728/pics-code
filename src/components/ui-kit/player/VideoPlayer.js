@@ -6,32 +6,44 @@ import * as Configs from '../../../default';
 
 class VideoPlayer extends Component {
 
+  mutecontrol = () => {
+    const config = Configs.getVideoConfig() ? JSON.parse(Configs.getVideoConfig()) :{};
+    const muted = config.muted ? true : false;
+    return muted;
+  }
+
   componentDidMount() {
-    const VisSense = VisSenseFactory(window)
-    const config = Configs.getVideoConfig();
+    const VisSense = VisSenseFactory(window);
     const videoJsOptions = {
       autoplay: false,
       controls: true,
-      muted: true,
+      muted: this.mutecontrol(),
       crossOrigin: true,
       sources: [{
         src: this.props.item,
         type: 'video/mp4'
       }]
-    }
+    };
 
     this.player = videojs(this.videoNode, videoJsOptions, () => { 
       // `this` will point to the current `PlayVideoComponent` instance
     })
 
+    this.player.on("volumechange", () => {
+      if(this.mutecontrol() !== this.player.muted()) {
+        Configs.saveVideoConfigToStorage(this.player.muted())
+      }
+    });
+
     VisSense(this.videoNode).monitor({
       fullyvisible: () => { 
         if(this.player) {
+          this.player.muted(this.mutecontrol())
           this.player.play()
         }
       }, 
       percentagechange: () => {
-        if(VisSense(this.videoNode).percentage() < 1) {
+        if(this.videoNode && VisSense(this.videoNode).percentage() < 1) {
           this.player.pause()
         }
       },
@@ -41,7 +53,6 @@ class VideoPlayer extends Component {
         }
       }
     }).start();
-    
   }
 
   // destroy player on unmount

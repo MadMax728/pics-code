@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import ReactPlayer from "react-player";
 import VideoPlayer from "../player/VideoPlayer";
 
 class VideoItem extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
   render() {
     const  { item, id } = this.props;
     return (
