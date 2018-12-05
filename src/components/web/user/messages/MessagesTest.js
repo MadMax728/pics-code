@@ -12,11 +12,11 @@ class Messages extends Component {
       title: Translations.messages_modal.messages,
       propsMsg: messages,
       messages,
-      message: '',
+      message: "",
       activeIndex: "1",
       chatData: []
     };
-    this.socket = io('http://127.0.0.1:3146/');
+    this.socket = io("http://127.0.0.1:3146/");
   }
 
   componentWillMount() {
@@ -46,21 +46,21 @@ class Messages extends Component {
     this.setState({ chatData });
   };
 
-  handleChange=(e)=>{
-    this.setState({message :e.target.value})
-  }
+  handleChange = e => {
+    this.setState({ message: e.target.value });
+  };
 
-  onEnterPress = (e) => {
-    if(e.keyCode === 13 && e.shiftKey === false) {
+  onEnterPress = e => {
+    if (e.keyCode === 13 && e.shiftKey === false) {
       e.preventDefault();
-      this.socket.emit('communication-message-board-join', {
+      this.socket.emit("communication-message-board-join", {
         receiverId: 1,
         senderId: 2,
         message: this.state.message
       });
     }
-  }
-  
+  };
+
   handleOnKeyDown = () => {};
 
   render() {
@@ -108,7 +108,9 @@ class Messages extends Component {
             >
               <img src={images.help} alt={"help"} />
               <br />
-              <div className="message_menu_title">{Translations.messages_modal.unknown}</div>
+              <div className="message_menu_title">
+                {Translations.messages_modal.unknown}
+              </div>
             </div>
             <div
               role="button"
@@ -123,7 +125,12 @@ class Messages extends Component {
               data-id="3"
               data-value="Like you"
             >
-              <img src={images.white_heart_bordered} alt={"white_heart_bordered"} height="21" width="21"/>
+              <img
+                src={images.white_heart_bordered}
+                alt={"white_heart_bordered"}
+                height="21"
+                width="21"
+              />
               <br />
               <div className="message_menu_title">{Translations.like_you}</div>
             </div>
@@ -142,7 +149,9 @@ class Messages extends Component {
             >
               <img src={images.comapny} alt={"comapny"} />
               <br />
-              <div className="message_menu_title">{Translations.messages_modal.companies}</div>
+              <div className="message_menu_title">
+                {Translations.messages_modal.companies}
+              </div>
             </div>
           </div>
           <div className="user-chat-wrapper">
@@ -208,7 +217,13 @@ class Messages extends Component {
           </div>
 
           <div className="write-chat">
-            <textarea placeholder="Write a message… " onChange={this.handleChange} value={this.state.message} onKeyUp={this.onEnterPress} onKeyDown={this.onEnterPress} />
+            <textarea
+              placeholder="Write a message… "
+              onChange={this.handleChange}
+              value={this.state.message}
+              onKeyUp={this.onEnterPress}
+              onKeyDown={this.onEnterPress}
+            />
             <img src={images.emoji} alt={"emoji1"} />
           </div>
         </div>

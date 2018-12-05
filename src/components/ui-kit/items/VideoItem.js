@@ -8,12 +8,13 @@ class VideoItem extends Component {
     super(props, context);
   }
   render() {
+    const  { item, id } = this.props;
     return (
       <div className="feed_image">
         <div className={"embed-responsive embed-responsive-16by9"}>
           <div className={"img-responsive embed-responsive-item"}>
             {/* <ReactPlayer url={this.props.item} playing={false} controls/> */}
-            <VideoPlayer item={this.props.item} />
+            <VideoPlayer id={id} item={item} />
           </div>
         </div>
       </div>
@@ -22,6 +23,7 @@ class VideoItem extends Component {
 }
 
 VideoItem.propTypes = {
+  id: PropTypes.string.isRequired,
   item: PropTypes.string.isRequired
 };
 

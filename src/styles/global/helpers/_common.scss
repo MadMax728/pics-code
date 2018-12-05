@@ -858,6 +858,9 @@ section.loader-wrapr {
       &:last-child {
         margin-bottom: 0;
       }
+      &:focus{
+        outline: 0;
+      }
     }
   }
 }
@@ -1283,6 +1286,22 @@ section.loader-wrapr {
           &::before{
             top: 25px;
           }
+        }
+      }
+      @media (max-width: 1200px){
+        .vjs-big-play-button{
+          top: 35%;
+        }
+      }
+      @media (max-width: 1024px) {
+        .vjs-big-play-button{
+          top: 30%;
+        }
+      }
+      @media (max-width: 991px) {
+        .vjs-big-play-button{
+          left: 35%;
+          top: 26%;
         }
       }
     } 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import videojs from 'video.js'
+import VisSenseFactory from 'vissense'
+import * as Configs from '../../../default';
 
 class VideoPlayer extends Component {
 
@@ -9,10 +11,8 @@ class VideoPlayer extends Component {
   }
 
   componentDidMount() {
-    // instantiate Video.js
-    // this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
-    //   console.log('onPlayerReady', this)
-    // });
+    const VisSense = VisSenseFactory(window)
+    const config = Configs.getVideoConfig();
     const videoJsOptions = {
       autoplay: false,
       controls: true,
@@ -23,10 +23,29 @@ class VideoPlayer extends Component {
         type: 'video/mp4'
       }]
     }
+
     this.player = videojs(this.videoNode, videoJsOptions, () => { 
       // `this` will point to the current `PlayVideoComponent` instance
-      console.log('onPlayerReady', this)
     })
+
+    VisSense(this.videoNode).monitor({
+      fullyvisible: () => { 
+        if(this.player) {
+          this.player.play()
+        }
+      }, 
+      percentagechange: () => {
+        if(VisSense(this.videoNode).percentage() < 1) {
+          this.player.pause()
+        }
+      },
+      hidden: () => { 
+        if(this.player) {
+          this.player.pause()
+        }
+      }
+    }).start();
+    
   }
 
   // destroy player on unmount
@@ -40,10 +59,11 @@ class VideoPlayer extends Component {
   // so videojs won't create additional wrapper in the DOM
   // see https://github.com/videojs/video.js/pull/3856
   render() {
+    const { id } = this.props;
     return (
       <div className="htWid100">    
         <div data-vjs-player className="htWid100">
-          <video muted ref={ node => this.videoNode = node } className="video-js htWid100"></video>
+          <video id={id} muted ref={ node => this.videoNode = node } className="video-js htWid100"></video>
         </div>
       </div>
     )
@@ -51,6 +71,7 @@ class VideoPlayer extends Component {
 }
 
 VideoPlayer.propTypes = {
+  id: PropTypes.string.isRequired,
   item: PropTypes.string.isRequired
 };
 

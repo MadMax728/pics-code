@@ -10,7 +10,7 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
       {campaign.typeContent &&
         campaign.typeContent.toLowerCase() ===
           enumerations.mediaTypes.video && (
-          <VideoItem item={campaign.mediaUrl} />
+          <VideoItem id={campaign.id}  item={campaign.mediaUrl} />
         )}
       {(!campaign.typeContent ||
         (campaign.typeContent &&
