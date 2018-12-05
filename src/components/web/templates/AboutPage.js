@@ -4,18 +4,8 @@ import { connect } from "react-redux";
 import { getAbout } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { AboutCard } from "../misc";
-import * as enumerations from "../../../lib/constants/enumerations";
-
 // remove when actual about API calling
-
 import { Auth } from "../../../auth";
-import jwtDecode from "jwt-decode";
-const storage = Auth.extractJwtFromStorage();
-let userInfo = null;
-if (storage) {
- userInfo = jwtDecode(storage.accessToken);
-}
-// ----------
 
 class AboutPage extends Component {
   componentDidMount = () => {
@@ -24,13 +14,8 @@ class AboutPage extends Component {
     // } else {
     //   this.props.getAbout("getAboutOwner");
     // }
-
-    if (userInfo) {
-      const data = {
-        username: userInfo.username
-      };
-      this.props.getAbout("getAbout",data)      
-    }
+    const data = Auth.extractJwtFromStorage();
+    this.props.getAbout("getAbout",data) 
 
   };
 

@@ -104,14 +104,15 @@ export const extractJwtFromStorage = () => {
     return null;
   }
 
-  return {
+  return ({
     accessToken: token,
     isAdmin: localStorage.getItem("is_admin"),
     userType: localStorage.getItem("user_type"),
     adminAccessToken: localStorage.getItem("admin_access_token"),
     language: localStorage.getItem("language"),
-    userInfo: localStorage.getItem("user_info")
-  };
+    userInfo: localStorage.getItem("user_info"),
+    username: localStorage.getItem("username"),
+  });
 };
 
 /**
@@ -149,6 +150,10 @@ export const saveJwtToStorage = authResponse => {
 
   if (authResponse.hasOwnProperty("language")) {
     localStorage.setItem("language", authResponse.language);
+  }
+
+  if (authResponse.hasOwnProperty("username")) {
+    localStorage.setItem("username", authResponse.username);
   }
 
   return extractJwtFromStorage();
