@@ -10,7 +10,7 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
       <div className="feed_image">
         {ad.mediaType &&
           ad.mediaType === enumerations.mediaTypes.video && (
-            <VideoItem item={ad.video} />
+            <VideoItem id={ad.id} item={ad.video} />
           )}
         {(!ad.mediaType ||
           (ad.mediaType && ad.mediaType === enumerations.mediaTypes.image)) && (

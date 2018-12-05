@@ -13,7 +13,7 @@ const MediaCardBody = ({ item }) => {
           )}
         {item.typeContent &&
           item.typeContent.toLowerCase() === enumerations.mediaTypes.video && (
-            <VideoItem item={item.mediaUrl} />
+            <VideoItem id={item.id} item={item.mediaUrl} />
           )}
       </div>
     </div>
