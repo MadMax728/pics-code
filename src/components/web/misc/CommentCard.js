@@ -44,34 +44,40 @@ class CommentCard extends Component {
 
   handleReportPost = () => {};
 
-  addComment = (comment) => {
+  addComment = comment => {
     const { comments, itemId, typeOfContent } = this.state;
     const data = {
       comment,
       typeOfContent,
       typeId: itemId
-    }
-    this.props.addComment(data).then(()=> { 
-        const commentData = {
-          id: this.props.comment.id,
-          comment: this.props.comment.comment,
-          username: this.props.comment.userName,
-          userId: this.props.comment.userId,
-          profileImage: this.props.comment.profileImage,
-          date: this.props.comment.createdAt
-        }
+    };
+    this.props.addComment(data).then(() => {
+      const commentData = {
+        id: this.props.comment.id,
+        comment: this.props.comment.comment,
+        username: this.props.comment.userName,
+        userId: this.props.comment.userId,
+        profileImage: this.props.comment.profileImage,
+        date: this.props.comment.createdAt
+      };
       comments.unshift(commentData);
       this.setState({ comments });
       this.props.handleComment(true);
-    })
+    });
   };
 
   handleEditComment = e => {
     const id = e.target.id;
     const { comments } = this.state;
-    this.setState({ updateForm: { ...this.state.updateForm, comment: comments[comments.findIndex(c => c.id === id)].comment, id}});
-  }
-  
+    this.setState({
+      updateForm: {
+        ...this.state.updateForm,
+        comment: comments[comments.findIndex(c => c.id === id)].comment,
+        id
+      }
+    });
+  };
+
   handleDelete = e => {
     const id = e.target.id;
     const comments = this.state.comments;
@@ -82,12 +88,12 @@ class CommentCard extends Component {
     if (indexOf !== -1) {
       const data = {
         id
-      }
-      this.props.deleteComment(data).then(()=> {
+      };
+      this.props.deleteComment(data).then(() => {
         comments.splice(indexOf, 1);
         this.setState({ comments });
         this.props.handleComment(false);
-      })
+      });
     }
   };
 
@@ -100,31 +106,34 @@ class CommentCard extends Component {
 
   renderEditComment = comment => {
     const { updateForm } = this.state;
+    const { isLoading } = this.props;
     let html = <p>{comment.comment}</p>;
-    if(comment.id === updateForm.id){
-      html =             
-      <form onSubmit={this.handleUpdateSubmit}>
-        <div className="col-sm-10 col-xs-7 no-padding">
-          <div className="comment-input">
-            <div className="form-group">
-              <HashTagUsername
-                className="form-control"
-                type="text"
-                placeholder="Write a comment"
-                name="comment"
-                handleSetState={this.handleUpdateSetState}
-                value={updateForm.comment}
-                isText
-              />
+    if (comment.id === updateForm.id) {
+      html = (
+        <form onSubmit={this.handleUpdateSubmit}>
+          <div className="col-sm-10 col-xs-7 no-padding">
+            <div className="comment-input">
+              <div className="form-group">
+                <HashTagUsername
+                  className="form-control"
+                  type="text"
+                  placeholder="Write a comment"
+                  name="comment"
+                  disabled={isLoading}
+                  handleSetState={this.handleUpdateSetState}
+                  value={updateForm.comment}
+                  isText
+                />
+              </div>
             </div>
           </div>
-        </div>
-        <input type="submit" hidden />
-      </form>
+          <input type="submit" hidden />
+        </form>
+      );
     }
-    
+
     return html;
-  }
+  };
 
   renderComment = comment => {
     return (
@@ -138,7 +147,8 @@ class CommentCard extends Component {
             />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {moment(comment.createdAt).format('MMMM Do YYYY')} <b>Reply</b>
+            <b>{comment.userName}</b>{" "}
+            {moment(comment.createdAt).format("MMMM Do YYYY")} <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
             <ThreeDots
@@ -158,9 +168,7 @@ class CommentCard extends Component {
             />
           </div>
         </div>
-        <div className="comment-content">
-          {this.renderEditComment(comment)}
-        </div>
+        <div className="comment-content">{this.renderEditComment(comment)}</div>
       </div>
     );
   };
@@ -170,7 +178,10 @@ class CommentCard extends Component {
   };
 
   handleUpdateSetState = (value, cd) => {
-    this.setState({ updateForm: { ...this.state.updateForm, comment: value } }, () => cd());
+    this.setState(
+      { updateForm: { ...this.state.updateForm, comment: value } },
+      () => cd()
+    );
   };
 
   handleSubmit = e => {
@@ -185,20 +196,23 @@ class CommentCard extends Component {
 
   handleUpdateSubmit = e => {
     e.preventDefault();
-    const { comments, updateForm } = this.state; 
+    const { comments, updateForm } = this.state;
     if (updateForm.comment !== "") {
       this.props.editComment(updateForm).then(() => {
-        comments[comments.findIndex(c => c.id === updateForm.id)].comment = updateForm.comment;
+        comments[comments.findIndex(c => c.id === updateForm.id)].comment =
+          updateForm.comment;
         /* eslint-disable */
         this.setState({ comments });
-        this.setState({ updateForm: { ...this.state.updateForm, comment: "", id: null } });
+        this.setState({
+          updateForm: { ...this.state.updateForm, comment: "", id: null }
+        });
       });
     }
   };
 
   render() {
     const { item, form, comments } = this.state;
-
+    const { comment, isLoading } = this.props;
     return (
       <div className="feed-comment" id={item.id}>
         <div className="comment-wrapper">
@@ -218,6 +232,7 @@ class CommentCard extends Component {
                     type="text"
                     placeholder="Write a comment"
                     name="comment"
+                    disabled={isLoading}
                     handleSetState={this.handleSetState}
                     value={form.comment}
                     isText
@@ -243,7 +258,8 @@ class CommentCard extends Component {
 }
 
 const mapStateToProps = state => ({
-  comment: state.commentData.comment
+  comment: state.commentData.comment,
+  isLoading: state.commentData.isLoading
 });
 
 const mapDispatchToProps = {
@@ -251,7 +267,6 @@ const mapDispatchToProps = {
   deleteComment,
   editComment
 };
-
 
 CommentCard.propTypes = {
   item: PropTypes.any,
@@ -261,7 +276,8 @@ CommentCard.propTypes = {
   editComment: PropTypes.func.isRequired,
   comment: PropTypes.any,
   typeContent: PropTypes.any,
-  itemId: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired,
+  itemId: PropTypes.any
 };
 
 export default connect(

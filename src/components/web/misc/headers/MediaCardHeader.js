@@ -5,7 +5,7 @@ import * as images from "../../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
-const MediaCardHeader = ({ item, handleFavorite }) => {
+const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
   const profile_route = item.isOwner
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}/${item.createdBy}`;
@@ -31,19 +31,23 @@ const MediaCardHeader = ({ item, handleFavorite }) => {
           <div className="normal_title">{item.title}</div>
         </Link>
         {item.category && (
-          <div className="grey_title">{moment(item.createdAt).format('MMMM Do YYYY')} in {item.category[0].categoryName}</div>
+          <div className="grey_title">
+            {moment(item.createdAt).format("MMMM Do YYYY")} in{" "}
+            {item.category[0].categoryName}
+          </div>
         )}
       </div>
       <div className="col-sm-1 col-xs-1 like_wrapper" role="article">
-        <img
-          src={favorite_icon}
-          alt="like"
-          className="pull-right"
-          role="presentation"
+        <button
+          type="button"
+          className="pull-right no-btn"
           onClick={handleFavorite}
           id={item.id}
           onKeyDown={handleFavorite}
-        />
+          disabled={isLoading}
+        >
+          <img src={favorite_icon} alt="like" role="presentation" />
+        </button>
       </div>
     </div>
   );
@@ -51,7 +55,8 @@ const MediaCardHeader = ({ item, handleFavorite }) => {
 
 MediaCardHeader.propTypes = {
   handleFavorite: propTypes.func.isRequired,
-  item: propTypes.object.isRequired
+  item: propTypes.object.isRequired,
+  isLoading: propTypes.bool.isRequired
 };
 
 export default MediaCardHeader;
