@@ -15,14 +15,20 @@ const MediaCardFooter = ({
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
         <span className="count">{item.commentCount}</span>
-        <img
-          src={images.comment}
-          alt="company-comments"
+        <button
+          type="button"
+          className="pull-right no-btn"
           onClick={handleCommentsSections}
-          role="presentation"
           id={item.createdBy}
           onKeyDown={handleCommentsSections}
-        />
+          disabled={isLoading}
+        >
+          <img
+            src={images.comment}
+            alt="company-comments"
+            role="presentation"
+          />
+        </button>
       </div>
       <div className="likes" role="article">
         <span className="count">{item.likeCount}</span>

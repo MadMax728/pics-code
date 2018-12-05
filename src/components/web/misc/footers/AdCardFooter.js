@@ -18,14 +18,20 @@ const AdCardFooter = ({
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
         <span className="count">{ad.commentCount}</span>
-        <img
-          src={images.comment}
-          alt="company-comments"
+        <button
+          type="button"
+          className="pull-right no-btn"
           onClick={handleCommentsSections}
-          role="presentation"
           id={ad.user.id}
           onKeyDown={handleCommentsSections}
-        />
+          disabled={isLoading}
+        >
+          <img
+            src={images.comment}
+            alt="company-comments"
+            role="presentation"
+          />
+        </button>
       </div>
       <div className="likes" role="article">
         <span className="count">{ad.likeCount}</span>

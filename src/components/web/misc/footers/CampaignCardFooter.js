@@ -21,14 +21,20 @@ const CampaignCardFooter = ({
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
         <span className="count">{campaign.commentCount}</span>
-        <img
-          src={images.comment}
-          alt="company-comments"
+        <button
+          type="button"
+          className="pull-right no-btn"
           onClick={handleCommentsSections}
-          role="presentation"
           id={campaign.createdBy}
           onKeyDown={handleCommentsSections}
-        />
+          disabled={isLoading}
+        >
+          <img
+            src={images.comment}
+            alt="company-comments"
+            role="presentation"
+          />
+        </button>
       </div>
       <div className="likes" role="article">
         <span className="count">{campaign.likeCount}</span>
