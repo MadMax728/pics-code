@@ -128,10 +128,12 @@ export const saveJwtToStorage = authResponse => {
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
-  if (authResponse.email && authResponse.username && authResponse.language && authResponse.id) {
+  if (authResponse.email && authResponse.username && authResponse.language && authResponse.id && authResponse.userType && authResponse.profileUrl) {
     localStorage.setItem("user_info",JSON.stringify({"email":authResponse.email, 
     "username":authResponse.username, 
-    "language": authResponse.language, 
+    "language": authResponse.language,
+    "profileUrl": authResponse.profileUrl,
+    "userType": authResponse.userType,
     "id": authResponse.id}));
   }
 
