@@ -6,10 +6,6 @@ import * as Configs from '../../../default';
 
 class VideoPlayer extends Component {
 
-  constructor(props, context) {
-    super(props, context);
-  }
-
   componentDidMount() {
     const VisSense = VisSenseFactory(window)
     const config = Configs.getVideoConfig();
