@@ -6,3 +6,4 @@ export * from "./user";
 export * from "./settings";
 export * from "./ad";
 export * from "./comments"
+export * from "./media"

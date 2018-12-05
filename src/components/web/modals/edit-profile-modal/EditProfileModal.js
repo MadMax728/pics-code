@@ -33,7 +33,7 @@ class EditProfileModal extends Component {
   };
 
   handleContinue = () => {
-    let Data = new FormData();
+    const Data = new FormData();
     Data.append('image',this.state.actual_img);
     Data.append('typeImage','Original');
     Data.append('typeOfContent','profile');

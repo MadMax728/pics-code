@@ -84,7 +84,7 @@ class Home extends Component {
   };
 
   handleEditImage = image => {
-    this.setState({ image: image });
+    this.setState({ image });
   };
 
   handleProfile = profile => {

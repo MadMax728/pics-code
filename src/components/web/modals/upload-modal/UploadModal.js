@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import propTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
+import { uploadMedia } from "../../../../actions/media";
+import connect from "react-redux/es/connect/connect";
 
 class UploadModal extends Component {
   constructor(props, context) {
@@ -10,15 +12,16 @@ class UploadModal extends Component {
       form: {
         address: "",
         add_location: "",
-        add_category: "",
+        add_category: "dummy",
         add_decription: "",
-        image: null
+        image: null,
+        file:null
       }
     };
-  }
+  } 
 
-  handleUpload = image => {
-    this.setState({ form: { ...this.state.form, image } });
+  handleUpload = (image, file) => {
+    this.setState({ form: { ...this.state.form, image,file } });
   };
 
   handleSetState = (value, cd) => {
@@ -28,7 +31,28 @@ class UploadModal extends Component {
   };
 
   handleContinue = () => {
-    console.log(this.state.form);
+    const { form } = this.state; 
+    const Data = new FormData();
+    Data.set('title', '');
+    Data.set('description', form.add_decription);
+    Data.append('image', form.file);
+    Data.set('postType', 'mediapost');
+    Data.set('location', form.add_location);
+
+    this.props.uploadMedia(Data).then(() => {
+      this.props.handleModalHide();
+
+      this.setState({
+        form: {
+          address: "",
+          add_location: "",
+          add_category: "dummy",
+          add_decription: "",
+          image: null,
+          file:null
+        }
+      });
+    });
   };
 
   handleChangeField = event => {
@@ -77,7 +101,21 @@ class UploadModal extends Component {
 
 UploadModal.propTypes = {
   modalShow: propTypes.bool,
-  handleModalHide: propTypes.func
+  handleModalHide: propTypes.func,
+  uploadMedia: propTypes.func
 };
 
-export default UploadModal;
+const mapStateToProps = state => ({
+  media: state.mediaData  
+});
+
+const mapDispatchToProps = {
+  uploadMedia
+};
+
+// export default UploadModal;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UploadModal);

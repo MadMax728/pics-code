@@ -27,7 +27,7 @@ class Upload extends Component {
     const currentThis = this;
     reader.readAsDataURL(file);
     reader.onloadend = function() {
-      currentThis.props.handleUpload(reader.result);
+      currentThis.props.handleUpload(reader.result,file);
     };
   };
 
