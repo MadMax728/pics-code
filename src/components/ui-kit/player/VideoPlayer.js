@@ -3,6 +3,12 @@ import PropTypes from "prop-types";
 import videojs from 'video.js'
 
 class VideoPlayer extends Component {
+
+  constructor(props, context) {
+    super(props, context);
+    this.videoNode = React.createRef();
+  }
+
   componentDidMount() {
     // instantiate Video.js
     // this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
@@ -38,7 +44,7 @@ class VideoPlayer extends Component {
     return (
       <div>    
         <div data-vjs-player>
-          <video muted ref={ node => this.videoNode = node } className="video-js"></video>
+          <video muted ref={this.videoNode} className="video-js"></video>
         </div>
       </div>
     )
