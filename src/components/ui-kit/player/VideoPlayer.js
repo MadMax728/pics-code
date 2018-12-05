@@ -41,9 +41,9 @@ class VideoPlayer extends Component {
   // see https://github.com/videojs/video.js/pull/3856
   render() {
     return (
-      <div>    
-        <div data-vjs-player>
-          <video muted ref={ node => this.videoNode = node } className="video-js"></video>
+      <div className="htWid100">    
+        <div data-vjs-player className="htWid100">
+          <video muted ref={ node => this.videoNode = node } className="video-js htWid100"></video>
         </div>
       </div>
     )
