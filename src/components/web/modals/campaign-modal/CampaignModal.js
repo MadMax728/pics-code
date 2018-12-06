@@ -9,23 +9,24 @@ import {
 } from "../../campaigns";
 
 import moment from "moment";
-import { modalType } from "../../../../lib/constants/enumerations";
+import { modalType, mediaTypes, target_group, procedure } from "../../../../lib/constants/enumerations";
 
 let contentText = "";
-class CampaignModal extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      stepIndex: 0,
+
+const initialState = {
+  stepIndex: 0,
       isPreview: false,
       form: {
         title: "",
-        location: "",
-        address: "",
+        location: {
+          lat: "",
+          lng: "",
+          address: ""
+        },
         category: "",
-        procedure: "public",
-        type: "video",
-        target_group: "company",
+        procedure: procedure.public,
+        type: mediaTypes.image,
+        target_group: target_group.company,
         offer: "",
         offer_tag: [],
         offerTagList: [],
@@ -53,11 +54,17 @@ class CampaignModal extends Component {
         voucher: "",
         photo: "",
         photoFile: null,
-        image: null
+        image: null,
+        actual_img: ""
       },
-      actual_img: "",
       scale: ""
-    };
+};
+
+
+class CampaignModal extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = initialState;
   }
 
   handleEditImage = image => {
@@ -88,7 +95,9 @@ class CampaignModal extends Component {
   };
 
   handleContentChange(text) {
-    contentText = text.blocks[0].text;
+    const { form } = this.state;
+    form.description = text
+    this.setState({ form });
   }
 
   handleCreatorChangeField = event => {
@@ -150,7 +159,9 @@ class CampaignModal extends Component {
     );
   };
   handleActualImg = actual_img => {
-    this.setState({ actual_img });
+    const { form } = this.state;
+    form.actual_img = actual_img;
+    this.setState({ form });
   };
 
   handleScale = scale => {
@@ -194,6 +205,16 @@ class CampaignModal extends Component {
     form.inquiryTagList.push(tag);
     this.setState({ form });
   };
+
+  handleSelect = (isFor , selected) => {
+    const { form } = this.state;
+    form[isFor] = selected;
+    this.setState({ form });
+  }
+
+  componentWillUnmount = () => {
+    this.setState(initialState);
+  }
 
   render() {
     const { isFor, handleModalHide } = this.props;
@@ -262,6 +283,7 @@ class CampaignModal extends Component {
               handleOfferTagDelete={this.handleOfferTagDelete}
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleSelect={this.handleSelect}
             />
           ) : (
             <CreateCreatorCampaign
@@ -287,6 +309,7 @@ class CampaignModal extends Component {
               handleOfferTagDelete={this.handleOfferTagDelete}
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleSelect={this.handleSelect}
             />
           )
         }

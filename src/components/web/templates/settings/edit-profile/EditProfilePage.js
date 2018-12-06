@@ -69,6 +69,7 @@ class EditProfile extends Component {
       };
       this.setState({isLoading: true})
       this.props.getUser(data).then(() => {
+        
         this.setDataOnLoad();
       });
     } 
@@ -211,9 +212,9 @@ class EditProfile extends Component {
     });
   };
 
-  handleCategory = (selected) => {
+  handleCategory = (isFor ,selected) => {
     const { form } = this.state;
-    form.category = selected;
+    form[isFor] = selected;
     this.setState({ form });
   }
 
@@ -371,7 +372,7 @@ class EditProfile extends Component {
                   <SelectCategory
                     value={form.category}
                     className="form-control"
-                    handleCategory={this.handleCategory}
+                    handleSelect={this.handleCategory}
                    />
               </div>
               <div className="form-group margin-bottom-30">

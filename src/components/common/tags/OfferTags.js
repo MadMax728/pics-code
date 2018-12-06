@@ -15,6 +15,10 @@ class OfferTags extends Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.setState({suggestionsOfferTagList: []})
+  }
+
   componentDidMount = () => {
     this.props.getOfferTag().then(() => {
       if(this.props.offerTags) {

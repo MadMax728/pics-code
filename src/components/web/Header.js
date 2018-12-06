@@ -65,7 +65,7 @@ export default class Header extends Component {
   };
   onSearchClick = e => {
     e.preventDefault();
-    const path = "?" + this.state.searchText;
+    const path = "?search=" + this.state.searchText;
     this.props.history.push(path);
   };
 

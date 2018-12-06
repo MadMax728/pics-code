@@ -1,5 +1,5 @@
 import * as types from "../lib/constants/actionTypes";
-import * as dashboardService from "../services/dashboardService";
+import * as dashboardService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 

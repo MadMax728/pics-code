@@ -1,51 +1,50 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getCategory } from "../../../actions";
+import { getInquiry } from "../../../actions";
 import { connect } from "react-redux";
 
-class SelectCategory extends Component {
+class SelectInquiry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryList: []
+      inquiryList: []
     }
   }
 
-
   componentWillUnmount = () => {
-    this.setState({categoryList: []});
+    this.setState({inquiryList: []});
   }
-
+  
   componentDidMount = () => {
-    this.props.getCategory().then(() => {
-      if(this.props.categoryList && this.props.categoryList.categories){
+    this.props.getInquiry().then(() => {
+      if(this.props.inquiryList && this.props.inquiryList.inquirys){
         this.setState({
-          categoryList: this.props.categoryList.categories
+          inquiryList: this.props.inquiryList.inquirys
         });
       }
     });
   }
   
-  handleCategory = (event) => {
-    this.props.handleSelect("category",event.target.value);
+  handleInquiry = (event) => {
+    this.props.handleSelect("inquiry",event.target.value);
   }
   
   render() {
-    const { categoryList } = this.state;
+    const { inquiryList } = this.state;
     const { value, className } = this.props;
 
     return (
       <select
         value={value}
         className={className}
-        onChange={this.handleCategory}
-        onBlur={this.handleCategory}
-        options={categoryList}
+        onChange={this.handleInquiry}
+        onBlur={this.handleInquiry}
+        options={inquiryList}
       >
         <option value="">{"select"}</option>
-        {categoryList.map(option => (
+        {inquiryList.map(option => (
           <option value={option.id} key={option.id}>
-            {option.categoryName}
+            {option.inquiryName}
           </option>
         ))}
       </select>
@@ -54,26 +53,26 @@ class SelectCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.selectData
+  inquiryList: state.selectData
 });
 
 const mapDispatchToProps = {
-  getCategory
+  getInquiry
 };
 
 
 const propTypes = {
   value: PropTypes.any,
-  categoryList: PropTypes.any,
+  inquiryList: PropTypes.any,
   className: PropTypes.string,
-  getCategory: PropTypes.func.isRequired,
+  getInquiry: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
-SelectCategory.propTypes = propTypes;
+SelectInquiry.propTypes = propTypes;
 
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectCategory);
+)(SelectInquiry);

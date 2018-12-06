@@ -4,7 +4,7 @@ import { ToolTip } from "../../ui-kit";
 
 const propTypes = {
   id: PropTypes.any.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
