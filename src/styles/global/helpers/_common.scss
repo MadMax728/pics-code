@@ -1337,6 +1337,26 @@ section.loader-wrapr {
         }
       }
     } 
-}
+    .vjs-button>.vjs-icon-placeholder:before{
+      font-size: 2.8em;
+      line-height: 1.5;
+    }
+    .vjs-control-bar{
+      height: 4em !important;
+    }
+    .vjs-time-control{
+      line-height: 4em !important;
+    }
+    .vjs-icon-replay:before{
+      content: "\f144" !important;
+    }
+    .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal{
+      height: 4em !important;
+    }
+    .vjs-volume-bar.vjs-slider-horizontal{
+      margin: 1.9em .45em !important;
+    }
+ }
+
   // .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before,
   
