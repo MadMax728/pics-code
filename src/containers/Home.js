@@ -18,7 +18,6 @@ class Home extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      currentLanguage: "en",
       modalShow: false,
       modalType: "",
       modalInfoShow: false,
@@ -71,7 +70,6 @@ class Home extends Component {
     // set language using language code
     Translations.setLanguage(languageCode || "en");
     // we need to update state to re render this component on language switch
-    this.setState({ currentLanguage: Translations.getLanguage() });
   };
 
   getFilter(filterData) {
@@ -92,7 +90,7 @@ class Home extends Component {
   };
 
   render() {
-    const { message, data, image, profile } = this.state;
+    const { message, image, profile } = this.state;
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (

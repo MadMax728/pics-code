@@ -19,7 +19,8 @@ const getSubscribersFailed = error => ({
 });
 
 /**
- * getSubscribers
+ *  getSubscribers
+ *  @returns {dispatch} getSubscribers.
  */
 export const getSubscribers = () => {
   return dispatch => {

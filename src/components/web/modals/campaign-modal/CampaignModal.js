@@ -11,7 +11,7 @@ import {
 import moment from "moment";
 import { modalType, mediaTypes, target_group, procedure } from "../../../../lib/constants/enumerations";
 
-let contentText = "";
+const contentText = "";
 
 const initialState = {
   stepIndex: 0,

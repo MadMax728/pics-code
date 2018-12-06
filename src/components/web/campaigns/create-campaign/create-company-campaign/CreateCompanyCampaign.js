@@ -8,8 +8,6 @@ import {
 } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
-import { CreateCompanyCampaignHeader } from "./index";
-import { ImageCropper } from "../../../../ui-kit/image-cropper";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {

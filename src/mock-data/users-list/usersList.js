@@ -1,5 +1,3 @@
-import * as images from "../../lib/constants/images";
-
 export const users_list = [
   {
     createdAt: 1543217115,
