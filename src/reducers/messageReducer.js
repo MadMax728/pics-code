@@ -26,4 +26,4 @@ const messageReducer = (state = initialState.aboutData, action) => {
   }
 };
 
-export default aboutReducer;
+export default messageReducer;
