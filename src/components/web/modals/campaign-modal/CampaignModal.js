@@ -18,8 +18,11 @@ const initialState = {
       isPreview: false,
       form: {
         title: "",
-        location: "",
-        address: "",
+        location: {
+          lat: "",
+          lng: "",
+          address: ""
+        },
         category: "",
         procedure: procedure.public,
         type: mediaTypes.image,
@@ -51,9 +54,9 @@ const initialState = {
         voucher: "",
         photo: "",
         photoFile: null,
-        image: null
+        image: null,
+        actual_img: ""
       },
-      actual_img: "",
       scale: ""
 };
 
@@ -92,8 +95,9 @@ class CampaignModal extends Component {
   };
 
   handleContentChange(text) {
-    contentText = text.blocks[0].text;
-    console.log(text);
+    const { form } = this.state;
+    form.description = text
+    this.setState({ form });
   }
 
   handleCreatorChangeField = event => {
@@ -155,7 +159,9 @@ class CampaignModal extends Component {
     );
   };
   handleActualImg = actual_img => {
-    this.setState({ actual_img });
+    const { form } = this.state;
+    form.actual_img = actual_img;
+    this.setState({ form });
   };
 
   handleScale = scale => {

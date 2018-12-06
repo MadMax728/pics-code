@@ -69,6 +69,7 @@ class EditProfile extends Component {
       };
       this.setState({isLoading: true})
       this.props.getUser(data).then(() => {
+        
         this.setDataOnLoad();
       });
     } 
