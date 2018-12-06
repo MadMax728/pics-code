@@ -144,6 +144,7 @@ hr {
 }
 .no-btn{
   border: none;
+  background: none;
 }
 /******** Titles Style*******************/
 .float_left{
@@ -847,7 +848,7 @@ section.loader-wrapr {
     display: inline-block;
     top: 40%;
     width: 300px;
-    div {
+    div, &>button {
       display: block;
       background: #ffffff;
       color: #4a4a4a;
@@ -855,6 +856,37 @@ section.loader-wrapr {
       text-align: center;
       margin-bottom: 2px;
       font-size: 12px;
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      border: 0;
+      &:before{
+        content: "";
+        position: absolute;
+        z-index: -1;
+        left: 51%;
+        right: 51%;
+        bottom: 0;
+        background: #ffffff;
+        height: 38px;
+        -webkit-transition-property: left, right;
+        transition-property: left, right;
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+        bottom: 1px;
+        z-index: -1;
+      }
+      &:hover{
+        color: white;
+        &::before{
+          background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+          bottom: -1px;
+          left: 0;
+          right: 0;
+        }
+      }
       &:last-child {
         margin-bottom: 0;
       }
@@ -1312,6 +1344,26 @@ section.loader-wrapr {
         }
       }
     } 
-}
+    .vjs-button>.vjs-icon-placeholder:before{
+      font-size: 2.8em;
+      line-height: 1.5;
+    }
+    .vjs-control-bar{
+      height: 4em !important;
+    }
+    .vjs-time-control{
+      line-height: 4em !important;
+    }
+    .vjs-icon-replay:before{
+      content: "\f144" !important;
+    }
+    .vjs-volume-panel:hover .vjs-volume-control.vjs-volume-horizontal{
+      height: 4em !important;
+    }
+    .vjs-volume-bar.vjs-slider-horizontal{
+      margin: 1.9em .45em !important;
+    }
+ }
+
   // .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before,
   

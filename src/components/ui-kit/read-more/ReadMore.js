@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 import ReadMoreReact from "read-more-react";
 
 const propTypes = {
-  text: PropTypes.string.isRequired,
+  // text: PropTypes.string.isRequired,
+  text: PropTypes.any,
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
   ideal: PropTypes.number.isRequired

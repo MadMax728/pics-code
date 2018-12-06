@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { RenderToolTips, HashTagUsername } from "../../common";
-import { ThreeDots } from "../../ui-kit";
+import { ThreeDots, ReadMore } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { addComment, deleteComment, editComment } from "../../../actions";
 import { connect } from "react-redux";
 import moment from "moment";
-
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -101,13 +100,19 @@ class CommentCard extends Component {
    * Tooltp
    */
   renderReportTips = id => {
-    return <RenderToolTips items={this.state.ReportTips} id={id} />;
+    return (
+      <RenderToolTips
+        items={this.state.ReportTips}
+        id={id}
+        isLoading={this.props.isLoading}
+      />
+    );
   };
 
   renderEditComment = comment => {
     const { updateForm } = this.state;
     const { isLoading } = this.props;
-    let html = <p>{comment.comment}</p>;
+    let html = <ReadMore text={comment.comment} min={150} ideal={150} max={150} />;
     if (comment.id === updateForm.id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
@@ -136,41 +141,25 @@ class CommentCard extends Component {
   };
 
   renderComment = comment => {
-    return (
-      <div className="comment-wrapper" key={comment.id}>
+    return <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
           <div className="col-sm-1 col-xs-1 no-padding profile_image">
-            <img
-              src={comment.profileImage}
-              alt={`comment-${comment.id}`}
-              className="img-circle img-responsive ht45"
-            />
+            <img src={comment.profileImage} alt={`comment-${comment.id}`} className="img-circle img-responsive ht45" />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b>{" "}
-            {moment(comment.createdAt).format("MMMM Do YYYY")} <b>Reply</b>
+            <b>{comment.userName}</b> {moment(comment.createdAt).format("MMMM Do YYYY")} <b>
+              Reply
+            </b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
-            <ThreeDots
-              id={`comment-${comment.id}`}
-              role="button"
-              dataTip="tooltip"
-              dataClass="tooltip-wrapr"
-              /* eslint-disable */
-              getContent={() => this.renderReportTips(comment.id)}
-              effect="solid"
-              delayHide={500}
-              delayShow={500}
-              delayUpdate={500}
-              place={"left"}
-              border={true}
-              type={"light"}
-            />
+            <ThreeDots id={`comment-${comment.id}`} role="button" dataTip="tooltip" dataClass="tooltip-wrapr" /* eslint-disable */
+              getContent={() => this.renderReportTips(comment.id)} effect="solid" delayHide={500} delayShow={500} delayUpdate={500} place={"left"} border={true} type={"light"} />
           </div>
         </div>
-        <div className="comment-content">{this.renderEditComment(comment)}</div>
-      </div>
-    );
+        <div className="comment-content">
+          {this.renderEditComment(comment)}
+        </div>
+      </div>;
   };
 
   handleSetState = (value, cd) => {
@@ -213,6 +202,7 @@ class CommentCard extends Component {
   render() {
     const { item, form, comments } = this.state;
     const { comment, isLoading } = this.props;
+    console.log("comment", isLoading);
     return (
       <div className="feed-comment" id={item.id}>
         <div className="comment-wrapper">
@@ -249,9 +239,13 @@ class CommentCard extends Component {
 
         {comments.length !== 0 && comments.map(this.renderComment)}
 
-        <div className="view-more-comments">
-          <Link to={""}>{Translations.view_more_comments}</Link>
-        </div>
+        {comments.length > 2 ? (
+          <div className="view-more-comments">
+            <Link to={""}>{Translations.view_more_comments}</Link>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
