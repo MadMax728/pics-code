@@ -925,6 +925,10 @@ section.loader-wrapr {
     border: 1px solid #979797;
     div {
       padding: 10px 20px;
+      border-bottom: 1px solid #979797;
+      &:last-child{
+        border-bottom: 0;
+      }
     }
   }
 }
@@ -1205,7 +1209,7 @@ section.loader-wrapr {
   padding-top: 10px;
   input.ReactTags__tagInputField {
   padding: 6px 12px;
-  &::-webkit-input-placeholder {
+   &::-webkit-input-placeholder {
   color: #4a4a4a;
   }
   &::-moz-placeholder {
@@ -1218,6 +1222,9 @@ section.loader-wrapr {
   color: #4a4a4a;
   }
   }
+  .ReactTags_suggestions{
+    border: 1px solid;
+  }  
   }
   span.tag-wrapper.ReactTags__tag.cursor-move {
   border: 1px solid #0f7aba;

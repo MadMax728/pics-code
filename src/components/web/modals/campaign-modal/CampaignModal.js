@@ -12,11 +12,9 @@ import moment from "moment";
 import { modalType, mediaTypes, target_group, procedure } from "../../../../lib/constants/enumerations";
 
 let contentText = "";
-class CampaignModal extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      stepIndex: 0,
+
+const initialState = {
+  stepIndex: 0,
       isPreview: false,
       form: {
         title: "",
@@ -57,7 +55,13 @@ class CampaignModal extends Component {
       },
       actual_img: "",
       scale: ""
-    };
+};
+
+
+class CampaignModal extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = initialState;
   }
 
   handleEditImage = image => {
@@ -89,6 +93,7 @@ class CampaignModal extends Component {
 
   handleContentChange(text) {
     contentText = text.blocks[0].text;
+    console.log(text);
   }
 
   handleCreatorChangeField = event => {
@@ -195,10 +200,14 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
-  handleCategory = (selected) => {
+  handleSelect = (isFor , selected) => {
     const { form } = this.state;
-    form.category = selected;
+    form[isFor] = selected;
     this.setState({ form });
+  }
+
+  componentWillUnmount = () => {
+    this.setState(initialState);
   }
 
   render() {
@@ -268,7 +277,7 @@ class CampaignModal extends Component {
               handleOfferTagDelete={this.handleOfferTagDelete}
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
-              handleCategory={this.handleCategory}
+              handleSelect={this.handleSelect}
             />
           ) : (
             <CreateCreatorCampaign
@@ -294,7 +303,7 @@ class CampaignModal extends Component {
               handleOfferTagDelete={this.handleOfferTagDelete}
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
-              handleCategory={this.handleCategory}
+              handleSelect={this.handleSelect}
             />
           )
         }

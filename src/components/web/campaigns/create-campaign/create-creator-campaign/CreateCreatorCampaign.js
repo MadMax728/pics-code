@@ -38,7 +38,7 @@ class CreateCreatorCampaign extends Component {
       handleOfferTagDelete,
       handleInquiryTagChange,
       handleInquiryTagDelete,
-      handleCategory
+      handleSelect
     } = this.props;
 
     return (
@@ -71,7 +71,7 @@ class CreateCreatorCampaign extends Component {
               handleInquiryTagDelete={handleInquiryTagDelete}
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
-              handleCategory={handleCategory}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -141,8 +141,7 @@ CreateCreatorCampaign.propTypes = {
   handleOfferTagDelete: propTypes.func.isRequired,
   handleInquiryTagChange: propTypes.func.isRequired,
   handleInquiryTagDelete: propTypes.func.isRequired,
-  handleCategory: propTypes.func.isRequired
-
+  handleSelect: propTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;

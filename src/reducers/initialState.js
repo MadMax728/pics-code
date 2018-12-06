@@ -97,6 +97,8 @@ const initialState = {
   },
   selectData: {
     categories: null,
+    offers: null,
+    inquirys: null,
     isLoading: false,
     error: false
   }

@@ -8,7 +8,7 @@ class VideoPlayer extends Component {
 
   mutecontrol = () => {
     const config = Configs.getVideoConfig() ? JSON.parse(Configs.getVideoConfig()) :{};
-    const muted = config.muted ? true : false;
+    const muted = !!config.muted;
     return muted;
   }
 

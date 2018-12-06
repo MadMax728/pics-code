@@ -1,51 +1,50 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getCategory } from "../../../actions";
+import { getOffer } from "../../../actions";
 import { connect } from "react-redux";
 
-class SelectCategory extends Component {
+class SelectOffer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryList: []
+      offerList: []
     }
   }
 
-
   componentWillUnmount = () => {
-    this.setState({categoryList: []});
+    this.setState({offerList: []});
   }
 
   componentDidMount = () => {
-    this.props.getCategory().then(() => {
-      if(this.props.categoryList && this.props.categoryList.categories){
+    this.props.getOffer().then(() => {
+      if(this.props.offerList && this.props.offerList.offers){
         this.setState({
-          categoryList: this.props.categoryList.categories
+          offerList: this.props.offerList.offers
         });
       }
     });
   }
   
-  handleCategory = (event) => {
-    this.props.handleSelect("category",event.target.value);
+  handleOffer = (event) => {
+    this.props.handleSelect("offer",event.target.value);
   }
   
   render() {
-    const { categoryList } = this.state;
+    const { offerList } = this.state;
     const { value, className } = this.props;
-
+    
     return (
       <select
         value={value}
         className={className}
-        onChange={this.handleCategory}
-        onBlur={this.handleCategory}
-        options={categoryList}
+        onChange={this.handleOffer}
+        onBlur={this.handleOffer}
+        options={offerList}
       >
         <option value="">{"select"}</option>
-        {categoryList.map(option => (
+        {offerList.map(option => (
           <option value={option.id} key={option.id}>
-            {option.categoryName}
+            {option.offerName}
           </option>
         ))}
       </select>
@@ -54,26 +53,26 @@ class SelectCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.selectData
+  offerList: state.selectData
 });
 
 const mapDispatchToProps = {
-  getCategory
+  getOffer
 };
 
 
 const propTypes = {
   value: PropTypes.any,
-  categoryList: PropTypes.any,
+  offerList: PropTypes.any,
   className: PropTypes.string,
-  getCategory: PropTypes.func.isRequired,
+  getOffer: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
-SelectCategory.propTypes = propTypes;
+SelectOffer.propTypes = propTypes;
 
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectCategory);
+)(SelectOffer);

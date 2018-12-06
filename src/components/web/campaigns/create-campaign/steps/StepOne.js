@@ -30,7 +30,7 @@ class StepOne extends Component {
       handleOfferTagDelete,
       handleInquiryTagChange,
       handleInquiryTagDelete,
-      handleCategory
+      handleSelect
     } = this.props;
 
     return (
@@ -79,7 +79,7 @@ class StepOne extends Component {
                 <SelectCategory
                   value={form.category}
                   className=""
-                  handleCategory={handleCategory}
+                  handleSelect={handleSelect}
                 />
             </div>
             <div className="subtitle">
@@ -217,18 +217,11 @@ class StepOne extends Component {
               <label htmlFor="Offer">
                 {Translations.create_campaigns.offer}
               </label>
-              <select
-                name="offer"
-                value={form.offer}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_campaigns.select_offer}</option>
-                <option>Offer 1</option>
-                <option>Offer 2</option>
-                <option>Offer 3</option>
-                <option>Offer 4</option>
-              </select>
+                <SelectOffer 
+                  value={form.offer}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="offer_tag">
@@ -244,18 +237,11 @@ class StepOne extends Component {
               <label htmlFor="Inquiry">
                 {Translations.create_campaigns.inquiry}
               </label>
-              <select
-                name="inquiry"
-                value={form.inquiry}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_campaigns.select_inquiry}</option>
-                <option>Inquiry 1</option>
-                <option>Inquiry 2</option>
-                <option>Inquiry 3</option>
-                <option>Inquiry 4</option>
-              </select>
+                <SelectInquiry 
+                  value={form.inquiry}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry_tag">
@@ -297,7 +283,7 @@ StepOne.propTypes = {
   handleOfferTagDelete: propTypes.func.isRequired,
   handleInquiryTagChange: propTypes.func.isRequired,
   handleInquiryTagDelete: propTypes.func.isRequired,
-  handleCategory: propTypes.func.isRequired
+  handleSelect: propTypes.func.isRequired
 };
 
 export default StepOne;

@@ -15,6 +15,10 @@ class InquiryTags extends Component {
     }
   }
 
+  componentWillUnmount = () => {
+    this.setState({suggestionsInquiryTagList: []})
+  }
+  
   componentDidMount = () => {
     this.props.getInquiryTag().then(() => {
       if(this.props.inquiryTags) {
