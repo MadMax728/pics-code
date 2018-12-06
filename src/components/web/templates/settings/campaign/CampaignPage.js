@@ -33,7 +33,7 @@ class SettingCampaignPage extends Component {
     const { campaignList, isLoading } = this.props;
 
     return (
-      <div className="padding-rl-10 middle-section">
+      <div className="padding-rl-10 middle-section"> 
         {campaignList && !isLoading && this.renderCampaignList()}
         {isLoading && <CampaignLoading />}
       </div>
