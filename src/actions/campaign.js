@@ -1,5 +1,5 @@
 import * as types from "../lib/constants/actionTypes";
-import * as campaignService from "../services/campaignService";
+import * as campaignService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 

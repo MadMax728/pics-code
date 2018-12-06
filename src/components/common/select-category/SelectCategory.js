@@ -50,7 +50,7 @@ class SelectCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.categoryData
+  categoryList: state.selectData
 });
 
 const mapDispatchToProps = {

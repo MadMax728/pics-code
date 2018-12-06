@@ -95,7 +95,7 @@ const initialState = {
     isLoading: false,
     error: false
   },
-  categoryData: {
+  selectData: {
     categories: null,
     isLoading: false,
     error: false
