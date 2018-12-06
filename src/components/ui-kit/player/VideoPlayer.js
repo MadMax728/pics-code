@@ -13,7 +13,6 @@ class VideoPlayer extends Component {
   }
 
   componentDidMount() {
-    const VisSense = VisSenseFactory(window);
     const videoJsOptions = {
       autoplay: false,
       controls: true,
@@ -27,28 +26,41 @@ class VideoPlayer extends Component {
 
     this.player = videojs(this.videoNode, videoJsOptions, () => { 
       // `this` will point to the current `PlayVideoComponent` instance
+      this.videoEvents();
+      this.checkVideoProgress();
     })
 
+  }
+
+  videoEvents = () => {
+    if(!this.player || !this.videoNode) return;
     this.player.on("volumechange", () => {
       if(this.mutecontrol() !== this.player.muted()) {
         Configs.saveVideoConfigToStorage(this.player.muted())
       }
     });
+  }
 
+  /**
+   * checkVideoProgress
+   */
+  checkVideoProgress = () => {
+    if(!this.player || !this.videoNode) return;
+    const VisSense = VisSenseFactory(window);
     VisSense(this.videoNode).monitor({
       fullyvisible: () => { 
-        if(this.player) {
+        if(this.videoNode && this.player) {
           this.player.muted(this.mutecontrol())
           this.player.play()
         }
       }, 
       percentagechange: () => {
-        if(this.player && !this.player.paused() && this.videoNode && VisSense(this.videoNode).percentage() < 1) {
+        if(this.videoNode && VisSense(this.videoNode).percentage() < 1 && this.player && !this.player.paused()) {
           this.player.pause()
         }
       },
       hidden: () => { 
-        if(this.player && !this.player.paused()) {
+        if(this.videoNode &&  this.player && !this.player.paused()) {
           this.player.pause()
         }
       }
