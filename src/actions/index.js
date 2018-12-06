@@ -7,5 +7,6 @@ export * from "./settings";
 export * from "./ad";
 export * from "./comments";
 export * from "./tags";
-export * from "./category";
 export * from "./users";
+export * from "./select";
+

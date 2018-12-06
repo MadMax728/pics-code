@@ -39,7 +39,8 @@ class CreateCompanyCampaign extends Component {
       handleOfferTagChange,
       handleOfferTagDelete,
       handleInquiryTagChange,
-      handleInquiryTagDelete
+      handleInquiryTagDelete,
+      handleSelect
     } = this.props;
 
     return (
@@ -72,6 +73,7 @@ class CreateCompanyCampaign extends Component {
               handleInquiryTagDelete={handleInquiryTagDelete}
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -142,7 +144,8 @@ CreateCompanyCampaign.propTypes = {
   handleOfferTagChange: PropTypes.func.isRequired,
   handleOfferTagDelete: PropTypes.func.isRequired,
   handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired
+  handleInquiryTagDelete: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;

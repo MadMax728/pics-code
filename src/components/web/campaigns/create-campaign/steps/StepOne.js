@@ -3,7 +3,8 @@ import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
-import { OfferTags, InquiryTags } from "../../../../../components/common";
+import * as enumerations from "../../../../../lib/constants/enumerations";
+import { OfferTags, InquiryTags, SelectCategory, SelectInquiry, SelectOffer } from "../../../../../components/common";
 
 class StepOne extends Component {
   constructor(props) {
@@ -14,8 +15,6 @@ class StepOne extends Component {
   uploadPhoto = e => {
     this.props.uploadFile(e, "photo");
   };
-
-
 
   render() {
     const {
@@ -30,7 +29,8 @@ class StepOne extends Component {
       handleOfferTagChange,
       handleOfferTagDelete,
       handleInquiryTagChange,
-      handleInquiryTagDelete
+      handleInquiryTagDelete,
+      handleSelect
     } = this.props;
 
     return (
@@ -56,7 +56,7 @@ class StepOne extends Component {
               </label>
               <input
                 type="text"
-                value={form.title | ""}
+                value={form.title? form.title : ""}
                 name="title"
                 onChange={handleChangeField}
               />
@@ -76,18 +76,11 @@ class StepOne extends Component {
               <label htmlFor="Category">
                 {Translations.create_campaigns.add_category}
               </label>
-              <select
-                name="category"
-                value={form.category}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_campaigns.select_category}</option>
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
-              </select>
+                <SelectCategory
+                  value={form.category}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="subtitle">
               {Translations.create_campaigns.application_criteria}
@@ -106,7 +99,7 @@ class StepOne extends Component {
                         name="procedure"
                         className="black_button"
                         value="public"
-                        defaultChecked={form.procedure === "public"}
+                        defaultChecked={form.procedure === enumerations.procedure.public}
                       />
                       <label htmlFor="public">
                         {Translations.create_campaigns.public}
@@ -118,7 +111,7 @@ class StepOne extends Component {
                         id="anonymous"
                         name="procedure"
                         value="anonymous"
-                        defaultChecked={form.procedure === "anonymous"}
+                        defaultChecked={form.procedure === enumerations.procedure.anonymous}
                       />
                       <label htmlFor="anonymous">
                         {Translations.create_campaigns.anonymous}
@@ -138,7 +131,7 @@ class StepOne extends Component {
                         name="type"
                         className="black_button"
                         value="video"
-                        defaultChecked={form.type === "video"}
+                        defaultChecked={form.type === enumerations.mediaTypes.video}
                       />
                       <label htmlFor="video">
                         {Translations.create_campaigns.video}
@@ -150,7 +143,7 @@ class StepOne extends Component {
                         id="image"
                         name="type"
                         value="image"
-                        defaultChecked={form.type === "image"}
+                        defaultChecked={form.type === enumerations.mediaTypes.image}
                       />
                       <label htmlFor="image">
                         {Translations.create_campaigns.image}
@@ -173,7 +166,7 @@ class StepOne extends Component {
                     name="target_group"
                     className="black_button"
                     value="company"
-                    defaultChecked={form.target_group === "company"}
+                    defaultChecked={form.target_group === enumerations.target_group.company}
                   />
                   <label htmlFor="company">
                     {Translations.create_campaigns.company}
@@ -182,10 +175,10 @@ class StepOne extends Component {
                 <li onChange={handleChangeField} className="wid49">
                   <input
                     type="radio"
-                    id="female-male"
-                    value="female-male"
+                    id="female_and_male"
+                    value="female_and_male"
                     name="target_group"
-                    defaultChecked={form.target_group === "female-male"}
+                    defaultChecked={form.target_group === enumerations.target_group.female_and_male}
                   />
                   <label htmlFor="femalemale">
                     {Translations.create_campaigns.male_female}
@@ -197,7 +190,7 @@ class StepOne extends Component {
                     id="female"
                     name="target_group"
                     value="female"
-                    defaultChecked={form.target_group === "female"}
+                    defaultChecked={form.target_group === enumerations.target_group.female}
                   />
                   <label htmlFor="female">
                     {Translations.create_campaigns.female}
@@ -209,7 +202,7 @@ class StepOne extends Component {
                     id="male"
                     name="target_group"
                     value="male"
-                    defaultChecked={form.target_group === "male"}
+                    defaultChecked={form.target_group === enumerations.target_group.male}
                   />
                   <label htmlFor="male">
                     {Translations.create_campaigns.male}
@@ -224,18 +217,11 @@ class StepOne extends Component {
               <label htmlFor="Offer">
                 {Translations.create_campaigns.offer}
               </label>
-              <select
-                name="offer"
-                value={form.offer}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_campaigns.select_offer}</option>
-                <option>Offer 1</option>
-                <option>Offer 2</option>
-                <option>Offer 3</option>
-                <option>Offer 4</option>
-              </select>
+                <SelectOffer 
+                  value={form.offer}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="offer_tag">
@@ -251,18 +237,11 @@ class StepOne extends Component {
               <label htmlFor="Inquiry">
                 {Translations.create_campaigns.inquiry}
               </label>
-              <select
-                name="inquiry"
-                value={form.inquiry}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_campaigns.select_inquiry}</option>
-                <option>Inquiry 1</option>
-                <option>Inquiry 2</option>
-                <option>Inquiry 3</option>
-                <option>Inquiry 4</option>
-              </select>
+                <SelectInquiry 
+                  value={form.inquiry}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry_tag">
@@ -303,7 +282,8 @@ StepOne.propTypes = {
   handleOfferTagChange: PropTypes.func.isRequired,
   handleOfferTagDelete: PropTypes.func.isRequired,
   handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired
+  handleInquiryTagDelete: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default StepOne;
