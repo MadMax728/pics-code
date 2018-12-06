@@ -848,7 +848,7 @@ section.loader-wrapr {
     display: inline-block;
     top: 40%;
     width: 300px;
-    div {
+    div, &>button {
       display: block;
       background: #ffffff;
       color: #4a4a4a;
@@ -858,6 +858,8 @@ section.loader-wrapr {
       font-size: 12px;
       position: relative;
       z-index: 1;
+      width: 100%;
+      border: 0;
       &:before{
         content: "";
         position: absolute;
