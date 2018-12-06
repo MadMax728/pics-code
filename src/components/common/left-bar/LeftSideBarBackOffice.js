@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   SideBarSettingBackOffice,
   SideBarBackOffice,
@@ -223,7 +223,7 @@ class LeftSideBarBackOffice extends Component {
 }
 
 LeftSideBarBackOffice.propTypes = {
-  getFilter: propTypes.func
+  getFilter: PropTypes.func
 };
 
 export default LeftSideBarBackOffice;

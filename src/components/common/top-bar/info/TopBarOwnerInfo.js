@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { TopBar } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 
 class TopBarOwnerInfo extends Component {
@@ -74,8 +74,8 @@ class TopBarOwnerInfo extends Component {
 }
 
 TopBarOwnerInfo.propTypes = {
-  handleModalShow: propTypes.func,
-  handleModalInfoShow: propTypes.func
+  handleModalShow: PropTypes.func,
+  handleModalInfoShow: PropTypes.func
 };
 
 export default TopBarOwnerInfo;

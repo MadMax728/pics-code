@@ -99,7 +99,12 @@ const initialState = {
     categories: null,
     isLoading: false,
     error: false
-  }
+  },
+  usersData: {
+    subscribers: [],
+    isLoading: false,
+    error: false
+  },
 };
 
 export default initialState;

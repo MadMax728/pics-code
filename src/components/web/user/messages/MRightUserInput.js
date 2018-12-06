@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
 
 class MRightUserInput extends Component {
@@ -44,13 +44,13 @@ class MRightUserInput extends Component {
 }
   
 MRightUserInput.propTypes = {
-    item: propTypes.shape({
-        image: propTypes.string,
-        userName: propTypes.string,
-        name: propTypes.string,
-        id: propTypes.string,
+    item: PropTypes.shape({
+        image: PropTypes.string,
+        userName: PropTypes.string,
+        name: PropTypes.string,
+        id: PropTypes.string,
     }),
-    onMessageSubmit: propTypes.func.isRequired
+    onMessageSubmit: PropTypes.func.isRequired
 };
 
 MRightUserInput.defaultProps = {

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
 
 class CreateCompanyCampaignHeader extends Component {
@@ -67,12 +67,12 @@ class CreateCompanyCampaignHeader extends Component {
 }
 
 CreateCompanyCampaignHeader.propTypes = {
-  handlePrivewOpen: propTypes.func.isRequired,
-  handleModalHide: propTypes.func,
-  stepIndex: propTypes.any.isRequired,
-  handleNext: propTypes.func,
-  handlePrev: propTypes.func,
-  handleResoreState: propTypes.func.isRequired
+  handlePrivewOpen: PropTypes.func.isRequired,
+  handleModalHide: PropTypes.func,
+  stepIndex: PropTypes.any.isRequired,
+  handleNext: PropTypes.func,
+  handlePrev: PropTypes.func,
+  handleResoreState: PropTypes.func.isRequired
 };
 
 export default CreateCompanyCampaignHeader;

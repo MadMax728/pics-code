@@ -6,7 +6,7 @@ import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import NavItem from "react-bootstrap/lib/NavItem";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
 import { Redirect } from "react-router";
@@ -172,6 +172,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  handleModalShow: propTypes.func,
-  history: propTypes.any
+  handleModalShow: PropTypes.func,
+  history: PropTypes.any
 };

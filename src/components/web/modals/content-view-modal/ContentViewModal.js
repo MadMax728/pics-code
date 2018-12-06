@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import { ContentView } from "../../user";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class ContentViewModal extends Component {
   constructor(props, context) {
@@ -25,8 +25,8 @@ class ContentViewModal extends Component {
 }
 
 ContentViewModal.propTypes = {
-  modalInfoShow: propTypes.bool,
-  handleModalInfoHide: propTypes.func
+  modalInfoShow: PropTypes.bool,
+  handleModalInfoHide: PropTypes.func
 };
 
 export default ContentViewModal;

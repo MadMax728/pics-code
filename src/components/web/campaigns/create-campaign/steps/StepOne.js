@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import { OfferTags, InquiryTags } from "../../../../../components/common";
@@ -292,18 +292,18 @@ class StepOne extends Component {
 }
 
 StepOne.propTypes = {
-  handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
-  isFor: propTypes.bool.isRequired,
-  uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired,
-  handleActualImg: propTypes.func,
-  handleScale: propTypes.func,
-  handleOfferTagChange: propTypes.func.isRequired,
-  handleOfferTagDelete: propTypes.func.isRequired,
-  handleInquiryTagChange: propTypes.func.isRequired,
-  handleInquiryTagDelete: propTypes.func.isRequired
+  handleChangeField: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired,
+  isFor: PropTypes.bool.isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  handleEditImage: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  handleActualImg: PropTypes.func,
+  handleScale: PropTypes.func,
+  handleOfferTagChange: PropTypes.func.isRequired,
+  handleOfferTagDelete: PropTypes.func.isRequired,
+  handleInquiryTagChange: PropTypes.func.isRequired,
+  handleInquiryTagDelete: PropTypes.func.isRequired
 };
 
 export default StepOne;

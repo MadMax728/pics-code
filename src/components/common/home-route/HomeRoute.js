@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 
 import {
@@ -411,10 +411,10 @@ class HomeRoute extends Component {
 }
 
 HomeRoute.propTypes = {
-  handleModalShow: propTypes.func,
-  handleModalInfoShow: propTypes.func,
-  image: propTypes.any,
-  profile: propTypes.any
+  handleModalShow: PropTypes.func,
+  handleModalInfoShow: PropTypes.func,
+  image: PropTypes.any,
+  profile: PropTypes.any
 };
 
 export default HomeRoute;

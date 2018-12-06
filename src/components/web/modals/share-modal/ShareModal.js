@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Share } from "../../user";
 import { Link } from "react-router-dom";
 import * as images from "../../../../lib/constants/images";
@@ -51,8 +51,8 @@ class ShareModal extends Component {
 }
 
 ShareModal.propTypes = {
-  handleModalInfoHide: propTypes.func,
-  modalInfoShow: propTypes.bool
+  handleModalInfoHide: PropTypes.func,
+  modalInfoShow: PropTypes.bool
 };
 
 export default ShareModal;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Translations } from "../../../lib/translations";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class Languages extends Component {
   constructor(props, context) {
@@ -66,7 +66,7 @@ class Languages extends Component {
 }
 
 Languages.propTypes = {
-  handleLanguageSwitch: propTypes.func.isRequired
+  handleLanguageSwitch: PropTypes.func.isRequired
 };
 
 export default Languages;

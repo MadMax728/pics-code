@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import { Messages } from "../../user";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class MessageModal extends Component {
   constructor(props, context) {
@@ -25,8 +25,8 @@ class MessageModal extends Component {
 }
 
 MessageModal.propTypes = {
-  modalShow: propTypes.bool,
-  handleModalHide: propTypes.func
+  modalShow: PropTypes.bool,
+  handleModalHide: PropTypes.func
 };
 
 export default MessageModal;

@@ -9,7 +9,7 @@ import {
   ParticipantsFilter
 } from "../filters";
 
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   SideBarCampaignMenu,
   SideBarCampaignMenuOnlyImage,
@@ -319,7 +319,7 @@ class LeftSideBar extends Component {
 }
 
 LeftSideBar.propTypes = {
-  getFilter: propTypes.func
+  getFilter: PropTypes.func
 };
 
 export default LeftSideBar;

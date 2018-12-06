@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 import moment from "moment";
 
@@ -81,7 +81,7 @@ const UserCard = ({ item }) => {
 };
 
 UserCard.propTypes = {
-  item: propTypes.object.isRequired
+  item: PropTypes.object.isRequired
 };
 
 export default UserCard;

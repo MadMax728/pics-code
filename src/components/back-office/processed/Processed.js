@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class Processed extends Component {
   onKeyDown = () => {};
@@ -31,7 +31,7 @@ class Processed extends Component {
 }
 
 Processed.propTypes = {
-  handleModalInfoHide: propTypes.func
+  handleModalInfoHide: PropTypes.func
 };
 
 export default Processed;

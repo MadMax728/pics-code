@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class RadioButton extends Component {
   constructor(props) {
@@ -42,12 +42,12 @@ class RadioButton extends Component {
 }
 
 RadioButton.propTypes = {
-  name: propTypes.string,
-  className: propTypes.string,
-  value: propTypes.string,
-  id: propTypes.string,
-  onChange: propTypes.func,
-  defaultChecked:propTypes.any
+  name: PropTypes.string,
+  className: PropTypes.string,
+  value: PropTypes.string,
+  id: PropTypes.string,
+  onChange: PropTypes.func,
+  defaultChecked:PropTypes.any
 };
 
 export default RadioButton;

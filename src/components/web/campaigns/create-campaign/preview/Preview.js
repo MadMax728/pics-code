@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import moment from "moment";
 class Preview extends Component {
   constructor(props) {
@@ -266,7 +266,7 @@ class Preview extends Component {
 }
 
 Preview.propTypes = {
-  form: propTypes.any.isRequired
+  form: PropTypes.any.isRequired
 };
 
 export default Preview;

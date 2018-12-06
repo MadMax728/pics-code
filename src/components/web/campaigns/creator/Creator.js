@@ -42,7 +42,7 @@ Creator.propTypes = {
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getCampaigns: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   creator_campaigns: PropTypes.any,
   error: PropTypes.any
 };

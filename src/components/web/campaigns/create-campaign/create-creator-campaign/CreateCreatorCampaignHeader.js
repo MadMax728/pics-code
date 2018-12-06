@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
 
 class CreateCreatorCampaignHeader extends Component {
@@ -66,11 +66,11 @@ class CreateCreatorCampaignHeader extends Component {
 }
 
 CreateCreatorCampaignHeader.propTypes = {
-  handleModalHide: propTypes.func,
-  handlePrivewOpen: propTypes.func.isRequired,
-  stepIndex: propTypes.any.isRequired,
-  handleNext: propTypes.func,
-  handlePrev: propTypes.func
+  handleModalHide: PropTypes.func,
+  handlePrivewOpen: PropTypes.func.isRequired,
+  stepIndex: PropTypes.any.isRequired,
+  handleNext: PropTypes.func,
+  handlePrev: PropTypes.func
 };
 
 export default CreateCreatorCampaignHeader;

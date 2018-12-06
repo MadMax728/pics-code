@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal, ImageCropper } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   CreateCompanyCampaign,
   CreateCompanyCampaignHeader,
@@ -296,10 +296,10 @@ class CampaignModal extends Component {
 }
 
 CampaignModal.propTypes = {
-  modalShow: propTypes.bool.isRequired,
-  handleModalHide: propTypes.func.isRequired,
-  isFor: propTypes.bool.isRequired,
-  handleModalInfoMsgShow: propTypes.func
+  modalShow: PropTypes.bool.isRequired,
+  handleModalHide: PropTypes.func.isRequired,
+  isFor: PropTypes.bool.isRequired,
+  handleModalInfoMsgShow: PropTypes.func
 };
 
 export default CampaignModal;

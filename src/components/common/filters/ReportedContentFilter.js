@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const relevanceItems = [
   { name: "all", className: "", value: "All" },
@@ -79,7 +79,7 @@ class ReportedContentFilter extends Component {
 }
 
 ReportedContentFilter.propTypes = {
-  handleApplyClick: propTypes.func
+  handleApplyClick: PropTypes.func
 };
 
 export default ReportedContentFilter;

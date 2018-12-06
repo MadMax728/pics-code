@@ -38,7 +38,7 @@ class PicturesRoot extends React.Component {
 
 PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   picsList: PropTypes.any,
   error: PropTypes.any
 };

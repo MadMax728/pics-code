@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const SocialProfileUrl = ({
   id,
@@ -56,15 +56,15 @@ const SocialProfileUrl = ({
 };
 
 SocialProfileUrl.propTypes = {
-  id: propTypes.string.isRequired,
-  title: propTypes.string.isRequired,
-  publicUrl: propTypes.string,
-  isConnectInProgress: propTypes.bool,
-  userName: propTypes.string,
-  icon: propTypes.string.isRequired,
-  handleSocialConnect: propTypes.func,
-  isOwnerProfile: propTypes.bool,
-  handleSocialClear: propTypes.func
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  publicUrl: PropTypes.string,
+  isConnectInProgress: PropTypes.bool,
+  userName: PropTypes.string,
+  icon: PropTypes.string.isRequired,
+  handleSocialConnect: PropTypes.func,
+  isOwnerProfile: PropTypes.bool,
+  handleSocialClear: PropTypes.func
 };
 
 export default SocialProfileUrl;

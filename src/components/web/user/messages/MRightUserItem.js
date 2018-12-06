@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
 
 const MRightUserItem = (
@@ -33,13 +33,13 @@ const MRightUserItem = (
 };
 
 MRightUserItem.propTypes = {
-    item: propTypes.shape({
-        image: propTypes.string,
-        userName: propTypes.string,
-        name: propTypes.string,
-        id: propTypes.string,
+    item: PropTypes.shape({
+        image: PropTypes.string,
+        userName: PropTypes.string,
+        name: PropTypes.string,
+        id: PropTypes.string,
     }),
-    onDeleteHistoryClick: propTypes.func.isRequired
+    onDeleteHistoryClick: PropTypes.func.isRequired
 };
 
 MRightUserItem.defaultProps = {

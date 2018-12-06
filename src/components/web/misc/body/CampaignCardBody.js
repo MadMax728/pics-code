@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { ImageItem, VideoItem, ReadMore } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import InformationCard from "../InformationCard";
@@ -41,9 +41,9 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
 };
 
 CampaignCardBody.propTypes = {
-  campaign: propTypes.object.isRequired,
-  isDescription: propTypes.bool.isRequired,
-  isInformation: propTypes.bool.isRequired
+  campaign: PropTypes.object.isRequired,
+  isDescription: PropTypes.bool.isRequired,
+  isInformation: PropTypes.bool.isRequired
 };
 
 export default CampaignCardBody;

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as images from "../../../lib/constants/images";
 import { modalType } from "../../../lib/constants/enumerations";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { backoffice_ads_list } from "../../../mock-data";
 import { ReportedSearchBar } from "../reported-search-bar";
 
@@ -123,7 +123,7 @@ class Ads extends Component {
 }
 
 Ads.propTypes = {
-  handleModalInfoShow: propTypes.func
+  handleModalInfoShow: PropTypes.func
 };
 
 export default Ads;

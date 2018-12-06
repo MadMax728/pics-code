@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import { TopBarOwnerInfo, TopBarOtherInfo } from "./info";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class TopBarInfo extends Component {
   TopBarOwnerInfo = () => {
@@ -65,8 +65,8 @@ class TopBarInfo extends Component {
 }
 
 TopBarInfo.propTypes = {
-  handleModalShow: propTypes.func,
-  handleModalInfoShow: propTypes.func
+  handleModalShow: PropTypes.func,
+  handleModalInfoShow: PropTypes.func
 };
 
 export default TopBarInfo;

@@ -270,7 +270,7 @@ CommentCard.propTypes = {
   editComment: PropTypes.func.isRequired,
   comment: PropTypes.any,
   typeContent: PropTypes.any,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   itemId: PropTypes.any
 };
 

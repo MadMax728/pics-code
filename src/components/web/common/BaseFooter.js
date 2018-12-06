@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
 class BaseFooter extends Component {
@@ -50,7 +50,7 @@ class BaseFooter extends Component {
 }
 
 BaseFooter.propTypes = {
-  className: propTypes.string.isRequired
+  className: PropTypes.string.isRequired
 };
 
 export default BaseFooter;

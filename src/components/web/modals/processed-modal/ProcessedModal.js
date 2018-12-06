@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Processed } from "../../../back-office";
 
 class ProcessedModal extends Component {
@@ -28,8 +28,8 @@ class ProcessedModal extends Component {
 }
 
 ProcessedModal.propTypes = {
-  handleModalInfoHide: propTypes.func,
-  modalInfoShow: propTypes.bool
+  handleModalInfoHide: PropTypes.func,
+  modalInfoShow: PropTypes.bool
 };
 
 export default ProcessedModal;

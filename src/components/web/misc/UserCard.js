@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import UserCardBody from "./body/UserCardBody";
 
 class UserCard extends Component {
@@ -29,8 +29,8 @@ class UserCard extends Component {
 }
 
 UserCard.propTypes = {
-  item: propTypes.object.isRequired,
-  index: propTypes.number.isRequired
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default UserCard;

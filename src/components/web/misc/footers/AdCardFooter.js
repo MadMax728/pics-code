@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 import { ThreeDots } from "../../../ui-kit";
@@ -73,12 +73,12 @@ const AdCardFooter = ({
 };
 
 AdCardFooter.propTypes = {
-  handleFavorite: propTypes.func.isRequired,
-  handleCommentsSections: propTypes.func.isRequired,
-  ad: propTypes.object.isRequired,
-  isStatus: propTypes.bool.isRequired,
-  renderReportTips: propTypes.func.isRequired,
-  isLoading: propTypes.bool.isRequired
+  handleFavorite: PropTypes.func.isRequired,
+  handleCommentsSections: PropTypes.func.isRequired,
+  ad: PropTypes.object.isRequired,
+  isStatus: PropTypes.bool.isRequired,
+  renderReportTips: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool
 };
 
 export default AdCardFooter;

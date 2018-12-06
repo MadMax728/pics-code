@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAds } from "../../../../../actions";
 import { CampaignLoading } from "../../../../ui-kit";
@@ -38,10 +38,10 @@ class AdsPage extends Component {
 }
 
 AdsPage.propTypes = {
-  getAds: propTypes.func.isRequired,
-  isLoading: propTypes.bool.isRequired,
-  adList: propTypes.any,
-  error: propTypes.any
+  getAds: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  adList: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

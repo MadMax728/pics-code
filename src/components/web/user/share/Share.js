@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 
@@ -57,7 +57,7 @@ class Share extends Component {
 }
 
 Share.propTypes = {
-  handleModalInfoHide: propTypes.func.isRequired
+  handleModalInfoHide: PropTypes.func.isRequired
 };
 
 export default Share;

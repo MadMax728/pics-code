@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
 
 const MLeftUserItem = ({ 
@@ -11,15 +11,15 @@ const MLeftUserItem = ({
             return '';
         }
         const userItem = item ? item : {};
-        const userImage = userItem.image || images.image;
+        const userImage = userItem.profileUrl || images.image;
 
         return (
             <div className="user-img">
-                <img src={userImage} alt={userItem.userName} />
-                <div className="username">{userItem.userName}</div>
+                <img src={userImage} alt={userItem.username} />
+                <div className="username">{userItem.username} </div>
                 { 
-                    message && message.date && (
-                        <div className="time">{message.date}</div>
+                    message && message.createdAt && (
+                        <div className="time">{message.createdAt}</div>
                     )
                 }
                 {
@@ -33,16 +33,16 @@ const MLeftUserItem = ({
 
 
 MLeftUserItem.propTypes = {
-    item: propTypes.shape({
-        image: propTypes.string,
-        userName: propTypes.string,
-        id: propTypes.string,
+    item: PropTypes.shape({
+        image: PropTypes.string,
+        userName: PropTypes.string,
+        id: PropTypes.string,
     }),
-    message: propTypes.shape({
-        date: propTypes.string,
-        text: propTypes.string,
-        id: propTypes.string,
-        me: propTypes.bool,
+    message: PropTypes.shape({
+        date: PropTypes.string,
+        text: PropTypes.string,
+        id: PropTypes.string,
+        me: PropTypes.bool,
     })
 };
   

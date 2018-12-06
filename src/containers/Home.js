@@ -12,7 +12,7 @@ import {
   HomeRoute,
   MessageBar
 } from "../components/common";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class Home extends Component {
   constructor(props, context) {
@@ -160,7 +160,7 @@ class Home extends Component {
   }
 }
 Home.propTypes = {
-  history: propTypes.any,
+  history: PropTypes.any,
 };
 
 

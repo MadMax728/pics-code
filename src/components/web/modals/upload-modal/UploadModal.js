@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
 
 class UploadModal extends Component {
@@ -75,8 +75,8 @@ class UploadModal extends Component {
 }
 
 UploadModal.propTypes = {
-  modalShow: propTypes.bool,
-  handleModalHide: propTypes.func
+  modalShow: PropTypes.bool,
+  handleModalHide: PropTypes.func
 };
 
 export default UploadModal;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { users_list } from "../../../../mock-data";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 class Community extends Component {
@@ -90,7 +90,7 @@ class Community extends Component {
 }
 
 Community.propTypes = {
-  handleMessageBar: propTypes.func.isRequired
+  handleMessageBar: PropTypes.func.isRequired
 };
 
 export default Community;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   EditProfilePic,
   EditProfilePicHeader
@@ -146,13 +146,13 @@ const mapDispatchToProps = {
 };
 
 EditProfileModal.propTypes = {
-  handleModalInfoHide: propTypes.func,
-  modalInfoShow: propTypes.bool,
-  handleEditImage: propTypes.func,
-  image: propTypes.any,
-  uploadProfilePicture: propTypes.any,
-  handleProfile: propTypes.func,
-  userDataByUsername: propTypes.any,
+  handleModalInfoHide: PropTypes.func,
+  modalInfoShow: PropTypes.bool,
+  handleEditImage: PropTypes.func,
+  image: PropTypes.any,
+  uploadProfilePicture: PropTypes.any,
+  handleProfile: PropTypes.func,
+  userDataByUsername: PropTypes.any,
 };
 
 export default connect(

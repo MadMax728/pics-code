@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 
@@ -61,18 +61,18 @@ class SettingCampaignStatisticsRight extends Component {
 }
 
 SettingCampaignStatisticsRight.propTypes = {
-  campaignStatistics: propTypes.shape({
-    title: propTypes.string,
-    applications: propTypes.string,
-    views: propTypes.string,
-    clicks: propTypes.string,
-    budget_spent_per: propTypes.string,
-    view_per: propTypes.string,
-    runtime_passed_per: propTypes.string,
-    total_budget_spent: propTypes.string,
-    remaining_budget: propTypes.string,
-    runtime: propTypes.string,
-    id: propTypes.number
+  campaignStatistics: PropTypes.shape({
+    title: PropTypes.string,
+    applications: PropTypes.string,
+    views: PropTypes.string,
+    clicks: PropTypes.string,
+    budget_spent_per: PropTypes.string,
+    view_per: PropTypes.string,
+    runtime_passed_per: PropTypes.string,
+    total_budget_spent: PropTypes.string,
+    remaining_budget: PropTypes.string,
+    runtime: PropTypes.string,
+    id: PropTypes.number
   })
 };
 

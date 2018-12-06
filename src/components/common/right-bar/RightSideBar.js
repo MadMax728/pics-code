@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import { Languages, RightAbout } from "./";
 import { FavouriteCampaigns } from "../../../components/web/campaigns";
@@ -155,9 +155,9 @@ class RightSideBar extends Component {
 }
 
 RightSideBar.propTypes = {
-  handleModalShow: propTypes.func,
-  handleMessageBar: propTypes.func.isRequired,
-  handleLanguageSwitch: propTypes.func.isRequired
+  handleModalShow: PropTypes.func,
+  handleMessageBar: PropTypes.func.isRequired,
+  handleLanguageSwitch: PropTypes.func.isRequired
 };
 
 export default RightSideBar;

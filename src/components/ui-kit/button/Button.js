@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 
 const Button = ({
@@ -35,14 +35,14 @@ const Button = ({
 };
 
 Button.propTypes = {
-  onClick: propTypes.func.isRequired,
-  children: propTypes.oneOfType([propTypes.element, propTypes.string]),
-  color: propTypes.oneOf(["primary", "secondary", "tertiary"]),
-  icon: propTypes.string,
-  iconOnly: propTypes.bool,
-  size: propTypes.oneOf(["default", "small", "medium", "large"]),
-  noTabFocus: propTypes.bool,
-  disabled: propTypes.bool
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
+  color: PropTypes.oneOf(["primary", "secondary", "tertiary"]),
+  icon: PropTypes.string,
+  iconOnly: PropTypes.bool,
+  size: PropTypes.oneOf(["default", "small", "medium", "large"]),
+  noTabFocus: PropTypes.bool,
+  disabled: PropTypes.bool
 };
 
 Button.defaultProps = {

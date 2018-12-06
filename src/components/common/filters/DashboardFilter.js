@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -194,7 +194,7 @@ class DashboardFilter extends Component {
 }
 
 DashboardFilter.propTypes = {
-  handleApplyClick: propTypes.func
+  handleApplyClick: PropTypes.func
 };
 
 export default DashboardFilter;
