@@ -22,13 +22,22 @@ class CreateCreatorCampaign extends Component {
       handleModalInfoShow,
       isPreview,
       handlePrivewClose,
-      isFor,
       form,
+      isFor,
       handleChangeField,
       handleSubmit,
       handleDate,
+      handleContentChange,
+      contentText,
+      uploadFile,
       handleEditImage,
-      handleLocation
+      handleLocation,
+      handleActualImg,
+      handleScale,
+      handleOfferTagChange,
+      handleOfferTagDelete,
+      handleInquiryTagChange,
+      handleInquiryTagDelete
     } = this.props;
 
     return (
@@ -49,16 +58,27 @@ class CreateCreatorCampaign extends Component {
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
+              uploadFile={uploadFile}
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
               handleEditImage={handleEditImage}
               handleLocation={handleLocation}
+              handleActualImg={handleActualImg}
+              handleScale={handleScale}
+              handleInquiryTagChange={handleInquiryTagChange}
+              handleInquiryTagDelete={handleInquiryTagDelete}
+              handleOfferTagChange={handleOfferTagChange}
+              handleOfferTagDelete={handleOfferTagDelete}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
-            <StepTwo handleChangeField={handleChangeField} />
+            <StepTwo 
+              handleChangeField={handleChangeField} 
+              contentText={contentText}
+              handleContentChange={handleContentChange}
+            />
           ))}
         {!isPreview &&
           (stepIndex === 2 && (
@@ -104,12 +124,21 @@ CreateCreatorCampaign.propTypes = {
   isPreview: propTypes.bool.isRequired,
   handlePrivewClose: propTypes.func.isRequired,
   handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
   isFor: propTypes.bool.isRequired,
+  form: propTypes.any.isRequired,
   handleSubmit: propTypes.func.isRequired,
   handleDate: propTypes.func.isRequired,
+  handleContentChange: propTypes.func.isRequired,
+  contentText: propTypes.any.isRequired,
+  uploadFile: propTypes.func.isRequired,
   handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired
+  handleLocation: propTypes.func.isRequired,
+  handleActualImg: propTypes.func,
+  handleScale: propTypes.func,
+  handleOfferTagChange: propTypes.func.isRequired,
+  handleOfferTagDelete: propTypes.func.isRequired,
+  handleInquiryTagChange: propTypes.func.isRequired,
+  handleInquiryTagDelete: propTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;

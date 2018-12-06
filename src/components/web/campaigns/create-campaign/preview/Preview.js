@@ -72,7 +72,7 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Start: </span>
                         <span className="secondary_title">
-                          {form.start_date.format("MM.DD.YYYY")}
+                          {form.start_date && form.start_date.format("MM.DD.YYYY")}
                         </span>
                       </div>
                       <div className="info_wrapper">

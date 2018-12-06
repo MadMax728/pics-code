@@ -65,7 +65,7 @@ class Feed extends Component {
   renderContents = (campaign, isDescription, isInformation) => {
     switch (campaign.type) {
       case "video":
-        return <VideoItem item={campaign.video} />;
+        return <VideoItem id={campaign.id} item={campaign.video} />;
       case "image":
         return (
           <ImageItem

@@ -3,6 +3,7 @@ import * as images from "../../../../../lib/constants/images";
 import propTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
+import { OfferTags, InquiryTags } from "../../../../../components/common";
 
 class StepOne extends Component {
   constructor(props) {
@@ -14,6 +15,8 @@ class StepOne extends Component {
     this.props.uploadFile(e, "photo");
   };
 
+
+
   render() {
     const {
       handleChangeField,
@@ -23,7 +26,11 @@ class StepOne extends Component {
       handleEditImage,
       handleLocation,
       handleScale,
-      handleActualImg
+      handleActualImg,
+      handleOfferTagChange,
+      handleOfferTagDelete,
+      handleInquiryTagChange,
+      handleInquiryTagDelete
     } = this.props;
 
     return (
@@ -49,7 +56,7 @@ class StepOne extends Component {
               </label>
               <input
                 type="text"
-                value={this.props.form.title ? this.props.form.title : ""}
+                value={form.title | ""}
                 name="title"
                 onChange={handleChangeField}
               />
@@ -59,11 +66,11 @@ class StepOne extends Component {
                 {Translations.create_campaigns.add_loaction}
                 Add Location
               </label>
-              <PlaceAutoCompleteLocation
-                className=""
-                handleLocation={handleLocation}
-                value={this.props.form.address}
-              />
+                <PlaceAutoCompleteLocation
+                  className=""
+                  handleLocation={handleLocation}
+                  value={form.address}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="Category">
@@ -71,7 +78,7 @@ class StepOne extends Component {
               </label>
               <select
                 name="category"
-                value={this.props.form.category}
+                value={form.category}
                 onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
@@ -219,7 +226,7 @@ class StepOne extends Component {
               </label>
               <select
                 name="offer"
-                value={this.props.form.offer}
+                value={form.offer}
                 onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
@@ -234,11 +241,10 @@ class StepOne extends Component {
               <label htmlFor="offer_tag">
                 {Translations.create_campaigns.offer_tag}
               </label>
-              <input
-                type="text"
-                name="offer_tag"
-                value={this.props.form.offer_tag}
-                onChange={handleChangeField}
+              <OfferTags 
+                value={form.offerTagList}
+                handleOfferTagChange={handleOfferTagChange}
+                handleOfferTagDelete={handleOfferTagDelete}
               />
             </div>
             <div className="form-group">
@@ -247,7 +253,7 @@ class StepOne extends Component {
               </label>
               <select
                 name="inquiry"
-                value={this.props.form.inquiry}
+                value={form.inquiry}
                 onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
@@ -262,11 +268,10 @@ class StepOne extends Component {
               <label htmlFor="Inquiry_tag">
                 {Translations.create_campaigns.inquiry_tag}
               </label>
-              <input
-                type="text"
-                name="inquiry_tag"
-                value={this.props.form.inquiry_tag}
-                onChange={handleChangeField}
+              <InquiryTags
+                value={form.inquiryTagList}
+                handleInquiryTagChange={handleInquiryTagChange}
+                handleInquiryTagDelete={handleInquiryTagDelete}
               />
             </div>
           </form>
@@ -294,7 +299,11 @@ StepOne.propTypes = {
   handleEditImage: propTypes.func.isRequired,
   handleLocation: propTypes.func.isRequired,
   handleActualImg: propTypes.func,
-  handleScale: propTypes.func
+  handleScale: propTypes.func,
+  handleOfferTagChange: propTypes.func.isRequired,
+  handleOfferTagDelete: propTypes.func.isRequired,
+  handleInquiryTagChange: propTypes.func.isRequired,
+  handleInquiryTagDelete: propTypes.func.isRequired
 };
 
 export default StepOne;

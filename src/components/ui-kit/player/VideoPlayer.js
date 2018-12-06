@@ -1,32 +1,58 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import videojs from 'video.js'
+import VisSenseFactory from 'vissense'
+import * as Configs from '../../../default';
 
 class VideoPlayer extends Component {
 
-  constructor(props, context) {
-    super(props, context);
+  mutecontrol = () => {
+    const config = Configs.getVideoConfig() ? JSON.parse(Configs.getVideoConfig()) :{};
+    const muted = config.muted ? true : false;
+    return muted;
   }
 
   componentDidMount() {
-    // instantiate Video.js
-    // this.player = videojs(this.videoNode, this.props, function onPlayerReady() {
-    //   console.log('onPlayerReady', this)
-    // });
+    const VisSense = VisSenseFactory(window);
     const videoJsOptions = {
       autoplay: false,
       controls: true,
-      muted: true,
+      muted: this.mutecontrol(),
       crossOrigin: true,
       sources: [{
         src: this.props.item,
         type: 'video/mp4'
       }]
-    }
+    };
+
     this.player = videojs(this.videoNode, videoJsOptions, () => { 
       // `this` will point to the current `PlayVideoComponent` instance
-      console.log('onPlayerReady', this)
     })
+
+    this.player.on("volumechange", () => {
+      if(this.mutecontrol() !== this.player.muted()) {
+        Configs.saveVideoConfigToStorage(this.player.muted())
+      }
+    });
+
+    VisSense(this.videoNode).monitor({
+      fullyvisible: () => { 
+        if(this.player) {
+          this.player.muted(this.mutecontrol())
+          this.player.play()
+        }
+      }, 
+      percentagechange: () => {
+        if(this.videoNode && VisSense(this.videoNode).percentage() < 1) {
+          this.player.pause()
+        }
+      },
+      hidden: () => { 
+        if(this.player) {
+          this.player.pause()
+        }
+      }
+    }).start();
   }
 
   // destroy player on unmount
@@ -40,10 +66,11 @@ class VideoPlayer extends Component {
   // so videojs won't create additional wrapper in the DOM
   // see https://github.com/videojs/video.js/pull/3856
   render() {
+    const { id } = this.props;
     return (
       <div className="htWid100">    
         <div data-vjs-player className="htWid100">
-          <video muted ref={ node => this.videoNode = node } className="video-js htWid100"></video>
+          <video id={id} muted ref={ node => this.videoNode = node } className="video-js htWid100"></video>
         </div>
       </div>
     )
@@ -51,6 +78,7 @@ class VideoPlayer extends Component {
 }
 
 VideoPlayer.propTypes = {
+  id: PropTypes.string.isRequired,
   item: PropTypes.string.isRequired
 };
 
