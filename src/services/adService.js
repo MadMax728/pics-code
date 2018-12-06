@@ -11,7 +11,7 @@ const api = apiFactory(baseUrl);
  */
 
 // Ad Settings API
-export const getSettingsAds = payload => api.get("/ad/settings", payload);
+export const getSettingsAds = payload => api.get("/newsfeeds/news-feeds", payload);
 
 // Ad Details
 export const getAdDetails = (payload, provider) =>
