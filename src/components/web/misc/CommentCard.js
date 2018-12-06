@@ -101,7 +101,13 @@ class CommentCard extends Component {
    * Tooltp
    */
   renderReportTips = id => {
-    return <RenderToolTips items={this.state.ReportTips} id={id} />;
+    return (
+      <RenderToolTips
+        items={this.state.ReportTips}
+        id={id}
+        isLoading={this.props.isLoading}
+      />
+    );
   };
 
   renderEditComment = comment => {
@@ -151,6 +157,7 @@ class CommentCard extends Component {
             {moment(comment.createdAt).format("MMMM Do YYYY")} <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
+            <p>123</p>
             <ThreeDots
               id={`comment-${comment.id}`}
               role="button"
@@ -213,6 +220,7 @@ class CommentCard extends Component {
   render() {
     const { item, form, comments } = this.state;
     const { comment, isLoading } = this.props;
+    console.log("comment", isLoading);
     return (
       <div className="feed-comment" id={item.id}>
         <div className="comment-wrapper">
@@ -249,9 +257,13 @@ class CommentCard extends Component {
 
         {comments.length !== 0 && comments.map(this.renderComment)}
 
-        <div className="view-more-comments">
-          <Link to={""}>{Translations.view_more_comments}</Link>
-        </div>
+        {comments.length > 2 ? (
+          <div className="view-more-comments">
+            <Link to={""}>{Translations.view_more_comments}</Link>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
