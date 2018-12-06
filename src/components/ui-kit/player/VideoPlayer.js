@@ -43,7 +43,7 @@ class VideoPlayer extends Component {
         }
       }, 
       percentagechange: () => {
-        if(this.videoNode && VisSense(this.videoNode).percentage() < 1) {
+        if(this.player && this.videoNode && VisSense(this.videoNode).percentage() < 1) {
           this.player.pause()
         }
       },
