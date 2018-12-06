@@ -61,7 +61,7 @@ const mapDispatchToProps = {
 const propTypes = {
   value: PropTypes.any,
   categoryList: PropTypes.any,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   getCategory: PropTypes.func.isRequired,
   handleCategory: PropTypes.func.isRequired
 };

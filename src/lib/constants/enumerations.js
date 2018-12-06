@@ -39,6 +39,18 @@ export const mediaTypes = {
   image: "image"
 };
 
+export const procedure = {
+  public: "public",
+  anonymous: "anonymous"
+}
+
+export const target_group = {
+  company: "company",
+  female_and_male: "female_and_male",
+  female: "female",
+  male: "male"
+}
+
 export const tagsType = {
   inquiryTagList: "inquiryTagList",
   offerTagList: "offerTagList"

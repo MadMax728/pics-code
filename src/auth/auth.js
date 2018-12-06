@@ -173,4 +173,5 @@ export const removeJwtFromStorage = () => {
   localStorage.removeItem("user_type");
   localStorage.removeItem("admin_access_token");
   localStorage.removeItem("user_info");
+  localStorage.removeItem("username");
 };

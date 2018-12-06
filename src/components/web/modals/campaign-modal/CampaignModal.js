@@ -9,7 +9,7 @@ import {
 } from "../../campaigns";
 
 import moment from "moment";
-import { modalType } from "../../../../lib/constants/enumerations";
+import { modalType, mediaTypes, target_group, procedure } from "../../../../lib/constants/enumerations";
 
 let contentText = "";
 class CampaignModal extends Component {
@@ -23,9 +23,9 @@ class CampaignModal extends Component {
         location: "",
         address: "",
         category: "",
-        procedure: "public",
-        type: "video",
-        target_group: "company",
+        procedure: procedure.public,
+        type: mediaTypes.image,
+        target_group: target_group.company,
         offer: "",
         offer_tag: [],
         offerTagList: [],
@@ -195,6 +195,12 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
+  handleCategory = (selected) => {
+    const { form } = this.state;
+    form.category = selected;
+    this.setState({ form });
+  }
+
   render() {
     const { isFor, handleModalHide } = this.props;
     const { stepIndex, isPreview, form } = this.state;
@@ -262,6 +268,7 @@ class CampaignModal extends Component {
               handleOfferTagDelete={this.handleOfferTagDelete}
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleCategory={this.handleCategory}
             />
           ) : (
             <CreateCreatorCampaign
@@ -287,6 +294,7 @@ class CampaignModal extends Component {
               handleOfferTagDelete={this.handleOfferTagDelete}
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleCategory={this.handleCategory}
             />
           )
         }
