@@ -13,6 +13,8 @@
   min-height: 100vh;
   header {
     background-color: #1575bb;
+    z-index: 1000 !important;
+    position: relative;
   }
   .custom-container {
     width: 700px;
