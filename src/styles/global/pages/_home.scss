@@ -695,6 +695,13 @@
         @media (max-width: 991px) {
           float: left;
         }
+        .display-text-group{
+          span{
+            display: inline-block;
+            width: 100%;
+            word-break: break-all;
+          }
+        }
         p {
           color: $charcoal_color;
           font-size: 14px;
