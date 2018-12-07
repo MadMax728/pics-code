@@ -8,6 +8,7 @@
     img {
       width: 100%;
       padding: 3px;
+      height: 100%;
     }
   }
   .user-details {
@@ -694,6 +695,13 @@
         @media (max-width: 991px) {
           float: left;
         }
+        .display-text-group{
+          span{
+            display: inline-block;
+            width: 100%;
+            word-break: break-all;
+          }
+        }
         p {
           color: $charcoal_color;
           font-size: 14px;
@@ -717,11 +725,11 @@
     .view-more-comments {
       float: left;
       width: 100%;
-      a {
+      
         padding: 13px;
         display: block;
         color: $silver_color;
-      }
+      
     }
   }
 }
