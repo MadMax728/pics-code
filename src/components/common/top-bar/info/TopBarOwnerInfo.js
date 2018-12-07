@@ -11,7 +11,6 @@ const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
 if (storage) {
   userInfo = JSON.parse(storage.userInfo);
-//  userInfo = jwtDecode(storage.accessToken);
 }
 
 class TopBarOwnerInfo extends Component {
@@ -49,7 +48,6 @@ class TopBarOwnerInfo extends Component {
       };
       this.setState({isLoading: true})
       this.props.getUser(data).then(() => {
-        console.log(this.props.userDataByUsername);
         if (this.props.userDataByUsername && this.props.userDataByUsername.user && this.props.userDataByUsername.user.data){
           const items = {
             username: this.props.userDataByUsername.user.data.username,

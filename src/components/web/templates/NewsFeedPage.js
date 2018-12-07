@@ -9,7 +9,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class NewsFeedPage extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
-      this.props.getNewsFeed("getNewsFeedOther", this.props.match.params.id);
+      this.props.getNewsFeed("getNewsFeedOther", this.props.match.params.username);
     } else {
       this.props.getNewsFeed("getNewsFeedOwner");
     }

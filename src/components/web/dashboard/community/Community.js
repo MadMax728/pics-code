@@ -19,16 +19,6 @@ class Community extends Component {
         (user.subscribed = !user.subscribed)
     );
     this.setState({ users_list });
-
-    // let data = users_list.filter(f => {
-    //   return f.id === e.target.id;
-    // });
-
-    // if (data[0].subscribed === true) {
-    //   this.props.handleMessageBar("You have successfully subscribed");
-    // } else {
-    //   this.props.handleMessageBar("You have successfully unsubscribed");
-    // }
   };
 
   render() {
@@ -41,7 +31,7 @@ class Community extends Component {
           {users_list.map((user, index) => {
             const profile_route = user.isOwner
               ? `/news-feed`
-              : `/news-feed/${user.id}`;
+              : `/news-feed/${user.username}`;
             return (
               <div className="community_wrapper" key={index}>
                 <div className="community-user-image">
