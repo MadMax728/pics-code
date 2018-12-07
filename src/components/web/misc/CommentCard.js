@@ -127,6 +127,7 @@ class CommentCard extends Component {
                   disabled={isLoading}
                   handleSetState={this.handleUpdateSetState}
                   value={updateForm.comment}
+                  maxLimit={1000}
                   isText
                 />
               </div>
@@ -202,7 +203,6 @@ class CommentCard extends Component {
   render() {
     const { item, form, comments } = this.state;
     const { comment, isLoading } = this.props;
-    console.log("comment", isLoading);
     return (
       <div className="feed-comment" id={item.id}>
         <div className="comment-wrapper">
@@ -225,6 +225,7 @@ class CommentCard extends Component {
                     disabled={isLoading}
                     handleSetState={this.handleSetState}
                     value={form.comment}
+                    maxLimit={1000}
                     isText
                   />
                 </div>
@@ -271,7 +272,8 @@ CommentCard.propTypes = {
   comment: PropTypes.any,
   typeContent: PropTypes.any,
   isLoading: PropTypes.bool,
-  itemId: PropTypes.any
+  itemId: PropTypes.any,
+  maxLimit: PropTypes.any
 };
 
 export default connect(
