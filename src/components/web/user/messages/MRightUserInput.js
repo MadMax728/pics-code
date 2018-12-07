@@ -46,7 +46,7 @@ class MRightUserInput extends Component {
 MRightUserInput.propTypes = {
     item: PropTypes.shape({
         image: PropTypes.string,
-        userName: PropTypes.string,
+        username: PropTypes.string,
         name: PropTypes.string,
         id: PropTypes.string,
     }),

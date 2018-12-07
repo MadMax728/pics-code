@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import * as _ from "lodash";
 import { Translations } from "../../../../lib/translations";
 import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from './MLeftUsersList';
@@ -67,6 +68,9 @@ class MLeftContainer extends Component {
     
     handleChatClick = (e) => {
         this.setState({ activeUser: e.currentTarget.dataset.id });
+        const { userList } = this.state;
+        const user = _.find(userList, { id: e.currentTarget.dataset.id });
+        this.props.selectUser(user);
     };
 
     render() {
@@ -92,6 +96,7 @@ class MLeftContainer extends Component {
 MLeftContainer.propTypes = {
     getSubscribers: PropTypes.func.isRequired,
     usersData: PropTypes.any,
+    selectUser: PropTypes.func
   };
   
   const mapStateToProps = state => ({

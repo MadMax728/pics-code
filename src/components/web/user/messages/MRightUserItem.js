@@ -17,7 +17,7 @@ const MRightUserItem = (
                 )
             }
             <div className="username-wrapper">
-                <span className="username">{item.userName}</span>
+                <span className="username">{item.username}</span>
                 <br />
                 <span className="name">{item.name}</span>
             </div>
@@ -35,7 +35,7 @@ const MRightUserItem = (
 MRightUserItem.propTypes = {
     item: PropTypes.shape({
         image: PropTypes.string,
-        userName: PropTypes.string,
+        username: PropTypes.string,
         name: PropTypes.string,
         id: PropTypes.string,
     }),

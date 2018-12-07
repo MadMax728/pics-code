@@ -35,7 +35,7 @@ const MLeftUserItem = ({
 MLeftUserItem.propTypes = {
     item: PropTypes.shape({
         image: PropTypes.string,
-        userName: PropTypes.string,
+        username: PropTypes.string,
         id: PropTypes.string,
     }),
     message: PropTypes.shape({
