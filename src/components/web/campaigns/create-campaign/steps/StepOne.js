@@ -12,15 +12,10 @@ class StepOne extends Component {
     this.state = {};
   }
 
-  uploadPhoto = e => {
-    this.props.uploadFile(e, "photo");
-  };
-
-  render() {
+   render() {
     const {
       handleChangeField,
       form,
-      uploadFile,
       isFor,
       handleEditImage,
       handleLocation,
@@ -274,7 +269,6 @@ StepOne.propTypes = {
   handleChangeField: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   isFor: PropTypes.bool.isRequired,
-  uploadFile: PropTypes.func.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,

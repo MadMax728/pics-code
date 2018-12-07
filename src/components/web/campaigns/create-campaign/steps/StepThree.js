@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
+import { SelectDailyBudget } from "../../../../../components/common";
 
 class StepThree extends Component {
   constructor(props) {
@@ -26,7 +27,10 @@ class StepThree extends Component {
   };
 
   render() {
-    const { handleChangeField } = this.props;
+    const { handleChangeField, form , handleSelect} = this.props;
+    // get 
+    let width;
+    // console.log(form.end_date.diff(form.start_date, 'days'));    
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -41,7 +45,7 @@ class StepThree extends Component {
                 </label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.props.form.start_date}
+                    selected={form.start_date}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -53,7 +57,7 @@ class StepThree extends Component {
                 <label htmlFor="End">{Translations.create_campaigns.end}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.props.form.end_date}
+                    selected={form.end_date}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -67,24 +71,18 @@ class StepThree extends Component {
             <label htmlFor="Define">
               {Translations.create_campaigns.define_daily_budget}
             </label>
-            <select
-              onBlur={handleChangeField}
-              onChange={handleChangeField}
-              value={this.props.form.daily_budget}
-              name="daily_budget"
-            >
-              <option value="100 E">100 E</option>
-              <option value="200 E">200 E</option>
-              <option value="300 E">300 E</option>
-              <option value="400 E">400 E</option>
-            </select>
+              <SelectDailyBudget 
+                value={form.daily_budget}
+                className=""
+                handleSelect={handleSelect}
+              />
           </div>
           <div className="form-group">
             <label htmlFor="Maximum">
               {Translations.create_campaigns.maximum_number_of_clicks}
             </label>
             <div className="meter orange nostripes">
-              <span style={{ width: "157px" }} className="filled-strip" />
+              <span style={{ width: "3.36px" }} className="filled-strip" />
               <span className="number-clicks">
                 {Translations.create_campaigns.max_1200_clicks}
               </span>
@@ -165,7 +163,8 @@ class StepThree extends Component {
 StepThree.propTypes = {
   handleChangeField: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  handleDate: PropTypes.func.isRequired
+  handleDate: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default StepThree;

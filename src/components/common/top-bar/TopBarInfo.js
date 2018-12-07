@@ -14,19 +14,13 @@ class TopBarInfo extends Component {
     );
   };
 
-  TopBarOtherInfo = () => {
-    return <TopBarOtherInfo handleModalShow={this.props.handleModalShow} />;
+  TopBarOtherInfo = (match) => {    
+    return <TopBarOtherInfo handleModalShow={this.props.handleModalShow} match={match.match.params} />;
   };
 
   render() {
     return (
       <div>
-        <Route
-          exact
-          path={routes.MY_PROFILE_ROUTE}
-          component={this.TopBarOwnerInfo}
-        />
-
         <Route
           exact
           path={routes.NEWS_FEED_ROUTE}

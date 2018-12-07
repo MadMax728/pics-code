@@ -99,6 +99,7 @@ const initialState = {
     categories: null,
     offers: null,
     inquirys: null,
+    dailyBudgets: null,
     isLoading: false,
     error: false
   },

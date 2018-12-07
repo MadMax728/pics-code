@@ -12,7 +12,6 @@ import {
   UsersPage,
   PicturesPage,
   AboutPage,
-  UserProfilePage,
   PrivacyPage,
   EditProfilePage,
   BusinessProfilePage,
@@ -201,12 +200,6 @@ class HomeRoute extends Component {
             path={routes.CAMPAIGN_ROUTE}
             exact
             component={this.handleCampaign}
-          />
-
-          <Route
-            exact
-            path={routes.MY_PROFILE_ROUTE}
-            component={UserProfilePage}
           />
 
           <Route

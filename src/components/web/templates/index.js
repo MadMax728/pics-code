@@ -6,7 +6,6 @@ export { default as ParticipantsPage } from "./ParticipantsPage";
 export { default as UsersPage } from "./UsersPage";
 export { default as PicturesPage } from "./PicturesPage";
 export { default as AboutPage } from "./AboutPage";
-export { default as UserProfilePage } from "./UserProfilePage";
 export { default as CampaignPage } from "./CampaignPage";
 export { default as ParticipantPage } from "./ParticipantPage";
 

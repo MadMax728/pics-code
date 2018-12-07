@@ -3,8 +3,7 @@ import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
 import {
   PaymentStepOne,
-  PaymentStepTwo,
-  PaymentStepThree
+  PaymentStepTwo
 } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
@@ -29,7 +28,6 @@ class CreateCompanyCampaign extends Component {
       handleDate,
       handleContentChange,
       contentText,
-      uploadFile,
       handleEditImage,
       handleLocation,
       handleActualImg,
@@ -59,7 +57,6 @@ class CreateCompanyCampaign extends Component {
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
-              uploadFile={uploadFile}
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
@@ -88,6 +85,7 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               handleDate={handleDate}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -101,14 +99,6 @@ class CreateCompanyCampaign extends Component {
         {!isPreview &&
           (stepIndex === 4 && (
             <PaymentStepTwo
-              forThat={forThat}
-              handleChangeField={handleChangeField}
-              form={form}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 5 && (
-            <PaymentStepThree
               forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
               handleChangeField={handleChangeField}
@@ -134,7 +124,6 @@ CreateCompanyCampaign.propTypes = {
   handleDate: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
   contentText: PropTypes.any.isRequired,
-  uploadFile: PropTypes.func.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,
