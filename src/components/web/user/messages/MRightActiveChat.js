@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 const MRightActiveChat = (
     { 
         items,
-        date,
         user,
         me,
         handleMessageClick
@@ -15,10 +14,10 @@ const MRightActiveChat = (
                 return '';
             }
 
-            return items.map((item, key) => (
-                <div>
+            return items.map((item) => (
+                <div key={item.id}> 
                     <div className="date">{ item.date }</div>
-                    <div key={item.id}>
+                    <div>
                     { me === item.senderId && (
                         <div className="reply"
                             role="presentation"
