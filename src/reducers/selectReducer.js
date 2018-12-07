@@ -64,6 +64,26 @@ const selectReducer = (state = initialState.selectData, action) => {
         error: action.payload
       };
 
+  // Get Daily Budget
+  case types.GET_DAILY_BUDGET_STARTED:
+    return {
+      ...state,
+      isLoading: true,
+      error: null
+    };
+  case types.GET_DAILY_BUDGET_SUCCEEDED:
+    return {
+      ...state,
+      dailyBudgets: action.payload,
+      isLoading: false
+    };
+  case types.GET_DAILY_BUDGET_FAILED:
+    return {
+      ...state,
+      isLoading: false,
+      error: action.payload
+    };
+
     default:
       return state;
   }

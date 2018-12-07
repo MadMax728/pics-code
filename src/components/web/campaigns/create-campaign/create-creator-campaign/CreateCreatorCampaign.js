@@ -4,8 +4,7 @@ import { Preview } from "../preview";
 import PropTypes from "prop-types";
 import {
   PaymentStepOne,
-  PaymentStepTwo,
-  PaymentStepThree
+  PaymentStepTwo
 } from "../../../user/payment/steps";
 import * as images from "../../../../../lib/constants/images";
 
@@ -29,7 +28,6 @@ class CreateCreatorCampaign extends Component {
       handleDate,
       handleContentChange,
       contentText,
-      uploadFile,
       handleEditImage,
       handleLocation,
       handleActualImg,
@@ -59,7 +57,6 @@ class CreateCreatorCampaign extends Component {
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
-              uploadFile={uploadFile}
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
@@ -87,6 +84,7 @@ class CreateCreatorCampaign extends Component {
             <StepThree
               handleChangeField={handleChangeField}
               handleDate={handleDate}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -100,20 +98,12 @@ class CreateCreatorCampaign extends Component {
           (stepIndex === 4 && (
             <PaymentStepTwo
               forThat={forThat}
-              handleChangeField={handleChangeField}
-              form={form}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 5 && (
-            <PaymentStepThree
-              forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
               handleChangeField={handleChangeField}
               form={form}
               handleSubmit={handleSubmit}
             />
-          ))}
+        ))}
       </div>
     );
   }
@@ -132,7 +122,6 @@ CreateCreatorCampaign.propTypes = {
   handleDate: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
   contentText: PropTypes.any.isRequired,
-  uploadFile: PropTypes.func.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,

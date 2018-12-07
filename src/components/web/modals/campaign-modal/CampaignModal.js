@@ -11,6 +11,8 @@ import {
 import moment from "moment";
 import { modalType, mediaTypes, target_group, procedure } from "../../../../lib/constants/enumerations";
 
+import { b64toBlob } from "../../../../lib/utils/helpers"
+
 const contentText = "";
 
 const initialState = {
@@ -77,19 +79,6 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
-  uploadFile = (e, forThat) => {
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    let base64Data;
-    const currentThis = this;
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      const { form } = currentThis.state;
-      form[forThat] = reader.result;
-      currentThis.setState({ form });
-    };
-  };
-
   handleCreatorSubmit = () => {
     console.log(this.state.form);
   };
@@ -140,7 +129,7 @@ class CampaignModal extends Component {
 
   handleNext = () => {
     const { stepIndex } = this.state;
-    if (stepIndex < 5) {
+    if (stepIndex < 4) {
       this.setState({ stepIndex: stepIndex + 1 });
     }
   };
@@ -159,9 +148,22 @@ class CampaignModal extends Component {
     );
   };
   handleActualImg = actual_img => {
+    // Set Actual Image
     const { form } = this.state;
     form.actual_img = actual_img;
     this.setState({ form });
+
+    // Set Image
+    const reader = new FileReader();
+    const file = actual_img;
+    // let base64Data;
+    const currentThis = this;
+    reader.readAsDataURL(file);
+    reader.onloadend = function() {
+      const { form } = currentThis.state;
+      form.image = reader.result;
+      currentThis.setState({ form });
+    };
   };
 
   handleScale = scale => {
@@ -273,7 +275,6 @@ class CampaignModal extends Component {
               handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
               contentText={contentText}
-              uploadFile={this.uploadFile}
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
               ref={this.imageCropper}
@@ -299,7 +300,6 @@ class CampaignModal extends Component {
               handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
               contentText={contentText}
-              uploadFile={this.uploadFile}
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
               ref={this.imageCropper}

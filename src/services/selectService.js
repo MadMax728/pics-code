@@ -18,3 +18,9 @@ export const getOffer = (payload, header = {}) =>
 // Get Inquiry
 export const getInquiry = (payload, header = {}) =>
   api(baseUrl, header).get("/inquiries", payload);
+
+
+// Get Daily Budget
+export const getDailyBudget = (payload, header = {}) =>
+  api(baseUrl, header).get("/dailybudgets", payload);
+  

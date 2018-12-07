@@ -115,3 +115,41 @@ export const getInquiry = params => {
     );
   };
 };
+
+// Get Daily Budget
+
+const getDailyBudgetStarted = () => ({
+  type: types.GET_DAILY_BUDGET_STARTED
+});
+
+const getDailyBudgetSucceeded = data => ({
+  type: types.GET_DAILY_BUDGET_SUCCEEDED,
+  payload: data
+});
+
+const getDailyBudgetFailed = error => ({
+  type: types.GET_DAILY_BUDGET_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getDailyBudget = params => {
+  return dispatch => {
+    dispatch(getDailyBudgetStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+    return selectService.getDailyBudget(params, header).then(
+      res => {
+        if (res.data && res.data.data)
+          dispatch(getDailyBudgetSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(getDailyBudgetFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

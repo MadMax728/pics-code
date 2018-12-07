@@ -11,7 +11,7 @@ class Preview extends Component {
 
   render() {
     const { form } = this.props;
-    console.log(form.image);
+    console.log(form.actual_img);
     
     return (
       <div className="col-xs-12 no-padding">

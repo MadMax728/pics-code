@@ -54,7 +54,7 @@ class CreateCreatorCampaignHeader extends Component {
                 {Translations.modal_header.preview}
               </button>
             )}
-          {stepIndex <= 4 && (
+          {stepIndex <= 3 && (
             <button className="black_button" onClick={this.handleContinue}>
               {Translations.modal_header.continue}
             </button>
