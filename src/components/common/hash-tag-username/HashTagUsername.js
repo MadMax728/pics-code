@@ -108,7 +108,6 @@ class HashTagUsername extends Component {
 
   render() {
     const { value, placeholder, className, name, isText } = this.props;
-
     return (
       <div>
         {isText ? (
@@ -124,7 +123,7 @@ class HashTagUsername extends Component {
               onKeyDown={this.handleLengthField}
               maxLength={this.props.maxLimit}
             />
-            {this.state.remainingLimitLength > 0 ? (
+            {(this.state.remainingLimitLength > 0 && this.state.remainingLimitLength !== 1000) ? (
               <p className="commenter-info">
                 You have {this.state.remainingLimitLength} characters left{" "}
               </p>
