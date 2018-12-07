@@ -11,7 +11,6 @@ const MediaCardFooter = ({
   handleFavorite
 }) => {
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
-  console.log(isLoading);
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">

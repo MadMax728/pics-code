@@ -8,6 +8,8 @@ import { Translations } from "../../../lib/translations";
 import { addComment, deleteComment, editComment } from "../../../actions";
 import { connect } from "react-redux";
 import moment from "moment";
+
+
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -17,6 +19,9 @@ class CommentCard extends Component {
       comments: this.props.item,
       itemId: this.props.itemId,
       typeOfContent: this.props.typeContent,
+      minRange : 0,
+      maxRange : 2,
+      slicedCommentsData : '',
       form: {
         id: null,
         comment: ""
@@ -42,6 +47,11 @@ class CommentCard extends Component {
   }
 
   handleReportPost = () => {};
+
+  componentWillMount = () => {
+    let commentData = (this.state.comments).slice(this.state.minRange, this.state.maxRange);
+    this.setState({'slicedCommentsData' :  commentData, 'maxRange' : 2})
+  }
 
   addComment = comment => {
     const { comments, itemId, typeOfContent } = this.state;
@@ -77,6 +87,12 @@ class CommentCard extends Component {
     });
   };
 
+  handleViewComment = (e) => {
+    let maxRangeValue =  parseInt(this.state.maxRange) + parseInt(e.target.id);
+    let commentData = (this.state.comments).slice(0, maxRangeValue);
+    this.setState({'slicedCommentsData' :  commentData, 'maxRange' : maxRangeValue})
+  };
+
   handleDelete = e => {
     const id = e.target.id;
     const comments = this.state.comments;
@@ -95,6 +111,8 @@ class CommentCard extends Component {
       });
     }
   };
+
+
 
   /**
    * Tooltp
@@ -203,6 +221,7 @@ class CommentCard extends Component {
   render() {
     const { item, form, comments } = this.state;
     const { comment, isLoading } = this.props;
+    console.log(this.state.maxRange);
     return (
       <div className="feed-comment" id={item.id}>
         <div className="comment-wrapper">
@@ -238,11 +257,11 @@ class CommentCard extends Component {
           </form>
         </div>
 
-        {comments.length !== 0 && comments.map(this.renderComment)}
+        {this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData.map(this.renderComment)}
 
-        {comments.length > 2 ? (
-          <div className="view-more-comments">
-            <Link to={""}>{Translations.view_more_comments}</Link>
+        {( this.props.totalCommentsCount > this.state.maxRange)? (
+          <div className="view-more-comments view-more-link"  id="8" onClick={this.handleViewComment}>
+            {Translations.view_more_comments}
           </div>
         ) : (
           ""
@@ -273,7 +292,8 @@ CommentCard.propTypes = {
   typeContent: PropTypes.any,
   isLoading: PropTypes.bool,
   itemId: PropTypes.any,
-  maxLimit: PropTypes.any
+  maxLimit: PropTypes.any,
+  totalCommentsCount: PropTypes.any
 };
 
 export default connect(

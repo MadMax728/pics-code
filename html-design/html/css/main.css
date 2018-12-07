@@ -830,7 +830,10 @@ header {
         font-size: 14px; }
   .feed_wrapper .feed-comment .view-more-comments {
     float: left;
-    width: 100%; }
+    width: 100%;
+    padding: 10px;
+    color: #9b9b9b; 
+    }
     .feed_wrapper .feed-comment .view-more-comments a {
       padding: 13px;
       display: block;
