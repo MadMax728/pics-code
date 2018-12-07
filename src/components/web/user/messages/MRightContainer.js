@@ -2,21 +2,19 @@ import React, { Component } from "react";
 import MRightUserItem from './MRightUserItem';
 import MRightActiveChat from './MRightActiveChat';
 import MRightUserInput from './MRightUserInput';
+import PropTypes from "prop-types";
 
 class MRightContainer extends Component {
   
     constructor(props, context) {
         super(props, context);
         this.state = {
-            activeUser : {},
             currentUser : '',
-            date: 'Today',
             messages : [],
         }
     }    
     
     onDeleteHistoryClick = (e) => {
-        this.setState({ activeUser: e.currentTarget.dataset.id });
     };
 
     handleMessageClick = (e) => {
@@ -31,17 +29,21 @@ class MRightContainer extends Component {
     }
 
     render() {
-        const { messages, activeUser, currentUser, date } = this.state;
+        const { messages, currentUser, date } = this.state;
         return (
             <div>
-                <MRightUserItem item={activeUser} onDeleteHistoryClick={this.onDeleteHistoryClick} />
-                <MRightActiveChat items={messages} me={currentUser} date={date} handleMessageClick={this.handleMessageClick} />
-                <MRightUserInput item={activeUser} onMessageSubmit={this.onMessageSubmit} />
+                <MRightUserItem item={this.props.user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
+                <MRightActiveChat items={messages} user={this.props.user} me={currentUser} handleMessageClick={this.handleMessageClick} />
+                <MRightUserInput item={this.props.user} onMessageSubmit={this.onMessageSubmit} />
             </div>
         )
     }
 
 }
   
+MRightContainer.propTypes = {
+    user: PropTypes.any,
+};
+
 export default MRightContainer;
   

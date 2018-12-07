@@ -1,17 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 
 const MRightActiveChat = (
     { 
         items,
         date,
+        user,
         me,
         handleMessageClick
     }) => {
         const renderMessages = () => {
+            
+            if(!items || !items.length){
+                return '';
+            }
+
             return items.map((item, key) => (
-                <div key={item.id}>
+                <div>
+                    <div className="date">{ item.date }</div>
+                    <div key={item.id}>
                     { me === item.senderId && (
                         <div className="reply"
                             role="presentation"
@@ -32,15 +39,19 @@ const MRightActiveChat = (
                         </div>
                     )}
                 </div>
+                </div>
             ));
         };
         return (
-            <div className={classnames("active-chat", { 'nochat' : items.length === 0 })}>
-                <div className="date">{ date }</div>
+            <div className={"active-chat"}>
                 {
-                        items && items.length ? (
-                            renderMessages()
-                        ) : 'You are ready to chat'
+                    user && user.id ? (
+                        renderMessages()
+                    ) : (
+                        <div className="card">
+                               You are ready to chat ..
+                        </div>
+                    )
                 }
             </div>
         )
@@ -59,7 +70,7 @@ MRightActiveChat.propTypes = {
         })
     ),
     handleMessageClick: PropTypes.func,
-    date: PropTypes.string.isRequired,
+    user:PropTypes.any,
     me: PropTypes.string.isRequired,
 };
   

@@ -16,7 +16,7 @@ const MLeftUsersList = (
                     className={classnames("chat-wrapper",{ "new" : !item.read })}
                     key={item.id}
                     data-id={item.id}
-                    data-value={item.userName}
+                    data-value={item.username}
                     onClick={handleChatClick}
                     onKeyDown={handleChatClick}
                   >

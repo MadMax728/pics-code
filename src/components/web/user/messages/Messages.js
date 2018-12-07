@@ -7,26 +7,30 @@ class Messages extends Component {
   
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            user : {},
+        }
     }    
 
+    selectUser = (user) => {
+        this.setState({ user });
+    }
+
     render() {
+        const { user } = this.state;
         return (
             <div className="col-xs-12 no-padding">
                 <div className="messages-left">
-                    <MLeftContainer />
+                    <MLeftContainer selectUser={this.selectUser}/>
                 </div>
                 <div className="messages-right">
-                     <MRightContainer />
+                     <MRightContainer user={user} />
                 </div>
             </div>  
         )
     }
 
 }
-
-Messages.propTypes = {
-    isDescription: PropTypes.bool,
-};
   
 export default Messages;
   
