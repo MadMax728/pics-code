@@ -1,21 +1,21 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const categoryReducer = (state = initialState.categoryData, action) => {
+const usersReducers = (state = initialState.usersData, action) => {
   switch (action.type) {
-    case types.GET_CATEGORY_STARTED:
+    case types.GET_SUBSCRIBERS_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_CATEGORY_SUCCEEDED:
+    case types.GET_SUBSCRIBERS_SUCCEEDED:
       return {
         ...state,
-        categories: action.payload,
+        subscribers: action.payload,
         isLoading: false
       };
-    case types.GET_CATEGORY_FAILED:
+    case types.GET_SUBSCRIBERS_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -26,4 +26,4 @@ const categoryReducer = (state = initialState.categoryData, action) => {
   }
 };
 
-export default categoryReducer;
+export default usersReducers;

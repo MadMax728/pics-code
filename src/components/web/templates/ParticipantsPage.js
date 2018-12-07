@@ -40,7 +40,7 @@ ParticipantsPage.propTypes = {
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   participantsList: PropTypes.any,
   error: PropTypes.any
 };

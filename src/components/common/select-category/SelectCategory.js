@@ -7,9 +7,13 @@ class SelectCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: this.props.value,
       categoryList: []
     }
+  }
+
+
+  componentWillUnmount = () => {
+    this.setState({categoryList: []});
   }
 
   componentDidMount = () => {
@@ -23,7 +27,7 @@ class SelectCategory extends Component {
   }
   
   handleCategory = (event) => {
-    this.props.handleCategory(event.target.value);
+    this.props.handleSelect("category",event.target.value);
   }
   
   render() {
@@ -50,7 +54,7 @@ class SelectCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.categoryData
+  categoryList: state.selectData
 });
 
 const mapDispatchToProps = {
@@ -61,9 +65,9 @@ const mapDispatchToProps = {
 const propTypes = {
   value: PropTypes.any,
   categoryList: PropTypes.any,
-  className: PropTypes.string.isRequired,
+  className: PropTypes.string,
   getCategory: PropTypes.func.isRequired,
-  handleCategory: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired
 };
 
 SelectCategory.propTypes = propTypes;

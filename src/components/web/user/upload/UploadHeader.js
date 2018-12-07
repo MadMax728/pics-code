@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Translations } from "../../../../lib/translations";
 
 class UploadHeader extends Component {
@@ -28,8 +28,8 @@ class UploadHeader extends Component {
 }
 
 UploadHeader.propTypes = {
-  handleModalHide: propTypes.func.isRequired,
-  handleContinue: propTypes.func.isRequired
+  handleModalHide: PropTypes.func.isRequired,
+  handleContinue: PropTypes.func.isRequired
 };
 
 export default UploadHeader;

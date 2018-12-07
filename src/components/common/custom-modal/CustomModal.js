@@ -7,7 +7,7 @@ import {
   AdsModal,
   CampaignModal
 } from "../../web/modals";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { modalType, userType } from "../../../lib/constants/enumerations";
 import { Auth } from "../../../auth";
 
@@ -92,11 +92,11 @@ class CustomModal extends Component {
 }
 
 CustomModal.propTypes = {
-  modalShow: propTypes.bool.isRequired,
-  modalType: propTypes.string.isRequired,
-  handleModalHide: propTypes.func.isRequired,
-  handleModalInfoShow: propTypes.func.isRequired,
-  handleModalInfoMsgShow: propTypes.func.isRequired
+  modalShow: PropTypes.bool.isRequired,
+  modalType: PropTypes.string.isRequired,
+  handleModalHide: PropTypes.func.isRequired,
+  handleModalInfoShow: PropTypes.func.isRequired,
+  handleModalInfoMsgShow: PropTypes.func.isRequired
 };
 
 export default CustomModal;

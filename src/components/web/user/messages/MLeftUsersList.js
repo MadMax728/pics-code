@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import MLeftUserItem from './MLeftUserItem';
 
@@ -14,7 +14,7 @@ const MLeftUsersList = (
                     role="button"
                     tabIndex={key}
                     className={classnames("chat-wrapper",{ "new" : !item.read })}
-                    key={item.userName}
+                    key={item.id}
                     data-id={item.id}
                     data-value={item.userName}
                     onClick={handleChatClick}
@@ -25,12 +25,14 @@ const MLeftUsersList = (
             ));
         };
         return (
-            <div className={classnames("" , {"nomessage" : items.length <= 0})}>
+            <div className="user-chat-wrapper">
                 {
                     items && items.length ? (
                         latestUserList()
                     ) : (
-                        <div>No message yet</div>
+                        <div className="card">
+                                No message yet...
+                        </div>
                     )
                 }
             </div>
@@ -39,21 +41,8 @@ const MLeftUsersList = (
 
 
 MLeftUsersList.propTypes = {
-    handleChatClick: propTypes.func,
-    items: propTypes.arrayOf(
-        propTypes.shape({
-          userName: propTypes.string,
-          id: propTypes.string,
-          image: propTypes.string,
-          read: propTypes.bool,
-          message: propTypes.shape({
-            date: propTypes.string,
-            text: propTypes.string,
-            id: propTypes.string,
-            me: propTypes.bool,
-          })
-        })
-    )
+    handleChatClick: PropTypes.func,
+    items: PropTypes.any
 };
   
 export default MLeftUsersList;

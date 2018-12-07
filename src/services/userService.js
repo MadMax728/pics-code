@@ -32,20 +32,8 @@ export const uploadProfilePicture = (payload, header = {}) =>
 export const updateUserProfile = (payload, header = {}) =>
   api(baseUrl, header).put("/users", payload);
 
-export const getOfferTag = (payload, header = {}) =>
-  api(baseUrl, header).get("/offertags", payload);
-
-export const getInquiryTag = (payload, header = {}) =>
-  api(baseUrl, header).get("/inquirytags", payload);
-
 export const generateOTP = (payload, header = {}) =>
   api(baseUrl, header).get("/auth/generate-otp", payload);
-
-export const addOfferTag = (payload, header = {}) =>
-  api(baseUrl, header).post("/offertags", payload);
-
-export const addInquiryTag = (payload, header = {}) =>
-  api(baseUrl, header).post("/inquirytags", payload);
 
 /**
  *
@@ -63,6 +51,3 @@ export const getSocialNetwork = payload =>
 export const disconnectNetwork = (payload, provider) =>
   apiAuth.delete("/auth/" + provider + "/disconnect", payload);
 
-  // Get Category
-export const getCategory = (payload, header = {}) =>
-  api(baseUrl, header).get("/categories", payload);

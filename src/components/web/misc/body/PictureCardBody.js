@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const PictureCardBody = ({ pic, index }) => {
   return (
@@ -20,8 +20,8 @@ const PictureCardBody = ({ pic, index }) => {
 };
 
 PictureCardBody.propTypes = {
-  pic: propTypes.object.isRequired,
-  index: propTypes.number.isRequired
+  pic: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default PictureCardBody;

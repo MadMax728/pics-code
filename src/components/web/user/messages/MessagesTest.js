@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import * as images from "../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { messages } from "../../../../mock-data";
 import { Translations } from "../../../../lib/translations";
 
@@ -233,25 +233,25 @@ class Messages extends Component {
 }
 
 Messages.propTypes = {
-  messages: propTypes.shape({
-    header: propTypes.bool,
-    headerName: propTypes.string,
-    closeBtn: propTypes.bool,
-    title: propTypes.string,
-    messages: propTypes.arrayOf(
-      propTypes.shape({
-        userName: propTypes.string,
-        read: propTypes.bool,
-        msg_type: propTypes.string,
-        last_msg_detail: propTypes.shape({
-          msg: propTypes.string,
-          time: propTypes.string
+  messages: PropTypes.shape({
+    header: PropTypes.bool,
+    headerName: PropTypes.string,
+    closeBtn: PropTypes.bool,
+    title: PropTypes.string,
+    messages: PropTypes.arrayOf(
+      PropTypes.shape({
+        userName: PropTypes.string,
+        read: PropTypes.bool,
+        msg_type: PropTypes.string,
+        last_msg_detail: PropTypes.shape({
+          msg: PropTypes.string,
+          time: PropTypes.string
         }),
-        msg_details: propTypes.arrayOf(
-          propTypes.shape({
-            msg: propTypes.string,
-            time: propTypes.string,
-            me: propTypes.bool
+        msg_details: PropTypes.arrayOf(
+          PropTypes.shape({
+            msg: PropTypes.string,
+            time: PropTypes.string,
+            me: PropTypes.bool
           })
         )
       })

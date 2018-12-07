@@ -1,5 +1,5 @@
 // import React, { Component } from "react";
-// import propTypes from "prop-types";
+// import PropTypes from "prop-types";
 // import TagsInput from "react-tagsinput";
 //
 // class InputTags extends Component {
@@ -38,14 +38,14 @@
 // }
 //
 // Text.propTypes = {
-//   autoComplete: propTypes.string,
-//   type: propTypes.string,
-//   name: propTypes.string,
-//   onChange: propTypes.func,
-//   className: propTypes.string,
-//   id: propTypes.string,
-//   placeholder: propTypes.string,
-//   value: propTypes.string
+//   autoComplete: PropTypes.string,
+//   type: PropTypes.string,
+//   name: PropTypes.string,
+//   onChange: PropTypes.func,
+//   className: PropTypes.string,
+//   id: PropTypes.string,
+//   placeholder: PropTypes.string,
+//   value: PropTypes.string
 // };
 //
 // export default Text;

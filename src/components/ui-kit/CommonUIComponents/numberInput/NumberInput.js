@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class NumberInput extends Component {
   constructor(props) {
@@ -38,14 +38,14 @@ class NumberInput extends Component {
 }
 
 NumberInput.propTypes = {
-  name: propTypes.string,
-  value: propTypes.any,
-  onChange: propTypes.func,
-  className: propTypes.string,
-  id: propTypes.string,
-  min: propTypes.any,
-  max: propTypes.any,
-  pattern: propTypes.any
+  name: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  min: PropTypes.any,
+  max: PropTypes.any,
+  pattern: PropTypes.any
 };
 
 export default NumberInput;

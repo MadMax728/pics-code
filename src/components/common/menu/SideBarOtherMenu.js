@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LeftSidebarNav } from "../../ui-kit";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class SideBarOtherMenu extends Component {
   constructor(props, context) {
@@ -40,7 +40,7 @@ class SideBarOtherMenu extends Component {
 }
 
 SideBarOtherMenu.propTypes = {
-  match: propTypes.any
+  match: PropTypes.any
 };
 
 export default SideBarOtherMenu;

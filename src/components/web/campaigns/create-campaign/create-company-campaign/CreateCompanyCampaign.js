@@ -6,10 +6,8 @@ import {
   PaymentStepTwo,
   PaymentStepThree
 } from "../../../user/payment/steps";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
-import { CreateCompanyCampaignHeader } from "./index";
-import { ImageCropper } from "../../../../ui-kit/image-cropper";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {
@@ -39,7 +37,8 @@ class CreateCompanyCampaign extends Component {
       handleOfferTagChange,
       handleOfferTagDelete,
       handleInquiryTagChange,
-      handleInquiryTagDelete
+      handleInquiryTagDelete,
+      handleSelect
     } = this.props;
 
     return (
@@ -72,6 +71,7 @@ class CreateCompanyCampaign extends Component {
               handleInquiryTagDelete={handleInquiryTagDelete}
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -122,27 +122,28 @@ class CreateCompanyCampaign extends Component {
 }
 
 CreateCompanyCampaign.propTypes = {
-  stepIndex: propTypes.any.isRequired,
-  forThat: propTypes.string.isRequired,
-  handleModalInfoShow: propTypes.func.isRequired,
-  isPreview: propTypes.bool.isRequired,
-  handlePrivewClose: propTypes.func.isRequired,
-  handleChangeField: propTypes.func.isRequired,
-  isFor: propTypes.bool.isRequired,
-  form: propTypes.any.isRequired,
-  handleSubmit: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired,
-  handleContentChange: propTypes.func.isRequired,
-  contentText: propTypes.any.isRequired,
-  uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired,
-  handleActualImg: propTypes.func,
-  handleScale: propTypes.func,
-  handleOfferTagChange: propTypes.func.isRequired,
-  handleOfferTagDelete: propTypes.func.isRequired,
-  handleInquiryTagChange: propTypes.func.isRequired,
-  handleInquiryTagDelete: propTypes.func.isRequired
+  stepIndex: PropTypes.any.isRequired,
+  forThat: PropTypes.string.isRequired,
+  handleModalInfoShow: PropTypes.func.isRequired,
+  isPreview: PropTypes.bool.isRequired,
+  handlePrivewClose: PropTypes.func.isRequired,
+  handleChangeField: PropTypes.func.isRequired,
+  isFor: PropTypes.bool.isRequired,
+  form: PropTypes.any.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleDate: PropTypes.func.isRequired,
+  handleContentChange: PropTypes.func.isRequired,
+  contentText: PropTypes.any.isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  handleEditImage: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  handleActualImg: PropTypes.func,
+  handleScale: PropTypes.func,
+  handleOfferTagChange: PropTypes.func.isRequired,
+  handleOfferTagDelete: PropTypes.func.isRequired,
+  handleInquiryTagChange: PropTypes.func.isRequired,
+  handleInquiryTagDelete: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;

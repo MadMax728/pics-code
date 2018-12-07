@@ -19,6 +19,7 @@ const dashboardReducer = (state = initialState.dashboardData, action) => {
     case types.GET_DASHBOARD_FAILED:
       return {
         ...state,
+        dashboard: [],
         isLoading: false,
         error: action.payload
       };

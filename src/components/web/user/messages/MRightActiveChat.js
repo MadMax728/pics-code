@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 
 const MRightActiveChat = (
@@ -48,19 +48,19 @@ const MRightActiveChat = (
 
 
 MRightActiveChat.propTypes = {
-    items: propTypes.arrayOf(
-        propTypes.shape({
-          id: propTypes.string,
-          content: propTypes.string,
-          createdAt: propTypes.string,
-          updatedAt: propTypes.string,
-          recipientId: propTypes.string,
-          senderId: propTypes.string,
+    items: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string,
+          content: PropTypes.string,
+          createdAt: PropTypes.string,
+          updatedAt: PropTypes.string,
+          recipientId: PropTypes.string,
+          senderId: PropTypes.string,
         })
     ),
-    handleMessageClick: propTypes.func,
-    date: propTypes.string.isRequired,
-    me: propTypes.string.isRequired,
+    handleMessageClick: PropTypes.func,
+    date: PropTypes.string.isRequired,
+    me: PropTypes.string.isRequired,
 };
   
 export default MRightActiveChat;

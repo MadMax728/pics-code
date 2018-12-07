@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { ReportedSearchBar } from "../../reported-search-bar";
 import * as images from "../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { images_b_o_list } from "../../../../mock-data";
 
@@ -111,7 +111,7 @@ class ImagesBO extends Component {
 }
 
 ImagesBO.propTypes = {
-  handleModalInfoShow: propTypes.func
+  handleModalInfoShow: PropTypes.func
 };
 
 export default ImagesBO;

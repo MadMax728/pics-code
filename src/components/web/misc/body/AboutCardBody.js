@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { SocialNetworks } from "../../templates/settings/edit-profile";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../lib/translations";
@@ -93,7 +93,7 @@ const AboutCardBody = ({ about }) => {
 };
 
 AboutCardBody.propTypes = {
-  about: propTypes.object.isRequired
+  about: PropTypes.object.isRequired
 };
 
 export default AboutCardBody;

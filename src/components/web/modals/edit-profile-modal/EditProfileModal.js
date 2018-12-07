@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   EditProfilePic,
   EditProfilePicHeader
 } from "../../../web/templates/settings/edit-profile-pic";
 import { uploadProfilePicture } from "../../../../actions/profile";
 import connect from "react-redux/es/connect/connect";
+import { b64toBlob } from "../../../../lib/utils/helpers";
 
 class EditProfileModal extends Component {
   constructor(props, context) {
@@ -36,30 +37,6 @@ class EditProfileModal extends Component {
     this.props.handleEditImage(image);
   };
 
-  b64toBlob = (b64Data, contentType, sliceSize) => {
-      contentType = contentType || '';
-      sliceSize = sliceSize || 512;
-
-      const byteCharacters = atob(b64Data);
-      const byteArrays = [];
-
-      for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-          const slice = byteCharacters.slice(offset, offset + sliceSize);
-
-          const byteNumbers = new Array(slice.length);
-          for (let i = 0; i < slice.length; i++) {
-              byteNumbers[i] = slice.charCodeAt(i);
-          }
-
-          const byteArray = new Uint8Array(byteNumbers);
-
-          byteArrays.push(byteArray);
-      }
-
-    const blob = new Blob(byteArrays, {type: contentType});
-    return blob;
-  }
-
   handleContinue = () => {
     const Data = new FormData();
     Data.append('image',this.state.actual_img);
@@ -82,7 +59,7 @@ class EditProfileModal extends Component {
           const realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
 
           // Convert it to a blob to upload
-          const blob = this.b64toBlob(realData, contentType);
+          const blob = b64toBlob(realData, contentType);
 
           const CropedData = new FormData();
           CropedData.append('image',blob);
@@ -146,13 +123,13 @@ const mapDispatchToProps = {
 };
 
 EditProfileModal.propTypes = {
-  handleModalInfoHide: propTypes.func,
-  modalInfoShow: propTypes.bool,
-  handleEditImage: propTypes.func,
-  image: propTypes.any,
-  uploadProfilePicture: propTypes.any,
-  handleProfile: propTypes.func,
-  userDataByUsername: propTypes.any,
+  handleModalInfoHide: PropTypes.func,
+  modalInfoShow: PropTypes.bool,
+  handleEditImage: PropTypes.func,
+  image: PropTypes.any,
+  uploadProfilePicture: PropTypes.any,
+  handleProfile: PropTypes.func,
+  userDataByUsername: PropTypes.any,
 };
 
 export default connect(

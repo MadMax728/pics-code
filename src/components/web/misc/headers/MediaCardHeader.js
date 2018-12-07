@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 import { Link } from "react-router-dom";
@@ -54,9 +54,9 @@ const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
 };
 
 MediaCardHeader.propTypes = {
-  handleFavorite: propTypes.func.isRequired,
-  item: propTypes.object.isRequired,
-  isLoading: propTypes.bool.isRequired
+  handleFavorite: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+  isLoading: PropTypes.bool
 };
 
 export default MediaCardHeader;

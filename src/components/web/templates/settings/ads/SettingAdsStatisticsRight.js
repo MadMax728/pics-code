@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 class SettingAdsStatisticsRight extends Component {
@@ -76,27 +76,27 @@ class SettingAdsStatisticsRight extends Component {
 }
 
 SettingAdsStatisticsRight.propTypes = {
-  adStatistics: propTypes.shape({
-    title: propTypes.string,
-    total_budget_spent_per: propTypes.string,
-    daily_budget_spent_per: propTypes.string,
-    performance_view_per: propTypes.string,
-    runtime_passed_per: propTypes.string,
+  adStatistics: PropTypes.shape({
+    title: PropTypes.string,
+    total_budget_spent_per: PropTypes.string,
+    daily_budget_spent_per: PropTypes.string,
+    performance_view_per: PropTypes.string,
+    runtime_passed_per: PropTypes.string,
 
-    daily_budget: propTypes.string,
-    total_budget_spent: propTypes.string,
-    total_expenses: propTypes.string,
-    runtime: propTypes.string,
+    daily_budget: PropTypes.string,
+    total_budget_spent: PropTypes.string,
+    total_expenses: PropTypes.string,
+    runtime: PropTypes.string,
 
-    views: propTypes.string,
-    clicks: propTypes.string,
+    views: PropTypes.string,
+    clicks: PropTypes.string,
 
-    location: propTypes.string,
-    radius: propTypes.string,
-    category: propTypes.string,
-    target_group: propTypes.string,
+    location: PropTypes.string,
+    radius: PropTypes.string,
+    category: PropTypes.string,
+    target_group: PropTypes.string,
 
-    id: propTypes.number
+    id: PropTypes.number
   })
 };
 

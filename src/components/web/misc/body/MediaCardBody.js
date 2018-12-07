@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { ImageItem, VideoItem } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 
@@ -21,7 +21,7 @@ const MediaCardBody = ({ item }) => {
 };
 
 MediaCardBody.propTypes = {
-  item: propTypes.object.isRequired
+  item: PropTypes.object.isRequired
 };
 
 export default MediaCardBody;

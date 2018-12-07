@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const UserCardBody = ({ user, index, handleSubscribed }) => {
   return (
@@ -37,9 +37,9 @@ const UserCardBody = ({ user, index, handleSubscribed }) => {
 };
 
 UserCardBody.propTypes = {
-  user: propTypes.object.isRequired,
-  handleSubscribed: propTypes.func.isRequired,
-  index: propTypes.number.isRequired
+  user: PropTypes.object.isRequired,
+  handleSubscribed: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default UserCardBody;

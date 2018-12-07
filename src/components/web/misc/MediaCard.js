@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import MediaCardBody from "./body/MediaCardBody";
 import MediaCardHeader from "./headers/MediaCardHeader";
 import MediaCardFooter from "./footers/MediaCardFooter";
@@ -118,12 +118,12 @@ const mapDispatchToProps = {
 };
 
 MediaCard.propTypes = {
-  item: propTypes.object.isRequired,
-  like: propTypes.func.isRequired,
-  comments: propTypes.any,
-  getComments: propTypes.func.isRequired,
-  isParticipant: propTypes.bool,
-  likeData: propTypes.any
+  item: PropTypes.object.isRequired,
+  like: PropTypes.func.isRequired,
+  comments: PropTypes.any,
+  getComments: PropTypes.func.isRequired,
+  isParticipant: PropTypes.bool,
+  likeData: PropTypes.any
 };
 
 MediaCard.defaultProps = {

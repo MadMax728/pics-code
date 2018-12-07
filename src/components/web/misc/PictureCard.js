@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import PictureCardBody from "./body/PictureCardBody";
 
 class PictureCard extends Component {
@@ -19,8 +19,8 @@ class PictureCard extends Component {
 }
 
 PictureCard.propTypes = {
-  item: propTypes.object.isRequired,
-  index: propTypes.number.isRequired
+  item: PropTypes.object.isRequired,
+  index: PropTypes.number.isRequired
 };
 
 export default PictureCard;

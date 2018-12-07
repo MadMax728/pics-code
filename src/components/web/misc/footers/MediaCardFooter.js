@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
 import { ThreeDots } from "../../../ui-kit";
 
@@ -65,11 +65,11 @@ const MediaCardFooter = ({
 };
 
 MediaCardFooter.propTypes = {
-  handleFavorite: propTypes.func.isRequired,
-  handleCommentsSections: propTypes.func.isRequired,
-  item: propTypes.object.isRequired,
-  renderReportTips: propTypes.func.isRequired,
-  isLoading: propTypes.bool.isRequired
+  handleFavorite: PropTypes.func.isRequired,
+  handleCommentsSections: PropTypes.func.isRequired,
+  item: PropTypes.object.isRequired,
+  renderReportTips: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool
 };
 
 export default MediaCardFooter;

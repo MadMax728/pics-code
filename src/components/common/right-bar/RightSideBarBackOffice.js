@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import {
   RightCampaignsList,
@@ -110,6 +110,6 @@ class RightSideBarBackOffice extends Component {
 }
 
 RightSideBarBackOffice.propTypes = {
-  handleModalShow: propTypes.func
+  handleModalShow: PropTypes.func
 };
 export default RightSideBarBackOffice;

@@ -1,5 +1,5 @@
 import * as types from "../lib/constants/actionTypes";
-import * as commentService from "../services/commentService";
+import * as commentService from "../services";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
 

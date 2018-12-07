@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 
@@ -194,13 +194,13 @@ class StepOne extends Component {
 }
 
 StepOne.propTypes = {
-  handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
-  uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired,
-  handleActualImg: propTypes.func,
-  handleScale: propTypes.func
+  handleChangeField: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  handleEditImage: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  handleActualImg: PropTypes.func,
+  handleScale: PropTypes.func
 };
 
 export default StepOne;

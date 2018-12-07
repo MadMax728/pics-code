@@ -58,7 +58,7 @@ class NewsFeedPage extends Component {
 NewsFeedPage.propTypes = {
   match: PropTypes.any.isRequired,
   getNewsFeed: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
   error: PropTypes.any
 };

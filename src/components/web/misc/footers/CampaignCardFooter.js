@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
@@ -80,12 +80,12 @@ const CampaignCardFooter = ({
 };
 
 CampaignCardFooter.propTypes = {
-  handleFavorite: propTypes.func.isRequired,
-  handleCommentsSections: propTypes.func.isRequired,
-  campaign: propTypes.object.isRequired,
-  isStatus: propTypes.bool.isRequired,
-  renderReportTips: propTypes.func.isRequired,
-  isLoading: propTypes.bool.isRequired
+  handleFavorite: PropTypes.func.isRequired,
+  handleCommentsSections: PropTypes.func.isRequired,
+  campaign: PropTypes.object.isRequired,
+  isStatus: PropTypes.bool.isRequired,
+  renderReportTips: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool
 };
 
 export default CampaignCardFooter;

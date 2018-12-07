@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 class PaymentStepOne extends Component {
   constructor(props) {
     super(props);
@@ -137,8 +137,8 @@ class PaymentStepOne extends Component {
 }
 
 PaymentStepOne.propTypes = {
-  form: propTypes.any.isRequired,
-  handleChangeField: propTypes.func.isRequired
+  form: PropTypes.any.isRequired,
+  handleChangeField: PropTypes.func.isRequired
 };
 
 export default PaymentStepOne;

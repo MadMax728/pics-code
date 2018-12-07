@@ -141,7 +141,7 @@ AdsStatisticsPage.propTypes = {
   match: PropTypes.any,
   getAdDetails: PropTypes.func.isRequired,
   ad_details: PropTypes.any,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   error: PropTypes.any
 };
 

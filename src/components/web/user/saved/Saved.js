@@ -41,7 +41,7 @@ Saved.propTypes = {
   handleModalInfoShow: PropTypes.func,
   getCampaigns: PropTypes.func.isRequired,
   saved_campaigns_list: PropTypes.any,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   error: PropTypes.any
 };
 

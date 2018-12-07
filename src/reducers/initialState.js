@@ -95,11 +95,18 @@ const initialState = {
     isLoading: false,
     error: false
   },
-  categoryData: {
+  selectData: {
     categories: null,
+    offers: null,
+    inquirys: null,
     isLoading: false,
     error: false
-  }
+  },
+  usersData: {
+    subscribers: [],
+    isLoading: false,
+    error: false
+  },
 };
 
 export default initialState;

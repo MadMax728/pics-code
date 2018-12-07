@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import moment from "moment";
 class Preview extends Component {
   constructor(props) {
@@ -11,23 +11,17 @@ class Preview extends Component {
 
   render() {
     const { form } = this.props;
+    console.log(form.image);
+    
     return (
       <div className="col-xs-12 no-padding">
         <div className="padding-l-10 middle-section width-100">
           <div className="info-main-title">{form.title && form.title}</div>
           <div className="information-wrapper overflow-y">
             <div className="info-inner-wrapper">
-              {/* <div className="text">
-                This text is an example.This text is an example.This text is an
-                example.This text is an example.This text is an example.This
-                text is an example.This text is an example.This text is an
-                example.This text is an example.This text is an example.This
-                text is an example.
-              </div> */}
-              <img src={images.information} alt={"information"} />
-              {/* {
+              {
                 form.image && <img src={form.image} alt={"information"} />
-              } */}
+              }
               <div className="text paddTop20">
                 {/* {form.description && form.description} */}
                 This text is an example.This text is an example.This text is an
@@ -266,7 +260,7 @@ class Preview extends Component {
 }
 
 Preview.propTypes = {
-  form: propTypes.any.isRequired
+  form: PropTypes.any.isRequired
 };
 
 export default Preview;

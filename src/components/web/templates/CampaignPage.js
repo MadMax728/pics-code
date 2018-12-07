@@ -50,7 +50,7 @@ class CampaignPage extends Component {
   render() {
     const { campaignList, isLoading } = this.props;
     return (
-      <div className={"padding-rl-10 middle-section"}> 123test
+      <div className={"padding-rl-10 middle-section"}>
         {campaignList && !isLoading && this.renderCampaignList()}
         {isLoading && <CampaignLoading />}
       </div>
@@ -61,7 +61,7 @@ class CampaignPage extends Component {
 CampaignPage.propTypes = {
   type: PropTypes.string.isRequired,
   getCampaigns: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
   error: PropTypes.any
 };

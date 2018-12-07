@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import { Link } from "react-router-dom";
 
@@ -34,8 +34,8 @@ const StatusCard = ({ item, route }) => {
 };
 
 StatusCard.propTypes = {
-  item: propTypes.object.isRequired,
-  route: propTypes.string.isRequired
+  item: PropTypes.object.isRequired,
+  route: PropTypes.string.isRequired
 };
 
 export default StatusCard;

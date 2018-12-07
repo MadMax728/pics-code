@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -91,9 +91,9 @@ class PlaceAutoCompleteLocation extends Component {
 }
 
 PlaceAutoCompleteLocation.propTypes = {
-  handleLocation: propTypes.func.isRequired,
-  className: propTypes.string.isRequired,
-  value: propTypes.any
+  handleLocation: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
+  value: PropTypes.any
 };
 
 export default PlaceAutoCompleteLocation;

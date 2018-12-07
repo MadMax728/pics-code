@@ -40,7 +40,7 @@ ExploreRoot.propTypes = {
   handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   exploreList: PropTypes.any,
   error: PropTypes.any
 };

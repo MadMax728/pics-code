@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
@@ -65,11 +65,11 @@ const CampaignCardHeader = ({
 };
 
 CampaignCardHeader.propTypes = {
-  handleFavorite: propTypes.func.isRequired,
-  campaign: propTypes.object.isRequired,
-  isDescription: propTypes.bool.isRequired,
-  isInformation: propTypes.bool.isRequired,
-  isLoading: propTypes.bool.isRequired
+  handleFavorite: PropTypes.func.isRequired,
+  campaign: PropTypes.object.isRequired,
+  isDescription: PropTypes.bool.isRequired,
+  isInformation: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool
 };
 
 export default CampaignCardHeader;

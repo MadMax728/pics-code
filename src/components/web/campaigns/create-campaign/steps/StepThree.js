@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 import DatePicker from "react-datepicker";
 import moment from "moment";
@@ -163,9 +163,9 @@ class StepThree extends Component {
 }
 
 StepThree.propTypes = {
-  handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
-  handleDate: propTypes.func.isRequired
+  handleChangeField: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired,
+  handleDate: PropTypes.func.isRequired
 };
 
 export default StepThree;
