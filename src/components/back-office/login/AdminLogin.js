@@ -14,7 +14,8 @@ class AdminLogin extends Component {
     super(props);
 
     this.state = {
-      otp: ""
+      otp: "",
+      errorMsg: "",
     };
   }
 
@@ -48,6 +49,7 @@ class AdminLogin extends Component {
    * Handle submit
    */
   handleSubmit = event => {
+    event.preventDefault();
     if (!this.formValid()) {
       return false;
     }
@@ -55,13 +57,17 @@ class AdminLogin extends Component {
     const { otp } = this.state;
 
     this.props.submitAdminLogin({ otp }).then(() => {
-      if (this.props.loginData.user.success === true)
+
+      if (this.props.loginData && this.props.loginData.user && this.props.loginData.user.success === true)
         this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
+      if (this.props.loginData && this.props.loginData.error && this.props.loginData.error.data && this.props.loginData.error.data.success === false)
+        this.setState({errorMsg: this.props.loginData.error.data.message});
     });
   };
 
   render() {
     const { loginData } = this.props;
+    const { errorMsg } = this.state;
     return (
       <div className="login-process">
         <AdminHeader />
@@ -70,7 +76,8 @@ class AdminLogin extends Component {
             <div className="login-wrapper backoffice-login">
               <h3 className="text-center">Backoffice log in</h3>
               <p>Please enter your password here. </p>
-              <form>
+              {errorMsg && <p> {errorMsg} </p>}
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
                   <input
                     type="password"
@@ -92,8 +99,7 @@ class AdminLogin extends Component {
                     <InlineLoading />
                   ) : (
                     <button
-                      type="button"
-                      onClick={this.handleSubmit}
+                      type="submit"
                       className="blue_button"
                     >
                       {Translations.login.login}
