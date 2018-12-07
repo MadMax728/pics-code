@@ -16,7 +16,8 @@ class CampaignCard extends Component {
     this.state = {
       isComments: false,
       item: this.props.item,
-      comments: ""
+      comments: "",
+      totalCommentsCount: ""
     };
   }
 
@@ -70,7 +71,8 @@ class CampaignCard extends Component {
     this.props.getComments(CampaignId).then(() => {
       this.setState({
         isComments: !this.state.isComments,
-        comments: this.props.comments
+        comments: this.props.comments,
+        totalCommentsCount: (this.props.comments).length
       });
     });
   };
@@ -108,6 +110,7 @@ class CampaignCard extends Component {
             itemId={item.id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
+            totalCommentsCount={(this.state.comments).length}
           />
         )}
       </div>
@@ -117,7 +120,8 @@ class CampaignCard extends Component {
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
-  comments: state.commentData.comments
+  comments: state.commentData.comments,
+   totalCommentsCount: state.totalCommentsCount
 });
 
 const mapDispatchToProps = {
