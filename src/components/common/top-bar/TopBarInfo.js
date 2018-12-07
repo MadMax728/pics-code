@@ -23,12 +23,6 @@ class TopBarInfo extends Component {
       <div>
         <Route
           exact
-          path={routes.MY_PROFILE_ROUTE}
-          component={this.TopBarOwnerInfo}
-        />
-
-        <Route
-          exact
           path={routes.NEWS_FEED_ROUTE}
           component={this.TopBarOwnerInfo}
         />

@@ -69,11 +69,6 @@ class RightSideBar extends Component {
         {/* ,,,,,, community ...... */}
 
         <Route
-          path={routes.MY_PROFILE_ROUTE}
-          exact
-          component={this.handleCommunity}
-        />
-        <Route
           path={routes.NEWS_FEED_ROUTE}
           exact
           component={this.handleCommunity}

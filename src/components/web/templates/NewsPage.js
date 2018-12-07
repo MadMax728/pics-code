@@ -16,11 +16,12 @@ class NewsRoot extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {newsFeed.postType.toLowerCase() ===
+        
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.mediaPost && (
             <MediaCard item={newsFeed} isParticipant={false} />
           )}
-          {newsFeed.postType.toLowerCase() ===
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={newsFeed}
@@ -29,7 +30,7 @@ class NewsRoot extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType.toLowerCase() ===
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.creatorCampaign && (
             <CampaignCard
               item={newsFeed}
@@ -38,11 +39,11 @@ class NewsRoot extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType.toLowerCase() ===
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.companyParticipantCampaign && (
             <MediaCard item={newsFeed} isParticipant />
           )}
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
+          {newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
               item={newsFeed}
               isDescription

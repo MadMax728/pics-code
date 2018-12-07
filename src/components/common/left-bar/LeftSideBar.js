@@ -139,11 +139,6 @@ class LeftSideBar extends Component {
 
         {/* ...... Other Menu ...... */}
         <Route
-          path={routes.MY_PROFILE_ROUTE}
-          exact
-          component={SideBarOtherMenu}
-        />
-        <Route
           path={routes.OTHER_NEWS_FEED_ROUTE}
           exact
           component={SideBarOtherMenu}
