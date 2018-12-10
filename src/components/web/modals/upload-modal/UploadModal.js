@@ -15,6 +15,7 @@ const initialState = {
     add_category: "",
     add_description: "",
     image: null,
+    file: null,
     video: null
   }
 };
@@ -25,7 +26,7 @@ class UploadModal extends Component {
   }
 
   handleUpload = (image, file) => {
-    this.setState({ form: { ...this.state.form, image,file } });
+    this.setState({ form: { ...this.state.form, image, file } });
   };
 
   handleSetState = (value, cd) => {

@@ -21,13 +21,15 @@ class Upload extends Component {
   };
 
   handleUpload = e => {
+    // const file = e.target.files[0];
+    // this.props.handleUpload(file);
     const reader = new FileReader();
     const file = e.target.files[0];
 
     const currentThis = this;
     reader.readAsDataURL(file);
     reader.onloadend = function() {
-      currentThis.props.handleUpload(reader.result,file);
+      currentThis.props.handleUpload(reader.result, file);
     };
   };
 
