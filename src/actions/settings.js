@@ -71,8 +71,8 @@ export const getAbout = (prop, provider) => {
         dispatch(getAboutSucceeded(res.data.data));
       },
       error => {
-          dispatch(getAboutFailed(error.response));
-      logger.error({
+        dispatch(getAboutFailed(error.response));
+        logger.error({
           description: error.toString(),
           fatal: true
         });

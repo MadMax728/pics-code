@@ -20,7 +20,7 @@ const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
 if (storage) {
   userInfo = JSON.parse(storage.userInfo);
-//  userInfo = jwtDecode(storage.accessToken);
+  //  userInfo = jwtDecode(storage.accessToken);
 }
 
 class EditProfile extends Component {
@@ -56,24 +56,23 @@ class EditProfile extends Component {
         inquiryTagList: []
       },
       error: {},
-      tags: [],
+      tags: []
     };
   }
 
   componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
     window.scrollTo(0, 0);
-
     if (userInfo) {
       const data = {
         username: userInfo.username
       };
-      this.setState({isLoading: true})
+      this.setState({ isLoading: true });
       this.props.getUser(data).then(() => {
-        
         this.setDataOnLoad();
       });
-    } 
-  }
+    }
+  };
 
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;
@@ -84,10 +83,16 @@ class EditProfile extends Component {
 
   handleInquiryTagDelete = id => {
     const { form } = this.state;
-    this.setState({ form: {
-      ...this.state.form, 
-      inquiry_tag: form.inquiry_tag.filter(tag => tag !== form.inquiryTagList[id].id), 
-      inquiryTagList: form.inquiryTagList.filter(tag => tag.id !== form.inquiryTagList[id].id)}
+    this.setState({
+      form: {
+        ...this.state.form,
+        inquiry_tag: form.inquiry_tag.filter(
+          tag => tag !== form.inquiryTagList[id].id
+        ),
+        inquiryTagList: form.inquiryTagList.filter(
+          tag => tag.id !== form.inquiryTagList[id].id
+        )
+      }
     });
   };
 
@@ -127,9 +132,9 @@ class EditProfile extends Component {
           name_company: userData.name,
           location: userData.location,
           birthDate: {
-            day: moment.unix(userData.birthDate).format('DD'),
-            mon: moment.unix(userData.birthDate).format('MM'),
-            year: moment.unix(userData.birthDate).format('YYYY'),
+            day: moment.unix(userData.birthDate).format("DD"),
+            mon: moment.unix(userData.birthDate).format("MM"),
+            year: moment.unix(userData.birthDate).format("YYYY")
           },
           gender: userData.gender,
           category: userData.category,
@@ -143,24 +148,28 @@ class EditProfile extends Component {
         }
       });
     }
-    this.setState({isLoading: false})
+    this.setState({ isLoading: false });
   };
 
   handlegetDOBDate = () => {
     const { form } = this.state;
-    if (form.birthDate.day && form.birthDate.mon && form.birthDate.year){
-      const date = form.birthDate.mon + "/" + form.birthDate.day + "/" + form.birthDate.year;
-      return date
+    if (form.birthDate.day && form.birthDate.mon && form.birthDate.year) {
+      const date =
+        form.birthDate.mon +
+        "/" +
+        form.birthDate.day +
+        "/" +
+        form.birthDate.year;
+      return date;
     }
-  }
+  };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
     console.log(this.state.form);
-    
     const data = {
-      profileImage: this.props.profile? this.props.profile : "",
+      profileImage: this.props.profile ? this.props.profile : "",
       name: this.state.form.name_company,
       category: this.state.form.category,
       gender: this.state.form.gender,
@@ -178,7 +187,7 @@ class EditProfile extends Component {
     };
 
     this.props.updateUserProfile(data).then(() => {
-      this.setState({isLoading: true})
+      this.setState({ isLoading: true });
       const errors = {};
       if (
         this.props.userDataByUsername.error &&
@@ -187,13 +196,13 @@ class EditProfile extends Component {
         errors.servererror = "Something went wrong";
         this.setState({ error: errors });
       } else if (userInfo) {
-          const data = {
-            username: userInfo.username
-          };
-          this.props.getUser(data).then(() => {
-            this.setDataOnLoad()
-          });
-        }
+        const data = {
+          username: userInfo.username
+        };
+        this.props.getUser(data).then(() => {
+          this.setDataOnLoad();
+        });
+      }
     });
   };
 
@@ -204,19 +213,25 @@ class EditProfile extends Component {
   };
 
   handleOfferTagDelete = id => {
-    const { form } = this.state;  
-    this.setState({ form: {
-      ...this.state.form, 
-      offer_tag: form.offer_tag.filter(tag => tag !== form.offerTagList[id].id), 
-      offerTagList: form.offerTagList.filter(tag => tag.id !== form.offerTagList[id].id)}
+    const { form } = this.state;
+    this.setState({
+      form: {
+        ...this.state.form,
+        offer_tag: form.offer_tag.filter(
+          tag => tag !== form.offerTagList[id].id
+        ),
+        offerTagList: form.offerTagList.filter(
+          tag => tag.id !== form.offerTagList[id].id
+        )
+      }
     });
   };
 
-  handleCategory = (isFor ,selected) => {
+  handleCategory = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected;
     this.setState({ form });
-  }
+  };
 
   render() {
     const { form, isLoading } = this.state;
@@ -224,9 +239,9 @@ class EditProfile extends Component {
 
     return (
       <div className="padding-rl-10 middle-section width-80">
-      {isLoading && <InlineLoading />}
+        {isLoading && <InlineLoading />}
         <div className="edit-profile-form">
-            <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
             <div className="edit-profile-title-wrapr">
               <div className="edit-title-wrapr">
                 <div className="form-title">
@@ -237,20 +252,20 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="edit_profile_wrapr">
-                {image && 
+                {image && (
                   <img
-                    src={image? image : images.pic_1}
+                    src={image ? image : images.pic_1}
                     className="image-wrapr"
                     alt="avatar"
                   />
-                }
-                {!image && 
+                )}
+                {!image && (
                   <img
-                    src={form.profileUrl? form.profileUrl : images.pic_1}
+                    src={form.profileUrl ? form.profileUrl : images.pic_1}
                     className="image-wrapr"
                     alt="avatar"
                   />
-                }
+                )}
                 <div className="input-file-container" />
                 <div
                   onClick={this.handleEditProfile}
@@ -264,7 +279,9 @@ class EditProfile extends Component {
             </div>
             <div className="general-information-wrapper">
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.username}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.username}
+                </span>
                 <label htmlFor="username">
                   {Translations.editProfile.username}
                 </label>
@@ -283,7 +300,9 @@ class EditProfile extends Component {
                 )}
               </div>
               <div className="form-group margin-bottom-30">
-              <span className="error-msg highlight">{this.state.error.name_company}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.name_company}
+                </span>
                 <label htmlFor="name">
                   {Translations.editProfile.name_company}
                 </label>
@@ -343,7 +362,9 @@ class EditProfile extends Component {
                           id="male"
                           name="gender"
                           value="male"
-                          defaultChecked={form.gender.toLowerCase()  === gender.male}
+                          defaultChecked={
+                            form.gender.toLowerCase() === gender.male
+                          }
                           className="black_button"
                           onChange={this.handleChangeField}
                         />
@@ -355,7 +376,9 @@ class EditProfile extends Component {
                           id="female"
                           value="female"
                           name="gender"
-                          defaultChecked={form.gender.toLowerCase() === gender.female}
+                          defaultChecked={
+                            form.gender.toLowerCase() === gender.female
+                          }
                           onChange={this.handleChangeField}
                         />
                         <label htmlFor="female">Female</label>
@@ -365,15 +388,17 @@ class EditProfile extends Component {
                 </div>
               </div>
               <div className="form-group margin-bottom-30">
-              <span className="error-msg highlight">{this.state.error.category}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.category}
+                </span>
                 <label htmlFor="category">
                   {Translations.editProfile.category}
                 </label>
-                  <SelectCategory
-                    value={form.category}
-                    className="form-control"
-                    handleSelect={this.handleCategory}
-                   />
+                <SelectCategory
+                  value={form.category}
+                  className="form-control"
+                  handleSelect={this.handleCategory}
+                />
               </div>
               <div className="form-group margin-bottom-30">
                 <label htmlFor="location" className="margin-bottom-13">
@@ -387,7 +412,9 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.phoneNumber}</span>  
+                <span className="error-msg highlight">
+                  {this.state.error.phoneNumber}
+                </span>
                 <label htmlFor="phone-number">
                   {Translations.editProfile.phone_number}
                 </label>
@@ -401,7 +428,9 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.email}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.email}
+                </span>
                 <label htmlFor="email">{Translations.editProfile.email}</label>
                 <Text
                   type="text"
@@ -413,7 +442,9 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.website}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.website}
+                </span>
                 <label htmlFor="website">
                   {Translations.editProfile.website}
                 </label>
@@ -427,7 +458,9 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.profile_description}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.profile_description}
+                </span>
                 <label htmlFor="description">
                   {Translations.editProfile.profile_description}
                 </label>
@@ -446,7 +479,9 @@ class EditProfile extends Component {
             </div>
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.offer_tag}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.offer_tag}
+                </span>
                 <label htmlFor="offer-tag">
                   {Translations.editProfile.offer_tag}
                 </label>
@@ -456,10 +491,11 @@ class EditProfile extends Component {
                   handleOfferTagChange={this.handleOfferTagChange}
                   handleOfferTagDelete={this.handleOfferTagDelete}
                 />
-
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">{this.state.error.inquiry_tag}</span>
+                <span className="error-msg highlight">
+                  {this.state.error.inquiry_tag}
+                </span>
                 <label htmlFor="inquiry-tag">
                   {Translations.editProfile.inquiry_tag}
                 </label>
@@ -469,7 +505,6 @@ class EditProfile extends Component {
                   handleInquiryTagChange={this.handleInquiryTagChange}
                   handleInquiryTagDelete={this.handleInquiryTagDelete}
                 />
-                
               </div>
             </div>
             <SocialNetworks userId={"123"} isOwnerProfile />
@@ -486,7 +521,7 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername,
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
@@ -501,7 +536,7 @@ EditProfile.propTypes = {
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any,
   profile: PropTypes.any,
-  updateUserProfile: PropTypes.any,
+  updateUserProfile: PropTypes.any
 };
 
 export default connect(

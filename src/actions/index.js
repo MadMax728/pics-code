@@ -9,4 +9,4 @@ export * from "./comments";
 export * from "./tags";
 export * from "./users";
 export * from "./select";
-
+export * from "./privacy";

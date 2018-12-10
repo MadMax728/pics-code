@@ -15,13 +15,12 @@ class AboutPage extends Component {
     //   this.props.getAbout("getAboutOwner");
     // }
     const data = Auth.extractJwtFromStorage();
-    this.props.getAbout("getAbout",data) 
-
+    this.props.getAbout("getAbout", data);
   };
 
   renderAbout = () => {
     const { aboutDetails } = this.props;
-      return <AboutCard about={aboutDetails} />;
+    return <AboutCard about={aboutDetails} />;
   };
 
   render() {

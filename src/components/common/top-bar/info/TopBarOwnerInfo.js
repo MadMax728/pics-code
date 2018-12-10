@@ -7,12 +7,6 @@ import { Auth } from "../../../../auth";
 import connect from "react-redux/es/connect/connect";
 import { getUser } from "../../../../actions";
 
-const storage = Auth.extractJwtFromStorage();
-let userInfo = null;
-if (storage) {
-  userInfo = JSON.parse(storage.userInfo);
-}
-
 class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
@@ -42,13 +36,23 @@ class TopBarOwnerInfo extends Component {
   };
 
   componentDidMount() {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+
     if (userInfo) {
       const data = {
         username: userInfo.username
       };
-      this.setState({isLoading: true})
+      this.setState({ isLoading: true });
       this.props.getUser(data).then(() => {
-        if (this.props.userDataByUsername && this.props.userDataByUsername.user && this.props.userDataByUsername.user.data){
+        if (
+          this.props.userDataByUsername &&
+          this.props.userDataByUsername.user &&
+          this.props.userDataByUsername.user.data
+        ) {
           const items = {
             username: this.props.userDataByUsername.user.data.username,
             private: this.props.userDataByUsername.user.data.isPrivate,
@@ -85,10 +89,7 @@ class TopBarOwnerInfo extends Component {
           this.setState({ items });
         }
       });
-    } 
-
-
-
+    }
   }
 
   render() {
@@ -96,19 +97,18 @@ class TopBarOwnerInfo extends Component {
   }
 }
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername,
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
-  getUser,
+  getUser
 };
 
 TopBarOwnerInfo.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   getUser: PropTypes.func,
-  userDataByUsername: PropTypes.object,
-
+  userDataByUsername: PropTypes.object
 };
 
 export default connect(
