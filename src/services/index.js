@@ -8,4 +8,5 @@ export * from "./commentService";
 export * from "./adService";
 export * from "./tagService";
 export * from "./selectService";
+export * from "./mediaService";
 export * from "./privacyService";

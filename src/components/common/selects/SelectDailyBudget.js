@@ -41,7 +41,7 @@ class SelectDailyBudget extends Component {
         onBlur={this.handleOffer}
         options={dailyBudgetList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{"Select Daily Budget"}</option>
         {dailyBudgetList.map(option => (
           <option value={option.amount} key={option.id}>
             {option.dailyBudget}

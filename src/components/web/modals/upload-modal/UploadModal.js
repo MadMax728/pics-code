@@ -2,33 +2,62 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
+import { uploadMedia } from "../../../../actions/media";
+import connect from "react-redux/es/connect/connect";
 
+const initialState = {
+  form: {
+    add_location: {
+      lat: "",
+      lng: "",
+      address: "",
+    },
+    add_category: "",
+    add_description: "",
+    image: null,
+    file: null,
+    video: null,
+    filetype: true,
+  }
+};
 class UploadModal extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      form: {
-        address: "",
-        add_location: "",
-        add_category: "",
-        add_decription: "",
-        image: null
-      }
-    };
+    this.state = initialState;
   }
 
-  handleUpload = image => {
-    this.setState({ form: { ...this.state.form, image } });
+  handleUpload = (imageVideo, file, filetype) => {
+    console.log(imageVideo);
+    console.log(file);
+    console.log(filetype);
+    
+    if (filetype){
+      this.setState({ form: { ...this.state.form, image: imageVideo, file, filetype } });
+    }
+    else{
+      this.setState({ form: { ...this.state.form, video: imageVideo, file, filetype } });
+    }
   };
 
   handleSetState = (value, cd) => {
-    this.setState({ form: { ...this.state.form, add_decription: value } }, () =>
+    this.setState({ form: { ...this.state.form, add_description: value } }, () =>
       cd()
     );
   };
 
   handleContinue = () => {
-    console.log(this.state.form);
+    const { form } = this.state; 
+    const Data = new FormData();
+    Data.set('title', '');
+    Data.set('description', form.add_decription);
+    Data.append('image', form.file);
+    Data.set('postType', 'mediapost');
+    Data.set('location', form.add_location);
+
+    this.props.uploadMedia(Data).then(() => {
+      this.props.handleModalHide();
+      this.setState({ initialState });
+    });
   };
 
   handleChangeField = event => {
@@ -38,10 +67,18 @@ class UploadModal extends Component {
   };
 
   handleLocation = (location, address) => {
-    this.setState({
-      form: { ...this.state.form, add_location: location, address }
-    });
+    const { form } = this.state;
+    form.add_location.lat = location.lat
+    form.add_location.lng = location.lng
+    form.add_location.address = address;
+    this.setState({ form });
   };
+
+  handleSelect = (isFor , selected) => {
+    const { form } = this.state;
+    form.add_category = selected;
+    this.setState({ form });
+  }
 
   render() {
     const { form } = this.state;
@@ -67,6 +104,7 @@ class UploadModal extends Component {
             handleSetState={this.handleSetState}
             handleLocation={this.handleLocation}
             handleUpload={this.handleUpload}
+            handleSelect={this.handleSelect}
           />
         }
       />
@@ -76,7 +114,21 @@ class UploadModal extends Component {
 
 UploadModal.propTypes = {
   modalShow: PropTypes.bool,
-  handleModalHide: PropTypes.func
+  handleModalHide: PropTypes.func,
+  uploadMedia: PropTypes.func
 };
 
-export default UploadModal;
+const mapStateToProps = state => ({
+  media: state.mediaData  
+});
+
+const mapDispatchToProps = {
+  uploadMedia
+};
+
+// export default UploadModal;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UploadModal);

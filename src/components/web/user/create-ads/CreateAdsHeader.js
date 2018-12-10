@@ -45,7 +45,7 @@ class CreateAdsHeader extends Component {
               {Translations.modal_header.back}
             </button>
           )}
-          {stepIndex <= 3 && (
+          {stepIndex <= 2 && (
             <button className="black_button" onClick={this.handleContinue}>
               {Translations.modal_header.continue}
             </button>

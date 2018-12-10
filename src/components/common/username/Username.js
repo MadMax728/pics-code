@@ -28,7 +28,7 @@ class Username extends Component {
   render() {
     let { userNameList } = this.state;
     const { value } = this.props;
-    const commentArr = value.split(" ");
+    const commentArr = value? value.split(" ") : " ";
     const lastText = commentArr[commentArr.length - 1].substring(1);
     userNameList = userNameList.filter(item => {
       return !!(

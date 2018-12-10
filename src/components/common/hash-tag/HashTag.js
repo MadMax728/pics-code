@@ -30,7 +30,7 @@ class HashTag extends Component {
   render() {
     let { hashTagList } = this.state;
     const { value } = this.props;
-    const commentArr = value.split(" ");
+    const commentArr = value? value.split(" ") : " ";
     const lastText = commentArr[commentArr.length - 1].substring(1);
     hashTagList = hashTagList.filter(item => {
       return !!(

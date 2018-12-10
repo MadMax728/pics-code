@@ -104,9 +104,11 @@ class EditProfile extends Component {
   };
 
   handleLocation = (location, address) => {
-    this.setState({
-      form: { ...this.state.form, location, address }
-    });
+    const { form } = this.state;
+    form.location.lat = location.lat
+    form.location.lng = location.lng
+    form.location.address = address;
+    this.setState({ form });
   };
 
   handleChangeDOB = event => {
@@ -130,7 +132,11 @@ class EditProfile extends Component {
           username: userData.username,
           email: userData.email,
           name_company: userData.name,
-          location: userData.location,
+          location: {
+            lat: userData.location.lat,
+            lng: userData.location.lng,
+            address: userData.location.address,
+          },
           birthDate: {
             day: moment.unix(userData.birthDate).format("DD"),
             mon: moment.unix(userData.birthDate).format("MM"),
@@ -180,7 +186,7 @@ class EditProfile extends Component {
       location: {
         latitude: this.state.form.location.lat,
         longitude: this.state.form.location.lng,
-        address: this.state.form.address
+        address: this.state.form.location.address
       },
       profileDescription: this.state.form.profile_description,
       website: this.state.form.website

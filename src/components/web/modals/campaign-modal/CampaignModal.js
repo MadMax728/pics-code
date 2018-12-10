@@ -147,6 +147,7 @@ class CampaignModal extends Component {
       "Campaign"
     );
   };
+  
   handleActualImg = actual_img => {
     // Set Actual Image
     const { form } = this.state;
@@ -171,11 +172,13 @@ class CampaignModal extends Component {
   };
 
   handleLocation = (location, address) => {
-    this.setState({
-      form: { ...this.state.form, location, address }
-    });
+    const { form } = this.state;
+    form.location.lat = location.lat
+    form.location.lng = location.lng
+    form.location.address = address;
+    this.setState({ form });
   };
-
+  
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;
     form.offer_tag.push(id);
@@ -228,7 +231,7 @@ class CampaignModal extends Component {
       modalClassName = "modal fade create-campaign-modal overflow-scroll ";
     } else if (stepIndex !== 0 && stepIndex < 4) {
       modalClassName = "modal fade create-campaign-modal editor-modal";
-    } else if (stepIndex > 3 && stepIndex < 6) {
+    } else if (stepIndex > 3 && stepIndex < 5) {
       modalClassName = "modal fade payment-overview-modal";
     }
 

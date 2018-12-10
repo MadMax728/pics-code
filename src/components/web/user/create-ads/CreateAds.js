@@ -23,11 +23,12 @@ class CreateAds extends Component {
       handleChangeField,
       handleSubmit,
       handleDate,
-      uploadFile,
       handleEditImage,
       handleLocation,
       handleActualImg,
-      handleScale
+      handleScale,
+      handleSelect,
+      handleSetState
     } = this.props;
 
     return (
@@ -35,19 +36,20 @@ class CreateAds extends Component {
         {stepIndex === 0 && (
           <StepOne
             handleChangeField={handleChangeField}
-            uploadFile={uploadFile}
             form={form}
             handleEditImage={handleEditImage}
             handleLocation={handleLocation}
             handleActualImg={handleActualImg}
             handleScale={handleScale}
+            handleSelect={handleSelect}
+            handleSetState={handleSetState}
           />
         )}
         {stepIndex === 1 && (
           <StepTwo
-            handleChangeField={handleChangeField}
             handleDate={handleDate}
             form={form}
+            handleSelect={handleSelect}
           />
         )}
         {stepIndex === 2 && (
@@ -59,13 +61,6 @@ class CreateAds extends Component {
         )}
         {stepIndex === 3 && (
           <PaymentStepTwo
-            forThat={forThat}
-            handleChangeField={handleChangeField}
-            form={form}
-          />
-        )}
-        {stepIndex === 4 && (
-          <PaymentStepThree
             forThat={forThat}
             handleModalInfoShow={handleModalInfoShow}
             form={form}
@@ -86,11 +81,12 @@ CreateAds.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   handleDate: PropTypes.func.isRequired,
-  uploadFile: PropTypes.func.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
-  handleActualImg: PropTypes.func,
-  handleScale: PropTypes.func
+  handleActualImg: PropTypes.func.isRequired,
+  handleScale: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
+  handleSetState: PropTypes.func.isRequired,
 };
 
 export default CreateAds;
