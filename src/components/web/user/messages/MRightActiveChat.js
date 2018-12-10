@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
-import { DateFormat } from "../../../factory";
+import { DateFormat } from "../../../Factory";
 
 const MRightActiveChat = (
     { 
