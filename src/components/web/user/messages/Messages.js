@@ -32,10 +32,11 @@ class Messages extends Component {
     }
 
     componentWillMount() {
-        let { messages } = this.state;
+        const { user, me } = this.state;
         this.socket.on('communication-message-board-new-message-response', (data) => {
-            messages.push(data);
-            this.setState({ messages });
+            this.setState({
+                messages: [...this.state.messages, data]
+            }) 
         });
     }
 

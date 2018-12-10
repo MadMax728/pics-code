@@ -86,6 +86,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  mediaData: {
+    media:null,
+    isLoading: false,
+    error: false
+  },
   tags: {
     addedOfferTags: null,
     addedInquiryTags: null,
@@ -108,6 +113,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  profilePrivacyData: {
+    profilePrivacyData: [],
+    isLoading: false,
+    error: false
+  }
 };
 
 export default initialState;

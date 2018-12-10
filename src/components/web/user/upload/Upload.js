@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { HashTagUsername } from "../../../common";
+import { HashTagUsername, SelectCategory } from "../../../common";
 import { PlaceAutoCompleteLocation } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 
@@ -21,14 +21,28 @@ class Upload extends Component {
   };
 
   handleUpload = e => {
+    // const file = e.target.files[0];
+    // this.props.handleUpload(file);
     const reader = new FileReader();
     const file = e.target.files[0];
 
-    const currentThis = this;
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      currentThis.props.handleUpload(reader.result);
-    };
+    console.log(file);
+
+    if(file.type.includes("video")){
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        currentThis.props.handleUpload(reader.result, file, false);
+      };
+    }
+
+    if(file.type.includes("image")){
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        currentThis.props.handleUpload(reader.result, file, true);
+      };
+    }
   };
 
   progressHandler = event => {
@@ -37,7 +51,7 @@ class Upload extends Component {
   };
 
   render() {
-    const { form, handleSetState, handleLocation } = this.props;
+    const { form, handleSetState, handleLocation, handleSelect } = this.props;
     const { isInProgress } = this.state;
 
     return (
@@ -71,12 +85,11 @@ class Upload extends Component {
               <label htmlFor="Category">
                 {Translations.upload_modal.add_category}
               </label>
-              <select name="add_category" onBlur={this.handleChangeField}>
-                <option value={"category_1"}>Category 1</option>
-                <option value={"category_2"}>Category 2</option>
-                <option value={"category_3"}>Category 3</option>
-                <option value={"category_4"}>Category 4</option>
-              </select>
+                <SelectCategory
+                  value={form.add_category? form.add_category : ""}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="description">
@@ -102,7 +115,7 @@ class Upload extends Component {
           </form>
         </div>
         <div className="col-sm-6 no-padding">
-          {!form.image ? (
+          {!form.image && !form.video ? (
             <div className="box">
               <input
                 type="file"
@@ -123,12 +136,15 @@ class Upload extends Component {
                   <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
                 </svg>
                 <br />{" "}
-                <span>{Translations.upload_modal.upload_title_image}</span>
+                <span>{Translations.upload_modal.upload_file}</span>
               </label>
             </div>
-          ) : (
-            <img src={form.image} alt="upload" className="widthHeightAuto" />
-          )}
+          ) : 
+            form.filetype? 
+            ( <img src={form.image} alt="upload" className="widthHeightAuto" />) 
+            :
+            (<div>video player</div>)
+          }
           {isInProgress && (
             <div className="image-wrapper">
               <div className="progress-bar-wrapper">
@@ -168,7 +184,8 @@ Upload.propTypes = {
   handleSetState: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  handleUpload: PropTypes.func.isRequired
+  handleUpload: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
 };
 
 export default Upload;

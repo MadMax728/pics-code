@@ -62,7 +62,12 @@ class EditProfileModal extends Component {
           const blob = b64toBlob(realData, contentType);
 
           const CropedData = new FormData();
-          CropedData.append('image',blob);
+          if (this.state.scale === 1){
+            CropedData.append('image',this.state.actual_img);
+          }
+          else {
+            CropedData.append('image',blob);
+          }
           CropedData.append('typeImage','Crop');
           CropedData.append('typeOfContent','profile');
           CropedData.append('coordinate', '50');
