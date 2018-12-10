@@ -2,7 +2,15 @@ import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import { Text } from "../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../lib/translations";
-import { setProfilePrivacy } from "../../../../actions";
+import {
+  setProfilePrivacy,
+  setProfilePersonalizedAdvertise,
+  setChangeEmail,
+  setChangePassword,
+  setChangeInvoiceAddress,
+  deleteSearchHistory,
+  deactivateAccount
+} from "../../../../actions";
 import PropTypes from "prop-types";
 import connect from "react-redux/es/connect/connect";
 
@@ -45,7 +53,8 @@ class PrivacyPage extends Component {
   hanldeIsPersonalized = event => {
     const isPersonalized = event.target.checked;
     this.setState({ isPersonalized });
-    // call API for isPersonalized
+    const paramData = { isPersonalizedAdvertise: isPersonalized };
+    this.props.setProfilePersonalizedAdvertise(paramData);
   };
 
   // handleFieldChangeEmail event
@@ -59,6 +68,8 @@ class PrivacyPage extends Component {
   handleSaveChangeEmail = e => {
     e.preventDefault();
     console.log(this.state.change_email_form);
+    const paramData = { emailDetails: "emailDetails" };
+    this.props.setChangeEmail(paramData);
   };
 
   // handleFieldChangePassword event
@@ -72,6 +83,8 @@ class PrivacyPage extends Component {
   handleSaveChangePassword = e => {
     e.preventDefault();
     console.log(this.state.change_password_form);
+    const paramData = { passwordDetails: "passwordDetails" };
+    this.props.setChangePassword(paramData);
   };
 
   // handleFieldChangeInvoice event
@@ -85,14 +98,20 @@ class PrivacyPage extends Component {
   handleSaveChangeInvoice = e => {
     e.preventDefault();
     console.log(this.state.change_invoicing_address_form);
+    const paramData = { addressDetails: "addressDetails" };
+    this.props.setChangeInvoiceAddress(paramData);
   };
 
   handleDeleteSearchHisory = () => {
     console.log("handleDeleteSearchHisory");
+    const paramData = { searchHistoryId: "testId" };
+    this.props.searchHistoryId(paramData);
   };
 
   handleDeactiveMyAccount = () => {
     console.log("handleDeactiveMyAccount");
+    const paramData = { accountId: "testId" };
+    this.props.deactivateAccount(paramData);
   };
 
   render() {
@@ -434,12 +453,24 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  setProfilePrivacy
+  setProfilePrivacy,
+  setProfilePersonalizedAdvertise,
+  setChangeEmail,
+  setChangePassword,
+  setChangeInvoiceAddress,
+  deleteSearchHistory,
+  deactivateAccount
 };
 
 PrivacyPage.propTypes = {
   setProfilePrivacy: PropTypes.func,
-  profilePrivacyData: PropTypes.object
+  setProfilePersonalizedAdvertise: PropTypes.func,
+  setChangeEmail: PropTypes.func,
+  setChangePassword: PropTypes.func,
+  setChangeInvoiceAddress: PropTypes.func,
+  deleteSearchHistory: PropTypes.func,
+  deactivateAccount: PropTypes.func,
+  searchHistoryId: PropTypes.object
 };
 
 export default connect(
