@@ -41,7 +41,7 @@ class SelectInquiry extends Component {
         onBlur={this.handleInquiry}
         options={inquiryList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{"Select Inquiry"}</option>
         {inquiryList.map(option => (
           <option value={option.id} key={option.id}>
             {option.inquiryName}

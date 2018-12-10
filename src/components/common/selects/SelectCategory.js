@@ -42,7 +42,7 @@ class SelectCategory extends Component {
         onBlur={this.handleCategory}
         options={categoryList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{"Select Category"}</option>
         {categoryList.map(option => (
           <option value={option.id} key={option.id}>
             {option.categoryName}
