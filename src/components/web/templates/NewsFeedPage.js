@@ -9,7 +9,10 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class NewsFeedPage extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
-      this.props.getNewsFeed("getNewsFeedOther", this.props.match.params.username);
+      this.props.getNewsFeed(
+        "getNewsFeedOther",
+        this.props.match.params.username
+      );
     } else {
       this.props.getNewsFeed("getNewsFeedOwner");
     }
@@ -20,7 +23,8 @@ class NewsFeedPage extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
+          {newsFeed.postType.toLowerCase() ===
+            enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={newsFeed}
               isDescription
@@ -36,9 +40,10 @@ class NewsFeedPage extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.image || newsFeed.postType.toLowerCase() === enumerations.contentTypes.video && (
-            <MediaCard item={newsFeed} />
-          )}
+          {newsFeed.postType.toLowerCase() ===
+            enumerations.contentTypes.image ||
+            (newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.video && <MediaCard item={newsFeed} />)}
         </div>
       );
     });

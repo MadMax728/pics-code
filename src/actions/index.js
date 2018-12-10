@@ -10,3 +10,4 @@ export * from "./media";
 export * from "./tags";
 export * from "./users";
 export * from "./select";
+export * from "./privacy";

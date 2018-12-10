@@ -113,6 +113,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  profilePrivacyData: {
+    profilePrivacyData: [],
+    isLoading: false,
+    error: false
+  }
 };
 
 export default initialState;
