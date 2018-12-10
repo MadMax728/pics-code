@@ -18,7 +18,8 @@ const propTypes = {
   allowZoomOut: PropTypes.bool,
   logCallback: PropTypes.any,
   handleEditImage: PropTypes.func,
-  isCircle: PropTypes.bool
+  isCircle: PropTypes.bool,
+  handleActualImg: PropTypes.any,
 };
 
 class ImageCropper extends Component {
@@ -44,6 +45,7 @@ class ImageCropper extends Component {
     const scale = parseFloat(e.target.value);
     this.setState({ scale }, () => {
       this.handleSave();
+      this.props.handleScale(scale);
     });
   };
 
@@ -58,6 +60,7 @@ class ImageCropper extends Component {
   };
 
   handleNewImage = e => {
+    this.props.handleActualImg(e.target.files[0]);
     this.setState({ image: e.target.files[0] }, () => {
       this.handleSave();
     });
@@ -75,9 +78,12 @@ class ImageCropper extends Component {
   };
 
   handleSave = () => {
-    const img = this.editor.getImageScaledToCanvas().toDataURL();
-    this.setState({ preview: img });
-    this.props.handleEditImage(img);
+    // todo fix
+    if(this.editor && this.editor.getImageScaledToCanvas()) {
+      const img = this.editor.getImageScaledToCanvas().toDataURL();
+      this.setState({ preview: img });
+      this.props.handleEditImage(img);
+    }
   };
 
   render() {

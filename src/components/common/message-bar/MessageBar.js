@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class MessageBar extends Component {
   constructor(props) {
@@ -9,13 +9,9 @@ class MessageBar extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     // this.timer = setInterval(() =>  this.setState(prevState => ({ isView: !prevState.isView })), 2000);
-  }
-
-  componentWillUnmount() {
-    // clearInterval(this.timer);
-  }
+  };
 
   render() {
     const { message } = this.props;
@@ -34,7 +30,7 @@ class MessageBar extends Component {
 }
 
 MessageBar.propTypes = {
-  message: propTypes.string.isRequired
+  message: PropTypes.string.isRequired
 };
 
 export default MessageBar;

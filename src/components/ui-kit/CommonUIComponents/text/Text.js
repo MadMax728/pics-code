@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class Text extends Component {
   constructor(props) {
@@ -19,8 +19,16 @@ class Text extends Component {
   };
 
   render() {
-    const { name, className, id, type, autoComplete, placeholder } = this.props;
-    const { value } = this.state;
+    const {
+      name,
+      className,
+      id,
+      type,
+      autoComplete,
+      placeholder,
+      value
+    } = this.props;
+    // const { value } = this.state;
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <input
@@ -31,20 +39,21 @@ class Text extends Component {
         placeholder={placeholder}
         autoComplete={autoComplete}
         onChange={this.handleChangeField}
-        value={value}
+        value={value || ''}
       />
     );
   }
 }
 
 Text.propTypes = {
-  autoComplete: propTypes.string,
-  type: propTypes.string,
-  name: propTypes.string,
-  onChange: propTypes.func,
-  className: propTypes.string,
-  id: propTypes.string,
-  placeholder: propTypes.string
+  autoComplete: PropTypes.string,
+  type: PropTypes.string,
+  name: PropTypes.string,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  placeholder: PropTypes.string,
+  value: PropTypes.string
 };
 
 export default Text;

@@ -1,93 +1,89 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
 class PaymentStepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
+  handleRedeemBtn = () => {};
+
+  handleCommitToBuy = () => {
+    this.props.handleSubmit();
+    this.props.handleModalInfoShow();
+  };
+
   render() {
-    const { form, handleChangeField } = this.props;
+    const { handleChangeField, form } = this.props;
     return (
-      <div className="modal-body">
-        <div className="col-sm-5 payment-form">
-          <div className="subtitle">Payment method</div>
-          <div className="form-group">
-            <div className="radio" onChange={handleChangeField}>
-              <label htmlFor={"Paypal"}>
-                <input
-                  value="paypal"
-                  type="radio"
-                  name="payment_option"
-                  defaultChecked={form.payment_option === "paypal"}
-                />
-                <span>Paypal</span>
-              </label>
-            </div>
-            <div className="radio">
-              <label htmlFor={"credit_card"} onChange={handleChangeField}>
-                <input
-                  type="radio"
-                  name="payment_option"
-                  value="card"
-                  defaultChecked={form.payment_option === "card"}
-                />
-                <span>Credit card</span>
-                <img src={images.cards} className="card-img" alt={"cards"} />
-              </label>
-              <div className="creditcard-form">
-                <div className="form-group">
-                  <label htmlFor={"name_card_holder"}>
-                    Name of card holder
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="Max Mustermann"
-                    name="card_holder"
-                    onChange={handleChangeField}
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor={"expiry_date"}>Expiry date</label>
-                  <input
-                    type="text"
-                    placeholder="00 / 00"
-                    name="expire_date"
-                    onChange={handleChangeField}
-                  />
-                </div>
-                <div className="form-group no-margin">
-                  <label htmlFor={"credit_card_no"}>Credit card no.</label>
-                  <input
-                    type="text"
-                    placeholder="0000 0000 0000 0000"
-                    onChange={handleChangeField}
-                    name="card_no"
-                  />
-                </div>
-                <div className="form-group no-margin">
-                  <label htmlFor={"cvc"}>CVC</label>
-                  <input
-                    type="text"
-                    placeholder="000"
-                    onChange={handleChangeField}
-                  />
-                </div>
-              </div>
+      <div className="col-xs-12 no-padding">
+        <div className="col-sm-5 payment-history">
+          <div className="subtitle">Complete payment transaction</div>
+          <div className="history-content-wrapper">
+            <div className="subtitle">Billing address</div>
+            <div className="content">
+              Marc Bopp
+              <br />
+              Oberer Dorfgraben 15c, 55130 Mainz, Deutschland
             </div>
           </div>
-          <div className="subtitle">Information on payment</div>
-          <p>
-            You only have to pay when a user actively clicks on your ad on
-            Picstagraph.
-          </p>
-          <ul>
-            <li>100 % cost control</li>
-            <li>Cost per Click: 1,00 €</li>
-            <li>Payment only after ad was cloes</li>
-            <li>Total budget can not be exceeded</li>
-          </ul>
+          <div className="history-content-wrapper">
+            <div className="subtitle">Payment method</div>
+            <div className="content">
+              VISA / MasterCard
+              <br />
+              Marc Aurel Bopp, **** ***** ***** **00
+            </div>
+          </div>
+          <div className="history-content-wrapper">
+            <div className="subtitle">Voucher </div>
+            <div className="form-content">
+              <input type="text" name="voucher" onChange={handleChangeField} />
+              <button className="blue_button" onClick={this.handleRedeemBtn}>
+                Redeem
+              </button>
+            </div>
+          </div>
+          <div className="history-content-wrapper">
+            <div className="subtitle">Order overview </div>
+            <div className="content no-padding">
+              <table>
+                <tbody>
+                  <tr>
+                    <td>Preliminary amount</td>
+                    <td>0,00 €</td>
+                  </tr>
+                  <tr>
+                    <td>Runtime</td>
+                    <td>7 Days</td>
+                  </tr>
+                  <tr>
+                    <td>Voucher</td>
+                    <td>0,00 €</td>
+                  </tr>
+                  <tr>
+                    <td className="fontBold">Maximum expenses</td>
+                    <td className="fontBold">2000,00 €</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="bottom-links">
+            By clicking on register you agree to our{" "}
+            <Link to={""}>General Terms & Conditions</Link>,{" "}
+            <Link to={""}>Terms of Use</Link> and{" "}
+            <Link to={""}>Data Protection</Link> &{" "}
+            <Link to={""}>Privacy Policy</Link>.
+          </div>
+          <div className="bottom-button">
+            <button className="filled_button" onClick={this.handleCommitToBuy}>
+              Commit to buy
+            </button>
+          </div>
         </div>
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
@@ -147,8 +143,11 @@ class PaymentStepTwo extends Component {
 }
 
 PaymentStepTwo.propTypes = {
-  handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired
+  handleModalInfoShow: PropTypes.func,
+  handleChangeField: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired
 };
+
 
 export default PaymentStepTwo;

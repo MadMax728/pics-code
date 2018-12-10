@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class NumberInput extends Component {
   constructor(props) {
@@ -19,8 +19,7 @@ class NumberInput extends Component {
   };
 
   render() {
-    const { name, min, max, pattern, className, id } = this.props;
-    const { value } = this.state;
+    const { name, min, max, pattern, className, id, value } = this.props;
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <input
@@ -32,20 +31,21 @@ class NumberInput extends Component {
         pattern={pattern}
         className={className}
         onChange={this.handleChangeField}
-        value={value}
+        defaultValue={value}
       />
     );
   }
 }
 
 NumberInput.propTypes = {
-  name: propTypes.string,
-  onChange: propTypes.func,
-  className: propTypes.string,
-  id: propTypes.string,
-  min: propTypes.any,
-  max: propTypes.any,
-  pattern: propTypes.any
+  name: PropTypes.string,
+  value: PropTypes.any,
+  onChange: PropTypes.func,
+  className: PropTypes.string,
+  id: PropTypes.string,
+  min: PropTypes.any,
+  max: PropTypes.any,
+  pattern: PropTypes.any
 };
 
 export default NumberInput;

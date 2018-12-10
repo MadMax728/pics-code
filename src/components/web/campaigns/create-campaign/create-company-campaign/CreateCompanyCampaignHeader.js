@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
+import { Translations } from "../../../../../lib/translations";
 
 class CreateCompanyCampaignHeader extends Component {
   constructor(props) {
@@ -36,25 +37,27 @@ class CreateCompanyCampaignHeader extends Component {
     const { stepIndex } = this.props;
     return (
       <div className="row">
-        <div className="col-sm-5 modal-title">Create Campaign</div>
+        <div className="col-sm-5 modal-title">
+          {Translations.modal_header.create_campaign}
+        </div>
         <div className="col-sm-7 text-right">
           <button className="black_button" onClick={this.handleCancle}>
-            Cancel
+            {Translations.modal_header.cancle}
           </button>
           {stepIndex !== 0 && (
             <button className="black_button" onClick={this.handleBack}>
-              Back
+              {Translations.modal_header.back}
             </button>
           )}
           {stepIndex !== 0 &&
             stepIndex < 3 && (
               <button className="black_button" onClick={this.handlePreview}>
-                Priview
+                {Translations.modal_header.preview}
               </button>
             )}
-          {stepIndex <= 4 && (
+          {stepIndex <= 3 && (
             <button className="black_button" onClick={this.handleContinue}>
-              Continue
+              {Translations.modal_header.continue}
             </button>
           )}
         </div>
@@ -64,12 +67,12 @@ class CreateCompanyCampaignHeader extends Component {
 }
 
 CreateCompanyCampaignHeader.propTypes = {
-  handlePrivewOpen: propTypes.func.isRequired,
-  handleModalHide: propTypes.func,
-  stepIndex: propTypes.any.isRequired,
-  handleNext: propTypes.func,
-  handlePrev: propTypes.func,
-  handleResoreState: propTypes.func.isRequired
+  handlePrivewOpen: PropTypes.func.isRequired,
+  handleModalHide: PropTypes.func,
+  stepIndex: PropTypes.any.isRequired,
+  handleNext: PropTypes.func,
+  handlePrev: PropTypes.func,
+  handleResoreState: PropTypes.func.isRequired
 };
 
 export default CreateCompanyCampaignHeader;

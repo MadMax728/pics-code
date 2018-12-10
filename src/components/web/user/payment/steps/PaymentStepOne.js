@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 class PaymentStepOne extends Component {
   constructor(props) {
     super(props);
@@ -11,12 +11,12 @@ class PaymentStepOne extends Component {
     const { handleChangeField } = this.props;
 
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
           <div className="user-title">
             <div className="subtitle">Billing Address</div>
           </div>
-          <form>
+          <form className="col-xs-12 no-padding">
             <div className="form-group">
               <label htmlFor="title">Invoice Recipient</label>
               <input
@@ -137,8 +137,8 @@ class PaymentStepOne extends Component {
 }
 
 PaymentStepOne.propTypes = {
-  form: propTypes.any.isRequired,
-  handleChangeField: propTypes.func.isRequired
+  form: PropTypes.any.isRequired,
+  handleChangeField: PropTypes.func.isRequired
 };
 
 export default PaymentStepOne;

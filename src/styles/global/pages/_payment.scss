@@ -2,17 +2,34 @@
   background: #333;
   .modal-dialog {
     width: 915px;
+    //reverting back
+    // height: 80vh;
+    // min-height: 80vh;
+    // background-color: white;
+    // margin: 10vh auto;
+    @media (max-width: 915px) {
+      width: calc(100% - 4%);
+      margin: 30px 2%;
+    }
   }
   .modal-content {
     @include float();
     box-shadow: none;
     border: 0px;
+    //reverting back
+    // height: 100%;
   }
   .modal-header {
     border-bottom: 6px solid #333333;
     .modal-title {
       font-family: "Helvetica-Bold";
       margin-top: 7px;
+      @media (max-width: 785px) {
+        width: 150px;
+        & ~ .text-right {
+          width: calc(100% - 150px);
+        }
+      }
     }
     button {
       height: 35px;
@@ -23,6 +40,17 @@
   }
   .modal-body {
     padding: 0px;
+    //reverting back
+    // height: 91%;
+    // .col-xs-12.no-padding {
+    //   height: 100%;
+    //   .col-xs-12.no-padding {
+    //     height: 100%;
+    //     & > div {
+    //       height: 100%;
+    //     }
+    //   }
+    // }
     .right-side {
       background-color: #333333;
     }

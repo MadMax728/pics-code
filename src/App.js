@@ -15,6 +15,12 @@ import {
   ResetPassword,
   ForgotPassword
 } from "./components/web/auth-flow";
+import {
+  GeneralTermsAndConditions,
+  Support,
+  LegalNotice
+} from "./components/web/information";
+// import { AboutUs } from './components/web/information/about-us';
 class App extends Component {
   constructor() {
     super();
@@ -48,6 +54,9 @@ class App extends Component {
   };
 
   isUserAuthenticated = () => {
+    if (window.location.href.indexOf("back-office") === -1) {
+      localStorage.removeItem("admin_access_token");
+    }
     if (!Auth.isUserAuthenticated()) {
       return (
         <div>
@@ -112,6 +121,15 @@ class App extends Component {
           component={AdminLogin}
         />
         <Route exact path={routes.REGISTER_ROUTE} component={Register} />
+        <Route
+          exact
+          path={routes.TERMS_CONDITIONS_ROUTE}
+          component={GeneralTermsAndConditions}
+        />
+        <Route exact path={routes.SUPPORT_ROUTE} component={Support} />
+        {/*<Route exact path={routes.LEGAL_NOTICE_ROUTE} component={LegalNotice}/>*/}
+        <Route exact path={routes.LEGAL_NOTICE_ROUTE} component={LegalNotice} />
+        {/*<Route exact path={routes.ABOUTUS_ROUTE} component={AboutUs}/>*/}
         <Route exact path={routes.RESET_EMAIL} component={ResetEmail} />
         <Route exact path={routes.FORGOT_PASSWORD} component={ForgotPassword} />
         <Route exact path={routes.RESET_PASSWORD} component={ResetPassword} />

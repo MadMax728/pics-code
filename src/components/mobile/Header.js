@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../lib/constants/images";
 import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
+import { Translations } from "../../lib/translations";
 
 export default class Header extends Component {
   constructor(props) {
@@ -61,8 +62,8 @@ export default class Header extends Component {
         </div>
 
         <div className="mobile_intro_text">
-          <p>Picstagraph</p>
-          <p>In der Picstagraph-App offenen</p>
+          <p>{Translations.app_name}</p>
+          <p>{Translations.offen}</p>
         </div>
       </header>
     );

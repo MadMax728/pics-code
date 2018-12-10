@@ -8,6 +8,7 @@ import {
   ads_statisitcs
 } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
+import { Translations } from "../../../lib/translations";
 
 class Landing extends Component {
   constructor(props, context) {
@@ -20,9 +21,9 @@ class Landing extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     const {
@@ -35,42 +36,42 @@ class Landing extends Component {
     const keyColumns = [
       {
         dataField: "registered_users",
-        text: "Registered users",
+        text: Translations.landing.Registered_users,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "active_users",
-        text: "Active users",
+        text: Translations.landing.Active_users,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "deactivated_accounts",
-        text: "Deactivated accounts",
+        text: Translations.landing.Deactivated_accounts,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "turnover",
-        text: "Turnover",
+        text: Translations.landing.Turnover,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "reviews",
-        text: "Reviews",
+        text: Translations.landing.Reviews,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "reported_content",
-        text: "Reported content",
+        text: Translations.landing.Reported_content,
         align: "left",
         headerAlign: "left",
         sort: false
@@ -80,70 +81,70 @@ class Landing extends Component {
     const contentColumns = [
       {
         dataField: "lable",
-        text: "Lable",
+        text: Translations.landing.Lable,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "images",
-        text: "Images",
+        text: Translations.landing.Images,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "videos",
-        text: "Videos",
+        text: Translations.landing.Videos,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "campaign_company",
-        text: "Campaign Company",
+        text: Translations.landing.Campaign_Company,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "image_campaign",
-        text: "Image Campaign",
+        text: Translations.landing.Image_Campaign,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "video_campaign",
-        text: "Video Campaign",
+        text: Translations.landing.Video_Campaign,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "campaign_creator",
-        text: "Campaign Creator",
+        text: Translations.landing.Campaign_Creator,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "pics",
-        text: "Pics",
+        text: Translations.landing.Pics,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "ads",
-        text: "Ads",
+        text: Translations.landing.Ads,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "total",
-        text: "Total",
+        text: Translations.landing.Total,
         align: "left",
         headerAlign: "left",
         sort: false
@@ -153,56 +154,56 @@ class Landing extends Component {
     const campaignsColumns = [
       {
         dataField: "lable",
-        text: "Lable",
+        text: Translations.landing.Lable,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "number",
-        text: "Number",
+        text: Translations.landing.Number,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "active_campaign",
-        text: "Active Campaign",
+        text: Translations.landing.Active_Campaign,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "closed_campaign",
-        text: "Closed Campaign",
+        text: Translations.landing.Closed_Campaign,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "campaigns_temp_closed",
-        text: "Campaign Temp Closed",
+        text: Translations.landing.Campaign_Temp_Closed,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "potential_turnover",
-        text: "Potential Turnover",
+        text: Translations.landing.Potential_Turnover,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "total_turnover",
-        text: "Total Turnover",
+        text: Translations.landing.Total_Turnover,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "average_conv_rate",
-        text: "Average conv rate Total",
+        text: Translations.landing.Average_conv_rate_Total,
         align: "left",
         headerAlign: "left",
         sort: false
@@ -212,56 +213,56 @@ class Landing extends Component {
     const adsColumns = [
       {
         dataField: "lable",
-        text: "Lable",
+        text: Translations.landing.Lable,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "number",
-        text: "Number",
+        text: Translations.landing.Number,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "active_ads",
-        text: "Active Ads",
+        text: Translations.landing.Active_Ads,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "closed_ads",
-        text: "Closed Ads",
+        text: Translations.landing.Closed_Ads,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "ads_temp_closed",
-        text: "Ads Temp Closed",
+        text: Translations.landing.Ads_Temp_Closed,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "potential_turnover",
-        text: "Potential Turnover",
+        text: Translations.landing.Potential_Turnover,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "total_turnover",
-        text: "Total Turnover",
+        text: Translations.landing.Total_Turnover,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "average_conv_rate",
-        text: "Average conv rate Total",
+        text: Translations.landing.Average_conv_rate_Total,
         align: "left",
         headerAlign: "left",
         sort: false
@@ -271,19 +272,23 @@ class Landing extends Component {
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">Navigation</div>
+          <div className="normal_title padding-15">
+            {Translations.landing.Navigation}
+          </div>
           <div className="review-report-btns">
             <Link to={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}>
-              <button className="filled_button pull-left">Review</button>{" "}
+              <button className="filled_button pull-left">
+                {Translations.landing.Review}
+              </button>{" "}
             </Link>
             <Link to={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}>
               <button className="filled_button pull-right">
-                Reported content
+                {Translations.landing.Reported_content}
               </button>
             </Link>
           </div>
           <div className="title_with_dropdown">
-            <span>Key statistics</span>
+            <span>{Translations.landing.Key_statistics}</span>
             <select>
               <option>Period </option>
               <option>Option 1 </option>
@@ -304,7 +309,7 @@ class Landing extends Component {
             />
           </div>
           <div className="title_with_dropdown">
-            <span>Content statistics</span>
+            <span>{Translations.landing.Content_statistics}</span>
             <select>
               <option>Period </option>
               <option>Option 1 </option>
@@ -325,7 +330,7 @@ class Landing extends Component {
             />
           </div>
           <div className="title_with_dropdown">
-            <span>Campaign statistics company</span>
+            <span>{Translations.landing.Campaign_statistics_company}</span>
             <select>
               <option>Period </option>
               <option>Option 1 </option>
@@ -346,7 +351,7 @@ class Landing extends Component {
             />
           </div>
           <div className="title_with_dropdown">
-            <span>Ad statisitcs</span>
+            <span>{Translations.landing.Ad_statisitcs}</span>
             <select>
               <option>Period </option>
               <option>Option 1 </option>

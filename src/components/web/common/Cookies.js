@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as images from "../../../lib/constants/images";
+import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 class Cookies extends Component {
   render() {
@@ -8,9 +10,13 @@ class Cookies extends Component {
       <section>
         <div className="custom-container">
           <div className="cookies-section">
-            For a better user experience we use <Link to={""}>Cookies</Link>. By
-            using picstagraph you do agree.
-            <img src={images.cross} alt={"cross"} />
+            {Translations.base_footer.better}{" "}
+            <Link to={routes.COOKIES_ROUTE}>
+              {Translations.base_footer.cookies}
+            </Link>
+            .{Translations.base_footer.agree}.
+            {/* <img src={images.cross} alt={"cross"} /> */}
+            <button className="got_it">Got it!</button>
           </div>
         </div>
       </section>

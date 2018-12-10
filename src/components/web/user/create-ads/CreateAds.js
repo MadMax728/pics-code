@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo } from "./steps";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   PaymentStepOne,
   PaymentStepTwo,
   PaymentStepThree
 } from "../../user/payment/steps";
+import { CreateCompanyCampaign } from "../../campaigns/create-campaign/create-company-campaign";
 
 class CreateAds extends Component {
   constructor(props) {
@@ -23,7 +24,10 @@ class CreateAds extends Component {
       handleSubmit,
       handleDate,
       uploadFile,
-      handleEditImage
+      handleEditImage,
+      handleLocation,
+      handleActualImg,
+      handleScale
     } = this.props;
 
     return (
@@ -34,6 +38,9 @@ class CreateAds extends Component {
             uploadFile={uploadFile}
             form={form}
             handleEditImage={handleEditImage}
+            handleLocation={handleLocation}
+            handleActualImg={handleActualImg}
+            handleScale={handleScale}
           />
         )}
         {stepIndex === 1 && (
@@ -72,15 +79,18 @@ class CreateAds extends Component {
 }
 
 CreateAds.propTypes = {
-  stepIndex: propTypes.any.isRequired,
-  forThat: propTypes.string.isRequired,
-  handleModalInfoShow: propTypes.func.isRequired,
-  handleChangeField: propTypes.func.isRequired,
-  handleSubmit: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
-  handleDate: propTypes.func.isRequired,
-  uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired
+  stepIndex: PropTypes.any.isRequired,
+  forThat: PropTypes.string.isRequired,
+  handleModalInfoShow: PropTypes.func.isRequired,
+  handleChangeField: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired,
+  handleDate: PropTypes.func.isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  handleEditImage: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  handleActualImg: PropTypes.func,
+  handleScale: PropTypes.func
 };
 
 export default CreateAds;

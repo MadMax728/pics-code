@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class PaymentConfirmation extends Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class PaymentConfirmation extends Component {
   render() {
     const { modalInfoMsg } = this.props;
     return (
-      <div className={"modal-body"}>
+      <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">
           Your {modalInfoMsg} is pending review whitin the next 48 hours.
         </div>
@@ -30,9 +30,9 @@ class PaymentConfirmation extends Component {
 }
 
 PaymentConfirmation.propTypes = {
-  handleModalInfoHide: propTypes.func,
-  handleModalHide: propTypes.func,
-  modalInfoMsg: propTypes.string
+  handleModalInfoHide: PropTypes.func,
+  handleModalHide: PropTypes.func,
+  modalInfoMsg: PropTypes.string
 };
 
 export default PaymentConfirmation;

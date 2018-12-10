@@ -1,18 +1,21 @@
-export { SideBarSetting } from "./sidebar-setting";
-export { SideBarSettingBackOffice } from "./sidebar-setting-back-office";
-export { SideBarReviewMenu } from "./sidebar-review-menu";
-export { SideBarReviewContentMenu } from "./sidebar-review-content-menu";
-
-export { SideBarBackOffice } from "./sidebar-back-office";
-export { SideBarOwnerMenu } from "./sidebar-owner-menu";
-export { SideBarOtherMenu } from "./sidebar-other-menu";
-export { SideBarInformation } from "./sidebar-information";
-export { SideBarService } from "./sidebar-service";
+export { default as SideBarSetting } from "./SideBarSetting";
 export {
-  SideBarMBMenuInformation,
-  SideBarMBMenuServices
-} from "./sidebar-mb-menu";
-export { SideBarCampaignMenu } from "./sidebar-campaign-menu";
+  default as SideBarSettingBackOffice
+} from "./SideBarSettingBackOffice";
+export { default as SideBarReviewMenu } from "./SideBarReviewMenu";
 export {
-  SideBarCampaignMenuOnlyImage
-} from "./sidebar-campaign-menu-olny-image";
+  default as SideBarReviewContentMenu
+} from "./SideBarReviewContentMenu";
+export { default as SideBarBackOffice } from "./SideBarBackOffice";
+export { default as SideBarOwnerMenu } from "./SideBarOwnerMenu";
+export { default as SideBarOtherMenu } from "./SideBarOtherMenu";
+export { default as SideBarInformation } from "./SideBarInformation";
+export { default as SideBarService } from "./SideBarService";
+export { default as SideBarMBMenuServices } from "./SideBarMBMenuServices";
+export {
+  default as SideBarMBMenuInformation
+} from "./SideBarMBMenuInformation";
+export { default as SideBarCampaignMenu } from "./SideBarCampaignMenu";
+export {
+  default as SideBarCampaignMenuOnlyImage
+} from "./SideBarCampaignMenuOnlyImage";

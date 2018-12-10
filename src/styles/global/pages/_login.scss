@@ -13,6 +13,8 @@
   min-height: 100vh;
   header {
     background-color: #1575bb;
+    z-index: 1000 !important;
+    position: relative;
   }
   .custom-container {
     width: 700px;
@@ -45,6 +47,7 @@
     margin: auto;
     text-align: center;
     color: $charcoal_color;
+    min-height: 810px;
     img {
       width: 20px;
     }
@@ -67,6 +70,9 @@
         position: relative;
         float: left;
         width: 100%;
+        &.marBtm0{
+          margin-bottom: 0px;
+        }
         .options {
           list-style-type: none;
           padding: 0;
@@ -171,6 +177,9 @@
       img {
         width: 135px;
       }
+      a{
+        margin: 0 8px;
+      }
     }
   }
   .cookies-section {
@@ -182,6 +191,12 @@
     border-top: 1px solid $charcoal_color;
     border-bottom: 1px solid $charcoal_color;
     margin-top: 15px;
+    position: fixed;
+    bottom: 65px;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
     a {
       color: $blue_color;
     }
@@ -199,7 +214,12 @@
     background-color: white;
     z-index: 100 !important;
     margin: 0px;
-
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 100;
     ul {
       padding: 0px;
       text-align: center;

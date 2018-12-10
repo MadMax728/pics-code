@@ -30,6 +30,13 @@
   .settings {
     display: inline-block;
     float: right;
+
+    .share-wrapr {
+      img {
+        width: 20px;
+        margin-left: 10px;
+      }
+    }
     img {
       width: 20px;
     }
@@ -145,6 +152,7 @@
       .filter-title {
         margin-bottom: 25px;
       }
+
       .radio-btn {
         display: block;
         position: relative;
@@ -321,6 +329,7 @@
 .feed_wrapper {
   background-color: $white_color;
   margin-bottom: 2px;
+  
   @include float();
   .feed_header {
     padding: 10px;
@@ -329,6 +338,9 @@
       display: inline-block;
       float: left;
       margin-right: 16px;
+      &.wid45{
+        width: 55px;
+      }
       img {
         width: 45px;
         height: 45px;
@@ -397,6 +409,7 @@
       float: left;
       width: 100%;
       padding: 10px;
+      }
       &:first-child {
         border-top: 1px solid #ededed;
       }
@@ -456,4 +469,4 @@
       }
     }
   }
-}
+

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
 
 class UploadModal extends Component {
@@ -8,12 +8,18 @@ class UploadModal extends Component {
     super(props, context);
     this.state = {
       form: {
+        address: "",
         add_location: "",
         add_category: "",
-        add_decription: ""
+        add_decription: "",
+        image: null
       }
     };
   }
+
+  handleUpload = image => {
+    this.setState({ form: { ...this.state.form, image } });
+  };
 
   handleSetState = (value, cd) => {
     this.setState({ form: { ...this.state.form, add_decription: value } }, () =>
@@ -29,7 +35,12 @@ class UploadModal extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
+  };
+
+  handleLocation = (location, address) => {
+    this.setState({
+      form: { ...this.state.form, add_location: location, address }
+    });
   };
 
   render() {
@@ -37,7 +48,7 @@ class UploadModal extends Component {
 
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade upload-image-modal"}
+        modalClassName={"modal fade upload-image-modal create-campaign-modal"}
         header
         modalHeaderContent={
           <UploadHeader
@@ -54,6 +65,8 @@ class UploadModal extends Component {
             handleChangeField={this.handleChangeField}
             form={form}
             handleSetState={this.handleSetState}
+            handleLocation={this.handleLocation}
+            handleUpload={this.handleUpload}
           />
         }
       />
@@ -62,8 +75,8 @@ class UploadModal extends Component {
 }
 
 UploadModal.propTypes = {
-  modalShow: propTypes.bool,
-  handleModalHide: propTypes.func
+  modalShow: PropTypes.bool,
+  handleModalHide: PropTypes.func
 };
 
 export default UploadModal;

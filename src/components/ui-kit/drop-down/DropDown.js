@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const DropDown = ({
   options,
@@ -37,12 +37,12 @@ const DropDown = ({
 };
 
 DropDown.propTypes = {
-  value: propTypes.string,
-  options: propTypes.array.isRequired,
-  onChange: propTypes.func,
-  defaultValue: propTypes.string,
-  disabled: propTypes.bool,
-  customDropDown: propTypes.func
+  value: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  onChange: PropTypes.func,
+  defaultValue: PropTypes.string,
+  disabled: PropTypes.bool,
+  customDropDown: PropTypes.func
 };
 
 export default DropDown;

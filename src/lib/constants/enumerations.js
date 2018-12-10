@@ -30,5 +30,49 @@ export const modalType = {
   preview: "preview",
   content_view: "content_view",
   processed: "processed",
-  edit_profile: "edit_profile"
+  edit_profile: "edit_profile",
+  share: "share"
 };
+
+export const mediaTypes = {
+  video: "video",
+  image: "image"
+};
+
+export const procedure = {
+  public: "public",
+  anonymous: "anonymous"
+}
+
+export const target_group = {
+  company: "company",
+  female_and_male: "female_and_male",
+  female: "female",
+  male: "male"
+}
+
+export const tagsType = {
+  inquiryTagList: "inquiryTagList",
+  offerTagList: "offerTagList"
+}
+
+export const contentTypes = {
+  companyCampaign: "companycampaign",
+  creatorCampaign: "creatorcampaign",
+  companyParticipantCampaign: "companyparticipantcampaign",
+  ad: "ad",
+  mediaPost: "mediapost",
+  video: "video",
+  image: "image"
+};
+
+export const gender = {
+  male: "male",
+  female: "female"
+}
+
+export const userType = {
+  company: "company",
+  creator: "creator"
+}
+

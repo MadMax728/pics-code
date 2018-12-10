@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class PaymentStepThree extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ class PaymentStepThree extends Component {
   render() {
     const { handleChangeField, form } = this.props;
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-5 payment-history">
           <div className="subtitle">Complete payment transaction</div>
           <div className="history-content-wrapper">
@@ -143,10 +143,10 @@ class PaymentStepThree extends Component {
 }
 
 PaymentStepThree.propTypes = {
-  handleModalInfoShow: propTypes.func,
-  handleChangeField: propTypes.func.isRequired,
-  handleSubmit: propTypes.func.isRequired,
-  form: propTypes.any.isRequired
+  handleModalInfoShow: PropTypes.func,
+  handleChangeField: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired
 };
 
 export default PaymentStepThree;

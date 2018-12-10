@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import {
   Landing,
@@ -21,7 +21,7 @@ import {
   CreateCMSManagement
 } from "../../back-office";
 
-import * as settings from "../../web/user";
+import * as settings from "../../web/templates";
 import { PageNotFound } from "../../web/page-not-found";
 
 class BackOfficeHomeRoute extends Component {
@@ -38,11 +38,11 @@ class BackOfficeHomeRoute extends Component {
   };
 
   handleSettingCampaign = () => {
-    return <settings.SettingCampaign isBackOffice />;
+    return <settings.SettingCampaignPage isBackOffice />;
   };
 
   handleAds = () => {
-    return <settings.Ads isBackOffice />;
+    return <settings.AdsPage isBackOffice />;
   };
 
   handlePageNotFound = () => {
@@ -149,7 +149,7 @@ class BackOfficeHomeRoute extends Component {
 }
 
 BackOfficeHomeRoute.propTypes = {
-  handleModalInfoShow: propTypes.func.isRequired
+  handleModalInfoShow: PropTypes.func.isRequired
 };
 
 export default BackOfficeHomeRoute;

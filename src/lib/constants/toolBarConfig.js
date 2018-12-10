@@ -1,11 +1,35 @@
 export const toolBarConfig = {
-  options: ["inline", "fontSize", "textAlign", "colorPicker", "history"],
+  options: [
+    "inline",
+    "blockType",
+    "fontSize",
+    "textAlign",
+    "colorPicker",
+    "history"
+  ],
   inline: {
     inDropdown: false,
     className: undefined,
     component: undefined,
     dropdownClassName: undefined,
     options: ["bold", "italic", "underline"]
+  },
+  blockType: {
+    inDropdown: true,
+    options: [
+      "Normal",
+      "H1",
+      "H2",
+      "H3",
+      "H4",
+      "H5",
+      "H6",
+      "Blockquote",
+      "Code"
+    ],
+    className: undefined,
+    component: undefined,
+    dropdownClassName: undefined
   },
   fontSize: {
     options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36, 48, 60, 72, 96],

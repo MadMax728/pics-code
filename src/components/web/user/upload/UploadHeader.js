@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
+import { Translations } from "../../../../lib/translations";
 
 class UploadHeader extends Component {
   constructor(props) {
@@ -10,13 +11,15 @@ class UploadHeader extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-sm-6 modal-title">Upload image</div>
+        <div className="col-sm-6 modal-title">
+          {Translations.modal_header.upload_image}
+        </div>
         <div className="col-sm-6 text-right">
           <button className="black_button" onClick={this.props.handleModalHide}>
-            Cancel
+            {Translations.modal_header.cancle}
           </button>
           <button className="black_button" onClick={this.props.handleContinue}>
-            Continue
+            {Translations.modal_header.continue}
           </button>
         </div>
       </div>
@@ -25,8 +28,8 @@ class UploadHeader extends Component {
 }
 
 UploadHeader.propTypes = {
-  handleModalHide: propTypes.func.isRequired,
-  handleContinue: propTypes.func.isRequired
+  handleModalHide: PropTypes.func.isRequired,
+  handleContinue: PropTypes.func.isRequired
 };
 
 export default UploadHeader;

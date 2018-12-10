@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { CreateAds, CreateAdsHeader } from "../../user";
 import { modalType } from "../../../../lib/constants/enumerations";
 import moment from "moment";
+import { CreateCompanyCampaign } from "../../campaigns/create-campaign/create-company-campaign";
 
 class AdsModal extends Component {
   constructor(props, context) {
@@ -13,6 +14,7 @@ class AdsModal extends Component {
       form: {
         title: "",
         location: "",
+        address: "",
         radius: "",
         category: "",
         description: "",
@@ -57,17 +59,23 @@ class AdsModal extends Component {
     form[forThat] = date;
     this.setState({ form });
   };
+  handleActualImg = actual_img => {
+    this.setState({ actual_img });
+  };
+
+  handleScale = scale => {
+    this.setState({ scale });
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({ stepIndex: 0 });
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.modalShow) {
@@ -108,6 +116,12 @@ class AdsModal extends Component {
 
   handleModalInfoShow = () => {
     this.props.handleModalInfoMsgShow(modalType.payment_confirmation, "Ad");
+  };
+
+  handleLocation = (location, address) => {
+    this.setState({
+      form: { ...this.state.form, location, address }
+    });
   };
 
   render() {
@@ -152,6 +166,9 @@ class AdsModal extends Component {
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}
             handleEditImage={this.handleEditImage}
+            handleLocation={this.handleLocation}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
           />
         }
       />
@@ -160,11 +177,11 @@ class AdsModal extends Component {
 }
 
 AdsModal.propTypes = {
-  modalShow: propTypes.bool,
-  handleModalHide: propTypes.func,
-  handleModalInfoMsgShow: propTypes.func,
-  uploadFile: propTypes.func,
-  handleResoreState: propTypes.func
+  modalShow: PropTypes.bool,
+  handleModalHide: PropTypes.func,
+  handleModalInfoMsgShow: PropTypes.func,
+  uploadFile: PropTypes.func,
+  handleResoreState: PropTypes.func
 };
 
 export default AdsModal;

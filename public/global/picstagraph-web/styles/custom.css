@@ -1,0 +1,8 @@
+.modal-open .modal {
+    overflow-x: hidden !important;
+    overflow-y: hidden !important;
+}
+.full-width-height {
+    width: 100%;
+    height: 100%;
+}

@@ -1,29 +1,91 @@
+.info-main-title {
+  font-size: 20px;
+  margin-bottom: 0px;
+  padding: 30px 30px 0 30px;
+  &.paddindLeft0 {
+    padding: 30px 30px 0 0px;
+  }
+  &.gray_box {
+    background: #d3d3d3;
+  }
+  & ~ .text {
+    &.gray_box {
+      background: #d3d3d3;
+      min-height: 30px;
+      margin: 10px 0;
+    }
+  }
+  & ~ img.gray_img {
+    width: 100%;
+  }
+}
 .information-wrapper {
   background: $white_color;
   margin-bottom: 30px;
   .info-inner-wrapper {
     padding: 25px 30px 0px 30px;
+    background-color: #ffffff;
   }
   @include float();
+  height: calc(100vh - 100px);
+  &.overflow-y {
+    overflow-y: auto;
+  }
+
   .feed_header {
     padding: 0px;
     margin-bottom: 24px;
     .like_wrapper {
       padding: 0px;
     }
+    &.feed_header_gray_box {
+      .gray_box {
+        min-height: 20px;
+        background-color: #d3d3d3;
+      }
+      .normal_title.gray_box {
+      }
+      .secondary_title.gray_box {
+      }
+      .grey_title.gray_box {
+        min-height: 20px;
+        background-color: #d3d3d3;
+      }
+    }
   }
-  .info-main-title {
-    font-size: 20px;
-    margin-bottom: 38px;
+  .feed_content.feed_content_gray_box {
+    .feed_description {
+      .info_wrapper {
+      }
+    }
+  }
+  textarea.form-control {
+    max-width: 100%;
+    min-width: 100%;
+    max-height: 50px;
+    min-height: 30px;
+    height: 30px;
+    resize: none;
+    overflow: hidden;
+    &:focus {
+      border-color: #000;
+      box-shadow: none;
+      outline: none;
+    }
   }
   .text {
     font-size: 16px;
     line-height: 25px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    &.paddTop20 {
+      padding-top: 20px;
+    }
   }
   img {
     width: 100%;
-    margin-bottom: 15px;
+    &.padd20{
+			padding: 0 20px;
+		}
   }
   button {
     width: 100%;
@@ -43,20 +105,37 @@
       padding: 10px 30px;
       img {
         width: 45px;
+        margin-bottom: 0px;
       }
       .emoji_wrapper {
         img {
           width: 20px;
+          padding-top: 16px;
         }
       }
       .profile_image {
         display: inline-block;
         float: left;
+        &.wid45{
+          width: 55px;
+        }
       }
       .comment-content {
         p {
-          padding-left: 60px;
+          padding-left: 70px;
         }
+      }
+      .show_more_options {
+        position: relative;
+        a {
+          position: absolute;
+          width: 30px;
+          top: 24px;
+          right: 0;
+        }
+      }
+      .commenter-info {
+        padding-top: 8px !important;
       }
     }
     .view-more-comments {

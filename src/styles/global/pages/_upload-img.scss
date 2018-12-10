@@ -1,5 +1,28 @@
 .upload-image-modal {
   background: #333;
+  &.create-campaign-modal {
+    .modal-body {
+      & > div {
+        height: auto;
+        & > div.col-sm-6.no-padding:nth-child(2) {
+          img.widthHeightAuto {
+            height: 378px;
+            max-height: calc(100% - 65px);
+            width: 100%;
+          }
+        }
+      }
+    }
+    .modal-body {
+      .box {
+        width: 100%;
+        max-height: calc(100% - 65px);
+        & ~ .add-wrapper {
+          height: 65px;
+        }
+      }
+    }
+  }
   .modal-dialog {
     width: 915px;
   }
@@ -26,10 +49,24 @@
       padding: 20px;
       .profile_image {
         float: left;
+        &.wid45{
+          width: 55px;
+        }
         img {
           width: 45px;
           margin-right: 10px;
         }
+      }
+      div.description {
+        border: 1px solid #979797;
+        height: auto;
+        margin-top: 10px;
+        min-height: 100px;
+        overflow: auto;
+        padding: 5px;
+        width: 100%;
+        word-break: break-word;
+        max-height: 100px;
       }
       .user-title {
         padding-top: 4px;

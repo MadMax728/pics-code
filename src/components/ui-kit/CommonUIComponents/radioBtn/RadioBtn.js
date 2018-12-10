@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { RadioGroup, Radio } from "react-radio-group";
 
 class RadioBtn extends Component {
@@ -12,12 +12,12 @@ class RadioBtn extends Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.setState({
       selectedValue: this.props.items[0].name,
       name: this.props.name
     });
-  }
+  };
 
   handleChange = (value, event) => {
     this.setState({ selectedValue: value });
@@ -55,14 +55,14 @@ class RadioBtn extends Component {
 }
 
 RadioBtn.propTypes = {
-  onChange: propTypes.func,
-  name: propTypes.string,
-  items: propTypes.arrayOf(
-    propTypes.shape({
-      name: propTypes.string,
-      value: propTypes.string,
-      checked: propTypes.bool,
-      className: propTypes.string
+  onChange: PropTypes.func,
+  name: PropTypes.string,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      value: PropTypes.string,
+      checked: PropTypes.bool,
+      className: PropTypes.string
     }).isRequired
   ).isRequired
 };

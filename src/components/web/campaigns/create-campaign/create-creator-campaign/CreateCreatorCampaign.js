@@ -1,11 +1,10 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   PaymentStepOne,
-  PaymentStepTwo,
-  PaymentStepThree
+  PaymentStepTwo
 } from "../../../user/payment/steps";
 import * as images from "../../../../../lib/constants/images";
 
@@ -22,17 +21,27 @@ class CreateCreatorCampaign extends Component {
       handleModalInfoShow,
       isPreview,
       handlePrivewClose,
-      isFor,
       form,
+      isFor,
       handleChangeField,
       handleSubmit,
       handleDate,
-      handleEditImage
+      handleContentChange,
+      contentText,
+      handleEditImage,
+      handleLocation,
+      handleActualImg,
+      handleScale,
+      handleOfferTagChange,
+      handleOfferTagDelete,
+      handleInquiryTagChange,
+      handleInquiryTagDelete,
+      handleSelect
     } = this.props;
 
     return (
       <div className="col-xs-12 no-padding">
-        {isPreview && <Preview />}
+        {isPreview && <Preview form={form} />}
         {isPreview && (
           <button
             onClick={handlePrivewClose}
@@ -52,17 +61,30 @@ class CreateCreatorCampaign extends Component {
               form={form}
               isFor={isFor}
               handleEditImage={handleEditImage}
+              handleLocation={handleLocation}
+              handleActualImg={handleActualImg}
+              handleScale={handleScale}
+              handleInquiryTagChange={handleInquiryTagChange}
+              handleInquiryTagDelete={handleInquiryTagDelete}
+              handleOfferTagChange={handleOfferTagChange}
+              handleOfferTagDelete={handleOfferTagDelete}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
-            <StepTwo handleChangeField={handleChangeField} />
+            <StepTwo 
+              handleChangeField={handleChangeField} 
+              contentText={contentText}
+              handleContentChange={handleContentChange}
+            />
           ))}
         {!isPreview &&
           (stepIndex === 2 && (
             <StepThree
               handleChangeField={handleChangeField}
               handleDate={handleDate}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -76,37 +98,39 @@ class CreateCreatorCampaign extends Component {
           (stepIndex === 4 && (
             <PaymentStepTwo
               forThat={forThat}
-              handleChangeField={handleChangeField}
-              form={form}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 5 && (
-            <PaymentStepThree
-              forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
               handleChangeField={handleChangeField}
               form={form}
               handleSubmit={handleSubmit}
             />
-          ))}
+        ))}
       </div>
     );
   }
 }
 
 CreateCreatorCampaign.propTypes = {
-  stepIndex: propTypes.any.isRequired,
-  forThat: propTypes.string.isRequired,
-  handleModalInfoShow: propTypes.func.isRequired,
-  isPreview: propTypes.bool.isRequired,
-  handlePrivewClose: propTypes.func.isRequired,
-  handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
-  isFor: propTypes.bool.isRequired,
-  handleSubmit: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired
+  stepIndex: PropTypes.any.isRequired,
+  forThat: PropTypes.string.isRequired,
+  handleModalInfoShow: PropTypes.func.isRequired,
+  isPreview: PropTypes.bool.isRequired,
+  handlePrivewClose: PropTypes.func.isRequired,
+  handleChangeField: PropTypes.func.isRequired,
+  isFor: PropTypes.bool.isRequired,
+  form: PropTypes.any.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleDate: PropTypes.func.isRequired,
+  handleContentChange: PropTypes.func.isRequired,
+  contentText: PropTypes.any.isRequired,
+  handleEditImage: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  handleActualImg: PropTypes.func,
+  handleScale: PropTypes.func,
+  handleOfferTagChange: PropTypes.func.isRequired,
+  handleOfferTagDelete: PropTypes.func.isRequired,
+  handleInquiryTagChange: PropTypes.func.isRequired,
+  handleInquiryTagDelete: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;

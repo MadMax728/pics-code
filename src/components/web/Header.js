@@ -6,9 +6,10 @@ import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import NavItem from "react-bootstrap/lib/NavItem";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
+import { Redirect } from "react-router";
 
 export default class Header extends Component {
   constructor(props) {
@@ -16,7 +17,8 @@ export default class Header extends Component {
     this.state = {
       navExpanded: false,
       userNavExpanded: false,
-      offsetHeight: 0
+      offsetHeight: 0,
+      searchText: ""
     };
   }
 
@@ -24,9 +26,9 @@ export default class Header extends Component {
     document.addEventListener("click", this.handleOutsideClick);
     document.addEventListener("scroll", this.onScroll);
   };
-  componenWillUnmount = () => {
+  componentWillUnmount() {
     document.removeEventListener("click", this.handleOutsideClick);
-  };
+  }
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
   };
@@ -40,9 +42,9 @@ export default class Header extends Component {
   };
 
   onScroll = () => {
-    let offsetHeight = window.pageYOffset;
+    const offsetHeight = window.pageYOffset;
     this.setState({
-      offsetHeight: offsetHeight
+      offsetHeight
     });
   };
 
@@ -61,14 +63,29 @@ export default class Header extends Component {
   handleNavClick = () => {
     this.toggleUserNav();
   };
+  onSearchClick = e => {
+    e.preventDefault();
+    const path = "?search=" + this.state.searchText;
+    this.props.history.push(path);
+  };
+
+  onInputChange = e => {
+    this.setState({
+      searchText: e.target.value
+    });
+  };
 
   handleModalMessage = () => {
     this.props.handleModalShow(modalType.messages);
   };
 
+  handleMessage = e => {
+    this.props.handleModalShow(modalType.messages, { id: e.target.id });
+  };
+
   render() {
     return (
-      <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
+      <header className={this.state.offsetHeight > 250 ? "fixed" : "" }>
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">
@@ -90,9 +107,11 @@ export default class Header extends Component {
                       type="text"
                       className="form-control"
                       placeholder="Search"
+                      onChange={this.onInputChange}
+                      value={this.state.searchText}
                     />
                     <span className="input-group-addon">
-                      <button type="submit">
+                      <button onClick={this.onSearchClick}>
                         <span className="search_icon">
                           <img src={images.search} alt="Search" />
                         </span>
@@ -110,7 +129,7 @@ export default class Header extends Component {
                     <span>{Translations.navigation.home}</span>
                   </RouteNavItem>
                   <RouteNavItem
-                    to={routes.CAMPAIGN_ROUTE}
+                    to={`/campaign/company`}
                     className={`menu_public`}
                     closeMenu={this.toggleNav}
                   >
@@ -132,7 +151,7 @@ export default class Header extends Component {
                     id="basic-nav-dropdown"
                     className={`menu_notifications`}
                   >
-                    <Notifications />
+                    <Notifications handleMessage={this.handleMessage} />
                   </NavDropdown>
 
                   <RouteNavItem
@@ -153,5 +172,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  handleModalShow: propTypes.func
+  handleModalShow: PropTypes.func,
+  history: PropTypes.any
 };

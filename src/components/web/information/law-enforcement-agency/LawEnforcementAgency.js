@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 
 class LawEnforcementAgency extends Component {
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     return (

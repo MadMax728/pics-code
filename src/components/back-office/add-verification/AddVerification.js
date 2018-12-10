@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { verification_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
+import { Translations } from "../../../lib/translations";
 
 class AddVerification extends Component {
   constructor(props, context) {
@@ -18,7 +18,6 @@ class AddVerification extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   // handelSubmit called when click on submit
@@ -51,7 +50,7 @@ class AddVerification extends Component {
     return (
       <div key={rowIndex}>
         <button name={row.name} onClick={this.removeVerification}>
-          Remove Verification
+          {Translations.admin.Remove_Verification}
         </button>
       </div>
     );
@@ -63,30 +62,30 @@ class AddVerification extends Component {
     </span>
   );
 
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     const { verifications } = this.state;
     const columns = [
       {
         dataField: "username",
-        text: "User Name",
+        text: Translations.admin.UserName,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "name",
-        text: "Name",
+        text: Translations.admin.Name,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "status",
-        text: "Admin Status",
+        text: Translations.admin.AdminStatus,
         align: "left",
         headerAlign: "left",
         sort: false,
@@ -133,18 +132,20 @@ class AddVerification extends Component {
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">Add admin</div>
+          <div className="normal_title padding-15">
+            {Translations.admin.Verification}
+          </div>
           <div className="title_with_search_dropdown_button">
             <input
               type="search"
               name="username"
               id="username"
-              placeholder="Search in users"
+              placeholder={Translations.admin.Search_in_users}
               className="flex2"
               onChange={this.handleChangeField}
             />
             <button className="wid30per" onClick={this.handleSubmit}>
-              Add
+              {Translations.admin.Add}
             </button>
           </div>
           <div className="dashboard-tbl">

@@ -18,6 +18,27 @@ export const blue_heart = `${
   process.env.REACT_APP_CDN_URL
 }/images/blue_heart.svg`;
 
+export const gray_heart = `${
+  process.env.REACT_APP_CDN_URL
+}/images/gray_heart.svg`;
+
+export const white_heart_bordered = `${
+  process.env.REACT_APP_CDN_URL
+}/images/white_heart_bordered.svg`;
+
+
+export const white_heart = `${
+  process.env.REACT_APP_CDN_URL
+}/images/white_heart.svg`;
+
+export const comapny = `${
+  process.env.REACT_APP_CDN_URL
+}/images/comapny.svg`;
+
+export const help = `${
+  process.env.REACT_APP_CDN_URL
+}/images/help.svg`;
+
 export const feed_msg = `${process.env.REACT_APP_CDN_URL}/images/feed_msg.svg`;
 
 export const feed_like = `${
@@ -26,9 +47,17 @@ export const feed_like = `${
 
 export const settings = `${process.env.REACT_APP_CDN_URL}/images/settings.svg`;
 
+export const share = `${process.env.REACT_APP_CDN_URL}/images/share_icon.png`;
+
+export const check = `${process.env.REACT_APP_CDN_URL}/images/check.svg`;
+
 export const profile_pic = `${
   process.env.REACT_APP_CDN_URL
 }/images/profile_pic.jpg`;
+
+export const placeholder_pic = `${
+  process.env.REACT_APP_CDN_URL
+}/images/placeholder_pic.png`;
 
 export const campaign1 = `${process.env.REACT_APP_CDN_URL}/campaigns/1.jpg`;
 
@@ -143,3 +172,6 @@ export const close = `${process.env.REACT_APP_CDN_URL}/images/close.svg`;
 
 export const crop_pic = `${process.env.REACT_APP_CDN_URL}/images/crop-pic.jpg`;
 export const comment = `${process.env.REACT_APP_CDN_URL}/images/comment.PNG`;
+export const profile_pic_gray = `${
+  process.env.REACT_APP_CDN_URL
+}/images/profile_pic_gray.png`;

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
-import { ImageCropper } from "../../../../ui-kit";
+import PropTypes from "prop-types";
+import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
+import { Translations } from "../../../../../lib/translations";
 
 class StepOne extends Component {
   constructor(props) {
@@ -13,11 +14,18 @@ class StepOne extends Component {
   };
 
   render() {
-    const { form, handleChangeField, uploadFile, handleEditImage } = this.props;
-    console.log("form", this.props.form);
+    const {
+      form,
+      handleChangeField,
+      uploadFile,
+      handleEditImage,
+      handleLocation,
+      handleActualImg,
+      handleScale
+    } = this.props;
 
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
           <div className="no-padding profile_image">
             <img
@@ -27,12 +35,14 @@ class StepOne extends Component {
             />
           </div>
           <div className="user-title">
-            <div className="normal_title">Title of campaigns</div>
+            <div className="normal_title">
+              {Translations.create_ads.title_of_ads}
+            </div>
             <div className="secondary_title">User name</div>
           </div>
           <form>
             <div className="form-group">
-              <label htmlFor="title">Add title</label>
+              <label htmlFor="title">{Translations.create_ads.add_title}</label>
               <input
                 type="text"
                 value={this.props.form.title}
@@ -41,16 +51,19 @@ class StepOne extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Location">Add Location</label>
-              <input
-                type="text"
-                name="location"
-                value={this.props.form.location}
-                onChange={handleChangeField}
+              <label htmlFor="Location">
+                {Translations.create_ads.add_location}
+              </label>
+              <PlaceAutoCompleteLocation
+                className=""
+                handleLocation={handleLocation}
+                value={this.props.form.address}
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Radius">Add Radius</label>
+              <label htmlFor="Radius">
+                {Translations.create_ads.add_radius}
+              </label>
               <select
                 name="radius"
                 value={this.props.form.radius}
@@ -64,7 +77,9 @@ class StepOne extends Component {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="Category">Add Category</label>
+              <label htmlFor="Category">
+                {Translations.create_ads.add_category}
+              </label>
               <select
                 onChange={handleChangeField}
                 value={this.props.form.category}
@@ -78,7 +93,9 @@ class StepOne extends Component {
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="Description">Add Description</label>
+              <label htmlFor="Description">
+                {Translations.create_ads.add_description}
+              </label>
               <textarea
                 className="form-control"
                 value={this.props.form.description}
@@ -87,7 +104,9 @@ class StepOne extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="target">Add target group</label>
+              <label htmlFor="target">
+                {Translations.create_ads.add_target_group}
+              </label>
               <ul className="options">
                 <li
                   className="full-width-input-wrapper wid49"
@@ -101,7 +120,9 @@ class StepOne extends Component {
                     className="black_button"
                     defaultChecked={form.target_group === "male-female"}
                   />
-                  <label htmlFor="male-female">Male & Female</label>
+                  <label htmlFor="male-female">
+                    {Translations.create_ads.male_female}
+                  </label>
                 </li>
                 <li className="wid49" onChange={handleChangeField}>
                   <input
@@ -112,7 +133,7 @@ class StepOne extends Component {
                     className="black_button"
                     defaultChecked={form.target_group === "male"}
                   />
-                  <label htmlFor="male">Male</label>
+                  <label htmlFor="male">{Translations.create_ads.male}</label>
                 </li>
                 <li className="wid49" onChange={handleChangeField}>
                   <input
@@ -122,27 +143,34 @@ class StepOne extends Component {
                     name="target_group"
                     defaultChecked={form.target_group === "female"}
                   />
-                  <label htmlFor="female">Female</label>
+                  <label htmlFor="female">
+                    {Translations.create_ads.female}
+                  </label>
                 </li>
               </ul>
             </div>
-            <div className="subtitle">Define details</div>
+            <div className="subtitle">
+              {Translations.create_ads.define_details}
+            </div>
             <div className="form-group">
-              <label htmlFor="call">Add call to action button</label>
+              <label htmlFor="call">
+                {Translations.create_ads.action_button}
+              </label>
               <select
                 name="call_to_action_button"
                 onChange={handleChangeField}
                 onBlur={handleChangeField}
               >
-                <option>Yes</option>
-                <option>No</option>
+                <option>{Translations.create_ads.yes}</option>
+                <option>{Translations.create_ads.no}</option>
               </select>
             </div>
             <div className="form-group">
-              <label htmlFor="Insert_link">Insert link</label>
+              <label htmlFor="Insert_link">
+                {Translations.create_ads.insert_link}
+              </label>
               <input
                 type="text"
-                insert_link
                 value={this.props.form.insert_link}
                 name="insert_link"
                 onChange={handleChangeField}
@@ -156,10 +184,9 @@ class StepOne extends Component {
             handleEditImage={handleEditImage}
             isCircle={false}
             ref={this.imageCrop}
+            handleActualImg={handleActualImg}
+            handleScale={handleScale}
           />
-          <div className="add-wrapper">
-            <img src={images.plus_button} alt={"plus_button"} />
-          </div>
         </div>
       </div>
     );
@@ -167,10 +194,13 @@ class StepOne extends Component {
 }
 
 StepOne.propTypes = {
-  handleChangeField: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
-  uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired
+  handleChangeField: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired,
+  uploadFile: PropTypes.func.isRequired,
+  handleEditImage: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  handleActualImg: PropTypes.func,
+  handleScale: PropTypes.func
 };
 
 export default StepOne;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { PaymentConfirmation } from "../../user";
 
 class PaymentConfirmationModal extends Component {
@@ -32,10 +32,10 @@ class PaymentConfirmationModal extends Component {
 }
 
 PaymentConfirmationModal.propTypes = {
-  modalInfoShow: propTypes.bool,
-  handleModalInfoHide: propTypes.func,
-  modalInfoMsg: propTypes.string,
-  handleModalHide: propTypes.func
+  modalInfoShow: PropTypes.bool,
+  handleModalInfoHide: PropTypes.func,
+  modalInfoMsg: PropTypes.string,
+  handleModalHide: PropTypes.func
 };
 
 export default PaymentConfirmationModal;

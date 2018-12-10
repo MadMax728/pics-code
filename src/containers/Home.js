@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Header from "../components/web/Header";
 import Footer from "../components/web/Footer";
+import { setCookie, getCookie } from "../lib/utils/helpers";
+import { Translations } from "../lib/translations";
 import {
   LeftSideBar,
   RightSideBar,
@@ -10,6 +12,7 @@ import {
   HomeRoute,
   MessageBar
 } from "../components/common";
+import PropTypes from "prop-types";
 
 class Home extends Component {
   constructor(props, context) {
@@ -22,7 +25,8 @@ class Home extends Component {
       modalInfoMsg: "",
       message: "",
       image: null,
-      data: null
+      profile: null,
+      data: null,
     };
   }
 
@@ -54,6 +58,20 @@ class Home extends Component {
     this.setState({ modalShow: true, modalType: e, data });
   };
 
+  /**
+   * Here we have to handle language set
+   * In localizations and cookie
+   * default we have to consider english - en
+   * Todo - We can modify cookie logic in production mode
+   */
+  handleLanguageSwitch = languageCode => {
+    // set cookie for default language
+    setCookie("interfaceLanguage", languageCode, 90);
+    // set language using language code
+    Translations.setLanguage(languageCode || "en");
+    // we need to update state to re render this component on language switch
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -67,12 +85,20 @@ class Home extends Component {
     this.setState({ image });
   };
 
-  render() {
-    const { message, data, image } = this.state;
+  handleProfile = profile => {
+    this.setState({ profile });
+  };
 
+  render() {
+    const { message, image, profile } = this.state;
+    // here get current language based on cookie inputs on home render
+    Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div>
-        <Header handleModalShow={this.handleModalShow} />
+        <Header
+          handleModalShow={this.handleModalShow}
+          history={this.props.history}
+        />
         <section>
           <MessageBar message={message} />
 
@@ -92,12 +118,16 @@ class Home extends Component {
             handleModalHide={this.handleModalHide}
             modalInfoMsg={this.state.modalInfoMsg}
             handleEditImage={this.handleEditImage}
+            handleProfile={this.handleProfile}
             image={image}
           />
 
           <div className="container">
             <div className="row">
-              <TopBarInfo handleModalShow={this.handleModalShow} />
+              <TopBarInfo
+                handleModalShow={this.handleModalShow}
+                handleModalInfoShow={this.handleModalInfoShow}
+              />
 
               <div className="left_menu_second no-padding">
                 <LeftSideBar getFilter={this.getFilter} />
@@ -108,11 +138,13 @@ class Home extends Component {
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalShow={this.handleModalShow}
                   image={image}
+                  profile={profile}
                 />
               </div>
 
               <div className="right_bar no-padding">
                 <RightSideBar
+                  handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
                   handleMessageBar={this.handleMessageBar}
                 />
@@ -125,5 +157,10 @@ class Home extends Component {
     );
   }
 }
+Home.propTypes = {
+  history: PropTypes.any,
+};
+
+
 
 export default Home;

@@ -7,6 +7,7 @@ import {
   setNewPassword,
   submitResetPassword
 } from "../../../actions/forgotPassword";
+import { Auth } from "../../../auth";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import connect from "react-redux/es/connect/connect";
 class ResetPassword extends Component {
@@ -21,27 +22,29 @@ class ResetPassword extends Component {
     };
   }
 
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutUser();
+  };
+
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
     if (!this.formValid()) {
       return false;
     }
-    let data = {
+    const data = {
       password: this.state.form.password,
       repeatPassword: this.state.form.repeat_password
     };
     this.props.setNewPassword(data).then(() => {
-      console.log("new password", this.props.newPasswordData);
       this.props.history.push(routes.ROOT_ROUTE);
     });
   };
@@ -82,7 +85,7 @@ class ResetPassword extends Component {
                     type="password"
                     className="form-control"
                     id="password"
-                    placeholder="Enter new password"
+                    placeholder={Translations.reset_password.enetr_password}
                     autoComplete="Password"
                     name="password"
                     value={form.password ? form.password : ""}
@@ -100,7 +103,7 @@ class ResetPassword extends Component {
                     type="password"
                     className="form-control"
                     id="new-password"
-                    placeholder="Repeat password"
+                    placeholder={Translations.reset_password.repeat_password}
                     autoComplete="Repeat Password"
                     name="repeat_password"
                     value={form.repeat_password ? form.repeat_password : ""}
@@ -115,7 +118,7 @@ class ResetPassword extends Component {
                 </div>
                 <div className="form-group">
                   <button className="blue_button" onClick={this.handleSubmit}>
-                    Send
+                    {Translations.reset_password.send}
                   </button>
                 </div>
               </form>

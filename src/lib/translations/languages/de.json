@@ -1,0 +1,631 @@
+{
+  "app_name": "Picstagraph",
+
+  "offen": "In der Picstagraph-App offenen",
+
+  "subscribe": "Subscribe",
+
+  "subscribed": "Subscribed",
+
+  "like": "Like",
+
+  "like_you_too": "Like you too",
+
+  "message": "Message",
+
+  "upload_title_image": "Upload title image",
+
+  "view_more_comments": "View more comments",
+
+  "apply_campaign": "Apply for this campaign",
+
+  "favourite_campaigns": "Favourite Campaigns",
+
+  "about": {
+    "general_information": "General informations",
+    "username": "User name",
+    "name_company": "Name / Company",
+    "date_of_birth": "Date of Birth",
+    "gender": "Gender",
+    "category": "Category",
+    "location": "Location",
+    "phone_number": "Phone number",
+    "email": "Email",
+    "web_site": "Web site",
+    "profile_description": "Profile description",
+    "personal_interest": "Personal Interest",
+    "offer_tag": "Offer tag",
+    "inquiry_tag": "Inquiry tag"
+  },
+
+  "upload_modal": {
+    "title_of_upload": "Title of Upload",
+    "add_location": "Add Location",
+    "add_category": "Add Category",
+    "add_description": "Add Description",
+    "upload_title_image": "Upload title image"
+  },
+
+  "create_ads": {
+    "runtime": "Runtime",
+    "runtime_passed": "Runtime passed",
+    "remaining_runtime": "Remaining runtime",
+    "title_of_ads": "Title of Ads",
+    "add_title": "Add title",
+    "add_location": "Add Location",
+    "add_radius": "Add Radius",
+    "add_category": "Add Category",
+    "add_description": "Add Description",
+    "add_target_group": "Add Target group",
+    "male_female": "Female & Male",
+    "male": "Male",
+    "female": "Female",
+    "define_details": "Define details",
+    "action_button": "Add call to action button",
+    "yes": "Yes",
+    "no": "No",
+    "insert_link": "Insert link",
+    "define_runtime_budget": "Define runtime & budget",
+    "start": "Start",
+    "end": "End",
+    "define_daily_budget": "Define daily budget",
+    "maximum_number_of_clicks": "Maximum number of clicks",
+    "max_1200_clicks": "Max. 1200 clicks",
+    "information_on_payment": "Information on payment",
+    "actively_clicks": "You only have to pay when a user actively clicks on your ad on Picstagraph.",
+    "cost_control": "100 % cost control",
+    "cost_per_Click": "Cost per Click: 1,00 €",
+    "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
+    "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
+    "clicks": "Clicks",
+    "views": "Views",
+    "type": "Type",
+    "applications": "Applications",
+    "status": "Status",
+    "statistics": "Statistics",
+    "total_budget": "Total budget",
+    "budget_spent": "Budget spent",
+    "remaining_Budget": "Remaining Budget",
+    "daily_budget": "Daily budget",
+    "daily_budget_spent": "Daily budget spent",
+    "remaining_daily_budget": "Remaining daily budget",
+    "Performance": "Performance"
+  },
+
+  "create_campaigns": {
+    "clicks": "Clicks",
+    "views": "Views",
+    "title_of_campaigns": "Title of campaigns",
+    "title": "Title",
+    "add_title": "Add title",
+    "inquiry_tag": "Inquiry tag",
+    "select_inquiry": "Select Inquiry",
+    "inquiry": "Inquiry",
+    "offer_tag": "Offer tag",
+    "select_offer": "Select offer",
+    "offer": "Offer",
+    "details_of_campaigns": "Details of campaigns",
+    "male": "Male",
+    "female": "Female",
+    "male_female": "Female & Male",
+    "company": "Company",
+    "target_group": "Target group",
+    "image": "image",
+    "video": "Video",
+    "type": "Type",
+    "anonymous": "Anonymous",
+    "public": "Public",
+    "procedure": "Procedure",
+    "application_criteria": "Application criteria",
+    "select_category": "Select category",
+    "add_category": "Add Category",
+    "add_location": "Add Location",
+    "define_runtime_budget": "Define runtime & budget",
+    "start": "Start",
+    "end": "End",
+    "define_daily_budget": "Define daily budget",
+    "maximum_number_of_clicks": "Maximum number of clicks",
+    "max_1200_clicks": "Max. 1200 clicks",
+    "information_on_payment": "Information on payment",
+    "actively_clicks": "You only have to pay when a user actively clicks on your ad on Picstagraph.",
+    "cost_control": "100 % cost control",
+    "cost_per_Click": "Cost per Click: 1,00 €",
+    "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
+    "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
+    "applications": "Applications",
+    "status": "Status",
+    "statistics": "Statistics"
+  },
+
+  "messages_modal": {
+    "unknown": "Unknown",
+    "messages": "Messages",
+    "Companies": "Companies"
+  },
+  "modal_header": {
+    "cancle": "Cancel",
+    "back": "Back",
+    "preview": "Preview",
+    "continue": "Continue",
+    "create_campaign": "Create Campaign",
+    "upload_image": "Upload image",
+    "create_ad": "Create Ad",
+    "edit_profile_image": "Edit Profile Image"
+  },
+
+  "notification": {
+    "subscribed_to_your_profile": "Subscribed to your profile",
+    "notification": "Notifications",
+    "like_you": "Like You",
+    "request": "Requests"
+  },
+
+  "navigation": {
+    "home": "Home",
+    "profile": "Profile",
+    "campaign": "Campaign",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "open": "Open"
+  },
+
+  "information_menu": {
+    "our_vision": "Our Vision",
+    "imprint": "Imprint",
+    "campaigns": "Campaigns",
+    "campaign_policy": "Campaign Policy",
+    "advertising": "Advertising",
+    "advertising_policy": "Advertising Policy",
+    "general_terms_and_conditions": "General Terms and Conditions",
+    "data_protection_and_privacy_policy": "Data protection and privacy Policy",
+    "platform_policy": "Platform policy",
+    "cancellation_policy": "Cancellation Policy",
+    "terms_of_use": "Terms of use"
+  },
+
+  "tool_tips": {
+    "report": "Report Post",
+    "save": "Save Post",
+    "lock": "locks / unlocks content"
+  },
+
+  "back_office_menu": {
+    "dashboard": "Dashboard",
+    "cms_managment": "CMS Management",
+    "add_admin": "Add Admin",
+    "add_verification": "Add Verification",
+    "add_voucher": "Add Voucher",
+    "data_download": "Data Download"
+  },
+
+  "review_menu": {
+    "campaigns": "Campaign",
+    "ads": "Ads"
+  },
+
+  "review_content_menu": {
+    "images": "Images",
+    "videos": "Videos",
+    "campaigns": "Campaigns",
+    "pics": "Pics",
+    "ads": "Ads",
+    "comments": "Comments",
+    "user": "User"
+  },
+
+  "review_filter": {
+    "status": {
+      "name": "Status",
+      "type": "select"
+    }
+  },
+
+  "reported_content_filter": {
+    "relevance": {
+      "name": "Relevance",
+      "type": "select"
+    },
+    "status": {
+      "name": "Status",
+      "type": "select"
+    }
+  },
+
+  "base_footer": {
+    "support": "Support",
+    "data_protection_and_privacy_policy": "Data Protehtion & Privacy Policy",
+    "legal_notice": "Legal Notice",
+    "general_terms_and_conditions": "General terms & Conditions",
+    "netzdg": "NETZDG",
+    "language": "Language",
+    "terms_of_use": "Terms of Use",
+    "better": "For a better user experience we use ",
+    "agree": "By using picstagraph you do agree",
+    "about_us": "About us",
+    "terms_and_condition": "Terms & Condition",
+    "cookies": "Cookies"
+  },
+
+  "right_side_bar_statistics": {
+    "all": "All",
+    "outstanding": "Outstanding",
+    "processed": "Processed",
+    "not_processed": "Not processed"
+  },
+
+  "service_menu": {
+    "support": "Support",
+    "verification": "Verification",
+    "feedback": "Feedback",
+    "reported_content": "Reported Content",
+    "delete_account": "Delete account",
+    "law_enforcement_agency": "Law enforcement agency"
+  },
+
+  "left_sidebar_filter": {
+    "relevance": {
+      "name": "Relevance",
+      "type": "radio"
+    },
+    "location": {
+      "name": "Location",
+      "type": "auto-complete"
+    },
+    "radius": {
+      "name": "Radius",
+      "type": "select"
+    },
+    "category": {
+      "name": "Category",
+      "type": "select"
+    },
+    "procedure": {
+      "name": "Procedure",
+      "type": "radio"
+    },
+    "content": {
+      "name": "Content",
+      "type": "radio"
+    },
+    "target_group": {
+      "name": "Target group",
+      "type": "select"
+    },
+    "offer": {
+      "name": "Offer",
+      "type": "select"
+    },
+    "offer_tag": {
+      "name": "Offer tag",
+      "type": "text"
+    },
+    "inquiry": {
+      "name": "Inquiry",
+      "type": "select"
+    },
+    "inquiry_tag": {
+      "name": "Inquiry tag",
+      "type": "text"
+    },
+    "reset_filters": {
+      "name": "Reset filters",
+      "type": "button"
+    },
+    "gender": {
+      "name": "Gender",
+      "type": "radio"
+    },
+    "age": {
+      "name": "Age",
+      "type": "select"
+    }
+  },
+
+  "message_module": {
+    "name": "Message",
+    "type": {
+      "subscribed": "Subscribed",
+      "unknown": "Unknown",
+      "like_you": "Like you",
+      "companies": "Companies"
+    }
+  },
+
+  "mobile_sidebar_information": {
+    "aboutus": "About Us",
+    "legal_notice": "Legal Notice",
+    "support": "Support",
+    "campaigns": "Campaigns",
+    "ads": "Ads",
+    "verification": "Verification"
+  },
+
+  "mobile_sidebar_services": {
+    "terms_conditions": "General Terms and Conditions",
+    "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
+    "terms_use": "Terms of Use",
+    "paltform_policy": "Paltform Policy",
+    "advertising_policy": "Advertising Policy",
+    "campaign_policy": "Campaign policy",
+    "netzDg": "NetzDg",
+    "reported_content": "Reported Content",
+    "payment_method": "Payment Method",
+    "cancellation_policy": "Cancellation Policy",
+    "data_download": "Data Download",
+    "delete_account": "Delete Account",
+    "law_enforcement_agency": "Law Enforcement Agency",
+    "report_problem": "Report Problem",
+    "cookies": "Cookies",
+    "feedback": "Feedback"
+  },
+
+  "top_bar_info": {
+    "upload": "Upload",
+    "create_campaign": "Create Campaign",
+    "create_ad": "Create Ad",
+    "subscriber": "Subscriber",
+    "subscribed": "Subscribed",
+    "posts": "Posts",
+    "subscribe": "Subscribe",
+    "message": "Message",
+    "like_you": "Like You"
+  },
+
+  "left_sidebar": {
+    "news": "News",
+    "explore": "Explore",
+    "participants": "Participants",
+    "user": "User",
+    "pics": "Pics",
+    "company": "Company",
+    "creator": "Creator",
+    "information": "Information"
+  },
+
+  "left_sidebar_owner_menu": {
+    "news_feed": " News Feeds",
+    "about": "About",
+    "saved": "Saved"
+  },
+
+  "left_sidebar_settings": {
+    "edit_profile": "Edit profile",
+    "admin": "Admin",
+    "privacy": "Privacy",
+    "bussiness_profile": "Bussiness profile",
+    "campaign": "Campaign",
+    "ads": "Ads",
+    "bills_and_receipts": "Bills and receipts",
+    "data_download": "Data Download",
+    "logout": "Logout"
+  },
+
+  "footer": {
+    "copyright": " 2018 Picstagraph | All rights reserved ",
+    "disclaimer": " Disclaimers and Other Legal Documents ",
+    "privacy": " Privacy & Terms of Use "
+  },
+
+  "loading_messages": {
+    "loading_with_ellipsis": "Loading..."
+  },
+
+  "user_profile": {
+    "my_profile": "My Profile",
+    "username": "username",
+    "email": "Email Address",
+    "confirm_email": "Confirm Email Address",
+    "phone": "Preferred Phone Number",
+    "security_question": "Security Question {0}",
+    "edit_profile": "Edit Profile",
+    "change_password": "Change Password",
+    "select_one": "Select One",
+    "cancel": "Cancel",
+    "submit": "Save Changes",
+    "invalid_email": "Email Address is invalid. ",
+    "invalid_confirm_email": "Confirm Email Address is invalid. ",
+    "security_question_answer_requirements": "Answer fields should be a minimum of 3 characters to 35 characters. ",
+    "security_question_text_input_label": "Answer",
+    "first_security_question_label": "First Security Question",
+    "second_security_question_label": "Second Security Question",
+    "third_security_question_label": "Third Security Question",
+    "required_question_input_validation_feedback": "Security Question {0} required. ",
+    "required_answer_input_validation_feedback": "Security Answer {0} required. ",
+    "invalid_answer_input_validation_feedback": "Invalid entry. ",
+    "profile_updated_successfully_feedback": "Profile successfully updated. ",
+    "error_codes": {
+      "100": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. ",
+      "120": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. ",
+      "121": "Email Address entered has already been registered. ",
+      "122": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. "
+    }
+  },
+
+  "header": {
+    "logout": "Logout"
+  },
+
+  "top_bar": {
+    "private_profile": "Private Profile"
+  },
+
+  "register": {
+    "username": "User name",
+    "password": "Password",
+    "repeat_password": "Repeat Password",
+    "email": "Email",
+    "male": "Male",
+    "female": "Female",
+    "register": "Register",
+    "agree": "By clicking on register you agree to our",
+    "company": "Company",
+    "free": "Register free as a",
+    "send": "Send"
+  },
+
+  "login": {
+    "header": "Do what you love",
+    "subheader": "Register for free",
+    "forgot_password": "Forgot password",
+    "login": "Log in"
+  },
+
+  "forgot_password": {
+    "email_account": "Check your email account.",
+    "confirm_email": "We sent you a confirmation email with a link.",
+    "reset_email": "Please click on the link to reset your password.",
+    "didnt_receive": "Didn´t receive an email?",
+    "request": "to request another mail.",
+    "click": "Click",
+    "here": "Here"
+  },
+
+  "filter": {
+    "reset_filter": "Reset filters",
+    "apply": "Apply"
+  },
+
+  "languages": {
+    "german": "German",
+    "english": "English"
+  },
+
+  "reset_password": {
+    "header": "Reset password",
+    "subheader": "Please enter your new password here.",
+    "enter_password": "Enter new password",
+    "repeat_password": "Repeat password",
+    "send": "Send"
+  },
+
+  "app_download": "App download",
+
+  "reset_email": {
+    "header": "Reset password",
+    "subheader": "We will send you an email to resetting your password."
+  },
+
+  "placeholders": {
+    "username_email": "User name / Email",
+    "password": "Password"
+  },
+  "edit_profile": {
+    "username": {
+      "name": "Username",
+      "type": "text"
+    },
+    "category": {
+      "name": "Category",
+      "type": "text"
+    },
+    "email": {
+      "name": "Email",
+      "type": "text"
+    },
+    "inquiry_tag": {
+      "name": "Inquiry-tag",
+      "type": "text"
+    },
+    "location": {
+      "name": "Location",
+      "type": "text"
+    },
+    "name_company": {
+      "name": "Name/Company",
+      "type": "text"
+    },
+    "offer_tag": {
+      "name": "Offer-tag",
+      "type": "text"
+    },
+    "phone_number": {
+      "name": "Phone-number",
+      "type": "text"
+    },
+    "profile_description": {
+      "name": "Profile-description",
+      "type": "text"
+    },
+    "website": {
+      "name": "Website",
+      "type": "text"
+    },
+    "gender": {
+      "name": "Gender",
+      "type": "radio"
+    },
+    "D_O_B_day": {
+      "name": "day",
+      "type": "number"
+    },
+    "D_O_B_week": {
+      "name": "week",
+      "type": "number"
+    },
+    "D_O_B_year": {
+      "name": "year",
+      "type": "number"
+    }
+  },
+  "editProfile": {
+    "username": "Username",
+    "category": "Category",
+    "email": "Email",
+    "inquiry_tag": "Inquiry-tag",
+    "location": "Location",
+    "name_company": "Name/Company",
+    "offer_tag": "Offer-tag",
+    "phone_number": "Phone-number",
+    "profile_description": "Profile-description",
+    "website": "Website",
+    "gender": "Gender",
+    "D_O_B": "Date of birth",
+    "general_information": "General Information",
+    "Personal_interests": "Personal interests"
+  },
+  "privacy": {
+    "limitations": "Limitations",
+    "set_my_profile_to_private": "Set my profile to private",
+    "Personalized_advertising": "Personalized advertising",
+    "Change_email": "Change email",
+    "Current_Email": "Current Email",
+    "New_Email": "New Email",
+    "Change_Password": "Change Password",
+    "Current_Password": "Current Password",
+    "New_Password": "New Password",
+    "Repeat_Password": "Repeat Password",
+    "Change_invoicing_address": "Change invoicing address",
+    "Invoice_recipient": "Invoice recipient",
+    "Street_number": "Street, number",
+    "Postal_code": "Postal code",
+    "city": "City",
+    "Country": "Country",
+    "VAT_identification_number": "VAT identification number",
+    "Actions": "Actions",
+    "Delete_search_history": "Delete search history",
+    "Delete": "Delete",
+    "Deactivate_my_account": "Deactivate my account",
+    "Deactivate": "Deactivate",
+    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account."
+  },
+  "Business_profile": {
+    "Business_profile": "Business profile",
+    "Business_profile_content": "By activating the business profile, you will get access to the following functions:",
+    "Create": "Create",
+    "ad": "ad",
+    "Add": "Add",
+    "email": "Email",
+    "phone_number": "phone number",
+    "Website": "Website",
+    "Activate": "Activate business profile",
+    "By_clicking_on_register_you_agree_to_our": "By clicking on register you agree to our"
+  },
+  "bill_and_receipts": {
+    "Ad_Campaign_title": "Ad / Campaign title",
+    "Runtime": "Runtime",
+    "Type": "Type",
+    "Expenses": "Expenses",
+    "Status": "Status",
+    "PDF": "PDF"
+  }
+}

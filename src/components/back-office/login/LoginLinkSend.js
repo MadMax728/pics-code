@@ -1,29 +1,58 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { AdminHeader } from "../header";
 import * as routes from "../../../lib/constants/routes";
+import { generateOTP } from "../../../actions/login";
+import PropTypes from "prop-types";
+import connect from "react-redux/es/connect/connect";
 
-const LoginLinkSend = () => {
-  return (
-    <div className="login-process">
-      <AdminHeader />
-      <section>
-        <div className="custom-container">
-          <div className="login-wrapper backoffice-login">
-            <h3 className="text-center">Backoffice log in</h3>
-            <p>Send password to admin´s email address. </p>
-            <form>
-              <div className="form-group">
-                <Link to={routes.LOGIN_PASSWORD_ROUTE} className="blue_button">
-                  Send
-                </Link>
-              </div>
-            </form>
+class LoginLinkSend extends Component {
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.generateOTP().then(() => {
+      if (this.props.loginData.user.success === true)
+        this.props.history.push(routes.LOGIN_PASSWORD_ROUTE);
+    });
+  };
+  render() {
+    return (
+      <div className="login-process">
+        <AdminHeader />
+        <section>
+          <div className="custom-container">
+            <div className="login-wrapper backoffice-login">
+              <h3 className="text-center">Backoffice log in</h3>
+              <p>Send password to admin´s email address. </p>
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <button type="submit" className="blue_button">
+                    Send
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
-  );
+        </section>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  loginData: state.loginData
+});
+
+const mapDispatchToProps = {
+  generateOTP
 };
 
-export default LoginLinkSend;
+LoginLinkSend.propTypes = {
+  generateOTP: PropTypes.func.isRequired,
+  loginData: PropTypes.object,
+  history: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginLinkSend);

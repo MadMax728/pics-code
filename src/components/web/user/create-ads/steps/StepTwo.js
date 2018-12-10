@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
+import { Translations } from "../../../../../lib/translations";
 
 class StepTwo extends Component {
   constructor(props) {
@@ -26,13 +27,15 @@ class StepTwo extends Component {
   render() {
     const { handleChangeField } = this.props;
     return (
-      <div className="modal-body">
+      <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
-          <div className="subtitle">Define runtime & budget</div>
+          <div className="subtitle">
+            {Translations.create_ads.define_runtime_budget}
+          </div>
           <div className="form-group">
             <ul className="options dates">
               <li>
-                <label htmlFor="Start">Start</label>
+                <label htmlFor="Start">{Translations.create_ads.start}</label>
                 <div className="input-group date">
                   <DatePicker
                     selected={this.props.form.start_date}
@@ -44,7 +47,7 @@ class StepTwo extends Component {
                 </div>
               </li>
               <li>
-                <label htmlFor="End">End</label>
+                <label htmlFor="End">{Translations.create_ads.end}</label>
                 <div className="input-group date">
                   <DatePicker
                     selected={this.props.form.end_date}
@@ -58,7 +61,9 @@ class StepTwo extends Component {
             </ul>
           </div>
           <div className="form-group">
-            <label htmlFor="Define">Define daily budget</label>
+            <label htmlFor="Define">
+              {Translations.create_ads.define_daily_budget}
+            </label>
             <select
               onChange={handleChangeField}
               value={this.props.form.daily_budget}
@@ -72,22 +77,25 @@ class StepTwo extends Component {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="Maximum">Maximum number of clicks</label>
+            <label htmlFor="Maximum">
+              {Translations.create_ads.maximum_number_of_clicks}
+            </label>
             <div className="meter orange nostripes">
               <span style={{ width: "157px" }} className="filled-strip" />
-              <span className="number-clicks">Max. 1200 clicks</span>
+              <span className="number-clicks">
+                {Translations.create_ads.max_1200_clicks}
+              </span>
             </div>
           </div>
-          <div className="subtitle">Information on payment</div>
-          <p>
-            You only have to pay when a user actively clicks on your ad on
-            Picstagraph.
-          </p>
+          <div className="subtitle">
+            {Translations.create_ads.information_on_payment}
+          </div>
+          <p>{Translations.create_ads.actively_clicks}</p>
           <ul>
-            <li>100 % cost control</li>
-            <li>Cost per Click: 1,00 €</li>
-            <li>Payment only after ad was cloes</li>
-            <li>Total budget can not be exceeded</li>
+            <li>{Translations.create_ads.cost_control}</li>
+            <li>{Translations.create_ads.cost_per_Click}</li>
+            <li>{Translations.create_ads.payment_only_after_ad_was_cloes}</li>
+            <li>{Translations.create_ads.total_budget_can_not_be_exceeded}</li>
           </ul>
         </div>
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
@@ -148,9 +156,9 @@ class StepTwo extends Component {
 }
 
 StepTwo.propTypes = {
-  handleChangeField: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired,
-  form: propTypes.any.isRequired
+  handleChangeField: PropTypes.func.isRequired,
+  handleDate: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired
 };
 
 export default StepTwo;

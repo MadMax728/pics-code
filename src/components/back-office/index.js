@@ -1,6 +1,5 @@
 export { LoginLinkSend, AdminLogin } from "./login";
 export { Landing } from "./landing";
-export { Header } from "./header";
 export { Campaigns } from "./campaigns";
 export { Ads } from "./ads";
 export { CMSManagement } from "./c-m-s-management";

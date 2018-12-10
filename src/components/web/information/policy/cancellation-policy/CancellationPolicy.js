@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 
 class CancellationPolicy extends Component {
-  componentDidMount() {
+  componentDidMount = () => {
     window.scrollTo(0, 0);
-  }
+  };
 
   render() {
     return (
