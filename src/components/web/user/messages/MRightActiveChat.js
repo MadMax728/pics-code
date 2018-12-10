@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as images from "../../../../lib/constants/images";
 
 const MRightActiveChat = (
     { 
@@ -14,9 +15,11 @@ const MRightActiveChat = (
                 return '';
             }
 
+            console.log('items', items);
+            
             return items.map((item) => (
                 <div key={item.id}> 
-                    <div className="date">{ item.date }</div>
+                    <div className="date">{ item.createdAt }</div>
                     <div>
                     { me === item.senderId && (
                         <div className="reply"
@@ -47,8 +50,11 @@ const MRightActiveChat = (
                     user && user.id ? (
                         renderMessages()
                     ) : (
-                        <div className="card">
-                               You are ready to chat ..
+                        <div className="full-width">
+                            <div className="card">
+                               <h6>You are ready to chat ..</h6>
+                               <img src={images.profile_pic} alt="message"/>
+                             </div>
                         </div>
                     )
                 }

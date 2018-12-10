@@ -243,12 +243,17 @@
           height: 422px;
           width: 100%;
           overflow-y: auto;
+          .full-width {
+            width: 100%;
+            height: 100%;
+          }
           .card {
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
             transition: 0.3s;
-            padding: 25px 16px;
+            padding: 60px;
             margin: 5px;
             text-align: center;
+            height: 97%;
           }
           .card:hover {
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
