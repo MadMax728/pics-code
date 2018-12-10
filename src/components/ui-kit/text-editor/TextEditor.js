@@ -4,7 +4,7 @@ import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.cs
 import { convertFromHTML, EditorState, ContentState } from "draft-js";
 import { convertToHTML } from "draft-convert";
 import { toolBarConfig } from "../../../lib/constants/toolBarConfig";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 const content = {
   entityMap: {},
@@ -39,7 +39,7 @@ class TextEditor extends Component {
 
   handleChange = editorState => {
     const content = convertToHTML(editorState.getCurrentContent());
-    console.log(content);
+    this.props.handleContentChange(content);
   };
 
   render() {
@@ -54,8 +54,8 @@ class TextEditor extends Component {
 }
 
 TextEditor.propTypes = {
-  handleContentChange: propTypes.func.isRequired,
-  contentText: propTypes.any.isRequired
+  handleContentChange: PropTypes.func.isRequired,
+  contentText: PropTypes.any.isRequired
 };
 
 export default TextEditor;

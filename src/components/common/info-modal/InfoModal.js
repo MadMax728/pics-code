@@ -8,7 +8,7 @@ import {
   EditProfileModal,
   ShareModal
 } from "../../web/modals";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
 
 class InfoModal extends Component {
@@ -54,6 +54,8 @@ class InfoModal extends Component {
         handleModalInfoHide={this.props.handleModalInfoHide}
         handleEditImage={this.props.handleEditImage}
         image={this.props.image}
+        profile={this.props.profile}
+        handleProfile={this.props.handleProfile}
       />
     );
   };
@@ -94,13 +96,15 @@ class InfoModal extends Component {
 }
 
 InfoModal.propTypes = {
-  modalInfoShow: propTypes.bool.isRequired,
-  modalInfoType: propTypes.string,
-  handleModalInfoHide: propTypes.func.isRequired,
-  handleModalHide: propTypes.func.isRequired,
-  modalInfoMsg: propTypes.string,
-  handleEditImage: propTypes.func,
-  image: propTypes.any
+  modalInfoShow: PropTypes.bool.isRequired,
+  modalInfoType: PropTypes.string,
+  handleModalInfoHide: PropTypes.func.isRequired,
+  handleModalHide: PropTypes.func.isRequired,
+  modalInfoMsg: PropTypes.string,
+  handleEditImage: PropTypes.func,
+  handleProfile: PropTypes.func,
+  image: PropTypes.any,
+  profile: PropTypes.any
 };
 
 export default InfoModal;

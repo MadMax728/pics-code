@@ -32,7 +32,6 @@ class Information extends Component {
         }
       ]
     };
-    console.log(this.props);
   }
 
   componentDidMount = () => {
@@ -273,7 +272,7 @@ Information.propTypes = {
   handleModalShow: PropTypes.func,
   match: PropTypes.any,
   campaign_detail: PropTypes.any,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   error: PropTypes.any
 };
 

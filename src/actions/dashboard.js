@@ -1,9 +1,7 @@
 import * as types from "../lib/constants/actionTypes";
-import * as dashboardService from "../services/dashboardService";
+import * as dashboardService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-// remove when no need
-import { dashboardList, users_list, pics_list } from "../mock-data";
 
 const getDashboardStarted = () => ({
   type: types.GET_DASHBOARD_STARTED
@@ -34,27 +32,6 @@ export const getDashboard = (prop, provider) => {
       },
       error => {
         dispatch(getDashboardFailed(error.response))
-        dispatch(
-          // getDashboardFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          prop === "getNews"
-            ? getDashboardSucceeded(dashboardList)
-            : prop === "getExplore"
-              ? getDashboardSucceeded(
-                  dashboardList.filter(
-                    d => d.type === "video" || d.type === "image"
-                  )
-                )
-              : prop === "getParticipant"
-                ? getDashboardSucceeded(
-                    dashboardList.filter(
-                      d => d.type === "video" || d.type === "image"
-                    )
-                  )
-                : prop === "getDashboardUser"
-                  ? getDashboardSucceeded(users_list)
-                  : prop === "getPic" && getDashboardSucceeded(pics_list)
-        );
         logger.error({
           description: error.toString(),
           fatal: true

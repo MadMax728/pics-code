@@ -41,7 +41,7 @@ class UsersRoot extends React.Component {
 
 UsersRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   usersList: PropTypes.any,
   error: PropTypes.any
 };

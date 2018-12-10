@@ -232,14 +232,14 @@
     			width: 100%;
     		}
     		.community-user-image{
-    			width: 32%;
+    			width: 28%;
     			padding: 0px 15px;
     			@media(max-width: 1199px){
 	    			float: left;
 	    		}
     		}
     		.community-user-name{
-    			width: 33%;
+    			width: 36%;
     			align-self: center;
     			@media(max-width: 1199px){
 	    			float: left;
@@ -250,7 +250,12 @@
     			button{
     				height: 30px;
 				    padding: 6px;
-				    width: 90px;
+					width: 90px;
+					@media(max-width: 1199px){
+						width: 85px;
+						padding: 3px;
+						font-size: 13px;
+					}
     			}
     		}    		
 		}
@@ -358,7 +363,8 @@
 			border-bottom: 1px solid #ededed;			
 			float: left;
 	    	width: 100%;
-	    	padding: 10px;
+			padding: 10px;
+			min-height: 80px;
 	    	&:first-child{
 	    		border-top: 1px solid #ededed;
 			}

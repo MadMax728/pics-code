@@ -3,13 +3,10 @@ import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
 import {
   PaymentStepOne,
-  PaymentStepTwo,
-  PaymentStepThree
+  PaymentStepTwo
 } from "../../../user/payment/steps";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
-import { CreateCompanyCampaignHeader } from "./index";
-import { ImageCropper } from "../../../../ui-kit/image-cropper";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {
@@ -31,11 +28,15 @@ class CreateCompanyCampaign extends Component {
       handleDate,
       handleContentChange,
       contentText,
-      uploadFile,
       handleEditImage,
       handleLocation,
       handleActualImg,
-      handleScale
+      handleScale,
+      handleOfferTagChange,
+      handleOfferTagDelete,
+      handleInquiryTagChange,
+      handleInquiryTagDelete,
+      handleSelect
     } = this.props;
 
     return (
@@ -56,7 +57,6 @@ class CreateCompanyCampaign extends Component {
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
-              uploadFile={uploadFile}
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
@@ -64,6 +64,11 @@ class CreateCompanyCampaign extends Component {
               handleLocation={handleLocation}
               handleActualImg={handleActualImg}
               handleScale={handleScale}
+              handleInquiryTagChange={handleInquiryTagChange}
+              handleInquiryTagDelete={handleInquiryTagDelete}
+              handleOfferTagChange={handleOfferTagChange}
+              handleOfferTagDelete={handleOfferTagDelete}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -80,6 +85,7 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               handleDate={handleDate}
+              handleSelect={handleSelect}
             />
           ))}
         {!isPreview &&
@@ -94,14 +100,6 @@ class CreateCompanyCampaign extends Component {
           (stepIndex === 4 && (
             <PaymentStepTwo
               forThat={forThat}
-              handleChangeField={handleChangeField}
-              form={form}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 5 && (
-            <PaymentStepThree
-              forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
               handleChangeField={handleChangeField}
               form={form}
@@ -114,23 +112,27 @@ class CreateCompanyCampaign extends Component {
 }
 
 CreateCompanyCampaign.propTypes = {
-  stepIndex: propTypes.any.isRequired,
-  forThat: propTypes.string.isRequired,
-  handleModalInfoShow: propTypes.func.isRequired,
-  isPreview: propTypes.bool.isRequired,
-  handlePrivewClose: propTypes.func.isRequired,
-  handleChangeField: propTypes.func.isRequired,
-  isFor: propTypes.bool.isRequired,
-  form: propTypes.any.isRequired,
-  handleSubmit: propTypes.func.isRequired,
-  handleDate: propTypes.func.isRequired,
-  handleContentChange: propTypes.func.isRequired,
-  contentText: propTypes.any.isRequired,
-  uploadFile: propTypes.func.isRequired,
-  handleEditImage: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired,
-  handleActualImg: propTypes.func,
-  handleScale: propTypes.func
+  stepIndex: PropTypes.any.isRequired,
+  forThat: PropTypes.string.isRequired,
+  handleModalInfoShow: PropTypes.func.isRequired,
+  isPreview: PropTypes.bool.isRequired,
+  handlePrivewClose: PropTypes.func.isRequired,
+  handleChangeField: PropTypes.func.isRequired,
+  isFor: PropTypes.bool.isRequired,
+  form: PropTypes.any.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  handleDate: PropTypes.func.isRequired,
+  handleContentChange: PropTypes.func.isRequired,
+  contentText: PropTypes.any.isRequired,
+  handleEditImage: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  handleActualImg: PropTypes.func,
+  handleScale: PropTypes.func,
+  handleOfferTagChange: PropTypes.func.isRequired,
+  handleOfferTagDelete: PropTypes.func.isRequired,
+  handleInquiryTagChange: PropTypes.func.isRequired,
+  handleInquiryTagDelete: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;

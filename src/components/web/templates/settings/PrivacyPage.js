@@ -49,7 +49,6 @@ class PrivacyPage extends Component {
     const { change_email_form } = this.state;
     change_email_form[event.values.name] = event.values.val;
     this.setState({ change_email_form });
-    console.log(this.state.change_email_form);
   };
 
   // handleSaveChangeEmail called when click on submit
@@ -63,7 +62,6 @@ class PrivacyPage extends Component {
     const { change_password_form } = this.state;
     change_password_form[event.values.name] = event.values.val;
     this.setState({ change_password_form });
-    console.log(this.state.change_password_form);
   };
 
   // handleSaveChangePassword called when click on submit
@@ -77,7 +75,6 @@ class PrivacyPage extends Component {
     const { change_invoicing_address_form } = this.state;
     change_invoicing_address_form[event.values.name] = event.values.val;
     this.setState({ change_invoicing_address_form });
-    console.log(this.state.change_invoicing_address_form);
   };
 
   // handleSaveChangeInvoice called when click on submit

@@ -4,6 +4,7 @@ import { ToolTip } from "../../ui-kit";
 
 const propTypes = {
   id: PropTypes.any.isRequired,
+  isLoading: PropTypes.bool,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -21,22 +22,22 @@ class RenderToolTips extends Component {
   handleKeyPress = () => {};
 
   render() {
-    const { items, id } = this.props;
-
+    const { items, id, isLoading } = this.props;
     return (
       <div className="post-action-links">
         {items.map((item, index) => {
           return (
-            <div
+            <button
+              className="btn-comment-tooltip"
+              type="button"
+              disabled={isLoading}
               key={index}
               onClick={item.handleEvent}
               id={id}
-              onKeyDown={this.handleKeyPress}
-              role={"button"}
-              tabIndex="0"
+              onKeyDown={item.handleEvent}
             >
               {item.name}
-            </div>
+            </button>
           );
         })}
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Translations } from "../../../../lib/translations";
 
 class CreateAdsHeader extends Component {
@@ -57,11 +57,11 @@ class CreateAdsHeader extends Component {
 }
 
 CreateAdsHeader.propTypes = {
-  handleModalHide: propTypes.func,
-  stepIndex: propTypes.any.isRequired,
-  handleNext: propTypes.func,
-  handlePrev: propTypes.func,
-  handleResoreState: propTypes.func
+  handleModalHide: PropTypes.func,
+  stepIndex: PropTypes.any.isRequired,
+  handleNext: PropTypes.func,
+  handlePrev: PropTypes.func,
+  handleResoreState: PropTypes.func
 };
 
 export default CreateAdsHeader;

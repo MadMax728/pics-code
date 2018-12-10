@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class Text extends Component {
   constructor(props) {
@@ -35,9 +35,9 @@ class Text extends Component {
 }
 
 Text.propTypes = {
-  name: propTypes.string,
-  onChange: propTypes.func,
-  className: propTypes.string
+  name: PropTypes.string,
+  onChange: PropTypes.func,
+  className: PropTypes.string
 };
 
 export default Text;

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import {
   Landing,
@@ -149,7 +149,7 @@ class BackOfficeHomeRoute extends Component {
 }
 
 BackOfficeHomeRoute.propTypes = {
-  handleModalInfoShow: propTypes.func.isRequired
+  handleModalInfoShow: PropTypes.func.isRequired
 };
 
 export default BackOfficeHomeRoute;

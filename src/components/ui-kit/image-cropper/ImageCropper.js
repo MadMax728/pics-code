@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import EditProfileCrop from "./EditProfileCrop";
 import CampaignAdCrop from "./CampaignAdCrop";
-import EditProfilePic from "../../web/templates/settings/edit-profile-pic/EditProfilePic";
 
 const propTypes = {
   handleNewImage: PropTypes.func,
@@ -19,7 +18,8 @@ const propTypes = {
   allowZoomOut: PropTypes.bool,
   logCallback: PropTypes.any,
   handleEditImage: PropTypes.func,
-  isCircle: PropTypes.bool
+  isCircle: PropTypes.bool,
+  handleActualImg: PropTypes.any,
 };
 
 class ImageCropper extends Component {
@@ -43,8 +43,6 @@ class ImageCropper extends Component {
 
   handleScale = e => {
     const scale = parseFloat(e.target.value);
-    console.log(scale);
-
     this.setState({ scale }, () => {
       this.handleSave();
       this.props.handleScale(scale);
@@ -62,7 +60,6 @@ class ImageCropper extends Component {
   };
 
   handleNewImage = e => {
-    console.log("iamges upload", e.target.files[0]);
     this.props.handleActualImg(e.target.files[0]);
     this.setState({ image: e.target.files[0] }, () => {
       this.handleSave();
@@ -81,9 +78,12 @@ class ImageCropper extends Component {
   };
 
   handleSave = () => {
-    const img = this.editor.getImageScaledToCanvas().toDataURL();
-    this.setState({ preview: img });
-    this.props.handleEditImage(img);
+    // todo fix
+    if(this.editor && this.editor.getImageScaledToCanvas()) {
+      const img = this.editor.getImageScaledToCanvas().toDataURL();
+      this.setState({ preview: img });
+      this.props.handleEditImage(img);
+    }
   };
 
   render() {
@@ -139,12 +139,6 @@ class ImageCropper extends Component {
   }
 }
 
-ImageCropper.propTypes = {
-  handleActualImg: propTypes.any,
-  image: propTypes.any,
-  isCircle: propTypes.any,
-  handleScale: propTypes.func,
-  handleEditImage: propTypes.func
-};
+ImageCropper.propTypes = propTypes;
 
 export default ImageCropper;

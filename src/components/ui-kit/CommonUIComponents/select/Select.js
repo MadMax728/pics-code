@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 
 class Select extends Component {
   constructor(props) {
@@ -43,11 +43,11 @@ class Select extends Component {
 }
 
 Select.propTypes = {
-  name: propTypes.string,
-  options: propTypes.array.isRequired,
-  onChange: propTypes.func,
-  defaultValue: propTypes.string,
-  disabled: propTypes.bool
+  name: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  onChange: PropTypes.func,
+  defaultValue: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default Select;

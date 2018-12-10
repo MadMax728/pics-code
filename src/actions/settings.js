@@ -1,8 +1,7 @@
 import * as types from "../lib/constants/actionTypes";
-import * as settingsService from "../services/settingsService";
+import * as settingsService from "../services";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
-import { campaigns_list, aboutInfo } from "../mock-data";
 
 // News Feed
 const getNewsFeedStarted = () => ({
@@ -24,23 +23,16 @@ export const getNewsFeed = (prop, provider) => {
   return dispatch => {
     dispatch(getNewsFeedStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return settingsService[prop](params, provider).then(
+    return settingsService[prop](provider, header).then(
       res => {
         dispatch(getNewsFeedSucceeded(res.data.data));
       },
       error => {
-        dispatch(
-          // getNewsFeedFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          getNewsFeedSucceeded(
-            campaigns_list
-          )
-        );
+        dispatch(getNewsFeedFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -70,30 +62,17 @@ export const getAbout = (prop, provider) => {
   return dispatch => {
     dispatch(getAboutStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return settingsService[prop](params, provider).then(
+    return settingsService[prop](provider, header).then(
       res => {
         dispatch(getAboutSucceeded(res.data.data));
       },
       error => {
-        dispatch(
-          // getCampaignsFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-
-          prop === "getAboutOther"
-            ? getAboutSucceeded(
-                aboutInfo.filter(a => a.general_information.userId === "1")
-              )
-            : prop === "getAboutOwner" &&
-              getAboutSucceeded(
-                aboutInfo.filter(a => a.general_information.userId === "2")
-              )
-        );
-        logger.error({
+          dispatch(getAboutFailed(error.response));
+      logger.error({
           description: error.toString(),
           fatal: true
         });
@@ -122,23 +101,16 @@ export const getSaved = (prop, provider) => {
   return dispatch => {
     dispatch(getSavedStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return settingsService[prop](params, provider).then(
+    return settingsService[prop](provider, header).then(
       res => {
         dispatch(getSavedSucceeded(res.data.data));
       },
       error => {
-        dispatch(
-          // getSavedFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          prop === "getSavedOther"
-            ? getSavedSucceeded(campaigns_list)
-            : prop === "getSavedOwner" && getSavedSucceeded(campaigns_list)
-        );
+        dispatch(getSavedFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

@@ -1,6 +1,5 @@
-import React, { Component } from "react";
 import * as types from "../lib/constants/actionTypes";
-import * as userService from "../services/userService";
+import * as userService from "../services";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
 

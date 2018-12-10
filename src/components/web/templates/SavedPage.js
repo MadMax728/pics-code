@@ -19,24 +19,35 @@ class SavedPage extends Component {
     return savedList.map(saved => {
       return (
         <div key={saved.id}>
-          {saved.postType === enumerations.contentTypes.campaign && (
+        {saved.postType.toLowerCase() === enumerations.contentTypes.mediaPost && (
+            <MediaCard item={saved} isParticipant={false} />
+          )}
+          {saved.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={saved}
-              isDescription
-              isInformation={false}
+              isDescription={false}
+              isInformation
               isStatus={false}
             />
           )}
-          {saved.postType === enumerations.contentTypes.ad && (
+          {saved.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign && (
+            <CampaignCard
+              item={saved}
+              isDescription={false}
+              isInformation
+              isStatus={false}
+            />
+          )}
+          {saved.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && (
+            <MediaCard item={saved} isParticipant />
+          )}
+          {saved.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
               item={saved}
               isDescription
               isInformation={false}
               isStatus={false}
             />
-          )}
-          {saved.postType.toLowerCase() === enumerations.contentTypes.image || saved.postType.toLowerCase() === enumerations.contentTypes.video && (
-            <MediaCard item={saved} />
           )}
         </div>
       );
@@ -57,7 +68,7 @@ class SavedPage extends Component {
 SavedPage.propTypes = {
   match: PropTypes.any.isRequired,
   getSaved: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   savedList: PropTypes.any,
   error: PropTypes.any
 };

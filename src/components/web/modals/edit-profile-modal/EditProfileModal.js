@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   EditProfilePic,
   EditProfilePicHeader
 } from "../../../web/templates/settings/edit-profile-pic";
 import { uploadProfilePicture } from "../../../../actions/profile";
-import axios from "axios";
 import connect from "react-redux/es/connect/connect";
+import { b64toBlob } from "../../../../lib/utils/helpers";
 
 class EditProfileModal extends Component {
   constructor(props, context) {
@@ -25,7 +25,6 @@ class EditProfileModal extends Component {
   };
 
   handleActualImg = actual_img => {
-    console.log("ac", actual_img);
     this.setState({ actual_img });
   };
 
@@ -33,41 +32,55 @@ class EditProfileModal extends Component {
     this.setState({ scale });
   };
 
+  handleEditImage = image => {
+    this.setState({ image });
+    this.props.handleEditImage(image);
+  };
+
   handleContinue = () => {
-    // let Data = new FormData();
-    // Data.append('avatar',this.state.actual_img);
-    // Data.append('typeImage','Crop');
-    // Data.append('typeOfContent','profile');
-    // Data.append('coordinate', '50');
+    const Data = new FormData();
+    Data.append('image',this.state.actual_img);
+    Data.append('typeImage','Original');
+    Data.append('typeOfContent','profile');
+    Data.append('coordinate', '50');
+    this.props.uploadProfilePicture(Data)
+      .then(()=>{
+        if (this.props.userDataByUsername.imageData)
+        {
+          // convert Base64 data
+          // https://ourcodeworld.com/articles/read/322/how-to-convert-a-base64-image-into-a-image-file-and-upload-it-with-an-asynchronous-form-using-jquery
 
-    // axios({
-    //   method: 'post',
-    //   url: 'http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/images',
-    //   data:Data,
-    //   config: { headers: {'Authorization':'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNmZWU5YThiLTI4NzItNDg3Yi04NTlmLWRjMmQ0ZTA0MjA3MSIsInVzZXJuYW1lIjoic2FudG9zaDEyMyIsImVtYWlsIjoic2FudG9zaC5zaGluZGVAcGljc3RhZ3JhcGguY29tIiwiZGF0ZUlzc3VlZCI6IjIwMTgtMTAtMzBUMTE6Mzg6NTIuMjUyWiIsImlhdCI6MTU0MDg5OTUzMiwiZXhwIjoyNzUwNDk5NTMyfQ.cFyhfgRhCoHlgbs410JE9sF6NUuaZRnCHL4XRyHN_Kw' }}
-    // }).then((res)=>{
-    //   console.log("test",res)
-    // })
+          const ImageURL = this.state.image;
+          // Split the base64 string in data and contentType
+          const block = ImageURL.split(";");
+          // Get the content type of the image
+          const contentType = block[0].split(":")[1];// In this case "image/gif"
+          // get the real base64 content of the file
+          const realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
 
-    // let data = {
-    //    'content':Data
-    //  }
+          // Convert it to a blob to upload
+          const blob = b64toBlob(realData, contentType);
 
-    // let data = {
-    //   avatar: this.state.actual_img,
-    //   typeImage: 'Crop',
-    //   typeOfContent: 'profile',
-    //   coordinate: 50
-    // }
-    // this.props.uploadProfilePicture(data)
-    //   .then(()=>{
-    //     console.log("data", this.props.userDataByUsername);
-    //   })
+          const CropedData = new FormData();
+          CropedData.append('image',blob);
+          CropedData.append('typeImage','Crop');
+          CropedData.append('typeOfContent','profile');
+          CropedData.append('coordinate', '50');
+          this.props.uploadProfilePicture(CropedData)
+            .then(()=>{
+              if (this.props.userDataByUsername.imageData)
+              {
+                const { imageData } = this.props.userDataByUsername;
+                if (imageData && imageData.data && imageData.data.id) {
+                this.props.handleProfile(this.props.userDataByUsername.imageData.data.id);
+                this.imageCropper.current.handleSave();
+                this.props.handleModalInfoHide();
+                }  
+              }
+            })
+        }
 
-    console.log("scale", this.props.image);
-    this.imageCropper.current.handleSave();
-
-    this.props.handleModalInfoHide();
+      })
   };
 
   render() {
@@ -90,7 +103,7 @@ class EditProfileModal extends Component {
         modalBodyContent={
           <EditProfilePic
             image={image}
-            handleEditImage={handleEditImage}
+            handleEditImage={this.handleEditImage}
             ref={this.imageCropper}
             handleActualImg={this.handleActualImg}
             handleScale={this.handleScale}
@@ -110,10 +123,13 @@ const mapDispatchToProps = {
 };
 
 EditProfileModal.propTypes = {
-  handleModalInfoHide: propTypes.func,
-  modalInfoShow: propTypes.bool,
-  handleEditImage: propTypes.func,
-  image: propTypes.any
+  handleModalInfoHide: PropTypes.func,
+  modalInfoShow: PropTypes.bool,
+  handleEditImage: PropTypes.func,
+  image: PropTypes.any,
+  uploadProfilePicture: PropTypes.any,
+  handleProfile: PropTypes.func,
+  userDataByUsername: PropTypes.any,
 };
 
 export default connect(

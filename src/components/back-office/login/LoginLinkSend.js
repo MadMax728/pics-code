@@ -23,9 +23,9 @@ class LoginLinkSend extends Component {
             <div className="login-wrapper backoffice-login">
               <h3 className="text-center">Backoffice log in</h3>
               <p>Send password to admin´s email address. </p>
-              <form>
+              <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <button onClick={this.handleSubmit} className="blue_button">
+                  <button type="submit" className="blue_button">
                     Send
                   </button>
                 </div>

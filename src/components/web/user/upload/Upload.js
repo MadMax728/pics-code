@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { HashTagUsername } from "../../../common";
 import { PlaceAutoCompleteLocation } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
@@ -164,11 +164,11 @@ class Upload extends Component {
 }
 
 Upload.propTypes = {
-  handleChangeField: propTypes.func.isRequired,
-  handleSetState: propTypes.func.isRequired,
-  handleLocation: propTypes.func.isRequired,
-  form: propTypes.any.isRequired,
-  handleUpload: propTypes.func.isRequired
+  handleChangeField: PropTypes.func.isRequired,
+  handleSetState: PropTypes.func.isRequired,
+  handleLocation: PropTypes.func.isRequired,
+  form: PropTypes.any.isRequired,
+  handleUpload: PropTypes.func.isRequired
 };
 
 export default Upload;

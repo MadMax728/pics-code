@@ -7,8 +7,9 @@ import {
   AdsModal,
   CampaignModal
 } from "../../web/modals";
-import propTypes from "prop-types";
-import { modalType } from "../../../lib/constants/enumerations";
+import PropTypes from "prop-types";
+import { modalType, userType } from "../../../lib/constants/enumerations";
+import { Auth } from "../../../auth";
 
 class CustomModal extends Component {
   constructor(props, context) {
@@ -46,12 +47,23 @@ class CustomModal extends Component {
   };
 
   handleModalCampaign = () => {
+    // get  user from local storage 
+    const storage = Auth.extractJwtFromStorage();
+    // parse the user info
+    const userInfo = JSON.parse(storage.userInfo) || {};
+    // set default to false
+    let isFor = false
+    // check if user is compnay
+    if(userInfo && userInfo.userType) {
+      isFor = userInfo.userType.toLowerCase() === userType.company;
+    }
+
     return (
       <CampaignModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
         // true for the company and false for the creator
-        isFor
+        isFor={isFor}
         handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
       />
     );
@@ -80,11 +92,11 @@ class CustomModal extends Component {
 }
 
 CustomModal.propTypes = {
-  modalShow: propTypes.bool.isRequired,
-  modalType: propTypes.string.isRequired,
-  handleModalHide: propTypes.func.isRequired,
-  handleModalInfoShow: propTypes.func.isRequired,
-  handleModalInfoMsgShow: propTypes.func.isRequired
+  modalShow: PropTypes.bool.isRequired,
+  modalType: PropTypes.string.isRequired,
+  handleModalHide: PropTypes.func.isRequired,
+  handleModalInfoShow: PropTypes.func.isRequired,
+  handleModalInfoMsgShow: PropTypes.func.isRequired
 };
 
 export default CustomModal;

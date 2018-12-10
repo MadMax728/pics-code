@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { ImageCropper } from "../../../../ui-kit";
 
 class EditProfilePic extends Component {
@@ -14,7 +14,6 @@ class EditProfilePic extends Component {
 
   render() {
     const { image, handleEditImage, handleActualImg, handleScale } = this.props;
-
     return (
       <div className="col-xs-12 upload-profile-wrapr padding-b-25">
         <ImageCropper
@@ -31,10 +30,10 @@ class EditProfilePic extends Component {
 }
 
 EditProfilePic.propTypes = {
-  image: propTypes.any,
-  handleEditImage: propTypes.func,
-  handleActualImg: propTypes.any,
-  handleScale: propTypes.any
+  image: PropTypes.any,
+  handleEditImage: PropTypes.func,
+  handleActualImg: PropTypes.any,
+  handleScale: PropTypes.any
 };
 
 export default EditProfilePic;

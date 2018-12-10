@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 
 import {
@@ -12,7 +12,6 @@ import {
   UsersPage,
   PicturesPage,
   AboutPage,
-  UserProfilePage,
   PrivacyPage,
   EditProfilePage,
   BusinessProfilePage,
@@ -70,6 +69,7 @@ class HomeRoute extends Component {
       <EditProfilePage
         handleModalInfoShow={this.props.handleModalInfoShow}
         image={this.props.image}
+        profile={this.props.profile}
       />
     );
   };
@@ -200,12 +200,6 @@ class HomeRoute extends Component {
             path={routes.CAMPAIGN_ROUTE}
             exact
             component={this.handleCampaign}
-          />
-
-          <Route
-            exact
-            path={routes.MY_PROFILE_ROUTE}
-            component={UserProfilePage}
           />
 
           <Route
@@ -410,9 +404,10 @@ class HomeRoute extends Component {
 }
 
 HomeRoute.propTypes = {
-  handleModalShow: propTypes.func,
-  handleModalInfoShow: propTypes.func,
-  image: propTypes.any
+  handleModalShow: PropTypes.func,
+  handleModalInfoShow: PropTypes.func,
+  image: PropTypes.any,
+  profile: PropTypes.any
 };
 
 export default HomeRoute;

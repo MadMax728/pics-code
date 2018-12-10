@@ -8,6 +8,7 @@
     img {
       width: 100%;
       padding: 3px;
+      height: 100%;
     }
   }
   .user-details {
@@ -35,10 +36,17 @@
     img {
       width: 20px;
       margin-left: 10px;
+      &:focus{
+        outline: 0;
+        border: 0;
+      }
     }
     a,
     .share-wrapr {
       float: left;
+      &:focus{
+        outline: 0;
+      }
     }
   }
   .slot_one,
@@ -182,6 +190,7 @@
   float: left;
   .navbar-nav {
     border-bottom: 2px solid rgba(198, 198, 198, 0.3);
+    width: 100%;
     li {
       width: 100%;
       a {
@@ -225,6 +234,7 @@
       border-bottom: 2px solid rgba(198, 198, 198, 0.3);
       .filter-title {
         margin-bottom: 27px;
+        margin-bottom: 10px;
       }
       .autocomplete-dropdown-container {
         position: relative;
@@ -247,6 +257,7 @@
         color: $silver_color;
         &.lbl-margin {
           margin-bottom: 30px;
+          margin-bottom: 5px;
         }
         .checkmark {
           position: absolute;
@@ -288,6 +299,7 @@
         margin-bottom: 25px;
         padding: 10px;
         width: 100%;
+        margin: 0;
         &:focus {
           outline: none;
           border: 1px solid $charcoal_color;
@@ -336,10 +348,10 @@
       width: 100%;
       border-bottom: 2px solid $grey_color;
       img {
-        width: 60px;
-        height: 60px;
-        min-width: 60px;
-        min-height: 60px;
+        width: 45px;
+        height: 45px;
+        min-width: 45px;
+        min-height: 45px;
         @media (max-width: 991px) {
           width: 40px;
           height: 40px;
@@ -363,17 +375,30 @@
         width: 100%;
       }
       .community-user-image {
-        width: 32%;
+        width: 24%;
         padding: 0px 15px;
         @media (max-width: 1199px) {
           float: left;
         }
+        @media (max-width: 991px) {
+          width: 45px;
+          height: 45px;
+          padding: 0;
+        }
+        img{
+          max-width: 45px;
+          max-height: 45px;
+        }
       }
       .community-user-name {
-        width: 33%;
+        width: 38%;
         align-self: center;
         @media (max-width: 1199px) {
           float: left;
+        }
+        @media (max-width: 991px) {
+          width: calc(100% - 50px);
+          padding-left: 15px;
         }
       }
       .community-subscribe {
@@ -382,6 +407,16 @@
           height: 35px;
           padding: 6px;
           width: 90px;
+          @media(max-width: 1199px){
+						width: 85px;
+						padding: 3px;
+						font-size: 13px;
+          }
+          @media (max-width: 991px){
+            width: calc(100% - 20px);
+            padding: 9px;
+            margin: 12px 10px 0px 10px;
+          }
         }
       }
     }
@@ -432,25 +467,28 @@
   @include float();
   .status {
     border-color: rgba(198, 198, 198, 0.3);
+    padding: 15px 0 0 0;
   }
   .feed_header {
     padding: 10px;
     @include float();
     .normal_title {
-      padding-left: 15px;
+      
       &.gray_box {
       }
     }
     .secondary_title {
-      padding-left: 15px;
       font-weight: bold;
       &.gray_box {
         min-height: 15px;
         background-color: #d3d3d3;
       }
+      &.textBold{
+        font-weight: bold;
+      }
     }
     .grey_title {
-      padding-left: 15px;
+      // padding-left: 15px;
       &.gray_box {
       }
     }
@@ -460,7 +498,7 @@
       &.wid45{
         width: 55px;
       }
-
+      
       img {
         cursor: auto;
         width: 45px;
@@ -480,6 +518,7 @@
     }
     .like_wrapper {
       float: right;
+      padding-right: 0px;
       img {
         width: 30px;
         cursor: pointer;
@@ -503,7 +542,7 @@
     float: left;
     width: 100%;
     video{
-      background: url("../images/play_video_back.png") no-repeat 50% #000;
+      // background: url("../images/play_video_back.png") no-repeat 50% #000;
       background-size: contain;
       background-position: center;
     }
@@ -530,6 +569,7 @@
   }
   .feed_footer {
     @include float();
+    padding: 15px 0;
     .count {
       padding-right: 5px;
       font-family: "Helvetica-Bold";
@@ -544,6 +584,7 @@
       display: inline-block;
       float: left;
       padding-right: 15px;
+      padding-left: 25px;
       img {
         width: 20px;
         cursor: pointer;
@@ -584,6 +625,7 @@
     .show_more_options {
       display: inline-block;
       float: right;
+      padding-right: 15px;
       div {
         color: $charcoal_color;
         display: inline-block;
@@ -617,6 +659,7 @@
       float: left;
       width: 100%;
       padding: 10px;
+      min-height: 80px;
       &:first-child {
         border-top: 1px solid rgba(0, 0, 0, 0.8);
       }
@@ -652,6 +695,13 @@
         @media (max-width: 991px) {
           float: left;
         }
+        .display-text-group{
+          span{
+            display: inline-block;
+            width: 100%;
+            word-break: break-all;
+          }
+        }
         p {
           color: $charcoal_color;
           font-size: 14px;
@@ -675,11 +725,11 @@
     .view-more-comments {
       float: left;
       width: 100%;
-      a {
+      
         padding: 13px;
         display: block;
         color: $silver_color;
-      }
+      
     }
   }
 }
@@ -801,13 +851,13 @@
     transform: rotate(0deg);
   }
   25% {
-    transform: rotate(10deg);
+    transform: rotate(20deg);
   }
   50% {
     transform: rotate(0deg);
   }
   75% {
-    transform: rotate(-10deg);
+    transform: rotate(-20deg);
   }
   100% {
     transform: rotate(0deg);
@@ -818,13 +868,13 @@
     -webkit-transform: rotate(0deg);
   }
   25% {
-    -webkit-transform: rotate(10deg);
+    -webkit-transform: rotate(20deg);
   }
   50% {
     -webkit-transform: rotate(0deg);
   }
   75% {
-    -webkit-transform: rotate(-10deg);
+    -webkit-transform: rotate(-20deg);
   }
   100% {
     -webkit-transform: rotate(0deg);
@@ -835,13 +885,13 @@
     -moz-transform: rotate(0deg);
   }
   25% {
-    -moz-transform: rotate(10deg);
+    -moz-transform: rotate(20deg);
   }
   50% {
     -moz-transform: rotate(0deg);
   }
   75% {
-    -moz-transform: rotate(-10deg);
+    -moz-transform: rotate(-20deg);
   }
   100% {
     -moz-transform: rotate(0deg);

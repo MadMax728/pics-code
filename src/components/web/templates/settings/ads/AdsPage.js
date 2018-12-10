@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAds } from "../../../../../actions";
 import { CampaignLoading } from "../../../../ui-kit";
@@ -11,11 +11,12 @@ class AdsPage extends Component {
     this.props.getAds("getSettingsAds");
   };
 
+  
   renderAdList = () => {
     const { adList } = this.props;
     return adList.map(ad => {
       return (
-        <div key={ad.id}>
+        <div key={ad.id}> 
           {ad.type === enumerations.contentTypes.ad && (
             <AdCard item={ad} isDescription isInformation={false} isStatus />
           )}
@@ -28,7 +29,7 @@ class AdsPage extends Component {
     const { adList, isLoading } = this.props;
 
     return (
-      <div className="padding-rl-10 middle-section">
+      <div className="padding-rl-10 middle-section"> 
         {adList && !isLoading && this.renderAdList()}
         {isLoading && <CampaignLoading />}
       </div>
@@ -37,10 +38,10 @@ class AdsPage extends Component {
 }
 
 AdsPage.propTypes = {
-  getAds: propTypes.func.isRequired,
-  isLoading: propTypes.bool.isRequired,
-  adList: propTypes.any,
-  error: propTypes.any
+  getAds: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  adList: PropTypes.any,
+  error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

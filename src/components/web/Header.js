@@ -6,7 +6,7 @@ import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import NavItem from "react-bootstrap/lib/NavItem";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
 import { Redirect } from "react-router";
@@ -65,12 +65,11 @@ export default class Header extends Component {
   };
   onSearchClick = e => {
     e.preventDefault();
-    const path = "?" + this.state.searchText;
+    const path = "?search=" + this.state.searchText;
     this.props.history.push(path);
   };
 
   onInputChange = e => {
-    console.log("target", e.target.value);
     this.setState({
       searchText: e.target.value
     });
@@ -86,7 +85,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
+      <header className={this.state.offsetHeight > 250 ? "fixed" : "" }>
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">
@@ -173,6 +172,6 @@ export default class Header extends Component {
 }
 
 Header.propTypes = {
-  handleModalShow: propTypes.func,
-  history: propTypes.any
+  handleModalShow: PropTypes.func,
+  history: PropTypes.any
 };

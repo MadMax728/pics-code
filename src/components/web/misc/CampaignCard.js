@@ -16,7 +16,8 @@ class CampaignCard extends Component {
     this.state = {
       isComments: false,
       item: this.props.item,
-      comments: ""
+      comments: "",
+      totalCommentsCount: ""
     };
   }
 
@@ -57,12 +58,11 @@ class CampaignCard extends Component {
     this.props.like(campaignLike);
   };
 
-  
-  handleComment = (commet) => {
+  handleComment = commet => {
     const item = this.state.item;
     item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
     this.setState({ item });
-  }
+  };
 
   handleCommentsSections = () => {
     const CampaignId = {
@@ -71,7 +71,8 @@ class CampaignCard extends Component {
     this.props.getComments(CampaignId).then(() => {
       this.setState({
         isComments: !this.state.isComments,
-        comments: this.props.comments
+        comments: this.props.comments,
+        totalCommentsCount: (this.props.comments).length
       });
     });
   };
@@ -79,8 +80,7 @@ class CampaignCard extends Component {
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
     const { isComments, item } = this.state;
-    console.log(item);
-
+    const { likeData } = this.props;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -88,6 +88,7 @@ class CampaignCard extends Component {
           isDescription={isDescription}
           isInformation={isInformation}
           handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
         />
         <CampaignCardBody
           campaign={item}
@@ -101,8 +102,17 @@ class CampaignCard extends Component {
           isStatus={isStatus}
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
         />
-        {isComments && <CommentCard item={this.state.comments} itemId={item.id} typeContent={item.typeContent} handleComment={this.handleComment} />}
+        {isComments && (
+          <CommentCard
+            item={this.state.comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={(this.state.comments).length}
+          />
+        )}
       </div>
     );
   }
@@ -110,7 +120,8 @@ class CampaignCard extends Component {
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
-  comments: state.commentData.comments
+  comments: state.commentData.comments,
+   totalCommentsCount: state.totalCommentsCount
 });
 
 const mapDispatchToProps = {
@@ -125,7 +136,8 @@ CampaignCard.propTypes = {
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,
-  like: PropTypes.func.isRequired
+  like: PropTypes.func.isRequired,
+  likeData: PropTypes.any
 };
 
 export default connect(

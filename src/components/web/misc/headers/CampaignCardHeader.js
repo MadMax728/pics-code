@@ -1,5 +1,5 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import classnames from "classnames";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
@@ -10,7 +10,8 @@ const CampaignCardHeader = ({
   campaign,
   isDescription,
   isInformation,
-  handleFavorite
+  handleFavorite,
+  isLoading
 }) => {
   const like_wrapper = classnames("like_wrapper", {
     "col-sm-2 col-xs-2 like_wrapper": isDescription && isInformation
@@ -25,7 +26,7 @@ const CampaignCardHeader = ({
 
   return (
     <div className="feed_header">
-      <div className="no-padding profile_image">
+      <div className="profile_image padding-right-15">
         <Link to={profile_route}>
           <img
             src={campaign.profileImage}
@@ -35,35 +36,40 @@ const CampaignCardHeader = ({
         </Link>
       </div>
       <div className="no-padding titles_wrapper">
-        <Link to={profile_route}>
+        <Link to={profile_route} className="">
           <div className="normal_title">{campaign.userName}</div>
         </Link>
-        <div className="">published a campaign</div>
+        <div className="normal_sub_title ">published a campaign</div>
         <div className="secondary_title">{campaign.location}</div>
         {campaign.category && (
-          <div className="grey_title">{moment(campaign.createdAt).format('MMMM Do YYYY')} in {campaign.category[0].categoryName}</div>
+          <div className="grey_title">
+            {moment(campaign.createdAt).format("MMMM Do YYYY")} in{" "}
+            {campaign.category[0].categoryName}
+          </div>
         )}
       </div>
       <div className={like_wrapper} role="article">
-        <img
-          src={favorite_icon}
-          alt="like"
-          className="pull-right"
-          role="presentation"
+        <button
+          type="button"
+          className="pull-right no-btn"
           onClick={handleFavorite}
           id={campaign.id}
           onKeyDown={handleFavorite}
-        />
+          disabled={isLoading}
+        >
+          <img src={favorite_icon} alt="like" role="presentation" />
+        </button>
       </div>
     </div>
   );
 };
 
 CampaignCardHeader.propTypes = {
-  handleFavorite: propTypes.func.isRequired,
-  campaign: propTypes.object.isRequired,
-  isDescription: propTypes.bool.isRequired,
-  isInformation: propTypes.bool.isRequired
+  handleFavorite: PropTypes.func.isRequired,
+  campaign: PropTypes.object.isRequired,
+  isDescription: PropTypes.bool.isRequired,
+  isInformation: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool
 };
 
 export default CampaignCardHeader;

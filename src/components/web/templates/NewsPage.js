@@ -16,10 +16,13 @@ class NewsRoot extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.mediaPost && (
+        
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+            enumerations.contentTypes.mediaPost && (
             <MediaCard item={newsFeed} isParticipant={false} />
           )}
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+            enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={newsFeed}
               isDescription={false}
@@ -27,7 +30,8 @@ class NewsRoot extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign && (
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+            enumerations.contentTypes.creatorCampaign && (
             <CampaignCard
               item={newsFeed}
               isDescription={false}
@@ -35,10 +39,11 @@ class NewsRoot extends Component {
               isStatus={false}
             />
           )}
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && (
+          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+            enumerations.contentTypes.companyParticipantCampaign && (
             <MediaCard item={newsFeed} isParticipant />
           )}
-          {newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
+          {newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
               item={newsFeed}
               isDescription
@@ -64,7 +69,7 @@ class NewsRoot extends Component {
 
 NewsRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
   error: PropTypes.any
 };

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import MediaCardBody from "./body/MediaCardBody";
 import MediaCardHeader from "./headers/MediaCardHeader";
 import MediaCardFooter from "./footers/MediaCardFooter";
@@ -16,7 +16,8 @@ class MediaCard extends Component {
     this.state = {
       isComments: false,
       item: this.props.item,
-      comments: ""
+      comments: "",
+      totalCommentsCount: ""
     };
   }
 
@@ -44,12 +45,12 @@ class MediaCard extends Component {
 
   handleContent = () => {};
 
-  handleComment = (commet) => {
+  handleComment = commet => {
     const item = this.state.item;
     item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
     this.setState({ item });
-  }
-  
+  };
+
   handleFavorite = e => {
     const item = this.state.item;
     item.isSelfLike = !this.state.item.isSelfLike;
@@ -70,26 +71,40 @@ class MediaCard extends Component {
     this.props.getComments(itemId).then(() => {
       this.setState({
         isComments: !this.state.isComments,
-        comments: this.props.comments
+        comments: this.props.comments,
+        totalCommentsCount: (this.props.comments).length
       });
     });
   };
 
   render() {
     const { isComments, item } = this.state;
-
+    const { likeData } = this.props;
     return (
       <div className="feed_wrapper">
-        <MediaCardHeader item={item} handleFavorite={this.handleFavorite} />
+        <MediaCardHeader
+          item={item}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+        />
         <MediaCardBody item={item} />
         <MediaCardFooter
+          isLoading={likeData.isLoading}
           item={item}
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
         />
-        {isComments && <CommentCard item={this.state.comments} itemId={item.id} typeContent={item.typeContent} handleComment={this.handleComment} />}
+        {isComments && (
+          <CommentCard
+            item={this.state.comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={(this.state.comments).length}
+          />
+        )}
       </div>
     );
   }
@@ -97,7 +112,8 @@ class MediaCard extends Component {
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
-  comments: state.commentData.comments
+  comments: state.commentData.comments,
+  totalCommentsCount: state.totalCommentsCount
 });
 
 const mapDispatchToProps = {
@@ -106,11 +122,16 @@ const mapDispatchToProps = {
 };
 
 MediaCard.propTypes = {
-  item: propTypes.object.isRequired,
-  like: propTypes.func.isRequired,
-  comments: propTypes.any,
-  getComments: propTypes.func.isRequired,
-  isParticipant: propTypes.bool.isRequired,
+  item: PropTypes.object.isRequired,
+  like: PropTypes.func.isRequired,
+  comments: PropTypes.any,
+  getComments: PropTypes.func.isRequired,
+  isParticipant: PropTypes.bool,
+  likeData: PropTypes.any
+};
+
+MediaCard.defaultProps = {
+  isParticipant: false
 };
 
 export default connect(

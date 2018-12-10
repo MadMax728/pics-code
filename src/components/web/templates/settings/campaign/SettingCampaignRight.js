@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { modalType } from "../../../../../lib/constants/enumerations";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 
@@ -26,7 +26,7 @@ class SettingCampaignRight extends Component {
 }
 
 SettingCampaignRight.propTypes = {
-  handleModalShow: propTypes.func
+  handleModalShow: PropTypes.func
 };
 
 export default SettingCampaignRight;

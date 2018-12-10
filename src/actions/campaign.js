@@ -1,9 +1,7 @@
 import * as types from "../lib/constants/actionTypes";
-import * as campaignService from "../services/campaignService";
+import * as campaignService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-// remove when no need
-import { campaigns_list } from "../mock-data";
 
 // Get Campaigns
 const getCampaignsStarted = () => ({
@@ -31,15 +29,12 @@ export const getCampaigns = (prop, provider) => {
 
     return campaignService[prop](provider, header).then(
       res => {
-        console.log(res);
         dispatch(getCampaignsSucceeded(res.data.data));
       },
       error => {
       
         dispatch(
           getCampaignsFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          // getCampaignsSucceeded(campaigns_list)
         );
         logger.error({
           description: error.toString(),
@@ -78,17 +73,10 @@ export const getCampaignDetails = provider => {
     return campaignService.getCampaignDetails(params, provider).then(
       res => {
         dispatch(getCampaignDetailsSucceeded(res.data.data));
-        // dispatch(
-        //   campaigns_list.filter(c => c.id === provider)
-        // )
       },
       error => {
         dispatch(
-          // getCampaignDetailsFailed(error.response)
-          // remove below code after API working, this is just for set mock data.
-          getCampaignDetailsSucceeded(
-            campaigns_list.filter(c => c.id === provider)
-          )
+          getCampaignDetailsFailed(error.response)
         );
         logger.error({
           description: error.toString(),

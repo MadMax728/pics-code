@@ -1,6 +1,5 @@
 export const ROOT_ROUTE = "/";
 export const REGISTER_ROUTE = "/register";
-export const MY_PROFILE_ROUTE = "/profile";
 export const NEWS_ROUTE = "/news";
 export const EXPLORE_ROUTE = "/expore";
 export const PARTICIPANTS_ROUTE = "/participants";
@@ -81,7 +80,7 @@ export const CAMPAIGN_ROUTE = "/campaign/:type";
 export const SAVED_ROUTE = "/saved";
 export const OTHER_SAVED_ROUTE = "/saved/:id";
 export const NEWS_FEED_ROUTE = "/news-feed";
-export const OTHER_NEWS_FEED_ROUTE = "/news-feed/:id";
+export const OTHER_NEWS_FEED_ROUTE = "/news-feed/:username";
 export const OTHER_ABOUT_ROUTE = "/about/:id";
 export const ABOUT_ROUTE = "/about";
 

@@ -32,7 +32,6 @@ class ResetMail extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
     this.formValid();
   };
 

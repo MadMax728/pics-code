@@ -9,7 +9,7 @@ import {
   ParticipantsFilter
 } from "../filters";
 
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   SideBarCampaignMenu,
   SideBarCampaignMenuOnlyImage,
@@ -138,11 +138,6 @@ class LeftSideBar extends Component {
         {/* ...... Owner Menu ...... */}
 
         {/* ...... Other Menu ...... */}
-        <Route
-          path={routes.MY_PROFILE_ROUTE}
-          exact
-          component={SideBarOtherMenu}
-        />
         <Route
           path={routes.OTHER_NEWS_FEED_ROUTE}
           exact
@@ -319,7 +314,7 @@ class LeftSideBar extends Component {
 }
 
 LeftSideBar.propTypes = {
-  getFilter: propTypes.func
+  getFilter: PropTypes.func
 };
 
 export default LeftSideBar;

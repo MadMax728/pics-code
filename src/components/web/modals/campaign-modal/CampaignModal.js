@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal, ImageCropper } from "../../../ui-kit";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import {
   CreateCompanyCampaign,
   CreateCompanyCampaignHeader,
@@ -9,27 +9,32 @@ import {
 } from "../../campaigns";
 
 import moment from "moment";
-import { modalType } from "../../../../lib/constants/enumerations";
+import { modalType, mediaTypes, target_group, procedure } from "../../../../lib/constants/enumerations";
 
-let contentText = "";
-class CampaignModal extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      stepIndex: 0,
+import { b64toBlob } from "../../../../lib/utils/helpers"
+
+const contentText = "";
+
+const initialState = {
+  stepIndex: 0,
       isPreview: false,
       form: {
         title: "",
-        location: "",
-        address: "",
+        location: {
+          lat: "",
+          lng: "",
+          address: ""
+        },
         category: "",
-        procedure: "public",
-        type: "video",
-        target_group: "company",
+        procedure: procedure.public,
+        type: mediaTypes.image,
+        target_group: target_group.company,
         offer: "",
-        offer_tag: "",
+        offer_tag: [],
+        offerTagList: [],
         inquiry: "",
-        inquiry_tag: "",
+        inquiry_tag: [],
+        inquiryTagList: [],
         description: "",
         start_date: moment(),
         end_date: moment(),
@@ -51,11 +56,17 @@ class CampaignModal extends Component {
         voucher: "",
         photo: "",
         photoFile: null,
-        image: null
+        image: null,
+        actual_img: ""
       },
-      actual_img: "",
       scale: ""
-    };
+};
+
+
+class CampaignModal extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = initialState;
   }
 
   handleEditImage = image => {
@@ -68,32 +79,20 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
-  uploadFile = (e, forThat) => {
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    let base64Data;
-    const currentThis = this;
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      const { form } = currentThis.state;
-      form[forThat] = reader.result;
-      currentThis.setState({ form });
-    };
-  };
-
   handleCreatorSubmit = () => {
     console.log(this.state.form);
   };
 
   handleContentChange(text) {
-    contentText = text.blocks[0].text;
+    const { form } = this.state;
+    form.description = text
+    this.setState({ form });
   }
 
   handleCreatorChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   handleCompanySubmit = () => {
@@ -104,7 +103,6 @@ class CampaignModal extends Component {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
     this.setState({ form });
-    console.log(this.state.form);
   };
 
   componentDidMount = () => {
@@ -131,7 +129,7 @@ class CampaignModal extends Component {
 
   handleNext = () => {
     const { stepIndex } = this.state;
-    if (stepIndex < 5) {
+    if (stepIndex < 4) {
       this.setState({ stepIndex: stepIndex + 1 });
     }
   };
@@ -150,8 +148,22 @@ class CampaignModal extends Component {
     );
   };
   handleActualImg = actual_img => {
-    console.log("ac", actual_img);
-    this.setState({ actual_img });
+    // Set Actual Image
+    const { form } = this.state;
+    form.actual_img = actual_img;
+    this.setState({ form });
+
+    // Set Image
+    const reader = new FileReader();
+    const file = actual_img;
+    // let base64Data;
+    const currentThis = this;
+    reader.readAsDataURL(file);
+    reader.onloadend = function() {
+      const { form } = currentThis.state;
+      form.image = reader.result;
+      currentThis.setState({ form });
+    };
   };
 
   handleScale = scale => {
@@ -164,11 +176,51 @@ class CampaignModal extends Component {
     });
   };
 
+  handleOfferTagChange = (id, tag) => {
+    const { form } = this.state;
+    form.offer_tag.push(id);
+    form.offerTagList.push(tag);
+    this.setState({ form });
+  };
+
+  handleInquiryTagDelete = id => {
+    const { form } = this.state;
+    this.setState({ form: {
+      ...this.state.form, 
+      inquiry_tag: form.inquiry_tag.filter(tag => tag !== form.inquiryTagList[id].id), 
+      inquiryTagList: form.inquiryTagList.filter(tag => tag.id !== form.inquiryTagList[id].id)}
+    });
+  };
+
+  handleOfferTagDelete = id => {
+    const { form } = this.state;  
+    this.setState({ form: {
+      ...this.state.form, 
+      offer_tag: form.offer_tag.filter(tag => tag !== form.offerTagList[id].id), 
+      offerTagList: form.offerTagList.filter(tag => tag.id !== form.offerTagList[id].id)}
+    });
+  };
+
+  handleInquiryTagChange = (id, tag) => {
+    const { form } = this.state;
+    form.inquiry_tag.push(id);
+    form.inquiryTagList.push(tag);
+    this.setState({ form });
+  };
+
+  handleSelect = (isFor , selected) => {
+    const { form } = this.state;
+    form[isFor] = selected;
+    this.setState({ form });
+  }
+
+  componentWillUnmount = () => {
+    this.setState(initialState);
+  }
+
   render() {
     const { isFor, handleModalHide } = this.props;
     const { stepIndex, isPreview, form } = this.state;
-
-    console.log(form.image);
 
     let modalClassName = "";
 
@@ -223,27 +275,41 @@ class CampaignModal extends Component {
               handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
               contentText={contentText}
-              uploadFile={this.uploadFile}
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
               ref={this.imageCropper}
               handleActualImg={this.handleActualImg}
               handleScale={this.handleScale}
+              handleOfferTagChange={this.handleOfferTagChange}
+              handleOfferTagDelete={this.handleOfferTagDelete}
+              handleInquiryTagChange={this.handleInquiryTagChange}
+              handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleSelect={this.handleSelect}
             />
           ) : (
             <CreateCreatorCampaign
-              stepIndex={this.state.stepIndex}
+              stepIndex={stepIndex}
               isFor={isFor}
               forThat={"Campaign"}
               handleModalInfoShow={this.handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
-              handleChangeField={this.handleCreatorChangeField}
+              handleChangeField={this.handleCompanyChangeField}
               form={form}
-              handleSubmit={this.handleCreatorSubmit}
+              handleContentChange={this.handleContentChange}
+              handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
+              contentText={contentText}
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
+              ref={this.imageCropper}
+              handleActualImg={this.handleActualImg}
+              handleScale={this.handleScale}
+              handleOfferTagChange={this.handleOfferTagChange}
+              handleOfferTagDelete={this.handleOfferTagDelete}
+              handleInquiryTagChange={this.handleInquiryTagChange}
+              handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleSelect={this.handleSelect}
             />
           )
         }
@@ -253,10 +319,10 @@ class CampaignModal extends Component {
 }
 
 CampaignModal.propTypes = {
-  modalShow: propTypes.bool.isRequired,
-  handleModalHide: propTypes.func.isRequired,
-  isFor: propTypes.bool.isRequired,
-  handleModalInfoMsgShow: propTypes.func
+  modalShow: PropTypes.bool.isRequired,
+  handleModalHide: PropTypes.func.isRequired,
+  isFor: PropTypes.bool.isRequired,
+  handleModalInfoMsgShow: PropTypes.func
 };
 
 export default CampaignModal;

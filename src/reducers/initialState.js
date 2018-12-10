@@ -94,7 +94,20 @@ const initialState = {
     comments: null,
     isLoading: false,
     error: false
-  }
+  },
+  selectData: {
+    categories: null,
+    offers: null,
+    inquirys: null,
+    dailyBudgets: null,
+    isLoading: false,
+    error: false
+  },
+  usersData: {
+    subscribers: [],
+    isLoading: false,
+    error: false
+  },
 };
 
 export default initialState;

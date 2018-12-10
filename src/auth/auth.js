@@ -104,13 +104,15 @@ export const extractJwtFromStorage = () => {
     return null;
   }
 
-  return {
+  return ({
     accessToken: token,
     isAdmin: localStorage.getItem("is_admin"),
     userType: localStorage.getItem("user_type"),
     adminAccessToken: localStorage.getItem("admin_access_token"),
-    language: localStorage.getItem("language")
-  };
+    language: localStorage.getItem("language"),
+    userInfo: localStorage.getItem("user_info"),
+    username: localStorage.getItem("username"),
+  });
 };
 
 /**
@@ -126,6 +128,14 @@ export const clearTokensFromStorage = () => {
 export const saveJwtToStorage = authResponse => {
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
+  }
+  if (authResponse.email && authResponse.username && authResponse.language && authResponse.id && authResponse.userType && authResponse.profileUrl) {
+    localStorage.setItem("user_info",JSON.stringify({"email":authResponse.email, 
+    "username":authResponse.username, 
+    "language": authResponse.language,
+    "profileUrl": authResponse.profileUrl,
+    "userType": authResponse.userType,
+    "id": authResponse.id}));
   }
 
   if (authResponse.hasOwnProperty("isAdmin")) {
@@ -144,6 +154,10 @@ export const saveJwtToStorage = authResponse => {
     localStorage.setItem("language", authResponse.language);
   }
 
+  if (authResponse.hasOwnProperty("username")) {
+    localStorage.setItem("username", authResponse.username);
+  }
+
   return extractJwtFromStorage();
 };
 
@@ -158,4 +172,6 @@ export const removeJwtFromStorage = () => {
   localStorage.removeItem("is_admin");
   localStorage.removeItem("user_type");
   localStorage.removeItem("admin_access_token");
+  localStorage.removeItem("user_info");
+  localStorage.removeItem("username");
 };

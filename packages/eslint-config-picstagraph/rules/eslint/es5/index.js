@@ -42,14 +42,14 @@ module.exports = {
     "one-var": ["error", "never"],
 
     // https://eslint.org/docs/rules/valid-jsdoc
-    "valid-jsdoc": [
-      "warn",
-      {
-        requireReturn: false,
-        requireReturnType: true,
-        requireReturnDescription: false
-      }
-    ],
+    // "valid-jsdoc": [
+    //   "warn",
+    //   {
+    //     requireReturn: false,
+    //     requireReturnType: true,
+    //     requireReturnDescription: false
+    //   }
+    // ],
     camelcase: ["warn", { properties: "never" }],
     complexity: ["warn", 20],
     eqeqeq: ["error", "smart"],

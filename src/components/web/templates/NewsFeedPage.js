@@ -9,7 +9,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class NewsFeedPage extends Component {
   componentDidMount = () => {
     if (this.props.match.params.id) {
-      this.props.getNewsFeed("getNewsFeedOther", this.props.match.params.id);
+      this.props.getNewsFeed("getNewsFeedOther", this.props.match.params.username);
     } else {
       this.props.getNewsFeed("getNewsFeedOwner");
     }
@@ -58,7 +58,7 @@ class NewsFeedPage extends Component {
 NewsFeedPage.propTypes = {
   match: PropTypes.any.isRequired,
   getNewsFeed: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
   error: PropTypes.any
 };

@@ -1,7 +1,18 @@
 header {
+  position: relative;
+  transition: all ease-in 1s;
+  transform: translateZ(0);
+  transition: all .5s;
+  z-index: 1000 !important;
   &.fixed {
     position: fixed;
-    z-index: 1000 !important;
+    animation: slide-down;
+    animation-direction: normal;
+    animation-duration: 0.7s;
+    top: 0px;
+  }
+  &.notfixed{
+    position: static;
   }
   margin-bottom: 10px;
   @include gradient();
@@ -315,4 +326,14 @@ header {
       }
     }
   }
+}
+@keyframes slide-down {
+  0% {
+      opacity: 0;
+      transform: translateY(-100%);
+  } 
+  100% {
+      opacity: 0.9;
+      transform: translateY(0);
+  } 
 }

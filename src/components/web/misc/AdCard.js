@@ -56,6 +56,7 @@ class AdCard extends Component {
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
     const { isComments, item } = this.state;
+    const { likeData } = this.props;
 
     return (
       <div className="feed_wrapper">
@@ -64,6 +65,7 @@ class AdCard extends Component {
           isDescription={isDescription}
           isInformation={isInformation}
           handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
         />
         <AdCardBody
           ad={item}
@@ -77,6 +79,7 @@ class AdCard extends Component {
           isStatus={isStatus}
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
         />
         {isComments && <CommentCard item={item} />}
       </div>
@@ -101,7 +104,8 @@ AdCard.propTypes = {
     msg_count: PropTypes.number,
     like_count: PropTypes.number,
     id: PropTypes.number
-  }).isRequired
+  }).isRequired,
+  likeData: PropTypes.any
 };
 
 export default AdCard;

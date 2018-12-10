@@ -1,9 +1,8 @@
 import React from "react";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { SocialNetworks } from "../../templates/settings/edit-profile";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../lib/translations";
-import { aboutInfo } from "../../../../mock-data";
 
 const AboutCardBody = ({ about }) => {
   return (
@@ -16,43 +15,43 @@ const AboutCardBody = ({ about }) => {
           <ul>
             <li>
               <span>{Translations.about.username}</span>
-              <span>{about.general_information.username}</span>
+              <span>{about.username}</span>
             </li>
             <li>
               <span>{Translations.about.name_company}</span>
-              <span>{about.general_information.name}</span>
+              <span>{about.name}</span>
             </li>
             <li>
               <span>{Translations.about.date_of_birth}</span>
-              <span>{about.general_information.dob}</span>
+              <span>{about.birthDate}</span>
             </li>
             <li>
               <span>{Translations.about.gender}</span>
-              <span>{about.general_information.gender}</span>
+              <span>{about.gender}</span>
             </li>
             <li>
               <span>{Translations.about.category}</span>
-              <span>{about.general_information.category}</span>
+              <span>{about.category}</span>
             </li>
             <li>
               <span>{Translations.about.location}</span>
-              <span>{about.general_information.location}</span>
+              <span>{about.location.address}</span>
             </li>
             <li>
               <span>{Translations.about.phone_number}</span>
-              <span>{about.general_information.phone_number}</span>
+              <span>{about.phone_number}</span>
             </li>
             <li>
               <span>{Translations.about.email}</span>
-              <span>{about.general_information.email}</span>
+              <span>{about.email}</span>
             </li>
             <li>
               <span>{Translations.about.web_site}</span>
-              <span>{about.general_information.web_site}</span>
+              <span>{about.website}</span>
             </li>
             <li>
               <span>{Translations.about.profile_description}</span>
-              <span>{about.general_information.profile_description}</span>
+              <span>{about.profileDescription}</span>
             </li>
           </ul>
         </div>
@@ -62,10 +61,10 @@ const AboutCardBody = ({ about }) => {
           </div>
           <div className="section-subtitle">{Translations.about.offer_tag}</div>
           <div className="tags-wrapper">
-            {about.personal_interest.offer_tag.map((offer, index) => {
+            {about.offerTagList.map((offer, index) => {
               return (
-                <Link to={""} key={index}>
-                  {offer.name}
+                <Link to={""} key={offer.id}>
+                  {offer.offerTagName}
                 </Link>
               );
             })}
@@ -76,10 +75,10 @@ const AboutCardBody = ({ about }) => {
             {Translations.about.inquiry_tag}
           </div>
           <div className="tags-wrapper">
-            {about.personal_interest.inquiry_tag.map((inquiry, index) => {
+            {about.inquiryTagList.map((inquiry, index) => {
               return (
-                <Link to={""} key={index}>
-                  {inquiry.name}
+                <Link to={""} key={inquiry.id}>
+                  {inquiry.inquiryTagName}
                 </Link>
               );
             })}
@@ -94,7 +93,7 @@ const AboutCardBody = ({ about }) => {
 };
 
 AboutCardBody.propTypes = {
-  about: propTypes.object.isRequired
+  about: PropTypes.object.isRequired
 };
 
 export default AboutCardBody;

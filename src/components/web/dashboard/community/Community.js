@@ -1,47 +1,46 @@
 import React, { Component } from "react";
-import { users_list } from "../../../../mock-data";
-import propTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-
+import { connect } from "react-redux";
+import { getDashboard } from "../../../../actions";
 class Community extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      users_list
+      usersList: null
     };
   }
 
+  componentDidMount = () => {
+    this.props.getDashboard("getDashboardUser").then(()=> {
+      if(this.props.usersList){
+        this.setState({usersList: this.props.usersList})
+      }
+    });
+  }
+
   handleSubscribed = e => {
-    const users_list = this.state.users_list;
-    users_list.filter(
+    const { usersList } = this.state;
+    usersList.filter(
       user =>
         user.id === e.target.id &&
-        (user.subscribed = !user.subscribed)
+        (user.isSubscribe = !user.isSubscribe)
     );
-    this.setState({ users_list });
-
-    // let data = users_list.filter(f => {
-    //   return f.id === e.target.id;
-    // });
-
-    // if (data[0].subscribed === true) {
-    //   this.props.handleMessageBar("You have successfully subscribed");
-    // } else {
-    //   this.props.handleMessageBar("You have successfully unsubscribed");
-    // }
+    this.setState({ usersList });
   };
 
   render() {
-    const { users_list } = this.state;
+    const { usersList } = this.state;
 
     return (
       <div>
         <div className="normal_title padding-15">Community</div>
         <div className="community">
-          {users_list.map((user, index) => {
+          { usersList &&
+            usersList.map((user, index) => {
             const profile_route = user.isOwner
               ? `/news-feed`
-              : `/news-feed/${user.id}`;
+              : `/news-feed/${user.username}`;
             return (
               <div className="community_wrapper" key={index}>
                 <div className="community-user-image">
@@ -56,10 +55,10 @@ class Community extends Component {
                 <div className="community-user-name">
                   <Link to={profile_route}>
                     <div className="normal_title">{user.username}</div>
-                    <div className="secondary_title">{user.name}</div>
+                    <div className="secondary_title">{'user.name'}</div>
                   </Link>
                 </div>
-                {user.subscribed ? (
+                {user.isSubscribe ? (
                   <div className="community-subscribe">
                     <button
                       className="filled_button"
@@ -89,8 +88,25 @@ class Community extends Component {
   }
 }
 
-Community.propTypes = {
-  handleMessageBar: propTypes.func.isRequired
+const mapStateToProps = state => ({
+  usersList: state.dashboardData.dashboard,
+  isLoading: state.dashboardData.isLoading,
+  error: state.dashboardData.error
+});
+
+const mapDispatchToProps = {
+  getDashboard
 };
 
-export default Community;
+Community.propTypes = {
+  handleMessageBar: PropTypes.func.isRequired,
+  getDashboard: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  usersList: PropTypes.any,
+  error: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Community);

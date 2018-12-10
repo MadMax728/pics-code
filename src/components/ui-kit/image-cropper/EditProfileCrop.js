@@ -68,6 +68,7 @@ const EditProfileCrop = ({
               onLoadSuccess={logCallback("onLoadSuccess")}
               onImageReady={logCallback("onImageReady")}
               image={image}
+              crossOrigin={`anonymous`}
               className="editor-canvas"
             />
           </div>
@@ -98,11 +99,13 @@ const EditProfileCrop = ({
           </div>
         </div>
       )}
+      {(image !== null && image !== undefined) &&
       <div className="range-wrapr col-xs-12">
         <img
           src={images.crop_pic}
           height="19"
           width="19"
+          crossOrigin={`anonymous`}
           className="min-profile-pic range-slider-pic"
           alt={"crop-1"}
         />
@@ -119,24 +122,26 @@ const EditProfileCrop = ({
                     : `${scale * 128}px`
           }}
         />
-        <input
-          name="scale"
-          type="range"
-          onChange={handleScale}
-          min={allowZoomOut ? "0.1" : "1"}
-          max="2"
-          step="0.01"
-          defaultValue="1"
-          disabled={!(image !== null && image !== undefined)}
-        />
+          <input
+            name="scale"
+            type="range"
+            onChange={handleScale}
+            min={allowZoomOut ? "0.1" : "1"}
+            max="2"
+            step="0.01"
+            defaultValue="1"
+            disabled={!(image !== null && image !== undefined)}
+          />
         <img
           src={images.crop_pic}
           height="27"
           alt={"crop-2"}
           width="27"
+          crossOrigin={`anonymous`}
           className="max-profile-pic range-slider-pic"
         />
       </div>
+      }
     </div>
   );
 };

@@ -320,7 +320,7 @@ InformationPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
   campaign_detail: PropTypes.any,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   error: PropTypes.any
 };
 

@@ -53,3 +53,48 @@ To use this cli tool do the following:
   - If the files generated aren't in correct location then manually move to necessary subfolder
   - Any issues or changes please open an issue on the project to discuss updating the templates
   - **note** - There is a known bug if you bypass prompts - [see issue](https://github.com/amwmedia/node-plop/issues/54)
+
+### Sample Component
+
+```
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+class MLeft extends Component {
+  
+    constructor(props, context) {
+        super(props, context);
+    }    
+
+    render() {
+        return (
+          <div></div>
+        )
+    }
+
+}
+
+MLeft.propTypes = {
+    isDescription: PropTypes.bool,
+};
+  
+export default MLeft;
+```
+
+### 2
+
+```
+import React from "react";
+import PropTypes from "prop-types";
+import classnames from "classnames";
+
+const MUserList = (
+    { 
+        items 
+    }) => {
+      return (<div></div>)
+};
+
+export default MUserList;
+
+```

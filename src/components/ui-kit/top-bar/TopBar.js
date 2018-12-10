@@ -13,22 +13,22 @@ const TopBar = ({ items, handeleShare }) => {
     <div>
       <div className="user_info">
         <div className="user-image bg-white no-padding">
-          <img src={images.campaign1} width="100%" alt="profile" />
+          <img src={items.userProfile? items.userProfile : images.crop_pic} width="100%" alt="profile" />
         </div>
         <div className="user-details no-padding-right padding-l-10">
           <div className="bg-white padding-25 user_details">
             <div className="user_name">{items.username}</div>
 
-            {items.private && (
+            {items.length !== 0 && items.private && (
               <img src={images.tick} alt="tick" className="tick" />
             )}
-            {items.private && (
+            {items.length !== 0 && items.private && (
               <span className="profile-type">
                 {Translations.top_bar.private_profile}
               </span>
             )}
 
-            {items.settings && (
+            {items.length !== 0 && items.settings && (
               <div className="settings">
                 <div
                   className="share-wrapr"
@@ -46,14 +46,14 @@ const TopBar = ({ items, handeleShare }) => {
               </div>
             )}
 
-            {items.more && (
+            {items.length !== 0 && items.more && (
               <div className="settings">
                 <img src={images.more} alt="more" />
               </div>
             )}
 
             <div className="clearfix" />
-            {items.slots.map(slot => (
+            {items.length !== 0 && items.slots.map(slot => (
               <div className={slot.className} key={slot.name}>
                 <span className="size-20">{slot.val} </span>
                 <span>{slot.name}</span>
@@ -74,23 +74,8 @@ const TopBar = ({ items, handeleShare }) => {
 };
 
 TopBar.propTypes = {
-  handeleShare: PropTypes.func.isRequired,
-  items: PropTypes.shape({
-    name: PropTypes.string,
-    private: PropTypes.bool,
-    more: PropTypes.bool,
-    settings: PropTypes.bool,
-    slots: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        val: PropTypes.string,
-        className: PropTypes.string,
-        btnActiveClassName: PropTypes.string,
-        btnText: PropTypes.string,
-        handeleEvent: PropTypes.func
-      })
-    )
-  })
+  handeleShare: PropTypes.func,
+  items: PropTypes.any
 };
 
 export default TopBar;
