@@ -1,5 +1,5 @@
 import moment from "moment";
-import { Translations } from "./../lib/translations";
+import { Translations } from "../lib/translations";
 
 export const toTitleCase = str => {
   return !!str
