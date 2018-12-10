@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
+import { uploadMedia } from "../../../../actions/media";
+import connect from "react-redux/es/connect/connect";
 
 const initialState = {
   form: {
@@ -22,8 +24,8 @@ class UploadModal extends Component {
     this.state = initialState;
   }
 
-  handleUpload = image => {
-    this.setState({ form: { ...this.state.form, image } });
+  handleUpload = (image, file) => {
+    this.setState({ form: { ...this.state.form, image,file } });
   };
 
   handleSetState = (value, cd) => {
@@ -33,7 +35,18 @@ class UploadModal extends Component {
   };
 
   handleContinue = () => {
-    console.log(this.state.form);
+    const { form } = this.state; 
+    const Data = new FormData();
+    Data.set('title', '');
+    Data.set('description', form.add_decription);
+    Data.append('image', form.file);
+    Data.set('postType', 'mediapost');
+    Data.set('location', form.add_location);
+
+    this.props.uploadMedia(Data).then(() => {
+      this.props.handleModalHide();
+      this.setState({ initialState });
+    });
   };
 
   handleChangeField = event => {
@@ -90,7 +103,21 @@ class UploadModal extends Component {
 
 UploadModal.propTypes = {
   modalShow: PropTypes.bool,
-  handleModalHide: PropTypes.func
+  handleModalHide: PropTypes.func,
+  uploadMedia: PropTypes.func
 };
 
-export default UploadModal;
+const mapStateToProps = state => ({
+  media: state.mediaData  
+});
+
+const mapDispatchToProps = {
+  uploadMedia
+};
+
+// export default UploadModal;
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UploadModal);
