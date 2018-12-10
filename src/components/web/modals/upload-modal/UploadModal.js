@@ -3,18 +3,23 @@ import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
 
+const initialState = {
+  form: {
+    add_location: {
+      lat: "",
+      lng: "",
+      address: "",
+    },
+    add_category: "",
+    add_description: "",
+    image: null,
+    video: null
+  }
+};
 class UploadModal extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      form: {
-        address: "",
-        add_location: "",
-        add_category: "",
-        add_description: "",
-        image: null
-      }
-    };
+    this.state = initialState;
   }
 
   handleUpload = image => {
@@ -38,10 +43,18 @@ class UploadModal extends Component {
   };
 
   handleLocation = (location, address) => {
-    this.setState({
-      form: { ...this.state.form, add_location: location, address }
-    });
+    const { form } = this.state;
+    form.add_location.lat = location.lat
+    form.add_location.lng = location.lng
+    form.add_location.address = address;
+    this.setState({ form });
   };
+
+  handleSelect = (isFor , selected) => {
+    const { form } = this.state;
+    form.add_category = selected;
+    this.setState({ form });
+  }
 
   render() {
     const { form } = this.state;
@@ -67,6 +80,7 @@ class UploadModal extends Component {
             handleSetState={this.handleSetState}
             handleLocation={this.handleLocation}
             handleUpload={this.handleUpload}
+            handleSelect={this.handleSelect}
           />
         }
       />

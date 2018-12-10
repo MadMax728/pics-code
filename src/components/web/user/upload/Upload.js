@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { HashTagUsername } from "../../../common";
+import { HashTagUsername, SelectCategory } from "../../../common";
 import { PlaceAutoCompleteLocation } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 
@@ -37,7 +37,7 @@ class Upload extends Component {
   };
 
   render() {
-    const { form, handleSetState, handleLocation } = this.props;
+    const { form, handleSetState, handleLocation, handleSelect } = this.props;
     const { isInProgress } = this.state;
 
     return (
@@ -71,12 +71,11 @@ class Upload extends Component {
               <label htmlFor="Category">
                 {Translations.upload_modal.add_category}
               </label>
-              <select name="add_category" onBlur={this.handleChangeField}>
-                <option value={"category_1"}>Category 1</option>
-                <option value={"category_2"}>Category 2</option>
-                <option value={"category_3"}>Category 3</option>
-                <option value={"category_4"}>Category 4</option>
-              </select>
+                <SelectCategory
+                  value={form.add_category? form.add_category : ""}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="description">
@@ -168,7 +167,8 @@ Upload.propTypes = {
   handleSetState: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  handleUpload: PropTypes.func.isRequired
+  handleUpload: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
 };
 
 export default Upload;
