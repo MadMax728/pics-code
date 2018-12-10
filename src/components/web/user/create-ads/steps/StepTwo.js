@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
+import { SelectDailyBudget } from "../../../../../components/common";
 
 class StepTwo extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class StepTwo extends Component {
   };
 
   render() {
-    const { handleChangeField } = this.props;
+    const {form, handleSelect } = this.props;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -38,7 +39,7 @@ class StepTwo extends Component {
                 <label htmlFor="Start">{Translations.create_ads.start}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.props.form.start_date}
+                    selected={form.start_date}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -50,7 +51,7 @@ class StepTwo extends Component {
                 <label htmlFor="End">{Translations.create_ads.end}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.props.form.end_date}
+                    selected={form.end_date}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -64,17 +65,11 @@ class StepTwo extends Component {
             <label htmlFor="Define">
               {Translations.create_ads.define_daily_budget}
             </label>
-            <select
-              onChange={handleChangeField}
-              value={this.props.form.daily_budget}
-              onBlur={handleChangeField}
-              name="daily_budget"
-            >
-              <option>100 €</option>
-              <option>200 €</option>
-              <option>300 €</option>
-              <option>400 €</option>
-            </select>
+              <SelectDailyBudget 
+                value={form.daily_budget}
+                className=""
+                handleSelect={handleSelect}
+              />
           </div>
           <div className="form-group">
             <label htmlFor="Maximum">
@@ -156,9 +151,9 @@ class StepTwo extends Component {
 }
 
 StepTwo.propTypes = {
-  handleChangeField: PropTypes.func.isRequired,
   handleDate: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default StepTwo;

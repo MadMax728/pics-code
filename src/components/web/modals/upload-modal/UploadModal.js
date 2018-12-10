@@ -11,7 +11,7 @@ class UploadModal extends Component {
         address: "",
         add_location: "",
         add_category: "",
-        add_decription: "",
+        add_description: "",
         image: null
       }
     };
@@ -22,7 +22,7 @@ class UploadModal extends Component {
   };
 
   handleSetState = (value, cd) => {
-    this.setState({ form: { ...this.state.form, add_decription: value } }, () =>
+    this.setState({ form: { ...this.state.form, add_description: value } }, () =>
       cd()
     );
   };

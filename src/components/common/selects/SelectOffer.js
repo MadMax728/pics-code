@@ -41,7 +41,7 @@ class SelectOffer extends Component {
         onBlur={this.handleOffer}
         options={offerList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{"Select Offer"}</option>
         {offerList.map(option => (
           <option value={option.id} key={option.id}>
             {option.offerName}

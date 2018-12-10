@@ -85,9 +85,9 @@ class Upload extends Component {
               <HashTagUsername
                 className="form-control"
                 type="text"
-                name="add_decription"
+                name="add_description"
                 handleSetState={handleSetState}
-                value={form.add_decription}
+                value={form.add_description}
                 isText={false}
               />
             </div>
