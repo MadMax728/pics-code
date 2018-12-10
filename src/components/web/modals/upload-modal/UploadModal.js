@@ -16,7 +16,8 @@ const initialState = {
     add_description: "",
     image: null,
     file: null,
-    video: null
+    video: null,
+    filetype: true,
   }
 };
 class UploadModal extends Component {
@@ -25,8 +26,17 @@ class UploadModal extends Component {
     this.state = initialState;
   }
 
-  handleUpload = (image, file) => {
-    this.setState({ form: { ...this.state.form, image, file } });
+  handleUpload = (imageVideo, file, filetype) => {
+    console.log(imageVideo);
+    console.log(file);
+    console.log(filetype);
+    
+    if (filetype){
+      this.setState({ form: { ...this.state.form, image: imageVideo, file, filetype } });
+    }
+    else{
+      this.setState({ form: { ...this.state.form, video: imageVideo, file, filetype } });
+    }
   };
 
   handleSetState = (value, cd) => {
