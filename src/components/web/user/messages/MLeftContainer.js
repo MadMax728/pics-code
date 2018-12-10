@@ -14,7 +14,6 @@ class MLeftContainer extends Component {
         super(props, context);
         this.state = {
             activeIndex : '1',
-            activeUser : '',
             userList: []
         }
     }    
@@ -64,15 +63,16 @@ class MLeftContainer extends Component {
         const activeIndex = e.currentTarget.dataset.id
         this.setState({ activeIndex });
         this.handleUserListCase(parseInt(activeIndex));
+        this.props.selectUser({});
     };
     
     handleChatClick = (e) => {
-        this.setState({ activeUser: e.currentTarget.dataset.id });
         const { userList } = this.state;
         const user = _.find(userList, { id: e.currentTarget.dataset.id });
         this.props.selectUser(user);
     };
 
+    
     render() {
         
         const { activeIndex, userList } = this.state;
@@ -95,6 +95,7 @@ class MLeftContainer extends Component {
     
 MLeftContainer.propTypes = {
     getSubscribers: PropTypes.func.isRequired,
+    me: PropTypes.string.isRequired,
     usersData: PropTypes.any,
     selectUser: PropTypes.func
   };

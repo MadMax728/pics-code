@@ -7,20 +7,20 @@ class MRightUserInput extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            text : ''
+            message : 'abc'
         }
     }    
 
-    handleChange=(e)=>{
-        this.setState({text :e.target.value})
-    }
-    
-    onEnterPress = (e) => {
+    handleChange = (e) => {
         e.preventDefault();
-        const { text } = this.state;
-        if(e.keyCode === 13 && e.shiftKey === false && this.props.onMessageSubmit && text) {
-          this.props.onMessageSubmit(text)
-        }
+        const { message } = this.state;
+        this.setState({ message: e.target.value });
+    };
+
+    onSubmit = (e) => {
+        const { message } = this.state;
+        this.props.onMessageSubmit(message);
+        this.setState({ message: '' });
     }
 
     render() {
@@ -28,14 +28,17 @@ class MRightUserInput extends Component {
         return (
             <div className="write-chat">
                 {
-                   item && item.id && (
-                    <textarea placeholder="Write a message… " onChange={this.handleChange} value={this.state.message} onKeyUp={this.onEnterPress} onKeyDown={this.onEnterPress} />
-                   )
-                }
-                {
-                   item && item.id && (
-                    <img src={images.emoji} alt={"emoji1"} />
-                   )
+                    item && item.id && (
+                    <div>
+                        <textarea type="text" placeholder="Write a message… " 
+                            onChange={this.handleChange} 
+                            value={this.state.message} />
+                            <button className="msg_send_btn" type="button" onClick={this.onSubmit}>
+                                <i className="fa fa-paper-plane-o" aria-hidden="true"></i>
+                            </button>
+                             {/* <img src={images.emoji} alt={"emoji1"} /> */}
+                    </div>
+                    )
                 }
             </div>
         )

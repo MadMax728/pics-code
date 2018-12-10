@@ -1,6 +1,10 @@
 {
   "app_name": "Picstagraph",
 
+  "date_format": {
+    "date": "MM/DD/YYYY"
+  },
+  
   "offen": "In der Picstagraph-App offenen",
 
   "subscribe": "Subscribe",
