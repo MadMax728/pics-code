@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import { Text } from "../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../lib/translations";
+import { setProfilePrivacy } from "../../../../actions";
+import PropTypes from "prop-types";
+import connect from "react-redux/es/connect/connect";
 
 class PrivacyPage extends Component {
   constructor(props) {
@@ -35,7 +38,8 @@ class PrivacyPage extends Component {
   hanldeIsPrivate = event => {
     const isPrivate = event.target.checked;
     this.setState({ isPrivate });
-    // call API for isPrivate
+    const paramData = { isprivate: isPrivate };
+    this.props.setProfilePrivacy(paramData);
   };
 
   hanldeIsPersonalized = event => {
@@ -115,10 +119,17 @@ class PrivacyPage extends Component {
                   {Translations.privacy.set_my_profile_to_private}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <label className="switch" htmlFor={"Privacy"}>
+                  <div>
+                    <div className="switch" htmlFor={"Privacy"}>
+                      <input type="checkbox" onChange={this.hanldeIsPrivate} />
+                      <div className="slider round" />
+                    </div>
+                  </div>
+
+                  {/* <label className="switch" htmlFor={"Privacy"}>
                     <input type="checkbox" onChange={this.hanldeIsPrivate} />
                     <span className="slider round" />
-                  </label>
+                  </label> */}
                 </div>
               </div>
               <div className="row">
@@ -416,4 +427,22 @@ class PrivacyPage extends Component {
   }
 }
 
-export default PrivacyPage;
+//export default PrivacyPage;
+
+const mapStateToProps = state => ({
+  profilePrivacyData: state.userDataByUsername
+});
+
+const mapDispatchToProps = {
+  setProfilePrivacy
+};
+
+PrivacyPage.propTypes = {
+  setProfilePrivacy: PropTypes.func,
+  profilePrivacyData: PropTypes.object
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrivacyPage);
