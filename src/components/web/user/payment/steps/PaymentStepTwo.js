@@ -33,9 +33,7 @@ class PaymentStepTwo extends Component {
           <div className="history-content-wrapper">
             <div className="subtitle">Payment method</div>
             <div className="content">
-              VISA / MasterCard
-              <br />
-              Marc Aurel Bopp, **** ***** ***** **00
+              N/A
             </div>
           </div>
           <div className="history-content-wrapper">
