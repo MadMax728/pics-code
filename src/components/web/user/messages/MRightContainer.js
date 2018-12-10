@@ -13,7 +13,8 @@ class MRightContainer extends Component {
         this.state = {
             message : ''
         }
-        this.socket = io(process.env.REACT_APP_API_BASEURL);
+        this.socket = io(process.env.REACT_APP_AUTH_BASEURL);
+        //this.socket = io("http://localhost:3146");
     }    
 
     onDeleteHistoryClick = (e) => {
@@ -27,9 +28,10 @@ class MRightContainer extends Component {
     };
 
     onMessageSubmit = (content) => {
+        if(!content || !this.props.user || !this.props.user.id || !this.props.me) return;
         this.socket.emit('communication-message-board-new-message', {
             recipientId: this.props.user.id,
-            senderId: this.state.currentUser,
+            senderId: this.props.me,
             content: content
         });
     }

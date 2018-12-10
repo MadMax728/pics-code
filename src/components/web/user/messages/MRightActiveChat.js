@@ -13,10 +13,7 @@ const MRightActiveChat = (
             
             if(!items || !items.length){
                 return '';
-            }
-
-            console.log('items', items);
-            
+            }            
             return items.map((item) => (
                 <div key={item.id}> 
                     <div className="date">{ item.createdAt }</div>
@@ -67,11 +64,11 @@ MRightActiveChat.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.string,
-          content: PropTypes.string,
-          createdAt: PropTypes.string,
-          updatedAt: PropTypes.string,
-          recipientId: PropTypes.string,
-          senderId: PropTypes.string,
+          content: PropTypes.any,
+          createdAt: PropTypes.any,
+          updatedAt: PropTypes.any,
+          recipientId: PropTypes.any,
+          senderId: PropTypes.any,
         })
     ),
     handleMessageClick: PropTypes.func,
