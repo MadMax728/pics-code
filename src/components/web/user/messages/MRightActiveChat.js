@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
+import { DateFormat } from "../../../factory";
 
 const MRightActiveChat = (
     { 
@@ -16,7 +17,7 @@ const MRightActiveChat = (
             }            
             return items.map((item) => (
                 <div key={item.id}> 
-                    <div className="date">{ item.createdAt }</div>
+                    <div className="date">{ DateFormat(item.createdAt) }</div>
                     <div>
                     { me === item.senderId && (
                         <div className="reply"
@@ -24,7 +25,7 @@ const MRightActiveChat = (
                             onKeyPress={handleMessageClick}
                             onClick={handleMessageClick}>
                              { item.content }
-                             <span className="time">{ item.createdAt }</span>
+                             <span className="time">{ DateFormat(item.createdAt) }</span>
                         </div>
                     )}
 
@@ -34,7 +35,7 @@ const MRightActiveChat = (
                             onKeyPress={handleMessageClick}
                             onClick={handleMessageClick}>
                              { item.content }
-                             <span className="time">{ item.createdAt }</span>
+                             <span className="time">{ DateFormat(item.createdAt) }</span>
                         </div>
                     )}
                 </div>
