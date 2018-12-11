@@ -260,7 +260,7 @@ class CommentCard extends Component {
         {this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData.map(this.renderComment)}
 
         {( this.props.totalCommentsCount > this.state.maxRange)? (
-          <div className="view-more-comments view-more-link"  id="8" onClick={this.handleViewComment}>
+          <div className="view-more-comments view-more-link"  id="7" onClick={this.handleViewComment}>
             {Translations.view_more_comments}
           </div>
         ) : (

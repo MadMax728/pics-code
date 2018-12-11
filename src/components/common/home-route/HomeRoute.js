@@ -135,6 +135,16 @@ class HomeRoute extends Component {
     );
   };
 
+  handlePrivacyPage = match => {
+    return (
+      <PrivacyPage
+        type={match.match.params.type}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
   handleCampaign = match => {
     return (
       <CampaignPage
@@ -224,7 +234,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_PRIVACY_ROUTE}
-            component={PrivacyPage}
+            component={this.handlePrivacyPage}
           />
 
           <Route

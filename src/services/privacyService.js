@@ -11,6 +11,9 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 export const setProfilePrivacy = (payload, header = {}) =>
   api(baseUrl, header).post("/users/private", payload);
 
+export const setSocialShare = (payload, header = {}) =>
+  api(baseUrl, header).post("/users/socialShare", payload);
+
 export const setProfilePersonalizedAdvertise = (payload, header = {}) =>
   api(baseUrl, header).post("/users/advertise", payload);
 
