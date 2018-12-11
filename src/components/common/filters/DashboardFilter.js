@@ -65,27 +65,6 @@ const relevanceItems = [
   }
 ];
 
-const languageItems = [
-  {
-    name: "All",
-    className: "radio-btn ",
-    checked: true,
-    value: "all"
-  },
-  {
-    name: "English",
-    className: "radio-btn ",
-    checked: true,
-    value: "english"
-  },
-  {
-    name: "German",
-    className: "radio-btn lbl-margin",
-    checked: false,
-    value: "german"
-  }
-];
-
 const targetGroupOptions = staticData;
 
 const radiusItems = staticData;
@@ -97,12 +76,6 @@ const offerItems = staticData;
 const inquiryItems = staticData;
 
 const Filters = [
-  {
-    name: Translations.left_sidebar_filter.language.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.language.type,
-    items: languageItems
-  },
   {
     name: Translations.left_sidebar_filter.relevance.name,
     className: "filter-title",

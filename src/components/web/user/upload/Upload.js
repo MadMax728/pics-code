@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { HashTagUsername, SelectCategory } from "../../../common";
 import { PlaceAutoCompleteLocation } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
+import VideoPlayer from "../../../ui-kit/player/VideoPlayer";
 
 class Upload extends Component {
   constructor(props) {
@@ -148,7 +149,10 @@ class Upload extends Component {
           ) : form.filetype ? (
             <img src={form.image} alt="upload" className="widthHeightAuto" />
           ) : (
-            <div>video player</div>
+            <video controls>
+              <track kind="captions" />
+              <source src={form.video} type={form.file.type} />
+            </video>
           )}
           {isInProgress && (
             <div className="image-wrapper">

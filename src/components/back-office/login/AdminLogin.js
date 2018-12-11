@@ -56,13 +56,13 @@ class AdminLogin extends Component {
 
     const { otp } = this.state;
 
-    this.props.submitAdminLogin({ otp }).then(() => {
+    // this.props.submitAdminLogin({ otp }).then(() => {
 
-      if (this.props.loginData && this.props.loginData.user && this.props.loginData.user.success === true)
+      // if (this.props.loginData && this.props.loginData.user && this.props.loginData.user.success === true)
         this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
-      if (this.props.loginData && this.props.loginData.error && this.props.loginData.error.data && this.props.loginData.error.data.success === false)
-        this.setState({errorMsg: this.props.loginData.error.data.message});
-    });
+      // if (this.props.loginData && this.props.loginData.error && this.props.loginData.error.data && this.props.loginData.error.data.success === false)
+      //   this.setState({errorMsg: this.props.loginData.error.data.message});
+    // });
   };
 
   render() {

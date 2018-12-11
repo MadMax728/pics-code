@@ -12,12 +12,39 @@ const staticData = [
 
 const reviewItems = staticData;
 
+const languageItems = [
+  {
+    name: "All",
+    className: "radio-btn ",
+    checked: true,
+    value: "all"
+  },
+  {
+    name: "German",
+    className: "radio-btn lbl-margin",
+    checked: false,
+    value: "german"
+  },
+  {
+    name: "English",
+    className: "radio-btn ",
+    checked: true,
+    value: "english"
+  }
+];
+
 const Filters = [
   {
     name: Translations.review_filter.status.name,
     className: "filter-title",
     type: Translations.review_filter.status.type,
     items: reviewItems
+  },
+  {
+    name: Translations.left_sidebar_filter.language.name,
+    className: "filter-title",
+    type: Translations.left_sidebar_filter.language.type,
+    items: languageItems
   }
 ];
 
