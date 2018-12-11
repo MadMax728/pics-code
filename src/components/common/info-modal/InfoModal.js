@@ -6,7 +6,8 @@ import {
   PaymentConfirmationModal,
   ProcessedModal,
   EditProfileModal,
-  ShareModal
+  ShareModal,
+  ConfirmationModal
 } from "../../web/modals";
 import PropTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -39,6 +40,17 @@ class InfoModal extends Component {
   handleModalPaymentConfirmation = () => {
     return (
       <PaymentConfirmationModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+        handleModalHide={this.props.handleModalHide}
+        modalInfoMsg={this.props.modalInfoMsg}
+      />
+    );
+  };
+
+  handleModalActionConfirmation = () => {
+    return (
+      <ConfirmationModal
         modalInfoShow={this.props.modalInfoShow}
         handleModalInfoHide={this.props.handleModalInfoHide}
         handleModalHide={this.props.handleModalHide}
@@ -82,6 +94,8 @@ class InfoModal extends Component {
           this.handleModalEditProfile()}
         {this.props.modalInfoType === modalType.share &&
           this.handleModalShare()}
+        {this.props.modalInfoType === modalType.confirmation &&
+          this.handleModalActionConfirmation()}
       </div>
     );
   };

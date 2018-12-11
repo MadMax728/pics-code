@@ -14,6 +14,7 @@ import {
 } from "../../../../actions";
 import PropTypes from "prop-types";
 import connect from "react-redux/es/connect/connect";
+import { modalType } from "../../../../lib/constants/enumerations";
 
 class PrivacyPage extends Component {
   constructor(props) {
@@ -114,7 +115,8 @@ class PrivacyPage extends Component {
   handleDeleteSearchHisory = () => {
     console.log("handleDeleteSearchHisory");
     const paramData = { searchHistoryId: "testId" };
-    this.props.deleteSearchHistory(paramData);
+    this.props.handleModalInfoShow(modalType.confirmation);
+    // this.props.deleteSearchHistory(paramData);
   };
 
   handleDeactiveMyAccount = () => {
@@ -492,7 +494,8 @@ PrivacyPage.propTypes = {
   setChangeInvoiceAddress: PropTypes.func,
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
-  searchHistoryId: PropTypes.object
+  searchHistoryId: PropTypes.object,
+  handleModalInfoShow: PropTypes.func
 };
 
 export default connect(
