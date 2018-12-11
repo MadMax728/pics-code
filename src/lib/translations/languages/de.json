@@ -267,6 +267,10 @@
   },
 
   "left_sidebar_filter": {
+    "language": {
+      "name": "Language",
+      "type": "radio"
+    },
     "relevance": {
       "name": "Relevance",
       "type": "radio"

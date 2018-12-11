@@ -48,8 +48,7 @@ class UploadModal extends Component {
       {
         form: {
           ...this.state.form,
-          add_description: value,
-          is_advertise_label: value
+          add_description: value
         }
       },
       () => cd()
