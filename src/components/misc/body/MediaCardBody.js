@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ImageItem, VideoItem } from "../../../ui-kit";
-import * as enumerations from "../../../../lib/constants/enumerations";
+import { ImageItem, VideoItem } from "../../ui-kit";
+import * as enumerations from "../../../lib/constants/enumerations";
 
 const MediaCardBody = ({ item }) => {
   return (

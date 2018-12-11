@@ -9,7 +9,7 @@ import {
 } from "../../../actions/forgotPassword";
 import { Auth } from "../../../auth";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 class ResetPassword extends Component {
   constructor(props) {
     super(props);

@@ -6,7 +6,7 @@ import {
   EditProfilePicHeader
 } from "../../../web/templates/settings/edit-profile-pic";
 import { uploadProfilePicture } from "../../../../actions/profile";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { b64toBlob } from "../../../../lib/utils/helpers";
 
 class EditProfileModal extends Component {

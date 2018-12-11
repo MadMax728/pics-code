@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCampaigns } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { CampaignCard } from "../misc";
+import { CampaignCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class CampaignPage extends Component {

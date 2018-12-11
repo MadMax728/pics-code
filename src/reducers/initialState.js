@@ -55,6 +55,16 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  backOfficeDashboardData: {
+    backOfficeDashboard: null,
+    isLoading: false,
+    error: false
+  },
+  cmsManagementData: {
+    cmsManagement: null,
+    isLoading: false,
+    error: false
+  },
   dashboardData: {
     dashboard: null,
     isLoading: false,
@@ -117,6 +127,24 @@ const initialState = {
     profilePrivacyData: [],
     isLoading: false,
     error: false
+  },
+  adminData: {
+    admins: null,
+    admin: null,
+    isLoading: false,
+    error: false
+  },
+  verificationData: {
+    verifications: null,
+    verification: null,
+    isLoading: false,
+    error: false
+  },
+  voucherData: {
+    vouchers: null,
+    voucher: null,
+    isLoading: false,
+    error: false    
   }
 };
 

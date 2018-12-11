@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { voucher_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import { getVouchers } from "../../../actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class AddVoucherPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      vouchers: voucher_list,
+      vouchers: null,
       form: {
         voucher_code: "",
         period: "",
@@ -137,9 +139,16 @@ class AddVoucherPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.props.getVouchers().then(()=> {
+      if(this.props.voucherData && this.props.voucherData.vouchers) {
+        this.setState({
+          vouchers: this.props.voucherData.vouchers
+        })
+      }
+    });
   };
 
-  render() {
+  renderVouchers = () => {
     const { vouchers } = this.state;
     const columns = [
       {
@@ -213,12 +222,7 @@ class AddVoucherPage extends Component {
     ];
 
     return (
-      <div className="padding-rl-10 middle-section width-80">
-        <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">
-            {Translations.admin.Add_voucher_code}
-          </div>
-          <div className="dashboard-tbl">
+      <div className="dashboard-tbl">
             <CustomBootstrapTable
               data={vouchers}
               columns={columns}
@@ -232,10 +236,38 @@ class AddVoucherPage extends Component {
               id={"code"}
             />
           </div>
+    )
+  }
+
+  render() {
+    const { vouchers } = this.state;
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+        <div className="dashboard-middle-section margin-bottom-50">
+          <div className="normal_title padding-15">
+            {Translations.admin.Add_voucher_code}
+          </div>
+          {vouchers && this.renderVouchers()}
         </div>
       </div>
     );
   }
 }
 
-export default AddVoucherPage;
+const mapStateToProps = state => ({
+  voucherData: state.voucherData
+});
+
+const mapDispatchToProps = {
+  getVouchers
+};
+
+AddVoucherPage.propTypes = {
+  getVouchers: PropTypes.func.isRequired,
+  voucherData: PropTypes.object,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddVoucherPage);

@@ -8,7 +8,7 @@ import { Text, RadioButton } from "../../ui-kit/CommonUIComponents";
 import PropTypes from "prop-types";
 import { submitRegister } from "../../../actions/register";
 import { Auth } from "../../../auth";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 
 class Register extends Component {
   constructor(props) {

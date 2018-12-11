@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { SocialNetworks } from "../../templates/settings/edit-profile";
+import { SocialNetworks } from "../../web/templates/settings/edit-profile";
 import { Link } from "react-router-dom";
-import { Translations } from "../../../../lib/translations";
+import { Translations } from "../../../lib/translations";
 
 const AboutCardBody = ({ about }) => {
   return (

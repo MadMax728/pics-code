@@ -11,8 +11,8 @@ import {
 import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
-import { getUser, updateUserProfile } from "../../../../../actions/profile";
-import connect from "react-redux/es/connect/connect";
+import { getUser, updateUserProfile } from "../../../../../actions";
+import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
 
@@ -20,7 +20,6 @@ const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
 if (storage) {
   userInfo = JSON.parse(storage.userInfo);
-  //  userInfo = jwtDecode(storage.accessToken);
 }
 
 class EditProfile extends Component {

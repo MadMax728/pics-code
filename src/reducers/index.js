@@ -18,6 +18,12 @@ import tags from "./tagsReducer";
 import usersData from "./usersReducers";
 import selectData from "./selectReducer";
 import mediaData from "./mediaReducer";
+import backOfficeDashboardData from "./backOfficeDashboardReducer";
+import cmsManagementData from "./cmsManagementReducer";
+import adminData from "./adminReducer";
+import verificationData from "./verificationReducer";
+import voucherData from "./voucherReducer";
+
 const rootReducer = combineReducers({
   loginData,
   userData,
@@ -37,7 +43,12 @@ const rootReducer = combineReducers({
   tags,
   usersData,
   selectData,
-  mediaData
+  mediaData,
+  backOfficeDashboardData,
+  cmsManagementData,
+  adminData,
+  verificationData,
+  voucherData,
 });
 
 export default rootReducer;

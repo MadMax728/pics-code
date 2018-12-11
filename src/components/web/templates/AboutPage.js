@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAbout } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { AboutCard } from "../misc";
+import { AboutCard } from "../../misc";
 // remove when actual about API calling
 import { Auth } from "../../../auth";
 

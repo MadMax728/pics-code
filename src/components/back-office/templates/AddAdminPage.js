@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { admin_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import { getAdmins } from "../../../actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class AddAdminPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      admins: admin_list,
+      admins: null,
       form: {
         username: "",
         status: "admin_status1"
@@ -61,6 +63,13 @@ class AddAdminPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.props.getAdmins().then(()=> {
+      if(this.props.adminData && this.props.adminData.admins) {
+        this.setState({
+          admins: this.props.adminData.admins
+        })
+      }
+    });
   };
 
   customTotal = (from, to, size) => (
@@ -69,7 +78,7 @@ class AddAdminPage extends Component {
     </span>
   );
 
-  render() {
+  renderAdmins = () => {
     const { admins } = this.state;
     const columns = [
       {
@@ -133,6 +142,27 @@ class AddAdminPage extends Component {
     ];
 
     return (
+      <div className="dashboard-tbl">
+          <CustomBootstrapTable
+            data={admins}
+            columns={columns}
+            striped
+            hover
+            bordered={false}
+            condensed
+            defaultSorted={defaultSorted}
+            pagination={pagination}
+            noDataIndication="Table is Empty"
+            id={"username"}
+          />
+        </div>
+    )
+  }
+
+  render() {
+    const { admins } = this.state;
+
+    return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
           <div className="normal_title padding-15">
@@ -160,24 +190,28 @@ class AddAdminPage extends Component {
               {Translations.admin.Add}
             </button>
           </div>
-          <div className="dashboard-tbl">
-            <CustomBootstrapTable
-              data={admins}
-              columns={columns}
-              striped
-              hover
-              bordered={false}
-              condensed
-              defaultSorted={defaultSorted}
-              pagination={pagination}
-              noDataIndication="Table is Empty"
-              id={"username"}
-            />
-          </div>
+          {admins && this.renderAdmins()}
         </div>
       </div>
     );
   }
 }
 
-export default AddAdminPage;
+
+const mapStateToProps = state => ({
+  adminData: state.adminData
+});
+
+const mapDispatchToProps = {
+  getAdmins
+};
+
+AddAdminPage.propTypes = {
+  getAdmins: PropTypes.func.isRequired,
+  adminData: PropTypes.object,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddAdminPage);

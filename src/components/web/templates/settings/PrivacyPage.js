@@ -13,7 +13,7 @@ import {
   deactivateAccount
 } from "../../../../actions";
 import PropTypes from "prop-types";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { modalType } from "../../../../lib/constants/enumerations";
 
 class PrivacyPage extends Component {

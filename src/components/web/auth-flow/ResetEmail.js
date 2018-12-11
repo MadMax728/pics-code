@@ -6,7 +6,7 @@ import { BaseHeader, BaseFooter } from "../common";
 import PropTypes from "prop-types";
 import { submitResetPassword } from "../../../actions/forgotPassword";
 import { submitLogin } from "../../../actions";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { Auth } from "../../../auth";
 import * as userService from "../../../services/userService";
 import { Redirect } from "react-router";

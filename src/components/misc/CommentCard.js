@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../lib/constants/images";
+import * as images from "../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { RenderToolTips, HashTagUsername } from "../../common";
-import { ThreeDots, ReadMore } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { addComment, deleteComment, editComment } from "../../../actions";
+import { RenderToolTips, HashTagUsername } from "../common";
+import { ThreeDots, ReadMore } from "../ui-kit";
+import { Translations } from "../../lib/translations";
+import { addComment, deleteComment, editComment } from "../../actions";
 import { connect } from "react-redux";
 import moment from "moment";
 
@@ -49,7 +49,7 @@ class CommentCard extends Component {
   handleReportPost = () => {};
 
   componentWillMount = () => {
-    let commentData = (this.state.comments).slice(this.state.minRange, this.state.maxRange);
+    const commentData = (this.state.comments).slice(this.state.minRange, this.state.maxRange);
     this.setState({'slicedCommentsData' :  commentData, 'maxRange' : 2})
   }
 
@@ -88,8 +88,8 @@ class CommentCard extends Component {
   };
 
   handleViewComment = (e) => {
-    let maxRangeValue =  parseInt(this.state.maxRange) + parseInt(e.target.id);
-    let commentData = (this.state.comments).slice(0, maxRangeValue);
+    const maxRangeValue =  parseInt(this.state.maxRange) + parseInt(e.target.id);
+    const commentData = (this.state.comments).slice(0, maxRangeValue);
     this.setState({'slicedCommentsData' :  commentData, 'maxRange' : maxRangeValue})
   };
 

@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import MediaCardBody from "./body/MediaCardBody";
-import MediaCardHeader from "./headers/MediaCardHeader";
-import MediaCardFooter from "./footers/MediaCardFooter";
+import CampaignCardHeader from "./headers/CampaignCardHeader";
+import CampaignCardBody from "./body/CampaignCardBody";
+import CampaignCardFooter from "./footers/CampaignCardFooter";
+import { Translations } from "../../lib/translations";
+import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
-import { Translations } from "../../../lib/translations";
-import { RenderToolTips } from "../../common";
-import { like } from "../../../actions/like";
-import { getComments } from "../../../actions/comments";
+import { like, getComments } from "../../actions";
 import { connect } from "react-redux";
 
-class MediaCard extends Component {
+class CampaignCard extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -45,30 +44,30 @@ class MediaCard extends Component {
 
   handleContent = () => {};
 
-  handleComment = commet => {
-    const item = this.state.item;
-    item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
-    this.setState({ item });
-  };
-
   handleFavorite = e => {
     const item = this.state.item;
     item.isSelfLike = !this.state.item.isSelfLike;
     item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
     this.setState({ item });
 
-    const mediaLike = {
-      typeOfContent: "mediapost",
+    const campaignLike = {
+      typeOfContent: "campaign",
       typeId: item.id
     };
-    this.props.like(mediaLike);
+    this.props.like(campaignLike);
+  };
+
+  handleComment = commet => {
+    const item = this.state.item;
+    item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
+    this.setState({ item });
   };
 
   handleCommentsSections = () => {
-    const itemId = {
+    const CampaignId = {
       typeId: this.state.item.id
     };
-    this.props.getComments(itemId).then(() => {
+    this.props.getComments(CampaignId).then(() => {
       this.setState({
         isComments: !this.state.isComments,
         comments: this.props.comments,
@@ -78,23 +77,31 @@ class MediaCard extends Component {
   };
 
   render() {
+    const { isStatus, isDescription, isInformation } = this.props;
     const { isComments, item } = this.state;
     const { likeData } = this.props;
     return (
       <div className="feed_wrapper">
-        <MediaCardHeader
-          item={item}
+        <CampaignCardHeader
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
         />
-        <MediaCardBody item={item} />
-        <MediaCardFooter
-          isLoading={likeData.isLoading}
-          item={item}
+        <CampaignCardBody
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
+        />
+        <CampaignCardFooter
+          campaign={item}
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
+          isStatus={isStatus}
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
         />
         {isComments && (
           <CommentCard
@@ -113,7 +120,7 @@ class MediaCard extends Component {
 const mapStateToProps = state => ({
   likeData: state.likeData,
   comments: state.commentData.comments,
-  totalCommentsCount: state.totalCommentsCount
+   totalCommentsCount: state.totalCommentsCount
 });
 
 const mapDispatchToProps = {
@@ -121,20 +128,18 @@ const mapDispatchToProps = {
   getComments
 };
 
-MediaCard.propTypes = {
+CampaignCard.propTypes = {
+  getComments: PropTypes.func.isRequired,
+  comments: PropTypes.any,
+  isDescription: PropTypes.bool.isRequired,
+  isInformation: PropTypes.bool.isRequired,
+  isStatus: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,
   like: PropTypes.func.isRequired,
-  comments: PropTypes.any,
-  getComments: PropTypes.func.isRequired,
-  isParticipant: PropTypes.bool,
   likeData: PropTypes.any
-};
-
-MediaCard.defaultProps = {
-  isParticipant: false
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MediaCard);
+)(CampaignCard);
