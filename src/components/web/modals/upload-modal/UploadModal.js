@@ -26,6 +26,10 @@ class UploadModal extends Component {
     this.state = initialState;
   }
 
+  componentWillUnmount = () => {
+    this.setState(initialState);
+  }
+  
   handleUpload = (imageVideo, file, filetype) => {
     console.log(imageVideo);
     console.log(file);
