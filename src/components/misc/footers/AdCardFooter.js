@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as routes from "../../../../lib/constants/routes";
-import * as images from "../../../../lib/constants/images";
-import { ThreeDots } from "../../../ui-kit";
+import * as routes from "../../../lib/constants/routes";
+import * as images from "../../../lib/constants/images";
+import { ThreeDots } from "../../ui-kit";
 import StatusCard from "../StatusCard";
 
 const AdCardFooter = ({

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getAds } from "../../../../../actions";
 import { CampaignLoading } from "../../../../ui-kit";
-import { AdCard } from "../../../misc";
+import { AdCard } from "../../../../misc";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class AdsPage extends Component {

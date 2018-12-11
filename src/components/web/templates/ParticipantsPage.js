@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { MediaCard } from "../misc";
+import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 import PropTypes from "prop-types";
 

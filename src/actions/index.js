@@ -11,3 +11,4 @@ export * from "./tags";
 export * from "./users";
 export * from "./select";
 export * from "./privacy";
+export * from "./like";

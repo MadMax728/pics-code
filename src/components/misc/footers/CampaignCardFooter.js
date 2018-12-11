@@ -1,25 +1,31 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../../lib/constants/images";
-import { ThreeDots } from "../../../ui-kit";
+import { Link } from "react-router-dom";
+import * as routes from "../../../lib/constants/routes";
+import * as images from "../../../lib/constants/images";
+import { ThreeDots } from "../../ui-kit";
+import StatusCard from "../StatusCard";
 
-const MediaCardFooter = ({
-  isLoading,
-  item,
+const CampaignCardFooter = ({
+  campaign,
   handleCommentsSections,
+  isStatus,
   renderReportTips,
-  handleFavorite
+  handleFavorite,
+  isLoading
 }) => {
-  const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
+  const favorite_icon = campaign.isSelfLike
+    ? images.blue_heart
+    : images.feed_like;
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
-        <span className="count">{item.commentCount}</span>
+        <span className="count">{campaign.commentCount}</span>
         <button
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
-          id={item.createdBy}
+          id={campaign.createdBy}
           onKeyDown={handleCommentsSections}
           disabled={isLoading}
         >
@@ -31,12 +37,12 @@ const MediaCardFooter = ({
         </button>
       </div>
       <div className="likes" role="article">
-        <span className="count">{item.likeCount}</span>
+        <span className="count">{campaign.likeCount}</span>
         <button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
-          id={item.id}
+          id={campaign.id}
           onKeyDown={handleFavorite}
           disabled={isLoading}
         >
@@ -44,6 +50,10 @@ const MediaCardFooter = ({
         </button>
       </div>
       <div className="show_more_options">
+        <div className="share-wrapr">
+          <img src={images.share} alt="share" />
+        </div>
+        <div className="social-media-wrapr" />
         <ThreeDots
           id="report"
           role="button"
@@ -59,16 +69,23 @@ const MediaCardFooter = ({
           type={"light"}
         />
       </div>
+      {campaign && isStatus && (
+        <StatusCard
+          item={campaign}
+          route={`${routes.BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}`}
+        />
+      )}
     </div>
   );
 };
 
-MediaCardFooter.propTypes = {
+CampaignCardFooter.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
   handleCommentsSections: PropTypes.func.isRequired,
-  item: PropTypes.object.isRequired,
+  campaign: PropTypes.object.isRequired,
+  isStatus: PropTypes.bool.isRequired,
   renderReportTips: PropTypes.func.isRequired,
   isLoading: PropTypes.bool
 };
 
-export default MediaCardFooter;
+export default CampaignCardFooter;

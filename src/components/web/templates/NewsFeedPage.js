@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getNewsFeed } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { CampaignCard, AdCard, MediaCard } from "../misc";
+import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsFeedPage extends Component {

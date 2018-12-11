@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../ui-kit";
-import { MediaCard } from "../misc";
+import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {

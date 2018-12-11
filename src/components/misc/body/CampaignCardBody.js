@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ImageItem, VideoItem, ReadMore } from "../../../ui-kit";
-import * as enumerations from "../../../../lib/constants/enumerations";
+import { ImageItem, VideoItem, ReadMore } from "../../ui-kit";
+import * as enumerations from "../../../lib/constants/enumerations";
 import InformationCard from "../InformationCard";
 
 const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {

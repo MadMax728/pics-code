@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import AdCardHeader from "./headers/AdCardHeader";
 import AdCardBody from "./body/AdCardBody";
 import AdCardFooter from "./footers/AdCardFooter";
-import { Translations } from "../../../lib/translations";
-import { RenderToolTips } from "../../common";
+import { Translations } from "../../lib/translations";
+import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
 
 class AdCard extends Component {

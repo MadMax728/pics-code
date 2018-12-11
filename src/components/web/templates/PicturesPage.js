@@ -1,5 +1,5 @@
 import React from "react";
-import PictureCard from "../../web/misc/PictureCard";
+import { PictureCard } from "../../misc";
 import PropTypes from "prop-types";
 import { UserPicLoading } from "../../ui-kit";
 import { connect } from "react-redux";

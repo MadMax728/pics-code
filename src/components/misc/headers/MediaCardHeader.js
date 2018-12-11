@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as routes from "../../../../lib/constants/routes";
-import * as images from "../../../../lib/constants/images";
+import * as routes from "../../../lib/constants/routes";
+import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import moment from "moment";
 

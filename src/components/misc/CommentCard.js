@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../lib/constants/images";
+import * as images from "../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { RenderToolTips, HashTagUsername } from "../../common";
-import { ThreeDots, ReadMore } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { addComment, deleteComment, editComment } from "../../../actions";
+import { RenderToolTips, HashTagUsername } from "../common";
+import { ThreeDots, ReadMore } from "../ui-kit";
+import { Translations } from "../../lib/translations";
+import { addComment, deleteComment, editComment } from "../../actions";
 import { connect } from "react-redux";
 import moment from "moment";
 
