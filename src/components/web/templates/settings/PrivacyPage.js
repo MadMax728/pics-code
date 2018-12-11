@@ -4,6 +4,7 @@ import { Text } from "../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../lib/translations";
 import {
   setProfilePrivacy,
+  setSocialShare,
   setProfilePersonalizedAdvertise,
   setChangeEmail,
   setChangePassword,
@@ -21,6 +22,7 @@ class PrivacyPage extends Component {
     this.state = {
       isPrivate: false,
       isPersonalized: false,
+      isSocialShare: false,
       change_email_form: {
         current_email: "",
         new_email: ""
@@ -48,6 +50,13 @@ class PrivacyPage extends Component {
     this.setState({ isPrivate });
     const paramData = { isprivate: isPrivate };
     this.props.setProfilePrivacy(paramData);
+  };
+
+  hanldeIsSocialShare = event => {
+    const isSocialShare = event.target.checked;
+    this.setState({ isSocialShare });
+    const paramData = { isSocialShare: isSocialShare };
+    this.props.setSocialShare(paramData);
   };
 
   hanldeIsPersonalized = event => {
@@ -105,7 +114,7 @@ class PrivacyPage extends Component {
   handleDeleteSearchHisory = () => {
     console.log("handleDeleteSearchHisory");
     const paramData = { searchHistoryId: "testId" };
-    this.props.searchHistoryId(paramData);
+    this.props.deleteSearchHistory(paramData);
   };
 
   handleDeactiveMyAccount = () => {
@@ -139,16 +148,27 @@ class PrivacyPage extends Component {
                 </div>
                 <div className="col-sm-6 text-right">
                   <div>
-                    <div className="switch" htmlFor={"Privacy"}>
+                    <label className="switch" htmlFor={"Privacy"}>
                       <input type="checkbox" onChange={this.hanldeIsPrivate} />
-                      <div className="slider round" />
-                    </div>
+                      <span className="slider round" />
+                    </label>
                   </div>
-
-                  {/* <label className="switch" htmlFor={"Privacy"}>
-                    <input type="checkbox" onChange={this.hanldeIsPrivate} />
-                    <span className="slider round" />
-                  </label> */}
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.social_share_function}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <div>
+                    <label className="switch" htmlFor={"SocialShare"}>
+                      <input
+                        type="checkbox"
+                        onChange={this.hanldeIsSocialShare}
+                      />
+                      <span className="slider round" />
+                    </label>
+                  </div>
                 </div>
               </div>
               <div className="row">
@@ -454,6 +474,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   setProfilePrivacy,
+  setSocialShare,
   setProfilePersonalizedAdvertise,
   setChangeEmail,
   setChangePassword,
@@ -464,6 +485,7 @@ const mapDispatchToProps = {
 
 PrivacyPage.propTypes = {
   setProfilePrivacy: PropTypes.func,
+  setSocialShare: PropTypes.func,
   setProfilePersonalizedAdvertise: PropTypes.func,
   setChangeEmail: PropTypes.func,
   setChangePassword: PropTypes.func,

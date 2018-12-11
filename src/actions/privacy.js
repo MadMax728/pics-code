@@ -19,6 +19,22 @@ const setProfilePrivacyFailed = error => ({
   error: true
 });
 
+// Set Social Share
+const setSocialShareStarted = () => ({
+  type: types.SET_SOCIAL_SHARE_STARTED
+});
+
+const setSocialShareSucceeded = data => ({
+  type: types.SET_SOCIAL_SHARE_SUCCEEDED,
+  payload: data
+});
+
+const setSocialShareFailed = error => ({
+  type: types.SET_SOCIAL_SHARE_FAILED,
+  payload: error,
+  error: true
+});
+
 // Set Profile - Personalized Advertise
 const setProfilePersonalizedAdvertiseStarted = () => ({
   type: types.SET_PROFILE_PERSONALIZED_ADVERTISE_STARTED
@@ -130,6 +146,27 @@ export const setProfilePrivacy = isPrivacy => {
       },
       error => {
         dispatch(setProfilePrivacyFailed(error.response));
+        logger.error({ description: error.toString(), fatal: true });
+      }
+    );
+  };
+};
+
+export const setSocialShare = isSocialShare => {
+  return dispatch => {
+    dispatch(setSocialShareStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+
+    return privacyService.setSocialShare(params, isSocialShare).then(
+      res => {
+        dispatch(setSocialShareSucceeded(res));
+      },
+      error => {
+        dispatch(setSocialShareFailed(error.response));
         logger.error({ description: error.toString(), fatal: true });
       }
     );

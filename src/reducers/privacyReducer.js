@@ -21,6 +21,25 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
         isLoading: false,
         error: action.payload
       };
+
+    case types.SET_SOCIAL_SHARE_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.SET_SOCIAL_SHARE_SUCCEEDED:
+      return {
+        ...state,
+        socialShareData: action.payload,
+        isLoading: false
+      };
+    case types.SET_SOCIAL_SHARE_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     case types.SET_PROFILE_PERSONALIZED_ADVERTISE_STARTED:
       return {
         ...state,
@@ -30,7 +49,7 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
     case types.SET_PROFILE_PERSONALIZED_ADVERTISE_SUCCEEDED:
       return {
         ...state,
-        profilePrivacyData: action.payload,
+        personalAdvertiseData: action.payload,
         isLoading: false
       };
     case types.SET_PROFILE_PERSONALIZED_ADVERTISE_FAILED:
@@ -48,7 +67,7 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
     case types.SET_CHANGE_EMAIL_SUCCEEDED:
       return {
         ...state,
-        profilePrivacyData: action.payload,
+        changeEmailData: action.payload,
         isLoading: false
       };
     case types.SET_CHANGE_EMAIL_FAILED:
@@ -66,7 +85,7 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
     case types.SET_CHANGE_PASSWORD_SUCCEEDED:
       return {
         ...state,
-        profilePrivacyData: action.payload,
+        changePasswordData: action.payload,
         isLoading: false
       };
     case types.SET_CHANGE_PASSWORD_FAILED:
@@ -84,7 +103,7 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
     case types.SET_CHANGE_INVOICE_ADDRESS_SUCCEEDED:
       return {
         ...state,
-        profilePrivacyData: action.payload,
+        changeInvoiceAddressData: action.payload,
         isLoading: false
       };
     case types.SET_CHANGE_INVOICE_ADDRESS_FAILED:
@@ -102,7 +121,7 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
     case types.DELETE_SEARCH_HISTORY_SUCCEEDED:
       return {
         ...state,
-        profilePrivacyData: action.payload,
+        deleteSearchHistoryData: action.payload,
         isLoading: false
       };
     case types.DELETE_SEARCH_HISTORY_FAILED:
@@ -120,7 +139,7 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
     case types.DEACTIVATE_ACCOUNT_SUCCEEDED:
       return {
         ...state,
-        profilePrivacyData: action.payload,
+        deactivateAccountData: action.payload,
         isLoading: false
       };
     case types.DEACTIVATE_ACCOUNT_FAILED:
