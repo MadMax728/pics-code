@@ -10,14 +10,15 @@ const initialState = {
     add_location: {
       lat: "",
       lng: "",
-      address: "",
+      address: ""
     },
     add_category: "",
     add_description: "",
+    is_advertise_label: false,
     image: null,
     file: null,
     video: null,
-    filetype: true,
+    filetype: true
   }
 };
 class UploadModal extends Component {
@@ -30,29 +31,40 @@ class UploadModal extends Component {
     console.log(imageVideo);
     console.log(file);
     console.log(filetype);
-    
-    if (filetype){
-      this.setState({ form: { ...this.state.form, image: imageVideo, file, filetype } });
-    }
-    else{
-      this.setState({ form: { ...this.state.form, video: imageVideo, file, filetype } });
+
+    if (filetype) {
+      this.setState({
+        form: { ...this.state.form, image: imageVideo, file, filetype }
+      });
+    } else {
+      this.setState({
+        form: { ...this.state.form, video: imageVideo, file, filetype }
+      });
     }
   };
 
   handleSetState = (value, cd) => {
-    this.setState({ form: { ...this.state.form, add_description: value } }, () =>
-      cd()
+    this.setState(
+      {
+        form: {
+          ...this.state.form,
+          add_description: value,
+          is_advertise_label: value
+        }
+      },
+      () => cd()
     );
   };
 
   handleContinue = () => {
-    const { form } = this.state; 
+    const { form } = this.state;
     const Data = new FormData();
-    Data.set('title', '');
-    Data.set('description', form.add_decription);
-    Data.append('image', form.file);
-    Data.set('postType', 'mediapost');
-    Data.set('location', form.add_location);
+    Data.set("title", "");
+    Data.set("description", form.add_decription);
+    Data.set("isAdvertiseLabel", form.is_advertise_label);
+    Data.append("image", form.file);
+    Data.set("postType", "mediapost");
+    Data.set("location", form.add_location);
 
     this.props.uploadMedia(Data).then(() => {
       this.props.handleModalHide();
@@ -62,23 +74,27 @@ class UploadModal extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    if (event.target.type === "checkbox") {
+      form[event.target.name] = event.target.checked;
+    } else {
+      form[event.target.name] = event.target.value;
+    }
     this.setState({ form });
   };
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    form.add_location.lat = location.lat
-    form.add_location.lng = location.lng
+    form.add_location.lat = location.lat;
+    form.add_location.lng = location.lng;
     form.add_location.address = address;
     this.setState({ form });
   };
 
-  handleSelect = (isFor , selected) => {
+  handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form.add_category = selected;
     this.setState({ form });
-  }
+  };
 
   render() {
     const { form } = this.state;
@@ -119,7 +135,7 @@ UploadModal.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  media: state.mediaData  
+  media: state.mediaData
 });
 
 const mapDispatchToProps = {
