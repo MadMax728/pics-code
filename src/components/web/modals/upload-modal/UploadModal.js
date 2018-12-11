@@ -3,7 +3,7 @@ import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
 import { uploadMedia } from "../../../../actions/media";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 
 const initialState = {
   form: {

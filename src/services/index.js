@@ -10,3 +10,4 @@ export * from "./tagService";
 export * from "./selectService";
 export * from "./mediaService";
 export * from "./privacyService";
+export * from "./backOfficeDashboardService";

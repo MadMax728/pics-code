@@ -4,7 +4,7 @@ import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { getUser } from "../../../../actions";
 
 class TopBarOwnerInfo extends Component {

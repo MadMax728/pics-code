@@ -4,7 +4,7 @@ import { AdminHeader } from "../header";
 import * as routes from "../../../lib/constants/routes";
 import { generateOTP } from "../../../actions/login";
 import PropTypes from "prop-types";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 
 class LoginLinkSend extends Component {
   handleSubmit = e => {

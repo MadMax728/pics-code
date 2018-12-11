@@ -3,7 +3,7 @@ import { TopBar } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { getUser } from "../../../../actions";
 class TopBarOtherInfo extends Component {
   constructor(props) {

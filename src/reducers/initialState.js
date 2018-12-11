@@ -55,6 +55,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  backOfficeDashboardData: {
+    backOfficeDashboard: null,
+    isLoading: false,
+    error: false
+  },
   dashboardData: {
     dashboard: null,
     isLoading: false,
