@@ -13,3 +13,7 @@ export * from "./select";
 export * from "./privacy";
 export * from "./like";
 export * from "./backOfficeDashboard";
+export * from "./cmsManagement";
+export * from "./admin";
+export * from "./verification";
+export * from "./voucher";

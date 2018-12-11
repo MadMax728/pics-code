@@ -32,7 +32,7 @@ class MRightContainer extends Component {
         this.socket.emit('communication-message-board-new-message', {
             recipientId: this.props.user.id,
             senderId: this.props.me,
-            content: content
+            content
         });
     }
 

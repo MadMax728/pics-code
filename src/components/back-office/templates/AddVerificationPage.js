@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import { verification_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import { getVerifications } from "../../../actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class AddVerificationPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      verifications: verification_list,
+      verifications: null,
       form: {
         username: ""
       }
@@ -64,9 +66,16 @@ class AddVerificationPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.props.getVerifications().then(()=> {
+      if(this.props.verificationData && this.props.verificationData.verifications) {
+        this.setState({
+          verifications: this.props.verificationData.verifications
+        })
+      }
+    });
   };
 
-  render() {
+  renderVerifications = () => {
     const { verifications } = this.state;
     const columns = [
       {
@@ -130,6 +139,26 @@ class AddVerificationPage extends Component {
     ];
 
     return (
+      <div className="dashboard-tbl">
+            <CustomBootstrapTable
+              data={verifications}
+              columns={columns}
+              striped
+              hover
+              bordered={false}
+              condensed
+              defaultSorted={defaultSorted}
+              pagination={pagination}
+              noDataIndication="Table is Empty"
+              id={"username"}
+            />
+          </div>
+    )
+  }
+
+  render() {
+    const { verifications } = this.state;
+    return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
           <div className="normal_title padding-15">
@@ -148,24 +177,29 @@ class AddVerificationPage extends Component {
               {Translations.admin.Add}
             </button>
           </div>
-          <div className="dashboard-tbl">
-            <CustomBootstrapTable
-              data={verifications}
-              columns={columns}
-              striped
-              hover
-              bordered={false}
-              condensed
-              defaultSorted={defaultSorted}
-              pagination={pagination}
-              noDataIndication="Table is Empty"
-              id={"username"}
-            />
-          </div>
+          {verifications && this.renderVerifications()}
         </div>
       </div>
     );
   }
 }
 
-export default AddVerificationPage;
+const mapStateToProps = state => ({
+  verificationData: state.verificationData
+});
+
+const mapDispatchToProps = {
+  getVerifications
+};
+
+AddVerificationPage.propTypes = {
+  getVerifications: PropTypes.func.isRequired,
+  verificationData: PropTypes.object,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddVerificationPage);
+
+

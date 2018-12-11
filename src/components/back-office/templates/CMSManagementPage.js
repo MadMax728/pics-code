@@ -1,15 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
-import { cmsManagement_list } from "../../../mock-data";
 import { CustomBootstrapTable } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import { getCMSManagement } from "../../../actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class CMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      cmsManagement: cmsManagement_list
+      cmsManagement: null
     };
   }
 
@@ -34,6 +36,13 @@ class CMSManagementPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.props.getCMSManagement().then(()=> {
+      if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
+        this.setState({
+          cmsManagement: this.props.cmsManagementData.cmsManagement
+        })
+      }
+    });
   };
 
   customTotal = (from, to, size) => (
@@ -42,7 +51,7 @@ class CMSManagementPage extends Component {
     </span>
   );
 
-  render() {
+  renderCMSManagement = () => {
     const { cmsManagement } = this.state;
     const columns = [
       {
@@ -90,7 +99,6 @@ class CMSManagementPage extends Component {
         formatter: this.statusFormatter
       }
     ];
-
     const pagination = {
       page: 1, // Specify the current page. It's necessary when remote is enabled
       sizePerPage: 5, // Specify the size per page. It's necessary when remote is enabled
@@ -128,8 +136,29 @@ class CMSManagementPage extends Component {
     ];
 
     return (
+      <div className="dashboard-tbl">
+        <CustomBootstrapTable
+          data={cmsManagement}
+          columns={columns}
+          striped
+          hover
+          bordered={false}
+          condensed
+          defaultSorted={defaultSorted}
+          pagination={pagination}
+          noDataIndication="Table is Empty"
+          id={"title"}
+        />
+      </div>
+    )
+  }
+
+  render() {
+    const { cmsManagement } = this.state;
+
+    return (
       <div className="padding-rl-10 middle-section width-80">
-        <div className="dashboard-middle-section margin-bottom-50">
+       <div className="dashboard-middle-section margin-bottom-50">
           <div className="title_with_dropdown">
             <span>{Translations.cms.cms}</span>
             <Link to={routes.BACK_OFFICE_CREATE_CMS_ROUTE}>
@@ -143,24 +172,28 @@ class CMSManagementPage extends Component {
               <option>Option 2 </option>
             </select>
           </div>
-          <div className="dashboard-tbl">
-            <CustomBootstrapTable
-              data={cmsManagement}
-              columns={columns}
-              striped
-              hover
-              bordered={false}
-              condensed
-              defaultSorted={defaultSorted}
-              pagination={pagination}
-              noDataIndication="Table is Empty"
-              id={"title"}
-            />
-          </div>
+          {cmsManagement && this.renderCMSManagement()}
         </div>
       </div>
     );
   }
 }
 
-export default CMSManagementPage;
+const mapStateToProps = state => ({
+  cmsManagementData: state.cmsManagementData
+});
+
+const mapDispatchToProps = {
+  getCMSManagement
+};
+
+CMSManagementPage.propTypes = {
+  getCMSManagement: PropTypes.func.isRequired,
+  cmsManagementData: PropTypes.object,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CMSManagementPage);
+

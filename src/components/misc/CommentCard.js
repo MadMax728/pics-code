@@ -49,7 +49,7 @@ class CommentCard extends Component {
   handleReportPost = () => {};
 
   componentWillMount = () => {
-    let commentData = (this.state.comments).slice(this.state.minRange, this.state.maxRange);
+    const commentData = (this.state.comments).slice(this.state.minRange, this.state.maxRange);
     this.setState({'slicedCommentsData' :  commentData, 'maxRange' : 2})
   }
 
@@ -88,8 +88,8 @@ class CommentCard extends Component {
   };
 
   handleViewComment = (e) => {
-    let maxRangeValue =  parseInt(this.state.maxRange) + parseInt(e.target.id);
-    let commentData = (this.state.comments).slice(0, maxRangeValue);
+    const maxRangeValue =  parseInt(this.state.maxRange) + parseInt(e.target.id);
+    const commentData = (this.state.comments).slice(0, maxRangeValue);
     this.setState({'slicedCommentsData' :  commentData, 'maxRange' : maxRangeValue})
   };
 

@@ -24,7 +24,7 @@ class Messages extends Component {
 
     selectUser = (user) => {
         if(!user || !user.id) return;
-        this.setState({ user: user,  messages : []});
+        this.setState({ user,  messages : []});
         this.socket.emit('communication-message-board-join', {
             recipientId: user.id,
             senderId: this.state.me
