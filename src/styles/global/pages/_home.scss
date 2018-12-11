@@ -36,7 +36,7 @@
     img {
       width: 20px;
       margin-left: 10px;
-      &:focus{
+      &:focus {
         outline: 0;
         border: 0;
       }
@@ -44,7 +44,7 @@
     a,
     .share-wrapr {
       float: left;
-      &:focus{
+      &:focus {
         outline: 0;
       }
     }
@@ -385,7 +385,7 @@
           height: 45px;
           padding: 0;
         }
-        img{
+        img {
           max-width: 45px;
           max-height: 45px;
         }
@@ -407,12 +407,12 @@
           height: 35px;
           padding: 6px;
           width: 90px;
-          @media(max-width: 1199px){
-						width: 85px;
-						padding: 3px;
-						font-size: 13px;
+          @media (max-width: 1199px) {
+            width: 85px;
+            padding: 3px;
+            font-size: 13px;
           }
-          @media (max-width: 991px){
+          @media (max-width: 991px) {
             width: calc(100% - 20px);
             padding: 9px;
             margin: 12px 10px 0px 10px;
@@ -473,7 +473,6 @@
     padding: 10px;
     @include float();
     .normal_title {
-      
       &.gray_box {
       }
     }
@@ -483,7 +482,7 @@
         min-height: 15px;
         background-color: #d3d3d3;
       }
-      &.textBold{
+      &.textBold {
         font-weight: bold;
       }
     }
@@ -495,10 +494,10 @@
     .profile_image {
       display: inline-block;
       float: left;
-      &.wid45{
+      &.wid45 {
         width: 55px;
       }
-      
+
       img {
         cursor: auto;
         width: 45px;
@@ -541,7 +540,7 @@
   .feed_content {
     float: left;
     width: 100%;
-    video{
+    video {
       // background: url("../images/play_video_back.png") no-repeat 50% #000;
       background-size: contain;
       background-position: center;
@@ -695,8 +694,8 @@
         @media (max-width: 991px) {
           float: left;
         }
-        .display-text-group{
-          span{
+        .display-text-group {
+          span {
             display: inline-block;
             width: 100%;
             word-break: break-all;
@@ -725,11 +724,10 @@
     .view-more-comments {
       float: left;
       width: 100%;
-      
-        padding: 13px;
-        display: block;
-        color: $silver_color;
-      
+      padding: 13px;
+      display: block;
+      color: $silver_color;
+      cursor: pointer;
     }
   }
 }

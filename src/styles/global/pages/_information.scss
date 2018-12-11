@@ -83,9 +83,9 @@
   }
   img {
     width: 100%;
-    &.padd20{
-			padding: 0 20px;
-		}
+    &.padd20 {
+      padding: 0 20px;
+    }
   }
   button {
     width: 100%;
@@ -116,7 +116,7 @@
       .profile_image {
         display: inline-block;
         float: left;
-        &.wid45{
+        &.wid45 {
           width: 55px;
         }
       }
@@ -140,6 +140,7 @@
     }
     .view-more-comments {
       padding: 0px 17px;
+      cursor: pointer;
     }
   }
 }

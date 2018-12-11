@@ -4,7 +4,7 @@
   "date_format": {
     "date": "MM/DD/YYYY"
   },
-  
+
   "offen": "In der Picstagraph-App offenen",
 
   "subscribe": "Subscribe",
@@ -267,6 +267,10 @@
   },
 
   "left_sidebar_filter": {
+    "language": {
+      "name": "Language",
+      "type": "radio"
+    },
     "relevance": {
       "name": "Relevance",
       "type": "radio"
@@ -590,6 +594,7 @@
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
+    "social_share_function": "Social share function",
     "Personalized_advertising": "Personalized advertising",
     "Change_email": "Change email",
     "Current_Email": "Current Email",

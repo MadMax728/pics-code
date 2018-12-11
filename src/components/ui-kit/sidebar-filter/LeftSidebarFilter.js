@@ -13,6 +13,7 @@ class LeftSidebarFilter extends Component {
 
   handleOnChange = filter => {
     const filterData = this.state.filterData;
+    console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
       return f.name === filter.values.name;
     });
@@ -84,7 +85,6 @@ class LeftSidebarFilter extends Component {
                   onChange={this.handleOnChange}
                 />
               )}
-
               {filter.type === "text" && (
                 <Text
                   foruse={filter.name}
