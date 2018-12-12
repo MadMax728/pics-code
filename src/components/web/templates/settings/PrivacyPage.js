@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 import { Text } from "../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../lib/translations";
+import { Auth } from "../../../../auth";
 import {
   setProfilePrivacy,
   setSocialShare,
@@ -40,9 +41,21 @@ class PrivacyPage extends Component {
         city: "",
         country: "",
         vat_identification_number: ""
-      }
+      },
+      userId: ""
     };
   }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.setState({ userId: userInfo.id });
+    }
+  };
 
   onKeyPressHandler = () => {};
 
@@ -112,25 +125,28 @@ class PrivacyPage extends Component {
     this.props.setChangeInvoiceAddress(paramData);
   };
 
-  handleDeleteSearchHisory = () => {
-    console.log("handleDeleteSearchHisory");
-    const paramData = { searchHistoryId: "testId" };
+  handleDeleteSearchHisory = e => {
+    console.log("Delete History", e.target.id);
+    const paramData = { searchHistoryId: e.target.id };
     this.props.handleModalInfoShow(modalType.confirmation);
-    // this.props.deleteSearchHistory(paramData);
+    // this.props.deleteSearchHistory(paramData); // API Call
   };
 
-  handleDeactiveMyAccount = () => {
-    console.log("handleDeactiveMyAccount");
-    const paramData = { accountId: "testId" };
-    this.props.deactivateAccount(paramData);
+  handleDeactiveMyAccount = e => {
+    console.log("Deactivate Account ", e.target.id);
+    const paramData = { accountId: e.target.id };
+    this.props.handleModalInfoShow(modalType.confirmation);
+    // this.props.deactivateAccount(paramData); // API Call
   };
 
   render() {
     const {
       change_email_form,
       change_password_form,
-      change_invoicing_address_form
+      change_invoicing_address_form,
+      userId
     } = this.state;
+    console.log("userid", userId);
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -437,6 +453,7 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeleteSearchHisory}
+                    id={userId}
                     role="button"
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}
@@ -452,6 +469,7 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeactiveMyAccount}
+                    id={userId}
                     role="button"
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}

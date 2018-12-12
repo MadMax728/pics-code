@@ -47,14 +47,14 @@ class CustomModal extends Component {
   };
 
   handleModalCampaign = () => {
-    // get  user from local storage 
+    // get  user from local storage
     const storage = Auth.extractJwtFromStorage();
     // parse the user info
     const userInfo = JSON.parse(storage.userInfo) || {};
     // set default to false
-    let isFor = false
+    let isFor = false;
     // check if user is compnay
-    if(userInfo && userInfo.userType) {
+    if (userInfo && userInfo.userType) {
       isFor = userInfo.userType.toLowerCase() === userType.company;
     }
 

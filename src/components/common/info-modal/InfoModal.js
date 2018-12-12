@@ -17,6 +17,7 @@ class InfoModal extends Component {
     super(props, context);
 
     this.state = {};
+    console.log("info", this.props);
   }
 
   handleModalContentView = () => {
