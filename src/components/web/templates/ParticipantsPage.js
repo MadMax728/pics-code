@@ -17,7 +17,7 @@ class ParticipantsPage extends Component {
       return (
         <div key={participant.id}>
           {participant.postType && participant.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && 
-               <MediaCard item={participant} />
+               <MediaCard item={participant} isDescription/>
           }
         </div>
       );

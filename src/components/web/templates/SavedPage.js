@@ -20,7 +20,7 @@ class SavedPage extends Component {
       return (
         <div key={saved.id}>
         {saved.postType.toLowerCase() === enumerations.contentTypes.mediaPost && (
-            <MediaCard item={saved} isParticipant={false} />
+            <MediaCard item={saved} isParticipant={false} isDescription/>
           )}
           {saved.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
             <CampaignCard
@@ -41,7 +41,7 @@ class SavedPage extends Component {
             />
           )}
           {saved.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && (
-            <MediaCard item={saved} isParticipant />
+            <MediaCard item={saved} isParticipant isDescription/>
           )}
           {saved.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard

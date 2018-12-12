@@ -19,7 +19,7 @@ class ParticipantPage extends Component {
           {participant.postType.toLowerCase() === enumerations.contentTypes.mediaPost ||
             (participant.postType.toLowerCase() ===
               enumerations.contentTypes.companyParticipantCampaign && (
-            <MediaCard item={participant} />)
+            <MediaCard item={participant} isDescription/>)
           )}
         </div>
       );

@@ -17,7 +17,7 @@ class ExploreRoot extends Component {
       return (
         <div key={explore.id}>
           {explore.postType === enumerations.contentTypes.mediaPost && (
-            <MediaCard item={explore} />
+            <MediaCard item={explore} isDescription/>
           )}
         </div>
       );
