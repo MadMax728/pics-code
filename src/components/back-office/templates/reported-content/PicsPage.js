@@ -21,7 +21,7 @@ class PicsPage extends Component {
             className={
               index % 2 ? "col-sm-6 pic-right-block" : "col-sm-6 pic-left-block"
             }
-            key={index}
+            key={`${pic.name}-${index}`}
           >
             <div className="backoffice-pics pic-block">
               <img src={pic.image} alt="pic_1" />

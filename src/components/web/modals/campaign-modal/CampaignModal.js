@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CustomBootstrapModal, ImageCropper } from "../../../ui-kit";
+import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import {
   CreateCompanyCampaign,
@@ -11,7 +11,7 @@ import {
 import moment from "moment";
 import { modalType, mediaTypes, target_group, procedure } from "../../../../lib/constants/enumerations";
 
-import { b64toBlob } from "../../../../lib/utils/helpers"
+// import { b64toBlob } from "../../../../lib/utils/helpers"
 
 const contentText = "";
 

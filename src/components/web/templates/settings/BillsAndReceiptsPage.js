@@ -32,9 +32,9 @@ class BillsAndReceiptsPage extends Component {
                 </tr>
               </thead>
               <tbody>
-                {dataDownload.map((data, index) => {
+                {dataDownload.map((data) => {
                   return (
-                    <tr key={index}>
+                    <tr key={data.no}>
                       <td>{data.no}</td>
                       <td>{data.title}</td>
                       <td>{data.runtime}</td>

@@ -10,33 +10,33 @@ import SocialProfileUrl from "./SocialProfileUrl";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-const socialNetworksAll = [
-  {
-    socialNetworkType: "facebook",
-    title: "Facebook",
-    icon: "fa-facebook",
-    publicUrl: "https://facebook.com/santosh.shinde.735944",
-    userName: "santosh.shinde"
-  },
-  {
-    socialNetworkType: "instagram",
-    title: "Instagram",
-    icon: "fa-instagram",
-    userName: "santosh.shinde"
-  },
-  {
-    socialNetworkType: "twitter",
-    title: "Twitter",
-    icon: "fa-twitter",
-    userName: "santosh.shinde"
-  },
-  {
-    socialNetworkType: "youtube",
-    title: "Youtube",
-    icon: "fa-youtube",
-    userName: "santosh.shinde"
-  }
-];
+// const socialNetworksAll = [
+//   {
+//     socialNetworkType: "facebook",
+//     title: "Facebook",
+//     icon: "fa-facebook",
+//     publicUrl: "https://facebook.com/santosh.shinde.735944",
+//     userName: "santosh.shinde"
+//   },
+//   {
+//     socialNetworkType: "instagram",
+//     title: "Instagram",
+//     icon: "fa-instagram",
+//     userName: "santosh.shinde"
+//   },
+//   {
+//     socialNetworkType: "twitter",
+//     title: "Twitter",
+//     icon: "fa-twitter",
+//     userName: "santosh.shinde"
+//   },
+//   {
+//     socialNetworkType: "youtube",
+//     title: "Youtube",
+//     icon: "fa-youtube",
+//     userName: "santosh.shinde"
+//   }
+// ];
 
 class SocialNetworks extends Component {
   constructor(props) {
@@ -230,8 +230,6 @@ SocialNetworks.propTypes = {
   getSocialNetwork: PropTypes.func.isRequired,
   disconnectNetwork: PropTypes.func,
   userData: PropTypes.object,
-  history: PropTypes.any,
-  userId: PropTypes.string.isRequired,
   isOwnerProfile: PropTypes.bool
 };
 

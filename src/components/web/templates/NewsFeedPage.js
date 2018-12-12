@@ -30,6 +30,7 @@ class NewsFeedPage extends Component {
               isDescription
               isInformation={false}
               isStatus={false}
+              isBudget={false}
             />
           )}
           {newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
@@ -65,7 +66,7 @@ NewsFeedPage.propTypes = {
   getNewsFeed: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

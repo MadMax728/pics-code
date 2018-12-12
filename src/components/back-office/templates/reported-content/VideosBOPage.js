@@ -19,9 +19,9 @@ class VideosBOPage extends Component {
       <div className="padding-rl-10 middle-section">
         <ReportedSearchBar />
         <div className="feed_wrapper">
-          {videos_detail.map((vid, index) => {
+          {videos_detail.map((vid) => {
             return (
-              <div key={index}>
+              <div key={vid.id}>
                 <div className="feed_header">
                   <div className="col-sm-1 col-xs-1 no-padding profile_image">
                     <img

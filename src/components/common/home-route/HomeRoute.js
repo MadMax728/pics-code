@@ -26,8 +26,6 @@ import {
   ParticipantPage
 } from "../../web/templates";
 
-import { Campaign, Information, Participant } from "../../web/campaigns";
-
 // Static Pages which is not requre to put in template folder
 import {
   CampaignsInformation,

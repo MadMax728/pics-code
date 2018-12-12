@@ -1,10 +1,8 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 
 class ImageItem extends PureComponent {
-  constructor(props, context) {
-    super(props, context);
-  }
+
   render() {
     return (
       <div className="feed_image">
@@ -31,7 +29,7 @@ class ImageItem extends PureComponent {
 
 ImageItem.propTypes = {
   item: PropTypes.string.isRequired,
-  isOtherCardExist: PropTypes.bool.isRequired
+  // isOtherCardExist: PropTypes.bool.isRequired
 };
 
 export default ImageItem;

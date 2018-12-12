@@ -6,13 +6,16 @@ import AdCardFooter from "./footers/AdCardFooter";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
+import { like, getComments } from "../../actions";
 
 class AdCard extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       isComments: false,
-      item: this.props.item
+      item: this.props.item,
+      comments: "",
+      totalCommentsCount: ""
     };
   }
 
@@ -42,16 +45,36 @@ class AdCard extends Component {
 
   handleFavorite = e => {
     const item = this.state.item;
-    item.isFavorite = !this.state.item.isFavorite;
-    item.like_count = item.isFavorite
-      ? item.like_count + 1
-      : item.like_count - 1;
+    item.isSelfLike = !this.state.item.isSelfLike;
+    item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
+    this.setState({ item });
+
+    const campaignLike = {
+      typeOfContent: "campaign",
+      typeId: item.id
+    };
+    this.props.like(campaignLike);
+  };
+
+  handleComment = commet => {
+    const item = this.state.item;
+    item.commentCount = commet ? item.commentCount + 1 : item.commentCount - 1;
     this.setState({ item });
   };
 
   handleCommentsSections = () => {
-    this.setState({ isComments: !this.state.isComments });
+    const CampaignId = {
+      typeId: this.state.item.id
+    };
+    this.props.getComments(CampaignId).then(() => {
+      this.setState({
+        isComments: !this.state.isComments,
+        comments: this.props.comments,
+        totalCommentsCount: (this.props.comments).length
+      });
+    });
   };
+
 
   render() {
     const { isStatus, isDescription, isInformation } = this.props;
@@ -81,7 +104,15 @@ class AdCard extends Component {
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
         />
-        {isComments && <CommentCard item={item} />}
+       {isComments && (
+          <CommentCard
+            item={this.state.comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={(this.state.comments).length}
+          />
+        )}
       </div>
     );
   }
@@ -105,7 +136,10 @@ AdCard.propTypes = {
     like_count: PropTypes.number,
     id: PropTypes.number
   }).isRequired,
-  likeData: PropTypes.any
+  likeData: PropTypes.any,
+  like: PropTypes.func.isRequired,
+  getComments: PropTypes.func.isRequired,
+  comments: PropTypes.any,
 };
 
 export default AdCard;

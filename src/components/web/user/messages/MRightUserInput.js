@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../../lib/constants/images";
 
 class MRightUserInput extends Component {
   
@@ -13,11 +12,10 @@ class MRightUserInput extends Component {
 
     handleChange = (e) => {
         e.preventDefault();
-        const { message } = this.state;
         this.setState({ message: e.target.value });
     };
 
-    onSubmit = (e) => {
+    onSubmit = () => {
         const { message } = this.state;
         this.props.onMessageSubmit(message);
         this.setState({ message: '' });

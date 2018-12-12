@@ -207,8 +207,8 @@ AdsModal.propTypes = {
   modalShow: PropTypes.bool,
   handleModalHide: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.func,
-  uploadFile: PropTypes.func,
-  handleResoreState: PropTypes.func
+  // uploadFile: PropTypes.func,
+  // handleResoreState: PropTypes.func
 };
 
 export default AdsModal;

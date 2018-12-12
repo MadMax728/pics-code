@@ -56,7 +56,7 @@ class PrivacyPage extends Component {
   hanldeIsSocialShare = event => {
     const isSocialShare = event.target.checked;
     this.setState({ isSocialShare });
-    const paramData = { isSocialShare: isSocialShare };
+    const paramData = { isSocialShare };
     this.props.setSocialShare(paramData);
   };
 
@@ -114,7 +114,6 @@ class PrivacyPage extends Component {
 
   handleDeleteSearchHisory = () => {
     console.log("handleDeleteSearchHisory");
-    const paramData = { searchHistoryId: "testId" };
     this.props.handleModalInfoShow(modalType.confirmation);
     // this.props.deleteSearchHistory(paramData);
   };
@@ -494,7 +493,7 @@ PrivacyPage.propTypes = {
   setChangeInvoiceAddress: PropTypes.func,
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
-  searchHistoryId: PropTypes.object,
+  // searchHistoryId: PropTypes.object,
   handleModalInfoShow: PropTypes.func
 };
 

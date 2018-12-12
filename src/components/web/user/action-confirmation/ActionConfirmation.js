@@ -13,7 +13,7 @@ class ActionConfirmation extends Component {
   };
 
   render() {
-    const { modalInfoMsg } = this.props;
+    // const { modalInfoMsg } = this.props;
     return (
       <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">Are you want to sure ?</div>
@@ -29,7 +29,7 @@ class ActionConfirmation extends Component {
 ActionConfirmation.propTypes = {
   handleModalInfoHide: PropTypes.func,
   handleModalHide: PropTypes.func,
-  modalInfoMsg: PropTypes.string
+  // modalInfoMsg: PropTypes.string
 };
 
 export default ActionConfirmation;

@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import { UserPicLoading } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
-import * as images from "../../../lib/constants/images";
 
 class PicturesRoot extends React.Component {
   componentDidMount = () => {
@@ -16,7 +15,7 @@ class PicturesRoot extends React.Component {
     return picsList.map((pic, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
       return (
-        <div key={index}>
+        <div key={pic.id}>
           {clearfixDiv}
           <PictureCard item={pic} index={index} />
         </div>
@@ -40,7 +39,7 @@ PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   picsList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

@@ -61,7 +61,7 @@ const AboutCardBody = ({ about }) => {
           </div>
           <div className="section-subtitle">{Translations.about.offer_tag}</div>
           <div className="tags-wrapper">
-            {about.offerTagList.map((offer, index) => {
+            {about.offerTagList.map((offer) => {
               return (
                 <Link to={""} key={offer.id}>
                   {offer.offerTagName}
@@ -75,7 +75,7 @@ const AboutCardBody = ({ about }) => {
             {Translations.about.inquiry_tag}
           </div>
           <div className="tags-wrapper">
-            {about.inquiryTagList.map((inquiry, index) => {
+            {about.inquiryTagList.map((inquiry) => {
               return (
                 <Link to={""} key={inquiry.id}>
                   {inquiry.inquiryTagName}

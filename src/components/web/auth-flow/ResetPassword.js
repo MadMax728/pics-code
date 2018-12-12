@@ -4,8 +4,7 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import {
-  setNewPassword,
-  submitResetPassword
+  setNewPassword
 } from "../../../actions/forgotPassword";
 import { Auth } from "../../../auth";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
@@ -142,7 +141,7 @@ const mapDispatchToProps = {
 
 ResetPassword.propTypes = {
   setNewPassword: PropTypes.func.isRequired,
-  newPasswordData: PropTypes.object,
+  // newPasswordData: PropTypes.object,
   history: PropTypes.any
 };
 
