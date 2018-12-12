@@ -18,3 +18,5 @@ export * from "./admin";
 export * from "./verification";
 export * from "./voucher";
 export * from "./backOfficeReview";
+export * from "./backOfficeReportedContent";
+

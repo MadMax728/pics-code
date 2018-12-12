@@ -151,6 +151,17 @@ const initialState = {
     ads: null,
     isLoading: false,
     error: false    
+  },
+  reportedContentData: {
+    images: null,
+    videos: null,
+    campaigns: null,
+    pics: null,
+    ads: null,
+    comments: null,
+    user: null,
+    isLoading: false,
+    error: false    
   }
 };
 

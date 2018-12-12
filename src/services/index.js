@@ -16,4 +16,5 @@ export * from "./adminService";
 export * from "./verificationService";
 export * from "./voucherService";
 export * from "./backOfficeReviewService";
+export * from "./backOfficeReportedContentService";
 
