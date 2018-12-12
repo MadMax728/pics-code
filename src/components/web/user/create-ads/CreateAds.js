@@ -3,10 +3,8 @@ import { StepOne, StepTwo } from "./steps";
 import PropTypes from "prop-types";
 import {
   PaymentStepOne,
-  PaymentStepTwo,
-  PaymentStepThree
+  PaymentStepTwo
 } from "../../user/payment/steps";
-import { CreateCompanyCampaign } from "../../campaigns/create-campaign/create-company-campaign";
 
 class CreateAds extends Component {
   constructor(props) {

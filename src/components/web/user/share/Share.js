@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as images from "../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
@@ -8,6 +7,10 @@ class Share extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  handleModalInfoHide = () => {
+    this.props.handleModalInfoHide();
   }
 
   render() {

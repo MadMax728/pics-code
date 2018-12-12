@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ToolTip } from "../../ui-kit";
 
 const propTypes = {
   id: PropTypes.any.isRequired,
@@ -25,13 +24,13 @@ class RenderToolTips extends Component {
     const { items, id, isLoading } = this.props;
     return (
       <div className="post-action-links">
-        {items.map((item, index) => {
+        {items.map((item) => {
           return (
             <button
               className="btn-comment-tooltip"
               type="button"
               disabled={isLoading}
-              key={index}
+              key={`${item.name}-${id}`}
               onClick={item.handleEvent}
               id={id}
               onKeyDown={item.handleEvent}

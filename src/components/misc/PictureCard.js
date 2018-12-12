@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import PictureCardBody from "./body/PictureCardBody";
 
 class PictureCard extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
   render() {
     const { item, index } = this.props;
 

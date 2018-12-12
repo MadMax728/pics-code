@@ -44,7 +44,7 @@ class CampaignCard extends Component {
 
   handleContent = () => {};
 
-  handleFavorite = e => {
+  handleFavorite = () => {
     const item = this.state.item;
     item.isSelfLike = !this.state.item.isSelfLike;
     item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;

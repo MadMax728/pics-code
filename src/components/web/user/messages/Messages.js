@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import io from "socket.io-client";
 import { Auth } from "../../../../auth";
 import MLeftContainer from './MLeftContainer';
@@ -32,7 +31,6 @@ class Messages extends Component {
     }
 
     componentWillMount() {
-        const { user, me } = this.state;
         this.socket.on('communication-message-board-new-message-response', (data) => {
             this.setState({
                 messages: [...this.state.messages, data]

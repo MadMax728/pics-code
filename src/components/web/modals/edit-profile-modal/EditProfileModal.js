@@ -89,7 +89,7 @@ class EditProfileModal extends Component {
   };
 
   render() {
-    const { handleModalInfoHide, modalInfoShow, handleEditImage } = this.props;
+    const { handleModalInfoHide, modalInfoShow } = this.props;
     const { image } = this.state;
     return (
       <CustomBootstrapModal

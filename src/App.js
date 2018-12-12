@@ -166,7 +166,6 @@ class App extends Component {
 }
 
 App.propTypes = {
-  history: PropTypes.any,
   location: PropTypes.any
 };
 

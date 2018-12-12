@@ -72,7 +72,7 @@ SavedPage.propTypes = {
   getSaved: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   savedList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

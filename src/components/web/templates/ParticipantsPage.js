@@ -36,13 +36,11 @@ class ParticipantsPage extends Component {
 }
 
 ParticipantsPage.propTypes = {
-  handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   participantsList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

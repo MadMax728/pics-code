@@ -66,7 +66,7 @@ NewsFeedPage.propTypes = {
   getNewsFeed: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

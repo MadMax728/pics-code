@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Share } from "../../user";
-import { Link } from "react-router-dom";
-import * as images from "../../../../lib/constants/images";
-import * as routes from "../../../../lib/constants/routes";
 
 class ShareModal extends Component {
   constructor(props, context) {

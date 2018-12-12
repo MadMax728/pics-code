@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Auth } from "../../../../../auth";

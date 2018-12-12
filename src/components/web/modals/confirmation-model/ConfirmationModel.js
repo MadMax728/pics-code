@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { ActionConfirmation } from "../../user/action-confirmation";
-import { Link } from "react-router-dom";
-import * as images from "../../../../lib/constants/images";
-import * as routes from "../../../../lib/constants/routes";
 
 class ConfirmationModal extends Component {
   constructor(props, context) {

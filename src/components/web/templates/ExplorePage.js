@@ -12,7 +12,7 @@ class ExploreRoot extends Component {
   };
 
   renderExploreList = () => {
-    const { exploreList, isLoading } = this.props;
+    const { exploreList } = this.props;
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
@@ -36,13 +36,11 @@ class ExploreRoot extends Component {
 }
 
 ExploreRoot.propTypes = {
-  handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   exploreList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

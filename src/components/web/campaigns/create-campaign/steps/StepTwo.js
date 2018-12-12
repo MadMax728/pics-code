@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { TextEditor } from "../../../../ui-kit/text-editor";
 import { Translations } from "../../../../../lib/translations";
@@ -25,7 +24,7 @@ class StepTwo extends Component {
 }
 
 StepTwo.propTypes = {
-  handleChangeField: PropTypes.func.isRequired,
+  // handleChangeField: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
   contentText: PropTypes.any.isRequired
 };

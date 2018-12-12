@@ -72,7 +72,7 @@ AdsPage.propTypes = {
   getBackOfficeReviewAds: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   adList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 export default connect(

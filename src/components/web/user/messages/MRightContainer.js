@@ -17,10 +17,10 @@ class MRightContainer extends Component {
         //this.socket = io("http://localhost:3146");
     }    
 
-    onDeleteHistoryClick = (e) => {
+    onDeleteHistoryClick = () => {
     };
 
-    handleMessageClick = (e) => {
+    handleMessageClick = () => {
     };
     
     handleChange = e => {

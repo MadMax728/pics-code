@@ -20,7 +20,7 @@ class UsersPage extends Component {
             className={
               index % 2 ? "col-sm-6 pic-right-block" : "col-sm-6 pic-left-block"
             }
-            key={index}
+            key={user.id}
           >
             <div className="backoffice-user pic-block">
               <img src={user.image} alt={user.image} />

@@ -5,11 +5,8 @@ import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter } from "../common";
 import PropTypes from "prop-types";
 import { submitResetPassword } from "../../../actions/forgotPassword";
-import { submitLogin } from "../../../actions";
 import { connect } from "react-redux";
 import { Auth } from "../../../auth";
-import * as userService from "../../../services/userService";
-import { Redirect } from "react-router";
 
 class ResetMail extends Component {
   constructor(props) {
@@ -71,7 +68,7 @@ class ResetMail extends Component {
     const data = {
       email: this.state.form.email
     };
-    this.props.submitResetPassword(data).then(res => {
+    this.props.submitResetPassword(data).then(() => {
       const errors = {};
       if (
         this.props.resetPasswordData.error &&

@@ -95,7 +95,6 @@ CustomModal.propTypes = {
   modalShow: PropTypes.bool.isRequired,
   modalType: PropTypes.string.isRequired,
   handleModalHide: PropTypes.func.isRequired,
-  handleModalInfoShow: PropTypes.func.isRequired,
   handleModalInfoMsgShow: PropTypes.func.isRequired
 };
 

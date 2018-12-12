@@ -9,7 +9,7 @@ import { RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
 import { getCampaignDetails } from "../../../../actions";
 import { connect } from "react-redux";
-import { InlineLoading, ThreeDots } from "../../../ui-kit";
+import { ThreeDots } from "../../../ui-kit";
 
 class InformationPage extends Component {
   constructor(props, context) {
@@ -37,7 +37,7 @@ class InformationPage extends Component {
     this.props.getCampaignDetails(this.state.campaignId);
   };
 
-  handleFavorite = e => {
+  handleFavorite = () => {
     this.setState({
       campaign_detail: {
         ...this.props.campaign_detail,
@@ -321,7 +321,7 @@ InformationPage.propTypes = {
   getCampaignDetails: PropTypes.func.isRequired,
   campaign_detail: PropTypes.any,
   isLoading: PropTypes.bool,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

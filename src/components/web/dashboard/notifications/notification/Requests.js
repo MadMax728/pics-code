@@ -33,12 +33,12 @@ class Requests extends Component {
     return (
       <div className="tab-pane fade active in" id="nav-requests">
         <div className="header-notifications">
-          {request_list.map((request, index) => {
+          {request_list.map((request) => {
             return (
               !request.isRejected && (
                 <div
                   className="notification-with-subscribe notification-wrapper"
-                  key={index}
+                  key={request.id}
                 >
                   <img src={request.image} alt="image4" />
                   <div className="user-info">

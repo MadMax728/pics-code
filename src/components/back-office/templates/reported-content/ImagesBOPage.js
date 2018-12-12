@@ -26,9 +26,9 @@ class ImagesBOPage extends Component {
       <div className="padding-rl-10 middle-section">
         <ReportedSearchBar />
         <div className="feed_wrapper">
-          {images_detail.map((img, index) => {
+          {images_detail.map((img) => {
             return (
-              <div key={index}>
+              <div key={img.id}>
                 <div className="feed_header">
                   <div className="col-sm-1 col-xs-1 no-padding profile_image">
                     <img

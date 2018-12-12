@@ -6,20 +6,20 @@ import { convertToHTML } from "draft-convert";
 import { toolBarConfig } from "../../../lib/constants/toolBarConfig";
 import PropTypes from "prop-types";
 
-const content = {
-  entityMap: {},
-  blocks: [
-    {
-      key: "637gr",
-      text: "Initialized from content state.",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {}
-    }
-  ]
-};
+// const content = {
+//   entityMap: {},
+//   blocks: [
+//     {
+//       key: "637gr",
+//       text: "Initialized from content state.",
+//       type: "unstyled",
+//       depth: 0,
+//       inlineStyleRanges: [],
+//       entityRanges: [],
+//       data: {}
+//     }
+//   ]
+// };
 class TextEditor extends Component {
   constructor(props) {
     super(props);

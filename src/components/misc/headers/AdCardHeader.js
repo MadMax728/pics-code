@@ -12,9 +12,6 @@ const AdCardHeader = ({
   handleFavorite,
   isLoading
 }) => {
-  const like_wrapper = classnames("like_wrapper", {
-    "col-sm-2 col-xs-2 like_wrapper": isDescription && isInformation
-  });
   const profile_route = ad.user.isOwner
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}${ad.id}`;

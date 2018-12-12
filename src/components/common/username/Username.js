@@ -41,7 +41,7 @@ class Username extends Component {
 
     return (
       <div>
-        {userNameList.map((item, index) => {
+        {userNameList.map((item) => {
           return (
             /* eslint-disable */
             <div

@@ -42,7 +42,7 @@ class HashTag extends Component {
 
     return (
       <div>
-        {hashTagList.map((item, index) => {
+        {hashTagList.map((item) => {
           return (
             /* eslint-disable */
             <div

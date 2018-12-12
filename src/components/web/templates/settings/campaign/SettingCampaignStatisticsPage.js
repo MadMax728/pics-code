@@ -118,7 +118,7 @@ SettingCampaignStatisticsPage.propTypes = {
   getCampaignDetails: PropTypes.func.isRequired,
   campaign_details: PropTypes.any,
   isLoading: PropTypes.bool,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
