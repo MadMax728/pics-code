@@ -30,6 +30,7 @@ class NewsFeedPage extends Component {
               isDescription
               isInformation={false}
               isStatus={false}
+              isBudget={false}
             />
           )}
           {newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (

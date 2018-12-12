@@ -145,6 +145,12 @@ const initialState = {
     voucher: null,
     isLoading: false,
     error: false    
+  },
+  reviewData: {
+    campaigns: null,
+    ads: null,
+    isLoading: false,
+    error: false    
   }
 };
 
