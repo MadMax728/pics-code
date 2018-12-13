@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDownloadData } from "../../../../actions";
 import * as images from "../../../../lib/constants/images";
+import { Translations } from "../../../../lib/translations";
 
 class DataDownloadPage extends Component {
   constructor(props) {
@@ -25,16 +26,16 @@ class DataDownloadPage extends Component {
     const { form } = this.state;
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (form.email.length === 0) {
-      errors.email = "Email is required.";
+      errors.email = Translations.data_download.Email_is_required;
       isFormValid = false;
     }
     const isValidemail = emailRegex.test(form.email);
     if (!isValidemail) {
       isFormValid = false;
-      errors.email = "Email ID should be valid.";
+      errors.email = Translations.data_download.Email_ID_should_be_valid;
     }
     if (form.password.length === 0) {
-      errors.password = "Password is required.";
+      errors.password = Translations.data_download.Password_is_required;
       isFormValid = false;
     }
     this.setState({ error: errors });
@@ -70,7 +71,9 @@ class DataDownloadPage extends Component {
       <div className="padding-rl-10 middle-section width-80">
         <div className="campaign-middle-section">
           <div className="data-download">
-            <div className="normal_title padding-15">Daten- Download</div>
+            <div className="normal_title padding-15">
+              {Translations.data_download.page_title}
+            </div>
             <p>
               This text is an example. This text is an example. This text is an
               example. This text is an example. This text is an example. This
@@ -92,12 +95,14 @@ class DataDownloadPage extends Component {
             <form>
               <div className="col-sm-5 padding-r-5 email-wrapper">
                 <div className="form-group">
-                  <label htmlFor="email">Email</label>
+                  <label htmlFor="email">
+                    {Translations.data_download.Email}
+                  </label>
                   <Text
                     type="text"
                     className="form-control"
                     id="email"
-                    placeholder="Email"
+                    placeholder={Translations.data_download.Email}
                     name="email"
                     value={form.email ? form.email : ""}
                     onChange={this.handleChangeField}
@@ -114,13 +119,15 @@ class DataDownloadPage extends Component {
               </div>
               <div className="col-sm-5 padding-l-5 padding-r-5">
                 <div className="form-group">
-                  <label htmlFor="password">Password</label>
+                  <label htmlFor="password">
+                    {Translations.data_download.Password}
+                  </label>
                   <Text
                     type="password"
                     className="form-control"
                     id="password"
                     name="password"
-                    placeholder="Password"
+                    placeholder={Translations.data_download.Password}
                     value={form.password ? form.password : ""}
                     onChange={this.handleChangeField}
                   />
@@ -137,7 +144,7 @@ class DataDownloadPage extends Component {
               <div className="col-sm-2 padding-l-5 btn-wrapper">
                 <div className="form-group">
                   <button className="blue_button" onClick={this.handleSubmit}>
-                    Download
+                    {Translations.data_download.Download}
                   </button>
                 </div>
               </div>

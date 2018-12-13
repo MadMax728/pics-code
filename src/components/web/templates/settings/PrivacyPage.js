@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { modalType } from "../../../../lib/constants/enumerations";
 
+const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 class PrivacyPage extends Component {
   constructor(props) {
     super(props);
@@ -42,7 +43,9 @@ class PrivacyPage extends Component {
         country: "",
         vat_identification_number: ""
       },
-      userId: ""
+      userId: "",
+      change_email_form_error: {},
+      change_password_form_error: {}
     };
   }
 
@@ -80,19 +83,97 @@ class PrivacyPage extends Component {
     this.props.setProfilePersonalizedAdvertise(paramData);
   };
 
+  formValidChangeEmail = () => {
+    const changeEmailErrors = {};
+    let isFormValid = true;
+    const { change_email_form } = this.state;
+
+    if (change_email_form.current_email.length === 0) {
+      changeEmailErrors.current_email =
+        Translations.privacy.Current_Email_is_required;
+      isFormValid = false;
+    }
+    const isValidCurrentEmail = emailRegex.test(
+      change_email_form.current_email
+    );
+    if (!isValidCurrentEmail) {
+      isFormValid = false;
+      changeEmailErrors.current_email =
+        Translations.privacy.Email_should_be_valid;
+    }
+
+    if (change_email_form.new_email.length === 0) {
+      changeEmailErrors.new_email = Translations.privacy.New_Email_is_required;
+      isFormValid = false;
+    }
+
+    const isValidNewEmail = emailRegex.test(change_email_form.new_email);
+    if (!isValidNewEmail) {
+      isFormValid = false;
+      changeEmailErrors.new_email = Translations.privacy.Email_should_be_valid;
+    }
+    this.setState({ change_email_form_error: changeEmailErrors });
+    return isFormValid;
+  };
+
+  formValidChangePassword = () => {
+    const changePasswordErrors = {};
+    let isChangePasswordFormValid = true;
+    const { change_password_form } = this.state;
+
+    if (change_password_form.current_password.length === 0) {
+      changePasswordErrors.current_password =
+        Translations.privacy.Current_Password_is_required;
+      isChangePasswordFormValid = false;
+    }
+
+    if (change_password_form.new_password.length === 0) {
+      changePasswordErrors.new_password =
+        Translations.privacy.New_Password_is_required;
+      isChangePasswordFormValid = false;
+    }
+
+    if (change_password_form.repeat_password.length === 0) {
+      changePasswordErrors.repeat_password =
+        Translations.privacy.Repeat_Password_is_required;
+      isChangePasswordFormValid = false;
+    }
+
+    if (
+      change_password_form.new_password !== change_password_form.repeat_password
+    ) {
+      changePasswordErrors.repeat_password =
+        Translations.privacy.Password_is_not_matching;
+      isChangePasswordFormValid = false;
+    }
+
+    this.setState({ change_password_form_error: changePasswordErrors });
+    return isChangePasswordFormValid;
+  };
+
   // handleFieldChangeEmail event
   handleFieldChangeEmail = event => {
     const { change_email_form } = this.state;
     change_email_form[event.values.name] = event.values.val;
     this.setState({ change_email_form });
+    this.formValidChangeEmail();
   };
 
   // handleSaveChangeEmail called when click on submit
   handleSaveChangeEmail = e => {
     e.preventDefault();
-    console.log(this.state.change_email_form);
-    const paramData = { emailDetails: "emailDetails" };
-    this.props.setChangeEmail(paramData);
+    if (!this.formValidChangeEmail()) {
+      return false;
+    }
+    const { change_email_form } = this.state;
+    const changeEmailData = {
+      current_email: change_email_form.current_email,
+      new_email: change_email_form.new_email
+    };
+    console.log(changeEmailData);
+    this.props.setChangeEmail(changeEmailData).then(() => {
+      // To Do - setChangeEmail
+    });
   };
 
   // handleFieldChangePassword event
@@ -100,14 +181,25 @@ class PrivacyPage extends Component {
     const { change_password_form } = this.state;
     change_password_form[event.values.name] = event.values.val;
     this.setState({ change_password_form });
+    this.formValidChangePassword();
   };
 
   // handleSaveChangePassword called when click on submit
   handleSaveChangePassword = e => {
     e.preventDefault();
-    console.log(this.state.change_password_form);
-    const paramData = { passwordDetails: "passwordDetails" };
-    this.props.setChangePassword(paramData);
+    if (!this.formValidChangePassword()) {
+      return false;
+    }
+    const { change_password_form } = this.state;
+    const changePasswordData = {
+      current_password: change_password_form.current_password,
+      new_password: change_password_form.new_password,
+      repeat_password: change_password_form.repeat_password
+    };
+    console.log(changePasswordData);
+    this.props.setChangePassword(changePasswordData).then(() => {
+      // To Do - setChangePassword
+    });
   };
 
   // handleFieldChangeInvoice event
@@ -219,6 +311,12 @@ class PrivacyPage extends Component {
                   id="current_email"
                   name="current_email"
                   autoComplete="current_email"
+                  placeholder={Translations.privacy.Current_Email}
+                  value={
+                    change_email_form.current_email
+                      ? change_email_form.current_email
+                      : ""
+                  }
                   onChange={this.handleFieldChangeEmail}
                 />
                 {change_email_form.current_email.length > 0 ? (
@@ -226,6 +324,9 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
+                <span className="error-msg highlight">
+                  {this.state.change_email_form_error.current_email}
+                </span>
               </div>
               <div className="form-group">
                 <label htmlFor="email">{Translations.privacy.New_Email}</label>
@@ -241,20 +342,29 @@ class PrivacyPage extends Component {
                   id="new_email"
                   autoComplete="new_email"
                   name="new_email"
+                  placeholder={Translations.privacy.New_Email}
                   onChange={this.handleFieldChangeEmail}
+                  value={
+                    change_email_form.new_email
+                      ? change_email_form.new_email
+                      : ""
+                  }
                 />
                 {change_email_form.new_email.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
+                <span className="error-msg highlight">
+                  {this.state.change_email_form_error.new_email}
+                </span>
               </div>
               <div className="form-group">
                 <button
                   className="black_button"
                   onClick={this.handleSaveChangeEmail}
                 >
-                  save
+                  {Translations.privacy.save}
                 </button>
               </div>
             </div>
@@ -264,20 +374,31 @@ class PrivacyPage extends Component {
             </div>
             <div className="change-password-wrapper">
               <div className="form-group">
-                <label htmlFor="c-password">Current Password</label>
+                <label htmlFor="c-password">
+                  {Translations.privacy.Current_Password}
+                </label>
                 <Text
                   type="password"
                   className="form-control"
                   id="current_password"
-                  name="current_password"
                   autoComplete="current_password"
+                  name="current_password"
+                  placeholder={Translations.privacy.Current_Password}
                   onChange={this.handleFieldChangePassword}
+                  value={
+                    change_password_form.current_password
+                      ? change_password_form.current_password
+                      : ""
+                  }
                 />
                 {change_password_form.current_password.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
+                <span className="error-msg highlight">
+                  {this.state.change_password_form_error.current_password}
+                </span>
               </div>
               <div className="form-group">
                 <label htmlFor="n-password">
@@ -289,6 +410,12 @@ class PrivacyPage extends Component {
                   id="new_password"
                   autoComplete="new_password"
                   name="new_password"
+                  placeholder={Translations.privacy.New_Password}
+                  value={
+                    change_password_form.new_password
+                      ? change_password_form.new_password
+                      : ""
+                  }
                   onChange={this.handleFieldChangePassword}
                 />
                 {change_password_form.new_password.length > 0 ? (
@@ -296,6 +423,9 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
+                <span className="error-msg highlight">
+                  {this.state.change_password_form_error.new_password}
+                </span>
               </div>
               <div className="form-group">
                 <label htmlFor="r-password">
@@ -307,6 +437,12 @@ class PrivacyPage extends Component {
                   id="repeat_password"
                   name="repeat_password"
                   autoComplete="repeat_password"
+                  placeholder={Translations.privacy.Repeat_Password}
+                  value={
+                    change_password_form.repeat_password
+                      ? change_password_form.repeat_password
+                      : ""
+                  }
                   onChange={this.handleFieldChangePassword}
                 />
                 {change_password_form.repeat_password.length > 0 ? (
@@ -314,13 +450,16 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
+                <span className="error-msg highlight">
+                  {this.state.change_password_form_error.repeat_password}
+                </span>
               </div>
               <div className="form-group">
                 <button
                   className="black_button"
                   onClick={this.handleSaveChangePassword}
                 >
-                  save
+                  {Translations.privacy.save}
                 </button>
               </div>
             </div>
