@@ -35,6 +35,9 @@ export const updateUserProfile = (payload, header = {}) =>
 export const generateOTP = (payload, header = {}) =>
   api(baseUrl, header).get("/auth/generate-otp", payload);
 
+export const activateBusinessProfile = (payload, header = {}) =>
+  api(baseUrl, header).post("/users/activate-business-profile", payload);
+
 /**
  *
  * @param {*} payload
@@ -50,4 +53,3 @@ export const getSocialNetwork = payload =>
 
 export const disconnectNetwork = (payload, provider) =>
   apiAuth.delete("/auth/" + provider + "/disconnect", payload);
-
