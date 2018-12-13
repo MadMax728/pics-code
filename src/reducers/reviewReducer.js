@@ -3,40 +3,20 @@ import initialState from "./initialState";
 
 const reviewReducer = (state = initialState.reviewData, action) => {
   switch (action.type) {
-    // Get Review Campaigns
-    case types.GET_BACK_OFFICE_REVIEW_CAMPAIGNS_STARTED:
+    // Get Back Office Review Campaigns and Ads
+    case types.GET_BACK_OFFICE_REVIEW_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_BACK_OFFICE_REVIEW_CAMPAIGNS_SUCCEEDED:
+    case types.GET_BACK_OFFICE_REVIEW_SUCCEEDED:
       return {
         ...state,
-        campaigns: action.payload,
+        [action.isFor]: action.payload,
         isLoading: false
       };
-    case types.GET_BACK_OFFICE_REVIEW_CAMPAIGNS_FAILED:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
-      };
-
-    // Get Review Ads
-    case types.GET_BACK_OFFICE_REVIEW_ADS_STARTED:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
-    case types.GET_BACK_OFFICE_REVIEW_ADS_SUCCEEDED:
-      return {
-        ...state,
-        ads: action.payload,
-        isLoading: false
-      };
-    case types.GET_BACK_OFFICE_REVIEW_ADS_FAILED:
+    case types.GET_BACK_OFFICE_REVIEW_FAILED:
       return {
         ...state,
         isLoading: false,

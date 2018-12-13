@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import moment from "moment";
+import { DateFormat } from "../../Factory";
 
 const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
   const profile_route = item.isOwner
@@ -32,7 +32,7 @@ const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
         </Link>
         {item.category && (
           <div className="grey_title">
-            {moment(item.createdAt).format("MMMM Do YYYY")} in{" "}
+            {DateFormat(item.createdAt)} in{" "}
             {item.category[0].categoryName}
           </div>
         )}

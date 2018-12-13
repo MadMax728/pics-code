@@ -10,7 +10,7 @@ const getDashboardStarted = () => ({
 const getDashboardSucceeded = (data, isFor) => ({
   type: types.GET_DASHBOARD_SUCCEEDED,
   payload: data,
-  isFor: isFor
+  isFor
 });
 
 const getDashboardFailed = error => ({
@@ -26,7 +26,6 @@ export const getDashboard = (prop, provider) => {
     const header = {
       Authorization: storage.accessToken
     };
-
     return dashboardService[prop](provider, header).then(
       res => {
           dispatch(getDashboardSucceeded(res.data.data, prop));

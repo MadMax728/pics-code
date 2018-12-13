@@ -41,6 +41,7 @@ class CampaignPage extends Component {
               isInformation
               isStatus={false}
               isBudget={false}
+              isReport={false}
             />
           )}
         </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ReportCard from "../ReportCard";
 
-const PictureCardBody = ({ pic, index }) => {
+const PictureCardBody = ({ pic, index, isReport }) => {
   return (
     <div
       className={
@@ -15,13 +16,19 @@ const PictureCardBody = ({ pic, index }) => {
           <div className="name">{pic.name}</div>
         </div>
       </div>
+      {pic && isReport && (
+        <ReportCard
+          item={pic}
+        />
+      )}
     </div>
   );
 };
 
 PictureCardBody.propTypes = {
   pic: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  isReport: PropTypes.bool
 };
 
 export default PictureCardBody;

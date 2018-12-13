@@ -8,7 +8,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("explore");
+    this.props.getDashboard("explores");
   };
 
   renderExploreList = () => {
@@ -44,7 +44,7 @@ ExploreRoot.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  exploreList: state.dashboardData.explore,
+  exploreList: state.dashboardData.explores,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

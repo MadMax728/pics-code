@@ -29,6 +29,7 @@ class NewsRoot extends Component {
               isInformation
               isStatus={false}
               isBudget={false}
+              isReport={false}
             />
           )}
           {newsFeed.postType && newsFeed.postType.toLowerCase() ===
@@ -39,6 +40,7 @@ class NewsRoot extends Component {
               isInformation
               isStatus={false}
               isBudget={false}
+              isReport={false}
             />
           )}
           {newsFeed.postType && newsFeed.postType.toLowerCase() ===

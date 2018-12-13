@@ -29,6 +29,7 @@ class SavedPage extends Component {
               isInformation
               isStatus={false}
               isBudget={false}
+              isReport={false}
             />
           )}
           {saved.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign && (
@@ -38,6 +39,7 @@ class SavedPage extends Component {
               isInformation
               isStatus={false}
               isBudget={false}
+              isReport={false}
             />
           )}
           {saved.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && (

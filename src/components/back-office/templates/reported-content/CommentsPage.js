@@ -1,76 +1,72 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { comments_list } from "../../../../mock-data";
+import { getBackOfficeReportedContent } from "../../../../actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { CampaignLoading } from "../../../ui-kit";
+import { CommentCard } from "../../../misc";
+import * as enumerations from "../../../../lib/constants/enumerations";
 
 class CommentsPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      comments_detail: comments_list
+      commentList: null
     };
   }
 
+  componentDidMount = () => {
+    this.props.getBackOfficeReportedContent("reportedContentComments").then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.reportedContentComments) {
+        this.setState({
+          commentList: this.props.reportedContentData.reportedContentComments
+        })
+      }
+    });
+  };
+
+  renderCommentList = () => {
+    const { commentList } = this.state;
+      return (
+        <CommentCard
+          item={commentList}
+          totalCommentsCount={commentList.length}
+        />
+      );
+  };
+
   render() {
-    const { comments_detail } = this.state;
+    const { commentList } = this.state;
+    const { isLoading } = this.props;
 
     return (
       <div className="padding-rl-10 middle-section">
         <ReportedSearchBar />
-        <div className="feed_wrapper">
-          {comments_detail.map((comment) => {
-            return (
-              <div key={comment.id}>
-                <div className="feed-comment">
-                  <div className="comment-wrapper">
-                    <div className="comment-header">
-                      <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                        <img
-                          src={comment.user.image}
-                          alt="image1"
-                          className="img-circle img-responsive"
-                        />
-                      </div>
-                      <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-                        <b>{comment.user.name}</b> {comment.date} <b>Reply</b>
-                      </div>
-                      <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
-                        <Link to={""}>• • •</Link>
-                      </div>
-                    </div>
-                    <div className="comment-content">
-                      <p>
-                        This <Link to={""}>#text</Link> is an example. This text
-                        is an example. This text is an example from{" "}
-                        <Link to={""}>@Username</Link>. This text is…{" "}
-                        <Link to={""} className="read-more">
-                          read more
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="status backoffice-status">
-                  <div className="status-wrapper">
-                    <div className="title">Date</div>
-                    <div className="subtitle">{comment.date}</div>
-                  </div>
-                  <div className="status-wrapper">
-                    <div className="title">Reports</div>
-                    <div className="subtitle">{comment.reports}</div>
-                  </div>
-                  <div className="status-wrapper">
-                    <div className="title">Status</div>
-                    <div className="subtitle">{comment.status}</div>
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+        {commentList && !isLoading && this.renderCommentList()}
+        {isLoading && <CampaignLoading />}
       </div>
     );
   }
 }
 
-export default CommentsPage;
+const mapStateToProps = state => ({
+  reportedContentData: state.reportedContentData,
+  isLoading: state.reportedContentData.isLoading,
+  error: state.reportedContentData.error
+});
+
+const mapDispatchToProps = {
+  getBackOfficeReportedContent
+};
+
+CommentsPage.propTypes = {
+  getBackOfficeReportedContent: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.object,
+  isLoading: PropTypes.bool,
+  // error: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CommentsPage);

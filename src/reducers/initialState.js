@@ -50,11 +50,6 @@ const initialState = {
     isLoading: false,
     error: false
   },
-  exploreData: {
-    explores: null,
-    isLoading: false,
-    error: false
-  },
   backOfficeDashboardData: {
     backOfficeDashboard: null,
     isLoading: false,
@@ -67,9 +62,9 @@ const initialState = {
   },
   dashboardData: {
     news: null,
-    explore: null,
+    explores: null,
     participants: null,
-    user: null,
+    users: null,
     pics: null,
     isLoading: false,
     error: false
@@ -157,13 +152,13 @@ const initialState = {
     error: false    
   },
   reportedContentData: {
-    images: null,
-    videos: null,
-    campaigns: null,
-    pics: null,
-    ads: null,
-    comments: null,
-    user: null,
+    reportedContentImages: null,
+    reportedContentVideos: null,
+    reportedContentCampaigns: null,
+    reportedContentPics: null,
+    reportedContentAds: null,
+    reportedContentComments: null,
+    reportedContentUsers: null,
     isLoading: false,
     error: false    
   }

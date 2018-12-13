@@ -16,7 +16,8 @@ import {
   ReportedCampaignsPage,
   PicsPage,
   ReportedAdsPage,
-  CommentsPage
+  CommentsPage,
+  UsersPage
 } from "../../back-office";
 
 import * as settings from "../../web/templates";
@@ -137,7 +138,7 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
             exact
-            component={settings.UsersPage}
+            component={UsersPage}
           />
           <Route exact path="/*" component={this.handlePageNotFound} />
         </Switch>

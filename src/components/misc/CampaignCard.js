@@ -77,7 +77,7 @@ class CampaignCard extends Component {
   };
 
   render() {
-    const { isStatus, isDescription, isInformation, isBudget, likeData } = this.props;
+    const { isStatus, isDescription, isInformation, isBudget, isReport, likeData } = this.props;
     const { isComments, item } = this.state;
     return (
       <div className="feed_wrapper">
@@ -102,6 +102,7 @@ class CampaignCard extends Component {
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
+          isReport={isReport}
         />
         {isComments && (
           <CommentCard
@@ -135,6 +136,7 @@ CampaignCard.propTypes = {
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,
   isBudget: PropTypes.bool.isRequired,
+  isReport: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,
   like: PropTypes.func.isRequired,
   likeData: PropTypes.any
