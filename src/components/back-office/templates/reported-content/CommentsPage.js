@@ -18,9 +18,9 @@ class CommentsPage extends Component {
       <div className="padding-rl-10 middle-section">
         <ReportedSearchBar />
         <div className="feed_wrapper">
-          {comments_detail.map((comment, index) => {
+          {comments_detail.map((comment) => {
             return (
-              <div key={index}>
+              <div key={comment.id}>
                 <div className="feed-comment">
                   <div className="comment-wrapper">
                     <div className="comment-header">

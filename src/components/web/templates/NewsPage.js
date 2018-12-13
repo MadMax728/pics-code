@@ -19,7 +19,7 @@ class NewsRoot extends Component {
         
           {newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.mediaPost && (
-            <MediaCard item={newsFeed} isParticipant={false} />
+            <MediaCard item={newsFeed} isParticipant={false} isDescription />
           )}
           {newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.companyCampaign && (
@@ -28,6 +28,7 @@ class NewsRoot extends Component {
               isDescription={false}
               isInformation
               isStatus={false}
+              isBudget={false}
             />
           )}
           {newsFeed.postType && newsFeed.postType.toLowerCase() ===
@@ -37,11 +38,12 @@ class NewsRoot extends Component {
               isDescription={false}
               isInformation
               isStatus={false}
+              isBudget={false}
             />
           )}
           {newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.companyParticipantCampaign && (
-            <MediaCard item={newsFeed} isParticipant />
+            <MediaCard item={newsFeed} isParticipant isDescription/>
           )}
           {newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
@@ -71,7 +73,7 @@ NewsRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

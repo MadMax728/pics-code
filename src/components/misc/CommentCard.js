@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../lib/constants/images";
-import { Link } from "react-router-dom";
 import { RenderToolTips, HashTagUsername } from "../common";
 import { ThreeDots, ReadMore } from "../ui-kit";
 import { Translations } from "../../lib/translations";
@@ -221,7 +220,6 @@ class CommentCard extends Component {
   render() {
     const { item, form, comments } = this.state;
     const { comment, isLoading } = this.props;
-    console.log(this.state.maxRange);
     return (
       <div className="feed-comment" id={item.id}>
         <div className="comment-wrapper">

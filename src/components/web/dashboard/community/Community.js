@@ -30,19 +30,19 @@ class Community extends Component {
   };
 
   render() {
-    const { usersList } = this.state;
+    const { usersList, isLoading } = this.state;
 
     return (
       <div>
         <div className="normal_title padding-15">Community</div>
         <div className="community">
-          { usersList &&
-            usersList.map((user, index) => {
+          { usersList && !isLoading &&
+             usersList.map((user) => {
             const profile_route = user.isOwner
               ? `/news-feed`
               : `/news-feed/${user.username}`;
             return (
-              <div className="community_wrapper" key={index}>
+              <div className="community_wrapper" key={user.id}>
                 <div className="community-user-image">
                   <Link to={profile_route}>
                     <img
@@ -99,11 +99,10 @@ const mapDispatchToProps = {
 };
 
 Community.propTypes = {
-  handleMessageBar: PropTypes.func.isRequired,
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   usersList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 export default connect(

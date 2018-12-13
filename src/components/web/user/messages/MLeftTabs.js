@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import * as images from "../../../../lib/constants/images";
@@ -52,7 +52,7 @@ const MLeftTabs = (
         activeIndex
     }) => {
         const mTabs = () => {
-            return tabs.map((tab, key) => (
+            return tabs.map((tab) => (
                 <div
                     role="button"
                     key={tab.id}

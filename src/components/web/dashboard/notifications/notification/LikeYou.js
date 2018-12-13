@@ -31,11 +31,11 @@ class LikeYou extends Component {
     return (
       <div className="tab-pane fade active in" id="nav-like">
         <div className="header-notifications">
-          {likeYou_list.map((like_you, index) => {
+          {likeYou_list.map((like_you) => {
             return (
               <div
                 className="notification-with-subscribe notification-wrapper"
-                key={index}
+                key={like_you.id}
               >
                 <img src={like_you.image} alt={"image1"} />
                 <div className="user-info">

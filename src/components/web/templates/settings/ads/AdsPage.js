@@ -41,7 +41,7 @@ AdsPage.propTypes = {
   getAds: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   adList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

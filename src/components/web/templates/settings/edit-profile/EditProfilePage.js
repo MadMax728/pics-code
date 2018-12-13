@@ -60,7 +60,6 @@ class EditProfile extends Component {
   }
 
   componentDidMount = () => {
-    const storage = Auth.extractJwtFromStorage();
     window.scrollTo(0, 0);
     if (userInfo) {
       const data = {
@@ -537,7 +536,6 @@ const mapDispatchToProps = {
 EditProfile.propTypes = {
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.object,
-  history: PropTypes.any,
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any,
   profile: PropTypes.any,

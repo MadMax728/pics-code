@@ -50,7 +50,7 @@ class MediaCard extends Component {
     this.setState({ item });
   };
 
-  handleFavorite = e => {
+  handleFavorite = () => {
     const item = this.state.item;
     item.isSelfLike = !this.state.item.isSelfLike;
     item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
@@ -78,7 +78,7 @@ class MediaCard extends Component {
 
   render() {
     const { isComments, item } = this.state;
-    const { likeData } = this.props;
+    const { likeData, isDescription } = this.props;
     return (
       <div className="feed_wrapper">
         <MediaCardHeader
@@ -86,7 +86,10 @@ class MediaCard extends Component {
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
         />
-        <MediaCardBody item={item} />
+        <MediaCardBody 
+          item={item} 
+          isDescription={isDescription}
+        />
         <MediaCardFooter
           isLoading={likeData.isLoading}
           item={item}
@@ -126,6 +129,7 @@ MediaCard.propTypes = {
   comments: PropTypes.any,
   getComments: PropTypes.func.isRequired,
   isParticipant: PropTypes.bool,
+  isDescription: PropTypes.bool.isRequired,
   likeData: PropTypes.any
 };
 

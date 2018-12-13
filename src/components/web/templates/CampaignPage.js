@@ -40,6 +40,7 @@ class CampaignPage extends Component {
               isDescription={false}
               isInformation
               isStatus={false}
+              isBudget={false}
             />
           )}
         </div>
@@ -63,7 +64,7 @@ CampaignPage.propTypes = {
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

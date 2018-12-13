@@ -32,7 +32,7 @@ class BackOfficeHomeRoute extends Component {
   };
 
   handleImageBO = () => {
-    return <ImagesBOPage handleModalInfoShow={this.props.handleModalInfoShow} />;
+    return <ImagesBOPage/>;
   };
 
   handleSettingCampaign = () => {
@@ -106,7 +106,7 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
             exact
-            component={this.handleImageBO}
+            component={ImagesBOPage}
           />
 
           <Route

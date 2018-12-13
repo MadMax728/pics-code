@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { ThreeDots } from "../../ui-kit";
 import StatusCard from "../StatusCard";
+import BudgetCard from "../BudgetCard";
 
 const CampaignCardFooter = ({
   campaign,
@@ -12,7 +12,8 @@ const CampaignCardFooter = ({
   isStatus,
   renderReportTips,
   handleFavorite,
-  isLoading
+  isLoading,
+  isBudget
 }) => {
   const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
@@ -75,6 +76,11 @@ const CampaignCardFooter = ({
           route={`${routes.BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}`}
         />
       )}
+      {campaign && isBudget && (
+        <BudgetCard
+          item={campaign}
+        />
+      )}
     </div>
   );
 };
@@ -84,6 +90,7 @@ CampaignCardFooter.propTypes = {
   handleCommentsSections: PropTypes.func.isRequired,
   campaign: PropTypes.object.isRequired,
   isStatus: PropTypes.bool.isRequired,
+  isBudget: PropTypes.bool.isRequired,
   renderReportTips: PropTypes.func.isRequired,
   isLoading: PropTypes.bool
 };

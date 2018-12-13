@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { AdminHeader } from "../header";
 import * as routes from "../../../lib/constants/routes";
 import { generateOTP } from "../../../actions/login";

@@ -4,14 +4,12 @@ import PropTypes from "prop-types";
 import { HashTagUsername, SelectCategory } from "../../../common";
 import { PlaceAutoCompleteLocation } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
-import VideoPlayer from "../../../ui-kit/player/VideoPlayer";
 
 class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isInProgress: false,
-      form: { image: null }
     };
     console.log(this.props);
   }
@@ -21,12 +19,8 @@ class Upload extends Component {
   };
 
   handleUpload = e => {
-    // const file = e.target.files[0];
-    // this.props.handleUpload(file);
     const reader = new FileReader();
     const file = e.target.files[0];
-
-    console.log(file);
 
     if (file.type.includes("video")) {
       const currentThis = this;
@@ -78,7 +72,7 @@ class Upload extends Component {
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
-                value={this.props.form.address}
+                value={form.address}
               />
             </div>
             <div className="form-group">
@@ -113,7 +107,7 @@ class Upload extends Component {
                 alt="isAdvertisement"
                 className="check"
                 name="is_advertise_label"
-                value={this.props.form.is_advertise_label}
+                value={form.is_advertise_label}
                 onChange={this.handleChangeField}
               />
               {/* <div className="check-wrapr">
@@ -193,7 +187,6 @@ Upload.propTypes = {
   handleSetState: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  handleUpload: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

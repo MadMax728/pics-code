@@ -35,11 +35,11 @@ class AboutPage extends Component {
 }
 
 AboutPage.propTypes = {
-  match: PropTypes.any.isRequired,
+  // match: PropTypes.any.isRequired,
   getAbout: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   aboutDetails: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

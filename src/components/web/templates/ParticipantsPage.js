@@ -17,7 +17,7 @@ class ParticipantsPage extends Component {
       return (
         <div key={participant.id}>
           {participant.postType && participant.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && 
-               <MediaCard item={participant} />
+               <MediaCard item={participant} isDescription/>
           }
         </div>
       );
@@ -36,13 +36,11 @@ class ParticipantsPage extends Component {
 }
 
 ParticipantsPage.propTypes = {
-  handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   participantsList: PropTypes.any,
-  error: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
