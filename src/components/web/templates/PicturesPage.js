@@ -7,7 +7,7 @@ import { getDashboard } from "../../../actions";
 
 class PicturesRoot extends React.Component {
   componentDidMount = () => {
-    this.props.getDashboard("getPic");
+    this.props.getDashboard("pics");
   };
 
   renderuserList = () => {
@@ -43,7 +43,7 @@ PicturesRoot.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  picsList: state.dashboardData.dashboard,
+  picsList: state.dashboardData.pics,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

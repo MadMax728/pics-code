@@ -8,7 +8,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsRoot extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("getNews");
+    this.props.getDashboard("news");
   };
 
   renderNewsFeedList = () => {
@@ -77,7 +77,7 @@ NewsRoot.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  newsFeedList: state.dashboardData.dashboard,
+  newsFeedList: state.dashboardData.news,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

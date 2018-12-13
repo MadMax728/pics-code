@@ -12,7 +12,7 @@ class Community extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getDashboard("getDashboardUser").then(()=> {
+    this.props.getDashboard("user").then(()=> {
       if(this.props.usersList){
         this.setState({usersList: this.props.usersList})
       }
@@ -89,7 +89,7 @@ class Community extends Component {
 }
 
 const mapStateToProps = state => ({
-  usersList: state.dashboardData.dashboard,
+  usersList: state.dashboardData.user,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });
