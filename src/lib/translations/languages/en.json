@@ -603,6 +603,7 @@
     "Change_email": "Change email",
     "Current_Email": "Current Email",
     "New_Email": "New Email",
+    "save": "Save",
     "Change_Password": "Change Password",
     "Current_Password": "Current Password",
     "New_Password": "New Password",
@@ -619,7 +620,14 @@
     "Delete": "Delete",
     "Deactivate_my_account": "Deactivate my account",
     "Deactivate": "Deactivate",
-    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account."
+    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account.",
+    "Current_Email_is_required": "Current Email is required",
+    "Email_should_be_valid": "Email should be valid",
+    "New_Email_is_required": "New Email is required",
+    "Current_Password_is_required": "Current Password is required",
+    "New_Password_is_required": "New Password is required",
+    "Repeat_Password_is_required": "Repeat Password is required",
+    "Password_is_not_matching": "Password is not matching"
   },
   "Business_profile": {
     "Business_profile": "Business profile",
@@ -640,6 +648,14 @@
     "Expenses": "Expenses",
     "Status": "Status",
     "PDF": "PDF"
+  },
+  "data_download": {
+    "Email": "Email",
+    "Password": "Password",
+    "Download": "Download",
+    "Email_ID_should_be_valid": "Email ID should be valid",
+    "Email_is_required": "Email is required",
+    "Password_is_required": "Password is required"
   },
   "landing": {
     "Navigation": "Navigation",

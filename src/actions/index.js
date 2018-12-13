@@ -5,7 +5,7 @@ export * from "./profile";
 export * from "./user";
 export * from "./settings";
 export * from "./ad";
-export * from "./comments"
+export * from "./comments";
 export * from "./media";
 export * from "./tags";
 export * from "./users";
@@ -19,4 +19,4 @@ export * from "./verification";
 export * from "./voucher";
 export * from "./backOfficeReview";
 export * from "./backOfficeReportedContent";
-
+export * from "./profileSettings";

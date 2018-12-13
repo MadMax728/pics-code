@@ -1,57 +1,60 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const profileReducer = (state = initialState.userDataByUsername, action) => {
+const profileSettingsReducer = (
+  state = initialState.businessProfileData,
+  action
+) => {
   switch (action.type) {
-    case types.GET_USER_STARTED:
+    case types.ACTIVATE_BUSINESS_PROFILE_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_USER_SUCCEEDED:
+    case types.ACTIVATE_BUSINESS_PROFILE_SUCCEEDED:
       return {
         ...state,
-        user: action.payload,
+        businessProfileActivationData: action.payload,
         isLoading: false
       };
-    case types.GET_USER_FAILED:
+    case types.ACTIVATE_BUSINESS_PROFILE_FAILED:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
-    case types.UPLOAD_IMAGE_STARTED:
+    case types.GET_BILLS_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.UPLOAD_IMAGE_SUCCEEDED:
+    case types.GET_BILLS_SUCCEEDED:
       return {
         ...state,
-        imageData: action.payload,
+        billsData: action.payload,
         isLoading: false
       };
-    case types.UPLOAD_IMAGE_FAILED:
+    case types.GET_BILLS_FAILED:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
-    case types.UPDATE_PROFILE_STARTED:
+    case types.GET_DOWNLOAD_DATA_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.UPDATE_PROFILE_SUCCEEDED:
+    case types.GET_DOWNLOAD_DATA_SUCCEEDED:
       return {
         ...state,
-        user: action.payload,
+        downloadData: action.payload,
         isLoading: false
       };
-    case types.UPDATE_PROFILE_FAILED:
+    case types.GET_DOWNLOAD_DATA_FAILED:
       return {
         ...state,
         isLoading: false,
@@ -62,4 +65,4 @@ const profileReducer = (state = initialState.userDataByUsername, action) => {
   }
 };
 
-export default profileReducer;
+export default profileSettingsReducer;
