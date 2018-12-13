@@ -17,4 +17,4 @@ export * from "./verificationService";
 export * from "./voucherService";
 export * from "./backOfficeReviewService";
 export * from "./backOfficeReportedContentService";
-
+export * from "./profileSettingsService";

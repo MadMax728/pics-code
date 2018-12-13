@@ -2,9 +2,7 @@ import * as types from "../lib/constants/actionTypes";
 import * as adminService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import {
-  admin_list
-} from "../mock-data";
+import { admin_list } from "../mock-data";
 
 const getAdminsStarted = () => ({
   type: types.GET_ADMINS_STARTED
@@ -31,10 +29,10 @@ export const getAdmins = () => {
 
     return adminService.getAdmins(header).then(
       res => {
-          dispatch(getAdminsSucceeded(res.data.data));
+        dispatch(getAdminsSucceeded(res.data.data));
       },
       error => {
-        dispatch(getAdminsFailed(error.response))
+        dispatch(getAdminsFailed(error.response));
         dispatch(getAdminsSucceeded(admin_list));
         logger.error({
           description: error.toString(),
