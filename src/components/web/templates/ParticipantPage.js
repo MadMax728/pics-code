@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
 
 class ParticipantPage extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("getParticipant");
+    this.props.getDashboard("participants");
   };
 
   renderParticipantList = () => {
@@ -46,7 +46,7 @@ ParticipantPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  participantList: state.dashboardData.dashboard,
+  participantList: state.dashboardData.participants,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

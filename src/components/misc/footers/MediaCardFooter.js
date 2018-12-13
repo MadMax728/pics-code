@@ -2,13 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { ThreeDots } from "../../ui-kit";
+import ReportCard from "../ReportCard";
 
 const MediaCardFooter = ({
   isLoading,
   item,
   handleCommentsSections,
   renderReportTips,
-  handleFavorite
+  handleFavorite,
+  isReport
 }) => {
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
   return (
@@ -59,6 +61,11 @@ const MediaCardFooter = ({
           type={"light"}
         />
       </div>
+      {item && isReport && (
+        <ReportCard
+          item={item}
+        />
+      )}
     </div>
   );
 };
@@ -68,7 +75,8 @@ MediaCardFooter.propTypes = {
   handleCommentsSections: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
   renderReportTips: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  isReport: PropTypes.bool
 };
 
 export default MediaCardFooter;

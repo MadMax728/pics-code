@@ -6,7 +6,7 @@ import { ThreeDots, ReadMore } from "../ui-kit";
 import { Translations } from "../../lib/translations";
 import { addComment, deleteComment, editComment } from "../../actions";
 import { connect } from "react-redux";
-import moment from "moment";
+import { DateFormat } from "../Factory";
 
 
 class CommentCard extends Component {
@@ -165,7 +165,7 @@ class CommentCard extends Component {
             <img src={comment.profileImage} alt={`comment-${comment.id}`} className="img-circle img-responsive ht45" />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {moment(comment.createdAt).format("MMMM Do YYYY")} <b>
+            <b>{comment.userName}</b> {DateFormat(comment.createdAt)} <b>
               Reply
             </b>
           </div>

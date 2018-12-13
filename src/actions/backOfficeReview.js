@@ -1,81 +1,43 @@
 import * as types from "../lib/constants/actionTypes";
-import * as adminService from "../services";
+import * as backOfficeReviewService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 import {
   campaigns_list
 } from "../mock-data";
 
-// back office review campigns
-const getBackOfficeReviewCampaignsStarted = () => ({
-  type: types.GET_BACK_OFFICE_REVIEW_CAMPAIGNS_STARTED
+// back office review Campigns and Ads
+const getBackOfficeReviewStarted = () => ({
+  type: types.GET_BACK_OFFICE_REVIEW_STARTED
 });
 
-const getBackOfficeReviewCampaignsSucceeded = data => ({
-  type: types.GET_BACK_OFFICE_REVIEW_CAMPAIGNS_SUCCEEDED,
-  payload: data
+const getBackOfficeReviewSucceeded = (data, isFor) => ({
+  type: types.GET_BACK_OFFICE_REVIEW_SUCCEEDED,
+  payload: data,
+  isFor
 });
 
-const getBackOfficeReviewCampaignsFailed = error => ({
-  type: types.GET_BACK_OFFICE_REVIEW_CAMPAIGNS_FAILED,
+const getBackOfficeReviewFailed = error => ({
+  type: types.GET_BACK_OFFICE_REVIEW_FAILED,
   payload: error,
   error: true
 });
 
-export const getBackOfficeReviewCampaigns = () => {
+export const getBackOfficeReview = (prop, provider) => {
   return dispatch => {
-    dispatch(getBackOfficeReviewCampaignsStarted());
+    dispatch(getBackOfficeReviewStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.adminAccessToken
     };
 
-    return adminService.getBackOfficeReviewCampaigns(header).then(
+    return backOfficeReviewService[prop](provider, header).then(
       res => {
-          dispatch(getBackOfficeReviewCampaignsSucceeded(res.data.data));
+          dispatch(getBackOfficeReviewSucceeded(res.data.data, prop));
       },
       error => {
-        dispatch(getBackOfficeReviewCampaignsFailed(error.response));
-        dispatch(getBackOfficeReviewCampaignsSucceeded(campaigns_list));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
-  };
-};
-
-// back office review ads
-const getBackOfficeReviewAdsStarted = () => ({
-  type: types.GET_BACK_OFFICE_REVIEW_ADS_STARTED
-});
-
-const getBackOfficeReviewAdsSucceeded = data => ({
-  type: types.GET_BACK_OFFICE_REVIEW_ADS_SUCCEEDED,
-  payload: data
-});
-
-const getBackOfficeReviewAdsFailed = error => ({
-  type: types.GET_BACK_OFFICE_REVIEW_ADS_FAILED,
-  payload: error,
-  error: true
-});
-
-export const getBackOfficeReviewAds = () => {
-  return dispatch => {
-    dispatch(getBackOfficeReviewAdsStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const header = {
-      Authorization: storage.adminAccessToken
-    };
-
-    return adminService.getBackOfficeReviewAds(header).then(
-      res => {
-          dispatch(getBackOfficeReviewAdsSucceeded(res.data.data));
-      },
-      error => {
-        dispatch(getBackOfficeReviewAdsFailed(error.response));
+        dispatch(getBackOfficeReviewFailed(error.response));
+        dispatch(getBackOfficeReviewSucceeded(campaigns_list, prop));
         logger.error({
           description: error.toString(),
           fatal: true

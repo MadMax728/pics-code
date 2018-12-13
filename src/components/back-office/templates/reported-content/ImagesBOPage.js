@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { images_b_o_list } from "../../../../mock-data";
 import { getBackOfficeReportedContent } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
@@ -8,27 +7,25 @@ import { CampaignLoading } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 
-
 class ImagesBOPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      images_detail: images_b_o_list,
       imageList: null
     };
   }
 
   componentDidMount = () => {
-    this.props.getBackOfficeReportedContent("images").then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.images) {
+    this.props.getBackOfficeReportedContent("reportedContentImages").then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.reportedContentImages) {
         this.setState({
-          imageList: this.props.reportedContentData.images
+          imageList: this.props.reportedContentData.reportedContentImages
         })
       }
     });
   };
 
-  renderimageList = () => {
+  renderImageList = () => {
     const { imageList } = this.state;
     return imageList.map(image => {
       return (
@@ -37,7 +34,7 @@ class ImagesBOPage extends Component {
           image.typeContent &&
           image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
           (
-            <MediaCard item={image} isDescription/>
+            <MediaCard item={image} isDescription isReport/>
           )}
         </div>
       );
@@ -49,7 +46,7 @@ class ImagesBOPage extends Component {
     return (
       <div className="padding-rl-10 middle-section">
         <ReportedSearchBar />
-        {imageList && !isLoading && this.renderimageList()}
+        {imageList && !isLoading && this.renderImageList()}
         {isLoading && <CampaignLoading />}
       </div>
     );

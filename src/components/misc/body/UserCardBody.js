@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ReportCard from "../ReportCard";
 
-const UserCardBody = ({ user, index, handleSubscribed }) => {
+const UserCardBody = ({ user, index, handleSubscribed, isReport }) => {
   return (
     <div
       className={
         index % 2 === 0 ? "col-sm-6 pic-left-block" : "col-sm-6 pic-right-block"
       }
     >
-      <div className="pic-block">
+      <div className={isReport? "backoffice-user pic-block" : "pic-block" }>
         <img src={user.profileUrl} alt={"pic-1"}/>
         <div className="name-wrapper">
           <div className="username">{user.username}</div>
@@ -31,6 +32,11 @@ const UserCardBody = ({ user, index, handleSubscribed }) => {
                     </button>
             )}
         </div>
+        {user && isReport && (
+          <ReportCard
+            item={user}
+          />
+        )}
       </div>
     </div>
   );
@@ -39,7 +45,8 @@ const UserCardBody = ({ user, index, handleSubscribed }) => {
 UserCardBody.propTypes = {
   user: PropTypes.object.isRequired,
   handleSubscribed: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  isReport: PropTypes.bool
 };
 
 export default UserCardBody;

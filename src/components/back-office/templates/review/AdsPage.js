@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { CampaignLoading } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { AdCard } from "../../../misc";
-import { getBackOfficeReviewAds } from "../../../../actions";
+import { getBackOfficeReview } from "../../../../actions";
 
 class AdsPage extends Component {
   constructor(props, context) {
@@ -17,7 +17,7 @@ class AdsPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getBackOfficeReviewAds().then(()=> {
+    this.props.getBackOfficeReview("ads").then(()=> {
       if(this.props.adList) {
         this.setState({
           adList: this.props.adList
@@ -65,11 +65,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getBackOfficeReviewAds
+  getBackOfficeReview
 };
 
 AdsPage.propTypes = {
-  getBackOfficeReviewAds: PropTypes.func.isRequired,
+  getBackOfficeReview: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   adList: PropTypes.any,
   // error: PropTypes.any
