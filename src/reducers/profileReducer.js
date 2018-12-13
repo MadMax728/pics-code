@@ -57,6 +57,24 @@ const profileReducer = (state = initialState.userDataByUsername, action) => {
         isLoading: false,
         error: action.payload
       };
+    case types.ACTIVATE_BUSINESS_PROFILE_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.ACTIVATE_BUSINESS_PROFILE_SUCCEEDED:
+      return {
+        ...state,
+        isActivateBusinessProfileData: action.payload,
+        isLoading: false
+      };
+    case types.ACTIVATE_BUSINESS_PROFILE_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }

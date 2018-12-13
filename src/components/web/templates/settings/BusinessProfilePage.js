@@ -1,11 +1,42 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../lib/translations";
+import { Auth } from "../../../../auth";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { activateBusinessProfile } from "../../../../actions";
 
 import * as images from "../../../../lib/constants/images";
 
 class BusinessProfilePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isActivateBusinessAccount: false,
+      userId: ""
+    };
+  }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.setState({ userId: userInfo.id });
+    }
+  };
+
+  handleActivationBusinessProfile = e => {
+    console.log("activate account", e.target.id);
+    const paramData = { profileId: e.target.id };
+    this.props.activateBusinessProfile(paramData); // API Call
+  };
+
   render() {
+    const { userId } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="bussiness-profile-form">
@@ -51,10 +82,15 @@ class BusinessProfilePage extends Component {
             </div>
           </div>
           <div className="col-sm-12">
-            <button className="gradient-button">
-              <span>{Translations.Business_profile.Activate}</span>
+            <button
+              type="button"
+              onClick={this.handleActivationBusinessProfile}
+              className="gradient-button"
+            >
+              <span id={userId}>{Translations.Business_profile.Activate} </span>
             </button>
           </div>
+
           <div className="clearfix" />
           <div className="terms-conditions text-center">
             {
@@ -77,4 +113,19 @@ class BusinessProfilePage extends Component {
   }
 }
 
-export default BusinessProfilePage;
+const mapStateToProps = state => ({
+  isActivateBusinessProfileData: state.userDataByUsername
+});
+
+const mapDispatchToProps = {
+  activateBusinessProfile
+};
+
+BusinessProfilePage.propTypes = {
+  activateBusinessProfile: PropTypes.func
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BusinessProfilePage);
