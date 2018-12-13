@@ -97,7 +97,7 @@ const initialState = {
     error: false
   },
   mediaData: {
-    media:null,
+    media: null,
     isLoading: false,
     error: false
   },
@@ -144,13 +144,13 @@ const initialState = {
     vouchers: null,
     voucher: null,
     isLoading: false,
-    error: false    
+    error: false
   },
   reviewData: {
     campaigns: null,
     ads: null,
     isLoading: false,
-    error: false    
+    error: false
   },
   reportedContentData: {
     images: null,
@@ -161,7 +161,14 @@ const initialState = {
     comments: null,
     user: null,
     isLoading: false,
-    error: false    
+    error: false
+  },
+  businessProfileData: {
+    businessProfileActivationData: null,
+    billsData: null,
+    downloadData: null,
+    isLoading: false,
+    error: false
   }
 };
 

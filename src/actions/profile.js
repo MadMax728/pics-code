@@ -47,21 +47,6 @@ const uploadImageFailed = error => ({
   error: true
 });
 
-const activateBusinessProfileStarted = () => ({
-  type: types.ACTIVATE_BUSINESS_PROFILE_STARTED
-});
-
-const activateBusinessProfileSucceeded = data => ({
-  type: types.ACTIVATE_BUSINESS_PROFILE_SUCCEEDED,
-  payload: data
-});
-
-const activateBusinessProfileFailed = error => ({
-  type: types.ACTIVATE_BUSINESS_PROFILE_FAILED,
-  payload: error,
-  error: true
-});
-
 export const getUser = params => {
   return dispatch => {
     dispatch(getUserStarted());
@@ -131,27 +116,6 @@ export const uploadProfilePicture = params => {
           description: error.toString(),
           fatal: true
         });
-      }
-    );
-  };
-};
-
-export const activateBusinessProfile = params => {
-  return dispatch => {
-    dispatch(activateBusinessProfileStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const header = {
-      Authorization: storage.accessToken
-    };
-
-    return userService.activateBusinessProfile(params, header).then(
-      res => {
-        if (res.data && res.data.data) Auth.saveJwtToStorage(res.data.data);
-        dispatch(activateBusinessProfileSucceeded(res.data));
-      },
-      error => {
-        dispatch(activateBusinessProfileFailed(error.response));
-        logger.error({ description: error.toString(), fatal: true });
       }
     );
   };

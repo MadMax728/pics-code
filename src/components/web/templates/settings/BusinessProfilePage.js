@@ -114,7 +114,7 @@ class BusinessProfilePage extends Component {
 }
 
 const mapStateToProps = state => ({
-  isActivateBusinessProfileData: state.userDataByUsername
+  businessProfileData: state.businessProfileActivationData
 });
 
 const mapDispatchToProps = {
