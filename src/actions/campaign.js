@@ -2,6 +2,7 @@ import * as types from "../lib/constants/actionTypes";
 import * as campaignService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
+import { campaign_detail } from "../mock-data";
 
 // Get Campaigns
 const getCampaignsStarted = () => ({
@@ -65,14 +66,14 @@ export const getCampaignDetails = provider => {
   return dispatch => {
     dispatch(getCampaignDetailsStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
+    const header = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
 
-    return campaignService.getCampaignDetails(params, provider).then(
+    return campaignService.getCampaignDetails(provider, header).then(
       res => {
         dispatch(getCampaignDetailsSucceeded(res.data.data));
+        // dispatch(getCampaignDetailsSucceeded(campaign_detail));
       },
       error => {
         dispatch(

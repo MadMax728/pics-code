@@ -34,17 +34,20 @@ class InformationPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getCampaignDetails(this.state.campaignId);
+    const data = {
+      id: this.state.campaignId
+    }
+    this.props.getCampaignDetails(data);
   };
 
   handleFavorite = () => {
     this.setState({
-      campaign_detail: {
-        ...this.props.campaign_detail,
-        isSelfLike: !this.props.campaign_detail.isSelfLike,
-        like_count: this.props.campaign_detail.isSelfLike
-          ? this.props.campaign_detail.like_count - 1
-          : this.props.campaign_detail.like_count + 1
+      campaignDetails: {
+        ...this.props.campaignDetails,
+        isSelfLike: !this.props.campaignDetails.isSelfLike,
+        like_count: this.props.campaignDetails.isSelfLike
+          ? this.props.campaignDetails.like_count - 1
+          : this.props.campaignDetails.like_count + 1
       }
     });
   };
@@ -68,25 +71,27 @@ class InformationPage extends Component {
     return (
       <RenderToolTips
         items={this.state.ReportTips}
-        id={this.props.campaign_detail.id}
+        id={this.props.campaignDetails.id}
       />
     );
   };
 
   render() {
-    const { campaign_detail, isLoading } = this.props;
+    const { campaignDetails, isLoading } = this.props;
+    console.log(campaignDetails);
+    
     return (
       <div className="padding-l-10 middle-section width-80">
-        {campaign_detail &&
+        {campaignDetails &&
           !isLoading && (
             <div className="information-wrapper ht100">
               <div className="info-inner-wrapper col-xs-12">
                 <div className="info-main-title paddindLeft0">
-                  {campaign_detail.title}
+                  {campaignDetails.title}
                 </div>
-                <div className="text">{campaign_detail.description}</div>
-                <img src={campaign_detail.profileImage} alt={"information"} />
-                <div className="text paddTop20">{campaign_detail.description}</div>
+                <div className="text">{campaignDetails.description}</div>
+                <img src={campaignDetails.profileImage} alt={"information"} />
+                <div className="text paddTop20">{campaignDetails.description}</div>
                 <button className="filled_button">
                   {Translations.apply_campaign}
                 </button>
@@ -101,24 +106,24 @@ class InformationPage extends Component {
                     </div>
                     <div className="col-sm-9 col-xs-7 no-padding">
                       <div className="normal_title">
-                        {campaign_detail.title}
+                        {campaignDetails.title}
                       </div>
                       <div className="secondary_title">
-                        {campaign_detail.userName}
+                        {campaignDetails.userName}
                       </div>
                       <div className="grey_title">
-                        {campaign_detail.category}
+                        {campaignDetails.category}
                       </div>
                     </div>
                     <div className="col-sm-2 col-xs-2 like_wrapper">
-                      {campaign_detail.isSelfLike ? (
+                      {campaignDetails.isSelfLike ? (
                         <img
                           src={images.blue_heart}
                           alt="like-1"
                           className="pull-right"
                           role="presentation"
                           onClick={this.handleFavorite}
-                          id={campaign_detail.id}
+                          id={campaignDetails.id}
                           onKeyDown={this.handleOnKeyDown}
                         />
                       ) : (
@@ -128,7 +133,7 @@ class InformationPage extends Component {
                           className="pull-right"
                           role="presentation"
                           onClick={this.handleFavorite}
-                          id={campaign_detail.id}
+                          id={campaignDetails.id}
                           onKeyDown={this.handleOnKeyDown}
                         />
                       )}
@@ -140,19 +145,19 @@ class InformationPage extends Component {
                         <div className="info_wrapper">
                           <span className="normal_title">Start: </span>
                           <span className="secondary_title">
-                            {campaign_detail.startDate}
+                            {campaignDetails.startDate}
                           </span>
                         </div>
                         <div className="info_wrapper">
                           <span className="normal_title">Procedure: </span>
                           <span className="secondary_title">
-                            {campaign_detail.procedure}
+                            {campaignDetails.procedure}
                           </span>
                         </div>
                         <div className="info_wrapper">
                           <span className="normal_title">Target group: </span>
                           <span className="secondary_title">
-                            {campaign_detail.target_group}
+                            {campaignDetails.target_group}
                           </span>
                         </div>
                       </div>
@@ -160,19 +165,19 @@ class InformationPage extends Component {
                         <div className="info_wrapper">
                           <span className="normal_title">End: </span>
                           <span className="secondary_title">
-                            {campaign_detail.endDate}
+                            {campaignDetails.endDate}
                           </span>
                         </div>
                         <div className="info_wrapper">
                           <span className="normal_title">Type: </span>
                           <span className="secondary_title">
-                            {campaign_detail.type}
+                            {campaignDetails.type}
                           </span>
                         </div>
                         <div className="info_wrapper">
                           <span className="normal_title">Applications: </span>
                           <span className="secondary_title">
-                            {campaign_detail.applications}
+                            {campaignDetails.applications}
                           </span>
                         </div>
                       </div>
@@ -180,13 +185,13 @@ class InformationPage extends Component {
                         <div className="info_wrapper">
                           <span className="normal_title">Start: </span>
                           <span className="secondary_title">
-                            {campaign_detail.startDate}
+                            {campaignDetails.startDate}
                           </span>
                         </div>
                         <div className="info_wrapper">
                           <span className="normal_title">Procedure: </span>
                           <span className="secondary_title">
-                            {campaign_detail.procedure}
+                            {campaignDetails.procedure}
                           </span>
                         </div>
                       </div>
@@ -194,13 +199,13 @@ class InformationPage extends Component {
                         <div className="info_wrapper">
                           <span className="normal_title">End: </span>
                           <span className="secondary_title">
-                            {campaign_detail.endDate}
+                            {campaignDetails.endDate}
                           </span>
                         </div>
                         <div className="info_wrapper">
                           <span className="normal_title">Type: </span>
                           <span className="secondary_title">
-                            {campaign_detail.type}
+                            {campaignDetails.type}
                           </span>
                         </div>
                       </div>
@@ -208,28 +213,28 @@ class InformationPage extends Component {
                   </div>
                   <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
                     <div className="messages">
-                      <span className="count">{campaign_detail.msg_count}</span>
+                      <span className="count">{campaignDetails.msg_count}</span>
                       <img
                         src={images.feed_msg}
                         alt={"feed_msg"}
                         role="presentation"
                         onClick={this.handleMessage}
-                        id={campaign_detail.createdBy}
+                        id={campaignDetails.createdBy}
                         onKeyDown={this.handleOnKeyDown}
                       />
                     </div>
                     <div className="likes">
                       <span className="count">
-                        {campaign_detail.like_count}
+                        {campaignDetails.like_count}
                       </span>
-                      {campaign_detail.isSelfLike ? (
+                      {campaignDetails.isSelfLike ? (
                         <img
                           src={images.blue_heart}
                           alt="like-1"
                           className="pull-right"
                           role="presentation"
                           onClick={this.handleFavorite}
-                          id={campaign_detail.id}
+                          id={campaignDetails.id}
                           onKeyDown={this.handleOnKeyDown}
                         />
                       ) : (
@@ -239,7 +244,7 @@ class InformationPage extends Component {
                           className="pull-right"
                           role="presentation"
                           onClick={this.handleFavorite}
-                          id={campaign_detail.id}
+                          id={campaignDetails.id}
                           onKeyDown={this.handleOnKeyDown}
                         />
                       )}
@@ -267,7 +272,7 @@ class InformationPage extends Component {
               <div className="feed_wrapper">
                 <div className="feed-comment">
                   {/* Comments Section */}
-                  <Comments campaign={campaign_detail} />
+                  <Comments campaign={campaignDetails} />
                 </div>
               </div>
             </div>
@@ -319,13 +324,13 @@ InformationPage.propTypes = {
   handleModalShow: PropTypes.func,
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
-  campaign_detail: PropTypes.any,
+  campaignDetails: PropTypes.any,
   isLoading: PropTypes.bool,
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  campaign_detail: state.campaignData.campaign[0],
+  campaignDetails: state.campaignData.campaign,
   isLoading: state.campaignData.isLoading,
   error: state.campaignData.error
 });

@@ -8,8 +8,8 @@ import { connect } from "react-redux";
 const initialState = {
   form: {
     add_location: {
-      lat: "",
-      lng: "",
+      latitude: "",
+      longitude: "",
       address: ""
     },
     add_category: "",
@@ -32,10 +32,6 @@ class UploadModal extends Component {
   }
   
   handleUpload = (imageVideo, file, filetype) => {
-    console.log(imageVideo);
-    console.log(file);
-    console.log(filetype);
-
     if (filetype) {
       this.setState({
         form: { ...this.state.form, image: imageVideo, file, filetype }
@@ -61,19 +57,34 @@ class UploadModal extends Component {
 
   handleContinue = () => {
     const { form } = this.state;
+    
     const Data = new FormData();
-    Data.set("title", "");
-    Data.set("description", form.add_decription);
-    Data.set("isAdvertiseLabel", form.is_advertise_label);
-    Data.append("image", form.file);
-    Data.set("postType", "mediapost");
-    Data.set("location", form.add_location);
+    Data.append("description", form.add_description);
+    Data.append("isAdvertiseLabel", form.is_advertise_label);
+    Data.append("category", form.add_category);
+    if(form.filetype) {
+      Data.append("image", form.file);
+    }
+    else {
+      Data.append("video", form.file);
+    }
+    Data.append("postType", "mediapost");
+    Data.append("location", JSON.stringify(form.add_location));
 
-    this.props.uploadMedia(Data).then(() => {
-      this.props.handleModalHide();
+    console.log(form);
+    
+    console.log(Data);
+    
+    this.props.uploadMedia(Data, form.filetype).then(() => {
       this.setState({ initialState });
+      this.props.handleModalHide();
     });
+
   };
+
+  componentWillUnmount = () => {
+    this.setState({ initialState });
+  }
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -87,8 +98,8 @@ class UploadModal extends Component {
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    form.add_location.lat = location.lat;
-    form.add_location.lng = location.lng;
+    form.add_location.latitude = location.lat;
+    form.add_location.longitude = location.lng;
     form.add_location.address = address;
     this.setState({ form });
   };

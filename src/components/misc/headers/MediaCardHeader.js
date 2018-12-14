@@ -23,13 +23,10 @@ const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
       </div>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link
-          to={{
-            pathname: `${routes.BASE_IMAGE_INFORMATION_ROUTE}${item.id}`,
-            state: { _id: item.id }
-          }}
-        >
-          <div className="normal_title">{item.title}</div>
+          to={profile_route}>
+          <div className="normal_title">{item.userName}</div>
         </Link>
+        <div className="secondary_title">{item.location.address}</div>
         {item.category && (
           <div className="grey_title">
             {DateFormat(item.createdAt)} in{" "}
