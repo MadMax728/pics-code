@@ -9,6 +9,7 @@ import { RenderToolTips } from "../common";
 import { getComments, like } from "../../actions";
 import { connect } from "react-redux";
 
+
 class MediaCard extends Component {
   constructor(props, context) {
     super(props, context);

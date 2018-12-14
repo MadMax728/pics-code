@@ -40,7 +40,8 @@ const initialState = {
   },
   campaignData: {
     campaigns: null,
-    campaign: [],
+    campaign: null,
+    favouriteCampaign: null,
     isLoading: false,
     error: false
   },

@@ -13,7 +13,22 @@ class TopBarOtherInfo extends Component {
     };
   }
 
-  componentWillMount() {
+  componentWillReceiveProps(nextProps) {
+    const data = this.props.match;
+    if (data.username !== nextProps.match.username) {
+      this.props.getUser(nextProps.match).then(() => {
+        if (
+          this.props.userDataByUsername &&
+          this.props.userDataByUsername.user &&
+          this.props.userDataByUsername.user.data
+        ) {
+            this.handleSetUserInfo();
+        }
+      });
+    }
+  }
+
+  componentDidMount() {
     console.log(this.props.match);
     const data = this.props.match;
 
@@ -23,42 +38,46 @@ class TopBarOtherInfo extends Component {
         this.props.userDataByUsername.user &&
         this.props.userDataByUsername.user.data
       ) {
-        const items = {
-          username: this.props.userDataByUsername.user.data.username,
-          private: this.props.userDataByUsername.user.data.isPrivate,
-          more: true,
-          isSubscribe: true,
-          userProfile: this.props.userDataByUsername.user.data.profileUrl,
-          slots: [
-            {
-              name: Translations.top_bar_info.subscriber,
-              val: this.props.userDataByUsername.user.data.subscribersCount,
-              className: "col-sm-4 slot_one no-padding",
-              btnActiveClassName: "filled_button",
-              btnText: Translations.top_bar_info.subscribe,
-              handeleEvent: this.handeleSubscribe
-            },
-            {
-              name: Translations.top_bar_info.subscribed,
-              val: this.props.userDataByUsername.user.data.subscribedCount,
-              className: "col-sm-4 slot_two no-padding",
-              btnActiveClassName: "black_button",
-              btnText: Translations.top_bar_info.message,
-              handeleEvent: this.handeleMessage
-            },
-            {
-              name: Translations.top_bar_info.posts,
-              val: this.props.userDataByUsername.user.data.postCount,
-              className: "col-sm-4 slot_three no-padding",
-              btnActiveClassName: "black_button",
-              btnText: Translations.top_bar_info.like_you,
-              handeleEvent: this.handeleLikeYou
-            }
-          ]
-        };
-        this.setState({ items });
+          this.handleSetUserInfo();
       }
     });
+  }
+
+  handleSetUserInfo = () => {
+    const items = {
+      username: this.props.userDataByUsername.user.data.username,
+      private: this.props.userDataByUsername.user.data.isPrivate,
+      more: true,
+      isSubscribe: true,
+      userProfile: this.props.userDataByUsername.user.data.profileUrl,
+      slots: [
+        {
+          name: Translations.top_bar_info.subscriber,
+          val: this.props.userDataByUsername.user.data.subscribersCount,
+          className: "col-sm-4 slot_one no-padding",
+          btnActiveClassName: "filled_button",
+          btnText: Translations.top_bar_info.subscribe,
+          handeleEvent: this.handeleSubscribe
+        },
+        {
+          name: Translations.top_bar_info.subscribed,
+          val: this.props.userDataByUsername.user.data.subscribedCount,
+          className: "col-sm-4 slot_two no-padding",
+          btnActiveClassName: "black_button",
+          btnText: Translations.top_bar_info.message,
+          handeleEvent: this.handeleMessage
+        },
+        {
+          name: Translations.top_bar_info.posts,
+          val: this.props.userDataByUsername.user.data.postCount,
+          className: "col-sm-4 slot_three no-padding",
+          btnActiveClassName: "black_button",
+          btnText: Translations.top_bar_info.like_you,
+          handeleEvent: this.handeleLikeYou
+        }
+      ]
+    };
+    this.setState({ items });
   }
 
   handeleSubscribe = () => {
