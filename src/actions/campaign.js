@@ -86,3 +86,47 @@ export const getCampaignDetails = provider => {
     );
   };
 };
+
+// Get Favourite Campaigns
+
+
+const getFavouriteCampaignsStarted = () => ({
+  type: types.GET_FAVOURITE_CAMPAIGNS_STARTED
+});
+
+const getFavouriteCampaignsSucceeded = data => ({
+  type: types.GET_FAVOURITE_CAMPAIGNS_SUCCEEDED,
+  payload: data
+});
+
+const getFavouriteCampaignsFailed = error => ({
+  type: types.GET_FAVOURITE_CAMPAIGNS_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getFavouriteCampaigns = (prop, provider) => {
+  return dispatch => {
+    dispatch(getFavouriteCampaignsStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return campaignService.getFavouriteCampaigns(provider, header).then(
+      res => {
+        dispatch(getFavouriteCampaignsSucceeded(res.data.data));
+      },
+      error => {
+      
+        dispatch(
+          getFavouriteCampaignsFailed(error.response)
+        );
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

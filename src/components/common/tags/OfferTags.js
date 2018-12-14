@@ -54,8 +54,6 @@ class OfferTags extends Component {
   render() {
     const { suggestionsOfferTagList } = this.state;
     const { value } = this.props;
-    console.log(value);
-    
     return (
         <Tags
           value={value}

@@ -25,7 +25,7 @@ export const getBackOfficeReportedContent = (prop, provider) => {
     dispatch(getBackOfficeReportedContentStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
-      Authorization: storage.accessToken
+      Authorization: storage.adminAccessToken
     };
 
     return  backOfficeReportedContentService[prop](provider, header).then(
