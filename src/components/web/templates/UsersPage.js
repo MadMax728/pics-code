@@ -7,7 +7,7 @@ import { getDashboard } from "../../../actions";
 
 class UsersRoot extends React.Component {
   componentDidMount = () => {
-    this.props.getDashboard("getDashboardUser");
+    this.props.getDashboard("users");
   };
 
   renderuserList = () => {
@@ -47,7 +47,7 @@ UsersRoot.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  usersList: state.dashboardData.dashboard,
+  usersList: state.dashboardData.users,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

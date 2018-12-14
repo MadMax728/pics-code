@@ -4,7 +4,7 @@ import classnames from "classnames";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import moment from "moment";
+import { DateFormat } from "../../Factory";
 
 const CampaignCardHeader = ({
   campaign,
@@ -43,7 +43,7 @@ const CampaignCardHeader = ({
         <div className="secondary_title">{campaign.location}</div>
         {campaign.category && (
           <div className="grey_title">
-            {moment(campaign.createdAt).format("MMMM Do YYYY")} in{" "}
+            {DateFormat(campaign.createdAt)} in{" "}
             {campaign.category[0].categoryName}
           </div>
         )}

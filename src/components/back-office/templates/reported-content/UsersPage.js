@@ -1,54 +1,74 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { users_list } from "../../../../mock-data";
+import { getBackOfficeReportedContent } from "../../../../actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { CampaignLoading } from "../../../ui-kit";
+import { UserCard } from "../../../misc";
 
 class UsersPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      users_details: users_list
+      userList: null
     };
   }
 
+  componentDidMount = () => {
+    this.props.getBackOfficeReportedContent("reportedContentUsers").then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.reportedContentUsers) {
+        this.setState({
+          userList: this.props.reportedContentData.reportedContentUsers
+        })
+      }
+    });
+  };
+
+  renderUserList = () => {
+    const { userList } = this.state;
+    
+    return userList.map((user, index) => {
+      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
+      return (
+        <div key={user.id}>
+          {clearfixDiv}
+          <UserCard item={user} index={index} isReport/>
+        </div>
+      );
+    });
+  };
+
   render() {
-    const { users_details } = this.state;
+    const { userList } = this.state;
+    const { isLoading } = this.props;
     return (
       <div className="padding-rl-10 middle-section">
         <ReportedSearchBar />
-        {users_details.map((user, index) => (
-          <div
-            className={
-              index % 2 ? "col-sm-6 pic-right-block" : "col-sm-6 pic-left-block"
-            }
-            key={user.id}
-          >
-            <div className="backoffice-user pic-block">
-              <img src={user.image} alt={user.image} />
-              <div className="name-wrapper">
-                <div className="username">User name</div>
-                <div className="name">{user.name}</div>
-                <button className="filled_button">Subscribe</button>
-              </div>
-              <div className="status backoffice-status">
-                <div className="status-wrapper">
-                  <div className="title">Date</div>
-                  <div className="subtitle">{user.date}</div>
-                </div>
-                <div className="status-wrapper">
-                  <div className="title">Reports</div>
-                  <div className="subtitle">{user.reports}</div>
-                </div>
-                <div className="status-wrapper">
-                  <div className="title">Status</div>
-                  <div className="subtitle">{user.status}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        ))}
+        {userList && !isLoading && this.renderUserList()}
+        {isLoading && <CampaignLoading />}
       </div>
     );
   }
 }
 
-export default UsersPage;
+const mapStateToProps = state => ({
+  reportedContentData: state.reportedContentData,
+  isLoading: state.reportedContentData.isLoading,
+  error: state.reportedContentData.error
+});
+
+const mapDispatchToProps = {
+  getBackOfficeReportedContent
+};
+
+UsersPage.propTypes = {
+  getBackOfficeReportedContent: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.object,
+  isLoading: PropTypes.bool,
+  // error: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UsersPage);

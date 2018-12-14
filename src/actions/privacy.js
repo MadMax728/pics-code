@@ -131,37 +131,33 @@ const deactivateAccountFailed = error => ({
   error: true
 });
 
-export const setProfilePrivacy = isPrivacy => {
+export const setProfilePrivacy = data => {
   return dispatch => {
     dispatch(setProfilePrivacyStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
-      Authorization: storage.accessToken
-    };
-    const params = { headers };
-
-    return privacyService.setProfilePrivacy(params, isPrivacy).then(
+    const header = { Authorization: storage.accessToken };
+    return privacyService.setProfilePrivacy(data, header).then(
       res => {
-        dispatch(setProfilePrivacySucceeded(res));
+        dispatch(setProfilePrivacySucceeded(res.data.data));
       },
       error => {
         dispatch(setProfilePrivacyFailed(error.response));
-        logger.error({ description: error.toString(), fatal: true });
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
       }
     );
   };
 };
 
-export const setSocialShare = isSocialShare => {
+export const setSocialShare = data => {
   return dispatch => {
     dispatch(setSocialShareStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
-      Authorization: storage.accessToken
-    };
-    const params = { headers };
-
-    return privacyService.setSocialShare(params, isSocialShare).then(
+    const header = { Authorization: storage.accessToken };
+    console.log(data);
+    return privacyService.setSocialShare(data, header).then(
       res => {
         dispatch(setSocialShareSucceeded(res));
       },
@@ -173,44 +169,47 @@ export const setSocialShare = isSocialShare => {
   };
 };
 
-export const setProfilePersonalizedAdvertise = isPersonalizedAdvertise => {
+export const setProfilePersonalizedAdvertise = data => {
   return dispatch => {
     dispatch(setProfilePersonalizedAdvertiseStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
-
-    return privacyService
-      .setProfilePersonalizedAdvertise(params, isPersonalizedAdvertise)
-      .then(
-        res => {
-          dispatch(setProfilePersonalizedAdvertiseSucceeded(res));
-        },
-        error => {
-          dispatch(setProfilePersonalizedAdvertiseFailed(error.response));
-          logger.error({
-            description: error.toString(),
-            fatal: true
-          });
-        }
-      );
+    const header = { Authorization: storage.accessToken };
+    console.log(data);
+    return privacyService.setProfilePersonalizedAdvertise(data, header).then(
+      res => {
+        dispatch(setProfilePersonalizedAdvertiseSucceeded(res));
+      },
+      error => {
+        dispatch(setProfilePersonalizedAdvertiseFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
   };
 };
 
 export const setChangeEmail = emailDetails => {
+  console.log(emailDetails);
   return dispatch => {
     dispatch(setChangeEmailStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
-
-    return privacyService.setChangeEmail(params, emailDetails).then(
+    const header = {
+      Authorization: storage.accessToken
+    };
+    console.log(emailDetails);
+    return privacyService.setChangeEmail(emailDetails, header).then(
       res => {
-        dispatch(setChangeEmailSucceeded(res));
+        console.log(res);
+        dispatch(setChangeEmailSucceeded(res.data.data));
       },
       error => {
         dispatch(setChangeEmailFailed(error.response));
-        logger.error({ description: error.toString(), fatal: true });
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
       }
     );
   };
@@ -220,10 +219,9 @@ export const setChangePassword = passwordDetails => {
   return dispatch => {
     dispatch(setChangePasswordStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
-
-    return privacyService.setChangePassword(params, passwordDetails).then(
+    const header = { Authorization: storage.accessToken };
+    console.log(passwordDetails);
+    return privacyService.setChangePassword(passwordDetails, header).then(
       res => {
         dispatch(setChangePasswordSucceeded(res));
       },

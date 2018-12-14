@@ -9,25 +9,25 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
  */
 
 export const setProfilePrivacy = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/private", payload);
+  api(baseUrl, header).put("/users/private", payload);
 
 export const setSocialShare = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/socialShare", payload);
+  api(baseUrl, header).put("/users/social-share", payload);
 
 export const setProfilePersonalizedAdvertise = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/advertise", payload);
+  api(baseUrl, header).put("/users/advertise", payload);
 
 export const setChangeEmail = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/changeEmail", payload);
+  api(baseUrl, header).put("/users/change-email", payload);
 
 export const setChangePassword = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/changePassword", payload);
+  api(baseUrl, header).put("/users/change-password", payload);
 
 export const setChangeInvoiceAddress = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/changeInvoiceAddress", payload);
+  api(baseUrl, header).put("/users/changeInvoiceAddress", payload);
 
 export const deleteSearchHistory = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/deleteSearchHistory", payload);
+  api(baseUrl, header).put("/users/deleteSearchHistory", payload);
 
 export const deactivateAccount = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/deactivateAccount", payload);
+  api(baseUrl, header).put("/users/active-deactive", payload);

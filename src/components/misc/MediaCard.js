@@ -78,7 +78,7 @@ class MediaCard extends Component {
 
   render() {
     const { isComments, item } = this.state;
-    const { likeData, isDescription } = this.props;
+    const { likeData, isDescription, isReport } = this.props;
     return (
       <div className="feed_wrapper">
         <MediaCardHeader
@@ -97,6 +97,7 @@ class MediaCard extends Component {
           isComments={isComments}
           renderReportTips={this.renderReportTips}
           handleFavorite={this.handleFavorite}
+          isReport={isReport}
         />
         {isComments && (
           <CommentCard
@@ -129,6 +130,7 @@ MediaCard.propTypes = {
   comments: PropTypes.any,
   getComments: PropTypes.func.isRequired,
   isParticipant: PropTypes.bool,
+  isReport: PropTypes.bool,
   isDescription: PropTypes.bool.isRequired,
   likeData: PropTypes.any
 };

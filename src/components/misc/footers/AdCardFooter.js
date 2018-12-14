@@ -4,6 +4,7 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { ThreeDots } from "../../ui-kit";
 import StatusCard from "../StatusCard";
+import ReportCard from "../ReportCard";
 
 const AdCardFooter = ({
   ad,
@@ -11,7 +12,8 @@ const AdCardFooter = ({
   isStatus,
   renderReportTips,
   handleFavorite,
-  isLoading
+  isLoading,
+  isReport
 }) => {
   const favorite_icon = ad.isFavorite ? images.blue_heart : images.feed_like;
   return (
@@ -68,6 +70,11 @@ const AdCardFooter = ({
           route={`${routes.BASE_SETTINGS_AD_STATISTICS_ROUTE}`}
         />
       )}
+      {ad && isReport && (
+        <ReportCard
+          item={ad}
+        />
+      )}
     </div>
   );
 };
@@ -78,7 +85,8 @@ AdCardFooter.propTypes = {
   ad: PropTypes.object.isRequired,
   isStatus: PropTypes.bool.isRequired,
   renderReportTips: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  isReport: PropTypes.bool
 };
 
 export default AdCardFooter;

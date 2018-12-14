@@ -19,10 +19,11 @@ class UserCard extends Component {
 
   render() {
     const { item, index } = this.state;
+    const { isReport } = this.props;
 
     return (
       <div>
-        <UserCardBody user={item} index={index} handleSubscribed={this.handleSubscribed} />
+        <UserCardBody user={item} index={index} handleSubscribed={this.handleSubscribed} isReport={isReport} />
       </div>
     );
   }
@@ -30,7 +31,8 @@ class UserCard extends Component {
 
 UserCard.propTypes = {
   item: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  isReport: PropTypes.bool
 };
 
 export default UserCard;

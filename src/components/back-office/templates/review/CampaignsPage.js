@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReviewCampaigns } from "../../../../actions";
+import { getBackOfficeReview } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../../ui-kit";
@@ -17,7 +17,7 @@ class CampaignsPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getBackOfficeReviewCampaigns().then(()=> {
+    this.props.getBackOfficeReview("campaigns").then(()=> {
       if(this.props.campaignList) {
         this.setState({
           campaignList: this.props.campaignList
@@ -40,6 +40,7 @@ class CampaignsPage extends Component {
               isInformation
               isStatus={false}
               isBudget
+              isReport={false}
             />
           )}
         </div>
@@ -69,11 +70,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getBackOfficeReviewCampaigns
+  getBackOfficeReview
 };
 
 CampaignsPage.propTypes = {
-  getBackOfficeReviewCampaigns: PropTypes.func.isRequired,
+  getBackOfficeReview: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
   // error: PropTypes.any

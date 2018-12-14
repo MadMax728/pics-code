@@ -5,6 +5,7 @@ import * as images from "../../../lib/constants/images";
 import { ThreeDots } from "../../ui-kit";
 import StatusCard from "../StatusCard";
 import BudgetCard from "../BudgetCard";
+import ReportCard from "../ReportCard";
 
 const CampaignCardFooter = ({
   campaign,
@@ -13,7 +14,8 @@ const CampaignCardFooter = ({
   renderReportTips,
   handleFavorite,
   isLoading,
-  isBudget
+  isBudget,
+  isReport
 }) => {
   const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
@@ -81,6 +83,11 @@ const CampaignCardFooter = ({
           item={campaign}
         />
       )}
+      {campaign && isReport && (
+        <ReportCard
+          item={campaign}
+        />
+      )}
     </div>
   );
 };
@@ -91,6 +98,7 @@ CampaignCardFooter.propTypes = {
   campaign: PropTypes.object.isRequired,
   isStatus: PropTypes.bool.isRequired,
   isBudget: PropTypes.bool.isRequired,
+  isReport: PropTypes.bool.isRequired,
   renderReportTips: PropTypes.func.isRequired,
   isLoading: PropTypes.bool
 };
