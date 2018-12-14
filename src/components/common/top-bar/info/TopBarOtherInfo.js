@@ -15,8 +15,6 @@ class TopBarOtherInfo extends Component {
 
   componentWillReceiveProps(nextProps) {
     const data = this.props.match;
-    console.log(nextProps.match.username);
-    console.log(data.username);
     if (data.username !== nextProps.match.username) {
       this.props.getUser(nextProps.match).then(() => {
         if (
