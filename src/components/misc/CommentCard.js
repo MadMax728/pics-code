@@ -7,6 +7,7 @@ import { Translations } from "../../lib/translations";
 import { addComment, deleteComment, editComment } from "../../actions";
 import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
+import ReportCard from "./ReportCard";
 
 
 class CommentCard extends Component {
@@ -158,6 +159,40 @@ class CommentCard extends Component {
     return html;
   };
 
+  renderBackOfficeComment = comment => {
+    const { isReport } = this.props;
+    return(
+      <div key={comment.id}>
+        <div className="feed-comment">
+          <div className="comment-wrapper">
+            <div className="comment-header">
+              <div className="col-sm-1 col-xs-1 no-padding profile_image">
+                <img src={comment.profileImage} alt={`comment-${comment.id}`} className="img-circle img-responsive ht45" />
+              </div>
+              <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
+                <b>{comment.userName}</b> {DateFormat(comment.createdAt)} <b>
+                  Reply
+                </b>
+              </div>
+              <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
+                <ThreeDots id={`comment-${comment.id}`} role="button" dataTip="tooltip" dataClass="tooltip-wrapr" /* eslint-disable */
+                  getContent={() => this.renderReportTips(comment.id)} effect="solid" delayHide={500} delayShow={500} delayUpdate={500} place={"left"} border={true} type={"light"} />
+              </div>
+            </div>
+            <div className="comment-content">
+              {this.renderEditComment(comment)}
+            </div>
+          </div>
+        </div>
+        {comment && isReport && (
+          <ReportCard
+            item={comment}
+          />
+        )}
+      </div>
+    );
+  };
+
   renderComment = comment => {
     return <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
@@ -219,11 +254,13 @@ class CommentCard extends Component {
 
   render() {
     const { item, form, comments } = this.state;
-    const { comment, isLoading } = this.props;
+    const { comment, isLoading, isReport } = this.props;
     return (
-      <div className="feed-comment" id={item.id}>
-        <div className="comment-wrapper">
-          <form onSubmit={this.handleSubmit} ref="commentForm">
+      <div className={isReport? "feed_wrapper" : "feed-comment"} id={item.id}>
+        {
+          !isReport  && 
+          <div className="comment-wrapper">
+            <form onSubmit={this.handleSubmit} ref="commentForm">
             <div className="col-sm-1 col-xs-1 no-padding profile_image">
               <img
                 src={images.image}
@@ -253,16 +290,17 @@ class CommentCard extends Component {
             </div>
             <input type="submit" hidden />
           </form>
-        </div>
+          </div>
+        }
 
-        {this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData.map(this.renderComment)}
+        {isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
+        
+        {!isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData.map(this.renderComment)}
 
-        {( this.props.totalCommentsCount > this.state.maxRange)? (
+        {(!isReport && this.props.totalCommentsCount > this.state.maxRange) && (
           <div className="view-more-comments view-more-link"  id="7" onClick={this.handleViewComment}>
             {Translations.view_more_comments}
           </div>
-        ) : (
-          ""
         )}
       </div>
     );
@@ -286,6 +324,7 @@ CommentCard.propTypes = {
   deleteComment: PropTypes.func.isRequired,
   handleComment: PropTypes.func.isRequired,
   editComment: PropTypes.func.isRequired,
+  isReport: PropTypes.bool,
   comment: PropTypes.any,
   typeContent: PropTypes.any,
   isLoading: PropTypes.bool,

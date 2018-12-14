@@ -19,7 +19,7 @@ const uploadMediaFailed = error => ({
   error: true
 });
 
-export const uploadMedia = (provider) => {
+export const uploadMedia = (provider, fileType) => {
   return dispatch => {
     dispatch(uploadMediaStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -27,21 +27,41 @@ export const uploadMedia = (provider) => {
       Authorization: storage.accessToken
     };
 
-    return mediaService.uploadMedia(provider, header).then(
-      res => {
-        console.log(res);
-        dispatch(uploadMediaSucceeded(res.data.data));
-      },
-      error => {
-      
-        dispatch(
-          uploadMediaFailed(error.response)
-        );
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
+    if (fileType) {
+      return mediaService.uploadMediaImage(provider, header).then(
+        res => {
+          console.log(res);
+          dispatch(uploadMediaSucceeded(res.data.data));
+        },
+        error => {
+        
+          dispatch(
+            uploadMediaFailed(error.response)
+          );
+          logger.error({
+            description: error.toString(),
+            fatal: true
+          });
+        }
+      );
+    }
+    else {
+      return mediaService.uploadMediaVideo(provider, header).then(
+        res => {
+          console.log(res);
+          dispatch(uploadMediaSucceeded(res.data.data));
+        },
+        error => {
+        
+          dispatch(
+            uploadMediaFailed(error.response)
+          );
+          logger.error({
+            description: error.toString(),
+            fatal: true
+          });
+        }
+      );
+    }
   };
 }; 
