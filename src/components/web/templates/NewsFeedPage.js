@@ -27,15 +27,22 @@ class NewsFeedPage extends Component {
   componentWillReceiveProps(nextProps) {
     const data = this.props.match.params;
     if (data.username !== nextProps.match.params.username) {
-      this.props.getUser(nextProps.match.params).then(() => {
-        if(this.props.userDataByUsername && this.props.userDataByUsername.user && this.props.userDataByUsername.user.data)
-        {
-          this.props.getNewsFeed(
-            "getNewsFeedOther",
-            this.props.userDataByUsername.user.data.id
-          );
-        }
-      });
+      if ( nextProps.match.params.username) {   
+        this.props.getUser(nextProps.match.params).then(() => {
+          if(this.props.userDataByUsername && this.props.userDataByUsername.user && this.props.userDataByUsername.user.data)
+          {
+            this.props.getNewsFeed(
+              "getNewsFeedOther",
+              this.props.userDataByUsername.user.data.id
+            );
+          }
+        });
+      }
+      else {
+        console.log("ahi abe chje");
+        
+        this.props.getNewsFeed("getNewsFeedOwner");
+      }
     }
   }
 
