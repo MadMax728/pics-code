@@ -5,8 +5,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../../ui-kit";
 import { CommentCard } from "../../../misc";
-import * as enumerations from "../../../../lib/constants/enumerations";
-
 class CommentsPage extends Component {
   constructor(props, context) {
     super(props, context);
@@ -31,6 +29,7 @@ class CommentsPage extends Component {
         <CommentCard
           item={commentList}
           totalCommentsCount={commentList.length}
+          isReport
         />
       );
   };
