@@ -96,13 +96,16 @@ class Register extends Component {
       return false;
     }
     const { form } = this.state;
+    let username = form.username;
+    username = username.toLowerCase();
+    username = username.replace(/\s/g, "_");
     const data = {
-      username: form.username,
+      username: username,
       email: form.email,
       name: "abc",
       gender: form.gender,
       password: form.password,
-      repeatPassword: form.repeat_password
+      confirmPassword: form.repeat_password
     };
 
     this.props.submitRegister(data).then(() => {
@@ -133,7 +136,9 @@ class Register extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <span className="error-msg highlight">{this.state.error.servererror}</span>
+                  <span className="error-msg highlight">
+                    {this.state.error.servererror}
+                  </span>
                   <Text
                     type="text"
                     className="form-control"
@@ -148,7 +153,9 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">{this.state.error.username}</span>
+                  <span className="error-msg highlight">
+                    {this.state.error.username}
+                  </span>
                 </div>
 
                 <div className="form-group">
@@ -166,7 +173,9 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">{this.state.error.email}</span>
+                  <span className="error-msg highlight">
+                    {this.state.error.email}
+                  </span>
                 </div>
 
                 <div className="form-group">
@@ -185,7 +194,9 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">{this.state.error.password}</span>
+                  <span className="error-msg highlight">
+                    {this.state.error.password}
+                  </span>
                 </div>
                 <div className="form-group">
                   <Text
@@ -204,7 +215,9 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">{this.state.error.repeat_password}</span>
+                  <span className="error-msg highlight">
+                    {this.state.error.repeat_password}
+                  </span>
                 </div>
                 <div className="form-group">
                   <ul className="options">

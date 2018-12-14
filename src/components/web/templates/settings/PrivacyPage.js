@@ -1,8 +1,12 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import * as images from "../../../../lib/constants/images";
 import { Text } from "../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../lib/translations";
+import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
+import { Link } from "react-router-dom";
+import * as routes from "../../../../lib/constants/routes";
 import {
   setProfilePrivacy,
   setSocialShare,
@@ -18,6 +22,8 @@ import { connect } from "react-redux";
 import { modalType } from "../../../../lib/constants/enumerations";
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+const passwordLength = inputMask.PASSWORD_LENGTH;
 class PrivacyPage extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +51,8 @@ class PrivacyPage extends Component {
       },
       userId: "",
       change_email_form_error: {},
-      change_password_form_error: {}
+      change_password_form_error: {},
+      isLoading: ""
     };
   }
 
@@ -65,21 +72,21 @@ class PrivacyPage extends Component {
   hanldeIsPrivate = event => {
     const isPrivate = event.target.checked;
     this.setState({ isPrivate });
-    const paramData = { isprivate: isPrivate };
+    const paramData = { isPrivate: isPrivate };
     this.props.setProfilePrivacy(paramData);
   };
 
   hanldeIsSocialShare = event => {
     const isSocialShare = event.target.checked;
     this.setState({ isSocialShare });
-    const paramData = { isSocialShare };
+    const paramData = { isPrivate: isSocialShare };
     this.props.setSocialShare(paramData);
   };
 
   hanldeIsPersonalized = event => {
     const isPersonalized = event.target.checked;
     this.setState({ isPersonalized });
-    const paramData = { isPersonalizedAdvertise: isPersonalized };
+    const paramData = { isPrivate: isPersonalized };
     this.props.setProfilePersonalizedAdvertise(paramData);
   };
 
@@ -127,9 +134,21 @@ class PrivacyPage extends Component {
       isChangePasswordFormValid = false;
     }
 
+    if (change_password_form.current_password.length < passwordLength) {
+      changePasswordErrors.current_password =
+        Translations.privacy.Password_Length_error;
+      isChangePasswordFormValid = false;
+    }
+
     if (change_password_form.new_password.length === 0) {
       changePasswordErrors.new_password =
         Translations.privacy.New_Password_is_required;
+      isChangePasswordFormValid = false;
+    }
+
+    if (change_password_form.new_password.length < passwordLength) {
+      changePasswordErrors.new_password =
+        Translations.privacy.Password_Length_error;
       isChangePasswordFormValid = false;
     }
 
@@ -144,6 +163,12 @@ class PrivacyPage extends Component {
     ) {
       changePasswordErrors.repeat_password =
         Translations.privacy.Password_is_not_matching;
+      isChangePasswordFormValid = false;
+    }
+
+    if (change_password_form.repeat_password.length < passwordLength) {
+      changePasswordErrors.repeat_password =
+        Translations.privacy.Password_Length_error;
       isChangePasswordFormValid = false;
     }
 
@@ -166,13 +191,21 @@ class PrivacyPage extends Component {
       return false;
     }
     const { change_email_form } = this.state;
-    const changeEmailData = {
-      current_email: change_email_form.current_email,
-      new_email: change_email_form.new_email
+    const changeEmailDataParams = {
+      email: change_email_form.current_email,
+      newEmail: change_email_form.new_email
     };
-    console.log(changeEmailData);
-    this.props.setChangeEmail(changeEmailData).then(() => {
-      // To Do - setChangeEmail
+    this.props.setChangeEmail(changeEmailDataParams).then(() => {
+      const changeEmailErrors = {};
+      if (
+        this.props.profilePrivacyData.error &&
+        this.props.profilePrivacyData.error.status === 400
+      ) {
+        changeEmailErrors.servererror = Translations.privacy.server_error;
+        this.setState({ change_email_form_error: changeEmailErrors });
+      } else {
+        this.props.history.push(routes.LOGOUT_ROUTE);
+      }
     });
   };
 
@@ -192,13 +225,23 @@ class PrivacyPage extends Component {
     }
     const { change_password_form } = this.state;
     const changePasswordData = {
-      current_password: change_password_form.current_password,
-      new_password: change_password_form.new_password,
-      repeat_password: change_password_form.repeat_password
+      password: change_password_form.current_password,
+      newPassword: change_password_form.new_password
     };
     console.log(changePasswordData);
     this.props.setChangePassword(changePasswordData).then(() => {
-      // To Do - setChangePassword
+      const changePasswordErrors = {};
+      if (
+        this.props.profilePrivacyData.error &&
+        this.props.profilePrivacyData.error.status === 400
+      ) {
+        changePasswordErrors.servererror = Translations.privacy.server_error;
+        this.setState({
+          change_password_form_error: changePasswordErrors
+        });
+      } else {
+        this.props.history.push(routes.LOGOUT_ROUTE);
+      }
     });
   };
 
@@ -212,9 +255,33 @@ class PrivacyPage extends Component {
   // handleSaveChangeInvoice called when click on submit
   handleSaveChangeInvoice = e => {
     e.preventDefault();
-    console.log(this.state.change_invoicing_address_form);
-    const paramData = { addressDetails: "addressDetails" };
-    this.props.setChangeInvoiceAddress(paramData);
+    const { change_invoicing_address_form } = this.state;
+    const changeInvoiceAddressData = new FormData();
+    changeInvoiceAddressData.set(
+      "invoice_recipient",
+      change_invoicing_address_form.invoice_recipient
+    );
+    changeInvoiceAddressData.set(
+      "street_number",
+      change_invoicing_address_form.street_number
+    );
+    changeInvoiceAddressData.set(
+      "postal_code",
+      change_invoicing_address_form.postal_code
+    );
+    changeInvoiceAddressData.set("city", change_invoicing_address_form.city);
+    changeInvoiceAddressData.set(
+      "country",
+      change_invoicing_address_form.country
+    );
+    changeInvoiceAddressData.set(
+      "vat_identification_number",
+      change_invoicing_address_form.vat_identification_number
+    );
+    console.log(changeInvoiceAddressData);
+    this.props.setChangeInvoiceAddress(changeInvoiceAddressData).then(() => {
+      // To Do - setChangeInvoiceAddress
+    });
   };
 
   handleDeleteSearchHisory = e => {
@@ -238,7 +305,6 @@ class PrivacyPage extends Component {
       change_invoicing_address_form,
       userId
     } = this.state;
-    console.log("userid", userId);
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -311,7 +377,6 @@ class PrivacyPage extends Component {
                   id="current_email"
                   name="current_email"
                   autoComplete="current_email"
-                  placeholder={Translations.privacy.Current_Email}
                   value={
                     change_email_form.current_email
                       ? change_email_form.current_email
@@ -324,7 +389,7 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg highlight">
+                <span className="error-msg form-field-error">
                   {this.state.change_email_form_error.current_email}
                 </span>
               </div>
@@ -342,7 +407,6 @@ class PrivacyPage extends Component {
                   id="new_email"
                   autoComplete="new_email"
                   name="new_email"
-                  placeholder={Translations.privacy.New_Email}
                   onChange={this.handleFieldChangeEmail}
                   value={
                     change_email_form.new_email
@@ -355,11 +419,11 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg highlight">
-                  {this.state.change_email_form_error.new_email}
-                </span>
               </div>
               <div className="form-group">
+                <span className="error-msg highlight">
+                  {this.state.change_email_form_error.servererror}
+                </span>
                 <button
                   className="black_button"
                   onClick={this.handleSaveChangeEmail}
@@ -383,7 +447,6 @@ class PrivacyPage extends Component {
                   id="current_password"
                   autoComplete="current_password"
                   name="current_password"
-                  placeholder={Translations.privacy.Current_Password}
                   onChange={this.handleFieldChangePassword}
                   value={
                     change_password_form.current_password
@@ -396,7 +459,7 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg highlight">
+                <span className="error-msg form-field-error">
                   {this.state.change_password_form_error.current_password}
                 </span>
               </div>
@@ -410,7 +473,6 @@ class PrivacyPage extends Component {
                   id="new_password"
                   autoComplete="new_password"
                   name="new_password"
-                  placeholder={Translations.privacy.New_Password}
                   value={
                     change_password_form.new_password
                       ? change_password_form.new_password
@@ -423,7 +485,7 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg highlight">
+                <span className="error-msg form-field-error">
                   {this.state.change_password_form_error.new_password}
                 </span>
               </div>
@@ -437,7 +499,6 @@ class PrivacyPage extends Component {
                   id="repeat_password"
                   name="repeat_password"
                   autoComplete="repeat_password"
-                  placeholder={Translations.privacy.Repeat_Password}
                   value={
                     change_password_form.repeat_password
                       ? change_password_form.repeat_password
@@ -450,11 +511,14 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg highlight">
+                <span className="error-msg form-field-error">
                   {this.state.change_password_form_error.repeat_password}
                 </span>
               </div>
               <div className="form-group">
+                <span className="error-msg highlight">
+                  {this.state.change_password_form_error.servererror}
+                </span>
                 <button
                   className="black_button"
                   onClick={this.handleSaveChangePassword}
@@ -469,12 +533,19 @@ class PrivacyPage extends Component {
             </div>
             <div className="change-invoiceadd-wrapper">
               <div className="form-group">
-                <label htmlFor="recipient">Invoice recipient</label>
+                <label htmlFor="recipient">
+                  {Translations.privacy.Invoice_recipient}
+                </label>
                 <Text
                   type="text"
                   className="form-control"
                   id="invoice_recipient"
                   name="invoice_recipient"
+                  value={
+                    change_invoicing_address_form.invoice_recipient
+                      ? change_invoicing_address_form.invoice_recipient
+                      : ""
+                  }
                   onChange={this.handleFieldChangeInvoice}
                 />
                 {change_invoicing_address_form.invoice_recipient.length > 0 ? (
@@ -492,6 +563,11 @@ class PrivacyPage extends Component {
                   className="form-control"
                   id="street_number"
                   name="street_number"
+                  value={
+                    change_invoicing_address_form.street_number
+                      ? change_invoicing_address_form.street_number
+                      : ""
+                  }
                   onChange={this.handleFieldChangeInvoice}
                 />
                 {change_invoicing_address_form.street_number.length > 0 ? (
@@ -509,6 +585,11 @@ class PrivacyPage extends Component {
                   className="form-control"
                   id="postal_code"
                   name="postal_code"
+                  value={
+                    change_invoicing_address_form.postal_code
+                      ? change_invoicing_address_form.postal_code
+                      : ""
+                  }
                   onChange={this.handleFieldChangeInvoice}
                 />
                 {change_invoicing_address_form.postal_code.length > 0 ? (
@@ -527,6 +608,11 @@ class PrivacyPage extends Component {
                       id="city"
                       name="city"
                       onChange={this.handleFieldChangeInvoice}
+                      value={
+                        change_invoicing_address_form.city
+                          ? change_invoicing_address_form.city
+                          : ""
+                      }
                     />
                     {change_invoicing_address_form.city.length > 0 ? (
                       <img src={images.checked} alt={"checked"} />
@@ -545,6 +631,11 @@ class PrivacyPage extends Component {
                       className="form-control"
                       id="country"
                       name="country"
+                      value={
+                        change_invoicing_address_form.country
+                          ? change_invoicing_address_form.country
+                          : ""
+                      }
                       onChange={this.handleFieldChangeInvoice}
                     />
                     {change_invoicing_address_form.country.length > 0 ? (
@@ -564,6 +655,11 @@ class PrivacyPage extends Component {
                   className="form-control"
                   id="vat_identification_number"
                   name="vat_identification_number"
+                  value={
+                    change_invoicing_address_form.vat_identification_number
+                      ? change_invoicing_address_form.vat_identification_number
+                      : ""
+                  }
                   onChange={this.handleFieldChangeInvoice}
                 />
                 {change_invoicing_address_form.vat_identification_number
@@ -578,7 +674,7 @@ class PrivacyPage extends Component {
                   className="black_button"
                   onClick={this.handleSaveChangeInvoice}
                 >
-                  save
+                  {Translations.privacy.save}
                 </button>
               </div>
             </div>
@@ -628,7 +724,7 @@ class PrivacyPage extends Component {
 //export default PrivacyPage;
 
 const mapStateToProps = state => ({
-  profilePrivacyData: state.userDataByUsername
+  profilePrivacyData: state.profilePrivacyData
 });
 
 const mapDispatchToProps = {
@@ -651,8 +747,9 @@ PrivacyPage.propTypes = {
   setChangeInvoiceAddress: PropTypes.func,
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
-  // searchHistoryId: PropTypes.object,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+  profilePrivacyData: PropTypes,
+  history: PropTypes.any
 };
 
 export default connect(

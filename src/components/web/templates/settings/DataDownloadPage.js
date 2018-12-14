@@ -112,7 +112,7 @@ class DataDownloadPage extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">
+                  <span className="error-msg form-field-error">
                     {this.state.error.email}
                   </span>
                 </div>
@@ -136,7 +136,7 @@ class DataDownloadPage extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">
+                  <span className="error-msg form-field-error">
                     {this.state.error.password}
                   </span>
                 </div>

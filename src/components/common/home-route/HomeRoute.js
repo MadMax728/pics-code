@@ -136,6 +136,7 @@ class HomeRoute extends Component {
   handlePrivacyPage = match => {
     return (
       <PrivacyPage
+        history={match.history}
         type={match.match.params.type}
         handleModalInfoShow={this.props.handleModalInfoShow}
         handleModalShow={this.props.handleModalShow}

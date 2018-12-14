@@ -126,7 +126,8 @@ const initialState = {
   profilePrivacyData: {
     profilePrivacyData: [],
     isLoading: false,
-    error: false
+    error: false,
+    changeEmailData: []
   },
   adminData: {
     admins: null,

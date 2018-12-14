@@ -290,6 +290,7 @@ hr {
     position: absolute;
     bottom: 10px;
     right: 10px;
+    top: 35px;
   }
   input {
     width: 100%;
@@ -312,6 +313,14 @@ hr {
     font-size: 12px;
     &.highlight {
       float: right;
+      padding: 5px 0 0 0;
+    }
+  }
+  .error-msg {
+    color: #d0021b;
+    font-size: 12px;
+    &.form-field-error {
+      float: left;
       padding: 5px 0 0 0;
     }
   }
