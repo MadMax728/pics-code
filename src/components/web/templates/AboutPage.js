@@ -4,18 +4,35 @@ import { connect } from "react-redux";
 import { getAbout } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { AboutCard } from "../../misc";
-// remove when actual about API calling
 import { Auth } from "../../../auth";
 
 class AboutPage extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      isPrivate: false
+    };
+  }
+  
   componentDidMount = () => {
-    // if (this.props.match.params.id) {
-    //   this.props.getAbout("getAboutOther", this.props.match.params.id);
-    // } else {
-    //   this.props.getAbout("getAboutOwner");
-    // }
-    const data = Auth.extractJwtFromStorage();
-    this.props.getAbout("getAbout", data);
+    if (this.props.match.params.username) {
+      const data = {
+        username: this.props.match.params.username
+      }
+      this.props.getAbout("getAbout", data).then(()=> {
+        console.log(this.props.aboutDetails);
+        if(this.props.aboutDetails) {
+          this.setState({isPrivate:  this.props.aboutDetails.isPrivate? this.props.aboutDetails.isPrivate : false})
+        }
+      });
+    } else {
+      const extractData = Auth.extractJwtFromStorage();
+      const data = {
+        username: extractData.username
+      }
+      this.props.getAbout("getAbout", data);
+    }
+
   };
 
   renderAbout = () => {
@@ -25,9 +42,10 @@ class AboutPage extends Component {
 
   render() {
     const { aboutDetails, isLoading } = this.props;
+    const { isPrivate } = this.state;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {aboutDetails && !isLoading && this.renderAbout()}
+        {aboutDetails && !isLoading && !isPrivate && this.renderAbout()}
         {isLoading && <CampaignLoading />}
       </div>
     );
@@ -35,7 +53,7 @@ class AboutPage extends Component {
 }
 
 AboutPage.propTypes = {
-  // match: PropTypes.any.isRequired,
+  match: PropTypes.any.isRequired,
   getAbout: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   aboutDetails: PropTypes.any,
