@@ -261,10 +261,9 @@ export const deleteSearchHistory = searchHistoryId => {
   return dispatch => {
     dispatch(deleteSearchHistoryStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
+    const header = { Authorization: storage.accessToken };
 
-    return privacyService.deleteSearchHistory(params, searchHistoryId).then(
+    return privacyService.deleteSearchHistory(searchHistoryId, header).then(
       res => {
         dispatch(deleteSearchHistorySucceeded(res));
       },
@@ -279,14 +278,14 @@ export const deleteSearchHistory = searchHistoryId => {
   };
 };
 
-export const deactivateAccount = accountId => {
+export const deactivateAccount = isActive => {
   return dispatch => {
     dispatch(deactivateAccountStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
 
-    return privacyService.deactivateAccount(params, accountId).then(
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+
+    return privacyService.deactivateAccount(isActive, header).then(
       res => {
         dispatch(deactivateAccountSucceeded(res));
       },

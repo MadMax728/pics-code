@@ -389,10 +389,10 @@ class PrivacyPage extends Component {
   };
 
   handleDeactiveMyAccount = e => {
-    console.log("Deactivate Account ", e.target.id);
-    const paramData = { accountId: e.target.id };
-    this.props.handleModalInfoShow(modalType.confirmation);
-    // this.props.deactivateAccount(paramData); // API Call
+    const modalForValue = e.target.id;
+    this.props.handleModalInfoShow(modalType.confirmation, value => {
+      console.log("In Privacy Value", value);
+    });
   };
 
   render() {
@@ -821,7 +821,7 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeleteSearchHisory}
-                    id={userId}
+                    id={"delete_search_history"}
                     role="button"
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}
@@ -837,7 +837,7 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeactiveMyAccount}
-                    id={userId}
+                    id={"deactivate_account"}
                     role="button"
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}
@@ -883,7 +883,7 @@ PrivacyPage.propTypes = {
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
-  profilePrivacyData: PropTypes,
+  profilePrivacyData: PropTypes.any,
   history: PropTypes.any,
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.any
