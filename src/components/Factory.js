@@ -1,5 +1,6 @@
 import moment from "moment";
 import { Translations } from "../lib/translations";
+import * as enumerations from "../lib/constants/enumerations";
 
 export const toTitleCase = str => {
   return !!str
@@ -23,3 +24,21 @@ export const DateFormat = (date, formatStr = Translations.date_format.date) => {
 export const toYesNoCase = isCheck => {
   return isCheck ? Translations.general.yes : Translations.general.no;
 };
+
+
+export const getBackendPostType = (type) => {
+  let postType = '';
+  if(type.postType.toLowerCase() === enumerations.contentTypes.companyCampaign || type.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign) {
+      postType = 'Campaign';
+  }
+  else if(type.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign) {
+      postType = 'Participant';                    
+  }
+  else if(type.postType.toLowerCase() === enumerations.contentTypes.ad) {
+    postType = 'Advertise';                    
+  }
+  else if(type.postType.toLowerCase() === enumerations.contentTypes.mediaPost) {
+      postType = type.typeContent;
+  }
+  return postType;
+}

@@ -82,6 +82,7 @@ const initialState = {
   },
   savedData: {
     saved: null,
+    saves: null,
     isLoading: false,
     error: false
   },

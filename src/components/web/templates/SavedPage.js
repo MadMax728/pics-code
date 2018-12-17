@@ -75,7 +75,7 @@ SavedPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  savedList: state.savedData.saved,
+  savedList: state.savedData.saves,
   isLoading: state.savedData.isLoading,
   error: state.savedData.error
 });

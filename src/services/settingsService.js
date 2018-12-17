@@ -16,9 +16,14 @@ export const getNewsFeedOwner = (payload, header = {}) =>
 export const getNewsFeedOther = (payload, header = {}) =>  
   api(baseUrl, header).get("/newsfeeds/own-news-feeds?id="+ payload);
 
-// Saved API
+// Get Saved API
 export const getSavedOwner = (payload, header = {}) =>  api(baseUrl, header).get("/saveposts");
 
 // About API
 export const getAbout = (payload, header = {}) =>
   api(baseUrl, header).get("/users/" + payload.username, payload);
+
+// Set Saved API
+export const setSavedPost = (payload, header = {}) =>
+  api(baseUrl, header).post("/saveposts/", payload);
+  

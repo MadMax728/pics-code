@@ -58,7 +58,7 @@ const CampaignCardFooter = ({
         </div>
         <div className="social-media-wrapr" />
         <ThreeDots
-          id="report"
+          id={`report-${campaign.id}`}
           role="button"
           dataTip="tooltip"
           dataClass="tooltip-wrapr"
