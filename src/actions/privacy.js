@@ -198,7 +198,6 @@ export const setChangeEmail = emailDetails => {
     const header = {
       Authorization: storage.accessToken
     };
-    console.log(emailDetails);
     return privacyService.setChangeEmail(emailDetails, header).then(
       res => {
         console.log(res);
@@ -220,7 +219,6 @@ export const setChangePassword = passwordDetails => {
     dispatch(setChangePasswordStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    console.log(passwordDetails);
     return privacyService.setChangePassword(passwordDetails, header).then(
       res => {
         dispatch(setChangePasswordSucceeded(res));
@@ -240,11 +238,10 @@ export const setChangeInvoiceAddress = invoiceAddressDetails => {
   return dispatch => {
     dispatch(setChangeInvoiceAddressStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
+    const header = { Authorization: storage.accessToken };
 
     return privacyService
-      .setChangeInvoiceAddress(params, invoiceAddressDetails)
+      .setChangeInvoiceAddress(invoiceAddressDetails, header)
       .then(
         res => {
           dispatch(setChangeInvoiceAddressSucceeded(res));
@@ -264,10 +261,9 @@ export const deleteSearchHistory = searchHistoryId => {
   return dispatch => {
     dispatch(deleteSearchHistoryStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
+    const header = { Authorization: storage.accessToken };
 
-    return privacyService.deleteSearchHistory(params, searchHistoryId).then(
+    return privacyService.deleteSearchHistory(searchHistoryId, header).then(
       res => {
         dispatch(deleteSearchHistorySucceeded(res));
       },
@@ -282,14 +278,14 @@ export const deleteSearchHistory = searchHistoryId => {
   };
 };
 
-export const deactivateAccount = accountId => {
+export const deactivateAccount = isActive => {
   return dispatch => {
     dispatch(deactivateAccountStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
 
-    return privacyService.deactivateAccount(params, accountId).then(
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+
+    return privacyService.deactivateAccount(isActive, header).then(
       res => {
         dispatch(deactivateAccountSucceeded(res));
       },

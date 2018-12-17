@@ -7,6 +7,7 @@ import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
+import Switch from "react-switch";
 import {
   setProfilePrivacy,
   setSocialShare,
@@ -15,7 +16,8 @@ import {
   setChangePassword,
   setChangeInvoiceAddress,
   deleteSearchHistory,
-  deactivateAccount
+  deactivateAccount,
+  getUser
 } from "../../../../actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -24,6 +26,20 @@ import { modalType } from "../../../../lib/constants/enumerations";
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 const passwordLength = inputMask.PASSWORD_LENGTH;
+const storage = Auth.extractJwtFromStorage();
+let userInfo = null;
+if (storage) {
+  userInfo = JSON.parse(storage.userInfo);
+}
+const switchOnColor = "#86d3ff";
+const switchOnHandleColor = "#2693e6";
+const switchHandleDiameter = "25";
+const switchUncheckedIcon = false;
+const switchCheckedIcon = false;
+const switchBoxShadow = "0px 1px 5px rgba(0, 0, 0, 0.6)";
+const switchActiveBoxShadow = "0px 0px 1px 10px rgba(0, 0, 0, 0.2)";
+const switchHeight = "25";
+const switchWidth = "25";
 class PrivacyPage extends Component {
   constructor(props) {
     super(props);
@@ -52,6 +68,7 @@ class PrivacyPage extends Component {
       userId: "",
       change_email_form_error: {},
       change_password_form_error: {},
+      error: {},
       isLoading: ""
     };
   }
@@ -63,31 +80,107 @@ class PrivacyPage extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     if (userInfo) {
-      this.setState({ userId: userInfo.id });
+      this.setState({ userId: userInfo.id, isLoading: true });
     }
+    const data = {
+      username: userInfo.username
+    };
+    this.props.getUser(data).then(() => {
+      this.setDataOnLoad();
+    });
   };
 
   onKeyPressHandler = () => {};
 
-  hanldeIsPrivate = event => {
-    const isPrivate = event.target.checked;
+  setDataOnLoad = () => {
+    if (this.props.userDataByUsername.user) {
+      const userData = this.props.userDataByUsername.user.data;
+      this.setState({
+        change_email_form: {
+          current_email: userData.email,
+          new_email: ""
+        },
+        change_invoicing_address_form: {
+          invoice_recipient: userData.userFullAddress.invoiceRecipient,
+          street_number: userData.userFullAddress.street,
+          postal_code: userData.userFullAddress.postalCode,
+          city: userData.userFullAddress.city,
+          country: userData.userFullAddress.country,
+          vat_identification_number: userData.userFullAddress.VATNO
+        },
+        isPrivate: userData.isPrivate,
+        isPersonalized: userData.isAdvertise,
+        isSocialShare: userData.isSocialShare,
+        isLoading: false
+      });
+    }
+  };
+
+  hanldeIsPrivate = checkedEvent => {
+    const isPrivate = checkedEvent;
     this.setState({ isPrivate });
     const paramData = { isPrivate: isPrivate };
-    this.props.setProfilePrivacy(paramData);
+    this.props.setProfilePrivacy(paramData).then(() => {
+      const errors = {};
+      if (
+        this.props.profilePrivacyData.error &&
+        this.props.profilePrivacyData.error.status === 400
+      ) {
+        errors.servererror = Translations.privacy.server_error;
+        this.setState({ error: errors });
+      } else if (userInfo) {
+        const data = {
+          username: userInfo.username
+        };
+        this.props.getUser(data).then(() => {
+          this.setDataOnLoad();
+        });
+      }
+    });
   };
 
-  hanldeIsSocialShare = event => {
-    const isSocialShare = event.target.checked;
+  hanldeIsSocialShare = checkedEvent => {
+    const isSocialShare = checkedEvent;
     this.setState({ isSocialShare });
-    const paramData = { isPrivate: isSocialShare };
-    this.props.setSocialShare(paramData);
+    const paramData = { isSocialShare: isSocialShare };
+    this.props.setSocialShare(paramData).then(() => {
+      const errors = {};
+      if (
+        this.props.profilePrivacyData.error &&
+        this.props.profilePrivacyData.error.status === 400
+      ) {
+        errors.servererror = Translations.privacy.server_error;
+        this.setState({ error: errors });
+      } else if (userInfo) {
+        const data = {
+          username: userInfo.username
+        };
+        this.props.getUser(data).then(() => {
+          this.setDataOnLoad();
+        });
+      }
+    });
   };
 
-  hanldeIsPersonalized = event => {
-    const isPersonalized = event.target.checked;
+  hanldeIsPersonalized = checkedEvent => {
+    const isPersonalized = checkedEvent;
     this.setState({ isPersonalized });
-    const paramData = { isPrivate: isPersonalized };
-    this.props.setProfilePersonalizedAdvertise(paramData);
+    const paramData = { isAdvertise: isPersonalized };
+    this.props.setProfilePersonalizedAdvertise(paramData).then(() => {
+      const errors = {};
+      if (
+        this.props.profilePrivacyData.error &&
+        this.props.profilePrivacyData.error.status === 400
+      ) {
+        errors.servererror = Translations.privacy.server_error;
+        this.setState({ error: errors });
+      } else if (userInfo) {
+        const data = { username: userInfo.username };
+        this.props.getUser(data).then(() => {
+          this.setDataOnLoad();
+        });
+      }
+    });
   };
 
   formValidChangeEmail = () => {
@@ -228,7 +321,6 @@ class PrivacyPage extends Component {
       password: change_password_form.current_password,
       newPassword: change_password_form.new_password
     };
-    console.log(changePasswordData);
     this.props.setChangePassword(changePasswordData).then(() => {
       const changePasswordErrors = {};
       if (
@@ -256,32 +348,36 @@ class PrivacyPage extends Component {
   handleSaveChangeInvoice = e => {
     e.preventDefault();
     const { change_invoicing_address_form } = this.state;
-    const changeInvoiceAddressData = new FormData();
-    changeInvoiceAddressData.set(
-      "invoice_recipient",
-      change_invoicing_address_form.invoice_recipient
-    );
-    changeInvoiceAddressData.set(
-      "street_number",
-      change_invoicing_address_form.street_number
-    );
-    changeInvoiceAddressData.set(
-      "postal_code",
-      change_invoicing_address_form.postal_code
-    );
-    changeInvoiceAddressData.set("city", change_invoicing_address_form.city);
-    changeInvoiceAddressData.set(
-      "country",
-      change_invoicing_address_form.country
-    );
-    changeInvoiceAddressData.set(
-      "vat_identification_number",
-      change_invoicing_address_form.vat_identification_number
-    );
-    console.log(changeInvoiceAddressData);
-    this.props.setChangeInvoiceAddress(changeInvoiceAddressData).then(() => {
-      // To Do - setChangeInvoiceAddress
-    });
+    const changeInvoiceAddressData = {
+      invoiceRecipient: change_invoicing_address_form.invoice_recipient,
+      street: change_invoicing_address_form.street_number,
+      postalCode: change_invoicing_address_form.postal_code,
+      city: change_invoicing_address_form.city,
+      VATNO: change_invoicing_address_form.vat_identification_number,
+      country: change_invoicing_address_form.country
+    };
+    this.props
+      .setChangeInvoiceAddress({ address: changeInvoiceAddressData })
+      .then(() => {
+        const changeInvoiceAddressErrors = {};
+        if (
+          this.props.profilePrivacyData.error &&
+          this.props.profilePrivacyData.error.status === 400
+        ) {
+          changeInvoiceAddressErrors.servererror =
+            Translations.privacy.server_error;
+          this.setState({
+            change_password_form_error: changeInvoiceAddressErrors
+          });
+        } else if (userInfo) {
+          const data = {
+            username: userInfo.username
+          };
+          this.props.getUser(data).then(() => {
+            this.setDataOnLoad();
+          });
+        }
+      });
   };
 
   handleDeleteSearchHisory = e => {
@@ -292,10 +388,13 @@ class PrivacyPage extends Component {
   };
 
   handleDeactiveMyAccount = e => {
-    console.log("Deactivate Account ", e.target.id);
-    const paramData = { accountId: e.target.id };
-    this.props.handleModalInfoShow(modalType.confirmation);
-    // this.props.deactivateAccount(paramData); // API Call
+    const modalForValue = e.target.id;
+    this.props.handleModalInfoShow(modalType.confirmation, value => {
+      console.log("In Privacy Value", value);
+    });
+    this.props.modalInfoShow = val => {
+      console.log(val);
+    };
   };
 
   render() {
@@ -324,9 +423,25 @@ class PrivacyPage extends Component {
                 </div>
                 <div className="col-sm-6 text-right">
                   <div>
+                    <span className="error-msg highlight">
+                      {this.state.error.servererror}
+                    </span>
                     <label className="switch" htmlFor={"Privacy"}>
-                      <input type="checkbox" onChange={this.hanldeIsPrivate} />
-                      <span className="slider round" />
+                      <Switch
+                        onChange={this.hanldeIsPrivate}
+                        checked={this.state.isPrivate}
+                        onColor={switchOnColor}
+                        onHandleColor={switchOnHandleColor}
+                        handleDiameter={25}
+                        uncheckedIcon={switchUncheckedIcon}
+                        checkedIcon={switchCheckedIcon}
+                        boxShadow={switchBoxShadow}
+                        activeBoxShadow={switchActiveBoxShadow}
+                        height={25}
+                        width={48}
+                        className="react-switch"
+                        id="material-switch"
+                      />
                     </label>
                   </div>
                 </div>
@@ -338,11 +453,21 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div>
                     <label className="switch" htmlFor={"SocialShare"}>
-                      <input
-                        type="checkbox"
+                      <Switch
                         onChange={this.hanldeIsSocialShare}
+                        checked={this.state.isSocialShare}
+                        onColor={switchOnColor}
+                        onHandleColor={switchOnHandleColor}
+                        handleDiameter={25}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow={switchBoxShadow}
+                        activeBoxShadow={switchActiveBoxShadow}
+                        height={25}
+                        width={48}
+                        className="react-switch"
+                        id="material-switch"
                       />
-                      <span className="slider round" />
                     </label>
                   </div>
                 </div>
@@ -353,11 +478,21 @@ class PrivacyPage extends Component {
                 </div>
                 <div className="col-sm-6 text-right">
                   <label className="switch" htmlFor={"Personalized"}>
-                    <input
-                      type="checkbox"
+                    <Switch
                       onChange={this.hanldeIsPersonalized}
+                      checked={this.state.isPersonalized}
+                      onColor={switchOnColor}
+                      onHandleColor={switchOnHandleColor}
+                      handleDiameter={25}
+                      uncheckedIcon={false}
+                      checkedIcon={false}
+                      boxShadow={switchBoxShadow}
+                      activeBoxShadow={switchActiveBoxShadow}
+                      height={25}
+                      width={48}
+                      className="react-switch"
+                      id="material-switch"
                     />
-                    <span className="slider round" />
                   </label>
                 </div>
               </div>
@@ -688,7 +823,7 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeleteSearchHisory}
-                    id={userId}
+                    id={"delete_search_history"}
                     role="button"
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}
@@ -704,7 +839,7 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div
                     onClick={this.handleDeactiveMyAccount}
-                    id={userId}
+                    id={"deactivate_account"}
                     role="button"
                     tabIndex="0"
                     onKeyDown={this.handleKeyDown}
@@ -724,7 +859,9 @@ class PrivacyPage extends Component {
 //export default PrivacyPage;
 
 const mapStateToProps = state => ({
-  profilePrivacyData: state.profilePrivacyData
+  profilePrivacyData: state.profilePrivacyData,
+  userDataByUsername: state.userDataByUsername,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -735,7 +872,8 @@ const mapDispatchToProps = {
   setChangePassword,
   setChangeInvoiceAddress,
   deleteSearchHistory,
-  deactivateAccount
+  deactivateAccount,
+  getUser
 };
 
 PrivacyPage.propTypes = {
@@ -748,8 +886,11 @@ PrivacyPage.propTypes = {
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
-  profilePrivacyData: PropTypes,
-  history: PropTypes.any
+  profilePrivacyData: PropTypes.any,
+  history: PropTypes.any,
+  getUser: PropTypes.func,
+  modalInfoShow: PropTypes.any,
+  userDataByUsername: PropTypes.any
 };
 
 export default connect(

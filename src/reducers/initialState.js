@@ -128,7 +128,10 @@ const initialState = {
     profilePrivacyData: [],
     isLoading: false,
     error: false,
-    changeEmailData: []
+    changeEmailData: [],
+    changePasswordData: [],
+    changeInvoiceAddressData: [],
+    userData: []
   },
   adminData: {
     admins: null,
@@ -169,6 +172,11 @@ const initialState = {
     businessProfileActivationData: null,
     billsData: null,
     downloadData: null,
+    isLoading: false,
+    error: false
+  },
+  searchData: {
+    searchKeyword: null,
     isLoading: false,
     error: false
   }

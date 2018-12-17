@@ -24,7 +24,7 @@ export const setChangePassword = (payload, header = {}) =>
   api(baseUrl, header).put("/users/change-password", payload);
 
 export const setChangeInvoiceAddress = (payload, header = {}) =>
-  api(baseUrl, header).put("/users/changeInvoiceAddress", payload);
+  api(baseUrl, header).put("/users/", payload);
 
 export const deleteSearchHistory = (payload, header = {}) =>
   api(baseUrl, header).put("/users/deleteSearchHistory", payload);

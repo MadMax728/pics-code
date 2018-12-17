@@ -11,6 +11,10 @@
     }
   }
 }
+.react-switch {
+  vertical-align: middle;
+  margin-left: 4px;
+}
 .privacy-form {
   padding: 35px 100px 25px 100px;
   background: $white_color;
@@ -37,7 +41,7 @@
         &:checked {
           & + .slider {
             background-color: #0f7aba;
-            &:before {
+            &::before {
               -webkit-transform: translateX(26px);
               -ms-transform: translateX(26px);
               transform: translateX(26px);
@@ -60,7 +64,7 @@
         background-color: $silver_color;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        &::before {
+        &:before {
           position: absolute;
           content: "";
           height: 26px;
