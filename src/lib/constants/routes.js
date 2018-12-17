@@ -81,7 +81,7 @@ export const SAVED_ROUTE = "/saved";
 export const OTHER_SAVED_ROUTE = "/saved/:id";
 export const NEWS_FEED_ROUTE = "/news-feed";
 export const OTHER_NEWS_FEED_ROUTE = "/news-feed/:username";
-export const OTHER_ABOUT_ROUTE = "/about/:id";
+export const OTHER_ABOUT_ROUTE = "/about/:username";
 export const ABOUT_ROUTE = "/about";
 
 // Information and service for web

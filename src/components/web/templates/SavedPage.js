@@ -8,12 +8,9 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class SavedPage extends Component {
   componentDidMount = () => {
-    if (this.props.match.params.id) {
-      this.props.getSaved("getSavedOther", this.props.match.params.id);
-    } else {
       this.props.getSaved("getSavedOwner");
-    }
   };
+  
   renderSavedList = () => {
     const { savedList } = this.props;
     return savedList.map(saved => {

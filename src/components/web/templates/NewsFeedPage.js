@@ -7,6 +7,13 @@ import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsFeedPage extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      isPrivate: false
+    };
+  }
+
   componentDidMount = () => {
     if (this.props.match.params.username) {      
       this.props.getUser(this.props.match.params).then(() => { 
@@ -16,9 +23,9 @@ class NewsFeedPage extends Component {
             "getNewsFeedOther",
             this.props.userDataByUsername.user.data.id
           );
+          this.setState({isPrivate: this.props.userDataByUsername.user.data.isPrivate? this.props.userDataByUsername.user.data.isPrivate : false})
         }
       });
-      
     } else {
       this.props.getNewsFeed("getNewsFeedOwner");
     }
@@ -35,12 +42,11 @@ class NewsFeedPage extends Component {
               "getNewsFeedOther",
               this.props.userDataByUsername.user.data.id
             );
+            this.setState({isPrivate: this.props.userDataByUsername.user.data.isPrivate? this.props.userDataByUsername.user.data.isPrivate : false})
           }
         });
       }
       else {
-        console.log("ahi abe chje");
-        
         this.props.getNewsFeed("getNewsFeedOwner");
       }
     }
@@ -97,11 +103,11 @@ class NewsFeedPage extends Component {
 
   render() {
     const { newsFeedList, isLoading } = this.props;
-    console.log(this.props);
-    
+    const { isPrivate } = this.state;
+    console.log(this.props.userDataByUsername);    
     return (
       <div className={"middle-section padding-rl-10"}>
-        {newsFeedList && !isLoading && this.renderNewsFeedList()}
+        {newsFeedList && !isLoading && !isPrivate && this.renderNewsFeedList()}
         {isLoading && <CampaignLoading />}
       </div>
     );
