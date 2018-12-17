@@ -8,7 +8,7 @@ class PaymentStepOne extends Component {
   }
 
   render() {
-    const { handleChangeField } = this.props;
+    const { handleChangeField, form } = this.props;
 
     return (
       <div className="col-xs-12 no-padding">
@@ -22,7 +22,7 @@ class PaymentStepOne extends Component {
               <input
                 type="text"
                 name="invoice_recipient"
-                value={this.props.form.invoice_recipient}
+                value={form.invoice_recipient}
                 onChange={handleChangeField}
               />
             </div>
@@ -31,13 +31,13 @@ class PaymentStepOne extends Component {
               <input
                 type="text"
                 name="street"
-                value={this.props.form.street}
+                value={form.street}
                 onChange={handleChangeField}
               />
               <input
                 type="text"
                 name="number"
-                value={this.props.form.number}
+                value={form.number}
                 onChange={handleChangeField}
               />
             </div>
@@ -46,7 +46,7 @@ class PaymentStepOne extends Component {
               <input
                 type="text"
                 name="postal_code"
-                value={this.props.form.postal_code}
+                value={form.postal_code}
                 onChange={handleChangeField}
               />
             </div>
@@ -55,7 +55,7 @@ class PaymentStepOne extends Component {
               <input
                 type="text"
                 name="city"
-                value={this.props.form.city}
+                value={form.city}
                 onChange={handleChangeField}
               />
             </div>
@@ -64,7 +64,7 @@ class PaymentStepOne extends Component {
               <input
                 type="text"
                 name="country"
-                value={this.props.form.country}
+                value={form.country}
                 onChange={handleChangeField}
               />
             </div>
@@ -72,7 +72,7 @@ class PaymentStepOne extends Component {
               <label htmlFor="title">VAT Identification Number</label>
               <input
                 type="text"
-                value={this.props.form.vat_identification_number}
+                value={form.vat_identification_number}
                 name="vat_identification_number"
                 onChange={handleChangeField}
               />

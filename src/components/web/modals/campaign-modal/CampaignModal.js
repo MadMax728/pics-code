@@ -57,7 +57,10 @@ const initialState = {
         photo: "",
         photoFile: null,
         image: null,
-        actual_img: ""
+        actual_img: "",
+        filetype: true,
+        file: null,
+        video: null
       },
       scale: ""
 };
@@ -81,6 +84,7 @@ class CampaignModal extends Component {
 
   handleCreatorSubmit = () => {
     console.log(this.state.form);
+    
   };
 
   handleContentChange(text) {
@@ -148,23 +152,38 @@ class CampaignModal extends Component {
     );
   };
   
-  handleActualImg = actual_img => {
-    // Set Actual Image
-    const { form } = this.state;
-    form.actual_img = actual_img;
-    this.setState({ form });
-
-    // Set Image
+  handleVideo = (e) => {
     const reader = new FileReader();
-    const file = actual_img;
-    // let base64Data;
-    const currentThis = this;
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      const { form } = currentThis.state;
-      form.image = reader.result;
-      currentThis.setState({ form });
-    };
+    const file = e.target.files[0];
+
+    if (file.type.includes("video")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { form } = currentThis.state;
+        form.video = reader.result;
+        form.file = file;
+        form.fileType = false;
+        currentThis.setState({ form });
+      };
+    }
+  }
+
+  handleActualImg = (e) => {
+    const reader = new FileReader();
+    const file = e;
+
+    if (file.type.includes("image")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { form } = currentThis.state;
+        form.image = reader.result;
+        form.file = file;
+        form.fileType = true;
+        currentThis.setState({ form });
+      };
+    }
   };
 
   handleScale = scale => {
@@ -288,6 +307,7 @@ class CampaignModal extends Component {
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
               handleSelect={this.handleSelect}
+              handleVideo={this.handleVideo}
             />
           ) : (
             <CreateCreatorCampaign
@@ -313,6 +333,7 @@ class CampaignModal extends Component {
               handleInquiryTagChange={this.handleInquiryTagChange}
               handleInquiryTagDelete={this.handleInquiryTagDelete}
               handleSelect={this.handleSelect}
+              handleVideo={this.handleVideo}
             />
           )
         }

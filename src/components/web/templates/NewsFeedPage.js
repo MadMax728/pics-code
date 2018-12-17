@@ -104,7 +104,6 @@ class NewsFeedPage extends Component {
   render() {
     const { newsFeedList, isLoading } = this.props;
     const { isPrivate } = this.state;
-    console.log(this.props.userDataByUsername);    
     return (
       <div className={"middle-section padding-rl-10"}>
         {newsFeedList && !isLoading && !isPrivate && this.renderNewsFeedList()}

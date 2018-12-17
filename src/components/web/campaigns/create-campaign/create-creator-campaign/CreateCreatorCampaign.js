@@ -36,7 +36,8 @@ class CreateCreatorCampaign extends Component {
       handleOfferTagDelete,
       handleInquiryTagChange,
       handleInquiryTagDelete,
-      handleSelect
+      handleSelect,
+      handleVideo
     } = this.props;
 
     return (
@@ -69,6 +70,7 @@ class CreateCreatorCampaign extends Component {
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
+              handleVideo={handleVideo}
             />
           ))}
         {!isPreview &&
@@ -85,6 +87,7 @@ class CreateCreatorCampaign extends Component {
               handleChangeField={handleChangeField}
               handleDate={handleDate}
               handleSelect={handleSelect}
+              form={form}
             />
           ))}
         {!isPreview &&
@@ -92,6 +95,7 @@ class CreateCreatorCampaign extends Component {
             <PaymentStepOne
               forThat={forThat}
               handleChangeField={handleChangeField}
+              form={form}
             />
           ))}
         {!isPreview &&
@@ -130,7 +134,8 @@ CreateCreatorCampaign.propTypes = {
   handleOfferTagDelete: PropTypes.func.isRequired,
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired,
+  handleVideo: PropTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;
