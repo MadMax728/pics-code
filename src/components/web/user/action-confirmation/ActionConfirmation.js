@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { deleteSearchHistory } from "../../../../actions/privacy";
+import { deactivateAccount } from "../../../../actions/privacy";
 import { connect } from "react-redux";
 
 class ActionConfirmation extends Component {
@@ -12,16 +12,16 @@ class ActionConfirmation extends Component {
   handleModalHides = () => {
     this.props.handleModalHide();
     this.props.handleModalInfoHide();
+    this.props.handleConfirmation(true);
   };
 
   handleModalAction = () => {
-    const historyId = "123";
-    const paramData = { searchHistoryId: historyId };
-    // this.props.deleteSearchHistory(paramData);
+    this.props.handleModalHide();
+    this.props.handleModalInfoHide();
+    this.props.handleConfirmation(false);
   };
 
   render() {
-    // const { modalInfoMsg } = this.props;
     return (
       <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">Are you want to sure ?</div>
@@ -36,7 +36,6 @@ class ActionConfirmation extends Component {
             className="filled_button col-sm-6"
             onClick={this.handleModalAction}
           >
-            {" "}
             Yes
           </button>
         </div>
@@ -45,14 +44,23 @@ class ActionConfirmation extends Component {
   }
 }
 
-// const mapDispatchToProps = {
-//   deleteSearchHistory
-// };
+const mapStateToProps = state => ({
+  profilePrivacyData: state.profilePrivacyData
+});
 
-ActionConfirmation.propTypes = {
-  handleModalInfoHide: PropTypes.func,
-  handleModalHide: PropTypes.func,
-  // modalInfoMsg: PropTypes.string
+const mapDispatchToProps = {
+  deactivateAccount
 };
 
-export default connect()(ActionConfirmation);
+ActionConfirmation.propTypes = {
+  deactivateAccount: PropTypes.func,
+  handleModalHide: PropTypes.func,
+  handleModalInfoHide: PropTypes.func,
+  profilePrivacyData: PropTypes.any,
+  handleConfirmation: PropTypes.func
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ActionConfirmation);
