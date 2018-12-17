@@ -6,9 +6,9 @@ import MediaCardFooter from "./footers/MediaCardFooter";
 import CommentCard from "./CommentCard";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
-import { getComments, like } from "../../actions";
+import { getComments, like, setSavedPost } from "../../actions";
 import { connect } from "react-redux";
-
+import { getBackendPostType } from "../Factory";
 
 class MediaCard extends Component {
   constructor(props, context) {
@@ -41,7 +41,19 @@ class MediaCard extends Component {
 
   handleReportPost = () => {};
 
-  handleSavePost = () => {};
+  handleSavePost = (e) => {
+    const item = this.state.item;
+    const data = {
+        typeId: e.target.id,
+        postType: getBackendPostType(item)
+      };
+
+    this.props.setSavedPost(data).then(()=> {
+      if(this.props.savedData){
+        console.log(this.props.savedData);
+      }
+    })
+  };
 
   handleContent = () => {};
 
@@ -116,17 +128,21 @@ class MediaCard extends Component {
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
+  savedData: state.savedData,
   comments: state.commentData.comments,
   totalCommentsCount: state.totalCommentsCount
 });
 
 const mapDispatchToProps = {
   like,
-  getComments
+  getComments,
+  setSavedPost
 };
 
 MediaCard.propTypes = {
   item: PropTypes.object.isRequired,
+  setSavedPost: PropTypes.func.isRequired,
+  savedData: PropTypes.any,
   like: PropTypes.func.isRequired,
   comments: PropTypes.any,
   getComments: PropTypes.func.isRequired,

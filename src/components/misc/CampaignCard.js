@@ -6,8 +6,10 @@ import CampaignCardFooter from "./footers/CampaignCardFooter";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
-import { like, getComments } from "../../actions";
+import { like, getComments, setSavedPost } from "../../actions";
 import { connect } from "react-redux";
+import { getBackendPostType } from "../Factory";
+
 
 class CampaignCard extends Component {
   constructor(props, context) {
@@ -20,7 +22,7 @@ class CampaignCard extends Component {
     };
   }
 
-  renderReportTips = () => {
+  renderReportTips = (id) => {
     const reportTips = [
       {
         name: Translations.tool_tips.report,
@@ -35,12 +37,24 @@ class CampaignCard extends Component {
         handleEvent: this.handleContent
       }
     ];
-    return <RenderToolTips items={reportTips} id={this.props.item.id} />;
+    return <RenderToolTips items={reportTips} id={id} />;
   };
 
   handleReportPost = () => {};
 
-  handleSavePost = () => {};
+  handleSavePost = (e) => {
+    const item = this.state.item;
+    const data = {
+        typeId: e.target.id,
+        postType: getBackendPostType(item)
+      };
+
+    this.props.setSavedPost(data).then(()=> {
+      if(this.props.savedData){
+        console.log(this.props.savedData);
+      }
+    })
+  };
 
   handleContent = () => {};
 
@@ -99,7 +113,8 @@ class CampaignCard extends Component {
           isComments={isComments}
           isStatus={isStatus}
           isBudget={isBudget}
-          renderReportTips={this.renderReportTips}
+          /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
@@ -120,17 +135,21 @@ class CampaignCard extends Component {
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
+  savedData: state.savedData,
   comments: state.commentData.comments,
-   totalCommentsCount: state.totalCommentsCount
+  totalCommentsCount: state.totalCommentsCount
 });
 
 const mapDispatchToProps = {
   like,
-  getComments
+  getComments,
+  setSavedPost
 };
 
 CampaignCard.propTypes = {
   getComments: PropTypes.func.isRequired,
+  setSavedPost: PropTypes.func.isRequired,
+  savedData: PropTypes.any,
   comments: PropTypes.any,
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
