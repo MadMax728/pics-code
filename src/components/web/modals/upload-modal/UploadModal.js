@@ -26,11 +26,7 @@ class UploadModal extends Component {
     super(props, context);
     this.state = initialState;
   }
-
-  componentWillUnmount = () => {
-    this.setState(initialState);
-  }
-  
+ 
   handleUpload = (imageVideo, file, filetype) => {
     if (filetype) {
       this.setState({
@@ -71,19 +67,15 @@ class UploadModal extends Component {
     Data.append("postType", "mediapost");
     Data.append("location", JSON.stringify(form.add_location));
 
-    console.log(form);
-    
-    console.log(Data);
-    
     this.props.uploadMedia(Data, form.filetype).then(() => {
-      this.setState({ initialState });
+      this.setState(initialState);
       this.props.handleModalHide();
     });
 
   };
 
   componentWillUnmount = () => {
-    this.setState({ initialState });
+    this.setState(initialState);
   }
 
   handleChangeField = event => {
@@ -110,6 +102,10 @@ class UploadModal extends Component {
     this.setState({ form });
   };
 
+  handleModalHide = () => {
+    this.setState(initialState);
+    this.props.handleModalHide();
+  }
   render() {
     const { form } = this.state;
 
@@ -119,14 +115,14 @@ class UploadModal extends Component {
         header
         modalHeaderContent={
           <UploadHeader
-            handleModalHide={this.props.handleModalHide}
+            handleModalHide={this.handleModalHide}
             handleContinue={this.handleContinue}
           />
         }
         footer={false}
         closeBtn={false}
         modalShow={this.props.modalShow}
-        handleModalHide={this.props.handleModalHide}
+        handleModalHide={this.handleModalHide}
         modalBodyContent={
           <Upload
             handleChangeField={this.handleChangeField}

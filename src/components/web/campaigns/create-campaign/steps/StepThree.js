@@ -27,9 +27,7 @@ class StepThree extends Component {
   };
 
   render() {
-    const { handleChangeField, form , handleSelect} = this.props;
-    // get 
-    let width;
+    const { form , handleSelect} = this.props;
     // console.log(form.end_date.diff(form.start_date, 'days'));    
     return (
       <div className="col-xs-12 no-padding">
@@ -161,7 +159,6 @@ class StepThree extends Component {
 }
 
 StepThree.propTypes = {
-  handleChangeField: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   handleDate: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired

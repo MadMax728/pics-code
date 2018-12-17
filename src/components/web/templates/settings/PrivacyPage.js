@@ -101,12 +101,12 @@ class PrivacyPage extends Component {
           new_email: ""
         },
         change_invoicing_address_form: {
-          invoice_recipient: userData.userFullAddress.invoiceRecipient,
-          street_number: userData.userFullAddress.street,
-          postal_code: userData.userFullAddress.postalCode,
-          city: userData.userFullAddress.city,
-          country: userData.userFullAddress.country,
-          vat_identification_number: userData.userFullAddress.VATNO
+          invoice_recipient: userData.userFullAddress? userData.userFullAddress.invoiceRecipient : "",
+          street_number: userData.userFullAddress? userData.userFullAddress.street : "",
+          postal_code: userData.userFullAddress? userData.userFullAddress.postalCode: "",
+          city: userData.userFullAddress? userData.userFullAddress.city : "",
+          country: userData.userFullAddress? userData.userFullAddress.country: "",
+          vat_identification_number: userData.userFullAddress? userData.userFullAddress.VATNO : ""
         },
         isPrivate: userData.isPrivate,
         isPersonalized: userData.isAdvertise,
