@@ -29,9 +29,7 @@ class TopBarOtherInfo extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.match);
     const data = this.props.match;
-
     this.props.getUser(data).then(() => {
       if (
         this.props.userDataByUsername &&

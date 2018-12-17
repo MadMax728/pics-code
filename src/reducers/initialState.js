@@ -173,6 +173,11 @@ const initialState = {
     downloadData: null,
     isLoading: false,
     error: false
+  },
+  searchData: {
+    searchKeyword: null,
+    isLoading: false,
+    error: false
   }
 };
 

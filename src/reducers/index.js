@@ -26,6 +26,7 @@ import voucherData from "./voucherReducer";
 import reviewData from "./reviewReducer";
 import reportedContentData from "./reportedContentReducer";
 import businessProfileData from "./profileSettingsReducer";
+import searchData from "./searchReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -54,7 +55,8 @@ const rootReducer = combineReducers({
   voucherData,
   reviewData,
   reportedContentData,
-  businessProfileData
+  businessProfileData,
+  searchData
 });
 
 export default rootReducer;

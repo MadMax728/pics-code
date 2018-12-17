@@ -8,7 +8,6 @@ import { Auth } from "../../../../auth";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import Switch from "react-switch";
-
 import {
   setProfilePrivacy,
   setSocialShare,
@@ -74,7 +73,7 @@ class PrivacyPage extends Component {
     };
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
     if (storage) {
@@ -393,6 +392,9 @@ class PrivacyPage extends Component {
     this.props.handleModalInfoShow(modalType.confirmation, value => {
       console.log("In Privacy Value", value);
     });
+    this.props.modalInfoShow = val => {
+      console.log(val);
+    };
   };
 
   render() {
@@ -858,7 +860,8 @@ class PrivacyPage extends Component {
 
 const mapStateToProps = state => ({
   profilePrivacyData: state.profilePrivacyData,
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -886,6 +889,7 @@ PrivacyPage.propTypes = {
   profilePrivacyData: PropTypes.any,
   history: PropTypes.any,
   getUser: PropTypes.func,
+  modalInfoShow: PropTypes.any,
   userDataByUsername: PropTypes.any
 };
 

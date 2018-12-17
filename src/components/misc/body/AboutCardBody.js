@@ -31,11 +31,11 @@ const AboutCardBody = ({ about }) => {
             </li>
             <li>
               <span>{Translations.about.category}</span>
-              <span>{about.category}</span>
+              <span>{about.category && about.category[0].categoryName}</span>
             </li>
             <li>
               <span>{Translations.about.location}</span>
-              <span>{about.location.address}</span>
+              <span>{about.location && about.location.address}</span>
             </li>
             <li>
               <span>{Translations.about.phone_number}</span>
@@ -61,7 +61,7 @@ const AboutCardBody = ({ about }) => {
           </div>
           <div className="section-subtitle">{Translations.about.offer_tag}</div>
           <div className="tags-wrapper">
-            {about.offerTagList.map((offer) => {
+            {about && about.offerTagList.length !== undefined && about.offerTagList.map((offer) => {
               return (
                 <Link to={""} key={offer.id}>
                   {offer.offerTagName}
@@ -75,7 +75,7 @@ const AboutCardBody = ({ about }) => {
             {Translations.about.inquiry_tag}
           </div>
           <div className="tags-wrapper">
-            {about.inquiryTagList.map((inquiry) => {
+            {about && about.inquiryTagList.length !== undefined && about.inquiryTagList.map((inquiry) => {
               return (
                 <Link to={""} key={inquiry.id}>
                   {inquiry.inquiryTagName}
