@@ -127,7 +127,10 @@ const initialState = {
     profilePrivacyData: [],
     isLoading: false,
     error: false,
-    changeEmailData: []
+    changeEmailData: [],
+    changePasswordData: [],
+    changeInvoiceAddressData: [],
+    userData: []
   },
   adminData: {
     admins: null,

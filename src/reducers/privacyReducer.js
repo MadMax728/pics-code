@@ -21,7 +21,6 @@ const privacyReducer = (state = initialState.profilePrivacyData, action) => {
         isLoading: false,
         error: action.payload
       };
-
     case types.SET_SOCIAL_SHARE_STARTED:
       return {
         ...state,

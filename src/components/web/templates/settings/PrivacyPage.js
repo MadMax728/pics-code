@@ -15,7 +15,8 @@ import {
   setChangePassword,
   setChangeInvoiceAddress,
   deleteSearchHistory,
-  deactivateAccount
+  deactivateAccount,
+  getUser
 } from "../../../../actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -56,21 +57,49 @@ class PrivacyPage extends Component {
     };
   }
 
-  componentDidMount = () => {
+  componentWillMount = () => {
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
     if (userInfo) {
-      this.setState({ userId: userInfo.id });
+      this.setState({ userId: userInfo.id, isLoading: true });
     }
+    const data = {
+      username: userInfo.username
+    };
+    this.props.getUser(data).then(() => {
+      this.setDataOnLoad();
+    });
   };
 
   onKeyPressHandler = () => {};
 
+  setDataOnLoad = () => {
+    if (this.props.userDataByUsername.user) {
+      const userData = this.props.userDataByUsername.user.data;
+      this.setState({
+        change_email_form: {
+          current_email: userData.email,
+          new_email: ""
+        },
+        change_invoicing_address_form: {
+          invoice_recipient: userData.userFullAddress.invoiceRecipient,
+          street_number: userData.userFullAddress.street,
+          postal_code: userData.userFullAddress.postalCode,
+          city: userData.userFullAddress.city,
+          country: userData.userFullAddress.country,
+          vat_identification_number: userData.userFullAddress.VATNO
+        },
+        isLoading: false
+      });
+    }
+  };
+
   hanldeIsPrivate = event => {
     const isPrivate = event.target.checked;
+    console.log("is", isPrivate);
     this.setState({ isPrivate });
     const paramData = { isPrivate: isPrivate };
     this.props.setProfilePrivacy(paramData);
@@ -256,32 +285,33 @@ class PrivacyPage extends Component {
   handleSaveChangeInvoice = e => {
     e.preventDefault();
     const { change_invoicing_address_form } = this.state;
-    const changeInvoiceAddressData = new FormData();
-    changeInvoiceAddressData.set(
-      "invoice_recipient",
-      change_invoicing_address_form.invoice_recipient
-    );
-    changeInvoiceAddressData.set(
-      "street_number",
-      change_invoicing_address_form.street_number
-    );
-    changeInvoiceAddressData.set(
-      "postal_code",
-      change_invoicing_address_form.postal_code
-    );
-    changeInvoiceAddressData.set("city", change_invoicing_address_form.city);
-    changeInvoiceAddressData.set(
-      "country",
-      change_invoicing_address_form.country
-    );
-    changeInvoiceAddressData.set(
-      "vat_identification_number",
-      change_invoicing_address_form.vat_identification_number
-    );
+    const changeInvoiceAddressData = {
+      invoiceRecipient: change_invoicing_address_form.invoice_recipient,
+      street: change_invoicing_address_form.street_number,
+      postalCode: change_invoicing_address_form.postal_code,
+      city: change_invoicing_address_form.city,
+      VATNO: change_invoicing_address_form.vat_identification_number,
+      country: change_invoicing_address_form.country
+    };
     console.log(changeInvoiceAddressData);
-    this.props.setChangeInvoiceAddress(changeInvoiceAddressData).then(() => {
-      // To Do - setChangeInvoiceAddress
-    });
+    this.props
+      .setChangeInvoiceAddress({ address: changeInvoiceAddressData })
+      .then(() => {
+        const changeInvoiceAddressErrors = {};
+        if (
+          this.props.profilePrivacyData.error &&
+          this.props.profilePrivacyData.error.status === 400
+        ) {
+          changeInvoiceAddressErrors.servererror =
+            Translations.privacy.server_error;
+          this.setState({
+            change_password_form_error: changeInvoiceAddressErrors
+          });
+        } else {
+          console.log("success");
+          //this.props.history.push(routes.LOGOUT_ROUTE);
+        }
+      });
   };
 
   handleDeleteSearchHisory = e => {
@@ -325,7 +355,11 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 text-right">
                   <div>
                     <label className="switch" htmlFor={"Privacy"}>
-                      <input type="checkbox" onChange={this.hanldeIsPrivate} />
+                      <input
+                        type="checkbox"
+                        onChange={this.hanldeIsPrivate}
+                        checked={this.state.isPrivate}
+                      />
                       <span className="slider round" />
                     </label>
                   </div>
@@ -724,7 +758,8 @@ class PrivacyPage extends Component {
 //export default PrivacyPage;
 
 const mapStateToProps = state => ({
-  profilePrivacyData: state.profilePrivacyData
+  profilePrivacyData: state.profilePrivacyData,
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
@@ -735,7 +770,8 @@ const mapDispatchToProps = {
   setChangePassword,
   setChangeInvoiceAddress,
   deleteSearchHistory,
-  deactivateAccount
+  deactivateAccount,
+  getUser
 };
 
 PrivacyPage.propTypes = {
@@ -749,7 +785,9 @@ PrivacyPage.propTypes = {
   deactivateAccount: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   profilePrivacyData: PropTypes,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getUser: PropTypes.func,
+  userDataByUsername: PropTypes.any
 };
 
 export default connect(
