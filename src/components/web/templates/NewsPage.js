@@ -11,50 +11,66 @@ class NewsRoot extends Component {
     this.props.getDashboard("news");
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      if (searchKeyword) {
+        console.log(searchKeyword);
+      }
+    }
+  };
+
   renderNewsFeedList = () => {
     const { newsFeedList } = this.props;
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-        
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.mediaPost && (
-            <MediaCard item={newsFeed} isParticipant={false} isDescription />
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.companyCampaign && (
-            <CampaignCard
-              item={newsFeed}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport={false}
-            />
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.creatorCampaign && (
-            <CampaignCard
-              item={newsFeed}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport={false}
-            />
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.companyParticipantCampaign && (
-            <MediaCard item={newsFeed} isParticipant isDescription/>
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
-            <AdCard
-              item={newsFeed}
-              isDescription
-              isInformation={false}
-              isStatus={false}
-            />
-          )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.mediaPost && (
+              <MediaCard item={newsFeed} isParticipant={false} isDescription />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.companyCampaign && (
+              <CampaignCard
+                item={newsFeed}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.creatorCampaign && (
+              <CampaignCard
+                item={newsFeed}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.companyParticipantCampaign && (
+              <MediaCard item={newsFeed} isParticipant isDescription />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.ad && (
+              <AdCard
+                item={newsFeed}
+                isDescription
+                isInformation={false}
+                isStatus={false}
+              />
+            )}
         </div>
       );
     });
@@ -75,11 +91,13 @@ NewsRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
+  searchData: PropTypes.any
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   newsFeedList: state.dashboardData.news,
+  searchData: state.searchData,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

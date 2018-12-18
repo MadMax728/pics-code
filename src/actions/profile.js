@@ -54,8 +54,7 @@ export const getUser = params => {
     const header = { Authorization: storage.accessToken };
     return userService.getUser(params, header).then(
       res => {
-        if (res.data && res.data.data) 
-        dispatch(getUserSucceeded(res.data));
+        if (res.data && res.data.data) dispatch(getUserSucceeded(res.data));
       },
       error => {
         dispatch(getUserFailed(error.response));
@@ -103,9 +102,9 @@ export const uploadProfilePicture = params => {
 
     return userService.uploadProfilePicture(params, header).then(
       res => {
-        if (res.data && res.data.data) 
-        //Auth.saveJwtToStorage(res.data.data);
-        dispatch(uploadImageSucceeded(res.data));
+        if (res.data && res.data.data)
+          //Auth.saveJwtToStorage(res.data.data);
+          dispatch(uploadImageSucceeded(res.data));
       },
       error => {
         dispatch(uploadImageFailed(error.response));

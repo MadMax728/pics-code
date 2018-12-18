@@ -20,7 +20,6 @@ const getSearchPrivacyFailed = error => ({
 });
 
 export const getSearch = data => {
-  console.log("inSearchFuction", data);
   return dispatch => {
     dispatch(getSearchSucceeded(data));
   };

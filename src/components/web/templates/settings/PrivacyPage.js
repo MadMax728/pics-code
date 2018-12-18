@@ -17,7 +17,8 @@ import {
   setChangeInvoiceAddress,
   deleteSearchHistory,
   deactivateAccount,
-  getUser
+  getUser,
+  getSearch
 } from "../../../../actions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -69,7 +70,8 @@ class PrivacyPage extends Component {
       change_email_form_error: {},
       change_password_form_error: {},
       error: {},
-      isLoading: ""
+      isLoading: "",
+      isSearch: ""
     };
   }
 
@@ -90,6 +92,24 @@ class PrivacyPage extends Component {
     });
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      if (searchKeyword) {
+        let userInfo = null;
+        if (storage) {
+          userInfo = JSON.parse(storage.userInfo);
+        }
+        const data = { username: userInfo.username, isSearch: searchKeyword };
+        this.props.getUser(data).then(() => {
+          this.setDataOnLoad();
+        });
+      }
+    }
+  };
+
   onKeyPressHandler = () => {};
 
   setDataOnLoad = () => {
@@ -101,12 +121,22 @@ class PrivacyPage extends Component {
           new_email: ""
         },
         change_invoicing_address_form: {
-          invoice_recipient: userData.userFullAddress? userData.userFullAddress.invoiceRecipient : "",
-          street_number: userData.userFullAddress? userData.userFullAddress.street : "",
-          postal_code: userData.userFullAddress? userData.userFullAddress.postalCode: "",
-          city: userData.userFullAddress? userData.userFullAddress.city : "",
-          country: userData.userFullAddress? userData.userFullAddress.country: "",
-          vat_identification_number: userData.userFullAddress? userData.userFullAddress.VATNO : ""
+          invoice_recipient: userData.userFullAddress
+            ? userData.userFullAddress.invoiceRecipient
+            : "",
+          street_number: userData.userFullAddress
+            ? userData.userFullAddress.street
+            : "",
+          postal_code: userData.userFullAddress
+            ? userData.userFullAddress.postalCode
+            : "",
+          city: userData.userFullAddress ? userData.userFullAddress.city : "",
+          country: userData.userFullAddress
+            ? userData.userFullAddress.country
+            : "",
+          vat_identification_number: userData.userFullAddress
+            ? userData.userFullAddress.VATNO
+            : ""
         },
         isPrivate: userData.isPrivate,
         isPersonalized: userData.isAdvertise,
@@ -873,7 +903,8 @@ const mapDispatchToProps = {
   setChangeInvoiceAddress,
   deleteSearchHistory,
   deactivateAccount,
-  getUser
+  getUser,
+  getSearch
 };
 
 PrivacyPage.propTypes = {
@@ -890,7 +921,9 @@ PrivacyPage.propTypes = {
   history: PropTypes.any,
   getUser: PropTypes.func,
   modalInfoShow: PropTypes.any,
-  userDataByUsername: PropTypes.any
+  userDataByUsername: PropTypes.any,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
 export default connect(
