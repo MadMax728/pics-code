@@ -285,7 +285,7 @@
     },
     "category": {
       "name": "Category",
-      "type": "select"
+      "type": "select-category"
     },
     "procedure": {
       "name": "Procedure",
@@ -301,19 +301,19 @@
     },
     "offer": {
       "name": "Offer",
-      "type": "select"
+      "type": "select-offer"
     },
     "offer_tag": {
       "name": "Offer tag",
-      "type": "text"
+      "type": "text-offer-tag"
     },
     "inquiry": {
       "name": "Inquiry",
-      "type": "select"
+      "type": "select-inquiry"
     },
     "inquiry_tag": {
       "name": "Inquiry tag",
-      "type": "text"
+      "type": "text-inquiry-tag"
     },
     "reset_filters": {
       "name": "Reset filters",

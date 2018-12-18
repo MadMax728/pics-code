@@ -2,11 +2,15 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
+import { getCategory } from "../../../actions";
+import { connect } from "react-redux";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
   { name: "option2", className: "", value: "option2" }
 ];
+
+const categoryData = staticData;
 
 const contentItems = [
   {
@@ -69,7 +73,7 @@ const targetGroupOptions = staticData;
 
 const radiusItems = staticData;
 
-const categoryItems = staticData;
+const categoryItems = categoryData;
 
 const offerItems = staticData;
 
@@ -149,7 +153,8 @@ class DashboardFilter extends Component {
     super(props);
     this.state = {
       filterApply: false,
-      filData: []
+      filData: [],
+      categoryList: []
     };
   }
 
@@ -166,6 +171,10 @@ class DashboardFilter extends Component {
     this.setState({ filData: filterData });
   };
 
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
   render() {
     return (
       <div className="left-filters">
@@ -173,6 +182,7 @@ class DashboardFilter extends Component {
           filters={Filters}
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -193,8 +203,22 @@ class DashboardFilter extends Component {
   }
 }
 
-DashboardFilter.propTypes = {
-  handleApplyClick: PropTypes.func
+const mapStateToProps = state => ({
+  categoryList: state.selectData
+});
+
+const mapDispatchToProps = {
+  getCategory
 };
 
-export default DashboardFilter;
+DashboardFilter.propTypes = {
+  handleApplyClick: PropTypes.func,
+  getCategory: PropTypes.func,
+  categoryList: PropTypes.any,
+  handleSelect: PropTypes.func
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardFilter);

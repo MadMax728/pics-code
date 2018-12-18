@@ -11,6 +11,17 @@ class NewsRoot extends Component {
     this.props.getDashboard("news");
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      if (searchKeyword) {
+        console.log(searchKeyword);
+      }
+    }
+  };
+
   renderNewsFeedList = () => {
     const { newsFeedList } = this.props;
     return newsFeedList.map(newsFeed => {
@@ -74,11 +85,13 @@ NewsRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
+  searchData: PropTypes.any
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   newsFeedList: state.dashboardData.news,
+  searchData: state.searchData,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

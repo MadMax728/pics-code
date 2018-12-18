@@ -166,6 +166,10 @@ class CampaignCompanyFilter extends Component {
     this.setState({ filData: filterData });
   };
 
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
   render() {
     return (
       <div className="left-filters">
@@ -173,6 +177,7 @@ class CampaignCompanyFilter extends Component {
           filters={Filters}
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -194,7 +199,8 @@ class CampaignCompanyFilter extends Component {
 }
 
 CampaignCompanyFilter.propTypes = {
-  handleApplyClick: PropTypes.func
+  handleApplyClick: PropTypes.func,
+  handleSelect: PropTypes.func
 };
 
 export default CampaignCompanyFilter;
