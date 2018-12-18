@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { RadioBtn, Select, Text } from "../CommonUIComponents";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
-import { SelectCategory } from "../../common";
+import { SelectCategory, SelectOffer, SelectInquiry } from "../../common";
 
 class LeftSidebarFilter extends Component {
   constructor(props) {
@@ -33,7 +33,7 @@ class LeftSidebarFilter extends Component {
     this.props.onChange(filterData);
   };
 
-  handleCategoryList = (isFor, selected) => {
+  handleSelectList = (isFor, selected) => {
     const filterData = this.state.filterData;
     console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
@@ -65,15 +65,13 @@ class LeftSidebarFilter extends Component {
       filterData.splice(indexOf, 1);
       filterData.push(location_value);
     }
-
     this.setState({ filterData });
-
     // calling function
     this.props.onChange(filterData);
   };
 
   render() {
-    const { filters, handleSelect } = this.props;
+    const { filters } = this.props;
     return (
       <div>
         {filters.map(filter => {
@@ -109,7 +107,25 @@ class LeftSidebarFilter extends Component {
                   name={filter.name}
                   options={filter.items}
                   defaultValue={"select"}
-                  handleSelect={this.handleCategoryList}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-inquiry" && (
+                <SelectInquiry
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-offer" && (
+                <SelectOffer
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
                 />
               )}
               {filter.type === "text" && (

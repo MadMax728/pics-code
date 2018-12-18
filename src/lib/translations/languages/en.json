@@ -302,7 +302,7 @@
     },
     "offer": {
       "name": "Offer",
-      "type": "select"
+      "type": "select-offer"
     },
     "offer_tag": {
       "name": "Offer tag",
@@ -310,7 +310,7 @@
     },
     "inquiry": {
       "name": "Inquiry",
-      "type": "select"
+      "type": "select-inquiry"
     },
     "inquiry_tag": {
       "name": "Inquiry tag",
