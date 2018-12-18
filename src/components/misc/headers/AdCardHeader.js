@@ -3,18 +3,22 @@ import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { DateFormat } from "../../Factory";
+import classnames from "classnames";
 
 const AdCardHeader = ({
   ad,
   isDescription,
-  isInformation,
+  isInformation,  
   handleFavorite,
   isLoading
 }) => {
+  const like_wrapper = classnames("like_wrapper", {
+    "col-sm-2 col-xs-2 like_wrapper": isDescription && isInformation
+  });
+
   const profile_route = ad.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}${ad.createdBy}`;
+    : `${routes.NEWS_FEED_ROUTE}/${ad.createdBy}`;
   const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
@@ -33,12 +37,12 @@ const AdCardHeader = ({
         </Link>
         {ad.category && (
           <div className="grey_title">
-            {DateFormat(ad.createdAt)} in{" "}
+            Sponsored in{" "}
             {ad.category[0].categoryName}
           </div>
         )}
       </div>
-      <div className="col-sm-1 col-xs-1 like_wrapper" role="article">
+      <div className={like_wrapper} role="article">
         <button
           type="button"
           className="pull-right no-btn"

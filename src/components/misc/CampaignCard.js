@@ -92,7 +92,7 @@ class CampaignCard extends Component {
 
   render() {
     const { isStatus, isDescription, isInformation, isBudget, isReport, likeData } = this.props;
-    const { isComments, item } = this.state;
+    const { isComments, item, comments } = this.state;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -121,11 +121,11 @@ class CampaignCard extends Component {
         />
         {isComments && (
           <CommentCard
-            item={this.state.comments}
+            item={comments}
             itemId={item.id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
-            totalCommentsCount={(this.state.comments).length}
+            totalCommentsCount={(comments).length}
           />
         )}
       </div>

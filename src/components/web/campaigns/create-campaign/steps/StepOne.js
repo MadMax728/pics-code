@@ -5,25 +5,16 @@ import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import { OfferTags, InquiryTags, SelectCategory, SelectInquiry, SelectOffer } from "../../../../../components/common";
-import { Auth } from "../../../../../auth";
 
-const storage = Auth.extractJwtFromStorage();
-let userInfo = null;
-if (storage) {
-  userInfo = JSON.parse(storage.userInfo);
-}
 class StepOne extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userInfo: null
     };
   }
 
   componentDidMount = () => {
-    if (userInfo) {
-      this.setState({userInfo})
-    }
+
   }
 
    render() {
@@ -40,11 +31,10 @@ class StepOne extends Component {
       handleInquiryTagChange,
       handleInquiryTagDelete,
       handleSelect,
-      handleVideo
+      handleVideo,
+      userInfo
     } = this.props;
 
-    const { userInfo } = this.state;
-    
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
@@ -142,25 +132,25 @@ class StepOne extends Component {
                     <li onChange={handleChangeField} className="wid49">
                       <input
                         type="radio"
-                        id={enumerations.mediaTypes.video}
-                        name="type"
+                        id={enumerations.typeContent.video}
+                        name="typeContent"
                         className="black_button"
-                        value={enumerations.mediaTypes.video}
-                        defaultChecked={form.type === enumerations.mediaTypes.video}
+                        value={enumerations.typeContent.video}
+                        defaultChecked={form.typeContent === enumerations.typeContent.video}
                       />
-                      <label htmlFor={enumerations.mediaTypes.video}>
+                      <label htmlFor={enumerations.typeContent.video}>
                         {Translations.create_campaigns.video}
                       </label>
                     </li>
                     <li onChange={handleChangeField} className="wid49">
                       <input
                         type="radio"
-                        id={enumerations.mediaTypes.image}
-                        name="type"
-                        value={enumerations.mediaTypes.image}
-                        defaultChecked={form.type === enumerations.mediaTypes.image}
+                        id={enumerations.typeContent.image}
+                        name="typeContent"
+                        value={enumerations.typeContent.image}
+                        defaultChecked={form.typeContent === enumerations.typeContent.image}
                       />
-                      <label htmlFor={enumerations.mediaTypes.image}>
+                      <label htmlFor={enumerations.typeContent.image}>
                         {Translations.create_campaigns.image}
                       </label>
                     </li>
@@ -175,10 +165,10 @@ class StepOne extends Component {
                   <input
                     type="radio"
                     id={enumerations.target_group.company}
-                    name="target_group"
+                    name="targetGroup"
                     className="black_button"
                     value={enumerations.target_group.company}
-                    defaultChecked={form.target_group === enumerations.target_group.company}
+                    defaultChecked={form.targetGroup === enumerations.target_group.company}
                   />
                   <label htmlFor={enumerations.target_group.company}>
                     {Translations.create_campaigns.company}
@@ -189,8 +179,8 @@ class StepOne extends Component {
                     type="radio"
                     id={enumerations.target_group.female_and_male}
                     value={enumerations.target_group.female_and_male}
-                    name="target_group"
-                    defaultChecked={form.target_group === enumerations.target_group.female_and_male}
+                    name="targetGroup"
+                    defaultChecked={form.targetGroup === enumerations.target_group.female_and_male}
                   />
                   <label htmlFor={enumerations.target_group.female_and_male}>
                     {Translations.create_campaigns.male_female}
@@ -200,9 +190,9 @@ class StepOne extends Component {
                   <input
                     type="radio"
                     id={enumerations.target_group.female}
-                    name="target_group"
+                    name="targetGroup"
                     value={enumerations.target_group.female}
-                    defaultChecked={form.target_group === enumerations.target_group.female}
+                    defaultChecked={form.targetGroup === enumerations.target_group.female}
                   />
                   <label htmlFor={enumerations.target_group.female}>
                     {Translations.create_campaigns.female}
@@ -212,9 +202,9 @@ class StepOne extends Component {
                   <input
                     type="radio"
                     id={enumerations.target_group.male}
-                    name="target_group"
+                    name="targetGroup"
                     value={enumerations.target_group.male}
-                    defaultChecked={form.target_group === enumerations.target_group.male}
+                    defaultChecked={form.targetGroup === enumerations.target_group.male}
                   />
                   <label htmlFor={enumerations.target_group.male}>
                     {Translations.create_campaigns.male}
@@ -270,7 +260,7 @@ class StepOne extends Component {
         <div className="col-sm-6 no-padding right-side">
 
           {
-            form.type === enumerations.mediaTypes.image &&
+            form.typeContent === enumerations.typeContent.image &&
               <ImageCropper
                 image={form.image}
                 handleEditImage={handleEditImage}
@@ -282,7 +272,7 @@ class StepOne extends Component {
           }
 
           {
-            form.type === enumerations.mediaTypes.video && !form.video &&
+            form.typeContent === enumerations.typeContent.video && !form.video &&
               <div className="box">
                 <input
                   type="file"
@@ -306,7 +296,7 @@ class StepOne extends Component {
                 </label>
               </div>
           }
-          { !form.fileType && form.video && form.type === enumerations.mediaTypes.video &&
+          { !form.fileType && form.video && form.typeContent === enumerations.typeContent.video &&
             <video controls>
               <track kind="captions" />
               <source src={form.video} type={form.file.type} />
@@ -332,7 +322,8 @@ StepOne.propTypes = {
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleVideo: PropTypes.func.isRequired
+  handleVideo: PropTypes.func.isRequired,
+  userInfo: PropTypes.object.isRequired
 };
 
 export default StepOne;

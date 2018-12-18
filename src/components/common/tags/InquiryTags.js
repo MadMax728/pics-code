@@ -44,7 +44,9 @@ class InquiryTags extends Component {
         inquiryTagName: tag.text
       }
       this.props.addInquiryTag(tagName).then(()=> {
-        this.props.handleInquiryTagChange(this.props.tags.addedInquiryTags.id, this.props.tags.addedInquiryTags)
+        if(this.props.tags && this.props.tags.addedInquiryTags && this.props.tags.addedInquiryTags) {
+          this.props.handleInquiryTagChange(this.props.tags.addedInquiryTags.data.id, this.props.tags.addedInquiryTags.data)
+        }
       })
     } else {
       this.props.handleInquiryTagChange(tag.id, tag);
