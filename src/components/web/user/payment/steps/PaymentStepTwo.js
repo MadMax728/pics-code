@@ -25,15 +25,15 @@ class PaymentStepTwo extends Component {
           <div className="history-content-wrapper">
             <div className="subtitle">Billing address</div>
             <div className="content">
-              N/A
+              Marc Bopp
+              <br />
+              Oberer Dorfgraben 15c, 55130 Mainz, Deutschland
             </div>
           </div>
           <div className="history-content-wrapper">
             <div className="subtitle">Payment method</div>
             <div className="content">
-              VISA / MasterCard
-              <br />
-              Marc Aurel Bopp, **** ***** ***** **00
+              N/A
             </div>
           </div>
           <div className="history-content-wrapper">
