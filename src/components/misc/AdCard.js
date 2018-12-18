@@ -6,8 +6,9 @@ import AdCardFooter from "./footers/AdCardFooter";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
-import { like, getComments } from "../../actions";
-
+import { like, getComments, setSavedPost } from "../../actions";
+import { connect } from "react-redux";
+import { getBackendPostType } from "../Factory";
 class AdCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -19,7 +20,7 @@ class AdCard extends Component {
     };
   }
 
-  renderReportTips = () => {
+  renderReportTips = (id) => {
     const reportTips = [
       {
         name: Translations.tool_tips.report,
@@ -34,12 +35,10 @@ class AdCard extends Component {
         handleEvent: this.handleContent
       }
     ];
-    return <RenderToolTips items={reportTips} id={this.props.item.id} />;
+    return <RenderToolTips items={reportTips} id={id} />;
   };
 
   handleReportPost = () => {};
-
-  handleSavePost = () => {};
 
   handleContent = () => {};
 
@@ -49,11 +48,11 @@ class AdCard extends Component {
     item.likeCount = item.isSelfLike ? item.likeCount + 1 : item.likeCount - 1;
     this.setState({ item });
 
-    const campaignLike = {
-      typeOfContent: "campaign",
+    const adLike = {
+      typeOfContent: "ad",
       typeId: item.id
     };
-    this.props.like(campaignLike);
+    this.props.like(adLike);
   };
 
   handleComment = commet => {
@@ -63,10 +62,10 @@ class AdCard extends Component {
   };
 
   handleCommentsSections = () => {
-    const CampaignId = {
+    const AdId = {
       typeId: this.state.item.id
     };
-    this.props.getComments(CampaignId).then(() => {
+    this.props.getComments(AdId).then(() => {
       this.setState({
         isComments: !this.state.isComments,
         comments: this.props.comments,
@@ -75,12 +74,25 @@ class AdCard extends Component {
     });
   };
 
+  handleSavePost = (e) => {
+    const item = this.state.item;
+    const data = {
+        typeId: e.target.id,
+        postType: getBackendPostType(item)
+      };
+
+    this.props.setSavedPost(data).then(()=> {
+      if(this.props.savedData){
+        console.log(this.props.savedData);
+      }
+    })
+  };
 
   render() {
     const { isStatus, isDescription, isInformation, isReport } = this.props;
-    const { isComments, item } = this.state;
-    const { likeData } = this.props;
-
+    const { isComments, item, comments } = this.state;
+    console.log(item);
+    
     return (
       <div className="feed_wrapper">
         <AdCardHeader
@@ -100,18 +112,19 @@ class AdCard extends Component {
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
           isStatus={isStatus}
-          renderReportTips={this.renderReportTips}
+          /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
           handleFavorite={this.handleFavorite}
           isLoading={false}
           isReport={isReport}
         />
        {isComments && (
           <CommentCard
-            item={this.state.comments}
+            item={comments}
             itemId={item.id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
-            totalCommentsCount={(this.state.comments).length}
+            totalCommentsCount={(comments).length}
           />
         )}
       </div>
@@ -123,25 +136,30 @@ AdCard.propTypes = {
   isDescription: PropTypes.bool.isRequired,
   isInformation: PropTypes.bool.isRequired,
   isStatus: PropTypes.bool.isRequired,
-  item: PropTypes.shape({
-    user: PropTypes.shape({
-      name: PropTypes.string,
-      image: PropTypes.string,
-      isOwner: PropTypes.bool
-    }).isRequired,
-    title: PropTypes.string,
-    category: PropTypes.string,
-    image: PropTypes.string,
-    desc: PropTypes.string,
-    msg_count: PropTypes.number,
-    like_count: PropTypes.number,
-    id: PropTypes.number
-  }).isRequired,
+  item: PropTypes.object.isRequired,
   likeData: PropTypes.any,
   like: PropTypes.func.isRequired,
+  setSavedPost: PropTypes.func.isRequired,
+  savedData: PropTypes.any,
   getComments: PropTypes.func.isRequired,
   comments: PropTypes.any,
-  isReport: PropTypes.bool
+  isReport: PropTypes.bool,
 };
 
-export default AdCard;
+const mapStateToProps = state => ({
+  likeData: state.likeData,
+  savedData: state.savedData,
+  comments: state.commentData.comments,
+  totalCommentsCount: state.totalCommentsCount
+});
+
+const mapDispatchToProps = {
+  like,
+  getComments,
+  setSavedPost
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdCard);

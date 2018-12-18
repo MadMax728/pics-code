@@ -5,6 +5,7 @@ import * as images from "../../../lib/constants/images";
 import { ThreeDots } from "../../ui-kit";
 import StatusCard from "../StatusCard";
 import ReportCard from "../ReportCard";
+import BudgetCard from "../BudgetCard";
 
 const AdCardFooter = ({
   ad,
@@ -13,6 +14,7 @@ const AdCardFooter = ({
   renderReportTips,
   handleFavorite,
   isLoading,
+  isBudget,
   isReport
 }) => {
   const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
@@ -50,7 +52,7 @@ const AdCardFooter = ({
       </div>
       <div className="show_more_options">
         <ThreeDots
-          id="report"
+          id={`report-${ad.id}`}
           role="button"
           dataTip="tooltip"
           dataClass="tooltip-wrapr"
@@ -70,6 +72,11 @@ const AdCardFooter = ({
           route={`${routes.BASE_SETTINGS_AD_STATISTICS_ROUTE}`}
         />
       )}
+      {ad && isBudget && (
+        <BudgetCard
+          item={ad}
+        />
+      )}
       {ad && isReport && (
         <ReportCard
           item={ad}
@@ -86,6 +93,7 @@ AdCardFooter.propTypes = {
   isStatus: PropTypes.bool.isRequired,
   renderReportTips: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  isBudget: PropTypes.bool,
   isReport: PropTypes.bool
 };
 

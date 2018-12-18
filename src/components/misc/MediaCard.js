@@ -21,7 +21,7 @@ class MediaCard extends Component {
     };
   }
 
-  renderReportTips = () => {
+  renderReportTips = (id) => {
     const reportTips = [
       {
         name: Translations.tool_tips.report,
@@ -36,7 +36,7 @@ class MediaCard extends Component {
         handleEvent: this.handleContent
       }
     ];
-    return <RenderToolTips items={reportTips} id={this.props.item.id} />;
+    return <RenderToolTips items={reportTips} id={id} />;
   };
 
   handleReportPost = () => {};
@@ -108,7 +108,8 @@ class MediaCard extends Component {
           item={item}
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
-          renderReportTips={this.renderReportTips}
+          /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
           handleFavorite={this.handleFavorite}
           isReport={isReport}
         />
