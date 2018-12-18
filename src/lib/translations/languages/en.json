@@ -306,7 +306,7 @@
     },
     "offer_tag": {
       "name": "Offer tag",
-      "type": "text"
+      "type": "text-offer-tag"
     },
     "inquiry": {
       "name": "Inquiry",
@@ -314,7 +314,7 @@
     },
     "inquiry_tag": {
       "name": "Inquiry tag",
-      "type": "text"
+      "type": "text-inquiry-tag"
     },
     "reset_filters": {
       "name": "Reset filters",
