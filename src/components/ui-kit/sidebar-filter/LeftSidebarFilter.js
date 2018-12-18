@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { RadioBtn, Select, Text } from "../CommonUIComponents";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
+import { SelectCategory } from "../../common";
 
 class LeftSidebarFilter extends Component {
   constructor(props) {

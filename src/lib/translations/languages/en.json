@@ -286,7 +286,7 @@
     },
     "category": {
       "name": "Category",
-      "type": "select"
+      "type": "select-category"
     },
     "procedure": {
       "name": "Procedure",

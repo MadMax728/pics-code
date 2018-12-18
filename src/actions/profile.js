@@ -52,7 +52,6 @@ export const getUser = params => {
     dispatch(getUserStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    console.log(params);
     return userService.getUser(params, header).then(
       res => {
         if (res.data && res.data.data) dispatch(getUserSucceeded(res.data));
