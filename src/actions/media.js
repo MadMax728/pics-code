@@ -30,7 +30,6 @@ export const uploadMedia = (provider, fileType) => {
     if (fileType) {
       return mediaService.uploadMediaImage(provider, header).then(
         res => {
-          console.log(res);
           dispatch(uploadMediaSucceeded(res.data.data));
         },
         error => {
@@ -48,7 +47,6 @@ export const uploadMedia = (provider, fileType) => {
     else {
       return mediaService.uploadMediaVideo(provider, header).then(
         res => {
-          console.log(res);
           dispatch(uploadMediaSucceeded(res.data.data));
         },
         error => {

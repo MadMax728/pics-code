@@ -15,7 +15,7 @@ const AdCardFooter = ({
   isLoading,
   isReport
 }) => {
-  const favorite_icon = ad.isFavorite ? images.blue_heart : images.feed_like;
+  const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
@@ -24,7 +24,7 @@ const AdCardFooter = ({
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
-          id={ad.user.id}
+          id={ad.createdBy}
           onKeyDown={handleCommentsSections}
           disabled={isLoading}
         >
