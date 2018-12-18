@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classnames from "classnames";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
+import { DateFormat } from "../../Factory";
 
 const AdCardHeader = ({
   ad,
@@ -12,16 +12,16 @@ const AdCardHeader = ({
   handleFavorite,
   isLoading
 }) => {
-  const profile_route = ad.user.isOwner
+  const profile_route = ad.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}${ad.id}`;
-  const favorite_icon = ad.isFavorite ? images.blue_heart : images.feed_like;
+    : `${routes.NEWS_FEED_ROUTE}${ad.createdBy}`;
+  const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
       <div className="profile_image padding-right-15">
         <Link to={profile_route}>
           <img
-            src={ad.user.image}
+            src={ad.profileImage}
             alt="feed"
             className="img-circle img-responsive"
           />
@@ -29,10 +29,13 @@ const AdCardHeader = ({
       </div>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link to={profile_route}>
-          <div className="normal_title">{ad.user.name}</div>
+          <div className="normal_title">{ad.userName}</div>
         </Link>
         {ad.category && (
-          <div className="grey_title">Sponsored in {ad.category}</div>
+          <div className="grey_title">
+            {DateFormat(ad.createdAt)} in{" "}
+            {ad.category[0].categoryName}
+          </div>
         )}
       </div>
       <div className="col-sm-1 col-xs-1 like_wrapper" role="article">

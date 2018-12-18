@@ -13,6 +13,7 @@ class LeftSidebarFilter extends Component {
   }
 
   handleOnChange = filter => {
+    console.log(filter);
     const filterData = this.state.filterData;
     console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
@@ -29,6 +30,22 @@ class LeftSidebarFilter extends Component {
     this.setState({ filterData });
 
     // calling function
+    this.props.onChange(filterData);
+  };
+
+  handleCategoryList = (isFor, selected) => {
+    const filterData = this.state.filterData;
+    console.log("filterData", filterData);
+    const indexOf = filterData.findIndex(f => {
+      return f.name === isFor;
+    });
+    if (indexOf === -1) {
+      filterData.push({ name: isFor, val: selected });
+    } else {
+      filterData.splice(indexOf, 1);
+      filterData.push({ name: isFor, val: selected });
+    }
+    this.setState({ filterData });
     this.props.onChange(filterData);
   };
 
@@ -56,7 +73,7 @@ class LeftSidebarFilter extends Component {
   };
 
   render() {
-    const { filters } = this.props;
+    const { filters, handleSelect } = this.props;
     return (
       <div>
         {filters.map(filter => {
@@ -86,6 +103,15 @@ class LeftSidebarFilter extends Component {
                   onChange={this.handleOnChange}
                 />
               )}
+              {filter.type === "select-category" && (
+                <SelectCategory
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleCategoryList}
+                />
+              )}
               {filter.type === "text" && (
                 <Text
                   foruse={filter.name}
@@ -110,7 +136,8 @@ LeftSidebarFilter.propTypes = {
       items: PropTypes.any
     }).isRequired
   ).isRequired,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  handleSelect: PropTypes.func
 };
 
 export default LeftSidebarFilter;

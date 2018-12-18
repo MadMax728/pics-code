@@ -10,7 +10,7 @@ const staticData = [
   { name: "option2", className: "", value: "option2" }
 ];
 
-const categoryData = [];
+const categoryData = staticData;
 
 const contentItems = [
   {
@@ -158,16 +158,6 @@ class DashboardFilter extends Component {
     };
   }
 
-  // componentDidMount = () => {
-  //   this.props.getCategory().then(() => {
-  //     if (this.props.categoryList && this.props.categoryList.categories) {
-  //       this.setState({
-  //         categoryList: this.props.categoryList.categories
-  //       });
-  //     }
-  //   });
-  // };
-
   handleResetFilterClick = () => {
     this.setState({ filterApply: false });
   };
@@ -178,7 +168,10 @@ class DashboardFilter extends Component {
   };
 
   handleOnChange = filterData => {
-    console.log(filterData);
+    this.setState({ filData: filterData });
+  };
+
+  handleSelect = filterData => {
     this.setState({ filData: filterData });
   };
 
@@ -189,6 +182,7 @@ class DashboardFilter extends Component {
           filters={Filters}
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -220,7 +214,8 @@ const mapDispatchToProps = {
 DashboardFilter.propTypes = {
   handleApplyClick: PropTypes.func,
   getCategory: PropTypes.func,
-  categoryList: PropTypes.any
+  categoryList: PropTypes.any,
+  handleSelect: PropTypes.func
 };
 
 export default connect(

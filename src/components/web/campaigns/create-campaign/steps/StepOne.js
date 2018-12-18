@@ -5,11 +5,25 @@ import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import { OfferTags, InquiryTags, SelectCategory, SelectInquiry, SelectOffer } from "../../../../../components/common";
+import { Auth } from "../../../../../auth";
 
+const storage = Auth.extractJwtFromStorage();
+let userInfo = null;
+if (storage) {
+  userInfo = JSON.parse(storage.userInfo);
+}
 class StepOne extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userInfo: null
+    };
+  }
+
+  componentDidMount = () => {
+    if (userInfo) {
+      this.setState({userInfo})
+    }
   }
 
    render() {
@@ -29,24 +43,23 @@ class StepOne extends Component {
       handleVideo
     } = this.props;
 
-    console.log(form);
+    const { userInfo } = this.state;
     
-
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
           <div className="no-padding profile_image">
             <img
-              src={images.image}
+              src={userInfo? userInfo.profileUrl : images.image}
               alt="image1"
               className="img-circle img-responsive"
             />
           </div>
           <div className="user-title">
             <div className="normal_title">
-              {Translations.create_campaigns.title_of_campaigns}
+              {form.title? form.title : Translations.create_campaigns.title_of_campaigns}
             </div>
-            <div className="secondary_title">User name</div>
+            <div className="secondary_title">{userInfo? userInfo.username : ""}</div>
           </div>
           <form>
             <div className="form-group">
