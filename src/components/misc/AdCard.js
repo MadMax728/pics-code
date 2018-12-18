@@ -91,8 +91,6 @@ class AdCard extends Component {
   render() {
     const { isStatus, isDescription, isInformation, isReport } = this.props;
     const { isComments, item, comments } = this.state;
-    console.log(item);
-    
     return (
       <div className="feed_wrapper">
         <AdCardHeader
