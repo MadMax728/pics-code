@@ -282,7 +282,7 @@
     },
     "radius": {
       "name": "Radius",
-      "type": "select"
+      "type": "select-radius"
     },
     "category": {
       "name": "Category",
@@ -298,7 +298,7 @@
     },
     "target_group": {
       "name": "Target group",
-      "type": "select"
+      "type": "select-target-group"
     },
     "offer": {
       "name": "Offer",
@@ -328,6 +328,13 @@
       "name": "Age",
       "type": "select"
     }
+  },
+
+  "target_group": {
+    "company": "Company",
+    "female_and_male": "Female and Male",
+    "female": "Female",
+    "male": "Male"
   },
 
   "message_module": {

@@ -7,18 +7,25 @@ import {
   SelectOffer,
   SelectInquiry,
   OfferTags,
-  InquiryTags
+  InquiryTags,
+  SelectRadius,
+  SelectTargetGroup
 } from "../../common";
 
 class LeftSidebarFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterData: []
+      filterData: [],
+      offerTagList: [],
+      offerTag: [],
+      inquiryTagList: [],
+      inquiryTag: []
     };
   }
 
   handleOnChange = filter => {
+    console.log(filter);
     const filterData = this.state.filterData;
     console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
@@ -57,41 +64,108 @@ class LeftSidebarFilter extends Component {
   handleOfferTagChange = (id, tag) => {
     const filterData = this.state.filterData;
     console.log("filterData", filterData);
+    const offerTagList = this.state.offerTagList;
+    const offerTag = this.state.offerTag;
+    offerTag.push(id);
+    offerTagList.push(tag);
     const indexOf = filterData.findIndex(f => {
       return f.name === "offerTagName";
     });
+
     if (indexOf === -1) {
-      filterData.push({ name: "offerTagName", val: id });
+      filterData.push({ name: "offerTagName", val: offerTag });
     } else {
       filterData.splice(indexOf, 1);
-      filterData.push({ name: "offerTagName", val: id });
+      filterData.push({ name: "offerTagName", val: offerTag });
     }
-    this.setState({ filterData });
+    this.setState({ offerTagList, offerTag, filterData });
     this.props.onChange(filterData);
   };
 
   handleOfferTagDelete = id => {
-    console.log(id);
+    const filterData = this.state.filterData;
+    console.log("filterData", filterData);
+    const { offerTagList, offerTag } = this.state;
+    const updatedOfferTagList = offerTagList.filter(
+      tag => tag.id !== offerTagList[id].id
+    );
+    const updatedOfferTags = offerTag.filter(
+      tag => tag !== offerTagList[id].id
+    );
+    const indexOf = filterData.findIndex(f => {
+      return f.name === "offerTagName";
+    });
+    if (indexOf === -1) {
+      filterData.push({ name: "offerTagName", val: updatedOfferTags });
+    } else {
+      filterData.splice(indexOf, 1);
+      filterData.push({ name: "offerTagName", val: updatedOfferTags });
+    }
+    if (updatedOfferTags.length === 0) {
+      filterData.splice(indexOf, 1);
+    }
+    this.setState({
+      offerTagList: updatedOfferTagList,
+      offerTag: updatedOfferTags,
+      filterData
+    });
+    this.props.onChange(filterData);
   };
 
   handleInquiryTagChange = (id, tag) => {
     const filterData = this.state.filterData;
     console.log("filterData", filterData);
+    const inquiryTagList = this.state.inquiryTagList;
+    const inquiryTag = this.state.inquiryTag;
+    inquiryTag.push(id);
+    inquiryTagList.push(tag);
     const indexOf = filterData.findIndex(f => {
       return f.name === "inquiryTagName";
     });
     if (indexOf === -1) {
-      filterData.push({ name: "inquiryTagName", val: id });
+      filterData.push({ name: "inquiryTagName", val: inquiryTag });
     } else {
       filterData.splice(indexOf, 1);
-      filterData.push({ name: "inquiryTagName", val: id });
+      filterData.push({ name: "inquiryTagName", val: inquiryTag });
     }
-    this.setState({ filterData });
+    this.setState({ inquiryTagList, inquiryTag, filterData });
     this.props.onChange(filterData);
   };
 
   handleInquiryTagDelete = id => {
-    console.log(id);
+    const filterData = this.state.filterData;
+    console.log("filterData", filterData);
+    const { inquiryTagList, inquiryTag } = this.state;
+    const updatedInquiryTagList = inquiryTagList.filter(
+      tag => tag.id !== inquiryTagList[id].id
+    );
+    const updatedInquiryTags = inquiryTag.filter(
+      tag => tag !== inquiryTagList[id].id
+    );
+    const indexOf = filterData.findIndex(f => {
+      return f.name === "inquiryTagName";
+    });
+    if (indexOf === -1) {
+      filterData.push({
+        name: "inquiryTagName",
+        val: updatedInquiryTags
+      });
+    } else {
+      filterData.splice(indexOf, 1);
+      filterData.push({
+        name: "inquiryTagName",
+        val: updatedInquiryTags
+      });
+    }
+    if (updatedInquiryTags.length === 0) {
+      filterData.splice(indexOf, 1);
+    }
+    this.setState({
+      inquiryTagList: updatedInquiryTagList,
+      inquiryTag: updatedInquiryTags,
+      filterData
+    });
+    this.props.onChange(filterData);
   };
 
   handleLocation = location => {
@@ -155,6 +229,24 @@ class LeftSidebarFilter extends Component {
                   handleSelect={this.handleSelectList}
                 />
               )}
+              {filter.type === "select-radius" && (
+                <SelectRadius
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-target-group" && (
+                <SelectTargetGroup
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
               {filter.type === "select-inquiry" && (
                 <SelectInquiry
                   foruse={filter.name}
@@ -185,6 +277,7 @@ class LeftSidebarFilter extends Component {
                   foruse={filter.name}
                   name={filter.name}
                   onChange={this.handleOnChange}
+                  value={this.state.offerTagList}
                   handleOfferTagChange={this.handleOfferTagChange}
                   handleOfferTagDelete={this.handleOfferTagDelete}
                 />
@@ -194,6 +287,7 @@ class LeftSidebarFilter extends Component {
                   foruse={filter.name}
                   name={filter.name}
                   onChange={this.handleOnChange}
+                  value={this.state.inquiryTagList}
                   handleInquiryTagChange={this.handleInquiryTagChange}
                   handleInquiryTagDelete={this.handleInquiryTagDelete}
                 />

@@ -281,7 +281,7 @@
     },
     "radius": {
       "name": "Radius",
-      "type": "select"
+      "type": "select-radius"
     },
     "category": {
       "name": "Category",
@@ -297,7 +297,7 @@
     },
     "target_group": {
       "name": "Target group",
-      "type": "select"
+      "type": "select-target-group"
     },
     "offer": {
       "name": "Offer",

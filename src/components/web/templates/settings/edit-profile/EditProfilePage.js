@@ -103,8 +103,8 @@ class EditProfile extends Component {
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    form.location.lat = location.lat
-    form.location.lng = location.lng
+    form.location.lat = location.lat;
+    form.location.lng = location.lng;
     form.location.address = address;
     this.setState({ form });
   };
@@ -126,29 +126,39 @@ class EditProfile extends Component {
       const userData = this.props.userDataByUsername.user.data;
       this.setState({
         form: {
-          profileUrl: userData.profileUrl? userData.profileUrl : "",
-          username: userData.username? userData.username : "",
-          email: userData.email? userData.email : "",
-          name_company: userData.name? userData.name : "",
+          profileUrl: userData.profileUrl ? userData.profileUrl : "",
+          username: userData.username ? userData.username : "",
+          email: userData.email ? userData.email : "",
+          name_company: userData.name ? userData.name : "",
           location: {
-            lat: userData.location? userData.location.lat: "",
-            lng: userData.location? userData.location.lng : "",
-            address: userData.location? userData.location.address : "",
+            lat: userData.location ? userData.location.lat : "",
+            lng: userData.location ? userData.location.lng : "",
+            address: userData.location ? userData.location.address : ""
           },
           birthDate: {
-            day: userData.birthDate? moment.unix(userData.birthDate).format("DD") : "",
-            mon: userData.birthDate? moment.unix(userData.birthDate).format("MM") : "",
-            year: userData.birthDate? moment.unix(userData.birthDate).format("YYYY"): ""
+            day: userData.birthDate
+              ? moment.unix(userData.birthDate).format("DD")
+              : "",
+            mon: userData.birthDate
+              ? moment.unix(userData.birthDate).format("MM")
+              : "",
+            year: userData.birthDate
+              ? moment.unix(userData.birthDate).format("YYYY")
+              : ""
           },
-          gender: userData.gender? userData.gender : gender.male,
-          category: userData.category? userData.category : "",
-          phoneNumber: userData.phoneNumber? userData.phoneNumber : "",
-          website: userData.website? userData.website : "",
-          profile_description: userData.profileDescription? userData.profileDescription : "",
-          offer_tag: userData.offerTag? userData.offerTag : [],
-          inquiry_tag: userData.inquiryTag? userData.inquiryTag : [],
-          offerTagList: userData.offerTagList.length === 0? userData.offerTagList : [],
-          inquiryTagList: userData.inquiryTagList.length === 0? userData.inquiryTagList : []
+          gender: userData.gender ? userData.gender : gender.male,
+          category: userData.category ? userData.category : "",
+          phoneNumber: userData.phoneNumber ? userData.phoneNumber : "",
+          website: userData.website ? userData.website : "",
+          profile_description: userData.profileDescription
+            ? userData.profileDescription
+            : "",
+          offer_tag: userData.offerTag ? userData.offerTag : [],
+          inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
+          offerTagList:
+            userData.offerTagList.length === 0 ? userData.offerTagList : [],
+          inquiryTagList:
+            userData.inquiryTagList.length === 0 ? userData.inquiryTagList : []
         }
       });
     }
