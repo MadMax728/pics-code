@@ -19,8 +19,10 @@ export const getOffer = (payload, header = {}) =>
 export const getInquiry = (payload, header = {}) =>
   api(baseUrl, header).get("/inquiries", payload);
 
-
 // Get Daily Budget
 export const getDailyBudget = (payload, header = {}) =>
   api(baseUrl, header).get("/dailybudgets", payload);
-  
+
+// Get Radius
+export const getRadius = (payload, header = {}) =>
+  api(baseUrl, header).get("/radius", payload);

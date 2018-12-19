@@ -153,3 +153,59 @@ export const getDailyBudget = params => {
     );
   };
 };
+
+// Get Radius
+const getRadiusStarted = () => ({
+  type: types.GET_RADIUS_STARTED
+});
+
+const getRadiusSucceeded = data => ({
+  type: types.GET_RADIUS_SUCCEEDED,
+  payload: data
+});
+
+const getRadiusFailed = error => ({
+  type: types.GET_RADIUS_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getRadius = params => {
+  return dispatch => {
+    dispatch(getRadiusStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+    return selectService.getRadius(params, header).then(
+      res => {
+        if (res.data && res.data.data)
+          dispatch(getRadiusSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(getRadiusFailed(error.response));
+        logger.error({ description: error.toString(), fatal: true });
+      }
+    );
+  };
+};
+
+// Get Target Group
+const getTargetGroupStarted = () => ({
+  type: types.GET_TARGET_GROUP_STARTED
+});
+
+const getTargetGroupSucceeded = data => ({
+  type: types.GET_TARGET_GROUP_SUCCEEDED,
+  payload: data
+});
+
+const getTargetGroupFailed = error => ({
+  type: types.GET_TARGET_GROUP_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getTargetGroup = data => {
+  return dispatch => {
+    dispatch(getTargetGroupSucceeded(data));
+  };
+};
