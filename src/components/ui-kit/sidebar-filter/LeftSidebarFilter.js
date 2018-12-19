@@ -19,6 +19,7 @@ class LeftSidebarFilter extends Component {
   }
 
   handleOnChange = filter => {
+    console.log(filter);
     const filterData = this.state.filterData;
     console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {

@@ -4,6 +4,7 @@ import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { getCategory } from "../../../actions";
 import { connect } from "react-redux";
+import * as enumerations from "../../../lib/constants/enumerations";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -69,7 +70,30 @@ const relevanceItems = [
   }
 ];
 
-const targetGroupOptions = staticData;
+const targetGroupData = [
+  {
+    name: enumerations.target_group.company,
+    className: "",
+    value: enumerations.target_group.company
+  },
+  {
+    name: enumerations.target_group.female_and_male,
+    className: "",
+    value: enumerations.target_group.female_and_male
+  },
+  {
+    name: enumerations.target_group.female,
+    className: "",
+    value: enumerations.target_group.female
+  },
+  {
+    name: enumerations.target_group.male,
+    className: "",
+    value: enumerations.target_group.male
+  }
+];
+
+const targetGroupOptions = targetGroupData;
 
 const radiusItems = staticData;
 
