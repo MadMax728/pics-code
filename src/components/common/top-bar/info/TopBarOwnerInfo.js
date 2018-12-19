@@ -6,12 +6,48 @@ import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 import { connect } from "react-redux";
 import { getUser } from "../../../../actions";
-
+const storage = Auth.extractJwtFromStorage();
+let userInfo = null;
+if (storage) {
+  userInfo = JSON.parse(storage.userInfo);
+}
 class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: {
+        username: userInfo.username,
+        private: true,
+        settings: true,
+        more: false,
+        userProfile: userInfo.profileUrl,
+        slots: [
+          {
+            name: Translations.top_bar_info.subscriber,
+            val: 0,
+            className: "col-sm-4 slot_one no-padding",
+            btnActiveClassName: "filled_button",
+            btnText: Translations.top_bar_info.upload,
+            handeleEvent: this.handeleUpload
+          },
+          {
+            name: Translations.top_bar_info.subscribed,
+            val: 0,
+            className: "col-sm-4 slot_two no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_campaign,
+            handeleEvent: this.handeleCreateCampaign
+          },
+          {
+            name: Translations.top_bar_info.posts,
+            val: 0,
+            className: "col-sm-4 slot_three no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_ad,
+            handeleEvent: this.handeleCreateAd
+          }
+        ]
+      }
     };
   }
 
@@ -36,12 +72,6 @@ class TopBarOwnerInfo extends Component {
   };
 
   componentDidMount() {
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-
     if (userInfo) {
       const data = {
         username: userInfo.username

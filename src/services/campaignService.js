@@ -43,3 +43,7 @@ export const getCampaignDetails = (payload, header = {}) =>
 // Favourite Campaigns API
 export const getFavouriteCampaigns = (payload, header = {}) =>
   api(baseUrl, header).get("/likes/get-favorite-campaign");
+
+// Create Campaign
+export const createCampaign= (payload, header = {}) =>
+  api(baseUrl, header).post("/campaigns", payload);

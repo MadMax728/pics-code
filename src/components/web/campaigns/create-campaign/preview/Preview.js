@@ -34,7 +34,14 @@ class Preview extends Component {
           <div className="information-wrapper overflow-y">
             <div className="info-inner-wrapper">
               {
-                form.image && <img src={form.image} alt={"information"} />
+                form.fileType && form.image && <img src={form.image} alt={"information"} />
+              }
+              {
+                !form.fileType && form.video && 
+                  <video controls>
+                    <track kind="captions" />
+                    <source src={form.video} type={form.file.type} />
+                  </video>
               }
               <div className="text paddTop20">
                 {form.description && form.description}
@@ -73,7 +80,7 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Start: </span>
                         <span className="secondary_title">
-                          {form.start_date && form.start_date.format("MM.DD.YYYY")}
+                          {form.startDate && form.startDate.format("MM.DD.YYYY")}
                         </span>
                       </div>
                       <div className="info_wrapper">
@@ -85,7 +92,7 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Target group: </span>
                         <span className="secondary_title">
-                          {form.target_group}
+                          {form.targetGroup}
                         </span>
                       </div>
                     </div>
@@ -93,12 +100,12 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">End: </span>
                         <span className="secondary_title">
-                          {form.end_date.format("MM.DD.YYYY")}
+                          {form.endDate.format("MM.DD.YYYY")}
                         </span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Type: </span>
-                        <span className="secondary_title">{form.type}</span>
+                        <span className="secondary_title">{form.typeContent}</span>
                       </div>
                     </div>                    
                   </div>

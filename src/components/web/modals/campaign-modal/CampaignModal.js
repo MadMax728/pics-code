@@ -12,6 +12,10 @@ import moment from "moment";
 import { modalType, typeContent, target_group, procedure } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 
+import { connect } from "react-redux";
+import { createCampaign, uploadMedia } from "../../../../actions";
+
+
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
 if (storage) {
@@ -36,7 +40,7 @@ const initialState = {
         procedure: procedure.public,
         typeContent: typeContent.image,
         targetGroup: target_group.company,
-        offer: "",
+        offers: "",
         offerTag: [],
         offerTagList: [],
         inquiry: "",
@@ -56,10 +60,7 @@ const initialState = {
           streetNumber: ""
         },
         voucher: "",
-        photo: "",
-        photoFile: null,
         image: null,
-        actual_img: "",
         filetype: true,
         file: null,
         video: null,
@@ -87,11 +88,10 @@ class CampaignModal extends Component {
   };
 
   handleCreatorSubmit = () => {
-    console.log(this.state.form);
-    
+    this.handleSubmit();
   };
 
-  handleContentChange(text) {
+  handleContentChange = (text) => {
     const { form } = this.state;
     form.description = text
     this.setState({ form });
@@ -103,8 +103,39 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
+  handleSubmit = () => {
+    const { form } = this.state;
+    const Data = new FormData();
+    if(form.filetype) {
+      Data.append("image", form.file);
+    }
+    else {
+      Data.append("video", form.file);
+    }
+    Data.append("postType", "campaign");
+
+    this.props.uploadMedia(Data, form.filetype).then(() => {
+      if(this.props.mediaData && this.props.mediaData.media)
+      {
+        form.typeId=this.props.mediaData.media.id;
+        form.file= null;
+        form.image= null;
+        form.video= null;
+        if(!form.maximumExpenses){
+          form.maximumExpenses = form.budget
+        }
+        this.setState({form});
+        this.props.createCampaign(form).then(()=> {
+          if(this.props.campaignData && this.props.campaignData.campaign && this.props.campaignData.campaign.id){
+            this.handleModalInfoShow();
+          }
+        })
+      }
+    });
+  }
+
   handleCompanySubmit = () => {
-    console.log(this.state.form);
+    this.handleSubmit();
   };
 
   handleCompanyChangeField = event => {
@@ -199,8 +230,8 @@ class CampaignModal extends Component {
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    form.location.lat = location.lat
-    form.location.lng = location.lng
+    form.location.latitude = location.lat
+    form.location.longitude = location.lng
     form.location.address = address;
     this.setState({ form });
   };
@@ -363,7 +394,25 @@ CampaignModal.propTypes = {
   modalShow: PropTypes.bool.isRequired,
   handleModalHide: PropTypes.func.isRequired,
   isFor: PropTypes.bool.isRequired,
-  handleModalInfoMsgShow: PropTypes.func
+  handleModalInfoMsgShow: PropTypes.func,
+  createCampaign: PropTypes.func.isRequired,
+  uploadMedia: PropTypes.func.isRequired,
+  mediaData: PropTypes.any,
+  campaignData: PropTypes.any
 };
 
-export default CampaignModal;
+
+const mapStateToProps = state => ({
+  mediaData: state.mediaData,
+  campaignData: state.campaignData
+});
+
+const mapDispatchToProps = {
+  createCampaign, 
+  uploadMedia
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CampaignModal);

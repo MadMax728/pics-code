@@ -9,7 +9,39 @@ class TopBarOtherInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      items: {
+        username: this.props.match.username,
+        private: true,
+        more: true,
+        isSubscribe: true,
+        userProfile: this.props.match.profileUrl,
+        slots: [
+          {
+            name: Translations.top_bar_info.subscriber,
+            val: 0,
+            className: "col-sm-4 slot_one no-padding",
+            btnActiveClassName: "filled_button",
+            btnText: Translations.top_bar_info.subscribe,
+            handeleEvent: this.handeleSubscribe
+          },
+          {
+            name: Translations.top_bar_info.subscribed,
+            val: 0,
+            className: "col-sm-4 slot_two no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.message,
+            handeleEvent: this.handeleMessage
+          },
+          {
+            name: Translations.top_bar_info.posts,
+            val: 0,
+            className: "col-sm-4 slot_three no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.like_you,
+            handeleEvent: this.handeleLikeYou
+          }
+        ]
+      }
     };
   }
 
