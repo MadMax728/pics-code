@@ -7,7 +7,8 @@ import {
   SelectOffer,
   SelectInquiry,
   OfferTags,
-  InquiryTags
+  InquiryTags,
+  SelectRadius
 } from "../../common";
 
 class LeftSidebarFilter extends Component {
@@ -149,6 +150,15 @@ class LeftSidebarFilter extends Component {
               )}
               {filter.type === "select-category" && (
                 <SelectCategory
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-radius" && (
+                <SelectRadius
                   foruse={filter.name}
                   name={filter.name}
                   options={filter.items}

@@ -47,7 +47,7 @@ const MediaCardFooter = ({
       </div>
       <div className="show_more_options">
         <ThreeDots
-          id="report"
+          id={`report-${item.id}`}
           role="button"
           dataTip="tooltip"
           dataClass="tooltip-wrapr"

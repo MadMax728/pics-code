@@ -37,7 +37,9 @@ class CreateCompanyCampaign extends Component {
       handleInquiryTagChange,
       handleInquiryTagDelete,
       handleSelect,
-      handleVideo
+      handleVideo,
+      userInfo,
+      handleAddress
     } = this.props;
 
     return (
@@ -61,6 +63,7 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
+              userInfo={userInfo}
               handleEditImage={handleEditImage}
               handleLocation={handleLocation}
               handleActualImg={handleActualImg}
@@ -93,6 +96,7 @@ class CreateCompanyCampaign extends Component {
         {!isPreview &&
           (stepIndex === 3 && (
             <PaymentStepOne
+              handleAddress={handleAddress}
               forThat={forThat}
               form={form}
               handleChangeField={handleChangeField}
@@ -135,7 +139,9 @@ CreateCompanyCampaign.propTypes = {
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleVideo: PropTypes.func.isRequired
+  handleVideo: PropTypes.func.isRequired,
+  handleAddress: PropTypes.func.isRequired,
+  userInfo: PropTypes.object
 };
 
 export default CreateCompanyCampaign;

@@ -228,7 +228,8 @@ class DashboardFilter extends Component {
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.selectData
+  categoryList: state.selectData,
+  radiusList: state.selectData
 });
 
 const mapDispatchToProps = {

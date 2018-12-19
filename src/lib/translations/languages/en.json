@@ -115,7 +115,7 @@
     "male_female": "Female & Male",
     "company": "Company",
     "target_group": "Target group",
-    "image": "image",
+    "image": "Image",
     "video": "Video",
     "type": "Type",
     "anonymous": "Anonymous",
@@ -282,7 +282,7 @@
     },
     "radius": {
       "name": "Radius",
-      "type": "select"
+      "type": "select-radius"
     },
     "category": {
       "name": "Category",
@@ -328,6 +328,13 @@
       "name": "Age",
       "type": "select"
     }
+  },
+
+  "target_group": {
+    "company": "Company",
+    "female_and_male": "Female and Male",
+    "female": "Female",
+    "male": "Male"
   },
 
   "message_module": {

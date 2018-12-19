@@ -44,7 +44,11 @@ class OfferTags extends Component {
         offerTagName: tag.text
       }
       this.props.addOfferTag(tagName).then(()=> {
-        this.props.handleOfferTagChange(this.props.tags.addedOfferTags.id, this.props.tags.addedOfferTags)
+        if(this.props.tags && this.props.tags.addedOfferTags) {
+          console.log(this.props.tags.addedOfferTags);
+          
+          this.props.handleOfferTagChange(this.props.tags.addedOfferTags.id, this.props.tags.addedOfferTags)
+        }
       })
     } else {
       this.props.handleOfferTagChange(tag.id, tag);

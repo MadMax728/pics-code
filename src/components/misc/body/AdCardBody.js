@@ -8,19 +8,22 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
   return (
     <div className="feed_content">
       <div className="feed_image">
-        {ad.mediaType &&
-          ad.mediaType === enumerations.mediaTypes.video && (
-            <VideoItem id={ad.id} item={ad.video} />
+      {ad.typeContent &&
+        ad.typeContent.toLowerCase() ===
+          enumerations.mediaTypes.video && (
+            <VideoItem id={ad.id} item={ad.mediaUrl} />
           )}
-        {(!ad.mediaType ||
-          (ad.mediaType && ad.mediaType === enumerations.mediaTypes.image)) && (
+        {(!ad.typeContent ||
+        (ad.typeContent &&
+          ad.typeContent.toLowerCase() ===
+            enumerations.mediaTypes.image)) && (
           <ImageItem
-            item={ad.image}
+            item={ad.mediaUrl}
             isOtherCardExist={!isDescription && isInformation}
           />
         )}
         <a
-          href={ad.insert_link}
+          href={ad.insertLink}
           target="_blank"
           className="more-strip zIndex0"
           rel="noopener noreferrer"
@@ -30,11 +33,15 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
       </div>
       {ad &&
         isDescription &&
-        ad.desc && (
+        ad.description && (
           <div className="feed_description padding-10">
-            <div className="normal_title">{ad.title}</div>
             <span className="secondary_title">
-              <ReadMore text={ad.desc} min={50} ideal={50} max={50} />
+              <ReadMore
+                text={ad.description}
+                min={50}
+                ideal={50}
+                max={50}
+              />
             </span>
           </div>
         )}

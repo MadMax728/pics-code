@@ -21,7 +21,7 @@ class CommentCard extends Component {
       typeOfContent: this.props.typeContent,
       minRange : 0,
       maxRange : 2,
-      slicedCommentsData : '',
+      slicedCommentsData : null,
       form: {
         id: null,
         comment: ""
@@ -48,30 +48,33 @@ class CommentCard extends Component {
 
   handleReportPost = () => {};
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const commentData = (this.state.comments).slice(this.state.minRange, this.state.maxRange);
-    this.setState({'slicedCommentsData' :  commentData, 'maxRange' : 2})
+    this.setState({slicedCommentsData :  commentData, maxRange : 2})
   }
 
   addComment = comment => {
-    const { comments, itemId, typeOfContent } = this.state;
+    const { comments, itemId, typeOfContent, slicedCommentsData } = this.state;
     const data = {
       comment,
       typeOfContent,
       typeId: itemId
     };
     this.props.addComment(data).then(() => {
-      const commentData = {
-        id: this.props.comment.id,
-        comment: this.props.comment.comment,
-        username: this.props.comment.userName,
-        userId: this.props.comment.userId,
-        profileImage: this.props.comment.profileImage,
-        date: this.props.comment.createdAt
-      };
-      comments.unshift(commentData);
-      this.setState({ comments });
-      this.props.handleComment(true);
+      if(this.props.comment)  {
+        const commentData = {
+          id: this.props.comment.id,
+          comment: this.props.comment.comment,
+          username: this.props.comment.userName,
+          userId: this.props.comment.userId,
+          profileImage: this.props.comment.profileImage,
+          date: this.props.comment.createdAt
+        };
+        comments.unshift(commentData);
+        slicedCommentsData.unshift(commentData);
+        this.setState({ comments, slicedCommentsData });
+        this.props.handleComment(true);
+      }
     });
   };
 
@@ -90,12 +93,12 @@ class CommentCard extends Component {
   handleViewComment = (e) => {
     const maxRangeValue =  parseInt(this.state.maxRange) + parseInt(e.target.id);
     const commentData = (this.state.comments).slice(0, maxRangeValue);
-    this.setState({'slicedCommentsData' :  commentData, 'maxRange' : maxRangeValue})
+    this.setState({slicedCommentsData :  commentData, maxRange : maxRangeValue})
   };
 
   handleDelete = e => {
     const id = e.target.id;
-    const comments = this.state.comments;
+    const { comments, slicedCommentsData} = this.state;
     const indexOf = comments.findIndex(c => {
       return c.id === id;
     });
@@ -106,7 +109,8 @@ class CommentCard extends Component {
       };
       this.props.deleteComment(data).then(() => {
         comments.splice(indexOf, 1);
-        this.setState({ comments });
+        slicedCommentsData.splice(indexOf, 1);
+        this.setState({ comments, slicedCommentsData });
         this.props.handleComment(false);
       });
     }
@@ -253,8 +257,8 @@ class CommentCard extends Component {
   };
 
   render() {
-    const { item, form, comments } = this.state;
-    const { comment, isLoading, isReport } = this.props;
+    const { item, form } = this.state;
+    const { isLoading, isReport } = this.props;
     return (
       <div className={isReport? "feed_wrapper" : "feed-comment"} id={item.id}>
         {
@@ -293,9 +297,9 @@ class CommentCard extends Component {
           </div>
         }
 
-        {isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
+        {isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData && this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
         
-        {!isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData.map(this.renderComment)}
+        {!isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData && this.state.slicedCommentsData.map(this.renderComment)}
 
         {(!isReport && this.props.totalCommentsCount > this.state.maxRange) && (
           <div className="view-more-comments view-more-link"  id="7" onClick={this.handleViewComment}>

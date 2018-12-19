@@ -40,6 +40,11 @@ export const mediaTypes = {
   image: "image"
 };
 
+export const typeContent = {
+  video: "Video",
+  image: "Image"
+};
+
 export const procedure = {
   public: "public",
   anonymous: "anonymous"

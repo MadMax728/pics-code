@@ -31,5 +31,10 @@ export { HashTag } from "./hash-tag";
 export { HashTagUsername } from "./hash-tag-username";
 export { RenderToolTips } from "./render-tool-tips";
 export { Tags, InquiryTags, OfferTags } from "./tags";
-export { SelectCategory, SelectInquiry, SelectDailyBudget, SelectOffer } from "./selects";
-
+export {
+  SelectCategory,
+  SelectInquiry,
+  SelectDailyBudget,
+  SelectOffer,
+  SelectRadius
+} from "./selects";

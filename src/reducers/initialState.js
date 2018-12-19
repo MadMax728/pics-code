@@ -116,6 +116,7 @@ const initialState = {
     offers: null,
     inquirys: null,
     dailyBudgets: null,
+    radius_data: null,
     isLoading: false,
     error: false
   },
