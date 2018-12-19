@@ -8,7 +8,8 @@ import {
   SelectInquiry,
   OfferTags,
   InquiryTags,
-  SelectRadius
+  SelectRadius,
+  SelectTargetGroup
 } from "../../common";
 
 class LeftSidebarFilter extends Component {
@@ -70,22 +71,45 @@ class LeftSidebarFilter extends Component {
     const indexOf = filterData.findIndex(f => {
       return f.name === "offerTagName";
     });
+
     if (indexOf === -1) {
-      filterData.push({ name: "offerTagName", val: id });
+      filterData.push({ name: "offerTagName", val: offerTag });
     } else {
       filterData.splice(indexOf, 1);
-      filterData.push({ name: "offerTagName", val: id });
+      filterData.push({ name: "offerTagName", val: offerTag });
     }
     this.setState({ offerTagList, offerTag, filterData });
     this.props.onChange(filterData);
   };
 
   handleOfferTagDelete = id => {
+    const filterData = this.state.filterData;
+    console.log("filterData", filterData);
     const { offerTagList, offerTag } = this.state;
-    this.setState({
-      offerTag: offerTag.filter(tag => tag !== offerTagList[id].id),
-      offerTagList: offerTagList.filter(tag => tag.id !== offerTagList[id].id)
+    const updatedOfferTagList = offerTagList.filter(
+      tag => tag.id !== offerTagList[id].id
+    );
+    const updatedOfferTags = offerTag.filter(
+      tag => tag !== offerTagList[id].id
+    );
+    const indexOf = filterData.findIndex(f => {
+      return f.name === "offerTagName";
     });
+    if (indexOf === -1) {
+      filterData.push({ name: "offerTagName", val: updatedOfferTags });
+    } else {
+      filterData.splice(indexOf, 1);
+      filterData.push({ name: "offerTagName", val: updatedOfferTags });
+    }
+    if (updatedOfferTags.length === 0) {
+      filterData.splice(indexOf, 1);
+    }
+    this.setState({
+      offerTagList: updatedOfferTagList,
+      offerTag: updatedOfferTags,
+      filterData
+    });
+    this.props.onChange(filterData);
   };
 
   handleInquiryTagChange = (id, tag) => {
@@ -99,23 +123,49 @@ class LeftSidebarFilter extends Component {
       return f.name === "inquiryTagName";
     });
     if (indexOf === -1) {
-      filterData.push({ name: "inquiryTagName", val: id });
+      filterData.push({ name: "inquiryTagName", val: inquiryTag });
     } else {
       filterData.splice(indexOf, 1);
-      filterData.push({ name: "inquiryTagName", val: id });
+      filterData.push({ name: "inquiryTagName", val: inquiryTag });
     }
     this.setState({ inquiryTagList, inquiryTag, filterData });
     this.props.onChange(filterData);
   };
 
   handleInquiryTagDelete = id => {
+    const filterData = this.state.filterData;
+    console.log("filterData", filterData);
     const { inquiryTagList, inquiryTag } = this.state;
-    this.setState({
-      inquiryTag: inquiryTag.filter(tag => tag !== inquiryTagList[id].id),
-      inquiryTagList: inquiryTagList.filter(
-        tag => tag.id !== inquiryTagList[id].id
-      )
+    const updatedInquiryTagList = inquiryTagList.filter(
+      tag => tag.id !== inquiryTagList[id].id
+    );
+    const updatedInquiryTags = inquiryTag.filter(
+      tag => tag !== inquiryTagList[id].id
+    );
+    const indexOf = filterData.findIndex(f => {
+      return f.name === "inquiryTagName";
     });
+    if (indexOf === -1) {
+      filterData.push({
+        name: "inquiryTagName",
+        val: updatedInquiryTags
+      });
+    } else {
+      filterData.splice(indexOf, 1);
+      filterData.push({
+        name: "inquiryTagName",
+        val: updatedInquiryTags
+      });
+    }
+    if (updatedInquiryTags.length === 0) {
+      filterData.splice(indexOf, 1);
+    }
+    this.setState({
+      inquiryTagList: updatedInquiryTagList,
+      inquiryTag: updatedInquiryTags,
+      filterData
+    });
+    this.props.onChange(filterData);
   };
 
   handleLocation = location => {
@@ -181,6 +231,15 @@ class LeftSidebarFilter extends Component {
               )}
               {filter.type === "select-radius" && (
                 <SelectRadius
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-target-group" && (
+                <SelectTargetGroup
                   foruse={filter.name}
                   name={filter.name}
                   options={filter.items}

@@ -25,7 +25,7 @@ class SelectRadius extends Component {
     });
   };
 
-  handleCategory = event => {
+  handleRadius = event => {
     this.props.handleSelect("radius", event.target.value);
   };
 
@@ -37,8 +37,8 @@ class SelectRadius extends Component {
       <select
         value={value}
         className={className}
-        onChange={this.handleCategory}
-        onBlur={this.handleCategory}
+        onChange={this.handleRadius}
+        onBlur={this.handleRadius}
         options={radiusList}
       >
         <option value="">{"Select Radius"}</option>

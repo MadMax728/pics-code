@@ -103,6 +103,26 @@ const selectReducer = (state = initialState.selectData, action) => {
         error: action.payload
       };
 
+    // Get Target Group
+    case types.GET_TARGET_GROUP_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.GET_TARGET_GROUP_SUCCEEDED:
+      return {
+        ...state,
+        target_group_data: action.payload,
+        isLoading: false
+      };
+    case types.GET_TARGET_GROUP_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

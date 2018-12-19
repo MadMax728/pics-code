@@ -117,6 +117,7 @@ const initialState = {
     inquirys: null,
     dailyBudgets: null,
     radius_data: null,
+    target_group_data: null,
     isLoading: false,
     error: false
   },

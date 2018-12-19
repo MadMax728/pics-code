@@ -187,3 +187,25 @@ export const getRadius = params => {
     );
   };
 };
+
+// Get Target Group
+const getTargetGroupStarted = () => ({
+  type: types.GET_TARGET_GROUP_STARTED
+});
+
+const getTargetGroupSucceeded = data => ({
+  type: types.GET_TARGET_GROUP_SUCCEEDED,
+  payload: data
+});
+
+const getTargetGroupFailed = error => ({
+  type: types.GET_TARGET_GROUP_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getTargetGroup = data => {
+  return dispatch => {
+    dispatch(getTargetGroupSucceeded(data));
+  };
+};
