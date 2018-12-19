@@ -90,7 +90,6 @@ export const getCampaignDetails = provider => {
 
 // Get Favourite Campaigns
 
-
 const getFavouriteCampaignsStarted = () => ({
   type: types.GET_FAVOURITE_CAMPAIGNS_STARTED
 });
@@ -122,6 +121,50 @@ export const getFavouriteCampaigns = (prop, provider) => {
       
         dispatch(
           getFavouriteCampaignsFailed(error.response)
+        );
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+
+// Create Campaign
+
+const createCampaignStarted = () => ({
+  type: types.CREATE_CAMPAIGN_STARTED
+});
+
+const createCampaignSucceeded = data => ({
+  type: types.CREATE_CAMPAIGN_SUCCEEDED,
+  payload: data
+});
+
+const createCampaignFailed = error => ({
+  type: types.CREATE_CAMPAIGN_FAILED,
+  payload: error,
+  error: true
+});
+
+export const createCampaign = (provider) => {
+  return dispatch => {
+    dispatch(createCampaignStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return campaignService.createCampaign(provider, header).then(
+      res => {
+        dispatch(createCampaignSucceeded(res.data.data));
+      },
+      error => {
+      
+        dispatch(
+          createCampaignFailed(error.response)
         );
         logger.error({
           description: error.toString(),

@@ -26,7 +26,7 @@ class SelectOffer extends Component {
   }
   
   handleOffer = (event) => {
-    this.props.handleSelect("offer",event.target.value);
+    this.props.handleSelect("offers",event.target.value);
   }
   
   render() {

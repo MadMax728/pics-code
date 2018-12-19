@@ -36,7 +36,7 @@ class PaymentStepOne extends Component {
               />
               <input
                 type="text"
-                name="number"
+                name="streetNumber"
                 value={form.address.streetNumber}
                 onChange={handleAddress}
               />

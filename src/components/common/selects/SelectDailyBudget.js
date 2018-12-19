@@ -26,7 +26,7 @@ class SelectDailyBudget extends Component {
   }
   
   handleOffer = (event) => {
-    this.props.handleSelect("daily_budget", event.target.value);
+    this.props.handleSelect("budget", event.target.value);
   }
   
   render() {

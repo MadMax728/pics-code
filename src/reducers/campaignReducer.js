@@ -62,6 +62,27 @@ const campaignReducer = (state = initialState.campaignData, action) => {
           isLoading: false,
           error: action.payload
         };
+
+      // Create Campaign
+      case types.CREATE_CAMPAIGN_STARTED:
+        return {
+          ...state,
+          isLoading: true,
+          error: null
+        };
+      case types.CREATE_CAMPAIGN_SUCCEEDED:
+        return {
+          ...state,
+          campaign: action.payload,
+          isLoading: false
+        };
+      case types.CREATE_CAMPAIGN_FAILED:
+        return {
+          ...state,
+          isLoading: false,
+          error: action.payload
+        };
+
     default:
       return state;
   }

@@ -220,7 +220,7 @@ class StepOne extends Component {
                 {Translations.create_campaigns.offer}
               </label>
                 <SelectOffer 
-                  value={form.offer? form.offer : ""}
+                  value={form.offers? form.offers : ""}
                   className=""
                   handleSelect={handleSelect}
                 />
