@@ -47,7 +47,7 @@ const initialState = {
   },
   adData: {
     ads: null,
-    ad: [],
+    ad: null,
     isLoading: false,
     error: false
   },
@@ -114,10 +114,11 @@ const initialState = {
   selectData: {
     categories: null,
     offers: null,
-    inquirys: null,
+    inquiries: null,
     dailyBudgets: null,
-    radius_data: null,
-    target_group_data: null,
+    radius: null,
+    targetGroups: null,
+    callToActions: null,
     isLoading: false,
     error: false
   },

@@ -10,19 +10,19 @@ class StepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start_date: moment(),
-      end_date: moment()
+      startDate: moment(),
+      endDate: moment()
     };
   }
 
   handleStartDateChange = date => {
-    this.setState({ start_date: date });
-    this.props.handleDate(date, "start_date");
+    this.setState({ startDate: date });
+    this.props.handleDate(date, "startDate");
   };
 
   handleEndDateChange = date => {
-    this.setState({ end_date: date });
-    this.props.handleDate(date, "end_date");
+    this.setState({ endDate: date });
+    this.props.handleDate(date, "endDate");
   };
 
   render() {
@@ -39,7 +39,7 @@ class StepTwo extends Component {
                 <label htmlFor="Start">{Translations.create_ads.start}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={form.start_date}
+                    selected={form.startDate}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -51,7 +51,7 @@ class StepTwo extends Component {
                 <label htmlFor="End">{Translations.create_ads.end}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={form.end_date}
+                    selected={form.endDate}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -66,7 +66,7 @@ class StepTwo extends Component {
               {Translations.create_ads.define_daily_budget}
             </label>
               <SelectDailyBudget 
-                value={form.daily_budget}
+                value={form.budget? form.budget : ""}
                 className=""
                 handleSelect={handleSelect}
               />

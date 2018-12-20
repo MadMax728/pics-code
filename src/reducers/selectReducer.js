@@ -3,124 +3,33 @@ import initialState from "./initialState";
 
 const selectReducer = (state = initialState.selectData, action) => {
   switch (action.type) {
-    // Get Category
-    case types.GET_CATEGORY_STARTED:
+
+    // Get Select
+    case types.GET_SELECT_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_CATEGORY_SUCCEEDED:
+    case types.GET_SELECT_SUCCEEDED:
       return {
         ...state,
-        categories: action.payload,
+        [action.isFor]: action.payload,
         isLoading: false
       };
-    case types.GET_CATEGORY_FAILED:
+    case types.GET_SELECT_FAILED:
       return {
         ...state,
         isLoading: false,
         error: action.payload
       };
 
-    // Get Offer
-    case types.GET_OFFER_STARTED:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
-    case types.GET_OFFER_SUCCEEDED:
-      return {
-        ...state,
-        offers: action.payload,
-        isLoading: false
-      };
-    case types.GET_OFFER_FAILED:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
-      };
-
-    // Get Inquiry
-    case types.GET_INQUIRY_STARTED:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
-    case types.GET_INQUIRY_SUCCEEDED:
-      return {
-        ...state,
-        inquirys: action.payload,
-        isLoading: false
-      };
-    case types.GET_INQUIRY_FAILED:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
-      };
-
-    // Get Daily Budget
-    case types.GET_DAILY_BUDGET_STARTED:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
-    case types.GET_DAILY_BUDGET_SUCCEEDED:
-      return {
-        ...state,
-        dailyBudgets: action.payload,
-        isLoading: false
-      };
-    case types.GET_DAILY_BUDGET_FAILED:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
-      };
-
-    // Get Radius
-    case types.GET_RADIUS_STARTED:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
-    case types.GET_RADIUS_SUCCEEDED:
-      return {
-        ...state,
-        radius_data: action.payload,
-        isLoading: false
-      };
-    case types.GET_RADIUS_FAILED:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
-      };
-
-    // Get Target Group
-    case types.GET_TARGET_GROUP_STARTED:
-      return {
-        ...state,
-        isLoading: true,
-        error: null
-      };
+    // Static Data,  In future would remove as when require
     case types.GET_TARGET_GROUP_SUCCEEDED:
       return {
         ...state,
-        target_group_data: action.payload,
+        targetGroups: action.payload,
         isLoading: false
-      };
-    case types.GET_TARGET_GROUP_FAILED:
-      return {
-        ...state,
-        isLoading: false,
-        error: action.payload
       };
 
     default:

@@ -140,7 +140,7 @@ class PrivacyPage extends Component {
   hanldeIsPrivate = checkedEvent => {
     const isPrivate = checkedEvent;
     this.setState({ isPrivate });
-    const paramData = { isPrivate: isPrivate };
+    const paramData = { isPrivate };
     this.props.setProfilePrivacy(paramData).then(() => {
       const errors = {};
       if (
@@ -163,7 +163,7 @@ class PrivacyPage extends Component {
   hanldeIsSocialShare = checkedEvent => {
     const isSocialShare = checkedEvent;
     this.setState({ isSocialShare });
-    const paramData = { isSocialShare: isSocialShare };
+    const paramData = { isSocialShare };
     this.props.setSocialShare(paramData).then(() => {
       const errors = {};
       if (

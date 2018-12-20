@@ -3,7 +3,7 @@ import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
-import { SelectCategory, HashTagUsername } from "../../../../../components/common";
+import { SelectCategory, HashTagUsername, SelectRadius, SelectCallToActions } from "../../../../../components/common";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class StepOne extends Component {
@@ -21,7 +21,8 @@ class StepOne extends Component {
       handleActualImg,
       handleScale,
       handleSelect,
-      handleSetState
+      handleSetState,
+      userInfo
     } = this.props;
 
     return (
@@ -29,16 +30,16 @@ class StepOne extends Component {
         <div className="col-sm-6 upload-form">
           <div className="no-padding profile_image">
             <img
-              src={images.image}
+              src={userInfo? userInfo.profileUrl : images.image}
               alt="image1"
               className="img-circle img-responsive"
             />
           </div>
           <div className="user-title">
             <div className="normal_title">
-              {Translations.create_ads.title_of_ads}
+              {form.title? form.title : Translations.create_ads.title_of_ads}
             </div>
-            <div className="secondary_title">User name</div>
+            <div className="secondary_title">{userInfo? userInfo.username : ""}</div>
           </div>
           <form>
             <div className="form-group">
@@ -64,17 +65,11 @@ class StepOne extends Component {
               <label htmlFor="Radius">
                 {Translations.create_ads.add_radius}
               </label>
-              <select
-                name="radius"
-                value={form.radius}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>30</option>
-              </select>
+              <SelectRadius
+                value={form.radius? form.radius : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Category">
@@ -113,10 +108,10 @@ class StepOne extends Component {
                   <input
                     type="radio"
                     id={enumerations.target_group.female_and_male}
-                    name="target_group"
+                    name="targetGroup"
                     value={enumerations.target_group.female_and_male}
                     className="black_button"
-                    defaultChecked={form.target_group === enumerations.target_group.female_and_male}
+                    defaultChecked={form.targetGroup === enumerations.target_group.female_and_male}
                   />
                   <label htmlFor={enumerations.target_group.female_and_male}>
                     {Translations.create_ads.male_female}
@@ -126,10 +121,10 @@ class StepOne extends Component {
                   <input
                     type="radio"
                     id="male"
-                    name="target_group"
+                    name="targetGroup"
                     value="male"
                     className="black_button"
-                    defaultChecked={form.target_group === enumerations.target_group.female}
+                    defaultChecked={form.targetGroup === enumerations.target_group.female}
                   />
                   <label htmlFor="male">{Translations.create_ads.male}</label>
                 </li>
@@ -138,8 +133,8 @@ class StepOne extends Component {
                     type="radio"
                     id={enumerations.target_group.female}
                     value={enumerations.target_group.female}
-                    name="target_group"
-                    defaultChecked={form.target_group === enumerations.target_group.female}
+                    name="targetGroup"
+                    defaultChecked={form.targetGroup === enumerations.target_group.female}
                   />
                   <label htmlFor={enumerations.target_group.female}>
                     {Translations.create_ads.female}
@@ -154,14 +149,11 @@ class StepOne extends Component {
               <label htmlFor="call">
                 {Translations.create_ads.action_button}
               </label>
-              <select
-                name="call_to_action_button"
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_ads.yes}</option>
-                <option>{Translations.create_ads.no}</option>
-              </select>
+                <SelectCallToActions
+                  value={form.callToAction? form.callToAction : ""}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="Insert_link">
@@ -169,22 +161,32 @@ class StepOne extends Component {
               </label>
               <input
                 type="text"
-                value={form.insert_link? form.insert_link : ""}
-                name="insert_link"
+                value={form.insertLink? form.insertLink : ""}
+                name="insertLink"
                 onChange={handleChangeField}
               />
             </div>
           </form>
         </div>
         <div className="col-sm-6 no-padding right-side ads-right-section">
-          <ImageCropper
-            image={form.image}
-            handleEditImage={handleEditImage}
-            isCircle={false}
-            ref={this.imageCrop}
-            handleActualImg={handleActualImg}
-            handleScale={handleScale}
-          />
+          {
+            form.fileType && form.typeContent === enumerations.typeContent.image &&
+            <ImageCropper
+              image={form.image}
+              handleEditImage={handleEditImage}
+              isCircle={false}
+              ref={this.imageCrop}
+              handleActualImg={handleActualImg}
+              handleScale={handleScale}
+            />
+          }
+          {
+            !form.fileType && form.video && form.typeContent === enumerations.typeContent.video &&
+              <video controls>
+                <track kind="captions" />
+                <source src={form.video} type={form.file ? form.file.type : ""} />
+              </video>
+          }
         </div>
       </div>
     );
@@ -200,6 +202,7 @@ StepOne.propTypes = {
   handleScale: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
   handleSetState: PropTypes.func.isRequired,
+  userInfo: PropTypes.any
 };
 
 export default StepOne;

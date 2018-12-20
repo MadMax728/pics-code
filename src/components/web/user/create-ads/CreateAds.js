@@ -26,7 +26,9 @@ class CreateAds extends Component {
       handleActualImg,
       handleScale,
       handleSelect,
-      handleSetState
+      handleSetState,
+      userInfo,
+      handleAddress
     } = this.props;
 
     return (
@@ -41,6 +43,7 @@ class CreateAds extends Component {
             handleScale={handleScale}
             handleSelect={handleSelect}
             handleSetState={handleSetState}
+            userInfo={userInfo}
           />
         )}
         {stepIndex === 1 && (
@@ -55,6 +58,7 @@ class CreateAds extends Component {
             forThat={forThat}
             handleChangeField={handleChangeField}
             form={form}
+            handleAddress={handleAddress}
           />
         )}
         {stepIndex === 3 && (
@@ -85,6 +89,8 @@ CreateAds.propTypes = {
   handleScale: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
   handleSetState: PropTypes.func.isRequired,
+  userInfo: PropTypes.any,
+  handleAddress: PropTypes.func.isRequired
 };
 
 export default CreateAds;

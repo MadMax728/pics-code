@@ -100,7 +100,7 @@ class Register extends Component {
     username = username.toLowerCase();
     username = username.replace(/\s/g, "_");
     const data = {
-      username: username,
+      username,
       email: form.email,
       name: "abc",
       gender: form.gender,
