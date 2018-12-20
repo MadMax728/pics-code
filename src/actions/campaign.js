@@ -33,10 +33,7 @@ export const getCampaigns = (prop, provider) => {
         dispatch(getCampaignsSucceeded(res.data.data));
       },
       error => {
-      
-        dispatch(
-          getCampaignsFailed(error.response)
-        );
+        dispatch(getCampaignsFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -76,9 +73,7 @@ export const getCampaignDetails = provider => {
         // dispatch(getCampaignDetailsSucceeded(campaign_detail));
       },
       error => {
-        dispatch(
-          getCampaignDetailsFailed(error.response)
-        );
+        dispatch(getCampaignDetailsFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -112,16 +107,12 @@ export const getFavouriteCampaigns = (prop, provider) => {
     const header = {
       Authorization: storage.accessToken
     };
-
     return campaignService.getFavouriteCampaigns(provider, header).then(
       res => {
         dispatch(getFavouriteCampaignsSucceeded(res.data.data));
       },
       error => {
-      
-        dispatch(
-          getFavouriteCampaignsFailed(error.response)
-        );
+        dispatch(getFavouriteCampaignsFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -130,7 +121,6 @@ export const getFavouriteCampaigns = (prop, provider) => {
     );
   };
 };
-
 
 // Create Campaign
 
@@ -149,7 +139,7 @@ const createCampaignFailed = error => ({
   error: true
 });
 
-export const createCampaign = (provider) => {
+export const createCampaign = provider => {
   return dispatch => {
     dispatch(createCampaignStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -162,10 +152,7 @@ export const createCampaign = (provider) => {
         dispatch(createCampaignSucceeded(res.data.data));
       },
       error => {
-      
-        dispatch(
-          createCampaignFailed(error.response)
-        );
+        dispatch(createCampaignFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

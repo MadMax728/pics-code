@@ -28,10 +28,10 @@ export const getDashboard = (prop, provider) => {
     };
     return dashboardService[prop](provider, header).then(
       res => {
-          dispatch(getDashboardSucceeded(res.data.data, prop));
+        dispatch(getDashboardSucceeded(res.data.data, prop));
       },
       error => {
-        dispatch(getDashboardFailed(error.response))
+        dispatch(getDashboardFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

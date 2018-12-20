@@ -97,16 +97,7 @@ class PrivacyPage extends Component {
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
       const searchKeyword = nextProps.searchData.searchKeyword;
-      if (searchKeyword) {
-        let userInfo = null;
-        if (storage) {
-          userInfo = JSON.parse(storage.userInfo);
-        }
-        const data = { username: userInfo.username, isSearch: searchKeyword };
-        this.props.getUser(data).then(() => {
-          this.setDataOnLoad();
-        });
-      }
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
     }
   };
 
