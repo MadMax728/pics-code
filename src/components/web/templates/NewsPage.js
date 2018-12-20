@@ -8,7 +8,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsRoot extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("news");
+    this.props.getDashboard("news", "");
   };
 
   componentWillReceiveProps = nextProps => {
@@ -17,7 +17,8 @@ class NewsRoot extends Component {
     ) {
       const searchKeyword = nextProps.searchData.searchKeyword;
       if (searchKeyword) {
-        console.log(searchKeyword);
+        const searchParam = "?isSearch=" + searchKeyword;
+        this.props.getDashboard("news", searchParam);
       }
     }
   };
@@ -27,44 +28,50 @@ class NewsRoot extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.mediaPost && (
-            <MediaCard item={newsFeed} isParticipant={false} isDescription />
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.companyCampaign && (
-            <CampaignCard
-              item={newsFeed}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport={false}
-            />
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.creatorCampaign && (
-            <CampaignCard
-              item={newsFeed}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport={false}
-            />
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.companyParticipantCampaign && (
-            <MediaCard item={newsFeed} isParticipant isDescription/>
-          )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
-            <AdCard
-              item={newsFeed}
-              isDescription
-              isInformation={false}
-              isStatus={false}
-            />
-          )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.mediaPost && (
+              <MediaCard item={newsFeed} isParticipant={false} isDescription />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.companyCampaign && (
+              <CampaignCard
+                item={newsFeed}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.creatorCampaign && (
+              <CampaignCard
+                item={newsFeed}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.companyParticipantCampaign && (
+              <MediaCard item={newsFeed} isParticipant isDescription />
+            )}
+          {newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.ad && (
+              <AdCard
+                item={newsFeed}
+                isDescription
+                isInformation={false}
+                isStatus={false}
+              />
+            )}
         </div>
       );
     });
