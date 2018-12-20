@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getRadius } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
 
 class SelectRadius extends Component {
@@ -16,10 +16,10 @@ class SelectRadius extends Component {
   };
 
   componentDidMount = () => {
-    this.props.getRadius().then(() => {
-      if (this.props.radiusList && this.props.radiusList.radius_data) {
+    this.props.getSelect("radius").then(() => {
+      if (this.props.radiusList && this.props.radiusList) {
         this.setState({
-          radiusList: this.props.radiusList.radius_data
+          radiusList: this.props.radiusList
         });
       }
     });
@@ -53,18 +53,18 @@ class SelectRadius extends Component {
 }
 
 const mapStateToProps = state => ({
-  radiusList: state.selectData
+  radiusList: state.selectData.radius
 });
 
 const mapDispatchToProps = {
-  getRadius
+  getSelect
 };
 
 const propTypes = {
   value: PropTypes.any,
   radiusList: PropTypes.any,
   className: PropTypes.string,
-  getRadius: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

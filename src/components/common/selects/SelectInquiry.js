@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getInquiry } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
 
 class SelectInquiry extends Component {
@@ -16,10 +16,10 @@ class SelectInquiry extends Component {
   }
   
   componentDidMount = () => {
-    this.props.getInquiry().then(() => {
-      if(this.props.inquiryList && this.props.inquiryList.inquirys){
+    this.props.getSelect("inquiries").then(() => {
+      if(this.props.inquiryList){
         this.setState({
-          inquiryList: this.props.inquiryList.inquirys
+          inquiryList: this.props.inquiryList
         });
       }
     });
@@ -53,11 +53,11 @@ class SelectInquiry extends Component {
 }
 
 const mapStateToProps = state => ({
-  inquiryList: state.selectData
+  inquiryList: state.selectData.inquiries
 });
 
 const mapDispatchToProps = {
-  getInquiry
+  getSelect
 };
 
 
@@ -65,7 +65,7 @@ const propTypes = {
   value: PropTypes.any,
   inquiryList: PropTypes.any,
   className: PropTypes.string,
-  getInquiry: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

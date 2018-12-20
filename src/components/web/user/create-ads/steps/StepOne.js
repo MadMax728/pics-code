@@ -3,7 +3,7 @@ import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
-import { SelectCategory, HashTagUsername } from "../../../../../components/common";
+import { SelectCategory, HashTagUsername, SelectRadius, SelectCallToActions } from "../../../../../components/common";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class StepOne extends Component {
@@ -64,17 +64,11 @@ class StepOne extends Component {
               <label htmlFor="Radius">
                 {Translations.create_ads.add_radius}
               </label>
-              <select
-                name="radius"
-                value={form.radius}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>30</option>
-              </select>
+              <SelectRadius
+                value={form.radius? form.radius : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
             </div>
             <div className="form-group">
               <label htmlFor="Category">
@@ -154,14 +148,11 @@ class StepOne extends Component {
               <label htmlFor="call">
                 {Translations.create_ads.action_button}
               </label>
-              <select
-                name="call_to_action_button"
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_ads.yes}</option>
-                <option>{Translations.create_ads.no}</option>
-              </select>
+                <SelectCallToActions
+                  value={form.callToAction? form.callToAction : ""}
+                  className=""
+                  handleSelect={handleSelect}
+                />
             </div>
             <div className="form-group">
               <label htmlFor="Insert_link">

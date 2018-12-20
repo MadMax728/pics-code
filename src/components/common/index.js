@@ -37,5 +37,6 @@ export {
   SelectDailyBudget,
   SelectOffer,
   SelectRadius,
-  SelectTargetGroup
+  SelectTargetGroup,
+  SelectCallToActions
 } from "./selects";

@@ -18,7 +18,7 @@ const initialState = {
     category: "",
     description: "",
     target_group: target_group.female_and_male,
-    call_to_action_button: "",
+    callToAction: "",
     insert_link: "",
     start_date: moment(),
     end_date: moment(),

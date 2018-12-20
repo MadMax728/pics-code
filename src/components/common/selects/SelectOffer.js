@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getOffer } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
 
 class SelectOffer extends Component {
@@ -16,10 +16,10 @@ class SelectOffer extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getOffer().then(() => {
-      if(this.props.offerList && this.props.offerList.offers){
+    this.props.getSelect("offers").then(() => {
+      if(this.props.offerList){
         this.setState({
-          offerList: this.props.offerList.offers
+          offerList: this.props.offerList
         });
       }
     });
@@ -53,11 +53,11 @@ class SelectOffer extends Component {
 }
 
 const mapStateToProps = state => ({
-  offerList: state.selectData
+  offerList: state.selectData.offers
 });
 
 const mapDispatchToProps = {
-  getOffer
+  getSelect
 };
 
 
@@ -65,7 +65,7 @@ const propTypes = {
   value: PropTypes.any,
   offerList: PropTypes.any,
   className: PropTypes.string,
-  getOffer: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

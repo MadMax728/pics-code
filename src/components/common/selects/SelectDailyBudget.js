@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getDailyBudget } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
 
 class SelectDailyBudget extends Component {
@@ -16,10 +16,10 @@ class SelectDailyBudget extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getDailyBudget().then(() => {
-      if(this.props.dailyBudgetList && this.props.dailyBudgetList.dailyBudgets){
+    this.props.getSelect("dailyBudgets").then(() => {
+      if(this.props.dailyBudgetList){
         this.setState({
-          dailyBudgetList: this.props.dailyBudgetList.dailyBudgets
+          dailyBudgetList: this.props.dailyBudgetList
         });
       }
     });
@@ -53,11 +53,11 @@ class SelectDailyBudget extends Component {
 }
 
 const mapStateToProps = state => ({
-  dailyBudgetList: state.selectData
+  dailyBudgetList: state.selectData.dailyBudgets
 });
 
 const mapDispatchToProps = {
-  getDailyBudget
+  getSelect
 };
 
 
@@ -65,7 +65,7 @@ const propTypes = {
   value: PropTypes.any,
   dailyBudgetList: PropTypes.any,
   className: PropTypes.string,
-  getDailyBudget: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
