@@ -8,7 +8,15 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsRoot extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("news", "");
+    window.scrollTo(0, 0);
+    if (this.props.searchData.searchKeyword) {
+      this.props.getDashboard(
+        "news",
+        "?isSearch=" + this.props.searchData.searchKeyword
+      );
+    } else {
+      this.props.getDashboard("news", "");
+    }
   };
 
   componentWillReceiveProps = nextProps => {
