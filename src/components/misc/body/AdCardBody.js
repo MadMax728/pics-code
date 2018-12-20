@@ -28,7 +28,7 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
           className="more-strip zIndex0"
           rel="noopener noreferrer"
         >
-          More
+          {ad.callToAction? ad.callToAction.callToActionName : "Ad"}
         </a>
       </div>
       {ad &&

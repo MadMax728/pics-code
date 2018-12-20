@@ -44,7 +44,7 @@ export const uploadMedia = (provider, fileType) => {
         }
       );
     }
-    else {
+    
       return mediaService.uploadMediaVideo(provider, header).then(
         res => {
           dispatch(uploadMediaSucceeded(res.data.data));
@@ -60,6 +60,6 @@ export const uploadMedia = (provider, fileType) => {
           });
         }
       );
-    }
+    
   };
 }; 

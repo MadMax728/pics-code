@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import { getCategory } from "../../../actions";
 import { connect } from "react-redux";
 import * as enumerations from "../../../lib/constants/enumerations";
 
@@ -233,12 +232,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getCategory
+  
 };
 
 DashboardFilter.propTypes = {
   handleApplyClick: PropTypes.func,
-  getCategory: PropTypes.func,
   categoryList: PropTypes.any,
   handleSelect: PropTypes.func
 };

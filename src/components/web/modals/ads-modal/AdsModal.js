@@ -2,46 +2,58 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { CreateAds, CreateAdsHeader } from "../../user";
-import { modalType, target_group } from "../../../../lib/constants/enumerations";
+import { modalType, target_group, typeContent } from "../../../../lib/constants/enumerations";
 import moment from "moment";
+import { Auth } from "../../../../auth";
+
+import { connect } from "react-redux";
+import { createAd, uploadMedia } from "../../../../actions";
+
+
+const storage = Auth.extractJwtFromStorage();
+let userInfo = null;
+if (storage) {
+  userInfo = JSON.parse(storage.userInfo);
+}
 
 const initialState = {
   stepIndex: 0,
+  userInfo: null,
   form: {
     title: "",
     location: {
-      lat: "",
-      lng: "",
+      latitude: "",
+      longitude: "",
       address: ""
     },
     radius: "",
     category: "",
     description: "",
-    target_group: target_group.female_and_male,
+    targetGroup: target_group.female_and_male,
     callToAction: "",
-    insert_link: "",
-    start_date: moment(),
-    end_date: moment(),
-    daily_budget: "",
-    invoice_recipient: "",
-    street: "",
-    number: "",
-    postal_code: "",
-    city: "",
-    country: "",
-    vat_identification_number: "",
-    payment_option: "card",
-    card_holder: "",
-    expire_date: "",
-    card_no: "",
-    cvc: "",
-    billing_address: "",
-    payment_method: "",
+    insertLink: "",
+    startDate: moment(),
+    endDate: moment(),
+    budget: "",
+    address:{
+      invoiceRecipient : "",
+      street : "",
+      postalCode: "",
+      city: "",
+      VATNO: "",
+      country: "",
+      streetNumber: ""
+    },
     voucher: "",
     image: null,
-    photo: "",
-    photoFile: null
-  }
+    fileType: true,
+    file: null,
+    video: null,
+    typeContent: typeContent.image,
+    typeId: "",
+    maximumExpenses: ""
+  },
+  scale: ""
 };
 
 class AdsModal extends Component {
@@ -65,7 +77,34 @@ class AdsModal extends Component {
   };
 
   handleSubmit = () => {
-    console.log(this.state.form);
+    const { form } = this.state;
+    const Data = new FormData();
+    if(form.fileType) {
+      Data.append("image", form.file);
+    }
+    else {
+      Data.append("video", form.file);
+    }
+    Data.append("postType", "ad");
+
+    this.props.uploadMedia(Data, form.fileType).then(() => {
+      if(this.props.mediaData && this.props.mediaData.media)
+      {
+        form.typeId=this.props.mediaData.media.id;
+        form.file= null;
+        form.image= null;
+        form.video= null;
+        if(!form.maximumExpenses){
+          form.maximumExpenses = form.budget
+        }
+        this.setState({form});
+        this.props.createAd(form).then(()=> {
+          if(this.props.adData && this.props.adData.ad && this.props.adData.ad.id){
+            this.handleModalInfoShow();
+          }
+        })
+      }
+    });
   };
 
   handleDate = (date, forThat) => {
@@ -74,23 +113,34 @@ class AdsModal extends Component {
     this.setState({ form });
   };
   
-  handleActualImg = actual_img => {
-    // Set Actual Image
-    const { form } = this.state;
-    form.actual_img = actual_img;
-    this.setState({ form });
-
-    // Set Image
+  handleActualImg = (e) => {
     const reader = new FileReader();
-    const file = actual_img;
-    // let base64Data;
-    const currentThis = this;
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      const { form } = currentThis.state;
-      form.image = reader.result;
-      currentThis.setState({ form });
-    };    
+    const file = e;
+
+    if (file.type.includes("image")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { form } = currentThis.state;
+        form.image = reader.result;
+        form.file = file;
+        form.fileType = true;
+        form.typeContent= typeContent.image;
+        currentThis.setState({ form });
+      };
+    }
+    if (file.type.includes("video")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { form } = currentThis.state;
+        form.video = reader.result;
+        form.file = file;
+        form.fileType = false;
+        form.typeContent= typeContent.video;
+        currentThis.setState({ form });
+      };
+    }
   };
 
   handleScale = scale => {
@@ -105,6 +155,9 @@ class AdsModal extends Component {
 
   componentDidMount = () => {
     this.setState({ stepIndex: 0 });
+    if (userInfo) {
+      this.setState({userInfo})
+    }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -112,11 +165,6 @@ class AdsModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
-  handleResoreState = () => {
-    this.setState({
-      form: {}
-    });
-  };
 
   handleNext = () => {
     const { stepIndex } = this.state;
@@ -150,8 +198,15 @@ class AdsModal extends Component {
     this.setState({ form });
   }
 
+
+  handleAddress = (event) => {
+    const { form } = this.state;
+    form.address[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+
   render() {
-    const { stepIndex, form } = this.state;
+    const { stepIndex, form, userInfo } = this.state;
     const { handleModalHide, modalShow } = this.props;
 
     let modalClassName = "";
@@ -170,7 +225,6 @@ class AdsModal extends Component {
         header
         modalHeaderContent={
           <CreateAdsHeader
-            handleResoreState={this.handleResoreState}
             handleModalHide={handleModalHide}
             handleNext={this.handleNext}
             handlePrev={this.handlePrev}
@@ -188,6 +242,7 @@ class AdsModal extends Component {
             handleModalInfoShow={this.handleModalInfoShow}
             handleChangeField={this.handleChangeField}
             form={form}
+            userInfo={userInfo}
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}
             handleEditImage={this.handleEditImage}
@@ -196,6 +251,7 @@ class AdsModal extends Component {
             handleScale={this.handleScale}
             handleSelect={this.handleSelect}
             handleSetState={this.handleSetState}
+            handleAddress={this.handleAddress}
           />
         }
       />
@@ -207,8 +263,24 @@ AdsModal.propTypes = {
   modalShow: PropTypes.bool,
   handleModalHide: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.func,
-  // uploadFile: PropTypes.func,
-  // handleResoreState: PropTypes.func
+  createAd: PropTypes.func.isRequired,
+  uploadMedia: PropTypes.func.isRequired,
+  mediaData: PropTypes.any,
+  adData: PropTypes.any,
 };
 
-export default AdsModal;
+
+const mapStateToProps = state => ({
+  mediaData: state.mediaData,
+  adData: state.adData
+});
+
+const mapDispatchToProps = {
+  createAd, 
+  uploadMedia
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdsModal);

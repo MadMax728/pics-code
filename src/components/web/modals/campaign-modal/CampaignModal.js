@@ -21,7 +21,6 @@ let userInfo = null;
 if (storage) {
   userInfo = JSON.parse(storage.userInfo);
 }
-// import { b64toBlob } from "../../../../lib/utils/helpers"
 
 const contentText = "";
 

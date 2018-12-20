@@ -11,7 +11,6 @@ class SelectCallToActions extends Component {
     }
   }
 
-
   componentWillUnmount = () => {
     this.setState({callToActionList: []});
   }

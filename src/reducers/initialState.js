@@ -47,7 +47,7 @@ const initialState = {
   },
   adData: {
     ads: null,
-    ad: [],
+    ad: null,
     isLoading: false,
     error: false
   },

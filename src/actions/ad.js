@@ -86,3 +86,46 @@ export const getAdDetails = provider => {
     );
   };
 };
+
+// Create Ad
+
+const createAdStarted = () => ({
+  type: types.CREATE_AD_STARTED
+});
+
+const createAdSucceeded = data => ({
+  type: types.CREATE_AD_SUCCEEDED,
+  payload: data
+});
+
+const createAdFailed = error => ({
+  type: types.CREATE_AD_FAILED,
+  payload: error,
+  error: true
+});
+
+export const createAd = (provider) => {
+  return dispatch => {
+    dispatch(createAdStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return adService.createAd(provider, header).then(
+      res => {
+        dispatch(createAdSucceeded(res.data.data));
+      },
+      error => {
+      
+        dispatch(
+          createAdFailed(error.response)
+        );
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

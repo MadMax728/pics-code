@@ -15,19 +15,13 @@ import { getUser, updateUserProfile } from "../../../../../actions";
 import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
-
-const storage = Auth.extractJwtFromStorage();
-let userInfo = null;
-if (storage) {
-  userInfo = JSON.parse(storage.userInfo);
-}
-
 class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: false,
+      userInfo: null,
       categoryList: [],
       form: {
         image: this.props.image,
@@ -61,7 +55,13 @@ class EditProfile extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
     if (userInfo) {
+      this.setState({userInfo})
       const data = {
         username: userInfo.username
       };
@@ -200,6 +200,7 @@ class EditProfile extends Component {
       website: this.state.form.website
     };
 
+    const { userInfo } =  this.state;
     this.props.updateUserProfile(data).then(() => {
       this.setState({ isLoading: true });
       const errors = {};
