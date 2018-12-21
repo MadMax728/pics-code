@@ -24,10 +24,11 @@ class NewsRoot extends Component {
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
       const searchKeyword = nextProps.searchData.searchKeyword;
+      let searchParam = "";
       if (searchKeyword) {
-        const searchParam = "?isSearch=" + searchKeyword;
-        this.props.getDashboard("news", searchParam);
+        searchParam = "?isSearch=" + searchKeyword;
       }
+      this.props.getDashboard("news", searchParam);
     }
   };
 
