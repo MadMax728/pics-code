@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import { getDownloadData } from "../../../../actions";
 import * as images from "../../../../lib/constants/images";
 import { Translations } from "../../../../lib/translations";
+import * as routes from "../../../../lib/constants/routes";
 
 class DataDownloadPage extends Component {
   constructor(props) {
@@ -19,6 +20,15 @@ class DataDownloadPage extends Component {
       error: {}
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
 
   formValid = () => {
     const errors = {};
@@ -162,7 +172,8 @@ class DataDownloadPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  downloadData: state.downloadData
+  downloadData: state.downloadData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -170,7 +181,9 @@ const mapDispatchToProps = {
 };
 
 DataDownloadPage.propTypes = {
-  getDownloadData: PropTypes.func
+  getDownloadData: PropTypes.func,
+  searchData: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(

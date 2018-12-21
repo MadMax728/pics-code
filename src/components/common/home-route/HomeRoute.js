@@ -62,12 +62,13 @@ class HomeRoute extends Component {
     );
   };
 
-  handleEditProfile = () => {
+  handleEditProfile = match => {
     return (
       <EditProfilePage
         handleModalInfoShow={this.props.handleModalInfoShow}
         image={this.props.image}
         profile={this.props.profile}
+        history={match.history}
       />
     );
   };

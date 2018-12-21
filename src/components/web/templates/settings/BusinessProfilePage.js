@@ -5,13 +5,12 @@ import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { activateBusinessProfile } from "../../../../actions";
-
+import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 
 class BusinessProfilePage extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       isActivateBusinessAccount: false,
       userId: ""
@@ -29,8 +28,16 @@ class BusinessProfilePage extends Component {
     }
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
   handleActivationBusinessProfile = e => {
-    console.log("activate account", e.target.id);
     const paramData = { profileId: e.target.id };
     this.props.activateBusinessProfile(paramData); // API Call
   };
@@ -90,7 +97,6 @@ class BusinessProfilePage extends Component {
               <span id={userId}>{Translations.Business_profile.Activate} </span>
             </button>
           </div>
-
           <div className="clearfix" />
           <div className="terms-conditions text-center">
             {
@@ -114,7 +120,8 @@ class BusinessProfilePage extends Component {
 }
 
 const mapStateToProps = state => ({
-  businessProfileData: state.businessProfileActivationData
+  businessProfileData: state.businessProfileActivationData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -122,7 +129,9 @@ const mapDispatchToProps = {
 };
 
 BusinessProfilePage.propTypes = {
-  activateBusinessProfile: PropTypes.func
+  activateBusinessProfile: PropTypes.func,
+  searchData: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(

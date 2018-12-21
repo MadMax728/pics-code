@@ -15,6 +15,7 @@ import { getUser, updateUserProfile } from "../../../../../actions";
 import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
+import * as routes from "../../../../../lib/constants/routes";
 class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -61,7 +62,7 @@ class EditProfile extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     if (userInfo) {
-      this.setState({userInfo})
+      this.setState({ userInfo });
       const data = {
         username: userInfo.username
       };
@@ -69,6 +70,15 @@ class EditProfile extends Component {
       this.props.getUser(data).then(() => {
         this.setDataOnLoad();
       });
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
     }
   };
 
@@ -200,7 +210,7 @@ class EditProfile extends Component {
       website: this.state.form.website
     };
 
-    const { userInfo } =  this.state;
+    const { userInfo } = this.state;
     this.props.updateUserProfile(data).then(() => {
       this.setState({ isLoading: true });
       const errors = {};
@@ -536,7 +546,8 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -550,7 +561,9 @@ EditProfile.propTypes = {
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any,
   profile: PropTypes.any,
-  updateUserProfile: PropTypes.any
+  updateUserProfile: PropTypes.any,
+  searchData: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(
