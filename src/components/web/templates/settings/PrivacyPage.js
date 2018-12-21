@@ -917,7 +917,8 @@ PrivacyPage.propTypes = {
   modalInfoShow: PropTypes.any,
   userDataByUsername: PropTypes.any,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  checked: PropTypes.func
 };
 
 export default connect(
