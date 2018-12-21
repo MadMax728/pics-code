@@ -12,4 +12,4 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // BackOffice Dashboard API
 export const getAdmins = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get("/users/admin/list");

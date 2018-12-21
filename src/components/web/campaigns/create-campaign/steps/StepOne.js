@@ -62,6 +62,11 @@ class StepOne extends Component {
                 name="title"
                 onChange={handleChangeField}
               />
+            {
+              form.title.length === 0 && form.error && (
+              <span className="error-msg highlight">{Translations.error.create_modal.title}</span>
+              )
+            }
             </div>
             <div className="form-group">
               <label htmlFor="Location">
@@ -73,6 +78,11 @@ class StepOne extends Component {
                   handleLocation={handleLocation}
                   value={form.location? form.location.address : ""}
                 />
+                {
+                  form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
+                    <span className="error-msg highlight">{Translations.error.create_modal.location}</span>
+                    )
+                  }
             </div>
             <div className="form-group">
               <label htmlFor="Category">
@@ -83,6 +93,11 @@ class StepOne extends Component {
                   className=""
                   handleSelect={handleSelect}
                 />
+                {
+                  form.category.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.category}</span>
+                  )
+                }
             </div>
             <div className="subtitle">
               {Translations.create_campaigns.application_criteria}
@@ -224,6 +239,11 @@ class StepOne extends Component {
                   className=""
                   handleSelect={handleSelect}
                 />
+                {
+                  form.offers.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.offers}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="offer_tag">
@@ -234,6 +254,11 @@ class StepOne extends Component {
                 handleOfferTagChange={handleOfferTagChange}
                 handleOfferTagDelete={handleOfferTagDelete}
               />
+              {
+                form.offerTag.length === 0 && form.error && (
+                <span className="error-msg highlight">{Translations.error.create_modal.offerTag}</span>
+                )
+              }
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry">
@@ -244,6 +269,11 @@ class StepOne extends Component {
                   className=""
                   handleSelect={handleSelect}
                 />
+                {
+                form.inquiry.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.inquiry}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry_tag">
@@ -254,6 +284,11 @@ class StepOne extends Component {
                 handleInquiryTagChange={handleInquiryTagChange}
                 handleInquiryTagDelete={handleInquiryTagDelete}
               />
+              {
+                form.inquiryTag.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.inquiryTag}</span>
+                  )
+                }
             </div>
           </form>
         </div>

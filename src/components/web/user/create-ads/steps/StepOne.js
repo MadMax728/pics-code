@@ -50,6 +50,11 @@ class StepOne extends Component {
                 name="title"
                 onChange={handleChangeField}
               />
+              {
+                form.title.length === 0 && form.error && (
+                <span className="error-msg highlight">{Translations.error.create_modal.title}</span>
+                )
+              }
             </div>
             <div className="form-group">
               <label htmlFor="Location">
@@ -60,6 +65,11 @@ class StepOne extends Component {
                 handleLocation={handleLocation}
                 value={form.location? form.location.address : ""}
               />
+              {
+                  form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.location}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Radius">
@@ -70,6 +80,11 @@ class StepOne extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
+              {
+                  form.radius.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.radius}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Category">
@@ -80,6 +95,11 @@ class StepOne extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
+              {
+                  form.category.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.category}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Description">
@@ -94,7 +114,11 @@ class StepOne extends Component {
                 value={form.description? form.description : ""}
                 isText={false}
               />
-              
+              {
+                  form.description.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.description}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="target">
@@ -154,6 +178,11 @@ class StepOne extends Component {
                   className=""
                   handleSelect={handleSelect}
                 />
+                {
+                  form.callToAction.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.callToAction}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Insert_link">
@@ -165,6 +194,11 @@ class StepOne extends Component {
                 name="insertLink"
                 onChange={handleChangeField}
               />
+              {
+                  form.insertLink.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.insertLink}</span>
+                  )
+                }
             </div>
           </form>
         </div>

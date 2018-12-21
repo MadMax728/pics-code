@@ -22,8 +22,6 @@ if (storage) {
   userInfo = JSON.parse(storage.userInfo);
 }
 
-const contentText = "";
-
 const initialState = {
       stepIndex: 0,
       isPreview: false,
@@ -64,7 +62,8 @@ const initialState = {
         file: null,
         video: null,
         typeId: "",
-        maximumExpenses: ""
+        maximumExpenses: "",
+        error: false
       },
       scale: ""
 };
@@ -104,34 +103,60 @@ class CampaignModal extends Component {
 
   handleSubmit = () => {
     const { form } = this.state;
-    const Data = new FormData();
-    if(form.filetype) {
-      Data.append("image", form.file);
+    if(form.file)
+    {
+      const Data = new FormData();
+      if(form.filetype) {
+        Data.append("image", form.file);
+      }
+      else {
+        Data.append("video", form.file);
+      }
+      Data.append("postType", "campaign");
+
+      this.props.uploadMedia(Data, form.filetype).then(() => {
+        if(this.props.mediaData && this.props.mediaData.media)
+        {
+          form.typeId=this.props.mediaData.media.id;
+          form.file= null;
+          form.image= null;
+          form.video= null;
+          if(!form.maximumExpenses){
+            form.maximumExpenses = form.budget
+          }
+          this.setState({form});
+          this.props.createCampaign(form).then(()=> {
+            if(this.props.campaignData && this.props.campaignData.campaign && this.props.campaignData.campaign.id){
+              this.handleModalInfoShow();
+            }
+          })
+        }
+      });
     }
     else {
-      Data.append("video", form.file);
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        "Please Select Image or Video"
+      );
     }
-    Data.append("postType", "campaign");
-
-    this.props.uploadMedia(Data, form.filetype).then(() => {
-      if(this.props.mediaData && this.props.mediaData.media)
-      {
-        form.typeId=this.props.mediaData.media.id;
-        form.file= null;
-        form.image= null;
-        form.video= null;
-        if(!form.maximumExpenses){
-          form.maximumExpenses = form.budget
-        }
-        this.setState({form});
-        this.props.createCampaign(form).then(()=> {
-          if(this.props.campaignData && this.props.campaignData.campaign && this.props.campaignData.campaign.id){
-            this.handleModalInfoShow();
-          }
-        })
-      }
-    });
   }
+
+  validateForm = (index) => {
+    const { form } = this.state;
+    if(index === 0){
+      return form.title && form.location.latitude && form.location.longitude && form.location.address && form.category && form.offers && form.offerTag.length !== 0 && form.inquiry && form.inquiryTag.length !== 0 && form.file
+    }
+    else if (index === 1){
+      return form.description
+    }
+    else if (index === 2){
+      return form.startDate && form.endDate && form.endDate.diff(form.startDate, 'days') >= 0 && form.budget
+    }
+    else if (index === 3){
+      return form.address.invoiceRecipient && form.address.street && form.address.streetNumber && form.address.postalCode && form.address.city && form.address.country && form.address.VATNO
+    }
+  }
+
 
   handleCompanySubmit = () => {
     this.handleSubmit();
@@ -171,7 +196,23 @@ class CampaignModal extends Component {
   handleNext = () => {
     const { stepIndex } = this.state;
     if (stepIndex < 4) {
-      this.setState({ stepIndex: stepIndex + 1 });
+      if(this.validateForm(stepIndex))
+      {
+        this.setState({
+          stepIndex: stepIndex + 1,
+          form: { ...this.state.form, error: true }
+        });
+      }
+      else {
+        this.setState({
+          form: { ...this.state.form, error: true }
+        });
+
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          "Please Fill proper Data"
+        );
+      }
     }
   };
 
@@ -237,6 +278,10 @@ class CampaignModal extends Component {
   
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;
+    if (form.offerTag.length === 0)
+    {
+      form.offerTag = [];
+    }
     form.offerTag.push(id);
     form.offerTagList.push(tag);
     this.setState({ form });
@@ -262,6 +307,10 @@ class CampaignModal extends Component {
 
   handleInquiryTagChange = (id, tag) => {
     const { form } = this.state;
+    if (form.inquiryTag.length === 0)
+    {
+      form.inquiryTag = [];
+    }
     form.inquiryTag.push(id);
     form.inquiryTagList.push(tag);
     this.setState({ form });
@@ -340,7 +389,7 @@ class CampaignModal extends Component {
               handleContentChange={this.handleContentChange}
               handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
-              contentText={contentText}
+              contentText={form.description}
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
               ref={this.imageCropper}
@@ -368,7 +417,7 @@ class CampaignModal extends Component {
               handleContentChange={this.handleContentChange}
               handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
-              contentText={contentText}
+              contentText={form.description}
               handleEditImage={this.handleEditImage}
               handleLocation={this.handleLocation}
               ref={this.imageCropper}

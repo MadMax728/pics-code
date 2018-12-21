@@ -8,8 +8,8 @@ class PaymentConfirmation extends Component {
   }
 
   handleModalHides = () => {
-    this.props.handleModalHide();
     this.props.handleModalInfoHide();
+    this.props.handleModalHide();
   };
 
   render() {

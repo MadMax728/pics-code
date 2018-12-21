@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getDashboard } from "../../../actions";
 import { username_list } from "../../../mock-data";
-
-const propTypes = {
-  value: PropTypes.any.isRequired,
-  handleSetSatetToolTipUsername: PropTypes.func.isRequired
-};
 
 class Username extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNameList: username_list
+      usersList: username_list
     };
+  }
+
+  componentDidMount = () => {
+    this.props.getDashboard("users").then(()=> {
+      if(this.props.usersList){
+        this.setState({usersListtest: this.props.usersList})
+      }
+    });
   }
 
   _commentsCbUserName = item => {
@@ -26,11 +31,11 @@ class Username extends Component {
   };
 
   render() {
-    let { userNameList } = this.state;
+    let { usersList } = this.state;
     const { value } = this.props;
     const commentArr = value? value.split(" ") : " ";
     const lastText = commentArr[commentArr.length - 1].substring(1);
-    userNameList = userNameList.filter(item => {
+    usersList = usersList && usersList.filter(item => {
       return !!(
         lastText === "@" ||
         lastText === "" ||
@@ -38,10 +43,11 @@ class Username extends Component {
         item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1
       );
     });
-
+    
     return (
       <div>
-        {userNameList.map((item) => {
+        {usersList &&
+          usersList.map((item) => {
           return (
             /* eslint-disable */
             <div
@@ -56,7 +62,7 @@ class Username extends Component {
               <div className="img-wrapr">
                 <img
                   src={item.image}
-                  alt={"image" + `${item.name}`}
+                  alt={"image" + `${item.username}`}
                   style={{ height: "20px", width: "20px" }}
                 />
               </div>
@@ -72,6 +78,26 @@ class Username extends Component {
   }
 }
 
-Username.propTypes = propTypes;
+const mapStateToProps = state => ({
+  usersList: state.dashboardData.users,
+  isLoading: state.dashboardData.isLoading,
+  error: state.dashboardData.error
+});
 
-export default Username;
+const mapDispatchToProps = {
+  getDashboard
+};
+
+Username.propTypes = {
+  getDashboard: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  usersList: PropTypes.any,
+  value: PropTypes.any.isRequired,
+  handleSetSatetToolTipUsername: PropTypes.func.isRequired
+  // error: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Username);
