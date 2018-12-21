@@ -51,7 +51,8 @@ const initialState = {
     video: null,
     typeContent: typeContent.image,
     typeId: "",
-    maximumExpenses: ""
+    maximumExpenses: "",
+    error: false
   },
   scale: ""
 };
@@ -78,33 +79,42 @@ class AdsModal extends Component {
 
   handleSubmit = () => {
     const { form } = this.state;
-    const Data = new FormData();
-    if(form.fileType) {
-      Data.append("image", form.file);
+    if (form.file)  
+    {
+      const Data = new FormData();
+      if(form.fileType) {
+        Data.append("image", form.file);
+      }
+      else {
+        Data.append("video", form.file);
+      }
+      Data.append("postType", "ad");
+
+      this.props.uploadMedia(Data, form.fileType).then(() => {
+        if(this.props.mediaData && this.props.mediaData.media)
+        {
+          form.typeId=this.props.mediaData.media.id;
+          form.file= null;
+          form.image= null;
+          form.video= null;
+          if(!form.maximumExpenses){
+            form.maximumExpenses = form.budget
+          }
+          this.setState({form});
+          this.props.createAd(form).then(()=> {
+            if(this.props.adData && this.props.adData.ad && this.props.adData.ad.id){
+              this.handleModalInfoShow();
+            }
+          })
+        }
+      });
     }
     else {
-      Data.append("video", form.file);
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        "Please Select Image or Video"
+      );
     }
-    Data.append("postType", "ad");
-
-    this.props.uploadMedia(Data, form.fileType).then(() => {
-      if(this.props.mediaData && this.props.mediaData.media)
-      {
-        form.typeId=this.props.mediaData.media.id;
-        form.file= null;
-        form.image= null;
-        form.video= null;
-        if(!form.maximumExpenses){
-          form.maximumExpenses = form.budget
-        }
-        this.setState({form});
-        this.props.createAd(form).then(()=> {
-          if(this.props.adData && this.props.adData.ad && this.props.adData.ad.id){
-            this.handleModalInfoShow();
-          }
-        })
-      }
-    });
   };
 
   handleDate = (date, forThat) => {
@@ -166,10 +176,37 @@ class AdsModal extends Component {
     }
   }
 
+  validateForm = (index) => {
+    const { form } = this.state;
+    if(index === 0){
+      return form.title && form.location.latitude && form.location.longitude && form.location.address && form.category && form.radius && form.description && form.callToAction && form.insertLink
+    }
+    else if (index === 1) {
+      return form.startDate && form.endDate && form.endDate.diff(form.startDate, 'days') >= 0 && form.budget 
+    }
+    
+  }
+
   handleNext = () => {
     const { stepIndex } = this.state;
     if (stepIndex < 4) {
-      this.setState({ stepIndex: stepIndex + 1 });
+      if(this.validateForm(stepIndex))
+      {
+        this.setState({
+          stepIndex: stepIndex + 1,
+          form: { ...this.state.form, error: true }
+        });
+      }
+      else {
+        this.setState({
+          form: { ...this.state.form, error: true }
+        });
+
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          "Please Fill proper Data"
+        );
+      }
     }
   };
 

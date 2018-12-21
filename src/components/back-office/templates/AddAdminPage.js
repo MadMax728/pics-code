@@ -38,6 +38,7 @@ class AddAdminPage extends Component {
       admins: adminData
     });
   };
+  
   deleteData = e => {
     const admins_Data = this.state.admins;
     for (let i = admins_Data.length - 1; i >= 0; i--) {

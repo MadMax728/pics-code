@@ -33,7 +33,7 @@ export const getAdmins = () => {
       },
       error => {
         dispatch(getAdminsFailed(error.response));
-        dispatch(getAdminsSucceeded(admin_list));
+        // dispatch(getAdminsSucceeded(admin_list));
         logger.error({
           description: error.toString(),
           fatal: true

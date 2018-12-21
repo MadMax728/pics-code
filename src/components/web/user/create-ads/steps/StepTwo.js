@@ -60,6 +60,11 @@ class StepTwo extends Component {
                 </div>
               </li>
             </ul>
+            {
+              form.error && form.endDate.diff(form.startDate, 'days') < 0 && (
+                <span className="error-msg highlight">{Translations.error.create_modal.date}</span>
+              )
+            }
           </div>
           <div className="form-group">
             <label htmlFor="Define">
@@ -70,6 +75,11 @@ class StepTwo extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
+              {
+                form.budget.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.budget}</span>
+                  )
+              }
           </div>
           <div className="form-group">
             <label htmlFor="Maximum">

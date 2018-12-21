@@ -728,5 +728,39 @@
     "Data_download": "Data download",
     "Download": "Download",
     "Search_in_users": "Search in users"
+  },
+
+  "payment_modal": {
+    "billing_address": "Billing Address",
+    "invoice_recipient": "Invoice Recipient",
+    "street_number": "Street, number",
+    "postal_code": "Postal Code",
+    "city": "City",
+    "country": "Country",
+    "VATNO": "VAT Identification Number"
+  },
+
+  "error": {
+    "create_modal": {
+      "title": "Plaese Enter Title",
+      "location": "Plaese Enter Location",
+      "category": "Please Select Category",
+      "offers": "Please Select Offer",
+      "offerTag": "Please Enter Offer Tags",
+      "inquiry": "Please Select Inquiry",
+      "callToAction": "Please Select Call to Action",
+      "radius": "Please Select Radius",
+      "inquiryTag": "Please Enter Inquiry Tags",
+      "description": "Please Enter Description",
+      "date" : "End Date must be greater than Start Date",
+      "budget": "Please Select Budget",
+      "invoiceRecipient" : "Please Enter Invoice Recipient",
+      "postalCode": "Please Enter Postal code",
+      "city": "Please Enter City",
+      "VATNO": "Please Enter VAT Identification Number",
+      "country": "Please Enter Country",
+      "streetNumber": "Please Enter Street,Number",
+      "insertLink": "Please Enter Inset Link" 
+    }
   }
 }

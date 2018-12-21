@@ -42,6 +42,19 @@ class TextEditor extends Component {
     this.props.handleContentChange(content);
   };
 
+  componentDidMount = () =>{
+    let editorState;
+    
+    if (this.props.contentText) {
+      const blocksFromHTML = convertFromHTML(this.props.contentText);
+      const contentState = ContentState.createFromBlockArray(blocksFromHTML);
+      editorState = EditorState.createWithContent(contentState);
+    } else {
+      editorState = EditorState.createEmpty();
+    }
+    this.setState({ editorState });
+  }
+
   render() {
     return (
       <Editor

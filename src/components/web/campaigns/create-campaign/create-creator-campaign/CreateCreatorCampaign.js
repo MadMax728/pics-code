@@ -27,7 +27,6 @@ class CreateCreatorCampaign extends Component {
       handleSubmit,
       handleDate,
       handleContentChange,
-      contentText,
       handleEditImage,
       handleLocation,
       handleActualImg,
@@ -80,7 +79,7 @@ class CreateCreatorCampaign extends Component {
           (stepIndex === 1 && (
             <StepTwo 
               handleChangeField={handleChangeField} 
-              contentText={contentText}
+              form={form}
               handleContentChange={handleContentChange}
             />
           ))}
@@ -129,7 +128,6 @@ CreateCreatorCampaign.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleDate: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
-  contentText: PropTypes.any.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,

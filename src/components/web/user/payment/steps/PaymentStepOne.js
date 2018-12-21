@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
+import { Translations } from "../../../../../lib/translations";
 class PaymentStepOne extends Component {
   constructor(props) {
     super(props);
@@ -14,20 +15,25 @@ class PaymentStepOne extends Component {
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
           <div className="user-title">
-            <div className="subtitle">Billing Address</div>
+            <div className="subtitle">{Translations.payment_modal.billing_address}</div>
           </div>
           <form className="col-xs-12 no-padding">
             <div className="form-group">
-              <label htmlFor="title">Invoice Recipient</label>
+              <label htmlFor="title">{Translations.payment_modal.invoice_recipient}</label>
               <input
                 type="text"
                 name="invoiceRecipient"
                 value={form.address.invoiceRecipient}
                 onChange={handleAddress}
               />
+              {
+                form.address.invoiceRecipient.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.invoiceRecipient}</span>
+                  )
+                }
             </div>
             <div className="form-group">
-              <label htmlFor="Location">Street, number</label>
+              <label htmlFor="Location">{Translations.payment_modal.street_number}</label>
               <input
                 type="text"
                 name="street"
@@ -40,42 +46,67 @@ class PaymentStepOne extends Component {
                 value={form.address.streetNumber}
                 onChange={handleAddress}
               />
+              {
+                 form.address.street.length === 0  || form.address.streetNumber.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.streetNumber}</span>
+                  )
+                }
             </div>
             <div className="form-group">
-              <label htmlFor="title">Postal Code</label>
+              <label htmlFor="title">{Translations.payment_modal.postal_code}</label>
               <input
                 type="text"
                 name="postalCode"
                 value={form.address.postalCode}
                 onChange={handleAddress}
               />
+              {
+                form.address.postalCode.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.postalCode}</span>
+                  )
+                }
             </div>
             <div className="form-group">
-              <label htmlFor="title">City</label>
+              <label htmlFor="title">{Translations.payment_modal.city}</label>
               <input
                 type="text"
                 name="city"
                 value={form.address.city}
                 onChange={handleAddress}
               />
+              {
+                form.address.city.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.city}</span>
+                  )
+                }
             </div>
             <div className="form-group">
-              <label htmlFor="title">Country</label>
+              <label htmlFor="title">{Translations.payment_modal.country}</label>
               <input
                 type="text"
                 name="country"
                 value={form.address.country}
                 onChange={handleAddress}
               />
+              {
+                form.address.country.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.country}</span>
+                  )
+                }
             </div>
             <div className="form-group">
-              <label htmlFor="title">VAT Identification Number</label>
+              <label htmlFor="title">{Translations.payment_modal.VATNO}</label>
               <input
                 type="text"
                 value={form.address.VATNO}
                 name="VATNO"
                 onChange={handleAddress}
               />
+              {
+                form.address.VATNO.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.VATNO}</span>
+                  )
+                }
             </div>
           </form>
         </div>

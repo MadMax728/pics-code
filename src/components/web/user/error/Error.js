@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class PaymentConfirmation extends Component {
+class Error extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -9,7 +9,6 @@ class PaymentConfirmation extends Component {
 
   handleModalHides = () => {
     this.props.handleModalInfoHide();
-    this.props.handleModalHide();
   };
 
   render() {
@@ -17,7 +16,7 @@ class PaymentConfirmation extends Component {
     return (
       <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">
-          Your {modalInfoMsg} is pending review whitin the next 48 hours.
+          {modalInfoMsg}
         </div>
         <div className="col-sm-12">
           <button className="filled_button" onClick={this.handleModalHides}>
@@ -29,10 +28,10 @@ class PaymentConfirmation extends Component {
   }
 }
 
-PaymentConfirmation.propTypes = {
+Error.propTypes = {
   handleModalInfoHide: PropTypes.func,
   handleModalHide: PropTypes.func,
   modalInfoMsg: PropTypes.string
 };
 
-export default PaymentConfirmation;
+export default Error;

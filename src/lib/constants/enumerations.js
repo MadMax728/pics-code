@@ -22,6 +22,7 @@ export const PaymentSources = {
 };
 
 export const modalType = {
+  error: "error",
   messages: "messages",
   upload: "upload",
   ads: "ads",
