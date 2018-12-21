@@ -26,20 +26,13 @@ export const getAds = (prop, provider) => {
     const headers = {
       Authorization: storage.accessToken
     };
-    const params = { headers };
-
-    return adService[prop](params, provider).then(
+    return adService[prop](provider, headers).then(
       res => {
         dispatch(getAdsSucceeded(res.data.data));
       },
       error => {
-        dispatch(
-          getAdsFailed(error.response)
-        );
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
+        dispatch(getAdsFailed(error.response));
+        logger.error({ description: error.toString(), fatal: true });
       }
     );
   };
@@ -75,9 +68,7 @@ export const getAdDetails = provider => {
         dispatch(getAdDetailsSucceeded(res.data.data));
       },
       error => {
-        dispatch(
-          getAdDetailsFailed(error.response)
-        );
+        dispatch(getAdDetailsFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -104,7 +95,7 @@ const createAdFailed = error => ({
   error: true
 });
 
-export const createAd = (provider) => {
+export const createAd = provider => {
   return dispatch => {
     dispatch(createAdStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -117,10 +108,7 @@ export const createAd = (provider) => {
         dispatch(createAdSucceeded(res.data.data));
       },
       error => {
-      
-        dispatch(
-          createAdFailed(error.response)
-        );
+        dispatch(createAdFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

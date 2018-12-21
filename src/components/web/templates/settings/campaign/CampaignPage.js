@@ -8,7 +8,20 @@ import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class SettingCampaignPage extends Component {
   componentDidMount = () => {
-    this.props.getCampaigns("getSettingsCampaigns");
+    this.props.getCampaigns("getSettingsCampaigns", "");
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      let searchParam = "";
+      if (searchKeyword) {
+        searchParam = "?isSearch=" + searchKeyword;
+      }
+      this.props.getCampaigns("getSettingsCampaigns", searchParam);
+    }
   };
 
   renderCampaignList = () => {
@@ -35,7 +48,7 @@ class SettingCampaignPage extends Component {
     const { campaignList, isLoading } = this.props;
 
     return (
-      <div className="padding-rl-10 middle-section"> 
+      <div className="padding-rl-10 middle-section">
         {campaignList && !isLoading && this.renderCampaignList()}
         {isLoading && <CampaignLoading />}
       </div>
@@ -47,13 +60,15 @@ SettingCampaignPage.propTypes = {
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
+  searchData: PropTypes.any
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   campaignList: state.campaignData.campaigns,
   isLoading: state.campaignData.isLoading,
-  error: state.campaignData.error
+  error: state.campaignData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {

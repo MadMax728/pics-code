@@ -8,11 +8,10 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
  * @param {*} payload
  */
 
-
 // Ad Settings API
 // Company Campaigns API
-export const getSettingsAds  = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds", payload);
+export const getSettingsAds = (payload, header = {}) =>
+  api(baseUrl, header).get("/newsfeeds/news-feeds" + payload);
 
 // Ad Details
 export const getAdDetails = (payload, provider) =>
