@@ -575,11 +575,14 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-              </div>
-              <div className="form-group">
+                <span className="error-msg form-field-error">
+                  {this.state.change_email_form_error.new_email}
+                </span>
                 <span className="error-msg highlight">
                   {this.state.change_email_form_error.servererror}
                 </span>
+              </div>
+              <div className="form-group">
                 <button
                   className="black_button"
                   onClick={this.handleSaveChangeEmail}
