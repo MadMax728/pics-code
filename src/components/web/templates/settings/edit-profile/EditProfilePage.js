@@ -191,7 +191,6 @@ class EditProfile extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
     const data = {
       profileImage: this.props.profile ? this.props.profile : "",
       name: this.state.form.name_company,

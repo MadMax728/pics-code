@@ -94,42 +94,6 @@ class InlineLoading extends React.Component {
                   />
                 </g>
               </svg>
-              {/* <svg
-                className="loader-star star-small"
-                version="1.1"
-                x="0px"
-                y="0px"
-                width="23.172px"
-                height="23.346px"
-                viewBox="0 0 23.172 23.346"
-              >
-                <ellipse
-                  className="ground"
-                  cx="11"
-                  cy="11"
-                  rx="10"
-                  ry="10"
-                  fill="#029bd7"
-                />
-              </svg>
-              <svg
-                className="loader-star star-big"
-                version="1.1"
-                x="0px"
-                y="0px"
-                width="23.172px"
-                height="23.346px"
-                viewBox="0 0 23.172 23.346"
-              >
-                <ellipse
-                  className="ground"
-                  cx="11"
-                  cy="11"
-                  rx="10"
-                  ry="10"
-                  fill="#1f58a6"
-                />
-              </svg> */}
             </div>
           </section>
         </span>
