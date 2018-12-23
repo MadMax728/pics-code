@@ -3,40 +3,41 @@ import * as usersService from "../services/usersService";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 
-const getSubscribersStarted = () => ({
-  type: types.GET_SUBSCRIBERS_STARTED
+const getUserListStarted = () => ({
+  type: types.GET_USER_LIST_STARTED
 });
 
-const getSubscribersSucceeded = data => ({
-  type: types.GET_SUBSCRIBERS_SUCCEEDED,
+const getUserListSucceeded = data => ({
+  type: types.GET_USER_LIST_SUCCEEDED,
   payload: data
 });
 
-const getSubscribersFailed = error => ({
-  type: types.GET_SUBSCRIBERS_FAILED,
+const getUserListFailed = error => ({
+  type: types.GET_USER_LIST_FAILED,
   payload: error,
   error: true
 });
 
 /**
- *  getSubscribers
- *  @returns {dispatch} getSubscribers.
+ *  getUserList
+ * { subscribed, unknown, likes, company }
+ *  @returns {dispatch} getUserList.
  */
-export const getSubscribers = () => {
+export const getUserList = (type = "subscribed") => {
   return dispatch => {
-    dispatch(getSubscribersStarted());
+    dispatch(getUserListStarted());
     const storage = Auth.extractJwtFromStorage();
     const headers = {
       Authorization: storage.accessToken
     };
     const params = { headers };
 
-    return usersService.getSubscribers(params).then(
+    return usersService.getUserList(params, type).then(
       res => {
-        dispatch(getSubscribersSucceeded(res.data.data));
+        dispatch(getUserListSucceeded(res.data.data));
       },
       error => {
-        dispatch(getSubscribersFailed(error.response));
+        dispatch(getUserListFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

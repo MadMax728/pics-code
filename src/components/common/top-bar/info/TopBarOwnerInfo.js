@@ -11,11 +11,10 @@ class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
     const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
+    let userInfo = {};
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-
     this.state = {
       items: {
         username: userInfo.username,
@@ -79,7 +78,7 @@ class TopBarOwnerInfo extends Component {
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-    
+
     if (userInfo) {
       const data = {
         username: userInfo.username

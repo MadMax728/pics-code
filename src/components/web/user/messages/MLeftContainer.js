@@ -6,7 +6,7 @@ import { Translations } from "../../../../lib/translations";
 import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from './MLeftUsersList';
 import MLeftTabs from './MLeftTabs';
-import { getSubscribers } from "../../../../actions";
+import { getUserList } from "../../../../actions";
 
 class MLeftContainer extends Component {
   
@@ -22,40 +22,28 @@ class MLeftContainer extends Component {
         this.handleUserListCase(parseInt(this.state.activeIndex));
     };
 
-    getSubscribers = () => {
-        this.props.getSubscribers().then(() => {
+    getUserList = (type='subscribed') => {
+        this.props.getUserList(type).then(() => {
             const  { usersData } = this.props;
             if(!usersData.isLoading) {
-                this.setState({ userList : usersData.subscribers })
+                this.setState({ userList : usersData.users })
             }
         });
-    }
-
-    getLikesYouUsers = () => {
-        this.setState({ userList : [] })
-    }
-
-    getUnknownUsers = () => {
-        this.setState({ userList : [] })
-    }
-
-    getCompanyUsers = () => {
-        this.setState({ userList : [] })
     }
 
     handleUserListCase = (activeIndex) => {
         switch(activeIndex) {
             case 1 : 
-                this.getSubscribers();
+                this.getUserList('subscribed');
             break;
             case 2 : 
-                this.getUnknownUsers();
+                this.getUserList('unknown');
             break;
             case 3 : 
-                this.getLikesYouUsers();
+                this.getUserList('likes');
             break;
             case 4 : 
-                this.getCompanyUsers();
+                this.getUserList('company');
             break;
         }
     }
@@ -94,7 +82,7 @@ class MLeftContainer extends Component {
 }
     
 MLeftContainer.propTypes = {
-    getSubscribers: PropTypes.func.isRequired,
+    getUserList: PropTypes.func.isRequired,
     me: PropTypes.string.isRequired,
     usersData: PropTypes.any,
     selectUser: PropTypes.func
@@ -105,7 +93,7 @@ MLeftContainer.propTypes = {
   });
   
   const mapDispatchToProps = {
-    getSubscribers
+    getUserList
   };
   
   export default connect(

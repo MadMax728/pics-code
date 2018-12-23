@@ -123,7 +123,7 @@ const initialState = {
     error: false
   },
   usersData: {
-    subscribers: [],
+    users: [],
     isLoading: false,
     error: false
   },
