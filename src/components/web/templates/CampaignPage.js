@@ -43,7 +43,7 @@ class CampaignPage extends Component {
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {(campaign.postType.toLowerCase() ===
+          { campaign.mediaUrl && (campaign.postType.toLowerCase() ===
             enumerations.contentTypes.companyCampaign ||
             campaign.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign) && (

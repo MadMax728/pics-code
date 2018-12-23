@@ -16,7 +16,7 @@ class ExploreRoot extends Component {
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
-          {explore.postType === enumerations.contentTypes.mediaPost && (
+          {explore.mediaUrl && explore.postType === enumerations.contentTypes.mediaPost && (
             <MediaCard item={explore} isDescription/>
           )}
         </div>

@@ -16,10 +16,10 @@ class SavedPage extends Component {
     return savedList.map(saved => {
       return (
         <div key={saved.id}>
-        {saved.postType.toLowerCase() === enumerations.contentTypes.mediaPost && (
+        {saved.mediaUrl && saved.postType.toLowerCase() === enumerations.contentTypes.mediaPost && (
             <MediaCard item={saved} isParticipant={false} isDescription/>
           )}
-          {saved.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
+          {saved.mediaUrl && saved.postType.toLowerCase() === enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={saved}
               isDescription={false}
@@ -29,7 +29,7 @@ class SavedPage extends Component {
               isReport={false}
             />
           )}
-          {saved.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign && (
+          {saved.mediaUrl && saved.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign && (
             <CampaignCard
               item={saved}
               isDescription={false}
@@ -39,10 +39,10 @@ class SavedPage extends Component {
               isReport={false}
             />
           )}
-          {saved.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && (
+          {saved.mediaUrl && saved.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && (
             <MediaCard item={saved} isParticipant isDescription/>
           )}
-          {saved.postType.toLowerCase() === enumerations.contentTypes.ad && (
+          {saved.mediaUrl && saved.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
               item={saved}
               isDescription

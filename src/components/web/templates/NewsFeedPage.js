@@ -58,11 +58,11 @@ class NewsFeedPage extends Component {
       return (
         <div key={newsFeed.id}>
         
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+          {newsFeed.mediaUrl && newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.mediaPost && (
             <MediaCard item={newsFeed} isParticipant={false} isDescription />
           )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+          {newsFeed.mediaUrl && newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.companyCampaign && (
             <CampaignCard
               item={newsFeed}
@@ -73,7 +73,7 @@ class NewsFeedPage extends Component {
               isReport={false}
             />
           )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+          {newsFeed.mediaUrl && newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.creatorCampaign && (
             <CampaignCard
               item={newsFeed}
@@ -84,11 +84,11 @@ class NewsFeedPage extends Component {
               isReport={false}
             />
           )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() ===
+          {newsFeed.mediaUrl &&  newsFeed.postType && newsFeed.postType.toLowerCase() ===
             enumerations.contentTypes.companyParticipantCampaign && (
             <MediaCard item={newsFeed} isParticipant isDescription/>
           )}
-          {newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
+          {newsFeed.mediaUrl &&  newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard
               item={newsFeed}
               isDescription

@@ -63,7 +63,7 @@ class StepOne extends Component {
                 onChange={handleChangeField}
               />
             {
-              form.title.length === 0 && form.error && (
+              form.title && form.title.length === 0 && form.error && (
               <span className="error-msg highlight">{Translations.error.create_modal.title}</span>
               )
             }
@@ -79,7 +79,7 @@ class StepOne extends Component {
                   value={form.location? form.location.address : ""}
                 />
                 {
-                  form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
+                  form.location && form.location.address && form.location.latitude && form.location.longitude && form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
                     <span className="error-msg highlight">{Translations.error.create_modal.location}</span>
                     )
                   }
@@ -94,7 +94,7 @@ class StepOne extends Component {
                   handleSelect={handleSelect}
                 />
                 {
-                  form.category.length === 0 && form.error && (
+                  form.category && form.category.length === 0 && form.error && (
                   <span className="error-msg highlight">{Translations.error.create_modal.category}</span>
                   )
                 }
@@ -234,7 +234,7 @@ class StepOne extends Component {
               <label htmlFor="Offer">
                 {Translations.create_campaigns.offer}
               </label>
-                <SelectOffer 
+                <SelectOffer
                   value={form.offers? form.offers : ""}
                   className=""
                   handleSelect={handleSelect}
@@ -249,13 +249,13 @@ class StepOne extends Component {
               <label htmlFor="offer_tag">
                 {Translations.create_campaigns.offer_tag}
               </label>
-              <OfferTags 
+              <OfferTags
                 value={form.offerTagList}
                 handleOfferTagChange={handleOfferTagChange}
                 handleOfferTagDelete={handleOfferTagDelete}
               />
               {
-                form.offerTag.length === 0 && form.error && (
+                form.offerTag && form.offerTag.length === 0 && form.error && (
                 <span className="error-msg highlight">{Translations.error.create_modal.offerTag}</span>
                 )
               }
@@ -264,13 +264,13 @@ class StepOne extends Component {
               <label htmlFor="Inquiry">
                 {Translations.create_campaigns.inquiry}
               </label>
-                <SelectInquiry 
+                <SelectInquiry
                   value={form.inquiry? form.inquiry : ""}
                   className=""
                   handleSelect={handleSelect}
                 />
                 {
-                form.inquiry.length === 0 && form.error && (
+                form.inquiry && form.inquiry.length === 0 && form.error && (
                   <span className="error-msg highlight">{Translations.error.create_modal.inquiry}</span>
                   )
                 }
@@ -285,7 +285,7 @@ class StepOne extends Component {
                 handleInquiryTagDelete={handleInquiryTagDelete}
               />
               {
-                form.inquiryTag.length === 0 && form.error && (
+                form.inquiryTag && form.inquiryTag.length === 0 && form.error && (
                   <span className="error-msg highlight">{Translations.error.create_modal.inquiryTag}</span>
                   )
                 }
