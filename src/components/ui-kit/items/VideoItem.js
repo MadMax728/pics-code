@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import VideoPlayer from "../player/VideoPlayer";
+import LazyLoad from 'react-lazyload';
 
 class VideoItem extends Component {
   render() {
@@ -9,8 +10,9 @@ class VideoItem extends Component {
       <div className="feed_image">
         <div className={"embed-responsive embed-responsive-16by9"}>
           <div className={"img-responsive embed-responsive-item"}>
-            {/* <ReactPlayer url={this.props.item} playing={false} controls/> */}
-            <VideoPlayer id={id} item={item} />
+            <LazyLoad height={200} once={true} offset={100}>
+              <VideoPlayer id={id} item={item} />
+            </LazyLoad>
           </div>
         </div>
       </div>

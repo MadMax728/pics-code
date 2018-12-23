@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import LazyLoad from 'react-lazyload';
 
 class ImageItem extends PureComponent {
 
@@ -15,11 +16,13 @@ class ImageItem extends PureComponent {
          */}
         <div className={`embed-responsive embed-responsive-16by9`}>
           <div className={`img-responsive embed-responsive-item`}>
-            <img
-              src={this.props.item}
-              alt="altmage"
-              className="img-responsive"
-            />
+            <LazyLoad height={200} once={true} offset={100}>
+              <img
+                  src={this.props.item}
+                  alt="altmage"
+                  className="img-responsive"
+                />
+            </LazyLoad>
           </div>
         </div>
       </div>

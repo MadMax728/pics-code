@@ -18,7 +18,6 @@ class Messages extends Component {
             messages : []
         }
         this.socket = io(process.env.REACT_APP_AUTH_BASEURL);
-        //this.socket = io("http://localhost:3146");
     }    
 
     selectUser = (user) => {

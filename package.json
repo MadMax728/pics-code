@@ -30,6 +30,7 @@
     "react-draft-wysiwyg": "^1.12.13",
     "react-dropzone": "^7.0.0",
     "react-ga": "^2.5.3",
+    "react-lazyload": "^2.3.0",
     "react-localization": "^1.0.10",
     "react-places-autocomplete": "^7.2.0",
     "react-player": "^1.6.6",
