@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 
 class ParticipantPage extends Component {
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     this.props.getDashboard("participants");
   };
 
@@ -16,11 +17,13 @@ class ParticipantPage extends Component {
     return participantList.map(participant => {
       return (
         <div key={participant.id}>
-          { participant.mediaUrl && participant.postType.toLowerCase() === enumerations.contentTypes.mediaPost ||
+          {(participant.mediaUrl &&
+            participant.postType.toLowerCase() ===
+              enumerations.contentTypes.mediaPost) ||
             (participant.postType.toLowerCase() ===
               enumerations.contentTypes.companyParticipantCampaign && (
-            <MediaCard item={participant} isDescription/>)
-          )}
+              <MediaCard item={participant} isDescription />
+            ))}
         </div>
       );
     });
@@ -41,7 +44,7 @@ ParticipantPage.propTypes = {
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  participantList: PropTypes.any,
+  participantList: PropTypes.any
   // error: PropTypes.any
 };
 

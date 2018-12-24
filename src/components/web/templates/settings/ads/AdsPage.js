@@ -9,6 +9,7 @@ import * as enumerations from "../../../../../lib/constants/enumerations";
 class AdsPage extends Component {
   componentDidMount = () => {
     this.props.getAds("getSettingsAds", "");
+    window.scrollTo(0, 0);
   };
 
   componentWillReceiveProps = nextProps => {

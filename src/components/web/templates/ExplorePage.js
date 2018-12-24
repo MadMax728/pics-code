@@ -9,6 +9,7 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class ExploreRoot extends Component {
   componentDidMount = () => {
     this.props.getDashboard("explores");
+    window.scrollTo(0, 0);
   };
 
   renderExploreList = () => {
@@ -16,9 +17,10 @@ class ExploreRoot extends Component {
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
-          {explore.mediaUrl && explore.postType === enumerations.contentTypes.mediaPost && (
-            <MediaCard item={explore} isDescription/>
-          )}
+          {explore.mediaUrl &&
+            explore.postType === enumerations.contentTypes.mediaPost && (
+              <MediaCard item={explore} isDescription />
+            )}
         </div>
       );
     });
@@ -39,7 +41,7 @@ ExploreRoot.propTypes = {
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  exploreList: PropTypes.any,
+  exploreList: PropTypes.any
   // error: PropTypes.any
 };
 

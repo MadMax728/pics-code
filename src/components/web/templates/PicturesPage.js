@@ -7,6 +7,7 @@ import { getDashboard } from "../../../actions";
 
 class PicturesRoot extends React.Component {
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     this.props.getDashboard("pics");
   };
 
@@ -38,7 +39,7 @@ class PicturesRoot extends React.Component {
 PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  picsList: PropTypes.any,
+  picsList: PropTypes.any
   // error: PropTypes.any
 };
 

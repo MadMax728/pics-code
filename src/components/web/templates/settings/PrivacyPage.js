@@ -76,6 +76,7 @@ class PrivacyPage extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
     if (storage) {

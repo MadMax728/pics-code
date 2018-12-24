@@ -15,15 +15,23 @@ class NewsFeedPage extends Component {
   }
 
   componentDidMount = () => {
-    if (this.props.match.params.username) {      
-      this.props.getUser(this.props.match.params).then(() => { 
-        if(this.props.userDataByUsername && this.props.userDataByUsername.user && this.props.userDataByUsername.user.data)
-        {
+    window.scrollTo(0, 0);
+    if (this.props.match.params.username) {
+      this.props.getUser(this.props.match.params).then(() => {
+        if (
+          this.props.userDataByUsername &&
+          this.props.userDataByUsername.user &&
+          this.props.userDataByUsername.user.data
+        ) {
           this.props.getNewsFeed(
             "getNewsFeedOther",
             this.props.userDataByUsername.user.data.id
           );
-          this.setState({isPrivate: this.props.userDataByUsername.user.data.isPrivate? this.props.userDataByUsername.user.data.isPrivate : false})
+          this.setState({
+            isPrivate: this.props.userDataByUsername.user.data.isPrivate
+              ? this.props.userDataByUsername.user.data.isPrivate
+              : false
+          });
         }
       });
     } else {
@@ -34,19 +42,25 @@ class NewsFeedPage extends Component {
   componentWillReceiveProps(nextProps) {
     const data = this.props.match.params;
     if (data.username !== nextProps.match.params.username) {
-      if ( nextProps.match.params.username) {   
+      if (nextProps.match.params.username) {
         this.props.getUser(nextProps.match.params).then(() => {
-          if(this.props.userDataByUsername && this.props.userDataByUsername.user && this.props.userDataByUsername.user.data)
-          {
+          if (
+            this.props.userDataByUsername &&
+            this.props.userDataByUsername.user &&
+            this.props.userDataByUsername.user.data
+          ) {
             this.props.getNewsFeed(
               "getNewsFeedOther",
               this.props.userDataByUsername.user.data.id
             );
-            this.setState({isPrivate: this.props.userDataByUsername.user.data.isPrivate? this.props.userDataByUsername.user.data.isPrivate : false})
+            this.setState({
+              isPrivate: this.props.userDataByUsername.user.data.isPrivate
+                ? this.props.userDataByUsername.user.data.isPrivate
+                : false
+            });
           }
         });
-      }
-      else {
+      } else {
         this.props.getNewsFeed("getNewsFeedOwner");
       }
     }
@@ -57,45 +71,55 @@ class NewsFeedPage extends Component {
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
-        
-          {newsFeed.mediaUrl && newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.mediaPost && (
-            <MediaCard item={newsFeed} isParticipant={false} isDescription />
-          )}
-          {newsFeed.mediaUrl && newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.companyCampaign && (
-            <CampaignCard
-              item={newsFeed}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport={false}
-            />
-          )}
-          {newsFeed.mediaUrl && newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.creatorCampaign && (
-            <CampaignCard
-              item={newsFeed}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport={false}
-            />
-          )}
-          {newsFeed.mediaUrl &&  newsFeed.postType && newsFeed.postType.toLowerCase() ===
-            enumerations.contentTypes.companyParticipantCampaign && (
-            <MediaCard item={newsFeed} isParticipant isDescription/>
-          )}
-          {newsFeed.mediaUrl &&  newsFeed.postType && newsFeed.postType.toLowerCase() === enumerations.contentTypes.ad && (
-            <AdCard
-              item={newsFeed}
-              isDescription
-              isInformation={false}
-              isStatus={false}
-            />
-          )}
+          {newsFeed.mediaUrl &&
+            newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.mediaPost && (
+              <MediaCard item={newsFeed} isParticipant={false} isDescription />
+            )}
+          {newsFeed.mediaUrl &&
+            newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.companyCampaign && (
+              <CampaignCard
+                item={newsFeed}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
+          {newsFeed.mediaUrl &&
+            newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.creatorCampaign && (
+              <CampaignCard
+                item={newsFeed}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
+          {newsFeed.mediaUrl &&
+            newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.companyParticipantCampaign && (
+              <MediaCard item={newsFeed} isParticipant isDescription />
+            )}
+          {newsFeed.mediaUrl &&
+            newsFeed.postType &&
+            newsFeed.postType.toLowerCase() ===
+              enumerations.contentTypes.ad && (
+              <AdCard
+                item={newsFeed}
+                isDescription
+                isInformation={false}
+                isStatus={false}
+              />
+            )}
         </div>
       );
     });

@@ -9,6 +9,10 @@ class SettingCampaignRight extends Component {
     this.props.handleModalShow(modalType.campaign);
   };
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   render() {
     return (
       <div>

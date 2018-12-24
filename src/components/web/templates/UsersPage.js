@@ -7,6 +7,7 @@ import { getDashboard } from "../../../actions";
 
 class UsersRoot extends React.Component {
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     this.props.getDashboard("users");
   };
 
@@ -42,7 +43,7 @@ class UsersRoot extends React.Component {
 UsersRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  usersList: PropTypes.any,
+  usersList: PropTypes.any
   // error: PropTypes.any
 };
 
