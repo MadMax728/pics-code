@@ -8,6 +8,7 @@ import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class SettingCampaignPage extends Component {
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     this.props.getCampaigns("getSettingsCampaigns", "");
   };
 

@@ -24,6 +24,7 @@ class Header extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     document.addEventListener("click", this.handleOutsideClick);
     document.addEventListener("scroll", this.onScroll);
   };

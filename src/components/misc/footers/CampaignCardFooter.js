@@ -78,16 +78,8 @@ const CampaignCardFooter = ({
           route={`${routes.BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}`}
         />
       )}
-      {campaign && isBudget && (
-        <BudgetCard
-          item={campaign}
-        />
-      )}
-      {campaign && isReport && (
-        <ReportCard
-          item={campaign}
-        />
-      )}
+      {campaign && isBudget && <BudgetCard item={campaign} />}
+      {campaign && isReport && <ReportCard item={campaign} />}
     </div>
   );
 };

@@ -15,6 +15,7 @@ class CampaignPage extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     const data = { userType: this.state.type };
     this.props.getCampaigns("getCampaignType", data);
   };
@@ -43,19 +44,20 @@ class CampaignPage extends Component {
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          { campaign.mediaUrl && (campaign.postType.toLowerCase() ===
-            enumerations.contentTypes.companyCampaign ||
-            campaign.postType.toLowerCase() ===
-              enumerations.contentTypes.creatorCampaign) && (
-            <CampaignCard
-              item={campaign}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport={false}
-            />
-          )}
+          {campaign.mediaUrl &&
+            (campaign.postType.toLowerCase() ===
+              enumerations.contentTypes.companyCampaign ||
+              campaign.postType.toLowerCase() ===
+                enumerations.contentTypes.creatorCampaign) && (
+              <CampaignCard
+                item={campaign}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
         </div>
       );
     });

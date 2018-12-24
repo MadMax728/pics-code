@@ -9,10 +9,14 @@ class Upload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isInProgress: false,
+      isInProgress: false
     };
     console.log(this.props);
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
   handleChangeField = event => {
     this.props.handleChangeField(event);

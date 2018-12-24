@@ -76,6 +76,7 @@ class PrivacyPage extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
     if (storage) {
@@ -879,8 +880,6 @@ class PrivacyPage extends Component {
     );
   }
 }
-
-//export default PrivacyPage;
 
 const mapStateToProps = state => ({
   profilePrivacyData: state.profilePrivacyData,

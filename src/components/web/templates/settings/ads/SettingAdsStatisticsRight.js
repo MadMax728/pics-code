@@ -3,6 +3,10 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 class SettingAdsStatisticsRight extends Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   handleOnChange = () => {};
 
   render() {

@@ -34,9 +34,10 @@ class InformationPage extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     const data = {
       id: this.state.campaignId
-    }
+    };
     this.props.getCampaignDetails(data);
   };
 
@@ -79,204 +80,199 @@ class InformationPage extends Component {
   render() {
     const { campaignDetails, isLoading } = this.props;
     console.log(campaignDetails);
-    
+
     return (
       <div className="padding-l-10 middle-section width-80">
-        {campaignDetails &&
-          !isLoading && (
-            <div className="information-wrapper ht100">
-              <div className="info-inner-wrapper col-xs-12">
-                <div className="info-main-title paddindLeft0">
-                  {campaignDetails.title}
-                </div>
-                <div className="text">{campaignDetails.description}</div>
-                <img src={campaignDetails.profileImage} alt={"information"} />
-                <div className="text paddTop20">{campaignDetails.description}</div>
-                <button className="filled_button">
-                  {Translations.apply_campaign}
-                </button>
-                <div className="feed_wrapper">
-                  <div className="feed_header">
-                    <div className="no-padding profile_image">
-                      <img
-                        src={images.image}
-                        alt="circle-img-1"
-                        className="img-circle img-responsive"
-                      />
-                    </div>
-                    <div className="col-sm-9 col-xs-7 no-padding">
-                      <div className="normal_title">
-                        {campaignDetails.title}
-                      </div>
-                      <div className="secondary_title">
-                        {campaignDetails.userName}
-                      </div>
-                      <div className="grey_title">
-                        {campaignDetails.category}
-                      </div>
-                    </div>
-                    <div className="col-sm-2 col-xs-2 like_wrapper">
-                      {campaignDetails.isSelfLike ? (
-                        <img
-                          src={images.blue_heart}
-                          alt="like-1"
-                          className="pull-right"
-                          role="presentation"
-                          onClick={this.handleFavorite}
-                          id={campaignDetails.id}
-                          onKeyDown={this.handleOnKeyDown}
-                        />
-                      ) : (
-                        <img
-                          src={images.feed_like}
-                          alt="like"
-                          className="pull-right"
-                          role="presentation"
-                          onClick={this.handleFavorite}
-                          id={campaignDetails.id}
-                          onKeyDown={this.handleOnKeyDown}
-                        />
-                      )}
-                    </div>
+        {campaignDetails && !isLoading && (
+          <div className="information-wrapper ht100">
+            <div className="info-inner-wrapper col-xs-12">
+              <div className="info-main-title paddindLeft0">
+                {campaignDetails.title}
+              </div>
+              <div className="text">{campaignDetails.description}</div>
+              <img src={campaignDetails.profileImage} alt={"information"} />
+              <div className="text paddTop20">
+                {campaignDetails.description}
+              </div>
+              <button className="filled_button">
+                {Translations.apply_campaign}
+              </button>
+              <div className="feed_wrapper">
+                <div className="feed_header">
+                  <div className="no-padding profile_image">
+                    <img
+                      src={images.image}
+                      alt="circle-img-1"
+                      className="img-circle img-responsive"
+                    />
                   </div>
-                  <div className="feed_content col-xs-12">
-                    <div className="feed_description col-xs-12">
-                      <div className="col-sm-6 no-padding">
-                        <div className="info_wrapper">
-                          <span className="normal_title">Start: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.startDate}
-                          </span>
-                        </div>
-                        <div className="info_wrapper">
-                          <span className="normal_title">Procedure: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.procedure}
-                          </span>
-                        </div>
-                        <div className="info_wrapper">
-                          <span className="normal_title">Target group: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.target_group}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="col-sm-6 no-padding">
-                        <div className="info_wrapper">
-                          <span className="normal_title">End: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.endDate}
-                          </span>
-                        </div>
-                        <div className="info_wrapper">
-                          <span className="normal_title">Type: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.type}
-                          </span>
-                        </div>
-                        <div className="info_wrapper">
-                          <span className="normal_title">Applications: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.applications}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="col-sm-6 no-padding">
-                        <div className="info_wrapper">
-                          <span className="normal_title">Start: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.startDate}
-                          </span>
-                        </div>
-                        <div className="info_wrapper">
-                          <span className="normal_title">Procedure: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.procedure}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="col-sm-6 no-padding">
-                        <div className="info_wrapper">
-                          <span className="normal_title">End: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.endDate}
-                          </span>
-                        </div>
-                        <div className="info_wrapper">
-                          <span className="normal_title">Type: </span>
-                          <span className="secondary_title">
-                            {campaignDetails.type}
-                          </span>
-                        </div>
-                      </div>
+                  <div className="col-sm-9 col-xs-7 no-padding">
+                    <div className="normal_title">{campaignDetails.title}</div>
+                    <div className="secondary_title">
+                      {campaignDetails.userName}
                     </div>
+                    <div className="grey_title">{campaignDetails.category}</div>
                   </div>
-                  <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
-                    <div className="messages">
-                      <span className="count">{campaignDetails.msg_count}</span>
+                  <div className="col-sm-2 col-xs-2 like_wrapper">
+                    {campaignDetails.isSelfLike ? (
                       <img
-                        src={images.feed_msg}
-                        alt={"feed_msg"}
+                        src={images.blue_heart}
+                        alt="like-1"
+                        className="pull-right"
                         role="presentation"
-                        onClick={this.handleMessage}
-                        id={campaignDetails.createdBy}
+                        onClick={this.handleFavorite}
+                        id={campaignDetails.id}
                         onKeyDown={this.handleOnKeyDown}
                       />
-                    </div>
-                    <div className="likes">
-                      <span className="count">
-                        {campaignDetails.like_count}
-                      </span>
-                      {campaignDetails.isSelfLike ? (
-                        <img
-                          src={images.blue_heart}
-                          alt="like-1"
-                          className="pull-right"
-                          role="presentation"
-                          onClick={this.handleFavorite}
-                          id={campaignDetails.id}
-                          onKeyDown={this.handleOnKeyDown}
-                        />
-                      ) : (
-                        <img
-                          src={images.feed_like}
-                          alt="like"
-                          className="pull-right"
-                          role="presentation"
-                          onClick={this.handleFavorite}
-                          id={campaignDetails.id}
-                          onKeyDown={this.handleOnKeyDown}
-                        />
-                      )}
-                    </div>
-                    <div className="show_more_options">
-                      <ThreeDots
-                        id="report"
-                        role="button"
-                        dataTip="tooltip"
-                        dataClass="tooltip-wrapr"
-                        getContent={this.renderReportTips}
-                        effect="solid"
-                        delayHide={500}
-                        delayShow={500}
-                        delayUpdate={500}
-                        place={"left"}
-                        border
-                        type={"light"}
+                    ) : (
+                      <img
+                        src={images.feed_like}
+                        alt="like"
+                        className="pull-right"
+                        role="presentation"
+                        onClick={this.handleFavorite}
+                        id={campaignDetails.id}
+                        onKeyDown={this.handleOnKeyDown}
                       />
+                    )}
+                  </div>
+                </div>
+                <div className="feed_content col-xs-12">
+                  <div className="feed_description col-xs-12">
+                    <div className="col-sm-6 no-padding">
+                      <div className="info_wrapper">
+                        <span className="normal_title">Start: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.startDate}
+                        </span>
+                      </div>
+                      <div className="info_wrapper">
+                        <span className="normal_title">Procedure: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.procedure}
+                        </span>
+                      </div>
+                      <div className="info_wrapper">
+                        <span className="normal_title">Target group: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.target_group}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-sm-6 no-padding">
+                      <div className="info_wrapper">
+                        <span className="normal_title">End: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.endDate}
+                        </span>
+                      </div>
+                      <div className="info_wrapper">
+                        <span className="normal_title">Type: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.type}
+                        </span>
+                      </div>
+                      <div className="info_wrapper">
+                        <span className="normal_title">Applications: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.applications}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-sm-6 no-padding">
+                      <div className="info_wrapper">
+                        <span className="normal_title">Start: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.startDate}
+                        </span>
+                      </div>
+                      <div className="info_wrapper">
+                        <span className="normal_title">Procedure: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.procedure}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="col-sm-6 no-padding">
+                      <div className="info_wrapper">
+                        <span className="normal_title">End: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.endDate}
+                        </span>
+                      </div>
+                      <div className="info_wrapper">
+                        <span className="normal_title">Type: </span>
+                        <span className="secondary_title">
+                          {campaignDetails.type}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="feed_wrapper">
-                <div className="feed-comment">
-                  {/* Comments Section */}
-                  <Comments campaign={campaignDetails} />
+                <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
+                  <div className="messages">
+                    <span className="count">{campaignDetails.msg_count}</span>
+                    <img
+                      src={images.feed_msg}
+                      alt={"feed_msg"}
+                      role="presentation"
+                      onClick={this.handleMessage}
+                      id={campaignDetails.createdBy}
+                      onKeyDown={this.handleOnKeyDown}
+                    />
+                  </div>
+                  <div className="likes">
+                    <span className="count">{campaignDetails.like_count}</span>
+                    {campaignDetails.isSelfLike ? (
+                      <img
+                        src={images.blue_heart}
+                        alt="like-1"
+                        className="pull-right"
+                        role="presentation"
+                        onClick={this.handleFavorite}
+                        id={campaignDetails.id}
+                        onKeyDown={this.handleOnKeyDown}
+                      />
+                    ) : (
+                      <img
+                        src={images.feed_like}
+                        alt="like"
+                        className="pull-right"
+                        role="presentation"
+                        onClick={this.handleFavorite}
+                        id={campaignDetails.id}
+                        onKeyDown={this.handleOnKeyDown}
+                      />
+                    )}
+                  </div>
+                  <div className="show_more_options">
+                    <ThreeDots
+                      id="report"
+                      role="button"
+                      dataTip="tooltip"
+                      dataClass="tooltip-wrapr"
+                      getContent={this.renderReportTips}
+                      effect="solid"
+                      delayHide={500}
+                      delayShow={500}
+                      delayUpdate={500}
+                      place={"left"}
+                      border
+                      type={"light"}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          )}
+
+            <div className="feed_wrapper">
+              <div className="feed-comment">
+                {/* Comments Section */}
+                <Comments campaign={campaignDetails} />
+              </div>
+            </div>
+          </div>
+        )}
         {isLoading && (
           <div className="info-inner-wrapper col-xs-12 no-padding">
             <div className="info-main-title paddindLeft0 gray_box" />
@@ -325,7 +321,7 @@ InformationPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
   campaignDetails: PropTypes.any,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool
   // error: PropTypes.any
 };
 

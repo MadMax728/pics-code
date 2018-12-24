@@ -33,6 +33,7 @@ class Information extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     // this.props.getCampaignDetails(this.state.commentId)
   };
 
@@ -270,7 +271,7 @@ Information.propTypes = {
   handleModalShow: PropTypes.func,
   // match: PropTypes.any,
   campaign_detail: PropTypes.any,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool
   // error: PropTypes.any
 };
 

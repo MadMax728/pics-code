@@ -9,7 +9,6 @@ import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
 import ReportCard from "./ReportCard";
 
-
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -19,9 +18,9 @@ class CommentCard extends Component {
       comments: this.props.item,
       itemId: this.props.itemId,
       typeOfContent: this.props.typeContent,
-      minRange : 0,
-      maxRange : 2,
-      slicedCommentsData : null,
+      minRange: 0,
+      maxRange: 2,
+      slicedCommentsData: null,
       form: {
         id: null,
         comment: ""
@@ -49,9 +48,12 @@ class CommentCard extends Component {
   handleReportPost = () => {};
 
   componentDidMount = () => {
-    const commentData = (this.state.comments).slice(this.state.minRange, this.state.maxRange);
-    this.setState({slicedCommentsData :  commentData, maxRange : 2})
-  }
+    const commentData = this.state.comments.slice(
+      this.state.minRange,
+      this.state.maxRange
+    );
+    this.setState({ slicedCommentsData: commentData, maxRange: 2 });
+  };
 
   addComment = comment => {
     const { comments, itemId, typeOfContent, slicedCommentsData } = this.state;
@@ -61,7 +63,7 @@ class CommentCard extends Component {
       typeId: itemId
     };
     this.props.addComment(data).then(() => {
-      if(this.props.comment)  {
+      if (this.props.comment) {
         const commentData = {
           id: this.props.comment.id,
           comment: this.props.comment.comment,
@@ -90,15 +92,15 @@ class CommentCard extends Component {
     });
   };
 
-  handleViewComment = (e) => {
-    const maxRangeValue =  parseInt(this.state.maxRange) + parseInt(e.target.id);
-    const commentData = (this.state.comments).slice(0, maxRangeValue);
-    this.setState({slicedCommentsData :  commentData, maxRange : maxRangeValue})
+  handleViewComment = e => {
+    const maxRangeValue = parseInt(this.state.maxRange) + parseInt(e.target.id);
+    const commentData = this.state.comments.slice(0, maxRangeValue);
+    this.setState({ slicedCommentsData: commentData, maxRange: maxRangeValue });
   };
 
   handleDelete = e => {
     const id = e.target.id;
-    const { comments, slicedCommentsData} = this.state;
+    const { comments, slicedCommentsData } = this.state;
     const indexOf = comments.findIndex(c => {
       return c.id === id;
     });
@@ -116,8 +118,6 @@ class CommentCard extends Component {
     }
   };
 
-
-
   /**
    * Tooltp
    */
@@ -134,7 +134,9 @@ class CommentCard extends Component {
   renderEditComment = comment => {
     const { updateForm } = this.state;
     const { isLoading } = this.props;
-    let html = <ReadMore text={comment.comment} min={150} ideal={150} max={150} />;
+    let html = (
+      <ReadMore text={comment.comment} min={150} ideal={150} max={150} />
+    );
     if (comment.id === updateForm.id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
@@ -165,22 +167,37 @@ class CommentCard extends Component {
 
   renderBackOfficeComment = comment => {
     const { isReport } = this.props;
-    return(
+    return (
       <div key={comment.id}>
         <div className="feed-comment">
           <div className="comment-wrapper">
             <div className="comment-header">
               <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                <img src={comment.profileImage} alt={`comment-${comment.id}`} className="img-circle img-responsive ht45" />
+                <img
+                  src={comment.profileImage}
+                  alt={`comment-${comment.id}`}
+                  className="img-circle img-responsive ht45"
+                />
               </div>
               <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-                <b>{comment.userName}</b> {DateFormat(comment.createdAt)} <b>
-                  Reply
-                </b>
+                <b>{comment.userName}</b> {DateFormat(comment.createdAt)}{" "}
+                <b>Reply</b>
               </div>
               <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
-                <ThreeDots id={`comment-${comment.id}`} role="button" dataTip="tooltip" dataClass="tooltip-wrapr" /* eslint-disable */
-                  getContent={() => this.renderReportTips(comment.id)} effect="solid" delayHide={500} delayShow={500} delayUpdate={500} place={"left"} border={true} type={"light"} />
+                <ThreeDots
+                  id={`comment-${comment.id}`}
+                  role="button"
+                  dataTip="tooltip"
+                  dataClass="tooltip-wrapr" /* eslint-disable */
+                  getContent={() => this.renderReportTips(comment.id)}
+                  effect="solid"
+                  delayHide={500}
+                  delayShow={500}
+                  delayUpdate={500}
+                  place={"left"}
+                  border={true}
+                  type={"light"}
+                />
               </div>
             </div>
             <div className="comment-content">
@@ -188,35 +205,47 @@ class CommentCard extends Component {
             </div>
           </div>
         </div>
-        {comment && isReport && (
-          <ReportCard
-            item={comment}
-          />
-        )}
+        {comment && isReport && <ReportCard item={comment} />}
       </div>
     );
   };
 
   renderComment = comment => {
-    return <div className="comment-wrapper" key={comment.id}>
+    console.log(comment);
+    return (
+      <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
           <div className="col-sm-1 col-xs-1 no-padding profile_image">
-            <img src={comment.profileImage} alt={`comment-${comment.id}`} className="img-circle img-responsive ht45" />
+            <img
+              src={comment.profileImage}
+              alt={`comment-${comment.id}`}
+              className="img-circle img-responsive ht45"
+            />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {DateFormat(comment.createdAt)} <b>
-              Reply
-            </b>
+            <b>{comment.userName}</b> {DateFormat(comment.createdAt)}{" "}
+            <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
-            <ThreeDots id={`comment-${comment.id}`} role="button" dataTip="tooltip" dataClass="tooltip-wrapr" /* eslint-disable */
-              getContent={() => this.renderReportTips(comment.id)} effect="solid" delayHide={500} delayShow={500} delayUpdate={500} place={"left"} border={true} type={"light"} />
+            <ThreeDots
+              id={`comment-${comment.id}`}
+              role="button"
+              dataTip="tooltip"
+              dataClass="tooltip-wrapr" /* eslint-disable */
+              getContent={() => this.renderReportTips(comment.id)}
+              effect="solid"
+              delayHide={500}
+              delayShow={500}
+              delayUpdate={500}
+              place={"left"}
+              border={true}
+              type={"light"}
+            />
           </div>
         </div>
-        <div className="comment-content">
-          {this.renderEditComment(comment)}
-        </div>
-      </div>;
+        <div className="comment-content">{this.renderEditComment(comment)}</div>
+      </div>
+    );
   };
 
   handleSetState = (value, cd) => {
@@ -259,50 +288,64 @@ class CommentCard extends Component {
   render() {
     const { item, form } = this.state;
     const { isLoading, isReport } = this.props;
+    console.log("in comment");
+    console.log(item.id);
+    console.log(isReport);
+    console.log(this.props.totalCommentsCount);
+    console.log(this.state.slicedCommentsData);
     return (
-      <div className={isReport? "feed_wrapper" : "feed-comment"} id={item.id}>
-        {
-          !isReport  && 
+      <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
+        {!isReport && (
           <div className="comment-wrapper">
             <form onSubmit={this.handleSubmit} ref="commentForm">
-            <div className="col-sm-1 col-xs-1 no-padding profile_image">
-              <img
-                src={images.image}
-                alt="image1"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-sm-10 col-xs-7 no-padding">
-              <div className="comment-input">
-                <div className="form-group">
-                  <HashTagUsername
-                    className="form-control"
-                    type="text"
-                    placeholder="Write a comment"
-                    name="comment"
-                    disabled={isLoading}
-                    handleSetState={this.handleSetState}
-                    value={form.comment}
-                    maxLimit={1000}
-                    isText
-                  />
+              <div className="col-sm-1 col-xs-1 no-padding profile_image">
+                <img
+                  src={images.image}
+                  alt="image1"
+                  className="img-circle img-responsive"
+                />
+              </div>
+              <div className="col-sm-10 col-xs-7 no-padding">
+                <div className="comment-input">
+                  <div className="form-group">
+                    <HashTagUsername
+                      className="form-control"
+                      type="text"
+                      placeholder="Write a comment"
+                      name="comment"
+                      disabled={isLoading}
+                      handleSetState={this.handleSetState}
+                      value={form.comment}
+                      maxLimit={1000}
+                      isText
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="col-sm-1 col-xs-2 emoji_wrapper">
-              <img src={images.emoji} alt="like" className="pull-right" />
-            </div>
-            <input type="submit" hidden />
-          </form>
+              <div className="col-sm-1 col-xs-2 emoji_wrapper">
+                <img src={images.emoji} alt="like" className="pull-right" />
+              </div>
+              <input type="submit" hidden />
+            </form>
           </div>
-        }
+        )}
 
-        {isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData && this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
-        
-        {!isReport && this.props.totalCommentsCount !== 0 && this.state.slicedCommentsData && this.state.slicedCommentsData.map(this.renderComment)}
+        {isReport &&
+          this.props.totalCommentsCount !== 0 &&
+          this.state.slicedCommentsData &&
+          this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
 
-        {(!isReport && this.props.totalCommentsCount > this.state.maxRange) && (
-          <div className="view-more-comments view-more-link"  id="7" onClick={this.handleViewComment}>
+        {!isReport &&
+          this.props.totalCommentsCount !== 0 &&
+          this.state.slicedCommentsData &&
+          this.state.slicedCommentsData.map(this.renderComment)}
+
+        {!isReport && this.props.totalCommentsCount > this.state.maxRange && (
+          <div
+            className="view-more-comments view-more-link"
+            id="7"
+            onClick={this.handleViewComment}
+          >
             {Translations.view_more_comments}
           </div>
         )}

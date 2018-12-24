@@ -49,6 +49,7 @@ class SocialNetworks extends Component {
 
   componentDidMount = () => {
     this.props.getSocialNetwork();
+    window.scrollTo(0, 0);
   };
 
   // Launches the popup by making a request to the server and then
@@ -63,13 +64,13 @@ class SocialNetworks extends Component {
     const width = window.innerWidth
       ? window.innerWidth
       : document.documentElement.clientWidth
-        ? document.documentElement.clientWidth
-        : window.screen.width;
+      ? document.documentElement.clientWidth
+      : window.screen.width;
     const height = window.innerHeight
       ? window.innerHeight
       : document.documentElement.clientHeight
-        ? document.documentElement.clientHeight
-        : window.screen.height;
+      ? document.documentElement.clientHeight
+      : window.screen.height;
 
     const left = width / 2 - w / 2 + dualScreenLeft;
     const top = height / 2 - h / 2 + dualScreenTop;

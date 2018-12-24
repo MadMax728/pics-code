@@ -19,6 +19,7 @@ class BusinessProfilePage extends Component {
 
   componentDidMount = () => {
     const storage = Auth.extractJwtFromStorage();
+    window.scrollTo(0, 0);
     let userInfo = null;
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);

@@ -21,6 +21,10 @@ class DataDownloadPage extends Component {
     };
   }
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   componentWillReceiveProps = nextProps => {
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
