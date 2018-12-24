@@ -12,7 +12,7 @@ const usersReducers = (state = initialState.usersData, action) => {
     case types.GET_USER_LIST_SUCCEEDED:
       return {
         ...state,
-        subscribers: action.payload,
+        users: action.payload,
         isLoading: false
       };
     case types.GET_USER_LIST_FAILED:

@@ -26,6 +26,7 @@ class MLeftContainer extends Component {
         this.props.getUserList(type).then(() => {
             const  { usersData } = this.props;
             if(!usersData.isLoading) {
+                console.log(usersData, usersData.users);
                 this.setState({ userList : usersData.users })
             }
         });

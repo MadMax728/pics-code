@@ -1375,5 +1375,8 @@ section.loader-wrapr {
 }
 .bg-black {
   background: #000;
+  background: -webkit-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%); /* Chrome 10+, Saf5.1+ */ 
+  background: -moz-linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%); /* FF3.6+ */
+  background: linear-gradient(360deg, #dee1e1 10%, #f4f4f4 360%); /* W3C */ 
 }
 // .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .video-js .vjs-play-control .vjs-icon-placeholder:before,
