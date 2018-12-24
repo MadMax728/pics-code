@@ -61,11 +61,7 @@ const MediaCardFooter = ({
           type={"light"}
         />
       </div>
-      {item && isReport && (
-        <ReportCard
-          item={item}
-        />
-      )}
+      {item && isReport && <ReportCard item={item} />}
     </div>
   );
 };

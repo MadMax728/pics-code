@@ -15,24 +15,27 @@ class UsersPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getBackOfficeReportedContent("reportedContentUsers").then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.reportedContentUsers) {
+    this.props.getBackOfficeReportedContent("reportedContentUsers").then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData.reportedContentUsers
+      ) {
         this.setState({
           userList: this.props.reportedContentData.reportedContentUsers
-        })
+        });
       }
     });
   };
 
   renderUserList = () => {
     const { userList } = this.state;
-    
+
     return userList.map((user, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
       return (
         <div key={user.id}>
           {clearfixDiv}
-          <UserCard item={user} index={index} isReport/>
+          <UserCard item={user} index={index} isReport />
         </div>
       );
     });
@@ -64,7 +67,7 @@ const mapDispatchToProps = {
 UsersPage.propTypes = {
   getBackOfficeReportedContent: PropTypes.func.isRequired,
   reportedContentData: PropTypes.object,
-  isLoading: PropTypes.bool,
+  isLoading: PropTypes.bool
   // error: PropTypes.any
 };
 

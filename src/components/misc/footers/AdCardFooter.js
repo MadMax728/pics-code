@@ -72,16 +72,8 @@ const AdCardFooter = ({
           route={`${routes.BASE_SETTINGS_AD_STATISTICS_ROUTE}`}
         />
       )}
-      {ad && isBudget && (
-        <BudgetCard
-          item={ad}
-        />
-      )}
-      {ad && isReport && (
-        <ReportCard
-          item={ad}
-        />
-      )}
+      {ad && isBudget && <BudgetCard item={ad} />}
+      {ad && isReport && <ReportCard item={ad} />}
     </div>
   );
 };
