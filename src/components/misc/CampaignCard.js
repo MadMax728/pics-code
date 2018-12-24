@@ -10,7 +10,6 @@ import { like, getComments, setSavedPost } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 
-
 class CampaignCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -22,7 +21,7 @@ class CampaignCard extends Component {
     };
   }
 
-  renderReportTips = (id) => {
+  renderReportTips = id => {
     const reportTips = [
       {
         name: Translations.tool_tips.report,
@@ -42,18 +41,18 @@ class CampaignCard extends Component {
 
   handleReportPost = () => {};
 
-  handleSavePost = (e) => {
+  handleSavePost = e => {
     const item = this.state.item;
     const data = {
-        typeId: e.target.id,
-        postType: getBackendPostType(item)
-      };
+      typeId: e.target.id,
+      postType: getBackendPostType(item)
+    };
 
-    this.props.setSavedPost(data).then(()=> {
-      if(this.props.savedData){
+    this.props.setSavedPost(data).then(() => {
+      if (this.props.savedData) {
         console.log(this.props.savedData);
       }
-    })
+    });
   };
 
   handleContent = () => {};
@@ -82,16 +81,24 @@ class CampaignCard extends Component {
       typeId: this.state.item.id
     };
     this.props.getComments(CampaignId).then(() => {
+      const totalComment = this.props.comments;
       this.setState({
         isComments: !this.state.isComments,
         comments: this.props.comments,
-        totalCommentsCount: (this.props.comments).length
+        totalCommentsCount: totalComment.length
       });
     });
   };
 
   render() {
-    const { isStatus, isDescription, isInformation, isBudget, isReport, likeData } = this.props;
+    const {
+      isStatus,
+      isDescription,
+      isInformation,
+      isBudget,
+      isReport,
+      likeData
+    } = this.props;
     const { isComments, item, comments } = this.state;
     return (
       <div className="feed_wrapper">
@@ -112,8 +119,7 @@ class CampaignCard extends Component {
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
           isStatus={isStatus}
-          isBudget={isBudget}
-          /* eslint-disable */
+          isBudget={isBudget} /* eslint-disable */
           renderReportTips={() => this.renderReportTips(item.id)}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
@@ -125,7 +131,8 @@ class CampaignCard extends Component {
             itemId={item.id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
-            totalCommentsCount={(comments).length}
+            totalCommentsCount={comments.length}
+            isReport={isReport}
           />
         )}
       </div>

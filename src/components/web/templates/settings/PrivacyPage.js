@@ -881,8 +881,6 @@ class PrivacyPage extends Component {
   }
 }
 
-//export default PrivacyPage;
-
 const mapStateToProps = state => ({
   profilePrivacyData: state.profilePrivacyData,
   userDataByUsername: state.userDataByUsername,
