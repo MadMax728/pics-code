@@ -7,14 +7,14 @@
   padding-left: 5px;
   .pic-block {
       img {
-        min-height: 276px;
+        max-height: 276px;
       }
     }
 }
 .pic-block {
   &.gray_content {
     img {
-      min-height: 276px;
+      max-height: 276px;
     }
   }
   img {

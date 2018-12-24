@@ -6,7 +6,7 @@ class MRightUserInput extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message : 'abc'
+            message : ''
         }
     }    
 

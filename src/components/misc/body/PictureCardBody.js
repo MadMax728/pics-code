@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
+import LazyLoad from 'react-lazyload';
+import { Loader } from "../../ui-kit";
 
 const PictureCardBody = ({ pic, index, isReport }) => {
   return (
@@ -10,7 +12,9 @@ const PictureCardBody = ({ pic, index, isReport }) => {
       }
     >
       <div className="pic-block">
-        <img src={pic.image} alt={pic.image} />
+        <LazyLoad height={200} once={true} offset={[-200, 0]} placeholder={<Loader />}>
+          <img src={pic.image} alt={pic.image} />
+        </LazyLoad>
         <div className="name-wrapper">
           <div className="username">User name</div>
           <div className="name">{pic.name}</div>

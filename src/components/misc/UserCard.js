@@ -22,9 +22,7 @@ class UserCard extends Component {
     const { isReport } = this.props;
 
     return (
-      <div>
-        <UserCardBody user={item} index={index} handleSubscribed={this.handleSubscribed} isReport={isReport} />
-      </div>
+      <UserCardBody user={item} index={index} handleSubscribed={this.handleSubscribed} isReport={isReport} />
     );
   }
 }
