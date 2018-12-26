@@ -293,7 +293,6 @@ class StepOne extends Component {
           </form>
         </div>
         <div className="col-sm-6 no-padding right-side">
-
           {
             form.typeContent === enumerations.typeContent.image &&
               <ImageCropper

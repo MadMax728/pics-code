@@ -107,7 +107,7 @@ NewsRoot.propTypes = {
   // errornews: PropTypes.any
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => ({  
   newsFeedList: state.dashboardData.news,
   searchData: state.searchData,
   isLoadingnews: state.dashboardData.isLoadingnews,
