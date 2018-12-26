@@ -87,11 +87,13 @@ class NewsRoot extends Component {
   };
 
   render() {
-    const { newsFeedList, isLoading } = this.props;
+    const { newsFeedList, isLoadingnews } = this.props;
+    console.log(isLoadingnews);
+    
     return (
       <div className={"middle-section padding-rl-10"}>
-        {newsFeedList && !isLoading && this.renderNewsFeedList()}
-        {isLoading && <CampaignLoading />}
+        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
+        {isLoadingnews && <CampaignLoading />}
       </div>
     );
   }
@@ -99,17 +101,17 @@ class NewsRoot extends Component {
 
 NewsRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoadingnews: PropTypes.bool,
   newsFeedList: PropTypes.any,
   searchData: PropTypes.any
-  // error: PropTypes.any
+  // errornews: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   newsFeedList: state.dashboardData.news,
   searchData: state.searchData,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  isLoadingnews: state.dashboardData.isLoadingnews,
+  errornews: state.dashboardData.errornews
 });
 
 const mapDispatchToProps = {
