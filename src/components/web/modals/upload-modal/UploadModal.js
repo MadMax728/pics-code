@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
 import { uploadMedia } from "../../../../actions/media";
 import { connect } from "react-redux";
+import { modalType } from "../../../../lib/constants/enumerations";
+
 
 const initialState = {
   form: {
@@ -52,25 +54,33 @@ class UploadModal extends Component {
   };
 
   handleContinue = () => {
-    const { form } = this.state;
-    
-    const Data = new FormData();
-    Data.append("description", form.add_description);
-    Data.append("isAdvertiseLabel", form.is_advertise_label);
-    Data.append("category", form.add_category);
-    if(form.filetype) {
-      Data.append("image", form.file);
+    if(this.validateForm()) {
+      const { form } = this.state;
+      const Data = new FormData();
+      Data.append("description", form.add_description);
+      Data.append("isAdvertiseLabel", form.is_advertise_label);
+      Data.append("category", form.add_category);
+      if(form.filetype) {
+        Data.append("image", form.file);
+      }
+      else {
+        Data.append("video", form.file);
+      }
+      Data.append("postType", "mediapost");
+      Data.append("location", JSON.stringify(form.add_location));
+  
+      this.props.uploadMedia(Data, form.filetype).then(() => {
+        this.setState(initialState);
+        this.props.handleModalHide();
+      });
     }
     else {
-      Data.append("video", form.file);
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        "Please Fill proper Data"
+      );
     }
-    Data.append("postType", "mediapost");
-    Data.append("location", JSON.stringify(form.add_location));
-
-    this.props.uploadMedia(Data, form.filetype).then(() => {
-      this.setState(initialState);
-      this.props.handleModalHide();
-    });
+    
 
   };
 
@@ -106,6 +116,12 @@ class UploadModal extends Component {
     this.setState(initialState);
     this.props.handleModalHide();
   }
+
+  validateForm = () => {
+    const { form } = this.state;
+    return form.add_category && form.add_location.latitude && form.add_location.longitude && form.add_location.address && form.file
+  }
+
   render() {
     const { form } = this.state;
 
@@ -141,7 +157,8 @@ class UploadModal extends Component {
 UploadModal.propTypes = {
   modalShow: PropTypes.bool,
   handleModalHide: PropTypes.func,
-  uploadMedia: PropTypes.func
+  uploadMedia: PropTypes.func,
+  handleModalInfoMsgShow: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
