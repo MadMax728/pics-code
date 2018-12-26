@@ -8,7 +8,8 @@ import {
   EditProfileModal,
   ShareModal,
   ConfirmationModal,
-  ErrorModal
+  ErrorModal,
+  SubscribeModal
 } from "../../web/modals";
 import PropTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -71,6 +72,17 @@ class InfoModal extends Component {
     );
   };
 
+  handleModalSubscribe = () => {
+    return (
+      <SubscribeModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+        handleModalHide={this.props.handleModalHide}
+        modalInfoMsg={this.props.modalInfoMsg}
+      />
+    );
+  };
+
   handleModalEditProfile = () => {
     return (
       <EditProfileModal
@@ -110,6 +122,8 @@ class InfoModal extends Component {
           this.handleModalActionConfirmation()}
         {this.props.modalInfoType === modalType.error &&
           this.handleModalError()}
+        {this.props.modalInfoType === modalType.subscribe &&
+          this.handleModalSubscribe()}
       </div>
     );
   };

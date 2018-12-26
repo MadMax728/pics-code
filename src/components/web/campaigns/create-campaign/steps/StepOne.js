@@ -4,20 +4,25 @@ import PropTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import * as enumerations from "../../../../../lib/constants/enumerations";
-import { OfferTags, InquiryTags, SelectCategory, SelectInquiry, SelectOffer } from "../../../../../components/common";
+import {
+  OfferTags,
+  InquiryTags,
+  SelectCategory,
+  SelectInquiry,
+  SelectOffer
+} from "../../../../../components/common";
 
 class StepOne extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 
-  }
-
-   render() {
+  render() {
     const {
       handleChangeField,
       form,
@@ -40,16 +45,20 @@ class StepOne extends Component {
         <div className="col-sm-6 upload-form">
           <div className="no-padding profile_image">
             <img
-              src={userInfo? userInfo.profileUrl : images.image}
+              src={userInfo ? userInfo.profileUrl : images.image}
               alt="image1"
               className="img-circle img-responsive"
             />
           </div>
           <div className="user-title">
             <div className="normal_title">
-              {form.title? form.title : Translations.create_campaigns.title_of_campaigns}
+              {form.title
+                ? form.title
+                : Translations.create_campaigns.title_of_campaigns}
             </div>
-            <div className="secondary_title">{userInfo? userInfo.username : ""}</div>
+            <div className="secondary_title">
+              {userInfo ? userInfo.username : ""}
+            </div>
           </div>
           <form>
             <div className="form-group">
@@ -58,46 +67,53 @@ class StepOne extends Component {
               </label>
               <input
                 type="text"
-                value={form.title? form.title : ""}
+                value={form.title ? form.title : ""}
                 name="title"
                 onChange={handleChangeField}
               />
-            {
-              form.title && form.title.length === 0 && form.error && (
-              <span className="error-msg highlight">{Translations.error.create_modal.title}</span>
-              )
-            }
+              {form.title && form.title.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.title}
+                </span>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="Location">
                 {Translations.create_campaigns.add_loaction}
                 Add Location
               </label>
-                <PlaceAutoCompleteLocation
-                  className=""
-                  handleLocation={handleLocation}
-                  value={form.location? form.location.address : ""}
-                />
-                {
-                  form.location && form.location.address && form.location.latitude && form.location.longitude && form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
-                    <span className="error-msg highlight">{Translations.error.create_modal.location}</span>
-                    )
-                  }
+              <PlaceAutoCompleteLocation
+                className=""
+                handleLocation={handleLocation}
+                value={form.location ? form.location.address : ""}
+              />
+              {form.location &&
+                form.location.address &&
+                form.location.latitude &&
+                form.location.longitude &&
+                form.location.address.length === 0 &&
+                form.location.latitude.length === 0 &&
+                form.location.longitude.length === 0 &&
+                form.error && (
+                  <span className="error-msg highlight">
+                    {Translations.error.create_modal.location}
+                  </span>
+                )}
             </div>
             <div className="form-group">
               <label htmlFor="Category">
                 {Translations.create_campaigns.add_category}
               </label>
-                <SelectCategory
-                  value={form.category? form.category : ""}
-                  className=""
-                  handleSelect={handleSelect}
-                />
-                {
-                  form.category && form.category.length === 0 && form.error && (
-                  <span className="error-msg highlight">{Translations.error.create_modal.category}</span>
-                  )
-                }
+              <SelectCategory
+                value={form.category ? form.category : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
+              {form.category && form.category.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.category}
+                </span>
+              )}
             </div>
             <div className="subtitle">
               {Translations.create_campaigns.application_criteria}
@@ -116,7 +132,9 @@ class StepOne extends Component {
                         name="procedure"
                         className="black_button"
                         value={enumerations.procedure.public}
-                        defaultChecked={form.procedure === enumerations.procedure.public}
+                        defaultChecked={
+                          form.procedure === enumerations.procedure.public
+                        }
                       />
                       <label htmlFor={enumerations.procedure.public}>
                         {Translations.create_campaigns.public}
@@ -128,7 +146,9 @@ class StepOne extends Component {
                         id={enumerations.procedure.anonymous}
                         name="procedure"
                         value={enumerations.procedure.anonymous}
-                        defaultChecked={form.procedure === enumerations.procedure.anonymous}
+                        defaultChecked={
+                          form.procedure === enumerations.procedure.anonymous
+                        }
                       />
                       <label htmlFor={enumerations.procedure.anonymous}>
                         {Translations.create_campaigns.anonymous}
@@ -139,38 +159,40 @@ class StepOne extends Component {
               </div>
             )}
 
-              <div className="form-group">
-                  <label htmlFor="Type">
-                    {Translations.create_campaigns.type}
+            <div className="form-group">
+              <label htmlFor="Type">{Translations.create_campaigns.type}</label>
+              <ul className="options">
+                <li onChange={handleChangeField} className="wid49">
+                  <input
+                    type="radio"
+                    id={enumerations.typeContent.video}
+                    name="typeContent"
+                    className="black_button"
+                    value={enumerations.typeContent.video}
+                    defaultChecked={
+                      form.typeContent === enumerations.typeContent.video
+                    }
+                  />
+                  <label htmlFor={enumerations.typeContent.video}>
+                    {Translations.create_campaigns.video}
                   </label>
-                  <ul className="options">
-                    <li onChange={handleChangeField} className="wid49">
-                      <input
-                        type="radio"
-                        id={enumerations.typeContent.video}
-                        name="typeContent"
-                        className="black_button"
-                        value={enumerations.typeContent.video}
-                        defaultChecked={form.typeContent === enumerations.typeContent.video}
-                      />
-                      <label htmlFor={enumerations.typeContent.video}>
-                        {Translations.create_campaigns.video}
-                      </label>
-                    </li>
-                    <li onChange={handleChangeField} className="wid49">
-                      <input
-                        type="radio"
-                        id={enumerations.typeContent.image}
-                        name="typeContent"
-                        value={enumerations.typeContent.image}
-                        defaultChecked={form.typeContent === enumerations.typeContent.image}
-                      />
-                      <label htmlFor={enumerations.typeContent.image}>
-                        {Translations.create_campaigns.image}
-                      </label>
-                    </li>
-                  </ul>
-                </div>
+                </li>
+                <li onChange={handleChangeField} className="wid49">
+                  <input
+                    type="radio"
+                    id={enumerations.typeContent.image}
+                    name="typeContent"
+                    value={enumerations.typeContent.image}
+                    defaultChecked={
+                      form.typeContent === enumerations.typeContent.image
+                    }
+                  />
+                  <label htmlFor={enumerations.typeContent.image}>
+                    {Translations.create_campaigns.image}
+                  </label>
+                </li>
+              </ul>
+            </div>
             <div className="form-group">
               <label htmlFor="Target_group">
                 {Translations.create_campaigns.target_group}
@@ -183,7 +205,9 @@ class StepOne extends Component {
                     name="targetGroup"
                     className="black_button"
                     value={enumerations.target_group.company}
-                    defaultChecked={form.targetGroup === enumerations.target_group.company}
+                    defaultChecked={
+                      form.targetGroup === enumerations.target_group.company
+                    }
                   />
                   <label htmlFor={enumerations.target_group.company}>
                     {Translations.create_campaigns.company}
@@ -195,7 +219,10 @@ class StepOne extends Component {
                     id={enumerations.target_group.female_and_male}
                     value={enumerations.target_group.female_and_male}
                     name="targetGroup"
-                    defaultChecked={form.targetGroup === enumerations.target_group.female_and_male}
+                    defaultChecked={
+                      form.targetGroup ===
+                      enumerations.target_group.female_and_male
+                    }
                   />
                   <label htmlFor={enumerations.target_group.female_and_male}>
                     {Translations.create_campaigns.male_female}
@@ -207,7 +234,9 @@ class StepOne extends Component {
                     id={enumerations.target_group.female}
                     name="targetGroup"
                     value={enumerations.target_group.female}
-                    defaultChecked={form.targetGroup === enumerations.target_group.female}
+                    defaultChecked={
+                      form.targetGroup === enumerations.target_group.female
+                    }
                   />
                   <label htmlFor={enumerations.target_group.female}>
                     {Translations.create_campaigns.female}
@@ -219,7 +248,9 @@ class StepOne extends Component {
                     id={enumerations.target_group.male}
                     name="targetGroup"
                     value={enumerations.target_group.male}
-                    defaultChecked={form.targetGroup === enumerations.target_group.male}
+                    defaultChecked={
+                      form.targetGroup === enumerations.target_group.male
+                    }
                   />
                   <label htmlFor={enumerations.target_group.male}>
                     {Translations.create_campaigns.male}
@@ -234,16 +265,16 @@ class StepOne extends Component {
               <label htmlFor="Offer">
                 {Translations.create_campaigns.offer}
               </label>
-                <SelectOffer
-                  value={form.offers? form.offers : ""}
-                  className=""
-                  handleSelect={handleSelect}
-                />
-                {
-                  form.offers.length === 0 && form.error && (
-                  <span className="error-msg highlight">{Translations.error.create_modal.offers}</span>
-                  )
-                }
+              <SelectOffer
+                value={form.offers ? form.offers : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
+              {form.offers.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.offers}
+                </span>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="offer_tag">
@@ -254,26 +285,26 @@ class StepOne extends Component {
                 handleOfferTagChange={handleOfferTagChange}
                 handleOfferTagDelete={handleOfferTagDelete}
               />
-              {
-                form.offerTag && form.offerTag.length === 0 && form.error && (
-                <span className="error-msg highlight">{Translations.error.create_modal.offerTag}</span>
-                )
-              }
+              {form.offerTag && form.offerTag.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.offerTag}
+                </span>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry">
                 {Translations.create_campaigns.inquiry}
               </label>
-                <SelectInquiry
-                  value={form.inquiry? form.inquiry : ""}
-                  className=""
-                  handleSelect={handleSelect}
-                />
-                {
-                form.inquiry && form.inquiry.length === 0 && form.error && (
-                  <span className="error-msg highlight">{Translations.error.create_modal.inquiry}</span>
-                  )
-                }
+              <SelectInquiry
+                value={form.inquiry ? form.inquiry : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
+              {form.inquiry && form.inquiry.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.inquiry}
+                </span>
+              )}
             </div>
             <div className="form-group">
               <label htmlFor="Inquiry_tag">
@@ -284,60 +315,60 @@ class StepOne extends Component {
                 handleInquiryTagChange={handleInquiryTagChange}
                 handleInquiryTagDelete={handleInquiryTagDelete}
               />
-              {
-                form.inquiryTag && form.inquiryTag.length === 0 && form.error && (
-                  <span className="error-msg highlight">{Translations.error.create_modal.inquiryTag}</span>
-                  )
-                }
+              {form.inquiryTag &&
+                form.inquiryTag.length === 0 &&
+                form.error && (
+                  <span className="error-msg highlight">
+                    {Translations.error.create_modal.inquiryTag}
+                  </span>
+                )}
             </div>
           </form>
         </div>
         <div className="col-sm-6 no-padding right-side">
+          {form.typeContent === enumerations.typeContent.image && (
+            <ImageCropper
+              image={form.image}
+              handleEditImage={handleEditImage}
+              isCircle={false}
+              ref={this.imageCrop}
+              handleActualImg={handleActualImg}
+              handleScale={handleScale}
+            />
+          )}
 
-          {
-            form.typeContent === enumerations.typeContent.image &&
-              <ImageCropper
-                image={form.image}
-                handleEditImage={handleEditImage}
-                isCircle={false}
-                ref={this.imageCrop}
-                handleActualImg={handleActualImg}
-                handleScale={handleScale}
+          {form.typeContent === enumerations.typeContent.video && !form.video && (
+            <div className="box">
+              <input
+                type="file"
+                name="newImage"
+                id="file-2"
+                className="inputfile inputfile-2"
+                data-multiple-caption="{count} files selected"
+                multiple=""
+                onChange={handleVideo}
               />
-          }
-
-          {
-            form.typeContent === enumerations.typeContent.video && !form.video &&
-              <div className="box">
-                <input
-                  type="file"
-                  name="newImage"
-                  id="file-2"
-                  className="inputfile inputfile-2"
-                  data-multiple-caption="{count} files selected"
-                  multiple=""
-                  onChange={handleVideo}
-                />
-                <label htmlFor="file-2">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="17"
-                    viewBox="0 0 20 17"
-                  >
-                    <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
-                  </svg>
-                  <br /> <span>{Translations.upload_modal.upload_file}</span>
-                </label>
-              </div>
-          }
-          { !form.fileType && form.video && form.typeContent === enumerations.typeContent.video &&
-            <video controls>
-              <track kind="captions" />
-              <source src={form.video} type={form.file.type} />
-            </video>
-          }
-
+              <label htmlFor="file-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="17"
+                  viewBox="0 0 20 17"
+                >
+                  <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                </svg>
+                <br /> <span>{Translations.upload_modal.upload_file}</span>
+              </label>
+            </div>
+          )}
+          {!form.fileType &&
+            form.video &&
+            form.typeContent === enumerations.typeContent.video && (
+              <video controls>
+                <track kind="captions" />
+                <source src={form.video} type={form.file.type} />
+              </video>
+            )}
         </div>
       </div>
     );

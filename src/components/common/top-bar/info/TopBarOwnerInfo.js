@@ -130,7 +130,14 @@ class TopBarOwnerInfo extends Component {
   }
 
   render() {
-    return <TopBar items={this.state.items} handeleShare={this.handeleShare} />;
+    return (
+      <TopBar
+        items={this.state.items}
+        handeleShare={this.handeleShare}
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   }
 }
 const mapStateToProps = state => ({

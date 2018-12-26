@@ -54,7 +54,7 @@ class TopBarOtherInfo extends Component {
           this.props.userDataByUsername.user &&
           this.props.userDataByUsername.user.data
         ) {
-            this.handleSetUserInfo();
+          this.handleSetUserInfo();
         }
       });
     }
@@ -68,7 +68,7 @@ class TopBarOtherInfo extends Component {
         this.props.userDataByUsername.user &&
         this.props.userDataByUsername.user.data
       ) {
-          this.handleSetUserInfo();
+        this.handleSetUserInfo();
       }
     });
   }
@@ -108,7 +108,7 @@ class TopBarOtherInfo extends Component {
       ]
     };
     this.setState({ items });
-  }
+  };
 
   handeleSubscribe = () => {
     console.log("handeleSubscribe clicked");
@@ -124,7 +124,13 @@ class TopBarOtherInfo extends Component {
   };
 
   render() {
-    return <TopBar items={this.state.items} />;
+    return (
+      <TopBar
+        items={this.state.items}
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   }
 }
 
@@ -140,7 +146,8 @@ TopBarOtherInfo.propTypes = {
   match: PropTypes.any,
   handleModalShow: PropTypes.func,
   getUser: PropTypes.func,
-  userDataByUsername: PropTypes.object
+  userDataByUsername: PropTypes.object,
+  handleModalInfoShow: PropTypes.any
 };
 
 export default connect(

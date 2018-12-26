@@ -33,7 +33,8 @@ export const modalType = {
   processed: "processed",
   edit_profile: "edit_profile",
   share: "share",
-  confirmation: "confirmation"
+  confirmation: "confirmation",
+  subscribe: "subscribe"
 };
 
 export const mediaTypes = {
