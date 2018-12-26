@@ -6,7 +6,7 @@ import {
   EditProfilePicHeader
 } from "../../../web/templates/settings/edit-profile-pic";
 import { uploadProfilePicture } from "../../../../actions/profile";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { b64toBlob } from "../../../../lib/utils/helpers";
 
 class EditProfileModal extends Component {
@@ -62,7 +62,12 @@ class EditProfileModal extends Component {
           const blob = b64toBlob(realData, contentType);
 
           const CropedData = new FormData();
-          CropedData.append('image',blob);
+          if (this.state.scale === 1){
+            CropedData.append('image',this.state.actual_img);
+          }
+          else {
+            CropedData.append('image',blob);
+          }
           CropedData.append('typeImage','Crop');
           CropedData.append('typeOfContent','profile');
           CropedData.append('coordinate', '50');
@@ -84,7 +89,7 @@ class EditProfileModal extends Component {
   };
 
   render() {
-    const { handleModalInfoHide, modalInfoShow, handleEditImage } = this.props;
+    const { handleModalInfoHide, modalInfoShow } = this.props;
     const { image } = this.state;
     return (
       <CustomBootstrapModal

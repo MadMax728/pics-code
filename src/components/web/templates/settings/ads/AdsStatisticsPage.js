@@ -16,6 +16,7 @@ class AdsStatisticsPage extends Component {
 
   componentDidMount = () => {
     this.props.getAdDetails(this.state.adId);
+    window.scrollTo(0, 0);
   };
 
   render() {
@@ -141,8 +142,8 @@ AdsStatisticsPage.propTypes = {
   match: PropTypes.any,
   getAdDetails: PropTypes.func.isRequired,
   ad_details: PropTypes.any,
-  isLoading: PropTypes.bool,
-  error: PropTypes.any
+  isLoading: PropTypes.bool
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

@@ -71,8 +71,8 @@ export const getAbout = (prop, provider) => {
         dispatch(getAboutSucceeded(res.data.data));
       },
       error => {
-          dispatch(getAboutFailed(error.response));
-      logger.error({
+        dispatch(getAboutFailed(error.response));
+        logger.error({
           description: error.toString(),
           fatal: true
         });
@@ -81,7 +81,7 @@ export const getAbout = (prop, provider) => {
   };
 };
 
-// Saved
+// Get Saved
 const getSavedStarted = () => ({
   type: types.GET_SAVED_STARTED
 });
@@ -111,6 +111,46 @@ export const getSaved = (prop, provider) => {
       },
       error => {
         dispatch(getSavedFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+
+// Set Saved
+const setSavedPostStarted = () => ({
+  type: types.SET_SAVED_STARTED
+});
+
+const setSavedPostSucceeded = data => ({
+  type: types.SET_SAVED_SUCCEEDED,
+  payload: data
+});
+
+const setSavedPostFailed = error => ({
+  type: types.SET_SAVED_FAILED,
+  payload: error,
+  error: true
+});
+
+export const setSavedPost = (provider) => {
+  return dispatch => {
+    dispatch(setSavedPostStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return settingsService.setSavedPost(provider, header).then(
+      res => {
+        dispatch(setSavedPostSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(setSavedPostFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

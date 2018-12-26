@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Comments from "./Comments";
-
 import * as images from "../../../../lib/constants/images";
 import { Translations } from "../../../../lib/translations";
-
 import { campaign_detail } from "../../../../mock-data";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { ThreeDots, RenderToolTips } from "../../../common";
@@ -35,10 +33,11 @@ class Information extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     // this.props.getCampaignDetails(this.state.commentId)
   };
 
-  handleFavorite = e => {
+  handleFavorite = () => {
     this.setState({
       campaign_detail: {
         ...this.state.campaign_detail,
@@ -270,10 +269,10 @@ class Information extends Component {
 
 Information.propTypes = {
   handleModalShow: PropTypes.func,
-  match: PropTypes.any,
+  // match: PropTypes.any,
   campaign_detail: PropTypes.any,
-  isLoading: PropTypes.bool,
-  error: PropTypes.any
+  isLoading: PropTypes.bool
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({

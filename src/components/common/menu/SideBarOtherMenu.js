@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { LeftSidebarNav } from "../../ui-kit";
-import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 
@@ -11,13 +10,13 @@ class SideBarOtherMenu extends Component {
     this.state = {
       links: [
         {
-          to: `/news-feed/${this.props.match.params.id}`,
+          to: `/news-feed/${this.props.match.params.username}`,
           className: "secondary_title",
           activeClassName: "active",
           text: Translations.left_sidebar_owner_menu.news_feed
         },
         {
-          to: `/about/${this.props.match.params.id}`,
+          to: `/about/${this.props.match.params.username}`,
           className: "secondary_title",
           activeClassName: "active",
           text: Translations.left_sidebar_owner_menu.about

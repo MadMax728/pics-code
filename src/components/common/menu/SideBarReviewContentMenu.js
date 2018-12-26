@@ -52,7 +52,7 @@ const SideBarReviewContentMenu = () => {
   return (
     <LeftSidebarNav
       links={Links}
-      header={`Review`}
+      header={`Reported Content`}
       ulClassName={"nav navbar-nav pull-right settings-menu"}
     />
   );

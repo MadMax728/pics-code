@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 class SettingAdsRight extends Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   handleCreateAds = () => {
     this.props.handleModalShow(modalType.ads);
   };

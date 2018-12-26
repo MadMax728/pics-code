@@ -3,34 +3,37 @@ import * as selectService from "../services";
 import { logger } from "../loggers";
 import * as types from "../lib/constants/actionTypes";
 
-// Get Category
-const getCategoryStarted = () => ({
-  type: types.GET_CATEGORY_STARTED
+
+// Get Select
+
+const getSelectStarted = () => ({
+  type: types.GET_SELECT_STARTED
 });
 
-const getCategorySucceeded = data => ({
-  type: types.GET_CATEGORY_SUCCEEDED,
-  payload: data
+const getSelectSucceeded = (data,isFor) => ({
+  type: types.GET_SELECT_SUCCEEDED,
+  payload: data,
+  isFor
 });
 
-const getCategoryFailed = error => ({
-  type: types.GET_CATEGORY_FAILED,
+const getSelectFailed = error => ({
+  type: types.GET_SELECT_FAILED,
   payload: error,
   error: true
 });
 
-export const getCategory = params => {
+export const getSelect = (prop, provider) => {
   return dispatch => {
-    dispatch(getCategoryStarted());
+    dispatch(getSelectStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    return selectService.getCategory(params, header).then(
+    return selectService[prop](provider, header).then(
       res => {
         if (res.data && res.data.data)
-          dispatch(getCategorySucceeded(res.data.data));
+          dispatch(getSelectSucceeded(res.data.data, prop));
       },
       error => {
-        dispatch(getCategoryFailed(error.response));
+        dispatch(getSelectFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -40,116 +43,14 @@ export const getCategory = params => {
   };
 };
 
-// Get Offer
 
-const getOfferStarted = () => ({
-  type: types.GET_OFFER_STARTED
-});
-
-const getOfferSucceeded = data => ({
-  type: types.GET_OFFER_SUCCEEDED,
+const getTargetGroupSucceeded = data => ({
+  type: types.GET_TARGET_GROUP_SUCCEEDED,
   payload: data
 });
 
-const getOfferFailed = error => ({
-  type: types.GET_OFFER_FAILED,
-  payload: error,
-  error: true
-});
-
-export const getOffer = params => {
+export const getTargetGroup = data => {
   return dispatch => {
-    dispatch(getOfferStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const header = { Authorization: storage.accessToken };
-    return selectService.getOffer(params, header).then(
-      res => {
-        if (res.data && res.data.data)
-          dispatch(getOfferSucceeded(res.data.data));
-      },
-      error => {
-        dispatch(getOfferFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
-  };
-};
-
-// Get Inquiry
-
-const getInquiryStarted = () => ({
-  type: types.GET_INQUIRY_STARTED
-});
-
-const getInquirySucceeded = data => ({
-  type: types.GET_INQUIRY_SUCCEEDED,
-  payload: data
-});
-
-const getInquiryFailed = error => ({
-  type: types.GET_INQUIRY_FAILED,
-  payload: error,
-  error: true
-});
-
-export const getInquiry = params => {
-  return dispatch => {
-    dispatch(getInquiryStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const header = { Authorization: storage.accessToken };
-    return selectService.getInquiry(params, header).then(
-      res => {
-        if (res.data && res.data.data)
-          dispatch(getInquirySucceeded(res.data.data));
-      },
-      error => {
-        dispatch(getInquiryFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
-  };
-};
-
-// Get Daily Budget
-
-const getDailyBudgetStarted = () => ({
-  type: types.GET_DAILY_BUDGET_STARTED
-});
-
-const getDailyBudgetSucceeded = data => ({
-  type: types.GET_DAILY_BUDGET_SUCCEEDED,
-  payload: data
-});
-
-const getDailyBudgetFailed = error => ({
-  type: types.GET_DAILY_BUDGET_FAILED,
-  payload: error,
-  error: true
-});
-
-export const getDailyBudget = params => {
-  return dispatch => {
-    dispatch(getDailyBudgetStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const header = { Authorization: storage.accessToken };
-    return selectService.getDailyBudget(params, header).then(
-      res => {
-        if (res.data && res.data.data)
-          dispatch(getDailyBudgetSucceeded(res.data.data));
-      },
-      error => {
-        dispatch(getDailyBudgetFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
+    dispatch(getTargetGroupSucceeded(data));
   };
 };

@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../lib/translations";
-
+import { Auth } from "../../../../auth";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getBills } from "../../../../actions";
 import * as images from "../../../../lib/constants/images";
 import { dataDownload_list } from "../../../../mock-data";
 
@@ -9,12 +12,32 @@ class BillsAndReceiptsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataDownload: dataDownload_list
+      dataDownload: dataDownload_list,
+      userId: ""
     };
   }
+
+  componentWillMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.setState({ userId: userInfo.id });
+      const params = { userId: userInfo.id };
+      this.props.getBills().then(() => {
+        this.setState({ dataDownload: dataDownload_list });
+      });
+    }
+  };
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   render() {
     const { dataDownload } = this.state;
-
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="campaign-middle-section">
@@ -32,9 +55,9 @@ class BillsAndReceiptsPage extends Component {
                 </tr>
               </thead>
               <tbody>
-                {dataDownload.map((data, index) => {
+                {dataDownload.map(data => {
                   return (
-                    <tr key={index}>
+                    <tr key={data.no}>
                       <td>{data.no}</td>
                       <td>{data.title}</td>
                       <td>{data.runtime}</td>
@@ -60,4 +83,19 @@ class BillsAndReceiptsPage extends Component {
   }
 }
 
-export default BillsAndReceiptsPage;
+const mapStateToProps = state => ({
+  billsData: state.billsData
+});
+
+const mapDispatchToProps = {
+  getBills
+};
+
+BillsAndReceiptsPage.propTypes = {
+  getBills: PropTypes.func
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BillsAndReceiptsPage);

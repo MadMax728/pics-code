@@ -99,20 +99,19 @@ export const jwtAdminValid = () => {
  */
 export const extractJwtFromStorage = () => {
   const token = localStorage.getItem("access_token");
-
   if (!token) {
     return null;
   }
 
-  return ({
+  return {
     accessToken: token,
     isAdmin: localStorage.getItem("is_admin"),
     userType: localStorage.getItem("user_type"),
     adminAccessToken: localStorage.getItem("admin_access_token"),
     language: localStorage.getItem("language"),
     userInfo: localStorage.getItem("user_info"),
-    username: localStorage.getItem("username"),
-  });
+    username: localStorage.getItem("username")
+  };
 };
 
 /**
@@ -129,13 +128,25 @@ export const saveJwtToStorage = authResponse => {
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
-  if (authResponse.email && authResponse.username && authResponse.language && authResponse.id && authResponse.userType && authResponse.profileUrl) {
-    localStorage.setItem("user_info",JSON.stringify({"email":authResponse.email, 
-    "username":authResponse.username, 
-    "language": authResponse.language,
-    "profileUrl": authResponse.profileUrl,
-    "userType": authResponse.userType,
-    "id": authResponse.id}));
+  if (
+    authResponse.email &&
+    authResponse.username &&
+    authResponse.language &&
+    authResponse.id &&
+    authResponse.userType &&
+    authResponse.profileUrl
+  ) {
+    localStorage.setItem(
+      "user_info",
+      JSON.stringify({
+        email: authResponse.email,
+        username: authResponse.username,
+        language: authResponse.language,
+        profileUrl: authResponse.profileUrl,
+        userType: authResponse.userType,
+        id: authResponse.id
+      })
+    );
   }
 
   if (authResponse.hasOwnProperty("isAdmin")) {

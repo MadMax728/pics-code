@@ -4,20 +4,51 @@ import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
 import { getUser } from "../../../../actions";
-
-const storage = Auth.extractJwtFromStorage();
-let userInfo = null;
-if (storage) {
-  userInfo = JSON.parse(storage.userInfo);
-}
 
 class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = {};
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
     this.state = {
-      items: []
+      items: {
+        username: userInfo.username,
+        private: true,
+        settings: true,
+        more: false,
+        userProfile: userInfo.profileUrl,
+        slots: [
+          {
+            name: Translations.top_bar_info.subscriber,
+            val: 0,
+            className: "col-sm-4 slot_one no-padding",
+            btnActiveClassName: "filled_button",
+            btnText: Translations.top_bar_info.upload,
+            handeleEvent: this.handeleUpload
+          },
+          {
+            name: Translations.top_bar_info.subscribed,
+            val: 0,
+            className: "col-sm-4 slot_two no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_campaign,
+            handeleEvent: this.handeleCreateCampaign
+          },
+          {
+            name: Translations.top_bar_info.posts,
+            val: 0,
+            className: "col-sm-4 slot_three no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_ad,
+            handeleEvent: this.handeleCreateAd
+          }
+        ]
+      }
     };
   }
 
@@ -42,13 +73,23 @@ class TopBarOwnerInfo extends Component {
   };
 
   componentDidMount() {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+
     if (userInfo) {
       const data = {
         username: userInfo.username
       };
-      this.setState({isLoading: true})
+      this.setState({ isLoading: true });
       this.props.getUser(data).then(() => {
-        if (this.props.userDataByUsername && this.props.userDataByUsername.user && this.props.userDataByUsername.user.data){
+        if (
+          this.props.userDataByUsername &&
+          this.props.userDataByUsername.user &&
+          this.props.userDataByUsername.user.data
+        ) {
           const items = {
             username: this.props.userDataByUsername.user.data.username,
             private: this.props.userDataByUsername.user.data.isPrivate,
@@ -85,10 +126,7 @@ class TopBarOwnerInfo extends Component {
           this.setState({ items });
         }
       });
-    } 
-
-
-
+    }
   }
 
   render() {
@@ -96,19 +134,18 @@ class TopBarOwnerInfo extends Component {
   }
 }
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername,
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
-  getUser,
+  getUser
 };
 
 TopBarOwnerInfo.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   getUser: PropTypes.func,
-  userDataByUsername: PropTypes.object,
-
+  userDataByUsername: PropTypes.object
 };
 
 export default connect(

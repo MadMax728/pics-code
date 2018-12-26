@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { TextEditor } from "../../../../ui-kit/text-editor";
 import { Translations } from "../../../../../lib/translations";
@@ -11,23 +10,30 @@ class StepTwo extends Component {
   }
 
   render() {
-    const { contentText, handleContentChange } = this.props;
+    const { form, handleContentChange } = this.props;
     return (
       <div className="col-xs-12 create-campaign-wrapper">
         <div className="title">{Translations.create_campaigns.title}</div>
         <TextEditor
           handleContentChange={handleContentChange}
-          contentText={contentText}
+          contentText={form.description}
         />
+        <div className="form-group">
+          {
+            form.description.length === 0 && form.error && (
+              <span className="error-msg highlight">{Translations.error.create_modal.description}</span>
+            )
+          }
+        </div>
       </div>
     );
   }
 }
 
 StepTwo.propTypes = {
-  handleChangeField: PropTypes.func.isRequired,
+  // handleChangeField: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
-  contentText: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired
 };
 
 export default StepTwo;

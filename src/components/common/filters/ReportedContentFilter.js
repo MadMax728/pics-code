@@ -14,6 +14,27 @@ const statusItems = [
   { name: "not_processed", className: "", value: "Not processed" }
 ];
 
+const languageItems = [
+  {
+    name: "All",
+    className: "radio-btn ",
+    checked: true,
+    value: "all"
+  },
+  {
+    name: "German",
+    className: "radio-btn lbl-margin",
+    checked: false,
+    value: "german"
+  },
+  {
+    name: "English",
+    className: "radio-btn ",
+    checked: true,
+    value: "english"
+  }
+];
+
 const Filters = [
   {
     name: Translations.reported_content_filter.relevance.name,
@@ -26,6 +47,12 @@ const Filters = [
     className: "filter-title",
     type: Translations.reported_content_filter.status.type,
     items: statusItems
+  },
+  {
+    name: Translations.left_sidebar_filter.language.name,
+    className: "filter-title",
+    type: Translations.left_sidebar_filter.language.type,
+    items: languageItems
   }
 ];
 
@@ -51,6 +78,10 @@ class ReportedContentFilter extends Component {
     this.setState({ filData: filterData });
   };
 
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
   render() {
     return (
       <div className="left-filters">
@@ -58,6 +89,7 @@ class ReportedContentFilter extends Component {
           filters={Filters}
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -79,7 +111,8 @@ class ReportedContentFilter extends Component {
 }
 
 ReportedContentFilter.propTypes = {
-  handleApplyClick: PropTypes.func
+  handleApplyClick: PropTypes.func,
+  handleSelect: PropTypes.func
 };
 
 export default ReportedContentFilter;

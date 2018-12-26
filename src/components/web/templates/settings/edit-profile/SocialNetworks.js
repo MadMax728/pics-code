@@ -10,33 +10,33 @@ import SocialProfileUrl from "./SocialProfileUrl";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 
-const socialNetworksAll = [
-  {
-    socialNetworkType: "facebook",
-    title: "Facebook",
-    icon: "fa-facebook",
-    publicUrl: "https://facebook.com/santosh.shinde.735944",
-    userName: "santosh.shinde"
-  },
-  {
-    socialNetworkType: "instagram",
-    title: "Instagram",
-    icon: "fa-instagram",
-    userName: "santosh.shinde"
-  },
-  {
-    socialNetworkType: "twitter",
-    title: "Twitter",
-    icon: "fa-twitter",
-    userName: "santosh.shinde"
-  },
-  {
-    socialNetworkType: "youtube",
-    title: "Youtube",
-    icon: "fa-youtube",
-    userName: "santosh.shinde"
-  }
-];
+// const socialNetworksAll = [
+//   {
+//     socialNetworkType: "facebook",
+//     title: "Facebook",
+//     icon: "fa-facebook",
+//     publicUrl: "https://facebook.com/santosh.shinde.735944",
+//     userName: "santosh.shinde"
+//   },
+//   {
+//     socialNetworkType: "instagram",
+//     title: "Instagram",
+//     icon: "fa-instagram",
+//     userName: "santosh.shinde"
+//   },
+//   {
+//     socialNetworkType: "twitter",
+//     title: "Twitter",
+//     icon: "fa-twitter",
+//     userName: "santosh.shinde"
+//   },
+//   {
+//     socialNetworkType: "youtube",
+//     title: "Youtube",
+//     icon: "fa-youtube",
+//     userName: "santosh.shinde"
+//   }
+// ];
 
 class SocialNetworks extends Component {
   constructor(props) {
@@ -49,6 +49,7 @@ class SocialNetworks extends Component {
 
   componentDidMount = () => {
     this.props.getSocialNetwork();
+    window.scrollTo(0, 0);
   };
 
   // Launches the popup by making a request to the server and then
@@ -63,13 +64,13 @@ class SocialNetworks extends Component {
     const width = window.innerWidth
       ? window.innerWidth
       : document.documentElement.clientWidth
-        ? document.documentElement.clientWidth
-        : window.screen.width;
+      ? document.documentElement.clientWidth
+      : window.screen.width;
     const height = window.innerHeight
       ? window.innerHeight
       : document.documentElement.clientHeight
-        ? document.documentElement.clientHeight
-        : window.screen.height;
+      ? document.documentElement.clientHeight
+      : window.screen.height;
 
     const left = width / 2 - w / 2 + dualScreenLeft;
     const top = height / 2 - h / 2 + dualScreenTop;
@@ -230,8 +231,6 @@ SocialNetworks.propTypes = {
   getSocialNetwork: PropTypes.func.isRequired,
   disconnectNetwork: PropTypes.func,
   userData: PropTypes.object,
-  history: PropTypes.any,
-  userId: PropTypes.string.isRequired,
   isOwnerProfile: PropTypes.bool
 };
 

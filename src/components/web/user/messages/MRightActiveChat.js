@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import * as images from "../../../../lib/constants/images";
+import { DateFormat } from "../../../Factory";
 
 const MRightActiveChat = (
     { 
@@ -12,11 +14,10 @@ const MRightActiveChat = (
             
             if(!items || !items.length){
                 return '';
-            }
-
+            }            
             return items.map((item) => (
                 <div key={item.id}> 
-                    <div className="date">{ item.date }</div>
+                    <div className="date">{ DateFormat(item.createdAt) }</div>
                     <div>
                     { me === item.senderId && (
                         <div className="reply"
@@ -24,7 +25,7 @@ const MRightActiveChat = (
                             onKeyPress={handleMessageClick}
                             onClick={handleMessageClick}>
                              { item.content }
-                             <span className="time">{ item.createdAt }</span>
+                             <span className="time">{ DateFormat(item.createdAt) }</span>
                         </div>
                     )}
 
@@ -34,7 +35,7 @@ const MRightActiveChat = (
                             onKeyPress={handleMessageClick}
                             onClick={handleMessageClick}>
                              { item.content }
-                             <span className="time">{ item.createdAt }</span>
+                             <span className="time">{ DateFormat(item.createdAt) }</span>
                         </div>
                     )}
                 </div>
@@ -47,8 +48,11 @@ const MRightActiveChat = (
                     user && user.id ? (
                         renderMessages()
                     ) : (
-                        <div className="card">
-                               You are ready to chat ..
+                        <div className="full-width">
+                            <div className="card">
+                               <h6>You are ready to chat ..</h6>
+                               <img src={images.profile_pic} alt="message"/>
+                             </div>
                         </div>
                     )
                 }
@@ -61,11 +65,11 @@ MRightActiveChat.propTypes = {
     items: PropTypes.arrayOf(
         PropTypes.shape({
           id: PropTypes.string,
-          content: PropTypes.string,
-          createdAt: PropTypes.string,
-          updatedAt: PropTypes.string,
-          recipientId: PropTypes.string,
-          senderId: PropTypes.string,
+          content: PropTypes.any,
+          createdAt: PropTypes.any,
+          updatedAt: PropTypes.any,
+          recipientId: PropTypes.any,
+          senderId: PropTypes.any,
         })
     ),
     handleMessageClick: PropTypes.func,

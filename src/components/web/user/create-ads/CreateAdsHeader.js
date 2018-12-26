@@ -10,7 +10,6 @@ class CreateAdsHeader extends Component {
 
   handleCancle = () => {
     this.props.handleModalHide();
-    this.props.handleResoreState();
   };
 
   handleBack = () => {
@@ -45,7 +44,7 @@ class CreateAdsHeader extends Component {
               {Translations.modal_header.back}
             </button>
           )}
-          {stepIndex <= 3 && (
+          {stepIndex <= 2 && (
             <button className="black_button" onClick={this.handleContinue}>
               {Translations.modal_header.continue}
             </button>
@@ -61,7 +60,6 @@ CreateAdsHeader.propTypes = {
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
-  handleResoreState: PropTypes.func
 };
 
 export default CreateAdsHeader;

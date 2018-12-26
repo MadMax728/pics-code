@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getCategory } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
 
 class SelectCategory extends Component {
@@ -17,10 +17,10 @@ class SelectCategory extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getCategory().then(() => {
-      if(this.props.categoryList && this.props.categoryList.categories){
+    this.props.getSelect("categories").then(() => {
+      if(this.props.categoryList){
         this.setState({
-          categoryList: this.props.categoryList.categories
+          categoryList: this.props.categoryList
         });
       }
     });
@@ -42,7 +42,7 @@ class SelectCategory extends Component {
         onBlur={this.handleCategory}
         options={categoryList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{"Select Category"}</option>
         {categoryList.map(option => (
           <option value={option.id} key={option.id}>
             {option.categoryName}
@@ -54,11 +54,11 @@ class SelectCategory extends Component {
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.selectData
+  categoryList: state.selectData.categories
 });
 
 const mapDispatchToProps = {
-  getCategory
+  getSelect
 };
 
 
@@ -66,7 +66,7 @@ const propTypes = {
   value: PropTypes.any,
   categoryList: PropTypes.any,
   className: PropTypes.string,
-  getCategory: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

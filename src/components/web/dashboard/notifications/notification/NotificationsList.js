@@ -25,19 +25,19 @@ class NotificationsList extends Component {
     return (
       <div className="tab-pane fade active in" id="nav-notifications">
         <div className="header-notifications">
-          {notification_list.map((notification, index) => {
+          {notification_list.map((notification) => {
             return (
               <div
                 className="notification-with-subscribe notification-wrapper"
-                key={index}
+                key={notification.id}
               >
                 {notification.isInvoise ? (
                   <img
                     src={images.notifications_logo}
-                    alt={"notifications-logo3" + index}
+                    alt={"notifications-logo3" + notification.id}
                   />
                 ) : (
-                  <img src={notification.image} alt={"index" + index} />
+                  <img src={notification.image} alt={"notification.id" + notification.id} />
                 )}
                 <div className="user-info">
                   <div className="username">{notification.username}</div>
@@ -70,7 +70,7 @@ class NotificationsList extends Component {
                   ))}
                 {notification.isImage && (
                   <div className="square-image">
-                    <img src={images.image} alt={"image5" + index} />
+                    <img src={images.image} alt={"image5" + notification.id} />
                   </div>
                 )}
               </div>

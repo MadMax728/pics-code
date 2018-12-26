@@ -7,19 +7,22 @@ class MRightUserInput extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            text : ''
+            message : ''
         }
     }    
 
-    handleChange=(e)=>{
-        this.setState({text :e.target.value})
-    }
-    
-    onEnterPress = (e) => {
+    handleChange = (e) => {
         e.preventDefault();
-        const { text } = this.state;
-        if(e.keyCode === 13 && e.shiftKey === false && this.props.onMessageSubmit && text) {
-          this.props.onMessageSubmit(text)
+        this.setState({ message: e.target.value });
+    };
+
+    onEnterPress = (e) => {
+        const keycode = (e.keyCode ? e.keyCode : e.which);
+        if(keycode === 13) {
+            e.preventDefault();
+            const { message } = this.state;
+            this.props.onMessageSubmit(message);
+            this.setState({ message: '' });
         }
     }
 
@@ -28,14 +31,15 @@ class MRightUserInput extends Component {
         return (
             <div className="write-chat">
                 {
-                   item && item.id && (
-                    <textarea placeholder="Write a message… " onChange={this.handleChange} value={this.state.message} onKeyUp={this.onEnterPress} onKeyDown={this.onEnterPress} />
-                   )
-                }
-                {
-                   item && item.id && (
-                    <img src={images.emoji} alt={"emoji1"} />
-                   )
+                    item && item.id && (
+                    <div>
+                        <textarea type="text" placeholder="Write a message… " 
+                            onChange={this.handleChange}
+                            onKeyPress={this.onEnterPress} 
+                            value={this.state.message} />
+                            <img src={images.emoji} alt={"emoji1"} />
+                    </div>
+                    )
                 }
             </div>
         )

@@ -30,7 +30,7 @@ export const getSavedCampaigns = payload =>
 
 // Settings Campaign
 export const getSettingsCampaigns = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get("/newsfeeds/news-feeds" + payload);
 
 // Campaign Type Creator and Company
 export const getCampaignType = (payload, header = {}) =>
@@ -38,4 +38,12 @@ export const getCampaignType = (payload, header = {}) =>
 
 // Campaign Informatin API
 export const getCampaignDetails = (payload, header = {}) =>
-  api(baseUrl, header).post("/campaigns/", payload);
+  api(baseUrl, header).get("/campaigns/" + payload.id);
+
+// Favourite Campaigns API
+export const getFavouriteCampaigns = (payload, header = {}) =>
+  api(baseUrl, header).get("/likes/get-favorite-campaign" + payload);
+
+// Create Campaign
+export const createCampaign = (payload, header = {}) =>
+  api(baseUrl, header).post("/campaigns", payload);

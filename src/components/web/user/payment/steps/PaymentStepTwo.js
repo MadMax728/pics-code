@@ -13,21 +13,24 @@ class PaymentStepTwo extends Component {
 
   handleCommitToBuy = () => {
     this.props.handleSubmit();
-    this.props.handleModalInfoShow();
   };
 
   render() {
     const { handleChangeField, form } = this.props;
     return (
-      <div className="col-xs-12 no-padding">
+      <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
           <div className="subtitle">Complete payment transaction</div>
           <div className="history-content-wrapper">
             <div className="subtitle">Billing address</div>
             <div className="content">
-              Marc Bopp
+              {form.address && 
+                form.address.invoiceRecipient
+              }
               <br />
-              Oberer Dorfgraben 15c, 55130 Mainz, Deutschland
+              {form.address && 
+                `${form.address.street}, ${form.address.streetNumber}, ${form.address.city}, ${form.address.country} - ${form.address.postalCode}`
+              }
             </div>
           </div>
           <div className="history-content-wrapper">
@@ -52,11 +55,11 @@ class PaymentStepTwo extends Component {
                 <tbody>
                   <tr>
                     <td>Preliminary amount</td>
-                    <td>0,00 €</td>
+                    <td>{form.budget}</td>
                   </tr>
                   <tr>
                     <td>Runtime</td>
-                    <td>7 Days</td>
+                    <td>{form.endDate && form.startDate && `${form.endDate.diff(form.startDate, 'days')} Days`}</td>
                   </tr>
                   <tr>
                     <td>Voucher</td>
@@ -64,7 +67,7 @@ class PaymentStepTwo extends Component {
                   </tr>
                   <tr>
                     <td className="fontBold">Maximum expenses</td>
-                    <td className="fontBold">2000,00 €</td>
+                    <td className="fontBold">{form.maximumExpenses? form.maximumExpenses : form.budget}</td>
                   </tr>
                 </tbody>
               </table>

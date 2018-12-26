@@ -1,5 +1,5 @@
 import React from "react";
-import UserCard from "../../web/misc/UserCard";
+import UserCard from "../../misc/UserCard";
 import PropTypes from "prop-types";
 import { UserPicLoading } from "../../ui-kit";
 import { connect } from "react-redux";
@@ -7,7 +7,8 @@ import { getDashboard } from "../../../actions";
 
 class UsersRoot extends React.Component {
   componentDidMount = () => {
-    this.props.getDashboard("getDashboardUser");
+    window.scrollTo(0, 0);
+    this.props.getDashboard("users");
   };
 
   renderuserList = () => {
@@ -42,12 +43,12 @@ class UsersRoot extends React.Component {
 UsersRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  usersList: PropTypes.any,
-  error: PropTypes.any
+  usersList: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  usersList: state.dashboardData.dashboard,
+  usersList: state.dashboardData.users,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

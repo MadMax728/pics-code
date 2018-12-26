@@ -2,7 +2,8 @@ export { Button } from "./button";
 export {
   InlineLoading,
   CampaignLoading,
-  UserPicLoading
+  UserPicLoading,
+  Loader
 } from "./loading-indicator";
 export { LeftSidebarNav } from "./nav-menu";
 export { TopBar } from "./top-bar";

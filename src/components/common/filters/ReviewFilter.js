@@ -12,12 +12,39 @@ const staticData = [
 
 const reviewItems = staticData;
 
+const languageItems = [
+  {
+    name: "All",
+    className: "radio-btn ",
+    checked: true,
+    value: "all"
+  },
+  {
+    name: "German",
+    className: "radio-btn lbl-margin",
+    checked: false,
+    value: "german"
+  },
+  {
+    name: "English",
+    className: "radio-btn ",
+    checked: true,
+    value: "english"
+  }
+];
+
 const Filters = [
   {
     name: Translations.review_filter.status.name,
     className: "filter-title",
     type: Translations.review_filter.status.type,
     items: reviewItems
+  },
+  {
+    name: Translations.left_sidebar_filter.language.name,
+    className: "filter-title",
+    type: Translations.left_sidebar_filter.language.type,
+    items: languageItems
   }
 ];
 
@@ -43,6 +70,10 @@ class ReviewFilter extends Component {
     this.setState({ filData: filterData });
   };
 
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
   render() {
     return (
       <div className="left-filters">
@@ -50,6 +81,7 @@ class ReviewFilter extends Component {
           filters={Filters}
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -71,7 +103,8 @@ class ReviewFilter extends Component {
 }
 
 ReviewFilter.propTypes = {
-  handleApplyClick: PropTypes.func
+  handleApplyClick: PropTypes.func,
+  handleSelect: PropTypes.func
 };
 
 export default ReviewFilter;

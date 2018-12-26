@@ -11,26 +11,24 @@ class StepThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start_date: moment(),
-      end_date: moment()
+      startDate: moment(),
+      endDate: moment()
     };
   }
 
   handleStartDateChange = date => {
-    this.setState({ start_date: date });
-    this.props.handleDate(date, "start_date");
+    this.setState({ startDate: date });
+    this.props.handleDate(date, "startDate");
   };
 
   handleEndDateChange = date => {
-    this.setState({ end_date: date });
-    this.props.handleDate(date, "end_date");
+    this.setState({ endDate: date });
+    this.props.handleDate(date, "endDate");
   };
 
   render() {
-    const { handleChangeField, form , handleSelect} = this.props;
-    // get 
-    let width;
-    // console.log(form.end_date.diff(form.start_date, 'days'));    
+    const { form , handleSelect} = this.props;
+    // console.log(form.endDate.diff(form.startDate, 'days'));    
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -45,7 +43,7 @@ class StepThree extends Component {
                 </label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={form.start_date}
+                    selected={form.startDate}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -57,7 +55,7 @@ class StepThree extends Component {
                 <label htmlFor="End">{Translations.create_campaigns.end}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={form.end_date}
+                    selected={form.endDate}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -66,16 +64,26 @@ class StepThree extends Component {
                 </div>
               </li>
             </ul>
+            {
+                form.error && form.endDate.diff(form.startDate, 'days') < 0 && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.date}</span>
+                )
+              }
           </div>
           <div className="form-group">
             <label htmlFor="Define">
               {Translations.create_campaigns.define_daily_budget}
             </label>
               <SelectDailyBudget 
-                value={form.daily_budget}
+                value={form.budget}
                 className=""
                 handleSelect={handleSelect}
               />
+              {
+                form.budget.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.budget}</span>
+                  )
+              }
           </div>
           <div className="form-group">
             <label htmlFor="Maximum">
@@ -161,7 +169,6 @@ class StepThree extends Component {
 }
 
 StepThree.propTypes = {
-  handleChangeField: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   handleDate: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired

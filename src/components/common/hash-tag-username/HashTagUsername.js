@@ -8,7 +8,6 @@ import { findDOMNode } from "react-dom";
 
 const propTypes = {
   className: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   name: PropTypes.string.isRequired,
   value: PropTypes.any.isRequired,
@@ -68,7 +67,7 @@ class HashTagUsername extends Component {
     const commentText = e.target.value;
     var keyCode = e.keyCode ? e.keyCode : e.which;
     if (keyCode == 13) {
-      console.log("you press enter");
+      // console.log("you press enter");
     }
     let limitCount = "";
     let limitNum = this.props.maxLimit;
@@ -123,7 +122,8 @@ class HashTagUsername extends Component {
               onKeyDown={this.handleLengthField}
               maxLength={this.props.maxLimit}
             />
-            {(this.state.remainingLimitLength > 0 && this.state.remainingLimitLength !== 1000) ? (
+            {this.state.remainingLimitLength > 0 &&
+            this.state.remainingLimitLength !== 1000 ? (
               <p className="commenter-info">
                 You have {this.state.remainingLimitLength} characters left{" "}
               </p>

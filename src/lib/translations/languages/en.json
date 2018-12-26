@@ -1,6 +1,10 @@
 {
   "app_name": "Picstagraph",
 
+  "date_format": {
+    "date": "MM/DD/YYYY"
+  },
+
   "offen": "In der Picstagraph-App offenen",
 
   "subscribe": "Subscribe",
@@ -44,7 +48,7 @@
     "add_category": "Add Category",
     "add_description": "Add Description",
     "advertisement": "Label as advertisement",
-    "upload_title_image": "Upload title image"
+    "upload_file": "Upload File"
   },
 
   "create_ads": {
@@ -111,7 +115,7 @@
     "male_female": "Female & Male",
     "company": "Company",
     "target_group": "Target group",
-    "image": "image",
+    "image": "Image",
     "video": "Video",
     "type": "Type",
     "anonymous": "Anonymous",
@@ -264,6 +268,10 @@
   },
 
   "left_sidebar_filter": {
+    "language": {
+      "name": "Language",
+      "type": "radio"
+    },
     "relevance": {
       "name": "Relevance",
       "type": "radio"
@@ -274,11 +282,11 @@
     },
     "radius": {
       "name": "Radius",
-      "type": "select"
+      "type": "select-radius"
     },
     "category": {
       "name": "Category",
-      "type": "select"
+      "type": "select-category"
     },
     "procedure": {
       "name": "Procedure",
@@ -290,23 +298,23 @@
     },
     "target_group": {
       "name": "Target group",
-      "type": "select"
+      "type": "select-target-group"
     },
     "offer": {
       "name": "Offer",
-      "type": "select"
+      "type": "select-offer"
     },
     "offer_tag": {
       "name": "Offer tag",
-      "type": "text"
+      "type": "text-offer-tag"
     },
     "inquiry": {
       "name": "Inquiry",
-      "type": "select"
+      "type": "select-inquiry"
     },
     "inquiry_tag": {
       "name": "Inquiry tag",
-      "type": "text"
+      "type": "text-inquiry-tag"
     },
     "reset_filters": {
       "name": "Reset filters",
@@ -320,6 +328,13 @@
       "name": "Age",
       "type": "select"
     }
+  },
+
+  "target_group": {
+    "company": "Company",
+    "female_and_male": "Female and Male",
+    "female": "Female",
+    "male": "Male"
   },
 
   "message_module": {
@@ -590,10 +605,12 @@
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
+    "social_share_function": "Social share function",
     "Personalized_advertising": "Personalized advertising",
     "Change_email": "Change email",
     "Current_Email": "Current Email",
     "New_Email": "New Email",
+    "save": "Save",
     "Change_Password": "Change Password",
     "Current_Password": "Current Password",
     "New_Password": "New Password",
@@ -610,7 +627,16 @@
     "Delete": "Delete",
     "Deactivate_my_account": "Deactivate my account",
     "Deactivate": "Deactivate",
-    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account."
+    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account.",
+    "Current_Email_is_required": "Current Email is required",
+    "Email_should_be_valid": "Email should be valid",
+    "New_Email_is_required": "New Email is required",
+    "Current_Password_is_required": "Current Password is required",
+    "New_Password_is_required": "New Password is required",
+    "Repeat_Password_is_required": "Repeat Password is required",
+    "Password_is_not_matching": "Password is not matching",
+    "server_error": "Something went wrong. Please Try Again",
+    "Password_Length_error": "Password Length should be greater than 8 characters"
   },
   "Business_profile": {
     "Business_profile": "Business profile",
@@ -631,6 +657,15 @@
     "Expenses": "Expenses",
     "Status": "Status",
     "PDF": "PDF"
+  },
+  "data_download": {
+    "page_title": "Daten- Download",
+    "Email": "Email",
+    "Password": "Password",
+    "Download": "Download",
+    "Email_ID_should_be_valid": "Email ID should be valid",
+    "Email_is_required": "Email is required",
+    "Password_is_required": "Password is required"
   },
   "landing": {
     "Navigation": "Navigation",
@@ -693,5 +728,39 @@
     "Data_download": "Data download",
     "Download": "Download",
     "Search_in_users": "Search in users"
+  },
+
+  "payment_modal": {
+    "billing_address": "Billing Address",
+    "invoice_recipient": "Invoice Recipient",
+    "street_number": "Street, number",
+    "postal_code": "Postal Code",
+    "city": "City",
+    "country": "Country",
+    "VATNO": "VAT Identification Number"
+  },
+
+  "error": {
+    "create_modal": {
+      "title": "Plaese Enter Title",
+      "location": "Plaese Enter Location",
+      "category": "Please Select Category",
+      "offers": "Please Select Offer",
+      "offerTag": "Please Enter Offer Tags",
+      "inquiry": "Please Select Inquiry",
+      "callToAction": "Please Select Call to Action",
+      "radius": "Please Select Radius",
+      "inquiryTag": "Please Enter Inquiry Tags",
+      "description": "Please Enter Description",
+      "date" : "End Date must be greater than Start Date",
+      "budget": "Please Select Budget",
+      "invoiceRecipient" : "Please Enter Invoice Recipient",
+      "postalCode": "Please Enter Postal code",
+      "city": "Please Enter City",
+      "VATNO": "Please Enter VAT Identification Number",
+      "country": "Please Enter Country",
+      "streetNumber": "Please Enter Street,Number",
+      "insertLink": "Please Enter Inset Link" 
+    }
   }
 }

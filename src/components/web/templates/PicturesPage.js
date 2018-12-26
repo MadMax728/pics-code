@@ -1,14 +1,14 @@
 import React from "react";
-import PictureCard from "../../web/misc/PictureCard";
+import { PictureCard } from "../../misc";
 import PropTypes from "prop-types";
 import { UserPicLoading } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
-import * as images from "../../../lib/constants/images";
 
 class PicturesRoot extends React.Component {
   componentDidMount = () => {
-    this.props.getDashboard("getPic");
+    window.scrollTo(0, 0);
+    this.props.getDashboard("pics");
   };
 
   renderuserList = () => {
@@ -16,7 +16,7 @@ class PicturesRoot extends React.Component {
     return picsList.map((pic, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
       return (
-        <div key={index}>
+        <div key={pic.id}>
           {clearfixDiv}
           <PictureCard item={pic} index={index} />
         </div>
@@ -39,12 +39,12 @@ class PicturesRoot extends React.Component {
 PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  picsList: PropTypes.any,
-  error: PropTypes.any
+  picsList: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  picsList: state.dashboardData.dashboard,
+  picsList: state.dashboardData.pics,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

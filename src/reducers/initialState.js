@@ -40,23 +40,33 @@ const initialState = {
   },
   campaignData: {
     campaigns: null,
-    campaign: [],
+    campaign: null,
+    favouriteCampaign: null,
     isLoading: false,
     error: false
   },
   adData: {
     ads: null,
-    ad: [],
+    ad: null,
     isLoading: false,
     error: false
   },
-  exploreData: {
-    explores: null,
+  backOfficeDashboardData: {
+    backOfficeDashboard: null,
+    isLoading: false,
+    error: false
+  },
+  cmsManagementData: {
+    cmsManagement: null,
     isLoading: false,
     error: false
   },
   dashboardData: {
-    dashboard: null,
+    news: null,
+    explores: null,
+    participants: null,
+    users: null,
+    pics: null,
     isLoading: false,
     error: false
   },
@@ -72,6 +82,7 @@ const initialState = {
   },
   savedData: {
     saved: null,
+    saves: null,
     isLoading: false,
     error: false
   },
@@ -83,6 +94,11 @@ const initialState = {
   commentData: {
     comments: {},
     comment: null,
+    isLoading: false,
+    error: false
+  },
+  mediaData: {
+    media: null,
     isLoading: false,
     error: false
   },
@@ -98,16 +114,75 @@ const initialState = {
   selectData: {
     categories: null,
     offers: null,
-    inquirys: null,
+    inquiries: null,
     dailyBudgets: null,
+    radius: null,
+    targetGroups: null,
+    callToActions: null,
     isLoading: false,
     error: false
   },
   usersData: {
-    subscribers: [],
+    users: [],
     isLoading: false,
     error: false
   },
+  profilePrivacyData: {
+    profilePrivacyData: [],
+    isLoading: false,
+    error: false,
+    changeEmailData: [],
+    changePasswordData: [],
+    changeInvoiceAddressData: [],
+    userData: []
+  },
+  adminData: {
+    admins: null,
+    admin: null,
+    isLoading: false,
+    error: false
+  },
+  verificationData: {
+    verifications: null,
+    verification: null,
+    isLoading: false,
+    error: false
+  },
+  voucherData: {
+    vouchers: null,
+    voucher: null,
+    isLoading: false,
+    error: false
+  },
+  reviewData: {
+    campaigns: null,
+    ads: null,
+    isLoading: false,
+    error: false
+  },
+  reportedContentData: {
+    reportedContentImages: null,
+    reportedContentVideos: null,
+    reportedContentCampaigns: null,
+    reportedContentPics: null,
+    reportedContentAds: null,
+    reportedContentComments: null,
+    reportedContentUsers: null,
+    isLoading: false,
+    error: false
+  },
+  businessProfileData: {
+    businessProfileActivationData: null,
+    billsData: null,
+    downloadData: null,
+    isLoading: false,
+    error: false
+  },
+  searchData: {
+    searchKeyword: null,
+    isLoading: false,
+    error: false
+  }
 };
 
 export default initialState;

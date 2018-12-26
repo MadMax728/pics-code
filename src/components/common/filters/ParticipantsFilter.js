@@ -111,12 +111,17 @@ class ParticipantsFilter extends Component {
     this.setState({ filData: filterData });
   };
 
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
   handleFilter = () => {
     return (
       <LeftSidebarFilter
         filters={Filters}
         onChange={this.handleOnChange}
         filterApply={this.state.filterApply}
+        handleSelect={this.handleSelect}
       />
     );
   };
@@ -128,6 +133,7 @@ class ParticipantsFilter extends Component {
           filters={Filters}
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -149,7 +155,8 @@ class ParticipantsFilter extends Component {
 }
 
 ParticipantsFilter.propTypes = {
-  handleApplyClick: PropTypes.func
+  handleApplyClick: PropTypes.func,
+  handleSelect: PropTypes.func
 };
 
 export default ParticipantsFilter;

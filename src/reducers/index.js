@@ -5,6 +5,7 @@ import registerData from "./registerReducer";
 import resetPasswordData from "./forgotPasswordReducer";
 import newPasswordData from "./setNewPasswordReducer";
 import userDataByUsername from "./profileReducer";
+import profilePrivacyData from "./privacyReducer";
 import campaignData from "./campaignReducer";
 import dashboardData from "./dashboardReducer";
 import aboutData from "./aboutReducer";
@@ -16,6 +17,16 @@ import commentData from "./commentReducer";
 import tags from "./tagsReducer";
 import usersData from "./usersReducers";
 import selectData from "./selectReducer";
+import mediaData from "./mediaReducer";
+import backOfficeDashboardData from "./backOfficeDashboardReducer";
+import cmsManagementData from "./cmsManagementReducer";
+import adminData from "./adminReducer";
+import verificationData from "./verificationReducer";
+import voucherData from "./voucherReducer";
+import reviewData from "./reviewReducer";
+import reportedContentData from "./reportedContentReducer";
+import businessProfileData from "./profileSettingsReducer";
+import searchData from "./searchReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -24,6 +35,7 @@ const rootReducer = combineReducers({
   resetPasswordData,
   newPasswordData,
   userDataByUsername,
+  profilePrivacyData,
   campaignData,
   dashboardData,
   aboutData,
@@ -34,7 +46,17 @@ const rootReducer = combineReducers({
   commentData,
   tags,
   usersData,
-  selectData
+  selectData,
+  mediaData,
+  backOfficeDashboardData,
+  cmsManagementData,
+  adminData,
+  verificationData,
+  voucherData,
+  reviewData,
+  reportedContentData,
+  businessProfileData,
+  searchData
 });
 
 export default rootReducer;

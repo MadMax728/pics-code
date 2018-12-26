@@ -50,4 +50,3 @@ export const getSocialNetwork = payload =>
 
 export const disconnectNetwork = (payload, provider) =>
   apiAuth.delete("/auth/" + provider + "/disconnect", payload);
-

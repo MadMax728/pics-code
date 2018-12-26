@@ -9,9 +9,10 @@ import NavItem from "react-bootstrap/lib/NavItem";
 import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
-import { Redirect } from "react-router";
+import { getSearch } from "../../actions";
+import { connect } from "react-redux";
 
-export default class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,6 +24,7 @@ export default class Header extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     document.addEventListener("click", this.handleOutsideClick);
     document.addEventListener("scroll", this.onScroll);
   };
@@ -63,10 +65,13 @@ export default class Header extends Component {
   handleNavClick = () => {
     this.toggleUserNav();
   };
+
   onSearchClick = e => {
     e.preventDefault();
     const path = "?search=" + this.state.searchText;
     this.props.history.push(path);
+    this.setState({ searchText: "" });
+    this.props.getSearch(this.state.searchText);
   };
 
   onInputChange = e => {
@@ -85,7 +90,7 @@ export default class Header extends Component {
 
   render() {
     return (
-      <header className={this.state.offsetHeight > 250 ? "fixed" : "" }>
+      <header className={this.state.offsetHeight > 250 ? "fixed" : ""}>
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">
@@ -171,7 +176,21 @@ export default class Header extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  searchData: state.searchData
+});
+
+const mapDispatchToProps = {
+  getSearch
+};
+
 Header.propTypes = {
   handleModalShow: PropTypes.func,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

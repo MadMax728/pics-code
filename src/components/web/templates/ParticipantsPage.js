@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { MediaCard } from "../misc";
+import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 import PropTypes from "prop-types";
 
 class ParticipantsPage extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("getParticipant");
+    window.scrollTo(0, 0);
+    this.props.getDashboard("participants");
   };
 
   renderParticipantsList = () => {
@@ -16,9 +17,12 @@ class ParticipantsPage extends Component {
     return participantsList.map(participant => {
       return (
         <div key={participant.id}>
-          {participant.postType && participant.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && 
-               <MediaCard item={participant} />
-          }
+          {participant.postType &&
+            participant.mediaUrl &&
+            participant.postType.toLowerCase() ===
+              enumerations.contentTypes.companyParticipantCampaign && (
+              <MediaCard item={participant} isDescription />
+            )}
         </div>
       );
     });
@@ -36,17 +40,15 @@ class ParticipantsPage extends Component {
 }
 
 ParticipantsPage.propTypes = {
-  handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  participantsList: PropTypes.any,
-  error: PropTypes.any
+  participantsList: PropTypes.any
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  participantsList: state.dashboardData.dashboard,
+  participantsList: state.dashboardData.participants,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error
 });

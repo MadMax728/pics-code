@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCampaigns } from "../../../actions";
+import { getCampaigns, getSearch } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { CampaignCard } from "../misc";
+import { CampaignCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class CampaignPage extends Component {
@@ -15,6 +15,7 @@ class CampaignPage extends Component {
   }
 
   componentDidMount = () => {
+    window.scrollTo(0, 0);
     const data = { userType: this.state.type };
     this.props.getCampaigns("getCampaignType", data);
   };
@@ -22,6 +23,17 @@ class CampaignPage extends Component {
   componentWillReceiveProps(nextProps) {
     if (this.state.type !== nextProps.type) {
       const data = { userType: nextProps.type };
+      this.props.getCampaigns("getCampaignType", data);
+      this.setState({ type: nextProps.type });
+      if (nextProps.searchData.searchKeyword) {
+        this.props.getSearch("");
+      }
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      const data = { userType: nextProps.type, isSearch: searchKeyword };
       this.props.getCampaigns("getCampaignType", data);
       this.setState({ type: nextProps.type });
     }
@@ -32,16 +44,20 @@ class CampaignPage extends Component {
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {(campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
-            campaign.postType.toLowerCase() ===
-              enumerations.contentTypes.creatorCampaign) && (
-            <CampaignCard
-              item={campaign}
-              isDescription={false}
-              isInformation
-              isStatus={false}
-            />
-          )}
+          {campaign.mediaUrl &&
+            (campaign.postType.toLowerCase() ===
+              enumerations.contentTypes.companyCampaign ||
+              campaign.postType.toLowerCase() ===
+                enumerations.contentTypes.creatorCampaign) && (
+              <CampaignCard
+                item={campaign}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport={false}
+              />
+            )}
         </div>
       );
     });
@@ -63,17 +79,21 @@ CampaignPage.propTypes = {
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
-  error: PropTypes.any
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   campaignList: state.campaignData.campaigns,
+  searchData: state.searchData,
   isLoading: state.campaignData.isLoading,
   error: state.campaignData.error
 });
 
 const mapDispatchToProps = {
-  getCampaigns
+  getCampaigns,
+  getSearch
 };
 
 export default connect(

@@ -38,12 +38,7 @@ MLeftUserItem.propTypes = {
         username: PropTypes.string,
         id: PropTypes.string,
     }),
-    message: PropTypes.shape({
-        date: PropTypes.string,
-        text: PropTypes.string,
-        id: PropTypes.string,
-        me: PropTypes.bool,
-    })
+    message: PropTypes.any
 };
   
 export default MLeftUserItem;

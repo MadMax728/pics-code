@@ -4,28 +4,29 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
+import { SelectDailyBudget } from "../../../../../components/common";
 
 class StepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start_date: moment(),
-      end_date: moment()
+      startDate: moment(),
+      endDate: moment()
     };
   }
 
   handleStartDateChange = date => {
-    this.setState({ start_date: date });
-    this.props.handleDate(date, "start_date");
+    this.setState({ startDate: date });
+    this.props.handleDate(date, "startDate");
   };
 
   handleEndDateChange = date => {
-    this.setState({ end_date: date });
-    this.props.handleDate(date, "end_date");
+    this.setState({ endDate: date });
+    this.props.handleDate(date, "endDate");
   };
 
   render() {
-    const { handleChangeField } = this.props;
+    const {form, handleSelect } = this.props;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -38,7 +39,7 @@ class StepTwo extends Component {
                 <label htmlFor="Start">{Translations.create_ads.start}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.props.form.start_date}
+                    selected={form.startDate}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -50,7 +51,7 @@ class StepTwo extends Component {
                 <label htmlFor="End">{Translations.create_ads.end}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={this.props.form.end_date}
+                    selected={form.endDate}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -59,22 +60,26 @@ class StepTwo extends Component {
                 </div>
               </li>
             </ul>
+            {
+              form.error && form.endDate.diff(form.startDate, 'days') < 0 && (
+                <span className="error-msg highlight">{Translations.error.create_modal.date}</span>
+              )
+            }
           </div>
           <div className="form-group">
             <label htmlFor="Define">
               {Translations.create_ads.define_daily_budget}
             </label>
-            <select
-              onChange={handleChangeField}
-              value={this.props.form.daily_budget}
-              onBlur={handleChangeField}
-              name="daily_budget"
-            >
-              <option>100 €</option>
-              <option>200 €</option>
-              <option>300 €</option>
-              <option>400 €</option>
-            </select>
+              <SelectDailyBudget 
+                value={form.budget? form.budget : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
+              {
+                form.budget.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.budget}</span>
+                  )
+              }
           </div>
           <div className="form-group">
             <label htmlFor="Maximum">
@@ -156,9 +161,9 @@ class StepTwo extends Component {
 }
 
 StepTwo.propTypes = {
-  handleChangeField: PropTypes.func.isRequired,
   handleDate: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired,
+  handleSelect: PropTypes.func.isRequired
 };
 
 export default StepTwo;

@@ -26,8 +26,6 @@ import {
   ParticipantPage
 } from "../../web/templates";
 
-import { Campaign, Information, Participant } from "../../web/campaigns";
-
 // Static Pages which is not requre to put in template folder
 import {
   CampaignsInformation,
@@ -64,12 +62,13 @@ class HomeRoute extends Component {
     );
   };
 
-  handleEditProfile = () => {
+  handleEditProfile = match => {
     return (
       <EditProfilePage
         handleModalInfoShow={this.props.handleModalInfoShow}
         image={this.props.image}
         profile={this.props.profile}
+        history={match.history}
       />
     );
   };
@@ -131,6 +130,17 @@ class HomeRoute extends Component {
       <ParticipantPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
+  };
+
+  handlePrivacyPage = match => {
+    return (
+      <PrivacyPage
+        history={match.history}
+        type={match.match.params.type}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
       />
     );
   };
@@ -224,7 +234,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_PRIVACY_ROUTE}
-            component={PrivacyPage}
+            component={this.handlePrivacyPage}
           />
 
           <Route
