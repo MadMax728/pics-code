@@ -194,6 +194,12 @@ const initialState = {
     searchKeyword: null,
     isLoading: false,
     error: false
+  },
+  hashUserData: {
+    usernames: null,
+    hashTags: null,
+    isLoading: false,
+    error: false
   }
 };
 

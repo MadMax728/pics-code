@@ -88,8 +88,6 @@ class NewsRoot extends Component {
 
   render() {
     const { newsFeedList, isLoadingnews } = this.props;
-    console.log(isLoadingnews);
-    
     return (
       <div className={"middle-section padding-rl-10"}>
         {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}

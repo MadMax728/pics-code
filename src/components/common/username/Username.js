@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDashboard } from "../../../actions";
+import { getHashUser } from "../../../actions";
 import { username_list } from "../../../mock-data";
 
 class Username extends Component {
@@ -13,7 +13,7 @@ class Username extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getDashboard("users").then(()=> {
+    this.props.getHashUser("usernames").then(()=> {
       if(this.props.usersList){
         this.setState({usersListtest: this.props.usersList})
       }
@@ -79,23 +79,24 @@ class Username extends Component {
 }
 
 const mapStateToProps = state => ({
-  usersList: state.dashboardData.users,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  usersList: state.hashUserData.usernames,
+  isLoading: state.hashUserData.isLoading,
+  error: state.hashUserData.error
 });
 
 const mapDispatchToProps = {
-  getDashboard
+  getHashUser
 };
 
 Username.propTypes = {
-  getDashboard: PropTypes.func.isRequired,
+  getHashUser: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   usersList: PropTypes.any,
   value: PropTypes.any.isRequired,
   handleSetSatetToolTipUsername: PropTypes.func.isRequired
   // error: PropTypes.any
 };
+
 
 export default connect(
   mapStateToProps,
