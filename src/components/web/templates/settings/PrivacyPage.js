@@ -411,12 +411,7 @@ class PrivacyPage extends Component {
 
   handleDeactiveMyAccount = e => {
     const modalForValue = e.target.id;
-    this.props.handleModalInfoShow(modalType.confirmation, value => {
-      console.log("In Privacy Value", value);
-    });
-    this.props.modalInfoShow = val => {
-      console.log(val);
-    };
+    this.props.handleModalInfoShow(modalType.confirmation);
   };
 
   render() {
