@@ -91,7 +91,7 @@ class CampaignModal extends Component {
 
   handleContentChange = (text) => {
     const { form } = this.state;
-    form.description = text
+    form.description = text === "<p></p>"? "" : text;
     this.setState({ form });
   }
 
@@ -200,7 +200,7 @@ class CampaignModal extends Component {
       {
         this.setState({
           stepIndex: stepIndex + 1,
-          form: { ...this.state.form, error: true }
+          form: { ...this.state.form, error: false }
         });
       }
       else {
@@ -231,14 +231,31 @@ class CampaignModal extends Component {
   };
   
   handleVideo = (e) => {
-    const reader = new FileReader();
     const file = e.target.files[0];
+    this.handleImageVideo(file);    
+  }
 
+  handleImageVideo = (file) => {
+    const reader = new FileReader();
+
+    if (file.type.includes("image")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { form } = currentThis.state;
+        form.typeContent= typeContent.image;
+        form.image = reader.result;
+        form.file = file;
+        form.fileType = true;
+        currentThis.setState({ form });
+      };
+    }
     if (file.type.includes("video")) {
       const currentThis = this;
       reader.readAsDataURL(file);
       reader.onloadend = function() {
         const { form } = currentThis.state;
+        form.typeContent= typeContent.video;
         form.video = reader.result;
         form.file = file;
         form.fileType = false;
@@ -248,20 +265,8 @@ class CampaignModal extends Component {
   }
 
   handleActualImg = (e) => {
-    const reader = new FileReader();
     const file = e;
-
-    if (file.type.includes("image")) {
-      const currentThis = this;
-      reader.readAsDataURL(file);
-      reader.onloadend = function() {
-        const { form } = currentThis.state;
-        form.image = reader.result;
-        form.file = file;
-        form.fileType = true;
-        currentThis.setState({ form });
-      };
-    }
+    this.handleImageVideo(file);
   };
 
   handleScale = scale => {

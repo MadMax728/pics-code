@@ -63,12 +63,24 @@ const initialState = {
   },
   dashboardData: {
     news: null,
+    isLoadingnews: false,
+    errornews: false,
+
     explores: null,
+    isLoadingexplores: false,
+    errorexplores: false,
+
     participants: null,
+    isLoadingparticipants: false,
+    errorparticipants: false,
+
     users: null,
+    isLoadingusers: false,
+    errorusers: false,
+
     pics: null,
-    isLoading: false,
-    error: false
+    isLoadingpics: false,
+    errorpics: false,
   },
   aboutData: {
     about: null,
@@ -180,6 +192,12 @@ const initialState = {
   },
   searchData: {
     searchKeyword: null,
+    isLoading: false,
+    error: false
+  },
+  hashUserData: {
+    usernames: null,
+    hashTags: null,
     isLoading: false,
     error: false
   }

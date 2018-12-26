@@ -32,6 +32,7 @@ class CustomModal extends Component {
       <UploadModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
       />
     );
   };

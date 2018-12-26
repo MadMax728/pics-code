@@ -211,7 +211,6 @@ class CommentCard extends Component {
   };
 
   renderComment = comment => {
-    console.log(comment);
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
@@ -288,11 +287,6 @@ class CommentCard extends Component {
   render() {
     const { item, form } = this.state;
     const { isLoading, isReport } = this.props;
-    console.log("in comment");
-    console.log(item.id);
-    console.log(isReport);
-    console.log(this.props.totalCommentsCount);
-    console.log(this.state.slicedCommentsData);
     return (
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
         {!isReport && (

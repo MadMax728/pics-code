@@ -30,11 +30,11 @@ class UsersRoot extends React.Component {
   };
 
   render() {
-    const { usersList, isLoading } = this.props;
+    const { usersList, isLoadingusers } = this.props;
     return (
       <div className="padding-rl-10 middle-section">
-        {usersList && !isLoading && this.renderuserList()}
-        {isLoading && <UserPicLoading />}
+        {usersList && !isLoadingusers && this.renderuserList()}
+        {isLoadingusers && <UserPicLoading />}
       </div>
     );
   }
@@ -42,15 +42,15 @@ class UsersRoot extends React.Component {
 
 UsersRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoadingusers: PropTypes.bool,
   usersList: PropTypes.any
-  // error: PropTypes.any
+  // errorusers: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   usersList: state.dashboardData.users,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  isLoadingusers: state.dashboardData.isLoadingusers,
+  errorusers: state.dashboardData.errorusers
 });
 
 const mapDispatchToProps = {

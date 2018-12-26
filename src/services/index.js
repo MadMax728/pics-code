@@ -18,3 +18,4 @@ export * from "./voucherService";
 export * from "./backOfficeReviewService";
 export * from "./backOfficeReportedContentService";
 export * from "./profileSettingsService";
+export * from "./hashUserService";
