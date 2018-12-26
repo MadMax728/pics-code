@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import * as images from "../../../../lib/constants/images";
 
 class MRightUserInput extends Component {
   
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message : 'abc'
+            message : ''
         }
     }    
 
@@ -15,10 +16,14 @@ class MRightUserInput extends Component {
         this.setState({ message: e.target.value });
     };
 
-    onSubmit = () => {
-        const { message } = this.state;
-        this.props.onMessageSubmit(message);
-        this.setState({ message: '' });
+    onEnterPress = (e) => {
+        const keycode = (e.keyCode ? e.keyCode : e.which);
+        if(keycode === 13) {
+            e.preventDefault();
+            const { message } = this.state;
+            this.props.onMessageSubmit(message);
+            this.setState({ message: '' });
+        }
     }
 
     render() {
@@ -29,12 +34,10 @@ class MRightUserInput extends Component {
                     item && item.id && (
                     <div>
                         <textarea type="text" placeholder="Write a message… " 
-                            onChange={this.handleChange} 
+                            onChange={this.handleChange}
+                            onKeyPress={this.onEnterPress} 
                             value={this.state.message} />
-                            <button className="msg_send_btn" type="button" onClick={this.onSubmit}>
-                                <i className="fa fa-paper-plane-o" aria-hidden="true"></i>
-                            </button>
-                             {/* <img src={images.emoji} alt={"emoji1"} /> */}
+                            <img src={images.emoji} alt={"emoji1"} />
                     </div>
                     )
                 }

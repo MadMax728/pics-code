@@ -38,7 +38,7 @@ export const getCampaignType = (payload, header = {}) =>
 
 // Campaign Informatin API
 export const getCampaignDetails = (payload, header = {}) =>
-  api(baseUrl, header).get("/campaigns?id=" + payload.id);
+  api(baseUrl, header).get("/campaigns/" + payload.id);
 
 // Favourite Campaigns API
 export const getFavouriteCampaigns = (payload, header = {}) =>

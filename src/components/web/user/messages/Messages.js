@@ -31,9 +31,12 @@ class Messages extends Component {
 
     componentWillMount() {
         this.socket.on('communication-message-board-new-message-response', (data) => {
-            this.setState({
-                messages: [...this.state.messages, data]
-            }) 
+            const { me, user } = this.state;
+            if(user && (me === data.recipientId || me === data.senderId) && (user.id === data.recipientId || user.id === data.senderId)) {
+                this.setState({
+                    messages: [...this.state.messages, data]
+                }) 
+            }
         });
     }
 

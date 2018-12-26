@@ -30,6 +30,7 @@ export { Username } from "./username";
 export { HashTag } from "./hash-tag";
 export { HashTagUsername } from "./hash-tag-username";
 export { RenderToolTips } from "./render-tool-tips";
+export { SubscribeToolTips } from "./subscribe-tool-tip";
 export { Tags, InquiryTags, OfferTags } from "./tags";
 export {
   SelectCategory,
