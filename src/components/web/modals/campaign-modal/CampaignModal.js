@@ -200,7 +200,7 @@ class CampaignModal extends Component {
       {
         this.setState({
           stepIndex: stepIndex + 1,
-          form: { ...this.state.form, error: true }
+          form: { ...this.state.form, error: false }
         });
       }
       else {

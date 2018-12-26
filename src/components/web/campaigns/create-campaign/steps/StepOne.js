@@ -63,15 +63,14 @@ class StepOne extends Component {
                 onChange={handleChangeField}
               />
             {
-              form.title && form.title.length === 0 && form.error && (
+              form.title.length === 0 && form.error && (
               <span className="error-msg highlight">{Translations.error.create_modal.title}</span>
               )
             }
             </div>
             <div className="form-group">
               <label htmlFor="Location">
-                {Translations.create_campaigns.add_loaction}
-                Add Location
+                {Translations.create_campaigns.add_location}
               </label>
                 <PlaceAutoCompleteLocation
                   className=""
@@ -79,7 +78,7 @@ class StepOne extends Component {
                   value={form.location? form.location.address : ""}
                 />
                 {
-                  form.location && form.location.address && form.location.latitude && form.location.longitude && form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
+                    form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
                     <span className="error-msg highlight">{Translations.error.create_modal.location}</span>
                     )
                   }
@@ -94,7 +93,7 @@ class StepOne extends Component {
                   handleSelect={handleSelect}
                 />
                 {
-                  form.category && form.category.length === 0 && form.error && (
+                  form.category.length === 0 && form.error && (
                   <span className="error-msg highlight">{Translations.error.create_modal.category}</span>
                   )
                 }

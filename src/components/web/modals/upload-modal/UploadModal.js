@@ -20,7 +20,8 @@ const initialState = {
     image: null,
     file: null,
     video: null,
-    filetype: true
+    filetype: true,
+    error: false
   }
 };
 class UploadModal extends Component {
@@ -57,24 +58,41 @@ class UploadModal extends Component {
     if(this.validateForm()) {
       const { form } = this.state;
       const Data = new FormData();
-      Data.append("description", form.add_description);
-      Data.append("isAdvertiseLabel", form.is_advertise_label);
-      Data.append("category", form.add_category);
-      if(form.filetype) {
-        Data.append("image", form.file);
+      if(form.file) {
+        Data.append("description", form.add_description);
+        Data.append("isAdvertiseLabel", form.is_advertise_label);
+        Data.append("category", form.add_category);
+        if(form.filetype) {
+          Data.append("image", form.file);
+        }
+        else {
+          Data.append("video", form.file);
+        }
+        Data.append("postType", "mediapost");
+        Data.append("location", JSON.stringify(form.add_location));
+    
+        this.props.uploadMedia(Data, form.filetype).then(() => {
+          this.setState(initialState);
+          this.props.handleModalHide();
+        });
+        this.setState({
+          form: { ...this.state.form, error: false }
+        });  
       }
       else {
-        Data.append("video", form.file);
+        this.setState({
+          form: { ...this.state.form, error: true }
+        });
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          "Please Select Image or Video"
+        );
       }
-      Data.append("postType", "mediapost");
-      Data.append("location", JSON.stringify(form.add_location));
-  
-      this.props.uploadMedia(Data, form.filetype).then(() => {
-        this.setState(initialState);
-        this.props.handleModalHide();
-      });
     }
     else {
+      this.setState({
+        form: { ...this.state.form, error: true }
+      });
       this.props.handleModalInfoMsgShow(
         modalType.error,
         "Please Fill proper Data"
@@ -119,7 +137,7 @@ class UploadModal extends Component {
 
   validateForm = () => {
     const { form } = this.state;
-    return form.add_category && form.add_location.latitude && form.add_location.longitude && form.add_location.address && form.file
+    return form.add_category && form.add_location.latitude && form.add_location.longitude && form.add_location.address && form.add_description
   }
 
   render() {
