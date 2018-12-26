@@ -46,7 +46,7 @@ class Languages extends Component {
     return (
       <div className="right_language padding-15">
         <div className="normal_title">{Translations.base_footer.language}</div>
-        {languages.map((lang) => {
+        {languages.map(lang => {
           return (
             <div
               key={lang.ios}

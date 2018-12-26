@@ -387,6 +387,13 @@
     "like_you": "Like You"
   },
 
+  "top_bar_info_modal": {
+    "modal_title": "Subscribers / Subscribed / Likes",
+    "follow_btn": "Follow",
+    "subscribe_btn": "Subscribed",
+    "request_sent_btn": "Request Sent"
+  },
+
   "left_sidebar": {
     "news": "News",
     "explore": "Explore",
@@ -752,15 +759,15 @@
       "radius": "Please Select Radius",
       "inquiryTag": "Please Enter Inquiry Tags",
       "description": "Please Enter Description",
-      "date" : "End Date must be greater than Start Date",
+      "date": "End Date must be greater than Start Date",
       "budget": "Please Select Budget",
-      "invoiceRecipient" : "Please Enter Invoice Recipient",
+      "invoiceRecipient": "Please Enter Invoice Recipient",
       "postalCode": "Please Enter Postal code",
       "city": "Please Enter City",
       "VATNO": "Please Enter VAT Identification Number",
       "country": "Please Enter Country",
       "streetNumber": "Please Enter Street,Number",
-      "insertLink": "Please Enter Inset Link" 
+      "insertLink": "Please Enter Inset Link"
     }
   }
 }

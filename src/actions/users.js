@@ -23,7 +23,7 @@ const getUserListFailed = error => ({
  * { subscribed, unknown, likes, company }
  *  @returns {dispatch} getUserList.
  */
-export const getUserList = (type = "subscribed") => {
+export const getUserList = (type = "subscriber") => {
   return dispatch => {
     dispatch(getUserListStarted());
     const storage = Auth.extractJwtFromStorage();

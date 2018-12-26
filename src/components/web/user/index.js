@@ -7,3 +7,4 @@ export { ContentView } from "./content-view";
 export { Verification } from "./verification";
 export { Share } from "./share";
 export { Error } from "./error";
+export { Subscribe } from "./subscribe";

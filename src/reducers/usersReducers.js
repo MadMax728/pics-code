@@ -18,6 +18,7 @@ const usersReducers = (state = initialState.usersData, action) => {
     case types.GET_USER_LIST_FAILED:
       return {
         ...state,
+        users: [], // Remove after - Getting blank array from API response
         isLoading: false,
         error: action.payload
       };
