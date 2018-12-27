@@ -26,14 +26,13 @@ export const getAdmins = () => {
     const header = {
       Authorization: storage.adminAccessToken
     };
-
-    return adminService.getAdmins(header).then(
+  
+    return adminService.getAdmins(null,header).then(
       res => {
         dispatch(getAdminsSucceeded(res.data.data));
       },
       error => {
         dispatch(getAdminsFailed(error.response));
-        // dispatch(getAdminsSucceeded(admin_list));
         logger.error({
           description: error.toString(),
           fatal: true

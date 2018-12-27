@@ -22,12 +22,20 @@ class Username extends Component {
 
   _commentsCbUserName = item => {
     const username = item.username;
+    const id = item.id;
+
     //hashtag = hash_tag_list.filter
     let { value } = this.props;
     const commentArr = value.split(" ");
     commentArr.pop();
-    value = commentArr.join(" ") + " @" + username;
-    this.props.handleSetSatetToolTipUsername(value);
+    if(this.props.username){
+      value = commentArr.join(" ")+ username;
+      this.props.handleSetSatetToolTipUsername(id,value);
+    }
+    else {
+      value = commentArr.join(" ") + " @" + username;
+      this.props.handleSetSatetToolTipUsername(value);
+    }
   };
 
   render() {
@@ -93,7 +101,8 @@ Username.propTypes = {
   isLoading: PropTypes.bool,
   usersList: PropTypes.any,
   value: PropTypes.any.isRequired,
-  handleSetSatetToolTipUsername: PropTypes.func.isRequired
+  handleSetSatetToolTipUsername: PropTypes.func.isRequired,
+  username: PropTypes.bool
   // error: PropTypes.any
 };
 

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getAdmins } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Username } from "../../common/username";
+import ReactTooltip from "react-tooltip";
+import { findDOMNode } from "react-dom";
 
 class AddAdminPage extends Component {
   constructor(props, context) {
@@ -11,8 +14,9 @@ class AddAdminPage extends Component {
     this.state = {
       admins: null,
       form: {
+        id: "",
         username: "",
-        status: "admin_status1"
+        role: "rank1"
       }
     };
   }
@@ -54,7 +58,8 @@ class AddAdminPage extends Component {
   statusFormatter = (cell, row, rowIndex) => {
     return (
       <div key={rowIndex}>
-        <span>{cell}</span>
+        <span>{row.role}</span>
+        <span>{" "}</span>
         <button name={row.name} onClick={this.deleteData}>
           Delete
         </button>
@@ -160,8 +165,47 @@ class AddAdminPage extends Component {
     )
   }
 
+  handleSetSatetToolTipUsername = (id,username) => {
+    const { form } = this.state;
+    form.id = id;
+    form.username = username
+    this.setState({ form });
+    this.usernameHide();
+    
+  }
+
+  renderUserNameTips = () => {
+    const { form }  = this.state;
+    return (
+      <Username
+        value={form.username}
+        handleSetSatetToolTipUsername={this.handleSetSatetToolTipUsername}
+        username
+      />
+    );
+  };
+
+  handleChangeUsername = e => {
+    const username = e.target.value.split(" ");
+
+    this.usernameHide();
+    this.setState({ form: { ...this.state.form, username: e.target.value } });
+    this.usernameShow();
+
+  };
+
+  usernameShow = () => {
+    /* eslint-disable */
+    ReactTooltip.show(findDOMNode(this.refs.username));
+  };
+
+  usernameHide = () => {
+    /* eslint-disable */
+    ReactTooltip.hide(findDOMNode(this.refs.username));
+  };
+  
   render() {
-    const { admins } = this.state;
+    const { admins, form } = this.state;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -176,16 +220,34 @@ class AddAdminPage extends Component {
               id="username"
               placeholder={Translations.admin.Search_in_users}
               className="res440"
-              onChange={this.handleChangeField}
+              onChange={this.handleChangeUsername}
+              value={form.username? form.username : "" }
             />
+            <div
+              data-for="username"
+              role="button"
+              data-tip="tooltip"
+              ref="username"
+            />
+             <ToolTip
+                id="username"
+                getContent={this.renderUserNameTips}
+                effect="solid"
+                delayHide={0}
+                delayShow={0}
+                delayUpdate={0}
+                place={"bottom"}
+                border={true}
+                type={"light"}
+              />
             <select
               className="res440"
               onBlur={this.handleChangeField}
-              name="status"
+              name="role"
             >
-              <option value={"admin_status1"}>Admin status 1 </option>
-              <option value={"admin_status2"}>Admin status 2 </option>
-              <option value={"admin_status3"}>Admin status 3 </option>
+              <option value={"rank1"}>Rank1</option>
+              <option value={"rank2"}>Rank2</option>
+              <option value={"rank3"}>Rank3</option>
             </select>
             <button className="res440" onClick={this.handleSubmit}>
               {Translations.admin.Add}
