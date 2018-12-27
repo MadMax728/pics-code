@@ -80,7 +80,7 @@ const initialState = {
 
     pics: null,
     isLoadingpics: false,
-    errorpics: false,
+    errorpics: false
   },
   aboutData: {
     about: null,
@@ -137,7 +137,9 @@ const initialState = {
   usersData: {
     users: [],
     isLoading: false,
-    error: false
+    error: false,
+    isRequestSend: null,
+    isUnsubscribed: null
   },
   profilePrivacyData: {
     profilePrivacyData: [],
