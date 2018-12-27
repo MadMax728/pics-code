@@ -10,6 +10,10 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
  * @param {*} payload
  */
 
-// BackOffice Dashboard API
+// BackOffice Get Admins API
 export const getAdmins = (payload, header = {}) =>
   api(baseUrl, header).get("/users/admin/list");
+
+// BackOffice Add Admin API
+export const addAdmin = (payload, header = {}) =>
+  api(baseUrl, header).put("/users/set-isadmin", payload);

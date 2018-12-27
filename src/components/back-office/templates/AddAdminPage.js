@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import { getAdmins } from "../../../actions";
+import { getAdmins, addAdmin } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Username } from "../../common/username";
 import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
+
 
 class AddAdminPage extends Component {
   constructor(props, context) {
@@ -16,7 +17,7 @@ class AddAdminPage extends Component {
       form: {
         id: "",
         username: "",
-        role: "rank1"
+        role: Translations.adminRole.rank1
       }
     };
   }
@@ -27,20 +28,38 @@ class AddAdminPage extends Component {
     this.setState({ form });
   };
 
+
+  validateForm = () => {
+    const { form } = this.state;
+    return form.id && form.username && form.role
+  }
+
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    const adminData = this.state.admins;
-    const data = {
-      no: 4,
-      username: this.state.form.username,
-      name: "test",
-      status: this.state.form.status
-    };
-    adminData.push(data);
-    this.setState({
-      admins: adminData
-    });
+    if(this.validateForm()) {
+      const { form, admins } = this.state;
+      const data = {
+        id: form.id,
+        role: form.role,
+        isAdmin: true
+      }
+      this.props.addAdmin(data).then(()=> {
+        if(this.props.adminData && this.props.adminData.admin) { 
+          const dataAdd = {
+            no: this.props.adminData.admin.id,
+            username: this.props.adminData.admin.username,
+            name: this.props.adminData.admin.name,
+            role: this.props.adminData.admin.role,
+          };
+          admins.push(dataAdd);
+          this.setState({ admins, form: { ...this.state.form , id: "", role: Translations.adminRole.rank1, username: ""}});
+        }
+      })
+
+      
+    }
+
   };
   
   deleteData = e => {
@@ -186,12 +205,11 @@ class AddAdminPage extends Component {
   };
 
   handleChangeUsername = e => {
-    const username = e.target.value.split(" ");
-
     this.usernameHide();
     this.setState({ form: { ...this.state.form, username: e.target.value } });
     this.usernameShow();
-
+    console.log(this.state.form);
+    
   };
 
   usernameShow = () => {
@@ -245,9 +263,9 @@ class AddAdminPage extends Component {
               onBlur={this.handleChangeField}
               name="role"
             >
-              <option value={"rank1"}>Rank1</option>
-              <option value={"rank2"}>Rank2</option>
-              <option value={"rank3"}>Rank3</option>
+              <option value={Translations.adminRole.rank1}>{Translations.adminRole.rank1}</option>
+              <option value={Translations.adminRole.rank2}>{Translations.adminRole.rank2}</option>
+              <option value={Translations.adminRole.rank3}>{Translations.adminRole.rank3}</option>
             </select>
             <button className="res440" onClick={this.handleSubmit}>
               {Translations.admin.Add}
@@ -266,11 +284,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getAdmins
+  getAdmins,
+  addAdmin
 };
 
 AddAdminPage.propTypes = {
   getAdmins: PropTypes.func.isRequired,
+  addAdmin: PropTypes.func.isRequired,
   adminData: PropTypes.object,
 };
 

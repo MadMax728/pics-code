@@ -3,19 +3,20 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getHashUser } from "../../../actions";
 import { username_list } from "../../../mock-data";
+import * as images from "../../../lib/constants/"
 
 class Username extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      usersList: username_list
+      usersList: null
     };
   }
 
   componentDidMount = () => {
     this.props.getHashUser("usernames").then(()=> {
       if(this.props.usersList){
-        this.setState({usersListtest: this.props.usersList})
+        this.setState({usersList: this.props.usersList})
       }
     });
   }
@@ -23,8 +24,6 @@ class Username extends Component {
   _commentsCbUserName = item => {
     const username = item.username;
     const id = item.id;
-
-    //hashtag = hash_tag_list.filter
     let { value } = this.props;
     const commentArr = value.split(" ");
     commentArr.pop();
@@ -40,15 +39,19 @@ class Username extends Component {
 
   render() {
     let { usersList } = this.state;
+
     const { value } = this.props;
+
     const commentArr = value? value.split(" ") : " ";
+
     const lastText = commentArr[commentArr.length - 1].substring(1);
+    
     usersList = usersList && usersList.filter(item => {
       return !!(
         lastText === "@" ||
         lastText === "" ||
-        item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1 ||
-        item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1
+        item.username && item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1 ||
+        item.name !== undefined && item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1
       );
     });
     
@@ -69,7 +72,7 @@ class Username extends Component {
             >
               <div className="img-wrapr">
                 <img
-                  src={item.image}
+                  src={item.profileUrl? item.profileUrl : images.image}
                   alt={"image" + `${item.username}`}
                   style={{ height: "20px", width: "20px" }}
                 />

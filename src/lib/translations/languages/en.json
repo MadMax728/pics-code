@@ -747,6 +747,12 @@
     "VATNO": "VAT Identification Number"
   },
 
+  "adminRole" : {
+    "rank1": "rank1",
+    "rank2": "rank2",
+    "rank3": "rank3"
+  },
+
   "error": {
     "create_modal": {
       "title": "Plaese Enter Title",
