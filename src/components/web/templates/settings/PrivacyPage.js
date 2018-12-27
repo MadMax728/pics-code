@@ -94,6 +94,9 @@ class PrivacyPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {

@@ -11,7 +11,7 @@ import {
 import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
-import { getUser, updateUserProfile } from "../../../../../actions";
+import { getUser, updateUserProfile, getSearch } from "../../../../../actions";
 import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
@@ -74,6 +74,9 @@ class EditProfile extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -551,7 +554,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getUser,
-  updateUserProfile
+  updateUserProfile,
+  getSearch
 };
 
 EditProfile.propTypes = {
@@ -562,7 +566,8 @@ EditProfile.propTypes = {
   profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
 export default connect(

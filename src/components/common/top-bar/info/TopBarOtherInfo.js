@@ -4,7 +4,7 @@ import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { connect } from "react-redux";
-import { getUser } from "../../../../actions";
+import { getUser, sendRequest, getUnsubscribe } from "../../../../actions";
 class TopBarOtherInfo extends Component {
   constructor(props) {
     super(props);
@@ -111,8 +111,39 @@ class TopBarOtherInfo extends Component {
   };
 
   handeleSubscribe = () => {
+    // To Do - Integration changed - according to backend API response
     console.log("handeleSubscribe clicked");
-    // call subscribe api
+    const errors = {};
+    const selectedUserList = this.props.userDataByUsername.user.data;
+    if (selectedUserList.subscribeId === "") {
+      const requestData = { followers: selectedUserList.id };
+      this.props.sendRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          errors.servererror =
+            Translations.profile_community_right_sidebar.serverError;
+          this.setState({ error: errors });
+        } else if (this.props.usersData.isRequestSend) {
+          this.handleSetUserInfo();
+        }
+      });
+    } else {
+      const subscribedId = selectedUserList.subscribeId;
+      this.props.getUnsubscribe(subscribedId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          errors.servererror =
+            Translations.profile_community_right_sidebar.serverError;
+          this.setState({ error: errors });
+        } else if (this.props.usersData.isUnsubscribed) {
+          this.handleSetUserInfo();
+        }
+      });
+    }
   };
 
   handeleMessage = () => {
@@ -135,11 +166,14 @@ class TopBarOtherInfo extends Component {
 }
 
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  usersData: state.usersData
 });
 
 const mapDispatchToProps = {
-  getUser
+  getUser,
+  sendRequest,
+  getUnsubscribe
 };
 
 TopBarOtherInfo.propTypes = {
@@ -147,7 +181,10 @@ TopBarOtherInfo.propTypes = {
   handleModalShow: PropTypes.func,
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.object,
-  handleModalInfoShow: PropTypes.any
+  handleModalInfoShow: PropTypes.any,
+  sendRequest: PropTypes.func,
+  getUnsubscribe: PropTypes.func,
+  usersData: PropTypes.any
 };
 
 export default connect(

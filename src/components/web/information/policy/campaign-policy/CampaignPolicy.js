@@ -3,9 +3,17 @@ import * as images from "../../../../../lib/constants/images";
 import * as routes from "../../../../../lib/constants/routes";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { getSearch } from "../../../../../actions";
 
 class CampaignPolicy extends Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -68,7 +76,15 @@ const mapStateToProps = state => ({
 
 CampaignPolicy.propTypes = {
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
-export default connect(mapStateToProps)(CampaignPolicy);
+const mapDispatchToProps = {
+  getSearch
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CampaignPolicy);

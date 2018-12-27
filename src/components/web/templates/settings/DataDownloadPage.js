@@ -3,7 +3,7 @@ import { Text } from "../../../ui-kit/CommonUIComponents";
 import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDownloadData } from "../../../../actions";
+import { getDownloadData, getSearch } from "../../../../actions";
 import * as images from "../../../../lib/constants/images";
 import { Translations } from "../../../../lib/translations";
 import * as routes from "../../../../lib/constants/routes";
@@ -26,6 +26,9 @@ class DataDownloadPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -181,13 +184,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getDownloadData
+  getDownloadData,
+  getSearch
 };
 
 DataDownloadPage.propTypes = {
   getDownloadData: PropTypes.func,
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
 export default connect(
