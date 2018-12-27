@@ -15,19 +15,19 @@ class AdsStatisticsPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getAdDetails(this.state.adId);
+    // this.props.getAdDetails(this.state.adId);
     window.scrollTo(0, 0);
   };
 
   render() {
-    const { ad_details, isLoading } = this.props;
+    const { adDetails, isLoading } = this.props;
 
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          {ad_details && (
+          {adDetails && (
             <div className="campaign-middle-section">
-              <div className="normal_title padding-15">{ad_details.title}</div>
+              <div className="normal_title padding-15">{adDetails.title}</div>
               <div className="campaign-block">
                 <div className="normal_title padding-15">
                   {Translations.create_ads.total_budget}
@@ -45,11 +45,11 @@ class AdsStatisticsPage extends Component {
                 <div className="progressbar-wrapper">
                   <div className="progressbar">
                     <div
-                      style={{ width: `${ad_details.total_budget_spent_per}` }}
+                      style={{ width: `${adDetails.total_budget_spent_per}` }}
                     />
                   </div>
                   <span className="counter">
-                    {ad_details.total_budget_spent_per}
+                    {adDetails.total_budget_spent_per}
                   </span>
                 </div>
               </div>
@@ -70,11 +70,11 @@ class AdsStatisticsPage extends Component {
                 <div className="progressbar-wrapper">
                   <div className="progressbar">
                     <div
-                      style={{ width: `${ad_details.daily_budget_spent_per}` }}
+                      style={{ width: `${adDetails.daily_budget_spent_per}` }}
                     />
                   </div>
                   <span className="counter">
-                    {ad_details.daily_budget_spent_per}
+                    {adDetails.daily_budget_spent_per}
                   </span>
                 </div>
               </div>
@@ -95,11 +95,11 @@ class AdsStatisticsPage extends Component {
                 <div className="progressbar-wrapper">
                   <div className="progressbar">
                     <div
-                      style={{ width: `${ad_details.performance_view_per}` }}
+                      style={{ width: `${adDetails.performance_view_per}` }}
                     />
                   </div>
                   <span className="counter">
-                    {ad_details.performance_view_per}
+                    {adDetails.performance_view_per}
                   </span>
                 </div>
               </div>
@@ -120,18 +120,18 @@ class AdsStatisticsPage extends Component {
                 <div className="progressbar-wrapper">
                   <div className="progressbar">
                     <div
-                      style={{ width: `${ad_details.runtime_passed_per}` }}
+                      style={{ width: `${adDetails.runtime_passed_per}` }}
                     />
                   </div>
                   <span className="counter">
-                    {ad_details.runtime_passed_per}
+                    {adDetails.runtime_passed_per}
                   </span>
                 </div>
               </div>
             </div>
           )}
         </div>
-        {ad_details && <SettingAdsStatisticsRight adStatistics={ad_details} />}
+        {adDetails && <SettingAdsStatisticsRight adStatistics={adDetails} />}
         {isLoading && <InlineLoading />}
       </div>
     );
@@ -141,13 +141,13 @@ class AdsStatisticsPage extends Component {
 AdsStatisticsPage.propTypes = {
   match: PropTypes.any,
   getAdDetails: PropTypes.func.isRequired,
-  ad_details: PropTypes.any,
+  adDetails: PropTypes.any,
   isLoading: PropTypes.bool
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  ad_details: state.adData.ad[0],
+  adDetails: state.adData.ad,
   isLoading: state.adData.isLoading,
   error: state.adData.error
 });

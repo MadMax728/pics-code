@@ -30,7 +30,7 @@ class AdsPage extends Component {
     return adList.map(ad => {
       return (
         <div key={ad.id}>
-          {ad.type === enumerations.contentTypes.ad && (
+          {ad.mediaUrl && ad.postType && ad.postType.toLowerCase() === enumerations.contentTypes.ad && (
             <AdCard item={ad} isDescription isInformation={false} isStatus />
           )}
         </div>
@@ -40,7 +40,7 @@ class AdsPage extends Component {
 
   render() {
     const { adList, isLoading } = this.props;
-
+    
     return (
       <div className="padding-rl-10 middle-section">
         {adList && !isLoading && this.renderAdList()}
