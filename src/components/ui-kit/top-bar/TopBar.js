@@ -18,7 +18,6 @@ class TopBar extends Component {
   }
 
   handleSubscriptionModal = e => {
-    console.log(e.target.id);
     if (e.target.id !== "Posts") {
       this.props.handleModalInfoShow(modalType.subscribe, { id: e.target.id });
     }
