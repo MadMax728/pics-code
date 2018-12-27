@@ -5,6 +5,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 class Imprint extends Component {
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   componentWillReceiveProps = nextProps => {
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
