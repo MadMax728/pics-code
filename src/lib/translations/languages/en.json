@@ -394,6 +394,13 @@
     "request_sent_btn": "Request Sent"
   },
 
+  "profile_community_right_sidebar": {
+    "community": "Community",
+    "serverError": "Something went wrong. Please Try Again",
+    "Subscribe": "Subscribe",
+    "Subscribed": "Subscribed"
+  },
+
   "left_sidebar": {
     "news": "News",
     "explore": "Explore",

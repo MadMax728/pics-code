@@ -4,7 +4,7 @@ import { Translations } from "../../../../lib/translations";
 import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { activateBusinessProfile } from "../../../../actions";
+import { activateBusinessProfile, getSearch } from "../../../../actions";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 
@@ -30,6 +30,9 @@ class BusinessProfilePage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -126,13 +129,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  activateBusinessProfile
+  activateBusinessProfile,
+  getSearch
 };
 
 BusinessProfilePage.propTypes = {
   activateBusinessProfile: PropTypes.func,
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
 export default connect(
