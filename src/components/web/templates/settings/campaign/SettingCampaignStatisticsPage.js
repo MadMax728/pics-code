@@ -15,7 +15,7 @@ class SettingCampaignStatisticsPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getCampaignDetails(this.state.campaignId);
+    // this.props.getCampaignDetails(this.state.campaignId);
     window.scrollTo(0, 0);
   };
 
@@ -121,7 +121,7 @@ SettingCampaignStatisticsPage.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  campaign_details: state.campaignData.campaign[0],
+  campaign_details: state.campaignData.campaign,
   isLoading: state.campaignData.isLoading,
   error: state.campaignData.error
 });

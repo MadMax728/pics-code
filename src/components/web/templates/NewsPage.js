@@ -54,7 +54,7 @@ class NewsRoot extends Component {
                 isReport={false}
               />
             )}
-          {newsFeed.mediaUrl && newsFeed.postType && newsFeed.mediaUrl &&
+          {newsFeed.mediaUrl && newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign && (
               <CampaignCard

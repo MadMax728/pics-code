@@ -30,7 +30,7 @@ export const getSavedCampaigns = payload =>
 
 // Settings Campaign
 export const getSettingsCampaigns = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds" + payload);
+  api(baseUrl, header).get("/campaigns/get-user-campaigns" + payload);
 
 // Campaign Type Creator and Company
 export const getCampaignType = (payload, header = {}) =>
