@@ -3,6 +3,7 @@ import * as images from "../../../../lib/constants/images";
 import * as routes from "../../../../lib/constants/routes";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { getSearch } from "../../../../actions";
 
 class GeneralTermsAndConditions extends Component {
   componentDidMount = () => {
@@ -10,6 +11,9 @@ class GeneralTermsAndConditions extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -72,7 +76,15 @@ const mapStateToProps = state => ({
 
 GeneralTermsAndConditions.propTypes = {
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
-export default connect(mapStateToProps)(GeneralTermsAndConditions);
+const mapDispatchToProps = {
+  getSearch
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GeneralTermsAndConditions);
