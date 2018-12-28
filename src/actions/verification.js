@@ -29,13 +29,12 @@ export const getVerifications = () => {
       Authorization: storage.adminAccessToken
     };
 
-    return verificationService.getVerifications(header).then(
+    return verificationService.getVerifications(null,header).then(
       res => {
           dispatch(getVerificationsSucceeded(res.data.data));
       },
       error => {
         dispatch(getVerificationsFailed(error.response))
-        dispatch(getVerificationsSucceeded(verification_list));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -44,3 +43,43 @@ export const getVerifications = () => {
     );
   };
 };
+
+
+const getUnverifiedUsersStarted = () => ({
+  type: types.GET_UNVERIFIED_USERS_STARTED
+});
+
+const getUnverifiedUsersSucceeded = data => ({
+  type: types.GET_UNVERIFIED_USERS_SUCCEEDED,
+  payload: data
+});
+
+const getUnverifiedUsersFailed = error => ({
+  type: types.GET_UNVERIFIED_USERS_FAILED,
+  payload: error,
+  error: true
+});
+
+export const getUnverifiedUsers = () => {
+  return dispatch => {
+    dispatch(getUnverifiedUsersStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.adminAccessToken
+    };
+
+    return verificationService.getUnverifiedUsers(null,header).then(
+      res => {
+          dispatch(getUnverifiedUsersSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(getUnverifiedUsersFailed(error.response))
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+

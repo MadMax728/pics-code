@@ -12,4 +12,9 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // getVerifications API
 export const getVerifications = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get("/users/admin/list?type=adminDashBoard");
+
+
+// unverifiedUser API
+export const getUnverifiedUsers = (payload, header = {}) =>
+  api(baseUrl, header).get("/users/admin/list?type=UnverifiedUser");
