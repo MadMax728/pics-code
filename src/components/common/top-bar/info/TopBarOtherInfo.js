@@ -86,19 +86,20 @@ class TopBarOtherInfo extends Component {
 
   handleSetUserInfo = () => {
     const isPending = this.props.userDataByUsername.user.data.isPending;
+    const isSubscribe = this.props.userDataByUsername.user.data.isSubscribe;
+    let subscribeBtnClass = "filled_button";
     let subscribeBtnText = Translations.top_bar_info.subscribe;
     if (isPending) {
       subscribeBtnText = Translations.top_bar_info.request_pending;
     } else {
-      subscribeBtnText = Translations.top_bar_info.subscribe;
-    }
-
-    const isSubscribe = this.props.userDataByUsername.user.data.isSubscribe;
-    let subscribeBtnClass = "filled_button";
-    if (isSubscribe) {
       subscribeBtnClass = "filled_button";
-    } else {
-      subscribeBtnClass = "blue_button";
+      if (isSubscribe) {
+        subscribeBtnClass = "filled_button";
+        subscribeBtnText = Translations.top_bar_info.subscribed;
+      } else {
+        subscribeBtnClass = "blue_button";
+        subscribeBtnText = Translations.top_bar_info.subscribe;
+      }
     }
 
     const items = {

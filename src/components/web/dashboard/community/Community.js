@@ -103,7 +103,10 @@ class Community extends Component {
                         id={user.id}
                         onClick={this.handleSubscribed}
                       >
-                        {Translations.profile_community_right_sidebar.Subscribe}
+                        {
+                          Translations.profile_community_right_sidebar
+                            .Subscribed
+                        }
                       </button>
                     </div>
                   ) : (
@@ -113,10 +116,7 @@ class Community extends Component {
                         id={user.id}
                         onClick={this.handleSubscribed}
                       >
-                        {
-                          Translations.profile_community_right_sidebar
-                            .Subscribed
-                        }
+                        {Translations.profile_community_right_sidebar.Subscribe}
                       </button>
                     </div>
                   )}
