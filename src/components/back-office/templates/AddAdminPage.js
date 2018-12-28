@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import { getAdmins, addAdmin } from "../../../actions";
+import { getAdmins, updateAdmin, getHashUser } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Username } from "../../common/username";
+import { UsernameList } from "../../common";
 import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
-
 
 class AddAdminPage extends Component {
   constructor(props, context) {
@@ -28,7 +27,6 @@ class AddAdminPage extends Component {
     this.setState({ form });
   };
 
-
   validateForm = () => {
     const { form } = this.state;
     return form.id && form.username && form.role
@@ -44,33 +42,47 @@ class AddAdminPage extends Component {
         role: form.role,
         isAdmin: true
       }
-      this.props.addAdmin(data).then(()=> {
+      this.props.updateAdmin(data).then(()=> {
         if(this.props.adminData && this.props.adminData.admin) { 
           const dataAdd = {
-            no: this.props.adminData.admin.id,
+            id: this.props.adminData.admin.id,
             username: this.props.adminData.admin.username,
             name: this.props.adminData.admin.name,
-            role: this.props.adminData.admin.role,
+            role: form.role,
           };
-          admins.push(dataAdd);
+          const indexOf = admins.findIndex(admin => {
+            return admin.id === form.id;
+          });
+          if (indexOf === -1) {
+            admins.push(dataAdd);
+          } else {
+            admins.splice(indexOf, 1);
+            admins.push(dataAdd);
+          }
           this.setState({ admins, form: { ...this.state.form , id: "", role: Translations.adminRole.rank1, username: ""}});
         }
       })
-
-      
     }
-
   };
   
   deleteData = e => {
-    const admins_Data = this.state.admins;
-    for (let i = admins_Data.length - 1; i >= 0; i--) {
-      if (admins_Data[i].name === e.target.name) {
-        admins_Data.splice(i, 1);
-      }
+    const { admins } = this.state;
+    const id = e.target.id;
+    const data = {
+      id: id,
+      role: "User",
+      isAdmin: false
     }
-    this.setState({
-      admins: admins_Data
+    this.props.updateAdmin(data).then(()=> {
+      if(this.props.adminData && this.props.adminData.admin) { 
+        const indexOf = admins.findIndex(admin => {
+          return admin.id === this.props.adminData.admin.id ;
+        });
+        if (indexOf !== -1) {
+          admins.splice(indexOf, 1);
+        }
+        this.setState({ admins });
+      }
     });
   };
 
@@ -79,7 +91,7 @@ class AddAdminPage extends Component {
       <div key={rowIndex}>
         <span>{row.role}</span>
         <span>{" "}</span>
-        <button name={row.name} onClick={this.deleteData}>
+        <button name={row.name} id={row.id} onClick={this.deleteData}>
           Delete
         </button>
       </div>
@@ -95,6 +107,9 @@ class AddAdminPage extends Component {
         })
       }
     });
+    
+    this.props.getHashUser("usernames");
+
   };
 
   customTotal = (from, to, size) => (
@@ -190,16 +205,16 @@ class AddAdminPage extends Component {
     form.username = username
     this.setState({ form });
     this.usernameHide();
-    
   }
 
   renderUserNameTips = () => {
     const { form }  = this.state;
+    const { usersList } = this.props;
     return (
-      <Username
+      <UsernameList
         value={form.username}
         handleSetSatetToolTipUsername={this.handleSetSatetToolTipUsername}
-        username
+        usersList={usersList}
       />
     );
   };
@@ -208,8 +223,6 @@ class AddAdminPage extends Component {
     this.usernameHide();
     this.setState({ form: { ...this.state.form, username: e.target.value } });
     this.usernameShow();
-    console.log(this.state.form);
-    
   };
 
   usernameShow = () => {
@@ -261,7 +274,9 @@ class AddAdminPage extends Component {
             <select
               className="res440"
               onBlur={this.handleChangeField}
+              onChange={this.handleChangeField}
               name="role"
+              value={form.role}
             >
               <option value={Translations.adminRole.rank1}>{Translations.adminRole.rank1}</option>
               <option value={Translations.adminRole.rank2}>{Translations.adminRole.rank2}</option>
@@ -280,18 +295,22 @@ class AddAdminPage extends Component {
 
 
 const mapStateToProps = state => ({
-  adminData: state.adminData
+  adminData: state.adminData,
+  usersList: state.hashUserData.usernames,
 });
 
 const mapDispatchToProps = {
   getAdmins,
-  addAdmin
+  updateAdmin,
+  getHashUser
 };
 
 AddAdminPage.propTypes = {
   getAdmins: PropTypes.func.isRequired,
-  addAdmin: PropTypes.func.isRequired,
+  updateAdmin: PropTypes.func.isRequired,
   adminData: PropTypes.object,
+  getHashUser: PropTypes.func,
+  usersList: PropTypes.any,
 };
 
 export default connect(

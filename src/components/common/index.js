@@ -27,6 +27,7 @@ export { HomeRoute } from "./home-route";
 export { BackOfficeHomeRoute } from "./back-office-home-route";
 export { MessageBar } from "./message-bar";
 export { Username } from "./username";
+export { UsernameList } from "./usernameList";
 export { HashTag } from "./hash-tag";
 export { HashTagUsername } from "./hash-tag-username";
 export { RenderToolTips } from "./render-tool-tips";

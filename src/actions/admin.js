@@ -2,7 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as adminService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import { admin_list } from "../mock-data";
 
 // Get Admins
 const getAdminsStarted = () => ({
@@ -43,37 +42,37 @@ export const getAdmins = () => {
   };
 };
 
-// Add Admin
+// Update Admin
 
-const addAdminStarted = () => ({
-  type: types.ADD_ADMIN_STARTED
+const updateAdminStarted = () => ({
+  type: types.UPDATE_ADMIN_STARTED
 });
 
-const addAdminSucceeded = data => ({
-  type: types.ADD_ADMIN_SUCCEEDED,
+const updateAdminSucceeded = data => ({
+  type: types.UPDATE_ADMIN_SUCCEEDED,
   payload: data
 });
 
-const addAdminFailed = error => ({
-  type: types.ADD_ADMIN_FAILED,
+const updateAdminFailed = error => ({
+  type: types.UPDATE_ADMIN_FAILED,
   payload: error,
   error: true
 });
 
-export const addAdmin = (provider) => {
+export const updateAdmin = (provider) => {
   return dispatch => {
-    dispatch(addAdminStarted());
+    dispatch(updateAdminStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.adminAccessToken
     };
   
-    return adminService.addAdmin(provider,header).then(
+    return adminService.updateAdmin(provider,header).then(
       res => {
-        dispatch(addAdminSucceeded(res.data.data));
+        dispatch(updateAdminSucceeded(res.data.data));
       },
       error => {
-        dispatch(addAdminFailed(error.response));
+        dispatch(updateAdminFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
