@@ -18,6 +18,10 @@ class TopBar extends Component {
     super(props);
   }
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   handleSubscriptionModal = e => {
     if (e.target.id !== "Posts") {
       this.props.handleModalInfoShow(modalType.subscribe, { id: e.target.id });

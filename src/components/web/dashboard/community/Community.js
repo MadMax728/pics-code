@@ -13,6 +13,7 @@ class Community extends Component {
 
   componentDidMount = () => {
     this.getUserData();
+    window.scrollTo(0, 0);
   };
 
   getUserData = () => {
