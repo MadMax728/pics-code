@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getVerifications } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { Username } from "../../common/username";
+import ReactTooltip from "react-tooltip";
+import { findDOMNode } from "react-dom";
 
 class AddVerificationPage extends Component {
   constructor(props, context) {
@@ -11,6 +14,7 @@ class AddVerificationPage extends Component {
     this.state = {
       verifications: null,
       form: {
+        id: "",
         username: ""
       }
     };
@@ -156,8 +160,43 @@ class AddVerificationPage extends Component {
     )
   }
 
+  handleSetSatetToolTipUsername = (id,username) => {   
+    const { form } = this.state;
+    form.id = id;
+    form.username = username
+    this.setState({ form });
+    this.usernameHide();
+  }
+
+  renderUserNameTips = () => {
+    const { form }  = this.state;
+    return (
+      <Username
+        value={form.username}
+        handleSetSatetToolTipUsername={this.handleSetSatetToolTipUsername}
+        username
+      />
+    );
+  };
+
+  handleChangeUsername = e => {
+    this.usernameHide();
+    this.setState({ form: { ...this.state.form, username: e.target.value } });
+    this.usernameShow();
+  };
+
+  usernameShow = () => {
+    /* eslint-disable */
+    ReactTooltip.show(findDOMNode(this.refs.username));
+  };
+
+  usernameHide = () => {
+    /* eslint-disable */
+    ReactTooltip.hide(findDOMNode(this.refs.username));
+  };
+
   render() {
-    const { verifications } = this.state;
+    const { verifications, form } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -171,8 +210,26 @@ class AddVerificationPage extends Component {
               id="username"
               placeholder={Translations.admin.Search_in_users}
               className="flex2"
-              onChange={this.handleChangeField}
+              onChange={this.handleChangeUsername}
+              value={form.username? form.username : "" }
             />
+            <div
+              data-for="username"
+              role="button"
+              data-tip="tooltip"
+              ref="username"
+            />
+             <ToolTip
+                id="username"
+                getContent={this.renderUserNameTips}
+                effect="solid"
+                delayHide={0}
+                delayShow={0}
+                delayUpdate={0}
+                place={"bottom"}
+                border={true}
+                type={"light"}
+              />
             <button className="wid30per" onClick={this.handleSubmit}>
               {Translations.admin.Add}
             </button>

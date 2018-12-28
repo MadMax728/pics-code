@@ -8,7 +8,6 @@ import { Username } from "../../common/username";
 import ReactTooltip from "react-tooltip";
 import { findDOMNode } from "react-dom";
 
-
 class AddAdminPage extends Component {
   constructor(props, context) {
     super(props, context);
@@ -27,7 +26,6 @@ class AddAdminPage extends Component {
     form[event.target.name] = event.target.value;
     this.setState({ form });
   };
-
 
   validateForm = () => {
     const { form } = this.state;
@@ -196,7 +194,6 @@ class AddAdminPage extends Component {
     form.username = username
     this.setState({ form });
     this.usernameHide();
-    
   }
 
   renderUserNameTips = () => {
@@ -214,8 +211,6 @@ class AddAdminPage extends Component {
     this.usernameHide();
     this.setState({ form: { ...this.state.form, username: e.target.value } });
     this.usernameShow();
-    console.log(this.state.form);
-    
   };
 
   usernameShow = () => {
