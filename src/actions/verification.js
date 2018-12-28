@@ -2,9 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as verificationService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import {
-  verification_list
-} from "../mock-data";
 
 const getVerificationsStarted = () => ({
   type: types.GET_VERIFICATIONS_STARTED
@@ -83,3 +80,42 @@ export const getUnverifiedUsers = () => {
   };
 };
 
+// Update Verification
+
+const updateVerificationStarted = () => ({
+  type: types.UPDATE_VERIFICATION_STARTED
+});
+
+const updateVerificationSucceeded = data => ({
+  type: types.UPDATE_VERIFICATION_SUCCEEDED,
+  payload: data
+});
+
+const updateVerificationFailed = error => ({
+  type: types.UPDATE_VERIFICATION_FAILED,
+  payload: error,
+  error: true
+});
+
+export const updateVerification = (provider) => {
+  return dispatch => {
+    dispatch(updateVerificationStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.adminAccessToken
+    };
+  
+    return verificationService.updateVerification(provider,header).then(
+      res => {
+        dispatch(updateVerificationSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(updateVerificationFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

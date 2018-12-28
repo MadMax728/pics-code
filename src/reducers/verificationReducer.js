@@ -43,6 +43,26 @@ const verificationReducer = (state = initialState.verificationData, action) => {
           error: action.payload
         };
 
+      // UPDATE VERIFICATION
+      case types.UPDATE_VERIFICATION_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+      case types.UPDATE_VERIFICATION_SUCCEEDED:
+      return {
+        ...state,
+        verification: action.payload,
+        isLoading: false
+      };
+      case types.UPDATE_VERIFICATION_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

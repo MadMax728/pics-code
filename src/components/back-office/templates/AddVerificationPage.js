@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import { getVerifications, getUnverifiedUsers } from "../../../actions";
+import { getVerifications, getUnverifiedUsers, updateVerification } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
@@ -12,7 +12,7 @@ class AddVerificationPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      verificationList: null,
+      verifications: null,
       form: {
         id: "",
         username: ""
@@ -26,37 +26,77 @@ class AddVerificationPage extends Component {
     this.setState({ form });
   };
 
+  validateForm = () => {
+    const { form } = this.state;
+    return form.id && form.username
+  }
+
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    const verificationData = this.state.verifications;
-    const data = {
-      no: 4,
-      username: "username5",
-      name: "abc"
-    };
-    verificationData.push(data);
-    this.setState({
-      verificationList: verificationData
-    });
+
+    if(this.validateForm()) {
+      const { form, verifications } = this.state;
+      const data = {
+        userId: form.id,
+        isVerifiedUser: true
+      }
+      this.props.updateVerification(data).then(()=> {
+        if(this.props.verificationData && this.props.verificationData.verification) { 
+          const dataAdd = {
+            id: this.props.verificationData.verification.id,
+            username: this.props.verificationData.verification.username,
+            name: this.props.verificationData.verification.name,
+          };
+          const indexOf = verifications.findIndex(verification => {
+            return verification.id === form.id;
+          });
+          if (indexOf === -1) {
+            verifications.push(dataAdd);
+          } else {
+            verifications.splice(indexOf, 1);
+            verifications.push(dataAdd);
+          }
+          this.setState({ verifications, form: { ...this.state.form , id: "", username: ""}});
+        }
+      })
+    }
   };
 
   removeVerification = e => {
-    const verification_Data = this.state.verifications;
-    for (let i = verification_Data.length - 1; i >= 0; i--) {
-      if (verification_Data[i].name === e.target.name) {
-        verification_Data.splice(i, 1);
-      }
+    const { verifications } = this.state;
+    const id = e.target.id;
+    const data = {
+      userId: id,
+      isVerifiedUser: false
     }
-    this.setState({
-      verificationList: verification_Data
+    this.props.updateVerification(data).then(()=> {
+      if(this.props.verificationData && this.props.verificationData.verification) { 
+        const indexOf = verifications.findIndex(verification => {
+          return verification.id === this.props.verificationData.verification.id ;
+        });
+        if (indexOf !== -1) {
+          verifications.splice(indexOf, 1);
+        }
+        this.setState({ verifications });
+      }
     });
+
+    // const verification_Data = this.state.verifications;
+    // for (let i = verification_Data.length - 1; i >= 0; i--) {
+    //   if (verification_Data[i].name === e.target.name) {
+    //     verification_Data.splice(i, 1);
+    //   }
+    // }
+    // this.setState({
+    //   verifications: verification_Data
+    // });
   };
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        <button name={row.name} onClick={this.removeVerification}>
+        <button name={row.name} id={row.id} onClick={this.removeVerification}>
           {Translations.admin.Remove_Verification}
         </button>
       </div>
@@ -74,7 +114,7 @@ class AddVerificationPage extends Component {
     this.props.getVerifications().then(()=> {
       if(this.props.verificationData && this.props.verificationData.verifications) {
         this.setState({
-          verificationList: this.props.verificationData.verifications
+          verifications: this.props.verificationData.verifications
         })
       }
     });
@@ -82,7 +122,7 @@ class AddVerificationPage extends Component {
   };
 
   renderVerifications = () => {
-    const { verificationList } = this.state;
+    const { verifications } = this.state;
     const columns = [
       {
         dataField: "username",
@@ -132,7 +172,7 @@ class AddVerificationPage extends Component {
         },
         {
           text: "All",
-          value: verificationList.length
+          value: verifications.length
         }
       ]
     };
@@ -147,7 +187,7 @@ class AddVerificationPage extends Component {
     return (
       <div className="dashboard-tbl">
         <CustomBootstrapTable
-          data={verificationList}
+          data={verifications}
           columns={columns}
           striped
           hover
@@ -156,7 +196,7 @@ class AddVerificationPage extends Component {
           defaultSorted={defaultSorted}
           pagination={pagination}
           noDataIndication="Table is Empty"
-          id={"verification"}
+          id={"username"}
         />
       </div>
     )
@@ -200,7 +240,7 @@ class AddVerificationPage extends Component {
   };
 
   render() {
-    const { verificationList, form } = this.state;
+    const { verifications, form } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -238,7 +278,7 @@ class AddVerificationPage extends Component {
               {Translations.admin.Add}
             </button>
           </div>
-          {verificationList && this.renderVerifications()}
+          {verifications && this.renderVerifications()}
         </div>
       </div>
     );
@@ -252,14 +292,16 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getVerifications,
-  getUnverifiedUsers
+  getUnverifiedUsers,
+  updateVerification
 };
 
 AddVerificationPage.propTypes = {
   getVerifications: PropTypes.func.isRequired,
   verificationData: PropTypes.object,
   getUnverifiedUsers: PropTypes.func,
-  usersList: PropTypes.object
+  updateVerification: PropTypes.func,
+  usersList: PropTypes.any
 };
 
 export default connect(

@@ -2,7 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as adminService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import { admin_list } from "../mock-data";
 
 // Get Admins
 const getAdminsStarted = () => ({

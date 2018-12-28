@@ -42,6 +42,7 @@ const adminReducer = (state = initialState.adminData, action) => {
       isLoading: false,
       error: action.payload
     };
+    
     default:
       return state;
   }
