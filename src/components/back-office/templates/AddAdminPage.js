@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import { getAdmins, addAdmin } from "../../../actions";
+import { getAdmins, updateAdmin } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Username } from "../../common/username";
@@ -44,10 +44,10 @@ class AddAdminPage extends Component {
         role: form.role,
         isAdmin: true
       }
-      this.props.addAdmin(data).then(()=> {
+      this.props.updateAdmin(data).then(()=> {
         if(this.props.adminData && this.props.adminData.admin) { 
           const dataAdd = {
-            no: this.props.adminData.admin.id,
+            id: this.props.adminData.admin.id,
             username: this.props.adminData.admin.username,
             name: this.props.adminData.admin.name,
             role: this.props.adminData.admin.role,
@@ -56,21 +56,27 @@ class AddAdminPage extends Component {
           this.setState({ admins, form: { ...this.state.form , id: "", role: Translations.adminRole.rank1, username: ""}});
         }
       })
-
-      
     }
-
   };
   
   deleteData = e => {
-    const admins_Data = this.state.admins;
-    for (let i = admins_Data.length - 1; i >= 0; i--) {
-      if (admins_Data[i].name === e.target.name) {
-        admins_Data.splice(i, 1);
-      }
+    const { admins } = this.state;
+    const id = e.target.id;
+    const data = {
+      id: id,
+      role: "User",
+      isAdmin: false
     }
-    this.setState({
-      admins: admins_Data
+    this.props.updateAdmin(data).then(()=> {
+      if(this.props.adminData && this.props.adminData.admin) { 
+        const indexOf = admins.findIndex(admin => {
+          return admin.id === this.props.adminData.admin.id ;
+        });
+        if (indexOf !== -1) {
+          admins.splice(indexOf, 1);
+        }
+        this.setState({ admins });
+      }
     });
   };
 
@@ -79,7 +85,7 @@ class AddAdminPage extends Component {
       <div key={rowIndex}>
         <span>{row.role}</span>
         <span>{" "}</span>
-        <button name={row.name} onClick={this.deleteData}>
+        <button name={row.name} id={row.id} onClick={this.deleteData}>
           Delete
         </button>
       </div>
@@ -285,12 +291,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getAdmins,
-  addAdmin
+  updateAdmin
 };
 
 AddAdminPage.propTypes = {
   getAdmins: PropTypes.func.isRequired,
-  addAdmin: PropTypes.func.isRequired,
+  updateAdmin: PropTypes.func.isRequired,
   adminData: PropTypes.object,
 };
 
