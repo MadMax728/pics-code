@@ -8,7 +8,8 @@ import * as routes from "../../../../../lib/constants/routes";
 import {
   getPendingUserList,
   getUnsubscribe,
-  acceptRequest
+  acceptRequest,
+  getDashboard
 } from "../../../../../actions";
 import moment from "moment";
 
@@ -47,6 +48,7 @@ class Requests extends Component {
         } else if (this.props.usersData.isAcceptRequest) {
           console.log("aacept", this.props.usersData.isAcceptRequest);
           this.getRequestList();
+          this.props.getDashboard("users");
         }
       });
     }
@@ -65,6 +67,7 @@ class Requests extends Component {
         } else if (this.props.usersData.isUnsubscribed) {
           console.log("reject", this.props.usersData.isUnsubscribed);
           this.getRequestList();
+          this.props.getDashboard("users");
         }
       });
     }
@@ -149,7 +152,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getPendingUserList,
   getUnsubscribe,
-  acceptRequest
+  acceptRequest,
+  getDashboard
 };
 
 Requests.propTypes = {
@@ -158,7 +162,8 @@ Requests.propTypes = {
   getUnsubscribe: PropTypes.func,
   acceptRequest: PropTypes.func,
   usersData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getDashboard: PropTypes.func
   // error: PropTypes.any
 };
 

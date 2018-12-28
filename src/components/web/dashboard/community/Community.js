@@ -58,6 +58,11 @@ class Community extends Component {
     }
   };
 
+  // static getDerivedStateFromProps = (nextProps, prevState) => {
+  //   console.log("ahi ave che");
+  //   // this.forceUpdate();
+  // };
+
   render() {
     const { usersList, isLoading } = this.state;
 
@@ -67,9 +72,9 @@ class Community extends Component {
           {Translations.profile_community_right_sidebar.community}
         </div>
         <div className="community">
-          {usersList &&
+          {this.props.usersList &&
             !isLoading &&
-            usersList.map(user => {
+            this.props.usersList.map(user => {
               const profile_route = user.isOwner
                 ? `/news-feed`
                 : `/news-feed/${user.username}`;
