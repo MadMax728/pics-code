@@ -9,7 +9,7 @@ import { connect } from "react-redux";
 import { ToolTip } from "../../ui-kit";
 import { users_list } from "../../../mock-data/users-list";
 import { SubscribeToolTips } from "../../common";
-import { getFollowUser } from "../../../actions";
+import { getFollowUserList } from "../../../actions";
 
 const handleKeyDown = () => {};
 
@@ -27,15 +27,28 @@ class TopBar extends Component {
   renderReportTips = type => {
     if (type !== "Posts") {
       const userId = this.props.items.userid;
+      if (type === "Subscriber") {
+        type = "followings";
+      } else if (type === "Subscribed") {
+        type = "followers";
+      } else {
+        type = "followings";
+      }
+      console.log(type);
       if (userId && type) {
-        const userRequestData = {
-          id: userId,
-          type: type
-        };
-        // this.props.getFollowUser(userRequestData).then(() => {
-        //   console.log("prop", this.props);
-        // });
+        // const userRequestData = { id: userId, type: type };
+        // this.props.getFollowUserList(userRequestData).then(() => {
+        //   if (
+        //     this.props.usersData.error &&
+        //     this.props.usersData.error.status === 400
+        //   ) {
+        //     // error
+        //   } else if (this.props.usersData.userList) {
+        //     const selectedTypeUserList = this.props.usersData.userList;
+        //     console.log(selectedTypeUserList);
         return <SubscribeToolTips items={users_list} id={type} />;
+        //   }
+        // });
       }
     }
   };
@@ -108,7 +121,7 @@ class TopBar extends Component {
                     </button>
                     <ToolTip
                       id={slot.name}
-                      getContent={() => this.renderReportTips(slot.name)}
+                      getContent={slot.handleCountEvent}
                       effect="solid"
                       delayHide={500}
                       delayShow={500}
@@ -132,14 +145,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getFollowUser
+  getFollowUserList
 };
 
 TopBar.propTypes = {
   handeleShare: PropTypes.func,
   items: PropTypes.any,
   handleModalInfoShow: PropTypes.any,
-  getFollowUser: PropTypes.func,
+  getFollowUserList: PropTypes.func,
   usersData: PropTypes.any
 };
 

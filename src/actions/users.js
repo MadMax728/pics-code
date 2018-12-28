@@ -98,58 +98,52 @@ const acceptRequestFailed = error => ({
   payload: error,
   error: true
 });
-export const acceptRequest = requestData => {
+export const acceptRequest = requestUserId => {
   return dispatch => {
     dispatch(acceptRequestStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
-
-    return usersService.acceptRequest(params, requestData).then(
+    const header = { Authorization: storage.accessToken };
+    return usersService.acceptRequest(requestUserId, header).then(
       res => {
-        dispatch(acceptRequestSucceeded(res.data.data));
+        dispatch(acceptRequestSucceeded(res.data.success));
       },
       error => {
         dispatch(acceptRequestFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
+        logger.error({ description: error.toString(), fatal: true });
       }
     );
   };
 };
 
-/* GetFollowUser - Follow selected user
+/* Get follow user list
  */
-const getFollowUserStarted = () => ({
-  type: types.GET_FOLLOW_USER_STARTED
+const getFollowUserListStarted = () => ({
+  type: types.GET_FOLLOW_USER_LIST_STARTED
 });
 
-const getFollowUserSucceeded = data => ({
-  type: types.GET_FOLLOW_USER_SUCCEEDED,
+const getFollowUserListSucceeded = data => ({
+  type: types.GET_FOLLOW_USER_LIST_SUCCEEDED,
   payload: data
 });
 
-const getFollowUserFailed = error => ({
-  type: types.GET_FOLLOW_USER_FAILED,
+const getFollowUserListFailed = error => ({
+  type: types.GET_FOLLOW_USER_LIST_FAILED,
   payload: error,
   error: true
 });
-export const getFollowUser = userData => {
+export const getFollowUserList = requestData => {
   return dispatch => {
-    dispatch(getFollowUserStarted());
+    dispatch(getFollowUserListStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.accessToken
     };
-
-    return usersService.getFollowUser(userData, header).then(
+    return usersService.getFollowUserList(requestData, header).then(
       res => {
-        dispatch(getFollowUserSucceeded(res.data.data));
+        dispatch(getFollowUserListSucceeded(res.data.data));
       },
       error => {
-        dispatch(getFollowUserFailed(error.response));
+        dispatch(getFollowUserListFailed(error.response));
         logger.error({ description: error.toString(), fatal: true });
       }
     );
@@ -183,6 +177,40 @@ export const getUnsubscribe = subscribeId => {
       },
       error => {
         dispatch(getUnsubscribeFailed(error.response));
+        logger.error({ description: error.toString(), fatal: true });
+      }
+    );
+  };
+};
+
+/* Get Pending User List */
+const getPendingUserListStarted = () => ({
+  type: types.GET_PENDING_USER_LIST_STARTED
+});
+
+const getPendingUserListSucceeded = data => ({
+  type: types.GET_PENDING_USER_LIST_SUCCEEDED,
+  payload: data
+});
+
+const getPendingUserListFailed = error => ({
+  type: types.GET_PENDING_USER_LIST_FAILED,
+  payload: error,
+  error: true
+});
+export const getPendingUserList = requestData => {
+  return dispatch => {
+    dispatch(getPendingUserListStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+    return usersService.getPendingUserList(requestData, header).then(
+      res => {
+        dispatch(getPendingUserListSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(getPendingUserListFailed(error.response));
         logger.error({ description: error.toString(), fatal: true });
       }
     );

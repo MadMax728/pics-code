@@ -22,6 +22,7 @@ class Community extends Component {
       }
     });
   };
+
   handleSubscribed = e => {
     const errors = {};
     const { usersList } = this.state;

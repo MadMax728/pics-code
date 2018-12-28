@@ -162,7 +162,8 @@
     "subscribed_to_your_profile": "Subscribed to your profile",
     "notification": "Notifications",
     "like_you": "Like You",
-    "request": "Requests"
+    "request": "Requests",
+    "no_request_avail": "No Request Available"
   },
 
   "navigation": {
@@ -752,6 +753,12 @@
     "city": "City",
     "country": "Country",
     "VATNO": "VAT Identification Number"
+  },
+
+  "adminRole": {
+    "rank1": "rank1",
+    "rank2": "rank2",
+    "rank3": "rank3"
   },
 
   "error": {

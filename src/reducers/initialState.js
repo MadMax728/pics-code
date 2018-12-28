@@ -140,7 +140,9 @@ const initialState = {
     error: false,
     isRequestSend: null,
     isUnsubscribed: null,
-    userList: []
+    userList: [],
+    pendingUserList: [],
+    isAcceptRequest: null
   },
   profilePrivacyData: {
     profilePrivacyData: [],

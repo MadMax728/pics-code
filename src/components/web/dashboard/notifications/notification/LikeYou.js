@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { likeYou_list } from "../../../../../mock-data";
 import { Translations } from "../../../../../lib/translations";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getFollowUserList } from "../../../../../actions";
 
 class LikeYou extends Component {
   constructor(props, context) {
@@ -10,6 +12,22 @@ class LikeYou extends Component {
       likeYou_list
     };
   }
+
+  componentDidMount = () => {
+    this.getLikeYouList();
+  };
+
+  getLikeYouList = () => {
+    // if (userId && type) {
+    //   const userRequestData = {
+    //     id: userId,
+    //     type: type
+    //   };
+    //   this.props.getFollowUserList(userRequestData).then(() => {
+    //     console.log("prop", this.props);
+    //   });
+    // }
+  };
 
   handleLike = e => {
     const likeYou_list = this.state.likeYou_list;
@@ -31,7 +49,7 @@ class LikeYou extends Component {
     return (
       <div className="tab-pane fade active in" id="nav-like">
         <div className="header-notifications">
-          {likeYou_list.map((like_you) => {
+          {likeYou_list.map(like_you => {
             return (
               <div
                 className="notification-with-subscribe notification-wrapper"
@@ -89,7 +107,19 @@ class LikeYou extends Component {
 }
 
 LikeYou.propTypes = {
-  handleMessage: PropTypes.func.isRequired
+  handleMessage: PropTypes.func.isRequired,
+  getFollowUserList: PropTypes.func
 };
 
-export default LikeYou;
+const mapStateToProps = state => ({
+  usersData: state.usersData
+});
+
+const mapDispatchToProps = {
+  getFollowUserList
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LikeYou);

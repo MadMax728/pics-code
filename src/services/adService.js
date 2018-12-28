@@ -11,7 +11,7 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 // Ad Settings API
 // Company Campaigns API
 export const getSettingsAds = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds" + payload);
+  api(baseUrl, header).get("/advertisement/get-user-advertise" + payload);
 
 // Ad Details
 export const getAdDetails = (payload, provider) =>
