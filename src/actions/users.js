@@ -136,23 +136,21 @@ const getFollowUserFailed = error => ({
   payload: error,
   error: true
 });
-export const getFollowUser = requestData => {
+export const getFollowUser = userData => {
   return dispatch => {
     dispatch(getFollowUserStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
+    const header = {
+      Authorization: storage.accessToken
+    };
 
-    return usersService.getFollowUser(params, requestData).then(
+    return usersService.getFollowUser(userData, header).then(
       res => {
         dispatch(getFollowUserSucceeded(res.data.data));
       },
       error => {
         dispatch(getFollowUserFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
+        logger.error({ description: error.toString(), fatal: true });
       }
     );
   };

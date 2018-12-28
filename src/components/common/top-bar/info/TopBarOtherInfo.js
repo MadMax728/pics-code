@@ -10,6 +10,7 @@ class TopBarOtherInfo extends Component {
     super(props);
     this.state = {
       items: {
+        userid: this.props.match.userid,
         username: this.props.match.username,
         private: true,
         more: true,
@@ -75,6 +76,7 @@ class TopBarOtherInfo extends Component {
 
   handleSetUserInfo = () => {
     const items = {
+      userid: this.props.userDataByUsername.user.data.id,
       username: this.props.userDataByUsername.user.data.username,
       private: this.props.userDataByUsername.user.data.isPrivate,
       more: true,

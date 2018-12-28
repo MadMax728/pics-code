@@ -41,8 +41,14 @@ export const sendRequest = (payload, header = {}) =>
 export const acceptRequest = (payload, header = {}) =>
   api(baseUrl, header).put("/subscribe/accept-request", payload);
 
-export const getFollowUser = (payload, userId, header = {}) => {
-  const apiURL = "/subscribe/" + userId + "?type='followers'";
+export const getFollowUser = (payload, header = {}) => {
+  let typeValue = "followings";
+  if (payload.type === "Subscriber") {
+    typeValue = "followings";
+  } else if (payload.type === "Subscribe") {
+    typeValue = "followers";
+  }
+  const apiURL = "/subscribe/" + payload.id + "?type=" + typeValue;
   api(baseUrl, header).get(apiURL, payload);
 };
 

@@ -63,6 +63,26 @@ const usersReducers = (state = initialState.usersData, action) => {
         error: action.payload
       };
 
+    // Get User List with type
+    case types.GET_FOLLOW_USER_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.GET_FOLLOW_USER_SUCCEEDED:
+      return {
+        ...state,
+        userList: action.payload,
+        isLoading: false
+      };
+    case types.GET_FOLLOW_USER_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

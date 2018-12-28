@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { ToolTip } from "../../ui-kit";
 import { users_list } from "../../../mock-data/users-list";
 import { SubscribeToolTips } from "../../common";
+import { getFollowUser } from "../../../actions";
 
 const handleKeyDown = () => {};
 
@@ -23,9 +24,19 @@ class TopBar extends Component {
     }
   };
 
-  renderReportTips = id => {
-    if (id !== "Posts") {
-      return <SubscribeToolTips items={users_list} id={id} />;
+  renderReportTips = type => {
+    if (type !== "Posts") {
+      const userId = this.props.items.userid;
+      if (userId && type) {
+        const userRequestData = {
+          id: userId,
+          type: type
+        };
+        // this.props.getFollowUser(userRequestData).then(() => {
+        //   console.log("prop", this.props);
+        // });
+        return <SubscribeToolTips items={users_list} id={type} />;
+      }
     }
   };
 
@@ -116,14 +127,20 @@ class TopBar extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  usersData: state.usersData
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getFollowUser
+};
 
 TopBar.propTypes = {
   handeleShare: PropTypes.func,
   items: PropTypes.any,
-  handleModalInfoShow: PropTypes.any
+  handleModalInfoShow: PropTypes.any,
+  getFollowUser: PropTypes.func,
+  usersData: PropTypes.any
 };
 
 export default connect(

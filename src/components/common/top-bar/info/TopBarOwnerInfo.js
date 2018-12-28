@@ -17,6 +17,7 @@ class TopBarOwnerInfo extends Component {
     }
     this.state = {
       items: {
+        userid: userInfo.id,
         username: userInfo.username,
         private: true,
         settings: true,
@@ -91,6 +92,7 @@ class TopBarOwnerInfo extends Component {
           this.props.userDataByUsername.user.data
         ) {
           const items = {
+            userid: this.props.userDataByUsername.user.data.id,
             username: this.props.userDataByUsername.user.data.username,
             private: this.props.userDataByUsername.user.data.isPrivate,
             settings: true,
