@@ -161,7 +161,8 @@
     "subscribed_to_your_profile": "Subscribed to your profile",
     "notification": "Notifications",
     "like_you": "Like You",
-    "request": "Requests"
+    "request": "Requests",
+    "no_request_avail": "No Request Available"
   },
 
   "navigation": {
@@ -373,6 +374,7 @@
     "create_ad": "Create Ad",
     "subscriber": "Subscriber",
     "subscribed": "Subscribed",
+    "request_pending": "Request Pending",
     "posts": "Posts",
     "subscribe": "Subscribe",
     "message": "Message",
