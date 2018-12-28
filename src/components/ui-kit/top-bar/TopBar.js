@@ -9,6 +9,7 @@ import { connect } from "react-redux";
 import { ToolTip } from "../../ui-kit";
 import { users_list } from "../../../mock-data/users-list";
 import { SubscribeToolTips } from "../../common";
+import { getFollowUserList } from "../../../actions";
 
 const handleKeyDown = () => {};
 
@@ -17,15 +18,42 @@ class TopBar extends Component {
     super(props);
   }
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
   handleSubscriptionModal = e => {
     if (e.target.id !== "Posts") {
       this.props.handleModalInfoShow(modalType.subscribe, { id: e.target.id });
     }
   };
 
-  renderReportTips = id => {
-    if (id !== "Posts") {
-      return <SubscribeToolTips items={users_list} id={id} />;
+  renderReportTips = type => {
+    if (type !== "Posts") {
+      const userId = this.props.items.userid;
+      if (type === "Subscriber") {
+        type = "followings";
+      } else if (type === "Subscribed") {
+        type = "followers";
+      } else {
+        type = "followings";
+      }
+      console.log(type);
+      if (userId && type) {
+        // const userRequestData = { id: userId, type: type };
+        // this.props.getFollowUserList(userRequestData).then(() => {
+        //   if (
+        //     this.props.usersData.error &&
+        //     this.props.usersData.error.status === 400
+        //   ) {
+        //     // error
+        //   } else if (this.props.usersData.userList) {
+        //     const selectedTypeUserList = this.props.usersData.userList;
+        //     console.log(selectedTypeUserList);
+        return <SubscribeToolTips items={users_list} id={type} />;
+        //   }
+        // });
+      }
     }
   };
 
@@ -97,7 +125,7 @@ class TopBar extends Component {
                     </button>
                     <ToolTip
                       id={slot.name}
-                      getContent={() => this.renderReportTips(slot.name)}
+                      getContent={slot.handleCountEvent}
                       effect="solid"
                       delayHide={500}
                       delayShow={500}
@@ -116,14 +144,20 @@ class TopBar extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  usersData: state.usersData
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getFollowUserList
+};
 
 TopBar.propTypes = {
   handeleShare: PropTypes.func,
   items: PropTypes.any,
-  handleModalInfoShow: PropTypes.any
+  handleModalInfoShow: PropTypes.any,
+  getFollowUserList: PropTypes.func,
+  usersData: PropTypes.any
 };
 
 export default connect(

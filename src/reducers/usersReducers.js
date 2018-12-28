@@ -63,6 +63,68 @@ const usersReducers = (state = initialState.usersData, action) => {
         error: action.payload
       };
 
+    // Get User List with type
+    case types.GET_FOLLOW_USER_LIST_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.GET_FOLLOW_USER_LIST_SUCCEEDED:
+      return {
+        ...state,
+        userList: action.payload,
+        isLoading: false
+      };
+    case types.GET_FOLLOW_USER_LIST_FAILED:
+      return {
+        ...state,
+        userList: [],
+        isLoading: false,
+        error: action.payload
+      };
+
+    // Get User Pending List with type
+    case types.GET_PENDING_USER_LIST_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.GET_PENDING_USER_LIST_SUCCEEDED:
+      return {
+        ...state,
+        pendingUserList: action.payload,
+        isLoading: false
+      };
+    case types.GET_PENDING_USER_LIST_FAILED:
+      return {
+        ...state,
+        pendingUserList: [],
+        isLoading: false,
+        error: action.payload
+      };
+
+    // Accept Request
+    case types.ACCEPT_REQUEST_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.ACCEPT_REQUEST_SUCCEEDED:
+      return {
+        ...state,
+        isAcceptRequest: action.payload,
+        isLoading: false
+      };
+    case types.ACCEPT_REQUEST_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

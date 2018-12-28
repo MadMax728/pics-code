@@ -28,6 +28,7 @@ class SubscribeToolTips extends Component {
 
   render() {
     const { items, id, isLoading } = this.props;
+    console.log("items", items);
     return (
       <div id="">
         <h4 className="normal_title">

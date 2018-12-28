@@ -4,12 +4,18 @@ import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { connect } from "react-redux";
-import { getUser, sendRequest, getUnsubscribe } from "../../../../actions";
+import {
+  getUser,
+  sendRequest,
+  getUnsubscribe,
+  getDashboard
+} from "../../../../actions";
 class TopBarOtherInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       items: {
+        userid: this.props.match.userid,
         username: this.props.match.username,
         private: true,
         more: true,
@@ -61,6 +67,11 @@ class TopBarOtherInfo extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
+    this.getUserData();
+  }
+
+  getUserData = () => {
     const data = this.props.match;
     this.props.getUser(data).then(() => {
       if (
@@ -71,10 +82,28 @@ class TopBarOtherInfo extends Component {
         this.handleSetUserInfo();
       }
     });
-  }
+  };
 
   handleSetUserInfo = () => {
+    const isPending = this.props.userDataByUsername.user.data.isPending;
+    const isSubscribe = this.props.userDataByUsername.user.data.isSubscribe;
+    let subscribeBtnClass = "filled_button";
+    let subscribeBtnText = Translations.top_bar_info.subscribe;
+    if (isPending) {
+      subscribeBtnText = Translations.top_bar_info.request_pending;
+    } else {
+      subscribeBtnClass = "filled_button";
+      if (isSubscribe) {
+        subscribeBtnClass = "filled_button";
+        subscribeBtnText = Translations.top_bar_info.subscribed;
+      } else {
+        subscribeBtnClass = "blue_button";
+        subscribeBtnText = Translations.top_bar_info.subscribe;
+      }
+    }
+
     const items = {
+      userid: this.props.userDataByUsername.user.data.id,
       username: this.props.userDataByUsername.user.data.username,
       private: this.props.userDataByUsername.user.data.isPrivate,
       more: true,
@@ -85,8 +114,8 @@ class TopBarOtherInfo extends Component {
           name: Translations.top_bar_info.subscriber,
           val: this.props.userDataByUsername.user.data.subscribersCount,
           className: "col-sm-4 slot_one no-padding",
-          btnActiveClassName: "filled_button",
-          btnText: Translations.top_bar_info.subscribe,
+          btnActiveClassName: subscribeBtnClass,
+          btnText: subscribeBtnText,
           handeleEvent: this.handeleSubscribe
         },
         {
@@ -115,7 +144,9 @@ class TopBarOtherInfo extends Component {
     console.log("handeleSubscribe clicked");
     const errors = {};
     const selectedUserList = this.props.userDataByUsername.user.data;
-    if (selectedUserList.subscribeId === "") {
+    if (selectedUserList.isPending) {
+      // To Do - On Pending request click
+    } else if (selectedUserList.isSubscribe === false) {
       const requestData = { followers: selectedUserList.id };
       this.props.sendRequest(requestData).then(() => {
         if (
@@ -126,10 +157,11 @@ class TopBarOtherInfo extends Component {
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
         } else if (this.props.usersData.isRequestSend) {
-          this.handleSetUserInfo();
+          this.getUserData();
+          this.props.getDashboard("users");
         }
       });
-    } else {
+    } else if (selectedUserList.isSubscribe === true) {
       const subscribedId = selectedUserList.subscribeId;
       this.props.getUnsubscribe(subscribedId).then(() => {
         if (
@@ -140,7 +172,8 @@ class TopBarOtherInfo extends Component {
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
         } else if (this.props.usersData.isUnsubscribed) {
-          this.handleSetUserInfo();
+          this.getUserData();
+          this.props.getDashboard("users");
         }
       });
     }
@@ -173,7 +206,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getUser,
   sendRequest,
-  getUnsubscribe
+  getUnsubscribe,
+  getDashboard
 };
 
 TopBarOtherInfo.propTypes = {
@@ -184,7 +218,8 @@ TopBarOtherInfo.propTypes = {
   handleModalInfoShow: PropTypes.any,
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,
-  usersData: PropTypes.any
+  usersData: PropTypes.any,
+  getDashboard: PropTypes.func
 };
 
 export default connect(

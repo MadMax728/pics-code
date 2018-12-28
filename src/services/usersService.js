@@ -38,13 +38,16 @@ export const getUserList = (payload, type = "subscribed", header = {}) => {
 export const sendRequest = (payload, header = {}) =>
   api(baseUrl, header).post("/subscribe/send-request", payload);
 
-export const acceptRequest = (payload, header = {}) =>
-  api(baseUrl, header).put("/subscribe/accept-request", payload);
-
-export const getFollowUser = (payload, userId, header = {}) => {
-  const apiURL = "/subscribe/" + userId + "?type='followers'";
-  api(baseUrl, header).get(apiURL, payload);
-};
-
 export const getUnsubscribe = (payload, id, header = {}) =>
   api(baseUrl, header).delete("/subscribe/" + id, payload);
+
+export const getFollowUserList = (payload, header = {}) =>
+  api(baseUrl, header).get(
+    "/subscribe/" + payload.id + "?type=" + payload.type
+  );
+
+export const getPendingUserList = (payload, header = {}) =>
+  api(baseUrl, header).get("/subscribe");
+
+export const acceptRequest = (payload, header = {}) =>
+  api(baseUrl, header).put("/subscribe/accept-request", payload);
