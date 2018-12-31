@@ -59,11 +59,6 @@ class Community extends Component {
     }
   };
 
-  // static getDerivedStateFromProps = (nextProps, prevState) => {
-  //   console.log("ahi ave che");
-  //   // this.forceUpdate();
-  // };
-
   render() {
     const { usersList, isLoading } = this.state;
 

@@ -73,7 +73,7 @@ const usersReducers = (state = initialState.usersData, action) => {
     case types.GET_FOLLOW_USER_LIST_SUCCEEDED:
       return {
         ...state,
-        userList: action.payload,
+        [action.isFor]: action.payload,
         isLoading: false
       };
     case types.GET_FOLLOW_USER_LIST_FAILED:
