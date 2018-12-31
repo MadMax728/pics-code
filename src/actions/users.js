@@ -1,5 +1,6 @@
 import * as types from "../lib/constants/actionTypes";
 import * as usersService from "../services/usersService";
+import * as subscribeService from "../services/subscribeService";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 
@@ -121,9 +122,10 @@ const getFollowUserListStarted = () => ({
   type: types.GET_FOLLOW_USER_LIST_STARTED
 });
 
-const getFollowUserListSucceeded = data => ({
+const getFollowUserListSucceeded = (data, isFor) => ({
   type: types.GET_FOLLOW_USER_LIST_SUCCEEDED,
-  payload: data
+  payload: data,
+  isFor
 });
 
 const getFollowUserListFailed = error => ({
@@ -131,16 +133,17 @@ const getFollowUserListFailed = error => ({
   payload: error,
   error: true
 });
-export const getFollowUserList = requestData => {
+
+export const getFollowUserList = (prop, requestData) => {
   return dispatch => {
     dispatch(getFollowUserListStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.accessToken
     };
-    return usersService.getFollowUserList(requestData, header).then(
+    return subscribeService[prop](requestData, header).then(
       res => {
-        dispatch(getFollowUserListSucceeded(res.data.data));
+        dispatch(getFollowUserListSucceeded(res.data.data, prop));
       },
       error => {
         dispatch(getFollowUserListFailed(error.response));

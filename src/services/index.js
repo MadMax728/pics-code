@@ -19,3 +19,4 @@ export * from "./backOfficeReviewService";
 export * from "./backOfficeReportedContentService";
 export * from "./profileSettingsService";
 export * from "./hashUserService";
+export * from "./subscribeService";

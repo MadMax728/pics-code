@@ -27,18 +27,18 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport }) => {
           {user.isSubscribe ? (
             <button
               className="filled_button"
-              id={user.id}
+              id={user.username}
               onClick={handleSubscribed}
             >
-              {Translations.profile_community_right_sidebar.Subscribe}
+              {Translations.profile_community_right_sidebar.Subscribed}
             </button>
           ) : (
             <button
               className="blue_button"
-              id={user.id}
+              id={user.username}
               onClick={handleSubscribed}
             >
-              {Translations.profile_community_right_sidebar.Subscribed}
+              {Translations.profile_community_right_sidebar.Subscribe}
             </button>
           )}
         </div>

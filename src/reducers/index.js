@@ -28,6 +28,7 @@ import reportedContentData from "./reportedContentReducer";
 import businessProfileData from "./profileSettingsReducer";
 import searchData from "./searchReducer";
 import hashUserData from "./hashUserReducer";
+import subscribeData from "./subscribeReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -58,7 +59,8 @@ const rootReducer = combineReducers({
   reportedContentData,
   businessProfileData,
   searchData,
-  hashUserData
+  hashUserData,
+  subscribeData
 });
 
 export default rootReducer;
