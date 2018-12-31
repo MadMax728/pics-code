@@ -12,7 +12,7 @@ const PictureCardBody = ({ pic, index, isReport }) => {
       }
     >
       <div className="pic-block">
-        <LazyLoad height={200} once={true} offset={[-200, 0]} placeholder={<Loader />}>
+        <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
           <img src={pic.image} alt={pic.image} />
         </LazyLoad>
         <div className="name-wrapper">

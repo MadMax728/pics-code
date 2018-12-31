@@ -27,7 +27,7 @@ class Community extends Component {
   handleSubscribed = e => {
     const errors = {};
     const { usersList } = this.state;
-    let selectedUserList = usersList.find(user => user.id === e.target.id);
+    const selectedUserList = usersList.find(user => user.id === e.target.id);
     if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
       this.props.sendRequest(requestData).then(() => {

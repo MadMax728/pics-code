@@ -347,6 +347,15 @@
             float: none;
           }
         }
+        .red-circle {
+          display: inline-block;
+          float: left;
+          margin-top: 3px;
+          margin-right: 5px;
+          @media (max-width: 440px) {
+            float: none;
+          }
+        }
       }
       td.wid93 {
         width: 93px;

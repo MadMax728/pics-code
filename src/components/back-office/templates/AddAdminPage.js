@@ -69,7 +69,7 @@ class AddAdminPage extends Component {
     const { admins } = this.state;
     const id = e.target.id;
     const data = {
-      id: id,
+      id,
       role: "User",
       isAdmin: false
     }

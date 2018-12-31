@@ -456,6 +456,14 @@ button:focus {
   display: block;
   margin: 7px auto;
 }
+.red-circle {
+  width: 8px;
+  height: 8px;
+  border: 2px solid #d32121;
+  border-radius: 50%;
+  display: block;
+  margin: 7px auto;
+}
 .modal-content {
   border-radius: 0;
 }

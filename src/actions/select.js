@@ -43,6 +43,26 @@ export const getSelect = (prop, provider) => {
   };
 };
 
+export const getBackofficeSelect = (prop, provider) => {
+  return dispatch => {
+    dispatch(getSelectStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.adminAccessToken };
+    return selectService[prop](provider, header).then(
+      res => {
+        if (res.data && res.data.data)
+          dispatch(getSelectSucceeded(res.data.data, prop));
+      },
+      error => {
+        dispatch(getSelectFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
 
 const getTargetGroupSucceeded = data => ({
   type: types.GET_TARGET_GROUP_SUCCEEDED,

@@ -22,6 +22,27 @@ const voucherReducer = (state = initialState.voucherData, action) => {
         isLoading: false,
         error: action.payload
       };
+
+    // ADD VOUCHER
+    case types.ADD_VOUCHER_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.ADD_VOUCHER_SUCCEEDED:
+      return {
+        ...state,
+        voucher: action.payload,
+        isLoading: false
+      };
+    case types.ADD_VOUCHER_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }
