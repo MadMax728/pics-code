@@ -131,6 +131,10 @@ const initialState = {
     radius: null,
     targetGroups: null,
     callToActions: null,
+    periods: null,
+    amounts: null,
+    types: null,
+    numbers: null,
     isLoading: false,
     error: false
   },

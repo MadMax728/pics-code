@@ -15,7 +15,7 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport }) => {
       <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
         <LazyLoad
           height={200}
-          once={true}
+          once
           offset={[-200, 0]}
           placeholder={<Loader />}
         >

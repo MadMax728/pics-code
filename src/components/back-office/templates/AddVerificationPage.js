@@ -81,16 +81,6 @@ class AddVerificationPage extends Component {
         this.setState({ verifications });
       }
     });
-
-    // const verification_Data = this.state.verifications;
-    // for (let i = verification_Data.length - 1; i >= 0; i--) {
-    //   if (verification_Data[i].name === e.target.name) {
-    //     verification_Data.splice(i, 1);
-    //   }
-    // }
-    // this.setState({
-    //   verifications: verification_Data
-    // });
   };
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {

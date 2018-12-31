@@ -41,5 +41,9 @@ export {
   SelectOffer,
   SelectRadius,
   SelectTargetGroup,
-  SelectCallToActions
+  SelectCallToActions,
+  SelectPeriod,
+  SelectAmount, 
+  SelectType, 
+  SelectNumber
 } from "./selects";

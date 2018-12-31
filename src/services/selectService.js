@@ -31,3 +31,18 @@ export const radius = (payload, header = {}) =>
 export const callToActions = (payload, header = {}) =>
   api(baseUrl, header).get("/calltoactions", payload);
   
+// Get Call to Periods
+export const periods = (payload, header = {}) =>
+  api(baseUrl, header).get("/vouchers/?type=periodLists");
+
+// Get Call to Amounts
+export const amounts = (payload, header = {}) =>
+  api(baseUrl, header).get("/vouchers/?type=amountLists");
+
+// Get Call to Types
+export const types = (payload, header = {}) =>
+  api(baseUrl, header).get("/vouchers/?type=typeLists");
+
+// Get Call to Numbers
+export const numbers = (payload, header = {}) =>
+  api(baseUrl, header).get("/vouchers/?type=numberLists");
