@@ -143,7 +143,7 @@ Community.propTypes = {
   usersList: PropTypes.any,
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,
-  usersData: PropTypes.func
+  usersData: PropTypes.object
   // error: PropTypes.any
 };
 

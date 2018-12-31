@@ -162,6 +162,7 @@ const initialState = {
   verificationData: {
     verifications: null,
     verification: null,
+    unverifiedUsers: null,
     isLoading: false,
     error: false
   },

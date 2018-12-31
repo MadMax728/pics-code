@@ -18,40 +18,7 @@ class TopBarOwnerInfo extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     this.state = {
-      items: {
-        userid: userInfo.id,
-        username: userInfo.username,
-        private: true,
-        settings: true,
-        more: false,
-        userProfile: userInfo.profileUrl,
-        slots: [
-          {
-            name: Translations.top_bar_info.subscriber,
-            val: 0,
-            className: "col-sm-4 slot_one no-padding",
-            btnActiveClassName: "filled_button",
-            btnText: Translations.top_bar_info.upload,
-            handeleEvent: this.handeleUpload
-          },
-          {
-            name: Translations.top_bar_info.subscribed,
-            val: 0,
-            className: "col-sm-4 slot_two no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.create_campaign,
-            handeleEvent: this.handeleCreateCampaign
-          },
-          {
-            name: Translations.top_bar_info.posts,
-            val: 0,
-            className: "col-sm-4 slot_three no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.create_ad,
-            handeleEvent: this.handeleCreateAd
-          }
-        ]
-      }
+      items: null
     };
   }
 
@@ -74,29 +41,6 @@ class TopBarOwnerInfo extends Component {
   handeleShare = () => {
     this.props.handleModalInfoShow(modalType.share);
   };
-
-  handleSubscriberCountTooltip = () => {
-    let userInfo = {};
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    const type = "followings";
-    const userRequestData = { id: userInfo.id, type: type };
-    // this.props.getFollowUserList(userRequestData).then(() => {
-    //   if (
-    //     this.props.usersData.error &&
-    //     this.props.usersData.error.status === 400
-    //   ) {
-    //     // error
-    //   } else if (this.props.usersData.userList) {
-    //     const selectedTypeUserList = this.props.usersData.userList;
-    //     console.log(selectedTypeUserList);
-    //     return <SubscribeToolTips items={selectedTypeUserList} id={type} />;
-    //   }
-    // });
-  };
-
-  handleSubscribedCountTooltip = () => {};
 
   componentDidMount() {
     const storage = Auth.extractJwtFromStorage();
@@ -131,7 +75,7 @@ class TopBarOwnerInfo extends Component {
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.upload,
                 handeleEvent: this.handeleUpload,
-                handleCountEvent: this.handleSubscriberCountTooltip
+                list: this.handleSubscriberCountTooltip
               },
               {
                 name: Translations.top_bar_info.subscribed,
@@ -140,7 +84,7 @@ class TopBarOwnerInfo extends Component {
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_campaign,
                 handeleEvent: this.handeleCreateCampaign,
-                handleCountEvent: this.handleSubscribedCountTooltip
+                list: this.handleSubscribedCountTooltip
               },
               {
                 name: Translations.top_bar_info.posts,
@@ -148,7 +92,7 @@ class TopBarOwnerInfo extends Component {
                 className: "col-sm-4 slot_three no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_ad,
-                handeleEvent: this.handeleCreateAd
+                handeleEvent: this.handeleCreateAd,
               }
             ]
           };
