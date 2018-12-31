@@ -31,7 +31,8 @@ export { UsernameList } from "./usernameList";
 export { HashTag } from "./hash-tag";
 export { HashTagUsername } from "./hash-tag-username";
 export { RenderToolTips } from "./render-tool-tips";
-export { SubscribeToolTips } from "./subscribe-tool-tip";
+export { SubscriberTooltip } from "./subscriber-tooltip";
+export { SubscribedTooltip } from "./subscribed-tooltip";
 export { Tags, InquiryTags, OfferTags } from "./tags";
 export {
   SelectCategory,

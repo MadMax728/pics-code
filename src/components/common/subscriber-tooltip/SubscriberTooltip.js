@@ -1,41 +1,40 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { Translations } from "../../../lib/translations";
+import { connect } from "react-redux";
+import { getFollowUserList } from "../../../actions";
+import { Auth } from "../../../auth";
 
-const propTypes = {
-  id: PropTypes.any.isRequired,
-  isLoading: PropTypes.bool,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      handleEvent: PropTypes.func
-    }).isRequired
-  ).isRequired
-};
-
-class SubscribeToolTips extends Component {
+class SubscriberTooltip extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
-  handleKeyPress = () => {};
-
-  handleSubscribe = e => {
-    console.log("subscribe", e.target.id);
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo.id && this.props.type) {
+      const userRequestData = { id: userInfo.id, type: "followings" };
+      this.props.getFollowUserList("subscriber", userRequestData).then(() => {
+        // Success
+      });
+    }
   };
 
+  handleKeyPress = () => {};
+
   render() {
-    const { items, id, isLoading } = this.props;
-    console.log("items", items);
     return (
       <div id="">
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>
         <div className="header-notifications">
-          {items.map(user => {
+          {this.props.subscribeData.subscriber.map(user => {
             return (
               <div
                 className="notification-with-subscribe notification-wrapper"
@@ -68,6 +67,21 @@ class SubscribeToolTips extends Component {
   }
 }
 
-SubscribeToolTips.propTypes = propTypes;
+const mapStateToProps = state => ({
+  subscribeData: state.subscribeData
+});
 
-export default SubscribeToolTips;
+const mapDispatchToProps = {
+  getFollowUserList
+};
+
+SubscriberTooltip.propTypes = {
+  type: PropTypes.any,
+  getFollowUserList: PropTypes.func,
+  subscribeData: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SubscriberTooltip);

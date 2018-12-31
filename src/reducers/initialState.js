@@ -144,6 +144,12 @@ const initialState = {
     pendingUserList: [],
     isAcceptRequest: null
   },
+  subscribeData: {
+    subscriber: [],
+    subscribed: [],
+    isLoading: false,
+    error: false
+  },
   profilePrivacyData: {
     profilePrivacyData: [],
     isLoading: false,
