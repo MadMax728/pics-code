@@ -10,6 +10,7 @@ import { ToolTip } from "../../ui-kit";
 import { users_list } from "../../../mock-data/users-list";
 import { SubscribeToolTips } from "../../common";
 import { getFollowUserList } from "../../../actions";
+import { SubscribeList } from "../subscribe-list";
 
 const handleKeyDown = () => {};
 
@@ -28,117 +29,131 @@ class TopBar extends Component {
     }
   };
 
-  renderReportTips = type => {
+  renderReportTips = (list, type) => {
     if (type !== "Posts") {
-      const userId = this.props.items.userid;
       if (type === "Subscriber") {
-        type = "followings";
+        // return component Subscriber
       } else if (type === "Subscribed") {
-        type = "followers";
+        // return component Subscribed
       } else {
-        type = "followings";
-      }
-      console.log(type);
-      if (userId && type) {
-        // const userRequestData = { id: userId, type: type };
-        // this.props.getFollowUserList(userRequestData).then(() => {
-        //   if (
-        //     this.props.usersData.error &&
-        //     this.props.usersData.error.status === 400
-        //   ) {
-        //     // error
-        //   } else if (this.props.usersData.userList) {
-        //     const selectedTypeUserList = this.props.usersData.userList;
-        //     console.log(selectedTypeUserList);
-        return <SubscribeToolTips items={users_list} id={type} />;
-        //   }
-        // });
+        // return component 
       }
     }
+      // example make new compoenent
+    // return (<Subscriber />);
   };
+
+  renderSlots = (slot) => {
+    return (
+            <div className={slot.className} key={`slot-${slot.name}`}>
+              <SubscribeList
+                id={`slot-${slot.name}`}
+                role="button"
+                dataTip="tooltip"
+                dataClass="tooltip-wrapr" /* eslint-disable */
+                getContent={() => this.renderReportTips(slot.name)}
+                effect="solid"
+                delayHide={10}
+                delayShow={250}
+                delayUpdate={250}
+                place={"left"}
+                border={true}
+                type={"light"}
+                value={slot.val}
+              />
+              <span> {slot.name}</span>
+              <div className="clearfix" />
+              <button
+                className={slot.btnActiveClassName}
+                onClick={slot.handeleEvent}
+              >
+                {slot.btnText}
+              </button>
+            </div>
+      )
+    }
 
   render() {
     const { items, handeleShare } = this.props;
     return (
       <div>
-        <div className="user_info">
-          <div className="user-image bg-white no-padding">
-            <img
-              src={items.userProfile ? items.userProfile : images.crop_pic}
-              width="100%"
-              alt="profile"
-            />
-          </div>
-          <div className="user-details no-padding-right padding-l-10">
-            <div className="bg-white padding-25 user_details">
-              <div className="user_name">{items.username}</div>
-              {items.length !== 0 && items.private && (
-                <img src={images.tick} alt="tick" className="tick" />
-              )}
-              {items.length !== 0 && items.private && (
-                <span className="profile-type">
-                  {Translations.top_bar.private_profile}
-                </span>
-              )}
-              {items.length !== 0 && items.settings && (
-                <div className="settings">
-                  <div
-                    className="share-wrapr"
-                    onClick={handeleShare}
-                    onKeyDown={handleKeyDown}
-                    role="button"
-                    tabIndex="0"
-                  >
-                    <img src={images.share} alt="share" />
-                  </div>
-                  <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-                    <img src={images.settings} alt="settings" />
-                  </Link>
-                </div>
-              )}
-              {items.length !== 0 && items.more && (
-                <div className="settings">
-                  <img src={images.more} alt="more" />
-                </div>
-              )}
-              <div className="clearfix" />
-              {items.length !== 0 &&
-                items.slots.map(slot => (
-                  <div className={slot.className} key={slot.name}>
-                    <span
-                      className="size-20"
-                      id={slot.name}
-                      data-for={slot.name}
-                      role="button"
-                      data-tip=""
-                      data-class="tooltip-wrapr"
-                    >
-                      {slot.val}
+        {
+          items ?
+          (
+            <div className="user_info">
+              <div className="user-image bg-white no-padding">
+                <img
+                  src={items.userProfile ? items.userProfile : images.crop_pic}
+                  width="100%"
+                  alt="profile"
+                />
+              </div>
+              <div className="user-details no-padding-right padding-l-10">
+                <div className="bg-white padding-25 user_details">
+                  <div className="user_name">{items.username}</div>
+                  {items.length !== 0 && items.private && (
+                    <img src={images.tick} alt="tick" className="tick" />
+                  )}
+                  {items.length !== 0 && items.private && (
+                    <span className="profile-type">
+                      {Translations.top_bar.private_profile}
                     </span>
-                    <span> {slot.name}</span>
-                    <div className="clearfix" />
-                    <button
-                      className={slot.btnActiveClassName}
-                      onClick={slot.handeleEvent}
-                    >
-                      {slot.btnText}
-                    </button>
-                    <ToolTip
-                      id={slot.name}
-                      getContent={slot.handleCountEvent}
-                      effect="solid"
-                      delayHide={500}
-                      delayShow={500}
-                      delayUpdate={500}
-                      place={"bottom"}
-                      border={true}
-                      type={"light"}
-                    />
-                  </div>
-                ))}
+                  )}
+                  {items.length !== 0 && items.settings && (
+                    <div className="settings">
+                      <div
+                        className="share-wrapr"
+                        onClick={handeleShare}
+                        onKeyDown={handleKeyDown}
+                        role="button"
+                        tabIndex="0"
+                      >
+                        <img src={images.share} alt="share" />
+                      </div>
+                      <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+                        <img src={images.settings} alt="settings" />
+                      </Link>
+                    </div>
+                  )}
+                  {items.length !== 0 && items.more && (
+                    <div className="settings">
+                      <img src={images.more} alt="more" />
+                    </div>
+                  )}
+                  <div className="clearfix" />
+                  {
+                    items.length !== 0 && items.slots.map(this.renderSlots)
+                  }
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
+          )
+          : 
+          (
+            <div className="user_info">
+              <div className="user-image bg-white no-padding">
+                <img
+                  src={images.crop_pic}
+                  width="100%"
+                  alt="profile"
+                />
+              </div>
+              <div className="user-details no-padding-right padding-l-10">
+                <div className="bg-white padding-25 user_details">
+                  <div className="user_name">{"Username"}</div>                 
+                    <img src={images.tick} alt="tick" className="tick" />
+                    <span className="profile-type">
+                      {Translations.top_bar.private_profile}
+                    </span>                  
+                    <div className="settings">
+                      <img src={images.more} alt="more" />
+                    </div>
+                  <div className="clearfix" />
+                </div>
+              </div>
+            </div>
+          )
+      }
       </div>
     );
   }
