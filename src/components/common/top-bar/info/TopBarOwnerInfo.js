@@ -5,50 +5,20 @@ import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 import { connect } from "react-redux";
-import { getUser } from "../../../../actions";
+import { getUser, getFollowUserList } from "../../../../actions";
+import { SubscribeToolTips } from "../../../common";
 
+const storage = Auth.extractJwtFromStorage();
 class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
-    const storage = Auth.extractJwtFromStorage();
+
     let userInfo = {};
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
     this.state = {
-      items: {
-        username: userInfo.username,
-        private: true,
-        settings: true,
-        more: false,
-        userProfile: userInfo.profileUrl,
-        slots: [
-          {
-            name: Translations.top_bar_info.subscriber,
-            val: 0,
-            className: "col-sm-4 slot_one no-padding",
-            btnActiveClassName: "filled_button",
-            btnText: Translations.top_bar_info.upload,
-            handeleEvent: this.handeleUpload
-          },
-          {
-            name: Translations.top_bar_info.subscribed,
-            val: 0,
-            className: "col-sm-4 slot_two no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.create_campaign,
-            handeleEvent: this.handeleCreateCampaign
-          },
-          {
-            name: Translations.top_bar_info.posts,
-            val: 0,
-            className: "col-sm-4 slot_three no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.create_ad,
-            handeleEvent: this.handeleCreateAd
-          }
-        ]
-      }
+      items: null
     };
   }
 
@@ -91,6 +61,7 @@ class TopBarOwnerInfo extends Component {
           this.props.userDataByUsername.user.data
         ) {
           const items = {
+            userid: this.props.userDataByUsername.user.data.id,
             username: this.props.userDataByUsername.user.data.username,
             private: this.props.userDataByUsername.user.data.isPrivate,
             settings: true,
@@ -130,22 +101,33 @@ class TopBarOwnerInfo extends Component {
   }
 
   render() {
-    return <TopBar items={this.state.items} handeleShare={this.handeleShare} />;
+    return (
+      <TopBar
+        items={this.state.items}
+        handeleShare={this.handeleShare}
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   }
 }
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  usersData: state.usersData
 });
 
 const mapDispatchToProps = {
-  getUser
+  getUser,
+  getFollowUserList
 };
 
 TopBarOwnerInfo.propTypes = {
   handleModalShow: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
   getUser: PropTypes.func,
-  userDataByUsername: PropTypes.object
+  userDataByUsername: PropTypes.object,
+  getFollowUserList: PropTypes.func,
+  usersData: PropTypes.object
 };
 
 export default connect(

@@ -156,7 +156,6 @@ export const setSocialShare = data => {
     dispatch(setSocialShareStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    console.log(data);
     return privacyService.setSocialShare(data, header).then(
       res => {
         dispatch(setSocialShareSucceeded(res));

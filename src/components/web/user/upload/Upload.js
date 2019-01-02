@@ -51,6 +51,8 @@ class Upload extends Component {
   render() {
     const { form, handleSetState, handleLocation, handleSelect } = this.props;
     const { isInProgress } = this.state;
+    console.log(form.error);
+    
 
     return (
       <div className="col-xs-12 no-padding">
@@ -78,6 +80,11 @@ class Upload extends Component {
                 handleLocation={handleLocation}
                 value={form.address}
               />
+              {
+                  form.add_location.address.length === 0 && form.add_location.latitude.length === 0 && form.add_location.longitude.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.location}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Category">
@@ -88,6 +95,11 @@ class Upload extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
+              {
+                  form.add_category.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.category}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="description">
@@ -101,6 +113,11 @@ class Upload extends Component {
                 value={form.add_description}
                 isText={false}
               />
+              {
+                form.add_description.length === 0 && form.error && (
+                <span className="error-msg highlight">{Translations.error.create_modal.description}</span>
+                )
+              }
             </div>
             <div className="form-group no-margin">
               <label htmlFor="description" className="dispInline">

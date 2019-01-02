@@ -79,8 +79,6 @@ class InformationPage extends Component {
 
   render() {
     const { campaignDetails, isLoading } = this.props;
-    console.log(campaignDetails);
-
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaignDetails && !isLoading && (

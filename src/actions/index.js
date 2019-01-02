@@ -21,3 +21,4 @@ export * from "./backOfficeReview";
 export * from "./backOfficeReportedContent";
 export * from "./profileSettings";
 export * from "./search";
+export * from "./hashUser";

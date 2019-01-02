@@ -3,8 +3,9 @@ import * as dashboardService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 
-const getDashboardStarted = () => ({
-  type: types.GET_DASHBOARD_STARTED
+const getDashboardStarted = (isFor) => ({
+  type: types.GET_DASHBOARD_STARTED,
+  isFor
 });
 
 const getDashboardSucceeded = (data, isFor) => ({
@@ -13,15 +14,16 @@ const getDashboardSucceeded = (data, isFor) => ({
   isFor
 });
 
-const getDashboardFailed = error => ({
+const getDashboardFailed = (error, isFor) => ({
   type: types.GET_DASHBOARD_FAILED,
   payload: error,
-  error: true
+  error: true,
+  isFor
 });
 
 export const getDashboard = (prop, provider) => {
   return dispatch => {
-    dispatch(getDashboardStarted());
+    dispatch(getDashboardStarted(prop));
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.accessToken
@@ -31,7 +33,7 @@ export const getDashboard = (prop, provider) => {
         dispatch(getDashboardSucceeded(res.data.data, prop));
       },
       error => {
-        dispatch(getDashboardFailed(error.response));
+        dispatch(getDashboardFailed(error.response, prop));
         logger.error({
           description: error.toString(),
           fatal: true

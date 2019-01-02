@@ -1,9 +1,12 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import { getAdmins } from "../../../actions";
+import { getAdmins, updateAdmin, getHashUser } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { UsernameList } from "../../common";
+import ReactTooltip from "react-tooltip";
+import { findDOMNode } from "react-dom";
 
 class AddAdminPage extends Component {
   constructor(props, context) {
@@ -11,8 +14,9 @@ class AddAdminPage extends Component {
     this.state = {
       admins: null,
       form: {
+        id: "",
         username: "",
-        status: "admin_status1"
+        role: Translations.adminRole.rank1
       }
     };
   }
@@ -23,39 +27,71 @@ class AddAdminPage extends Component {
     this.setState({ form });
   };
 
+  validateForm = () => {
+    const { form } = this.state;
+    return form.id && form.username && form.role
+  }
+
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    const adminData = this.state.admins;
-    const data = {
-      no: 4,
-      username: this.state.form.username,
-      name: "test",
-      status: this.state.form.status
-    };
-    adminData.push(data);
-    this.setState({
-      admins: adminData
-    });
+    if(this.validateForm()) {
+      const { form, admins } = this.state;
+      const data = {
+        id: form.id,
+        role: form.role,
+        isAdmin: true
+      }
+      this.props.updateAdmin(data).then(()=> {
+        if(this.props.adminData && this.props.adminData.admin) { 
+          const dataAdd = {
+            id: this.props.adminData.admin.id,
+            username: this.props.adminData.admin.username,
+            name: this.props.adminData.admin.name,
+            role: form.role,
+          };
+          const indexOf = admins.findIndex(admin => {
+            return admin.id === form.id;
+          });
+          if (indexOf === -1) {
+            admins.push(dataAdd);
+          } else {
+            admins.splice(indexOf, 1);
+            admins.push(dataAdd);
+          }
+          this.setState({ admins, form: { ...this.state.form , id: "", role: Translations.adminRole.rank1, username: ""}});
+        }
+      })
+    }
   };
   
   deleteData = e => {
-    const admins_Data = this.state.admins;
-    for (let i = admins_Data.length - 1; i >= 0; i--) {
-      if (admins_Data[i].name === e.target.name) {
-        admins_Data.splice(i, 1);
-      }
+    const { admins } = this.state;
+    const id = e.target.id;
+    const data = {
+      id,
+      role: "User",
+      isAdmin: false
     }
-    this.setState({
-      admins: admins_Data
+    this.props.updateAdmin(data).then(()=> {
+      if(this.props.adminData && this.props.adminData.admin) { 
+        const indexOf = admins.findIndex(admin => {
+          return admin.id === this.props.adminData.admin.id ;
+        });
+        if (indexOf !== -1) {
+          admins.splice(indexOf, 1);
+        }
+        this.setState({ admins });
+      }
     });
   };
 
   statusFormatter = (cell, row, rowIndex) => {
     return (
       <div key={rowIndex}>
-        <span>{cell}</span>
-        <button name={row.name} onClick={this.deleteData}>
+        <span>{row.role}</span>
+        <span>{" "}</span>
+        <button name={row.name} id={row.id} onClick={this.deleteData}>
           Delete
         </button>
       </div>
@@ -71,6 +107,9 @@ class AddAdminPage extends Component {
         })
       }
     });
+    
+    this.props.getHashUser("usernames");
+
   };
 
   customTotal = (from, to, size) => (
@@ -160,8 +199,44 @@ class AddAdminPage extends Component {
     )
   }
 
+  handleSetSatetToolTipUsername = (id,username) => {
+    const { form } = this.state;
+    form.id = id;
+    form.username = username
+    this.setState({ form });
+    this.usernameHide();
+  }
+
+  renderUserNameTips = () => {
+    const { form }  = this.state;
+    const { usersList } = this.props;
+    return (
+      <UsernameList
+        value={form.username}
+        handleSetSatetToolTipUsername={this.handleSetSatetToolTipUsername}
+        usersList={usersList}
+      />
+    );
+  };
+
+  handleChangeUsername = e => {
+    this.usernameHide();
+    this.setState({ form: { ...this.state.form, username: e.target.value } });
+    this.usernameShow();
+  };
+
+  usernameShow = () => {
+    /* eslint-disable */
+    ReactTooltip.show(findDOMNode(this.refs.username));
+  };
+
+  usernameHide = () => {
+    /* eslint-disable */
+    ReactTooltip.hide(findDOMNode(this.refs.username));
+  };
+  
   render() {
-    const { admins } = this.state;
+    const { admins, form } = this.state;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -176,16 +251,36 @@ class AddAdminPage extends Component {
               id="username"
               placeholder={Translations.admin.Search_in_users}
               className="res440"
-              onChange={this.handleChangeField}
+              onChange={this.handleChangeUsername}
+              value={form.username? form.username : "" }
             />
+            <div
+              data-for="username"
+              role="button"
+              data-tip="tooltip"
+              ref="username"
+            />
+             <ToolTip
+                id="username"
+                getContent={this.renderUserNameTips}
+                effect="solid"
+                delayHide={0}
+                delayShow={0}
+                delayUpdate={0}
+                place={"bottom"}
+                border={true}
+                type={"light"}
+              />
             <select
               className="res440"
               onBlur={this.handleChangeField}
-              name="status"
+              onChange={this.handleChangeField}
+              name="role"
+              value={form.role}
             >
-              <option value={"admin_status1"}>Admin status 1 </option>
-              <option value={"admin_status2"}>Admin status 2 </option>
-              <option value={"admin_status3"}>Admin status 3 </option>
+              <option value={Translations.adminRole.rank1}>{Translations.adminRole.rank1}</option>
+              <option value={Translations.adminRole.rank2}>{Translations.adminRole.rank2}</option>
+              <option value={Translations.adminRole.rank3}>{Translations.adminRole.rank3}</option>
             </select>
             <button className="res440" onClick={this.handleSubmit}>
               {Translations.admin.Add}
@@ -200,16 +295,22 @@ class AddAdminPage extends Component {
 
 
 const mapStateToProps = state => ({
-  adminData: state.adminData
+  adminData: state.adminData,
+  usersList: state.hashUserData.usernames,
 });
 
 const mapDispatchToProps = {
-  getAdmins
+  getAdmins,
+  updateAdmin,
+  getHashUser
 };
 
 AddAdminPage.propTypes = {
   getAdmins: PropTypes.func.isRequired,
+  updateAdmin: PropTypes.func.isRequired,
   adminData: PropTypes.object,
+  getHashUser: PropTypes.func,
+  usersList: PropTypes.any,
 };
 
 export default connect(

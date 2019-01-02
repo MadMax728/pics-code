@@ -94,6 +94,9 @@ class PrivacyPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -411,12 +414,7 @@ class PrivacyPage extends Component {
 
   handleDeactiveMyAccount = e => {
     const modalForValue = e.target.id;
-    this.props.handleModalInfoShow(modalType.confirmation, value => {
-      console.log("In Privacy Value", value);
-    });
-    this.props.modalInfoShow = val => {
-      console.log(val);
-    };
+    this.props.handleModalInfoShow(modalType.confirmation);
   };
 
   render() {

@@ -162,7 +162,8 @@
     "subscribed_to_your_profile": "Subscribed to your profile",
     "notification": "Notifications",
     "like_you": "Like You",
-    "request": "Requests"
+    "request": "Requests",
+    "no_request_avail": "No Request Available"
   },
 
   "navigation": {
@@ -381,10 +382,25 @@
     "create_ad": "Create Ad",
     "subscriber": "Subscribers",
     "subscribed": "Subscribed",
+    "request_pending": "Request Pending",
     "posts": "Posts",
     "subscribe": "Subscribe",
     "message": "Message",
     "like_you": "Like You"
+  },
+
+  "top_bar_info_modal": {
+    "modal_title": "Subscribers / Subscribed / Likes",
+    "follow_btn": "Follow",
+    "subscribe_btn": "Subscribed",
+    "request_sent_btn": "Request Sent"
+  },
+
+  "profile_community_right_sidebar": {
+    "community": "Community",
+    "serverError": "Something went wrong. Please Try Again",
+    "Subscribe": "Subscribe",
+    "Subscribed": "Subscribed"
   },
 
   "left_sidebar": {
@@ -718,11 +734,11 @@
     "AdminStatus": "Admin Status",
     "Verification": "Add verification",
     "Remove_Verification": "Remove Verification",
-    "Period": "Period",
-    "amount": "amount",
-    "type": "type",
-    "Number": "Number",
-    "Code": "Code",
+    "period": "Period",
+    "amount": "Amount",
+    "type": "Type",
+    "number": "Number",
+    "code": "Code",
     "status": "status",
     "Add_voucher_code": "Add voucher code",
     "Data_download": "Data download",
@@ -740,6 +756,12 @@
     "VATNO": "VAT Identification Number"
   },
 
+  "adminRole": {
+    "rank1": "rank1",
+    "rank2": "rank2",
+    "rank3": "rank3"
+  },
+
   "error": {
     "create_modal": {
       "title": "Plaese Enter Title",
@@ -752,15 +774,15 @@
       "radius": "Please Select Radius",
       "inquiryTag": "Please Enter Inquiry Tags",
       "description": "Please Enter Description",
-      "date" : "End Date must be greater than Start Date",
+      "date": "End Date must be greater than Start Date",
       "budget": "Please Select Budget",
-      "invoiceRecipient" : "Please Enter Invoice Recipient",
+      "invoiceRecipient": "Please Enter Invoice Recipient",
       "postalCode": "Please Enter Postal code",
       "city": "Please Enter City",
       "VATNO": "Please Enter VAT Identification Number",
       "country": "Please Enter Country",
       "streetNumber": "Please Enter Street,Number",
-      "insertLink": "Please Enter Inset Link" 
+      "insertLink": "Please Enter Inset Link"
     }
   }
 }

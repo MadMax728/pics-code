@@ -63,12 +63,24 @@ const initialState = {
   },
   dashboardData: {
     news: null,
+    isLoadingnews: false,
+    errornews: false,
+
     explores: null,
+    isLoadingexplores: false,
+    errorexplores: false,
+
     participants: null,
+    isLoadingparticipants: false,
+    errorparticipants: false,
+
     users: null,
+    isLoadingusers: false,
+    errorusers: false,
+
     pics: null,
-    isLoading: false,
-    error: false
+    isLoadingpics: false,
+    errorpics: false
   },
   aboutData: {
     about: null,
@@ -119,11 +131,26 @@ const initialState = {
     radius: null,
     targetGroups: null,
     callToActions: null,
+    periods: null,
+    amounts: null,
+    types: null,
+    numbers: null,
     isLoading: false,
     error: false
   },
   usersData: {
     users: [],
+    isLoading: false,
+    error: false,
+    isRequestSend: null,
+    isUnsubscribed: null,
+    userList: [],
+    pendingUserList: [],
+    isAcceptRequest: null
+  },
+  subscribeData: {
+    subscriber: [],
+    subscribed: [],
     isLoading: false,
     error: false
   },
@@ -145,6 +172,7 @@ const initialState = {
   verificationData: {
     verifications: null,
     verification: null,
+    unverifiedUsers: null,
     isLoading: false,
     error: false
   },
@@ -180,6 +208,12 @@ const initialState = {
   },
   searchData: {
     searchKeyword: null,
+    isLoading: false,
+    error: false
+  },
+  hashUserData: {
+    usernames: null,
+    hashTags: null,
     isLoading: false,
     error: false
   }

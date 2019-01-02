@@ -25,12 +25,12 @@ class PicturesRoot extends React.Component {
   };
 
   render() {
-    const { picsList, isLoading } = this.props;
+    const { picsList, isLoadingpics } = this.props;
 
     return (
       <div className="padding-rl-10 middle-section">
-        {picsList && !isLoading && this.renderuserList()}
-        {isLoading && <UserPicLoading />}
+        {picsList && !isLoadingpics && this.renderuserList()}
+        {isLoadingpics && <UserPicLoading />}
       </div>
     );
   }
@@ -38,15 +38,15 @@ class PicturesRoot extends React.Component {
 
 PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoadingpics: PropTypes.bool,
   picsList: PropTypes.any
-  // error: PropTypes.any
+  // errorpics: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   picsList: state.dashboardData.pics,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  isLoadingpics: state.dashboardData.isLoadingpics,
+  errorpics: state.dashboardData.errorpics
 });
 
 const mapDispatchToProps = {

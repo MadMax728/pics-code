@@ -29,11 +29,11 @@ class ParticipantsPage extends Component {
   };
 
   render() {
-    const { participantsList, isLoading } = this.props;
+    const { participantsList, isLoadingparticipants } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {participantsList && !isLoading && this.renderParticipantsList()}
-        {isLoading && <CampaignLoading />}
+        {participantsList && !isLoadingparticipants && this.renderParticipantsList()}
+        {isLoadingparticipants && <CampaignLoading />}
       </div>
     );
   }
@@ -42,15 +42,15 @@ class ParticipantsPage extends Component {
 ParticipantsPage.propTypes = {
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoadingparticipants: PropTypes.bool,
   participantsList: PropTypes.any
-  // error: PropTypes.any
+  // errorparticipants: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   participantsList: state.dashboardData.participants,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  isLoadingparticipants: state.dashboardData.isLoadingparticipants,
+  errorparticipants: state.dashboardData.errorparticipants
 });
 
 const mapDispatchToProps = {

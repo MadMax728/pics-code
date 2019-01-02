@@ -16,7 +16,7 @@ class ImageItem extends PureComponent {
          */}
         <div className={`embed-responsive embed-responsive-16by9`}>
           <div className={`img-responsive embed-responsive-item`}>
-            <LazyLoad height={200} once={true} offset={[-200, 0]} placeholder={<Loader />}>
+            <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
               <img
                   src={this.props.item}
                   alt="altmage"
