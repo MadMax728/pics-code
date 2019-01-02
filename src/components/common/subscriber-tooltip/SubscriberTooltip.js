@@ -57,11 +57,6 @@ class SubscribedTooltip extends Component {
 
   // Top Bar - User Info
   getUserInfo = username => {
-    // const storage = Auth.extractJwtFromStorage();
-    // let userInfo = null;
-    // if (storage) {
-    //   userInfo = JSON.parse(storage.userInfo);
-    // }
     const data = { username: username };
     this.props.getUser(data).then(() => {
       if (this.props.userDataByUsername.user.data) {
