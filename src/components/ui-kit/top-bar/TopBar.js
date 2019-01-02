@@ -24,7 +24,6 @@ class TopBar extends Component {
   };
 
   renderReportTips = (type, userid) => {
-    console.log(userid);
     if (type !== "Posts") {
       if (type === "Subscriber") {
         return <SubscriberTooltip type={type} userId={userid} />;

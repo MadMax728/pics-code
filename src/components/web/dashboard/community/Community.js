@@ -38,7 +38,6 @@ class Community extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     const data = { username: userInfo.username };
-    console.log(data);
     this.props.getUser(data).then(() => {
       if (this.props.userDataByUsername.user.data) {
         // Success

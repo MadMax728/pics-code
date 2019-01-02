@@ -385,7 +385,8 @@
     "modal_title": "Subscribers / Subscribed / Likes",
     "follow_btn": "Follow",
     "subscribe_btn": "Subscribed",
-    "request_sent_btn": "Request Sent"
+    "request_sent_btn": "Request Sent",
+    "no_data": "No Data Available"
   },
 
   "profile_community_right_sidebar": {
