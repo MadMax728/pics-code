@@ -27,8 +27,6 @@ class TextEditor extends Component {
     let editorState;
 
     if (props.contentText) {
-      console.log(props.contentText);
-      
       const blocksFromHTML = convertFromHTML(props.contentText);
       const contentState = ContentState.createFromBlockArray(blocksFromHTML);
       editorState = EditorState.createWithContent(contentState);
