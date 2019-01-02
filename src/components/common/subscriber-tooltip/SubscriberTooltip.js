@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 import { connect } from "react-redux";
-import { getFollowUserList } from "../../../actions";
-import { Auth } from "../../../auth";
+import {
+  getFollowUserList,
+  sendRequest,
+  getUnsubscribe
+} from "../../../actions";
 
 class SubscriberTooltip extends Component {
   constructor(props) {
@@ -11,21 +14,54 @@ class SubscriberTooltip extends Component {
     this.state = {};
   }
 
+  handleKeyPress = () => {};
+
   componentDidMount = () => {
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
+    this.getUserList(this.props.userId);
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userId !== nextProps.userId) {
+      this.getUserList(nextProps.userId);
     }
-    if (userInfo.id && this.props.type) {
-      const userRequestData = { id: userInfo.id, type: "followings" };
-      this.props.getFollowUserList("subscriber", userRequestData).then(() => {
-        // Success
+  }
+
+  getUserList = userId => {
+    const userRequestData = { id: userId, type: "followings" };
+    this.props.getFollowUserList("subscriber", userRequestData).then(() => {
+      // Success
+    });
+  };
+
+  handleSubscribed = e => {
+    const usersList = this.props.subscribeData.subscribed;
+    const selectedUserList = usersList.find(user => user.id === e.target.id);
+    if (selectedUserList.subscribeId === "") {
+      const requestData = { followers: e.target.id };
+      this.props.sendRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isRequestSend) {
+          this.getUserList(this.props.userId);
+        }
+      });
+    } else {
+      const subscribedId = selectedUserList.subscribeId;
+      this.props.getUnsubscribe(subscribedId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isUnsubscribed) {
+          this.getUserList(this.props.userId);
+        }
       });
     }
   };
-
-  handleKeyPress = () => {};
 
   render() {
     return (
@@ -50,13 +86,30 @@ class SubscriberTooltip extends Component {
                   <div className="subtitle">{user.name}</div>
                 </div>
                 <div className="subscribe-btn">
-                  <button
-                    className="filled_button"
-                    id={user.id}
-                    onClick={this.handleSubscribe}
-                  >
-                    {Translations.top_bar_info_modal.subscribe_btn}
-                  </button>
+                  {user.isSubscribe ? (
+                    <div className="community-subscribe">
+                      <button
+                        className="filled_button"
+                        id={user.id}
+                        onClick={this.handleSubscribed}
+                      >
+                        {
+                          Translations.profile_community_right_sidebar
+                            .Subscribed
+                        }
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="community-subscribe">
+                      <button
+                        className="blue_button"
+                        id={user.id}
+                        onClick={this.handleSubscribed}
+                      >
+                        {Translations.profile_community_right_sidebar.Subscribe}
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -68,17 +121,24 @@ class SubscriberTooltip extends Component {
 }
 
 const mapStateToProps = state => ({
-  subscribeData: state.subscribeData
+  subscribeData: state.subscribeData,
+  usersData: state.usersData
 });
 
 const mapDispatchToProps = {
-  getFollowUserList
+  getFollowUserList,
+  sendRequest,
+  getUnsubscribe
 };
 
 SubscriberTooltip.propTypes = {
   type: PropTypes.any,
+  userId: PropTypes.any,
   getFollowUserList: PropTypes.func,
-  subscribeData: PropTypes.any
+  subscribeData: PropTypes.any,
+  usersData: PropTypes.any,
+  sendRequest: PropTypes.any,
+  getUnsubscribe: PropTypes.any
 };
 
 export default connect(

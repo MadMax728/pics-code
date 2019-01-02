@@ -74,7 +74,8 @@ class TopBarOwnerInfo extends Component {
                 className: "col-sm-4 slot_one no-padding",
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.upload,
-                handeleEvent: this.handeleUpload
+                handeleEvent: this.handeleUpload,
+                userid: this.props.userDataByUsername.user.data.id
               },
               {
                 name: Translations.top_bar_info.subscribed,
@@ -82,7 +83,8 @@ class TopBarOwnerInfo extends Component {
                 className: "col-sm-4 slot_two no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_campaign,
-                handeleEvent: this.handeleCreateCampaign
+                handeleEvent: this.handeleCreateCampaign,
+                userid: this.props.userDataByUsername.user.data.id
               },
               {
                 name: Translations.top_bar_info.posts,
@@ -90,13 +92,26 @@ class TopBarOwnerInfo extends Component {
                 className: "col-sm-4 slot_three no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_ad,
-                handeleEvent: this.handeleCreateAd
+                handeleEvent: this.handeleCreateAd,
+                userid: this.props.userDataByUsername.user.data.id
               }
             ]
           };
           this.setState({ items });
         }
       });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userDataByUsername.user) {
+      if (
+        this.props.userDataByUsername.user.data.subscribedCount !==
+        nextProps.userDataByUsername.user.data.subscribedCount
+      ) {
+        console.log("props", this.props.userDataByUsername.user.data);
+        console.log("next", nextProps.userDataByUsername.user.data);
+      }
     }
   }
 

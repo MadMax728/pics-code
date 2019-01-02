@@ -28,7 +28,8 @@ class TopBarOtherInfo extends Component {
             className: "col-sm-4 slot_one no-padding",
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.subscribe,
-            handeleEvent: this.handeleSubscribe
+            handeleEvent: this.handeleSubscribe,
+            userid: this.props.match.userid
           },
           {
             name: Translations.top_bar_info.subscribed,
@@ -36,7 +37,8 @@ class TopBarOtherInfo extends Component {
             className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.message,
-            handeleEvent: this.handeleMessage
+            handeleEvent: this.handeleMessage,
+            userid: this.props.match.userid
           },
           {
             name: Translations.top_bar_info.posts,
@@ -44,7 +46,8 @@ class TopBarOtherInfo extends Component {
             className: "col-sm-4 slot_three no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.like_you,
-            handeleEvent: this.handeleLikeYou
+            handeleEvent: this.handeleLikeYou,
+            userid: this.props.match.userid
           }
         ]
       }
@@ -116,7 +119,8 @@ class TopBarOtherInfo extends Component {
           className: "col-sm-4 slot_one no-padding",
           btnActiveClassName: subscribeBtnClass,
           btnText: subscribeBtnText,
-          handeleEvent: this.handeleSubscribe
+          handeleEvent: this.handeleSubscribe,
+          userid: this.props.userDataByUsername.user.data.id
         },
         {
           name: Translations.top_bar_info.subscribed,
@@ -124,7 +128,8 @@ class TopBarOtherInfo extends Component {
           className: "col-sm-4 slot_two no-padding",
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.message,
-          handeleEvent: this.handeleMessage
+          handeleEvent: this.handeleMessage,
+          userid: this.props.userDataByUsername.user.data.id
         },
         {
           name: Translations.top_bar_info.posts,
@@ -132,7 +137,8 @@ class TopBarOtherInfo extends Component {
           className: "col-sm-4 slot_three no-padding",
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.like_you,
-          handeleEvent: this.handeleLikeYou
+          handeleEvent: this.handeleLikeYou,
+          userid: this.props.userDataByUsername.user.data.id
         }
       ]
     };

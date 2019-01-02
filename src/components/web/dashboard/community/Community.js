@@ -2,7 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getDashboard, sendRequest, getUnsubscribe } from "../../../../actions";
+import { Auth } from "../../../../auth";
+import {
+  getDashboard,
+  sendRequest,
+  getUnsubscribe,
+  getUser
+} from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 
 class Community extends Component {
@@ -24,6 +30,22 @@ class Community extends Component {
     });
   };
 
+  // Top Bar - User Info
+  getUserInfo = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    const data = { username: userInfo.username };
+    console.log(data);
+    this.props.getUser(data).then(() => {
+      if (this.props.userDataByUsername.user.data) {
+        // Success
+      }
+    });
+  };
+
   handleSubscribed = e => {
     const errors = {};
     const { usersList } = this.state;
@@ -40,6 +62,7 @@ class Community extends Component {
           this.setState({ error: errors });
         } else if (this.props.usersData.isRequestSend) {
           this.getUserData();
+          this.getUserInfo();
         }
       });
     } else {
@@ -54,6 +77,7 @@ class Community extends Component {
           this.setState({ error: errors });
         } else if (this.props.usersData.isUnsubscribed) {
           this.getUserData();
+          this.getUserInfo();
         }
       });
     }
@@ -128,13 +152,15 @@ const mapStateToProps = state => ({
   usersList: state.dashboardData.users,
   isLoading: state.dashboardData.isLoading,
   error: state.dashboardData.error,
-  usersData: state.usersData
+  usersData: state.usersData,
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
   getDashboard,
   sendRequest,
-  getUnsubscribe
+  getUnsubscribe,
+  getUser
 };
 
 Community.propTypes = {
@@ -143,7 +169,9 @@ Community.propTypes = {
   usersList: PropTypes.any,
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,
-  usersData: PropTypes.object
+  usersData: PropTypes.object,
+  getUser: PropTypes.func,
+  userDataByUsername: PropTypes.any
   // error: PropTypes.any
 };
 
