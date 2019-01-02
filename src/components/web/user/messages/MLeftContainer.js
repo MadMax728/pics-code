@@ -17,18 +17,15 @@ class MLeftContainer extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.handleUserListCase(parseInt(this.state.activeIndex));
-  };
-
-  getUserList = (type = "subscriber") => {
-    this.props.getUserList(type).then(() => {
-      const { usersData } = this.props;
-      if (!usersData.isLoading) {
-        this.setState({ userList: usersData.users });
-      }
-    });
-  };
+  getUserList = (type='subscribed') => {
+      this.setState({ userList : [] });
+      this.props.getUserList(type).then(() => {
+          const  { usersData } = this.props;
+          if(!usersData.isLoading) {
+              this.setState({ userList : usersData.users })
+          }
+      });
+  }
 
   handleUserListCase = activeIndex => {
     switch (activeIndex) {
@@ -45,12 +42,22 @@ class MLeftContainer extends Component {
         this.getUserList("company");
         break;
     }
+  }
+
+  handleTypeClick = (e) => {
+    const currentIndex = e.currentTarget.dataset.id
+    const { activeIndex } = this.state;
+    if(currentIndex !== activeIndex) {
+        this.setState({ activeIndex: currentIndex });
+        this.handleUserListCase(parseInt(currentIndex));
+        this.props.selectUser({});
+    }
   };
-  handleTypeClick = e => {
-    const activeIndex = e.currentTarget.dataset.id;
-    this.setState({ activeIndex });
-    this.handleUserListCase(parseInt(activeIndex));
-    this.props.selectUser({});
+    
+  handleChatClick = (e) => {
+      const { userList } = this.state;
+      const user = _.find(userList, { id: e.currentTarget.dataset.id });
+      this.props.selectUser(user);
   };
 
   handleChatClick = e => {
