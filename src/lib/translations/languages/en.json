@@ -719,13 +719,23 @@
     "Ads_Temp_Closed": "Ads Temp Closed"
   },
   "cms": {
-    "Title_of_page": "Title of page",
-    "Language": "Language",
-    "Most_recent_change": "Most recent change",
-    "Created_by": "Created by",
-    "Options": "Options",
-    "Status": "Status",
-    "cms": "CMS management"
+    "create": "Create new CMS page",
+    "edit": "Edit CMS page",
+    "title_of_page": "Title of page",
+    "language": "Language",
+    "most_recent_change": "Most recent change",
+    "created_by": "Created by",
+    "options": "Options",
+    "status": "Status",
+    "cms": "CMS management",
+    "public": "Public",
+    "draft": "Draft",
+    "url": "Url",
+    "display_page": "Display page",
+    "cancle": "Cancel",
+    "preview": "Preview",
+    "save": "Save",
+    "update": "Update"
   },
   "admin": {
     "Add_admin": "Add admin",

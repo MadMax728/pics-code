@@ -58,6 +58,7 @@ const initialState = {
   },
   cmsManagementData: {
     cmsManagement: null,
+    cmsDetail: null,
     isLoading: false,
     error: false
   },

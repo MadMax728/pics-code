@@ -12,4 +12,13 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // BackOffice Dashboard API
 export const getCMSManagement = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get(payload);
+
+export const getCMSDetail = (payload, header = {}) =>
+  api(baseUrl, header).get("/cmspages/" + payload);
+
+export const updateCMS = (payload, header = {}) =>
+  api(baseUrl, header).put("/cmspages/" , payload);
+
+export const createCMS = (payload, header = {}) =>
+  api(baseUrl, header).post("/cmspages/", payload);

@@ -6,6 +6,7 @@ import { Translations } from "../../../lib/translations";
 import { getCMSManagement } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { DateFormat } from "../../Factory";
 
 class CMSManagementPage extends Component {
   constructor(props, context) {
@@ -15,10 +16,10 @@ class CMSManagementPage extends Component {
     };
   }
 
-  optionsFormatter = (cell, row, rowIndex) => {
+  optionsFormatter = (cell, row, rowIndex) => {   
     return (
       <div key={rowIndex}>
-        <Link to={""}>Edit</Link>
+        <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row.id}`}>Edit</Link>
         <Link to={""}>Preview</Link>
       </div>
     );
@@ -29,14 +30,14 @@ class CMSManagementPage extends Component {
   statusFormatter = (cell, row, rowIndex) => {
     return (
       <div key={rowIndex}>
-        <span className="green-circle" /> Active{" "}
+        <span className={`${row.status}-circle`} /> Active{" "}
       </div>
     );
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getCMSManagement().then(()=> {
+    this.props.getCMSManagement("/cmspages").then(()=> {
       if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
         this.setState({
           cmsManagement: this.props.cmsManagementData.cmsManagement
@@ -51,40 +52,49 @@ class CMSManagementPage extends Component {
     </span>
   );
 
+  recentFormatter  = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        {row.updatedAt && DateFormat(row.updatedAt)}
+      </div>
+    );
+  };
+
   renderCMSManagement = () => {
     const { cmsManagement } = this.state;
     const columns = [
       {
         dataField: "title",
-        text: Translations.cms.Title_of_page,
+        text: Translations.cms.title_of_page,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
-        dataField: "language",
-        text: Translations.cms.Language,
+        dataField: "pageLanguage",
+        text: Translations.cms.language,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "most_recent_change",
-        text: Translations.cms.Most_recent_change,
+        text: Translations.cms.most_recent_change,
         align: "left",
         headerAlign: "left",
-        sort: false
+        sort: false,
+        formatter: this.recentFormatter
       },
       {
-        dataField: "created_by",
-        text: Translations.cms.Created_by,
+        dataField: "username",
+        text: Translations.cms.created_by,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "options",
-        text: Translations.cms.Options,
+        text: Translations.cms.options,
         align: "left",
         headerAlign: "left",
         sort: false,
@@ -92,7 +102,7 @@ class CMSManagementPage extends Component {
       },
       {
         dataField: "status",
-        text: Translations.cms.Status,
+        text: Translations.cms.status,
         align: "left",
         headerAlign: "left",
         sort: false,
