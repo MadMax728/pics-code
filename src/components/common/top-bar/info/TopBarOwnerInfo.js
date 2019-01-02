@@ -74,7 +74,9 @@ class TopBarOwnerInfo extends Component {
                 className: "col-sm-4 slot_one no-padding",
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.upload,
-                handeleEvent: this.handeleUpload
+                handeleEvent: this.handeleUpload,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
               },
               {
                 name: Translations.top_bar_info.subscribed,
@@ -82,7 +84,9 @@ class TopBarOwnerInfo extends Component {
                 className: "col-sm-4 slot_two no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_campaign,
-                handeleEvent: this.handeleCreateCampaign
+                handeleEvent: this.handeleCreateCampaign,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
               },
               {
                 name: Translations.top_bar_info.posts,
@@ -90,13 +94,66 @@ class TopBarOwnerInfo extends Component {
                 className: "col-sm-4 slot_three no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_ad,
-                handeleEvent: this.handeleCreateAd
+                handeleEvent: this.handeleCreateAd,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
               }
             ]
           };
           this.setState({ items });
         }
       });
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userDataByUsername.user) {
+      if (
+        this.props.userDataByUsername.user.data.subscribedCount !==
+        nextProps.userDataByUsername.user.data.subscribedCount
+      ) {
+        const items = {
+          userid: nextProps.userDataByUsername.user.data.id,
+          username: nextProps.userDataByUsername.user.data.username,
+          private: nextProps.userDataByUsername.user.data.isPrivate,
+          settings: true,
+          more: false,
+          userProfile: nextProps.userDataByUsername.user.data.profileUrl,
+          slots: [
+            {
+              name: Translations.top_bar_info.subscriber,
+              val: nextProps.userDataByUsername.user.data.subscribersCount,
+              className: "col-sm-4 slot_one no-padding",
+              btnActiveClassName: "filled_button",
+              btnText: Translations.top_bar_info.upload,
+              handeleEvent: this.handeleUpload,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.subscribed,
+              val: nextProps.userDataByUsername.user.data.subscribedCount,
+              className: "col-sm-4 slot_two no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_campaign,
+              handeleEvent: this.handeleCreateCampaign,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.posts,
+              val: nextProps.userDataByUsername.user.data.postCount,
+              className: "col-sm-4 slot_three no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_ad,
+              handeleEvent: this.handeleCreateAd,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            }
+          ]
+        };
+        this.setState({ items });
+      }
     }
   }
 
