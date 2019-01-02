@@ -24,6 +24,10 @@ class SubscribedTooltip extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+    if (this.props.userId !== nextProps.userId) {
+      this.getTooltipUserList(nextProps.userId);
+    }
+
     if (this.props.userDataByUsername.user) {
       if (
         this.props.userDataByUsername.user.data.subscribedCount !==
@@ -52,13 +56,13 @@ class SubscribedTooltip extends Component {
   };
 
   // Top Bar - User Info
-  getUserInfo = () => {
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    const data = { username: userInfo.username };
+  getUserInfo = username => {
+    // const storage = Auth.extractJwtFromStorage();
+    // let userInfo = null;
+    // if (storage) {
+    //   userInfo = JSON.parse(storage.userInfo);
+    // }
+    const data = { username: username };
     this.props.getUser(data).then(() => {
       if (this.props.userDataByUsername.user.data) {
         // Success
@@ -80,7 +84,7 @@ class SubscribedTooltip extends Component {
         } else if (this.props.usersData.isRequestSend) {
           this.getTooltipUserList(this.props.userId);
           this.getAllUserData();
-          this.getUserInfo();
+          this.getUserInfo(selectedUserList.username);
         }
       });
     } else {
@@ -94,7 +98,7 @@ class SubscribedTooltip extends Component {
         } else if (this.props.usersData.isUnsubscribed) {
           this.getTooltipUserList(this.props.userId);
           this.getAllUserData();
-          this.getUserInfo();
+          this.getUserInfo(selectedUserList.username);
         }
       });
     }
@@ -188,6 +192,7 @@ const mapDispatchToProps = {
 SubscribedTooltip.propTypes = {
   type: PropTypes.any,
   userId: PropTypes.any,
+  username: PropTypes.any,
   getFollowUserList: PropTypes.func,
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,

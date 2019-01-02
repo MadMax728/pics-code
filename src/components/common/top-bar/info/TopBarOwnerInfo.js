@@ -75,7 +75,8 @@ class TopBarOwnerInfo extends Component {
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.upload,
                 handeleEvent: this.handeleUpload,
-                userid: this.props.userDataByUsername.user.data.id
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
               },
               {
                 name: Translations.top_bar_info.subscribed,
@@ -84,7 +85,8 @@ class TopBarOwnerInfo extends Component {
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_campaign,
                 handeleEvent: this.handeleCreateCampaign,
-                userid: this.props.userDataByUsername.user.data.id
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
               },
               {
                 name: Translations.top_bar_info.posts,
@@ -93,7 +95,8 @@ class TopBarOwnerInfo extends Component {
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_ad,
                 handeleEvent: this.handeleCreateAd,
-                userid: this.props.userDataByUsername.user.data.id
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
               }
             ]
           };
@@ -124,7 +127,8 @@ class TopBarOwnerInfo extends Component {
               btnActiveClassName: "filled_button",
               btnText: Translations.top_bar_info.upload,
               handeleEvent: this.handeleUpload,
-              userid: nextProps.userDataByUsername.user.data.id
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
             },
             {
               name: Translations.top_bar_info.subscribed,
@@ -133,7 +137,8 @@ class TopBarOwnerInfo extends Component {
               btnActiveClassName: "black_button",
               btnText: Translations.top_bar_info.create_campaign,
               handeleEvent: this.handeleCreateCampaign,
-              userid: nextProps.userDataByUsername.user.data.id
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
             },
             {
               name: Translations.top_bar_info.posts,
@@ -142,7 +147,8 @@ class TopBarOwnerInfo extends Component {
               btnActiveClassName: "black_button",
               btnText: Translations.top_bar_info.create_ad,
               handeleEvent: this.handeleCreateAd,
-              userid: nextProps.userDataByUsername.user.data.id
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
             }
           ]
         };

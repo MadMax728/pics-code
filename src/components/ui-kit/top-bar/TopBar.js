@@ -23,12 +23,16 @@ class TopBar extends Component {
     window.scrollTo(0, 0);
   };
 
-  renderReportTips = (type, userid) => {
+  renderReportTips = (type, userid, username) => {
     if (type !== "Posts") {
       if (type === "Subscriber") {
-        return <SubscriberTooltip type={type} userId={userid} />;
+        return (
+          <SubscriberTooltip type={type} userId={userid} username={username} />
+        );
       } else if (type === "Subscribed") {
-        return <SubscribedTooltip type={type} userId={userid} />;
+        return (
+          <SubscribedTooltip type={type} userId={userid} username={username} />
+        );
       }
     }
   };
@@ -41,7 +45,9 @@ class TopBar extends Component {
           role="button"
           dataTip="tooltip"
           dataClass="tooltip-wrapr" /* eslint-disable */
-          getContent={() => this.renderReportTips(slot.name, slot.userid)}
+          getContent={() =>
+            this.renderReportTips(slot.name, slot.userid, slot.username)
+          }
           effect="solid"
           delayHide={10}
           delayShow={250}

@@ -29,7 +29,8 @@ class TopBarOtherInfo extends Component {
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.subscribe,
             handeleEvent: this.handeleSubscribe,
-            userid: this.props.match.userid
+            userid: this.props.match.userid,
+            username: this.props.match.username
           },
           {
             name: Translations.top_bar_info.subscribed,
@@ -38,7 +39,8 @@ class TopBarOtherInfo extends Component {
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.message,
             handeleEvent: this.handeleMessage,
-            userid: this.props.match.userid
+            userid: this.props.match.userid,
+            username: this.props.match.username
           },
           {
             name: Translations.top_bar_info.posts,
@@ -47,7 +49,8 @@ class TopBarOtherInfo extends Component {
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.like_you,
             handeleEvent: this.handeleLikeYou,
-            userid: this.props.match.userid
+            userid: this.props.match.userid,
+            username: this.props.match.username
           }
         ]
       }
@@ -120,7 +123,8 @@ class TopBarOtherInfo extends Component {
           btnActiveClassName: subscribeBtnClass,
           btnText: subscribeBtnText,
           handeleEvent: this.handeleSubscribe,
-          userid: this.props.userDataByUsername.user.data.id
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.usernam
         },
         {
           name: Translations.top_bar_info.subscribed,
@@ -129,7 +133,8 @@ class TopBarOtherInfo extends Component {
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.message,
           handeleEvent: this.handeleMessage,
-          userid: this.props.userDataByUsername.user.data.id
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
         },
         {
           name: Translations.top_bar_info.posts,
@@ -138,7 +143,8 @@ class TopBarOtherInfo extends Component {
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.like_you,
           handeleEvent: this.handeleLikeYou,
-          userid: this.props.userDataByUsername.user.data.id
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
         }
       ]
     };
