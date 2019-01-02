@@ -37,7 +37,7 @@ export const getUserList = (type = "subscribed") => {
         dispatch(getUserListSucceeded(res.data.data));
       },
       error => {
-        dispatch(getUserListFailed(error.response));
+        dispatch(getUserListSucceeded([]));
         logger.error({
           description: error.toString(),
           fatal: true

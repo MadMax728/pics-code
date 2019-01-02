@@ -23,6 +23,7 @@ class MLeftContainer extends Component {
     };
 
     getUserList = (type='subscribed') => {
+        this.setState({ userList : [] });
         this.props.getUserList(type).then(() => {
             const  { usersData } = this.props;
             if(!usersData.isLoading) {
@@ -48,10 +49,13 @@ class MLeftContainer extends Component {
         }
     }
     handleTypeClick = (e) => {
-        const activeIndex = e.currentTarget.dataset.id
-        this.setState({ activeIndex });
-        this.handleUserListCase(parseInt(activeIndex));
-        this.props.selectUser({});
+        const currentIndex = e.currentTarget.dataset.id
+        const { activeIndex } = this.state;
+        if(currentIndex !== activeIndex) {
+            this.setState({ activeIndex: currentIndex });
+            this.handleUserListCase(parseInt(currentIndex));
+            this.props.selectUser({});
+        }
     };
     
     handleChatClick = (e) => {
