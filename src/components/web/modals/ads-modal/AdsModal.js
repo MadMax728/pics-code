@@ -181,7 +181,7 @@ class AdsModal extends Component {
 
   validateForm = index => {
     const { form } = this.state;
-    console.log("form", form);
+    // console.log("form", form);
     if (index === 0) {
       return (
         form.title &&

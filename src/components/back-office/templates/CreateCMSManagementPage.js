@@ -21,18 +21,23 @@ class CreateCMSManagementPage extends Component {
         displayPage: Translations.cms.public,
         description: ""
       },
-      isEdit: false,
+      isEdit: false
     };
   }
 
   componentDidMount = () => {
-    const isEdit = !!((this.props.match && this.props.match.params.id))
+    const isEdit =
+    this.props.match && this.props.match.params.id ? true : false;
     this.setState({ isEdit });
     if (isEdit) {
-      this.props.getCMSDetail(this.props.match.params.id).then(()=> {
-        if(this.props.cmsManagementData && this.props.cmsManagementData.cmsDetail){
+      this.props.getCMSDetail(this.props.match.params.id).then(() => {
+        if (
+          this.props.cmsManagementData &&
+          this.props.cmsManagementData.cmsDetail
+        ) {
           this.setState({
-            form: {...this.state.form,
+            form: {
+              ...this.state.form,
               id: this.props.cmsManagementData.cmsDetail.id,
               title: this.props.cmsManagementData.cmsDetail.title,
               url: this.props.cmsManagementData.cmsDetail.url,
@@ -40,11 +45,11 @@ class CreateCMSManagementPage extends Component {
               display_page: this.props.cmsManagementData.cmsDetail.displayPage,
               description: this.props.cmsManagementData.cmsDetail.description
             }
-          })
+          });
         }
-      })
+      });
     }
-  }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -61,8 +66,8 @@ class CreateCMSManagementPage extends Component {
   handleSubmit = e => {
     e.preventDefault();
     const { form, isEdit } = this.state;
-    if(this.validationForm()){
-      if(isEdit) {
+    if (this.validationForm()) {
+      if (isEdit) {
         const data = {
           id: form.id,
           url: form.url,
@@ -70,31 +75,30 @@ class CreateCMSManagementPage extends Component {
           displayPage: form.displayPage,
           language: form.pageLanguage,
           title: form.title
-        }
-        this.props.updateCMS(data).then(()=> {
+        };
+        this.props.updateCMS(data).then(() => {
           this.props.history.goBack();
-        })
-      }
-      else {
+        });
+      } else {
         const data = {
           url: form.url,
           description: form.description,
           displayPage: form.displayPage,
           language: form.pageLanguage,
           title: form.title
-        }
-        this.props.createCMS(data).then(()=> {
+        };
+        this.props.createCMS(data).then(() => {
           this.props.history.goBack();
-        })
+        });
       }
     }
   };
 
-  handleContentChange = (text) => {
+  handleContentChange = text => {
     const { form } = this.state;
-    form.description = text === "<p></p>"? "" : text;
+    form.description = text === "<p></p>" ? "" : text;
     this.setState({ form });
-  }
+  };
 
   handlePreview = () => {
     this.props.handleModalInfoDetailsShow(modalType.cmsPreview,this.state.form);
@@ -106,7 +110,7 @@ class CreateCMSManagementPage extends Component {
       <div className="padding-rl-10 middle-section width-80">
         <div className="create-cms-page-wrapr">
           <div className="page-heading col-xs-12 mar-btm-5">
-            {isEdit? Translations.cms.edit : Translations.cms.create}
+            {isEdit ? Translations.cms.edit : Translations.cms.create}
           </div>
           <form className="cms-form col-xs-12" onSubmit={this.handleSubmit}>
             <div className="form-row col-xs-12">
@@ -165,7 +169,7 @@ class CreateCMSManagementPage extends Component {
               </div>
             </div>
             <div className="form-row col-xs-12 res480">
-              <TextEditor 
+              <TextEditor
                 handleContentChange={this.handleContentChange}
                 contentText={form.description}
               />
@@ -173,17 +177,14 @@ class CreateCMSManagementPage extends Component {
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
                 <button type="button" className="form-btn">
-                {Translations.cms.cancle}
+                  {Translations.cms.cancle}
                 </button>
               </Link>
               <button type="button" className="form-btn" onClick={this.handlePreview}>
                 {Translations.cms.preview}
               </button>
-              <button
-                type="submit"
-                className="form-btn"
-              >
-                {isEdit? Translations.cms.update : Translations.cms.save}
+              <button type="submit" className="form-btn">
+                {isEdit ? Translations.cms.update : Translations.cms.save}
               </button>
             </div>
           </form>

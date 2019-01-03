@@ -8,8 +8,28 @@ import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("explores");
     window.scrollTo(0, 0);
+    if (this.props.searchData.searchKeyword) {
+      this.props.getDashboard(
+        "explores",
+        "?isSearch=" + this.props.searchData.searchKeyword
+      );
+    } else {
+      this.props.getDashboard("explores", "");
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      let searchParam = "";
+      if (searchKeyword) {
+        searchParam = "?isSearch=" + searchKeyword;
+      }
+      this.props.getDashboard("explores", searchParam);
+    }
   };
 
   renderExploreList = () => {
@@ -27,11 +47,11 @@ class ExploreRoot extends Component {
   };
 
   render() {
-    const { exploreList, isLoading } = this.props;
+    const { exploreList, isLoadingexplores } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {exploreList && !isLoading && this.renderExploreList()}
-        {isLoading && <CampaignLoading />}
+        {exploreList && !isLoadingexplores && this.renderExploreList()}
+        {isLoadingexplores && <CampaignLoading />}
       </div>
     );
   }
@@ -40,15 +60,17 @@ class ExploreRoot extends Component {
 ExploreRoot.propTypes = {
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
-  exploreList: PropTypes.any
+  isLoadingexplores: PropTypes.bool,
+  exploreList: PropTypes.any,
+  searchData: PropTypes.any
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   exploreList: state.dashboardData.explores,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  isLoadingexplores: state.dashboardData.isLoadingexplores,
+  error: state.dashboardData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {

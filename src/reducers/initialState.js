@@ -219,6 +219,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  hashTagData: {
+    hashTags: null,
+    isLoading: false,
+    error: false
+  },
   messagesData: {
     messages: [],
     senderId: null,

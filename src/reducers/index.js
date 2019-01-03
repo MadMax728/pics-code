@@ -29,6 +29,7 @@ import businessProfileData from "./profileSettingsReducer";
 import searchData from "./searchReducer";
 import hashUserData from "./hashUserReducer";
 import subscribeData from "./subscribeReducer";
+import hashTagData from "./hashTagReducer";
 import messagesData from "./messageReducer";
 
 const rootReducer = combineReducers({
@@ -62,6 +63,7 @@ const rootReducer = combineReducers({
   searchData,
   hashUserData,
   subscribeData,
+  hashTagData,
   messagesData
 });
 
