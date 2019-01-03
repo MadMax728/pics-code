@@ -2,7 +2,8 @@
   "app_name": "Picstagraph",
 
   "date_format": {
-    "date": "MM/DD/YYYY"
+    "date": "MM/DD/YYYY",
+    "time": "LT"
   },
 
   "offen": "In der Picstagraph-App offenen",
