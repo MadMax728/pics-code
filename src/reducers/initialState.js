@@ -136,6 +136,7 @@ const initialState = {
     amounts: null,
     types: null,
     numbers: null,
+    languages: null,
     isLoading: false,
     error: false
   },

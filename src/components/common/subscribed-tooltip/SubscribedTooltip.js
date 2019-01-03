@@ -57,7 +57,7 @@ class SubscribedTooltip extends Component {
 
   // Top Bar - User Info
   getUserInfo = username => {
-    const data = { username: username };
+    const data = { username };
     this.props.getUser(data).then(() => {
       if (this.props.userDataByUsername.user.data) {
         // Success

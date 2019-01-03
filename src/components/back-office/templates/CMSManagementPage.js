@@ -7,23 +7,36 @@ import { getCMSManagement } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { DateFormat } from "../../Factory";
+import { SelectLanguage } from "../../common";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class CMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      cmsManagement: null
+      cmsManagement: null,
+      language: Translations.base_footer.language
     };
   }
 
   optionsFormatter = (cell, row, rowIndex) => {   
+    const data = { 
+      title: row.title,
+      url: row.url,
+      pageLanguage: row.pageLanguage,
+      displayPage: row.displayPage,
+      description: row.description
+    }
+
     return (
       <div key={rowIndex}>
         <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row.id}`}>Edit</Link>
-        <Link to={""}>Preview</Link>
+        <div role="button" tabIndex="0" onKeyDown={this.handleKeyDown}  onClick={() => this.handlePreview(data)}>Preview</div>
       </div>
     );
   };
+
+  handleKeyDown = () => {}
 
   // https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
   // used for formatter
@@ -163,8 +176,27 @@ class CMSManagementPage extends Component {
     )
   }
 
+  handleSelect = (isFor , selected) => {
+    this.setState({ language: selected });
+    if (this.state.language !== selected)
+    {
+      const url = selected === Translations.base_footer.language? `/cmspages` : `/cmspages?language=${selected}`;
+      this.props.getCMSManagement(url).then(()=> {
+        if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
+          this.setState({
+            cmsManagement: this.props.cmsManagementData.cmsManagement
+          })
+        }
+      });
+    }
+  }
+
+  handlePreview = (data) => {
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview,data);
+  }
+
   render() {
-    const { cmsManagement } = this.state;
+    const { cmsManagement, language } = this.state;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -176,11 +208,10 @@ class CMSManagementPage extends Component {
                 <i className="glyphicon glyphicon-plus-sign" />
               </button>{" "}
             </Link>
-            <select>
-              <option>Language </option>
-              <option>Option 1 </option>
-              <option>Option 2 </option>
-            </select>
+            <SelectLanguage 
+              value={language}
+              handleSelect={this.handleSelect}
+            />
           </div>
           {cmsManagement && this.renderCMSManagement()}
         </div>
@@ -200,6 +231,7 @@ const mapDispatchToProps = {
 CMSManagementPage.propTypes = {
   getCMSManagement: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
+  handleModalInfoDetailsShow: PropTypes.func.isRequired
 };
 
 export default connect(

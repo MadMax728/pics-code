@@ -9,3 +9,4 @@ export { default as SelectPeriod } from "./SelectPeriod";
 export { default as SelectAmount } from "./SelectAmount";
 export { default as SelectType } from "./SelectType";
 export { default as SelectNumber } from "./SelectNumber";
+export { default as SelectLanguage } from "./SelectLanguage";

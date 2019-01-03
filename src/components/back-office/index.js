@@ -18,5 +18,7 @@ export {
   ReportedAdsPage,
   CommentsPage,
   UsersPage,
-  ReportedSearchBar
+  ReportedSearchBar,
+  CMSPreview,
+  CMSPreviewHeader
 } from "./templates";

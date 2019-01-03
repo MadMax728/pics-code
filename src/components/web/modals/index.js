@@ -10,3 +10,4 @@ export { ShareModal } from "./share-modal";
 export { ConfirmationModal } from "./confirmation-model";
 export { ErrorModal } from "./error-modal";
 export { SubscribeModal } from "./subscribe-modal";
+export { CMSPreviewModal } from "./cms-preview-modal";

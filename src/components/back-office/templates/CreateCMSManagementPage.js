@@ -7,6 +7,7 @@ import { Translations } from "../../../lib/translations";
 import { getCMSDetail, updateCMS, createCMS } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class CreateCMSManagementPage extends Component {
   constructor(props, context) {
@@ -16,8 +17,8 @@ class CreateCMSManagementPage extends Component {
         id: "",
         title: "",
         url: "",
-        language: "",
-        displal_page: Translations.cms.public,
+        pageLanguage: Translations.languages.english,
+        displayPage: Translations.cms.public,
         description: ""
       },
       isEdit: false,
@@ -25,7 +26,7 @@ class CreateCMSManagementPage extends Component {
   }
 
   componentDidMount = () => {
-    const isEdit = (this.props.match && this.props.match.params.id)? true : false
+    const isEdit = !!((this.props.match && this.props.match.params.id))
     this.setState({ isEdit });
     if (isEdit) {
       this.props.getCMSDetail(this.props.match.params.id).then(()=> {
@@ -36,7 +37,7 @@ class CreateCMSManagementPage extends Component {
               title: this.props.cmsManagementData.cmsDetail.title,
               url: this.props.cmsManagementData.cmsDetail.url,
               language: this.props.cmsManagementData.cmsDetail.pageLanguage,
-              displal_page: this.props.cmsManagementData.cmsDetail.displayPage,
+              display_page: this.props.cmsManagementData.cmsDetail.displayPage,
               description: this.props.cmsManagementData.cmsDetail.description
             }
           })
@@ -53,7 +54,7 @@ class CreateCMSManagementPage extends Component {
 
   validationForm = () => {
     const { form } = this.state;
-    return form.title && form.language && form.url && form.description;
+    return form.title && form.pageLanguage && form.url && form.description;
   }
 
   // handelSubmit called when click on submit
@@ -66,8 +67,8 @@ class CreateCMSManagementPage extends Component {
           id: form.id,
           url: form.url,
           description: form.description,
-          displayPage: form.displal_page,
-          language: form.language,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
           title: form.title
         }
         this.props.updateCMS(data).then(()=> {
@@ -78,8 +79,8 @@ class CreateCMSManagementPage extends Component {
         const data = {
           url: form.url,
           description: form.description,
-          displayPage: form.displal_page,
-          language: form.language,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
           title: form.title
         }
         this.props.createCMS(data).then(()=> {
@@ -93,6 +94,10 @@ class CreateCMSManagementPage extends Component {
     const { form } = this.state;
     form.description = text === "<p></p>"? "" : text;
     this.setState({ form });
+  }
+
+  handlePreview = () => {
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview,this.state.form);
   }
 
   render() {
@@ -129,30 +134,30 @@ class CreateCMSManagementPage extends Component {
             <div className="form-row marBtm30 col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
                 <label htmlFor="Language">{Translations.cms.language}</label>
-                <select name="language" id="" onBlur={this.handleChangeField} onChange={this.handleChangeField} value={form.language} >
+                <select name="language" id="" onBlur={this.handleChangeField} onChange={this.handleChangeField} value={form.pageLanguage} >
                   <option value="English">English</option>
                   <option value="German">German</option>
                 </select>
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="Display page">{Translations.cms.displal_page}</label>
+                <label htmlFor="Display page">{Translations.cms.display_page}</label>
                 <div className="choice-wrapr">
                   <div className="choice" onChange={this.handleChangeField}>
                     <input
                       type="radio"
-                      name="displal_page"
+                      name="display_page"
                       value={Translations.cms.public}
-                      defaultChecked={form.displal_page === Translations.cms.public}
+                      defaultChecked={form.displayPage === Translations.cms.public}
                     />
                     <label htmlFor="Public">{Translations.cms.public}</label>
                   </div>
                   <div className="choice" onChange={this.handleChangeField}>
                     <input
                       type="radio"
-                      name="displal_page"
+                      name="display_page"
                       value={Translations.cms.draft}
-                      defaultChecked={form.displal_page === Translations.cms.draft}
+                      defaultChecked={form.displayPage === Translations.cms.draft}
                     />
                     <label htmlFor="Draft">{Translations.cms.draft}</label>
                   </div>
@@ -171,7 +176,7 @@ class CreateCMSManagementPage extends Component {
                 {Translations.cms.cancle}
                 </button>
               </Link>
-              <button type="button" className="form-btn">
+              <button type="button" className="form-btn" onClick={this.handlePreview}>
                 {Translations.cms.preview}
               </button>
               <button
@@ -202,6 +207,7 @@ CreateCMSManagementPage.propTypes = {
   getCMSDetail: PropTypes.func.isRequired,
   updateCMS: PropTypes.func.isRequired,
   createCMS: PropTypes.func.isRequired,
+  handleModalInfoDetailsShow: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
   match: PropTypes.any,
   history: PropTypes.any

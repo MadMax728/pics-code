@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectDailyBudget extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class SelectDailyBudget extends Component {
         onBlur={this.handleOffer}
         options={dailyBudgetList}
       >
-        <option value="">{"Select Daily Budget"}</option>
+        <option value="">{Translations.select_daily_budget}</option>
         {dailyBudgetList.map(option => (
           <option value={option.amount} key={option.id}>
             {option.dailyBudget}

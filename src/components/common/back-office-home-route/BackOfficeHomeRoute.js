@@ -48,6 +48,14 @@ class BackOfficeHomeRoute extends Component {
     return <PageNotFound className={"page-not-found-wrapr"} />;
   };
 
+  handleCreateCMSManagementPage = (match) => {
+    return <CreateCMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} match={match.match} />
+  }
+  
+  handleCMSManagementPage= () => {
+    return <CMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} />
+  }
+
   render() {
     return (
       <div>
@@ -62,19 +70,19 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
             exact
-            component={CMSManagementPage}
+            component={this.handleCMSManagementPage}
           />
 
           <Route
             path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
             exact
-            component={CreateCMSManagementPage}
+            component={this.handleCreateCMSManagementPage}
           />
 
           <Route
             path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
             exact
-            component={CreateCMSManagementPage}
+            component={this.handleCreateCMSManagementPage}
           />
 
           <Route
@@ -154,7 +162,8 @@ class BackOfficeHomeRoute extends Component {
 }
 
 BackOfficeHomeRoute.propTypes = {
-  handleModalInfoShow: PropTypes.func.isRequired
+  handleModalInfoShow: PropTypes.func.isRequired,
+  handleModalInfoDetailsShow: PropTypes.func.isRequired,
 };
 
 export default BackOfficeHomeRoute;
