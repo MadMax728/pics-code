@@ -15,6 +15,9 @@ class MLeftContainer extends Component {
       activeIndex: "1",
       userList: []
     };
+  }
+
+  componentDidMount() {
     this.handleUserListCase(1);
   }
 

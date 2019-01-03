@@ -3,6 +3,9 @@ import io from "socket.io-client";
 import { Auth } from "../../../../auth";
 import MLeftContainer from './MLeftContainer';
 import MRightContainer from './MRightContainer';
+import { connect } from "react-redux";
+import { getMessages } from "../../../../actions";
+import PropTypes from "prop-types";
 
 class Messages extends Component {
   
@@ -26,6 +29,14 @@ class Messages extends Component {
         this.socket.emit('communication-message-board-join', {
             recipientId: user.id,
             senderId: this.state.me
+        });
+        this.props.getMessages(this.state.me, user.id).then(() => {
+            const  { messagesData } = this.props;
+            if(messagesData && !messagesData.isLoading && messagesData.messages) {
+                this.setState({
+                    messages: messagesData.messages
+                })
+            }
         });
     }
 
@@ -56,5 +67,22 @@ class Messages extends Component {
 
 }
   
-export default Messages;
+
+Messages.propTypes = {
+    getMessages: PropTypes.func.isRequired,
+    messagesData: PropTypes.any,
+};
+  
+const mapStateToProps = state => ({
+    messagesData: state.messagesData
+});
+  
+const mapDispatchToProps = {
+    getMessages
+};
+  
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Messages);
   
