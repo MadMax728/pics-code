@@ -15,6 +15,7 @@ class MLeftContainer extends Component {
       activeIndex: "1",
       userList: []
     };
+    this.handleUserListCase(1);
   }
 
   getUserList = (type='subscribed') => {

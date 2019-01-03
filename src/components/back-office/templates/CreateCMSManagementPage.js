@@ -203,7 +203,7 @@ CreateCMSManagementPage.propTypes = {
   updateCMS: PropTypes.func.isRequired,
   createCMS: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
-  match: PropTypes.any
+  match: PropTypes.any,
   history: PropTypes.any
 };
 
