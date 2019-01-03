@@ -218,6 +218,13 @@ const initialState = {
     hashTags: null,
     isLoading: false,
     error: false
+  },
+  messagesData: {
+    messages: [],
+    senderId: null,
+    recipientId: null,
+    isLoading: false,
+    error: false
   }
 };
 
