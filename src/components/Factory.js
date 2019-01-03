@@ -17,9 +17,6 @@ export const toTitleCase = str => {
 // call this function, passing-in your date
 function dateToFromNowDaily( myDate, formatStr ) {
 
-  // get from-now for this date
-  var fromNow = moment( myDate ).fromNow();
-
   // ensure the date is displayed with today and yesterday
   return moment( myDate ).calendar( null, {
       // when the date is closer, specify custom values
