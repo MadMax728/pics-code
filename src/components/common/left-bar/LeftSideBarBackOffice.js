@@ -41,6 +41,12 @@ class LeftSideBarBackOffice extends Component {
         />
 
         <Route
+            path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
+            exact
+            component={SideBarBackOffice}
+        />
+
+        <Route
           path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
           exact
           component={SideBarBackOffice}
@@ -190,6 +196,12 @@ class LeftSideBarBackOffice extends Component {
 
         <Route
           path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
           exact
           component={SideBarSettingBackOffice}
         />

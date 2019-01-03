@@ -72,6 +72,12 @@ class BackOfficeHomeRoute extends Component {
           />
 
           <Route
+            path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
+            exact
+            component={CreateCMSManagementPage}
+          />
+
+          <Route
             path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
             exact
             component={AddAdminPage}

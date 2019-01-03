@@ -124,6 +124,7 @@ export const BACK_OFFICE_PROFILE_ROUTE = "/back-office/profile";
 export const BACK_OFFICE_DASHBOARD_ROUTE = "/back-office/dashboard";
 export const BACK_OFFICE_CMS_MANAGMENT_ROUTE = "/back-office/cms-managment";
 export const BACK_OFFICE_CREATE_CMS_ROUTE = "/back-office/cms-managment/create";
+export const BACK_OFFICE_EDIT_CMS_ROUTE = "/back-office/cms-managment/:id";
 export const BACK_OFFICE_ADD_ADMIN_ROUTE = "/back-office/add-admin";
 export const BACK_OFFICE_ADD_VERIFICATION_ROUTE =
   "/back-office/add-verification";

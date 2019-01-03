@@ -3,20 +3,52 @@ import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.cs
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import { TextEditor } from "../../ui-kit/text-editor";
+import { Translations } from "../../../lib/translations";
+import { getCMSDetail, updateCMS, createCMS } from "../../../actions";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class CreateCMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       form: {
+        id: "",
         title: "",
         url: "",
         language: "",
-        displal_page: "public",
+        displal_page: Translations.cms.public,
         description: ""
-      }
+      },
+      isEdit: false
     };
   }
+
+  componentDidMount = () => {
+    const isEdit =
+      this.props.match && this.props.match.params.id ? true : false;
+    this.setState({ isEdit });
+    if (isEdit) {
+      this.props.getCMSDetail(this.props.match.params.id).then(() => {
+        if (
+          this.props.cmsManagementData &&
+          this.props.cmsManagementData.cmsDetail
+        ) {
+          this.setState({
+            form: {
+              ...this.state.form,
+              id: this.props.cmsManagementData.cmsDetail.id,
+              title: this.props.cmsManagementData.cmsDetail.title,
+              url: this.props.cmsManagementData.cmsDetail.url,
+              language: this.props.cmsManagementData.cmsDetail.pageLanguage,
+              displal_page: this.props.cmsManagementData.cmsDetail.displayPage,
+              description: this.props.cmsManagementData.cmsDetail.description
+            }
+          });
+        }
+      });
+    }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -24,92 +56,142 @@ class CreateCMSManagementPage extends Component {
     this.setState({ form });
   };
 
+  validationForm = () => {
+    const { form } = this.state;
+    return form.title && form.language && form.url && form.description;
+  };
+
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
+    const { form, isEdit } = this.state;
+    if (this.validationForm()) {
+      if (isEdit) {
+        const data = {
+          id: form.id,
+          url: form.url,
+          description: form.description,
+          displayPage: form.displal_page,
+          language: form.language,
+          title: form.title
+        };
+        this.props.updateCMS(data).then(() => {
+          this.props.history.goBack();
+        });
+      } else {
+        const data = {
+          url: form.url,
+          description: form.description,
+          displayPage: form.displal_page,
+          language: form.language,
+          title: form.title
+        };
+        this.props.createCMS(data).then(() => {
+          this.props.history.goBack();
+        });
+      }
+    }
+  };
+
+  handleContentChange = text => {
+    const { form } = this.state;
+    form.description = text === "<p></p>" ? "" : text;
+    this.setState({ form });
   };
 
   render() {
-    const { form } = this.state;
+    const { form, isEdit } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="create-cms-page-wrapr">
           <div className="page-heading col-xs-12 mar-btm-5">
-            Create new CMS page
+            {isEdit ? Translations.cms.edit : Translations.cms.create}
           </div>
-          <form className="cms-form col-xs-12 ">
+          <form className="cms-form col-xs-12" onSubmit={this.handleSubmit}>
             <div className="form-row col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
                 <label htmlFor="Title of page" className="col-xs">
-                  Title of page
+                  {Translations.cms.title_of_page}
                 </label>
                 <input
                   type="text"
                   name="title"
+                  defaultValue={form.title}
                   onChange={this.handleChangeField}
                 />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="URL">URL</label>
+                <label htmlFor="URL">{Translations.cms.url}</label>
                 <input
                   type="text"
                   name="url"
+                  defaultValue={form.url}
                   onChange={this.handleChangeField}
                 />
               </div>
             </div>
             <div className="form-row marBtm30 col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Language">Language</label>
-                <select name="language" id="" onBlur={this.handleChangeField}>
-                  <option value="">Item1</option>
-                  <option value="">Item2</option>
-                  <option value="">Item3</option>
+                <label htmlFor="Language">{Translations.cms.language}</label>
+                <select
+                  name="language"
+                  id=""
+                  onBlur={this.handleChangeField}
+                  onChange={this.handleChangeField}
+                  value={form.language}
+                >
+                  <option value="English">English</option>
+                  <option value="German">German</option>
                 </select>
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="Display page">Display page</label>
+                <label htmlFor="Display page">
+                  {Translations.cms.displal_page}
+                </label>
                 <div className="choice-wrapr">
                   <div className="choice" onChange={this.handleChangeField}>
                     <input
                       type="radio"
                       name="displal_page"
-                      value="public"
-                      defaultChecked={form.displal_page === "public"}
+                      value={Translations.cms.public}
+                      defaultChecked={
+                        form.displal_page === Translations.cms.public
+                      }
                     />
-                    <label htmlFor="Public">Public</label>
+                    <label htmlFor="Public">{Translations.cms.public}</label>
                   </div>
                   <div className="choice" onChange={this.handleChangeField}>
                     <input
                       type="radio"
                       name="displal_page"
-                      value="default"
-                      defaultChecked={form.displal_page === "default"}
+                      value={Translations.cms.draft}
+                      defaultChecked={
+                        form.displal_page === Translations.cms.draft
+                      }
                     />
-                    <label htmlFor="Default">Default</label>
+                    <label htmlFor="Draft">{Translations.cms.draft}</label>
                   </div>
                 </div>
               </div>
             </div>
             <div className="form-row col-xs-12 res480">
-              <TextEditor />
+              <TextEditor
+                handleContentChange={this.handleContentChange}
+                contentText={form.description}
+              />
             </div>
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
                 <button type="button" className="form-btn">
-                  Cancel
+                  {Translations.cms.cancle}
                 </button>
               </Link>
               <button type="button" className="form-btn">
-                Preview
+                {Translations.cms.preview}
               </button>
-              <button
-                type="button"
-                className="form-btn"
-                onClick={this.handleSubmit}
-              >
-                Save
+              <button type="submit" className="form-btn">
+                {isEdit ? Translations.cms.update : Translations.cms.save}
               </button>
             </div>
           </form>
@@ -119,4 +201,26 @@ class CreateCMSManagementPage extends Component {
   }
 }
 
-export default CreateCMSManagementPage;
+const mapStateToProps = state => ({
+  cmsManagementData: state.cmsManagementData
+});
+
+const mapDispatchToProps = {
+  getCMSDetail,
+  updateCMS,
+  createCMS
+};
+
+CreateCMSManagementPage.propTypes = {
+  getCMSDetail: PropTypes.func.isRequired,
+  updateCMS: PropTypes.func.isRequired,
+  createCMS: PropTypes.func.isRequired,
+  cmsManagementData: PropTypes.object,
+  match: PropTypes.any,
+  history: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateCMSManagementPage);
