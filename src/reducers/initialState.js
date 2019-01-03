@@ -216,6 +216,11 @@ const initialState = {
     hashTags: null,
     isLoading: false,
     error: false
+  },
+  hashTagData: {
+    hashTags: null,
+    isLoading: false,
+    error: false
   }
 };
 

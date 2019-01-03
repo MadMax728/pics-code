@@ -3,7 +3,7 @@ import * as hashUserService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 
-const getHashUserStarted = (isFor) => ({
+const getHashUserStarted = isFor => ({
   type: types.GET_HASH_USER_STARTED,
   isFor
 });
