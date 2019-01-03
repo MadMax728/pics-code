@@ -74,3 +74,16 @@ export const getTargetGroup = data => {
     dispatch(getTargetGroupSucceeded(data));
   };
 };
+
+
+const getLanguageSucceeded = data => ({
+  type: types.GET_LANGUAGE_SUCCEEDED,
+  payload: data
+});
+
+export const getLanguage = data => {
+  return dispatch => {
+    dispatch(getLanguageSucceeded(data));
+  };
+};
+

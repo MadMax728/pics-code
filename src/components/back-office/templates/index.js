@@ -6,6 +6,8 @@ export { default as AddVerificationPage } from "./AddVerificationPage";
 export { default as AddVoucherPage } from "./AddVoucherPage";
 export { default as DataDownloadPage } from "./DataDownloadPage";
 export { default as ReportedSearchBar } from "./ReportedSearchBar";
+export { default as CMSPreview } from "./CMSPreview";
+export { default as CMSPreviewHeader } from "./CMSPreviewHeader";
 
 
 export { 

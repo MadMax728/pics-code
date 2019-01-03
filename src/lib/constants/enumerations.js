@@ -34,7 +34,8 @@ export const modalType = {
   edit_profile: "edit_profile",
   share: "share",
   confirmation: "confirmation",
-  subscribe: "subscribe"
+  subscribe: "subscribe",
+  cmsPreview: "cmsPreview"
 };
 
 export const mediaTypes = {

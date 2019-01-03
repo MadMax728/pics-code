@@ -45,5 +45,6 @@ export {
   SelectPeriod,
   SelectAmount, 
   SelectType, 
-  SelectNumber
+  SelectNumber,
+  SelectLanguage
 } from "./selects";

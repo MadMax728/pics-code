@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Translations } from "../../../../lib/translations";
 import * as images from "../../../../lib/constants/images";
 import { DateFormat } from "../../../Factory";
 
@@ -15,30 +16,39 @@ const MRightActiveChat = (
             if(!items || !items.length){
                 return '';
             }            
-            return items.map((item) => (
+            return items.map((item, key) => (
                 <div key={item.id}> 
-                    <div className="date">{ DateFormat(item.createdAt) }</div>
+                    { 
+                        key === 0 && (
+                            <div className="date">{ DateFormat(item.createdAt) }</div>
+                        )
+                    }
+                    { 
+                        key > 0 && (DateFormat(items[key - 1].createdAt) !== DateFormat(item.createdAt)) && (
+                            <div className="date">{ DateFormat(item.createdAt) }</div>
+                        )
+                    }
                     <div>
-                    { me === item.senderId && (
-                        <div className="reply"
-                            role="presentation"
-                            onKeyPress={handleMessageClick}
-                            onClick={handleMessageClick}>
-                             { item.content }
-                             <span className="time">{ DateFormat(item.createdAt) }</span>
-                        </div>
-                    )}
+                        { me === item.senderId && (
+                            <div className="reply"
+                                role="presentation"
+                                onKeyPress={handleMessageClick}
+                                onClick={handleMessageClick}>
+                                { item.content }
+                                <span className="time">{ DateFormat(item.createdAt, Translations.date_format.time, true) }</span>
+                            </div>
+                        )}
 
-                     { me !== item.senderId && (
-                        <div className="response"
-                            role="presentation"
-                            onKeyPress={handleMessageClick}
-                            onClick={handleMessageClick}>
-                             { item.content }
-                             <span className="time">{ DateFormat(item.createdAt) }</span>
-                        </div>
-                    )}
-                </div>
+                        { me !== item.senderId && (
+                            <div className="response"
+                                role="presentation"
+                                onKeyPress={handleMessageClick}
+                                onClick={handleMessageClick}>
+                                { item.content }
+                                <span className="time">{ DateFormat(item.createdAt, Translations.date_format.time, true) }</span>
+                            </div>
+                        )}
+                    </div>
                 </div>
             ));
         };

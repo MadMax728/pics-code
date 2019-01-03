@@ -1,21 +1,21 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const messageReducer = (state = initialState.aboutData, action) => {
+const messageReducer = (state = initialState.messagesData, action) => {
   switch (action.type) {
-    case types.GET_ABOUT_STARTED:
+    case types.GET_MESSAGES_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_ABOUT_SUCCEEDED:
+    case types.GET_MESSAGES_SUCCEEDED:
       return {
         ...state,
-        about: action.payload,
+        messages: action.payload,
         isLoading: false
       };
-    case types.GET_ABOUT_FAILED:
+    case types.GET_MESSAGES_FAILED:
       return {
         ...state,
         isLoading: false,

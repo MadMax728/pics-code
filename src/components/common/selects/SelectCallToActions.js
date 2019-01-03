@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectCallToActions extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class SelectCallToActions extends Component {
         onBlur={this.handleCallToActions}
         options={callToActionList}
       >
-        <option value="">{"Select Call to Action"}</option>
+        <option value="">{Translations.call_to_action}</option>
         {callToActionList.map(option => (
           <option value={option.id} key={option.id}>
             {option.callToActionName}

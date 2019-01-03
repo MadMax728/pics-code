@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectCategory extends Component {
   constructor(props) {
@@ -42,7 +43,7 @@ class SelectCategory extends Component {
         onBlur={this.handleCategory}
         options={categoryList}
       >
-        <option value="">{"Select Category"}</option>
+        <option value="">{Translations.select_category}</option>
         {categoryList.map(option => (
           <option value={option.id} key={option.id}>
             {option.categoryName}

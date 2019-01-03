@@ -55,7 +55,6 @@ class SelectTargetGroup extends Component {
   };
 
   render() {
-    const { targetGroupList } = this.state;
     const { value, className } = this.props;
     return (
       <select
@@ -65,7 +64,7 @@ class SelectTargetGroup extends Component {
         onBlur={this.handleTargetGroup}
         options={targetGroupData}
       >
-        <option value="">{"Select Target Group"}</option>
+        <option value="">{Translations.select_target_group}</option>
         {targetGroupData.map(option => (
           <option value={option.id} key={option.id}>
             {option.value}

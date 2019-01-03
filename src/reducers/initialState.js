@@ -136,6 +136,7 @@ const initialState = {
     amounts: null,
     types: null,
     numbers: null,
+    languages: null,
     isLoading: false,
     error: false
   },
@@ -220,6 +221,13 @@ const initialState = {
   },
   hashTagData: {
     hashTags: null,
+    isLoading: false,
+    error: false
+  },
+  messagesData: {
+    messages: [],
+    senderId: null,
+    recipientId: null,
     isLoading: false,
     error: false
   }

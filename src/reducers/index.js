@@ -30,6 +30,7 @@ import searchData from "./searchReducer";
 import hashUserData from "./hashUserReducer";
 import subscribeData from "./subscribeReducer";
 import hashTagData from "./hashTagReducer";
+import messagesData from "./messageReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -62,7 +63,8 @@ const rootReducer = combineReducers({
   searchData,
   hashUserData,
   subscribeData,
-  hashTagData
+  hashTagData,
+  messagesData
 });
 
 export default rootReducer;

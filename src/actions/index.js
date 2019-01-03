@@ -23,3 +23,5 @@ export * from "./profileSettings";
 export * from "./search";
 export * from "./hashUser";
 export * from "./hashTag";
+export * from "./messages";
+

@@ -9,7 +9,8 @@ import {
   ShareModal,
   ConfirmationModal,
   ErrorModal,
-  SubscribeModal
+  SubscribeModal,
+  CMSPreviewModal
 } from "../../web/modals";
 import PropTypes from "prop-types";
 import { modalType } from "../../../lib/constants/enumerations";
@@ -105,6 +106,16 @@ class InfoModal extends Component {
     );
   };
 
+  handleModalCMSPreview = () => {    
+    return (
+      <CMSPreviewModal
+        modalInfoShow={this.props.modalInfoShow}
+        handleModalInfoHide={this.props.handleModalInfoHide}
+        modalInfo={this.props.modalInfo}
+      />
+    )
+  }
+
   handleModalRender = () => {
     return (
       <div>
@@ -124,6 +135,8 @@ class InfoModal extends Component {
           this.handleModalError()}
         {this.props.modalInfoType === modalType.subscribe &&
           this.handleModalSubscribe()}
+        {this.props.modalInfoType === modalType.cmsPreview &&
+          this.handleModalCMSPreview()}
       </div>
     );
   };
@@ -145,6 +158,7 @@ InfoModal.propTypes = {
   modalInfoMsg: PropTypes.string,
   handleEditImage: PropTypes.func,
   handleProfile: PropTypes.func,
+  modalInfo: PropTypes.any,
   image: PropTypes.any,
   profile: PropTypes.any
 };

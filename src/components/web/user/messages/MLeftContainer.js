@@ -17,6 +17,10 @@ class MLeftContainer extends Component {
     };
   }
 
+  componentDidMount() {
+    this.handleUserListCase(1);
+  }
+
   getUserList = (type='subscribed') => {
       this.setState({ userList : [] });
       this.props.getUserList(type).then(() => {
