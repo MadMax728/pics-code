@@ -12,7 +12,8 @@ class BackOfficeHome extends Component {
     super(props, context);
     this.state = {
       modalInfoShow: false,
-      modalInfoType: ""
+      modalInfoType: "",
+      modalInfo: null,
     };
   }
 
@@ -24,6 +25,10 @@ class BackOfficeHome extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
+  handleModalInfoDetailsShow = (e, info) => {   
+    this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -32,14 +37,16 @@ class BackOfficeHome extends Component {
   handleModalHide = () => {};
 
   render() {
+    const { modalInfo, modalInfoShow, modalInfoType} = this.state;
     return (
       <div>
         <section>
           <InfoModal
-            modalInfoShow={this.state.modalInfoShow}
+            modalInfoShow={modalInfoShow}
             handleModalInfoHide={this.handleModalInfoHide}
-            modalInfoType={this.state.modalInfoType}
+            modalInfoType={modalInfoType}
             handleModalHide={this.handleModalHide}
+            modalInfo={modalInfo}
           />
 
           <div className="container">
@@ -51,6 +58,7 @@ class BackOfficeHome extends Component {
               <div>
                 <BackOfficeHomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
+                  handleModalInfoDetailsShow={this.handleModalInfoDetailsShow}
                 />
               </div>
 

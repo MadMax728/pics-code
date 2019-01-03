@@ -167,7 +167,6 @@ class CMSManagementPage extends Component {
 
   handleSelect = (isFor , selected) => {
     this.setState({ language: selected });
-    
     if (this.state.language !== selected)
     {
       const url = selected === Translations.base_footer.language? `/cmspages` : `/cmspages?language=${selected}`;

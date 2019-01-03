@@ -7,6 +7,7 @@ import { Translations } from "../../../lib/translations";
 import { getCMSDetail, updateCMS, createCMS } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class CreateCMSManagementPage extends Component {
   constructor(props, context) {
@@ -16,8 +17,8 @@ class CreateCMSManagementPage extends Component {
         id: "",
         title: "",
         url: "",
-        language: "",
-        displal_page: Translations.cms.public,
+        language: Translations.languages.english,
+        display_page: Translations.cms.public,
         description: ""
       },
       isEdit: false,
@@ -36,7 +37,7 @@ class CreateCMSManagementPage extends Component {
               title: this.props.cmsManagementData.cmsDetail.title,
               url: this.props.cmsManagementData.cmsDetail.url,
               language: this.props.cmsManagementData.cmsDetail.pageLanguage,
-              displal_page: this.props.cmsManagementData.cmsDetail.displayPage,
+              display_page: this.props.cmsManagementData.cmsDetail.displayPage,
               description: this.props.cmsManagementData.cmsDetail.description
             }
           })
@@ -66,7 +67,7 @@ class CreateCMSManagementPage extends Component {
           id: form.id,
           url: form.url,
           description: form.description,
-          displayPage: form.displal_page,
+          displayPage: form.display_page,
           language: form.language,
           title: form.title
         }
@@ -78,7 +79,7 @@ class CreateCMSManagementPage extends Component {
         const data = {
           url: form.url,
           description: form.description,
-          displayPage: form.displal_page,
+          displayPage: form.display_page,
           language: form.language,
           title: form.title
         }
@@ -93,6 +94,11 @@ class CreateCMSManagementPage extends Component {
     const { form } = this.state;
     form.description = text === "<p></p>"? "" : text;
     this.setState({ form });
+  }
+
+  handlePreview = () => {
+
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview,this.state.form);
   }
 
   render() {
@@ -136,23 +142,23 @@ class CreateCMSManagementPage extends Component {
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="Display page">{Translations.cms.displal_page}</label>
+                <label htmlFor="Display page">{Translations.cms.display_page}</label>
                 <div className="choice-wrapr">
                   <div className="choice" onChange={this.handleChangeField}>
                     <input
                       type="radio"
-                      name="displal_page"
+                      name="display_page"
                       value={Translations.cms.public}
-                      defaultChecked={form.displal_page === Translations.cms.public}
+                      defaultChecked={form.display_page === Translations.cms.public}
                     />
                     <label htmlFor="Public">{Translations.cms.public}</label>
                   </div>
                   <div className="choice" onChange={this.handleChangeField}>
                     <input
                       type="radio"
-                      name="displal_page"
+                      name="display_page"
                       value={Translations.cms.draft}
-                      defaultChecked={form.displal_page === Translations.cms.draft}
+                      defaultChecked={form.display_page === Translations.cms.draft}
                     />
                     <label htmlFor="Draft">{Translations.cms.draft}</label>
                   </div>
@@ -171,7 +177,7 @@ class CreateCMSManagementPage extends Component {
                 {Translations.cms.cancle}
                 </button>
               </Link>
-              <button type="button" className="form-btn">
+              <button type="button" className="form-btn" onClick={this.handlePreview}>
                 {Translations.cms.preview}
               </button>
               <button
@@ -202,6 +208,7 @@ CreateCMSManagementPage.propTypes = {
   getCMSDetail: PropTypes.func.isRequired,
   updateCMS: PropTypes.func.isRequired,
   createCMS: PropTypes.func.isRequired,
+  handleModalInfoDetailsShow: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
   match: PropTypes.any,
   history: PropTypes.any

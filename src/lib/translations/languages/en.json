@@ -155,7 +155,8 @@
     "create_campaign": "Create Campaign",
     "upload_image": "Upload image",
     "create_ad": "Create Ad",
-    "edit_profile_image": "Edit Profile Image"
+    "edit_profile_image": "Edit Profile Image",
+    "cms_preview": "CMS Preview"
   },
 
   "notification": {
@@ -735,7 +736,8 @@
     "cancle": "Cancel",
     "preview": "Preview",
     "save": "Save",
-    "update": "Update"
+    "update": "Update",
+    "description": "Description"
   },
   "admin": {
     "Add_admin": "Add admin",
