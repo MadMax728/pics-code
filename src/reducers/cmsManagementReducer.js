@@ -19,6 +19,7 @@ const cmsManagementReducer = (state = initialState.cmsManagementData, action) =>
     case types.GET_CMS_MANAGEMENT_FAILED:
       return {
         ...state,
+        cmsManagement: [],
         isLoading: false,
         error: action.payload
       };

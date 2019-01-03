@@ -32,6 +32,13 @@ const selectReducer = (state = initialState.selectData, action) => {
         isLoading: false
       };
 
+    // Static Data,  In future would remove as when require
+    case types.GET_LANGUAGE_SUCCEEDED:
+      return {
+        ...state,
+        languages: action.payload,
+        isLoading: false
+      };
     default:
       return state;
   }

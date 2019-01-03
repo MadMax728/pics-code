@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectRadius extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class SelectRadius extends Component {
         onBlur={this.handleRadius}
         options={radiusList}
       >
-        <option value="">{"Select Radius"}</option>
+        <option value="">{Translations.select_radius}</option>
         {radiusList.map(option => (
           <option value={option.id} key={option.id}>
             {option.radiusName}

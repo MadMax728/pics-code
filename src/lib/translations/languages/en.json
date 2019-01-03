@@ -773,6 +773,14 @@
     "rank3": "rank3"
   },
 
+  "call_to_action": "Select Call to Action",
+  "select_category": "Select Category",
+  "select_daily_budget": "Select Daily Budget",
+  "select_inquiry": "Select Inquiry",
+  "select_offer": "Select Offer",
+  "select_radius": "Select Radius",
+  "select_target_group": "Select Target Group",
+
   "error": {
     "create_modal": {
       "title": "Plaese Enter Title",

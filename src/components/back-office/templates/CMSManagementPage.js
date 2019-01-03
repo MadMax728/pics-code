@@ -7,12 +7,14 @@ import { getCMSManagement } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { DateFormat } from "../../Factory";
+import { SelectLanguage } from "../../common";
 
 class CMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      cmsManagement: null
+      cmsManagement: null,
+      language: Translations.base_footer.language
     };
   }
 
@@ -163,8 +165,24 @@ class CMSManagementPage extends Component {
     )
   }
 
+  handleSelect = (isFor , selected) => {
+    this.setState({ language: selected });
+    
+    if (this.state.language !== selected)
+    {
+      const url = selected === Translations.base_footer.language? `/cmspages` : `/cmspages?language=${selected}`;
+      this.props.getCMSManagement(url).then(()=> {
+        if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
+          this.setState({
+            cmsManagement: this.props.cmsManagementData.cmsManagement
+          })
+        }
+      });
+    }
+  }
+
   render() {
-    const { cmsManagement } = this.state;
+    const { cmsManagement, language } = this.state;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -176,11 +194,10 @@ class CMSManagementPage extends Component {
                 <i className="glyphicon glyphicon-plus-sign" />
               </button>{" "}
             </Link>
-            <select>
-              <option>Language </option>
-              <option>Option 1 </option>
-              <option>Option 2 </option>
-            </select>
+            <SelectLanguage 
+              value={language}
+              handleSelect={this.handleSelect}
+            />
           </div>
           {cmsManagement && this.renderCMSManagement()}
         </div>
