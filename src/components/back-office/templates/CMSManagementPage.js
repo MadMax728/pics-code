@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { DateFormat } from "../../Factory";
 import { SelectLanguage } from "../../common";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class CMSManagementPage extends Component {
   constructor(props, context) {
@@ -19,13 +20,23 @@ class CMSManagementPage extends Component {
   }
 
   optionsFormatter = (cell, row, rowIndex) => {   
+    const data = { 
+      title: row.title,
+      url: row.url,
+      pageLanguage: row.pageLanguage,
+      displayPage: row.displayPage,
+      description: row.description
+    }
+
     return (
       <div key={rowIndex}>
         <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row.id}`}>Edit</Link>
-        <Link to={""}>Preview</Link>
+        <div role="button" tabIndex="0" onKeyDown={this.handleKeyDown}  onClick={() => this.handlePreview(data)}>Preview</div>
       </div>
     );
   };
+
+  handleKeyDown = () => {}
 
   // https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
   // used for formatter
@@ -180,6 +191,10 @@ class CMSManagementPage extends Component {
     }
   }
 
+  handlePreview = (data) => {
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview,data);
+  }
+
   render() {
     const { cmsManagement, language } = this.state;
 
@@ -216,6 +231,7 @@ const mapDispatchToProps = {
 CMSManagementPage.propTypes = {
   getCMSManagement: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
+  handleModalInfoDetailsShow: PropTypes.func.isRequired
 };
 
 export default connect(

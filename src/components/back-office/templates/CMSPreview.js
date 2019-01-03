@@ -38,7 +38,7 @@ class CMSPreview extends Component {
                 {Translations.cms.language} :
                 </label>
                 <label htmlFor="language" className="col-xs">
-                  {form.language}
+                  {form.pageLanguage}
                 </label>
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">

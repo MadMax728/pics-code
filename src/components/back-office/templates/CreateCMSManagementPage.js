@@ -17,8 +17,8 @@ class CreateCMSManagementPage extends Component {
         id: "",
         title: "",
         url: "",
-        language: Translations.languages.english,
-        display_page: Translations.cms.public,
+        pageLanguage: Translations.languages.english,
+        displayPage: Translations.cms.public,
         description: ""
       },
       isEdit: false,
@@ -26,7 +26,7 @@ class CreateCMSManagementPage extends Component {
   }
 
   componentDidMount = () => {
-    const isEdit = (this.props.match && this.props.match.params.id)? true : false
+    const isEdit = !!((this.props.match && this.props.match.params.id))
     this.setState({ isEdit });
     if (isEdit) {
       this.props.getCMSDetail(this.props.match.params.id).then(()=> {
@@ -54,7 +54,7 @@ class CreateCMSManagementPage extends Component {
 
   validationForm = () => {
     const { form } = this.state;
-    return form.title && form.language && form.url && form.description;
+    return form.title && form.pageLanguage && form.url && form.description;
   }
 
   // handelSubmit called when click on submit
@@ -67,8 +67,8 @@ class CreateCMSManagementPage extends Component {
           id: form.id,
           url: form.url,
           description: form.description,
-          displayPage: form.display_page,
-          language: form.language,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
           title: form.title
         }
         this.props.updateCMS(data).then(()=> {
@@ -79,8 +79,8 @@ class CreateCMSManagementPage extends Component {
         const data = {
           url: form.url,
           description: form.description,
-          displayPage: form.display_page,
-          language: form.language,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
           title: form.title
         }
         this.props.createCMS(data).then(()=> {
@@ -97,7 +97,6 @@ class CreateCMSManagementPage extends Component {
   }
 
   handlePreview = () => {
-
     this.props.handleModalInfoDetailsShow(modalType.cmsPreview,this.state.form);
   }
 
@@ -135,7 +134,7 @@ class CreateCMSManagementPage extends Component {
             <div className="form-row marBtm30 col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
                 <label htmlFor="Language">{Translations.cms.language}</label>
-                <select name="language" id="" onBlur={this.handleChangeField} onChange={this.handleChangeField} value={form.language} >
+                <select name="language" id="" onBlur={this.handleChangeField} onChange={this.handleChangeField} value={form.pageLanguage} >
                   <option value="English">English</option>
                   <option value="German">German</option>
                 </select>
@@ -149,7 +148,7 @@ class CreateCMSManagementPage extends Component {
                       type="radio"
                       name="display_page"
                       value={Translations.cms.public}
-                      defaultChecked={form.display_page === Translations.cms.public}
+                      defaultChecked={form.displayPage === Translations.cms.public}
                     />
                     <label htmlFor="Public">{Translations.cms.public}</label>
                   </div>
@@ -158,7 +157,7 @@ class CreateCMSManagementPage extends Component {
                       type="radio"
                       name="display_page"
                       value={Translations.cms.draft}
-                      defaultChecked={form.display_page === Translations.cms.draft}
+                      defaultChecked={form.displayPage === Translations.cms.draft}
                     />
                     <label htmlFor="Draft">{Translations.cms.draft}</label>
                   </div>

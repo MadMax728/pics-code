@@ -51,6 +51,10 @@ class BackOfficeHomeRoute extends Component {
   handleCreateCMSManagementPage = (match) => {
     return <CreateCMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} match={match.match} />
   }
+  
+  handleCMSManagementPage= () => {
+    return <CMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} />
+  }
 
   render() {
     return (
@@ -66,7 +70,7 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
             exact
-            component={CMSManagementPage}
+            component={this.handleCMSManagementPage}
           />
 
           <Route
