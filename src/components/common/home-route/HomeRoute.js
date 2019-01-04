@@ -26,6 +26,9 @@ import {
   ParticipantPage
 } from "../../web/templates";
 
+
+import { Messages } from "../../web/user";
+
 // Static Pages which is not requre to put in template folder
 import {
   CampaignsInformation,
@@ -188,6 +191,12 @@ class HomeRoute extends Component {
             exact
             path={routes.OTHER_SAVED_ROUTE}
             component={this.handleSaved}
+          />
+
+          <Route
+            exact
+            path={routes.MESSAGES_ROUTE}
+            component={Messages}
           />
 
           <Route

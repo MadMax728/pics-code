@@ -5,6 +5,7 @@ export const EXPLORE_ROUTE = "/expore";
 export const PARTICIPANTS_ROUTE = "/participants";
 export const USERS_ROUTE = "/users";
 export const PICS_ROUTE = "/pics";
+export const MESSAGES_ROUTE = "/messages";
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const FORGOT_PASSWORD = "/check-email";
 export const CAMPAIGN_VIEW_ROUTE = "/campaign/:id";
