@@ -275,6 +275,10 @@
       "name": "Language",
       "type": "radio"
     },
+    "language_select": {
+      "name": "Language",
+      "type": "select-language"
+    },
     "relevance": {
       "name": "Relevance",
       "type": "radio"

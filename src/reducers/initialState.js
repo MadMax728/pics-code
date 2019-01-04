@@ -221,6 +221,7 @@ const initialState = {
   },
   hashTagData: {
     hashTags: null,
+    addedHashTags: null,
     isLoading: false,
     error: false
   },

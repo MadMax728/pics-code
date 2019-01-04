@@ -13,3 +13,6 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 // Username API
 export const hashTags = (payload, header = {}) =>
   api(baseUrl, header).get("/hashtags");
+
+export const addHashTag = (payload, header = {}) =>
+  api(baseUrl, header).post("/hashtags", payload);
