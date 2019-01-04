@@ -141,14 +141,14 @@ class Header extends Component {
                     <span>{Translations.navigation.campaign}</span>
                   </RouteNavItem>
 
-                  <NavItem
-                    className={`menu_messages`}
-                    nocaret={"true"}
-                    onClick={this.handleModalMessage}
+                  <RouteNavItem
+                    to={routes.MESSAGES_ROUTE}
+                    className={`menu_public`}
+                    closeMenu={this.toggleNav}
                   >
                     <span className="badge badge-danger">100</span>
                     <span>{Translations.navigation.messages}</span>
-                  </NavItem>
+                  </RouteNavItem>
 
                   <NavDropdown
                     noCaret

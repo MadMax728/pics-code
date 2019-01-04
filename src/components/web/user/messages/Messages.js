@@ -54,14 +54,14 @@ class Messages extends Component {
     render() {
         const { user, messages, me } = this.state;
         return (
-            <div className="col-xs-12 no-padding">
+            <div className="message-home">
                 <div className="messages-left">
                     <MLeftContainer selectUser={this.selectUser} me={me}/>
                 </div>
                 <div className="messages-right">
-                     <MRightContainer user={user} me={me} messages={messages}/>
+                    <MRightContainer user={user} me={me} messages={messages}/>
                 </div>
-            </div>  
+            </div>
         )
     }
 

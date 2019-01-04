@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import {
-  MessageModal,
   UploadModal,
   AdsModal,
   CampaignModal
@@ -17,15 +16,6 @@ class CustomModal extends Component {
 
     this.state = {};
   }
-
-  handleModalMessage = () => {
-    return (
-      <MessageModal
-        modalShow={this.props.modalShow}
-        handleModalHide={this.props.handleModalHide}
-      />
-    );
-  };
 
   handleModalUpload = () => {
     return (
@@ -74,8 +64,6 @@ class CustomModal extends Component {
     return (
       <div>
         {this.props.modalType === modalType.upload && this.handleModalUpload()}
-        {this.props.modalType === modalType.messages &&
-          this.handleModalMessage()}
         {this.props.modalType === modalType.ads && this.handleModalAds()}
         {this.props.modalType === modalType.campaign &&
           this.handleModalCampaign()}
