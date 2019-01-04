@@ -19,6 +19,7 @@ const reportedContentReducer = (state = initialState.reportedContentData, action
     case types.GET_BACK_OFFICE_REPORTED_CONTENT_FAILED:
       return {
         ...state,
+        [action.isFor]: [],
         isLoading: false,
         error: action.payload
       };

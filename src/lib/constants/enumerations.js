@@ -84,3 +84,10 @@ export const userType = {
   company: "company",
   creator: "creator"
 };
+
+export const reportStatusType = {
+  lock: "Processed",
+  unLock: "Not Processed",
+  doNotLock: "Not Processed",
+  normal: "Outstanding"
+}

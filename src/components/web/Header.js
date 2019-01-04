@@ -143,7 +143,7 @@ class Header extends Component {
 
                   <RouteNavItem
                     to={routes.MESSAGES_ROUTE}
-                    className={`menu_public`}
+                    className={`menu_messages`}
                     closeMenu={this.toggleNav}
                   >
                     <span className="badge badge-danger">100</span>

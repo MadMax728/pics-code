@@ -48,7 +48,7 @@ const Links = [
   }
 ];
 
-const SideBarReviewContentMenu = () => {
+const SideBarReportedContentMenu = () => {
   return (
     <LeftSidebarNav
       links={Links}
@@ -58,4 +58,4 @@ const SideBarReviewContentMenu = () => {
   );
 };
 
-export default SideBarReviewContentMenu;
+export default SideBarReportedContentMenu;

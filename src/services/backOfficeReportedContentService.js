@@ -3,16 +3,34 @@ import { api } from "../api";
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
 
-// const api = apiFactory(baseUrl);
-
 /**
  *
  * @param {*} payload
  */
 
+export const reportedContent = (payload, type="get", header = {}) => {
+  let apiURL;
+  switch (type) {
+    case "get":
+      apiURL = `/reports?reportContent=${payload.reportContent}`;
+      break;
+    case "search":
+      apiURL = `/reports?reportContent=${payload.reportContent}&searchType=${payload.searchType}`;
+      break;
+    default: 
+      apiURL = "/reports?reportContent=Image";
+      break;
+  }
+  return api(baseUrl, header).get(apiURL);
+};
+
+
 // BackOffice ImageBO API
 export const reportedContentImages = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get("/reports?"+ payload );
+
+
+  // ?reportContent="+payload.reportContent+"&searchType="+payload.searchType
 
 // BackOffice VideoBO API
 export const reportedContentVideos = (payload, header = {}) =>

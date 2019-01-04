@@ -7,7 +7,7 @@ import {
   SideBarSettingBackOffice,
   SideBarBackOffice,
   SideBarReviewMenu,
-  SideBarReviewContentMenu
+  SideBarReportedContentMenu
 } from "../menu";
 import { ReviewFilter, ReportedContentFilter } from "../filters";
 class LeftSideBarBackOffice extends Component {
@@ -75,43 +75,43 @@ class LeftSideBarBackOffice extends Component {
         <Route
           path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         {/* review menu */}

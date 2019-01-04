@@ -1,9 +1,8 @@
-export { TopBarInfo } from "./top-bar";
+  export { TopBarInfo } from "./top-bar";
 export {
   Languages,
   RightAbout,
-  RightSideBar,
-  RightSideBarBackOffice
+  RightSideBar
 } from "./right-bar";
 export { DashboardNav, CampaignNav } from "./nav-bar";
 export {
