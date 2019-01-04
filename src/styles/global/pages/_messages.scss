@@ -1,35 +1,7 @@
-.messages-modal {
-  background: #333;
-  .modal-dialog {
-    width: 915px;
-    height: 530px;
-    background: #fff;
-    top: 17%;
-    margin: 0 auto;
-    @media(max-width: 915px){
-      width: 100%;
-    }
-    .modal-content {
-      float: left;
-      width: 100%;
-      box-shadow: none;
-      border: 0px;
-      .closeBtn {
-        position: absolute;
-        right: -40px;
-        top: -25px;
-        background: transparent;
-        border: 0;
-        @media(max-width: 915px){
-          right: 10px;
-        }
-      }
-      .modal-title {
-        padding: 20px;
-        font-family: "Helvetica-Bold";
-        display: inline-block;
-        float: left;
-      }
+.message-home {
+  background: #fff;
+  width: 100%;
+  float: left;
       .title-wrapper {
         height: 60px;
         border-bottom: 2px solid #333;
@@ -331,6 +303,4 @@
           }
         }
       }
-    }
-  }
 }
