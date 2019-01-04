@@ -51,7 +51,7 @@ class VideoPlayer extends Component {
       fullyvisible: () => { 
         if(this.videoNode && this.player) {
           this.player.muted(this.mutecontrol())
-          this.player.play()
+          //this.player.play()
         }
       }, 
       percentagechange: () => {
