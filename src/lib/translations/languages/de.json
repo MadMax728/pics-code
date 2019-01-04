@@ -2,7 +2,8 @@
   "app_name": "Picstagraph",
 
   "date_format": {
-    "date": "MM/DD/YYYY"
+    "date": "MM/DD/YYYY",
+    "time": "LT"
   },
 
   "offen": "In der Picstagraph-App offenen",
@@ -47,6 +48,7 @@
     "add_location": "Add Location",
     "add_category": "Add Category",
     "add_description": "Add Description",
+    "advertisement": "Label as advertisement",
     "upload_file": "Upload File"
   },
 
@@ -114,7 +116,7 @@
     "male_female": "Female & Male",
     "company": "Company",
     "target_group": "Target group",
-    "image": "image",
+    "image": "Image",
     "video": "Video",
     "type": "Type",
     "anonymous": "Anonymous",
@@ -144,6 +146,7 @@
   "messages_modal": {
     "unknown": "Unknown",
     "messages": "Messages",
+    "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
   "modal_header": {
@@ -154,7 +157,8 @@
     "create_campaign": "Create Campaign",
     "upload_image": "Upload image",
     "create_ad": "Create Ad",
-    "edit_profile_image": "Edit Profile Image"
+    "edit_profile_image": "Edit Profile Image",
+    "cms_preview": "CMS Preview"
   },
 
   "notification": {
@@ -255,7 +259,7 @@
     "all": "All",
     "outstanding": "Outstanding",
     "processed": "Processed",
-    "not_processed": "Not processed"
+    "not_processed": "Not Processed"
   },
 
   "service_menu": {
@@ -271,6 +275,10 @@
     "language": {
       "name": "Language",
       "type": "radio"
+    },
+    "language_select": {
+      "name": "Language",
+      "type": "select-language"
     },
     "relevance": {
       "name": "Relevance",
@@ -330,6 +338,13 @@
     }
   },
 
+  "target_group": {
+    "company": "Company",
+    "female_and_male": "Female and Male",
+    "female": "Female",
+    "male": "Male"
+  },
+
   "message_module": {
     "name": "Message",
     "type": {
@@ -372,7 +387,7 @@
     "upload": "Upload",
     "create_campaign": "Create Campaign",
     "create_ad": "Create Ad",
-    "subscriber": "Subscriber",
+    "subscriber": "Subscribers",
     "subscribed": "Subscribed",
     "request_pending": "Request Pending",
     "posts": "Posts",
@@ -408,7 +423,7 @@
   },
 
   "left_sidebar_owner_menu": {
-    "news_feed": " News Feeds",
+    "news_feed": " News Feed",
     "about": "About",
     "saved": "Saved"
   },
@@ -492,7 +507,10 @@
     "header": "Do what you love",
     "subheader": "Register for free",
     "forgot_password": "Forgot password",
-    "login": "Log in"
+    "login": "Log in",
+    "username_required": "Username or Email is required.",
+    "password_required": "Password is required.",
+    "invalid_credentials": "Username or password is wrong."
   },
 
   "forgot_password": {
@@ -593,16 +611,16 @@
     }
   },
   "editProfile": {
-    "username": "Username",
+    "username": "User name",
     "category": "Category",
     "email": "Email",
     "inquiry_tag": "Inquiry-tag",
     "location": "Location",
-    "name_company": "Name/Company",
+    "name_company": "Name / Company",
     "offer_tag": "Offer-tag",
-    "phone_number": "Phone-number",
-    "profile_description": "Profile-description",
-    "website": "Website",
+    "phone_number": "Phone number",
+    "profile_description": "Profile description",
+    "website": "Web site",
     "gender": "Gender",
     "D_O_B": "Date of birth",
     "general_information": "General Information",
@@ -654,7 +672,7 @@
     "phone_number": "phone number",
     "Website": "Website",
     "Activate": "Activate business profile",
-    "By_clicking_on_register_you_agree_to_our": "By clicking on register you agree to our"
+    "By_clicking_on_register_you_agree_to_our": "By clicking on activate you agree to our"
   },
   "bill_and_receipts": {
     "Ad_Campaign_title": "Ad / Campaign title",
@@ -672,5 +690,126 @@
     "Email_ID_should_be_valid": "Email ID should be valid",
     "Email_is_required": "Email is required",
     "Password_is_required": "Password is required"
+  },
+  "landing": {
+    "Navigation": "Navigation",
+    "Review": "Review",
+    "Key_statistics": "Key statistics",
+    "Content_statistics": "Content statistics",
+    "Campaign_statistics_company": "Campaign statistics company",
+    "Ad_statisitcs": "Ad statisitcs",
+    "Reported_content": "Reported content",
+    "Registered_users": "Registered users",
+    "Active_users": "Active users",
+    "Deactivated_accounts": "Deactivated accounts",
+    "Turnover": "Turnover",
+    "Reviews": "Reviews",
+    "Lable": "Lable",
+    "Images": "Images",
+    "Videos": "Videos",
+    "Campaign_Company": "Campaign Company",
+    "Image_Campaign": "Image Campaign",
+    "Video_Campaign": "Video Campaign",
+    "Campaign_Creator": "Campaign Creator",
+    "Pics": "Pics",
+    "Ads": "Ads",
+    "Total": "Total",
+    "Number": "Number",
+    "Active_Campaign": "Active Campaign",
+    "Closed_Campaign": "Closed Campaign",
+    "Campaign_Temp_Closed": "Campaign Temp Closed",
+    "Potential_Turnover": "Potential Turnover",
+    "Total_Turnover": "Total Turnover",
+    "Average_conv_rate_Total": "Average conv rate Total",
+    "Active_Ads": "Active Ads",
+    "Closed_Ads": "Closed Ads",
+    "Ads_Temp_Closed": "Ads Temp Closed"
+  },
+  "cms": {
+    "create": "Create new CMS page",
+    "edit": "Edit CMS page",
+    "title_of_page": "Title of page",
+    "language": "Language",
+    "most_recent_change": "Most recent change",
+    "created_by": "Created by",
+    "options": "Options",
+    "status": "Status",
+    "cms": "CMS management",
+    "public": "Public",
+    "draft": "Draft",
+    "url": "Url",
+    "display_page": "Display page",
+    "cancle": "Cancel",
+    "preview": "Preview",
+    "save": "Save",
+    "update": "Update",
+    "description": "Description"
+  },
+  "admin": {
+    "Add_admin": "Add admin",
+    "Add": "Add",
+    "UserName": "User Name",
+    "Name": "Name",
+    "AdminStatus": "Admin Status",
+    "Verification": "Add verification",
+    "Remove_Verification": "Remove Verification",
+    "period": "Period",
+    "amount": "Amount",
+    "type": "Type",
+    "number": "Number",
+    "code": "Code",
+    "status": "status",
+    "Add_voucher_code": "Add voucher code",
+    "Data_download": "Data download",
+    "Download": "Download",
+    "Search_in_users": "Search in users"
+  },
+
+  "payment_modal": {
+    "billing_address": "Billing Address",
+    "invoice_recipient": "Invoice Recipient",
+    "street_number": "Street, number",
+    "postal_code": "Postal Code",
+    "city": "City",
+    "country": "Country",
+    "VATNO": "VAT Identification Number"
+  },
+
+  "adminRole": {
+    "rank1": "rank1",
+    "rank2": "rank2",
+    "rank3": "rank3"
+  },
+
+  "call_to_action": "Select Call to Action",
+  "select_category": "Select Category",
+  "select_daily_budget": "Select Daily Budget",
+  "select_inquiry": "Select Inquiry",
+  "select_offer": "Select Offer",
+  "select_radius": "Select Radius",
+  "select_target_group": "Select Target Group",
+
+  "error": {
+    "create_modal": {
+      "title": "Plaese Enter Title",
+      "location": "Plaese Enter Location",
+      "category": "Please Select Category",
+      "offers": "Please Select Offer",
+      "offerTag": "Please Enter Offer Tags",
+      "inquiry": "Please Select Inquiry",
+      "callToAction": "Please Select Call to Action",
+      "radius": "Please Select Radius",
+      "inquiryTag": "Please Enter Inquiry Tags",
+      "description": "Please Enter Description",
+      "date": "End Date must be greater than Start Date",
+      "budget": "Please Select Budget",
+      "invoiceRecipient": "Please Enter Invoice Recipient",
+      "postalCode": "Please Enter Postal code",
+      "city": "Please Enter City",
+      "VATNO": "Please Enter VAT Identification Number",
+      "country": "Please Enter Country",
+      "streetNumber": "Please Enter Street,Number",
+      "insertLink": "Please Enter Inset Link"
+    }
   }
 }

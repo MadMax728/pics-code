@@ -146,6 +146,7 @@
   "messages_modal": {
     "unknown": "Unknown",
     "messages": "Messages",
+    "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
   "modal_header": {

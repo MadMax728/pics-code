@@ -1,68 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../lib/translations";
-import * as images from "../../../../lib/constants/images";
-import { DateFormat } from "../../../Factory";
+import MessagesList from './MessagesList';
 
 const MRightActiveChat = (
     { 
         items,
+        listRef,
         user,
         me,
         handleMessageClick
     }) => {
-        const renderMessages = () => {
-            
-            if(!items || !items.length){
-                return '';
-            }            
-            return items.map((item, key) => (
-                <div key={item.id}> 
-                    { 
-                        key === 0 && (
-                            <div className="date">{ DateFormat(item.createdAt) }</div>
-                        )
-                    }
-                    { 
-                        key > 0 && (DateFormat(items[key - 1].createdAt) !== DateFormat(item.createdAt)) && (
-                            <div className="date">{ DateFormat(item.createdAt) }</div>
-                        )
-                    }
-                    <div>
-                        { me === item.senderId && (
-                            <div className="reply"
-                                role="presentation"
-                                onKeyPress={handleMessageClick}
-                                onClick={handleMessageClick}>
-                                { item.content }
-                                <span className="time">{ DateFormat(item.createdAt, Translations.date_format.time, true) }</span>
-                            </div>
-                        )}
-
-                        { me !== item.senderId && (
-                            <div className="response"
-                                role="presentation"
-                                onKeyPress={handleMessageClick}
-                                onClick={handleMessageClick}>
-                                { item.content }
-                                <span className="time">{ DateFormat(item.createdAt, Translations.date_format.time, true) }</span>
-                            </div>
-                        )}
-                    </div>
-                </div>
-            ));
-        };
         return (
-            <div className={"active-chat"}>
+            <div className={"active-chat"} ref={listRef}>
                 {
                     user && user.id ? (
-                        renderMessages()
+                        <MessagesList handleMessageClick={handleMessageClick} me={me} items={items} />
                     ) : (
-                        <div className="full-width">
-                            <div className="card">
-                               <h6>You are ready to chat ..</h6>
-                               <img src={images.profile_pic} alt="message"/>
-                             </div>
+                        <div className="full-width text-center">
+                             <h6>{Translations.messages_modal.ready}</h6>
                         </div>
                     )
                 }
@@ -82,6 +38,7 @@ MRightActiveChat.propTypes = {
           senderId: PropTypes.any,
         })
     ),
+    listRef: PropTypes.any,
     handleMessageClick: PropTypes.func,
     user:PropTypes.any,
     me: PropTypes.string.isRequired,
