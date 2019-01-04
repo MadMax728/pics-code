@@ -22,6 +22,26 @@ const hashTagReducer = (state = initialState.hashTagData, action) => {
         isLoading: false,
         error: action.payload
       };
+
+    // Add HASH USER
+    case types.ADD_HASH_TAG_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.ADD_HASH_TAG_SUCCEEDED:
+      return {
+        ...state,
+        addedHashTags: action.payload,
+        isLoading: false
+      };
+    case types.ADD_HASH_TAG_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }

@@ -23,7 +23,7 @@ class Community extends Component {
   };
 
   getUserData = () => {
-    this.props.getDashboard("users").then(() => {
+    this.props.getDashboard("users", "").then(() => {
       if (this.props.usersList) {
         this.setState({ usersList: this.props.usersList });
       }

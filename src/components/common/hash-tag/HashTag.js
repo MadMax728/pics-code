@@ -10,8 +10,6 @@ class HashTag extends Component {
     this.state = { hashTagList: null };
   }
 
-  onKeyHandle = () => {};
-
   componentDidMount = () => {
     this.props.getHashTag("hashTags").then(() => {
       if (this.props.hashTagData.hashTags) {
@@ -37,7 +35,7 @@ class HashTag extends Component {
   };
 
   render() {
-    let { hashTagList } = this.state;
+    let { hashTagList } = this.props;
     const { value } = this.props;
     const commentArr = value ? value.split(" ") : " ";
     const lastText = commentArr[commentArr.length - 1].substring(1);

@@ -18,10 +18,10 @@ export const explores = (payload, header = {}) =>
   api(baseUrl, header).post("/newsfeeds/explore" + payload);
 
 export const participants = (payload, header = {}) =>
-  api(baseUrl, header).post("/participants/get-all-participant");
+  api(baseUrl, header).post("/participants/get-all-participant" + payload);
 
 export const users = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/get-all-users");
+  api(baseUrl, header).post("/users/get-all-users" + payload);
 
 export const pics = (payload, header = {}) =>
   api(baseUrl, header).post("/pics");

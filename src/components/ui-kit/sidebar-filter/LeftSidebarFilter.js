@@ -9,8 +9,10 @@ import {
   OfferTags,
   InquiryTags,
   SelectRadius,
-  SelectTargetGroup
+  SelectTargetGroup,
+  SelectLanguage
 } from "../../common";
+import { Translations } from "../../../lib/translations";
 
 class LeftSidebarFilter extends Component {
   constructor(props) {
@@ -20,7 +22,8 @@ class LeftSidebarFilter extends Component {
       offerTagList: [],
       offerTag: [],
       inquiryTagList: [],
-      inquiryTag: []
+      inquiryTag: [],
+      language: Translations.base_footer.language
     };
   }
 
@@ -191,12 +194,14 @@ class LeftSidebarFilter extends Component {
 
   render() {
     const { filters } = this.props;
+    const { language } = this.state;
     return (
       <div>
         {filters.map(filter => {
           return (
             <div className="filter-wrapper" key={filter.name}>
               <div className={filter.className}>{filter.name}</div>
+
               {filter.type === "auto-complete" && (
                 <PlaceAutoCompleteLocation
                   className={""}
@@ -218,6 +223,16 @@ class LeftSidebarFilter extends Component {
                   options={filter.items}
                   defaultValue={"select"}
                   onChange={this.handleOnChange}
+                />
+              )}
+              {filter.type === "select-language" && (
+                <SelectLanguage
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  value={language}
+                  handleSelect={this.handleSelectList}
                 />
               )}
               {filter.type === "select-category" && (
