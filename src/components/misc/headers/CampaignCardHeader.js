@@ -40,7 +40,7 @@ const CampaignCardHeader = ({
           <div className="normal_title">{campaign.userName}</div>
         </Link>
         <div className="normal_sub_title ">published a campaign</div>
-        <div className="secondary_title">{campaign.location && campaign.location.address}</div>
+        <div className="secondary_title">{campaign.location && campaign.location.address && campaign.location.address}</div>
         {campaign.category && (
           <div className="grey_title">
             {DateFormat(campaign.createdAt)} in{" "}
