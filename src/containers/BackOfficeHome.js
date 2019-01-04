@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import {
   LeftSideBarBackOffice,
   BackOfficeHomeRoute,
-  RightSideBarBackOffice,
   InfoModal
 } from "../components/common";
 
@@ -60,10 +59,6 @@ class BackOfficeHome extends Component {
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalInfoDetailsShow={this.handleModalInfoDetailsShow}
                 />
-              </div>
-
-              <div className="right_bar no-padding">
-                <RightSideBarBackOffice />
               </div>
             </div>
           </div>

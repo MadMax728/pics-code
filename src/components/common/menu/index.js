@@ -4,8 +4,8 @@ export {
 } from "./SideBarSettingBackOffice";
 export { default as SideBarReviewMenu } from "./SideBarReviewMenu";
 export {
-  default as SideBarReviewContentMenu
-} from "./SideBarReviewContentMenu";
+  default as SideBarReportedContentMenu
+} from "./SideBarReportedContentMenu";
 export { default as SideBarBackOffice } from "./SideBarBackOffice";
 export { default as SideBarOwnerMenu } from "./SideBarOwnerMenu";
 export { default as SideBarOtherMenu } from "./SideBarOtherMenu";

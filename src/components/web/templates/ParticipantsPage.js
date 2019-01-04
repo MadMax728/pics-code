@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getDashboard } from "../../../actions";
+import { getDashboard, getSearch } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -9,7 +9,30 @@ import PropTypes from "prop-types";
 class ParticipantsPage extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getDashboard("participants");
+    if (this.props.searchData.searchKeyword) {
+      this.props.getDashboard(
+        "participants",
+        "?isSearch=" + this.props.searchData.searchKeyword
+      );
+    } else {
+      this.props.getDashboard("participants", "");
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (this.props.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      let searchParam = "";
+      if (searchKeyword) {
+        searchParam = "?isSearch=" + searchKeyword;
+      }
+      this.props.getDashboard("participants", searchParam);
+    }
   };
 
   renderParticipantsList = () => {
@@ -32,7 +55,9 @@ class ParticipantsPage extends Component {
     const { participantsList, isLoadingparticipants } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {participantsList && !isLoadingparticipants && this.renderParticipantsList()}
+        {participantsList &&
+          !isLoadingparticipants &&
+          this.renderParticipantsList()}
         {isLoadingparticipants && <CampaignLoading />}
       </div>
     );
@@ -43,19 +68,23 @@ ParticipantsPage.propTypes = {
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
   isLoadingparticipants: PropTypes.bool,
-  participantsList: PropTypes.any
+  participantsList: PropTypes.any,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func
   // errorparticipants: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   participantsList: state.dashboardData.participants,
   isLoadingparticipants: state.dashboardData.isLoadingparticipants,
-  errorparticipants: state.dashboardData.errorparticipants
+  errorparticipants: state.dashboardData.errorparticipants,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getDashboard
+  getDashboard,
+  getSearch
 };
 
 export default connect(

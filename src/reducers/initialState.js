@@ -191,13 +191,13 @@ const initialState = {
     error: false
   },
   reportedContentData: {
-    reportedContentImages: null,
-    reportedContentVideos: null,
-    reportedContentCampaigns: null,
-    reportedContentPics: null,
-    reportedContentAds: null,
-    reportedContentComments: null,
-    reportedContentUsers: null,
+    Image: null,
+    Videos: null,
+    Campaigns: null,
+    Pics: null,
+    Ads: null,
+    Comments: null,
+    Users: null,
     isLoading: false,
     error: false
   },
@@ -221,6 +221,7 @@ const initialState = {
   },
   hashTagData: {
     hashTags: null,
+    addedHashTags: null,
     isLoading: false,
     error: false
   },
