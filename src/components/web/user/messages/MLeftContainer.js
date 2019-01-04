@@ -57,7 +57,7 @@ class MLeftContainer extends Component {
         this.props.selectUser({});
     }
   };
-    
+
   handleChatClick = (e) => {
       const { userList } = this.state;
       const user = _.find(userList, { id: e.currentTarget.dataset.id });
@@ -78,10 +78,8 @@ class MLeftContainer extends Component {
         <div className="title-wrapper">
           <div className="modal-title">
             {Translations.messages_modal.messages}
-          </div>
-          <div className="edit">
-            <img src={images.edit} alt={"edit"} />
-          </div>
+            <span className="edit"></span>
+          </div>          
         </div>
         <MLeftTabs
           activeIndex={activeIndex}

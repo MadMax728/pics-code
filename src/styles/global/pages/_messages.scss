@@ -1,10 +1,23 @@
 .message-home {
   background: #fff;
+  border: 1px solid #ddd;
   width: 100%;
   float: left;
       .title-wrapper {
         height: 60px;
-        border-bottom: 2px solid #333;
+        border-bottom: 1px solid #ddd;
+        .modal-title{
+          padding: 10px;
+          font-weight: bold;
+          font-size: 15px;
+          letter-spacing: 1px;
+          .edit{
+            background: url(../images/edit.svg);
+            background-size: 100%;
+            width: 20px;
+            height: 20px;
+          }
+        }
         .back {
           display: inline-block;
           float: left;
@@ -13,7 +26,7 @@
         }
       }
       .messages-left {
-        width: 43%;
+        width: 40%;
         float: left;
         .edit {
           float: right;
@@ -25,7 +38,7 @@
         }
         .messages-menu {
           display: flex;
-          border-bottom: 2px solid #333;
+          border-bottom: 1px solid #ddd;
           .menu-item {
             flex: 1;
             text-align: center;
@@ -60,9 +73,9 @@
             &:hover{
               .message_menu_title{
                 &::before{
-                   left: 7%; 
+                   left: 7%;
                    right: 7%;
-                   background: #000; 
+                   background: #000;
                 }
               }
             }
@@ -89,7 +102,7 @@
           .chat-wrapper {
             float: left;
             width: 100%;
-            border-bottom: 1px solid #bbb;
+            border-bottom: 1px solid #ddd;
             color: $silver_color;
             &:first-child {
               color: $charcoal_color;
@@ -116,6 +129,9 @@
               float: left;
               width: 100%;
               padding: 10px;
+              &:focus{
+                outline: none!important;
+              }
               img {
                 width: 45px;
                 height: 45px;
@@ -129,6 +145,7 @@
               font-family: "Helvetica-Bold";
               color: $charcoal_color;
               position: relative;
+              margin-top: 10px;
             }
             .time {
               float: right;
@@ -146,14 +163,15 @@
             margin: 5px;
             text-align: center;
           }
-          .chat-wrapper:hover, .card:hover {
+          .chat-wrapper:hover, .card:hover, .chat-wrapper:focus, .chat-wrapper:active{
             border: 0px;
+            outline: 0;
             box-shadow: 0 1px 20px 0 rgba(0, 0, 0, 0.3);
           }
         }
         .search-user {
           position: relative;
-          border-bottom: 2px solid #333;
+          border-bottom: 1px solid #333;
           input {
             height: 60px;
             width: 100%;
@@ -179,14 +197,14 @@
         }
       }
       .messages-right {
-        width: 57%;
+        width: 60%;
         float: left;
         .user-wrapper {
           display: flex;
           height: 60px;
-          padding: 7px;
-          border-left: 2px solid #333;
-          border-bottom: 2px solid #333;
+          padding: 10px;
+          border-left: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
           .user-img {
             margin-right: 10px;
             img {
@@ -211,7 +229,7 @@
         }
         .active-chat {
           float: left;
-          border-left: 2px solid #333;
+          border-left: 1px solid #ddd;
           height: 422px;
           width: 100%;
           overflow-y: auto;
@@ -280,8 +298,8 @@
         .write-chat {
           float: left;
           width: 100%;
-          border-left: 2px solid #333;
-          border-top: 2px solid #333;
+          border-left: 1px solid #ddd;
+          border-top: 1px solid #ddd;
           padding-top: 12px;
           padding-left: 12px;
           padding-bottom: 10px;
