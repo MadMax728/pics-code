@@ -26,13 +26,19 @@ const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
           to={profile_route}>
           <div className="normal_title">{item.userName}</div>
         </Link>
-        <div className="secondary_title">{item.location.address}</div>
-        {item.category && (
-          <div className="grey_title">
-            {DateFormat(item.createdAt)} in{" "}
-            {item.category[0].categoryName}
-          </div>
-        )}
+        {
+          item.location && (
+            <div className="secondary_title">{item.location.address}</div>
+          )
+        }
+        {
+          item.category && item.category.length && (
+            <div className="grey_title">
+              {DateFormat(item.createdAt)} in{" "}
+              {item.category[0].categoryName}
+            </div>
+          )
+        }
       </div>
       <div className="col-sm-1 col-xs-1 like_wrapper" role="article">
         <button
