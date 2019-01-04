@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getDashboard } from "../../../actions";
+import { getDashboard, getSearch } from "../../../actions";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
@@ -20,6 +20,9 @@ class ExploreRoot extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (this.props.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -62,7 +65,8 @@ ExploreRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoadingexplores: PropTypes.bool,
   exploreList: PropTypes.any,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func
   // error: PropTypes.any
 };
 
@@ -75,7 +79,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getDashboard
+  getDashboard,
+  getSearch
 };
 
 export default connect(

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDashboard } from "../../../actions";
+import { getDashboard, getSearch } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
 import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -9,6 +9,9 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class NewsRoot extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    if (this.props.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (this.props.searchData.searchKeyword) {
       this.props.getDashboard(
         "news",
@@ -20,6 +23,9 @@ class NewsRoot extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    if (this.props.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -108,6 +114,7 @@ class NewsRoot extends Component {
 
 NewsRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
+  getSearch: PropTypes.func,
   isLoadingnews: PropTypes.bool,
   newsFeedList: PropTypes.any,
   searchData: PropTypes.any
@@ -122,7 +129,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getDashboard
+  getDashboard,
+  getSearch
 };
 
 export default connect(
