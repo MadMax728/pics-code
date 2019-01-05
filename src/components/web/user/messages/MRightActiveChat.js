@@ -1,21 +1,18 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../lib/translations";
-import MessagesList from './MessagesList';
+import MessagesLazyList from './MessagesLazyList';
 
 const MRightActiveChat = (
     { 
-        items,
-        listRef,
         user,
-        me,
-        handleMessageClick
+        socket
     }) => {
         return (
-            <div className={"active-chat"} ref={listRef}>
+            <div className={"active-chat"}>
                 {
                     user && user.id ? (
-                        <MessagesList handleMessageClick={handleMessageClick} me={me} items={items} />
+                        <MessagesLazyList user={user} socket={socket} />
                     ) : (
                         <div className="full-width text-center">
                              <h6>{Translations.messages_modal.ready}</h6>
@@ -28,20 +25,8 @@ const MRightActiveChat = (
 
 
 MRightActiveChat.propTypes = {
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          content: PropTypes.any,
-          createdAt: PropTypes.any,
-          updatedAt: PropTypes.any,
-          recipientId: PropTypes.any,
-          senderId: PropTypes.any,
-        })
-    ),
-    listRef: PropTypes.any,
-    handleMessageClick: PropTypes.func,
-    user:PropTypes.any,
-    me: PropTypes.string.isRequired,
+    user: PropTypes.any,
+    socket: PropTypes.any
 };
   
 export default MRightActiveChat;
