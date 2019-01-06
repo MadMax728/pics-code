@@ -21,7 +21,7 @@ class MRightUserInput extends Component {
 
     addEmoji = (emoji) => {
         const { message } = this.state;
-        let newMessage = message + emoji.native;
+        const newMessage = message + emoji.native;
         this.setState({message: newMessage});
         this.setState({ isEmoji: false });
     };
