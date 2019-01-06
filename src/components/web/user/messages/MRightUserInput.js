@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 class MRightUserInput extends Component {
   
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message : ''
+            message : '',
+            isEmoji: false
         }
     }    
 
@@ -15,6 +18,19 @@ class MRightUserInput extends Component {
         e.preventDefault();
         this.setState({ message: e.target.value });
     };
+
+    addEmoji = (emoji) => {
+        const { message } = this.state;
+        let newMessage = message + emoji.native;
+        this.setState({message: newMessage});
+        this.setState({ isEmoji: false });
+    };
+
+    onEmojiOpen = () => {
+        this.setState(prevState => ({
+            isEmoji: !prevState.isEmoji
+        }))
+    }
 
     onEnterPress = (e) => {
         const keycode = (e.keyCode ? e.keyCode : e.which);
@@ -28,6 +44,7 @@ class MRightUserInput extends Component {
 
     render() {
         const { item } = this.props;
+        const { isEmoji } = this.state;
         return (
             <div className="write-chat">
                 {
@@ -37,8 +54,13 @@ class MRightUserInput extends Component {
                             onChange={this.handleChange}
                             onKeyPress={this.onEnterPress} 
                             value={this.state.message} />
-                            <img src={images.emoji} alt={"emoji1"} />
+                            <img src={images.emoji} alt={"emoji1"} onClick={this.onEmojiOpen} onKeyPress={this.onEmojiOpen} />
                     </div>
+                    )
+                }
+                {
+                    isEmoji && (
+                        <Picker onSelect={this.addEmoji} style={{ position: 'absolute', bottom: '135px', right: '60px' }} />
                     )
                 }
             </div>
