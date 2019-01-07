@@ -54,7 +54,7 @@ class MRightUserInput extends Component {
                             onChange={this.handleChange}
                             onKeyPress={this.onEnterPress} 
                             value={this.state.message} />
-                            <img role="button" src={images.emoji} alt={"emoji1"} onClick={this.onEmojiOpen} />
+                            <img role="presentation" src={images.emoji} alt={"emoji1"} onKeyPress={this.onEmojiOpen} onClick={this.onEmojiOpen} />
                     </div>
                     )
                 }
