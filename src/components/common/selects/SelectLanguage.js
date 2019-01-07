@@ -31,10 +31,7 @@ class SelectLanguage extends Component {
     this.props.getLanguage(languageData);
   };
   componentDidMount = () => {
-    if (
-      this.props.languageList &&
-      this.props.languageList.languages
-    ) {
+    if (this.props.languageList && this.props.languageList.languages) {
       this.setState({
         languageList: this.props.languageList.languages
       });
@@ -55,7 +52,9 @@ class SelectLanguage extends Component {
         onBlur={this.handleLanguage}
         options={languageData}
       >
-        <option value={Translations.base_footer.language}>{Translations.base_footer.language}</option>
+        <option value={Translations.base_footer.language}>
+          {Translations.base_footer.language}
+        </option>
         {languageData.map(option => (
           <option value={option.id} key={option.id}>
             {option.value}

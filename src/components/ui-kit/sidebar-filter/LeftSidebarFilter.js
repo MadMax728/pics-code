@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { RadioBtn, Select, Text } from "../CommonUIComponents";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
+import { setCookie } from "../../../lib/utils/helpers";
 import {
   SelectCategory,
   SelectOffer,
@@ -62,6 +63,20 @@ class LeftSidebarFilter extends Component {
     }
     this.setState({ filterData });
     this.props.onChange(filterData);
+  };
+
+  handleLanguageChange = (isFor, selected) => {
+    console.log(selected);
+    let languageCode = "en";
+    if (selected === "English") {
+      languageCode = "en";
+    } else if (selected === "German") {
+      languageCode = "de";
+    }
+    setCookie("interfaceLanguage", languageCode, 90);
+    // set language using language code
+    Translations.setLanguage(languageCode || "en");
+    // we need to update state to re render this component on language switch
   };
 
   handleOfferTagChange = (id, tag) => {
@@ -230,9 +245,8 @@ class LeftSidebarFilter extends Component {
                   foruse={filter.name}
                   name={filter.name}
                   options={filter.items}
-                  defaultValue={"select"}
-                  value={language}
-                  handleSelect={this.handleSelectList}
+                  defaultValue={language}
+                  handleSelect={this.handleLanguageChange}
                 />
               )}
               {filter.type === "select-category" && (

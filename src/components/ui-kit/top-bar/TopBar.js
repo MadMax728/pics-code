@@ -43,7 +43,7 @@ class TopBar extends Component {
         <SubscribeList
           id={`slot-${slot.name}`}
           role="button"
-          dataTip="tooltip"
+          dataTip=""
           dataClass="tooltip-wrapr" /* eslint-disable */
           getContent={() =>
             this.renderReportTips(slot.name, slot.userid, slot.username)

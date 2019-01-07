@@ -15,7 +15,7 @@ class RightSideBar extends Component {
     // here we have to switch language
     return (
       <div>
-        <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
+        {/* <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} /> */}
         <RightAbout />
       </div>
     );

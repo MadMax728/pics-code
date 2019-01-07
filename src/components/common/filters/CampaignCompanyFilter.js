@@ -75,7 +75,15 @@ const offerItems = staticData;
 
 const inquiryItems = staticData;
 
+const languageItem = staticData;
+
 const Filters = [
+  {
+    name: Translations.left_sidebar_filter.language_select.name,
+    className: "filter-title",
+    type: Translations.left_sidebar_filter.language_select.type,
+    items: languageItem
+  },
   {
     name: Translations.left_sidebar_filter.relevance.name,
     className: "filter-title",

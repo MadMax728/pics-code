@@ -83,7 +83,9 @@ class Community extends Component {
   };
 
   render() {
-    const { usersList, isLoading } = this.state;
+    const { usersList } = this.state;
+    const { isLoadingusers } = this.props;
+    console.log(isLoadingusers);
 
     return (
       <div>
@@ -92,7 +94,7 @@ class Community extends Component {
         </div>
         <div className="community">
           {this.props.usersList &&
-            !isLoading &&
+            !isLoadingusers &&
             this.props.usersList.map(user => {
               const profile_route = user.isOwner
                 ? `/news-feed`
@@ -165,6 +167,7 @@ const mapDispatchToProps = {
 Community.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  isLoadingusers: PropTypes.bool,
   usersList: PropTypes.any,
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,
