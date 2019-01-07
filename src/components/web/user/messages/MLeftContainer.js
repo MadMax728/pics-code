@@ -79,7 +79,25 @@ class MLeftContainer extends Component {
           <div className="modal-title">
             {Translations.messages_modal.messages}
             <span className="edit"></span>
-          </div>          
+          </div>                    
+        </div>
+        <div className="msgs-search-user">
+          <form>
+            <div className="input-group search-input-group">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+              />
+              <span className="input-group-addon">
+                <button >
+                  <span className="search_icon">
+                    <img src={images.search} alt="Search" />
+                  </span>
+                </button>
+              </span>
+            </div>
+          </form>
         </div>
         <MLeftTabs
           activeIndex={activeIndex}

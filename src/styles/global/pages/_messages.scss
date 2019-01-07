@@ -190,6 +190,33 @@
             }
           }
         }
+        .msgs-search-user {
+          position: relative;
+          border-bottom: 1px solid #333;
+          .input-group-addon{
+            padding: 6px 23px;
+            background-color: #fff;
+            border: none;
+          }
+          input {
+            height: 60px;
+            width: 100%;
+            border: 0;
+            padding: 15px 50px 15px 15px;
+            box-shadow: none!important;
+          }
+          button {
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            position: absolute;
+            top: 18px;
+            right: 10px;
+            img {
+              width: 20px;
+            }
+          }
+        }
         .nomessage{
           text-align: center;
           font-size: 18px;
@@ -230,8 +257,9 @@
         .active-chat {
           float: left;
           border-left: 1px solid #ddd;
-          height: 422px;
           width: 100%;
+          min-height: calc(100vh - 120px);
+          height: calc(100vh - 120px);
           overflow-y: auto;
           .full-width {
             width: 100%;
@@ -296,14 +324,17 @@
           }
         }
         .write-chat {
+          position: fixed;
+          width: 36%;
+          bottom: 0;
           float: left;
-          width: 100%;
           border-left: 1px solid #ddd;
           border-top: 1px solid #ddd;
           padding-top: 12px;
           padding-left: 12px;
           padding-bottom: 10px;
           height: 60px;
+          background: #fff;
           textarea {
             width: 90%;
             float: left;
