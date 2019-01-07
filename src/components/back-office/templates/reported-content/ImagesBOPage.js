@@ -13,7 +13,28 @@ class ImagesBOPage extends Component {
     super(props, context);
     this.state = {
       imageList: null,
-      statistics: null
+      statistics: [
+        {
+          name: Translations.right_side_bar_statistics.all,
+          id: "All",
+          value: 0
+        },
+        {
+          name: Translations.right_side_bar_statistics.outstanding,
+          id: "Outstanding",
+          value: 0
+        },
+        {
+          name: Translations.right_side_bar_statistics.processed,
+          id: "Processed",
+          value: 0
+        },
+        {
+          name: Translations.right_side_bar_statistics.not_processed,
+          id: "NotProcessed",
+          value: 0
+        }
+      ]
     };
   }
 
@@ -29,29 +50,7 @@ class ImagesBOPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.Image) {
         this.setState({
-          imageList: this.props.reportedContentData.Image,
-          statistics: [
-            {
-              name: Translations.right_side_bar_statistics.all,
-              id: "All",
-              value: this.props.reportedContentData.Image.allCount? this.props.reportedContentData.Image.allCount : 0
-            },
-            {
-              name: Translations.right_side_bar_statistics.outstanding,
-              id: "Outstanding",
-              value: this.props.reportedContentData.Image.outstandingCount? this.props.reportedContentData.Image.outstandingCount : 0
-            },
-            {
-              name: Translations.right_side_bar_statistics.processed,
-              id: "Processed",
-              value: this.props.reportedContentData.Image.processedCount? this.props.reportedContentData.Image.processedCount : 0
-            },
-            {
-              name: Translations.right_side_bar_statistics.not_processed,
-              id: "NotProcessed",
-              value: this.props.reportedContentData.Image.notProcessedCount? this.props.reportedContentData.Image.notProcessedCount : 0
-            }
-          ]
+          imageList: this.props.reportedContentData.Image
         })
       }
     });
@@ -66,7 +65,7 @@ class ImagesBOPage extends Component {
           image.typeContent &&
           image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
           (
-            <MediaCard item={image} isDescription isReport/>
+            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />
           )}
         </div>
       );
@@ -124,6 +123,7 @@ ImagesBOPage.propTypes = {
   getBackOfficeReportedContent: PropTypes.func.isRequired,
   reportedContentData: PropTypes.object,
   isLoading: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func
   // error: PropTypes.any
 };
 

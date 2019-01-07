@@ -18,7 +18,34 @@ class TopBarOwnerInfo extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     this.state = {
-      items: null
+      items: {
+        slots: [
+          {
+            name: Translations.top_bar_info.subscriber,
+            val:0,
+            className: "col-sm-4 slot_one no-padding",
+            btnActiveClassName: "filled_button",
+            btnText: Translations.top_bar_info.upload,
+            handeleEvent: this.handeleUpload,
+          },
+          {
+            name: Translations.top_bar_info.subscribed,
+            val: 0,
+            className: "col-sm-4 slot_two no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_campaign,
+            handeleEvent: this.handeleCreateCampaign,
+          },
+          {
+            name: Translations.top_bar_info.posts,
+            val: 0,
+            className: "col-sm-4 slot_three no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_ad,
+            handeleEvent: this.handeleCreateAd,
+          }
+        ]
+      }
     };
   }
 
