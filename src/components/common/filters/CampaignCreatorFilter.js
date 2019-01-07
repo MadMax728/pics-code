@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
+import { setCookie, getCookie } from "../../../lib/utils/helpers";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -23,6 +24,21 @@ const relevanceItems = [
   }
 ];
 
+const languageItems = [
+  {
+    name: Translations.languages.english,
+    className: "radio-btn lbl-margin",
+    checked: true,
+    value: Translations.languages.english
+  },
+  {
+    name: Translations.languages.german,
+    className: "radio-btn ",
+    checked: false,
+    value: Translations.languages.german
+  }
+];
+
 const targetGroupOptions = staticData;
 
 const radiusItems = staticData;
@@ -33,77 +49,15 @@ const offerItems = staticData;
 
 const inquiryItems = staticData;
 
-const languageItem = staticData;
-
-const Filters = [
-  {
-    name: Translations.left_sidebar_filter.language_select.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.language_select.type,
-    items: languageItem
-  },
-  {
-    name: Translations.left_sidebar_filter.relevance.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.relevance.type,
-    items: relevanceItems
-  },
-  {
-    name: Translations.left_sidebar_filter.location.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.location.type,
-    items: []
-  },
-  {
-    name: Translations.left_sidebar_filter.radius.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.radius.type,
-    items: radiusItems
-  },
-  {
-    name: Translations.left_sidebar_filter.category.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.category.type,
-    items: categoryItems
-  },
-  {
-    name: Translations.left_sidebar_filter.target_group.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.target_group.type,
-    items: targetGroupOptions
-  },
-  {
-    name: Translations.left_sidebar_filter.offer.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.offer.type,
-    items: offerItems
-  },
-  {
-    name: Translations.left_sidebar_filter.offer_tag.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.offer_tag.type,
-    items: []
-  },
-  {
-    name: Translations.left_sidebar_filter.inquiry.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.inquiry.type,
-    items: inquiryItems
-  },
-  {
-    name: Translations.left_sidebar_filter.inquiry_tag.name,
-    className: "filter-title",
-    type: Translations.left_sidebar_filter.inquiry_tag.type,
-    items: []
-  }
-];
+const languageItem = languageItems;
 
 class CampaignCreatorFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filterApply: false,
-      filData: []
+      filData: [],
+      currentLanguage: Translations.getLanguage()
     };
   }
 
@@ -124,7 +78,80 @@ class CampaignCreatorFilter extends Component {
     this.setState({ filData: filterData });
   };
 
+  handleLanguageSwitch = languageCode => {
+    // set cookie for default language
+    setCookie("interfaceLanguage", languageCode, 90);
+    // set language using language code
+    Translations.setLanguage(languageCode || "en");
+    // we need to update state to re render this component on language switch
+    this.setState({
+      currentLanguage: Translations.getLanguage()
+    });
+  };
+
   render() {
+    const Filters = [
+      {
+        name: Translations.left_sidebar_filter.radio_change_language.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.radio_change_language.type,
+        items: languageItem
+      },
+      {
+        name: Translations.left_sidebar_filter.relevance.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.relevance.type,
+        items: relevanceItems
+      },
+      {
+        name: Translations.left_sidebar_filter.location.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.location.type,
+        items: []
+      },
+      {
+        name: Translations.left_sidebar_filter.radius.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.radius.type,
+        items: radiusItems
+      },
+      {
+        name: Translations.left_sidebar_filter.category.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.category.type,
+        items: categoryItems
+      },
+      {
+        name: Translations.left_sidebar_filter.target_group.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.target_group.type,
+        items: targetGroupOptions
+      },
+      {
+        name: Translations.left_sidebar_filter.offer.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.offer.type,
+        items: offerItems
+      },
+      {
+        name: Translations.left_sidebar_filter.offer_tag.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.offer_tag.type,
+        items: []
+      },
+      {
+        name: Translations.left_sidebar_filter.inquiry.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.inquiry.type,
+        items: inquiryItems
+      },
+      {
+        name: Translations.left_sidebar_filter.inquiry_tag.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.inquiry_tag.type,
+        items: []
+      }
+    ];
     return (
       <div className="left-filters">
         <LeftSidebarFilter
@@ -132,6 +159,7 @@ class CampaignCreatorFilter extends Component {
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
           handleSelect={this.handleSelect}
+          handleLanguageSwitch={this.handleLanguageSwitch}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -154,7 +182,8 @@ class CampaignCreatorFilter extends Component {
 
 CampaignCreatorFilter.propTypes = {
   handleApplyClick: PropTypes.func,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  handleLanguageSwitch: PropTypes.func
 };
 
 export default CampaignCreatorFilter;
