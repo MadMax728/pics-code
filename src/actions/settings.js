@@ -2,6 +2,8 @@ import * as types from "../lib/constants/actionTypes";
 import * as settingsService from "../services";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
+import * as _ from "lodash";
+import moment from "moment";
 
 // News Feed
 const getNewsFeedStarted = () => ({
@@ -29,7 +31,8 @@ export const getNewsFeed = (prop, provider) => {
 
     return settingsService[prop](provider, header).then(
       res => {
-        dispatch(getNewsFeedSucceeded(res.data.data));
+        const newsfeeds = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        dispatch(getNewsFeedSucceeded(newsfeeds));
       },
       error => {
         dispatch(getNewsFeedFailed(error.response));
@@ -107,7 +110,8 @@ export const getSaved = (prop, provider) => {
 
     return settingsService[prop](provider, header).then(
       res => {
-        dispatch(getSavedSucceeded(res.data.data));
+        const newsfeeds = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        dispatch(getSavedSucceeded(newsfeeds));
       },
       error => {
         dispatch(getSavedFailed(error.response));
