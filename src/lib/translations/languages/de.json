@@ -278,7 +278,7 @@
       "type": "radio"
     },
     "radio_change_language": {
-      "name": "Language1",
+      "name": "Sprache",
       "type": "radio_change_language"
     },
     "relevance": {
