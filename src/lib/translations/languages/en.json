@@ -278,9 +278,9 @@
       "name": "Language",
       "type": "radio"
     },
-    "language_select": {
+    "radio_change_language": {
       "name": "Language",
-      "type": "select-language"
+      "type": "radio_change_language"
     },
     "relevance": {
       "name": "Relevance",

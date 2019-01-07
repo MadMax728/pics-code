@@ -26,7 +26,7 @@ class Home extends Component {
       message: "",
       image: null,
       profile: null,
-      data: null,
+      data: null
     };
   }
 
@@ -65,6 +65,7 @@ class Home extends Component {
    * Todo - We can modify cookie logic in production mode
    */
   handleLanguageSwitch = languageCode => {
+    // console.log(languageCode);
     // set cookie for default language
     setCookie("interfaceLanguage", languageCode, 90);
     // set language using language code
@@ -158,9 +159,7 @@ class Home extends Component {
   }
 }
 Home.propTypes = {
-  history: PropTypes.any,
+  history: PropTypes.any
 };
-
-
 
 export default Home;

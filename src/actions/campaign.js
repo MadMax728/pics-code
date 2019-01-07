@@ -2,7 +2,8 @@ import * as types from "../lib/constants/actionTypes";
 import * as campaignService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import { campaign_detail } from "../mock-data";
+import * as _ from "lodash";
+import moment from "moment";
 
 // Get Campaigns
 const getCampaignsStarted = () => ({
@@ -30,7 +31,8 @@ export const getCampaigns = (prop, provider) => {
 
     return campaignService[prop](provider, header).then(
       res => {
-        dispatch(getCampaignsSucceeded(res.data.data));
+        const campaigns = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        dispatch(getCampaignsSucceeded(campaigns));
       },
       error => {
         dispatch(getCampaignsFailed(error.response));

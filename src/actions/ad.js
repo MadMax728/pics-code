@@ -2,6 +2,8 @@ import * as types from "../lib/constants/actionTypes";
 import * as adService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
+import * as _ from "lodash";
+import moment from "moment";
 
 // Get Ads
 const getAdsStarted = () => ({
@@ -28,7 +30,8 @@ export const getAds = (prop, provider) => {
     };
     return adService[prop](provider, headers).then(
       res => {
-        dispatch(getAdsSucceeded(res.data.data));
+        const ads = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        dispatch(getAdsSucceeded(ads));
       },
       error => {
         dispatch(getAdsFailed(error.response));
