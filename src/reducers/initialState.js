@@ -198,6 +198,7 @@ const initialState = {
     Ads: null,
     Comments: null,
     Users: null,
+    updateReport: null,
     isLoading: false,
     error: false
   },

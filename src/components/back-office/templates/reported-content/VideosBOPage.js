@@ -35,7 +35,7 @@ class VideosBOPage extends Component {
           video.typeContent &&
           video.typeContent.toLowerCase() === enumerations.mediaTypes.video &&
           (
-            <MediaCard item={video} isDescription isReport/>
+            <MediaCard item={video} isDescription isReport isBackOffice handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow}/>
           )}
         </div>
       );
@@ -70,6 +70,7 @@ VideosBOPage.propTypes = {
   getBackOfficeReportedContent: PropTypes.func.isRequired,
   reportedContentData: PropTypes.object,
   isLoading: PropTypes.bool,
+  handleModalInfoDetailsShow: PropTypes.func
   // error: PropTypes.any
 };
 

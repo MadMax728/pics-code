@@ -33,7 +33,7 @@ class BackOfficeHomeRoute extends Component {
   };
 
   handleImageBO = () => {
-    return <ImagesBOPage/>;
+    return <ImagesBOPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
   };
 
   handleSettingCampaign = () => {
@@ -121,7 +121,7 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
             exact
-            component={ImagesBOPage}
+            component={this.handleImageBO}
           />
 
           <Route
@@ -164,6 +164,7 @@ class BackOfficeHomeRoute extends Component {
 BackOfficeHomeRoute.propTypes = {
   handleModalInfoShow: PropTypes.func.isRequired,
   handleModalInfoDetailsShow: PropTypes.func.isRequired,
+  handleModalInfoDetailsCallbackShow: PropTypes.func.isRequired
 };
 
 export default BackOfficeHomeRoute;

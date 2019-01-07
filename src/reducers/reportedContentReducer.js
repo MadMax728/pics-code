@@ -23,6 +23,29 @@ const reportedContentReducer = (state = initialState.reportedContentData, action
         isLoading: false,
         error: action.payload
       };
+
+    // Update UPDATE_BACK_OFFICE_REPORT
+    case types.UPDATE_BACK_OFFICE_REPORT_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.UPDATE_BACK_OFFICE_REPORT_SUCCEEDED:
+      return {
+        ...state,
+        updateReport: action.payload,
+        isLoading: false
+      };
+    case types.UPDATE_BACK_OFFICE_REPORT_FAILED:
+      return {
+        ...state,
+        updateReport: null,
+        isLoading: false,
+        error: action.payload
+      };
+
+      
     default:
       return state;
   }

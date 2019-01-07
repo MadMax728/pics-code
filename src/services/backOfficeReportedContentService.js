@@ -8,7 +8,7 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
  * @param {*} payload
  */
 
-export const reportedContent = (payload, type="get", header = {}) => {
+export const getReportedContent = (payload, type="get", header = {}) => {
   let apiURL;
   switch (type) {
     case "get":
@@ -25,12 +25,11 @@ export const reportedContent = (payload, type="get", header = {}) => {
 };
 
 
-// BackOffice ImageBO API
-export const reportedContentImages = (payload, header = {}) =>
-  api(baseUrl, header).get("/reports?"+ payload );
+// Update BackOffice Report
+export const updateBackOfficeReport = (payload, header = {}) =>
+  api(baseUrl, header).put("/reports", payload );
 
 
-  // ?reportContent="+payload.reportContent+"&searchType="+payload.searchType
 
 // BackOffice VideoBO API
 export const reportedContentVideos = (payload, header = {}) =>
