@@ -247,6 +247,7 @@
     "general_terms_and_conditions": "General terms & Conditions",
     "netzdg": "NETZDG",
     "language": "Language",
+    "language": "Sprache",
     "terms_of_use": "Terms of Use",
     "better": "For a better user experience we use ",
     "agree": "By using picstagraph you do agree",
@@ -276,9 +277,9 @@
       "name": "Language",
       "type": "radio"
     },
-    "language_select": {
-      "name": "Language",
-      "type": "select-language"
+    "radio_change_language": {
+      "name": "Language1",
+      "type": "radio_change_language"
     },
     "relevance": {
       "name": "Relevance",
