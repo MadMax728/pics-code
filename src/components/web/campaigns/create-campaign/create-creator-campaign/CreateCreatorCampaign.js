@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
 import PropTypes from "prop-types";
-import {
-  PaymentStepOne,
-  PaymentStepTwo
-} from "../../../user/payment/steps";
+import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import * as images from "../../../../../lib/constants/images";
 
 class CreateCreatorCampaign extends Component {
@@ -77,8 +74,8 @@ class CreateCreatorCampaign extends Component {
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
-            <StepTwo 
-              handleChangeField={handleChangeField} 
+            <StepTwo
+              handleChangeField={handleChangeField}
               form={form}
               handleContentChange={handleContentChange}
             />
@@ -110,7 +107,7 @@ class CreateCreatorCampaign extends Component {
               form={form}
               handleSubmit={handleSubmit}
             />
-        ))}
+          ))}
       </div>
     );
   }

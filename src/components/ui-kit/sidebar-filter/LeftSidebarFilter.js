@@ -11,7 +11,7 @@ import {
   InquiryTags,
   SelectRadius,
   SelectTargetGroup,
-  SelectLanguage
+  RadioButtonLanguages
 } from "../../common";
 import { Translations } from "../../../lib/translations";
 
@@ -65,9 +65,9 @@ class LeftSidebarFilter extends Component {
     this.props.onChange(filterData);
   };
 
-    handleLanguageSwitch = language => {
-       console.log('filter', language);
-    }
+  handleLanguageSwitch = language => {
+    console.log("filter", language);
+  };
 
   handleOfferTagChange = (id, tag) => {
     const filterData = this.state.filterData;
@@ -220,12 +220,12 @@ class LeftSidebarFilter extends Component {
                   onChange={this.handleOnChange}
                 />
               )}
-              {filter.type === "radio_change_language" && ( 
-                <SelectLanguage
+              {filter.type === "radio_change_language" && (
+                <RadioButtonLanguages
                   foruse={filter.name}
                   name={filter.name}
                   options={filter.items}
-                    onChange={this.handleOnChange}
+                  onChange={this.handleOnChange}
                   handleLanguageSwitch={this.props.handleLanguageSwitch}
                 />
               )}

@@ -9,7 +9,27 @@ class PaymentStepThree extends Component {
     this.state = {};
   }
 
-  handleRedeemBtn = () => {};
+  handleRedeemBtn = () => {
+    console.log("123", this.props.form.voucher);
+    const voucherData = { code: this.props.form.voucher };
+    this.props.checkVoucherExpiry(voucherData).then(() => {
+      console.log(this.props);
+      //   const errors = {};
+      //   if (
+      //     this.props.profilePrivacyData.error &&
+      //     this.props.profilePrivacyData.error.status === 400
+      //   ) {
+      //     errors.servererror = Translations.privacy.server_error;
+      //     this.setState({ error: errors });
+      //   } else if (userInfo) {
+      //     const data = {
+      //       username: userInfo.username
+      //     };
+      //     this.props.getUser(data).then(() => {
+      //       this.setDataOnLoad();
+      //     });
+    });
+  };
 
   handleCommitToBuy = () => {
     this.props.handleSubmit();
@@ -146,7 +166,8 @@ PaymentStepThree.propTypes = {
   handleModalInfoShow: PropTypes.func,
   handleChangeField: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired,
+  checkVoucherExpiry: PropTypes.func
 };
 
 export default PaymentStepThree;

@@ -2,9 +2,7 @@ import * as types from "../lib/constants/actionTypes";
 import * as voucherService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import {
-  voucher_list
-} from "../mock-data";
+import { voucher_list } from "../mock-data";
 
 const getVouchersStarted = () => ({
   type: types.GET_VOUCHERS_STARTED
@@ -29,12 +27,12 @@ export const getVouchers = () => {
       Authorization: storage.adminAccessToken
     };
 
-    return voucherService.getVouchers(null,header).then(
+    return voucherService.getVouchers(null, header).then(
       res => {
-          dispatch(getVouchersSucceeded(res.data.data));
+        dispatch(getVouchersSucceeded(res.data.data));
       },
       error => {
-        dispatch(getVouchersFailed(error.response))
+        dispatch(getVouchersFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -43,7 +41,6 @@ export const getVouchers = () => {
     );
   };
 };
-
 
 // Add Voucher
 
@@ -62,15 +59,16 @@ const addVoucherFailed = error => ({
   error: true
 });
 
-export const addVoucher = (provider) => {
+export const addVoucher = provider => {
   return dispatch => {
     dispatch(addVoucherStarted());
     const storage = Auth.extractJwtFromStorage();
+
     const header = {
       Authorization: storage.adminAccessToken
     };
-  
-    return voucherService.addVoucher(provider,header).then(
+
+    return voucherService.addVoucher(provider, header).then(
       res => {
         dispatch(addVoucherSucceeded(res.data.data));
       },
@@ -80,6 +78,44 @@ export const addVoucher = (provider) => {
           description: error.toString(),
           fatal: true
         });
+      }
+    );
+  };
+};
+
+// For Web /Admin - check voucher expiry
+
+const checkVoucherExpiryStarted = () => ({
+  type: types.CHECK_VOUCHER_EXPIRY_STARTED
+});
+
+const checkVoucherExpirySucceeded = data => ({
+  type: types.CHECK_VOUCHER_EXPIRY_SUCCEEDED,
+  payload: data
+});
+
+const checkVoucherExpiryFailed = error => ({
+  type: types.CHECK_VOUCHER_EXPIRY_FAILED,
+  payload: error,
+  error: true
+});
+
+export const checkVoucherExpiry = data => {
+  return dispatch => {
+    dispatch(checkVoucherExpiryStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { authorization: storage.accessToken };
+    console.log(data);
+    console.log(header);
+    return voucherService.checkVoucherExpiry(data, header).then(
+      res => {
+        console.log("cuccess");
+        dispatch(checkVoucherExpirySucceeded(res));
+      },
+      error => {
+        console.log("error");
+        dispatch(checkVoucherExpiryFailed(error.response));
+        logger.error({ description: error.toString(), fatal: true });
       }
     );
   };

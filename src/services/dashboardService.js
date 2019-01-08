@@ -15,7 +15,7 @@ export const news = (payload, header = {}) =>
   api(baseUrl, header).get("/newsfeeds/news-feeds" + payload);
 
 export const explores = (payload, header = {}) =>
-  api(baseUrl, header).post("/newsfeeds/explore" + payload);
+  api(baseUrl, header).get("/newsfeeds/explore" + payload);
 
 export const participants = (payload, header = {}) =>
   api(baseUrl, header).post("/participants/get-all-participant" + payload);
