@@ -27,7 +27,7 @@ class CreateCMSManagementPage extends Component {
 
   componentDidMount = () => {
     const isEdit =
-    this.props.match && this.props.match.params.id ? true : false;
+    !!(this.props.match && this.props.match.params.id);
     this.setState({ isEdit });
     if (isEdit) {
       this.props.getCMSDetail(this.props.match.params.id).then(() => {

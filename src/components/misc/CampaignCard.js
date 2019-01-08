@@ -9,6 +9,8 @@ import CommentCard from "./CommentCard";
 import { like, getComments, setSavedPost } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
+import * as enumerations from "../../lib/constants/enumerations";
+import { modalType } from "../../lib/constants";
 
 class CampaignCard extends Component {
   constructor(props, context) {
@@ -21,21 +23,71 @@ class CampaignCard extends Component {
     };
   }
 
-  renderReportTips = id => {
-    const reportTips = [
-      {
-        name: Translations.tool_tips.report,
-        handleEvent: this.handleReportPost
-      },
-      {
-        name: Translations.tool_tips.save,
-        handleEvent: this.handleSavePost
-      },
-      {
-        name: Translations.tool_tips.lock,
-        handleEvent: this.handleContent
-      }
-    ];
+  handleLockContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+  
+  handleSetState = (data) => {
+    clearInterval(this.timer);
+    const { item } = this.state;
+    item.reportStatus = data.contentStatus;
+  }
+
+  handleDoNotContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+
+  handleUnlockContent= (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+  
+  renderReportTips = (id) => {
+    let reportTips;
+    const { isBackOffice } = this.props;
+    const { item } = this.state;
+
+    if (isBackOffice){
+      reportTips = [
+        {
+          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    }
+    else {
+      reportTips = [
+        {
+          name: Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+    }
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
@@ -165,7 +217,9 @@ CampaignCard.propTypes = {
   isReport: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired,
   like: PropTypes.func.isRequired,
-  likeData: PropTypes.any
+  likeData: PropTypes.any,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  isBackOffice: PropTypes.bool
 };
 
 export default connect(

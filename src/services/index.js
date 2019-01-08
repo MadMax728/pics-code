@@ -16,7 +16,7 @@ export * from "./adminService";
 export * from "./verificationService";
 export * from "./voucherService";
 export * from "./backOfficeReviewService";
-export * from "./backOfficeReportedContentService";
+export * from "./reportedContentService";
 export * from "./profileSettingsService";
 export * from "./hashUserService";
 export * from "./subscribeService";

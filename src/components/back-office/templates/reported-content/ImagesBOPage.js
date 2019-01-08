@@ -44,7 +44,7 @@ class ImagesBOPage extends Component {
       reportContent: "Image"
     }
     this.getBackOfficeReportedContent(data);
-    this.getStatistics(data);
+    this.getBackOfficeReportedStatistics(data);
   };
 
   getBackOfficeReportedContent = (data) => {
@@ -57,7 +57,7 @@ class ImagesBOPage extends Component {
     });
   }
 
-  getStatistics = (data) => {
+  getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.ImageStatistics) {
         this.setState({
@@ -88,22 +88,6 @@ class ImagesBOPage extends Component {
     });
   }
 
-  renderImageList = () => {
-    const { imageList } = this.state;
-    return imageList.map(image => {
-      return (
-        <div key={image.id}>
-          {image.postType === enumerations.contentTypes.mediaPost &&  
-          image.typeContent &&
-          image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
-          (
-            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />
-          )}
-        </div>
-      );
-    });
-  };
-
   handleReported = (e) => {
     let data;
     if (e.target.id === "All")
@@ -122,6 +106,22 @@ class ImagesBOPage extends Component {
     }
     this.getBackOfficeReportedContent(data);
   }
+  
+  renderImageList = () => {
+    const { imageList } = this.state;
+    return imageList.map(image => {
+      return (
+        <div key={image.id}>
+          {image.postType === enumerations.contentTypes.mediaPost &&  
+          image.typeContent &&
+          image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
+          (
+            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />
+          )}
+        </div>
+      );
+    });
+  };
 
   render() {
     const { imageList, statistics } = this.state;

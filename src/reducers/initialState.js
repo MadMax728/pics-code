@@ -211,6 +211,8 @@ const initialState = {
 
     updateReport: null,
 
+    addReport: null,
+
     isLoading: false,
     error: false
   },
