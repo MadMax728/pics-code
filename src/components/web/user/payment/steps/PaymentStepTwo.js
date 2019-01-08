@@ -11,14 +11,22 @@ class PaymentStepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: {}
+      error: {},
+      voucherCode: "",
+      voucherRedeemAmount: 0.0,
+      maximumExpenses: this.props.form.maximumExpenses
+        ? this.props.form.maximumExpenses
+        : this.props.form.budget
     };
   }
 
   handleRedeemBtn = () => {
     let errors = {};
     if (this.props.form.voucher) {
-      const voucherParams = { code: this.props.form.voucher };
+      const voucherParams = {
+        code: this.props.form.voucher,
+        type: this.props.forThat
+      };
       this.props.checkVoucherExpiry(voucherParams).then(() => {
         const errors = {};
         if (
@@ -34,19 +42,37 @@ class PaymentStepTwo extends Component {
           this.setState({ error: errors });
         } else if (
           this.props.voucherData &&
-          this.props.voucherData.voucherExpiryResult
+          this.props.voucherData.voucherExpiryResult &&
+          this.props.voucherData.voucherExpiryResult.amountList
         ) {
-          console.log(this.props.voucherData);
+          let maximumExpensenAmount = this.props.form.maximumExpenses
+            ? this.props.form.maximumExpenses
+            : this.props.form.budget;
+          this.setState({
+            voucherCode: this.props.form.voucher,
+            voucherRedeemAmount: this.props.voucherData.voucherExpiryResult
+              .amountList.voucherRedeemAmount,
+            maximumExpenses:
+              parseInt(maximumExpensenAmount) -
+              parseInt(
+                this.props.voucherData.voucherExpiryResult.amountList
+                  .voucherRedeemAmount
+              )
+          });
         }
       });
     } else {
       errors.voucherError = Translations.create_campaigns.voucherCodeRequired;
-      console.log(Translations.create_campaigns.voucherCodeRequired);
       this.setState({ error: errors });
     }
   };
 
   handleCommitToBuy = () => {
+    this.props.setVoucherData(
+      this.state.voucherCode,
+      this.state.voucherRedeemAmount,
+      this.state.maximumExpenses
+    );
     this.props.handleSubmit();
   };
 
@@ -96,6 +122,7 @@ class PaymentStepTwo extends Component {
                     <td>Preliminary amount</td>
                     <td>{form.budget}</td>
                   </tr>
+                  `
                   <tr>
                     <td>Runtime</td>
                     <td>
@@ -106,14 +133,15 @@ class PaymentStepTwo extends Component {
                   </tr>
                   <tr>
                     <td>Voucher</td>
-                    <td>0,00 €</td>
+                    <td>{this.state.voucherRedeemAmount}€</td>
                   </tr>
                   <tr>
                     <td className="fontBold">Maximum expenses</td>
                     <td className="fontBold">
-                      {form.maximumExpenses
+                      {/* {form.maximumExpenses
                         ? form.maximumExpenses
-                        : form.budget}
+                        : form.budget} */}
+                      {this.state.maximumExpenses}
                     </td>
                   </tr>
                 </tbody>
@@ -205,7 +233,9 @@ PaymentStepTwo.propTypes = {
   form: PropTypes.any.isRequired,
   checkVoucherExpiry: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.any,
-  voucherData: PropTypes.any
+  voucherData: PropTypes.any,
+  forThat: PropTypes.any,
+  setVoucherData: PropTypes.func
 };
 
 export default connect(

@@ -35,7 +35,8 @@ class CreateCreatorCampaign extends Component {
       handleSelect,
       handleVideo,
       userInfo,
-      handleAddress
+      handleAddress,
+      setVoucherData
     } = this.props;
 
     return (
@@ -106,6 +107,7 @@ class CreateCreatorCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               handleSubmit={handleSubmit}
+              setVoucherData={setVoucherData}
             />
           ))}
       </div>
@@ -136,7 +138,8 @@ CreateCreatorCampaign.propTypes = {
   handleSelect: PropTypes.func.isRequired,
   handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
-  userInfo: PropTypes.object
+  userInfo: PropTypes.object,
+  setVoucherData: PropTypes.func
 };
 
 export default CreateCreatorCampaign;
