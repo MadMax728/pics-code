@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
-import {
-  PaymentStepOne,
-  PaymentStepTwo
-} from "../../../user/payment/steps";
+import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
 
@@ -38,7 +35,8 @@ class CreateCompanyCampaign extends Component {
       handleSelect,
       handleVideo,
       userInfo,
-      handleAddress
+      handleAddress,
+      setVoucherData
     } = this.props;
 
     return (
@@ -109,6 +107,7 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               handleSubmit={handleSubmit}
+              setVoucherData={setVoucherData}
             />
           ))}
       </div>
@@ -139,7 +138,8 @@ CreateCompanyCampaign.propTypes = {
   handleSelect: PropTypes.func.isRequired,
   handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
-  userInfo: PropTypes.object
+  userInfo: PropTypes.object,
+  setVoucherData: PropTypes.func
 };
 
 export default CreateCompanyCampaign;

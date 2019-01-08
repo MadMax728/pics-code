@@ -48,6 +48,8 @@ const initialState = {
       streetNumber: ""
     },
     voucher: "",
+    voucherAmount: "",
+    voucherCode: "",
     image: null,
     fileType: true,
     file: null,
@@ -178,6 +180,16 @@ class AdsModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
+
+  setVoucherData = (code, voucher, maximumExpenses) => {
+    const { form } = this.state;
+    if (voucher && maximumExpenses) {
+      form.voucherCode = code;
+      form.voucherAmount = voucher;
+      form.maximumExpenses = maximumExpenses;
+      this.setState({ form });
+    }
+  };
 
   validateForm = index => {
     const { form } = this.state;
@@ -313,6 +325,7 @@ class AdsModal extends Component {
             handleSelect={this.handleSelect}
             handleSetState={this.handleSetState}
             handleAddress={this.handleAddress}
+            setVoucherData={this.setVoucherData}
           />
         }
       />

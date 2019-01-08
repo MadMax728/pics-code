@@ -105,15 +105,11 @@ export const checkVoucherExpiry = data => {
     dispatch(checkVoucherExpiryStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { authorization: storage.accessToken };
-    console.log(data);
-    console.log(header);
     return voucherService.checkVoucherExpiry(data, header).then(
       res => {
-        console.log("cuccess");
-        dispatch(checkVoucherExpirySucceeded(res));
+        dispatch(checkVoucherExpirySucceeded(res.data.data));
       },
       error => {
-        console.log("error");
         dispatch(checkVoucherExpiryFailed(error.response));
         logger.error({ description: error.toString(), fatal: true });
       }
