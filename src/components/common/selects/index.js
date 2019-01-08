@@ -10,3 +10,4 @@ export { default as SelectAmount } from "./SelectAmount";
 export { default as SelectType } from "./SelectType";
 export { default as SelectNumber } from "./SelectNumber";
 export { default as SelectLanguage } from "./SelectLanguage";
+export { default as RadioButtonLanguages } from "./RadioButtonLanguages";

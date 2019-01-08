@@ -7,13 +7,11 @@ import { Translations } from "../../../lib/translations";
 const languageData = [
   {
     id: Translations.languages.english,
-    value: Translations.languages.english,
-    isChecked: 'en'
+    value: Translations.languages.english
   },
   {
     id: Translations.languages.german,
-    value: Translations.languages.german,
-    isChecked: 'de'
+    value: Translations.languages.german
   }
 ];
 
@@ -21,8 +19,7 @@ class SelectLanguage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      languageList: [],
-      currentLanguage: Translations.getLanguage()
+      languageList: []
     };
   }
 
@@ -42,30 +39,29 @@ class SelectLanguage extends Component {
   };
 
   handleLanguage = event => {
-    let selectedValue = event.target.value;
-    if (selectedValue === "English") {
-      this.props.handleLanguageSwitch("en");
-       this.setState({ currentLanguage: event.target.value });
-    } else if (selectedValue === "German") {
-      this.props.handleLanguageSwitch("de");
-       this.setState({ currentLanguage: event.target.value });
+    this.props.handleSelect("language", event.target.value);
   };
-}
 
   render() {
-    const { value, className, languageList } = this.props;
-    return <div>
-        {languageData.map(option => <div key={option.value}>
-            <input type="radio" 
-            className={option.className} 
-            id={option.value}
-            name={option.value} 
-            value={option.value} 
-            defaultChecked={option.isChecked === this.state.currentLanguage}
-            onChange={this.handleLanguage} />
-            <span>{option.value}</span>
-          </div>)}
-      </div>;
+    const { value, className } = this.props;
+    return (
+      <select
+        value={value}
+        className={className}
+        onChange={this.handleLanguage}
+        onBlur={this.handleLanguage}
+        options={languageData}
+      >
+        <option value={Translations.base_footer.language}>
+          {Translations.base_footer.language}
+        </option>
+        {languageData.map(option => (
+          <option value={option.id} key={option.id}>
+            {option.value}
+          </option>
+        ))}
+      </select>
+    );
   }
 }
 
@@ -82,8 +78,7 @@ const propTypes = {
   languageList: PropTypes.any,
   className: PropTypes.string,
   getLanguage: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  handleLanguageSwitch: PropTypes.func
+  handleSelect: PropTypes.func.isRequired
 };
 
 SelectLanguage.propTypes = propTypes;

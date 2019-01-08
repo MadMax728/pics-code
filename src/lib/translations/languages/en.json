@@ -140,7 +140,10 @@
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
     "applications": "Applications",
     "status": "Status",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "serverError": "Something went wrong. Please Try Again",
+    "voucherCodeRequired": "Please enter Voucher Code",
+    "voucherCodeValid": "Please enter Valid Voucher Code"
   },
 
   "messages_modal": {
