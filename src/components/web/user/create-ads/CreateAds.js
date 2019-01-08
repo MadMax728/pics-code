@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo } from "./steps";
 import PropTypes from "prop-types";
-import {
-  PaymentStepOne,
-  PaymentStepTwo
-} from "../../user/payment/steps";
+import { PaymentStepOne, PaymentStepTwo } from "../../user/payment/steps";
 
 class CreateAds extends Component {
   constructor(props) {
@@ -28,7 +25,8 @@ class CreateAds extends Component {
       handleSelect,
       handleSetState,
       userInfo,
-      handleAddress
+      handleAddress,
+      setVoucherData
     } = this.props;
 
     return (
@@ -68,6 +66,7 @@ class CreateAds extends Component {
             form={form}
             handleChangeField={handleChangeField}
             handleSubmit={handleSubmit}
+            setVoucherData={setVoucherData}
           />
         )}
       </div>
@@ -90,7 +89,8 @@ CreateAds.propTypes = {
   handleSelect: PropTypes.func.isRequired,
   handleSetState: PropTypes.func.isRequired,
   userInfo: PropTypes.any,
-  handleAddress: PropTypes.func.isRequired
+  handleAddress: PropTypes.func.isRequired,
+  setVoucherData: PropTypes.func
 };
 
 export default CreateAds;

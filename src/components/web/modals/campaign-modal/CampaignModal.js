@@ -61,6 +61,8 @@ const initialState = {
       streetNumber: ""
     },
     voucher: "",
+    voucherAmount: "",
+    voucherCode: "",
     image: null,
     filetype: true,
     file: null,
@@ -106,6 +108,7 @@ class CampaignModal extends Component {
 
   handleSubmit = () => {
     const { form } = this.state;
+    console.log(form);
     if (form.file) {
       const Data = new FormData();
       if (form.filetype) {
@@ -141,6 +144,16 @@ class CampaignModal extends Component {
         modalType.error,
         "Please Select Image or Video"
       );
+    }
+  };
+
+  setVoucherData = (code, voucher, maximumExpenses) => {
+    const { form } = this.state;
+    if (voucher && maximumExpenses) {
+      form.voucherCode = code;
+      form.voucherAmount = voucher;
+      form.maximumExpenses = maximumExpenses;
+      this.setState({ form });
     }
   };
 
@@ -192,7 +205,7 @@ class CampaignModal extends Component {
   };
 
   componentDidMount = () => {
-    this.setState({ stepIndex: 4, isPreview: false });
+    this.setState({ stepIndex: 0, isPreview: false });
     if (userInfo) {
       this.setState({ userInfo });
     }
@@ -436,6 +449,7 @@ class CampaignModal extends Component {
               handleSelect={this.handleSelect}
               handleVideo={this.handleVideo}
               userInfo={userInfo}
+              setVoucherData={this.setVoucherData}
             />
           ) : (
             <CreateCreatorCampaign
@@ -464,6 +478,7 @@ class CampaignModal extends Component {
               handleSelect={this.handleSelect}
               handleVideo={this.handleVideo}
               userInfo={userInfo}
+              setVoucherData={this.setVoucherData}
             />
           )
         }

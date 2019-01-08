@@ -11,7 +11,12 @@ class PaymentStepTwo extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      error: {}
+      error: {},
+      voucherCode: "",
+      voucherRedeemAmount: 0.0,
+      maximumExpenses: this.props.form.maximumExpenses
+        ? this.props.form.maximumExpenses
+        : this.props.form.budget
     };
   }
 
@@ -22,7 +27,6 @@ class PaymentStepTwo extends Component {
         code: this.props.form.voucher,
         type: this.props.forThat
       };
-      console.log("campeign", voucherParams);
       this.props.checkVoucherExpiry(voucherParams).then(() => {
         const errors = {};
         if (
@@ -38,9 +42,23 @@ class PaymentStepTwo extends Component {
           this.setState({ error: errors });
         } else if (
           this.props.voucherData &&
-          this.props.voucherData.voucherExpiryResult
+          this.props.voucherData.voucherExpiryResult &&
+          this.props.voucherData.voucherExpiryResult.amountList
         ) {
-          console.log(this.props.voucherData);
+          let maximumExpensenAmount = this.props.form.maximumExpenses
+            ? this.props.form.maximumExpenses
+            : this.props.form.budget;
+          this.setState({
+            voucherCode: this.props.form.voucher,
+            voucherRedeemAmount: this.props.voucherData.voucherExpiryResult
+              .amountList.voucherRedeemAmount,
+            maximumExpenses:
+              parseInt(maximumExpensenAmount) -
+              parseInt(
+                this.props.voucherData.voucherExpiryResult.amountList
+                  .voucherRedeemAmount
+              )
+          });
         }
       });
     } else {
@@ -50,12 +68,16 @@ class PaymentStepTwo extends Component {
   };
 
   handleCommitToBuy = () => {
+    this.props.setVoucherData(
+      this.state.voucherCode,
+      this.state.voucherRedeemAmount,
+      this.state.maximumExpenses
+    );
     this.props.handleSubmit();
   };
 
   render() {
     const { handleChangeField, form } = this.props;
-    console.log("step2", this.props);
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
@@ -100,6 +122,7 @@ class PaymentStepTwo extends Component {
                     <td>Preliminary amount</td>
                     <td>{form.budget}</td>
                   </tr>
+                  `
                   <tr>
                     <td>Runtime</td>
                     <td>
@@ -110,14 +133,15 @@ class PaymentStepTwo extends Component {
                   </tr>
                   <tr>
                     <td>Voucher</td>
-                    <td>0,00 €</td>
+                    <td>{this.state.voucherRedeemAmount}€</td>
                   </tr>
                   <tr>
                     <td className="fontBold">Maximum expenses</td>
                     <td className="fontBold">
-                      {form.maximumExpenses
+                      {/* {form.maximumExpenses
                         ? form.maximumExpenses
-                        : form.budget}
+                        : form.budget} */}
+                      {this.state.maximumExpenses}
                     </td>
                   </tr>
                 </tbody>
@@ -210,7 +234,8 @@ PaymentStepTwo.propTypes = {
   checkVoucherExpiry: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.any,
   voucherData: PropTypes.any,
-  forThat: PropTypes.any
+  forThat: PropTypes.any,
+  setVoucherData: PropTypes.func
 };
 
 export default connect(
