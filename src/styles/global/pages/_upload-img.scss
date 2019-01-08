@@ -56,7 +56,19 @@
           width: 45px;
           margin-right: 10px;
         }
-      }
+      }     
+      .dispInline{
+        width: calc(100% - 50px);
+        margin-top: 4px;
+        &+input{
+          width: 20px;
+          height: 30px;
+          margin: auto;
+          display: table-row;
+          margin-left: 4px;
+          margin-top: 1px;
+        }
+      }      
       div.description {
         border: 1px solid #979797;
         height: auto;
