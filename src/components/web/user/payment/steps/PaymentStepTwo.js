@@ -18,7 +18,11 @@ class PaymentStepTwo extends Component {
   handleRedeemBtn = () => {
     let errors = {};
     if (this.props.form.voucher) {
-      const voucherParams = { code: this.props.form.voucher };
+      const voucherParams = {
+        code: this.props.form.voucher,
+        type: this.props.forThat
+      };
+      console.log("campeign", voucherParams);
       this.props.checkVoucherExpiry(voucherParams).then(() => {
         const errors = {};
         if (
@@ -41,7 +45,6 @@ class PaymentStepTwo extends Component {
       });
     } else {
       errors.voucherError = Translations.create_campaigns.voucherCodeRequired;
-      console.log(Translations.create_campaigns.voucherCodeRequired);
       this.setState({ error: errors });
     }
   };
@@ -52,6 +55,7 @@ class PaymentStepTwo extends Component {
 
   render() {
     const { handleChangeField, form } = this.props;
+    console.log("step2", this.props);
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
@@ -205,7 +209,8 @@ PaymentStepTwo.propTypes = {
   form: PropTypes.any.isRequired,
   checkVoucherExpiry: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.any,
-  voucherData: PropTypes.any
+  voucherData: PropTypes.any,
+  forThat: PropTypes.any
 };
 
 export default connect(

@@ -20,5 +20,8 @@ export const addVoucher = (payload, header = {}) =>
 // Admin - Campeign / Ads - Redeem Functionality
 export const checkVoucherExpiry = (payload, header = {}) =>
   api(baseUrl, header).get(
-    "/vouchers/check-voucher-expiry?voucherCode=GET1112"
+    "/vouchers/check-voucher-expiry?voucherCode=" +
+      payload.code +
+      "&type=" +
+      payload.type
   );

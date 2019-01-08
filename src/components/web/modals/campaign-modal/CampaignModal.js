@@ -413,7 +413,7 @@ class CampaignModal extends Component {
             <CreateCompanyCampaign
               stepIndex={stepIndex}
               isFor={isFor}
-              forThat={"Campaign"}
+              forThat={"Campaigns"}
               handleModalInfoShow={this.handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
@@ -441,7 +441,7 @@ class CampaignModal extends Component {
             <CreateCreatorCampaign
               stepIndex={stepIndex}
               isFor={isFor}
-              forThat={"Campaign"}
+              forThat={"Campaigns"}
               handleModalInfoShow={this.handleModalInfoShow}
               handlePrivewClose={this.handlePrivewClose}
               isPreview={isPreview}
