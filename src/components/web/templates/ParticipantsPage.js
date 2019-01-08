@@ -8,6 +8,9 @@ import PropTypes from "prop-types";
 
 class ParticipantsPage extends Component {
   componentDidMount = () => {
+    if (this.props.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
     window.scrollTo(0, 0);
     if (this.props.searchData.searchKeyword) {
       this.props.getDashboard(
@@ -20,9 +23,6 @@ class ParticipantsPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {

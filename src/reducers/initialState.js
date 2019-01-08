@@ -181,6 +181,7 @@ const initialState = {
   voucherData: {
     vouchers: null,
     voucher: null,
+    voucherExpiryResult: null,
     isLoading: false,
     error: false
   },

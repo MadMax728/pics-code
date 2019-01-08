@@ -132,27 +132,17 @@ class CampaignCompanyFilter extends Component {
   };
 
   render() {
-    console.log("camp", this.state.currentLanguage);
-    let isEnglish = true;
-    let isGerman = false;
-    if (this.state.currentLanguage === "en") {
-      isEnglish = true;
-      isGerman = false;
-    } else if (this.state.currentLanguage === "de") {
-      isEnglish = false;
-      isGerman = true;
-    }
     const languageItems = [
       {
         name: Translations.languages.english,
         className: "radio-btn lbl-margin",
-        checked: isEnglish,
+        checked: true,
         value: Translations.languages.english
       },
       {
         name: Translations.languages.german,
         className: "radio-btn ",
-        checked: isGerman,
+        checked: false,
         value: Translations.languages.german
       }
     ];

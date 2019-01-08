@@ -2,14 +2,49 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { checkVoucherExpiry } from "../../../../../actions";
+import { connect } from "react-redux";
+import { modalType } from "../../../../../lib/constants/enumerations";
+import { Translations } from "../../../../../lib/translations";
 
 class PaymentStepTwo extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      error: {}
+    };
   }
 
-  handleRedeemBtn = () => {};
+  handleRedeemBtn = () => {
+    let errors = {};
+    if (this.props.form.voucher) {
+      const voucherParams = { code: this.props.form.voucher };
+      this.props.checkVoucherExpiry(voucherParams).then(() => {
+        const errors = {};
+        if (
+          this.props.voucherData.error &&
+          this.props.voucherData.error.status === 400
+        ) {
+          if (this.props.voucherData.voucherExpiryResult.length === 0) {
+            errors.voucherError =
+              Translations.create_campaigns.voucherCodeValid;
+          } else {
+            errors.voucherError = Translations.create_campaigns.serverError;
+          }
+          this.setState({ error: errors });
+        } else if (
+          this.props.voucherData &&
+          this.props.voucherData.voucherExpiryResult
+        ) {
+          console.log(this.props.voucherData);
+        }
+      });
+    } else {
+      errors.voucherError = Translations.create_campaigns.voucherCodeRequired;
+      console.log(Translations.create_campaigns.voucherCodeRequired);
+      this.setState({ error: errors });
+    }
+  };
 
   handleCommitToBuy = () => {
     this.props.handleSubmit();
@@ -24,20 +59,17 @@ class PaymentStepTwo extends Component {
           <div className="history-content-wrapper">
             <div className="subtitle">Billing address</div>
             <div className="content">
-              {form.address && 
-                form.address.invoiceRecipient
-              }
+              {form.address && form.address.invoiceRecipient}
               <br />
-              {form.address && 
-                `${form.address.street}, ${form.address.streetNumber}, ${form.address.city}, ${form.address.country} - ${form.address.postalCode}`
-              }
+              {form.address &&
+                `${form.address.street}, ${form.address.streetNumber}, ${
+                  form.address.city
+                }, ${form.address.country} - ${form.address.postalCode}`}
             </div>
           </div>
           <div className="history-content-wrapper">
             <div className="subtitle">Payment method</div>
-            <div className="content">
-              N/A
-            </div>
+            <div className="content">N/A</div>
           </div>
           <div className="history-content-wrapper">
             <div className="subtitle">Voucher </div>
@@ -46,6 +78,13 @@ class PaymentStepTwo extends Component {
               <button className="blue_button" onClick={this.handleRedeemBtn}>
                 Redeem
               </button>
+              {this.state.error.voucherError ? (
+                <span className="error-msg highlight">
+                  {this.state.error.voucherError}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="history-content-wrapper">
@@ -59,7 +98,11 @@ class PaymentStepTwo extends Component {
                   </tr>
                   <tr>
                     <td>Runtime</td>
-                    <td>{form.endDate && form.startDate && `${form.endDate.diff(form.startDate, 'days')} Days`}</td>
+                    <td>
+                      {form.endDate &&
+                        form.startDate &&
+                        `${form.endDate.diff(form.startDate, "days")} Days`}
+                    </td>
                   </tr>
                   <tr>
                     <td>Voucher</td>
@@ -67,7 +110,11 @@ class PaymentStepTwo extends Component {
                   </tr>
                   <tr>
                     <td className="fontBold">Maximum expenses</td>
-                    <td className="fontBold">{form.maximumExpenses? form.maximumExpenses : form.budget}</td>
+                    <td className="fontBold">
+                      {form.maximumExpenses
+                        ? form.maximumExpenses
+                        : form.budget}
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -143,12 +190,25 @@ class PaymentStepTwo extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  voucherData: state.voucherData
+});
+
+const mapDispatchToProps = {
+  checkVoucherExpiry
+};
+
 PaymentStepTwo.propTypes = {
   handleModalInfoShow: PropTypes.func,
   handleChangeField: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired,
+  checkVoucherExpiry: PropTypes.func,
+  handleModalInfoMsgShow: PropTypes.any,
+  voucherData: PropTypes.any
 };
 
-
-export default PaymentStepTwo;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentStepTwo);

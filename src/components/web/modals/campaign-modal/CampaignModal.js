@@ -9,12 +9,16 @@ import {
 } from "../../campaigns";
 
 import moment from "moment";
-import { modalType, typeContent, target_group, procedure } from "../../../../lib/constants/enumerations";
+import {
+  modalType,
+  typeContent,
+  target_group,
+  procedure
+} from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 
 import { connect } from "react-redux";
 import { createCampaign, uploadMedia } from "../../../../actions";
-
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -23,51 +27,50 @@ if (storage) {
 }
 
 const initialState = {
-      stepIndex: 0,
-      isPreview: false,
-      userInfo: null,
-      form: {
-        title: "",
-        location: {
-          latitude: "",
-          longitude: "",
-          address: ""
-        },
-        category: "",
-        procedure: procedure.public,
-        typeContent: typeContent.image,
-        targetGroup: target_group.company,
-        offers: "",
-        offerTag: [],
-        offerTagList: [],
-        inquiry: "",
-        inquiryTag: [],
-        inquiryTagList: [],
-        description: "",
-        startDate: moment(),
-        endDate: moment(),
-        budget: "",
-        address:{
-          invoiceRecipient : "",
-          street : "",
-          postalCode: "",
-          city: "",
-          VATNO: "",
-          country: "",
-          streetNumber: ""
-        },
-        voucher: "",
-        image: null,
-        filetype: true,
-        file: null,
-        video: null,
-        typeId: "",
-        maximumExpenses: "",
-        error: false
-      },
-      scale: ""
+  stepIndex: 0,
+  isPreview: false,
+  userInfo: null,
+  form: {
+    title: "",
+    location: {
+      latitude: "",
+      longitude: "",
+      address: ""
+    },
+    category: "",
+    procedure: procedure.public,
+    typeContent: typeContent.image,
+    targetGroup: target_group.company,
+    offers: "",
+    offerTag: [],
+    offerTagList: [],
+    inquiry: "",
+    inquiryTag: [],
+    inquiryTagList: [],
+    description: "",
+    startDate: moment(),
+    endDate: moment(),
+    budget: "",
+    address: {
+      invoiceRecipient: "",
+      street: "",
+      postalCode: "",
+      city: "",
+      VATNO: "",
+      country: "",
+      streetNumber: ""
+    },
+    voucher: "",
+    image: null,
+    filetype: true,
+    file: null,
+    video: null,
+    typeId: "",
+    maximumExpenses: "",
+    error: false
+  },
+  scale: ""
 };
-
 
 class CampaignModal extends Component {
   constructor(props, context) {
@@ -89,11 +92,11 @@ class CampaignModal extends Component {
     this.handleSubmit();
   };
 
-  handleContentChange = (text) => {
+  handleContentChange = text => {
     const { form } = this.state;
-    form.description = text === "<p></p>"? "" : text;
+    form.description = text === "<p></p>" ? "" : text;
     this.setState({ form });
-  }
+  };
 
   handleCreatorChangeField = event => {
     const { form } = this.state;
@@ -103,60 +106,80 @@ class CampaignModal extends Component {
 
   handleSubmit = () => {
     const { form } = this.state;
-    if(form.file)
-    {
+    if (form.file) {
       const Data = new FormData();
-      if(form.filetype) {
+      if (form.filetype) {
         Data.append("image", form.file);
-      }
-      else {
+      } else {
         Data.append("video", form.file);
       }
       Data.append("postType", "campaign");
 
       this.props.uploadMedia(Data, form.filetype).then(() => {
-        if(this.props.mediaData && this.props.mediaData.media)
-        {
-          form.typeId=this.props.mediaData.media.id;
-          form.file= null;
-          form.image= null;
-          form.video= null;
-          if(!form.maximumExpenses){
-            form.maximumExpenses = form.budget
+        if (this.props.mediaData && this.props.mediaData.media) {
+          form.typeId = this.props.mediaData.media.id;
+          form.file = null;
+          form.image = null;
+          form.video = null;
+          if (!form.maximumExpenses) {
+            form.maximumExpenses = form.budget;
           }
-          this.setState({form});
-          this.props.createCampaign(form).then(()=> {
-            if(this.props.campaignData && this.props.campaignData.campaign && this.props.campaignData.campaign.id){
+          this.setState({ form });
+          this.props.createCampaign(form).then(() => {
+            if (
+              this.props.campaignData &&
+              this.props.campaignData.campaign &&
+              this.props.campaignData.campaign.id
+            ) {
               this.handleModalInfoShow();
             }
-          })
+          });
         }
       });
-    }
-    else {
+    } else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         "Please Select Image or Video"
       );
     }
-  }
+  };
 
-  validateForm = (index) => {
+  validateForm = index => {
     const { form } = this.state;
-    if(index === 0){
-      return form.title && form.location.latitude && form.location.longitude && form.location.address && form.category && form.offers && form.offerTag.length !== 0 && form.inquiry && form.inquiryTag.length !== 0 && form.file
+    if (index === 0) {
+      return (
+        form.title &&
+        form.location.latitude &&
+        form.location.longitude &&
+        form.location.address &&
+        form.category &&
+        form.offers &&
+        form.offerTag.length !== 0 &&
+        form.inquiry &&
+        form.inquiryTag.length !== 0 &&
+        form.file
+      );
+    } else if (index === 1) {
+      return form.description;
+    } else if (index === 2) {
+      return (
+        form.startDate &&
+        form.endDate &&
+        form.endDate.diff(form.startDate, "days") >= 0 &&
+        form.budget
+      );
+    } else if (index === 3) {
+      return (
+        form.address.invoiceRecipient &&
+        form.address.street &&
+        form.address.streetNumber &&
+        form.address.postalCode &&
+        form.address.city &&
+        form.address.country &&
+        form.address.VATNO
+      );
     }
-    else if (index === 1){
-      return form.description
-    }
-    else if (index === 2){
-      return form.startDate && form.endDate && form.endDate.diff(form.startDate, 'days') >= 0 && form.budget
-    }
-    else if (index === 3){
-      return form.address.invoiceRecipient && form.address.street && form.address.streetNumber && form.address.postalCode && form.address.city && form.address.country && form.address.VATNO
-    }
-  }
-
+  };
 
   handleCompanySubmit = () => {
     this.handleSubmit();
@@ -169,9 +192,9 @@ class CampaignModal extends Component {
   };
 
   componentDidMount = () => {
-    this.setState({ stepIndex: 0, isPreview: false });
+    this.setState({ stepIndex: 4, isPreview: false });
     if (userInfo) {
-      this.setState({userInfo})
+      this.setState({ userInfo });
     }
   };
 
@@ -196,14 +219,12 @@ class CampaignModal extends Component {
   handleNext = () => {
     const { stepIndex } = this.state;
     if (stepIndex < 4) {
-      if(this.validateForm(stepIndex))
-      {
+      if (this.validateForm(stepIndex)) {
         this.setState({
           stepIndex: stepIndex + 1,
           form: { ...this.state.form, error: false }
         });
-      }
-      else {
+      } else {
         this.setState({
           form: { ...this.state.form, error: true }
         });
@@ -229,13 +250,13 @@ class CampaignModal extends Component {
       "Campaign"
     );
   };
-  
-  handleVideo = (e) => {
-    const file = e.target.files[0];
-    this.handleImageVideo(file);    
-  }
 
-  handleImageVideo = (file) => {
+  handleVideo = e => {
+    const file = e.target.files[0];
+    this.handleImageVideo(file);
+  };
+
+  handleImageVideo = file => {
     const reader = new FileReader();
 
     if (file.type.includes("image")) {
@@ -243,7 +264,7 @@ class CampaignModal extends Component {
       reader.readAsDataURL(file);
       reader.onloadend = function() {
         const { form } = currentThis.state;
-        form.typeContent= typeContent.image;
+        form.typeContent = typeContent.image;
         form.image = reader.result;
         form.file = file;
         form.fileType = true;
@@ -255,16 +276,16 @@ class CampaignModal extends Component {
       reader.readAsDataURL(file);
       reader.onloadend = function() {
         const { form } = currentThis.state;
-        form.typeContent= typeContent.video;
+        form.typeContent = typeContent.video;
         form.video = reader.result;
         form.file = file;
         form.fileType = false;
         currentThis.setState({ form });
       };
     }
-  }
+  };
 
-  handleActualImg = (e) => {
+  handleActualImg = e => {
     const file = e;
     this.handleImageVideo(file);
   };
@@ -275,16 +296,15 @@ class CampaignModal extends Component {
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    form.location.latitude = location.lat
-    form.location.longitude = location.lng
+    form.location.latitude = location.lat;
+    form.location.longitude = location.lng;
     form.location.address = address;
     this.setState({ form });
   };
-  
+
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;
-    if (form.offerTag.length === 0)
-    {
+    if (form.offerTag.length === 0) {
       form.offerTag = [];
     }
     form.offerTag.push(id);
@@ -294,26 +314,35 @@ class CampaignModal extends Component {
 
   handleInquiryTagDelete = id => {
     const { form } = this.state;
-    this.setState({ form: {
-      ...this.state.form, 
-      inquiryTag: form.inquiryTag.filter(tag => tag !== form.inquiryTagList[id].id), 
-      inquiryTagList: form.inquiryTagList.filter(tag => tag.id !== form.inquiryTagList[id].id)}
+    this.setState({
+      form: {
+        ...this.state.form,
+        inquiryTag: form.inquiryTag.filter(
+          tag => tag !== form.inquiryTagList[id].id
+        ),
+        inquiryTagList: form.inquiryTagList.filter(
+          tag => tag.id !== form.inquiryTagList[id].id
+        )
+      }
     });
   };
 
   handleOfferTagDelete = id => {
-    const { form } = this.state;  
-    this.setState({ form: {
-      ...this.state.form, 
-      offerTag: form.offerTag.filter(tag => tag !== form.offerTagList[id].id), 
-      offerTagList: form.offerTagList.filter(tag => tag.id !== form.offerTagList[id].id)}
+    const { form } = this.state;
+    this.setState({
+      form: {
+        ...this.state.form,
+        offerTag: form.offerTag.filter(tag => tag !== form.offerTagList[id].id),
+        offerTagList: form.offerTagList.filter(
+          tag => tag.id !== form.offerTagList[id].id
+        )
+      }
     });
   };
 
   handleInquiryTagChange = (id, tag) => {
     const { form } = this.state;
-    if (form.inquiryTag.length === 0)
-    {
+    if (form.inquiryTag.length === 0) {
       form.inquiryTag = [];
     }
     form.inquiryTag.push(id);
@@ -321,21 +350,21 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
-  handleSelect = (isFor , selected) => {
+  handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected;
     this.setState({ form });
-  }
+  };
 
   componentWillUnmount = () => {
     this.setState(initialState);
-  }
+  };
 
-  handleAddress = (event) => {
+  handleAddress = event => {
     const { form } = this.state;
     form.address[event.target.name] = event.target.value;
     this.setState({ form });
-  }
+  };
 
   render() {
     const { isFor, handleModalHide } = this.props;
@@ -454,14 +483,13 @@ CampaignModal.propTypes = {
   campaignData: PropTypes.any
 };
 
-
 const mapStateToProps = state => ({
   mediaData: state.mediaData,
   campaignData: state.campaignData
 });
 
 const mapDispatchToProps = {
-  createCampaign, 
+  createCampaign,
   uploadMedia
 };
 

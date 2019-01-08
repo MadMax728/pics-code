@@ -2,7 +2,6 @@ import { api } from "../api";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
-
 // const api = apiFactory(baseUrl);
 
 /**
@@ -17,3 +16,9 @@ export const getVouchers = (payload, header = {}) =>
 // BackOffice Dashboard API
 export const addVoucher = (payload, header = {}) =>
   api(baseUrl, header).post("/vouchers", payload);
+
+// Admin - Campeign / Ads - Redeem Functionality
+export const checkVoucherExpiry = (payload, header = {}) =>
+  api(baseUrl, header).get(
+    "/vouchers/check-voucher-expiry?voucherCode=GET1112"
+  );
