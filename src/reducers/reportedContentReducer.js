@@ -45,7 +45,27 @@ const reportedContentReducer = (state = initialState.reportedContentData, action
         error: action.payload
       };
 
-      
+    // GET_BACK_OFFICE_REPORTED_STATISTICS
+    case types.GET_BACK_OFFICE_REPORTED_STATISTICS_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.GET_BACK_OFFICE_REPORTED_STATISTICS_SUCCEEDED:
+      return {
+        ...state,
+        [`${action.isFor}Statistics`]: action.payload,
+        isLoading: false
+      };
+    case types.GET_BACK_OFFICE_REPORTED_STATISTICS_FAILED:
+      return {
+        ...state,
+        [action.isFor]: [],
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

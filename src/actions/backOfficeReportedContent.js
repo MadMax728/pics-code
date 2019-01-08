@@ -44,6 +44,51 @@ export const getBackOfficeReportedContent = (prop) => {
 };
 
 
+// Get BackOffice Reported Statistics
+const getBackOfficeReportedStatisticsStarted = () => ({
+  type: types.GET_BACK_OFFICE_REPORTED_STATISTICS_STARTED
+});
+
+const getBackOfficeReportedStatisticsSucceeded = (data, isFor) => ({
+  type: types.GET_BACK_OFFICE_REPORTED_STATISTICS_SUCCEEDED,
+  payload: data,
+  isFor
+});
+
+const getBackOfficeReportedStatisticsFailed = (error, isFor) => ({
+  type: types.GET_BACK_OFFICE_REPORTED_STATISTICS_FAILED,
+  payload: error,
+  error: true,
+  isFor
+});
+
+export const getBackOfficeReportedStatistics = (prop) => {
+  return dispatch => {
+    dispatch(getBackOfficeReportedStatisticsStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.adminAccessToken
+    };
+
+      console.log("fndsjk");
+      
+    return  backOfficeReportedContentService.getReportedStatistics(prop, header).then(
+      res => {
+          dispatch(getBackOfficeReportedStatisticsSucceeded(res.data.data, prop.reportContent));
+      },
+      error => {
+        dispatch(getBackOfficeReportedStatisticsFailed(error.response, prop.reportContent))
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+
+
 //  Update Back Office Report
 const updateBackOfficeReportStarted = () => ({
   type: types.UPDATE_BACK_OFFICE_REPORT_STARTED
@@ -65,7 +110,7 @@ export const updateBackOfficeReport = (prop) => {
     dispatch(updateBackOfficeReportStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
-      Authorization: storage.accessToken
+      Authorization: storage.adminAccessToken
     };
 
     return  backOfficeReportedContentService.updateBackOfficeReport(prop, header).then(

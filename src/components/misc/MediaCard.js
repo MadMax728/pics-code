@@ -34,9 +34,9 @@ class MediaCard extends Component {
   }
   
   handleSetState = (data) => {
+    clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
-    this.setState({item});
   }
 
   handleDoNotContent = (e) => {

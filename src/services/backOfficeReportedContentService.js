@@ -29,7 +29,9 @@ export const getReportedContent = (payload, type="get", header = {}) => {
 export const updateBackOfficeReport = (payload, header = {}) =>
   api(baseUrl, header).put("/reports", payload );
 
-
+// Get Reported Statistics
+export const getReportedStatistics = (payload, header = {}) =>
+  api(baseUrl, header).get("/reports/post-count?reportContent=" + payload.reportContent);
 
 // BackOffice VideoBO API
 export const reportedContentVideos = (payload, header = {}) =>
