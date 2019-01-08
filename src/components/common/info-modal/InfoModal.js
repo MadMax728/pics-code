@@ -36,6 +36,8 @@ class InfoModal extends Component {
       <ProcessedModal
         modalInfoShow={this.props.modalInfoShow}
         handleModalInfoHide={this.props.handleModalInfoHide}
+        modalInfo={this.props.modalInfo}
+        statusCallback={this.props.statusCallback}
       />
     );
   };
@@ -160,7 +162,8 @@ InfoModal.propTypes = {
   handleProfile: PropTypes.func,
   modalInfo: PropTypes.any,
   image: PropTypes.any,
-  profile: PropTypes.any
+  profile: PropTypes.any,
+  statusCallback: PropTypes.any
 };
 
 export default InfoModal;

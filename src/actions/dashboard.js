@@ -2,6 +2,8 @@ import * as types from "../lib/constants/actionTypes";
 import * as dashboardService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
+import * as _ from "lodash";
+import moment from "moment";
 
 const getDashboardStarted = (isFor) => ({
   type: types.GET_DASHBOARD_STARTED,
@@ -30,7 +32,8 @@ export const getDashboard = (prop, provider) => {
     };
     return dashboardService[prop](provider, header).then(
       res => {
-        dispatch(getDashboardSucceeded(res.data.data, prop));
+        const campaigns = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        dispatch(getDashboardSucceeded(campaigns, prop));
       },
       error => {
         dispatch(getDashboardFailed(error.response, prop));

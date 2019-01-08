@@ -70,7 +70,6 @@ class TopBar extends Component {
     const { items, handeleShare } = this.props;
     return (
       <div>
-        {items ? (
           <div className="user_info">
             <div className="user-image bg-white no-padding">
               <img
@@ -81,7 +80,7 @@ class TopBar extends Component {
             </div>
             <div className="user-details no-padding-right padding-l-10">
               <div className="bg-white padding-25 user_details">
-                <div className="user_name">{items.username}</div>
+                <div className="user_name">{items.username? items.username : "Username"}</div>
                 {items.length !== 0 && items.private && (
                   <img src={images.tick} alt="tick" className="tick" />
                 )}
@@ -116,26 +115,6 @@ class TopBar extends Component {
               </div>
             </div>
           </div>
-        ) : (
-          <div className="user_info">
-            <div className="user-image bg-white no-padding">
-              <img src={images.crop_pic} width="100%" alt="profile" />
-            </div>
-            <div className="user-details no-padding-right padding-l-10">
-              <div className="bg-white padding-25 user_details">
-                <div className="user_name">{"Username"}</div>
-                <img src={images.tick} alt="tick" className="tick" />
-                <span className="profile-type">
-                  {Translations.top_bar.private_profile}
-                </span>
-                <div className="settings">
-                  <img src={images.more} alt="more" />
-                </div>
-                <div className="clearfix" />
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     );
   }

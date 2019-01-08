@@ -91,3 +91,9 @@ export const reportStatusType = {
   doNotLock: "Not Processed",
   normal: "Outstanding"
 }
+
+export const reportType = {
+  lock: "lock",
+  unLock: "unLock",
+  doNotLock: "doNotLock"
+}

@@ -5,10 +5,12 @@ import MediaCardHeader from "./headers/MediaCardHeader";
 import MediaCardFooter from "./footers/MediaCardFooter";
 import CommentCard from "./CommentCard";
 import { Translations } from "../../lib/translations";
+import * as enumerations from "../../lib/constants/enumerations";
 import { RenderToolTips } from "../common";
 import { getComments, like, setSavedPost } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
+import { modalType } from "../../lib/constants";
 
 class MediaCard extends Component {
   constructor(props, context) {
@@ -21,21 +23,71 @@ class MediaCard extends Component {
     };
   }
 
+  handleLockContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+  
+  handleSetState = (data) => {
+    const { item } = this.state;
+    item.reportStatus = data.contentStatus;
+    this.setState({item});
+  }
+
+  handleDoNotContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+
+  handleUnlockContent= (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+
   renderReportTips = (id) => {
-    const reportTips = [
-      {
-        name: Translations.tool_tips.report,
-        handleEvent: this.handleReportPost
-      },
-      {
-        name: Translations.tool_tips.save,
-        handleEvent: this.handleSavePost
-      },
-      {
-        name: Translations.tool_tips.lock,
-        handleEvent: this.handleContent
-      }
-    ];
+    let reportTips;
+    const { isBackOffice } = this.props;
+    const { item } = this.state;
+
+    if (isBackOffice){
+      reportTips = [
+        {
+          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    }
+    else {
+      reportTips = [
+        {
+          name: Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+    }
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
@@ -54,8 +106,6 @@ class MediaCard extends Component {
       }
     })
   };
-
-  handleContent = () => {};
 
   handleComment = commet => {
     const item = this.state.item;
@@ -131,7 +181,8 @@ const mapStateToProps = state => ({
   likeData: state.likeData,
   savedData: state.savedData,
   comments: state.commentData.comments,
-  totalCommentsCount: state.totalCommentsCount
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
@@ -150,7 +201,10 @@ MediaCard.propTypes = {
   isParticipant: PropTypes.bool,
   isReport: PropTypes.bool,
   isDescription: PropTypes.bool.isRequired,
-  likeData: PropTypes.any
+  likeData: PropTypes.any,
+  isBackOffice: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  reportedContentData: PropTypes.any
 };
 
 MediaCard.defaultProps = {

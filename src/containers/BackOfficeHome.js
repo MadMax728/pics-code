@@ -13,6 +13,7 @@ class BackOfficeHome extends Component {
       modalInfoShow: false,
       modalInfoType: "",
       modalInfo: null,
+      statusCallback: () => { }
     };
   }
 
@@ -28,6 +29,10 @@ class BackOfficeHome extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info });
   };
 
+  handleModalInfoDetailsCallbackShow = (e, info, callback) => {   
+    this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info, statusCallback: callback });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -36,7 +41,7 @@ class BackOfficeHome extends Component {
   handleModalHide = () => {};
 
   render() {
-    const { modalInfo, modalInfoShow, modalInfoType} = this.state;
+    const { modalInfo, modalInfoShow, modalInfoType, statusCallback} = this.state;
     return (
       <div>
         <section>
@@ -46,6 +51,7 @@ class BackOfficeHome extends Component {
             modalInfoType={modalInfoType}
             handleModalHide={this.handleModalHide}
             modalInfo={modalInfo}
+            statusCallback={statusCallback}
           />
 
           <div className="container">
@@ -58,6 +64,7 @@ class BackOfficeHome extends Component {
                 <BackOfficeHomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalInfoDetailsShow={this.handleModalInfoDetailsShow}
+                  handleModalInfoDetailsCallbackShow={this.handleModalInfoDetailsCallbackShow}
                 />
               </div>
             </div>

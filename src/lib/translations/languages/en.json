@@ -198,7 +198,9 @@
   "tool_tips": {
     "report": "Report Post",
     "save": "Save Post",
-    "lock": "locks / unlocks content"
+    "lock": "Lock content",
+    "unlock": "Unlock content",
+    "do_not": "Do not lock content"
   },
 
   "back_office_menu": {
