@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent } from "../../../../actions";
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
@@ -44,6 +44,7 @@ class ImagesBOPage extends Component {
       reportContent: "Image"
     }
     this.getBackOfficeReportedContent(data);
+    this.getBackOfficeReportedStatistics(data);
   };
 
   getBackOfficeReportedContent = (data) => {
@@ -56,21 +57,36 @@ class ImagesBOPage extends Component {
     });
   }
 
-  renderImageList = () => {
-    const { imageList } = this.state;
-    return imageList.map(image => {
-      return (
-        <div key={image.id}>
-          {image.postType === enumerations.contentTypes.mediaPost &&  
-          image.typeContent &&
-          image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
-          (
-            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />
-          )}
-        </div>
-      );
+  getBackOfficeReportedStatistics = (data) => {
+    this.props.getBackOfficeReportedStatistics(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.ImageStatistics) {
+        this.setState({
+          statistics: [
+            {
+              name: Translations.right_side_bar_statistics.all,
+              id: "All",
+              value: this.props.reportedContentData.ImageStatistics.all
+            },
+            {
+              name: Translations.right_side_bar_statistics.outstanding,
+              id: "Outstanding",
+              value: this.props.reportedContentData.ImageStatistics.outstanding
+            },
+            {
+              name: Translations.right_side_bar_statistics.processed,
+              id: "Processed",
+              value: this.props.reportedContentData.ImageStatistics.processed
+            },
+            {
+              name: Translations.right_side_bar_statistics.not_processed,
+              id: "NotProcessed",
+              value: this.props.reportedContentData.ImageStatistics.notProcessed
+            }
+          ]
+        })
+      }
     });
-  };
+  }
 
   handleReported = (e) => {
     let data;
@@ -90,6 +106,22 @@ class ImagesBOPage extends Component {
     }
     this.getBackOfficeReportedContent(data);
   }
+  
+  renderImageList = () => {
+    const { imageList } = this.state;
+    return imageList.map(image => {
+      return (
+        <div key={image.id}>
+          {image.postType === enumerations.contentTypes.mediaPost &&  
+          image.typeContent &&
+          image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
+          (
+            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />
+          )}
+        </div>
+      );
+    });
+  };
 
   render() {
     const { imageList, statistics } = this.state;
@@ -116,14 +148,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getBackOfficeReportedContent
+  getBackOfficeReportedContent,
+  getBackOfficeReportedStatistics
 };
 
 ImagesBOPage.propTypes = {
   getBackOfficeReportedContent: PropTypes.func.isRequired,
   reportedContentData: PropTypes.object,
   isLoading: PropTypes.bool,
-  handleModalInfoDetailsCallbackShow: PropTypes.func
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  getBackOfficeReportedStatistics: PropTypes.func,
   // error: PropTypes.any
 };
 
