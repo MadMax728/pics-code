@@ -143,7 +143,26 @@
     "statistics": "Statistics",
     "serverError": "Something went wrong. Please Try Again",
     "voucherCodeRequired": "Please enter Voucher Code",
-    "voucherCodeValid": "Please enter Valid Voucher Code"
+    "voucherCodeValid": "Please enter Valid Voucher Code",
+    "CompletePaymentTransaction": "Complete payment transaction",
+    "BillingAddress": "Billing Address",
+    "PaymentMethod": "Payment method",
+    "NA": "N/A",
+    "Voucher": "Voucher",
+    "Redeem": "Redeem",
+    "OrderOverview": "Order overview",
+    "PreliminaryAmount": "Preliminary amount",
+    "Runtime": "Runtime",
+    "MaximumExpenses": "Maximum expenses",
+    "CommitToBuy": "Commit to buy",
+    "onClickRegister": "By clicking on register you agree to our",
+    "GenralTerms": "General Terms & Conditions",
+    "termsUse": "Terms of Use",
+    "dataProtection": "Data Protection",
+    "privacyPolicy": "Privacy Policy",
+    "FillProperData": "Please Fill proper Data",
+    "SelectProperMedia": "Please Select Proper Media",
+    "ImageAndVedio": "Please Select Image or Video"
   },
 
   "messages_modal": {
