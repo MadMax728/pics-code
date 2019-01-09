@@ -13,28 +13,8 @@ class ImagesBOPage extends Component {
     super(props, context);
     this.state = {
       imageList: null,
-      statistics: [
-        {
-          name: Translations.right_side_bar_statistics.all,
-          id: "All",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.outstanding,
-          id: "Outstanding",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.processed,
-          id: "Processed",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.not_processed,
-          id: "NotProcessed",
-          value: 0
-        }
-      ]
+      isLoading: this.props.isLoading,
+      isSearch: false
     };
   }
 
@@ -43,6 +23,7 @@ class ImagesBOPage extends Component {
       type: "get",
       reportContent: "Image"
     }
+    this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
   };
@@ -51,39 +32,18 @@ class ImagesBOPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.Image) {
         this.setState({
-          imageList: this.props.reportedContentData.Image
+          imageList: this.props.reportedContentData.Image,
+          isLoading: this.props.reportedContentData.isLoading
         })
       }
     });
   }
 
+
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.ImageStatistics) {
-        this.setState({
-          statistics: [
-            {
-              name: Translations.right_side_bar_statistics.all,
-              id: "All",
-              value: this.props.reportedContentData.ImageStatistics.all
-            },
-            {
-              name: Translations.right_side_bar_statistics.outstanding,
-              id: "Outstanding",
-              value: this.props.reportedContentData.ImageStatistics.outstanding
-            },
-            {
-              name: Translations.right_side_bar_statistics.processed,
-              id: "Processed",
-              value: this.props.reportedContentData.ImageStatistics.processed
-            },
-            {
-              name: Translations.right_side_bar_statistics.not_processed,
-              id: "NotProcessed",
-              value: this.props.reportedContentData.ImageStatistics.notProcessed
-            }
-          ]
-        })
+        // success
       }
     });
   }
@@ -96,6 +56,7 @@ class ImagesBOPage extends Component {
         type: "get",
         reportContent: "Image"
       }
+      this.setState({isSearch: false});
     }
     else {
       data = {
@@ -103,10 +64,19 @@ class ImagesBOPage extends Component {
         reportContent: "Image",
         searchType: `${e.target.id}`
       }
+      this.setState({isSearch: true});
     }
     this.getBackOfficeReportedContent(data);
   }
-  
+
+  handleRemove = (data) => {
+    const { imageList, isSearch } = this.state;
+    if (isSearch)
+    {
+      this.setState({imageList: imageList.filter(e => e.id !== data)});
+    }
+  }
+
   renderImageList = () => {
     const { imageList } = this.state;
     return imageList.map(image => {
@@ -116,7 +86,7 @@ class ImagesBOPage extends Component {
           image.typeContent &&
           image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
           (
-            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />
+            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
           )}
         </div>
       );
@@ -124,17 +94,24 @@ class ImagesBOPage extends Component {
   };
 
   render() {
-    const { imageList, statistics } = this.state;
-    const { isLoading } = this.props;
+    const { imageList, isLoading } = this.state;
+    const { reportedContentData } = this.props;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
           <ReportedSearchBar />
-          {imageList && !isLoading && this.renderImageList()}
-          {isLoading && <CampaignLoading />}
+          {imageList && this.renderImageList()}
+          {!imageList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
-          <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.images}`} statistics={statistics} handleEvent={this.handleReported} />
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.images}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.all : 0} 
+            outstanding={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.outstanding : 0}
+            processed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.processed : 0} 
+            notProcessed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.notProcessed : 0}
+          />
         </div>
       </div>
     );

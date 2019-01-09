@@ -4,10 +4,11 @@ import * as images from "../../lib/constants/images";
 import { RenderToolTips, HashTagUsername } from "../common";
 import { ThreeDots, ReadMore } from "../ui-kit";
 import { Translations } from "../../lib/translations";
-import { addComment, deleteComment, editComment } from "../../actions";
+import { addComment, deleteComment, editComment, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
 import ReportCard from "./ReportCard";
+import * as enumerations from "../../lib/constants/enumerations";
 
 class CommentCard extends Component {
   constructor(props, context) {
@@ -27,25 +28,23 @@ class CommentCard extends Component {
       },
       updateForm: {
         comment: ""
-      },
-      ReportTips: [
-        {
-          name: "Edit",
-          handleEvent: this.handleEditComment
-        },
-        {
-          name: "Report Comment",
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: "Delete",
-          handleEvent: this.handleDelete
-        }
-      ]
+      }
     };
   }
 
-  handleReportPost = () => {};
+  handleReportPost = (e) => {
+    const  { item } = this.state;
+    const data = {
+      typeContent: "Comment",
+      typeId: e.target.id,
+      title: item.title
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
+        // console.log(this.props.reportedContentData.addReport.success);
+      }
+    });
+  };
 
   componentDidMount = () => {
     const commentData = this.state.comments.slice(
@@ -121,10 +120,43 @@ class CommentCard extends Component {
   /**
    * Tooltp
    */
-  renderReportTips = id => {
+  renderReportTips = (id) => {
+    let reportTips;
+    const { isBackOffice } = this.props;
+    const { item } = this.state;
+
+    if (isBackOffice){
+      reportTips = [
+        {
+          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    }
+    else {
+      reportTips = [
+        {
+          name: Translations.tool_tips.edit,
+          handleEvent: this.handleEditComment
+        },
+        {
+          name: Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: Translations.tool_tips.delete,
+          handleEvent: this.handleDelete
+        }
+      ];
+    }
+
     return (
       <RenderToolTips
-        items={this.state.ReportTips}
+        items={reportTips}
         id={id}
         isLoading={this.props.isLoading}
       />
@@ -350,13 +382,15 @@ class CommentCard extends Component {
 
 const mapStateToProps = state => ({
   comment: state.commentData.comment,
-  isLoading: state.commentData.isLoading
+  isLoading: state.commentData.isLoading,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   addComment,
   deleteComment,
-  editComment
+  editComment,
+  addReport
 };
 
 CommentCard.propTypes = {
@@ -371,7 +405,10 @@ CommentCard.propTypes = {
   isLoading: PropTypes.bool,
   itemId: PropTypes.any,
   maxLimit: PropTypes.any,
-  totalCommentsCount: PropTypes.any
+  totalCommentsCount: PropTypes.any,
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any
 };
 
 export default connect(

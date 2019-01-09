@@ -208,9 +208,6 @@ const initialState = {
     CommentsStatistics: null,
     UsersStatistics: null,
 
-
-    updateReport: null,
-
     addReport: null,
 
     isLoading: false,

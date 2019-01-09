@@ -13,29 +13,9 @@ class ReportedCampaignsPage extends Component {
     super(props, context);
     this.state = {
       campaignList: null,
-      statistics: [
-        {
-          name: Translations.right_side_bar_statistics.all,
-          id: "All",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.outstanding,
-          id: "Outstanding",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.processed,
-          id: "Processed",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.not_processed,
-          id: "NotProcessed",
-          value: 0
-        }
-      ]
-    };
+      isLoading: this.props.isLoading,
+      isSearch: false
+     };
   }
 
   componentDidMount = () => {
@@ -60,30 +40,7 @@ class ReportedCampaignsPage extends Component {
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.CampaignStatistics) {
-        this.setState({
-          statistics: [
-            {
-              name: Translations.right_side_bar_statistics.all,
-              id: "All",
-              value: this.props.reportedContentData.CampaignStatistics.all
-            },
-            {
-              name: Translations.right_side_bar_statistics.outstanding,
-              id: "Outstanding",
-              value: this.props.reportedContentData.CampaignStatistics.outstanding
-            },
-            {
-              name: Translations.right_side_bar_statistics.processed,
-              id: "Processed",
-              value: this.props.reportedContentData.CampaignStatistics.processed
-            },
-            {
-              name: Translations.right_side_bar_statistics.not_processed,
-              id: "NotProcessed",
-              value: this.props.reportedContentData.CampaignStatistics.notProcessed
-            }
-          ]
-        })
+        // success
       }
     });
   }
@@ -96,6 +53,7 @@ class ReportedCampaignsPage extends Component {
         type: "get",
         reportContent: "Campaign"
       }
+      this.setState({isSearch: false});
     }
     else {
       data = {
@@ -103,14 +61,21 @@ class ReportedCampaignsPage extends Component {
         reportContent: "Campaign",
         searchType: `${e.target.id}`
       }
+      this.setState({isSearch: true});
     }
     this.getBackOfficeReportedContent(data);
   }
   
+  handleRemove = (data) => {
+    const { campaignList, isSearch } = this.state;
+    if (isSearch)
+    {
+      this.setState({campaignList: campaignList.filter(e => e.id !== data)});
+    }
+  }
 
   rendercampaigns = () => {
     const { campaignList } = this.state;
-    
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
@@ -127,6 +92,7 @@ class ReportedCampaignsPage extends Component {
               isReport
               isBackOffice 
               handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+              handleRemove={this.handleRemove}
               />
           )}
         </div>
@@ -135,20 +101,27 @@ class ReportedCampaignsPage extends Component {
   };
 
   render(){
-    const { campaignList, statistics } = this.state;
-    const { isLoading } = this.props;
+    const { campaignList } = this.state;
+    const { isLoading, reportedContentData } = this.props;
 
     return (
       <div>
         <div className="padding-rl-10 middle-section">
           <ReportedSearchBar />
-            {campaignList && !isLoading && this.rendercampaigns()}
-            {isLoading && <CampaignLoading />}
+            {campaignList && this.rendercampaigns()}
+            {!campaignList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
-        <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.Campaigns}`} statistics={statistics} handleEvent={this.handleReported} />
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.campaigns}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.all : 0} 
+            outstanding={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.outstanding : 0}
+            processed={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.processed : 0} 
+            notProcessed={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.notProcessed : 0}
+          />
+        </div>
       </div>
-    </div>
     );
   }
 }

@@ -25,9 +25,11 @@ class MediaCard extends Component {
   }
 
   handleLockContent = (e) => {
+    const  { item } = this.state;
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
+      reportContent: item.typeContent
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -38,12 +40,16 @@ class MediaCard extends Component {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
+    this.setState({item});
+    this.props.handleRemove(item.id);
   }
 
-  handleDoNotContent = (e) => {
+  handleDoNotContent = (e) => {    
+    const  { item } = this.state;
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
+      reportContent: item.typeContent
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -51,9 +57,11 @@ class MediaCard extends Component {
   }
 
   handleUnlockContent= (e) => {
+    const  { item } = this.state;    
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
+      reportContent: item.typeContent
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -100,9 +108,8 @@ class MediaCard extends Component {
       title: item.title
     }    
     this.props.addReport(data).then(()=> {
-      console.log(this.props.reportedContentData.addReport);
       if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
-        // this.props.handleModalInfoHide();
+        // console.log(this.props.reportedContentData.addReport.success);
       }
     });
   };
@@ -221,6 +228,7 @@ MediaCard.propTypes = {
   isBackOffice: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   addReport: PropTypes.func,
+  handleRemove: PropTypes.func,
   reportedContentData: PropTypes.any
 };
 

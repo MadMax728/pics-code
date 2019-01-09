@@ -219,7 +219,9 @@
     "save": "Save Post",
     "lock": "Lock content",
     "unlock": "Unlock content",
-    "do_not": "Do not lock content"
+    "do_not": "Do not lock content",
+    "edit": "Edit",
+    "delete": "Delete"
   },
 
   "back_office_menu": {

@@ -1,9 +1,35 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Translations } from "../../../lib/translations";
 
 const onKeyDown = () => {};
 
-const RightSidebarStatistics = ({ header, statistics, handleEvent }) => {
+
+
+const RightSidebarStatistics = ({ header, handleEvent, all, outstanding, processed, notProcessed }) => {
+  const statistics = [
+    {
+      name: Translations.right_side_bar_statistics.all,
+      id: "All",
+      value: all
+    },
+    {
+      name: Translations.right_side_bar_statistics.outstanding,
+      id: "Outstanding",
+      value: outstanding
+    },
+    {
+      name: Translations.right_side_bar_statistics.processed,
+      id: "Processed",
+      value: processed
+    },
+    {
+      name: Translations.right_side_bar_statistics.not_processed,
+      id: "NotProcessed",
+      value: notProcessed
+    }
+  ]
+
   return (
     <div className="campaigns-right">
       <div className="normal_title padding-15">{header}</div>
@@ -21,8 +47,11 @@ const RightSidebarStatistics = ({ header, statistics, handleEvent }) => {
 
 RightSidebarStatistics.propTypes = {
   header: PropTypes.string,
-  statistics: PropTypes.any.isRequired,
-  handleEvent: PropTypes.func.isRequired
+  handleEvent: PropTypes.func.isRequired,
+  all: PropTypes.any.isRequired,
+  outstanding: PropTypes.any.isRequired, 
+  processed: PropTypes.any.isRequired, 
+  notProcessed: PropTypes.any.isRequired
 };
 
 export default RightSidebarStatistics;
