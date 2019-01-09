@@ -11,15 +11,16 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class Tags extends Component {
   render() {
-    const { value, suggestion, handleAddition, handleDelete } = this.props; 
+    const { value, suggestion, handleAddition, handleDelete } = this.props;
     return (
-        <ReactTags
-          tags={value}
-          suggestions={suggestion}
-          handleDelete={handleDelete}
-          handleAddition={handleAddition}
-          delimiters={delimiters}
-        />
+      <ReactTags
+        // inline={false}
+        tags={value}
+        suggestions={suggestion}
+        handleDelete={handleDelete}
+        handleAddition={handleAddition}
+        delimiters={delimiters}
+      />
     );
   }
 }

@@ -44,8 +44,8 @@ class TopBar extends Component {
           id={`slot-${slot.name}`}
           role="button"
           dataTip=""
-          dataClass="tooltip-wrapr" /* eslint-disable */
-          getContent={() =>
+          dataClass="tooltip-wrapr"
+          /* eslint-disable */ getContent={() =>
             this.renderReportTips(slot.name, slot.userid, slot.username)
           }
           effect="solid"
@@ -59,7 +59,11 @@ class TopBar extends Component {
         />
         <span> {slot.name}</span>
         <div className="clearfix" />
-        <button className={slot.btnActiveClassName} onClick={slot.handeleEvent}>
+        <button
+          className={slot.btnActiveClassName}
+          id={slot.userid}
+          onClick={slot.handeleEvent}
+        >
           {slot.btnText}
         </button>
       </div>

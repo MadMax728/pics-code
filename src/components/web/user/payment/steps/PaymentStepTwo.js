@@ -84,6 +84,7 @@ class PaymentStepTwo extends Component {
   };
 
   handleCommitToBuy = () => {
+    this.setState({ error: {} });
     this.props.setVoucherData(
       this.state.voucherCode,
       this.state.voucherRedeemAmount,
@@ -95,7 +96,6 @@ class PaymentStepTwo extends Component {
   render() {
     const { handleChangeField, form, isLoading } = this.props;
     const redeemLoading = this.props.voucherData.isLoading;
-    console.log(redeemLoading);
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
