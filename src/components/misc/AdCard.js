@@ -6,9 +6,11 @@ import AdCardFooter from "./footers/AdCardFooter";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
-import { like, getComments, setSavedPost } from "../../actions";
+import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
+import * as enumerations from "../../lib/constants/enumerations";
+
 class AdCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -21,24 +23,50 @@ class AdCard extends Component {
   }
 
   renderReportTips = (id) => {
-    const reportTips = [
-      {
-        name: Translations.tool_tips.report,
-        handleEvent: this.handleReportPost
-      },
-      {
-        name: Translations.tool_tips.save,
-        handleEvent: this.handleSavePost
-      },
-      {
-        name: Translations.tool_tips.lock,
-        handleEvent: this.handleContent
-      }
-    ];
+    let reportTips;
+    const { isBackOffice } = this.props;
+    const { item } = this.state;
+
+    if (isBackOffice){
+      reportTips = [
+        {
+          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    }
+    else {
+      reportTips = [
+        {
+          name: Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+    }
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = () => {};
+  handleReportPost = (e) => {
+    const  { item } = this.state;
+    const data = {
+      typeContent: "Ads",
+      typeId: e.target.id,
+      title: item.title
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
+        // console.log(this.props.reportedContentData.addReport.success);
+      }
+    });
+  };
 
   handleContent = () => {};
 
@@ -142,19 +170,24 @@ AdCard.propTypes = {
   getComments: PropTypes.func.isRequired,
   comments: PropTypes.any,
   isReport: PropTypes.bool,
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
   savedData: state.savedData,
   comments: state.commentData.comments,
-  totalCommentsCount: state.totalCommentsCount
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   like,
   getComments,
-  setSavedPost
+  setSavedPost,
+  addReport
 };
 
 export default connect(
