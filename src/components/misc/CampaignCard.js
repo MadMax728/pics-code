@@ -27,6 +27,7 @@ class CampaignCard extends Component {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
+      reportContent: "Campaign"
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -44,6 +45,7 @@ class CampaignCard extends Component {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "Campaign"
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -54,6 +56,7 @@ class CampaignCard extends Component {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
+      reportContent: "Campaign"
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)

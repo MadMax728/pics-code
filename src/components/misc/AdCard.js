@@ -117,7 +117,7 @@ class AdCard extends Component {
   };
 
   render() {
-    const { isStatus, isDescription, isInformation, isReport } = this.props;
+    const { isStatus, isDescription, isInformation, isReport, reportedContentData } = this.props;
     const { isComments, item, comments } = this.state;
     return (
       <div className="feed_wrapper">
@@ -132,6 +132,7 @@ class AdCard extends Component {
           ad={item}
           isDescription={isDescription}
           isInformation={isInformation}
+          isLoading={reportedContentData.isLoading}
         />
         <AdCardFooter
           ad={item}

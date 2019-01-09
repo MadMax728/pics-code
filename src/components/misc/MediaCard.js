@@ -25,9 +25,11 @@ class MediaCard extends Component {
   }
 
   handleLockContent = (e) => {
+    const  { item } = this.state;
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
+      reportContent: item.typeContent
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -41,10 +43,12 @@ class MediaCard extends Component {
     this.setState({item})
   }
 
-  handleDoNotContent = (e) => {
+  handleDoNotContent = (e) => {    
+    const  { item } = this.state;
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
+      reportContent: item.typeContent
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -52,9 +56,11 @@ class MediaCard extends Component {
   }
 
   handleUnlockContent= (e) => {
+    const  { item } = this.state;    
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
+      reportContent: item.typeContent
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
