@@ -11,7 +11,7 @@ import {
   getUser
 } from "../../../actions";
 
-class SubscribedTooltip extends Component {
+class SubscriberTooltip extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -184,7 +184,7 @@ const mapDispatchToProps = {
   getUser
 };
 
-SubscribedTooltip.propTypes = {
+SubscriberTooltip.propTypes = {
   type: PropTypes.any,
   userId: PropTypes.any,
   username: PropTypes.any,
@@ -203,4 +203,4 @@ SubscribedTooltip.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SubscribedTooltip);
+)(SubscriberTooltip);
