@@ -113,43 +113,51 @@ class SubscriberTooltip extends Component {
                   className="notification-with-subscribe notification-wrapper"
                   key={user.id}
                 >
-                  <img
-                    src={user.profileUrl}
-                    alt="campaign"
-                    className="img-circle img-responsive"
-                  />
-                  <div className="user-info">
-                    <div className="username">{user.username}</div>
-                    <div className="subtitle">{user.name}</div>
-                  </div>
-                  <div className="subscribe-btn">
-                    {user.isSubscribe ? (
-                      <div className="community-subscribe">
-                        <button
-                          className="filled_button"
-                          id={user.id}
-                          onClick={this.handleSubscribed}
-                        >
-                          {
-                            Translations.profile_community_right_sidebar
-                              .Subscribed
-                          }
-                        </button>
+                  <div className="row">
+                    <div className="col-md-3">
+                      <img
+                        src={user.profileUrl}
+                        alt="campaign"
+                        className="img-circle img-responsive"
+                      />
+                    </div>
+                    <div className="col-md-4">
+                      <div className="user-info">
+                        <div className="username">{user.username}</div>
+                        <div className="subtitle">{user.name}</div>
                       </div>
-                    ) : (
-                      <div className="community-subscribe">
-                        <button
-                          className="blue_button"
-                          id={user.id}
-                          onClick={this.handleSubscribed}
-                        >
-                          {
-                            Translations.profile_community_right_sidebar
-                              .Subscribe
-                          }
-                        </button>
                       </div>
-                    )}
+                    <div className="col-md-5">
+                      <div className="subscribe-btn">
+                        {user.isSubscribe ? (
+                          <div className="community-subscribe">
+                            <button
+                              className="filled_button"
+                              id={user.id}
+                              onClick={this.handleSubscribed}
+                            >
+                              {
+                                Translations.profile_community_right_sidebar
+                                  .Subscribed
+                              }
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="community-subscribe">
+                            <button
+                              className="blue_button"
+                              id={user.id}
+                              onClick={this.handleSubscribed}
+                            >
+                              {
+                                Translations.profile_community_right_sidebar
+                                  .Subscribe
+                              }
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
               );

@@ -8,12 +8,14 @@ const languageData = [
   {
     id: Translations.languages.english,
     value: Translations.languages.english,
-    isChecked: "en"
+    isChecked: "en",
+    className: "language-radio-input"
   },
   {
     id: Translations.languages.german,
     value: Translations.languages.german,
-    isChecked: "de"
+    isChecked: "de",
+    className: "language-radio-input"
   }
 ];
 
