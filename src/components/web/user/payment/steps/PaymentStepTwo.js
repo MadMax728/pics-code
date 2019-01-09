@@ -12,8 +12,12 @@ class PaymentStepTwo extends Component {
     super(props);
     this.state = {
       error: {},
-      voucherCode: "",
-      voucherRedeemAmount: 0.0,
+      voucherCode: this.props.form.voucherCode
+        ? this.props.form.voucherCode
+        : " ",
+      voucherRedeemAmount: this.props.form.voucherAmount
+        ? this.props.form.voucherAmount
+        : "0.0",
       maximumExpenses: this.props.form.maximumExpenses
         ? this.props.form.maximumExpenses
         : this.props.form.budget
@@ -48,17 +52,27 @@ class PaymentStepTwo extends Component {
           let maximumExpensenAmount = this.props.form.maximumExpenses
             ? this.props.form.maximumExpenses
             : this.props.form.budget;
-          this.setState({
-            voucherCode: this.props.form.voucher,
-            voucherRedeemAmount: this.props.voucherData.voucherExpiryResult
-              .amountList.voucherRedeemAmount,
-            maximumExpenses:
-              parseInt(maximumExpensenAmount) -
-              parseInt(
-                this.props.voucherData.voucherExpiryResult.amountList
-                  .voucherRedeemAmount
-              )
-          });
+
+          const voucherAmount = this.props.voucherData.voucherExpiryResult
+            .amountList.voucherRedeemAmount;
+          const calculatedMaximumExpenses =
+            parseInt(maximumExpensenAmount) -
+            parseInt(
+              this.props.voucherData.voucherExpiryResult.amountList
+                .voucherRedeemAmount
+            );
+          if (calculatedMaximumExpenses > 0) {
+            this.setState({
+              voucherCode: this.props.form.voucher,
+              voucherRedeemAmount: voucherAmount,
+              maximumExpenses: calculatedMaximumExpenses
+            });
+            errors.voucherError = "";
+          } else {
+            errors.voucherError =
+              Translations.create_campaigns.voucherCodeValid;
+          }
+          this.setState({ error: errors });
         }
       });
     } else {
