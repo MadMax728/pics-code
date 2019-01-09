@@ -140,7 +140,7 @@ class CommentCard extends Component {
     if (comment.id === updateForm.id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
-          <div className="col-sm-10 col-xs-7 no-padding">
+          <div className="col-sm-11 col-xs-7 no-padding">
             <div className="comment-input">
               <div className="form-group">
                 <HashTagUsername
