@@ -22,11 +22,11 @@ class TopBarOwnerInfo extends Component {
         slots: [
           {
             name: Translations.top_bar_info.subscriber,
-            val:0,
+            val: 0,
             className: "col-sm-4 slot_one no-padding",
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.upload,
-            handeleEvent: this.handeleUpload,
+            handeleEvent: this.handeleUpload
           },
           {
             name: Translations.top_bar_info.subscribed,
@@ -34,7 +34,7 @@ class TopBarOwnerInfo extends Component {
             className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_campaign,
-            handeleEvent: this.handeleCreateCampaign,
+            handeleEvent: this.handeleCreateCampaign
           },
           {
             name: Translations.top_bar_info.posts,
@@ -42,7 +42,7 @@ class TopBarOwnerInfo extends Component {
             className: "col-sm-4 slot_three no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_ad,
-            handeleEvent: this.handeleCreateAd,
+            handeleEvent: this.handeleCreateAd
           }
         ]
       }
@@ -191,6 +191,7 @@ class TopBarOwnerInfo extends Component {
         handeleShare={this.handeleShare}
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
+        userDataByUsername={this.props.userDataByUsername}
       />
     );
   }

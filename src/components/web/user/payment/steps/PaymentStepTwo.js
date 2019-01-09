@@ -6,6 +6,8 @@ import { checkVoucherExpiry } from "../../../../../actions";
 import { connect } from "react-redux";
 import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
+import LazyLoad from "react-lazyload";
+import { Loader } from "../../../../ui-kit";
 
 class PaymentStepTwo extends Component {
   constructor(props) {
@@ -82,6 +84,7 @@ class PaymentStepTwo extends Component {
   };
 
   handleCommitToBuy = () => {
+    this.setState({ error: {} });
     this.props.setVoucherData(
       this.state.voucherCode,
       this.state.voucherRedeemAmount,
@@ -91,13 +94,19 @@ class PaymentStepTwo extends Component {
   };
 
   render() {
-    const { handleChangeField, form } = this.props;
+    const { handleChangeField, form, isLoading } = this.props;
+    const redeemLoading = this.props.voucherData.isLoading;
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
-          <div className="subtitle">Complete payment transaction</div>
+          <div className="subtitle">
+            {Translations.create_campaigns.CompletePaymentTransaction}
+          </div>
           <div className="history-content-wrapper">
-            <div className="subtitle">Billing address</div>
+            <div className="subtitle">
+              {" "}
+              {Translations.create_campaigns.BillingAddress}
+            </div>
             <div className="content">
               {form.address && form.address.invoiceRecipient}
               <br />
@@ -108,37 +117,48 @@ class PaymentStepTwo extends Component {
             </div>
           </div>
           <div className="history-content-wrapper">
-            <div className="subtitle">Payment method</div>
-            <div className="content">N/A</div>
+            <div className="subtitle">
+              {" "}
+              {Translations.create_campaigns.PaymentMethod}{" "}
+            </div>
+            <div className="content"> {Translations.create_campaigns.NA}</div>
           </div>
           <div className="history-content-wrapper">
-            <div className="subtitle">Voucher </div>
+            <div className="subtitle">
+              {" "}
+              {Translations.create_campaigns.Voucher}{" "}
+            </div>
             <div className="form-content">
               <input type="text" name="voucher" onChange={handleChangeField} />
               <button className="blue_button" onClick={this.handleRedeemBtn}>
-                Redeem
+                {Translations.create_campaigns.Redeem}
               </button>
               {this.state.error.voucherError ? (
-                <span className="error-msg highlight">
-                  {this.state.error.voucherError}
-                </span>
+                <div className="form-group">
+                  <span className="error-msg highlight">
+                    {this.state.error.voucherError}
+                  </span>
+                </div>
               ) : (
                 ""
               )}
             </div>
           </div>
           <div className="history-content-wrapper">
-            <div className="subtitle">Order overview </div>
+            <div className="subtitle">
+              {" "}
+              {Translations.create_campaigns.OrderOverview}{" "}
+            </div>
             <div className="content no-padding">
               <table>
                 <tbody>
                   <tr>
-                    <td>Preliminary amount</td>
+                    <td> {Translations.create_campaigns.PreliminaryAmount} </td>
                     <td>{form.budget}</td>
                   </tr>
                   `
                   <tr>
-                    <td>Runtime</td>
+                    <td> {Translations.create_campaigns.Runtime}</td>
                     <td>
                       {form.endDate &&
                         form.startDate &&
@@ -146,11 +166,13 @@ class PaymentStepTwo extends Component {
                     </td>
                   </tr>
                   <tr>
-                    <td>Voucher</td>
+                    <td>{Translations.create_campaigns.Voucher}</td>
                     <td>{this.state.voucherRedeemAmount}€</td>
                   </tr>
                   <tr>
-                    <td className="fontBold">Maximum expenses</td>
+                    <td className="fontBold">
+                      {Translations.create_campaigns.MaximumExpenses}
+                    </td>
                     <td className="fontBold">
                       {/* {form.maximumExpenses
                         ? form.maximumExpenses
@@ -163,17 +185,19 @@ class PaymentStepTwo extends Component {
             </div>
           </div>
           <div className="bottom-links">
-            By clicking on register you agree to our{" "}
-            <Link to={""}>General Terms & Conditions</Link>,{" "}
-            <Link to={""}>Terms of Use</Link> and{" "}
-            <Link to={""}>Data Protection</Link> &{" "}
-            <Link to={""}>Privacy Policy</Link>.
+            {Translations.create_campaigns.onClickRegister}{" "}
+            <Link to={""}>{Translations.create_campaigns.GenralTerms}</Link>,{" "}
+            <Link to={""}>{Translations.create_campaigns.termsUse}</Link> and{" "}
+            <Link to={""}>{Translations.create_campaigns.dataProtection}</Link>{" "}
+            &{" "}
+            <Link to={""}> {Translations.create_campaigns.privacyPolicy}</Link>.
           </div>
           <div className="bottom-button">
             <button className="filled_button" onClick={this.handleCommitToBuy}>
-              Commit to buy
+              {Translations.create_campaigns.CommitToBuy}
             </button>
           </div>
+          {redeemLoading && <Loader />}
         </div>
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
@@ -249,7 +273,8 @@ PaymentStepTwo.propTypes = {
   handleModalInfoMsgShow: PropTypes.any,
   voucherData: PropTypes.any,
   forThat: PropTypes.any,
-  setVoucherData: PropTypes.func
+  setVoucherData: PropTypes.func,
+  isLoading: PropTypes.any
 };
 
 export default connect(

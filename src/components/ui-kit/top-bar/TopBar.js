@@ -35,14 +35,15 @@ class TopBar extends Component {
   };
 
   renderSlots = slot => {
+    const userIsLoading = this.props.userDataByUsername.isLoading;
     return (
       <div className={slot.className} key={`slot-${slot.name}`}>
         <SubscribeList
           id={`slot-${slot.name}`}
           role="button"
           dataTip=""
-          dataClass="tooltip-wrapr" /* eslint-disable */
-          getContent={() =>
+          dataClass="tooltip-wrapr"
+          /* eslint-disable */ getContent={() =>
             this.renderReportTips(slot.name, slot.userid, slot.username)
           }
           effect="solid"
@@ -56,7 +57,12 @@ class TopBar extends Component {
         />
         <span> {slot.name}</span>
         <div className="clearfix" />
-        <button className={slot.btnActiveClassName} onClick={slot.handeleEvent}>
+        <button
+          className={slot.btnActiveClassName}
+          id={slot.userid}
+          onClick={slot.handeleEvent}
+          disabled={userIsLoading}
+        >
           {slot.btnText}
         </button>
       </div>
@@ -132,7 +138,8 @@ TopBar.propTypes = {
   items: PropTypes.any,
   handleModalInfoShow: PropTypes.any,
   getFollowUserList: PropTypes.func,
-  usersData: PropTypes.any
+  usersData: PropTypes.any,
+  userDataByUsername: PropTypes.any
 };
 
 export default connect(
