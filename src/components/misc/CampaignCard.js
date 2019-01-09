@@ -38,7 +38,8 @@ class CampaignCard extends Component {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
-    this.setState({item})
+    this.setState({item});
+    this.props.handleRemove(item.id)
   }
 
   handleDoNotContent = (e) => {
@@ -241,7 +242,8 @@ CampaignCard.propTypes = {
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  handleRemove: PropTypes.func
 };
 
 export default connect(

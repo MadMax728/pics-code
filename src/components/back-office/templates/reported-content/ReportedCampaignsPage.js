@@ -13,6 +13,8 @@ class ReportedCampaignsPage extends Component {
     super(props, context);
     this.state = {
       campaignList: null,
+      isLoading: this.props.isLoading,
+      isSearch: false
      };
   }
 
@@ -51,6 +53,7 @@ class ReportedCampaignsPage extends Component {
         type: "get",
         reportContent: "Campaign"
       }
+      this.setState({isSearch: false});
     }
     else {
       data = {
@@ -58,10 +61,18 @@ class ReportedCampaignsPage extends Component {
         reportContent: "Campaign",
         searchType: `${e.target.id}`
       }
+      this.setState({isSearch: true});
     }
     this.getBackOfficeReportedContent(data);
   }
   
+  handleRemove = (data) => {
+    const { campaignList, isSearch } = this.state;
+    if (isSearch)
+    {
+      this.setState({campaignList: campaignList.filter(e => e.id !== data)});
+    }
+  }
 
   rendercampaigns = () => {
     const { campaignList } = this.state;
@@ -81,6 +92,7 @@ class ReportedCampaignsPage extends Component {
               isReport
               isBackOffice 
               handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+              handleRemove={this.handleRemove}
               />
           )}
         </div>

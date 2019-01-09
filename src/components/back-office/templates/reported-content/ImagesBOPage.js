@@ -14,6 +14,7 @@ class ImagesBOPage extends Component {
     this.state = {
       imageList: null,
       isLoading: this.props.isLoading,
+      isSearch: false
     };
   }
 
@@ -55,6 +56,7 @@ class ImagesBOPage extends Component {
         type: "get",
         reportContent: "Image"
       }
+      this.setState({isSearch: false});
     }
     else {
       data = {
@@ -62,10 +64,19 @@ class ImagesBOPage extends Component {
         reportContent: "Image",
         searchType: `${e.target.id}`
       }
+      this.setState({isSearch: true});
     }
     this.getBackOfficeReportedContent(data);
   }
-  
+
+  handleRemove = (data) => {
+    const { imageList, isSearch } = this.state;
+    if (isSearch)
+    {
+      this.setState({imageList: imageList.filter(e => e.id !== data)});
+    }
+  }
+
   renderImageList = () => {
     const { imageList } = this.state;
     return imageList.map(image => {
@@ -75,7 +86,7 @@ class ImagesBOPage extends Component {
           image.typeContent &&
           image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
           (
-            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />
+            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
           )}
         </div>
       );

@@ -40,7 +40,8 @@ class MediaCard extends Component {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
-    this.setState({item})
+    this.setState({item});
+    this.props.handleRemove(item.id);
   }
 
   handleDoNotContent = (e) => {    
@@ -227,6 +228,7 @@ MediaCard.propTypes = {
   isBackOffice: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   addReport: PropTypes.func,
+  handleRemove: PropTypes.func,
   reportedContentData: PropTypes.any
 };
 

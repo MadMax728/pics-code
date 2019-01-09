@@ -14,6 +14,7 @@ class VideosBOPage extends Component {
     this.state = {
       videoList: null,
       isLoading: this.props.isLoading,
+      isSearch: false
     };
   }
 
@@ -54,6 +55,7 @@ class VideosBOPage extends Component {
         type: "get",
         reportContent: "Video"
       }
+      this.setState({isSearch: false});
     }
     else {
       data = {
@@ -61,6 +63,7 @@ class VideosBOPage extends Component {
         reportContent: "Video",
         searchType: `${e.target.id}`
       }
+      this.setState({isSearch: true});
     }
     this.getBackOfficeReportedContent(data);
   }
@@ -75,12 +78,20 @@ class VideosBOPage extends Component {
           video.typeContent &&
           video.typeContent.toLowerCase() === enumerations.mediaTypes.video &&
           (
-            <MediaCard item={video} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}/>
+            <MediaCard item={video} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
           )}
         </div>
       );
     });
   };
+
+  handleRemove = (data) => {
+    const { videoList, isSearch } = this.state;
+    if (isSearch)
+    {
+      this.setState({videoList: videoList.filter(e => e.id !== data)});
+    }
+  }
 
   render() {
     const { videoList, isLoading } = this.state;
