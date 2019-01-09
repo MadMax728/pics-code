@@ -199,7 +199,20 @@ const initialState = {
     Ads: null,
     Comments: null,
     Users: null,
+
+    ImageStatistics: null,
+    VideosStatistics: null,
+    CampaignsStatistics: null,
+    PicsStatistics: null,
+    AdsStatistics: null,
+    CommentsStatistics: null,
+    UsersStatistics: null,
+
+
     updateReport: null,
+
+    addReport: null,
+
     isLoading: false,
     error: false
   },

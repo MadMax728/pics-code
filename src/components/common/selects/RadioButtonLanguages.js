@@ -42,7 +42,7 @@ class RadioButtonLanguages extends Component {
   };
 
   handleLanguage = event => {
-    let selectedValue = event.target.value;
+    const selectedValue = event.target.value;
     if (selectedValue === "English") {
       this.props.handleLanguageSwitch("en");
       this.setState({ currentLanguage: event.target.value });

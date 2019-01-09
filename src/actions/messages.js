@@ -32,8 +32,8 @@ export const getMessages = (senderId, recipientId) => {
       Authorization: storage.accessToken
     };
     const params = { 
-        senderId : senderId,
-        recipientId: recipientId
+        senderId,
+        recipientId
     };
 
     return messagesService.getMessages(params, headers).then(

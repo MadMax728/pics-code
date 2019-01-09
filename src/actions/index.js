@@ -18,7 +18,7 @@ export * from "./admin";
 export * from "./verification";
 export * from "./voucher";
 export * from "./backOfficeReview";
-export * from "./backOfficeReportedContent";
+export * from "./reportedContent";
 export * from "./profileSettings";
 export * from "./search";
 export * from "./hashUser";

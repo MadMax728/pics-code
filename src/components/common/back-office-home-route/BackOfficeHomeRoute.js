@@ -36,6 +36,15 @@ class BackOfficeHomeRoute extends Component {
     return <ImagesBOPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
   };
 
+  handleVideosBOPage = () => {
+    return <VideosBOPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handleReportedCampaignsPage = () => {
+    return <ReportedCampaignsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+
   handleSettingCampaign = () => {
     return <settings.SettingCampaignPage isBackOffice />;
   };
@@ -127,12 +136,12 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
             exact
-            component={VideosBOPage}
+            component={this.handleVideosBOPage}
           />
           <Route
             path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
             exact
-            component={ReportedCampaignsPage}
+            component={this.handleReportedCampaignsPage}
           />
           <Route
             path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}

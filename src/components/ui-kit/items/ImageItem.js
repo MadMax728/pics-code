@@ -5,6 +5,7 @@ import { Loader } from '../loading-indicator';
 class ImageItem extends PureComponent {
 
   render() {
+    const { isLoading, item } = this.props;
     return (
       <div className="bg-black feed_image">
         {/**
@@ -16,13 +17,18 @@ class ImageItem extends PureComponent {
          */}
         <div className={`embed-responsive embed-responsive-16by9`}>
           <div className={`img-responsive embed-responsive-item`}>
+            {isLoading? 
+              <Loader /> 
+              :        
+            (
             <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
               <img
-                  src={this.props.item}
+                  src={item}
                   alt="altmage"
                   className="img-responsive"
                 />
             </LazyLoad>
+            )}
           </div>
         </div>
       </div>
@@ -32,6 +38,7 @@ class ImageItem extends PureComponent {
 
 ImageItem.propTypes = {
   item: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool,
   // isOtherCardExist: PropTypes.bool.isRequired
 };
 

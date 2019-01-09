@@ -25,7 +25,7 @@ class PaymentStepTwo extends Component {
   }
 
   handleRedeemBtn = () => {
-    let errors = {};
+    const errors = {};
     if (this.props.form.voucher) {
       const voucherParams = {
         code: this.props.form.voucher,

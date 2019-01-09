@@ -7,10 +7,11 @@ import CommentCard from "./CommentCard";
 import { Translations } from "../../lib/translations";
 import * as enumerations from "../../lib/constants/enumerations";
 import { RenderToolTips } from "../common";
-import { getComments, like, setSavedPost } from "../../actions";
+import { getComments, like, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import { modalType } from "../../lib/constants";
+import { Loader } from "../ui-kit";
 
 class MediaCard extends Component {
   constructor(props, context) {
@@ -34,9 +35,9 @@ class MediaCard extends Component {
   }
   
   handleSetState = (data) => {
+    clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
-    this.setState({item});
   }
 
   handleDoNotContent = (e) => {
@@ -91,7 +92,20 @@ class MediaCard extends Component {
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = () => {};
+  handleReportPost = (e) => {
+    const  { item } = this.state;
+    const data = {
+      typeContent: item.typeContent,
+      typeId: e.target.id,
+      title: item.title
+    }    
+    this.props.addReport(data).then(()=> {
+      console.log(this.props.reportedContentData.addReport);
+      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
+        // this.props.handleModalInfoHide();
+      }
+    });
+  };
 
   handleSavePost = (e) => {
     const item = this.state.item;
@@ -141,7 +155,7 @@ class MediaCard extends Component {
 
   render() {
     const { isComments, item } = this.state;
-    const { likeData, isDescription, isReport } = this.props;
+    const { likeData, isDescription, isReport, reportedContentData } = this.props;
     return (
       <div className="feed_wrapper">
         <MediaCardHeader
@@ -152,6 +166,7 @@ class MediaCard extends Component {
         <MediaCardBody 
           item={item} 
           isDescription={isDescription}
+          isLoading={reportedContentData.isLoading}
         />
         <MediaCardFooter
           isLoading={likeData.isLoading}
@@ -188,7 +203,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   like,
   getComments,
-  setSavedPost
+  setSavedPost,
+  addReport
 };
 
 MediaCard.propTypes = {
@@ -204,6 +220,7 @@ MediaCard.propTypes = {
   likeData: PropTypes.any,
   isBackOffice: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
+  addReport: PropTypes.func,
   reportedContentData: PropTypes.any
 };
 
