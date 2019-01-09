@@ -104,7 +104,7 @@ class InformationPage extends Component {
                       className="img-circle img-responsive"
                     />
                   </div>
-                  <div className="col-sm-9 col-xs-7 no-padding">
+                  <div className="col-sm-9 col-xs-7">
                     <div className="normal_title">{campaignDetails.title}</div>
                     <div className="secondary_title">
                       {campaignDetails.userName}

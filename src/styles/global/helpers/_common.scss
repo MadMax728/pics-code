@@ -1274,6 +1274,12 @@ section.loader-wrapr {
       }
       .ReactTags_suggestions {
         border: 1px solid;
+        ul{
+          list-style-type: none!important;
+          li{
+            border-bottom: 1px solid #ddd!important;
+          }          
+        }
       }
     }
     span.tag-wrapper.ReactTags__tag.cursor-move {

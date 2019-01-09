@@ -226,6 +226,7 @@
       .messages-right {
         width: 60%;
         float: left;
+        position: relative;
         .user-wrapper {
           display: flex;
           height: 60px;
@@ -324,9 +325,10 @@
           }
         }
         .write-chat {
-          position: fixed;
-          width: 36%;
+          position: absolute;
+          width: 100%;
           bottom: 0;
+          z-index: 9999;
           float: left;
           border-left: 1px solid #ddd;
           border-top: 1px solid #ddd;
