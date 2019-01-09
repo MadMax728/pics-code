@@ -13,28 +13,6 @@ class VideosBOPage extends Component {
     super(props, context);
     this.state = {
       videoList: null,
-      statistics: [
-        {
-          name: Translations.right_side_bar_statistics.all,
-          id: "All",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.outstanding,
-          id: "Outstanding",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.processed,
-          id: "Processed",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.not_processed,
-          id: "NotProcessed",
-          value: 0
-        }
-      ],
       isLoading: this.props.isLoading,
     };
   }
@@ -63,30 +41,7 @@ class VideosBOPage extends Component {
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.VideoStatistics) {
-        this.setState({
-          statistics: [
-            {
-              name: Translations.right_side_bar_statistics.all,
-              id: "All",
-              value: this.props.reportedContentData.VideoStatistics.all
-            },
-            {
-              name: Translations.right_side_bar_statistics.outstanding,
-              id: "Outstanding",
-              value: this.props.reportedContentData.VideoStatistics.outstanding
-            },
-            {
-              name: Translations.right_side_bar_statistics.processed,
-              id: "Processed",
-              value: this.props.reportedContentData.VideoStatistics.processed
-            },
-            {
-              name: Translations.right_side_bar_statistics.not_processed,
-              id: "NotProcessed",
-              value: this.props.reportedContentData.VideoStatistics.notProcessed
-            }
-          ]
-        })
+        // success
       }
     });
   }
@@ -128,7 +83,8 @@ class VideosBOPage extends Component {
   };
 
   render() {
-    const { videoList, statistics, isLoading } = this.state;
+    const { videoList, isLoading } = this.state;
+    const { reportedContentData } = this.props;
 
     return (
       <div>
@@ -138,7 +94,14 @@ class VideosBOPage extends Component {
           {!videoList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
-          <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.videos}`} statistics={statistics} handleEvent={this.handleReported} />
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.videos}`}
+            handleEvent={this.handleReported} 
+            all={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.all : 0} 
+            outstanding={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.outstanding : 0}
+            processed={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.processed : 0} 
+            notProcessed={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.notProcessed : 0}
+          />          
         </div>
       </div>
     );

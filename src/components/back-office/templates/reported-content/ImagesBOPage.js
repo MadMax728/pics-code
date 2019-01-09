@@ -13,28 +13,6 @@ class ImagesBOPage extends Component {
     super(props, context);
     this.state = {
       imageList: null,
-      statistics: [
-        {
-          name: Translations.right_side_bar_statistics.all,
-          id: "All",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.outstanding,
-          id: "Outstanding",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.processed,
-          id: "Processed",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.not_processed,
-          id: "NotProcessed",
-          value: 0
-        }
-      ],
       isLoading: this.props.isLoading,
     };
   }
@@ -60,33 +38,11 @@ class ImagesBOPage extends Component {
     });
   }
 
+
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.ImageStatistics) {
-        this.setState({
-          statistics: [
-            {
-              name: Translations.right_side_bar_statistics.all,
-              id: "All",
-              value: this.props.reportedContentData.ImageStatistics.all
-            },
-            {
-              name: Translations.right_side_bar_statistics.outstanding,
-              id: "Outstanding",
-              value: this.props.reportedContentData.ImageStatistics.outstanding
-            },
-            {
-              name: Translations.right_side_bar_statistics.processed,
-              id: "Processed",
-              value: this.props.reportedContentData.ImageStatistics.processed
-            },
-            {
-              name: Translations.right_side_bar_statistics.not_processed,
-              id: "NotProcessed",
-              value: this.props.reportedContentData.ImageStatistics.notProcessed
-            }
-          ]
-        })
+        // success
       }
     });
   }
@@ -127,7 +83,8 @@ class ImagesBOPage extends Component {
   };
 
   render() {
-    const { imageList, statistics, isLoading } = this.state;
+    const { imageList, isLoading } = this.state;
+    const { reportedContentData } = this.props;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
@@ -136,7 +93,14 @@ class ImagesBOPage extends Component {
           {!imageList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
-          <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.images}`} statistics={statistics} handleEvent={this.handleReported} />
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.images}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.all : 0} 
+            outstanding={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.outstanding : 0}
+            processed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.processed : 0} 
+            notProcessed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.notProcessed : 0}
+          />
         </div>
       </div>
     );

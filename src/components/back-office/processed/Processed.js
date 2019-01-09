@@ -10,7 +10,7 @@ class Processed extends Component {
   handleProcessed = () => {
     const { modalInfo } = this.props;
     this.props.updateBackOfficeReport(modalInfo).then(()=> {
-      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.updateReport.success) {
+      if(this.props.reportedContentData && !this.props.reportedContentData.error) {
         this.props.statusCallback();
         this.props.handleModalInfoHide();
       }

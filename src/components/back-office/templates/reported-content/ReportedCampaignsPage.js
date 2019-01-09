@@ -13,29 +13,7 @@ class ReportedCampaignsPage extends Component {
     super(props, context);
     this.state = {
       campaignList: null,
-      statistics: [
-        {
-          name: Translations.right_side_bar_statistics.all,
-          id: "All",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.outstanding,
-          id: "Outstanding",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.processed,
-          id: "Processed",
-          value: 0
-        },
-        {
-          name: Translations.right_side_bar_statistics.not_processed,
-          id: "NotProcessed",
-          value: 0
-        }
-      ]
-    };
+     };
   }
 
   componentDidMount = () => {
@@ -60,30 +38,7 @@ class ReportedCampaignsPage extends Component {
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.CampaignStatistics) {
-        this.setState({
-          statistics: [
-            {
-              name: Translations.right_side_bar_statistics.all,
-              id: "All",
-              value: this.props.reportedContentData.CampaignStatistics.all
-            },
-            {
-              name: Translations.right_side_bar_statistics.outstanding,
-              id: "Outstanding",
-              value: this.props.reportedContentData.CampaignStatistics.outstanding
-            },
-            {
-              name: Translations.right_side_bar_statistics.processed,
-              id: "Processed",
-              value: this.props.reportedContentData.CampaignStatistics.processed
-            },
-            {
-              name: Translations.right_side_bar_statistics.not_processed,
-              id: "NotProcessed",
-              value: this.props.reportedContentData.CampaignStatistics.notProcessed
-            }
-          ]
-        })
+        // success
       }
     });
   }
@@ -110,12 +65,7 @@ class ReportedCampaignsPage extends Component {
 
   rendercampaigns = () => {
     const { campaignList } = this.state;
-    console.log(campaignList);
-    
     return campaignList.map(campaign => {
-      console.log(campaign.postType && campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
-      campaign.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign);
-      
       return (
         <div key={campaign.id}>
           {campaign.postType && campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
@@ -139,8 +89,8 @@ class ReportedCampaignsPage extends Component {
   };
 
   render(){
-    const { campaignList, statistics } = this.state;
-    const { isLoading } = this.props;
+    const { campaignList } = this.state;
+    const { isLoading, reportedContentData } = this.props;
 
     return (
       <div>
@@ -150,7 +100,14 @@ class ReportedCampaignsPage extends Component {
             {!campaignList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
-          <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.campaigns}`} statistics={statistics} handleEvent={this.handleReported} />
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.campaigns}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.all : 0} 
+            outstanding={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.outstanding : 0}
+            processed={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.processed : 0} 
+            notProcessed={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.notProcessed : 0}
+          />
         </div>
       </div>
     );
