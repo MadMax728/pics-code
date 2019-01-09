@@ -108,7 +108,6 @@ class CampaignModal extends Component {
 
   handleSubmit = () => {
     const { form } = this.state;
-    console.log(form);
     if (form.file) {
       const Data = new FormData();
       if (form.filetype) {

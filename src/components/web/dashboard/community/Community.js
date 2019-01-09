@@ -85,8 +85,6 @@ class Community extends Component {
   render() {
     const { usersList } = this.state;
     const { isLoadingusers } = this.props;
-    console.log(isLoadingusers);
-
     return (
       <div>
         <div className="normal_title padding-15">
