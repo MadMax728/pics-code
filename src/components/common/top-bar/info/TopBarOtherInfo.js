@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TopBar } from "../../../ui-kit";
+import { TopBar, Loader } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
@@ -223,6 +223,7 @@ class TopBarOtherInfo extends Component {
         items={this.state.items}
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
+        userDataByUsername={this.props.userDataByUsername}
       />
     );
   }

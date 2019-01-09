@@ -6,7 +6,7 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { modalType } from "../../../lib/constants/enumerations";
 import { connect } from "react-redux";
-import { ToolTip } from "../../ui-kit";
+import { ToolTip, Loader } from "../../ui-kit";
 import { users_list } from "../../../mock-data/users-list";
 import { SubscriberTooltip, SubscribedTooltip } from "../../common";
 import { getFollowUserList } from "../../../actions";
@@ -38,6 +38,7 @@ class TopBar extends Component {
   };
 
   renderSlots = slot => {
+    const userIsLoading = this.props.userDataByUsername.isLoading;
     return (
       <div className={slot.className} key={`slot-${slot.name}`}>
         <SubscribeList
@@ -63,6 +64,7 @@ class TopBar extends Component {
           className={slot.btnActiveClassName}
           id={slot.userid}
           onClick={slot.handeleEvent}
+          disabled={userIsLoading}
         >
           {slot.btnText}
         </button>
@@ -139,7 +141,8 @@ TopBar.propTypes = {
   items: PropTypes.any,
   handleModalInfoShow: PropTypes.any,
   getFollowUserList: PropTypes.func,
-  usersData: PropTypes.any
+  usersData: PropTypes.any,
+  userDataByUsername: PropTypes.any
 };
 
 export default connect(
