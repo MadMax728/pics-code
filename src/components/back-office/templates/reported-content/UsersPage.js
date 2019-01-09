@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent } from "../../../../actions";
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../../ui-kit";

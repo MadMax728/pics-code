@@ -70,8 +70,6 @@ export const getBackOfficeReportedStatistics = (prop) => {
       Authorization: storage.adminAccessToken
     };
 
-      console.log("fndsjk");
-      
     return  reportedContentService.getReportedStatistics(prop, header).then(
       res => {
           dispatch(getBackOfficeReportedStatisticsSucceeded(res.data.data, prop.reportContent));

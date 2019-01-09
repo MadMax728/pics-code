@@ -34,7 +34,8 @@ class ImagesBOPage extends Component {
           id: "NotProcessed",
           value: 0
         }
-      ]
+      ],
+      isLoading: this.props.isLoading,
     };
   }
 
@@ -43,6 +44,7 @@ class ImagesBOPage extends Component {
       type: "get",
       reportContent: "Image"
     }
+    this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
   };
@@ -51,7 +53,8 @@ class ImagesBOPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.Image) {
         this.setState({
-          imageList: this.props.reportedContentData.Image
+          imageList: this.props.reportedContentData.Image,
+          isLoading: this.props.reportedContentData.isLoading
         })
       }
     });
@@ -124,14 +127,13 @@ class ImagesBOPage extends Component {
   };
 
   render() {
-    const { imageList, statistics } = this.state;
-    const { isLoading } = this.props;
+    const { imageList, statistics, isLoading } = this.state;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
           <ReportedSearchBar />
-          {imageList && !isLoading && this.renderImageList()}
-          {isLoading && <CampaignLoading />}
+          {imageList && this.renderImageList()}
+          {!imageList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
           <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.images}`} statistics={statistics} handleEvent={this.handleReported} />

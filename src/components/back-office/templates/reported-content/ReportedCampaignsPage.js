@@ -110,8 +110,12 @@ class ReportedCampaignsPage extends Component {
 
   rendercampaigns = () => {
     const { campaignList } = this.state;
+    console.log(campaignList);
     
     return campaignList.map(campaign => {
+      console.log(campaign.postType && campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
+      campaign.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign);
+      
       return (
         <div key={campaign.id}>
           {campaign.postType && campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
@@ -142,13 +146,13 @@ class ReportedCampaignsPage extends Component {
       <div>
         <div className="padding-rl-10 middle-section">
           <ReportedSearchBar />
-            {campaignList && !isLoading && this.rendercampaigns()}
-            {isLoading && <CampaignLoading />}
+            {campaignList && this.rendercampaigns()}
+            {!campaignList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
-        <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.Campaigns}`} statistics={statistics} handleEvent={this.handleReported} />
+          <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.campaigns}`} statistics={statistics} handleEvent={this.handleReported} />
+        </div>
       </div>
-    </div>
     );
   }
 }

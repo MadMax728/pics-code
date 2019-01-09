@@ -34,7 +34,8 @@ class VideosBOPage extends Component {
           id: "NotProcessed",
           value: 0
         }
-      ]
+      ],
+      isLoading: this.props.isLoading,
     };
   }
 
@@ -43,6 +44,7 @@ class VideosBOPage extends Component {
       type: "get",
       reportContent: "Video"
     }
+    this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
   };
@@ -51,7 +53,8 @@ class VideosBOPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.Video) {
         this.setState({
-          videoList: this.props.reportedContentData.Video
+          videoList: this.props.reportedContentData.Video,
+          isLoading: this.props.reportedContentData.isLoading
         })
       }
     });
@@ -125,18 +128,17 @@ class VideosBOPage extends Component {
   };
 
   render() {
-    const { videoList, statistics } = this.state;
-    const { isLoading } = this.props;
+    const { videoList, statistics, isLoading } = this.state;
 
     return (
       <div>
         <div className="padding-rl-10 middle-section">
           <ReportedSearchBar />
-          {videoList && !isLoading && this.renderVideoList()}
-          {isLoading && <CampaignLoading />}
+          {videoList && this.renderVideoList()}
+          {!videoList && isLoading && <CampaignLoading />}
         </div>
         <div className="right_bar no-padding">
-          <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.video}`} statistics={statistics} handleEvent={this.handleReported} />
+          <RightSidebarStatistics header={`Reported ${Translations.review_content_menu.videos}`} statistics={statistics} handleEvent={this.handleReported} />
         </div>
       </div>
     );
