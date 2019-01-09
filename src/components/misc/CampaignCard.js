@@ -6,7 +6,7 @@ import CampaignCardFooter from "./footers/CampaignCardFooter";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
-import { like, getComments, setSavedPost } from "../../actions";
+import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
@@ -92,7 +92,19 @@ class CampaignCard extends Component {
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = () => {};
+  handleReportPost = (e) => {
+    const  { item } = this.state;
+    const data = {
+      typeContent: "Campaign",
+      typeId: e.target.id,
+      title: item.title
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
+        // console.log(this.props.reportedContentData.addReport.success);
+      }
+    });
+  };
 
   handleSavePost = e => {
     const item = this.state.item;
@@ -150,7 +162,8 @@ class CampaignCard extends Component {
       isInformation,
       isBudget,
       isReport,
-      likeData
+      likeData,
+      reportedContentData
     } = this.props;
     const { isComments, item, comments } = this.state;
     return (
@@ -166,6 +179,7 @@ class CampaignCard extends Component {
           campaign={item}
           isDescription={isDescription}
           isInformation={isInformation}
+          isLoading={reportedContentData.isLoading}
         />
         <CampaignCardFooter
           campaign={item}
@@ -197,12 +211,14 @@ const mapStateToProps = state => ({
   likeData: state.likeData,
   savedData: state.savedData,
   comments: state.commentData.comments,
-  totalCommentsCount: state.totalCommentsCount
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   like,
   getComments,
+  addReport,
   setSavedPost
 };
 
@@ -220,7 +236,9 @@ CampaignCard.propTypes = {
   like: PropTypes.func.isRequired,
   likeData: PropTypes.any,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
-  isBackOffice: PropTypes.bool
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any
 };
 
 export default connect(

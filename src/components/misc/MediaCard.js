@@ -101,9 +101,8 @@ class MediaCard extends Component {
       title: item.title
     }    
     this.props.addReport(data).then(()=> {
-      console.log(this.props.reportedContentData.addReport);
       if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
-        // this.props.handleModalInfoHide();
+        // console.log(this.props.reportedContentData.addReport.success);
       }
     });
   };
