@@ -27,13 +27,11 @@ class HashTagUsername extends Component {
   };
 
   hashTagShow = () => {
-    console.log("hashtagUsername", this.refs.hash_tag);
     /* eslint-disable */
     ReactTooltip.show(findDOMNode(this.refs.hash_tag));
   };
 
   hashTagHide = () => {
-    console.log("hashtagUsername hide", this.refs.hash_tag);
     /* eslint-disable */
     ReactTooltip.hide(findDOMNode(this.refs.hash_tag));
   };
