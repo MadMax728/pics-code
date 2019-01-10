@@ -219,3 +219,39 @@ export const getPendingUserList = requestData => {
     );
   };
 };
+
+/* Block User Request -  For Block user
+ */
+const blockUserRequestStarted = () => ({
+  type: types.BLOCK_USER_REQUEST_STARTED
+});
+
+const blockUserRequestSucceeded = data => ({
+  type: types.BLOCK_USER_REQUEST_SUCCEEDED,
+  payload: data
+});
+
+const blockUserRequestFailed = error => ({
+  type: types.BLOCK_USER_REQUEST_FAILED,
+  payload: error,
+  error: true
+});
+export const blockUserRequest = userId => {
+  return dispatch => {
+    dispatch(blockUserRequestStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+    return usersService.blockUserRequest(userId, header).then(
+      res => {
+        dispatch(blockUserRequestSucceeded(res.data.success));
+      },
+      error => {
+        dispatch(blockUserRequestFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

@@ -13,6 +13,7 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
+import { Loader } from "../components/ui-kit";
 
 class Home extends Component {
   constructor(props, context) {
@@ -135,6 +136,7 @@ class Home extends Component {
               </div>
 
               <div>
+                {/* {isLoading || && <Loader />} */}
                 <HomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalShow={this.handleModalShow}
@@ -142,7 +144,6 @@ class Home extends Component {
                   profile={profile}
                 />
               </div>
-
               <div className="right_bar no-padding">
                 <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
