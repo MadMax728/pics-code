@@ -78,6 +78,7 @@
     "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
+    "@angular/language-service": "^7.2.0",
     "@storybook/addon-actions": "^3.3.12",
     "@storybook/addon-info": "^3.3.12",
     "@storybook/addon-knobs": "^3.3.13",

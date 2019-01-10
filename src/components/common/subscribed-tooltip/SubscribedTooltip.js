@@ -40,10 +40,12 @@ class SubscribedTooltip extends Component {
 
   // Tooltip List
   getTooltipUserList = userId => {
-    const userRequestData = { id: userId, type: "followers" };
-    this.props.getFollowUserList("subscribed", userRequestData).then(() => {
-      // Success
-    });
+    if (userId) {
+      const userRequestData = { id: userId, type: "followers" };
+      this.props.getFollowUserList("subscribed", userRequestData).then(() => {
+        // Success
+      });
+    }
   };
 
   // Left sidebar - All User List
