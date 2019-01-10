@@ -216,7 +216,11 @@
 
   "tool_tips": {
     "report": "Report Post",
+    "unreport": "Unreport Post",
+    "report_comment": "Report Comment",
+    "unreport_comment": "Unreport Comment",
     "save": "Save Post",
+    "unsave": "Unsave Post",
     "lock": "Lock content",
     "unlock": "Unlock content",
     "do_not": "Do not lock content",

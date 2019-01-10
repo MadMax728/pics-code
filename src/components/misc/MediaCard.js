@@ -88,11 +88,11 @@ class MediaCard extends Component {
     else {
       reportTips = [
         {
-          name: Translations.tool_tips.report,
+          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: Translations.tool_tips.save,
+          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         }
       ];
@@ -108,8 +108,9 @@ class MediaCard extends Component {
       title: item.title
     }    
     this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
-        // console.log(this.props.reportedContentData.addReport.success);
+      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
+        item.isReported = !item.isReported;
+        this.setState({item});
       }
     });
   };
@@ -122,8 +123,9 @@ class MediaCard extends Component {
       };
 
     this.props.setSavedPost(data).then(()=> {
-      if(this.props.savedData){
-        console.log(this.props.savedData);
+      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
+        item.isSavedPost = !item.isSavedPost;
+        this.setState({item});
       }
     })
   };
@@ -162,7 +164,7 @@ class MediaCard extends Component {
 
   render() {
     const { isComments, item } = this.state;
-    const { likeData, isDescription, isReport, reportedContentData } = this.props;
+    const { likeData, isDescription, isReport, reportedContentData, savedData } = this.props;
     return (
       <div className="feed_wrapper">
         <MediaCardHeader
@@ -173,7 +175,7 @@ class MediaCard extends Component {
         <MediaCardBody 
           item={item} 
           isDescription={isDescription}
-          isLoading={reportedContentData.isLoading}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
         />
         <MediaCardFooter
           isLoading={likeData.isLoading}
