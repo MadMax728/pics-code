@@ -116,6 +116,7 @@ class MediaCard extends Component {
   };
 
   handleSavePost = (e) => {
+    const { isSavedPage } = this.props;
     const item = this.state.item;
     const data = {
         typeId: e.target.id,
@@ -126,6 +127,9 @@ class MediaCard extends Component {
       if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
         item.isSavedPost = !item.isSavedPost;
         this.setState({item});
+        if(isSavedPage && !this.state.item.isSavedPost) {
+          this.props.handleRemove(item.id);
+        }
       }
     })
   };
@@ -231,7 +235,8 @@ MediaCard.propTypes = {
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   addReport: PropTypes.func,
   handleRemove: PropTypes.func,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  isSavedPage: PropTypes.bool
 };
 
 MediaCard.defaultProps = {

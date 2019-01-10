@@ -104,6 +104,7 @@ class AdCard extends Component {
   };
 
   handleSavePost = (e) => {
+    const { isSavedPage } = this.props;
     const item = this.state.item;
     const data = {
         typeId: e.target.id,
@@ -114,6 +115,9 @@ class AdCard extends Component {
       if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
         item.isSavedPost = !item.isSavedPost;
         this.setState({item});
+        if(isSavedPage && !this.state.item.isSavedPost) {
+          this.props.handleRemove(item.id);
+        }
       }
     })
   };
@@ -175,7 +179,9 @@ AdCard.propTypes = {
   isReport: PropTypes.bool,
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  handleRemove: PropTypes.func,
+  isSavedPage: PropTypes.bool
 };
 
 const mapStateToProps = state => ({

@@ -105,8 +105,6 @@ class TopBar extends Component {
 
   render() {
     const { items, handeleShare } = this.props;   
-    console.log(items);
-    
     return (
       <div>
         <div className="user_info">

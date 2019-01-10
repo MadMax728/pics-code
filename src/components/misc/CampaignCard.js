@@ -111,7 +111,8 @@ class CampaignCard extends Component {
   };
 
   handleSavePost = e => {
-    const item = this.state.item;
+    const { item } = this.state;
+    const { isSavedPage } = this.props;
     const data = {
       typeId: e.target.id,
       postType: getBackendPostType(item)
@@ -121,6 +122,9 @@ class CampaignCard extends Component {
       if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
         item.isSavedPost = !item.isSavedPost;
         this.setState({item});
+        if(isSavedPage && !this.state.item.isSavedPost) {
+          this.props.handleRemove(item.id);
+        }
       }
     });
   };
@@ -245,7 +249,8 @@ CampaignCard.propTypes = {
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
   reportedContentData: PropTypes.any,
-  handleRemove: PropTypes.func
+  handleRemove: PropTypes.func,
+  isSavedPage: PropTypes.bool
 };
 
 export default connect(
