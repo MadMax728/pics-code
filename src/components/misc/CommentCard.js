@@ -37,20 +37,18 @@ class CommentCard extends Component {
     };
   }
 
-  handleReportPost = e => {
+  handleReportPost = (e) => {
     const { item } = this.state;
+    const comment = item[item.findIndex(i => i.id === e.target.id)];
     const data = {
       typeContent: "Comment",
       typeId: e.target.id,
-      title: item.title
-    };
-    this.props.addReport(data).then(() => {
-      if (
-        this.props.reportedContentData &&
-        !this.props.reportedContentData.error &&
-        this.props.reportedContentData.addReport.success
-      ) {
-        // console.log(this.props.reportedContentData.addReport.success);
+      title: comment.comment
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === comment.id) {
+        comment.isReported = !comment.isReported;
+        this.setState({item});
       }
     });
   };
@@ -147,14 +145,8 @@ class CommentCard extends Component {
     if (isBackOffice) {
       reportTips = [
         {
-          name:
-            item.reportStatus === enumerations.reportType.lock
-              ? Translations.tool_tips.unlock
-              : Translations.tool_tips.lock,
-          handleEvent:
-            item.reportStatus === enumerations.reportType.lock
-              ? this.handleUnlockContent
-              : this.handleLockContent
+          name: item[item.findIndex(i => i.id === id)].reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
         },
         {
           name: Translations.tool_tips.do_not,
@@ -168,7 +160,7 @@ class CommentCard extends Component {
           handleEvent: this.handleEditComment
         },
         {
-          name: Translations.tool_tips.report,
+          name: item[item.findIndex(i => i.id === id)].isReported? Translations.tool_tips.unreport_comment : Translations.tool_tips.report_comment,
           handleEvent: this.handleReportPost
         },
         {

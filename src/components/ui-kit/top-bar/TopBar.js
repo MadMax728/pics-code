@@ -163,8 +163,7 @@ class TopBar extends Component {
   };
 
   render() {
-    const { items, handeleShare } = this.props;
-
+    const { items, handeleShare } = this.props;   
     return (
       <div>
         <div className="user_info">
