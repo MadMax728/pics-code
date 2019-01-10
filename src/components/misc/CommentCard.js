@@ -106,7 +106,7 @@ class CommentCard extends Component {
     this.setState({ slicedCommentsData: commentData, maxRange: maxRangeValue });
   };
 
-  handleViewLessComment = e => {
+  handleViewLessComment = () => {
     const maxRangeValue = "2";
     const commentData = this.state.comments.slice(0, maxRangeValue);
     this.setState({
@@ -400,15 +400,16 @@ class CommentCard extends Component {
           </div>
         )}
 
-        {!isReport && this.props.totalCommentsCount <= this.state.maxRange && (
-          <div
-            className="view-more-comments view-more-link"
-            id="7"
-            onClick={this.handleViewLessComment}
-          >
-            {Translations.view_less_comments}
-          </div>
-        )}
+        {!isReport &&
+          this.props.totalCommentsCount > 2 &&
+          this.props.totalCommentsCount < this.state.maxRange && (
+            <div
+              className="view-more-comments view-more-link"
+              onClick={this.handleViewLessComment}
+            >
+              {Translations.view_less_comments}
+            </div>
+          )}
       </div>
     );
   }
