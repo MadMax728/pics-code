@@ -222,7 +222,10 @@
     "unlock": "Unlock content",
     "do_not": "Do not lock content",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "block": "Block",
+    "unblock": "Unblock",
+    "report_user": "Report User"
   },
 
   "back_office_menu": {
