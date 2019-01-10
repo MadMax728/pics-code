@@ -5,8 +5,17 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { connect } from "react-redux";
-import { SubscriberTooltip, SubscribedTooltip, RenderToolTips } from "../../common";
-import { getFollowUserList, addReport } from "../../../actions";
+import {
+  SubscriberTooltip,
+  SubscribedTooltip,
+  RenderToolTips
+} from "../../common";
+import {
+  getFollowUserList,
+  addReport,
+  blockUserRequest,
+  getUnsubscribe
+} from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
 import { ThreeDots } from "../../ui-kit";
 import { Loader } from "../loading-indicator";
@@ -71,42 +80,91 @@ class TopBar extends Component {
     );
   };
 
-  handleReportUser = (e) => {
-    const  { items } = this.props;
+  handleReportUser = e => {
+    const { items } = this.props;
     const data = {
       typeContent: "User",
       typeId: e.target.id,
       title: items.username
-    }    
-    this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        !this.props.reportedContentData.error &&
+        this.props.reportedContentData.addReport.success
+      ) {
         // console.log(this.props.reportedContentData.addReport.success);
       }
     });
-  }
-  
-  handleBlock = (e) => {
-    console.log("handleBlock");
-  }
+  };
 
-  renderDotTips = (id) => {
+  // getUserData = () => {
+  //   const data = { username: this.props.items.username };
+  //   this.props.getUser(data).then(() => {
+  //     if (
+  //       this.props.userDataByUsername &&
+  //       this.props.userDataByUsername.user &&
+  //       this.props.userDataByUsername.user.data
+  //     ) {
+  //       // success
+  //     }
+  //   });
+  // };
+
+  handleBlock = e => {
+    console.log("handleBlock");
+    const { items } = this.props;
+    const errors = {};
+    const blockId = items.blockId;
+    if (blockId === "") {
+      const requestData = { following: items.userid, isBlock: true };
+      this.props.blockUserRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isBlockRequestResult) {
+          console.log(this.props.usersData.isBlockRequestResult);
+          //this.getUserData();
+        }
+      });
+    } else {
+      console.log("ublock");
+      this.props.getUnsubscribe(blockId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isUnsubscribed) {
+          // this.getUserData();
+        }
+      });
+    }
+  };
+
+  renderDotTips = id => {
+    // console.log(this.props.items.isBlocked;
+    let BlockTitle = Translations.tool_tips.block;
+    if (this.props.items.isBlocked) {
+      BlockTitle = Translations.tool_tips.unblock;
+    } else {
+      BlockTitle = Translations.tool_tips.block;
+    }
     const reportTips = [
       {
         name: Translations.tool_tips.report_user,
         handleEvent: this.handleReportUser
       },
-      {
-        name: Translations.tool_tips.block,
-        handleEvent: this.handleBlock
-      }
+      { name: BlockTitle, handleEvent: this.handleBlock }
     ];
-    return <RenderToolTips items={reportTips} id={id? id : "0"} />;
-  }; 
+    return <RenderToolTips items={reportTips} id={id ? id : "0"} />;
+  };
 
   render() {
-    const { items, handeleShare } = this.props;   
-    console.log(items);
-    
+    const { items, handeleShare } = this.props;
+
     return (
       <div>
         <div className="user_info">
@@ -182,7 +240,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getFollowUserList,
-  addReport
+  addReport,
+  blockUserRequest,
+  getUnsubscribe
 };
 
 TopBar.propTypes = {
@@ -193,7 +253,9 @@ TopBar.propTypes = {
   usersData: PropTypes.any,
   userDataByUsername: PropTypes.any,
   addReport: PropTypes.func,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  blockUserRequest: PropTypes.func,
+  getUnsubscribe: PropTypes.func
 };
 
 export default connect(

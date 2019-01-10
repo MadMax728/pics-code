@@ -218,7 +218,14 @@
   "tool_tips": {
     "report": "Report Post",
     "save": "Save Post",
-    "lock": "locks / unlocks content"
+    "lock": "Lock content",
+    "unlock": "Unlock content",
+    "do_not": "Do not lock content",
+    "edit": "Edit",
+    "delete": "Delete",
+    "block": "Block",
+    "unblock": "Unblock",
+    "report_user": "Report User"
   },
 
   "back_office_menu": {

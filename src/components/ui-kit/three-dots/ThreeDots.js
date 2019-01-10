@@ -14,8 +14,7 @@ const propTypes = {
   delayUpdate: PropTypes.number.isRequired,
   place: PropTypes.string.isRequired,
   border: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
-  ref: PropTypes.any
+  type: PropTypes.string.isRequired
 };
 
 class ThreeDots extends Component {
@@ -37,8 +36,7 @@ class ThreeDots extends Component {
       delayUpdate,
       place,
       border,
-      type,
-      ref
+      type
     } = this.props;
 
     return (
