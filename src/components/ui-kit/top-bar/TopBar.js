@@ -5,9 +5,11 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { connect } from "react-redux";
-import { SubscriberTooltip, SubscribedTooltip } from "../../common";
-import { getFollowUserList } from "../../../actions";
+import { SubscriberTooltip, SubscribedTooltip, RenderToolTips } from "../../common";
+import { getFollowUserList, addReport } from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
+import { ThreeDots } from "../../ui-kit";
+import { Loader } from "../loading-indicator";
 
 const handleKeyDown = () => {};
 
@@ -69,8 +71,42 @@ class TopBar extends Component {
     );
   };
 
+  handleReportUser = (e) => {
+    const  { items } = this.props;
+    const data = {
+      typeContent: "User",
+      typeId: e.target.id,
+      title: items.username
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
+        // console.log(this.props.reportedContentData.addReport.success);
+      }
+    });
+  }
+  
+  handleBlock = (e) => {
+    console.log("handleBlock");
+  }
+
+  renderDotTips = (id) => {
+    const reportTips = [
+      {
+        name: Translations.tool_tips.report_user,
+        handleEvent: this.handleReportUser
+      },
+      {
+        name: Translations.tool_tips.block,
+        handleEvent: this.handleBlock
+      }
+    ];
+    return <RenderToolTips items={reportTips} id={id? id : "0"} />;
+  }; 
+
   render() {
-    const { items, handeleShare } = this.props;
+    const { items, handeleShare } = this.props;   
+    console.log(items);
+    
     return (
       <div>
         <div className="user_info">
@@ -112,7 +148,21 @@ class TopBar extends Component {
               )}
               {items.length !== 0 && items.more && (
                 <div className="settings">
-                  <img src={images.more} alt="more" />
+                  <ThreeDots
+                    id={`topbar-${items.userid}`}
+                    role="button"
+                    dataTip="tooltip"
+                    dataClass="tooltip-wrapr"
+                    /* eslint-disable */
+                    getContent={() => this.renderDotTips(items.userid)}
+                    effect="solid"
+                    delayHide={500}
+                    delayShow={500}
+                    delayUpdate={500}
+                    place={"left"}
+                    border
+                    type={"light"}
+                  />
                 </div>
               )}
               <div className="clearfix" />
@@ -126,11 +176,13 @@ class TopBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  usersData: state.usersData
+  usersData: state.usersData,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
-  getFollowUserList
+  getFollowUserList,
+  addReport
 };
 
 TopBar.propTypes = {
@@ -139,7 +191,9 @@ TopBar.propTypes = {
   handleModalInfoShow: PropTypes.any,
   getFollowUserList: PropTypes.func,
   usersData: PropTypes.any,
-  userDataByUsername: PropTypes.any
+  userDataByUsername: PropTypes.any,
+  addReport: PropTypes.func,
+  reportedContentData: PropTypes.any
 };
 
 export default connect(

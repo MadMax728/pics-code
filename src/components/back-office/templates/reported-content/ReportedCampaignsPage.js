@@ -101,8 +101,8 @@ class ReportedCampaignsPage extends Component {
   };
 
   render(){
-    const { campaignList } = this.state;
-    const { isLoading, reportedContentData } = this.props;
+    const { campaignList, isLoading } = this.state;
+    const { reportedContentData } = this.props;
 
     return (
       <div>
