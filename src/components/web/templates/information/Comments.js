@@ -9,7 +9,8 @@ import {
   addComment,
   deleteComment,
   editComment,
-  addReport
+  addReport,
+  getComments
 } from "../../../../actions";
 import { connect } from "react-redux";
 
@@ -19,7 +20,7 @@ class Comments extends Component {
 
     this.state = {
       campaign: this.props.campaign,
-      comments: this.props.campaign.comments,
+      comments: "",
       item: this.props.item,
       itemId: this.props.itemId,
       typeOfContent: this.props.typeContent,
@@ -38,9 +39,25 @@ class Comments extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.handleCommentsSections();
   };
 
   handleReportPost = () => {};
+
+  handleCommentsSections = () => {
+    const CampaignId = { typeId: this.props.campaign.typeId };
+    this.props.getComments(CampaignId).then(() => {
+      console.log(this.props);
+      // const totalComment = this.props;
+
+      //const totalComment = this.props;
+      // this.setState({
+      //   isComments: !this.state.isComments,
+      //   comments: this.props.comments,
+      //   totalCommentsCount: totalComment.length
+      // });
+    });
+  };
 
   addComment = comment => {
     const { comments, itemId, typeOfContent, slicedCommentsData } = this.state;
@@ -214,26 +231,13 @@ class Comments extends Component {
             <input type="submit" hidden />
           </form>
         </div>
-        {comments && comments.length !== 0 && comments.map(this.renderComment)}
-        {!isReport && this.props.totalCommentsCount > this.state.maxRange && (
-          <div
-            className="view-more-comments view-more-link"
-            id="7"
-            onClick={this.handleViewComment}
-          >
-            {Translations.view_more_comments}
-          </div>
-        )}
-        {!isReport &&
-          this.props.totalCommentsCount > 2 &&
-          this.props.totalCommentsCount < this.state.maxRange && (
-            <div
-              className="view-more-comments view-more-link"
-              onClick={this.handleViewLessComment}
-            >
-              {Translations.view_less_comments}
-            </div>
-          )}
+        <div
+          className="view-more-comments view-more-link"
+          id="7"
+          onClick={this.handleViewComment}
+        >
+          {Translations.view_more_comments}
+        </div>
       </div>
     );
   }
@@ -249,7 +253,8 @@ const mapDispatchToProps = {
   addComment,
   deleteComment,
   editComment,
-  addReport
+  addReport,
+  getComments
 };
 
 Comments.propTypes = {
@@ -257,7 +262,7 @@ Comments.propTypes = {
   item: PropTypes.any,
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  handleComment: PropTypes.func.isRequired,
+  handleComment: PropTypes.func,
   editComment: PropTypes.func.isRequired,
   isReport: PropTypes.bool,
   comment: PropTypes.any,
@@ -268,7 +273,8 @@ Comments.propTypes = {
   totalCommentsCount: PropTypes.any,
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  getComments: PropTypes.func
 };
 
 export default connect(

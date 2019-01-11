@@ -149,7 +149,8 @@ const initialState = {
     userList: [],
     pendingUserList: [],
     isAcceptRequest: null,
-    isBlockRequestResult: null
+    BlockRequestResult: [],
+    isUnblock: null
   },
   subscribeData: {
     subscriber: [],
