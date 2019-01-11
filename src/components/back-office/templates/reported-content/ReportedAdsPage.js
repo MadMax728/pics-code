@@ -1,29 +1,79 @@
 import React, {Component} from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent } from "../../../../actions";
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading } from "../../../ui-kit";
+import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { AdCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
-
+import { Translations } from "../../../../lib/translations";
 class ReportedAdsPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      adList: null
+      adList: null,
+      isLoading: this.props.isLoading,
+      isSearch: false
     };
   }
 
   componentDidMount = () => {
-    this.props.getBackOfficeReportedContent("reportedContentAds").then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.reportedContentAds) {
+    const data = {
+      type: "get",
+      reportContent: "Ads"
+    }
+    this.getBackOfficeReportedContent(data);
+    this.getBackOfficeReportedStatistics(data);
+  };
+
+
+  getBackOfficeReportedContent = (data) => {
+    this.props.getBackOfficeReportedContent(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.Ads) {
         this.setState({
-          adList: this.props.reportedContentData.reportedContentAds
+          adList: this.props.reportedContentData.Ads
         })
       }
     });
-  };
+  }
+
+  getBackOfficeReportedStatistics = (data) => {
+    this.props.getBackOfficeReportedStatistics(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.AdsStatistics) {
+        // success
+      }
+    });
+  }
+
+  handleReported = (e) => {
+    let data;
+    if (e.target.id === "All")
+    {
+      data ={
+        type: "get",
+        reportContent: "Ads"
+      }
+      this.setState({isSearch: false});
+    }
+    else {
+      data = {
+        type: "search",
+        reportContent: "Ads",
+        searchType: `${e.target.id}`
+      }
+      this.setState({isSearch: true});
+    }
+    this.getBackOfficeReportedContent(data);
+  }
+  
+  handleRemove = (data) => {
+    const { adList, isSearch } = this.state;
+    if (isSearch)
+    {
+      this.setState({adList: adList.filter(e => e.id !== data)});
+    }
+  }
+
 
   renderAds = () => {
     const { adList } = this.state;
@@ -38,6 +88,9 @@ class ReportedAdsPage extends Component {
               isInformation={false}
               isStatus={false}
               isReport
+              isBackOffice 
+              handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+              handleRemove={this.handleRemove}
             />
           )}
         </div>
@@ -46,14 +99,26 @@ class ReportedAdsPage extends Component {
   };
 
   render() {
-    const { adList } = this.state;
-    const { isLoading } = this.props;
+    const { adList, isLoading } = this.state;
+    const { reportedContentData } = this.props;
 
     return (
-      <div className="padding-rl-10 middle-section">
-        <ReportedSearchBar />
-          {adList && !isLoading && this.renderAds()}
-          {isLoading && <CampaignLoading />}
+      <div>
+        <div className="padding-rl-10 middle-section">
+          <ReportedSearchBar />
+            {adList && this.renderAds()}
+            {!adList && isLoading && <CampaignLoading />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.ads}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.AdsStatistics? reportedContentData.AdsStatistics.all : 0} 
+            outstanding={reportedContentData.AdsStatistics? reportedContentData.AdsStatistics.outstanding : 0}
+            processed={reportedContentData.AdsStatistics? reportedContentData.AdsStatistics.processed : 0} 
+            notProcessed={reportedContentData.AdsStatistics? reportedContentData.AdsStatistics.notProcessed : 0}
+          />
+        </div>
       </div>
     );
   }
@@ -66,13 +131,16 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getBackOfficeReportedContent
+  getBackOfficeReportedContent,
+  getBackOfficeReportedStatistics
 };
 
 ReportedAdsPage.propTypes = {
   getBackOfficeReportedContent: PropTypes.func.isRequired,
   reportedContentData: PropTypes.object,
   isLoading: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  getBackOfficeReportedStatistics: PropTypes.func,
   // error: PropTypes.any
 };
 

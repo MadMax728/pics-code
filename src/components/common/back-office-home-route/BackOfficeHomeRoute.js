@@ -44,6 +44,9 @@ class BackOfficeHomeRoute extends Component {
     return <ReportedCampaignsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
   };
 
+  handleReportedAdsPage = () => {
+    return <ReportedAdsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
 
   handleSettingCampaign = () => {
     return <settings.SettingCampaignPage isBackOffice />;
@@ -151,7 +154,7 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
             exact
-            component={ReportedAdsPage}
+            component={this.handleReportedAdsPage}
           />
           <Route
             path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
