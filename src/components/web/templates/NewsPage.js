@@ -105,8 +105,8 @@ class NewsRoot extends Component {
     const { newsFeedList, isLoadingnews } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
-        {isLoadingnews && <CampaignLoading />}
+        {/* {newsFeedList && !isLoadingnews && this.renderNewsFeedList()} */}
+        {!isLoadingnews && <CampaignLoading />}
       </div>
     );
   }
