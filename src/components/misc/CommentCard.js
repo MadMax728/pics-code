@@ -188,7 +188,7 @@ class CommentCard extends Component {
     if (comment.id === updateForm.id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
-          <div className="col-sm-11 col-xs-7 no-padding">
+          <div>
             <div className="comment-input">
               <div className="form-group">
                 <HashTagUsername
@@ -290,7 +290,7 @@ class CommentCard extends Component {
             />
           </div>
         </div>
-        <div className="comment-content">{this.renderEditComment(comment)}</div>
+        <div className="comment-content col-md-12 no-padding"><div class="col-md-1"></div><div class="col-md-10">{this.renderEditComment(comment)}</div></div>
       </div>
     );
   };
@@ -340,14 +340,14 @@ class CommentCard extends Component {
         {!isReport && (
           <div className="comment-wrapper">
             <form onSubmit={this.handleSubmit} ref="commentForm">
-              <div className="col-sm-1 col-xs-1 no-padding profile_image">
+              <div className="no-padding profile_image">
                 <img
                   src={images.image}
                   alt="image1"
                   className="img-circle img-responsive"
                 />
               </div>
-              <div className="col-sm-10 col-xs-7 no-padding">
+              <div className="no-padding">
                 <div className="comment-input">
                   <div className="form-group">
                     <HashTagUsername
@@ -361,12 +361,12 @@ class CommentCard extends Component {
                       maxLimit={1000}
                       isText
                     />
+                    <div className="emoji_wrapper">
+                      <img src={images.emoji} alt="like" className="pull-right" />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-sm-1 col-xs-2 emoji_wrapper">
-                <img src={images.emoji} alt="like" className="pull-right" />
-              </div>
+              </div>              
               <input type="submit" hidden />
             </form>
           </div>

@@ -116,14 +116,14 @@ class SubscriberTooltip extends Component {
                   key={user.id}
                 >
                   <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-sm-3">
                       <img
                         src={user.profileUrl}
                         alt="campaign"
                         className="img-circle img-responsive"
                       />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-sm-4">
                       <div className="user-info">
                         <div className="username">{user.username}</div>
                         <div className="subtitle">{user.name}</div>
