@@ -5,7 +5,7 @@ import LazyLoad from "react-lazyload";
 import { Loader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 
-const UserCardBody = ({ user, index, handleSubscribed, isReport }) => {
+const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, renderReportTips }) => {
   return (
     <div
       className={
@@ -24,15 +24,17 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport }) => {
         <div className="name-wrapper">
           <div className="username">{user.username}</div>
           <div className="name">{user.name}</div>
-          {user.isSubscribe ? (
-            <button
-              className="filled_button"
-              id={user.username}
-              onClick={handleSubscribed}
-            >
-              {Translations.profile_community_right_sidebar.Subscribed}
-            </button>
-          ) : (
+          {!isBackOffice && user.isSubscribe && (
+              <button
+                className="filled_button"
+                id={user.username}
+                onClick={handleSubscribed}
+              >
+                {Translations.profile_community_right_sidebar.Subscribed}
+              </button>
+            )
+          }
+            {!isBackOffice && !user.isSubscribe && (
             <button
               className="blue_button"
               id={user.username}
@@ -42,7 +44,7 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport }) => {
             </button>
           )}
         </div>
-        {user && isReport && <ReportCard item={user} />}
+        {user && isReport && <ReportCard item={user} renderReportTips={renderReportTips} />}
       </div>
     </div>
   );
@@ -52,7 +54,9 @@ UserCardBody.propTypes = {
   user: PropTypes.object.isRequired,
   handleSubscribed: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  isReport: PropTypes.bool
+  isReport: PropTypes.bool,
+  isBackOffice: PropTypes.bool,
+  renderReportTips: PropTypes.any
 };
 
 export default UserCardBody;

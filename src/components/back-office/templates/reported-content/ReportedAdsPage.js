@@ -22,6 +22,7 @@ class ReportedAdsPage extends Component {
       type: "get",
       reportContent: "Ads"
     }
+    this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
   };
@@ -31,7 +32,8 @@ class ReportedAdsPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.Ads) {
         this.setState({
-          adList: this.props.reportedContentData.Ads
+          adList: this.props.reportedContentData.Ads,
+          isLoading: this.props.reportedContentData.isLoading
         })
       }
     });
