@@ -135,10 +135,30 @@ const usersReducers = (state = initialState.usersData, action) => {
     case types.BLOCK_USER_REQUEST_SUCCEEDED:
       return {
         ...state,
-        isBlockRequestResult: action.payload,
+        BlockRequestResult: action.payload,
         isLoading: false
       };
     case types.BLOCK_USER_REQUEST_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    // Block Request
+    case types.UNBLOCK_USER_REQUEST_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.UNBLOCK_USER_REQUEST_SUCCEEDED:
+      return {
+        ...state,
+        isUnblock: action.payload,
+        isLoading: false
+      };
+    case types.UNBLOCK_USER_REQUEST_FAILED:
       return {
         ...state,
         isLoading: false,

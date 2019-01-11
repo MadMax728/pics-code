@@ -243,10 +243,46 @@ export const blockUserRequest = userId => {
     const header = { Authorization: storage.accessToken };
     return usersService.blockUserRequest(userId, header).then(
       res => {
-        dispatch(blockUserRequestSucceeded(res.data.success));
+        dispatch(blockUserRequestSucceeded(res.data.data));
       },
       error => {
         dispatch(blockUserRequestFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+/* Unblock
+ */
+const unblockUserRequestStarted = () => ({
+  type: types.UNBLOCK_USER_REQUEST_STARTED
+});
+
+const unblockUserRequestSucceeded = data => ({
+  type: types.UNBLOCK_USER_REQUEST_SUCCEEDED,
+  payload: data
+});
+
+const unblockUserRequestFailed = error => ({
+  type: types.UNBLOCK_USER_REQUEST_FAILED,
+  payload: error,
+  error: true
+});
+export const unblockUserRequest = blockId => {
+  return dispatch => {
+    dispatch(unblockUserRequestStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+    return usersService.unblockUserRequest("", blockId, header).then(
+      res => {
+        dispatch(unblockUserRequestSucceeded(res.data.success));
+      },
+      error => {
+        dispatch(unblockUserRequestFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

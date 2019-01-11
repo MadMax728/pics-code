@@ -15,7 +15,8 @@ const propTypes = {
   place: PropTypes.string.isRequired,
   border: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired
+  value: PropTypes.number.isRequired,
+  valueName: PropTypes.number.isRequired
 };
 
 class SubscribeList extends Component {
@@ -38,17 +39,13 @@ class SubscribeList extends Component {
       place,
       border,
       type,
-      value
+      value,
+      valueName
     } = this.props;
 
     return (
-        <span
-          data-for={id}
-          role={role}
-          data-tip={dataTip}
-          data-class={dataClass}
-        >
-          {value}
+      <span data-for={id} role={role} data-tip={dataTip} data-class={dataClass}>
+        {value} {valueName}
         <ToolTip
           id={id}
           getContent={getContent}

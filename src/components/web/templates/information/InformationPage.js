@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 import { getCampaignDetails } from "../../../../actions";
 import { connect } from "react-redux";
 import { ThreeDots } from "../../../ui-kit";
+import moment from "moment";
 
 class InformationPage extends Component {
   constructor(props, context) {
@@ -141,7 +142,9 @@ class InformationPage extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Start: </span>
                         <span className="secondary_title">
-                          {campaignDetails.startDate}
+                          {moment(campaignDetails.startDate).format(
+                            "MMMM Do YYYY"
+                          )}
                         </span>
                       </div>
                       <div className="info_wrapper">
@@ -161,47 +164,66 @@ class InformationPage extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">End: </span>
                         <span className="secondary_title">
-                          {campaignDetails.endDate}
+                          {moment(campaignDetails.endDate).format(
+                            "MMMM Do YYYY"
+                          )}
                         </span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Type: </span>
                         <span className="secondary_title">
-                          {campaignDetails.type}
+                          {campaignDetails.typeContent}
                         </span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Applications: </span>
                         <span className="secondary_title">
-                          {campaignDetails.applications}
+                          {campaignDetails.applications
+                            ? campaignDetails.applications
+                            : "22/22"}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="feed_description col-xs-12">
+                    <div className="col-sm-6 no-padding">
+                      <div className="info_wrapper">
+                        <span className="normal_title">
+                          {Translations.create_campaigns.offer}:{" "}
+                        </span>
+                        <span className="secondary_title">
+                          {campaignDetails.offerTagList &&
+                            campaignDetails.offerTagList[0].offerTagName}
+                        </span>
+                      </div>
+                      <div className="info_wrapper">
+                        <span className="normal_title">
+                          {Translations.create_campaigns.inquiry}:{" "}
+                        </span>
+                        <span className="secondary_title">
+                          {campaignDetails.inquiryTagList &&
+                            campaignDetails.inquiryTagList[0].inquiryTagName}
                         </span>
                       </div>
                     </div>
                     <div className="col-sm-6 no-padding">
                       <div className="info_wrapper">
-                        <span className="normal_title">Start: </span>
+                        <span className="normal_title">
+                          {Translations.create_campaigns.offer_tag}:{" "}
+                        </span>
                         <span className="secondary_title">
-                          {campaignDetails.startDate}
+                          {campaignDetails.offerTagList &&
+                            campaignDetails.offerTagList[0].offerTagName}
                         </span>
                       </div>
                       <div className="info_wrapper">
-                        <span className="normal_title">Procedure: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.procedure}
+                        <span className="normal_title">
+                          {Translations.create_campaigns.inquiry_tag}:{" "}
                         </span>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 no-padding">
-                      <div className="info_wrapper">
-                        <span className="normal_title">End: </span>
                         <span className="secondary_title">
-                          {campaignDetails.endDate}
-                        </span>
-                      </div>
-                      <div className="info_wrapper">
-                        <span className="normal_title">Type: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.type}
+                          {campaignDetails.inquiryTagList &&
+                            campaignDetails.inquiryTagList[0].inquiryTagName}
                         </span>
                       </div>
                     </div>

@@ -49,3 +49,6 @@ export const acceptRequest = (payload, header = {}) =>
 
 export const blockUserRequest = (payload, header = {}) =>
   api(baseUrl, header).put("/subscribe/block-request", payload);
+
+export const unblockUserRequest = (payload, id, header = {}) =>
+  api(baseUrl, header).delete("/subscribe/" + id, payload);
