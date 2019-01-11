@@ -21,6 +21,7 @@
   "upload_title_image": "Upload title image",
 
   "view_more_comments": "View more comments",
+  "view_less_comments": "View less comments",
 
   "apply_campaign": "Apply for this campaign",
 
@@ -216,12 +217,19 @@
 
   "tool_tips": {
     "report": "Report Post",
+    "unreport": "Unreport Post",
+    "report_comment": "Report Comment",
+    "unreport_comment": "Unreport Comment",
     "save": "Save Post",
+    "unsave": "Unsave Post",
     "lock": "Lock content",
     "unlock": "Unlock content",
     "do_not": "Do not lock content",
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "block": "Block",
+    "unblock": "Unblock",
+    "report_user": "Report User"
   },
 
   "back_office_menu": {

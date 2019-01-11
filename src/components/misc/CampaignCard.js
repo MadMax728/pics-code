@@ -68,7 +68,6 @@ class CampaignCard extends Component {
     let reportTips;
     const { isBackOffice } = this.props;
     const { item } = this.state;
-
     if (isBackOffice){
       reportTips = [
         {
@@ -84,11 +83,11 @@ class CampaignCard extends Component {
     else {
       reportTips = [
         {
-          name: Translations.tool_tips.report,
+          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: Translations.tool_tips.save,
+          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         }
       ];
@@ -104,22 +103,28 @@ class CampaignCard extends Component {
       title: item.title
     }    
     this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && !this.props.reportedContentData.error && this.props.reportedContentData.addReport.success) {
-        // console.log(this.props.reportedContentData.addReport.success);
+      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
+        item.isReported = !item.isReported;
+        this.setState({item});
       }
     });
   };
 
   handleSavePost = e => {
-    const item = this.state.item;
+    const { item } = this.state;
+    const { isSavedPage } = this.props;
     const data = {
       typeId: e.target.id,
       postType: getBackendPostType(item)
     };
 
     this.props.setSavedPost(data).then(() => {
-      if (this.props.savedData) {
-        console.log(this.props.savedData);
+      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
+        item.isSavedPost = !item.isSavedPost;
+        this.setState({item});
+        if(isSavedPage && !this.state.item.isSavedPost) {
+          this.props.handleRemove(item.id);
+        }
       }
     });
   };
@@ -167,7 +172,8 @@ class CampaignCard extends Component {
       isBudget,
       isReport,
       likeData,
-      reportedContentData
+      reportedContentData,
+      savedData
     } = this.props;
     const { isComments, item, comments } = this.state;
     return (
@@ -183,7 +189,7 @@ class CampaignCard extends Component {
           campaign={item}
           isDescription={isDescription}
           isInformation={isInformation}
-          isLoading={reportedContentData.isLoading}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
         />
         <CampaignCardFooter
           campaign={item}
@@ -243,7 +249,8 @@ CampaignCard.propTypes = {
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
   reportedContentData: PropTypes.any,
-  handleRemove: PropTypes.func
+  handleRemove: PropTypes.func,
+  isSavedPage: PropTypes.bool
 };
 
 export default connect(

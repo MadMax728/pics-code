@@ -5,9 +5,20 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { connect } from "react-redux";
-import { SubscriberTooltip, SubscribedTooltip } from "../../common";
-import { getFollowUserList } from "../../../actions";
+import {
+  SubscriberTooltip,
+  SubscribedTooltip,
+  RenderToolTips
+} from "../../common";
+import {
+  getFollowUserList,
+  addReport,
+  blockUserRequest,
+  getUnsubscribe
+} from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
+import { ThreeDots } from "../../ui-kit";
+import { Loader } from "../loading-indicator";
 
 const handleKeyDown = () => {};
 
@@ -69,8 +80,90 @@ class TopBar extends Component {
     );
   };
 
+  handleReportUser = e => {
+    const { items } = this.props;
+    const data = {
+      typeContent: "User",
+      typeId: e.target.id,
+      title: items.username
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        !this.props.reportedContentData.error &&
+        this.props.reportedContentData.addReport.success
+      ) {
+        // console.log(this.props.reportedContentData.addReport.success);
+      }
+    });
+  };
+
+  // getUserData = () => {
+  //   const data = { username: this.props.items.username };
+  //   this.props.getUser(data).then(() => {
+  //     if (
+  //       this.props.userDataByUsername &&
+  //       this.props.userDataByUsername.user &&
+  //       this.props.userDataByUsername.user.data
+  //     ) {
+  //       // success
+  //     }
+  //   });
+  // };
+
+  handleBlock = e => {
+    console.log("handleBlock");
+    const { items } = this.props;
+    const errors = {};
+    const blockId = items.blockId;
+    if (blockId === "") {
+      const requestData = { following: items.userid, isBlock: true };
+      this.props.blockUserRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isBlockRequestResult) {
+          console.log(this.props.usersData.isBlockRequestResult);
+          //this.getUserData();
+        }
+      });
+    } else {
+      console.log("ublock");
+      this.props.getUnsubscribe(blockId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isUnsubscribed) {
+          // this.getUserData();
+        }
+      });
+    }
+  };
+
+  renderDotTips = id => {
+    // console.log(this.props.items.isBlocked;
+    let BlockTitle = Translations.tool_tips.block;
+    if (this.props.items.isBlocked) {
+      BlockTitle = Translations.tool_tips.unblock;
+    } else {
+      BlockTitle = Translations.tool_tips.block;
+    }
+    const reportTips = [
+      {
+        name: Translations.tool_tips.report_user,
+        handleEvent: this.handleReportUser
+      },
+      { name: BlockTitle, handleEvent: this.handleBlock }
+    ];
+    return <RenderToolTips items={reportTips} id={id ? id : "0"} />;
+  };
+
   render() {
-    const { items, handeleShare } = this.props;
+    const { items, handeleShare } = this.props;   
     return (
       <div>
         <div className="user_info">
@@ -112,7 +205,21 @@ class TopBar extends Component {
               )}
               {items.length !== 0 && items.more && (
                 <div className="settings">
-                  <img src={images.more} alt="more" />
+                  <ThreeDots
+                    id={`topbar-${items.userid}`}
+                    role="button"
+                    dataTip="tooltip"
+                    dataClass="tooltip-wrapr"
+                    /* eslint-disable */
+                    getContent={() => this.renderDotTips(items.userid)}
+                    effect="solid"
+                    delayHide={500}
+                    delayShow={500}
+                    delayUpdate={500}
+                    place={"left"}
+                    border
+                    type={"light"}
+                  />
                 </div>
               )}
               <div className="clearfix" />
@@ -126,11 +233,15 @@ class TopBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  usersData: state.usersData
+  usersData: state.usersData,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
-  getFollowUserList
+  getFollowUserList,
+  addReport,
+  blockUserRequest,
+  getUnsubscribe
 };
 
 TopBar.propTypes = {
@@ -139,7 +250,11 @@ TopBar.propTypes = {
   handleModalInfoShow: PropTypes.any,
   getFollowUserList: PropTypes.func,
   usersData: PropTypes.any,
-  userDataByUsername: PropTypes.any
+  userDataByUsername: PropTypes.any,
+  addReport: PropTypes.func,
+  reportedContentData: PropTypes.any,
+  blockUserRequest: PropTypes.func,
+  getUnsubscribe: PropTypes.func
 };
 
 export default connect(

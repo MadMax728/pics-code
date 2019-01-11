@@ -21,6 +21,8 @@ class TopBarOtherInfo extends Component {
         private: true,
         more: true,
         isSubscribe: true,
+        isBlocked: null,
+        blockId: null,
         userProfile: this.props.match.profileUrl,
         slots: [
           {
@@ -125,6 +127,8 @@ class TopBarOtherInfo extends Component {
       more: true,
       isSubscribe: true,
       userProfile: this.props.userDataByUsername.user.data.profileUrl,
+      isBlocked: this.props.userDataByUsername.user.data.isBlocked,
+      blockId: this.props.userDataByUsername.user.data.blockId,
       slots: [
         {
           name: Translations.top_bar_info.subscriber,
