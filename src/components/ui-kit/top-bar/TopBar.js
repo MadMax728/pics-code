@@ -181,6 +181,7 @@ class TopBar extends Component {
 
   renderDotTips = id => {
     const tooltipIsLoading = this.props.usersData.isLoading;
+
     let BlockTitle = Translations.tool_tips.block;
     let ReportTitle = Translations.tool_tips.report_user;
     if (this.state.blockId) {

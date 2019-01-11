@@ -20,7 +20,7 @@ class Comments extends Component {
 
     this.state = {
       campaign: this.props.campaign,
-      comments: this.props.campaign.comments,
+      comments: "",
       item: this.props.item,
       itemId: this.props.itemId,
       typeOfContent: this.props.typeContent,
@@ -45,9 +45,7 @@ class Comments extends Component {
   handleReportPost = () => {};
 
   handleCommentsSections = () => {
-    const CampaignId = {
-      typeId: this.state.item.typeId
-    };
+    const CampaignId = { typeId: this.props.campaign.typeId };
     this.props.getComments(CampaignId).then(() => {
       console.log(this.props);
       // const totalComment = this.props;
@@ -233,26 +231,13 @@ class Comments extends Component {
             <input type="submit" hidden />
           </form>
         </div>
-        {comments && comments.length !== 0 && comments.map(this.renderComment)}
-        {!isReport && this.props.totalCommentsCount > this.state.maxRange && (
-          <div
-            className="view-more-comments view-more-link"
-            id="7"
-            onClick={this.handleViewComment}
-          >
-            {Translations.view_more_comments}
-          </div>
-        )}
-        {!isReport &&
-          this.props.totalCommentsCount > 2 &&
-          this.props.totalCommentsCount < this.state.maxRange && (
-            <div
-              className="view-more-comments view-more-link"
-              onClick={this.handleViewLessComment}
-            >
-              {Translations.view_less_comments}
-            </div>
-          )}
+        <div
+          className="view-more-comments view-more-link"
+          id="7"
+          onClick={this.handleViewComment}
+        >
+          {Translations.view_more_comments}
+        </div>
       </div>
     );
   }

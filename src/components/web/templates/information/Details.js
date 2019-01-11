@@ -8,6 +8,7 @@ import { ThreeDots, RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
 import { getCampaignDetails } from "../../../../actions";
 import { connect } from "react-redux";
+import moment from "moment";
 
 class Information extends Component {
   constructor(props, context) {
@@ -75,7 +76,7 @@ class Information extends Component {
 
   render() {
     const { campaign_detail } = this.state;
-
+    console.log("details", campaign_detail);
     return (
       <div className="padding-l-10 middle-section width-80">
         <div className="information-wrapper">
