@@ -876,7 +876,11 @@
         padding-right: 15px;
       }
       .user-info{
-       .username, .subtitle{
+       .username{
+        color: #4a4a4a;
+        word-break: break-all;
+       }
+       .subtitle{
          word-break: break-all;
        }
       }
@@ -884,6 +888,7 @@
         margin-top: 0;
         button{
           margin-top: 0;
+          width: 100px;
         }
       }
     }
