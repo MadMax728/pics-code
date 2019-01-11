@@ -14,7 +14,9 @@ import {
   getFollowUserList,
   addReport,
   blockUserRequest,
-  getUnsubscribe
+  getUnsubscribe,
+  getUser,
+  getDashboard
 } from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
 import { ThreeDots } from "../../ui-kit";
@@ -29,6 +31,17 @@ class TopBar extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      this.props.usersData.isBlockRequestResult !==
+      nextProps.usersData.isBlockRequestResult
+    ) {
+      console.log("in");
+      this.getUserInfo();
+      this.renderDotTips(this.props.items.userid);
+    }
   };
 
   renderReportTips = (type, userid, username) => {
@@ -87,32 +100,48 @@ class TopBar extends Component {
       typeId: e.target.id,
       title: items.username
     };
+    console.log("reportUser");
     this.props.addReport(data).then(() => {
       if (
         this.props.reportedContentData &&
-        !this.props.reportedContentData.error &&
-        this.props.reportedContentData.addReport.success
+        !this.props.reportedContentData.error
       ) {
-        // console.log(this.props.reportedContentData.addReport.success);
+        console.log(this.props.reportedContentData.addReport);
+      }
+    });
+    // this.props.addReport(data).then(() => {
+    //   if (
+    //     this.props.reportedContentData &&
+    //     !this.props.reportedContentData.error &&
+    //     this.props.reportedContentData.addReport.success
+    //   ) {
+    //     console.log(this.props.reportedContentData);
+    //   }
+    // });
+  };
+
+  getUserInfo = () => {
+    const data = { username: this.props.items.username };
+    this.props.getUser(data).then(() => {
+      if (
+        this.props.userDataByUsername &&
+        this.props.userDataByUsername.user &&
+        this.props.userDataByUsername.user.data
+      ) {
+        // success
       }
     });
   };
 
-  // getUserData = () => {
-  //   const data = { username: this.props.items.username };
-  //   this.props.getUser(data).then(() => {
-  //     if (
-  //       this.props.userDataByUsername &&
-  //       this.props.userDataByUsername.user &&
-  //       this.props.userDataByUsername.user.data
-  //     ) {
-  //       // success
-  //     }
-  //   });
-  // };
+  getUserData = () => {
+    this.props.getDashboard("users", "").then(() => {
+      if (this.props.usersList) {
+        this.setState({ usersList: this.props.usersList });
+      }
+    });
+  };
 
   handleBlock = e => {
-    console.log("handleBlock");
     const { items } = this.props;
     const errors = {};
     const blockId = items.blockId;
@@ -125,12 +154,11 @@ class TopBar extends Component {
         ) {
           // error
         } else if (this.props.usersData.isBlockRequestResult) {
-          console.log(this.props.usersData.isBlockRequestResult);
-          //this.getUserData();
+          this.getUserInfo();
+          this.getUserData();
         }
       });
     } else {
-      console.log("ublock");
       this.props.getUnsubscribe(blockId).then(() => {
         if (
           this.props.usersData.error &&
@@ -138,7 +166,8 @@ class TopBar extends Component {
         ) {
           // error
         } else if (this.props.usersData.isUnsubscribed) {
-          // this.getUserData();
+          this.getUserInfo();
+          this.getUserData();
         }
       });
     }
@@ -146,24 +175,32 @@ class TopBar extends Component {
 
   renderDotTips = id => {
     // console.log(this.props.items.isBlocked;
+    const tooltipIsLoading = this.props.usersData.isLoading;
+
     let BlockTitle = Translations.tool_tips.block;
+    let ReportTitle = Translations.tool_tips.report_user;
+
     if (this.props.items.isBlocked) {
       BlockTitle = Translations.tool_tips.unblock;
     } else {
       BlockTitle = Translations.tool_tips.block;
     }
+
     const reportTips = [
-      {
-        name: Translations.tool_tips.report_user,
-        handleEvent: this.handleReportUser
-      },
+      { name: ReportTitle, handleEvent: this.handleReportUser },
       { name: BlockTitle, handleEvent: this.handleBlock }
     ];
-    return <RenderToolTips items={reportTips} id={id ? id : "0"} />;
+    return (
+      <RenderToolTips
+        items={reportTips}
+        id={id ? id : "0"}
+        isLoading={tooltipIsLoading}
+      />
+    );
   };
 
   render() {
-    const { items, handeleShare } = this.props;   
+    const { items, handeleShare } = this.props;
     return (
       <div>
         <div className="user_info">
@@ -234,14 +271,17 @@ class TopBar extends Component {
 
 const mapStateToProps = state => ({
   usersData: state.usersData,
-  reportedContentData: state.reportedContentData
+  reportedContentData: state.reportedContentData,
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
   getFollowUserList,
   addReport,
   blockUserRequest,
-  getUnsubscribe
+  getUnsubscribe,
+  getUser,
+  getDashboard
 };
 
 TopBar.propTypes = {
@@ -254,7 +294,10 @@ TopBar.propTypes = {
   addReport: PropTypes.func,
   reportedContentData: PropTypes.any,
   blockUserRequest: PropTypes.func,
-  getUnsubscribe: PropTypes.func
+  getUnsubscribe: PropTypes.func,
+  getUser: PropTypes.func,
+  userDataByUsername: PropTypes.any,
+  getDashboard: PropTypes.func
 };
 
 export default connect(
