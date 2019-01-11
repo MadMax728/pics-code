@@ -28,7 +28,8 @@ class TopBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      blockId: this.props.items.blockId
+      blockId: this.props.items.blockId,
+      isReported: this.props.items.isReported ? true : false
     };
   }
 
@@ -108,18 +109,15 @@ class TopBar extends Component {
         this.props.reportedContentData &&
         !this.props.reportedContentData.error
       ) {
-        console.log(this.props.reportedContentData.addReport);
+        console.log(this.props.reportedContentData.addReport.isReported);
+        this.getUserInfo();
+        this.getUserData();
+        this.renderDotTips(this.props.items.userid);
+        this.setState({
+          isReported: this.props.reportedContentData.addReport.isReported
+        });
       }
     });
-    // this.props.addReport(data).then(() => {
-    //   if (
-    //     this.props.reportedContentData &&
-    //     !this.props.reportedContentData.error &&
-    //     this.props.reportedContentData.addReport.success
-    //   ) {
-    //     console.log(this.props.reportedContentData);
-    //   }
-    // });
   };
 
   getUserInfo = () => {
@@ -189,6 +187,12 @@ class TopBar extends Component {
       BlockTitle = Translations.tool_tips.unblock;
     } else {
       BlockTitle = Translations.tool_tips.block;
+    }
+
+    if (this.state.isReported) {
+      ReportTitle = Translations.tool_tips.report_user;
+    } else {
+      ReportTitle = Translations.tool_tips.unreport_user;
     }
     const reportTips = [
       { name: ReportTitle, handleEvent: this.handleReportUser },

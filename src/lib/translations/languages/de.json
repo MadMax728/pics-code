@@ -225,7 +225,8 @@
     "delete": "Delete",
     "block": "Block",
     "unblock": "Unblock",
-    "report_user": "Report User"
+    "report_user": "Report User",
+    "unreport_user": "Unreport User"
   },
 
   "back_office_menu": {
