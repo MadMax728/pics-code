@@ -1,7 +1,4 @@
-export { default as CampeignPageLoading } from "./CampeignPageLoading";
-export { default as ExplorePageLoading } from "./ExplorePageLoading";
-export { default as NewsPageLoading } from "./NewsPageLoading";
-export { default as ParticipantsPageLoading } from "./ParticipantsPageLoading";
-export { default as PicsPageLoading } from "./PicsPageLoading";
-export { default as UserPageLoading } from "./UserPageLoading";
+export { default as InlinePageLoading } from "./InlinePageLoading";
+export { default as CampaignLPageLoading } from "./CampeignPageLoading";
+export { default as UserPicPageLoading } from "./UserPicPageLoading";
 export { default as NoDataLoader } from "./NoDataLoader";
