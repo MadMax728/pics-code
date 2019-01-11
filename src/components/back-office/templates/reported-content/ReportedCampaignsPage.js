@@ -23,6 +23,7 @@ class ReportedCampaignsPage extends Component {
       type: "get",
       reportContent: "Campaign"
     }
+    this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
   };
@@ -31,7 +32,8 @@ class ReportedCampaignsPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(()=> {
       if(this.props.reportedContentData && this.props.reportedContentData.Campaign) {
         this.setState({
-          campaignList: this.props.reportedContentData.Campaign
+          campaignList: this.props.reportedContentData.Campaign,
+          isLoading: this.props.reportedContentData.isLoading
         })
       }
     });

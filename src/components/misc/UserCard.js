@@ -9,8 +9,11 @@ import {
   getUser
 } from "../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../lib/translations";
+import { RenderToolTips } from "../common";
+import * as enumerations from "../../lib/constants/enumerations";
+import { modalType } from "../../lib/constants";
 
-const storage = Auth.extractJwtFromStorage();
 class UserCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -61,9 +64,67 @@ class UserCard extends Component {
     });
   };
 
+  renderReportTips = (id) => {
+    const { item } = this.state;
+    
+    const reportTips = [
+      {
+        name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+        handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+      },
+      {
+        name: Translations.tool_tips.do_not,
+        handleEvent: this.handleDoNotContent
+      }
+    ];
+    return <RenderToolTips items={reportTips} id={id} />;
+  };
+
+  handleLockContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+      reportContent: "User"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+  
+  handleSetState = (data) => {
+    clearInterval(this.timer);
+    const { item } = this.state;
+    item.reportStatus = data.contentStatus;
+    this.setState({item});
+    this.props.handleRemove(item.id)
+  }
+
+  handleDoNotContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "User"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+
+  handleUnlockContent= (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+      reportContent: "User"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+  
+
   render() {
     const { item, index } = this.state;
-    const { isReport } = this.props;
+    const { isReport, isBackOffice } = this.props;
 
     return (
       <UserCardBody
@@ -71,6 +132,8 @@ class UserCard extends Component {
         index={index}
         handleSubscribed={this.handleSubscribed}
         isReport={isReport}
+        isBackOffice={isBackOffice}/* eslint-disable */
+        renderReportTips={() => this.renderReportTips(item.id)}
       />
     );
   }
@@ -97,7 +160,10 @@ UserCard.propTypes = {
   getDashboard: PropTypes.func,
   usersData: PropTypes.any,
   getUser: PropTypes.func,
-  userDataByUsername: PropTypes.any
+  userDataByUsername: PropTypes.any,
+  isBackOffice: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  handleRemove: PropTypes.func
 };
 
 export default connect(
