@@ -24,7 +24,7 @@ class RenderToolTips extends Component {
     const { items, id, isLoading } = this.props;
     return (
       <div className="post-action-links">
-        {items.map((item) => {
+        {items.map(item => {
           return (
             <button
               className="btn-comment-tooltip"
