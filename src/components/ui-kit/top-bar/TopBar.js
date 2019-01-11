@@ -14,7 +14,7 @@ import {
   getFollowUserList,
   addReport,
   blockUserRequest,
-  getUnsubscribe,
+  unblockUserRequest,
   getUser,
   getDashboard
 } from "../../../actions";
@@ -27,6 +27,9 @@ const handleKeyDown = () => {};
 class TopBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      blockId: this.props.items.blockId
+    };
   }
 
   componentDidMount = () => {
@@ -35,12 +38,11 @@ class TopBar extends Component {
 
   componentWillReceiveProps = nextProps => {
     if (
-      this.props.usersData.isBlockRequestResult !==
-      nextProps.usersData.isBlockRequestResult
+      this.props.usersData.BlockRequestResult !==
+      nextProps.usersData.BlockRequestResult
     ) {
-      console.log("in");
       this.getUserInfo();
-      this.renderDotTips(this.props.items.userid);
+      this.renderDotTips(nextProps.items.userid);
     }
   };
 
@@ -78,8 +80,9 @@ class TopBar extends Component {
           border={true}
           type={"light"}
           value={slot.val}
+          valueName={slot.name}
         />
-        <span> {slot.name}</span>
+        {/* <span> {slot.name}</span> */}
         <div className="clearfix" />
         <button
           className={slot.btnActiveClassName}
@@ -100,7 +103,6 @@ class TopBar extends Component {
       typeId: e.target.id,
       title: items.username
     };
-    console.log("reportUser");
     this.props.addReport(data).then(() => {
       if (
         this.props.reportedContentData &&
@@ -144,8 +146,8 @@ class TopBar extends Component {
   handleBlock = e => {
     const { items } = this.props;
     const errors = {};
-    const blockId = items.blockId;
-    if (blockId === "") {
+    const blockId = this.state.blockId;
+    if (!blockId) {
       const requestData = { following: items.userid, isBlock: true };
       this.props.blockUserRequest(requestData).then(() => {
         if (
@@ -153,39 +155,41 @@ class TopBar extends Component {
           this.props.usersData.error.status === 400
         ) {
           // error
-        } else if (this.props.usersData.isBlockRequestResult) {
+        } else if (this.props.usersData.BlockRequestResult) {
           this.getUserInfo();
           this.getUserData();
+          this.renderDotTips(this.props.items.userid);
+          this.setState({
+            blockId: this.props.usersData.BlockRequestResult.id
+          });
         }
       });
     } else {
-      this.props.getUnsubscribe(blockId).then(() => {
+      this.props.unblockUserRequest(blockId).then(() => {
         if (
           this.props.usersData.error &&
           this.props.usersData.error.status === 400
         ) {
           // error
-        } else if (this.props.usersData.isUnsubscribed) {
+        } else if (this.props.usersData.isUnblock) {
           this.getUserInfo();
           this.getUserData();
+          this.renderDotTips(this.props.items.userid);
+          this.setState({ blockId: "" });
         }
       });
     }
   };
 
   renderDotTips = id => {
-    // console.log(this.props.items.isBlocked;
     const tooltipIsLoading = this.props.usersData.isLoading;
-
     let BlockTitle = Translations.tool_tips.block;
     let ReportTitle = Translations.tool_tips.report_user;
-
-    if (this.props.items.isBlocked) {
+    if (this.state.blockId) {
       BlockTitle = Translations.tool_tips.unblock;
     } else {
       BlockTitle = Translations.tool_tips.block;
     }
-
     const reportTips = [
       { name: ReportTitle, handleEvent: this.handleReportUser },
       { name: BlockTitle, handleEvent: this.handleBlock }
@@ -279,7 +283,7 @@ const mapDispatchToProps = {
   getFollowUserList,
   addReport,
   blockUserRequest,
-  getUnsubscribe,
+  unblockUserRequest,
   getUser,
   getDashboard
 };
@@ -294,7 +298,7 @@ TopBar.propTypes = {
   addReport: PropTypes.func,
   reportedContentData: PropTypes.any,
   blockUserRequest: PropTypes.func,
-  getUnsubscribe: PropTypes.func,
+  unblockUserRequest: PropTypes.func,
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.any,
   getDashboard: PropTypes.func

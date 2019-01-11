@@ -9,7 +9,8 @@ import {
   addComment,
   deleteComment,
   editComment,
-  addReport
+  addReport,
+  getComments
 } from "../../../../actions";
 import { connect } from "react-redux";
 
@@ -38,9 +39,27 @@ class Comments extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.handleCommentsSections();
   };
 
   handleReportPost = () => {};
+
+  handleCommentsSections = () => {
+    const CampaignId = {
+      typeId: this.state.item.typeId
+    };
+    this.props.getComments(CampaignId).then(() => {
+      console.log(this.props);
+      // const totalComment = this.props;
+
+      //const totalComment = this.props;
+      // this.setState({
+      //   isComments: !this.state.isComments,
+      //   comments: this.props.comments,
+      //   totalCommentsCount: totalComment.length
+      // });
+    });
+  };
 
   addComment = comment => {
     const { comments, itemId, typeOfContent, slicedCommentsData } = this.state;
@@ -249,7 +268,8 @@ const mapDispatchToProps = {
   addComment,
   deleteComment,
   editComment,
-  addReport
+  addReport,
+  getComments
 };
 
 Comments.propTypes = {
@@ -257,7 +277,7 @@ Comments.propTypes = {
   item: PropTypes.any,
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  handleComment: PropTypes.func.isRequired,
+  handleComment: PropTypes.func,
   editComment: PropTypes.func.isRequired,
   isReport: PropTypes.bool,
   comment: PropTypes.any,
@@ -268,7 +288,8 @@ Comments.propTypes = {
   totalCommentsCount: PropTypes.any,
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  getComments: PropTypes.func
 };
 
 export default connect(
