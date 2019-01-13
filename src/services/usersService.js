@@ -41,13 +41,14 @@ export const sendRequest = (payload, header = {}) =>
 export const getUnsubscribe = (payload, id, header = {}) =>
   api(baseUrl, header).delete("/subscribe/" + id, payload);
 
-// export const getFollowUserList = (payload, header = {}) =>
-//   api(baseUrl, header).get(
-//     "/subscribe/" + payload.id + "?type=" + payload.type
-//   );
-
 export const getPendingUserList = (payload, header = {}) =>
   api(baseUrl, header).get("/subscribe");
 
 export const acceptRequest = (payload, header = {}) =>
   api(baseUrl, header).put("/subscribe/accept-request", payload);
+
+export const blockUserRequest = (payload, header = {}) =>
+  api(baseUrl, header).put("/subscribe/block-request", payload);
+
+export const unblockUserRequest = (payload, id, header = {}) =>
+  api(baseUrl, header).delete("/subscribe/" + id, payload);

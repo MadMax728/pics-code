@@ -4,10 +4,16 @@ import * as images from "../../lib/constants/images";
 import { RenderToolTips, HashTagUsername } from "../common";
 import { ThreeDots, ReadMore } from "../ui-kit";
 import { Translations } from "../../lib/translations";
-import { addComment, deleteComment, editComment } from "../../actions";
+import {
+  addComment,
+  deleteComment,
+  editComment,
+  addReport
+} from "../../actions";
 import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
 import ReportCard from "./ReportCard";
+import * as enumerations from "../../lib/constants/enumerations";
 
 class CommentCard extends Component {
   constructor(props, context) {
@@ -27,25 +33,25 @@ class CommentCard extends Component {
       },
       updateForm: {
         comment: ""
-      },
-      ReportTips: [
-        {
-          name: "Edit",
-          handleEvent: this.handleEditComment
-        },
-        {
-          name: "Report Comment",
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: "Delete",
-          handleEvent: this.handleDelete
-        }
-      ]
+      }
     };
   }
 
-  handleReportPost = () => {};
+  handleReportPost = (e) => {
+    const { item } = this.state;
+    const comment = item[item.findIndex(i => i.id === e.target.id)];
+    const data = {
+      typeContent: "Comment",
+      typeId: e.target.id,
+      title: comment.comment
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === comment.id) {
+        comment.isReported = !comment.isReported;
+        this.setState({item});
+      }
+    });
+  };
 
   componentDidMount = () => {
     const commentData = this.state.comments.slice(
@@ -98,6 +104,16 @@ class CommentCard extends Component {
     this.setState({ slicedCommentsData: commentData, maxRange: maxRangeValue });
   };
 
+  handleViewLessComment = () => {
+    const maxRangeValue = "2";
+    const commentData = this.state.comments.slice(0, maxRangeValue);
+    this.setState({
+      slicedCommentsData: commentData,
+      minRange: 0,
+      maxRange: maxRangeValue
+    });
+  };
+
   handleDelete = e => {
     const id = e.target.id;
     const { comments, slicedCommentsData } = this.state;
@@ -122,9 +138,41 @@ class CommentCard extends Component {
    * Tooltp
    */
   renderReportTips = id => {
+    let reportTips;
+    const { isBackOffice } = this.props;
+    const { item } = this.state;
+
+    if (isBackOffice) {
+      reportTips = [
+        {
+          name: item[item.findIndex(i => i.id === id)].reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    } else {
+      reportTips = [
+        {
+          name: Translations.tool_tips.edit,
+          handleEvent: this.handleEditComment
+        },
+        {
+          name: item[item.findIndex(i => i.id === id)].isReported? Translations.tool_tips.unreport_comment : Translations.tool_tips.report_comment,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: Translations.tool_tips.delete,
+          handleEvent: this.handleDelete
+        }
+      ];
+    }
+
     return (
       <RenderToolTips
-        items={this.state.ReportTips}
+        items={reportTips}
         id={id}
         isLoading={this.props.isLoading}
       />
@@ -140,7 +188,7 @@ class CommentCard extends Component {
     if (comment.id === updateForm.id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
-          <div className="col-sm-11 col-xs-7 no-padding">
+          <div>
             <div className="comment-input">
               <div className="form-group">
                 <HashTagUsername
@@ -242,7 +290,7 @@ class CommentCard extends Component {
             />
           </div>
         </div>
-        <div className="comment-content">{this.renderEditComment(comment)}</div>
+        <div className="comment-content col-md-12 no-padding"><div class="col-md-1"></div><div class="col-md-10">{this.renderEditComment(comment)}</div></div>
       </div>
     );
   };
@@ -292,14 +340,14 @@ class CommentCard extends Component {
         {!isReport && (
           <div className="comment-wrapper">
             <form onSubmit={this.handleSubmit} ref="commentForm">
-              <div className="col-sm-1 col-xs-1 no-padding profile_image">
+              <div className="no-padding profile_image">
                 <img
                   src={images.image}
                   alt="image1"
                   className="img-circle img-responsive"
                 />
               </div>
-              <div className="col-sm-10 col-xs-7 no-padding">
+              <div className="no-padding">
                 <div className="comment-input">
                   <div className="form-group">
                     <HashTagUsername
@@ -313,12 +361,12 @@ class CommentCard extends Component {
                       maxLimit={1000}
                       isText
                     />
+                    <div className="emoji_wrapper">
+                      <img src={images.emoji} alt="like" className="pull-right" />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-sm-1 col-xs-2 emoji_wrapper">
-                <img src={images.emoji} alt="like" className="pull-right" />
-              </div>
+              </div>              
               <input type="submit" hidden />
             </form>
           </div>
@@ -343,6 +391,17 @@ class CommentCard extends Component {
             {Translations.view_more_comments}
           </div>
         )}
+
+        {!isReport &&
+          this.props.totalCommentsCount > 2 &&
+          this.props.totalCommentsCount < this.state.maxRange && (
+            <div
+              className="view-more-comments view-more-link"
+              onClick={this.handleViewLessComment}
+            >
+              {Translations.view_less_comments}
+            </div>
+          )}
       </div>
     );
   }
@@ -350,13 +409,15 @@ class CommentCard extends Component {
 
 const mapStateToProps = state => ({
   comment: state.commentData.comment,
-  isLoading: state.commentData.isLoading
+  isLoading: state.commentData.isLoading,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   addComment,
   deleteComment,
-  editComment
+  editComment,
+  addReport
 };
 
 CommentCard.propTypes = {
@@ -371,7 +432,10 @@ CommentCard.propTypes = {
   isLoading: PropTypes.bool,
   itemId: PropTypes.any,
   maxLimit: PropTypes.any,
-  totalCommentsCount: PropTypes.any
+  totalCommentsCount: PropTypes.any,
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any
 };
 
 export default connect(

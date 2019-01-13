@@ -148,7 +148,9 @@ const initialState = {
     isUnsubscribed: null,
     userList: [],
     pendingUserList: [],
-    isAcceptRequest: null
+    isAcceptRequest: null,
+    BlockRequestResult: [],
+    isUnblock: null
   },
   subscribeData: {
     subscriber: [],
@@ -207,9 +209,6 @@ const initialState = {
     AdsStatistics: null,
     CommentsStatistics: null,
     UsersStatistics: null,
-
-
-    updateReport: null,
 
     addReport: null,
 

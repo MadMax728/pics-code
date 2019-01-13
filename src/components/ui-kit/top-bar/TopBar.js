@@ -4,23 +4,47 @@ import { Link } from "react-router-dom";
 import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
-import { modalType } from "../../../lib/constants/enumerations";
 import { connect } from "react-redux";
-import { ToolTip } from "../../ui-kit";
-import { users_list } from "../../../mock-data/users-list";
-import { SubscriberTooltip, SubscribedTooltip } from "../../common";
-import { getFollowUserList } from "../../../actions";
+import {
+  SubscriberTooltip,
+  SubscribedTooltip,
+  RenderToolTips
+} from "../../common";
+import {
+  getFollowUserList,
+  addReport,
+  blockUserRequest,
+  unblockUserRequest,
+  getUser,
+  getDashboard
+} from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
+import { ThreeDots } from "../../ui-kit";
+import { Loader } from "../loading-indicator";
 
 const handleKeyDown = () => {};
 
 class TopBar extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      blockId: this.props.items.blockId,
+      isReported: this.props.items.isReported ? true : false
+    };
   }
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      this.props.usersData.BlockRequestResult !==
+      nextProps.usersData.BlockRequestResult
+    ) {
+      this.getUserInfo();
+      this.renderDotTips(nextProps.items.userid);
+    }
   };
 
   renderReportTips = (type, userid, username) => {
@@ -38,14 +62,15 @@ class TopBar extends Component {
   };
 
   renderSlots = slot => {
+    const userIsLoading = this.props.userDataByUsername.isLoading;
     return (
       <div className={slot.className} key={`slot-${slot.name}`}>
         <SubscribeList
           id={`slot-${slot.name}`}
           role="button"
           dataTip=""
-          dataClass="tooltip-wrapr" /* eslint-disable */
-          getContent={() =>
+          dataClass="tooltip-wrapr"
+          /* eslint-disable */ getContent={() =>
             this.renderReportTips(slot.name, slot.userid, slot.username)
           }
           effect="solid"
@@ -56,13 +81,130 @@ class TopBar extends Component {
           border={true}
           type={"light"}
           value={slot.val}
+          valueName={slot.name}
         />
-        <span> {slot.name}</span>
+        {/* <span> {slot.name}</span> */}
         <div className="clearfix" />
-        <button className={slot.btnActiveClassName} onClick={slot.handeleEvent}>
+        <button
+          className={slot.btnActiveClassName}
+          id={slot.userid}
+          onClick={slot.handeleEvent}
+          disabled={userIsLoading}
+        >
           {slot.btnText}
         </button>
       </div>
+    );
+  };
+
+  handleReportUser = e => {
+    const { items } = this.props;
+    const data = {
+      typeContent: "User",
+      typeId: e.target.id,
+      title: items.username
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        !this.props.reportedContentData.error
+      ) {
+        console.log(this.props.reportedContentData.addReport.isReported);
+        this.getUserInfo();
+        this.getUserData();
+        this.renderDotTips(this.props.items.userid);
+        this.setState({
+          isReported: this.props.reportedContentData.addReport.isReported
+        });
+      }
+    });
+  };
+
+  getUserInfo = () => {
+    const data = { username: this.props.items.username };
+    this.props.getUser(data).then(() => {
+      if (
+        this.props.userDataByUsername &&
+        this.props.userDataByUsername.user &&
+        this.props.userDataByUsername.user.data
+      ) {
+        // success
+      }
+    });
+  };
+
+  getUserData = () => {
+    this.props.getDashboard("users", "").then(() => {
+      if (this.props.usersList) {
+        this.setState({ usersList: this.props.usersList });
+      }
+    });
+  };
+
+  handleBlock = e => {
+    const { items } = this.props;
+    const errors = {};
+    const blockId = this.state.blockId;
+    if (!blockId) {
+      const requestData = { following: items.userid, isBlock: true };
+      this.props.blockUserRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.BlockRequestResult) {
+          this.getUserInfo();
+          this.getUserData();
+          this.renderDotTips(this.props.items.userid);
+          this.setState({
+            blockId: this.props.usersData.BlockRequestResult.id
+          });
+        }
+      });
+    } else {
+      this.props.unblockUserRequest(blockId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isUnblock) {
+          this.getUserInfo();
+          this.getUserData();
+          this.renderDotTips(this.props.items.userid);
+          this.setState({ blockId: "" });
+        }
+      });
+    }
+  };
+
+  renderDotTips = id => {
+    const tooltipIsLoading = this.props.usersData.isLoading;
+
+    let BlockTitle = Translations.tool_tips.block;
+    let ReportTitle = Translations.tool_tips.report_user;
+    if (this.state.blockId) {
+      BlockTitle = Translations.tool_tips.unblock;
+    } else {
+      BlockTitle = Translations.tool_tips.block;
+    }
+
+    if (this.state.isReported) {
+      ReportTitle = Translations.tool_tips.report_user;
+    } else {
+      ReportTitle = Translations.tool_tips.unreport_user;
+    }
+    const reportTips = [
+      { name: ReportTitle, handleEvent: this.handleReportUser },
+      { name: BlockTitle, handleEvent: this.handleBlock }
+    ];
+    return (
+      <RenderToolTips
+        items={reportTips}
+        id={id ? id : "0"}
+        isLoading={tooltipIsLoading}
+      />
     );
   };
 
@@ -109,7 +251,21 @@ class TopBar extends Component {
               )}
               {items.length !== 0 && items.more && (
                 <div className="settings">
-                  <img src={images.more} alt="more" />
+                  <ThreeDots
+                    id={`topbar-${items.userid}`}
+                    role="button"
+                    dataTip="tooltip"
+                    dataClass="tooltip-wrapr"
+                    /* eslint-disable */
+                    getContent={() => this.renderDotTips(items.userid)}
+                    effect="solid"
+                    delayHide={500}
+                    delayShow={500}
+                    delayUpdate={500}
+                    place={"left"}
+                    border
+                    type={"light"}
+                  />
                 </div>
               )}
               <div className="clearfix" />
@@ -123,11 +279,18 @@ class TopBar extends Component {
 }
 
 const mapStateToProps = state => ({
-  usersData: state.usersData
+  usersData: state.usersData,
+  reportedContentData: state.reportedContentData,
+  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
-  getFollowUserList
+  getFollowUserList,
+  addReport,
+  blockUserRequest,
+  unblockUserRequest,
+  getUser,
+  getDashboard
 };
 
 TopBar.propTypes = {
@@ -135,7 +298,15 @@ TopBar.propTypes = {
   items: PropTypes.any,
   handleModalInfoShow: PropTypes.any,
   getFollowUserList: PropTypes.func,
-  usersData: PropTypes.any
+  usersData: PropTypes.any,
+  userDataByUsername: PropTypes.any,
+  addReport: PropTypes.func,
+  reportedContentData: PropTypes.any,
+  blockUserRequest: PropTypes.func,
+  unblockUserRequest: PropTypes.func,
+  getUser: PropTypes.func,
+  userDataByUsername: PropTypes.any,
+  getDashboard: PropTypes.func
 };
 
 export default connect(

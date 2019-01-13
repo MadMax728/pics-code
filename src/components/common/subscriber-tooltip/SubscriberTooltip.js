@@ -40,10 +40,12 @@ class SubscriberTooltip extends Component {
 
   // Tooltip List
   getTooltipUserList = userId => {
-    const userRequestData = { id: userId, type: "followings" };
-    this.props.getFollowUserList("subscriber", userRequestData).then(() => {
-      // Success
-    });
+    if (userId) {
+      const userRequestData = { id: userId, type: "followings" };
+      this.props.getFollowUserList("subscriber", userRequestData).then(() => {
+        // Success
+      });
+    }
   };
 
   // Left sidebar - All User List
@@ -114,19 +116,19 @@ class SubscriberTooltip extends Component {
                   key={user.id}
                 >
                   <div className="row">
-                    <div className="col-md-3">
+                    <div className="col-sm-3">
                       <img
                         src={user.profileUrl}
                         alt="campaign"
                         className="img-circle img-responsive"
                       />
                     </div>
-                    <div className="col-md-4">
+                    <div className="col-sm-4">
                       <div className="user-info">
                         <div className="username">{user.username}</div>
                         <div className="subtitle">{user.name}</div>
                       </div>
-                      </div>
+                    </div>
                     <div className="col-md-5">
                       <div className="subscribe-btn">
                         {user.isSubscribe ? (

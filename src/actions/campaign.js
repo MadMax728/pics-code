@@ -31,7 +31,7 @@ export const getCampaigns = (prop, provider) => {
 
     return campaignService[prop](provider, header).then(
       res => {
-        const campaigns = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        const campaigns =  _.orderBy(res.data.data, (o ) => moment(o.createdAt), ['desc']);
         dispatch(getCampaignsSucceeded(campaigns));
       },
       error => {

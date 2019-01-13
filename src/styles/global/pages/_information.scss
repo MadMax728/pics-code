@@ -139,8 +139,10 @@
       }
     }
     .view-more-comments {
-      padding: 0px 17px;
       cursor: pointer;
+      a{
+        color: $silver_color;
+      }
     }
   }
 }

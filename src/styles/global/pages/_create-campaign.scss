@@ -858,12 +858,39 @@
 }
 .__react_component_tooltip{
   .normal_title{
-    padding: 5px;
+    padding: 15px;
     margin: 0;
+    background: #fff;
+    border-bottom: 1px solid #777;
   }  
-  .notification-with-subscribe{
-    .user-info{
-      margin-top: 17px;
+  .header-notifications{
+    padding: 0!important;
+    .notification-with-subscribe{
+      padding: 10px 0;
+      border-bottom: 2px solid rgba(198, 198, 198, 0.3);
+      &:last-child{
+        border-bottom: none;
+      }
+      .row{
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+      .user-info{
+       .username{
+        color: #4a4a4a;
+        word-break: break-all;
+       }
+       .subtitle{
+         word-break: break-all;
+       }
+      }
+      .community-subscribe{
+        margin-top: 0;
+        button{
+          margin-top: 0;
+          width: 100px;
+        }
+      }
     }
   }
 }

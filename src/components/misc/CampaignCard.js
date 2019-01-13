@@ -6,7 +6,7 @@ import CampaignCardFooter from "./footers/CampaignCardFooter";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
-import { like, getComments, setSavedPost } from "../../actions";
+import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
@@ -27,6 +27,7 @@ class CampaignCard extends Component {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
+      reportContent: "Campaign"
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -37,12 +38,15 @@ class CampaignCard extends Component {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
+    this.setState({item});
+    this.props.handleRemove(item.id)
   }
 
   handleDoNotContent = (e) => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "Campaign"
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -53,6 +57,7 @@ class CampaignCard extends Component {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
+      reportContent: "Campaign"
     }    
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
@@ -63,7 +68,6 @@ class CampaignCard extends Component {
     let reportTips;
     const { isBackOffice } = this.props;
     const { item } = this.state;
-
     if (isBackOffice){
       reportTips = [
         {
@@ -79,11 +83,11 @@ class CampaignCard extends Component {
     else {
       reportTips = [
         {
-          name: Translations.tool_tips.report,
+          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: Translations.tool_tips.save,
+          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         }
       ];
@@ -91,18 +95,36 @@ class CampaignCard extends Component {
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = () => {};
+  handleReportPost = (e) => {
+    const  { item } = this.state;
+    const data = {
+      typeContent: "Campaign",
+      typeId: e.target.id,
+      title: item.title
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
+        item.isReported = !item.isReported;
+        this.setState({item});
+      }
+    });
+  };
 
   handleSavePost = e => {
-    const item = this.state.item;
+    const { item } = this.state;
+    const { isSavedPage } = this.props;
     const data = {
       typeId: e.target.id,
       postType: getBackendPostType(item)
     };
 
     this.props.setSavedPost(data).then(() => {
-      if (this.props.savedData) {
-        console.log(this.props.savedData);
+      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
+        item.isSavedPost = !item.isSavedPost;
+        this.setState({item});
+        if(isSavedPage && !this.state.item.isSavedPost) {
+          this.props.handleRemove(item.id);
+        }
       }
     });
   };
@@ -149,11 +171,31 @@ class CampaignCard extends Component {
       isInformation,
       isBudget,
       isReport,
-      likeData
+      likeData,
+      reportedContentData,
+      savedData
     } = this.props;
     const { isComments, item, comments } = this.state;
+    console.log('state', this.state);
+    console.log('prop', this.props);
     return (
+      /* No Data Found - Card */
       <div className="feed_wrapper">
+        {/*<div className="feed_wrapper">
+         <div className="datanotfound-wrapper" >
+          <div className="notfound-body row">
+            <div class="notfound-title col-sm-8">Error Title</div>
+            <div className="notfound-btn-wrapper col-sm-2">
+              <button className="filled_button" id="1" >New</button> 
+            </div>
+            <div className="notfound-btn-wrapper col-sm-2">
+              <button className="filled_button" id="2" >Refresh</button>
+            </div>
+          </div>   
+          <div className="notfound-footer row">
+            <div class="col-md-12">Menu title will go here...</div>
+          </div>       
+    </div>*/}
         <CampaignCardHeader
           campaign={item}
           isDescription={isDescription}
@@ -165,6 +207,7 @@ class CampaignCard extends Component {
           campaign={item}
           isDescription={isDescription}
           isInformation={isInformation}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
         />
         <CampaignCardFooter
           campaign={item}
@@ -196,12 +239,14 @@ const mapStateToProps = state => ({
   likeData: state.likeData,
   savedData: state.savedData,
   comments: state.commentData.comments,
-  totalCommentsCount: state.totalCommentsCount
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   like,
   getComments,
+  addReport,
   setSavedPost
 };
 
@@ -219,7 +264,11 @@ CampaignCard.propTypes = {
   like: PropTypes.func.isRequired,
   likeData: PropTypes.any,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
-  isBackOffice: PropTypes.bool
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any,
+  handleRemove: PropTypes.func,
+  isSavedPage: PropTypes.bool
 };
 
 export default connect(

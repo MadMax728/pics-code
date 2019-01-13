@@ -409,7 +409,7 @@
         button {
           height: 35px;
           padding: 6px;
-          width: 90px;
+          width: 100px;
           @media (max-width: 1199px) {
             width: 85px;
             padding: 3px;
@@ -671,6 +671,12 @@
         resize: none;
         box-shadow: none;
       }
+      .comment-input{
+        width: 90%;
+        input{
+          width: 80%;
+        }        
+      }
       .emoji_wrapper {
         padding-right: 0px;
       }
@@ -702,6 +708,10 @@
             display: inline-block;
             width: 100%;
             word-break: break-all;
+            .read-more-button{
+              color: #029bd7;
+              cursor: pointer;
+            }
           }
         }
         p {
@@ -730,7 +740,7 @@
       padding: 13px;
       display: block;
       color: $silver_color;
-      cursor: pointer;
+      cursor: pointer;      
     }
   }
 }
@@ -899,9 +909,12 @@
   }
 }
 
+.languageBtn{
+  position: relative;
+}
 .language-radio-input:checked,
 .language-radio-input:not(:checked) {
-  right: 13px;
+  right: 0;
   z-index: 99999;
   opacity: 0;
   margin-top: 0;
@@ -911,11 +924,12 @@
 .language-radio-input:not(:checked) + span
 {
     position: relative;
-    width: 200px;
+    width: 100%;
     cursor: pointer;
     line-height: 20px;
     display: inline-block;
-    color: #666;
+    color: #9b9b9b;
+    margin-bottom: 10px;
 }
 .language-radio-input:checked + span:before,
 .language-radio-input:not(:checked) + span:before {

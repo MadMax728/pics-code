@@ -2,9 +2,17 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { ThreeDots } from "../../../ui-kit";
+import { ThreeDots, ReadMore } from "../../../ui-kit";
 import { RenderToolTips, HashTagUsername } from "../../../common";
 import { Translations } from "../../../../lib/translations";
+import {
+  addComment,
+  deleteComment,
+  editComment,
+  addReport,
+  getComments
+} from "../../../../actions";
+import { connect } from "react-redux";
 
 class Comments extends Component {
   constructor(props, context) {
@@ -12,59 +20,117 @@ class Comments extends Component {
 
     this.state = {
       campaign: this.props.campaign,
-      comments: this.props.campaign.comments,
+      comments: "",
+      item: this.props.item,
+      itemId: this.props.itemId,
+      typeOfContent: this.props.typeContent,
+      minRange: 0,
+      maxRange: 2,
+      slicedCommentsData: null,
       form: {
+        id: null,
         comment: ""
       },
-      ReportTips: [
-        {
-          name: "Report Comment",
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: "Delete",
-          handleEvent: this.handleDelete
-        }
-      ]
+      updateForm: {
+        comment: ""
+      }
     };
   }
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.handleCommentsSections();
   };
 
   handleReportPost = () => {};
 
-  addComment = (campaignId, comment) => {
-    const comments = this.state.comments;
-    const commentData = {
-      comment_id: parseInt(Math.random()),
+  handleCommentsSections = () => {
+    const CampaignId = { typeId: this.props.campaign.typeId };
+    this.props.getComments(CampaignId).then(() => {
+      console.log(this.props);
+      // const totalComment = this.props;
+
+      //const totalComment = this.props;
+      // this.setState({
+      //   isComments: !this.state.isComments,
+      //   comments: this.props.comments,
+      //   totalCommentsCount: totalComment.length
+      // });
+    });
+  };
+
+  addComment = comment => {
+    const { comments, itemId, typeOfContent, slicedCommentsData } = this.state;
+    const data = {
       comment,
-      user: {
-        name: "Vaghela",
-        id: 2,
-        image: `${images.campaign2}`
-      },
-      date: "02.02.2000"
+      typeOfContent,
+      typeId: itemId
     };
+    console.log(this.state);
+    // this.props.addComment(data).then(() => {
+    //   if (this.props.comment) {
+    //     const commentData = {
+    //       id: this.props.comment.id,
+    //       comment: this.props.comment.comment,
+    //       username: this.props.comment.userName,
+    //       userId: this.props.comment.userId,
+    //       profileImage: this.props.comment.profileImage,
+    //       date: this.props.comment.createdAt
+    //     };
+    //     comments.unshift(commentData);
+    //     slicedCommentsData.unshift(commentData);
+    //     this.setState({ comments, slicedCommentsData });
+    //     this.props.handleComment(true);
+    //   }
+    // });
+  };
 
-    comments.unshift(commentData);
+  handleEditComment = e => {
+    const id = e.target.id;
+    const { comments } = this.state;
+    this.setState({
+      updateForm: {
+        ...this.state.updateForm,
+        comment: comments[comments.findIndex(c => c.id === id)].comment,
+        id
+      }
+    });
+  };
 
-    this.setState({ comments });
+  handleViewComment = e => {
+    const maxRangeValue = parseInt(this.state.maxRange) + parseInt(e.target.id);
+    const commentData = this.state.comments.slice(0, maxRangeValue);
+    this.setState({ slicedCommentsData: commentData, maxRange: maxRangeValue });
+  };
+
+  handleViewLessComment = () => {
+    const maxRangeValue = "2";
+    const commentData = this.state.comments.slice(0, maxRangeValue);
+    this.setState({
+      slicedCommentsData: commentData,
+      minRange: 0,
+      maxRange: maxRangeValue
+    });
   };
 
   handleDelete = e => {
     const id = e.target.id;
-    const comments = this.state.comments;
-
+    const { comments, slicedCommentsData } = this.state;
     const indexOf = comments.findIndex(c => {
-      return c.comment_id === parseInt(id);
+      return c.id === id;
     });
 
     if (indexOf !== -1) {
-      comments.splice(indexOf, 1);
+      const data = {
+        id
+      };
+      this.props.deleteComment(data).then(() => {
+        comments.splice(indexOf, 1);
+        slicedCommentsData.splice(indexOf, 1);
+        this.setState({ comments, slicedCommentsData });
+        this.props.handleComment(false);
+      });
     }
-    this.setState({ comments });
   };
 
   /**
@@ -128,10 +194,13 @@ class Comments extends Component {
   };
 
   render() {
-    const { campaign, form, comments } = this.state;
+    const { campaign, form, comments, item } = this.state;
+    const { isLoading, isReport } = this.props;
 
     return (
       <div className="feed-comment" id={campaign.id}>
+        {" "}
+        123
         <div className="comment-wrapper">
           <form onSubmit={this.handleSubmit} ref="commentForm">
             <div className="no-padding profile_image">
@@ -162,19 +231,53 @@ class Comments extends Component {
             <input type="submit" hidden />
           </form>
         </div>
-
-        {comments && comments.length !== 0 && comments.map(this.renderComment)}
-
-        <div className="view-more-comments">
-          <Link to={""}>{Translations.view_more_comments}</Link>
+        <div
+          className="view-more-comments view-more-link"
+          id="7"
+          onClick={this.handleViewComment}
+        >
+          {Translations.view_more_comments}
         </div>
       </div>
     );
   }
 }
 
-Comments.propTypes = {
-  campaign: PropTypes.any
+const mapStateToProps = state => ({
+  comment: state.commentData.comment,
+  isLoading: state.commentData.isLoading,
+  reportedContentData: state.reportedContentData
+});
+
+const mapDispatchToProps = {
+  addComment,
+  deleteComment,
+  editComment,
+  addReport,
+  getComments
 };
 
-export default Comments;
+Comments.propTypes = {
+  campaign: PropTypes.any,
+  item: PropTypes.any,
+  addComment: PropTypes.func.isRequired,
+  deleteComment: PropTypes.func.isRequired,
+  handleComment: PropTypes.func,
+  editComment: PropTypes.func.isRequired,
+  isReport: PropTypes.bool,
+  comment: PropTypes.any,
+  typeContent: PropTypes.any,
+  isLoading: PropTypes.bool,
+  itemId: PropTypes.any,
+  maxLimit: PropTypes.any,
+  totalCommentsCount: PropTypes.any,
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any,
+  getComments: PropTypes.func
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Comments);

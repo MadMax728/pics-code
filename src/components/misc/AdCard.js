@@ -6,9 +6,12 @@ import AdCardFooter from "./footers/AdCardFooter";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
-import { like, getComments, setSavedPost } from "../../actions";
+import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
+import * as enumerations from "../../lib/constants/enumerations";
+import { modalType } from "../../lib/constants";
+
 class AdCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -20,25 +23,94 @@ class AdCard extends Component {
     };
   }
 
+  handleLockContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+      reportContent: "Ads"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+  
+  handleSetState = (data) => {
+    clearInterval(this.timer);
+    const { item } = this.state;
+    item.reportStatus = data.contentStatus;
+    this.setState({item});
+    this.props.handleRemove(item.id)
+  }
+
+  handleDoNotContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "Ads"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+
+  handleUnlockContent= (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+      reportContent: "Ads"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+
   renderReportTips = (id) => {
-    const reportTips = [
-      {
-        name: Translations.tool_tips.report,
-        handleEvent: this.handleReportPost
-      },
-      {
-        name: Translations.tool_tips.save,
-        handleEvent: this.handleSavePost
-      },
-      {
-        name: Translations.tool_tips.lock,
-        handleEvent: this.handleContent
-      }
-    ];
+    let reportTips;
+    const { isBackOffice } = this.props;
+    const { item } = this.state;
+
+    if (isBackOffice){
+      reportTips = [
+        {
+          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
+          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    }
+    else {
+
+      reportTips = [
+        {
+          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+    }
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = () => {};
+  handleReportPost = (e) => {
+    const  { item } = this.state;
+    const data = {
+      typeContent: "Ads",
+      typeId: e.target.id,
+      title: item.title
+    }    
+    this.props.addReport(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
+        item.isReported = !item.isReported;
+        this.setState({item});
+      }
+    });
+  };
 
   handleContent = () => {};
 
@@ -75,6 +147,7 @@ class AdCard extends Component {
   };
 
   handleSavePost = (e) => {
+    const { isSavedPage } = this.props;
     const item = this.state.item;
     const data = {
         typeId: e.target.id,
@@ -82,14 +155,18 @@ class AdCard extends Component {
       };
 
     this.props.setSavedPost(data).then(()=> {
-      if(this.props.savedData){
-        console.log(this.props.savedData);
+      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
+        item.isSavedPost = !item.isSavedPost;
+        this.setState({item});
+        if(isSavedPage && !this.state.item.isSavedPost) {
+          this.props.handleRemove(item.id);
+        }
       }
     })
   };
 
   render() {
-    const { isStatus, isDescription, isInformation, isReport } = this.props;
+    const { isStatus, isDescription, isInformation, isReport, reportedContentData, savedData} = this.props;
     const { isComments, item, comments } = this.state;
     return (
       <div className="feed_wrapper">
@@ -104,6 +181,7 @@ class AdCard extends Component {
           ad={item}
           isDescription={isDescription}
           isInformation={isInformation}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
         />
         <AdCardFooter
           ad={item}
@@ -142,19 +220,27 @@ AdCard.propTypes = {
   getComments: PropTypes.func.isRequired,
   comments: PropTypes.any,
   isReport: PropTypes.bool,
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any,
+  handleRemove: PropTypes.func,
+  isSavedPage: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
   savedData: state.savedData,
   comments: state.commentData.comments,
-  totalCommentsCount: state.totalCommentsCount
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   like,
   getComments,
-  setSavedPost
+  setSavedPost,
+  addReport
 };
 
 export default connect(

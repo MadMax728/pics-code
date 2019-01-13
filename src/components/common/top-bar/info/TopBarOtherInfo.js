@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { TopBar } from "../../../ui-kit";
+import { TopBar, Loader } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
@@ -8,7 +8,8 @@ import {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard
+  getDashboard,
+  like
 } from "../../../../actions";
 class TopBarOtherInfo extends Component {
   constructor(props) {
@@ -20,6 +21,8 @@ class TopBarOtherInfo extends Component {
         private: true,
         more: true,
         isSubscribe: true,
+        isBlocked: null,
+        blockId: null,
         userProfile: this.props.match.profileUrl,
         slots: [
           {
@@ -93,6 +96,8 @@ class TopBarOtherInfo extends Component {
   handleSetUserInfo = () => {
     const isPending = this.props.userDataByUsername.user.data.isPending;
     const isSubscribe = this.props.userDataByUsername.user.data.isSubscribe;
+    const isLike = this.props.userDataByUsername.user.data.isLike;
+
     let subscribeBtnClass = "filled_button";
     let subscribeBtnText = Translations.top_bar_info.subscribe;
     if (isPending) {
@@ -108,6 +113,13 @@ class TopBarOtherInfo extends Component {
       }
     }
 
+    let isLikeBtnClass = "black_button";
+    if (isLike) {
+      isLikeBtnClass = "filled_button";
+    } else {
+      isLikeBtnClass = "black_button";
+    }
+
     const items = {
       userid: this.props.userDataByUsername.user.data.id,
       username: this.props.userDataByUsername.user.data.username,
@@ -115,6 +127,8 @@ class TopBarOtherInfo extends Component {
       more: true,
       isSubscribe: true,
       userProfile: this.props.userDataByUsername.user.data.profileUrl,
+      isBlocked: this.props.userDataByUsername.user.data.isBlocked,
+      blockId: this.props.userDataByUsername.user.data.blockId,
       slots: [
         {
           name: Translations.top_bar_info.subscriber,
@@ -140,7 +154,7 @@ class TopBarOtherInfo extends Component {
           name: Translations.top_bar_info.posts,
           val: this.props.userDataByUsername.user.data.postCount,
           className: "col-sm-4 slot_three no-padding",
-          btnActiveClassName: "black_button",
+          btnActiveClassName: isLikeBtnClass,
           btnText: Translations.top_bar_info.like_you,
           handeleEvent: this.handeleLikeYou,
           userid: this.props.userDataByUsername.user.data.id,
@@ -195,8 +209,16 @@ class TopBarOtherInfo extends Component {
     this.props.handleModalShow(modalType.messages);
   };
 
-  handeleLikeYou = () => {
-    console.log("handeleLikeYou clicked");
+  handeleLikeYou = event => {
+    const likeParam = { typeId: event.target.id };
+    this.props.like(likeParam);
+    const username = this.props.userDataByUsername.user.data.username;
+    if (username) {
+      const data = {
+        username: username
+      };
+      this.getUserData(data);
+    }
   };
 
   render() {
@@ -205,6 +227,7 @@ class TopBarOtherInfo extends Component {
         items={this.state.items}
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
+        userDataByUsername={this.props.userDataByUsername}
       />
     );
   }
@@ -219,7 +242,8 @@ const mapDispatchToProps = {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard
+  getDashboard,
+  like
 };
 
 TopBarOtherInfo.propTypes = {
@@ -231,7 +255,8 @@ TopBarOtherInfo.propTypes = {
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,
   usersData: PropTypes.any,
-  getDashboard: PropTypes.func
+  getDashboard: PropTypes.func,
+  like: PropTypes.func
 };
 
 export default connect(

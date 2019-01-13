@@ -70,8 +70,6 @@ export const getBackOfficeReportedStatistics = (prop) => {
       Authorization: storage.adminAccessToken
     };
 
-      console.log("fndsjk");
-      
     return  reportedContentService.getReportedStatistics(prop, header).then(
       res => {
           dispatch(getBackOfficeReportedStatisticsSucceeded(res.data.data, prop.reportContent));
@@ -94,15 +92,17 @@ const updateBackOfficeReportStarted = () => ({
   type: types.UPDATE_BACK_OFFICE_REPORT_STARTED
 });
 
-const updateBackOfficeReportSucceeded = (data) => ({
+const updateBackOfficeReportSucceeded = (data, isFor) => ({
   type: types.UPDATE_BACK_OFFICE_REPORT_SUCCEEDED,
-  payload: data
+  payload: data,
+  isFor
 });
 
-const updateBackOfficeReportFailed = (error) => ({
+const updateBackOfficeReportFailed = (error,isFor) => ({
   type: types.UPDATE_BACK_OFFICE_REPORT_FAILED,
   payload: error,
-  error: true
+  error: true,
+  isFor
 });
 
 export const updateBackOfficeReport = (prop) => {
@@ -115,10 +115,10 @@ export const updateBackOfficeReport = (prop) => {
 
     return  reportedContentService.updateBackOfficeReport(prop, header).then(
       res => {
-          dispatch(updateBackOfficeReportSucceeded(res.data.data));
+          dispatch(updateBackOfficeReportSucceeded(res.data.data, prop.reportContent));
       },
       error => {
-        dispatch(updateBackOfficeReportFailed(error.response))
+        dispatch(updateBackOfficeReportFailed(error.response, prop.reportContent))
         logger.error({
           description: error.toString(),
           fatal: true

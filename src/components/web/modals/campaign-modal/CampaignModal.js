@@ -19,6 +19,7 @@ import { Auth } from "../../../../auth";
 
 import { connect } from "react-redux";
 import { createCampaign, uploadMedia } from "../../../../actions";
+import { Translations } from "../../../../lib/translations";
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -141,7 +142,7 @@ class CampaignModal extends Component {
     } else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
-        "Please Select Image or Video"
+        Translations.create_campaigns.ImageAndVedio
       );
     }
   };
@@ -243,7 +244,7 @@ class CampaignModal extends Component {
 
         this.props.handleModalInfoMsgShow(
           modalType.error,
-          "Please Fill proper Data"
+          Translations.create_campaigns.FillProperData
         );
       }
     }
@@ -282,8 +283,7 @@ class CampaignModal extends Component {
         form.fileType = true;
         currentThis.setState({ form });
       };
-    }
-    if (file.type.includes("video")) {
+    } else if (file.type.includes("video")) {
       const currentThis = this;
       reader.readAsDataURL(file);
       reader.onloadend = function() {
@@ -294,6 +294,11 @@ class CampaignModal extends Component {
         form.fileType = false;
         currentThis.setState({ form });
       };
+    } else {
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        Translations.create_campaigns.SelectProperMedia
+      );
     }
   };
 

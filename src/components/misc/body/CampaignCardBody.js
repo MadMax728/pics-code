@@ -4,13 +4,13 @@ import { ImageItem, VideoItem, ReadMore } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import InformationCard from "../InformationCard";
 
-const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
+const CampaignCardBody = ({ campaign, isDescription, isInformation, isLoading }) => {
   return (
     <div className="feed_content">
       {campaign.typeContent &&
         campaign.typeContent.toLowerCase() ===
           enumerations.mediaTypes.video && (
-          <VideoItem id={campaign.id}  item={campaign.mediaUrl} />
+          <VideoItem id={campaign.id}  item={campaign.mediaUrl} isLoading={isLoading} />
         )}
       {(!campaign.typeContent ||
         (campaign.typeContent &&
@@ -19,6 +19,7 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
         <ImageItem
           item={campaign.mediaUrl}
           isOtherCardExist={!isDescription && isInformation}
+          isLoading={isLoading}
         />
       )}
       {campaign &&
@@ -43,7 +44,8 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation }) => {
 CampaignCardBody.propTypes = {
   campaign: PropTypes.object.isRequired,
   isDescription: PropTypes.bool.isRequired,
-  isInformation: PropTypes.bool.isRequired
+  isInformation: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default CampaignCardBody;

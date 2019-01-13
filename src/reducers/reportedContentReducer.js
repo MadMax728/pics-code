@@ -34,13 +34,13 @@ const reportedContentReducer = (state = initialState.reportedContentData, action
     case types.UPDATE_BACK_OFFICE_REPORT_SUCCEEDED:
       return {
         ...state,
-        updateReport: action.payload,
+        [`${action.isFor}Statistics`]: action.payload,
         isLoading: false
       };
     case types.UPDATE_BACK_OFFICE_REPORT_FAILED:
       return {
         ...state,
-        updateReport: null,
+        [`${action.isFor}Statistics`]: null,
         isLoading: false,
         error: action.payload
       };
