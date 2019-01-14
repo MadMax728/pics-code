@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
-import {
-  UploadModal,
-  AdsModal,
-  CampaignModal
-} from "../../web/modals";
+import { UploadModal, AdsModal, CampaignModal } from "../../web/modals";
 import PropTypes from "prop-types";
 import { modalType, userType } from "../../../lib/constants/enumerations";
 import { Auth } from "../../../auth";
@@ -23,6 +19,7 @@ class CustomModal extends Component {
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
         handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
+        data={this.props.data}
       />
     );
   };
@@ -84,7 +81,8 @@ CustomModal.propTypes = {
   modalShow: PropTypes.bool.isRequired,
   modalType: PropTypes.string.isRequired,
   handleModalHide: PropTypes.func.isRequired,
-  handleModalInfoMsgShow: PropTypes.func.isRequired
+  handleModalInfoMsgShow: PropTypes.func.isRequired,
+  data: PropTypes.any
 };
 
 export default CustomModal;

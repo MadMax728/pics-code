@@ -17,7 +17,7 @@ export * from "./cmsManagement";
 export * from "./admin";
 export * from "./verification";
 export * from "./voucher";
-export * from "./backOfficeReview";
+export * from "./review";
 export * from "./reportedContent";
 export * from "./profileSettings";
 export * from "./search";

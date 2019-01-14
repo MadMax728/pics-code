@@ -16,8 +16,16 @@ class CampaignPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    const data = { userType: this.state.type };
-    this.props.getCampaigns("getCampaignType", data);
+    if (this.props.searchData.searchKeyword) {
+      const data = {
+        userType: this.state.type,
+        isSearch: this.props.searchData.searchKeyword
+      };
+      this.props.getCampaigns("getCampaignType", data);
+    } else {
+      const data = { userType: this.state.type };
+      this.props.getCampaigns("getCampaignType", data);
+    }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -32,8 +40,10 @@ class CampaignPage extends Component {
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
+      console.log("if2");
       const searchKeyword = nextProps.searchData.searchKeyword;
       const data = { userType: nextProps.type, isSearch: searchKeyword };
+      console.log(data);
       this.props.getCampaigns("getCampaignType", data);
       this.setState({ type: nextProps.type });
     }
