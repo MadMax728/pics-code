@@ -5,6 +5,7 @@ import { Auth } from "../auth";
 import * as _ from "lodash";
 import moment from "moment";
 
+
 const getMessagesListStarted = () => ({
   type: types.GET_MESSAGES_STARTED
 });
@@ -38,7 +39,7 @@ export const getMessages = (senderId, recipientId) => {
 
     return messagesService.getMessages(params, headers).then(
       res => {
-        const messages = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); });
+        const messages =  _.orderBy(res.data.data, (o ) => moment(o.createdAt));
         dispatch(getMessagesListSucceeded(messages));
       },
       error => {

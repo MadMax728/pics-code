@@ -10,6 +10,7 @@ import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
+import { modalType } from "../../lib/constants";
 
 class AdCard extends Component {
   constructor(props, context) {
@@ -20,6 +21,47 @@ class AdCard extends Component {
       comments: "",
       totalCommentsCount: ""
     };
+  }
+
+  handleLockContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+      reportContent: "Ads"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+  
+  handleSetState = (data) => {
+    clearInterval(this.timer);
+    const { item } = this.state;
+    item.reportStatus = data.contentStatus;
+    this.setState({item});
+    this.props.handleRemove(item.id)
+  }
+
+  handleDoNotContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "Ads"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
+  }
+
+  handleUnlockContent= (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+      reportContent: "Ads"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data)
+    });
   }
 
   renderReportTips = (id) => {
@@ -40,6 +82,7 @@ class AdCard extends Component {
       ];
     }
     else {
+
       reportTips = [
         {
           name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
@@ -181,7 +224,8 @@ AdCard.propTypes = {
   addReport: PropTypes.func.isRequired,
   reportedContentData: PropTypes.any,
   handleRemove: PropTypes.func,
-  isSavedPage: PropTypes.bool
+  isSavedPage: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
