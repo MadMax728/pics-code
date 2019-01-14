@@ -7,18 +7,21 @@ const messageReducer = (state = initialState.messagesData, action) => {
       return {
         ...state,
         isLoading: true,
+        lastEvaluatedKeys: undefined,
         error: null
       };
     case types.GET_MESSAGES_SUCCEEDED:
       return {
         ...state,
         messages: action.payload,
+        lastEvaluatedKeys: action.lastEvaluatedKeys,
         isLoading: false
       };
     case types.GET_MESSAGES_FAILED:
       return {
         ...state,
         isLoading: false,
+        lastEvaluatedKeys: undefined,
         error: action.payload
       };
     default:
