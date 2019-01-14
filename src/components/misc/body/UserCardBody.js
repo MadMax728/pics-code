@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
-import { Loader } from "../../ui-kit";
+import { Loader, ThreeDots } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 
 const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, renderReportTips }) => {
@@ -24,6 +24,24 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, r
         <div className="name-wrapper">
           <div className="username">{user.username}</div>
           <div className="name">{user.name}</div>
+          {isBackOffice &&
+            <div className="show_more_options">
+              <ThreeDots
+                id={`report-${user.id}`}
+                role="button"
+                dataTip="tooltip"
+                dataClass="tooltip-wrapr"
+                getContent={renderReportTips}
+                effect="solid"
+                delayHide={500}
+                delayShow={500}
+                delayUpdate={500}
+                place={"left"}
+                border
+                type={"light"}
+              />
+            </div>
+          }
           {!isBackOffice && user.isSubscribe && (
               <button
                 className="filled_button"
@@ -44,7 +62,7 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, r
             </button>
           )}
         </div>
-        {user && isReport && <ReportCard item={user} renderReportTips={renderReportTips} />}
+        {user && isReport && <ReportCard item={user} />}
       </div>
     </div>
   );
