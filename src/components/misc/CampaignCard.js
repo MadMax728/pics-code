@@ -174,8 +174,6 @@ class CampaignCard extends Component {
       savedData
     } = this.props;
     const { isComments, item, comments } = this.state;
-    console.log('state', this.state);
-    console.log('prop', this.props);
     return (
       /* No Data Found - Card */
       <div className="feed_wrapper">

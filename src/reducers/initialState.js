@@ -188,15 +188,19 @@ const initialState = {
     error: false
   },
   reviewData: {
-    campaigns: null,
-    ads: null,
+    Campaigns: null,
+    Ads: null,
+
+    CampaignStatistics: null,
+    AdsStatistics: null,
+
     isLoading: false,
     error: false
   },
   reportedContentData: {
     Image: null,
     Videos: null,
-    Campaigns: null,
+    Campaign: null,
     Pics: null,
     Ads: null,
     Comments: null,
@@ -204,7 +208,7 @@ const initialState = {
 
     ImageStatistics: null,
     VideosStatistics: null,
-    CampaignsStatistics: null,
+    CampaignStatistics: null,
     PicsStatistics: null,
     AdsStatistics: null,
     CommentsStatistics: null,
