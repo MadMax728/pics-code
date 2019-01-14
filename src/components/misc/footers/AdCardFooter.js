@@ -5,6 +5,7 @@ import * as images from "../../../lib/constants/images";
 import { ThreeDots } from "../../ui-kit";
 import StatusCard from "../StatusCard";
 import ReportCard from "../ReportCard";
+import ReviewCard from "../ReviewCard";
 import BudgetCard from "../BudgetCard";
 
 const AdCardFooter = ({
@@ -15,7 +16,8 @@ const AdCardFooter = ({
   handleFavorite,
   isLoading,
   isBudget,
-  isReport
+  isReport,
+  isReview
 }) => {
   const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
@@ -74,6 +76,7 @@ const AdCardFooter = ({
       )}
       {ad && isBudget && <BudgetCard item={ad} />}
       {ad && isReport && <ReportCard item={ad} />}
+      {ad && isReview && <ReviewCard item={ad} />}
     </div>
   );
 };
@@ -86,7 +89,8 @@ AdCardFooter.propTypes = {
   renderReportTips: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   isBudget: PropTypes.bool,
-  isReport: PropTypes.bool
+  isReport: PropTypes.bool,
+  isReview: PropTypes.bool
 };
 
 export default AdCardFooter;
