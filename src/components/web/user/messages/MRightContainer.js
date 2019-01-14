@@ -31,6 +31,8 @@ class MRightContainer extends Component {
         });
     }
 
+    
+
     render() {
         const { socket, user } = this.props;
         return (

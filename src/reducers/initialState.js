@@ -241,8 +241,7 @@ const initialState = {
   },
   messagesData: {
     messages: [],
-    senderId: null,
-    recipientId: null,
+    lastEvaluatedKeys: undefined,
     isLoading: false,
     error: false
   }
