@@ -80,6 +80,7 @@ class InformationPage extends Component {
 
   render() {
     const { campaignDetails, isLoading } = this.props;
+    console.log(campaignDetails);
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaignDetails && !isLoading && (
@@ -231,9 +232,11 @@ class InformationPage extends Component {
                 </div>
                 <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
                   <div className="messages">
-                    <span className="count">{campaignDetails.msg_count}</span>
+                    <span className="count">
+                      {campaignDetails.commentCount}
+                    </span>
                     <img
-                      src={images.feed_msg}
+                      src={images.comment}
                       alt={"feed_msg"}
                       role="presentation"
                       onClick={this.handleMessage}
