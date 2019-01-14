@@ -17,7 +17,9 @@ class MessagesLazyList extends Component {
         this.state = {
             user : {},
             me : userInfo.id,
-            messages : []
+            messages : [],
+            lastEvaluatedKeys : null,
+            lastEvaluatedPages : []
         }
         this.props.socket.on('communication-message-board-new-message-response', (data) => {
             const { me, user } = this.state;
@@ -35,6 +37,8 @@ class MessagesLazyList extends Component {
         if (props.user !== state.user) {
           return {
             user: props.user,
+            lastEvaluatedKeys: undefined,
+            lastEvaluatedPages: []
           };
         }
         return null;
@@ -46,6 +50,19 @@ class MessagesLazyList extends Component {
             this.setState({ messages: [] }, () => {
                 this.getMessages(true);
             })
+        }
+        const { lastEvaluatedKeys, lastEvaluatedPages } = this.state;
+
+        if (prevProps.count !== this.props.count && lastEvaluatedPages && lastEvaluatedKeys && lastEvaluatedKeys.id) {
+            
+            const page  = lastEvaluatedPages.find(x => x === lastEvaluatedKeys.id);
+           
+            if (!page) {
+
+                this.setState({ lastEvaluatedPages: [...this.state.lastEvaluatedPages, lastEvaluatedKeys.id] }, () => {
+                    this.getMessages();
+                })
+            }
         }
     }
 
@@ -61,18 +78,19 @@ class MessagesLazyList extends Component {
 
     getMessages = (callback) => {
 
-        const { me, user } = this.state;
-        
+        const { me, user, lastEvaluatedKeys } = this.state;
         if(!user || !user.id) return;
-
-        this.props.getMessages(me, user.id).then(() => {
+        this.props.getMessages(me, user.id, lastEvaluatedKeys).then(() => {
             const  { messagesData } = this.props;
             if(messagesData && !messagesData.isLoading && messagesData.messages) {
-                this.setState({ messages: [...this.state.messages, ...messagesData.messages ] }, () => {
+                this.setState({ messages: [...messagesData.messages, ...this.state.messages ] }, () => {
                     if(callback) {
                         this.scrollBottomOnNewMessage();
                     } 
                 })
+            }
+            if(messagesData && !messagesData.isLoading && messagesData.lastEvaluatedKeys &&  messagesData.lastEvaluatedKeys.id) {
+                this.setState({ lastEvaluatedKeys: messagesData.lastEvaluatedKeys })
             }
         });
 
@@ -114,6 +132,7 @@ MessagesLazyList.propTypes = {
     getMessages: PropTypes.func.isRequired,
     messagesData: PropTypes.any,
     user:PropTypes.any,
+    count: PropTypes.number,
     socket: PropTypes.any
 };
   

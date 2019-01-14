@@ -7,26 +7,33 @@ class MRightActiveChat extends Component {
     
     constructor(){
         super();
-        this.trackScrolling = this.trackScrolling.bind(this);
+        this.state = {
+            count : 0
+        }
     }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.user !== this.props.user) {
+            this.setState({ count: 0 })
+        }
+    }
+    
 
     trackScrolling = () => {
         const wrappedElement = document.getElementById("header-chat-"+this.props.user.id);
-        // console.log(wrappedElement.scrollTop ,wrappedElement.scrollLeft);
-        if(wrappedElement)
-        console.log(wrappedElement.scrollTop ,wrappedElement.scrollLeft);
         if (wrappedElement && (wrappedElement.scrollTop === wrappedElement.scrollLeft)) {
-            console.log('header bottom reached');
+            this.setState({ count: this.state.count + 1 })
         }
     };
 
     render() {
         const { socket, user } = this.props;
+        const { count } = this.state;
         return (
             <div onScroll={this.trackScrolling} className={"active-chat"} id={"header-chat-"+user.id}>
             {
                 user && user.id ? (
-                    <MessagesLazyList user={user} socket={socket} />
+                    <MessagesLazyList user={user} count={count} socket={socket} />
                 ) : (
                     <div className="full-width text-center">
                          <h6>{Translations.messages_modal.ready}</h6>

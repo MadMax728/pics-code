@@ -10,9 +10,10 @@ const getMessagesListStarted = () => ({
   type: types.GET_MESSAGES_STARTED
 });
 
-const getMessagesListSucceeded = data => ({
+const getMessagesListSucceeded = (data, lastEvaluatedKeys = null) => ({
   type: types.GET_MESSAGES_SUCCEEDED,
-  payload: data
+  payload: data,
+  lastEvaluatedKeys: lastEvaluatedKeys
 });
 
 const getMessagesListFailed = error => ({
@@ -25,22 +26,24 @@ const getMessagesListFailed = error => ({
  *  GET MESSAGES
  *  @returns {dispatch} getMessages.
  */
-export const getMessages = (senderId, recipientId) => {
+export const getMessages = (senderId, recipientId, lastEvaluatedKeys = undefined) => {
   return dispatch => {
     dispatch(getMessagesListStarted());
     const storage = Auth.extractJwtFromStorage();
     const headers = {
       Authorization: storage.accessToken
     };
+    const lastEvaluatedKey = lastEvaluatedKeys && lastEvaluatedKeys.id ?  lastEvaluatedKeys.id : undefined;
     const params = { 
         senderId,
-        recipientId
+        recipientId,
+        lastEvaluatedKey : lastEvaluatedKey,
     };
 
     return messagesService.getMessages(params, headers).then(
       res => {
         const messages =  _.orderBy(res.data.data, (o ) => moment(o.createdAt));
-        dispatch(getMessagesListSucceeded(messages));
+        dispatch(getMessagesListSucceeded(messages, res.data.lastEvaluatedKeys));
       },
       error => {
         dispatch(getMessagesListFailed([]));
