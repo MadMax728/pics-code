@@ -23,71 +23,92 @@ class CampaignCard extends Component {
     };
   }
 
-  handleLockContent = (e) => {
+  handleLockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
       reportContent: "Campaign"
-    }    
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
-  
-  handleSetState = (data) => {
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  handleSetState = data => {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
-    this.setState({item});
-    this.props.handleRemove(item.id)
-  }
+    this.setState({ item });
+    this.props.handleRemove(item.id);
+  };
 
-  handleDoNotContent = (e) => {
+  handleDoNotContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
       reportContent: "Campaign"
-    }    
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  handleUnlockContent= (e) => {
+  handleUnlockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
       reportContent: "Campaign"
-    }    
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
-  
-  renderReportTips = (id) => {
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  renderReportTips = id => {
     let reportTips;
     const { isBackOffice } = this.props;
     const { item } = this.state;
-    if (isBackOffice){
+    if (isBackOffice) {
       reportTips = [
         {
-          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
-          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+          name:
+            item.reportStatus === enumerations.reportType.lock
+              ? Translations.tool_tips.unlock
+              : Translations.tool_tips.lock,
+          handleEvent:
+            item.reportStatus === enumerations.reportType.lock
+              ? this.handleUnlockContent
+              : this.handleLockContent
         },
         {
           name: Translations.tool_tips.do_not,
           handleEvent: this.handleDoNotContent
         }
       ];
-    }
-    else {
+    } else {
       reportTips = [
         {
-          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
+          name: item.isReported
+            ? Translations.tool_tips.unreport
+            : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
+          name: item.isSavedPost
+            ? Translations.tool_tips.unsave
+            : Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         }
       ];
@@ -95,17 +116,21 @@ class CampaignCard extends Component {
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = (e) => {
-    const  { item } = this.state;
+  handleReportPost = e => {
+    const { item } = this.state;
     const data = {
       typeContent: "Campaign",
       typeId: e.target.id,
       title: item.title
-    }    
-    this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === item.id
+      ) {
         item.isReported = !item.isReported;
-        this.setState({item});
+        this.setState({ item });
       }
     });
   };
@@ -119,10 +144,14 @@ class CampaignCard extends Component {
     };
 
     this.props.setSavedPost(data).then(() => {
-      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
+      if (
+        this.props.savedData &&
+        this.props.savedData.saved &&
+        this.props.savedData.saved.typeId === item.id
+      ) {
         item.isSavedPost = !item.isSavedPost;
-        this.setState({item});
-        if(isSavedPage && !this.state.item.isSavedPost) {
+        this.setState({ item });
+        if (isSavedPage && !this.state.item.isSavedPost) {
           this.props.handleRemove(item.id);
         }
       }
@@ -176,8 +205,6 @@ class CampaignCard extends Component {
       savedData
     } = this.props;
     const { isComments, item, comments } = this.state;
-    console.log('state', this.state);
-    console.log('prop', this.props);
     return (
       /* No Data Found - Card */
       <div className="feed_wrapper">

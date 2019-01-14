@@ -17,7 +17,18 @@ import { connect } from "react-redux";
 class Comments extends Component {
   constructor(props, context) {
     super(props, context);
-
+    let reportTips;
+    reportTips = [
+      {
+        name: Translations.tool_tips.edit,
+        handleEvent: this.handleEditComment
+      },
+      {
+        name: Translations.tool_tips.report_comment,
+        handleEvent: this.handleReportPost
+      },
+      { name: Translations.tool_tips.delete, handleEvent: this.handleDelete }
+    ];
     this.state = {
       campaign: this.props.campaign,
       comments: "",
@@ -27,13 +38,9 @@ class Comments extends Component {
       minRange: 0,
       maxRange: 2,
       slicedCommentsData: null,
-      form: {
-        id: null,
-        comment: ""
-      },
-      updateForm: {
-        comment: ""
-      }
+      form: { id: null, comment: "" },
+      updateForm: { comment: "" },
+      ReportTips: reportTips
     };
   }
 
@@ -45,17 +52,17 @@ class Comments extends Component {
   handleReportPost = () => {};
 
   handleCommentsSections = () => {
-    const CampaignId = { typeId: this.props.campaign.typeId };
+    const CampaignId = { typeId: this.props.campaign.id };
     this.props.getComments(CampaignId).then(() => {
-      console.log(this.props);
-      // const totalComment = this.props;
-
-      //const totalComment = this.props;
-      // this.setState({
-      //   isComments: !this.state.isComments,
-      //   comments: this.props.comments,
-      //   totalCommentsCount: totalComment.length
-      // });
+      const totalComment = this.props.comments;
+      const commentData = this.props.comments.slice(0, 2);
+      this.setState({
+        isComments: !this.state.isComments,
+        comments: this.props.comments,
+        totalCommentsCount: totalComment.length,
+        slicedCommentsData: commentData,
+        maxRange: 2
+      });
     });
   };
 
@@ -66,23 +73,6 @@ class Comments extends Component {
       typeOfContent,
       typeId: itemId
     };
-    console.log(this.state);
-    // this.props.addComment(data).then(() => {
-    //   if (this.props.comment) {
-    //     const commentData = {
-    //       id: this.props.comment.id,
-    //       comment: this.props.comment.comment,
-    //       username: this.props.comment.userName,
-    //       userId: this.props.comment.userId,
-    //       profileImage: this.props.comment.profileImage,
-    //       date: this.props.comment.createdAt
-    //     };
-    //     comments.unshift(commentData);
-    //     slicedCommentsData.unshift(commentData);
-    //     this.setState({ comments, slicedCommentsData });
-    //     this.props.handleComment(true);
-    //   }
-    // });
   };
 
   handleEditComment = e => {
@@ -142,17 +132,17 @@ class Comments extends Component {
 
   renderComment = comment => {
     return (
-      <div className="comment-wrapper" key={comment.comment_id}>
+      <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header">
           <div className="no-padding profile_image">
             <img
-              src={comment.user.image}
-              alt={`comment-${comment.comment_id}`}
+              src={comment.profileImage}
+              alt={`comment-${comment.id}`}
               className="img-circle img-responsive"
             />
           </div>
           <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.user.name}</b> {comment.date} <b>Reply</b>
+            <b>{comment.userName}</b> {comment.createdAt} <b>Reply</b>
           </div>
           <div className="col-sm-3 col-md-2 col-xs-2 show_more_options pull-right">
             <ThreeDots
@@ -160,8 +150,9 @@ class Comments extends Component {
               role="button"
               dataTip="tooltip"
               dataClass="tooltip-wrapr"
-              /* eslint-disable */
-              getContent={() => this.renderReportTips(comment.comment_id)}
+              /* eslint-disable */ getContent={() =>
+                this.renderReportTips(comment.id)
+              }
               effect="solid"
               delayHide={500}
               delayShow={500}
@@ -194,13 +185,17 @@ class Comments extends Component {
   };
 
   render() {
-    const { campaign, form, comments, item } = this.state;
+    const {
+      campaign,
+      form,
+      comments,
+      item,
+      slicedCommentsData,
+      totalCommentsCount
+    } = this.state;
     const { isLoading, isReport } = this.props;
-
     return (
       <div className="feed-comment" id={campaign.id}>
-        {" "}
-        123
         <div className="comment-wrapper">
           <form onSubmit={this.handleSubmit} ref="commentForm">
             <div className="no-padding profile_image">
@@ -231,20 +226,39 @@ class Comments extends Component {
             <input type="submit" hidden />
           </form>
         </div>
-        <div
-          className="view-more-comments view-more-link"
-          id="7"
-          onClick={this.handleViewComment}
-        >
-          {Translations.view_more_comments}
-        </div>
+
+        {!isReport &&
+          this.state.totalCommentsCount !== 0 &&
+          this.state.slicedCommentsData &&
+          this.state.slicedCommentsData.map(this.renderComment)}
+
+        {!isReport && this.state.totalCommentsCount > this.state.maxRange && (
+          <div
+            className="view-more-comments view-more-link"
+            id="7"
+            onClick={this.handleViewComment}
+          >
+            {Translations.view_more_comments}
+          </div>
+        )}
+
+        {!isReport &&
+          this.state.totalCommentsCount > 2 &&
+          this.state.totalCommentsCount < this.state.maxRange && (
+            <div
+              className="view-more-comments view-more-link"
+              onClick={this.handleViewLessComment}
+            >
+              {Translations.view_less_comments}
+            </div>
+          )}
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  comment: state.commentData.comment,
+  comments: state.commentData.comments,
   isLoading: state.commentData.isLoading,
   reportedContentData: state.reportedContentData
 });
@@ -274,7 +288,8 @@ Comments.propTypes = {
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
   reportedContentData: PropTypes.any,
-  getComments: PropTypes.func
+  getComments: PropTypes.func,
+  comments: PropTypes.any
 };
 
 export default connect(

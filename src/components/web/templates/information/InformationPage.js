@@ -7,7 +7,7 @@ import { Translations } from "../../../../lib/translations";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
-import { getCampaignDetails } from "../../../../actions";
+import { getCampaignDetails, like } from "../../../../actions";
 import { connect } from "react-redux";
 import { ThreeDots } from "../../../ui-kit";
 import moment from "moment";
@@ -47,16 +47,26 @@ class InformationPage extends Component {
       campaignDetails: {
         ...this.props.campaignDetails,
         isSelfLike: !this.props.campaignDetails.isSelfLike,
-        like_count: this.props.campaignDetails.isSelfLike
-          ? this.props.campaignDetails.like_count - 1
-          : this.props.campaignDetails.like_count + 1
+        likeCount: this.props.campaignDetails.isSelfLike
+          ? this.props.campaignDetails.likeCount - 1
+          : this.props.campaignDetails.likeCount + 1
       }
     });
+    this.props.campaignDetails.isSelfLike = !this.props.campaignDetails
+      .isSelfLike;
+    this.props.campaignDetails.likeCount = this.props.campaignDetails.isSelfLike
+      ? this.props.campaignDetails.likeCount + 1
+      : this.props.campaignDetails.likeCount - 1;
+    const campeignLike = {
+      typeOfContent: "campaign",
+      typeId: this.state.campaignId
+    };
+    this.props.like(campeignLike);
   };
 
-  handleMessage = e => {
-    this.props.handleModalShow(modalType.messages, { id: e.target.id });
-  };
+  // handleMessage = e => {
+  //   this.props.handleModalShow(modalType.messages, { id: e.target.id });
+  // };
 
   handleOnKeyDown = () => {};
 
@@ -80,7 +90,6 @@ class InformationPage extends Component {
 
   render() {
     const { campaignDetails, isLoading } = this.props;
-    console.log(campaignDetails);
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaignDetails && !isLoading && (
@@ -239,13 +248,12 @@ class InformationPage extends Component {
                       src={images.comment}
                       alt={"feed_msg"}
                       role="presentation"
-                      onClick={this.handleMessage}
                       id={campaignDetails.createdBy}
                       onKeyDown={this.handleOnKeyDown}
                     />
                   </div>
                   <div className="likes">
-                    <span className="count">{campaignDetails.like_count}</span>
+                    <span className="count">{campaignDetails.likeCount}</span>
                     {campaignDetails.isSelfLike ? (
                       <img
                         src={images.blue_heart}
@@ -291,7 +299,13 @@ class InformationPage extends Component {
             <div className="feed_wrapper">
               <div className="feed-comment">
                 {/* Comments Section */}
-                <Comments campaign={campaignDetails} />
+                {/* <Comments
+                  campaign={campaignDetails}/> */}
+                <Comments
+                  campaign={campaignDetails}
+                  handleCommentsSections={this.handleCommentsSections}
+                  isReport={false}
+                />
               </div>
             </div>
           </div>
@@ -344,7 +358,9 @@ InformationPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
   campaignDetails: PropTypes.any,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  handleFavorite: PropTypes.func,
+  like: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 
@@ -355,7 +371,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getCampaignDetails
+  getCampaignDetails,
+  like
 };
 
 export default connect(
