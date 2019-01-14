@@ -84,6 +84,26 @@ const campaignReducer = (state = initialState.campaignData, action) => {
         error: action.payload
       };
 
+    // Add Participants
+    case types.ADD_PARTICIPANTS_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.ADD_PARTICIPANTS_SUCCEEDED:
+      return {
+        ...state,
+        isAddParticipant: action.payload,
+        isLoading: false
+      };
+    case types.ADD_PARTICIPANTS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

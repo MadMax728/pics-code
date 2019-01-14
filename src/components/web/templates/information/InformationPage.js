@@ -7,10 +7,11 @@ import { Translations } from "../../../../lib/translations";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
-import { getCampaignDetails } from "../../../../actions";
+import { getCampaignDetails, like, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import { ThreeDots } from "../../../ui-kit";
 import moment from "moment";
+import * as routes from "../../../../lib/constants/routes";
 
 class InformationPage extends Component {
   constructor(props, context) {
@@ -42,20 +43,46 @@ class InformationPage extends Component {
     this.props.getCampaignDetails(data);
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      this.props.getSearch(nextProps.searchData.searchKeyword);
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push("/campaign/company?search=" + searchKeyword);
+    }
+  };
+
   handleFavorite = () => {
     this.setState({
       campaignDetails: {
         ...this.props.campaignDetails,
         isSelfLike: !this.props.campaignDetails.isSelfLike,
-        like_count: this.props.campaignDetails.isSelfLike
-          ? this.props.campaignDetails.like_count - 1
-          : this.props.campaignDetails.like_count + 1
+        likeCount: this.props.campaignDetails.isSelfLike
+          ? this.props.campaignDetails.likeCount - 1
+          : this.props.campaignDetails.likeCount + 1
       }
     });
+    this.props.campaignDetails.isSelfLike = !this.props.campaignDetails
+      .isSelfLike;
+    this.props.campaignDetails.likeCount = this.props.campaignDetails.isSelfLike
+      ? this.props.campaignDetails.likeCount + 1
+      : this.props.campaignDetails.likeCount - 1;
+    const campeignLike = {
+      typeOfContent: "campaign",
+      typeId: this.state.campaignId
+    };
+    this.props.like(campeignLike);
   };
 
-  handleMessage = e => {
-    this.props.handleModalShow(modalType.messages, { id: e.target.id });
+  handleApplyParticipant = e => {
+    this.props.handleModalShow(modalType.upload, {
+      campaignId: e.target.id,
+      campaignName: this.props.campaignDetails.campaignName
+    });
   };
 
   handleOnKeyDown = () => {};
@@ -93,9 +120,17 @@ class InformationPage extends Component {
               <div className="text paddTop20">
                 {campaignDetails.description}
               </div>
-              <button className="filled_button">
-                {Translations.apply_campaign}
-              </button>
+              {campaignDetails.isOwner ? (
+                ""
+              ) : (
+                <button
+                  className="filled_button"
+                  onClick={this.handleApplyParticipant}
+                  id={campaignDetails.id}
+                >
+                  {Translations.apply_campaign}
+                </button>
+              )}
               <div className="feed_wrapper">
                 <div className="feed_header">
                   <div className="no-padding profile_image">
@@ -231,18 +266,19 @@ class InformationPage extends Component {
                 </div>
                 <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
                   <div className="messages">
-                    <span className="count">{campaignDetails.msg_count}</span>
+                    <span className="count">
+                      {campaignDetails.commentCount}
+                    </span>
                     <img
-                      src={images.feed_msg}
+                      src={images.comment}
                       alt={"feed_msg"}
                       role="presentation"
-                      onClick={this.handleMessage}
                       id={campaignDetails.createdBy}
                       onKeyDown={this.handleOnKeyDown}
                     />
                   </div>
                   <div className="likes">
-                    <span className="count">{campaignDetails.like_count}</span>
+                    <span className="count">{campaignDetails.likeCount}</span>
                     {campaignDetails.isSelfLike ? (
                       <img
                         src={images.blue_heart}
@@ -288,7 +324,13 @@ class InformationPage extends Component {
             <div className="feed_wrapper">
               <div className="feed-comment">
                 {/* Comments Section */}
-                <Comments campaign={campaignDetails} />
+                {/* <Comments
+                  campaign={campaignDetails}/> */}
+                <Comments
+                  campaign={campaignDetails}
+                  handleCommentsSections={this.handleCommentsSections}
+                  isReport={false}
+                />
               </div>
             </div>
           </div>
@@ -341,18 +383,26 @@ InformationPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
   campaignDetails: PropTypes.any,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  handleFavorite: PropTypes.func,
+  like: PropTypes.func.isRequired,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired,
+  history: PropTypes.any
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   campaignDetails: state.campaignData.campaign,
   isLoading: state.campaignData.isLoading,
-  error: state.campaignData.error
+  error: state.campaignData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
-  getCampaignDetails
+  getCampaignDetails,
+  like,
+  getSearch
 };
 
 export default connect(

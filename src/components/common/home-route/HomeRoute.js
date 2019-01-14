@@ -26,7 +26,6 @@ import {
   ParticipantPage
 } from "../../web/templates";
 
-
 import { Messages } from "../../web/user";
 
 // Static Pages which is not requre to put in template folder
@@ -120,6 +119,7 @@ class HomeRoute extends Component {
       <InformationPage
         handleModalShow={this.props.handleModalShow}
         match={match.match}
+        history={match.history}
       />
     );
   };
@@ -193,11 +193,7 @@ class HomeRoute extends Component {
             component={this.handleSaved}
           />
 
-          <Route
-            exact
-            path={routes.MESSAGES_ROUTE}
-            component={Messages}
-          />
+          <Route exact path={routes.MESSAGES_ROUTE} component={Messages} />
 
           <Route
             exact

@@ -43,7 +43,8 @@ const initialState = {
     campaign: null,
     favouriteCampaign: null,
     isLoading: false,
-    error: false
+    error: false,
+    isAddParticipant: null
   },
   adData: {
     ads: null,
