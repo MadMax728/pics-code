@@ -56,6 +56,8 @@ class Home extends Component {
   };
 
   handleModalShow = (e, data) => {
+    console.log("call");
+
     this.setState({ modalShow: true, modalType: e, data });
   };
 
@@ -92,7 +94,7 @@ class Home extends Component {
   };
 
   render() {
-    const { message, image, profile } = this.state;
+    const { message, image, profile, data } = this.state;
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
@@ -111,6 +113,7 @@ class Home extends Component {
             handleModalInfoShow={this.handleModalInfoShow}
             modalInfoType={this.state.modalInfoType}
             handleModalInfoMsgShow={this.handleModalInfoMsgShow}
+            data={data}
           />
 
           <InfoModal

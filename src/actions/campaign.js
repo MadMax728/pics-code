@@ -31,7 +31,9 @@ export const getCampaigns = (prop, provider) => {
 
     return campaignService[prop](provider, header).then(
       res => {
-        const campaigns =  _.orderBy(res.data.data, (o ) => moment(o.createdAt), ['desc']);
+        const campaigns = _.orderBy(res.data.data, o => moment(o.createdAt), [
+          "desc"
+        ]);
         dispatch(getCampaignsSucceeded(campaigns));
       },
       error => {
@@ -155,6 +157,44 @@ export const createCampaign = provider => {
       },
       error => {
         dispatch(createCampaignFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+// Add Partiipants
+
+const addParticipantsStarted = () => ({
+  type: types.ADD_PARTICIPANTS_STARTED
+});
+
+const addParticipantsSucceeded = data => ({
+  type: types.ADD_PARTICIPANTS_SUCCEEDED,
+  payload: data
+});
+
+const addParticipantsFailed = error => ({
+  type: types.ADD_COMMENT_FAILED,
+  payload: error,
+  error: true
+});
+
+export const addParticipants = provider => {
+  return dispatch => {
+    dispatch(addParticipantsStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+
+    return campaignService.addParticipants(provider, header).then(
+      res => {
+        dispatch(addParticipantsSucceeded(res.data.success));
+      },
+      error => {
+        dispatch(addParticipantsFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

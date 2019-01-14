@@ -3,7 +3,6 @@ import * as mediaService from "../services/mediaService";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 
-
 const uploadMediaStarted = () => ({
   type: types.UPLOAD_MEDIA_STARTED
 });
@@ -33,10 +32,7 @@ export const uploadMedia = (provider, fileType) => {
           dispatch(uploadMediaSucceeded(res.data.data));
         },
         error => {
-        
-          dispatch(
-            uploadMediaFailed(error.response)
-          );
+          dispatch(uploadMediaFailed(error.response));
           logger.error({
             description: error.toString(),
             fatal: true
@@ -44,22 +40,18 @@ export const uploadMedia = (provider, fileType) => {
         }
       );
     }
-    
-      return mediaService.uploadMediaVideo(provider, header).then(
-        res => {
-          dispatch(uploadMediaSucceeded(res.data.data));
-        },
-        error => {
-        
-          dispatch(
-            uploadMediaFailed(error.response)
-          );
-          logger.error({
-            description: error.toString(),
-            fatal: true
-          });
-        }
-      );
-    
+
+    return mediaService.uploadMediaVideo(provider, header).then(
+      res => {
+        dispatch(uploadMediaSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(uploadMediaFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
   };
-}; 
+};

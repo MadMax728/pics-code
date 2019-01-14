@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 class ParticipantPage extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getDashboard("participants");
+    this.props.getDashboard("participants", "");
   };
 
   renderParticipantList = () => {
@@ -33,7 +33,9 @@ class ParticipantPage extends Component {
     const { participantList, isLoadingparticipants } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {participantList && !isLoadingparticipants && this.renderParticipantList()}
+        {participantList &&
+          !isLoadingparticipants &&
+          this.renderParticipantList()}
         {isLoadingparticipants && <CampaignLoading />}
       </div>
     );
