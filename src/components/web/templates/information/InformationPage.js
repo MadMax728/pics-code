@@ -78,9 +78,12 @@ class InformationPage extends Component {
     this.props.like(campeignLike);
   };
 
-  // handleMessage = e => {
-  //   this.props.handleModalShow(modalType.messages, { id: e.target.id });
-  // };
+  handleApplyParticipant = e => {
+    this.props.handleModalShow(modalType.upload, {
+      campaignId: e.target.id,
+      campaignName: this.props.campaignDetails.campaignName
+    });
+  };
 
   handleOnKeyDown = () => {};
 
@@ -117,9 +120,17 @@ class InformationPage extends Component {
               <div className="text paddTop20">
                 {campaignDetails.description}
               </div>
-              <button className="filled_button">
-                {Translations.apply_campaign}
-              </button>
+              {campaignDetails.isOwner ? (
+                ""
+              ) : (
+                <button
+                  className="filled_button"
+                  onClick={this.handleApplyParticipant}
+                  id={campaignDetails.id}
+                >
+                  {Translations.apply_campaign}
+                </button>
+              )}
               <div className="feed_wrapper">
                 <div className="feed_header">
                   <div className="no-padding profile_image">

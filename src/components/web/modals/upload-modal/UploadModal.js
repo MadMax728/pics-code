@@ -2,10 +2,9 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
-import { uploadMedia } from "../../../../actions/media";
+import { uploadMedia, addParticipants } from "../../../../actions";
 import { connect } from "react-redux";
 import { modalType } from "../../../../lib/constants/enumerations";
-
 
 const initialState = {
   form: {
@@ -29,7 +28,7 @@ class UploadModal extends Component {
     super(props, context);
     this.state = initialState;
   }
- 
+
   handleUpload = (imageVideo, file, filetype) => {
     if (filetype) {
       this.setState({
@@ -55,31 +54,56 @@ class UploadModal extends Component {
   };
 
   handleContinue = () => {
-    if(this.validateForm()) {
+    if (this.validateForm()) {
       const { form } = this.state;
       const Data = new FormData();
-      if(form.file) {
+      if (form.file) {
         Data.append("description", form.add_description);
         Data.append("isAdvertiseLabel", form.is_advertise_label);
         Data.append("category", form.add_category);
-        if(form.filetype) {
+        if (form.filetype) {
           Data.append("image", form.file);
-        }
-        else {
+        } else {
           Data.append("video", form.file);
         }
         Data.append("postType", "mediapost");
         Data.append("location", JSON.stringify(form.add_location));
-    
         this.props.uploadMedia(Data, form.filetype).then(() => {
           this.setState(initialState);
+          /* Add Participants */
+          if (this.props.data) {
+            console.log("if-participants");
+            let typeOfContent = "";
+            if (form.filetype) {
+              typeOfContent = "Image";
+            } else {
+              typeOfContent = "Video";
+            }
+            const participantFormData = {
+              campaignId: this.props.data.campaignId,
+              campaignName: this.props.data.campaignName,
+              title: this.props.data.campaignName,
+              typeId: this.props.data.campaignId,
+              typeContent: typeOfContent,
+              description: form.add_description,
+              category: form.add_category
+            };
+            this.props.addParticipants(participantFormData).then(() => {
+              if (
+                this.props.campaignData &&
+                this.props.campaignData.isAddParticipant
+              ) {
+                console.log("participant added");
+              }
+            });
+          }
           this.props.handleModalHide();
         });
+
         this.setState({
           form: { ...this.state.form, error: false }
-        });  
-      }
-      else {
+        });
+      } else {
         this.setState({
           form: { ...this.state.form, error: true }
         });
@@ -88,8 +112,7 @@ class UploadModal extends Component {
           "Please Select Image or Video"
         );
       }
-    }
-    else {
+    } else {
       this.setState({
         form: { ...this.state.form, error: true }
       });
@@ -98,13 +121,11 @@ class UploadModal extends Component {
         "Please Fill proper Data"
       );
     }
-    
-
   };
 
   componentWillUnmount = () => {
     this.setState(initialState);
-  }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -133,12 +154,18 @@ class UploadModal extends Component {
   handleModalHide = () => {
     this.setState(initialState);
     this.props.handleModalHide();
-  }
+  };
 
   validateForm = () => {
     const { form } = this.state;
-    return form.add_category && form.add_location.latitude && form.add_location.longitude && form.add_location.address && form.add_description
-  }
+    return (
+      form.add_category &&
+      form.add_location.latitude &&
+      form.add_location.longitude &&
+      form.add_location.address &&
+      form.add_description
+    );
+  };
 
   render() {
     const { form } = this.state;
@@ -177,14 +204,20 @@ UploadModal.propTypes = {
   handleModalHide: PropTypes.func,
   uploadMedia: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.func,
+  data: PropTypes.any,
+  media: PropTypes.any,
+  addParticipants: PropTypes.func,
+  campaignData: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  media: state.mediaData
+  media: state.mediaData,
+  campaignData: state.campaignData
 });
 
 const mapDispatchToProps = {
-  uploadMedia
+  uploadMedia,
+  addParticipants
 };
 
 // export default UploadModal;

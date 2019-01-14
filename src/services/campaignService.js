@@ -47,3 +47,7 @@ export const getFavouriteCampaigns = (payload, header = {}) =>
 // Create Campaign
 export const createCampaign = (payload, header = {}) =>
   api(baseUrl, header).post("/campaigns", payload);
+
+// Add Participant
+export const addParticipants = (payload, header = {}) =>
+  api(baseUrl, header).post("/participants/add-participant", payload);

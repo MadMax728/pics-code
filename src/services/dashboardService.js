@@ -24,4 +24,4 @@ export const users = (payload, header = {}) =>
   api(baseUrl, header).post("/users/get-all-users" + payload);
 
 export const pics = (payload, header = {}) =>
-  api(baseUrl, header).post("/pics");
+  api(baseUrl, header).get("/images/get-pics");
