@@ -8,11 +8,12 @@ class CampaignLoading extends React.Component {
       <div className="feed_wrapper">
         <div className="feed_header">
           <div className="no-padding profile_image wid45">
-            <img
+            {/* <img
               src={images.profile_pic_gray}
               alt="prof_img"
               className="img-circle img-responsive profile_pic_gray"
-            />
+            /> */}
+             <span className="gray_box pro-image"></span>
           </div>
           <div className="col-sm-8 col-xs-7 no-padding">
             <div className="normal_title gray_box" />
@@ -34,6 +35,7 @@ class CampaignLoading extends React.Component {
               alt="feed_image"
               className="img-responsive profile_pic_gray big gray_box"
             />
+           
           </div>
           <div className="feed_description">
             <span className="secondary_title gray_box gray_box_big desc1" />
