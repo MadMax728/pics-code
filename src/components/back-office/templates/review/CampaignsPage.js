@@ -94,9 +94,6 @@ class CampaignsPage extends Component {
   render() {
     const { isLoading, reviewData } = this.props;
     const { campaignList } = this.state;
-    console.log(campaignList);
-    
-    
     return (
       <div>
         <div className="padding-rl-10 middle-section margin-b-22">

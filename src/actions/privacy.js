@@ -173,7 +173,6 @@ export const setProfilePersonalizedAdvertise = data => {
     dispatch(setProfilePersonalizedAdvertiseStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    console.log(data);
     return privacyService.setProfilePersonalizedAdvertise(data, header).then(
       res => {
         dispatch(setProfilePersonalizedAdvertiseSucceeded(res));
@@ -190,7 +189,6 @@ export const setProfilePersonalizedAdvertise = data => {
 };
 
 export const setChangeEmail = emailDetails => {
-  console.log(emailDetails);
   return dispatch => {
     dispatch(setChangeEmailStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -199,7 +197,6 @@ export const setChangeEmail = emailDetails => {
     };
     return privacyService.setChangeEmail(emailDetails, header).then(
       res => {
-        console.log(res);
         dispatch(setChangeEmailSucceeded(res.data.data));
       },
       error => {

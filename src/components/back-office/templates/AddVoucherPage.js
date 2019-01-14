@@ -36,8 +36,6 @@ class AddVoucherPage extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
-    
     if(this.validateForm()) {
       const { form, voucherList } = this.state;
       const data = {
@@ -48,7 +46,6 @@ class AddVoucherPage extends Component {
         amountId: form.amount,
         numberId: form.number
       }
-      console.log(data);
       
       this.props.addVoucher(data).then(()=> {
         if(this.props.voucherData && this.props.voucherData.voucher) { 
@@ -188,8 +185,6 @@ class AddVoucherPage extends Component {
     window.scrollTo(0, 0);
     this.props.getVouchers().then(()=> {
       if(this.props.voucherData && this.props.voucherData.vouchers) {
-        console.log(this.props.voucherData.vouchers);
-        
         this.setState({
           voucherList: this.props.voucherData.vouchers
         })

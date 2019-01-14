@@ -64,6 +64,8 @@ const initialState = {
     error: false
   },
   dashboardData: {
+    isLoading: false,
+
     news: null,
     isLoadingnews: false,
     errornews: false,

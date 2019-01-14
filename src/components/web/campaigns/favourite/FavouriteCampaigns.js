@@ -6,7 +6,7 @@ import * as enumerations from "../../../../lib/constants/enumerations";
 import { getFavouriteCampaigns } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { Loader, RightSidebarLoading } from "../../../ui-kit";
+import { RightSidebarLoading } from "../../../ui-kit";
 
 class FavouriteCampaigns extends Component {
   componentDidMount = () => {
@@ -53,7 +53,7 @@ class FavouriteCampaigns extends Component {
             </div>
           )
         }
-         {
+        {
           isLoading && (
             <RightSidebarLoading />
           )

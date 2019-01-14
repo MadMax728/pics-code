@@ -148,7 +148,6 @@ class Home extends Component {
                 />
               </div>
               <div className="right_bar no-padding">
-                {/* <RightSidebarLoading /> */}
                 <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
