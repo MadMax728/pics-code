@@ -9,6 +9,5 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // Get messages
 export const getMessages = (payload, header = {}) =>
-  api(baseUrl, header).get(
-    "/messages?senderId=" + payload.senderId + "&strict=false&recipientId=" + payload.recipientId
+  api(baseUrl, header).get( `/messages?senderId=${payload.senderId}&recipientId=${payload.recipientId}&lastEvaluatedKey=${payload.lastEvaluatedKey}`
 );
