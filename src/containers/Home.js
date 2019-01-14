@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import Header from "../components/web/Header";
+import React, { Component } from "react";
 import Footer from "../components/web/Footer";
 import { setCookie, getCookie } from "../lib/utils/helpers";
 import { Translations } from "../lib/translations";
@@ -14,6 +14,7 @@ import {
 } from "../components/common";
 import PropTypes from "prop-types";
 import { Loader } from "../components/ui-kit";
+import { RightSidebarLoading } from "../components/ui-kit/loading-indicator";
 
 class Home extends Component {
   constructor(props, context) {
@@ -145,11 +146,12 @@ class Home extends Component {
                 />
               </div>
               <div className="right_bar no-padding">
-                <RightSideBar
+                <RightSidebarLoading />
+                {/* <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
                   handleMessageBar={this.handleMessageBar}
-                />
+                /> */}
               </div>
             </div>
           </div>
