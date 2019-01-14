@@ -6,7 +6,6 @@ class RightSidebarLoading extends React.Component {
   render() {
     return (
       <div className="feed_wrapper" > 
-          <div  className="normal_title padding-15">Favourite Campaigns</div>
           <div  className="campaigns">
             <div  className="campaign_wrapper">
               <div  className="col-xs-3 col-md-2">

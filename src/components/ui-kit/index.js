@@ -3,7 +3,8 @@ export {
   InlineLoading,
   CampaignLoading,
   UserPicLoading,
-  Loader
+  Loader,
+  RightSidebarLoading
 } from "./loading-indicator";
 export { LeftSidebarNav } from "./nav-menu";
 export { TopBar } from "./top-bar";

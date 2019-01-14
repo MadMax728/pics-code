@@ -13,8 +13,7 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
-import { Loader } from "../components/ui-kit";
-import { RightSidebarLoading } from "../components/ui-kit/loading-indicator";
+import { Loader, RightSidebarLoading } from "../components/ui-kit";
 
 class Home extends Component {
   constructor(props, context) {
@@ -146,12 +145,12 @@ class Home extends Component {
                 />
               </div>
               <div className="right_bar no-padding">
-                <RightSidebarLoading />
-                {/* <RightSideBar
+                {/* <RightSidebarLoading /> */}
+                <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
                   handleMessageBar={this.handleMessageBar}
-                /> */}
+                />
               </div>
             </div>
           </div>
