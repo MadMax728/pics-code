@@ -14,11 +14,11 @@ import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
 import ReportCard from "./ReportCard";
 import * as enumerations from "../../lib/constants/enumerations";
+import { modalType } from "../../lib/constants";
 
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
-
     this.state = {
       item: this.props.item,
       comments: this.props.item,
@@ -146,7 +146,7 @@ class CommentCard extends Component {
       reportTips = [
         {
           name: item[item.findIndex(i => i.id === id)].reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
-          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+          handleEvent: item[item.findIndex(i => i.id === id)].reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
         },
         {
           name: Translations.tool_tips.do_not,
@@ -290,14 +290,58 @@ class CommentCard extends Component {
             />
           </div>
         </div>
-        <div className="comment-content col-md-12 no-padding"><div class="col-md-1"></div><div class="col-md-10">{this.renderEditComment(comment)}</div></div>
+        <div className="comment-content col-md-12 no-padding"><div className="col-md-1"></div><div className="col-md-10">{this.renderEditComment(comment)}</div></div>
       </div>
     );
   };
 
   handleSetState = (value, cd) => {
-    this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
+    const { isBackOffice } = this.props;
+    if(isBackOffice) {
+      clearInterval(this.timer);
+      const { item } = this.state;
+      const comment = item[item.findIndex(i => i.id === value.typeId)];
+      comment.reportStatus = value.contentStatus;
+      this.setState({item});
+      this.props.handleRemove(comment.id)
+    }
+    else {
+      this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
+    }
   };
+
+  handleLockContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+      reportContent: "Comment"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data, null)
+    });
+  }
+
+  handleDoNotContent = (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "Comment"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data, null)
+    });
+  }
+
+  handleUnlockContent= (e) => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+      reportContent: "Comment"
+    }    
+    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
+      this.handleSetState(data, null)
+    });
+  }
 
   handleUpdateSetState = (value, cd) => {
     this.setState(
@@ -333,8 +377,8 @@ class CommentCard extends Component {
   };
 
   render() {
-    const { item, form } = this.state;
-    const { isLoading, isReport } = this.props;
+    const { form } = this.state;
+    const { isLoading, isReport, isBackOffice, item } = this.props;
     return (
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
         {!isReport && (
@@ -372,12 +416,9 @@ class CommentCard extends Component {
           </div>
         )}
 
-        {isReport &&
-          this.props.totalCommentsCount !== 0 &&
-          this.state.slicedCommentsData &&
-          this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
+        {isReport && isBackOffice && item && item.map(this.renderBackOfficeComment)}
 
-        {!isReport &&
+        {!isReport && !isBackOffice &&
           this.props.totalCommentsCount !== 0 &&
           this.state.slicedCommentsData &&
           this.state.slicedCommentsData.map(this.renderComment)}
@@ -424,7 +465,7 @@ CommentCard.propTypes = {
   item: PropTypes.any,
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  handleComment: PropTypes.func.isRequired,
+  handleComment: PropTypes.func,
   editComment: PropTypes.func.isRequired,
   isReport: PropTypes.bool,
   comment: PropTypes.any,
@@ -435,7 +476,10 @@ CommentCard.propTypes = {
   totalCommentsCount: PropTypes.any,
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  isBackOffice: PropTypes.bool,
+  handleRemove: PropTypes.func,
 };
 
 export default connect(
