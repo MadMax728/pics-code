@@ -1,8 +1,9 @@
 import React from "react";
 import * as images from "../../../lib/constants/images";
+import PropTypes from "prop-types";
 
-const CampaignLoading = () => {
-  return [1,2,3].map((item) => {
+const CampaignLoading = ({ count }) => {
+  return Array(count).fill().map((item) => {
     return (
       <div key={item} className="feed_wrapper">
         <div className="feed_header">
@@ -55,6 +56,14 @@ const CampaignLoading = () => {
       </div>
     );
   });
+}
+
+CampaignLoading.defaultProps = {
+  count: 3
+};
+
+CampaignLoading.propTypes = {
+  count : PropTypes.number
 }
 
 export default CampaignLoading;
