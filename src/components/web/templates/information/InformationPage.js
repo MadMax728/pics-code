@@ -7,10 +7,11 @@ import { Translations } from "../../../../lib/translations";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
-import { getCampaignDetails, like } from "../../../../actions";
+import { getCampaignDetails, like, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import { ThreeDots } from "../../../ui-kit";
 import moment from "moment";
+import * as routes from "../../../../lib/constants/routes";
 
 class InformationPage extends Component {
   constructor(props, context) {
@@ -40,6 +41,19 @@ class InformationPage extends Component {
       id: this.state.campaignId
     };
     this.props.getCampaignDetails(data);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      this.props.getSearch(nextProps.searchData.searchKeyword);
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push("/campaign/company?search=" + searchKeyword);
+    }
   };
 
   handleFavorite = () => {
@@ -360,19 +374,24 @@ InformationPage.propTypes = {
   campaignDetails: PropTypes.any,
   isLoading: PropTypes.bool,
   handleFavorite: PropTypes.func,
-  like: PropTypes.func.isRequired
+  like: PropTypes.func.isRequired,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired,
+  history: PropTypes.any
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   campaignDetails: state.campaignData.campaign,
   isLoading: state.campaignData.isLoading,
-  error: state.campaignData.error
+  error: state.campaignData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getCampaignDetails,
-  like
+  like,
+  getSearch
 };
 
 export default connect(
