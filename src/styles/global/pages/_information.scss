@@ -108,9 +108,14 @@
         margin-bottom: 0px;
       }
       .emoji_wrapper {
+        position: relative;
         img {
           width: 20px;
           padding-top: 16px;
+        }
+        .emoji-mart{
+          bottom: 0 !important;
+          right: 30px !important;
         }
       }
       .profile_image {
@@ -119,10 +124,21 @@
         &.wid45 {
           width: 55px;
         }
+        
+      }
+      .comment-input{
+        .form-group{
+          .form-control{
+            width: 100%;
+          }
+        }
       }
       .comment-content {
         p {
           padding-left: 70px;
+        }
+        .comment-inner-wrap{
+          padding-left:45px;
         }
       }
       .show_more_options {

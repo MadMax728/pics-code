@@ -436,7 +436,7 @@ class CommentCard extends Component {
                   className="img-circle img-responsive"
                 />
               </div>
-              <div className="no-padding">
+              <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
                 <div className="comment-input">
                   <div className="form-group">
                     <HashTagUsername
@@ -450,7 +450,10 @@ class CommentCard extends Component {
                       maxLimit={1000}
                       isText
                     />
-                    <div className="emoji_wrapper">
+                  </div>
+                </div>
+              </div>
+              <div className="emoji_wrapper col-sm-2 col-xs-2 pull-right text-right">
                       <img
                         role="presentation"
                         className="pull-right"
@@ -470,9 +473,6 @@ class CommentCard extends Component {
                         />
                       )}
                     </div>
-                  </div>
-                </div>
-              </div>
               <input type="submit" hidden />
             </form>
           </div>

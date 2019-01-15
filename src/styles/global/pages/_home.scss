@@ -654,6 +654,7 @@
     }
   }
 
+
   /*************** Comments CSS ****************/
   .feed-comment {
     .comment-wrapper {
@@ -665,6 +666,13 @@
       &:first-child {
         border-top: 1px solid rgba(0, 0, 0, 0.8);
       }
+      .profile_image{
+        display: inline-block;
+        float: left;
+        img{
+          width: 45px;
+        }
+      }
       input {
         height: 38px;
         border: 0;
@@ -674,7 +682,7 @@
       .comment-input{
         width: 90%;
         input{
-          width: 80%;
+          width: 100%;
         }        
       }
       .emoji_wrapper {
