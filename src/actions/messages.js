@@ -37,7 +37,8 @@ export const getMessages = (senderId, recipientId, lastEvaluatedKeys = undefined
     const params = { 
         senderId,
         recipientId,
-        lastEvaluatedKey : lastEvaluatedKey,
+        strict: true,
+        lastEvaluatedKey
     };
 
     return messagesService.getMessages(params, headers).then(
