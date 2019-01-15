@@ -61,7 +61,7 @@ const AboutCardBody = ({ about }) => {
           </div>
           <div className="section-subtitle">{Translations.about.offer_tag}</div>
           <div className="tags-wrapper">
-            {about && about.offerTagList.length !== undefined && about.offerTagList.map((offer) => {
+            {about && about.offerTagList && about.offerTagList.length && about.offerTagList.map((offer) => {
               return (
                 <Link to={""} key={offer.id}>
                   {offer.offerTagName}
