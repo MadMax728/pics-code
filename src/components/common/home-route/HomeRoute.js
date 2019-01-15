@@ -148,6 +148,10 @@ class HomeRoute extends Component {
     );
   };
 
+  handlePictures = match => {
+    return <PicturesPage history={match.history} />;
+  };
+
   handleCampaign = match => {
     return (
       <CampaignPage
@@ -203,7 +207,11 @@ class HomeRoute extends Component {
 
           <Route exact path={routes.USERS_ROUTE} component={UsersPage} />
 
-          <Route exact path={routes.PICS_ROUTE} component={PicturesPage} />
+          <Route
+            exact
+            path={routes.PICS_ROUTE}
+            component={this.handlePictures}
+          />
 
           <Route
             path={routes.ROOT_ROUTE}

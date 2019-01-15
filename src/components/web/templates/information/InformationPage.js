@@ -7,7 +7,15 @@ import { Translations } from "../../../../lib/translations";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
-import { getCampaignDetails, like, getSearch } from "../../../../actions";
+import {
+  getCampaignDetails,
+  like,
+  getSearch,
+  getComments,
+  setSavedPost,
+  addReport
+} from "../../../../actions";
+import { getBackendPostType } from "../../../Factory";
 import { connect } from "react-redux";
 import { ThreeDots } from "../../../ui-kit";
 import moment from "moment";
@@ -17,7 +25,9 @@ class InformationPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      isComments: false,
       campaignId: this.props.match.params.id,
+      comments: null,
       ReportTips: [
         {
           name: "Report Post",
@@ -37,10 +47,20 @@ class InformationPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.getCampaignDetailsData();
+  };
+
+  getCampaignDetailsData = () => {
     const data = {
       id: this.state.campaignId
     };
-    this.props.getCampaignDetails(data);
+    this.props.getCampaignDetails(data).then(() => {
+      if (this.props.campaignDetails) {
+        this.setState({
+          campaignDetails: this.props.campaignDetails
+        });
+      }
+    });
   };
 
   componentWillReceiveProps = nextProps => {
@@ -85,11 +105,66 @@ class InformationPage extends Component {
     });
   };
 
+  handleComment = commet => {
+    const campaignDetails = this.props.campaignDetails;
+    campaignDetails.commentCount = commet
+      ? campaignDetails.commentCount + 1
+      : campaignDetails.commentCount - 1;
+    this.setState({ campaignDetails: campaignDetails });
+  };
+
+  handleCommentsSections = () => {
+    const CampaignId = { typeId: this.props.match.params.id };
+    this.props.getComments(CampaignId).then(() => {
+      const totalComment = this.props.comments;
+      this.setState({
+        isComments: !this.state.isComments,
+        comments: this.props.comments,
+        totalCommentsCount: totalComment.length
+      });
+    });
+  };
+
   handleOnKeyDown = () => {};
 
-  handleReportPost = () => {};
+  handleReportPost = e => {
+    const { campaignDetails } = this.state;
+    const data = {
+      typeContent: "Campaign",
+      typeId: e.target.id,
+      title: campaignDetails.title
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === campaignDetails.id
+      ) {
+        campaignDetails.isReported = !campaignDetails.isReported;
+        this.setState({ campaignDetails });
+      }
+    });
+  };
 
-  handleSavePost = () => {};
+  handleSavePost = e => {
+    const { campaignDetails } = this.state;
+    // const { isSavedPage } = this.props;
+    const data = {
+      typeId: e.target.id,
+      postType: getBackendPostType(campaignDetails)
+    };
+
+    this.props.setSavedPost(data).then(() => {
+      if (
+        this.props.savedData &&
+        this.props.savedData.saved &&
+        this.props.savedData.saved.typeId === campaignDetails.id
+      ) {
+        campaignDetails.isSavedPost = !campaignDetails.isSavedPost;
+        this.setState({ campaignDetails });
+      }
+    });
+  };
 
   handleContent = () => {};
 
@@ -97,16 +172,30 @@ class InformationPage extends Component {
    * Tooltp
    */
   renderReportTips = () => {
-    return (
-      <RenderToolTips
-        items={this.state.ReportTips}
-        id={this.props.campaignDetails.id}
-      />
-    );
+    let reportTips;
+    const { campaignDetails } = this.state;
+    if (campaignDetails) {
+      reportTips = [
+        {
+          name: campaignDetails.isReported
+            ? Translations.tool_tips.unreport
+            : Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: campaignDetails.isSavedPost
+            ? Translations.tool_tips.unsave
+            : Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+      return <RenderToolTips items={reportTips} id={campaignDetails.id} />;
+    }
   };
 
   render() {
     const { campaignDetails, isLoading } = this.props;
+    const { isComments, comments } = this.state;
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaignDetails && !isLoading && (
@@ -120,7 +209,8 @@ class InformationPage extends Component {
               <div className="text paddTop20">
                 {campaignDetails.description}
               </div>
-              {campaignDetails.isOwner ? (
+              {campaignDetails.isOwner ||
+              campaignDetails.isAlreadyParticipant ? (
                 ""
               ) : (
                 <button
@@ -275,6 +365,7 @@ class InformationPage extends Component {
                       role="presentation"
                       id={campaignDetails.createdBy}
                       onKeyDown={this.handleOnKeyDown}
+                      onClick={this.handleCommentsSections}
                     />
                   </div>
                   <div className="likes">
@@ -307,7 +398,7 @@ class InformationPage extends Component {
                       role="button"
                       dataTip="tooltip"
                       dataClass="tooltip-wrapr"
-                      getContent={this.renderReportTips}
+                      getContent={() => this.renderReportTips()}
                       effect="solid"
                       delayHide={500}
                       delayShow={500}
@@ -324,13 +415,17 @@ class InformationPage extends Component {
             <div className="feed_wrapper">
               <div className="feed-comment">
                 {/* Comments Section */}
-                {/* <Comments
-                  campaign={campaignDetails}/> */}
-                <Comments
-                  campaign={campaignDetails}
-                  handleCommentsSections={this.handleCommentsSections}
-                  isReport={false}
-                />
+                {isComments && (
+                  <Comments
+                    campaign={campaignDetails}
+                    campaignComments={comments}
+                    campeignId={campaignDetails.id}
+                    typeContent={campaignDetails.typeContent}
+                    handleComment={this.handleComment}
+                    totalCommentsCount={comments.length}
+                    isReport={false}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -388,7 +483,14 @@ InformationPage.propTypes = {
   like: PropTypes.func.isRequired,
   searchData: PropTypes.any,
   getSearch: PropTypes.func.isRequired,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getComments: PropTypes.func.isRequired,
+  comments: PropTypes.any,
+  handleRemove: PropTypes.func,
+  reportedContentData: PropTypes.any,
+  savedData: PropTypes.any,
+  setSavedPost: PropTypes.func,
+  addReport: PropTypes.func
   // error: PropTypes.any
 };
 
@@ -396,13 +498,21 @@ const mapStateToProps = state => ({
   campaignDetails: state.campaignData.campaign,
   isLoading: state.campaignData.isLoading,
   error: state.campaignData.error,
-  searchData: state.searchData
+  searchData: state.searchData,
+  comments: state.commentData.comments,
+  likeData: state.likeData,
+  savedData: state.savedData,
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   getCampaignDetails,
   like,
-  getSearch
+  getSearch,
+  getComments,
+  addReport,
+  setSavedPost
 };
 
 export default connect(

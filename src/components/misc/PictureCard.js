@@ -4,11 +4,16 @@ import PictureCardBody from "./body/PictureCardBody";
 
 class PictureCard extends Component {
   render() {
-    const { item, index, isReport } = this.props;
+    const { item, index, isReport, history } = this.props;
 
     return (
       <div>
-        <PictureCardBody pic={item} index={index} isReport={isReport} />
+        <PictureCardBody
+          pic={item}
+          index={index}
+          isReport={isReport}
+          history={history}
+        />
       </div>
     );
   }
@@ -17,7 +22,8 @@ class PictureCard extends Component {
 PictureCard.propTypes = {
   item: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-  isReport: PropTypes.bool
+  isReport: PropTypes.bool,
+  history: PropTypes.any
 };
 
 export default PictureCard;
