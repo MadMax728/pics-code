@@ -7,6 +7,7 @@ import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
 
 class VideosBOPage extends Component {
   constructor(props, context) {
@@ -14,7 +15,10 @@ class VideosBOPage extends Component {
     this.state = {
       videoList: null,
       isLoading: this.props.isLoading,
-      isSearch: false
+      isSearch: false,
+      form: {
+        search: ""
+      }
     };
   }
 
@@ -69,8 +73,9 @@ class VideosBOPage extends Component {
   }
 
   renderVideoList = () => {
-    const { videoList } = this.state;
-    
+    let { videoList, form } = this.state;
+    videoList = search(videoList,"userName", form.search);
+
     return videoList.map(video => {
       return (
         <div key={video.id}>
@@ -93,14 +98,23 @@ class VideosBOPage extends Component {
     }
   }
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+
   render() {
-    const { videoList, isLoading } = this.state;
+    let { videoList, form } = this.state;
+    const { isLoading } = this.state;
     const { reportedContentData } = this.props;
+    videoList = search(videoList,"userName", form.search);
 
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {videoList && this.renderVideoList()}
           {!videoList && isLoading && <CampaignLoading />}
         </div>

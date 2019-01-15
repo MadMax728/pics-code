@@ -6,12 +6,16 @@ import PropTypes from "prop-types";
 import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { UserCard } from "../../../misc";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
 
 class UsersPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      userList: null
+      userList: null,
+      form: {
+        search: ""
+      }
     };
   }
 
@@ -73,7 +77,8 @@ class UsersPage extends Component {
   }
 
   renderUserList = () => {
-    const { userList } = this.state;
+    let { userList, form } = this.state;
+    userList = search(userList, "username", form.search);
 
     return userList.map((user, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
@@ -93,13 +98,22 @@ class UsersPage extends Component {
     });
   };
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+  
   render() {
-    const { userList, isLoading } = this.state;
+    const { isLoading } = this.state;
+    let { userList, form } = this.state;
+    userList = search(userList, "username", form.search);
     const { reportedContentData } = this.props;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {userList && !isLoading && this.renderUserList()}
           {isLoading && <CampaignLoading />}
         </div>

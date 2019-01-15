@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { CommentCard } from "../../../misc";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
 
 class CommentsPage extends Component {
   constructor(props, context) {
@@ -13,7 +14,10 @@ class CommentsPage extends Component {
     this.state = {
       commentList: null,
       isLoading: this.props.isLoading,
-      isSearch: false
+      isSearch: false,
+      form: {
+        search: ""
+      }
     };
   }
 
@@ -77,7 +81,8 @@ class CommentsPage extends Component {
   }
 
   renderCommentList = () => {
-    const { commentList } = this.state;
+    let { commentList, form } = this.state;
+    commentList = search(commentList, "userName", form.search);
       return (
         <CommentCard
           item={commentList}
@@ -90,14 +95,23 @@ class CommentsPage extends Component {
       );
   };
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+  
   render() {
-    const { commentList, isLoading } = this.state;
+    const { isLoading } = this.state;
+    let { commentList, form } = this.state;
+    commentList = search(commentList, "userName", form.search);
     const { reportedContentData } = this.props;
 
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {commentList && this.renderCommentList()}
           {!commentList && isLoading && <CampaignLoading />}
         </div>

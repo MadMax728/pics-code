@@ -7,12 +7,16 @@ import * as enumerations from "../../../../lib/constants/enumerations";
 import { AdCard } from "../../../misc";
 import { getBackOfficeReview, getBackOfficeReviewStatistics } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
 
 class AdsPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      adList: null
+      adList: null,
+      form: {
+        search: ""
+      }
     };
   }
 
@@ -57,7 +61,8 @@ class AdsPage extends Component {
   }  
 
   renderAdList = () => {
-    const { adList } = this.state;
+    let { adList, form } = this.state;
+    adList = search(adList, "userName", form.search);
     return adList.map(ad => {
       return (
         <div key={ad.id}>
@@ -88,14 +93,22 @@ class AdsPage extends Component {
   
   handleReported = () => {}
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+  
   render() {
-    const { adList } = this.state;
+    let { adList, form } = this.state;
+    adList = search(adList, "userName", form.search);
     const { isLoading, reviewData } = this.props;
 
     return (
       <div>
         <div className="padding-rl-10 middle-section margin-b-22">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {adList && this.renderAdList()}
           {!adList && isLoading && <CampaignLoading />}
         </div>

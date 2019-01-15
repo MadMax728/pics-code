@@ -7,13 +7,18 @@ import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { AdCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
+
 class ReportedAdsPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       adList: null,
       isLoading: this.props.isLoading,
-      isSearch: false
+      isSearch: false,
+      form: {
+        search: ""
+      }
     };
   }
 
@@ -78,7 +83,8 @@ class ReportedAdsPage extends Component {
 
 
   renderAds = () => {
-    const { adList } = this.state;
+    let { adList, form } = this.state;
+    adList = search(adList, "userName", form.search);
     
     return adList.map(ad => {
       return (
@@ -100,14 +106,22 @@ class ReportedAdsPage extends Component {
     });
   };
 
-  render() {
-    const { adList, isLoading } = this.state;
-    const { reportedContentData } = this.props;
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
 
+  render() {
+    let { adList, form } = this.state;
+    const { isLoading } = this.state;
+    const { reportedContentData } = this.props;
+    adList = search(adList, "userName", form.search);
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
             {adList && this.renderAds()}
             {!adList && isLoading && <CampaignLoading />}
         </div>

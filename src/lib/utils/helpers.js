@@ -54,7 +54,6 @@ export function search (dataList, key, word) {
   const value = word;
   const valueArr = value ? value.split(" ") : " ";
   const lastText = valueArr[valueArr.length - 1].substring(1);
-  console.log(value);
   dataList =
     dataList &&
     dataList.filter(item => {
@@ -66,7 +65,5 @@ export function search (dataList, key, word) {
             item[key].toLowerCase().indexOf(lastText.toLowerCase()) > -1)
       );
     });
-  console.log(dataList);
-  
   return dataList;
 }

@@ -7,12 +7,16 @@ import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { CampaignCard } from "../../../misc";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
 
 class CampaignsPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      campaignList: null
+      campaignList: null,
+      form: {
+        search: ""
+      }
     };
   }
 
@@ -56,7 +60,8 @@ class CampaignsPage extends Component {
   }
 
   renderCampaignList = () => {
-    const { campaignList } = this.state;
+    let { campaignList, form } = this.state;
+    campaignList = search(campaignList, "userName", form.search);
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
@@ -90,13 +95,22 @@ class CampaignsPage extends Component {
   
   handleReported = () => {}
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+
   render() {
     const { isLoading, reviewData } = this.props;
-    const { campaignList } = this.state;
+    let { campaignList, form } = this.state;
+    campaignList = search(campaignList, "userName", form.search);
+
     return (
       <div>
         <div className="padding-rl-10 middle-section margin-b-22">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {campaignList && this.renderCampaignList()}
           {!campaignList && isLoading && <CampaignLoading />}
         </div>
