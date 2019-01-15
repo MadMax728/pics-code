@@ -14,6 +14,8 @@ import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
 import ReportCard from "./ReportCard";
 import * as enumerations from "../../lib/constants/enumerations";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 class CommentCard extends Component {
   constructor(props, context) {
@@ -33,7 +35,8 @@ class CommentCard extends Component {
       },
       updateForm: {
         comment: ""
-      }
+      },
+      isEmoji: false
     };
   }
 
@@ -349,8 +352,22 @@ class CommentCard extends Component {
     }
   };
 
+  /* Emoji */
+  addEmoji = emoji => {
+    const comment = this.state.form.comment;
+    const newComment = comment + emoji.native;
+    this.setState({ form: { comment: newComment } });
+    this.setState({ isEmoji: false });
+  };
+
+  onEmojiOpen = () => {
+    this.setState(prevState => ({
+      isEmoji: !prevState.isEmoji
+    }));
+  };
+
   render() {
-    const { item, form } = this.state;
+    const { item, form, isEmoji } = this.state;
     const { isLoading, isReport } = this.props;
     return (
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
@@ -380,10 +397,23 @@ class CommentCard extends Component {
                     />
                     <div className="emoji_wrapper">
                       <img
-                        src={images.emoji}
-                        alt="like"
+                        role="presentation"
                         className="pull-right"
+                        src={images.emoji}
+                        alt={"emoji1"}
+                        onKeyPress={this.onEmojiOpen}
+                        onClick={this.onEmojiOpen}
                       />
+                      {isEmoji && (
+                        <Picker
+                          onSelect={this.addEmoji}
+                          style={{
+                            position: "absolute",
+                            bottom: "135px",
+                            right: "60px"
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
