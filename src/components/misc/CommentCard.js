@@ -422,7 +422,7 @@ class CommentCard extends Component {
   };
 
   render() {
-    const { item, form, isEmoji } = this.state;
+    const { item, form, isEmoji, isBackOffice } = this.state;
     const { isLoading, isReport } = this.props;
     return (
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
