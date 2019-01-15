@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
-import { uploadMedia, addParticipants } from "../../../../actions";
+import {
+  uploadMedia,
+  addParticipants,
+  getCampaignDetails
+} from "../../../../actions";
 import { connect } from "react-redux";
 import { modalType } from "../../../../lib/constants/enumerations";
 
@@ -94,6 +98,8 @@ class UploadModal extends Component {
                 this.props.campaignData.isAddParticipant
               ) {
                 console.log("participant added");
+                const data = { id: this.props.data.campaignId };
+                this.props.getCampaignDetails(data);
               }
             });
           }
@@ -207,7 +213,8 @@ UploadModal.propTypes = {
   data: PropTypes.any,
   media: PropTypes.any,
   addParticipants: PropTypes.func,
-  campaignData: PropTypes.any
+  campaignData: PropTypes.any,
+  getCampaignDetails: PropTypes.func
 };
 
 const mapStateToProps = state => ({
@@ -217,7 +224,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   uploadMedia,
-  addParticipants
+  addParticipants,
+  getCampaignDetails
 };
 
 // export default UploadModal;

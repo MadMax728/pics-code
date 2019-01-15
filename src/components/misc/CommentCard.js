@@ -37,18 +37,22 @@ class CommentCard extends Component {
     };
   }
 
-  handleReportPost = (e) => {
+  handleReportPost = e => {
     const { item } = this.state;
     const comment = item[item.findIndex(i => i.id === e.target.id)];
     const data = {
       typeContent: "Comment",
       typeId: e.target.id,
       title: comment.comment
-    }    
-    this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === comment.id) {
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === comment.id
+      ) {
         comment.isReported = !comment.isReported;
-        this.setState({item});
+        this.setState({ item });
       }
     });
   };
@@ -145,8 +149,15 @@ class CommentCard extends Component {
     if (isBackOffice) {
       reportTips = [
         {
-          name: item[item.findIndex(i => i.id === id)].reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
-          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+          name:
+            item[item.findIndex(i => i.id === id)].reportStatus ===
+            enumerations.reportType.lock
+              ? Translations.tool_tips.unlock
+              : Translations.tool_tips.lock,
+          handleEvent:
+            item.reportStatus === enumerations.reportType.lock
+              ? this.handleUnlockContent
+              : this.handleLockContent
         },
         {
           name: Translations.tool_tips.do_not,
@@ -160,7 +171,9 @@ class CommentCard extends Component {
           handleEvent: this.handleEditComment
         },
         {
-          name: item[item.findIndex(i => i.id === id)].isReported? Translations.tool_tips.unreport_comment : Translations.tool_tips.report_comment,
+          name: item[item.findIndex(i => i.id === id)].isReported
+            ? Translations.tool_tips.unreport_comment
+            : Translations.tool_tips.report_comment,
           handleEvent: this.handleReportPost
         },
         {
@@ -290,7 +303,10 @@ class CommentCard extends Component {
             />
           </div>
         </div>
-        <div className="comment-content col-md-12 no-padding"><div class="col-md-1"></div><div class="col-md-10">{this.renderEditComment(comment)}</div></div>
+        <div className="comment-content col-md-12 no-padding">
+          <div class="col-md-1" />
+          <div class="col-md-10">{this.renderEditComment(comment)}</div>
+        </div>
       </div>
     );
   };
@@ -362,11 +378,15 @@ class CommentCard extends Component {
                       isText
                     />
                     <div className="emoji_wrapper">
-                      <img src={images.emoji} alt="like" className="pull-right" />
+                      <img
+                        src={images.emoji}
+                        alt="like"
+                        className="pull-right"
+                      />
                     </div>
                   </div>
                 </div>
-              </div>              
+              </div>
               <input type="submit" hidden />
             </form>
           </div>
