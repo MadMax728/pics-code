@@ -12,13 +12,13 @@ class PicturesRoot extends React.Component {
   };
 
   renderuserList = () => {
-    const { picsList } = this.props;
+    const { picsList, history } = this.props;
     return picsList.map((pic, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
       return (
         <div key={pic.id}>
           {clearfixDiv}
-          <PictureCard item={pic} index={index} />
+          <PictureCard item={pic} index={index} history={history} />
         </div>
       );
     });
@@ -39,7 +39,8 @@ class PicturesRoot extends React.Component {
 PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoadingpics: PropTypes.bool,
-  picsList: PropTypes.any
+  picsList: PropTypes.any,
+  history: PropTypes.any
   // errorpics: PropTypes.any
 };
 
