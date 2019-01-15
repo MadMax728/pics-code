@@ -37,26 +37,3 @@ export const addReport = (payload, header = {}) =>
 export const getReportedStatistics = (payload, header = {}) =>
   api(baseUrl, header).get("/reports/post-count?reportContent=" + payload.reportContent);
 
-// BackOffice VideoBO API
-export const reportedContentVideos = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
-
-// BackOffice Campaign API
-export const reportedContentCampaigns = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
-
-// BackOffice Pics API
-export const reportedContentPics = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
-
-// BackOffice Ads API
-export const reportedContentAds = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
-
-// BackOffice Comments API
-export const reportedContentComments = (payload, header = {}) =>
-  api(baseUrl, header).get("/comments");
-
-// BackOffice User API
-export const reportedContentUsers = (payload, header = {}) =>
-  api(baseUrl, header).get("/users/get-all-users");

@@ -16,7 +16,7 @@ const propTypes = {
   border: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.number.isRequired,
-  valueName: PropTypes.number.isRequired
+  valueName: PropTypes.string.isRequired
 };
 
 class SubscribeList extends Component {

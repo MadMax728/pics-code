@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import Header from "../components/web/Header";
+import React, { Component } from "react";
 import Footer from "../components/web/Footer";
 import { setCookie, getCookie } from "../lib/utils/helpers";
 import { Translations } from "../lib/translations";
@@ -13,7 +13,7 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
-import { Loader } from "../components/ui-kit";
+import { Loader, RightSidebarLoading } from "../components/ui-kit";
 
 class Home extends Component {
   constructor(props, context) {

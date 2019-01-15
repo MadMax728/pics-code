@@ -10,6 +10,7 @@ import {
   getUser
 } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
+import { RightSidebarLoading } from "../../../ui-kit";
 
 class Community extends Component {
   constructor(props, context) {
@@ -84,7 +85,9 @@ class Community extends Component {
 
   render() {
     const { usersList } = this.state;
-    const { isLoadingusers } = this.props;
+    const { isLoading, isLoadingusers } = this.props;
+    console.log('isLoading', this.props);
+    
     return (
       <div>
         <div className="normal_title padding-15">
@@ -142,6 +145,10 @@ class Community extends Component {
               );
             })}
         </div>
+        {
+          isLoading && 
+            <RightSidebarLoading />
+        }
       </div>
     );
   }

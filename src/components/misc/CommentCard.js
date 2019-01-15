@@ -20,7 +20,6 @@ import { Picker } from "emoji-mart";
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
-
     this.state = {
       item: this.props.item,
       comments: this.props.item,
@@ -315,7 +314,64 @@ class CommentCard extends Component {
   };
 
   handleSetState = (value, cd) => {
-    this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
+    const { isBackOffice } = this.props;
+    if (isBackOffice) {
+      clearInterval(this.timer);
+      const { item } = this.state;
+      const comment = item[item.findIndex(i => i.id === value.typeId)];
+      comment.reportStatus = value.contentStatus;
+      this.setState({ item });
+      this.props.handleRemove(comment.id);
+    } else {
+      this.setState({ form: { ...this.state.form, comment: value } }, () =>
+        cd()
+      );
+    }
+  };
+
+  handleLockContent = e => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+      reportContent: "Comment"
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
+  };
+
+  handleDoNotContent = e => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "Comment"
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
+  };
+
+  handleUnlockContent = e => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+      reportContent: "Comment"
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
   };
 
   handleUpdateSetState = (value, cd) => {
@@ -423,11 +479,12 @@ class CommentCard extends Component {
         )}
 
         {isReport &&
-          this.props.totalCommentsCount !== 0 &&
-          this.state.slicedCommentsData &&
-          this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
+          isBackOffice &&
+          item &&
+          item.map(this.renderBackOfficeComment)}
 
         {!isReport &&
+          !isBackOffice &&
           this.props.totalCommentsCount !== 0 &&
           this.state.slicedCommentsData &&
           this.state.slicedCommentsData.map(this.renderComment)}
@@ -474,7 +531,7 @@ CommentCard.propTypes = {
   item: PropTypes.any,
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  handleComment: PropTypes.func.isRequired,
+  handleComment: PropTypes.func,
   editComment: PropTypes.func.isRequired,
   isReport: PropTypes.bool,
   comment: PropTypes.any,
@@ -485,7 +542,10 @@ CommentCard.propTypes = {
   totalCommentsCount: PropTypes.any,
   isBackOffice: PropTypes.bool,
   addReport: PropTypes.func.isRequired,
-  reportedContentData: PropTypes.any
+  reportedContentData: PropTypes.any,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  isBackOffice: PropTypes.bool,
+  handleRemove: PropTypes.func
 };
 
 export default connect(

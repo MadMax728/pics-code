@@ -12,8 +12,6 @@ class CMSPreview extends Component {
 
   render() {
     const { form } = this.state;
-    console.log(form);
-    
     return (
         <div className="col-xs-12 no-padding">
             <div className="form-row col-xs-12">

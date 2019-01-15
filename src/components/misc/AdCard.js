@@ -166,7 +166,7 @@ class AdCard extends Component {
   };
 
   render() {
-    const { isStatus, isDescription, isInformation, isReport, reportedContentData, savedData} = this.props;
+    const { isReview, isStatus, isDescription, isInformation, isReport, reportedContentData, savedData} = this.props;
     const { isComments, item, comments } = this.state;
     return (
       <div className="feed_wrapper">
@@ -193,6 +193,7 @@ class AdCard extends Component {
           handleFavorite={this.handleFavorite}
           isLoading={false}
           isReport={isReport}
+          isReview={isReview}
         />
        {isComments && (
           <CommentCard
@@ -225,6 +226,7 @@ AdCard.propTypes = {
   reportedContentData: PropTypes.any,
   handleRemove: PropTypes.func,
   isSavedPage: PropTypes.bool,
+  isReview: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
 };
 

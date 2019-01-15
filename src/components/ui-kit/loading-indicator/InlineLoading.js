@@ -32,7 +32,6 @@ class InlineLoading extends React.Component {
   };
 
   render() {
-    const { message } = this.props;
     const { isVisible } = this.state;
 
     return (

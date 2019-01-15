@@ -6,6 +6,7 @@ import * as enumerations from "../../../../lib/constants/enumerations";
 import { getFavouriteCampaigns } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import { RightSidebarLoading } from "../../../ui-kit";
 
 class FavouriteCampaigns extends Component {
   componentDidMount = () => {
@@ -25,28 +26,39 @@ class FavouriteCampaigns extends Component {
   }
 
   render() {
+    const { isLoading } = this.props;
     return (
       <div>
         <div className="normal_title padding-15">
           {Translations.favourite_campaigns}
         </div>
-        <div className="campaigns">
-          {this.props.campaignData.favouriteCampaign &&
-            this.props.campaignData.favouriteCampaign.map(campaign => {
-              return (
-                ((campaign.postType &&
-                  campaign.postType.toLowerCase() ===
-                    enumerations.contentTypes.companyCampaign) ||
-                  campaign.postType.toLowerCase() ===
-                    enumerations.contentTypes.creatorCampaign) && (
-                  <FavouriteCampaignItem
-                    campaign={campaign}
-                    key={campaign.id}
-                  />
-                )
-              );
-            })}
-        </div>
+        {
+          !isLoading && (
+            <div className="campaigns">
+              {this.props.campaignData.favouriteCampaign &&
+                this.props.campaignData.favouriteCampaign.map(campaign => {
+                  return (
+                    ((campaign.postType &&
+                      campaign.postType.toLowerCase() ===
+                        enumerations.contentTypes.companyCampaign) ||
+                      campaign.postType.toLowerCase() ===
+                        enumerations.contentTypes.creatorCampaign) && (
+                      <FavouriteCampaignItem
+                        campaign={campaign}
+                        key={campaign.id}
+                      />
+                    )
+                  );
+                })}
+            </div>
+          )
+        }
+        {
+          isLoading && (
+            <RightSidebarLoading />
+          )
+        }
+       
       </div>
     );
   }

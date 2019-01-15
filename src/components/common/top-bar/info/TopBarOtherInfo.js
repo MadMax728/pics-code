@@ -167,7 +167,6 @@ class TopBarOtherInfo extends Component {
 
   handeleSubscribe = () => {
     // To Do - Integration changed - according to backend API response
-    console.log("handeleSubscribe clicked");
     const errors = {};
     const selectedUserList = this.props.userDataByUsername.user.data;
     if (selectedUserList.isPending) {

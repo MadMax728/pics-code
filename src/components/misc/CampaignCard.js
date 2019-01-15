@@ -161,8 +161,6 @@ class CampaignCard extends Component {
     });
   };
 
-  handleContent = () => {};
-
   handleFavorite = () => {
     const item = this.state.item;
     item.isSelfLike = !this.state.item.isSelfLike;
