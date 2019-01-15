@@ -14,7 +14,8 @@ import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
 import ReportCard from "./ReportCard";
 import * as enumerations from "../../lib/constants/enumerations";
-import { modalType } from "../../lib/constants";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
 
 class CommentCard extends Component {
   constructor(props, context) {
@@ -33,22 +34,27 @@ class CommentCard extends Component {
       },
       updateForm: {
         comment: ""
-      }
+      },
+      isEmoji: false
     };
   }
 
-  handleReportPost = (e) => {
+  handleReportPost = e => {
     const { item } = this.state;
     const comment = item[item.findIndex(i => i.id === e.target.id)];
     const data = {
       typeContent: "Comment",
       typeId: e.target.id,
       title: comment.comment
-    }    
-    this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === comment.id) {
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === comment.id
+      ) {
         comment.isReported = !comment.isReported;
-        this.setState({item});
+        this.setState({ item });
       }
     });
   };
@@ -145,8 +151,15 @@ class CommentCard extends Component {
     if (isBackOffice) {
       reportTips = [
         {
-          name: item[item.findIndex(i => i.id === id)].reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
-          handleEvent: item[item.findIndex(i => i.id === id)].reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+          name:
+            item[item.findIndex(i => i.id === id)].reportStatus ===
+            enumerations.reportType.lock
+              ? Translations.tool_tips.unlock
+              : Translations.tool_tips.lock,
+          handleEvent:
+            item.reportStatus === enumerations.reportType.lock
+              ? this.handleUnlockContent
+              : this.handleLockContent
         },
         {
           name: Translations.tool_tips.do_not,
@@ -160,7 +173,9 @@ class CommentCard extends Component {
           handleEvent: this.handleEditComment
         },
         {
-          name: item[item.findIndex(i => i.id === id)].isReported? Translations.tool_tips.unreport_comment : Translations.tool_tips.report_comment,
+          name: item[item.findIndex(i => i.id === id)].isReported
+            ? Translations.tool_tips.unreport_comment
+            : Translations.tool_tips.report_comment,
           handleEvent: this.handleReportPost
         },
         {
@@ -290,58 +305,74 @@ class CommentCard extends Component {
             />
           </div>
         </div>
-        <div className="comment-content col-md-12 no-padding"><div className="col-md-1"></div><div className="col-md-10">{this.renderEditComment(comment)}</div></div>
+        <div className="comment-content col-md-12 no-padding">
+          <div className="col-md-1" />
+          <div className="col-md-10">{this.renderEditComment(comment)}</div>
+        </div>
       </div>
     );
   };
 
   handleSetState = (value, cd) => {
     const { isBackOffice } = this.props;
-    if(isBackOffice) {
+    if (isBackOffice) {
       clearInterval(this.timer);
       const { item } = this.state;
       const comment = item[item.findIndex(i => i.id === value.typeId)];
       comment.reportStatus = value.contentStatus;
-      this.setState({item});
-      this.props.handleRemove(comment.id)
-    }
-    else {
-      this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
+      this.setState({ item });
+      this.props.handleRemove(comment.id);
+    } else {
+      this.setState({ form: { ...this.state.form, comment: value } }, () =>
+        cd()
+      );
     }
   };
 
-  handleLockContent = (e) => {
+  handleLockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
       reportContent: "Comment"
-    }    
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data, null)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
+  };
 
-  handleDoNotContent = (e) => {
+  handleDoNotContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
       reportContent: "Comment"
-    }    
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data, null)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
+  };
 
-  handleUnlockContent= (e) => {
+  handleUnlockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
       reportContent: "Comment"
-    }    
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data, null)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
+  };
 
   handleUpdateSetState = (value, cd) => {
     this.setState(
@@ -376,9 +407,23 @@ class CommentCard extends Component {
     }
   };
 
+  /* Emoji */
+  addEmoji = emoji => {
+    const comment = this.state.form.comment;
+    const newComment = comment + emoji.native;
+    this.setState({ form: { comment: newComment } });
+    this.setState({ isEmoji: false });
+  };
+
+  onEmojiOpen = () => {
+    this.setState(prevState => ({
+      isEmoji: !prevState.isEmoji
+    }));
+  };
+
   render() {
-    const { form } = this.state;
-    const { isLoading, isReport, isBackOffice, item } = this.props;
+    const { item, form, isEmoji, isBackOffice } = this.state;
+    const { isLoading, isReport } = this.props;
     return (
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
         {!isReport && (
@@ -406,19 +451,40 @@ class CommentCard extends Component {
                       isText
                     />
                     <div className="emoji_wrapper">
-                      <img src={images.emoji} alt="like" className="pull-right" />
+                      <img
+                        role="presentation"
+                        className="pull-right"
+                        src={images.emoji}
+                        alt={"emoji1"}
+                        onKeyPress={this.onEmojiOpen}
+                        onClick={this.onEmojiOpen}
+                      />
+                      {isEmoji && (
+                        <Picker
+                          onSelect={this.addEmoji}
+                          style={{
+                            position: "absolute",
+                            bottom: "135px",
+                            right: "60px"
+                          }}
+                        />
+                      )}
                     </div>
                   </div>
                 </div>
-              </div>              
+              </div>
               <input type="submit" hidden />
             </form>
           </div>
         )}
 
-        {isReport && isBackOffice && item && item.map(this.renderBackOfficeComment)}
+        {isReport &&
+          isBackOffice &&
+          item &&
+          item.map(this.renderBackOfficeComment)}
 
-        {!isReport && !isBackOffice &&
+        {!isReport &&
+          !isBackOffice &&
           this.props.totalCommentsCount !== 0 &&
           this.state.slicedCommentsData &&
           this.state.slicedCommentsData.map(this.renderComment)}
@@ -479,7 +545,7 @@ CommentCard.propTypes = {
   reportedContentData: PropTypes.any,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   isBackOffice: PropTypes.bool,
-  handleRemove: PropTypes.func,
+  handleRemove: PropTypes.func
 };
 
 export default connect(
