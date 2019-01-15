@@ -1,8 +1,7 @@
 import React from "react";
 import * as images from "../../../lib/constants/images";
 
-class UserPicLoading extends React.Component {
-  render() {
+const UserPicLoading  = () => {
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-6 pic-block-wrapr pic-left-block padding-lr-5">
@@ -24,8 +23,6 @@ class UserPicLoading extends React.Component {
           </div>
         </div>
       </div>
-    );
-  }
+  );
 }
-
 export default UserPicLoading;
