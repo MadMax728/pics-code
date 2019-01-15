@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { updateBackOfficeReport } from "../../../actions";
+import { updateBackOfficeReport, updateBackOfficeReview } from "../../../actions";
 import { connect } from "react-redux";
 
 class Processed extends Component {
@@ -9,12 +9,22 @@ class Processed extends Component {
 
   handleProcessed = () => {
     const { modalInfo } = this.props;
-    this.props.updateBackOfficeReport(modalInfo).then(()=> {
-      if(this.props.reportedContentData && !this.props.reportedContentData.error) {
-        this.props.statusCallback();
-        this.props.handleModalInfoHide();
-      }
-    });
+    if (modalInfo.isBudget || modalInfo.isReview) {
+      this.props.updateBackOfficeReview(modalInfo).then(()=> {
+        if(this.props.reviewData && !this.props.reviewData.error) {
+          this.props.statusCallback();
+          this.props.handleModalInfoHide();
+        }
+      });
+    }
+    else {
+      this.props.updateBackOfficeReport(modalInfo).then(()=> {
+        if(this.props.reportedContentData && !this.props.reportedContentData.error) {
+          this.props.statusCallback();
+          this.props.handleModalInfoHide();
+        }
+      });
+    }
   }
 
   render() {
@@ -50,19 +60,23 @@ class Processed extends Component {
 
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
+  reviewData: state.reviewData,
   isLoading: state.reportedContentData.isLoading,
   error: state.reportedContentData.error
 });
 
 const mapDispatchToProps = {
-  updateBackOfficeReport
+  updateBackOfficeReport,
+  updateBackOfficeReview
 };
 
 Processed.propTypes = {
   handleModalInfoHide: PropTypes.func,
   reportedContentData: PropTypes.any,
+  reviewData: PropTypes.any,
   modalInfo: PropTypes.any,
   updateBackOfficeReport: PropTypes.func,
+  updateBackOfficeReview: PropTypes.func,
   statusCallback: PropTypes.func
 };
 

@@ -7,6 +7,7 @@ import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
 
 class ImagesBOPage extends Component {
   constructor(props, context) {
@@ -14,7 +15,10 @@ class ImagesBOPage extends Component {
     this.state = {
       imageList: null,
       isLoading: this.props.isLoading,
-      isSearch: false
+      isSearch: false,
+      form: {
+        search: ""
+      }
     };
   }
 
@@ -78,7 +82,8 @@ class ImagesBOPage extends Component {
   }
 
   renderImageList = () => {
-    const { imageList } = this.state;
+    let { imageList, form } = this.state;
+    imageList = search(imageList,"userName", form.search);
     return imageList.map(image => {
       return (
         <div key={image.id}>
@@ -93,13 +98,22 @@ class ImagesBOPage extends Component {
     });
   };
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+
   render() {
-    const { imageList, isLoading } = this.state;
+    let { imageList } = this.state;
+    const { isLoading, form } = this.state;
     const { reportedContentData } = this.props;
+    imageList = search(imageList,"userName", form.search);
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {imageList && this.renderImageList()}
           {!imageList && isLoading && <CampaignLoading />}
         </div>

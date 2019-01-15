@@ -7,28 +7,31 @@ import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { CampaignCard } from "../../../misc";
 import { Translations } from "../../../../lib/translations";
+import { search } from "../.../../../../../lib/utils/helpers";
 
 class CampaignsPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      campaignList: null
+      campaignList: null,
+      form: {
+        search: ""
+      }
     };
   }
 
   componentDidMount = () => {
     this.getBackOfficeReview();
-    this.getBackOfficeReviewCampaignStatistics();
+    this.getBackOfficeReviewCampaignsStatistics();
     this.getBackOfficeReviewAdStatistics();
   };
   
-  getBackOfficeReviewCampaignStatistics = () => {
+  getBackOfficeReviewCampaignsStatistics = () => {
     const data = {
-      type: "get",
-      reportContent: "Campaign"
+      reportContent: "Campaigns"
     }
     this.props.getBackOfficeReviewStatistics(data).then(()=> {
-      if(this.props.reviewData && this.props.reviewData.CampaignStatistics) {
+      if(this.props.reviewData && this.props.reviewData.CampaignsStatistics) {
         // success
       }
     });
@@ -37,10 +40,10 @@ class CampaignsPage extends Component {
   getBackOfficeReviewAdStatistics = () => {
     const data = {
       type: "get",
-      reportContent: "Ads"
+      reportContent: "Advertisement"
     }
     this.props.getBackOfficeReviewStatistics(data).then(()=> {
-      if(this.props.reviewData && this.props.reviewData.AdsStatistics) {
+      if(this.props.reviewData && this.props.reviewData.AdvertisementStatistics) {
         // success
       }
     });
@@ -57,7 +60,8 @@ class CampaignsPage extends Component {
   }
 
   renderCampaignList = () => {
-    const { campaignList } = this.state;
+    let { campaignList, form } = this.state;
+    campaignList = search(campaignList, "userName", form.search);
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
@@ -91,13 +95,22 @@ class CampaignsPage extends Component {
   
   handleReported = () => {}
 
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+
   render() {
     const { isLoading, reviewData } = this.props;
-    const { campaignList } = this.state;
+    let { campaignList, form } = this.state;
+    campaignList = search(campaignList, "userName", form.search);
+
     return (
       <div>
         <div className="padding-rl-10 middle-section margin-b-22">
-          <ReportedSearchBar />
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {campaignList && this.renderCampaignList()}
           {!campaignList && isLoading && <CampaignLoading />}
         </div>
@@ -105,18 +118,18 @@ class CampaignsPage extends Component {
           <RightSidebarStatistics 
             header={`Reported ${Translations.review_content_menu.campaigns}`} 
             handleEvent={this.handleReported} 
-            all={reviewData.CampaignStatistics? reviewData.CampaignStatistics.all : 0} 
-            outstanding={reviewData.CampaignStatistics? reviewData.CampaignStatistics.outstanding : 0}
-            processed={reviewData.CampaignStatistics? reviewData.CampaignStatistics.processed : 0} 
-            notProcessed={reviewData.CampaignStatistics? reviewData.CampaignStatistics.notProcessed : 0}
+            all={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.all : 0} 
+            outstanding={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.outstanding : 0}
+            processed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.processed : 0} 
+            notProcessed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.notProcessed : 0}
           />
           <RightSidebarStatistics 
             header={`Reported ${Translations.review_content_menu.ads}`} 
             handleEvent={this.handleReported} 
-            all={reviewData.AdsStatistics? reviewData.AdsStatistics.all : 0} 
-            outstanding={reviewData.AdsStatistics? reviewData.AdsStatistics.outstanding : 0}
-            processed={reviewData.AdsStatistics? reviewData.AdsStatistics.processed : 0} 
-            notProcessed={reviewData.AdsStatistics? reviewData.AdsStatistics.notProcessed : 0}
+            all={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.all : 0} 
+            outstanding={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.outstanding : 0}
+            processed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.processed : 0} 
+            notProcessed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.notProcessed : 0}
           />
       </div>
     </div>

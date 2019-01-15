@@ -194,8 +194,8 @@ const initialState = {
     Campaigns: null,
     Ads: null,
 
-    CampaignStatistics: null,
-    AdsStatistics: null,
+    CampaignsStatistics: null,
+    AdvertisementStatistics: null,
 
     isLoading: false,
     error: false
