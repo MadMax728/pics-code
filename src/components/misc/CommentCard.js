@@ -96,7 +96,6 @@ class CommentCard extends Component {
   handleEditComment = e => {
     const id = e.target.id;
     const { comments } = this.state;
-    console.log(comments);
     this.setState({
       updateForm: {
         ...this.state.updateForm,
@@ -308,8 +307,8 @@ class CommentCard extends Component {
           </div>
         </div>
         <div className="comment-content col-md-12 no-padding">
-          <div class="col-md-1" />
-          <div class="col-md-10">{this.renderEditComment(comment)}</div>
+          <div className="col-md-1" />
+          <div className="col-md-10">{this.renderEditComment(comment)}</div>
         </div>
       </div>
     );
