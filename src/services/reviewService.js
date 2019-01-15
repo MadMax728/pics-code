@@ -20,8 +20,8 @@ export const Ads = (payload, header = {}) =>
 
 // Get Reported Statistics
 export const getReviewStatistics = (payload, header = {}) =>
-  api(baseUrl, header).get("/reports/post-count?reportContent=" + payload.reportContent);
-
-
-//   CampaignStatistics
-// AdsStatistics
+  api(baseUrl, header).get(`/${payload.reportContent}/post-count`);
+  
+// Update BackOffice Review
+export const updateBackOfficeReview = (payload, header = {}) =>
+  api(baseUrl, header).put(`/${payload.reportContent}/update-status`, payload );

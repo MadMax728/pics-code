@@ -24,11 +24,23 @@ class CampaignCard extends Component {
   }
 
   handleLockContent = e => {
-    const data = {
-      typeId: e.target.id,
-      contentStatus: enumerations.reportType.lock,
-      reportContent: "Campaign"
-    };
+    const { isBudget } = this.props;
+    let data;
+    if (isBudget) {
+      data = {
+        id: e.target.id,
+        contentStatus: enumerations.reportType.lock,
+        reportContent: "Campaigns",
+        isBudget
+      };
+    }
+    else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: enumerations.reportType.lock,
+        reportContent: "Campaign"
+      };
+    }
     this.props.handleModalInfoDetailsCallbackShow(
       modalType.processed,
       data,
@@ -41,17 +53,36 @@ class CampaignCard extends Component {
   handleSetState = data => {
     clearInterval(this.timer);
     const { item } = this.state;
-    item.reportStatus = data.contentStatus;
+    const { isBudget } = this.props;
+    if (isBudget) {
+      item.contentStatus = data.contentStatus;
+    }
+    else {
+      item.reportStatus = data.contentStatus;
+    }
     this.setState({ item });
     this.props.handleRemove(item.id);
   };
 
   handleDoNotContent = e => {
-    const data = {
-      typeId: e.target.id,
-      contentStatus: enumerations.reportType.doNotLock,
-      reportContent: "Campaign"
-    };
+    const { isBudget } = this.props;
+    let data;
+
+    if  (isBudget) {
+      data = {
+        id: e.target.id,
+        contentStatus: enumerations.reportType.doNotLock,
+        reportContent: "Campaigns",
+        isBudget
+      };
+    }
+    else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: enumerations.reportType.doNotLock,
+        reportContent: "Campaign"
+      };
+    }
     this.props.handleModalInfoDetailsCallbackShow(
       modalType.processed,
       data,
@@ -62,11 +93,23 @@ class CampaignCard extends Component {
   };
 
   handleUnlockContent = e => {
-    const data = {
-      typeId: e.target.id,
-      contentStatus: enumerations.reportType.unLock,
-      reportContent: "Campaign"
-    };
+    const { isBudget } = this.props;
+    let data;
+    if (isBudget) {
+      data = {
+        id: e.target.id,
+        contentStatus: enumerations.reportType.unLock,
+        reportContent: "Campaigns",
+        isBudget
+      };
+    }
+    else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: enumerations.reportType.unLock,
+        reportContent: "Campaign"
+      };
+    }
     this.props.handleModalInfoDetailsCallbackShow(
       modalType.processed,
       data,
@@ -78,19 +121,23 @@ class CampaignCard extends Component {
 
   renderReportTips = id => {
     let reportTips;
-    const { isBackOffice } = this.props;
+    const { isBackOffice, isBudget } = this.props;
     const { item } = this.state;
     if (isBackOffice) {
       reportTips = [
         {
-          name:
-            item.reportStatus === enumerations.reportType.lock
+          name: isBudget? (item.contentStatus === enumerations.reportType.lock
+            ? Translations.tool_tips.unlock
+            : Translations.tool_tips.lock) :
+            (item.reportStatus === enumerations.reportType.lock
               ? Translations.tool_tips.unlock
-              : Translations.tool_tips.lock,
-          handleEvent:
-            item.reportStatus === enumerations.reportType.lock
+              : Translations.tool_tips.lock),
+          handleEvent: isBudget? (item.contentStatus === enumerations.reportType.lock
+            ? this.handleUnlockContent
+            : this.handleLockContent) :
+            (item.reportStatus === enumerations.reportType.lock
               ? this.handleUnlockContent
-              : this.handleLockContent
+              : this.handleLockContent)
         },
         {
           name: Translations.tool_tips.do_not,

@@ -6,7 +6,7 @@ import * as routes from "../../../../lib/constants/routes";
 const FavouriteCampaignItem = ({ campaign }) => {
   const profile_route = campaign.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${campaign.createdBy}`;
+    : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
 
   return (
     <div className="campaign_wrapper">

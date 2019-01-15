@@ -24,11 +24,23 @@ class AdCard extends Component {
   }
 
   handleLockContent = (e) => {
-    const data = {
-      typeId: e.target.id,
-      contentStatus: enumerations.reportType.lock,
-      reportContent: "Ads"
-    }    
+    const { isReview } = this.props;
+    let data;
+    if (isReview) {
+      data = {
+        id: e.target.id,
+        contentStatus: enumerations.reportType.lock,
+        reportContent: "Advertisement",
+        isReview
+      }
+    }
+    else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: enumerations.reportType.lock,
+        reportContent: "Ads"
+      }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
@@ -37,28 +49,61 @@ class AdCard extends Component {
   handleSetState = (data) => {
     clearInterval(this.timer);
     const { item } = this.state;
-    item.reportStatus = data.contentStatus;
+    const { isReview } = this.props;
+    if (isReview) {
+      item.contentStatus = data.contentStatus;
+    }
+    else {
+      item.reportStatus = data.contentStatus;
+    }
     this.setState({item});
     this.props.handleRemove(item.id)
   }
 
   handleDoNotContent = (e) => {
-    const data = {
-      typeId: e.target.id,
-      contentStatus: enumerations.reportType.doNotLock,
-      reportContent: "Ads"
-    }    
+    const { isReview } = this.props;
+    let data;
+
+    if (isReview) {
+      data = {
+        id: e.target.id,
+        contentStatus: enumerations.reportType.doNotLock,
+        reportContent: "Advertisement",
+        isReview
+      }
+    }
+    else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: enumerations.reportType.doNotLock,
+        reportContent: "Ads"
+      }    
+    }
+
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
   }
 
   handleUnlockContent= (e) => {
-    const data = {
-      typeId: e.target.id,
-      contentStatus: enumerations.reportType.unLock,
-      reportContent: "Ads"
-    }    
+    const { isReview } = this.props;
+    let data;
+
+    if (isReview) {
+      data = {
+        id: e.target.id,
+        contentStatus: enumerations.reportType.unLock,
+        reportContent: "Advertisement",
+        isReview
+      }
+    }
+    else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: enumerations.reportType.unLock,
+        reportContent: "Ads"
+      }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
@@ -66,14 +111,14 @@ class AdCard extends Component {
 
   renderReportTips = (id) => {
     let reportTips;
-    const { isBackOffice } = this.props;
+    const { isBackOffice, isReview } = this.props;
     const { item } = this.state;
 
     if (isBackOffice){
       reportTips = [
         {
-          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
-          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+          name: isReview? (item.contentStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock) : (item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock) ,
+          handleEvent: isReview? (item.contentStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent) : (item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent),
         },
         {
           name: Translations.tool_tips.do_not,

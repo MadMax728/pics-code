@@ -18,17 +18,16 @@ class CampaignsPage extends Component {
 
   componentDidMount = () => {
     this.getBackOfficeReview();
-    this.getBackOfficeReviewCampaignStatistics();
+    this.getBackOfficeReviewCampaignsStatistics();
     this.getBackOfficeReviewAdStatistics();
   };
   
-  getBackOfficeReviewCampaignStatistics = () => {
+  getBackOfficeReviewCampaignsStatistics = () => {
     const data = {
-      type: "get",
-      reportContent: "Campaign"
+      reportContent: "Campaigns"
     }
     this.props.getBackOfficeReviewStatistics(data).then(()=> {
-      if(this.props.reviewData && this.props.reviewData.CampaignStatistics) {
+      if(this.props.reviewData && this.props.reviewData.CampaignsStatistics) {
         // success
       }
     });
@@ -37,10 +36,10 @@ class CampaignsPage extends Component {
   getBackOfficeReviewAdStatistics = () => {
     const data = {
       type: "get",
-      reportContent: "Ads"
+      reportContent: "Advertisement"
     }
     this.props.getBackOfficeReviewStatistics(data).then(()=> {
-      if(this.props.reviewData && this.props.reviewData.AdsStatistics) {
+      if(this.props.reviewData && this.props.reviewData.AdvertisementStatistics) {
         // success
       }
     });
@@ -105,18 +104,18 @@ class CampaignsPage extends Component {
           <RightSidebarStatistics 
             header={`Reported ${Translations.review_content_menu.campaigns}`} 
             handleEvent={this.handleReported} 
-            all={reviewData.CampaignStatistics? reviewData.CampaignStatistics.all : 0} 
-            outstanding={reviewData.CampaignStatistics? reviewData.CampaignStatistics.outstanding : 0}
-            processed={reviewData.CampaignStatistics? reviewData.CampaignStatistics.processed : 0} 
-            notProcessed={reviewData.CampaignStatistics? reviewData.CampaignStatistics.notProcessed : 0}
+            all={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.all : 0} 
+            outstanding={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.outstanding : 0}
+            processed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.processed : 0} 
+            notProcessed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.notProcessed : 0}
           />
           <RightSidebarStatistics 
             header={`Reported ${Translations.review_content_menu.ads}`} 
             handleEvent={this.handleReported} 
-            all={reviewData.AdsStatistics? reviewData.AdsStatistics.all : 0} 
-            outstanding={reviewData.AdsStatistics? reviewData.AdsStatistics.outstanding : 0}
-            processed={reviewData.AdsStatistics? reviewData.AdsStatistics.processed : 0} 
-            notProcessed={reviewData.AdsStatistics? reviewData.AdsStatistics.notProcessed : 0}
+            all={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.all : 0} 
+            outstanding={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.outstanding : 0}
+            processed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.processed : 0} 
+            notProcessed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.notProcessed : 0}
           />
       </div>
     </div>

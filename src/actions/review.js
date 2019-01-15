@@ -84,3 +84,44 @@ export const getBackOfficeReviewStatistics = (prop) => {
     );
   };
 };
+
+//  Update Back Office Review
+const updateBackOfficeReviewStarted = () => ({
+  type: types.UPDATE_BACK_OFFICE_REVIEW_STARTED
+});
+
+const updateBackOfficeReviewSucceeded = (data, isFor) => ({
+  type: types.UPDATE_BACK_OFFICE_REVIEW_SUCCEEDED,
+  payload: data,
+  isFor
+});
+
+const updateBackOfficeReviewFailed = (error,isFor) => ({
+  type: types.UPDATE_BACK_OFFICE_REVIEW_FAILED,
+  payload: error,
+  error: true,
+  isFor
+});
+
+export const updateBackOfficeReview = (prop) => {
+  return dispatch => {
+    dispatch(updateBackOfficeReviewStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.adminAccessToken
+    };
+
+    return  reviewService.updateBackOfficeReview(prop, header).then(
+      res => {
+          dispatch(updateBackOfficeReviewSucceeded(res.data.data, prop.reportContent));
+      },
+      error => {
+        dispatch(updateBackOfficeReviewFailed(error.response, prop.reportContent))
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
