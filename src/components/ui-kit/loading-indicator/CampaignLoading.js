@@ -3,9 +3,9 @@ import * as images from "../../../lib/constants/images";
 import PropTypes from "prop-types";
 
 const CampaignLoading = ({ count }) => {
-  return Array(count).fill().map((item) => {
+  return Array(count).fill().map((item,index) => {
     return (
-      <div key={item} className="feed_wrapper">
+      <div key={index} className="feed_wrapper">
         <div className="feed_header">
           <div className="no-padding profile_image wid45">
             <span className="gray_box pro-image"></span>
