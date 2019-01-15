@@ -93,6 +93,7 @@ class CommentCard extends Component {
   handleEditComment = e => {
     const id = e.target.id;
     const { comments } = this.state;
+    console.log(comments);
     this.setState({
       updateForm: {
         ...this.state.updateForm,
