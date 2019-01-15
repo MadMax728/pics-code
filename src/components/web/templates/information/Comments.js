@@ -290,8 +290,8 @@ class Comments extends Component {
           </div>
         </div>
         <div className="comment-content col-md-12 no-padding">
-          <div className="col-md-1" />
-          <div className="col-md-10">{this.renderEditComment(comment)}</div>
+          {/* <div className="col-md-1" /> */}
+          <div className="col-md-11"><div className="comment-inner-wrap">{this.renderEditComment(comment)}</div></div>
         </div>
         {/* <div className="comment-content">
           <p>{comment.comment}</p>
@@ -336,7 +336,7 @@ class Comments extends Component {
                 className="img-circle img-responsive"
               />
             </div>
-            <div className="col-sm-7 col-xs-7 no-padding">
+            <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
               <div className="comment-input">
                 <div className="form-group">
                   <HashTagUsername
@@ -352,7 +352,7 @@ class Comments extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right">
+            <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right text-right">
               {/* <img src={images.emoji} alt="like" className="pull-right" /> */}
               <img
                 role="presentation"
