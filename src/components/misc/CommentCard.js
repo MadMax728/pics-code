@@ -243,7 +243,7 @@ class CommentCard extends Component {
                 />
               </div>
               <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-                <b>{comment.userName}</b> {DateFormat(comment.createdAt)}{" "}
+                <b>{comment.userName}</b> {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
                 <b>Reply</b>
               </div>
               <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
@@ -285,7 +285,7 @@ class CommentCard extends Component {
             />
           </div>
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {DateFormat(comment.createdAt)}{" "}
+            <b>{comment.userName}</b> {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
             <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
