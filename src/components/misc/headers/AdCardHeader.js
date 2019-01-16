@@ -18,7 +18,7 @@ const AdCardHeader = ({
 
   const profile_route = ad.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${ad.createdBy}`;
+    : `${routes.NEWS_FEED_ROUTE}/${ad.userName}`;
   const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
