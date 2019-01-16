@@ -9,6 +9,7 @@ import PropTypes from "prop-types";
 import { DateFormat } from "../../Factory";
 import { SelectLanguage } from "../../common";
 import { modalType } from "../../../lib/constants/enumerations";
+import CustomeTableLoader from "../../ui-kit/loading-indicator/CustomeTableLoader";
 
 class CMSManagementPage extends Component {
   constructor(props, context) {
@@ -213,6 +214,7 @@ class CMSManagementPage extends Component {
               handleSelect={this.handleSelect}
             />
           </div>
+          {/* <CustomeTableLoader /> */}
           {cmsManagement && this.renderCMSManagement()}
         </div>
       </div>

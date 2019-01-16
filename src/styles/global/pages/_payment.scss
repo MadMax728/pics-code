@@ -188,3 +188,20 @@
     }
   }
 }
+.action-confirmation-modal{
+  .modal-dialog{
+    .modal-content{
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+      .modal-body {
+          display: inline-block;
+          width: 100%;
+          .filled_button{
+            margin: 10px 0;
+            width: 100%;
+          }
+      }
+    }
+  }
+}
