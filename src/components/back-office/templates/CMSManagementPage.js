@@ -11,6 +11,7 @@ import { SelectLanguage } from "../../common";
 import { modalType } from "../../../lib/constants/enumerations";
 
 class CMSManagementPage extends Component {
+ 
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -50,10 +51,12 @@ class CMSManagementPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    const { cmsManagementData } = this.props;
+
     this.props.getCMSManagement("/cmspages").then(()=> {
-      if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
+      if(cmsManagementData && cmsManagementData.cmsManagement) {
         this.setState({
-          cmsManagement: this.props.cmsManagementData.cmsManagement
+          cmsManagement: cmsManagementData.cmsManagement
         })
       }
     });
@@ -180,7 +183,7 @@ class CMSManagementPage extends Component {
     this.setState({ language: selected });
     if (this.state.language !== selected)
     {
-      const url = selected === Translations.base_footer.language? `/cmspages` : `/cmspages?language=${selected}`;
+      const url = selected === Translations.base_footer.language? `` : `?language=${selected}`;
       this.props.getCMSManagement(url).then(()=> {
         if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
           this.setState({

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import { TextEditor } from "../../ui-kit/text-editor";
