@@ -1547,3 +1547,15 @@ section.loader-wrapr {
   border-radius: 50%;
   padding: 0 0px;
 }
+
+.feed_wrapper{
+  .feed_footer{
+    table{
+      thead{
+        th{
+          padding: 5px;
+        }
+      }
+    }
+  }
+}
