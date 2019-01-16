@@ -548,7 +548,7 @@ class PrivacyPage extends Component {
                   {this.state.change_email_form_error.current_email}
                 </span>
               </div>
-              <div className="form-group">
+              <div className="form-group new-email">
                 <label htmlFor="email">{Translations.privacy.New_Email}</label>
                 <span className="error-msg pull-right">
                   {
@@ -844,7 +844,7 @@ class PrivacyPage extends Component {
                   {Translations.privacy.Delete_search_history}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <div
+                  <div className="action-btns"
                     onClick={this.handleDeleteSearchHisory}
                     id={"delete_search_history"}
                     role="button"
@@ -860,7 +860,7 @@ class PrivacyPage extends Component {
                   {Translations.privacy.Deactivate_my_account}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <div
+                  <div className="action-btns"
                     onClick={this.handleDeactiveMyAccount}
                     id={"deactivate_account"}
                     role="button"

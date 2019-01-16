@@ -255,6 +255,7 @@
             }
           }
         }
+
         .active-chat {
           float: left;
           border-left: 1px solid #ddd;
@@ -338,6 +339,10 @@
           padding-bottom: 10px;
           height: 60px;
           background: #fff;
+          .emoji-mart{
+            bottom: 60px !important;
+            right: 40px !important;
+          }
           textarea {
             width: 90%;
             float: left;
