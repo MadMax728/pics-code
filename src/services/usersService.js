@@ -1,4 +1,5 @@
 import apiFactory, { api } from "../api";
+import { unblockUserRequestEndPoint, blockUserRequestEndPoint, acceptRequestEndPoint, getPendingUserListEndPoint, getUnsubscribeEndPoint, sendRequestEndPoint, getUserListCompanyEndPoint, getUserListLikeYouEndPoint, getUserListUnknownEndPoint, getUserListSubscriberEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -10,24 +11,24 @@ const apiAuth = apiFactory(baseUrl);
  * @param {*} payload
  */
 export const getUserList = (payload, type = "subscribed", header = {}) => {
-  let apiURL = "/messages/userlist?type=subscriber";
+  let apiURL = getUserListSubscriberEndPoint;
   let call = true;
   switch (type) {
     case "subscriber":
       call = true;
-      apiURL = "/messages/userlist?type=subscriber";
+      apiURL = getUserListSubscriberEndPoint;
       break;
     case "unknown":
       call = true;
-      apiURL = "/messages/userlist?type=unknown";
+      apiURL = getUserListUnknownEndPoint;
       break;
     case "likeYou":
       call = true;
-      apiURL = "/messages/userlist?type=likeYou";
+      apiURL = getUserListLikeYouEndPoint;
       break;
     case "company":
       call = true;
-      apiURL = "/messages/userlist?type=company";
+      apiURL = getUserListCompanyEndPoint;
       break;
   }
   return call
@@ -36,19 +37,19 @@ export const getUserList = (payload, type = "subscribed", header = {}) => {
 };
 
 export const sendRequest = (payload, header = {}) =>
-  api(baseUrl, header).post("/subscribe/send-request", payload);
+  api(baseUrl, header).post(sendRequestEndPoint, payload);
 
 export const getUnsubscribe = (payload, id, header = {}) =>
-  api(baseUrl, header).delete("/subscribe/" + id, payload);
+  api(baseUrl, header).delete( `${getUnsubscribeEndPoint}${id}`, payload);
 
 export const getPendingUserList = (payload, header = {}) =>
-  api(baseUrl, header).get("/subscribe");
+  api(baseUrl, header).get(getPendingUserListEndPoint);
 
 export const acceptRequest = (payload, header = {}) =>
-  api(baseUrl, header).put("/subscribe/accept-request", payload);
+  api(baseUrl, header).put(acceptRequestEndPoint, payload);
 
 export const blockUserRequest = (payload, header = {}) =>
-  api(baseUrl, header).put("/subscribe/block-request", payload);
+  api(baseUrl, header).put( blockUserRequestEndPoint, payload);
 
 export const unblockUserRequest = (payload, id, header = {}) =>
-  api(baseUrl, header).delete("/subscribe/" + id, payload);
+  api(baseUrl, header).delete(unblockUserRequestEndPoint + id, payload);

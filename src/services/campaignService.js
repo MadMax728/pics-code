@@ -35,7 +35,7 @@ export const getSettingsCampaigns = (payload, header = {}) =>
 
 // Campaign Type Creator and Company
 export const getCampaignType = (payload, header = {}) =>
-  api(baseUrl, header).post(getCampaignTypeEndPoint, payload);
+  api(baseUrl, header).get(`${getCampaignTypeEndPoint}${payload.userType}`);
 
 // Campaign Informatin API
 export const getCampaignDetails = (payload, header = {}) =>
