@@ -4,13 +4,14 @@ import { HashTag } from "../hash-tag";
 import { Username } from "../username";
 import { ToolTip } from "../../ui-kit";
 import ReactTooltip from "react-tooltip";
-import { findDOMNode } from "react-dom";
 import { getHashTag, addHashTag } from "../../../actions";
 import { connect } from "react-redux";
 
 class HashTagUsername extends Component {
   constructor(props) {
     super(props);
+    this.username = React.createRef();
+    this.hash_tag = React.createRef();
     this.state = { remainingLimitLength: 0, hashTagList: null };
   }
 
@@ -27,23 +28,19 @@ class HashTagUsername extends Component {
   };
 
   hashTagShow = () => {
-    /* eslint-disable */
-    ReactTooltip.show(findDOMNode(this.refs.hash_tag));
+    ReactTooltip.show(this.hash_tag);
   };
 
   hashTagHide = () => {
-    /* eslint-disable */
-    ReactTooltip.hide(findDOMNode(this.refs.hash_tag));
+    ReactTooltip.hide(this.hash_tag);
   };
 
   usernameShow = () => {
-    /* eslint-disable */
-    ReactTooltip.show(findDOMNode(this.refs.username));
+    ReactTooltip.show(this.username);
   };
 
   usernameHide = () => {
-    /* eslint-disable */
-    ReactTooltip.hide(findDOMNode(this.refs.username));
+    ReactTooltip.hide(this.username);
   };
 
   none = () => {};
@@ -51,7 +48,6 @@ class HashTagUsername extends Component {
   handleChangeField = e => {
     const commentArr = e.target.value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
-    /* eslint-disable */
     this.hashTagHide();
     this.usernameHide();
     if (lastText.charAt(0) === "#") {
@@ -65,16 +61,16 @@ class HashTagUsername extends Component {
   };
 
   handleLengthField = e => {
-    const commentText = e.target.value;
-
+    let commentText = e.target.value;
+    let limitField;
     const commentArr = e.target.value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
 
-    var keyCode = e.keyCode ? e.keyCode : e.which;
+    let keyCode = e.keyCode ? e.keyCode : e.which;
 
     if (lastText.charAt(0) === "#") {
       this.props.handleSetState(e.target.value, this.hashTagShow);
-      if (keyCode == 32) {
+      if (keyCode === 32) {
         this.handleAddHashTag(lastText);
       }
     }
@@ -175,13 +171,13 @@ class HashTagUsername extends Component {
           data-for="hash_tag"
           role="button"
           data-tip="tooltip"
-          ref="hash_tag"
+          ref={hash_tag => this.hash_tag = hash_tag}
         />
         <div
           data-for="username"
           role="button"
           data-tip="tooltip"
-          ref="username"
+          ref={username => this.username = username}
         />
         <ToolTip
           id="hash_tag"

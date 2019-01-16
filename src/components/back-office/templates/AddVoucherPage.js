@@ -270,7 +270,7 @@ class AddVoucherPage extends Component {
     ];
 
     return (
-      <div className="dashboard-tbl">
+      <div className="dashboard-tbl voucher-table">
             <CustomBootstrapTable
               data={voucherList}
               columns={columns}

@@ -51,7 +51,7 @@ class PaymentStepTwo extends Component {
           this.props.voucherData.voucherExpiryResult &&
           this.props.voucherData.voucherExpiryResult.amountList
         ) {
-          let maximumExpensenAmount = this.props.form.maximumExpenses
+          const maximumExpensenAmount = this.props.form.maximumExpenses
             ? this.props.form.maximumExpenses
             : this.props.form.budget;
 

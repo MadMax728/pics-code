@@ -24,9 +24,10 @@ class Community extends Component {
   };
 
   getUserData = () => {
-    this.props.getDashboard("users", "").then(() => {
-      if (this.props.usersList) {
-        this.setState({ usersList: this.props.usersList });
+    const { usersList, getDashboard} = this.props;
+    getDashboard("users", "").then(() => {
+      if (usersList) {
+        this.setState({ usersList });
       }
     });
   };
@@ -39,8 +40,9 @@ class Community extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     const data = { username: userInfo.username };
-    this.props.getUser(data).then(() => {
-      if (this.props.userDataByUsername.user.data) {
+    const { getUser, userDataByUsername } = this.props;
+    getUser(data).then(() => {
+      if (userDataByUsername.user.data) {
         // Success
       }
     });
@@ -49,33 +51,34 @@ class Community extends Component {
   handleSubscribed = e => {
     const errors = {};
     const { usersList } = this.state;
+    const { sendRequest, getUnsubscribe, usersData } = this.props;
     const selectedUserList = usersList.find(user => user.id === e.target.id);
     if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
-      this.props.sendRequest(requestData).then(() => {
+      sendRequest(requestData).then(() => {
         if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
+          usersData.error &&
+          usersData.error.status === 400
         ) {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (this.props.usersData.isRequestSend) {
+        } else if (usersData.isRequestSend) {
           this.getUserData();
           this.getUserInfo();
         }
       });
     } else {
       const subscribedId = selectedUserList.subscribeId;
-      this.props.getUnsubscribe(subscribedId).then(() => {
+      getUnsubscribe(subscribedId).then(() => {
         if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
+          usersData.error &&
+          usersData.error.status === 400
         ) {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (this.props.usersData.isUnsubscribed) {
+        } else if (usersData.isUnsubscribed) {
           this.getUserData();
           this.getUserInfo();
         }
@@ -84,19 +87,16 @@ class Community extends Component {
   };
 
   render() {
-    const { usersList } = this.state;
-    const { isLoading, isLoadingusers } = this.props;
-    console.log('isLoading', this.props);
-    
+    const { isLoading, isLoadingusers, usersList } = this.props;
     return (
       <div>
         <div className="normal_title padding-15">
           {Translations.profile_community_right_sidebar.community}
         </div>
         <div className="community">
-          {this.props.usersList &&
+          {usersList &&
             !isLoadingusers &&
-            this.props.usersList.map(user => {
+            usersList.map(user => {
               const profile_route = user.isOwner
                 ? `/news-feed`
                 : `/news-feed/${user.username}`;
@@ -114,7 +114,7 @@ class Community extends Component {
                   <div className="community-user-name">
                     <Link to={profile_route}>
                       <div className="normal_title">{user.username}</div>
-                      <div className="secondary_title">{"user.name"}</div>
+                      <div className="secondary_title">{user.name}</div>
                     </Link>
                   </div>
                   {user.isSubscribe ? (

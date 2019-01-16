@@ -13,7 +13,7 @@ const getMessagesListStarted = () => ({
 const getMessagesListSucceeded = (data, lastEvaluatedKeys = null) => ({
   type: types.GET_MESSAGES_SUCCEEDED,
   payload: data,
-  lastEvaluatedKeys: lastEvaluatedKeys
+  lastEvaluatedKeys
 });
 
 const getMessagesListFailed = error => ({

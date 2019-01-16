@@ -31,6 +31,7 @@ const InfoBootstrapModal = ({
       <Modal
         show={modalShow}
         onHide={handleModalHide}
+        backdrop={false}
         className={modalClassName}
       >
         {closeBtn && (
