@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
-import { Link } from "react-router-dom";
 import { ThreeDots, ReadMore } from "../../../ui-kit";
 import { RenderToolTips, HashTagUsername } from "../../../common";
 import { Translations } from "../../../../lib/translations";
@@ -20,7 +19,7 @@ class Comments extends Component {
   constructor(props, context) {
     super(props, context);
     let reportTips;
-    let comments = this.props.campaignComments;
+    this.commentForm = React.createRef();
     reportTips = [
       {
         name: Translations.tool_tips.edit,
@@ -85,8 +84,8 @@ class Comments extends Component {
       slicedCommentsData
     } = this.state;
     const data = {
-      comment: comment,
-      typeOfContent: typeOfContent,
+      comment,
+      typeOfContent,
       typeId: campaignId
     };
     this.props.addComment(data).then(() => {
@@ -213,7 +212,6 @@ class Comments extends Component {
     const { isLoading } = this.props;
     let html = (
       <ReadMore text={comment.comment} min={150} ideal={150} max={150} />
-      // <p>{comment.comment}</p>
     );
     if (comment.id === updateForm.id) {
       html = (
@@ -308,8 +306,7 @@ class Comments extends Component {
     e.preventDefault();
     if (this.state.form.comment !== "") {
       this.addComment(this.state.form.comment);
-      /* eslint-disable */
-      this.refs.commentForm.reset();
+      this.commentForm.current.reset();
       this.setState({
         form: { ...this.state.form, comment: "", currentComment: "" }
       });
@@ -320,15 +317,13 @@ class Comments extends Component {
     const {
       campaign,
       form,
-      comments,
-      slicedCommentsData,
       isEmoji
     } = this.state;
-    const { isLoading, isReport, totalCommentsCount } = this.props;
+    const { isReport } = this.props;
     return (
       <div className="feed-comment" id={campaign.id}>
         <div className="comment-wrapper">
-          <form onSubmit={this.handleSubmit} ref="commentForm">
+          <form onSubmit={this.handleSubmit} ref={this.commentForm}>
             <div className="no-padding profile_image">
               <img
                 src={images.image}
@@ -353,7 +348,6 @@ class Comments extends Component {
               </div>
             </div>
             <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right text-right">
-              {/* <img src={images.emoji} alt="like" className="pull-right" /> */}
               <img
                 role="presentation"
                 src={images.emoji}

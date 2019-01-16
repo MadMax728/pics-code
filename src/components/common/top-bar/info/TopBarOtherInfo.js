@@ -214,7 +214,7 @@ class TopBarOtherInfo extends Component {
     const username = this.props.userDataByUsername.user.data.username;
     if (username) {
       const data = {
-        username: username
+        username
       };
       this.getUserData(data);
     }

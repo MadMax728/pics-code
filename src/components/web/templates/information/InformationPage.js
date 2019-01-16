@@ -110,7 +110,7 @@ class InformationPage extends Component {
     campaignDetails.commentCount = commet
       ? campaignDetails.commentCount + 1
       : campaignDetails.commentCount - 1;
-    this.setState({ campaignDetails: campaignDetails });
+    this.setState({ campaignDetails });
   };
 
   handleCommentsSections = () => {

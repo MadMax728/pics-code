@@ -32,6 +32,7 @@ const CustomBootstrapModal = ({
         show={modalShow}
         onHide={handleModalHide}
         className={modalClassName}
+        backdrop={false}
       >
         {closeBtn && (
           <button onClick={handleModalHide} className={"closeBtn"}>

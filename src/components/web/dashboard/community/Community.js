@@ -27,7 +27,7 @@ class Community extends Component {
     const { usersList, getDashboard} = this.props;
     getDashboard("users", "").then(() => {
       if (usersList) {
-        this.setState({ usersList: usersList });
+        this.setState({ usersList });
       }
     });
   };
