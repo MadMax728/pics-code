@@ -5,6 +5,7 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { DateFormat } from "../../Factory";
+import { Translations } from "../../../lib/translations";
 
 const CampaignCardHeader = ({
   campaign,
@@ -43,7 +44,7 @@ const CampaignCardHeader = ({
         <div className="secondary_title">{campaign.location && campaign.location.address && campaign.location.address}</div>
         {campaign.category && (
           <div className="grey_title">
-            {DateFormat(campaign.createdAt)} in{" "}
+            {DateFormat(campaign.createdAt, Translations.date_format.time, true)} in{" "}
             {campaign.category[0].categoryName}
           </div>
         )}

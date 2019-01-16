@@ -71,7 +71,7 @@ class CMSManagementPage extends Component {
   recentFormatter  = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        {row.updatedAt && DateFormat(row.updatedAt)}
+        {row.updatedAt && DateFormat(row.updatedAt, Translations.date_format.time, true)}
       </div>
     );
   };
