@@ -5,12 +5,12 @@ import { getVerifications, getUnverifiedUsers, updateVerification } from "../../
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
-import { findDOMNode } from "react-dom";
 import { UsernameList } from "../../common";
 
 class AddVerificationPage extends Component {
   constructor(props, context) {
     super(props, context);
+    this.username = React.createRef();
     this.state = {
       verifications: null,
       form: {
@@ -220,13 +220,11 @@ class AddVerificationPage extends Component {
   };
 
   usernameShow = () => {
-    /* eslint-disable */
-    ReactTooltip.show(findDOMNode(this.refs.username));
+    ReactTooltip.show(this.username);
   };
 
   usernameHide = () => {
-    /* eslint-disable */
-    ReactTooltip.hide(findDOMNode(this.refs.username));
+    ReactTooltip.hide(this.username);
   };
 
   render() {
@@ -251,7 +249,7 @@ class AddVerificationPage extends Component {
               data-for="username"
               role="button"
               data-tip="tooltip"
-              ref="username"
+              ref={username => this.username = username}
             />
              <ToolTip
                 id="username"

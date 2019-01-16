@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
-import { Languages, RightAbout } from "./";
+import { RightAbout } from "./";
 import { FavouriteCampaigns } from "../../../components/web/campaigns";
 import { Community } from "../../../components/web/dashboard";
 import {

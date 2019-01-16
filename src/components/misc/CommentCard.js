@@ -20,6 +20,7 @@ import { Picker } from "emoji-mart";
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
+    this.commentForm = React.createRef();
     this.state = {
       item: this.props.item,
       comments: this.props.item,
@@ -385,8 +386,7 @@ class CommentCard extends Component {
     e.preventDefault();
     if (this.state.form.comment !== "") {
       this.addComment(this.state.form.comment);
-      /* eslint-disable */
-      this.refs.commentForm.reset();
+      this.commentForm.current.reset();
       this.setState({ form: { ...this.state.form, comment: "" } });
     }
   };
@@ -428,7 +428,7 @@ class CommentCard extends Component {
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
         {!isReport && (
           <div className="comment-wrapper">
-            <form onSubmit={this.handleSubmit} ref="commentForm">
+            <form onSubmit={this.handleSubmit} ref={this.commentForm}>
               <div className="no-padding profile_image">
                 <img
                   src={images.image}

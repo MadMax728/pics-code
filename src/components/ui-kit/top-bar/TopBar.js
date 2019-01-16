@@ -29,7 +29,7 @@ class TopBar extends Component {
     super(props);
     this.state = {
       blockId: this.props.items.blockId,
-      isReported: this.props.items.isReported ? true : false
+      isReported: !!this.props.items.isReported
     };
   }
 

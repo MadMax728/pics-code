@@ -6,11 +6,11 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { UsernameList } from "../../common";
 import ReactTooltip from "react-tooltip";
-import { findDOMNode } from "react-dom";
 
 class AddAdminPage extends Component {
   constructor(props, context) {
     super(props, context);
+    this.username = React.createRef();
     this.state = {
       admins: null,
       form: {
@@ -226,13 +226,11 @@ class AddAdminPage extends Component {
   };
 
   usernameShow = () => {
-    /* eslint-disable */
-    ReactTooltip.show(findDOMNode(this.refs.username));
+    ReactTooltip.show(this.username);
   };
 
   usernameHide = () => {
-    /* eslint-disable */
-    ReactTooltip.hide(findDOMNode(this.refs.username));
+    ReactTooltip.hide(this.username);
   };
   
   render() {
@@ -258,7 +256,7 @@ class AddAdminPage extends Component {
               data-for="username"
               role="button"
               data-tip="tooltip"
-              ref="username"
+              ref={username => this.username = username}
             />
              <ToolTip
                 id="username"
@@ -268,7 +266,7 @@ class AddAdminPage extends Component {
                 delayShow={0}
                 delayUpdate={0}
                 place={"bottom"}
-                border={true}
+                border
                 type={"light"}
               />
             <select
