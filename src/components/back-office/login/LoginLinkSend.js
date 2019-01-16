@@ -7,13 +7,6 @@ import { connect } from "react-redux";
 import InlineLoading from "../../ui-kit/loading-indicator/InlineLoading";
 
 class LoginLinkSend extends Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.generateOTP().then(() => {
-      if (this.props.loginData.user.success === true)
-        this.props.history.push(routes.LOGIN_PASSWORD_ROUTE);
-    });
-  };
   render() {
     const { isLoading } = this.props;
     return (
@@ -38,6 +31,15 @@ class LoginLinkSend extends Component {
       </div>
     );
   }
+  
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.generateOTP().then(() => {
+      if (this.props.loginData.user.success === true)
+        this.props.history.push(routes.LOGIN_PASSWORD_ROUTE);
+    });
+  };
+
 }
 
 const mapStateToProps = state => ({

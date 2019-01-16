@@ -1,18 +1,18 @@
 import { api } from "../api";
+import { hashTagsEndPoint, addHashTagEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
-
-// const api = apiFactory(baseUrl);
 
 /**
  *
  * @param {*} payload
  */
 
-// Username API
+// hashTags API
 export const hashTags = (payload, header = {}) =>
-  api(baseUrl, header).get("/hashtags");
+  api(baseUrl, header).get(hashTagsEndPoint);
 
+// add hashTags API
 export const addHashTag = (payload, header = {}) =>
-  api(baseUrl, header).post("/hashtags", payload);
+  api(baseUrl, header).post(addHashTagEndPoint, payload);

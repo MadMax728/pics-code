@@ -1,4 +1,5 @@
 import { api } from "../api";
+import { uploadMediaVideoEndPoint, uploadMediaImageEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -14,9 +15,9 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 export const uploadMediaImage = (
   payload,
   header = { "Content-Type": "multipart/form-data" }
-) => api(baseUrl, header).post("/images/profile", payload);
+) => api(baseUrl, header).post(uploadMediaImageEndPoint, payload);
 
 export const uploadMediaVideo = (
   payload,
   header = { "Content-Type": "multipart/form-data" }
-) => api(baseUrl, header).post("/videos", payload);
+) => api(baseUrl, header).post(uploadMediaVideoEndPoint, payload);
