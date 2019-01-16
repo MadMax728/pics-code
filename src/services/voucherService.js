@@ -1,4 +1,5 @@
 import { api } from "../api";
+import { addVoucherEndPoint, getVouchersEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -11,11 +12,11 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // BackOffice Dashboard API
 export const getVouchers = (payload, header = {}) =>
-  api(baseUrl, header).get("/vouchers/?type=voucherLists");
+  api(baseUrl, header).get(getVouchersEndPoint);
 
 // BackOffice Dashboard API
 export const addVoucher = (payload, header = {}) =>
-  api(baseUrl, header).post("/vouchers", payload);
+  api(baseUrl, header).post(addVoucherEndPoint, payload);
 
 // Admin - Campeign / Ads - Redeem Functionality
 export const checkVoucherExpiry = (payload, header = {}) =>

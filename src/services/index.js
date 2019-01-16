@@ -3,7 +3,6 @@ export * from "./campaignService";
 export * from "./dashboardService";
 export * from "./settingsService";
 export * from "./likeService";
-export * from "./exploreService";
 export * from "./commentService";
 export * from "./adService";
 export * from "./tagService";

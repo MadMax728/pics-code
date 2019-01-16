@@ -1,4 +1,5 @@
 import { api } from "../api";
+import { getMessagesEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -13,4 +14,4 @@ function queryParams(payload = {}) {
 
 // Get messages
 export const getMessages = (payload, header = {}) =>
-  api(baseUrl, header).get(`/messages?${queryParams(payload)}`);
+  api(baseUrl, header).get(`${getMessagesEndPoint}${queryParams(payload)}`);

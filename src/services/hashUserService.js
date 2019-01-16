@@ -1,9 +1,8 @@
 import { api } from "../api";
+import { usernamesEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
-
-// const api = apiFactory(baseUrl);
 
 /**
  *
@@ -12,6 +11,6 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // Username API
 export const usernames = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/get-all-users");
+  api(baseUrl, header).post(usernamesEndPoint);
 
   
