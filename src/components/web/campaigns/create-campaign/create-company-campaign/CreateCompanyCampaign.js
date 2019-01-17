@@ -79,6 +79,7 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               handleContentChange={handleContentChange}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -88,6 +89,7 @@ class CreateCompanyCampaign extends Component {
               form={form}
               handleDate={handleDate}
               handleSelect={handleSelect}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -97,6 +99,7 @@ class CreateCompanyCampaign extends Component {
               forThat={forThat}
               form={form}
               handleChangeField={handleChangeField}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -108,6 +111,7 @@ class CreateCompanyCampaign extends Component {
               form={form}
               handleSubmit={handleSubmit}
               setVoucherData={setVoucherData}
+              userInfo={userInfo}
             />
           ))}
       </div>
