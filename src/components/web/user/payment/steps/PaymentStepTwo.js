@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
 import LazyLoad from "react-lazyload";
-import { Loader } from "../../../../ui-kit";
+import { Loader, InlineLoading } from "../../../../ui-kit";
 
 class PaymentStepTwo extends Component {
   constructor(props) {
@@ -94,8 +94,10 @@ class PaymentStepTwo extends Component {
   };
 
   render() {
-    const { handleChangeField, form, isLoading } = this.props;
+    const { handleChangeField, form } = this.props;
     const redeemLoading = this.props.voucherData.isLoading;
+    const campeignCommitToBuyLoading = this.props.campaignData.isLoading;
+    const adCommitToBuyLoading = this.props.adData.isLoading;
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
@@ -198,6 +200,8 @@ class PaymentStepTwo extends Component {
             </button>
           </div>
           {redeemLoading && <Loader />}
+          {campeignCommitToBuyLoading && <InlineLoading />}
+          {adCommitToBuyLoading && <InlineLoading />}
         </div>
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
@@ -257,7 +261,9 @@ class PaymentStepTwo extends Component {
 }
 
 const mapStateToProps = state => ({
-  voucherData: state.voucherData
+  voucherData: state.voucherData,
+  campaignData: state.campaignData,
+  adData: state.adData
 });
 
 const mapDispatchToProps = {
@@ -274,7 +280,9 @@ PaymentStepTwo.propTypes = {
   voucherData: PropTypes.any,
   forThat: PropTypes.any,
   setVoucherData: PropTypes.func,
-  isLoading: PropTypes.any
+  isLoading: PropTypes.any,
+  campaignData: PropTypes.any,
+  adData: PropTypes.any
 };
 
 export default connect(
