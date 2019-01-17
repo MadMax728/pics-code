@@ -2,16 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsRoot extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
     if (this.props.searchData.searchKeyword) {
       this.props.getSearch("");
     }
@@ -104,7 +101,7 @@ class NewsRoot extends Component {
   render() {
     const { newsFeedList, isLoadingnews } = this.props;
     return (
-      <div className={"middle-section padding-rl-10"}>
+      <div className={"middle-section padding-rl-10"}> <NoDataFoundCenterPage/>
         {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
         {isLoadingnews && <CampaignLoading />}
       </div>

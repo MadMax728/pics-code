@@ -49,6 +49,7 @@ class CreateAds extends Component {
             handleDate={handleDate}
             form={form}
             handleSelect={handleSelect}
+            userInfo={userInfo}
           />
         )}
         {stepIndex === 2 && (
@@ -57,6 +58,7 @@ class CreateAds extends Component {
             handleChangeField={handleChangeField}
             form={form}
             handleAddress={handleAddress}
+            userInfo={userInfo}
           />
         )}
         {stepIndex === 3 && (
@@ -67,6 +69,7 @@ class CreateAds extends Component {
             handleChangeField={handleChangeField}
             handleSubmit={handleSubmit}
             setVoucherData={setVoucherData}
+            userInfo={userInfo}
           />
         )}
       </div>

@@ -10,7 +10,7 @@ import {
   getUser
 } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
-import { RightSidebarLoading } from "../../../ui-kit";
+import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
 
 class Community extends Component {
   constructor(props, context) {
@@ -90,6 +90,7 @@ class Community extends Component {
     const { isLoading, isLoadingusers, usersList } = this.props;
     return (
       <div>
+        <NoDataFoundRightSidebar/>
         <div className="normal_title padding-15">
           {Translations.profile_community_right_sidebar.community}
         </div>

@@ -73,7 +73,7 @@ export const activateBusinessProfileEndPoint = "/users/activate-business-profile
 export const getBillsEndPoint = "/users/get-bills";
 export const getDownloadDataEndPoint = "/users/download-data";
 
-// reported content serivec
+// reported content service
 export const updateBackOfficeReportEndPoint = "/reports";
 export const addReportEndPoint = "/reports";
 export const getReportedStatisticsEndPoint = "/reports/post-count?reportContent=";

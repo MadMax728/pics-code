@@ -60,16 +60,25 @@ class DashboardPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getBackOfficeDashboard().then(() => {
-      if (this.props.backOfficeDashboardData && this.props.backOfficeDashboardData.backOfficeDashboard) {
-        this.setState({
-          key_statistics: this.props.backOfficeDashboardData.backOfficeDashboard.key_statistics,
-          content_statistics: this.props.backOfficeDashboardData.backOfficeDashboard.content_statistics,
-          campaign_statistics_company: this.props.backOfficeDashboardData.backOfficeDashboard.campaign_statistics_company,
-          ads_statisitcs: this.props.backOfficeDashboardData.backOfficeDashboard.ads_statisitcs
-        })
-      }
-    });
+    // this.props.getBackOfficeDashboard().then(()=> {
+    //   if(this.props.backOfficeDashboardData && this.props.backOfficeDashboardData.backOfficeDashboard) {
+    //     this.setState({
+    //       key_statistics: this.props.backOfficeDashboardData.backOfficeDashboard.key_statistics,
+    //       content_statistics: this.props.backOfficeDashboardData.backOfficeDashboard. content_statistics,
+    //       campaign_statistics_company: this.props.backOfficeDashboardData.backOfficeDashboard.campaign_statistics_company,
+    //       ads_statisitcs: this.props.backOfficeDashboardData.backOfficeDashboard.ads_statisitcs
+    //     })
+    //   }
+    // });
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
   };
 
   renderKeyStatistics = () => {
@@ -426,7 +435,8 @@ class DashboardPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  backOfficeDashboardData: state.backOfficeDashboardData
+  backOfficeDashboardData: state.backOfficeDashboardData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -436,6 +446,8 @@ const mapDispatchToProps = {
 DashboardPage.propTypes = {
   getBackOfficeDashboard: PropTypes.func.isRequired,
   backOfficeDashboardData: PropTypes.object,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(
