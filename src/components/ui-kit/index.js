@@ -5,6 +5,7 @@ export {
   UserPicLoading,
   Loader,
   RightSidebarLoading,
+  CustomeTableLoader
 } from "./loading-indicator";
 export { LeftSidebarNav } from "./nav-menu";
 export { TopBar } from "./top-bar";

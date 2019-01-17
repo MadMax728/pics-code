@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getVerifications, getUnverifiedUsers, updateVerification } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
 import { UsernameList } from "../../common";
+import * as routes from "../../../lib/constants/routes";
+
 
 class AddVerificationPage extends Component {
   constructor(props, context) {
@@ -19,6 +21,15 @@ class AddVerificationPage extends Component {
       }
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -229,6 +240,7 @@ class AddVerificationPage extends Component {
 
   render() {
     const { verifications, form } = this.state;
+    const { verificationData } = this.props;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -267,6 +279,7 @@ class AddVerificationPage extends Component {
             </button>
           </div>
           {verifications && this.renderVerifications()}
+          {verificationData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );
@@ -275,7 +288,8 @@ class AddVerificationPage extends Component {
 
 const mapStateToProps = state => ({
   verificationData: state.verificationData,
-  usersList: state.verificationData.unverifiedUsers
+  usersList: state.verificationData.unverifiedUsers,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -289,7 +303,9 @@ AddVerificationPage.propTypes = {
   verificationData: PropTypes.object,
   getUnverifiedUsers: PropTypes.func,
   updateVerification: PropTypes.func,
-  usersList: PropTypes.any
+  usersList: PropTypes.any,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(

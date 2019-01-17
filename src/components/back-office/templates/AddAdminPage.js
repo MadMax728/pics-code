@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getAdmins, updateAdmin, getHashUser } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { UsernameList } from "../../common";
 import ReactTooltip from "react-tooltip";
+import * as routes from "../../../lib/constants/routes";
 
 class AddAdminPage extends Component {
   constructor(props, context) {
@@ -20,6 +21,15 @@ class AddAdminPage extends Component {
       }
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -235,6 +245,7 @@ class AddAdminPage extends Component {
   
   render() {
     const { admins, form } = this.state;
+    const { adminData } = this.props;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -285,6 +296,7 @@ class AddAdminPage extends Component {
             </button>
           </div>
           {admins && this.renderAdmins()}
+          {adminData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );
@@ -295,6 +307,7 @@ class AddAdminPage extends Component {
 const mapStateToProps = state => ({
   adminData: state.adminData,
   usersList: state.hashUserData.usernames,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -309,6 +322,8 @@ AddAdminPage.propTypes = {
   adminData: PropTypes.object,
   getHashUser: PropTypes.func,
   usersList: PropTypes.any,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(

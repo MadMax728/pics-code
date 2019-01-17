@@ -24,6 +24,94 @@ class CreateCMSManagementPage extends Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
+  componentDidMount = () => {
+    const isEdit =
+    !!(this.props.match && this.props.match.params.id);
+    this.setState({ isEdit });
+    if (isEdit) {
+      this.props.getCMSDetail(this.props.match.params.id).then(() => {
+        if (
+          this.props.cmsManagementData &&
+          this.props.cmsManagementData.cmsDetail
+        ) {
+          this.setState({
+            form: {
+              ...this.state.form,
+              id: this.props.cmsManagementData.cmsDetail.id,
+              title: this.props.cmsManagementData.cmsDetail.title,
+              url: this.props.cmsManagementData.cmsDetail.url,
+              language: this.props.cmsManagementData.cmsDetail.pageLanguage,
+              display_page: this.props.cmsManagementData.cmsDetail.displayPage,
+              description: this.props.cmsManagementData.cmsDetail.description
+            }
+          });
+        }
+      });
+    }
+  };
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  };
+
+  validationForm = () => {
+    const { form } = this.state;
+    return form.title && form.pageLanguage && form.url && form.description;
+  }
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    const { form, isEdit } = this.state;
+    if (this.validationForm()) {
+      if (isEdit) {
+        const data = {
+          id: form.id,
+          url: form.url,
+          description: form.description,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
+          title: form.title
+        };
+        this.props.updateCMS(data).then(() => {
+          this.props.history.goBack();
+        });
+      } else {
+        const data = {
+          url: form.url,
+          description: form.description,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
+          title: form.title
+        };
+        this.props.createCMS(data).then(() => {
+          this.props.history.goBack();
+        });
+      }
+    }
+  };
+
+  handleContentChange = text => {
+    const { form } = this.state;
+    form.description = text === "<p></p>" ? "" : text;
+    this.setState({ form });
+  };
+
+  handlePreview = () => {
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview,this.state.form);
+  }
+
   render() {
     const { form, isEdit } = this.state;
     return (
@@ -196,7 +284,8 @@ class CreateCMSManagementPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  cmsManagementData: state.cmsManagementData
+  cmsManagementData: state.cmsManagementData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -212,7 +301,8 @@ CreateCMSManagementPage.propTypes = {
   handleModalInfoDetailsShow: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
   match: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  searchData: PropTypes.any
 };
 
 export default connect(

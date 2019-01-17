@@ -560,7 +560,8 @@
 
   "filter": {
     "reset_filter": "Reset filters",
-    "apply": "Apply"
+    "apply": "Apply",
+    "back": "Back"
   },
 
   "languages": {

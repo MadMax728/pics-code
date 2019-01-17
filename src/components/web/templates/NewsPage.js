@@ -13,9 +13,6 @@ class NewsRoot extends Component {
       this.props.getSearch("");
     }
     if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (this.props.searchData.searchKeyword) {
       this.props.getDashboard(
         "news",
         "?isSearch=" + this.props.searchData.searchKeyword

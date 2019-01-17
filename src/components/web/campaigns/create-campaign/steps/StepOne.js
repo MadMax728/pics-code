@@ -58,7 +58,7 @@ class StepOne extends Component {
               </label>
               <input
                 type="text"
-                value={form.title? form.title : ""}
+                value={form.title && form.title? form.title : ""}
                 name="title"
                 onChange={handleChangeField}
               />

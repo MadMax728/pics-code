@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable } from "../../ui-kit";
+import { CustomBootstrapTable, CustomeTableLoader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getVouchers, addVoucher } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { SelectPeriod, SelectAmount, SelectType, SelectNumber } from "../../common";
+import * as routes from "../../../lib/constants/routes";
 
 class AddVoucherPage extends Component {
   constructor(props, context) {
@@ -22,8 +23,18 @@ class AddVoucherPage extends Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  }
+
   render() {
     const { voucherList } = this.state;
+    const { voucherData } = this.props;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -31,6 +42,7 @@ class AddVoucherPage extends Component {
             {Translations.admin.Add_voucher_code}
           </div>
           {voucherList && this.renderVouchers()}
+          {voucherData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );
@@ -302,11 +314,11 @@ class AddVoucherPage extends Component {
     )
   }
 
-
 }
 
 const mapStateToProps = state => ({
-  voucherData: state.voucherData
+  voucherData: state.voucherData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -318,6 +330,8 @@ AddVoucherPage.propTypes = {
   getVouchers: PropTypes.func.isRequired,
   addVoucher: PropTypes.func.isRequired,
   voucherData: PropTypes.object,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(
