@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../../lib/constants/images";
+import * as images from "/../../lib/constants/images";
 
 const CampaignDetailsCard = ({ 
     campaignDetails,
@@ -17,6 +17,7 @@ const favorite_icon = campaignDetails.isSelfLike
 
 CampaignDetailsCard.propTypes = {
     campaignDetails: PropTypes.any,
+    isComments: PropTypes.bool
 };
 
 export default CampaignDetailsCard;
