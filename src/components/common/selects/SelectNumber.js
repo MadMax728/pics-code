@@ -12,24 +12,6 @@ class SelectNumber extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({numberList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getBackofficeSelect("numbers").then(() => {
-      if(this.props.numberList){
-        this.setState({
-          numberList: this.props.numberList
-        });
-      }
-    });
-  }
-  
-  handleNumber = (event) => {
-    this.props.handleSelect("number",event.target.value);
-  }
-  
   render() {
     const { numberList } = this.state;
     const { value, className } = this.props;
@@ -51,6 +33,25 @@ class SelectNumber extends Component {
       </select>
     );
   }
+  
+  componentDidMount = () => {
+    this.props.getBackofficeSelect("numbers").then(() => {
+      if(this.props.numberList){
+        this.setState({
+          numberList: this.props.numberList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({numberList: []});
+  }
+  
+  handleNumber = (event) => {
+    this.props.handleSelect("number",event.target.value);
+  }
+  
 }
 
 const mapStateToProps = state => ({

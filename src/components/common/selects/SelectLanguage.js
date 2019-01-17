@@ -23,23 +23,8 @@ class SelectLanguage extends Component {
     };
   }
 
-  componentWillUnmount = () => {
-    this.setState({ languageList: [] });
-  };
-
   componentWillMount = () => {
     this.props.getLanguage(languageData);
-  };
-  componentDidMount = () => {
-    if (this.props.languageList && this.props.languageList.languages) {
-      this.setState({
-        languageList: this.props.languageList.languages
-      });
-    }
-  };
-
-  handleLanguage = event => {
-    this.props.handleSelect("language", event.target.value);
   };
 
   render() {
@@ -63,6 +48,23 @@ class SelectLanguage extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    if (this.props.languageList && this.props.languageList.languages) {
+      this.setState({
+        languageList: this.props.languageList.languages
+      });
+    }
+  };
+
+  componentWillUnmount = () => {
+    this.setState({ languageList: [] });
+  };
+
+  handleLanguage = event => {
+    this.props.handleSelect("language", event.target.value);
+  };
+
 }
 
 const mapStateToProps = state => ({

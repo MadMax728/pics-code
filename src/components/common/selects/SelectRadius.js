@@ -12,24 +12,6 @@ class SelectRadius extends Component {
     };
   }
 
-  componentWillUnmount = () => {
-    this.setState({ radiusList: [] });
-  };
-
-  componentDidMount = () => {
-    this.props.getSelect("radius").then(() => {
-      if (this.props.radiusList && this.props.radiusList) {
-        this.setState({
-          radiusList: this.props.radiusList
-        });
-      }
-    });
-  };
-
-  handleRadius = event => {
-    this.props.handleSelect("radius", event.target.value);
-  };
-
   render() {
     const { radiusList } = this.state;
     const { value, className } = this.props;
@@ -51,6 +33,25 @@ class SelectRadius extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("radius").then(() => {
+      if (this.props.radiusList && this.props.radiusList) {
+        this.setState({
+          radiusList: this.props.radiusList
+        });
+      }
+    });
+  };
+
+  componentWillUnmount = () => {
+    this.setState({ radiusList: [] });
+  };
+
+  handleRadius = event => {
+    this.props.handleSelect("radius", event.target.value);
+  };
+
 }
 
 const mapStateToProps = state => ({

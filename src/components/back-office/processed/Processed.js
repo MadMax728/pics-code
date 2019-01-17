@@ -5,28 +5,7 @@ import { updateBackOfficeReport, updateBackOfficeReview } from "../../../actions
 import { connect } from "react-redux";
 
 class Processed extends Component {
-  onKeyDown = () => {};
-
-  handleProcessed = () => {
-    const { modalInfo } = this.props;
-    if (modalInfo.isBudget || modalInfo.isReview) {
-      this.props.updateBackOfficeReview(modalInfo).then(()=> {
-        if(this.props.reviewData && !this.props.reviewData.error) {
-          this.props.statusCallback();
-          this.props.handleModalInfoHide();
-        }
-      });
-    }
-    else {
-      this.props.updateBackOfficeReport(modalInfo).then(()=> {
-        if(this.props.reportedContentData && !this.props.reportedContentData.error) {
-          this.props.statusCallback();
-          this.props.handleModalInfoHide();
-        }
-      });
-    }
-  }
-
+  
   render() {
     const { handleModalInfoHide } = this.props;
     return (
@@ -54,6 +33,28 @@ class Processed extends Component {
         </div>
       </div>
     );
+  }
+
+  onKeyDown = () => {};
+
+  handleProcessed = () => {
+    const { modalInfo } = this.props;
+    if (modalInfo.isBudget || modalInfo.isReview) {
+      this.props.updateBackOfficeReview(modalInfo).then(()=> {
+        if(this.props.reviewData && !this.props.reviewData.error) {
+          this.props.statusCallback();
+          this.props.handleModalInfoHide();
+        }
+      });
+    }
+    else {
+      this.props.updateBackOfficeReport(modalInfo).then(()=> {
+        if(this.props.reportedContentData && !this.props.reportedContentData.error) {
+          this.props.statusCallback();
+          this.props.handleModalInfoHide();
+        }
+      });
+    }
   }
 }
 

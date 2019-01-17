@@ -10,14 +10,8 @@ import {
   SideBarReportedContentMenu
 } from "../menu";
 import { ReviewFilter, ReportedContentFilter } from "../filters";
-class LeftSideBarBackOffice extends Component {
-  handleReportedContentFilter = () => {
-    return <ReportedContentFilter handleApplyClick={this.props.getFilter} />;
-  };
 
-  handleReviewFilter = () => {
-    return <ReviewFilter handleApplyClick={this.props.getFilter} />;
-  };
+class LeftSideBarBackOffice extends Component {
 
   render() {
     return (
@@ -41,9 +35,9 @@ class LeftSideBarBackOffice extends Component {
         />
 
         <Route
-            path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
-            exact
-            component={SideBarBackOffice}
+          path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
+          exact
+          component={SideBarBackOffice}
         />
 
         <Route
@@ -232,6 +226,15 @@ class LeftSideBarBackOffice extends Component {
       </div>
     );
   }
+
+  handleReportedContentFilter = () => {
+    return <ReportedContentFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleReviewFilter = () => {
+    return <ReviewFilter handleApplyClick={this.props.getFilter} />;
+  };
+
 }
 
 LeftSideBarBackOffice.propTypes = {

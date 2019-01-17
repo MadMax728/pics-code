@@ -21,30 +21,6 @@ import {
 } from "../menu";
 
 class LeftSideBar extends Component {
-  handleDashboardFilter = () => {
-    return <DashboardFilter handleApplyClick={this.props.getFilter} />;
-  };
-
-  handleCampaignCompanyFilter = () => {
-    return <CampaignCompanyFilter handleApplyClick={this.props.getFilter} />;
-  };
-
-  handleCampaignCreatorFilter = () => {
-    return <CampaignCreatorFilter handleApplyClick={this.props.getFilter} />;
-  };
-
-  handleParticipantsFilter = () => {
-    return <ParticipantsFilter handleApplyClick={this.props.getFilter} />;
-  };
-
-  renderInformationService = () => {
-    return (
-      <div>
-        <SideBarInformation />
-        <SideBarService />
-      </div>
-    );
-  };
 
   render() {
     return (
@@ -311,6 +287,32 @@ class LeftSideBar extends Component {
       </div>
     );
   }
+
+  handleDashboardFilter = () => {
+    return <DashboardFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleCampaignCompanyFilter = () => {
+    return <CampaignCompanyFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleCampaignCreatorFilter = () => {
+    return <CampaignCreatorFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleParticipantsFilter = () => {
+    return <ParticipantsFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  renderInformationService = () => {
+    return (
+      <div>
+        <SideBarInformation />
+        <SideBarService />
+      </div>
+    );
+  };
+
 }
 
 LeftSideBar.propTypes = {

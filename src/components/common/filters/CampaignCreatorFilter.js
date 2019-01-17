@@ -61,34 +61,6 @@ class CampaignCreatorFilter extends Component {
     };
   }
 
-  handleResetFilterClick = () => {
-    this.setState({ filterApply: false });
-  };
-
-  handleApplyClick = () => {
-    this.setState({ filterApply: true });
-    this.props.handleApplyClick(this.state.filData);
-  };
-
-  handleOnChange = filterData => {
-    this.setState({ filData: filterData });
-  };
-
-  handleSelect = filterData => {
-    this.setState({ filData: filterData });
-  };
-
-  handleLanguageSwitch = languageCode => {
-    // set cookie for default language
-    setCookie("interfaceLanguage", languageCode, 90);
-    // set language using language code
-    Translations.setLanguage(languageCode || "en");
-    // we need to update state to re render this component on language switch
-    this.setState({
-      currentLanguage: Translations.getLanguage()
-    });
-  };
-
   render() {
     const Filters = [
       {
@@ -170,14 +142,42 @@ class CampaignCreatorFilter extends Component {
               {Translations.filter.reset_filter}
             </button>
           ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
+              <button className="black_button" onClick={this.handleApplyClick}>
+                {Translations.filter.apply}
+              </button>
+            )}
         </div>
       </div>
     );
   }
+
+  handleResetFilterClick = () => {
+    this.setState({ filterApply: false });
+  };
+
+  handleApplyClick = () => {
+    this.setState({ filterApply: true });
+    this.props.handleApplyClick(this.state.filData);
+  };
+
+  handleOnChange = filterData => {
+    this.setState({ filData: filterData });
+  };
+
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
+  handleLanguageSwitch = languageCode => {
+    // set cookie for default language
+    setCookie("interfaceLanguage", languageCode, 90);
+    // set language using language code
+    Translations.setLanguage(languageCode || "en");
+    // we need to update state to re render this component on language switch
+    this.setState({
+      currentLanguage: Translations.getLanguage()
+    });
+  };
 }
 
 CampaignCreatorFilter.propTypes = {
