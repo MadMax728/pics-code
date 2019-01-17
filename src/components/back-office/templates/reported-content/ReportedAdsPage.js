@@ -7,7 +7,7 @@ import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { AdCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
-import { search } from "../.../../../../../lib/utils/helpers";
+import { search } from "../../../../lib/utils/helpers";
 
 class ReportedAdsPage extends Component {
   constructor(props, context) {

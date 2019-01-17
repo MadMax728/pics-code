@@ -12,24 +12,6 @@ class SelectCallToActions extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({callToActionList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getSelect("callToActions").then(() => {
-      if(this.props.callToActionList){
-        this.setState({
-          callToActionList: this.props.callToActionList
-        });
-      }
-    });
-  }
-  
-  handleCallToActions = (event) => {
-    this.props.handleSelect("callToAction",event.target.value);
-  }
-  
   render() {
     const { callToActionList } = this.state;
     const { value, className } = this.props;
@@ -50,6 +32,27 @@ class SelectCallToActions extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("callToActions").then(() => {
+      if (this.props.callToActionList) {
+        this.setState({
+          callToActionList: this.props.callToActionList
+        });
+      }
+    });
+  }
+
+
+  componentWillUnmount = () => {
+    this.setState({ callToActionList: [] });
+  }
+
+  handleCallToActions = (event) => {
+    this.props.handleSelect("callToAction", event.target.value);
+  }
+
+
 }
 
 const mapStateToProps = state => ({

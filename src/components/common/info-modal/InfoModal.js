@@ -22,6 +22,14 @@ class InfoModal extends Component {
     this.state = {};
   }
 
+  render() {
+    return (
+      <div>
+        <Route path={routes.ROOT_ROUTE} render={this.handleModalRender} />
+      </div>
+    );
+  }
+
   handleModalContentView = () => {
     return (
       <ContentViewModal
@@ -108,7 +116,7 @@ class InfoModal extends Component {
     );
   };
 
-  handleModalCMSPreview = () => {    
+  handleModalCMSPreview = () => {
     return (
       <CMSPreviewModal
         modalInfoShow={this.props.modalInfoShow}
@@ -143,13 +151,6 @@ class InfoModal extends Component {
     );
   };
 
-  render() {
-    return (
-      <div>
-        <Route path={routes.ROOT_ROUTE} render={this.handleModalRender} />
-      </div>
-    );
-  }
 }
 
 InfoModal.propTypes = {

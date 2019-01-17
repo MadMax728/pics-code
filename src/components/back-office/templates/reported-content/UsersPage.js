@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { UserCard } from "../../../misc";
 import { Translations } from "../../../../lib/translations";
-import { search } from "../.../../../../../lib/utils/helpers";
+import { search } from "../../../../lib/utils/helpers";
 
 class UsersPage extends Component {
   constructor(props, context) {

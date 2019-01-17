@@ -59,23 +59,6 @@ class ReviewFilter extends Component {
     };
   }
 
-  handleResetFilterClick = () => {
-    this.setState({ filterApply: false });
-  };
-
-  handleApplyClick = () => {
-    this.setState({ filterApply: true });
-    this.props.handleApplyClick(this.state.filData);
-  };
-
-  handleOnChange = filterData => {
-    this.setState({ filData: filterData });
-  };
-
-  handleSelect = filterData => {
-    this.setState({ filData: filterData });
-  };
-
   render() {
     return (
       <div className="left-filters">
@@ -109,6 +92,25 @@ class ReviewFilter extends Component {
       </div>
     );
   }
+
+  handleResetFilterClick = () => {
+    this.setState({ filterApply: false });
+  };
+
+  handleApplyClick = () => {
+    this.setState({ filterApply: true });
+    this.props.handleApplyClick(this.state.filData);
+  };
+
+  handleOnChange = filterData => {
+    this.setState({ filData: filterData });
+  };
+
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
+
 }
 
 ReviewFilter.propTypes = {

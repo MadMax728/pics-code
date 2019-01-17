@@ -198,6 +198,62 @@ class BackOfficeHomeRoute extends Component {
       </div>
     );
   }
+  
+  handleLanding = () => {
+    return <DashboardPage handleModalInfoShow={this.props.handleModalInfoShow} />;
+  };
+
+  handleAdsPage = () => {
+    return <AdsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handleCampaignsPage = () => {
+    return <CampaignsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+  handleImageBO = () => {
+    return <ImagesBOPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handleVideosBOPage = () => {
+    return <VideosBOPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handleReportedCampaignsPage = () => {
+    return <ReportedCampaignsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handleReportedAdsPage = () => {
+    return <ReportedAdsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handleUsersPage = () => {
+    return <UsersPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+  
+  handleCommentsPage = () => {
+    return <CommentsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handleSettingCampaign = () => {
+    return <settings.SettingCampaignPage isBackOffice />;
+  };
+
+  BackOffice = () => {
+    return <settings.AdsPage isBackOffice />;
+  };
+
+  handlePageNotFound = () => {
+    return <PageNotFound className={"page-not-found-wrapr"} />;
+  };
+
+  handleCreateCMSManagementPage = (match) => {
+    return <CreateCMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} match={match.match} />
+  }
+  
+  handleCMSManagementPage= () => {
+    return <CMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} />
+  }
+
 }
 
 BackOfficeHomeRoute.propTypes = {

@@ -30,6 +30,33 @@ class AddVoucherPage extends Component {
       const searchKeyword = nextProps.searchData.searchKeyword;
       this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
     }
+  }
+
+  render() {
+    const { voucherList } = this.state;
+    const { voucherData } = this.props;
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+        <div className="dashboard-middle-section margin-bottom-50">
+          <div className="normal_title padding-15">
+            {Translations.admin.Add_voucher_code}
+          </div>
+          {voucherList && this.renderVouchers()}
+          {voucherData.isLoading && <CustomeTableLoader />}
+        </div>
+      </div>
+    );
+  }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    this.props.getVouchers().then(() => {
+      if (this.props.voucherData && this.props.voucherData.vouchers) {
+        this.setState({
+          voucherList: this.props.voucherData.vouchers
+        })
+      }
+    });
   };
 
   handleChangeField = event => {
@@ -46,7 +73,7 @@ class AddVoucherPage extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    if(this.validateForm()) {
+    if (this.validateForm()) {
       const { form, voucherList } = this.state;
       const data = {
         title: form.voucher_code,
@@ -56,10 +83,10 @@ class AddVoucherPage extends Component {
         amountId: form.amount,
         numberId: form.number
       }
-      
-      this.props.addVoucher(data).then(()=> {
-        if(this.props.voucherData && this.props.voucherData.voucher) { 
-          const dataAdd = this.props.voucherData.voucher;           
+
+      this.props.addVoucher(data).then(() => {
+        if (this.props.voucherData && this.props.voucherData.voucher) {
+          const dataAdd = this.props.voucherData.voucher;
           const indexOf = voucherList.findIndex(voucher => {
             return voucher.id === form.id;
           });
@@ -69,13 +96,13 @@ class AddVoucherPage extends Component {
             voucherList.splice(indexOf, 1);
             voucherList.push(dataAdd);
           }
-          this.setState({ voucherList, form: { ...this.state.form , id: "", voucher_code: "", period: "", type: "", amount: "", number: ""}});
+          this.setState({ voucherList, form: { ...this.state.form, id: "", voucher_code: "", period: "", type: "", amount: "", number: "" } });
         }
       })
     }
   };
 
-  handleSelect = (isFor , selected) => {
+  handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected;
     this.setState({ form });
@@ -85,7 +112,7 @@ class AddVoucherPage extends Component {
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        <span className={row.isActive? "green-circle" : "red-circle"} /> Active{" "}
+        <span className={row.isActive ? "green-circle" : "red-circle"} /> Active{" "}
       </div>
     );
   };
@@ -139,7 +166,7 @@ class AddVoucherPage extends Component {
     const { form } = this.state;
     return (
       <SelectPeriod
-        value={form.period? form.period : ""}
+        value={form.period ? form.period : ""}
         className="res320"
         handleSelect={this.handleSelect}
       />
@@ -150,7 +177,7 @@ class AddVoucherPage extends Component {
     const { form } = this.state;
     return (
       <SelectAmount
-        value={form.amount? form.amount : ""}
+        value={form.amount ? form.amount : ""}
         className="res320"
         handleSelect={this.handleSelect}
       />
@@ -161,7 +188,7 @@ class AddVoucherPage extends Component {
     const { form } = this.state;
     return (
       <SelectType
-        value={form.type? form.type : ""}
+        value={form.type ? form.type : ""}
         className="res320"
         handleSelect={this.handleSelect}
       />
@@ -172,7 +199,7 @@ class AddVoucherPage extends Component {
     const { form } = this.state;
     return (
       <SelectNumber
-        value={form.number? form.number : ""}
+        value={form.number ? form.number : ""}
         className="res320"
         handleSelect={this.handleSelect}
       />
@@ -191,16 +218,6 @@ class AddVoucherPage extends Component {
     </span>
   );
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.props.getVouchers().then(()=> {
-      if(this.props.voucherData && this.props.voucherData.vouchers) {
-        this.setState({
-          voucherList: this.props.voucherData.vouchers
-        })
-      }
-    });
-  };
 
   renderVouchers = () => {
     const { voucherList } = this.state;
@@ -297,21 +314,6 @@ class AddVoucherPage extends Component {
     )
   }
 
-  render() {
-    const { voucherList } = this.state;
-    const { voucherData } = this.props;
-    return (
-      <div className="padding-rl-10 middle-section width-80">
-        <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">
-            {Translations.admin.Add_voucher_code}
-          </div>
-          {voucherList && this.renderVouchers()}
-          {voucherData.isLoading && <CustomeTableLoader />}
-        </div>
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

@@ -10,30 +10,6 @@ class HashTag extends Component {
     this.state = { hashTagList: null };
   }
 
-  componentDidMount = () => {
-    this.props.getHashTag("hashTags").then(() => {
-      if (this.props.hashTagData.hashTags) {
-        this.setState({ hashTagList: this.props.hashTagData.hashTags });
-      }
-    });
-  };
-
-  _commentsCbHashTag = item => {
-    const hashtag = item.hashTagName;
-    //hashtag = hash_tag_list.filter
-    const id = item.id;
-    let { value } = this.props;
-    const commentArr = value.split(" ");
-    commentArr.pop();
-    if (this.props.hashTag) {
-      value = commentArr.join(" ") + " #" + hashtag;
-      this.props.handleSetSatetToolTipHashTag(id, value);
-    } else {
-      value = commentArr.join(" ") + " #" + hashtag;
-      this.props.handleSetSatetToolTipHashTag(value);
-    }
-  };
-
   render() {
     let { hashTagList } = this.props;
     const { value } = this.props;
@@ -71,6 +47,30 @@ class HashTag extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getHashTag("hashTags").then(() => {
+      if (this.props.hashTagData.hashTags) {
+        this.setState({ hashTagList: this.props.hashTagData.hashTags });
+      }
+    });
+  };
+
+  _commentsCbHashTag = item => {
+    const hashtag = item.hashTagName;
+    //hashtag = hash_tag_list.filter
+    const id = item.id;
+    let { value } = this.props;
+    const commentArr = value.split(" ");
+    commentArr.pop();
+    if (this.props.hashTag) {
+      value = commentArr.join(" ") + " #" + hashtag;
+      this.props.handleSetSatetToolTipHashTag(id, value);
+    } else {
+      value = commentArr.join(" ") + " #" + hashtag;
+      this.props.handleSetSatetToolTipHashTag(value);
+    }
+  };
 }
 
 const mapStateToProps = state => ({

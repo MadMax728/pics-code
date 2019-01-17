@@ -98,6 +98,33 @@ class ParticipantsFilter extends Component {
     };
   }
 
+  render() {
+    return (
+      <div className="left-filters">
+        <LeftSidebarFilter
+          filters={Filters}
+          onChange={this.handleOnChange}
+          filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
+        />
+        <div className="filter-btn-wrapper">
+          {this.state.filterApply ? (
+            <button
+              className="black_button"
+              onClick={this.handleResetFilterClick}
+            >
+              {Translations.filter.reset_filter}
+            </button>
+          ) : (
+            <button className="black_button" onClick={this.handleApplyClick}>
+              {Translations.filter.apply}
+            </button>
+          )}
+        </div>
+      </div>
+    );
+  }
+
   handleResetFilterClick = () => {
     this.setState({ filterApply: false });
   };
@@ -125,33 +152,6 @@ class ParticipantsFilter extends Component {
       />
     );
   };
-
-  render() {
-    return (
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
-          handleSelect={this.handleSelect}
-        />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
 }
 
 ParticipantsFilter.propTypes = {
