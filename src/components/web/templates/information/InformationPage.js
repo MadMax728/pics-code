@@ -17,7 +17,7 @@ import {
 } from "../../../../actions";
 import { getBackendPostType } from "../../../Factory";
 import { connect } from "react-redux";
-import { ThreeDots } from "../../../ui-kit";
+import { ThreeDots, CampaignLoading } from "../../../ui-kit";
 import moment from "moment";
 import * as routes from "../../../../lib/constants/routes";
 
@@ -430,44 +430,7 @@ class InformationPage extends Component {
             </div>
           </div>
         )}
-        {isLoading && (
-          <div className="info-inner-wrapper col-xs-12 no-padding">
-            <div className="info-main-title paddindLeft0 gray_box" />
-            <div className="text gray_box" />
-            <img
-              src={images.placeholder_pic}
-              alt="information"
-              className="gray_img"
-            />
-            <div className="text gray_box" />
-            {/* <button class="filled_button">Apply for this campaign</button> */}
-            <div className="feed_wrapper">
-              <div className="feed_header feed_header_gray_box">
-                <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                  <img
-                    src={images.placeholder_pic}
-                    alt="circle-img-1"
-                    className="img-circle img-responsive"
-                  />
-                </div>
-                <div className="col-sm-9 col-xs-7 no-padding">
-                  <div className="normal_title gray_box" />
-                  <div className="secondary_title gray_box" />
-                  <div className="grey_title gray_box" />
-                </div>
-                <div className="col-sm-2 col-xs-2 like_wrapper">
-                  <img
-                    src="/global/picstagraph-web/images/feed_like.svg"
-                    alt="like"
-                    className="pull-right"
-                    role="presentation"
-                    id="1"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {isLoading && <CampaignLoading count={1} />}
       </div>
     );
   }
