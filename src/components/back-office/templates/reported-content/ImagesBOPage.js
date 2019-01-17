@@ -7,7 +7,7 @@ import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
-import { search } from "../.../../../../../lib/utils/helpers";
+import { search } from "../../../../lib/utils/helpers";
 
 class ImagesBOPage extends Component {
   constructor(props, context) {

@@ -21,26 +21,6 @@ class Languages extends Component {
     };
   }
 
-  /**
-   * handle english
-   */
-  handleEnglish = () => {
-    // needs to send language code to handle language
-    // make sure we have props is exist with method handleLanguageSwitch
-    this.props.handleLanguageSwitch("en");
-  };
-
-  /**
-   * handle german language
-   */
-  handleGerman = () => {
-    // needs to send language code to handle language
-    // make sure we have props is exist with method handleLanguageSwitch
-    this.props.handleLanguageSwitch("de");
-  };
-
-  handleKeyDown = () => {};
-
   render() {
     const { languages } = this.state;
     return (
@@ -63,6 +43,28 @@ class Languages extends Component {
       </div>
     );
   }
+
+  /**
+   * handle english
+   */
+  handleEnglish = () => {
+    // needs to send language code to handle language
+    // make sure we have props is exist with method handleLanguageSwitch
+    this.props.handleLanguageSwitch("en");
+  };
+
+  /**
+   * handle german language
+   */
+  handleGerman = () => {
+    // needs to send language code to handle language
+    // make sure we have props is exist with method handleLanguageSwitch
+    this.props.handleLanguageSwitch("de");
+  };
+
+  handleKeyDown = () => {};
+
+ 
 }
 
 Languages.propTypes = {

@@ -28,30 +28,8 @@ class RadioButtonLanguages extends Component {
     };
   }
 
-  componentWillUnmount = () => {
-    this.setState({ languageList: [] });
-  };
-
   componentWillMount = () => {
     this.props.getLanguage(languageData);
-  };
-  componentDidMount = () => {
-    if (this.props.languageList && this.props.languageList.languages) {
-      this.setState({
-        languageList: this.props.languageList.languages
-      });
-    }
-  };
-
-  handleLanguage = event => {
-    const selectedValue = event.target.value;
-    if (selectedValue === "English") {
-      this.props.handleLanguageSwitch("en");
-      this.setState({ currentLanguage: event.target.value });
-    } else if (selectedValue === "German") {
-      this.props.handleLanguageSwitch("de");
-      this.setState({ currentLanguage: event.target.value });
-    }
   };
 
   render() {
@@ -75,6 +53,30 @@ class RadioButtonLanguages extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    if (this.props.languageList && this.props.languageList.languages) {
+      this.setState({
+        languageList: this.props.languageList.languages
+      });
+    }
+  };
+
+  componentWillUnmount = () => {
+    this.setState({ languageList: [] });
+  };
+
+  handleLanguage = event => {
+    const selectedValue = event.target.value;
+    if (selectedValue === "English") {
+      this.props.handleLanguageSwitch("en");
+      this.setState({ currentLanguage: event.target.value });
+    } else if (selectedValue === "German") {
+      this.props.handleLanguageSwitch("de");
+      this.setState({ currentLanguage: event.target.value });
+    }
+  };
+
 }
 
 const mapStateToProps = state => ({

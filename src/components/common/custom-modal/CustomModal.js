@@ -13,6 +13,14 @@ class CustomModal extends Component {
     this.state = {};
   }
 
+  render() {
+    return (
+      <div>
+        <Route path={routes.ROOT_ROUTE} render={this.handleModalRender} />
+      </div>
+    );
+  }
+
   handleModalUpload = () => {
     return (
       <UploadModal
@@ -68,13 +76,7 @@ class CustomModal extends Component {
     );
   };
 
-  render() {
-    return (
-      <div>
-        <Route path={routes.ROOT_ROUTE} render={this.handleModalRender} />
-      </div>
-    );
-  }
+
 }
 
 CustomModal.propTypes = {

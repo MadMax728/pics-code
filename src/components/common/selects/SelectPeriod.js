@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getBackofficeSelect } from "../../../actions";
 import { connect } from "react-redux";
-import { Translations }  from "../../../lib/translations";
+import { Translations } from "../../../lib/translations";
 
 class SelectPeriod extends Component {
   constructor(props) {
@@ -12,24 +12,6 @@ class SelectPeriod extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({periodList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getBackofficeSelect("periods").then(() => {
-      if(this.props.periodList){
-        this.setState({
-          periodList: this.props.periodList
-        });
-      }
-    });
-  }
-  
-  handlePeriod = (event) => {
-    this.props.handleSelect("period",event.target.value);
-  }
-  
   render() {
     const { periodList } = this.state;
     const { value, className } = this.props;
@@ -51,6 +33,25 @@ class SelectPeriod extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getBackofficeSelect("periods").then(() => {
+      if (this.props.periodList) {
+        this.setState({
+          periodList: this.props.periodList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({ periodList: [] });
+  }
+
+  handlePeriod = (event) => {
+    this.props.handleSelect("period", event.target.value);
+  }
+
 }
 
 const mapStateToProps = state => ({

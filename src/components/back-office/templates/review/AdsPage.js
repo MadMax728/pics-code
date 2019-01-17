@@ -7,7 +7,7 @@ import * as enumerations from "../../../../lib/constants/enumerations";
 import { AdCard } from "../../../misc";
 import { getBackOfficeReview, getBackOfficeReviewStatistics } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
-import { search } from "../.../../../../../lib/utils/helpers";
+import { search } from "../../../../lib/utils/helpers";
 
 class AdsPage extends Component {
   constructor(props, context) {

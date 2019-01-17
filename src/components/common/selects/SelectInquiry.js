@@ -12,24 +12,6 @@ class SelectInquiry extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({inquiryList: []});
-  }
-  
-  componentDidMount = () => {
-    this.props.getSelect("inquiries").then(() => {
-      if(this.props.inquiryList){
-        this.setState({
-          inquiryList: this.props.inquiryList
-        });
-      }
-    });
-  }
-  
-  handleInquiry = (event) => {
-    this.props.handleSelect("inquiry",event.target.value);
-  }
-  
   render() {
     const { inquiryList } = this.state;
     const { value, className } = this.props;
@@ -51,6 +33,25 @@ class SelectInquiry extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("inquiries").then(() => {
+      if (this.props.inquiryList) {
+        this.setState({
+          inquiryList: this.props.inquiryList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({ inquiryList: [] });
+  }
+
+  handleInquiry = (event) => {
+    this.props.handleSelect("inquiry", event.target.value);
+  }
+
 }
 
 const mapStateToProps = state => ({

@@ -12,21 +12,6 @@ class DataDownloadPage extends Component {
     };
   }
 
-  handleChangeField = event => {
-    const { form } = this.state;
-    form[event.target.name] = event.target.value;
-    this.setState({ form });
-  };
-
-  // handelSubmit called when click on submit
-  handleSubmit = e => {
-    e.preventDefault();
-  };
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
   render() {
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -53,6 +38,22 @@ class DataDownloadPage extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+  };
+
 }
 
 export default DataDownloadPage;
