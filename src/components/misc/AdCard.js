@@ -23,6 +23,49 @@ class AdCard extends Component {
     };
   }
 
+  render() {
+    const { isReview, isStatus, isDescription, isInformation, isReport, reportedContentData, savedData} = this.props;
+    const { isComments, item, comments } = this.state;
+    return (
+      <div className="feed_wrapper">
+        <AdCardHeader
+          ad={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
+          handleFavorite={this.handleFavorite}
+          isLoading={false}
+        />
+        <AdCardBody
+          ad={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
+        />
+        <AdCardFooter
+          ad={item}
+          handleCommentsSections={this.handleCommentsSections}
+          isComments={isComments}
+          isStatus={isStatus}
+          /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
+          handleFavorite={this.handleFavorite}
+          isLoading={false}
+          isReport={isReport}
+          isReview={isReview}
+        />
+       {isComments && (
+          <CommentCard
+            item={comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={(comments).length}
+          />
+        )}
+      </div>
+    );
+  }
+
   handleLockContent = (e) => {
     const { isReview } = this.props;
     let data;
@@ -210,48 +253,6 @@ class AdCard extends Component {
     })
   };
 
-  render() {
-    const { isReview, isStatus, isDescription, isInformation, isReport, reportedContentData, savedData} = this.props;
-    const { isComments, item, comments } = this.state;
-    return (
-      <div className="feed_wrapper">
-        <AdCardHeader
-          ad={item}
-          isDescription={isDescription}
-          isInformation={isInformation}
-          handleFavorite={this.handleFavorite}
-          isLoading={false}
-        />
-        <AdCardBody
-          ad={item}
-          isDescription={isDescription}
-          isInformation={isInformation}
-          isLoading={reportedContentData.isLoading || savedData.isLoading}
-        />
-        <AdCardFooter
-          ad={item}
-          handleCommentsSections={this.handleCommentsSections}
-          isComments={isComments}
-          isStatus={isStatus}
-          /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
-          handleFavorite={this.handleFavorite}
-          isLoading={false}
-          isReport={isReport}
-          isReview={isReview}
-        />
-       {isComments && (
-          <CommentCard
-            item={comments}
-            itemId={item.id}
-            typeContent={item.typeContent}
-            handleComment={this.handleComment}
-            totalCommentsCount={(comments).length}
-          />
-        )}
-      </div>
-    );
-  }
 }
 
 AdCard.propTypes = {
