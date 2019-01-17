@@ -78,12 +78,13 @@ class MessagesLazyList extends Component {
 
     getMessages = (callback) => {
 
-        const { me, user, lastEvaluatedKeys } = this.state;
+        const { me, user, lastEvaluatedKeys, messages } = this.state;
         if(!user || !user.id) return;
         this.props.getMessages(me, user.id, lastEvaluatedKeys).then(() => {
             const  { messagesData } = this.props;
             if(messagesData && !messagesData.isLoading && messagesData.messages) {
-                this.setState({ messages: [...messagesData.messages, ...this.state.messages ] }, () => {
+                const newMessages  =  [...messagesData.messages, ...messages ];
+                this.setState({ messages: newMessages }, () => {
                     if(callback) {
                         this.scrollBottomOnNewMessage();
                     } 
