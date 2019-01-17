@@ -12,24 +12,6 @@ class SelectAmount extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({amountList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getBackofficeSelect("amounts").then(() => {
-      if(this.props.amountList){
-        this.setState({
-          amountList: this.props.amountList
-        });
-      }
-    });
-  }
-  
-  handleAmount = (event) => {
-    this.props.handleSelect("amount",event.target.value);
-  }
-  
   render() {
     const { amountList } = this.state;
     const { value, className } = this.props;
@@ -51,6 +33,26 @@ class SelectAmount extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getBackofficeSelect("amounts").then(() => {
+      if(this.props.amountList){
+        this.setState({
+          amountList: this.props.amountList
+        });
+      }
+    });
+  }
+  
+  componentWillUnmount = () => {
+    this.setState({amountList: []});
+  }
+
+  
+  handleAmount = (event) => {
+    this.props.handleSelect("amount",event.target.value);
+  }
+  
 }
 
 const mapStateToProps = state => ({

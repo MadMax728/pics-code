@@ -12,24 +12,6 @@ class SelectOffer extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({offerList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getSelect("offers").then(() => {
-      if(this.props.offerList){
-        this.setState({
-          offerList: this.props.offerList
-        });
-      }
-    });
-  }
-  
-  handleOffer = (event) => {
-    this.props.handleSelect("offers",event.target.value);
-  }
-  
   render() {
     const { offerList } = this.state;
     const { value, className } = this.props;
@@ -51,6 +33,25 @@ class SelectOffer extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("offers").then(() => {
+      if(this.props.offerList){
+        this.setState({
+          offerList: this.props.offerList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({offerList: []});
+  }
+  
+  handleOffer = (event) => {
+    this.props.handleSelect("offers",event.target.value);
+  }
+  
 }
 
 const mapStateToProps = state => ({

@@ -12,25 +12,6 @@ class SelectCategory extends Component {
     }
   }
 
-
-  componentWillUnmount = () => {
-    this.setState({categoryList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getSelect("categories").then(() => {
-      if(this.props.categoryList){
-        this.setState({
-          categoryList: this.props.categoryList
-        });
-      }
-    });
-  }
-  
-  handleCategory = (event) => {
-    this.props.handleSelect("category",event.target.value);
-  }
-  
   render() {
     const { categoryList } = this.state;
     const { value, className } = this.props;
@@ -52,6 +33,25 @@ class SelectCategory extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("categories").then(() => {
+      if(this.props.categoryList){
+        this.setState({
+          categoryList: this.props.categoryList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({categoryList: []});
+  }
+  
+  handleCategory = (event) => {
+    this.props.handleSelect("category",event.target.value);
+  }
+  
 }
 
 const mapStateToProps = state => ({

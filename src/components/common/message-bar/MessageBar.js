@@ -9,10 +9,6 @@ class MessageBar extends Component {
     };
   }
 
-  componentDidMount = () => {
-    // this.timer = setInterval(() =>  this.setState(prevState => ({ isView: !prevState.isView })), 2000);
-  };
-
   render() {
     const { message } = this.props;
     const { isView } = this.state;
@@ -27,6 +23,11 @@ class MessageBar extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    // this.timer = setInterval(() =>  this.setState(prevState => ({ isView: !prevState.isView })), 2000);
+  };
+
 }
 
 MessageBar.propTypes = {

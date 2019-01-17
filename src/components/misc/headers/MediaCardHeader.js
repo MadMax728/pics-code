@@ -8,7 +8,7 @@ import { DateFormat } from "../../Factory";
 const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
   const profile_route = item.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${item.createdBy}`;
+    : `${routes.NEWS_FEED_ROUTE}/${item.userName}`;
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">

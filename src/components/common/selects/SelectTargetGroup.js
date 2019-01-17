@@ -32,26 +32,8 @@ class SelectTargetGroup extends Component {
     };
   }
 
-  componentWillUnmount = () => {
-    this.setState({ targetGroupList: [] });
-  };
-
   componentWillMount = () => {
     this.props.getTargetGroup(targetGroupData);
-  };
-  componentDidMount = () => {
-    if (
-      this.props.targetGroupList &&
-      this.props.targetGroupList.target_group_data
-    ) {
-      this.setState({
-        targetGroupList: this.props.targetGroupList.target_group_data
-      });
-    }
-  };
-
-  handleTargetGroup = event => {
-    this.props.handleSelect("target_group", event.target.value);
   };
 
   render() {
@@ -73,6 +55,26 @@ class SelectTargetGroup extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    if (
+      this.props.targetGroupList &&
+      this.props.targetGroupList.target_group_data
+    ) {
+      this.setState({
+        targetGroupList: this.props.targetGroupList.target_group_data
+      });
+    }
+  };
+
+  componentWillUnmount = () => {
+    this.setState({ targetGroupList: [] });
+  };
+
+  handleTargetGroup = event => {
+    this.props.handleSelect("target_group", event.target.value);
+  };
+
 }
 
 const mapStateToProps = state => ({

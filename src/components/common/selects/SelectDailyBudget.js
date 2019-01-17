@@ -12,28 +12,10 @@ class SelectDailyBudget extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({dailyBudgetList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getSelect("dailyBudgets").then(() => {
-      if(this.props.dailyBudgetList){
-        this.setState({
-          dailyBudgetList: this.props.dailyBudgetList
-        });
-      }
-    });
-  }
-  
-  handleOffer = (event) => {
-    this.props.handleSelect("budget", event.target.value);
-  }
-  
   render() {
     const { dailyBudgetList } = this.state;
     const { value, className } = this.props;
-    
+
     return (
       <select
         value={value}
@@ -51,6 +33,25 @@ class SelectDailyBudget extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("dailyBudgets").then(() => {
+      if (this.props.dailyBudgetList) {
+        this.setState({
+          dailyBudgetList: this.props.dailyBudgetList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({ dailyBudgetList: [] });
+  }
+
+  handleOffer = (event) => {
+    this.props.handleSelect("budget", event.target.value);
+  }
+
 }
 
 const mapStateToProps = state => ({

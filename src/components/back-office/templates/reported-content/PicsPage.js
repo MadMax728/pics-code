@@ -14,30 +14,6 @@ class PicsPage extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.props.getBackOfficeReportedContent("reportedContentPics").then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.reportedContentPics) {
-        this.setState({
-          picList: this.props.reportedContentData.reportedContentPics
-        })
-      }
-    });
-  };
-
-  renderPicList = () => {
-    const { picList } = this.state;
-    
-    return picList.map((pic, index) => {
-      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
-      return (
-        <div key={pic.id}>
-          {clearfixDiv}
-          <PictureCard item={pic} index={index} isReport/>
-        </div>
-      );
-    });
-  };
-
   render() {
     const { picList } = this.state;
     const { isLoading } = this.props;
@@ -50,6 +26,30 @@ class PicsPage extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getBackOfficeReportedContent("reportedContentPics").then(() => {
+      if (this.props.reportedContentData && this.props.reportedContentData.reportedContentPics) {
+        this.setState({
+          picList: this.props.reportedContentData.reportedContentPics
+        })
+      }
+    });
+  };
+
+  renderPicList = () => {
+    const { picList } = this.state;
+
+    return picList.map((pic, index) => {
+      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
+      return (
+        <div key={pic.id}>
+          {clearfixDiv}
+          <PictureCard item={pic} index={index} isReport />
+        </div>
+      );
+    });
+  };
 }
 
 const mapStateToProps = state => ({
