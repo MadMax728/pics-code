@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import * as routes from "../../../lib/constants";
 
 const staticData = [
   { name: "all", className: "", value: "All" },
@@ -96,6 +98,13 @@ class ReviewFilter extends Component {
               {Translations.filter.apply}
             </button>
           )}
+          <div className="filter-btn-wrapper">
+            <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
+              <button className="black_button" onClick={this.handleApplyClick}>
+                {Translations.filter.back}
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     );
