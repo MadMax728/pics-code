@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants";
 
 const staticData = [
