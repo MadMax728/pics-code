@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { Translations } from "../../../lib/translations";
+import * as routes from "../../../lib/constants/routes";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 class DataDownloadPage extends Component {
   constructor(props) {
@@ -11,6 +14,15 @@ class DataDownloadPage extends Component {
       }
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -55,4 +67,20 @@ class DataDownloadPage extends Component {
   }
 }
 
-export default DataDownloadPage;
+const mapStateToProps = state => ({
+  searchData: state.searchData
+});
+
+const mapDispatchToProps = {
+
+};
+
+DataDownloadPage.propTypes = {
+  searchData: PropTypes.any,
+  history: PropTypes.any,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DataDownloadPage);

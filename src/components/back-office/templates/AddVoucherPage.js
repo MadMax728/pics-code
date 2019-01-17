@@ -5,6 +5,7 @@ import { getVouchers, addVoucher } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { SelectPeriod, SelectAmount, SelectType, SelectNumber } from "../../common";
+import * as routes from "../../../lib/constants/routes";
 
 class AddVoucherPage extends Component {
   constructor(props, context) {
@@ -21,6 +22,15 @@ class AddVoucherPage extends Component {
       }
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -305,7 +315,8 @@ class AddVoucherPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  voucherData: state.voucherData
+  voucherData: state.voucherData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -317,6 +328,8 @@ AddVoucherPage.propTypes = {
   getVouchers: PropTypes.func.isRequired,
   addVoucher: PropTypes.func.isRequired,
   voucherData: PropTypes.object,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(

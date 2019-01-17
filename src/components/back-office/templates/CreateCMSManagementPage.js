@@ -24,6 +24,16 @@ class CreateCMSManagementPage extends Component {
     };
   }
 
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
   componentDidMount = () => {
     const isEdit =
     !!(this.props.match && this.props.match.params.id);
@@ -194,7 +204,8 @@ class CreateCMSManagementPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  cmsManagementData: state.cmsManagementData
+  cmsManagementData: state.cmsManagementData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -210,7 +221,8 @@ CreateCMSManagementPage.propTypes = {
   handleModalInfoDetailsShow: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
   match: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  searchData: PropTypes.any
 };
 
 export default connect(

@@ -32,6 +32,15 @@ class DashboardPage extends Component {
     // });
   };
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
   renderKeyStatistics = () => {
     const { key_statistics } = this.state;
     const keyColumns = [
@@ -426,7 +435,8 @@ class DashboardPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  backOfficeDashboardData: state.backOfficeDashboardData
+  backOfficeDashboardData: state.backOfficeDashboardData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -436,6 +446,8 @@ const mapDispatchToProps = {
 DashboardPage.propTypes = {
   getBackOfficeDashboard: PropTypes.func.isRequired,
   backOfficeDashboardData: PropTypes.object,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(

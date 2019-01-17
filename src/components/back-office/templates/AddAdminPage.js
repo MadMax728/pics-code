@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { UsernameList } from "../../common";
 import ReactTooltip from "react-tooltip";
+import * as routes from "../../../lib/constants/routes";
 
 class AddAdminPage extends Component {
   constructor(props, context) {
@@ -20,6 +21,15 @@ class AddAdminPage extends Component {
       }
     };
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -297,6 +307,7 @@ class AddAdminPage extends Component {
 const mapStateToProps = state => ({
   adminData: state.adminData,
   usersList: state.hashUserData.usernames,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -311,6 +322,8 @@ AddAdminPage.propTypes = {
   adminData: PropTypes.object,
   getHashUser: PropTypes.func,
   usersList: PropTypes.any,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(

@@ -24,8 +24,8 @@ import * as settings from "../../web/templates";
 import { PageNotFound } from "../../web/page-not-found";
 
 class BackOfficeHomeRoute extends Component {
-  handleLanding = () => {
-    return <DashboardPage handleModalInfoShow={this.props.handleModalInfoShow} />;
+  handleLanding = (match) => {
+    return <DashboardPage history={match.history} handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
   handleAdsPage = () => {
@@ -75,8 +75,24 @@ class BackOfficeHomeRoute extends Component {
     return <CreateCMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} match={match.match} />
   }
   
-  handleCMSManagementPage= () => {
-    return <CMSManagementPage handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} />
+  handleCMSManagementPage = (match) => {
+    return <CMSManagementPage history={match.history} handleModalInfoDetailsShow={this.props.handleModalInfoDetailsShow} />
+  }
+
+  handleAddAdminPage = (match) => {
+    return <AddAdminPage history={match.history} />
+  }
+
+  handleAddVerificationPage = (match) => {
+    return <AddVerificationPage history={match.history} />
+  }
+
+  handleAddVoucherPage = (match) => {
+    return <AddVoucherPage history={match.history} />
+  }
+
+  handleDataDownloadPage = (match) => {
+    return <settings.DataDownloadPage history={match.history} />
   }
 
   render() {
@@ -111,25 +127,25 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
             exact
-            component={AddAdminPage}
+            component={this.handleAddAdminPage}
           />
 
           <Route
             path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
             exact
-            component={AddVerificationPage}
+            component={this.handleAddVerificationPage}
           />
 
           <Route
             path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
             exact
-            component={AddVoucherPage}
+            component={this.handleAddVoucherPage}
           />
 
           <Route
             path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
             exact
-            component={settings.DataDownloadPage}
+            component={this.handleDataDownloadPage}
           />
 
           <Route

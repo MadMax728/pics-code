@@ -20,6 +20,15 @@ class CMSManagementPage extends Component {
     };
   }
 
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
   optionsFormatter = (cell, row, rowIndex) => {   
     const data = { 
       title: row.title,
@@ -225,7 +234,8 @@ class CMSManagementPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  cmsManagementData: state.cmsManagementData
+  cmsManagementData: state.cmsManagementData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -235,7 +245,9 @@ const mapDispatchToProps = {
 CMSManagementPage.propTypes = {
   getCMSManagement: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
-  handleModalInfoDetailsShow: PropTypes.func.isRequired
+  handleModalInfoDetailsShow: PropTypes.func.isRequired,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(
