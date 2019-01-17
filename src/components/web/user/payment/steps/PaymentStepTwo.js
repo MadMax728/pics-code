@@ -4,10 +4,17 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { checkVoucherExpiry } from "../../../../../actions";
 import { connect } from "react-redux";
-import { modalType } from "../../../../../lib/constants/enumerations";
+//import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
 import LazyLoad from "react-lazyload";
-import { Loader, InlineLoading } from "../../../../ui-kit";
+import * as enumerations from "../../../../../lib/constants/enumerations";
+import {
+  Loader,
+  InlineLoading,
+  ImageItem,
+  VideoItem
+} from "../../../../ui-kit";
+import moment from "moment";
 
 class PaymentStepTwo extends Component {
   constructor(props) {
@@ -94,10 +101,11 @@ class PaymentStepTwo extends Component {
   };
 
   render() {
-    const { handleChangeField, form } = this.props;
+    const { handleChangeField, form, userInfo } = this.props;
     const redeemLoading = this.props.voucherData.isLoading;
     const campeignCommitToBuyLoading = this.props.campaignData.isLoading;
     const adCommitToBuyLoading = this.props.adData.isLoading;
+    const todayDate = new Date();
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
@@ -214,9 +222,11 @@ class PaymentStepTwo extends Component {
                 />
               </div>
               <div className="no-padding titles_wrapper">
-                <div className="normal_title">Title of campaigns</div>
-                <div className="secondary_title">Santosh Shinde</div>
-                <div className="grey_title">01.01.2000 in Category</div>
+                <div className="normal_title">{form.title}</div>
+                <div className="secondary_title">{userInfo.username}</div>
+                <div className="grey_title">
+                  {moment(todayDate).format("DD.MM.YYYY")} in category
+                </div>
               </div>
               <div className="like_wrapper">
                 <img
@@ -230,23 +240,32 @@ class PaymentStepTwo extends Component {
               <div className="feed_image">
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
-                    <img src={images.image} alt="image1" />
+                    {/* <img src={images.image} alt="image1" /> */}
+                    {form.typeContent &&
+                      form.typeContent.toLowerCase() ===
+                        enumerations.mediaTypes.video && (
+                        <VideoItem item={form.video} />
+                      )}
+                    {(!form.typeContent ||
+                      (form.typeContent &&
+                        form.typeContent.toLowerCase() ===
+                          enumerations.mediaTypes.image)) && (
+                      <ImageItem item={form.image} />
+                    )}
                   </div>
                 </div>
               </div>
               <div className="feed_description padding-15">
-                <span className="secondary_title">
-                  {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...`}
-                </span>
+                <span className="secondary_title">{form.description}</span>
               </div>
             </div>
             <div className="feed_footer padding-15">
               <div className="messages">
-                <span className="count">12</span>
+                <span className="count">0</span>
                 <img src={images.feed_msg} alt="profile1" />
               </div>
               <div className="likes">
-                <span className="count">12</span>
+                <span className="count">0</span>
                 <img src={images.feed_like} alt="profile2" />
               </div>
               <div className="show_more_options">
@@ -263,7 +282,8 @@ class PaymentStepTwo extends Component {
 const mapStateToProps = state => ({
   voucherData: state.voucherData,
   campaignData: state.campaignData,
-  adData: state.adData
+  adData: state.adData,
+  categoryList: state.selectData
 });
 
 const mapDispatchToProps = {
@@ -282,7 +302,9 @@ PaymentStepTwo.propTypes = {
   setVoucherData: PropTypes.func,
   isLoading: PropTypes.any,
   campaignData: PropTypes.any,
-  adData: PropTypes.any
+  adData: PropTypes.any,
+  userInfo: PropTypes.any,
+  categoryList: PropTypes.any
 };
 
 export default connect(

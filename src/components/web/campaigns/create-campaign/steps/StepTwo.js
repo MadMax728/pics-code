@@ -19,11 +19,11 @@ class StepTwo extends Component {
           contentText={form.description}
         />
         <div className="form-group">
-          {
-            form.description.length === 0 && form.error && (
-              <span className="error-msg highlight">{Translations.error.create_modal.description}</span>
-            )
-          }
+          {form.description.length === 0 && form.error && (
+            <span className="error-msg highlight">
+              {Translations.error.create_modal.description}
+            </span>
+          )}
         </div>
       </div>
     );
@@ -33,7 +33,8 @@ class StepTwo extends Component {
 StepTwo.propTypes = {
   // handleChangeField: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired,
+  userInfo: PropTypes.any
 };
 
 export default StepTwo;
