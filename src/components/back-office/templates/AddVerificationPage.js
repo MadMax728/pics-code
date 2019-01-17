@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getVerifications, getUnverifiedUsers, updateVerification } from "../../../actions";
 import { connect } from "react-redux";
@@ -229,6 +229,7 @@ class AddVerificationPage extends Component {
 
   render() {
     const { verifications, form } = this.state;
+    const { verificationData } = this.props;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -267,6 +268,7 @@ class AddVerificationPage extends Component {
             </button>
           </div>
           {verifications && this.renderVerifications()}
+          {verificationData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );

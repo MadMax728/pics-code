@@ -4,7 +4,8 @@ export {
   CampaignLoading,
   UserPicLoading,
   Loader,
-  RightSidebarLoading
+  RightSidebarLoading,
+  CustomeTableLoader
 } from "./loading-indicator";
 export { LeftSidebarNav } from "./nav-menu";
 export { TopBar } from "./top-bar";
@@ -21,3 +22,4 @@ export { ThreeDots } from "./three-dots";
 export { SubscribeList } from "./subscribe-list";
 export { ImageItem } from "./items";
 export { ReadMore } from "./read-more";
+

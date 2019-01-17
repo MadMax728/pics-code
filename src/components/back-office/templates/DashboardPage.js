@@ -20,16 +20,16 @@ class DashboardPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getBackOfficeDashboard().then(()=> {
-      if(this.props.backOfficeDashboardData && this.props.backOfficeDashboardData.backOfficeDashboard) {
-        this.setState({
-          key_statistics: this.props.backOfficeDashboardData.backOfficeDashboard.key_statistics,
-          content_statistics: this.props.backOfficeDashboardData.backOfficeDashboard. content_statistics,
-          campaign_statistics_company: this.props.backOfficeDashboardData.backOfficeDashboard.campaign_statistics_company,
-          ads_statisitcs: this.props.backOfficeDashboardData.backOfficeDashboard.ads_statisitcs
-        })
-      }
-    });
+    // this.props.getBackOfficeDashboard().then(()=> {
+    //   if(this.props.backOfficeDashboardData && this.props.backOfficeDashboardData.backOfficeDashboard) {
+    //     this.setState({
+    //       key_statistics: this.props.backOfficeDashboardData.backOfficeDashboard.key_statistics,
+    //       content_statistics: this.props.backOfficeDashboardData.backOfficeDashboard. content_statistics,
+    //       campaign_statistics_company: this.props.backOfficeDashboardData.backOfficeDashboard.campaign_statistics_company,
+    //       ads_statisitcs: this.props.backOfficeDashboardData.backOfficeDashboard.ads_statisitcs
+    //     })
+    //   }
+    // });
   };
 
   renderKeyStatistics = () => {

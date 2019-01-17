@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable, ToolTip } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getAdmins, updateAdmin, getHashUser } from "../../../actions";
 import { connect } from "react-redux";
@@ -235,6 +235,7 @@ class AddAdminPage extends Component {
   
   render() {
     const { admins, form } = this.state;
+    const { adminData } = this.props;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -285,6 +286,7 @@ class AddAdminPage extends Component {
             </button>
           </div>
           {admins && this.renderAdmins()}
+          {adminData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );

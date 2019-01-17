@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable } from "../../ui-kit";
+import { CustomBootstrapTable, CustomeTableLoader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getVouchers, addVoucher } from "../../../actions";
 import { connect } from "react-redux";
@@ -289,6 +289,7 @@ class AddVoucherPage extends Component {
 
   render() {
     const { voucherList } = this.state;
+    const { voucherData } = this.props;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="dashboard-middle-section margin-bottom-50">
@@ -296,6 +297,7 @@ class AddVoucherPage extends Component {
             {Translations.admin.Add_voucher_code}
           </div>
           {voucherList && this.renderVouchers()}
+          {voucherData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
-import { CustomBootstrapTable } from "../../ui-kit";
+import { CustomeTableLoader, CustomBootstrapTable } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getCMSManagement } from "../../../actions";
 import { connect } from "react-redux";
@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import { DateFormat } from "../../Factory";
 import { SelectLanguage } from "../../common";
 import { modalType } from "../../../lib/constants/enumerations";
-import CustomeTableLoader from "../../ui-kit/loading-indicator/CustomeTableLoader";
 
 class CMSManagementPage extends Component {
  
@@ -52,9 +51,8 @@ class CMSManagementPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    const { cmsManagementData } = this.props;
-
-    this.props.getCMSManagement("/cmspages").then(()=> {
+    this.props.getCMSManagement("").then(()=> {
+      const { cmsManagementData } = this.props;
       if(cmsManagementData && cmsManagementData.cmsManagement) {
         this.setState({
           cmsManagement: cmsManagementData.cmsManagement
@@ -201,6 +199,7 @@ class CMSManagementPage extends Component {
 
   render() {
     const { cmsManagement, language } = this.state;
+    const { cmsManagementData } = this.props;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -217,8 +216,8 @@ class CMSManagementPage extends Component {
               handleSelect={this.handleSelect}
             />
           </div>
-          {/* <CustomeTableLoader /> */}
           {cmsManagement && this.renderCMSManagement()}
+          {cmsManagementData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );
