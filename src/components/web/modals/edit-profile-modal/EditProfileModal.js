@@ -20,6 +20,36 @@ class EditProfileModal extends Component {
     };
   }
 
+  render() {
+    const { handleModalInfoHide, modalInfoShow } = this.props;
+    const { image } = this.state;
+    return (
+      <CustomBootstrapModal
+        modalClassName={"modal fade create-campaign-modal"}
+        header
+        modalHeaderContent={
+          <EditProfilePicHeader
+            handleModalHide={this.props.handleModalInfoHide}
+            handleContinue={this.handleContinue}
+          />
+        }
+        footer={false}
+        modalShow={modalInfoShow}
+        closeBtn={false}
+        handleModalHide={handleModalInfoHide}
+        modalBodyContent={
+          <EditProfilePic
+            image={image}
+            handleEditImage={this.handleEditImage}
+            ref={this.imageCropper}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
+          />
+        }
+      />
+    );
+  }
+
   componentDidMount = () => {
     this.setState({ image: this.props.image });
   };
@@ -88,35 +118,6 @@ class EditProfileModal extends Component {
       })
   };
 
-  render() {
-    const { handleModalInfoHide, modalInfoShow } = this.props;
-    const { image } = this.state;
-    return (
-      <CustomBootstrapModal
-        modalClassName={"modal fade create-campaign-modal"}
-        header
-        modalHeaderContent={
-          <EditProfilePicHeader
-            handleModalHide={this.props.handleModalInfoHide}
-            handleContinue={this.handleContinue}
-          />
-        }
-        footer={false}
-        modalShow={modalInfoShow}
-        closeBtn={false}
-        handleModalHide={handleModalInfoHide}
-        modalBodyContent={
-          <EditProfilePic
-            image={image}
-            handleEditImage={this.handleEditImage}
-            ref={this.imageCropper}
-            handleActualImg={this.handleActualImg}
-            handleScale={this.handleScale}
-          />
-        }
-      />
-    );
-  }
 }
 
 const mapStateToProps = state => ({

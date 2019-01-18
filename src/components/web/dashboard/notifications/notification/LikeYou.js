@@ -13,38 +13,6 @@ class LikeYou extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.getLikeYouList();
-  };
-
-  getLikeYouList = () => {
-    // if (userId && type) {
-    //   const userRequestData = {
-    //     id: userId,
-    //     type: type
-    //   };
-    //   this.props.getFollowUserList(userRequestData).then(() => {
-    //     console.log("prop", this.props);
-    //   });
-    // }
-  };
-
-  handleLike = e => {
-    const likeYou_list = this.state.likeYou_list;
-    likeYou_list.filter(
-      like =>
-        like.id === parseInt(e.target.id) &&
-        (like.user.isLikeToo = !like.user.isLikeToo)
-    );
-    this.setState({ likeYou_list });
-  };
-
-  handleOnKeyDown = () => {};
-
-  handleMessage = e => {
-    this.props.handleMessage(e);
-  };
-
   render() {
     return (
       <div className="tab-pane fade active in" id="nav-like">
@@ -104,6 +72,39 @@ class LikeYou extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.getLikeYouList();
+  };
+
+  getLikeYouList = () => {
+    // if (userId && type) {
+    //   const userRequestData = {
+    //     id: userId,
+    //     type: type
+    //   };
+    //   this.props.getFollowUserList(userRequestData).then(() => {
+    //     console.log("prop", this.props);
+    //   });
+    // }
+  };
+
+  handleLike = e => {
+    const likeYou_list = this.state.likeYou_list;
+    likeYou_list.filter(
+      like =>
+        like.id === parseInt(e.target.id) &&
+        (like.user.isLikeToo = !like.user.isLikeToo)
+    );
+    this.setState({ likeYou_list });
+  };
+
+  handleOnKeyDown = () => {};
+
+  handleMessage = e => {
+    this.props.handleMessage(e);
+  };
+
 }
 
 LikeYou.propTypes = {

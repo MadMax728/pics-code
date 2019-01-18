@@ -17,35 +17,6 @@ class BusinessProfilePage extends Component {
     };
   }
 
-  componentDidMount = () => {
-    const storage = Auth.extractJwtFromStorage();
-    window.scrollTo(0, 0);
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    if (userInfo) {
-      this.setState({ userId: userInfo.id });
-    }
-  };
-
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
-
-  handleActivationBusinessProfile = e => {
-    const paramData = { profileId: e.target.id };
-    this.props.activateBusinessProfile(paramData); // API Call
-  };
-
   render() {
     const { userId } = this.state;
     return (
@@ -121,6 +92,35 @@ class BusinessProfilePage extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    window.scrollTo(0, 0);
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.setState({ userId: userInfo.id });
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
+  handleActivationBusinessProfile = e => {
+    const paramData = { profileId: e.target.id };
+    this.props.activateBusinessProfile(paramData); // API Call
+  };
 }
 
 const mapStateToProps = state => ({

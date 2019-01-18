@@ -11,20 +11,6 @@ class RadioButton extends Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.setState({
-  //     selectedValue: this.props.items[0].name,
-  //     name: this.props.name
-  //   });
-  // }
-
-  handleChangeField = event => {
-    this.setState({ value: event.target.value });
-    const { data } = this.state;
-    data.values = { name: this.state.name, val: event.target.value };
-    this.props.onChange(data);
-  };
-
   render() {
     const { className, value, name, id, defaultChecked } = this.props;
     return (
@@ -39,6 +25,21 @@ class RadioButton extends Component {
       />
     );
   }
+
+  // componentDidMount() {
+  //   this.setState({
+  //     selectedValue: this.props.items[0].name,
+  //     name: this.props.name
+  //   });
+  // }
+
+  handleChangeField = event => {
+    this.setState({ value: event.target.value });
+    const { data } = this.state;
+    data.values = { name: this.state.name, val: event.target.value };
+    this.props.onChange(data);
+  };
+
 }
 
 RadioButton.propTypes = {
@@ -47,7 +48,7 @@ RadioButton.propTypes = {
   value: PropTypes.string,
   id: PropTypes.string,
   onChange: PropTypes.func,
-  defaultChecked:PropTypes.any
+  defaultChecked: PropTypes.any
 };
 
 export default RadioButton;

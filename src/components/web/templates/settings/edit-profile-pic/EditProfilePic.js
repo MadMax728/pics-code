@@ -8,14 +8,6 @@ class EditProfilePic extends Component {
     this.imageCrop = React.createRef();
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
-  handleSave = () => {
-    this.imageCrop.current.handleSave();
-  };
-
   render() {
     const { image, handleEditImage, handleActualImg, handleScale } = this.props;
     return (
@@ -31,6 +23,15 @@ class EditProfilePic extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  handleSave = () => {
+    this.imageCrop.current.handleSave();
+  };
+
 }
 
 EditProfilePic.propTypes = {

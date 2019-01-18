@@ -7,6 +7,18 @@ import { AdCard } from "../../../../misc";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class AdsPage extends Component {
+
+  render() {
+    const { adList, isLoading } = this.props;
+    
+    return (
+      <div className="padding-rl-10 middle-section">
+        {adList && !isLoading && this.renderAdList()}
+        {isLoading && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     this.props.getAds("getSettingsAds", "");
     window.scrollTo(0, 0);
@@ -38,16 +50,6 @@ class AdsPage extends Component {
     });
   };
 
-  render() {
-    const { adList, isLoading } = this.props;
-    
-    return (
-      <div className="padding-rl-10 middle-section">
-        {adList && !isLoading && this.renderAdList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 AdsPage.propTypes = {

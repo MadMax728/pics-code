@@ -18,16 +18,6 @@ class StepThree extends Component {
     };
   }
 
-  handleStartDateChange = date => {
-    this.setState({ startDate: date });
-    this.props.handleDate(date, "startDate");
-  };
-
-  handleEndDateChange = date => {
-    this.setState({ endDate: date });
-    this.props.handleDate(date, "endDate");
-  };
-
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const todayDate = new Date();
@@ -180,6 +170,17 @@ class StepThree extends Component {
       </div>
     );
   }
+
+  handleStartDateChange = date => {
+    this.setState({ startDate: date });
+    this.props.handleDate(date, "startDate");
+  };
+
+  handleEndDateChange = date => {
+    this.setState({ endDate: date });
+    this.props.handleDate(date, "endDate");
+  };
+
 }
 
 StepThree.propTypes = {

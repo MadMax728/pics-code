@@ -7,6 +7,17 @@ import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsRoot extends Component {
+
+  render() {
+    const { newsFeedList, isLoadingnews } = this.props;
+    return (
+      <div className={"middle-section padding-rl-10"}> <NoDataFoundCenterPage/>
+        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
+        {isLoadingnews && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     if (this.props.searchData.searchKeyword) {
@@ -98,15 +109,6 @@ class NewsRoot extends Component {
     });
   };
 
-  render() {
-    const { newsFeedList, isLoadingnews } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}> <NoDataFoundCenterPage/>
-        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
-        {isLoadingnews && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 NewsRoot.propTypes = {

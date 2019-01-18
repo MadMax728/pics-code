@@ -7,6 +7,19 @@ import * as enumerations from "../../../lib/constants/enumerations";
 import PropTypes from "prop-types";
 
 class ParticipantsPage extends Component {
+
+  render() {
+    const { participantsList, isLoadingparticipants } = this.props;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {participantsList &&
+          !isLoadingparticipants &&
+          this.renderParticipantsList()}
+        {isLoadingparticipants && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     if (this.props.searchData.searchKeyword) {
       this.props.getSearch("");
@@ -51,17 +64,6 @@ class ParticipantsPage extends Component {
     });
   };
 
-  render() {
-    const { participantsList, isLoadingparticipants } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {participantsList &&
-          !isLoadingparticipants &&
-          this.renderParticipantsList()}
-        {isLoadingparticipants && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 ParticipantsPage.propTypes = {

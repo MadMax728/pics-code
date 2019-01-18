@@ -14,6 +14,16 @@ class CampaignPage extends Component {
     };
   }
 
+  render() {
+    const { campaignList, isLoading } = this.props;
+    return (
+      <div className={"padding-rl-10 middle-section"}>
+        {campaignList && !isLoading && this.renderCampaignList()}
+        {isLoading && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     if (this.props.searchData.searchKeyword) {
@@ -73,15 +83,6 @@ class CampaignPage extends Component {
     });
   };
 
-  render() {
-    const { campaignList, isLoading } = this.props;
-    return (
-      <div className={"padding-rl-10 middle-section"}>
-        {campaignList && !isLoading && this.renderCampaignList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 CampaignPage.propTypes = {
