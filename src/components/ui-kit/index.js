@@ -5,7 +5,8 @@ export {
   UserPicLoading,
   Loader,
   RightSidebarLoading,
-  CustomeTableLoader
+  CustomeTableLoader,
+  CampaignDetailsLoading
 } from "./loading-indicator";
 export { LeftSidebarNav } from "./nav-menu";
 export { TopBar } from "./top-bar";

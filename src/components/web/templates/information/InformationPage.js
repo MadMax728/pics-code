@@ -17,7 +17,7 @@ import {
 } from "../../../../actions";
 import { getBackendPostType } from "../../../Factory";
 import { connect } from "react-redux";
-import { ThreeDots, CampaignLoading } from "../../../ui-kit";
+import { ThreeDots, CampaignDetailsLoading } from "../../../ui-kit";
 import moment from "moment";
 import * as routes from "../../../../lib/constants/routes";
 
@@ -430,7 +430,7 @@ class InformationPage extends Component {
             </div>
           </div>
         )}
-        {isLoading && <CampaignLoading count={1} />}
+        {isLoading && <CampaignDetailsLoading count={1} />}
       </div>
     );
   }
