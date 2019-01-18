@@ -26,7 +26,7 @@ const CampaignLoading = ({ count }) => {
         <div className="feed_content">
           <div className="feed_image">
             <img
-              src={images.plcholder_pic}
+              src={images.placeholder_pic}
               alt="feed_image"
               className="img-responsive profile_pic_gray big gray_box"
             />
