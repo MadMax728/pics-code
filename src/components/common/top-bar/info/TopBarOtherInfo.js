@@ -26,8 +26,30 @@ class TopBarOtherInfo extends Component {
         userProfile: this.props.match.profileUrl,
         slots: [
           {
+            className: "col-sm-4 slot_one no-padding",
             name: Translations.top_bar_info.subscriber,
             val: 0,
+            userid: this.props.match.userid,
+            username: this.props.match.username
+          },
+          {
+            className: "col-sm-4 slot_one no-padding",
+            name: Translations.top_bar_info.subscribed,
+            val: 0,
+            userid: this.props.match.userid,
+            username: this.props.match.username,
+            isHide: true
+          },
+          {
+            className: "col-sm-4 slot_one no-padding",
+            name: Translations.top_bar_info.posts,
+            val: 0,
+            userid: this.props.match.userid,
+            username: this.props.match.username
+          }
+        ],
+        btnSlots: [
+          {
             className: "col-sm-8 slot_one no-padding",
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.subscribe,
@@ -36,19 +58,6 @@ class TopBarOtherInfo extends Component {
             username: this.props.match.username
           },
           {
-            name: Translations.top_bar_info.subscribed,
-            val: 0,
-            className: "col-sm-4 slot_two no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.message,
-            handeleEvent: this.handeleMessage,
-            userid: this.props.match.userid,
-            username: this.props.match.username,
-            isHide: true
-          },
-          {
-            name: Translations.top_bar_info.posts,
-            val: 0,
             className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.message,
@@ -132,8 +141,29 @@ class TopBarOtherInfo extends Component {
       blockId: this.props.userDataByUsername.user.data.blockId,
       slots: [
         {
+          className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.subscriber,
           val: this.props.userDataByUsername.user.data.subscribersCount,
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
+        },
+        {
+          className: "col-sm-4 slot_one no-padding",
+          name: Translations.top_bar_info.subscribed,
+          val: this.props.userDataByUsername.user.data.subscribedCount,
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
+        },
+        {
+          className: "col-sm-4 slot_one no-padding",
+          name: Translations.top_bar_info.posts,
+          val: this.props.userDataByUsername.user.data.postCount,
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
+        }
+      ],
+      btnSlots: [
+        {
           className: "col-sm-8 slot_one no-padding",
           btnActiveClassName: subscribeBtnClass,
           btnText: subscribeBtnText,
@@ -142,19 +172,6 @@ class TopBarOtherInfo extends Component {
           username: this.props.userDataByUsername.user.data.username
         },
         {
-          name: Translations.top_bar_info.subscribed,
-          val: this.props.userDataByUsername.user.data.subscribedCount,
-          className: "col-sm-4 slot_two no-padding",
-          btnActiveClassName: subscribeBtnClass,
-          btnText: subscribeBtnText,
-          handeleEvent: this.handeleSubscribe,
-          userid: this.props.userDataByUsername.user.data.id,
-          username: this.props.userDataByUsername.user.data.username,
-          isHide: true
-        },
-        {
-          name: Translations.top_bar_info.posts,
-          val: this.props.userDataByUsername.user.data.postCount,
           className: "col-sm-4 slot_two no-padding",
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.message,
@@ -167,16 +184,6 @@ class TopBarOtherInfo extends Component {
     this.setState({ items });
   };
 
-  // {
-  //   name: Translations.top_bar_info.posts,
-  //   val: this.props.userDataByUsername.user.data.postCount,
-  //   className: "col-sm-4 slot_three no-padding",
-  //   btnActiveClassName: isLikeBtnClass,
-  //   btnText: Translations.top_bar_info.like_you,
-  //   handeleEvent: this.handeleLikeYou,
-  //   userid: this.props.userDataByUsername.user.data.id,
-  //   username: this.props.userDataByUsername.user.data.username
-  // }
   handeleSubscribe = () => {
     // To Do - Integration changed - according to backend API response
     const errors = {};
