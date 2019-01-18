@@ -54,7 +54,7 @@ class TopBarOwnerInfo extends Component {
           {
             name: Translations.top_bar_info.subscriber,
             className: "col-sm-4 slot_one no-padding",
-            btnActiveClassName: "black_button",
+            btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.upload,
             handeleEvent: this.handeleUpload,
             userid: userInfo.id,
@@ -63,7 +63,7 @@ class TopBarOwnerInfo extends Component {
           {
             name: Translations.top_bar_info.subscribed,
             className: "col-sm-4 slot_two no-padding",
-            btnActiveClassName: "filled_button",
+            btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_campaign,
             handeleEvent: this.handeleCreateCampaign,
             userid: userInfo.id,
@@ -72,7 +72,7 @@ class TopBarOwnerInfo extends Component {
           {
             name: Translations.top_bar_info.posts,
             className: "col-sm-4 slot_three no-padding",
-            btnActiveClassName: "filled_button",
+            btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_ad,
             handeleEvent: this.handeleCreateAd,
             userid: userInfo.id,
