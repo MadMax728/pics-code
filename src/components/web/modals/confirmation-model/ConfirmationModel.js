@@ -11,22 +11,6 @@ class ConfirmationModal extends Component {
     this.state = {};
   }
 
-  handleConfirmation = value => {
-    const paramData = { isActive: value };
-    this.props.deactivateAccount(paramData).then(() => {
-      if (
-        this.props.profilePrivacyData.error &&
-        this.props.profilePrivacyData.error.status === 400
-      ) {
-        console.log("error");
-        // To Do - Call back to Modal call - with error status
-      } else {
-        console.log("Deactivate Accont");
-        // To Do - Call back to Modal call - with success status
-      }
-    });
-  };
-
   render() {
     const { handleModalInfoHide, handleModalHide, modalInfoMsg } = this.props;
     return (
@@ -48,6 +32,23 @@ class ConfirmationModal extends Component {
       />
     );
   }
+
+  handleConfirmation = value => {
+    const paramData = { isActive: value };
+    this.props.deactivateAccount(paramData).then(() => {
+      if (
+        this.props.profilePrivacyData.error &&
+        this.props.profilePrivacyData.error.status === 400
+      ) {
+        console.log("error");
+        // To Do - Call back to Modal call - with error status
+      } else {
+        console.log("Deactivate Accont");
+        // To Do - Call back to Modal call - with success status
+      }
+    });
+  };
+
 }
 
 const mapStateToProps = state => ({

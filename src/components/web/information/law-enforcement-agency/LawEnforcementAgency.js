@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
 
 class LawEnforcementAgency extends Component {
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
 
   render() {
     return (
@@ -110,6 +107,10 @@ class LawEnforcementAgency extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
 }
 
 export default LawEnforcementAgency;

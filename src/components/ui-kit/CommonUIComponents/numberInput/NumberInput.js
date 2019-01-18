@@ -11,13 +11,6 @@ class NumberInput extends Component {
     };
   }
 
-  handleChangeField = event => {
-    this.setState({ value: event.target.value });
-    const { data } = this.state;
-    data.values = { name: this.state.name, val: event.target.value };
-    this.props.onChange(data);
-  };
-
   render() {
     const { name, min, max, pattern, className, id, value } = this.props;
     return (
@@ -35,6 +28,14 @@ class NumberInput extends Component {
       />
     );
   }
+
+  handleChangeField = event => {
+    this.setState({ value: event.target.value });
+    const { data } = this.state;
+    data.values = { name: this.state.name, val: event.target.value };
+    this.props.onChange(data);
+  };
+
 }
 
 NumberInput.propTypes = {

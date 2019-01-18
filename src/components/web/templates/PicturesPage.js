@@ -6,6 +6,18 @@ import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
 
 class PicturesRoot extends React.Component {
+
+  render() {
+    const { picsList, isLoadingpics } = this.props;
+
+    return (
+      <div className="padding-rl-10 middle-section">
+        {picsList && !isLoadingpics && this.renderuserList()}
+        {isLoadingpics && <UserPicLoading />}
+      </div>
+    );
+  }
+  
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.props.getDashboard("pics");
@@ -24,16 +36,6 @@ class PicturesRoot extends React.Component {
     });
   };
 
-  render() {
-    const { picsList, isLoadingpics } = this.props;
-
-    return (
-      <div className="padding-rl-10 middle-section">
-        {picsList && !isLoadingpics && this.renderuserList()}
-        {isLoadingpics && <UserPicLoading />}
-      </div>
-    );
-  }
 }
 
 PicturesRoot.propTypes = {

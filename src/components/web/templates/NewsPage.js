@@ -5,38 +5,48 @@ import { getDashboard, getSearch } from "../../../actions";
 import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
+import { search } from "../../../lib/utils/helpers";
 
 class NewsRoot extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      newsFeedList: null
+    };
+  }
+
+
+  render() {
+    let { newsFeedList } = this.state;
+    const { isLoadingnews, searchData } = this.props;
+    newsFeedList = search(newsFeedList,"userName", searchData.searchKeyword);
+
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
+        {!newsFeedList && <NoDataFoundCenterPage />}
+        {isLoadingnews && <CampaignLoading />}
+        {newsFeedList && newsFeedList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+      </div>
+    );
+  }
+  
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (this.props.searchData.searchKeyword) {
-      this.props.getDashboard(
-        "news",
-        "?isSearch=" + this.props.searchData.searchKeyword
-      );
-    } else {
-      this.props.getDashboard("news", "");
-    }
+    this.handleSetNewsFeed();
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      let searchParam = "";
-      if (searchKeyword) {
-        searchParam = "?isSearch=" + searchKeyword;
-      }
-      this.props.getDashboard("news", searchParam);
-    }
-  };
+  handleSetNewsFeed = () => {
+    this.props.getDashboard("news", "").then(() => {
+      const { newsFeedList } = this.props;
+      this.setState({newsFeedList});
+    });
+  }
 
   renderNewsFeedList = () => {
-    const { newsFeedList } = this.props;
+    let { newsFeedList } = this.state;
+    const { searchData } = this.props;
+    newsFeedList = search(newsFeedList,"userName", searchData.searchKeyword);
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
@@ -98,14 +108,12 @@ class NewsRoot extends Component {
     });
   };
 
-  render() {
-    const { newsFeedList, isLoadingnews } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}> <NoDataFoundCenterPage/>
-        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
-        {isLoadingnews && <CampaignLoading />}
-      </div>
-    );
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.handleSetNewsFeed();
+    }
   }
 }
 

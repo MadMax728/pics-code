@@ -3,14 +3,6 @@ import PropTypes from "prop-types";
 import EditProfileCrop from "./EditProfileCrop";
 import CampaignAdCrop from "./CampaignAdCrop";
 
-const propTypes = {
-  image: PropTypes.any,
-  handleScale: PropTypes.func,
-  handleEditImage: PropTypes.func,
-  isCircle: PropTypes.bool,
-  handleActualImg: PropTypes.any,
-};
-
 class ImageCropper extends Component {
   constructor(props) {
     super(props);
@@ -127,6 +119,15 @@ class ImageCropper extends Component {
     );
   }
 }
+
+const propTypes = {
+  image: PropTypes.any,
+  handleScale: PropTypes.func,
+  handleEditImage: PropTypes.func,
+  isCircle: PropTypes.bool,
+  handleActualImg: PropTypes.any,
+};
+
 
 ImageCropper.propTypes = propTypes;
 

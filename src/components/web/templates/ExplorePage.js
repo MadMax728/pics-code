@@ -7,6 +7,18 @@ import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {
+
+
+  render() {
+    const { exploreList, isLoadingexplores } = this.props;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {exploreList && !isLoadingexplores && this.renderExploreList()}
+        {isLoadingexplores && <CampaignLoading />}
+      </div>
+    );
+  }
+  
   componentDidMount = () => {
     window.scrollTo(0, 0);
     if (this.props.searchData.searchKeyword) {
@@ -49,15 +61,6 @@ class ExploreRoot extends Component {
     });
   };
 
-  render() {
-    const { exploreList, isLoadingexplores } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {exploreList && !isLoadingexplores && this.renderExploreList()}
-        {isLoadingexplores && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 ExploreRoot.propTypes = {

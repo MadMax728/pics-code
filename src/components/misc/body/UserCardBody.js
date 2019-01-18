@@ -19,7 +19,7 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, r
           offset={[-200, 0]}
           placeholder={<Loader />}
         >
-          <img src={user.profileUrl} alt={"pic-1"} />
+          <div className="profile-img-wrapper"><img src={user.profileUrl} alt={"pic-1"} /></div>
         </LazyLoad>
         <div className="name-wrapper">
           <div className="username">{user.username}</div>

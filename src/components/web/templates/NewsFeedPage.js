@@ -14,6 +14,17 @@ class NewsFeedPage extends Component {
     };
   }
 
+  render() {
+    const { newsFeedList, isLoading } = this.props;
+    const { isPrivate } = this.state;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {newsFeedList && !isLoading && !isPrivate && this.renderNewsFeedList()}
+        {isLoading && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     if (this.props.match.params.username) {
@@ -125,16 +136,6 @@ class NewsFeedPage extends Component {
     });
   };
 
-  render() {
-    const { newsFeedList, isLoading } = this.props;
-    const { isPrivate } = this.state;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {newsFeedList && !isLoading && !isPrivate && this.renderNewsFeedList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 NewsFeedPage.propTypes = {
