@@ -33,46 +33,6 @@ class Information extends Component {
     };
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    // this.props.getCampaignDetails(this.state.commentId)
-  };
-
-  handleFavorite = () => {
-    this.setState({
-      campaign_detail: {
-        ...this.state.campaign_detail,
-        isFavorite: !this.state.campaign_detail.isFavorite,
-        like_count: this.state.campaign_detail.isFavorite
-          ? this.state.campaign_detail.like_count - 1
-          : this.state.campaign_detail.like_count + 1
-      }
-    });
-  };
-
-  handleMessage = e => {
-    this.props.handleModalShow(modalType.messages, { id: e.target.id });
-  };
-
-  handleOnKeyDown = () => {};
-
-  handleReportPost = () => {};
-
-  handleSavePost = () => {};
-
-  handleContent = () => {};
-
-  /**
-   * Tooltp
-   */
-  renderReportTips = () => {
-    return (
-      <RenderToolTips
-        items={this.state.ReportTips}
-        id={this.state.campaign_detail.id}
-      />
-    );
-  };
 
   render() {
     const { campaign_detail } = this.state;
@@ -266,6 +226,48 @@ class Information extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    // this.props.getCampaignDetails(this.state.commentId)
+  };
+
+  handleFavorite = () => {
+    this.setState({
+      campaign_detail: {
+        ...this.state.campaign_detail,
+        isFavorite: !this.state.campaign_detail.isFavorite,
+        like_count: this.state.campaign_detail.isFavorite
+          ? this.state.campaign_detail.like_count - 1
+          : this.state.campaign_detail.like_count + 1
+      }
+    });
+  };
+
+  handleMessage = e => {
+    this.props.handleModalShow(modalType.messages, { id: e.target.id });
+  };
+
+  handleOnKeyDown = () => {};
+
+  handleReportPost = () => {};
+
+  handleSavePost = () => {};
+
+  handleContent = () => {};
+
+  /**
+   * Tooltp
+   */
+  renderReportTips = () => {
+    return (
+      <RenderToolTips
+        items={this.state.ReportTips}
+        id={this.state.campaign_detail.id}
+      />
+    );
+  };
+
 }
 
 Information.propTypes = {

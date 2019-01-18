@@ -27,11 +27,48 @@ const initialState = {
     error: false
   }
 };
+
 class UploadModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = initialState;
   }
+
+
+  render() {
+    const { form } = this.state;
+
+    return (
+      <CustomBootstrapModal
+        modalClassName={"modal fade upload-image-modal create-campaign-modal"}
+        header
+        modalHeaderContent={
+          <UploadHeader
+            handleModalHide={this.handleModalHide}
+            handleContinue={this.handleContinue}
+          />
+        }
+        footer={false}
+        closeBtn={false}
+        modalShow={this.props.modalShow}
+        handleModalHide={this.handleModalHide}
+        modalBodyContent={
+          <Upload
+            handleChangeField={this.handleChangeField}
+            form={form}
+            handleSetState={this.handleSetState}
+            handleLocation={this.handleLocation}
+            handleUpload={this.handleUpload}
+            handleSelect={this.handleSelect}
+          />
+        }
+      />
+    );
+  }
+
+  componentWillUnmount = () => {
+    this.setState(initialState);
+  };
 
   handleUpload = (imageVideo, file, filetype) => {
     if (filetype) {
@@ -129,10 +166,6 @@ class UploadModal extends Component {
     }
   };
 
-  componentWillUnmount = () => {
-    this.setState(initialState);
-  };
-
   handleChangeField = event => {
     const { form } = this.state;
     if (event.target.type === "checkbox") {
@@ -173,36 +206,6 @@ class UploadModal extends Component {
     );
   };
 
-  render() {
-    const { form } = this.state;
-
-    return (
-      <CustomBootstrapModal
-        modalClassName={"modal fade upload-image-modal create-campaign-modal"}
-        header
-        modalHeaderContent={
-          <UploadHeader
-            handleModalHide={this.handleModalHide}
-            handleContinue={this.handleContinue}
-          />
-        }
-        footer={false}
-        closeBtn={false}
-        modalShow={this.props.modalShow}
-        handleModalHide={this.handleModalHide}
-        modalBodyContent={
-          <Upload
-            handleChangeField={this.handleChangeField}
-            form={form}
-            handleSetState={this.handleSetState}
-            handleLocation={this.handleLocation}
-            handleUpload={this.handleUpload}
-            handleSelect={this.handleSelect}
-          />
-        }
-      />
-    );
-  }
 }
 
 UploadModal.propTypes = {

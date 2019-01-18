@@ -73,6 +73,22 @@ class TopBarOtherInfo extends Component {
     };
   }
 
+  render() {
+    return (
+      <TopBar
+        items={this.state.items}
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        userDataByUsername={this.props.userDataByUsername}
+      />
+    );
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    this.getUserData();
+  }
+
   componentWillReceiveProps(nextProps) {
     const data = this.props.match;
     if (data.username !== nextProps.match.username) {
@@ -86,11 +102,6 @@ class TopBarOtherInfo extends Component {
         }
       });
     }
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    this.getUserData();
   }
 
   getUserData = () => {
@@ -224,16 +235,6 @@ class TopBarOtherInfo extends Component {
     this.props.history.push(routes.MESSAGES_ROUTE);
   };
 
-  render() {
-    return (
-      <TopBar
-        items={this.state.items}
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        userDataByUsername={this.props.userDataByUsername}
-      />
-    );
-  }
 }
 
 const mapStateToProps = state => ({

@@ -5,21 +5,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getSearch } from "../../../../actions";
 class Feedback extends Component {
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
 
   render() {
     return (
@@ -99,6 +84,23 @@ class Feedback extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
 }
 
 const mapStateToProps = state => ({

@@ -83,25 +83,17 @@ class TopBarOwnerInfo extends Component {
     };
   }
 
-  handeleUpload = () => {
-    this.props.handleModalShow(modalType.upload);
-  };
-
-  handeleCreateCampaign = () => {
-    this.props.handleModalShow(modalType.campaign);
-  };
-
-  handeleCreateAd = () => {
-    this.props.handleModalShow(modalType.ads);
-  };
-
-  handelePayment = () => {
-    this.props.handleModalShow(modalType.payment);
-  };
-
-  handeleShare = () => {
-    this.props.handleModalInfoShow(modalType.share);
-  };
+  render() {
+    return (
+      <TopBar
+        items={this.state.items}
+        handeleShare={this.handeleShare}
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        userDataByUsername={this.props.userDataByUsername}
+      />
+    );
+  }
 
   componentDidMount() {
     const storage = Auth.extractJwtFromStorage();
@@ -255,17 +247,26 @@ class TopBarOwnerInfo extends Component {
     }
   }
 
-  render() {
-    return (
-      <TopBar
-        items={this.state.items}
-        handeleShare={this.handeleShare}
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        userDataByUsername={this.props.userDataByUsername}
-      />
-    );
-  }
+  handeleUpload = () => {
+    this.props.handleModalShow(modalType.upload);
+  };
+
+  handeleCreateCampaign = () => {
+    this.props.handleModalShow(modalType.campaign);
+  };
+
+  handeleCreateAd = () => {
+    this.props.handleModalShow(modalType.ads);
+  };
+
+  handelePayment = () => {
+    this.props.handleModalShow(modalType.payment);
+  };
+
+  handeleShare = () => {
+    this.props.handleModalInfoShow(modalType.share);
+  };
+
 }
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,

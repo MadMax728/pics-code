@@ -18,8 +18,6 @@ class StepOne extends Component {
     this.state = {};
   }
 
-  componentDidMount = () => {};
-
   render() {
     const {
       handleChangeField,
@@ -301,6 +299,9 @@ class StepOne extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {};
+  
 }
 
 StepOne.propTypes = {

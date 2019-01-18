@@ -14,28 +14,6 @@ class Support extends Component {
     };
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
-
-  handleCollapse = e => {
-    this.setState({ open: !this.state.open, current: e.target.id });
-  };
-
-  handleKeyDown = () => {};
-
   render() {
     const { open, current } = this.state;
     return (
@@ -148,6 +126,28 @@ class Support extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
+  handleCollapse = e => {
+    this.setState({ open: !this.state.open, current: e.target.id });
+  };
+
+  handleKeyDown = () => {};
 }
 
 const mapStateToProps = state => ({

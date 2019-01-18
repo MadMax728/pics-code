@@ -47,6 +47,40 @@ class SocialNetworks extends Component {
     };
   }
 
+  render() {
+    const { isOwnerProfile, userData } = this.props;
+    return (
+      <div>
+        {userData &&
+          !userData.error &&
+          !userData.isLoading &&
+          userData.socialNetworks &&
+          userData.socialNetworks.length > 0 && (
+            <div className="social-link-wrapr col-xs-12 no-padding">
+              <div className="form-subtitle">Social Network URL</div>
+              <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
+                {userData.socialNetworks.map(socialNetwork => {
+                  return (
+                    <SocialProfileUrl
+                      key={socialNetwork.socialNetworkType}
+                      id={socialNetwork.socialNetworkType}
+                      title={socialNetwork.title}
+                      icon={socialNetwork.icon}
+                      publicUrl={socialNetwork.publicUrl}
+                      isConnectInProgress={this.state.isConnectInProgress}
+                      handleSocialConnect={this.handleSocialConnect}
+                      handleSocialClear={this.handleSocialClear}
+                      isOwnerProfile={isOwnerProfile}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          )}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     this.props.getSocialNetwork();
     window.scrollTo(0, 0);
@@ -178,39 +212,6 @@ class SocialNetworks extends Component {
     }
   }
 
-  render() {
-    const { isOwnerProfile, userData } = this.props;
-    return (
-      <div>
-        {userData &&
-          !userData.error &&
-          !userData.isLoading &&
-          userData.socialNetworks &&
-          userData.socialNetworks.length > 0 && (
-            <div className="social-link-wrapr col-xs-12 no-padding">
-              <div className="form-subtitle">Social Network URL</div>
-              <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
-                {userData.socialNetworks.map(socialNetwork => {
-                  return (
-                    <SocialProfileUrl
-                      key={socialNetwork.socialNetworkType}
-                      id={socialNetwork.socialNetworkType}
-                      title={socialNetwork.title}
-                      icon={socialNetwork.icon}
-                      publicUrl={socialNetwork.publicUrl}
-                      isConnectInProgress={this.state.isConnectInProgress}
-                      handleSocialConnect={this.handleSocialConnect}
-                      handleSocialClear={this.handleSocialClear}
-                      isOwnerProfile={isOwnerProfile}
-                    />
-                  );
-                })}
-              </div>
-            </div>
-          )}
-      </div>
-    );
-  }
 }
 
 // Specifies the default values for props:

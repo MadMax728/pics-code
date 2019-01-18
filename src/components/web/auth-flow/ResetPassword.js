@@ -9,6 +9,7 @@ import {
 import { Auth } from "../../../auth";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { connect } from "react-redux";
+
 class ResetPassword extends Component {
   constructor(props) {
     super(props);
@@ -19,6 +20,70 @@ class ResetPassword extends Component {
         repeat_password: ""
       }
     };
+  }
+
+  render() {
+    const { form } = this.state;
+    return (
+      <div className="login-process">
+        <BaseHeader />
+        <section>
+          <div className="custom-container">
+            <div className="login-wrapper">
+              <h3 className="text-center">
+                {Translations.reset_password.header}
+              </h3>
+              <p>{Translations.reset_password.subheader}</p>
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder={Translations.reset_password.enetr_password}
+                    autoComplete="Password"
+                    name="password"
+                    value={form.password ? form.password : ""}
+                    onChange={this.handleChangeField}
+                  />
+
+                  {form.password.length === 0 ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                </div>
+                <div className="form-group">
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="new-password"
+                    placeholder={Translations.reset_password.repeat_password}
+                    autoComplete="Repeat Password"
+                    name="repeat_password"
+                    value={form.repeat_password ? form.repeat_password : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.repeat_password.length === 0 ||
+                    form.password !== form.repeat_password ? (
+                      <img src={images.error} alt={"error"} />
+                    ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                </div>
+                <div className="form-group">
+                  <button className="blue_button" onClick={this.handleSubmit}>
+                    {Translations.reset_password.send}
+                  </button>
+                </div>
+              </form>
+              <DownloadStore />
+            </div>
+          </div>
+        </section>
+        <BaseFooter className={"custom-container"} />
+      </div>
+    );
   }
 
   //logout user
@@ -65,70 +130,6 @@ class ResetPassword extends Component {
     return true;
   };
 
-  render() {
-    const { form } = this.state;
-
-    return (
-      <div className="login-process">
-        <BaseHeader />
-        <section>
-          <div className="custom-container">
-            <div className="login-wrapper">
-              <h3 className="text-center">
-                {Translations.reset_password.header}
-              </h3>
-              <p>{Translations.reset_password.subheader}</p>
-              <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder={Translations.reset_password.enetr_password}
-                    autoComplete="Password"
-                    name="password"
-                    value={form.password ? form.password : ""}
-                    onChange={this.handleChangeField}
-                  />
-
-                  {form.password.length === 0 ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                </div>
-                <div className="form-group">
-                  <input
-                    type="password"
-                    className="form-control"
-                    id="new-password"
-                    placeholder={Translations.reset_password.repeat_password}
-                    autoComplete="Repeat Password"
-                    name="repeat_password"
-                    value={form.repeat_password ? form.repeat_password : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.repeat_password.length === 0 ||
-                  form.password !== form.repeat_password ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                </div>
-                <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
-                    {Translations.reset_password.send}
-                  </button>
-                </div>
-              </form>
-              <DownloadStore />
-            </div>
-          </div>
-        </section>
-        <BaseFooter className={"custom-container"} />
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

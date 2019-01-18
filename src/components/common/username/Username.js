@@ -13,29 +13,6 @@ class Username extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.props.getHashUser("usernames").then(() => {
-      if (this.props.usersList) {
-        this.setState({ usersList: this.props.usersList });
-      }
-    });
-  };
-
-  _commentsCbUserName = item => {
-    const username = item.username;
-    const id = item.id;
-    let { value } = this.props;
-    const commentArr = value.split(" ");
-    commentArr.pop();
-    if (this.props.username) {
-      value = commentArr.join(" ") + username;
-      this.props.handleSetSatetToolTipUsername(id, value);
-    } else {
-      value = commentArr.join(" ") + " @" + username;
-      this.props.handleSetSatetToolTipUsername(value);
-    }
-  };
-
   render() {
     let { usersList } = this.state;
 
@@ -90,6 +67,30 @@ class Username extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getHashUser("usernames").then(() => {
+      if (this.props.usersList) {
+        this.setState({ usersList: this.props.usersList });
+      }
+    });
+  };
+
+  _commentsCbUserName = item => {
+    const username = item.username;
+    const id = item.id;
+    let { value } = this.props;
+    const commentArr = value.split(" ");
+    commentArr.pop();
+    if (this.props.username) {
+      value = commentArr.join(" ") + username;
+      this.props.handleSetSatetToolTipUsername(id, value);
+    } else {
+      value = commentArr.join(" ") + " @" + username;
+      this.props.handleSetSatetToolTipUsername(value);
+    }
+  };
+
 }
 
 const mapStateToProps = state => ({

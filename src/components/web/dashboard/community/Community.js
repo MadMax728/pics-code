@@ -18,73 +18,6 @@ class Community extends Component {
     this.state = { usersList: null, error: null };
   }
 
-  componentDidMount = () => {
-    this.getUserData();
-    window.scrollTo(0, 0);
-  };
-
-  getUserData = () => {
-    const { usersList, getDashboard } = this.props;
-    getDashboard("users", "").then(() => {
-      if (usersList) {
-        this.setState({ usersList });
-      }
-    });
-  };
-
-  // Top Bar - User Info
-  getUserInfo = () => {
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    const data = { username: userInfo.username };
-    const { getUser, userDataByUsername } = this.props;
-    getUser(data).then(() => {
-      if (userDataByUsername.user.data) {
-        // Success
-      }
-    });
-  };
-
-  handleSubscribed = e => {
-    const errors = {};
-    const { sendRequest, getUnsubscribe, usersList } = this.props;
-    const selectedUserList = usersList.find(user => user.id === e.target.id);
-    if (selectedUserList.subscribeId === "") {
-      const requestData = { followers: e.target.id };
-      sendRequest(requestData).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          errors.servererror =
-            Translations.profile_community_right_sidebar.serverError;
-          this.setState({ error: errors });
-        } else if (this.props.usersData.isRequestSendData) {
-          this.getUserData();
-          this.getUserInfo();
-        }
-      });
-    } else {
-      const subscribedId = selectedUserList.subscribeId;
-      getUnsubscribe(subscribedId).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          errors.servererror =
-            Translations.profile_community_right_sidebar.serverError;
-          this.setState({ error: errors });
-        } else if (this.props.usersData.isUnsubscribedData) {
-          this.getUserData();
-          this.getUserInfo();
-        }
-      });
-    }
-  };
-
   render() {
     const { isLoading, isLoadingusers, usersList, usersData } = this.props;
     const userListIsLoading = usersData.isLoading;
@@ -183,6 +116,74 @@ class Community extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.getUserData();
+    window.scrollTo(0, 0);
+  };
+
+  getUserData = () => {
+    const { usersList, getDashboard } = this.props;
+    getDashboard("users", "").then(() => {
+      if (usersList) {
+        this.setState({ usersList });
+      }
+    });
+  };
+
+  // Top Bar - User Info
+  getUserInfo = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    const data = { username: userInfo.username };
+    const { getUser, userDataByUsername } = this.props;
+    getUser(data).then(() => {
+      if (userDataByUsername.user.data) {
+        // Success
+      }
+    });
+  };
+
+  handleSubscribed = e => {
+    const errors = {};
+    const { sendRequest, getUnsubscribe, usersList } = this.props;
+    const selectedUserList = usersList.find(user => user.id === e.target.id);
+    if (selectedUserList.subscribeId === "") {
+      const requestData = { followers: e.target.id };
+      sendRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          errors.servererror =
+            Translations.profile_community_right_sidebar.serverError;
+          this.setState({ error: errors });
+        } else if (this.props.usersData.isRequestSendData) {
+          this.getUserData();
+          this.getUserInfo();
+        }
+      });
+    } else {
+      const subscribedId = selectedUserList.subscribeId;
+      getUnsubscribe(subscribedId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          errors.servererror =
+            Translations.profile_community_right_sidebar.serverError;
+          this.setState({ error: errors });
+        } else if (this.props.usersData.isUnsubscribedData) {
+          this.getUserData();
+          this.getUserInfo();
+        }
+      });
+    }
+  };
+
 }
 
 const mapStateToProps = state => ({

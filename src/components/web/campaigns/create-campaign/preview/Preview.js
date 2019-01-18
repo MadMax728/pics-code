@@ -11,6 +11,7 @@ let userInfo = null;
 if (storage) {
   userInfo = JSON.parse(storage.userInfo);
 }
+
 class Preview extends Component {
   constructor(props) {
     super(props);
@@ -19,11 +20,6 @@ class Preview extends Component {
     };
   }
 
-  componentDidMount = () => {
-    if (userInfo) {
-      this.setState({ userInfo });
-    }
-  };
 
   render() {
     const { form } = this.props;
@@ -127,6 +123,13 @@ class Preview extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    if (userInfo) {
+      this.setState({ userInfo });
+    }
+  };
+
 }
 
 Preview.propTypes = {

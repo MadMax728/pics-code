@@ -9,21 +9,6 @@ import PropTypes from "prop-types";
 import { RightSidebarLoading } from "../../../ui-kit";
 
 class FavouriteCampaigns extends Component {
-  componentDidMount = () => {
-    this.props.getFavouriteCampaigns("", "");
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      if (searchKeyword) {
-        const searchParam = "?isSearch=" + searchKeyword;
-        this.props.getFavouriteCampaigns("", searchParam);
-      }
-    }
-  }
 
   render() {
     const { isLoading } = this.props;
@@ -62,6 +47,23 @@ class FavouriteCampaigns extends Component {
       </div>
     );
   }
+  
+  componentDidMount = () => {
+    this.props.getFavouriteCampaigns("", "");
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      if (searchKeyword) {
+        const searchParam = "?isSearch=" + searchKeyword;
+        this.props.getFavouriteCampaigns("", searchParam);
+      }
+    }
+  }
+
 }
 
 const mapStateToProps = state => ({

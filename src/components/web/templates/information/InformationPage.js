@@ -46,22 +46,32 @@ class InformationPage extends Component {
     };
   }
 
+  render() {
+    const { campaignDetails, isLoading } = this.props;
+    const { isComments, comments } = this.state;
+    return (
+      <div className="padding-l-10 middle-section width-80">
+        {campaignDetails && !isLoading && (
+          <CampaignDetailsCard 
+            campaignDetails={campaignDetails} 
+            isComments={isComments} 
+            comments={comments} 
+            handleApplyParticipant={this.handleApplyParticipant} 
+            handleCommentsSections={this.handleCommentsSections}
+            handleFavorite={this.handleFavorite}
+            handleOnKeyDown={this.handleOnKeyDown}
+            renderReportTips={this.renderReportTips}
+            handleComment={this.handleComment}
+          />
+        )}
+        {isLoading && <CampaignDetailsLoading count={1} />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.getCampaignDetailsData();
-  };
-
-  getCampaignDetailsData = () => {
-    const data = {
-      id: this.state.campaignId
-    };
-    this.props.getCampaignDetails(data).then(() => {
-      if (this.props.campaignDetails) {
-        this.setState({
-          campaignDetails: this.props.campaignDetails
-        });
-      }
-    });
   };
 
   componentWillReceiveProps = nextProps => {
@@ -75,6 +85,19 @@ class InformationPage extends Component {
       const searchKeyword = nextProps.searchData.searchKeyword;
       this.props.history.push("/campaign/company?search=" + searchKeyword);
     }
+  };
+
+  getCampaignDetailsData = () => {
+    const data = {
+      id: this.state.campaignId
+    };
+    this.props.getCampaignDetails(data).then(() => {
+      if (this.props.campaignDetails) {
+        this.setState({
+          campaignDetails: this.props.campaignDetails
+        });
+      }
+    });
   };
 
   handleFavorite = () => {
@@ -194,28 +217,6 @@ class InformationPage extends Component {
     }
   };
 
-  render() {
-    const { campaignDetails, isLoading } = this.props;
-    const { isComments, comments } = this.state;
-    return (
-      <div className="padding-l-10 middle-section width-80">
-        {campaignDetails && !isLoading && (
-          <CampaignDetailsCard 
-            campaignDetails={campaignDetails} 
-            isComments={isComments} 
-            comments={comments} 
-            handleApplyParticipant={this.handleApplyParticipant} 
-            handleCommentsSections={this.handleCommentsSections}
-            handleFavorite={this.handleFavorite}
-            handleOnKeyDown={this.handleOnKeyDown}
-            renderReportTips={this.renderReportTips}
-            handleComment={this.handleComment}
-          />
-        )}
-        {isLoading && <CampaignDetailsLoading count={1} />}
-      </div>
-    );
-  }
 }
 
 InformationPage.propTypes = {

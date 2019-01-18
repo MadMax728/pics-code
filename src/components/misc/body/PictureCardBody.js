@@ -13,18 +13,6 @@ class PictureCardBody extends Component {
     super(props);
   }
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
-
   render() {
     const { pic, index, isReport, isLoading, history } = this.props;
     return (
@@ -44,7 +32,7 @@ class PictureCardBody extends Component {
               {/* <img src={pic.mediaUrl} alt={pic.typeContent} /> */}
               {pic.typeContent &&
                 pic.typeContent.toLowerCase() ===
-                  enumerations.mediaTypes.video && (
+                enumerations.mediaTypes.video && (
                   <VideoItem
                     id={pic.id}
                     item={pic.mediaUrl}
@@ -54,9 +42,9 @@ class PictureCardBody extends Component {
               {(!pic.typeContent ||
                 (pic.typeContent &&
                   pic.typeContent.toLowerCase() ===
-                    enumerations.mediaTypes.image)) && (
-                <ImageItem item={pic.mediaUrl} isLoading={isLoading} />
-              )}
+                  enumerations.mediaTypes.image)) && (
+                  <ImageItem item={pic.mediaUrl} isLoading={isLoading} />
+                )}
             </LazyLoad>
             <div className="name-wrapper">
               <div className="username">{pic.userName}</div>
@@ -68,6 +56,18 @@ class PictureCardBody extends Component {
       </div>
     );
   }
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
 }
 
 const mapStateToProps = state => ({

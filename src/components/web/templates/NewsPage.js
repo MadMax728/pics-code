@@ -15,6 +15,22 @@ class NewsRoot extends Component {
     };
   }
 
+
+  render() {
+    let { newsFeedList } = this.state;
+    const { isLoadingnews, searchData } = this.props;
+    newsFeedList = search(newsFeedList,"userName", searchData.searchKeyword);
+
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
+        {!newsFeedList && <NoDataFoundCenterPage />}
+        {isLoadingnews && <CampaignLoading />}
+        {newsFeedList && newsFeedList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+      </div>
+    );
+  }
+  
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.handleSetNewsFeed();
@@ -98,21 +114,6 @@ class NewsRoot extends Component {
       getSearch("");
       this.handleSetNewsFeed();
     }
-  }
-
-  render() {
-    let { newsFeedList } = this.state;
-    const { isLoadingnews, searchData } = this.props;
-    newsFeedList = search(newsFeedList,"userName", searchData.searchKeyword);
-
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
-        {!newsFeedList && <NoDataFoundCenterPage />}
-        {isLoadingnews && <CampaignLoading />}
-        {newsFeedList && newsFeedList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
-      </div>
-    );
   }
 }
 

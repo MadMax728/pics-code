@@ -13,16 +13,27 @@ class AboutPage extends Component {
       isPrivate: false
     };
   }
-  
+
+  render() {
+    const { aboutDetails, isLoading } = this.props;
+    const { isPrivate } = this.state;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {aboutDetails && !isLoading && !isPrivate && this.renderAbout()}
+        {isLoading && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     if (this.props.match.params.username) {
       const data = {
         username: this.props.match.params.username
       }
-      this.props.getAbout("getAbout", data).then(()=> {
+      this.props.getAbout("getAbout", data).then(() => {
         console.log(this.props.aboutDetails);
-        if(this.props.aboutDetails) {
-          this.setState({isPrivate:  this.props.aboutDetails.isPrivate? this.props.aboutDetails.isPrivate : false})
+        if (this.props.aboutDetails) {
+          this.setState({ isPrivate: this.props.aboutDetails.isPrivate ? this.props.aboutDetails.isPrivate : false })
         }
       });
     } else {
@@ -40,16 +51,6 @@ class AboutPage extends Component {
     return <AboutCard about={aboutDetails} />;
   };
 
-  render() {
-    const { aboutDetails, isLoading } = this.props;
-    const { isPrivate } = this.state;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {aboutDetails && !isLoading && !isPrivate && this.renderAbout()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 AboutPage.propTypes = {
