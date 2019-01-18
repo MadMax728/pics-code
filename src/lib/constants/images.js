@@ -59,6 +59,10 @@ export const placeholder_pic = `${
   process.env.REACT_APP_CDN_URL
 }/images/placeholder_pic.png`;
 
+export const plcholder_pic = `${
+  process.env.REACT_APP_CDN_URL
+}/images/plcholder.png`;
+
 export const campaign1 = `${process.env.REACT_APP_CDN_URL}/campaigns/1.jpg`;
 
 export const campaign2 = `${process.env.REACT_APP_CDN_URL}/campaigns/2.jpg`;
