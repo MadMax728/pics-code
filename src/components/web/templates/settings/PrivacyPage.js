@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router";
 import * as images from "../../../../lib/constants/images";
 import { Text } from "../../../ui-kit/CommonUIComponents";
 import { Translations } from "../../../../lib/translations";
 import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
-import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import Switch from "react-switch";
 import {
@@ -34,13 +32,11 @@ if (storage) {
 }
 const switchOnColor = "#86d3ff";
 const switchOnHandleColor = "#2693e6";
-const switchHandleDiameter = "25";
 const switchUncheckedIcon = false;
 const switchCheckedIcon = false;
 const switchBoxShadow = "0px 1px 5px rgba(0, 0, 0, 0.6)";
 const switchActiveBoxShadow = "0px 0px 1px 10px rgba(0, 0, 0, 0.2)";
-const switchHeight = "25";
-const switchWidth = "25";
+
 class PrivacyPage extends Component {
   constructor(props) {
     super(props);
@@ -94,9 +90,10 @@ class PrivacyPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
+    // To to test this condition 
+    // if (nextProps.searchData.searchKeyword) {
+    //   this.props.getSearch("");
+    // }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -406,7 +403,6 @@ class PrivacyPage extends Component {
   };
 
   handleDeleteSearchHisory = e => {
-    console.log("Delete History", e.target.id);
     const paramData = { searchHistoryId: e.target.id };
     this.props.handleModalInfoShow(modalType.confirmation);
     // this.props.deleteSearchHistory(paramData); // API Call

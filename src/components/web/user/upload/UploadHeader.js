@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../lib/translations";
+import { InlineLoading } from "../../../ui-kit";
+import { connect } from "react-redux";
 
 class UploadHeader extends Component {
   constructor(props) {
@@ -13,8 +15,10 @@ class UploadHeader extends Component {
   };
 
   render() {
+    const isLoading = this.props.media.isLoading;
     return (
       <div className="row">
+        {isLoading && <InlineLoading />}
         <div className="col-sm-6 modal-title">
           {Translations.modal_header.upload_image}
         </div>
@@ -31,9 +35,14 @@ class UploadHeader extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  media: state.mediaData
+});
+
 UploadHeader.propTypes = {
   handleModalHide: PropTypes.func.isRequired,
-  handleContinue: PropTypes.func.isRequired
+  handleContinue: PropTypes.func.isRequired,
+  media: PropTypes.any
 };
 
-export default UploadHeader;
+export default connect(mapStateToProps)(UploadHeader);

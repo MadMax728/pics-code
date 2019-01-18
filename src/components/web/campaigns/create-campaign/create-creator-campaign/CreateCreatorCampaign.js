@@ -79,6 +79,7 @@ class CreateCreatorCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               handleContentChange={handleContentChange}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -88,6 +89,7 @@ class CreateCreatorCampaign extends Component {
               handleDate={handleDate}
               handleSelect={handleSelect}
               form={form}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -97,6 +99,7 @@ class CreateCreatorCampaign extends Component {
               forThat={forThat}
               handleChangeField={handleChangeField}
               form={form}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -108,6 +111,7 @@ class CreateCreatorCampaign extends Component {
               form={form}
               handleSubmit={handleSubmit}
               setVoucherData={setVoucherData}
+              userInfo={userInfo}
             />
           ))}
       </div>

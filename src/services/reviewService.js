@@ -1,5 +1,5 @@
 import { api } from "../api";
-import { updateBackOfficeReportEndPoint, updateBackOfficeReviewEndPoint, getReportedStatisticsEndPoint, AdsEndPoint, CampaignsEndPoint } from "../lib/constants/endPoints";
+import { updateBackOfficeReviewEndPoint, getReportedStatisticsEndPoint, AdsEndPoint, CampaignsEndPoint, getReviewStatisticsEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -21,7 +21,7 @@ export const Ads = (payload, header = {}) =>
 
 // Get Reported Statistics
 export const getReviewStatistics = (payload, header = {}) =>
-  api(baseUrl, header).get(`/${payload.reportContent}${getReportedStatisticsEndPoint}`);
+  api(baseUrl, header).get(`/${payload.reportContent}${getReviewStatisticsEndPoint}`);
   
 // Update BackOffice Review
 export const updateBackOfficeReview = (payload, header = {}) =>
