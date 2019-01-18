@@ -254,23 +254,7 @@ class CampaignCard extends Component {
     } = this.props;
     const { isComments, item, comments } = this.state;
     return (
-      /* No Data Found - Card */
       <div className="feed_wrapper">
-        {/*<div className="feed_wrapper">
-         <div className="datanotfound-wrapper" >
-          <div className="notfound-body row">
-            <div class="notfound-title col-sm-8">Error Title</div>
-            <div className="notfound-btn-wrapper col-sm-2">
-              <button className="filled_button" id="1" >New</button> 
-            </div>
-            <div className="notfound-btn-wrapper col-sm-2">
-              <button className="filled_button" id="2" >Refresh</button>
-            </div>
-          </div>   
-          <div className="notfound-footer row">
-            <div class="col-md-12">Menu title will go here...</div>
-          </div>       
-    </div>*/}
         <CampaignCardHeader
           campaign={item}
           isDescription={isDescription}
