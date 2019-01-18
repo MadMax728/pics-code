@@ -130,9 +130,9 @@ class UsersPage extends Component {
       <div>
         <div className="padding-rl-10 middle-section">
           <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {userList && !isLoading && this.renderUserList()}
-          {isLoading && <CampaignLoading />}
-          {userList && userList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+          { userList && !isLoading && this.renderUserList() }
+          { isLoading && <CampaignLoading />}
+          { !isLoading && userList && userList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
         </div>
         <div className="right_bar no-padding">
           <RightSidebarStatistics 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 import PropTypes from "prop-types";
@@ -16,7 +16,8 @@ class ParticipantPage extends Component {
         {participantList &&
           !isLoadingparticipants &&
           this.renderParticipantList()}
-        {isLoadingparticipants && <CampaignLoading />}
+        { isLoadingparticipants && <CampaignLoading /> }
+        { !isLoadingparticipants && ( !participantList || (participantList && !participantList.length) ) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
       </div>
     );
   }
@@ -40,6 +41,9 @@ class ParticipantPage extends Component {
       }
       this.props.getDashboard("participants", searchParam);
     }
+  };
+
+  handleRefresh = () => {
   };
 
   renderParticipantList = () => {

@@ -25,7 +25,7 @@ const NoDataFoundCenterPage = ({handleRefresh}) => {
 }
 
 NoDataFoundCenterPage.propTypes = {
-    handleRefresh: PropTypes.func.isRequired
+    handleRefresh: PropTypes.func
 };
 
 export default NoDataFoundCenterPage;

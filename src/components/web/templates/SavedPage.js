@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getSaved } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
@@ -21,6 +21,7 @@ class SavedPage extends Component {
       <div className={"middle-section padding-rl-10"}>
         {savedList && this.renderSavedList()}
         {!savedList && isLoading && <CampaignLoading />}
+        { !isLoading && ( !savedList || ( savedList && savedList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
       </div>
     );
   }
@@ -32,6 +33,9 @@ class SavedPage extends Component {
         this.setState({savedList: this.props.savedList});
       }
     });
+  };
+
+  handleRefresh = () => {
   };
 
   handleRemove = (id) => {

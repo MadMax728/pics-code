@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCampaigns, getSearch } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
@@ -20,6 +20,7 @@ class CampaignPage extends Component {
       <div className={"padding-rl-10 middle-section"}>
         {campaignList && !isLoading && this.renderCampaignList()}
         {isLoading && <CampaignLoading />}
+        { !isLoading && ( !campaignList || ( campaignList && campaignList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
       </div>
     );
   }
@@ -50,14 +51,15 @@ class CampaignPage extends Component {
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
-      console.log("if2");
       const searchKeyword = nextProps.searchData.searchKeyword;
       const data = { userType: nextProps.type, isSearch: searchKeyword };
-      console.log(data);
       this.props.getCampaigns("getCampaignType", data);
       this.setState({ type: nextProps.type });
     }
   }
+
+  handleRefresh = () => {
+  };
 
   renderCampaignList = () => {
     const { campaignList } = this.props;

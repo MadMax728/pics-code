@@ -1,7 +1,7 @@
 import React from "react";
 import UserCard from "../../misc/UserCard";
 import PropTypes from "prop-types";
-import { UserPicLoading } from "../../ui-kit";
+import { UserPicLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
 
@@ -11,8 +11,9 @@ class UsersRoot extends React.Component {
     const { usersList, isLoadingusers } = this.props;
     return (
       <div className="padding-rl-10 middle-section">
-        {usersList && !isLoadingusers && this.renderuserList()}
-        {isLoadingusers && <UserPicLoading />}
+        { usersList && !isLoadingusers && this.renderuserList() }
+        { isLoadingusers && <UserPicLoading /> }
+        { !isLoadingusers && ( !usersList || ( usersList && usersList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
       </div>
     );
   }
@@ -43,6 +44,9 @@ class UsersRoot extends React.Component {
       }
       this.props.getDashboard("users", searchParam);
     }
+  };
+
+  handleRefresh = () => {
   };
 
   renderuserList = () => {

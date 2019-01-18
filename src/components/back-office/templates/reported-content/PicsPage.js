@@ -26,9 +26,9 @@ class PicsPage extends Component {
     return (
       <div className="padding-rl-10 middle-section">
         <ReportedSearchBar />
-        {picList && !isLoading && this.renderPicList()}
-        {isLoading && <CampaignLoading />}
-        {picList && picList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        { picList && !isLoading && this.renderPicList()}
+        { isLoading && <CampaignLoading />}
+        { picList && picList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
       </div>
     );
   }
