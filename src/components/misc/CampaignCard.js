@@ -309,6 +309,57 @@ class CampaignCard extends Component {
     });
   };
 
+  render() {
+    const {
+      isStatus,
+      isDescription,
+      isInformation,
+      isBudget,
+      isReport,
+      likeData,
+      reportedContentData,
+      savedData
+    } = this.props;
+    const { isComments, item, comments } = this.state;
+    return (
+      <div className="feed_wrapper">
+        <CampaignCardHeader
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+        />
+        <CampaignCardBody
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
+        />
+        <CampaignCardFooter
+          campaign={item}
+          handleCommentsSections={this.handleCommentsSections}
+          isComments={isComments}
+          isStatus={isStatus}
+          isBudget={isBudget} /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+          isReport={isReport}
+        />
+        {isComments && (
+          <CommentCard
+            item={comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={comments.length}
+            isReport={isReport}
+          />
+        )}
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
