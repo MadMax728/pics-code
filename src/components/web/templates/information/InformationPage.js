@@ -198,7 +198,7 @@ class InformationPage extends Component {
     const { isComments, comments } = this.state;
     return (
       <div className="padding-l-10 middle-section width-80">
-        {campaignDetails && !isLoading && (
+        {/* {campaignDetails && !isLoading && (
           <div className="information-wrapper ht100">
             <div className="info-inner-wrapper col-xs-12">
               <div className="info-main-title paddindLeft0">
@@ -414,7 +414,6 @@ class InformationPage extends Component {
 
             <div className="feed_wrapper">
               <div className="feed-comment">
-                {/* Comments Section */}
                 {isComments && (
                   <Comments
                     campaign={campaignDetails}
@@ -429,8 +428,8 @@ class InformationPage extends Component {
               </div>
             </div>
           </div>
-        )}
-        {isLoading && <CampaignDetailsLoading count={1} />}
+        )} */}
+        {!isLoading && <CampaignDetailsLoading count={1} />}
       </div>
     );
   }
