@@ -9,6 +9,7 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { Auth } from "../../../auth";
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -21,69 +22,6 @@ class Login extends Component {
       error: {}
     };
   }
-
-  //logout user
-  componentDidMount = () => {
-    Auth.logoutUser();
-  };
-
-  /**
-   * formValid
-   */
-  formValid = () => {
-    const errors = {};
-    let isFormValid = true;
-    const { form } = this.state;
-
-    if (form.userName.length === 0) {
-      errors.username = Translations.login.username_required;
-      isFormValid = false;
-    }
-    if (form.password.length === 0) {
-      errors.password = Translations.login.password_required;
-      isFormValid = false;
-    }
-    this.setState({ error: errors });
-    return isFormValid;
-
-    // if (form.userName.length === 0 || form.password.length === 0) {
-    //   return false;
-    // }
-
-    // return isFormValid;
-  };
-
-  handleChangeField = event => {
-    const { form } = this.state;
-    form[event.target.name] = event.target.value;
-    this.setState({ form });
-    this.formValid();
-  };
-
-  // handelSubmit called when click on submit
-  handleSubmit = e => {
-    e.preventDefault();
-    if (!this.formValid()) {
-      return false;
-    }
-
-    const { form } = this.state;
-
-    this.props
-      .submitLogin({ email: form.userName, password: form.password })
-      .then(() => {
-        const errors = {};
-        if (
-          this.props.loginData.error &&
-          this.props.loginData.error.status === 400
-        ) {
-          errors.servererror = Translations.login.invalid_credentials;
-          this.setState({ error: errors });
-        } else {
-          this.props.history.push(routes.ROOT_ROUTE);
-        }
-      });
-  };
 
   render() {
     const { loginData } = this.props;
@@ -162,6 +100,70 @@ class Login extends Component {
       </div>
     );
   }
+
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutUser();
+  };
+
+  /**
+   * formValid
+   */
+  formValid = () => {
+    const errors = {};
+    let isFormValid = true;
+    const { form } = this.state;
+
+    if (form.userName.length === 0) {
+      errors.username = Translations.login.username_required;
+      isFormValid = false;
+    }
+    if (form.password.length === 0) {
+      errors.password = Translations.login.password_required;
+      isFormValid = false;
+    }
+    this.setState({ error: errors });
+    return isFormValid;
+
+    // if (form.userName.length === 0 || form.password.length === 0) {
+    //   return false;
+    // }
+
+    // return isFormValid;
+  };
+
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+    this.formValid();
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    if (!this.formValid()) {
+      return false;
+    }
+
+    const { form } = this.state;
+
+    this.props
+      .submitLogin({ email: form.userName, password: form.password })
+      .then(() => {
+        const errors = {};
+        if (
+          this.props.loginData.error &&
+          this.props.loginData.error.status === 400
+        ) {
+          errors.servererror = Translations.login.invalid_credentials;
+          this.setState({ error: errors });
+        } else {
+          this.props.history.push(routes.ROOT_ROUTE);
+        }
+      });
+  };
+
 }
 
 const mapStateToProps = state => ({

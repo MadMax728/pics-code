@@ -14,11 +14,6 @@ class SettingCampaignStatisticsPage extends Component {
     };
   }
 
-  componentDidMount = () => {
-    // this.props.getCampaignDetails(this.state.campaignId);
-    window.scrollTo(0, 0);
-  };
-
   render() {
     const { campaign_details, isLoading } = this.props;
     return (
@@ -110,6 +105,12 @@ class SettingCampaignStatisticsPage extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    // this.props.getCampaignDetails(this.state.campaignId);
+    window.scrollTo(0, 0);
+  };
+
 }
 
 SettingCampaignStatisticsPage.propTypes = {

@@ -14,10 +14,15 @@ class SavedPage extends Component {
     };
   }
 
-
-  handleRemove = (id) => {
+  render() {
+    const { isLoading } = this.props;
     const { savedList } = this.state;
-    this.setState({savedList: savedList.filter(e => e.id !== id)});
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {savedList && this.renderSavedList()}
+        {!savedList && isLoading && <CampaignLoading />}
+      </div>
+    );
   }
 
   componentDidMount = () => {
@@ -28,6 +33,11 @@ class SavedPage extends Component {
       }
     });
   };
+
+  handleRemove = (id) => {
+    const { savedList } = this.state;
+    this.setState({savedList: savedList.filter(e => e.id !== id)});
+  }
 
   renderSavedList = () => {
     const { savedList } = this.state;
@@ -99,16 +109,6 @@ class SavedPage extends Component {
     });
   };
 
-  render() {
-    const { isLoading } = this.props;
-    const { savedList } = this.state;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {savedList && this.renderSavedList()}
-        {!savedList && isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 SavedPage.propTypes = {

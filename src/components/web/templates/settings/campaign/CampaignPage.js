@@ -7,6 +7,18 @@ import { CampaignCard } from "../../../../misc";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class SettingCampaignPage extends Component {
+  
+  render() {
+    const { campaignList, isLoading } = this.props;
+
+    return (
+      <div className="padding-rl-10 middle-section">
+        {campaignList && !isLoading && this.renderCampaignList()}
+        {isLoading && <CampaignLoading />}
+      </div>
+    );
+  }
+  
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.props.getCampaigns("getSettingsCampaigns", "");
@@ -45,16 +57,6 @@ class SettingCampaignPage extends Component {
     });
   };
 
-  render() {
-    const { campaignList, isLoading } = this.props;
-
-    return (
-      <div className="padding-rl-10 middle-section">
-        {campaignList && !isLoading && this.renderCampaignList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 SettingCampaignPage.propTypes = {

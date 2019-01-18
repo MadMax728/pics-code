@@ -23,12 +23,17 @@ class TextEditor extends Component {
 
   }
 
-  handleChange = editorState => {
-    const content = convertToHTML(editorState.getCurrentContent());
-    this.props.handleContentChange(content);
-  };
+  render() {
+    return (
+      <Editor
+        defaultEditorState={this.state.editorState}
+        onEditorStateChange={this.handleChange}
+        toolbar={toolBarConfig}
+      />
+    );
+  }
 
-  componentDidMount = () =>{
+  componentDidMount = () => {
     let editorState;
     
     if (this.props.contentText) {
@@ -41,16 +46,12 @@ class TextEditor extends Component {
     this.setState({ editorState });
   }
 
-  render() {
-    return (
-      <Editor
-        defaultEditorState={this.state.editorState}
-        onEditorStateChange={this.handleChange}
-        toolbar={toolBarConfig}
-      />
-    );
-  }
+  handleChange = editorState => {
+    const content = convertToHTML(editorState.getCurrentContent());
+    this.props.handleContentChange(content);
+  };
 }
+
 
 TextEditor.propTypes = {
   handleContentChange: PropTypes.func.isRequired,

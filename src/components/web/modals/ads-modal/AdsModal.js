@@ -69,6 +69,74 @@ class AdsModal extends Component {
     this.state = initialState;
   }
 
+
+  render() {
+    const { stepIndex, form, userInfo } = this.state;
+    const { handleModalHide, modalShow } = this.props;
+
+    let modalClassName = "";
+
+    if (stepIndex === 0) {
+      modalClassName = "modal fade create-ad-modal overflow-scroll";
+    } else if (stepIndex !== 0 && stepIndex < 3) {
+      modalClassName = "modal fade create-campaign-modal";
+    } else if (stepIndex > 2 && stepIndex < 5) {
+      modalClassName = "modal fade payment-overview-modal";
+    }
+
+    return (
+      <CustomBootstrapModal
+        modalClassName={modalClassName}
+        header
+        modalHeaderContent={
+          <CreateAdsHeader
+            handleModalHide={handleModalHide}
+            handleNext={this.handleNext}
+            handlePrev={this.handlePrev}
+            stepIndex={stepIndex}
+          />
+        }
+        footer={false}
+        modalShow={modalShow}
+        closeBtn={false}
+        handleModalHide={handleModalHide}
+        modalBodyContent={
+          <CreateAds
+            stepIndex={stepIndex}
+            forThat={"Ads"}
+            handleModalInfoShow={this.handleModalInfoShow}
+            handleChangeField={this.handleChangeField}
+            form={form}
+            userInfo={userInfo}
+            handleSubmit={this.handleSubmit}
+            handleDate={this.handleDate}
+            handleEditImage={this.handleEditImage}
+            handleLocation={this.handleLocation}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
+            handleSelect={this.handleSelect}
+            handleSetState={this.handleSetState}
+            handleAddress={this.handleAddress}
+            setVoucherData={this.setVoucherData}
+          />
+        }
+      />
+    );
+  }
+
+  componentDidMount = () => {
+    this.setState({ stepIndex: 0 });
+    if (userInfo) {
+      this.setState({ userInfo });
+    }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.modalShow) {
+      this.setState({ stepIndex: 0 });
+    }
+  }
+  
   componentWillUnmount = () => {
     this.setState(initialState);
   };
@@ -173,19 +241,6 @@ class AdsModal extends Component {
     this.setState({ form });
   };
 
-  componentDidMount = () => {
-    this.setState({ stepIndex: 0 });
-    if (userInfo) {
-      this.setState({ userInfo });
-    }
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 0 });
-    }
-  }
-
   setVoucherData = (code, voucher, maximumExpenses) => {
     const { form } = this.state;
     if (voucher && maximumExpenses) {
@@ -284,59 +339,6 @@ class AdsModal extends Component {
     this.setState({ form });
   };
 
-  render() {
-    const { stepIndex, form, userInfo } = this.state;
-    const { handleModalHide, modalShow } = this.props;
-
-    let modalClassName = "";
-
-    if (stepIndex === 0) {
-      modalClassName = "modal fade create-ad-modal overflow-scroll";
-    } else if (stepIndex !== 0 && stepIndex < 3) {
-      modalClassName = "modal fade create-campaign-modal";
-    } else if (stepIndex > 2 && stepIndex < 5) {
-      modalClassName = "modal fade payment-overview-modal";
-    }
-
-    return (
-      <CustomBootstrapModal
-        modalClassName={modalClassName}
-        header
-        modalHeaderContent={
-          <CreateAdsHeader
-            handleModalHide={handleModalHide}
-            handleNext={this.handleNext}
-            handlePrev={this.handlePrev}
-            stepIndex={stepIndex}
-          />
-        }
-        footer={false}
-        modalShow={modalShow}
-        closeBtn={false}
-        handleModalHide={handleModalHide}
-        modalBodyContent={
-          <CreateAds
-            stepIndex={stepIndex}
-            forThat={"Ads"}
-            handleModalInfoShow={this.handleModalInfoShow}
-            handleChangeField={this.handleChangeField}
-            form={form}
-            userInfo={userInfo}
-            handleSubmit={this.handleSubmit}
-            handleDate={this.handleDate}
-            handleEditImage={this.handleEditImage}
-            handleLocation={this.handleLocation}
-            handleActualImg={this.handleActualImg}
-            handleScale={this.handleScale}
-            handleSelect={this.handleSelect}
-            handleSetState={this.handleSetState}
-            handleAddress={this.handleAddress}
-            setVoucherData={this.setVoucherData}
-          />
-        }
-      />
-    );
-  }
 }
 
 AdsModal.propTypes = {

@@ -1127,6 +1127,21 @@ section.loader-wrapr {
   margin-top: 10px !important;
   min-height: 8px !important;
 }
+.descTitle {
+  width: 50% !important;
+  margin-top: 10px !important;
+  min-height: 12px !important;
+}
+.descCompain{
+  width: 30% !important;
+  margin-top: 20px !important; 
+}
+.lists{
+  width: 50% !important;
+}
+.hr-color hr{
+  border: 1px solid #eee;
+}
 .desc1sm{
   width: 40% !important;
   margin-top: 8px !important;
@@ -1615,4 +1630,16 @@ section.loader-wrapr {
       }
     }
   }
+}
+.width-70{
+  width: 70% !important;
+}
+.padding-rl15{
+  padding: 0 15px;
+}
+.padding-left0{
+  padding-left: 0 !important;
+}
+.margin-left0{
+  margin-left: 0 !important;
 }

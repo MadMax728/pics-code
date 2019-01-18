@@ -98,30 +98,6 @@ class CampaignCreatorFilter extends Component {
         className: "filter-title",
         type: Translations.left_sidebar_filter.target_group.type,
         items: targetGroupOptions
-      },
-      {
-        name: Translations.left_sidebar_filter.offer.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer.type,
-        items: offerItems
-      },
-      {
-        name: Translations.left_sidebar_filter.offer_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer_tag.type,
-        items: []
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry.type,
-        items: inquiryItems
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry_tag.type,
-        items: []
       }
     ];
     return (
@@ -142,10 +118,10 @@ class CampaignCreatorFilter extends Component {
               {Translations.filter.reset_filter}
             </button>
           ) : (
-              <button className="black_button" onClick={this.handleApplyClick}>
-                {Translations.filter.apply}
-              </button>
-            )}
+            <button className="black_button" onClick={this.handleApplyClick}>
+              {Translations.filter.apply}
+            </button>
+          )}
         </div>
       </div>
     );

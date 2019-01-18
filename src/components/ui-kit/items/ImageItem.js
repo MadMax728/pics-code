@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import LazyLoad from 'react-lazyload';
 import { Loader } from '../loading-indicator';
+
 class ImageItem extends PureComponent {
 
   render() {
@@ -17,18 +18,18 @@ class ImageItem extends PureComponent {
          */}
         <div className={`embed-responsive embed-responsive-16by9`}>
           <div className={`img-responsive embed-responsive-item`}>
-            {isLoading? 
-              <Loader /> 
-              :        
-            (
-            <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
-              <img
-                  src={item}
-                  alt="altmage"
-                  className="img-responsive"
-                />
-            </LazyLoad>
-            )}
+            {isLoading ?
+              <Loader />
+              :
+              (
+                <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
+                  <img
+                    src={item}
+                    alt="altmage"
+                    className="img-responsive"
+                  />
+                </LazyLoad>
+              )}
           </div>
         </div>
       </div>

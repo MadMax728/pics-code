@@ -14,28 +14,6 @@ class PlaceAutoCompleteLocation extends Component {
     };
   }
 
-  componentWillReceiveProps = (nextProps) => {
-    if (nextProps.value) {
-      this.setState({ address: nextProps.value });
-    }
-  }
-
-  handleChange = address => {
-    this.getGeoLocation(address);
-  };
-
-  handleSelect = address => {
-    this.getGeoLocation(address);
-  };
-
-  getGeoLocation = address => {
-    this.setState({ address });
-    geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
-      .then(latLng => this.props.handleLocation(latLng, address))
-      .catch(error => console.error("Error", error));
-  };
-
   render() {
     const { className } = this.props;
     const isConnected = navigator.onLine;
@@ -88,6 +66,28 @@ class PlaceAutoCompleteLocation extends Component {
       )
     );
   }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (nextProps.value) {
+      this.setState({ address: nextProps.value });
+    }
+  }
+
+  handleChange = address => {
+    this.getGeoLocation(address);
+  };
+
+  handleSelect = address => {
+    this.getGeoLocation(address);
+  };
+
+  getGeoLocation = address => {
+    this.setState({ address });
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => this.props.handleLocation(latLng, address))
+      .catch(error => console.error("Error", error));
+  };
 }
 
 PlaceAutoCompleteLocation.propTypes = {

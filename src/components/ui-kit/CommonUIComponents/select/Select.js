@@ -11,13 +11,6 @@ class Select extends Component {
     };
   }
 
-  handleChange = event => {
-    this.setState({ defaultValue: event.target.value });
-    const { data } = this.state;
-    data.values = { name: this.state.name, val: event.target.value };
-    this.props.onChange(data);
-  };
-
   render() {
     const { options, disabled } = this.props;
     const { defaultValue } = this.state;
@@ -40,6 +33,13 @@ class Select extends Component {
       </select>
     );
   }
+
+  handleChange = event => {
+    this.setState({ defaultValue: event.target.value });
+    const { data } = this.state;
+    data.values = { name: this.state.name, val: event.target.value };
+    this.props.onChange(data);
+  };
 }
 
 Select.propTypes = {

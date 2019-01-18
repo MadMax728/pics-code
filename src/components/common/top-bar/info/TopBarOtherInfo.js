@@ -8,9 +8,10 @@ import {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard,
-  like
+  getDashboard
 } from "../../../../actions";
+import * as routes from "../../../../lib/constants/routes";
+
 class TopBarOtherInfo extends Component {
   constructor(props) {
     super(props);
@@ -26,9 +27,32 @@ class TopBarOtherInfo extends Component {
         userProfile: this.props.match.profileUrl,
         slots: [
           {
+            className: "col-sm-4 slot_one no-padding",
             name: Translations.top_bar_info.subscriber,
             val: 0,
+            userid: this.props.match.userid,
+            username: this.props.match.username
+          },
+          {
             className: "col-sm-4 slot_one no-padding",
+            name: Translations.top_bar_info.subscribed,
+            val: 0,
+            userid: this.props.match.userid,
+            username: this.props.match.username,
+            isHide: true
+          },
+          {
+            className: "col-sm-4 slot_one no-padding",
+            name: Translations.top_bar_info.posts,
+            val: 0,
+            userid: this.props.match.userid,
+            username: this.props.match.username
+          }
+        ],
+        btnSlots: [
+          {
+            name: Translations.top_bar_info.subscriber,
+            className: "col-sm-8 slot_one no-padding",
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.subscribe,
             handeleEvent: this.handeleSubscribe,
@@ -36,28 +60,33 @@ class TopBarOtherInfo extends Component {
             username: this.props.match.username
           },
           {
-            name: Translations.top_bar_info.subscribed,
-            val: 0,
+            name: Translations.top_bar_info.posts,
             className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.message,
-            handeleEvent: this.handeleMessage,
-            userid: this.props.match.userid,
-            username: this.props.match.username
-          },
-          {
-            name: Translations.top_bar_info.posts,
-            val: 0,
-            className: "col-sm-4 slot_three no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.like_you,
-            handeleEvent: this.handeleLikeYou,
+            handeleEvent: this.andeleMessage,
             userid: this.props.match.userid,
             username: this.props.match.username
           }
         ]
       }
     };
+  }
+
+  render() {
+    return (
+      <TopBar
+        items={this.state.items}
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        userDataByUsername={this.props.userDataByUsername}
+      />
+    );
+  }
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    this.getUserData();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,11 +102,6 @@ class TopBarOtherInfo extends Component {
         }
       });
     }
-  }
-
-  componentDidMount() {
-    window.scrollTo(0, 0);
-    this.getUserData();
   }
 
   getUserData = () => {
@@ -96,12 +120,12 @@ class TopBarOtherInfo extends Component {
   handleSetUserInfo = () => {
     const isPending = this.props.userDataByUsername.user.data.isPending;
     const isSubscribe = this.props.userDataByUsername.user.data.isSubscribe;
-    const isLike = this.props.userDataByUsername.user.data.isLike;
 
     let subscribeBtnClass = "filled_button";
     let subscribeBtnText = Translations.top_bar_info.subscribe;
     if (isPending) {
       subscribeBtnText = Translations.top_bar_info.request_pending;
+      subscribeBtnClass = "filled_button";
     } else {
       subscribeBtnClass = "filled_button";
       if (isSubscribe) {
@@ -112,14 +136,6 @@ class TopBarOtherInfo extends Component {
         subscribeBtnText = Translations.top_bar_info.subscribe;
       }
     }
-
-    let isLikeBtnClass = "black_button";
-    if (isLike) {
-      isLikeBtnClass = "filled_button";
-    } else {
-      isLikeBtnClass = "black_button";
-    }
-
     const items = {
       userid: this.props.userDataByUsername.user.data.id,
       username: this.props.userDataByUsername.user.data.username,
@@ -131,32 +147,43 @@ class TopBarOtherInfo extends Component {
       blockId: this.props.userDataByUsername.user.data.blockId,
       slots: [
         {
+          className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.subscriber,
           val: this.props.userDataByUsername.user.data.subscribersCount,
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
+        },
+        {
           className: "col-sm-4 slot_one no-padding",
+          name: Translations.top_bar_info.subscribed,
+          val: this.props.userDataByUsername.user.data.subscribedCount,
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
+        },
+        {
+          className: "col-sm-4 slot_one no-padding",
+          name: Translations.top_bar_info.posts,
+          val: this.props.userDataByUsername.user.data.postCount,
+          userid: this.props.userDataByUsername.user.data.id,
+          username: this.props.userDataByUsername.user.data.username
+        }
+      ],
+      btnSlots: [
+        {
+          name: Translations.top_bar_info.subscriber,
+          className: "col-sm-8 slot_one no-padding",
           btnActiveClassName: subscribeBtnClass,
           btnText: subscribeBtnText,
           handeleEvent: this.handeleSubscribe,
-          userid: this.props.userDataByUsername.user.data.id,
-          username: this.props.userDataByUsername.user.data.usernam
-        },
-        {
-          name: Translations.top_bar_info.subscribed,
-          val: this.props.userDataByUsername.user.data.subscribedCount,
-          className: "col-sm-4 slot_two no-padding",
-          btnActiveClassName: "black_button",
-          btnText: Translations.top_bar_info.message,
-          handeleEvent: this.handeleMessage,
           userid: this.props.userDataByUsername.user.data.id,
           username: this.props.userDataByUsername.user.data.username
         },
         {
           name: Translations.top_bar_info.posts,
-          val: this.props.userDataByUsername.user.data.postCount,
-          className: "col-sm-4 slot_three no-padding",
-          btnActiveClassName: isLikeBtnClass,
-          btnText: Translations.top_bar_info.like_you,
-          handeleEvent: this.handeleLikeYou,
+          className: "col-sm-4 slot_two no-padding",
+          btnActiveClassName: "black_button",
+          btnText: Translations.top_bar_info.message,
+          handeleEvent: this.handeleMessage,
           userid: this.props.userDataByUsername.user.data.id,
           username: this.props.userDataByUsername.user.data.username
         }
@@ -205,31 +232,9 @@ class TopBarOtherInfo extends Component {
   };
 
   handeleMessage = () => {
-    this.props.handleModalShow(modalType.messages);
+    this.props.history.push(routes.MESSAGES_ROUTE);
   };
 
-  handeleLikeYou = event => {
-    const likeParam = { typeId: event.target.id };
-    this.props.like(likeParam);
-    const username = this.props.userDataByUsername.user.data.username;
-    if (username) {
-      const data = {
-        username
-      };
-      this.getUserData(data);
-    }
-  };
-
-  render() {
-    return (
-      <TopBar
-        items={this.state.items}
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        userDataByUsername={this.props.userDataByUsername}
-      />
-    );
-  }
 }
 
 const mapStateToProps = state => ({
@@ -241,8 +246,7 @@ const mapDispatchToProps = {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard,
-  like
+  getDashboard
 };
 
 TopBarOtherInfo.propTypes = {
@@ -255,7 +259,7 @@ TopBarOtherInfo.propTypes = {
   getUnsubscribe: PropTypes.func,
   usersData: PropTypes.any,
   getDashboard: PropTypes.func,
-  like: PropTypes.func
+  history: PropTypes.any
 };
 
 export default connect(

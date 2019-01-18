@@ -18,13 +18,112 @@ class Community extends Component {
     this.state = { usersList: null, error: null };
   }
 
+  render() {
+    const { isLoading, isLoadingusers, usersList, usersData } = this.props;
+    const userListIsLoading = usersData.isLoading;
+    return (
+      <div>
+        <div className="normal_title padding-15">
+          {Translations.profile_community_right_sidebar.community}
+        </div>
+        <div className="community">
+          {usersList && !isLoadingusers ? (
+            usersList.map(user => {
+              const profile_route = user.isOwner
+                ? `/news-feed`
+                : `/news-feed/${user.username}`;
+              let classNameText = "filled_button";
+              let btnText =
+                Translations.profile_community_right_sidebar.Subscribed;
+              if (user.isPending) {
+                btnText = Translations.profile_community_right_sidebar.Pending;
+                classNameText = "filled_button";
+              } else if (user.isSubscribe) {
+                btnText =
+                  Translations.profile_community_right_sidebar.Subscribed;
+                classNameText = "filled_button";
+              } else {
+                btnText =
+                  Translations.profile_community_right_sidebar.Subscribe;
+                classNameText = "blue_button";
+              }
+              const actionButton = {
+                className: classNameText,
+                userId: user.id,
+                handleActionClick: this.handleSubscribed,
+                btnText: btnText,
+                isLoading: userListIsLoading
+              };
+              return (
+                <div className="community_wrapper" key={user.id}>
+                  <div className="community-user-image">
+                    <Link to={profile_route}>
+                      <img
+                        src={user.profileUrl}
+                        alt="campaign"
+                        className="img-circle img-responsive"
+                      />
+                    </Link>
+                  </div>
+                  <div className="community-user-name">
+                    <Link to={profile_route}>
+                      <div className="normal_title">{user.username}</div>
+                      <div className="secondary_title">{user.name}</div>
+                    </Link>
+                  </div>
+                  <div className="community-subscribe">
+                    <button
+                      className={actionButton.className}
+                      id={actionButton.userId}
+                      onClick={actionButton.handleActionClick}
+                      disabled={actionButton.isLoading}
+                    >
+                      {actionButton.btnText}
+                    </button>
+                  </div>
+                  {/* {user.isSubscribe ? (
+                    <div className="community-subscribe">
+                      <button
+                        className="filled_button"
+                        id={user.id}
+                        onClick={this.handleSubscribed}
+                      >
+                        {
+                          Translations.profile_community_right_sidebar
+                            .Subscribed
+                        }
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="community-subscribe">
+                      <button
+                        className="blue_button"
+                        id={user.id}
+                        onClick={this.handleSubscribed}
+                      >
+                        {Translations.profile_community_right_sidebar.Subscribe}
+                      </button>
+                    </div>
+                  )} */}
+                </div>
+              );
+            })
+          ) : (
+            <NoDataFoundRightSidebar />
+          )}
+        </div>
+        {isLoading && <RightSidebarLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     this.getUserData();
     window.scrollTo(0, 0);
   };
 
   getUserData = () => {
-    const { usersList, getDashboard} = this.props;
+    const { usersList, getDashboard } = this.props;
     getDashboard("users", "").then(() => {
       if (usersList) {
         this.setState({ usersList });
@@ -50,20 +149,19 @@ class Community extends Component {
 
   handleSubscribed = e => {
     const errors = {};
-    const { usersList } = this.state;
-    const { sendRequest, getUnsubscribe, usersData } = this.props;
+    const { sendRequest, getUnsubscribe, usersList } = this.props;
     const selectedUserList = usersList.find(user => user.id === e.target.id);
     if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
       sendRequest(requestData).then(() => {
         if (
-          usersData.error &&
-          usersData.error.status === 400
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
         ) {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (usersData.isRequestSend) {
+        } else if (this.props.usersData.isRequestSendData) {
           this.getUserData();
           this.getUserInfo();
         }
@@ -72,13 +170,13 @@ class Community extends Component {
       const subscribedId = selectedUserList.subscribeId;
       getUnsubscribe(subscribedId).then(() => {
         if (
-          usersData.error &&
-          usersData.error.status === 400
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
         ) {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (usersData.isUnsubscribed) {
+        } else if (this.props.usersData.isUnsubscribedData) {
           this.getUserData();
           this.getUserInfo();
         }
@@ -86,73 +184,6 @@ class Community extends Component {
     }
   };
 
-  render() {
-    const { isLoading, isLoadingusers, usersList } = this.props;
-    return (
-      <div>
-        <NoDataFoundRightSidebar/>
-        <div className="normal_title padding-15">
-          {Translations.profile_community_right_sidebar.community}
-        </div>
-        <div className="community">
-          {usersList &&
-            !isLoadingusers &&
-            usersList.map(user => {
-              const profile_route = user.isOwner
-                ? `/news-feed`
-                : `/news-feed/${user.username}`;
-              return (
-                <div className="community_wrapper" key={user.id}>
-                  <div className="community-user-image">
-                    <Link to={profile_route}>
-                      <img
-                        src={user.profileUrl}
-                        alt="campaign"
-                        className="img-circle img-responsive"
-                      />
-                    </Link>
-                  </div>
-                  <div className="community-user-name">
-                    <Link to={profile_route}>
-                      <div className="normal_title">{user.username}</div>
-                      <div className="secondary_title">{user.name}</div>
-                    </Link>
-                  </div>
-                  {user.isSubscribe ? (
-                    <div className="community-subscribe">
-                      <button
-                        className="filled_button"
-                        id={user.id}
-                        onClick={this.handleSubscribed}
-                      >
-                        {
-                          Translations.profile_community_right_sidebar
-                            .Subscribed
-                        }
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="community-subscribe">
-                      <button
-                        className="blue_button"
-                        id={user.id}
-                        onClick={this.handleSubscribed}
-                      >
-                        {Translations.profile_community_right_sidebar.Subscribe}
-                      </button>
-                    </div>
-                  )}
-                </div>
-              );
-            })}
-        </div>
-        {
-          isLoading && 
-            <RightSidebarLoading />
-        }
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

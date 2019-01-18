@@ -8,31 +8,6 @@ class CreateCompanyCampaignHeader extends Component {
     this.state = {};
   }
 
-  handleCancle = () => {
-    this.props.handleModalHide();
-    this.props.handleResoreState();
-  };
-
-  handleBack = () => {
-    this.props.handlePrev();
-  };
-
-  handleNext = () => {
-    this.props.handleNext();
-  };
-
-  handlePreview = () => {
-    this.props.handlePrivewOpen();
-  };
-
-  handleContinue = () => {
-    if (this.props.stepIndex < 5) {
-      this.props.handleNext();
-    } else {
-      console.log("data saved code");
-    }
-  };
-
   render() {
     const { stepIndex } = this.props;
     return (
@@ -64,6 +39,32 @@ class CreateCompanyCampaignHeader extends Component {
       </div>
     );
   }
+
+  handleCancle = () => {
+    this.props.handleModalHide();
+    this.props.handleResoreState();
+  };
+
+  handleBack = () => {
+    this.props.handlePrev();
+  };
+
+  handleNext = () => {
+    this.props.handleNext();
+  };
+
+  handlePreview = () => {
+    this.props.handlePrivewOpen();
+  };
+
+  handleContinue = () => {
+    if (this.props.stepIndex < 5) {
+      this.props.handleNext();
+    } else {
+      console.log("data saved code");
+    }
+  };
+
 }
 
 CreateCompanyCampaignHeader.propTypes = {

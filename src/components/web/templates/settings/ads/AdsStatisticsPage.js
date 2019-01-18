@@ -14,11 +14,6 @@ class AdsStatisticsPage extends Component {
     };
   }
 
-  componentDidMount = () => {
-    // this.props.getAdDetails(this.state.adId);
-    window.scrollTo(0, 0);
-  };
-
   render() {
     const { adDetails, isLoading } = this.props;
 
@@ -136,6 +131,11 @@ class AdsStatisticsPage extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    // this.props.getAdDetails(this.state.adId);
+    window.scrollTo(0, 0);
+  };
 }
 
 AdsStatisticsPage.propTypes = {

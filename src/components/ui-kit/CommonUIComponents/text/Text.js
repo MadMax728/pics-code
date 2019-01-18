@@ -11,13 +11,6 @@ class Text extends Component {
     };
   }
 
-  handleChangeField = event => {
-    this.setState({ value: event.target.value });
-    const { data } = this.state;
-    data.values = { name: this.state.name, val: event.target.value };
-    this.props.onChange(data);
-  };
-
   render() {
     const {
       name,
@@ -43,6 +36,14 @@ class Text extends Component {
       />
     );
   }
+
+  handleChangeField = event => {
+    this.setState({ value: event.target.value });
+    const { data } = this.state;
+    data.values = { name: this.state.name, val: event.target.value };
+    this.props.onChange(data);
+  };
+
 }
 
 Text.propTypes = {

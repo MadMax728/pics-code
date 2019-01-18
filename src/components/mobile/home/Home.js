@@ -12,22 +12,6 @@ class Home extends Component {
     this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
   }
 
-  onSetSidebarOpen(open) {
-    this.setState({ sidebarOpen: open });
-  }
-
-  onSetSidebarClose() {
-    this.setState({ sidebarOpen: false });
-  }
-
-  handleOnSetSidebarClose = () => {
-    this.onSetSidebarClose();
-  };
-
-  handleOnSetSidebarOpen = () => {
-    this.onSetSidebarOpen(true);
-  };
-
   render() {
     return (
       <div className="full-height-wrapper">
@@ -67,6 +51,23 @@ class Home extends Component {
       </div>
     );
   }
+
+  onSetSidebarOpen(open) {
+    this.setState({ sidebarOpen: open });
+  }
+
+  onSetSidebarClose() {
+    this.setState({ sidebarOpen: false });
+  }
+
+  handleOnSetSidebarClose = () => {
+    this.onSetSidebarClose();
+  };
+
+  handleOnSetSidebarOpen = () => {
+    this.onSetSidebarOpen(true);
+  };
+
 }
 
 export default Home;

@@ -6,10 +6,15 @@ import * as Configs from '../../../default';
 
 class VideoPlayer extends Component {
 
-  mutecontrol = () => {
-    const config = Configs.getVideoConfig() ? JSON.parse(Configs.getVideoConfig()) :{};
-    const muted = !!config.muted;
-    return muted;
+  render() {
+    const { id } = this.props;
+    return (
+      <div className="htWid100">    
+        <div data-vjs-player className="htWid100">
+          <video id={id} muted ref={ node => this.videoNode = node } className="video-js htWid100"></video>
+        </div>
+      </div>
+    )
   }
 
   componentDidMount() {
@@ -30,6 +35,12 @@ class VideoPlayer extends Component {
       this.checkVideoProgress();
     })
 
+  }
+
+  mutecontrol = () => {
+    const config = Configs.getVideoConfig() ? JSON.parse(Configs.getVideoConfig()) :{};
+    const muted = !!config.muted;
+    return muted;
   }
 
   videoEvents = () => {
@@ -77,16 +88,7 @@ class VideoPlayer extends Component {
   // wrap the player in a div with a `data-vjs-player` attribute
   // so videojs won't create additional wrapper in the DOM
   // see https://github.com/videojs/video.js/pull/3856
-  render() {
-    const { id } = this.props;
-    return (
-      <div className="htWid100">    
-        <div data-vjs-player className="htWid100">
-          <video id={id} muted ref={ node => this.videoNode = node } className="video-js htWid100"></video>
-        </div>
-      </div>
-    )
-  }
+ 
 }
 
 VideoPlayer.propTypes = {
