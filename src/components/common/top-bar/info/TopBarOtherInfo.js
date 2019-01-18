@@ -50,6 +50,7 @@ class TopBarOtherInfo extends Component {
         ],
         btnSlots: [
           {
+            name: Translations.top_bar_info.subscriber,
             className: "col-sm-8 slot_one no-padding",
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.subscribe,
@@ -58,6 +59,7 @@ class TopBarOtherInfo extends Component {
             username: this.props.match.username
           },
           {
+            name: Translations.top_bar_info.posts,
             className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.message,
@@ -164,6 +166,7 @@ class TopBarOtherInfo extends Component {
       ],
       btnSlots: [
         {
+          name: Translations.top_bar_info.subscriber,
           className: "col-sm-8 slot_one no-padding",
           btnActiveClassName: subscribeBtnClass,
           btnText: subscribeBtnText,
@@ -172,6 +175,7 @@ class TopBarOtherInfo extends Component {
           username: this.props.userDataByUsername.user.data.username
         },
         {
+          name: Translations.top_bar_info.posts,
           className: "col-sm-4 slot_two no-padding",
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.message,

@@ -19,41 +19,64 @@ class TopBarOwnerInfo extends Component {
     }
     this.state = {
       items: {
+        userid: userInfo.id,
+        username: userInfo.username,
+        private: userInfo.isPrivate,
+        more: true,
+        isSubscribe: userInfo.isSubscribe,
+        userProfile: userInfo.profileUrl,
+        isBlocked: userInfo.isBlocked,
+        blockId: userInfo.blockId,
         slots: [
           {
             name: Translations.top_bar_info.subscriber,
             val: 0,
-            className: "col-sm-4 slot_one no-padding"
+            className: "col-sm-4 slot_one no-padding",
+            userid: userInfo.id,
+            username: userInfo.username
           },
           {
             name: Translations.top_bar_info.subscribed,
             val: 0,
-            className: "col-sm-4 slot_two no-padding"
+            className: "col-sm-4 slot_two no-padding",
+            userid: userInfo.id,
+            username: userInfo.username
           },
           {
             name: Translations.top_bar_info.posts,
             val: 0,
-            className: "col-sm-4 slot_three no-padding"
+            className: "col-sm-4 slot_three no-padding",
+            userid: userInfo.id,
+            username: userInfo.username
           }
         ],
         btnSlots: [
           {
+            name: Translations.top_bar_info.subscriber,
             className: "col-sm-4 slot_one no-padding",
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.upload,
-            handeleEvent: this.handeleUpload
+            handeleEvent: this.handeleUpload,
+            userid: userInfo.id,
+            username: userInfo.username
           },
           {
+            name: Translations.top_bar_info.subscribed,
             className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_campaign,
-            handeleEvent: this.handeleCreateCampaign
+            handeleEvent: this.handeleCreateCampaign,
+            userid: userInfo.id,
+            username: userInfo.username
           },
           {
+            name: Translations.top_bar_info.posts,
             className: "col-sm-4 slot_three no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_ad,
-            handeleEvent: this.handeleCreateAd
+            handeleEvent: this.handeleCreateAd,
+            userid: userInfo.id,
+            username: userInfo.username
           }
         ]
       }
@@ -130,6 +153,7 @@ class TopBarOwnerInfo extends Component {
             ],
             btnSlots: [
               {
+                name: Translations.top_bar_info.subscriber,
                 className: "col-sm-4 slot_one no-padding",
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.upload,
@@ -138,6 +162,7 @@ class TopBarOwnerInfo extends Component {
                 username: this.props.userDataByUsername.user.data.username
               },
               {
+                name: Translations.top_bar_info.subscribed,
                 className: "col-sm-4 slot_two no-padding",
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.create_campaign,
@@ -146,6 +171,7 @@ class TopBarOwnerInfo extends Component {
                 username: this.props.userDataByUsername.user.data.username
               },
               {
+                name: Translations.top_bar_info.posts,
                 className: "col-sm-4 slot_three no-padding",
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.create_ad,

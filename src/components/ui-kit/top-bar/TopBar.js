@@ -83,8 +83,6 @@ class TopBar extends Component {
           value={slot.val}
           valueName={slot.name}
         />
-
-        <div className="clearfix" />
       </div>
     );
   };
@@ -92,7 +90,7 @@ class TopBar extends Component {
   renderButtonSlots = btnSlot => {
     const userIsLoading = this.props.userDataByUsername.isLoading;
     return (
-      <div className={btnSlot.className} key={`slot-${btnSlot.name}`}>
+      <div className={btnSlot.className} key={`btnSlot-${btnSlot.name}`}>
         <div className="clearfix" />
         <button
           className={btnSlot.btnActiveClassName}
@@ -279,6 +277,7 @@ class TopBar extends Component {
               )}
               <div className="clearfix" />
               {items.length !== 0 && items.slots.map(this.renderSlots)}
+              <div className="clearfix" />
               {items.length !== 0 && items.btnSlots.map(this.renderButtonSlots)}
             </div>
           </div>
