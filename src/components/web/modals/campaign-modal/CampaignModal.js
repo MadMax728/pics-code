@@ -166,10 +166,6 @@ class CampaignModal extends Component {
         form.location.longitude &&
         form.location.address &&
         form.category &&
-        form.offers &&
-        form.offerTag.length !== 0 &&
-        form.inquiry &&
-        form.inquiryTag.length !== 0 &&
         form.file
       );
     } else if (index === 1) {
