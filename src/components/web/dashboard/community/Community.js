@@ -55,44 +55,39 @@ class Community extends Component {
     if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
       sendRequest(requestData).then(() => {
-        console.log("in Request call");
-        console.log(this.props.usersData);
-        //   if (usersData.error && usersData.error.status === 400) {
-        //     errors.servererror =
-        //       Translations.profile_community_right_sidebar.serverError;
-        //     this.setState({ error: errors });
-        //   } else if (usersData.isRequestSend) {
-        //     this.getUserData();
-        //     this.getUserInfo();
-        //   }
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          errors.servererror =
+            Translations.profile_community_right_sidebar.serverError;
+          this.setState({ error: errors });
+        } else if (this.props.usersData.isRequestSendData) {
+          this.getUserData();
+          this.getUserInfo();
+        }
       });
     } else {
       const subscribedId = selectedUserList.subscribeId;
       getUnsubscribe(subscribedId).then(() => {
-        console.log("in unsubscribe call");
-        console.log(this.props.usersData);
-        // if (usersData.error && usersData.error.status === 400) {
-        //   errors.servererror =
-        //     Translations.profile_community_right_sidebar.serverError;
-        //   this.setState({ error: errors });
-        // } else if (usersData.isUnsubscribed) {
-        //   this.getUserData();
-        //   this.getUserInfo();
-        // }
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          errors.servererror =
+            Translations.profile_community_right_sidebar.serverError;
+          this.setState({ error: errors });
+        } else if (this.props.usersData.isUnsubscribedData) {
+          this.getUserData();
+          this.getUserInfo();
+        }
       });
     }
   };
 
   render() {
     const { isLoading, isLoadingusers, usersList, usersData } = this.props;
-    if (usersData.isRequestSendData) {
-      console.log("sendRequest", usersData.isRequestSendData);
-    }
-
-    if (usersData.isUnsubscribedData) {
-      console.log("unsubscribe", usersData.isUnsubscribedData);
-    }
-
+    const userListIsLoading = usersData.isLoading;
     return (
       <div>
         <div className="normal_title padding-15">
@@ -107,7 +102,6 @@ class Community extends Component {
               let classNameText = "filled_button";
               let btnText =
                 Translations.profile_community_right_sidebar.Subscribed;
-
               if (user.isPending) {
                 btnText = Translations.profile_community_right_sidebar.Pending;
                 classNameText = "filled_button";
@@ -124,7 +118,8 @@ class Community extends Component {
                 className: classNameText,
                 userId: user.id,
                 handleActionClick: this.handleSubscribed,
-                btnText: btnText
+                btnText: btnText,
+                isLoading: userListIsLoading
               };
               return (
                 <div className="community_wrapper" key={user.id}>
@@ -148,6 +143,7 @@ class Community extends Component {
                       className={actionButton.className}
                       id={actionButton.userId}
                       onClick={actionButton.handleActionClick}
+                      disabled={actionButton.isLoading}
                     >
                       {actionButton.btnText}
                     </button>

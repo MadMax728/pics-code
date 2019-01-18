@@ -8,9 +8,10 @@ import {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard,
-  like
+  getDashboard
 } from "../../../../actions";
+import * as routes from "../../../../lib/constants/routes";
+
 class TopBarOtherInfo extends Component {
   constructor(props) {
     super(props);
@@ -108,12 +109,12 @@ class TopBarOtherInfo extends Component {
   handleSetUserInfo = () => {
     const isPending = this.props.userDataByUsername.user.data.isPending;
     const isSubscribe = this.props.userDataByUsername.user.data.isSubscribe;
-    const isLike = this.props.userDataByUsername.user.data.isLike;
 
     let subscribeBtnClass = "filled_button";
     let subscribeBtnText = Translations.top_bar_info.subscribe;
     if (isPending) {
       subscribeBtnText = Translations.top_bar_info.request_pending;
+      subscribeBtnClass = "filled_button";
     } else {
       subscribeBtnClass = "filled_button";
       if (isSubscribe) {
@@ -124,14 +125,6 @@ class TopBarOtherInfo extends Component {
         subscribeBtnText = Translations.top_bar_info.subscribe;
       }
     }
-
-    let isLikeBtnClass = "black_button";
-    if (isLike) {
-      isLikeBtnClass = "filled_button";
-    } else {
-      isLikeBtnClass = "black_button";
-    }
-
     const items = {
       userid: this.props.userDataByUsername.user.data.id,
       username: this.props.userDataByUsername.user.data.username,
@@ -228,19 +221,7 @@ class TopBarOtherInfo extends Component {
   };
 
   handeleMessage = () => {
-    this.props.handleModalShow(modalType.messages);
-  };
-
-  handeleLikeYou = event => {
-    const likeParam = { typeId: event.target.id };
-    this.props.like(likeParam);
-    const username = this.props.userDataByUsername.user.data.username;
-    if (username) {
-      const data = {
-        username
-      };
-      this.getUserData(data);
-    }
+    this.props.history.push(routes.MESSAGES_ROUTE);
   };
 
   render() {
@@ -264,8 +245,7 @@ const mapDispatchToProps = {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard,
-  like
+  getDashboard
 };
 
 TopBarOtherInfo.propTypes = {
@@ -278,7 +258,7 @@ TopBarOtherInfo.propTypes = {
   getUnsubscribe: PropTypes.func,
   usersData: PropTypes.any,
   getDashboard: PropTypes.func,
-  like: PropTypes.func
+  history: PropTypes.any
 };
 
 export default connect(
