@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
+import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { CommentCard } from "../../../misc";
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
@@ -82,7 +82,8 @@ class CommentsPage extends Component {
 
   renderCommentList = () => {
     let { commentList, form } = this.state;
-    commentList = search(commentList, "userName", form.search);
+    const { searchData } = this.props;
+    commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
       return (
         <CommentCard
           item={commentList}
@@ -102,10 +103,26 @@ class CommentsPage extends Component {
     this.setState({ form });
   }
   
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+
+    if (searchData.searchKeyword) {
+      getSearch("");
+      const data = {
+        type: "get",
+        reportContent: "Comment"
+      }
+      this.setState({isLoading: true});
+      this.getBackOfficeReportedContent(data);
+      this.getBackOfficeReportedStatistics(data);
+    }
+  }
+
   render() {
     const { isLoading } = this.state;
     let { commentList, form } = this.state;
-    commentList = search(commentList, "userName", form.search);
+    const { searchData } = this.props;
+    commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
     const { reportedContentData } = this.props;
 
     return (
@@ -114,6 +131,7 @@ class CommentsPage extends Component {
           <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {commentList && this.renderCommentList()}
           {!commentList && isLoading && <CampaignLoading />}
+          {commentList && commentList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
         </div>
         <div className="right_bar no-padding">
           <RightSidebarStatistics 
@@ -133,12 +151,14 @@ class CommentsPage extends Component {
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
   isLoading: state.reportedContentData.isLoading,
-  error: state.reportedContentData.error
+  error: state.reportedContentData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
-  getBackOfficeReportedStatistics
+  getBackOfficeReportedStatistics,
+  getSearch
 };
 
 CommentsPage.propTypes = {
@@ -147,6 +167,8 @@ CommentsPage.propTypes = {
   isLoading: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 

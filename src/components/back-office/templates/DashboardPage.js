@@ -73,6 +73,8 @@ class DashboardPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    console.log(this.props);
+    
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {

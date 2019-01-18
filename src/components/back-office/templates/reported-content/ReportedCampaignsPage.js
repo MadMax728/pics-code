@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
+import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { CampaignCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
@@ -82,7 +82,8 @@ class ReportedCampaignsPage extends Component {
 
   rendercampaigns = () => {
     let { campaignList, form } = this.state;
-    campaignList = search(campaignList, "userName", form.search);
+    const { searchData } = this.props;
+    campaignList = search(campaignList, "userName", form.search  || searchData.searchKeyword);
     
     return campaignList.map(campaign => {
       return (
@@ -115,11 +116,26 @@ class ReportedCampaignsPage extends Component {
     this.setState({ form });
   }
 
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+
+    if (searchData.searchKeyword) {
+      getSearch("");
+      const data = {
+        type: "get",
+        reportContent: "Campaign"
+      }
+      this.setState({isLoading: true});
+      this.getBackOfficeReportedContent(data);
+      this.getBackOfficeReportedStatistics(data);
+    }
+  }
+
   render(){
     let { campaignList, form } = this.state;
     const { isLoading } = this.state;
-    const { reportedContentData } = this.props;
-    campaignList = search(campaignList, "userName", form.search);
+    const { reportedContentData, searchData } = this.props;
+    campaignList = search(campaignList, "userName", form.search  || searchData.searchKeyword);
 
     return (
       <div>
@@ -127,6 +143,7 @@ class ReportedCampaignsPage extends Component {
           <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
             {campaignList && this.rendercampaigns()}
             {!campaignList && isLoading && <CampaignLoading />}
+            {campaignList && campaignList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
         </div>
         <div className="right_bar no-padding">
           <RightSidebarStatistics 
@@ -146,12 +163,14 @@ class ReportedCampaignsPage extends Component {
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
   isLoading: state.reportedContentData.isLoading,
-  error: state.reportedContentData.error
+  error: state.reportedContentData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
-  getBackOfficeReportedStatistics
+  getBackOfficeReportedStatistics,
+  getSearch
 };
 
 ReportedCampaignsPage.propTypes = {
@@ -160,6 +179,8 @@ ReportedCampaignsPage.propTypes = {
   isLoading: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 
