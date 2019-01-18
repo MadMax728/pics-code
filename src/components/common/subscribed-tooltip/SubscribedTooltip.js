@@ -83,8 +83,8 @@ class SubscribedTooltip extends Component {
           ) : (
             <div className="notification-with-subscribe notification-wrapper">
               <div className="user-info">
-                <div className="subtitle padding">
-                  {Translations.top_bar_info_modal.no_data}
+                <div className="subtitle">
+                  {Translations.top_bar_info_modal.no_data}123
                 </div>
               </div>
             </div>
@@ -177,7 +177,6 @@ class SubscribedTooltip extends Component {
       });
     }
   };
-
 }
 
 const mapStateToProps = state => ({
