@@ -24,6 +24,7 @@ class EditProfile extends Component {
       isLoading: false,
       userInfo: null,
       categoryList: [],
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
         image: this.props.image,
         username: "",
@@ -73,17 +74,12 @@ class EditProfile extends Component {
     }
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword);
     }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
+    return null;
+  }
 
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;

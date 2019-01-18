@@ -199,8 +199,8 @@ class BackOfficeHomeRoute extends Component {
     );
   }
   
-  handleLanding = () => {
-    return <DashboardPage handleModalInfoShow={this.props.handleModalInfoShow} />;
+  handleLanding = (match) => {
+    return <DashboardPage handleModalInfoShow={this.props.handleModalInfoShow} history={match.history} />;
   };
 
   handleAdsPage = () => {
