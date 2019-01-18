@@ -1,23 +1,18 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { AdminHeader } from "../header";
 import * as routes from "../../../lib/constants/routes";
 import { generateOTP } from "../../../actions/login";
 import PropTypes from "prop-types";
-import connect from "react-redux/es/connect/connect";
+import { connect } from "react-redux";
+import InlineLoading from "../../ui-kit/loading-indicator/InlineLoading";
 
 class LoginLinkSend extends Component {
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.generateOTP().then(() => {
-      if (this.props.loginData.user.success === true)
-        this.props.history.push(routes.LOGIN_PASSWORD_ROUTE);
-    });
-  };
   render() {
+    const { isLoading } = this.props;
     return (
       <div className="login-process">
         <AdminHeader />
+        {isLoading && <InlineLoading />}
         <section>
           <div className="custom-container">
             <div className="login-wrapper backoffice-login">
@@ -36,10 +31,20 @@ class LoginLinkSend extends Component {
       </div>
     );
   }
+  
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.generateOTP().then(() => {
+      if (this.props.loginData.user.success === true)
+        this.props.history.push(routes.LOGIN_PASSWORD_ROUTE);
+    });
+  };
+
 }
 
 const mapStateToProps = state => ({
-  loginData: state.loginData
+  loginData: state.loginData,
+  isLoading: state.loginData.isLoading
 });
 
 const mapDispatchToProps = {
@@ -49,6 +54,7 @@ const mapDispatchToProps = {
 LoginLinkSend.propTypes = {
   generateOTP: PropTypes.func.isRequired,
   loginData: PropTypes.object,
+  isLoading: PropTypes.bool.isRequired,
   history: PropTypes.any
 };
 

@@ -44,7 +44,11 @@ class RadioBtn extends Component {
               htmlFor={name + "-" + index}
             >
               <span>{item.name}</span>
-              <Radio value={item.name} id={name + "-" + index} />
+              <Radio
+                value={item.name}
+                id={name + "-" + index}
+                checked={item.checked}
+              />
               <span className="checkmark" />
             </label>
           );

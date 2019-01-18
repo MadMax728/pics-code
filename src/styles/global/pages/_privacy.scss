@@ -1,3 +1,4 @@
+
 .settings-menu {
   li {
     a {
@@ -10,6 +11,10 @@
       }
     }
   }
+}
+.react-switch {
+  vertical-align: middle;
+  margin-left: 4px;
 }
 .privacy-form {
   padding: 35px 100px 25px 100px;
@@ -24,6 +29,9 @@
         color: $blue_color;
       }
     }
+    .action-btns{
+      display: inline-block;
+    }
   }
   .limitation-wrapper {
     .switch {
@@ -37,7 +45,7 @@
         &:checked {
           & + .slider {
             background-color: #0f7aba;
-            &:before {
+            &::before {
               -webkit-transform: translateX(26px);
               -ms-transform: translateX(26px);
               transform: translateX(26px);
@@ -60,7 +68,7 @@
         background-color: $silver_color;
         -webkit-transition: 0.4s;
         transition: 0.4s;
-        &::before {
+        &:before {
           position: absolute;
           content: "";
           height: 26px;
@@ -77,6 +85,16 @@
           &:before {
             border-radius: 50%;
           }
+        }
+      }
+    }
+  }
+  .change-email-wrapper{
+    .new-email{
+      .form-group{
+        img{
+          bottom: 15px;
+          top: initial;
         }
       }
     }

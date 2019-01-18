@@ -22,6 +22,7 @@ export const PaymentSources = {
 };
 
 export const modalType = {
+  error: "error",
   messages: "messages",
   upload: "upload",
   ads: "ads",
@@ -31,7 +32,10 @@ export const modalType = {
   content_view: "content_view",
   processed: "processed",
   edit_profile: "edit_profile",
-  share: "share"
+  share: "share",
+  confirmation: "confirmation",
+  subscribe: "subscribe",
+  cmsPreview: "cmsPreview"
 };
 
 export const mediaTypes = {
@@ -39,22 +43,27 @@ export const mediaTypes = {
   image: "image"
 };
 
+export const typeContent = {
+  video: "Video",
+  image: "Image"
+};
+
 export const procedure = {
   public: "public",
   anonymous: "anonymous"
-}
+};
 
 export const target_group = {
   company: "company",
   female_and_male: "female_and_male",
   female: "female",
   male: "male"
-}
+};
 
 export const tagsType = {
   inquiryTagList: "inquiryTagList",
   offerTagList: "offerTagList"
-}
+};
 
 export const contentTypes = {
   companyCampaign: "companycampaign",
@@ -69,10 +78,22 @@ export const contentTypes = {
 export const gender = {
   male: "male",
   female: "female"
-}
+};
 
 export const userType = {
   company: "company",
   creator: "creator"
+};
+
+export const reportStatusType = {
+  lock: "Processed",
+  unLock: "Not Processed",
+  doNotLock: "Not Processed",
+  normal: "Outstanding"
 }
 
+export const reportType = {
+  lock: "lock",
+  unLock: "unLock",
+  doNotLock: "doNotLock"
+}

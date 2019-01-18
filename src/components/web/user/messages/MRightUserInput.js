@@ -1,41 +1,67 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
+import 'emoji-mart/css/emoji-mart.css'
+import { Picker } from 'emoji-mart'
 
 class MRightUserInput extends Component {
   
     constructor(props, context) {
         super(props, context);
         this.state = {
-            text : ''
+            message : '',
+            isEmoji: false
         }
     }    
 
-    handleChange=(e)=>{
-        this.setState({text :e.target.value})
-    }
-    
-    onEnterPress = (e) => {
+    handleChange = (e) => {
         e.preventDefault();
-        const { text } = this.state;
-        if(e.keyCode === 13 && e.shiftKey === false && this.props.onMessageSubmit && text) {
-          this.props.onMessageSubmit(text)
+        this.setState({ message: e.target.value });
+    };
+
+    addEmoji = (emoji) => {
+        const { message } = this.state;
+        const newMessage = message + emoji.native;
+        this.setState({message: newMessage});
+        this.setState({ isEmoji: false });
+    };
+
+    onEmojiOpen = () => {
+        this.setState(prevState => ({
+            isEmoji: !prevState.isEmoji
+        }))
+    }
+
+    onEnterPress = (e) => {
+        const keycode = (e.keyCode ? e.keyCode : e.which);
+        if(keycode === 13) {
+            e.preventDefault();
+            const { message } = this.state;
+            this.props.onMessageSubmit(message);
+            this.setState({ message: '' });
         }
     }
 
     render() {
         const { item } = this.props;
+        const { isEmoji } = this.state;
         return (
             <div className="write-chat">
                 {
-                   item && item.id && (
-                    <textarea placeholder="Write a message… " onChange={this.handleChange} value={this.state.message} onKeyUp={this.onEnterPress} onKeyDown={this.onEnterPress} />
-                   )
+                    item && item.id && (
+                    <div>
+                        <textarea type="text" placeholder="Write a message… " 
+                            onChange={this.handleChange}
+                            onKeyPress={this.onEnterPress} 
+                            value={this.state.message} />
+                            <img role="presentation" src={images.emoji} alt={"emoji1"} onKeyPress={this.onEmojiOpen} onClick={this.onEmojiOpen} />
+                    </div>
+                    )
                 }
                 {
-                   item && item.id && (
-                    <img src={images.emoji} alt={"emoji1"} />
-                   )
+                    isEmoji && (
+                        <Picker onSelect={this.addEmoji} style={{ position: 'absolute', bottom: '135px', right: '60px' }} />
+                    )
                 }
             </div>
         )

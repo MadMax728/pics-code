@@ -26,7 +26,7 @@ import {
   ParticipantPage
 } from "../../web/templates";
 
-import { Campaign, Information, Participant } from "../../web/campaigns";
+import { Messages } from "../../web/user";
 
 // Static Pages which is not requre to put in template folder
 import {
@@ -55,95 +55,6 @@ import {
 import { PageNotFound } from "../../web/page-not-found";
 
 class HomeRoute extends Component {
-  handleLanding = () => {
-    return (
-      <NewsPage
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        handleModalShow={this.props.handleModalShow}
-      />
-    );
-  };
-
-  handleEditProfile = () => {
-    return (
-      <EditProfilePage
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        image={this.props.image}
-        profile={this.props.profile}
-      />
-    );
-  };
-
-  handlePageNotFound = () => {
-    return <PageNotFound className={"page-not-found-wrapr padding72"} />;
-  };
-
-  handleSettingCampaign = () => {
-    return (
-      <SettingCampaignPage
-        isBackOffice={false}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        handleModalShow={this.props.handleModalShow}
-      />
-    );
-  };
-
-  handleAds = () => {
-    return <AdsPage isBackOffice={false} />;
-  };
-
-  handleNewsFeed = match => {
-    return <NewsFeedPage match={match.match} />;
-  };
-
-  handleSaved = match => {
-    return <SavedPage match={match.match} />;
-  };
-
-  handleAbout = match => {
-    return <AboutPage match={match.match} />;
-  };
-
-  handleExplore = () => {
-    return (
-      <ExplorePage
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-      />
-    );
-  };
-
-  handleInformation = match => {
-    return (
-      <InformationPage
-        handleModalShow={this.props.handleModalShow}
-        match={match.match}
-      />
-    );
-  };
-
-  handleSettingCampaignStatistics = match => {
-    return <SettingCampaignStatisticsPage match={match.match} />;
-  };
-
-  handleParticipant = () => {
-    return (
-      <ParticipantPage
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-      />
-    );
-  };
-
-  handleCampaign = match => {
-    return (
-      <CampaignPage
-        type={match.match.params.type}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        handleModalShow={this.props.handleModalShow}
-      />
-    );
-  };
 
   render() {
     return (
@@ -180,6 +91,8 @@ class HomeRoute extends Component {
             component={this.handleSaved}
           />
 
+          <Route exact path={routes.MESSAGES_ROUTE} component={Messages} />
+
           <Route
             exact
             path={routes.PARTICIPANTS_ROUTE}
@@ -188,7 +101,11 @@ class HomeRoute extends Component {
 
           <Route exact path={routes.USERS_ROUTE} component={UsersPage} />
 
-          <Route exact path={routes.PICS_ROUTE} component={PicturesPage} />
+          <Route
+            exact
+            path={routes.PICS_ROUTE}
+            component={this.handlePictures}
+          />
 
           <Route
             path={routes.ROOT_ROUTE}
@@ -224,7 +141,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_PRIVACY_ROUTE}
-            component={PrivacyPage}
+            component={this.handlePrivacyPage}
           />
 
           <Route
@@ -401,6 +318,115 @@ class HomeRoute extends Component {
       </div>
     );
   }
+  
+  handleLanding = () => {
+    return (
+      <NewsPage
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
+  handleEditProfile = match => {
+    return (
+      <EditProfilePage
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        image={this.props.image}
+        profile={this.props.profile}
+        history={match.history}
+      />
+    );
+  };
+
+  handlePageNotFound = () => {
+    return <PageNotFound className={"page-not-found-wrapr padding72"} />;
+  };
+
+  handleSettingCampaign = () => {
+    return (
+      <SettingCampaignPage
+        isBackOffice={false}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
+  handleAds = () => {
+    return <AdsPage isBackOffice={false} />;
+  };
+
+  handleNewsFeed = match => {
+    return <NewsFeedPage match={match.match} />;
+  };
+
+  handleSaved = match => {
+    return <SavedPage match={match.match} />;
+  };
+
+  handleAbout = match => {
+    return <AboutPage match={match.match} />;
+  };
+
+  handleExplore = () => {
+    return (
+      <ExplorePage
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
+  };
+
+  handleInformation = match => {
+    return (
+      <InformationPage
+        handleModalShow={this.props.handleModalShow}
+        match={match.match}
+        history={match.history}
+      />
+    );
+  };
+
+  handleSettingCampaignStatistics = match => {
+    return <SettingCampaignStatisticsPage match={match.match} />;
+  };
+
+  handleParticipant = () => {
+    return (
+      <ParticipantPage
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
+  };
+
+  handlePrivacyPage = match => {
+    return (
+      <PrivacyPage
+        history={match.history}
+        type={match.match.params.type}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
+  handlePictures = match => {
+    return <PicturesPage history={match.history} />;
+  };
+
+  handleCampaign = match => {
+    return (
+      <CampaignPage
+        type={match.match.params.type}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
+
+ 
 }
 
 HomeRoute.propTypes = {

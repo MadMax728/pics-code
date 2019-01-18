@@ -19,52 +19,6 @@ class AdminLogin extends Component {
     };
   }
 
-  //logout user
-  componentDidMount = () => {
-    Auth.logoutAdmin();
-  };
-
-  /**
-   * getUserEnterPassword
-   */
-  getUserEnterPassword = e => {
-    e.preventDefault();
-    this.setState({ otp: e.target.value });
-  };
-
-  /**
-   * formValid
-   */
-  formValid = () => {
-    const { otp } = this.state;
-
-    if (otp.length === 0) {
-      return false;
-    }
-
-    return true;
-  };
-
-  /**
-   * Handle submit
-   */
-  handleSubmit = event => {
-    event.preventDefault();
-    if (!this.formValid()) {
-      return false;
-    }
-
-    const { otp } = this.state;
-
-    this.props.submitAdminLogin({ otp }).then(() => {
-
-      if (this.props.loginData && this.props.loginData.user && this.props.loginData.user.success === true)
-        this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
-      if (this.props.loginData && this.props.loginData.error && this.props.loginData.error.data && this.props.loginData.error.data.success === false)
-        this.setState({errorMsg: this.props.loginData.error.data.message});
-    });
-  };
-
   render() {
     const { loginData } = this.props;
     const { errorMsg } = this.state;
@@ -113,6 +67,53 @@ class AdminLogin extends Component {
       </div>
     );
   }
+
+  //logout user
+  componentDidMount = () => {
+    Auth.logoutAdmin();
+  };
+
+  /**
+   * getUserEnterPassword
+   */
+  getUserEnterPassword = e => {
+    e.preventDefault();
+    this.setState({ otp: e.target.value });
+  };
+
+  /**
+   * formValid
+   */
+  formValid = () => {
+    const { otp } = this.state;
+
+    if (otp.length === 0) {
+      return false;
+    }
+
+    return true;
+  };
+
+  /**
+   * Handle submit
+   */
+  handleSubmit = event => {
+    event.preventDefault();
+    if (!this.formValid()) {
+      return false;
+    }
+
+    const { otp } = this.state;
+
+    this.props.submitAdminLogin({ otp }).then(() => {
+      if (this.props.loginData && this.props.loginData.user && this.props.loginData.user.success === true)
+        this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
+      if (this.props.loginData && this.props.loginData.error && this.props.loginData.error.data && this.props.loginData.error.data.success === false)
+        this.setState({errorMsg: this.props.loginData.error.data.message});
+    });
+  };
+
+
 }
 
 const mapStateToProps = state => ({

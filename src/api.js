@@ -5,22 +5,23 @@ const apiFactory = baseUrl => {
   const service = axios.create({
     baseURL: baseUrl,
     transformResponse: [
-      (data) => {
-          if (typeof data === 'string') {
-              try {
-                  data = JSON.parse(data);
-              } catch (e) { /* Ignore */
-              }
+      data => {
+        if (typeof data === "string") {
+          try {
+            data = JSON.parse(data);
+          } catch (e) {
+            /* Ignore */
           }
+        }
 
-          if(data && data.error && data.error === "Error: Invalid credentials") {
-            Auth.logoutUser();
-            window.location.reload('/');
-          }
+        if (data && !data.success && data.message === "Invalid credentials" || data && data.error && data.error === "Error: Invalid credentials") {
+          Auth.logoutUser();
+          window.location.reload("/");
+        }
 
-          return data;
-      },
-    ],
+        return data;
+      }
+    ]
   });
 
   return service;
@@ -31,22 +32,23 @@ export const api = (baseUrl, header = {}) => {
     baseURL: baseUrl,
     headers: buildHeader(header),
     transformResponse: [
-      (data) => {
-          if (typeof data === 'string') {
-              try {
-                  data = JSON.parse(data);
-              } catch (e) { /* Ignore */
-              }
+      data => {
+        if (typeof data === "string") {
+          try {
+            data = JSON.parse(data);
+          } catch (e) {
+            /* Ignore */
           }
+        }
 
-          if(data && data.error && data.error === "Error: Invalid credentials") {
-            Auth.logoutUser();
-            window.location.reload('/');
-          }
+        if (data && !data.success && data.message === "Invalid credentials" || data && data.error && data.error === "Error: Invalid credentials") {
+          Auth.logoutUser();
+          window.location.reload("/");
+        }
 
-          return data;
-      },
-    ],
+        return data;
+      }
+    ]
   });
 
   return service;

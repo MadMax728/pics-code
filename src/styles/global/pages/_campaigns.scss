@@ -28,6 +28,14 @@
     display: block;
     margin: 7px auto;
   }
+  .red-circle {
+    width: 6px;
+    height: 6px;
+    border: 2px solid #d32121;
+    border-radius: 50%;
+    display: block;
+    margin: 7px auto;
+  }
 }
 .status {
   border-top: 1px solid $charcoal_color;
@@ -54,7 +62,7 @@
       font-size: 12px;
       font-family: "Helvetica-Bold";
       @media (max-width: 991px) {
-        width: 80%;
+        width: 100%;
       }
     }
     .subtitle {
@@ -64,6 +72,14 @@
       width: 6px;
       height: 6px;
       border: 2px solid #7ed321;
+      border-radius: 50%;
+      display: block;
+      margin: 7px auto;
+    }
+    .red-circle {
+      width: 6px;
+      height: 6px;
+      border: 2px solid #d32121;
       border-radius: 50%;
       display: block;
       margin: 7px auto;

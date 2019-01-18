@@ -1,49 +1,55 @@
 import React, { Component } from "react";
+import MRightUserInput from './MRightUserInput';
 import MRightUserItem from './MRightUserItem';
 import MRightActiveChat from './MRightActiveChat';
-import MRightUserInput from './MRightUserInput';
 import PropTypes from "prop-types";
+import io from "socket.io-client";
+
 
 class MRightContainer extends Component {
-  
+
     constructor(props, context) {
         super(props, context);
         this.state = {
-            currentUser : '',
-            messages : [],
+            message : ''
         }
-    }    
-    
-    onDeleteHistoryClick = (e) => {
+    }
+
+    onDeleteHistoryClick = () => {
     };
 
-    handleMessageClick = (e) => {
+    handleChange = e => {
+        this.setState({ message: e.target.value });
     };
 
-    onMessageSubmit = (text) => {
-        this.socket.emit('communication-message-board-join', {
-            receiverId: 1,
-            senderId: 2,
-            text
+    onMessageSubmit = (content) => {
+        if(!content || !this.props.user || !this.props.user.id || !this.props.me) return;
+        this.props.socket.emit('communication-message-board-new-message', {
+            recipientId: this.props.user.id,
+            senderId: this.props.me,
+            content
         });
     }
 
+    
+
     render() {
-        const { messages, currentUser, date } = this.state;
+        const { socket, user } = this.props;
         return (
             <div>
-                <MRightUserItem item={this.props.user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
-                <MRightActiveChat items={messages} user={this.props.user} me={currentUser} handleMessageClick={this.handleMessageClick} />
-                <MRightUserInput item={this.props.user} onMessageSubmit={this.onMessageSubmit} />
+                <MRightUserItem item={user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
+                <MRightActiveChat user={user} socket={socket} />
+                <MRightUserInput item={user} onMessageSubmit={this.onMessageSubmit} />
             </div>
         )
     }
 
 }
-  
+
 MRightContainer.propTypes = {
     user: PropTypes.any,
+    me: PropTypes.any,
+    socket: PropTypes.any
 };
 
 export default MRightContainer;
-  

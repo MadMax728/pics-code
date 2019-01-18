@@ -40,25 +40,51 @@ const initialState = {
   },
   campaignData: {
     campaigns: null,
-    campaign: [],
+    campaign: null,
+    favouriteCampaign: null,
     isLoading: false,
-    error: false
+    error: false,
+    isAddParticipant: null
   },
   adData: {
     ads: null,
-    ad: [],
+    ad: null,
     isLoading: false,
     error: false
   },
-  exploreData: {
-    explores: null,
+  backOfficeDashboardData: {
+    backOfficeDashboard: null,
+    isLoading: false,
+    error: false
+  },
+  cmsManagementData: {
+    cmsManagement: null,
+    cmsDetail: null,
     isLoading: false,
     error: false
   },
   dashboardData: {
-    dashboard: null,
     isLoading: false,
-    error: false
+
+    news: null,
+    isLoadingnews: false,
+    errornews: false,
+
+    explores: null,
+    isLoadingexplores: false,
+    errorexplores: false,
+
+    participants: null,
+    isLoadingparticipants: false,
+    errorparticipants: false,
+
+    users: null,
+    isLoadingusers: false,
+    errorusers: false,
+
+    pics: null,
+    isLoadingpics: false,
+    errorpics: false
   },
   aboutData: {
     about: null,
@@ -72,6 +98,7 @@ const initialState = {
   },
   savedData: {
     saved: null,
+    saves: null,
     isLoading: false,
     error: false
   },
@@ -83,6 +110,11 @@ const initialState = {
   commentData: {
     comments: {},
     comment: null,
+    isLoading: false,
+    error: false
+  },
+  mediaData: {
+    media: null,
     isLoading: false,
     error: false
   },
@@ -98,18 +130,125 @@ const initialState = {
   selectData: {
     categories: null,
     offers: null,
-    inquirys: null,
+    inquiries: null,
     dailyBudgets: null,
+    radius: null,
+    targetGroups: null,
+    callToActions: null,
+    periods: null,
+    amounts: null,
+    types: null,
+    numbers: null,
+    languages: null,
     isLoading: false,
     error: false
   },
   usersData: {
-    subscribers: [],
+    users: [],
+    isLoading: false,
+    error: false,
+    isRequestSend: null,
+    isUnsubscribed: null,
+    userList: [],
+    pendingUserList: [],
+    isAcceptRequest: null,
+    BlockRequestResult: [],
+    isUnblock: null
+  },
+  subscribeData: {
+    subscriber: [],
+    subscribed: [],
     isLoading: false,
     error: false
   },
   profilePrivacyData: {
     profilePrivacyData: [],
+    isLoading: false,
+    error: false,
+    changeEmailData: [],
+    changePasswordData: [],
+    changeInvoiceAddressData: [],
+    userData: []
+  },
+  adminData: {
+    admins: null,
+    admin: null,
+    isLoading: false,
+    error: false
+  },
+  verificationData: {
+    verifications: null,
+    verification: null,
+    unverifiedUsers: null,
+    isLoading: false,
+    error: false
+  },
+  voucherData: {
+    vouchers: null,
+    voucher: null,
+    voucherExpiryResult: null,
+    isLoading: false,
+    error: false
+  },
+  reviewData: {
+    Campaigns: null,
+    Ads: null,
+
+    CampaignsStatistics: null,
+    AdvertisementStatistics: null,
+
+    isLoading: false,
+    error: false
+  },
+  reportedContentData: {
+    Image: null,
+    Videos: null,
+    Campaign: null,
+    Pics: null,
+    Ads: null,
+    Comments: null,
+    Users: null,
+
+    ImageStatistics: null,
+    VideosStatistics: null,
+    CampaignStatistics: null,
+    PicsStatistics: null,
+    AdsStatistics: null,
+    CommentsStatistics: null,
+    UsersStatistics: null,
+
+    addReport: null,
+
+    isLoading: false,
+    error: false
+  },
+  businessProfileData: {
+    businessProfileActivationData: null,
+    billsData: null,
+    downloadData: null,
+    isLoading: false,
+    error: false
+  },
+  searchData: {
+    searchKeyword: null,
+    isLoading: false,
+    error: false
+  },
+  hashUserData: {
+    usernames: null,
+    hashTags: null,
+    isLoading: false,
+    error: false
+  },
+  hashTagData: {
+    hashTags: null,
+    addedHashTags: null,
+    isLoading: false,
+    error: false
+  },
+  messagesData: {
+    messages: [],
+    lastEvaluatedKeys: undefined,
     isLoading: false,
     error: false
   }

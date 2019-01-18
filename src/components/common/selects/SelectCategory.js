@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getCategory } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectCategory extends Component {
   constructor(props) {
@@ -11,25 +12,6 @@ class SelectCategory extends Component {
     }
   }
 
-
-  componentWillUnmount = () => {
-    this.setState({categoryList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getCategory().then(() => {
-      if(this.props.categoryList && this.props.categoryList.categories){
-        this.setState({
-          categoryList: this.props.categoryList.categories
-        });
-      }
-    });
-  }
-  
-  handleCategory = (event) => {
-    this.props.handleSelect("category",event.target.value);
-  }
-  
   render() {
     const { categoryList } = this.state;
     const { value, className } = this.props;
@@ -42,7 +24,7 @@ class SelectCategory extends Component {
         onBlur={this.handleCategory}
         options={categoryList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{Translations.select_category}</option>
         {categoryList.map(option => (
           <option value={option.id} key={option.id}>
             {option.categoryName}
@@ -51,14 +33,33 @@ class SelectCategory extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("categories").then(() => {
+      if(this.props.categoryList){
+        this.setState({
+          categoryList: this.props.categoryList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({categoryList: []});
+  }
+  
+  handleCategory = (event) => {
+    this.props.handleSelect("category",event.target.value);
+  }
+  
 }
 
 const mapStateToProps = state => ({
-  categoryList: state.selectData
+  categoryList: state.selectData.categories
 });
 
 const mapDispatchToProps = {
-  getCategory
+  getSelect
 };
 
 
@@ -66,7 +67,7 @@ const propTypes = {
   value: PropTypes.any,
   categoryList: PropTypes.any,
   className: PropTypes.string,
-  getCategory: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

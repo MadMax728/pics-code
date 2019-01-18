@@ -1,14 +1,38 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getDashboard } from "../../../actions";
+import { getDashboard, getSearch } from "../../../actions";
 import { CampaignLoading } from "../../ui-kit";
-import { MediaCard } from "../misc";
+import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 import PropTypes from "prop-types";
 
 class ParticipantsPage extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("getParticipant");
+    if (this.props.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    window.scrollTo(0, 0);
+    if (this.props.searchData.searchKeyword) {
+      this.props.getDashboard(
+        "participants",
+        "?isSearch=" + this.props.searchData.searchKeyword
+      );
+    } else {
+      this.props.getDashboard("participants", "");
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      let searchParam = "";
+      if (searchKeyword) {
+        searchParam = "?isSearch=" + searchKeyword;
+      }
+      this.props.getDashboard("participants", searchParam);
+    }
   };
 
   renderParticipantsList = () => {
@@ -16,44 +40,51 @@ class ParticipantsPage extends Component {
     return participantsList.map(participant => {
       return (
         <div key={participant.id}>
-          {participant.postType && participant.postType.toLowerCase() === enumerations.contentTypes.companyParticipantCampaign && 
-               <MediaCard item={participant} />
-          }
+          {participant.postType &&
+            participant.mediaUrl &&
+            participant.postType.toLowerCase() ===
+              enumerations.contentTypes.companyParticipantCampaign && (
+              <MediaCard item={participant} isDescription />
+            )}
         </div>
       );
     });
   };
 
   render() {
-    const { participantsList, isLoading } = this.props;
+    const { participantsList, isLoadingparticipants } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {participantsList && !isLoading && this.renderParticipantsList()}
-        {isLoading && <CampaignLoading />}
+        {participantsList &&
+          !isLoadingparticipants &&
+          this.renderParticipantsList()}
+        {isLoadingparticipants && <CampaignLoading />}
       </div>
     );
   }
 }
 
 ParticipantsPage.propTypes = {
-  handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoadingparticipants: PropTypes.bool,
   participantsList: PropTypes.any,
-  error: PropTypes.any
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func
+  // errorparticipants: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  participantsList: state.dashboardData.dashboard,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  participantsList: state.dashboardData.participants,
+  isLoadingparticipants: state.dashboardData.isLoadingparticipants,
+  errorparticipants: state.dashboardData.errorparticipants,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getDashboard
+  getDashboard,
+  getSearch
 };
 
 export default connect(

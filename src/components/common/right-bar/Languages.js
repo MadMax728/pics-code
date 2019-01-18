@@ -21,6 +21,29 @@ class Languages extends Component {
     };
   }
 
+  render() {
+    const { languages } = this.state;
+    return (
+      <div className="right_language padding-15">
+        <div className="normal_title">{Translations.base_footer.language}</div>
+        {languages.map(lang => {
+          return (
+            <div
+              key={lang.ios}
+              onKeyDown={this.handleKeyDown}
+              className={lang.ios === Translations._language ? "active" : ""}
+              onClick={lang.handleEvent}
+              role="button"
+              tabIndex="0"
+            >
+              {lang.name}
+            </div>
+          );
+        })}
+      </div>
+    );
+  }
+
   /**
    * handle english
    */
@@ -41,28 +64,7 @@ class Languages extends Component {
 
   handleKeyDown = () => {};
 
-  render() {
-    const { languages } = this.state;
-    return (
-      <div className="right_language padding-15">
-        <div className="normal_title">{Translations.base_footer.language}</div>
-        {languages.map((lang, index) => {
-          return (
-            <div
-              key={index}
-              onKeyDown={this.handleKeyDown}
-              className={lang.ios === Translations._language ? "active" : ""}
-              onClick={lang.handleEvent}
-              role="button"
-              tabIndex="0"
-            >
-              {lang.name}
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
+ 
 }
 
 Languages.propTypes = {

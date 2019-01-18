@@ -1,77 +1,118 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { getHashUser } from "../../../actions";
 import { username_list } from "../../../mock-data";
-
-const propTypes = {
-  value: PropTypes.any.isRequired,
-  handleSetSatetToolTipUsername: PropTypes.func.isRequired
-};
+import * as images from "../../../lib/constants/";
 
 class Username extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userNameList: username_list
+      usersList: null
     };
   }
 
+  componentDidMount = () => {
+    this.props.getHashUser("usernames").then(() => {
+      if (this.props.usersList) {
+        this.setState({ usersList: this.props.usersList });
+      }
+    });
+  };
+
   _commentsCbUserName = item => {
     const username = item.username;
-    //hashtag = hash_tag_list.filter
+    const id = item.id;
     let { value } = this.props;
     const commentArr = value.split(" ");
     commentArr.pop();
-    value = commentArr.join(" ") + " @" + username;
-    this.props.handleSetSatetToolTipUsername(value);
+    if (this.props.username) {
+      value = commentArr.join(" ") + username;
+      this.props.handleSetSatetToolTipUsername(id, value);
+    } else {
+      value = commentArr.join(" ") + " @" + username;
+      this.props.handleSetSatetToolTipUsername(value);
+    }
   };
 
   render() {
-    let { userNameList } = this.state;
+    let { usersList } = this.state;
+
     const { value } = this.props;
-    const commentArr = value.split(" ");
+
+    const commentArr = value ? value.split(" ") : " ";
+
     const lastText = commentArr[commentArr.length - 1].substring(1);
-    userNameList = userNameList.filter(item => {
-      return !!(
-        lastText === "@" ||
-        lastText === "" ||
-        item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1 ||
-        item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1
-      );
-    });
+
+    usersList =
+      usersList &&
+      usersList.filter(item => {
+        return !!(
+          lastText === "@" ||
+          lastText === "" ||
+          (item.username &&
+            item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1) ||
+          (item.name !== undefined &&
+            item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1)
+        );
+      });
 
     return (
       <div>
-        {userNameList.map((item, index) => {
-          return (
-            /* eslint-disable */
-            <div
-              key={"Commnet_" + item.id}
-              onClick={() => {
-                this._commentsCbUserName(item);
-              }}
-              id={item.id}
-              onKeyDown={this.onKeyHandle}
-              className="tag-person-wrapr"
-            >
-              <div className="img-wrapr">
-                <img
-                  src={item.image}
-                  alt={"image" + `${item.name}`}
-                  style={{ height: "20px", width: "20px" }}
-                />
+        {usersList &&
+          usersList.map(item => {
+            return (
+              /* eslint-disable */
+              <div
+                key={"Commnet_" + item.id}
+                onClick={() => {
+                  this._commentsCbUserName(item);
+                }}
+                id={item.id}
+                onKeyDown={this.onKeyHandle}
+                className="tag-person-wrapr"
+              >
+                <div className="img-wrapr">
+                  <img
+                    src={item.profileUrl ? item.profileUrl : images.image}
+                    alt={"image" + `${item.username}`}
+                    style={{ height: "20px", width: "20px" }}
+                  />
+                </div>
+                <div className="person-info-wrapr">
+                  <div className="person-name">{item.username}</div>
+                  <div className="person-info">{item.name}</div>
+                </div>
               </div>
-              <div className="person-info-wrapr">
-                <div className="person-name">{item.username}</div>
-                <div className="person-info">{item.name}</div>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     );
   }
 }
 
-Username.propTypes = propTypes;
+const mapStateToProps = state => ({
+  usersList: state.hashUserData.usernames,
+  isLoading: state.hashUserData.isLoading,
+  error: state.hashUserData.error
+});
 
-export default Username;
+const mapDispatchToProps = {
+  getHashUser
+};
+
+Username.propTypes = {
+  getHashUser: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  usersList: PropTypes.any,
+  value: PropTypes.any.isRequired,
+  handleSetSatetToolTipUsername: PropTypes.func.isRequired,
+  username: PropTypes.bool
+  // error: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Username);

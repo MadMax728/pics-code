@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getInquiry } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectInquiry extends Component {
   constructor(props) {
@@ -11,24 +12,6 @@ class SelectInquiry extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({inquiryList: []});
-  }
-  
-  componentDidMount = () => {
-    this.props.getInquiry().then(() => {
-      if(this.props.inquiryList && this.props.inquiryList.inquirys){
-        this.setState({
-          inquiryList: this.props.inquiryList.inquirys
-        });
-      }
-    });
-  }
-  
-  handleInquiry = (event) => {
-    this.props.handleSelect("inquiry",event.target.value);
-  }
-  
   render() {
     const { inquiryList } = this.state;
     const { value, className } = this.props;
@@ -41,7 +24,7 @@ class SelectInquiry extends Component {
         onBlur={this.handleInquiry}
         options={inquiryList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{Translations.select_inquiry}</option>
         {inquiryList.map(option => (
           <option value={option.id} key={option.id}>
             {option.inquiryName}
@@ -50,14 +33,33 @@ class SelectInquiry extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("inquiries").then(() => {
+      if (this.props.inquiryList) {
+        this.setState({
+          inquiryList: this.props.inquiryList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({ inquiryList: [] });
+  }
+
+  handleInquiry = (event) => {
+    this.props.handleSelect("inquiry", event.target.value);
+  }
+
 }
 
 const mapStateToProps = state => ({
-  inquiryList: state.selectData
+  inquiryList: state.selectData.inquiries
 });
 
 const mapDispatchToProps = {
-  getInquiry
+  getSelect
 };
 
 
@@ -65,7 +67,7 @@ const propTypes = {
   value: PropTypes.any,
   inquiryList: PropTypes.any,
   className: PropTypes.string,
-  getInquiry: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

@@ -83,9 +83,9 @@
   }
   img {
     width: 100%;
-    &.padd20{
-			padding: 0 20px;
-		}
+    &.padd20 {
+      padding: 0 20px;
+    }
   }
   button {
     width: 100%;
@@ -108,21 +108,37 @@
         margin-bottom: 0px;
       }
       .emoji_wrapper {
+        position: relative;
         img {
           width: 20px;
           padding-top: 16px;
+        }
+        .emoji-mart{
+          bottom: 0 !important;
+          right: 30px !important;
         }
       }
       .profile_image {
         display: inline-block;
         float: left;
-        &.wid45{
+        &.wid45 {
           width: 55px;
+        }
+        
+      }
+      .comment-input{
+        .form-group{
+          .form-control{
+            width: 100%;
+          }
         }
       }
       .comment-content {
         p {
           padding-left: 70px;
+        }
+        .comment-inner-wrap{
+          padding-left:45px;
         }
       }
       .show_more_options {
@@ -139,7 +155,10 @@
       }
     }
     .view-more-comments {
-      padding: 0px 17px;
+      cursor: pointer;
+      a{
+        color: $silver_color;
+      }
     }
   }
 }

@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
+import { Translations } from "../../../../../lib/translations";
+import { userInfo } from "os";
+import moment from "moment";
+import { Loader, ImageItem, VideoItem } from "../../../../ui-kit";
+import * as enumerations from "../../../../../lib/constants/enumerations";
+import { connect } from "react-redux";
+
 class PaymentStepOne extends Component {
   constructor(props) {
     super(props);
@@ -8,74 +15,120 @@ class PaymentStepOne extends Component {
   }
 
   render() {
-    const { handleChangeField } = this.props;
-
+    const { handleAddress, form, userInfo, categoryList } = this.props;
+    const todayDate = new Date();
+    console.log(form.category[0].categoryName);
+    // const selectedCategory = categoryList.find(
+    //   category => category.id === form.category
+    // );
+    // console.log("step1", selectedCategory);
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
           <div className="user-title">
-            <div className="subtitle">Billing Address</div>
+            <div className="subtitle">
+              {Translations.payment_modal.billing_address}
+            </div>
           </div>
           <form className="col-xs-12 no-padding">
             <div className="form-group">
-              <label htmlFor="title">Invoice Recipient</label>
+              <label htmlFor="title">
+                {Translations.payment_modal.invoice_recipient}
+              </label>
               <input
                 type="text"
-                name="invoice_recipient"
-                value={this.props.form.invoice_recipient}
-                onChange={handleChangeField}
+                name="invoiceRecipient"
+                defaultValue={form.address.invoiceRecipient}
+                onChange={handleAddress}
               />
+              {form.address.invoiceRecipient.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.invoiceRecipient}
+                </span>
+              )}
             </div>
             <div className="form-group">
-              <label htmlFor="Location">Street, number</label>
+              <label htmlFor="Location">
+                {Translations.payment_modal.street_number}
+              </label>
               <input
                 type="text"
                 name="street"
-                value={this.props.form.street}
-                onChange={handleChangeField}
+                defaultValue={form.address.street}
+                onChange={handleAddress}
               />
               <input
                 type="text"
-                name="number"
-                value={this.props.form.number}
-                onChange={handleChangeField}
+                name="streetNumber"
+                defaultValue={form.address.streetNumber}
+                onChange={handleAddress}
               />
+              {form.address.street.length === 0 ||
+                (form.address.streetNumber.length === 0 && form.error && (
+                  <span className="error-msg highlight">
+                    {Translations.error.create_modal.streetNumber}
+                  </span>
+                ))}
             </div>
             <div className="form-group">
-              <label htmlFor="title">Postal Code</label>
+              <label htmlFor="title">
+                {Translations.payment_modal.postal_code}
+              </label>
               <input
                 type="text"
-                name="postal_code"
-                value={this.props.form.postal_code}
-                onChange={handleChangeField}
+                name="postalCode"
+                defaultValue={form.address.postalCode}
+                onChange={handleAddress}
               />
+              {form.address.postalCode.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.postalCode}
+                </span>
+              )}
             </div>
             <div className="form-group">
-              <label htmlFor="title">City</label>
+              <label htmlFor="title">{Translations.payment_modal.city}</label>
               <input
                 type="text"
                 name="city"
-                value={this.props.form.city}
-                onChange={handleChangeField}
+                defaultValue={form.address.city}
+                onChange={handleAddress}
               />
+              {form.address.city.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.city}
+                </span>
+              )}
             </div>
             <div className="form-group">
-              <label htmlFor="title">Country</label>
+              <label htmlFor="title">
+                {Translations.payment_modal.country}
+              </label>
               <input
                 type="text"
                 name="country"
-                value={this.props.form.country}
-                onChange={handleChangeField}
+                defaultValue={form.address.country}
+                onChange={handleAddress}
               />
+              {form.address.country.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.country}
+                </span>
+              )}
             </div>
             <div className="form-group">
-              <label htmlFor="title">VAT Identification Number</label>
+              <label htmlFor="title">{Translations.payment_modal.VATNO}</label>
               <input
                 type="text"
-                value={this.props.form.vat_identification_number}
-                name="vat_identification_number"
-                onChange={handleChangeField}
+                defaultValue={form.address.VATNO}
+                name="VATNO"
+                onChange={handleAddress}
               />
+              {form.address.VATNO.length === 0 && form.error && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.VATNO}
+                </span>
+              )}
             </div>
           </form>
         </div>
@@ -90,9 +143,12 @@ class PaymentStepOne extends Component {
                 />
               </div>
               <div className="no-padding titles_wrapper">
-                <div className="normal_title">Title of campaigns</div>
-                <div className="secondary_title">Santosh Shinde</div>
-                <div className="grey_title">01.01.2000 in Category</div>
+                <div className="normal_title">{form.title}</div>
+                <div className="secondary_title">{userInfo.username}</div>
+                <div className="grey_title">
+                  {" "}
+                  {moment(todayDate).format("DD.MM.YYYY")} in Category
+                </div>
               </div>
               <div className="like_wrapper">
                 <img
@@ -106,23 +162,32 @@ class PaymentStepOne extends Component {
               <div className="feed_image">
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
-                    <img src={images.image} alt="image2" />
+                    {/* <img src={images.image} alt="image2" /> */}
+                    {form.typeContent &&
+                      form.typeContent.toLowerCase() ===
+                        enumerations.mediaTypes.video && (
+                        <VideoItem item={form.video} />
+                      )}
+                    {(!form.typeContent ||
+                      (form.typeContent &&
+                        form.typeContent.toLowerCase() ===
+                          enumerations.mediaTypes.image)) && (
+                      <ImageItem item={form.image} />
+                    )}
                   </div>
                 </div>
               </div>
               <div className="feed_description padding-15">
-                <span className="secondary_title">
-                  {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...`}
-                </span>
+                <span className="secondary_title">{form.description}</span>
               </div>
             </div>
             <div className="feed_footer padding-15">
               <div className="messages">
-                <span className="count">12</span>
+                <span className="count">0</span>
                 <img src={images.feed_msg} alt="feed_msg" />
               </div>
               <div className="likes">
-                <span className="count">12</span>
+                <span className="count">0</span>
                 <img src={images.feed_like} alt="feed_like" />
               </div>
               <div className="show_more_options">
@@ -136,9 +201,15 @@ class PaymentStepOne extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  categoryList: state.selectData
+});
+
 PaymentStepOne.propTypes = {
   form: PropTypes.any.isRequired,
-  handleChangeField: PropTypes.func.isRequired
+  handleAddress: PropTypes.func.isRequired,
+  userInfo: PropTypes.any,
+  categoryList: PropTypes.any
 };
 
-export default PaymentStepOne;
+export default connect(mapStateToProps)(PaymentStepOne);

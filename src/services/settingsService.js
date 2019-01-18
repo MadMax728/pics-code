@@ -1,40 +1,30 @@
 import { api } from "../api";
+import { setSavedPostEndPoint, getAboutEndPoint, getSavedOwnerEndPoint, getNewsFeedOtherEndPoint, getNewsFeedOwnerEndPoint } from "../lib/constants/endPoints";
 
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
 
-// const api = apiFactory(baseUrl);
 
 /**
  *
  * @param {*} payload
  */
 
-// // News Feed API
-// export const getNewsFeedOwner = payload => api.get("/news-feed", payload);
-// export const getNewsFeedOther = (payload, id) =>
-//   api.get("/news-feed/" + id, payload);
-
-// // Saved API
-// export const getSavedOwner = payload => api.get("/saved", payload);
-// export const getSavedOther = (payload, id) => api.get("/saved/" + id, payload);
-
-// // About API
-// export const getAboutOwner = payload => api.get("/about", payload);
-// export const getAboutOther = (payload, id) => api.get("/about/" + id, payload);
-
-// remove when actual API used
 // News Feed API
 export const getNewsFeedOwner = (payload, header = {}) =>  
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get(getNewsFeedOwnerEndPoint);
 export const getNewsFeedOther = (payload, header = {}) =>  
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get(`${getNewsFeedOtherEndPoint}${payload}`);
 
-// Saved API
-export const getSavedOwner = (payload, header = {}) =>  api(baseUrl, header).get("/newsfeeds/news-feeds");
-export const getSavedOther = (payload, header = {}) =>  api(baseUrl, header).get("/newsfeeds/news-feeds");
+// Get Saved API
+export const getSavedOwner = (payload, header = {}) =>  api(baseUrl, header).get(getSavedOwnerEndPoint);
 
 // About API
 export const getAbout = (payload, header = {}) =>
-  api(baseUrl, header).get("/users/" + payload.username, payload);
+  api(baseUrl, header).get(getAboutEndPoint + payload.username, payload);
+
+// Set Saved API
+export const setSavedPost = (payload, header = {}) =>
+  api(baseUrl, header).post(setSavedPostEndPoint, payload);
+  

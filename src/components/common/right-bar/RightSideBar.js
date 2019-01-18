@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
-import { Languages, RightAbout } from "./";
+import { RightAbout } from "./";
 import { FavouriteCampaigns } from "../../../components/web/campaigns";
 import { Community } from "../../../components/web/dashboard";
 import {
@@ -11,29 +11,6 @@ import {
 } from "../../../components/web/templates/settings";
 
 class RightSideBar extends Component {
-  userLanguage = () => {
-    // here we have to switch language
-    return (
-      <div>
-        <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
-        <RightAbout />
-      </div>
-    );
-  };
-
-  SettingCampaignRight = () => {
-    return (
-      <SettingCampaignRight handleModalShow={this.props.handleModalShow} />
-    );
-  };
-
-  SettingAdsRight = () => {
-    return <SettingAdsRight handleModalShow={this.props.handleModalShow} />;
-  };
-
-  handleCommunity = () => {
-    return <Community handleMessageBar={this.props.handleMessageBar} />;
-  };
 
   render() {
     return (
@@ -147,6 +124,31 @@ class RightSideBar extends Component {
       </div>
     );
   }
+
+  userLanguage = () => {
+    // here we have to switch language
+    return (
+      <div>
+        {/* <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} /> */}
+        <RightAbout />
+      </div>
+    );
+  };
+
+  SettingCampaignRight = () => {
+    return (
+      <SettingCampaignRight handleModalShow={this.props.handleModalShow} />
+    );
+  };
+
+  SettingAdsRight = () => {
+    return <SettingAdsRight handleModalShow={this.props.handleModalShow} />;
+  };
+
+  handleCommunity = () => {
+    return <Community handleMessageBar={this.props.handleMessageBar} />;
+  };
+
 }
 
 RightSideBar.propTypes = {

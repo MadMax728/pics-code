@@ -1,36 +1,37 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
-
 import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
+import { userInfo } from "os";
+import { ImageItem, VideoItem } from "../../../../ui-kit";
+import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class StepThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      start_date: moment(),
-      end_date: moment()
+      startDate: moment(),
+      endDate: moment()
     };
   }
 
   handleStartDateChange = date => {
-    this.setState({ start_date: date });
-    this.props.handleDate(date, "start_date");
+    this.setState({ startDate: date });
+    this.props.handleDate(date, "startDate");
   };
 
   handleEndDateChange = date => {
-    this.setState({ end_date: date });
-    this.props.handleDate(date, "end_date");
+    this.setState({ endDate: date });
+    this.props.handleDate(date, "endDate");
   };
 
   render() {
-    const { handleChangeField, form , handleSelect} = this.props;
-    // get 
-    let width;
-    // console.log(form.end_date.diff(form.start_date, 'days'));    
+    const { form, handleSelect, userInfo } = this.props;
+    const todayDate = new Date();
+    // console.log(form.endDate.diff(form.startDate, 'days'));
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -45,7 +46,7 @@ class StepThree extends Component {
                 </label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={form.start_date}
+                    selected={form.startDate}
                     onChange={this.handleStartDateChange}
                   />
                   <span className="input-group-addon">
@@ -57,7 +58,7 @@ class StepThree extends Component {
                 <label htmlFor="End">{Translations.create_campaigns.end}</label>
                 <div className="input-group date">
                   <DatePicker
-                    selected={form.end_date}
+                    selected={form.endDate}
                     onChange={this.handleEndDateChange}
                   />
                   <span className="input-group-addon">
@@ -66,16 +67,26 @@ class StepThree extends Component {
                 </div>
               </li>
             </ul>
+            {form.error && form.endDate.diff(form.startDate, "days") < 0 && (
+              <span className="error-msg highlight">
+                {Translations.error.create_modal.date}
+              </span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="Define">
               {Translations.create_campaigns.define_daily_budget}
             </label>
-              <SelectDailyBudget 
-                value={form.daily_budget}
-                className=""
-                handleSelect={handleSelect}
-              />
+            <SelectDailyBudget
+              value={form.budget}
+              className=""
+              handleSelect={handleSelect}
+            />
+            {form.budget.length === 0 && form.error && (
+              <span className="error-msg highlight">
+                {Translations.error.create_modal.budget}
+              </span>
+            )}
           </div>
           <div className="form-group">
             <label htmlFor="Maximum">
@@ -114,9 +125,11 @@ class StepThree extends Component {
                 />
               </div>
               <div className="no-padding titles_wrapper">
-                <div className="normal_title">Title of campaigns</div>
-                <div className="secondary_title">Santosh Shinde</div>
-                <div className="grey_title">01.01.2000 in Category</div>
+                <div className="normal_title">{form.title}</div>
+                <div className="secondary_title">{userInfo.username}</div>
+                <div className="grey_title">
+                  {moment(todayDate).format("DD.MM.YYYY")} in Category
+                </div>
               </div>
               <div className="like_wrapper">
                 <img
@@ -130,23 +143,32 @@ class StepThree extends Component {
               <div className="feed_image">
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
-                    <img src={images.image} alt="altmage1" />
+                    {/* <img src={images.image} alt="altmage1" /> */}
+                    {form.typeContent &&
+                      form.typeContent.toLowerCase() ===
+                        enumerations.mediaTypes.video && (
+                        <VideoItem item={form.video} />
+                      )}
+                    {(!form.typeContent ||
+                      (form.typeContent &&
+                        form.typeContent.toLowerCase() ===
+                          enumerations.mediaTypes.image)) && (
+                      <ImageItem item={form.image} />
+                    )}
                   </div>
                 </div>
               </div>
               <div className="feed_description padding-15">
-                <span className="secondary_title">
-                  {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...`}
-                </span>
+                <span className="secondary_title">{form.description}</span>
               </div>
             </div>
             <div className="feed_footer padding-15">
               <div className="messages">
-                <span className="count">12</span>
+                <span className="count">0</span>
                 <img src={images.feed_msg} alt="profile1" />
               </div>
               <div className="likes">
-                <span className="count">12</span>
+                <span className="count">0</span>
                 <img src={images.feed_like} alt="profile2" />
               </div>
               <div className="show_more_options">
@@ -161,10 +183,10 @@ class StepThree extends Component {
 }
 
 StepThree.propTypes = {
-  handleChangeField: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   handleDate: PropTypes.func.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired,
+  userInfo: PropTypes.any
 };
 
 export default StepThree;

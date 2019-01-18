@@ -1,36 +1,36 @@
 import React from "react";
-import PictureCard from "../../web/misc/PictureCard";
+import { PictureCard } from "../../misc";
 import PropTypes from "prop-types";
 import { UserPicLoading } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard } from "../../../actions";
-import * as images from "../../../lib/constants/images";
 
 class PicturesRoot extends React.Component {
   componentDidMount = () => {
-    this.props.getDashboard("getPic");
+    window.scrollTo(0, 0);
+    this.props.getDashboard("pics");
   };
 
   renderuserList = () => {
-    const { picsList } = this.props;
+    const { picsList, history } = this.props;
     return picsList.map((pic, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
       return (
-        <div key={index}>
+        <div key={pic.id}>
           {clearfixDiv}
-          <PictureCard item={pic} index={index} />
+          <PictureCard item={pic} index={index} history={history} />
         </div>
       );
     });
   };
 
   render() {
-    const { picsList, isLoading } = this.props;
+    const { picsList, isLoadingpics } = this.props;
 
     return (
       <div className="padding-rl-10 middle-section">
-        {picsList && !isLoading && this.renderuserList()}
-        {isLoading && <UserPicLoading />}
+        {picsList && !isLoadingpics && this.renderuserList()}
+        {isLoadingpics && <UserPicLoading />}
       </div>
     );
   }
@@ -38,15 +38,16 @@ class PicturesRoot extends React.Component {
 
 PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoadingpics: PropTypes.bool,
   picsList: PropTypes.any,
-  error: PropTypes.any
+  history: PropTypes.any
+  // errorpics: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  picsList: state.dashboardData.dashboard,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  picsList: state.dashboardData.pics,
+  isLoadingpics: state.dashboardData.isLoadingpics,
+  errorpics: state.dashboardData.errorpics
 });
 
 const mapDispatchToProps = {

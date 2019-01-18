@@ -5,6 +5,7 @@ export const EXPLORE_ROUTE = "/expore";
 export const PARTICIPANTS_ROUTE = "/participants";
 export const USERS_ROUTE = "/users";
 export const PICS_ROUTE = "/pics";
+export const MESSAGES_ROUTE = "/messages";
 export const NOTIFICATIONS_ROUTE = "/notifications";
 export const FORGOT_PASSWORD = "/check-email";
 export const CAMPAIGN_VIEW_ROUTE = "/campaign/:id";
@@ -81,7 +82,7 @@ export const SAVED_ROUTE = "/saved";
 export const OTHER_SAVED_ROUTE = "/saved/:id";
 export const NEWS_FEED_ROUTE = "/news-feed";
 export const OTHER_NEWS_FEED_ROUTE = "/news-feed/:username";
-export const OTHER_ABOUT_ROUTE = "/about/:id";
+export const OTHER_ABOUT_ROUTE = "/about/:username";
 export const ABOUT_ROUTE = "/about";
 
 // Information and service for web
@@ -124,6 +125,7 @@ export const BACK_OFFICE_PROFILE_ROUTE = "/back-office/profile";
 export const BACK_OFFICE_DASHBOARD_ROUTE = "/back-office/dashboard";
 export const BACK_OFFICE_CMS_MANAGMENT_ROUTE = "/back-office/cms-managment";
 export const BACK_OFFICE_CREATE_CMS_ROUTE = "/back-office/cms-managment/create";
+export const BACK_OFFICE_EDIT_CMS_ROUTE = "/back-office/cms-managment/:id";
 export const BACK_OFFICE_ADD_ADMIN_ROUTE = "/back-office/add-admin";
 export const BACK_OFFICE_ADD_VERIFICATION_ROUTE =
   "/back-office/add-verification";

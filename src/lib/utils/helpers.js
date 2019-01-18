@@ -49,3 +49,21 @@ export function b64toBlob (b64Data, contentType, sliceSize) {
 const blob = new Blob(byteArrays, {type: contentType});
 return blob;
 }
+
+export function search (dataList, key, word) {
+  const value = word;
+  const valueArr = value ? value.split(" ") : " ";
+  const lastText = valueArr[valueArr.length - 1].substring(1);
+  dataList =
+    dataList &&
+    dataList.filter(item => {
+      return !!(
+        lastText === "" ||
+        (item[key] &&
+          item[key].toLowerCase().indexOf(lastText.toLowerCase()) > -1) || 
+          (item[key] !== undefined &&
+            item[key].toLowerCase().indexOf(lastText.toLowerCase()) > -1)
+      );
+    });
+  return dataList;
+}

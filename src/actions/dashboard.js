@@ -2,36 +2,41 @@ import * as types from "../lib/constants/actionTypes";
 import * as dashboardService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
+import * as _ from "lodash";
+import moment from "moment";
 
-const getDashboardStarted = () => ({
-  type: types.GET_DASHBOARD_STARTED
+const getDashboardStarted = (isFor) => ({
+  type: types.GET_DASHBOARD_STARTED,
+  isFor
 });
 
-const getDashboardSucceeded = data => ({
+const getDashboardSucceeded = (data, isFor) => ({
   type: types.GET_DASHBOARD_SUCCEEDED,
-  payload: data
+  payload: data,
+  isFor
 });
 
-const getDashboardFailed = error => ({
+const getDashboardFailed = (error, isFor) => ({
   type: types.GET_DASHBOARD_FAILED,
   payload: error,
-  error: true
+  error: true,
+  isFor
 });
 
 export const getDashboard = (prop, provider) => {
   return dispatch => {
-    dispatch(getDashboardStarted());
+    dispatch(getDashboardStarted(prop));
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.accessToken
     };
-
     return dashboardService[prop](provider, header).then(
       res => {
-          dispatch(getDashboardSucceeded(res.data.data));
+        const campaigns = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        dispatch(getDashboardSucceeded(campaigns, prop));
       },
       error => {
-        dispatch(getDashboardFailed(error.response))
+        dispatch(getDashboardFailed(error.response, prop));
         logger.error({
           description: error.toString(),
           fatal: true

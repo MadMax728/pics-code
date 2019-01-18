@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import {
   LeftSideBarBackOffice,
   BackOfficeHomeRoute,
-  RightSideBarBackOffice,
   InfoModal
 } from "../components/common";
 
@@ -12,7 +11,9 @@ class BackOfficeHome extends Component {
     super(props, context);
     this.state = {
       modalInfoShow: false,
-      modalInfoType: ""
+      modalInfoType: "",
+      modalInfo: null,
+      statusCallback: () => { }
     };
   }
 
@@ -24,6 +25,14 @@ class BackOfficeHome extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
+  handleModalInfoDetailsShow = (e, info) => {   
+    this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info });
+  };
+
+  handleModalInfoDetailsCallbackShow = (e, info, callback) => {   
+    this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info, statusCallback: callback });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -32,14 +41,17 @@ class BackOfficeHome extends Component {
   handleModalHide = () => {};
 
   render() {
+    const { modalInfo, modalInfoShow, modalInfoType, statusCallback} = this.state;
     return (
       <div>
         <section>
           <InfoModal
-            modalInfoShow={this.state.modalInfoShow}
+            modalInfoShow={modalInfoShow}
             handleModalInfoHide={this.handleModalInfoHide}
-            modalInfoType={this.state.modalInfoType}
+            modalInfoType={modalInfoType}
             handleModalHide={this.handleModalHide}
+            modalInfo={modalInfo}
+            statusCallback={statusCallback}
           />
 
           <div className="container">
@@ -51,11 +63,9 @@ class BackOfficeHome extends Component {
               <div>
                 <BackOfficeHomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
+                  handleModalInfoDetailsShow={this.handleModalInfoDetailsShow}
+                  handleModalInfoDetailsCallbackShow={this.handleModalInfoDetailsCallbackShow}
                 />
-              </div>
-
-              <div className="right_bar no-padding">
-                <RightSideBarBackOffice />
               </div>
             </div>
           </div>

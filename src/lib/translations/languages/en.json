@@ -1,6 +1,11 @@
 {
   "app_name": "Picstagraph",
 
+  "date_format": {
+    "date": "MM/DD/YYYY",
+    "time": "LT"
+  },
+
   "offen": "In der Picstagraph-App offenen",
 
   "subscribe": "Subscribe",
@@ -16,6 +21,7 @@
   "upload_title_image": "Upload title image",
 
   "view_more_comments": "View more comments",
+  "view_less_comments": "View less comments",
 
   "apply_campaign": "Apply for this campaign",
 
@@ -44,7 +50,7 @@
     "add_category": "Add Category",
     "add_description": "Add Description",
     "advertisement": "Label as advertisement",
-    "upload_title_image": "Upload title image"
+    "upload_file": "Upload File"
   },
 
   "create_ads": {
@@ -111,7 +117,7 @@
     "male_female": "Female & Male",
     "company": "Company",
     "target_group": "Target group",
-    "image": "image",
+    "image": "Image",
     "video": "Video",
     "type": "Type",
     "anonymous": "Anonymous",
@@ -135,12 +141,35 @@
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
     "applications": "Applications",
     "status": "Status",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "serverError": "Something went wrong. Please Try Again",
+    "voucherCodeRequired": "If you have voucher code, then Please Enter Voucher Code (Otherwise, Ignore)",
+    "voucherCodeValid": "Please Enter Valid Voucher Code (Otherwise, Ignore)",
+    "CompletePaymentTransaction": "Complete payment transaction",
+    "BillingAddress": "Billing Address",
+    "PaymentMethod": "Payment method",
+    "NA": "N/A",
+    "Voucher": "Voucher",
+    "Redeem": "Redeem",
+    "OrderOverview": "Order overview",
+    "PreliminaryAmount": "Preliminary amount",
+    "Runtime": "Runtime",
+    "MaximumExpenses": "Maximum expenses",
+    "CommitToBuy": "Commit to buy",
+    "onClickRegister": "By clicking on register you agree to our",
+    "GenralTerms": "General Terms & Conditions",
+    "termsUse": "Terms of Use",
+    "dataProtection": "Data Protection",
+    "privacyPolicy": "Privacy Policy",
+    "FillProperData": "Please Fill proper Data",
+    "SelectProperMedia": "Please Select Proper Media",
+    "ImageAndVedio": "Please Select Image or Video"
   },
 
   "messages_modal": {
     "unknown": "Unknown",
     "messages": "Messages",
+    "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
   "modal_header": {
@@ -151,14 +180,16 @@
     "create_campaign": "Create Campaign",
     "upload_image": "Upload image",
     "create_ad": "Create Ad",
-    "edit_profile_image": "Edit Profile Image"
+    "edit_profile_image": "Edit Profile Image",
+    "cms_preview": "CMS Preview"
   },
 
   "notification": {
     "subscribed_to_your_profile": "Subscribed to your profile",
     "notification": "Notifications",
     "like_you": "Like You",
-    "request": "Requests"
+    "request": "Requests",
+    "no_request_avail": "No Request Available"
   },
 
   "navigation": {
@@ -186,8 +217,20 @@
 
   "tool_tips": {
     "report": "Report Post",
+    "unreport": "Unreport Post",
+    "report_comment": "Report Comment",
+    "unreport_comment": "Unreport Comment",
     "save": "Save Post",
-    "lock": "locks / unlocks content"
+    "unsave": "Unsave Post",
+    "lock": "Lock content",
+    "unlock": "Unlock content",
+    "do_not": "Do not lock content",
+    "edit": "Edit",
+    "delete": "Delete",
+    "block": "Block",
+    "unblock": "Unblock",
+    "report_user": "Report User",
+    "unreport_user": "Unreport User"
   },
 
   "back_office_menu": {
@@ -251,7 +294,7 @@
     "all": "All",
     "outstanding": "Outstanding",
     "processed": "Processed",
-    "not_processed": "Not processed"
+    "not_processed": "Not Processed"
   },
 
   "service_menu": {
@@ -264,6 +307,14 @@
   },
 
   "left_sidebar_filter": {
+    "language": {
+      "name": "Language",
+      "type": "radio"
+    },
+    "radio_change_language": {
+      "name": "Language",
+      "type": "radio_change_language"
+    },
     "relevance": {
       "name": "Relevance",
       "type": "radio"
@@ -274,11 +325,11 @@
     },
     "radius": {
       "name": "Radius",
-      "type": "select"
+      "type": "select-radius"
     },
     "category": {
       "name": "Category",
-      "type": "select"
+      "type": "select-category"
     },
     "procedure": {
       "name": "Procedure",
@@ -290,23 +341,23 @@
     },
     "target_group": {
       "name": "Target group",
-      "type": "select"
+      "type": "select-target-group"
     },
     "offer": {
       "name": "Offer",
-      "type": "select"
+      "type": "select-offer"
     },
     "offer_tag": {
       "name": "Offer tag",
-      "type": "text"
+      "type": "text-offer-tag"
     },
     "inquiry": {
       "name": "Inquiry",
-      "type": "select"
+      "type": "select-inquiry"
     },
     "inquiry_tag": {
       "name": "Inquiry tag",
-      "type": "text"
+      "type": "text-inquiry-tag"
     },
     "reset_filters": {
       "name": "Reset filters",
@@ -320,6 +371,13 @@
       "name": "Age",
       "type": "select"
     }
+  },
+
+  "target_group": {
+    "company": "Company",
+    "female_and_male": "Female and Male",
+    "female": "Female",
+    "male": "Male"
   },
 
   "message_module": {
@@ -366,10 +424,26 @@
     "create_ad": "Create Ad",
     "subscriber": "Subscribers",
     "subscribed": "Subscribed",
+    "request_pending": "Request Pending",
     "posts": "Posts",
     "subscribe": "Subscribe",
     "message": "Message",
     "like_you": "Like You"
+  },
+
+  "top_bar_info_modal": {
+    "modal_title": "Subscribers / Subscribed / Likes",
+    "follow_btn": "Follow",
+    "subscribe_btn": "Subscribed",
+    "request_sent_btn": "Request Sent",
+    "no_data": "No Data Available"
+  },
+
+  "profile_community_right_sidebar": {
+    "community": "Community",
+    "serverError": "Something went wrong. Please Try Again",
+    "Subscribe": "Subscribe",
+    "Subscribed": "Subscribed"
   },
 
   "left_sidebar": {
@@ -486,7 +560,8 @@
 
   "filter": {
     "reset_filter": "Reset filters",
-    "apply": "Apply"
+    "apply": "Apply",
+    "back": "Back"
   },
 
   "languages": {
@@ -590,10 +665,12 @@
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
+    "social_share_function": "Social share function",
     "Personalized_advertising": "Personalized advertising",
     "Change_email": "Change email",
     "Current_Email": "Current Email",
     "New_Email": "New Email",
+    "save": "Save",
     "Change_Password": "Change Password",
     "Current_Password": "Current Password",
     "New_Password": "New Password",
@@ -610,7 +687,16 @@
     "Delete": "Delete",
     "Deactivate_my_account": "Deactivate my account",
     "Deactivate": "Deactivate",
-    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account."
+    "Please_confirm_this_change_in_your_email_account": "Please confirm this change in your email account.",
+    "Current_Email_is_required": "Current Email is required",
+    "Email_should_be_valid": "Email should be valid",
+    "New_Email_is_required": "New Email is required",
+    "Current_Password_is_required": "Current Password is required",
+    "New_Password_is_required": "New Password is required",
+    "Repeat_Password_is_required": "Repeat Password is required",
+    "Password_is_not_matching": "Password is not matching",
+    "server_error": "Something went wrong. Please Try Again",
+    "Password_Length_error": "Password Length should be greater than 8 characters"
   },
   "Business_profile": {
     "Business_profile": "Business profile",
@@ -631,6 +717,15 @@
     "Expenses": "Expenses",
     "Status": "Status",
     "PDF": "PDF"
+  },
+  "data_download": {
+    "page_title": "Daten- Download",
+    "Email": "Email",
+    "Password": "Password",
+    "Download": "Download",
+    "Email_ID_should_be_valid": "Email ID should be valid",
+    "Email_is_required": "Email is required",
+    "Password_is_required": "Password is required"
   },
   "landing": {
     "Navigation": "Navigation",
@@ -667,13 +762,24 @@
     "Ads_Temp_Closed": "Ads Temp Closed"
   },
   "cms": {
-    "Title_of_page": "Title of page",
-    "Language": "Language",
-    "Most_recent_change": "Most recent change",
-    "Created_by": "Created by",
-    "Options": "Options",
-    "Status": "Status",
-    "cms": "CMS management"
+    "create": "Create new CMS page",
+    "edit": "Edit CMS page",
+    "title_of_page": "Title of page",
+    "language": "Language",
+    "most_recent_change": "Most recent change",
+    "created_by": "Created by",
+    "options": "Options",
+    "status": "Status",
+    "cms": "CMS management",
+    "public": "Public",
+    "draft": "Draft",
+    "url": "Url",
+    "display_page": "Display page",
+    "cancle": "Cancel",
+    "preview": "Preview",
+    "save": "Save",
+    "update": "Update",
+    "description": "Description"
   },
   "admin": {
     "Add_admin": "Add admin",
@@ -683,15 +789,63 @@
     "AdminStatus": "Admin Status",
     "Verification": "Add verification",
     "Remove_Verification": "Remove Verification",
-    "Period": "Period",
-    "amount": "amount",
-    "type": "type",
-    "Number": "Number",
-    "Code": "Code",
+    "period": "Period",
+    "amount": "Amount",
+    "type": "Type",
+    "number": "Number",
+    "code": "Code",
     "status": "status",
     "Add_voucher_code": "Add voucher code",
     "Data_download": "Data download",
     "Download": "Download",
     "Search_in_users": "Search in users"
+  },
+
+  "payment_modal": {
+    "billing_address": "Billing Address",
+    "invoice_recipient": "Invoice Recipient",
+    "street_number": "Street, number",
+    "postal_code": "Postal Code",
+    "city": "City",
+    "country": "Country",
+    "VATNO": "VAT Identification Number"
+  },
+
+  "adminRole": {
+    "rank1": "rank1",
+    "rank2": "rank2",
+    "rank3": "rank3"
+  },
+
+  "call_to_action": "Select Call to Action",
+  "select_category": "Select Category",
+  "select_daily_budget": "Select Daily Budget",
+  "select_inquiry": "Select Inquiry",
+  "select_offer": "Select Offer",
+  "select_radius": "Select Radius",
+  "select_target_group": "Select Target Group",
+
+  "error": {
+    "create_modal": {
+      "title": "Plaese Enter Title",
+      "location": "Plaese Enter Location",
+      "category": "Please Select Category",
+      "offers": "Please Select Offer",
+      "offerTag": "Please Enter Offer Tags",
+      "inquiry": "Please Select Inquiry",
+      "callToAction": "Please Select Call to Action",
+      "radius": "Please Select Radius",
+      "inquiryTag": "Please Enter Inquiry Tags",
+      "description": "Please Enter Description",
+      "date": "End Date must be greater than Start Date",
+      "budget": "Please Select Budget",
+      "invoiceRecipient": "Please Enter Invoice Recipient",
+      "postalCode": "Please Enter Postal code",
+      "city": "Please Enter City",
+      "VATNO": "Please Enter VAT Identification Number",
+      "country": "Please Enter Country",
+      "streetNumber": "Please Enter Street,Number",
+      "insertLink": "Please Enter Inset Link"
+    }
   }
 }

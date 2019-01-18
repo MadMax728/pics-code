@@ -17,6 +17,20 @@ import commentData from "./commentReducer";
 import tags from "./tagsReducer";
 import usersData from "./usersReducers";
 import selectData from "./selectReducer";
+import mediaData from "./mediaReducer";
+import backOfficeDashboardData from "./backOfficeDashboardReducer";
+import cmsManagementData from "./cmsManagementReducer";
+import adminData from "./adminReducer";
+import verificationData from "./verificationReducer";
+import voucherData from "./voucherReducer";
+import reviewData from "./reviewReducer";
+import reportedContentData from "./reportedContentReducer";
+import businessProfileData from "./profileSettingsReducer";
+import searchData from "./searchReducer";
+import hashUserData from "./hashUserReducer";
+import subscribeData from "./subscribeReducer";
+import hashTagData from "./hashTagReducer";
+import messagesData from "./messageReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -36,7 +50,21 @@ const rootReducer = combineReducers({
   commentData,
   tags,
   usersData,
-  selectData
+  selectData,
+  mediaData,
+  backOfficeDashboardData,
+  cmsManagementData,
+  adminData,
+  verificationData,
+  voucherData,
+  reviewData,
+  reportedContentData,
+  businessProfileData,
+  searchData,
+  hashUserData,
+  subscribeData,
+  hashTagData,
+  messagesData
 });
 
 export default rootReducer;

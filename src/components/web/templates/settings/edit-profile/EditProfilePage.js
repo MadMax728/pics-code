@@ -11,24 +11,18 @@ import {
 import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
-import { getUser, updateUserProfile } from "../../../../../actions/profile";
-import connect from "react-redux/es/connect/connect";
+import { getUser, updateUserProfile, getSearch } from "../../../../../actions";
+import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
-
-const storage = Auth.extractJwtFromStorage();
-let userInfo = null;
-if (storage) {
-  userInfo = JSON.parse(storage.userInfo);
-  //  userInfo = jwtDecode(storage.accessToken);
-}
-
+import * as routes from "../../../../../lib/constants/routes";
 class EditProfile extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       isLoading: false,
+      userInfo: null,
       categoryList: [],
       form: {
         image: this.props.image,
@@ -61,9 +55,14 @@ class EditProfile extends Component {
   }
 
   componentDidMount = () => {
-    const storage = Auth.extractJwtFromStorage();
     window.scrollTo(0, 0);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
     if (userInfo) {
+      this.setState({ userInfo });
       const data = {
         username: userInfo.username
       };
@@ -71,6 +70,18 @@ class EditProfile extends Component {
       this.props.getUser(data).then(() => {
         this.setDataOnLoad();
       });
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
     }
   };
 
@@ -104,9 +115,11 @@ class EditProfile extends Component {
   };
 
   handleLocation = (location, address) => {
-    this.setState({
-      form: { ...this.state.form, location, address }
-    });
+    const { form } = this.state;
+    form.location.lat = location.lat;
+    form.location.lng = location.lng;
+    form.location.address = address;
+    this.setState({ form });
   };
 
   handleChangeDOB = event => {
@@ -126,25 +139,39 @@ class EditProfile extends Component {
       const userData = this.props.userDataByUsername.user.data;
       this.setState({
         form: {
-          profileUrl: userData.profileUrl,
-          username: userData.username,
-          email: userData.email,
-          name_company: userData.name,
-          location: userData.location,
-          birthDate: {
-            day: moment.unix(userData.birthDate).format("DD"),
-            mon: moment.unix(userData.birthDate).format("MM"),
-            year: moment.unix(userData.birthDate).format("YYYY")
+          profileUrl: userData.profileUrl ? userData.profileUrl : "",
+          username: userData.username ? userData.username : "",
+          email: userData.email ? userData.email : "",
+          name_company: userData.name ? userData.name : "",
+          location: {
+            lat: userData.location ? userData.location.lat : "",
+            lng: userData.location ? userData.location.lng : "",
+            address: userData.location ? userData.location.address : ""
           },
-          gender: userData.gender,
-          category: userData.category,
-          phoneNumber: userData.phoneNumber,
-          website: userData.website,
-          profile_description: userData.profileDescription,
-          offer_tag: userData.offerTag,
-          inquiry_tag: userData.inquiryTag,
-          offerTagList: userData.offerTagList,
-          inquiryTagList: userData.inquiryTagList
+          birthDate: {
+            day: userData.birthDate
+              ? moment.unix(userData.birthDate).format("DD")
+              : "",
+            mon: userData.birthDate
+              ? moment.unix(userData.birthDate).format("MM")
+              : "",
+            year: userData.birthDate
+              ? moment.unix(userData.birthDate).format("YYYY")
+              : ""
+          },
+          gender: userData.gender ? userData.gender : gender.male,
+          category: userData.category ? userData.category : "",
+          phoneNumber: userData.phoneNumber ? userData.phoneNumber : "",
+          website: userData.website ? userData.website : "",
+          profile_description: userData.profileDescription
+            ? userData.profileDescription
+            : "",
+          offer_tag: userData.offerTag ? userData.offerTag : [],
+          inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
+          offerTagList:
+            userData.offerTagList.length === 0 ? userData.offerTagList : [],
+          inquiryTagList:
+            userData.inquiryTagList.length === 0 ? userData.inquiryTagList : []
         }
       });
     }
@@ -167,7 +194,6 @@ class EditProfile extends Component {
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    console.log(this.state.form);
     const data = {
       profileImage: this.props.profile ? this.props.profile : "",
       name: this.state.form.name_company,
@@ -180,12 +206,13 @@ class EditProfile extends Component {
       location: {
         latitude: this.state.form.location.lat,
         longitude: this.state.form.location.lng,
-        address: this.state.form.address
+        address: this.state.form.location.address
       },
       profileDescription: this.state.form.profile_description,
       website: this.state.form.website
     };
 
+    const { userInfo } = this.state;
     this.props.updateUserProfile(data).then(() => {
       this.setState({ isLoading: true });
       const errors = {};
@@ -521,22 +548,26 @@ class EditProfile extends Component {
 }
 
 const mapStateToProps = state => ({
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getUser,
-  updateUserProfile
+  updateUserProfile,
+  getSearch
 };
 
 EditProfile.propTypes = {
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.object,
-  history: PropTypes.any,
   handleModalInfoShow: PropTypes.func.isRequired,
   image: PropTypes.any,
   profile: PropTypes.any,
-  updateUserProfile: PropTypes.any
+  updateUserProfile: PropTypes.any,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
 export default connect(

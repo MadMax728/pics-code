@@ -10,7 +10,7 @@ class ProcessedModal extends Component {
   }
 
   render() {
-    const { handleModalInfoHide, modalInfoShow } = this.props;
+    const { handleModalInfoHide, modalInfoShow, modalInfo, statusCallback } = this.props;
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade processed-popup"}
@@ -20,7 +20,7 @@ class ProcessedModal extends Component {
         closeBtn={false}
         handleModalHide={handleModalInfoHide}
         modalBodyContent={
-          <Processed handleModalInfoHide={handleModalInfoHide} />
+          <Processed handleModalInfoHide={handleModalInfoHide} modalInfo={modalInfo} statusCallback={statusCallback}/>
         }
       />
     );
@@ -29,7 +29,9 @@ class ProcessedModal extends Component {
 
 ProcessedModal.propTypes = {
   handleModalInfoHide: PropTypes.func,
-  modalInfoShow: PropTypes.bool
+  modalInfoShow: PropTypes.bool,
+  modalInfo: PropTypes.any,
+  statusCallback: PropTypes.any
 };
 
 export default ProcessedModal;

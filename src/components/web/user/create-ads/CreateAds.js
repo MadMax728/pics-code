@@ -1,12 +1,7 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo } from "./steps";
 import PropTypes from "prop-types";
-import {
-  PaymentStepOne,
-  PaymentStepTwo,
-  PaymentStepThree
-} from "../../user/payment/steps";
-import { CreateCompanyCampaign } from "../../campaigns/create-campaign/create-company-campaign";
+import { PaymentStepOne, PaymentStepTwo } from "../../user/payment/steps";
 
 class CreateAds extends Component {
   constructor(props) {
@@ -23,11 +18,15 @@ class CreateAds extends Component {
       handleChangeField,
       handleSubmit,
       handleDate,
-      uploadFile,
       handleEditImage,
       handleLocation,
       handleActualImg,
-      handleScale
+      handleScale,
+      handleSelect,
+      handleSetState,
+      userInfo,
+      handleAddress,
+      setVoucherData
     } = this.props;
 
     return (
@@ -35,19 +34,22 @@ class CreateAds extends Component {
         {stepIndex === 0 && (
           <StepOne
             handleChangeField={handleChangeField}
-            uploadFile={uploadFile}
             form={form}
             handleEditImage={handleEditImage}
             handleLocation={handleLocation}
             handleActualImg={handleActualImg}
             handleScale={handleScale}
+            handleSelect={handleSelect}
+            handleSetState={handleSetState}
+            userInfo={userInfo}
           />
         )}
         {stepIndex === 1 && (
           <StepTwo
-            handleChangeField={handleChangeField}
             handleDate={handleDate}
             form={form}
+            handleSelect={handleSelect}
+            userInfo={userInfo}
           />
         )}
         {stepIndex === 2 && (
@@ -55,22 +57,19 @@ class CreateAds extends Component {
             forThat={forThat}
             handleChangeField={handleChangeField}
             form={form}
+            handleAddress={handleAddress}
+            userInfo={userInfo}
           />
         )}
         {stepIndex === 3 && (
           <PaymentStepTwo
             forThat={forThat}
-            handleChangeField={handleChangeField}
-            form={form}
-          />
-        )}
-        {stepIndex === 4 && (
-          <PaymentStepThree
-            forThat={forThat}
             handleModalInfoShow={handleModalInfoShow}
             form={form}
             handleChangeField={handleChangeField}
             handleSubmit={handleSubmit}
+            setVoucherData={setVoucherData}
+            userInfo={userInfo}
           />
         )}
       </div>
@@ -86,11 +85,15 @@ CreateAds.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   handleDate: PropTypes.func.isRequired,
-  uploadFile: PropTypes.func.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
-  handleActualImg: PropTypes.func,
-  handleScale: PropTypes.func
+  handleActualImg: PropTypes.func.isRequired,
+  handleScale: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
+  handleSetState: PropTypes.func.isRequired,
+  userInfo: PropTypes.any,
+  handleAddress: PropTypes.func.isRequired,
+  setVoucherData: PropTypes.func
 };
 
 export default CreateAds;

@@ -2,56 +2,125 @@ import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { CreateAds, CreateAdsHeader } from "../../user";
-import { modalType } from "../../../../lib/constants/enumerations";
+import {
+  modalType,
+  target_group,
+  typeContent
+} from "../../../../lib/constants/enumerations";
 import moment from "moment";
-import { CreateCompanyCampaign } from "../../campaigns/create-campaign/create-company-campaign";
+import { Auth } from "../../../../auth";
+
+import { connect } from "react-redux";
+import { createAd, uploadMedia } from "../../../../actions";
+import { Translations } from "../../../../lib/translations";
+
+const storage = Auth.extractJwtFromStorage();
+let userInfo = null;
+if (storage) {
+  userInfo = JSON.parse(storage.userInfo);
+}
+
+const initialState = {
+  stepIndex: 0,
+  userInfo: null,
+  form: {
+    title: "",
+    location: {
+      latitude: "",
+      longitude: "",
+      address: ""
+    },
+    radius: "",
+    category: "",
+    description: "",
+    targetGroup: target_group.female_and_male,
+    callToAction: "",
+    insertLink: "",
+    startDate: moment(),
+    endDate: moment(),
+    budget: "",
+    address: {
+      invoiceRecipient: "",
+      street: "",
+      postalCode: "",
+      city: "",
+      VATNO: "",
+      country: "",
+      streetNumber: ""
+    },
+    voucher: "",
+    voucherAmount: "",
+    voucherCode: "",
+    image: null,
+    fileType: true,
+    file: null,
+    video: null,
+    typeContent: typeContent.image,
+    typeId: "",
+    maximumExpenses: "",
+    error: false
+  },
+  scale: ""
+};
 
 class AdsModal extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      stepIndex: 0,
-      form: {
-        title: "",
-        location: "",
-        address: "",
-        radius: "",
-        category: "",
-        description: "",
-        target_group: "male-female",
-        call_to_action_button: "",
-        insert_link: "",
-        start_date: moment(),
-        end_date: moment(),
-        daily_budget: "",
-        invoice_recipient: "",
-        street: "",
-        number: "",
-        postal_code: "",
-        city: "",
-        country: "",
-        vat_identification_number: "",
-        payment_option: "card",
-        card_holder: "",
-        expire_date: "",
-        card_no: "",
-        cvc: "",
-        billing_address: "",
-        payment_method: "",
-        voucher: "",
-        image: null,
-        photo: "",
-        photoFile: null
-      }
-    };
+    this.state = initialState;
   }
+
+  componentWillUnmount = () => {
+    this.setState(initialState);
+  };
+
+  handleSetState = (value, cd) => {
+    this.setState({ form: { ...this.state.form, description: value } }, () =>
+      cd()
+    );
+  };
 
   handleEditImage = image => {
     this.setState({ form: { ...this.state.form, image } });
   };
 
   handleSubmit = () => {
-    console.log(this.state.form);
+    const { form } = this.state;
+    if (form.file) {
+      const Data = new FormData();
+      if (form.fileType) {
+        Data.append("image", form.file);
+      } else {
+        Data.append("video", form.file);
+      }
+      Data.append("postType", "ad");
+
+      this.props.uploadMedia(Data, form.fileType).then(() => {
+        if (this.props.mediaData && this.props.mediaData.media) {
+          form.typeId = this.props.mediaData.media.id;
+          form.file = null;
+          form.image = null;
+          form.video = null;
+          if (!form.maximumExpenses) {
+            form.maximumExpenses = form.budget;
+          }
+          this.setState({ form });
+          this.props.createAd(form).then(() => {
+            if (
+              this.props.adData &&
+              this.props.adData.ad &&
+              this.props.adData.ad.id
+            ) {
+              this.handleModalInfoShow();
+            }
+          });
+        }
+      });
+    } else {
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        Translations.create_campaigns.ImageAndVedio
+      );
+    }
   };
 
   handleDate = (date, forThat) => {
@@ -59,8 +128,39 @@ class AdsModal extends Component {
     form[forThat] = date;
     this.setState({ form });
   };
-  handleActualImg = actual_img => {
-    this.setState({ actual_img });
+
+  handleActualImg = e => {
+    const reader = new FileReader();
+    const file = e;
+
+    if (file.type.includes("image")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { form } = currentThis.state;
+        form.image = reader.result;
+        form.file = file;
+        form.fileType = true;
+        form.typeContent = typeContent.image;
+        currentThis.setState({ form });
+      };
+    } else if (file.type.includes("video")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { form } = currentThis.state;
+        form.video = reader.result;
+        form.file = file;
+        form.fileType = false;
+        form.typeContent = typeContent.video;
+        currentThis.setState({ form });
+      };
+    } else {
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        Translations.create_campaigns.SelectProperMedia
+      );
+    }
   };
 
   handleScale = scale => {
@@ -75,6 +175,9 @@ class AdsModal extends Component {
 
   componentDidMount = () => {
     this.setState({ stepIndex: 0 });
+    if (userInfo) {
+      this.setState({ userInfo });
+    }
   };
 
   componentWillReceiveProps(nextProps) {
@@ -82,29 +185,72 @@ class AdsModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
-  handleResoreState = () => {
-    this.setState({
-      form: {}
-    });
+
+  setVoucherData = (code, voucher, maximumExpenses) => {
+    const { form } = this.state;
+    if (voucher && maximumExpenses) {
+      form.voucherCode = code;
+      form.voucherAmount = voucher;
+      form.maximumExpenses = maximumExpenses;
+      this.setState({ form });
+    }
+  };
+
+  validateForm = index => {
+    const { form } = this.state;
+    // console.log("form", form);
+    if (index === 0) {
+      return (
+        form.title &&
+        form.location.latitude &&
+        form.location.longitude &&
+        form.location.address &&
+        form.category &&
+        form.radius &&
+        form.description &&
+        form.callToAction &&
+        form.insertLink &&
+        form.file
+      );
+    } else if (index === 1) {
+      return (
+        form.startDate &&
+        form.endDate &&
+        form.endDate.diff(form.startDate, "days") >= 0 &&
+        form.budget
+      );
+    } else if (index === 2) {
+      return (
+        form.address.invoiceRecipient &&
+        form.address.street &&
+        form.address.streetNumber &&
+        form.address.postalCode &&
+        form.address.city &&
+        form.address.country &&
+        form.address.VATNO
+      );
+    }
   };
 
   handleNext = () => {
     const { stepIndex } = this.state;
     if (stepIndex < 4) {
-      this.setState({ stepIndex: stepIndex + 1 });
+      if (this.validateForm(stepIndex)) {
+        this.setState({
+          stepIndex: stepIndex + 1,
+          form: { ...this.state.form, error: false }
+        });
+      } else {
+        this.setState({
+          form: { ...this.state.form, error: true }
+        });
+
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          Translations.create_campaigns.FillProperData
+        );
+      }
     }
-  };
-  uploadFile = (e, forThat) => {
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    let base64Data;
-    const currentThis = this;
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      const { form } = currentThis.state;
-      form[forThat] = reader.result;
-      currentThis.setState({ form });
-    };
   };
 
   handlePrev = () => {
@@ -119,13 +265,27 @@ class AdsModal extends Component {
   };
 
   handleLocation = (location, address) => {
-    this.setState({
-      form: { ...this.state.form, location, address }
-    });
+    const { form } = this.state;
+    form.location.latitude = location.lat;
+    form.location.longitude = location.lng;
+    form.location.address = address;
+    this.setState({ form });
+  };
+
+  handleSelect = (isFor, selected) => {
+    const { form } = this.state;
+    form[isFor] = selected;
+    this.setState({ form });
+  };
+
+  handleAddress = event => {
+    const { form } = this.state;
+    form.address[event.target.name] = event.target.value;
+    this.setState({ form });
   };
 
   render() {
-    const { stepIndex, form } = this.state;
+    const { stepIndex, form, userInfo } = this.state;
     const { handleModalHide, modalShow } = this.props;
 
     let modalClassName = "";
@@ -144,7 +304,6 @@ class AdsModal extends Component {
         header
         modalHeaderContent={
           <CreateAdsHeader
-            handleResoreState={this.handleResoreState}
             handleModalHide={handleModalHide}
             handleNext={this.handleNext}
             handlePrev={this.handlePrev}
@@ -158,17 +317,21 @@ class AdsModal extends Component {
         modalBodyContent={
           <CreateAds
             stepIndex={stepIndex}
-            uploadFile={this.uploadFile}
             forThat={"Ads"}
             handleModalInfoShow={this.handleModalInfoShow}
             handleChangeField={this.handleChangeField}
             form={form}
+            userInfo={userInfo}
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}
             handleEditImage={this.handleEditImage}
             handleLocation={this.handleLocation}
             handleActualImg={this.handleActualImg}
             handleScale={this.handleScale}
+            handleSelect={this.handleSelect}
+            handleSetState={this.handleSetState}
+            handleAddress={this.handleAddress}
+            setVoucherData={this.setVoucherData}
           />
         }
       />
@@ -180,8 +343,23 @@ AdsModal.propTypes = {
   modalShow: PropTypes.bool,
   handleModalHide: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.func,
-  uploadFile: PropTypes.func,
-  handleResoreState: PropTypes.func
+  createAd: PropTypes.func.isRequired,
+  uploadMedia: PropTypes.func.isRequired,
+  mediaData: PropTypes.any,
+  adData: PropTypes.any
 };
 
-export default AdsModal;
+const mapStateToProps = state => ({
+  mediaData: state.mediaData,
+  adData: state.adData
+});
+
+const mapDispatchToProps = {
+  createAd,
+  uploadMedia
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AdsModal);

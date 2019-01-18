@@ -1,11 +1,53 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../lib/translations";
-
+import { Auth } from "../../../../auth";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { activateBusinessProfile, getSearch } from "../../../../actions";
+import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 
 class BusinessProfilePage extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isActivateBusinessAccount: false,
+      userId: ""
+    };
+  }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    window.scrollTo(0, 0);
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.setState({ userId: userInfo.id });
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
+  handleActivationBusinessProfile = e => {
+    const paramData = { profileId: e.target.id };
+    this.props.activateBusinessProfile(paramData); // API Call
+  };
+
   render() {
+    const { userId } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="bussiness-profile-form">
@@ -51,8 +93,12 @@ class BusinessProfilePage extends Component {
             </div>
           </div>
           <div className="col-sm-12">
-            <button className="gradient-button">
-              <span>{Translations.Business_profile.Activate}</span>
+            <button
+              type="button"
+              onClick={this.handleActivationBusinessProfile}
+              className="gradient-button"
+            >
+              <span id={userId}>{Translations.Business_profile.Activate} </span>
             </button>
           </div>
           <div className="clearfix" />
@@ -77,4 +123,24 @@ class BusinessProfilePage extends Component {
   }
 }
 
-export default BusinessProfilePage;
+const mapStateToProps = state => ({
+  businessProfileData: state.businessProfileActivationData,
+  searchData: state.searchData
+});
+
+const mapDispatchToProps = {
+  activateBusinessProfile,
+  getSearch
+};
+
+BusinessProfilePage.propTypes = {
+  activateBusinessProfile: PropTypes.func,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
+  getSearch: PropTypes.func
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(BusinessProfilePage);

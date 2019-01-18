@@ -293,8 +293,13 @@
     font-size: 12px;
     color: $charcoal_color;
     tr {
+      th{
+        border-top: 1px solid $charcoal_color !important;
+        padding: 10px 10px 15px !important;
+      }
       td {
         border: 1px solid $charcoal_color;
+        
         padding: 10px;
         font-size: 12px;
         @media (max-width: 767px) {
@@ -339,6 +344,15 @@
           top: 11px;
         }
         .green-circle {
+          display: inline-block;
+          float: left;
+          margin-top: 3px;
+          margin-right: 5px;
+          @media (max-width: 440px) {
+            float: none;
+          }
+        }
+        .red-circle {
           display: inline-block;
           float: left;
           margin-top: 3px;
@@ -476,6 +490,19 @@
     }
     @media (max-width: 400px) {
       padding-right: 25px;
+    }
+  }
+}
+.voucher-table{
+  .table {
+    thead{
+      th{
+        padding: 0 10px !important;
+        vertical-align: middle;
+        &:last-of-type{
+          padding: 0 !important;
+        }
+      }
     }
   }
 }

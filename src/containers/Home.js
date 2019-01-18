@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import Header from "../components/web/Header";
+import React, { Component } from "react";
 import Footer from "../components/web/Footer";
 import { setCookie, getCookie } from "../lib/utils/helpers";
 import { Translations } from "../lib/translations";
@@ -13,6 +13,7 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
+import { Loader, RightSidebarLoading } from "../components/ui-kit";
 
 class Home extends Component {
   constructor(props, context) {
@@ -26,7 +27,7 @@ class Home extends Component {
       message: "",
       image: null,
       profile: null,
-      data: null,
+      data: null
     };
   }
 
@@ -55,6 +56,8 @@ class Home extends Component {
   };
 
   handleModalShow = (e, data) => {
+    console.log("call");
+
     this.setState({ modalShow: true, modalType: e, data });
   };
 
@@ -65,6 +68,7 @@ class Home extends Component {
    * Todo - We can modify cookie logic in production mode
    */
   handleLanguageSwitch = languageCode => {
+    // console.log(languageCode);
     // set cookie for default language
     setCookie("interfaceLanguage", languageCode, 90);
     // set language using language code
@@ -90,7 +94,7 @@ class Home extends Component {
   };
 
   render() {
-    const { message, image, profile } = this.state;
+    const { message, image, profile, data } = this.state;
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
@@ -109,6 +113,7 @@ class Home extends Component {
             handleModalInfoShow={this.handleModalInfoShow}
             modalInfoType={this.state.modalInfoType}
             handleModalInfoMsgShow={this.handleModalInfoMsgShow}
+            data={data}
           />
 
           <InfoModal
@@ -134,6 +139,7 @@ class Home extends Component {
               </div>
 
               <div>
+                {/* {isLoading || && <Loader />} */}
                 <HomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalShow={this.handleModalShow}
@@ -141,7 +147,6 @@ class Home extends Component {
                   profile={profile}
                 />
               </div>
-
               <div className="right_bar no-padding">
                 <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
@@ -158,9 +163,7 @@ class Home extends Component {
   }
 }
 Home.propTypes = {
-  history: PropTypes.any,
+  history: PropTypes.any
 };
-
-
 
 export default Home;

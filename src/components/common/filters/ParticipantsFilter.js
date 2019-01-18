@@ -98,29 +98,6 @@ class ParticipantsFilter extends Component {
     };
   }
 
-  handleResetFilterClick = () => {
-    this.setState({ filterApply: false });
-  };
-
-  handleApplyClick = () => {
-    this.setState({ filterApply: true });
-    this.props.handleApplyClick(this.state.filData);
-  };
-
-  handleOnChange = filterData => {
-    this.setState({ filData: filterData });
-  };
-
-  handleFilter = () => {
-    return (
-      <LeftSidebarFilter
-        filters={Filters}
-        onChange={this.handleOnChange}
-        filterApply={this.state.filterApply}
-      />
-    );
-  };
-
   render() {
     return (
       <div className="left-filters">
@@ -128,6 +105,7 @@ class ParticipantsFilter extends Component {
           filters={Filters}
           onChange={this.handleOnChange}
           filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
           {this.state.filterApply ? (
@@ -146,10 +124,39 @@ class ParticipantsFilter extends Component {
       </div>
     );
   }
+
+  handleResetFilterClick = () => {
+    this.setState({ filterApply: false });
+  };
+
+  handleApplyClick = () => {
+    this.setState({ filterApply: true });
+    this.props.handleApplyClick(this.state.filData);
+  };
+
+  handleOnChange = filterData => {
+    this.setState({ filData: filterData });
+  };
+
+  handleSelect = filterData => {
+    this.setState({ filData: filterData });
+  };
+
+  handleFilter = () => {
+    return (
+      <LeftSidebarFilter
+        filters={Filters}
+        onChange={this.handleOnChange}
+        filterApply={this.state.filterApply}
+        handleSelect={this.handleSelect}
+      />
+    );
+  };
 }
 
 ParticipantsFilter.propTypes = {
-  handleApplyClick: PropTypes.func
+  handleApplyClick: PropTypes.func,
+  handleSelect: PropTypes.func
 };
 
 export default ParticipantsFilter;

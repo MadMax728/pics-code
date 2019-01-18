@@ -7,17 +7,11 @@ import {
   SideBarSettingBackOffice,
   SideBarBackOffice,
   SideBarReviewMenu,
-  SideBarReviewContentMenu
+  SideBarReportedContentMenu
 } from "../menu";
 import { ReviewFilter, ReportedContentFilter } from "../filters";
-class LeftSideBarBackOffice extends Component {
-  handleReportedContentFilter = () => {
-    return <ReportedContentFilter handleApplyClick={this.props.getFilter} />;
-  };
 
-  handleReviewFilter = () => {
-    return <ReviewFilter handleApplyClick={this.props.getFilter} />;
-  };
+class LeftSideBarBackOffice extends Component {
 
   render() {
     return (
@@ -36,6 +30,12 @@ class LeftSideBarBackOffice extends Component {
 
         <Route
           path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
+          exact
+          component={SideBarBackOffice}
+        />
+
+        <Route
+          path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
           exact
           component={SideBarBackOffice}
         />
@@ -69,43 +69,43 @@ class LeftSideBarBackOffice extends Component {
         <Route
           path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
           exact
-          component={SideBarReviewContentMenu}
+          component={SideBarReportedContentMenu}
         />
 
         {/* review menu */}
@@ -195,6 +195,12 @@ class LeftSideBarBackOffice extends Component {
         />
 
         <Route
+          path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
+          exact
+          component={SideBarSettingBackOffice}
+        />
+
+        <Route
           path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
           exact
           component={SideBarSettingBackOffice}
@@ -220,6 +226,15 @@ class LeftSideBarBackOffice extends Component {
       </div>
     );
   }
+
+  handleReportedContentFilter = () => {
+    return <ReportedContentFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleReviewFilter = () => {
+    return <ReviewFilter handleApplyClick={this.props.getFilter} />;
+  };
+
 }
 
 LeftSideBarBackOffice.propTypes = {

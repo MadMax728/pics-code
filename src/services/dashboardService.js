@@ -1,9 +1,8 @@
 import { api } from "../api";
+import { picsEndPoint, usersEndPoint, participantsEndPoint, exploresEndPoint, newsEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
-
-// const api = apiFactory(baseUrl);
 
 /**
  *
@@ -11,18 +10,17 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
  */
 
 // Explore API
-export const getNews = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+export const news = (payload, header = {}) =>
+  api(baseUrl, header).get(`${newsEndPoint}${payload}`);
 
-export const getExplore = (payload, header = {}) =>
-  api(baseUrl, header).post("/newsfeeds/explore");
+export const explores = (payload, header = {}) =>
+  api(baseUrl, header).get(`${exploresEndPoint}${payload}`);
 
-export const getParticipant = (payload, header = {}) =>
-  api(baseUrl, header).post("/participants/get-all-participant");
+export const participants = (payload, header = {}) =>
+  api(baseUrl, header).post(`${participantsEndPoint}${payload}`);
 
-export const getDashboardUser  = (payload, header = {}) =>
-  api(baseUrl, header).post("/users/get-all-users ");
+export const users = (payload, header = {}) =>
+  api(baseUrl, header).post(`${usersEndPoint}${payload}`);
 
-export const getPic = (payload, header = {}) =>
-  api(baseUrl, header).post("/pics");
-
+export const pics = (payload, header = {}) =>
+  api(baseUrl, header).get(picsEndPoint);

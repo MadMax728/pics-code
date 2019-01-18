@@ -1,5 +1,5 @@
 //https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
-const ErrorCodes = {
+export const ErrorCodes = {
   NotFound: 404,
   ServerError: 500,
   NotImplemented: 501,
@@ -17,4 +17,3 @@ const ErrorCodes = {
     NoRegisteredAccounts: 900
   }
 };
-export default ErrorCodes;

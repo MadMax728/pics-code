@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getDailyBudget } from "../../../actions";
+import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectDailyBudget extends Component {
   constructor(props) {
@@ -11,28 +12,10 @@ class SelectDailyBudget extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({dailyBudgetList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getDailyBudget().then(() => {
-      if(this.props.dailyBudgetList && this.props.dailyBudgetList.dailyBudgets){
-        this.setState({
-          dailyBudgetList: this.props.dailyBudgetList.dailyBudgets
-        });
-      }
-    });
-  }
-  
-  handleOffer = (event) => {
-    this.props.handleSelect("daily_budget", event.target.value);
-  }
-  
   render() {
     const { dailyBudgetList } = this.state;
     const { value, className } = this.props;
-    
+
     return (
       <select
         value={value}
@@ -41,7 +24,7 @@ class SelectDailyBudget extends Component {
         onBlur={this.handleOffer}
         options={dailyBudgetList}
       >
-        <option value="">{"select"}</option>
+        <option value="">{Translations.select_daily_budget}</option>
         {dailyBudgetList.map(option => (
           <option value={option.amount} key={option.id}>
             {option.dailyBudget}
@@ -50,14 +33,33 @@ class SelectDailyBudget extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("dailyBudgets").then(() => {
+      if (this.props.dailyBudgetList) {
+        this.setState({
+          dailyBudgetList: this.props.dailyBudgetList
+        });
+      }
+    });
+  }
+
+  componentWillUnmount = () => {
+    this.setState({ dailyBudgetList: [] });
+  }
+
+  handleOffer = (event) => {
+    this.props.handleSelect("budget", event.target.value);
+  }
+
 }
 
 const mapStateToProps = state => ({
-  dailyBudgetList: state.selectData
+  dailyBudgetList: state.selectData.dailyBudgets
 });
 
 const mapDispatchToProps = {
-  getDailyBudget
+  getSelect
 };
 
 
@@ -65,7 +67,7 @@ const propTypes = {
   value: PropTypes.any,
   dailyBudgetList: PropTypes.any,
   className: PropTypes.string,
-  getDailyBudget: PropTypes.func.isRequired,
+  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

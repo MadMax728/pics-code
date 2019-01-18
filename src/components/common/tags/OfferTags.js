@@ -44,7 +44,9 @@ class OfferTags extends Component {
         offerTagName: tag.text
       }
       this.props.addOfferTag(tagName).then(()=> {
-        this.props.handleOfferTagChange(this.props.tags.addedOfferTags.id, this.props.tags.addedOfferTags)
+        if(this.props.tags && this.props.tags.addedOfferTags) {
+          this.props.handleOfferTagChange(this.props.tags.addedOfferTags.id, this.props.tags.addedOfferTags)
+        }
       })
     } else {
       this.props.handleOfferTagChange(tag.id, tag);
@@ -54,7 +56,6 @@ class OfferTags extends Component {
   render() {
     const { suggestionsOfferTagList } = this.state;
     const { value } = this.props;
-
     return (
         <Tags
           value={value}

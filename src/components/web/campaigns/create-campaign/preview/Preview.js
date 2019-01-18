@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import moment from "moment";
 import { Auth } from "../../../../../auth";
+import { DateFormat } from "../../../../Factory";
+import { Translations } from "../../../../../lib/translations";
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -20,23 +21,30 @@ class Preview extends Component {
 
   componentDidMount = () => {
     if (userInfo) {
-     this.setState({userInfo})
+      this.setState({ userInfo });
     }
-  }
+  };
 
   render() {
     const { form } = this.props;
     console.log(form.actual_img);
-    
+    const todayDate = new Date();
+
     return (
       <div className="col-xs-12 no-padding">
         <div className="padding-l-10 middle-section width-100">
           <div className="info-main-title">{form.title && form.title}</div>
           <div className="information-wrapper overflow-y">
             <div className="info-inner-wrapper">
-              {
-                form.image && <img src={form.image} alt={"information"} />
-              }
+              {form.fileType && form.image && (
+                <img src={form.image} alt={"information"} />
+              )}
+              {!form.fileType && form.video && (
+                <video controls>
+                  <track kind="captions" />
+                  <source src={form.video} type={form.file.type} />
+                </video>
+              )}
               <div className="text paddTop20">
                 {form.description && form.description}
               </div>
@@ -44,7 +52,11 @@ class Preview extends Component {
                 <div className="feed_header">
                   <div className="col-sm-1 col-xs-1 no-padding profile_image">
                     <img
-                      src={(userInfo && userInfo.profileUrl)? userInfo.profileUrl : images.image}
+                      src={
+                        userInfo && userInfo.profileUrl
+                          ? userInfo.profileUrl
+                          : images.image
+                      }
                       alt="circle-img-1"
                       className="img-circle img-responsive"
                     />
@@ -57,7 +69,8 @@ class Preview extends Component {
                       {userInfo && userInfo.username && userInfo.username}
                     </div>
                     <div className="grey_title">
-                      {moment().format("MM.DD.YYYY")} 
+                      {moment(todayDate).format("DD.MM.YYYY")}
+                      in Category
                     </div>
                   </div>
                   <div className="col-sm-2 col-xs-2 like_wrapper">
@@ -74,7 +87,8 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Start: </span>
                         <span className="secondary_title">
-                          {form.start_date && form.start_date.format("MM.DD.YYYY")}
+                          {form.startDate &&
+                            form.startDate.format("DD.MM.YYYY")}
                         </span>
                       </div>
                       <div className="info_wrapper">
@@ -86,7 +100,7 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Target group: </span>
                         <span className="secondary_title">
-                          {form.target_group}
+                          {form.targetGroup}
                         </span>
                       </div>
                     </div>
@@ -94,14 +108,16 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">End: </span>
                         <span className="secondary_title">
-                          {form.end_date.format("MM.DD.YYYY")}
+                          {form.endDate.format("DD.MM.YYYY")}
                         </span>
                       </div>
                       <div className="info_wrapper">
                         <span className="normal_title">Type: </span>
-                        <span className="secondary_title">{form.type}</span>
+                        <span className="secondary_title">
+                          {form.typeContent}
+                        </span>
                       </div>
-                    </div>                    
+                    </div>
                   </div>
                 </div>
               </div>

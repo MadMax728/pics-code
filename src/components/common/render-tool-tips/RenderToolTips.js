@@ -1,17 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ToolTip } from "../../ui-kit";
 
-const propTypes = {
-  id: PropTypes.any.isRequired,
-  isLoading: PropTypes.bool,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      handleEvent: PropTypes.func.isRequired
-    }).isRequired
-  ).isRequired
-};
 
 class RenderToolTips extends Component {
   constructor(props) {
@@ -19,19 +8,17 @@ class RenderToolTips extends Component {
     this.state = {};
   }
 
-  handleKeyPress = () => {};
-
   render() {
     const { items, id, isLoading } = this.props;
     return (
       <div className="post-action-links">
-        {items.map((item, index) => {
+        {items.map(item => {
           return (
             <button
               className="btn-comment-tooltip"
               type="button"
               disabled={isLoading}
-              key={index}
+              key={`${item.name}-${id}`}
               onClick={item.handleEvent}
               id={id}
               onKeyDown={item.handleEvent}
@@ -43,7 +30,20 @@ class RenderToolTips extends Component {
       </div>
     );
   }
+
+  handleKeyPress = () => {};
 }
+
+const propTypes = {
+  id: PropTypes.any.isRequired,
+  isLoading: PropTypes.bool,
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      handleEvent: PropTypes.func.isRequired
+    }).isRequired
+  ).isRequired
+};
 
 RenderToolTips.propTypes = propTypes;
 

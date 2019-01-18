@@ -19,6 +19,22 @@ const setProfilePrivacyFailed = error => ({
   error: true
 });
 
+// Set Social Share
+const setSocialShareStarted = () => ({
+  type: types.SET_SOCIAL_SHARE_STARTED
+});
+
+const setSocialShareSucceeded = data => ({
+  type: types.SET_SOCIAL_SHARE_SUCCEEDED,
+  payload: data
+});
+
+const setSocialShareFailed = error => ({
+  type: types.SET_SOCIAL_SHARE_FAILED,
+  payload: error,
+  error: true
+});
+
 // Set Profile - Personalized Advertise
 const setProfilePersonalizedAdvertiseStarted = () => ({
   type: types.SET_PROFILE_PERSONALIZED_ADVERTISE_STARTED
@@ -115,48 +131,60 @@ const deactivateAccountFailed = error => ({
   error: true
 });
 
-export const setProfilePrivacy = isPrivacy => {
+export const setProfilePrivacy = data => {
   return dispatch => {
     dispatch(setProfilePrivacyStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
-      Authorization: storage.accessToken
-    };
-    const params = { headers };
-
-    return privacyService.setProfilePrivacy(params, isPrivacy).then(
+    const header = { Authorization: storage.accessToken };
+    return privacyService.setProfilePrivacy(data, header).then(
       res => {
-        dispatch(setProfilePrivacySucceeded(res));
+        dispatch(setProfilePrivacySucceeded(res.data.data));
       },
       error => {
         dispatch(setProfilePrivacyFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+export const setSocialShare = data => {
+  return dispatch => {
+    dispatch(setSocialShareStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+    return privacyService.setSocialShare(data, header).then(
+      res => {
+        dispatch(setSocialShareSucceeded(res));
+      },
+      error => {
+        dispatch(setSocialShareFailed(error.response));
         logger.error({ description: error.toString(), fatal: true });
       }
     );
   };
 };
 
-export const setProfilePersonalizedAdvertise = isPersonalizedAdvertise => {
+export const setProfilePersonalizedAdvertise = data => {
   return dispatch => {
     dispatch(setProfilePersonalizedAdvertiseStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
-
-    return privacyService
-      .setProfilePersonalizedAdvertise(params, isPersonalizedAdvertise)
-      .then(
-        res => {
-          dispatch(setProfilePersonalizedAdvertiseSucceeded(res));
-        },
-        error => {
-          dispatch(setProfilePersonalizedAdvertiseFailed(error.response));
-          logger.error({
-            description: error.toString(),
-            fatal: true
-          });
-        }
-      );
+    const header = { Authorization: storage.accessToken };
+    return privacyService.setProfilePersonalizedAdvertise(data, header).then(
+      res => {
+        dispatch(setProfilePersonalizedAdvertiseSucceeded(res));
+      },
+      error => {
+        dispatch(setProfilePersonalizedAdvertiseFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
   };
 };
 
@@ -164,16 +192,19 @@ export const setChangeEmail = emailDetails => {
   return dispatch => {
     dispatch(setChangeEmailStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
-
-    return privacyService.setChangeEmail(params, emailDetails).then(
+    const header = {
+      Authorization: storage.accessToken
+    };
+    return privacyService.setChangeEmail(emailDetails, header).then(
       res => {
-        dispatch(setChangeEmailSucceeded(res));
+        dispatch(setChangeEmailSucceeded(res.data.data));
       },
       error => {
         dispatch(setChangeEmailFailed(error.response));
-        logger.error({ description: error.toString(), fatal: true });
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
       }
     );
   };
@@ -183,10 +214,8 @@ export const setChangePassword = passwordDetails => {
   return dispatch => {
     dispatch(setChangePasswordStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
-
-    return privacyService.setChangePassword(params, passwordDetails).then(
+    const header = { Authorization: storage.accessToken };
+    return privacyService.setChangePassword(passwordDetails, header).then(
       res => {
         dispatch(setChangePasswordSucceeded(res));
       },
@@ -205,11 +234,10 @@ export const setChangeInvoiceAddress = invoiceAddressDetails => {
   return dispatch => {
     dispatch(setChangeInvoiceAddressStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
+    const header = { Authorization: storage.accessToken };
 
     return privacyService
-      .setChangeInvoiceAddress(params, invoiceAddressDetails)
+      .setChangeInvoiceAddress(invoiceAddressDetails, header)
       .then(
         res => {
           dispatch(setChangeInvoiceAddressSucceeded(res));
@@ -229,10 +257,9 @@ export const deleteSearchHistory = searchHistoryId => {
   return dispatch => {
     dispatch(deleteSearchHistoryStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
+    const header = { Authorization: storage.accessToken };
 
-    return privacyService.deleteSearchHistory(params, searchHistoryId).then(
+    return privacyService.deleteSearchHistory(searchHistoryId, header).then(
       res => {
         dispatch(deleteSearchHistorySucceeded(res));
       },
@@ -247,14 +274,14 @@ export const deleteSearchHistory = searchHistoryId => {
   };
 };
 
-export const deactivateAccount = accountId => {
+export const deactivateAccount = isActive => {
   return dispatch => {
     dispatch(deactivateAccountStarted());
-    const storage = Auth.extractJwtFromStorage();
-    const headers = { Authorization: storage.accessToken };
-    const params = { headers };
 
-    return privacyService.deactivateAccount(params, accountId).then(
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+
+    return privacyService.deactivateAccount(isActive, header).then(
       res => {
         dispatch(deactivateAccountSucceeded(res));
       },

@@ -3,25 +3,26 @@ import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
+import { SelectCategory, HashTagUsername, SelectRadius, SelectCallToActions } from "../../../../../components/common";
+import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class StepOne extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  uploadPhoto = e => {
-    this.props.uploadFile(e, "photo");
-  };
 
   render() {
     const {
       form,
       handleChangeField,
-      uploadFile,
       handleEditImage,
       handleLocation,
       handleActualImg,
-      handleScale
+      handleScale,
+      handleSelect,
+      handleSetState,
+      userInfo
     } = this.props;
 
     return (
@@ -29,26 +30,31 @@ class StepOne extends Component {
         <div className="col-sm-6 upload-form">
           <div className="no-padding profile_image">
             <img
-              src={images.image}
+              src={userInfo? userInfo.profileUrl : images.image}
               alt="image1"
               className="img-circle img-responsive"
             />
           </div>
           <div className="user-title">
             <div className="normal_title">
-              {Translations.create_ads.title_of_ads}
+              {form.title? form.title : Translations.create_ads.title_of_ads}
             </div>
-            <div className="secondary_title">User name</div>
+            <div className="secondary_title">{userInfo? userInfo.username : ""}</div>
           </div>
           <form>
             <div className="form-group">
               <label htmlFor="title">{Translations.create_ads.add_title}</label>
               <input
                 type="text"
-                value={this.props.form.title}
+                value={form.title? form.title : ""}
                 name="title"
                 onChange={handleChangeField}
               />
+              {
+                form.title.length === 0 && form.error && (
+                <span className="error-msg highlight">{Translations.error.create_modal.title}</span>
+                )
+              }
             </div>
             <div className="form-group">
               <label htmlFor="Location">
@@ -57,51 +63,62 @@ class StepOne extends Component {
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
-                value={this.props.form.address}
+                value={form.location? form.location.address : ""}
               />
+              {
+                  form.location.address.length === 0 && form.location.latitude.length === 0 && form.location.longitude.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.location}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Radius">
                 {Translations.create_ads.add_radius}
               </label>
-              <select
-                name="radius"
-                value={this.props.form.radius}
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>10</option>
-                <option>20</option>
-                <option>30</option>
-                <option>30</option>
-              </select>
+              <SelectRadius
+                value={form.radius? form.radius : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
+              {
+                  form.radius.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.radius}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Category">
                 {Translations.create_ads.add_category}
               </label>
-              <select
-                onChange={handleChangeField}
-                value={this.props.form.category}
-                onBlur={handleChangeField}
-                name="category"
-              >
-                <option>Category 1</option>
-                <option>Category 2</option>
-                <option>Category 3</option>
-                <option>Category 4</option>
-              </select>
+              <SelectCategory
+                value={form.category? form.category : ""}
+                className=""
+                handleSelect={handleSelect}
+              />
+              {
+                  form.category.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.category}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Description">
                 {Translations.create_ads.add_description}
               </label>
-              <textarea
+
+              <HashTagUsername
                 className="form-control"
-                value={this.props.form.description}
-                onChange={handleChangeField}
+                type="text"
                 name="description"
+                handleSetState={handleSetState}
+                value={form.description? form.description : ""}
+                isText={false}
               />
+              {
+                  form.description.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.description}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="target">
@@ -114,13 +131,13 @@ class StepOne extends Component {
                 >
                   <input
                     type="radio"
-                    id="male-female"
-                    name="target_group"
-                    value="male-female"
+                    id={enumerations.target_group.female_and_male}
+                    name="targetGroup"
+                    value={enumerations.target_group.female_and_male}
                     className="black_button"
-                    defaultChecked={form.target_group === "male-female"}
+                    defaultChecked={form.targetGroup === enumerations.target_group.female_and_male}
                   />
-                  <label htmlFor="male-female">
+                  <label htmlFor={enumerations.target_group.female_and_male}>
                     {Translations.create_ads.male_female}
                   </label>
                 </li>
@@ -128,22 +145,22 @@ class StepOne extends Component {
                   <input
                     type="radio"
                     id="male"
-                    name="target_group"
+                    name="targetGroup"
                     value="male"
                     className="black_button"
-                    defaultChecked={form.target_group === "male"}
+                    defaultChecked={form.targetGroup === enumerations.target_group.female}
                   />
                   <label htmlFor="male">{Translations.create_ads.male}</label>
                 </li>
                 <li className="wid49" onChange={handleChangeField}>
                   <input
                     type="radio"
-                    id="female"
-                    value="female"
-                    name="target_group"
-                    defaultChecked={form.target_group === "female"}
+                    id={enumerations.target_group.female}
+                    value={enumerations.target_group.female}
+                    name="targetGroup"
+                    defaultChecked={form.targetGroup === enumerations.target_group.female}
                   />
-                  <label htmlFor="female">
+                  <label htmlFor={enumerations.target_group.female}>
                     {Translations.create_ads.female}
                   </label>
                 </li>
@@ -156,14 +173,16 @@ class StepOne extends Component {
               <label htmlFor="call">
                 {Translations.create_ads.action_button}
               </label>
-              <select
-                name="call_to_action_button"
-                onChange={handleChangeField}
-                onBlur={handleChangeField}
-              >
-                <option>{Translations.create_ads.yes}</option>
-                <option>{Translations.create_ads.no}</option>
-              </select>
+                <SelectCallToActions
+                  value={form.callToAction? form.callToAction : ""}
+                  className=""
+                  handleSelect={handleSelect}
+                />
+                {
+                  form.callToAction.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.callToAction}</span>
+                  )
+                }
             </div>
             <div className="form-group">
               <label htmlFor="Insert_link">
@@ -171,22 +190,37 @@ class StepOne extends Component {
               </label>
               <input
                 type="text"
-                value={this.props.form.insert_link}
-                name="insert_link"
+                value={form.insertLink? form.insertLink : ""}
+                name="insertLink"
                 onChange={handleChangeField}
               />
+              {
+                  form.insertLink.length === 0 && form.error && (
+                  <span className="error-msg highlight">{Translations.error.create_modal.insertLink}</span>
+                  )
+                }
             </div>
           </form>
         </div>
         <div className="col-sm-6 no-padding right-side ads-right-section">
-          <ImageCropper
-            image={form.image}
-            handleEditImage={handleEditImage}
-            isCircle={false}
-            ref={this.imageCrop}
-            handleActualImg={handleActualImg}
-            handleScale={handleScale}
-          />
+          {
+            form.fileType && form.typeContent === enumerations.typeContent.image &&
+            <ImageCropper
+              image={form.image}
+              handleEditImage={handleEditImage}
+              isCircle={false}
+              ref={this.imageCrop}
+              handleActualImg={handleActualImg}
+              handleScale={handleScale}
+            />
+          }
+          {
+            !form.fileType && form.video && form.typeContent === enumerations.typeContent.video &&
+              <video controls>
+                <track kind="captions" />
+                <source src={form.video} type={form.file ? form.file.type : ""} />
+              </video>
+          }
         </div>
       </div>
     );
@@ -196,11 +230,13 @@ class StepOne extends Component {
 StepOne.propTypes = {
   handleChangeField: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  uploadFile: PropTypes.func.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
-  handleActualImg: PropTypes.func,
-  handleScale: PropTypes.func
+  handleActualImg: PropTypes.func.isRequired,
+  handleScale: PropTypes.func.isRequired,
+  handleSelect: PropTypes.func.isRequired,
+  handleSetState: PropTypes.func.isRequired,
+  userInfo: PropTypes.any
 };
 
 export default StepOne;

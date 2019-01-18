@@ -1,13 +1,13 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-
+import LazyLoad from 'react-lazyload';
+import { Loader } from '../loading-indicator';
 class ImageItem extends PureComponent {
-  constructor(props, context) {
-    super(props, context);
-  }
+
   render() {
+    const { isLoading, item } = this.props;
     return (
-      <div className="feed_image">
+      <div className="bg-black feed_image">
         {/**
          * If we need to remove responsive with 16by9
          * Just need to remove following classes from div
@@ -17,11 +17,18 @@ class ImageItem extends PureComponent {
          */}
         <div className={`embed-responsive embed-responsive-16by9`}>
           <div className={`img-responsive embed-responsive-item`}>
-            <img
-              src={this.props.item}
-              alt="altmage"
-              className="img-responsive"
-            />
+            {isLoading? 
+              <Loader /> 
+              :        
+            (
+            <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
+              <img
+                  src={item}
+                  alt="altmage"
+                  className="img-responsive"
+                />
+            </LazyLoad>
+            )}
           </div>
         </div>
       </div>
@@ -31,7 +38,8 @@ class ImageItem extends PureComponent {
 
 ImageItem.propTypes = {
   item: PropTypes.string.isRequired,
-  isOtherCardExist: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool,
+  // isOtherCardExist: PropTypes.bool.isRequired
 };
 
 export default ImageItem;

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import * as images from "../../../../lib/constants/images";
@@ -25,16 +25,16 @@ const tabs = [
         image: images.help,
         value: Translations.message_module.type.unknown,
     },
-    {
-        id: '3',
-        index: 3,
-        title: Translations.message_module.type.like_you,
-        icon: '',
-        height: 21,
-        width: 21,
-        image: images.white_heart_bordered,
-        value: Translations.message_module.type.like_you,
-    },
+    // {
+    //     id: '3',
+    //     index: 3,
+    //     title: Translations.message_module.type.like_you,
+    //     icon: '',
+    //     height: 21,
+    //     width: 21,
+    //     image: images.white_heart_bordered,
+    //     value: Translations.message_module.type.like_you,
+    // },
     {
         id: '4',
         index: 4,
@@ -52,7 +52,7 @@ const MLeftTabs = (
         activeIndex
     }) => {
         const mTabs = () => {
-            return tabs.map((tab, key) => (
+            return tabs.map((tab) => (
                 <div
                     role="button"
                     key={tab.id}

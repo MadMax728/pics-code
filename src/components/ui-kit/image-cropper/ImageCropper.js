@@ -4,19 +4,8 @@ import EditProfileCrop from "./EditProfileCrop";
 import CampaignAdCrop from "./CampaignAdCrop";
 
 const propTypes = {
-  handleNewImage: PropTypes.func,
-  handleDrop: PropTypes.func,
   image: PropTypes.any,
-  setEditorRef: PropTypes.any,
-  scale: PropTypes.any,
-  position: PropTypes.any,
-  height: PropTypes.any,
-  width: PropTypes.any,
-  handlePositionChange: PropTypes.func,
   handleScale: PropTypes.func,
-  borderRadius: PropTypes.any,
-  allowZoomOut: PropTypes.bool,
-  logCallback: PropTypes.any,
   handleEditImage: PropTypes.func,
   isCircle: PropTypes.bool,
   handleActualImg: PropTypes.any,

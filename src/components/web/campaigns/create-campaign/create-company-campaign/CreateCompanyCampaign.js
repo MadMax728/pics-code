@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
-import {
-  PaymentStepOne,
-  PaymentStepTwo
-} from "../../../user/payment/steps";
+import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
 import * as images from "../../../../../lib/constants/images";
 
@@ -27,7 +24,6 @@ class CreateCompanyCampaign extends Component {
       handleSubmit,
       handleDate,
       handleContentChange,
-      contentText,
       handleEditImage,
       handleLocation,
       handleActualImg,
@@ -36,7 +32,11 @@ class CreateCompanyCampaign extends Component {
       handleOfferTagDelete,
       handleInquiryTagChange,
       handleInquiryTagDelete,
-      handleSelect
+      handleSelect,
+      handleVideo,
+      userInfo,
+      handleAddress,
+      setVoucherData
     } = this.props;
 
     return (
@@ -60,6 +60,7 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               isFor={isFor}
+              userInfo={userInfo}
               handleEditImage={handleEditImage}
               handleLocation={handleLocation}
               handleActualImg={handleActualImg}
@@ -69,14 +70,16 @@ class CreateCompanyCampaign extends Component {
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
+              handleVideo={handleVideo}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
             <StepTwo
               handleChangeField={handleChangeField}
-              contentText={contentText}
+              form={form}
               handleContentChange={handleContentChange}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -86,14 +89,17 @@ class CreateCompanyCampaign extends Component {
               form={form}
               handleDate={handleDate}
               handleSelect={handleSelect}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
           (stepIndex === 3 && (
             <PaymentStepOne
+              handleAddress={handleAddress}
               forThat={forThat}
               form={form}
               handleChangeField={handleChangeField}
+              userInfo={userInfo}
             />
           ))}
         {!isPreview &&
@@ -104,6 +110,8 @@ class CreateCompanyCampaign extends Component {
               handleChangeField={handleChangeField}
               form={form}
               handleSubmit={handleSubmit}
+              setVoucherData={setVoucherData}
+              userInfo={userInfo}
             />
           ))}
       </div>
@@ -123,7 +131,6 @@ CreateCompanyCampaign.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   handleDate: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
-  contentText: PropTypes.any.isRequired,
   handleEditImage: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,
@@ -132,7 +139,11 @@ CreateCompanyCampaign.propTypes = {
   handleOfferTagDelete: PropTypes.func.isRequired,
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired,
+  handleVideo: PropTypes.func.isRequired,
+  handleAddress: PropTypes.func.isRequired,
+  userInfo: PropTypes.object,
+  setVoucherData: PropTypes.func
 };
 
 export default CreateCompanyCampaign;

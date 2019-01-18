@@ -1,76 +1,53 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Translations } from "../../../../lib/translations";
+import MessagesLazyList from './MessagesLazyList';
 
-const MRightActiveChat = (
-    { 
-        items,
-        user,
-        me,
-        handleMessageClick
-    }) => {
-        const renderMessages = () => {
-            
-            if(!items || !items.length){
-                return '';
-            }
+class MRightActiveChat extends Component { 
+    
+    constructor(){
+        super();
+        this.state = {
+            count : 0
+        }
+    }
 
-            return items.map((item) => (
-                <div key={item.id}> 
-                    <div className="date">{ item.date }</div>
-                    <div>
-                    { me === item.senderId && (
-                        <div className="reply"
-                            role="presentation"
-                            onKeyPress={handleMessageClick}
-                            onClick={handleMessageClick}>
-                             { item.content }
-                             <span className="time">{ item.createdAt }</span>
-                        </div>
-                    )}
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.user !== this.props.user) {
+            this.setState({ count: 0 })
+        }
+    }
+    
 
-                     { me !== item.senderId && (
-                        <div className="response"
-                            role="presentation"
-                            onKeyPress={handleMessageClick}
-                            onClick={handleMessageClick}>
-                             { item.content }
-                             <span className="time">{ item.createdAt }</span>
-                        </div>
-                    )}
-                </div>
-                </div>
-            ));
-        };
+    trackScrolling = () => {
+        const wrappedElement = document.getElementById("header-chat-"+this.props.user.id);
+        if (wrappedElement && (wrappedElement.scrollTop === wrappedElement.scrollLeft)) {
+            this.setState({ count: this.state.count + 1 })
+        }
+    };
+
+    render() {
+        const { socket, user } = this.props;
+        const { count } = this.state;
         return (
-            <div className={"active-chat"}>
-                {
-                    user && user.id ? (
-                        renderMessages()
-                    ) : (
-                        <div className="card">
-                               You are ready to chat ..
-                        </div>
-                    )
-                }
-            </div>
+            <div onScroll={this.trackScrolling} className={"active-chat"} id={"header-chat-"+user.id}>
+            {
+                user && user.id ? (
+                    <MessagesLazyList user={user} count={count} socket={socket} />
+                ) : (
+                    <div className="full-width text-center">
+                         <h6>{Translations.messages_modal.ready}</h6>
+                    </div>
+                )
+            }
+        </div>
         )
-};
-
+    }
+} 
 
 MRightActiveChat.propTypes = {
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          content: PropTypes.string,
-          createdAt: PropTypes.string,
-          updatedAt: PropTypes.string,
-          recipientId: PropTypes.string,
-          senderId: PropTypes.string,
-        })
-    ),
-    handleMessageClick: PropTypes.func,
-    user:PropTypes.any,
-    me: PropTypes.string.isRequired,
+    user: PropTypes.any,
+    socket: PropTypes.any
 };
   
 export default MRightActiveChat;

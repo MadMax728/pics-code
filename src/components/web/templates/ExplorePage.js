@@ -1,59 +1,86 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getDashboard } from "../../../actions";
+import { getDashboard, getSearch } from "../../../actions";
 import PropTypes from "prop-types";
 import { CampaignLoading } from "../../ui-kit";
-import { MediaCard } from "../misc";
+import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {
   componentDidMount = () => {
-    this.props.getDashboard("getExplore");
+    window.scrollTo(0, 0);
+    if (this.props.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (this.props.searchData.searchKeyword) {
+      this.props.getDashboard(
+        "explores",
+        "?isSearch=" + this.props.searchData.searchKeyword
+      );
+    } else {
+      this.props.getDashboard("explores", "");
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      let searchParam = "";
+      if (searchKeyword) {
+        searchParam = "?isSearch=" + searchKeyword;
+      }
+      this.props.getDashboard("explores", searchParam);
+    }
   };
 
   renderExploreList = () => {
-    const { exploreList, isLoading } = this.props;
+    const { exploreList } = this.props;
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
-          {explore.postType === enumerations.contentTypes.mediaPost && (
-            <MediaCard item={explore} />
-          )}
+          {explore.mediaUrl &&
+            explore.postType === enumerations.contentTypes.mediaPost && (
+              <MediaCard item={explore} isDescription />
+            )}
         </div>
       );
     });
   };
 
   render() {
-    const { exploreList, isLoading } = this.props;
+    const { exploreList, isLoadingexplores } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
-        {exploreList && !isLoading && this.renderExploreList()}
-        {isLoading && <CampaignLoading />}
+        {exploreList && !isLoadingexplores && this.renderExploreList()}
+        {isLoadingexplores && <CampaignLoading />}
       </div>
     );
   }
 }
 
 ExploreRoot.propTypes = {
-  handleModalShow: PropTypes.func,
-  handleModalInfoShow: PropTypes.func,
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
+  isLoadingexplores: PropTypes.bool,
   exploreList: PropTypes.any,
-  error: PropTypes.any
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func
+  // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  exploreList: state.dashboardData.dashboard,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  exploreList: state.dashboardData.explores,
+  isLoadingexplores: state.dashboardData.isLoadingexplores,
+  error: state.dashboardData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getDashboard
+  getDashboard,
+  getSearch
 };
 
 export default connect(

@@ -1,4 +1,3 @@
-export { MessageModal } from "./message-modal";
 export { UploadModal } from "./upload-modal";
 export { AdsModal } from "./ads-modal";
 export { CampaignModal } from "./campaign-modal";
@@ -7,3 +6,7 @@ export { ContentViewModal } from "./content-view-modal";
 export { ProcessedModal } from "./processed-modal";
 export { EditProfileModal } from "./edit-profile-modal";
 export { ShareModal } from "./share-modal";
+export { ConfirmationModal } from "./confirmation-model";
+export { ErrorModal } from "./error-modal";
+export { SubscribeModal } from "./subscribe-modal";
+export { CMSPreviewModal } from "./cms-preview-modal";
