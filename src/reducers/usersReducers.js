@@ -33,7 +33,7 @@ const usersReducers = (state = initialState.usersData, action) => {
     case types.SEND_REQUEST_SUCCEEDED:
       return {
         ...state,
-        isRequestSend: action.payload,
+        isRequestSendData: action.payload,
         isLoading: false
       };
     case types.SEND_REQUEST_FAILED:
@@ -53,7 +53,7 @@ const usersReducers = (state = initialState.usersData, action) => {
     case types.GET_UNSUBSCRIBE_SUCCEEDED:
       return {
         ...state,
-        isUnsubscribed: action.payload,
+        isUnsubscribedData: action.payload,
         isLoading: false
       };
     case types.GET_UNSUBSCRIBE_FAILED:

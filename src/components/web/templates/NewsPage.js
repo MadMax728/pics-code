@@ -11,8 +11,9 @@ class NewsRoot extends Component {
   render() {
     const { newsFeedList, isLoadingnews } = this.props;
     return (
-      <div className={"middle-section padding-rl-10"}> <NoDataFoundCenterPage/>
+      <div className={"middle-section padding-rl-10"}>
         {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
+        {!newsFeedList && <NoDataFoundCenterPage />}
         {isLoadingnews && <CampaignLoading />}
       </div>
     );

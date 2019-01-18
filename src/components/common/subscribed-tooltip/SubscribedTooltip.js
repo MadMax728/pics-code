@@ -17,7 +17,6 @@ class SubscribedTooltip extends Component {
     this.state = {};
   }
 
-
   render() {
     return (
       <div id="">
@@ -62,19 +61,19 @@ class SubscribedTooltip extends Component {
                             </button>
                           </div>
                         ) : (
-                            <div className="community-subscribe">
-                              <button
-                                className="blue_button"
-                                id={user.id}
-                                onClick={this.handleSubscribed}
-                              >
-                                {
-                                  Translations.profile_community_right_sidebar
-                                    .Subscribe
-                                }
-                              </button>
-                            </div>
-                          )}
+                          <div className="community-subscribe">
+                            <button
+                              className="blue_button"
+                              id={user.id}
+                              onClick={this.handleSubscribed}
+                            >
+                              {
+                                Translations.profile_community_right_sidebar
+                                  .Subscribe
+                              }
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -82,19 +81,19 @@ class SubscribedTooltip extends Component {
               );
             })
           ) : (
-              <div className="notification-with-subscribe notification-wrapper">
-                <div className="user-info">
-                  <div className="subtitle">
-                    {Translations.top_bar_info_modal.no_data}
-                  </div>
+            <div className="notification-with-subscribe notification-wrapper">
+              <div className="user-info">
+                <div className="subtitle padding">
+                  {Translations.top_bar_info_modal.no_data}
                 </div>
               </div>
-            )}
+            </div>
+          )}
         </div>
       </div>
     );
   }
-
+  
   componentDidMount = () => {
     this.getTooltipUserList(this.props.userId);
   };
@@ -178,6 +177,7 @@ class SubscribedTooltip extends Component {
       });
     }
   };
+
 }
 
 const mapStateToProps = state => ({

@@ -241,16 +241,14 @@ class PaymentStepTwo extends Component {
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
                     {/* <img src={images.image} alt="image1" /> */}
-                    {form.typeContent &&
-                      form.typeContent.toLowerCase() ===
-                        enumerations.mediaTypes.video && (
-                        <VideoItem item={form.video} />
-                      )}
-                    {(!form.typeContent ||
-                      (form.typeContent &&
-                        form.typeContent.toLowerCase() ===
-                          enumerations.mediaTypes.image)) && (
-                      <ImageItem item={form.image} />
+                    {form.fileType && form.image && (
+                      <img src={form.image} alt={"information"} />
+                    )}
+                    {!form.fileType && form.video && (
+                      <video controls>
+                        <track kind="captions" />
+                        <source src={form.video} type={form.file.type} />
+                      </video>
                     )}
                   </div>
                 </div>
