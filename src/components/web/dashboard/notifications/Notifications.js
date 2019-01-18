@@ -13,7 +13,7 @@ class Notifications extends Component {
       <div className="notification-mega-wrapper">
         {" "}
         {/* you can change the className name if you want */}
-        <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
           {/* for Notification Tab */}
           <Tab
             tabClassName="tab-header"
@@ -25,16 +25,6 @@ class Notifications extends Component {
             }
           >
             <NotificationsList />
-          </Tab>
-          {/* for Like you tab */}
-          <Tab
-            tabClassName="tab-header"
-            eventKey={2}
-            title={
-              <p className="tab-title">{Translations.notification.like_you}</p>
-            }
-          >
-            <LikeYou handleMessage={handleMessage} />
           </Tab>
           {/* for Requests tab */}
           <Tab

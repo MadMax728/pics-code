@@ -167,7 +167,7 @@ class SubscribedTooltip extends Component {
           ) : (
             <div className="notification-with-subscribe notification-wrapper">
               <div className="user-info">
-                <div className="subtitle">
+                <div className="subtitle padding">
                   {Translations.top_bar_info_modal.no_data}
                 </div>
               </div>

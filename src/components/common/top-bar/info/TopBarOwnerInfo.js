@@ -19,30 +19,64 @@ class TopBarOwnerInfo extends Component {
     }
     this.state = {
       items: {
+        userid: userInfo.id,
+        username: userInfo.username,
+        private: userInfo.isPrivate,
+        more: true,
+        isSubscribe: userInfo.isSubscribe,
+        userProfile: userInfo.profileUrl,
+        isBlocked: userInfo.isBlocked,
+        blockId: userInfo.blockId,
         slots: [
           {
             name: Translations.top_bar_info.subscriber,
             val: 0,
             className: "col-sm-4 slot_one no-padding",
-            btnActiveClassName: "filled_button",
-            btnText: Translations.top_bar_info.upload,
-            handeleEvent: this.handeleUpload
+            userid: userInfo.id,
+            username: userInfo.username
           },
           {
             name: Translations.top_bar_info.subscribed,
             val: 0,
             className: "col-sm-4 slot_two no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.create_campaign,
-            handeleEvent: this.handeleCreateCampaign
+            userid: userInfo.id,
+            username: userInfo.username
           },
           {
             name: Translations.top_bar_info.posts,
             val: 0,
             className: "col-sm-4 slot_three no-padding",
+            userid: userInfo.id,
+            username: userInfo.username
+          }
+        ],
+        btnSlots: [
+          {
+            name: Translations.top_bar_info.subscriber,
+            className: "col-sm-4 slot_one no-padding",
+            btnActiveClassName: "filled_button",
+            btnText: Translations.top_bar_info.upload,
+            handeleEvent: this.handeleUpload,
+            userid: userInfo.id,
+            username: userInfo.username
+          },
+          {
+            name: Translations.top_bar_info.subscribed,
+            className: "col-sm-4 slot_two no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_campaign,
+            handeleEvent: this.handeleCreateCampaign,
+            userid: userInfo.id,
+            username: userInfo.username
+          },
+          {
+            name: Translations.top_bar_info.posts,
+            className: "col-sm-4 slot_three no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_ad,
-            handeleEvent: this.handeleCreateAd
+            handeleEvent: this.handeleCreateAd,
+            userid: userInfo.id,
+            username: userInfo.username
           }
         ]
       }
@@ -99,6 +133,28 @@ class TopBarOwnerInfo extends Component {
                 name: Translations.top_bar_info.subscriber,
                 val: this.props.userDataByUsername.user.data.subscribersCount,
                 className: "col-sm-4 slot_one no-padding",
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.subscribed,
+                val: this.props.userDataByUsername.user.data.subscribedCount,
+                className: "col-sm-4 slot_two no-padding",
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.posts,
+                val: this.props.userDataByUsername.user.data.postCount,
+                className: "col-sm-4 slot_three no-padding",
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              }
+            ],
+            btnSlots: [
+              {
+                name: Translations.top_bar_info.subscriber,
+                className: "col-sm-4 slot_one no-padding",
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.upload,
                 handeleEvent: this.handeleUpload,
@@ -107,7 +163,6 @@ class TopBarOwnerInfo extends Component {
               },
               {
                 name: Translations.top_bar_info.subscribed,
-                val: this.props.userDataByUsername.user.data.subscribedCount,
                 className: "col-sm-4 slot_two no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_campaign,
@@ -117,7 +172,6 @@ class TopBarOwnerInfo extends Component {
               },
               {
                 name: Translations.top_bar_info.posts,
-                val: this.props.userDataByUsername.user.data.postCount,
                 className: "col-sm-4 slot_three no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_ad,
@@ -151,9 +205,30 @@ class TopBarOwnerInfo extends Component {
               name: Translations.top_bar_info.subscriber,
               val: nextProps.userDataByUsername.user.data.subscribersCount,
               className: "col-sm-4 slot_one no-padding",
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.subscribed,
+              val: nextProps.userDataByUsername.user.data.subscribedCount,
+              className: "col-sm-4 slot_two no-padding",
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.posts,
+              val: nextProps.userDataByUsername.user.data.postCount,
+              className: "col-sm-4 slot_three no-padding",
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            }
+          ],
+          btnSlots: [
+            {
+              name: Translations.top_bar_info.subscriber,
+              val: nextProps.userDataByUsername.user.data.subscribersCount,
+              className: "col-sm-4 slot_one no-padding",
               btnActiveClassName: "filled_button",
-              btnText: Translations.top_bar_info.upload,
-              handeleEvent: this.handeleUpload,
               userid: nextProps.userDataByUsername.user.data.id,
               username: nextProps.userDataByUsername.user.data.username
             },
@@ -162,8 +237,6 @@ class TopBarOwnerInfo extends Component {
               val: nextProps.userDataByUsername.user.data.subscribedCount,
               className: "col-sm-4 slot_two no-padding",
               btnActiveClassName: "black_button",
-              btnText: Translations.top_bar_info.create_campaign,
-              handeleEvent: this.handeleCreateCampaign,
               userid: nextProps.userDataByUsername.user.data.id,
               username: nextProps.userDataByUsername.user.data.username
             },
@@ -172,8 +245,6 @@ class TopBarOwnerInfo extends Component {
               val: nextProps.userDataByUsername.user.data.postCount,
               className: "col-sm-4 slot_three no-padding",
               btnActiveClassName: "black_button",
-              btnText: Translations.top_bar_info.create_ad,
-              handeleEvent: this.handeleCreateAd,
               userid: nextProps.userDataByUsername.user.data.id,
               username: nextProps.userDataByUsername.user.data.username
             }

@@ -33,8 +33,7 @@ class StepTwo extends Component {
 StepTwo.propTypes = {
   // handleChangeField: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired,
-  userInfo: PropTypes.any
+  form: PropTypes.any.isRequired
 };
 
 export default StepTwo;
