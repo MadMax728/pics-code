@@ -1,23 +1,26 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import Comments from "./Comments";
 
+import * as images from "../../../../lib/constants/images";
+import { Translations } from "../../../../lib/translations";
+
+import { modalType } from "../../../../lib/constants/enumerations";
+import { RenderToolTips } from "../../../common";
+import PropTypes from "prop-types";
 import {
   getCampaignDetails,
-  like,
   getSearch,
   getComments,
   setSavedPost,
+  like,
   addReport
 } from "../../../../actions";
-
-import { Translations } from "../../../../lib/translations";
-import { modalType } from "../../../../lib/constants/enumerations";
-
-import { RenderToolTips } from "../../../common";
 import { getBackendPostType } from "../../../Factory";
-import { CampaignDetailsLoading } from "../../../ui-kit";
-import CampaignDetailsCard from "../../../misc/CampaignDetailsCard";
+import { connect } from "react-redux";
+import { ThreeDots, CampaignDetailsLoading } from "../../../ui-kit";
+import moment from "moment";
+import * as routes from "../../../../lib/constants/routes";
+import { CampaignDetailsCard } from "../../../misc";
 
 class InformationPage extends Component {
   constructor(props, context) {
@@ -46,7 +49,6 @@ class InformationPage extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.getCampaignDetailsData();
-    this.handleCommentsSections();
   };
 
   getCampaignDetailsData = () => {

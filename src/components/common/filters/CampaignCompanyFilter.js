@@ -169,30 +169,6 @@ class CampaignCompanyFilter extends Component {
         className: "filter-title",
         type: Translations.left_sidebar_filter.target_group.type,
         items: targetGroupOptions
-      },
-      {
-        name: Translations.left_sidebar_filter.offer.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer.type,
-        items: offerItems
-      },
-      {
-        name: Translations.left_sidebar_filter.offer_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer_tag.type,
-        items: []
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry.type,
-        items: inquiryItems
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry_tag.type,
-        items: []
       }
     ];
     return (
@@ -249,7 +225,6 @@ class CampaignCompanyFilter extends Component {
       currentLanguage: Translations.getLanguage()
     });
   };
-
 }
 
 CampaignCompanyFilter.propTypes = {

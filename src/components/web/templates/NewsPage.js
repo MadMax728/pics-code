@@ -108,6 +108,7 @@ class NewsRoot extends Component {
     return (
       <div className={"middle-section padding-rl-10"}>
         {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
+        {!newsFeedList && <NoDataFoundCenterPage />}
         {isLoadingnews && <CampaignLoading />}
         {newsFeedList && newsFeedList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
       </div>

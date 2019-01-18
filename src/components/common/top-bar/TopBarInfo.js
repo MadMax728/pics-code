@@ -14,8 +14,15 @@ class TopBarInfo extends Component {
     );
   };
 
-  TopBarOtherInfo = (match) => {    
-    return <TopBarOtherInfo handleModalShow={this.props.handleModalShow} match={match.match.params} />;
+  TopBarOtherInfo = match => {
+    console.log(match);
+    return (
+      <TopBarOtherInfo
+        handleModalShow={this.props.handleModalShow}
+        match={match.match.params}
+        history={match.history}
+      />
+    );
   };
 
   render() {
