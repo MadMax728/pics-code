@@ -24,7 +24,7 @@ class Community extends Component {
   };
 
   getUserData = () => {
-    const { usersList, getDashboard} = this.props;
+    const { usersList, getDashboard } = this.props;
     getDashboard("users", "").then(() => {
       if (usersList) {
         this.setState({ usersList });
@@ -50,57 +50,82 @@ class Community extends Component {
 
   handleSubscribed = e => {
     const errors = {};
-    const { usersList } = this.state;
-    const { sendRequest, getUnsubscribe, usersData } = this.props;
+    const { sendRequest, getUnsubscribe, usersList } = this.props;
     const selectedUserList = usersList.find(user => user.id === e.target.id);
     if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
       sendRequest(requestData).then(() => {
-        if (
-          usersData.error &&
-          usersData.error.status === 400
-        ) {
-          errors.servererror =
-            Translations.profile_community_right_sidebar.serverError;
-          this.setState({ error: errors });
-        } else if (usersData.isRequestSend) {
-          this.getUserData();
-          this.getUserInfo();
-        }
+        console.log("in Request call");
+        console.log(this.props.usersData);
+        //   if (usersData.error && usersData.error.status === 400) {
+        //     errors.servererror =
+        //       Translations.profile_community_right_sidebar.serverError;
+        //     this.setState({ error: errors });
+        //   } else if (usersData.isRequestSend) {
+        //     this.getUserData();
+        //     this.getUserInfo();
+        //   }
       });
     } else {
       const subscribedId = selectedUserList.subscribeId;
       getUnsubscribe(subscribedId).then(() => {
-        if (
-          usersData.error &&
-          usersData.error.status === 400
-        ) {
-          errors.servererror =
-            Translations.profile_community_right_sidebar.serverError;
-          this.setState({ error: errors });
-        } else if (usersData.isUnsubscribed) {
-          this.getUserData();
-          this.getUserInfo();
-        }
+        console.log("in unsubscribe call");
+        console.log(this.props.usersData);
+        // if (usersData.error && usersData.error.status === 400) {
+        //   errors.servererror =
+        //     Translations.profile_community_right_sidebar.serverError;
+        //   this.setState({ error: errors });
+        // } else if (usersData.isUnsubscribed) {
+        //   this.getUserData();
+        //   this.getUserInfo();
+        // }
       });
     }
   };
 
   render() {
-    const { isLoading, isLoadingusers, usersList } = this.props;
+    const { isLoading, isLoadingusers, usersList, usersData } = this.props;
+    if (usersData.isRequestSendData) {
+      console.log("sendRequest", usersData.isRequestSendData);
+    }
+
+    if (usersData.isUnsubscribedData) {
+      console.log("unsubscribe", usersData.isUnsubscribedData);
+    }
+
     return (
       <div>
-        <NoDataFoundRightSidebar/>
         <div className="normal_title padding-15">
           {Translations.profile_community_right_sidebar.community}
         </div>
         <div className="community">
-          {usersList &&
-            !isLoadingusers &&
+          {usersList && !isLoadingusers ? (
             usersList.map(user => {
               const profile_route = user.isOwner
                 ? `/news-feed`
                 : `/news-feed/${user.username}`;
+              let classNameText = "filled_button";
+              let btnText =
+                Translations.profile_community_right_sidebar.Subscribed;
+
+              if (user.isPending) {
+                btnText = Translations.profile_community_right_sidebar.Pending;
+                classNameText = "filled_button";
+              } else if (user.isSubscribe) {
+                btnText =
+                  Translations.profile_community_right_sidebar.Subscribed;
+                classNameText = "filled_button";
+              } else {
+                btnText =
+                  Translations.profile_community_right_sidebar.Subscribe;
+                classNameText = "blue_button";
+              }
+              const actionButton = {
+                className: classNameText,
+                userId: user.id,
+                handleActionClick: this.handleSubscribed,
+                btnText: btnText
+              };
               return (
                 <div className="community_wrapper" key={user.id}>
                   <div className="community-user-image">
@@ -118,7 +143,16 @@ class Community extends Component {
                       <div className="secondary_title">{user.name}</div>
                     </Link>
                   </div>
-                  {user.isSubscribe ? (
+                  <div className="community-subscribe">
+                    <button
+                      className={actionButton.className}
+                      id={actionButton.userId}
+                      onClick={actionButton.handleActionClick}
+                    >
+                      {actionButton.btnText}
+                    </button>
+                  </div>
+                  {/* {user.isSubscribe ? (
                     <div className="community-subscribe">
                       <button
                         className="filled_button"
@@ -141,15 +175,15 @@ class Community extends Component {
                         {Translations.profile_community_right_sidebar.Subscribe}
                       </button>
                     </div>
-                  )}
+                  )} */}
                 </div>
               );
-            })}
+            })
+          ) : (
+            <NoDataFoundRightSidebar />
+          )}
         </div>
-        {
-          isLoading && 
-            <RightSidebarLoading />
-        }
+        {isLoading && <RightSidebarLoading />}
       </div>
     );
   }

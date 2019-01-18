@@ -85,14 +85,16 @@ class TopBar extends Component {
         />
         {/* <span> {slot.name}</span> */}
         <div className="clearfix" />
-        <button
-          className={slot.btnActiveClassName}
-          id={slot.userid}
-          onClick={slot.handeleEvent}
-          disabled={userIsLoading}
-        >
-          {slot.btnText}
-        </button>
+        {slot.isHide !== true && (
+          <button
+            className={slot.btnActiveClassName}
+            id={slot.userid}
+            onClick={slot.handeleEvent}
+            disabled={userIsLoading}
+          >
+            {slot.btnText}
+          </button>
+        )}
       </div>
     );
   };
