@@ -8,7 +8,6 @@ import { Translations } from "../../../../lib/translations";
 class Subscribe extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
   }
 
   componentDidMount() {

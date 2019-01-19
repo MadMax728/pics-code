@@ -1,7 +1,4 @@
 import * as types from "../lib/constants/actionTypes";
-import * as privacyService from "../services";
-import { logger } from "../loggers";
-import { Auth } from "../auth";
 
 // Set Profile Privacy
 const getSearchStarted = () => ({

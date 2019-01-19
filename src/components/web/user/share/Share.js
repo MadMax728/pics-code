@@ -1,57 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import * as routes from "../../../../lib/constants/routes";
 import {
-  FacebookShareCount,
-  GooglePlusShareCount,
-  LinkedinShareCount,
-  PinterestShareCount,
-  VKShareCount,
-  OKShareCount,
-  RedditShareCount,
-  TumblrShareCount,
-
   FacebookShareButton,
-  GooglePlusShareButton,
-  LinkedinShareButton,
   TwitterShareButton,
-  PinterestShareButton,
-  VKShareButton,
-  OKShareButton,
-  TelegramShareButton,
   WhatsappShareButton,
-  RedditShareButton,
   EmailShareButton,
-  TumblrShareButton,
-  LivejournalShareButton,
-  MailruShareButton,
-  ViberShareButton,
-  WorkplaceShareButton,
-  LineShareButton,
-  WeiboShareButton,
 
   FacebookIcon,
   TwitterIcon,
-  GooglePlusIcon,
-  LinkedinIcon,
-  PinterestIcon,
-  VKIcon,
-  OKIcon,
-  TelegramIcon,
   WhatsappIcon,
-  RedditIcon,
-  TumblrIcon,
-  MailruIcon,
   EmailIcon,
-  LivejournalIcon,
-  ViberIcon,
-  WorkplaceIcon,
-  LineIcon,
 } from 'react-share';
 
 const Share = ({ 
-  handleModalInfoHiden, 
   shareUrl = 'http://www.picstagraph.com', 
   title  = 'Picstagraph',
   hashtag = '#picstagraph' 
@@ -110,7 +71,6 @@ const Share = ({
 }
 
 Share.propTypes = {
-  handleModalInfoHide: PropTypes.func.isRequired,
   shareUrl : PropTypes.string,
   title : PropTypes.string,
   hashtag : PropTypes.string
