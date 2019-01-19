@@ -4,15 +4,11 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { checkVoucherExpiry } from "../../../../../actions";
 import { connect } from "react-redux";
-//import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
-import LazyLoad from "react-lazyload";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
   Loader,
-  InlineLoading,
-  ImageItem,
-  VideoItem
+  InlineLoading
 } from "../../../../ui-kit";
 import moment from "moment";
 

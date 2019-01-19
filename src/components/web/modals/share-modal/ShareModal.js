@@ -19,30 +19,8 @@ class ShareModal extends Component {
         modalShow={modalInfoShow}
         closeBtn={false}
         handleModalHide={handleModalInfoHide}
-        modalBodyContent={<Share handleModalInfoHide={handleModalInfoHide} />}
+        modalBodyContent={<Share shareUrl={`https://www.picstagraph.com/`} title={`Picstagraph`} handleModalInfoHide={handleModalInfoHide} />}
       />
-      // <ul className="share-side-popup">
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-facebook"></span>
-      //      </Link>
-      //   </li>
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-instagram"></span>
-      //      </Link>
-      //   </li>
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-youtube"></span>
-      //      </Link>
-      //   </li>
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-twitter"></span>
-      //      </Link>
-      //   </li>
-      // </ul>
     );
   }
 }
