@@ -67,7 +67,7 @@ class StepOne extends Component {
                 name="title"
                 onChange={handleChangeField}
               />
-              {form.title.length === 0 && form.error && (
+              {form.title && form.title.length === 0 && form.error && (
                 <span className="error-msg highlight">
                   {Translations.error.create_modal.title}
                 </span>
@@ -82,7 +82,9 @@ class StepOne extends Component {
                 handleLocation={handleLocation}
                 value={form.location ? form.location.address : ""}
               />
-              {form.location.address.length === 0 &&
+              { form.location && form.location.address && form.location.latitude &&
+                form.location.longitude &&
+                form.location.address.length === 0 &&
                 form.location.latitude.length === 0 &&
                 form.location.longitude.length === 0 &&
                 form.error && (
@@ -100,7 +102,7 @@ class StepOne extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
-              {form.category.length === 0 && form.error && (
+              {form.category && form.category.length === 0 && form.error && (
                 <span className="error-msg highlight">
                   {Translations.error.create_modal.category}
                 </span>
