@@ -5,11 +5,7 @@ import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
-  OfferTags,
-  InquiryTags,
   SelectCategory,
-  SelectInquiry,
-  SelectOffer
 } from "../../../../../components/common";
 
 class StepOne extends Component {

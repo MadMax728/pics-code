@@ -13,6 +13,7 @@ class MLeftContainer extends Component {
     super(props, context);
     this.state = {
       activeIndex: "1",
+      search: '',
       userList: []
     };
   }
@@ -58,6 +59,27 @@ class MLeftContainer extends Component {
     }
   };
 
+  handleChange = (e) => {
+    e.preventDefault();
+    const search = e.target.value;
+    const { userList } = this.state;
+    this.setState({ search: e.target.value });
+    if(search) {
+      let filtered = userList.filter( u => {
+        if(u.name && u.username.includes(search)) return true;
+        if(u.email && u.email.includes(search)) return true;
+        if(u.name && u.name.includes(search)) return true;
+        return false;
+      });
+      this.setState({ userList : filtered })
+    } else {
+          const  { usersData } = this.props;
+          if(!usersData.isLoading) {
+              this.setState({ userList : usersData.users })
+          }
+    }
+  };
+
   handleChatClick = (e) => {
       const { userList } = this.state;
       const user = _.find(userList, { id: e.currentTarget.dataset.id });
@@ -71,33 +93,33 @@ class MLeftContainer extends Component {
   };
 
   render() {
-    const { activeIndex, userList } = this.state;
+    const { activeIndex, userList, search } = this.state;
 
     return (
       <div>
         <div className="title-wrapper">
           <div className="modal-title">
-            {Translations.messages_modal.messages}
-            <span className="edit"></span>
+            { Translations.messages_modal.messages }
+            {/* <span className="edit"></span> */}
           </div>                    
         </div>
         <div className="msgs-search-user">
-          <form>
-            <div className="input-group search-input-group">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search"
-              />
-              <span className="input-group-addon">
-                <button >
-                  <span className="search_icon">
-                    <img src={images.search} alt="Search" />
-                  </span>
-                </button>
-              </span>
-            </div>
-          </form>
+          <div className="input-group search-input-group">
+            <input
+              type="text"
+              value={search}
+              onChange={this.handleChange}
+              className="form-control"
+              placeholder="Search"
+            />
+            <span className="input-group-addon">
+              <button onClick={this.handleChange}>
+                <span className="search_icon">
+                  <img src={images.search} alt="Search" />
+                </span>
+              </button>
+            </span>
+          </div>
         </div>
         <MLeftTabs
           activeIndex={activeIndex}

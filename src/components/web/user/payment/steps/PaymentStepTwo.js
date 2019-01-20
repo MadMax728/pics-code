@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { checkVoucherExpiry } from "../../../../../actions";
 import { connect } from "react-redux";
 import { Translations } from "../../../../../lib/translations";
-import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
   Loader,
   InlineLoading

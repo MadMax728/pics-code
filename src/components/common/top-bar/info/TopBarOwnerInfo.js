@@ -6,7 +6,6 @@ import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 import { connect } from "react-redux";
 import { getUser, getFollowUserList } from "../../../../actions";
-import { SubscribeToolTips } from "../../../common";
 
 const storage = Auth.extractJwtFromStorage();
 class TopBarOwnerInfo extends Component {

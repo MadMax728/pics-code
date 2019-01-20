@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
-import { userInfo } from "os";
 import moment from "moment";
-import { Loader, ImageItem, VideoItem } from "../../../../ui-kit";
-import * as enumerations from "../../../../../lib/constants/enumerations";
 import { connect } from "react-redux";
 
 class PaymentStepOne extends Component {
@@ -17,11 +14,6 @@ class PaymentStepOne extends Component {
   render() {
     const { handleAddress, form, userInfo, categoryList } = this.props;
     const todayDate = new Date();
-    console.log(form.category[0].categoryName);
-    // const selectedCategory = categoryList.find(
-    //   category => category.id === form.category
-    // );
-    // console.log("step1", selectedCategory);
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">

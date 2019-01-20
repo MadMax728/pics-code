@@ -5,8 +5,6 @@ import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
-import * as enumerations from "../../../../../lib/constants/enumerations";
-import { ImageItem, VideoItem } from "../../../../ui-kit";
 class StepTwo extends Component {
   constructor(props) {
     super(props);

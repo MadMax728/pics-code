@@ -88,8 +88,8 @@ class ReportedCampaignsPage extends Component {
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {campaign.postType && campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaign ||
-          campaign.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign
+          {campaign.postType && (campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaig ||
+          campaign.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign)
           &&
           (
             <CampaignCard 

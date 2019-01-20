@@ -5,7 +5,6 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
-import { userInfo } from "os";
 import { ImageItem, VideoItem } from "../../../../ui-kit";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
@@ -21,7 +20,6 @@ class StepThree extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const todayDate = new Date();
-    // console.log(form.endDate.diff(form.startDate, 'days'));
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
