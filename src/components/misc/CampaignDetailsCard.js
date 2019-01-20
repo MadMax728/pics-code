@@ -29,7 +29,9 @@ const CampaignDetailsCard = ({
                 <h3 className="no-padding no-margin">
                     {campaignDetails.title}
                 </h3>
-                <div className="text">{campaignDetails.description}</div>
+                <div className="text">
+                    <div dangerouslySetInnerHTML={{__html: campaignDetails.description}} />
+                </div>
                 <div className="info-img">
                     {campaignDetails.typeContent &&
                         campaignDetails.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
