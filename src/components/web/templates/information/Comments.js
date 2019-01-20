@@ -53,14 +53,15 @@ class Comments extends Component {
       form,
       isEmoji
     } = this.state;
-    const { isReport } = this.props;
+    const { isReport, userImage } = this.props;
+    const profileImage = userImage || images.image;
     return (
       <div className="feed-comment" id={campaign.id}>
         <div className="comment-wrapper">
           <form onSubmit={this.handleSubmit} ref={this.commentForm}>
             <div className="no-padding profile_image">
               <img
-                src={images.image}
+                src={profileImage}
                 alt="image1"
                 className="img-circle img-responsive"
               />
@@ -380,12 +381,8 @@ class Comments extends Component {
           </div>
         </div>
         <div className="comment-content col-md-12 no-padding">
-          {/* <div className="col-md-1" /> */}
           <div className="col-md-11"><div className="comment-inner-wrap">{this.renderEditComment(comment)}</div></div>
         </div>
-        {/* <div className="comment-content">
-          <p>{comment.comment}</p>
-        </div> */}
       </div>
     );
   };
@@ -442,7 +439,8 @@ Comments.propTypes = {
   getComments: PropTypes.func,
   comments: PropTypes.any,
   addedComment: PropTypes.any,
-  campaignComments: PropTypes.any
+  campaignComments: PropTypes.any,
+  userImage: PropTypes.string
 };
 
 export default connect(

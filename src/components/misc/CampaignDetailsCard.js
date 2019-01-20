@@ -3,8 +3,10 @@ import PropTypes from "prop-types";
 import * as images from "./../../lib/constants/images";
 import Comments from "../web/templates/information/Comments";
 import { Translations } from "../../lib/translations";
-import moment from "moment";
-import { ThreeDots } from "../ui-kit";
+import { DateFormat } from "../Factory";
+import FeedHeader from "./headers/FeedHeader";
+import { ImageItem, VideoItem, ThreeDots } from "../ui-kit";
+import * as enumerations from "../../lib/constants/enumerations";
 
 const CampaignDetailsCard = ({
     campaignDetails,
@@ -29,7 +31,14 @@ const CampaignDetailsCard = ({
                 </h3>
                 <div className="text">{campaignDetails.description}</div>
                 <div className="info-img">
-                    <img src={campaignDetails.profileImage} alt={"information"} />
+                    {campaignDetails.typeContent &&
+                        campaignDetails.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
+                            <ImageItem item={campaignDetails.mediaUrl} isOtherCardExist={false}/>
+                        )}
+                    {campaignDetails.typeContent &&
+                        campaignDetails.typeContent.toLowerCase() === enumerations.mediaTypes.video && (
+                            <VideoItem id={campaignDetails.id} item={campaignDetails.mediaUrl}/>
+                    )}
                 </div>
                 <div className="text paddTop20">
                 </div>
@@ -46,42 +55,22 @@ const CampaignDetailsCard = ({
                         </button>
                     )}
                 <div className="feed_wrapper">
-                    <div className="feed_header">
-                        <div className="no-padding profile_image">
-                            <img
-                                src={images.image}
-                                alt="circle-img-1"
-                                className="img-circle img-responsive"
-                            />
-                        </div>
-                        <div className="col-sm-9 col-xs-7">
-                            <div className="normal_title">{campaignDetails.title}</div>
-                            <div className="secondary_title">
-                                {campaignDetails.userName}
-                            </div>
-                            <div className="grey_title">{campaignDetails.category}</div>
-                        </div>
-                        <div className="col-sm-2 col-xs-2 like_wrapper">
-                            <img
-                                src={favorite_icon}
-                                alt="like-1"
-                                className="pull-right"
-                                role="presentation"
-                                onClick={handleFavorite}
-                                id={campaignDetails.id}
-                                onKeyDown={handleOnKeyDown}
-                            />
-                        </div>
-                    </div>
+                    <FeedHeader 
+                        id={campaignDetails.id} 
+                        isSelfLike={campaignDetails.isSelfLike}
+                        userName={campaignDetails.userName}
+                        image={campaignDetails.profileImage} 
+                        title={campaignDetails.title} 
+                        category={campaignDetails.category} 
+                        handleFavorite={handleFavorite} 
+                    />
                     <div className="feed_content col-xs-12">
                         <div className="feed_description col-xs-12">
                             <div className="col-sm-6 no-padding">
                                 <div className="info_wrapper">
                                     <span className="normal_title">Start: </span>
                                     <span className="secondary_title">
-                                        {moment(campaignDetails.startDate).format(
-                                            "MMMM Do YYYY"
-                                        )}
+                                        {DateFormat(campaignDetails.startDate, Translations.date_format.date, true)}
                                     </span>
                                 </div>
                                 <div className="info_wrapper">
@@ -101,9 +90,7 @@ const CampaignDetailsCard = ({
                                 <div className="info_wrapper">
                                     <span className="normal_title">End: </span>
                                     <span className="secondary_title">
-                                        {moment(campaignDetails.endDate).format(
-                                            "MMMM Do YYYY"
-                                        )}
+                                        {DateFormat(campaignDetails.endDate, Translations.date_format.date, true)}
                                     </span>
                                 </div>
                                 <div className="info_wrapper">
@@ -115,9 +102,7 @@ const CampaignDetailsCard = ({
                                 <div className="info_wrapper">
                                     <span className="normal_title">Applications: </span>
                                     <span className="secondary_title">
-                                        {campaignDetails.applications
-                                            ? campaignDetails.applications
-                                            : "22/22"}
+                                        {campaignDetails.applications}
                                     </span>
                                 </div>
                             </div>
@@ -214,7 +199,6 @@ const CampaignDetailsCard = ({
 
             <div className="feed_wrapper">
                 <div className="feed-comment">
-                    {/* Comments Section */}
                     {isComments && (
                         <Comments
                             campaign={campaignDetails}
@@ -224,6 +208,7 @@ const CampaignDetailsCard = ({
                             handleComment={handleComment}
                             totalCommentsCount={comments.length}
                             isReport={false}
+                            userImage={campaignDetails.profileImage}
                         />
                     )}
                 </div>
