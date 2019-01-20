@@ -76,7 +76,6 @@ class PrivacyPage extends Component {
       change_email_form,
       change_password_form,
       change_invoicing_address_form,
-      userId
     } = this.state;
 
     return (
@@ -864,13 +863,13 @@ class PrivacyPage extends Component {
   };
 
   handleDeleteSearchHisory = e => {
-    const paramData = { searchHistoryId: e.target.id };
+    // const paramData = { searchHistoryId: e.target.id };
     this.props.handleModalInfoShow(modalType.confirmation);
     // this.props.deleteSearchHistory(paramData); // API Call
   };
 
   handleDeactiveMyAccount = e => {
-    const modalForValue = e.target.id;
+    // const modalForValue = e.target.id;
     this.props.handleModalInfoShow(modalType.confirmation);
   };
 

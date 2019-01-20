@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import { setCookie, getCookie } from "../../../lib/utils/helpers";
+import { setCookie } from "../../../lib/utils/helpers";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -40,15 +40,8 @@ const languageItems = [
 ];
 
 const targetGroupOptions = staticData;
-
 const radiusItems = staticData;
-
 const categoryItems = staticData;
-
-const offerItems = staticData;
-
-const inquiryItems = staticData;
-
 const languageItem = languageItems;
 
 class CampaignCreatorFilter extends Component {

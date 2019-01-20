@@ -9,12 +9,8 @@ import { connect } from "react-redux";
 import * as routes from "../../../lib/constants/routes";
 
 class PictureCardBody extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
-    const { pic, index, isReport, isLoading, history } = this.props;
+    const { pic, index, isReport, isLoading } = this.props;
     return (
       <div
         className={

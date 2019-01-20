@@ -17,8 +17,8 @@ class UsernameList extends Component {
       return !!(
         lastText === "@" ||
         lastText === "" ||
-        item.username && item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1 ||
-        item.name !== undefined && item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1
+        (item.username && item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1) ||
+        (item.name !== undefined && item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1)
       );
     });
 

@@ -12,8 +12,6 @@ import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
 import "emoji-mart/css/emoji-mart.css";
-import { Picker } from "emoji-mart";
-
 class CampaignCard extends Component {
   constructor(props, context) {
     super(props, context);

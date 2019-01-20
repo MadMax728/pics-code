@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { CustomBootstrapModal, InlineLoading } from "../../../ui-kit";
+import { CustomBootstrapModal } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { Upload, UploadHeader } from "../../user";
 import {

@@ -46,6 +46,7 @@ class MLeftContainer extends Component {
       case 4:
         this.getUserList("company");
         break;
+      default:
     }
   }
 

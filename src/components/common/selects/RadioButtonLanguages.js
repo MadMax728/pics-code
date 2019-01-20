@@ -33,7 +33,6 @@ class RadioButtonLanguages extends Component {
   };
 
   render() {
-    const { value, className, languageList } = this.props;
     return (
       <div className="languageBtn">
         {languageData.map(option => (

@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as images from "./../../lib/constants/images";
-import * as routes from "./../../lib/constants/routes";
 import Comments from "../web/templates/information/Comments";
 import { Translations } from "../../lib/translations";
 import moment from "moment";
@@ -18,9 +17,6 @@ const CampaignDetailsCard = ({
     renderReportTips,
     handleComment
 }) => {
-    const profile_route = campaignDetails.isOwner
-        ? routes.NEWS_FEED_ROUTE
-        : `${routes.NEWS_FEED_ROUTE}/${campaignDetails.userName}`;
     const favorite_icon = campaignDetails.isSelfLike
         ? images.blue_heart
         : images.feed_like;

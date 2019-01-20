@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Text } from "../../../ui-kit/CommonUIComponents";
-import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDownloadData, getSearch } from "../../../../actions";

@@ -25,7 +25,6 @@ class BillsAndReceiptsPage extends Component {
     }
     if (userInfo) {
       this.setState({ userId: userInfo.id });
-      const params = { userId: userInfo.id };
       this.props.getBills().then(() => {
         this.setState({ dataDownload: dataDownload_list });
       });

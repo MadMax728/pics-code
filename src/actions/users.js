@@ -13,12 +13,6 @@ const getUserListSucceeded = data => ({
   payload: data
 });
 
-const getUserListFailed = error => ({
-  type: types.GET_USER_LIST_FAILED,
-  payload: error,
-  error: true
-});
-
 /**
  *  getUserList
  * { subscribed, unknown, likes, company }

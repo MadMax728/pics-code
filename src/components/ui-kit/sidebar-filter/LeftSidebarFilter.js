@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { RadioBtn, Select, Text } from "../CommonUIComponents";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
-import { setCookie, getCookie } from "../../../lib/utils/helpers";
+import { getCookie } from "../../../lib/utils/helpers";
 import {
   SelectCategory,
   SelectOffer,

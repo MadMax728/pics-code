@@ -23,10 +23,6 @@ class StepOne extends Component {
       handleLocation,
       handleScale,
       handleActualImg,
-      handleOfferTagChange,
-      handleOfferTagDelete,
-      handleInquiryTagChange,
-      handleInquiryTagDelete,
       handleSelect,
       handleVideo,
       userInfo

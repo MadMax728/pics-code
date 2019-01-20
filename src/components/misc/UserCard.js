@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import UserCardBody from "./body/UserCardBody";
-import { Auth } from "../../auth";
 import {
   sendRequest,
   getUnsubscribe,

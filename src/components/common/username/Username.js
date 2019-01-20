@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getHashUser } from "../../../actions";
-import { username_list } from "../../../mock-data";
 import * as images from "../../../lib/constants/";
 
 class Username extends Component {

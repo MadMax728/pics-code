@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 import { connect } from "react-redux";
-import { Auth } from "../../../auth";
 import {
   getFollowUserList,
   sendRequest,

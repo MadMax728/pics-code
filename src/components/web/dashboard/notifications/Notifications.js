@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import Tabs from "react-bootstrap/lib/Tabs";
 import Tab from "react-bootstrap/lib/Tab";
-import { LikeYou, Requests, NotificationsList } from "./notification";
+import { Requests, NotificationsList } from "./notification";
 import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 
 class Notifications extends Component {
   render() {
-    const { handleMessage } = this.props;
-
     return (
       <div className="notification-mega-wrapper">
         {" "}

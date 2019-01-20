@@ -12,7 +12,7 @@ class PaymentStepOne extends Component {
   }
 
   render() {
-    const { handleAddress, form, userInfo, categoryList } = this.props;
+    const { handleAddress, form, userInfo } = this.props;
     const todayDate = new Date();
     return (
       <div className="col-xs-12 no-padding">

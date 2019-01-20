@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Collapse } from "react-bootstrap";
-import * as images from "../../../../lib/constants/images";
 import * as routes from "../../../../lib/constants/routes";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

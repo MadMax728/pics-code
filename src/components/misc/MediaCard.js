@@ -11,7 +11,6 @@ import { getComments, like, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import { modalType } from "../../lib/constants";
-import { Loader } from "../ui-kit";
 
 class MediaCard extends Component {
   constructor(props, context) {

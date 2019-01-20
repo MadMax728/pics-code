@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import { request_list } from "../../../../../mock-data";
 import { Translations } from "../../../../../lib/translations";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as routes from "../../../../../lib/constants/routes";
 import {
   getPendingUserList,
   getUnsubscribe,
@@ -14,10 +12,7 @@ import {
 import moment from "moment";
 
 class Requests extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
+  
   render() {
     return (
       <div className="tab-pane fade active in" id="nav-requests">

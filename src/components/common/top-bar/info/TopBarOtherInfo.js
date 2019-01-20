@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { TopBar, Loader } from "../../../ui-kit";
+import { TopBar } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
-import { modalType } from "../../../../lib/constants/enumerations";
 import { connect } from "react-redux";
 import {
   getUser,

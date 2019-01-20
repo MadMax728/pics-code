@@ -20,7 +20,6 @@ import {
 } from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
 import { ThreeDots } from "../../ui-kit";
-import { Loader } from "../loading-indicator";
 
 class TopBar extends Component {
   constructor(props) {

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { checkVoucherExpiry } from "../../../../../actions";
 import { connect } from "react-redux";
-import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
 
 class PaymentStepThree extends Component {
