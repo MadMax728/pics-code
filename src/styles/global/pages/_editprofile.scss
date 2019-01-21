@@ -63,4 +63,15 @@
       }
     }
   }
+  .full-width-textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    outline: none;
+    padding: 10px;
+    border: 1px solid #000;
+    &:focus {
+      border: 1px solid #000;
+    }
+  }
 }
