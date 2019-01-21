@@ -561,18 +561,6 @@ class EditProfile extends Component {
     }
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
-
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;
     form.offer_tag.push(id);
