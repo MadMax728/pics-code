@@ -263,7 +263,7 @@ class EditProfile extends Component {
   render() {
     const { form, isLoading } = this.state;
     const { image } = this.props;
-
+    console.log(form.offerTagList);
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -319,6 +319,7 @@ class EditProfile extends Component {
                   name="username"
                   value={form.username}
                   onChange={this.handleChangeField}
+                  readOnly={form.username ? "readonly" : ""}
                 />
                 {form.username.length === 0 ? (
                   <img src={images.error} alt={"error"} />
@@ -331,7 +332,7 @@ class EditProfile extends Component {
                   {this.state.error.name_company}
                 </span>
                 <label htmlFor="name">
-                  {Translations.editProfile.name_company}
+                  {Translations.editProfile.name_company}?{" "}
                 </label>
                 <Text
                   type="text"
@@ -610,10 +611,10 @@ class EditProfile extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    if (event.target.name === "profile_description") {
-      form[event.target.name] = event.target.value;
-    } else {
+    if (event.values.name) {
       form[event.values.name] = event.values.val;
+    } else if (event.target.name === "profile_description") {
+      form[event.target.name] = event.target.value;
     }
     this.setState({ form });
     // this.formValid();
@@ -621,6 +622,8 @@ class EditProfile extends Component {
   setDataOnLoad = () => {
     if (this.props.userDataByUsername.user) {
       const userData = this.props.userDataByUsername.user.data;
+      let test = userData.offerTag ? userData.offerTag : [];
+      console.log(test);
       this.setState({
         form: {
           profileUrl: userData.profileUrl ? userData.profileUrl : "",

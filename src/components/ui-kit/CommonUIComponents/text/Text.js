@@ -19,9 +19,12 @@ class Text extends Component {
       type,
       autoComplete,
       placeholder,
-      value
+      value,
+      readOnly
     } = this.props;
     // const { value } = this.state;
+    let isReadonly = '';
+    if(readOnly) { isReadonly = readOnly; }
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <input
@@ -32,7 +35,8 @@ class Text extends Component {
         placeholder={placeholder}
         autoComplete={autoComplete}
         onChange={this.handleChangeField}
-        value={value || ''}
+        value={value || ""}
+        readOnly={isReadonly}
       />
     );
   }
@@ -43,7 +47,6 @@ class Text extends Component {
     data.values = { name: this.state.name, val: event.target.value };
     this.props.onChange(data);
   };
-
 }
 
 Text.propTypes = {
@@ -54,7 +57,8 @@ Text.propTypes = {
   className: PropTypes.string,
   id: PropTypes.string,
   placeholder: PropTypes.string,
-  value: PropTypes.string
+  value: PropTypes.string,
+  readOnly: PropTypes.any
 };
 
 export default Text;
