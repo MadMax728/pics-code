@@ -81,30 +81,6 @@ class Community extends Component {
                       {actionButton.btnText}
                     </button>
                   </div>
-                  {/* {user.isSubscribe ? (
-                    <div className="community-subscribe">
-                      <button
-                        className="filled_button"
-                        id={user.id}
-                        onClick={this.handleSubscribed}
-                      >
-                        {
-                          Translations.profile_community_right_sidebar
-                            .Subscribed
-                        }
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="community-subscribe">
-                      <button
-                        className="blue_button"
-                        id={user.id}
-                        onClick={this.handleSubscribed}
-                      >
-                        {Translations.profile_community_right_sidebar.Subscribe}
-                      </button>
-                    </div>
-                  )} */}
                 </div>
               );
             })
