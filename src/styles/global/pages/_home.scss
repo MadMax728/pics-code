@@ -340,6 +340,14 @@
     @include gradient();
   }
 }
+.profile-img-wrapper{
+  .user_info{
+    padding: 15px 0;
+    div{
+      margin: 0 auto;
+    }
+  }
+}
 .right_bar {
   width: 30%;
   float: right;
