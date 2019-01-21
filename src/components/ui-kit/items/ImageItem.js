@@ -23,11 +23,10 @@ class ImageItem extends PureComponent {
               :
               (
                 <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
-                  <img
-                    src={item}
-                    alt="altmage"
-                    className="img-responsive"
-                  />
+                  {  item && <img src={item}
+                            alt="altmage"
+                            className="img-responsive"/> 
+                  }
                 </LazyLoad>
               )}
           </div>
