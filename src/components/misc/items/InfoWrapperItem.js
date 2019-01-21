@@ -16,7 +16,7 @@ class InfoWrapperItem extends PureComponent {
 
 InfoWrapperItem.propTypes = {
   title: PropTypes.string.isRequired,
-  value: PropTypes.string,
+  value: PropTypes.any,
 };
 
 export default InfoWrapperItem;

@@ -17,7 +17,7 @@ export const explores = (payload, header = {}) =>
   api(baseUrl, header).get(`${exploresEndPoint}${payload}`);
 
 export const participants = (payload, header = {}) =>
-  api(baseUrl, header).post(`${participantsEndPoint}${payload}`);
+  api(baseUrl, header).get(`${participantsEndPoint}${payload}`);
 
 export const users = (payload, header = {}) =>
   api(baseUrl, header).post(`${usersEndPoint}${payload}`);
