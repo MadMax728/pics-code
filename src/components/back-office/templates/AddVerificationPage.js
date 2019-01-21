@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { getVerifications, getUnverifiedUsers, updateVerification } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
+
+import { getVerifications, getUnverifiedUsers, updateVerification } from "../../../actions";
+
+import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
 import { UsernameList } from "../../common";
+
 import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 
 class AddVerificationPage extends Component {
@@ -15,6 +18,7 @@ class AddVerificationPage extends Component {
     this.username = React.createRef();
     this.state = {
       verifications: null,
+      searchKeyword: this.props.searchData.searchKeyword,      
       form: {
         id: "",
         username: ""
@@ -22,14 +26,73 @@ class AddVerificationPage extends Component {
     };
   }
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
+  render() {
+    const { verifications, form } = this.state;
+    const { verificationData } = this.props;
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+        <div className="dashboard-middle-section margin-bottom-50">
+          <div className="normal_title padding-15">
+            {Translations.admin.Verification}
+          </div>
+          <div className="title_with_search_dropdown_button">
+            <input
+              type="search"
+              name="username"
+              id="username"
+              placeholder={Translations.admin.Search_in_users}
+              className="flex2"
+              onChange={this.handleChangeUsername}
+              value={form.username? form.username : "" }
+            />
+            <div
+              data-for="username"
+              role="button"
+              data-tip="tooltip"
+              ref={username => this.username = username}
+            />
+             <ToolTip
+                id="username"
+                getContent={this.renderUserNameTips}
+                effect="solid"
+                delayHide={0}
+                delayShow={0}
+                delayUpdate={0}
+                place={"bottom"}
+                border
+                type={"light"}
+              />
+            <button className="wid30per" onClick={this.handleSubmit}>
+              {Translations.admin.Add}
+            </button>
+          </div>
+          {verifications && this.renderVerifications()}
+          {verificationData.isLoading && <CustomeTableLoader />}
+        </div>
+      </div>
+    );
+  }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    this.props.getVerifications().then(()=> {
+      if(this.props.verificationData && this.props.verificationData.verifications) {
+        this.setState({
+          verifications: this.props.verificationData.verifications
+        })
+      }
+    });
+    this.props.getUnverifiedUsers();
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -109,18 +172,6 @@ class AddVerificationPage extends Component {
       Showing {from} to {to} of {size} Results
     </span>
   );
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.props.getVerifications().then(()=> {
-      if(this.props.verificationData && this.props.verificationData.verifications) {
-        this.setState({
-          verifications: this.props.verificationData.verifications
-        })
-      }
-    });
-    this.props.getUnverifiedUsers();
-  };
 
   renderVerifications = () => {
     const { verifications } = this.state;
@@ -237,53 +288,6 @@ class AddVerificationPage extends Component {
   usernameHide = () => {
     ReactTooltip.hide(this.username);
   };
-
-  render() {
-    const { verifications, form } = this.state;
-    const { verificationData } = this.props;
-    return (
-      <div className="padding-rl-10 middle-section width-80">
-        <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">
-            {Translations.admin.Verification}
-          </div>
-          <div className="title_with_search_dropdown_button">
-            <input
-              type="search"
-              name="username"
-              id="username"
-              placeholder={Translations.admin.Search_in_users}
-              className="flex2"
-              onChange={this.handleChangeUsername}
-              value={form.username? form.username : "" }
-            />
-            <div
-              data-for="username"
-              role="button"
-              data-tip="tooltip"
-              ref={username => this.username = username}
-            />
-             <ToolTip
-                id="username"
-                getContent={this.renderUserNameTips}
-                effect="solid"
-                delayHide={0}
-                delayShow={0}
-                delayUpdate={0}
-                place={"bottom"}
-                border={true}
-                type={"light"}
-              />
-            <button className="wid30per" onClick={this.handleSubmit}>
-              {Translations.admin.Add}
-            </button>
-          </div>
-          {verifications && this.renderVerifications()}
-          {verificationData.isLoading && <CustomeTableLoader />}
-        </div>
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

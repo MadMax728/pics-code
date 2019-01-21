@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import { Translations } from "../../../lib/translations";
 
 class CMSPreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: this.props.modalInfo
+      form: this.props.modalInfo,
     };
   }
 

@@ -17,7 +17,7 @@ class ShareModal extends Component {
         header={false}
         footer={false}
         modalShow={modalInfoShow}
-        closeBtn={true}
+        closeBtn
         handleModalHide={handleModalInfoHide}
         modalBodyContent={<Share shareUrl={`https://www.picstagraph.com/`} title={`Picstagraph`} handleModalInfoHide={handleModalInfoHide} />}
       />

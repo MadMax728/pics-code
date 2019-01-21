@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getBackOfficeReportedContent, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
 import { CampaignLoading, NoDataFoundCenterPage } from "../../../ui-kit";
 import { PictureCard } from "../../../misc";
+
 import { search } from "../../../../lib/utils/helpers";
 
 class PicsPage extends Component {
@@ -41,6 +44,10 @@ class PicsPage extends Component {
         })
       }
     });
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
   handleRefresh = () => {

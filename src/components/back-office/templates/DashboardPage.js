@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as routes from "../../../lib/constants/routes";
-import { CustomBootstrapTable } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { getBackOfficeDashboard } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getBackOfficeDashboard } from "../../../actions";
+
+import { CustomBootstrapTable } from "../../ui-kit";
+
+import { Translations } from "../../../lib/translations";
+import * as routes from "../../../lib/constants/routes";
 
 class DashboardPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      searchKeyword: this.props.searchData.searchKeyword,      
       key_statistics: null,
       content_statistics: null,
       campaign_statistics_company: null,
@@ -72,16 +76,14 @@ class DashboardPage extends Component {
     // });
   };
 
-  componentWillReceiveProps = nextProps => {
-    console.log(this.props);
-    
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
     }
-  };
+    return null;
+  }
 
   renderKeyStatistics = () => {
     const { key_statistics } = this.state;
