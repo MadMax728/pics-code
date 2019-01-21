@@ -128,8 +128,6 @@ class EditProfile extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    console.log("on change");
-    console.log(event.values);
     form[event.values.name] = event.values.val;
     this.setState({ form });
     // this.formValid();
@@ -169,9 +167,9 @@ class EditProfile extends Component {
           offer_tag: userData.offerTag ? userData.offerTag : [],
           inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
           offerTagList:
-            userData.offerTagList.length === 0 ? userData.offerTagList : [],
+            userData.offerTagList.length !== 0 ? userData.offerTagList : [],
           inquiryTagList:
-            userData.inquiryTagList.length === 0 ? userData.inquiryTagList : []
+            userData.inquiryTagList.length !== 0 ? userData.inquiryTagList : []
         }
       });
     }
@@ -263,7 +261,6 @@ class EditProfile extends Component {
   render() {
     const { form, isLoading } = this.state;
     const { image } = this.props;
-    console.log(form.offerTagList);
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -546,206 +543,6 @@ class EditProfile extends Component {
       </div>
     );
   }
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    if (userInfo) {
-      this.setState({ userInfo });
-      const data = {
-        username: userInfo.username
-      };
-      this.setState({ isLoading: true });
-      this.props.getUser(data).then(() => {
-        this.setDataOnLoad();
-      });
-    }
-  };
-
-  handleOfferTagChange = (id, tag) => {
-    const { form } = this.state;
-    form.offer_tag.push(id);
-    form.offerTagList.push(tag);
-    this.setState({ form });
-  };
-
-  handleInquiryTagDelete = id => {
-    const { form } = this.state;
-    this.setState({
-      form: {
-        ...this.state.form,
-        inquiry_tag: form.inquiry_tag.filter(
-          tag => tag !== form.inquiryTagList[id].id
-        ),
-        inquiryTagList: form.inquiryTagList.filter(
-          tag => tag.id !== form.inquiryTagList[id].id
-        )
-      }
-    });
-  };
-
-  handleInquiryTagChange = (id, tag) => {
-    const { form } = this.state;
-    form.inquiry_tag.push(id);
-    form.inquiryTagList.push(tag);
-    this.setState({ form });
-  };
-
-  handleLocation = (location, address) => {
-    const { form } = this.state;
-    form.location.lat = location.lat;
-    form.location.lng = location.lng;
-    form.location.address = address;
-    this.setState({ form });
-  };
-
-  handleChangeDOB = event => {
-    const { form } = this.state;
-    form.birthDate[event.values.name] = event.values.val;
-    this.setState({ form });
-  };
-
-  handleChangeField = event => {
-    const { form } = this.state;
-    if (event.values.name) {
-      form[event.values.name] = event.values.val;
-    } else if (event.target.name === "profile_description") {
-      form[event.target.name] = event.target.value;
-    }
-    this.setState({ form });
-    // this.formValid();
-  };
-  setDataOnLoad = () => {
-    if (this.props.userDataByUsername.user) {
-      const userData = this.props.userDataByUsername.user.data;
-      let test = userData.offerTag ? userData.offerTag : [];
-      console.log(test);
-      this.setState({
-        form: {
-          profileUrl: userData.profileUrl ? userData.profileUrl : "",
-          username: userData.username ? userData.username : "",
-          email: userData.email ? userData.email : "",
-          name_company: userData.name ? userData.name : "",
-          location: {
-            lat: userData.location ? userData.location.lat : "",
-            lng: userData.location ? userData.location.lng : "",
-            address: userData.location ? userData.location.address : ""
-          },
-          birthDate: {
-            day: userData.birthDate
-              ? moment.unix(userData.birthDate).format("DD")
-              : "",
-            mon: userData.birthDate
-              ? moment.unix(userData.birthDate).format("MM")
-              : "",
-            year: userData.birthDate
-              ? moment.unix(userData.birthDate).format("YYYY")
-              : ""
-          },
-          gender: userData.gender ? userData.gender : gender.male,
-          category: userData.category ? userData.category : "",
-          phoneNumber: userData.phoneNumber ? userData.phoneNumber : "",
-          website: userData.website ? userData.website : "",
-          profile_description: userData.profileDescription
-            ? userData.profileDescription
-            : "",
-          offer_tag: userData.offerTag ? userData.offerTag : [],
-          inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
-          offerTagList:
-            userData.offerTagList.length === 0 ? userData.offerTagList : [],
-          inquiryTagList:
-            userData.inquiryTagList.length === 0 ? userData.inquiryTagList : []
-        }
-      });
-    }
-    this.setState({ isLoading: false });
-  };
-
-  handlegetDOBDate = () => {
-    const { form } = this.state;
-    if (form.birthDate.day && form.birthDate.mon && form.birthDate.year) {
-      const date =
-        form.birthDate.mon +
-        "/" +
-        form.birthDate.day +
-        "/" +
-        form.birthDate.year;
-      return date;
-    }
-  };
-
-  // handelSubmit called when click on submit
-  handleSubmit = e => {
-    e.preventDefault();
-    const data = {
-      profileImage: this.props.profile ? this.props.profile : "",
-      name: this.state.form.name_company,
-      category: this.state.form.category,
-      gender: this.state.form.gender,
-      offerTag: this.state.form.offer_tag,
-      inquiryTag: this.state.form.inquiry_tag,
-      birthDate: this.handlegetDOBDate(),
-      phoneNumber: this.state.form.phoneNumber,
-      location: {
-        latitude: this.state.form.location.lat,
-        longitude: this.state.form.location.lng,
-        address: this.state.form.location.address
-      },
-      profileDescription: this.state.form.profile_description,
-      website: this.state.form.website
-    };
-
-    const { userInfo } = this.state;
-    this.props.updateUserProfile(data).then(() => {
-      this.setState({ isLoading: true });
-      const errors = {};
-      if (
-        this.props.userDataByUsername.error &&
-        this.props.userDataByUsername.error.status === 400
-      ) {
-        errors.servererror = "Something went wrong";
-        this.setState({ error: errors });
-      } else if (userInfo) {
-        const data = {
-          username: userInfo.username
-        };
-        this.props.getUser(data).then(() => {
-          this.setDataOnLoad();
-        });
-      }
-    });
-  };
-
-  handleOnKeyDown = () => {};
-
-  handleEditProfile = () => {
-    this.props.handleModalInfoShow(modalType.edit_profile);
-  };
-
-  handleOfferTagDelete = id => {
-    const { form } = this.state;
-    this.setState({
-      form: {
-        ...this.state.form,
-        offer_tag: form.offer_tag.filter(
-          tag => tag !== form.offerTagList[id].id
-        ),
-        offerTagList: form.offerTagList.filter(
-          tag => tag.id !== form.offerTagList[id].id
-        )
-      }
-    });
-  };
-
-  handleCategory = (isFor, selected) => {
-    const { form } = this.state;
-    form[isFor] = selected;
-    this.setState({ form });
-  };
 }
 
 const mapStateToProps = state => ({
