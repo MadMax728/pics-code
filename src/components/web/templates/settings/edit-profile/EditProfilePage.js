@@ -491,14 +491,6 @@ class EditProfile extends Component {
                 <label htmlFor="description">
                   {Translations.editProfile.profile_description}
                 </label>
-                {/* <Text
-                  type="text"
-                  className="form-control"
-                  id="profile_description"
-                  name="profile_description"
-                  value={form.profile_description}
-                  onChange={this.handleChangeField}
-                /> */}
                 <textarea
                   type="text"
                   className="form-control full-width-textarea"
