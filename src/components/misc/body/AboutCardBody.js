@@ -49,25 +49,32 @@ const AboutCardBody = ({ about }) => {
               <span>{Translations.about.web_site}</span>
               <span>{about.website}</span>
             </li>
-            <li>
-              <span>{Translations.about.profile_description}</span>
-              <span>{about.profileDescription}</span>
-            </li>
           </ul>
         </div>
+
+        <div className="profile-description">
+          <div className="section-title">
+            {Translations.about.profile_description}
+          </div>
+          <div className="profile-content">{about.profileDescription}</div>
+        </div>
+
         <div className="personal-interest">
           <div className="section-title">
             {Translations.about.personal_interest}
           </div>
           <div className="section-subtitle">{Translations.about.offer_tag}</div>
           <div className="tags-wrapper">
-            {about && about.offerTagList && about.offerTagList.length && about.offerTagList.map((offer) => {
-              return (
-                <Link to={""} key={offer.id}>
-                  {offer.offerTagName}
-                </Link>
-              );
-            })}
+            {about &&
+              about.offerTagList &&
+              about.offerTagList.length &&
+              about.offerTagList.map(offer => {
+                return (
+                  <Link to={""} key={offer.id}>
+                    {offer.offerTagName}
+                  </Link>
+                );
+              })}
           </div>
         </div>
         <div className="inquiry-tag">
@@ -75,13 +82,15 @@ const AboutCardBody = ({ about }) => {
             {Translations.about.inquiry_tag}
           </div>
           <div className="tags-wrapper">
-            {about && about.inquiryTagList.length !== undefined && about.inquiryTagList.map((inquiry) => {
-              return (
-                <Link to={""} key={inquiry.id}>
-                  {inquiry.inquiryTagName}
-                </Link>
-              );
-            })}
+            {about &&
+              about.inquiryTagList.length !== undefined &&
+              about.inquiryTagList.map(inquiry => {
+                return (
+                  <Link to={""} key={inquiry.id}>
+                    {inquiry.inquiryTagName}
+                  </Link>
+                );
+              })}
           </div>
         </div>
       </div>

@@ -76,7 +76,9 @@ class EditProfile extends Component {
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
-      nextProps.history.push(routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword);
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
     }
     return null;
   }
@@ -126,6 +128,8 @@ class EditProfile extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
+    console.log("on change");
+    console.log(event.values);
     form[event.values.name] = event.values.val;
     this.setState({ form });
     // this.formValid();
@@ -487,9 +491,9 @@ class EditProfile extends Component {
                 <label htmlFor="description">
                   {Translations.editProfile.profile_description}
                 </label>
-                <Text
+                <textarea
                   type="text"
-                  className="form-control"
+                  className="form-control full-width-textarea"
                   id="profile_description"
                   name="profile_description"
                   value={form.profile_description}
@@ -618,7 +622,11 @@ class EditProfile extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.values.name] = event.values.val;
+    if (event.target.name === "profile_description") {
+      form[event.target.name] = event.target.value;
+    } else {
+      form[event.values.name] = event.values.val;
+    }
     this.setState({ form });
     // this.formValid();
   };
@@ -747,7 +755,6 @@ class EditProfile extends Component {
     form[isFor] = selected;
     this.setState({ form });
   };
-
 }
 
 const mapStateToProps = state => ({
