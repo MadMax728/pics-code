@@ -469,7 +469,7 @@
           &:before {
             content: "\2022";
             position: absolute;
-            top: 1px;
+            top: 0;
             left: 0;
           }
           color: $silver_color;
