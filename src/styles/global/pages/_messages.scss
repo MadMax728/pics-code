@@ -103,6 +103,7 @@
             float: left;
             width: 100%;
             border-bottom: 1px solid #ddd;
+            transition: 0.3s all ease-in-out 0s;
             color: $silver_color;
             &:first-child {
               color: $charcoal_color;
