@@ -66,7 +66,7 @@ class HashTagUsername extends Component {
     const commentArr = e.target.value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
 
-    let keyCode = e.keyCode ? e.keyCode : e.which;
+    const keyCode = e.keyCode ? e.keyCode : e.which;
 
     if (lastText.charAt(0) === "#") {
       this.props.handleSetState(e.target.value, this.hashTagShow);
@@ -76,7 +76,7 @@ class HashTagUsername extends Component {
     }
 
     let limitCount = "";
-    let limitNum = this.props.maxLimit;
+    const limitNum = this.props.maxLimit;
     if (commentText.length > limitNum) {
       commentText = limitField.value.substring(0, limitNum);
     } else {
@@ -95,7 +95,7 @@ class HashTagUsername extends Component {
 
   handleAddHashTag = value => {
     value = value.slice(1);
-    let { hashTagList } = this.state;
+    const { hashTagList } = this.state;
     const indexOf = hashTagList.findIndex(f => {
       return f.hashTagName === value;
     });
@@ -187,7 +187,7 @@ class HashTagUsername extends Component {
           delayShow={0}
           delayUpdate={0}
           place={"bottom"}
-          border={true}
+          border
           type={"light"}
         />
 
@@ -199,7 +199,7 @@ class HashTagUsername extends Component {
           delayShow={0}
           delayUpdate={0}
           place={"bottom"}
-          border={true}
+          border
           type={"light"}
         />
       </div>

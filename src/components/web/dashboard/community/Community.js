@@ -51,7 +51,7 @@ class Community extends Component {
                 className: classNameText,
                 userId: user.id,
                 handleActionClick: this.handleSubscribed,
-                btnText: btnText,
+                btnText,
                 isLoading: userListIsLoading
               };
               return (

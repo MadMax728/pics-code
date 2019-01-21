@@ -66,7 +66,7 @@ class MLeftContainer extends Component {
     const { userList } = this.state;
     this.setState({ search: e.target.value });
     if(search) {
-      let filtered = userList.filter( u => {
+      const filtered = userList.filter( u => {
         if(u.name && u.username.includes(search)) return true;
         if(u.email && u.email.includes(search)) return true;
         if(u.name && u.name.includes(search)) return true;

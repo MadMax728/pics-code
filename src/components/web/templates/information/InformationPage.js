@@ -66,6 +66,7 @@ class InformationPage extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.getCampaignDetailsData();
+    this.handleCommentsSections();
   };
 
   componentWillReceiveProps = nextProps => {

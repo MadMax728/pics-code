@@ -5,8 +5,9 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
-import { ImageItem, VideoItem } from "../../../../ui-kit";
+import { ImageItem, VideoItem, UserImageItem, UserTitleItem } from "../../../../ui-kit";
 import * as enumerations from "../../../../../lib/constants/enumerations";
+import { DateFormat } from "../../../../Factory";
 
 class StepThree extends Component {
   constructor(props) {
@@ -105,20 +106,10 @@ class StepThree extends Component {
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
             <div className="feed_header">
-              <div className="padding-right-15 profile_image">
-                <img
-                  src={images.image}
-                  alt="feed1"
-                  className="img-circle img-responsive"
-                />
-              </div>
-              <div className="no-padding titles_wrapper">
-                <div className="normal_title">{form.title}</div>
-                <div className="secondary_title">{userInfo.username}</div>
-                <div className="grey_title">
-                  {moment(todayDate).format("DD.MM.YYYY")} in Category
-                </div>
-              </div>
+              <UserImageItem item={userInfo ? userInfo.profileUrl : images.image} customClass={`padding-rl-10`} />
+              <UserTitleItem date={DateFormat(todayDate, Translations.date_format.date, true)}
+                             title={form.title} 
+                             username={userInfo ? userInfo.username : ""} />
               <div className="like_wrapper">
                 <img
                   src={images.blue_heart}

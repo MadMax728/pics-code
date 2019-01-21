@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
 import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
+
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
@@ -22,6 +25,34 @@ class ImagesBOPage extends Component {
     };
   }
 
+  render() {
+    let { imageList } = this.state;
+    const { isLoading, form } = this.state;
+    const { reportedContentData, searchData } = this.props;
+    imageList = search(imageList,"userName", form.search || searchData.searchKeyword);
+    
+    return (
+      <div>
+        <div className="padding-rl-10 middle-section">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          {imageList && this.renderImageList()}
+          {!imageList && isLoading && <CampaignLoading />}
+          {imageList && imageList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.images}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.all : 0} 
+            outstanding={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.outstanding : 0}
+            processed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.processed : 0} 
+            notProcessed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.notProcessed : 0}
+          />
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     const data = {
       type: "get",
@@ -30,6 +61,10 @@ class ImagesBOPage extends Component {
     this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
   getBackOfficeReportedContent = (data) => {
@@ -42,7 +77,6 @@ class ImagesBOPage extends Component {
       }
     });
   }
-
 
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
@@ -119,34 +153,6 @@ class ImagesBOPage extends Component {
       this.getBackOfficeReportedContent(data);
       this.getBackOfficeReportedStatistics(data);
     }
-  }
-
-  render() {
-    let { imageList } = this.state;
-    const { isLoading, form } = this.state;
-    const { reportedContentData, searchData } = this.props;
-    imageList = search(imageList,"userName", form.search || searchData.searchKeyword);
-    
-    return (
-      <div>
-        <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {imageList && this.renderImageList()}
-          {!imageList && isLoading && <CampaignLoading />}
-          {imageList && imageList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
-        </div>
-        <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.images}`} 
-            handleEvent={this.handleReported} 
-            all={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.all : 0} 
-            outstanding={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.outstanding : 0}
-            processed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.processed : 0} 
-            notProcessed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.notProcessed : 0}
-          />
-        </div>
-      </div>
-    );
   }
 }
 
