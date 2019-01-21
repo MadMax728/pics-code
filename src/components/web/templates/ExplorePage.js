@@ -5,54 +5,57 @@ import PropTypes from "prop-types";
 import { NoDataFoundCenterPage, CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
+import { search } from "../../../lib/utils/helpers";
 
 class ExploreRoot extends Component {
-
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      exploreList: null
+    };
+  }
 
   render() {
-    const { exploreList, isLoadingexplores } = this.props;
+    let { exploreList } = this.state;
+    const { isLoadingexplores, searchData } = this.props;
+    exploreList = search(exploreList, "userName", searchData.searchKeyword);
+
     return (
       <div className={"middle-section padding-rl-10"}>
-        { !isLoadingexplores && ( !exploreList || (exploreList && !exploreList.length) ) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
-        { exploreList && exploreList.length && !isLoadingexplores && this.renderExploreList()}
-        { isLoadingexplores && <CampaignLoading />}
+        {exploreList && !isLoadingexplores && this.renderExploreList()}
+        {isLoadingexplores && <CampaignLoading />}
+        {!isLoadingexplores &&
+          (!exploreList || (exploreList && exploreList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
       </div>
     );
   }
-  
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (this.props.searchData.searchKeyword) {
-      this.props.getDashboard(
-        "explores",
-        "?isSearch=" + this.props.searchData.searchKeyword
-      );
-    } else {
-      this.props.getDashboard("explores", "");
-    }
+    this.handleSearch();
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      let searchParam = "";
-      if (searchKeyword) {
-        searchParam = "?isSearch=" + searchKeyword;
-      }
-      this.props.getDashboard("explores", searchParam);
-    }
+  handleSearch = () => {
+    this.props.getDashboard("explores", "").then(() => {
+      const { exploreList } = this.props;
+      this.setState({ exploreList });
+    });
   };
 
   handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.handleSearch();
+    }
   };
 
   renderExploreList = () => {
-    const { exploreList } = this.props;
+    let { exploreList } = this.state;
+    const { searchData } = this.props;
+    exploreList = search(exploreList, "userName", searchData.searchKeyword);
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
@@ -64,7 +67,6 @@ class ExploreRoot extends Component {
       );
     });
   };
-
 }
 
 ExploreRoot.propTypes = {
