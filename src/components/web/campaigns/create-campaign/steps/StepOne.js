@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
+import { ImageCropper, PlaceAutoCompleteLocation, UserImageItem, UserTitleItem } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
@@ -31,25 +31,12 @@ class StepOne extends Component {
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
-          <div className="no-padding profile_image">
-            <img
-              src={userInfo ? userInfo.profileUrl : images.image}
-              alt="image1"
-              className="img-circle img-responsive"
-            />
-          </div>
-          <div className="user-title">
-            <div className="normal_title">
-              {form.title
+          <UserImageItem item={userInfo ? userInfo.profileUrl : images.image}></UserImageItem>
+          <UserTitleItem title={form.title
                 ? form.title
-                : Translations.create_campaigns.title_of_campaigns}
-            </div>
-            <div className="secondary_title">
-              {userInfo ? userInfo.username : ""}
-            </div>
-          </div>
+                : Translations.create_campaigns.title_of_campaigns} username={userInfo ? userInfo.username : ""} />
           <form>
-            <div className="form-group">
+            <div className="pt-10 form-group">
               <label htmlFor="title">
                 {Translations.create_campaigns.add_title}
               </label>

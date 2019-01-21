@@ -392,11 +392,12 @@ class HomeRoute extends Component {
     return <SettingCampaignStatisticsPage match={match.match} />;
   };
 
-  handleParticipant = () => {
+  handleParticipant = (match) => {
     return (
       <ParticipantPage
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
+        params={match.match.params}
       />
     );
   };
