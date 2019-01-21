@@ -5,6 +5,7 @@ import Comments from "../web/templates/information/Comments";
 import { Translations } from "../../lib/translations";
 import { DateFormat } from "../Factory";
 import FeedHeader from "./headers/FeedHeader";
+import { InfoWrapperItem, DescriptionItem } from "./items";
 import { ImageItem, VideoItem, ThreeDots } from "../ui-kit";
 import * as enumerations from "../../lib/constants/enumerations";
 
@@ -29,9 +30,7 @@ const CampaignDetailsCard = ({
                 <h3 className="no-padding no-margin">
                     {campaignDetails.title}
                 </h3>
-                <div className="text">
-                    <div dangerouslySetInnerHTML={{__html: campaignDetails.description}} />
-                </div>
+                <DescriptionItem desc={campaignDetails.description} />
                 <div className="info-img">
                     {campaignDetails.typeContent &&
                         campaignDetails.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
@@ -69,87 +68,14 @@ const CampaignDetailsCard = ({
                     <div className="feed_content col-xs-12">
                         <div className="feed_description col-xs-12">
                             <div className="col-sm-6 no-padding">
-                                <div className="info_wrapper">
-                                    <span className="normal_title">Start: </span>
-                                    <span className="secondary_title">
-                                        {DateFormat(campaignDetails.startDate, Translations.date_format.date, true)}
-                                    </span>
-                                </div>
-                                <div className="info_wrapper">
-                                    <span className="normal_title">Procedure: </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.procedure}
-                                    </span>
-                                </div>
-                                <div className="info_wrapper">
-                                    <span className="normal_title">Target group: </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.target_group}
-                                    </span>
-                                </div>
+                                <InfoWrapperItem title={'Start'} value= {DateFormat(campaignDetails.startDate, Translations.date_format.date, true)} />
+                                <InfoWrapperItem title={'Procedure'} value={campaignDetails.procedure} />
+                                <InfoWrapperItem title={'Target group'} value={campaignDetails.target_group} />
                             </div>
                             <div className="col-sm-6 no-padding">
-                                <div className="info_wrapper">
-                                    <span className="normal_title">End: </span>
-                                    <span className="secondary_title">
-                                        {DateFormat(campaignDetails.endDate, Translations.date_format.date, true)}
-                                    </span>
-                                </div>
-                                <div className="info_wrapper">
-                                    <span className="normal_title">Type: </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.typeContent}
-                                    </span>
-                                </div>
-                                <div className="info_wrapper">
-                                    <span className="normal_title">Applications: </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.applications}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <hr />
-                        <div className="feed_description col-xs-12">
-                            <div className="col-sm-6 no-padding">
-                                <div className="info_wrapper">
-                                    <span className="normal_title">
-                                        {Translations.create_campaigns.offer}:{" "}
-                                    </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.offerTagList &&
-                                            campaignDetails.offerTagList[0].offerTagName}
-                                    </span>
-                                </div>
-                                <div className="info_wrapper">
-                                    <span className="normal_title">
-                                        {Translations.create_campaigns.inquiry}:{" "}
-                                    </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.inquiryTagList &&
-                                            campaignDetails.inquiryTagList[0].inquiryTagName}
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="col-sm-6 no-padding">
-                                <div className="info_wrapper">
-                                    <span className="normal_title">
-                                        {Translations.create_campaigns.offer_tag}:{" "}
-                                    </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.offerTagList &&
-                                            campaignDetails.offerTagList[0].offerTagName}
-                                    </span>
-                                </div>
-                                <div className="info_wrapper">
-                                    <span className="normal_title">
-                                        {Translations.create_campaigns.inquiry_tag}:{" "}
-                                    </span>
-                                    <span className="secondary_title">
-                                        {campaignDetails.inquiryTagList &&
-                                            campaignDetails.inquiryTagList[0].inquiryTagName}
-                                    </span>
-                                </div>
+                                <InfoWrapperItem title={'End'} value={DateFormat(campaignDetails.endDate, Translations.date_format.date, true)} />
+                                <InfoWrapperItem title={'Type'} value={campaignDetails.typeContent} />
+                                <InfoWrapperItem title={'Applications'} value={campaignDetails.applications} />
                             </div>
                         </div>
                     </div>
