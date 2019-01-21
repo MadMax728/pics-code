@@ -560,6 +560,58 @@ button:focus {
     }
   }
 }
+.preview-modal{
+  background: #333;
+  .modal-dialog{
+    width: 915px;
+    @media (min-width: 768px){
+      margin: 100px auto 30px;
+    }
+  }
+  .modal-content{
+    display: inline-block;
+    width: 100%;
+    padding: 20px;
+    .closeBtn{
+      position: absolute;
+      right: -40px;
+      top: -25px;
+      background: transparent;
+      border: 0;
+      img{
+        height: 13px;
+        width: 13px;
+      }
+    }
+    .modal-header{
+      padding: 5px 10px;
+      .modal-title{
+        font-size: 20px;
+        margin-bottom: 0px;
+        padding: 0 15px 10px;
+      }
+    }
+    .modal-body{
+      padding: 5px 10px;
+      .preview-content{
+        .preview-div-wrapper{
+           padding-top:10px;
+           padding-bottom: 10px;
+          .title-text{
+            color: #4a4a4a;
+            font-family: "Helvetica-Bold";
+            font-size: 14px;
+          }
+          .content-text{
+            font-family: "Helvetica";
+            color: #4a4a4a;
+            font-weight: normal;
+          }
+        }
+      }
+    }
+  }
+}
 .scrollStyle::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -1075,6 +1127,29 @@ section.loader-wrapr {
   margin-top: 10px !important;
   min-height: 8px !important;
 }
+.descTitle {
+  width: 50% !important;
+  margin-top: 10px !important;
+  min-height: 12px !important;
+}
+.descCompain{
+  width: 30% !important;
+  margin-top: 20px !important; 
+}
+.lists{
+  width: 50% !important;
+}
+.info-img{
+  width: 70%;
+  overflow: hidden;
+  max-height: 400px;
+}
+.padd-15{
+  padding: 15px !important;
+}
+.hr-color hr{
+  border: 1px solid #eee;
+}
 .desc1sm{
   width: 40% !important;
   margin-top: 8px !important;
@@ -1353,7 +1428,7 @@ section.loader-wrapr {
     span.tag-wrapper.ReactTags__tag.cursor-move {
       border: 1px solid #0f7aba;
       border-radius: 37.5px;
-      padding: 2px 25px;
+      padding:4px 25px 2px;
       margin: 5px 5px;
       display: inline-block;
       a.ReactTags__remove {
@@ -1563,4 +1638,16 @@ section.loader-wrapr {
       }
     }
   }
+}
+.width-70{
+  width: 70% !important;
+}
+.padding-rl15{
+  padding: 0 15px;
+}
+.padding-left0{
+  padding-left: 0 !important;
+}
+.margin-left0{
+  margin-left: 0 !important;
 }

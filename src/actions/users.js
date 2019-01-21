@@ -13,12 +13,6 @@ const getUserListSucceeded = data => ({
   payload: data
 });
 
-const getUserListFailed = error => ({
-  type: types.GET_USER_LIST_FAILED,
-  payload: error,
-  error: true
-});
-
 /**
  *  getUserList
  * { subscribed, unknown, likes, company }
@@ -73,7 +67,7 @@ export const sendRequest = requestData => {
     };
     return usersService.sendRequest(requestData, header).then(
       res => {
-        dispatch(sendRequestSucceeded(res.data.success));
+        dispatch(sendRequestSucceeded(res.data.data));
       },
       error => {
         dispatch(sendRequestFailed(error.response));
@@ -176,7 +170,7 @@ export const getUnsubscribe = subscribeId => {
     const header = { Authorization: storage.accessToken };
     return usersService.getUnsubscribe("", subscribeId, header).then(
       res => {
-        dispatch(getUnsubscribeSucceeded(res.data.success));
+        dispatch(getUnsubscribeSucceeded(res.data.data));
       },
       error => {
         dispatch(getUnsubscribeFailed(error.response));

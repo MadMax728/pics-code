@@ -6,15 +6,7 @@ import { users_list } from "../../../../mock-data/users-list";
 import { Translations } from "../../../../lib/translations";
 
 class Subscribe extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    console.log(users_list);
-  }
-
+  
   handleModalHide = () => {
     this.props.handleModalHide();
     this.props.handleModalInfoHide();

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
-import moment from "moment";
 import { Auth } from "../../../../../auth";
 import { DateFormat } from "../../../../Factory";
 import { Translations } from "../../../../../lib/translations";
@@ -11,6 +10,7 @@ let userInfo = null;
 if (storage) {
   userInfo = JSON.parse(storage.userInfo);
 }
+
 class Preview extends Component {
   constructor(props) {
     super(props);
@@ -19,15 +19,9 @@ class Preview extends Component {
     };
   }
 
-  componentDidMount = () => {
-    if (userInfo) {
-      this.setState({ userInfo });
-    }
-  };
 
   render() {
     const { form } = this.props;
-    console.log(form.actual_img);
     const todayDate = new Date();
 
     return (
@@ -69,7 +63,7 @@ class Preview extends Component {
                       {userInfo && userInfo.username && userInfo.username}
                     </div>
                     <div className="grey_title">
-                      {moment(todayDate).format("DD.MM.YYYY")}
+                      { todayDate && DateFormat(todayDate, Translations.date_format.date, true)}
                       in Category
                     </div>
                   </div>
@@ -87,8 +81,7 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Start: </span>
                         <span className="secondary_title">
-                          {form.startDate &&
-                            form.startDate.format("DD.MM.YYYY")}
+                          { form.startDate && DateFormat(form.startDate, Translations.date_format.date, true)}
                         </span>
                       </div>
                       <div className="info_wrapper">
@@ -108,7 +101,7 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">End: </span>
                         <span className="secondary_title">
-                          {form.endDate.format("DD.MM.YYYY")}
+                          { form.endDate && DateFormat(form.endDate, Translations.date_format.date, true)}
                         </span>
                       </div>
                       <div className="info_wrapper">
@@ -127,6 +120,13 @@ class Preview extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    if (userInfo) {
+      this.setState({ userInfo });
+    }
+  };
+
 }
 
 Preview.propTypes = {

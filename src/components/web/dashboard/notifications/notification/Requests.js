@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import { request_list } from "../../../../../mock-data";
 import { Translations } from "../../../../../lib/translations";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import * as routes from "../../../../../lib/constants/routes";
 import {
   getPendingUserList,
   getUnsubscribe,
@@ -14,65 +12,7 @@ import {
 import moment from "moment";
 
 class Requests extends Component {
-  constructor(props, context) {
-    super(props, context);
-  }
-
-  componentDidMount = () => {
-    this.getRequestList();
-  };
-
-  getRequestList = () => {
-    this.props.getPendingUserList().then(() => {
-      if (
-        this.props.usersData.error &&
-        this.props.usersData.error.status === 400
-      ) {
-        //  Error
-      } else if (this.props.usersData.pendingUserList) {
-        // Success
-      }
-    });
-  };
-
-  handleAccepted = e => {
-    console.log(e.target.id);
-    if (e.target.id) {
-      const requestData = { following: e.target.id, isAccepted: true };
-      this.props.acceptRequest(requestData).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          //  Error
-        } else if (this.props.usersData.isAcceptRequest) {
-          console.log("aacept", this.props.usersData.isAcceptRequest);
-          this.getRequestList();
-          this.props.getDashboard("users");
-        }
-      });
-    }
-  };
-
-  handleRejected = e => {
-    const subscribedId = e.target.id;
-    console.log(subscribedId);
-    if (subscribedId) {
-      this.props.getUnsubscribe(subscribedId).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          // Error
-        } else if (this.props.usersData.isUnsubscribed) {
-          console.log("reject", this.props.usersData.isUnsubscribed);
-          this.getRequestList();
-          this.props.getDashboard("users");
-        }
-      });
-    }
-  };
-
+  
   render() {
     return (
       <div className="tab-pane fade active in" id="nav-requests">
@@ -143,6 +83,62 @@ class Requests extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.getRequestList();
+  };
+
+  getRequestList = () => {
+    this.props.getPendingUserList().then(() => {
+      if (
+        this.props.usersData.error &&
+        this.props.usersData.error.status === 400
+      ) {
+        //  Error
+      } else if (this.props.usersData.pendingUserList) {
+        // Success
+      }
+    });
+  };
+
+  handleAccepted = e => {
+    console.log(e.target.id);
+    if (e.target.id) {
+      const requestData = { following: e.target.id, isAccepted: true };
+      this.props.acceptRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          //  Error
+        } else if (this.props.usersData.isAcceptRequest) {
+          console.log("aacept", this.props.usersData.isAcceptRequest);
+          this.getRequestList();
+          this.props.getDashboard("users");
+        }
+      });
+    }
+  };
+
+  handleRejected = e => {
+    const subscribedId = e.target.id;
+    console.log(subscribedId);
+    if (subscribedId) {
+      this.props.getUnsubscribe(subscribedId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // Error
+        } else if (this.props.usersData.isUnsubscribed) {
+          console.log("reject", this.props.usersData.isUnsubscribed);
+          this.getRequestList();
+          this.props.getDashboard("users");
+        }
+      });
+    }
+  };
+
 }
 
 const mapStateToProps = state => ({

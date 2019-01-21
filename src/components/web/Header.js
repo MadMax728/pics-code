@@ -5,7 +5,6 @@ import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
-import NavItem from "react-bootstrap/lib/NavItem";
 import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";

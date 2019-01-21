@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getSaved } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
@@ -14,10 +14,16 @@ class SavedPage extends Component {
     };
   }
 
-
-  handleRemove = (id) => {
+  render() {
+    const { isLoading } = this.props;
     const { savedList } = this.state;
-    this.setState({savedList: savedList.filter(e => e.id !== id)});
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {savedList && this.renderSavedList()}
+        {!savedList && isLoading && <CampaignLoading />}
+        { !isLoading && ( !savedList || ( savedList && savedList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+      </div>
+    );
   }
 
   componentDidMount = () => {
@@ -28,6 +34,14 @@ class SavedPage extends Component {
       }
     });
   };
+
+  handleRefresh = () => {
+  };
+
+  handleRemove = (id) => {
+    const { savedList } = this.state;
+    this.setState({savedList: savedList.filter(e => e.id !== id)});
+  }
 
   renderSavedList = () => {
     const { savedList } = this.state;
@@ -99,16 +113,6 @@ class SavedPage extends Component {
     });
   };
 
-  render() {
-    const { isLoading } = this.props;
-    const { savedList } = this.state;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {savedList && this.renderSavedList()}
-        {!savedList && isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 SavedPage.propTypes = {

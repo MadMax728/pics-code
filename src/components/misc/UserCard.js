@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import UserCardBody from "./body/UserCardBody";
-import { Auth } from "../../auth";
 import {
   sendRequest,
   getUnsubscribe,
@@ -21,6 +20,22 @@ class UserCard extends Component {
       item: this.props.item,
       index: this.props.index
     };
+  }
+
+  render() {
+    const { item, index } = this.state;
+    const { isReport, isBackOffice } = this.props;
+
+    return (
+      <UserCardBody
+        user={item}
+        index={index}
+        handleSubscribed={this.handleSubscribed}
+        isReport={isReport}
+        isBackOffice={isBackOffice}/* eslint-disable */
+        renderReportTips={() => this.renderReportTips(item.id)}
+      />
+    );
   }
 
   componentDidMount = () => {
@@ -66,11 +81,11 @@ class UserCard extends Component {
 
   renderReportTips = (id) => {
     const { item } = this.state;
-    
+
     const reportTips = [
       {
-        name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
-        handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+        name: item.reportStatus === enumerations.reportType.lock ? Translations.tool_tips.unlock : Translations.tool_tips.lock,
+        handleEvent: item.reportStatus === enumerations.reportType.lock ? this.handleUnlockContent : this.handleLockContent,
       },
       {
         name: Translations.tool_tips.do_not,
@@ -85,17 +100,17 @@ class UserCard extends Component {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
       reportContent: "User"
-    }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
   }
-  
+
   handleSetState = (data) => {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
-    this.setState({item});
+    this.setState({ item });
     this.props.handleRemove(item.id)
   }
 
@@ -104,39 +119,23 @@ class UserCard extends Component {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
       reportContent: "User"
-    }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
   }
 
-  handleUnlockContent= (e) => {
+  handleUnlockContent = (e) => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
       reportContent: "User"
-    }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
   }
-  
 
-  render() {
-    const { item, index } = this.state;
-    const { isReport, isBackOffice } = this.props;
-
-    return (
-      <UserCardBody
-        user={item}
-        index={index}
-        handleSubscribed={this.handleSubscribed}
-        isReport={isReport}
-        isBackOffice={isBackOffice}/* eslint-disable */
-        renderReportTips={() => this.renderReportTips(item.id)}
-      />
-    );
-  }
 }
 
 const mapStateToProps = state => ({

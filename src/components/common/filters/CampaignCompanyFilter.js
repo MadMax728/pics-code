@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import { setCookie, getCookie } from "../../../lib/utils/helpers";
+import { setCookie } from "../../../lib/utils/helpers";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -66,32 +66,9 @@ const relevanceItems = [
   }
 ];
 
-const languageItems = [
-  {
-    name: Translations.languages.english,
-    className: "radio-btn lbl-margin",
-    checked: true,
-    value: Translations.languages.english
-  },
-  {
-    name: Translations.languages.german,
-    className: "radio-btn ",
-    checked: false,
-    value: Translations.languages.german
-  }
-];
-
 const targetGroupOptions = staticData;
-
 const radiusItems = staticData;
-
 const categoryItems = staticData;
-
-const offerItems = staticData;
-
-const inquiryItems = staticData;
-
-const languageItem = languageItems;
 
 class CampaignCompanyFilter extends Component {
   constructor(props) {
@@ -169,30 +146,6 @@ class CampaignCompanyFilter extends Component {
         className: "filter-title",
         type: Translations.left_sidebar_filter.target_group.type,
         items: targetGroupOptions
-      },
-      {
-        name: Translations.left_sidebar_filter.offer.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer.type,
-        items: offerItems
-      },
-      {
-        name: Translations.left_sidebar_filter.offer_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer_tag.type,
-        items: []
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry.type,
-        items: inquiryItems
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry_tag.type,
-        items: []
       }
     ];
     return (
@@ -249,7 +202,6 @@ class CampaignCompanyFilter extends Component {
       currentLanguage: Translations.getLanguage()
     });
   };
-
 }
 
 CampaignCompanyFilter.propTypes = {

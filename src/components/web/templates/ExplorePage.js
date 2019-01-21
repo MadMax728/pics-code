@@ -2,11 +2,24 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
 import PropTypes from "prop-types";
-import { CampaignLoading } from "../../ui-kit";
+import { NoDataFoundCenterPage, CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class ExploreRoot extends Component {
+
+
+  render() {
+    const { exploreList, isLoadingexplores } = this.props;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        { !isLoadingexplores && ( !exploreList || (exploreList && !exploreList.length) ) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        { exploreList && exploreList.length && !isLoadingexplores && this.renderExploreList()}
+        { isLoadingexplores && <CampaignLoading />}
+      </div>
+    );
+  }
+  
   componentDidMount = () => {
     window.scrollTo(0, 0);
     if (this.props.searchData.searchKeyword) {
@@ -35,6 +48,9 @@ class ExploreRoot extends Component {
     }
   };
 
+  handleRefresh = () => {
+  };
+
   renderExploreList = () => {
     const { exploreList } = this.props;
     return exploreList.map(explore => {
@@ -49,15 +65,6 @@ class ExploreRoot extends Component {
     });
   };
 
-  render() {
-    const { exploreList, isLoadingexplores } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {exploreList && !isLoadingexplores && this.renderExploreList()}
-        {isLoadingexplores && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 ExploreRoot.propTypes = {

@@ -1,12 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 import PropTypes from "prop-types";
 
 class ParticipantsPage extends Component {
+
+  render() {
+    const { participantsList, isLoadingparticipants } = this.props;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {participantsList &&
+          !isLoadingparticipants &&
+          this.renderParticipantsList()}
+        { isLoadingparticipants && <CampaignLoading /> }
+        { !isLoadingparticipants && ( !participantsList || (participantsList && !participantsList.length) ) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     if (this.props.searchData.searchKeyword) {
       this.props.getSearch("");
@@ -35,6 +49,9 @@ class ParticipantsPage extends Component {
     }
   };
 
+  handleRefresh = () => {
+  };
+
   renderParticipantsList = () => {
     const { participantsList } = this.props;
     return participantsList.map(participant => {
@@ -51,17 +68,6 @@ class ParticipantsPage extends Component {
     });
   };
 
-  render() {
-    const { participantsList, isLoadingparticipants } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {participantsList &&
-          !isLoadingparticipants &&
-          this.renderParticipantsList()}
-        {isLoadingparticipants && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 ParticipantsPage.propTypes = {

@@ -47,6 +47,99 @@ class Comments extends Component {
     };
   }
 
+  render() {
+    const {
+      campaign,
+      form,
+      isEmoji
+    } = this.state;
+    const { isReport, userImage } = this.props;
+    const profileImage = userImage || images.image;
+    return (
+      <div className="feed-comment" id={campaign.id}>
+        <div className="comment-wrapper">
+          <form onSubmit={this.handleSubmit} ref={this.commentForm}>
+            <div className="no-padding profile_image">
+              <img
+                src={profileImage}
+                alt="image1"
+                className="img-circle img-responsive"
+              />
+            </div>
+            <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
+              <div className="comment-input">
+                <div className="form-group">
+                  <HashTagUsername
+                    className="form-control"
+                    type="text"
+                    placeholder="Write a comment"
+                    name="comment"
+                    handleSetState={this.handleSetState}
+                    value={form.comment}
+                    maxLimit={1000}
+                    isText
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right text-right">
+              <img
+                role="presentation"
+                src={images.emoji}
+                alt={"emoji1"}
+                onKeyPress={this.onEmojiOpen}
+                onClick={this.onEmojiOpen}
+              />
+              {isEmoji && (
+                <Picker
+                  onSelect={this.addEmoji}
+                  style={{
+                    position: "absolute",
+                    bottom: "135px",
+                    right: "60px"
+                  }}
+                />
+              )}
+            </div>
+            <input type="submit" hidden />
+          </form>
+        </div>
+
+        {!isReport &&
+          this.props.totalCommentsCount !== 0 &&
+          this.state.slicedCommentsData &&
+          this.state.slicedCommentsData.map(this.renderComment)}
+
+        {!isReport && this.props.totalCommentsCount > this.state.maxRange && (
+          <div
+            className="view-more-comments view-more-link"
+            id="7"
+            onClick={this.handleViewComment}
+            onKeyUp={this.handleViewComment}
+            role='button'
+            tabIndex="0"
+          >
+            {Translations.view_more_comments}
+          </div>
+        )}
+
+        {!isReport &&
+          this.props.totalCommentsCount > 2 &&
+          this.props.totalCommentsCount < this.state.maxRange && (
+            <div
+              className="view-more-comments view-more-link"
+              onClick={this.handleViewLessComment}
+              onKeyUp={this.handleViewLessComment}
+              role='button'
+              tabIndex="0"
+            >
+              {Translations.view_less_comments}
+            </div>
+          )}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     const commentData = this.state.comments.slice(
@@ -288,12 +381,8 @@ class Comments extends Component {
           </div>
         </div>
         <div className="comment-content col-md-12 no-padding">
-          {/* <div className="col-md-1" /> */}
           <div className="col-md-11"><div className="comment-inner-wrap">{this.renderEditComment(comment)}</div></div>
         </div>
-        {/* <div className="comment-content">
-          <p>{comment.comment}</p>
-        </div> */}
       </div>
     );
   };
@@ -313,91 +402,6 @@ class Comments extends Component {
     }
   };
 
-  render() {
-    const {
-      campaign,
-      form,
-      isEmoji
-    } = this.state;
-    const { isReport } = this.props;
-    return (
-      <div className="feed-comment" id={campaign.id}>
-        <div className="comment-wrapper">
-          <form onSubmit={this.handleSubmit} ref={this.commentForm}>
-            <div className="no-padding profile_image">
-              <img
-                src={images.image}
-                alt="image1"
-                className="img-circle img-responsive"
-              />
-            </div>
-            <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
-              <div className="comment-input">
-                <div className="form-group">
-                  <HashTagUsername
-                    className="form-control"
-                    type="text"
-                    placeholder="Write a comment"
-                    name="comment"
-                    handleSetState={this.handleSetState}
-                    value={form.comment}
-                    maxLimit={1000}
-                    isText
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-sm-2 col-xs-2 emoji_wrapper pull-right text-right">
-              <img
-                role="presentation"
-                src={images.emoji}
-                alt={"emoji1"}
-                onKeyPress={this.onEmojiOpen}
-                onClick={this.onEmojiOpen}
-              />
-              {isEmoji && (
-                <Picker
-                  onSelect={this.addEmoji}
-                  style={{
-                    position: "absolute",
-                    bottom: "135px",
-                    right: "60px"
-                  }}
-                />
-              )}
-            </div>
-            <input type="submit" hidden />
-          </form>
-        </div>
-
-        {!isReport &&
-          this.props.totalCommentsCount !== 0 &&
-          this.state.slicedCommentsData &&
-          this.state.slicedCommentsData.map(this.renderComment)}
-
-        {!isReport && this.props.totalCommentsCount > this.state.maxRange && (
-          <div
-            className="view-more-comments view-more-link"
-            id="7"
-            onClick={this.handleViewComment}
-          >
-            {Translations.view_more_comments}
-          </div>
-        )}
-
-        {!isReport &&
-          this.props.totalCommentsCount > 2 &&
-          this.props.totalCommentsCount < this.state.maxRange && (
-            <div
-              className="view-more-comments view-more-link"
-              onClick={this.handleViewLessComment}
-            >
-              {Translations.view_less_comments}
-            </div>
-          )}
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({
@@ -435,7 +439,8 @@ Comments.propTypes = {
   getComments: PropTypes.func,
   comments: PropTypes.any,
   addedComment: PropTypes.any,
-  campaignComments: PropTypes.any
+  campaignComments: PropTypes.any,
+  userImage: PropTypes.string
 };
 
 export default connect(

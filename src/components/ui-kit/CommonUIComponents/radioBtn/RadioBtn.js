@@ -12,20 +12,6 @@ class RadioBtn extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.setState({
-      selectedValue: this.props.items[0].name,
-      name: this.props.name
-    });
-  };
-
-  handleChange = (value, event) => {
-    this.setState({ selectedValue: value });
-    const { data } = this.state;
-    data.values = { name: event.target.name, val: value };
-    this.props.onChange(data);
-  };
-
   render() {
     const { items, name } = this.props;
     return (
@@ -56,6 +42,21 @@ class RadioBtn extends Component {
       </RadioGroup>
     );
   }
+
+  componentDidMount = () => {
+    this.setState({
+      selectedValue: this.props.items[0].name,
+      name: this.props.name
+    });
+  };
+
+  handleChange = (value, event) => {
+    this.setState({ selectedValue: value });
+    const { data } = this.state;
+    data.values = { name: event.target.name, val: value };
+    this.props.onChange(data);
+  };
+
 }
 
 RadioBtn.propTypes = {

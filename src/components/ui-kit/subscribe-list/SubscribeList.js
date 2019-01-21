@@ -2,22 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ToolTip } from "..";
 
-const propTypes = {
-  id: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  dataTip: PropTypes.string.isRequired,
-  dataClass: PropTypes.string.isRequired,
-  getContent: PropTypes.any.isRequired,
-  effect: PropTypes.string.isRequired,
-  delayHide: PropTypes.number.isRequired,
-  delayShow: PropTypes.number.isRequired,
-  delayUpdate: PropTypes.number.isRequired,
-  place: PropTypes.string.isRequired,
-  border: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
-  valueName: PropTypes.string.isRequired
-};
 
 class SubscribeList extends Component {
   constructor(props) {
@@ -61,6 +45,24 @@ class SubscribeList extends Component {
     );
   }
 }
+
+
+const propTypes = {
+  id: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  dataTip: PropTypes.string.isRequired,
+  dataClass: PropTypes.string.isRequired,
+  getContent: PropTypes.any.isRequired,
+  effect: PropTypes.string.isRequired,
+  delayHide: PropTypes.number.isRequired,
+  delayShow: PropTypes.number.isRequired,
+  delayUpdate: PropTypes.number.isRequired,
+  place: PropTypes.string.isRequired,
+  border: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  valueName: PropTypes.string.isRequired
+};
 
 SubscribeList.propTypes = propTypes;
 

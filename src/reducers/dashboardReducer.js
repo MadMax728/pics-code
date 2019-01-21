@@ -1,9 +1,6 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const isLoading = "isLoading";
-const error = "error";
-
 const dashboardReducer = (state = initialState.dashboardData, action) => {
   switch (action.type) {
     // Get DASHBOARD

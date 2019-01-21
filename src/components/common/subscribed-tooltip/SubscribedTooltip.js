@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 import { connect } from "react-redux";
-import { Auth } from "../../../auth";
 import {
   getFollowUserList,
   sendRequest,
@@ -16,90 +15,6 @@ class SubscribedTooltip extends Component {
     super(props);
     this.state = {};
   }
-
-  handleKeyPress = () => {};
-
-  componentDidMount = () => {
-    this.getTooltipUserList(this.props.userId);
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.userId !== nextProps.userId) {
-      this.getTooltipUserList(nextProps.userId);
-    }
-
-    if (this.props.userDataByUsername.user) {
-      if (
-        this.props.userDataByUsername.user.data.subscribedCount !==
-        nextProps.userDataByUsername.user.data.subscribedCount
-      ) {
-        this.getTooltipUserList(nextProps.userId);
-      }
-    }
-  }
-
-  // Tooltip List
-  getTooltipUserList = userId => {
-    if (userId) {
-      const userRequestData = { id: userId, type: "followers" };
-      this.props.getFollowUserList("subscribed", userRequestData).then(() => {
-        // Success
-      });
-    }
-  };
-
-  // Left sidebar - All User List
-  getAllUserData = () => {
-    this.props.getDashboard("users").then(() => {
-      if (this.props.usersList) {
-        this.setState({ usersList: this.props.usersList });
-      }
-    });
-  };
-
-  // Top Bar - User Info
-  getUserInfo = username => {
-    const data = { username };
-    this.props.getUser(data).then(() => {
-      if (this.props.userDataByUsername.user.data) {
-        // Success
-      }
-    });
-  };
-
-  handleSubscribed = e => {
-    const usersList = this.props.subscribeData.subscribed;
-    const selectedUserList = usersList.find(user => user.id === e.target.id);
-    if (selectedUserList.subscribeId === "") {
-      const requestData = { followers: e.target.id };
-      this.props.sendRequest(requestData).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          // error
-        } else if (this.props.usersData.isRequestSend) {
-          this.getTooltipUserList(this.props.userId);
-          this.getAllUserData();
-          this.getUserInfo(selectedUserList.username);
-        }
-      });
-    } else {
-      const subscribedId = selectedUserList.subscribeId;
-      this.props.getUnsubscribe(subscribedId).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          // error
-        } else if (this.props.usersData.isUnsubscribed) {
-          this.getTooltipUserList(this.props.userId);
-          this.getAllUserData();
-          this.getUserInfo(selectedUserList.username);
-        }
-      });
-    }
-  };
 
   render() {
     return (
@@ -168,7 +83,7 @@ class SubscribedTooltip extends Component {
             <div className="notification-with-subscribe notification-wrapper">
               <div className="user-info">
                 <div className="subtitle">
-                  {Translations.top_bar_info_modal.no_data}
+                  {Translations.top_bar_info_modal.no_data}123
                 </div>
               </div>
             </div>
@@ -177,6 +92,90 @@ class SubscribedTooltip extends Component {
       </div>
     );
   }
+  
+  componentDidMount = () => {
+    this.getTooltipUserList(this.props.userId);
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.userId !== nextProps.userId) {
+      this.getTooltipUserList(nextProps.userId);
+    }
+
+    if (this.props.userDataByUsername.user) {
+      if (
+        this.props.userDataByUsername.user.data.subscribedCount !==
+        nextProps.userDataByUsername.user.data.subscribedCount
+      ) {
+        this.getTooltipUserList(nextProps.userId);
+      }
+    }
+  }
+
+  handleKeyPress = () => { };
+
+  // Tooltip List
+  getTooltipUserList = userId => {
+    if (userId) {
+      const userRequestData = { id: userId, type: "followers" };
+      this.props.getFollowUserList("subscribed", userRequestData).then(() => {
+        // Success
+      });
+    }
+  };
+
+  // Left sidebar - All User List
+  getAllUserData = () => {
+    this.props.getDashboard("users").then(() => {
+      if (this.props.usersList) {
+        this.setState({ usersList: this.props.usersList });
+      }
+    });
+  };
+
+  // Top Bar - User Info
+  getUserInfo = username => {
+    const data = { username };
+    this.props.getUser(data).then(() => {
+      if (this.props.userDataByUsername.user.data) {
+        // Success
+      }
+    });
+  };
+
+  handleSubscribed = e => {
+    const usersList = this.props.subscribeData.subscribed;
+    const selectedUserList = usersList.find(user => user.id === e.target.id);
+    if (selectedUserList.subscribeId === "") {
+      const requestData = { followers: e.target.id };
+      this.props.sendRequest(requestData).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isRequestSend) {
+          this.getTooltipUserList(this.props.userId);
+          this.getAllUserData();
+          this.getUserInfo(selectedUserList.username);
+        }
+      });
+    } else {
+      const subscribedId = selectedUserList.subscribeId;
+      this.props.getUnsubscribe(subscribedId).then(() => {
+        if (
+          this.props.usersData.error &&
+          this.props.usersData.error.status === 400
+        ) {
+          // error
+        } else if (this.props.usersData.isUnsubscribed) {
+          this.getTooltipUserList(this.props.userId);
+          this.getAllUserData();
+          this.getUserInfo(selectedUserList.username);
+        }
+      });
+    }
+  };
 }
 
 const mapStateToProps = state => ({

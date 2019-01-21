@@ -28,6 +28,174 @@ class Register extends Component {
     };
   }
 
+  render() {
+    const { form } = this.state;
+
+    return (
+      <div className="login-process">
+        <BaseHeader />
+        <section className="col-xs-12">
+          <div className="custom-container">
+            <div className="login-wrapper">
+              <h3 className="text-center">{Translations.login.header}</h3>
+              <p>{Translations.login.subheader}</p>
+              <form onSubmit={this.handleSubmit}>
+                <div className="form-group">
+                  <span className="error-msg highlight">
+                    {this.state.error.servererror}
+                  </span>
+                  <Text
+                    type="text"
+                    className="form-control"
+                    id="username"
+                    placeholder={Translations.register.username}
+                    name="username"
+                    value={form.username ? form.username : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.username.length === 0 ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                  <span className="error-msg highlight">
+                    {this.state.error.username}
+                  </span>
+                </div>
+
+                <div className="form-group">
+                  <Text
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    placeholder={Translations.register.email}
+                    name="email"
+                    value={form.email ? form.email : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.email.length === 0 || form.emailValid ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                  <span className="error-msg highlight">
+                    {this.state.error.email}
+                  </span>
+                </div>
+
+                <div className="form-group">
+                  <Text
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    placeholder={Translations.register.password}
+                    autoComplete="password"
+                    name="password"
+                    value={form.password ? form.password : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.password.length === 0 ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                  <span className="error-msg highlight">
+                    {this.state.error.password}
+                  </span>
+                </div>
+                <div className="form-group">
+                  <Text
+                    type="password"
+                    className="form-control"
+                    id="repeat-password"
+                    placeholder={Translations.register.repeat_password}
+                    autoComplete="repeat-password"
+                    name="repeat_password"
+                    value={form.repeat_password ? form.repeat_password : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.repeat_password.length === 0 ||
+                    form.repeat_password !== form.password ? (
+                      <img src={images.error} alt={"error"} />
+                    ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                  <span className="error-msg highlight">
+                    {this.state.error.repeat_password}
+                  </span>
+                </div>
+                <div className="form-group">
+                  <ul className="options">
+                    <li>
+                      <RadioButton
+                        type="radio"
+                        id="male"
+                        name="gender"
+                        value="male"
+                        defaultChecked={form.gender === "male"}
+                        className="black_button"
+                        onChange={this.handleChangeField}
+                      />
+                      <label htmlFor="male">{Translations.register.male}</label>
+                    </li>
+                    <li>
+                      <RadioButton
+                        type="radio"
+                        id="female"
+                        value="female"
+                        name="gender"
+                        defaultChecked={form.gender === "female"}
+                        onChange={this.handleChangeField}
+                      />
+                      <label htmlFor="female">
+                        {Translations.register.female}
+                      </label>
+                    </li>
+                  </ul>
+                </div>
+                <div className="form-group">
+                  <button className="blue_button" type="submit">
+                    {Translations.register.register}
+                  </button>
+                </div>
+              </form>
+              <div>
+                <div className="terms-conditions">
+                  {Translations.register.agree}
+                  <Link to={routes.TERMS_CONDITIONS_ROUTE}>
+                    {" "}
+                    {Translations.base_footer.general_terms_and_conditions}
+                  </Link>
+                  ,
+                  <Link to={routes.TEARMS_USE_ROUTE}>
+                    {" "}
+                    {Translations.base_footer.terms_of_use}{" "}
+                  </Link>{" "}
+                  and
+                  <Link to={routes.DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}>
+                    {" "}
+                    {
+                      Translations.base_footer
+                        .data_protection_and_privacy_policy
+                    }
+                  </Link>
+                  .
+                </div>
+                <div className="free-register">
+                  {Translations.register.free}{" "}
+                  <b>{Translations.register.company}</b>
+                </div>
+              </div>
+              <DownloadStore />
+            </div>
+          </div>
+        </section>
+        <Cookies />
+        <BaseFooter className={"custom-container"} />
+      </div>
+    );
+  }
+
   //logout user
   componentDidMount = () => {
     Auth.logoutUser();
@@ -123,173 +291,6 @@ class Register extends Component {
     });
   };
 
-  render() {
-    const { form } = this.state;
-
-    return (
-      <div className="login-process">
-        <BaseHeader />
-        <section className="col-xs-12">
-          <div className="custom-container">
-            <div className="login-wrapper">
-              <h3 className="text-center">{Translations.login.header}</h3>
-              <p>{Translations.login.subheader}</p>
-              <form onSubmit={this.handleSubmit}>
-                <div className="form-group">
-                  <span className="error-msg highlight">
-                    {this.state.error.servererror}
-                  </span>
-                  <Text
-                    type="text"
-                    className="form-control"
-                    id="username"
-                    placeholder={Translations.register.username}
-                    name="username"
-                    value={form.username ? form.username : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.username.length === 0 ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                  <span className="error-msg highlight">
-                    {this.state.error.username}
-                  </span>
-                </div>
-
-                <div className="form-group">
-                  <Text
-                    type="email"
-                    className="form-control"
-                    id="email"
-                    placeholder={Translations.register.email}
-                    name="email"
-                    value={form.email ? form.email : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.email.length === 0 || form.emailValid ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                  <span className="error-msg highlight">
-                    {this.state.error.email}
-                  </span>
-                </div>
-
-                <div className="form-group">
-                  <Text
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    placeholder={Translations.register.password}
-                    autoComplete="password"
-                    name="password"
-                    value={form.password ? form.password : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.password.length === 0 ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                  <span className="error-msg highlight">
-                    {this.state.error.password}
-                  </span>
-                </div>
-                <div className="form-group">
-                  <Text
-                    type="password"
-                    className="form-control"
-                    id="repeat-password"
-                    placeholder={Translations.register.repeat_password}
-                    autoComplete="repeat-password"
-                    name="repeat_password"
-                    value={form.repeat_password ? form.repeat_password : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.repeat_password.length === 0 ||
-                  form.repeat_password !== form.password ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                  <span className="error-msg highlight">
-                    {this.state.error.repeat_password}
-                  </span>
-                </div>
-                <div className="form-group">
-                  <ul className="options">
-                    <li>
-                      <RadioButton
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="male"
-                        defaultChecked={form.gender === "male"}
-                        className="black_button"
-                        onChange={this.handleChangeField}
-                      />
-                      <label htmlFor="male">{Translations.register.male}</label>
-                    </li>
-                    <li>
-                      <RadioButton
-                        type="radio"
-                        id="female"
-                        value="female"
-                        name="gender"
-                        defaultChecked={form.gender === "female"}
-                        onChange={this.handleChangeField}
-                      />
-                      <label htmlFor="female">
-                        {Translations.register.female}
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-                <div className="form-group">
-                  <button className="blue_button" type="submit">
-                    {Translations.register.register}
-                  </button>
-                </div>
-              </form>
-              <div>
-                <div className="terms-conditions">
-                  {Translations.register.agree}
-                  <Link to={routes.TERMS_CONDITIONS_ROUTE}>
-                    {" "}
-                    {Translations.base_footer.general_terms_and_conditions}
-                  </Link>
-                  ,
-                  <Link to={routes.TEARMS_USE_ROUTE}>
-                    {" "}
-                    {Translations.base_footer.terms_of_use}{" "}
-                  </Link>{" "}
-                  and
-                  <Link to={routes.DATA_PROTECTION_AND_PRIVACY_POLICY_ROUTE}>
-                    {" "}
-                    {
-                      Translations.base_footer
-                        .data_protection_and_privacy_policy
-                    }
-                  </Link>
-                  .
-                </div>
-                <div className="free-register">
-                  {Translations.register.free}{" "}
-                  <b>{Translations.register.company}</b>
-                </div>
-              </div>
-              <DownloadStore />
-            </div>
-          </div>
-        </section>
-        <Cookies />
-        <BaseFooter className={"custom-container"} />
-      </div>
-    );
-  }
 }
 
 Register.propTypes = {

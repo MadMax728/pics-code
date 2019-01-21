@@ -13,7 +13,6 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
-import { Loader, RightSidebarLoading } from "../components/ui-kit";
 
 class Home extends Component {
   constructor(props, context) {

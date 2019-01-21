@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
+import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
@@ -74,7 +74,9 @@ class VideosBOPage extends Component {
 
   renderVideoList = () => {
     let { videoList, form } = this.state;
-    videoList = search(videoList,"userName", form.search);
+    const { searchData } = this.props;
+
+    videoList = search(videoList,"userName", form.search || searchData.searchKeyword);
 
     return videoList.map(video => {
       return (
@@ -105,11 +107,26 @@ class VideosBOPage extends Component {
     this.setState({ form });
   }
 
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+
+    if (searchData.searchKeyword) {
+      getSearch("");
+      const data = {
+        type: "get",
+        reportContent: "Video"
+      }
+      this.setState({isLoading: true});
+      this.getBackOfficeReportedContent(data);
+      this.getBackOfficeReportedStatistics(data);
+    }
+  }
+
   render() {
     let { videoList, form } = this.state;
     const { isLoading } = this.state;
-    const { reportedContentData } = this.props;
-    videoList = search(videoList,"userName", form.search);
+    const { reportedContentData, searchData } = this.props;
+    videoList = search(videoList,"userName", form.search || searchData.searchKeyword);
 
     return (
       <div>
@@ -117,6 +134,7 @@ class VideosBOPage extends Component {
           <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
           {videoList && this.renderVideoList()}
           {!videoList && isLoading && <CampaignLoading />}
+          {videoList && videoList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
         </div>
         <div className="right_bar no-padding">
           <RightSidebarStatistics 
@@ -136,12 +154,14 @@ class VideosBOPage extends Component {
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
   isLoading: state.reportedContentData.isLoading,
-  error: state.reportedContentData.error
+  error: state.reportedContentData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
-  getBackOfficeReportedStatistics
+  getBackOfficeReportedStatistics,
+  getSearch
 };
 
 VideosBOPage.propTypes = {
@@ -150,6 +170,8 @@ VideosBOPage.propTypes = {
   isLoading: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 

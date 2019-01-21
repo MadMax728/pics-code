@@ -25,16 +25,12 @@ class BillsAndReceiptsPage extends Component {
     }
     if (userInfo) {
       this.setState({ userId: userInfo.id });
-      const params = { userId: userInfo.id };
       this.props.getBills().then(() => {
         this.setState({ dataDownload: dataDownload_list });
       });
     }
   };
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
 
   render() {
     const { dataDownload } = this.state;
@@ -81,6 +77,11 @@ class BillsAndReceiptsPage extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
 }
 
 const mapStateToProps = state => ({

@@ -4,15 +4,10 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { checkVoucherExpiry } from "../../../../../actions";
 import { connect } from "react-redux";
-//import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
-import LazyLoad from "react-lazyload";
-import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
   Loader,
-  InlineLoading,
-  ImageItem,
-  VideoItem
+  InlineLoading
 } from "../../../../ui-kit";
 import moment from "moment";
 
@@ -241,16 +236,14 @@ class PaymentStepTwo extends Component {
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
                     {/* <img src={images.image} alt="image1" /> */}
-                    {form.typeContent &&
-                      form.typeContent.toLowerCase() ===
-                        enumerations.mediaTypes.video && (
-                        <VideoItem item={form.video} />
-                      )}
-                    {(!form.typeContent ||
-                      (form.typeContent &&
-                        form.typeContent.toLowerCase() ===
-                          enumerations.mediaTypes.image)) && (
-                      <ImageItem item={form.image} />
+                    {form.fileType && form.image && (
+                      <img src={form.image} alt={"information"} />
+                    )}
+                    {!form.fileType && form.video && (
+                      <video controls>
+                        <track kind="captions" />
+                        <source src={form.video} type={form.file.type} />
+                      </video>
                     )}
                   </div>
                 </div>

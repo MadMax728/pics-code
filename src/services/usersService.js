@@ -30,6 +30,10 @@ export const getUserList = (payload, type = "subscribed", header = {}) => {
       call = true;
       apiURL = getUserListCompanyEndPoint;
       break;
+    default:
+      call = true;
+      apiURL = getUserListSubscriberEndPoint;
+      break;
   }
   return call
     ? apiAuth.get(apiURL, payload)

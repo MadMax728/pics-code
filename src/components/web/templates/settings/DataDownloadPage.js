@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Text } from "../../../ui-kit/CommonUIComponents";
-import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDownloadData, getSearch } from "../../../../actions";
@@ -19,6 +18,102 @@ class DataDownloadPage extends Component {
       },
       error: {}
     };
+  }
+
+
+  render() {
+    const { form } = this.state;
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+        <div className="campaign-middle-section">
+          <div className="data-download">
+            <div className="normal_title padding-15">
+              {Translations.data_download.page_title}
+            </div>
+            <p>
+              This text is an example. This text is an example. This text is an
+              example. This text is an example. This text is an example. This
+              text is an example. This text is an example.{" "}
+            </p>
+
+            <p>
+              This text is an example. This text is an example. This text is an
+              example. This text is an example. This text is an example. This
+              text is an example. This text is an example.{" "}
+            </p>
+
+            <p>
+              This text is an example. This text is an example. This text is an
+              example. This text is an example. This text is an example. This
+              text is an example. This text is an example.{" "}
+            </p>
+
+            <form>
+              <div className="col-sm-5 padding-r-5 email-wrapper">
+                <div className="form-group">
+                  <label htmlFor="email">
+                    {Translations.data_download.Email}
+                  </label>
+                  <Text
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    placeholder={Translations.data_download.Email}
+                    name="email"
+                    value={form.email ? form.email : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.password.length === 0 ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                  <span className="error-msg form-field-error">
+                    {this.state.error.email}
+                  </span>
+                </div>
+              </div>
+              <div className="col-sm-5 padding-l-5 padding-r-5">
+                <div className="form-group">
+                  <label htmlFor="password">
+                    {Translations.data_download.Password}
+                  </label>
+                  <Text
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    name="password"
+                    placeholder={Translations.data_download.Password}
+                    value={form.password ? form.password : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.password.length === 0 ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                  <span className="error-msg form-field-error">
+                    {this.state.error.password}
+                  </span>
+                </div>
+              </div>
+              <div className="col-sm-2 padding-l-5 btn-wrapper">
+                <div className="form-group">
+                  <button className="blue_button" onClick={this.handleSubmit}>
+                    {Translations.data_download.Download}
+                  </button>
+                </div>
+              </div>
+            </form>
+            <div className="clearfix" />
+            <p>
+              This text is an example. This text is an example. This text is an
+              example.
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   componentDidMount = () => {
@@ -82,100 +177,6 @@ class DataDownloadPage extends Component {
     });
   };
 
-  render() {
-    const { form } = this.state;
-    return (
-      <div className="padding-rl-10 middle-section width-80">
-        <div className="campaign-middle-section">
-          <div className="data-download">
-            <div className="normal_title padding-15">
-              {Translations.data_download.page_title}
-            </div>
-            <p>
-              This text is an example. This text is an example. This text is an
-              example. This text is an example. This text is an example. This
-              text is an example. This text is an example.{" "}
-            </p>
-
-            <p>
-              This text is an example. This text is an example. This text is an
-              example. This text is an example. This text is an example. This
-              text is an example. This text is an example.{" "}
-            </p>
-
-            <p>
-              This text is an example. This text is an example. This text is an
-              example. This text is an example. This text is an example. This
-              text is an example. This text is an example.{" "}
-            </p>
-
-            <form>
-              <div className="col-sm-5 padding-r-5 email-wrapper">
-                <div className="form-group">
-                  <label htmlFor="email">
-                    {Translations.data_download.Email}
-                  </label>
-                  <Text
-                    type="text"
-                    className="form-control"
-                    id="email"
-                    placeholder={Translations.data_download.Email}
-                    name="email"
-                    value={form.email ? form.email : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.password.length === 0 ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                  <span className="error-msg form-field-error">
-                    {this.state.error.email}
-                  </span>
-                </div>
-              </div>
-              <div className="col-sm-5 padding-l-5 padding-r-5">
-                <div className="form-group">
-                  <label htmlFor="password">
-                    {Translations.data_download.Password}
-                  </label>
-                  <Text
-                    type="password"
-                    className="form-control"
-                    id="password"
-                    name="password"
-                    placeholder={Translations.data_download.Password}
-                    value={form.password ? form.password : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.password.length === 0 ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                  <span className="error-msg form-field-error">
-                    {this.state.error.password}
-                  </span>
-                </div>
-              </div>
-              <div className="col-sm-2 padding-l-5 btn-wrapper">
-                <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
-                    {Translations.data_download.Download}
-                  </button>
-                </div>
-              </div>
-            </form>
-            <div className="clearfix" />
-            <p>
-              This text is an example. This text is an example. This text is an
-              example.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

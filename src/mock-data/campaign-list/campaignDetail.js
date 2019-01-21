@@ -1,5 +1,3 @@
-import * as images from "../../lib/constants/images";
-import * as videos from "../../lib/constants/videos";
 
 export const campaign_detail  = {
   inquiryTag: "abcd",

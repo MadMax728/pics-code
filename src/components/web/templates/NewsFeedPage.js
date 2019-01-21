@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getNewsFeed, getUser } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
@@ -12,6 +12,18 @@ class NewsFeedPage extends Component {
     this.state = {
       isPrivate: false
     };
+  }
+
+  render() {
+    const { newsFeedList, isLoading } = this.props;
+    const { isPrivate } = this.state;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        { newsFeedList && !isLoading && !isPrivate && this.renderNewsFeedList() }
+        { isLoading && <CampaignLoading /> }
+        { !isLoading && ( !newsFeedList || ( newsFeedList && newsFeedList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+      </div>
+    );
   }
 
   componentDidMount = () => {
@@ -65,6 +77,9 @@ class NewsFeedPage extends Component {
       }
     }
   }
+
+  handleRefresh = () => {
+  };
 
   renderNewsFeedList = () => {
     const { newsFeedList } = this.props;
@@ -125,16 +140,6 @@ class NewsFeedPage extends Component {
     });
   };
 
-  render() {
-    const { newsFeedList, isLoading } = this.props;
-    const { isPrivate } = this.state;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {newsFeedList && !isLoading && !isPrivate && this.renderNewsFeedList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 NewsFeedPage.propTypes = {
