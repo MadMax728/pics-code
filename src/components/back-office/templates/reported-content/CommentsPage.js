@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
 import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { CommentCard } from "../../../misc";
+
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
 
@@ -21,6 +24,36 @@ class CommentsPage extends Component {
     };
   }
 
+
+  render() {
+    const { isLoading } = this.state;
+    let { commentList, form } = this.state;
+    const { searchData } = this.props;
+    commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
+    const { reportedContentData } = this.props;
+
+    return (
+      <div>
+        <div className="padding-rl-10 middle-section">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          {commentList && this.renderCommentList()}
+          {!commentList && isLoading && <CampaignLoading />}
+          {commentList && commentList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.comments}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.all : 0} 
+            outstanding={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.outstanding : 0}
+            processed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.processed : 0} 
+            notProcessed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.notProcessed : 0}
+          />
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     const data = {
       type: "get",
@@ -29,6 +62,10 @@ class CommentsPage extends Component {
     this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
   getBackOfficeReportedContent = (data) => {
@@ -41,7 +78,6 @@ class CommentsPage extends Component {
       }
     });
   }
-
 
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
@@ -116,35 +152,6 @@ class CommentsPage extends Component {
       this.getBackOfficeReportedContent(data);
       this.getBackOfficeReportedStatistics(data);
     }
-  }
-
-  render() {
-    const { isLoading } = this.state;
-    let { commentList, form } = this.state;
-    const { searchData } = this.props;
-    commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
-    const { reportedContentData } = this.props;
-
-    return (
-      <div>
-        <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {commentList && this.renderCommentList()}
-          {!commentList && isLoading && <CampaignLoading />}
-          {commentList && commentList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
-        </div>
-        <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.comments}`} 
-            handleEvent={this.handleReported} 
-            all={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.all : 0} 
-            outstanding={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.outstanding : 0}
-            processed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.processed : 0} 
-            notProcessed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.notProcessed : 0}
-          />
-        </div>
-      </div>
-    );
   }
 }
 

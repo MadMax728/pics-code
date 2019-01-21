@@ -1,6 +1,7 @@
 import React from "react";
-import * as images from "../../../lib/constants/images";
 import PropTypes from "prop-types";
+
+import * as images from "../../../lib/constants/images";
 
 const ReportedSearchBar = (e) => {
   return (

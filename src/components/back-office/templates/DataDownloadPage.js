@@ -1,43 +1,21 @@
 import React, { Component } from "react";
-import { Translations } from "../../../lib/translations";
-import * as routes from "../../../lib/constants/routes";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { Translations } from "../../../lib/translations";
+import * as routes from "../../../lib/constants/routes";
 
 class DataDownloadPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      searchKeyword: this.props.searchData.searchKeyword,      
       form: {
-        username: ""
+        username: "",
       }
     };
   }
-
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
-
-  handleChangeField = event => {
-    const { form } = this.state;
-    form[event.target.name] = event.target.value;
-    this.setState({ form });
-  };
-
-  // handelSubmit called when click on submit
-  handleSubmit = e => {
-    e.preventDefault();
-  };
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
 
   render() {
     return (
@@ -70,6 +48,15 @@ class DataDownloadPage extends Component {
     window.scrollTo(0, 0);
   };
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
+  
   handleChangeField = event => {
     const { form } = this.state;
     form[event.target.name] = event.target.value;
