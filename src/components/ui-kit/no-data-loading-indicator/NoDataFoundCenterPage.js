@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-const NoDataFoundCenterPage = ({handleRefresh}) => {
+import * as images from "../../../lib/constants/images";
+const NoDataFoundCenterPage = ({ handleRefresh }) => {
     return (
         <div className="feed_wrapper">
             <div className="datanotfound-wrapper" >
@@ -17,7 +17,12 @@ const NoDataFoundCenterPage = ({handleRefresh}) => {
                     </div>
                 </div>
                 <div className="notfound-footer">
-                    <div className="col-md-12"><span>Do Post</span>on Picstagraph</div>
+                    <div className="col-md-12 text-center"><span>Do Post</span>on Picstagraph
+                    <img
+                            src={images.no_data_pic}
+                            alt="no_data_image"
+                        />
+                    </div>
                 </div>
             </div>
         </div>
