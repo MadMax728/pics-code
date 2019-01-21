@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
 import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
-import PropTypes from "prop-types";
 
 class ParticipantsPage extends Component {
 

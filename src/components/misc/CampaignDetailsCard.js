@@ -23,7 +23,8 @@ const CampaignDetailsCard = ({
     const favorite_icon = campaignDetails.isSelfLike
         ? images.blue_heart
         : images.feed_like;
-
+    console.log(campaignDetails);
+    
     return (
         <div className="information-wrapper ht100">
             <div className="info-inner-wrapper col-xs-12 padd-15">
@@ -75,7 +76,7 @@ const CampaignDetailsCard = ({
                             <div className="col-sm-6 no-padding">
                                 <InfoWrapperItem title={'End'} value={DateFormat(campaignDetails.endDate, Translations.date_format.date, true)} />
                                 <InfoWrapperItem title={'Type'} value={campaignDetails.typeContent} />
-                                <InfoWrapperItem title={'Applications'} value={campaignDetails.applications} />
+                                <InfoWrapperItem title={'Applications'} value={campaignDetails.applicationCount} />
                             </div>
                         </div>
                     </div>
