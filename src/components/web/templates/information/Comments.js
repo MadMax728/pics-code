@@ -18,9 +18,8 @@ import { Picker } from "emoji-mart";
 class Comments extends Component {
   constructor(props, context) {
     super(props, context);
-    let reportTips;
     this.commentForm = React.createRef();
-    reportTips = [
+    const reportTips = [
       {
         name: Translations.tool_tips.edit,
         handleEvent: this.handleEditComment

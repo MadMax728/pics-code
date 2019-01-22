@@ -116,7 +116,6 @@ class SavedPage extends Component {
 }
 
 SavedPage.propTypes = {
-  match: PropTypes.any.isRequired,
   getSaved: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   savedList: PropTypes.any

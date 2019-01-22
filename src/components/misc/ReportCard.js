@@ -9,7 +9,7 @@ const ReportCard = ({ item }) => {
     <div className="status backoffice-status">
       <div className="status-wrapper">
         <div className="title">Date</div>
-        <div className="subtitle">{DateFormat(item.firstReportedDate, Translations.date_format.time, true)}</div>
+        <div className="subtitle">{DateFormat(item.firstReportedDate, Translations.date_format.date, true)}</div>
       </div>
       <div className="status-wrapper">
         <div className="title">Reports</div>

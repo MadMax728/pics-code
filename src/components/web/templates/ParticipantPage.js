@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDashboard, getSearch } from "../../../actions";
+import { getDashboard } from "../../../actions";
 import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -69,7 +69,6 @@ ParticipantPage.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoadingparticipants: PropTypes.bool,
   participantList: PropTypes.any,
-  getSearch: PropTypes.func,
   searchData: PropTypes.any,
   params: PropTypes.any
   // errorparticipants: PropTypes.any
@@ -84,8 +83,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getDashboard,
-  getSearch
+  getDashboard
 };
 
 export default connect(

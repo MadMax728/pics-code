@@ -329,10 +329,10 @@ LeftSidebarFilter.propTypes = {
     }).isRequired
   ).isRequired,
   onChange: PropTypes.func,
-  handleSelect: PropTypes.func,
-  handleOfferTagChange: PropTypes.func,
-  handleInquiryTagChange: PropTypes.func,
-  handleOfferTagDelete: PropTypes.func,
+  // handleSelect: PropTypes.func,
+  // handleOfferTagChange: PropTypes.func,
+  // handleInquiryTagChange: PropTypes.func,
+  // handleOfferTagDelete: PropTypes.func,
   handleLanguageSwitch: PropTypes.func
 };
 

@@ -5,10 +5,11 @@ import PropTypes from "prop-types";
 import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
 
 import ReportedSearchBar from "../ReportedSearchBar";
-import { CampaignLoading, NoDataFoundCenterPage } from "../../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage, RightSidebarStatistics } from "../../../ui-kit";
 import { PictureCard } from "../../../misc";
 
 import { search } from "../../../../lib/utils/helpers";
+import { Translations } from "../../../../lib/translations";
 
 
 class PicsPage extends Component {
@@ -25,17 +26,30 @@ class PicsPage extends Component {
   }
 
   render() {
-    let { picList, form } = this.state;
-    const { isLoading, searchData } = this.props;
-    picList = search(picList,"userName", form.search || searchData.searchKeyword);
+    const { searchData, reportedContentData } = this.props;
+    let { picList, isLoading } = this.state;
+    const { form } = this.state;
+    picList = search(picList, "username", form.search || searchData.searchKeyword);
 
     return (
-      <div className="padding-rl-10 middle-section">
-        <ReportedSearchBar />
-        { picList && !isLoading && this.renderPicList()}
-        { isLoading && <CampaignLoading />}
-        { picList && picList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+      <div>
+        <div className="padding-rl-10 middle-section">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          { picList && !isLoading && this.renderPicList()}
+          { isLoading && <CampaignLoading />}
+          { picList && picList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+        <RightSidebarStatistics 
+          header={`Reported ${Translations.review_content_menu.pics}`} 
+          handleEvent={this.handleReported} 
+          all={reportedContentData.PicsStatistics? reportedContentData.PicsStatistics.all : 0} 
+          outstanding={reportedContentData.PicsStatistics? reportedContentData.PicsStatistics.outstanding : 0}
+          processed={reportedContentData.PicsStatistics? reportedContentData.PicsStatistics.processed : 0} 
+          notProcessed={reportedContentData.PicsStatistics? reportedContentData.PicsStatistics.notProcessed : 0}
+        />
       </div>
+    </div>
     );
   }
 
@@ -52,6 +66,34 @@ class PicsPage extends Component {
       getSearch("");
     }
   };
+
+  handleSearch = (event) => {
+    event.preventDefault();
+    const { form } = this.state;
+    form[event.target.name] = event.target.value;
+    this.setState({ form });
+  }
+
+  handleReported = (e) => {
+    let data;
+    if (e.target.id === "All")
+    {
+      data ={
+        type: "get",
+        reportContent: "Pics"
+      }
+      this.setState({isSearch: false});
+    }
+    else {
+      data = {
+        type: "search",
+        reportContent: "Pics",
+        searchType: `${e.target.id}`
+      }
+      this.setState({isSearch: true});
+    }
+    this.getBackOfficeReportedContent(data);
+  }
 
   getBackOfficeReportedContent = (data) => {
     this.props.getBackOfficeReportedContent(data).then(()=> {
@@ -71,7 +113,6 @@ class PicsPage extends Component {
       }
     });
   }
-  
 
   handleRefresh = () => {
     const { searchData, getSearch } = this.props;
@@ -88,16 +129,32 @@ class PicsPage extends Component {
     }
   }
 
+  handleRemove = (data) => {
+    const { picList, isSearch } = this.state;
+    if (isSearch)
+    {
+      this.setState({picList: picList.filter(e => e.id !== data)});
+    }
+  }
+
   renderPicList = () => {
-    let { picList, form } = this.state;
-    const { searchData } = this.props;
+    let { picList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
     picList = search(picList,"userName", form.search || searchData.searchKeyword);
     return picList.map((pic, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
       return (
         <div key={pic.id}>
           {clearfixDiv}
-          <PictureCard item={pic} index={index} isReport />
+          <PictureCard 
+            item={pic} 
+            index={index} 
+            isReport 
+            isBackOffice 
+            handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+            handleRemove={this.handleRemove}
+           />
         </div>
       );
     });
@@ -123,7 +180,8 @@ PicsPage.propTypes = {
   reportedContentData: PropTypes.object,
   isLoading: PropTypes.bool,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func.isRequired
+  getSearch: PropTypes.func.isRequired,
+  handleModalInfoDetailsCallbackShow: PropTypes.func
   // error: PropTypes.any
 };
 
