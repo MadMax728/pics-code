@@ -21,10 +21,10 @@ NoDataFoundRightSidebar.propTypes = {
 /**
  * images.no_community_pic
  * images.no_campaign_pic
- * images.no_record_fount
+ * images.no_record_found
  */
 NoDataFoundRightSidebar.defaultProps = {
-    image: `${images.no_record_fount}`
+    image: `${images.no_record_found}`
 };
 
 export default NoDataFoundRightSidebar;

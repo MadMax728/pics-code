@@ -71,7 +71,7 @@ export const no_campaign_pic = `${
   process.env.REACT_APP_CDN_URL
 }/images/no-campaigns.png`;
 
-export const no_record_fount = `${
+export const no_record_found = `${
   process.env.REACT_APP_CDN_URL
 }/images/no-records.png`;
 
