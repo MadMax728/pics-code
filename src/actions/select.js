@@ -2,7 +2,8 @@ import { Auth } from "../auth";
 import * as selectService from "../services";
 import { logger } from "../loggers";
 import * as types from "../lib/constants/actionTypes";
-
+import moment from "moment";
+import * as _ from "lodash";
 
 // Get Select
 
@@ -10,7 +11,7 @@ const getSelectStarted = () => ({
   type: types.GET_SELECT_STARTED
 });
 
-const getSelectSucceeded = (data,isFor) => ({
+const getSelectSucceeded = (data, isFor) => ({
   type: types.GET_SELECT_SUCCEEDED,
   payload: data,
   isFor
@@ -29,8 +30,16 @@ export const getSelect = (prop, provider) => {
     const header = { Authorization: storage.accessToken };
     return selectService[prop](provider, header).then(
       res => {
-        if (res.data && res.data.data)
-          dispatch(getSelectSucceeded(res.data.data, prop));
+        if (res.data && res.data.data) {
+          const selectData = _.orderBy(
+            res.data.data,
+            function(o) {
+              return new moment(o.createdAt);
+            },
+            ["desc"]
+          );
+          dispatch(getSelectSucceeded(selectData, prop));
+        }
       },
       error => {
         dispatch(getSelectFailed(error.response));
@@ -75,7 +84,6 @@ export const getTargetGroup = data => {
   };
 };
 
-
 const getLanguageSucceeded = data => ({
   type: types.GET_LANGUAGE_SUCCEEDED,
   payload: data
@@ -86,4 +94,3 @@ export const getLanguage = data => {
     dispatch(getLanguageSucceeded(data));
   };
 };
-

@@ -486,7 +486,6 @@ class CampaignModal extends Component {
     form.address[event.target.name] = event.target.value;
     this.setState({ form });
   };
-
 }
 
 CampaignModal.propTypes = {
