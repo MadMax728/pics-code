@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
+import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { HashTagUsername, SelectCategory } from "../../../common";
-import { PlaceAutoCompleteLocation } from "../../../ui-kit";
+import { PlaceAutoCompleteLocation, UserImageItem } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
+const storage = Auth.extractJwtFromStorage();
 
 class Upload extends Component {
   constructor(props) {
@@ -54,16 +56,12 @@ class Upload extends Component {
   render() {
     const { form, handleSetState, handleLocation, handleSelect } = this.props;
     const { isInProgress } = this.state;
+    const userInfo = storage ? JSON.parse(storage.userInfo) : null;
+    const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form height100">
-          <div className="no-padding profile_image">
-            <img
-              src={images.image}
-              alt="image1"
-              className="img-circle img-responsive"
-            />
-          </div>
+          <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
           <div className="user-title">
             <div className="normal_title">
               {Translations.upload_modal.title_of_upload}
