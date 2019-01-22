@@ -1,14 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as routes from "../../../lib/constants/routes";
-import { CustomeTableLoader, CustomBootstrapTable } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { getCMSManagement } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getCMSManagement } from "../../../actions";
+
+import { CustomeTableLoader, CustomBootstrapTable } from "../../ui-kit";
 import { DateFormat } from "../../Factory";
 import { SelectLanguage } from "../../common";
+
 import { modalType } from "../../../lib/constants/enumerations";
+import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 class CMSManagementPage extends Component {
  
@@ -16,18 +19,58 @@ class CMSManagementPage extends Component {
     super(props, context);
     this.state = {
       cmsManagement: null,
+      searchKeyword: this.props.searchData.searchKeyword,      
       language: Translations.base_footer.language
     };
   }
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
+  render() {
+    const { cmsManagement, language } = this.state;
+    const { cmsManagementData } = this.props;
+
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+       <div className="dashboard-middle-section margin-bottom-50">
+          <div className="title_with_dropdown">
+            <span>{Translations.cms.cms}</span>
+            <Link to={routes.BACK_OFFICE_CREATE_CMS_ROUTE}>
+              <button className="expandDrop">
+                <i className="glyphicon glyphicon-plus-sign" />
+              </button>{" "}
+            </Link>
+            <SelectLanguage 
+              value={language}
+              handleSelect={this.handleSelect}
+            />
+          </div>
+          {cmsManagement && this.renderCMSManagement()}
+          {cmsManagementData.isLoading && <CustomeTableLoader />}
+        </div>
+      </div>
+    );
+  }
+
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    this.props.getCMSManagement("").then(()=> {
+      const { cmsManagementData } = this.props;
+      if(cmsManagementData && cmsManagementData.cmsManagement) {
+        this.setState({
+          cmsManagement: cmsManagementData.cmsManagement
+        })
+      }
+    });
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
 
   optionsFormatter = (cell, row, rowIndex) => {   
     const data = { 
@@ -41,12 +84,10 @@ class CMSManagementPage extends Component {
     return (
       <div key={rowIndex}>
         <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row.id}`}>Edit</Link>
-        <div role="button" tabIndex="0" onKeyDown={this.handleKeyDown}  onClick={() => this.handlePreview(data)}>Preview</div>
+        <div role="button" tabIndex="0" onKeyDown={() => this.handlePreview(data)}  onClick={() => this.handlePreview(data)}>Preview</div>
       </div>
     );
   };
-
-  handleKeyDown = () => {}
 
   // https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Work%20on%20Columns&selectedStory=Column%20Formatter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel
   // used for formatter
@@ -56,18 +97,6 @@ class CMSManagementPage extends Component {
         <span className={`${row.status}-circle`} /> Active{" "}
       </div>
     );
-  };
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.props.getCMSManagement("").then(()=> {
-      const { cmsManagementData } = this.props;
-      if(cmsManagementData && cmsManagementData.cmsManagement) {
-        this.setState({
-          cmsManagement: cmsManagementData.cmsManagement
-        })
-      }
-    });
   };
 
   customTotal = (from, to, size) => (
@@ -206,31 +235,7 @@ class CMSManagementPage extends Component {
     this.props.handleModalInfoDetailsShow(modalType.cmsPreview,data);
   }
 
-  render() {
-    const { cmsManagement, language } = this.state;
-    const { cmsManagementData } = this.props;
 
-    return (
-      <div className="padding-rl-10 middle-section width-80">
-       <div className="dashboard-middle-section margin-bottom-50">
-          <div className="title_with_dropdown">
-            <span>{Translations.cms.cms}</span>
-            <Link to={routes.BACK_OFFICE_CREATE_CMS_ROUTE}>
-              <button className="expandDrop">
-                <i className="glyphicon glyphicon-plus-sign" />
-              </button>{" "}
-            </Link>
-            <SelectLanguage 
-              value={language}
-              handleSelect={this.handleSelect}
-            />
-          </div>
-          {cmsManagement && this.renderCMSManagement()}
-          {cmsManagementData.isLoading && <CustomeTableLoader />}
-        </div>
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

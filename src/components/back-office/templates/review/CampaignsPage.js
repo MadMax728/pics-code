@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReview, getBackOfficeReviewStatistics, getSearch } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getBackOfficeReview, getBackOfficeReviewStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
 import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
-import * as enumerations from "../../../../lib/constants/enumerations";
 import { CampaignCard } from "../../../misc";
+
+import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
 
@@ -20,10 +23,49 @@ class CampaignsPage extends Component {
     };
   }
 
+  render() {
+    const { isLoading, reviewData, searchData } = this.props;
+    let { campaignList, form } = this.state;
+    campaignList = search(campaignList, "userName", form.search || searchData.searchKeyword);
+
+    return (
+      <div>
+        <div className="padding-rl-10 middle-section margin-b-22">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          {campaignList && this.renderCampaignList()}
+          {!campaignList && isLoading && <CampaignLoading />}
+          {campaignList && campaignList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.campaigns}`} 
+            handleEvent={this.handleReported} 
+            all={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.all : 0} 
+            outstanding={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.outstanding : 0}
+            processed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.processed : 0} 
+            notProcessed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.notProcessed : 0}
+          />
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.ads}`} 
+            handleEvent={this.handleReported} 
+            all={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.all : 0} 
+            outstanding={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.outstanding : 0}
+            processed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.processed : 0} 
+            notProcessed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.notProcessed : 0}
+          />
+      </div>
+    </div>
+    );
+  }
+
   componentDidMount = () => {
     this.getBackOfficeReview();
     this.getBackOfficeReviewCampaignsStatistics();
     this.getBackOfficeReviewAdStatistics();
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
   
   getBackOfficeReviewCampaignsStatistics = () => {
@@ -112,41 +154,6 @@ class CampaignsPage extends Component {
       this.getBackOfficeReviewCampaignsStatistics();
       this.getBackOfficeReviewAdStatistics();
     }
-  }
-
-  render() {
-    const { isLoading, reviewData, searchData } = this.props;
-    let { campaignList, form } = this.state;
-    campaignList = search(campaignList, "userName", form.search || searchData.searchKeyword);
-
-    return (
-      <div>
-        <div className="padding-rl-10 middle-section margin-b-22">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {campaignList && this.renderCampaignList()}
-          {!campaignList && isLoading && <CampaignLoading />}
-          {campaignList && campaignList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
-        </div>
-        <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.campaigns}`} 
-            handleEvent={this.handleReported} 
-            all={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.all : 0} 
-            outstanding={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.outstanding : 0}
-            processed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.processed : 0} 
-            notProcessed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.notProcessed : 0}
-          />
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.ads}`} 
-            handleEvent={this.handleReported} 
-            all={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.all : 0} 
-            outstanding={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.outstanding : 0}
-            processed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.processed : 0} 
-            notProcessed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.notProcessed : 0}
-          />
-      </div>
-    </div>
-    );
   }
 }
 

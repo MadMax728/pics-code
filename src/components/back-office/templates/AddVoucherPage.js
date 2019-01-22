@@ -1,17 +1,21 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable, CustomeTableLoader } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { getVouchers, addVoucher } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getVouchers, addVoucher } from "../../../actions";
+
+import { CustomBootstrapTable, CustomeTableLoader } from "../../ui-kit";
 import { SelectPeriod, SelectAmount, SelectType, SelectNumber } from "../../common";
+
 import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 class AddVoucherPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       voucherList: null,
+      searchKeyword: this.props.searchData.searchKeyword,      
       form: {
         id: "",
         voucher_code: "",
@@ -21,15 +25,6 @@ class AddVoucherPage extends Component {
         number: ""
       }
     };
-  }
-
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
   }
 
   render() {
@@ -58,6 +53,15 @@ class AddVoucherPage extends Component {
       }
     });
   };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
 
   handleChangeField = event => {
     const { form } = this.state;
@@ -107,7 +111,6 @@ class AddVoucherPage extends Component {
     form[isFor] = selected;
     this.setState({ form });
   }
-
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
@@ -217,7 +220,6 @@ class AddVoucherPage extends Component {
       Showing {from} to {to} of {size} Results
     </span>
   );
-
 
   renderVouchers = () => {
     const { voucherList } = this.state;

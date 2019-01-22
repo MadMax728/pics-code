@@ -16,7 +16,7 @@ class VideoItem extends Component {
               <Loader /> : 
               (
               <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
-                <VideoPlayer id={id} item={item} />
+                { item && <VideoPlayer id={id} item={item} /> }
               </LazyLoad>
               )
             }

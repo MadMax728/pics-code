@@ -340,6 +340,14 @@
     @include gradient();
   }
 }
+.profile-img-wrapper{
+  .user_info{
+    padding: 15px 0;
+    div{
+      margin: 0 auto;
+    }
+  }
+}
 .right_bar {
   width: 30%;
   float: right;
@@ -469,7 +477,7 @@
           &:before {
             content: "\2022";
             position: absolute;
-            top: 1px;
+            top: 0;
             left: 0;
           }
           color: $silver_color;

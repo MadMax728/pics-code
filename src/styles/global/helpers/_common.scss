@@ -1298,15 +1298,24 @@ section.loader-wrapr {
 // share pop up
 .share-popup.modal {
   &.in {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.9);
   }
   .modal-dialog {
     margin: 34vh auto;
-    margin-left: 44vw;
+    width:300px;
+    // margin-left: 44vw;
+    .closeBtn{
+      position: absolute;
+      right: -38px;
+      top: -38px;
+      z-index: 9;
+      background: none;
+      border:none;
+    }
   }
   .modal-content,
   .modal-body {
-    // width: 100%;
+    width: 100%;
     float: left;
     background-color: transparent;
     padding: 0;
@@ -1382,7 +1391,7 @@ section.loader-wrapr {
         .social-link-title {
           display: inline-block;
           position: relative;
-          top: -4px;
+          top: 6px;
         }
       }
     }
@@ -1653,4 +1662,7 @@ section.loader-wrapr {
 }
 .margin-left0{
   margin-left: 0 !important;
+}
+.form-control {
+  border-radius: 0;
 }
