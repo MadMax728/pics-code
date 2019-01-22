@@ -23,8 +23,6 @@ const CampaignDetailsCard = ({
     const favorite_icon = campaignDetails.isSelfLike
         ? images.blue_heart
         : images.feed_like;
-    console.log(campaignDetails);
-    
     return (
         <div className="information-wrapper ht100">
             <div className="info-inner-wrapper col-xs-12 padd-15">
@@ -63,7 +61,7 @@ const CampaignDetailsCard = ({
                         userName={campaignDetails.userName}
                         image={campaignDetails.profileImage} 
                         title={campaignDetails.title} 
-                        category={campaignDetails.category} 
+                        category={campaignDetails.category && campaignDetails.category[0] && campaignDetails.category[0].categoryName} 
                         handleFavorite={handleFavorite} 
                     />
                     <div className="feed_content col-xs-12">
