@@ -13,7 +13,8 @@ import {
   modalType,
   typeContent,
   target_group,
-  procedure
+  procedure,
+  budgetCalculation
 } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 
@@ -31,6 +32,7 @@ const initialState = {
   stepIndex: 0,
   isPreview: false,
   userInfo: null,
+  maxClicks: 0,
   form: {
     title: "",
     location: {
@@ -83,7 +85,7 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor, handleModalHide } = this.props;
-    const { stepIndex, isPreview, form, userInfo } = this.state;
+    const { stepIndex, isPreview, form, userInfo, maxClicks } = this.state;
 
     let modalClassName = "";
 
@@ -135,6 +137,7 @@ class CampaignModal extends Component {
               handleChangeField={this.handleCompanyChangeField}
               handleAddress={this.handleAddress}
               form={form}
+              maxClicks={maxClicks}
               handleContentChange={this.handleContentChange}
               handleSubmit={this.handleCompanySubmit}
               handleDate={this.handleDate}
@@ -152,6 +155,7 @@ class CampaignModal extends Component {
               handleVideo={this.handleVideo}
               userInfo={userInfo}
               setVoucherData={this.setVoucherData}
+              calculateMaxClicks={this.calculateMaxClicks}
             />
           ) : (
             <CreateCreatorCampaign
@@ -163,6 +167,7 @@ class CampaignModal extends Component {
               isPreview={isPreview}
               handleChangeField={this.handleCompanyChangeField}
               form={form}
+              maxClicks={maxClicks}
               handleAddress={this.handleAddress}
               handleContentChange={this.handleContentChange}
               handleSubmit={this.handleCompanySubmit}
@@ -181,6 +186,7 @@ class CampaignModal extends Component {
               handleVideo={this.handleVideo}
               userInfo={userInfo}
               setVoucherData={this.setVoucherData}
+              calculateMaxClicks={this.calculateMaxClicks}
             />
           )
         }
@@ -478,7 +484,27 @@ class CampaignModal extends Component {
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected;
+    if (isFor === "budget") {
+      this.calculateMaxClicks();
+    }
     this.setState({ form });
+  };
+
+  calculateMaxClicks = () => {
+    const { form } = this.state;
+    let maxClicksValue = 0;
+    let CPC = budgetCalculation.CPC;
+    const budgetValue = form.budget;
+    const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
+    if (noOfDaysRuntime && budgetValue) {
+      maxClicksValue =
+        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
+      if (maxClicksValue > 1200) {
+        maxClicksValue = 1200;
+      }
+      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+      this.setState({ maxClicks: maxClicksValue });
+    }
   };
 
   handleAddress = event => {
@@ -486,7 +512,6 @@ class CampaignModal extends Component {
     form.address[event.target.name] = event.target.value;
     this.setState({ form });
   };
-
 }
 
 CampaignModal.propTypes = {
@@ -497,7 +522,8 @@ CampaignModal.propTypes = {
   createCampaign: PropTypes.func.isRequired,
   uploadMedia: PropTypes.func.isRequired,
   mediaData: PropTypes.any,
-  campaignData: PropTypes.any
+  campaignData: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 const mapStateToProps = state => ({
