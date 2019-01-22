@@ -7,21 +7,11 @@ const CampaignDetailsLoading = ({ count }) => {
     return (
       <div key={index} className="feed_wrapper padding-rl15">
         <div className="feed_header width-70 padding-left0">
-          {/* <div className="no-padding profile_image wid45">
-            <span className="gray_box pro-image"></span>
-          </div> */}
           <div className="col-sm-12 no-padding">
             <div className="normal_title gray_box descTitle" />
             <div className="secondary_title gray_box desc1" />
             <div className="grey_title" />
           </div>
-          {/* <div className="col-sm-1 col-xs-1 like_wrapper no-padding">
-            <img
-              src={images.gray_heart}
-              alt="like"
-              className="pull-right gray_heart"
-            />
-          </div> */}
         </div>
         <div className="feed_content">
           <div className="feed_image width-70">
