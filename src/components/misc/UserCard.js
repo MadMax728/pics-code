@@ -16,6 +16,7 @@ import { modalType } from "../../lib/constants";
 class UserCard extends Component {
   constructor(props, context) {
     super(props, context);
+
     this.state = {
       item: this.props.item,
       index: this.props.index
@@ -25,14 +26,13 @@ class UserCard extends Component {
   render() {
     const { item, index } = this.state;
     const { isReport, isBackOffice } = this.props;
-
     return (
       <UserCardBody
         user={item}
         index={index}
         handleSubscribed={this.handleSubscribed}
         isReport={isReport}
-        isBackOffice={isBackOffice}/* eslint-disable */
+        isBackOffice={isBackOffice} /* eslint-disable */
         renderReportTips={() => this.renderReportTips(item.id)}
       />
     );
@@ -79,13 +79,19 @@ class UserCard extends Component {
     });
   };
 
-  renderReportTips = (id) => {
+  renderReportTips = id => {
     const { item } = this.state;
 
     const reportTips = [
       {
-        name: item.reportStatus === enumerations.reportType.lock ? Translations.tool_tips.unlock : Translations.tool_tips.lock,
-        handleEvent: item.reportStatus === enumerations.reportType.lock ? this.handleUnlockContent : this.handleLockContent,
+        name:
+          item.reportStatus === enumerations.reportType.lock
+            ? Translations.tool_tips.unlock
+            : Translations.tool_tips.lock,
+        handleEvent:
+          item.reportStatus === enumerations.reportType.lock
+            ? this.handleUnlockContent
+            : this.handleLockContent
       },
       {
         name: Translations.tool_tips.do_not,
@@ -95,47 +101,58 @@ class UserCard extends Component {
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleLockContent = (e) => {
+  handleLockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
       reportContent: "User"
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  handleSetState = (data) => {
+  handleSetState = data => {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
     this.setState({ item });
-    this.props.handleRemove(item.id)
-  }
+    this.props.handleRemove(item.id);
+  };
 
-  handleDoNotContent = (e) => {
+  handleDoNotContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
       reportContent: "User"
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  handleUnlockContent = (e) => {
+  handleUnlockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
       reportContent: "User"
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
-
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 }
 
 const mapStateToProps = state => ({

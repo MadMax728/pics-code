@@ -293,10 +293,6 @@ StepOne.propTypes = {
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,
   handleScale: PropTypes.func,
-  handleOfferTagChange: PropTypes.func.isRequired,
-  handleOfferTagDelete: PropTypes.func.isRequired,
-  handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
   handleVideo: PropTypes.func.isRequired,
   userInfo: PropTypes.object.isRequired

@@ -41,7 +41,6 @@ class Notifications extends Component {
 }
 
 Notifications.propTypes = {
-  handleMessage: PropTypes.func.isRequired
 };
 
 export default Notifications;

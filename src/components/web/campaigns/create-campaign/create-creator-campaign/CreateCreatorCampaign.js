@@ -19,6 +19,7 @@ class CreateCreatorCampaign extends Component {
       isPreview,
       handlePrivewClose,
       form,
+      maxClicks,
       isFor,
       handleChangeField,
       handleSubmit,
@@ -36,7 +37,8 @@ class CreateCreatorCampaign extends Component {
       handleVideo,
       userInfo,
       handleAddress,
-      setVoucherData
+      setVoucherData,
+      calculateMaxClicks
     } = this.props;
 
     return (
@@ -90,6 +92,8 @@ class CreateCreatorCampaign extends Component {
               handleSelect={handleSelect}
               form={form}
               userInfo={userInfo}
+              calculateMaxClicks={calculateMaxClicks}
+              maxClicks={maxClicks}
             />
           ))}
         {!isPreview &&
@@ -143,7 +147,9 @@ CreateCreatorCampaign.propTypes = {
   handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
-  setVoucherData: PropTypes.func
+  setVoucherData: PropTypes.func,
+  calculateMaxClicks: PropTypes.func,
+  maxClicks: PropTypes.any
 };
 
 export default CreateCreatorCampaign;

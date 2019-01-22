@@ -153,12 +153,12 @@ const mapDispatchToProps = {
 };
 
 Requests.propTypes = {
-  isLoading: PropTypes.bool,
+  // isLoading: PropTypes.bool,
   getPendingUserList: PropTypes.func,
   getUnsubscribe: PropTypes.func,
   acceptRequest: PropTypes.func,
   usersData: PropTypes.any,
-  history: PropTypes.any,
+  // history: PropTypes.any,
   getDashboard: PropTypes.func
   // error: PropTypes.any
 };

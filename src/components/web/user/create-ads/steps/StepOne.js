@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { ImageCropper, PlaceAutoCompleteLocation } from "../../../../ui-kit";
+import { ImageCropper, PlaceAutoCompleteLocation, UserImageItem } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import { SelectCategory, HashTagUsername, SelectRadius, SelectCallToActions } from "../../../../../components/common";
 import * as enumerations from "../../../../../lib/constants/enumerations";
@@ -24,17 +24,11 @@ class StepOne extends Component {
       handleSetState,
       userInfo
     } = this.props;
-
+    const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
-          <div className="no-padding profile_image">
-            <img
-              src={userInfo? userInfo.profileUrl : images.image}
-              alt="image1"
-              className="img-circle img-responsive"
-            />
-          </div>
+          <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
           <div className="user-title">
             <div className="normal_title">
               {form.title? form.title : Translations.create_ads.title_of_ads}

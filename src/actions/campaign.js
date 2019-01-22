@@ -74,7 +74,6 @@ export const getCampaignDetails = provider => {
     return campaignService.getCampaignDetails(provider, header).then(
       res => {
         dispatch(getCampaignDetailsSucceeded(res.data.data));
-        // dispatch(getCampaignDetailsSucceeded(campaign_detail));
       },
       error => {
         dispatch(getCampaignDetailsFailed(error.response));

@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
+import { UserImageItem } from "../../ui-kit";
 
 const FeedHeader = ({
     id,
@@ -17,13 +18,7 @@ const FeedHeader = ({
     const profileImage = image || images.image;
     return (
         <div className="feed_header">
-            <div className="no-padding profile_image">
-                <img
-                    src={profileImage}
-                    alt="circle-img-1"
-                    className="img-circle img-responsive"
-                />
-            </div>
+            <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
             <div className="col-sm-9 col-xs-7">
                 <div className="normal_title">{title}</div>
                 <div className="secondary_title">

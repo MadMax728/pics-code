@@ -26,7 +26,8 @@ class VideosBOPage extends Component {
   }
 
   render() {
-    let { videoList, form } = this.state;
+    let { videoList } = this.state;
+    const { form } = this.state;
     const { isLoading } = this.state;
     const { reportedContentData, searchData } = this.props;
     videoList = search(videoList,"userName", form.search || searchData.searchKeyword);
@@ -108,8 +109,9 @@ class VideosBOPage extends Component {
   }
 
   renderVideoList = () => {
-    let { videoList, form } = this.state;
-    const { searchData } = this.props;
+    let { videoList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
 
     videoList = search(videoList,"userName", form.search || searchData.searchKeyword);
 
@@ -120,7 +122,7 @@ class VideosBOPage extends Component {
           video.typeContent &&
           video.typeContent.toLowerCase() === enumerations.mediaTypes.video &&
           (
-            <MediaCard item={video} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
+            <MediaCard item={video} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
           )}
         </div>
       );

@@ -115,7 +115,7 @@ const mapDispatchToProps = {
 
 NotificationsList.propTypes = {
   getFollowUserList: PropTypes.func,
-  isLoading: PropTypes.bool
+  // isLoading: PropTypes.bool
   // error: PropTypes.any
 };
 

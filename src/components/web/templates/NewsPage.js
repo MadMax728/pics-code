@@ -15,37 +15,40 @@ class NewsRoot extends Component {
     };
   }
 
-
   render() {
     let { newsFeedList } = this.state;
     const { isLoadingnews, searchData } = this.props;
-    newsFeedList = search(newsFeedList,"userName", searchData.searchKeyword);
+    newsFeedList = search(newsFeedList, "userName", searchData.searchKeyword);
 
     return (
       <div className={"middle-section padding-rl-10"}>
-        { newsFeedList && !isLoadingnews && this.renderNewsFeedList() }
-        { isLoadingnews && <CampaignLoading /> }
-        { !isLoadingnews && ( !newsFeedList || ( newsFeedList && newsFeedList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        {newsFeedList && !isLoadingnews && this.renderNewsFeedList()}
+        {isLoadingnews && <CampaignLoading />}
+        {!isLoadingnews &&
+          (!newsFeedList || (newsFeedList && newsFeedList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
       </div>
     );
   }
-  
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.handleRefresh();
     this.handleSetNewsFeed();
   };
 
   handleSetNewsFeed = () => {
     this.props.getDashboard("news", "").then(() => {
       const { newsFeedList } = this.props;
-      this.setState({newsFeedList});
+      this.setState({ newsFeedList });
     });
-  }
+  };
 
   renderNewsFeedList = () => {
     let { newsFeedList } = this.state;
     const { searchData } = this.props;
-    newsFeedList = search(newsFeedList,"userName", searchData.searchKeyword);
+    newsFeedList = search(newsFeedList, "userName", searchData.searchKeyword);
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
@@ -113,7 +116,7 @@ class NewsRoot extends Component {
       getSearch("");
       this.handleSetNewsFeed();
     }
-  }
+  };
 }
 
 NewsRoot.propTypes = {

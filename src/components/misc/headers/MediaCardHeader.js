@@ -4,6 +4,7 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { DateFormat } from "../../Factory";
+import { UserImageItem } from "../../ui-kit";
 
 const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
   const profile_route = item.isOwner
@@ -12,15 +13,9 @@ const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
-      <div className="profile_image padding-right-15">
-        <Link to={profile_route}>
-          <img
-            src={item.profileImage}
-            alt="feed"
-            className="img-circle img-responsive"
-          />
-        </Link>
-      </div>
+      <Link to={profile_route}>
+          <UserImageItem item={item.profileImage} customClass={`img-circle img-responsive padding-right-15`} />
+      </Link>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link
           to={profile_route}>

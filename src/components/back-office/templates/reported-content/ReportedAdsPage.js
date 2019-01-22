@@ -90,8 +90,9 @@ class ReportedAdsPage extends Component {
 
 
   renderAds = () => {
-    let { adList, form } = this.state;
-    const { searchData } = this.props;
+    let { adList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
     adList = search(adList, "userName", form.search  || searchData.searchKeyword);
     
     return adList.map(ad => {
@@ -105,7 +106,7 @@ class ReportedAdsPage extends Component {
               isStatus={false}
               isReport
               isBackOffice 
-              handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
               handleRemove={this.handleRemove}
             />
           )}
@@ -137,7 +138,8 @@ class ReportedAdsPage extends Component {
   }
 
   render() {
-    let { adList, form } = this.state;
+    let { adList } = this.state;
+    const { form } = this.state;
     const { isLoading } = this.state;
     const { reportedContentData, searchData } = this.props;
 
