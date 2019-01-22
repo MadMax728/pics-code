@@ -862,13 +862,13 @@ class PrivacyPage extends Component {
       });
   };
 
-  handleDeleteSearchHisory = e => {
+  handleDeleteSearchHisory = () => {
     // const paramData = { searchHistoryId: e.target.id };
     this.props.handleModalInfoShow(modalType.confirmation);
     // this.props.deleteSearchHistory(paramData); // API Call
   };
 
-  handleDeactiveMyAccount = e => {
+  handleDeactiveMyAccount = () => {
     // const modalForValue = e.target.id;
     this.props.handleModalInfoShow(modalType.confirmation);
   };

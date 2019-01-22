@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
-import { Loader, ImageItem, VideoItem } from "../../ui-kit";
+import { Loader, ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { getSearch } from "../../../actions";
 import { connect } from "react-redux";
@@ -10,7 +10,7 @@ import * as routes from "../../../lib/constants/routes";
 
 class PictureCardBody extends Component {
   render() {
-    const { pic, index, isReport, isLoading } = this.props;
+    const { pic, index, isReport, isLoading, renderReportTips } = this.props;
     return (
       <div
         className={
@@ -18,7 +18,7 @@ class PictureCardBody extends Component {
         }
       >
         {pic && (
-          <div className="pic-block">
+          <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
             <LazyLoad
               height={200}
               once
@@ -44,11 +44,26 @@ class PictureCardBody extends Component {
             </LazyLoad>
             <div className="name-wrapper">
               <div className="username">{pic.userName}</div>
-              <div className="name">{pic.name}</div>
+                <div className="show_more_options pic">
+                  <ThreeDots
+                    id={`report-${pic.id}`}
+                    role="button"
+                    dataTip="tooltip"
+                    dataClass="tooltip-wrapr"
+                    getContent={renderReportTips}
+                    effect="solid"
+                    delayHide={500}
+                    delayShow={500}
+                    delayUpdate={500}
+                    place={"left"}
+                    border
+                    type={"light"}
+                  />
+                </div>
             </div>
+            {pic && isReport && <ReportCard item={pic} />}
           </div>
         )}
-        {pic && isReport && <ReportCard item={pic} />}
       </div>
     );
   }
@@ -80,7 +95,8 @@ PictureCardBody.propTypes = {
   isLoading: PropTypes.any,
   searchData: PropTypes.any,
   history: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  renderReportTips: PropTypes.any
 };
 
 export default connect(

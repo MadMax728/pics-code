@@ -27,7 +27,8 @@ class ImagesBOPage extends Component {
 
   render() {
     let { imageList } = this.state;
-    const { isLoading, form } = this.state;
+    const { isLoading } = this.state;
+    const { form } = this.state;
     const { reportedContentData, searchData } = this.props;
     imageList = search(imageList,"userName", form.search || searchData.searchKeyword);
     
@@ -116,8 +117,9 @@ class ImagesBOPage extends Component {
   }
 
   renderImageList = () => {
-    let { imageList, form } = this.state;
-    const { searchData } = this.props;
+    let { imageList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
     imageList = search(imageList,"userName", form.search || searchData.searchKeyword);
     return imageList.map(image => {
       return (
@@ -126,7 +128,7 @@ class ImagesBOPage extends Component {
           image.typeContent &&
           image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
           (
-            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
+            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
           )}
         </div>
       );

@@ -29,7 +29,7 @@ const UserCardBody = ({
           <div className="username">{user.username}</div>
           <div className="name">{user.name}</div>
           {isBackOffice && (
-            <div className="show_more_options">
+            <div className="show_more_options user">
               <ThreeDots
                 id={`report-${user.id}`}
                 role="button"

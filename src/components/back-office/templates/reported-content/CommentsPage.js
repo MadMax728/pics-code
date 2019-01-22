@@ -27,7 +27,8 @@ class CommentsPage extends Component {
 
   render() {
     const { isLoading } = this.state;
-    let { commentList, form } = this.state;
+    let { commentList } = this.state;
+    const { form } = this.state;
     const { searchData } = this.props;
     commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
     const { reportedContentData } = this.props;
@@ -117,8 +118,9 @@ class CommentsPage extends Component {
   }
 
   renderCommentList = () => {
-    let { commentList, form } = this.state;
-    const { searchData } = this.props;
+    let { commentList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
     commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
       return (
         <CommentCard
@@ -126,7 +128,7 @@ class CommentsPage extends Component {
           totalCommentsCount={commentList.length}
           isReport
           isBackOffice
-          handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+          handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
           handleRemove={this.handleRemove} 
         />
       );
