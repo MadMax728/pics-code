@@ -18,7 +18,7 @@ class PictureCardBody extends Component {
         }
       >
         {pic && (
-          <div className="pic-block">
+          <div className="pic-block pic-sec-block">
             <LazyLoad
               height={200}
               once

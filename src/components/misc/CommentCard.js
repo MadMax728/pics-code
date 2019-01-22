@@ -308,7 +308,7 @@ class CommentCard extends Component {
         </div>
         <div className="comment-content col-md-12 no-padding">
           <div className="col-md-1" />
-          <div className="col-md-10">{this.renderEditComment(comment)}</div>
+          <div className="col-md-10 comment-content-div">{this.renderEditComment(comment)}</div>
         </div>
       </div>
     );
