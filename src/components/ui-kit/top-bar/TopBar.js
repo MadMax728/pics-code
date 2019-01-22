@@ -19,7 +19,7 @@ import {
   getDashboard
 } from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
-import { ThreeDots } from "../../ui-kit";
+import { ThreeDots, UserProfileImage } from "../../ui-kit";
 
 class TopBar extends Component {
   constructor(props) {
@@ -35,13 +35,8 @@ class TopBar extends Component {
     return (
       <div>
         <div className="user_info">
-          <div className="user-image bg-white no-padding">
-            <img
-              src={items.userProfile ? items.userProfile : images.crop_pic}
-              width="100%"
-              alt="profile"
-            />
-          </div>
+          <UserProfileImage item={items.userProfile ? items.userProfile : images.crop_pic} 
+            userName={items.username ? items.username : "Username"}/>
           <div className="user-details no-padding-right padding-l-10">
             <div className="bg-white padding-25 user_details">
               <div className="user_name">

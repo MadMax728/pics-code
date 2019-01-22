@@ -158,7 +158,7 @@ class StepThree extends Component {
                       (form.typeContent &&
                         form.typeContent.toLowerCase() ===
                           enumerations.mediaTypes.image)) && (
-                      <ImageItem item={form.image} />
+                      <ImageItem item={form.image} userName={userInfo ? userInfo.username : ""} />
                     )}
                   </div>
                 </div>
