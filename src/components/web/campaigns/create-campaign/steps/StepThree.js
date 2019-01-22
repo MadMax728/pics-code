@@ -5,7 +5,12 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
-import { ImageItem, VideoItem, UserImageItem, UserTitleItem } from "../../../../ui-kit";
+import {
+  ImageItem,
+  VideoItem,
+  UserImageItem,
+  UserTitleItem
+} from "../../../../ui-kit";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import { DateFormat } from "../../../../Factory";
 
@@ -14,12 +19,21 @@ class StepThree extends Component {
     super(props);
     this.state = {
       startDate: moment(),
-      endDate: moment()
+      endDate: moment(),
+      maxClicks: 0
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { maxClicks } = this.props;
+    if (prevState.maxClicks !== maxClicks) {
+      this.setState({ maxClicks: maxClicks });
+    }
   }
 
   render() {
     const { form, handleSelect, userInfo } = this.props;
+    const { maxClicks } = this.state;
     const todayDate = new Date();
     return (
       <div className="col-xs-12 no-padding">
@@ -82,7 +96,10 @@ class StepThree extends Component {
               {Translations.create_campaigns.maximum_number_of_clicks}
             </label>
             <div className="meter orange nostripes">
-              <span style={{ width: "3.36px" }} className="filled-strip" />
+              <span
+                style={{ width: `${maxClicks}px` }}
+                className="filled-strip"
+              />
               <span className="number-clicks">
                 {Translations.create_campaigns.max_1200_clicks}
               </span>
@@ -106,10 +123,19 @@ class StepThree extends Component {
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
             <div className="feed_header">
-              <UserImageItem item={userInfo ? userInfo.profileUrl : images.image} customClass={`padding-rl-10`} />
-              <UserTitleItem date={DateFormat(todayDate, Translations.date_format.date, true)}
-                             title={form.title} 
-                             username={userInfo ? userInfo.username : ""} />
+              <UserImageItem
+                item={userInfo ? userInfo.profileUrl : images.image}
+                customClass={`padding-rl-10`}
+              />
+              <UserTitleItem
+                date={DateFormat(
+                  todayDate,
+                  Translations.date_format.date,
+                  true
+                )}
+                title={form.title}
+                username={userInfo ? userInfo.username : ""}
+              />
               <div className="like_wrapper">
                 <img
                   src={images.blue_heart}
@@ -163,20 +189,27 @@ class StepThree extends Component {
   handleStartDateChange = date => {
     this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
 
   handleEndDateChange = date => {
     this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
-
 }
 
 StepThree.propTypes = {
   form: PropTypes.any.isRequired,
   handleDate: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  userInfo: PropTypes.any
+  userInfo: PropTypes.any,
+  maxClicks: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 export default StepThree;

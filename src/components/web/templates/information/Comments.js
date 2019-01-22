@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../../../lib/constants/images";
-import { ThreeDots, ReadMore } from "../../../ui-kit";
+import { ThreeDots, ReadMore, UserImageItem } from "../../../ui-kit";
 import { RenderToolTips, HashTagUsername } from "../../../common";
 import { Translations } from "../../../../lib/translations";
 import {
@@ -58,13 +58,7 @@ class Comments extends Component {
       <div className="feed-comment" id={campaign.id}>
         <div className="comment-wrapper">
           <form onSubmit={this.handleSubmit} ref={this.commentForm}>
-            <div className="no-padding profile_image">
-              <img
-                src={profileImage}
-                alt="image1"
-                className="img-circle img-responsive"
-              />
-            </div>
+            <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
             <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
               <div className="comment-input">
                 <div className="form-group">
@@ -224,7 +218,6 @@ class Comments extends Component {
       this.props.editComment(updateForm).then(() => {
         comments[comments.findIndex(c => c.id === updateForm.id)].comment =
           updateForm.comment;
-        /* eslint-disable */
         this.setState({ comments });
         this.setState({
           updateForm: { ...this.state.updateForm, comment: "", id: null }
@@ -300,7 +293,7 @@ class Comments extends Component {
   };
 
   renderEditComment = comment => {
-    const { updateForm, isEmoji } = this.state;
+    const { updateForm } = this.state;
     const { isLoading } = this.props;
     let html = (
       <ReadMore text={comment.comment} min={150} ideal={150} max={150} />
@@ -350,13 +343,7 @@ class Comments extends Component {
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header">
-          <div className="no-padding profile_image">
-            <img
-              src={comment.profileImage}
-              alt={`comment-${comment.id}`}
-              className="img-circle img-responsive"
-            />
-          </div>
+          <UserImageItem item={comment.profileImage} customClass={`img-circle img-responsive`} />
           <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
             <b>{comment.userName}</b> {comment.createdAt} <b>Reply</b>
           </div>

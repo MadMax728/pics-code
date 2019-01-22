@@ -28,7 +28,7 @@ class PictureCardBody extends Component {
               {/* <img src={pic.mediaUrl} alt={pic.typeContent} /> */}
               {pic.typeContent &&
                 pic.typeContent.toLowerCase() ===
-                enumerations.mediaTypes.video && (
+                  enumerations.mediaTypes.video && (
                   <VideoItem
                     id={pic.id}
                     item={pic.mediaUrl}
@@ -38,9 +38,9 @@ class PictureCardBody extends Component {
               {(!pic.typeContent ||
                 (pic.typeContent &&
                   pic.typeContent.toLowerCase() ===
-                  enumerations.mediaTypes.image)) && (
-                  <ImageItem item={pic.mediaUrl} isLoading={isLoading} id={pic.id}/>
-                )}
+                    enumerations.mediaTypes.image)) && (
+                <ImageItem item={pic.mediaUrl} isLoading={isLoading} />
+              )}
             </LazyLoad>
             <div className="name-wrapper">
               <div className="username">{pic.userName}</div>
@@ -68,17 +68,16 @@ class PictureCardBody extends Component {
     );
   }
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      console.log("123");
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
     }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
+    return null;
+  }
 }
 
 const mapStateToProps = state => ({
