@@ -39,7 +39,6 @@ class StepTwo extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const { maxClicks } = this.state;
-    console.log("MaxClick", maxClicks);
     const todayDate = new Date();
     const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
@@ -124,7 +123,10 @@ class StepTwo extends Component {
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
             <div className="feed_header">
-              <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
+              <UserImageItem
+                item={profileImage}
+                customClass={`img-circle img-responsive`}
+              />
               <div className="no-padding titles_wrapper">
                 <div className="normal_title">{form.title}</div>
                 <div className="secondary_title">{userInfo.username} </div>

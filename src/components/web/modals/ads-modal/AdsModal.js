@@ -351,6 +351,7 @@ class AdsModal extends Component {
       if (maxClicksValue > 1200) {
         maxClicksValue = 1200;
       }
+      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
       this.setState({ maxClicks: maxClicksValue });
     }
   };

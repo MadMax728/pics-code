@@ -34,7 +34,6 @@ class StepThree extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const { maxClicks } = this.state;
-    console.log("MaxClick", maxClicks);
     const todayDate = new Date();
     return (
       <div className="col-xs-12 no-padding">
