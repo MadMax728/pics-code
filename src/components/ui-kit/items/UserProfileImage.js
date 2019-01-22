@@ -20,6 +20,7 @@ class UserProfileImage extends Component {
             <LazyLoad height={75} once offset={[-75, 0]}>
                 {  item &&  <img
                             src={item}
+                            role="presentation"
                             onClick={this.openLightbox}
                             onKeyDown={this.openLightbox}
                             width="100%"

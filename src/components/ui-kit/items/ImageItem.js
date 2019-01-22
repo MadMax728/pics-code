@@ -34,6 +34,7 @@ class ImageItem extends Component {
                 <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
                   {  item && <img src={item}
                             alt="altmage"
+                            role="presentation"
                             onClick={this.openLightbox}
                             onKeyDown={this.openLightbox}
                             className="img-responsive"/> 
