@@ -214,14 +214,12 @@ UploadModal.propTypes = {
   uploadMedia: PropTypes.func,
   handleModalInfoMsgShow: PropTypes.func,
   data: PropTypes.any,
-  media: PropTypes.any,
   addParticipants: PropTypes.func,
   campaignData: PropTypes.any,
   getCampaignDetails: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-  media: state.mediaData,
   campaignData: state.campaignData
 });
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
-import { Loader, ImageItem, VideoItem } from "../../ui-kit";
+import { Loader, ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { getSearch } from "../../../actions";
 import { connect } from "react-redux";
@@ -10,7 +10,7 @@ import * as routes from "../../../lib/constants/routes";
 
 class PictureCardBody extends Component {
   render() {
-    const { pic, index, isReport, isLoading } = this.props;
+    const { pic, index, isReport, isLoading, renderReportTips } = this.props;
     return (
       <div
         className={
@@ -18,7 +18,7 @@ class PictureCardBody extends Component {
         }
       >
         {pic && (
-          <div className="pic-block">
+          <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
             <LazyLoad
               height={200}
               once
@@ -28,7 +28,7 @@ class PictureCardBody extends Component {
               {/* <img src={pic.mediaUrl} alt={pic.typeContent} /> */}
               {pic.typeContent &&
                 pic.typeContent.toLowerCase() ===
-                enumerations.mediaTypes.video && (
+                  enumerations.mediaTypes.video && (
                   <VideoItem
                     id={pic.id}
                     item={pic.mediaUrl}
@@ -38,32 +38,46 @@ class PictureCardBody extends Component {
               {(!pic.typeContent ||
                 (pic.typeContent &&
                   pic.typeContent.toLowerCase() ===
-                  enumerations.mediaTypes.image)) && (
-                  <ImageItem item={pic.mediaUrl} isLoading={isLoading} />
-                )}
+                    enumerations.mediaTypes.image)) && (
+                <ImageItem item={pic.mediaUrl} isLoading={isLoading} />
+              )}
             </LazyLoad>
             <div className="name-wrapper">
               <div className="username">{pic.userName}</div>
-              <div className="name">{pic.name}</div>
+                <div className="show_more_options pic">
+                  <ThreeDots
+                    id={`report-${pic.id}`}
+                    role="button"
+                    dataTip="tooltip"
+                    dataClass="tooltip-wrapr"
+                    getContent={renderReportTips}
+                    effect="solid"
+                    delayHide={500}
+                    delayShow={500}
+                    delayUpdate={500}
+                    place={"left"}
+                    border
+                    type={"light"}
+                  />
+                </div>
             </div>
+            {pic && isReport && <ReportCard item={pic} />}
           </div>
         )}
-        {pic && isReport && <ReportCard item={pic} />}
       </div>
     );
   }
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log(nextProps);
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      console.log("123");
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
     }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
+    return null;
+  }
 }
 
 const mapStateToProps = state => ({
@@ -81,7 +95,8 @@ PictureCardBody.propTypes = {
   isLoading: PropTypes.any,
   searchData: PropTypes.any,
   history: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  renderReportTips: PropTypes.any
 };
 
 export default connect(

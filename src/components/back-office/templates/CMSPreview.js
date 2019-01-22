@@ -61,8 +61,8 @@ class CMSPreview extends Component {
 }
 
 CMSPreview.propTypes = {
-  handleModalInfoHide: PropTypes.func,
-  handleModalHide: PropTypes.func,
+  // handleModalInfoHide: PropTypes.func,
+  // handleModalHide: PropTypes.func,
   modalInfo: PropTypes.any
 };
 

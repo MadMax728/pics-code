@@ -88,8 +88,9 @@ class ReportedCampaignsPage extends Component {
   }
 
   rendercampaigns = () => {
-    let { campaignList, form } = this.state;
-    const { searchData } = this.props;
+    let { campaignList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
     campaignList = search(campaignList, "userName", form.search  || searchData.searchKeyword);
     
     return campaignList.map(campaign => {
@@ -107,7 +108,7 @@ class ReportedCampaignsPage extends Component {
               isBudget={false}
               isReport
               isBackOffice 
-              handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
               handleRemove={this.handleRemove}
               />
           )}
@@ -139,7 +140,8 @@ class ReportedCampaignsPage extends Component {
   }
 
   render(){
-    let { campaignList, form } = this.state;
+    let { campaignList } = this.state;
+    const { form } = this.state;
     const { isLoading } = this.state;
     const { reportedContentData, searchData } = this.props;
     campaignList = search(campaignList, "userName", form.search  || searchData.searchKeyword);

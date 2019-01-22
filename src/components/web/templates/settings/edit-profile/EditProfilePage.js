@@ -11,7 +11,7 @@ import {
 import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
-import { getUser, updateUserProfile, getSearch } from "../../../../../actions";
+import { getUser, updateUserProfile } from "../../../../../actions";
 import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
@@ -552,8 +552,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getUser,
-  updateUserProfile,
-  getSearch
+  updateUserProfile
 };
 
 EditProfile.propTypes = {
@@ -564,8 +563,7 @@ EditProfile.propTypes = {
   profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any,
-  getSearch: PropTypes.func
+  history: PropTypes.any
 };
 
 export default connect(

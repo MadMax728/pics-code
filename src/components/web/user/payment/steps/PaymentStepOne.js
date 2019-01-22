@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
-import PropTypes from "prop-types";
-import { Translations } from "../../../../../lib/translations";
 import moment from "moment";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import * as images from "../../../../../lib/constants/images";
+import { Translations } from "../../../../../lib/translations";
 
 class PaymentStepOne extends Component {
   constructor(props) {
@@ -191,15 +191,13 @@ class PaymentStepOne extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  categoryList: state.selectData
+const mapStateToProps = () => ({
 });
 
 PaymentStepOne.propTypes = {
   form: PropTypes.any.isRequired,
   handleAddress: PropTypes.func.isRequired,
-  userInfo: PropTypes.any,
-  categoryList: PropTypes.any
+  userInfo: PropTypes.any
 };
 
 export default connect(mapStateToProps)(PaymentStepOne);
