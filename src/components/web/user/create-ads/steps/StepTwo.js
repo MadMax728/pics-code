@@ -8,24 +8,36 @@ import { SelectDailyBudget } from "../../../../../components/common";
 class StepTwo extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      startDate: moment(),
-      endDate: moment()
-    };
+    this.state = { startDate: moment(), endDate: moment(), maxClicks: 0 };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { maxClicks } = this.props;
+    if (prevState.maxClicks !== maxClicks) {
+      this.setState({ maxClicks: maxClicks });
+    }
   }
 
   handleStartDateChange = date => {
     this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
 
   handleEndDateChange = date => {
     this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
 
   render() {
     const { form, handleSelect, userInfo } = this.props;
+    const { maxClicks } = this.state;
+    console.log("MaxClick", maxClicks);
     const todayDate = new Date();
     return (
       <div className="col-xs-12 no-padding">
@@ -86,7 +98,10 @@ class StepTwo extends Component {
               {Translations.create_ads.maximum_number_of_clicks}
             </label>
             <div className="meter orange nostripes">
-              <span style={{ width: "157px" }} className="filled-strip" />
+              <span
+                style={{ width: `${maxClicks}px` }}
+                className="filled-strip"
+              />
               <span className="number-clicks">
                 {Translations.create_ads.max_1200_clicks}
               </span>
@@ -173,7 +188,9 @@ StepTwo.propTypes = {
   handleDate: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  userInfo: PropTypes.any
+  userInfo: PropTypes.any,
+  maxClicks: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 export default StepTwo;

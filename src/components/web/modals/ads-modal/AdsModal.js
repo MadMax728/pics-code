@@ -5,7 +5,8 @@ import { CreateAds, CreateAdsHeader } from "../../user";
 import {
   modalType,
   target_group,
-  typeContent
+  typeContent,
+  budgetCalculation
 } from "../../../../lib/constants/enumerations";
 import moment from "moment";
 import { Auth } from "../../../../auth";
@@ -23,6 +24,7 @@ if (storage) {
 const initialState = {
   stepIndex: 0,
   userInfo: null,
+  maxClicks: 0,
   form: {
     title: "",
     location: {
@@ -69,9 +71,8 @@ class AdsModal extends Component {
     this.state = initialState;
   }
 
-
   render() {
-    const { stepIndex, form, userInfo } = this.state;
+    const { stepIndex, form, userInfo, maxClicks } = this.state;
     const { handleModalHide, modalShow } = this.props;
 
     let modalClassName = "";
@@ -107,6 +108,7 @@ class AdsModal extends Component {
             handleModalInfoShow={this.handleModalInfoShow}
             handleChangeField={this.handleChangeField}
             form={form}
+            maxClicks={maxClicks}
             userInfo={userInfo}
             handleSubmit={this.handleSubmit}
             handleDate={this.handleDate}
@@ -118,6 +120,7 @@ class AdsModal extends Component {
             handleSetState={this.handleSetState}
             handleAddress={this.handleAddress}
             setVoucherData={this.setVoucherData}
+            calculateMaxClicks={this.calculateMaxClicks}
           />
         }
       />
@@ -136,7 +139,7 @@ class AdsModal extends Component {
       this.setState({ stepIndex: 0 });
     }
   }
-  
+
   componentWillUnmount = () => {
     this.setState(initialState);
   };
@@ -330,7 +333,26 @@ class AdsModal extends Component {
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected;
+    if (isFor === "budget") {
+      this.calculateMaxClicks();
+    }
     this.setState({ form });
+  };
+
+  calculateMaxClicks = () => {
+    const { form } = this.state;
+    let maxClicksValue = 0;
+    const CPC = budgetCalculation.CPC;
+    const budgetValue = form.budget;
+    const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
+    if (noOfDaysRuntime && budgetValue) {
+      maxClicksValue =
+        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
+      if (maxClicksValue > 1200) {
+        maxClicksValue = 1200;
+      }
+      this.setState({ maxClicks: maxClicksValue });
+    }
   };
 
   handleAddress = event => {
@@ -338,7 +360,6 @@ class AdsModal extends Component {
     form.address[event.target.name] = event.target.value;
     this.setState({ form });
   };
-
 }
 
 AdsModal.propTypes = {
@@ -348,7 +369,9 @@ AdsModal.propTypes = {
   createAd: PropTypes.func.isRequired,
   uploadMedia: PropTypes.func.isRequired,
   mediaData: PropTypes.any,
-  adData: PropTypes.any
+  adData: PropTypes.any,
+  maxClicks: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 const mapStateToProps = state => ({

@@ -19,12 +19,22 @@ class StepThree extends Component {
     super(props);
     this.state = {
       startDate: moment(),
-      endDate: moment()
+      endDate: moment(),
+      maxClicks: 0
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { maxClicks } = this.props;
+    if (prevState.maxClicks !== maxClicks) {
+      this.setState({ maxClicks: maxClicks });
+    }
   }
 
   render() {
     const { form, handleSelect, userInfo } = this.props;
+    const { maxClicks } = this.state;
+    console.log("MaxClick", maxClicks);
     const todayDate = new Date();
     return (
       <div className="col-xs-12 no-padding">
@@ -87,7 +97,10 @@ class StepThree extends Component {
               {Translations.create_campaigns.maximum_number_of_clicks}
             </label>
             <div className="meter orange nostripes">
-              <span style={{ width: `${3}px` }} className="filled-strip" />
+              <span
+                style={{ width: `${maxClicks}px` }}
+                className="filled-strip"
+              />
               <span className="number-clicks">
                 {Translations.create_campaigns.max_1200_clicks}
               </span>
@@ -177,11 +190,17 @@ class StepThree extends Component {
   handleStartDateChange = date => {
     this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
 
   handleEndDateChange = date => {
     this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
 }
 
@@ -189,7 +208,9 @@ StepThree.propTypes = {
   form: PropTypes.any.isRequired,
   handleDate: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  userInfo: PropTypes.any
+  userInfo: PropTypes.any,
+  maxClicks: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 export default StepThree;
