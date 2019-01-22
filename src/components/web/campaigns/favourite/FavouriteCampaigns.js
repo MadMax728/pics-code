@@ -6,7 +6,7 @@ import * as enumerations from "../../../../lib/constants/enumerations";
 import { getFavouriteCampaigns } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { RightSidebarLoading } from "../../../ui-kit";
+import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
 
 class FavouriteCampaigns extends Component {
 
@@ -20,7 +20,8 @@ class FavouriteCampaigns extends Component {
         {
           !isLoading && (
             <div className="campaigns">
-              {this.props.campaignData.favouriteCampaign &&
+              {
+                this.props.campaignData.favouriteCampaign ? (
                 this.props.campaignData.favouriteCampaign.map(campaign => {
                   return (
                     ((campaign.postType &&
@@ -34,7 +35,8 @@ class FavouriteCampaigns extends Component {
                       />
                     )
                   );
-                })}
+                })): (<NoDataFoundRightSidebar />)
+              }
             </div>
           )
         }

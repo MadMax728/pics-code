@@ -887,10 +887,16 @@
         word-break: break-all;
         font-weight: 600;
         text-transform: capitalize;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
        }
        .subtitle{
          word-break: break-all;
-         padding: 0 20px;
+         padding: 0;
+         white-space: nowrap; 
+         overflow: hidden;
+         text-overflow: ellipsis;
        }
       }
       .community-subscribe{

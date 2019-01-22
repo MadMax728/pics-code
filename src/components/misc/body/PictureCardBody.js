@@ -18,7 +18,7 @@ class PictureCardBody extends Component {
         }
       >
         {pic && (
-          <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
+          <div className={isReport ? "backoffice-user pic-sec-block pic-block" : "pic-sec-block pic-block"}>
             <LazyLoad
               height={200}
               once
@@ -68,16 +68,16 @@ class PictureCardBody extends Component {
     );
   }
 
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log(nextProps);
-    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
-      console.log("123");
-      nextProps.history.push(
-        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
-      );
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(nextProps, prevState) {
+  //   console.log(nextProps);
+  //   if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+  //     console.log("123");
+  //     nextProps.history.push(
+  //       routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+  //     );
+  //   }
+  //   return null;
+  // }
 }
 
 const mapStateToProps = state => ({
