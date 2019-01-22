@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../lib/constants/images";
+import { Auth } from "../../auth";
 import { RenderToolTips, HashTagUsername } from "../common";
-import { ThreeDots, ReadMore } from "../ui-kit";
+import { ThreeDots, ReadMore, UserImageItem } from "../ui-kit";
 import { Translations } from "../../lib/translations";
 import {
   addComment,
@@ -16,6 +17,7 @@ import ReportCard from "./ReportCard";
 import * as enumerations from "../../lib/constants/enumerations";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
+const storage = Auth.extractJwtFromStorage();
 
 class CommentCard extends Component {
   constructor(props, context) {
@@ -236,13 +238,7 @@ class CommentCard extends Component {
         <div className="feed-comment">
           <div className="comment-wrapper">
             <div className="comment-header">
-              <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                <img
-                  src={comment.profileImage}
-                  alt={`comment-${comment.id}`}
-                  className="img-circle img-responsive ht45"
-                />
-              </div>
+              <UserImageItem item={comment.profileImage} customClass={`img-circle img-responsive`} />
               <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
                 <b>{comment.userName}</b> {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
                 <b>Reply</b>
@@ -278,13 +274,7 @@ class CommentCard extends Component {
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
-          <div className="col-sm-1 col-xs-1 no-padding profile_image">
-            <img
-              src={comment.profileImage}
-              alt={`comment-${comment.id}`}
-              className="img-circle img-responsive ht45"
-            />
-          </div>
+          <UserImageItem item={comment.profileImage} customClass={`img-circle img-responsive`} />
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
             <b>{comment.userName}</b> {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
             <b>Reply</b>
@@ -308,7 +298,7 @@ class CommentCard extends Component {
         </div>
         <div className="comment-content col-md-12 no-padding">
           <div className="col-md-1" />
-          <div className="col-md-10">{this.renderEditComment(comment)}</div>
+          <div className="col-md-10 comment-content-div">{this.renderEditComment(comment)}</div>
         </div>
       </div>
     );
@@ -424,18 +414,14 @@ class CommentCard extends Component {
   render() {
     const { item, form, isEmoji, isBackOffice } = this.state;
     const { isLoading, isReport } = this.props;
+    const userInfo = storage ? JSON.parse(storage.userInfo) : null;
+    const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
         {!isReport && (
           <div className="comment-wrapper">
             <form onSubmit={this.handleSubmit} ref={this.commentForm}>
-              <div className="no-padding profile_image">
-                <img
-                  src={images.image}
-                  alt="image1"
-                  className="img-circle img-responsive"
-                />
-              </div>
+              <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
               <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
                 <div className="comment-input">
                   <div className="form-group">

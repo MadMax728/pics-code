@@ -340,6 +340,14 @@
     @include gradient();
   }
 }
+.profile-img-wrapper{
+  .user_info{
+    padding: 15px 0;
+    div{
+      margin: 0 auto;
+    }
+  }
+}
 .right_bar {
   width: 30%;
   float: right;
@@ -469,7 +477,7 @@
           &:before {
             content: "\2022";
             position: absolute;
-            top: 1px;
+            top: 0;
             left: 0;
           }
           color: $silver_color;
@@ -686,6 +694,7 @@
         float: left;
         img{
           width: 45px;
+          height: 45px;
         }
       }
       input {
@@ -702,6 +711,11 @@
       }
       .emoji_wrapper {
         padding-right: 0px;
+        position: relative;
+        .emoji-mart{
+          bottom: 20px !important;
+          right: 20px !important;
+        }
       }
       .commenter-info {
         b {
@@ -765,6 +779,11 @@
       color: $silver_color;
       cursor: pointer;      
     }
+  }
+}
+.comment-content-div{
+  input{
+    padding-left: 0;
   }
 }
 .tick {

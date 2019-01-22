@@ -13,7 +13,8 @@ import {
   modalType,
   typeContent,
   target_group,
-  procedure
+  procedure,
+  budgetCalculation
 } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 
@@ -31,6 +32,7 @@ const initialState = {
   stepIndex: 0,
   isPreview: false,
   userInfo: null,
+  maxClicks: 0,
   form: {
     title: "",
     location: {
@@ -80,6 +82,134 @@ class CampaignModal extends Component {
     super(props, context);
     this.state = initialState;
   }
+
+  render() {
+    const { isFor, handleModalHide } = this.props;
+    const { stepIndex, isPreview, form, userInfo, maxClicks } = this.state;
+
+    let modalClassName = "";
+
+    if (stepIndex === 0) {
+      modalClassName = "modal fade create-campaign-modal overflow-scroll ";
+    } else if (stepIndex !== 0 && stepIndex < 4) {
+      modalClassName = "modal fade create-campaign-modal editor-modal";
+    } else if (stepIndex > 3 && stepIndex < 5) {
+      modalClassName = "modal fade payment-overview-modal";
+    }
+
+    return (
+      <CustomBootstrapModal
+        modalClassName={modalClassName}
+        header={!isPreview}
+        modalHeaderContent={
+          isFor ? (
+            <CreateCompanyCampaignHeader
+              handleModalHide={handleModalHide}
+              handleNext={this.handleNext}
+              handlePrev={this.handlePrev}
+              stepIndex={this.state.stepIndex}
+              handlePrivewOpen={this.handlePrivewOpen}
+              handleResoreState={this.handleResoreState}
+            />
+          ) : (
+            <CreateCreatorCampaignHeader
+              handleModalHide={handleModalHide}
+              handleNext={this.handleNext}
+              handlePrev={this.handlePrev}
+              stepIndex={stepIndex}
+              handlePrivewOpen={this.handlePrivewOpen}
+            />
+          )
+        }
+        footer={false}
+        modalShow={this.props.modalShow}
+        closeBtn={false}
+        handleModalHide={handleModalHide}
+        modalBodyContent={
+          isFor ? (
+            <CreateCompanyCampaign
+              stepIndex={stepIndex}
+              isFor={isFor}
+              forThat={"Campaigns"}
+              handleModalInfoShow={this.handleModalInfoShow}
+              handlePrivewClose={this.handlePrivewClose}
+              isPreview={isPreview}
+              handleChangeField={this.handleCompanyChangeField}
+              handleAddress={this.handleAddress}
+              form={form}
+              maxClicks={maxClicks}
+              handleContentChange={this.handleContentChange}
+              handleSubmit={this.handleCompanySubmit}
+              handleDate={this.handleDate}
+              contentText={form.description}
+              handleEditImage={this.handleEditImage}
+              handleLocation={this.handleLocation}
+              ref={this.imageCropper}
+              handleActualImg={this.handleActualImg}
+              handleScale={this.handleScale}
+              handleOfferTagChange={this.handleOfferTagChange}
+              handleOfferTagDelete={this.handleOfferTagDelete}
+              handleInquiryTagChange={this.handleInquiryTagChange}
+              handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleSelect={this.handleSelect}
+              handleVideo={this.handleVideo}
+              userInfo={userInfo}
+              setVoucherData={this.setVoucherData}
+              calculateMaxClicks={this.calculateMaxClicks}
+            />
+          ) : (
+            <CreateCreatorCampaign
+              stepIndex={stepIndex}
+              isFor={isFor}
+              forThat={"Campaigns"}
+              handleModalInfoShow={this.handleModalInfoShow}
+              handlePrivewClose={this.handlePrivewClose}
+              isPreview={isPreview}
+              handleChangeField={this.handleCompanyChangeField}
+              form={form}
+              maxClicks={maxClicks}
+              handleAddress={this.handleAddress}
+              handleContentChange={this.handleContentChange}
+              handleSubmit={this.handleCompanySubmit}
+              handleDate={this.handleDate}
+              contentText={form.description}
+              handleEditImage={this.handleEditImage}
+              handleLocation={this.handleLocation}
+              ref={this.imageCropper}
+              handleActualImg={this.handleActualImg}
+              handleScale={this.handleScale}
+              handleOfferTagChange={this.handleOfferTagChange}
+              handleOfferTagDelete={this.handleOfferTagDelete}
+              handleInquiryTagChange={this.handleInquiryTagChange}
+              handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleSelect={this.handleSelect}
+              handleVideo={this.handleVideo}
+              userInfo={userInfo}
+              setVoucherData={this.setVoucherData}
+              calculateMaxClicks={this.calculateMaxClicks}
+            />
+          )
+        }
+      />
+    );
+  }
+
+  componentDidMount = () => {
+    this.setState({ stepIndex: 0, isPreview: false });
+    if (userInfo) {
+      this.setState({ userInfo });
+    }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.modalShow) {
+      this.setState({ stepIndex: 0, isPreview: false });
+    }
+  }
+
+  componentWillUnmount = () => {
+    this.setState(initialState);
+  };
 
   handleEditImage = image => {
     this.setState({ form: { ...this.state.form, image } });
@@ -166,10 +296,6 @@ class CampaignModal extends Component {
         form.location.longitude &&
         form.location.address &&
         form.category &&
-        form.offers &&
-        form.offerTag.length !== 0 &&
-        form.inquiry &&
-        form.inquiryTag.length !== 0 &&
         form.file
       );
     } else if (index === 1) {
@@ -204,18 +330,6 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
-  componentDidMount = () => {
-    this.setState({ stepIndex: 0, isPreview: false });
-    if (userInfo) {
-      this.setState({ userInfo });
-    }
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 0, isPreview: false });
-    }
-  }
   handleResoreState = () => {
     this.setState({
       form: {}
@@ -370,11 +484,27 @@ class CampaignModal extends Component {
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected;
+    if (isFor === "budget") {
+      this.calculateMaxClicks();
+    }
     this.setState({ form });
   };
 
-  componentWillUnmount = () => {
-    this.setState(initialState);
+  calculateMaxClicks = () => {
+    const { form } = this.state;
+    let maxClicksValue = 0;
+    let CPC = budgetCalculation.CPC;
+    const budgetValue = form.budget;
+    const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
+    if (noOfDaysRuntime && budgetValue) {
+      maxClicksValue =
+        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
+      if (maxClicksValue > 1200) {
+        maxClicksValue = 1200;
+      }
+      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+      this.setState({ maxClicks: maxClicksValue });
+    }
   };
 
   handleAddress = event => {
@@ -382,113 +512,6 @@ class CampaignModal extends Component {
     form.address[event.target.name] = event.target.value;
     this.setState({ form });
   };
-
-  render() {
-    const { isFor, handleModalHide } = this.props;
-    const { stepIndex, isPreview, form, userInfo } = this.state;
-
-    let modalClassName = "";
-
-    if (stepIndex === 0) {
-      modalClassName = "modal fade create-campaign-modal overflow-scroll ";
-    } else if (stepIndex !== 0 && stepIndex < 4) {
-      modalClassName = "modal fade create-campaign-modal editor-modal";
-    } else if (stepIndex > 3 && stepIndex < 5) {
-      modalClassName = "modal fade payment-overview-modal";
-    }
-
-    return (
-      <CustomBootstrapModal
-        modalClassName={modalClassName}
-        header={!isPreview}
-        modalHeaderContent={
-          isFor ? (
-            <CreateCompanyCampaignHeader
-              handleModalHide={handleModalHide}
-              handleNext={this.handleNext}
-              handlePrev={this.handlePrev}
-              stepIndex={this.state.stepIndex}
-              handlePrivewOpen={this.handlePrivewOpen}
-              handleResoreState={this.handleResoreState}
-            />
-          ) : (
-            <CreateCreatorCampaignHeader
-              handleModalHide={handleModalHide}
-              handleNext={this.handleNext}
-              handlePrev={this.handlePrev}
-              stepIndex={stepIndex}
-              handlePrivewOpen={this.handlePrivewOpen}
-            />
-          )
-        }
-        footer={false}
-        modalShow={this.props.modalShow}
-        closeBtn={false}
-        handleModalHide={handleModalHide}
-        modalBodyContent={
-          isFor ? (
-            <CreateCompanyCampaign
-              stepIndex={stepIndex}
-              isFor={isFor}
-              forThat={"Campaigns"}
-              handleModalInfoShow={this.handleModalInfoShow}
-              handlePrivewClose={this.handlePrivewClose}
-              isPreview={isPreview}
-              handleChangeField={this.handleCompanyChangeField}
-              handleAddress={this.handleAddress}
-              form={form}
-              handleContentChange={this.handleContentChange}
-              handleSubmit={this.handleCompanySubmit}
-              handleDate={this.handleDate}
-              contentText={form.description}
-              handleEditImage={this.handleEditImage}
-              handleLocation={this.handleLocation}
-              ref={this.imageCropper}
-              handleActualImg={this.handleActualImg}
-              handleScale={this.handleScale}
-              handleOfferTagChange={this.handleOfferTagChange}
-              handleOfferTagDelete={this.handleOfferTagDelete}
-              handleInquiryTagChange={this.handleInquiryTagChange}
-              handleInquiryTagDelete={this.handleInquiryTagDelete}
-              handleSelect={this.handleSelect}
-              handleVideo={this.handleVideo}
-              userInfo={userInfo}
-              setVoucherData={this.setVoucherData}
-            />
-          ) : (
-            <CreateCreatorCampaign
-              stepIndex={stepIndex}
-              isFor={isFor}
-              forThat={"Campaigns"}
-              handleModalInfoShow={this.handleModalInfoShow}
-              handlePrivewClose={this.handlePrivewClose}
-              isPreview={isPreview}
-              handleChangeField={this.handleCompanyChangeField}
-              form={form}
-              handleAddress={this.handleAddress}
-              handleContentChange={this.handleContentChange}
-              handleSubmit={this.handleCompanySubmit}
-              handleDate={this.handleDate}
-              contentText={form.description}
-              handleEditImage={this.handleEditImage}
-              handleLocation={this.handleLocation}
-              ref={this.imageCropper}
-              handleActualImg={this.handleActualImg}
-              handleScale={this.handleScale}
-              handleOfferTagChange={this.handleOfferTagChange}
-              handleOfferTagDelete={this.handleOfferTagDelete}
-              handleInquiryTagChange={this.handleInquiryTagChange}
-              handleInquiryTagDelete={this.handleInquiryTagDelete}
-              handleSelect={this.handleSelect}
-              handleVideo={this.handleVideo}
-              userInfo={userInfo}
-              setVoucherData={this.setVoucherData}
-            />
-          )
-        }
-      />
-    );
-  }
 }
 
 CampaignModal.propTypes = {
@@ -499,7 +522,8 @@ CampaignModal.propTypes = {
   createCampaign: PropTypes.func.isRequired,
   uploadMedia: PropTypes.func.isRequired,
   mediaData: PropTypes.any,
-  campaignData: PropTypes.any
+  campaignData: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 const mapStateToProps = state => ({

@@ -13,7 +13,7 @@ class StepTwo extends Component {
     const { form, handleContentChange } = this.props;
     return (
       <div className="col-xs-12 create-campaign-wrapper">
-        <div className="title">{Translations.create_campaigns.title}</div>
+        <div className="title">{form.title}</div>
         <TextEditor
           handleContentChange={handleContentChange}
           contentText={form.description}
@@ -33,8 +33,7 @@ class StepTwo extends Component {
 StepTwo.propTypes = {
   // handleChangeField: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired,
-  userInfo: PropTypes.any
+  form: PropTypes.any.isRequired
 };
 
 export default StepTwo;

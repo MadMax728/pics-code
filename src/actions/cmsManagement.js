@@ -2,9 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as cmsManagementService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import {
-  cmsManagement_list
-} from "../mock-data";
 
 const getCMSManagementStarted = () => ({
   type: types.GET_CMS_MANAGEMENT_STARTED

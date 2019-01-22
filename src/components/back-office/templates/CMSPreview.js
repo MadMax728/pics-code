@@ -1,56 +1,59 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import { Translations } from "../../../lib/translations";
 
 class CMSPreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: this.props.modalInfo
+      form: this.props.modalInfo,
     };
   }
 
   render() {
     const { form } = this.state;
     return (
-        <div className="col-xs-12 no-padding">
-            <div className="form-row col-xs-12">
-              <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Title of page" className="col-xs">
-                  {Translations.cms.title_of_page} :
+        <div className="preview-content">
+            <div className="row">
+              <div className="col-xs-6 preview-div-wrapper">
+                <label htmlFor="Title of page" className="title-text">
+                {Translations.cms.title_of_page} :
                 </label>
-                <label htmlFor="Title of page" className="col-xs">
+                <label htmlFor="Title of page" className="content-text">
                   {form.title}
                 </label>
               </div>
-              <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="URL">{Translations.cms.url}</label> :
-                <label htmlFor="Title of page" className="col-xs">
+              <div className="col-xs-6 preview-div-wrapper">
+                <label  className="title-text" htmlFor="URL">{Translations.cms.url}</label> :
+                <label className="content-text" htmlFor="Title of page">
                   {form.url}
                 </label>
               </div>
             </div>
-            <div className="form-row marBtm30 col-xs-12">
-              <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Language">
+            <div className="row">
+              <div className="col-xs-6 preview-div-wrapper">
+                <label className="title-text" htmlFor="Language">
                 {Translations.cms.language} :
                 </label>
-                <label htmlFor="language" className="col-xs">
+                <label htmlFor="language" className="content-text">
                   {form.pageLanguage}
                 </label>
               </div>
-              <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="Display page">{Translations.cms.display_page}</label> :
-                <label htmlFor="display_page" className="col-xs">
+              <div className="col-xs-6 preview-div-wrapper">
+                <label htmlFor="Display page" className="title-text">{Translations.cms.display_page}</label> :
+                <label htmlFor="display_page" className="content-text">
                   {form.display_page}
                 </label>
               </div>
             </div>
-            <div className="form-row col-xs-12 res480">
-              <label htmlFor="Display page">{Translations.cms.description}</label> :
-              <label htmlFor="description" className="col-xs">
-                {form.description}
-              </label>
+            <div className="row">
+              <div className="col-xs-6 preview-div-wrapper">
+                <label htmlFor="Display page" className="title-text">{Translations.cms.description}</label> :
+                <label htmlFor="description" className="content-text">
+                  {form.description}
+                </label>
+              </div>
             </div>
         </div>
     );
@@ -58,8 +61,8 @@ class CMSPreview extends Component {
 }
 
 CMSPreview.propTypes = {
-  handleModalInfoHide: PropTypes.func,
-  handleModalHide: PropTypes.func,
+  // handleModalInfoHide: PropTypes.func,
+  // handleModalHide: PropTypes.func,
   modalInfo: PropTypes.any
 };
 

@@ -1,42 +1,73 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
-import PropTypes from "prop-types";
+import { search } from "../../../lib/utils/helpers";
 
 class ParticipantsPage extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      participantsList: null
+    };
+  }
+
+  render() {
+    let { participantsList } = this.state;
+    const { isLoadingparticipants, searchData } = this.props;
+    participantsList = search(
+      participantsList,
+      "userName",
+      searchData.searchKeyword
+    );
+
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {participantsList &&
+          !isLoadingparticipants &&
+          this.renderParticipantsList()}
+        {isLoadingparticipants && <CampaignLoading />}
+        {!isLoadingparticipants &&
+          (!participantsList ||
+            (participantsList && !participantsList.length)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
-    if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
     window.scrollTo(0, 0);
-    if (this.props.searchData.searchKeyword) {
-      this.props.getDashboard(
-        "participants",
-        "?isSearch=" + this.props.searchData.searchKeyword
-      );
-    } else {
-      this.props.getDashboard("participants", "");
-    }
+    this.handleRefresh();
+    this.handleSearch();
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      let searchParam = "";
-      if (searchKeyword) {
-        searchParam = "?isSearch=" + searchKeyword;
-      }
-      this.props.getDashboard("participants", searchParam);
+  handleSearch = () => {
+    this.props.getDashboard("participants", "").then(() => {
+      const { participantsList } = this.props;
+      this.setState({ participantsList });
+    });
+  };
+
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.handleSearch();
     }
   };
 
   renderParticipantsList = () => {
-    const { participantsList } = this.props;
+    let { participantsList } = this.state;
+    const { searchData } = this.props;
+    participantsList = search(
+      participantsList,
+      "userName",
+      searchData.searchKeyword
+    );
     return participantsList.map(participant => {
       return (
         <div key={participant.id}>
@@ -50,18 +81,6 @@ class ParticipantsPage extends Component {
       );
     });
   };
-
-  render() {
-    const { participantsList, isLoadingparticipants } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {participantsList &&
-          !isLoadingparticipants &&
-          this.renderParticipantsList()}
-        {isLoadingparticipants && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 ParticipantsPage.propTypes = {

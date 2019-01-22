@@ -5,7 +5,14 @@ import LazyLoad from "react-lazyload";
 import { Loader, ThreeDots } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 
-const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, renderReportTips }) => {
+const UserCardBody = ({
+  user,
+  index,
+  handleSubscribed,
+  isReport,
+  isBackOffice,
+  renderReportTips
+}) => {
   return (
     <div
       className={
@@ -13,19 +20,16 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, r
       }
     >
       <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
-        <LazyLoad
-          height={200}
-          once
-          offset={[-200, 0]}
-          placeholder={<Loader />}
-        >
-          <img src={user.profileUrl} alt={"pic-1"} />
+        <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
+          <div className="profile-img-wrapper">
+            <img src={user.profileUrl} alt={"pic-1"} />
+          </div>
         </LazyLoad>
         <div className="name-wrapper">
           <div className="username">{user.username}</div>
           <div className="name">{user.name}</div>
-          {isBackOffice &&
-            <div className="show_more_options">
+          {isBackOffice && (
+            <div className="show_more_options user">
               <ThreeDots
                 id={`report-${user.id}`}
                 role="button"
@@ -41,18 +45,17 @@ const UserCardBody = ({ user, index, handleSubscribed, isReport, isBackOffice, r
                 type={"light"}
               />
             </div>
-          }
+          )}
           {!isBackOffice && user.isSubscribe && (
-              <button
-                className="filled_button"
-                id={user.username}
-                onClick={handleSubscribed}
-              >
-                {Translations.profile_community_right_sidebar.Subscribed}
-              </button>
-            )
-          }
-            {!isBackOffice && !user.isSubscribe && (
+            <button
+              className="filled_button"
+              id={user.username}
+              onClick={handleSubscribed}
+            >
+              {Translations.profile_community_right_sidebar.Subscribed}
+            </button>
+          )}
+          {!isBackOffice && !user.isSubscribe && (
             <button
               className="blue_button"
               id={user.username}

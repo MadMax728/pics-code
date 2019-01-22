@@ -31,17 +31,18 @@
   .personal-interest {
     .tags-wrapper {
       a {
-        width: 74px;
-        height: 25px;
+        min-width: 74px;
+        min-height: 25px;
         display: inline-block;
         border: 1px solid #0f7aba;
         border-radius: 30px;
-        padding: 2px;
+        padding: 3px 10px;
         text-align: center;
         margin-right: 6px;
         color: #0f7aba;
         margin-bottom: 16px;
         margin-top: 20px;
+        line-height: 17px;
         &:hover {
           color: $charcoal_color;
           border: 1px solid $charcoal_color;
@@ -50,6 +51,13 @@
       }
     }
   }
+
+  .profile-description {
+    .profile-content {
+      padding-bottom: 10px;
+    }
+  }
+
   .inquiry-tag {
     margin-bottom: 35px;
     .tags-wrapper {

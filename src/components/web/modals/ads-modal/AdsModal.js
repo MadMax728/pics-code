@@ -5,7 +5,8 @@ import { CreateAds, CreateAdsHeader } from "../../user";
 import {
   modalType,
   target_group,
-  typeContent
+  typeContent,
+  budgetCalculation
 } from "../../../../lib/constants/enumerations";
 import moment from "moment";
 import { Auth } from "../../../../auth";
@@ -23,6 +24,7 @@ if (storage) {
 const initialState = {
   stepIndex: 0,
   userInfo: null,
+  maxClicks: 0,
   form: {
     title: "",
     location: {
@@ -67,6 +69,75 @@ class AdsModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = initialState;
+  }
+
+  render() {
+    const { stepIndex, form, userInfo, maxClicks } = this.state;
+    const { handleModalHide, modalShow } = this.props;
+
+    let modalClassName = "";
+
+    if (stepIndex === 0) {
+      modalClassName = "modal fade create-ad-modal overflow-scroll";
+    } else if (stepIndex !== 0 && stepIndex < 3) {
+      modalClassName = "modal fade create-campaign-modal";
+    } else if (stepIndex > 2 && stepIndex < 5) {
+      modalClassName = "modal fade payment-overview-modal";
+    }
+
+    return (
+      <CustomBootstrapModal
+        modalClassName={modalClassName}
+        header
+        modalHeaderContent={
+          <CreateAdsHeader
+            handleModalHide={handleModalHide}
+            handleNext={this.handleNext}
+            handlePrev={this.handlePrev}
+            stepIndex={stepIndex}
+          />
+        }
+        footer={false}
+        modalShow={modalShow}
+        closeBtn={false}
+        handleModalHide={handleModalHide}
+        modalBodyContent={
+          <CreateAds
+            stepIndex={stepIndex}
+            forThat={"Ads"}
+            handleModalInfoShow={this.handleModalInfoShow}
+            handleChangeField={this.handleChangeField}
+            form={form}
+            maxClicks={maxClicks}
+            userInfo={userInfo}
+            handleSubmit={this.handleSubmit}
+            handleDate={this.handleDate}
+            handleEditImage={this.handleEditImage}
+            handleLocation={this.handleLocation}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
+            handleSelect={this.handleSelect}
+            handleSetState={this.handleSetState}
+            handleAddress={this.handleAddress}
+            setVoucherData={this.setVoucherData}
+            calculateMaxClicks={this.calculateMaxClicks}
+          />
+        }
+      />
+    );
+  }
+
+  componentDidMount = () => {
+    this.setState({ stepIndex: 0 });
+    if (userInfo) {
+      this.setState({ userInfo });
+    }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.modalShow) {
+      this.setState({ stepIndex: 0 });
+    }
   }
 
   componentWillUnmount = () => {
@@ -173,19 +244,6 @@ class AdsModal extends Component {
     this.setState({ form });
   };
 
-  componentDidMount = () => {
-    this.setState({ stepIndex: 0 });
-    if (userInfo) {
-      this.setState({ userInfo });
-    }
-  };
-
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 0 });
-    }
-  }
-
   setVoucherData = (code, voucher, maximumExpenses) => {
     const { form } = this.state;
     if (voucher && maximumExpenses) {
@@ -275,7 +333,27 @@ class AdsModal extends Component {
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected;
+    if (isFor === "budget") {
+      this.calculateMaxClicks();
+    }
     this.setState({ form });
+  };
+
+  calculateMaxClicks = () => {
+    const { form } = this.state;
+    let maxClicksValue = 0;
+    const CPC = budgetCalculation.CPC;
+    const budgetValue = form.budget;
+    const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
+    if (noOfDaysRuntime && budgetValue) {
+      maxClicksValue =
+        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
+      if (maxClicksValue > 1200) {
+        maxClicksValue = 1200;
+      }
+      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+      this.setState({ maxClicks: maxClicksValue });
+    }
   };
 
   handleAddress = event => {
@@ -283,60 +361,6 @@ class AdsModal extends Component {
     form.address[event.target.name] = event.target.value;
     this.setState({ form });
   };
-
-  render() {
-    const { stepIndex, form, userInfo } = this.state;
-    const { handleModalHide, modalShow } = this.props;
-
-    let modalClassName = "";
-
-    if (stepIndex === 0) {
-      modalClassName = "modal fade create-ad-modal overflow-scroll";
-    } else if (stepIndex !== 0 && stepIndex < 3) {
-      modalClassName = "modal fade create-campaign-modal";
-    } else if (stepIndex > 2 && stepIndex < 5) {
-      modalClassName = "modal fade payment-overview-modal";
-    }
-
-    return (
-      <CustomBootstrapModal
-        modalClassName={modalClassName}
-        header
-        modalHeaderContent={
-          <CreateAdsHeader
-            handleModalHide={handleModalHide}
-            handleNext={this.handleNext}
-            handlePrev={this.handlePrev}
-            stepIndex={stepIndex}
-          />
-        }
-        footer={false}
-        modalShow={modalShow}
-        closeBtn={false}
-        handleModalHide={handleModalHide}
-        modalBodyContent={
-          <CreateAds
-            stepIndex={stepIndex}
-            forThat={"Ads"}
-            handleModalInfoShow={this.handleModalInfoShow}
-            handleChangeField={this.handleChangeField}
-            form={form}
-            userInfo={userInfo}
-            handleSubmit={this.handleSubmit}
-            handleDate={this.handleDate}
-            handleEditImage={this.handleEditImage}
-            handleLocation={this.handleLocation}
-            handleActualImg={this.handleActualImg}
-            handleScale={this.handleScale}
-            handleSelect={this.handleSelect}
-            handleSetState={this.handleSetState}
-            handleAddress={this.handleAddress}
-            setVoucherData={this.setVoucherData}
-          />
-        }
-      />
-    );
-  }
 }
 
 AdsModal.propTypes = {
@@ -346,7 +370,9 @@ AdsModal.propTypes = {
   createAd: PropTypes.func.isRequired,
   uploadMedia: PropTypes.func.isRequired,
   mediaData: PropTypes.any,
-  adData: PropTypes.any
+  adData: PropTypes.any,
+  maxClicks: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 const mapStateToProps = state => ({

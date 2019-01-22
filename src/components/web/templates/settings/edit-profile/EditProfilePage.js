@@ -11,7 +11,7 @@ import {
 import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
 import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
-import { getUser, updateUserProfile, getSearch } from "../../../../../actions";
+import { getUser, updateUserProfile } from "../../../../../actions";
 import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
@@ -24,6 +24,7 @@ class EditProfile extends Component {
       isLoading: false,
       userInfo: null,
       categoryList: [],
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
         image: this.props.image,
         username: "",
@@ -73,17 +74,14 @@ class EditProfile extends Component {
     }
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
     }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
+    return null;
+  }
 
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;
@@ -169,9 +167,9 @@ class EditProfile extends Component {
           offer_tag: userData.offerTag ? userData.offerTag : [],
           inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
           offerTagList:
-            userData.offerTagList.length === 0 ? userData.offerTagList : [],
+            userData.offerTagList.length !== 0 ? userData.offerTagList : [],
           inquiryTagList:
-            userData.inquiryTagList.length === 0 ? userData.inquiryTagList : []
+            userData.inquiryTagList.length !== 0 ? userData.inquiryTagList : []
         }
       });
     }
@@ -263,7 +261,6 @@ class EditProfile extends Component {
   render() {
     const { form, isLoading } = this.state;
     const { image } = this.props;
-
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -319,6 +316,7 @@ class EditProfile extends Component {
                   name="username"
                   value={form.username}
                   onChange={this.handleChangeField}
+                  readOnly={form.username ? "readonly" : ""}
                 />
                 {form.username.length === 0 ? (
                   <img src={images.error} alt={"error"} />
@@ -331,7 +329,7 @@ class EditProfile extends Component {
                   {this.state.error.name_company}
                 </span>
                 <label htmlFor="name">
-                  {Translations.editProfile.name_company}
+                  {Translations.editProfile.name_company}?{" "}
                 </label>
                 <Text
                   type="text"
@@ -491,9 +489,9 @@ class EditProfile extends Component {
                 <label htmlFor="description">
                   {Translations.editProfile.profile_description}
                 </label>
-                <Text
+                <textarea
                   type="text"
-                  className="form-control"
+                  className="form-control full-width-textarea"
                   id="profile_description"
                   name="profile_description"
                   value={form.profile_description}
@@ -554,8 +552,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getUser,
-  updateUserProfile,
-  getSearch
+  updateUserProfile
 };
 
 EditProfile.propTypes = {
@@ -566,8 +563,7 @@ EditProfile.propTypes = {
   profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any,
-  getSearch: PropTypes.func
+  history: PropTypes.any
 };
 
 export default connect(

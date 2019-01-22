@@ -6,6 +6,7 @@ import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { DateFormat } from "../../Factory";
 import { Translations } from "../../../lib/translations";
+import { UserImageItem } from "../../ui-kit";
 
 const CampaignCardHeader = ({
   campaign,
@@ -27,20 +28,14 @@ const CampaignCardHeader = ({
 
   return (
     <div className="feed_header">
-      <div className="profile_image padding-right-15">
-        <Link to={profile_route}>
-          <img
-            src={campaign.profileImage}
-            alt="feed"
-            className="img-circle img-responsive"
-          />
-        </Link>
-      </div>
+      <Link to={profile_route}>
+            <UserImageItem item={campaign.profileImage} customClass={`img-circle img-responsive padding-right-15`} />
+      </Link>
       <div className="no-padding titles_wrapper">
         <Link to={profile_route} className="">
           <div className="normal_title">{campaign.userName}</div>
         </Link>
-        <div className="normal_sub_title ">published a campaign</div>
+        <div className="normal_sub_title ">{Translations.landing.published_a_campaign}</div>
         <div className="secondary_title">{campaign.location && campaign.location.address && campaign.location.address}</div>
         {campaign.category && (
           <div className="grey_title">

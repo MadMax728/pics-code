@@ -2,9 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
-const onKeyDown = () => {};
-
-
+const onKeyDown = () => { };
 
 const RightSidebarStatistics = ({ header, handleEvent, all, outstanding, processed, notProcessed }) => {
   const statistics = [
@@ -49,8 +47,8 @@ RightSidebarStatistics.propTypes = {
   header: PropTypes.string,
   handleEvent: PropTypes.func.isRequired,
   all: PropTypes.any.isRequired,
-  outstanding: PropTypes.any.isRequired, 
-  processed: PropTypes.any.isRequired, 
+  outstanding: PropTypes.any.isRequired,
+  processed: PropTypes.any.isRequired,
   notProcessed: PropTypes.any.isRequired
 };
 

@@ -2,7 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as voucherService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import { voucher_list } from "../mock-data";
 
 const getVouchersStarted = () => ({
   type: types.GET_VOUCHERS_STARTED

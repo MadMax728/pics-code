@@ -443,7 +443,8 @@
     "community": "Community",
     "serverError": "Something went wrong. Please Try Again",
     "Subscribe": "Subscribe",
-    "Subscribed": "Subscribed"
+    "Subscribed": "Subscribed",
+    "Pending": "Pending"
   },
 
   "left_sidebar": {
@@ -729,6 +730,7 @@
   },
   "landing": {
     "Navigation": "Navigation",
+    "published_a_campaign": "Published a Campaign",
     "Review": "Review",
     "Key_statistics": "Key statistics",
     "Content_statistics": "Content statistics",

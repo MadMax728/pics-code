@@ -13,7 +13,6 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
-import { Loader, RightSidebarLoading } from "../components/ui-kit";
 
 class Home extends Component {
   constructor(props, context) {
@@ -134,7 +133,7 @@ class Home extends Component {
                 handleModalInfoShow={this.handleModalInfoShow}
               />
 
-              <div className="left_menu_second no-padding">
+              <div className="left_menu_second no-padding profile-img-wrapper">
                 <LeftSideBar getFilter={this.getFilter} />
               </div>
 

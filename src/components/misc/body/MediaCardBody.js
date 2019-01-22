@@ -9,7 +9,10 @@ const MediaCardBody = ({ item, isDescription, isLoading }) => {
       <div className="feed_image">
         {item.typeContent &&
           item.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
-            <ImageItem item={item.mediaUrl} isOtherCardExist={false} isLoading={isLoading} />
+          <ImageItem item={item.mediaUrl} 
+                  userName={item.userName} 
+                  isOtherCardExist={false} 
+                  isLoading={isLoading} />
           )}
         {item.typeContent &&
           item.typeContent.toLowerCase() === enumerations.mediaTypes.video && (

@@ -2,20 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ToolTip } from "../../ui-kit";
 
-const propTypes = {
-  id: PropTypes.string.isRequired,
-  role: PropTypes.string.isRequired,
-  dataTip: PropTypes.string.isRequired,
-  dataClass: PropTypes.string.isRequired,
-  getContent: PropTypes.any.isRequired,
-  effect: PropTypes.string.isRequired,
-  delayHide: PropTypes.number.isRequired,
-  delayShow: PropTypes.number.isRequired,
-  delayUpdate: PropTypes.number.isRequired,
-  place: PropTypes.string.isRequired,
-  border: PropTypes.bool.isRequired,
-  type: PropTypes.string.isRequired
-};
 
 class ThreeDots extends Component {
   constructor(props) {
@@ -64,6 +50,21 @@ class ThreeDots extends Component {
     );
   }
 }
+
+const propTypes = {
+  id: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
+  dataTip: PropTypes.string.isRequired,
+  dataClass: PropTypes.string.isRequired,
+  getContent: PropTypes.any.isRequired,
+  effect: PropTypes.string.isRequired,
+  delayHide: PropTypes.number.isRequired,
+  delayShow: PropTypes.number.isRequired,
+  delayUpdate: PropTypes.number.isRequired,
+  place: PropTypes.string.isRequired,
+  border: PropTypes.bool.isRequired,
+  type: PropTypes.string.isRequired
+};
 
 ThreeDots.propTypes = propTypes;
 

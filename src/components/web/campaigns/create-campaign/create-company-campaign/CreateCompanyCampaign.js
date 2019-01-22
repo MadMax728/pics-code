@@ -19,6 +19,7 @@ class CreateCompanyCampaign extends Component {
       isPreview,
       handlePrivewClose,
       form,
+      maxClicks,
       isFor,
       handleChangeField,
       handleSubmit,
@@ -36,9 +37,10 @@ class CreateCompanyCampaign extends Component {
       handleVideo,
       userInfo,
       handleAddress,
-      setVoucherData
+      setVoucherData,
+      calculateMaxClicks
     } = this.props;
-
+    console.log("company", this.props);
     return (
       <div className="col-xs-12 no-padding">
         {isPreview && <Preview form={form} />}
@@ -90,6 +92,8 @@ class CreateCompanyCampaign extends Component {
               handleDate={handleDate}
               handleSelect={handleSelect}
               userInfo={userInfo}
+              calculateMaxClicks={calculateMaxClicks}
+              maxClicks={maxClicks}
             />
           ))}
         {!isPreview &&
@@ -143,7 +147,9 @@ CreateCompanyCampaign.propTypes = {
   handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
-  setVoucherData: PropTypes.func
+  setVoucherData: PropTypes.func,
+  calculateMaxClicks: PropTypes.func,
+  maxClicks: PropTypes.any
 };
 
 export default CreateCompanyCampaign;

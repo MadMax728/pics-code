@@ -1,18 +1,32 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getDashboard, getSearch } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { getDashboard } from "../../../actions";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
-import PropTypes from "prop-types";
 
 class ParticipantPage extends Component {
+
+
+  render() {
+    const { participantList, isLoadingparticipants } = this.props;
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {participantList &&
+          !isLoadingparticipants &&
+          this.renderParticipantList()}
+        { isLoadingparticipants && <CampaignLoading /> }
+        { !isLoadingparticipants && ( !participantList || (participantList && !participantList.length) ) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+      </div>
+    );
+  }
+  
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    this.props.getDashboard("participants", "");
+    const data = `?id=${this.props.params.id}`;
+
+    this.props.getDashboard("participants", data);
   };
 
   componentWillReceiveProps = nextProps => {
@@ -26,6 +40,9 @@ class ParticipantPage extends Component {
       }
       this.props.getDashboard("participants", searchParam);
     }
+  };
+
+  handleRefresh = () => {
   };
 
   renderParticipantList = () => {
@@ -45,17 +62,6 @@ class ParticipantPage extends Component {
     });
   };
 
-  render() {
-    const { participantList, isLoadingparticipants } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {participantList &&
-          !isLoadingparticipants &&
-          this.renderParticipantList()}
-        {isLoadingparticipants && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 ParticipantPage.propTypes = {
@@ -63,8 +69,8 @@ ParticipantPage.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoadingparticipants: PropTypes.bool,
   participantList: PropTypes.any,
-  getSearch: PropTypes.func,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  params: PropTypes.any
   // errorparticipants: PropTypes.any
 };
 
@@ -77,8 +83,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getDashboard,
-  getSearch
+  getDashboard
 };
 
 export default connect(

@@ -3,7 +3,6 @@ import MRightUserInput from './MRightUserInput';
 import MRightUserItem from './MRightUserItem';
 import MRightActiveChat from './MRightActiveChat';
 import PropTypes from "prop-types";
-import io from "socket.io-client";
 
 
 class MRightContainer extends Component {

@@ -881,12 +881,22 @@
         padding-right: 15px;
       }
       .user-info{
+        padding: 10px 0 0 0;
        .username{
         color: #4a4a4a;
         word-break: break-all;
+        font-weight: 600;
+        text-transform: capitalize;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
        }
        .subtitle{
          word-break: break-all;
+         padding: 0;
+         white-space: nowrap; 
+         overflow: hidden;
+         text-overflow: ellipsis;
        }
       }
       .community-subscribe{

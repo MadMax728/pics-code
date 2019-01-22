@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { hash_tag_list } from "../../../mock-data";
 import { connect } from "react-redux";
-import { getDashboard, getHashTag } from "../../../actions";
+import { getHashTag } from "../../../actions";
 
 class HashTag extends Component {
   constructor(props) {

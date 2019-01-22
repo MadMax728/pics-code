@@ -1,12 +1,15 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
-import * as enumerations from "../../../../lib/constants/enumerations";
+
+import { getBackOfficeReview, getBackOfficeReviewStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
+import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { AdCard } from "../../../misc";
-import { getBackOfficeReview, getBackOfficeReviewStatistics } from "../../../../actions";
+
 import { Translations } from "../../../../lib/translations";
+import * as enumerations from "../../../../lib/constants/enumerations";
 import { search } from "../../../../lib/utils/helpers";
 
 class AdsPage extends Component {
@@ -20,10 +23,49 @@ class AdsPage extends Component {
     };
   }
 
+  render() {
+    let { adList, form } = this.state;
+    const { isLoading, reviewData, searchData } = this.props;
+    adList = search(adList, "userName", form.search || searchData.searchKeyword);
+
+    return (
+      <div>
+        <div className="padding-rl-10 middle-section margin-b-22">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          {adList && this.renderAdList()}
+          {!adList && isLoading && <CampaignLoading />}
+          {adList && adList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.campaigns}`} 
+            handleEvent={this.handleReported} 
+            all={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.all : 0} 
+            outstanding={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.outstanding : 0}
+            processed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.processed : 0} 
+            notProcessed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.notProcessed : 0}
+          />
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.ads}`} 
+            handleEvent={this.handleReported} 
+            all={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.all : 0} 
+            outstanding={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.outstanding : 0}
+            processed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.processed : 0} 
+            notProcessed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.notProcessed : 0}
+          />
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     this.getBackOfficeReview();
     this.getBackOfficeReviewCampaignStatistics();
     this.getBackOfficeReviewAdStatistics();
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
   getBackOfficeReviewCampaignStatistics = () => {
@@ -62,7 +104,9 @@ class AdsPage extends Component {
 
   renderAdList = () => {
     let { adList, form } = this.state;
-    adList = search(adList, "userName", form.search);
+    const { searchData } = this.props;
+
+    adList = search(adList, "userName", form.search || searchData.searchKeyword);
     return adList.map(ad => {
       return (
         <div key={ad.id}>
@@ -99,51 +143,29 @@ class AdsPage extends Component {
     form[event.target.name] = event.target.value;
     this.setState({ form });
   }
-  
-  render() {
-    let { adList, form } = this.state;
-    adList = search(adList, "userName", form.search);
-    const { isLoading, reviewData } = this.props;
 
-    return (
-      <div>
-        <div className="padding-rl-10 middle-section margin-b-22">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {adList && this.renderAdList()}
-          {!adList && isLoading && <CampaignLoading />}
-        </div>
-        <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.campaigns}`} 
-            handleEvent={this.handleReported} 
-            all={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.all : 0} 
-            outstanding={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.outstanding : 0}
-            processed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.processed : 0} 
-            notProcessed={reviewData.CampaignsStatistics? reviewData.CampaignsStatistics.notProcessed : 0}
-          />
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.ads}`} 
-            handleEvent={this.handleReported} 
-            all={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.all : 0} 
-            outstanding={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.outstanding : 0}
-            processed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.processed : 0} 
-            notProcessed={reviewData.AdvertisementStatistics? reviewData.AdvertisementStatistics.notProcessed : 0}
-          />
-        </div>
-      </div>
-    );
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.getBackOfficeReview();
+      this.getBackOfficeReviewCampaignsStatistics();
+      this.getBackOfficeReviewAdStatistics();
+    }
   }
 }
 
 const mapStateToProps = state => ({
   reviewData: state.reviewData,
   isLoading: state.reviewData.isLoading,
-  error: state.reviewData.error
+  error: state.reviewData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReview,
-  getBackOfficeReviewStatistics
+  getBackOfficeReviewStatistics,
+  getSearch
 };
 
 AdsPage.propTypes = {
@@ -152,6 +174,8 @@ AdsPage.propTypes = {
   reviewData: PropTypes.any,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReviewStatistics: PropTypes.func,
+  getSearch: PropTypes.func.isRequired,
+  searchData: PropTypes.any
   // error: PropTypes.any
 };
 

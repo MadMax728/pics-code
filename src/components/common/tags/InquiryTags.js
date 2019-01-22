@@ -15,8 +15,18 @@ class InquiryTags extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({suggestionsInquiryTagList: []})
+  render() {
+    const { suggestionsInquiryTagList } = this.state;
+    const { value } = this.props;
+
+    return (
+        <Tags
+          value={value}
+          suggestion={suggestionsInquiryTagList}
+          handleAddition={this.handleInquiryTagChange}
+          handleDelete={this.handleInquiryTagDelete}
+        />
+    );
   }
   
   componentDidMount = () => {
@@ -29,6 +39,10 @@ class InquiryTags extends Component {
     });
   }
   
+  componentWillUnmount = () => {
+    this.setState({suggestionsInquiryTagList: []})
+  }
+
   handleInquiryTagDelete = id => {
     this.props.handleInquiryTagDelete(id);
   };
@@ -52,20 +66,6 @@ class InquiryTags extends Component {
       this.props.handleInquiryTagChange(tag.id, tag);
     }
   };
-
-  render() {
-    const { suggestionsInquiryTagList } = this.state;
-    const { value } = this.props;
-
-    return (
-        <Tags
-          value={value}
-          suggestion={suggestionsInquiryTagList}
-          handleAddition={this.handleInquiryTagChange}
-          handleDelete={this.handleInquiryTagDelete}
-        />
-    );
-  }
 }
 
 const mapStateToProps = state => ({

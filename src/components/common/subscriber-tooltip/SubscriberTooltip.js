@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 import { connect } from "react-redux";
-import { Auth } from "../../../auth";
 import {
   getFollowUserList,
   sendRequest,
@@ -17,7 +16,85 @@ class SubscriberTooltip extends Component {
     this.state = {};
   }
 
-  handleKeyPress = () => {};
+
+  render() {
+    return (
+      <div id="">
+        <h4 className="normal_title">
+          {Translations.top_bar_info_modal.modal_title}
+        </h4>
+        <div className="header-notifications">
+          {this.props.subscribeData.subscriber.length > 0 ? (
+            this.props.subscribeData.subscriber.map(user => {
+              return (
+                <div
+                  className="notification-with-subscribe notification-wrapper"
+                  key={user.id}
+                >
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <img
+                        src={user.profileUrl}
+                        alt="campaign"
+                        className="img-circle img-responsive"
+                      />
+                    </div>
+                    <div className="col-sm-4">
+                      <div className="user-info">
+                        <div className="username">{user.username}</div>
+                        <div className="subtitle">{user.name}</div>
+                      </div>
+                    </div>
+                    <div className="col-md-5">
+                      <div className="subscribe-btn">
+                        {user.isSubscribe ? (
+                          <div className="community-subscribe">
+                            <button
+                              className="filled_button"
+                              id={user.id}
+                              onClick={this.handleSubscribed}
+                            >
+                              {
+                                Translations.profile_community_right_sidebar
+                                  .Subscribed
+                              }
+                            </button>
+                          </div>
+                        ) : (
+                            <div className="community-subscribe">
+                              <button
+                                className="blue_button"
+                                id={user.id}
+                                onClick={this.handleSubscribed}
+                              >
+                                {
+                                  Translations.profile_community_right_sidebar
+                                    .Subscribe
+                                }
+                              </button>
+                            </div>
+                          )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+              <div className="notification-with-subscribe notification-wrapper">
+                <div className="user-info">
+                  <div className="subtitle">
+                    {Translations.top_bar_info_modal.no_data}
+                  </div>
+                </div>
+              </div>
+            )}
+        </div>
+      </div>
+    );
+  }
+
+
 
   componentDidMount = () => {
     this.getTooltipUserList(this.props.userId);
@@ -37,6 +114,8 @@ class SubscriberTooltip extends Component {
       }
     }
   }
+  
+  handleKeyPress = () => { };
 
   // Tooltip List
   getTooltipUserList = userId => {
@@ -101,82 +180,6 @@ class SubscriberTooltip extends Component {
     }
   };
 
-  render() {
-    return (
-      <div id="">
-        <h4 className="normal_title">
-          {Translations.top_bar_info_modal.modal_title}
-        </h4>
-        <div className="header-notifications">
-          {this.props.subscribeData.subscriber.length > 0 ? (
-            this.props.subscribeData.subscriber.map(user => {
-              return (
-                <div
-                  className="notification-with-subscribe notification-wrapper"
-                  key={user.id}
-                >
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <img
-                        src={user.profileUrl}
-                        alt="campaign"
-                        className="img-circle img-responsive"
-                      />
-                    </div>
-                    <div className="col-sm-4">
-                      <div className="user-info">
-                        <div className="username">{user.username}</div>
-                        <div className="subtitle">{user.name}</div>
-                      </div>
-                    </div>
-                    <div className="col-md-5">
-                      <div className="subscribe-btn">
-                        {user.isSubscribe ? (
-                          <div className="community-subscribe">
-                            <button
-                              className="filled_button"
-                              id={user.id}
-                              onClick={this.handleSubscribed}
-                            >
-                              {
-                                Translations.profile_community_right_sidebar
-                                  .Subscribed
-                              }
-                            </button>
-                          </div>
-                        ) : (
-                          <div className="community-subscribe">
-                            <button
-                              className="blue_button"
-                              id={user.id}
-                              onClick={this.handleSubscribed}
-                            >
-                              {
-                                Translations.profile_community_right_sidebar
-                                  .Subscribe
-                              }
-                            </button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <div className="notification-with-subscribe notification-wrapper">
-              <div className="user-info">
-                <div className="subtitle">
-                  {Translations.top_bar_info_modal.no_data}
-                </div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

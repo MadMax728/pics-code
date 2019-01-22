@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
+
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
+import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { CommentCard } from "../../../misc";
+
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
 
@@ -21,6 +24,37 @@ class CommentsPage extends Component {
     };
   }
 
+
+  render() {
+    const { isLoading } = this.state;
+    let { commentList } = this.state;
+    const { form } = this.state;
+    const { searchData } = this.props;
+    commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
+    const { reportedContentData } = this.props;
+
+    return (
+      <div>
+        <div className="padding-rl-10 middle-section">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          {commentList && this.renderCommentList()}
+          {!commentList && isLoading && <CampaignLoading />}
+          {commentList && commentList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.comments}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.all : 0} 
+            outstanding={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.outstanding : 0}
+            processed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.processed : 0} 
+            notProcessed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.notProcessed : 0}
+          />
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     const data = {
       type: "get",
@@ -29,6 +63,10 @@ class CommentsPage extends Component {
     this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
   getBackOfficeReportedContent = (data) => {
@@ -41,7 +79,6 @@ class CommentsPage extends Component {
       }
     });
   }
-
 
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
@@ -81,15 +118,17 @@ class CommentsPage extends Component {
   }
 
   renderCommentList = () => {
-    let { commentList, form } = this.state;
-    commentList = search(commentList, "userName", form.search);
+    let { commentList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
+    commentList = search(commentList, "userName", form.search  || searchData.searchKeyword);
       return (
         <CommentCard
           item={commentList}
           totalCommentsCount={commentList.length}
           isReport
           isBackOffice
-          handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+          handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
           handleRemove={this.handleRemove} 
         />
       );
@@ -102,43 +141,33 @@ class CommentsPage extends Component {
     this.setState({ form });
   }
   
-  render() {
-    const { isLoading } = this.state;
-    let { commentList, form } = this.state;
-    commentList = search(commentList, "userName", form.search);
-    const { reportedContentData } = this.props;
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
 
-    return (
-      <div>
-        <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {commentList && this.renderCommentList()}
-          {!commentList && isLoading && <CampaignLoading />}
-        </div>
-        <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.comments}`} 
-            handleEvent={this.handleReported} 
-            all={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.all : 0} 
-            outstanding={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.outstanding : 0}
-            processed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.processed : 0} 
-            notProcessed={reportedContentData.CommentStatistics? reportedContentData.CommentStatistics.notProcessed : 0}
-          />
-        </div>
-      </div>
-    );
+    if (searchData.searchKeyword) {
+      getSearch("");
+      const data = {
+        type: "get",
+        reportContent: "Comment"
+      }
+      this.setState({isLoading: true});
+      this.getBackOfficeReportedContent(data);
+      this.getBackOfficeReportedStatistics(data);
+    }
   }
 }
 
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
   isLoading: state.reportedContentData.isLoading,
-  error: state.reportedContentData.error
+  error: state.reportedContentData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
-  getBackOfficeReportedStatistics
+  getBackOfficeReportedStatistics,
+  getSearch
 };
 
 CommentsPage.propTypes = {
@@ -147,6 +176,8 @@ CommentsPage.propTypes = {
   isLoading: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 

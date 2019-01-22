@@ -1,48 +1,65 @@
 import React from "react";
 import UserCard from "../../misc/UserCard";
 import PropTypes from "prop-types";
-import { UserPicLoading } from "../../ui-kit";
+import { UserPicLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { connect } from "react-redux";
 import { getDashboard, getSearch } from "../../../actions";
+import { search } from "../../../lib/utils/helpers";
 
 class UsersRoot extends React.Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = { usersList: null };
+  }
+
+  render() {
+    let { usersList } = this.state;
+    const { isLoadingusers, searchData } = this.props;
+    usersList = search(usersList, "username", searchData.searchKeyword);
+    return (
+      <div className="padding-rl-10 middle-section">
+        {usersList && !isLoadingusers && this.renderuserList()}
+        {isLoadingusers && <UserPicLoading />}
+        {!isLoadingusers &&
+          (!usersList || (usersList && usersList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    if (this.props.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (this.props.searchData.searchKeyword) {
-      this.props.getDashboard(
-        "users",
-        "?isSearch=" + this.props.searchData.searchKeyword
-      );
-    } else {
-      this.props.getDashboard("users", "");
-    }
+    this.handleRefresh();
+    this.handleSearch();
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      let searchParam = "";
-      if (searchKeyword) {
-        searchParam = "?isSearch=" + searchKeyword;
-      }
-      this.props.getDashboard("users", searchParam);
+  handleSearch = () => {
+    this.props.getDashboard("users", "").then(() => {
+      const { usersList } = this.props;
+      this.setState({ usersList });
+    });
+  };
+
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.handleSearch();
     }
   };
 
   renderuserList = () => {
-    const { usersList } = this.props;
+    let { usersList } = this.state;
+    const { searchData } = this.props;
+    usersList = search(usersList, "username", searchData.searchKeyword);
     return (
       <div className="user-wrapper">
         {usersList.map((user, index) => {
           const clearfixDiv =
             index % 2 === 0 ? <div className="clearfix" /> : null;
           return (
-            <div key={index}>
+            <div key={user.id}>
               {clearfixDiv}
               <UserCard item={user} index={index} />
             </div>
@@ -51,16 +68,6 @@ class UsersRoot extends React.Component {
       </div>
     );
   };
-
-  render() {
-    const { usersList, isLoadingusers } = this.props;
-    return (
-      <div className="padding-rl-10 middle-section">
-        {usersList && !isLoadingusers && this.renderuserList()}
-        {isLoadingusers && <UserPicLoading />}
-      </div>
-    );
-  }
 }
 
 UsersRoot.propTypes = {

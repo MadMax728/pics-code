@@ -176,7 +176,7 @@ class BackOfficeHomeRoute extends Component {
           <Route
             path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
             exact
-            component={PicsPage}
+            component={this.handlePicsPage}
           />
           <Route
             path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
@@ -199,8 +199,8 @@ class BackOfficeHomeRoute extends Component {
     );
   }
   
-  handleLanding = () => {
-    return <DashboardPage handleModalInfoShow={this.props.handleModalInfoShow} />;
+  handleLanding = (match) => {
+    return <DashboardPage handleModalInfoShow={this.props.handleModalInfoShow} history={match.history} />;
   };
 
   handleAdsPage = () => {
@@ -220,6 +220,10 @@ class BackOfficeHomeRoute extends Component {
 
   handleReportedCampaignsPage = () => {
     return <ReportedCampaignsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
+  };
+
+  handlePicsPage = () => {
+    return <PicsPage handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} />;
   };
 
   handleReportedAdsPage = () => {

@@ -12,8 +12,6 @@ import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
 import "emoji-mart/css/emoji-mart.css";
-import { Picker } from "emoji-mart";
-
 class CampaignCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -24,6 +22,58 @@ class CampaignCard extends Component {
       totalCommentsCount: "",
       isEmoji: false
     };
+  }
+
+  render() {
+    const {
+      isStatus,
+      isDescription,
+      isInformation,
+      isBudget,
+      isReport,
+      likeData,
+      reportedContentData,
+      savedData
+    } = this.props;
+    const { isComments, item, comments } = this.state;
+    return (
+      <div className="feed_wrapper">
+        <CampaignCardHeader
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+        />
+        <CampaignCardBody
+          campaign={item}
+          isDescription={isDescription}
+          isInformation={isInformation}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
+        />
+        <CampaignCardFooter
+          campaign={item}
+          handleCommentsSections={this.handleCommentsSections}
+          isComments={isComments}
+          isStatus={isStatus}
+          isBudget={isBudget} /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+          isReport={isReport}
+        />
+        {isComments && (
+          <CommentCard
+            item={comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={comments.length}
+            isReport={isReport}
+          />
+        )}
+      </div>
+    );
   }
 
   handleLockContent = e => {
@@ -71,7 +121,7 @@ class CampaignCard extends Component {
     const { isBudget } = this.props;
     let data;
 
-    if  (isBudget) {
+    if (isBudget) {
       data = {
         id: e.target.id,
         contentStatus: enumerations.reportType.doNotLock,
@@ -129,13 +179,13 @@ class CampaignCard extends Component {
     if (isBackOffice) {
       reportTips = [
         {
-          name: isBudget? (item.contentStatus === enumerations.reportType.lock
+          name: isBudget ? (item.contentStatus === enumerations.reportType.lock
             ? Translations.tool_tips.unlock
             : Translations.tool_tips.lock) :
             (item.reportStatus === enumerations.reportType.lock
               ? Translations.tool_tips.unlock
               : Translations.tool_tips.lock),
-          handleEvent: isBudget? (item.contentStatus === enumerations.reportType.lock
+          handleEvent: isBudget ? (item.contentStatus === enumerations.reportType.lock
             ? this.handleUnlockContent
             : this.handleLockContent) :
             (item.reportStatus === enumerations.reportType.lock

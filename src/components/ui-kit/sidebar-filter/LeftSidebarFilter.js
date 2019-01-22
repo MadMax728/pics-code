@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { RadioBtn, Select, Text } from "../CommonUIComponents";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
-import { setCookie, getCookie } from "../../../lib/utils/helpers";
+import { getCookie } from "../../../lib/utils/helpers";
 import {
   SelectCategory,
   SelectOffer,
@@ -26,6 +26,126 @@ class LeftSidebarFilter extends Component {
       inquiryTag: [],
       language: Translations.base_footer.language
     };
+  }
+
+  render() {
+    const { filters } = this.props;
+    Translations.setLanguage(getCookie("interfaceLanguage") || "en");
+    return (
+      <div>
+        {filters.map(filter => {
+          return (
+            <div className="filter-wrapper" key={filter.name}>
+              <div className={filter.className}>{filter.name}</div>
+              {filter.type === "auto-complete" && (
+                <PlaceAutoCompleteLocation
+                  className={""}
+                  handleLocation={this.handleLocation}
+                />
+              )}
+              {filter.type === "radio" && (
+                <RadioBtn
+                  foruse={filter.name}
+                  name={filter.name}
+                  items={filter.items}
+                  onChange={this.handleOnChange}
+                />
+              )}
+              {filter.type === "radio_change_language" && (
+                <RadioButtonLanguages
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  onChange={this.handleOnChange}
+                  handleLanguageSwitch={this.props.handleLanguageSwitch}
+                />
+              )}
+              {filter.type === "select" && (
+                <Select
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  onChange={this.handleOnChange}
+                />
+              )}
+              {filter.type === "select-category" && (
+                <SelectCategory
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-radius" && (
+                <SelectRadius
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-target-group" && (
+                <SelectTargetGroup
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-inquiry" && (
+                <SelectInquiry
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "select-offer" && (
+                <SelectOffer
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
+              {filter.type === "text" && (
+                <Text
+                  foruse={filter.name}
+                  name={filter.name}
+                  onChange={this.handleOnChange}
+                />
+              )}
+              {filter.type === "text-offer-tag" && (
+                <OfferTags
+                  foruse={filter.name}
+                  name={filter.name}
+                  onChange={this.handleOnChange}
+                  value={this.state.offerTagList}
+                  handleOfferTagChange={this.handleOfferTagChange}
+                  handleOfferTagDelete={this.handleOfferTagDelete}
+                />
+              )}
+              {filter.type === "text-inquiry-tag" && (
+                <InquiryTags
+                  foruse={filter.name}
+                  name={filter.name}
+                  onChange={this.handleOnChange}
+                  value={this.state.inquiryTagList}
+                  handleInquiryTagChange={this.handleInquiryTagChange}
+                  handleInquiryTagDelete={this.handleInquiryTagDelete}
+                />
+              )}
+            </div>
+          );
+        })}
+      </div>
+    );
   }
 
   handleOnChange = filter => {
@@ -197,125 +317,6 @@ class LeftSidebarFilter extends Component {
     this.props.onChange(filterData);
   };
 
-  render() {
-    const { filters } = this.props;
-    Translations.setLanguage(getCookie("interfaceLanguage") || "en");
-    return (
-      <div>
-        {filters.map(filter => {
-          return (
-            <div className="filter-wrapper" key={filter.name}>
-              <div className={filter.className}>{filter.name}</div>
-              {filter.type === "auto-complete" && (
-                <PlaceAutoCompleteLocation
-                  className={""}
-                  handleLocation={this.handleLocation}
-                />
-              )}
-              {filter.type === "radio" && (
-                <RadioBtn
-                  foruse={filter.name}
-                  name={filter.name}
-                  items={filter.items}
-                  onChange={this.handleOnChange}
-                />
-              )}
-              {filter.type === "radio_change_language" && (
-                <RadioButtonLanguages
-                  foruse={filter.name}
-                  name={filter.name}
-                  options={filter.items}
-                  onChange={this.handleOnChange}
-                  handleLanguageSwitch={this.props.handleLanguageSwitch}
-                />
-              )}
-              {filter.type === "select" && (
-                <Select
-                  foruse={filter.name}
-                  name={filter.name}
-                  options={filter.items}
-                  defaultValue={"select"}
-                  onChange={this.handleOnChange}
-                />
-              )}
-              {filter.type === "select-category" && (
-                <SelectCategory
-                  foruse={filter.name}
-                  name={filter.name}
-                  options={filter.items}
-                  defaultValue={"select"}
-                  handleSelect={this.handleSelectList}
-                />
-              )}
-              {filter.type === "select-radius" && (
-                <SelectRadius
-                  foruse={filter.name}
-                  name={filter.name}
-                  options={filter.items}
-                  defaultValue={"select"}
-                  handleSelect={this.handleSelectList}
-                />
-              )}
-              {filter.type === "select-target-group" && (
-                <SelectTargetGroup
-                  foruse={filter.name}
-                  name={filter.name}
-                  options={filter.items}
-                  defaultValue={"select"}
-                  handleSelect={this.handleSelectList}
-                />
-              )}
-              {filter.type === "select-inquiry" && (
-                <SelectInquiry
-                  foruse={filter.name}
-                  name={filter.name}
-                  options={filter.items}
-                  defaultValue={"select"}
-                  handleSelect={this.handleSelectList}
-                />
-              )}
-              {filter.type === "select-offer" && (
-                <SelectOffer
-                  foruse={filter.name}
-                  name={filter.name}
-                  options={filter.items}
-                  defaultValue={"select"}
-                  handleSelect={this.handleSelectList}
-                />
-              )}
-              {filter.type === "text" && (
-                <Text
-                  foruse={filter.name}
-                  name={filter.name}
-                  onChange={this.handleOnChange}
-                />
-              )}
-              {filter.type === "text-offer-tag" && (
-                <OfferTags
-                  foruse={filter.name}
-                  name={filter.name}
-                  onChange={this.handleOnChange}
-                  value={this.state.offerTagList}
-                  handleOfferTagChange={this.handleOfferTagChange}
-                  handleOfferTagDelete={this.handleOfferTagDelete}
-                />
-              )}
-              {filter.type === "text-inquiry-tag" && (
-                <InquiryTags
-                  foruse={filter.name}
-                  name={filter.name}
-                  onChange={this.handleOnChange}
-                  value={this.state.inquiryTagList}
-                  handleInquiryTagChange={this.handleInquiryTagChange}
-                  handleInquiryTagDelete={this.handleInquiryTagDelete}
-                />
-              )}
-            </div>
-          );
-        })}
-      </div>
-    );
-  }
 }
 
 LeftSidebarFilter.propTypes = {
@@ -328,10 +329,10 @@ LeftSidebarFilter.propTypes = {
     }).isRequired
   ).isRequired,
   onChange: PropTypes.func,
-  handleSelect: PropTypes.func,
-  handleOfferTagChange: PropTypes.func,
-  handleInquiryTagChange: PropTypes.func,
-  handleOfferTagDelete: PropTypes.func,
+  // handleSelect: PropTypes.func,
+  // handleOfferTagChange: PropTypes.func,
+  // handleInquiryTagChange: PropTypes.func,
+  // handleOfferTagDelete: PropTypes.func,
   handleLanguageSwitch: PropTypes.func
 };
 

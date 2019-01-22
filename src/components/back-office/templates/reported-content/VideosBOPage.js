@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
+
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
+  import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
+
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
@@ -22,6 +25,35 @@ class VideosBOPage extends Component {
     };
   }
 
+  render() {
+    let { videoList } = this.state;
+    const { form } = this.state;
+    const { isLoading } = this.state;
+    const { reportedContentData, searchData } = this.props;
+    videoList = search(videoList,"userName", form.search || searchData.searchKeyword);
+
+    return (
+      <div>
+        <div className="padding-rl-10 middle-section">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          {videoList && this.renderVideoList()}
+          {!videoList && isLoading && <CampaignLoading />}
+          {videoList && videoList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.videos}`}
+            handleEvent={this.handleReported} 
+            all={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.all : 0} 
+            outstanding={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.outstanding : 0}
+            processed={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.processed : 0} 
+            notProcessed={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.notProcessed : 0}
+          />          
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     const data = {
       type: "get",
@@ -30,6 +62,10 @@ class VideosBOPage extends Component {
     this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
   getBackOfficeReportedContent = (data) => {
@@ -73,8 +109,11 @@ class VideosBOPage extends Component {
   }
 
   renderVideoList = () => {
-    let { videoList, form } = this.state;
-    videoList = search(videoList,"userName", form.search);
+    let { videoList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
+
+    videoList = search(videoList,"userName", form.search || searchData.searchKeyword);
 
     return videoList.map(video => {
       return (
@@ -83,7 +122,7 @@ class VideosBOPage extends Component {
           video.typeContent &&
           video.typeContent.toLowerCase() === enumerations.mediaTypes.video &&
           (
-            <MediaCard item={video} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
+            <MediaCard item={video} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
           )}
         </div>
       );
@@ -105,43 +144,33 @@ class VideosBOPage extends Component {
     this.setState({ form });
   }
 
-  render() {
-    let { videoList, form } = this.state;
-    const { isLoading } = this.state;
-    const { reportedContentData } = this.props;
-    videoList = search(videoList,"userName", form.search);
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
 
-    return (
-      <div>
-        <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {videoList && this.renderVideoList()}
-          {!videoList && isLoading && <CampaignLoading />}
-        </div>
-        <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.videos}`}
-            handleEvent={this.handleReported} 
-            all={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.all : 0} 
-            outstanding={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.outstanding : 0}
-            processed={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.processed : 0} 
-            notProcessed={reportedContentData.VideoStatistics? reportedContentData.VideoStatistics.notProcessed : 0}
-          />          
-        </div>
-      </div>
-    );
+    if (searchData.searchKeyword) {
+      getSearch("");
+      const data = {
+        type: "get",
+        reportContent: "Video"
+      }
+      this.setState({isLoading: true});
+      this.getBackOfficeReportedContent(data);
+      this.getBackOfficeReportedStatistics(data);
+    }
   }
 }
 
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
   isLoading: state.reportedContentData.isLoading,
-  error: state.reportedContentData.error
+  error: state.reportedContentData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
-  getBackOfficeReportedStatistics
+  getBackOfficeReportedStatistics,
+  getSearch
 };
 
 VideosBOPage.propTypes = {
@@ -150,6 +179,8 @@ VideosBOPage.propTypes = {
   isLoading: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Collapse } from "react-bootstrap";
-import * as images from "../../../../lib/constants/images";
 import * as routes from "../../../../lib/constants/routes";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -13,28 +12,6 @@ class Support extends Component {
       current: "1"
     };
   }
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
-
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
-
-  handleCollapse = e => {
-    this.setState({ open: !this.state.open, current: e.target.id });
-  };
-
-  handleKeyDown = () => {};
 
   render() {
     const { open, current } = this.state;
@@ -148,6 +125,28 @@ class Support extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
+  handleCollapse = e => {
+    this.setState({ open: !this.state.open, current: e.target.id });
+  };
+
+  handleKeyDown = () => {};
 }
 
 const mapStateToProps = state => ({

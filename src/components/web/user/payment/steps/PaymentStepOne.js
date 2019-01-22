@@ -1,12 +1,9 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
-import PropTypes from "prop-types";
-import { Translations } from "../../../../../lib/translations";
-import { userInfo } from "os";
 import moment from "moment";
-import { Loader, ImageItem, VideoItem } from "../../../../ui-kit";
-import * as enumerations from "../../../../../lib/constants/enumerations";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import * as images from "../../../../../lib/constants/images";
+import { Translations } from "../../../../../lib/translations";
 
 class PaymentStepOne extends Component {
   constructor(props) {
@@ -15,13 +12,8 @@ class PaymentStepOne extends Component {
   }
 
   render() {
-    const { handleAddress, form, userInfo, categoryList } = this.props;
+    const { handleAddress, form, userInfo } = this.props;
     const todayDate = new Date();
-    console.log(form.category[0].categoryName);
-    // const selectedCategory = categoryList.find(
-    //   category => category.id === form.category
-    // );
-    // console.log("step1", selectedCategory);
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
@@ -163,16 +155,14 @@ class PaymentStepOne extends Component {
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
                     {/* <img src={images.image} alt="image2" /> */}
-                    {form.typeContent &&
-                      form.typeContent.toLowerCase() ===
-                        enumerations.mediaTypes.video && (
-                        <VideoItem item={form.video} />
-                      )}
-                    {(!form.typeContent ||
-                      (form.typeContent &&
-                        form.typeContent.toLowerCase() ===
-                          enumerations.mediaTypes.image)) && (
-                      <ImageItem item={form.image} />
+                    {form.fileType && form.image && (
+                      <img src={form.image} alt={"information"} />
+                    )}
+                    {!form.fileType && form.video && (
+                      <video controls>
+                        <track kind="captions" />
+                        <source src={form.video} type={form.file.type} />
+                      </video>
                     )}
                   </div>
                 </div>
@@ -201,15 +191,13 @@ class PaymentStepOne extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  categoryList: state.selectData
+const mapStateToProps = () => ({
 });
 
 PaymentStepOne.propTypes = {
   form: PropTypes.any.isRequired,
   handleAddress: PropTypes.func.isRequired,
-  userInfo: PropTypes.any,
-  categoryList: PropTypes.any
+  userInfo: PropTypes.any
 };
 
 export default connect(mapStateToProps)(PaymentStepOne);

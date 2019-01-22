@@ -1,11 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import ReactTooltip from "react-tooltip";
 import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getAdmins, updateAdmin, getHashUser } from "../../../actions";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { UsernameList } from "../../common";
-import ReactTooltip from "react-tooltip";
 import * as routes from "../../../lib/constants/routes";
 
 class AddAdminPage extends Component {
@@ -13,6 +13,7 @@ class AddAdminPage extends Component {
     super(props, context);
     this.username = React.createRef();
     this.state = {
+      searchKeyword: this.props.searchData.searchKeyword,
       admins: null,
       form: {
         id: "",
@@ -22,14 +23,14 @@ class AddAdminPage extends Component {
     };
   }
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
     }
-  };
+    return null;
+  }
 
   handleChangeField = event => {
     const { form } = this.state;

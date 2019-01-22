@@ -1,10 +1,13 @@
 import React, {Component} from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
+
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
+import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { AdCard } from "../../../misc";
+
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
@@ -30,6 +33,10 @@ class ReportedAdsPage extends Component {
     this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
 
@@ -83,8 +90,10 @@ class ReportedAdsPage extends Component {
 
 
   renderAds = () => {
-    let { adList, form } = this.state;
-    adList = search(adList, "userName", form.search);
+    let { adList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
+    adList = search(adList, "userName", form.search  || searchData.searchKeyword);
     
     return adList.map(ad => {
       return (
@@ -97,7 +106,7 @@ class ReportedAdsPage extends Component {
               isStatus={false}
               isReport
               isBackOffice 
-              handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
               handleRemove={this.handleRemove}
             />
           )}
@@ -113,17 +122,35 @@ class ReportedAdsPage extends Component {
     this.setState({ form });
   }
 
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+
+    if (searchData.searchKeyword) {
+      getSearch("");
+      const data = {
+        type: "get",
+        reportContent: "Ads"
+      }
+      this.setState({isLoading: true});
+      this.getBackOfficeReportedContent(data);
+      this.getBackOfficeReportedStatistics(data);
+    }
+  }
+
   render() {
-    let { adList, form } = this.state;
+    let { adList } = this.state;
+    const { form } = this.state;
     const { isLoading } = this.state;
-    const { reportedContentData } = this.props;
-    adList = search(adList, "userName", form.search);
+    const { reportedContentData, searchData } = this.props;
+
+    adList = search(adList, "userName", form.search  || searchData.searchKeyword);
     return (
       <div>
         <div className="padding-rl-10 middle-section">
           <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
             {adList && this.renderAds()}
             {!adList && isLoading && <CampaignLoading />}
+            {adList && adList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
         </div>
         <div className="right_bar no-padding">
           <RightSidebarStatistics 
@@ -143,12 +170,14 @@ class ReportedAdsPage extends Component {
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
   isLoading: state.reportedContentData.isLoading,
-  error: state.reportedContentData.error
+  error: state.reportedContentData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
-  getBackOfficeReportedStatistics
+  getBackOfficeReportedStatistics,
+  getSearch
 };
 
 ReportedAdsPage.propTypes = {
@@ -157,6 +186,8 @@ ReportedAdsPage.propTypes = {
   isLoading: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 

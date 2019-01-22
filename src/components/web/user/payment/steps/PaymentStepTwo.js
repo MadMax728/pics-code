@@ -1,20 +1,16 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
+import moment from "moment";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { checkVoucherExpiry } from "../../../../../actions";
 import { connect } from "react-redux";
-//import { modalType } from "../../../../../lib/constants/enumerations";
+
+import * as images from "../../../../../lib/constants/images";
+import { checkVoucherExpiry } from "../../../../../actions";
 import { Translations } from "../../../../../lib/translations";
-import LazyLoad from "react-lazyload";
-import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
   Loader,
-  InlineLoading,
-  ImageItem,
-  VideoItem
+  InlineLoading
 } from "../../../../ui-kit";
-import moment from "moment";
 
 class PaymentStepTwo extends Component {
   constructor(props) {
@@ -241,16 +237,14 @@ class PaymentStepTwo extends Component {
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
                     {/* <img src={images.image} alt="image1" /> */}
-                    {form.typeContent &&
-                      form.typeContent.toLowerCase() ===
-                        enumerations.mediaTypes.video && (
-                        <VideoItem item={form.video} />
-                      )}
-                    {(!form.typeContent ||
-                      (form.typeContent &&
-                        form.typeContent.toLowerCase() ===
-                          enumerations.mediaTypes.image)) && (
-                      <ImageItem item={form.image} />
+                    {form.fileType && form.image && (
+                      <img src={form.image} alt={"information"} />
+                    )}
+                    {!form.fileType && form.video && (
+                      <video controls>
+                        <track kind="captions" />
+                        <source src={form.video} type={form.file.type} />
+                      </video>
                     )}
                   </div>
                 </div>
@@ -283,7 +277,6 @@ const mapStateToProps = state => ({
   voucherData: state.voucherData,
   campaignData: state.campaignData,
   adData: state.adData,
-  categoryList: state.selectData
 });
 
 const mapDispatchToProps = {
@@ -291,12 +284,10 @@ const mapDispatchToProps = {
 };
 
 PaymentStepTwo.propTypes = {
-  handleModalInfoShow: PropTypes.func,
   handleChangeField: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   checkVoucherExpiry: PropTypes.func,
-  handleModalInfoMsgShow: PropTypes.any,
   voucherData: PropTypes.any,
   forThat: PropTypes.any,
   setVoucherData: PropTypes.func,
@@ -304,7 +295,6 @@ PaymentStepTwo.propTypes = {
   campaignData: PropTypes.any,
   adData: PropTypes.any,
   userInfo: PropTypes.any,
-  categoryList: PropTypes.any
 };
 
 export default connect(

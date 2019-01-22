@@ -14,32 +14,6 @@ class NotificationsList extends Component {
     };
   }
 
-  componentDidMount = () => {
-    this.getNotificationList();
-  };
-
-  getNotificationList = () => {
-    // if (userId && type) {
-    //   const userRequestData = {
-    //     id: userId,
-    //     type: type
-    //   };
-    //   this.props.getFollowUserList(userRequestData).then(() => {
-    //     console.log("prop", this.props);
-    //   });
-    // }
-  };
-
-  handleSubscribed = e => {
-    const notification_list = this.state.notification_list;
-    notification_list.filter(
-      noti =>
-        noti.id === parseInt(e.target.id) &&
-        (noti.user.subscribed = !noti.user.subscribed)
-    );
-    this.setState({ notification_list });
-  };
-
   render() {
     return (
       <div className="tab-pane fade active in" id="nav-notifications">
@@ -102,6 +76,33 @@ class NotificationsList extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.getNotificationList();
+  };
+
+  getNotificationList = () => {
+    // if (userId && type) {
+    //   const userRequestData = {
+    //     id: userId,
+    //     type: type
+    //   };
+    //   this.props.getFollowUserList(userRequestData).then(() => {
+    //     console.log("prop", this.props);
+    //   });
+    // }
+  };
+
+  handleSubscribed = e => {
+    const notification_list = this.state.notification_list;
+    notification_list.filter(
+      noti =>
+        noti.id === parseInt(e.target.id) &&
+        (noti.user.subscribed = !noti.user.subscribed)
+    );
+    this.setState({ notification_list });
+  };
+
 }
 
 const mapStateToProps = state => ({
@@ -114,7 +115,7 @@ const mapDispatchToProps = {
 
 NotificationsList.propTypes = {
   getFollowUserList: PropTypes.func,
-  isLoading: PropTypes.bool
+  // isLoading: PropTypes.bool
   // error: PropTypes.any
 };
 

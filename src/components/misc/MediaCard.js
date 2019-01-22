@@ -11,7 +11,6 @@ import { getComments, like, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import { modalType } from "../../lib/constants";
-import { Loader } from "../ui-kit";
 
 class MediaCard extends Component {
   constructor(props, context) {
@@ -24,45 +23,83 @@ class MediaCard extends Component {
     };
   }
 
+  render() {
+    const { isComments, item } = this.state;
+    const { likeData, isDescription, isReport, reportedContentData, savedData } = this.props;
+    return (
+      <div className="feed_wrapper">
+        <MediaCardHeader
+          item={item}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+        />
+        <MediaCardBody
+          item={item}
+          isDescription={isDescription}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
+        />
+        <MediaCardFooter
+          isLoading={likeData.isLoading}
+          item={item}
+          handleCommentsSections={this.handleCommentsSections}
+          isComments={isComments}
+          /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
+          handleFavorite={this.handleFavorite}
+          isReport={isReport}
+        />
+        {isComments && (
+          <CommentCard
+            item={this.state.comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={(this.state.comments).length}
+          />
+        )}
+      </div>
+    );
+  }
+
   handleLockContent = (e) => {
-    const  { item } = this.state;
+    const { item } = this.state;
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
       reportContent: item.typeContent
-    }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
   }
-  
+
   handleSetState = (data) => {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
-    this.setState({item});
+    this.setState({ item });
     this.props.handleRemove(item.id);
   }
 
-  handleDoNotContent = (e) => {    
-    const  { item } = this.state;
+  handleDoNotContent = (e) => {
+    const { item } = this.state;
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
       reportContent: item.typeContent
-    }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
   }
 
-  handleUnlockContent= (e) => {
-    const  { item } = this.state;    
+  handleUnlockContent = (e) => {
+    const { item } = this.state;
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
       reportContent: item.typeContent
-    }    
+    }
     this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
       this.handleSetState(data)
     });
@@ -73,11 +110,11 @@ class MediaCard extends Component {
     const { isBackOffice } = this.props;
     const { item } = this.state;
 
-    if (isBackOffice){
+    if (isBackOffice) {
       reportTips = [
         {
-          name: item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock ,
-          handleEvent: item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent,
+          name: item.reportStatus === enumerations.reportType.lock ? Translations.tool_tips.unlock : Translations.tool_tips.lock,
+          handleEvent: item.reportStatus === enumerations.reportType.lock ? this.handleUnlockContent : this.handleLockContent,
         },
         {
           name: Translations.tool_tips.do_not,
@@ -88,11 +125,11 @@ class MediaCard extends Component {
     else {
       reportTips = [
         {
-          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
+          name: item.isReported ? Translations.tool_tips.unreport : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
+          name: item.isSavedPost ? Translations.tool_tips.unsave : Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         }
       ];
@@ -101,16 +138,16 @@ class MediaCard extends Component {
   };
 
   handleReportPost = (e) => {
-    const  { item } = this.state;
+    const { item } = this.state;
     const data = {
       typeContent: item.typeContent,
       typeId: e.target.id,
       title: item.title
-    }    
-    this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
+    }
+    this.props.addReport(data).then(() => {
+      if (this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
         item.isReported = !item.isReported;
-        this.setState({item});
+        this.setState({ item });
       }
     });
   };
@@ -119,15 +156,15 @@ class MediaCard extends Component {
     const { isSavedPage } = this.props;
     const item = this.state.item;
     const data = {
-        typeId: e.target.id,
-        postType: getBackendPostType(item)
-      };
+      typeId: e.target.id,
+      postType: getBackendPostType(item)
+    };
 
-    this.props.setSavedPost(data).then(()=> {
-      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
+    this.props.setSavedPost(data).then(() => {
+      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id) {
         item.isSavedPost = !item.isSavedPost;
-        this.setState({item});
-        if(isSavedPage && !this.state.item.isSavedPost) {
+        this.setState({ item });
+        if (isSavedPage && !this.state.item.isSavedPost) {
           this.props.handleRemove(item.id);
         }
       }
@@ -166,43 +203,6 @@ class MediaCard extends Component {
     });
   };
 
-  render() {
-    const { isComments, item } = this.state;
-    const { likeData, isDescription, isReport, reportedContentData, savedData } = this.props;
-    return (
-      <div className="feed_wrapper">
-        <MediaCardHeader
-          item={item}
-          handleFavorite={this.handleFavorite}
-          isLoading={likeData.isLoading}
-        />
-        <MediaCardBody 
-          item={item} 
-          isDescription={isDescription}
-          isLoading={reportedContentData.isLoading || savedData.isLoading}
-        />
-        <MediaCardFooter
-          isLoading={likeData.isLoading}
-          item={item}
-          handleCommentsSections={this.handleCommentsSections}
-          isComments={isComments}
-          /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
-          handleFavorite={this.handleFavorite}
-          isReport={isReport}
-        />
-        {isComments && (
-          <CommentCard
-            item={this.state.comments}
-            itemId={item.id}
-            typeContent={item.typeContent}
-            handleComment={this.handleComment}
-            totalCommentsCount={(this.state.comments).length}
-          />
-        )}
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({

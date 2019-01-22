@@ -4,31 +4,43 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
+import { UserImageItem } from "../../../../ui-kit";
 import { SelectDailyBudget } from "../../../../../components/common";
-import * as enumerations from "../../../../../lib/constants/enumerations";
-import { ImageItem, VideoItem } from "../../../../ui-kit";
+
 class StepTwo extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      startDate: moment(),
-      endDate: moment()
-    };
+    this.state = { startDate: moment(), endDate: moment(), maxClicks: 0 };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { maxClicks } = this.props;
+    if (prevState.maxClicks !== maxClicks) {
+      this.setState({ maxClicks: maxClicks });
+    }
   }
 
   handleStartDateChange = date => {
     this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
 
   handleEndDateChange = date => {
     this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
+    if (this.props.form.budget) {
+      this.props.calculateMaxClicks();
+    }
   };
 
   render() {
     const { form, handleSelect, userInfo } = this.props;
+    const { maxClicks } = this.state;
     const todayDate = new Date();
+    const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -88,7 +100,10 @@ class StepTwo extends Component {
               {Translations.create_ads.maximum_number_of_clicks}
             </label>
             <div className="meter orange nostripes">
-              <span style={{ width: "157px" }} className="filled-strip" />
+              <span
+                style={{ width: `${maxClicks}px` }}
+                className="filled-strip"
+              />
               <span className="number-clicks">
                 {Translations.create_ads.max_1200_clicks}
               </span>
@@ -108,13 +123,10 @@ class StepTwo extends Component {
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
             <div className="feed_header">
-              <div className="no-padding profile_image">
-                <img
-                  src={images.image}
-                  alt="image1"
-                  className="img-circle img-responsive"
-                />
-              </div>
+              <UserImageItem
+                item={profileImage}
+                customClass={`img-circle img-responsive`}
+              />
               <div className="no-padding titles_wrapper">
                 <div className="normal_title">{form.title}</div>
                 <div className="secondary_title">{userInfo.username} </div>
@@ -135,16 +147,14 @@ class StepTwo extends Component {
                 <div className="embed-responsive embed-responsive-16by9">
                   <div className="img-responsive embed-responsive-item">
                     {/* <img src={images.image} alt="image2" /> */}
-                    {form.typeContent &&
-                      form.typeContent.toLowerCase() ===
-                        enumerations.mediaTypes.video && (
-                        <VideoItem item={form.video} />
-                      )}
-                    {(!form.typeContent ||
-                      (form.typeContent &&
-                        form.typeContent.toLowerCase() ===
-                          enumerations.mediaTypes.image)) && (
-                      <ImageItem item={form.image} />
+                    {form.fileType && form.image && (
+                      <img src={form.image} alt={"information"} />
+                    )}
+                    {!form.fileType && form.video && (
+                      <video controls>
+                        <track kind="captions" />
+                        <source src={form.video} type={form.file.type} />
+                      </video>
                     )}
                   </div>
                 </div>
@@ -177,7 +187,9 @@ StepTwo.propTypes = {
   handleDate: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  userInfo: PropTypes.any
+  userInfo: PropTypes.any,
+  maxClicks: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 export default StepTwo;

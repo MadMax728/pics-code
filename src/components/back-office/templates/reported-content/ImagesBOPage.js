@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import ReportedSearchBar from "../ReportedSearchBar";
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { CampaignLoading, RightSidebarStatistics } from "../../../ui-kit";
+
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+
+import ReportedSearchBar from "../ReportedSearchBar";
+import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
 import { MediaCard } from "../../../misc";
+
 import * as enumerations from "../../../../lib/constants/enumerations";
 import { Translations } from "../../../../lib/translations";
 import { search } from "../../../../lib/utils/helpers";
@@ -22,6 +25,35 @@ class ImagesBOPage extends Component {
     };
   }
 
+  render() {
+    let { imageList } = this.state;
+    const { isLoading } = this.state;
+    const { form } = this.state;
+    const { reportedContentData, searchData } = this.props;
+    imageList = search(imageList,"userName", form.search || searchData.searchKeyword);
+    
+    return (
+      <div>
+        <div className="padding-rl-10 middle-section">
+          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
+          {imageList && this.renderImageList()}
+          {!imageList && isLoading && <CampaignLoading />}
+          {imageList && imageList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        </div>
+        <div className="right_bar no-padding">
+          <RightSidebarStatistics 
+            header={`Reported ${Translations.review_content_menu.images}`} 
+            handleEvent={this.handleReported} 
+            all={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.all : 0} 
+            outstanding={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.outstanding : 0}
+            processed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.processed : 0} 
+            notProcessed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.notProcessed : 0}
+          />
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     const data = {
       type: "get",
@@ -30,6 +62,10 @@ class ImagesBOPage extends Component {
     this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+    }
   };
 
   getBackOfficeReportedContent = (data) => {
@@ -42,7 +78,6 @@ class ImagesBOPage extends Component {
       }
     });
   }
-
 
   getBackOfficeReportedStatistics = (data) => {
     this.props.getBackOfficeReportedStatistics(data).then(()=> {
@@ -82,8 +117,10 @@ class ImagesBOPage extends Component {
   }
 
   renderImageList = () => {
-    let { imageList, form } = this.state;
-    imageList = search(imageList,"userName", form.search);
+    let { imageList } = this.state;
+    const { form } = this.state;
+    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
+    imageList = search(imageList,"userName", form.search || searchData.searchKeyword);
     return imageList.map(image => {
       return (
         <div key={image.id}>
@@ -91,7 +128,7 @@ class ImagesBOPage extends Component {
           image.typeContent &&
           image.typeContent.toLowerCase() === enumerations.mediaTypes.image &&
           (
-            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
+            <MediaCard item={image} isDescription isReport isBackOffice handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow} handleRemove={this.handleRemove} />
           )}
         </div>
       );
@@ -105,42 +142,33 @@ class ImagesBOPage extends Component {
     this.setState({ form });
   }
 
-  render() {
-    let { imageList } = this.state;
-    const { isLoading, form } = this.state;
-    const { reportedContentData } = this.props;
-    imageList = search(imageList,"userName", form.search);
-    return (
-      <div>
-        <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          {imageList && this.renderImageList()}
-          {!imageList && isLoading && <CampaignLoading />}
-        </div>
-        <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.images}`} 
-            handleEvent={this.handleReported} 
-            all={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.all : 0} 
-            outstanding={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.outstanding : 0}
-            processed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.processed : 0} 
-            notProcessed={reportedContentData.ImageStatistics? reportedContentData.ImageStatistics.notProcessed : 0}
-          />
-        </div>
-      </div>
-    );
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+
+    if (searchData.searchKeyword) {
+      getSearch("");
+      const data = {
+        type: "get",
+        reportContent: "Image"
+      }
+      this.setState({isLoading: true});
+      this.getBackOfficeReportedContent(data);
+      this.getBackOfficeReportedStatistics(data);
+    }
   }
 }
 
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
   isLoading: state.reportedContentData.isLoading,
-  error: state.reportedContentData.error
+  error: state.reportedContentData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
-  getBackOfficeReportedStatistics
+  getBackOfficeReportedStatistics,
+  getSearch
 };
 
 ImagesBOPage.propTypes = {
@@ -149,6 +177,8 @@ ImagesBOPage.propTypes = {
   isLoading: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
+  getSearch: PropTypes.func.isRequired,
+  searchData: PropTypes.any
   // error: PropTypes.any
 };
 

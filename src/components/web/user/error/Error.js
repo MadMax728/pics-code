@@ -30,7 +30,6 @@ class Error extends Component {
 
 Error.propTypes = {
   handleModalInfoHide: PropTypes.func,
-  handleModalHide: PropTypes.func,
   modalInfoMsg: PropTypes.string
 };
 
