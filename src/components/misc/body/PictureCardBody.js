@@ -18,7 +18,7 @@ class PictureCardBody extends Component {
         }
       >
         {pic && (
-          <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
+          <div className={isReport ? "backoffice-user pic-sec-block pic-block" : "pic-sec-block pic-block"}>
             <LazyLoad
               height={200}
               once

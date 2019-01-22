@@ -94,22 +94,22 @@
             }
           }
         }
-        @media (max-width: 1200px) {
-          .vjs-big-play-button {
-            top: 35%;
-          }
-        }
-        @media (max-width: 1024px) {
-          .vjs-big-play-button {
-            top: 30%;
-          }
-        }
-        @media (max-width: 991px) {
-          .vjs-big-play-button {
-            left: 35%;
-            top: 26%;
-          }
-        }
+        // @media (max-width: 1200px) {
+        //   .vjs-big-play-button {
+        //     top: 35%;
+        //   }
+        // }
+        // @media (max-width: 1024px) {
+        //   .vjs-big-play-button {
+        //     top: 30%;
+        //   }
+        // }
+        // @media (max-width: 991px) {
+        //   .vjs-big-play-button {
+        //     left: 35%;
+        //     top: 26%;
+        //   }
+        // }
       }
       .vjs-button > .vjs-icon-placeholder:before {
         font-size: 2.8em;
@@ -130,6 +130,15 @@
       .vjs-volume-bar.vjs-slider-horizontal {
         margin: 1.9em 0.45em !important;
       }
+    }
+  }
+}
+.pic-sec-block{
+  min-height: 278px;
+  .feed_image{
+    min-height: 310px;
+    .embed-responsive{
+      min-height: 310px;
     }
   }
 }
