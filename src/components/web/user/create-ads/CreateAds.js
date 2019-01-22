@@ -15,6 +15,7 @@ class CreateAds extends Component {
       handleModalInfoShow,
       forThat,
       form,
+      maxClicks,
       handleChangeField,
       handleSubmit,
       handleDate,
@@ -26,7 +27,8 @@ class CreateAds extends Component {
       handleSetState,
       userInfo,
       handleAddress,
-      setVoucherData
+      setVoucherData,
+      calculateMaxClicks
     } = this.props;
 
     return (
@@ -50,6 +52,8 @@ class CreateAds extends Component {
             form={form}
             handleSelect={handleSelect}
             userInfo={userInfo}
+            maxClicks={maxClicks}
+            calculateMaxClicks={calculateMaxClicks}
           />
         )}
         {stepIndex === 2 && (
@@ -93,7 +97,9 @@ CreateAds.propTypes = {
   handleSetState: PropTypes.func.isRequired,
   userInfo: PropTypes.any,
   handleAddress: PropTypes.func.isRequired,
-  setVoucherData: PropTypes.func
+  setVoucherData: PropTypes.func,
+  calculateMaxClicks: PropTypes.func,
+  maxClicks: PropTypes.any
 };
 
 export default CreateAds;

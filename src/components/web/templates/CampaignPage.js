@@ -5,64 +5,78 @@ import { getCampaigns, getSearch } from "../../../actions";
 import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
+import { search } from "../../../lib/utils/helpers";
 
 class CampaignPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      type: props.type
-    };
+    this.state = { type: props.type, campaignList: null };
   }
 
   render() {
-    const { campaignList, isLoading } = this.props;
+    let { campaignList } = this.state;
+    const { isLoading, searchData } = this.props;
+    campaignList = search(campaignList, "userName", searchData.searchKeyword);
+
     return (
       <div className={"padding-rl-10 middle-section"}>
         {campaignList && !isLoading && this.renderCampaignList()}
         {isLoading && <CampaignLoading />}
-        { !isLoading && ( !campaignList || ( campaignList && campaignList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        {!isLoading &&
+          (!campaignList || (campaignList && campaignList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
       </div>
     );
   }
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    if (this.props.searchData.searchKeyword) {
-      const data = {
-        userType: this.state.type,
-        isSearch: this.props.searchData.searchKeyword
-      };
-      this.props.getCampaigns("getCampaignType", data);
-    } else {
-      const data = { userType: this.state.type };
-      this.props.getCampaigns("getCampaignType", data);
-    }
+    this.handleRefresh();
+    this.handleCampeignList();
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.state.type !== nextProps.type) {
-      const data = { userType: nextProps.type };
-      this.props.getCampaigns("getCampaignType", data);
-      this.setState({ type: nextProps.type });
-      if (nextProps.searchData.searchKeyword) {
-        this.props.getSearch("");
-      }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.type !== prevState.type) {
+      return {
+        type: nextProps.type
+      };
     }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      const data = { userType: nextProps.type, isSearch: searchKeyword };
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { type } = this.state;
+    if (prevState.type !== type) {
+      const data = { userType: type };
       this.props.getCampaigns("getCampaignType", data);
-      this.setState({ type: nextProps.type });
+      this.props.getSearch("");
     }
   }
 
+  handleCampeignList = () => {
+    const data = {
+      userType: this.state.type
+    };
+    this.props.getCampaigns("getCampaignType", data).then(() => {
+      const { campaignList } = this.props;
+      this.setState({ campaignList });
+    });
+  };
+
   handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.handleCampeignList();
+    }
   };
 
   renderCampaignList = () => {
-    const { campaignList } = this.props;
+    let { campaignList } = this.state;
+    const { searchData } = this.props;
+    campaignList = search(campaignList, "userName", searchData.searchKeyword);
+
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
@@ -84,7 +98,6 @@ class CampaignPage extends Component {
       );
     });
   };
-
 }
 
 CampaignPage.propTypes = {

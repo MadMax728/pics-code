@@ -13,7 +13,7 @@ class StepTwo extends Component {
     const { form, handleContentChange } = this.props;
     return (
       <div className="col-xs-12 create-campaign-wrapper">
-        <div className="title">{Translations.create_campaigns.title}</div>
+        <div className="title">{form.title}</div>
         <TextEditor
           handleContentChange={handleContentChange}
           contentText={form.description}

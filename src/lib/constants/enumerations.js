@@ -90,10 +90,12 @@ export const reportStatusType = {
   unLock: "Not Processed",
   doNotLock: "Not Processed",
   normal: "Outstanding"
-}
+};
 
 export const reportType = {
   lock: "lock",
   unLock: "unLock",
   doNotLock: "doNotLock"
-}
+};
+
+export const budgetCalculation = { CPC: 1.0 };
