@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { getBackOfficeReportedContent, getSearch } from "../../../../actions";
+import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
 
 import ReportedSearchBar from "../ReportedSearchBar";
 import { CampaignLoading, NoDataFoundCenterPage } from "../../../ui-kit";
@@ -10,11 +10,14 @@ import { PictureCard } from "../../../misc";
 
 import { search } from "../../../../lib/utils/helpers";
 
+
 class PicsPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       picList: null,
+      isLoading: this.props.isLoading,
+      isSearch: false,
       form: {
         search: ""
       }
@@ -37,18 +40,38 @@ class PicsPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getBackOfficeReportedContent("reportedContentPics").then(() => {
-      if (this.props.reportedContentData && this.props.reportedContentData.reportedContentPics) {
-        this.setState({
-          picList: this.props.reportedContentData.reportedContentPics
-        })
-      }
-    });
+    const data = {
+      type: "get",
+      reportContent: "Pics"
+    }
+    this.setState({isLoading: true});
+    this.getBackOfficeReportedContent(data);
+    this.getBackOfficeReportedStatistics(data);
     const { searchData, getSearch } = this.props;
     if (searchData.searchKeyword) {
       getSearch("");
     }
   };
+
+  getBackOfficeReportedContent = (data) => {
+    this.props.getBackOfficeReportedContent(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.Pics) {
+        this.setState({
+          picList: this.props.reportedContentData.Pics,
+          isLoading: this.props.reportedContentData.isLoading
+        })
+      }
+    });
+  }
+
+  getBackOfficeReportedStatistics = (data) => {
+    this.props.getBackOfficeReportedStatistics(data).then(()=> {
+      if(this.props.reportedContentData && this.props.reportedContentData.PicsStatistics) {
+        // success
+      }
+    });
+  }
+  
 
   handleRefresh = () => {
     const { searchData, getSearch } = this.props;
@@ -90,11 +113,13 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getBackOfficeReportedContent,
+  getBackOfficeReportedStatistics,
   getSearch
 };
 
 PicsPage.propTypes = {
   getBackOfficeReportedContent: PropTypes.func.isRequired,
+  getBackOfficeReportedStatistics: PropTypes.func.isRequired,
   reportedContentData: PropTypes.object,
   isLoading: PropTypes.bool,
   searchData: PropTypes.any,
