@@ -18,6 +18,7 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation, isLoading })
             enumerations.mediaTypes.image)) && (
         <ImageItem
           item={campaign.mediaUrl}
+          userName={campaign.userName}
           isOtherCardExist={!isDescription && isInformation}
           isLoading={isLoading}
         />

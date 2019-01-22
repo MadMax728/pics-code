@@ -33,7 +33,7 @@ const CampaignDetailsCard = ({
                 <div className="info-img">
                     {campaignDetails.typeContent &&
                         campaignDetails.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
-                            <ImageItem item={campaignDetails.mediaUrl} isOtherCardExist={false}/>
+                            <ImageItem item={campaignDetails.mediaUrl} userName={campaignDetails.userName} isOtherCardExist={false}/>
                         )}
                     {campaignDetails.typeContent &&
                         campaignDetails.typeContent.toLowerCase() === enumerations.mediaTypes.video && (

@@ -6,7 +6,6 @@ import { Loader, ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { getSearch } from "../../../actions";
 import { connect } from "react-redux";
-import * as routes from "../../../lib/constants/routes";
 
 class PictureCardBody extends Component {
   render() {
@@ -39,7 +38,9 @@ class PictureCardBody extends Component {
                 (pic.typeContent &&
                   pic.typeContent.toLowerCase() ===
                     enumerations.mediaTypes.image)) && (
-                <ImageItem item={pic.mediaUrl} isLoading={isLoading} />
+                <ImageItem item={pic.mediaUrl} 
+                    userName={pic.userName} 
+                    isLoading={isLoading} />
               )}
             </LazyLoad>
             <div className="name-wrapper">
