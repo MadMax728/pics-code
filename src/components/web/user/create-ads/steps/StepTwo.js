@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
+import { UserImageItem } from "../../../../ui-kit";
 import { SelectDailyBudget } from "../../../../../components/common";
+
 class StepTwo extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +29,7 @@ class StepTwo extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const todayDate = new Date();
+    const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -106,13 +109,7 @@ class StepTwo extends Component {
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
             <div className="feed_header">
-              <div className="no-padding profile_image">
-                <img
-                  src={images.image}
-                  alt="image1"
-                  className="img-circle img-responsive"
-                />
-              </div>
+              <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
               <div className="no-padding titles_wrapper">
                 <div className="normal_title">{form.title}</div>
                 <div className="secondary_title">{userInfo.username} </div>
