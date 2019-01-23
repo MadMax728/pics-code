@@ -499,8 +499,10 @@ class CampaignModal extends Component {
     if (noOfDaysRuntime && budgetValue) {
       maxClicksValue =
         (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
-      if (maxClicksValue > 1200) {
+      if (maxClicksValue >= 1200) {
         maxClicksValue = 1200;
+      } else {
+        maxClicksValue = maxClicksValue;
       }
       maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
       this.setState({ maxClicks: maxClicksValue });

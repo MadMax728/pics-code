@@ -98,4 +98,8 @@ export const reportType = {
   doNotLock: "doNotLock"
 };
 
-export const budgetCalculation = { CPC: 1.0 };
+export const budgetCalculation = {
+  CPC: 1.0,
+  maxClicksLimit: 1200,
+  rangeSlot: 3.58
+};
