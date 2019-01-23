@@ -14,55 +14,56 @@ import { ReviewFilter, ReportedContentFilter } from "../filters";
 class LeftSideBarBackOffice extends Component {
 
   render() {
+    const { isRank } = this.props;
     return (
       <div>
         {/* Backoffice Menu */}
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
-        <Route
+        />}
+        {!isRank && <Route
           path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
           exact
           component={SideBarBackOffice}
-        />
+        />}
 
         {/* Reported content menu */}
 
@@ -109,29 +110,29 @@ class LeftSideBarBackOffice extends Component {
         />
 
         {/* review menu */}
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
           exact
           component={SideBarReviewMenu}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ADS_ROUTE}
           exact
           component={SideBarReviewMenu}
-        />
+        />}
 
         {/* Filters  */}
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
           exact
           component={this.handleReviewFilter}
-        />
-        <Route
+        />}
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ADS_ROUTE}
           exact
           component={this.handleReviewFilter}
-        />
+        />}
 
         <Route
           path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
@@ -176,53 +177,53 @@ class LeftSideBarBackOffice extends Component {
         />
 
         {/* Setting Menu */}
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ROOT_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
 
-        <Route
+       {!isRank && <Route
           path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
 
-        <Route
+       {!isRank && <Route
           path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
 
-        <Route
+        {!isRank && <Route
           path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />
+        />}
       </div>
     );
   }
@@ -238,7 +239,8 @@ class LeftSideBarBackOffice extends Component {
 }
 
 LeftSideBarBackOffice.propTypes = {
-  getFilter: PropTypes.func
+  getFilter: PropTypes.func,
+  isRank: PropTypes.bool.isRequired
 };
 
 export default LeftSideBarBackOffice;

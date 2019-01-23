@@ -5,6 +5,7 @@ import { AdminHeader } from "../header";
 import { Auth } from "../../../auth";
 import { submitAdminLogin } from "../../../actions/login";
 import * as routes from "../../../lib/constants/routes";
+import * as enumerations from "../../../lib/constants/enumerations";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
 import { InlineLoading } from "../../ui-kit";
@@ -15,7 +16,7 @@ class AdminLogin extends Component {
 
     this.state = {
       otp: "",
-      errorMsg: "",
+      errorMsg: ""
     };
   }
 
@@ -105,9 +106,16 @@ class AdminLogin extends Component {
 
     const { otp } = this.state;
 
+    let root_route;
     this.props.submitAdminLogin({ otp }).then(() => {
       if (this.props.loginData && this.props.loginData.user && this.props.loginData.user.success === true)
-        this.props.history.push(routes.BACK_OFFICE_ROOT_ROUTE);
+        if (this.props.loginData.user.data.role === enumerations.adminRank.rank3) {
+          root_route = routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE;
+        }
+        else {
+          root_route = routes.BACK_OFFICE_ROOT_ROUTE;
+        }
+        this.props.history.push(root_route);
       if (this.props.loginData && this.props.loginData.error && this.props.loginData.error.data && this.props.loginData.error.data.success === false)
         this.setState({errorMsg: this.props.loginData.error.data.message});
     });

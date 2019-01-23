@@ -13,6 +13,7 @@ import {
 } from "../../../../ui-kit";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import { DateFormat } from "../../../../Factory";
+import { DescriptionItem } from "../../../../misc/items";
 
 class StepThree extends Component {
   constructor(props) {
@@ -164,7 +165,9 @@ class StepThree extends Component {
                 </div>
               </div>
               <div className="feed_description padding-15">
-                <span className="secondary_title">{form.description}</span>
+                <span className="secondary_title">
+                  <DescriptionItem desc={form.description} />
+                </span>
               </div>
             </div>
             <div className="feed_footer padding-15">

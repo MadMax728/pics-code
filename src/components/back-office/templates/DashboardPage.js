@@ -8,7 +8,9 @@ import { getBackOfficeDashboard } from "../../../actions";
 import { CustomBootstrapTable } from "../../ui-kit";
 
 import { Translations } from "../../../lib/translations";
+import * as enumerations from "../../../lib/constants/enumerations";
 import * as routes from "../../../lib/constants/routes";
+import { Auth } from "../../../auth";
 
 class DashboardPage extends Component {
   constructor(props, context) {
@@ -18,7 +20,8 @@ class DashboardPage extends Component {
       key_statistics: null,
       content_statistics: null,
       campaign_statistics_company: null,
-      ads_statisitcs: null
+      ads_statisitcs: null,
+      isRank: false
     };
   }
 
@@ -27,7 +30,8 @@ class DashboardPage extends Component {
       key_statistics,
       content_statistics,
       campaign_statistics_company,
-      ads_statisitcs
+      ads_statisitcs,
+      isRank
     } = this.state;
 
     return (
@@ -49,13 +53,19 @@ class DashboardPage extends Component {
             </Link>
           </div>
 
-          {key_statistics && this.renderKeyStatistics()}
+          {
+            !isRank && 
+            <div>
+              {key_statistics && this.renderKeyStatistics()}
 
-          {content_statistics && this.renderContentStatistics()}
+              {content_statistics && this.renderContentStatistics()}
 
-          {campaign_statistics_company && this.renderCampaignStatisticsCompany()}
+              {campaign_statistics_company && this.renderCampaignStatisticsCompany()}
 
-          {ads_statisitcs && this.renderAdsStatistics()}
+              {ads_statisitcs && this.renderAdsStatistics()}
+            </div>
+          }
+
 
         </div>
       </div>
@@ -64,6 +74,16 @@ class DashboardPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) { 
+      this.setState({isRank: userInfo.role === enumerations.adminRank.rank2});
+    }
+
     // this.props.getBackOfficeDashboard().then(()=> {
     //   if(this.props.backOfficeDashboardData && this.props.backOfficeDashboardData.backOfficeDashboard) {
     //     this.setState({

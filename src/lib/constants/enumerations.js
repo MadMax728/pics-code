@@ -98,6 +98,12 @@ export const reportType = {
   doNotLock: "doNotLock"
 };
 
+export const adminRank = {
+  rank1: "rank1",
+  rank2: "rank2",
+  rank3: "rank3"
+};
+
 export const budgetCalculation = {
   CPC: 1.0,
   maxClicksLimit: 1200,

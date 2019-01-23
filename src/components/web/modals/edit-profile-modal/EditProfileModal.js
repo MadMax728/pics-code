@@ -14,6 +14,7 @@ class EditProfileModal extends Component {
     super(props, context);
     this.imageCropper = React.createRef();
     this.state = {
+      isLoading: false,
       image: null,
       actual_img: null,
       scale: 1
@@ -22,7 +23,7 @@ class EditProfileModal extends Component {
 
   render() {
     const { handleModalInfoHide, modalInfoShow } = this.props;
-    const { image } = this.state;
+    const { image, isLoading } = this.state;
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade create-campaign-modal"}
@@ -31,6 +32,7 @@ class EditProfileModal extends Component {
           <EditProfilePicHeader
             handleModalHide={this.props.handleModalInfoHide}
             handleContinue={this.handleContinue}
+            isLoading={isLoading}
           />
         }
         footer={false}
@@ -73,6 +75,7 @@ class EditProfileModal extends Component {
     Data.append('typeImage','Original');
     Data.append('typeOfContent','profile');
     Data.append('coordinate', '50');
+    this.setState({isLoading: true});
     this.props.uploadProfilePicture(Data)
       .then(()=>{
         if (this.props.userDataByUsername.imageData)
@@ -110,6 +113,7 @@ class EditProfileModal extends Component {
                 this.props.handleProfile(this.props.userDataByUsername.imageData.data.id);
                 this.imageCropper.current.handleSave();
                 this.props.handleModalInfoHide();
+                this.setState({isLoading: false});
                 }  
               }
             })

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { CreateAds, CreateAdsHeader } from "../../user";
 import {
@@ -11,7 +12,6 @@ import {
 import moment from "moment";
 import { Auth } from "../../../../auth";
 
-import { connect } from "react-redux";
 import { createAd, uploadMedia } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 
@@ -24,6 +24,7 @@ if (storage) {
 const initialState = {
   stepIndex: 0,
   userInfo: null,
+  isLoading: false,  
   maxClicks: 0,
   form: {
     title: "",
@@ -72,7 +73,7 @@ class AdsModal extends Component {
   }
 
   render() {
-    const { stepIndex, form, userInfo, maxClicks } = this.state;
+    const { stepIndex, form, userInfo, maxClicks, isLoading } = this.state;
     const { handleModalHide, modalShow } = this.props;
 
     let modalClassName = "";
@@ -121,6 +122,7 @@ class AdsModal extends Component {
             handleAddress={this.handleAddress}
             setVoucherData={this.setVoucherData}
             calculateMaxClicks={this.calculateMaxClicks}
+            isLoading={isLoading}
           />
         }
       />
@@ -165,6 +167,7 @@ class AdsModal extends Component {
       }
       Data.append("postType", "ad");
 
+      this.setState({isLoading: true});
       this.props.uploadMedia(Data, form.fileType).then(() => {
         if (this.props.mediaData && this.props.mediaData.media) {
           form.typeId = this.props.mediaData.media.id;
@@ -182,6 +185,7 @@ class AdsModal extends Component {
               this.props.adData.ad.id
             ) {
               this.handleModalInfoShow();
+              this.setState(initialState);
             }
           });
         }
@@ -260,6 +264,7 @@ class AdsModal extends Component {
     if (index === 0) {
       return (
         form.title &&
+        form.location &&
         form.location.latitude &&
         form.location.longitude &&
         form.location.address &&

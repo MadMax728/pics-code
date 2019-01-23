@@ -37,7 +37,7 @@ class AddVoucherPage extends Component {
             {Translations.admin.Add_voucher_code}
           </div>
           {voucherList && this.renderVouchers()}
-          {voucherData.isLoading && <CustomeTableLoader />}
+          {!voucherList && voucherData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Auth } from "../../../../../auth";
 import { DateFormat } from "../../../../Factory";
 import { Translations } from "../../../../../lib/translations";
+import { DescriptionItem } from "../../../../misc/items";
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -40,7 +41,9 @@ class Preview extends Component {
                 </video>
               )}
               <div className="text paddTop20">
-                {form.description && form.description}
+                {form.description && (
+                  <DescriptionItem desc={form.description} />
+                )}
               </div>
               <div className="feed_wrapper">
                 <div className="feed_header">

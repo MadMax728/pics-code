@@ -134,6 +134,7 @@ export const saveJwtToStorage = authResponse => {
     authResponse.language &&
     authResponse.id &&
     authResponse.userType &&
+    authResponse.role &&
     authResponse.profileUrl
   ) {
     localStorage.setItem(
@@ -144,6 +145,7 @@ export const saveJwtToStorage = authResponse => {
         language: authResponse.language,
         profileUrl: authResponse.profileUrl,
         userType: authResponse.userType,
+        role: authResponse.role,
         id: authResponse.id
       })
     );
