@@ -862,9 +862,6 @@ section.loader-wrapr {
   padding: 0px;
   width: 340px;
   opacity: 1;
-  position: absolute;
-  left: -120% !important;
-  top: -400% !important;
   // margin-left: 70%;
   // transition: all ease 0.3s;
   //   &.show{
@@ -974,7 +971,13 @@ section.loader-wrapr {
     }
   }
 }
-
+.__react_component_tooltip.type-light.border{
+  // .subscriber-tooltip{
+  //   position: absolute;
+  //   left: 0 !important;
+  //   top: 0 !important;
+  // }
+}
 //file-upload
 @keyframes load {
   0% {

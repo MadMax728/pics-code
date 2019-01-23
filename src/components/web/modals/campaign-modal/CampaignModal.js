@@ -30,6 +30,7 @@ if (storage) {
 
 const initialState = {
   stepIndex: 0,
+  isLoading: false,
   isPreview: false,
   userInfo: null,
   maxClicks: 0,
@@ -84,8 +85,8 @@ class CampaignModal extends Component {
   }
 
   render() {
-    const { isFor, handleModalHide } = this.props;
-    const { stepIndex, isPreview, form, userInfo, maxClicks } = this.state;
+    const { isFor, handleModalHide, modalShow } = this.props;
+    const { stepIndex, isPreview, form, userInfo, maxClicks,isLoading } = this.state;
 
     let modalClassName = "";
 
@@ -107,7 +108,7 @@ class CampaignModal extends Component {
               handleModalHide={handleModalHide}
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
-              stepIndex={this.state.stepIndex}
+              stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
               handleResoreState={this.handleResoreState}
             />
@@ -122,7 +123,7 @@ class CampaignModal extends Component {
           )
         }
         footer={false}
-        modalShow={this.props.modalShow}
+        modalShow={modalShow}
         closeBtn={false}
         handleModalHide={handleModalHide}
         modalBodyContent={
@@ -156,6 +157,7 @@ class CampaignModal extends Component {
               userInfo={userInfo}
               setVoucherData={this.setVoucherData}
               calculateMaxClicks={this.calculateMaxClicks}
+              isLoading={isLoading}
             />
           ) : (
             <CreateCreatorCampaign
@@ -187,6 +189,7 @@ class CampaignModal extends Component {
               userInfo={userInfo}
               setVoucherData={this.setVoucherData}
               calculateMaxClicks={this.calculateMaxClicks}
+              isLoading={isLoading}
             />
           )
         }
@@ -248,6 +251,7 @@ class CampaignModal extends Component {
       }
       Data.append("postType", "campaign");
 
+      this.setState({isLoading: true});
       this.props.uploadMedia(Data, form.filetype).then(() => {
         if (this.props.mediaData && this.props.mediaData.media) {
           form.typeId = this.props.mediaData.media.id;
@@ -265,6 +269,7 @@ class CampaignModal extends Component {
               this.props.campaignData.campaign.id
             ) {
               this.handleModalInfoShow();
+              this.setState(initialState);
             }
           });
         }
@@ -292,6 +297,7 @@ class CampaignModal extends Component {
     if (index === 0) {
       return (
         form.title &&
+        form.location &&
         form.location.latitude &&
         form.location.longitude &&
         form.location.address &&
@@ -499,8 +505,10 @@ class CampaignModal extends Component {
     if (noOfDaysRuntime && budgetValue) {
       maxClicksValue =
         (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
-      if (maxClicksValue > 1200) {
+      if (maxClicksValue >= 1200) {
         maxClicksValue = 1200;
+      } else {
+        maxClicksValue = maxClicksValue;
       }
       maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
       this.setState({ maxClicks: maxClicksValue });

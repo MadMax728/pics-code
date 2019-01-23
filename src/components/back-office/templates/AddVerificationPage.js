@@ -67,7 +67,7 @@ class AddVerificationPage extends Component {
             </button>
           </div>
           {verifications && this.renderVerifications()}
-          {verificationData.isLoading && <CustomeTableLoader />}
+          {!verifications && verificationData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );

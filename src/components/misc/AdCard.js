@@ -24,7 +24,15 @@ class AdCard extends Component {
   }
 
   render() {
-    const { isReview, isStatus, isDescription, isInformation, isReport, reportedContentData, savedData} = this.props;
+    const {
+      isReview,
+      isStatus,
+      isDescription,
+      isInformation,
+      isReport,
+      reportedContentData,
+      savedData
+    } = this.props;
     const { isComments, item, comments } = this.state;
     return (
       <div className="feed_wrapper">
@@ -53,20 +61,20 @@ class AdCard extends Component {
           isReport={isReport}
           isReview={isReview}
         />
-       {isComments && (
+        {isComments && (
           <CommentCard
             item={comments}
             itemId={item.id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
-            totalCommentsCount={(comments).length}
+            totalCommentsCount={comments.length}
           />
         )}
       </div>
     );
   }
 
-  handleLockContent = (e) => {
+  handleLockContent = e => {
     const { isReview } = this.props;
     let data;
     if (isReview) {
@@ -75,35 +83,37 @@ class AdCard extends Component {
         contentStatus: enumerations.reportType.lock,
         reportContent: "Advertisement",
         isReview
-      }
-    }
-    else {
+      };
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.lock,
         reportContent: "Ads"
-      }    
+      };
     }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
-  
-  handleSetState = (data) => {
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  handleSetState = data => {
     clearInterval(this.timer);
     const { item } = this.state;
     const { isReview } = this.props;
     if (isReview) {
       item.contentStatus = data.contentStatus;
-    }
-    else {
+    } else {
       item.reportStatus = data.contentStatus;
     }
-    this.setState({item});
-    this.props.handleRemove(item.id)
-  }
+    this.setState({ item });
+    this.props.handleRemove(item.id);
+  };
 
-  handleDoNotContent = (e) => {
+  handleDoNotContent = e => {
     const { isReview } = this.props;
     let data;
 
@@ -113,22 +123,25 @@ class AdCard extends Component {
         contentStatus: enumerations.reportType.doNotLock,
         reportContent: "Advertisement",
         isReview
-      }
-    }
-    else {
+      };
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.doNotLock,
         reportContent: "Ads"
-      }    
+      };
     }
 
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  handleUnlockContent= (e) => {
+  handleUnlockContent = e => {
     const { isReview } = this.props;
     let data;
 
@@ -138,46 +151,63 @@ class AdCard extends Component {
         contentStatus: enumerations.reportType.unLock,
         reportContent: "Advertisement",
         isReview
-      }
-    }
-    else {
+      };
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.unLock,
         reportContent: "Ads"
-      }    
+      };
     }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  renderReportTips = (id) => {
+  renderReportTips = id => {
     let reportTips;
     const { isBackOffice, isReview } = this.props;
     const { item } = this.state;
 
-    if (isBackOffice){
+    if (isBackOffice) {
       reportTips = [
         {
-          name: isReview? (item.contentStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock) : (item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock) ,
-          handleEvent: isReview? (item.contentStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent) : (item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent),
+          name: isReview
+            ? item.contentStatus === enumerations.reportType.lock
+              ? Translations.tool_tips.unlock
+              : Translations.tool_tips.lock
+            : item.reportStatus === enumerations.reportType.lock
+            ? Translations.tool_tips.unlock
+            : Translations.tool_tips.lock,
+          handleEvent: isReview
+            ? item.contentStatus === enumerations.reportType.lock
+              ? this.handleUnlockContent
+              : this.handleLockContent
+            : item.reportStatus === enumerations.reportType.lock
+            ? this.handleUnlockContent
+            : this.handleLockContent
         },
         {
           name: Translations.tool_tips.do_not,
           handleEvent: this.handleDoNotContent
         }
       ];
-    }
-    else {
-
+    } else {
       reportTips = [
         {
-          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
+          name: item.isReported
+            ? Translations.tool_tips.unreport
+            : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
+          name: item.isSavedPost
+            ? Translations.tool_tips.unsave
+            : Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         }
       ];
@@ -185,17 +215,21 @@ class AdCard extends Component {
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = (e) => {
-    const  { item } = this.state;
+  handleReportPost = e => {
+    const { item } = this.state;
     const data = {
       typeContent: "Ads",
       typeId: e.target.id,
       title: item.title
-    }    
-    this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === item.id
+      ) {
         item.isReported = !item.isReported;
-        this.setState({item});
+        this.setState({ item });
       }
     });
   };
@@ -229,30 +263,33 @@ class AdCard extends Component {
       this.setState({
         isComments: !this.state.isComments,
         comments: this.props.comments,
-        totalCommentsCount: (this.props.comments).length
+        totalCommentsCount: this.props.comments.length
       });
     });
   };
 
-  handleSavePost = (e) => {
+  handleSavePost = e => {
     const { isSavedPage } = this.props;
     const item = this.state.item;
     const data = {
-        typeId: e.target.id,
-        postType: getBackendPostType(item)
-      };
+      typeId: e.target.id,
+      postType: getBackendPostType(item)
+    };
 
-    this.props.setSavedPost(data).then(()=> {
-      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
+    this.props.setSavedPost(data).then(() => {
+      if (
+        this.props.savedData &&
+        this.props.savedData.saved &&
+        this.props.savedData.saved.typeId === item.id
+      ) {
         item.isSavedPost = !item.isSavedPost;
-        this.setState({item});
-        if(isSavedPage && !this.state.item.isSavedPost) {
+        this.setState({ item });
+        if (isSavedPage && !this.state.item.isSavedPost) {
           this.props.handleRemove(item.id);
         }
       }
-    })
+    });
   };
-
 }
 
 AdCard.propTypes = {
@@ -273,7 +310,7 @@ AdCard.propTypes = {
   handleRemove: PropTypes.func,
   isSavedPage: PropTypes.bool,
   isReview: PropTypes.bool,
-  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  handleModalInfoDetailsCallbackShow: PropTypes.func
 };
 
 const mapStateToProps = state => ({

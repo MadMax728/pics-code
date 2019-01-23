@@ -1,9 +1,12 @@
 import React from "react";
+import * as _ from "lodash";
 import { LeftSidebarNav } from "../../ui-kit";
 import * as routes from "../../../lib/constants/routes";
+import * as enumerations from "../../../lib/constants/enumerations";
 import { Translations } from "../../../lib/translations";
+import { Auth } from "../../../auth";
 
-const Links = [
+const Rank1 = [
   {
     to: routes.BACK_OFFICE_ROOT_ROUTE,
     className: "secondary_title",
@@ -40,9 +43,34 @@ const Links = [
     activeClassName: "active",
     text: Translations.back_office_menu.data_download
   }
+]
+
+const Rank2 = [
+  {
+    to: routes.BACK_OFFICE_ROOT_ROUTE,
+    className: "secondary_title",
+    activeClassName: "active",
+    text: Translations.back_office_menu.dashboard
+  }
 ];
 
 const SideBarBackOffice = () => {
+  const storage = Auth.extractJwtFromStorage();
+  let Links = [];
+  let userInfo
+  if (storage) {
+    userInfo = JSON.parse(storage.userInfo);
+    
+    if (userInfo) { 
+      if (userInfo.role === enumerations.adminRank.rank1) {
+        Links = Rank1;
+      }
+      else if (userInfo.role === enumerations.adminRank.rank2) {
+        Links = Rank2;       
+      }
+    }
+  }
+  
   return (
     <div>
       <LeftSidebarNav

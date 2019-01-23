@@ -59,6 +59,8 @@ class ImagesBOPage extends Component {
       type: "get",
       reportContent: "Image"
     }
+    console.log("ahij");
+    
     this.setState({isLoading: true});
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);

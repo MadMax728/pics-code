@@ -295,7 +295,7 @@ StepOne.propTypes = {
   handleScale: PropTypes.func,
   handleSelect: PropTypes.func.isRequired,
   handleVideo: PropTypes.func.isRequired,
-  userInfo: PropTypes.object.isRequired
+  userInfo: PropTypes.object
 };
 
 export default StepOne;

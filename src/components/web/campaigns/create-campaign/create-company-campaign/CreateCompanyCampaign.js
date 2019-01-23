@@ -38,9 +38,9 @@ class CreateCompanyCampaign extends Component {
       userInfo,
       handleAddress,
       setVoucherData,
-      calculateMaxClicks
+      calculateMaxClicks,
+      isLoading
     } = this.props;
-    console.log("company", this.props);
     return (
       <div className="col-xs-12 no-padding">
         {isPreview && <Preview form={form} />}
@@ -116,6 +116,7 @@ class CreateCompanyCampaign extends Component {
               handleSubmit={handleSubmit}
               setVoucherData={setVoucherData}
               userInfo={userInfo}
+              isLoading={isLoading}
             />
           ))}
       </div>
@@ -149,7 +150,8 @@ CreateCompanyCampaign.propTypes = {
   userInfo: PropTypes.object,
   setVoucherData: PropTypes.func,
   calculateMaxClicks: PropTypes.func,
-  maxClicks: PropTypes.any
+  maxClicks: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default CreateCompanyCampaign;

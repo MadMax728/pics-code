@@ -297,7 +297,7 @@ class AddAdminPage extends Component {
             </button>
           </div>
           {admins && this.renderAdmins()}
-          {adminData.isLoading && <CustomeTableLoader />}
+          {!admins && adminData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );

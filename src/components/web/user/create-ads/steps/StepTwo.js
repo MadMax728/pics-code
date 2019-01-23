@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
 import { UserImageItem } from "../../../../ui-kit";
 import { SelectDailyBudget } from "../../../../../components/common";
+import { DescriptionItem } from "../../../../misc/items";
 
 class StepTwo extends Component {
   constructor(props) {
@@ -160,7 +161,9 @@ class StepTwo extends Component {
                 </div>
               </div>
               <div className="feed_description padding-15">
-                <span className="secondary_title">{form.description}</span>
+                <span className="secondary_title">
+                  <DescriptionItem desc={form.description} />
+                </span>
               </div>
             </div>
             <div className="feed_footer padding-15">

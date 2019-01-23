@@ -30,7 +30,13 @@ export const getAds = (prop, provider) => {
     };
     return adService[prop](provider, headers).then(
       res => {
-        const ads = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        const ads = _.orderBy(
+          res.data.data,
+          function(o) {
+            return new moment(o.createdAt);
+          },
+          ["desc"]
+        );
         dispatch(getAdsSucceeded(ads));
       },
       error => {
@@ -61,21 +67,14 @@ export const getAdDetails = provider => {
   return dispatch => {
     dispatch(getAdDetailsStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
-      Authorization: storage.accessToken
-    };
-    const params = { headers };
-
-    return adService.getAdDetails(params, provider).then(
+    const header = { Authorization: storage.accessToken };
+    return adService.getAdDetails(provider, header).then(
       res => {
         dispatch(getAdDetailsSucceeded(res.data.data));
       },
       error => {
         dispatch(getAdDetailsFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
+        logger.error({ description: error.toString(), fatal: true });
       }
     );
   };

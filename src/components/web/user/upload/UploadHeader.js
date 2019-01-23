@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import { Translations } from "../../../../lib/translations";
 import { InlineLoading } from "../../../ui-kit";
-import { connect } from "react-redux";
 
 class UploadHeader extends Component {
   constructor(props) {
