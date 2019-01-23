@@ -44,7 +44,7 @@ class CMSManagementPage extends Component {
             />
           </div>
           {cmsManagement && this.renderCMSManagement()}
-          {cmsManagementData.isLoading && <CustomeTableLoader />}
+          {!cmsManagement && cmsManagementData.isLoading && <CustomeTableLoader />}
         </div>
       </div>
     );

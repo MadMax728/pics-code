@@ -5,6 +5,8 @@ import {
   BackOfficeHomeRoute,
   InfoModal
 } from "../components/common";
+import { Auth } from "../auth";
+import * as enumerations from "../lib/constants/enumerations";
 
 class BackOfficeHome extends Component {
   constructor(props, context) {
@@ -13,8 +15,22 @@ class BackOfficeHome extends Component {
       modalInfoShow: false,
       modalInfoType: "",
       modalInfo: null,
+      isRank: false,
+      userInfo: null,
       statusCallback: () => { }
     };
+  }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) { 
+      this.setState({isRank: userInfo.role === enumerations.adminRank.rank3});
+    }
   }
 
   handleModalInfoHide = () => {
@@ -41,7 +57,7 @@ class BackOfficeHome extends Component {
   handleModalHide = () => {};
 
   render() {
-    const { modalInfo, modalInfoShow, modalInfoType, statusCallback} = this.state;
+    const { modalInfo, modalInfoShow, modalInfoType, statusCallback, isRank} = this.state;
     return (
       <div>
         <section>
@@ -57,7 +73,7 @@ class BackOfficeHome extends Component {
           <div className="container">
             <div className="row">
               <div className="left_menu_second no-padding">
-                <LeftSideBarBackOffice getFilter={this.getFilter} />
+                <LeftSideBarBackOffice getFilter={this.getFilter} isRank={isRank} />
               </div>
 
               <div>
@@ -65,6 +81,7 @@ class BackOfficeHome extends Component {
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalInfoDetailsShow={this.handleModalInfoDetailsShow}
                   handleModalInfoDetailsCallbackShow={this.handleModalInfoDetailsCallbackShow}
+                  isRank={isRank}
                 />
               </div>
             </div>

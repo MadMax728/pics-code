@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router";
 import { Switch, Route } from "react-router-dom";
+import PropTypes from "prop-types";
 import * as routes from "./lib/constants/routes";
 import { AdminLogin, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
 import * as userService from "./services/userService";
 import { Auth } from "./auth";
-import PropTypes from "prop-types";
 import {
   Login,
   Register,
@@ -87,6 +87,8 @@ class App extends Component {
   };
 
   backOfficeRender = () => {
+    const root_route = routes.BACK_OFFICE_ROOT_ROUTE;
+    
     return (
       <Switch>
         <Route
@@ -100,7 +102,7 @@ class App extends Component {
           component={AdminLogin}
         />
         <Route
-          path={routes.BACK_OFFICE_ROOT_ROUTE}
+          path={root_route}
           render={this.isAdminUserAuthenticated}
         />
       </Switch>
