@@ -2,10 +2,24 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
+import { Translations } from "../../../../../lib/translations";
+import moment from "moment";
+import { DateFormat } from "../../../../Factory";
 class SettingAdsStatisticsRight extends Component {
- 
   render() {
     const { adStatistics } = this.props;
+    let isStatus = "green-circle pull-right";
+    if (adStatistics.isActive) {
+      isStatus = "green-circle pull-right";
+    } else {
+      isStatus = "red-circle pull-right";
+    }
+    // Calculation of Daily budget spent (24 hours counter – counter starts when ad was created) (Ref from SRS)
+    const todayDate = moment().unix();
+    const budgetSpent = moment
+      .unix(adStatistics.createdAt)
+      .diff(todayDate, "hour");
+    console.log(budgetSpent);
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
@@ -17,21 +31,27 @@ class SettingAdsStatisticsRight extends Component {
           <ul className="campaign-right-options">
             <li>
               <span>Daily budget</span>
-              <span className="pull-right">{adStatistics.daily_budget}</span>
+              <span className="pull-right">{adStatistics.budget}</span>
             </li>
             <li>
               <span>Total budget spent</span>
-              <span className="pull-right">
-                {adStatistics.total_budget_spent}
-              </span>
+              <span className="pull-right">{budgetSpent}</span>
             </li>
             <li>
               <span>Total expenses</span>
-              <span className="pull-right">{adStatistics.total_expenses}</span>
+              <span className="pull-right">{adStatistics.maximumExpenses}</span>
             </li>
             <li>
               <span>Runtime</span>
-              <span className="pull-right">{adStatistics.runtime}</span>
+              <span className="pull-right">
+                {moment
+                  .unix(adStatistics.startDate)
+                  .format(Translations.date_format.date)}{" "}
+                -
+                {moment
+                  .unix(adStatistics.endDate)
+                  .format(Translations.date_format.date)}
+              </span>
             </li>
           </ul>
           <div className="normal_title padding-15">Performance</div>
@@ -49,24 +69,32 @@ class SettingAdsStatisticsRight extends Component {
           <ul className="campaign-right-options">
             <li>
               <span>Location</span>
-              <span className="pull-right">{adStatistics.location}</span>
+              <span className="pull-right">
+                {adStatistics.location.address}
+              </span>
             </li>
             <li>
               <span>Radius</span>
-              <span className="pull-right">{adStatistics.radius}</span>
+              <span className="pull-right">
+                {adStatistics.radius.radiusName}
+              </span>
             </li>
             <li>
               <span>Category</span>
-              <span className="pull-right">{adStatistics.category}</span>
+              <span className="pull-right">
+                {adStatistics.category[0].categoryName}
+              </span>
             </li>
             <li>
               <span>Target group</span>
-              <span className="pull-right">{adStatistics.target_group}</span>
+              <span className="pull-right">
+                {Translations.target_group[adStatistics.targetGroup]}
+              </span>
             </li>
           </ul>
           <div className="normal_title padding-15">
             Status
-            <span className="green-circle pull-right" />
+            <span className={isStatus} />
           </div>
         </div>
       </div>

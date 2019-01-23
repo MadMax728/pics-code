@@ -76,6 +76,7 @@ const CampaignCardFooter = ({
         <StatusCard
           item={campaign}
           route={`${routes.BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}`}
+          isFor="campaign"
         />
       )}
       {campaign && isBudget && <BudgetCard item={campaign} />}
