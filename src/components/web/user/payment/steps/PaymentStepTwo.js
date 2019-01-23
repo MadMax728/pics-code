@@ -97,10 +97,8 @@ class PaymentStepTwo extends Component {
   };
 
   render() {
-    const { handleChangeField, form, userInfo } = this.props;
+    const { handleChangeField, form, userInfo, isLoading } = this.props;
     const redeemLoading = this.props.voucherData.isLoading;
-    const campeignCommitToBuyLoading = this.props.campaignData.isLoading;
-    const adCommitToBuyLoading = this.props.adData.isLoading;
     const todayDate = new Date();
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
@@ -162,7 +160,7 @@ class PaymentStepTwo extends Component {
                     <td> {Translations.create_campaigns.PreliminaryAmount} </td>
                     <td>{form.budget}</td>
                   </tr>
-                  `
+                  
                   <tr>
                     <td> {Translations.create_campaigns.Runtime}</td>
                     <td>
@@ -204,8 +202,7 @@ class PaymentStepTwo extends Component {
             </button>
           </div>
           {redeemLoading && <Loader />}
-          {campeignCommitToBuyLoading && <InlineLoading />}
-          {adCommitToBuyLoading && <InlineLoading />}
+          {isLoading && <InlineLoading />}
         </div>
         <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
           <div className="feed_wrapper">
@@ -274,9 +271,7 @@ class PaymentStepTwo extends Component {
 }
 
 const mapStateToProps = state => ({
-  voucherData: state.voucherData,
-  campaignData: state.campaignData,
-  adData: state.adData,
+  voucherData: state.voucherData
 });
 
 const mapDispatchToProps = {
@@ -291,10 +286,10 @@ PaymentStepTwo.propTypes = {
   voucherData: PropTypes.any,
   forThat: PropTypes.any,
   setVoucherData: PropTypes.func,
-  isLoading: PropTypes.any,
   campaignData: PropTypes.any,
   adData: PropTypes.any,
   userInfo: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default connect(

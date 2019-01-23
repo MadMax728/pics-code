@@ -37,6 +37,7 @@ class UploadModal extends Component {
 
   render() {
     const { form } = this.state;
+    const { modalShow } = this.props;
 
     return (
       <CustomBootstrapModal
@@ -50,7 +51,7 @@ class UploadModal extends Component {
         }
         footer={false}
         closeBtn={false}
-        modalShow={this.props.modalShow}
+        modalShow={modalShow}
         handleModalHide={this.handleModalHide}
         modalBodyContent={
           <Upload

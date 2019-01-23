@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { HashTag } from "../hash-tag";
 import { Username } from "../username";
 import { ToolTip } from "../../ui-kit";
 import ReactTooltip from "react-tooltip";
 import { getHashTag, addHashTag } from "../../../actions";
-import { connect } from "react-redux";
 
 class HashTagUsername extends Component {
   constructor(props) {
@@ -36,6 +36,10 @@ class HashTagUsername extends Component {
   };
 
   usernameShow = () => {
+    console.log("ahi abe cje");
+    console.log(this.username);
+    
+    
     ReactTooltip.show(this.username);
   };
 

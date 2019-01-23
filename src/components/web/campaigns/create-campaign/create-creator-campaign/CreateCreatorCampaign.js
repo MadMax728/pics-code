@@ -38,7 +38,8 @@ class CreateCreatorCampaign extends Component {
       userInfo,
       handleAddress,
       setVoucherData,
-      calculateMaxClicks
+      calculateMaxClicks,
+      isLoading
     } = this.props;
 
     return (
@@ -116,6 +117,7 @@ class CreateCreatorCampaign extends Component {
               handleSubmit={handleSubmit}
               setVoucherData={setVoucherData}
               userInfo={userInfo}
+              isLoading={isLoading}
             />
           ))}
       </div>
@@ -149,7 +151,8 @@ CreateCreatorCampaign.propTypes = {
   userInfo: PropTypes.object,
   setVoucherData: PropTypes.func,
   calculateMaxClicks: PropTypes.func,
-  maxClicks: PropTypes.any
+  maxClicks: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default CreateCreatorCampaign;

@@ -28,7 +28,8 @@ class CreateAds extends Component {
       userInfo,
       handleAddress,
       setVoucherData,
-      calculateMaxClicks
+      calculateMaxClicks,
+      isLoading
     } = this.props;
 
     return (
@@ -74,6 +75,7 @@ class CreateAds extends Component {
             handleSubmit={handleSubmit}
             setVoucherData={setVoucherData}
             userInfo={userInfo}
+            isLoading={isLoading}
           />
         )}
       </div>
@@ -99,7 +101,8 @@ CreateAds.propTypes = {
   handleAddress: PropTypes.func.isRequired,
   setVoucherData: PropTypes.func,
   calculateMaxClicks: PropTypes.func,
-  maxClicks: PropTypes.any
+  maxClicks: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default CreateAds;

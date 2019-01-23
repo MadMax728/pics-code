@@ -55,8 +55,6 @@ class Home extends Component {
   };
 
   handleModalShow = (e, data) => {
-    console.log("call");
-
     this.setState({ modalShow: true, modalType: e, data });
   };
 
