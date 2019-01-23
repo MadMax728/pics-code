@@ -5,15 +5,20 @@ export const updateAdminEndPoint = "/users/set-isadmin";
 // ad Services
 export const getSettingsAdsEndPoint = "/advertisement/get-user-advertise";
 export const createAdEndPoint = "/advertisement";
+export const getAdsDetailsEndPoint = "/advertisement/";
 
 // back-office dashboard service
 export const getBackOfficeDashboardEndPoint = "/newsfeeds/news-feeds";
 
 // Campaign Service
-export const getCompanyCampaignsEndPoint = "/campaigns/get-all-company-campaigns";
-export const getCreatorCampaignsEndPoint = "/campaigns/get-all-creator-campaigns";
-export const getNewsFeedCampaignsEndPoint = "/campaigns/get-all-news-feed-campaigns";
-export const getUserProfileCampaignsEndPoint = "/campaigns/get-all-user-profile-campaigns";
+export const getCompanyCampaignsEndPoint =
+  "/campaigns/get-all-company-campaigns";
+export const getCreatorCampaignsEndPoint =
+  "/campaigns/get-all-creator-campaigns";
+export const getNewsFeedCampaignsEndPoint =
+  "/campaigns/get-all-news-feed-campaigns";
+export const getUserProfileCampaignsEndPoint =
+  "/campaigns/get-all-user-profile-campaigns";
 export const getSavedCampaignsEndPoint = "/campaigns/get-all-saved-campaigns";
 export const getSettingsCampaignsEndPoint = "/campaigns/get-user-campaigns";
 export const getCampaignTypeEndPoint = "/campaigns/list/";
@@ -51,7 +56,7 @@ export const usernamesEndPoint = "/users/get-all-users";
 // Like Service
 export const likeEndPoint = "/likes";
 
-// media services 
+// media services
 export const uploadMediaImageEndPoint = "/images/profile";
 export const uploadMediaVideoEndPoint = "/videos";
 
@@ -69,14 +74,16 @@ export const deleteSearchHistoryEndPoint = "/users/deleteSearchHistory";
 export const deactivateAccountEndPoint = "/users/active-deactive";
 
 // Profile Setting Service
-export const activateBusinessProfileEndPoint = "/users/activate-business-profile";
+export const activateBusinessProfileEndPoint =
+  "/users/activate-business-profile";
 export const getBillsEndPoint = "/users/get-bills";
 export const getDownloadDataEndPoint = "/users/download-data";
 
 // reported content service
 export const updateBackOfficeReportEndPoint = "/reports";
 export const addReportEndPoint = "/reports";
-export const getReportedStatisticsEndPoint = "/reports/post-count?reportContent=";
+export const getReportedStatisticsEndPoint =
+  "/reports/post-count?reportContent=";
 
 // review services
 export const CampaignsEndPoint = "/campaigns/get-all-campaigns";
@@ -123,8 +130,9 @@ export const generateOTPEndPoint = "/auth/generate-otp";
 export const logoutEndPoint = "/auth/logout";
 export const getSocialNetworkEndPoint = "/auth/social-network-details";
 
-// Users Services 
-export const getUserListSubscriberEndPoint = "/messages/userlist?type=subscriber";
+// Users Services
+export const getUserListSubscriberEndPoint =
+  "/messages/userlist?type=subscriber";
 export const getUserListUnknownEndPoint = "/messages/userlist?type=unknown";
 export const getUserListLikeYouEndPoint = "/messages/userlist?type=likeYou";
 export const getUserListCompanyEndPoint = "/messages/userlist?type=company";
@@ -137,7 +145,8 @@ export const unblockUserRequestEndPoint = "/subscribe/";
 
 // Verification Service
 export const getVerificationsEndPoint = "/users/admin/list?type=verifiedUser";
-export const getUnverifiedUsersEndPoint = "/users/admin/list?type=UnverifiedUser";
+export const getUnverifiedUsersEndPoint =
+  "/users/admin/list?type=UnverifiedUser";
 export const updateVerificationEndPoint = "/users/admin/verify-user";
 
 // Voucher Service

@@ -2,13 +2,19 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const StatusCard = ({ item, route }) => {
+const StatusCard = ({ item, route, isFor }) => {
+  let isStatus = "green-circle";
+  if (item.isActive) {
+    isStatus = "green-circle";
+  } else {
+    isStatus = "red-circle";
+  }
   return (
     <div className="status">
       <div className="status-wrapper">
         <div className="title">Status</div>
         <div className="subtitle">
-          <span className="green-circle" />
+          <span className={isStatus} />
         </div>
       </div>
       <div className="status-wrapper">
@@ -21,11 +27,11 @@ const StatusCard = ({ item, route }) => {
       </div>
       <div className="status-wrapper">
         <div className="title">Applications</div>
-        <div className="subtitle">{item.applications}</div>
+        <div className="subtitle">{item.applicationCount}</div>
       </div>
       <div className="status-wrapper">
         <Link to={`${route}${item.id}`}>
-          <button className="blue_button">statistics</button>
+          <button className="blue_button">Statistics</button>
         </Link>
       </div>
     </div>
@@ -34,7 +40,8 @@ const StatusCard = ({ item, route }) => {
 
 StatusCard.propTypes = {
   item: PropTypes.object.isRequired,
-  route: PropTypes.string.isRequired
+  route: PropTypes.string.isRequired,
+  isFor: PropTypes.any
 };
 
 export default StatusCard;

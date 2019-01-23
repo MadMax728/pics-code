@@ -26,68 +26,72 @@ class Community extends Component {
         <div className="normal_title padding-15">
           {Translations.profile_community_right_sidebar.community}
         </div>
-        <div className="community">
-          {usersList && !isLoadingusers ? (
-            usersList.map(user => {
-              const profile_route = user.isOwner
-                ? `/news-feed`
-                : `/news-feed/${user.username}`;
-              let classNameText = "filled_button";
-              let btnText =
-                Translations.profile_community_right_sidebar.Subscribed;
-              if (user.isPending) {
-                btnText = Translations.profile_community_right_sidebar.Pending;
-                classNameText = "filled_button";
-              } else if (user.isSubscribe) {
-                btnText =
+
+        {!isLoadingusers && (
+          <div className="community">
+            {usersList && !isLoadingusers ? (
+              usersList.map(user => {
+                const profile_route = user.isOwner
+                  ? `/news-feed`
+                  : `/news-feed/${user.username}`;
+                let classNameText = "filled_button";
+                let btnText =
                   Translations.profile_community_right_sidebar.Subscribed;
-                classNameText = "filled_button";
-              } else {
-                btnText =
-                  Translations.profile_community_right_sidebar.Subscribe;
-                classNameText = "blue_button";
-              }
-              const actionButton = {
-                className: classNameText,
-                userId: user.id,
-                handleActionClick: this.handleSubscribed,
-                btnText,
-                isLoading: userListIsLoading
-              };
-              return (
-                <div className="community_wrapper" key={user.id}>
-                  <div className="community-user-image">
-                    <Link to={profile_route}>
-                      <img
-                        src={user.profileUrl}
-                        alt="campaign"
-                        className="img-circle img-responsive"
-                      />
-                    </Link>
+                if (user.isPending) {
+                  btnText =
+                    Translations.profile_community_right_sidebar.Pending;
+                  classNameText = "filled_button";
+                } else if (user.isSubscribe) {
+                  btnText =
+                    Translations.profile_community_right_sidebar.Subscribed;
+                  classNameText = "filled_button";
+                } else {
+                  btnText =
+                    Translations.profile_community_right_sidebar.Subscribe;
+                  classNameText = "blue_button";
+                }
+                const actionButton = {
+                  className: classNameText,
+                  userId: user.id,
+                  handleActionClick: this.handleSubscribed,
+                  btnText,
+                  isLoading: userListIsLoading
+                };
+                return (
+                  <div className="community_wrapper" key={user.id}>
+                    <div className="community-user-image">
+                      <Link to={profile_route}>
+                        <img
+                          src={user.profileUrl}
+                          alt="campaign"
+                          className="img-circle img-responsive"
+                        />
+                      </Link>
+                    </div>
+                    <div className="community-user-name">
+                      <Link to={profile_route}>
+                        <div className="normal_title">{user.username}</div>
+                        <div className="secondary_title">{user.name}</div>
+                      </Link>
+                    </div>
+                    <div className="community-subscribe">
+                      <button
+                        className={actionButton.className}
+                        id={actionButton.userId}
+                        onClick={actionButton.handleActionClick}
+                        disabled={actionButton.isLoading}
+                      >
+                        {actionButton.btnText}
+                      </button>
+                    </div>
                   </div>
-                  <div className="community-user-name">
-                    <Link to={profile_route}>
-                      <div className="normal_title">{user.username}</div>
-                      <div className="secondary_title">{user.name}</div>
-                    </Link>
-                  </div>
-                  <div className="community-subscribe">
-                    <button
-                      className={actionButton.className}
-                      id={actionButton.userId}
-                      onClick={actionButton.handleActionClick}
-                      disabled={actionButton.isLoading}
-                    >
-                      {actionButton.btnText}
-                    </button>
-                  </div>
-                </div>
-              );
-            })
-          ) : (
-            <NoDataFoundRightSidebar />
-          )}
-        </div>
+                );
+              })
+            ) : (
+              <NoDataFoundRightSidebar />
+            )}
+          </div>
+        )}
         {isLoading && <RightSidebarLoading />}
       </div>
     );
@@ -127,7 +131,9 @@ class Community extends Component {
     const errors = {};
     const { sendRequest, getUnsubscribe, usersList } = this.props;
     const selectedUserList = usersList.find(user => user.id === e.target.id);
-    if (selectedUserList.subscribeId === "") {
+    if (selectedUserList.isPending) {
+      // To Do - On Pending request click
+    } else if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
       sendRequest(requestData).then(() => {
         if (
@@ -159,7 +165,6 @@ class Community extends Component {
       });
     }
   };
-
 }
 
 const mapStateToProps = state => ({

@@ -16,7 +16,6 @@ class AdsStatisticsPage extends Component {
 
   render() {
     const { adDetails, isLoading } = this.props;
-
     return (
       <div>
         <div className="padding-rl-10 middle-section">
@@ -114,9 +113,7 @@ class AdsStatisticsPage extends Component {
                 </div>
                 <div className="progressbar-wrapper">
                   <div className="progressbar">
-                    <div
-                      style={{ width: `${adDetails.runtime_passed_per}` }}
-                    />
+                    <div style={{ width: `${adDetails.runtime_passed_per}` }} />
                   </div>
                   <span className="counter">
                     {adDetails.runtime_passed_per}
@@ -133,8 +130,13 @@ class AdsStatisticsPage extends Component {
   }
 
   componentDidMount = () => {
-    // this.props.getAdDetails(this.state.adId);
     window.scrollTo(0, 0);
+    const data = { id: this.state.adId };
+    this.props.getAdDetails(data).then(() => {
+      if (this.props.ad) {
+        this.setState({ adDetails: this.props.ad });
+      }
+    });
   };
 }
 
@@ -142,7 +144,8 @@ AdsStatisticsPage.propTypes = {
   match: PropTypes.any,
   getAdDetails: PropTypes.func.isRequired,
   adDetails: PropTypes.any,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  ad: PropTypes.any
   // error: PropTypes.any
 };
 

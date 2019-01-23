@@ -46,7 +46,7 @@ class SettingCampaignStatisticsRight extends Component {
             <li>
               <span>Applications</span>
               <span className="pull-right">
-                {campaignStatistics.applications}
+                {campaignStatistics.applicationCount}
               </span>
             </li>
           </ul>
