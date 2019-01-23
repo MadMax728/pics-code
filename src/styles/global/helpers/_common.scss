@@ -862,6 +862,9 @@ section.loader-wrapr {
   padding: 0px;
   width: 340px;
   opacity: 1;
+  position: absolute;
+  left: -120% !important;
+  top: -400% !important;
   // margin-left: 70%;
   // transition: all ease 0.3s;
   //   &.show{
@@ -880,7 +883,7 @@ section.loader-wrapr {
     text-align: left;
     background: #9b9b9b;
     & > div {
-      padding: 11px 0 10px 15px;
+      padding: 11px 0 10px 15px !important;
       background-color: white;
       margin-bottom: 1px;
       font-size: 14px;
@@ -1298,7 +1301,7 @@ section.loader-wrapr {
 // share pop up
 .share-popup.modal {
   &.in {
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.3);
   }
   .modal-dialog {
     margin: 34vh auto;
@@ -1326,7 +1329,7 @@ section.loader-wrapr {
       .social-media-link {
         background-color: white;
         margin-bottom: 2px;
-        padding: 10px 60px;
+        padding: 5px 60px;
         &:last-child {
           margin-bottom: 0;
         }
@@ -1493,33 +1496,34 @@ section.loader-wrapr {
 .video-js {
   &.htWid100 {
     .vjs-big-play-button {
-      left: 38%;
-      top: 38%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       border-radius: 51%;
-      height: 100px;
-      width: 100px;
+      height: 50px;
+      width: 50px;
       span.vjs-icon-placeholder {
         &::before {
-          top: 25px;
+          top: 0;
         }
       }
     }
-    @media (max-width: 1200px) {
-      .vjs-big-play-button {
-        top: 35%;
-      }
-    }
-    @media (max-width: 1024px) {
-      .vjs-big-play-button {
-        top: 30%;
-      }
-    }
-    @media (max-width: 991px) {
-      .vjs-big-play-button {
-        left: 35%;
-        top: 26%;
-      }
-    }
+    // @media (max-width: 1200px) {
+    //   .vjs-big-play-button {
+    //     top: 35%;
+    //   }
+    // }
+    // @media (max-width: 1024px) {
+    //   .vjs-big-play-button {
+    //     top: 30%;
+    //   }
+    // }
+    // @media (max-width: 991px) {
+    //   .vjs-big-play-button {
+    //     left: 35%;
+    //     top: 26%;
+    //   }
+    // }
   }
   .vjs-button > .vjs-icon-placeholder:before {
     font-size: 2.8em;

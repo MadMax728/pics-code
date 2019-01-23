@@ -98,3 +98,7 @@ const MUserList = (
 export default MUserList;
 
 ```
+
+### Modules
+
+  - **React Images** - [react-images](http://jossmac.github.io/react-images/)

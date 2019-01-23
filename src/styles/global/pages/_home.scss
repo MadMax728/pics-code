@@ -711,6 +711,11 @@
       }
       .emoji_wrapper {
         padding-right: 0px;
+        position: relative;
+        .emoji-mart{
+          bottom: 20px !important;
+          right: 20px !important;
+        }
       }
       .commenter-info {
         b {
@@ -774,6 +779,11 @@
       color: $silver_color;
       cursor: pointer;      
     }
+  }
+}
+.comment-content-div{
+  input{
+    padding-left: 0;
   }
 }
 .tick {

@@ -3,7 +3,6 @@ import Tabs from "react-bootstrap/lib/Tabs";
 import Tab from "react-bootstrap/lib/Tab";
 import { Requests, NotificationsList } from "./notification";
 import { Translations } from "../../../../lib/translations";
-import PropTypes from "prop-types";
 
 class Notifications extends Component {
   render() {
