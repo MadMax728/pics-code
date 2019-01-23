@@ -26,7 +26,7 @@ class TopBarOtherInfo extends Component {
         userProfile: this.props.match.profileUrl,
         slots: [
           {
-            className: "col-sm-4 slot_one no-padding",
+            className: "col-sm-4 slot_one  no-padding",
             name: Translations.top_bar_info.subscriber,
             val: 0,
             userid: this.props.match.userid,

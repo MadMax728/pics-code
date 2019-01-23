@@ -126,10 +126,19 @@
     .progressbar {
       background-color: #bfbfbf;
       margin-bottom: 15px;
+      position: relative;
       > div {
         @include gradient();
         /* Adjust with JavaScript */
         height: 25px;
+      }
+      .completed-count{
+        position: absolute;
+        left: 50%;
+        -webkit-transform: translateX(-50%);
+        transform: translateX(-50%);
+        color:#fff;
+        top:3px;
       }
     }
   }

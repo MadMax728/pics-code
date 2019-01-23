@@ -19,7 +19,7 @@ class SubscriberTooltip extends Component {
 
   render() {
     return (
-      <div id="">
+      <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>

@@ -91,7 +91,8 @@
   }
   .change-email-wrapper{
     .new-email{
-      .form-group{
+      position: relative;
+      &.form-group{
         img{
           bottom: 15px;
           top: initial;

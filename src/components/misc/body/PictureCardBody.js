@@ -44,7 +44,7 @@ class PictureCardBody extends Component {
               )}
             </LazyLoad>
             <div className="name-wrapper">
-              <div className="username">{pic.userName}</div>
+              {/* <div className="username">{pic.userName}</div> */}
                 <div className="show_more_options pic">
                   <ThreeDots
                     id={`report-${pic.id}`}
