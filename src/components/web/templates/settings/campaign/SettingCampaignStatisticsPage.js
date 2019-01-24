@@ -15,7 +15,7 @@ class SettingCampaignStatisticsPage extends Component {
   }
 
   render() {
-    const { campaignDetails, isLoading } = this.props;
+    const { campaignDetails, isLoading, handleModalShow } = this.props;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
@@ -101,6 +101,7 @@ class SettingCampaignStatisticsPage extends Component {
         {campaignDetails && !isLoading && (
           <SettingCampaignStatisticsRight
             campaignStatistics={campaignDetails}
+            handleModalShow={handleModalShow}
           />
         )}
         {isLoading && <InlineLoading />}
@@ -128,7 +129,8 @@ SettingCampaignStatisticsPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
   campaignDetails: PropTypes.any,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  handleModalShow: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 
