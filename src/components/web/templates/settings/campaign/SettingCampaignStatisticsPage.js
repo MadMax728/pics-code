@@ -54,8 +54,9 @@ class SettingCampaignStatisticsPage extends Component {
                 </div>
                 <div className="progressbar-wrapper">
                   <div className="progressbar">
-                    <div style={{ width: `${budgetProgress}%` }} />
-                    <p className="completed-count">{budgetProgress}€</p>
+                    <div style={{ width: `${budgetProgress}%` }} >
+                        <p className="completed-count">{budgetProgress}€</p>
+                    </div>
                   </div>
                   {/* <span className="counter">{budgetProgress}€</span> */}
                 </div>

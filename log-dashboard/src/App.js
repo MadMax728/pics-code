@@ -6,7 +6,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import Router from './Router';
 
 const Navigation = (props) => <nav>
-  <ul>
+  <ul className="log-data-tabs">
     <li><NavLink to='/'>History Log</NavLink></li>
     <li><NavLink to='/Errorlog'>Error Log</NavLink></li>
   </ul>
@@ -15,8 +15,8 @@ const Navigation = (props) => <nav>
 class App extends Component {
   render() {
     return (
-      <div className='page-container'>
-        <h1>History and Error Data</h1>
+      <div className='page-container log-data'>
+        <h1 className="log-data-header">History and Error Data</h1>
         <Navigation />
         <Router />
       </div>      
