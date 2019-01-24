@@ -75,7 +75,7 @@ class Historylog extends Component {
         console.log(secondReplaceString);
 
         return (
-            <Modal show={this.state.show} onHide={this.handleClose} backdrop="static">
+            <Modal show={this.state.show} onHide={this.handleClose} backdrop="static" className="data-log-modal">
                 <Modal.Header closeButton>
                     <Modal.Title>History Data</Modal.Title>
                 </Modal.Header>

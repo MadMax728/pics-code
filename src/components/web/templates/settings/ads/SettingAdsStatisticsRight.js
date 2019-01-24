@@ -30,20 +30,20 @@ class SettingAdsStatisticsRight extends Component {
           <div className="normal_title padding-15">Budget & Runtime</div>
           <ul className="campaign-right-options">
             <li>
-              <span>Daily budget</span>
-              <span className="pull-right">{adStatistics.budget}</span>
+              <span className="left-title">Daily budget</span>
+              <span className="pull-right right-content">{adStatistics.budget}</span>
             </li>
             <li>
-              <span>Total budget spent</span>
-              <span className="pull-right">{budgetSpent}</span>
+              <span className="left-title">Total budget spent</span>
+              <span className="pull-right right-content">{budgetSpent}</span>
             </li>
             <li>
-              <span>Total expenses</span>
-              <span className="pull-right">{adStatistics.maximumExpenses}</span>
+              <span className="left-title">Total expenses</span>
+              <span className="pull-right right-content">{adStatistics.maximumExpenses}</span>
             </li>
             <li>
-              <span>Runtime</span>
-              <span className="pull-right">
+              <span className="left-title">Runtime</span>
+              <span className="pull-right right-content">
                 {moment
                   .unix(adStatistics.startDate)
                   .format(Translations.date_format.date)}{" "}
@@ -57,37 +57,37 @@ class SettingAdsStatisticsRight extends Component {
           <div className="normal_title padding-15">Performance</div>
           <ul className="campaign-right-options">
             <li>
-              <span>Views</span>
-              <span className="pull-right">{adStatistics.views}</span>
+              <span className="left-title">Views</span>
+              <span className="pull-right right-content">{adStatistics.views}</span>
             </li>
             <li>
-              <span>Clicks</span>
-              <span className="pull-right">{adStatistics.clicks}</span>
+              <span className="left-title">Clicks</span>
+              <span className="pull-right right-content">{adStatistics.clicks}</span>
             </li>
           </ul>
           <div className="normal_title padding-15">Details on ad</div>
           <ul className="campaign-right-options">
             <li>
-              <span>Location</span>
-              <span className="pull-right">
+              <span className="left-title">Location</span>
+              <span className="pull-right right-content">
                 {adStatistics.location.address}
               </span>
             </li>
             <li>
-              <span>Radius</span>
-              <span className="pull-right">
+              <span className="left-title">Radius</span>
+              <span className="pull-right right-content">
                 {adStatistics.radius.radiusName}
               </span>
             </li>
             <li>
-              <span>Category</span>
-              <span className="pull-right">
+              <span className="left-title">Category</span>
+              <span className="pull-right right-content">
                 {adStatistics.category[0].categoryName}
               </span>
             </li>
             <li>
-              <span>Target group</span>
-              <span className="pull-right">
+              <span className="left-title">Target group</span>
+              <span className="pull-right right-content">
                 {Translations.target_group[adStatistics.targetGroup]}
               </span>
             </li>

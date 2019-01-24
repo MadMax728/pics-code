@@ -42,8 +42,11 @@ class SettingCampaignStatisticsPage extends Component {
                       style={{
                         width: `${campaignDetails.budget_spent_per}`
                       }}
-                    />
+                      
+                    >
                     <p className="completed-count">100</p>
+                    </div>
+                    
                   </div>
                   <span className="counter">
                     {campaignDetails.budget_spent_per}
