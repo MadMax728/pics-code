@@ -23,7 +23,7 @@ class SettingCampaignStatisticsRight extends Component {
   render() {
     const { campaignStatistics } = this.state;
     console.log(campaignStatistics);
-    const { campaignStatistics, budgetSpend, remainingBudget } = this.props;
+    const { budgetSpend, remainingBudget } = this.props;
     let isStatus = "green-circle pull-right";
     if (campaignStatistics.isActive) {
       isStatus = "green-circle pull-right";
