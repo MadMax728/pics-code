@@ -1693,3 +1693,11 @@ section.loader-wrapr {
 .no-data-css{
   transform: scale(0.6);
 }
+.feed_wrapper {
+  .feed_header{
+     .like_wrapper img {
+        width: 24px !important;
+        margin-top: 11px !important;
+    }
+  }
+}
