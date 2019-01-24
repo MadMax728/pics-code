@@ -31,7 +31,7 @@ class StepOne extends Component {
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-6 upload-form">
-          <UserImageItem item={userInfo ? userInfo.profileUrl : images.image}></UserImageItem>
+          <UserImageItem customClass={`img-circle img-responsive padding-right-15`} item={userInfo ? userInfo.profileUrl : images.image}></UserImageItem>
           <UserTitleItem title={form.title
                 ? form.title
                 : Translations.create_campaigns.title_of_campaigns} username={userInfo ? userInfo.username : ""} />
@@ -87,9 +87,12 @@ class StepOne extends Component {
                 </span>
               )}
             </div>
-            <div className="subtitle">
-              {Translations.create_campaigns.application_criteria}
+            <div className="pt-10">
+              <div className="subtitle">
+                {Translations.create_campaigns.application_criteria}
+              </div>
             </div>
+          
             {isFor && (
               <div>
                 <div className="form-group">

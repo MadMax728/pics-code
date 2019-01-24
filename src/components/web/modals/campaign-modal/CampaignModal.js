@@ -83,6 +83,7 @@ const initialState = {
 };
 
 class CampaignModal extends Component {
+  
   constructor(props, context) {
     super(props, context);
     this.state = initialState;
