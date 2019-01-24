@@ -90,7 +90,16 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor, handleModalHide, modalShow } = this.props;
-    const { isEdit, stepIndex, isPreview, form, userInfo, maxClicks,isLoading, modalTitle } = this.state;
+    const {
+      modalTitle,
+      isEdit,
+      stepIndex,
+      isPreview,
+      form,
+      userInfo,
+      maxClicks,
+      isLoading
+    } = this.state;
 
     let modalClassName = "";
 
@@ -651,8 +660,6 @@ class CampaignModal extends Component {
         (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
       if (maxClicksValue >= 1200) {
         maxClicksValue = 1200;
-      } else {
-        maxClicksValue = maxClicksValue;
       }
       maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
       this.setState({ maxClicks: maxClicksValue });
