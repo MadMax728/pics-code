@@ -36,7 +36,18 @@ class NewsRoot extends Component {
     window.scrollTo(0, 0);
     this.handleRefresh();
     this.handleSetNewsFeed();
+    window.addEventListener('scroll', this.onScroll, false);
   };
+
+  onScroll = () => {
+    console.log((window.innerHeight + window.scrollY), (document.body.offsetHeight));
+    if (
+      (window.innerHeight + window.scrollY) >= (document.body.offsetHeight) &&
+      this.state.newsFeedList.length
+    ) {
+      console.log('call event');
+    }
+  }
 
   handleSetNewsFeed = () => {
     this.props.getDashboard("news", "").then(() => {
@@ -51,7 +62,7 @@ class NewsRoot extends Component {
     newsFeedList = search(newsFeedList, "userName", searchData.searchKeyword);
     return newsFeedList.map(newsFeed => {
       return (
-        <div key={newsFeed.id}>
+        <div onScroll={this.trackScrolling}  key={newsFeed.id}>
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.mediaUrl &&
