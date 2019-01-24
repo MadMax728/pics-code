@@ -176,6 +176,7 @@
     "Runtime": "Runtime",
     "MaximumExpenses": "Maximum expenses",
     "CommitToBuy": "Commit to buy",
+    "CommitToUpdate": "Commit to Update",
     "onClickRegister": "By clicking on register you agree to our",
     "GenralTerms": "General Terms & Conditions",
     "termsUse": "Terms of Use",
@@ -208,8 +209,10 @@
     "preview": "Preview",
     "continue": "Continue",
     "create_campaign": "Create Campaign",
+    "edit_campaign": "Edit Campaign",
     "upload_image": "Upload image",
     "create_ad": "Create Ad",
+    "edit_ad": "Edit Ad",
     "edit_profile_image": "Edit Profile Image",
     "cms_preview": "CMS Preview"
   },

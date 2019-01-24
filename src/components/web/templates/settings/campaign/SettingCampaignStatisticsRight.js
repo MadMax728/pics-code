@@ -2,11 +2,27 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
+import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
 import moment from "moment";
 
 class SettingCampaignStatisticsRight extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      campaignStatistics: this.props.campaignStatistics
+    };
+  }
+
+  handleEditCampaign = () => {
+    const { campaignStatistics } = this.state;
+    this.props.handleModalShow(modalType.editCampaign, campaignStatistics);
+  }
+
   render() {
+    const { campaignStatistics } = this.state;
+    console.log(campaignStatistics);
     const { campaignStatistics, budgetSpend, remainingBudget } = this.props;
     let isStatus = "green-circle pull-right";
     if (campaignStatistics.isActive) {
@@ -14,13 +30,11 @@ class SettingCampaignStatisticsRight extends Component {
     } else {
       isStatus = "red-circle pull-right";
     }
-
+    
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
-          <button className="blue_button">
-            {Translations.create_campaigns.edit_campaign}{" "}
-          </button>
+          <button className="blue_button" onClick={this.handleEditCampaign} >Edit campaign</button>
           <Link to={routes.SETTINGS_CAMPAIGN_ROUTE}>
             <button className="black_button">
               {" "}
@@ -85,18 +99,19 @@ class SettingCampaignStatisticsRight extends Component {
 }
 
 SettingCampaignStatisticsRight.propTypes = {
+  handleModalShow: PropTypes.func.isRequired,
   campaignStatistics: PropTypes.shape({
     title: PropTypes.string,
     applications: PropTypes.string,
-    views: PropTypes.string,
-    clicks: PropTypes.string,
+    views: PropTypes.any,
+    clicks: PropTypes.any,
     budget_spent_per: PropTypes.string,
     view_per: PropTypes.string,
     runtime_passed_per: PropTypes.string,
     total_budget_spent: PropTypes.string,
     remaining_budget: PropTypes.string,
     runtime: PropTypes.string,
-    id: PropTypes.number
+    id: PropTypes.any,
   }),
   remainingBudget: PropTypes.any,
   budgetSpend: PropTypes.any

@@ -22,7 +22,7 @@ class SettingCampaignStatisticsPage extends Component {
   }
 
   render() {
-    const { campaignDetails, isLoading } = this.props;
+    const { campaignDetails, isLoading, handleModalShow } = this.props;
     const {
       budgetProgress,
       performaceProgress,
@@ -114,6 +114,7 @@ class SettingCampaignStatisticsPage extends Component {
         {campaignDetails && !isLoading && (
           <SettingCampaignStatisticsRight
             campaignStatistics={campaignDetails}
+            handleModalShow={handleModalShow}
             budgetSpend={budgetSpend}
             remainingBudget={remainingBudget}
           />
@@ -228,7 +229,8 @@ SettingCampaignStatisticsPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
   campaignDetails: PropTypes.any,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  handleModalShow: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 
