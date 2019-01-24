@@ -284,6 +284,7 @@ class AdsModal extends Component {
       );
     } else if (index === 2) {
       return (
+        form.address && 
         form.address.invoiceRecipient &&
         form.address.street &&
         form.address.streetNumber &&
@@ -329,9 +330,11 @@ class AdsModal extends Component {
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    form.location.latitude = location.lat;
-    form.location.longitude = location.lng;
-    form.location.address = address;
+    if(form && form.location) {
+      form.location.latitude = location.lat;
+      form.location.longitude = location.lng;
+      form.location.address = address;
+    }
     this.setState({ form });
   };
 

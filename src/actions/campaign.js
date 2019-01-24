@@ -202,3 +202,44 @@ export const addParticipants = provider => {
     );
   };
 };
+
+
+// Update Campaign
+
+const updateCampaignStarted = () => ({
+  type: types.UPDATE_CAMPAIGN_STARTED
+});
+
+const updateCampaignSucceeded = data => ({
+  type: types.UPDATE_CAMPAIGN_SUCCEEDED,
+  payload: data
+});
+
+const updateCampaignFailed = error => ({
+  type: types.UPDATE_CAMPAIGN_FAILED,
+  payload: error,
+  error: true
+});
+
+export const updateCampaign = provider => {
+  return dispatch => {
+    dispatch(updateCampaignStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return campaignService.updateCampaign(provider, header).then(
+      res => {
+        dispatch(updateCampaignSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(updateCampaignFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

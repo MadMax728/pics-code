@@ -25,6 +25,7 @@ export const getCampaignTypeEndPoint = "/campaigns/list/";
 export const getCampaignDetailsEndPoint = "/campaigns/";
 export const getFavouriteCampaignsEndPoint = "/likes/get-favorite-campaign";
 export const createCampaignEndPoint = "/campaigns";
+export const editCampaignEndPoint = "/campaigns";
 export const addParticipantsEndPoint = "/participants/add-participant";
 
 // CMS Management Service
