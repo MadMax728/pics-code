@@ -73,7 +73,7 @@ class Errorlog extends Component {
         console.log(secondReplaceString);
 
         return (
-            <Modal show={this.state.show} onHide={this.handleClose} backdrop="static">
+            <Modal show={this.state.show} onHide={this.handleClose} backdrop="static" className="data-log-modal">
                 <Modal.Header closeButton>
                     <Modal.Title>Errorlog Data</Modal.Title>
                 </Modal.Header>

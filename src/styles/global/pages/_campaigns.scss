@@ -18,6 +18,16 @@
       background: $white_color;
       margin-bottom: 1px;
       padding: 11px;
+      display: inline-block;
+      width: 100%;
+      .left-title{
+        width: 40%;
+        display: inline-block;
+      }
+      .right-content{
+        width: 60%;
+        display: inline-block;
+      }
     }
   }
   .green-circle {
@@ -126,11 +136,11 @@
     .progressbar {
       background-color: #bfbfbf;
       margin-bottom: 15px;
-      position: relative;
       > div {
         @include gradient();
         /* Adjust with JavaScript */
         height: 25px;
+        position: relative;
       }
       .completed-count{
         position: absolute;
