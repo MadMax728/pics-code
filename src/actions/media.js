@@ -40,18 +40,19 @@ export const uploadMedia = (provider, fileType) => {
         }
       );
     }
-
-    return mediaService.uploadMediaVideo(provider, header).then(
-      res => {
-        dispatch(uploadMediaSucceeded(res.data.data));
-      },
-      error => {
-        dispatch(uploadMediaFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
+    else if (!fileType) {
+      return mediaService.uploadMediaVideo(provider, header).then(
+        res => {
+          dispatch(uploadMediaSucceeded(res.data.data));
+        },
+        error => {
+          dispatch(uploadMediaFailed(error.response));
+          logger.error({
+            description: error.toString(),
+            fatal: true
+          });
+        }
+      );
+    }
   };
 };

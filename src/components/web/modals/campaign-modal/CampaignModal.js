@@ -29,6 +29,7 @@ if (storage) {
 }
 
 const initialState = {
+  isNewFile: false,
   isEdit: false,
   stepIndex: 0,
   isLoading: false,
@@ -210,8 +211,10 @@ class CampaignModal extends Component {
       this.setState({ userInfo });
     }
     const { data } = this.props;
+    console.log(data);
+    
     if(data && data.id){
-      this.setState({modalTitle: Translations.modal_header.edit_campaign, isEdit: true})
+      this.setState({modalTitle: Translations.modal_header.edit_campaign, isEdit: true, isNewFile: false})
       this.handleSetstate(data);
     }
     else {
@@ -235,7 +238,7 @@ class CampaignModal extends Component {
     form.procedure = procedure[data.procedure];
     if(data.typeContent) {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
-      form.filetype = typeContent.image === data.typeContent.toLowerCase();
+      form.filetype = typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
       if(form.filetype)  {
         form.image = data.mediaUrl;
         form.file = data.mediaUrl;
@@ -246,7 +249,7 @@ class CampaignModal extends Component {
       }
     }
     if(data.targetGroup) {
-      form.targetGroup = typeContent[data.targetGroup.toLowerCase()];
+      form.targetGroup = target_group[data.targetGroup.toLowerCase()];
     }
     form.description = data.description;
     form.startDate = moment.unix(data.startDate);
@@ -265,8 +268,9 @@ class CampaignModal extends Component {
     form.voucherAmount = data.voucherAmount;
     form.voucherCode = data.voucherCode;
     form.maximumExpenses = data.maximumExpenses;
+    form.typeId = data.typeId;
     form.error = false
-    this.setState({form});
+    this.setState({form, isNewFile: false});
     this.calculateMaxClicks();
   }
 
@@ -352,8 +356,9 @@ class CampaignModal extends Component {
   };
 
   handleSubmit = () => {
-    const { form, isEdit } = this.state;
-    if (form.file) {
+    const { form, isEdit, isNewFile } = this.state;
+    
+    if (form.file && isNewFile) {
       const Data = new FormData();
       if (form.filetype) {
         Data.append("image", form.file);
@@ -363,6 +368,7 @@ class CampaignModal extends Component {
       Data.append("postType", "campaign");
 
       this.setState({isLoading: true});
+      
       this.props.uploadMedia(Data, form.filetype).then(() => {
         if (this.props.mediaData && this.props.mediaData.media) {
           form.typeId = this.props.mediaData.media.id;
@@ -375,17 +381,7 @@ class CampaignModal extends Component {
           this.setState({ form });
           
           if(isEdit){
-            console.log("edit");            
-            this.props.updateCampaign(form).then(() => {
-              if (
-                this.props.campaignData &&
-                this.props.campaignData.campaign &&
-                this.props.campaignData.campaign.id
-              ) {
-                this.handleModalInfoShow();
-                this.handleResetForm();
-              }
-            });
+            this.handleUpdateCampaign(form);
           }
           else {
             this.props.createCampaign(form).then(() => {
@@ -402,13 +398,30 @@ class CampaignModal extends Component {
 
         }
       });
-    } else {
+    }
+    else if(form.file && !isNewFile) {
+      this.handleUpdateCampaign(form);
+    }
+    else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
       );
     }
   };
+
+  handleUpdateCampaign = (form) => {
+    this.props.updateCampaign(form).then(() => {
+      if (
+        this.props.campaignData &&
+        this.props.campaignData.campaign &&
+        this.props.campaignData.campaign.id
+      ) {
+        this.handleModalInfoShow();
+        this.handleResetForm();
+      }
+    });
+  }
 
   setVoucherData = (code, voucher, maximumExpenses) => {
     const { form } = this.state;
@@ -514,6 +527,7 @@ class CampaignModal extends Component {
 
   handleVideo = e => {
     const file = e.target.files[0];
+    this.setState({isNewFile: true});
     this.handleImageVideo(file);
   };
 
@@ -552,7 +566,9 @@ class CampaignModal extends Component {
 
   handleActualImg = e => {
     const file = e;
+    this.setState({isNewFile: true});
     this.handleImageVideo(file);
+    
   };
 
   handleScale = scale => {

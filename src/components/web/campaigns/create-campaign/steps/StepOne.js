@@ -241,6 +241,7 @@ class StepOne extends Component {
               ref={this.imageCrop}
               handleActualImg={handleActualImg}
               handleScale={handleScale}
+              userInfo={userInfo}
             />
           )}
 
