@@ -6,6 +6,16 @@
     "time": "LT"
   },
 
+  "complete_date_format": {
+    "date": "YYYY-MM-DD HH:mm:ss",
+    "time": "LT"
+  },
+
+  "statistics_date_format": {
+    "date": "DD.MM.YYYY",
+    "time": "LT"
+  },
+
   "offen": "In der Picstagraph-App offenen",
 
   "subscribe": "Subscribe",
@@ -91,12 +101,22 @@
     "status": "Status",
     "statistics": "Statistics",
     "total_budget": "Total budget",
+    "total_budget_spent": "Total budget spent",
+    "total_expense": "Total expenses",
     "budget_spent": "Budget spent",
     "remaining_Budget": "Remaining Budget",
     "daily_budget": "Daily budget",
     "daily_budget_spent": "Daily budget spent",
     "remaining_daily_budget": "Remaining daily budget",
-    "Performance": "Performance"
+    "Performance": "Performance",
+    "edit_ad": "Edit Ad",
+    "close_ad": "Close Ad",
+    "budget_runtime": "Budget & Runtime",
+    "DetailsonAd": "Details on ad",
+    "location": "Location",
+    "radius": "Radius",
+    "category": "Category",
+    "target_group": "Target Group"
   },
 
   "create_campaigns": {
@@ -163,7 +183,17 @@
     "privacyPolicy": "Privacy Policy",
     "FillProperData": "Please Fill proper Data",
     "SelectProperMedia": "Please Select Proper Media",
-    "ImageAndVedio": "Please Select Image or Video"
+    "ImageAndVedio": "Please Select Image or Video",
+    "total_budget": "Total budget",
+    "budget_spent": "Budget spent",
+    "remaining_budget": "Remaining Budget",
+    "performance": "Performance",
+    "runtime_passed": "Runtime Passed",
+    "remaining_runtime": "Remaining runtime",
+    "edit_campaign": "Edit Campaign",
+    "close_campaign": "Close Campaign",
+    "budget_runtime": "Budget & Runtime",
+    "total_budget_spent": "Total budget spent"
   },
 
   "messages_modal": {
