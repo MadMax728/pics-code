@@ -9,8 +9,6 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { Auth } from "../../../auth";
-import CookieConsent from "react-cookie-consent";
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -97,15 +95,7 @@ class Login extends Component {
             </div>
           </div>
         </section>
-        <CookieConsent
-          buttonText="Got it!"
-          style={{ background: "white", border: "solid 1px #1f58a6", color:"black" }}
-          buttonStyle={{ float: "right" }}
-        >
-          <p class="text-center">For a better user experience we use Cookie. By using picstagraph you do agree.</p>
-        </CookieConsent>
         <BaseFooter className={"custom-container"} />
-        
       </div>
     );
   }
