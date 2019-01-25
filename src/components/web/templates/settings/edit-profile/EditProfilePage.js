@@ -167,9 +167,9 @@ class EditProfile extends Component {
           offer_tag: userData.offerTag ? userData.offerTag : [],
           inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
           offerTagList:
-            userData.offerTagList.length !== 0 ? userData.offerTagList : [],
+            userData.offerTagList.length !== 0 && userData.offerTagList.length !== undefined ? userData.offerTagList : [],
           inquiryTagList:
-            userData.inquiryTagList.length !== 0 ? userData.inquiryTagList : []
+            userData.inquiryTagList.length !== 0 && userData.inquiryTagList.length !== undefined ? userData.inquiryTagList : []
         }
       });
     }

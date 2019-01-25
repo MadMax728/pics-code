@@ -18,11 +18,10 @@ class SettingCampaignStatisticsRight extends Component {
   handleEditCampaign = () => {
     const { campaignStatistics } = this.state;
     this.props.handleModalShow(modalType.editCampaign, campaignStatistics);
-  }
+  };
 
   render() {
     const { campaignStatistics } = this.state;
-    console.log(campaignStatistics);
     const { budgetSpend, remainingBudget } = this.props;
     let isStatus = "green-circle pull-right";
     if (campaignStatistics.isActive) {
@@ -30,11 +29,13 @@ class SettingCampaignStatisticsRight extends Component {
     } else {
       isStatus = "red-circle pull-right";
     }
-    
+
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
-          <button className="blue_button" onClick={this.handleEditCampaign} >Edit campaign</button>
+          <button className="blue_button" onClick={this.handleEditCampaign}>
+            Edit campaign
+          </button>
           <Link to={routes.SETTINGS_CAMPAIGN_ROUTE}>
             <button className="black_button">
               {" "}

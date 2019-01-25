@@ -13,7 +13,7 @@ const UserCard = ({ item }) => {
             {Translations.create_campaigns.start}:{" "}
           </span>
           <span className="secondary_title">
-            {moment(item.startDate).format("MMMM Do YYYY")}
+            {moment.unix(item.startDate).format("MMMM Do YYYY")}
           </span>
         </div>
         <div className="info_wrapper">
@@ -37,7 +37,7 @@ const UserCard = ({ item }) => {
             {Translations.create_campaigns.end}:{" "}
           </span>
           <span className="secondary_title">
-            {moment(item.endDate).format("MMMM Do YYYY")}
+            {moment.unix(item.endDate).format("MMMM Do YYYY")}
           </span>
         </div>
         <div className="info_wrapper">

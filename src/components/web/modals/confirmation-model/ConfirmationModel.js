@@ -4,6 +4,7 @@ import { ActionConfirmation } from "../../user/action-confirmation";
 import PropTypes from "prop-types";
 import { deactivateAccount } from "../../../../actions/privacy";
 import { connect } from "react-redux";
+import * as routes from "../../../../lib/constants/routes";
 
 class ConfirmationModal extends Component {
   constructor(props, context) {
@@ -44,11 +45,12 @@ class ConfirmationModal extends Component {
         // To Do - Call back to Modal call - with error status
       } else {
         console.log("Deactivate Accont");
+        console.log(this.props.profilePrivacyData);
+        this.props.history.push(routes.LOGOUT_ROUTE);
         // To Do - Call back to Modal call - with success status
       }
     });
   };
-
 }
 
 const mapStateToProps = state => ({
@@ -65,7 +67,8 @@ ConfirmationModal.propTypes = {
   handleModalInfoHide: PropTypes.func,
   modalInfoShow: PropTypes.bool,
   modalInfoMsg: PropTypes.string,
-  profilePrivacyData: PropTypes.any
+  profilePrivacyData: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(

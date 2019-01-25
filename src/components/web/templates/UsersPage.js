@@ -13,9 +13,9 @@ class UsersRoot extends React.Component {
   }
 
   render() {
-    let { usersList } = this.state;
-    const { isLoadingusers, searchData } = this.props;
-    usersList = search(usersList, "username", searchData.searchKeyword);
+    //let { usersList } = this.state;
+    const { isLoadingusers, searchData, usersList } = this.props;
+    // usersList = search(usersList, "username", searchData.searchKeyword);
     return (
       <div className="padding-rl-10 middle-section">
         {usersList && !isLoadingusers && this.renderuserList()}
@@ -50,9 +50,9 @@ class UsersRoot extends React.Component {
   };
 
   renderuserList = () => {
-    let { usersList } = this.state;
-    const { searchData } = this.props;
-    usersList = search(usersList, "username", searchData.searchKeyword);
+    // let { usersList } = this.state;
+    const { searchData, isLoadingusers, usersList } = this.props;
+    // usersList = search(usersList, "username", searchData.searchKeyword);
     return (
       <div className="user-wrapper">
         {usersList.map((user, index) => {
@@ -61,7 +61,7 @@ class UsersRoot extends React.Component {
           return (
             <div key={user.id}>
               {clearfixDiv}
-              <UserCard item={user} index={index} />
+              <UserCard item={user} index={index} isLoading={isLoadingusers} />
             </div>
           );
         })}
