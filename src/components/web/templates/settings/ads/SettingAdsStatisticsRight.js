@@ -42,21 +42,34 @@ class SettingAdsStatisticsRight extends Component {
           </div>
           <ul className="campaign-right-options">
             <li>
-              <span className="left-title"> {Translations.create_ads.daily_budget}</span>
-              <span className="pull-right right-content">{adStatistics.budget}€</span>
+              <span className="left-title">
+                {" "}
+                {Translations.create_ads.daily_budget}
+              </span>
+              <span className="pull-right right-content">
+                {adStatistics.budget}€
+              </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.daily_budget_spent}</span>
-              <span className="pull-right right-content">{budgetSpentInHours}</span>
+              <span className="left-title">
+                {Translations.create_ads.daily_budget_spent}
+              </span>
+              <span className="pull-right right-content">
+                {budgetSpentInHours}
+              </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.total_expense}</span>
+              <span className="left-title">
+                {Translations.create_ads.total_expense}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.maximumExpenses}€
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.runtime}</span>
+              <span className="left-title">
+                {Translations.create_ads.runtime}
+              </span>
               <span className="pull-right right-content">
                 {moment
                   .unix(adStatistics.startDate)
@@ -73,12 +86,22 @@ class SettingAdsStatisticsRight extends Component {
           </div>
           <ul className="campaign-right-options">
             <li>
-              <span className="left-title"> {Translations.create_ads.views}</span>
-              <span className="pull-right right-content">{adStatistics.views}</span>
+              <span className="left-title">
+                {" "}
+                {Translations.create_ads.views}
+              </span>
+              <span className="pull-right right-content">
+                {adStatistics.views}
+              </span>
             </li>
             <li>
-              <span className="left-title"> {Translations.create_ads.clicks}</span>
-              <span className="pull-right right-content">{adStatistics.clicks}</span>
+              <span className="left-title">
+                {" "}
+                {Translations.create_ads.clicks}
+              </span>
+              <span className="pull-right right-content">
+                {adStatistics.clicks}
+              </span>
             </li>
           </ul>
           <div className="normal_title padding-15">
@@ -87,25 +110,33 @@ class SettingAdsStatisticsRight extends Component {
           </div>
           <ul className="campaign-right-options">
             <li>
-              <span className="left-title">{Translations.create_ads.location}</span>
+              <span className="left-title">
+                {Translations.create_ads.location}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.location.address}
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.radius}</span>
+              <span className="left-title">
+                {Translations.create_ads.radius}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.radius.radiusName}
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.category}</span>
+              <span className="left-title">
+                {Translations.create_ads.category}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.category[0].categoryName}
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.target_group}</span>
+              <span className="left-title">
+                {Translations.create_ads.target_group}
+              </span>
               <span className="pull-right right-content">
                 {Translations.target_group[adStatistics.targetGroup]}
               </span>
@@ -140,15 +171,15 @@ SettingAdsStatisticsRight.propTypes = {
     total_expenses: PropTypes.string,
     runtime: PropTypes.string,
 
-    views: PropTypes.string,
-    clicks: PropTypes.string,
+    views: PropTypes.any,
+    clicks: PropTypes.any,
 
-    location: PropTypes.string,
-    radius: PropTypes.string,
-    category: PropTypes.string,
+    location: PropTypes.any,
+    radius: PropTypes.any,
+    category: PropTypes.any,
     target_group: PropTypes.string,
 
-    id: PropTypes.number
+    id: PropTypes.string
   })
 };
 
