@@ -11,6 +11,4 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // Username API
 export const usernames = (payload, header = {}) =>
-  api(baseUrl, header).post(usernamesEndPoint);
-
-  
+  api(baseUrl, header).get(usernamesEndPoint);
