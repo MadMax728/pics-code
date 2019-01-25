@@ -4,10 +4,24 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 import { Translations } from "../../../../../lib/translations";
 import moment from "moment";
+import { modalType } from "../../../../../lib/constants";
 
 class SettingAdsStatisticsRight extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      adStatistics: this.props.adStatistics
+    };
+  }
+
+  handleEditAd = () => {
+    const { adStatistics } = this.state;
+    this.props.handleModalShow(modalType.editAds, adStatistics);
+  }
+
   render() {
-    const { adStatistics } = this.props;
+    const { adStatistics } = this.state;
     let isStatus = "green-circle pull-right";
     if (adStatistics.isActive) {
       isStatus = "green-circle pull-right";
@@ -28,7 +42,7 @@ class SettingAdsStatisticsRight extends Component {
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
-          <button className="blue_button">
+          <button className="blue_button" onClick={this.handleEditAd}>
             {Translations.create_ads.edit_ad}
           </button>
           <Link to={routes.SETTINGS_ADS_ROUTE}>
@@ -43,7 +57,7 @@ class SettingAdsStatisticsRight extends Component {
           <ul className="campaign-right-options">
             <li>
               <span className="left-title"> {Translations.create_ads.daily_budget}</span>
-              <span className="pull-right right-content">{adStatistics.budget}€</span>
+              <span className="pull-right right-content">{adStatistics.budget && adStatistics.budget.dailyBudget}</span>
             </li>
             <li>
               <span className="left-title">{Translations.create_ads.daily_budget_spent}</span>
@@ -128,28 +142,8 @@ class SettingAdsStatisticsRight extends Component {
 }
 
 SettingAdsStatisticsRight.propTypes = {
-  adStatistics: PropTypes.shape({
-    title: PropTypes.string,
-    total_budget_spent_per: PropTypes.string,
-    daily_budget_spent_per: PropTypes.string,
-    performance_view_per: PropTypes.string,
-    runtime_passed_per: PropTypes.string,
-
-    daily_budget: PropTypes.string,
-    total_budget_spent: PropTypes.string,
-    total_expenses: PropTypes.string,
-    runtime: PropTypes.string,
-
-    views: PropTypes.string,
-    clicks: PropTypes.string,
-
-    location: PropTypes.string,
-    radius: PropTypes.string,
-    category: PropTypes.string,
-    target_group: PropTypes.string,
-
-    id: PropTypes.number
-  })
+  adStatistics: PropTypes.object.isRequired,
+  handleModalShow: PropTypes.func.isRequired
 };
 
 export default SettingAdsStatisticsRight;

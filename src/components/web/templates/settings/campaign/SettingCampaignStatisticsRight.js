@@ -100,19 +100,7 @@ class SettingCampaignStatisticsRight extends Component {
 
 SettingCampaignStatisticsRight.propTypes = {
   handleModalShow: PropTypes.func.isRequired,
-  campaignStatistics: PropTypes.shape({
-    title: PropTypes.string,
-    applications: PropTypes.string,
-    views: PropTypes.any,
-    clicks: PropTypes.any,
-    budget_spent_per: PropTypes.string,
-    view_per: PropTypes.string,
-    runtime_passed_per: PropTypes.string,
-    total_budget_spent: PropTypes.string,
-    remaining_budget: PropTypes.string,
-    runtime: PropTypes.string,
-    id: PropTypes.any,
-  }),
+  campaignStatistics: PropTypes.object.isRequired,
   remainingBudget: PropTypes.any,
   budgetSpend: PropTypes.any
 };

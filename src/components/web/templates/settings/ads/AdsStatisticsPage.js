@@ -15,7 +15,7 @@ class AdsStatisticsPage extends Component {
   }
 
   render() {
-    const { adDetails, isLoading } = this.props;
+    const { adDetails, isLoading, handleModalShow } = this.props;
     return (
       <div>
         <div className="padding-rl-10 middle-section">
@@ -122,8 +122,8 @@ class AdsStatisticsPage extends Component {
               </div>
             </div>
           )}
-        </div>
-        {adDetails && <SettingAdsStatisticsRight adStatistics={adDetails} />}
+        </div>    
+        {adDetails && <SettingAdsStatisticsRight adStatistics={adDetails} handleModalShow={handleModalShow} />}
         {isLoading && <InlineLoading />}
       </div>
     );
@@ -145,7 +145,8 @@ AdsStatisticsPage.propTypes = {
   getAdDetails: PropTypes.func.isRequired,
   adDetails: PropTypes.any,
   isLoading: PropTypes.bool,
-  ad: PropTypes.any
+  ad: PropTypes.any,
+  handleModalShow: PropTypes.func.isRequired
   // error: PropTypes.any
 };
 

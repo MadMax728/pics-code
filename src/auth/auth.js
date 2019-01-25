@@ -1,3 +1,5 @@
+import * as images from "../lib/constants/images";
+
 /**
  * check user is authenticated or not
  */
@@ -150,9 +152,9 @@ export const saveJwtToStorage = authResponse => {
 
   userInfo.language = authResponse.language || "English";
   userInfo.userType = authResponse.userType || "creator";
-  userInfo.profileUrl = authResponse.profileUrl;
+  userInfo.profileUrl = authResponse.profileUrl || images.image;
 
-  localStorage.setItem("userInfo", JSON.stringify(userInfo));
+  localStorage.setItem("user_info", JSON.stringify(userInfo));
 
   if (authResponse.hasOwnProperty("isAdmin")) {
     localStorage.setItem("is_admin", authResponse.isAdmin);
