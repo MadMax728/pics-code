@@ -131,9 +131,9 @@ export const saveJwtToStorage = authResponse => {
   if (
     authResponse.email &&
     authResponse.username &&
-    authResponse.language &&
+    authResponse.language ||
     authResponse.id &&
-    authResponse.userType &&
+    authResponse.userType ||
     authResponse.role &&
     authResponse.profileUrl
   ) {
@@ -142,9 +142,9 @@ export const saveJwtToStorage = authResponse => {
       JSON.stringify({
         email: authResponse.email,
         username: authResponse.username,
-        language: authResponse.language,
+        language: authResponse.language? authResponse.language : "English",
         profileUrl: authResponse.profileUrl,
-        userType: authResponse.userType,
+        userType: authResponse.userType? authResponse.userType : "creator",
         role: authResponse.role,
         id: authResponse.id
       })
