@@ -4,7 +4,8 @@ import MaterialTable from 'material-table';
 import axios from 'axios';
 import * as moment from 'moment';
 // import Modal from './Modal/modal'
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Tabs, Tab } from 'react-bootstrap';
+import JSONTree from 'react-json-tree'
 
 class Historylog extends Component {
 
@@ -50,7 +51,6 @@ class Historylog extends Component {
                 const historylog = res.data.data;
                 console.log('historylog', historylog);
                 Object.keys(historylog).map(function (key, index) {
-                    // console.log(historylog[key].info.functionName);
                     jsonArr.push({
                         userid: historylog[key].userId,
                         functionName: historylog[key].info.functionName,
@@ -68,22 +68,26 @@ class Historylog extends Component {
     renderModal = () => {
         this.state.modalData.createdAt = moment(this.state.modalData.createdAt).format('MM/DD/YYYY');
         let data = JSON.stringify(this.state.modalData);
-        
-        let firstReplaceString = data.replace(/[{}]/g,'');
-        console.log( firstReplaceString);
-        let secondReplaceString =  firstReplaceString.replace(/[,]/g,'\n');
-        console.log(secondReplaceString);
+
+        let firstReplaceString = data.replace(/[{}]/g, '');
+        let secondReplaceString = firstReplaceString.replace(/[,]/g, '\n');
 
         return (
             <Modal show={this.state.show} onHide={this.handleClose} backdrop="static" className="data-log-modal">
-                <Modal.Header closeButton>
-                    <Modal.Title>History Data</Modal.Title>
+                <Modal.Header closeButton >
+                    <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                        <Tab className="bodyScrollbar" eventKey={1} title="Text Viewer">
+                            <div className="modalBody">
+                                {data}
+                            </div>
+                        </Tab>
+                        <Tab className="bodyScrollbar" eventKey={2} title="JSON Viewer">
+                            <JSONTree
+                                data={this.state.modalData}
+                            />
+                        </Tab>
+                    </Tabs>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className="modalBody">
-                        <pre>{secondReplaceString}</pre>
-                    </div>
-                </Modal.Body>
                 <Modal.Footer>
                     <Button onClick={this.handleClose}>Close</Button>
                 </Modal.Footer>
@@ -95,7 +99,6 @@ class Historylog extends Component {
 
         let rowData = this.state.data;
         console.log(rowData);
-        // let functionName = this.state.data.info.functionName;
         return (
             <div className="App">
                 {this.state.loading ? <div><img src={"spinner.gif"} /></div> :
@@ -114,9 +117,6 @@ class Historylog extends Component {
                         detailPanel={rowData => {
                             return (
                                 <div className="messageInfo" >
-                                    {/* <h1>UserId : {rowData.userid}</h1>
-                                    <h1>Function Name :{rowData.functionName}</h1> */}
-
                                     <b>Message : {rowData.message}</b>
                                     <button className="btn-margin" type="button" onClick={() => this.handleShow(rowData)}>Details</button>
                                 </div>

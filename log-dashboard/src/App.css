@@ -43,12 +43,12 @@
 
 .modalBody{
   word-wrap: break-word;
-  /* overflow-x: scroll; */
 }
-/* 
-.modal {
-  z-index: 1000;
-} */
+
+.bodyScrollbar {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
 
 .log-data{
   padding:30px 20px;
