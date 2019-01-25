@@ -28,6 +28,7 @@
     "react-bootstrap-table2-paginator": "^1.0.3",
     "react-collapsible": "^2.2.0",
     "react-confirm-alert": "^2.0.6",
+    "react-cookie-consent": "^2.0.1",
     "react-datepicker": "^1.7.0",
     "react-dom": "^16.4.0",
     "react-draft-wysiwyg": "^1.12.13",
