@@ -306,6 +306,7 @@ class CampaignModal extends Component {
   handleResetForm = () => {
     const { form } = this.state;
     form.title = "";
+    form.location = {};
     form.location.latitude = "";
     form.location.longitude = "";
     form.location.address = "";
@@ -317,6 +318,7 @@ class CampaignModal extends Component {
     form.startDate = moment();
     form.endDate = moment();
     form.budget = "";
+    form.address = {};
     form.address.invoiceRecipient = "";
     form.address.street = "";
     form.address.postalCode = "";

@@ -1,12 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Translations } from "../../lib/translations";
 import moment from "moment";
+import { Link } from "react-router-dom";
+import { Translations } from "../../lib/translations";
+import * as routes from "../../lib/constants/routes";
 
-const UserCard = ({ item }) => {
+const InformationCard = ({ item , type }) => {
   return (
     <div className="feed_description padding-10">
-      <div className="normal_title">{item.title}</div>
+      {
+        type && type === 'campaign' && (
+          <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${item.id}`}>
+            <div className="normal_title">{item.title}</div>
+          </Link>
+        )
+      }
+      {
+        (!type || type !== 'campaign' )&& (
+          <div className="normal_title">{item.title}</div>
+        )
+      }
       <div className="col-sm-6 no-padding">
         <div className="info_wrapper">
           <span className="normal_title">
@@ -59,8 +72,9 @@ const UserCard = ({ item }) => {
   );
 };
 
-UserCard.propTypes = {
-  item: PropTypes.object.isRequired
+InformationCard.propTypes = {
+  item: PropTypes.object.isRequired,
+  type: PropTypes.string
 };
 
-export default UserCard;
+export default InformationCard;
