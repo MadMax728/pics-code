@@ -354,6 +354,8 @@
   .normal_title {
     margin-bottom: 3px;
     background-color: $white_color;
+    padding-right: 5px;
+    word-break: break-all;
   }
   .campaigns {
     margin-bottom: 8px;
@@ -424,7 +426,7 @@
       .community-subscribe {
         align-self: center;
         button {
-          height: 35px;
+          min-height: 35px;
           padding: 6px;
           width: 100px;
           @media (max-width: 1199px) {
@@ -705,9 +707,13 @@
       }
       .comment-input{
         width: 90%;
-        input{
-          width: 100%;
-        }        
+        .form-group{
+          margin-bottom: 10px;
+          input{
+            width: 100%;
+            height: 50px;
+          }     
+        }  
       }
       .emoji_wrapper {
         padding-right: 0px;
