@@ -13,14 +13,18 @@ class Tags extends Component {
   render() {
     const { value, suggestion, handleAddition, handleDelete } = this.props;
     return (
-      <ReactTags
-        // inline={false}
-        tags={value}
-        suggestions={suggestion}
-        handleDelete={handleDelete}
-        handleAddition={handleAddition}
-        delimiters={delimiters}
-      />
+      <div>
+        {value && 
+          <ReactTags
+            // inline={false}
+            tags={value.length !== undefined ? value : []}
+            suggestions={suggestion}
+            handleDelete={handleDelete}
+            handleAddition={handleAddition}
+            delimiters={delimiters}
+          />
+        }
+      </div>
     );
   }
 }
