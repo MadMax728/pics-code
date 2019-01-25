@@ -27,3 +27,4 @@ export {
   NoDataFoundRightSidebar,
   NoDataFoundCenterPage
 } from "./no-data-loading-indicator";
+export { RightSidebarModal } from "./right-sidebar-modal";

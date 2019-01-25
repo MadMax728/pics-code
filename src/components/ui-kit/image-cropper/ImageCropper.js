@@ -76,7 +76,7 @@ class ImageCropper extends Component {
       width,
       allowZoomOut,
       borderRadius,
-      isCircle
+      isCircle,
     } = this.state;
 
     if (isCircle) {
@@ -115,6 +115,7 @@ class ImageCropper extends Component {
         allowZoomOut={allowZoomOut}
         logCallback={this.logCallback}
         isCircle={isCircle}
+        userInfo={this.props.userInfo}
       />
     );
   }
@@ -126,6 +127,7 @@ const propTypes = {
   handleEditImage: PropTypes.func,
   isCircle: PropTypes.bool,
   handleActualImg: PropTypes.any,
+  userInfo: PropTypes.any
 };
 
 
