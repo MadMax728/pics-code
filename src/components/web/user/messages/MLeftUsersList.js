@@ -20,7 +20,7 @@ const MLeftUsersList = (
                     onClick={handleChatClick}
                     onKeyDown={handleChatClick}
                   >
-                    <MLeftUserItem key={key} item={item} message={item.message} />
+                    <MLeftUserItem key={key} item={item} message={item.lastMessage} />
                 </div>
             ));
         };

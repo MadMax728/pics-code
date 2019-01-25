@@ -166,6 +166,11 @@ hr {
 }
 .secondary_title {
   font-family: "Helvetica";
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: $charcoal_color;
   &.gray_box_big {
     height: 8px;

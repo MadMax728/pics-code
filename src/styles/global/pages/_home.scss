@@ -504,6 +504,11 @@
     }
     .secondary_title {
       font-weight: bold;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
       &.gray_box {
         min-height: 15px;
         background-color: #d3d3d3;
@@ -521,7 +526,7 @@
       display: inline-block;
       float: left;
       &.wid45 {
-        width: 55px;
+        width: 45px;
       }
 
       img {
