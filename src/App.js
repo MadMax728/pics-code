@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router";
 import { Switch, Route } from "react-router-dom";
 import PropTypes from "prop-types";
+import CookieConsent from "react-cookie-consent";
 import * as routes from "./lib/constants/routes";
 import { AdminLogin, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
@@ -162,6 +163,13 @@ class App extends Component {
     return (
       <div>
         <Route render={this.webRender} />
+        <CookieConsent
+          buttonText="Got it!"
+          style={{ background: "white", border: "solid 1px #1f58a6", color:"black" }}
+          buttonStyle={{ float: "right" }}
+        >
+          <p className="text-center">For a better user experience we use Cookie. By using picstagraph you do agree.</p>
+        </CookieConsent>
       </div>
     );
   }

@@ -9,7 +9,6 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { Auth } from "../../../auth";
-
 class Login extends Component {
   constructor(props) {
     super(props);
