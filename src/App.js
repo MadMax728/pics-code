@@ -168,7 +168,7 @@ class App extends Component {
           style={{ background: "white", border: "solid 1px #1f58a6", color:"black" }}
           buttonStyle={{ float: "right" }}
         >
-          <p class="text-center">For a better user experience we use Cookie. By using picstagraph you do agree.</p>
+          <p className="text-center">For a better user experience we use Cookie. By using picstagraph you do agree.</p>
         </CookieConsent>
       </div>
     );
