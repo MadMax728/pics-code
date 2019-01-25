@@ -7,7 +7,7 @@ const NoDataFoundCenterPage = ({ handleRefresh }) => {
             <div className="datanotfound-wrapper" >
                 <div className="notfound-footer">
                     <div className="col-md-12 text-center">
-                        <img src={images.no_data_pic} width="100%" alt="no_data_image"/>
+                        <img src={images.no_data_pic} width="100%" className="no-data-css" alt="no_data_image"/>
                     </div>
                 </div>
             </div>
