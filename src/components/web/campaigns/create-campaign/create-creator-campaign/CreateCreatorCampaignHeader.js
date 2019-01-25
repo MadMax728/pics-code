@@ -9,11 +9,11 @@ class CreateCreatorCampaignHeader extends Component {
   }
 
   render() {
-    const { stepIndex } = this.props;
+    const { stepIndex, modalTitle } = this.props;
     return (
       <div className="row">
         <div className="col-sm-5 modal-title">
-          {Translations.modal_header.create_campaign}
+          {modalTitle}
         </div>
         <div className="col-sm-7 text-right">
           <button className="black_button" onClick={this.handleCancle}>
@@ -72,7 +72,8 @@ CreateCreatorCampaignHeader.propTypes = {
   handlePrivewOpen: PropTypes.func.isRequired,
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
-  handlePrev: PropTypes.func
+  handlePrev: PropTypes.func,
+  modalTitle: PropTypes.string.isRequired
 };
 
 export default CreateCreatorCampaignHeader;

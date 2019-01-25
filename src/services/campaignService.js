@@ -1,5 +1,5 @@
 import { api } from "../api";
-import { getCompanyCampaignsEndPoint, getCreatorCampaignsEndPoint, getNewsFeedCampaignsEndPoint, getUserProfileCampaignsEndPoint, getSavedCampaignsEndPoint, getSettingsCampaignsEndPoint, getCampaignTypeEndPoint, getCampaignDetailsEndPoint, getFavouriteCampaignsEndPoint, createCampaignEndPoint, addParticipantsEndPoint } from "../lib/constants/endPoints";
+import { getCompanyCampaignsEndPoint, getCreatorCampaignsEndPoint, getNewsFeedCampaignsEndPoint, getUserProfileCampaignsEndPoint, getSavedCampaignsEndPoint, getSettingsCampaignsEndPoint, getCampaignTypeEndPoint, getCampaignDetailsEndPoint, getFavouriteCampaignsEndPoint, createCampaignEndPoint, addParticipantsEndPoint, editCampaignEndPoint } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -48,6 +48,10 @@ export const getFavouriteCampaigns = (payload, header = {}) =>
 // Create Campaign
 export const createCampaign = (payload, header = {}) =>
   api(baseUrl, header).post(createCampaignEndPoint, payload);
+
+// Update Campaign
+export const updateCampaign = (payload, header = {}) =>
+  api(baseUrl, header).put(editCampaignEndPoint, payload);
 
 // Add Participant
 export const addParticipants = (payload, header = {}) =>

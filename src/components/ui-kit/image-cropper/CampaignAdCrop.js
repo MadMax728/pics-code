@@ -5,6 +5,7 @@ import Dropzone from "react-dropzone";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
+import { ImageItem } from "../items";
 
 const propTypes = {
   handleNewImage: PropTypes.func,
@@ -20,7 +21,8 @@ const propTypes = {
   borderRadius: PropTypes.any,
   allowZoomOut: PropTypes.bool,
   isCircle: PropTypes.bool,
-  logCallback: PropTypes.any
+  logCallback: PropTypes.any,
+  userInfo: PropTypes.any
 };
 
 const CampaignAdCrop = ({
@@ -37,11 +39,12 @@ const CampaignAdCrop = ({
   borderRadius,
   allowZoomOut,
   logCallback,
-  isCircle
+  isCircle,
+  userInfo
 }) => {
   return (
-    <div className="col-xs-12 no-padding create-campaign-crop-pic">
-      {image !== null && image !== undefined ? (
+    <div className="col-xs-12 no-padding create-campaign-crop-pic">      
+      {image !== null && image !== undefined && typeof(image) !== "string" ? (
         <Dropzone
           onDrop={handleDrop}
           disableClick
@@ -73,7 +76,7 @@ const CampaignAdCrop = ({
             />
           </div>
         </Dropzone>
-      ) : (
+      ) : typeof(image) !== "string" ? (
         <div className="edit-profile-pic">
           <div className="box">
             <input
@@ -98,7 +101,11 @@ const CampaignAdCrop = ({
             </label>
           </div>
         </div>
-      )}
+      )
+      : (
+        <ImageItem item={image} userName={userInfo ? userInfo.username : ""} />
+      )
+      }
       <div className="range-wrapr col-xs-12 mar50">
         <img
           src={images.crop_pic}
@@ -129,7 +136,7 @@ const CampaignAdCrop = ({
           max="2"
           step="0.01"
           defaultValue="1"
-          disabled={!(image !== null && image !== undefined)}
+          disabled={!(image !== null && image !== undefined && typeof(image) !== "string")}
         />
         <img
           src={images.crop_pic}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 import { Translations } from "../../../../../lib/translations";
 import moment from "moment";
-import { DateFormat } from "../../../../Factory";
+
 class SettingAdsStatisticsRight extends Component {
   render() {
     const { adStatistics } = this.props;
@@ -14,86 +14,105 @@ class SettingAdsStatisticsRight extends Component {
     } else {
       isStatus = "red-circle pull-right";
     }
+
     // Calculation of Daily budget spent (24 hours counter – counter starts when ad was created) (Ref from SRS)
-    const todayDate = moment().unix();
-    const budgetSpent = moment
+    const createdDate = moment
       .unix(adStatistics.createdAt)
-      .diff(todayDate, "hour");
-    console.log(budgetSpent);
+      .format(Translations.complete_date_format.date);
+    const todayDate = moment().format(Translations.complete_date_format.date);
+    const duration = moment.duration(
+      moment(todayDate).diff(moment(createdDate))
+    );
+    const budgetSpentInHours = duration.hours();
+
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
-          <button className="blue_button">Edit ad</button>
+          <button className="blue_button">
+            {Translations.create_ads.edit_ad}
+          </button>
           <Link to={routes.SETTINGS_ADS_ROUTE}>
-            <button className="black_button">Close ad </button>
+            <button className="black_button">
+              {" "}
+              {Translations.create_ads.close_ad}{" "}
+            </button>
           </Link>
-          <div className="normal_title padding-15">Budget & Runtime</div>
+          <div className="normal_title padding-15">
+            {Translations.create_ads.budget_runtime}
+          </div>
           <ul className="campaign-right-options">
             <li>
-              <span>Daily budget</span>
-              <span className="pull-right">{adStatistics.budget}</span>
+              <span className="left-title"> {Translations.create_ads.daily_budget}</span>
+              <span className="pull-right right-content">{adStatistics.budget}€</span>
             </li>
             <li>
-              <span>Total budget spent</span>
-              <span className="pull-right">{budgetSpent}</span>
+              <span className="left-title">{Translations.create_ads.daily_budget_spent}</span>
+              <span className="pull-right right-content">{budgetSpentInHours}</span>
             </li>
             <li>
-              <span>Total expenses</span>
-              <span className="pull-right">{adStatistics.maximumExpenses}</span>
+              <span className="left-title">{Translations.create_ads.total_expense}</span>
+              <span className="pull-right right-content">
+                {adStatistics.maximumExpenses}€
+              </span>
             </li>
             <li>
-              <span>Runtime</span>
-              <span className="pull-right">
+              <span className="left-title">{Translations.create_ads.runtime}</span>
+              <span className="pull-right right-content">
                 {moment
                   .unix(adStatistics.startDate)
-                  .format(Translations.date_format.date)}{" "}
+                  .format(Translations.statistics_date_format.date)}{" "}
                 -
                 {moment
                   .unix(adStatistics.endDate)
-                  .format(Translations.date_format.date)}
+                  .format(Translations.statistics_date_format.date)}
               </span>
             </li>
           </ul>
-          <div className="normal_title padding-15">Performance</div>
+          <div className="normal_title padding-15">
+            {Translations.create_ads.Performance}
+          </div>
           <ul className="campaign-right-options">
             <li>
-              <span>Views</span>
-              <span className="pull-right">{adStatistics.views}</span>
+              <span className="left-title"> {Translations.create_ads.views}</span>
+              <span className="pull-right right-content">{adStatistics.views}</span>
             </li>
             <li>
-              <span>Clicks</span>
-              <span className="pull-right">{adStatistics.clicks}</span>
+              <span className="left-title"> {Translations.create_ads.clicks}</span>
+              <span className="pull-right right-content">{adStatistics.clicks}</span>
             </li>
           </ul>
-          <div className="normal_title padding-15">Details on ad</div>
+          <div className="normal_title padding-15">
+            {" "}
+            {Translations.create_ads.DetailsonAd}
+          </div>
           <ul className="campaign-right-options">
             <li>
-              <span>Location</span>
-              <span className="pull-right">
+              <span className="left-title">{Translations.create_ads.location}</span>
+              <span className="pull-right right-content">
                 {adStatistics.location.address}
               </span>
             </li>
             <li>
-              <span>Radius</span>
-              <span className="pull-right">
+              <span className="left-title">{Translations.create_ads.radius}</span>
+              <span className="pull-right right-content">
                 {adStatistics.radius.radiusName}
               </span>
             </li>
             <li>
-              <span>Category</span>
-              <span className="pull-right">
+              <span className="left-title">{Translations.create_ads.category}</span>
+              <span className="pull-right right-content">
                 {adStatistics.category[0].categoryName}
               </span>
             </li>
             <li>
-              <span>Target group</span>
-              <span className="pull-right">
+              <span className="left-title">{Translations.create_ads.target_group}</span>
+              <span className="pull-right right-content">
                 {Translations.target_group[adStatistics.targetGroup]}
               </span>
             </li>
           </ul>
           <div className="normal_title padding-15">
-            Status
+            {Translations.create_ads.status}
             <span className={isStatus} />
           </div>
         </div>

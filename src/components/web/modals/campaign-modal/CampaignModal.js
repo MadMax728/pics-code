@@ -19,7 +19,7 @@ import {
 import { Auth } from "../../../../auth";
 
 import { connect } from "react-redux";
-import { createCampaign, uploadMedia } from "../../../../actions";
+import { createCampaign, uploadMedia, updateCampaign } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 
 const storage = Auth.extractJwtFromStorage();
@@ -29,12 +29,16 @@ if (storage) {
 }
 
 const initialState = {
+  isNewFile: false,
+  isEdit: false,
   stepIndex: 0,
   isLoading: false,
   isPreview: false,
   userInfo: null,
   maxClicks: 0,
+  modalTitle: Translations.modal_header.create_campaign,
   form: {
+    id: "",
     title: "",
     location: {
       latitude: "",
@@ -79,6 +83,7 @@ const initialState = {
 };
 
 class CampaignModal extends Component {
+  
   constructor(props, context) {
     super(props, context);
     this.state = initialState;
@@ -86,7 +91,16 @@ class CampaignModal extends Component {
 
   render() {
     const { isFor, handleModalHide, modalShow } = this.props;
-    const { stepIndex, isPreview, form, userInfo, maxClicks,isLoading } = this.state;
+    const {
+      modalTitle,
+      isEdit,
+      stepIndex,
+      isPreview,
+      form,
+      userInfo,
+      maxClicks,
+      isLoading
+    } = this.state;
 
     let modalClassName = "";
 
@@ -111,6 +125,7 @@ class CampaignModal extends Component {
               stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
               handleResoreState={this.handleResoreState}
+              modalTitle={modalTitle}
             />
           ) : (
             <CreateCreatorCampaignHeader
@@ -119,6 +134,7 @@ class CampaignModal extends Component {
               handlePrev={this.handlePrev}
               stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
+              modalTitle={modalTitle}
             />
           )
         }
@@ -158,6 +174,7 @@ class CampaignModal extends Component {
               setVoucherData={this.setVoucherData}
               calculateMaxClicks={this.calculateMaxClicks}
               isLoading={isLoading}
+              isEdit={isEdit}
             />
           ) : (
             <CreateCreatorCampaign
@@ -190,6 +207,7 @@ class CampaignModal extends Component {
               setVoucherData={this.setVoucherData}
               calculateMaxClicks={this.calculateMaxClicks}
               isLoading={isLoading}
+              isEdit={isEdit}
             />
           )
         }
@@ -202,16 +220,123 @@ class CampaignModal extends Component {
     if (userInfo) {
       this.setState({ userInfo });
     }
+    const { data } = this.props;
+    console.log(data);
+    
+    if(data && data.id){
+      this.setState({modalTitle: Translations.modal_header.edit_campaign, isEdit: true, isNewFile: false})
+      this.handleSetstate(data);
+    }
+    else {
+      this.handleResetForm();
+    }
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 0, isPreview: false });
+  handleSetstate = (data) => {    
+    const { form } = this.state;
+    form.id = data.id;
+    form.title = data.title;
+    if(data.location) {
+      form.location.latitude = data.location.latitude;
+      form.location.longitude = data.location.longitude;
+      form.location.address = data.location.address;
     }
+    if(data.category && data.category[0] && data.category[0].id)
+    {
+      form.category = data.category[0].id;
+    }
+    form.procedure = procedure[data.procedure];
+    if(data.typeContent) {
+      form.typeContent = typeContent[data.typeContent.toLowerCase()];
+      form.filetype = typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
+      if(form.filetype)  {
+        form.image = data.mediaUrl;
+        form.file = data.mediaUrl;
+      }
+      else if (!form.filetype) {
+        form.video = data.mediaUrl;
+        form.file = data.mediaUrl;
+      }
+    }
+    if(data.targetGroup) {
+      form.targetGroup = target_group[data.targetGroup.toLowerCase()];
+    }
+    form.description = data.description;
+    form.startDate = moment.unix(data.startDate);
+    form.endDate = moment.unix(data.endDate);
+    form.budget = data.budget;
+    if(data.address)
+    {
+      form.address.invoiceRecipient = data.address.invoiceRecipient;
+      form.address.street = data.address.street;
+      form.address.postalCode = data.address.postalCode;
+      form.address.city = data.address.city;
+      form.address.VATNO = data.address.VATNO;
+      form.address.country = data.address.country;
+      form.address.streetNumber = data.address.street;
+    }
+    form.voucherAmount = data.voucherAmount;
+    form.voucherCode = data.voucherCode;
+    form.maximumExpenses = data.maximumExpenses;
+    form.typeId = data.typeId;
+    form.error = false
+    this.setState({form, isNewFile: false});
+    this.calculateMaxClicks();
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (!nextProps.modalShow) {
+      return { stepIndex: 0, isPreview: false}
+    }
+    if (nextProps.data && nextProps.data.id) {
+      return {modalTitle: Translations.modal_header.edit_campaign}
+    }
+    else {
+      return initialState;
+    }
+  } 
+
+  handleResetForm = () => {
+    const { form } = this.state;
+    form.title = "";
+    form.location.latitude = "";
+    form.location.longitude = "";
+    form.location.address = "";
+    form.category = "";
+    form.procedure = procedure.public;
+    form.typeContent = typeContent.image;
+    form.targetGroup = target_group.company;
+    form.offers = "";
+    form.offerTag = [];
+    form.offerTagList = [];
+    form.inquiry = "";
+    form.inquiryTag = [];
+    form.inquiryTagList = [];
+    form.description = "";
+    form.startDate = moment();
+    form.endDate = moment();
+    form.budget = "";
+    form.address.invoiceRecipient = "";
+    form.address.street = "";
+    form.address.postalCode = "";
+    form.address.city = "";
+    form.address.VATNO = "";
+    form.address.country = "";
+    form.address.streetNumber = "";
+    form.voucher = "";
+    form.voucherAmount = "";
+    form.voucherCode = "";
+    form.image = null;
+    form.filetype = true;
+    form.file = null;
+    form.video = null;
+    form.typeId = "";
+    form.maximumExpenses = "";
+    form.error = false
+    this.setState({form});
+  }
   componentWillUnmount = () => {
-    this.setState(initialState);
+    this.handleResetForm();
   };
 
   handleEditImage = image => {
@@ -241,8 +366,9 @@ class CampaignModal extends Component {
   };
 
   handleSubmit = () => {
-    const { form } = this.state;
-    if (form.file) {
+    const { form, isEdit, isNewFile } = this.state;
+    
+    if (form.file && isNewFile) {
       const Data = new FormData();
       if (form.filetype) {
         Data.append("image", form.file);
@@ -252,6 +378,7 @@ class CampaignModal extends Component {
       Data.append("postType", "campaign");
 
       this.setState({isLoading: true});
+      
       this.props.uploadMedia(Data, form.filetype).then(() => {
         if (this.props.mediaData && this.props.mediaData.media) {
           form.typeId = this.props.mediaData.media.id;
@@ -262,25 +389,49 @@ class CampaignModal extends Component {
             form.maximumExpenses = form.budget;
           }
           this.setState({ form });
-          this.props.createCampaign(form).then(() => {
-            if (
-              this.props.campaignData &&
-              this.props.campaignData.campaign &&
-              this.props.campaignData.campaign.id
-            ) {
-              this.handleModalInfoShow();
-              this.setState(initialState);
-            }
-          });
+          
+          if(isEdit){
+            this.handleUpdateCampaign(form);
+          }
+          else {
+            this.props.createCampaign(form).then(() => {
+              if (
+                this.props.campaignData &&
+                this.props.campaignData.campaign &&
+                this.props.campaignData.campaign.id
+              ) {
+                this.handleModalInfoShow();
+                this.handleResetForm();
+              }
+            });
+          }
+
         }
       });
-    } else {
+    }
+    else if(form.file && !isNewFile) {
+      this.handleUpdateCampaign(form);
+    }
+    else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
       );
     }
   };
+
+  handleUpdateCampaign = (form) => {
+    this.props.updateCampaign(form).then(() => {
+      if (
+        this.props.campaignData &&
+        this.props.campaignData.campaign &&
+        this.props.campaignData.campaign.id
+      ) {
+        this.handleModalInfoShow();
+        this.handleResetForm();
+      }
+    });
+  }
 
   setVoucherData = (code, voucher, maximumExpenses) => {
     const { form } = this.state;
@@ -386,6 +537,7 @@ class CampaignModal extends Component {
 
   handleVideo = e => {
     const file = e.target.files[0];
+    this.setState({isNewFile: true});
     this.handleImageVideo(file);
   };
 
@@ -424,7 +576,9 @@ class CampaignModal extends Component {
 
   handleActualImg = e => {
     const file = e;
+    this.setState({isNewFile: true});
     this.handleImageVideo(file);
+    
   };
 
   handleScale = scale => {
@@ -507,8 +661,6 @@ class CampaignModal extends Component {
         (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
       if (maxClicksValue >= 1200) {
         maxClicksValue = 1200;
-      } else {
-        maxClicksValue = maxClicksValue;
       }
       maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
       this.setState({ maxClicks: maxClicksValue });
@@ -531,7 +683,9 @@ CampaignModal.propTypes = {
   uploadMedia: PropTypes.func.isRequired,
   mediaData: PropTypes.any,
   campaignData: PropTypes.any,
-  calculateMaxClicks: PropTypes.func
+  calculateMaxClicks: PropTypes.func,
+  updateCampaign: PropTypes.func.isRequired,
+  data: PropTypes.any
 };
 
 const mapStateToProps = state => ({
@@ -541,7 +695,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   createCampaign,
-  uploadMedia
+  uploadMedia,
+  updateCampaign
 };
 
 export default connect(

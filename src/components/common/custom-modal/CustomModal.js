@@ -65,13 +65,37 @@ class CustomModal extends Component {
     );
   };
 
+  handleModalEditCampaign = () => {
+    // get  user from local storage
+    const storage = Auth.extractJwtFromStorage();
+    // parse the user info
+    const userInfo = JSON.parse(storage.userInfo) || {};
+    // set default to false
+    let isFor = false;
+    // check if user is compnay
+    if (userInfo && userInfo.userType) {
+      isFor = userInfo.userType.toLowerCase() === userType.company;
+    }
+
+    return (
+      <CampaignModal
+        modalShow={this.props.modalShow}
+        handleModalHide={this.props.handleModalHide}
+        // true for the company and false for the creator
+        isFor={isFor}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
+        data={this.props.data}
+      />
+    );
+  };
+
   handleModalRender = () => {
     return (
       <div>
         {this.props.modalType === modalType.upload && this.handleModalUpload()}
         {this.props.modalType === modalType.ads && this.handleModalAds()}
-        {this.props.modalType === modalType.campaign &&
-          this.handleModalCampaign()}
+        {this.props.modalType === modalType.campaign && this.handleModalCampaign()}
+        {this.props.modalType === modalType.editCampaign && this.handleModalEditCampaign()}
       </div>
     );
   };
