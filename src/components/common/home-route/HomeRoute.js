@@ -171,7 +171,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
-            component={AdsStatisticsPage}
+            component={this.handleAdsStatisticsPage}
           />
 
           <Route
@@ -387,6 +387,10 @@ class HomeRoute extends Component {
   handleSettingCampaignStatistics = match => {
     return <SettingCampaignStatisticsPage match={match.match} handleModalShow={this.props.handleModalShow} />;
   };
+
+  handleAdsStatisticsPage = (match) => {
+    return <AdsStatisticsPage match={match.match} handleModalShow={this.props.handleModalShow} />;    
+  }
 
   handleParticipant = (match) => {
     return (

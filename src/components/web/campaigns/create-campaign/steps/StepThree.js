@@ -32,7 +32,7 @@ class StepThree extends Component {
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
           <div className="subtitle">
-            {Translations.create_campaigns.define_runtime_budget}c
+            {Translations.create_campaigns.define_runtime_budget}
           </div>
           <div className="form-group">
             <ul className="options dates">
@@ -78,7 +78,7 @@ class StepThree extends Component {
               className=""
               handleSelect={handleSelect}
             />
-            {form.budget.length === 0 && form.error && (
+            {form.budget && form.budget.length === 0 && form.error && (
               <span className="error-msg highlight">
                 {Translations.error.create_modal.budget}
               </span>

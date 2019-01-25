@@ -154,7 +154,7 @@ class SettingCampaignStatisticsPage extends Component {
     if (this.props.campaignDetails) {
       const { campaignDetails } = this.props;
 
-      const dailyBudget = campaignDetails.budget;
+      // const dailyBudget = campaignDetails.budget;
 
       // Calculations of Total No. Of Days
       const startDate = moment

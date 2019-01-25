@@ -142,7 +142,7 @@ class StepOne extends Component {
                     name="targetGroup"
                     value="male"
                     className="black_button"
-                    defaultChecked={form.targetGroup === enumerations.target_group.female}
+                    defaultChecked={form.targetGroup === enumerations.target_group.male}
                   />
                   <label htmlFor="male">{Translations.create_ads.male}</label>
                 </li>
