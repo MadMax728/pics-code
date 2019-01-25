@@ -152,7 +152,7 @@ export const saveJwtToStorage = authResponse => {
   userInfo.userType = authResponse.userType || "creator";
   userInfo.profileUrl = authResponse.profileUrl;
 
-  localStorage.setItem("userInfo", JSON.stringify(userInfo));
+  localStorage.setItem("user_info", JSON.stringify(userInfo));
 
   if (authResponse.hasOwnProperty("isAdmin")) {
     localStorage.setItem("is_admin", authResponse.isAdmin);
