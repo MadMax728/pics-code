@@ -125,31 +125,34 @@ export const clearTokensFromStorage = () => {
  * save jwt in storage
  */
 export const saveJwtToStorage = authResponse => {
+
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
-  if (
-    authResponse.email &&
-    authResponse.username &&
-    authResponse.language ||
-    authResponse.id &&
-    authResponse.userType ||
-    authResponse.role &&
-    authResponse.profileUrl
-  ) {
-    localStorage.setItem(
-      "user_info",
-      JSON.stringify({
-        email: authResponse.email,
-        username: authResponse.username,
-        language: authResponse.language? authResponse.language : "English",
-        profileUrl: authResponse.profileUrl,
-        userType: authResponse.userType? authResponse.userType : "creator",
-        role: authResponse.role,
-        id: authResponse.id
-      })
-    );
+
+  const userInfo = {};
+
+  if (authResponse.email) {
+     userInfo.email = authResponse.email
   }
+
+  if (authResponse.username) {
+    userInfo.username = authResponse.username
+  }
+
+  if (authResponse.role) {
+    userInfo.role = authResponse.role
+  }
+
+  if (authResponse.id) {
+    userInfo.id = authResponse.id
+  }
+
+  userInfo.language = authResponse.language || "English";
+  userInfo.userType = authResponse.userType || "creator";
+  userInfo.profileUrl = authResponse.profileUrl;
+
+  localStorage.setItem("userInfo", JSON.stringify(userInfo));
 
   if (authResponse.hasOwnProperty("isAdmin")) {
     localStorage.setItem("is_admin", authResponse.isAdmin);
