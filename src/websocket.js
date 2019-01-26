@@ -27,7 +27,7 @@ function join(senderId, recipientId) {
     });
 }
 
-function emit(senderId, recipientId, message) {
+function emit(senderId, recipientId, content) {
     socket.emit('communication-message-board-new-message', {
         recipientId: recipientId,
         senderId: senderId,
@@ -35,4 +35,4 @@ function emit(senderId, recipientId, message) {
     });
 }
   
-export { connect, socket, join }
+export { connect, socket, join, emit }
