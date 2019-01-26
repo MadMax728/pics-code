@@ -26,5 +26,13 @@ function join(senderId, recipientId) {
         recipientId: senderId
     });
 }
+
+function emit(senderId, recipientId, message) {
+    socket.emit('communication-message-board-new-message', {
+        recipientId: recipientId,
+        senderId: senderId,
+        content
+    });
+}
   
 export { connect, socket, join }

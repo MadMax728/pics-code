@@ -3,6 +3,7 @@ import MRightUserInput from './MRightUserInput';
 import MRightUserItem from './MRightUserItem';
 import MRightActiveChat from './MRightActiveChat';
 import PropTypes from "prop-types";
+import * as websocket from '../../../../websocket';
 
 
 class MRightContainer extends Component {
@@ -22,12 +23,10 @@ class MRightContainer extends Component {
     };
 
     onMessageSubmit = (content) => {
-        if(!content || !this.props.user || !this.props.user.id || !this.props.me) return;
-        this.props.socket.emit('communication-message-board-new-message', {
-            recipientId: this.props.user.id,
-            senderId: this.props.me,
-            content
-        });
+        const message =  content ? content.trim() : ''
+        const { user, me } = this.props;
+        if(!message || !user || !user.id || !me) return;
+        websocket.emit(this.props.me, this.props.user.id, message)
     }
 
     
