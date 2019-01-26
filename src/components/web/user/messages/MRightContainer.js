@@ -33,11 +33,11 @@ class MRightContainer extends Component {
     
 
     render() {
-        const { socket, user } = this.props;
+        const { user } = this.props;
         return (
             <div>
                 <MRightUserItem item={user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
-                <MRightActiveChat user={user} socket={socket} />
+                <MRightActiveChat user={user}/>
                 <MRightUserInput item={user} onMessageSubmit={this.onMessageSubmit} />
             </div>
         )
@@ -47,8 +47,7 @@ class MRightContainer extends Component {
 
 MRightContainer.propTypes = {
     user: PropTypes.any,
-    me: PropTypes.any,
-    socket: PropTypes.any
+    me: PropTypes.any
 };
 
 export default MRightContainer;

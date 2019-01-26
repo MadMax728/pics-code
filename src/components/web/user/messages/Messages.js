@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import io from "socket.io-client";
 import { Auth } from "../../../../auth";
 import MLeftContainer from './MLeftContainer';
 import MRightContainer from './MRightContainer';
+import * as websocket from '../../../../websocket';
 
 class Messages extends Component {
   
@@ -16,16 +16,13 @@ class Messages extends Component {
             user : {},
             me : userInfo.id
         }
-        this.socket = io(process.env.REACT_APP_AUTH_BASEURL);
     }    
 
-    selectUser = (user) => {
-        if(!user || !user.id) return;
-        this.setState({ user,  messages : []});
-        this.socket.emit('communication-message-board-join', {
-            recipientId: user.id,
-            senderId: this.state.me
-        });
+    selectUser = (newUser) => {
+        const { user } = this.state;
+        if(!newUser || !newUser.id || ( user && user.id === newUser.id)) return;
+        this.setState({ user : newUser,  messages : []});
+        websocket.join(newUser.id, this.state.me);
     }
 
     render() {
@@ -36,7 +33,7 @@ class Messages extends Component {
                     <MLeftContainer selectUser={this.selectUser} me={me}/>
                 </div>
                 <div className="messages-right">
-                    <MRightContainer user={user} me={me} socket={this.socket} />
+                    <MRightContainer user={user} me={me}/>
                 </div>
             </div>
         )

@@ -169,7 +169,7 @@ class App extends Component {
           style={{ background: "white", border: "solid 1px #1f58a6", color:"black" }}
           buttonStyle={{ float: "right" }}
         >
-          <p className="text-center">For a better user experience we use 
+          <p className="text-center">For a better user experience we use  
             <Link to={routes.COOKIES_ROUTE}>
               {Translations.base_footer.cookies}
             </Link>. By using picstagraph you do agree.
