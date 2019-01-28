@@ -8,6 +8,7 @@
       height: 276px;
       img {
         height: 100%;
+        padding: 10px;
         object-fit: cover;
         @media (max-width: 1200px){
           object-fit: contain;
@@ -26,6 +27,7 @@
       height: 276px;
       img {
         height: 100%;
+        padding: 10px;
         object-fit: cover;
         @media (max-width: 1200px){
           object-fit: contain;
@@ -47,11 +49,11 @@
   }
   .name-wrapper {
     text-align: center;
-    padding: 10px;
+    padding: 20px 10px;
     background: #fff;
     margin-bottom: 10px;
     .name{
-      min-height: 20px;
+      // min-height: 20px;
     }
     .username {
       font-family: "Helvetica-Bold";
@@ -135,6 +137,7 @@
 }
 .pic-sec-block{
   min-height: 278px;
+  position: relative;
   .feed_image{
     min-height: 310px;
     .embed-responsive{
@@ -143,8 +146,19 @@
   }
   .name-wrapper{
     padding: 0 10px;
+    position: absolute;
+    transition: opacity 0.5s linear;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    opacity: 0;
     .show_more_options{
       text-align: right;
+    }
+  }
+  &:hover{
+    .name-wrapper{
+      opacity: 1;
     }
   }
 }
