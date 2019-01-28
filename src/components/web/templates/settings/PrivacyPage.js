@@ -75,7 +75,7 @@ class PrivacyPage extends Component {
     const {
       change_email_form,
       change_password_form,
-      change_invoicing_address_form,
+      change_invoicing_address_form
     } = this.state;
 
     return (
@@ -195,8 +195,8 @@ class PrivacyPage extends Component {
                 {change_email_form.current_email.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
                 <span className="error-msg form-field-error">
                   {this.state.change_email_form_error.current_email}
                 </span>
@@ -225,8 +225,8 @@ class PrivacyPage extends Component {
                 {change_email_form.new_email.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
                 <span className="error-msg form-field-error">
                   {this.state.change_email_form_error.new_email}
                 </span>
@@ -268,8 +268,8 @@ class PrivacyPage extends Component {
                 {change_password_form.current_password.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
                 <span className="error-msg form-field-error">
                   {this.state.change_password_form_error.current_password}
                 </span>
@@ -294,8 +294,8 @@ class PrivacyPage extends Component {
                 {change_password_form.new_password.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
                 <span className="error-msg form-field-error">
                   {this.state.change_password_form_error.new_password}
                 </span>
@@ -320,8 +320,8 @@ class PrivacyPage extends Component {
                 {change_password_form.repeat_password.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
                 <span className="error-msg form-field-error">
                   {this.state.change_password_form_error.repeat_password}
                 </span>
@@ -362,8 +362,8 @@ class PrivacyPage extends Component {
                 {change_invoicing_address_form.invoice_recipient.length > 0 ? (
                   <img src={images.checked} alt={"checked1"} />
                 ) : (
-                    <img src={images.error} alt={"error1"} />
-                  )}
+                  <img src={images.error} alt={"error1"} />
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="street">
@@ -384,8 +384,8 @@ class PrivacyPage extends Component {
                 {change_invoicing_address_form.street_number.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="postal">
@@ -406,8 +406,8 @@ class PrivacyPage extends Component {
                 {change_invoicing_address_form.postal_code.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
               </div>
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">
@@ -428,8 +428,8 @@ class PrivacyPage extends Component {
                     {change_invoicing_address_form.city.length > 0 ? (
                       <img src={images.checked} alt={"checked"} />
                     ) : (
-                        <img src={images.error} alt={"error"} />
-                      )}
+                      <img src={images.error} alt={"error"} />
+                    )}
                   </div>
                 </div>
                 <div className="col-sm-6 padding-l-5">
@@ -452,8 +452,8 @@ class PrivacyPage extends Component {
                     {change_invoicing_address_form.country.length > 0 ? (
                       <img src={images.checked} alt={"checked"} />
                     ) : (
-                        <img src={images.error} alt={"error"} />
-                      )}
+                      <img src={images.error} alt={"error"} />
+                    )}
                   </div>
                 </div>
               </div>
@@ -475,10 +475,10 @@ class PrivacyPage extends Component {
                 />
                 {change_invoicing_address_form.vat_identification_number
                   .length > 0 ? (
-                    <img src={images.checked} alt={"checked"} />
-                  ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
               </div>
               <div className="form-group">
                 <button
@@ -497,7 +497,8 @@ class PrivacyPage extends Component {
                   {Translations.privacy.Delete_search_history}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <div className="action-btns"
+                  <div
+                    className="action-btns"
                     onClick={this.handleDeleteSearchHisory}
                     id={"delete_search_history"}
                     role="button"
@@ -513,7 +514,8 @@ class PrivacyPage extends Component {
                   {Translations.privacy.Deactivate_my_account}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <div className="action-btns"
+                  <div
+                    className="action-btns"
                     onClick={this.handleDeactiveMyAccount}
                     id={"deactivate_account"}
                     role="button"
@@ -550,7 +552,7 @@ class PrivacyPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    // To to test this condition 
+    // To to test this condition
     // if (nextProps.searchData.searchKeyword) {
     //   this.props.getSearch("");
     // }
@@ -562,7 +564,7 @@ class PrivacyPage extends Component {
     }
   };
 
-  onKeyPressHandler = () => { };
+  onKeyPressHandler = () => {};
 
   setDataOnLoad = () => {
     if (this.props.userDataByUsername.user) {
@@ -869,10 +871,14 @@ class PrivacyPage extends Component {
   };
 
   handleDeactiveMyAccount = () => {
+    this.props.handleModalShow(modalType.confirmation, {
+      id: "deactivateAccount"
+    });
     // const modalForValue = e.target.id;
-    this.props.handleModalInfoShow(modalType.confirmation);
+    // this.props.handleModalInfoShow(modalType.confirmation, {
+    //   id: "deactivateAccount"
+    // });
   };
-
 }
 
 const mapStateToProps = state => ({
@@ -904,6 +910,7 @@ PrivacyPage.propTypes = {
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func,
   profilePrivacyData: PropTypes.any,
   history: PropTypes.any,
   getUser: PropTypes.func,
