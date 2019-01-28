@@ -78,7 +78,10 @@ class Historylog extends Component {
                     <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
                         <Tab className="bodyScrollbar" eventKey={1} title="Text Viewer">
                             <div className="modalBody">
-                                {data}
+                            {/* <JSONTree
+                                data={data}
+                            /> */}
+                            {data}
                             </div>
                         </Tab>
                         <Tab className="bodyScrollbar" eventKey={2} title="JSON Viewer">
