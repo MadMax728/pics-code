@@ -60,7 +60,7 @@ const propTypes = {
   place: PropTypes.string.isRequired,
   border: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
   valueName: PropTypes.string.isRequired
 };
 
