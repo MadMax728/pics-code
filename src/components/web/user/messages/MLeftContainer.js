@@ -101,7 +101,6 @@ class MLeftContainer extends Component {
         <div className="title-wrapper">
           <div className="modal-title">
             { Translations.messages_modal.messages }
-            {/* <span className="edit"></span> */}
           </div>                    
         </div>
         <div className="msgs-search-user">

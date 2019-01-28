@@ -2,7 +2,8 @@ import { api } from "../api";
 import {
   getSettingsAdsEndPoint,
   createAdEndPoint,
-  getAdsDetailsEndPoint
+  getAdsDetailsEndPoint,
+  editAdEndPoint
 } from "../lib/constants";
 
 // Developers can override this with an env.local file
@@ -25,3 +26,7 @@ export const getAdDetails = (payload, header = {}) =>
 // Create Ad
 export const createAd = (payload, header = {}) =>
   api(baseUrl, header).post(createAdEndPoint, payload);
+
+// Update Ad
+export const updateAd = (payload, header = {}) =>
+  api(baseUrl, header).put(editAdEndPoint, payload);

@@ -119,3 +119,43 @@ export const createAd = provider => {
     );
   };
 };
+
+// Update Ad
+
+const updateAdStarted = () => ({
+  type: types.UPDATE_AD_STARTED
+});
+
+const updateAdSucceeded = data => ({
+  type: types.UPDATE_AD_SUCCEEDED,
+  payload: data
+});
+
+const updateAdFailed = error => ({
+  type: types.UPDATE_AD_FAILED,
+  payload: error,
+  error: true
+});
+
+export const updateAd = provider => {
+  return dispatch => {
+    dispatch(updateAdStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return adService.updateAd(provider, header).then(
+      res => {
+        dispatch(updateAdSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(updateAdFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

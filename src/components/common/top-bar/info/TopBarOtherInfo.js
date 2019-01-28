@@ -116,6 +116,12 @@ class TopBarOtherInfo extends Component {
     });
   };
 
+  getUserDataList = () => {
+    this.props.getDashboard("users", "").then(() => {
+      // get user list
+    });
+  };
+
   handleSetUserInfo = () => {
     const isPending = this.props.userDataByUsername.user.data.isPending;
     const isSubscribe = this.props.userDataByUsername.user.data.isSubscribe;
@@ -207,12 +213,12 @@ class TopBarOtherInfo extends Component {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (this.props.usersData.isRequestSend) {
+        } else if (this.props.usersData.isRequestSendData) {
           this.getUserData();
-          this.props.getDashboard("users");
+          this.getUserDataList();
         }
       });
-    } else if (selectedUserList.isSubscribe === true) {
+    } else {
       const subscribedId = selectedUserList.subscribeId;
       this.props.getUnsubscribe(subscribedId).then(() => {
         if (
@@ -222,9 +228,9 @@ class TopBarOtherInfo extends Component {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (this.props.usersData.isUnsubscribed) {
+        } else if (this.props.usersData.isUnsubscribedData) {
           this.getUserData();
-          this.props.getDashboard("users");
+          this.getUserDataList();
         }
       });
     }
@@ -233,7 +239,6 @@ class TopBarOtherInfo extends Component {
   handeleMessage = () => {
     this.props.history.push(routes.MESSAGES_ROUTE);
   };
-
 }
 
 const mapStateToProps = state => ({

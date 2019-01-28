@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { DateFormat } from "../../../Factory";
 import MessageItem from './MessageItem';
 import { getMessages } from "../../../../actions";
+import * as websocket from '../../../../websocket';
 import PropTypes from "prop-types";
 
 class MessagesLazyList extends Component {
@@ -21,11 +22,15 @@ class MessagesLazyList extends Component {
             lastEvaluatedKeys : null,
             lastEvaluatedPages : []
         }
-        this.props.socket.on('communication-message-board-new-message-response', (data) => {
+        
+        // this.props.socket.on('communication-message-board-history', (data) => {
+        //   console.log('data', data);
+        // });
+
+        websocket.connect(data => {
             const { me, user } = this.state;
             if(user && (me === data.recipientId || me === data.senderId) && (user.id === data.recipientId || user.id === data.senderId)) {
                 this.setState({messages: [...this.state.messages, data]});
-                this.scrollBottomOnNewMessage();
             }
         });
     }    
@@ -134,7 +139,6 @@ MessagesLazyList.propTypes = {
     messagesData: PropTypes.any,
     user:PropTypes.any,
     count: PropTypes.number,
-    socket: PropTypes.any
 };
   
 const mapStateToProps = state => ({
