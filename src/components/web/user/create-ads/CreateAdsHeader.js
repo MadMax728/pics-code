@@ -10,6 +10,7 @@ class CreateAdsHeader extends Component {
 
   handleCancle = () => {
     this.props.handleModalHide();
+    this.props.handleResetForm();
   };
 
   handleBack = () => {
@@ -60,7 +61,8 @@ CreateAdsHeader.propTypes = {
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
-  modalTitle: PropTypes.string.isRequired
+  modalTitle: PropTypes.string.isRequired,
+  handleResetForm: PropTypes.func.isRequired
 };
 
 export default CreateAdsHeader;

@@ -46,6 +46,7 @@ class UploadModal extends Component {
           <UploadHeader
             handleModalHide={this.handleModalHide}
             handleContinue={this.handleContinue}
+            handleResetForm={this.handleResetForm}
           />
         }
         footer={false}
@@ -66,6 +67,22 @@ class UploadModal extends Component {
     );
   }
 
+  handleResetForm = () => {
+    const { form } = this.state;
+    form.add_location = {};
+    form.add_location.latitude = "";
+    form.add_location.longitude = "";
+    form.add_location.address = "";
+    form.add_category = "";
+    form.add_description = "";
+    form.is_advertise_label= false;
+    form.image =  null;
+    form.file = null;
+    form.video = null;
+    form.filetype = true;
+    form.error = false;
+    this.setState({form});
+  }
   componentWillUnmount = () => {
     this.setState(initialState);
   };
