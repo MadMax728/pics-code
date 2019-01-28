@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
-import { BaseHeader, BaseFooter, Cookies, DownloadStore } from "../common";
+import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { Text, RadioButton } from "../../ui-kit/CommonUIComponents";
 import PropTypes from "prop-types";
 import { submitRegister } from "../../../actions/register";
@@ -190,7 +190,6 @@ class Register extends Component {
             </div>
           </div>
         </section>
-        <Cookies />
         <BaseFooter className={"custom-container"} />
       </div>
     );

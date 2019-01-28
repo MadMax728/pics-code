@@ -1,3 +1,5 @@
+import * as images from "../lib/constants/images";
+
 /**
  * check user is authenticated or not
  */
@@ -150,7 +152,7 @@ export const saveJwtToStorage = authResponse => {
 
   userInfo.language = authResponse.language || "English";
   userInfo.userType = authResponse.userType || "creator";
-  userInfo.profileUrl = authResponse.profileUrl;
+  userInfo.profileUrl = authResponse.profileUrl || images.image;
 
   localStorage.setItem("user_info", JSON.stringify(userInfo));
 

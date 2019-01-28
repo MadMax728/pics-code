@@ -46,13 +46,13 @@ const RightSidebarModal = ({userInfo, form }) => {
               {form.typeContent &&
                 form.typeContent.toLowerCase() ===
                   enumerations.mediaTypes.video && (
-                  <VideoItem item={form.video} />
+                  <VideoItem item={form.video} id={form.id || ''}/>
                 )}
               {(!form.typeContent ||
                 (form.typeContent &&
                   form.typeContent.toLowerCase() ===
                     enumerations.mediaTypes.image)) && (
-                <ImageItem item={form.image} userName={userInfo ? userInfo.username : ""} />
+                <ImageItem item={form.image || ""} userName={userInfo ? userInfo.username : ""} />
               )}
             </div>
           </div>

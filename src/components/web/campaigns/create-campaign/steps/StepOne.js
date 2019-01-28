@@ -77,7 +77,7 @@ class StepOne extends Component {
                 {Translations.create_campaigns.add_category}
               </label>
               <SelectCategory
-                value={form.category ? form.category : ""}
+                value={form.category || ''}
                 className=""
                 handleSelect={handleSelect}
               />

@@ -5,6 +5,7 @@ export const updateAdminEndPoint = "/users/set-isadmin";
 // ad Services
 export const getSettingsAdsEndPoint = "/advertisement/get-user-advertise";
 export const createAdEndPoint = "/advertisement";
+export const editAdEndPoint = "/advertisement";
 export const getAdsDetailsEndPoint = "/advertisement/";
 
 // back-office dashboard service

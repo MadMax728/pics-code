@@ -27,13 +27,13 @@ class MRightActiveChat extends Component {
     };
 
     render() {
-        const { socket, user } = this.props;
+        const { user } = this.props;
         const { count } = this.state;
         return (
             <div onScroll={this.trackScrolling} className={"active-chat"} id={"header-chat-"+user.id}>
             {
                 user && user.id ? (
-                    <MessagesLazyList user={user} count={count} socket={socket} />
+                    <MessagesLazyList user={user} count={count}/>
                 ) : (
                     <div className="full-width text-center">
                          <h6>{Translations.messages_modal.ready}</h6>
@@ -46,8 +46,7 @@ class MRightActiveChat extends Component {
 } 
 
 MRightActiveChat.propTypes = {
-    user: PropTypes.any,
-    socket: PropTypes.any
+    user: PropTypes.any
 };
   
 export default MRightActiveChat;

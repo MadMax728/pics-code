@@ -29,11 +29,11 @@ class CreateAdsHeader extends Component {
   };
 
   render() {
-    const { stepIndex } = this.props;
+    const { stepIndex, modalTitle } = this.props;
     return (
       <div className="row">
         <div className="col-sm-6 modal-title">
-          {Translations.modal_header.create_ad}
+          {modalTitle}
         </div>
         <div className="col-sm-6 text-right">
           <button className="black_button" onClick={this.handleCancle}>
@@ -60,6 +60,7 @@ CreateAdsHeader.propTypes = {
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
+  modalTitle: PropTypes.string.isRequired
 };
 
 export default CreateAdsHeader;

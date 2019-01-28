@@ -36,8 +36,8 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation, isLoading })
               />
             </span>
           </div>
-        )}
-      {campaign && isInformation && <InformationCard item={campaign} />}
+      )}
+      {campaign && isInformation && <InformationCard item={campaign} type={`campaign`} />}
     </div>
   );
 };

@@ -7,15 +7,17 @@ import { Auth } from "../../../../auth";
 import { connect } from "react-redux";
 import { getUser, getFollowUserList } from "../../../../actions";
 
-const storage = Auth.extractJwtFromStorage();
 class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
-
+    
+    const storage = Auth.extractJwtFromStorage();
     let userInfo = {};
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
+    console.log(storage);
+    
     this.state = {
       items: {
         userid: userInfo.id,

@@ -88,6 +88,17 @@ class CustomModal extends Component {
       />
     );
   };
+  
+  handleModalEditAd = () => {
+    return (
+      <AdsModal
+        modalShow={this.props.modalShow}
+        handleModalHide={this.props.handleModalHide}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
+        data={this.props.data}
+      />
+    );
+  };
 
   handleModalRender = () => {
     return (
@@ -96,6 +107,7 @@ class CustomModal extends Component {
         {this.props.modalType === modalType.ads && this.handleModalAds()}
         {this.props.modalType === modalType.campaign && this.handleModalCampaign()}
         {this.props.modalType === modalType.editCampaign && this.handleModalEditCampaign()}
+        {this.props.modalType === modalType.editAds && this.handleModalEditAd()}
       </div>
     );
   };

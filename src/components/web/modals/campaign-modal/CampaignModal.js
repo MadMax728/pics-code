@@ -289,16 +289,24 @@ class CampaignModal extends Component {
       return { stepIndex: 0, isPreview: false}
     }
     if (nextProps.data && nextProps.data.id) {
-      return {modalTitle: Translations.modal_header.edit_campaign}
+      return {modalTitle: Translations.modal_header.edit_campaign, isEdit: true}
     }
     else {
       return initialState;
     }
   } 
 
+  componentDidUpdate = (prevProps, prevState) => {
+    if (prevState.isEdit !== this.state.isEdit) {
+      const { data } = this.props;
+      this.handleSetstate(data);
+    }
+  }
+
   handleResetForm = () => {
     const { form } = this.state;
     form.title = "";
+    form.location = {};
     form.location.latitude = "";
     form.location.longitude = "";
     form.location.address = "";
@@ -306,16 +314,11 @@ class CampaignModal extends Component {
     form.procedure = procedure.public;
     form.typeContent = typeContent.image;
     form.targetGroup = target_group.company;
-    form.offers = "";
-    form.offerTag = [];
-    form.offerTagList = [];
-    form.inquiry = "";
-    form.inquiryTag = [];
-    form.inquiryTagList = [];
     form.description = "";
     form.startDate = moment();
     form.endDate = moment();
     form.budget = "";
+    form.address = {};
     form.address.invoiceRecipient = "";
     form.address.street = "";
     form.address.postalCode = "";
@@ -335,6 +338,7 @@ class CampaignModal extends Component {
     form.error = false
     this.setState({form});
   }
+
   componentWillUnmount = () => {
     this.handleResetForm();
   };
@@ -402,6 +406,7 @@ class CampaignModal extends Component {
               ) {
                 this.handleModalInfoShow();
                 this.handleResetForm();
+                this.setState({isLoading: false});
               }
             });
           }
@@ -421,6 +426,7 @@ class CampaignModal extends Component {
   };
 
   handleUpdateCampaign = (form) => {
+    this.setState({isLoading: true});
     this.props.updateCampaign(form).then(() => {
       if (
         this.props.campaignData &&
@@ -429,6 +435,7 @@ class CampaignModal extends Component {
       ) {
         this.handleModalInfoShow();
         this.handleResetForm();
+        this.setState({isLoading: false});
       }
     });
   }
@@ -578,7 +585,6 @@ class CampaignModal extends Component {
     const file = e;
     this.setState({isNewFile: true});
     this.handleImageVideo(file);
-    
   };
 
   handleScale = scale => {

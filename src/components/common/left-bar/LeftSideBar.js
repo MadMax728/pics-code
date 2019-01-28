@@ -184,12 +184,6 @@ class LeftSideBar extends Component {
           component={SideBarSetting}
         />
 
-        <Route
-          path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
-          exact
-          component={SideBarSetting}
-        />
-
         {/* letf side bar information */}
 
         <Route

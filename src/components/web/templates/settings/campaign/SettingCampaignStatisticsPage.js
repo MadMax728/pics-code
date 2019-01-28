@@ -54,11 +54,10 @@ class SettingCampaignStatisticsPage extends Component {
                 </div>
                 <div className="progressbar-wrapper">
                   <div className="progressbar">
-                    <div style={{ width: `${budgetProgress}%` }} >
-                        <p className="completed-count">{budgetProgress}€</p>
+                    <div style={{ width: `${budgetProgress}%` }}>
+                      <p className="completed-count">{budgetProgress}%</p>
                     </div>
                   </div>
-                  {/* <span className="counter">{budgetProgress}€</span> */}
                 </div>
               </div>
               <div className="campaign-block">
@@ -81,7 +80,6 @@ class SettingCampaignStatisticsPage extends Component {
                       <p className="completed-count">{performaceProgress}%</p>
                     </div>
                   </div>
-                  {/* <span className="counter">{performaceProgress}%</span> */}
                 </div>
               </div>
               <div className="campaign-block">
@@ -105,7 +103,6 @@ class SettingCampaignStatisticsPage extends Component {
                       <p className="completed-count">{runtimeProgress}%</p>
                     </div>
                   </div>
-                  {/* <span className="counter">{runtimeProgress}%</span> */}
                 </div>
               </div>
             </div>
@@ -157,7 +154,7 @@ class SettingCampaignStatisticsPage extends Component {
     if (this.props.campaignDetails) {
       const { campaignDetails } = this.props;
 
-      const dailyBudget = campaignDetails.budget;
+      // const dailyBudget = campaignDetails.budget;
 
       // Calculations of Total No. Of Days
       const startDate = moment

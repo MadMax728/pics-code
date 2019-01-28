@@ -4,10 +4,24 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 import { Translations } from "../../../../../lib/translations";
 import moment from "moment";
+import { modalType } from "../../../../../lib/constants";
 
 class SettingAdsStatisticsRight extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      adStatistics: this.props.adStatistics
+    };
+  }
+
+  handleEditAd = () => {
+    const { adStatistics } = this.state;
+    this.props.handleModalShow(modalType.editAds, adStatistics);
+  }
+
   render() {
-    const { adStatistics } = this.props;
+    const { adStatistics } = this.state;
     let isStatus = "green-circle pull-right";
     if (adStatistics.isActive) {
       isStatus = "green-circle pull-right";
@@ -28,7 +42,7 @@ class SettingAdsStatisticsRight extends Component {
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
-          <button className="blue_button">
+          <button className="blue_button" onClick={this.handleEditAd}>
             {Translations.create_ads.edit_ad}
           </button>
           <Link to={routes.SETTINGS_ADS_ROUTE}>
@@ -42,21 +56,34 @@ class SettingAdsStatisticsRight extends Component {
           </div>
           <ul className="campaign-right-options">
             <li>
-              <span className="left-title"> {Translations.create_ads.daily_budget}</span>
-              <span className="pull-right right-content">{adStatistics.budget}€</span>
+              <span className="left-title">
+                {" "}
+                {Translations.create_ads.daily_budget}
+              </span>
+              <span className="pull-right right-content">
+                {adStatistics.budget}€
+              </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.daily_budget_spent}</span>
-              <span className="pull-right right-content">{budgetSpentInHours}</span>
+              <span className="left-title">
+                {Translations.create_ads.daily_budget_spent}
+              </span>
+              <span className="pull-right right-content">
+                {budgetSpentInHours}
+              </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.total_expense}</span>
+              <span className="left-title">
+                {Translations.create_ads.total_expense}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.maximumExpenses}€
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.runtime}</span>
+              <span className="left-title">
+                {Translations.create_ads.runtime}
+              </span>
               <span className="pull-right right-content">
                 {moment
                   .unix(adStatistics.startDate)
@@ -73,12 +100,22 @@ class SettingAdsStatisticsRight extends Component {
           </div>
           <ul className="campaign-right-options">
             <li>
-              <span className="left-title"> {Translations.create_ads.views}</span>
-              <span className="pull-right right-content">{adStatistics.views}</span>
+              <span className="left-title">
+                {" "}
+                {Translations.create_ads.views}
+              </span>
+              <span className="pull-right right-content">
+                {adStatistics.views}
+              </span>
             </li>
             <li>
-              <span className="left-title"> {Translations.create_ads.clicks}</span>
-              <span className="pull-right right-content">{adStatistics.clicks}</span>
+              <span className="left-title">
+                {" "}
+                {Translations.create_ads.clicks}
+              </span>
+              <span className="pull-right right-content">
+                {adStatistics.clicks}
+              </span>
             </li>
           </ul>
           <div className="normal_title padding-15">
@@ -87,25 +124,33 @@ class SettingAdsStatisticsRight extends Component {
           </div>
           <ul className="campaign-right-options">
             <li>
-              <span className="left-title">{Translations.create_ads.location}</span>
+              <span className="left-title">
+                {Translations.create_ads.location}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.location.address}
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.radius}</span>
+              <span className="left-title">
+                {Translations.create_ads.radius}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.radius.radiusName}
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.category}</span>
+              <span className="left-title">
+                {Translations.create_ads.category}
+              </span>
               <span className="pull-right right-content">
                 {adStatistics.category[0].categoryName}
               </span>
             </li>
             <li>
-              <span className="left-title">{Translations.create_ads.target_group}</span>
+              <span className="left-title">
+                {Translations.create_ads.target_group}
+              </span>
               <span className="pull-right right-content">
                 {Translations.target_group[adStatistics.targetGroup]}
               </span>
@@ -128,28 +173,8 @@ class SettingAdsStatisticsRight extends Component {
 }
 
 SettingAdsStatisticsRight.propTypes = {
-  adStatistics: PropTypes.shape({
-    title: PropTypes.string,
-    total_budget_spent_per: PropTypes.string,
-    daily_budget_spent_per: PropTypes.string,
-    performance_view_per: PropTypes.string,
-    runtime_passed_per: PropTypes.string,
-
-    daily_budget: PropTypes.string,
-    total_budget_spent: PropTypes.string,
-    total_expenses: PropTypes.string,
-    runtime: PropTypes.string,
-
-    views: PropTypes.string,
-    clicks: PropTypes.string,
-
-    location: PropTypes.string,
-    radius: PropTypes.string,
-    category: PropTypes.string,
-    target_group: PropTypes.string,
-
-    id: PropTypes.number
-  })
+  adStatistics: PropTypes.object.isRequired,
+  handleModalShow: PropTypes.func.isRequired
 };
 
 export default SettingAdsStatisticsRight;
