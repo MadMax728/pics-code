@@ -273,15 +273,25 @@ header {
                   &:last-child{
                     border-bottom: 0px;
                   }
-                  img {
+                  .notification-profile-img{
                     width: 45px;
-                    border-radius: 50%;
+                    display: inline-block;
                     float: left;
-                    margin-right: 10px;
+                    height: 45px;
+                    img {
+                      width:100%;
+                      object-fit: cover;
+                      border-radius: 50%;
+                      float: left;
+                      margin-right: 10px;
+                      height: 100%;
+                    }
                   }
                   .user-info {
                     display: inline-block;
                     float: left;
+                    padding: 0 15px;
+                    width: 50%;
                     .username {
                       font-family: "Helvetica-Bold";
                     }
@@ -292,6 +302,8 @@ header {
                   .subscribe-btn {
                     display: inline-block;
                     float: right;
+                    width: 30%;
+                    text-align: right;
                     button {
                       height: 30px;
                       width: 100px;
