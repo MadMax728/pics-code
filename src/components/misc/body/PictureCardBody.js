@@ -6,6 +6,8 @@ import { Loader, ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { getSearch } from "../../../actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import * as routes from "../../../lib/constants/routes";
 
 class PictureCardBody extends Component {
   render() {
@@ -44,7 +46,9 @@ class PictureCardBody extends Component {
               )}
             </LazyLoad>
             <div className="name-wrapper">
-              {/* <div className="username">{pic.userName}</div> */}
+                <Link to={`${routes.ABOUT_ROUTE}/${pic.userName}`}>
+                  <div className="username float_left">{pic.userName}</div>
+                </Link>
                 <div className="show_more_options pic">
                   <ThreeDots
                     id={`report-${pic.id}`}

@@ -52,11 +52,12 @@
     padding: 20px 10px;
     background: #fff;
     margin-bottom: 10px;
-    .name{
+    .name {
       // min-height: 20px;
     }
     .username {
       font-family: "Helvetica-Bold";
+      color: #fff;
     }
   }
   &:hover {
@@ -145,7 +146,6 @@
     }
   }
   .name-wrapper{
-    padding: 0 10px;
     position: absolute;
     transition: opacity 0.5s linear;
     bottom: -10px;
