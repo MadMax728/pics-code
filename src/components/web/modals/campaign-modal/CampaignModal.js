@@ -293,7 +293,7 @@ class CampaignModal extends Component {
       return {modalTitle: Translations.modal_header.edit_campaign, isEdit: true}
     }
     else {
-      return initialState;
+      return null;
     }
   } 
 

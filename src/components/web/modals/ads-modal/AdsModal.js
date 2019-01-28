@@ -201,7 +201,7 @@ class AdsModal extends Component {
       return {modalTitle: Translations.modal_header.edit_ad, isEdit: true}
     }
     else {
-      return initialState;
+      return null;
     }
   } 
 
