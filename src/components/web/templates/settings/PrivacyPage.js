@@ -874,10 +874,6 @@ class PrivacyPage extends Component {
     this.props.handleModalShow(modalType.confirmation, {
       id: "deactivateAccount"
     });
-    // const modalForValue = e.target.id;
-    // this.props.handleModalInfoShow(modalType.confirmation, {
-    //   id: "deactivateAccount"
-    // });
   };
 }
 

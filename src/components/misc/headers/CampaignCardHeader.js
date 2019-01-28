@@ -29,18 +29,31 @@ const CampaignCardHeader = ({
   return (
     <div className="feed_header">
       <Link to={profile_route}>
-            <UserImageItem item={campaign.profileImage} customClass={`img-circle img-responsive padding-right-15`} />
+        <UserImageItem
+          item={campaign.profileImage}
+          customClass={`img-circle img-responsive padding-right-15`}
+        />
       </Link>
       <div className="no-padding titles_wrapper">
         <Link to={profile_route} className="">
           <div className="normal_title">{campaign.userName}</div>
         </Link>
-        <div className="normal_sub_title ">{Translations.landing.published_a_campaign}</div>
-        <div className="secondary_title">{campaign.location && campaign.location.address && campaign.location.address}</div>
+        <div className="normal_sub_title ">
+          {Translations.landing.published_a_campaign}
+        </div>
+        <div className="secondary_title">
+          {campaign.location &&
+            campaign.location.address &&
+            campaign.location.address}
+        </div>
         {campaign.category && (
           <div className="grey_title">
-            {DateFormat(campaign.createdAt, Translations.date_format.time, true)} in{" "}
-            {campaign.category[0].categoryName}
+            {DateFormat(
+              campaign.createdAt,
+              Translations.date_format.time,
+              true
+            )}{" "}
+            in {campaign.category[0].categoryName}
           </div>
         )}
       </div>
