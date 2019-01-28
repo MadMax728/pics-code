@@ -22,7 +22,7 @@ const MediaCardBody = ({ item, isDescription, isLoading }) => {
       {item &&
         isDescription &&
         item.description && (
-          <div className="feed_description padding-15">
+          <div className="feed_description news-feed-data padding-15">
             <span className="secondary_title">
               <ReadMore
                 text={item.description}
