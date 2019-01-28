@@ -24,7 +24,7 @@ class Requests extends Component {
                   className="notification-with-subscribe notification-wrapper"
                   key={request.id}
                 >
-                  <img src={request.profileUrl} alt="image4" />
+                  <div className="notification-profile-img"><img src={request.profileUrl} alt="image4" /></div>
                   <div className="user-info">
                     <div className="username">{request.username}</div>
                     <div className="subtitle">
