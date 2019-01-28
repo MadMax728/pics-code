@@ -104,6 +104,7 @@ class AdsModal extends Component {
             handlePrev={this.handlePrev}
             stepIndex={stepIndex}
             modalTitle={modalTitle}
+            handleResetForm={this.handleResetForm}
           />
         }
         footer={false}

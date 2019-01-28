@@ -134,6 +134,7 @@ class CampaignModal extends Component {
               handlePrev={this.handlePrev}
               stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
+              handleResoreState={this.handleResoreState}
               modalTitle={modalTitle}
             />
           )
@@ -495,10 +496,9 @@ class CampaignModal extends Component {
   };
 
   handleResoreState = () => {
-    this.setState({
-      form: {}
-    });
+    this.handleResetForm();
   };
+
   handlePrivewOpen = () => {
     this.setState({ isPreview: true });
   };
