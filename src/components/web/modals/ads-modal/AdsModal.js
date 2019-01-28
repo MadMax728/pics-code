@@ -29,7 +29,7 @@ const initialState = {
   isEdit: false,
   stepIndex: 0,
   userInfo: null,
-  isLoading: false,  
+  isLoading: false,
   maxClicks: 0,
   modalTitle: Translations.modal_header.create_ad,
   form: {
@@ -80,7 +80,15 @@ class AdsModal extends Component {
   }
 
   render() {
-    const { stepIndex, form, userInfo, maxClicks, isLoading, isEdit, modalTitle } = this.state;
+    const {
+      stepIndex,
+      form,
+      userInfo,
+      maxClicks,
+      isLoading,
+      isEdit,
+      modalTitle
+    } = this.state;
     const { handleModalHide, modalShow } = this.props;
 
     let modalClassName = "";
@@ -146,15 +154,17 @@ class AdsModal extends Component {
     }
     const { data } = this.props;
     console.log(data);
-    
-    if(data && data.id){
-      this.setState({modalTitle: Translations.modal_header.edit_ad, isEdit: true, isNewFile: false})
+
+    if (data && data.id) {
+      this.setState({
+        modalTitle: Translations.modal_header.edit_ad,
+        isEdit: true,
+        isNewFile: false
+      });
       this.handleFillState(data);
-    }
-    else {
+    } else {
       this.handleResetForm();
     }
-    
   };
 
   handleResetForm = () => {
@@ -169,7 +179,7 @@ class AdsModal extends Component {
     form.description = "";
     form.radius = "";
     form.callToAction = "";
-    form.insertLink = "" ;
+    form.insertLink = "";
     form.startDate = moment();
     form.endDate = moment();
     form.budget = "";
@@ -189,63 +199,60 @@ class AdsModal extends Component {
     form.video = null;
     form.typeId = "";
     form.maximumExpenses = "";
-    form.error = false
-    this.setState({form});
-  }
+    form.error = false;
+    this.setState({ form });
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (!nextProps.modalShow) {
-      return { stepIndex: 0}
+      return { stepIndex: 0 };
     }
     if (nextProps.data && nextProps.data.id) {
-      return {modalTitle: Translations.modal_header.edit_ad, isEdit: true}
-    }
-    else {
+      return { modalTitle: Translations.modal_header.edit_ad, isEdit: true };
+    } else {
       return null;
     }
-  } 
+  }
 
-  handleFillState = (data) => {
+  handleFillState = data => {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
-    if(data.location) {
+    if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
       form.location.address = data.location.address;
     }
-    if(data.category && data.category[0] && data.category[0].id)
-    {
+    if (data.category && data.category[0] && data.category[0].id) {
       form.category = data.category[0].id;
     }
-    if(data.radius) {
+    if (data.radius) {
       form.radius = data.radius.id;
     }
     form.description = data.description;
-    if(data.targetGroup) {
+    if (data.targetGroup) {
       form.targetGroup = target_group[data.targetGroup.toLowerCase()];
     }
-    if(data.callToAction) {
+    if (data.callToAction) {
       form.callToAction = data.callToAction.id;
     }
     form.insertLink = data.insertLink;
     form.startDate = moment.unix(data.startDate);
     form.endDate = moment.unix(data.endDate);
     form.budget = data.budget;
-    if(data.typeContent) {
+    if (data.typeContent) {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
-      form.fileType = typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
-      if(form.fileType)  {
+      form.fileType =
+        typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
+      if (form.fileType) {
         form.image = data.mediaUrl;
         form.file = data.mediaUrl;
-      }
-      else if (!form.fileType) {
+      } else if (!form.fileType) {
         form.video = data.mediaUrl;
         form.file = data.mediaUrl;
       }
     }
-    if(data.address)
-    {
+    if (data.address) {
       form.address.invoiceRecipient = data.address.invoiceRecipient;
       form.address.street = data.address.street;
       form.address.postalCode = data.address.postalCode;
@@ -258,10 +265,10 @@ class AdsModal extends Component {
     form.voucherCode = data.voucherCode;
     form.maximumExpenses = data.maximumExpenses;
     form.typeId = data.typeId;
-    form.error = false
-    this.setState({form, isNewFile: false});
+    form.error = false;
+    this.setState({ form, isNewFile: false });
     this.calculateMaxClicks();
-  }
+  };
 
   componentWillUnmount = () => {
     this.setState(initialState);
@@ -278,7 +285,7 @@ class AdsModal extends Component {
   };
 
   handleSubmit = () => {
-    const { form, isEdit, isNewFile  } = this.state;
+    const { form, isEdit, isNewFile } = this.state;
 
     if (form.file && isNewFile) {
       const Data = new FormData();
@@ -289,7 +296,7 @@ class AdsModal extends Component {
       }
       Data.append("postType", "ad");
 
-      this.setState({isLoading: true});
+      this.setState({ isLoading: true });
       this.props.uploadMedia(Data, form.fileType).then(() => {
         if (this.props.mediaData && this.props.mediaData.media) {
           form.typeId = this.props.mediaData.media.id;
@@ -300,11 +307,11 @@ class AdsModal extends Component {
             form.maximumExpenses = form.budget;
           }
           this.setState({ form });
-          
-          if(isEdit){
+
+          if (isEdit) {
             this.handleUpdateAd(form);
-          }
-          else {
+          } else {
+            delete form.id;
             this.props.createAd(form).then(() => {
               if (
                 this.props.adData &&
@@ -318,11 +325,9 @@ class AdsModal extends Component {
           }
         }
       });
-    } 
-    else if(form.file && !isNewFile) {
+    } else if (form.file && !isNewFile) {
       this.handleUpdateAd(form);
-    }
-    else {
+    } else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
@@ -330,8 +335,8 @@ class AdsModal extends Component {
     }
   };
 
-  handleUpdateAd = (form) => {
-    this.setState({isLoading: true});
+  handleUpdateAd = form => {
+    this.setState({ isLoading: true });
     this.props.updateAd(form).then(() => {
       if (
         this.props.adData &&
@@ -340,10 +345,10 @@ class AdsModal extends Component {
       ) {
         this.handleModalInfoShow();
         this.handleResetForm();
-        this.setState({isLoading: false});
+        this.setState({ isLoading: false });
       }
     });
-  }
+  };
 
   handleDate = (date, forThat) => {
     const { form } = this.state;
@@ -352,7 +357,7 @@ class AdsModal extends Component {
   };
 
   handleActualImg = e => {
-    this.setState({isNewFile: true});
+    this.setState({ isNewFile: true });
     const reader = new FileReader();
     const file = e;
 
@@ -432,7 +437,7 @@ class AdsModal extends Component {
       );
     } else if (index === 2) {
       return (
-        form.address && 
+        form.address &&
         form.address.invoiceRecipient &&
         form.address.street &&
         form.address.streetNumber &&
@@ -478,7 +483,7 @@ class AdsModal extends Component {
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    if(form && form.location) {
+    if (form && form.location) {
       form.location.latitude = location.lat;
       form.location.longitude = location.lng;
       form.location.address = address;

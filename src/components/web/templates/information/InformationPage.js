@@ -15,6 +15,7 @@ import { getBackendPostType } from "../../../Factory";
 import { connect } from "react-redux";
 import { CampaignDetailsLoading } from "../../../ui-kit";
 import { CampaignDetailsCard } from "../../../misc";
+import * as routes from "../../../../lib/constants/routes";
 
 class InformationPage extends Component {
   constructor(props, context) {
@@ -46,11 +47,11 @@ class InformationPage extends Component {
     return (
       <div className="padding-l-10 middle-section width-80">
         {campaignDetails && !isLoading && (
-          <CampaignDetailsCard 
-            campaignDetails={campaignDetails} 
-            isComments={isComments} 
-            comments={comments} 
-            handleApplyParticipant={this.handleApplyParticipant} 
+          <CampaignDetailsCard
+            campaignDetails={campaignDetails}
+            isComments={isComments}
+            comments={comments}
+            handleApplyParticipant={this.handleApplyParticipant}
             handleCommentsSections={this.handleCommentsSections}
             handleFavorite={this.handleFavorite}
             handleOnKeyDown={this.handleOnKeyDown}
@@ -118,10 +119,16 @@ class InformationPage extends Component {
   };
 
   handleApplyParticipant = e => {
-    this.props.handleModalShow(modalType.upload, {
-      campaignId: e.target.id,
-      campaignName: this.props.campaignDetails.campaignName
-    });
+    if (this.props.campaignDetails.userType === "company") {
+      this.props.handleModalShow(modalType.upload, {
+        campaignId: e.target.id,
+        campaignName: this.props.campaignDetails.campaignName
+      });
+    } else {
+      this.props.history.push(
+        routes.MESSAGES_ROUTE + "?new=" + this.props.campaignDetails.userName
+      );
+    }
   };
 
   handleComment = commet => {
@@ -211,7 +218,6 @@ class InformationPage extends Component {
       return <RenderToolTips items={reportTips} id={campaignDetails.id} />;
     }
   };
-
 }
 
 InformationPage.propTypes = {

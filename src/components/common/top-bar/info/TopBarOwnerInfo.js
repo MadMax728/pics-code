@@ -10,14 +10,13 @@ import { getUser, getFollowUserList } from "../../../../actions";
 class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
-    
+
     const storage = Auth.extractJwtFromStorage();
     let userInfo = {};
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-    console.log(storage);
-    
+
     this.state = {
       items: {
         userid: userInfo.id,
@@ -267,7 +266,6 @@ class TopBarOwnerInfo extends Component {
   handeleShare = () => {
     this.props.handleModalInfoShow(modalType.share);
   };
-
 }
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,

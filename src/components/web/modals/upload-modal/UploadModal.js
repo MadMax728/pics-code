@@ -34,7 +34,6 @@ class UploadModal extends Component {
     this.state = initialState;
   }
 
-
   render() {
     const { form } = this.state;
     const { modalShow } = this.props;
@@ -131,7 +130,6 @@ class UploadModal extends Component {
           this.setState(initialState);
           /* Add Participants */
           if (this.props.data) {
-            console.log("if-participants");
             let typeOfContent = "";
             if (form.filetype) {
               typeOfContent = "Image";
@@ -223,7 +221,6 @@ class UploadModal extends Component {
       form.add_description
     );
   };
-
 }
 
 UploadModal.propTypes = {

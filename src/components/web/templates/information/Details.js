@@ -33,10 +33,8 @@ class Information extends Component {
     };
   }
 
-
   render() {
     const { campaign_detail } = this.state;
-    console.log("details", campaign_detail);
     return (
       <div className="padding-l-10 middle-section width-80">
         <div className="information-wrapper">
@@ -267,7 +265,6 @@ class Information extends Component {
       />
     );
   };
-
 }
 
 Information.propTypes = {

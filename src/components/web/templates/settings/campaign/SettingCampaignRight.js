@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
 
 class SettingCampaignRight extends Component {
-
   render() {
     return (
       <div>
@@ -28,7 +27,6 @@ class SettingCampaignRight extends Component {
   handleCreateCampaign = () => {
     this.props.handleModalShow(modalType.campaign);
   };
- 
 }
 
 SettingCampaignRight.propTypes = {

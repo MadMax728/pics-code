@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
-import { UploadModal, AdsModal, CampaignModal } from "../../web/modals";
+import {
+  UploadModal,
+  AdsModal,
+  CampaignModal,
+  ConfirmationModal
+} from "../../web/modals";
 import PropTypes from "prop-types";
 import { modalType, userType } from "../../../lib/constants/enumerations";
 import { Auth } from "../../../auth";
@@ -74,7 +79,8 @@ class CustomModal extends Component {
     let isFor = false;
     // check if user is compnay
     if (userInfo && userInfo.userType) {
-      isFor = userInfo.userType.toLowerCase() === userType.company;
+      // isFor = userInfo.userType.toLowerCase() === userType.company;
+      isFor = false;
     }
 
     return (
@@ -88,10 +94,21 @@ class CustomModal extends Component {
       />
     );
   };
-  
+
   handleModalEditAd = () => {
     return (
       <AdsModal
+        modalShow={this.props.modalShow}
+        handleModalHide={this.props.handleModalHide}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
+        data={this.props.data}
+      />
+    );
+  };
+
+  handleModalActionConfirmation = () => {
+    return (
+      <ConfirmationModal
         modalShow={this.props.modalShow}
         handleModalHide={this.props.handleModalHide}
         handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
@@ -105,14 +122,16 @@ class CustomModal extends Component {
       <div>
         {this.props.modalType === modalType.upload && this.handleModalUpload()}
         {this.props.modalType === modalType.ads && this.handleModalAds()}
-        {this.props.modalType === modalType.campaign && this.handleModalCampaign()}
-        {this.props.modalType === modalType.editCampaign && this.handleModalEditCampaign()}
+        {this.props.modalType === modalType.campaign &&
+          this.handleModalCampaign()}
+        {this.props.modalType === modalType.editCampaign &&
+          this.handleModalEditCampaign()}
         {this.props.modalType === modalType.editAds && this.handleModalEditAd()}
+        {this.props.modalType === modalType.confirmation &&
+          this.handleModalActionConfirmation()}
       </div>
     );
   };
-
-
 }
 
 CustomModal.propTypes = {

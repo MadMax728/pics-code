@@ -124,8 +124,13 @@ class AdsStatisticsPage extends Component {
               </div>
             </div>
           )}
-        </div>    
-        {adDetails && <SettingAdsStatisticsRight adStatistics={adDetails} handleModalShow={handleModalShow} />}
+        </div>
+        {adDetails && (
+          <SettingAdsStatisticsRight
+            adStatistics={adDetails}
+            handleModalShow={handleModalShow}
+          />
+        )}
         {isLoading && <InlineLoading />}
       </div>
     );
@@ -223,20 +228,38 @@ class AdsStatisticsPage extends Component {
         dailyBudgetSpend = dailyBudget;
         dailyRemainingBudget = 0;
       }
-      const totalRuntime = parseInt(totalNoOfDays) + parseInt(remainingDays);
-      const runtimePercentage =
-        (parseInt(totalNoOfDays) / parseInt(totalRuntime)) * 100;
 
       // Total Budget Percentage Calculation
-      const totalBudget = parseInt(budgetSpend) + parseInt(remainingBudget);
-      const budgetPercentage =
-        (parseInt(budgetSpend) / parseInt(totalBudget)) * 100;
 
       // Daily Budget Percentage Calculation
       const totalDailyBudget =
         parseInt(dailyBudgetSpend) + parseInt(dailyRemainingBudget);
-      const DailyBudgetPercentage =
-        (parseInt(dailyBudgetSpend) / parseInt(totalDailyBudget)) * 100;
+      let DailyBudgetPercentage = 0;
+      if (budgetSpend === 0 && totalBudget === 0) {
+        DailyBudgetPercentage = 0;
+      } else {
+        DailyBudgetPercentage =
+          (parseInt(dailyBudgetSpend) / parseInt(totalDailyBudget)) * 100;
+      }
+
+      // Runtime
+      const totalRuntime = parseInt(totalNoOfDays) + parseInt(remainingDays);
+      let runtimePercentage = 0;
+      if (totalNoOfDays === 0 && remainingDays === 0) {
+        runtimePercentage = 0;
+      } else {
+        runtimePercentage =
+          (parseInt(totalNoOfDays) / parseInt(totalRuntime)) * 100;
+      }
+      // Budget Percentage Calculation
+      const totalBudget = parseInt(budgetSpend) + parseInt(remainingBudget);
+      let budgetPercentage = 0;
+      if (budgetSpend === 0 && totalBudget === 0) {
+        budgetPercentage = 0;
+      } else {
+        budgetPercentage =
+          (parseInt(budgetSpend) / parseInt(totalBudget)) * 100;
+      }
 
       this.setState({
         runtimeProgress: Math.round(runtimePercentage),

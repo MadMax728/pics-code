@@ -72,17 +72,6 @@ class InfoModal extends Component {
     );
   };
 
-  handleModalActionConfirmation = () => {
-    return (
-      <ConfirmationModal
-        modalInfoShow={this.props.modalInfoShow}
-        handleModalInfoHide={this.props.handleModalInfoHide}
-        handleModalHide={this.props.handleModalHide}
-        modalInfoMsg={this.props.modalInfoMsg}
-      />
-    );
-  };
-
   handleModalSubscribe = () => {
     return (
       <SubscribeModal
@@ -123,8 +112,8 @@ class InfoModal extends Component {
         handleModalInfoHide={this.props.handleModalInfoHide}
         modalInfo={this.props.modalInfo}
       />
-    )
-  }
+    );
+  };
 
   handleModalRender = () => {
     return (
@@ -139,8 +128,6 @@ class InfoModal extends Component {
           this.handleModalEditProfile()}
         {this.props.modalInfoType === modalType.share &&
           this.handleModalShare()}
-        {this.props.modalInfoType === modalType.confirmation &&
-          this.handleModalActionConfirmation()}
         {this.props.modalInfoType === modalType.error &&
           this.handleModalError()}
         {this.props.modalInfoType === modalType.subscribe &&
@@ -150,7 +137,6 @@ class InfoModal extends Component {
       </div>
     );
   };
-
 }
 
 InfoModal.propTypes = {

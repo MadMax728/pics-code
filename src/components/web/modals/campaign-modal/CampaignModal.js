@@ -19,7 +19,11 @@ import {
 import { Auth } from "../../../../auth";
 
 import { connect } from "react-redux";
-import { createCampaign, uploadMedia, updateCampaign } from "../../../../actions";
+import {
+  createCampaign,
+  uploadMedia,
+  updateCampaign
+} from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 
 const storage = Auth.extractJwtFromStorage();
@@ -83,7 +87,6 @@ const initialState = {
 };
 
 class CampaignModal extends Component {
-  
   constructor(props, context) {
     super(props, context);
     this.state = initialState;
@@ -222,52 +225,52 @@ class CampaignModal extends Component {
       this.setState({ userInfo });
     }
     const { data } = this.props;
-    console.log(data);
-    
-    if(data && data.id){
-      this.setState({modalTitle: Translations.modal_header.edit_campaign, isEdit: true, isNewFile: false})
+
+    if (data && data.id) {
+      this.setState({
+        modalTitle: Translations.modal_header.edit_campaign,
+        isEdit: true,
+        isNewFile: false
+      });
       this.handleSetstate(data);
-    }
-    else {
+    } else {
       this.handleResetForm();
     }
   };
 
-  handleSetstate = (data) => {    
+  handleSetstate = data => {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
-    if(data.location) {
+    if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
       form.location.address = data.location.address;
     }
-    if(data.category && data.category[0] && data.category[0].id)
-    {
+    if (data.category && data.category[0] && data.category[0].id) {
       form.category = data.category[0].id;
     }
     form.procedure = procedure[data.procedure];
-    if(data.typeContent) {
+    if (data.typeContent) {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
-      form.filetype = typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
-      if(form.filetype)  {
+      form.filetype =
+        typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
+      if (form.filetype) {
         form.image = data.mediaUrl;
         form.file = data.mediaUrl;
-      }
-      else if (!form.filetype) {
+      } else if (!form.filetype) {
         form.video = data.mediaUrl;
         form.file = data.mediaUrl;
       }
     }
-    if(data.targetGroup) {
+    if (data.targetGroup) {
       form.targetGroup = target_group[data.targetGroup.toLowerCase()];
     }
     form.description = data.description;
     form.startDate = moment.unix(data.startDate);
     form.endDate = moment.unix(data.endDate);
     form.budget = data.budget;
-    if(data.address)
-    {
+    if (data.address) {
       form.address.invoiceRecipient = data.address.invoiceRecipient;
       form.address.street = data.address.street;
       form.address.postalCode = data.address.postalCode;
@@ -280,29 +283,31 @@ class CampaignModal extends Component {
     form.voucherCode = data.voucherCode;
     form.maximumExpenses = data.maximumExpenses;
     form.typeId = data.typeId;
-    form.error = false
-    this.setState({form, isNewFile: false});
+    form.error = false;
+    this.setState({ form, isNewFile: false });
     this.calculateMaxClicks();
-  }
+  };
 
   static getDerivedStateFromProps(nextProps, prevState) {
     if (!nextProps.modalShow) {
-      return { stepIndex: 0, isPreview: false}
+      return { stepIndex: 0, isPreview: false };
     }
     if (nextProps.data && nextProps.data.id) {
-      return {modalTitle: Translations.modal_header.edit_campaign, isEdit: true}
-    }
-    else {
+      return {
+        modalTitle: Translations.modal_header.edit_campaign,
+        isEdit: true
+      };
+    } else {
       return null;
     }
-  } 
+  }
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.isEdit !== this.state.isEdit) {
       const { data } = this.props;
       this.handleSetstate(data);
     }
-  }
+  };
 
   handleResetForm = () => {
     const { form } = this.state;
@@ -336,9 +341,9 @@ class CampaignModal extends Component {
     form.video = null;
     form.typeId = "";
     form.maximumExpenses = "";
-    form.error = false
-    this.setState({form});
-  }
+    form.error = false;
+    this.setState({ form });
+  };
 
   componentWillUnmount = () => {
     this.handleResetForm();
@@ -372,7 +377,7 @@ class CampaignModal extends Component {
 
   handleSubmit = () => {
     const { form, isEdit, isNewFile } = this.state;
-    
+
     if (form.file && isNewFile) {
       const Data = new FormData();
       if (form.filetype) {
@@ -382,8 +387,8 @@ class CampaignModal extends Component {
       }
       Data.append("postType", "campaign");
 
-      this.setState({isLoading: true});
-      
+      this.setState({ isLoading: true });
+
       this.props.uploadMedia(Data, form.filetype).then(() => {
         if (this.props.mediaData && this.props.mediaData.media) {
           form.typeId = this.props.mediaData.media.id;
@@ -394,11 +399,11 @@ class CampaignModal extends Component {
             form.maximumExpenses = form.budget;
           }
           this.setState({ form });
-          
-          if(isEdit){
+
+          if (isEdit) {
             this.handleUpdateCampaign(form);
-          }
-          else {
+          } else {
+            delete form.id;
             this.props.createCampaign(form).then(() => {
               if (
                 this.props.campaignData &&
@@ -407,18 +412,15 @@ class CampaignModal extends Component {
               ) {
                 this.handleModalInfoShow();
                 this.handleResetForm();
-                this.setState({isLoading: false});
+                this.setState({ isLoading: false });
               }
             });
           }
-
         }
       });
-    }
-    else if(form.file && !isNewFile) {
+    } else if (form.file && !isNewFile) {
       this.handleUpdateCampaign(form);
-    }
-    else {
+    } else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
@@ -426,8 +428,8 @@ class CampaignModal extends Component {
     }
   };
 
-  handleUpdateCampaign = (form) => {
-    this.setState({isLoading: true});
+  handleUpdateCampaign = form => {
+    this.setState({ isLoading: true });
     this.props.updateCampaign(form).then(() => {
       if (
         this.props.campaignData &&
@@ -436,10 +438,10 @@ class CampaignModal extends Component {
       ) {
         this.handleModalInfoShow();
         this.handleResetForm();
-        this.setState({isLoading: false});
+        this.setState({ isLoading: false });
       }
     });
-  }
+  };
 
   setVoucherData = (code, voucher, maximumExpenses) => {
     const { form } = this.state;
@@ -544,7 +546,7 @@ class CampaignModal extends Component {
 
   handleVideo = e => {
     const file = e.target.files[0];
-    this.setState({isNewFile: true});
+    this.setState({ isNewFile: true });
     this.handleImageVideo(file);
   };
 
@@ -583,7 +585,7 @@ class CampaignModal extends Component {
 
   handleActualImg = e => {
     const file = e;
-    this.setState({isNewFile: true});
+    this.setState({ isNewFile: true });
     this.handleImageVideo(file);
   };
 

@@ -83,7 +83,7 @@ class SubscribedTooltip extends Component {
             <div className="notification-with-subscribe notification-wrapper">
               <div className="user-info">
                 <div className="subtitle">
-                  {Translations.top_bar_info_modal.no_data}123
+                  {Translations.top_bar_info_modal.no_data}
                 </div>
               </div>
             </div>
@@ -92,7 +92,7 @@ class SubscribedTooltip extends Component {
       </div>
     );
   }
-  
+
   componentDidMount = () => {
     this.getTooltipUserList(this.props.userId);
   };
@@ -112,7 +112,7 @@ class SubscribedTooltip extends Component {
     }
   }
 
-  handleKeyPress = () => { };
+  handleKeyPress = () => {};
 
   // Tooltip List
   getTooltipUserList = userId => {
