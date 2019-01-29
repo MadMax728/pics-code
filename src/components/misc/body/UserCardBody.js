@@ -47,7 +47,7 @@ const UserCardBody = ({
         </LazyLoad>
         <div className="name-wrapper">
           <div className="username">{user.username}</div>
-          <div className="name">{user.name}</div>
+          {/* <div className="name">{user.name}</div> */}
           {isBackOffice && (
             <div className="show_more_options user">
               <ThreeDots
