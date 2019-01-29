@@ -104,7 +104,6 @@ const campaignReducer = (state = initialState.campaignData, action) => {
         error: action.payload
       };
 
-
     // Add Participants
     case types.ADD_PARTICIPANTS_STARTED:
       return {
@@ -119,6 +118,26 @@ const campaignReducer = (state = initialState.campaignData, action) => {
         isLoading: false
       };
     case types.ADD_PARTICIPANTS_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    // Remove Participants
+    case types.REMOVE_PARTICIPANT_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.REMOVE_PARTICIPANT_SUCCEEDED:
+      return {
+        ...state,
+        isRemoveParticipant: action.payload,
+        isLoading: false
+      };
+    case types.REMOVE_PARTICIPANT_FAILED:
       return {
         ...state,
         isLoading: false,
