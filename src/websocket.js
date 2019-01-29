@@ -18,7 +18,7 @@ function connect(cb) {
 
 function messagecount(userId, cb) {
     socket.emit('communication-notification-board-count-request', {
-        userId: userId
+        userId
     });
     // listen for any messages coming through
     // of type 'chat' and then trigger the 
@@ -46,8 +46,8 @@ function join(senderId, recipientId) {
 
 function emit(senderId, recipientId, content) {
     socket.emit('communication-message-board-new-message', {
-        recipientId: recipientId,
-        senderId: senderId,
+        recipientId,
+        senderId,
         content
     });
 }

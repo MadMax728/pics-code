@@ -29,11 +29,11 @@ class LeftSideBarBackOffice extends Component {
           component={SideBarBackOffice}
         />}
 
-        {!isRank && <Route
+        {/* {!isRank && <Route
           path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
           exact
           component={SideBarBackOffice}
-        />}
+        />} */}
 
         {!isRank && <Route
           path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
@@ -189,11 +189,11 @@ class LeftSideBarBackOffice extends Component {
           component={SideBarSettingBackOffice}
         />}
 
-        {!isRank && <Route
+        {/* {!isRank && <Route
           path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />}
+        />} */}
 
         {!isRank && <Route
           path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}

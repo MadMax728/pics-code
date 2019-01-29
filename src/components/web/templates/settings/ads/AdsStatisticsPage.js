@@ -265,8 +265,8 @@ class AdsStatisticsPage extends Component {
         runtimeProgress: Math.round(runtimePercentage),
         budgetProgress: Math.round(budgetPercentage),
         dailyBudgetProgress: Math.round(DailyBudgetPercentage),
-        budgetSpend: budgetSpend,
-        remainingBudget: remainingBudget
+        budgetSpend,
+        remainingBudget
       });
     }
   };

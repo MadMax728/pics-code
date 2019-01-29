@@ -297,9 +297,9 @@ class CampaignModal extends Component {
         modalTitle: Translations.modal_header.edit_campaign,
         isEdit: true
       };
-    } else {
+    } 
       return null;
-    }
+    
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -661,7 +661,7 @@ class CampaignModal extends Component {
   calculateMaxClicks = () => {
     const { form } = this.state;
     let maxClicksValue = 0;
-    let CPC = budgetCalculation.CPC;
+    const CPC = budgetCalculation.CPC;
     const budgetValue = form.budget;
     const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
     if (noOfDaysRuntime && budgetValue) {

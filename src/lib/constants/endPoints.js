@@ -33,6 +33,7 @@ export const removeParticipantsEndPoint = "/participants/";
 // CMS Management Service
 export const getCMSManagementEndPoint = "/cmspages";
 export const getCMSDetailEndPoint = "/cmspages/";
+export const getWebCMSDetailEndPoint = "/cmspages/cmspage";
 export const updateCMSEndPoint = "/cmspages/";
 export const createCMSEndPoint = "/cmspages/";
 
