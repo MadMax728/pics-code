@@ -132,29 +132,28 @@ export const saveJwtToStorage = authResponse => {
     localStorage.setItem("access_token", authResponse.token);
   }
 
-  const userInfo = {};
-
-  if (authResponse.email) {
-     userInfo.email = authResponse.email
+  // Change due to reflected in back-office login
+  if (
+    authResponse.email &&
+    authResponse.username &&
+    authResponse.id &&
+    authResponse.role &&
+    authResponse.profileUrl
+  ) {
+    localStorage.setItem(
+      "user_info",
+      JSON.stringify({
+        email: authResponse.email,
+        username: authResponse.username,
+        language: authResponse.language || "English",
+        profileUrl:authResponse.profileUrl || images.image,
+        userType: authResponse.userType || "creator",
+        role: authResponse.role,
+        id: authResponse.id
+      })
+    );
   }
 
-  if (authResponse.username) {
-    userInfo.username = authResponse.username
-  }
-
-  if (authResponse.role) {
-    userInfo.role = authResponse.role
-  }
-
-  if (authResponse.id) {
-    userInfo.id = authResponse.id
-  }
-
-  userInfo.language = authResponse.language || "English";
-  userInfo.userType = authResponse.userType || "creator";
-  userInfo.profileUrl = authResponse.profileUrl || images.image;
-
-  localStorage.setItem("user_info", JSON.stringify(userInfo));
 
   if (authResponse.hasOwnProperty("isAdmin")) {
     localStorage.setItem("is_admin", authResponse.isAdmin);

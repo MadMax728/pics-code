@@ -225,8 +225,8 @@ class SettingCampaignStatisticsPage extends Component {
       this.setState({
         runtimeProgress: Math.round(runtimePercentage),
         budgetProgress: Math.round(budgetPercentage),
-        budgetSpend: budgetSpend,
-        remainingBudget: remainingBudget
+        budgetSpend,
+        remainingBudget
       });
     }
   };

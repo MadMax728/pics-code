@@ -1,5 +1,19 @@
 import { api } from "../api";
-import { getCompanyCampaignsEndPoint, getCreatorCampaignsEndPoint, getNewsFeedCampaignsEndPoint, getUserProfileCampaignsEndPoint, getSavedCampaignsEndPoint, getSettingsCampaignsEndPoint, getCampaignTypeEndPoint, getCampaignDetailsEndPoint, getFavouriteCampaignsEndPoint, createCampaignEndPoint, addParticipantsEndPoint, editCampaignEndPoint } from "../lib/constants/endPoints";
+import {
+  getCompanyCampaignsEndPoint,
+  getCreatorCampaignsEndPoint,
+  getNewsFeedCampaignsEndPoint,
+  getUserProfileCampaignsEndPoint,
+  getSavedCampaignsEndPoint,
+  getSettingsCampaignsEndPoint,
+  getCampaignTypeEndPoint,
+  getCampaignDetailsEndPoint,
+  getFavouriteCampaignsEndPoint,
+  createCampaignEndPoint,
+  addParticipantsEndPoint,
+  editCampaignEndPoint,
+  removeParticipantsEndPoint
+} from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -56,3 +70,7 @@ export const updateCampaign = (payload, header = {}) =>
 // Add Participant
 export const addParticipants = (payload, header = {}) =>
   api(baseUrl, header).post(addParticipantsEndPoint, payload);
+
+// Remove Participant
+export const removeParticipants = (payload, header = {}) =>
+  api(baseUrl, header).delete(removeParticipantsEndPoint + payload);

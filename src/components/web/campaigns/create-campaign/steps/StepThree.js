@@ -21,7 +21,7 @@ class StepThree extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { maxClicks } = this.props;
     if (prevState.maxClicks !== maxClicks) {
-      this.setState({ maxClicks: maxClicks });
+      this.setState({ maxClicks });
     }
   }
 

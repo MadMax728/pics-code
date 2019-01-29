@@ -8,13 +8,30 @@ function connect(cb) {
     // of type 'chat' and then trigger the 
     // callback function with said message
     socket.on('communication-message-board-new-message-response', (message) => {
-      // console.log the message for posterity
-      console.log(message)
-      // trigger the callback passed in when
-      // our App component calls connect
-      cb(message);
+        // console.log the message for posterity
+        console.log(message)
+        // trigger the callback passed in when
+        // our App component calls connect
+        cb(message);
     })
 }
+
+function messagecount(userId, cb) {
+    socket.emit('communication-notification-board-count-request', {
+        userId
+    });
+    // listen for any messages coming through
+    // of type 'chat' and then trigger the 
+    // callback function with said message
+    socket.on('communication-notification-board-count-response', (count) => {
+        // console.log the message for posterity
+        console.log(count)
+        // trigger the callback passed in when
+        // our App component calls connect
+        cb(count);
+    })
+}
+
 
 function join(senderId, recipientId) {
     socket.emit('communication-message-board-join', {
@@ -29,10 +46,10 @@ function join(senderId, recipientId) {
 
 function emit(senderId, recipientId, content) {
     socket.emit('communication-message-board-new-message', {
-        recipientId: recipientId,
-        senderId: senderId,
+        recipientId,
+        senderId,
         content
     });
 }
-  
-export { connect, socket, join, emit }
+
+export { connect, socket, join, messagecount, emit }
