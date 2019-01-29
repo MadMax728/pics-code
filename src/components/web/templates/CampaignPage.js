@@ -49,7 +49,10 @@ class CampaignPage extends Component {
     const { type } = this.state;
     if (prevState.type !== type) {
       const data = { userType: type };
-      this.props.getCampaigns("getCampaignType", data);
+      this.props.getCampaigns("getCampaignType", data).then(() => {
+        const { campaignList } = this.props;
+        this.setState({ campaignList });
+      });
       this.props.getSearch("");
     }
   }
@@ -77,7 +80,10 @@ class CampaignPage extends Component {
     const { searchData } = this.props;
     campaignList = search(campaignList, "userName", searchData.searchKeyword);
 
+    
     return campaignList.map(campaign => {
+      console.log(campaign.mediaUrl && (campaign.postType.toLowerCase() ===
+      enumerations.contentTypes.creatorCampaign) && campaignList);
       return (
         <div key={campaign.id}>
           {campaign.mediaUrl &&
