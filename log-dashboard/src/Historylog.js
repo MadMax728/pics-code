@@ -6,6 +6,7 @@ import * as moment from 'moment';
 // import Modal from './Modal/modal'
 import { Button, Modal, Tabs, Tab } from 'react-bootstrap';
 import JSONTree from 'react-json-tree'
+import  Config  from './config'  
 
 class Historylog extends Component {
 
@@ -46,7 +47,7 @@ class Historylog extends Component {
 
     getErrorData = (token) => {
         var jsonArr = [];
-        axios.get(`http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/historylog`, { headers: { "Authorization": token } })
+        axios.get(Config.serverUrl + `historylog`, { headers: { "Authorization": token } })
             .then(res => {
                 const historylog = res.data.data;
                 console.log('historylog', historylog);
