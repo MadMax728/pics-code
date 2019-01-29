@@ -13,20 +13,19 @@ class ConfirmationModal extends Component {
   }
 
   render() {
-    const { handleModalInfoHide, handleModalHide, modalInfoMsg } = this.props;
+    const { handleModalHide } = this.props;
+    console.log(this.props);
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade action-confirmation-modal"}
         header={false}
         footer={false}
-        modalShow={this.props.modalInfoShow}
+        modalShow={this.props.modalShow}
         closeBtn={false}
-        handleModalHide={this.props.handleModalInfoHide}
+        handleModalHide={this.props.handleModalHide}
         modalBodyContent={
           <ActionConfirmation
-            handleModalInfoHide={handleModalInfoHide}
             handleModalHide={handleModalHide}
-            modalInfoMsg={modalInfoMsg}
             handleConfirmation={this.handleConfirmation}
           />
         }
@@ -36,20 +35,25 @@ class ConfirmationModal extends Component {
 
   handleConfirmation = value => {
     const paramData = { isActive: value };
-    this.props.deactivateAccount(paramData).then(() => {
-      if (
-        this.props.profilePrivacyData.error &&
-        this.props.profilePrivacyData.error.status === 400
-      ) {
-        console.log("error");
-        // To Do - Call back to Modal call - with error status
-      } else {
-        console.log("Deactivate Accont");
-        console.log(this.props.profilePrivacyData);
-        this.props.history.push(routes.LOGOUT_ROUTE);
-        // To Do - Call back to Modal call - with success status
-      }
-    });
+    console.log(paramData);
+    if (this.props.data.id === "deactivateAccount") {
+      this.props.deactivateAccount(paramData).then(() => {
+        if (
+          this.props.profilePrivacyData.error &&
+          this.props.profilePrivacyData.error.status === 400
+        ) {
+          console.log("error");
+          // To Do - Call back to Modal call - with error status
+        } else {
+          console.log("Deactivate Accont");
+          console.log(this.props.profilePrivacyData);
+          this.props.history.push(routes.LOGOUT_ROUTE);
+          // To Do - Call back to Modal call - with success status
+        }
+      });
+    } else {
+      console.log("delete History");
+    }
   };
 }
 
@@ -68,7 +72,10 @@ ConfirmationModal.propTypes = {
   modalInfoShow: PropTypes.bool,
   modalInfoMsg: PropTypes.string,
   profilePrivacyData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  handleModalShow: PropTypes.any,
+  modalShow: PropTypes.any,
+  data: PropTypes.any
 };
 
 export default connect(

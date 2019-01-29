@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
-import LazyLoad from "react-lazyload";
-import { Loader, ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
+import { ImageItem, VideoItem, ThreeDots } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { getSearch } from "../../../actions";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import * as routes from "../../../lib/constants/routes";
 
 class PictureCardBody extends Component {
   render() {
@@ -18,13 +19,6 @@ class PictureCardBody extends Component {
       >
         {pic && (
           <div className={isReport ? "backoffice-user pic-sec-block pic-block" : "pic-sec-block pic-block"}>
-            <LazyLoad
-              height={200}
-              once
-              offset={[-200, 0]}
-              placeholder={<Loader />}
-            >
-              {/* <img src={pic.mediaUrl} alt={pic.typeContent} /> */}
               {pic.typeContent &&
                 pic.typeContent.toLowerCase() ===
                   enumerations.mediaTypes.video && (
@@ -42,9 +36,10 @@ class PictureCardBody extends Component {
                     userName={pic.userName} 
                     isLoading={isLoading} />
               )}
-            </LazyLoad>
             <div className="name-wrapper">
-              {/* <div className="username">{pic.userName}</div> */}
+                <Link to={`${routes.ABOUT_ROUTE}/${pic.userName}`}>
+                  <div className="username float_left">{pic.userName}</div>
+                </Link>
                 <div className="show_more_options pic">
                   <ThreeDots
                     id={`report-${pic.id}`}

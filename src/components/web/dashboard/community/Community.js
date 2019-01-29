@@ -39,7 +39,7 @@ class Community extends Component {
 
         {!isLoadingusers && (
           <div className="community">
-            {usersList && !isLoadingusers ? (
+            {usersList && usersList.length > 0 && !isLoadingusers ? (
               usersList.map(user => {
                 const profile_route = user.isOwner
                   ? `/news-feed`

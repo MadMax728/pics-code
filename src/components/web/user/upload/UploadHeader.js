@@ -15,8 +15,14 @@ class UploadHeader extends Component {
     window.scrollTo(0, 0);
   };
 
+  handleModalHide = () => {
+    this.props.handleModalHide();
+    this.props.handleResetForm();
+  }
+
   render() {
     const isLoading = this.props.media.isLoading;
+    const { handleContinue } = this.props;
     return (
       <div className="row">
         {isLoading && <InlineLoading />}
@@ -24,10 +30,10 @@ class UploadHeader extends Component {
           {Translations.modal_header.upload_image}
         </div>
         <div className="col-sm-6 text-right">
-          <button className="black_button" onClick={this.props.handleModalHide}>
+          <button className="black_button" onClick={this.handleModalHide}>
             {Translations.modal_header.cancle}
           </button>
-          <button className="black_button" onClick={this.props.handleContinue}>
+          <button className="black_button" onClick={handleContinue}>
             {Translations.modal_header.continue}
           </button>
         </div>
@@ -43,6 +49,7 @@ const mapStateToProps = state => ({
 UploadHeader.propTypes = {
   handleModalHide: PropTypes.func.isRequired,
   handleContinue: PropTypes.func.isRequired,
+  handleResetForm: PropTypes.func.isRequired,
   media: PropTypes.any
 };
 

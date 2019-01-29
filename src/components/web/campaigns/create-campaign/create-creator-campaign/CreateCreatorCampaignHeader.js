@@ -42,6 +42,7 @@ class CreateCreatorCampaignHeader extends Component {
 
   handleCancle = () => {
     this.props.handleModalHide();
+    this.props.handleResoreState();
   };
 
   handleBack = () => {
@@ -73,6 +74,7 @@ CreateCreatorCampaignHeader.propTypes = {
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
+  handleResoreState: PropTypes.func.isRequired,
   modalTitle: PropTypes.string.isRequired
 };
 

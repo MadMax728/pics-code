@@ -203,14 +203,24 @@ class SettingCampaignStatisticsPage extends Component {
         budgetSpend = maximumExpense;
         remainingBudget = 0;
       }
+      // Runtime
       const totalRuntime = parseInt(totalNoOfDays) + parseInt(remainingDays);
-      const runtimePercentage =
-        (parseInt(totalNoOfDays) / parseInt(totalRuntime)) * 100;
-
+      let runtimePercentage = 0;
+      if (totalNoOfDays === 0 && remainingDays === 0) {
+        runtimePercentage = 0;
+      } else {
+        runtimePercentage =
+          (parseInt(totalNoOfDays) / parseInt(totalRuntime)) * 100;
+      }
       // Budget Percentage Calculation
       const totalBudget = parseInt(budgetSpend) + parseInt(remainingBudget);
-      const budgetPercentage =
-        (parseInt(budgetSpend) / parseInt(totalBudget)) * 100;
+      let budgetPercentage = 0;
+      if (budgetSpend === 0 && totalBudget === 0) {
+        budgetPercentage = 0;
+      } else {
+        budgetPercentage =
+          (parseInt(budgetSpend) / parseInt(totalBudget)) * 100;
+      }
 
       this.setState({
         runtimeProgress: Math.round(runtimePercentage),

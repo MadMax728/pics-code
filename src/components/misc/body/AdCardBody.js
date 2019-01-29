@@ -36,7 +36,7 @@ const AdCardBody = ({ ad, isDescription, isInformation, isLoading }) => {
       {ad &&
         isDescription &&
         ad.description && (
-          <div className="feed_description padding-10">
+          <div className="feed_description news-feed-data padding-10">
             <span className="secondary_title">
               <ReadMore
                 text={ad.description}

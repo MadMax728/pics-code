@@ -10,6 +10,8 @@ import {
   getDashboard
 } from "../../../../../actions";
 import moment from "moment";
+import { UserImageItem } from "../../../../ui-kit";
+import { DateFormat } from "../../../../Factory";
 
 class Requests extends Component {
   
@@ -24,14 +26,14 @@ class Requests extends Component {
                   className="notification-with-subscribe notification-wrapper"
                   key={request.id}
                 >
-                  <img src={request.profileUrl} alt="image4" />
+                   <UserImageItem item={request.profileUrl} customClass={`float_left padding-right-5 img-circle img-responsive`} />
                   <div className="user-info">
                     <div className="username">{request.username}</div>
                     <div className="subtitle">
                       {Translations.notification.subscribed_to_your_profile}
                     </div>
                     <div className="date">
-                      {moment(request.createdAt).format("MM.DD.YYYY")}
+                      {DateFormat(request.createdAt, Translations.date_format.date, true)}
                     </div>
                   </div>
                   {request.isAccepted && (

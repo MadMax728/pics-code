@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
 
 class FavouriteCampaigns extends Component {
-
   render() {
     const { isLoading } = this.props;
     return (
@@ -17,39 +16,34 @@ class FavouriteCampaigns extends Component {
         <div className="normal_title padding-15">
           {Translations.favourite_campaigns}
         </div>
-        {
-          !isLoading && (
-            <div className="campaigns">
-              {
-                this.props.campaignData.favouriteCampaign ? (
-                this.props.campaignData.favouriteCampaign.map(campaign => {
-                  return (
-                    ((campaign.postType &&
-                      campaign.postType.toLowerCase() ===
-                        enumerations.contentTypes.companyCampaign) ||
-                      campaign.postType.toLowerCase() ===
-                        enumerations.contentTypes.creatorCampaign) && (
-                      <FavouriteCampaignItem
-                        campaign={campaign}
-                        key={campaign.id}
-                      />
-                    )
-                  );
-                })): (<NoDataFoundRightSidebar />)
-              }
-            </div>
-          )
-        }
-        {
-          isLoading && (
-            <RightSidebarLoading />
-          )
-        }
-       
+        {!isLoading && (
+          <div className="campaigns">
+            {this.props.campaignData.favouriteCampaign &&
+            this.props.campaignData.favouriteCampaign.length > 0 ? (
+              this.props.campaignData.favouriteCampaign.map(campaign => {
+                return (
+                  ((campaign.postType &&
+                    campaign.postType.toLowerCase() ===
+                      enumerations.contentTypes.companyCampaign) ||
+                    campaign.postType.toLowerCase() ===
+                      enumerations.contentTypes.creatorCampaign) && (
+                    <FavouriteCampaignItem
+                      campaign={campaign}
+                      key={campaign.id}
+                    />
+                  )
+                );
+              })
+            ) : (
+              <NoDataFoundRightSidebar />
+            )}
+          </div>
+        )}
+        {isLoading && <RightSidebarLoading />}
       </div>
     );
   }
-  
+
   componentDidMount = () => {
     this.props.getFavouriteCampaigns("", "");
   };
@@ -65,7 +59,6 @@ class FavouriteCampaigns extends Component {
       }
     }
   }
-
 }
 
 const mapStateToProps = state => ({

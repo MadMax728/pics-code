@@ -11,13 +11,11 @@ class ActionConfirmation extends Component {
 
   handleModalHides = () => {
     this.props.handleModalHide();
-    this.props.handleModalInfoHide();
     this.props.handleConfirmation(true);
   };
 
   handleModalAction = () => {
     this.props.handleModalHide();
-    this.props.handleModalInfoHide();
     this.props.handleConfirmation(false);
   };
 
@@ -26,7 +24,7 @@ class ActionConfirmation extends Component {
       <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">Are you want to sure ?</div>
         <div className="col-sm-12">
-        <div className="row">
+          <div className="row">
             <div className="col-md-6">
               <button
                 className="filled_button col-sm-6"
@@ -36,16 +34,14 @@ class ActionConfirmation extends Component {
               </button>
             </div>
             <div className="col-md-6">
-            <button
-              className="filled_button col-sm-6"
-              onClick={this.handleModalAction}
-            >
-              Yes
-            </button>
+              <button
+                className="filled_button col-sm-6"
+                onClick={this.handleModalAction}
+              >
+                Yes
+              </button>
             </div>
-        </div>
-          
-         
+          </div>
         </div>
       </div>
     );
