@@ -2080,6 +2080,9 @@ header .navbar-default .navbar-nav li a span {
 .information-wrapper .feed-comment .comment-wrapper .view-more-comments {
   padding: 0px 17px;
 }
-
+.feed_wrapper .feed_content .feed_description.news-feed-data .secondary_title{
+  text-overflow: unset;
+  overflow: visible;
+}
 /* @import 'pages/mobile';  */
 /*# sourceMappingURL=main.css.map */

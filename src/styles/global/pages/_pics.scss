@@ -46,6 +46,8 @@
   img {
     width: 100%;
     background-color: #cbcbcb;
+    height: 100%;
+    object-fit: cover;
   }
   .name-wrapper {
     text-align: center;
@@ -57,7 +59,7 @@
     }
     .username {
       font-family: "Helvetica-Bold";
-      color: #fff;
+      // color: #fff;
     }
   }
   &:hover {
@@ -139,6 +141,7 @@
 .pic-sec-block{
   min-height: 278px;
   position: relative;
+  margin-bottom: 10px;
   .feed_image{
     min-height: 310px;
     .embed-responsive{
@@ -152,6 +155,9 @@
     left: 0;
     width: 100%;
     opacity: 0;
+    .username {
+      color: #fff;
+    }
     .show_more_options{
       text-align: right;
     }
