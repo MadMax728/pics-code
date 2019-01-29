@@ -79,8 +79,8 @@ class CustomModal extends Component {
     let isFor = false;
     // check if user is compnay
     if (userInfo && userInfo.userType) {
-      // isFor = userInfo.userType.toLowerCase() === userType.company;
-      isFor = false;
+      isFor = userInfo.userType.toLowerCase() === userType.company;
+      // isFor = false; // For Creator Campaign
     }
 
     return (
