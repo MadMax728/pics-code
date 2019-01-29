@@ -75,14 +75,14 @@ class UploadModal extends Component {
     form.add_location.address = "";
     form.add_category = "";
     form.add_description = "";
-    form.is_advertise_label= false;
-    form.image =  null;
+    form.is_advertise_label = false;
+    form.image = null;
     form.file = null;
     form.video = null;
     form.filetype = true;
     form.error = false;
-    this.setState({form});
-  }
+    this.setState({ form });
+  };
   componentWillUnmount = () => {
     this.setState(initialState);
   };
@@ -140,7 +140,7 @@ class UploadModal extends Component {
               campaignId: this.props.data.campaignId,
               campaignName: this.props.data.campaignName,
               title: this.props.data.campaignName,
-              typeId: this.props.data.campaignId,
+              typeId: this.props.mediaData.media.id,
               typeContent: typeOfContent,
               description: form.add_description,
               category: form.add_category
@@ -231,11 +231,13 @@ UploadModal.propTypes = {
   data: PropTypes.any,
   addParticipants: PropTypes.func,
   campaignData: PropTypes.any,
-  getCampaignDetails: PropTypes.func
+  getCampaignDetails: PropTypes.func,
+  mediaData: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  campaignData: state.campaignData
+  campaignData: state.campaignData,
+  mediaData: state.mediaData
 });
 
 const mapDispatchToProps = {

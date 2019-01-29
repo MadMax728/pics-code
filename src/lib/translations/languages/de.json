@@ -259,7 +259,8 @@
     "block": "Block",
     "unblock": "Unblock",
     "report_user": "Report User",
-    "unreport_user": "Unreport User"
+    "unreport_user": "Unreport User",
+    "remove_participant": "Remove Participant"
   },
 
   "back_office_menu": {

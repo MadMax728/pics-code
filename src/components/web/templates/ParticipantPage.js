@@ -7,8 +7,6 @@ import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class ParticipantPage extends Component {
-
-
   render() {
     const { participantList, isLoadingparticipants } = this.props;
     return (
@@ -16,12 +14,16 @@ class ParticipantPage extends Component {
         {participantList &&
           !isLoadingparticipants &&
           this.renderParticipantList()}
-        { isLoadingparticipants && <CampaignLoading /> }
-        { !isLoadingparticipants && ( !participantList || (participantList && !participantList.length) ) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        {isLoadingparticipants && <CampaignLoading />}
+        {!isLoadingparticipants &&
+          (!participantList ||
+            (participantList && !participantList.length)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
       </div>
     );
   }
-  
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     const data = `?id=${this.props.params.id}`;
@@ -42,11 +44,11 @@ class ParticipantPage extends Component {
     }
   };
 
-  handleRefresh = () => {
-  };
+  handleRefresh = () => {};
 
   renderParticipantList = () => {
     const { participantList } = this.props;
+    const isParticipant = true;
     return participantList.map(participant => {
       return (
         <div key={participant.id}>
@@ -55,13 +57,16 @@ class ParticipantPage extends Component {
               enumerations.contentTypes.mediaPost) ||
             (participant.postType.toLowerCase() ===
               enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard item={participant} isDescription />
+              <MediaCard
+                item={participant}
+                isParticipant={isParticipant}
+                isDescription
+              />
             ))}
         </div>
       );
     });
   };
-
 }
 
 ParticipantPage.propTypes = {
@@ -70,7 +75,8 @@ ParticipantPage.propTypes = {
   isLoadingparticipants: PropTypes.bool,
   participantList: PropTypes.any,
   searchData: PropTypes.any,
-  params: PropTypes.any
+  params: PropTypes.any,
+  isParticipant: PropTypes.any
   // errorparticipants: PropTypes.any
 };
 
