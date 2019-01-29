@@ -84,7 +84,7 @@ CMSContent.propTypes = {
   title: PropTypes.string.isRequired,
   searchData: PropTypes.any.isRequired,
   getSearch: PropTypes.func.isRequired,
-  history: PropTypes.any.isRequired,
+  history: PropTypes.any,
 };
 
 const mapDispatchToProps = {

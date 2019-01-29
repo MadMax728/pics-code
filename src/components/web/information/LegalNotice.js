@@ -1,11 +1,13 @@
 import React from "react";
+import CMSContent from "../common/CMSContent";
+import PropTypes from "prop-types";
 
-const LegalNotice = () => {
-  return (
-    <div>
-      <div className="normal_title padding-15">Legal Notice</div>
-    </div>
-  );
+const LegalNotice = ({ history }) => {
+  return <CMSContent title={'Legal Notice'} history={history}/>
+}
+
+LegalNotice.propTypes = {
+  history: PropTypes.any,
 };
 
 export default LegalNotice;

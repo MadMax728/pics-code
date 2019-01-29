@@ -1,11 +1,14 @@
 import React from "react";
+import CMSContent from "../common/CMSContent";
+import PropTypes from "prop-types";
 
-const AboutUsInformation = () => {
-  return (
-    <div>
-      <div className="normal_title padding-15">AboutUsInformation</div>
-    </div>
-  );
+const AboutUsInformation = ({ history }) => {
+  return <CMSContent title={'About us Information'} history={history}/>
+}
+
+AboutUsInformation.propTypes = {
+  history: PropTypes.any,
 };
 
 export default AboutUsInformation;
+

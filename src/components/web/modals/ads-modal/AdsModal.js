@@ -209,9 +209,9 @@ class AdsModal extends Component {
     }
     if (nextProps.data && nextProps.data.id) {
       return { modalTitle: Translations.modal_header.edit_ad, isEdit: true };
-    } else {
+    } 
       return null;
-    }
+    
   }
 
   handleFillState = data => {

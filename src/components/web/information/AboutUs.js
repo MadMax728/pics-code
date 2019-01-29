@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React from "react";
+import CMSContent from "../common/CMSContent";
+import PropTypes from "prop-types";
 
-class AboutUs extends Component {
-  render() {
-    return (
-      <div>
-        <div className="normal_title padding-15">AboutUsInformation</div>
-      </div>
-    );
-  }
+const AboutUs = ({ history }) => {
+  return <CMSContent title={'About us'} history={history}/>
 }
+
+AboutUs.propTypes = {
+  history: PropTypes.any,
+};
 
 export default AboutUs;

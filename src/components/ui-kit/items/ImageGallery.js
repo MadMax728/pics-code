@@ -8,7 +8,7 @@ class ImageGallery extends PureComponent {
     const { lightboxIsOpen, image, caption, closeLightbox } = this.props;
     return (
         <Lightbox
-            images={[{ src : image, caption: caption }]}
+            images={[{ src : image, caption }]}
             isOpen={lightboxIsOpen}
             onClose={closeLightbox}
         />

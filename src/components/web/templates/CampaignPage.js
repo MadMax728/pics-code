@@ -82,8 +82,6 @@ class CampaignPage extends Component {
 
     
     return campaignList.map(campaign => {
-      console.log(campaign.mediaUrl && (campaign.postType.toLowerCase() ===
-      enumerations.contentTypes.creatorCampaign) && campaignList);
       return (
         <div key={campaign.id}>
           {campaign.mediaUrl &&

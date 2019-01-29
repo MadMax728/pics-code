@@ -31,7 +31,7 @@ const UserCardBody = ({
     userId: user.username,
     handleActionClick: handleSubscribed,
     btnText,
-    isLoading: isLoading
+    isLoading
   };
   return (
     <div
