@@ -19,7 +19,8 @@ class UserCard extends Component {
 
     this.state = {
       item: this.props.item,
-      index: this.props.index
+      index: this.props.index,
+      subscribeResponse: null
     };
   }
 

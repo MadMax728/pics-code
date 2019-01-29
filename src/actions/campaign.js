@@ -177,7 +177,7 @@ const addParticipantsSucceeded = data => ({
 });
 
 const addParticipantsFailed = error => ({
-  type: types.ADD_COMMENT_FAILED,
+  type: types.ADD_PARTICIPANTS_FAILED,
   payload: error,
   error: true
 });
@@ -203,6 +203,42 @@ export const addParticipants = provider => {
   };
 };
 
+// Remove Participant
+const removeParticipantsStarted = () => ({
+  type: types.REMOVE_PARTICIPANT_STARTED
+});
+
+const removeParticipantsSucceeded = data => ({
+  type: types.REMOVE_PARTICIPANT_SUCCEEDED,
+  payload: data
+});
+
+const removeParticipantsFailed = error => ({
+  type: types.REMOVE_PARTICIPANT_FAILED,
+  payload: error,
+  error: true
+});
+
+export const removeParticipants = provider => {
+  return dispatch => {
+    dispatch(removeParticipantsStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+
+    return campaignService.removeParticipants(provider, header).then(
+      res => {
+        dispatch(removeParticipantsSucceeded(res.data.success));
+      },
+      error => {
+        dispatch(removeParticipantsFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
 
 // Update Campaign
 

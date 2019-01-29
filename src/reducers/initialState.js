@@ -44,7 +44,8 @@ const initialState = {
     favouriteCampaign: null,
     isLoading: false,
     error: false,
-    isAddParticipant: null
+    isAddParticipant: null,
+    isRemoveParticipant: null
   },
   adData: {
     ads: null,
