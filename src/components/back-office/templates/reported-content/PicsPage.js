@@ -143,7 +143,7 @@ class PicsPage extends Component {
     const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
     picList = search(picList,"userName", form.search || searchData.searchKeyword);
     return picList.map((pic, index) => {
-      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
+      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : <div></div>;
       return (
         <div key={pic.id}>
           {clearfixDiv}

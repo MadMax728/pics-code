@@ -10,6 +10,8 @@ import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
 import { getSearch } from "../../actions";
 import { connect } from "react-redux";
+import * as websocket from '../../websocket';
+import { Auth } from "../../auth";
 
 class Header extends Component {
   constructor(props) {
@@ -18,8 +20,21 @@ class Header extends Component {
       navExpanded: false,
       userNavExpanded: false,
       offsetHeight: 0,
-      searchText: ""
+      searchText: "",
+      messageCount: 0
     };
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo && userInfo.id) {
+      websocket.messagecount(userInfo.id, (count) => {
+        if (count && count.messageCount) {
+          this.setState({ messageCount: count.messageCount });
+        }
+      });
+    }
   }
 
   componentDidMount = () => {
@@ -88,6 +103,7 @@ class Header extends Component {
   };
 
   render() {
+    const { messageCount } = this.state;
     return (
       <header className={this.state.offsetHeight > 250 ? "fixed" : ""}>
         <nav className="navbar navbar-default">
@@ -145,7 +161,8 @@ class Header extends Component {
                     className={`menu_messages`}
                     closeMenu={this.toggleNav}
                   >
-                    <span className="badge badge-danger">100</span>
+                    {messageCount && messageCount < 100(<span className="badge badge-danger">{messageCount}</span>)}
+                    {messageCount && messageCount > 99(<span className="badge badge-danger">99+</span>)}
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
 

@@ -22,7 +22,6 @@ class PicturesRoot extends React.Component {
   }
 
   componentDidMount = () => {
-    window.scrollTo(0, 0);
     this.props.getDashboard("pics");
   };
 
@@ -31,7 +30,7 @@ class PicturesRoot extends React.Component {
   renderuserList = () => {
     const { picsList, history } = this.props;
     return picsList.map((pic, index) => {
-      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
+      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : <div></div>;
       return (
         <div key={pic.id}>
           {clearfixDiv}
