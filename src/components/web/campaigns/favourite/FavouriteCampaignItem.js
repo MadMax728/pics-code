@@ -7,6 +7,7 @@ const FavouriteCampaignItem = ({ campaign }) => {
   const profile_route = campaign.isOwner
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
+  console.log(campaign);
 
   return (
     <div className="campaign_wrapper">
@@ -27,7 +28,7 @@ const FavouriteCampaignItem = ({ campaign }) => {
           <div className="secondary_title">{campaign.userName}</div>
         </Link>
         <div className="grey_title">
-          {campaign.category[0] ? campaign.category[0].categoryName : ""}
+          {campaign.category && campaign.category[0].categoryName}
         </div>
       </div>
     </div>
