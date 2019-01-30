@@ -205,7 +205,7 @@ class CreateCMSManagementPage extends Component {
 
   handleContentChange = text => {
     const { form } = this.state;
-    form.description = text;
+    form.description = text === "<p></p>" ? "" : text;;
     this.setState({ form });
   };
 
