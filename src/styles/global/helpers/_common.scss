@@ -1041,6 +1041,11 @@ section.loader-wrapr {
 .autocomplete-dropdown-container {
   &.show {
     border: 1px solid #979797;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 999;
+    width:100%;
     div {
       padding: 10px 20px;
       border-bottom: 1px solid #979797;
