@@ -55,7 +55,6 @@ import {
 import { PageNotFound } from "../../web/page-not-found";
 
 class HomeRoute extends Component {
-
   render() {
     return (
       <div>
@@ -318,7 +317,7 @@ class HomeRoute extends Component {
       </div>
     );
   }
-  
+
   handleLanding = () => {
     return (
       <NewsPage
@@ -344,9 +343,7 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaign = () => {
-    return (
-      <SettingCampaignPage />
-    );
+    return <SettingCampaignPage />;
   };
 
   handleAds = () => {
@@ -385,14 +382,24 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaignStatistics = match => {
-    return <SettingCampaignStatisticsPage match={match.match} handleModalShow={this.props.handleModalShow} />;
+    return (
+      <SettingCampaignStatisticsPage
+        match={match.match}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
   };
 
-  handleAdsStatisticsPage = (match) => {
-    return <AdsStatisticsPage match={match.match} handleModalShow={this.props.handleModalShow} />;    
-  }
+  handleAdsStatisticsPage = match => {
+    return (
+      <AdsStatisticsPage
+        match={match.match}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
+  };
 
-  handleParticipant = (match) => {
+  handleParticipant = match => {
     return (
       <ParticipantPage
         handleModalShow={this.props.handleModalShow}
@@ -414,7 +421,12 @@ class HomeRoute extends Component {
   };
 
   handlePictures = match => {
-    return <PicturesPage history={match.history} />;
+    return (
+      <PicturesPage
+        history={match.history}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
   };
 
   handleCampaign = match => {
@@ -426,8 +438,6 @@ class HomeRoute extends Component {
       />
     );
   };
-
- 
 }
 
 HomeRoute.propTypes = {

@@ -28,6 +28,7 @@ class ParticipantsPage extends Component {
       <div className={"middle-section padding-rl-10"}>
         {participantsList &&
           !isLoadingparticipants &&
+          participantsList.length > 0 &&
           this.renderParticipantsList()}
         {isLoadingparticipants && <CampaignLoading />}
         {!isLoadingparticipants &&
@@ -43,11 +44,24 @@ class ParticipantsPage extends Component {
     window.scrollTo(0, 0);
     this.handleRefresh();
     this.handleSearch();
+    if (this.state.participantsList) {
+      this.setState({
+        participantsList: this.state.participantsList.filter(
+          e => e.isActive !== false
+        )
+      });
+    }
   };
 
   handleSearch = () => {
     this.props.getDashboard("participants", "").then(() => {
-      const { participantsList } = this.props;
+      let { participantsList } = this.props;
+      participantsList = participantsList.filter(
+        participant =>
+          participant.isActive &&
+          participant.isActive === true &&
+          participant.mediaUrl !== ""
+      );
       this.setState({ participantsList });
     });
   };
@@ -60,26 +74,50 @@ class ParticipantsPage extends Component {
     }
   };
 
+  handleParticipantFilterList = data => {
+    const { participantsList } = this.state;
+    this.setState({
+      participantsList: participantsList.filter(
+        e => e.id !== data.id && e.isActive === true
+      )
+    });
+  };
+
   renderParticipantsList = () => {
     let { participantsList } = this.state;
     const { searchData } = this.props;
+    const isParticipant = true;
     participantsList = search(
       participantsList,
       "userName",
       searchData.searchKeyword
     );
-    return participantsList.map(participant => {
-      return (
-        <div key={participant.id}>
-          {participant.postType &&
-            participant.mediaUrl &&
-            participant.postType.toLowerCase() ===
-              enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard item={participant} isDescription />
-            )}
-        </div>
-      );
-    });
+
+    return (
+      <div>
+        {participantsList && participantsList.length > 0 ? (
+          participantsList.map(participant => {
+            return (
+              <div key={participant.id}>
+                {participant.postType &&
+                  participant.mediaUrl &&
+                  participant.postType.toLowerCase() ===
+                    enumerations.contentTypes.companyParticipantCampaign && (
+                    <MediaCard
+                      item={participant}
+                      isParticipant={isParticipant}
+                      handleFilterList={this.handleParticipantFilterList}
+                      isDescription
+                    />
+                  )}
+              </div>
+            );
+          })
+        ) : (
+          <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+        )}
+      </div>
+    );
   };
 }
 

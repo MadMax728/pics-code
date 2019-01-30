@@ -122,7 +122,8 @@ class InformationPage extends Component {
     if (this.props.campaignDetails.userType === "company") {
       this.props.handleModalShow(modalType.upload, {
         campaignId: e.target.id,
-        campaignName: this.props.campaignDetails.campaignName
+        campaignName: this.props.campaignDetails.campaignName,
+        campaignCreatedById: this.props.campaignDetails.createdBy
       });
     } else {
       this.props.history.push(

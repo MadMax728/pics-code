@@ -25,7 +25,9 @@ const FavouriteCampaignItem = ({ campaign }) => {
         <Link to={profile_route}>
           <div className="secondary_title">{campaign.userName}</div>
         </Link>
-        <div className="grey_title">{campaign.category && campaign.category[0].categoryName}</div>
+        <div className="grey_title">
+          {campaign.category && campaign.category[0].categoryName}
+        </div>
       </div>
     </div>
   );

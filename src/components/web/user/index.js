@@ -6,3 +6,4 @@ export { ContentView } from "./content-view";
 export { Share } from "./share";
 export { Error } from "./error";
 export { Subscribe } from "./subscribe";
+export { Userpics } from "./userpics";
