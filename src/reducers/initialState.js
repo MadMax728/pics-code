@@ -45,7 +45,7 @@ const initialState = {
     isLoading: false,
     error: false,
     isAddParticipant: null,
-    isRemoveParticipant: null
+    isRemoveParticipantData: null
   },
   adData: {
     ads: null,

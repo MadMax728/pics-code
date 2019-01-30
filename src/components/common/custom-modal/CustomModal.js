@@ -5,7 +5,8 @@ import {
   UploadModal,
   AdsModal,
   CampaignModal,
-  ConfirmationModal
+  ConfirmationModal,
+  PicsModal
 } from "../../web/modals";
 import PropTypes from "prop-types";
 import { modalType, userType } from "../../../lib/constants/enumerations";
@@ -117,6 +118,17 @@ class CustomModal extends Component {
     );
   };
 
+  handleModalUserpics = () => {
+    return (
+      <PicsModal
+        modalShow={this.props.modalShow}
+        handleModalHide={this.props.handleModalHide}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
+        data={this.props.data}
+      />
+    );
+  };
+
   handleModalRender = () => {
     return (
       <div>
@@ -129,6 +141,8 @@ class CustomModal extends Component {
         {this.props.modalType === modalType.editAds && this.handleModalEditAd()}
         {this.props.modalType === modalType.confirmation &&
           this.handleModalActionConfirmation()}
+        {this.props.modalType === modalType.userpics &&
+          this.handleModalUserpics()}
       </div>
     );
   };
