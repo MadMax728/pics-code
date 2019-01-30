@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { Translations } from "../../../lib/translations";
+import { DescriptionItem } from "../../misc/items";
 
 class CMSPreview extends Component {
   constructor(props) {
@@ -51,7 +52,7 @@ class CMSPreview extends Component {
               <div className="col-xs-6 preview-div-wrapper">
                 <label htmlFor="Display page" className="title-text">{Translations.cms.description}</label> :
                 <label htmlFor="description" className="content-text">
-                  {form.description}
+                  <DescriptionItem desc={form.description} />
                 </label>
               </div>
             </div>
