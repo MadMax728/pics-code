@@ -265,7 +265,7 @@ class CampaignCard extends Component {
     this.setState({ item });
 
     const campaignLike = {
-      typeOfContent: "campaign",
+      typeOfContent: enumerations.likeContentTypes.campaign,
       typeId: item.id
     };
     this.props.like(campaignLike);

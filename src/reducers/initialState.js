@@ -252,6 +252,9 @@ const initialState = {
     lastEvaluatedKeys: undefined,
     isLoading: false,
     error: false
+  },
+  lastEvaluatedKey: {
+    keys: null
   }
 };
 

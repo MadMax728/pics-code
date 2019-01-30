@@ -31,6 +31,7 @@ import hashUserData from "./hashUserReducer";
 import subscribeData from "./subscribeReducer";
 import hashTagData from "./hashTagReducer";
 import messagesData from "./messageReducer";
+import lastEvaluatedKey from "./lastEvaluateKeyReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -64,7 +65,8 @@ const rootReducer = combineReducers({
   hashUserData,
   subscribeData,
   hashTagData,
-  messagesData
+  messagesData,
+  lastEvaluatedKey
 });
 
 export default rootReducer;

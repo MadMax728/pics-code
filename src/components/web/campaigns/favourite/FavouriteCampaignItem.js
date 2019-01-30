@@ -7,8 +7,6 @@ const FavouriteCampaignItem = ({ campaign }) => {
   const profile_route = campaign.isOwner
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
-  console.log(campaign);
-  
   return (
     <div className="campaign_wrapper">
       <div className="col-xs-3 col-md-2">

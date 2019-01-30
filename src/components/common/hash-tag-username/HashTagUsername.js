@@ -36,10 +36,6 @@ class HashTagUsername extends Component {
   };
 
   usernameShow = () => {
-    console.log("ahi abe cje");
-    console.log(this.username);
-    
-    
     ReactTooltip.show(this.username);
   };
 

@@ -111,3 +111,11 @@ export const budgetCalculation = {
   maxClicksLimit: 1200,
   rangeSlot: 3.58
 };
+
+export const likeContentTypes = {
+  campaign: "Campaign",
+  advertisement: "Advertisement",
+  participant: "Participant",
+  video: "Video",
+  image: "Image"
+};
