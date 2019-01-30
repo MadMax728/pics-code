@@ -34,7 +34,7 @@ const CampaignCardHeader = ({
           customClass={`img-circle img-responsive padding-right-15`}
         />
       </Link>
-      <div className="no-padding titles_wrapper">
+      <div className="no-padding titles_wrapper col-sm-8 col-xs-7">
         <Link to={profile_route} className="">
           <div className="normal_title">{campaign.userName}</div>
         </Link>

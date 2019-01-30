@@ -28,13 +28,19 @@ class PicturesRoot extends React.Component {
   handleRefresh = () => {};
 
   renderuserList = () => {
-    const { picsList, history } = this.props;
+    const { picsList, history, handleModalShow } = this.props;
     return picsList.map((pic, index) => {
-      const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : <div></div>;
+      const clearfixDiv =
+        index % 2 === 0 ? <div className="clearfix" /> : <div />;
       return (
         <div key={pic.id}>
           {clearfixDiv}
-          <PictureCard item={pic} index={index} history={history} />
+          <PictureCard
+            item={pic}
+            index={index}
+            history={history}
+            handleModalShow={handleModalShow}
+          />
         </div>
       );
     });
@@ -45,7 +51,8 @@ PicturesRoot.propTypes = {
   getDashboard: PropTypes.func.isRequired,
   isLoadingpics: PropTypes.bool,
   picsList: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  handleModalShow: PropTypes.any
   // errorpics: PropTypes.any
 };
 

@@ -12,11 +12,13 @@ import {
   like,
   setSavedPost,
   addReport,
-  removeParticipants
+  removeParticipants,
+  getDashboard
 } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import { modalType } from "../../lib/constants";
+import { Auth } from "../../auth";
 
 class MediaCard extends Component {
   constructor(props, context) {
@@ -133,6 +135,11 @@ class MediaCard extends Component {
     let reportTips;
     const { isBackOffice, isParticipant } = this.props;
     const { item } = this.state;
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
 
     if (isBackOffice) {
       reportTips = [
@@ -151,8 +158,23 @@ class MediaCard extends Component {
           handleEvent: this.handleDoNotContent
         }
       ];
-    } else if (isParticipant) {
+    } else if (
+      isParticipant &&
+      (item.createdBy === userInfo.id || item.campaignCreatedBy === userInfo.id)
+    ) {
       reportTips = [
+        {
+          name: item.isReported
+            ? Translations.tool_tips.remo
+            : Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: item.isSavedPost
+            ? Translations.tool_tips.unsave
+            : Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        },
         {
           name: Translations.tool_tips.remove_participant,
           handleEvent: this.handleRemoveParticipant
@@ -253,12 +275,11 @@ class MediaCard extends Component {
 
   handleRemoveParticipant = e => {
     this.props.removeParticipants(e.target.id).then(() => {
-      console.log(this.props.campaignData.isRemoveParticipant);
-      // this.setState({
-      //   isComments: !this.state.isComments,
-      //   comments: this.props.comments,
-      //   totalCommentsCount: this.props.comments.length
-      // });
+      if (this.props.campaignData.isRemoveParticipantData) {
+        this.props.handleFilterList(
+          this.props.campaignData.isRemoveParticipantData
+        );
+      }
     });
   };
 }
@@ -277,7 +298,8 @@ const mapDispatchToProps = {
   getComments,
   setSavedPost,
   addReport,
-  removeParticipants
+  removeParticipants,
+  getDashboard
 };
 
 MediaCard.propTypes = {
@@ -299,7 +321,9 @@ MediaCard.propTypes = {
   isSavedPage: PropTypes.bool,
   isParticipant: PropTypes.any,
   removeParticipants: PropTypes.func,
-  campaignData: PropTypes.any
+  campaignData: PropTypes.any,
+  getDashboard: PropTypes.func,
+  handleFilterList: PropTypes.func
 };
 
 MediaCard.defaultProps = {

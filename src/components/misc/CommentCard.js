@@ -75,7 +75,8 @@ class CommentCard extends Component {
     const data = {
       comment,
       typeOfContent,
-      typeId: itemId
+      typeId: itemId,
+      // mentionedUserId: []
     };
     this.props.addComment(data).then(() => {
       if (this.props.comment) {

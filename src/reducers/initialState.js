@@ -45,7 +45,7 @@ const initialState = {
     isLoading: false,
     error: false,
     isAddParticipant: null,
-    isRemoveParticipant: null
+    isRemoveParticipantData: null
   },
   adData: {
     ads: null,
@@ -252,6 +252,9 @@ const initialState = {
     lastEvaluatedKeys: undefined,
     isLoading: false,
     error: false
+  },
+  lastEvaluatedKey: {
+    keys: null
   }
 };
 

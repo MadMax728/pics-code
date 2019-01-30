@@ -134,7 +134,7 @@ const campaignReducer = (state = initialState.campaignData, action) => {
     case types.REMOVE_PARTICIPANT_SUCCEEDED:
       return {
         ...state,
-        isRemoveParticipant: action.payload,
+        isRemoveParticipantData: action.payload,
         isLoading: false
       };
     case types.REMOVE_PARTICIPANT_FAILED:

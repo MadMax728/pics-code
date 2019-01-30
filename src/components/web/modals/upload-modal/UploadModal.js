@@ -143,7 +143,8 @@ class UploadModal extends Component {
               typeId: this.props.mediaData.media.id,
               typeContent: typeOfContent,
               description: form.add_description,
-              category: form.add_category
+              category: form.add_category,
+              campaignCreatedBy: this.props.data.campaignCreatedById
             };
             this.props.addParticipants(participantFormData).then(() => {
               if (

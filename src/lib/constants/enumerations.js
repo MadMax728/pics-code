@@ -37,7 +37,8 @@ export const modalType = {
   share: "share",
   confirmation: "confirmation",
   subscribe: "subscribe",
-  cmsPreview: "cmsPreview"
+  cmsPreview: "cmsPreview",
+  userpics: "userpics"
 };
 
 export const mediaTypes = {
@@ -110,4 +111,12 @@ export const budgetCalculation = {
   CPC: 1.0,
   maxClicksLimit: 1200,
   rangeSlot: 3.58
+};
+
+export const likeContentTypes = {
+  campaign: "Campaign",
+  advertisement: "Advertisement",
+  participant: "Participant",
+  video: "Video",
+  image: "Image"
 };

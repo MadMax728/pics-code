@@ -23,6 +23,12 @@ const getDashboardFailed = (error, isFor) => ({
   isFor
 });
 
+const setLastEvaluatedKeys = (data) => (
+  {
+    type: types.GET_LAST_EVALUATE_KEYS_SUCCEEDED,
+    payload: data
+});
+
 export const getDashboard = (prop, provider) => {
   return dispatch => {
     dispatch(getDashboardStarted(prop));
@@ -34,6 +40,8 @@ export const getDashboard = (prop, provider) => {
       res => {
         const campaigns = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
         dispatch(getDashboardSucceeded(campaigns, prop));
+        const lastEvaluatedKeys = res.data.lastEvaluatedKeys? res.data.lastEvaluatedKeys : null;
+        dispatch(setLastEvaluatedKeys(lastEvaluatedKeys));
       },
       error => {
         dispatch(getDashboardFailed(error.response, prop));
