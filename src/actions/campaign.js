@@ -227,7 +227,7 @@ export const removeParticipants = provider => {
 
     return campaignService.removeParticipants(provider, header).then(
       res => {
-        dispatch(removeParticipantsSucceeded(res.data.success));
+        dispatch(removeParticipantsSucceeded(res.data.data));
       },
       error => {
         dispatch(removeParticipantsFailed(error.response));
