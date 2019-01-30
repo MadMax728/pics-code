@@ -6,6 +6,8 @@ import * as moment from 'moment';
 // import Modal from './Modal/modal'
 import { Button, Modal, Tabs, Tab } from 'react-bootstrap';
 import JSONTree from 'react-json-tree'
+import * as Config from './config';
+import img from './images/spinner.gif';
 
 class Historylog extends Component {
 
@@ -34,7 +36,7 @@ class Historylog extends Component {
     }
 
     componentDidMount() {
-        axios.post(`http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/auth/login`, { email: 'vishal.raut11@gmail.com', password: 'chetan098' })
+        axios.post(Config.postUrl,{ email: 'vishal.raut11@gmail.com', password: 'chetan098' })
             .then(res => {
                 let token = res.data.data.token;
                 this.getErrorData(token);
@@ -43,10 +45,9 @@ class Historylog extends Component {
             });
     }
 
-
     getErrorData = (token) => {
         var jsonArr = [];
-        axios.get(`http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/historylog`, { headers: { "Authorization": token } })
+        axios.get(Config.getUrl + `historylog`, { headers: { "Authorization": token } })
             .then(res => {
                 const historylog = res.data.data;
                 console.log('historylog', historylog);
@@ -101,7 +102,7 @@ class Historylog extends Component {
         console.log(rowData);
         return (
             <div className="App">
-                {this.state.loading ? <div><img src={"spinner.gif"} /></div> :
+                {this.state.loading ? <div><img src={img} /></div> :
                     <MaterialTable
                         columns={[
                             { title: 'UserId', field: 'userid' },

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Router from './Router';
+import Header from './components/header/header'
 
 const Navigation = (props) => <nav>
   <ul className="log-data-tabs">
@@ -13,7 +14,7 @@ class App extends Component {
   render() {
     return (
       <div className='page-container log-data'>
-        <h1 className="log-data-header">History and Error Data</h1>
+        <Header />
         <Navigation />
         <Router />
       </div>      
