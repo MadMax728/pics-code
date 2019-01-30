@@ -19,21 +19,26 @@ class UserCard extends Component {
 
     this.state = {
       item: this.props.item,
-      index: this.props.index
+      index: this.props.index,
+      subscribeResponse: null
     };
   }
 
   render() {
     const { item, index } = this.state;
     const { isReport, isBackOffice } = this.props;
+    const requestLoading = this.props.usersData.isLoading;
     return (
       <UserCardBody
         user={item}
         index={index}
         handleSubscribed={this.handleSubscribed}
         isReport={isReport}
-        isBackOffice={isBackOffice} /* eslint-disable */
-        renderReportTips={() => this.renderReportTips(item.id)}
+        isBackOffice={isBackOffice}
+        /* eslint-disable */ renderReportTips={() =>
+          this.renderReportTips(item.id)
+        }
+        isLoading={requestLoading}
       />
     );
   }
@@ -48,7 +53,9 @@ class UserCard extends Component {
       if (this.props.userDataByUsername.user.data) {
         // success
         const selectedUserList = this.props.userDataByUsername.user.data;
-        if (!selectedUserList.isSubscribe) {
+        if (selectedUserList.isPending) {
+          // To Do - On Pending request click
+        } else if (selectedUserList.isSubscribe === false) {
           const requestData = { followers: selectedUserList.id };
           this.props.sendRequest(requestData).then(() => {
             if (
@@ -56,9 +63,9 @@ class UserCard extends Component {
               this.props.usersData.error.status === 400
             ) {
               // Error
-            } else if (this.props.usersData.isRequestSend) {
+            } else if (this.props.usersData.isRequestSendData) {
               // Success
-              this.props.getDashboard("users");
+              this.props.getDashboard("users", "");
             }
           });
         } else {
@@ -69,9 +76,9 @@ class UserCard extends Component {
               this.props.usersData.error.status === 400
             ) {
               // Error
-            } else if (this.props.usersData.isUnsubscribed) {
+            } else if (this.props.usersData.isUnsubscribedData) {
               // Success
-              this.props.getDashboard("users");
+              this.props.getDashboard("users", "");
             }
           });
         }
@@ -179,7 +186,8 @@ UserCard.propTypes = {
   userDataByUsername: PropTypes.any,
   isBackOffice: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
-  handleRemove: PropTypes.func
+  handleRemove: PropTypes.func,
+  isLoading: PropTypes.any
 };
 
 export default connect(

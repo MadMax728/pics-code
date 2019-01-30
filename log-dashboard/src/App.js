@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav'
-import '@trendmicro/react-sidenav/dist/react-sidenav.css';
-
 import Router from './Router';
+import Header from './components/header/header'
 
 const Navigation = (props) => <nav>
-  <ul>
+  <ul className="log-data-tabs">
     <li><NavLink to='/'>History Log</NavLink></li>
     <li><NavLink to='/Errorlog'>Error Log</NavLink></li>
   </ul>
@@ -15,8 +13,8 @@ const Navigation = (props) => <nav>
 class App extends Component {
   render() {
     return (
-      <div className='page-container'>
-        <h1>History and Error Data</h1>
+      <div className='page-container log-data'>
+        <Header />
         <Navigation />
         <Router />
       </div>      

@@ -34,7 +34,6 @@ class UploadModal extends Component {
     this.state = initialState;
   }
 
-
   render() {
     const { form } = this.state;
     const { modalShow } = this.props;
@@ -47,6 +46,7 @@ class UploadModal extends Component {
           <UploadHeader
             handleModalHide={this.handleModalHide}
             handleContinue={this.handleContinue}
+            handleResetForm={this.handleResetForm}
           />
         }
         footer={false}
@@ -67,6 +67,22 @@ class UploadModal extends Component {
     );
   }
 
+  handleResetForm = () => {
+    const { form } = this.state;
+    form.add_location = {};
+    form.add_location.latitude = "";
+    form.add_location.longitude = "";
+    form.add_location.address = "";
+    form.add_category = "";
+    form.add_description = "";
+    form.is_advertise_label = false;
+    form.image = null;
+    form.file = null;
+    form.video = null;
+    form.filetype = true;
+    form.error = false;
+    this.setState({ form });
+  };
   componentWillUnmount = () => {
     this.setState(initialState);
   };
@@ -114,7 +130,6 @@ class UploadModal extends Component {
           this.setState(initialState);
           /* Add Participants */
           if (this.props.data) {
-            console.log("if-participants");
             let typeOfContent = "";
             if (form.filetype) {
               typeOfContent = "Image";
@@ -125,7 +140,7 @@ class UploadModal extends Component {
               campaignId: this.props.data.campaignId,
               campaignName: this.props.data.campaignName,
               title: this.props.data.campaignName,
-              typeId: this.props.data.campaignId,
+              typeId: this.props.mediaData.media.id,
               typeContent: typeOfContent,
               description: form.add_description,
               category: form.add_category
@@ -206,7 +221,6 @@ class UploadModal extends Component {
       form.add_description
     );
   };
-
 }
 
 UploadModal.propTypes = {
@@ -217,11 +231,13 @@ UploadModal.propTypes = {
   data: PropTypes.any,
   addParticipants: PropTypes.func,
   campaignData: PropTypes.any,
-  getCampaignDetails: PropTypes.func
+  getCampaignDetails: PropTypes.func,
+  mediaData: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  campaignData: state.campaignData
+  campaignData: state.campaignData,
+  mediaData: state.mediaData
 });
 
 const mapDispatchToProps = {

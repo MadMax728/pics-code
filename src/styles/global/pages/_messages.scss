@@ -139,6 +139,7 @@
                 border-radius: 50%;
                 float: left;
                 margin-right: 10px;
+                object-fit: cover;
               }
             }
             .username {
@@ -238,6 +239,7 @@
             margin-right: 10px;
             img {
               width: 45px;
+              height: 45px;
               border-radius: 50%;
             }
           }

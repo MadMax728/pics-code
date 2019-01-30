@@ -32,7 +32,7 @@ import { Messages } from "../../web/user";
 import {
   CampaignsInformation,
   Advertising,
-  OurMission,
+  OurVision,
   Imprint,
   CampaignPolicy,
   AdvertisingPolicy,
@@ -171,7 +171,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
-            component={AdsStatisticsPage}
+            component={this.handleAdsStatisticsPage}
           />
 
           <Route
@@ -192,7 +192,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.INFORMATION_OUR_MISSION_ROUTE}
-            component={OurMission}
+            component={OurVision}
           />
 
           <Route
@@ -345,11 +345,7 @@ class HomeRoute extends Component {
 
   handleSettingCampaign = () => {
     return (
-      <SettingCampaignPage
-        isBackOffice={false}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-        handleModalShow={this.props.handleModalShow}
-      />
+      <SettingCampaignPage />
     );
   };
 
@@ -389,8 +385,12 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaignStatistics = match => {
-    return <SettingCampaignStatisticsPage match={match.match} />;
+    return <SettingCampaignStatisticsPage match={match.match} handleModalShow={this.props.handleModalShow} />;
   };
+
+  handleAdsStatisticsPage = (match) => {
+    return <AdsStatisticsPage match={match.match} handleModalShow={this.props.handleModalShow} />;    
+  }
 
   handleParticipant = (match) => {
     return (

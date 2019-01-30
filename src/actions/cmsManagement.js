@@ -3,6 +3,7 @@ import * as cmsManagementService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 
+// For Back-Office Get CMS Management
 const getCMSManagementStarted = () => ({
   type: types.GET_CMS_MANAGEMENT_STARTED
 });
@@ -41,8 +42,7 @@ export const getCMSManagement = (provider) => {
   };
 };
 
-
-// Get CMS Detail
+// Get CMS Detail Back-Office
 
 const getCMSDetailStarted = () => ({
   type: types.GET_CMS_DETAIL_STARTED
@@ -82,6 +82,30 @@ export const getCMSDetail = (provider) => {
   };
 };
 
+
+// Get for CMS Web
+export const getWebCMSManagement = (provider) => {
+  return dispatch => {
+    dispatch(getCMSDetailStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return cmsManagementService.getWebCMSManagement(provider,header).then(
+      res => {
+          dispatch(getCMSDetailSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(getCMSDetailFailed(error.response))
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
 
 // Update CMS Detail
 

@@ -6,9 +6,9 @@
         height: auto;
         & > div.col-sm-6.no-padding:nth-child(2) {
           img.widthHeightAuto {
-            height: 378px;
-            max-height: calc(100% - 65px);
-            width: 100%;
+            // height: 378px;
+            // max-height: calc(100% - 65px);
+            // width: 100%;
           }
         }
       }
@@ -50,10 +50,11 @@
       .profile_image {
         float: left;
         &.wid45{
-          width: 55px;
+          width: 45px;
         }
         img {
           width: 45px;
+          height: 45px;
           margin-right: 10px;
         }
       }     

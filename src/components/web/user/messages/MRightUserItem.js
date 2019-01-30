@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { UserImageItem } from "../../../ui-kit";
 import * as images from "../../../../lib/constants/images";
 
 const MRightUserItem = (
@@ -10,10 +11,10 @@ const MRightUserItem = (
       return (
         <div className="user-wrapper">
             {
-                item && item.image && (
+                item && item.profileUrl && (
                     <div className="user-img">
-                        <img src={item.image} alt={"user"} />
-                     </div> 
+                      <UserImageItem item={item.profileUrl} customClass={`img-circle img-responsive float_left padding-right-15`} />
+                    </div>
                 )
             }
             <div className="username-wrapper">

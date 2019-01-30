@@ -2,6 +2,67 @@
   text-align: center;
 }
 
+.login-logo1 {
+  text-align: center;
+  padding: 13px;
+  width: 100%;
+}
+
+.login-process .login-header-menu {
+  padding: 0;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  top: 20px;
+}
+
+.login-process .login-header-menu li a {
+  color: #fff;
+  font-size: 18px;
+  margin-left: 30px;
+  font-family: "Helvetica-Bold";
+  text-decoration: none;
+}
+
+ul, menu, dir {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+
+.login-process .custom-container {
+  width: 700px;
+  margin: auto;
+  position: relative;
+}
+
+.login-process {
+  background: #fff;
+  float: left;
+  width: 100%;
+  padding-bottom: 10px;
+
+}
+
+.login-process header {
+  background-color: #1575bb;
+  z-index: 1000 !important;
+  position: relative;
+}
+
+header {
+  float: left;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+    background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+}
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 40vmin;
@@ -16,6 +77,10 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+a {
+  color: #337ab7;
+  text-decoration: none;
 }
 
 .App-link {
@@ -43,10 +108,89 @@
 
 .modalBody{
   word-wrap: break-word;
-  /* overflow-x: scroll; */
 }
-/* 
-.modal {
-  z-index: 1000;
-} */
 
+.bodyScrollbar {
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
+
+.log-data{
+  
+}
+.log-data .log-data-header{
+  font-size: 24px;
+  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid #000;
+}
+.log-data-tabs{
+  padding: 0;
+  display: inline-block;
+  margin: 20px 0 40px;
+}
+.log-data-tabs li{
+  display: inline-block;
+  float: left;
+  margin: 10px 30px 10px 0;
+}
+.log-data-tabs li a{
+  color: black;
+  font-size: 16px;
+  text-decoration:none;
+  padding: 10px 0;
+}
+.log-data-tabs li a.active{
+  border-bottom: 3px solid #000;
+}
+.MuiTypography-h6-255,.MuiTypography-h6-54{
+  font-size: 20px !important;
+}
+.App table thead >tr >th,.App table tbody >tr >td,.App table tfoot >tr >td,.App table tfoot >tr >td >span.MuiTypography-caption-47{
+  font-size: 14px;
+  color: black;
+}
+.App table thead >tr >th{
+  font-weight: 600;
+}
+.App table tbody >tr >td .messageInfo{
+  margin-bottom: 0;
+}
+.App table tbody >tr >td .messageInfo .btn-margin{
+  background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+  color: #ffffff;
+  border:1px solid #1f58a6;
+  padding: 6px 20px;
+}
+.MuiTypography-caption-47,.MuiTypography-caption-248,.MuiInputBase-input-301{
+  font-size: 14px !important;
+  color: black !important;
+}
+
+
+
+
+.MuiTooltip-tooltip-315,.MuiTooltip-touch-316 {
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px !important;
+  max-width: 300px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  line-height: 1.4em;
+  border-radius: 4px;
+  background-color: #616161;
+}
+
+.data-log-modal .modal-dialog .modal-body{
+  height: 400px;
+  overflow: auto;
+}
+.data-log-modal .modal-footer .btn.btn-default{
+  background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+  color: #ffffff;
+  border:1px solid #1f58a6;
+  border-radius: 0;
+}
+.data-log-modal .modal-content{
+  border-radius: 0;
+}

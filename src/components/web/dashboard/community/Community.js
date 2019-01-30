@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Auth } from "../../../../auth";
 import {
   getDashboard,
   sendRequest,
@@ -19,8 +18,19 @@ class Community extends Component {
   }
 
   render() {
-    const { isLoading, isLoadingusers, usersList, usersData } = this.props;
+    const {
+      isLoading,
+      isLoadingusers,
+      usersList,
+      usersData,
+      userDataByUsername
+    } = this.props;
+    let selectedUsername = "";
     const userListIsLoading = usersData.isLoading;
+    if (userDataByUsername && userDataByUsername.user) {
+      const selectedUserdata = userDataByUsername.user.data;
+      selectedUsername = selectedUserdata.username;
+    }
     return (
       <div>
         <div className="normal_title padding-15">
@@ -29,7 +39,7 @@ class Community extends Component {
 
         {!isLoadingusers && (
           <div className="community">
-            {usersList && !isLoadingusers ? (
+            {usersList && usersList.length > 0 && !isLoadingusers ? (
               usersList.map(user => {
                 const profile_route = user.isOwner
                   ? `/news-feed`
@@ -58,32 +68,38 @@ class Community extends Component {
                   isLoading: userListIsLoading
                 };
                 return (
-                  <div className="community_wrapper" key={user.id}>
-                    <div className="community-user-image">
-                      <Link to={profile_route}>
-                        <img
-                          src={user.profileUrl}
-                          alt="campaign"
-                          className="img-circle img-responsive"
-                        />
-                      </Link>
-                    </div>
-                    <div className="community-user-name">
-                      <Link to={profile_route}>
-                        <div className="normal_title">{user.username}</div>
-                        <div className="secondary_title">{user.name}</div>
-                      </Link>
-                    </div>
-                    <div className="community-subscribe">
-                      <button
-                        className={actionButton.className}
-                        id={actionButton.userId}
-                        onClick={actionButton.handleActionClick}
-                        disabled={actionButton.isLoading}
-                      >
-                        {actionButton.btnText}
-                      </button>
-                    </div>
+                  <div key={user.id}>
+                    {user.username !== selectedUsername ? (
+                      <div className="community_wrapper">
+                        <div className="community-user-image">
+                          <Link to={profile_route}>
+                            <img
+                              src={user.profileUrl}
+                              alt="campaign"
+                              className="img-circle img-responsive"
+                            />
+                          </Link>
+                        </div>
+                        <div className="community-user-name">
+                          <Link to={profile_route}>
+                            <div className="normal_title">{user.username}</div>
+                            <div className="secondary_title">{user.name}</div>
+                          </Link>
+                        </div>
+                        <div className="community-subscribe">
+                          <button
+                            className={actionButton.className}
+                            id={actionButton.userId}
+                            onClick={actionButton.handleActionClick}
+                            disabled={actionButton.isLoading}
+                          >
+                            {actionButton.btnText}
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 );
               })
@@ -111,22 +127,6 @@ class Community extends Component {
     });
   };
 
-  // Top Bar - User Info
-  getUserInfo = () => {
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    const data = { username: userInfo.username };
-    const { getUser, userDataByUsername } = this.props;
-    getUser(data).then(() => {
-      if (userDataByUsername.user.data) {
-        // Success
-      }
-    });
-  };
-
   handleSubscribed = e => {
     const errors = {};
     const { sendRequest, getUnsubscribe, usersList } = this.props;
@@ -145,7 +145,6 @@ class Community extends Component {
           this.setState({ error: errors });
         } else if (this.props.usersData.isRequestSendData) {
           this.getUserData();
-          this.getUserInfo();
         }
       });
     } else {
@@ -160,7 +159,6 @@ class Community extends Component {
           this.setState({ error: errors });
         } else if (this.props.usersData.isUnsubscribedData) {
           this.getUserData();
-          this.getUserInfo();
         }
       });
     }

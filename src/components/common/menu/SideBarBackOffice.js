@@ -1,5 +1,4 @@
 import React from "react";
-import * as _ from "lodash";
 import { LeftSidebarNav } from "../../ui-kit";
 import * as routes from "../../../lib/constants/routes";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -71,7 +70,7 @@ const SideBarBackOffice = () => {
     }
   }
   
-  return (
+  return (    
     <div>
       <LeftSidebarNav
         links={Links}

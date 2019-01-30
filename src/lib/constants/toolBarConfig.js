@@ -5,7 +5,8 @@ export const toolBarConfig = {
     "fontSize",
     "textAlign",
     "colorPicker",
-    "history"
+    "history",
+    "image"
   ],
   inline: {
     inDropdown: false,
@@ -84,5 +85,22 @@ export const toolBarConfig = {
     component: undefined,
     dropdownClassName: undefined,
     options: ["undo", "redo"]
+  },
+  image: {
+    // icon: image,
+    className: undefined,
+    component: undefined,
+    popupClassName: undefined,
+    urlEnabled: true,
+    uploadEnabled: true,
+    alignmentEnabled: true,
+    uploadCallback: undefined,
+    previewImage: true,
+    inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+    alt: { present: true, mandatory: false },
+    defaultSize: {
+      height: 'auto',
+      width: 'auto',
+    },
   }
 };

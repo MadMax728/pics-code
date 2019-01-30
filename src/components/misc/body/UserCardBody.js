@@ -11,8 +11,28 @@ const UserCardBody = ({
   handleSubscribed,
   isReport,
   isBackOffice,
-  renderReportTips
+  renderReportTips,
+  isLoading
 }) => {
+  let classNameText = "filled_button";
+  let btnText = Translations.profile_community_right_sidebar.Subscribed;
+  if (user.isPending) {
+    btnText = Translations.profile_community_right_sidebar.Pending;
+    classNameText = "filled_button";
+  } else if (user.isSubscribe) {
+    btnText = Translations.profile_community_right_sidebar.Subscribed;
+    classNameText = "filled_button";
+  } else {
+    btnText = Translations.profile_community_right_sidebar.Subscribe;
+    classNameText = "blue_button";
+  }
+  const actionButton = {
+    className: classNameText,
+    userId: user.username,
+    handleActionClick: handleSubscribed,
+    btnText,
+    isLoading
+  };
   return (
     <div
       className={
@@ -27,7 +47,7 @@ const UserCardBody = ({
         </LazyLoad>
         <div className="name-wrapper">
           <div className="username">{user.username}</div>
-          <div className="name">{user.name}</div>
+          {/* <div className="name">{user.name}</div> */}
           {isBackOffice && (
             <div className="show_more_options user">
               <ThreeDots
@@ -46,22 +66,14 @@ const UserCardBody = ({
               />
             </div>
           )}
-          {!isBackOffice && user.isSubscribe && (
+          {!isBackOffice && (
             <button
-              className="filled_button"
-              id={user.username}
-              onClick={handleSubscribed}
+              className={actionButton.className}
+              id={actionButton.userId}
+              onClick={actionButton.handleActionClick}
+              disabled={actionButton.isLoading}
             >
-              {Translations.profile_community_right_sidebar.Subscribed}
-            </button>
-          )}
-          {!isBackOffice && !user.isSubscribe && (
-            <button
-              className="blue_button"
-              id={user.username}
-              onClick={handleSubscribed}
-            >
-              {Translations.profile_community_right_sidebar.Subscribe}
+              {actionButton.btnText}
             </button>
           )}
         </div>
@@ -77,7 +89,8 @@ UserCardBody.propTypes = {
   index: PropTypes.number.isRequired,
   isReport: PropTypes.bool,
   isBackOffice: PropTypes.bool,
-  renderReportTips: PropTypes.any
+  renderReportTips: PropTypes.any,
+  isLoading: PropTypes.any
 };
 
 export default UserCardBody;

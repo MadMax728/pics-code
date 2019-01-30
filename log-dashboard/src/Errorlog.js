@@ -3,7 +3,10 @@ import './App.css';
 import MaterialTable from 'material-table';
 import axios from 'axios';
 import * as moment from 'moment';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Tabs, Tab } from 'react-bootstrap';
+import JSONTree from 'react-json-tree'
+import * as Config from './config';
+import img from './images/spinner.gif';
 
 class Errorlog extends Component {
 
@@ -25,7 +28,6 @@ class Errorlog extends Component {
     }
 
     handleShow(rowData) {
-        //rowData.createdAtString = moment()
         this.setState({
             show: true,
             modalData: rowData
@@ -33,7 +35,7 @@ class Errorlog extends Component {
     }
 
     componentDidMount() {
-        axios.post(`http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/auth/login`, { email: 'vishal.raut11@gmail.com', password: 'chetan098' })
+        axios.post(Config.postUrl,{ email: 'vishal.raut11@gmail.com', password: 'chetan098' })
             .then(res => {
                 let token = res.data.data.token;
                 this.getErrorData(token);
@@ -44,21 +46,9 @@ class Errorlog extends Component {
 
     getErrorData = (token) => {
         var jsonArr = [];
-        axios.get(`http://picstagraph-backend-dev2.us-east-1.elasticbeanstalk.com/api/errorlog`, { headers: { "Authorization": token } })
+        axios.get(Config.getUrl + `errorlog`, { headers: { "Authorization": token }})
             .then(res => {
                 const errorlog = res.data.data;
-                // console.log('errorlog', errorlog);
-                // Object.keys(errorlog).map(function (key, index) {
-                //     // console.log(errorlog[key].info.functionName);
-                //     jsonArr.push({
-                //         createdAt: errorlog[key].createdAt,
-                //         functionName: errorlog[key].functionName,
-                //         message: errorlog[key].message,
-                //         error: errorlog[key].error,
-                //         id: errorlog[key].id,
-                //     });
-                //});
-                // this.setState({  });
                 this.setState({ data: errorlog, loading: false });
             })
     };
@@ -66,22 +56,26 @@ class Errorlog extends Component {
     renderModal = () => {
         this.state.modalData.createdAt = moment(this.state.modalData.createdAt).format('MM/DD/YYYY');
         let data = JSON.stringify(this.state.modalData);
-        
-        let firstReplaceString = data.replace(/[{}]/g,'');
-        console.log( firstReplaceString);
-        let secondReplaceString =  firstReplaceString.replace(/[,]/g,'\n');
-        console.log(secondReplaceString);
+        let firstReplaceString = data.replace(/[{}]/g, '');
+        let secondReplaceString = firstReplaceString.replace(/[,]/g, '\n');
 
         return (
-            <Modal show={this.state.show} onHide={this.handleClose} backdrop="static">
-                <Modal.Header closeButton>
-                    <Modal.Title>Errorlog Data</Modal.Title>
+            <Modal show={this.state.show} onHide={this.handleClose} backdrop="static" className="data-log-modal">
+                <Modal.Header closeButton >
+                    <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                        <Tab className="bodyScrollbar" eventKey={1} title="Text Viewer">
+                            <div className="modalBody">
+                                {data}
+                            </div>
+                        </Tab>
+                        <Tab className="bodyScrollbar" eventKey={2} title="JSON Viewer">
+                            <JSONTree
+                                data={this.state.modalData}
+                            />
+                        </Tab>
+                    </Tabs>
                 </Modal.Header>
-                <Modal.Body>
-                    <div className="modalBody">
-                        <pre>{secondReplaceString}</pre>
-                    </div>
-                </Modal.Body>
+
                 <Modal.Footer>
                     <Button onClick={this.handleClose}>Close</Button>
                 </Modal.Footer>
@@ -89,12 +83,10 @@ class Errorlog extends Component {
         )
     }
 
-
-    render() {
-        let rowData = this.state.data;
+    render() { 
         return (
             <div className="App">
-                {this.state.loading ? <div><img src={"spinner.gif"} /></div> :
+                {this.state.loading ? <div><img src={img} /></div> :
                     <MaterialTable
                         columns={[
                             { title: 'Function Name', field: 'functionName' },
@@ -109,8 +101,6 @@ class Errorlog extends Component {
                         detailPanel={rowData => {
                             return (
                                 <div className="messageInfo">
-                                    {/* <h4>UserId : {rowData.userid}</h4>
-                                    <h4>Function Name :{rowData.functionName}</h4> */}
                                     <b>Message : {rowData.message}</b>
                                     <button className="btn-margin" type="button" onClick={() => this.handleShow(rowData)}>Details</button>
                                 </div>

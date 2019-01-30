@@ -354,6 +354,8 @@
   .normal_title {
     margin-bottom: 3px;
     background-color: $white_color;
+    padding-right: 5px;
+    word-break: break-all;
   }
   .campaigns {
     margin-bottom: 8px;
@@ -424,7 +426,7 @@
       .community-subscribe {
         align-self: center;
         button {
-          height: 35px;
+          min-height: 35px;
           padding: 6px;
           width: 100px;
           @media (max-width: 1199px) {
@@ -504,6 +506,11 @@
     }
     .secondary_title {
       font-weight: bold;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
       &.gray_box {
         min-height: 15px;
         background-color: #d3d3d3;
@@ -521,7 +528,7 @@
       display: inline-block;
       float: left;
       &.wid45 {
-        width: 55px;
+        width: 45px;
       }
 
       img {
@@ -530,6 +537,7 @@
         height: 45px;
         min-width: 45px;
         min-height: 45px;
+        object-fit: cover;
         &.profile_pic_gray {
           height: 35px;
           width: 35px;
@@ -567,6 +575,7 @@
     float: left;
     width: 100%;
     video {
+
       // background: url("../images/play_video_back.png") no-repeat 50% #000;
       background-size: contain;
       background-position: center;
@@ -574,6 +583,8 @@
     .feed_image {
       img {
         width: 100%;
+        height: 100%;
+        object-fit: cover;
         &.big {
           min-height: 35vh;
           padding: 0 7px;
@@ -705,9 +716,13 @@
       }
       .comment-input{
         width: 90%;
-        input{
-          width: 100%;
-        }        
+        .form-group{
+          margin-bottom: 10px;
+          input{
+            width: 100%;
+            height: 50px;
+          }     
+        }  
       }
       .emoji_wrapper {
         padding-right: 0px;
@@ -1013,4 +1028,34 @@
     -webkit-transform: scale(1);
     transform: scale(1);
      border: 1px solid transparent;
+}
+
+.cookieConsent {
+  z-index: 9999 !important;
+  p{
+    a{
+      display: inline-block;
+      padding-left:5px;
+    }
+  }
+  button{
+    background-image: radial-gradient(circle at 0 100%, #1f58a6, #029bd7) !important;
+    color: #ffffff !important;
+    min-width:100px;
+    padding:8px 15px !important;
+    line-height: 17px;
+  }
+}
+.feed_wrapper .feed_content .feed_description.news-feed-data .secondary_title{
+  text-overflow: unset;
+  overflow: visible;
+  display: inline-block;
+}
+
+.content_13hv8io{
+  .footer_60scne{
+    .footerCount_lkhc9u{
+      display: none;
+    }
+  }
 }

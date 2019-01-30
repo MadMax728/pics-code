@@ -1,12 +1,10 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
-import { UserImageItem } from "../../../../ui-kit";
+import { RightSidebarModal } from "../../../../ui-kit";
 import { SelectDailyBudget } from "../../../../../components/common";
-import { DescriptionItem } from "../../../../misc/items";
 
 class StepTwo extends Component {
   constructor(props) {
@@ -17,7 +15,7 @@ class StepTwo extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { maxClicks } = this.props;
     if (prevState.maxClicks !== maxClicks) {
-      this.setState({ maxClicks: maxClicks });
+      this.setState({ maxClicks });
     }
   }
 
@@ -40,8 +38,7 @@ class StepTwo extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const { maxClicks } = this.state;
-    const todayDate = new Date();
-    const profileImage = userInfo ? userInfo.profileUrl : images.image;
+    
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -86,11 +83,11 @@ class StepTwo extends Component {
               {Translations.create_ads.define_daily_budget}
             </label>
             <SelectDailyBudget
-              value={form.budget ? form.budget : ""}
+              value={form.budget || ""}
               className=""
               handleSelect={handleSelect}
             />
-            {form.budget.length === 0 && form.error && (
+            {form.budget && form.budget.length === 0 && form.error && (
               <span className="error-msg highlight">
                 {Translations.error.create_modal.budget}
               </span>
@@ -121,66 +118,10 @@ class StepTwo extends Component {
             <li>{Translations.create_ads.total_budget_can_not_be_exceeded}</li>
           </ul>
         </div>
-        <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
-          <div className="feed_wrapper">
-            <div className="feed_header">
-              <UserImageItem
-                item={profileImage}
-                customClass={`img-circle img-responsive`}
-              />
-              <div className="no-padding titles_wrapper">
-                <div className="normal_title">{form.title}</div>
-                <div className="secondary_title">{userInfo.username} </div>
-                <div className="grey_title">
-                  {moment(todayDate).format("DD.MM.YYYY")} in Category
-                </div>
-              </div>
-              <div className="like_wrapper">
-                <img
-                  src={images.blue_heart}
-                  alt={"blue_heart"}
-                  className="pull-right"
-                />
-              </div>
-            </div>
-            <div className="feed_content">
-              <div className="feed_image">
-                <div className="embed-responsive embed-responsive-16by9">
-                  <div className="img-responsive embed-responsive-item">
-                    {/* <img src={images.image} alt="image2" /> */}
-                    {form.fileType && form.image && (
-                      <img src={form.image} alt={"information"} />
-                    )}
-                    {!form.fileType && form.video && (
-                      <video controls>
-                        <track kind="captions" />
-                        <source src={form.video} type={form.file.type} />
-                      </video>
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="feed_description padding-15">
-                <span className="secondary_title">
-                  <DescriptionItem desc={form.description} />
-                </span>
-              </div>
-            </div>
-            <div className="feed_footer padding-15">
-              <div className="messages">
-                <span className="count">0</span>
-                <img src={images.feed_msg} alt="feed_msg" />
-              </div>
-              <div className="likes">
-                <span className="count">0</span>
-                <img src={images.feed_like} alt="feed_like" />
-              </div>
-              <div className="show_more_options">
-                <div>• • •</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <RightSidebarModal
+          userInfo={userInfo}
+          form={form}
+        />
       </div>
     );
   }

@@ -166,6 +166,11 @@ hr {
 }
 .secondary_title {
   font-family: "Helvetica";
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
   color: $charcoal_color;
   &.gray_box_big {
     height: 8px;
@@ -1672,4 +1677,32 @@ section.loader-wrapr {
 }
 .form-control {
   border-radius: 0;
+}
+.social-media-link:hover{ 
+    background-image: radial-gradient(circle at 0 100%, #029bd7, #1f58a6);
+    color: #fff;
+}
+.social-media-link svg{ 
+  transform: scale(2.5);
+  top: 9px !important;
+}
+.social-media-link{
+  overflow: hidden;
+  padding: 0px 15px !important;
+  height: 50px;
+}
+.social-media-link .social-link-title{
+  font-size: 16px;
+  vertical-align: middle;
+}
+.no-data-css{
+  transform: scale(0.6);
+}
+.feed_wrapper {
+  .feed_header{
+     .like_wrapper img {
+        width: 24px !important;
+        margin-top: 11px !important;
+    }
+  }
 }
