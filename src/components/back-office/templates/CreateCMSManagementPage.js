@@ -10,6 +10,7 @@ import { TextEditor } from "../../ui-kit/text-editor";
 import { modalType } from "../../../lib/constants/enumerations";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
+import InlineLoading from "../../ui-kit/loading-indicator/InlineLoading";
 
 class CreateCMSManagementPage extends Component {
   constructor(props, context) {
@@ -30,7 +31,9 @@ class CreateCMSManagementPage extends Component {
 
   render() {
     const { form, isEdit } = this.state;
+    const { cmsManagementData } = this.props;
     console.log(this.props);
+    console.log(form.description);
     
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -38,6 +41,9 @@ class CreateCMSManagementPage extends Component {
           <div className="page-heading col-xs-12 mar-btm-5">
             {isEdit ? Translations.cms.edit : Translations.cms.create}
           </div>
+          {
+            cmsManagementData && cmsManagementData.isLoading && <InlineLoading />
+          }
           <form className="cms-form col-xs-12" onSubmit={this.handleSubmit}>
             <div className="form-row col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
@@ -97,7 +103,7 @@ class CreateCMSManagementPage extends Component {
             <div className="form-row col-xs-12 res480">
               <TextEditor
                 handleContentChange={this.handleContentChange}
-                contentText={form.description}
+                contentText={form.description || ""}
               />
             </div>
             <div className="form-row col-xs-12 marBtm0">
@@ -199,7 +205,7 @@ class CreateCMSManagementPage extends Component {
 
   handleContentChange = text => {
     const { form } = this.state;
-    form.description = text === "<p></p>" ? "" : text;
+    form.description = text === "<p></p>" ? "" : text;;
     this.setState({ form });
   };
 
