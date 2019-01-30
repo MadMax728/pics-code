@@ -163,12 +163,17 @@ class Upload extends Component {
               </label>
             </div>
           ) : form.filetype ? (
-            <img src={form.image} alt="upload" className="widthHeightAuto" />
+            <div className="upload-img-wrapper">
+                <img src={form.image} alt="upload" className="widthHeightAuto" />
+            </div>
+            
           ) : (
-            <video controls>
-              <track kind="captions" />
-              <source src={form.video} type={form.file.type} />
-            </video>
+            <div className="upload-img-wrapper">
+              <video controls>
+                <track kind="captions" />
+                <source src={form.video} type={form.file.type} />
+              </video>
+            </div>
           )}
           {isInProgress && (
             <div className="image-wrapper">

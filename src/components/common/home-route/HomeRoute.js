@@ -32,7 +32,7 @@ import { Messages } from "../../web/user";
 import {
   CampaignsInformation,
   Advertising,
-  OurMission,
+  OurVision,
   Imprint,
   CampaignPolicy,
   AdvertisingPolicy,
@@ -192,7 +192,7 @@ class HomeRoute extends Component {
           <Route
             exact
             path={routes.INFORMATION_OUR_MISSION_ROUTE}
-            component={OurMission}
+            component={OurVision}
           />
 
           <Route

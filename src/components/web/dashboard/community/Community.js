@@ -28,7 +28,7 @@ class Community extends Component {
     let selectedUsername = "";
     const userListIsLoading = usersData.isLoading;
     if (userDataByUsername && userDataByUsername.user) {
-      const selectedUserdata = userDataByUsername.user["data"];
+      const selectedUserdata = userDataByUsername.user.data;
       selectedUsername = selectedUserdata.username;
     }
     return (

@@ -30,6 +30,8 @@ class CreateCMSManagementPage extends Component {
 
   render() {
     const { form, isEdit } = this.state;
+    console.log(this.props);
+    
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="create-cms-page-wrapr">

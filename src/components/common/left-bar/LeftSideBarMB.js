@@ -5,9 +5,8 @@ import {
   AboutUsInformation,
   Advertising,
   Cookies,
-  Feedback,
   NetzDg,
-  LawEnforcementAgency,
+  LawEnforcementAgencyMB,
   LegalNotice,
   Support,
   GeneralTermsAndConditions,
@@ -17,16 +16,15 @@ import {
   AdvertisingPolicy,
   CampaignPolicy,
   CancellationPolicy,
-  DataProtectionAndPrivacyPolicy
-} from "../../web/information";
-import { Verification, DeleteAccount } from "../../web/user";
-
-import {
-  DataDownload,
-  PaymentMethod,
+  DataProtectionAndPrivacyPolicy,
+  Verification,
   ReportProblem,
-  ReportedContent
-} from "../../web/dashboard";
+  DeleteAccountMB,
+  FeedbackMB,
+  ReportedContentMB,
+  DataDownload,
+  PaymentMethod
+} from "../../web/information";
 
 const LeftSideBarMB = () => {
   return (
@@ -76,7 +74,7 @@ const LeftSideBarMB = () => {
       <Route
         exact
         path={routes.REPORTED_CONTENT_ROUTE}
-        component={ReportedContent}
+        component={ReportedContentMB}
       />
       <Route
         exact
@@ -92,12 +90,12 @@ const LeftSideBarMB = () => {
       <Route
         exact
         path={routes.DELETE_ACCOUNT_ROUTE}
-        component={DeleteAccount}
+        component={DeleteAccountMB}
       />
       <Route
         exact
         path={routes.LAW_ENFORCEMENT_AGENCY_ROUTE}
-        component={LawEnforcementAgency}
+        component={LawEnforcementAgencyMB}
       />
       <Route
         exact
@@ -105,7 +103,7 @@ const LeftSideBarMB = () => {
         component={ReportProblem}
       />
       <Route exact path={routes.COOKIES_ROUTE} component={Cookies} />
-      <Route exact path={routes.FEEDBACK_ROUTE} component={Feedback} />
+      <Route exact path={routes.FEEDBACK_ROUTE} component={FeedbackMB} />
     </div>
   );
 };
