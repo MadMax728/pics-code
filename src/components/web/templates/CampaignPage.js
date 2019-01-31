@@ -80,11 +80,13 @@ class CampaignPage extends Component {
     const { searchData } = this.props;
     campaignList = search(campaignList, "userName", searchData.searchKeyword);
 
-    
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
           {campaign.mediaUrl &&
+            campaign.typeContent &&
+            campaign.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             (campaign.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign ||
               campaign.postType.toLowerCase() ===
