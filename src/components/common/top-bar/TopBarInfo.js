@@ -57,6 +57,7 @@ class TopBarInfo extends Component {
     return (
       <TopBarOtherInfo
         handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
         match={match.match.params}
         history={match.history}
       />

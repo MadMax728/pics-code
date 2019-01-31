@@ -37,7 +37,7 @@ class SettingCampaignPage extends Component {
   };
 
   renderCampaignList = () => {
-    const { campaignList } = this.props;
+    const { campaignList, handleModalInfoShow } = this.props;
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
@@ -52,6 +52,7 @@ class SettingCampaignPage extends Component {
                 isStatus
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
         </div>
@@ -64,7 +65,8 @@ SettingCampaignPage.propTypes = {
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 

@@ -47,6 +47,7 @@ class SavedPage extends Component {
 
   renderSavedList = () => {
     const { savedList } = this.state;
+    const { handleModalInfoShow } = this.props;
     return savedList.map(saved => {
       return (
         <div key={saved.id}>
@@ -75,6 +76,7 @@ class SavedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
           {saved.mediaUrl &&
@@ -91,6 +93,7 @@ class SavedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
           {saved.mediaUrl &&
@@ -124,7 +127,8 @@ class SavedPage extends Component {
 SavedPage.propTypes = {
   getSaved: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  savedList: PropTypes.any
+  savedList: PropTypes.any,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 

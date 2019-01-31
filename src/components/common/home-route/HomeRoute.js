@@ -351,11 +351,11 @@ class HomeRoute extends Component {
   };
 
   handleNewsFeed = match => {
-    return <NewsFeedPage match={match.match} />;
+    return <NewsFeedPage match={match.match} handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
   handleSaved = match => {
-    return <SavedPage match={match.match} />;
+        return <SavedPage match={match.match} handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
   handleAbout = match => {

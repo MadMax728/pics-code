@@ -10,7 +10,7 @@ import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
-import { modalType } from "../../lib/constants";
+import { modalType, BASE_CAMPAIGN_INFORMATION_ROUTE } from "../../lib/constants";
 import "emoji-mart/css/emoji-mart.css";
 class CampaignCard extends Component {
   constructor(props, context) {
@@ -289,6 +289,14 @@ class CampaignCard extends Component {
     });
   };
 
+  handeleShare = () => {
+    const { item } = this.state;
+    const data = {
+      url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${item.id}`
+    }
+    this.props.handleModalInfoShow(modalType.share, data);
+  };
+
   render() {
     const {
       isStatus,
@@ -326,6 +334,7 @@ class CampaignCard extends Component {
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
+          handeleShare={this.handeleShare}
         />
         {isComments && (
           <CommentCard
@@ -375,7 +384,8 @@ CampaignCard.propTypes = {
   addReport: PropTypes.func.isRequired,
   reportedContentData: PropTypes.any,
   handleRemove: PropTypes.func,
-  isSavedPage: PropTypes.bool
+  isSavedPage: PropTypes.bool,
+  handleModalInfoShow: PropTypes.func
 };
 
 export default connect(
