@@ -86,8 +86,7 @@ class CampaignCard extends Component {
         reportContent: "Campaigns",
         isBudget
       };
-    }
-    else {
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.lock,
@@ -109,8 +108,7 @@ class CampaignCard extends Component {
     const { isBudget } = this.props;
     if (isBudget) {
       item.contentStatus = data.contentStatus;
-    }
-    else {
+    } else {
       item.reportStatus = data.contentStatus;
     }
     this.setState({ item });
@@ -128,8 +126,7 @@ class CampaignCard extends Component {
         reportContent: "Campaigns",
         isBudget
       };
-    }
-    else {
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.doNotLock,
@@ -155,8 +152,7 @@ class CampaignCard extends Component {
         reportContent: "Campaigns",
         isBudget
       };
-    }
-    else {
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.unLock,
@@ -179,18 +175,20 @@ class CampaignCard extends Component {
     if (isBackOffice) {
       reportTips = [
         {
-          name: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? Translations.tool_tips.unlock
-            : Translations.tool_tips.lock) :
-            (item.reportStatus === enumerations.reportType.lock
+          name: isBudget
+            ? item.contentStatus === enumerations.reportType.lock
               ? Translations.tool_tips.unlock
-              : Translations.tool_tips.lock),
-          handleEvent: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? this.handleUnlockContent
-            : this.handleLockContent) :
-            (item.reportStatus === enumerations.reportType.lock
+              : Translations.tool_tips.lock
+            : item.reportStatus === enumerations.reportType.lock
+            ? Translations.tool_tips.unlock
+            : Translations.tool_tips.lock,
+          handleEvent: isBudget
+            ? item.contentStatus === enumerations.reportType.lock
               ? this.handleUnlockContent
-              : this.handleLockContent)
+              : this.handleLockContent
+            : item.reportStatus === enumerations.reportType.lock
+            ? this.handleUnlockContent
+            : this.handleLockContent
         },
         {
           name: Translations.tool_tips.do_not,
