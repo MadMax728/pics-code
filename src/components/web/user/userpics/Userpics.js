@@ -22,18 +22,12 @@ class Userpics extends Component {
     const picsDataList = picsData.data;
     return (
       <div className={"col-xs-12 no-padding"}>
-        <div className="col-sm-12 margin-bottom-10">User Pics</div>
+        <div className="col-sm-12 margin-bottom-10">
+          <h2 className="slider-modal-header">User Pics</h2>
+        </div>
         <div className="col-sm-12">
-          <div className="row">
-            <button
-              className="filled_button col-sm-6"
-              onClick={this.handleModalHides}
-            >
-              Cancel
-            </button>
-          </div>
           {picsDataList && (
-            <div className="userpics-carousel row">
+            <div className="user-pics-carousel row">
               <Carousel>
                 {picsDataList.map(picsDataRow => {
                   return (
