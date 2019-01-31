@@ -53,9 +53,13 @@ class NewsFeedPage extends Component {
       });
     } else {
       this.props.getNewsFeed("getNewsFeedOwner").then(() => {
-        this.setState({
-          newsFeedList: this.props.newsFeedList.filter(e => e.isActive === true)
-        });
+        if (this.props.newsFeedList) {
+          this.setState({
+            newsFeedList: this.props.newsFeedList.filter(
+              e => e.isActive === true
+            )
+          });
+        }
       });
     }
   };
@@ -83,11 +87,13 @@ class NewsFeedPage extends Component {
         });
       } else {
         this.props.getNewsFeed("getNewsFeedOwner").then(() => {
-          this.setState({
-            newsFeedList: this.props.newsFeedList.filter(
-              e => e.isActive === true
-            )
-          });
+          if (this.props.newsFeedList) {
+            this.setState({
+              newsFeedList: this.props.newsFeedList.filter(
+                e => e.isActive === true
+              )
+            });
+          }
         });
       }
     }
@@ -97,11 +103,13 @@ class NewsFeedPage extends Component {
 
   handleParticipantFilterList = data => {
     const { newsFeedList } = this.state;
-    this.setState({
-      newsFeedList: newsFeedList.filter(
-        e => e.id !== data.id && e.isActive === true
-      )
-    });
+    if (newsFeedList) {
+      this.setState({
+        newsFeedList: newsFeedList.filter(
+          e => e.id !== data.id && e.isActive === true
+        )
+      });
+    }
   };
 
   renderNewsFeedList = () => {
@@ -111,7 +119,6 @@ class NewsFeedPage extends Component {
         <div key={newsFeed.id}>
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
-            newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.mediaPost && (
               <MediaCard
