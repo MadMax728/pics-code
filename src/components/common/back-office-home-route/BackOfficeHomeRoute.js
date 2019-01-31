@@ -49,6 +49,7 @@ class BackOfficeHomeRoute extends Component {
         handleModalInfoDetailsCallbackShow={
           this.props.handleModalInfoDetailsCallbackShow
         }
+        handleModalInfoShow={this.props.handleModalInfoShow}
       />
     );
   };
@@ -78,6 +79,7 @@ class BackOfficeHomeRoute extends Component {
         handleModalInfoDetailsCallbackShow={
           this.props.handleModalInfoDetailsCallbackShow
         }
+        handleModalInfoShow={this.props.handleModalInfoShow}
       />
     );
   };

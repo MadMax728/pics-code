@@ -46,6 +46,10 @@ class Home extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
+  handleModalInfoShow = (e, data) => {
+    this.setState({ modalInfoShow: true, modalInfoType: e, data });
+  };
+
   handleModalInfoMsgShow = (e, forThat) => {
     this.setState({
       modalInfoShow: true,
@@ -121,6 +125,7 @@ class Home extends Component {
             modalInfoMsg={this.state.modalInfoMsg}
             handleEditImage={this.handleEditImage}
             handleProfile={this.handleProfile}
+            data={data}
             image={image}
           />
 

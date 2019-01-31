@@ -103,7 +103,7 @@ class CampaignsPage extends Component {
 
   renderCampaignList = () => {
     let { campaignList, form } = this.state;
-    const { searchData } = this.props;
+    const { searchData, handleModalInfoShow } = this.props;
 
     campaignList = search(campaignList, "userName", form.search || searchData.searchKeyword);
     return campaignList.map(campaign => {
@@ -122,6 +122,7 @@ class CampaignsPage extends Component {
               isBackOffice 
               handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
               handleRemove={this.handleRemove}
+              handleModalInfoShow={handleModalInfoShow}
             />
           )}
         </div>
@@ -177,7 +178,8 @@ CampaignsPage.propTypes = {
   getBackOfficeReviewStatistics: PropTypes.func,
   reviewData: PropTypes.object,
   getSearch: PropTypes.func.isRequired,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 

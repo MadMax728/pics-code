@@ -114,6 +114,7 @@ class NewsFeedPage extends Component {
 
   renderNewsFeedList = () => {
     const { newsFeedList } = this.state;
+    const { handleModalInfoShow } = this.props;
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
@@ -140,6 +141,7 @@ class NewsFeedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -153,6 +155,7 @@ class NewsFeedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -190,7 +193,8 @@ NewsFeedPage.propTypes = {
   getUser: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
-  userDataByUsername: PropTypes.any
+  userDataByUsername: PropTypes.any,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 

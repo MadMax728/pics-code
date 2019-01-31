@@ -15,7 +15,8 @@ const CampaignCardFooter = ({
   handleFavorite,
   isLoading,
   isBudget,
-  isReport
+  isReport,
+  handeleShare
 }) => {
   const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
@@ -53,7 +54,13 @@ const CampaignCardFooter = ({
         </button>
       </div>
       <div className="show_more_options">
-        <div className="share-wrapr">
+        <div
+          className="share-wrapr"
+          onClick={handeleShare}
+          onKeyDown={handeleShare}
+          role="button"
+          tabIndex="0"
+        >
           <img src={images.share} alt="share" />
         </div>
         <div className="social-media-wrapr" />
@@ -93,7 +100,8 @@ CampaignCardFooter.propTypes = {
   isBudget: PropTypes.bool.isRequired,
   isReport: PropTypes.bool.isRequired,
   renderReportTips: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  handeleShare: PropTypes.func
 };
 
 export default CampaignCardFooter;

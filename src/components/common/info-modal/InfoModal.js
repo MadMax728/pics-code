@@ -101,6 +101,7 @@ class InfoModal extends Component {
       <ShareModal
         modalInfoShow={this.props.modalInfoShow}
         handleModalInfoHide={this.props.handleModalInfoHide}
+        data={this.props.data}
       />
     );
   };
@@ -150,7 +151,8 @@ InfoModal.propTypes = {
   modalInfo: PropTypes.any,
   image: PropTypes.any,
   profile: PropTypes.any,
-  statusCallback: PropTypes.any
+  statusCallback: PropTypes.any,
+  data: PropTypes.any
 };
 
 export default InfoModal;

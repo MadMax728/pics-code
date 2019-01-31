@@ -90,7 +90,7 @@ class ReportedCampaignsPage extends Component {
   rendercampaigns = () => {
     let { campaignList } = this.state;
     const { form } = this.state;
-    const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
+    const { searchData, handleModalInfoDetailsCallbackShow, handleModalInfoShow } = this.props;
     campaignList = search(campaignList, "userName", form.search  || searchData.searchKeyword);
     
     return campaignList.map(campaign => {
@@ -110,6 +110,7 @@ class ReportedCampaignsPage extends Component {
               isBackOffice 
               handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
               handleRemove={this.handleRemove}
+              handleModalInfoShow={handleModalInfoShow}
               />
           )}
         </div>
@@ -189,7 +190,8 @@ ReportedCampaignsPage.propTypes = {
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReportedStatistics: PropTypes.func,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func.isRequired
+  getSearch: PropTypes.func.isRequired,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 
