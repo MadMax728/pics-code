@@ -104,7 +104,6 @@ class Requests extends Component {
   };
 
   handleAccepted = e => {
-    console.log(e.target.id);
     if (e.target.id) {
       const requestData = { following: e.target.id, isAccepted: true };
       this.props.acceptRequest(requestData).then(() => {
@@ -114,7 +113,6 @@ class Requests extends Component {
         ) {
           //  Error
         } else if (this.props.usersData.isAcceptRequest) {
-          console.log("aacept", this.props.usersData.isAcceptRequest);
           this.getRequestList();
           this.props.getDashboard("users");
         }

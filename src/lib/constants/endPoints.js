@@ -156,3 +156,6 @@ export const updateVerificationEndPoint = "/users/admin/verify-user";
 // Voucher Service
 export const getVouchersEndPoint = "/vouchers/?type=voucherLists";
 export const addVoucherEndPoint = "/vouchers";
+
+// Get Notification
+export const getNotificationEndPoint = "/subscribe/notification";

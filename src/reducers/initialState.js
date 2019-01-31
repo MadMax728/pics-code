@@ -108,6 +108,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  notificationData: {
+    notification: null,
+    isLoading: false,
+    error: false
+  },
   commentData: {
     comments: {},
     comment: null,

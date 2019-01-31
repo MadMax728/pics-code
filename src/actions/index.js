@@ -24,4 +24,5 @@ export * from "./search";
 export * from "./hashUser";
 export * from "./hashTag";
 export * from "./messages";
+export * from "./notification";
 
