@@ -4,14 +4,14 @@ import { ImageItem, VideoItem, ReadMore } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import InformationCard from "../InformationCard";
 
-const CampaignCardBody = ({ campaign, isDescription, isInformation, isLoading }) => {
+const CampaignCardBody = ({
+  campaign,
+  isDescription,
+  isInformation,
+  isLoading
+}) => {
   return (
     <div className="feed_content">
-      {campaign.typeContent &&
-        campaign.typeContent.toLowerCase() ===
-          enumerations.mediaTypes.video && (
-          <VideoItem id={campaign.id}  item={campaign.mediaUrl} isLoading={isLoading} />
-        )}
       {(!campaign.typeContent ||
         (campaign.typeContent &&
           campaign.typeContent.toLowerCase() ===
@@ -23,21 +23,21 @@ const CampaignCardBody = ({ campaign, isDescription, isInformation, isLoading })
           isLoading={isLoading}
         />
       )}
-      {campaign &&
-        isDescription &&
-        campaign.description && (
-          <div className="feed_description news-feed-data padding-15">
-            <span className="secondary_title">
-              <ReadMore
-                text={campaign.description}
-                min={50}
-                ideal={50}
-                max={50}
-              />
-            </span>
-          </div>
+      {campaign && isDescription && campaign.description && (
+        <div className="feed_description news-feed-data padding-15">
+          <span className="secondary_title">
+            <ReadMore
+              text={campaign.description}
+              min={50}
+              ideal={50}
+              max={50}
+            />
+          </span>
+        </div>
       )}
-      {campaign && isInformation && <InformationCard item={campaign} type={`campaign`} />}
+      {campaign && isInformation && (
+        <InformationCard item={campaign} type={`campaign`} />
+      )}
     </div>
   );
 };

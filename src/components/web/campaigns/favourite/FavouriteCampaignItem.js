@@ -8,28 +8,24 @@ const FavouriteCampaignItem = ({ campaign }) => {
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
   return (
-    <div className="campaign_wrapper">
-      <div className="col-xs-3 col-md-2">
-        <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}>
+    <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}>
+      <div className="campaign_wrapper">
+        <div className="col-xs-3 col-md-2">
           <img
             src={campaign.profileImage}
             alt="campaign"
             className="img-circle img-responsive"
           />
-        </Link>
-      </div>
-      <div className="col-xs-9 col-md-10">
-        <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}>
+        </div>
+        <div className="col-xs-9 col-md-10">
           <div className="normal_title">{campaign.title}</div>
-        </Link>
-        <Link to={profile_route}>
           <div className="secondary_title">{campaign.userName}</div>
-        </Link>
-        <div className="grey_title">
-          {campaign.category && campaign.category[0].categoryName}
+          <div className="grey_title">
+            {campaign.category && campaign.category[0].categoryName}
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

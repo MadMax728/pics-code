@@ -132,6 +132,10 @@ class NewsFeedPage extends Component {
 
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
+            newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign && (
               <CampaignCard
@@ -145,6 +149,9 @@ class NewsFeedPage extends Component {
               />
             )}
           {newsFeed.mediaUrl &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign && (

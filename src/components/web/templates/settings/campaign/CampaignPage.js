@@ -41,17 +41,20 @@ class SettingCampaignPage extends Component {
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {campaign.type === enumerations.contentTypes.campaign && (
-            <CampaignCard
-              item={campaign}
-              isDescription={false}
-              isInformation
-              isStatus
-              isBudget={false}
-              isReport={false}
-              handleModalInfoShow={handleModalInfoShow}
-            />
-          )}
+          {campaign.type === enumerations.contentTypes.campaign &&
+            campaign.typeContent &&
+            campaign.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video && (
+              <CampaignCard
+                item={campaign}
+                isDescription={false}
+                isInformation
+                isStatus
+                isBudget={false}
+                isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
+              />
+            )}
         </div>
       );
     });
