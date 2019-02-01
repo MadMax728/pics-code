@@ -77,21 +77,23 @@ class TopBar extends Component {
                     >
                       <img src={images.share} alt="share" />
                     </div>
-                    <ThreeDots
-                      id={`topbar-${items.userid}`}
-                      role="button"
-                      dataTip="tooltip"
-                      dataClass="tooltip-wrapr"
-                      /* eslint-disable */
-                      getContent={() => this.renderDotTips(items.userid)}
-                      effect="solid"
-                      delayHide={500}
-                      delayShow={500}
-                      delayUpdate={500}
-                      place={"left"}
-                      border
-                      type={"light"}
-                    />
+                    <div className="tooltip-dot">
+                      <ThreeDots
+                        id={`topbar-${items.userid}`}
+                        role="button"
+                        dataTip="tooltip"
+                        dataClass="tooltip-wrapr"
+                        /* eslint-disable */
+                        getContent={() => this.renderDotTips(items.userid)}
+                        effect="solid"
+                        delayHide={500}
+                        delayShow={500}
+                        delayUpdate={500}
+                        place={"left"}
+                        border
+                        type={"light"}
+                      />
+                    </div>
                 </div>
               )}
               <div className="clearfix" />

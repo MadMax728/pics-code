@@ -50,9 +50,16 @@
     a,
     .share-wrapr {
       float: left;
+      display: inline-block;
+      margin-left: 20px;
       &:focus {
         outline: 0;
       }
+    }
+    .tooltip-dot{
+      display: inline-block;
+      float: left;
+      margin-left: 20px;
     }
   }
   .slot_one,
