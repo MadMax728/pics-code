@@ -146,6 +146,7 @@ const initialState = {
     types: null,
     numbers: null,
     languages: null,
+    age: null,
     isLoading: false,
     error: false
   },

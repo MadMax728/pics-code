@@ -400,7 +400,7 @@
     },
     "age": {
       "name": "Age",
-      "type": "select"
+      "type": "age-select"
     },
     "hashtag": {
       "name": "Hashtag",
@@ -883,6 +883,7 @@
   "select_offer": "Select Offer",
   "select_radius": "Select Radius",
   "select_target_group": "Select Target Group",
+  "select_age": "Select Age",
 
   "error": {
     "create_modal": {

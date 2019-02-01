@@ -63,6 +63,14 @@ export const target_group = {
   male: "male"
 };
 
+export const age = {
+  1: "0-18",
+  2: "19-25",
+  3: "26-35",
+  4: "36-55",
+  5: "56-100"
+};
+
 export const tagsType = {
   inquiryTagList: "inquiryTagList",
   offerTagList: "offerTagList"

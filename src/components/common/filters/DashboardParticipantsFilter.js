@@ -151,6 +151,8 @@ class DashboardParticipantsFilter extends Component {
       }
     ];
 
+    const ageItems = ageItems;
+
     const Filters = [
       {
         name: Translations.left_sidebar_filter.radio_change_language.name,
@@ -187,6 +189,12 @@ class DashboardParticipantsFilter extends Component {
         className: "filter-title",
         type: Translations.left_sidebar_filter.gender.type,
         items: genderItems
+      },
+      {
+        name: Translations.left_sidebar_filter.age.name,
+        className: "filter-title",
+        type: Translations.left_sidebar_filter.age.type,
+        items: ageItems
       }
     ];
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
