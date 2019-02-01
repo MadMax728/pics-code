@@ -3,7 +3,6 @@ import initialState from "./initialState";
 
 const selectReducer = (state = initialState.selectData, action) => {
   switch (action.type) {
-
     // Get Select
     case types.GET_SELECT_STARTED:
       return {
@@ -29,6 +28,14 @@ const selectReducer = (state = initialState.selectData, action) => {
       return {
         ...state,
         targetGroups: action.payload,
+        isLoading: false
+      };
+
+    // Static Data,  In future would remove as when require
+    case types.GET_AGE_SUCCEEDED:
+      return {
+        ...state,
+        age: action.payload,
         isLoading: false
       };
 

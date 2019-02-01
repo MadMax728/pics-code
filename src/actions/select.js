@@ -94,3 +94,14 @@ export const getLanguage = data => {
     dispatch(getLanguageSucceeded(data));
   };
 };
+
+const getAgeSucceeded = data => ({
+  type: types.GET_AGE_SUCCEEDED,
+  payload: data
+});
+
+export const getAge = data => {
+  return dispatch => {
+    dispatch(getAgeSucceeded(data));
+  };
+};

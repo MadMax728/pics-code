@@ -11,7 +11,8 @@ import {
   InquiryTags,
   SelectRadius,
   SelectTargetGroup,
-  RadioButtonLanguages
+  RadioButtonLanguages,
+  SelectAge
 } from "../../common";
 import { Translations } from "../../../lib/translations";
 
@@ -141,6 +142,15 @@ class LeftSidebarFilter extends Component {
                   handleInquiryTagDelete={this.handleInquiryTagDelete}
                 />
               )}
+              {filter.type === "age-select" && (
+                <SelectAge
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
             </div>
           );
         })}
@@ -149,9 +159,7 @@ class LeftSidebarFilter extends Component {
   }
 
   handleOnChange = filter => {
-    console.log(filter);
     const filterData = this.state.filterData;
-    console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
       return f.name === filter.values.name;
     });
@@ -316,7 +324,6 @@ class LeftSidebarFilter extends Component {
     // calling function
     this.props.onChange(filterData);
   };
-
 }
 
 LeftSidebarFilter.propTypes = {
