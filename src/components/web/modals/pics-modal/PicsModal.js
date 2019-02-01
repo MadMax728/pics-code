@@ -14,10 +14,10 @@ class PicsModal extends Component {
 
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade create-campaign-modal"}
+        modalClassName={"modal fade create-campaign-modal user-pics-modal"}
         header={false}
         footer={false}
-        closeBtn={false}
+        closeBtn
         modalShow={modalShow}
         handleModalHide={this.props.handleModalHide}
         modalBodyContent={
