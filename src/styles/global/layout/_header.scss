@@ -263,6 +263,10 @@ header {
             }
           }
           .tab-content {
+            display: inline-block;
+            height: 400px;
+            width: 100%;
+            overflow: auto;
             .tab-pane {
               .header-notifications {
                 .notification-wrapper {
