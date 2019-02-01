@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 import { connect } from "react-redux";
-import { getUser, getFollowUserList } from "../../../../actions";
+import { getUser, getFollowUserList, getUserCommunity } from "../../../../actions";
 
 class TopBarOwnerInfo extends Component {
   constructor(props) {
@@ -104,9 +104,11 @@ class TopBarOwnerInfo extends Component {
 
     if (userInfo) {
       const data = {
-        username: userInfo.username
+        username: userInfo.username,
+        id: userInfo.id
       };
       this.setState({ isLoading: true });
+      this.props.getUserCommunity(data);
       this.props.getUser(data).then(() => {
         if (
           this.props.userDataByUsername &&
@@ -271,9 +273,8 @@ class TopBarOwnerInfo extends Component {
     }
     if (userInfo) {
       const data = {
-        url: `${window.location.href}/${userInfo.username}` 
+        url: `${window.location.href}/${userInfo.username}`
       };
-      console.log(data);
       this.props.handleModalInfoShow(modalType.share, data);
     }
   };
@@ -285,7 +286,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getUser,
-  getFollowUserList
+  getFollowUserList,
+  getUserCommunity
 };
 
 TopBarOwnerInfo.propTypes = {
@@ -295,6 +297,7 @@ TopBarOwnerInfo.propTypes = {
   userDataByUsername: PropTypes.object,
   getFollowUserList: PropTypes.func,
   usersData: PropTypes.object,
+  getUserCommunity: PropTypes.func
 };
 
 export default connect(
