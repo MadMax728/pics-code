@@ -42,5 +42,6 @@ export {
   SelectType,
   SelectNumber,
   SelectLanguage,
-  RadioButtonLanguages
+  RadioButtonLanguages,
+  SelectAge
 } from "./selects";

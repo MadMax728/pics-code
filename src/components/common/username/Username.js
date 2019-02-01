@@ -82,14 +82,15 @@ class Username extends Component {
     const commentArr = value.split(" ");
     commentArr.pop();
     if (this.props.username) {
+      console.log("if");
       value = commentArr.join(" ") + username;
       this.props.handleSetSatetToolTipUsername(id, value);
     } else {
+      console.log("else");
       value = commentArr.join(" ") + " @" + username;
-      this.props.handleSetSatetToolTipUsername(value);
+      this.props.handleSetSatetToolTipUsername(value, id);
     }
   };
-
 }
 
 const mapStateToProps = state => ({

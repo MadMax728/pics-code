@@ -89,8 +89,9 @@ class HashTagUsername extends Component {
     this.props.handleSetState(value, this.hashTagHide);
   };
 
-  handleSetSatetToolTipUsername = value => {
-    this.props.handleSetState(value, this.usernameHide);
+  handleSetSatetToolTipUsername = (value, id) => {
+    console.log("id", id);
+    this.props.handleSetState(value, this.usernameHide, id);
   };
 
   handleAddHashTag = value => {
@@ -171,13 +172,13 @@ class HashTagUsername extends Component {
           data-for="hash_tag"
           role="button"
           data-tip="tooltip"
-          ref={hash_tag => this.hash_tag = hash_tag}
+          ref={hash_tag => (this.hash_tag = hash_tag)}
         />
         <div
           data-for="username"
           role="button"
           data-tip="tooltip"
-          ref={username => this.username = username}
+          ref={username => (this.username = username)}
         />
         <ToolTip
           id="hash_tag"
