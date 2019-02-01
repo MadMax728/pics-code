@@ -75,12 +75,6 @@ class CampaignCreatorFilter extends Component {
         items: []
       },
       {
-        name: Translations.left_sidebar_filter.radius.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radius.type,
-        items: radiusItems
-      },
-      {
         name: Translations.left_sidebar_filter.category.name,
         className: "filter-title",
         type: Translations.left_sidebar_filter.category.type,

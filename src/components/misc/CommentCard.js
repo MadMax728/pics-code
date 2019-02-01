@@ -18,7 +18,7 @@ import * as enumerations from "../../lib/constants/enumerations";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 const storage = Auth.extractJwtFromStorage();
-
+let userMentionList = [];
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -38,7 +38,8 @@ class CommentCard extends Component {
       updateForm: {
         comment: ""
       },
-      isEmoji: false
+      isEmoji: false,
+      commentMentionUserlist: null
     };
   }
 
@@ -75,7 +76,7 @@ class CommentCard extends Component {
     const data = {
       comment,
       typeOfContent,
-      typeId: itemId,
+      typeId: itemId
       // mentionedUserId: []
     };
     this.props.addComment(data).then(() => {
@@ -239,9 +240,17 @@ class CommentCard extends Component {
         <div className="feed-comment">
           <div className="comment-wrapper">
             <div className="comment-header">
-              <UserImageItem item={comment.profileImage} customClass={`img-circle img-responsive`} />
+              <UserImageItem
+                item={comment.profileImage}
+                customClass={`img-circle img-responsive`}
+              />
               <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-                <b>{comment.userName}</b> {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
+                <b>{comment.userName}</b>{" "}
+                {DateFormat(
+                  comment.createdAt,
+                  Translations.date_format.time,
+                  true
+                )}{" "}
                 <b>Reply</b>
               </div>
               <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
@@ -275,9 +284,13 @@ class CommentCard extends Component {
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
-          <UserImageItem item={comment.profileImage} customClass={`img-circle img-responsive`} />
+          <UserImageItem
+            item={comment.profileImage}
+            customClass={`img-circle img-responsive`}
+          />
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
+            <b>{comment.userName}</b>{" "}
+            {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
             <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
@@ -299,13 +312,23 @@ class CommentCard extends Component {
         </div>
         <div className="comment-content col-md-12 no-padding">
           <div className="col-md-1" />
-          <div className="col-md-10 comment-content-div">{this.renderEditComment(comment)}</div>
+          <div className="col-md-10 comment-content-div">
+            {this.renderEditComment(comment)}
+          </div>
         </div>
       </div>
     );
   };
 
-  handleSetState = (value, cd) => {
+  handleSetState = (value, cd, id) => {
+    //console.log("description");
+    // console.log(value);
+
+    if (id) {
+      //console.log("id:", id);
+      userMentionList.push(id);
+    }
+    console.log(userMentionList);
     const { isBackOffice } = this.props;
     if (isBackOffice) {
       clearInterval(this.timer);
@@ -422,7 +445,10 @@ class CommentCard extends Component {
         {!isReport && (
           <div className="comment-wrapper">
             <form onSubmit={this.handleSubmit} ref={this.commentForm}>
-              <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
+              <UserImageItem
+                item={profileImage}
+                customClass={`img-circle img-responsive`}
+              />
               <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
                 <div className="comment-input">
                   <div className="form-group">
@@ -441,25 +467,25 @@ class CommentCard extends Component {
                 </div>
               </div>
               <div className="emoji_wrapper col-sm-2 col-xs-2 pull-right text-right">
-                      <img
-                        role="presentation"
-                        className="pull-right"
-                        src={images.emoji}
-                        alt={"emoji1"}
-                        onKeyPress={this.onEmojiOpen}
-                        onClick={this.onEmojiOpen}
-                      />
-                      {isEmoji && (
-                        <Picker
-                          onSelect={this.addEmoji}
-                          style={{
-                            position: "absolute",
-                            bottom: "135px",
-                            right: "60px"
-                          }}
-                        />
-                      )}
-                    </div>
+                <img
+                  role="presentation"
+                  className="pull-right"
+                  src={images.emoji}
+                  alt={"emoji1"}
+                  onKeyPress={this.onEmojiOpen}
+                  onClick={this.onEmojiOpen}
+                />
+                {isEmoji && (
+                  <Picker
+                    onSelect={this.addEmoji}
+                    style={{
+                      position: "absolute",
+                      bottom: "135px",
+                      right: "60px"
+                    }}
+                  />
+                )}
+              </div>
               <input type="submit" hidden />
             </form>
           </div>

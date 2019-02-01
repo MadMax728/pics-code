@@ -354,7 +354,7 @@
       "type": "radio"
     },
     "location": {
-      "name": "Location",
+      "name": "Location / Radius",
       "type": "auto-complete"
     },
     "radius": {
@@ -370,7 +370,7 @@
       "type": "radio"
     },
     "content": {
-      "name": "Content",
+      "name": "Content Type",
       "type": "radio"
     },
     "target_group": {
@@ -404,7 +404,26 @@
     "age": {
       "name": "Age",
       "type": "select"
+    },
+    "hashtag": {
+      "name": "Hashtag",
+      "type": "select"
+    },
+    "user_group": {
+      "name": "User Group",
+      "type": "radio"
     }
+  },
+
+  "user_group": {
+    "all_users": "All Users",
+    "subscribed": "Subscribed"
+  },
+
+  "gender": {
+    "all": "All",
+    "male": "Male",
+    "female": "Female"
   },
 
   "target_group": {
@@ -412,6 +431,15 @@
     "female_and_male": "Female and Male",
     "female": "Female",
     "male": "Male"
+  },
+
+  "age": {
+    "0": "All",
+    "1": "0 - 18 years old",
+    "2": "19 - 25 years old",
+    "3": "26 - 35 years old",
+    "4": "36 - 55 years old",
+    "5": "56 + years old"
   },
 
   "message_module": {
@@ -458,7 +486,7 @@
     "create_ad": "Create Ad",
     "subscriber": "Subscribers",
     "subscribed": "Subscribed",
-    "request_pending": "Request Pending",
+    "request_pending": "Pending",
     "posts": "Posts",
     "subscribe": "Subscribe",
     "message": "Message",
@@ -478,7 +506,7 @@
     "serverError": "Something went wrong. Please Try Again",
     "Subscribe": "Subscribe",
     "Subscribed": "Subscribed",
-    "Pending": "Request Pending"
+    "Pending": "Pending"
   },
 
   "left_sidebar": {

@@ -34,7 +34,7 @@ class Userpics extends Component {
           </div>
           {picsDataList && (
             <div className="userpics-carousel row">
-              <Carousel>
+              <Carousel showArrows={true}>
                 {picsDataList.map(picsDataRow => {
                   return (
                     <div key={picsDataRow.id}>

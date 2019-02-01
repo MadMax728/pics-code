@@ -2,12 +2,17 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import { setCookie } from "../../../lib/utils/helpers";
+import { connect } from "react-redux";
+import * as enumerations from "../../../lib/constants/enumerations";
+import { setCookie, getCookie } from "../../../lib/utils/helpers";
+import { Route } from "react-router-dom";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
   { name: "option2", className: "", value: "option2" }
 ];
+
+const categoryData = staticData;
 
 const contentItems = [
   {
@@ -66,22 +71,52 @@ const relevanceItems = [
   }
 ];
 
-const targetGroupOptions = staticData;
-const radiusItems = staticData;
-const categoryItems = staticData;
+const targetGroupData = [
+  {
+    name: enumerations.target_group.company,
+    className: "",
+    value: enumerations.target_group.company
+  },
+  {
+    name: enumerations.target_group.female_and_male,
+    className: "",
+    value: enumerations.target_group.female_and_male
+  },
+  {
+    name: enumerations.target_group.female,
+    className: "",
+    value: enumerations.target_group.female
+  },
+  {
+    name: enumerations.target_group.male,
+    className: "",
+    value: enumerations.target_group.male
+  }
+];
 
-class CampaignCompanyFilter extends Component {
+const targetGroupOptions = targetGroupData;
+
+const radiusItems = staticData;
+
+const categoryItems = categoryData;
+
+const offerItems = staticData;
+
+const inquiryItems = staticData;
+
+class DashboardUserFilter extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filterApply: false,
       filData: [],
+      categoryList: [],
       currentLanguage: Translations.getLanguage()
     };
   }
 
   render() {
-    const languageItems = [
+    const languageItem = [
       {
         name: Translations.languages.english,
         className: "radio-btn lbl-margin",
@@ -96,7 +131,26 @@ class CampaignCompanyFilter extends Component {
       }
     ];
 
-    const languageItem = languageItems;
+    const genderItems = [
+      {
+        name: Translations.gender.all,
+        className: "radio-btn lbl-margin",
+        checked: true,
+        value: Translations.gender.all
+      },
+      {
+        name: Translations.gender.male,
+        className: "radio-btn ",
+        checked: false,
+        value: Translations.gender.male
+      },
+      {
+        name: Translations.gender.female,
+        className: "radio-btn ",
+        checked: false,
+        value: Translations.gender.female
+      }
+    ];
 
     const Filters = [
       {
@@ -124,24 +178,25 @@ class CampaignCompanyFilter extends Component {
         items: categoryItems
       },
       {
-        name: Translations.left_sidebar_filter.procedure.name,
+        name: Translations.left_sidebar_filter.gender.name,
         className: "filter-title",
-        type: Translations.left_sidebar_filter.procedure.type,
-        items: procedureItems
+        type: Translations.left_sidebar_filter.gender.type,
+        items: genderItems
       },
       {
-        name: Translations.left_sidebar_filter.content.name,
+        name: Translations.left_sidebar_filter.offer_tag.name,
         className: "filter-title",
-        type: Translations.left_sidebar_filter.content.type,
-        items: contentItems
+        type: Translations.left_sidebar_filter.offer_tag.type,
+        items: []
       },
       {
-        name: Translations.left_sidebar_filter.target_group.name,
+        name: Translations.left_sidebar_filter.inquiry_tag.name,
         className: "filter-title",
-        type: Translations.left_sidebar_filter.target_group.type,
-        items: targetGroupOptions
+        type: Translations.left_sidebar_filter.inquiry_tag.type,
+        items: []
       }
     ];
+    Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div className="left-filters">
         <LeftSidebarFilter
@@ -168,6 +223,8 @@ class CampaignCompanyFilter extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {};
 
   handleResetFilterClick = () => {
     this.setState({ filterApply: false });
@@ -198,10 +255,21 @@ class CampaignCompanyFilter extends Component {
   };
 }
 
-CampaignCompanyFilter.propTypes = {
+const mapStateToProps = state => ({
+  categoryList: state.selectData,
+  radiusList: state.selectData
+});
+
+const mapDispatchToProps = {};
+
+DashboardUserFilter.propTypes = {
   handleApplyClick: PropTypes.func,
+  categoryList: PropTypes.any,
   handleSelect: PropTypes.func,
-  handleLanguageSwitch: PropTypes.func
+  route: PropTypes.any
 };
 
-export default CampaignCompanyFilter;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DashboardUserFilter);
