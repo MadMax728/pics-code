@@ -108,6 +108,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  notificationData: {
+    notification: null,
+    isLoading: false,
+    error: false
+  },
   commentData: {
     comments: {},
     comment: null,
@@ -141,6 +146,7 @@ const initialState = {
     types: null,
     numbers: null,
     languages: null,
+    age: null,
     isLoading: false,
     error: false
   },

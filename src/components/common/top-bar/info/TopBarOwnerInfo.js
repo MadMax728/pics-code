@@ -264,7 +264,18 @@ class TopBarOwnerInfo extends Component {
   };
 
   handeleShare = () => {
-    this.props.handleModalInfoShow(modalType.share);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      const data = {
+        url: `${window.location.href}/${userInfo.username}` 
+      };
+      console.log(data);
+      this.props.handleModalInfoShow(modalType.share, data);
+    }
   };
 }
 const mapStateToProps = state => ({
@@ -283,7 +294,7 @@ TopBarOwnerInfo.propTypes = {
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.object,
   getFollowUserList: PropTypes.func,
-  usersData: PropTypes.object
+  usersData: PropTypes.object,
 };
 
 export default connect(

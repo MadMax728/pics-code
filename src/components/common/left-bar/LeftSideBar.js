@@ -6,7 +6,11 @@ import {
   CampaignCompanyFilter,
   CampaignCreatorFilter,
   DashboardFilter,
-  ParticipantsFilter
+  ParticipantsFilter,
+  DashboardExploreFilter,
+  DashboardUserFilter,
+  DashboardPicsFilter,
+  DashboardParticipantsFilter
 } from "../filters";
 
 import PropTypes from "prop-types";
@@ -21,7 +25,6 @@ import {
 } from "../menu";
 
 class LeftSideBar extends Component {
-
   render() {
     return (
       <div>
@@ -50,6 +53,26 @@ class LeftSideBar extends Component {
           path={routes.ROOT_ROUTE}
           exact
           component={this.handleDashboardFilter}
+        />
+        <Route
+          path={routes.EXPLORE_ROUTE}
+          exact
+          component={this.handleExploreFilter}
+        />
+        <Route
+          path={routes.PARTICIPANTS_ROUTE}
+          exact
+          component={this.handleDashboardParticipantsFilter}
+        />
+        <Route
+          path={routes.USERS_ROUTE}
+          exact
+          component={this.handleUserFilter}
+        />
+        <Route
+          path={routes.PICS_ROUTE}
+          exact
+          component={this.handlePicsFilter}
         />
 
         <Route
@@ -286,6 +309,24 @@ class LeftSideBar extends Component {
     return <DashboardFilter handleApplyClick={this.props.getFilter} />;
   };
 
+  handleExploreFilter = () => {
+    return <DashboardExploreFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handlePicsFilter = () => {
+    return <DashboardPicsFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleUserFilter = () => {
+    return <DashboardUserFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleDashboardParticipantsFilter = () => {
+    return (
+      <DashboardParticipantsFilter handleApplyClick={this.props.getFilter} />
+    );
+  };
+
   handleCampaignCompanyFilter = () => {
     return <CampaignCompanyFilter handleApplyClick={this.props.getFilter} />;
   };
@@ -306,7 +347,6 @@ class LeftSideBar extends Component {
       </div>
     );
   };
-
 }
 
 LeftSideBar.propTypes = {

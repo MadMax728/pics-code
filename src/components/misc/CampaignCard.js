@@ -10,7 +10,7 @@ import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
-import { modalType } from "../../lib/constants";
+import { modalType, BASE_CAMPAIGN_INFORMATION_ROUTE } from "../../lib/constants";
 import "emoji-mart/css/emoji-mart.css";
 class CampaignCard extends Component {
   constructor(props, context) {
@@ -86,8 +86,7 @@ class CampaignCard extends Component {
         reportContent: "Campaigns",
         isBudget
       };
-    }
-    else {
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.lock,
@@ -109,8 +108,7 @@ class CampaignCard extends Component {
     const { isBudget } = this.props;
     if (isBudget) {
       item.contentStatus = data.contentStatus;
-    }
-    else {
+    } else {
       item.reportStatus = data.contentStatus;
     }
     this.setState({ item });
@@ -128,8 +126,7 @@ class CampaignCard extends Component {
         reportContent: "Campaigns",
         isBudget
       };
-    }
-    else {
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.doNotLock,
@@ -155,8 +152,7 @@ class CampaignCard extends Component {
         reportContent: "Campaigns",
         isBudget
       };
-    }
-    else {
+    } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.unLock,
@@ -179,18 +175,20 @@ class CampaignCard extends Component {
     if (isBackOffice) {
       reportTips = [
         {
-          name: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? Translations.tool_tips.unlock
-            : Translations.tool_tips.lock) :
-            (item.reportStatus === enumerations.reportType.lock
+          name: isBudget
+            ? item.contentStatus === enumerations.reportType.lock
               ? Translations.tool_tips.unlock
-              : Translations.tool_tips.lock),
-          handleEvent: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? this.handleUnlockContent
-            : this.handleLockContent) :
-            (item.reportStatus === enumerations.reportType.lock
+              : Translations.tool_tips.lock
+            : item.reportStatus === enumerations.reportType.lock
+            ? Translations.tool_tips.unlock
+            : Translations.tool_tips.lock,
+          handleEvent: isBudget
+            ? item.contentStatus === enumerations.reportType.lock
               ? this.handleUnlockContent
-              : this.handleLockContent)
+              : this.handleLockContent
+            : item.reportStatus === enumerations.reportType.lock
+            ? this.handleUnlockContent
+            : this.handleLockContent
         },
         {
           name: Translations.tool_tips.do_not,
@@ -291,6 +289,14 @@ class CampaignCard extends Component {
     });
   };
 
+  handeleShare = () => {
+    const { item } = this.state;
+    const data = {
+      url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${item.id}`
+    }
+    this.props.handleModalInfoShow(modalType.share, data);
+  };
+
   render() {
     const {
       isStatus,
@@ -328,6 +334,7 @@ class CampaignCard extends Component {
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
+          handeleShare={this.handeleShare}
         />
         {isComments && (
           <CommentCard
@@ -377,7 +384,8 @@ CampaignCard.propTypes = {
   addReport: PropTypes.func.isRequired,
   reportedContentData: PropTypes.any,
   handleRemove: PropTypes.func,
-  isSavedPage: PropTypes.bool
+  isSavedPage: PropTypes.bool,
+  handleModalInfoShow: PropTypes.func
 };
 
 export default connect(

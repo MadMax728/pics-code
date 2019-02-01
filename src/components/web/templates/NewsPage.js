@@ -36,30 +36,33 @@ class NewsRoot extends Component {
     window.scrollTo(0, 0);
     this.handleRefresh();
     this.handleSetNewsFeed("");
-    window.addEventListener('scroll', this.onScroll, false);
+    window.addEventListener("scroll", this.onScroll, false);
   };
 
   onScroll = () => {
     const { newsFeedList } = this.state;
     const currentScrollHeight = parseInt(window.innerHeight + window.scrollY);
     // console.log(currentScrollHeight, (document.body.offsetHeight));
-    if ( newsFeedList && 
-      (currentScrollHeight) + 1 >= (document.body.offsetHeight) &&
+    if (
+      newsFeedList &&
+      currentScrollHeight + 1 >= document.body.offsetHeight &&
       newsFeedList.length
     ) {
       const { lastEvaluatedKey } = this.props;
       let payload = "?limit=10";
-      for (let i in lastEvaluatedKey){
-        payload += `&${i}=${lastEvaluatedKey[i]}`; 
+      for (let i in lastEvaluatedKey) {
+        payload += `&${i}=${lastEvaluatedKey[i]}`;
       }
-      this.props.getDashboard("news", payload).then(() => { 
-        const { newsFeedList }  = this.state;
-        this.setState({ newsFeedList: newsFeedList.concat(this.props.newsFeedList)});
+      this.props.getDashboard("news", payload).then(() => {
+        const { newsFeedList } = this.state;
+        this.setState({
+          newsFeedList: newsFeedList.concat(this.props.newsFeedList)
+        });
       });
     }
-  }
+  };
 
-  handleSetNewsFeed = (payload) => {
+  handleSetNewsFeed = payload => {
     this.props.getDashboard("news", payload).then(() => {
       const { newsFeedList } = this.props;
       this.setState({ newsFeedList });
@@ -68,12 +71,12 @@ class NewsRoot extends Component {
 
   renderNewsFeedList = () => {
     let { newsFeedList } = this.state;
-    const { searchData } = this.props;
+    const { searchData, handleModalInfoShow } = this.props;
     newsFeedList = search(newsFeedList, "userName", searchData.searchKeyword);
 
     return newsFeedList.map(newsFeed => {
       return (
-        <div onScroll={this.trackScrolling}  key={newsFeed.id}>
+        <div onScroll={this.trackScrolling} key={newsFeed.id}>
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.mediaUrl &&
@@ -81,9 +84,12 @@ class NewsRoot extends Component {
               enumerations.contentTypes.mediaPost && (
               <MediaCard item={newsFeed} isParticipant={false} isDescription />
             )}
+
           {newsFeed.mediaUrl &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             newsFeed.postType &&
-            newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign && (
               <CampaignCard
@@ -93,9 +99,14 @@ class NewsRoot extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
+
           {newsFeed.mediaUrl &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign && (
@@ -106,8 +117,10 @@ class NewsRoot extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}                
               />
             )}
+
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.mediaUrl &&
@@ -147,7 +160,8 @@ NewsRoot.propTypes = {
   getSearch: PropTypes.func,
   isLoadingnews: PropTypes.bool,
   newsFeedList: PropTypes.any,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  handleModalInfoShow: PropTypes.func
   // errornews: PropTypes.any
 };
 

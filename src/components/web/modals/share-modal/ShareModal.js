@@ -10,7 +10,7 @@ class ShareModal extends Component {
   }
 
   render() {
-    const { handleModalInfoHide, modalInfoShow } = this.props;
+    const { handleModalInfoHide, modalInfoShow, data } = this.props;
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade share-popup"}
@@ -19,7 +19,7 @@ class ShareModal extends Component {
         modalShow={modalInfoShow}
         closeBtn
         handleModalHide={handleModalInfoHide}
-        modalBodyContent={<Share shareUrl={`https://www.picstagraph.com/`} title={`Picstagraph`} handleModalInfoHide={handleModalInfoHide} />}
+        modalBodyContent={<Share shareUrl={`${data.url}`} title={`Picstagraph`} handleModalInfoHide={handleModalInfoHide} />}
       />
     );
   }
@@ -27,7 +27,8 @@ class ShareModal extends Component {
 
 ShareModal.propTypes = {
   handleModalInfoHide: PropTypes.func,
-  modalInfoShow: PropTypes.bool
+  modalInfoShow: PropTypes.bool,
+  data: PropTypes.any
 };
 
 export default ShareModal;

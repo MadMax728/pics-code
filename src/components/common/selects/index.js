@@ -11,3 +11,4 @@ export { default as SelectType } from "./SelectType";
 export { default as SelectNumber } from "./SelectNumber";
 export { default as SelectLanguage } from "./SelectLanguage";
 export { default as RadioButtonLanguages } from "./RadioButtonLanguages";
+export { default as SelectAge } from "./SelectAge";

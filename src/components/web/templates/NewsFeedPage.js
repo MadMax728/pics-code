@@ -53,9 +53,13 @@ class NewsFeedPage extends Component {
       });
     } else {
       this.props.getNewsFeed("getNewsFeedOwner").then(() => {
-        this.setState({
-          newsFeedList: this.props.newsFeedList.filter(e => e.isActive === true)
-        });
+        if (this.props.newsFeedList) {
+          this.setState({
+            newsFeedList: this.props.newsFeedList.filter(
+              e => e.isActive === true
+            )
+          });
+        }
       });
     }
   };
@@ -83,11 +87,13 @@ class NewsFeedPage extends Component {
         });
       } else {
         this.props.getNewsFeed("getNewsFeedOwner").then(() => {
-          this.setState({
-            newsFeedList: this.props.newsFeedList.filter(
-              e => e.isActive === true
-            )
-          });
+          if (this.props.newsFeedList) {
+            this.setState({
+              newsFeedList: this.props.newsFeedList.filter(
+                e => e.isActive === true
+              )
+            });
+          }
         });
       }
     }
@@ -97,21 +103,23 @@ class NewsFeedPage extends Component {
 
   handleParticipantFilterList = data => {
     const { newsFeedList } = this.state;
-    this.setState({
-      newsFeedList: newsFeedList.filter(
-        e => e.id !== data.id && e.isActive === true
-      )
-    });
+    if (newsFeedList) {
+      this.setState({
+        newsFeedList: newsFeedList.filter(
+          e => e.id !== data.id && e.isActive === true
+        )
+      });
+    }
   };
 
   renderNewsFeedList = () => {
     const { newsFeedList } = this.state;
+    const { handleModalInfoShow } = this.props;
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
-            newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.mediaPost && (
               <MediaCard
@@ -124,6 +132,10 @@ class NewsFeedPage extends Component {
 
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
+            newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign && (
               <CampaignCard
@@ -133,9 +145,13 @@ class NewsFeedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
           {newsFeed.mediaUrl &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign && (
@@ -146,6 +162,7 @@ class NewsFeedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -183,7 +200,8 @@ NewsFeedPage.propTypes = {
   getUser: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
-  userDataByUsername: PropTypes.any
+  userDataByUsername: PropTypes.any,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 

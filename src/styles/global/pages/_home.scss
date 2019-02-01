@@ -50,9 +50,16 @@
     a,
     .share-wrapr {
       float: left;
+      display: inline-block;
+      margin-left: 20px;
       &:focus {
         outline: 0;
       }
+    }
+    .tooltip-dot{
+      display: inline-block;
+      float: left;
+      margin-left: 20px;
     }
   }
   .slot_one,
@@ -1056,6 +1063,47 @@
   .footer_60scne{
     .footerCount_lkhc9u{
       display: none;
+    }
+  }
+}
+
+.user-pics-modal{
+  .modal-dialog{
+    margin: 80px auto;
+    .modal-content{
+      .closeBtn {
+          position: absolute;
+          right: -38px;
+          top: -38px;
+          z-index: 9;
+          background: none;
+          border: none;
+      }
+      .modal-body{
+        padding: 10px 0 0;
+        .slider-modal-header{
+          font-size: 18px;
+          padding: 15px 0;
+          margin: 0;
+        }
+        .user-pics-carousel{
+          height: 500px;
+          .slider-wrapper{
+            .slider{
+              .slide {
+                height: 500px;
+                > div{
+                  height: 100%;
+                  img{
+                    height: 100%;
+                    object-fit: contain;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

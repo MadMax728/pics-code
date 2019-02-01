@@ -195,6 +195,7 @@ const getPendingUserListFailed = error => ({
   payload: error,
   error: true
 });
+
 export const getPendingUserList = requestData => {
   return dispatch => {
     dispatch(getPendingUserListStarted());

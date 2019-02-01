@@ -55,7 +55,7 @@ class TopBar extends Component {
                   <div
                     className="share-wrapr"
                     onClick={handeleShare}
-                    onKeyDown={this.handleKeyDown}
+                    onKeyDown={handeleShare}
                     role="button"
                     tabIndex="0"
                   >
@@ -68,21 +68,32 @@ class TopBar extends Component {
               )}
               {items.length !== 0 && items.more && (
                 <div className="settings">
-                  <ThreeDots
-                    id={`topbar-${items.userid}`}
-                    role="button"
-                    dataTip="tooltip"
-                    dataClass="tooltip-wrapr"
-                    /* eslint-disable */
-                    getContent={() => this.renderDotTips(items.userid)}
-                    effect="solid"
-                    delayHide={500}
-                    delayShow={500}
-                    delayUpdate={500}
-                    place={"left"}
-                    border
-                    type={"light"}
-                  />
+                    <div
+                      className="share-wrapr"
+                      onClick={handeleShare}
+                      onKeyDown={this.handleKeyDown}
+                      role="button"
+                      tabIndex="0"
+                    >
+                      <img src={images.share} alt="share" />
+                    </div>
+                    <div className="tooltip-dot">
+                      <ThreeDots
+                        id={`topbar-${items.userid}`}
+                        role="button"
+                        dataTip="tooltip"
+                        dataClass="tooltip-wrapr"
+                        /* eslint-disable */
+                        getContent={() => this.renderDotTips(items.userid)}
+                        effect="solid"
+                        delayHide={500}
+                        delayShow={500}
+                        delayUpdate={500}
+                        place={"left"}
+                        border
+                        type={"light"}
+                      />
+                    </div>
                 </div>
               )}
               <div className="clearfix" />
@@ -109,8 +120,6 @@ class TopBar extends Component {
       this.renderDotTips(nextProps.items.userid);
     }
   };
-
-  handleKeyDown = () => { };
 
   renderReportTips = (type, userid, username) => {
     if (type !== "Posts") {

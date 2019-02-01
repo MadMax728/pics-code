@@ -10,6 +10,7 @@ import {
   getDashboard
 } from "../../../../actions";
 import * as routes from "../../../../lib/constants/routes";
+import { modalType } from "../../../../lib/constants";
 
 class TopBarOtherInfo extends Component {
   constructor(props) {
@@ -76,6 +77,7 @@ class TopBarOtherInfo extends Component {
     return (
       <TopBar
         items={this.state.items}
+        handeleShare={this.handeleShare}
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
         userDataByUsername={this.props.userDataByUsername}
@@ -103,6 +105,13 @@ class TopBarOtherInfo extends Component {
     }
   }
 
+  handeleShare = () => {
+    const data = {
+      url: `${window.location.href}`
+    }
+    this.props.handleModalInfoShow(modalType.share, data);
+  };
+  
   getUserData = () => {
     const data = this.props.match;
     this.props.getUser(data).then(() => {

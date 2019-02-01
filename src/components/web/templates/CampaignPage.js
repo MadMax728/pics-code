@@ -77,14 +77,16 @@ class CampaignPage extends Component {
 
   renderCampaignList = () => {
     let { campaignList } = this.state;
-    const { searchData } = this.props;
+    const { searchData, handleModalInfoShow } = this.props;
     campaignList = search(campaignList, "userName", searchData.searchKeyword);
 
-    
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
           {campaign.mediaUrl &&
+            campaign.typeContent &&
+            campaign.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             (campaign.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign ||
               campaign.postType.toLowerCase() ===
@@ -96,6 +98,7 @@ class CampaignPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
         </div>
@@ -110,7 +113,8 @@ CampaignPage.propTypes = {
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 

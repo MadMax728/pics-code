@@ -108,7 +108,7 @@ class Community extends Component {
             )}
           </div>
         )}
-        {isLoading && <RightSidebarLoading />}
+        {isLoadingusers && <RightSidebarLoading />}
       </div>
     );
   }

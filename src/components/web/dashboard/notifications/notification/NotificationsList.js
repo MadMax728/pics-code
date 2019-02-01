@@ -1,51 +1,44 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import { notification_list } from "../../../../../mock-data";
+import { notificationList } from "../../../../../mock-data";
 import { Translations } from "../../../../../lib/translations";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getFollowUserList } from "../../../../../actions";
+import { getNotification } from "../../../../../actions";
+import { DateFormat } from "../../../../Factory";
 
 class NotificationsList extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      notification_list
+      notificationList: null
     };
   }
 
   render() {
+    const { notificationList } = this.state;
     return (
       <div className="tab-pane fade active in" id="nav-notifications">
         <div className="header-notifications">
-          {notification_list &&  notification_list.length > 0 ? 
-            notification_list.map(notification => {
+          {notificationList &&  notificationList.length > 0 ? 
+            notificationList.map(notification => {
             return (
               <div
                 className="notification-with-subscribe abc notification-wrapper"
                 key={notification.id}
               >
-                {notification.isInvoise ? (
-                  <div className="notification-profile-img">
+                <div className="notification-profile-img">
                   <img
-                    src={images.notifications_logo}
-                    alt={"notifications-logo3" + notification.id}
-                  />
-                  </div>
-                ) : (
-                  <div className="notification-profile-img">
-                  <img
-                    src={notification.image}
+                    src={notification.profileImage}
                     alt={"notification.id" + notification.id}
                   />
-                  </div>
-                )}
+                </div>
                 <div className="user-info">
                   <div className="username">{notification.username}</div>
                   <div className="subtitle">
-                    {Translations.notification.subscribed_to_your_profile}
+                    {notification.message}
                   </div>
-                  <div className="date">{notification.date}</div>
+                  <div className="date">{DateFormat(notification.createdAt, Translations.date_format.date, true)}</div>
                 </div>
                 {notification.isSubScribe &&
                   (notification.user.subscribed ? (
@@ -96,41 +89,37 @@ class NotificationsList extends Component {
   };
 
   getNotificationList = () => {
-    // if (userId && type) {
-    //   const userRequestData = {
-    //     id: userId,
-    //     type: type
-    //   };
-    //   this.props.getFollowUserList(userRequestData).then(() => {
-    //     console.log("prop", this.props);
-    //   });
-    // }
+    this.props.getNotification().then(() => {
+      const { notificationData } = this.props;
+      if(notificationData && notificationData.notification)
+      {
+        this.setState({notificationList: notificationData.notification})
+      }
+    });
   };
 
   handleSubscribed = e => {
-    const notification_list = this.state.notification_list;
-    notification_list.filter(
-      noti =>
-        noti.id === parseInt(e.target.id) &&
-        (noti.user.subscribed = !noti.user.subscribed)
-    );
-    this.setState({ notification_list });
-  };
-
+  //   const notificationList = this.state.notificationList;
+  //   notificationList.filter(
+  //     noti =>
+  //       noti.id === parseInt(e.target.id) &&
+  //       (noti.user.subscribed = !noti.user.subscribed)
+  //   );
+  //   this.setState({ notificationList });
+  }
 }
 
 const mapStateToProps = state => ({
-  usersData: state.usersData
+  notificationData: state.notificationData
 });
 
 const mapDispatchToProps = {
-  getFollowUserList
+  getNotification
 };
 
 NotificationsList.propTypes = {
-  getFollowUserList: PropTypes.func,
-  // isLoading: PropTypes.bool
-  // error: PropTypes.any
+  getNotification: PropTypes.func,
+  notificationData: PropTypes.any
 };
 
 export default connect(
