@@ -12,9 +12,7 @@ class CreateCreatorCampaignHeader extends Component {
     const { stepIndex, modalTitle } = this.props;
     return (
       <div className="row">
-        <div className="col-sm-5 modal-title">
-          {modalTitle}
-        </div>
+        <div className="col-sm-5 modal-title">{/* {modalTitle} */}</div>
         <div className="col-sm-7 text-right">
           <button className="black_button" onClick={this.handleCancle}>
             {Translations.modal_header.cancle}
@@ -24,12 +22,11 @@ class CreateCreatorCampaignHeader extends Component {
               {Translations.modal_header.back}
             </button>
           )}
-          {stepIndex !== 0 &&
-            stepIndex < 3 && (
-              <button className="black_button" onClick={this.handlePreview}>
-                {Translations.modal_header.preview}
-              </button>
-            )}
+          {stepIndex !== 0 && stepIndex < 3 && (
+            <button className="black_button" onClick={this.handlePreview}>
+              {Translations.modal_header.preview}
+            </button>
+          )}
           {stepIndex <= 3 && (
             <button className="black_button" onClick={this.handleContinue}>
               {Translations.modal_header.continue}
@@ -64,8 +61,6 @@ class CreateCreatorCampaignHeader extends Component {
       console.log("data saved code");
     }
   };
-
-
 }
 
 CreateCreatorCampaignHeader.propTypes = {
