@@ -56,6 +56,11 @@ export const procedure = {
   anonymous: "anonymous"
 };
 
+export const advertiseLabel = {
+  no: false,
+  yes: true
+};
+
 export const target_group = {
   company: "company",
   female_and_male: "female_and_male",
