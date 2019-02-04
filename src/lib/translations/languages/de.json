@@ -60,7 +60,9 @@
     "add_category": "Add Category",
     "add_description": "Add Description",
     "advertisement": "Label as advertisement",
-    "upload_file": "Upload File"
+    "upload_file": "Upload File",
+    "yes": "Yes",
+    "no": "No"
   },
 
   "create_ads": {
