@@ -3,44 +3,29 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-  getDashboard,
   sendRequest,
-  getUnsubscribe,
-  getUser
+  getUnsubscribe
 } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
 
 class Community extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = { usersList: null, error: null };
-  }
-
   render() {
     const {
       isLoading,
-      isLoadingusers,
-      usersList,
-      usersData,
-      userDataByUsername
+      userCommunity
     } = this.props;
-    let selectedUsername = "";
-    const userListIsLoading = usersData.isLoading;
-    if (userDataByUsername && userDataByUsername.user) {
-      const selectedUserdata = userDataByUsername.user.data;
-      selectedUsername = selectedUserdata.username;
-    }
+    
     return (
       <div>
         <div className="normal_title padding-15">
           {Translations.profile_community_right_sidebar.community}
         </div>
 
-        {!isLoadingusers && (
+        {!isLoading && (
           <div className="community">
-            {usersList && usersList.length > 0 && !isLoadingusers ? (
-              usersList.map(user => {
+            {userCommunity && userCommunity.length > 0 ? (
+              userCommunity.map(user => {
                 const profile_route = user.isOwner
                   ? `/news-feed`
                   : `/news-feed/${user.username}`;
@@ -65,11 +50,10 @@ class Community extends Component {
                   userId: user.id,
                   handleActionClick: this.handleSubscribed,
                   btnText,
-                  isLoading: userListIsLoading
+                  isLoading
                 };
                 return (
                   <div key={user.id}>
-                    {user.username !== selectedUsername ? (
                       <div className="community_wrapper">
                         <div className="community-user-image">
                           <Link to={profile_route}>
@@ -97,9 +81,6 @@ class Community extends Component {
                           </button>
                         </div>
                       </div>
-                    ) : (
-                      ""
-                    )}
                   </div>
                 );
               })
@@ -108,33 +89,33 @@ class Community extends Component {
             )}
           </div>
         )}
-        {isLoadingusers && <RightSidebarLoading />}
+        {isLoading && <RightSidebarLoading />}
       </div>
     );
   }
 
   componentDidMount = () => {
-    this.getUserData();
+    // this.getUserData();
     window.scrollTo(0, 0);
   };
 
   getUserData = () => {
-    const { usersList, getDashboard } = this.props;
-    getDashboard("users", "").then(() => {
-      if (usersList) {
-        this.setState({ usersList });
-      }
-    });
+    const { userCommunity } = this.props;
+    if (userCommunity) {
+      this.setState({ userCommunity });
+    }
   };
 
   handleSubscribed = e => {
     const errors = {};
-    const { sendRequest, getUnsubscribe, usersList } = this.props;
-    const selectedUserList = usersList.find(user => user.id === e.target.id);
+    const { sendRequest, getUnsubscribe, userCommunity } = this.props;
+    const selectedUserList = userCommunity.find(user => user.id === e.target.id);
+    console.log(e.target.id);
     if (selectedUserList.isPending) {
       // To Do - On Pending request click
     } else if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
+      
       sendRequest(requestData).then(() => {
         if (
           this.props.usersData.error &&
@@ -166,31 +147,24 @@ class Community extends Component {
 }
 
 const mapStateToProps = state => ({
-  usersList: state.dashboardData.users,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error,
+  userCommunity: state.communityData.userCommunity,
+  isLoading: state.communityData.isLoading,
+  error: state.communityData.error,
   usersData: state.usersData,
-  userDataByUsername: state.userDataByUsername
 });
 
 const mapDispatchToProps = {
-  getDashboard,
   sendRequest,
-  getUnsubscribe,
-  getUser
+  getUnsubscribe
 };
 
 Community.propTypes = {
-  getDashboard: PropTypes.func.isRequired,
+  userCommunity: PropTypes.any,
   isLoading: PropTypes.bool,
-  isLoadingusers: PropTypes.bool,
-  usersList: PropTypes.any,
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,
-  usersData: PropTypes.object,
-  getUser: PropTypes.func,
-  userDataByUsername: PropTypes.any
-  // error: PropTypes.any
+  usersData: PropTypes.any,
+  error: PropTypes.any
 };
 
 export default connect(

@@ -37,12 +37,7 @@ class RenderToolTips extends Component {
 const propTypes = {
   id: PropTypes.any.isRequired,
   isLoading: PropTypes.bool,
-  items: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      handleEvent: PropTypes.func.isRequired
-    }).isRequired
-  ).isRequired
+  items: PropTypes.any.isRequired
 };
 
 RenderToolTips.propTypes = propTypes;

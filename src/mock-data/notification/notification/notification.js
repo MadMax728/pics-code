@@ -1,4 +1,4 @@
-import * as images from "../../../lib/constants/images";
+// import * as images from "../../../lib/constants/images";
 
 export const notification_list = [
   // {

@@ -241,6 +241,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  communityData: {
+    userCommunity: null,
+    isLoading: false,
+    error: false
+  },
   hashUserData: {
     usernames: null,
     hashTags: null,

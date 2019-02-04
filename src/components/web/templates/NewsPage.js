@@ -39,6 +39,10 @@ class NewsRoot extends Component {
     window.addEventListener("scroll", this.onScroll, false);
   };
 
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.onScroll);
+  }
+
   onScroll = () => {
     const { newsFeedList } = this.state;
     const currentScrollHeight = parseInt(window.innerHeight + window.scrollY);

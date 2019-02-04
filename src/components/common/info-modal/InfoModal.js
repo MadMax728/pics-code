@@ -7,7 +7,7 @@ import {
   ProcessedModal,
   EditProfileModal,
   ShareModal,
-  ConfirmationModal,
+  // ConfirmationModal,
   ErrorModal,
   SubscribeModal,
   CMSPreviewModal

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
-import { notificationList } from "../../../../../mock-data";
 import { Translations } from "../../../../../lib/translations";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";

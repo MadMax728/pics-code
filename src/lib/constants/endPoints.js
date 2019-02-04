@@ -24,7 +24,7 @@ export const getSavedCampaignsEndPoint = "/campaigns/get-all-saved-campaigns";
 export const getSettingsCampaignsEndPoint = "/campaigns/get-user-campaigns";
 export const getCampaignTypeEndPoint = "/campaigns/list/";
 export const getCampaignDetailsEndPoint = "/campaigns/";
-export const getFavouriteCampaignsEndPoint = "/likes/get-favorite-campaign";
+export const getFavouriteCampaignsEndPoint = "/campaigns/favorite?favBy=";
 export const createCampaignEndPoint = "/campaigns";
 export const editCampaignEndPoint = "/campaigns";
 export const addParticipantsEndPoint = "/participants/add-participant";
@@ -133,6 +133,8 @@ export const updateUserProfileEndPoint = "/users";
 export const generateOTPEndPoint = "/auth/generate-otp";
 export const logoutEndPoint = "/auth/logout";
 export const getSocialNetworkEndPoint = "/auth/social-network-details";
+export const getUserCommunityEndPoint = "/users/community?followerId=";
+
 
 // Users Services
 export const getUserListSubscriberEndPoint =
