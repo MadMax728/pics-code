@@ -9,7 +9,6 @@ import {
   acceptRequest,
   getDashboard
 } from "../../../../../actions";
-import moment from "moment";
 import { UserImageItem } from "../../../../ui-kit";
 import { DateFormat } from "../../../../Factory";
 

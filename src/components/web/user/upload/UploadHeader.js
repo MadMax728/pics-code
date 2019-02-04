@@ -26,7 +26,10 @@ class UploadHeader extends Component {
     return (
       <div className="row">
         {isLoading && <InlineLoading />}
-        <div className="col-md-offset-6 col-sm-6 text-right">
+        <div className="col-sm-6 modal-title">
+          {/* {Translations.modal_header.upload_image} */}
+        </div>
+        <div className="col-sm-offest-6 col-sm-6 text-right">
           <button className="black_button" onClick={this.handleModalHide}>
             {Translations.modal_header.cancle}
           </button>

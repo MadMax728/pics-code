@@ -28,8 +28,8 @@ class AdsStatisticsPage extends Component {
       performaceProgress,
       runtimeProgress,
       dailyBudgetProgress,
-      budgetSpend,
-      remainingBudget
+      // budgetSpend,
+      // remainingBudget
     } = this.state;
     return (
       <div>

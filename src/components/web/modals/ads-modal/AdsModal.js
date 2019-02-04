@@ -31,7 +31,7 @@ const initialState = {
   userInfo: null,
   isLoading: false,
   maxClicks: 0,
-  modalTitle: Translations.modal_header.create_ad,
+  modalTitle: "",
   form: {
     id: "",
     title: "",
@@ -209,9 +209,8 @@ class AdsModal extends Component {
     }
     if (nextProps.data && nextProps.data.id) {
       return { modalTitle: Translations.modal_header.edit_ad, isEdit: true };
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   handleFillState = data => {

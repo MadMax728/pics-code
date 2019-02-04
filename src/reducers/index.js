@@ -33,6 +33,8 @@ import hashTagData from "./hashTagReducer";
 import messagesData from "./messageReducer";
 import lastEvaluatedKey from "./lastEvaluateKeyReducer";
 import notificationData from "./notificationReducer";
+import communityData from "./communityReducer";
+
 
 const rootReducer = combineReducers({
   loginData,
@@ -68,7 +70,8 @@ const rootReducer = combineReducers({
   hashTagData,
   messagesData,
   lastEvaluatedKey,
-  notificationData
+  notificationData,
+  communityData
 });
 
 export default rootReducer;
