@@ -40,7 +40,7 @@ class UploadModal extends Component {
 
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade upload-image-modal create-campaign-modal"}
+        modalClassName={"modal fade upload-image-modal upload-pic-modal create-campaign-modal"}
         header
         modalHeaderContent={
           <UploadHeader

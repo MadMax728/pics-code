@@ -65,7 +65,7 @@ class Upload extends Component {
       <div className="col-xs-12 no-padding">
         <div className="col-sm-12 upload-form">
           <div className="user-title">
-            <div className="normal_title">
+            <div className="normal_title modal-title">
               {/* {Translations.upload_modal.title_of_upload} */} Create an
               Image
             </div>
@@ -78,15 +78,7 @@ class Upload extends Component {
                 This is example text. This is example text. This is example text
               </p>
               {!form.image && !form.video ? (
-                <div className="">
-                  {/* <label htmlFor="description" className="dispInline">
-                  Add title image
-                </label>
-                <p>
-                  This is example text. This is example text. This is example
-                  text
-                </p>{" "} */}
-                  {/* -- className="box" -- */}
+                <div className="box">
                   <input
                     type="file"
                     name="newImage"

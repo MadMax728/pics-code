@@ -255,3 +255,48 @@
     margin-bottom: 20px;
   }
 }
+.upload-pic-modal.create-campaign-modal{
+  .modal-dialog{
+    width:700px;
+    .modal-content{
+      text-align: center;
+      .modal-header{
+        text-align: right;
+      }
+      .modal-body{
+        height: 800px;
+        .box{
+          padding: 10rem 1.25rem;
+          .inputfile + label{
+            max-width: 100%;
+            margin: 0 auto;
+          }
+        }
+        .upload-form{
+          padding: 20px 120px;
+          .user-title{
+            .modal-title{
+              font-size: 24px;
+            }
+          }
+          .form-group{
+            label{
+              text-decoration: underline;
+              font-size: 18px;
+              font-family: "Helvetica";
+            }
+            p{
+              margin: 5px 0 15px;
+            }
+            .options{
+              label{
+                text-decoration: none;
+                
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
