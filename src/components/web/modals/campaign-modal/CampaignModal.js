@@ -40,7 +40,7 @@ const initialState = {
   isPreview: false,
   userInfo: null,
   maxClicks: 0,
-  modalTitle: Translations.modal_header.create_campaign,
+  modalTitle: "",
   form: {
     id: "",
     title: "",
@@ -297,9 +297,8 @@ class CampaignModal extends Component {
         modalTitle: Translations.modal_header.edit_campaign,
         isEdit: true
       };
-    } 
-      return null;
-    
+    }
+    return null;
   }
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -463,7 +462,9 @@ class CampaignModal extends Component {
         form.location.longitude &&
         form.location.address &&
         form.category &&
-        form.file
+        form.file &&
+        form.offers &&
+        form.inquiry
       );
     } else if (index === 1) {
       return form.description;
