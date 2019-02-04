@@ -15,7 +15,6 @@ class Community extends Component {
       isLoading,
       userCommunity
     } = this.props;
-    console.log(userCommunity);
     
     return (
       <div>

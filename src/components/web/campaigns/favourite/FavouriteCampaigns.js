@@ -18,20 +18,16 @@ class FavouriteCampaigns extends Component {
         </div>
         {!isLoading && (
           <div className="campaigns">
-            {this.props.campaignData.favouriteCampaign &&
-            this.props.campaignData.favouriteCampaign.length > 0 ? (
+            {
+              this.props.campaignData &&
+              this.props.campaignData.favouriteCampaign &&
+              this.props.campaignData.favouriteCampaign.length > 0 ? (
               this.props.campaignData.favouriteCampaign.map(campaign => {
                 return (
-                  ((campaign.postType &&
-                    campaign.postType.toLowerCase() ===
-                      enumerations.contentTypes.companyCampaign) ||
-                    campaign.postType.toLowerCase() ===
-                      enumerations.contentTypes.creatorCampaign) && (
                     <FavouriteCampaignItem
                       campaign={campaign}
                       key={campaign.id}
                     />
-                  )
                 );
               })
             ) : (
