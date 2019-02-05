@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
 import * as routes from "../../../../../lib/constants/routes";
+
 class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -267,9 +268,10 @@ class EditProfile extends Component {
   };
 
   render() {
-    const { form, isLoading } = this.state;
-    const { image, loginData } = this.props;
-    console.log("userData", loginData);
+    const { form, isLoading, userInfo } = this.state;
+    const { image } = this.props;
+    let loginUserData = null;
+    loginUserData = userInfo;
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -338,7 +340,9 @@ class EditProfile extends Component {
                   {this.state.error.name_company}
                 </span>
                 <label htmlFor="name">
-                  {Translations.editProfile.name_company}?{" "}
+                  {loginUserData && loginUserData.userType === "creator"
+                    ? Translations.editProfile.user
+                    : Translations.editProfile.name_company}
                 </label>
                 <Text
                   type="text"
@@ -556,8 +560,7 @@ class EditProfile extends Component {
 
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  searchData: state.searchData,
-  loginData: state.loginData
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {

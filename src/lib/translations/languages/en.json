@@ -679,7 +679,7 @@
       "type": "text"
     },
     "name_company": {
-      "name": "Name/Company",
+      "name": "Company",
       "type": "text"
     },
     "offer_tag": {
@@ -721,7 +721,8 @@
     "email": "Email",
     "inquiry_tag": "Inquiry-tag",
     "location": "Location",
-    "name_company": "Name / Company",
+    "user": "Name",
+    "name_company": "Company",
     "offer_tag": "Offer-tag",
     "phone_number": "Phone number",
     "profile_description": "Profile description",
