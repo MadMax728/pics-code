@@ -56,8 +56,8 @@ class Register extends Component {
                   {form.username.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
+                    <img src={images.checked} alt={"checked"} />
+                  )}
                   <span className="error-msg highlight">
                     {this.state.error.username}
                   </span>
@@ -76,8 +76,8 @@ class Register extends Component {
                   {form.email.length === 0 || form.emailValid ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
+                    <img src={images.checked} alt={"checked"} />
+                  )}
                   <span className="error-msg highlight">
                     {this.state.error.email}
                   </span>
@@ -97,8 +97,8 @@ class Register extends Component {
                   {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
+                    <img src={images.checked} alt={"checked"} />
+                  )}
                   <span className="error-msg highlight">
                     {this.state.error.password}
                   </span>
@@ -115,11 +115,11 @@ class Register extends Component {
                     onChange={this.handleChangeField}
                   />
                   {form.repeat_password.length === 0 ||
-                    form.repeat_password !== form.password ? (
-                      <img src={images.error} alt={"error"} />
-                    ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
+                  form.repeat_password !== form.password ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                    <img src={images.checked} alt={"checked"} />
+                  )}
                   <span className="error-msg highlight">
                     {this.state.error.repeat_password}
                   </span>
@@ -251,7 +251,6 @@ class Register extends Component {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
-    console.log(this.state.form);
     this.formValid();
   };
 
@@ -289,7 +288,6 @@ class Register extends Component {
       }
     });
   };
-
 }
 
 Register.propTypes = {
