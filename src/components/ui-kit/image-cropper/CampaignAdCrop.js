@@ -106,7 +106,7 @@ const CampaignAdCrop = ({
         <ImageItem item={image} userName={userInfo ? userInfo.username : ""} />
       )
       }
-      <div className="range-wrapr col-xs-12 mar50">
+      <div className="range-wrapr col-xs-12 mar50 add-wrapper">
         <img
           src={images.crop_pic}
           height="19"
