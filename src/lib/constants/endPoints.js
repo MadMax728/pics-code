@@ -125,6 +125,7 @@ export const addInquiryTagEndPoint = "/inquirytags";
 export const submitLoginEndPoint = "/auth/login";
 export const validateOTPEndPoint = "/auth/validate-otp";
 export const submitRegisterEndPoint = "/users";
+export const submitCompanyRegisterEndPoint = "/users/company/create";
 export const setNewPasswordEndPoint = "/users/set-password";
 export const submitResetPasswordEndPoint = "/users/forgot-password";
 export const getUserEndPoint = "/users/";
@@ -134,7 +135,6 @@ export const generateOTPEndPoint = "/auth/generate-otp";
 export const logoutEndPoint = "/auth/logout";
 export const getSocialNetworkEndPoint = "/auth/social-network-details";
 export const getUserCommunityEndPoint = "/users/community?followerId=";
-
 
 // Users Services
 export const getUserListSubscriberEndPoint =

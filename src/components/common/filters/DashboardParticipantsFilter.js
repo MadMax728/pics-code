@@ -189,12 +189,6 @@ class DashboardParticipantsFilter extends Component {
         className: "filter-title",
         type: Translations.left_sidebar_filter.gender.type,
         items: genderItems
-      },
-      {
-        name: Translations.left_sidebar_filter.age.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.age.type,
-        items: ageItems
       }
     ];
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
