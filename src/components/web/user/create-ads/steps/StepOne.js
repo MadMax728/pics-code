@@ -38,7 +38,7 @@ class StepOne extends Component {
       <div className="col-xs-12 no-padding">
         <div className="col-sm-12 upload-form">
           <div className="user-title">
-            <div className="normal_title">
+            <div className="normal_title modal-title">
               {Translations.create_ads.title_of_ads}
             </div>
           </div>

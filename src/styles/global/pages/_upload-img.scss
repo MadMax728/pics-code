@@ -257,7 +257,7 @@
 }
 .upload-pic-modal.create-campaign-modal{
   .modal-dialog{
-    width:700px;
+    width:915px;
     .modal-content{
       text-align: center;
       .modal-header{
@@ -266,14 +266,22 @@
       .modal-body{
         height: 800px;
         .box{
-          padding: 10rem 1.25rem;
+          padding: 12rem 1.25rem;
+          border:1px solid #979797;
+          height: 300px;
           .inputfile + label{
             max-width: 100%;
             margin: 0 auto;
           }
+          & ~ .add-wrapper{
+            height: 55px;
+            border:1px solid #979797;
+            margin-bottom: 30px;
+            padding: 12px 0 12px;
+          }
         }
         .upload-form{
-          padding: 20px 120px;
+          padding: 20px 190px;
           .user-title{
             .modal-title{
               font-size: 24px;
@@ -287,14 +295,75 @@
             }
             p{
               margin: 5px 0 15px;
+              display: inline-block;
+              width: 100%;
             }
             .options{
               label{
                 text-decoration: none;
+                font-size: 16px;
                 
               }
             }
           }
+        }
+      }
+    }
+  }
+}
+.create-campaign-modal.start-campaign-modal{
+  .modal-dialog{
+    .modal-content{
+      .modal-header{}
+      .modal-body{
+        .range-wrapr.add-wrapper{
+          position: relative;
+          padding: 0 50px;
+          .min-profile-pic{
+            width: 20px;
+            height: 20px;
+            left: 20px;
+            top: 18px;
+          }
+          input[type="range"]{
+            border:none;
+            margin: 15px 25px;
+          }
+          .runnable{
+            left: 55px;
+            top: 26px;
+          }
+          .max-profile-pic{
+            left: -7px;
+            top: 12px;
+          }
+        }
+      }
+      .add-wrapper.create-camp-ad-wrapr{
+        img{
+          top: -41px;
+        }
+      }
+    }
+  }
+}
+
+.create-campaign-modal.editor-modal{
+  .modal-dialog{
+    .modal-content{
+      .modal-header{
+
+      }
+      .modal-body{
+        min-height: 400px;
+        .create-campaign-wrapper{
+          .title{
+            padding: 15px 20px;
+          }
+        }
+        .quill {
+          padding: 20px;
+          height: 250px;
         }
       }
     }

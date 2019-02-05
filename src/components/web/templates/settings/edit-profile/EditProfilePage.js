@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
 import * as routes from "../../../../../lib/constants/routes";
+
 class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -167,9 +168,17 @@ class EditProfile extends Component {
           offer_tag: userData.offerTag ? userData.offerTag : [],
           inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
           offerTagList:
-            userData.offerTagList && userData.offerTagList.length !== 0 && userData.offerTagList.length !== undefined ? userData.offerTagList : [],
+            userData.offerTagList &&
+            userData.offerTagList.length !== 0 &&
+            userData.offerTagList.length !== undefined
+              ? userData.offerTagList
+              : [],
           inquiryTagList:
-          userData.inquiryTagList && userData.inquiryTagList.length !== 0 && userData.inquiryTagList.length !== undefined ? userData.inquiryTagList : []
+            userData.inquiryTagList &&
+            userData.inquiryTagList.length !== 0 &&
+            userData.inquiryTagList.length !== undefined
+              ? userData.inquiryTagList
+              : []
         }
       });
     }
@@ -259,8 +268,10 @@ class EditProfile extends Component {
   };
 
   render() {
-    const { form, isLoading } = this.state;
+    const { form, isLoading, userInfo } = this.state;
     const { image } = this.props;
+    let loginUserData = null;
+    loginUserData = userInfo;
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -329,7 +340,9 @@ class EditProfile extends Component {
                   {this.state.error.name_company}
                 </span>
                 <label htmlFor="name">
-                  {Translations.editProfile.name_company}?{" "}
+                  {loginUserData && loginUserData.userType === "creator"
+                    ? Translations.editProfile.user
+                    : Translations.editProfile.name_company}
                 </label>
                 <Text
                   type="text"
@@ -563,7 +576,8 @@ EditProfile.propTypes = {
   profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  loginData: PropTypes.any
 };
 
 export default connect(

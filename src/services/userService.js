@@ -1,8 +1,9 @@
 import apiFactory, { api } from "../api";
-import { 
+import {
   submitLoginEndPoint,
   validateOTPEndPoint,
   submitRegisterEndPoint,
+  submitCompanyRegisterEndPoint,
   setNewPasswordEndPoint,
   submitResetPasswordEndPoint,
   getUserEndPoint,
@@ -10,7 +11,7 @@ import {
   updateUserProfileEndPoint,
   generateOTPEndPoint,
   logoutEndPoint,
-  getSocialNetworkEndPoint,
+  getSocialNetworkEndPoint
 } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
@@ -23,12 +24,17 @@ const apiAuth = apiFactory(baseUrl);
  * @param {*} payload
  */
 
-export const submitLogin = payload => apiAuth.post(submitLoginEndPoint, payload);
+export const submitLogin = payload =>
+  apiAuth.post(submitLoginEndPoint, payload);
 
 export const validateOTP = payload =>
   apiAuth.post(validateOTPEndPoint, payload);
 
-export const submitRegister = payload => apiAuth.post(submitRegisterEndPoint, payload);
+export const submitRegister = payload =>
+  apiAuth.post(submitRegisterEndPoint, payload);
+
+export const submitCompanyRegister = payload =>
+  apiAuth.post(submitCompanyRegisterEndPoint, payload);
 
 export const setNewPassword = payload =>
   apiAuth.put(setNewPasswordEndPoint, payload);
