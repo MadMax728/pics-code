@@ -164,11 +164,11 @@ class LeftSideBar extends Component {
           exact
           component={SideBarSetting}
         />
-        <Route
+        {/* <Route
           path={routes.SETTINGS_BUSSINESS_PROFILE_ROUTE}
           exact
           component={SideBarSetting}
-        />
+        /> */}
         <Route
           path={routes.SETTINGS_EDIT_PROFILE_ROUTE}
           exact

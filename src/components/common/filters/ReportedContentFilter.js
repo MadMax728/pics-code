@@ -3,7 +3,8 @@ import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import * as routes from "../../../lib/constants";
+import * as routes from "../../../lib/constants/routes";
+import * as enumerations from "../../../lib/constants/enumerations";
 
 const relevanceItems = [
   { name: "all", className: "", value: "All" },
@@ -68,12 +69,14 @@ class ReportedContentFilter extends Component {
   }
 
   render() {
+    const { isRank } = this.props;
+    const { filterApply } = this.state;
     return (
       <div className="left-filters">
         <LeftSidebarFilter
           filters={Filters}
           onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
+          filterApply={filterApply}
           handleSelect={this.handleSelect}
         />
         <div className="filter-btn-wrapper">
@@ -89,13 +92,18 @@ class ReportedContentFilter extends Component {
               {Translations.filter.apply}
             </button>
           )}
-          <div className="filter-btn-wrapper">
-            <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
-              <button className="black_button" onClick={this.handleApplyClick}>
-                {Translations.filter.back}
-              </button>
-            </Link>
-          </div>
+          {
+            isRank === enumerations.adminRank.rank1 &&
+            (
+              <div className="filter-btn-wrapper">
+                <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
+                  <button className="black_button" onClick={this.handleApplyClick}>
+                    {Translations.filter.back}
+                  </button>
+                </Link>
+              </div>
+            )
+          }
         </div>
       </div>
     );
@@ -123,7 +131,8 @@ class ReportedContentFilter extends Component {
 
 ReportedContentFilter.propTypes = {
   handleApplyClick: PropTypes.func,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  isRank: PropTypes.string
 };
 
 export default ReportedContentFilter;
