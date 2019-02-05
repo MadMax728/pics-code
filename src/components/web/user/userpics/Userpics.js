@@ -28,7 +28,12 @@ class Userpics extends Component {
         <div className="col-sm-12">
           {picsDataList && (
             <div className="user-pics-carousel row">
-              <Carousel autoPlay showThumbs={false} interval={500}>
+              <Carousel
+                autoPlay
+                showThumbs={false}
+                interval={500}
+                showIndicators={false}
+              >
                 {picsDataList.map(picsDataRow => {
                   return (
                     <div key={picsDataRow.id}>
@@ -46,7 +51,7 @@ class Userpics extends Component {
                             item={picsDataRow.mediaUrl}
                           />
                         )}
-                      <p className="legend">{picsDataRow.title}</p>
+                      {/* <p className="legend">{picsDataRow.title}</p> */}
                     </div>
                   );
                 })}

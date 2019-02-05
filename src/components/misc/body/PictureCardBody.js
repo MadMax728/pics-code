@@ -19,50 +19,6 @@ class PictureCardBody extends Component {
           index % 2 ? "col-sm-6 pic-right-block" : "col-sm-6 pic-left-block"
         }
       >
-        {/* {pic && (
-          <div className={isReport ? "backoffice-user pic-sec-block pic-block" : "pic-sec-block pic-block"}>
-              {pic.typeContent &&
-                pic.typeContent.toLowerCase() ===
-                  enumerations.mediaTypes.video && (
-                  <VideoItem
-                    id={pic.id}
-                    item={pic.mediaUrl}
-                    isLoading={isLoading}
-                  />
-                )}
-              {(!pic.typeContent ||
-                (pic.typeContent &&
-                  pic.typeContent.toLowerCase() ===
-                    enumerations.mediaTypes.image)) && (
-                <ImageItem item={pic.mediaUrl} 
-                    userName={pic.userName} 
-                    isLoading={isLoading} />
-              )}
-            <div className="name-wrapper">
-                <Link to={`${routes.ABOUT_ROUTE}/${pic.userName}`}>
-                  <div className="username float_left">{pic.userName}</div>
-                </Link>
-                <div className="show_more_options pic">
-                  <ThreeDots
-                    id={`report-${pic.id}`}
-                    role="button"
-                    dataTip="tooltip"
-                    dataClass="tooltip-wrapr"
-                    getContent={renderReportTips}
-                    effect="solid"
-                    delayHide={500}
-                    delayShow={500}
-                    delayUpdate={500}
-                    place={"left"}
-                    border
-                    type={"light"}
-                  />
-                </div>
-            </div>
-            {pic && isReport && <ReportCard item={pic} />}
-          </div>
-        )} */}
-
         {pic && pic.userPics[0] && (
           <div
             className={isReport ? "backoffice-user pic-block" : "pic-block"}

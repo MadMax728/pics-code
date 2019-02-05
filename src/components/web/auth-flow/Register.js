@@ -6,7 +6,10 @@ import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { Text, RadioButton } from "../../ui-kit/CommonUIComponents";
 import PropTypes from "prop-types";
-import { submitRegister } from "../../../actions/register";
+import {
+  submitRegister,
+  submitCompanyRegister
+} from "../../../actions/register";
 import { Auth } from "../../../auth";
 import { connect } from "react-redux";
 
@@ -15,6 +18,7 @@ class Register extends Component {
     super(props);
 
     this.state = {
+      isUser: true,
       form: {
         gender: "male",
         username: "",
@@ -29,7 +33,7 @@ class Register extends Component {
   }
 
   render() {
-    const { form } = this.state;
+    const { form, isUser } = this.state;
 
     return (
       <div className="login-process">
@@ -124,35 +128,42 @@ class Register extends Component {
                     {this.state.error.repeat_password}
                   </span>
                 </div>
-                <div className="form-group">
-                  <ul className="options">
-                    <li>
-                      <RadioButton
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="male"
-                        defaultChecked={form.gender === "male"}
-                        className="black_button"
-                        onChange={this.handleChangeField}
-                      />
-                      <label htmlFor="male">{Translations.register.male}</label>
-                    </li>
-                    <li>
-                      <RadioButton
-                        type="radio"
-                        id="female"
-                        value="female"
-                        name="gender"
-                        defaultChecked={form.gender === "female"}
-                        onChange={this.handleChangeField}
-                      />
-                      <label htmlFor="female">
-                        {Translations.register.female}
-                      </label>
-                    </li>
-                  </ul>
-                </div>
+                {isUser ? (
+                  <div className="form-group">
+                    <ul className="options">
+                      <li>
+                        <RadioButton
+                          type="radio"
+                          id="male"
+                          name="gender"
+                          value="male"
+                          defaultChecked={form.gender === "male"}
+                          className="black_button"
+                          onChange={this.handleChangeField}
+                        />
+                        <label htmlFor="male">
+                          {Translations.register.male}
+                        </label>
+                      </li>
+                      <li>
+                        <RadioButton
+                          type="radio"
+                          id="female"
+                          value="female"
+                          name="gender"
+                          defaultChecked={form.gender === "female"}
+                          onChange={this.handleChangeField}
+                        />
+                        <label htmlFor="female">
+                          {Translations.register.female}
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
+
                 <div className="form-group">
                   <button className="blue_button" type="submit">
                     {Translations.register.register}
@@ -181,9 +192,19 @@ class Register extends Component {
                   </Link>
                   .
                 </div>
+
                 <div className="free-register">
                   {Translations.register.free}{" "}
-                  <b>{Translations.register.company}</b>
+                  <b
+                    onClick={this.handleUserLogin}
+                    onKeyPress={this.onKeyHandle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    {isUser
+                      ? Translations.register.company
+                      : Translations.register.user}
+                  </b>
                 </div>
               </div>
               <DownloadStore />
@@ -198,6 +219,10 @@ class Register extends Component {
   //logout user
   componentDidMount = () => {
     Auth.logoutUser();
+  };
+
+  handleUserLogin = () => {
+    this.setState({ isUser: !this.state.isUser });
   };
 
   formValid = () => {
@@ -274,25 +299,42 @@ class Register extends Component {
       confirmPassword: form.repeat_password
     };
 
-    this.props.submitRegister(data).then(() => {
-      Auth.logoutUser();
-      const errors = {};
-      if (
-        this.props.registerData.error &&
-        this.props.registerData.error.status === 400
-      ) {
-        errors.servererror = "Something went wrong";
-        this.setState({ error: errors });
-      } else {
-        this.props.history.push(routes.ROOT_ROUTE);
-      }
-    });
+    if (this.state.isUser) {
+      this.props.submitRegister(data).then(() => {
+        Auth.logoutUser();
+        const errors = {};
+        if (
+          this.props.registerData.error &&
+          this.props.registerData.error.status === 400
+        ) {
+          errors.servererror = "Something went wrong";
+          this.setState({ error: errors });
+        } else {
+          this.props.history.push(routes.ROOT_ROUTE);
+        }
+      });
+    } else {
+      this.props.submitCompanyRegister(data).then(() => {
+        Auth.logoutUser();
+        const errors = {};
+        if (
+          this.props.registerData.error &&
+          this.props.registerData.error.status === 400
+        ) {
+          errors.servererror = "Something went wrong";
+          this.setState({ error: errors });
+        } else {
+          this.props.history.push(routes.ROOT_ROUTE);
+        }
+      });
+    }
   };
 }
 
 Register.propTypes = {
   history: PropTypes.any,
   submitRegister: PropTypes.func.isRequired,
+  submitCompanyRegister: PropTypes.func.isRequired,
   registerData: PropTypes.object
 };
 
@@ -301,7 +343,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  submitRegister
+  submitRegister,
+  submitCompanyRegister
 };
 
 export default connect(

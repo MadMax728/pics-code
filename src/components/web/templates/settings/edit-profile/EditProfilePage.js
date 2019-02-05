@@ -167,9 +167,17 @@ class EditProfile extends Component {
           offer_tag: userData.offerTag ? userData.offerTag : [],
           inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
           offerTagList:
-            userData.offerTagList && userData.offerTagList.length !== 0 && userData.offerTagList.length !== undefined ? userData.offerTagList : [],
+            userData.offerTagList &&
+            userData.offerTagList.length !== 0 &&
+            userData.offerTagList.length !== undefined
+              ? userData.offerTagList
+              : [],
           inquiryTagList:
-          userData.inquiryTagList && userData.inquiryTagList.length !== 0 && userData.inquiryTagList.length !== undefined ? userData.inquiryTagList : []
+            userData.inquiryTagList &&
+            userData.inquiryTagList.length !== 0 &&
+            userData.inquiryTagList.length !== undefined
+              ? userData.inquiryTagList
+              : []
         }
       });
     }
@@ -260,7 +268,8 @@ class EditProfile extends Component {
 
   render() {
     const { form, isLoading } = this.state;
-    const { image } = this.props;
+    const { image, loginData } = this.props;
+    console.log("userData", loginData);
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -547,7 +556,8 @@ class EditProfile extends Component {
 
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  searchData: state.searchData
+  searchData: state.searchData,
+  loginData: state.loginData
 });
 
 const mapDispatchToProps = {
@@ -563,7 +573,8 @@ EditProfile.propTypes = {
   profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  loginData: PropTypes.any
 };
 
 export default connect(

@@ -19,6 +19,7 @@ const initialState = {
   },
   registerData: {
     registeredUser: null,
+    registeredCompanyUser: null,
     isLoading: false,
     error: null
   },
