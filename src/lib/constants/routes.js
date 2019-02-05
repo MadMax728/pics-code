@@ -56,7 +56,7 @@ export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/:id";
 // settings routes
 export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit-profile";
 export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
-export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness-profile";
+// export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness-profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
 export const BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
   "/settings/campaigns/statistics/";
@@ -127,8 +127,7 @@ export const BACK_OFFICE_CMS_MANAGMENT_ROUTE = "/back-office/cms-managment";
 export const BACK_OFFICE_CREATE_CMS_ROUTE = "/back-office/cms-managment/create";
 export const BACK_OFFICE_EDIT_CMS_ROUTE = "/back-office/cms-managment/:id";
 export const BACK_OFFICE_ADD_ADMIN_ROUTE = "/back-office/add-admin";
-export const BACK_OFFICE_ADD_VERIFICATION_ROUTE =
-  "/back-office/add-verification";
+// export const BACK_OFFICE_ADD_VERIFICATION_ROUTE =  "/back-office/add-verification";
 export const BACK_OFFICE_ADD_VOUCHER_ROUTE = "/back-office/add-voucher";
 export const BACK_OFFICE_DATA_DOWNLOAD_ROUTE = "/back-office/data-download";
 

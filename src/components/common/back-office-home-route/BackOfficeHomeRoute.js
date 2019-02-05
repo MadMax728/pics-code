@@ -21,6 +21,7 @@ import {
 } from "../../back-office";
 
 import * as settings from "../../web/templates";
+import * as enumerations from "../../../lib/constants/enumerations";
 import { PageNotFound } from "../../web/page-not-found";
 
 class BackOfficeHomeRoute extends Component {
@@ -177,7 +178,7 @@ class BackOfficeHomeRoute extends Component {
       <div>
         <Switch>
           {/* backoffice routes */}
-          {!isRank && (
+          {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_ROOT_ROUTE}
               exact
@@ -185,7 +186,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {!isRank && (
+          {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
               exact
@@ -193,7 +194,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {!isRank && (
+          {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
               exact
@@ -201,7 +202,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {!isRank && (
+          {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
               exact
@@ -209,7 +210,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {!isRank && (
+          {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
               exact
@@ -217,15 +218,15 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {!isRank && (
+          {/* {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
               exact
               component={this.handleAddVerificationPage}
             />
-          )}
+          )} */}
 
-          {!isRank && (
+          {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
               exact
@@ -233,7 +234,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {!isRank && (
+          {isRank === enumerations.adminRank.rank1 && (
             <Route
               path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
               exact
@@ -243,7 +244,8 @@ class BackOfficeHomeRoute extends Component {
 
           {/*  Reviews Routes */}
 
-          {!isRank && (
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank2) && 
+          (
             <Route
               path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
               exact
@@ -251,7 +253,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {!isRank && (
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank2) && (
             <Route
               path={routes.BACK_OFFICE_ADS_ROUTE}
               exact
@@ -260,42 +262,63 @@ class BackOfficeHomeRoute extends Component {
           )}
 
           {/* reported routes */}
-          <Route
-            path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
-            exact
-            component={this.handleImageBO}
-          />
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+            <Route
+              path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
+              exact
+              component={this.handleImageBO}
+            />
+            )
+          }
 
-          <Route
-            path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
-            exact
-            component={this.handleVideosBOPage}
-          />
-          <Route
-            path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
-            exact
-            component={this.handleReportedCampaignsPage}
-          />
-          <Route
-            path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
-            exact
-            component={this.handlePicsPage}
-          />
-          <Route
-            path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
-            exact
-            component={this.handleReportedAdsPage}
-          />
-          <Route
-            path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
-            exact
-            component={this.handleCommentsPage}
-          />
-          <Route
-            path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
-            exact
-            component={this.handleUsersPage}
-          />
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+            <Route
+              path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
+              exact
+              component={this.handleVideosBOPage}
+            />
+            )
+          }
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+            <Route
+              path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
+              exact
+              component={this.handleReportedCampaignsPage}
+            />
+            )
+          }
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+            <Route
+              path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
+              exact
+              component={this.handlePicsPage}
+            />
+            )
+          }
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+            <Route
+              path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
+              exact
+              component={this.handleReportedAdsPage}
+            />
+            )
+          }
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+            <Route
+              path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
+              exact
+              component={this.handleCommentsPage}
+            />
+            )
+          }
+          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+            <Route
+              path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
+              exact
+              component={this.handleUsersPage}
+            />
+            )
+          }
           <Route exact path="/*" component={this.handlePageNotFound} />
         </Switch>
       </div>
@@ -307,7 +330,7 @@ BackOfficeHomeRoute.propTypes = {
   handleModalInfoShow: PropTypes.func.isRequired,
   handleModalInfoDetailsShow: PropTypes.func.isRequired,
   handleModalInfoDetailsCallbackShow: PropTypes.func.isRequired,
-  isRank: PropTypes.bool.isRequired
+  isRank: PropTypes.string.isRequired
 };
 
 export default BackOfficeHomeRoute;

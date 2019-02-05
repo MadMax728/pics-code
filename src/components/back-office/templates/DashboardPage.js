@@ -58,11 +58,11 @@ class DashboardPage extends Component {
             <div>
               {key_statistics && this.renderKeyStatistics()}
 
-              {content_statistics && this.renderContentStatistics()}
+              {/* {content_statistics && this.renderContentStatistics()}
 
               {campaign_statistics_company && this.renderCampaignStatisticsCompany()}
 
-              {ads_statisitcs && this.renderAdsStatistics()}
+              {ads_statisitcs && this.renderAdsStatistics()} */}
             </div>
           }
 

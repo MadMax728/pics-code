@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FavouriteCampaignItem from "./FavouriteCampaignItem";
 import { Translations } from "../../../../lib/translations";
-import * as enumerations from "../../../../lib/constants/enumerations";
+// import * as enumerations from "../../../../lib/constants/enumerations";
 import { getFavouriteCampaigns } from "../../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";

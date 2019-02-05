@@ -25,12 +25,12 @@ const Links = [
     activeClassName: "active",
     text: Translations.left_sidebar_settings.privacy
   },
-  {
-    to: routes.SETTINGS_BUSSINESS_PROFILE_ROUTE,
-    className: "secondary_title",
-    activeClassName: "active",
-    text: Translations.left_sidebar_settings.bussiness_profile
-  },
+  // {
+  //   to: routes.SETTINGS_BUSSINESS_PROFILE_ROUTE,
+  //   className: "secondary_title",
+  //   activeClassName: "active",
+  //   text: Translations.left_sidebar_settings.bussiness_profile
+  // },
   {
     to: routes.SETTINGS_CAMPAIGN_ROUTE,
     className: "secondary_title",

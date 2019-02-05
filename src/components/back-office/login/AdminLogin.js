@@ -109,7 +109,10 @@ class AdminLogin extends Component {
     let root_route;
     this.props.submitAdminLogin({ otp }).then(() => {
       if (this.props.loginData && this.props.loginData.user && this.props.loginData.user.success === true)
-        if (this.props.loginData.user.data.role === enumerations.adminRank.rank3) {
+        if (this.props.loginData.user.data.role === enumerations.adminRank.rank2) {
+          root_route = routes.BACK_OFFICE_CAMPAIGNS_ROUTE;        
+        }
+        else if (this.props.loginData.user.data.role === enumerations.adminRank.rank3) {
           root_route = routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE;
         }
         else {

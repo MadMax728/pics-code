@@ -15,7 +15,7 @@ class BackOfficeHome extends Component {
       modalInfoShow: false,
       modalInfoType: "",
       modalInfo: null,
-      isRank: false,
+      isRank: "",
       userInfo: null,
       statusCallback: () => { }
     };
@@ -29,7 +29,8 @@ class BackOfficeHome extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     if (userInfo) { 
-      this.setState({isRank: userInfo.role === enumerations.adminRank.rank3});
+      this.setState({isRank: userInfo.role});
+      // this.setState({isRank: enumerations.adminRank.rank2});
     }
   }
 

@@ -143,11 +143,11 @@ class HomeRoute extends Component {
             component={this.handlePrivacyPage}
           />
 
-          <Route
+          {/* <Route
             exact
             path={routes.SETTINGS_BUSSINESS_PROFILE_ROUTE}
             component={BusinessProfilePage}
-          />
+          /> */}
 
           <Route
             exact
