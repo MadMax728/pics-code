@@ -435,11 +435,15 @@ a.more-strip.zIndex0 {
     width:915px;
     .modal-content{
       text-align: center;
+      height: auto;
       .modal-header{
         text-align: right;
       }
       .modal-body{
-        height: 800px;
+        height: 600px;
+        >div{
+          height: 100%;
+        }
         .box{
           padding: 12rem 1.25rem;
           border:1px solid #979797;
