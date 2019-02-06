@@ -260,11 +260,15 @@
     width:915px;
     .modal-content{
       text-align: center;
+      height: auto;
       .modal-header{
         text-align: right;
       }
       .modal-body{
-        height: 800px;
+        height: 600px;
+        >div{
+          height: 100%;
+        }
         .box{
           padding: 12rem 1.25rem;
           border:1px solid #979797;
@@ -282,6 +286,8 @@
         }
         .upload-form{
           padding: 20px 190px;
+          height: 100%;
+          border:none;
           .user-title{
             .modal-title{
               font-size: 24px;
