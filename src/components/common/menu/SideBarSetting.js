@@ -12,7 +12,34 @@ const admin = {
   text: Translations.left_sidebar_settings.admin
 };
 
-const Links = [
+const userLinks = [
+  {
+    to: routes.SETTINGS_EDIT_PROFILE_ROUTE,
+    className: "secondary_title",
+    activeClassName: "active",
+    text: Translations.left_sidebar_settings.edit_profile
+  },
+  {
+    to: routes.SETTINGS_PRIVACY_ROUTE,
+    className: "secondary_title",
+    activeClassName: "active",
+    text: Translations.left_sidebar_settings.privacy
+  },
+  {
+    to: routes.SETTINGS_DATA_DOWNLOAD_ROUTE,
+    className: "secondary_title",
+    activeClassName: "active",
+    text: Translations.left_sidebar_settings.data_download
+  },
+  {
+    to: routes.LOGOUT_ROUTE,
+    className: "secondary_title padding",
+    activeClassName: "active",
+    text: Translations.left_sidebar_settings.logout
+  }
+];
+
+const companyLinks = [
   {
     to: routes.SETTINGS_EDIT_PROFILE_ROUTE,
     className: "secondary_title",
@@ -68,6 +95,20 @@ const SideBarSetting = () => {
    * If user is admin and validate with login API
    * If menu is already exist then we don't need to add it
    */
+
+  const storage = Auth.extractJwtFromStorage();
+  let userInfo = null;
+  if (storage) {
+    userInfo = JSON.parse(storage.userInfo);
+  }
+  const selectedUserType = "creator";
+
+  let Links;
+  if (userInfo && userInfo.userType === selectedUserType) {
+    Links = userLinks;
+  } else {
+    Links = companyLinks;
+  }
   const isNeedAdminMenu = _.find(Links, admin);
 
   if (Auth.isUserAdmin() && !isNeedAdminMenu) Links.splice(1, 0, admin);

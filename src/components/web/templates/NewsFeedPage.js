@@ -14,13 +14,12 @@ class NewsFeedPage extends Component {
 
   render() {
     const { isLoading } = this.props;
-    const { isPrivate, newsFeedList } = this.state;
+    const { newsFeedList } = this.state; /* isPrivate*/
     return (
       <div className={"middle-section padding-rl-10"}>
         {newsFeedList &&
           newsFeedList.length > 0 &&
           !isLoading &&
-          !isPrivate &&
           this.renderNewsFeedList()}
         {isLoading && <CampaignLoading />}
         {!isLoading &&
@@ -44,11 +43,11 @@ class NewsFeedPage extends Component {
             "getNewsFeedOther",
             this.props.userDataByUsername.user.data.id
           );
-          this.setState({
-            isPrivate: this.props.userDataByUsername.user.data.isPrivate
-              ? this.props.userDataByUsername.user.data.isPrivate
-              : false
-          });
+          // this.setState({
+          //   isPrivate: this.props.userDataByUsername.user.data.isPrivate
+          //     ? this.props.userDataByUsername.user.data.isPrivate
+          //     : false
+          // });
         }
       });
     } else {
@@ -78,11 +77,11 @@ class NewsFeedPage extends Component {
               "getNewsFeedOther",
               this.props.userDataByUsername.user.data.id
             );
-            this.setState({
-              isPrivate: this.props.userDataByUsername.user.data.isPrivate
-                ? this.props.userDataByUsername.user.data.isPrivate
-                : false
-            });
+            // this.setState({
+            //   isPrivate: this.props.userDataByUsername.user.data.isPrivate
+            //     ? this.props.userDataByUsername.user.data.isPrivate
+            //     : false
+            // });
           }
         });
       } else {
@@ -129,7 +128,6 @@ class NewsFeedPage extends Component {
                 isDescription
               />
             )}
-
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.typeContent &&
@@ -176,7 +174,6 @@ class NewsFeedPage extends Component {
                 isDescription
               />
             )}
-
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===

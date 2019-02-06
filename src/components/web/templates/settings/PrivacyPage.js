@@ -90,7 +90,7 @@ class PrivacyPage extends Component {
               {Translations.privacy.limitations}
             </div>
             <div className="limitation-wrapper">
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-sm-6">
                   {Translations.privacy.set_my_profile_to_private}
                 </div>
@@ -118,7 +118,7 @@ class PrivacyPage extends Component {
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="row">
                 <div className="col-sm-6">
                   {Translations.privacy.social_share_function}

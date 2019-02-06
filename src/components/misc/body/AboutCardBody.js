@@ -3,8 +3,17 @@ import PropTypes from "prop-types";
 import { SocialNetworks } from "../../web/templates/settings/edit-profile";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../lib/translations";
+import { Auth } from "../../../auth";
+import { DateFormat } from "../../Factory";
+import moment from "moment";
 
 const AboutCardBody = ({ about }) => {
+  const storage = Auth.extractJwtFromStorage();
+  let userInfo = null;
+  if (storage) {
+    userInfo = JSON.parse(storage.userInfo);
+  }
+  const selectedUserType = "creator";
   return (
     <div>
       <div className="about-wrapper">
@@ -18,17 +27,33 @@ const AboutCardBody = ({ about }) => {
               <span>{about.username}</span>
             </li>
             <li>
-              <span>{Translations.about.name_company}</span>
+              <span>
+                {userInfo && userInfo.userType === selectedUserType
+                  ? Translations.about.user
+                  : Translations.about.name_company}
+              </span>
               <span>{about.name}</span>
             </li>
-            <li>
-              <span>{Translations.about.date_of_birth}</span>
-              <span>{about.birthDate}</span>
-            </li>
-            <li>
-              <span>{Translations.about.gender}</span>
-              <span>{about.gender}</span>
-            </li>
+            {userInfo && userInfo.userType === selectedUserType ? (
+              <li>
+                <span>{Translations.about.date_of_birth}</span>
+                <span>
+                  {moment
+                    .unix(about.birthDate)
+                    .format(Translations.date_format.date)}
+                </span>
+              </li>
+            ) : (
+              ""
+            )}
+            {userInfo && userInfo.userType === selectedUserType ? (
+              <li>
+                <span>{Translations.about.gender}</span>
+                <span>{about.gender}</span>
+              </li>
+            ) : (
+              ""
+            )}
             <li>
               <span>{Translations.about.category}</span>
               <span>{about.category && about.category[0].categoryName}</span>

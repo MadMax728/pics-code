@@ -2,20 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import {
-  sendRequest,
-  getUnsubscribe
-} from "../../../../actions";
+import { sendRequest, getUnsubscribe } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
 
 class Community extends Component {
   render() {
-    const {
-      isLoading,
-      userCommunity
-    } = this.props;
-    
+    const { isLoading, userCommunity } = this.props;
+
     return (
       <div>
         <div className="normal_title padding-15">
@@ -32,11 +26,12 @@ class Community extends Component {
                 let classNameText = "filled_button";
                 let btnText =
                   Translations.profile_community_right_sidebar.Subscribed;
-                if (user.isPending) {
-                  btnText =
-                    Translations.profile_community_right_sidebar.Pending;
-                  classNameText = "filled_button";
-                } else if (user.isSubscribe) {
+                // if (user.isPending) {
+                //   btnText =
+                //     Translations.profile_community_right_sidebar.Pending;
+                //   classNameText = "filled_button";
+                // } else
+                if (user.isSubscribe) {
                   btnText =
                     Translations.profile_community_right_sidebar.Subscribed;
                   classNameText = "filled_button";
@@ -54,33 +49,33 @@ class Community extends Component {
                 };
                 return (
                   <div key={user.id}>
-                      <div className="community_wrapper">
-                        <div className="community-user-image">
-                          <Link to={profile_route}>
-                            <img
-                              src={user.profileUrl}
-                              alt="campaign"
-                              className="img-circle img-responsive"
-                            />
-                          </Link>
-                        </div>
-                        <div className="community-user-name">
-                          <Link to={profile_route}>
-                            <div className="normal_title">{user.username}</div>
-                            <div className="secondary_title">{user.name}</div>
-                          </Link>
-                        </div>
-                        <div className="community-subscribe">
-                          <button
-                            className={actionButton.className}
-                            id={actionButton.userId}
-                            onClick={actionButton.handleActionClick}
-                            disabled={actionButton.isLoading}
-                          >
-                            {actionButton.btnText}
-                          </button>
-                        </div>
+                    <div className="community_wrapper">
+                      <div className="community-user-image">
+                        <Link to={profile_route}>
+                          <img
+                            src={user.profileUrl}
+                            alt="campaign"
+                            className="img-circle img-responsive"
+                          />
+                        </Link>
                       </div>
+                      <div className="community-user-name">
+                        <Link to={profile_route}>
+                          <div className="normal_title">{user.username}</div>
+                          <div className="secondary_title">{user.name}</div>
+                        </Link>
+                      </div>
+                      <div className="community-subscribe">
+                        <button
+                          className={actionButton.className}
+                          id={actionButton.userId}
+                          onClick={actionButton.handleActionClick}
+                          disabled={actionButton.isLoading}
+                        >
+                          {actionButton.btnText}
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 );
               })
@@ -109,13 +104,16 @@ class Community extends Component {
   handleSubscribed = e => {
     const errors = {};
     const { sendRequest, getUnsubscribe, userCommunity } = this.props;
-    const selectedUserList = userCommunity.find(user => user.id === e.target.id);
+    const selectedUserList = userCommunity.find(
+      user => user.id === e.target.id
+    );
     console.log(e.target.id);
-    if (selectedUserList.isPending) {
-      // To Do - On Pending request click
-    } else if (selectedUserList.subscribeId === "") {
+    // if (selectedUserList.isPending) {
+    //   // To Do - On Pending request click
+    // } else
+    if (selectedUserList.subscribeId === "") {
       const requestData = { followers: e.target.id };
-      
+
       sendRequest(requestData).then(() => {
         if (
           this.props.usersData.error &&
@@ -150,7 +148,7 @@ const mapStateToProps = state => ({
   userCommunity: state.communityData.userCommunity,
   isLoading: state.communityData.isLoading,
   error: state.communityData.error,
-  usersData: state.usersData,
+  usersData: state.usersData
 });
 
 const mapDispatchToProps = {

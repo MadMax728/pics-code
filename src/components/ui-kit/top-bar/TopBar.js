@@ -35,21 +35,24 @@ class TopBar extends Component {
     return (
       <div>
         <div className="user_info">
-          <UserProfileImage item={items.userProfile ? items.userProfile : images.crop_pic} 
-            userName={items.username ? items.username : "Username"}/>
+          <UserProfileImage
+            item={items.userProfile ? items.userProfile : images.crop_pic}
+            userName={items.username ? items.username : "Username"}
+          />
           <div className="user-details no-padding-right padding-l-10">
             <div className="bg-white padding-25 user_details">
               <div className="user_name">
                 {items.username ? items.username : "Username"}
               </div>
-              {items.length !== 0 && items.private && (
+              {/* is Private Profile */}
+              {/* {items.length !== 0 && items.private && (
                 <img src={images.tick} alt="tick" className="tick" />
               )}
               {items.length !== 0 && items.private && (
                 <span className="profile-type">
                   {Translations.top_bar.private_profile}
                 </span>
-              )}
+              )} */}
               {items.length !== 0 && items.settings && (
                 <div className="settings">
                   <div
@@ -68,32 +71,32 @@ class TopBar extends Component {
               )}
               {items.length !== 0 && items.more && (
                 <div className="settings">
-                    <div
-                      className="share-wrapr"
-                      onClick={handeleShare}
-                      onKeyDown={this.handleKeyDown}
+                  <div
+                    className="share-wrapr"
+                    onClick={handeleShare}
+                    onKeyDown={this.handleKeyDown}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    <img src={images.share} alt="share" />
+                  </div>
+                  <div className="tooltip-dot">
+                    <ThreeDots
+                      id={`topbar-${items.userid}`}
                       role="button"
-                      tabIndex="0"
-                    >
-                      <img src={images.share} alt="share" />
-                    </div>
-                    <div className="tooltip-dot">
-                      <ThreeDots
-                        id={`topbar-${items.userid}`}
-                        role="button"
-                        dataTip="tooltip"
-                        dataClass="tooltip-wrapr"
-                        /* eslint-disable */
-                        getContent={() => this.renderDotTips(items.userid)}
-                        effect="solid"
-                        delayHide={500}
-                        delayShow={500}
-                        delayUpdate={500}
-                        place={"left"}
-                        border
-                        type={"light"}
-                      />
-                    </div>
+                      dataTip="tooltip"
+                      dataClass="tooltip-wrapr"
+                      /* eslint-disable */
+                      getContent={() => this.renderDotTips(items.userid)}
+                      effect="solid"
+                      delayHide={500}
+                      delayShow={500}
+                      delayUpdate={500}
+                      place={"left"}
+                      border
+                      type={"light"}
+                    />
+                  </div>
                 </div>
               )}
               <div className="clearfix" />
@@ -288,7 +291,6 @@ class TopBar extends Component {
       />
     );
   };
-
 }
 
 const mapStateToProps = state => ({
