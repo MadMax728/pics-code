@@ -24,7 +24,7 @@ class Notifications extends Component {
             <NotificationsList />
           </Tab>
           {/* for Requests tab */}
-          <Tab
+          {/* <Tab
             tabClassName="tab-header"
             eventKey={3}
             title={
@@ -32,14 +32,13 @@ class Notifications extends Component {
             }
           >
             <Requests />
-          </Tab>
+          </Tab> */}
         </Tabs>
       </div>
     );
   }
 }
 
-Notifications.propTypes = {
-};
+Notifications.propTypes = {};
 
 export default Notifications;
