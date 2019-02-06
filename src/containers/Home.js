@@ -115,6 +115,7 @@ class Home extends Component {
             modalInfoType={this.state.modalInfoType}
             handleModalInfoMsgShow={this.handleModalInfoMsgShow}
             data={data}
+            history={this.props.history}
           />
 
           <InfoModal
@@ -127,6 +128,7 @@ class Home extends Component {
             handleProfile={this.handleProfile}
             data={data}
             image={image}
+            history={this.props.history}
           />
 
           <div className="container">
