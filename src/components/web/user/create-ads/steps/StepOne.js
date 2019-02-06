@@ -50,8 +50,8 @@ class StepOne extends Component {
               <p>
                 This is example text. This is example text. This is example text
               </p>
-              {form.fileType &&
-                form.typeContent === enumerations.typeContent.image && (
+              {/* {form.fileType &&
+                form.typeContent === enumerations.typeContent.image && ( */}
                   <ImageCropper
                     image={form.image}
                     handleEditImage={handleEditImage}
@@ -60,8 +60,8 @@ class StepOne extends Component {
                     handleActualImg={handleActualImg}
                     handleScale={handleScale}
                   />
-                )}
-              {!form.fileType &&
+                {/* )} */}
+              {/* {!form.fileType &&
                 form.video &&
                 form.typeContent === enumerations.typeContent.video && (
                   <video controls>
@@ -71,7 +71,7 @@ class StepOne extends Component {
                       type={form.file ? form.file.type : ""}
                     />
                   </video>
-                )}
+                )} */}
             </div>
             <div className="form-group">
               <label htmlFor="title">{Translations.create_ads.add_title}</label>
