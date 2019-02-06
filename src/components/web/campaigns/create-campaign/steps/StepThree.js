@@ -4,9 +4,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
-import {
-  RightSidebarModal
-} from "../../../../ui-kit";
+import { RightSidebarModal } from "../../../../ui-kit";
 
 class StepThree extends Component {
   constructor(props) {
@@ -77,6 +75,7 @@ class StepThree extends Component {
               value={form.budget}
               className=""
               handleSelect={handleSelect}
+              isFor="campaign"
             />
             {form.budget && form.budget.length === 0 && form.error && (
               <span className="error-msg highlight">
@@ -113,10 +112,7 @@ class StepThree extends Component {
             </li>
           </ul>
         </div>
-        <RightSidebarModal
-          userInfo={userInfo}
-          form={form}
-        />
+        <RightSidebarModal userInfo={userInfo} form={form} />
       </div>
     );
   }

@@ -108,7 +108,8 @@ class CampaignModal extends Component {
     let modalClassName = "";
 
     if (stepIndex === 0) {
-      modalClassName = "modal fade create-campaign-modal upload-pic-modal start-campaign-modal overflow-scroll ";
+      modalClassName =
+        "modal fade create-campaign-modal upload-pic-modal start-campaign-modal overflow-scroll ";
     } else if (stepIndex !== 0 && stepIndex < 4) {
       modalClassName = "modal fade create-campaign-modal editor-modal";
     } else if (stepIndex > 3 && stepIndex < 5) {
@@ -220,7 +221,7 @@ class CampaignModal extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({ stepIndex: 0, isPreview: false });
+    this.setState({ stepIndex: 2, isPreview: false });
     if (userInfo) {
       this.setState({ userInfo });
     }

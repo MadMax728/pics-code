@@ -133,3 +133,93 @@ export const likeContentTypes = {
   video: "Video",
   image: "Image"
 };
+
+export const dailyBudgetForCampaigns = [
+  {
+    id: 10000,
+    label: "10,000 €"
+  },
+  {
+    id: 7500,
+    label: "7500 €"
+  },
+  {
+    id: 5000,
+    label: "5000 €"
+  },
+  {
+    id: 3000,
+    label: "3000 €"
+  },
+  {
+    id: 2500,
+    label: "2500 €"
+  },
+  {
+    id: 2000,
+    label: "2000 €"
+  },
+  {
+    id: 1500,
+    label: "1500 €"
+  },
+  {
+    id: 1000,
+    label: "1000 €"
+  },
+  {
+    id: 500,
+    label: "500 €"
+  },
+  {
+    id: 200,
+    label: "200 €"
+  },
+  {
+    id: 100,
+    label: "100 €"
+  }
+];
+
+export const dailyBudgetForAds = [
+  {
+    id: 8000,
+    label: "8000 €"
+  },
+  {
+    id: 7000,
+    label: "7000 €"
+  },
+  {
+    id: 6000,
+    label: "6000 €"
+  },
+  {
+    id: 5000,
+    label: "5000 €"
+  },
+  {
+    id: 4000,
+    label: "4000 €"
+  },
+  {
+    id: 3000,
+    label: "3000 €"
+  },
+  {
+    id: 2500,
+    label: "2500 €"
+  },
+  {
+    id: 2000,
+    label: "2000 €"
+  },
+  {
+    id: 1500,
+    label: "1500 €"
+  },
+  {
+    id: 1000,
+    label: "1000 €"
+  }
+];
