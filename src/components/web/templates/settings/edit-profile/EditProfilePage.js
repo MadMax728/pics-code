@@ -270,8 +270,7 @@ class EditProfile extends Component {
   render() {
     const { form, isLoading, userInfo } = this.state;
     const { image } = this.props;
-    let loginUserData = null;
-    loginUserData = userInfo;
+    const selectedUserType = "creator";
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -340,7 +339,7 @@ class EditProfile extends Component {
                   {this.state.error.name_company}
                 </span>
                 <label htmlFor="name">
-                  {loginUserData && loginUserData.userType === "creator"
+                  {userInfo && userInfo.userType === selectedUserType
                     ? Translations.editProfile.user
                     : Translations.editProfile.name_company}
                 </label>
@@ -353,78 +352,82 @@ class EditProfile extends Component {
                   onChange={this.handleChangeField}
                 />
               </div>
-              <div className="col-2">
-                <div className="col-sm-6 padding-r-5">
-                  <div className="form-group margin-bottom-30">
-                    <label htmlFor="city">
-                      {Translations.editProfile.D_O_B}
-                    </label>
-                    <NumberInput
-                      type="number"
-                      name="day"
-                      value={form.birthDate.day}
-                      min="1"
-                      max="31"
-                      pattern="[0-9]*"
-                      onChange={this.handleChangeDOB}
-                    />
-                    <NumberInput
-                      type="number"
-                      name="mon"
-                      value={form.birthDate.mon}
-                      min="1"
-                      pattern="[0-9]*"
-                      max="12"
-                      onChange={this.handleChangeDOB}
-                    />
-                    <NumberInput
-                      type="number"
-                      name="year"
-                      value={form.birthDate.year}
-                      min="1950"
-                      pattern="[0-9]*"
-                      max="2050"
-                      onChange={this.handleChangeDOB}
-                    />
+              {userInfo && userInfo.userType === selectedUserType ? (
+                <div className="col-2">
+                  <div className="col-sm-6 padding-r-5">
+                    <div className="form-group margin-bottom-30">
+                      <label htmlFor="city">
+                        {Translations.editProfile.D_O_B}
+                      </label>
+                      <NumberInput
+                        type="number"
+                        name="day"
+                        value={form.birthDate.day}
+                        min="1"
+                        max="31"
+                        pattern="[0-9]*"
+                        onChange={this.handleChangeDOB}
+                      />
+                      <NumberInput
+                        type="number"
+                        name="mon"
+                        value={form.birthDate.mon}
+                        min="1"
+                        pattern="[0-9]*"
+                        max="12"
+                        onChange={this.handleChangeDOB}
+                      />
+                      <NumberInput
+                        type="number"
+                        name="year"
+                        value={form.birthDate.year}
+                        min="1950"
+                        pattern="[0-9]*"
+                        max="2050"
+                        onChange={this.handleChangeDOB}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-sm-6 padding-l-5">
+                    <div className="form-group margin-bottom-30">
+                      <label htmlFor="country">
+                        {Translations.editProfile.gender}
+                      </label>
+                      <ul className="options">
+                        <li>
+                          <RadioButton
+                            type="radio"
+                            id="male"
+                            name="gender"
+                            value="male"
+                            defaultChecked={
+                              form.gender.toLowerCase() === gender.male
+                            }
+                            className="black_button"
+                            onChange={this.handleChangeField}
+                          />
+                          <label htmlFor="male">Male</label>
+                        </li>
+                        <li>
+                          <RadioButton
+                            type="radio"
+                            id="female"
+                            value="female"
+                            name="gender"
+                            defaultChecked={
+                              form.gender.toLowerCase() === gender.female
+                            }
+                            onChange={this.handleChangeField}
+                          />
+                          <label htmlFor="female">Female</label>
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-                <div className="col-sm-6 padding-l-5">
-                  <div className="form-group margin-bottom-30">
-                    <label htmlFor="country">
-                      {Translations.editProfile.gender}
-                    </label>
-                    <ul className="options">
-                      <li>
-                        <RadioButton
-                          type="radio"
-                          id="male"
-                          name="gender"
-                          value="male"
-                          defaultChecked={
-                            form.gender.toLowerCase() === gender.male
-                          }
-                          className="black_button"
-                          onChange={this.handleChangeField}
-                        />
-                        <label htmlFor="male">Male</label>
-                      </li>
-                      <li>
-                        <RadioButton
-                          type="radio"
-                          id="female"
-                          value="female"
-                          name="gender"
-                          defaultChecked={
-                            form.gender.toLowerCase() === gender.female
-                          }
-                          onChange={this.handleChangeField}
-                        />
-                        <label htmlFor="female">Female</label>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              ) : (
+                ""
+              )}
               <div className="form-group margin-bottom-30">
                 <span className="error-msg highlight">
                   {this.state.error.category}

@@ -16,10 +16,11 @@ const UserCardBody = ({
 }) => {
   let classNameText = "filled_button";
   let btnText = Translations.profile_community_right_sidebar.Subscribed;
-  if (user.isPending) {
-    btnText = Translations.profile_community_right_sidebar.Pending;
-    classNameText = "filled_button";
-  } else if (user.isSubscribe) {
+  // if (user.isPending) {
+  //   btnText = Translations.profile_community_right_sidebar.Pending;
+  //   classNameText = "filled_button";
+  // } else
+  if (user.isSubscribe) {
     btnText = Translations.profile_community_right_sidebar.Subscribed;
     classNameText = "filled_button";
   } else {

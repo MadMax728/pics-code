@@ -5,7 +5,11 @@ import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 import { connect } from "react-redux";
-import { getUser, getFollowUserList, getUserCommunity } from "../../../../actions";
+import {
+  getUser,
+  getFollowUserList,
+  getUserCommunity
+} from "../../../../actions";
 
 class TopBarOwnerInfo extends Component {
   constructor(props) {
@@ -17,6 +21,16 @@ class TopBarOwnerInfo extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
 
+    const selectedUserType = "creator";
+    let createBtnText = Translations.top_bar_info.create_campaign;
+    let createBtnHandleEvent = this.handeleCreateCampaign;
+    if (userInfo && userInfo.userType === selectedUserType) {
+      createBtnText = Translations.top_bar_info.create_campaign;
+      createBtnHandleEvent = this.handeleCreateCampaign;
+    } else {
+      createBtnText = Translations.top_bar_info.create_ad;
+      createBtnHandleEvent = this.handeleCreateAd;
+    }
     this.state = {
       items: {
         userid: userInfo.id,
@@ -53,7 +67,7 @@ class TopBarOwnerInfo extends Component {
         btnSlots: [
           {
             name: Translations.top_bar_info.subscriber,
-            className: "col-sm-4 slot_one no-padding",
+            className: "col-sm-8 slot_one no-padding",
             btnActiveClassName: "filled_button",
             btnText: Translations.top_bar_info.upload,
             handeleEvent: this.handeleUpload,
@@ -64,17 +78,8 @@ class TopBarOwnerInfo extends Component {
             name: Translations.top_bar_info.subscribed,
             className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.create_campaign,
-            handeleEvent: this.handeleCreateCampaign,
-            userid: userInfo.id,
-            username: userInfo.username
-          },
-          {
-            name: Translations.top_bar_info.posts,
-            className: "col-sm-4 slot_three no-padding",
-            btnActiveClassName: "black_button",
-            btnText: Translations.top_bar_info.create_ad,
-            handeleEvent: this.handeleCreateAd,
+            btnText: createBtnText,
+            handeleEvent: createBtnHandleEvent,
             userid: userInfo.id,
             username: userInfo.username
           }
@@ -107,6 +112,16 @@ class TopBarOwnerInfo extends Component {
         username: userInfo.username,
         id: userInfo.id
       };
+      const selectedUserType = "creator";
+      let createBtnText = Translations.top_bar_info.create_campaign;
+      let createBtnHandleEvent = this.handeleCreateCampaign;
+      if (userInfo && userInfo.userType === selectedUserType) {
+        createBtnText = Translations.top_bar_info.create_campaign;
+        createBtnHandleEvent = this.handeleCreateCampaign;
+      } else {
+        createBtnText = Translations.top_bar_info.create_ad;
+        createBtnHandleEvent = this.handeleCreateAd;
+      }
       this.setState({ isLoading: true });
       this.props.getUserCommunity(data);
       this.props.getUser(data).then(() => {
@@ -148,7 +163,7 @@ class TopBarOwnerInfo extends Component {
             btnSlots: [
               {
                 name: Translations.top_bar_info.subscriber,
-                className: "col-sm-4 slot_one no-padding",
+                className: "col-sm-8 slot_one no-padding",
                 btnActiveClassName: "filled_button",
                 btnText: Translations.top_bar_info.upload,
                 handeleEvent: this.handeleUpload,
@@ -159,17 +174,8 @@ class TopBarOwnerInfo extends Component {
                 name: Translations.top_bar_info.subscribed,
                 className: "col-sm-4 slot_two no-padding",
                 btnActiveClassName: "black_button",
-                btnText: Translations.top_bar_info.create_campaign,
-                handeleEvent: this.handeleCreateCampaign,
-                userid: this.props.userDataByUsername.user.data.id,
-                username: this.props.userDataByUsername.user.data.username
-              },
-              {
-                name: Translations.top_bar_info.posts,
-                className: "col-sm-4 slot_three no-padding",
-                btnActiveClassName: "black_button",
-                btnText: Translations.top_bar_info.create_ad,
-                handeleEvent: this.handeleCreateAd,
+                btnText: createBtnText,
+                handeleEvent: createBtnHandleEvent,
                 userid: this.props.userDataByUsername.user.data.id,
                 username: this.props.userDataByUsername.user.data.username
               }

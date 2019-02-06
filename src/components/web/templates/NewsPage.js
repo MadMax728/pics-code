@@ -41,7 +41,7 @@ class NewsRoot extends Component {
 
   componentWillUnmount = () => {
     window.removeEventListener("scroll", this.onScroll);
-  }
+  };
 
   onScroll = () => {
     const { newsFeedList } = this.state;
@@ -88,7 +88,6 @@ class NewsRoot extends Component {
               enumerations.contentTypes.mediaPost && (
               <MediaCard item={newsFeed} isParticipant={false} isDescription />
             )}
-
           {newsFeed.mediaUrl &&
             newsFeed.typeContent &&
             newsFeed.typeContent.toLowerCase() !==
@@ -106,7 +105,6 @@ class NewsRoot extends Component {
                 handleModalInfoShow={handleModalInfoShow}
               />
             )}
-
           {newsFeed.mediaUrl &&
             newsFeed.typeContent &&
             newsFeed.typeContent.toLowerCase() !==
@@ -121,10 +119,9 @@ class NewsRoot extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
-                handleModalInfoShow={handleModalInfoShow}                
+                handleModalInfoShow={handleModalInfoShow}
               />
             )}
-
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.mediaUrl &&

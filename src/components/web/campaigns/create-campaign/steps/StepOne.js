@@ -44,9 +44,12 @@ class StepOne extends Component {
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-12 upload-form">
-        <div className="user-title">
-          <div className="normal_title modal-title"> {Translations.create_campaigns.title}</div>
-        </div>
+          <div className="user-title">
+            <div className="normal_title modal-title">
+              {" "}
+              {Translations.create_campaigns.title}
+            </div>
+          </div>
           <form>
             <div className="pt-10 form-group">
               <label htmlFor="title">
@@ -164,52 +167,55 @@ class StepOne extends Component {
                 </span>
               )}
             </div>
-            {/* {isFor && ( */}
-            <div>
-              <div className="form-group">
-                <label htmlFor="Procedure">
-                  {Translations.create_campaigns.procedure}
-                </label>
-                <p>
-                  {Translations.create_campaigns.public_procedure_help_text}
-                </p>
-                <p>
-                  {Translations.create_campaigns.anonymous_proceture_help_text}
-                </p>
-                <ul className="options">
-                  <li onChange={handleChangeField} className="wid49">
-                    <input
-                      type="radio"
-                      id={enumerations.procedure.public}
-                      name="procedure"
-                      className="black_button"
-                      value={enumerations.procedure.public}
-                      defaultChecked={
-                        form.procedure === enumerations.procedure.public
-                      }
-                    />
-                    <label htmlFor={enumerations.procedure.public}>
-                      {Translations.create_campaigns.public}
-                    </label>
-                  </li>
-                  <li onChange={handleChangeField} className="wid49">
-                    <input
-                      type="radio"
-                      id={enumerations.procedure.anonymous}
-                      name="procedure"
-                      value={enumerations.procedure.anonymous}
-                      defaultChecked={
-                        form.procedure === enumerations.procedure.anonymous
-                      }
-                    />
-                    <label htmlFor={enumerations.procedure.anonymous}>
-                      {Translations.create_campaigns.anonymous}
-                    </label>
-                  </li>
-                </ul>
+            {isFor && (
+              <div>
+                <div className="form-group">
+                  <label htmlFor="Procedure">
+                    {Translations.create_campaigns.procedure}
+                  </label>
+                  <p>
+                    {Translations.create_campaigns.public_procedure_help_text}
+                  </p>
+                  <p>
+                    {
+                      Translations.create_campaigns
+                        .anonymous_proceture_help_text
+                    }
+                  </p>
+                  <ul className="options">
+                    <li onChange={handleChangeField} className="wid49">
+                      <input
+                        type="radio"
+                        id={enumerations.procedure.public}
+                        name="procedure"
+                        className="black_button"
+                        value={enumerations.procedure.public}
+                        defaultChecked={
+                          form.procedure === enumerations.procedure.public
+                        }
+                      />
+                      <label htmlFor={enumerations.procedure.public}>
+                        {Translations.create_campaigns.public}
+                      </label>
+                    </li>
+                    <li onChange={handleChangeField} className="wid49">
+                      <input
+                        type="radio"
+                        id={enumerations.procedure.anonymous}
+                        name="procedure"
+                        value={enumerations.procedure.anonymous}
+                        defaultChecked={
+                          form.procedure === enumerations.procedure.anonymous
+                        }
+                      />
+                      <label htmlFor={enumerations.procedure.anonymous}>
+                        {Translations.create_campaigns.anonymous}
+                      </label>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-            {/* )} */}
+            )}
 
             <div className="form-group">
               <label htmlFor="Type">{Translations.create_campaigns.type}</label>

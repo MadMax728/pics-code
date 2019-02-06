@@ -108,10 +108,10 @@ class TopBarOtherInfo extends Component {
   handeleShare = () => {
     const data = {
       url: `${window.location.href}`
-    }
+    };
     this.props.handleModalInfoShow(modalType.share, data);
   };
-  
+
   getUserData = () => {
     const data = this.props.match;
     this.props.getUser(data).then(() => {
@@ -137,19 +137,19 @@ class TopBarOtherInfo extends Component {
 
     let subscribeBtnClass = "filled_button";
     let subscribeBtnText = Translations.top_bar_info.subscribe;
-    if (isPending) {
-      subscribeBtnText = Translations.top_bar_info.request_pending;
+    // if (isPending) {
+    //   subscribeBtnText = Translations.top_bar_info.request_pending;
+    //   subscribeBtnClass = "filled_button";
+    // } else {
+    subscribeBtnClass = "filled_button";
+    if (isSubscribe) {
       subscribeBtnClass = "filled_button";
+      subscribeBtnText = Translations.top_bar_info.subscribed;
     } else {
-      subscribeBtnClass = "filled_button";
-      if (isSubscribe) {
-        subscribeBtnClass = "filled_button";
-        subscribeBtnText = Translations.top_bar_info.subscribed;
-      } else {
-        subscribeBtnClass = "blue_button";
-        subscribeBtnText = Translations.top_bar_info.subscribe;
-      }
+      subscribeBtnClass = "blue_button";
+      subscribeBtnText = Translations.top_bar_info.subscribe;
     }
+    // }
     const items = {
       userid: this.props.userDataByUsername.user.data.id,
       username: this.props.userDataByUsername.user.data.username,
@@ -210,9 +210,10 @@ class TopBarOtherInfo extends Component {
     // To Do - Integration changed - according to backend API response
     const errors = {};
     const selectedUserList = this.props.userDataByUsername.user.data;
-    if (selectedUserList.isPending) {
-      // To Do - On Pending request click
-    } else if (selectedUserList.isSubscribe === false) {
+    // if (selectedUserList.isPending) {
+    //   // To Do - On Pending request click
+    // } else
+    if (selectedUserList.isSubscribe === false) {
       const requestData = { followers: selectedUserList.id };
       this.props.sendRequest(requestData).then(() => {
         if (
