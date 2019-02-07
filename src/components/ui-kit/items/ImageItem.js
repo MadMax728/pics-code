@@ -14,7 +14,7 @@ class ImageItem extends Component {
   }
 
   render() {
-    const { isLoading, item, userName } = this.props;
+    const { isLoading, item, userName, classNames } = this.props;
     const { lightboxIsOpen } = this.state;
     return (
       <div className="bg-black feed_image">
@@ -25,32 +25,27 @@ class ImageItem extends Component {
          * { img-responsive embed-responsive-item }
          * { isOtherCardExist } will check if other card exist with image or not
          */}
-        <div className={`embed-responsive embed-responsive-16by9`}>
+        <div className={`${classNames}`}>
           <div className={`img-responsive embed-responsive-item`}>
-            {isLoading ?
-              <Loader />
-              :
-              (
-                <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
-                  {  item && <img src={item}
-                            alt="altmage"
-                            role="presentation"
-                            onClick={this.openLightbox}
-                            onKeyDown={this.openLightbox}
-                            className="img-responsive"/> 
-                  }
-                </LazyLoad>
-              )}
+              <LazyLoad height={400} once offset={[-400, 0]}>
+                {  item && <img src={item}
+                          alt="altmage"
+                          role="presentation"
+                          onClick={this.openLightbox}
+                          onKeyDown={this.openLightbox}
+                          className="img-responsive"/> 
+                }
+              </LazyLoad>
           </div>
         </div>
-        {  
+        {/* {  
           item &&(
           <ImageGallery image={item} 
                         caption={userName}
                         lightboxIsOpen={lightboxIsOpen} 
                         closeLightbox={this.closeLightbox}>
           </ImageGallery>
-        )}
+        )} */}
       </div>
     );
   }
@@ -69,6 +64,7 @@ ImageItem.propTypes = {
   item: PropTypes.string.isRequired,
   userName: PropTypes.string,
   isLoading: PropTypes.bool,
+  classNames: PropTypes.string
 };
 
 export default ImageItem;
