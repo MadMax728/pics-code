@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
-import { Text } from "../../../ui-kit/CommonUIComponents";
+import { Input } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
@@ -179,7 +179,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="email">
                   {Translations.privacy.Current_Email}
                 </label>
-                <Text
+                <Input
                   type="email"
                   className="form-control"
                   id="current_email"
@@ -209,7 +209,7 @@ class PrivacyPage extends Component {
                       .Please_confirm_this_change_in_your_email_account
                   }
                 </span>
-                <Text
+                <Input
                   type="email"
                   className="form-control"
                   id="new_email"
@@ -252,7 +252,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="c-password">
                   {Translations.privacy.Current_Password}
                 </label>
-                <Text
+                <Input
                   type="password"
                   className="form-control"
                   id="current_password"
@@ -278,7 +278,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="n-password">
                   {Translations.privacy.New_Password}
                 </label>
-                <Text
+                <Input
                   type="password"
                   className="form-control"
                   id="new_password"
@@ -304,7 +304,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="r-password">
                   {Translations.privacy.Repeat_Password}
                 </label>
-                <Text
+                <Input
                   type="password"
                   className="form-control"
                   id="repeat_password"
@@ -347,7 +347,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="recipient">
                   {Translations.privacy.Invoice_recipient}
                 </label>
-                <Text
+                <Input
                   type="text"
                   className="form-control"
                   id="invoice_recipient"
@@ -369,7 +369,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="street">
                   {Translations.privacy.Street_number}
                 </label>
-                <Text
+                <Input
                   type="text"
                   className="form-control"
                   id="street_number"
@@ -391,7 +391,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="postal">
                   {Translations.privacy.Postal_code}
                 </label>
-                <Text
+                <Input
                   type="text"
                   className="form-control"
                   id="postal_code"
@@ -413,7 +413,7 @@ class PrivacyPage extends Component {
                 <div className="col-sm-6 padding-r-5">
                   <div className="form-group">
                     <label htmlFor="city">{Translations.privacy.city}</label>
-                    <Text
+                    <Input
                       type="text"
                       className="form-control"
                       id="city"
@@ -437,7 +437,7 @@ class PrivacyPage extends Component {
                     <label htmlFor="country">
                       {Translations.privacy.Country}
                     </label>
-                    <Text
+                    <Input
                       type="text"
                       className="form-control"
                       id="country"
@@ -461,7 +461,7 @@ class PrivacyPage extends Component {
                 <label htmlFor="vat">
                   {Translations.privacy.VAT_identification_number}
                 </label>
-                <Text
+                <Input
                   type="text"
                   className="form-control"
                   id="vat_identification_number"

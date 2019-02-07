@@ -4,7 +4,7 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
-import { Text, RadioButton } from "../../ui-kit/CommonUIComponents";
+import { RadioButton, Button, Input, ErrorSpan } from "../../ui-kit";
 import PropTypes from "prop-types";
 import {
   submitRegister,
@@ -33,7 +33,7 @@ class Register extends Component {
   }
 
   render() {
-    const { form, isUser } = this.state;
+    const { form, isUser, error } = this.state;
 
     return (
       <div className="login-process">
@@ -45,10 +45,8 @@ class Register extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <span className="error-msg highlight">
-                    {this.state.error.servererror}
-                  </span>
-                  <Text
+                  <ErrorSpan value={error.servererror} />
+                  <Input
                     type="text"
                     className="form-control"
                     id="username"
@@ -62,13 +60,11 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">
-                    {this.state.error.username}
-                  </span>
+                  <ErrorSpan value={error.username} />
                 </div>
 
                 <div className="form-group">
-                  <Text
+                  <Input
                     type="email"
                     className="form-control"
                     id="email"
@@ -82,13 +78,11 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">
-                    {this.state.error.email}
-                  </span>
+                  <ErrorSpan value={error.email} />
                 </div>
 
                 <div className="form-group">
-                  <Text
+                  <Input
                     type="password"
                     className="form-control"
                     id="password"
@@ -103,12 +97,10 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">
-                    {this.state.error.password}
-                  </span>
+                  <ErrorSpan value={error.password} />
                 </div>
                 <div className="form-group">
-                  <Text
+                  <Input
                     type="password"
                     className="form-control"
                     id="repeat-password"
@@ -124,9 +116,7 @@ class Register extends Component {
                   ) : (
                     <img src={images.checked} alt={"checked"} />
                   )}
-                  <span className="error-msg highlight">
-                    {this.state.error.repeat_password}
-                  </span>
+                  <ErrorSpan value={error.repeat_password} />
                 </div>
                 {isUser ? (
                   <div className="form-group">
@@ -165,9 +155,11 @@ class Register extends Component {
                 )}
 
                 <div className="form-group">
-                  <button className="blue_button" type="submit">
-                    {Translations.register.register}
-                  </button>
+                  <Button 
+                    className="blue_button" 
+                    type="submit"
+                    text={Translations.register.register}
+                  />
                 </div>
               </form>
               <div>

@@ -717,6 +717,7 @@
     }
   },
   "editProfile": {
+    "save": "Save",
     "username": "User name",
     "category": "Category",
     "email": "Email",
@@ -730,6 +731,9 @@
     "website": "Web site",
     "gender": "Gender",
     "D_O_B": "Date of birth",
+    "male": "Male",
+    "female": "Female",
+    "location": "Location",
     "general_information": "General Information",
     "Personal_interests": "Personal interests"
   },

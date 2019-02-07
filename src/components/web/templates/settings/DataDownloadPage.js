@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text } from "../../../ui-kit/CommonUIComponents";
+import { Input } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDownloadData, getSearch } from "../../../../actions";
@@ -54,7 +54,7 @@ class DataDownloadPage extends Component {
                   <label htmlFor="email">
                     {Translations.data_download.Email}
                   </label>
-                  <Text
+                  <Input
                     type="text"
                     className="form-control"
                     id="email"
@@ -78,7 +78,7 @@ class DataDownloadPage extends Component {
                   <label htmlFor="password">
                     {Translations.data_download.Password}
                   </label>
-                  <Text
+                  <Input
                     type="password"
                     className="form-control"
                     id="password"
