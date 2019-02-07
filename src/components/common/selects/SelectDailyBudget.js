@@ -3,13 +3,15 @@ import PropTypes from "prop-types";
 import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
 import { Translations } from "../../../lib/translations";
+import * as enumerations from "../../../lib/constants/enumerations";
 
+//dailyBudgetForCampaigns //dailyBudgetForAds
 class SelectDailyBudget extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dailyBudgetList: []
-    }
+    };
   }
 
   render() {
@@ -26,8 +28,8 @@ class SelectDailyBudget extends Component {
       >
         <option value="">{Translations.select_daily_budget}</option>
         {dailyBudgetList.map(option => (
-          <option value={option.amount} key={option.id}>
-            {option.dailyBudget}
+          <option value={option.id} key={option.id}>
+            {option.label}
           </option>
         ))}
       </select>
@@ -35,23 +37,33 @@ class SelectDailyBudget extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getSelect("dailyBudgets").then(() => {
-      if (this.props.dailyBudgetList) {
-        this.setState({
-          dailyBudgetList: this.props.dailyBudgetList
-        });
-      }
+    const { isFor } = this.props;
+    let dailyBudgetList = [];
+    if (isFor === "campaign") {
+      dailyBudgetList = enumerations.dailyBudgetForCampaigns;
+    } else if (isFor === "ad") {
+      dailyBudgetList = enumerations.dailyBudgetForAds;
+    }
+    this.setState({
+      dailyBudgetList
     });
-  }
+
+    // this.props.getSelect("dailyBudgets").then(() => {
+    //   if (this.props.dailyBudgetList) {
+    //     this.setState({
+    //       dailyBudgetList: this.props.dailyBudgetList
+    //     });
+    //   }
+    // });
+  };
 
   componentWillUnmount = () => {
     this.setState({ dailyBudgetList: [] });
-  }
+  };
 
-  handleOffer = (event) => {
+  handleOffer = event => {
     this.props.handleSelect("budget", event.target.value);
-  }
-
+  };
 }
 
 const mapStateToProps = state => ({
@@ -62,17 +74,16 @@ const mapDispatchToProps = {
   getSelect
 };
 
-
 const propTypes = {
   value: PropTypes.any,
   dailyBudgetList: PropTypes.any,
   className: PropTypes.string,
   getSelect: PropTypes.func.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired,
+  isFor: PropTypes.any
 };
 
 SelectDailyBudget.propTypes = propTypes;
-
 
 export default connect(
   mapStateToProps,
