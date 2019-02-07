@@ -156,12 +156,14 @@
     "end": "End",
     "define_daily_budget": "Define daily budget",
     "maximum_number_of_clicks": "Maximum number of clicks",
+    "maximum_number_of_applicants": "Maximum number of applicants",
     "max_1200_clicks": "Max. 1200 clicks",
     "information_on_payment": "Information on payment",
     "actively_clicks": "You only have to pay when a user actively clicks on your ad on Picstagraph.",
+    "start_fee": "Starting fee : 150 €",
     "cost_control": "100 % cost control",
-    "cost_per_Click": "Cost per Click: 1,00 €",
-    "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
+    "cost_per_Click": "Cost per application: 5,00 €",
+    "payment_only_after_ad_was_cloes": "Payment only after campaign was closed",
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
     "applications": "Applications",
     "status": "Status",
@@ -914,7 +916,8 @@
       "VATNO": "Please Enter VAT Identification Number",
       "country": "Please Enter Country",
       "streetNumber": "Please Enter Street,Number",
-      "insertLink": "Please Enter Inset Link"
+      "insertLink": "Please Enter Inset Link",
+      "campaignDate": "Date range should be greater than 1 week and less than 3 Month"
     }
   }
 }

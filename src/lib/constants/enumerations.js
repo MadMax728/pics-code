@@ -123,7 +123,8 @@ export const adminRank = {
 export const budgetCalculation = {
   CPC: 1.0,
   maxClicksLimit: 1200,
-  rangeSlot: 3.58
+  rangeSlot: 3.58,
+  campaignPerApplicationCost: 5
 };
 
 export const likeContentTypes = {

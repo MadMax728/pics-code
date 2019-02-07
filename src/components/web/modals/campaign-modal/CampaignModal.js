@@ -221,7 +221,7 @@ class CampaignModal extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({ stepIndex: 2, isPreview: false });
+    this.setState({ stepIndex: 0, isPreview: false });
     if (userInfo) {
       this.setState({ userInfo });
     }
@@ -666,13 +666,23 @@ class CampaignModal extends Component {
     const CPC = budgetCalculation.CPC;
     const budgetValue = form.budget;
     const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
-    if (noOfDaysRuntime && budgetValue) {
+
+    // Max Clicks calculation
+    // if (noOfDaysRuntime && budgetValue) {
+    //   maxClicksValue =
+    //     (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
+    //   if (maxClicksValue >= 1200) {
+    //     maxClicksValue = 1200;
+    //   }
+    //   maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+    //   this.setState({ maxClicks: maxClicksValue });
+    // }
+
+    if (budgetValue) {
       maxClicksValue =
-        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
-      if (maxClicksValue >= 1200) {
-        maxClicksValue = 1200;
-      }
-      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+        parseInt(budgetValue) /
+        parseInt(budgetCalculation.campaignPerApplicationCost);
+      maxClicksValue = Math.floor(parseInt(maxClicksValue));
       this.setState({ maxClicks: maxClicksValue });
     }
   };
