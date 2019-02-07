@@ -114,6 +114,7 @@ class CustomModal extends Component {
         handleModalHide={this.props.handleModalHide}
         handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
         data={this.props.data}
+        history={this.props.history}
       />
     );
   };
@@ -153,7 +154,8 @@ CustomModal.propTypes = {
   modalType: PropTypes.string.isRequired,
   handleModalHide: PropTypes.func.isRequired,
   handleModalInfoMsgShow: PropTypes.func.isRequired,
-  data: PropTypes.any
+  data: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default CustomModal;

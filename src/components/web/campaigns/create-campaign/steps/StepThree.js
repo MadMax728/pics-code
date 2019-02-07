@@ -4,9 +4,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
-import {
-  RightSidebarModal
-} from "../../../../ui-kit";
+import { RightSidebarModal } from "../../../../ui-kit";
 
 class StepThree extends Component {
   constructor(props) {
@@ -28,6 +26,10 @@ class StepThree extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const { maxClicks } = this.state;
+    console.log("day", form.endDate.diff(form.startDate, "days"));
+    const weekDiffrence = form.endDate.diff(form.startDate, "week");
+    console.log("week", weekDiffrence);
+    const MonthDiffrence = form.endDate.diff(form.startDate, "month");
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -63,12 +65,24 @@ class StepThree extends Component {
                 </div>
               </li>
             </ul>
-            {form.error && form.endDate.diff(form.startDate, "days") < 0 && (
+            {form.error && form.endDate.diff(form.startDate, "days") < 0 ? (
               <span className="error-msg highlight">
                 {Translations.error.create_modal.date}
               </span>
+            ) : form.error && form.endDate.diff(form.startDate, "week") <= 0 ? (
+              <span className="error-msg highlight">
+                {Translations.error.create_modal.weekValidation}
+              </span>
+            ) : (
+              form.error &&
+              form.endDate.diff(form.startDate, "month") > 3 && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.monthValidation}
+                </span>
+              )
             )}
           </div>
+
           <div className="form-group">
             <label htmlFor="Define">
               {Translations.create_campaigns.define_daily_budget}
@@ -77,6 +91,7 @@ class StepThree extends Component {
               value={form.budget}
               className=""
               handleSelect={handleSelect}
+              isFor={"campaign"}
             />
             {form.budget && form.budget.length === 0 && form.error && (
               <span className="error-msg highlight">
@@ -84,7 +99,7 @@ class StepThree extends Component {
               </span>
             )}
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="Maximum">
               {Translations.create_campaigns.maximum_number_of_clicks}
             </label>
@@ -97,14 +112,25 @@ class StepThree extends Component {
                 {Translations.create_campaigns.max_1200_clicks}
               </span>
             </div>
+          </div> */}
+          <div className="form-group">
+            <label htmlFor="Maximum">
+              {Translations.create_campaigns.maximum_number_of_applicants}
+            </label>
+            <div className="meter orange nostripes">
+              <span className="filled-strip" style={{ width: "0px" }}>
+                <p className="applicant-count"> {maxClicks} applicant </p>
+              </span>
+            </div>
           </div>
           <div className="subtitle">
             {Translations.create_campaigns.information_on_payment}
           </div>
           <p>{Translations.create_campaigns.actively_clicks}</p>
           <ul>
+            <li>{Translations.create_campaigns.start_fee}</li>
+            <li>{Translations.create_campaigns.cost_per_Click} </li>
             <li>{Translations.create_campaigns.cost_control}</li>
-            <li>{Translations.create_campaigns.cost_per_Click}: 1,00 €</li>
             <li>
               {Translations.create_campaigns.payment_only_after_ad_was_cloes}
             </li>
@@ -113,10 +139,7 @@ class StepThree extends Component {
             </li>
           </ul>
         </div>
-        <RightSidebarModal
-          userInfo={userInfo}
-          form={form}
-        />
+        <RightSidebarModal userInfo={userInfo} form={form} />
       </div>
     );
   }
@@ -124,17 +147,17 @@ class StepThree extends Component {
   handleStartDateChange = date => {
     this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
-    if (this.props.form.budget) {
-      this.props.calculateMaxClicks();
-    }
+    // if (this.props.form.budget) {
+    //   this.props.calculateMaxClicks();
+    // }
   };
 
   handleEndDateChange = date => {
     this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
-    if (this.props.form.budget) {
-      this.props.calculateMaxClicks();
-    }
+    // if (this.props.form.budget) {
+    //   this.props.calculateMaxClicks();
+    // }
   };
 }
 
