@@ -18,6 +18,7 @@ const CampaignCardBody = ({
             enumerations.mediaTypes.image)) && (
         <ImageItem
           item={campaign.mediaUrl}
+          classNames={`embed-responsive embed-responsive-16by9`}
           userName={campaign.userName}
           isOtherCardExist={!isDescription && isInformation}
           isLoading={isLoading}

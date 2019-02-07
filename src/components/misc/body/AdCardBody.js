@@ -20,6 +20,7 @@ const AdCardBody = ({ ad, isDescription, isInformation, isLoading }) => {
           <ImageItem
             item={ad.mediaUrl}
             userName={ad.userName}
+            classNames={`embed-responsive embed-responsive-16by9`}
             isOtherCardExist={!isDescription && isInformation}
             isLoading={isLoading}
           />
