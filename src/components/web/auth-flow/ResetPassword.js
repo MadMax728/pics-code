@@ -9,6 +9,7 @@ import {
 import { Auth } from "../../../auth";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { connect } from "react-redux";
+import { Input, Button } from "../../ui-kit";
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -36,7 +37,7 @@ class ResetPassword extends Component {
               <p>{Translations.reset_password.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <input
+                  <Input
                     type="password"
                     className="form-control"
                     id="password"
@@ -54,7 +55,7 @@ class ResetPassword extends Component {
                     )}
                 </div>
                 <div className="form-group">
-                  <input
+                  <Input
                     type="password"
                     className="form-control"
                     id="new-password"
@@ -72,9 +73,10 @@ class ResetPassword extends Component {
                     )}
                 </div>
                 <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
-                    {Translations.reset_password.send}
-                  </button>
+                  <Button 
+                    className="blue_button" 
+                    text={Translations.reset_password.send}
+                  />
                 </div>
               </form>
               <DownloadStore />

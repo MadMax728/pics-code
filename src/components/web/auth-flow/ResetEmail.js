@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { submitResetPassword } from "../../../actions/forgotPassword";
 import { connect } from "react-redux";
 import { Auth } from "../../../auth";
+import { Input, Button, ErrorSpan } from "../../ui-kit";
 
 class ResetMail extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class ResetMail extends Component {
   }
 
   render() {
-    const { form } = this.state;
+    const { form, error } = this.state;
     return (
       <div className="login-process">
         <BaseHeader />
@@ -31,9 +32,9 @@ class ResetMail extends Component {
               <h3 className="text-center">{Translations.reset_email.header}</h3>
               <p>{Translations.reset_email.subheader}</p>
               <form>
-                <span className="error-msg highlight">{this.state.error.servererror}</span>
+                <ErrorSpan value={this.state.error.servererror} />
                 <div className="form-group">
-                  <input
+                  <Input
                     type="text"
                     className="form-control"
                     id="email"
@@ -47,12 +48,14 @@ class ResetMail extends Component {
                   ) : (
                       <img src={images.checked} alt={"checked"} />
                     )}
-                  <span className="error-msg highlight">{this.state.error.email}</span>
+                  <ErrorSpan value={error.email} /> 
                 </div>
                 <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
-                    {Translations.register.send}
-                  </button>
+                  <Button 
+                    className="blue_button" 
+                    onClick={this.handleSubmit}
+                    text={Translations.register.send}
+                  />
                 </div>
               </form>
             </div>

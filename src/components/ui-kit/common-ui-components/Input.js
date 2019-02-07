@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-class Text extends Component {
+class Input extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,6 +25,7 @@ class Text extends Component {
     // const { value } = this.state;
     let isReadonly = '';
     if(readOnly) { isReadonly = readOnly; }
+    
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <input
@@ -49,7 +50,7 @@ class Text extends Component {
   };
 }
 
-Text.propTypes = {
+Input.propTypes = {
   autoComplete: PropTypes.string,
   type: PropTypes.string,
   name: PropTypes.string,
@@ -61,4 +62,4 @@ Text.propTypes = {
   readOnly: PropTypes.any
 };
 
-export default Text;
+export default Input;

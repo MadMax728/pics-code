@@ -58,13 +58,13 @@ export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit-profile";
 export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
 // export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness-profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
-// export const BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE = "/settings/campaigns/statistics/";
-// export const BASE_SETTINGS_AD_STATISTICS_ROUTE = "/settings/ads/statistics/";
-// export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE = "/settings/campaigns/statistics/:id";
+export const BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE = "/settings/campaigns/statistics/";
+export const BASE_SETTINGS_AD_STATISTICS_ROUTE = "/settings/ads/statistics/";
+export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE = "/settings/campaigns/statistics/:id";
 export const SETTINGS_ADS_ROUTE = "/settings/ads";
 export const BASE_SETTINGS_ADS_STATISTICS_ROUTE =
   "/settings/ads/statistics/:id";
-// export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/statistics/:id";
+export const SETTINGS_ADS_STATISTICS_ROUTE = "/settings/ads/statistics/:id";
 export const SETTINGS_BILLS_AND_RECEIPTS_ROUTE = "/settings/bills-and-receipts";
 export const SETTINGS_DATA_DOWNLOAD_ROUTE = "/settings/data-download";
 export const LOGOUT_ROUTE = "/?logout=true";
