@@ -96,13 +96,16 @@ class Home extends Component {
 
   render() {
     const { message, image, profile, data } = this.state;
+    const { history } = this.props;
+
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
+    
     return (
       <div>
         <Header
           handleModalShow={this.handleModalShow}
-          history={this.props.history}
+          history={history}
         />
         <section>
           <MessageBar message={message} />

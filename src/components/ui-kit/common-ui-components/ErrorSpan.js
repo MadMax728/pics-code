@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 
 const ErrorSpan = (
   {
-    value
+    value,
+    className
   }
 ) => {
   return (
     <span 
-      className="error-msg highlight">
+      className={className || "error-msg highlight"}>
       {value}
     </span>
   );
@@ -16,6 +17,7 @@ const ErrorSpan = (
 
 ErrorSpan.propTypes = {
   value: PropTypes.string,
+  className: PropTypes.string
 };
 
 export default ErrorSpan;
