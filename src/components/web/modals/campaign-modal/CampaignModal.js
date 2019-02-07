@@ -386,10 +386,10 @@ class CampaignModal extends Component {
       // } else {
       //   Data.append("video", form.file);
       // }
-      
+
       // add below line for Image
       Data.append("image", form.file);
-      
+
       Data.append("postType", "campaign");
       this.setState({ isLoading: true });
 
@@ -478,6 +478,8 @@ class CampaignModal extends Component {
         form.startDate &&
         form.endDate &&
         form.endDate.diff(form.startDate, "days") >= 0 &&
+        form.endDate.diff(form.startDate, "week") >= 1 &&
+        form.endDate.diff(form.startDate, "month") <= 3 &&
         form.budget
       );
     } else if (index === 3) {

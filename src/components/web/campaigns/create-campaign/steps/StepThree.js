@@ -26,7 +26,9 @@ class StepThree extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const { maxClicks } = this.state;
+    console.log("day", form.endDate.diff(form.startDate, "days"));
     const weekDiffrence = form.endDate.diff(form.startDate, "week");
+    console.log("week", weekDiffrence);
     const MonthDiffrence = form.endDate.diff(form.startDate, "month");
     return (
       <div className="col-xs-12 no-padding">
@@ -63,10 +65,21 @@ class StepThree extends Component {
                 </div>
               </li>
             </ul>
-            {form.error && form.endDate.diff(form.startDate, "days") < 0 && (
+            {form.error && form.endDate.diff(form.startDate, "days") < 0 ? (
               <span className="error-msg highlight">
                 {Translations.error.create_modal.date}
               </span>
+            ) : form.error && form.endDate.diff(form.startDate, "week") <= 0 ? (
+              <span className="error-msg highlight">
+                {Translations.error.create_modal.weekValidation}
+              </span>
+            ) : (
+              form.error &&
+              form.endDate.diff(form.startDate, "month") > 3 && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.monthValidation}
+                </span>
+              )
             )}
           </div>
 

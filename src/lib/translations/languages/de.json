@@ -917,7 +917,8 @@
       "country": "Please Enter Country",
       "streetNumber": "Please Enter Street,Number",
       "insertLink": "Please Enter Inset Link",
-      "campaignDate": "Date range should be greater than 1 week and less than 3 Month"
+      "weekValidation": "Date range should be greater than 1 week",
+      "monthValidation": "Date range should be less than 1 Month"
     }
   }
 }
