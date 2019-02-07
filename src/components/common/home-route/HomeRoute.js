@@ -167,11 +167,11 @@ class HomeRoute extends Component {
             component={this.handleAds}
           />
 
-          <Route
+          {/* <Route
             exact
             path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
             component={this.handleAdsStatisticsPage}
-          />
+          /> */}
 
           <Route
             exact
@@ -179,11 +179,11 @@ class HomeRoute extends Component {
             component={this.handleSettingCampaign}
           />
 
-          <Route
+          {/* <Route
             exact
             path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
             component={this.handleSettingCampaignStatistics}
-          />
+          /> */}
           {/* -------- Settings Routes --------- */}
 
           {/* -------- Information Routes --------- */}

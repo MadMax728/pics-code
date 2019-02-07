@@ -6,7 +6,7 @@ import {
   InfoModal
 } from "../components/common";
 import { Auth } from "../auth";
-import * as enumerations from "../lib/constants/enumerations";
+// import * as enumerations from "../lib/constants/enumerations";
 
 class BackOfficeHome extends Component {
   constructor(props, context) {

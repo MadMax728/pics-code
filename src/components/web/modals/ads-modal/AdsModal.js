@@ -153,7 +153,6 @@ class AdsModal extends Component {
       this.setState({ userInfo });
     }
     const { data } = this.props;
-    console.log(data);
 
     if (data && data.id) {
       this.setState({
@@ -241,15 +240,16 @@ class AdsModal extends Component {
     form.budget = data.budget;
     if (data.typeContent) {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
-      form.fileType =
-        typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
-      if (form.fileType) {
-        form.image = data.mediaUrl;
-        form.file = data.mediaUrl;
-      } else if (!form.fileType) {
-        form.video = data.mediaUrl;
-        form.file = data.mediaUrl;
-      }
+      form.image = data.mediaUrl;
+      form.file = data.mediaUrl;
+      // form.fileType = typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
+      // if (form.fileType) {
+      //   form.image = data.mediaUrl;
+      //   form.file = data.mediaUrl;
+      // } else if (!form.fileType) {
+      //   form.video = data.mediaUrl;
+      //   form.file = data.mediaUrl;
+      // }
     }
     if (data.address) {
       form.address.invoiceRecipient = data.address.invoiceRecipient;
@@ -288,11 +288,12 @@ class AdsModal extends Component {
 
     if (form.file && isNewFile) {
       const Data = new FormData();
-      if (form.fileType) {
-        Data.append("image", form.file);
-      } else {
-        Data.append("video", form.file);
-      }
+      // if (form.fileType) {
+      //   Data.append("image", form.file);
+      // } else {
+      //   Data.append("video", form.file);
+      // }      
+      Data.append("image", form.file);
       Data.append("postType", "ad");
 
       this.setState({ isLoading: true });
@@ -368,20 +369,24 @@ class AdsModal extends Component {
         form.image = reader.result;
         form.file = file;
         form.fileType = true;
-        form.typeContent = typeContent.image;
+        // form.typeContent = typeContent.image;
         currentThis.setState({ form });
       };
     } else if (file.type.includes("video")) {
-      const currentThis = this;
-      reader.readAsDataURL(file);
-      reader.onloadend = function() {
-        const { form } = currentThis.state;
-        form.video = reader.result;
-        form.file = file;
-        form.fileType = false;
-        form.typeContent = typeContent.video;
-        currentThis.setState({ form });
-      };
+      // const currentThis = this;
+      // reader.readAsDataURL(file);
+      // reader.onloadend = function() {
+      //   const { form } = currentThis.state;
+      //   form.video = reader.result;
+      //   form.file = file;
+      //   form.fileType = false;
+      //   form.typeContent = typeContent.video;
+      //   currentThis.setState({ form });
+      // };
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        Translations.create_campaigns.SelectProperMedia
+      );
     } else {
       this.props.handleModalInfoMsgShow(
         modalType.error,

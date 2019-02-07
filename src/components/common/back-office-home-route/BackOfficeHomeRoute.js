@@ -174,11 +174,18 @@ class BackOfficeHomeRoute extends Component {
 
   render() {
     const { isRank } = this.props;
+    
+    const backoffice = (isRank === enumerations.adminRank.rank1);
+    
+    const review = (isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank2);
+    
+    const report = (isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3);
+
     return (
       <div>
         <Switch>
           {/* backoffice routes */}
-          {isRank === enumerations.adminRank.rank1 && (
+          {backoffice && (
             <Route
               path={routes.BACK_OFFICE_ROOT_ROUTE}
               exact
@@ -186,7 +193,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {isRank === enumerations.adminRank.rank1 && (
+          {backoffice && (
             <Route
               path={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}
               exact
@@ -194,7 +201,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {isRank === enumerations.adminRank.rank1 && (
+          {backoffice && (
             <Route
               path={routes.BACK_OFFICE_CREATE_CMS_ROUTE}
               exact
@@ -202,7 +209,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {isRank === enumerations.adminRank.rank1 && (
+          {backoffice && (
             <Route
               path={routes.BACK_OFFICE_EDIT_CMS_ROUTE}
               exact
@@ -210,7 +217,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {isRank === enumerations.adminRank.rank1 && (
+          {backoffice && (
             <Route
               path={routes.BACK_OFFICE_ADD_ADMIN_ROUTE}
               exact
@@ -218,7 +225,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {/* {isRank === enumerations.adminRank.rank1 && (
+          {/* {backoffice && (
             <Route
               path={routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE}
               exact
@@ -226,7 +233,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )} */}
 
-          {isRank === enumerations.adminRank.rank1 && (
+          {backoffice && (
             <Route
               path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
               exact
@@ -234,7 +241,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {isRank === enumerations.adminRank.rank1 && (
+          {backoffice && (
             <Route
               path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
               exact
@@ -244,7 +251,7 @@ class BackOfficeHomeRoute extends Component {
 
           {/*  Reviews Routes */}
 
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank2) && 
+          {review && 
           (
             <Route
               path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
@@ -253,7 +260,7 @@ class BackOfficeHomeRoute extends Component {
             />
           )}
 
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank2) && (
+          {review && (
             <Route
               path={routes.BACK_OFFICE_ADS_ROUTE}
               exact
@@ -262,7 +269,7 @@ class BackOfficeHomeRoute extends Component {
           )}
 
           {/* reported routes */}
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+          {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}
               exact
@@ -271,7 +278,7 @@ class BackOfficeHomeRoute extends Component {
             )
           }
 
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+          {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_VIDEOS_ROUTE}
               exact
@@ -279,7 +286,7 @@ class BackOfficeHomeRoute extends Component {
             />
             )
           }
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+          {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
               exact
@@ -287,7 +294,7 @@ class BackOfficeHomeRoute extends Component {
             />
             )
           }
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+          {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
               exact
@@ -295,7 +302,7 @@ class BackOfficeHomeRoute extends Component {
             />
             )
           }
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+          {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
               exact
@@ -303,7 +310,7 @@ class BackOfficeHomeRoute extends Component {
             />
             )
           }
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+          {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
               exact
@@ -311,7 +318,7 @@ class BackOfficeHomeRoute extends Component {
             />
             )
           }
-          {(isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3) && (
+          {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
               exact
