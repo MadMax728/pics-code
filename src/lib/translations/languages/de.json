@@ -56,7 +56,8 @@
   },
 
   "upload_modal": {
-    "title_of_upload": "Title of Upload",
+    "title_of_upload": "Create an Upload",
+    "add_title": "Add Title",
     "add_location": "Add Location",
     "add_category": "Add Category",
     "add_description": "Add Description",
