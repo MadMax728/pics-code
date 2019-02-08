@@ -12,6 +12,7 @@ import { modalType } from "../../../../lib/constants/enumerations";
 
 const initialState = {
   form: {
+    id: "",
     add_location: {
       latitude: "",
       longitude: "",
@@ -40,7 +41,9 @@ class UploadModal extends Component {
 
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade upload-image-modal upload-pic-modal create-campaign-modal"}
+        modalClassName={
+          "modal fade upload-image-modal upload-pic-modal create-campaign-modal"
+        }
         header
         modalHeaderContent={
           <UploadHeader
@@ -85,13 +88,21 @@ class UploadModal extends Component {
   };
 
   componentDidMount = () => {
-    this.fillState();
+    const { data } = this.props;
+    this.fillState(data);
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { data } = this.props;
+    if (data && data.id !== prevState.form.id) {
+      this.fillState(data);
+    }
   }
 
-  fillState = () => {
-    const { data } = this.props;
+  fillState = data => {
     const { form } = this.state;
-    if (data) {
+    if (data && data.id) {
+      form.id = data.id;
       form.add_location = {};
       form.add_location.latitude = data.location.latitude || "";
       form.add_location.longitude = data.location.longitude || "";
@@ -110,7 +121,7 @@ class UploadModal extends Component {
       form.error = false;
       this.setState({ form });
     }
-  }
+  };
 
   componentWillUnmount = () => {
     this.setState(initialState);

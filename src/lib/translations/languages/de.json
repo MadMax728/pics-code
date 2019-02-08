@@ -56,7 +56,8 @@
   },
 
   "upload_modal": {
-    "title_of_upload": "Title of Upload",
+    "title_of_upload": "Create an Upload",
+    "add_title": "Add Title",
     "add_location": "Add Location",
     "add_category": "Add Category",
     "add_description": "Add Description",
@@ -91,11 +92,12 @@
     "end": "End",
     "define_daily_budget": "Define daily budget",
     "maximum_number_of_clicks": "Maximum number of clicks",
+    "maximum_number_of_views": "Maximum number of views",
     "max_1200_clicks": "Max. 1200 clicks",
     "information_on_payment": "Information on payment",
     "actively_clicks": "You only have to pay when a user actively clicks on your ad on Picstagraph.",
     "cost_control": "100 % cost control",
-    "cost_per_Click": "Cost per Click: 1,00 €",
+    "cost_per_Click": "Cost per View: 0.20 €",
     "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
     "clicks": "Clicks",
@@ -166,6 +168,7 @@
     "payment_only_after_ad_was_cloes": "Payment only after campaign was closed",
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
     "applications": "Applications",
+    "applicant": "Applicant",
     "status": "Status",
     "statistics": "Statistics",
     "serverError": "Something went wrong. Please Try Again",
@@ -918,7 +921,7 @@
       "streetNumber": "Please Enter Street,Number",
       "insertLink": "Please Enter Inset Link",
       "weekValidation": "Date range should be greater than 1 week",
-      "monthValidation": "Date range should be less than 1 Month"
+      "monthValidation": "Date range should be less than 3 Month"
     }
   }
 }

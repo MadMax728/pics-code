@@ -78,6 +78,7 @@ class SavedPage extends Component {
                 isBudget={false}
                 isReport={false}
                 handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {saved.mediaUrl &&
@@ -95,6 +96,7 @@ class SavedPage extends Component {
                 isBudget={false}
                 isReport={false}
                 handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {saved.mediaUrl &&
@@ -118,6 +120,7 @@ class SavedPage extends Component {
                 isStatus={false}
                 isSavedPage
                 handleRemove={this.handleRemove}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>

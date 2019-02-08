@@ -22,15 +22,60 @@ class TopBarOwnerInfo extends Component {
     }
 
     const selectedUserType = "creator";
-    let createBtnText = Translations.top_bar_info.create_campaign;
-    let createBtnHandleEvent = this.handeleCreateCampaign;
+    let btnSlotsData = [];
     if (userInfo && userInfo.userType === selectedUserType) {
-      createBtnText = Translations.top_bar_info.create_campaign;
-      createBtnHandleEvent = this.handeleCreateCampaign;
+      btnSlotsData = [
+        {
+          name: Translations.top_bar_info.subscriber,
+          className: "col-sm-8 slot_one no-padding",
+          btnActiveClassName: "filled_button",
+          btnText: Translations.top_bar_info.upload,
+          handeleEvent: this.handeleUpload,
+          userid: userInfo.id,
+          username: userInfo.username
+        },
+        {
+          name: Translations.top_bar_info.subscribed,
+          className: "col-sm-4 slot_two no-padding",
+          btnActiveClassName: "black_button",
+          btnText: Translations.top_bar_info.create_campaign,
+          handeleEvent: this.handeleCreateCampaign,
+          userid: userInfo.id,
+          username: userInfo.username
+        }
+      ];
     } else {
-      createBtnText = Translations.top_bar_info.create_ad;
-      createBtnHandleEvent = this.handeleCreateAd;
+      btnSlotsData = [
+        {
+          name: Translations.top_bar_info.subscriber,
+          className: "col-sm-4 slot_one no-padding",
+          btnActiveClassName: "filled_button",
+          btnText: Translations.top_bar_info.upload,
+          handeleEvent: this.handeleUpload,
+          userid: userInfo.id,
+          username: userInfo.username
+        },
+        {
+          name: Translations.top_bar_info.subscribed,
+          className: "col-sm-4 slot_two no-padding",
+          btnActiveClassName: "black_button",
+          btnText: Translations.top_bar_info.create_campaign,
+          handeleEvent: this.handeleCreateCampaign,
+          userid: userInfo.id,
+          username: userInfo.username
+        },
+        {
+          name: Translations.top_bar_info.subscribed,
+          className: "col-sm-4 slot_two no-padding",
+          btnActiveClassName: "black_button",
+          btnText: Translations.top_bar_info.create_ad,
+          handeleEvent: this.handeleCreateAd,
+          userid: userInfo.id,
+          username: userInfo.username
+        }
+      ];
     }
+
     this.state = {
       items: {
         userid: userInfo.id,
@@ -64,26 +109,7 @@ class TopBarOwnerInfo extends Component {
             username: userInfo.username
           }
         ],
-        btnSlots: [
-          {
-            name: Translations.top_bar_info.subscriber,
-            className: "col-sm-8 slot_one no-padding",
-            btnActiveClassName: "filled_button",
-            btnText: Translations.top_bar_info.upload,
-            handeleEvent: this.handeleUpload,
-            userid: userInfo.id,
-            username: userInfo.username
-          },
-          {
-            name: Translations.top_bar_info.subscribed,
-            className: "col-sm-4 slot_two no-padding",
-            btnActiveClassName: "black_button",
-            btnText: createBtnText,
-            handeleEvent: createBtnHandleEvent,
-            userid: userInfo.id,
-            username: userInfo.username
-          }
-        ]
+        btnSlots: btnSlotsData
       }
     };
   }
@@ -113,15 +139,6 @@ class TopBarOwnerInfo extends Component {
         id: userInfo.id
       };
       const selectedUserType = "creator";
-      let createBtnText = Translations.top_bar_info.create_campaign;
-      let createBtnHandleEvent = this.handeleCreateCampaign;
-      if (userInfo && userInfo.userType === selectedUserType) {
-        createBtnText = Translations.top_bar_info.create_campaign;
-        createBtnHandleEvent = this.handeleCreateCampaign;
-      } else {
-        createBtnText = Translations.top_bar_info.create_ad;
-        createBtnHandleEvent = this.handeleCreateAd;
-      }
       this.setState({ isLoading: true });
       this.props.getUserCommunity(data);
       this.props.getUser(data).then(() => {
@@ -130,6 +147,61 @@ class TopBarOwnerInfo extends Component {
           this.props.userDataByUsername.user &&
           this.props.userDataByUsername.user.data
         ) {
+          /* To set Create Campaign and Ad - on lodin user type */
+          let btnSlotsData = [];
+          if (userInfo && userInfo.userType === selectedUserType) {
+            btnSlotsData = [
+              {
+                name: Translations.top_bar_info.subscriber,
+                className: "col-sm-8 slot_one no-padding",
+                btnActiveClassName: "filled_button",
+                btnText: Translations.top_bar_info.upload,
+                handeleEvent: this.handeleUpload,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.subscribed,
+                className: "col-sm-4 slot_two no-padding",
+                btnActiveClassName: "black_button",
+                btnText: Translations.top_bar_info.create_campaign,
+                handeleEvent: this.handeleCreateCampaign,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              }
+            ];
+          } else {
+            btnSlotsData = [
+              {
+                name: Translations.top_bar_info.subscriber,
+                className: "col-sm-4 slot_one no-padding",
+                btnActiveClassName: "filled_button",
+                btnText: Translations.top_bar_info.upload,
+                handeleEvent: this.handeleUpload,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.subscribed,
+                className: "col-sm-4 slot_two no-padding",
+                btnActiveClassName: "black_button",
+                btnText: Translations.top_bar_info.create_campaign,
+                handeleEvent: this.handeleCreateCampaign,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.subscribed,
+                className: "col-sm-4 slot_two no-padding",
+                btnActiveClassName: "black_button",
+                btnText: Translations.top_bar_info.create_ad,
+                handeleEvent: this.handeleCreateAd,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              }
+            ];
+          }
+
           const items = {
             userid: this.props.userDataByUsername.user.data.id,
             username: this.props.userDataByUsername.user.data.username,
@@ -160,26 +232,7 @@ class TopBarOwnerInfo extends Component {
                 username: this.props.userDataByUsername.user.data.username
               }
             ],
-            btnSlots: [
-              {
-                name: Translations.top_bar_info.subscriber,
-                className: "col-sm-8 slot_one no-padding",
-                btnActiveClassName: "filled_button",
-                btnText: Translations.top_bar_info.upload,
-                handeleEvent: this.handeleUpload,
-                userid: this.props.userDataByUsername.user.data.id,
-                username: this.props.userDataByUsername.user.data.username
-              },
-              {
-                name: Translations.top_bar_info.subscribed,
-                className: "col-sm-4 slot_two no-padding",
-                btnActiveClassName: "black_button",
-                btnText: createBtnText,
-                handeleEvent: createBtnHandleEvent,
-                userid: this.props.userDataByUsername.user.data.id,
-                username: this.props.userDataByUsername.user.data.username
-              }
-            ]
+            btnSlots: btnSlotsData
           };
           this.setState({ items });
         }

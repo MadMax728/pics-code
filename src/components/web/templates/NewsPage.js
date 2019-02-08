@@ -103,6 +103,7 @@ class NewsRoot extends Component {
                 isBudget={false}
                 isReport={false}
                 handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -120,6 +121,7 @@ class NewsRoot extends Component {
                 isBudget={false}
                 isReport={false}
                 handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -139,6 +141,7 @@ class NewsRoot extends Component {
                 isDescription
                 isInformation={false}
                 isStatus={false}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>

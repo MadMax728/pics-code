@@ -33,6 +33,7 @@ class MediaCard extends Component {
 
   render() {
     const { isComments, item } = this.state;
+    const { isParticipant } = this.props;
     const {
       likeData,
       isDescription,
@@ -44,6 +45,7 @@ class MediaCard extends Component {
       <div className="feed_wrapper">
         <MediaCardHeader
           item={item}
+          isParticipant={isParticipant}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
         />
@@ -182,9 +184,9 @@ class MediaCard extends Component {
       ];
       if (item.userId === userInfo.id) {
         const data = {
-            name: Translations.tool_tips.edit_post,
-            handleEvent: this.handleEditPost
-        }
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
         reportTips.push(data);
       }
     } else {
@@ -204,9 +206,9 @@ class MediaCard extends Component {
       ];
       if (item.userId === userInfo.id) {
         const data = {
-            name: Translations.tool_tips.edit_post,
-            handleEvent: this.handleEditPost
-        }
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
         reportTips.unshift(data);
       }
     }
@@ -216,7 +218,7 @@ class MediaCard extends Component {
   handleEditPost = e => {
     const { item } = this.state;
     this.props.handleModalShow(modalType.upload, item);
-  }
+  };
 
   handleReportPost = e => {
     const { item } = this.state;
@@ -338,7 +340,6 @@ MediaCard.propTypes = {
   handleRemove: PropTypes.func,
   reportedContentData: PropTypes.any,
   isSavedPage: PropTypes.bool,
-  isParticipant: PropTypes.any,
   removeParticipants: PropTypes.func,
   campaignData: PropTypes.any,
   getDashboard: PropTypes.func,

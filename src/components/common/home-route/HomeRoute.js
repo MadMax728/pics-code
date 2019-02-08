@@ -343,11 +343,11 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaign = () => {
-    return <SettingCampaignPage />;
+    return <SettingCampaignPage handleModalShow={this.props.handleModalShow} handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
   handleAds = () => {
-    return <AdsPage isBackOffice={false} />;
+    return <AdsPage isBackOffice={false} handleModalShow={this.props.handleModalShow} handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
   handleNewsFeed = match => {

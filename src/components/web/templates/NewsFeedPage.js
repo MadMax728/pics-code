@@ -145,6 +145,7 @@ class NewsFeedPage extends Component {
                 isBudget={false}
                 isReport={false}
                 handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -162,6 +163,7 @@ class NewsFeedPage extends Component {
                 isBudget={false}
                 isReport={false}
                 handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -185,6 +187,7 @@ class NewsFeedPage extends Component {
                 isDescription
                 isInformation={false}
                 isStatus={false}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>

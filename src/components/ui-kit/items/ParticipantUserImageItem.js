@@ -4,14 +4,9 @@ import LazyLoad from "react-lazyload";
 import * as images from "../../../lib/constants/images";
 import { UserImageItemLoader } from "../loading-indicator";
 
-class UserImageItem extends PureComponent {
+class ParticipantUserImageItem extends PureComponent {
   render() {
-    const {
-      item,
-      customClass,
-      isParticipant,
-      campaignUserProfile
-    } = this.props;
+    const { item, customClass, ownerItem } = this.props;
     return (
       <div className={`profile_image ${customClass}`}>
         <LazyLoad
@@ -25,32 +20,25 @@ class UserImageItem extends PureComponent {
             alt="profile"
             className="img-circle img-responsive"
           />
-          {isParticipant && (
-            <span className="overap-pro-img">
-              <img
-                src={campaignUserProfile ? campaignUserProfile : images.image}
-                alt="profile"
-                className="img-circle img-responsive"
-              />
-            </span>
-          )}
+          <span className="overap-pro-img">
+            <img
+              src={ownerItem ? ownerItem : images.image}
+              alt="profile"
+              className="img-circle img-responsive"
+            />
+          </span>
         </LazyLoad>
       </div>
     );
   }
 }
 
-UserImageItem.propTypes = {
+ParticipantUserImageItem.propTypes = {
   item: PropTypes.string.isRequired,
-  isParticipant: PropTypes.bool,
-  campaignUserProfile: PropTypes.string,
   customClass: PropTypes.string,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  ownerItem: PropTypes.any
   // isOtherCardExist: PropTypes.bool.isRequired
 };
 
-UserImageItem.defaultProps = {
-  isParticipant: false
-};
-
-export default UserImageItem;
+export default ParticipantUserImageItem;

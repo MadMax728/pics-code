@@ -5,6 +5,8 @@ import { generateOTP } from "../../../actions/login";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import InlineLoading from "../../ui-kit/loading-indicator/InlineLoading";
+import { Button } from "../../ui-kit";
+import { Translations } from "../../../lib/translations";
 
 class LoginLinkSend extends Component {
   render() {
@@ -16,13 +18,11 @@ class LoginLinkSend extends Component {
         <section>
           <div className="custom-container">
             <div className="login-wrapper backoffice-login">
-              <h3 className="text-center">Backoffice log in</h3>
-              <p>Send password to admin´s email address. </p>
+              <h3 className="text-center">{Translations.admin_login.backoffice_login}</h3>
+              <p>{Translations.admin_login.send_password} </p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <button type="submit" className="blue_button">
-                    Send
-                  </button>
+                  <Button type="submit" className="blue_button" text={Translations.admin_login.send} />
                 </div>
               </form>
             </div>
