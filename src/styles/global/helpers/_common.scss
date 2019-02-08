@@ -1314,7 +1314,7 @@ section.loader-wrapr {
 // share pop up
 .share-popup.modal {
   &.in {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.7);
   }
   .modal-dialog {
     margin: 34vh auto;
@@ -1346,6 +1346,18 @@ section.loader-wrapr {
         &:last-child {
           margin-bottom: 0;
         }
+        .social-link-title{
+          &:hover,&:focus{
+            border:none;
+            outline: none;
+          }
+            >div{
+              &:hover,&:focus{
+                border:none;
+                outline: none;
+              }
+            }
+        }
         .social-icon {
           display: inline-block;
           height: 20px;
@@ -1354,6 +1366,9 @@ section.loader-wrapr {
           position: relative;
           top: 5px;
           margin-right: 10px;
+          &:hover,&:focus{
+            border:none;
+          }
           &.icon-whatsapp {
             background: url("../images/facebook.png") no-repeat center;
           }
