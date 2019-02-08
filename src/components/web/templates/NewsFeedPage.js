@@ -187,6 +187,7 @@ class NewsFeedPage extends Component {
                 isDescription
                 isInformation={false}
                 isStatus={false}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>

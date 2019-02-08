@@ -104,7 +104,7 @@ class AdsPage extends Component {
 
   renderAdList = () => {
     let { adList, form } = this.state;
-    const { searchData } = this.props;
+    const { searchData, handleModalShow, handleModalInfoDetailsCallbackShow } = this.props;
 
     adList = search(adList, "userName", form.search || searchData.searchKeyword);
     return adList.map(ad => {
@@ -118,8 +118,9 @@ class AdsPage extends Component {
               isStatus={false}
               isReview
               isBackOffice 
-              handleModalInfoDetailsCallbackShow={this.props.handleModalInfoDetailsCallbackShow}
+              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
               handleRemove={this.handleRemove}
+              handleModalShow={handleModalShow}
             />
           )}
         </div>
@@ -175,7 +176,8 @@ AdsPage.propTypes = {
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   getBackOfficeReviewStatistics: PropTypes.func,
   getSearch: PropTypes.func.isRequired,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

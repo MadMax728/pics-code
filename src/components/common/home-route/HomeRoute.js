@@ -347,7 +347,7 @@ class HomeRoute extends Component {
   };
 
   handleAds = () => {
-    return <AdsPage isBackOffice={false} />;
+    return <AdsPage isBackOffice={false} handleModalShow={this.props.handleModalShow} handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
   handleNewsFeed = match => {

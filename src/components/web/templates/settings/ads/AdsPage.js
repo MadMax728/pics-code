@@ -38,12 +38,12 @@ class AdsPage extends Component {
   };
 
   renderAdList = () => {
-    const { adList } = this.props;
+    const { adList, handleModalShow } = this.props;
     return adList.map(ad => {
       return (
         <div key={ad.id}>
           {ad.mediaUrl && ad.postType && ad.postType.toLowerCase() === enumerations.contentTypes.ad && (
-            <AdCard item={ad} isDescription isInformation={false} isStatus />
+            <AdCard item={ad} isDescription isInformation={false} isStatus handleModalShow={handleModalShow} />
           )}
         </div>
       );
@@ -56,7 +56,8 @@ AdsPage.propTypes = {
   getAds: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   adList: PropTypes.any,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

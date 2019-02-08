@@ -141,6 +141,7 @@ class NewsRoot extends Component {
                 isDescription
                 isInformation={false}
                 isStatus={false}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>

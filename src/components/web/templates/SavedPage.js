@@ -120,6 +120,7 @@ class SavedPage extends Component {
                 isStatus={false}
                 isSavedPage
                 handleRemove={this.handleRemove}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>
