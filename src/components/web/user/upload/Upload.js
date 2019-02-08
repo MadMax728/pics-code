@@ -61,22 +61,23 @@ class Upload extends Component {
     const { isInProgress, isAdvertise } = this.state;
     const userInfo = storage ? JSON.parse(storage.userInfo) : null;
     const profileImage = userInfo ? userInfo.profileUrl : images.image;
+    const isLabel = {
+      yes: enumerations.advertiseLabel.yes,
+      no: enumerations.advertiseLabel.no
+    };
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-12 upload-form">
           <div className="user-title">
             <div className="normal_title modal-title">
-              {/* {Translations.upload_modal.title_of_upload} */} Create an
-              Image
+              {Translations.upload_modal.title_of_upload}
             </div>
-            {/* <div className="secondary_title">Add title Image</div> */}
           </div>
           <form className="col-xs-12 no-padding">
             <div className="form-group no-margin">
-              <label htmlFor="image">Add Title image</label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              {/* <label htmlFor="image">
+                {Translations.upload_modal.add_title}
+              </label> */}
               {!form.image && !form.video ? (
                 <div className="box">
                   <input
@@ -147,10 +148,9 @@ class Upload extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="Location">Add Location</label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <label htmlFor="Location">
+                {Translations.upload_modal.add_location}
+              </label>
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -166,10 +166,9 @@ class Upload extends Component {
                 )}
             </div>
             <div className="form-group">
-              <label htmlFor="Category">Add Categorie</label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <label htmlFor="Category">
+                {Translations.upload_modal.add_category}
+              </label>
               <SelectCategory
                 value={form.add_category ? form.add_category : ""}
                 className=""
@@ -182,10 +181,9 @@ class Upload extends Component {
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="description">Add Description</label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <label htmlFor="description">
+                {Translations.upload_modal.add_description}
+              </label>
               <HashTagUsername
                 className="form-control"
                 type="text"
@@ -202,18 +200,9 @@ class Upload extends Component {
             </div>
 
             <div className="form-group no-margin">
-              <label htmlFor="label">Label as Advertisment</label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
-              {/* <input
-                type="checkbox"
-                alt="isAdvertisement"
-                className="check form-control"
-                name="is_advertise_label"
-                value={form.is_advertise_label}
-                onChange={this.handleChangeField}
-              /> */}
+              <label htmlFor="label">
+                {Translations.upload_modal.advertisement}
+              </label>
               <div className="form-group">
                 <ul className="options">
                   <li handleSetState={handleSetState} className="wid49">
@@ -222,12 +211,10 @@ class Upload extends Component {
                       id={enumerations.advertiseLabel.no}
                       name="is_advertise_label"
                       className="black_button"
-                      value={enumerations.advertiseLabel.no}
-                      defaultChecked={
-                        isAdvertise === enumerations.advertiseLabel.no
-                      }
+                      value={isLabel.no}
+                      defaultChecked={isAdvertise === isLabel.no}
                     />
-                    <label htmlFor={enumerations.advertiseLabel.no}>
+                    <label htmlFor={isLabel.no}>
                       {Translations.upload_modal.no}
                     </label>
                   </li>
@@ -236,12 +223,10 @@ class Upload extends Component {
                       type="radio"
                       id={enumerations.advertiseLabel.yes}
                       name="is_advertise_label"
-                      value={enumerations.advertiseLabel.yes}
-                      defaultChecked={
-                        isAdvertise === enumerations.advertiseLabel.yes
-                      }
+                      value={isLabel.yes}
+                      defaultChecked={isAdvertise === isLabel.yes}
                     />
-                    <label htmlFor={enumerations.advertiseLabel.yes}>
+                    <label htmlFor={isLabel.yes}>
                       {Translations.upload_modal.yes}
                     </label>
                   </li>

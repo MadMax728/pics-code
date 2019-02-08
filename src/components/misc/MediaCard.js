@@ -184,9 +184,9 @@ class MediaCard extends Component {
       ];
       if (item.userId === userInfo.id) {
         const data = {
-            name: Translations.tool_tips.edit_post,
-            handleEvent: this.handleEditPost
-        }
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
         reportTips.push(data);
       }
     } else {
@@ -206,9 +206,9 @@ class MediaCard extends Component {
       ];
       if (item.userId === userInfo.id) {
         const data = {
-            name: Translations.tool_tips.edit_post,
-            handleEvent: this.handleEditPost
-        }
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
         reportTips.unshift(data);
       }
     }
@@ -218,7 +218,7 @@ class MediaCard extends Component {
   handleEditPost = e => {
     const { item } = this.state;
     this.props.handleModalShow(modalType.upload, item);
-  }
+  };
 
   handleReportPost = e => {
     const { item } = this.state;

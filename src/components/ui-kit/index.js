@@ -20,7 +20,15 @@ export { ToolTip } from "./tool-tip";
 export { PlaceAutoCompleteLocation } from "./place-auto-complete-location";
 export { ThreeDots } from "./three-dots";
 export { SubscribeList } from "./subscribe-list";
-export { ImageItem, UserProfileImage, UserImageItem, VideoItem, UserTitleItem, ImageGallery } from "./items";
+export {
+  ImageItem,
+  UserProfileImage,
+  UserImageItem,
+  ParticipantUserImageItem,
+  VideoItem,
+  UserTitleItem,
+  ImageGallery
+} from "./items";
 export { ReadMore } from "./read-more";
 export {
   NoDataFoundRightSidebar,
@@ -28,7 +36,7 @@ export {
 } from "./no-data-loading-indicator";
 export { RightSidebarModal } from "./right-sidebar-modal";
 
-export { 
+export {
   Button,
   Input,
   RadioBtn,
