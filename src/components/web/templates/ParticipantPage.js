@@ -74,6 +74,7 @@ class ParticipantPage extends Component {
   renderParticipantList = () => {
     const { participantList } = this.state;
     const isParticipant = true;
+    const { handleModalShow } = this.props;
     return (
       <div>
         {participantList && participantList.length > 0 ? (
@@ -89,6 +90,7 @@ class ParticipantPage extends Component {
                       isParticipant={isParticipant}
                       handleFilterList={this.handleParticipantFilterList}
                       isDescription
+                      handleModalShow={handleModalShow}
                     />
                   )}
               </div>
@@ -109,7 +111,8 @@ ParticipantPage.propTypes = {
   participantList: PropTypes.any,
   searchData: PropTypes.any,
   params: PropTypes.any,
-  isParticipant: PropTypes.any
+  isParticipant: PropTypes.any,
+  handleModalShow: PropTypes.func
   // errorparticipants: PropTypes.any
 };
 
