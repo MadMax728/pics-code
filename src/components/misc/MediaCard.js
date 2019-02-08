@@ -165,7 +165,7 @@ class MediaCard extends Component {
       reportTips = [
         {
           name: item.isReported
-            ? Translations.tool_tips.remo
+            ? Translations.tool_tips.unreport
             : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
@@ -180,11 +180,18 @@ class MediaCard extends Component {
           handleEvent: this.handleRemoveParticipant
         }
       ];
+      if (item.userId === userInfo.id) {
+        const data = {
+            name: Translations.tool_tips.edit_post,
+            handleEvent: this.handleEditPost
+        }
+        reportTips.push(data);
+      }
     } else {
       reportTips = [
         {
           name: item.isReported
-            ? Translations.tool_tips.remo
+            ? Translations.tool_tips.unreport
             : Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
@@ -195,9 +202,21 @@ class MediaCard extends Component {
           handleEvent: this.handleSavePost
         }
       ];
+      if (item.userId === userInfo.id) {
+        const data = {
+            name: Translations.tool_tips.edit_post,
+            handleEvent: this.handleEditPost
+        }
+        reportTips.unshift(data);
+      }
     }
     return <RenderToolTips items={reportTips} id={id} />;
   };
+
+  handleEditPost = e => {
+    const { item } = this.state;
+    this.props.handleModalShow(modalType.upload, item);
+  }
 
   handleReportPost = e => {
     const { item } = this.state;
@@ -323,7 +342,8 @@ MediaCard.propTypes = {
   removeParticipants: PropTypes.func,
   campaignData: PropTypes.any,
   getDashboard: PropTypes.func,
-  handleFilterList: PropTypes.func
+  handleFilterList: PropTypes.func,
+  handleModalShow: PropTypes.func
 };
 
 MediaCard.defaultProps = {

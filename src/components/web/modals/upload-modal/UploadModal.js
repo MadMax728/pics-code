@@ -83,6 +83,35 @@ class UploadModal extends Component {
     form.error = false;
     this.setState({ form });
   };
+
+  componentDidMount = () => {
+    this.fillState();
+  }
+
+  fillState = () => {
+    const { data } = this.props;
+    const { form } = this.state;
+    if (data) {
+      form.add_location = {};
+      form.add_location.latitude = data.location.latitude || "";
+      form.add_location.longitude = data.location.longitude || "";
+      form.add_location.address = data.location.address || "";
+      form.add_category = data.category || "";
+      form.add_description = data.description || "";
+      form.is_advertise_label = data.is_advertise_label || false;
+      if (data.typeContent === "Image") {
+        form.image = data.mediaUrl;
+        form.filetype = true;
+      } else {
+        form.video = data.mediaUrl;
+        form.filetype = false;
+      }
+      form.file = data.path;
+      form.error = false;
+      this.setState({ form });
+    }
+  }
+
   componentWillUnmount = () => {
     this.setState(initialState);
   };

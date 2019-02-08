@@ -75,7 +75,7 @@ class NewsRoot extends Component {
 
   renderNewsFeedList = () => {
     let { newsFeedList } = this.state;
-    const { searchData, handleModalInfoShow } = this.props;
+    const { searchData, handleModalInfoShow, handleModalShow } = this.props;
     newsFeedList = search(newsFeedList, "userName", searchData.searchKeyword);
 
     return newsFeedList.map(newsFeed => {
@@ -86,7 +86,7 @@ class NewsRoot extends Component {
             newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.mediaPost && (
-              <MediaCard item={newsFeed} isParticipant={false} isDescription />
+              <MediaCard item={newsFeed} isParticipant={false} isDescription handleModalShow={handleModalShow} />
             )}
           {newsFeed.mediaUrl &&
             newsFeed.typeContent &&
@@ -127,7 +127,7 @@ class NewsRoot extends Component {
             newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard item={newsFeed} isParticipant isDescription />
+              <MediaCard item={newsFeed} isParticipant isDescription handleModalShow={handleModalShow} />
             )}
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
@@ -162,7 +162,8 @@ NewsRoot.propTypes = {
   isLoadingnews: PropTypes.bool,
   newsFeedList: PropTypes.any,
   searchData: PropTypes.any,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
   // errornews: PropTypes.any
 };
 
