@@ -10,8 +10,6 @@ const FavouriteCampaignItem = ({ campaign }) => {
   // const profile_route = campaign.isOwner
   //   ? routes.NEWS_FEED_ROUTE
   //   : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
-  console.log(campaign);
-  
   const profile_image = campaign.profileImage? campaign.profileImage : images.image;
   return (
     <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}>
