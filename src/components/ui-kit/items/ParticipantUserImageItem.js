@@ -4,7 +4,7 @@ import LazyLoad from "react-lazyload";
 import * as images from "../../../lib/constants/images";
 import { UserImageItemLoader } from "../loading-indicator";
 
-class UserImageItem extends PureComponent {
+class ParticipantUserImageItem extends PureComponent {
   render() {
     const { item, customClass } = this.props;
     return (
@@ -26,11 +26,11 @@ class UserImageItem extends PureComponent {
   }
 }
 
-UserImageItem.propTypes = {
+ParticipantUserImageItem.propTypes = {
   item: PropTypes.string.isRequired,
   customClass: PropTypes.string,
   isLoading: PropTypes.bool
   // isOtherCardExist: PropTypes.bool.isRequired
 };
 
-export default UserImageItem;
+export default ParticipantUserImageItem;
