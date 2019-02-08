@@ -118,7 +118,7 @@ class StepThree extends Component {
                 <span className="applicant-count">{maxClicks}</span>
                 <span className="applicant-label">
                   {" "}
-                  {Translations.applicant}
+                  {Translations.create_campaigns.applicant}
                 </span>
               </p>
             </div>
