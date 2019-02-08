@@ -26,10 +26,6 @@ class StepThree extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const { maxClicks } = this.state;
-    console.log("day", form.endDate.diff(form.startDate, "days"));
-    const weekDiffrence = form.endDate.diff(form.startDate, "week");
-    console.log("week", weekDiffrence);
-    const MonthDiffrence = form.endDate.diff(form.startDate, "month");
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -119,7 +115,10 @@ class StepThree extends Component {
             </label>
             <div className="meter orange nostripes">
               <span className="filled-strip" style={{ width: "0px" }}>
-                <p className="applicant-count"> {maxClicks} applicant </p>
+                <p className="applicant-count">
+                  {" "}
+                  {maxClicks} {Translations.create_campaigns.applicant}{" "}
+                </p>
               </span>
             </div>
           </div>

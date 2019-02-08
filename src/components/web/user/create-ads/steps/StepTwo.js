@@ -22,17 +22,17 @@ class StepTwo extends Component {
   handleStartDateChange = date => {
     this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
-    if (this.props.form.budget) {
-      this.props.calculateMaxClicks();
-    }
+    // if (this.props.form.budget) {
+    //   this.props.calculateMaxClicks();
+    // }
   };
 
   handleEndDateChange = date => {
     this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
-    if (this.props.form.budget) {
-      this.props.calculateMaxClicks();
-    }
+    // if (this.props.form.budget) {
+    //   this.props.calculateMaxClicks();
+    // }
   };
 
   render() {
@@ -72,10 +72,21 @@ class StepTwo extends Component {
                 </div>
               </li>
             </ul>
-            {form.error && form.endDate.diff(form.startDate, "days") < 0 && (
+            {form.error && form.endDate.diff(form.startDate, "days") < 0 ? (
               <span className="error-msg highlight">
                 {Translations.error.create_modal.date}
               </span>
+            ) : form.error && form.endDate.diff(form.startDate, "week") <= 0 ? (
+              <span className="error-msg highlight">
+                {Translations.error.create_modal.weekValidation}
+              </span>
+            ) : (
+              form.error &&
+              form.endDate.diff(form.startDate, "month") > 3 && (
+                <span className="error-msg highlight">
+                  {Translations.error.create_modal.monthValidation}
+                </span>
+              )
             )}
           </div>
           <div className="form-group">
@@ -94,7 +105,7 @@ class StepTwo extends Component {
               </span>
             )}
           </div>
-          <div className="form-group">
+          {/* <div className="form-group">
             <label htmlFor="Maximum">
               {Translations.create_ads.maximum_number_of_clicks}
             </label>
@@ -105,6 +116,19 @@ class StepTwo extends Component {
               />
               <span className="number-clicks">
                 {Translations.create_ads.max_1200_clicks}
+              </span>
+            </div>
+          </div> */}
+          <div className="form-group">
+            <label htmlFor="Maximum">
+              {Translations.create_ads.maximum_number_of_views}
+            </label>
+            <div className="meter orange nostripes">
+              <span className="filled-strip" style={{ width: "0px" }}>
+                <p className="applicant-count">
+                  {" "}
+                  {maxClicks} {Translations.create_ads.views}{" "}
+                </p>
               </span>
             </div>
           </div>
@@ -119,7 +143,7 @@ class StepTwo extends Component {
             <li>{Translations.create_ads.total_budget_can_not_be_exceeded}</li>
           </ul>
         </div>
-        <RightSidebarModal userInfo={userInfo} form={form} />
+        <RightSidebarModal userInfo={userInfo} form={form} isFor="ads" />
       </div>
     );
   }
