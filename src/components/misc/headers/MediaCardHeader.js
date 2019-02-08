@@ -4,7 +4,7 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { DateFormat } from "../../Factory";
-import { UserImageItem, ParticipantUserImageItem } from "../../ui-kit";
+import { UserImageItem } from "../../ui-kit";
 
 const MediaCardHeader = ({
   item,
@@ -16,25 +16,15 @@ const MediaCardHeader = ({
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}/${item.userName}`;
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
-
-  // TO DO - Binding of campaign creator owner profile image
-  const campaignOwnerProfileImage =
-    "https://picstagraph-dev.s3.amazonaws.com/1543216131198-user.png";
   return (
     <div className="feed_header">
       <Link to={profile_route}>
-        {isParticipant === true ? (
-          <ParticipantUserImageItem
-            ownerItem={campaignOwnerProfileImage}
-            item={item.profileImage}
-            customClass={`img-circle img-responsive padding-right-15`}
-          />
-        ) : (
-          <UserImageItem
-            item={item.profileImage}
-            customClass={`img-circle img-responsive padding-right-15`}
-          />
-        )}
+        <UserImageItem
+          item={item.profileImage}
+          isParticipant={isParticipant}
+          campaignUserProfile={item.campaign}
+          customClass={`img-circle img-responsive padding-right-15`}
+        />
       </Link>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link to={profile_route}>
@@ -68,8 +58,12 @@ const MediaCardHeader = ({
 MediaCardHeader.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
-  isLoading: PropTypes.bool,
-  isParticipant: PropTypes.any
+  isParticipant: PropTypes.bool,
+  isLoading: PropTypes.bool
+};
+
+MediaCardHeader.defaultProps = {
+  isParticipant: false
 };
 
 export default MediaCardHeader;
