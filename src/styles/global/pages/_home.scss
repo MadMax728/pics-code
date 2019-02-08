@@ -534,6 +534,7 @@
     .profile_image {
       display: inline-block;
       float: left;
+      position: relative;
       &.wid45 {
         width: 45px;
       }
@@ -549,6 +550,19 @@
           height: 35px;
           width: 35px;
           border: 1px solid gray;
+        }
+      }
+      .overap-pro-img{
+        position: absolute;
+        right: 8px;
+        top: -8px;
+        img{
+          cursor: auto;
+          width: 30px;
+          height: 30px;
+          min-width: 30px;
+          min-height: 30px;
+          object-fit: cover;
         }
       }
     }
