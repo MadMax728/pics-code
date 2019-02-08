@@ -243,6 +243,8 @@ class CampaignModal extends Component {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
+    console.log(data);
+    
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;

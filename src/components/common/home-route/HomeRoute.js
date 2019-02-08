@@ -343,7 +343,7 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaign = () => {
-    return <SettingCampaignPage />;
+    return <SettingCampaignPage handleModalShow={this.props.handleModalShow} handleModalInfoShow={this.props.handleModalInfoShow} />;
   };
 
   handleAds = () => {
