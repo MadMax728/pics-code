@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { RadioBtn, Select, Text } from "../CommonUIComponents";
+import { RadioBtn, Select, Input } from "../common-ui-components";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
 import { getCookie } from "../../../lib/utils/helpers";
 import {
@@ -116,7 +116,8 @@ class LeftSidebarFilter extends Component {
                 />
               )}
               {filter.type === "text" && (
-                <Text
+                <Input
+                  type='text'
                   foruse={filter.name}
                   name={filter.name}
                   onChange={this.handleOnChange}

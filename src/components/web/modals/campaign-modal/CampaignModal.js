@@ -108,7 +108,8 @@ class CampaignModal extends Component {
     let modalClassName = "";
 
     if (stepIndex === 0) {
-      modalClassName = "modal fade create-campaign-modal upload-pic-modal start-campaign-modal overflow-scroll ";
+      modalClassName =
+        "modal fade create-campaign-modal upload-pic-modal start-campaign-modal overflow-scroll ";
     } else if (stepIndex !== 0 && stepIndex < 4) {
       modalClassName = "modal fade create-campaign-modal editor-modal";
     } else if (stepIndex > 3 && stepIndex < 5) {
@@ -385,10 +386,10 @@ class CampaignModal extends Component {
       // } else {
       //   Data.append("video", form.file);
       // }
-      
+
       // add below line for Image
       Data.append("image", form.file);
-      
+
       Data.append("postType", "campaign");
       this.setState({ isLoading: true });
 
@@ -477,6 +478,8 @@ class CampaignModal extends Component {
         form.startDate &&
         form.endDate &&
         form.endDate.diff(form.startDate, "days") >= 0 &&
+        form.endDate.diff(form.startDate, "week") >= 1 &&
+        form.endDate.diff(form.startDate, "month") <= 3 &&
         form.budget
       );
     } else if (index === 3) {
@@ -673,13 +676,23 @@ class CampaignModal extends Component {
     const CPC = budgetCalculation.CPC;
     const budgetValue = form.budget;
     const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
-    if (noOfDaysRuntime && budgetValue) {
+
+    // Max Clicks calculation
+    // if (noOfDaysRuntime && budgetValue) {
+    //   maxClicksValue =
+    //     (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
+    //   if (maxClicksValue >= 1200) {
+    //     maxClicksValue = 1200;
+    //   }
+    //   maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+    //   this.setState({ maxClicks: maxClicksValue });
+    // }
+
+    if (budgetValue) {
       maxClicksValue =
-        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
-      if (maxClicksValue >= 1200) {
-        maxClicksValue = 1200;
-      }
-      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+        parseInt(budgetValue) /
+        parseInt(budgetCalculation.campaignPerApplicationCost);
+      maxClicksValue = Math.floor(parseInt(maxClicksValue));
       this.setState({ maxClicks: maxClicksValue });
     }
   };

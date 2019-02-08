@@ -38,7 +38,7 @@ class StepTwo extends Component {
   render() {
     const { form, handleSelect, userInfo } = this.props;
     const { maxClicks } = this.state;
-    
+
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -86,6 +86,7 @@ class StepTwo extends Component {
               value={form.budget || ""}
               className=""
               handleSelect={handleSelect}
+              isFor={"ad"}
             />
             {form.budget && form.budget.length === 0 && form.error && (
               <span className="error-msg highlight">
@@ -118,10 +119,7 @@ class StepTwo extends Component {
             <li>{Translations.create_ads.total_budget_can_not_be_exceeded}</li>
           </ul>
         </div>
-        <RightSidebarModal
-          userInfo={userInfo}
-          form={form}
-        />
+        <RightSidebarModal userInfo={userInfo} form={form} />
       </div>
     );
   }

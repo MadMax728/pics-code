@@ -13,7 +13,6 @@ class EditProfilePicHeader extends Component {
 
   render() {
     const {isLoading} = this.props;
-    console.log(this.props.isLoading);
     return (
       <div className="row">
         {isLoading && <InlineLoading />}

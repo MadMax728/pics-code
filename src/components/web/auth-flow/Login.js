@@ -1,21 +1,22 @@
-import { connect } from "react-redux";
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { submitLogin } from "../../../actions/login";
-import { InlineLoading } from "../../ui-kit";
+import { InlineLoading, Input, Button, ErrorSpan } from "../../ui-kit";
 import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { Auth } from "../../../auth";
+
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       form: {
-        userName: "",
+        username: "",
         password: ""
       },
       error: {}
@@ -24,7 +25,7 @@ class Login extends Component {
 
   render() {
     const { loginData } = this.props;
-    const { form } = this.state;
+    const { form, error } = this.state;
     return (
       <div className="login-process">
         <BaseHeader />
@@ -35,42 +36,41 @@ class Login extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <span className="error-msg highlight">{this.state.error.servererror}</span>
+                  <ErrorSpan value={error.servererror} />
                 </div>
                 <div className="form-group">
-                  <input
+                  <Input
                     type="text"
                     className="form-control"
-                    id="text"
-                    name="userName"
-                    value={form.userName}
-                    onChange={this.handleChangeField}
+                    id="username"
+                    name="username"
                     placeholder={Translations.placeholders.username_email}
+                    value={form.username? form.username : ""}
+                    onChange={this.handleChangeField}
                   />
-                  {form.userName.length > 0 ? (
+                  {form.username.length > 0 ? (
                     <img src={images.checked} alt={"checked"} />
                   ) : (
                     <img src={images.error} alt={"error"} />
                   )}
-                  <span className="error-msg highlight">{this.state.error.username}</span>
+                  <ErrorSpan value={error.username} />
                 </div>
                 <div className="form-group">
-                  <input
+                  <Input
                     type="password"
                     className="form-control"
                     id="password"
-                    autoComplete="password"
                     name="password"
-                    value={form.password}
-                    onChange={this.handleChangeField}
                     placeholder={Translations.placeholders.password}
+                    value={form.password? form.password : ""}
+                    onChange={this.handleChangeField}
                   />
                   {form.password.length > 0 ? (
                     <img src={images.checked} alt={"checked"} />
                   ) : (
                     <img src={images.error} alt={"error"} />
                   )}
-                  <span className="error-msg highlight">{this.state.error.password}</span>
+                  <ErrorSpan value={error.password} />
                 </div>
                 <div className="form-group">
                   <Link to={routes.RESET_EMAIL}>
@@ -81,13 +81,11 @@ class Login extends Component {
                   {loginData && loginData.isLoading ? (
                     <InlineLoading />
                   ) : (
-                    <button
+                    <Button
                       type="submit"
-                      // onClick={this.handleSubmit}
                       className="blue_button"
-                    >
-                      {Translations.login.login}
-                    </button>
+                      text={Translations.login.login}
+                    />
                   )}
                 </div>
               </form>
@@ -113,7 +111,7 @@ class Login extends Component {
     let isFormValid = true;
     const { form } = this.state;
 
-    if (form.userName.length === 0) {
+    if (form.username.length === 0) {
       errors.username = Translations.login.username_required;
       isFormValid = false;
     }
@@ -124,7 +122,7 @@ class Login extends Component {
     this.setState({ error: errors });
     return isFormValid;
 
-    // if (form.userName.length === 0 || form.password.length === 0) {
+    // if (form.username.length === 0 || form.password.length === 0) {
     //   return false;
     // }
 
@@ -133,9 +131,10 @@ class Login extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
     this.formValid();
+   
   };
 
   // handelSubmit called when click on submit
@@ -144,11 +143,9 @@ class Login extends Component {
     if (!this.formValid()) {
       return false;
     }
-
     const { form } = this.state;
-
     this.props
-      .submitLogin({ email: form.userName, password: form.password })
+      .submitLogin({ email: form.username, password: form.password })
       .then(() => {
         const errors = {};
         if (
