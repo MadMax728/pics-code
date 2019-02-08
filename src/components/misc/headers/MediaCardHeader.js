@@ -16,6 +16,8 @@ const MediaCardHeader = ({
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}/${item.userName}`;
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
+
+  // TO DO - Binding of campaign creator owner profile image
   const campaignOwnerProfileImage =
     "https://picstagraph-dev.s3.amazonaws.com/1543216131198-user.png";
   return (

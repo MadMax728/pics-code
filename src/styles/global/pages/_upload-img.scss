@@ -304,6 +304,19 @@
               display: inline-block;
               width: 100%;
             }
+            .create-campaign-crop-pic{
+              .feed_image{
+                  img{
+                    width: 100%;
+                    position: absolute;
+                    bottom: 10px;
+                    right: 10px;
+                    top: 0;
+                    height: 100%;
+                    object-fit: contain;
+                  }
+              }
+            }
             .options{
               label{
                 text-decoration: none;
@@ -365,10 +378,11 @@
         .create-campaign-wrapper{
           .title{
             padding: 15px 20px;
+            margin: 0;
           }
         }
         .quill {
-          padding: 20px;
+          padding:0 20px 20px;
           height: 250px;
         }
       }

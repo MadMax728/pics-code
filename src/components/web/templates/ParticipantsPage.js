@@ -87,7 +87,7 @@ class ParticipantsPage extends Component {
 
   renderParticipantsList = () => {
     let { participantsList } = this.state;
-    const { searchData } = this.props;
+    const { searchData, handleModalShow } = this.props;
     const isParticipant = true;
     participantsList = search(
       participantsList,
@@ -110,6 +110,7 @@ class ParticipantsPage extends Component {
                       isParticipant={isParticipant}
                       handleFilterList={this.handleParticipantFilterList}
                       isDescription
+                      handleModalShow={handleModalShow}
                     />
                   )}
               </div>
@@ -129,7 +130,8 @@ ParticipantsPage.propTypes = {
   isLoadingparticipants: PropTypes.bool,
   participantsList: PropTypes.any,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  handleModalShow: PropTypes.func
   // errorparticipants: PropTypes.any
 };
 

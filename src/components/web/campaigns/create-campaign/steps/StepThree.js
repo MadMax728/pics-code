@@ -114,12 +114,13 @@ class StepThree extends Component {
               {Translations.create_campaigns.maximum_number_of_applicants}
             </label>
             <div className="meter orange nostripes">
-              <span className="filled-strip" style={{ width: "0px" }}>
-                <p className="applicant-count">
+              <p className="applicant-block">
+                <span className="applicant-count">{maxClicks}</span>
+                <span className="applicant-label">
                   {" "}
-                  {maxClicks} {Translations.create_campaigns.applicant}{" "}
-                </p>
-              </span>
+                  {Translations.applicant}
+                </span>
+              </p>
             </div>
           </div>
           <div className="subtitle">

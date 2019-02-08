@@ -124,12 +124,12 @@ class StepTwo extends Component {
               {Translations.create_ads.maximum_number_of_views}
             </label>
             <div className="meter orange nostripes">
-              <span className="filled-strip" style={{ width: "0px" }}>
-                <p className="applicant-count">
-                  {" "}
-                  {maxClicks} {Translations.create_ads.views}{" "}
-                </p>
-              </span>
+              <p className="applicant-block">
+                <span className="applicant-count">{maxClicks}</span>
+                <span className="applicant-label">
+                  {Translations.create_ads.views}
+                </span>
+              </p>
             </div>
           </div>
           <div className="subtitle">

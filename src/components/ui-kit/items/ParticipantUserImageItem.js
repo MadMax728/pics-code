@@ -20,7 +20,7 @@ class ParticipantUserImageItem extends PureComponent {
             alt="profile"
             className="img-circle img-responsive"
           />
-          <span>
+          <span className="overap-pro-img">
             <img
               src={ownerItem ? ownerItem : images.image}
               alt="profile"
