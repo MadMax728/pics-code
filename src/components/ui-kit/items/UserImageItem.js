@@ -16,6 +16,13 @@ class UserImageItem extends PureComponent {
                 alt="profile"
                 className="img-circle img-responsive"
                 />
+                <span className="overap-pro-img">
+                  <img
+                  src={item ? item : images.image}
+                  alt="profile"
+                  className="img-circle img-responsive"
+                  />
+                </span>
             </LazyLoad>
         </div>
     );
