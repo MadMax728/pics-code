@@ -113,7 +113,7 @@ class NewsFeedPage extends Component {
 
   renderNewsFeedList = () => {
     const { newsFeedList } = this.state;
-    const { handleModalInfoShow } = this.props;
+    const { handleModalInfoShow, handleModalShow } = this.props;
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
@@ -126,6 +126,7 @@ class NewsFeedPage extends Component {
                 isParticipant={false}
                 handleFilterList={this.handleParticipantFilterList}
                 isDescription
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -172,6 +173,7 @@ class NewsFeedPage extends Component {
                 isParticipant
                 handleFilterList={this.handleParticipantFilterList}
                 isDescription
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
@@ -198,7 +200,8 @@ NewsFeedPage.propTypes = {
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
   userDataByUsername: PropTypes.any,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

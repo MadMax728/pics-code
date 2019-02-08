@@ -55,14 +55,14 @@ class ExploreRoot extends Component {
 
   renderExploreList = () => {
     let { exploreList } = this.state;
-    const { searchData } = this.props;
+    const { searchData, handleModalShow } = this.props;
     exploreList = search(exploreList, "userName", searchData.searchKeyword);
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
           {explore.mediaUrl &&
             explore.postType === enumerations.contentTypes.mediaPost && (
-              <MediaCard item={explore} isDescription />
+              <MediaCard item={explore} isDescription handleModalShow={handleModalShow} />
             )}
         </div>
       );
@@ -76,7 +76,8 @@ ExploreRoot.propTypes = {
   isLoadingexplores: PropTypes.bool,
   exploreList: PropTypes.any,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 
