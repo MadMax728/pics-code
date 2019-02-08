@@ -6,7 +6,7 @@ import { UserImageItemLoader } from "../loading-indicator";
 
 class ParticipantUserImageItem extends PureComponent {
   render() {
-    const { item, customClass } = this.props;
+    const { item, customClass, ownerItem } = this.props;
     return (
       <div className={`profile_image ${customClass}`}>
         <LazyLoad
@@ -20,6 +20,13 @@ class ParticipantUserImageItem extends PureComponent {
             alt="profile"
             className="img-circle img-responsive"
           />
+          <span>
+            <img
+              src={ownerItem ? ownerItem : images.image}
+              alt="profile"
+              className="img-circle img-responsive"
+            />
+          </span>
         </LazyLoad>
       </div>
     );
@@ -29,7 +36,8 @@ class ParticipantUserImageItem extends PureComponent {
 ParticipantUserImageItem.propTypes = {
   item: PropTypes.string.isRequired,
   customClass: PropTypes.string,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  ownerItem: PropTypes.any
   // isOtherCardExist: PropTypes.bool.isRequired
 };
 

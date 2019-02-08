@@ -38,7 +38,8 @@ class MediaCard extends Component {
       isDescription,
       isReport,
       reportedContentData,
-      savedData
+      savedData,
+      isParticipant
     } = this.props;
     return (
       <div className="feed_wrapper">
@@ -46,6 +47,7 @@ class MediaCard extends Component {
           item={item}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
+          isParticipant={isParticipant}
         />
         <MediaCardBody
           item={item}
@@ -57,8 +59,9 @@ class MediaCard extends Component {
           item={item}
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
-          /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          /* eslint-disable */ renderReportTips={() =>
+            this.renderReportTips(item.id)
+          }
           handleFavorite={this.handleFavorite}
           isReport={isReport}
         />
