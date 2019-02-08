@@ -305,12 +305,12 @@ class CampaignModal extends Component {
     return null;
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.isEdit !== this.state.isEdit) {
-      const { data } = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    const { data } = this.props;
+    if (data && data.id !== prevState.form.id) {
       this.handleSetstate(data);
     }
-  };
+  }
 
   handleResetForm = () => {
     const { form } = this.state;

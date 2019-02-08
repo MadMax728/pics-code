@@ -213,6 +213,13 @@ class AdsModal extends Component {
     return null;
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    const { data } = this.props;
+    if (data && data.id !== prevState.form.id) {
+      this.handleFillState(data);
+    }
+  }
+
   handleFillState = data => {
     const { form } = this.state;
     form.id = data.id;
