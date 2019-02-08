@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { DateFormat } from "../../Factory";
 import { UserImageItem } from "../../ui-kit";
 
-const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
+const MediaCardHeader = ({ item, handleFavorite, isLoading, isParticipant }) => {
   const profile_route = item.isOwner
     ? routes.NEWS_FEED_ROUTE
     : `${routes.NEWS_FEED_ROUTE}/${item.userName}`;
@@ -14,7 +14,7 @@ const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
   return (
     <div className="feed_header">
       <Link to={profile_route}>
-          <UserImageItem item={item.profileImage} customClass={`img-circle img-responsive padding-right-15`} />
+          <UserImageItem item={item.profileImage} isParticipant={isParticipant} campaignUserProfile={item.campaign} customClass={`img-circle img-responsive padding-right-15`} />
       </Link>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link
@@ -54,7 +54,12 @@ const MediaCardHeader = ({ item, handleFavorite, isLoading }) => {
 MediaCardHeader.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
+  isParticipant:  PropTypes.bool,
   isLoading: PropTypes.bool
+};
+
+MediaCardHeader.defaultProps = {
+  isParticipant: false
 };
 
 export default MediaCardHeader;

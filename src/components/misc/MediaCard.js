@@ -33,6 +33,7 @@ class MediaCard extends Component {
 
   render() {
     const { isComments, item } = this.state;
+    const { isParticipant } = this.props;
     const {
       likeData,
       isDescription,
@@ -44,6 +45,7 @@ class MediaCard extends Component {
       <div className="feed_wrapper">
         <MediaCardHeader
           item={item}
+          isParticipant={isParticipant}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
         />
@@ -338,7 +340,6 @@ MediaCard.propTypes = {
   handleRemove: PropTypes.func,
   reportedContentData: PropTypes.any,
   isSavedPage: PropTypes.bool,
-  isParticipant: PropTypes.any,
   removeParticipants: PropTypes.func,
   campaignData: PropTypes.any,
   getDashboard: PropTypes.func,
