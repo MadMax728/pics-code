@@ -8,7 +8,7 @@ import * as routes from "../../../lib/constants/routes";
 import * as enumerations from "../../../lib/constants/enumerations";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
-import { InlineLoading } from "../../ui-kit";
+import { InlineLoading, Input, Button } from "../../ui-kit";
 
 class AdminLogin extends Component {
   constructor(props) {
@@ -29,12 +29,12 @@ class AdminLogin extends Component {
         <section>
           <div className="custom-container">
             <div className="login-wrapper backoffice-login">
-              <h3 className="text-center">Backoffice log in</h3>
-              <p>Please enter your password here. </p>
+              <h3 className="text-center">{Translations.admin_login.backoffice_login}</h3>
+              <p>{Translations.admin_login.enter_password} </p>
               {errorMsg && <p> {errorMsg} </p>}
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <input
+                  <Input
                     type="password"
                     className="form-control"
                     id="otp"
@@ -53,12 +53,11 @@ class AdminLogin extends Component {
                   {loginData && loginData.isLoading ? (
                     <InlineLoading />
                   ) : (
-                    <button
+                    <Button
                       type="submit"
                       className="blue_button"
-                    >
-                      {Translations.login.login}
-                    </button>
+                      text={Translations.login.login}
+                    />
                   )}
                 </div>
               </form>

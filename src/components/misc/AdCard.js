@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
+import { Auth } from "../../auth";
 
 class AdCard extends Component {
   constructor(props, context) {
@@ -173,6 +174,12 @@ class AdCard extends Component {
     const { isBackOffice, isReview } = this.props;
     const { item } = this.state;
 
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    
     if (isBackOffice) {
       reportTips = [
         {
@@ -211,9 +218,21 @@ class AdCard extends Component {
           handleEvent: this.handleSavePost
         }
       ];
+      if (item.createdBy === userInfo.id) {
+        const data = {
+            name: Translations.tool_tips.edit_post,
+            handleEvent: this.handleEditPost
+        }
+        reportTips.unshift(data);
+      }
     }
     return <RenderToolTips items={reportTips} id={id} />;
   };
+
+  handleEditPost = e => {
+    const { item } = this.state;
+    this.props.handleModalShow(modalType.editAds , item);
+  }
 
   handleReportPost = e => {
     const { item } = this.state;
@@ -310,7 +329,8 @@ AdCard.propTypes = {
   handleRemove: PropTypes.func,
   isSavedPage: PropTypes.bool,
   isReview: PropTypes.bool,
-  handleModalInfoDetailsCallbackShow: PropTypes.func
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  handleModalShow: PropTypes.func
 };
 
 const mapStateToProps = state => ({

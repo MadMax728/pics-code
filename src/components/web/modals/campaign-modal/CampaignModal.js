@@ -243,6 +243,8 @@ class CampaignModal extends Component {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
+    console.log(data);
+    
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
@@ -303,12 +305,12 @@ class CampaignModal extends Component {
     return null;
   }
 
-  componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.isEdit !== this.state.isEdit) {
-      const { data } = this.props;
+  componentDidUpdate(prevProps, prevState) {
+    const { data } = this.props;
+    if (data && data.id !== prevState.form.id) {
       this.handleSetstate(data);
     }
-  };
+  }
 
   handleResetForm = () => {
     const { form } = this.state;

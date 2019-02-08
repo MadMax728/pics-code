@@ -12,6 +12,7 @@ import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType, BASE_CAMPAIGN_INFORMATION_ROUTE } from "../../lib/constants";
 import "emoji-mart/css/emoji-mart.css";
+import { Auth } from "../../auth";
 class CampaignCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -172,6 +173,11 @@ class CampaignCard extends Component {
     let reportTips;
     const { isBackOffice, isBudget } = this.props;
     const { item } = this.state;
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
     if (isBackOffice) {
       reportTips = [
         {
@@ -210,9 +216,21 @@ class CampaignCard extends Component {
           handleEvent: this.handleSavePost
         }
       ];
+      if (item.createdBy === userInfo.id) {
+        const data = {
+            name: Translations.tool_tips.edit_post,
+            handleEvent: this.handleEditPost
+        }
+        reportTips.unshift(data);
+      }
     }
     return <RenderToolTips items={reportTips} id={id} />;
   };
+
+  handleEditPost = e => {
+    const { item } = this.state;
+    this.props.handleModalShow(modalType.editCampaign , item);
+  }
 
   handleReportPost = e => {
     const { item } = this.state;
@@ -385,7 +403,8 @@ CampaignCard.propTypes = {
   reportedContentData: PropTypes.any,
   handleRemove: PropTypes.func,
   isSavedPage: PropTypes.bool,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
 };
 
 export default connect(

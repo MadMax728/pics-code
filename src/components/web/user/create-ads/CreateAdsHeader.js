@@ -34,7 +34,7 @@ class CreateAdsHeader extends Component {
     return (
       <div className="row">
         <div className="col-sm-6 modal-title">
-          {modalTitle}
+          {/* {modalTitle} */}
         </div>
         <div className="col-sm-6 text-right">
           <button className="black_button" onClick={this.handleCancle}>

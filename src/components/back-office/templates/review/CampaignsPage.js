@@ -155,7 +155,7 @@ class CampaignsPage extends Component {
 
   renderCampaignList = () => {
     let { campaignList, form } = this.state;
-    const { searchData, handleModalInfoShow } = this.props;
+    const { searchData, handleModalInfoShow, handleModalShow } = this.props;
 
     campaignList = search(
       campaignList,
@@ -182,6 +182,8 @@ class CampaignsPage extends Component {
               }
               handleRemove={this.handleRemove}
               handleModalInfoShow={handleModalInfoShow}
+              handleModalShow={handleModalShow}
+              
             />
           )}
         </div>
@@ -237,7 +239,8 @@ CampaignsPage.propTypes = {
   reviewData: PropTypes.object,
   getSearch: PropTypes.func.isRequired,
   searchData: PropTypes.any,
-  handleModalInfoShow: PropTypes.func
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 
