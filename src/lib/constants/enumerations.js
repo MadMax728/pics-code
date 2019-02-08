@@ -124,7 +124,8 @@ export const budgetCalculation = {
   CPC: 1.0,
   maxClicksLimit: 1200,
   rangeSlot: 3.58,
-  campaignPerApplicationCost: 5
+  campaignPerApplicationCost: 5,
+  adsPerViewCost: 0.2
 };
 
 export const likeContentTypes = {
