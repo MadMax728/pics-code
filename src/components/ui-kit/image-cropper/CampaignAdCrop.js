@@ -22,7 +22,8 @@ const propTypes = {
   allowZoomOut: PropTypes.bool,
   isCircle: PropTypes.bool,
   logCallback: PropTypes.any,
-  userInfo: PropTypes.any
+  userInfo: PropTypes.any,
+  isEdit: PropTypes.any
 };
 
 const CampaignAdCrop = ({
@@ -40,21 +41,18 @@ const CampaignAdCrop = ({
   allowZoomOut,
   logCallback,
   isCircle,
-  userInfo
+  userInfo,
+  isEdit
 }) => {
   return (
-    <div className="col-xs-12 no-padding create-campaign-crop-pic">      
-      {image !== null && image !== undefined && typeof(image) !== "string" ? (
+    <div className="col-xs-12 no-padding create-campaign-crop-pic">
+      {image !== null && image !== undefined && typeof image !== "string" ? (
         <Dropzone
           onDrop={handleDrop}
           disableClick
           multiple={false}
           className="col-xs-12 uploaded-profile-pic mar0padd0"
-          style={{
-            width,
-            height,
-            marginBottom: "35px"
-          }}
+          style={{ width, height, marginBottom: "35px" }}
         >
           <div className="col-xs-12 textCenter ">
             <AvatarEditor
@@ -76,7 +74,7 @@ const CampaignAdCrop = ({
             />
           </div>
         </Dropzone>
-      ) : typeof(image) !== "string" ? (
+      ) : typeof image !== "string" ? (
         <div className="edit-profile-pic">
           <div className="box">
             <input
@@ -101,52 +99,60 @@ const CampaignAdCrop = ({
             </label>
           </div>
         </div>
-      )
-      : (
+      ) : (
         <ImageItem item={image} userName={userInfo ? userInfo.username : ""} />
-      )
-      }
-      <div className="range-wrapr col-xs-12 mar50 add-wrapper">
-        <img
-          src={images.crop_pic}
-          height="19"
-          width="19"
-          className="min-profile-pic range-slider-pic"
-          crossOrigin={`anonymous`}
-          alt={"crop-1"}
-        />
-        <div
-          className="runnable"
-          style={{
-            width:
-              scale === 0.1
-                ? `0px`
-                : scale === 1
+      )}
+      {image !== null && image !== undefined && typeof image !== "string" ? (
+        <div className="range-wrapr col-xs-12 mar50 add-wrapper">
+          <img
+            src={images.crop_pic}
+            height="19"
+            width="19"
+            className="min-profile-pic range-slider-pic"
+            crossOrigin={`anonymous`}
+            alt={"crop-1"}
+          />
+          <div
+            className="runnable"
+            style={{
+              width:
+                scale === 0.1
+                  ? `0px`
+                  : scale === 1
                   ? `${scale * 121.5}px`
                   : scale < 1
-                    ? `${scale * 120.5}px`
-                    : `${scale * 128}px`
-          }}
-        />
-        <input
-          name="scale"
-          type="range"
-          onChange={handleScale}
-          min={allowZoomOut ? "0.1" : "1"}
-          max="2"
-          step="0.01"
-          defaultValue="1"
-          disabled={!(image !== null && image !== undefined && typeof(image) !== "string")}
-        />
-        <img
-          src={images.crop_pic}
-          height="27"
-          alt={"crop-2"}
-          width="27"
-          crossOrigin={`anonymous`}
-          className="max-profile-pic range-slider-pic"
-        />
-      </div>
+                  ? `${scale * 120.5}px`
+                  : `${scale * 128}px`
+            }}
+          />
+          <input
+            name="scale"
+            type="range"
+            onChange={handleScale}
+            min={allowZoomOut ? "0.1" : "1"}
+            max="2"
+            step="0.01"
+            defaultValue="1"
+            disabled={
+              !(
+                image !== null &&
+                image !== undefined &&
+                typeof image !== "string"
+              )
+            }
+          />
+          <img
+            src={images.crop_pic}
+            height="27"
+            alt={"crop-2"}
+            width="27"
+            crossOrigin={`anonymous`}
+            className="max-profile-pic range-slider-pic"
+          />
+        </div>
+      ) : (
+        ""
+      )}
       <div className="add-wrapper create-camp-ad-wrapr col-xs-12 no-padding">
         <input
           type="file"

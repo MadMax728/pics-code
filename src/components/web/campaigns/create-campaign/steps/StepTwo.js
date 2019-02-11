@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { TextEditor } from "../../../../ui-kit/text-editor";
+import { ErrorSpan } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 
 class StepTwo extends Component {
@@ -20,9 +21,7 @@ class StepTwo extends Component {
         />
         <div className="form-group">
           {form.description.length === 0 && form.error && (
-            <span className="error-msg highlight">
-              {Translations.error.create_modal.description}
-            </span>
+            <ErrorSpan value={Translations.error.create_modal.description} />
           )}
         </div>
       </div>

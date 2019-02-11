@@ -52,7 +52,7 @@ const RightSidebarModal = ({ userInfo, form, isFor }) => {
                 )}
               </div>
             </div>
-            {isFor === "ads" && (
+            {isFor === "Ads" && (
               <div className="preview-ad-link">
                 <a
                   href={form.insertLink}

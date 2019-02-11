@@ -3,7 +3,15 @@ import * as images from "../../../../lib/constants/images";
 import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { HashTagUsername, SelectCategory } from "../../../common";
-import { PlaceAutoCompleteLocation, UserImageItem } from "../../../ui-kit";
+import {
+  PlaceAutoCompleteLocation,
+  UserImageItem,
+  Label,
+  ImageItem,
+  VideoItem,
+  ErrorSpan,
+  RadioButton
+} from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import * as enumerations from "../../../../lib/constants/enumerations";
 
@@ -14,7 +22,7 @@ class Upload extends Component {
     super(props);
     this.state = {
       isInProgress: false,
-      isAdvertise: false
+      isAdvertise: this.props.form.is_advertise_label
     };
   }
 
@@ -23,6 +31,14 @@ class Upload extends Component {
   };
 
   handleChangeField = event => {
+    if (event.values.name === "is_advertise_label") {
+      let isLabel = false;
+      if (event.values.val === "yes") {
+        isLabel = true;
+      }
+      this.setState({ isAdvertise: isLabel });
+    }
+
     this.props.handleChangeField(event);
   };
 
@@ -75,9 +91,6 @@ class Upload extends Component {
           </div>
           <form className="col-xs-12 no-padding">
             <div className="form-group no-margin">
-              {/* <label htmlFor="image">
-                {Translations.upload_modal.add_title}
-              </label> */}
               {!form.image && !form.video ? (
                 <div className="box">
                   <input
@@ -103,18 +116,11 @@ class Upload extends Component {
                 </div>
               ) : form.filetype ? (
                 <div className="upload-img-wrapper">
-                  <img
-                    src={form.image}
-                    alt="upload"
-                    className="widthHeightAuto"
-                  />
+                  <ImageItem item={form.image} classNames={`widthHeightAuto`} />
                 </div>
               ) : (
                 <div className="upload-img-wrapper">
-                  <video controls>
-                    <track kind="captions" />
-                    <source src={form.video} type={form.file.type} />
-                  </video>
+                  <VideoItem item={form.video} id="upload-video" />
                 </div>
               )}
               {isInProgress && (
@@ -143,14 +149,15 @@ class Upload extends Component {
                   multiple=""
                   onChange={this.handleUpload}
                 />
-                <img src={images.plus_button} alt={"plus_button"} />
+                <img src={images.plus_button} alt="plus button" />
               </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="Location">
-                {Translations.upload_modal.add_location}
-              </label>
+              <Label
+                htmlFor="Location"
+                value={Translations.upload_modal.add_location}
+              />
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -160,30 +167,28 @@ class Upload extends Component {
                 form.add_location.latitude.length === 0 &&
                 form.add_location.longitude.length === 0 &&
                 form.error && (
-                  <span className="error-msg highlight">
-                    {Translations.error.create_modal.location}
-                  </span>
+                  <ErrorSpan value={Translations.error.create_modal.location} />
                 )}
             </div>
             <div className="form-group">
-              <label htmlFor="Category">
-                {Translations.upload_modal.add_category}
-              </label>
+              <Label
+                htmlFor="Category"
+                value={Translations.upload_modal.add_category}
+              />
               <SelectCategory
                 value={form.add_category ? form.add_category : ""}
                 className=""
                 handleSelect={handleSelect}
               />
               {form.add_category.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.category}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.category} />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="description">
-                {Translations.upload_modal.add_description}
-              </label>
+              <Label
+                htmlFor="description"
+                value={Translations.upload_modal.add_description}
+              />
               <HashTagUsername
                 className="form-control"
                 type="text"
@@ -193,42 +198,47 @@ class Upload extends Component {
                 isText={false}
               />
               {form.add_description.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.description}
-                </span>
+                <ErrorSpan
+                  value={Translations.error.create_modal.description}
+                />
               )}
             </div>
 
             <div className="form-group no-margin">
-              <label htmlFor="label">
-                {Translations.upload_modal.advertisement}
-              </label>
+              <Label
+                htmlFor="label"
+                value={Translations.upload_modal.advertisement}
+              />
               <div className="form-group">
                 <ul className="options">
-                  <li handleSetState={handleSetState} className="wid49">
-                    <input
+                  <li className="wid49">
+                    <RadioButton
                       type="radio"
-                      id={enumerations.advertiseLabel.no}
+                      id="no"
+                      value="no"
                       name="is_advertise_label"
-                      className="black_button"
-                      value={isLabel.no}
                       defaultChecked={isAdvertise === isLabel.no}
+                      onChange={this.handleChangeField}
                     />
-                    <label htmlFor={isLabel.no}>
-                      {Translations.upload_modal.no}
-                    </label>
+                    <Label
+                      htmlFor={Translations.upload_modal.no}
+                      value={Translations.upload_modal.no}
+                    />
                   </li>
-                  <li handleSetState={handleSetState} className="wid49">
-                    <input
+                  <li className="wid49">
+                    <RadioButton
                       type="radio"
-                      id={enumerations.advertiseLabel.yes}
+                      id="yes"
                       name="is_advertise_label"
-                      value={isLabel.yes}
+                      value="yes"
                       defaultChecked={isAdvertise === isLabel.yes}
+                      className="black_button"
+                      onChange={this.handleChangeField}
                     />
-                    <label htmlFor={isLabel.yes}>
-                      {Translations.upload_modal.yes}
-                    </label>
+                    <Label
+                      htmlFor={Translations.upload_modal.yes}
+                      value={Translations.upload_modal.yes}
+                    />
                   </li>
                 </ul>
               </div>
@@ -246,7 +256,8 @@ Upload.propTypes = {
   handleSetState: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired,
+  is_advertise_label: PropTypes.any
 };
 
 export default Upload;

@@ -156,8 +156,12 @@ class UploadModal extends Component {
       const { form } = this.state;
       const Data = new FormData();
       if (form.file) {
+        let isLabel = false;
+        if (form.is_advertise_label === "yes") {
+          isLabel = true;
+        }
         Data.append("description", form.add_description);
-        Data.append("isAdvertiseLabel", form.is_advertise_label);
+        Data.append("isAdvertiseLabel", isLabel);
         Data.append("category", form.add_category);
         if (form.filetype) {
           Data.append("image", form.file);
@@ -224,12 +228,9 @@ class UploadModal extends Component {
   };
 
   handleChangeField = event => {
+    console.log(event.values);
     const { form } = this.state;
-    if (event.target.type === "checkbox") {
-      form[event.target.name] = event.target.checked;
-    } else {
-      form[event.target.name] = event.target.value;
-    }
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 

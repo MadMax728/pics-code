@@ -75,6 +75,7 @@ class CreateCreatorCampaign extends Component {
               handleSelect={handleSelect}
               handleVideo={handleVideo}
               userInfo={userInfo}
+              isEdit={isEdit}
             />
           ))}
         {!isPreview &&

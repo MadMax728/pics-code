@@ -154,7 +154,6 @@ class AdsModal extends Component {
       this.setState({ userInfo });
     }
     const { data } = this.props;
-
     if (data && data.id) {
       this.setState({
         modalTitle: Translations.modal_header.edit_ad,
@@ -409,7 +408,7 @@ class AdsModal extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -540,7 +539,7 @@ class AdsModal extends Component {
 
   handleAddress = event => {
     const { form } = this.state;
-    form.address[event.target.name] = event.target.value;
+    form.address[event.values.name] = event.values.val;
     this.setState({ form });
   };
 }
