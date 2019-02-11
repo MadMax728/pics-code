@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import {
-  ImageCropper,
+  CampaignAdCrop,
   PlaceAutoCompleteLocation,
-  UserImageItem,
+  // UserImageItem,
   Label,
   Input,
   ErrorSpan,
@@ -54,7 +54,7 @@ class StepOne extends Component {
               />
               {/* {form.fileType &&
                 form.typeContent === enumerations.typeContent.image && ( */}
-              <ImageCropper
+              <CampaignAdCrop
                 image={form.image}
                 handleEditImage={handleEditImage}
                 isCircle={false}

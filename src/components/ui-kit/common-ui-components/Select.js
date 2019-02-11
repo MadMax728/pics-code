@@ -7,24 +7,26 @@ class Select extends Component {
     this.state = {
       name: this.props.name,
       defaultValue: this.props.defaultValue,
+      value: this.props.value,
       data: {}
     };
   }
 
   render() {
-    const { options, disabled } = this.props;
-    const { defaultValue } = this.state;
+    const { options, disabled, className } = this.props;
+    const { defaultValue, value } = this.state;
 
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <select
-        value={defaultValue}
-        className="drop-down"
+        value={value}
+        className={className}
         onChange={this.handleChange}
+        // onBlur={this.handleChange}
         options={options}
         disabled={disabled}
       >
-        <option value="">{defaultValue}</option>
+        {defaultValue && <option value="">{defaultValue}</option>}
         {options.map(option => (
           <option value={option.value} key={option.name}>
             {option.value}
@@ -47,7 +49,9 @@ Select.propTypes = {
   options: PropTypes.array.isRequired,
   onChange: PropTypes.func,
   defaultValue: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  className: PropTypes.string,
+  value: PropTypes.any
 };
 
 export default Select;

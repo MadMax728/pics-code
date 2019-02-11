@@ -80,6 +80,8 @@ class ImageCropper extends Component {
     } = this.state;
 
     if (isCircle) {
+      console.log(image);
+      
       return (
         <EditProfileCrop
           handleNewImage={this.handleNewImage}

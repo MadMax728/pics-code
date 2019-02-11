@@ -5,7 +5,7 @@ import ReactTooltip from "react-tooltip";
 
 import { getVerifications, getUnverifiedUsers, updateVerification } from "../../../actions";
 
-import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip, CustomeTableLoader, Input, Button } from "../../ui-kit";
 import { UsernameList } from "../../common";
 
 import * as routes from "../../../lib/constants/routes";
@@ -36,7 +36,7 @@ class AddVerificationPage extends Component {
             {Translations.admin.Verification}
           </div>
           <div className="title_with_search_dropdown_button">
-            <input
+            <Input
               type="search"
               name="username"
               id="username"
@@ -62,9 +62,11 @@ class AddVerificationPage extends Component {
                 border
                 type={"light"}
               />
-            <button className="wid30per" onClick={this.handleSubmit}>
-              {Translations.admin.Add}
-            </button>
+            <Button 
+              className="wid30per" 
+              onClick={this.handleSubmit}
+              text={Translations.admin.Add}
+            />
           </div>
           {verifications && this.renderVerifications()}
           {!verifications && verificationData.isLoading && <CustomeTableLoader />}
@@ -160,16 +162,19 @@ class AddVerificationPage extends Component {
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        <button name={row.name} id={row.id} onClick={this.removeVerification}>
-          {Translations.admin.Remove_Verification}
-        </button>
+        <Button 
+          name={row.name} 
+          id={row.id} 
+          onClick={this.removeVerification}
+          text={Translations.admin.Remove_Verification}
+        />
       </div>
     );
   };
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
     </span>
   );
 
@@ -247,7 +252,7 @@ class AddVerificationPage extends Component {
           condensed
           defaultSorted={defaultSorted}
           pagination={pagination}
-          noDataIndication="Table is Empty"
+          noDataIndication={Translations.table_empty}
           id={"username"}
         />
       </div>
@@ -277,7 +282,7 @@ class AddVerificationPage extends Component {
 
   handleChangeUsername = e => {
     this.usernameHide();
-    this.setState({ form: { ...this.state.form, username: e.target.value } });
+    this.setState({ form: { ...this.state.form, username: e.values.val } });
     this.usernameShow();
   };
 

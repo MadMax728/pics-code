@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import {
-  ImageCropper,
+  CampaignAdCrop,
   PlaceAutoCompleteLocation,
   UserImageItem,
   UserTitleItem,
@@ -61,7 +61,7 @@ class StepOne extends Component {
                 value={Translations.create_campaigns.add_title_image}
               />
               {/* {form.typeContent === enumerations.typeContent.image && ( */}
-              <ImageCropper
+              <CampaignAdCrop
                 image={form.image}
                 handleEditImage={handleEditImage}
                 isCircle={false}

@@ -63,11 +63,13 @@ class LeftSidebarFilter extends Component {
               )}
               {filter.type === "select" && (
                 <Select
-                  foruse={filter.name}
+                  // foruse={filter.name}
                   name={filter.name}
                   options={filter.items}
-                  defaultValue={"select"}
+                  defaultValue={Translations.select}
+                  value={Translations.select}
                   onChange={this.handleOnChange}
+                  className="drop-down"
                 />
               )}
               {filter.type === "select-category" && (
