@@ -23,9 +23,11 @@ class Input extends Component {
       readOnly
     } = this.props;
     // const { value } = this.state;
-    let isReadonly = '';
-    if(readOnly) { isReadonly = readOnly; }
-    
+    let isReadonly = "";
+    if (readOnly) {
+      isReadonly = readOnly;
+    }
+
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <input
@@ -36,7 +38,7 @@ class Input extends Component {
         placeholder={placeholder}
         autoComplete={autoComplete}
         onChange={this.handleChangeField}
-        value={value || ""}
+        defaultValue={value || ""}
         readOnly={isReadonly}
       />
     );
