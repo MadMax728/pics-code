@@ -7,7 +7,9 @@ const Button = (
     text,
     tabIndex,
     type,
-    onClick
+    onClick,
+    name,
+    id
   }
 ) => {
   return (
@@ -15,7 +17,9 @@ const Button = (
       className={className}
       onClick={onClick}
       tabIndex={tabIndex ? -1 : null}
-      type={type}
+      type={type || ''}
+      name={name}
+      id={id}
     >
      {text}
     </button>
@@ -27,7 +31,9 @@ Button.propTypes = {
   text: PropTypes.string,
   type: PropTypes.string,
   tabIndex: PropTypes.string,
-  className: PropTypes.string
+  className: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string
 };
 
 export default Button;

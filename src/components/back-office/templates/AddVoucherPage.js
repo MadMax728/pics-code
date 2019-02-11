@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import { getVouchers, addVoucher } from "../../../actions";
 
-import { CustomBootstrapTable, CustomeTableLoader } from "../../ui-kit";
+import { CustomBootstrapTable, CustomeTableLoader, Input, Button } from "../../ui-kit";
 import { SelectPeriod, SelectAmount, SelectType, SelectNumber } from "../../common";
 
 import * as routes from "../../../lib/constants/routes";
@@ -65,7 +65,7 @@ class AddVoucherPage extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -154,7 +154,7 @@ class AddVoucherPage extends Component {
 
   codeFormatter = (column, colIndex) => {
     return (
-      <input
+      <Input
         type="text"
         htmlFor="Voucher Code"
         className="res320"
@@ -211,13 +211,16 @@ class AddVoucherPage extends Component {
 
   addFormatter = (column, colIndex) => {
     return (
-      <button onClick={this.handleSubmit}>{Translations.admin.Add}</button>
+      <Button 
+        onClick={this.handleSubmit}
+        text={Translations.admin.Add}
+      />
     );
   };
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
     </span>
   );
 
@@ -309,7 +312,7 @@ class AddVoucherPage extends Component {
               condensed
               defaultSorted={defaultSorted}
               pagination={pagination}
-              noDataIndication="Table is Empty"
+              noDataIndication={Translations.table_empty}
               id={"voucherCode"}
             />
           </div>

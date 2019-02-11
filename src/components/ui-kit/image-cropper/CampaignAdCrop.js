@@ -1,80 +1,118 @@
-import React from "react";
+import React, {Component} from "react";
 // https://www.npmjs.com/package/react-avatar-editor used for image crop
 import AvatarEditor from "react-avatar-editor";
 import Dropzone from "react-dropzone";
 import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
-import { ImageItem } from "../items";
+// import { ImageItem } from "../items";
 
-const propTypes = {
-  handleNewImage: PropTypes.func,
-  handleDrop: PropTypes.func,
-  image: PropTypes.any,
-  setEditorRef: PropTypes.any,
-  scale: PropTypes.any,
-  position: PropTypes.any,
-  height: PropTypes.any,
-  width: PropTypes.any,
-  handlePositionChange: PropTypes.func,
-  handleScale: PropTypes.func,
-  borderRadius: PropTypes.any,
-  allowZoomOut: PropTypes.bool,
-  isCircle: PropTypes.bool,
-  logCallback: PropTypes.any,
-  userInfo: PropTypes.any,
-  isEdit: PropTypes.any
-};
+class CampaignAdCrop extends Component { 
+  constructor(props) {
+    super(props);
+    this.state = {
+      image: this.props.image,
+      isCircle: this.props.isCircle,
+      position: {
+        x: 0.5,
+        y: 0.5
+      },
+      allowZoomOut: true,
+      borderRadius: 0,
+      preview: null,
+      scale: 1,
+      width: 250,
+      height: 250
+    };
+  }
 
-const CampaignAdCrop = ({
-  handleNewImage,
-  handleDrop,
-  image,
-  setEditorRef,
-  scale,
-  position,
-  height,
-  width,
-  handlePositionChange,
-  handleScale,
-  borderRadius,
-  allowZoomOut,
-  logCallback,
-  isCircle,
-  userInfo,
-  isEdit
-}) => {
+  handleScale = e => {
+    const scale = parseFloat(e.target.value);
+    this.setState({ scale }, () => {
+      // this.handleSave();
+      this.props.handleScale(scale);
+    });
+  };
+
+  handlePositionChange = position => {
+    this.setState({ position }, () => {
+      // this.handleSave();
+    });
+  };
+
+  setEditorRef = editor => {
+    if (editor) this.editor = editor;
+  };
+
+  handleNewImage = e => {
+    this.props.handleActualImg(e.target.files[0]);
+    this.setState({ image: e.target.files[0] }, () => {
+      this.handleSave();
+    });
+  };
+
+  handleDrop = acceptedFiles => {
+    this.setState({ image: acceptedFiles[0] }, () => {
+      this.handleSave();
+    });
+  };
+
+  logCallback = e => {
+    // eslint-disable-next-line
+    // console.log("callback", e);
+  };
+
+  handleSave = () => {
+    // todo fix
+    if (this.editor && this.editor.getImageScaledToCanvas()) {
+      const img = this.editor.getImageScaledToCanvas().toDataURL();
+      this.setState({ preview: img });
+      this.props.handleEditImage(img);
+    }
+  };
+
+  render() {
+    const {
+      image,
+      isCircle
+    } = this.props;
+    const { width, height, scale, position, borderRadius, allowZoomOut } = this.state;
+
   return (
-    <div className="col-xs-12 no-padding create-campaign-crop-pic">
-      {image !== null && image !== undefined && typeof image !== "string" ? (
+    <div className="col-xs-12 no-padding create-campaign-crop-pic">      
+      {image !== null && image !== undefined ? (
         <Dropzone
-          onDrop={handleDrop}
+          onDrop={this.handleDrop}
           disableClick
           multiple={false}
           className="col-xs-12 uploaded-profile-pic mar0padd0"
-          style={{ width, height, marginBottom: "35px" }}
+          style={{
+            width,
+            height,
+            marginBottom: "35px"
+          }}
         >
           <div className="col-xs-12 textCenter ">
             <AvatarEditor
-              ref={setEditorRef}
+              ref={this.setEditorRef}
               scale={parseFloat(scale)}
               width={width}
               height={height}
               position={position}
-              onPositionChange={handlePositionChange}
+              onPositionChange={this.handlePositionChange}
               borderRadius={
                 isCircle ? 100 / borderRadius : width / (100 / borderRadius)
               }
-              onLoadFailure={logCallback("onLoadFailed")}
-              onLoadSuccess={logCallback("onLoadSuccess")}
-              onImageReady={logCallback("onImageReady")}
+              onLoadFailure={this.logCallback("onLoadFailed")}
+              onLoadSuccess={this.logCallback("onLoadSuccess")}
+              onImageReady={this.logCallback("onImageReady")}
               image={image}
               crossOrigin={`anonymous`}
               className="editor-canvas wid100"
             />
           </div>
         </Dropzone>
-      ) : typeof image !== "string" ? (
+      ) : (
         <div className="edit-profile-pic">
           <div className="box">
             <input
@@ -84,7 +122,7 @@ const CampaignAdCrop = ({
               className="inputfile inputfile-2"
               data-multiple-caption="{count} files selected"
               multiple=""
-              onChange={handleNewImage}
+              onChange={this.handleNewImage}
             />
             <label htmlFor="file-2">
               <svg
@@ -99,60 +137,49 @@ const CampaignAdCrop = ({
             </label>
           </div>
         </div>
-      ) : (
-        <ImageItem item={image} userName={userInfo ? userInfo.username : ""} />
-      )}
-      {image !== null && image !== undefined && typeof image !== "string" ? (
-        <div className="range-wrapr col-xs-12 mar50 add-wrapper">
-          <img
-            src={images.crop_pic}
-            height="19"
-            width="19"
-            className="min-profile-pic range-slider-pic"
-            crossOrigin={`anonymous`}
-            alt={"crop-1"}
-          />
-          <div
-            className="runnable"
-            style={{
-              width:
-                scale === 0.1
-                  ? `0px`
-                  : scale === 1
+      )
+      }
+      <div className="range-wrapr col-xs-12 mar50 add-wrapper">
+        <img
+          src={images.crop_pic}
+          height="19"
+          width="19"
+          className="min-profile-pic range-slider-pic"
+          crossOrigin={`anonymous`}
+          alt={"crop-1"}
+        />
+        <div
+          className="runnable"
+          style={{
+            width:
+              scale === 0.1
+                ? `0px`
+                : scale === 1
                   ? `${scale * 121.5}px`
                   : scale < 1
-                  ? `${scale * 120.5}px`
-                  : `${scale * 128}px`
-            }}
-          />
-          <input
-            name="scale"
-            type="range"
-            onChange={handleScale}
-            min={allowZoomOut ? "0.1" : "1"}
-            max="2"
-            step="0.01"
-            defaultValue="1"
-            disabled={
-              !(
-                image !== null &&
-                image !== undefined &&
-                typeof image !== "string"
-              )
-            }
-          />
-          <img
-            src={images.crop_pic}
-            height="27"
-            alt={"crop-2"}
-            width="27"
-            crossOrigin={`anonymous`}
-            className="max-profile-pic range-slider-pic"
-          />
-        </div>
-      ) : (
-        ""
-      )}
+                    ? `${scale * 120.5}px`
+                    : `${scale * 128}px`
+          }}
+        />
+        <input
+          name="scale"
+          type="range"
+          onChange={this.handleScale}
+          min={allowZoomOut ? "0.1" : "1"}
+          max="2"
+          step="0.01"
+          defaultValue="1"
+          disabled={!(image !== null && image !== undefined )}
+        />
+        <img
+          src={images.crop_pic}
+          height="27"
+          alt={"crop-2"}
+          width="27"
+          crossOrigin={`anonymous`}
+          className="max-profile-pic range-slider-pic"
+        />
+      </div>
       <div className="add-wrapper create-camp-ad-wrapr col-xs-12 no-padding">
         <input
           type="file"
@@ -161,12 +188,23 @@ const CampaignAdCrop = ({
           id="file-2"
           data-multiple-caption="{count} files selected"
           multiple=""
-          onChange={handleNewImage}
+          onChange={this.handleNewImage}
         />
         <img src={images.plus_button} alt={"plus_button"} />
       </div>
     </div>
   );
+  }
+}
+
+const propTypes = {
+  image: PropTypes.any,
+  handleScale: PropTypes.func,
+  isCircle: PropTypes.bool,
+  userInfo: PropTypes.any,
+  ref: PropTypes.any,  
+  handleEditImage: PropTypes.func,
+  handleActualImg: PropTypes.func,
 };
 
 CampaignAdCrop.propTypes = propTypes;

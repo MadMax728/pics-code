@@ -101,7 +101,7 @@ class CMSManagementPage extends Component {
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
     </span>
   );
 
@@ -209,7 +209,7 @@ class CMSManagementPage extends Component {
           condensed
           defaultSorted={defaultSorted}
           pagination={pagination}
-          noDataIndication="Table is Empty"
+          noDataIndication={Translations.table_empty}
           id={"title"}
         />
       </div>

@@ -36,7 +36,7 @@ class RadioButton extends Component {
   handleChangeField = event => {
     this.setState({ value: event.target.value });
     const { data } = this.state;
-    data.values = { name: this.state.name, val: event.target.value };
+    data.values = { name: event.target.name, val: event.target.value };
     this.props.onChange(data);
   };
 

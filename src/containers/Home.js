@@ -13,6 +13,7 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
+import { Auth } from "../auth";
 
 class Home extends Component {
   constructor(props, context) {
@@ -28,6 +29,17 @@ class Home extends Component {
       profile: null,
       data: null
     };
+  }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo){
+      this.setState({ image: userInfo.profileUrl})
+    }
   }
 
   handleModalHide = () => {
