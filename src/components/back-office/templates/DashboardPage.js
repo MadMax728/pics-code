@@ -171,7 +171,7 @@ class DashboardPage extends Component {
             bordered={false}
             condensed
             isPagination={false}
-            noDataIndication="Table is Empty"
+            noDataIndication={Translations.table_empty}
             id={"registered_users"}
           />
         </div>
@@ -273,7 +273,7 @@ class DashboardPage extends Component {
             bordered={false}
             condensed
             isPagination={false}
-            noDataIndication="Table is Empty"
+            noDataIndication={Translations.table_empty}
             id={"lable"}
           />
         </div>
@@ -361,7 +361,7 @@ class DashboardPage extends Component {
             bordered={false}
             condensed
             isPagination={false}
-            noDataIndication="Table is Empty"
+            noDataIndication={Translations.table_empty}
             id={"lable"}
           />
         </div>
@@ -449,7 +449,7 @@ class DashboardPage extends Component {
             bordered={false}
             condensed
             isPagination={false}
-            noDataIndication="Table is Empty"
+            noDataIndication={Translations.table_empty}
             id={"lable"}
           />
         </div>

@@ -15,8 +15,8 @@ const apiFactory = baseUrl => {
         }
 
         if (data && (data.message === "Invalid credentials" || data.error === "Error: Invalid credentials")) {
-          Auth.logoutUser();
-          window.location.reload("/");
+          // Auth.logoutUser();
+          // window.location.reload("/");
         }
 
         return data;
@@ -42,8 +42,8 @@ export const api = (baseUrl, header = {}) => {
         }
 
         if (data && (data.message === "Invalid credentials" || data.error === "Error: Invalid credentials")) {
-          Auth.logoutUser();
-          window.location.reload("/");
+          // Auth.logoutUser();
+          // window.location.reload("/");
         }
 
         return data;

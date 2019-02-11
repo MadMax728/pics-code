@@ -309,6 +309,13 @@
       "type": "select"
     }
   },
+  
+  "select": "Select",
+  "showing": "Showing",
+  "to": "to", 
+  "of": "of", 
+  "results": "Results",
+  "table_empty": "Table is Empty",
 
   "reported_content_filter": {
     "relevance": {

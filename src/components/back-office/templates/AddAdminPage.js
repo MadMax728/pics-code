@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
-import { CustomBootstrapTable, ToolTip, CustomeTableLoader } from "../../ui-kit";
+import { CustomBootstrapTable, ToolTip, CustomeTableLoader, Input, Select, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getAdmins, updateAdmin, getHashUser } from "../../../actions";
 import { UsernameList } from "../../common";
@@ -34,7 +34,7 @@ class AddAdminPage extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -102,9 +102,7 @@ class AddAdminPage extends Component {
       <div key={rowIndex}>
         <span>{row.role}</span>
         <span>{" "}</span>
-        <button name={row.name} id={row.id} onClick={this.deleteData}>
-          Delete
-        </button>
+        <Button name={row.name} id={row.id} onClick={this.deleteData} text={Translations.privacy.Delete} />
       </div>
     );
   };
@@ -125,7 +123,7 @@ class AddAdminPage extends Component {
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
     </span>
   );
 
@@ -203,7 +201,7 @@ class AddAdminPage extends Component {
             condensed
             defaultSorted={defaultSorted}
             pagination={pagination}
-            noDataIndication="Table is Empty"
+            noDataIndication={Translations.table_empty}
             id={"username"}
           />
         </div>
@@ -232,7 +230,7 @@ class AddAdminPage extends Component {
 
   handleChangeUsername = e => {
     this.usernameHide();
-    this.setState({ form: { ...this.state.form, username: e.target.value } });
+    this.setState({ form: { ...this.state.form, username: e.values.val } });
     this.usernameShow();
   };
 
@@ -247,6 +245,20 @@ class AddAdminPage extends Component {
   render() {
     const { admins, form } = this.state;
     const { adminData } = this.props;
+    const  items = [
+      {
+        name: Translations.adminRole.rank1,
+        value: Translations.adminRole.rank1
+      },
+      {
+        name: Translations.adminRole.rank2,
+        value: Translations.adminRole.rank2
+      },
+      {
+        name: Translations.adminRole.rank3,
+        value: Translations.adminRole.rank3
+      }
+    ]
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -255,7 +267,7 @@ class AddAdminPage extends Component {
             {Translations.admin.Add_admin}
           </div>
           <div className="title_with_search_dropdown_button">
-            <input
+            <Input
               type="search"
               name="username"
               id="username"
@@ -281,17 +293,13 @@ class AddAdminPage extends Component {
                 border
                 type={"light"}
               />
-            <select
-              className="res440"
-              onBlur={this.handleChangeField}
-              onChange={this.handleChangeField}
-              name="role"
-              value={form.role}
-            >
-              <option value={Translations.adminRole.rank1}>{Translations.adminRole.rank1}</option>
-              <option value={Translations.adminRole.rank2}>{Translations.adminRole.rank2}</option>
-              <option value={Translations.adminRole.rank3}>{Translations.adminRole.rank3}</option>
-            </select>
+              <Select
+                  className="res440"
+                  name={'role'}
+                  options={items}
+                  value={form.role}
+                  onChange={this.handleChangeField}
+              />
             <button className="res440" onClick={this.handleSubmit}>
               {Translations.admin.Add}
             </button>
