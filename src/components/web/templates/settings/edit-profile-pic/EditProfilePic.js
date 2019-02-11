@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { ImageCropper } from "../../../../ui-kit";
+import { EditProfileCrop } from "../../../../ui-kit";
 
 class EditProfilePic extends Component {
   constructor(props, context) {
@@ -12,7 +12,7 @@ class EditProfilePic extends Component {
     const { image, handleEditImage, handleActualImg, handleScale } = this.props;
     return (
       <div className="col-xs-12 upload-profile-wrapr padding-b-25">
-        <ImageCropper
+        <EditProfileCrop
           image={image}
           handleEditImage={handleEditImage}
           isCircle
