@@ -22,7 +22,7 @@ class AdminLogin extends Component {
 
   render() {
     const { loginData } = this.props;
-    const { errorMsg } = this.state;
+    const { errorMsg, otp } = this.state;
     return (
       <div className="login-process">
         <AdminHeader />
@@ -36,14 +36,15 @@ class AdminLogin extends Component {
                 <div className="form-group">
                   <Input
                     type="password"
+                    name="otp"
                     className="form-control"
                     id="otp"
-                    value={this.state.otp}
+                    value={otp}
                     onChange={this.getUserEnterPassword}
                     placeholder={Translations.placeholders.password}
                   />
 
-                  {this.state.otp.length === 0 ? (
+                  {otp && otp.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
                     <img src={images.checked} alt={"checked"} />
@@ -77,8 +78,7 @@ class AdminLogin extends Component {
    * getUserEnterPassword
    */
   getUserEnterPassword = e => {
-    e.preventDefault();
-    this.setState({ otp: e.target.value });
+    this.setState({ otp: e.values.val });
   };
 
   /**

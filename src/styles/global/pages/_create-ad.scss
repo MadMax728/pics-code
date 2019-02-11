@@ -433,6 +433,11 @@ a.more-strip.zIndex0 {
 .create-ad-modal.upload-pic-modal{
   .modal-dialog{
     width:915px;
+    @media only screen and (max-width: 1280px){
+      width:75%;
+      margin: 0 auto;
+      padding: 30px 0;
+    }
     .modal-content{
       text-align: center;
       height: auto;
@@ -477,6 +482,9 @@ a.more-strip.zIndex0 {
         }
         .upload-form{
           padding: 20px 190px;
+          @media only screen and (max-width: 1280px){
+            padding: 20px 40px;
+          }
           .user-title{
             .modal-title{
               font-size: 24px;
