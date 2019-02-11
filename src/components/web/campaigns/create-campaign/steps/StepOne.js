@@ -5,7 +5,11 @@ import {
   ImageCropper,
   PlaceAutoCompleteLocation,
   UserImageItem,
-  UserTitleItem
+  UserTitleItem,
+  Label,
+  RadioButton,
+  ErrorSpan,
+  Input
 } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import * as enumerations from "../../../../../lib/constants/enumerations";
@@ -38,9 +42,9 @@ class StepOne extends Component {
       handleOfferTagChange,
       handleOfferTagDelete,
       handleInquiryTagChange,
-      handleInquiryTagDelete
+      handleInquiryTagDelete,
+      isEdit
     } = this.props;
-
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-12 upload-form">
@@ -52,22 +56,21 @@ class StepOne extends Component {
           </div>
           <form>
             <div className="pt-10 form-group">
-              <label htmlFor="title">
-                {Translations.create_campaigns.add_title_image}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="title"
+                value={Translations.create_campaigns.add_title_image}
+              />
               {/* {form.typeContent === enumerations.typeContent.image && ( */}
-                <ImageCropper
-                  image={form.image}
-                  handleEditImage={handleEditImage}
-                  isCircle={false}
-                  ref={this.imageCrop}
-                  handleActualImg={handleActualImg}
-                  handleScale={handleScale}
-                  userInfo={userInfo}
-                />
+              <ImageCropper
+                image={form.image}
+                handleEditImage={handleEditImage}
+                isCircle={false}
+                ref={this.imageCrop}
+                handleActualImg={handleActualImg}
+                handleScale={handleScale}
+                userInfo={userInfo}
+                isEdit={isEdit}
+              />
               {/* )} */}
 
               {/* {form.typeContent === enumerations.typeContent.video &&
@@ -106,31 +109,27 @@ class StepOne extends Component {
                 )} */}
             </div>
             <div className="pt-10 form-group">
-              <label htmlFor="title">
-                {Translations.create_campaigns.add_title}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
-              <input
+              <Label
+                htmlFor="title"
+                value={Translations.create_campaigns.add_title}
+              />
+              <Input
                 type="text"
-                value={form.title && form.title ? form.title : ""}
+                className="form-control"
+                id="title"
                 name="title"
+                value={form.title && form.title ? form.title : ""}
                 onChange={handleChangeField}
               />
               {form.title && form.title.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.title}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.title} />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="Location">
-                {Translations.create_campaigns.add_location}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Location"
+                value={Translations.create_campaigns.add_location}
+              />
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -144,47 +143,33 @@ class StepOne extends Component {
                 form.location.latitude.length === 0 &&
                 form.location.longitude.length === 0 &&
                 form.error && (
-                  <span className="error-msg highlight">
-                    {Translations.error.create_modal.location}
-                  </span>
+                  <ErrorSpan value={Translations.error.create_modal.location} />
                 )}
             </div>
             <div className="form-group">
-              <label htmlFor="Category">
-                {Translations.create_campaigns.add_category}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Category"
+                value={Translations.create_campaigns.add_category}
+              />
               <SelectCategory
                 value={form.category || ""}
                 className=""
                 handleSelect={handleSelect}
               />
               {form.category && form.category.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.category}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.category} />
               )}
             </div>
             {isFor && (
               <div>
                 <div className="form-group">
-                  <label htmlFor="Procedure">
-                    {Translations.create_campaigns.procedure}
-                  </label>
-                  <p>
-                    {Translations.create_campaigns.public_procedure_help_text}
-                  </p>
-                  <p>
-                    {
-                      Translations.create_campaigns
-                        .anonymous_proceture_help_text
-                    }
-                  </p>
+                  <Label
+                    htmlFor="Procedure"
+                    value={Translations.create_campaigns.procedure}
+                  />
                   <ul className="options">
-                    <li onChange={handleChangeField} className="wid49">
-                      <input
+                    <li className="wid49">
+                      <RadioButton
                         type="radio"
                         id={enumerations.procedure.public}
                         name="procedure"
@@ -193,13 +178,15 @@ class StepOne extends Component {
                         defaultChecked={
                           form.procedure === enumerations.procedure.public
                         }
+                        onChange={handleChangeField}
                       />
-                      <label htmlFor={enumerations.procedure.public}>
-                        {Translations.create_campaigns.public}
-                      </label>
+                      <Label
+                        htmlFor={enumerations.procedure.public}
+                        value={Translations.create_campaigns.public}
+                      />
                     </li>
-                    <li onChange={handleChangeField} className="wid49">
-                      <input
+                    <li className="wid49">
+                      <RadioButton
                         type="radio"
                         id={enumerations.procedure.anonymous}
                         name="procedure"
@@ -207,10 +194,12 @@ class StepOne extends Component {
                         defaultChecked={
                           form.procedure === enumerations.procedure.anonymous
                         }
+                        onChange={handleChangeField}
                       />
-                      <label htmlFor={enumerations.procedure.anonymous}>
-                        {Translations.create_campaigns.anonymous}
-                      </label>
+                      <Label
+                        htmlFor={enumerations.procedure.anonymous}
+                        value={Translations.create_campaigns.anonymous}
+                      />
                     </li>
                   </ul>
                 </div>
@@ -218,13 +207,13 @@ class StepOne extends Component {
             )}
 
             <div className="form-group">
-              <label htmlFor="Type">{Translations.create_campaigns.type}</label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Type"
+                value={Translations.create_campaigns.type}
+              />
               <ul className="options">
-                <li onChange={handleChangeField} className="wid49">
-                  <input
+                <li className="wid49">
+                  <RadioButton
                     type="radio"
                     id={enumerations.typeContent.video}
                     name="typeContent"
@@ -233,13 +222,15 @@ class StepOne extends Component {
                     defaultChecked={
                       form.typeContent === enumerations.typeContent.video
                     }
+                    onChange={handleChangeField}
                   />
-                  <label htmlFor={enumerations.typeContent.video}>
-                    {Translations.create_campaigns.video}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.typeContent.video}
+                    value={Translations.create_campaigns.video}
+                  />
                 </li>
-                <li onChange={handleChangeField} className="wid49">
-                  <input
+                <li className="wid49">
+                  <RadioButton
                     type="radio"
                     id={enumerations.typeContent.image}
                     name="typeContent"
@@ -247,23 +238,23 @@ class StepOne extends Component {
                     defaultChecked={
                       form.typeContent === enumerations.typeContent.image
                     }
+                    onChange={handleChangeField}
                   />
-                  <label htmlFor={enumerations.typeContent.image}>
-                    {Translations.create_campaigns.image}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.typeContent.image}
+                    value={Translations.create_campaigns.image}
+                  />
                 </li>
               </ul>
             </div>
             <div className="form-group">
-              <label htmlFor="Target_group">
-                {Translations.create_campaigns.target_group}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Target_group"
+                value={Translations.create_campaigns.target_group}
+              />
               <ul className="options target-options">
-                <li onChange={handleChangeField} className="wid49">
-                  <input
+                <li className="wid49">
+                  <RadioButton
                     type="radio"
                     id={enumerations.target_group.company}
                     name="targetGroup"
@@ -272,13 +263,15 @@ class StepOne extends Component {
                     defaultChecked={
                       form.targetGroup === enumerations.target_group.company
                     }
+                    onChange={handleChangeField}
                   />
-                  <label htmlFor={enumerations.target_group.company}>
-                    {Translations.create_campaigns.company}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.target_group.company}
+                    value={Translations.create_campaigns.company}
+                  />
                 </li>
-                <li onChange={handleChangeField} className="wid49">
-                  <input
+                <li className="wid49">
+                  <RadioButton
                     type="radio"
                     id={enumerations.target_group.female_and_male}
                     value={enumerations.target_group.female_and_male}
@@ -287,13 +280,15 @@ class StepOne extends Component {
                       form.targetGroup ===
                       enumerations.target_group.female_and_male
                     }
+                    onChange={handleChangeField}
                   />
-                  <label htmlFor={enumerations.target_group.female_and_male}>
-                    {Translations.create_campaigns.male_female}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.target_group.female_and_male}
+                    value={Translations.create_campaigns.male_female}
+                  />
                 </li>
-                <li onChange={handleChangeField} className="wid49">
-                  <input
+                <li className="wid49">
+                  <RadioButton
                     type="radio"
                     id={enumerations.target_group.female}
                     name="targetGroup"
@@ -301,13 +296,15 @@ class StepOne extends Component {
                     defaultChecked={
                       form.targetGroup === enumerations.target_group.female
                     }
+                    onChange={handleChangeField}
                   />
-                  <label htmlFor={enumerations.target_group.female}>
-                    {Translations.create_campaigns.female}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.target_group.female}
+                    value={Translations.create_campaigns.female}
+                  />
                 </li>
-                <li onChange={handleChangeField} className="wid49">
-                  <input
+                <li className="wid49">
+                  <RadioButton
                     type="radio"
                     id={enumerations.target_group.male}
                     name="targetGroup"
@@ -315,20 +312,20 @@ class StepOne extends Component {
                     defaultChecked={
                       form.targetGroup === enumerations.target_group.male
                     }
+                    onChange={handleChangeField}
                   />
-                  <label htmlFor={enumerations.target_group.male}>
-                    {Translations.create_campaigns.male}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.target_group.male}
+                    value={Translations.create_campaigns.male}
+                  />
                 </li>
               </ul>
             </div>
             <div className="form-group">
-              <label htmlFor="Offer">
-                {Translations.create_campaigns.offer}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Offer"
+                value={Translations.create_campaigns.offer}
+              />
               <SelectOffer
                 value={form.offer}
                 className=""
@@ -336,12 +333,10 @@ class StepOne extends Component {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="Inquiry">
-                {Translations.create_campaigns.inquiry}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Inquiry"
+                value={Translations.create_campaigns.inquiry}
+              />
               <SelectInquiry
                 value={form.inquiry}
                 className=""
@@ -371,7 +366,8 @@ StepOne.propTypes = {
   handleOfferTagChange: PropTypes.func.isRequired,
   handleOfferTagDelete: PropTypes.func.isRequired,
   handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired
+  handleInquiryTagDelete: PropTypes.func.isRequired,
+  isEdit: PropTypes.any
 };
 
 export default StepOne;

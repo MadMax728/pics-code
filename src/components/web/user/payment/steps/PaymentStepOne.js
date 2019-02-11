@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
-import { RightSidebarModal } from "../../../../ui-kit";
+import { RightSidebarModal, Label, Input, ErrorSpan } from "../../../../ui-kit";
 
 class PaymentStepOne extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class PaymentStepOne extends Component {
   }
 
   render() {
-    const { handleAddress, form, userInfo } = this.props;
+    const { handleAddress, form, userInfo, forThat } = this.props;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
@@ -22,32 +22,36 @@ class PaymentStepOne extends Component {
           </div>
           <form className="col-xs-12 no-padding">
             <div className="form-group">
-              <label htmlFor="title">
-                {Translations.payment_modal.invoice_recipient}
-              </label>
-              <input
+              <Label
+                htmlFor="title"
+                value={Translations.payment_modal.invoice_recipient}
+              />
+              <Input
                 type="text"
+                className="form-control"
+                id="invoiceRecipient"
                 name="invoiceRecipient"
                 defaultValue={form.address.invoiceRecipient}
                 onChange={handleAddress}
               />
               {form.address.invoiceRecipient.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.invoiceRecipient}
-                </span>
+                <ErrorSpan
+                  value={Translations.error.create_modal.invoiceRecipient}
+                />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="Location">
-                {Translations.payment_modal.street_number}
-              </label>
-              <input
+              <Label
+                htmlFor="Location"
+                value={Translations.payment_modal.street_number}
+              />
+              <Input
                 type="text"
                 name="street"
                 defaultValue={form.address.street}
                 onChange={handleAddress}
               />
-              <input
+              <Input
                 type="text"
                 name="streetNumber"
                 defaultValue={form.address.streetNumber}
@@ -55,89 +59,80 @@ class PaymentStepOne extends Component {
               />
               {form.address.street.length === 0 ||
                 (form.address.streetNumber.length === 0 && form.error && (
-                  <span className="error-msg highlight">
-                    {Translations.error.create_modal.streetNumber}
-                  </span>
+                  <ErrorSpan
+                    value={Translations.error.create_modal.streetNumber}
+                  />
                 ))}
             </div>
             <div className="form-group">
-              <label htmlFor="title">
-                {Translations.payment_modal.postal_code}
-              </label>
-              <input
+              <Label
+                htmlFor="title"
+                value={Translations.payment_modal.postal_code}
+              />
+              <Input
                 type="text"
                 name="postalCode"
                 defaultValue={form.address.postalCode}
                 onChange={handleAddress}
               />
               {form.address.postalCode.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.postalCode}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.postalCode} />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="title">{Translations.payment_modal.city}</label>
-              <input
+              <Label htmlFor="title" value={Translations.payment_modal.city} />
+              <Input
                 type="text"
                 name="city"
                 defaultValue={form.address.city}
                 onChange={handleAddress}
               />
               {form.address.city.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.city}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.city} />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="title">
-                {Translations.payment_modal.country}
-              </label>
-              <input
+              <Label
+                htmlFor="title"
+                value={Translations.payment_modal.country}
+              />
+              <Input
                 type="text"
                 name="country"
                 defaultValue={form.address.country}
                 onChange={handleAddress}
               />
               {form.address.country.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.country}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.country} />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="title">{Translations.payment_modal.VATNO}</label>
-              <input
+              <Label htmlFor="title" value={Translations.payment_modal.VATNO} />
+              <Input
                 type="text"
                 defaultValue={form.address.VATNO}
                 name="VATNO"
                 onChange={handleAddress}
               />
               {form.address.VATNO.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.VATNO}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.VATNO} />
               )}
             </div>
           </form>
         </div>
-        <RightSidebarModal
-          userInfo={userInfo}
-          form={form}
-        />
+        <RightSidebarModal userInfo={userInfo} form={form} isFor={forThat} />
       </div>
     );
   }
 }
 
-const mapStateToProps = () => ({
-});
+const mapStateToProps = () => ({});
 
 PaymentStepOne.propTypes = {
   form: PropTypes.any.isRequired,
   handleAddress: PropTypes.func.isRequired,
-  userInfo: PropTypes.any
+  userInfo: PropTypes.any,
+  forThat: PropTypes.any
 };
 
 export default connect(mapStateToProps)(PaymentStepOne);

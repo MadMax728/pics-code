@@ -4,7 +4,11 @@ import PropTypes from "prop-types";
 import {
   ImageCropper,
   PlaceAutoCompleteLocation,
-  UserImageItem
+  UserImageItem,
+  Label,
+  Input,
+  ErrorSpan,
+  RadioButton
 } from "../../../../ui-kit";
 import { Translations } from "../../../../../lib/translations";
 import {
@@ -44,23 +48,21 @@ class StepOne extends Component {
           </div>
           <form>
             <div className="form-group">
-              <label htmlFor="Insert_link">
-                {Translations.create_ads.add_title_image}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Insert_link"
+                value={Translations.create_ads.add_title_image}
+              />
               {/* {form.fileType &&
                 form.typeContent === enumerations.typeContent.image && ( */}
-                  <ImageCropper
-                    image={form.image}
-                    handleEditImage={handleEditImage}
-                    isCircle={false}
-                    ref={this.imageCrop}
-                    handleActualImg={handleActualImg}
-                    handleScale={handleScale}
-                  />
-                {/* )} */}
+              <ImageCropper
+                image={form.image}
+                handleEditImage={handleEditImage}
+                isCircle={false}
+                ref={this.imageCrop}
+                handleActualImg={handleActualImg}
+                handleScale={handleScale}
+              />
+              {/* )} */}
               {/* {!form.fileType &&
                 form.video &&
                 form.typeContent === enumerations.typeContent.video && (
@@ -74,29 +76,25 @@ class StepOne extends Component {
                 )} */}
             </div>
             <div className="form-group">
-              <label htmlFor="title">{Translations.create_ads.add_title}</label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
-              <input
+              <Label
+                htmlFor="title"
+                value={Translations.create_ads.add_title}
+              />
+              <Input
                 type="text"
                 value={form.title ? form.title : ""}
                 name="title"
                 onChange={handleChangeField}
               />
               {form.title.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.title}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.title} />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="Location">
-                {Translations.create_ads.add_location}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Location"
+                value={Translations.create_ads.add_location}
+              />
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -106,61 +104,49 @@ class StepOne extends Component {
                 form.location.latitude.length === 0 &&
                 form.location.longitude.length === 0 &&
                 form.error && (
-                  <span className="error-msg highlight">
-                    {Translations.error.create_modal.location}
-                  </span>
+                  <ErrorSpan value={Translations.error.create_modal.location} />
                 )}
             </div>
             <div className="form-group">
-              <label htmlFor="Radius">
-                {Translations.create_ads.add_radius}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Radius"
+                value={Translations.create_ads.add_radius}
+              />
               <SelectRadius
                 value={form.radius ? form.radius : ""}
                 className=""
                 handleSelect={handleSelect}
               />
               {form.radius.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.radius}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.radius} />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="Category">
-                {Translations.create_ads.add_category}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Category"
+                value={Translations.create_ads.add_category}
+              />
               <SelectCategory
                 value={form.category ? form.category : ""}
                 className=""
                 handleSelect={handleSelect}
               />
               {form.category.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.category}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.category} />
               )}
             </div>
 
             <div className="form-group">
-              <label htmlFor="target">
-                {Translations.create_ads.add_target_group}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="target"
+                value={Translations.create_ads.add_target_group}
+              />
               <ul className="options">
                 <li
                   className="full-width-input-wrapper wid49"
                   onChange={handleChangeField}
                 >
-                  <input
+                  <RadioButton
                     type="radio"
                     id={enumerations.target_group.female_and_male}
                     name="targetGroup"
@@ -171,12 +157,13 @@ class StepOne extends Component {
                       enumerations.target_group.female_and_male
                     }
                   />
-                  <label htmlFor={enumerations.target_group.female_and_male}>
-                    {Translations.create_ads.male_female}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.target_group.female_and_male}
+                    value={Translations.create_ads.male_female}
+                  />
                 </li>
                 <li className="wid49" onChange={handleChangeField}>
-                  <input
+                  <RadioButton
                     type="radio"
                     id="male"
                     name="targetGroup"
@@ -186,10 +173,10 @@ class StepOne extends Component {
                       form.targetGroup === enumerations.target_group.male
                     }
                   />
-                  <label htmlFor="male">{Translations.create_ads.male}</label>
+                  <Label htmlFor="male" value={Translations.create_ads.male} />
                 </li>
                 <li className="wid49" onChange={handleChangeField}>
-                  <input
+                  <RadioButton
                     type="radio"
                     id={enumerations.target_group.female}
                     value={enumerations.target_group.female}
@@ -198,19 +185,18 @@ class StepOne extends Component {
                       form.targetGroup === enumerations.target_group.female
                     }
                   />
-                  <label htmlFor={enumerations.target_group.female}>
-                    {Translations.create_ads.female}
-                  </label>
+                  <Label
+                    htmlFor={enumerations.target_group.female}
+                    value={Translations.create_ads.female}
+                  />
                 </li>
               </ul>
             </div>
             <div className="form-group">
-              <label htmlFor="Description">
-                {Translations.create_ads.add_description}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="Description"
+                value={Translations.create_ads.add_description}
+              />
               <HashTagUsername
                 className="form-control"
                 type="text"
@@ -220,46 +206,40 @@ class StepOne extends Component {
                 isText={false}
               />
               {form.description.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.description}
-                </span>
+                <ErrorSpan
+                  value={Translations.error.create_modal.description}
+                />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="call">
-                {Translations.create_ads.action_button}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
+              <Label
+                htmlFor="call"
+                value={Translations.create_ads.action_button}
+              />
               <SelectCallToActions
                 value={form.callToAction ? form.callToAction : ""}
                 className=""
                 handleSelect={handleSelect}
               />
               {form.callToAction.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.callToAction}
-                </span>
+                <ErrorSpan
+                  value={Translations.error.create_modal.callToAction}
+                />
               )}
             </div>
             <div className="form-group">
-              <label htmlFor="Insert_link">
-                {Translations.create_ads.insert_link}
-              </label>
-              <p>
-                This is example text. This is example text. This is example text
-              </p>
-              <input
+              <Label
+                htmlFor="Insert_link"
+                value={Translations.create_ads.insert_link}
+              />
+              <Input
                 type="text"
                 value={form.insertLink ? form.insertLink : ""}
                 name="insertLink"
                 onChange={handleChangeField}
               />
               {form.insertLink.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.insertLink}
-                </span>
+                <ErrorSpan value={Translations.error.create_modal.insertLink} />
               )}
             </div>
           </form>

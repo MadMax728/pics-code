@@ -243,8 +243,8 @@ class CampaignModal extends Component {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
-    console.log(data);
-    
+    // console.log(data);
+
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
@@ -374,7 +374,7 @@ class CampaignModal extends Component {
 
   handleCreatorChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -503,7 +503,7 @@ class CampaignModal extends Component {
 
   handleCompanyChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -701,7 +701,7 @@ class CampaignModal extends Component {
 
   handleAddress = event => {
     const { form } = this.state;
-    form.address[event.target.name] = event.target.value;
+    form.address[event.values.name] = event.values.val;
     this.setState({ form });
   };
 }

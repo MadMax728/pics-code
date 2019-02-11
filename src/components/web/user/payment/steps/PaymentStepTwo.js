@@ -7,7 +7,10 @@ import { Translations } from "../../../../../lib/translations";
 import {
   Loader,
   InlineLoading,
-  RightSidebarModal
+  RightSidebarModal,
+  ErrorSpan,
+  Button,
+  Input
 } from "../../../../ui-kit";
 
 class PaymentStepTwo extends Component {
@@ -95,7 +98,14 @@ class PaymentStepTwo extends Component {
   };
 
   render() {
-    const { handleChangeField, form, userInfo, isLoading, isEdit } = this.props;
+    const {
+      handleChangeField,
+      form,
+      userInfo,
+      isLoading,
+      isEdit,
+      forThat
+    } = this.props;
     const redeemLoading = this.props.voucherData.isLoading;
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
@@ -130,15 +140,16 @@ class PaymentStepTwo extends Component {
               {Translations.create_campaigns.Voucher}{" "}
             </div>
             <div className="form-content">
-              <input type="text" name="voucher" onChange={handleChangeField} />
-              <button className="blue_button" onClick={this.handleRedeemBtn}>
-                {Translations.create_campaigns.Redeem}
-              </button>
+              <Input type="text" name="voucher" onChange={handleChangeField} />
+              <Button
+                className="blue_button"
+                type="button"
+                text={Translations.create_campaigns.Redeem}
+                onClick={this.handleRedeemBtn}
+              />
               {this.state.error.voucherError ? (
                 <div className="form-group">
-                  <span className="error-msg highlight">
-                    {this.state.error.voucherError}
-                  </span>
+                  <ErrorSpan value={this.state.error.voucherError} />
                 </div>
               ) : (
                 ""
@@ -157,7 +168,7 @@ class PaymentStepTwo extends Component {
                     <td> {Translations.create_campaigns.PreliminaryAmount} </td>
                     <td>{form.budget}</td>
                   </tr>
-                  
+
                   <tr>
                     <td> {Translations.create_campaigns.Runtime}</td>
                     <td>
@@ -194,18 +205,21 @@ class PaymentStepTwo extends Component {
             <Link to={""}> {Translations.create_campaigns.privacyPolicy}</Link>.
           </div>
           <div className="bottom-button">
-            <button className="filled_button" onClick={this.handleCommitToBuy}>
-            {!isEdit && Translations.create_campaigns.CommitToBuy}
-            {isEdit && Translations.create_campaigns.CommitToUpdate}
-            </button>
+            <Button
+              className="filled_button"
+              type="button"
+              text={
+                !isEdit
+                  ? Translations.create_campaigns.CommitToBuy
+                  : Translations.create_campaigns.CommitToUpdate
+              }
+              onClick={this.handleCommitToBuy}
+            />
           </div>
           {redeemLoading && <Loader />}
           {isLoading && <InlineLoading />}
         </div>
-        <RightSidebarModal
-          userInfo={userInfo}
-          form={form}
-        />
+        <RightSidebarModal userInfo={userInfo} form={form} isFor={forThat} />
       </div>
     );
   }

@@ -4,7 +4,7 @@ import DatePicker from "react-datepicker";
 import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
-import { RightSidebarModal } from "../../../../ui-kit";
+import { RightSidebarModal, Label, ErrorSpan } from "../../../../ui-kit";
 
 class StepThree extends Component {
   constructor(props) {
@@ -35,9 +35,10 @@ class StepThree extends Component {
           <div className="form-group">
             <ul className="options dates">
               <li>
-                <label htmlFor="Start">
-                  {Translations.create_campaigns.start}
-                </label>
+                <Label
+                  htmlFor="Start"
+                  value={Translations.create_campaigns.start}
+                />
                 <div className="input-group date">
                   <DatePicker
                     selected={form.startDate}
@@ -49,7 +50,10 @@ class StepThree extends Component {
                 </div>
               </li>
               <li>
-                <label htmlFor="End">{Translations.create_campaigns.end}</label>
+                <Label
+                  htmlFor="End"
+                  value={Translations.create_campaigns.end}
+                />
                 <div className="input-group date">
                   <DatePicker
                     selected={form.endDate}
@@ -62,27 +66,26 @@ class StepThree extends Component {
               </li>
             </ul>
             {form.error && form.endDate.diff(form.startDate, "days") < 0 ? (
-              <span className="error-msg highlight">
-                {Translations.error.create_modal.date}
-              </span>
+              <ErrorSpan value={Translations.error.create_modal.date} />
             ) : form.error && form.endDate.diff(form.startDate, "week") <= 0 ? (
-              <span className="error-msg highlight">
-                {Translations.error.create_modal.weekValidation}
-              </span>
+              <ErrorSpan
+                value={Translations.error.create_modal.weekValidation}
+              />
             ) : (
               form.error &&
               form.endDate.diff(form.startDate, "month") > 3 && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.monthValidation}
-                </span>
+                <ErrorSpan
+                  value={Translations.error.create_modal.monthValidation}
+                />
               )
             )}
           </div>
 
           <div className="form-group">
-            <label htmlFor="Define">
-              {Translations.create_campaigns.define_daily_budget}
-            </label>
+            <Label
+              htmlFor="Define"
+              value={Translations.create_campaigns.define_daily_budget}
+            />
             <SelectDailyBudget
               value={form.budget}
               className=""
@@ -90,9 +93,7 @@ class StepThree extends Component {
               isFor={"campaign"}
             />
             {form.budget && form.budget.length === 0 && form.error && (
-              <span className="error-msg highlight">
-                {Translations.error.create_modal.budget}
-              </span>
+              <ErrorSpan value={Translations.error.create_modal.budget} />
             )}
           </div>
           {/* <div className="form-group">
@@ -110,14 +111,14 @@ class StepThree extends Component {
             </div>
           </div> */}
           <div className="form-group">
-            <label htmlFor="Maximum">
-              {Translations.create_campaigns.maximum_number_of_applicants}
-            </label>
+            <Label
+              htmlFor="Maximum"
+              value={Translations.create_campaigns.maximum_number_of_applicants}
+            />
             <div className="meter orange nostripes">
               <p className="applicant-block">
                 <span className="applicant-count">{maxClicks}</span>
                 <span className="applicant-label">
-                  {" "}
                   {Translations.create_campaigns.applicant}
                 </span>
               </p>
