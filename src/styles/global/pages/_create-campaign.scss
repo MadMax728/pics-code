@@ -4,9 +4,10 @@
   &.editor-modal {
     & > .modal-dialog {
       max-width: 915px;
-      @media (max-width: 915px) {
-        width: calc(100% - 4%);
-        margin: 30px 7%;
+      @media only screen and (max-width: 1280px){
+        width:75%;
+        margin: 0 auto;
+        padding: 30px 0;
       }
       .rdw-editor-wrapper {
         .rdw-editor-main {
@@ -26,9 +27,10 @@
     // min-height: 80vh;
     // margin: 10vh auto;
     // background-color: white;
-    @media (max-width: 915px) {
-      width: calc(100% - 4%);
-      margin: 30px 2%;
+    @media only screen and (max-width: 1280px){
+      width:75%;
+      margin: 0 auto;
+      padding: 30px 0;
     }
   }
   .modal-content {
@@ -345,6 +347,11 @@
         top: 0;
         bottom: 0;
         margin: auto;
+      }
+      video {
+          width: 100%;
+          max-height: 292px;
+          background: black;
       }
     }
     .target-options {
