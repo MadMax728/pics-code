@@ -25,7 +25,7 @@ const FavouriteCampaignItem = ({ campaign }) => {
           <div className="normal_title">{campaign.title}</div>
           <div className="secondary_title">{campaign.userName}</div>
           <div className="grey_title">
-            {campaign.startDate && DateFormat(campaign.startDate, Translations.date_format.time, true)}
+            {campaign.startDate && DateFormat(campaign.startDate, Translations.date_format.date, true)}
           </div>
         </div>
       </div>
