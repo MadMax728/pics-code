@@ -11,7 +11,7 @@ class PaymentStepOne extends Component {
   }
 
   render() {
-    const { handleAddress, form, userInfo } = this.props;
+    const { handleAddress, form, userInfo, forThat } = this.props;
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
@@ -120,7 +120,7 @@ class PaymentStepOne extends Component {
             </div>
           </form>
         </div>
-        <RightSidebarModal userInfo={userInfo} form={form} />
+        <RightSidebarModal userInfo={userInfo} form={form} isFor={forThat} />
       </div>
     );
   }
@@ -131,7 +131,8 @@ const mapStateToProps = () => ({});
 PaymentStepOne.propTypes = {
   form: PropTypes.any.isRequired,
   handleAddress: PropTypes.func.isRequired,
-  userInfo: PropTypes.any
+  userInfo: PropTypes.any,
+  forThat: PropTypes.any
 };
 
 export default connect(mapStateToProps)(PaymentStepOne);

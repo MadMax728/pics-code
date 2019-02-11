@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
+import { Button } from "../../../../ui-kit";
 
 class CreateCreatorCampaignHeader extends Component {
   constructor(props) {
@@ -14,23 +15,31 @@ class CreateCreatorCampaignHeader extends Component {
       <div className="row">
         <div className="col-sm-5 modal-title">{/* {modalTitle} */}</div>
         <div className="col-sm-7 text-right">
-          <button className="black_button" onClick={this.handleCancle}>
-            {Translations.modal_header.cancle}
-          </button>
+          <Button
+            className="black_button"
+            onClick={this.handleCancle}
+            text={Translations.modal_header.cancle}
+          />
           {stepIndex !== 0 && (
-            <button className="black_button" onClick={this.handleBack}>
-              {Translations.modal_header.back}
-            </button>
+            <Button
+              className="black_button"
+              onClick={this.handleBack}
+              text={Translations.modal_header.back}
+            />
           )}
           {stepIndex !== 0 && stepIndex < 3 && (
-            <button className="black_button" onClick={this.handlePreview}>
-              {Translations.modal_header.preview}
-            </button>
+            <Button
+              className="black_button"
+              onClick={this.handlePreview}
+              text={Translations.modal_header.preview}
+            />
           )}
           {stepIndex <= 3 && (
-            <button className="black_button" onClick={this.handleContinue}>
-              {Translations.modal_header.continue}
-            </button>
+            <Button
+              className="black_button"
+              onClick={this.handleContinue}
+              text={Translations.modal_header.continue}
+            />
           )}
         </div>
       </div>

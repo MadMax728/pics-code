@@ -98,7 +98,14 @@ class PaymentStepTwo extends Component {
   };
 
   render() {
-    const { handleChangeField, form, userInfo, isLoading, isEdit } = this.props;
+    const {
+      handleChangeField,
+      form,
+      userInfo,
+      isLoading,
+      isEdit,
+      forThat
+    } = this.props;
     const redeemLoading = this.props.voucherData.isLoading;
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
@@ -212,7 +219,7 @@ class PaymentStepTwo extends Component {
           {redeemLoading && <Loader />}
           {isLoading && <InlineLoading />}
         </div>
-        <RightSidebarModal userInfo={userInfo} form={form} />
+        <RightSidebarModal userInfo={userInfo} form={form} isFor={forThat} />
       </div>
     );
   }

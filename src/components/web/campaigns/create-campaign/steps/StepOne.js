@@ -42,9 +42,9 @@ class StepOne extends Component {
       handleOfferTagChange,
       handleOfferTagDelete,
       handleInquiryTagChange,
-      handleInquiryTagDelete
+      handleInquiryTagDelete,
+      isEdit
     } = this.props;
-
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-12 upload-form">
@@ -69,6 +69,7 @@ class StepOne extends Component {
                 handleActualImg={handleActualImg}
                 handleScale={handleScale}
                 userInfo={userInfo}
+                isEdit={isEdit}
               />
               {/* )} */}
 
@@ -365,7 +366,8 @@ StepOne.propTypes = {
   handleOfferTagChange: PropTypes.func.isRequired,
   handleOfferTagDelete: PropTypes.func.isRequired,
   handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired
+  handleInquiryTagDelete: PropTypes.func.isRequired,
+  isEdit: PropTypes.any
 };
 
 export default StepOne;

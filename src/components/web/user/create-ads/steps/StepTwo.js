@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
-import { RightSidebarModal } from "../../../../ui-kit";
+import { RightSidebarModal, Label, ErrorSpan } from "../../../../ui-kit";
 import { SelectDailyBudget } from "../../../../../components/common";
 
 class StepTwo extends Component {
@@ -48,7 +48,7 @@ class StepTwo extends Component {
           <div className="form-group">
             <ul className="options dates">
               <li>
-                <label htmlFor="Start">{Translations.create_ads.start}</label>
+                <Label htmlFor="Start" value={Translations.create_ads.start} />
                 <div className="input-group date">
                   <DatePicker
                     selected={form.startDate}
@@ -73,26 +73,25 @@ class StepTwo extends Component {
               </li>
             </ul>
             {form.error && form.endDate.diff(form.startDate, "days") < 0 ? (
-              <span className="error-msg highlight">
-                {Translations.error.create_modal.date}
-              </span>
+              <ErrorSpan value={Translations.error.create_modal.date} />
             ) : form.error && form.endDate.diff(form.startDate, "week") <= 0 ? (
-              <span className="error-msg highlight">
-                {Translations.error.create_modal.weekValidation}
-              </span>
+              <ErrorSpan
+                value={Translations.error.create_modal.weekValidation}
+              />
             ) : (
               form.error &&
               form.endDate.diff(form.startDate, "month") > 3 && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.monthValidation}
-                </span>
+                <ErrorSpan
+                  value={Translations.error.create_modal.monthValidation}
+                />
               )
             )}
           </div>
           <div className="form-group">
-            <label htmlFor="Define">
-              {Translations.create_ads.define_daily_budget}
-            </label>
+            <Label
+              htmlFor="Define"
+              value={Translations.create_ads.define_daily_budget}
+            />
             <SelectDailyBudget
               value={form.budget || ""}
               className=""
@@ -100,9 +99,7 @@ class StepTwo extends Component {
               isFor={"ad"}
             />
             {form.budget && form.budget.length === 0 && form.error && (
-              <span className="error-msg highlight">
-                {Translations.error.create_modal.budget}
-              </span>
+              <ErrorSpan value={Translations.error.create_modal.budget} />
             )}
           </div>
           {/* <div className="form-group">
@@ -120,9 +117,10 @@ class StepTwo extends Component {
             </div>
           </div> */}
           <div className="form-group">
-            <label htmlFor="Maximum">
-              {Translations.create_ads.maximum_number_of_views}
-            </label>
+            <Label
+              htmlFor="Maximum"
+              value={Translations.create_ads.maximum_number_of_views}
+            />
             <div className="meter orange nostripes">
               <p className="applicant-block">
                 <span className="applicant-count">{maxClicks}</span>
@@ -143,7 +141,7 @@ class StepTwo extends Component {
             <li>{Translations.create_ads.total_budget_can_not_be_exceeded}</li>
           </ul>
         </div>
-        <RightSidebarModal userInfo={userInfo} form={form} isFor="ads" />
+        <RightSidebarModal userInfo={userInfo} form={form} isFor="Ads" />
       </div>
     );
   }

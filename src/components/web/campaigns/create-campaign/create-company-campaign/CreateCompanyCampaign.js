@@ -74,6 +74,7 @@ class CreateCompanyCampaign extends Component {
               handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
               handleVideo={handleVideo}
+              isEdit={isEdit}
             />
           ))}
         {!isPreview &&
@@ -155,7 +156,6 @@ CreateCompanyCampaign.propTypes = {
   maxClicks: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
   isEdit: PropTypes.bool.isRequired
-
 };
 
 export default CreateCompanyCampaign;
