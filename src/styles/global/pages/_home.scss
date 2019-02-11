@@ -196,6 +196,27 @@
     width: 100%;
   }
 }
+.campaign-profile-info{
+  display: inline-block;
+  min-height: 100vh;
+  // overflow: auto;
+}
+.left-sidebar{
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 70px;
+}
+.right-sidebar{
+  position: -moz-sticky;
+  position: -ms-sticky;
+  position: -o-sticky;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 70px;
+}
 .left_menu_second {
   background-color: $white_color;
   z-index: 9;

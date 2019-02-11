@@ -45,7 +45,7 @@ class InformationPage extends Component {
     const { campaignDetails, isLoading } = this.props;
     const { isComments, comments } = this.state;
     return (
-      <div className="padding-l-10 middle-section width-80">
+      <div className="padding-l-10 middle-section campaign-profile-info width-80">
         {campaignDetails && !isLoading && (
           <CampaignDetailsCard
             campaignDetails={campaignDetails}

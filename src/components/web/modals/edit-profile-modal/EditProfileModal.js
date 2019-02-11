@@ -26,7 +26,7 @@ class EditProfileModal extends Component {
     const { image, isLoading } = this.state;
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade create-campaign-modal"}
+        modalClassName={"modal fade create-campaign-modal edit-profile-modal"}
         header
         modalHeaderContent={
           <EditProfilePicHeader

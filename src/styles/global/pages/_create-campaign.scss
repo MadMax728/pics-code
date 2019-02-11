@@ -946,3 +946,42 @@
     }
   }
 }
+
+
+.edit-profile-modal{
+  .modal-dialog{
+    .modal-content{
+      .modal-header{}
+      .modal-body{
+        .upload-profile-wrapr{
+          .range-wrapr{
+            margin: 0 25%;
+            text-align: center;
+            display: inline-block;
+            width: 50%;
+            padding: 0;
+            position: relative;
+            height: 60px;
+            .min-profile-pic{
+              position: absolute;
+              left: 30px;
+              z-index: 9;
+            }
+            img.max-profile-pic{
+              position: absolute;
+              right: 30px;
+              z-index: 9;
+              left:initial;
+            }
+            input[type="range"]{
+              float: none;
+            }
+            .runnable{
+              left: 80px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

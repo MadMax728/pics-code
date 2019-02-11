@@ -141,7 +141,7 @@ class Home extends Component {
                 handleModalInfoShow={this.handleModalInfoShow}
               />
 
-              <div className="left_menu_second no-padding profile-img-wrapper">
+              <div className="left_menu_second left-sidebar no-padding profile-img-wrapper">
                 <LeftSideBar getFilter={this.getFilter} />
               </div>
 
@@ -154,7 +154,7 @@ class Home extends Component {
                   profile={profile}
                 />
               </div>
-              <div className="right_bar no-padding">
+              <div className="right_bar right-sidebar no-padding">
                 <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
