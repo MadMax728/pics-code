@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
-import { Input } from "../../../ui-kit";
+import { Input, Label, ErrorSpan, Button } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
@@ -125,35 +125,10 @@ class PrivacyPage extends Component {
                 </div>
                 <div className="col-sm-6 text-right">
                   <div>
-                    <label className="switch" htmlFor={"SocialShare"}>
-                      <Switch
-                        onChange={this.hanldeIsSocialShare}
-                        checked={this.state.isSocialShare}
-                        onColor={switchOnColor}
-                        onHandleColor={switchOnHandleColor}
-                        handleDiameter={25}
-                        uncheckedIcon={false}
-                        checkedIcon={false}
-                        boxShadow={switchBoxShadow}
-                        activeBoxShadow={switchActiveBoxShadow}
-                        height={25}
-                        width={48}
-                        className="react-switch"
-                        id="material-switch"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-6">
-                  {Translations.privacy.Personalized_advertising}
-                </div>
-                <div className="col-sm-6 text-right">
-                  <label className="switch" htmlFor={"Personalized"}>
+                    <Label className="switch" htmlFor={"SocialShare"} />
                     <Switch
-                      onChange={this.hanldeIsPersonalized}
-                      checked={this.state.isPersonalized}
+                      onChange={this.hanldeIsSocialShare}
+                      checked={this.state.isSocialShare}
                       onColor={switchOnColor}
                       onHandleColor={switchOnHandleColor}
                       handleDiameter={25}
@@ -166,7 +141,30 @@ class PrivacyPage extends Component {
                       className="react-switch"
                       id="material-switch"
                     />
-                  </label>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.Personalized_advertising}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <Label className="switch" htmlFor={"Personalized"} />
+                  <Switch
+                    onChange={this.hanldeIsPersonalized}
+                    checked={this.state.isPersonalized}
+                    onColor={switchOnColor}
+                    onHandleColor={switchOnHandleColor}
+                    handleDiameter={25}
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    boxShadow={switchBoxShadow}
+                    activeBoxShadow={switchActiveBoxShadow}
+                    height={25}
+                    width={48}
+                    className="react-switch"
+                    id="material-switch"
+                  />
                 </div>
               </div>
             </div>
@@ -176,9 +174,10 @@ class PrivacyPage extends Component {
             </div>
             <div className="change-email-wrapper">
               <div className="form-group">
-                <label htmlFor="email">
-                  {Translations.privacy.Current_Email}
-                </label>
+                <Label
+                  htmlFor="email"
+                  value={Translations.privacy.Current_Email}
+                />
                 <Input
                   type="email"
                   className="form-control"
@@ -197,18 +196,18 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_email_form_error.current_email}
-                </span>
+                <ErrorSpan
+                  value={this.state.change_email_form_error.current_email}
+                />
               </div>
               <div className="form-group new-email">
-                <label htmlFor="email">{Translations.privacy.New_Email}</label>
-                <span className="error-msg pull-right">
-                  {
+                <Label htmlFor="email" value={Translations.privacy.New_Email} />
+                <ErrorSpan
+                  value={
                     Translations.privacy
                       .Please_confirm_this_change_in_your_email_account
                   }
-                </span>
+                />
                 <Input
                   type="email"
                   className="form-control"
@@ -227,20 +226,19 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_email_form_error.new_email}
-                </span>
-                <span className="error-msg highlight">
-                  {this.state.change_email_form_error.servererror}
-                </span>
+                <ErrorSpan
+                  value={this.state.change_email_form_error.new_email}
+                />
+                <ErrorSpan
+                  value={this.state.change_email_form_error.servererror}
+                />
               </div>
               <div className="form-group">
-                <button
+                <Button
                   className="black_button"
                   onClick={this.handleSaveChangeEmail}
-                >
-                  {Translations.privacy.save}
-                </button>
+                  text={Translations.privacy.save}
+                />
               </div>
             </div>
 
