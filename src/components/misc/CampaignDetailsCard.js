@@ -84,7 +84,7 @@ const CampaignDetailsCard = ({
                   title={Translations.campaign_details.start}
                   value={moment
                     .unix(campaignDetails.startDate)
-                    .format("MMMM Do YYYY")}
+                    .format(Translations.campaign_post_date_format.date)}
                 />
 
                 {campaignDetails &&
@@ -109,7 +109,7 @@ const CampaignDetailsCard = ({
                   title={Translations.campaign_details.end}
                   value={moment
                     .unix(campaignDetails.endDate)
-                    .format("MMMM Do YYYY")}
+                    .format(Translations.campaign_post_date_format.date)}
                 />
                 {campaignDetails &&
                   campaignDetails.userType !== selectedUserType && (

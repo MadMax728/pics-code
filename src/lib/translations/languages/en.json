@@ -16,6 +16,11 @@
     "time": "LT"
   },
 
+  "campaign_post_date_format": {
+    "date": "MMMM Do YYYY",
+    "time": "LT"
+  },
+
   "offen": "In der Picstagraph-App offenen",
 
   "subscribe": "Subscribe",

@@ -23,7 +23,9 @@ const InformationCard = ({ item, type }) => {
               {Translations.campaign_details.start}:{" "}
             </span>
             <span className="secondary_title">
-              {moment.unix(item.startDate).format("MMMM Do YYYY")}
+              {moment
+                .unix(item.startDate)
+                .format(Translations.campaign_post_date_format.date)}
             </span>
           </div>
 
@@ -53,7 +55,9 @@ const InformationCard = ({ item, type }) => {
               {Translations.campaign_details.end}:{" "}
             </span>
             <span className="secondary_title">
-              {moment.unix(item.endDate).format("MMMM Do YYYY")}
+              {moment
+                .unix(item.endDate)
+                .format(Translations.campaign_post_date_format.date)}
             </span>
           </div>
 
