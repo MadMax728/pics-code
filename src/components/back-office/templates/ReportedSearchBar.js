@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import * as images from "../../../lib/constants/images";
-import { Input } from "../../ui-kit";
+import { Input, Button } from "../../ui-kit";
 
 const ReportedSearchBar = (e) => {
   return (
@@ -17,11 +17,11 @@ const ReportedSearchBar = (e) => {
             onChange={e.handleSearch}
           />
           <span className="input-group-addon">
-            <button type="submit">
+            <Button type="submit" text={
               <span className="search_icon">
                 <img src={images.search} alt="Search" />
-              </span>
-            </button>
+              </span>}
+            />
           </span>
         </div>
       </form>

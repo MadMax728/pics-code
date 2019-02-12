@@ -3,6 +3,7 @@ import * as images from "../../lib/constants/images";
 import { SideBarMBMenuInformation, SideBarMBMenuServices } from "../common";
 
 import PropTypes from "prop-types";
+import { Translations } from "../../lib/translations";
 
 export default class MobileMenu extends Component {
 
@@ -21,13 +22,13 @@ export default class MobileMenu extends Component {
             >
               <button type="button">
                 <img src={images.black_left_arrow} alt="left_arrow" />
-                Back
+                {Translations.modal_header.back}
               </button>
             </div>
             <div className="mobile_menu_wrapper">
-              <div className="normal_title padding-15">Information</div>
+              <div className="normal_title padding-15">{Translations.left_sidebar.information}</div>
               <SideBarMBMenuInformation />
-              <div className="normal_title padding-15">Services</div>
+              <div className="normal_title padding-15">{Translations.smobile_sidebar_services.ervices}</div>
               <SideBarMBMenuServices />
             </div>
           </div>

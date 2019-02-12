@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { deactivateAccount } from "../../../../actions/privacy";
 import { connect } from "react-redux";
+import { Translations } from "../../../../lib/translations";
+import { Button } from "../../../ui-kit";
 
 class ActionConfirmation extends Component {
   constructor(props) {
@@ -22,24 +24,22 @@ class ActionConfirmation extends Component {
   render() {
     return (
       <div className={"col-xs-12 no-padding"}>
-        <div className="col-sm-12 margin-bottom-10">Are you want to sure ?</div>
+        <div className="col-sm-12 margin-bottom-10">{Translations.sure}</div>
         <div className="col-sm-12">
           <div className="row">
             <div className="col-md-6">
-              <button
+              <Button
                 className="filled_button col-sm-6"
                 onClick={this.handleModalHides}
-              >
-                Cancel
-              </button>
+                text={Translations.modal_header.cancel}
+              />
             </div>
             <div className="col-md-6">
-              <button
+              <Button
                 className="filled_button col-sm-6"
                 onClick={this.handleModalAction}
-              >
-                Yes
-              </button>
+                text={Translations.upload_modal.yes}
+              />
             </div>
           </div>
         </div>

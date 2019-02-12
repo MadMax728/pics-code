@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Translations } from "../../../lib/translations";
 
 class Cookies extends Component {
   render() {
@@ -8,10 +9,10 @@ class Cookies extends Component {
           <div className="modal-content">
             <div className="modal-body">
               <p>
-                For a better user experience we can use <a href="/">Cookies</a>
+                {Translations.cookies.better_user} <a href="/">{Translations.cookies.cookies}</a>
               </p>
               <br />
-              <p>By using picstagraph you do agree</p>
+              <p>{Translations.cookies.agree}</p>
               <button
                 type="button"
                 className="close"

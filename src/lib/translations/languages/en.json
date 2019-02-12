@@ -37,6 +37,19 @@
 
   "favourite_campaigns": "Favourite Campaigns",
 
+  "report_review" : {
+    "date": "Date",
+    "reports": "Reports",
+    "status": "Status",
+    "start": "Start",
+    "end": "End",
+    "daily_budget": "Daily budget",
+    "clicks": "Clicks",
+    "views": "Views",
+    "applications": "Applications",
+    "statistics": "Statistics"
+  },
+
   "about": {
     "general_information": "General informations",
     "username": "User name",
@@ -208,12 +221,20 @@
     "anonymous_proceture_help_text": "If you choose anonymous, only you will see the content from your participants."
   },
 
+  "payment": {
+    "your": "Your",
+    "review": "is pending review whitin the next 48 hours."
+  },
+
   "messages_modal": {
     "unknown": "Unknown",
     "messages": "Messages",
     "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
+  
+  "sure" : "Are you want to sure?",
+
   "modal_header": {
     "cancle": "Cancel",
     "back": "Back",
@@ -341,6 +362,12 @@
     "about_us": "About us",
     "terms_and_condition": "Terms & Condition",
     "cookies": "Cookies"
+  },
+
+  "cookies": {
+    "cookies": "Cookies",
+    "better_user": "For a better user experience we can use",
+    "agree": "By using picstagraph you do agree"
   },
 
   "right_side_bar_statistics": {
@@ -481,6 +508,7 @@
   },
 
   "mobile_sidebar_services": {
+    "services": "Services",
     "terms_conditions": "General Terms and Conditions",
     "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
     "terms_use": "Terms of Use",
@@ -750,6 +778,14 @@
     "general_information": "General Information",
     "Personal_interests": "Personal interests"
   },
+
+  "social": {
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "whatsapp": "Whatsapp",
+    "email": "Email"
+  },
+
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
@@ -850,6 +886,16 @@
     "Closed_Ads": "Closed Ads",
     "Ads_Temp_Closed": "Ads Temp Closed"
   },
+
+  "download_app": "Download App",
+  
+  "user_pics": "User Pics",
+
+  "not_found": {
+    "not_available": "This page isn't available",
+    "remove_link": "The link you followed may be broken, or the page may have been removed" 
+  },
+
   "cms": {
     "create": "Create new CMS page",
     "edit": "Edit CMS page",

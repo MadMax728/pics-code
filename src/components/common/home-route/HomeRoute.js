@@ -375,6 +375,7 @@ class HomeRoute extends Component {
     return (
       <InformationPage
         handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
         match={match.match}
         history={match.history}
       />

@@ -32,8 +32,6 @@ class CreateCMSManagementPage extends Component {
   }
 
   handleSelect = (isFor , selected) => {
-    console.log(selected);
-    
     const { form } = this.state;
     form.pageLanguage = selected
     this.setState({ form });
@@ -42,9 +40,7 @@ class CreateCMSManagementPage extends Component {
   render() {
     const { form, isEdit } = this.state;
     const { cmsManagementData } = this.props;
-    console.log(this.props);
-    console.log(form.description);
-    
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="create-cms-page-wrapr">
