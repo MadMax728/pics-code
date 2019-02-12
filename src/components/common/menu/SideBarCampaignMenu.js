@@ -7,16 +7,34 @@ import * as routes from "../../../lib/constants/routes";
 class SideBarCampaignMenu extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { links: [], menu: "" };
+    let linkData = [
+      {
+        to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
+          this.props.match.params.type
+        }${"/"}${this.props.match.params.id}`,
+        className: "menu_information secondary_title",
+        activeClassName: "active",
+        text: Translations.left_sidebar.information
+      },
+      {
+        to: `${routes.BASE_CAMPAIGN_PARTICIPANT_ROUTE}${
+          this.props.match.params.type
+        }${"/"}${this.props.match.params.id}`,
+        className: "menu_participants secondary_title",
+        activeClassName: "active",
+        text: Translations.left_sidebar.participants
+      }
+    ];
+    this.state = { links: linkData };
   }
 
   render() {
-    const { links, menu } = this.state;
+    const { links } = this.state;
     return (
       <div>
         <LeftSidebarNav
           links={links}
-          header={menu}
+          header={"Menu"}
           ulClassName={"nav navbar-nav pull-right"}
         />
       </div>
@@ -24,8 +42,16 @@ class SideBarCampaignMenu extends Component {
   }
 
   componentWillMount = () => {
-    let linkData = [];
-    let menuLink = "";
+    let linkData = (linkData = [
+      {
+        to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
+          this.props.match.params.type
+        }${"/"}${this.props.match.params.id}`,
+        className: "menu_information secondary_title",
+        activeClassName: "active",
+        text: Translations.left_sidebar.information
+      }
+    ]);
     if (
       this.props.match &&
       this.props.match &&
@@ -49,9 +75,8 @@ class SideBarCampaignMenu extends Component {
           text: Translations.left_sidebar.participants
         }
       ];
-      menuLink = "Menu";
     }
-    this.setState({ links: linkData, menu: menuLink });
+    this.setState({ links: linkData });
   };
 }
 

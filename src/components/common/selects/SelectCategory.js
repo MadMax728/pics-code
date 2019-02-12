@@ -9,7 +9,7 @@ class SelectCategory extends Component {
     super(props);
     this.state = {
       categoryList: []
-    }
+    };
   }
 
   render() {
@@ -36,22 +36,21 @@ class SelectCategory extends Component {
 
   componentDidMount = () => {
     this.props.getSelect("categories").then(() => {
-      if(this.props.categoryList){
+      if (this.props.categoryList) {
         this.setState({
           categoryList: this.props.categoryList
         });
       }
     });
-  }
+  };
 
   componentWillUnmount = () => {
-    this.setState({categoryList: []});
-  }
-  
-  handleCategory = (event) => {
-    this.props.handleSelect("category",event.target.value);
-  }
-  
+    this.setState({ categoryList: [] });
+  };
+
+  handleCategory = event => {
+    this.props.handleSelect("category", event.target.value);
+  };
 }
 
 const mapStateToProps = state => ({
@@ -62,7 +61,6 @@ const mapDispatchToProps = {
   getSelect
 };
 
-
 const propTypes = {
   value: PropTypes.any,
   categoryList: PropTypes.any,
@@ -72,7 +70,6 @@ const propTypes = {
 };
 
 SelectCategory.propTypes = propTypes;
-
 
 export default connect(
   mapStateToProps,
