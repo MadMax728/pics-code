@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
-import { Input, Label, ErrorSpan, Button } from "../../../ui-kit";
+import {
+  Input,
+  Label,
+  ErrorSpan,
+  Button,
+  InlineLoading
+} from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
@@ -77,6 +83,7 @@ class PrivacyPage extends Component {
       change_password_form,
       change_invoicing_address_form
     } = this.state;
+    const isInvoiceAddressLoading = this.props.profilePrivacyData.isLoading;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -249,9 +256,10 @@ class PrivacyPage extends Component {
             </div>
             <div className="change-password-wrapper">
               <div className="form-group">
-                <label htmlFor="c-password">
-                  {Translations.privacy.Current_Password}
-                </label>
+                <Label
+                  htmlFor="c-password"
+                  value={Translations.privacy.Current_Password}
+                />
                 <Input
                   type="password"
                   className="form-control"
@@ -270,14 +278,15 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.current_password}
-                </span>
+                <ErrorSpan
+                  value={this.state.change_password_form_error.current_password}
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="n-password">
-                  {Translations.privacy.New_Password}
-                </label>
+                <Label
+                  htmlFor="n-password"
+                  value={Translations.privacy.New_Password}
+                />
                 <Input
                   type="password"
                   className="form-control"
@@ -296,14 +305,15 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.new_password}
-                </span>
+                <ErrorSpan
+                  value={this.state.change_password_form_error.new_password}
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="r-password">
-                  {Translations.privacy.Repeat_Password}
-                </label>
+                <Label
+                  htmlFor="r-password"
+                  value={Translations.privacy.Repeat_Password}
+                />
                 <Input
                   type="password"
                   className="form-control"
@@ -322,20 +332,19 @@ class PrivacyPage extends Component {
                 ) : (
                   <img src={images.error} alt={"error"} />
                 )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.repeat_password}
-                </span>
+                <ErrorSpan
+                  value={this.state.change_password_form_error.repeat_password}
+                />
               </div>
               <div className="form-group">
-                <span className="error-msg highlight">
-                  {this.state.change_password_form_error.servererror}
-                </span>
-                <button
+                <ErrorSpan
+                  value={this.state.change_password_form_error.servererror}
+                />
+                <Button
                   className="black_button"
                   onClick={this.handleSaveChangePassword}
-                >
-                  {Translations.privacy.save}
-                </button>
+                  text={Translations.privacy.save}
+                />
               </div>
             </div>
 
@@ -343,10 +352,12 @@ class PrivacyPage extends Component {
               {Translations.privacy.Change_invoicing_address}
             </div>
             <div className="change-invoiceadd-wrapper">
+              {isInvoiceAddressLoading && <InlineLoading />}
               <div className="form-group">
-                <label htmlFor="recipient">
-                  {Translations.privacy.Invoice_recipient}
-                </label>
+                <Label
+                  htmlFor="recipient"
+                  value={Translations.privacy.Invoice_recipient}
+                />
                 <Input
                   type="text"
                   className="form-control"
@@ -366,9 +377,10 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="street">
-                  {Translations.privacy.Street_number}
-                </label>
+                <Label
+                  htmlFor="street"
+                  value={Translations.privacy.Street_number}
+                />
                 <Input
                   type="text"
                   className="form-control"
@@ -388,9 +400,10 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <label htmlFor="postal">
-                  {Translations.privacy.Postal_code}
-                </label>
+                <Label
+                  htmlFor="postal"
+                  value={Translations.privacy.Postal_code}
+                />
                 <Input
                   type="text"
                   className="form-control"
@@ -412,7 +425,7 @@ class PrivacyPage extends Component {
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">
                   <div className="form-group">
-                    <label htmlFor="city">{Translations.privacy.city}</label>
+                    <Label htmlFor="city" value={Translations.privacy.city} />
                     <Input
                       type="text"
                       className="form-control"
@@ -434,9 +447,10 @@ class PrivacyPage extends Component {
                 </div>
                 <div className="col-sm-6 padding-l-5">
                   <div className="form-group">
-                    <label htmlFor="country">
-                      {Translations.privacy.Country}
-                    </label>
+                    <Label
+                      htmlFor="country"
+                      value={Translations.privacy.Country}
+                    />
                     <Input
                       type="text"
                       className="form-control"
@@ -458,9 +472,10 @@ class PrivacyPage extends Component {
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="vat">
-                  {Translations.privacy.VAT_identification_number}
-                </label>
+                <Label
+                  htmlFor="vat"
+                  value={Translations.privacy.VAT_identification_number}
+                />
                 <Input
                   type="text"
                   className="form-control"
@@ -481,12 +496,11 @@ class PrivacyPage extends Component {
                 )}
               </div>
               <div className="form-group">
-                <button
+                <Button
                   className="black_button"
                   onClick={this.handleSaveChangeInvoice}
-                >
-                  {Translations.privacy.save}
-                </button>
+                  text={Translations.privacy.save}
+                />
               </div>
             </div>
 
