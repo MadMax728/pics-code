@@ -57,9 +57,7 @@ class CreateCMSManagementPage extends Component {
           <form className="cms-form col-xs-12" onSubmit={this.handleSubmit}>
             <div className="form-row col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Title of page" className="col-xs">
-                  {Translations.cms.title_of_page}
-                </label>
+                <Label htmlFor="Title of page" className="col-xs" value={Translations.cms.title_of_page} />
                 <Input
                   type="text"
                   name="title"
@@ -68,7 +66,7 @@ class CreateCMSManagementPage extends Component {
                 />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="URL">{Translations.cms.url}</label>
+                <Label htmlFor="URL" value={Translations.cms.url} />
                 <Input
                   type="text"
                   name="url"
@@ -79,7 +77,7 @@ class CreateCMSManagementPage extends Component {
             </div>
             <div className="form-row marBtm30 col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Language">{Translations.cms.language}</label>
+                <Label htmlFor="Language" value={Translations.cms.language} />
                   <SelectLanguage
                     value={form.language}
                     handleSelect={this.handleSelect}
@@ -87,7 +85,7 @@ class CreateCMSManagementPage extends Component {
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="Display page">{Translations.cms.display_page}</label>
+                <Label htmlFor="Display page" value={Translations.cms.display_page} />
                 <div className="choice-wrapr">
                   <div className="choice">
                     <RadioButton
