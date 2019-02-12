@@ -1147,3 +1147,27 @@
     }
   }
 }
+
+.login-process{
+  .login-wrapper.bkoffice-wrapper{
+    min-height: auto;
+  }
+}
+.right_bar .community .community_wrapper .community-user-name {
+  width: 40%;
+  align-self: center;
+}
+.right_bar {
+  .community {
+    .community_wrapper {
+      .community-user-name{
+        .normal_title{
+          word-break: unset;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}
