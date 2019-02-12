@@ -206,47 +206,50 @@ class StepOne extends Component {
               </div>
             )}
 
-            <div className="form-group">
-              <Label
-                htmlFor="Type"
-                value={Translations.create_campaigns.type}
-              />
-              <ul className="options">
-                <li className="wid49">
-                  <RadioButton
-                    type="radio"
-                    id={enumerations.typeContent.video}
-                    name="typeContent"
-                    className="black_button"
-                    value={enumerations.typeContent.video}
-                    defaultChecked={
-                      form.typeContent === enumerations.typeContent.video
-                    }
-                    onChange={handleChangeField}
-                  />
-                  <Label
-                    htmlFor={enumerations.typeContent.video}
-                    value={Translations.create_campaigns.video}
-                  />
-                </li>
-                <li className="wid49">
-                  <RadioButton
-                    type="radio"
-                    id={enumerations.typeContent.image}
-                    name="typeContent"
-                    value={enumerations.typeContent.image}
-                    defaultChecked={
-                      form.typeContent === enumerations.typeContent.image
-                    }
-                    onChange={handleChangeField}
-                  />
-                  <Label
-                    htmlFor={enumerations.typeContent.image}
-                    value={Translations.create_campaigns.image}
-                  />
-                </li>
-              </ul>
-            </div>
+            {isFor && (
+              <div className="form-group">
+                <Label
+                  htmlFor="Type"
+                  value={Translations.create_campaigns.type}
+                />
+                <ul className="options">
+                  <li className="wid49">
+                    <RadioButton
+                      type="radio"
+                      id={enumerations.typeContent.video}
+                      name="typeContent"
+                      className="black_button"
+                      value={enumerations.typeContent.video}
+                      defaultChecked={
+                        form.typeContent === enumerations.typeContent.video
+                      }
+                      onChange={handleChangeField}
+                    />
+                    <Label
+                      htmlFor={enumerations.typeContent.video}
+                      value={Translations.create_campaigns.video}
+                    />
+                  </li>
+                  <li className="wid49">
+                    <RadioButton
+                      type="radio"
+                      id={enumerations.typeContent.image}
+                      name="typeContent"
+                      value={enumerations.typeContent.image}
+                      defaultChecked={
+                        form.typeContent === enumerations.typeContent.image
+                      }
+                      onChange={handleChangeField}
+                    />
+                    <Label
+                      htmlFor={enumerations.typeContent.image}
+                      value={Translations.create_campaigns.image}
+                    />
+                  </li>
+                </ul>
+              </div>
+            )}
+
             <div className="form-group">
               <Label
                 htmlFor="Target_group"

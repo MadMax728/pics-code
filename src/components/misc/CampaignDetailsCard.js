@@ -8,6 +8,7 @@ import FeedHeader from "./headers/FeedHeader";
 import { InfoWrapperItem, DescriptionItem } from "./items";
 import { ImageItem, VideoItem, ThreeDots } from "../ui-kit";
 import * as enumerations from "../../lib/constants/enumerations";
+import moment from "moment";
 
 const CampaignDetailsCard = ({
   campaignDetails,
@@ -23,6 +24,7 @@ const CampaignDetailsCard = ({
   const favorite_icon = campaignDetails.isSelfLike
     ? images.blue_heart
     : images.feed_like;
+  const selectedUserType = "creator";
   return (
     <div className="information-wrapper ht100">
       <div className="info-inner-wrapper col-xs-12 padd-15">
@@ -56,7 +58,9 @@ const CampaignDetailsCard = ({
             onClick={handleApplyParticipant}
             id={campaignDetails.id}
           >
-            {Translations.apply_campaign}
+            {campaignDetails && campaignDetails.userType === selectedUserType
+              ? Translations.campaign_details.send_message
+              : Translations.campaign_details.apply_campaign}
           </button>
         )}
         <div className="feed_wrapper">
@@ -77,39 +81,50 @@ const CampaignDetailsCard = ({
             <div className="feed_description col-xs-12">
               <div className="col-sm-6 no-padding">
                 <InfoWrapperItem
-                  title={"Start"}
-                  value={DateFormat(
-                    campaignDetails.startDate,
-                    Translations.date_format.date,
-                    true
+                  title={Translations.campaign_details.start}
+                  value={moment
+                    .unix(campaignDetails.startDate)
+                    .format(Translations.campaign_post_date_format.date)}
+                />
+
+                {campaignDetails &&
+                  campaignDetails.userType !== selectedUserType && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.procedure}
+                      value={campaignDetails.procedure}
+                    />
                   )}
-                />
-                <InfoWrapperItem
-                  title={"Procedure"}
-                  value={campaignDetails.procedure}
-                />
-                <InfoWrapperItem
-                  title={"Target group"}
-                  value={campaignDetails.target_group}
-                />
+
+                {campaignDetails &&
+                  campaignDetails.userType !== selectedUserType && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.applications}
+                      value={campaignDetails.applicationCount}
+                    />
+                  )}
               </div>
+
               <div className="col-sm-6 no-padding">
                 <InfoWrapperItem
-                  title={"End"}
-                  value={DateFormat(
-                    campaignDetails.endDate,
-                    Translations.date_format.date,
-                    true
+                  title={Translations.campaign_details.end}
+                  value={moment
+                    .unix(campaignDetails.endDate)
+                    .format(Translations.campaign_post_date_format.date)}
+                />
+                {campaignDetails &&
+                  campaignDetails.userType !== selectedUserType && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.type}
+                      value={campaignDetails.typeContent}
+                    />
                   )}
-                />
-                <InfoWrapperItem
-                  title={"Type"}
-                  value={campaignDetails.typeContent}
-                />
-                <InfoWrapperItem
-                  title={"Applications"}
-                  value={campaignDetails.applicationCount}
-                />
+
+                {campaignDetails && campaignDetails.target_group && (
+                  <InfoWrapperItem
+                    title={Translations.campaign_details.target_group}
+                    value={campaignDetails.target_group}
+                  />
+                )}
               </div>
             </div>
           </div>
