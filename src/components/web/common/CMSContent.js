@@ -24,7 +24,7 @@ class CMSContent extends Component {
       <div className="padding-rl-10 middle-section width-80">
         <div className="cms-middle-section col-xs-12 no-padding">
           <div className="panel-wrapper mar-btm-5">
-          <div className="cms-page-content">
+          <div className="cms-page-content other-pages-content">
             {
               cmsDetail && cmsDetail.description && 
                 <DescriptionItem desc={cmsDetail.description} />

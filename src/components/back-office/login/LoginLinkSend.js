@@ -17,7 +17,7 @@ class LoginLinkSend extends Component {
         {isLoading && <InlineLoading />}
         <section>
           <div className="custom-container">
-            <div className="login-wrapper backoffice-login">
+            <div className="login-wrapper bkoffice-wrapper backoffice-login">
               <h3 className="text-center">{Translations.admin_login.backoffice_login}</h3>
               <p>{Translations.admin_login.send_password} </p>
               <form onSubmit={this.handleSubmit}>
