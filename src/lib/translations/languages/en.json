@@ -34,6 +34,7 @@
   "view_less_comments": "View less comments",
 
   "apply_campaign": "Apply for this campaign",
+  "send_message": "Send Message",
 
   "favourite_campaigns": "Favourite Campaigns",
 
@@ -309,11 +310,11 @@
       "type": "select"
     }
   },
-  
+
   "select": "Select",
   "showing": "Showing",
-  "to": "to", 
-  "of": "of", 
+  "to": "to",
+  "of": "of",
   "results": "Results",
   "table_empty": "Table is Empty",
 

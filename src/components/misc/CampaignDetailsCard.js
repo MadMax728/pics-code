@@ -23,6 +23,7 @@ const CampaignDetailsCard = ({
   const favorite_icon = campaignDetails.isSelfLike
     ? images.blue_heart
     : images.feed_like;
+  const selectedUserType = "creator";
   return (
     <div className="information-wrapper ht100">
       <div className="info-inner-wrapper col-xs-12 padd-15">
@@ -56,7 +57,9 @@ const CampaignDetailsCard = ({
             onClick={handleApplyParticipant}
             id={campaignDetails.id}
           >
-            {Translations.apply_campaign}
+            {campaignDetails.userType === selectedUserType
+              ? Translations.send_message
+              : Translations.apply_campaign}
           </button>
         )}
         <div className="feed_wrapper">
