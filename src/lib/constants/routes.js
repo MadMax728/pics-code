@@ -50,17 +50,19 @@ export const BASE_AD_INFORMATION_ROUTE = "/ad/information/";
 export const BASE_IMAGE_INFORMATION_ROUTE = "/image/information/";
 export const BASE_VIDEO_INFORMATION_ROUTE = "/video/information/";
 export const BASE_CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/";
-export const CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/:id";
-export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/:id";
+export const CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/:type/:id";
+export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/:type/:id";
 
 // settings routes
 export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit-profile";
 export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
 // export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness-profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
-export const BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE = "/settings/campaigns/statistics/";
+export const BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
+  "/settings/campaigns/statistics/";
 export const BASE_SETTINGS_AD_STATISTICS_ROUTE = "/settings/ads/statistics/";
-export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE = "/settings/campaigns/statistics/:id";
+export const SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
+  "/settings/campaigns/statistics/:id";
 export const SETTINGS_ADS_ROUTE = "/settings/ads";
 export const BASE_SETTINGS_ADS_STATISTICS_ROUTE =
   "/settings/ads/statistics/:id";

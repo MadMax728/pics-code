@@ -10,9 +10,15 @@ const FavouriteCampaignItem = ({ campaign }) => {
   // const profile_route = campaign.isOwner
   //   ? routes.NEWS_FEED_ROUTE
   //   : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
-  const profile_image = campaign.profileImage? campaign.profileImage : images.image;
+  const profile_image = campaign.profileImage
+    ? campaign.profileImage
+    : images.image;
   return (
-    <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.id}`}>
+    <Link
+      to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaign.userType}${"/"}${
+        campaign.id
+      }`}
+    >
       <div className="campaign_wrapper">
         <div className="col-xs-3 col-md-2">
           <img
@@ -25,7 +31,12 @@ const FavouriteCampaignItem = ({ campaign }) => {
           <div className="normal_title">{campaign.title}</div>
           <div className="secondary_title">{campaign.userName}</div>
           <div className="grey_title">
-            {campaign.startDate && DateFormat(campaign.startDate, Translations.date_format.date, true)}
+            {campaign.startDate &&
+              DateFormat(
+                campaign.startDate,
+                Translations.date_format.date,
+                true
+              )}
           </div>
         </div>
       </div>

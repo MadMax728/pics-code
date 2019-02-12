@@ -9,7 +9,11 @@ import { DateFormat } from "../Factory";
 const InformationCard = ({ item, type }) => {
   const selectedUserType = "creator";
   return (
-    <Link to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${item.id}`}>
+    <Link
+      to={`${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${item.userType}${"/"}${
+        item.id
+      }`}
+    >
       <div className="feed_description padding-10">
         {type && type === "campaign" && (
           <div className="normal_title">{item.title}</div>
