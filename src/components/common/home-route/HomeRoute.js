@@ -343,19 +343,42 @@ class HomeRoute extends Component {
   };
 
   handleSettingCampaign = () => {
-    return <SettingCampaignPage handleModalShow={this.props.handleModalShow} handleModalInfoShow={this.props.handleModalInfoShow} />;
+    return (
+      <SettingCampaignPage
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   handleAds = () => {
-    return <AdsPage isBackOffice={false} handleModalShow={this.props.handleModalShow} handleModalInfoShow={this.props.handleModalInfoShow} />;
+    return (
+      <AdsPage
+        isBackOffice={false}
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
   };
 
   handleNewsFeed = match => {
-    return <NewsFeedPage match={match.match} handleModalInfoShow={this.props.handleModalInfoShow} handleModalShow={this.props.handleModalShow} />;
+    return (
+      <NewsFeedPage
+        match={match.match}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
   };
 
   handleSaved = match => {
-    return <SavedPage match={match.match} handleModalInfoShow={this.props.handleModalInfoShow} handleModalShow={this.props.handleModalShow} />;
+    return (
+      <SavedPage
+        match={match.match}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        handleModalShow={this.props.handleModalShow}
+      />
+    );
   };
 
   handleAbout = match => {

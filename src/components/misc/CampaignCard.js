@@ -10,7 +10,10 @@ import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
-import { modalType, BASE_CAMPAIGN_INFORMATION_ROUTE } from "../../lib/constants";
+import {
+  modalType,
+  BASE_CAMPAIGN_INFORMATION_ROUTE
+} from "../../lib/constants";
 import "emoji-mart/css/emoji-mart.css";
 import { Auth } from "../../auth";
 class CampaignCard extends Component {
@@ -218,9 +221,9 @@ class CampaignCard extends Component {
       ];
       if (item.createdBy === userInfo.id) {
         const data = {
-            name: Translations.tool_tips.edit_post,
-            handleEvent: this.handleEditPost
-        }
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
         reportTips.unshift(data);
       }
     }
@@ -229,8 +232,8 @@ class CampaignCard extends Component {
 
   handleEditPost = e => {
     const { item } = this.state;
-    this.props.handleModalShow(modalType.editCampaign , item);
-  }
+    this.props.handleModalShow(modalType.editCampaign, item);
+  };
 
   handleReportPost = e => {
     const { item } = this.state;
@@ -310,8 +313,10 @@ class CampaignCard extends Component {
   handeleShare = () => {
     const { item } = this.state;
     const data = {
-      url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${item.id}`
-    }
+      url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${
+        item.userType
+      }${"/"}${item.id}`
+    };
     this.props.handleModalInfoShow(modalType.share, data);
   };
 

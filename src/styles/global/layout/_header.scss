@@ -1,14 +1,14 @@
 header {
   position: relative;
-  transition: all ease-in 1s;
-  transform: translateZ(0);
-  transition: all .5s;
+  // transition: all ease-in 1s;
+  // transform: translateZ(0);
+  transition: all .2s;
   z-index: 1000 !important;
   &.fixed {
     position: fixed;
-    animation: slide-down;
-    animation-direction: normal;
-    animation-duration: 0.7s;
+    // animation: slide-down;
+    // animation-direction: normal;
+    // animation-duration: 0.7s;
     top: 0px;
   }
   &.notfixed{

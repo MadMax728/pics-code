@@ -16,6 +16,11 @@
     "time": "LT"
   },
 
+  "campaign_post_date_format": {
+    "date": "MMMM Do YYYY",
+    "time": "LT"
+  },
+
   "offen": "In der Picstagraph-App offenen",
 
   "subscribe": "Subscribe",
@@ -32,9 +37,6 @@
 
   "view_more_comments": "View more comments",
   "view_less_comments": "View less comments",
-
-  "apply_campaign": "Apply for this campaign",
-
   "favourite_campaigns": "Favourite Campaigns",
 
   "report_review" : {
@@ -225,6 +227,17 @@
     "your": "Your",
     "review": "is pending review whitin the next 48 hours."
   },
+  
+  "campaign_details": {
+    "start": "Start",
+    "end": "End",
+    "procedure": "Procedure",
+    "target_group": "Target Group",
+    "type": "Type",
+    "applications": "Applications",
+    "apply_campaign": "Apply for this campaign",
+    "send_message": "Send Message"
+  },
 
   "messages_modal": {
     "unknown": "Unknown",
@@ -330,11 +343,11 @@
       "type": "select"
     }
   },
-  
+
   "select": "Select",
   "showing": "Showing",
-  "to": "to", 
-  "of": "of", 
+  "to": "to",
+  "of": "of",
   "results": "Results",
   "table_empty": "Table is Empty",
 

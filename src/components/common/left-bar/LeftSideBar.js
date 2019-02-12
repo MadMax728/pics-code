@@ -105,13 +105,13 @@ class LeftSideBar extends Component {
         <Route
           path={routes.CAMPAIGN_INFORMATION_ROUTE}
           exact
-          component={SideBarCampaignMenu}
+          component={this.handleSideBarCampaignMenu}
         />
 
         <Route
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact
-          component={SideBarCampaignMenu}
+          component={this.handleSideBarCampaignMenu}
         />
 
         <Route
@@ -304,6 +304,10 @@ class LeftSideBar extends Component {
       </div>
     );
   }
+
+  handleSideBarCampaignMenu = match => {
+    return <SideBarCampaignMenu match={match.match} />;
+  };
 
   handleDashboardFilter = () => {
     return <DashboardFilter handleApplyClick={this.props.getFilter} />;
