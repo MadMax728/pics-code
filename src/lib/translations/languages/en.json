@@ -32,10 +32,6 @@
 
   "view_more_comments": "View more comments",
   "view_less_comments": "View less comments",
-
-  "apply_campaign": "Apply for this campaign",
-  "send_message": "Send Message",
-
   "favourite_campaigns": "Favourite Campaigns",
 
   "about": {
@@ -207,6 +203,17 @@
     "total_budget_spent": "Total budget spent",
     "public_procedure_help_text": "If you choose public, every user will be able to see the content from your participants.",
     "anonymous_proceture_help_text": "If you choose anonymous, only you will see the content from your participants."
+  },
+
+  "campaign_details": {
+    "start": "Start",
+    "end": "End",
+    "procedure": "Procedure",
+    "target_group": "Target Group",
+    "type": "Type",
+    "applications": "Applications",
+    "apply_campaign": "Apply for this campaign",
+    "send_message": "Send Message"
   },
 
   "messages_modal": {
