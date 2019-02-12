@@ -263,8 +263,8 @@
 .upload-pic-modal.create-campaign-modal{
   .modal-dialog{
     width:915px;
-    @media only screen and (max-width: 1280px){
-      width:90%;
+    @media only screen and (max-width: 991px){
+      width:85%;
       margin: 0 auto;
       padding: 30px 0;
     }
@@ -282,6 +282,7 @@
         .box{
           padding: 12rem 1.25rem;
           border:1px solid #979797;
+          width: 518px;
           height: 300px;
           .inputfile + label{
             max-width: 100%;
@@ -296,7 +297,7 @@
         }
         .upload-form{
           padding: 20px 190px;
-          @media only screen and (max-width: 1280px){
+          @media only screen and (max-width: 991px){
             padding: 20px 40px;
           }
           height: 100%;
@@ -322,7 +323,7 @@
                 width:520px;
                 height: 300px;
                 position: relative;
-                @media only screen and (max-width: 1280px){
+                @media only screen and (max-width: 991px){
                   margin: 0 auto;
                 }
                   img{

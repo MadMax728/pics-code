@@ -112,7 +112,7 @@ class Header extends Component {
       messageCountView = "99+";
     }
     return (
-      <header className={this.state.offsetHeight > 250 ? "fixed" : ""}>
+      <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">
