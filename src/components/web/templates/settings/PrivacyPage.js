@@ -125,10 +125,35 @@ class PrivacyPage extends Component {
                 </div>
                 <div className="col-sm-6 text-right">
                   <div>
-                    <Label className="switch" htmlFor={"SocialShare"} />
+                    <div className="switch" htmlFor={"SocialShare"}>
+                      <Switch
+                        onChange={this.hanldeIsSocialShare}
+                        checked={this.state.isSocialShare}
+                        onColor={switchOnColor}
+                        onHandleColor={switchOnHandleColor}
+                        handleDiameter={25}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow={switchBoxShadow}
+                        activeBoxShadow={switchActiveBoxShadow}
+                        height={25}
+                        width={48}
+                        className="react-switch"
+                        id="material-switch"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.Personalized_advertising}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <div className="switch" htmlFor={"Personalized"}>
                     <Switch
-                      onChange={this.hanldeIsSocialShare}
-                      checked={this.state.isSocialShare}
+                      onChange={this.hanldeIsPersonalized}
+                      checked={this.state.isPersonalized}
                       onColor={switchOnColor}
                       onHandleColor={switchOnHandleColor}
                       handleDiameter={25}
@@ -142,29 +167,6 @@ class PrivacyPage extends Component {
                       id="material-switch"
                     />
                   </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-6">
-                  {Translations.privacy.Personalized_advertising}
-                </div>
-                <div className="col-sm-6 text-right">
-                  <Label className="switch" htmlFor={"Personalized"} />
-                  <Switch
-                    onChange={this.hanldeIsPersonalized}
-                    checked={this.state.isPersonalized}
-                    onColor={switchOnColor}
-                    onHandleColor={switchOnHandleColor}
-                    handleDiameter={25}
-                    uncheckedIcon={false}
-                    checkedIcon={false}
-                    boxShadow={switchBoxShadow}
-                    activeBoxShadow={switchActiveBoxShadow}
-                    height={25}
-                    width={48}
-                    className="react-switch"
-                    id="material-switch"
-                  />
                 </div>
               </div>
             </div>
