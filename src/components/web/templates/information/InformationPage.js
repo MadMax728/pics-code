@@ -26,15 +26,15 @@ class InformationPage extends Component {
       comments: null,
       ReportTips: [
         {
-          name: "Report Post",
+          name: Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: "Save Post",
+          name: Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         },
         {
-          name: "locks / unlocks content",
+          name: Translations.tool_tips.locks_unlocks,
           handleEvent: this.handleContent
         }
       ]

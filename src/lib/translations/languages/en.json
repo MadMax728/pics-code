@@ -310,7 +310,8 @@
     "unblock": "Unblock",
     "report_user": "Report User",
     "unreport_user": "Unreport User",
-    "remove_participant": "Remove Participant"
+    "remove_participant": "Remove Participant",
+    "locks_unlocks": "locks / unlocks content"
   },
 
   "back_office_menu": {
