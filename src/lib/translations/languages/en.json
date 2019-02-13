@@ -39,7 +39,7 @@
   "view_less_comments": "View less comments",
   "favourite_campaigns": "Favourite Campaigns",
 
-  "report_review" : {
+  "report_review": {
     "date": "Date",
     "reports": "Reports",
     "status": "Status",
@@ -231,7 +231,7 @@
     "your": "Your",
     "review": "is pending review whitin the next 48 hours."
   },
-  
+
   "campaign_details": {
     "start": "Start",
     "end": "End",
@@ -242,7 +242,7 @@
     "apply_campaign": "Apply for this campaign",
     "send_message": "Send Message",
     "campaign_success_apply": "You have successfully applied for this campaign",
-    "subscribers": "Subscribers",
+    "followers": "Followers",
     "offer": "Offer",
     "inquiry": "Inquiry"
   },
@@ -253,8 +253,8 @@
     "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
-  
-  "sure" : "Are you want to sure?",
+
+  "sure": "Are you want to sure?",
 
   "modal_header": {
     "cancle": "Cancel",
@@ -910,12 +910,12 @@
   },
 
   "download_app": "Download App",
-  
+
   "user_pics": "User Pics",
 
   "not_found": {
     "not_available": "This page isn't available",
-    "remove_link": "The link you followed may be broken, or the page may have been removed" 
+    "remove_link": "The link you followed may be broken, or the page may have been removed"
   },
 
   "cms": {
