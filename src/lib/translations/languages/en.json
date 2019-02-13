@@ -137,7 +137,8 @@
     "location": "Location",
     "radius": "Radius",
     "category": "Category",
-    "target_group": "Target Group"
+    "target_group": "Target Group",
+    "views_clicks": "Views / Clicks"
   },
 
   "create_campaigns": {
@@ -220,7 +221,10 @@
     "budget_runtime": "Budget & Runtime",
     "total_budget_spent": "Total budget spent",
     "public_procedure_help_text": "If you choose public, every user will be able to see the content from your participants.",
-    "anonymous_proceture_help_text": "If you choose anonymous, only you will see the content from your participants."
+    "anonymous_proceture_help_text": "If you choose anonymous, only you will see the content from your participants.",
+    "application_authorised": "Application authorised",
+    "application_removed": "Application you have removed",
+    "application_removed_by_applicant": "Application removed from applicant"
   },
 
   "payment": {
@@ -236,7 +240,8 @@
     "type": "Type",
     "applications": "Applications",
     "apply_campaign": "Apply for this campaign",
-    "send_message": "Send Message"
+    "send_message": "Send Message",
+    "campaign_success_apply": "You have successfully applied for this campaign"
   },
 
   "messages_modal": {

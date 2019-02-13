@@ -2,9 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Translations } from "../../lib/translations";
-import { Button } from "../ui-kit";
 
-const StatusCard = ({ item, route , isFor }) => {
+const StatusCard = ({ item, route, isFor }) => {
   let isStatus = "green-circle";
   if (item.isActive) {
     isStatus = "green-circle";
@@ -12,15 +11,15 @@ const StatusCard = ({ item, route , isFor }) => {
     isStatus = "red-circle";
   }
   return (
-    <div className="status">
-      <div className="status-wrapper">
-        <div className="title">{Translations.report_review.status}</div>
+    <div className="">
+      {/* <div className="status-wrapper">
+        <div className="title">Status</div>
         <div className="subtitle">
           <span className={isStatus} />
         </div>
-      </div>
-      <div className="status-wrapper">
-        <div className="title">{Translations.report_review.views}</div>
+      </div> */}
+      {/* <div className="status-wrapper">
+        <div className="title">Views</div>
         <div className="subtitle">{item.views}</div>
       </div>
       <div className="status-wrapper">
@@ -30,10 +29,12 @@ const StatusCard = ({ item, route , isFor }) => {
       <div className="status-wrapper">
         <div className="title">{Translations.report_review.applications}</div>
         <div className="subtitle">{item.applicationCount}</div>
-      </div>
-      <div className="status-wrapper">
+      </div> */}
+      <div className="">
         <Link to={`${route}${item.id}`}>
-          <Button className="blue_button" text={Translations.report_review.statistics} />
+          <button className="blue_button">
+            {Translations.create_ads.statistics}
+          </button>
         </Link>
       </div>
     </div>
