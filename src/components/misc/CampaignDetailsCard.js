@@ -19,7 +19,8 @@ const CampaignDetailsCard = ({
   handleFavorite,
   handleOnKeyDown,
   renderReportTips,
-  handleComment
+  handleComment,
+  handeleShare
 }) => {
   const favorite_icon = campaignDetails.isSelfLike
     ? images.blue_heart
@@ -204,20 +205,29 @@ const CampaignDetailsCard = ({
               />
             </div>
             <div className="show_more_options">
-              <ThreeDots
-                id="report"
+              <div
+                className="share-wrapr"
+                onClick={handeleShare}
+                onKeyDown={handeleShare}
                 role="button"
-                dataTip="tooltip"
-                dataClass="tooltip-wrapr"
-                getContent={() => renderReportTips()}
-                effect="solid"
-                delayHide={500}
-                delayShow={500}
-                delayUpdate={500}
-                place={"left"}
-                border
-                type={"light"}
-              />
+                tabIndex="0"
+              >
+                <img src={images.share} alt="share" />
+              </div>
+                <ThreeDots
+                  id="report"
+                  role="button"
+                  dataTip="tooltip"
+                  dataClass="tooltip-wrapr"
+                  getContent={() => renderReportTips()}
+                  effect="solid"
+                  delayHide={500}
+                  delayShow={500}
+                  delayUpdate={500}
+                  place={"left"}
+                  border
+                  type={"light"}
+                />
             </div>
           </div>
         </div>
@@ -252,7 +262,8 @@ CampaignDetailsCard.propTypes = {
   handleFavorite: PropTypes.func,
   handleOnKeyDown: PropTypes.func,
   renderReportTips: PropTypes.func,
-  handleComment: PropTypes.func
+  handleComment: PropTypes.func,
+  handeleShare: PropTypes.func
 };
 
 export default CampaignDetailsCard;

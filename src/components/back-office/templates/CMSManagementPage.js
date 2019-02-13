@@ -234,8 +234,6 @@ class CMSManagementPage extends Component {
   handlePreview = (data) => {
     this.props.handleModalInfoDetailsShow(modalType.cmsPreview,data);
   }
-
-
 }
 
 const mapStateToProps = state => ({

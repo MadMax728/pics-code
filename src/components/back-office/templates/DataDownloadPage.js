@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import { Translations } from "../../../lib/translations";
 import * as routes from "../../../lib/constants/routes";
+import { Input, Button } from "../../ui-kit";
 
 class DataDownloadPage extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class DataDownloadPage extends Component {
           </div>
           <div className="user_download_wrapr">
             <div className="title_with_search_dropdown_button">
-              <input
+              <Input
                 type="search"
                 name="username"
                 id="username"
@@ -34,9 +35,9 @@ class DataDownloadPage extends Component {
                 className="flex2"
                 onChange={this.handleChangeField}
               />
-              <button className="wid30per" onClick={this.handleSubmit}>
-                {Translations.admin.Download}
-              </button>
+              <Button className="wid30per" onClick={this.handleSubmit}
+                text={Translations.admin.Download}
+              />
             </div>
           </div>
         </div>
@@ -59,7 +60,7 @@ class DataDownloadPage extends Component {
   
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 

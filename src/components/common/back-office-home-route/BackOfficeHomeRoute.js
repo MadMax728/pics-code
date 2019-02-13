@@ -17,7 +17,8 @@ import {
   PicsPage,
   ReportedAdsPage,
   CommentsPage,
-  UsersPage
+  UsersPage,
+  DataDownloadPage
 } from "../../back-office";
 
 import * as settings from "../../web/templates";
@@ -159,7 +160,7 @@ class BackOfficeHomeRoute extends Component {
   };
 
   handleDataDownloadPage = match => {
-    return <settings.DataDownloadPage history={match.history} />;
+    return <DataDownloadPage history={match.history} />;
   };
 
   handlePicsPage = () => {

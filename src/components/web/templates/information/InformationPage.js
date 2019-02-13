@@ -26,20 +26,28 @@ class InformationPage extends Component {
       comments: null,
       ReportTips: [
         {
-          name: "Report Post",
+          name: Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: "Save Post",
+          name: Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         },
         {
-          name: "locks / unlocks content",
+          name: Translations.tool_tips.locks_unlocks,
           handleEvent: this.handleContent
         }
       ]
     };
   }
+
+  handeleShare = () => {
+    const { campaignId } = this.state;
+    const data = {
+      url: `${window.location.origin}${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaignId}`
+    }
+    this.props.handleModalInfoShow(modalType.share, data);
+  };
 
   render() {
     const { campaignDetails, isLoading } = this.props;
@@ -57,6 +65,7 @@ class InformationPage extends Component {
             handleOnKeyDown={this.handleOnKeyDown}
             renderReportTips={this.renderReportTips}
             handleComment={this.handleComment}
+            handeleShare={this.handeleShare}
           />
         )}
         {isLoading && <CampaignDetailsLoading count={1} />}
@@ -236,7 +245,8 @@ InformationPage.propTypes = {
   reportedContentData: PropTypes.any,
   savedData: PropTypes.any,
   setSavedPost: PropTypes.func,
-  addReport: PropTypes.func
+  addReport: PropTypes.func,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 
