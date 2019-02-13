@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LeftSidebarFilter } from "../../ui-kit";
+import { LeftSidebarFilter, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { setCookie } from "../../../lib/utils/helpers";
@@ -142,29 +142,21 @@ class CampaignCompanyFilter extends Component {
         items: targetGroupOptions
       }
     ];
+
+    const { filterApply } = this.state;
+
     return (
       <div className="left-filters">
         <LeftSidebarFilter
           filters={Filters}
           onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
+          filterApply={filterApply}
           handleSelect={this.handleSelect}
           handleLanguageSwitch={this.handleLanguageSwitch}
+          handleResetFilterClick={this.handleResetFilterClick}
+          handleApplyClick={this.handleApplyClick}
+          isNotFilter
         />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-        </div>
       </div>
     );
   }

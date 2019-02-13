@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
-import { ThreeDots } from "../../ui-kit";
+import { ThreeDots, Button } from "../../ui-kit";
 import StatusCard from "../StatusCard";
 import BudgetCard from "../BudgetCard";
 import ReportCard from "../ReportCard";
@@ -25,33 +25,29 @@ const CampaignCardFooter = ({
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
         <span className="count">{campaign.commentCount}</span>
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
           id={campaign.createdBy}
-          onKeyDown={handleCommentsSections}
           disabled={isLoading}
-        >
-          <img
+          text={<img
             src={images.comment}
             alt="company-comments"
             role="presentation"
-          />
-        </button>
+          />}
+        />
       </div>
       <div className="likes" role="article">
         <span className="count">{campaign.likeCount}</span>
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
           id={campaign.id}
-          onKeyDown={handleFavorite}
           disabled={isLoading}
-        >
-          <img src={favorite_icon} alt="like" role="presentation" />
-        </button>
+          text={<img src={favorite_icon} alt="like" role="presentation" />}
+        />
       </div>
       <div className="show_more_options">
         <div

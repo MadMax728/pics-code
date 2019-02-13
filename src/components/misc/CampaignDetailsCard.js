@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import * as images from "./../../lib/constants/images";
 import Comments from "../web/templates/information/Comments";
 import { Translations } from "../../lib/translations";
-import { DateFormat } from "../Factory";
 import FeedHeader from "./headers/FeedHeader";
 import { InfoWrapperItem, DescriptionItem } from "./items";
 import { ImageItem, VideoItem, ThreeDots, Button } from "../ui-kit";
@@ -55,20 +54,20 @@ const CampaignDetailsCard = ({
           ""
         ) : campaignDetails.isAlreadyParticipant &&
           campaignDetails.userType !== selectedUserType ? (
-          <button className="blue_button" disabled>
-            {Translations.campaign_details.campaign_success_apply}
-          </button>
+          <Button 
+            className="blue_button" 
+            disabled 
+            text={Translations.campaign_details.campaign_success_apply}
+          />
         ) : (
-          <button
+          <Button
             className="filled_button"
             onClick={handleApplyParticipant}
             id={campaignDetails.id}
-          >
-            {" "}
-            {campaignDetails && campaignDetails.userType === selectedUserType
+            text={campaignDetails && campaignDetails.userType === selectedUserType
               ? Translations.campaign_details.send_message
               : Translations.campaign_details.apply_campaign}
-          </button>
+          />
         )}
 
         <div className="feed_wrapper">

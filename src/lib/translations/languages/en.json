@@ -227,6 +227,10 @@
     "application_removed_by_applicant": "Application removed from applicant"
   },
 
+  "you_have": "You have",
+
+  "characters_left": "characters left",
+
   "payment": {
     "your": "Your",
     "review": "is pending review whitin the next 48 hours."
@@ -297,6 +301,12 @@
     "cancellation_policy": "Cancellation Policy",
     "terms_of_use": "Terms of use"
   },
+  
+  "reply": "Reply",
+  
+  "sponsored_in": "Sponsored in",
+  
+  "in": "in",
 
   "tool_tips": {
     "report": "Report Post",

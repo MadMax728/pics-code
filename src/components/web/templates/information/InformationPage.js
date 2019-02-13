@@ -53,7 +53,7 @@ class InformationPage extends Component {
     const { campaignDetails, isLoading } = this.props;
     const { isComments, comments } = this.state;
     return (
-      <div className="padding-l-10 middle-section campaign-profile-info width-80">
+      <div className="middle-section padding-rl-10">
         {campaignDetails && !isLoading && (
           <CampaignDetailsCard
             campaignDetails={campaignDetails}
@@ -91,6 +91,23 @@ class InformationPage extends Component {
       this.props.history.push("/campaign/company?search=" + searchKeyword);
     }
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    const campaignId = this.props.match.params.id;
+
+    if(campaignId !== prevState.campaignId) {
+      console.log("calling");
+      console.log(campaignId);
+      this.setState({
+        isComments: false,
+        campaignId: campaignId,
+        comments: null
+      }, ()=> {
+        this.getCampaignDetailsData();
+        this.handleCommentsSections();
+      })
+    }
+  }
 
   getCampaignDetailsData = () => {
     const data = {
@@ -150,6 +167,8 @@ class InformationPage extends Component {
   };
 
   handleCommentsSections = () => {
+    console.log("ahi");
+    
     const CampaignId = { typeId: this.props.match.params.id };
     this.props.getComments(CampaignId).then(() => {
       const totalComment = this.props.comments;

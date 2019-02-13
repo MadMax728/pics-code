@@ -9,6 +9,7 @@ import {
   getDashboard,
   getUser
 } from "../../../actions";
+import { Button } from "../../ui-kit";
 
 class SubscriberTooltip extends Component {
   constructor(props) {
@@ -49,29 +50,21 @@ class SubscriberTooltip extends Component {
                       <div className="subscribe-btn">
                         {user.isSubscribe ? (
                           <div className="community-subscribe">
-                            <button
+                            <Button
                               className="filled_button"
                               id={user.id}
                               onClick={this.handleSubscribed}
-                            >
-                              {
-                                Translations.profile_community_right_sidebar
-                                  .Subscribed
-                              }
-                            </button>
+                              text={Translations.profile_community_right_sidebar.Subscribed}
+                            />
                           </div>
                         ) : (
                             <div className="community-subscribe">
-                              <button
+                              <Button
                                 className="blue_button"
                                 id={user.id}
                                 onClick={this.handleSubscribed}
-                              >
-                                {
-                                  Translations.profile_community_right_sidebar
-                                    .Subscribe
-                                }
-                              </button>
+                                text={Translations.profile_community_right_sidebar.Subscribe}
+                              />
                             </div>
                           )}
                       </div>

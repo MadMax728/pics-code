@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
-import { Loader, ThreeDots } from "../../ui-kit";
+import { Loader, ThreeDots, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 
 const UserCardBody = ({
@@ -68,14 +68,13 @@ const UserCardBody = ({
             </div>
           )}
           {!isBackOffice && (
-            <button
+            <Button
               className={actionButton.className}
               id={actionButton.userId}
               onClick={actionButton.handleActionClick}
               disabled={actionButton.isLoading}
-            >
-              {actionButton.btnText}
-            </button>
+              text={actionButton.btnText}
+            />
           )}
         </div>
         {user && isReport && <ReportCard item={user} />}
