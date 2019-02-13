@@ -52,6 +52,7 @@ class StepOne extends Component {
                 htmlFor="Insert_link"
                 value={Translations.create_ads.add_title_image}
               />
+              <p className="form-help-text">{Translations.create_ads.ads_title_help_text}</p>
               {/* {form.fileType &&
                 form.typeContent === enumerations.typeContent.image && ( */}
               <CampaignAdCrop
@@ -80,6 +81,7 @@ class StepOne extends Component {
                 htmlFor="title"
                 value={Translations.create_ads.add_title}
               />
+              <p className="form-help-text">{Translations.create_ads.title_help_text}</p>
               <Input
                 type="text"
                 value={form.title ? form.title : ""}
@@ -95,6 +97,7 @@ class StepOne extends Component {
                 htmlFor="Location"
                 value={Translations.create_ads.add_location}
               />
+              <p className="form-help-text">{Translations.create_ads.location_help_text}</p>
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -112,6 +115,7 @@ class StepOne extends Component {
                 htmlFor="Radius"
                 value={Translations.create_ads.add_radius}
               />
+              <p className="form-help-text">{Translations.create_ads.radius_help_text}</p>
               <SelectRadius
                 value={form.radius ? form.radius : ""}
                 className=""
@@ -126,6 +130,7 @@ class StepOne extends Component {
                 htmlFor="Category"
                 value={Translations.create_ads.add_category}
               />
+              <p className="form-help-text">{Translations.create_ads.category_help_text}</p>
               <SelectCategory
                 value={form.category ? form.category : ""}
                 className=""
@@ -141,6 +146,7 @@ class StepOne extends Component {
                 htmlFor="target"
                 value={Translations.create_ads.add_target_group}
               />
+              <p className="form-help-text">{Translations.create_ads.target_group_help_text}</p>
               <ul className="options">
                 <li
                   className="full-width-input-wrapper wid49"
@@ -197,6 +203,7 @@ class StepOne extends Component {
                 htmlFor="Description"
                 value={Translations.create_ads.add_description}
               />
+              <p className="form-help-text">{Translations.create_ads.description_help_text}</p>
               <HashTagUsername
                 className="form-control"
                 type="text"
@@ -216,6 +223,7 @@ class StepOne extends Component {
                 htmlFor="call"
                 value={Translations.create_ads.action_button}
               />
+              <p className="form-help-text">{Translations.create_ads.action_call_help_text}</p>
               <SelectCallToActions
                 value={form.callToAction ? form.callToAction : ""}
                 className=""
@@ -232,6 +240,7 @@ class StepOne extends Component {
                 htmlFor="Insert_link"
                 value={Translations.create_ads.insert_link}
               />
+              <p className="form-help-text">{Translations.create_ads.link_help_text}</p>
               <Input
                 type="text"
                 value={form.insertLink ? form.insertLink : ""}

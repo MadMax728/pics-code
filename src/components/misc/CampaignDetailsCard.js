@@ -86,52 +86,96 @@ const CampaignDetailsCard = ({
           />
           <div className="feed_content col-xs-12">
             <div className="feed_description col-xs-12">
-              <div className="col-sm-6 no-padding">
-                <InfoWrapperItem
-                  title={Translations.campaign_details.start}
-                  value={moment
-                    .unix(campaignDetails.startDate)
-                    .format(Translations.campaign_post_date_format.date)}
-                />
+              {campaignDetails &&
+                campaignDetails.userType !== selectedUserType && (
+                  <div className="block-divide">
+                    <div className="col-sm-6 no-padding">
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.procedure}
+                        value={campaignDetails.procedure}
+                      />
 
-                {campaignDetails &&
-                  campaignDetails.userType !== selectedUserType && (
-                    <InfoWrapperItem
-                      title={Translations.campaign_details.procedure}
-                      value={campaignDetails.procedure}
-                    />
-                  )}
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.start}
+                        value={moment
+                          .unix(campaignDetails.startDate)
+                          .format(Translations.campaign_post_date_format.date)}
+                      />
+                    </div>
+                    <div className="col-sm-6 no-padding">
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.type}
+                        value={campaignDetails.typeContent}
+                      />
 
-                {campaignDetails &&
-                  campaignDetails.userType !== selectedUserType && (
-                    <InfoWrapperItem
-                      title={Translations.campaign_details.applications}
-                      value={campaignDetails.applicationCount}
-                    />
-                  )}
-              </div>
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.end}
+                        value={moment
+                          .unix(campaignDetails.endDate)
+                          .format(Translations.campaign_post_date_format.date)}
+                      />
+                    </div>
+                  </div>
+                )}
 
-              <div className="col-sm-6 no-padding">
-                <InfoWrapperItem
-                  title={Translations.campaign_details.end}
-                  value={moment
-                    .unix(campaignDetails.endDate)
-                    .format(Translations.campaign_post_date_format.date)}
-                />
-                {campaignDetails &&
-                  campaignDetails.userType !== selectedUserType && (
-                    <InfoWrapperItem
-                      title={Translations.campaign_details.type}
-                      value={campaignDetails.typeContent}
-                    />
-                  )}
-
-                {campaignDetails && campaignDetails.target_group && (
+              <div className="creator-block">
+                <div className="col-sm-6 no-padding">
                   <InfoWrapperItem
                     title={Translations.campaign_details.target_group}
-                    value={campaignDetails.target_group}
+                    value={
+                      campaignDetails && campaignDetails.target_group
+                        ? campaignDetails.target_group
+                        : Translations.target_group.female_and_male
+                    }
                   />
-                )}
+
+                  {campaignDetails && campaignDetails.offers && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.offer}
+                      value={
+                        campaignDetails.offers &&
+                        campaignDetails.offersList &&
+                        campaignDetails.offersList[0].offerName &&
+                        campaignDetails.offersList[0].offerName
+                      }
+                    />
+                  )}
+                </div>
+
+                <div className="col-sm-6 no-padding">
+                  {campaignDetails &&
+                  campaignDetails.userType !== selectedUserType ? (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.applications}
+                      value={
+                        campaignDetails && campaignDetails.applicationCount
+                          ? campaignDetails.applicationCount
+                          : "0"
+                      }
+                    />
+                  ) : (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.followers}
+                      value={
+                        campaignDetails && campaignDetails.subscribers
+                          ? campaignDetails.subscribers
+                          : "0"
+                      }
+                    />
+                  )}
+
+                  {campaignDetails && campaignDetails.inquiry && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.inquiry}
+                      value={
+                        campaignDetails.inquiry &&
+                        campaignDetails.inquiryList &&
+                        campaignDetails.inquiryList[0].inquiryName &&
+                        campaignDetails.inquiryList[0].inquiryName
+                      }
+                    />
+                  )}
+                </div>
               </div>
             </div>
           </div>
@@ -169,20 +213,20 @@ const CampaignDetailsCard = ({
               >
                 <img src={images.share} alt="share" />
               </div>
-                <ThreeDots
-                  id="report"
-                  role="button"
-                  dataTip="tooltip"
-                  dataClass="tooltip-wrapr"
-                  getContent={() => renderReportTips()}
-                  effect="solid"
-                  delayHide={500}
-                  delayShow={500}
-                  delayUpdate={500}
-                  place={"left"}
-                  border
-                  type={"light"}
-                />
+              <ThreeDots
+                id="report"
+                role="button"
+                dataTip="tooltip"
+                dataClass="tooltip-wrapr"
+                getContent={() => renderReportTips()}
+                effect="solid"
+                delayHide={500}
+                delayShow={500}
+                delayUpdate={500}
+                place={"left"}
+                border
+                type={"light"}
+              />
             </div>
           </div>
         </div>

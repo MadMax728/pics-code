@@ -60,6 +60,9 @@ class StepOne extends Component {
                 htmlFor="title"
                 value={Translations.create_campaigns.add_title_image}
               />
+              <p className="form-help-text">
+                {Translations.create_campaigns.campaign_title_help_text}
+              </p>
               {/* {form.typeContent === enumerations.typeContent.image && ( */}
               <CampaignAdCrop
                 image={form.image}
@@ -113,6 +116,9 @@ class StepOne extends Component {
                 htmlFor="title"
                 value={Translations.create_campaigns.add_title}
               />
+              <p className="form-help-text">
+                {Translations.create_campaigns.title_help_text}
+              </p>
               <Input
                 type="text"
                 className="form-control"
@@ -130,6 +136,9 @@ class StepOne extends Component {
                 htmlFor="Location"
                 value={Translations.create_campaigns.add_location}
               />
+              <p className="form-help-text">
+                {Translations.create_campaigns.location_help_text}
+              </p>
               <PlaceAutoCompleteLocation
                 className=""
                 handleLocation={handleLocation}
@@ -151,6 +160,9 @@ class StepOne extends Component {
                 htmlFor="Category"
                 value={Translations.create_campaigns.add_category}
               />
+              <p className="form-help-text">
+                {Translations.create_campaigns.category_help_text}
+              </p>
               <SelectCategory
                 value={form.category || ""}
                 className=""
@@ -167,6 +179,15 @@ class StepOne extends Component {
                     htmlFor="Procedure"
                     value={Translations.create_campaigns.procedure}
                   />
+                  <p className="form-help-text">
+                    {Translations.create_campaigns.public_procedure_help_text}
+                  </p>
+                  <p className="form-help-text">
+                    {
+                      Translations.create_campaigns
+                        .anonymous_proceture_help_text
+                    }
+                  </p>
                   <ul className="options">
                     <li className="wid49">
                       <RadioButton
@@ -212,6 +233,9 @@ class StepOne extends Component {
                   htmlFor="Type"
                   value={Translations.create_campaigns.type}
                 />
+                <p className="form-help-text">
+                  {Translations.create_campaigns.type_help_text}
+                </p>
                 <ul className="options">
                   <li className="wid49">
                     <RadioButton
@@ -255,6 +279,9 @@ class StepOne extends Component {
                 htmlFor="Target_group"
                 value={Translations.create_campaigns.target_group}
               />
+              <p className="form-help-text">
+                {Translations.create_campaigns.target_group_help_text}
+              </p>
               <ul className="options target-options">
                 <li className="wid49">
                   <RadioButton
@@ -329,6 +356,9 @@ class StepOne extends Component {
                 htmlFor="Offer"
                 value={Translations.create_campaigns.offer}
               />
+              <p className="form-help-text">
+                {Translations.create_campaigns.offer_help_text}
+              </p>
               <SelectOffer
                 value={form.offer}
                 className=""
@@ -340,6 +370,9 @@ class StepOne extends Component {
                 htmlFor="Inquiry"
                 value={Translations.create_campaigns.inquiry}
               />
+              <p className="form-help-text">
+                {Translations.create_campaigns.inquiry_help_text}
+              </p>
               <SelectInquiry
                 value={form.inquiry}
                 className=""
