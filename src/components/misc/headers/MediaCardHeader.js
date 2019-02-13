@@ -4,7 +4,7 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { DateFormat } from "../../Factory";
-import { UserImageItem } from "../../ui-kit";
+import { UserImageItem, Button } from "../../ui-kit";
 
 const MediaCardHeader = ({
   item,
@@ -40,16 +40,14 @@ const MediaCardHeader = ({
         )}
       </div>
       <div className="col-sm-1 col-xs-1 like_wrapper" role="article">
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
           id={item.id}
-          onKeyDown={handleFavorite}
           disabled={isLoading}
-        >
-          <img src={favorite_icon} alt="like" role="presentation" />
-        </button>
+          text={<img src={favorite_icon} alt="like" role="presentation" />}
+        />
       </div>
     </div>
   );

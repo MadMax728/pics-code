@@ -50,9 +50,11 @@ class Comments extends Component {
     const {
       campaign,
       form,
-      isEmoji
+      isEmoji,
+      slicedCommentsData,
+      maxRange
     } = this.state;
-    const { isReport, userImage } = this.props;
+    const { isReport, userImage, totalCommentsCount } = this.props;
     const profileImage = userImage || images.image;
     return (
       <div className="feed-comment" id={campaign.id}>
@@ -62,7 +64,7 @@ class Comments extends Component {
             <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
               <div className="comment-input">
                 <div className="form-group">
-                  <HashTagUsername
+                  {/* <HashTagUsername
                     className="form-control"
                     type="text"
                     placeholder="Write a comment"
@@ -71,7 +73,7 @@ class Comments extends Component {
                     value={form.comment}
                     maxLimit={1000}
                     isText
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
@@ -99,11 +101,11 @@ class Comments extends Component {
         </div>
 
         {!isReport &&
-          this.props.totalCommentsCount !== 0 &&
-          this.state.slicedCommentsData &&
-          this.state.slicedCommentsData.map(this.renderComment)}
+          totalCommentsCount !== 0 &&
+          slicedCommentsData &&
+          slicedCommentsData.map(this.renderComment)}
 
-        {!isReport && this.props.totalCommentsCount > this.state.maxRange && (
+        {!isReport && totalCommentsCount > maxRange && (
           <div
             className="view-more-comments view-more-link"
             id="7"
@@ -117,8 +119,8 @@ class Comments extends Component {
         )}
 
         {!isReport &&
-          this.props.totalCommentsCount > 2 &&
-          this.props.totalCommentsCount < this.state.maxRange && (
+          totalCommentsCount > 2 &&
+          totalCommentsCount < maxRange && (
             <div
               className="view-more-comments view-more-link"
               onClick={this.handleViewLessComment}
@@ -135,9 +137,10 @@ class Comments extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    const { maxRange, minRange } = this.state;
     const commentData = this.state.comments.slice(
-      this.state.minRange,
-      this.state.maxRange
+      minRange,
+      maxRange
     );
     this.setState({ slicedCommentsData: commentData, maxRange: 2 });
   };
@@ -227,14 +230,16 @@ class Comments extends Component {
   };
 
   handleViewComment = e => {
-    const maxRangeValue = parseInt(this.state.maxRange) + parseInt(e.target.id);
-    const commentData = this.state.comments.slice(0, maxRangeValue);
+    const { maxRange, comments } = this.state;
+    const maxRangeValue = parseInt(maxRange) + parseInt(e.target.id);
+    const commentData = comments.slice(0, maxRangeValue);
     this.setState({ slicedCommentsData: commentData, maxRange: maxRangeValue });
   };
 
   handleViewLessComment = () => {
+    const { comments } = this.state;
     const maxRangeValue = "2";
-    const commentData = this.state.comments.slice(0, maxRangeValue);
+    const commentData = comments.slice(0, maxRangeValue);
     this.setState({
       slicedCommentsData: commentData,
       minRange: 0,
@@ -345,7 +350,7 @@ class Comments extends Component {
         <div className="comment-header">
           <UserImageItem item={comment.profileImage} customClass={`img-circle img-responsive`} />
           <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {comment.createdAt} <b>Reply</b>
+            <b>{comment.userName}</b> {comment.createdAt} <b>{Translations.reply}</b>
           </div>
           <div className="col-sm-3 col-md-2 col-xs-2 show_more_options pull-right">
             <ThreeDots

@@ -216,21 +216,8 @@ class DashboardFilter extends Component {
           filterApply={this.state.filterApply}
           handleSelect={this.handleSelect}
           handleLanguageSwitch={this.handleLanguageSwitch}
+          isNotFilter={false}
         />
-        {/* <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-        </div> */}
       </div>
     );
   }

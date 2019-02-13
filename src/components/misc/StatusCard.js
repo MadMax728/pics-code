@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Translations } from "../../lib/translations";
+import { Button } from "../ui-kit";
 
 const StatusCard = ({ item, route, isFor }) => {
   let isStatus = "green-circle";
@@ -32,9 +33,10 @@ const StatusCard = ({ item, route, isFor }) => {
       </div> */}
       <div className="camp-statices-btn">
         <Link to={`${route}${item.id}`}>
-          <button className="blue_button">
-            {Translations.create_ads.statistics}
-          </button>
+          <Button 
+            className="blue_button"
+            text={Translations.create_ads.statistics}
+          />
         </Link>
       </div>
     </div>

@@ -93,28 +93,20 @@ class ParticipantsFilter extends Component {
   }
 
   render() {
+
+    const { filterApply } = this.state;
+
     return (
       <div className="left-filters">
         <LeftSidebarFilter
           filters={Filters}
           onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
+          filterApply={filterApply}
           handleSelect={this.handleSelect}
+          handleResetFilterClick={this.handleResetFilterClick}
+          handleApplyClick={this.handleApplyClick}
+          isNotFilter
         />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-        </div>
       </div>
     );
   }

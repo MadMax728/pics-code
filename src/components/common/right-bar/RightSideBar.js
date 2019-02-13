@@ -35,11 +35,21 @@ class RightSideBar extends Component {
           exact
           component={FavouriteCampaigns}
         />
+        
         <Route
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact
           component={FavouriteCampaigns}
         />
+
+        <Route
+          path={routes.CAMPAIGN_INFORMATION_ROUTE}
+          exact
+          component={FavouriteCampaigns}
+        />
+
+
+
 
         {/* ,,,,,, FavouriteCampaigns ...... */}
 
