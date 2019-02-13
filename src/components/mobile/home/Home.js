@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import * as images from "../../../lib/constants/images";
 import Sidebar from "react-sidebar";
 import MobileMenu from "../MobileMenu";
+import { Translations } from "../../../lib/translations";
 
 class Home extends Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Home extends Component {
               </Sidebar>
             </div>
             <div className="language_link padding-15">
-              <a href="/">Language</a>
+              <a href="/">{Translations.cms.language}</a>
             </div>
             <div className="clearfix" />
             <div className="mobile_page_logo text-center padding-15">
@@ -42,7 +43,7 @@ class Home extends Component {
             </div>
             <div className="clearfix" />
             <div className="download_option text-center">
-              <div className="grey_title padding-15">Download App</div>
+              <div className="grey_title padding-15">{Translations.download_app}</div>
               <img src={images.iphone} alt="iphone" />
               <img src={images.andriod} alt="andriod" />
             </div>

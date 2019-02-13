@@ -23,11 +23,11 @@ const StatusCard = ({ item, route, isFor }) => {
         <div className="subtitle">{item.views}</div>
       </div>
       <div className="status-wrapper">
-        <div className="title">Clicks</div>
+        <div className="title">{Translations.report_review.clicks}</div>
         <div className="subtitle">{item.clicks}</div>
       </div>
       <div className="status-wrapper">
-        <div className="title">Applications</div>
+        <div className="title">{Translations.report_review.applications}</div>
         <div className="subtitle">{item.applicationCount}</div>
       </div> */}
       <div className="camp-statices-btn">

@@ -7,6 +7,7 @@ import { Carousel } from "react-responsive-carousel";
 import { ImageItem, VideoItem } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import VideoPlayer from "../../../ui-kit/player/VideoPlayer";
+import { Translations } from "../../../../lib/translations";
 class Userpics extends Component {
   constructor(props) {
     super(props);
@@ -23,7 +24,7 @@ class Userpics extends Component {
     return (
       <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">
-          <h2 className="slider-modal-header">User Pics</h2>
+          <h2 className="slider-modal-header">{Translations.user_pics}</h2>
         </div>
         <div className="col-sm-12">
           {picsDataList && (

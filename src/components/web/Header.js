@@ -12,6 +12,7 @@ import { getSearch } from "../../actions";
 import { connect } from "react-redux";
 import * as websocket from "../../websocket";
 import { Auth } from "../../auth";
+import { Button, Input } from "../ui-kit";
 
 class Header extends Component {
   constructor(props) {
@@ -90,7 +91,7 @@ class Header extends Component {
 
   onInputChange = e => {
     this.setState({
-      searchText: e.target.value
+      searchText: e.values.val
     });
   };
 
@@ -103,7 +104,7 @@ class Header extends Component {
   };
 
   render() {
-    const { messageCount } = this.state;
+    const { messageCount, searchText } = this.state;
 
     let messageCountView = messageCount;
     if (messageCount < 100) {
@@ -130,19 +131,19 @@ class Header extends Component {
               >
                 <form className="navbar-form navbar-left">
                   <div className="input-group search-input-group">
-                    <input
+                    <Input
                       type="text"
                       className="form-control"
                       placeholder="Search"
                       onChange={this.onInputChange}
-                      value={this.state.searchText}
+                      value={searchText}
                     />
                     <span className="input-group-addon">
-                      <button onClick={this.onSearchClick}>
+                      <Button onClick={this.onSearchClick} text={
                         <span className="search_icon">
                           <img src={images.search} alt="Search" />
-                        </span>
-                      </button>
+                        </span>}
+                      />
                     </span>
                   </div>
                 </form>

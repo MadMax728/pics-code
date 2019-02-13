@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import { Translations } from "../../../../lib/translations";
-import { InlineLoading } from "../../../ui-kit";
+import { InlineLoading, Button } from "../../../ui-kit";
 
 class UploadHeader extends Component {
   constructor(props) {
@@ -30,12 +30,8 @@ class UploadHeader extends Component {
           {/* {Translations.modal_header.upload_image} */}
         </div>
         <div className="col-sm-offest-6 col-sm-6 text-right">
-          <button className="black_button" onClick={this.handleModalHide}>
-            {Translations.modal_header.cancle}
-          </button>
-          <button className="black_button" onClick={handleContinue}>
-            {Translations.modal_header.continue}
-          </button>
+          <Button className="black_button" onClick={this.handleModalHide} text={Translations.modal_header.cancle} />
+          <Button className="black_button" onClick={handleContinue} text={Translations.modal_header.continue} />
         </div>
       </div>
     );
