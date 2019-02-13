@@ -74,16 +74,16 @@ const InformationCard = ({ item, type }) => {
             </div>
           )}
 
-          {item && item.target_group && (
-            <div className="info_wrapper">
-              <span className="normal_title">
-                {Translations.campaign_details.target_group}:{" "}
-              </span>
-              <span className="secondary_title">
-                {item.target_group ? item.target_group : "Male"}
-              </span>
-            </div>
-          )}
+          <div className="info_wrapper">
+            <span className="normal_title">
+              {Translations.campaign_details.target_group}:{" "}
+            </span>
+            <span className="secondary_title">
+              {item && item.target_group
+                ? item.target_group
+                : Translations.target_group.female_and_male}
+            </span>
+          </div>
         </div>
       </div>
     </Link>

@@ -87,12 +87,15 @@ const CampaignDetailsCard = ({
           <div className="feed_content col-xs-12">
             <div className="feed_description col-xs-12">
               <div className="col-sm-6 no-padding">
-                <InfoWrapperItem
-                  title={Translations.campaign_details.start}
-                  value={moment
-                    .unix(campaignDetails.startDate)
-                    .format(Translations.campaign_post_date_format.date)}
-                />
+                {campaignDetails &&
+                  campaignDetails.userType !== selectedUserType && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.start}
+                      value={moment
+                        .unix(campaignDetails.startDate)
+                        .format(Translations.campaign_post_date_format.date)}
+                    />
+                  )}
 
                 {campaignDetails &&
                   campaignDetails.userType !== selectedUserType && (
@@ -103,21 +106,47 @@ const CampaignDetailsCard = ({
                   )}
 
                 {campaignDetails &&
-                  campaignDetails.userType !== selectedUserType && (
+                campaignDetails.userType !== selectedUserType ? (
+                  <InfoWrapperItem
+                    title={Translations.campaign_details.applications}
+                    value={campaignDetails.applicationCount}
+                  />
+                ) : (
+                  <InfoWrapperItem
+                    title={Translations.campaign_details.subscribers}
+                    value={
+                      campaignDetails && campaignDetails.subscribers
+                        ? campaignDetails.subscribers
+                        : "0"
+                    }
+                  />
+                )}
+
+                {campaignDetails &&
+                  campaignDetails.userType === selectedUserType && (
                     <InfoWrapperItem
-                      title={Translations.campaign_details.applications}
-                      value={campaignDetails.applicationCount}
+                      title={Translations.campaign_details.offer}
+                      value={
+                        campaignDetails.offers &&
+                        campaignDetails.offersList &&
+                        campaignDetails.offersList[0].offerName &&
+                        campaignDetails.offersList[0].offerName
+                      }
                     />
                   )}
               </div>
 
               <div className="col-sm-6 no-padding">
-                <InfoWrapperItem
-                  title={Translations.campaign_details.end}
-                  value={moment
-                    .unix(campaignDetails.endDate)
-                    .format(Translations.campaign_post_date_format.date)}
-                />
+                {campaignDetails &&
+                  campaignDetails.userType !== selectedUserType && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.end}
+                      value={moment
+                        .unix(campaignDetails.endDate)
+                        .format(Translations.campaign_post_date_format.date)}
+                    />
+                  )}
+
                 {campaignDetails &&
                   campaignDetails.userType !== selectedUserType && (
                     <InfoWrapperItem
@@ -126,12 +155,27 @@ const CampaignDetailsCard = ({
                     />
                   )}
 
-                {campaignDetails && campaignDetails.target_group && (
-                  <InfoWrapperItem
-                    title={Translations.campaign_details.target_group}
-                    value={campaignDetails.target_group}
-                  />
-                )}
+                <InfoWrapperItem
+                  title={Translations.campaign_details.target_group}
+                  value={
+                    campaignDetails && campaignDetails.target_group
+                      ? campaignDetails.target_group
+                      : Translations.target_group.female_and_male
+                  }
+                />
+
+                {campaignDetails &&
+                  campaignDetails.userType === selectedUserType && (
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.inquiry}
+                      value={
+                        campaignDetails.inquiry &&
+                        campaignDetails.inquiryList &&
+                        campaignDetails.inquiryList[0].inquiryName &&
+                        campaignDetails.inquiryList[0].inquiryName
+                      }
+                    />
+                  )}
               </div>
             </div>
           </div>

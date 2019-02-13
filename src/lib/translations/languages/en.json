@@ -223,7 +223,10 @@
     "applications": "Applications",
     "apply_campaign": "Apply for this campaign",
     "send_message": "Send Message",
-    "campaign_success_apply": "You have successfully applied for this campaign"
+    "campaign_success_apply": "You have successfully applied for this campaign",
+    "subscribers": "Subscribers",
+    "offer": "Offer",
+    "inquiry": "Inquiry"
   },
 
   "messages_modal": {
