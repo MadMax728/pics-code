@@ -34,7 +34,7 @@ class SettingCampaignStatisticsRight extends Component {
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
           <button className="blue_button" onClick={this.handleEditCampaign}>
-            Edit campaign
+            {Translations.create_campaigns.edit_campaign}{" "}
           </button>
           <Link to={routes.SETTINGS_CAMPAIGN_ROUTE}>
             <button className="black_button">
@@ -74,7 +74,7 @@ class SettingCampaignStatisticsRight extends Component {
             {Translations.create_campaigns.performance}
           </div>
           <ul className="campaign-right-options">
-            <li>
+            {/* <li>
               <span>{Translations.create_campaigns.views}</span>
               <span className="pull-right">{campaignStatistics.views}</span>
             </li>
@@ -87,6 +87,22 @@ class SettingCampaignStatisticsRight extends Component {
               <span className="pull-right">
                 {campaignStatistics.applicationCount}
               </span>
+            </li> */}
+            <li>
+              <span>
+                {Translations.create_campaigns.application_authorised}
+              </span>
+              <span className="pull-right">{"50"}</span>
+            </li>
+            <li>
+              <span>{Translations.create_campaigns.application_removed}</span>
+              <span className="pull-right">{"10"}</span>
+            </li>
+            <li>
+              <span>
+                {Translations.create_campaigns.application_removed_by_applicant}
+              </span>
+              <span className="pull-right">{"10"}</span>
             </li>
           </ul>
           <div className="normal_title padding-15">
