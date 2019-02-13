@@ -124,7 +124,8 @@
     "location": "Location",
     "radius": "Radius",
     "category": "Category",
-    "target_group": "Target Group"
+    "target_group": "Target Group",
+    "views_clicks": "Views / Clicks"
   },
 
   "create_campaigns": {

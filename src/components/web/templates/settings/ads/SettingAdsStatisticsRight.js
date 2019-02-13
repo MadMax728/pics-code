@@ -18,10 +18,11 @@ class SettingAdsStatisticsRight extends Component {
   handleEditAd = () => {
     const { adStatistics } = this.state;
     this.props.handleModalShow(modalType.editAds, adStatistics);
-  }
+  };
 
   render() {
     const { adStatistics } = this.state;
+    const { remainingBudget, totalBudget } = this.props;
     let isStatus = "green-circle pull-right";
     if (adStatistics.isActive) {
       isStatus = "green-circle pull-right";
@@ -30,14 +31,14 @@ class SettingAdsStatisticsRight extends Component {
     }
 
     // Calculation of Daily budget spent (24 hours counter – counter starts when ad was created) (Ref from SRS)
-    const createdDate = moment
-      .unix(adStatistics.createdAt)
-      .format(Translations.complete_date_format.date);
-    const todayDate = moment().format(Translations.complete_date_format.date);
-    const duration = moment.duration(
-      moment(todayDate).diff(moment(createdDate))
-    );
-    const budgetSpentInHours = duration.hours();
+    // const createdDate = moment
+    //   .unix(adStatistics.createdAt)
+    //   .format(Translations.complete_date_format.date);
+    // const todayDate = moment().format(Translations.complete_date_format.date);
+    // const duration = moment.duration(
+    //   moment(todayDate).diff(moment(createdDate))
+    // );
+    // const budgetSpentInHours = duration.hours();
 
     return (
       <div className="right_bar no-padding pull-left">
@@ -58,28 +59,26 @@ class SettingAdsStatisticsRight extends Component {
             <li>
               <span className="left-title">
                 {" "}
-                {Translations.create_ads.daily_budget}
+                {Translations.create_ads.total_budget_spent}
               </span>
-              <span className="pull-right right-content">
-                {adStatistics.budget}€
-              </span>
+              <span className="pull-right right-content">{totalBudget}€</span>
             </li>
             <li>
               <span className="left-title">
-                {Translations.create_ads.daily_budget_spent}
+                {Translations.create_ads.remaining_Budget}
               </span>
               <span className="pull-right right-content">
-                {budgetSpentInHours}
+                {remainingBudget}€
               </span>
             </li>
-            <li>
+            {/* <li>
               <span className="left-title">
                 {Translations.create_ads.total_expense}
               </span>
               <span className="pull-right right-content">
                 {adStatistics.maximumExpenses}€
               </span>
-            </li>
+            </li> */}
             <li>
               <span className="left-title">
                 {Translations.create_ads.runtime}
@@ -96,7 +95,7 @@ class SettingAdsStatisticsRight extends Component {
             </li>
           </ul>
           <div className="normal_title padding-15">
-            {Translations.create_ads.Performance}
+            {Translations.create_ads.views_clicks}
           </div>
           <ul className="campaign-right-options">
             <li>
@@ -174,7 +173,9 @@ class SettingAdsStatisticsRight extends Component {
 
 SettingAdsStatisticsRight.propTypes = {
   adStatistics: PropTypes.object.isRequired,
-  handleModalShow: PropTypes.func.isRequired
+  handleModalShow: PropTypes.func.isRequired,
+  remainingBudget: PropTypes.any,
+  totalBudget: PropTypes.any
 };
 
 export default SettingAdsStatisticsRight;

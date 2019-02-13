@@ -25,9 +25,11 @@ class AdsStatisticsPage extends Component {
     const { adDetails, isLoading, handleModalShow } = this.props;
     const {
       budgetProgress,
+      remainingBudget,
+      totalBudget,
       performaceProgress,
       runtimeProgress,
-      dailyBudgetProgress,
+      dailyBudgetProgress
       // budgetSpend,
       // remainingBudget
     } = this.state;
@@ -59,7 +61,7 @@ class AdsStatisticsPage extends Component {
                   </div>
                 </div>
               </div>
-              <div className="campaign-block">
+              {/* <div className="campaign-block">
                 <div className="normal_title padding-15">
                   {Translations.create_ads.daily_budget}
                 </div>
@@ -77,8 +79,8 @@ class AdsStatisticsPage extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="campaign-block">
+              </div> */}
+              {/* <div className="campaign-block">
                 <div className="normal_title padding-15">
                   {Translations.create_ads.Performance}
                 </div>
@@ -99,7 +101,7 @@ class AdsStatisticsPage extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="campaign-block">
                 <div className="normal_title padding-15">
                   {Translations.create_ads.runtime}
@@ -129,6 +131,8 @@ class AdsStatisticsPage extends Component {
           <SettingAdsStatisticsRight
             adStatistics={adDetails}
             handleModalShow={handleModalShow}
+            totalBudget={totalBudget}
+            remainingBudget={remainingBudget}
           />
         )}
         {isLoading && <InlineLoading />}
@@ -195,11 +199,9 @@ class AdsStatisticsPage extends Component {
           moment(endDate).diff(moment(todayDate))
         );
         remainingDays = totalRemainingDuration.days();
-
         // Total Budget
         budgetSpend = 0;
         remainingBudget = maximumExpense;
-
         //Daily Budget
         dailyBudgetSpend = 0;
         dailyRemainingBudget = dailyBudget;
@@ -208,7 +210,6 @@ class AdsStatisticsPage extends Component {
           moment(endDate).diff(moment(todayDate))
         );
         remainingDays = totalRemainingDuration.days();
-
         // Total Budget
         const calculateDay = parseInt(totalNoOfDays) - parseInt(remainingDays);
         budgetSpend = parseInt(adDetails.budget) * parseInt(calculateDay);
@@ -261,11 +262,14 @@ class AdsStatisticsPage extends Component {
           (parseInt(budgetSpend) / parseInt(totalBudget)) * 100;
       }
 
+      // console.log(totalBudget);
+      // console.log(remainingBudget);
       this.setState({
         runtimeProgress: Math.round(runtimePercentage),
         budgetProgress: Math.round(budgetPercentage),
         dailyBudgetProgress: Math.round(DailyBudgetPercentage),
         budgetSpend,
+        totalBudget,
         remainingBudget
       });
     }
