@@ -60,7 +60,7 @@ class SettingCampaignStatisticsPage extends Component {
                   </div>
                 </div>
               </div>
-              <div className="campaign-block">
+              {/* <div className="campaign-block">
                 <div className="normal_title padding-15">
                   {Translations.create_campaigns.performance}
                 </div>
@@ -81,7 +81,7 @@ class SettingCampaignStatisticsPage extends Component {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="campaign-block">
                 <div className="normal_title padding-15">
                   {" "}

@@ -6,7 +6,7 @@ import { Translations } from "../../lib/translations";
 import { DateFormat } from "../Factory";
 import FeedHeader from "./headers/FeedHeader";
 import { InfoWrapperItem, DescriptionItem } from "./items";
-import { ImageItem, VideoItem, ThreeDots } from "../ui-kit";
+import { ImageItem, VideoItem, ThreeDots, Button } from "../ui-kit";
 import * as enumerations from "../../lib/constants/enumerations";
 import moment from "moment";
 
@@ -50,19 +50,26 @@ const CampaignDetailsCard = ({
             )}
         </div>
         <div className="text paddTop20" />
-        {campaignDetails.isOwner || campaignDetails.isAlreadyParticipant ? (
+        {campaignDetails.isOwner ? (
           ""
+        ) : campaignDetails.isAlreadyParticipant &&
+          campaignDetails.userType !== selectedUserType ? (
+          <button className="blue_button" disabled>
+            {Translations.campaign_details.campaign_success_apply}
+          </button>
         ) : (
           <button
             className="filled_button"
             onClick={handleApplyParticipant}
             id={campaignDetails.id}
           >
+            {" "}
             {campaignDetails && campaignDetails.userType === selectedUserType
               ? Translations.campaign_details.send_message
               : Translations.campaign_details.apply_campaign}
           </button>
         )}
+
         <div className="feed_wrapper">
           <FeedHeader
             id={campaignDetails.id}
