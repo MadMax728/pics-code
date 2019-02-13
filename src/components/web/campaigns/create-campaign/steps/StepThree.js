@@ -11,7 +11,7 @@ class StepThree extends Component {
     super(props);
     this.state = {
       startDate: moment(),
-      endDate: moment(),
+      endDate: moment().add(7, "days"),
       maxClicks: 0
     };
   }
@@ -140,7 +140,11 @@ class StepThree extends Component {
             </li>
           </ul>
         </div>
-        <RightSidebarModal userInfo={userInfo} form={form} />
+        <RightSidebarModal
+          userInfo={userInfo}
+          form={form}
+          isFor={"Campaigns"}
+        />
       </div>
     );
   }

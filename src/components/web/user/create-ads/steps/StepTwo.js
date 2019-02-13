@@ -9,7 +9,11 @@ import { SelectDailyBudget } from "../../../../../components/common";
 class StepTwo extends Component {
   constructor(props) {
     super(props);
-    this.state = { startDate: moment(), endDate: moment(), maxClicks: 0 };
+    this.state = {
+      startDate: moment(),
+      endDate: moment().add(7, "days"),
+      maxClicks: 0
+    };
   }
 
   componentDidUpdate(prevProps, prevState) {

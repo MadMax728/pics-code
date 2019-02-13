@@ -47,7 +47,7 @@ const initialState = {
     callToAction: "",
     insertLink: "",
     startDate: moment(),
-    endDate: moment(),
+    endDate: moment().add(7, "days"),
     budget: "",
     address: {
       invoiceRecipient: "",
@@ -180,7 +180,7 @@ class AdsModal extends Component {
     form.callToAction = "";
     form.insertLink = "";
     form.startDate = moment();
-    form.endDate = moment();
+    form.endDate = moment().add(7, "days");
     form.budget = "";
     form.address.invoiceRecipient = "";
     form.address.street = "";

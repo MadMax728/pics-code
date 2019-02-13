@@ -38,9 +38,6 @@
   "view_more_comments": "View more comments",
   "view_less_comments": "View less comments",
 
-  "apply_campaign": "Apply for this campaign",
-  "send_message": "Send Message",
-
   "favourite_campaigns": "Favourite Campaigns",
 
   "about": {
@@ -70,7 +67,15 @@
     "advertisement": "Label as advertisement",
     "upload_file": "Upload File",
     "yes": "Yes",
-    "no": "No"
+    "no": "No",
+    "add_image": "Add image",
+    "add_video": "Add Video",
+    "location_help_text": "Define where you are located",
+    "image_category_help_text": "Define a category in which your image belongs",
+    "video_category_help_text": "Define a category in which your video belongs",
+    "description_help_text": "Enter a description of what you want to tell your community",
+    "image_label_advertisement_help_text": "Label your image as advertisement if you have a product placement",
+    "video_label_advertisement_help_text": "Label your video as advertisement if you have a product placement"
   },
 
   "create_ads": {
@@ -78,7 +83,7 @@
     "runtime_passed": "Runtime passed",
     "remaining_runtime": "Remaining runtime",
     "title_of_ads": "Start your advertisement",
-    "add_title_image": "Add title image",
+    "add_title_image": "Add title image / video",
     "add_title": "Add title",
     "add_location": "Add location",
     "add_radius": "Add radius",
@@ -129,8 +134,18 @@
     "radius": "Radius",
     "category": "Category",
     "target_group": "Target Group",
-    "views_clicks": "Views / Clicks"
+    "views_clicks": "Views / Clicks",
+    "ads_title_help_text": "You can add a title image / video which users will give an impression about your product or service",
+    "title_help_text": "Select a title in order to allow identify your ad for internal proposes.",
+    "location_help_text": "Define where you want to ad shown",
+    "radius_help_text": "Define with which radius you want to ad shown",
+    "category_help_text": "Select a category to which your target audience belongs",
+    "target_group_help_text": "Define the gender which your ad targets",
+    "description_help_text": "Enter a description of what your product or service offers",
+    "action_call_help_text": "Define a call to action button to define what is behind your link",
+    "link_help_text": "Set the link to which the user will be directed when clicking on your ad"
   },
+
   "create_campaigns": {
     "clicks": "Clicks",
     "views": "Views",
@@ -210,11 +225,20 @@
     "close_campaign": "Close Campaign",
     "budget_runtime": "Budget & Runtime",
     "total_budget_spent": "Total budget spent",
-    "public_procedure_help_text": "If you choose public, every user will be able to see the content from your participants.",
-    "anonymous_proceture_help_text": "If you choose anonymous, only you will see the content from your participants.",
+    "public_procedure_help_text": "Public : Everybody can see the content from your participants to get feedback",
+    "anonymous_proceture_help_text": "Non-public : Only you can see the content from your participants.",
     "application_authorised": "Application authorised",
     "application_removed": "Application you have removed",
-    "application_removed_by_applicant": "Application removed from applicant"
+    "application_removed_by_applicant": "Application removed from applicant",
+    "campaign_title_help_text": "You can add a title image which users will give an impression about your campaign",
+    "title_help_text": "You can add a title which users will give an impression about your campaign",
+    "location_help_text": "Define where your campaign will take place or where you are located",
+    "radius_help_text": "Define with which radius you want to ad shown",
+    "category_help_text": "Define a category in which your campaign belongs",
+    "target_group_help_text": "Select whom your campaign addresses",
+    "type_help_text": "Select if the participant have to apply with an image or video",
+    "offer_help_text": "Use offers to indicate what you offer in return for doing the campaign",
+    "inquiry_help_text": "User inquiry to select what service you are looking for"
   },
 
   "campaign_details": {
@@ -222,11 +246,14 @@
     "end": "End",
     "procedure": "Procedure",
     "target_group": "Target Group",
-    "type": "Type of Application",
+    "type": "Type",
     "applications": "Applications",
     "apply_campaign": "Apply for this campaign",
     "send_message": "Send Message",
-    "campaign_success_apply": "You have successfully applied for this campaign"
+    "campaign_success_apply": "You have successfully applied for this campaign",
+    "followers": "Followers",
+    "offer": "Offer",
+    "inquiry": "Inquiry"
   },
 
   "messages_modal": {
