@@ -83,6 +83,22 @@ class Upload extends Component {
     };
     return (
       <div className="col-xs-12 no-padding">
+        <div className="col-xs-12 col-sm-12 col-md-8 col-md-offset-2 ">
+          <div className="upload-format">
+              <div className="col-md-6 col-sm-6 col-xs-6">
+                  <div className="upload-pic upload-div">
+                      <h4>upload image</h4>
+                      <i className="fa fa-file-image-o" aria-hidden="true"></i>
+                  </div>
+              </div>
+              <div className="col-md-6 col-sm-6 col-xs-6">
+                  <div className="upload-video upload-div">
+                      <h4>upload video</h4>
+                      <i className="fa fa-video-camera" aria-hidden="true"></i>
+                  </div>
+              </div>
+          </div>
+        </div>
         <div className="col-sm-12 upload-form">
           <div className="user-title">
             <div className="normal_title modal-title">

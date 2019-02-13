@@ -358,9 +358,9 @@
         .range-wrapr.add-wrapper{
           position: relative;
           padding: 0 50px;
-          // width: 518px;
-          // float: none;
-          // margin: auto;
+          width: 518px;
+          float: none;
+          margin: auto;
           .min-profile-pic{
             width: 20px;
             height: 20px;
@@ -384,8 +384,11 @@
       .add-wrapper.create-camp-ad-wrapr{
         img{
           top: -41px;
-          @media only screen and (max-width: 991px) and (min-width: 768px){
+          @media only screen and (max-width: 991px) and (min-width: 880px){
             right: 15%;
+          }
+          @media only screen and (max-width: 879px) and (min-width: 768px){
+            right: 10%;
           }
         }
       }
@@ -410,6 +413,40 @@
         .quill {
           padding:0 20px 20px;
           height: 350px;
+        }
+      }
+    }
+  }
+}
+
+.upload-pic-modal.upload-image-modal{
+  .modal-dialog{
+    .modal-content{
+      .modal-body{
+        .upload-format{
+          h4{
+            color: #4a4a4a;
+            font-family: "Helvetica-Bold";
+            font-size: 14px;
+            text-transform: capitalize;
+            margin: 15px 0 20px;
+          }
+          .upload-div{
+            height: 200px;
+            width: 200px;
+            padding: 20px;
+            position: relative;
+            border:1px solid #ccc;
+            margin: 10px auto;
+            i{
+              background: -webkit-radial-gradient(#1f58a6, #029bd7);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              font-size: 60px;
+              margin: 20px 0 10px;
+              // color: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+            }
+          }
         }
       }
     }
