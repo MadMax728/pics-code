@@ -348,10 +348,10 @@ class PrivacyPage extends Component {
               </div>
             </div>
 
-            <div className="form-subtitle">
+            {/* <div className="form-subtitle">
               {Translations.privacy.Change_invoicing_address}
-            </div>
-            <div className="change-invoiceadd-wrapper">
+            </div> */}
+            {/* <div className="change-invoiceadd-wrapper">
               {isInvoiceAddressLoading && <InlineLoading />}
               <div className="form-group">
                 <Label
@@ -502,7 +502,7 @@ class PrivacyPage extends Component {
                   text={Translations.privacy.save}
                 />
               </div>
-            </div>
+            </div> */}
 
             <div className="form-subtitle">{Translations.privacy.Actions}</div>
             <div className="privacy-actions-wrapper">

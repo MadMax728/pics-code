@@ -221,7 +221,8 @@
     "type": "Type of Application",
     "applications": "Applications",
     "apply_campaign": "Apply for this campaign",
-    "send_message": "Send Message"
+    "send_message": "Send Message",
+    "campaign_success_apply": "You have successfully applied for this campaign"
   },
 
   "messages_modal": {
