@@ -39,6 +39,19 @@
   "view_less_comments": "View less comments",
   "favourite_campaigns": "Favourite Campaigns",
 
+  "report_review" : {
+    "date": "Date",
+    "reports": "Reports",
+    "status": "Status",
+    "start": "Start",
+    "end": "End",
+    "daily_budget": "Daily budget",
+    "clicks": "Clicks",
+    "views": "Views",
+    "applications": "Applications",
+    "statistics": "Statistics"
+  },
+
   "about": {
     "general_information": "General informations",
     "username": "User name",
@@ -214,6 +227,11 @@
     "application_removed_by_applicant": "Application removed from applicant"
   },
 
+  "payment": {
+    "your": "Your",
+    "review": "is pending review whitin the next 48 hours."
+  },
+  
   "campaign_details": {
     "start": "Start",
     "end": "End",
@@ -232,6 +250,9 @@
     "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
+  
+  "sure" : "Are you want to sure?",
+
   "modal_header": {
     "cancle": "Cancel",
     "back": "Back",
@@ -294,7 +315,8 @@
     "unblock": "Unblock",
     "report_user": "Report User",
     "unreport_user": "Unreport User",
-    "remove_participant": "Remove Participant"
+    "remove_participant": "Remove Participant",
+    "locks_unlocks": "locks / unlocks content"
   },
 
   "back_office_menu": {
@@ -359,6 +381,12 @@
     "about_us": "About us",
     "terms_and_condition": "Terms & Condition",
     "cookies": "Cookies"
+  },
+
+  "cookies": {
+    "cookies": "Cookies",
+    "better_user": "For a better user experience we can use",
+    "agree": "By using picstagraph you do agree"
   },
 
   "right_side_bar_statistics": {
@@ -499,6 +527,7 @@
   },
 
   "mobile_sidebar_services": {
+    "services": "Services",
     "terms_conditions": "General Terms and Conditions",
     "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
     "terms_use": "Terms of Use",
@@ -768,6 +797,14 @@
     "general_information": "General Information",
     "Personal_interests": "Personal interests"
   },
+
+  "social": {
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "whatsapp": "Whatsapp",
+    "email": "Email"
+  },
+
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
@@ -825,7 +862,7 @@
     "PDF": "PDF"
   },
   "data_download": {
-    "page_title": "Daten- Download",
+    "page_title": "Data - Download",
     "Email": "Email",
     "Password": "Password",
     "Download": "Download",
@@ -868,6 +905,16 @@
     "Closed_Ads": "Closed Ads",
     "Ads_Temp_Closed": "Ads Temp Closed"
   },
+
+  "download_app": "Download App",
+  
+  "user_pics": "User Pics",
+
+  "not_found": {
+    "not_available": "This page isn't available",
+    "remove_link": "The link you followed may be broken, or the page may have been removed" 
+  },
+
   "cms": {
     "create": "Create new CMS page",
     "edit": "Edit CMS page",

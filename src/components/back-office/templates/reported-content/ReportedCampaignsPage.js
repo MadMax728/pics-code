@@ -119,9 +119,8 @@ class ReportedCampaignsPage extends Component {
   };
 
   handleSearch = (event) => {
-    event.preventDefault();
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   }
 

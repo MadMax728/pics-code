@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { users_list } from "../../../../mock-data/users-list";
 import { Translations } from "../../../../lib/translations";
+import { Button } from "../../../ui-kit";
 
 class Subscribe extends Component {
   
@@ -44,13 +45,12 @@ class Subscribe extends Component {
                   </Link>
                 </div>
                 <div className="subscribe-user-name">
-                  <button
+                  <Button
                     className="filled_button"
                     id={user.id}
                     onClick={this.handleSubscribeAction}
-                  >
-                    {Translations.top_bar_info_modal.subscribe_btn}
-                  </button>
+                    text={Translations.top_bar_info_modal.subscribe_btn}
+                  />
                 </div>
               </div>
             );

@@ -28,7 +28,7 @@ const Button = (
 
 Button.propTypes = {
   onClick: PropTypes.func,
-  text: PropTypes.string,
+  text: PropTypes.any,
   type: PropTypes.string,
   tabIndex: PropTypes.string,
   className: PropTypes.string,

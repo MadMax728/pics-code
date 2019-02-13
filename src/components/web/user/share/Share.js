@@ -11,6 +11,7 @@ import {
   WhatsappIcon,
   EmailIcon,
 } from 'react-share';
+import { Translations } from "../../../../lib/translations";
 
 const Share = ({ 
   shareUrl = 'http://www.picstagraph.com', 
@@ -30,7 +31,7 @@ const Share = ({
                 size={40}
                 round={false} />
             </FacebookShareButton>
-            <span className="social-link-title">Facebook</span>
+            <span className="social-link-title">{Translations.social.facebook}</span>
           </div>
           <div className="social-media-link">
             <TwitterShareButton
@@ -41,7 +42,7 @@ const Share = ({
                 size={40}
                 round={false}  />
             </TwitterShareButton>
-            <span className="social-link-title">Twitter</span>
+            <span className="social-link-title">{Translations.social.twitter}</span>
           </div>
           <div className="social-media-link">
             <WhatsappShareButton
@@ -51,7 +52,7 @@ const Share = ({
               className="social-link-title">
               <WhatsappIcon size={40} round={false}  />
             </WhatsappShareButton>
-            <span className="social-link-title">Whatsapp</span>
+            <span className="social-link-title">{Translations.social.whatsapp}</span>
           </div>
           <div className="social-media-link">
             <EmailShareButton
@@ -63,7 +64,7 @@ const Share = ({
                 size={40}
                 round={false} />
             </EmailShareButton>
-            <span className="social-link-title">Email</span>
+            <span className="social-link-title">{Translations.social.email}</span>
           </div>
         </div>
       </div>

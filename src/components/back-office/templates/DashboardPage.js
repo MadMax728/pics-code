@@ -65,8 +65,6 @@ class DashboardPage extends Component {
               {ads_statisitcs && this.renderAdsStatistics()} */}
             </div>
           }
-
-
         </div>
       </div>
     );
