@@ -251,7 +251,7 @@ class CommentCard extends Component {
                   Translations.date_format.time,
                   true
                 )}{" "}
-                <b>Reply</b>
+                <b>{Translations.reply}</b>
               </div>
               <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
                 <ThreeDots
@@ -328,7 +328,6 @@ class CommentCard extends Component {
       //console.log("id:", id);
       userMentionList.push(id);
     }
-    console.log(userMentionList);
     const { isBackOffice } = this.props;
     if (isBackOffice) {
       clearInterval(this.timer);

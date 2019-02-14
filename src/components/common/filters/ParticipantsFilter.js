@@ -94,6 +94,9 @@ class ParticipantsFilter extends Component {
   }
 
   render() {
+
+    const { filterApply } = this.state;
+
     return (
       <Scrollbars style={{ width: 20, height: 100 }}>
         <div className="left-filters">

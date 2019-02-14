@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { DescriptionItem } from "../../misc/items";
+import { DescriptionItem, InfoWrapperItem } from "../../misc/items";
 import { ImageItem, VideoItem, UserTitleItem, UserImageItem } from "../items";
 import { Translations } from "../../../lib/translations";
 import * as images from "../../../lib/constants/images";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { DateFormat } from "../../Factory";
+import moment from "moment";
 
 const propTypes = {
   userInfo: PropTypes.object,
@@ -15,6 +16,7 @@ const propTypes = {
 
 const RightSidebarModal = ({ userInfo, form, isFor }) => {
   const todayDate = new Date();
+  const selectedUserType = "creator";
   return (
     <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
       <div className="feed_wrapper">
@@ -71,6 +73,101 @@ const RightSidebarModal = ({ userInfo, form, isFor }) => {
             <span className="secondary_title">
               <DescriptionItem desc={form.description} />
             </span>
+            {/* Campaign Details */}
+            {isFor === "Campaigns" && (
+              <div>
+                {userInfo && userInfo.userType !== selectedUserType && (
+                  <div className="block-divide">
+                    <div className="col-sm-6 no-padding">
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.procedure}
+                        value={form.procedure}
+                      />
+
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.start}
+                        value={moment().format(
+                          Translations.campaign_post_date_format.date
+                        )}
+                      />
+                    </div>
+                    <div className="col-sm-6 no-padding">
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.type}
+                        value={form.typeContent}
+                      />
+
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.end}
+                        value={moment()
+                          .add(7, "days")
+                          .format(Translations.campaign_post_date_format.date)}
+                      />
+                    </div>
+                  </div>
+                )}
+
+                <div className="creator-block">
+                  <div className="col-sm-6 no-padding">
+                    <InfoWrapperItem
+                      title={Translations.campaign_details.target_group}
+                      value={
+                        form && form.target_group
+                          ? form.target_group
+                          : Translations.target_group.female_and_male
+                      }
+                    />
+
+                    {form && form.offers && (
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.offer}
+                        value={
+                          form.offers &&
+                          form.offersList &&
+                          form.offersList[0].offerName &&
+                          form.offersList[0].offerName
+                        }
+                      />
+                    )}
+                  </div>
+
+                  <div className="col-sm-6 no-padding">
+                    {userInfo && userInfo.userType !== selectedUserType ? (
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.applications}
+                        value={
+                          form && form.applicationCount
+                            ? form.applicationCount
+                            : "0"
+                        }
+                      />
+                    ) : (
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.followers}
+                        value={
+                          form && form.subscribers ? form.subscribers : "0"
+                        }
+                      />
+                    )}
+
+                    {form && form.inquiry && (
+                      <InfoWrapperItem
+                        title={Translations.campaign_details.inquiry}
+                        value={
+                          form.inquiry &&
+                          form.inquiryList &&
+                          form.inquiryList[0].inquiryName &&
+                          form.inquiryList[0].inquiryName
+                        }
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <div>
+            <div />
           </div>
         </div>
         <div className="feed_footer padding-15">

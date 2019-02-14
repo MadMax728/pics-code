@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { getLanguage } from "../../../actions";
 import { connect } from "react-redux";
 import { Translations } from "../../../lib/translations";
+import { Input } from "../../ui-kit";
 
 const languageData = [
   {
@@ -37,7 +38,7 @@ class RadioButtonLanguages extends Component {
       <div className="languageBtn">
         {languageData.map(option => (
           <div key={option.value}>
-            <input
+            <Input
               type="radio"
               className={option.className}
               id={option.value}
@@ -66,13 +67,13 @@ class RadioButtonLanguages extends Component {
   };
 
   handleLanguage = event => {
-    const selectedValue = event.target.value;
+    const selectedValue = event.values.val;
     if (selectedValue === "English") {
       this.props.handleLanguageSwitch("en");
-      this.setState({ currentLanguage: event.target.value });
+      this.setState({ currentLanguage: event.values.val });
     } else if (selectedValue === "German") {
       this.props.handleLanguageSwitch("de");
-      this.setState({ currentLanguage: event.target.value });
+      this.setState({ currentLanguage: event.values.val });
     }
   };
 

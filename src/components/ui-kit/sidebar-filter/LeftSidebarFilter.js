@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { RadioBtn, Select, Input } from "../common-ui-components";
+import { Link } from "react-router-dom";
+
+import { RadioBtn, Select, Input, Button } from "../common-ui-components";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
 import { getCookie } from "../../../lib/utils/helpers";
 import {
@@ -12,9 +14,11 @@ import {
   SelectRadius,
   SelectTargetGroup,
   RadioButtonLanguages,
-  SelectAge
+  SelectAge,
 } from "../../common";
 import { Translations } from "../../../lib/translations";
+import * as enumerations from "../../../lib/constants/enumerations";
+import * as routes from "../../../lib/constants/routes";
 
 class LeftSidebarFilter extends Component {
   constructor(props) {
@@ -30,7 +34,13 @@ class LeftSidebarFilter extends Component {
   }
 
   render() {
-    const { filters } = this.props;
+    const { filters,
+            handleResetFilterClick,
+            handleApplyClick,
+            filterApply,
+            isNotFilter,
+            isRank
+         } = this.props;
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div>
@@ -157,6 +167,38 @@ class LeftSidebarFilter extends Component {
             </div>
           );
         })}
+        {
+          isNotFilter && 
+          <div className="filter-btn-wrapper">
+            {filterApply ? (
+              <Button
+                className="black_button"
+                onClick={handleResetFilterClick}
+                text={Translations.filter.reset_filter}
+              />
+            ) : (
+              <Button 
+                className="black_button" 
+                onClick={handleApplyClick}
+                text={Translations.filter.apply}
+              />
+            )}
+
+          {
+            isRank && isRank === enumerations.adminRank.rank1 &&
+            (
+              <div className="filter-btn-wrapper">
+                <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
+                  <button className="black_button">
+                    {Translations.filter.back}
+                  </button>
+                </Link>
+              </div>
+            )
+          }
+
+          </div>
+        }
       </div>
     );
   }
@@ -339,11 +381,16 @@ LeftSidebarFilter.propTypes = {
     }).isRequired
   ).isRequired,
   onChange: PropTypes.func,
+  handleResetFilterClick: PropTypes.func,
+  handleApplyClick: PropTypes.func,
+  filterApply: PropTypes.bool,
+  handleLanguageSwitch: PropTypes.func,
+  isNotFilter: PropTypes.bool,
+  isRank: PropTypes.string
   // handleSelect: PropTypes.func,
   // handleOfferTagChange: PropTypes.func,
   // handleInquiryTagChange: PropTypes.func,
   // handleOfferTagDelete: PropTypes.func,
-  handleLanguageSwitch: PropTypes.func
 };
 
 export default LeftSidebarFilter;

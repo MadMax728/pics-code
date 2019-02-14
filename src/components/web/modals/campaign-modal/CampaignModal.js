@@ -61,7 +61,7 @@ const initialState = {
     inquiryTagList: [],
     description: "",
     startDate: moment(),
-    endDate: moment(),
+    endDate: moment().add(7, "days"),
     budget: "",
     address: {
       invoiceRecipient: "",
@@ -325,7 +325,7 @@ class CampaignModal extends Component {
     form.targetGroup = target_group.company;
     form.description = "";
     form.startDate = moment();
-    form.endDate = moment();
+    form.endDate = moment().add(7, "days");
     form.budget = "";
     form.address = {};
     form.address.invoiceRecipient = "";

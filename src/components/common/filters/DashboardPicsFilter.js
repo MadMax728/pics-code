@@ -179,30 +179,23 @@ class DashboardPicsFilter extends Component {
         items: categoryItems
       }
     ];
+
+    const { filterApply } = this.state;
+
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
+    
     return (
       <div className="left-filters">
         <LeftSidebarFilter
           filters={Filters}
           onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
+          filterApply={filterApply}
           handleSelect={this.handleSelect}
           handleLanguageSwitch={this.handleLanguageSwitch}
+          handleResetFilterClick={this.handleResetFilterClick}
+          handleApplyClick={this.handleApplyClick}
+          isNotFilter
         />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-        </div>
       </div>
     );
   }

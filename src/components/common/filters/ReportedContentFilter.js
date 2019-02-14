@@ -78,33 +78,11 @@ class ReportedContentFilter extends Component {
           onChange={this.handleOnChange}
           filterApply={filterApply}
           handleSelect={this.handleSelect}
+          isRank={isRank}
+          handleResetFilterClick={this.handleResetFilterClick}
+          handleApplyClick={this.handleApplyClick}
+          isNotFilter
         />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-          {
-            isRank === enumerations.adminRank.rank1 &&
-            (
-              <div className="filter-btn-wrapper">
-                <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
-                  <button className="black_button" onClick={this.handleApplyClick}>
-                    {Translations.filter.back}
-                  </button>
-                </Link>
-              </div>
-            )
-          }
-        </div>
       </div>
     );
   }

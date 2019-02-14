@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
-import { UserImageItem } from "../../ui-kit";
+import { UserImageItem, Button } from "../../ui-kit";
 import classnames from "classnames";
+import { Translations } from "../../../lib/translations";
 
 const AdCardHeader = ({
   ad,
@@ -32,22 +33,20 @@ const AdCardHeader = ({
         </Link>
         {ad.category && (
           <div className="grey_title">
-            Sponsored in{" "}
+            {Translations.sponsored_in}{" "}
             {ad.category[0].categoryName}
           </div>
         )}
       </div>
       <div className={like_wrapper} role="article">
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
           id={ad.id}
-          onKeyDown={handleFavorite}
           disabled={isLoading}
-        >
-          <img src={favorite_icon} alt="like" role="presentation" />
-        </button>
+          text={<img src={favorite_icon} alt="like" role="presentation" />}
+        />
       </div>
     </div>
   );

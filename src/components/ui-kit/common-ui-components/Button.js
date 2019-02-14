@@ -9,6 +9,7 @@ const Button = (
     type,
     onClick,
     name,
+    disabled,
     id
   }
 ) => {
@@ -20,6 +21,7 @@ const Button = (
       type={type || ''}
       name={name}
       id={id}
+      disabled={disabled}
     >
      {text}
     </button>
@@ -33,7 +35,8 @@ Button.propTypes = {
   tabIndex: PropTypes.string,
   className: PropTypes.string,
   id: PropTypes.string,
-  name: PropTypes.string
+  name: PropTypes.string,
+  disabled: PropTypes.bool
 };
 
 export default Button;

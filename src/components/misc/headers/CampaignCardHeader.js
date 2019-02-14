@@ -6,7 +6,7 @@ import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import { DateFormat } from "../../Factory";
 import { Translations } from "../../../lib/translations";
-import { UserImageItem } from "../../ui-kit";
+import { UserImageItem, Button } from "../../ui-kit";
 
 const CampaignCardHeader = ({
   campaign,
@@ -53,21 +53,19 @@ const CampaignCardHeader = ({
               Translations.date_format.time,
               true
             )}{" "}
-            in {campaign.category[0].categoryName}
+            {Translations.in} {campaign.category[0].categoryName}
           </div>
         )}
       </div>
       <div className={like_wrapper} role="article">
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
           id={campaign.id}
-          onKeyDown={handleFavorite}
           disabled={isLoading}
-        >
-          <img src={favorite_icon} alt="like" role="presentation" />
-        </button>
+          text={<img src={favorite_icon} alt="like" role="presentation" />}
+        />
       </div>
     </div>
   );
