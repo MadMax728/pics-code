@@ -296,7 +296,7 @@
           }
         }
         .upload-form{
-          padding: 20px 190px;
+          padding: 20px 155px;
           @media only screen and (max-width: 991px){
             padding: 20px 40px;
           }
@@ -317,6 +317,9 @@
               margin: 5px 0 15px;
               display: inline-block;
               width: 100%;
+              &.form-help-text{
+                font-size: 15px;
+              }
             }
             .create-campaign-crop-pic{
               .feed_image{
@@ -355,11 +358,19 @@
     .modal-content{
       .modal-header{}
       .modal-body{
+        .edit-profile-pic{
+          + .range-wrapr.add-wrapper{
+            float: none;
+          }
+        }
+        .create-campaign-crop-pic{
+          width: 518px;
+        }
         .range-wrapr.add-wrapper{
           position: relative;
           padding: 0 50px;
           width: 518px;
-          float: none;
+          float: inherit;
           margin: auto;
           .min-profile-pic{
             width: 20px;
@@ -405,6 +416,7 @@
       .modal-body{
         min-height: 400px;
         .create-campaign-wrapper{
+          padding: 0 0px 25px;
           .title{
             padding: 15px 20px;
             margin: 0;
@@ -450,5 +462,25 @@
         }
       }
     }
+  }
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  .btn {
+    padding: 8px 20px;
+    background-color: #fff;
+  }
+  input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  i{
+    cursor: pointer;
   }
 }
