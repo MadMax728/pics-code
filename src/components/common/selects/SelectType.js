@@ -48,11 +48,15 @@ class SelectType extends Component {
     this.setState({ typeList: [] });
   }
 
-
   handleType = (event) => {
-    this.props.handleSelect("type", event.target.value);
-  }
-
+    const { typeList } = this.props;
+    const name = typeList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: (name.length !== 0) ? name[0].voucherType : ""
+    }
+    this.props.handleSelect("type", data);
+  };
 }
 
 const mapStateToProps = state => ({

@@ -1,20 +1,36 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getSelect } from "../../../actions";
+import { getOffer } from "../../../actions";
 import { connect } from "react-redux";
 import { Translations } from "../../../lib/translations";
+import * as enumerations from "../../../lib/constants/enumerations";
+
+const offerList = [
+  {
+    id: enumerations.offer.payment,
+    value: Translations.offer.payment
+  },
+  {
+    id: enumerations.offer.products,
+    value: Translations.offer.products
+  },
+  {
+    id: enumerations.offer.premium_commission,
+    value: Translations.offer.premium_commission
+  },
+  {
+    id: enumerations.offer.cooperation,
+    value: Translations.offer.cooperation
+  },
+  {
+    id: enumerations.offer.other_incentive,
+    value: Translations.offer.other_incentive
+  }
+];
 
 class SelectOffer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      offerList: []
-    }
-  }
-
   render() {
-    const { offerList } = this.state;
-    const { value, className } = this.props;
+    const { value, className, offerList } = this.props;
     
     return (
       <select
@@ -25,9 +41,9 @@ class SelectOffer extends Component {
         options={offerList}
       >
         <option value="">{Translations.select_offer}</option>
-        {offerList.map(option => (
+        {offerList && offerList.map(option => (
           <option value={option.id} key={option.id}>
-            {option.offerName}
+            {option.value}
           </option>
         ))}
       </select>
@@ -35,23 +51,18 @@ class SelectOffer extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getSelect("offers").then(() => {
-      if(this.props.offerList){
-        this.setState({
-          offerList: this.props.offerList
-        });
-      }
-    });
+    this.props.getOffer(offerList);
   }
 
-  componentWillUnmount = () => {
-    this.setState({offerList: []});
-  }
-  
   handleOffer = (event) => {
-    this.props.handleSelect("offers",event.target.value);
-  }
-  
+    const { offerList } = this.props;
+    const name = offerList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: (name.length !== 0) ? name[0].value : ""
+    }
+    this.props.handleSelect("offers", data);
+  };
 }
 
 const mapStateToProps = state => ({
@@ -59,15 +70,14 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSelect
+  getOffer
 };
-
 
 const propTypes = {
   value: PropTypes.any,
   offerList: PropTypes.any,
   className: PropTypes.string,
-  getSelect: PropTypes.func.isRequired,
+  getOffer: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

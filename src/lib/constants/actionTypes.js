@@ -184,6 +184,12 @@ export const GET_USER_LIST_FAILED = "GET_USER_LIST_FAILED";
 //Get Target Group, would remove when requires
 export const GET_TARGET_GROUP_SUCCEEDED = "GET_TARGET_GROUP_SUCCEEDED";
 
+//Get Offer, would remove when requires
+export const GET_OFFER_SUCCEEDED = "GET_OFFER_SUCCEEDED";
+
+//Get Inquiry, would remove when requires
+export const GET_INQUIRY_SUCCEEDED = "GET_INQUIRY_SUCCEEDED";
+
 export const GET_AGE_SUCCEEDED = "GET_AGE_SUCCEEDED";
 
 // Privacy Profile

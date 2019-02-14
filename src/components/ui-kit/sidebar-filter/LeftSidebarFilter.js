@@ -224,15 +224,14 @@ class LeftSidebarFilter extends Component {
 
   handleSelectList = (isFor, selected) => {
     const filterData = this.state.filterData;
-    console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
       return f.name === isFor;
     });
     if (indexOf === -1) {
-      filterData.push({ name: isFor, val: selected });
+      filterData.push({ name: isFor, val: selected.id });
     } else {
       filterData.splice(indexOf, 1);
-      filterData.push({ name: isFor, val: selected });
+      filterData.push({ name: isFor, val: selected.id });
     }
     this.setState({ filterData });
     this.props.onChange(filterData);
