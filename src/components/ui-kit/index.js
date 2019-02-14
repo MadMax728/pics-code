@@ -44,5 +44,6 @@ export {
   Select,
   RadioButton,
   ErrorSpan,
-  Label
+  Label,
+  Textarea
 } from "./common-ui-components";
