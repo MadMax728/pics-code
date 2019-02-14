@@ -62,9 +62,13 @@ class SelectLanguage extends Component {
   };
 
   handleLanguage = event => {
-    this.props.handleSelect("language", event.target.value);
+    const { languageList } = this.state;
+    const data = {
+      id: event.target.value,
+      name: languageList.filter(c => c.id === event.target.value)[0].value
+    }
+    this.props.handleSelect("language", data);
   };
-
 }
 
 const mapStateToProps = state => ({

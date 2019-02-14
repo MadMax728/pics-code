@@ -49,7 +49,12 @@ class SelectCategory extends Component {
   };
 
   handleCategory = event => {
-    this.props.handleSelect("category", event.target.value);
+    const { categoryList } = this.props;
+    const data = {
+      id: event.target.value,
+      name: categoryList.filter(c => c.id === event.target.value)[0].categoryName
+    }
+    this.props.handleSelect("category", data);
   };
 }
 

@@ -49,10 +49,13 @@ class SelectCallToActions extends Component {
   }
 
   handleCallToActions = (event) => {
-    this.props.handleSelect("callToAction", event.target.value);
-  }
-
-
+    const { callToActionList } = this.props;
+    const data = {
+      id: event.target.value,
+      name: callToActionList.filter(c => c.id === event.target.value)[0].callToActionName
+    }
+    this.props.handleSelect("callToAction", data);
+  };
 }
 
 const mapStateToProps = state => ({

@@ -72,9 +72,13 @@ class SelectTargetGroup extends Component {
   };
 
   handleTargetGroup = event => {
-    this.props.handleSelect("target_group", event.target.value);
+    const { targetGroupList } = this.state;
+    const data = {
+      id: event.target.value,
+      name: targetGroupList.filter(c => c.id === event.target.value)[0].value
+    }
+    this.props.handleSelect("target_group", data);
   };
-
 }
 
 const mapStateToProps = state => ({

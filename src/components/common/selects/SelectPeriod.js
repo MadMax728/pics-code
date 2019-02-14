@@ -49,9 +49,13 @@ class SelectPeriod extends Component {
   }
 
   handlePeriod = (event) => {
-    this.props.handleSelect("period", event.target.value);
-  }
-
+    const { periodList } = this.props;
+    const data = {
+      id: event.target.value,
+      name: periodList.filter(c => c.id === event.target.value)[0].voucherPeriod
+    }
+    this.props.handleSelect("period", data);
+  };
 }
 
 const mapStateToProps = state => ({

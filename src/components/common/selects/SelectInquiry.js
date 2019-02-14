@@ -49,9 +49,13 @@ class SelectInquiry extends Component {
   }
 
   handleInquiry = (event) => {
-    this.props.handleSelect("inquiry", event.target.value);
-  }
-
+    const { inquiryList } = this.props;
+    const data = {
+      id: event.target.value,
+      name: inquiryList.filter(c => c.id === event.target.value)[0].inquiryName
+    }
+    this.props.handleSelect("inquiry", data);
+  };
 }
 
 const mapStateToProps = state => ({

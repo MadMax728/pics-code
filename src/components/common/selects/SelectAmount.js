@@ -50,9 +50,13 @@ class SelectAmount extends Component {
 
   
   handleAmount = (event) => {
-    this.props.handleSelect("amount",event.target.value);
-  }
-  
+    const { amountList } = this.props;
+    const data = {
+      id: event.target.value,
+      name: amountList.filter(c => c.id === event.target.value)[0].voucherAmount
+    }
+    this.props.handleSelect("amount", data);
+  };
 }
 
 const mapStateToProps = state => ({

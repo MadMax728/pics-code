@@ -49,9 +49,13 @@ class SelectOffer extends Component {
   }
   
   handleOffer = (event) => {
-    this.props.handleSelect("offers",event.target.value);
-  }
-  
+    const { offerList } = this.props;
+    const data = {
+      id: event.target.value,
+      name: offerList.filter(c => c.id === event.target.value)[0].offerName
+    }
+    this.props.handleSelect("offers", data);
+  };
 }
 
 const mapStateToProps = state => ({
@@ -61,7 +65,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getSelect
 };
-
 
 const propTypes = {
   value: PropTypes.any,

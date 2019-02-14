@@ -267,7 +267,7 @@ class EditProfile extends Component {
 
   handleCategory = (isFor, selected) => {
     const { form } = this.state;
-    form[isFor] = selected;
+    form[isFor] = selected.id;
     this.setState({ form });
   };
 
