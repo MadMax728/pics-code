@@ -253,6 +253,8 @@
     }
   }
   .left-filters {
+    display: inline-block;
+		width: 100%;
     .filter-btn-wrapper {
       border-top: 10px solid rgba(198, 198, 198, 0.3);
       @include float();
