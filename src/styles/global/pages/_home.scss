@@ -253,6 +253,8 @@
     }
   }
   .left-filters {
+    display: inline-block;
+		width: 100%;
     .filter-btn-wrapper {
       border-top: 10px solid rgba(198, 198, 198, 0.3);
       @include float();
@@ -1177,4 +1179,15 @@
   .blue_button{
     width: 100%;
   }
+}
+
+.block-divide{
+  display: inline-block;
+  width:100%;
+  border-bottom: 1px solid #ccc;
+}
+.creator-block{
+  display: inline-block;
+  width:100%;
+  padding: 8px 0 0 0;
 }

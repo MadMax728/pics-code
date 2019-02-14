@@ -88,13 +88,21 @@ class Upload extends Component {
               <div className="col-md-6 col-sm-6 col-xs-6">
                   <div className="upload-pic upload-div">
                       <h4>upload image</h4>
-                      <i className="fa fa-file-image-o" aria-hidden="true"></i>
+                      <div className="upload-btn-wrapper">
+                        <button className="btn"><i className="fa fa-file-image-o" aria-hidden="true"></i></button>
+                        <input type="file" name="myfile" />
+                      </div>
+                      
                   </div>
               </div>
               <div className="col-md-6 col-sm-6 col-xs-6">
                   <div className="upload-video upload-div">
                       <h4>upload video</h4>
-                      <i className="fa fa-video-camera" aria-hidden="true"></i>
+                      
+                      <div className="upload-btn-wrapper">
+                        <button className="btn"><i className="fa fa-video-camera" aria-hidden="true"></i></button>
+                        <input type="file" name="myfile" />
+                      </div>
                   </div>
               </div>
           </div>
