@@ -1,21 +1,40 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getSelect } from "../../../actions";
+import { getInquiry } from "../../../actions";
 import { connect } from "react-redux";
+import * as enumerations from "../../../lib/constants/enumerations";
 import { Translations } from "../../../lib/translations";
 
-class SelectInquiry extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      inquiryList: []
-    }
+const inquiryList = [
+  {
+    id: enumerations.inquiry.images,
+    value: Translations.inquiry.images
+  },
+  {
+    id: enumerations.inquiry.videos,
+    value: Translations.inquiry.videos
+  },
+  {
+    id: enumerations.inquiry.blogs,
+    value: Translations.inquiry.blogs
+  },
+  {
+    id: enumerations.inquiry.audio,
+    value: Translations.inquiry.audio
+  },
+  {
+    id: enumerations.inquiry.skills,
+    value: Translations.inquiry.skills
+  },
+  {
+    id: enumerations.inquiry.custom_work,
+    value: Translations.inquiry.custom_work
   }
+];
 
+class SelectInquiry extends Component {
   render() {
-    const { inquiryList } = this.state;
-    const { value, className } = this.props;
-
+    const { value, className, inquiryList } = this.props;
     return (
       <select
         value={value}
@@ -25,9 +44,9 @@ class SelectInquiry extends Component {
         options={inquiryList}
       >
         <option value="">{Translations.select_inquiry}</option>
-        {inquiryList.map(option => (
+        {inquiryList && inquiryList.map(option => (
           <option value={option.id} key={option.id}>
-            {option.inquiryName}
+            {option.value}
           </option>
         ))}
       </select>
@@ -35,24 +54,15 @@ class SelectInquiry extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getSelect("inquiries").then(() => {
-      if (this.props.inquiryList) {
-        this.setState({
-          inquiryList: this.props.inquiryList
-        });
-      }
-    });
-  }
-
-  componentWillUnmount = () => {
-    this.setState({ inquiryList: [] });
+    this.props.getInquiry(inquiryList);
   }
 
   handleInquiry = (event) => {
     const { inquiryList } = this.props;
+    const name = inquiryList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: inquiryList.filter(c => c.id === event.target.value)[0].inquiryName
+      name: (name.length !== 0) ? name[0].value : ""
     }
     this.props.handleSelect("inquiry", data);
   };
@@ -63,7 +73,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSelect
+  getInquiry
 };
 
 
@@ -71,7 +81,7 @@ const propTypes = {
   value: PropTypes.any,
   inquiryList: PropTypes.any,
   className: PropTypes.string,
-  getSelect: PropTypes.func.isRequired,
+  getInquiry: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 

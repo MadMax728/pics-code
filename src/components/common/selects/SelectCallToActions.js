@@ -50,9 +50,10 @@ class SelectCallToActions extends Component {
 
   handleCallToActions = (event) => {
     const { callToActionList } = this.props;
+    const name = callToActionList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: callToActionList.filter(c => c.id === event.target.value)[0].callToActionName
+      name: (name.length !== 0) ?  name[0].callToActionName : ""
     }
     this.props.handleSelect("callToAction", data);
   };

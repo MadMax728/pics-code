@@ -25,29 +25,18 @@ const targetGroupData = [
 ];
 
 class SelectTargetGroup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      targetGroupList: []
-    };
-  }
-
-  componentWillMount = () => {
-    this.props.getTargetGroup(targetGroupData);
-  };
-
   render() {
-    const { value, className } = this.props;
+    const { value, className, targetGroupList } = this.props;
     return (
       <select
         value={value}
         className={className}
         onChange={this.handleTargetGroup}
         onBlur={this.handleTargetGroup}
-        options={targetGroupData}
+        options={targetGroupList}
       >
         <option value="">{Translations.select_target_group}</option>
-        {targetGroupData.map(option => (
+        {targetGroupList && targetGroupList.map(option => (
           <option value={option.id} key={option.id}>
             {option.value}
           </option>
@@ -57,32 +46,22 @@ class SelectTargetGroup extends Component {
   }
 
   componentDidMount = () => {
-    if (
-      this.props.targetGroupList &&
-      this.props.targetGroupList.target_group_data
-    ) {
-      this.setState({
-        targetGroupList: this.props.targetGroupList.target_group_data
-      });
-    }
-  };
-
-  componentWillUnmount = () => {
-    this.setState({ targetGroupList: [] });
+    this.props.getTargetGroup(targetGroupData);
   };
 
   handleTargetGroup = event => {
-    const { targetGroupList } = this.state;
+    const { targetGroupList } = this.props;
+    const name = targetGroupList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: targetGroupList.filter(c => c.id === event.target.value)[0].value
+      name: (name.length !== 0) ?  name[0].value : ""
     }
     this.props.handleSelect("target_group", data);
   };
 }
 
 const mapStateToProps = state => ({
-  targetGroupList: state.selectData
+  targetGroupList: state.selectData.targetGroups
 });
 
 const mapDispatchToProps = {

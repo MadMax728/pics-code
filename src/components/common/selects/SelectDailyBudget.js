@@ -55,9 +55,10 @@ class SelectDailyBudget extends Component {
 
   handleOffer = event => {
     const { dailyBudgetList } = this.state;
+    const name = dailyBudgetList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: dailyBudgetList.filter(c => c.id === event.target.value)[0].label
+      name: (name.length !== 0 )?  name[0].label : ""
     }
     this.props.handleSelect("budget", data);
   };
