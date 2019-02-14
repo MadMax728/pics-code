@@ -265,6 +265,41 @@ class LeftSideBar extends Component {
           render={this.renderInformationService}
         />
 
+        <Route
+          path={routes.INFORMATION_COOKIE_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_COMMUNITY_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_BRANDED_CONTENT_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_BUSINESS_TERMS_CONDITIONS_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_PAYMENT_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_COMMUNITY_PAYMENT_GUIDELINE_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
         {/* letf side bar information */}
 
         {/* letf side bar service */}
