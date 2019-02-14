@@ -1112,6 +1112,8 @@
 
 .user-pics-modal{
   .modal-dialog{
+    width: 400px !important;
+    position: relative;
     margin: 80px auto;
     .modal-content{
       .closeBtn {
@@ -1123,7 +1125,7 @@
           border: none;
       }
       .modal-body{
-        padding: 10px 0 0;
+        // padding: 10px 0 0;
         .slider-modal-header{
           font-size: 18px;
           padding: 15px 0;
@@ -1131,19 +1133,70 @@
         }
         .user-pics-carousel{
           height: 500px;
-          .slider-wrapper{
-            .slider{
-              .slide {
-                height: 500px;
-                > div{
-                  height: 100%;
-                  img{
+          .carousel-slider{
+            overflow: visible;
+            .slider-wrapper{
+              .slider{
+                .slide {
+                  height: 500px;
+                  > div{
                     height: 100%;
-                    object-fit: contain;
+                    img{
+                      height: 100%;
+                      object-fit: cover;
+                    }
                   }
                 }
               }
             }
+            // .control-arrow{
+            //   opacity: 1;
+            // }
+            .carousel-status{
+              display: none;
+            }
+            .control-prev.control-arrow{
+              left:-75px;
+              &:hover{
+                background: transparent;
+              }
+              &::before{
+                content: "\f104"; 
+                font-family: FontAwesome;
+                border: none;
+                color: #ffffff;
+              }
+            }
+            .control-next.control-arrow{
+              right: -75px;
+              &:hover{
+                background: transparent;
+              }
+              &::before{
+                content: "\f105"; 
+                font-family: FontAwesome;
+                border: none;
+                color: #ffffff;
+              }
+            }
+          }
+        }
+        .user-pic-opt{
+          position: absolute;
+          bottom: 0;
+          p{
+            display: inline-block;
+            width: 100%;
+            margin: 0 0 5px;
+            i{
+              color: #ffffff;
+              cursor: pointer;
+            }
+          }
+          .option-text{
+            color: #ffffff;
+            font-size: 14px;
+            text-transform: capitalize;
           }
         }
       }
