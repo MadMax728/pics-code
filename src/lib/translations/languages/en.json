@@ -79,15 +79,15 @@
     "advertisement": "Label as advertisement",
     "upload_file": "Upload File",
     "yes": "Yes",
-    "no": "No",    
+    "no": "No",
     "add_image": "Add image",
-    "add_video" : "Add Video",
-    "location_help_text" : "Define where you are located",
-    "image_category_help_text" : "Define a category in which your image belongs",
-    "video_category_help_text" : "Define a category in which your video belongs",
-    "description_help_text" : "Enter a description of what you want to tell your community",
-    "image_label_advertisement_help_text" : "Label your image as advertisement if you have a product placement",
-    "video_label_advertisement_help_text" : "Label your video as advertisement if you have a product placement"
+    "add_video": "Add Video",
+    "location_help_text": "Define where you are located",
+    "image_category_help_text": "Define a category in which your image belongs",
+    "video_category_help_text": "Define a category in which your video belongs",
+    "description_help_text": "Enter a description of what you want to tell your community",
+    "image_label_advertisement_help_text": "Label your image as advertisement if you have a product placement",
+    "video_label_advertisement_help_text": "Label your video as advertisement if you have a product placement"
   },
 
   "create_ads": {
@@ -248,9 +248,9 @@
     "radius_help_text": "Define with which radius you want to ad shown",
     "category_help_text": "Define a category in which your campaign belongs",
     "target_group_help_text": "Select whom your campaign addresses",
-    "type_help-text" :"Select if the participant have to apply with an image or video",
-    "offer_help_text" :"Use offers to indicate what you offer in return for doing the campaign",
-    "inquiry_help_text" :"User inquiry to select what service you are looking for"
+    "type_help-text": "Select if the participant have to apply with an image or video",
+    "offer_help_text": "Use offers to indicate what you offer in return for doing the campaign",
+    "inquiry_help_text": "User inquiry to select what service you are looking for"
   },
 
   "you_have": "You have",
@@ -318,23 +318,30 @@
   },
 
   "information_menu": {
+    "menu_title": "Information",
     "our_vision": "Our Vision",
     "imprint": "Imprint",
     "campaigns": "Campaigns",
     "campaign_policy": "Campaign Policy",
     "advertising": "Advertising",
-    "advertising_policy": "Advertising Policy",
+    "advertising_policy": "Advertisment Policy",
     "general_terms_and_conditions": "General Terms and Conditions",
-    "data_protection_and_privacy_policy": "Data protection and privacy Policy",
-    "platform_policy": "Platform policy",
+    "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
+    "platform_policy": "Platform Policy",
     "cancellation_policy": "Cancellation Policy",
-    "terms_of_use": "Terms of use"
+    "terms_of_use": "Terms of use",
+    "cookie_guidelines": "Cookie Guidelines",
+    "community_guidelines": "Community Guidelines",
+    "branded_content_guidelines": "Branded Content Guidelines",
+    "business_terms_condition": "Business Terms and Conditions",
+    "payment_guidelines": "Payment Guidelines",
+    "community_payment_guidelines": "Community Payment Guidelines"
   },
-  
+
   "reply": "Reply",
-  
+
   "sponsored_in": "Sponsored in",
-  
+
   "in": "in",
 
   "tool_tips": {
@@ -436,12 +443,31 @@
   },
 
   "service_menu": {
+    "menu_title": "Service",
     "support": "Support",
     "verification": "Verification",
     "feedback": "Feedback",
+    "report_problem": "Report a problem",
     "reported_content": "Reported Content",
     "delete_account": "Delete account",
     "law_enforcement_agency": "Law enforcement agency"
+  },
+
+  "service_feedback": {
+    "title": "Feedback",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "name": "Your name",
+    "username": "Your username",
+    "email": "Your email",
+    "subject": "subject",
+    "text": "Text",
+    "send": "Send",
+    "name_is_required": "Name is required",
+    "username_is_required": "Username is required",
+    "email_is_required": "Email is required",
+    "email_should_be_valid": "Email should be valid",
+    "subject_is_required": "Subject is required",
+    "text_is_required": "Text is required"
   },
 
   "left_sidebar_filter": {
@@ -522,6 +548,23 @@
   "user_group": {
     "all_users": "All Users",
     "subscribed": "Subscribed"
+  },
+
+  "offer": {
+    "payment": "Payment",
+    "products": "Products",
+    "premium_commission": "Premium/commission",
+    "cooperation": "Cooperation",
+    "other_incentive": "Other incentive"
+  },
+
+  "inquiry": {
+    "images": "Images",
+    "videos": "Videos",
+    "blogs": "Blogs",
+    "audio": "Audio",
+    "skills": "Skills",
+    "custom_work": "Custom Work"
   },
 
   "gender": {

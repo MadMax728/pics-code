@@ -217,10 +217,10 @@ class CMSManagementPage extends Component {
   }
 
   handleSelect = (isFor , selected) => {
-    this.setState({ language: selected });
-    if (this.state.language !== selected)
+    this.setState({ language: selected.id });
+    if (this.state.language !== selected.id)
     {
-      const url = selected === Translations.base_footer.language? `` : `?language=${selected}`;
+      const url = selected.id === Translations.base_footer.language? `` : `?language=${selected.id}`;
       this.props.getCMSManagement(url).then(()=> {
         if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
           this.setState({

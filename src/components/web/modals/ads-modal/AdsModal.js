@@ -506,7 +506,7 @@ class AdsModal extends Component {
 
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
-    form[isFor] = selected;
+    form[isFor] = selected.id;
     if (isFor === "budget") {
       this.calculateMaxClicks();
     }

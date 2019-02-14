@@ -6,3 +6,4 @@ export { default as RadioButton } from "./RadioButton";
 export { default as Button } from "./Button";
 export { default as ErrorSpan } from "./ErrorSpan";
 export { default as Label } from "./Label";
+export { default as Textarea } from "./Textarea";

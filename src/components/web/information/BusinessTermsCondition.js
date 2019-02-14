@@ -3,17 +3,17 @@ import CMSContent from "../common/CMSContent";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
-const Imprint = ({ history }) => {
+const BusinessTermsCondition = ({ history }) => {
   return (
     <CMSContent
-      title={Translations.information_menu.imprint}
+      title={Translations.information_menu.business_terms_condition}
       history={history}
     />
   );
 };
 
-Imprint.propTypes = {
+BusinessTermsCondition.propTypes = {
   history: PropTypes.any
 };
 
-export default Imprint;
+export default BusinessTermsCondition;
