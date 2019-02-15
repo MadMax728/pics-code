@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { UserImageItem } from "../../ui-kit";
 
@@ -16,14 +18,17 @@ const FeedHeader = ({
         ? images.blue_heart
         : images.feed_like;
     const profileImage = image || images.image;
+    const profile_route = `${routes.NEWS_FEED_ROUTE}/${userName}`;
     return (
         <div className="feed_header">
             <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
             <div className="col-sm-9 col-xs-7">
                 <div className="normal_title">{title}</div>
-                <div className="secondary_title">
-                    {userName}
-                </div>
+                <Link to={profile_route} className="">
+                    <div className="secondary_title">
+                        {userName}
+                    </div>
+                </Link>
                 {
                     category && (
                         <div className="grey_title">{category}</div>

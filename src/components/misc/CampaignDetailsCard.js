@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import * as images from "./../../lib/constants/images";
+import * as routes from "./../../lib/constants/routes";
 import Comments from "../web/templates/information/Comments";
 import { Translations } from "../../lib/translations";
 import FeedHeader from "./headers/FeedHeader";
@@ -8,6 +10,7 @@ import { InfoWrapperItem, DescriptionItem } from "./items";
 import { ImageItem, VideoItem, ThreeDots, Button } from "../ui-kit";
 import * as enumerations from "../../lib/constants/enumerations";
 import moment from "moment";
+import { DateFormat } from "./../Factory";
 
 const CampaignDetailsCard = ({
   campaignDetails,
@@ -24,13 +27,32 @@ const CampaignDetailsCard = ({
   const favorite_icon = campaignDetails.isSelfLike
     ? images.blue_heart
     : images.feed_like;
+  const profile_route = campaignDetails.isOwner
+    ? routes.NEWS_FEED_ROUTE
+    : `${routes.NEWS_FEED_ROUTE}/${campaignDetails.userName}`;
   const selectedUserType = "creator";
   return (
     <div className="information-wrapper ht100">
       <div className="info-inner-wrapper col-xs-12 padd-15">
-        <h3 className="no-padding no-margin">{campaignDetails.title}</h3>
-        <DescriptionItem desc={campaignDetails.description} />
-        <div className="info-img">
+        <h3 className="no-padding no-margin capitalize">{campaignDetails.title}</h3>
+        <div className="no-padding titles_wrapper">
+          <div className="secondary_title">
+            {campaignDetails.location &&
+              campaignDetails.location.address &&
+              campaignDetails.location.address}
+          </div>
+          {campaignDetails.category && (
+            <div className="grey_title">
+              {DateFormat(
+                campaignDetails.createdAt,
+                Translations.date_format.time,
+                true
+              )}{" "}
+              {Translations.in} {campaignDetails.category[0].categoryName}
+            </div>
+          )}
+        </div>
+        <div className="paddTop20">
           {campaignDetails.typeContent &&
             campaignDetails.typeContent.toLowerCase() ===
               enumerations.mediaTypes.image && (
@@ -48,6 +70,9 @@ const CampaignDetailsCard = ({
                 item={campaignDetails.mediaUrl}
               />
             )}
+        </div>
+        <div className="paddTop20">
+          <DescriptionItem desc={campaignDetails.description} />
         </div>
         <div className="text paddTop20" />
         {campaignDetails.isOwner ? (

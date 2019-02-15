@@ -153,8 +153,12 @@ hr {
 .float_left {
   float: left;
 }
+.capitalize {
+  text-transform: capitalize;
+}
 .normal_title {
   color: $charcoal_color;
+  text-transform: capitalize;
   font-family: "Helvetica-Bold";
   font-size: 14px;
   &.gray_box {
