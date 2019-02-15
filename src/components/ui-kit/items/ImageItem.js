@@ -15,7 +15,6 @@ class ImageItem extends Component {
 
   render() {
     const { isLoading, item, userName, classNames } = this.props;
-    console.log(item);
     const { lightboxIsOpen } = this.state;
     return (
       <div className="bg-black feed_image">

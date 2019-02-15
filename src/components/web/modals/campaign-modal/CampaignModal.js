@@ -140,6 +140,8 @@ class CampaignModal extends Component {
               handlePrivewOpen={this.handlePrivewOpen}
               handleResoreState={this.handleResoreState}
               modalTitle={modalTitle}
+              handleSubmit={this.handleCreatorSubmit}
+              isFor={isFor}
             />
           )
         }
@@ -194,7 +196,7 @@ class CampaignModal extends Component {
               maxClicks={maxClicks}
               handleAddress={this.handleAddress}
               handleContentChange={this.handleContentChange}
-              handleSubmit={this.handleCompanySubmit}
+              handleSubmit={this.handleCreatorSubmit}
               handleDate={this.handleDate}
               contentText={form.description}
               handleEditImage={this.handleEditImage}
@@ -363,7 +365,9 @@ class CampaignModal extends Component {
   };
 
   handleCreatorSubmit = () => {
-    this.handleSubmit();
+    console.log("handle creator submit");
+    
+    // this.handleSubmit();
   };
 
   handleContentChange = text => {

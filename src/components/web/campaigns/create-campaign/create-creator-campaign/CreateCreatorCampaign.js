@@ -99,30 +99,6 @@ class CreateCreatorCampaign extends Component {
               maxClicks={maxClicks}
             />
           ))}
-        {!isPreview &&
-          (stepIndex === 3 && (
-            <PaymentStepOne
-              handleAddress={handleAddress}
-              forThat={forThat}
-              handleChangeField={handleChangeField}
-              form={form}
-              userInfo={userInfo}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 4 && (
-            <PaymentStepTwo
-              forThat={forThat}
-              handleModalInfoShow={handleModalInfoShow}
-              handleChangeField={handleChangeField}
-              form={form}
-              handleSubmit={handleSubmit}
-              setVoucherData={setVoucherData}
-              userInfo={userInfo}
-              isLoading={isLoading}
-              isEdit={isEdit}
-            />
-          ))}
       </div>
     );
   }
