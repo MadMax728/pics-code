@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import { Scrollbars } from 'react-custom-scrollbars';
+// import { Scrollbars } from 'react-custom-scrollbars';
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -98,7 +98,7 @@ class ParticipantsFilter extends Component {
     const { filterApply } = this.state;
 
     return (
-      <Scrollbars style={{ width: 20, height: 100 }}>
+      // <Scrollbars style={{ width: 20, height: 100 }}>
         <div className="left-filters">
         
           <LeftSidebarFilter
@@ -122,7 +122,7 @@ class ParticipantsFilter extends Component {
             )}
           </div>
         </div>
-      </Scrollbars>
+      // </Scrollbars>
     );
   }
 
