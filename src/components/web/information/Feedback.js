@@ -98,7 +98,7 @@ class Feedback extends Component {
                         value={Translations.service_feedback.email}
                       />
                       <Input
-                        type="text"
+                        type="email"
                         className="form-control"
                         id="email"
                         name="email"
@@ -143,8 +143,6 @@ class Feedback extends Component {
                 <div className="row">
                   <div className="col-sm-12">
                     <div className="form-group">
-                      {/* <label htmlFor={"Text"}>Text</label>
-                      <textarea className="full-width-textarea" /> */}
                       <Label
                         htmlFor={Translations.service_feedback.text}
                         value={Translations.service_feedback.text}
@@ -169,13 +167,13 @@ class Feedback extends Component {
                 </div>
                 <div className="row">
                   <div className="col-sm-12">
-                    <div className="form-group capcha-wrapper">
+                    {/* <div className="form-group capcha-wrapper">
                       <img
                         src={images.capcha}
                         alt={"capcha"}
                         className="capcha-img"
                       />
-                    </div>
+                    </div> */}
                     <div className="form-group button_wrapper">
                       <Button
                         className="black_button wid120"
@@ -288,7 +286,6 @@ class Feedback extends Component {
       return false;
     }
     const { feedback_form } = this.state;
-    console.log(feedback_form);
   };
 }
 
