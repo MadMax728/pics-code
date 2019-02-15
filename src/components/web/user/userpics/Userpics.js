@@ -23,9 +23,9 @@ class Userpics extends Component {
     const picsDataList = picsData.data;
     return (
       <div className={"col-xs-12 no-padding"}>
-        <div className="col-sm-12 margin-bottom-10">
+        {/* <div className="col-sm-12 margin-bottom-10">
           <h2 className="slider-modal-header">{Translations.user_pics}</h2>
-        </div>
+        </div> */}
         <div className="col-sm-12">
           {picsDataList && (
             <div className="user-pics-carousel row">
@@ -57,6 +57,16 @@ class Userpics extends Component {
                   );
                 })}
               </Carousel>
+              <div className="col-md-12 col-sm-12 user-pic-opt">
+                <div className="col-md-4 text-center">
+                  <p><i className="fa fa-eye" aria-hidden="true"></i></p>
+                  <p className="option-text">0 views</p>
+                </div>
+                <div className="col-md-4 col-md-offset-4 text-center">
+                  <p><i className="fa fa-trash" aria-hidden="true"></i></p>
+                  <p className="option-text">delete</p>
+                </div>
+              </div>
             </div>
           )}
         </div>
