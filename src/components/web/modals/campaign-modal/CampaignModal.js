@@ -378,9 +378,8 @@ class CampaignModal extends Component {
   };
 
   handleCreatorSubmit = () => {
-    console.log("handle creator submit");
-    
-    // this.handleSubmit();
+    // console.log("handle creator submit");
+    this.handleSubmit();
   };
 
   handleContentChange = text => {
