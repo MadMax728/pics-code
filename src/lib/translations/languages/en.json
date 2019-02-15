@@ -91,6 +91,7 @@
   },
 
   "create_ads": {
+    "ad": "Ad",
     "runtime": "Runtime",
     "runtime_passed": "Runtime passed",
     "remaining_runtime": "Remaining runtime",

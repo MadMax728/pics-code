@@ -13,7 +13,6 @@ import {
   Textarea,
   InlineLoading
 } from "../../ui-kit";
-import { modalType } from "../../../lib/constants/enumerations";
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 class ReportedContent extends Component {
@@ -197,6 +196,7 @@ class ReportedContent extends Component {
                         }
                         value={Translations.service_report_problem.select_file}
                       />
+                      <ErrorSpan value={errors.file} />
                     </div>
                   </div>
                 </div>
@@ -389,7 +389,7 @@ class ReportedContent extends Component {
       return false;
     }
     const { report_form } = this.state;
-    console.log(report_form);
+    // console.log(report_form);
   };
 }
 

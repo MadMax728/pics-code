@@ -29,6 +29,11 @@ const RightSidebarModal = ({ userInfo, form, isFor }) => {
             date={DateFormat(todayDate, Translations.date_format.date, true)}
             title={form.title}
             username={userInfo ? userInfo.username : ""}
+            category={
+              form.categoryName
+                ? form.categoryName
+                : Translations.create_ads.category
+            }
           />
           <div className="like_wrapper">
             <img src={images.blue_heart} alt="like1" className="pull-right" />
@@ -62,9 +67,9 @@ const RightSidebarModal = ({ userInfo, form, isFor }) => {
                   className="more-strip zIndex0"
                   rel="noopener noreferrer"
                 >
-                  {"Ad"}
-                  {/* To Do - Action Name */}
-                  {/* {form.callToAction ? form.callToAction : "Ad"} */}
+                  {form.actionName
+                    ? form.actionName
+                    : Translations.create_ads.ad}
                 </a>
               </div>
             )}
@@ -121,12 +126,7 @@ const RightSidebarModal = ({ userInfo, form, isFor }) => {
                     {form && form.offers && (
                       <InfoWrapperItem
                         title={Translations.campaign_details.offer}
-                        value={
-                          form.offers &&
-                          form.offersList &&
-                          form.offersList[0].offerName &&
-                          form.offersList[0].offerName
-                        }
+                        value={form.offers && form.offerName && form.offerName}
                       />
                     )}
                   </div>
@@ -154,10 +154,7 @@ const RightSidebarModal = ({ userInfo, form, isFor }) => {
                       <InfoWrapperItem
                         title={Translations.campaign_details.inquiry}
                         value={
-                          form.inquiry &&
-                          form.inquiryList &&
-                          form.inquiryList[0].inquiryName &&
-                          form.inquiryList[0].inquiryName
+                          form.inquiry && form.inquiryName && form.inquiryName
                         }
                       />
                     )}
