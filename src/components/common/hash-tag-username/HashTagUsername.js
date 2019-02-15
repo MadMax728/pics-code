@@ -47,30 +47,34 @@ class HashTagUsername extends Component {
   none = () => {};
 
   handleChangeField = e => {
-    const commentArr = e.values.val.split(" ");
+    const { isText } = this.props;
+    const value = isText? e.values.val : e.target.value;
+    const commentArr = value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
     this.hashTagHide();
     this.usernameHide();
     if (lastText.charAt(0) === "#") {
-      this.props.handleSetState(e.values.val, this.hashTagShow);
+      this.props.handleSetState(value, this.hashTagShow);
       // this.handleAddHashTag(lastText);
     } else if (lastText.charAt(0) === "@") {
-      this.props.handleSetState(e.values.val, this.usernameShow);
+      this.props.handleSetState(value, this.usernameShow);
     } else {
-      this.props.handleSetState(e.values.val, this.none);
+      this.props.handleSetState(value, this.none);
     }
   };
 
   handleLengthField = e => {
-    let commentText = e.values.val;
+    const { isText } = this.props;
+    const value = isText? e.values.val : e.target.value;
+    let commentText = value;
     let limitField;
-    const commentArr = e.values.val.split(" ");
+    const commentArr = value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
 
     const keyCode = e.keyCode ? e.keyCode : e.which;
 
     if (lastText.charAt(0) === "#") {
-      this.props.handleSetState(e.values.val, this.hashTagShow);
+      this.props.handleSetState(value, this.hashTagShow);
       if (keyCode === 32) {
         this.handleAddHashTag(lastText);
       }
