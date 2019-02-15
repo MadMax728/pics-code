@@ -244,7 +244,7 @@ class UploadModal extends Component {
 
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
-    form.add_category = selected;
+    form.add_category = selected.id;
     this.setState({ form });
   };
 

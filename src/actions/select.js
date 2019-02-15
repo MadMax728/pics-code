@@ -73,6 +73,7 @@ export const getBackofficeSelect = (prop, provider) => {
   };
 };
 
+// Target Group
 const getTargetGroupSucceeded = data => ({
   type: types.GET_TARGET_GROUP_SUCCEEDED,
   payload: data
@@ -81,6 +82,30 @@ const getTargetGroupSucceeded = data => ({
 export const getTargetGroup = data => {
   return dispatch => {
     dispatch(getTargetGroupSucceeded(data));
+  };
+};
+
+// Offer
+const getOfferSucceeded = data => ({
+  type: types.GET_OFFER_SUCCEEDED,
+  payload: data
+});
+
+export const getOffer = data => {
+  return dispatch => {
+    dispatch(getOfferSucceeded(data));
+  };
+};
+
+// Inquiry
+const getInquirySucceeded = data => ({
+  type: types.GET_INQUIRY_SUCCEEDED,
+  payload: data
+});
+
+export const getInquiry = data => {
+  return dispatch => {
+    dispatch(getInquirySucceeded(data));
   };
 };
 
