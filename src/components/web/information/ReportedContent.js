@@ -13,6 +13,7 @@ import {
   Textarea,
   InlineLoading
 } from "../../ui-kit";
+import { modalType } from "../../../lib/constants/enumerations";
 
 const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 class ReportedContent extends Component {
@@ -26,7 +27,9 @@ class ReportedContent extends Component {
         email: "",
         account_reporting: "",
         subject: "",
+        image: "",
         file: "",
+        fileType: "",
         text: ""
       },
       errors: {}
@@ -185,20 +188,15 @@ class ReportedContent extends Component {
                         type="file"
                         name="file-1"
                         id="file-1"
-                        onChange={this.handleFile}
-                      />
-                      {/* <input
-                        type="file"
-                        name="file-1"
-                        id="file-1"
                         className="inputfile inputfile-1"
+                        onChange={this.handleFile}
                       />
                       <Label
                         htmlFor={
                           Translations.service_report_problem.select_file
                         }
                         value={Translations.service_report_problem.select_file}
-                      /> */}
+                      />
                     </div>
                   </div>
                 </div>
@@ -269,11 +267,27 @@ class ReportedContent extends Component {
     }
   };
 
-  handleFile = file => {
-    console.log(file);
+  handleFile = event => {
+    const file = event.target.files[0];
     const reader = new FileReader();
-    if (file.type.includes("image")) {
-      console.log(file.type);
+    if (file.type.includes("image/jpeg") || file.type.includes("image/jpg")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        const { report_form } = currentThis.state;
+        report_form.image = reader.result;
+        report_form.file = file;
+        report_form.fileType = true;
+        currentThis.setState({ report_form });
+        currentThis.formValid();
+      };
+    } else {
+      const currentThis = this;
+      const { report_form } = currentThis.state;
+      report_form.file = file;
+      report_form.fileType = false;
+      currentThis.setState({ report_form });
+      this.formValid();
     }
   };
 
@@ -356,6 +370,11 @@ class ReportedContent extends Component {
       isFormValid = false;
     }
 
+    if (report_form.file !== "" && report_form.fileType === false) {
+      errors.file = Translations.service_report_problem.select_evidence;
+      isFormValid = false;
+    }
+
     if (report_form.text.length === 0) {
       errors.text = Translations.service_report_problem.text_is_required;
       isFormValid = false;
@@ -370,7 +389,7 @@ class ReportedContent extends Component {
       return false;
     }
     const { report_form } = this.state;
-    // console.log(report_form);
+    console.log(report_form);
   };
 }
 
@@ -385,7 +404,8 @@ const mapDispatchToProps = {
 ReportedContent.propTypes = {
   searchData: PropTypes.any,
   history: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  handleModalInfoMsgShow: PropTypes.any
 };
 
 export default connect(
