@@ -15,7 +15,6 @@ class RenderToolTips extends Component {
       <div className="post-action-links">
         {items.map(item => {
           return (  
-            <div key={`${item.name}-${id}`}>
               <Button
                 className="btn-comment-tooltip"
                 type="button"
@@ -23,8 +22,8 @@ class RenderToolTips extends Component {
                 onClick={item.handleEvent}
                 id={id}
                 text={item.name}
+                key={`${item.name}-${id}`}
               />
-            </div>
           );
         })}
       </div>

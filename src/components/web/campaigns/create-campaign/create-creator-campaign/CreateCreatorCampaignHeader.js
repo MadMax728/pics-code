@@ -10,7 +10,7 @@ class CreateCreatorCampaignHeader extends Component {
   }
 
   render() {
-    const { stepIndex, modalTitle } = this.props;
+    const { stepIndex, modalTitle, handleSubmit, isFor } = this.props;
     return (
       <div className="row">
         <div className="col-sm-5 modal-title">{/* {modalTitle} */}</div>
@@ -64,9 +64,14 @@ class CreateCreatorCampaignHeader extends Component {
   };
 
   handleContinue = () => {
-    if (this.props.stepIndex < 5) {
+    const { stepIndex, isFor } = this.props;
+    if (stepIndex === 2 && !isFor) {
+      this.props.handleSubmit();
+    }
+    else if(this.props.stepIndex < 5) {
       this.props.handleNext();
-    } else {
+    } 
+    else {
       console.log("data saved code");
     }
   };
@@ -79,7 +84,9 @@ CreateCreatorCampaignHeader.propTypes = {
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
   handleResoreState: PropTypes.func.isRequired,
-  modalTitle: PropTypes.string.isRequired
+  modalTitle: PropTypes.string.isRequired,
+  handleSubmit: PropTypes.func,
+  isFor: PropTypes.bool
 };
 
 export default CreateCreatorCampaignHeader;
