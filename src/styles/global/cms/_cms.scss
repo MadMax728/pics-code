@@ -20,6 +20,12 @@ header {
   .panel-wrapper {
     background: $white_color;
     margin-bottom: 10px;
+    .browse-file{
+      .inputfile{
+        z-index: 9;
+        top:25px;
+      }
+    }
     form {
       padding-top: 20px;
       label {
