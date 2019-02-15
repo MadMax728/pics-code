@@ -425,6 +425,65 @@
     "text_is_required": "Text is required"
   },
 
+  "service_report_problem": {
+    "title": "Reported Problem",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "name": "Your name",
+    "username": "Your username",
+    "email": "Your email",
+    "subject": "subject",
+    "text": "Text",
+    "account_reporting": "The account that you're reporting",
+    "upload": "Upload evidence (jpeg)",
+    "select_file": "Select File",
+    "send": "Send",
+    "name_is_required": "Name is required",
+    "username_is_required": "Username is required",
+    "email_is_required": "Email is required",
+    "email_should_be_valid": "Email should be valid",
+    "subject_is_required": "Subject is required",
+    "text_is_required": "Text is required",
+    "account_is_required": "Account is required",
+    "select_evidence": "Select Evidence in required format"
+  },
+
+  "service_delete_account": {
+    "title": "Delete Account",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "username": "Username / Email",
+    "password": "Password",
+    "repeat_password": "Repeat Password",
+    "delete_account": "Delete account",
+    "username_is_required": "Username is required",
+    "email_should_be_valid": "Email should be valid",
+    "password_required": "Password is required",
+    "repeat_password_is_required": "Repeat Password is required",
+    "password_is_not_matching": "Password is not matching",
+    "password_length_error": "Password Length should be greater than 8 characters"
+  },
+
+  "service_law_agency": {
+    "title": "Law Enforcement Agency",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "name": "Your name",
+    "agency": "Your agency",
+    "email": "Your email",
+    "subject": "subject",
+    "text": "Text",
+    "account_reporting": "The account that you're reporting",
+    "upload": "Upload evidence (jpeg)",
+    "select_file": "Select File",
+    "send": "Send",
+    "name_is_required": "Name is required",
+    "agency_is_required": "Agency is required",
+    "email_is_required": "Email is required",
+    "email_should_be_valid": "Email should be valid",
+    "subject_is_required": "Subject is required",
+    "text_is_required": "Text is required",
+    "account_is_required": "Account is required",
+    "select_evidence": "Select Evidence in required format"
+  },
+
   "left_sidebar_filter": {
     "language": {
       "name": "Language",
