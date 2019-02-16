@@ -48,5 +48,5 @@ typings/
 .idea/
 *.sln.iml
 
-
+package-lock.json
 storybook-static/
