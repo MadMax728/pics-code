@@ -33,7 +33,7 @@ class CreateCMSManagementPage extends Component {
 
   handleSelect = (isFor , selected) => {
     const { form } = this.state;
-    form.pageLanguage = selected
+    form.pageLanguage = selected.id
     this.setState({ form });
   }
 

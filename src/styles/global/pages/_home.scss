@@ -151,7 +151,7 @@
       }
       .content-wrapper {
         background-color: white;
-        height: inherit;
+        height: auto;
         .title {
           font-family: "Helvetica-Bold";
           font-size: 20px;
@@ -253,8 +253,11 @@
     }
   }
   .left-filters {
+    display: inline-block;
+    width: 100%;
+    padding-right: 10px;
     .filter-btn-wrapper {
-      border-top: 10px solid rgba(198, 198, 198, 0.3);
+      border-top: 2px solid rgba(198, 198, 198, 0.3);
       @include float();
       .black_button {
         width: 100%;
@@ -1109,8 +1112,14 @@
 }
 
 .user-pics-modal{
+  background:rgba(51,51,51,0.7) !important;
+  &.in{
+    
+  }
   .modal-dialog{
-    margin: 80px auto;
+    width: 400px !important;
+    position: relative;
+    margin: 120px auto;
     .modal-content{
       .closeBtn {
           position: absolute;
@@ -1121,7 +1130,7 @@
           border: none;
       }
       .modal-body{
-        padding: 10px 0 0;
+        // padding: 10px 0 0;
         .slider-modal-header{
           font-size: 18px;
           padding: 15px 0;
@@ -1129,19 +1138,126 @@
         }
         .user-pics-carousel{
           height: 500px;
-          .slider-wrapper{
-            .slider{
-              .slide {
-                height: 500px;
-                > div{
-                  height: 100%;
-                  img{
+          .carousel-slider{
+            overflow: visible;
+            .slider-wrapper{
+              .slider{
+                .slide {
+                  height: 500px;
+                  > div{
                     height: 100%;
-                    object-fit: contain;
+                    img{
+                      height: 100%;
+                      object-fit: cover;
+                    }
                   }
                 }
               }
             }
+            .control-arrow{
+              opacity: 1;
+            }
+            .carousel-status{
+              display: none;
+            }
+            .control-prev.control-arrow{
+              left:-75px;
+              &:hover{
+                background: transparent;
+              }
+              &::before{
+                content: "\f104"; 
+                font-family: FontAwesome;
+                border: none;
+                color: #ffffff;
+              }
+            }
+            .control-next.control-arrow{
+              right: -75px;
+              &:hover{
+                background: transparent;
+              }
+              &::before{
+                content: "\f105"; 
+                font-family: FontAwesome;
+                border: none;
+                color: #ffffff;
+              }
+            }
+          }
+        }
+        .user-pic-data{
+          display: inline-block;
+          width: 100%;
+          padding: 20px 25px;
+          position: absolute;
+          top:20px;
+          z-index: 9;
+          .user-pic{
+            display: inline-block;
+            width:25%;
+            float: left;
+            img{
+              height: 45px;
+              width:45px;
+              border-radius: 100%;
+            }
+          }
+          .user-pic-name{
+            display: inline-block;
+            width:70%;
+            float: left;
+            color: #fff;
+            .username{
+              margin:2px 0 3px;
+              font-size: 15px;
+              font-weight: 700;
+              text-transform: capitalize;
+            }
+            p{
+              margin:0 0 3px;
+              text-transform: capitalize;
+              display: inline-block;
+              width: 100%;
+              font-family: "Helvetica-Light";
+              font-size: 13px;
+            }
+          }
+        }
+        .user-pic-opt{
+          position: absolute;
+          bottom: 0;
+          p{
+            display: inline-block;
+            width: 100%;
+            margin: 0 0 5px;
+            i{
+              color: #ffffff;
+              cursor: pointer;
+            }
+          }
+          .option-text{
+            color: #ffffff;
+            font-size: 14px;
+            text-transform: capitalize;
+          }
+        }
+        .user-pic-status{
+          display: inline-block;
+          width:100%;
+          position: absolute;
+          top:5px;
+          -webkit-z-index: 99;
+          -moz-z-index: 99;
+          -ms-z-index: 99;
+          -o-z-index: 99;
+          z-index: 99;
+          p{
+            height: 3px;
+            background-color: #fff;
+            display: inline-block;
+            margin: 0 2px;
+            width:80px;
           }
         }
       }
@@ -1177,4 +1293,15 @@
   .blue_button{
     width: 100%;
   }
+}
+
+.block-divide{
+  display: inline-block;
+  width:100%;
+  border-bottom: 1px solid #ccc;
+}
+.creator-block{
+  display: inline-block;
+  width:100%;
+  padding: 8px 0 0 0;
 }

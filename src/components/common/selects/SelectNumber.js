@@ -49,9 +49,14 @@ class SelectNumber extends Component {
   }
   
   handleNumber = (event) => {
-    this.props.handleSelect("number",event.target.value);
-  }
-  
+    const { numberList } = this.props;
+    const name = numberList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: (name.length !== 0) ? name[0].voucherNumber : ""
+    }
+    this.props.handleSelect("number", data);
+  };
 }
 
 const mapStateToProps = state => ({

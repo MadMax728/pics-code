@@ -49,9 +49,14 @@ class SelectRadius extends Component {
   };
 
   handleRadius = event => {
-    this.props.handleSelect("radius", event.target.value);
+    const { radiusList } = this.props;
+    const name = radiusList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: (name.length !== 0) ? name[0].radiusName : ""
+    }
+    this.props.handleSelect("radius", data);
   };
-
 }
 
 const mapStateToProps = state => ({

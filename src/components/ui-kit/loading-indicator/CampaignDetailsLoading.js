@@ -14,7 +14,7 @@ const CampaignDetailsLoading = ({ count }) => {
           </div>
         </div>
         <div className="feed_content">
-          <div className="feed_image width-70">
+          <div className="feed_image">
             <img
               src={images.placeholder_pic}
               alt="feed_image"

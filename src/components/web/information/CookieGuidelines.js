@@ -3,17 +3,17 @@ import CMSContent from "../common/CMSContent";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
-const Imprint = ({ history }) => {
+const CookieGuidelines = ({ history }) => {
   return (
     <CMSContent
-      title={Translations.information_menu.imprint}
+      title={Translations.information_menu.cookie_guidelines}
       history={history}
     />
   );
 };
 
-Imprint.propTypes = {
+CookieGuidelines.propTypes = {
   history: PropTypes.any
 };
 
-export default Imprint;
+export default CookieGuidelines;

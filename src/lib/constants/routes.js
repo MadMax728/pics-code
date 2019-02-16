@@ -102,11 +102,23 @@ export const INFORMATION_PLATFORM_POLICY_ROUTE = "/information/platform-policy";
 export const INFORMATION_CANCELLATION_POLICY_ROUTE =
   "/information/cancellation-policy";
 export const INFORMATION_TERMS_OF_USE_ROUTE = "/information/terms-of-use";
+export const INFORMATION_COOKIE_GUIDELINES_ROUTE =
+  "/information/cookie-guidelines";
+export const INFORMATION_COMMUNITY_GUIDELINES_ROUTE =
+  "/information/community-guidelines";
+export const INFORMATION_BRANDED_CONTENT_GUIDELINES_ROUTE =
+  "/information/branded-content-guidelines";
+export const INFORMATION_BUSINESS_TERMS_CONDITIONS_ROUTE =
+  "/information/business-terms-and-condition";
+export const INFORMATION_PAYMENT_GUIDELINES_ROUTE =
+  "/information/payment-guidelines";
+export const INFORMATION_COMMUNITY_PAYMENT_GUIDELINE_ROUTE =
+  "/information/community-payment-guidelines";
 
 export const SERVICE_SUPPORT_ROUTE = "/service/support";
 export const SERVICE_VERIFICATION_ROUTE = "/service/verification";
 export const SERVICE_FEEDBACK_ROUTE = "/service/feedback";
-export const SERVICE_REPORTED_CONTENT_ROUTE = "/service/reported-content";
+export const SERVICE_REPORTED_CONTENT_ROUTE = "/service/reported-problem";
 export const SERVICE_DELETE_ACCOUNT_ROUTE = "/service/delete-account";
 export const SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE =
   "/service/law-enforcement-agency";

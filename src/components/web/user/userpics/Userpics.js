@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import ReactDOM from "react-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
+import * as images from "../../../../lib/constants/images";
 import { ImageItem, VideoItem } from "../../../ui-kit";
 import * as enumerations from "../../../../lib/constants/enumerations";
 import VideoPlayer from "../../../ui-kit/player/VideoPlayer";
@@ -23,12 +24,27 @@ class Userpics extends Component {
     const picsDataList = picsData.data;
     return (
       <div className={"col-xs-12 no-padding"}>
-        <div className="col-sm-12 margin-bottom-10">
+        {/* <div className="col-sm-12 margin-bottom-10">
           <h2 className="slider-modal-header">{Translations.user_pics}</h2>
-        </div>
+        </div> */}
         <div className="col-sm-12">
           {picsDataList && (
             <div className="user-pics-carousel row">
+            <div className="user-pic-status">
+             <p></p>
+             <p></p>
+             <p></p>
+            </div>
+              <div className="user-pic-data">
+                  <div className="user-pic">
+                    <img src={images.profile_pic} alt="profilepic"/>
+                  </div>
+                  <div className="user-pic-name">
+                      <h4 className="username">username</h4>
+                      <p className="user-location">location</p>
+                      <p className="user-cata">01.01.2000 in category</p>
+                  </div>
+              </div>
               <Carousel
                 autoPlay
                 showThumbs={false}
@@ -57,6 +73,17 @@ class Userpics extends Component {
                   );
                 })}
               </Carousel>
+              
+              <div className="col-md-12 col-sm-12 user-pic-opt">
+                <div className="col-md-4 text-center">
+                  <p><i className="fa fa-eye" aria-hidden="true"></i></p>
+                  <p className="option-text">0 views</p>
+                </div>
+                <div className="col-md-4 col-md-offset-4 text-center">
+                  <p><i className="fa fa-trash" aria-hidden="true"></i></p>
+                  <p className="option-text">delete</p>
+                </div>
+              </div>
             </div>
           )}
         </div>

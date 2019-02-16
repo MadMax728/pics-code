@@ -68,6 +68,23 @@ export const target_group = {
   male: "male"
 };
 
+export const offer = {
+  payment: "Payment",
+  products: "Products",
+  premium_commission: "Premium/commission",
+  cooperation: "Cooperation",
+  other_incentive: "Other incentive"
+}
+
+export const inquiry = {
+  images: "Images",
+  videos: "Videos",
+  blogs: "Blogs",
+  audio: "Audio",
+  skills: "Skills",
+  custom_work: "Custom Work"
+}
+
 export const age = {
   1: "0-18",
   2: "19-25",

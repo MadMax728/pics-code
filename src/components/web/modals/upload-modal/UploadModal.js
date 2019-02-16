@@ -13,6 +13,7 @@ import { modalType } from "../../../../lib/constants/enumerations";
 const initialState = {
   form: {
     id: "",
+    add_title: "",
     add_location: {
       latitude: "",
       longitude: "",
@@ -26,7 +27,8 @@ const initialState = {
     video: null,
     filetype: true,
     error: false
-  }
+  },
+  fileUpdate: false
 };
 
 class UploadModal extends Component {
@@ -36,15 +38,15 @@ class UploadModal extends Component {
   }
 
   render() {
-    const { form } = this.state;
+    const { form, fileUpdate } = this.state;
     const { modalShow } = this.props;
-
+    const className = !fileUpdate ? "upload-file-format" : "";
     return (
       <CustomBootstrapModal
         modalClassName={
-          "modal fade upload-image-modal upload-pic-modal create-campaign-modal"
+          `modal fade upload-image-modal upload-pic-modal create-campaign-modal ${className}` 
         }
-        header
+        header={fileUpdate}
         modalHeaderContent={
           <UploadHeader
             handleModalHide={this.handleModalHide}
@@ -53,7 +55,7 @@ class UploadModal extends Component {
           />
         }
         footer={false}
-        closeBtn={false}
+        closeBtn={!fileUpdate}
         modalShow={modalShow}
         handleModalHide={this.handleModalHide}
         modalBodyContent={
@@ -64,6 +66,7 @@ class UploadModal extends Component {
             handleLocation={this.handleLocation}
             handleUpload={this.handleUpload}
             handleSelect={this.handleSelect}
+            fileUpdate={fileUpdate}
           />
         }
       />
@@ -78,6 +81,7 @@ class UploadModal extends Component {
     form.add_location.address = "";
     form.add_category = "";
     form.add_description = "";
+    form.add_title = "";
     form.is_advertise_label = false;
     form.image = null;
     form.file = null;
@@ -109,6 +113,7 @@ class UploadModal extends Component {
       form.add_location.address = data.location.address || "";
       form.add_category = data.category || "";
       form.add_description = data.description || "";
+      form.add_title = data.title || "";
       form.is_advertise_label = data.is_advertise_label || false;
       if (data.typeContent === "Image") {
         form.image = data.mediaUrl;
@@ -130,11 +135,13 @@ class UploadModal extends Component {
   handleUpload = (imageVideo, file, filetype) => {
     if (filetype) {
       this.setState({
-        form: { ...this.state.form, image: imageVideo, file, filetype }
+        form: { ...this.state.form, image: imageVideo, file, filetype },
+        fileUpdate: true
       });
     } else {
       this.setState({
-        form: { ...this.state.form, video: imageVideo, file, filetype }
+        form: { ...this.state.form, video: imageVideo, file, filetype },
+        fileUpdate: true
       });
     }
   };
@@ -161,6 +168,7 @@ class UploadModal extends Component {
           isLabel = true;
         }
         Data.append("description", form.add_description);
+        Data.append("title", form.add_title);
         Data.append("isAdvertiseLabel", isLabel);
         Data.append("category", form.add_category);
         if (form.filetype) {
@@ -195,7 +203,6 @@ class UploadModal extends Component {
                 this.props.campaignData &&
                 this.props.campaignData.isAddParticipant
               ) {
-                console.log("participant added");
                 const data = { id: this.props.data.campaignId };
                 this.props.getCampaignDetails(data);
               }
@@ -228,7 +235,6 @@ class UploadModal extends Component {
   };
 
   handleChangeField = event => {
-    console.log(event.values);
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
@@ -244,7 +250,7 @@ class UploadModal extends Component {
 
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
-    form.add_category = selected;
+    form.add_category = selected.id;
     this.setState({ form });
   };
 

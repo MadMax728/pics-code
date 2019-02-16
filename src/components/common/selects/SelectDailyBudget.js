@@ -47,14 +47,6 @@ class SelectDailyBudget extends Component {
     this.setState({
       dailyBudgetList
     });
-
-    // this.props.getSelect("dailyBudgets").then(() => {
-    //   if (this.props.dailyBudgetList) {
-    //     this.setState({
-    //       dailyBudgetList: this.props.dailyBudgetList
-    //     });
-    //   }
-    // });
   };
 
   componentWillUnmount = () => {
@@ -62,7 +54,13 @@ class SelectDailyBudget extends Component {
   };
 
   handleOffer = event => {
-    this.props.handleSelect("budget", event.target.value);
+    const { dailyBudgetList } = this.state;
+    const name = dailyBudgetList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: (name.length !== 0 )?  name[0].label : ""
+    }
+    this.props.handleSelect("budget", data);
   };
 }
 
