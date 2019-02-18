@@ -8,7 +8,8 @@ import {
   VideoItem,
   ErrorSpan,
   RadioButton,
-  Input
+  Input,
+  ImageItem
 } from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import * as enumerations from "../../../../lib/constants/enumerations";
@@ -34,7 +35,9 @@ const UploadData = ({
     <div className="col-sm-12 upload-form">
       <div className="user-title">
         <div className="normal_title modal-title">
-          {Translations.upload_modal.title_of_upload}
+          {form.filetype
+            ? Translations.upload_modal.title_of_image_upload
+            : Translations.upload_modal.title_of_video_upload}
         </div>
       </div>
       <form className="col-xs-12 no-padding">
@@ -63,21 +66,35 @@ const UploadData = ({
               </label>
             </div>
           ) : form.filetype ? (
-            <div className="upload-img-wrapper">
-              {form.image &&
-                <img
-                  src={form.image}
-                  alt="altmage"
-                  role="presentation"
-                  className="img-responsive widthHeightAuto"
-                />
-              }
-            </div>
-          ) : (
+            <div>
+              {form.image && (
                 <div className="upload-img-wrapper">
-                  <VideoItem item={form.video} id="upload-video" />
+                  <Label
+                    htmlFor="image"
+                    value={Translations.upload_modal.add_image}
+                  />
+                  <p className="form-help-text">
+                    {Translations.upload_modal.add_image_help_text}
+                  </p>
+                  <ImageItem
+                    item={form.image}
+                    classNames={`img-responsive widthHeightAuto`}
+                  />
                 </div>
               )}
+            </div>
+          ) : (
+            <div className="upload-img-wrapper">
+              <Label
+                htmlFor="Location"
+                value={Translations.upload_modal.add_video}
+              />
+              <p className="form-help-text">
+                {Translations.upload_modal.add_video_help_text}
+              </p>
+              <VideoItem item={form.video} id="upload-video" />
+            </div>
+          )}
           {isInProgress && (
             <div className="image-wrapper">
               <div className="progress-bar-wrapper">
@@ -108,13 +125,15 @@ const UploadData = ({
           </div>
         </div>
 
-        { !form.filetype && 
-          (
+        {!form.filetype && (
           <div className="form-group">
             <Label
               htmlFor="Location"
               value={Translations.upload_modal.add_title}
             />
+            <p className="form-help-text">
+              {Translations.upload_modal.video_title_help_text}
+            </p>
             <Input
               type="text"
               value={form.add_title ? form.add_title : ""}
@@ -125,14 +144,16 @@ const UploadData = ({
               <ErrorSpan value={Translations.error.create_modal.title} />
             )}
           </div>
-          )
-        }
+        )}
 
         <div className="form-group">
           <Label
             htmlFor="Location"
             value={Translations.upload_modal.add_location}
           />
+          <p className="form-help-text">
+            {Translations.upload_modal.location_help_text}
+          </p>
           <PlaceAutoCompleteLocation
             className=""
             handleLocation={handleLocation}
@@ -150,6 +171,11 @@ const UploadData = ({
             htmlFor="Category"
             value={Translations.upload_modal.add_category}
           />
+          <p>
+            {form.filetype
+              ? Translations.upload_modal.image_category_help_text
+              : Translations.upload_modal.video_category_help_text}
+          </p>
           <SelectCategory
             value={form.add_category ? form.add_category : ""}
             className=""
@@ -164,6 +190,7 @@ const UploadData = ({
             htmlFor="description"
             value={Translations.upload_modal.add_description}
           />
+          <p>{Translations.upload_modal.description_help_text}</p>
           <HashTagUsername
             className="form-control"
             type="text"
@@ -173,9 +200,7 @@ const UploadData = ({
             isText={false}
           />
           {form.add_description.length === 0 && form.error && (
-            <ErrorSpan
-              value={Translations.error.create_modal.description}
-            />
+            <ErrorSpan value={Translations.error.create_modal.description} />
           )}
         </div>
 
@@ -184,6 +209,11 @@ const UploadData = ({
             htmlFor="label"
             value={Translations.upload_modal.advertisement}
           />
+          <p>
+            {form.filetype
+              ? Translations.upload_modal.image_label_advertisement_help_text
+              : Translations.upload_modal.video_label_advertisement_help_text}
+          </p>
           <div className="form-group">
             <ul className="options">
               <li className="wid49">
@@ -221,7 +251,7 @@ const UploadData = ({
       </form>
     </div>
   );
-}
+};
 
 UploadData.propTypes = {
   handleChangeField: PropTypes.func.isRequired,

@@ -8,10 +8,11 @@ import {
   RadioButton,
   Input,
   Button,
-  PlaceAutoCompleteLocation, 
+  PlaceAutoCompleteLocation,
   InlineLoading,
   Label,
-  ErrorSpan
+  ErrorSpan,
+  Textarea
 } from "../../../../ui-kit";
 import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
@@ -318,7 +319,7 @@ class EditProfile extends Component {
             <div className="general-information-wrapper">
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.username} />
-                <Label 
+                <Label
                   htmlFor="username"
                   value={Translations.editProfile.username}
                 />
@@ -339,11 +340,13 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.name_company} />
-                <Label 
+                <Label
                   htmlFor="name"
-                  value={userInfo && userInfo.userType === selectedUserType
-                    ? Translations.editProfile.user
-                    : Translations.editProfile.name_company}
+                  value={
+                    userInfo && userInfo.userType === selectedUserType
+                      ? Translations.editProfile.user
+                      : Translations.editProfile.name_company
+                  }
                 />
                 <Input
                   type="text"
@@ -358,7 +361,7 @@ class EditProfile extends Component {
                 <div className="col-2">
                   <div className="col-sm-6 padding-r-5">
                     <div className="form-group margin-bottom-30">
-                      <Label 
+                      <Label
                         htmlFor="city"
                         value={Translations.editProfile.D_O_B}
                       />
@@ -393,7 +396,8 @@ class EditProfile extends Component {
                   </div>
                   <div className="col-sm-6 padding-l-5">
                     <div className="form-group margin-bottom-30">
-                      <Label htmlFor="country"
+                      <Label
+                        htmlFor="country"
                         value={Translations.editProfile.gender}
                       />
                       <ul className="options">
@@ -409,7 +413,10 @@ class EditProfile extends Component {
                             className="black_button"
                             onChange={this.handleChangeField}
                           />
-                          <Label htmlFor="male" value={Translations.editProfile.male} />
+                          <Label
+                            htmlFor="male"
+                            value={Translations.editProfile.male}
+                          />
                         </li>
                         <li>
                           <RadioButton
@@ -422,7 +429,10 @@ class EditProfile extends Component {
                             }
                             onChange={this.handleChangeField}
                           />
-                          <Label htmlFor="female" value={Translations.editProfile.female} />
+                          <Label
+                            htmlFor="female"
+                            value={Translations.editProfile.female}
+                          />
                         </li>
                       </ul>
                     </div>
@@ -433,7 +443,10 @@ class EditProfile extends Component {
               )}
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.category} />
-                <Label htmlFor="category" value={Translations.editProfile.category} />
+                <Label
+                  htmlFor="category"
+                  value={Translations.editProfile.category}
+                />
                 <SelectCategory
                   value={form.category}
                   className="form-control"
@@ -441,8 +454,8 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <Label 
-                  htmlFor="location" 
+                <Label
+                  htmlFor="location"
                   className="margin-bottom-13"
                   value={Translations.editProfile.location}
                 />
@@ -454,7 +467,7 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.phoneNumber} />
-                <Label 
+                <Label
                   htmlFor="phone-number"
                   value={Translations.editProfile.phone_number}
                 />
@@ -481,7 +494,10 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.website} />
-                <Label htmlFor="website" value={Translations.editProfile.website} />
+                <Label
+                  htmlFor="website"
+                  value={Translations.editProfile.website}
+                />
                 <Input
                   type="text"
                   className="form-control"
@@ -493,9 +509,11 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.profile_description} />
-                <Label htmlFor="description" value={Translations.editProfile.profile_description} />
-                <Input
-                  type="text"
+                <Label
+                  htmlFor="description"
+                  value={Translations.editProfile.profile_description}
+                />
+                <Textarea
                   className="form-control full-width-textarea"
                   id="profile_description"
                   name="profile_description"
@@ -510,7 +528,10 @@ class EditProfile extends Component {
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.offer_tag} />
-                <Label htmlFor="offer-tag" value={Translations.editProfile.offer_tag} />
+                <Label
+                  htmlFor="offer-tag"
+                  value={Translations.editProfile.offer_tag}
+                />
                 <OfferTags
                   value={this.state.form.offerTagList}
                   handleOfferTagChange={this.handleOfferTagChange}
@@ -519,7 +540,10 @@ class EditProfile extends Component {
               </div>
               <div className="form-group margin-bottom-30">
                 <ErrorSpan value={error.inquiry_tag} />
-                <Label htmlFor="inquiry-tag" value={Translations.editProfile.inquiry_tag} />
+                <Label
+                  htmlFor="inquiry-tag"
+                  value={Translations.editProfile.inquiry_tag}
+                />
                 <InquiryTags
                   value={this.state.form.inquiryTagList}
                   handleInquiryTagChange={this.handleInquiryTagChange}
@@ -529,8 +553,8 @@ class EditProfile extends Component {
             </div>
             <SocialNetworks userId={"123"} isOwnerProfile />
             <div className="form-group margin-bottom-30">
-              <Button 
-                className="black_button" 
+              <Button
+                className="black_button"
                 type="submit"
                 text={Translations.editProfile.save}
               />

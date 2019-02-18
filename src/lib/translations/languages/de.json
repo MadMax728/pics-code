@@ -70,12 +70,19 @@
     "no": "No",
     "add_image": "Add image",
     "add_video": "Add Video",
+    "upload_image": "Upload Image",
+    "upload_video": "Upload Video",
+    "title_of_image_upload": "Create an Image",
+    "title_of_video_upload": "Create a Video",
+    "add_image_help_text": "Upload your image which you want to show the world.",
+    "add_video_help_text": "Upload your video which you want to show the world.",
+    "video_title_help_text": "You can add a title which users will give an impression about your video.",
     "location_help_text": "Define where you are located",
-    "image_category_help_text": "Define a category in which your image belongs",
-    "video_category_help_text": "Define a category in which your video belongs",
-    "description_help_text": "Enter a description of what you want to tell your community",
-    "image_label_advertisement_help_text": "Label your image as advertisement if you have a product placement",
-    "video_label_advertisement_help_text": "Label your video as advertisement if you have a product placement"
+    "image_category_help_text": "Define a category in which your image belongs.",
+    "video_category_help_text": "Define a category in which your video belongs.",
+    "description_help_text": "Enter a description of what you want to tell your community.",
+    "image_label_advertisement_help_text": "Label your image as advertisement if you have a product placement.",
+    "video_label_advertisement_help_text": "Label your video as advertisement if you have a product placement."
   },
 
   "create_ads": {
@@ -643,7 +650,8 @@
     "follow_btn": "Follow",
     "subscribe_btn": "Subscribed",
     "request_sent_btn": "Request Sent",
-    "no_data": "No Data Available"
+    "no_data": "No Data Available",
+    "cancel": "Cancel"
   },
 
   "profile_community_right_sidebar": {
@@ -855,6 +863,7 @@
     }
   },
   "editProfile": {
+    "save": "Save",
     "username": "User name",
     "category": "Category",
     "email": "Email",
@@ -868,6 +877,9 @@
     "website": "Web site",
     "gender": "Gender",
     "D_O_B": "Date of birth",
+    "male": "Male",
+    "female": "Female",
+    "location": "Location",
     "general_information": "General Information",
     "Personal_interests": "Personal interests"
   },
