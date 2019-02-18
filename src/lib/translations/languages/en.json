@@ -1152,5 +1152,10 @@
     "send_password": "Send password to admin´s email address.",
     "backoffice_login": "Backoffice log in",
     "enter_password": "Please enter your password here."
+  },
+
+  "text_editor": {
+    "image": "Please Upload Image Files",
+    "video": "Please Upload Video Files"
   }
 }

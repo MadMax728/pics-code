@@ -40,7 +40,8 @@ class CreateCreatorCampaign extends Component {
       setVoucherData,
       calculateMaxClicks,
       isLoading,
-      isEdit
+      isEdit,
+      handleModalInfoMsgShow
     } = this.props;
 
     return (
@@ -85,6 +86,7 @@ class CreateCreatorCampaign extends Component {
               form={form}
               handleContentChange={handleContentChange}
               userInfo={userInfo}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
             />
           ))}
         {!isPreview &&
@@ -132,7 +134,8 @@ CreateCreatorCampaign.propTypes = {
   calculateMaxClicks: PropTypes.func,
   maxClicks: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
-  isEdit: PropTypes.bool.isRequired
+  isEdit: PropTypes.bool.isRequired,
+  handleModalInfoMsgShow: PropTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;
