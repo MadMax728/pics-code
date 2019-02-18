@@ -3,6 +3,7 @@ import { LeftSidebarFilter, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { setCookie } from "../../../lib/utils/helpers";
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -50,7 +51,8 @@ class CampaignCreatorFilter extends Component {
     this.state = {
       filterApply: false,
       filData: [],
-      currentLanguage: Translations.getLanguage()
+      currentLanguage: Translations.getLanguage(),
+      height: window.innerHeight
     };
   }
 
@@ -88,21 +90,23 @@ class CampaignCreatorFilter extends Component {
       }
     ];
 
-    const { filterApply } = this.state;
+    const { filterApply, height } = this.state;
 
     return (
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={filterApply}
-          handleSelect={this.handleSelect}
-          handleLanguageSwitch={this.handleLanguageSwitch}
-          handleResetFilterClick={this.handleResetFilterClick}
-          handleApplyClick={this.handleApplyClick}
-          isNotFilter
-        />
-      </div>
+      <Scrollbars style={{ height: `${height - 220}px` }}>
+        <div className="left-filters">
+          <LeftSidebarFilter
+            filters={Filters}
+            onChange={this.handleOnChange}
+            filterApply={filterApply}
+            handleSelect={this.handleSelect}
+            handleLanguageSwitch={this.handleLanguageSwitch}
+            handleResetFilterClick={this.handleResetFilterClick}
+            handleApplyClick={this.handleApplyClick}
+            isNotFilter
+          />
+        </div>
+      </Scrollbars>
     );
   }
 

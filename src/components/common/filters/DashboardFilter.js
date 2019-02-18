@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { setCookie, getCookie } from "../../../lib/utils/helpers";
-import { Route } from "react-router-dom";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -111,7 +110,7 @@ class DashboardFilter extends Component {
       filterApply: false,
       filData: [],
       categoryList: [],
-      currentLanguage: Translations.getLanguage()
+      currentLanguage: Translations.getLanguage(),
     };
   }
 
@@ -208,17 +207,18 @@ class DashboardFilter extends Component {
       // }
     ];
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
+
     return (
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
-          handleSelect={this.handleSelect}
-          handleLanguageSwitch={this.handleLanguageSwitch}
-          isNotFilter={false}
-        />
-      </div>
+        <div className="left-filters">
+          <LeftSidebarFilter
+            filters={Filters}
+            onChange={this.handleOnChange}
+            filterApply={this.state.filterApply}
+            handleSelect={this.handleSelect}
+            handleLanguageSwitch={this.handleLanguageSwitch}
+            isNotFilter={false}
+          />
+        </div>
     );
   }
 
