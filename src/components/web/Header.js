@@ -22,8 +22,11 @@ class Header extends Component {
       userNavExpanded: false,
       offsetHeight: 0,
       searchText: "",
-      messageCount: 0
+      messageCount: 0,
+      menuIsOpened: false
     };
+
+    this.handleToggle = this.handleToggle.bind(this);
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
     if (storage) {
@@ -48,6 +51,11 @@ class Header extends Component {
   }
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
+  };
+
+  handleToggle = () => {
+    const { menuIsOpened } = this.state;
+    this.setState({ menuIsOpened: !menuIsOpened });
   };
 
   toggleUserNav = () => {
@@ -189,8 +197,14 @@ class Header extends Component {
                     title={<span>{Translations.navigation.notifications}</span>}
                     id="basic-nav-dropdown"
                     className={`menu_notifications`}
+                    open={this.state.menuIsOpened}
+                    onToggle={this.handleToggle}
                   >
-                    <Notifications handleMessage={this.handleMessage} />
+                    <Notifications
+                      handleMessage={this.handleMessage}
+                      history={this.props.history}
+                      handleToggle={this.handleToggle}
+                    />
                   </NavDropdown>
 
                   <RouteNavItem

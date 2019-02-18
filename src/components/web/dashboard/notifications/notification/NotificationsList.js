@@ -6,7 +6,8 @@ import { connect } from "react-redux";
 import { getNotification } from "../../../../../actions";
 import { DateFormat } from "../../../../Factory";
 import { Button } from "../../../../ui-kit";
-
+import { Link } from "react-router-dom";
+import * as routes from "../../../../../lib/constants/routes";
 class NotificationsList extends Component {
   constructor(props, context) {
     super(props, context);
@@ -26,17 +27,27 @@ class NotificationsList extends Component {
                 <div
                   className="notification-with-subscribe abc notification-wrapper"
                   key={notification.id}
+                  role="button"
+                  onKeyDown={this.keyDown}
+                  tabIndex="0"
+                  onClick={this.handleRedirection}
+                  id={notification.id}
                 >
                   <div className="notification-profile-img">
                     <img
                       src={notification.profileImage}
                       alt={"notification.id" + notification.id}
+                      id={notification.id}
                     />
                   </div>
-                  <div className="user-info">
-                    <div className="username">{notification.username}</div>
-                    <div className="subtitle">{notification.message}</div>
-                    <div className="date">
+                  <div className="user-info" id={notification.id}>
+                    <div className="username" id={notification.id}>
+                      {notification.username}
+                    </div>
+                    <div className="subtitle" id={notification.id}>
+                      {notification.message}
+                    </div>
+                    <div className="date" id={notification.id}>
                       {DateFormat(
                         notification.createdAt,
                         Translations.date_format.date,
@@ -102,6 +113,28 @@ class NotificationsList extends Component {
     });
   };
 
+  handleRedirection = e => {
+    this.props.handleToggle();
+    if (e.target.id) {
+      const selectedNotification = this.state.notificationList.find(
+        notificationRow => notificationRow.id === e.target.id
+      );
+      let redirectUrl = "/news-feed/";
+      if (
+        selectedNotification &&
+        selectedNotification.typeOfContent &&
+        selectedNotification.typeOfContent === "Campaign"
+      ) {
+        redirectUrl = `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
+          selectedNotification.userType
+        }${"/"}${selectedNotification.typeId}`;
+      } else {
+        redirectUrl = `/news-feed/${selectedNotification.username}`;
+      }
+      this.props.history.push(redirectUrl);
+    }
+  };
+
   handleSubscribed = e => {
     //   const notificationList = this.state.notificationList;
     //   notificationList.filter(
@@ -123,7 +156,9 @@ const mapDispatchToProps = {
 
 NotificationsList.propTypes = {
   getNotification: PropTypes.func,
-  notificationData: PropTypes.any
+  notificationData: PropTypes.any,
+  history: PropTypes.any,
+  handleToggle: PropTypes.func
 };
 
 export default connect(

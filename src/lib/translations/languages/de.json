@@ -1084,5 +1084,12 @@
       "weekValidation": "Date range should be greater than 1 week",
       "monthValidation": "Date range should be less than 3 Month"
     }
+  },
+  "admin_login": {
+    "send": "Send",
+    "send_password": "Send password to admin´s email address.",
+    "backoffice_login": "Backoffice log in",
+    "enter_password": "Please enter your password here.",
+    "proceed": "Processed ?"
   }
 }

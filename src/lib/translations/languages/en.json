@@ -1165,6 +1165,7 @@
     "send": "Send",
     "send_password": "Send password to admin´s email address.",
     "backoffice_login": "Backoffice log in",
-    "enter_password": "Please enter your password here."
+    "enter_password": "Please enter your password here.",
+    "proceed" : "Processed ?"
   }
 }
