@@ -45,19 +45,20 @@ const CampaignDetailsCard = ({
             <div className="grey_title">
               {DateFormat(
                 campaignDetails.createdAt,
-                Translations.date_format.time,
+                Translations.date_format.campaign_post_date_format,
                 true
               )}{" "}
               {Translations.in} {campaignDetails.category[0].categoryName}
             </div>
           )}
         </div>
-        <div className="paddTop20">
+        <div className="margin-top-25">
           {campaignDetails.typeContent &&
             campaignDetails.typeContent.toLowerCase() ===
               enumerations.mediaTypes.image && (
               <ImageItem
                 item={campaignDetails.mediaUrl}
+                classNames={`embed-responsive embed-responsive-16by9`}
                 userName={campaignDetails.userName}
                 isOtherCardExist={false}
               />
@@ -69,32 +70,31 @@ const CampaignDetailsCard = ({
                 id={campaignDetails.id}
                 item={campaignDetails.mediaUrl}
               />
-            )}
+          )}
         </div>
-        <div className="paddTop20">
+        <div className="margin-top-25">
           <DescriptionItem desc={campaignDetails.description} />
         </div>
         <div className="text paddTop20" />
-        {campaignDetails.isOwner ? (
-          ""
-        ) : campaignDetails.isAlreadyParticipant &&
-          campaignDetails.userType !== selectedUserType ? (
-          <Button 
-            className="blue_button" 
-            disabled 
-            text={Translations.campaign_details.campaign_success_apply}
-          />
-        ) : (
-          <Button
-            className="filled_button"
-            onClick={handleApplyParticipant}
-            id={campaignDetails.id}
-            text={campaignDetails && campaignDetails.userType === selectedUserType
-              ? Translations.campaign_details.send_message
-              : Translations.campaign_details.apply_campaign}
-          />
-        )}
-
+          {campaignDetails.isOwner ? (
+            ""
+          ) : campaignDetails.isAlreadyParticipant &&
+            campaignDetails.userType !== selectedUserType ? (
+            <Button 
+              className="blue_button" 
+              disabled 
+              text={Translations.campaign_details.campaign_success_apply}
+            />
+          ) : (
+            <Button
+              className="filled_button"
+              onClick={handleApplyParticipant}
+              id={campaignDetails.id}
+              text={campaignDetails && campaignDetails.userType === selectedUserType
+                ? Translations.campaign_details.send_message
+                : Translations.campaign_details.apply_campaign}
+            />
+          )}
         <div className="feed_wrapper">
           <FeedHeader
             id={campaignDetails.id}

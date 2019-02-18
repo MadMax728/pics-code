@@ -3,6 +3,7 @@ import { LeftSidebarFilter, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { setCookie } from "../../../lib/utils/helpers";
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -146,6 +147,7 @@ class CampaignCompanyFilter extends Component {
     const { filterApply } = this.state;
 
     return (
+      <Scrollbars style={{ height: 700 }}>
       <div className="left-filters">
         <LeftSidebarFilter
           filters={Filters}
@@ -158,6 +160,7 @@ class CampaignCompanyFilter extends Component {
           isNotFilter
         />
       </div>
+      </Scrollbars>
     );
   }
 

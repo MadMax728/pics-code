@@ -178,7 +178,7 @@ class ReportedContent extends Component {
                     </div>
                   </div>
                   <div className="col-sm-6">
-                    <div className="form-group">
+                    <div className="form-group browse-file">
                       <Label
                         htmlFor={Translations.service_report_problem.upload}
                         value={Translations.service_report_problem.upload}
