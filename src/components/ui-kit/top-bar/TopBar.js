@@ -19,7 +19,7 @@ import {
   getDashboard
 } from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
-import { ThreeDots, UserProfileImage } from "../../ui-kit";
+import { ThreeDots, UserProfileImage, Button } from "../../ui-kit";
 
 class TopBar extends Component {
   constructor(props) {
@@ -169,14 +169,13 @@ class TopBar extends Component {
     return (
       <div className={btnSlot.className} key={`btnSlot-${btnSlot.name}`}>
         <div className="clearfix" />
-        <button
+        <Button
           className={btnSlot.btnActiveClassName}
           id={btnSlot.userid}
           onClick={btnSlot.handeleEvent}
           disabled={userIsLoading}
-        >
-          {btnSlot.btnText}
-        </button>
+          text={btnSlot.btnText}
+        />
       </div>
     );
   };

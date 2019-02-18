@@ -42,9 +42,11 @@ const initialState = {
     },
     radius: "",
     category: "",
+    categoryName: "",
     description: "",
     targetGroup: target_group.female_and_male,
     callToAction: "",
+    actionName: "",
     insertLink: "",
     startDate: moment(),
     endDate: moment().add(7, "days"),
@@ -178,6 +180,7 @@ class AdsModal extends Component {
     form.description = "";
     form.radius = "";
     form.callToAction = "";
+    form.actionName = "";
     form.insertLink = "";
     form.startDate = moment();
     form.endDate = moment().add(7, "days");
@@ -230,6 +233,7 @@ class AdsModal extends Component {
     }
     if (data.category && data.category[0] && data.category[0].id) {
       form.category = data.category[0].id;
+      form.categoryName = data.category[0].categoryName;
     }
     if (data.radius) {
       form.radius = data.radius.id;
@@ -240,6 +244,7 @@ class AdsModal extends Component {
     }
     if (data.callToAction) {
       form.callToAction = data.callToAction.id;
+      form.actionName = data.callToAction.callToActionName;
     }
     form.insertLink = data.insertLink;
     form.startDate = moment.unix(data.startDate);
@@ -507,6 +512,9 @@ class AdsModal extends Component {
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form[isFor] = selected.id;
+    if (isFor === "callToAction") {
+      form.actionName = selected.name;
+    }
     if (isFor === "budget") {
       this.calculateMaxClicks();
     }

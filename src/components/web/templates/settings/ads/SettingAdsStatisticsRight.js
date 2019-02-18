@@ -5,6 +5,7 @@ import * as routes from "../../../../../lib/constants/routes";
 import { Translations } from "../../../../../lib/translations";
 import moment from "moment";
 import { modalType } from "../../../../../lib/constants";
+import { Button } from "../../../../ui-kit";
 
 class SettingAdsStatisticsRight extends Component {
   constructor(props, context) {
@@ -43,14 +44,16 @@ class SettingAdsStatisticsRight extends Component {
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
-          <button className="blue_button" onClick={this.handleEditAd}>
-            {Translations.create_ads.edit_ad}
-          </button>
+          <Button
+            className="blue_button"
+            onClick={this.handleEditAd}
+            text={Translations.create_ads.edit_ad}
+          />
           <Link to={routes.SETTINGS_ADS_ROUTE}>
-            <button className="black_button">
-              {" "}
-              {Translations.create_ads.close_ad}{" "}
-            </button>
+            <Button
+              className="black_button"
+              text={Translations.create_ads.close_ad}
+            />
           </Link>
           <div className="normal_title padding-15">
             {Translations.create_ads.budget_runtime}

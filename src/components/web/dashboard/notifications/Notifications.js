@@ -3,9 +3,11 @@ import Tabs from "react-bootstrap/lib/Tabs";
 import Tab from "react-bootstrap/lib/Tab";
 import { Requests, NotificationsList } from "./notification";
 import { Translations } from "../../../../lib/translations";
+import PropTypes from "prop-types";
 
 class Notifications extends Component {
   render() {
+    const { history, handleToggle } = this.props;
     return (
       <div className="notification-mega-wrapper">
         {" "}
@@ -21,7 +23,7 @@ class Notifications extends Component {
               </p>
             }
           >
-            <NotificationsList />
+            <NotificationsList history={history} handleToggle={handleToggle} />
           </Tab>
           {/* for Requests tab */}
           {/* <Tab
@@ -39,6 +41,9 @@ class Notifications extends Component {
   }
 }
 
-Notifications.propTypes = {};
+Notifications.propTypes = {
+  history: PropTypes.any,
+  handleToggle: PropTypes.any
+};
 
 export default Notifications;

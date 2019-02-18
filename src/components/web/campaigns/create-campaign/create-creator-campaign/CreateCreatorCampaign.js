@@ -4,6 +4,7 @@ import { Preview } from "../preview";
 import PropTypes from "prop-types";
 import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import * as images from "../../../../../lib/constants/images";
+import { Button } from "../../../../ui-kit";
 
 class CreateCreatorCampaign extends Component {
   constructor(props) {
@@ -47,16 +48,17 @@ class CreateCreatorCampaign extends Component {
       <div className="col-xs-12 no-padding">
         {isPreview && <Preview form={form} />}
         {isPreview && (
-          <button
+          <Button
             onClick={handlePrivewClose}
             className={"closeBtn right-side-close"}
-          >
-            <img
-              src={images.white_close}
-              alt={"cross"}
-              style={{ height: "10px", width: "10px" }}
-            />
-          </button>
+            text={
+              <img
+                src={images.white_close}
+                alt={"cross"}
+                style={{ height: "10px", width: "10px" }}
+              />
+            }
+          />
         )}
         {!isPreview &&
           (stepIndex === 0 && (

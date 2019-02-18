@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Translations } from "../../../lib/translations";
+import { Button } from "../../ui-kit";
 
 class Cookies extends Component {
   render() {
@@ -9,18 +10,18 @@ class Cookies extends Component {
           <div className="modal-content">
             <div className="modal-body">
               <p>
-                {Translations.cookies.better_user} <a href="/">{Translations.cookies.cookies}</a>
+                {Translations.cookies.better_user}{" "}
+                <a href="/">{Translations.cookies.cookies}</a>
               </p>
               <br />
               <p>{Translations.cookies.agree}</p>
-              <button
+              <Button
                 type="button"
                 className="close"
                 data-dismiss="modal"
                 aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
+                text={<span aria-hidden="true">&times;</span>}
+              />
             </div>
           </div>
         </div>

@@ -2,7 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
-import { CustomBootstrapTable, ToolTip, CustomeTableLoader, Input, Select, Button } from "../../ui-kit";
+import {
+  CustomBootstrapTable,
+  ToolTip,
+  CustomeTableLoader,
+  Input,
+  Select,
+  Button
+} from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import { getAdmins, updateAdmin, getHashUser } from "../../../actions";
 import { UsernameList } from "../../common";
@@ -40,26 +47,26 @@ class AddAdminPage extends Component {
 
   validateForm = () => {
     const { form } = this.state;
-    return form.id && form.username && form.role
-  }
+    return form.id && form.username && form.role;
+  };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    if(this.validateForm()) {
+    if (this.validateForm()) {
       const { form, admins } = this.state;
       const data = {
         id: form.id,
         role: form.role,
         isAdmin: true
-      }
-      this.props.updateAdmin(data).then(()=> {
-        if(this.props.adminData && this.props.adminData.admin) { 
+      };
+      this.props.updateAdmin(data).then(() => {
+        if (this.props.adminData && this.props.adminData.admin) {
           const dataAdd = {
             id: this.props.adminData.admin.id,
             username: this.props.adminData.admin.username,
             name: this.props.adminData.admin.name,
-            role: form.role,
+            role: form.role
           };
           const indexOf = admins.findIndex(admin => {
             return admin.id === form.id;
@@ -70,12 +77,20 @@ class AddAdminPage extends Component {
             admins.splice(indexOf, 1);
             admins.push(dataAdd);
           }
-          this.setState({ admins, form: { ...this.state.form , id: "", role: Translations.adminRole.rank1, username: ""}});
+          this.setState({
+            admins,
+            form: {
+              ...this.state.form,
+              id: "",
+              role: Translations.adminRole.rank1,
+              username: ""
+            }
+          });
         }
-      })
+      });
     }
   };
-  
+
   deleteData = e => {
     const { admins } = this.state;
     const id = e.target.id;
@@ -83,11 +98,11 @@ class AddAdminPage extends Component {
       id,
       role: "User",
       isAdmin: false
-    }
-    this.props.updateAdmin(data).then(()=> {
-      if(this.props.adminData && this.props.adminData.admin) { 
+    };
+    this.props.updateAdmin(data).then(() => {
+      if (this.props.adminData && this.props.adminData.admin) {
         const indexOf = admins.findIndex(admin => {
-          return admin.id === this.props.adminData.admin.id ;
+          return admin.id === this.props.adminData.admin.id;
         });
         if (indexOf !== -1) {
           admins.splice(indexOf, 1);
@@ -101,29 +116,34 @@ class AddAdminPage extends Component {
     return (
       <div key={rowIndex}>
         <span>{row.role}</span>
-        <span>{" "}</span>
-        <Button name={row.name} id={row.id} onClick={this.deleteData} text={Translations.privacy.Delete} />
+        <span> </span>
+        <Button
+          name={row.name}
+          id={row.id}
+          onClick={this.deleteData}
+          text={Translations.privacy.Delete}
+        />
       </div>
     );
   };
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getAdmins().then(()=> {
-      if(this.props.adminData && this.props.adminData.admins) {
+    this.props.getAdmins().then(() => {
+      if (this.props.adminData && this.props.adminData.admins) {
         this.setState({
           admins: this.props.adminData.admins
-        })
+        });
       }
     });
-    
-    this.props.getHashUser("usernames");
 
+    this.props.getHashUser("usernames");
   };
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size}{" "}
+      {Translations.results}
     </span>
   );
 
@@ -192,32 +212,32 @@ class AddAdminPage extends Component {
 
     return (
       <div className="dashboard-tbl">
-          <CustomBootstrapTable
-            data={admins}
-            columns={columns}
-            striped
-            hover
-            bordered={false}
-            condensed
-            defaultSorted={defaultSorted}
-            pagination={pagination}
-            noDataIndication={Translations.table_empty}
-            id={"username"}
-          />
-        </div>
-    )
-  }
+        <CustomBootstrapTable
+          data={admins}
+          columns={columns}
+          striped
+          hover
+          bordered={false}
+          condensed
+          defaultSorted={defaultSorted}
+          pagination={pagination}
+          noDataIndication={Translations.table_empty}
+          id={"username"}
+        />
+      </div>
+    );
+  };
 
-  handleSetSatetToolTipUsername = (id,username) => {
+  handleSetSatetToolTipUsername = (id, username) => {
     const { form } = this.state;
     form.id = id;
-    form.username = username
+    form.username = username;
     this.setState({ form });
     this.usernameHide();
-  }
+  };
 
   renderUserNameTips = () => {
-    const { form }  = this.state;
+    const { form } = this.state;
     const { usersList } = this.props;
     return (
       <UsernameList
@@ -241,11 +261,11 @@ class AddAdminPage extends Component {
   usernameHide = () => {
     ReactTooltip.hide(this.username);
   };
-  
+
   render() {
     const { admins, form } = this.state;
     const { adminData } = this.props;
-    const  items = [
+    const items = [
       {
         name: Translations.adminRole.rank1,
         value: Translations.adminRole.rank1
@@ -258,7 +278,7 @@ class AddAdminPage extends Component {
         name: Translations.adminRole.rank3,
         value: Translations.adminRole.rank3
       }
-    ]
+    ];
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -274,35 +294,37 @@ class AddAdminPage extends Component {
               placeholder={Translations.admin.Search_in_users}
               className="res440"
               onChange={this.handleChangeUsername}
-              value={form.username? form.username : "" }
+              value={form.username ? form.username : ""}
             />
             <div
               data-for="username"
               role="button"
               data-tip="tooltip"
-              ref={username => this.username = username}
+              ref={username => (this.username = username)}
             />
-             <ToolTip
-                id="username"
-                getContent={this.renderUserNameTips}
-                effect="solid"
-                delayHide={0}
-                delayShow={0}
-                delayUpdate={0}
-                place={"bottom"}
-                border
-                type={"light"}
-              />
-              <Select
-                  className="res440"
-                  name={'role'}
-                  options={items}
-                  value={form.role}
-                  onChange={this.handleChangeField}
-              />
-            <button className="res440" onClick={this.handleSubmit}>
-              {Translations.admin.Add}
-            </button>
+            <ToolTip
+              id="username"
+              getContent={this.renderUserNameTips}
+              effect="solid"
+              delayHide={0}
+              delayShow={0}
+              delayUpdate={0}
+              place={"bottom"}
+              border
+              type={"light"}
+            />
+            <Select
+              className="res440"
+              name={"role"}
+              options={items}
+              value={form.role}
+              onChange={this.handleChangeField}
+            />
+            <Button
+              className="res440"
+              onClick={this.handleSubmit}
+              text={Translations.admin.Add}
+            />
           </div>
           {admins && this.renderAdmins()}
           {!admins && adminData.isLoading && <CustomeTableLoader />}
@@ -311,7 +333,6 @@ class AddAdminPage extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   adminData: state.adminData,
@@ -332,11 +353,10 @@ AddAdminPage.propTypes = {
   getHashUser: PropTypes.func,
   usersList: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddAdminPage);
-

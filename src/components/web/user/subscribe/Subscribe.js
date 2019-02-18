@@ -7,7 +7,6 @@ import { Translations } from "../../../../lib/translations";
 import { Button } from "../../../ui-kit";
 
 class Subscribe extends Component {
-  
   handleModalHide = () => {
     this.props.handleModalHide();
     this.props.handleModalInfoHide();
@@ -57,12 +56,11 @@ class Subscribe extends Component {
           })}
         </div>
         <div className="col-sm-12">
-          <button
+          <Button
             className="filled_button col-sm-6"
             onClick={this.handleModalHide}
-          >
-            Cancel
-          </button>
+            text={Translations.top_bar_info_modal.cancel}
+          />
         </div>
       </div>
     );

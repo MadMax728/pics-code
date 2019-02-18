@@ -22,8 +22,11 @@ class Header extends Component {
       userNavExpanded: false,
       offsetHeight: 0,
       searchText: "",
-      messageCount: 0
+      messageCount: 0,
+      menuIsOpened: false
     };
+
+    this.handleToggle = this.handleToggle.bind(this);
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
     if (storage) {
@@ -48,6 +51,11 @@ class Header extends Component {
   }
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
+  };
+
+  handleToggle = () => {
+    const { menuIsOpened } = this.state;
+    this.setState({ menuIsOpened: !menuIsOpened });
   };
 
   toggleUserNav = () => {
@@ -118,9 +126,11 @@ class Header extends Component {
           <div className="container">
             <div className="row">
               <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed">
-                  <img src={images.menu} alt="Menu" />
-                </button>
+                <Button
+                  type="button"
+                  className="navbar-toggle collapsed"
+                  text={<img src={images.menu} alt="Menu" />}
+                />
                 <Link to={routes.ROOT_ROUTE} className="navbar-brand">
                   <img src={images.headerLogo} alt="logo" />
                 </Link>
@@ -139,10 +149,13 @@ class Header extends Component {
                       value={searchText}
                     />
                     <span className="input-group-addon">
-                      <Button onClick={this.onSearchClick} text={
-                        <span className="search_icon">
-                          <img src={images.search} alt="Search" />
-                        </span>}
+                      <Button
+                        onClick={this.onSearchClick}
+                        text={
+                          <span className="search_icon">
+                            <img src={images.search} alt="Search" />
+                          </span>
+                        }
                       />
                     </span>
                   </div>
@@ -184,8 +197,14 @@ class Header extends Component {
                     title={<span>{Translations.navigation.notifications}</span>}
                     id="basic-nav-dropdown"
                     className={`menu_notifications`}
+                    open={this.state.menuIsOpened}
+                    onToggle={this.handleToggle}
                   >
-                    <Notifications handleMessage={this.handleMessage} />
+                    <Notifications
+                      handleMessage={this.handleMessage}
+                      history={this.props.history}
+                      handleToggle={this.handleToggle}
+                    />
                   </NavDropdown>
 
                   <RouteNavItem

@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { sendRequest, getUnsubscribe } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
-import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
+import {
+  RightSidebarLoading,
+  NoDataFoundRightSidebar,
+  Button
+} from "../../../ui-kit";
 
 class Community extends Component {
   render() {
@@ -66,14 +70,13 @@ class Community extends Component {
                         </Link>
                       </div>
                       <div className="community-subscribe">
-                        <button
+                        <Button
                           className={actionButton.className}
                           id={actionButton.userId}
                           onClick={actionButton.handleActionClick}
                           disabled={actionButton.isLoading}
-                        >
-                          {actionButton.btnText}
-                        </button>
+                          text={actionButton.btnText}
+                        />
                       </div>
                     </div>
                   </div>

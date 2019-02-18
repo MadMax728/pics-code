@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { LeftSidebarFilter } from "../../ui-kit";
+import { LeftSidebarFilter, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbars } from "react-custom-scrollbars";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -95,22 +95,21 @@ class ParticipantsFilter extends Component {
   }
 
   render() {
-
     const { filterApply, height } = this.state;
 
     return (
-      <Scrollbars style={{ height: `${height - 380}px` }}>      
+      <Scrollbars style={{ height: `${height - 380}px` }}>
         <div className="left-filters">
           <LeftSidebarFilter
-              filters={Filters}
-              onChange={this.handleOnChange}
-              filterApply={filterApply}
-              handleSelect={this.handleSelect}
-              handleResetFilterClick={this.handleResetFilterClick}
-              handleApplyClick={this.handleApplyClick}
-              isNotFilter
-            />
-          </div>
+            filters={Filters}
+            onChange={this.handleOnChange}
+            filterApply={filterApply}
+            handleSelect={this.handleSelect}
+            handleResetFilterClick={this.handleResetFilterClick}
+            handleApplyClick={this.handleApplyClick}
+            isNotFilter
+          />
+        </div>
       </Scrollbars>
     );
   }

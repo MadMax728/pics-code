@@ -14,7 +14,7 @@ import {
   SelectRadius,
   SelectTargetGroup,
   RadioButtonLanguages,
-  SelectAge,
+  SelectAge
 } from "../../common";
 import { Translations } from "../../../lib/translations";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -34,13 +34,14 @@ class LeftSidebarFilter extends Component {
   }
 
   render() {
-    const { filters,
-            handleResetFilterClick,
-            handleApplyClick,
-            filterApply,
-            isNotFilter,
-            isRank
-         } = this.props;
+    const {
+      filters,
+      handleResetFilterClick,
+      handleApplyClick,
+      filterApply,
+      isNotFilter,
+      isRank
+    } = this.props;
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div>
@@ -129,7 +130,7 @@ class LeftSidebarFilter extends Component {
               )}
               {filter.type === "text" && (
                 <Input
-                  type='text'
+                  type="text"
                   foruse={filter.name}
                   name={filter.name}
                   onChange={this.handleOnChange}
@@ -167,8 +168,7 @@ class LeftSidebarFilter extends Component {
             </div>
           );
         })}
-        {
-          isNotFilter && 
+        {isNotFilter && (
           <div className="filter-btn-wrapper">
             {filterApply ? (
               <Button
@@ -177,28 +177,25 @@ class LeftSidebarFilter extends Component {
                 text={Translations.filter.reset_filter}
               />
             ) : (
-              <Button 
-                className="black_button" 
+              <Button
+                className="black_button"
                 onClick={handleApplyClick}
                 text={Translations.filter.apply}
               />
             )}
 
-          {
-            isRank && isRank === enumerations.adminRank.rank1 &&
-            (
+            {isRank && isRank === enumerations.adminRank.rank1 && (
               <div className="filter-btn-wrapper">
                 <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
-                  <button className="black_button">
-                    {Translations.filter.back}
-                  </button>
+                  <Button
+                    className="black_button"
+                    text={Translations.filter.back}
+                  />
                 </Link>
               </div>
-            )
-          }
-
+            )}
           </div>
-        }
+        )}
       </div>
     );
   }
