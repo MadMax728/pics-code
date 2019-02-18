@@ -5,6 +5,7 @@ import * as routes from "../../../../../lib/constants/routes";
 import { modalType } from "../../../../../lib/constants/enumerations";
 import { Translations } from "../../../../../lib/translations";
 import moment from "moment";
+import { Button } from "../../../../ui-kit";
 
 class SettingCampaignStatisticsRight extends Component {
   constructor(props, context) {
@@ -33,14 +34,16 @@ class SettingCampaignStatisticsRight extends Component {
     return (
       <div className="right_bar no-padding pull-left">
         <div className="campaigns-right">
-          <button className="blue_button" onClick={this.handleEditCampaign}>
-            {Translations.create_campaigns.edit_campaign}{" "}
-          </button>
+          <Button
+            className="blue_button"
+            onClick={this.handleEditCampaign}
+            text={Translations.create_campaigns.edit_campaign}
+          />
           <Link to={routes.SETTINGS_CAMPAIGN_ROUTE}>
-            <button className="black_button">
-              {" "}
-              {Translations.create_campaigns.close_campaign}{" "}
-            </button>
+            <Button
+              className="black_button"
+              text={Translations.create_campaigns.close_campaign}
+            />
           </Link>
           <div className="normal_title padding-15">
             {" "}

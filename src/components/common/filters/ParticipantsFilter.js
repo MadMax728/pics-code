@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { LeftSidebarFilter } from "../../ui-kit";
+import { LeftSidebarFilter, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 // import { Scrollbars } from 'react-custom-scrollbars';
@@ -94,34 +94,33 @@ class ParticipantsFilter extends Component {
   }
 
   render() {
-
     const { filterApply } = this.state;
 
     return (
       // <Scrollbars style={{ width: 20, height: 100 }}>
-        <div className="left-filters">
-        
-          <LeftSidebarFilter
-            filters={Filters}
-            onChange={this.handleOnChange}
-            filterApply={this.state.filterApply}
-            handleSelect={this.handleSelect}
-          />
-          <div className="filter-btn-wrapper">
-            {this.state.filterApply ? (
-              <button
-                className="black_button"
-                onClick={this.handleResetFilterClick}
-              >
-                {Translations.filter.reset_filter}
-              </button>
-            ) : (
-              <button className="black_button" onClick={this.handleApplyClick}>
-                {Translations.filter.apply}
-              </button>
-            )}
-          </div>
+      <div className="left-filters">
+        <LeftSidebarFilter
+          filters={Filters}
+          onChange={this.handleOnChange}
+          filterApply={this.state.filterApply}
+          handleSelect={this.handleSelect}
+        />
+        <div className="filter-btn-wrapper">
+          {this.state.filterApply ? (
+            <Button
+              className="black_button"
+              onClick={this.handleResetFilterClick}
+              text={Translations.filter.reset_filter}
+            />
+          ) : (
+            <Button
+              className="black_button"
+              onClick={this.handleApplyClick}
+              text={Translations.filter.apply}
+            />
+          )}
         </div>
+      </div>
       // </Scrollbars>
     );
   }

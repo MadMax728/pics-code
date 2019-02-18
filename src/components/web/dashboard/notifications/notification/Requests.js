@@ -9,11 +9,10 @@ import {
   acceptRequest,
   getDashboard
 } from "../../../../../actions";
-import { UserImageItem } from "../../../../ui-kit";
+import { UserImageItem, Button } from "../../../../ui-kit";
 import { DateFormat } from "../../../../Factory";
 
 class Requests extends Component {
-  
   render() {
     return (
       <div className="tab-pane fade active in" id="nav-requests">
@@ -25,47 +24,60 @@ class Requests extends Component {
                   className="notification-with-subscribe notification-wrapper"
                   key={request.id}
                 >
-                   <UserImageItem item={request.profileUrl} customClass={`float_left padding-right-5 img-circle img-responsive`} />
+                  <UserImageItem
+                    item={request.profileUrl}
+                    customClass={`float_left padding-right-5 img-circle img-responsive`}
+                  />
                   <div className="user-info">
                     <div className="username">{request.username}</div>
                     <div className="subtitle">
                       {Translations.notification.subscribed_to_your_profile}
                     </div>
                     <div className="date">
-                      {DateFormat(request.createdAt, Translations.date_format.date, true)}
+                      {DateFormat(
+                        request.createdAt,
+                        Translations.date_format.date,
+                        true
+                      )}
                     </div>
                   </div>
                   {request.isAccepted && (
                     <div className="subscribe-btn">
-                      <button className="black_button">
-                        <img src={images.green_tick} alt={"green-tick"} />
-                      </button>
+                      <Button
+                        className="black_button"
+                        text={
+                          <img src={images.green_tick} alt={"green-tick"} />
+                        }
+                      />
                     </div>
                   )}
                   {!request.isAccepted && (
                     <div className="subscribe-btn">
-                      <button
+                      <Button
                         className="black_button"
                         id={request.id}
                         onClick={this.handleAccepted}
-                      >
-                        <img
-                          src={images.green_tick}
-                          alt={"green-tick"}
-                          id={request.id}
-                        />
-                      </button>
-                      <button
+                        text={
+                          <img
+                            src={images.green_tick}
+                            alt={"green-tick"}
+                            id={request.id}
+                          />
+                        }
+                      />
+
+                      <Button
                         className="black_button"
                         id={request.subscribeId}
                         onClick={this.handleRejected}
-                      >
-                        <img
-                          src={images.cross}
-                          alt={"cross"}
-                          id={request.subscribeId}
-                        />
-                      </button>
+                        text={
+                          <img
+                            src={images.cross}
+                            alt={"cross"}
+                            id={request.subscribeId}
+                          />
+                        }
+                      />
                     </div>
                   )}
                 </div>
@@ -137,7 +149,6 @@ class Requests extends Component {
       });
     }
   };
-
 }
 
 const mapStateToProps = state => ({

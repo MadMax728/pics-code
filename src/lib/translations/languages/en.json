@@ -163,7 +163,9 @@
     "target_group_help_text": "Define the gender which your ad targets",
     "description_help_text": "Enter a description of what your product or service offers",
     "action_call_help_text": "Define a call to action button to define what is behind your link",
-    "link_help_text": "Set the link to which the user will be directed when clicking on your ad"
+    "link_help_text": "Set the link to which the user will be directed when clicking on your ad",
+    "create_ad": "Create Ad",
+    "what_are_ad": "What are ads?"
   },
 
   "create_campaigns": {
@@ -258,7 +260,9 @@
     "target_group_help_text": "Select whom your campaign addresses",
     "type_help_text": "Select if the participant have to apply with an image or video",
     "offer_help_text": "Use offers to indicate what you offer in return for doing the campaign",
-    "inquiry_help_text": "User inquiry to select what service you are looking for"
+    "inquiry_help_text": "User inquiry to select what service you are looking for",
+    "create_campaign": "Create Campaign",
+    "what_are_campaign": "What are campaigns?"
   },
 
   "you_have": "You have",
@@ -952,7 +956,8 @@
     "facebook": "Facebook",
     "twitter": "Twitter",
     "whatsapp": "Whatsapp",
-    "email": "Email"
+    "email": "Email",
+    "connect": "Connect"
   },
 
   "privacy": {

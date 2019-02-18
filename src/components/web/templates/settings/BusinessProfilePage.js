@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { activateBusinessProfile, getSearch } from "../../../../actions";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
+import { Button } from "../../../ui-kit";
 
 class BusinessProfilePage extends Component {
   constructor(props) {
@@ -64,13 +65,16 @@ class BusinessProfilePage extends Component {
             </div>
           </div>
           <div className="col-sm-12">
-            <button
+            <Button
               type="button"
               onClick={this.handleActivationBusinessProfile}
               className="gradient-button"
-            >
-              <span id={userId}>{Translations.Business_profile.Activate} </span>
-            </button>
+              text={
+                <span id={userId}>
+                  {Translations.Business_profile.Activate}{" "}
+                </span>
+              }
+            />
           </div>
           <div className="clearfix" />
           <div className="terms-conditions text-center">

@@ -118,9 +118,11 @@ class Header extends Component {
           <div className="container">
             <div className="row">
               <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed">
-                  <img src={images.menu} alt="Menu" />
-                </button>
+                <Button
+                  type="button"
+                  className="navbar-toggle collapsed"
+                  text={<img src={images.menu} alt="Menu" />}
+                />
                 <Link to={routes.ROOT_ROUTE} className="navbar-brand">
                   <img src={images.headerLogo} alt="logo" />
                 </Link>
@@ -139,10 +141,13 @@ class Header extends Component {
                       value={searchText}
                     />
                     <span className="input-group-addon">
-                      <Button onClick={this.onSearchClick} text={
-                        <span className="search_icon">
-                          <img src={images.search} alt="Search" />
-                        </span>}
+                      <Button
+                        onClick={this.onSearchClick}
+                        text={
+                          <span className="search_icon">
+                            <img src={images.search} alt="Search" />
+                          </span>
+                        }
                       />
                     </span>
                   </div>
