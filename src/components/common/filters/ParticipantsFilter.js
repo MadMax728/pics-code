@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-// import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -89,40 +89,29 @@ class ParticipantsFilter extends Component {
     super(props);
     this.state = {
       filterApply: false,
-      filData: []
+      filData: [],
+      height: window.innerHeight
     };
   }
 
   render() {
 
-    const { filterApply } = this.state;
+    const { filterApply, height } = this.state;
 
     return (
-      // <Scrollbars style={{ width: 20, height: 100 }}>
+      <Scrollbars style={{ height: `${height - 380}px` }}>      
         <div className="left-filters">
-        
           <LeftSidebarFilter
-            filters={Filters}
-            onChange={this.handleOnChange}
-            filterApply={this.state.filterApply}
-            handleSelect={this.handleSelect}
-          />
-          <div className="filter-btn-wrapper">
-            {this.state.filterApply ? (
-              <button
-                className="black_button"
-                onClick={this.handleResetFilterClick}
-              >
-                {Translations.filter.reset_filter}
-              </button>
-            ) : (
-              <button className="black_button" onClick={this.handleApplyClick}>
-                {Translations.filter.apply}
-              </button>
-            )}
+              filters={Filters}
+              onChange={this.handleOnChange}
+              filterApply={filterApply}
+              handleSelect={this.handleSelect}
+              handleResetFilterClick={this.handleResetFilterClick}
+              handleApplyClick={this.handleApplyClick}
+              isNotFilter
+            />
           </div>
-        </div>
-      // </Scrollbars>
+      </Scrollbars>
     );
   }
 
