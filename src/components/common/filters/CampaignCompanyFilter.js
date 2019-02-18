@@ -77,7 +77,8 @@ class CampaignCompanyFilter extends Component {
     this.state = {
       filterApply: false,
       filData: [],
-      currentLanguage: Translations.getLanguage()
+      currentLanguage: Translations.getLanguage(),
+      height: window.innerHeight
     };
   }
 
@@ -144,22 +145,22 @@ class CampaignCompanyFilter extends Component {
       }
     ];
 
-    const { filterApply } = this.state;
+    const { filterApply, height } = this.state;
 
     return (
-      <Scrollbars style={{ height: 700 }}>
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={filterApply}
-          handleSelect={this.handleSelect}
-          handleLanguageSwitch={this.handleLanguageSwitch}
-          handleResetFilterClick={this.handleResetFilterClick}
-          handleApplyClick={this.handleApplyClick}
-          isNotFilter
-        />
-      </div>
+      <Scrollbars style={{ height: `${height - 220}px` }}>
+        <div className="left-filters">
+          <LeftSidebarFilter
+            filters={Filters}
+            onChange={this.handleOnChange}
+            filterApply={filterApply}
+            handleSelect={this.handleSelect}
+            handleLanguageSwitch={this.handleLanguageSwitch}
+            handleResetFilterClick={this.handleResetFilterClick}
+            handleApplyClick={this.handleApplyClick}
+            isNotFilter
+          />
+        </div>
       </Scrollbars>
     );
   }
