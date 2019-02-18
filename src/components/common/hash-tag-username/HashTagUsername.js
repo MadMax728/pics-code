@@ -48,7 +48,7 @@ class HashTagUsername extends Component {
 
   handleChangeField = e => {
     const { isText } = this.props;
-    const value = isText? e.values.val : e.target.value;
+    const value = isText ? e.values.val : e.target.value;
     const commentArr = value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
     this.hashTagHide();
@@ -65,7 +65,7 @@ class HashTagUsername extends Component {
 
   handleLengthField = e => {
     const { isText } = this.props;
-    const value = isText? e.values.val : e.target.value;
+    const value = isText ? e.values.val : e.target.value;
     let commentText = value;
     let limitField;
     const commentArr = value.split(" ");
@@ -138,7 +138,14 @@ class HashTagUsername extends Component {
   };
 
   render() {
-    const { value, placeholder, className, name, isText, maxLimit } = this.props;
+    const {
+      value,
+      placeholder,
+      className,
+      name,
+      isText,
+      maxLimit
+    } = this.props;
     const { remainingLimitLength } = this.state;
     return (
       <div>
@@ -153,10 +160,10 @@ class HashTagUsername extends Component {
               value={value}
               maxLength={maxLimit}
             />
-            {remainingLimitLength > 0 &&
-            remainingLimitLength !== 1000 ? (
+            {remainingLimitLength > 0 && remainingLimitLength !== 1000 ? (
               <p className="commenter-info">
-                {Translations.you_have} {remainingLimitLength} {Translations.characters_left} {" "}
+                {Translations.you_have} {remainingLimitLength}{" "}
+                {Translations.characters_left}{" "}
               </p>
             ) : (
               ""

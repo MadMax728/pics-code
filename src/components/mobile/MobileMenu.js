@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import { Translations } from "../../lib/translations";
 
 export default class MobileMenu extends Component {
-
   render() {
     return (
       <section>
@@ -26,9 +25,13 @@ export default class MobileMenu extends Component {
               </button>
             </div>
             <div className="mobile_menu_wrapper">
-              <div className="normal_title padding-15">{Translations.left_sidebar.information}</div>
+              <div className="normal_title padding-15">
+                {Translations.left_sidebar.information}
+              </div>
               <SideBarMBMenuInformation />
-              <div className="normal_title padding-15">{Translations.smobile_sidebar_services.ervices}</div>
+              <div className="normal_title padding-15">
+                {Translations.smobile_sidebar_services.ervices}
+              </div>
               <SideBarMBMenuServices />
             </div>
           </div>
@@ -36,7 +39,7 @@ export default class MobileMenu extends Component {
       </section>
     );
   }
-  
+
   componentDidMount = () => {
     document.addEventListener("click", this.handleOutsideClick);
   };
@@ -74,7 +77,6 @@ export default class MobileMenu extends Component {
   };
 
   handleKeyPress = () => {};
-
 }
 
 MobileMenu.propTypes = {

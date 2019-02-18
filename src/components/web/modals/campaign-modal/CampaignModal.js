@@ -50,13 +50,16 @@ const initialState = {
       address: ""
     },
     category: "",
+    categoryName: "",
     procedure: procedure.public,
     typeContent: typeContent.image,
     targetGroup: target_group.company,
     offers: "",
+    offerName: "",
     offerTag: [],
     offerTagList: [],
     inquiry: "",
+    inquiryName: "",
     inquiryTag: [],
     inquiryTagList: [],
     description: "",
@@ -247,8 +250,6 @@ class CampaignModal extends Component {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
-    // console.log(data);
-
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
@@ -256,6 +257,15 @@ class CampaignModal extends Component {
     }
     if (data.category && data.category[0] && data.category[0].id) {
       form.category = data.category[0].id;
+      form.categoryName = data.category[0].categoryName;
+    }
+    if (data.offers && data.offersList[0] && data.offersList[0].id) {
+      form.offers = data.offersList[0].id;
+      form.offerName = data.offersList[0].offerName;
+    }
+    if (data.inquiry && data.inquiryList[0] && data.inquiryList[0].id) {
+      form.inquiry = data.inquiryList[0].id;
+      form.inquiryName = data.inquiryList[0].inquiryName;
     }
     form.procedure = procedure[data.procedure];
     if (data.typeContent) {
@@ -324,6 +334,9 @@ class CampaignModal extends Component {
     form.location.longitude = "";
     form.location.address = "";
     form.category = "";
+    form.categoryName = "";
+    form.offerName = "";
+    form.inquiryName = "";
     form.procedure = procedure.public;
     form.typeContent = typeContent.image;
     form.targetGroup = target_group.company;
@@ -367,6 +380,7 @@ class CampaignModal extends Component {
   };
 
   handleCreatorSubmit = () => {
+    // console.log("handle creator submit");
     this.handleSubmit();
   };
 
@@ -669,6 +683,15 @@ class CampaignModal extends Component {
 
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
+    if (isFor === "category") {
+      form.categoryName = selected.name;
+    }
+    if (isFor === "offers") {
+      form.offerName = selected.name;
+    }
+    if (isFor === "inquiry") {
+      form.inquiryName = selected.name;
+    }
     form[isFor] = selected.id;
     if (isFor === "budget") {
       this.calculateMaxClicks();

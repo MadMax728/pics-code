@@ -7,6 +7,7 @@ import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from "./MLeftUsersList";
 import MLeftTabs from "./MLeftTabs";
 import { getUserList } from "../../../../actions";
+import { Button } from "../../../ui-kit";
 
 class MLeftContainer extends Component {
   constructor(props, context) {
@@ -119,11 +120,14 @@ class MLeftContainer extends Component {
               placeholder="Search"
             />
             <span className="input-group-addon">
-              <button onClick={this.handleChange}>
-                <span className="search_icon">
-                  <img src={images.search} alt="Search" />
-                </span>
-              </button>
+              <Button
+                onClick={this.handleChange}
+                text={
+                  <span className="search_icon">
+                    <img src={images.search} alt="Search" />
+                  </span>
+                }
+              />
             </span>
           </div>
         </div>

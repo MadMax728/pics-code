@@ -65,7 +65,7 @@ class TopBarOwnerInfo extends Component {
           username: userInfo.username
         },
         {
-          name: Translations.top_bar_info.subscribed,
+          name: Translations.top_bar_info.posts,
           className: "col-sm-4 slot_two no-padding",
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.create_ad,
@@ -191,7 +191,7 @@ class TopBarOwnerInfo extends Component {
                 username: this.props.userDataByUsername.user.data.username
               },
               {
-                name: Translations.top_bar_info.subscribed,
+                name: Translations.top_bar_info.posts,
                 className: "col-sm-4 slot_two no-padding",
                 btnActiveClassName: "black_button",
                 btnText: Translations.top_bar_info.create_ad,

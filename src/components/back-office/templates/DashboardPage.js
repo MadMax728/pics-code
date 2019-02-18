@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { getBackOfficeDashboard } from "../../../actions";
 
-import { CustomBootstrapTable } from "../../ui-kit";
+import { CustomBootstrapTable, Button } from "../../ui-kit";
 
 import { Translations } from "../../../lib/translations";
 import * as enumerations from "../../../lib/constants/enumerations";
@@ -16,7 +16,7 @@ class DashboardPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      searchKeyword: this.props.searchData.searchKeyword,      
+      searchKeyword: this.props.searchData.searchKeyword,
       key_statistics: null,
       content_statistics: null,
       campaign_statistics_company: null,
@@ -42,19 +42,20 @@ class DashboardPage extends Component {
           </div>
           <div className="review-report-btns">
             <Link to={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}>
-              <button className="filled_button pull-left">
-                {Translations.landing.Review}
-              </button>{" "}
+              <Button
+                className="filled_button pull-left"
+                text={Translations.landing.Review}
+              />
             </Link>
             <Link to={routes.BACK_OFFICE_REPORTED_IMAGES_ROUTE}>
-              <button className="filled_button pull-right">
-                {Translations.landing.Reported_content}
-              </button>
+              <Button
+                className="filled_button pull-right"
+                text={Translations.landing.Reported_content}
+              />
             </Link>
           </div>
 
-          {
-            !isRank && 
+          {!isRank && (
             <div>
               {key_statistics && this.renderKeyStatistics()}
 
@@ -64,7 +65,7 @@ class DashboardPage extends Component {
 
               {ads_statisitcs && this.renderAdsStatistics()} */}
             </div>
-          }
+          )}
         </div>
       </div>
     );
@@ -74,12 +75,12 @@ class DashboardPage extends Component {
     window.scrollTo(0, 0);
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
-    
+
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-    if (userInfo) { 
-      this.setState({isRank: userInfo.role === enumerations.adminRank.rank2});
+    if (userInfo) {
+      this.setState({ isRank: userInfo.role === enumerations.adminRank.rank2 });
     }
 
     // this.props.getBackOfficeDashboard().then(()=> {
@@ -174,8 +175,8 @@ class DashboardPage extends Component {
           />
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   renderContentStatistics = () => {
     const { content_statistics } = this.state;
@@ -276,8 +277,8 @@ class DashboardPage extends Component {
           />
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   renderCampaignStatisticsCompany = () => {
     const { campaign_statistics_company } = this.state;
@@ -364,8 +365,8 @@ class DashboardPage extends Component {
           />
         </div>
       </div>
-    )
-  }
+    );
+  };
 
   renderAdsStatistics = () => {
     const { ads_statisitcs } = this.state;
@@ -452,8 +453,8 @@ class DashboardPage extends Component {
           />
         </div>
       </div>
-    )
-  }
+    );
+  };
 }
 
 const mapStateToProps = state => ({
@@ -469,7 +470,7 @@ DashboardPage.propTypes = {
   getBackOfficeDashboard: PropTypes.func.isRequired,
   backOfficeDashboardData: PropTypes.object,
   searchData: PropTypes.any,
-  history: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(

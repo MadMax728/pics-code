@@ -1,17 +1,20 @@
 import React, { Component } from "react";
 import * as images from "../../../lib/constants/images";
 import PropTypes from "prop-types";
-import { updateBackOfficeReport, updateBackOfficeReview } from "../../../actions";
+import {
+  updateBackOfficeReport,
+  updateBackOfficeReview
+} from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class Processed extends Component {
-  
   render() {
     const { handleModalInfoHide } = this.props;
     return (
       <div>
         <div className="normal_title padding-15 modal-normal-title">
-          Processed ?
+          {Translations.admin_login.proceed}
         </div>
         <div className="processed-options">
           <span
@@ -40,24 +43,25 @@ class Processed extends Component {
   handleProcessed = () => {
     const { modalInfo } = this.props;
     if (modalInfo.isBudget || modalInfo.isReview) {
-      this.props.updateBackOfficeReview(modalInfo).then(()=> {
-        if(this.props.reviewData && !this.props.reviewData.error) {
+      this.props.updateBackOfficeReview(modalInfo).then(() => {
+        if (this.props.reviewData && !this.props.reviewData.error) {
+          this.props.statusCallback();
+          this.props.handleModalInfoHide();
+        }
+      });
+    } else {
+      this.props.updateBackOfficeReport(modalInfo).then(() => {
+        if (
+          this.props.reportedContentData &&
+          !this.props.reportedContentData.error
+        ) {
           this.props.statusCallback();
           this.props.handleModalInfoHide();
         }
       });
     }
-    else {
-      this.props.updateBackOfficeReport(modalInfo).then(()=> {
-        if(this.props.reportedContentData && !this.props.reportedContentData.error) {
-          this.props.statusCallback();
-          this.props.handleModalInfoHide();
-        }
-      });
-    }
-  }
+  };
 }
-
 
 const mapStateToProps = state => ({
   reportedContentData: state.reportedContentData,
