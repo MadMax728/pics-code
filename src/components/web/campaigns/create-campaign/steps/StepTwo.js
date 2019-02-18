@@ -11,13 +11,14 @@ class StepTwo extends Component {
   }
 
   render() {
-    const { form, handleContentChange } = this.props;
+    const { form, handleContentChange, handleModalInfoMsgShow } = this.props;
     return (
       <div className="col-xs-12 create-campaign-wrapper">
         <div className="title">{form.title}</div>
         <TextEditor
           handleContentChange={handleContentChange}
           contentText={form.description}
+          handleModalInfoMsgShow={handleModalInfoMsgShow}
         />
         <div className="form-group">
           {form.description.length === 0 && form.error && (
@@ -32,7 +33,8 @@ class StepTwo extends Component {
 StepTwo.propTypes = {
   // handleChangeField: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired,
+  handleModalInfoMsgShow: PropTypes.func.isRequired
 };
 
 export default StepTwo;

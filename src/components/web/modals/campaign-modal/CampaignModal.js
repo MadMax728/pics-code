@@ -96,7 +96,7 @@ class CampaignModal extends Component {
   }
 
   render() {
-    const { isFor, handleModalHide, modalShow } = this.props;
+    const { isFor, handleModalHide, modalShow, handleModalInfoMsgShow } = this.props;
     const {
       modalTitle,
       isEdit,
@@ -185,6 +185,7 @@ class CampaignModal extends Component {
               calculateMaxClicks={this.calculateMaxClicks}
               isLoading={isLoading}
               isEdit={isEdit}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
             />
           ) : (
             <CreateCreatorCampaign
@@ -218,6 +219,7 @@ class CampaignModal extends Component {
               calculateMaxClicks={this.calculateMaxClicks}
               isLoading={isLoading}
               isEdit={isEdit}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
             />
           )
         }
@@ -226,7 +228,7 @@ class CampaignModal extends Component {
   }
 
   componentDidMount = () => {
-    this.setState({ stepIndex: 0, isPreview: false });
+    this.setState({ stepIndex: 1, isPreview: false });
     if (userInfo) {
       this.setState({ userInfo });
     }

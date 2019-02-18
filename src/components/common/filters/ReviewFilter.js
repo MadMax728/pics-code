@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import * as routes from "../../../lib/constants/routes";
-import * as enumerations from "../../../lib/constants/enumerations";
-import { Scrollbars } from 'react-custom-scrollbars';
 
 const staticData = [
   { name: "all", className: "", value: "All" },
@@ -58,15 +54,13 @@ class ReviewFilter extends Component {
     this.state = {
       filterApply: false,
       filData: [],
-      height: window.innerHeight
     };
   }
 
   render() {
     const { isRank } = this.props;
-    const { filterApply, height } = this.state;
+    const { filterApply } = this.state;
     return (
-      <Scrollbars style={{ height: `${height - 220}px` }}>      
         <div className="left-filters">
           <LeftSidebarFilter
             filters={Filters}
@@ -79,7 +73,6 @@ class ReviewFilter extends Component {
             isNotFilter
           />
         </div>
-      </Scrollbars>
     );
   }
 

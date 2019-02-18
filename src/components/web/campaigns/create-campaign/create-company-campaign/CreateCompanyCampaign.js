@@ -41,7 +41,8 @@ class CreateCompanyCampaign extends Component {
       setVoucherData,
       calculateMaxClicks,
       isLoading,
-      isEdit
+      isEdit,
+      handleModalInfoMsgShow
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
@@ -86,6 +87,7 @@ class CreateCompanyCampaign extends Component {
               form={form}
               handleContentChange={handleContentChange}
               userInfo={userInfo}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
             />
           ))}
         {!isPreview &&
@@ -157,7 +159,8 @@ CreateCompanyCampaign.propTypes = {
   calculateMaxClicks: PropTypes.func,
   maxClicks: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
-  isEdit: PropTypes.bool.isRequired
+  isEdit: PropTypes.bool.isRequired,
+  handleModalInfoMsgShow: PropTypes.func.isRequired
 };
 
 export default CreateCompanyCampaign;
