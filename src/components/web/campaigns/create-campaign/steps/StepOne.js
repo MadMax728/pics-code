@@ -360,7 +360,7 @@ class StepOne extends Component {
                 {Translations.create_campaigns.offer_help_text}
               </p>
               <SelectOffer
-                value={form.offer}
+                value={form.offers || ""}
                 className=""
                 handleSelect={handleSelect}
               />
@@ -374,7 +374,7 @@ class StepOne extends Component {
                 {Translations.create_campaigns.inquiry_help_text}
               </p>
               <SelectInquiry
-                value={form.inquiry}
+                value={form.inquiry || ""}
                 className=""
                 handleSelect={handleSelect}
               />
