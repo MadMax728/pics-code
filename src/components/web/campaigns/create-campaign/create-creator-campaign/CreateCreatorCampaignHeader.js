@@ -60,7 +60,7 @@ class CreateCreatorCampaignHeader extends Component {
   };
 
   handlePreview = () => {
-    this.props.handlePrivewOpen();
+    // this.props.handlePrivewOpen();
   };
 
   handleContinue = () => {
@@ -84,7 +84,7 @@ CreateCreatorCampaignHeader.propTypes = {
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
   handleResoreState: PropTypes.func.isRequired,
-  modalTitle: PropTypes.string.isRequired,
+  modalTitle: PropTypes.string,
   handleSubmit: PropTypes.func,
   isFor: PropTypes.bool
 };

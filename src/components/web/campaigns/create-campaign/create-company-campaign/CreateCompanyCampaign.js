@@ -35,7 +35,6 @@ class CreateCompanyCampaign extends Component {
       handleInquiryTagChange,
       handleInquiryTagDelete,
       handleSelect,
-      handleVideo,
       userInfo,
       handleAddress,
       setVoucherData,
@@ -46,8 +45,8 @@ class CreateCompanyCampaign extends Component {
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
-        {isPreview && <Preview form={form} />}
-        {isPreview && (
+        {/* {isPreview && <Preview form={form} />} */}
+        {/* {isPreview && (
           <Button
             onClick={handlePrivewClose}
             className={"closeBtn right-side-close"}
@@ -59,7 +58,7 @@ class CreateCompanyCampaign extends Component {
               />
             }
           />
-        )}
+        )} */}
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
@@ -76,7 +75,6 @@ class CreateCompanyCampaign extends Component {
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
-              handleVideo={handleVideo}
               isEdit={isEdit}
             />
           ))}
@@ -152,7 +150,6 @@ CreateCompanyCampaign.propTypes = {
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
   setVoucherData: PropTypes.func,
