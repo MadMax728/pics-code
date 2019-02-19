@@ -298,7 +298,7 @@
         .upload-form{
           padding: 20px 190px;
           @media only screen and (max-width: 991px){
-            padding: 20px 40px;
+            padding: 20px 80px;
           }
           height: 100%;
           border:none;
@@ -365,6 +365,9 @@
         }
         .create-campaign-crop-pic{
           width: 518px;
+          @media only screen and (max-width: 991px){
+            width:inherit;
+          }
         }
         .range-wrapr.add-wrapper{
           position: relative;
@@ -393,6 +396,9 @@
           .add-wrapper.create-camp-ad-wrapr{
             position: absolute;
             right: 0;
+            @media only screen and (max-width: 991px){
+              right: 15px;
+            }
             bottom: 55px;
             width: 30px;
             height: 20px;
