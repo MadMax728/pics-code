@@ -8,7 +8,6 @@ const MRightUserItem = ({ item, onDeleteHistoryClick }) => {
     <div className="user-wrapper">
       {item && item.profileUrl && (
         <div className="user-img">
-          123
           <UserImageItem
             item={item.profileUrl}
             customClass={`img-circle img-responsive float_left padding-right-15`}

@@ -26,7 +26,7 @@ class AdminLogin extends Component {
     return (
       <div className="login-process">
         <AdminHeader />
-        <section>
+        <section className="main-section">
           <div className="custom-container">
             <div className="login-wrapper  backoffice-login">
               <h3 className="text-center">{Translations.admin_login.backoffice_login}</h3>
