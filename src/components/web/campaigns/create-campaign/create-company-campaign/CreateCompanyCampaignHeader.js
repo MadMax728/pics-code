@@ -60,7 +60,7 @@ class CreateCompanyCampaignHeader extends Component {
   };
 
   handlePreview = () => {
-    this.props.handlePrivewOpen();
+    // this.props.handlePrivewOpen();
   };
 
   handleContinue = () => {

@@ -44,9 +44,9 @@ class SelectCategory extends Component {
     });
   };
 
-  componentWillUnmount = () => {
-    this.setState({ categoryList: [] });
-  };
+  // componentWillUnmount = () => {
+  //   this.setState({ categoryList: [] });
+  // };
 
   handleCategory = event => {
     const { categoryList } = this.props;
