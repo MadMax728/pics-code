@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { setCookie, getCookie } from "../../../lib/utils/helpers";
 import { Route } from "react-router-dom";
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbars } from "react-custom-scrollbars";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -156,12 +156,12 @@ class DashboardUserFilter extends Component {
     ];
 
     const Filters = [
-      {
-        name: Translations.left_sidebar_filter.radio_change_language.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radio_change_language.type,
-        items: languageItem
-      },
+      // {
+      //   name: Translations.left_sidebar_filter.radio_change_language.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.radio_change_language.type,
+      //   items: languageItem
+      // },
       {
         name: Translations.left_sidebar_filter.relevance.name,
         className: "filter-title",
