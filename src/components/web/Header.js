@@ -121,7 +121,107 @@ class Header extends Component {
       messageCountView = "99+";
     }
     return (
-      <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
+      // <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
+      //   <nav className="navbar navbar-default">
+      //     <div className="container">
+      //       <div className="row">
+      //         <div className="navbar-header">
+      //           <Button
+      //             type="button"
+      //             className="navbar-toggle collapsed"
+      //             text={<img src={images.menu} alt="Menu" />}
+      //           />
+      //           <Link to={routes.ROOT_ROUTE} className="navbar-brand">
+      //             <img src={images.headerLogo} alt="logo" />
+      //           </Link>
+      //         </div>
+      //         <div
+      //           className="collapse navbar-collapse"
+      //           id="bs-example-navbar-collapse-1"
+      //         >
+      //           <form className="navbar-form navbar-left">
+      //             <div className="input-group search-input-group">
+      //               <Input
+      //                 type="text"
+      //                 className="form-control"
+      //                 placeholder="Search"
+      //                 onChange={this.onInputChange}
+      //                 value={searchText}
+      //               />
+      //               <span className="input-group-addon">
+      //                 <Button
+      //                   onClick={this.onSearchClick}
+      //                   text={
+      //                     <span className="search_icon">
+      //                       <img src={images.search} alt="Search" />
+      //                     </span>
+      //                   }
+      //                 />
+      //               </span>
+      //             </div>
+      //           </form>
+      //           <ul className="nav navbar-nav pull-right">
+      //             <RouteNavItem
+      //               to={routes.ROOT_ROUTE}
+      //               className={`menu_home`}
+      //               activeAtRoot
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               <span>{Translations.navigation.home}</span>
+      //             </RouteNavItem>
+      //             <RouteNavItem
+      //               to={`/campaign/company`}
+      //               className={`menu_public`}
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               <span>{Translations.navigation.campaign}</span>
+      //             </RouteNavItem>
+
+      //             <RouteNavItem
+      //               to={routes.MESSAGES_ROUTE}
+      //               className={`menu_messages`}
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               {messageCount && messageCount > 0 ? (
+      //                 <span className="badge badge-danger">
+      //                   {messageCountView}
+      //                 </span>
+      //               ) : (
+      //                 ""
+      //               )}
+      //               <span>{Translations.navigation.messages}</span>
+      //             </RouteNavItem>
+
+      //             <NavDropdown
+      //               noCaret
+      //               title={<span>{Translations.navigation.notifications}</span>}
+      //               id="basic-nav-dropdown"
+      //               className={`menu_notifications`}
+      //               open={this.state.menuIsOpened}
+      //               onToggle={this.handleToggle}
+      //             >
+      //               <Notifications
+      //                 handleMessage={this.handleMessage}
+      //                 history={this.props.history}
+      //                 handleToggle={this.handleToggle}
+      //               />
+      //             </NavDropdown>
+
+      //             <RouteNavItem
+      //               to={routes.NEWS_FEED_ROUTE}
+      //               className={`menu_profile`}
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               <span>{Translations.navigation.profile}</span>
+      //             </RouteNavItem>
+      //           </ul>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   </nav>
+      // </header>
+
+      <header className="fixed">
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">
@@ -220,6 +320,7 @@ class Header extends Component {
           </div>
         </nav>
       </header>
+      
     );
   }
 }

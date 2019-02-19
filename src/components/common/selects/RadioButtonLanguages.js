@@ -39,27 +39,31 @@ class RadioButtonLanguages extends Component {
   render() {
     return (
       <div className="languageBtn">
-        <RadioButton
-          type="radio"
-          id="en"
-          name="language"
-          value="en"
-          defaultChecked={this.state.currentLanguage === "en"}
-          className="language-radio-input"
-          onChange={this.handleLanguage}
-        />
-        <span>{"English"}</span>
-
-        <RadioButton
-          type="radio"
-          id="de"
-          name="language"
-          value="de"
-          defaultChecked={this.state.currentLanguage === "de"}
-          className="radio-btn lbl-margin"
-          onChange={this.handleLanguage}
-        />
-        <span>{"German"}</span>
+        <div className="">
+          <RadioButton
+            type="radio"
+            id="en"
+            name="language"
+            value="en"
+            defaultChecked={this.state.currentLanguage === "en"}
+            className="language-radio-input"
+            onChange={this.handleLanguage}
+          />
+          <span>{"English"}</span>
+        </div>
+          
+          <div className="">
+            <RadioButton
+              type="radio"
+              id="de"
+              name="language"
+              value="de"
+              defaultChecked={this.state.currentLanguage === "de"}
+              className="language-radio-input"
+              onChange={this.handleLanguage}
+            />
+            <span>{"German"}</span>
+          </div>
       </div>
     );
   }
