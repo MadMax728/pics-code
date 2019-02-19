@@ -7,16 +7,20 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
 import { Auth } from "../../../../auth";
+import { Scrollbars } from "react-custom-scrollbars";
 
 class FavouriteCampaigns extends Component {
   render() {
     const { isLoading } = this.props;
+    const height = window.innerHeight;
     return (
+     
       <div>
         <div className="normal_title padding-15">
           {Translations.favourite_campaigns}
         </div>
         {!isLoading && (
+           <Scrollbars style={{ height: `${height - 220}px` }}>
           <div className="campaigns">
             {
               this.props.campaignData &&
@@ -34,6 +38,7 @@ class FavouriteCampaigns extends Component {
               <NoDataFoundRightSidebar />
             )}
           </div>
+          </Scrollbars>
         )}
         {isLoading && <RightSidebarLoading />}
       </div>
