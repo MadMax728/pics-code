@@ -14,7 +14,7 @@ class InlineLoading extends React.Component {
     return (
       isVisible && (
         <span>
-          <section className="loader-wrapr">
+          <section className="loader-wrapr main-section">
             <div className="loader loader-14">
               <svg
                 version="1.1"

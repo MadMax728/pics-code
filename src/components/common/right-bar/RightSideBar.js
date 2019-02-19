@@ -9,7 +9,6 @@ import {
   SettingCampaignRight,
   SettingAdsRight
 } from "../../../components/web/templates/settings";
-
 class RightSideBar extends Component {
 
   render() {

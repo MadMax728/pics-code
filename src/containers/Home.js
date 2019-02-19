@@ -119,7 +119,7 @@ class Home extends Component {
           handleModalShow={this.handleModalShow}
           history={history}
         />
-        <section>
+        <section className="main-section">
           <MessageBar message={message} />
 
           <CustomModal
