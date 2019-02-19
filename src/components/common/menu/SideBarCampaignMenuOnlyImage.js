@@ -8,7 +8,7 @@ const SideBarCampaignMenuOnlyImage = () => {
   if (storage) {
     userInfo = JSON.parse(storage.userInfo);
   }
-  const profile_img = userInfo? userInfo.profileUrl : images.campaign1;
+  const profile_img = userInfo ? userInfo.profileUrl : images.campaign1;
   return (
     <div>
       <div className="user_info">

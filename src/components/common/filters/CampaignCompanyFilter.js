@@ -3,7 +3,7 @@ import { LeftSidebarFilter, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { setCookie } from "../../../lib/utils/helpers";
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbars } from "react-custom-scrollbars";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -101,12 +101,12 @@ class CampaignCompanyFilter extends Component {
     const languageItem = languageItems;
 
     const Filters = [
-      {
-        name: Translations.left_sidebar_filter.radio_change_language.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radio_change_language.type,
-        items: languageItem
-      },
+      // {
+      //   name: Translations.left_sidebar_filter.radio_change_language.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.radio_change_language.type,
+      //   items: languageItem
+      // },
       {
         name: Translations.left_sidebar_filter.relevance.name,
         className: "filter-title",

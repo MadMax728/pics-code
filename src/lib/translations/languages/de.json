@@ -181,6 +181,7 @@
     "anonymous": "Anonymous",
     "public": "Public",
     "procedure": "Add procedure",
+    "description_placeholder": "Write something..",
     "application_criteria": "Application criteria",
     "select_category": "Select category",
     "add_category": "Add category",
@@ -322,6 +323,28 @@
     "business_terms_condition": "Business Terms and Conditions",
     "payment_guidelines": "Payment Guidelines",
     "community_payment_guidelines": "Community Payment Guidelines"
+  },
+
+  "cms_menu": {
+    "about_us": "About us",
+    "about_us_information": "About us Information",
+    "advertising": "Advertising",
+    "campaign": "Campaign",
+    "cancellation_policy": "Cancellation Policy",
+    "cookies": "Cookies",
+    "data_download": "Data Download",
+    "delete_account_mb": "Delete Account MB",
+    "facebook_mb": "Facebook MB",
+    "law_enforcement_agency_mb": "Law Enforcement Agency MB",
+    "legal_notice": "Legal Notice",
+    "netzdg": "NetzDg",
+    "our_vision": "Our Vision",
+    "payment_method": "Payment Method",
+    "reported_content_mb": "Reported Content MB",
+    "report_problem": "Report Problem",
+    "support": "Support",
+    "terms_use": "Terms of Use",
+    "verification": "Verification"
   },
 
   "tool_tips": {

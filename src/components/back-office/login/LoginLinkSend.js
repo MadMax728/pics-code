@@ -15,7 +15,7 @@ class LoginLinkSend extends Component {
       <div className="login-process">
         <AdminHeader />
         {isLoading && <InlineLoading />}
-        <section>
+        <section className="main-section">
           <div className="custom-container">
             <div className="login-wrapper bkoffice-wrapper backoffice-login">
               <h3 className="text-center">{Translations.admin_login.backoffice_login}</h3>

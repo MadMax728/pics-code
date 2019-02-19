@@ -30,12 +30,19 @@ class Userpics extends Component {
         <div className="col-sm-12">
           {picsDataList && (
             <div className="user-pics-carousel row">
-            <div className="user-pic-status">
-             <p></p>
-             <p></p>
-             <p></p>
-            </div>
+              <div className="left-arrow">
+                  <i className="fa fa-angle-left"></i>
+              </div>
+              <div className="right-arrow">
+                  <i className="fa fa-angle-right"></i>
+              </div>
+              <div className="user-pic-status">
+                <p></p>
+                <p></p>
+                <p></p>
+              </div>
               <div className="user-pic-data">
+                  
                   <div className="user-pic">
                     <img src={images.profile_pic} alt="profilepic"/>
                   </div>
@@ -44,12 +51,14 @@ class Userpics extends Component {
                       <p className="user-location">location</p>
                       <p className="user-cata">01.01.2000 in category</p>
                   </div>
+                 
               </div>
               <Carousel
                 autoPlay
                 showThumbs={false}
                 interval={500}
                 showIndicators={false}
+                showArrows={false}
               >
                 {picsDataList.map(picsDataRow => {
                   return (
@@ -74,12 +83,12 @@ class Userpics extends Component {
                 })}
               </Carousel>
               
-              <div className="col-md-12 col-sm-12 user-pic-opt">
-                <div className="col-md-4 text-center">
+              <div className="col-md-10 col-md-offset-1 col-sm-12 col-xs-12 user-pic-opt">
+                <div className="col-md-6 col-sm-6 col-xs-6 text-center">
                   <p><i className="fa fa-eye" aria-hidden="true"></i></p>
                   <p className="option-text">0 views</p>
                 </div>
-                <div className="col-md-4 col-md-offset-4 text-center">
+                <div className="col-md-6 col-sm-6 col-xs-6 text-center">
                   <p><i className="fa fa-trash" aria-hidden="true"></i></p>
                   <p className="option-text">delete</p>
                 </div>

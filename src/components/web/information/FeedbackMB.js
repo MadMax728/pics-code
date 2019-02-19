@@ -1,13 +1,16 @@
 import React from "react";
 import CMSContent from "../common/CMSContent";
 import PropTypes from "prop-types";
+import { Translations } from "../../../lib/translations";
 
 const FeedbackMB = ({ history }) => {
-  return <CMSContent title={'Feedback MB'} history={history}/>
-}
+  return (
+    <CMSContent title={Translations.cms_menu.facebook_mb} history={history} />
+  );
+};
 
 FeedbackMB.propTypes = {
-  history: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default FeedbackMB;

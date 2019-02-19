@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import * as enumerations from "../../../lib/constants/enumerations";
 import { setCookie, getCookie } from "../../../lib/utils/helpers";
 import { Route } from "react-router-dom";
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbars } from "react-custom-scrollbars";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -136,12 +136,12 @@ class DashboardExploreFilter extends Component {
     const languageItem = languageItems;
 
     const Filters = [
-      {
-        name: Translations.left_sidebar_filter.radio_change_language.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radio_change_language.type,
-        items: languageItem
-      },
+      // {
+      //   name: Translations.left_sidebar_filter.radio_change_language.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.radio_change_language.type,
+      //   items: languageItem
+      // },
       {
         name: Translations.left_sidebar_filter.relevance.name,
         className: "filter-title",
@@ -167,11 +167,11 @@ class DashboardExploreFilter extends Component {
         items: categoryItems
       }
     ];
-    
+
     const { filterApply, height } = this.state;
 
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
-    
+
     return (
       <Scrollbars style={{ height: `${height - 370}px` }}>
         <div className="left-filters">

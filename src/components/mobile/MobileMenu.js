@@ -8,7 +8,7 @@ import { Translations } from "../../lib/translations";
 export default class MobileMenu extends Component {
   render() {
     return (
-      <section>
+      <section className="main-section">
         <div className="container-fluid">
           <div className="row">
             <div

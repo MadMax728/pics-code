@@ -197,6 +197,7 @@
     "select_category": "Select category",
     "add_category": "Add category",
     "add_location": "Add location",
+    "description_placeholder": "Write something..",
     "define_runtime_budget": "Define runtime & budget",
     "start": "Start",
     "end": "End",
@@ -348,6 +349,28 @@
     "business_terms_condition": "Business Terms and Conditions",
     "payment_guidelines": "Payment Guidelines",
     "community_payment_guidelines": "Community Payment Guidelines"
+  },
+
+  "cms_menu": {
+    "about_us": "About us",
+    "about_us_information": "About us Information",
+    "advertising": "Advertising",
+    "campaign": "Campaign",
+    "cancellation_policy": "Cancellation Policy",
+    "cookies": "Cookies",
+    "data_download": "Data Download",
+    "delete_account_mb": "Delete Account MB",
+    "facebook_mb": "Facebook MB",
+    "law_enforcement_agency_mb": "Law Enforcement Agency MB",
+    "legal_notice": "Legal Notice",
+    "netzdg": "NetzDg",
+    "our_vision": "Our Vision",
+    "payment_method": "Payment Method",
+    "reported_content_mb": "Reported Content MB",
+    "report_problem": "Report Problem",
+    "support": "Support",
+    "terms_use": "Terms of Use",
+    "verification": "Verification"
   },
 
   "reply": "Reply",
@@ -1166,7 +1189,7 @@
     "send_password": "Send password to admin´s email address.",
     "backoffice_login": "Backoffice log in",
     "enter_password": "Please enter your password here.",
-    "proceed" : "Processed ?"
+    "proceed": "Processed ?"
   },
 
   "text_editor": {
