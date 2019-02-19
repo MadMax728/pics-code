@@ -27,14 +27,30 @@ class MLeftContainer extends Component {
     this.setState({ userList: [] });
     this.props.getUserList(type).then(() => {
       const { usersData } = this.props;
+      console.log("type", type);
+      console.log("creator", this.props.isCreator);
       if (!usersData.isLoading) {
-        let selectedUserList = usersData.users;
         if (this.props.isCreator) {
-          selectedUserList = usersData.users.filter(
-            user => user.username !== this.props.isCreator
+          const { activeIndex } = this.state;
+          // For - Creator user not shown in list
+          // selectedUserList = usersData.users.filter(
+          //   user => user.username !== this.props.isCreator
+          // );
+          let selectedUserList = "";
+          selectedUserList = usersData.users.find(
+            user => user.username === this.props.isCreator
           );
+          if (selectedUserList) {
+            this.setState({ activeIndex });
+          } else {
+            const indexCount = parseInt(activeIndex) + 1;
+            this.handleUserListCase(indexCount);
+            this.setState({ activeIndex: indexCount.toString() });
+          }
         }
-        this.setState({ userList: selectedUserList });
+        this.setState({
+          userList: usersData.users
+        });
       }
     });
   };

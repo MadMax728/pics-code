@@ -110,7 +110,7 @@ class DashboardFilter extends Component {
       filterApply: false,
       filData: [],
       categoryList: [],
-      currentLanguage: Translations.getLanguage(),
+      currentLanguage: Translations.getLanguage()
     };
   }
 
@@ -133,12 +133,12 @@ class DashboardFilter extends Component {
     const languageItem = languageItems;
 
     const Filters = [
-      {
-        name: Translations.left_sidebar_filter.radio_change_language.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radio_change_language.type,
-        items: languageItem
-      }
+      // {
+      //   name: Translations.left_sidebar_filter.radio_change_language.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.radio_change_language.type,
+      //   items: languageItem
+      // }
       // {
       //   name: Translations.left_sidebar_filter.relevance.name,
       //   className: "filter-title",
@@ -209,16 +209,22 @@ class DashboardFilter extends Component {
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
 
     return (
-        <div className="left-filters">
-          <LeftSidebarFilter
-            filters={Filters}
-            onChange={this.handleOnChange}
-            filterApply={this.state.filterApply}
-            handleSelect={this.handleSelect}
-            handleLanguageSwitch={this.handleLanguageSwitch}
-            isNotFilter={false}
-          />
-        </div>
+      <div>
+        {Filters.length > 0 ? (
+          <div className="left-filters">
+            <LeftSidebarFilter
+              filters={Filters}
+              onChange={this.handleOnChange}
+              filterApply={this.state.filterApply}
+              handleSelect={this.handleSelect}
+              handleLanguageSwitch={this.handleLanguageSwitch}
+              isNotFilter={false}
+            />
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
     );
   }
 

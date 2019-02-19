@@ -9,9 +9,9 @@ import {
   SettingCampaignRight,
   SettingAdsRight
 } from "../../../components/web/templates/settings";
+import { Languages } from "../../common";
 
 class RightSideBar extends Component {
-
   render() {
     return (
       <div>
@@ -35,7 +35,7 @@ class RightSideBar extends Component {
           exact
           component={FavouriteCampaigns}
         />
-        
+
         <Route
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact
@@ -47,9 +47,6 @@ class RightSideBar extends Component {
           exact
           component={FavouriteCampaigns}
         />
-
-
-
 
         {/* ,,,,,, FavouriteCampaigns ...... */}
 
@@ -139,7 +136,7 @@ class RightSideBar extends Component {
     // here we have to switch language
     return (
       <div>
-        {/* <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} /> */}
+        <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
         <RightAbout />
       </div>
     );
@@ -158,7 +155,6 @@ class RightSideBar extends Component {
   handleCommunity = () => {
     return <Community handleMessageBar={this.props.handleMessageBar} />;
   };
-
 }
 
 RightSideBar.propTypes = {
