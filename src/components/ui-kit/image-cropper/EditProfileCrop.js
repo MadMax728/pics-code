@@ -119,6 +119,7 @@ class EditProfileCrop extends Component {
                 id="file-2"
                 className="inputfile inputfile-2"
                 data-multiple-caption="{count} files selected"
+                accept="image/x-png,image/gif,image/jpeg"
                 multiple=""
                 onChange={this.handleNewImage}
               />
@@ -165,6 +166,7 @@ class EditProfileCrop extends Component {
               onChange={this.handleScale}
               min={allowZoomOut ? "0.1" : "1"}
               max="2"
+              accept="image/x-png,image/gif,image/jpeg"
               step="0.01"
               defaultValue="1"
               disabled={!(image !== null && image !== undefined)}

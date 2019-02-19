@@ -15,15 +15,15 @@ class CreateCreatorCampaign extends Component {
   render() {
     const {
       stepIndex,
-      forThat,
-      handleModalInfoShow,
+      // forThat,
+      // handleModalInfoShow,
       isPreview,
-      handlePrivewClose,
+      // handlePrivewClose,
       form,
       maxClicks,
       isFor,
       handleChangeField,
-      handleSubmit,
+      // handleSubmit,
       handleDate,
       handleContentChange,
       handleEditImage,
@@ -35,32 +35,17 @@ class CreateCreatorCampaign extends Component {
       handleInquiryTagChange,
       handleInquiryTagDelete,
       handleSelect,
-      handleVideo,
       userInfo,
-      handleAddress,
-      setVoucherData,
+      // handleAddress,
+      // setVoucherData,
       calculateMaxClicks,
-      isLoading,
+      // isLoading,
       isEdit,
       handleModalInfoMsgShow
     } = this.props;
 
     return (
       <div className="col-xs-12 no-padding">
-        {isPreview && <Preview form={form} />}
-        {isPreview && (
-          <Button
-            onClick={handlePrivewClose}
-            className={"closeBtn right-side-close"}
-            text={
-              <img
-                src={images.white_close}
-                alt={"cross"}
-                style={{ height: "10px", width: "10px" }}
-              />
-            }
-          />
-        )}
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
@@ -76,7 +61,6 @@ class CreateCreatorCampaign extends Component {
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
-              handleVideo={handleVideo}
               userInfo={userInfo}
               isEdit={isEdit}
             />
@@ -129,7 +113,6 @@ CreateCreatorCampaign.propTypes = {
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
   setVoucherData: PropTypes.func,
