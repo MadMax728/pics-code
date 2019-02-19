@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ReactQuill from 'react-quill';
+import ReactQuill from "react-quill";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 // import { modules, formats } from "../../../lib/constants/toolBarConfig";
@@ -9,38 +9,41 @@ import { uploadMedia } from "../../../actions";
 import { InlineLoading } from "../loading-indicator";
 
 class TextEditor extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { 
-      theme: 'snow',
+  constructor(props) {
+    super(props);
+    this.state = {
+      theme: "snow",
       isMedia: true, // True for Image and False for Video
       mediaTypes: enumerations.mediaTypes.image,
       type: null
-    }
-  }
-  
-  handleChange = (html) => {
-    this.props.handleContentChange(html);    
+    };
   }
 
-  imageHandler = (value) => {
-    this.setState({ isMedia: true, mediaTypes: enumerations.mediaTypes.image});
+  handleChange = html => {
+    this.props.handleContentChange(html);
+  };
+
+  imageHandler = value => {
+    this.setState({ isMedia: true, mediaTypes: enumerations.mediaTypes.image });
     this.upload.click();
-  }
+  };
 
-  videoHandler = (value) => {
-    this.setState({ isMedia: false, mediaTypes: enumerations.mediaTypes.video});
+  videoHandler = value => {
+    this.setState({
+      isMedia: false,
+      mediaTypes: enumerations.mediaTypes.video
+    });
     this.upload.click();
-  }
+  };
 
-  onChangeFile = (event) => {
+  onChangeFile = event => {
     // event.stopPropagation();
     // event.preventDefault();
     // var range = this.quillRef.getEditor().getSelection();
     // this.quillRef.getEditor().insertEmbed(range.index, 'image', file, "user");
 
     let file = event.target.files[0];
-    if (this.validation(file)){
+    if (this.validation(file)) {
       const { mediaTypes, isMedia } = this.state;
       const Data = new FormData();
       Data.append(mediaTypes, file);
@@ -48,31 +51,31 @@ class TextEditor extends Component {
         let range = this.quillRef.getEditor().getSelection();
         const { mediaData } = this.props;
 
-        if (mediaData && mediaData.media && mediaData.media.path){
+        if (mediaData && mediaData.media && mediaData.media.path) {
           let value = mediaData.media.path;
-          if(value) {
-              this.quillRef.getEditor().insertEmbed(range.index, mediaTypes, value, "user");
+          if (value) {
+            this.quillRef
+              .getEditor()
+              .insertEmbed(range.index, mediaTypes, value, "user");
           }
-        } 
+        }
       });
     }
-  }
+  };
 
-  validation = (file) => {
+  validation = file => {
     const { isMedia } = this.state;
     const { handleModalInfoMsgShow } = this.props;
 
     if (!file) {
       return false;
-    }
-    else if( isMedia && !file.type.includes("image") ){
-        handleModalInfoMsgShow(
-          enumerations.modalType.error,
-          Translations.text_editor.image
-        );
-        return false;
-    }
-    else if ( !isMedia && !file.type.includes("video") ) {
+    } else if (isMedia && !file.type.includes("image")) {
+      handleModalInfoMsgShow(
+        enumerations.modalType.error,
+        Translations.text_editor.image
+      );
+      return false;
+    } else if (!isMedia && !file.type.includes("video")) {
       handleModalInfoMsgShow(
         enumerations.modalType.error,
         Translations.text_editor.video
@@ -80,59 +83,73 @@ class TextEditor extends Component {
       return false;
     }
     return true;
-  }
+  };
 
-  render () {
+  render() {
     const { theme } = this.state;
     const { contentText } = this.props;
 
     let modules = {
       toolbar: {
-          container: [
-            [{ 'header': '1'}, {'header': '2'}],
-            [{size: []}],
-            ['bold', 'italic', 'underline'],
-            [{'list': 'ordered'}, {'list': 'bullet'}, 
-             {'indent': '-1'}, {'indent': '+1'}],
-            ['link', 'image', 'video'],
-            ['clean']
+        container: [
+          [{ header: "1" }, { header: "2" }],
+          [{ size: [] }],
+          ["bold", "italic", "underline"],
+          [
+            { list: "ordered" },
+            { list: "bullet" },
+            { indent: "-1" },
+            { indent: "+1" }
           ],
-          handlers: {
-             'image': this.imageHandler,
-             'video': this.videoHandler
-          }
+          ["link", "image", "video"],
+          ["clean"]
+        ],
+        handlers: {
+          image: this.imageHandler,
+          video: this.videoHandler
+        }
       }
     };
-    
+
     let formats = [
-      'video', 'image', 'link', 'blockquote','bold', 'italic', 'underline', 'list', 'strike', 'header'
-    ]
+      "video",
+      "image",
+      "link",
+      "blockquote",
+      "bold",
+      "italic",
+      "underline",
+      "list",
+      "strike",
+      "header"
+    ];
 
     const { mediaData } = this.props;
 
     return (
       <div>
         {mediaData.isLoading && <InlineLoading />}
-        <ReactQuill 
+        <ReactQuill
           theme={theme}
           onChange={this.handleChange}
           value={contentText}
           modules={modules}
           formats={formats}
-          ref={(el) => this.quillRef = el}
-          bounds={'.app'}
-          placeholder={'Write something...'}
-         />
-         <input type="file" id="file"  
-                onChange={this.onChangeFile}
-                ref={(ref) => this.upload = ref} 
-                style={{display: "none"}}/>
-       </div>
-       )
-      }
+          ref={el => (this.quillRef = el)}
+          bounds={".app"}
+          placeholder={Translations.create_campaigns.description_placeholder}
+        />
+        <input
+          type="file"
+          id="file"
+          onChange={this.onChangeFile}
+          ref={ref => (this.upload = ref)}
+          style={{ display: "none" }}
+        />
+      </div>
+    );
+  }
 }
-
-
 
 const mapStateToProps = state => ({
   mediaData: state.mediaData
@@ -154,4 +171,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(TextEditor);
-

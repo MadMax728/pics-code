@@ -7,7 +7,7 @@ import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from "./MLeftUsersList";
 import MLeftTabs from "./MLeftTabs";
 import { getUserList } from "../../../../actions";
-import { Button } from "../../../ui-kit";
+import { Button, Input } from "../../../ui-kit";
 
 class MLeftContainer extends Component {
   constructor(props, context) {
@@ -112,7 +112,7 @@ class MLeftContainer extends Component {
         </div>
         <div className="msgs-search-user">
           <div className="input-group search-input-group">
-            <input
+            <Input
               type="text"
               value={search}
               onChange={this.handleChange}
