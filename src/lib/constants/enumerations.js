@@ -1,3 +1,7 @@
+export const language = {
+  en: "English",
+  de: "German"
+};
 export const PaymentTypes = {
   unknown: "unknown",
   notEnrolled: "notsignedup",
@@ -74,7 +78,7 @@ export const offer = {
   premium_commission: "Premium/commission",
   cooperation: "Cooperation",
   other_incentive: "Other incentive"
-}
+};
 
 export const inquiry = {
   images: "Images",
@@ -83,7 +87,7 @@ export const inquiry = {
   audio: "Audio",
   skills: "Skills",
   custom_work: "Custom Work"
-}
+};
 
 export const age = {
   1: "0-18",
