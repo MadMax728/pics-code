@@ -1119,7 +1119,7 @@
   .modal-dialog{
     width: 400px !important;
     position: relative;
-    margin: 120px auto;
+    margin: 10% auto 100px;
     .modal-content{
       .closeBtn {
           position: absolute;
@@ -1138,6 +1138,25 @@
         }
         .user-pics-carousel{
           height: 500px;
+          position: relative;
+          .left-arrow{
+            position: absolute;
+            left:-75px;
+            top:50%;
+            i{
+              font-size: 25px;
+              color: #fff;
+            }
+          }
+          .right-arrow{
+            position: absolute;
+            right:-75px;
+            top:50%;
+            i{
+              font-size: 25px;
+              color: #fff;
+            }
+          }
           .carousel-slider{
             overflow: visible;
             .slider-wrapper{
@@ -1154,36 +1173,37 @@
                 }
               }
             }
-            .control-arrow{
-              opacity: 1;
-            }
+            // .control-arrow{
+            //   opacity: 1;
+            // }
             .carousel-status{
               display: none;
             }
-            .control-prev.control-arrow{
-              left:-75px;
-              &:hover{
-                background: transparent;
-              }
-              &::before{
-                content: "\f104"; 
-                font-family: FontAwesome;
-                border: none;
-                color: #ffffff;
-              }
-            }
-            .control-next.control-arrow{
-              right: -75px;
-              &:hover{
-                background: transparent;
-              }
-              &::before{
-                content: "\f105"; 
-                font-family: FontAwesome;
-                border: none;
-                color: #ffffff;
-              }
-            }
+            
+            // .control-prev.control-arrow{
+            //   left:-75px;
+            //   &:hover{
+            //     background: transparent;
+            //   }
+            //   &::before{
+            //     content: "\f104"; 
+            //     font-family: FontAwesome;
+            //     border: none;
+            //     color: #ffffff;
+            //   }
+            // }
+            // .control-next.control-arrow{
+            //   right: -75px;
+            //   &:hover{
+            //     background: transparent;
+            //   }
+            //   &::before{
+            //     content: "\f105"; 
+            //     font-family: FontAwesome;
+            //     border: none;
+            //     color: #ffffff;
+            //   }
+            // }
           }
         }
         .user-pic-data{
