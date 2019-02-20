@@ -155,8 +155,8 @@ class Register extends Component {
                 )}
 
                 <div className="form-group">
-                  <Button 
-                    className="blue_button" 
+                  <Button
+                    className="blue_button"
                     type="submit"
                     text={Translations.register.register}
                   />
@@ -224,32 +224,32 @@ class Register extends Component {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (form.username.length === 0) {
-      errors.username = "Username is required.";
+      errors.username = Translations.register.username_required;
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors.password = "Password is required.";
+      errors.password = Translations.register.password_required;
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors.email = "Email is required.";
+      errors.email = Translations.register.email_required;
       isFormValid = false;
     }
     const isValidemail = emailRegex.test(form.email);
     if (!isValidemail) {
       isFormValid = false;
-      errors.email = "Email ID should be valid.";
+      errors.email = Translations.register.email_valid;
     }
     if (form.password.length === 0) {
-      errors.repeat_password = "Password is required.";
+      errors.repeat_password = Translations.register.password_required;
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors.password = "Password is required.";
+      errors.password = Translations.register.password_required;
       isFormValid = false;
     }
     if (form.password !== form.repeat_password) {
-      errors.repeat_password = "Password is not matching.";
+      errors.repeat_password = Translations.register.password_match;
       isFormValid = false;
     }
 
@@ -285,41 +285,28 @@ class Register extends Component {
     const data = {
       username,
       email: form.email,
-      name: "abc",
-      gender: form.gender,
       password: form.password,
-      confirmPassword: form.repeat_password
+      confirm_password: form.repeat_password
     };
-
     if (this.state.isUser) {
-      this.props.submitRegister(data).then(() => {
-        Auth.logoutUser();
-        const errors = {};
-        if (
-          this.props.registerData.error &&
-          this.props.registerData.error.status === 400
-        ) {
-          errors.servererror = "Something went wrong";
-          this.setState({ error: errors });
-        } else {
-          this.props.history.push(routes.ROOT_ROUTE);
-        }
-      });
+      data.gender = form.gender;
+      data.userType = "creator";
     } else {
-      this.props.submitCompanyRegister(data).then(() => {
-        Auth.logoutUser();
-        const errors = {};
-        if (
-          this.props.registerData.error &&
-          this.props.registerData.error.status === 400
-        ) {
-          errors.servererror = "Something went wrong";
-          this.setState({ error: errors });
-        } else {
-          this.props.history.push(routes.ROOT_ROUTE);
-        }
-      });
+      data.userType = "company";
     }
+    this.props.submitRegister(data).then(() => {
+      Auth.logoutUser();
+      const errors = {};
+      if (
+        this.props.registerData.error &&
+        this.props.registerData.error.status === 400
+      ) {
+        errors.servererror = Translations.comman_error.server_error;
+        this.setState({ error: errors });
+      } else {
+        this.props.history.push(routes.ROOT_ROUTE);
+      }
+    });
   };
 }
 
