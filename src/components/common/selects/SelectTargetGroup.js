@@ -2,27 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getTargetGroup } from "../../../actions";
 import { connect } from "react-redux";
-import * as enumerations from "../../../lib/constants/enumerations";
 import { Translations } from "../../../lib/translations";
-
-const targetGroupData = [
-  {
-    id: enumerations.target_group.company,
-    value: Translations.target_group.company
-  },
-  {
-    id: enumerations.target_group.female_and_male,
-    value: Translations.target_group.female_and_male
-  },
-  {
-    id: enumerations.target_group.female,
-    value: Translations.target_group.female
-  },
-  {
-    id: enumerations.target_group.male,
-    value: Translations.target_group.male
-  }
-];
+import { targetGroupData } from "../../../lib/constants/select";
 
 class SelectTargetGroup extends Component {
   render() {

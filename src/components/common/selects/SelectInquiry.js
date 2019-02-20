@@ -1,40 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getInquiry } from "../../../actions";
-import { connect } from "react-redux";
-import * as enumerations from "../../../lib/constants/enumerations";
 import { Translations } from "../../../lib/translations";
-
-const inquiryList = [
-  {
-    id: enumerations.inquiry.images,
-    value: Translations.inquiry.images
-  },
-  {
-    id: enumerations.inquiry.videos,
-    value: Translations.inquiry.videos
-  },
-  {
-    id: enumerations.inquiry.blogs,
-    value: Translations.inquiry.blogs
-  },
-  {
-    id: enumerations.inquiry.audio,
-    value: Translations.inquiry.audio
-  },
-  {
-    id: enumerations.inquiry.skills,
-    value: Translations.inquiry.skills
-  },
-  {
-    id: enumerations.inquiry.custom_work,
-    value: Translations.inquiry.custom_work
-  }
-];
+import { inquiryList } from "../../../lib/constants";
 
 class SelectInquiry extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      inquiryList
+    }
+  }
   render() {
-    const { value, className, inquiryList } = this.props;
+    const { inquiryList } = this.state;
+    const { value, className } = this.props;
     return (
       <select
         value={value}
@@ -53,12 +31,8 @@ class SelectInquiry extends Component {
     );
   }
 
-  componentDidMount = () => {
-    this.props.getInquiry(inquiryList);
-  }
-
   handleInquiry = (event) => {
-    const { inquiryList } = this.props;
+    const { inquiryList } = this.state;
     const name = inquiryList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
@@ -68,27 +42,12 @@ class SelectInquiry extends Component {
   };
 }
 
-const mapStateToProps = state => ({
-  inquiryList: state.selectData.inquiries
-});
-
-const mapDispatchToProps = {
-  getInquiry
-};
-
-
 const propTypes = {
   value: PropTypes.any,
-  inquiryList: PropTypes.any,
   className: PropTypes.string,
-  getInquiry: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
 SelectInquiry.propTypes = propTypes;
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectInquiry);
+export default SelectInquiry;

@@ -246,3 +246,40 @@ export const dailyBudgetForAds = [
     label: "1000 €"
   }
 ];
+
+
+export const category = {
+  craftmen: 'craftmen', 
+  technology: 'technology', 
+  travel: 'travel', 
+  art_culture: 'art_culture',
+  beauty_cosmetics: 'beauty_cosmetics', 
+  sports_health: 'sports_health',
+  animals: 'animals', 
+  other: 'other', 
+  outdoor: 'outdoor', 
+  family: 'family',
+  automobiles: 'automobiles', 
+  spirituality: 'spirituality', 
+  fashion: 'fashion',
+  charity: 'charity', 
+  business: 'business', 
+  movies_photography: 'movies_photography',
+  news_politics: 'news_politics', 
+  entertainment: 'entertainment', 
+  company: 'companyy',
+  gaming: 'gaming', 
+  education: 'education', 
+  nature: 'nature', 
+  food_drink: 'food_drink',
+  science: 'science', 
+  music: 'music', 
+  home_living: 'home_livingn'
+}
+
+export const callToAction =  {
+  apply_now: "apply_now",
+  register: "register",
+  more: "more",
+  book_now: "book_noww"
+}
