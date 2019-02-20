@@ -690,7 +690,8 @@
       "unknown": "Unknown",
       "like_you": "Like you",
       "companies": "Companies"
-    }
+    },
+    "no_msg": "No message yet..."
   },
 
   "mobile_sidebar_information": {
