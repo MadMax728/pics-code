@@ -20,7 +20,7 @@ class FavouriteCampaigns extends Component {
           {Translations.favourite_campaigns}
         </div>
         {!isLoading && (
-           <Scrollbars autoHeight autoHeightMin={0}
+           <Scrollbars style={{}} autoHeight autoHeightMin={0}
            autoHeightMax={500}>
           <div className="campaigns">
             {
