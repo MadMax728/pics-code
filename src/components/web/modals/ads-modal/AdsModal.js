@@ -69,6 +69,7 @@ const initialState = {
     video: null,
     typeContent: typeContent.image,
     typeId: "",
+    fileName: "",
     maximumExpenses: "",
     error: false
   },
@@ -200,6 +201,7 @@ class AdsModal extends Component {
     form.file = null;
     form.video = null;
     form.typeId = "";
+    form.fileName = "";
     form.maximumExpenses = "";
     form.error = false;
     this.setState({ form });
@@ -276,6 +278,7 @@ class AdsModal extends Component {
     form.voucherCode = data.voucherCode;
     form.maximumExpenses = data.maximumExpenses;
     form.typeId = data.typeId;
+    form.fileName = data.fileName;
     form.error = false;
     this.setState({ form, isNewFile: false });
     this.calculateMaxClicks();
@@ -309,9 +312,11 @@ class AdsModal extends Component {
       Data.append("postType", "ad");
 
       this.setState({ isLoading: true });
-      this.props.uploadMedia(Data, form.fileType).then(() => {
-        if (this.props.mediaData && this.props.mediaData.media) {
-          form.typeId = this.props.mediaData.media.id;
+      this.props.uploadMedia(Data, form.fileType, "advertise").then(() => {
+        const { mediaData } = this.props;
+        if (mediaData && mediaData.media) {
+          form.typeId = mediaData.media.id;
+          form.fileName = mediaData.media.imageName;
           form.file = null;
           form.image = null;
           form.video = null;
@@ -331,7 +336,7 @@ class AdsModal extends Component {
                 this.props.adData.ad.id
               ) {
                 this.handleModalInfoShow();
-                this.setState(initialState);
+                this.handleResetForm();
               }
             });
           }

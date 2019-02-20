@@ -94,3 +94,12 @@ export const offerList = [
       value: Translations.inquiry.custom_work
     }
   ];
+
+  export const radiusList = [
+    {id: enumerations.radius.off, value: Translations.radius.off},
+    {id: enumerations.radius.km50, value: Translations.radius.km50},
+    {id: enumerations.radius.km100, value: Translations.radius.km100},
+    {id: enumerations.radius.km200, value: Translations.radius.km200},
+    {id: enumerations.radius.km500, value: Translations.radius.km500},
+    {id: enumerations.radius.worldwide, value: Translations.radius.worldwide}
+]

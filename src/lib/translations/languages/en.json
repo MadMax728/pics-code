@@ -1227,9 +1227,18 @@
   },
   
   "callToAction": {
-    "apply_now": "apply now",
+    "apply_now": "Apply now",
     "register": "Register",
     "more": "More",
     "book_now": "Book now"
+  },
+
+  "radius": {
+    "off": "off",
+    "km50": "50km",
+    "km100": "100km",
+    "km200": "200km",
+    "km500": "500km",
+    "worldwide": "worldwide"
   }
 }

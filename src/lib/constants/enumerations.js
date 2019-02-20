@@ -249,37 +249,46 @@ export const dailyBudgetForAds = [
 
 
 export const category = {
-  craftmen: 'craftmen', 
-  technology: 'technology', 
-  travel: 'travel', 
-  art_culture: 'art_culture',
-  beauty_cosmetics: 'beauty_cosmetics', 
-  sports_health: 'sports_health',
-  animals: 'animals', 
-  other: 'other', 
-  outdoor: 'outdoor', 
-  family: 'family',
-  automobiles: 'automobiles', 
-  spirituality: 'spirituality', 
-  fashion: 'fashion',
-  charity: 'charity', 
-  business: 'business', 
-  movies_photography: 'movies_photography',
-  news_politics: 'news_politics', 
-  entertainment: 'entertainment', 
-  company: 'companyy',
-  gaming: 'gaming', 
-  education: 'education', 
-  nature: 'nature', 
-  food_drink: 'food_drink',
-  science: 'science', 
-  music: 'music', 
-  home_living: 'home_livingn'
+  craftmen: "Craftmen", 
+  technology: "Technology", 
+  travel: "Travel", 
+  art_culture: "Art & Culture",
+  beauty_cosmetics: "Beauty & Cosmetics", 
+  sports_health: "Sports & Health",
+  animals: "Animals", 
+  other: "Other", 
+  outdoor: "Outdoor", 
+  family: "Family",
+  automobiles: "Automobiles", 
+  spirituality: "Spirituality", 
+  fashion: "Fashion",
+  charity: "Charity", 
+  business: "Business", 
+  movies_photography: "Movies & Photography",
+  news_politics: "News & Politics", 
+  entertainment: "Entertainment", 
+  company: "Company",
+  gaming: "Gaming", 
+  education: "Education", 
+  nature: "Nature", 
+  food_drink: "Food & Drink",
+  science: "Science", 
+  music: "Music", 
+  home_living: "Home & Living"
 }
 
 export const callToAction =  {
-  apply_now: "apply_now",
-  register: "register",
-  more: "more",
-  book_now: "book_noww"
+  apply_now: "Apply now",
+  register: "Register",
+  more: "More",
+  book_now: "Book now"
+}
+
+export const radius = {
+  off: "off",
+  km50: "km50",
+  km100: "km100",
+  km200: "km200",
+  km500: "km500",
+  worldwide: "worldwide"
 }
