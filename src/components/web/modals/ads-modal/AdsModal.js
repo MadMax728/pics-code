@@ -228,29 +228,30 @@ class AdsModal extends Component {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
+    
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
       form.location.address = data.location.address;
     }
-    if (data.category && data.category[0] && data.category[0].id) {
-      form.category = data.category[0].id;
-      form.categoryName = data.category[0].categoryName;
+    if (data.category) {
+      form.category = data.category;
+      form.categoryName = data.category;
     }
     if (data.radius) {
-      form.radius = data.radius.id;
+      form.radius = data.radius;
     }
     form.description = data.description;
     if (data.targetGroup) {
       form.targetGroup = target_group[data.targetGroup.toLowerCase()];
     }
     if (data.callToAction) {
-      form.callToAction = data.callToAction.id;
-      form.actionName = data.callToAction.callToActionName;
+      form.callToAction = data.callToAction;
+      form.actionName = data.callToAction;
     }
     form.insertLink = data.insertLink;
-    form.startDate = moment.unix(data.startDate);
-    form.endDate = moment.unix(data.endDate);
+    form.startDate = moment(data.startDate);
+    form.endDate = moment(data.endDate);
     form.budget = data.budget;
     if (data.typeContent) {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
@@ -529,11 +530,11 @@ class AdsModal extends Component {
   calculateMaxClicks = () => {
     const { form } = this.state;
     let maxClicksValue = 0;
-    const perViewCost = budgetCalculation.adsPerViewCost;
+    // const perViewCost = budgetCalculation.adsPerViewCost;
 
-    const CPC = budgetCalculation.CPC;
+    // const CPC = budgetCalculation.CPC;
     const budgetValue = form.budget;
-    const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
+    // const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
     // Budget calculation for max clicks
     // if (noOfDaysRuntime && budgetValue) {
     //   maxClicksValue =

@@ -142,7 +142,8 @@ class AdsStatisticsPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    const data = { id: this.state.adId };
+    const { adId } = this.state;
+    const data = `${adId}?type=Advertise`;
     this.props.getAdDetails(data).then(() => {
       if (this.props.adDetails) {
         this.setState({ adDetails: this.props.ad });

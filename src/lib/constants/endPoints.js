@@ -3,7 +3,7 @@ export const getAdminsEndPoint = "/users/admin/list?type=adminDashBoard";
 export const updateAdminEndPoint = "/users/set-isadmin";
 
 // ad Services
-export const getSettingsAdsEndPoint = "/advertisement/get-user-advertise";
+export const getSettingsAdsEndPoint = "/advertisement/";
 export const createAdEndPoint = "/advertisement";
 export const editAdEndPoint = "/advertisement";
 export const getAdsDetailsEndPoint = "/advertisement/";
@@ -128,7 +128,7 @@ export const submitRegisterEndPoint = "/users";
 export const submitCompanyRegisterEndPoint = "/users/company/create";
 export const setNewPasswordEndPoint = "/users/set-password";
 export const submitResetPasswordEndPoint = "/users/forgot-password";
-export const getUserEndPoint = "/userss/";
+export const getUserEndPoint = "/users/";
 export const uploadProfilePictureEndPoint = "/image/profile";
 export const updateUserProfileEndPoint = "/users";
 export const generateOTPEndPoint = "/auth/generate-otp";
