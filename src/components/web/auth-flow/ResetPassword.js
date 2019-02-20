@@ -3,9 +3,7 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
-import {
-  setNewPassword
-} from "../../../actions/forgotPassword";
+import { setNewPassword } from "../../../actions/forgotPassword";
 import { Auth } from "../../../auth";
 import { BaseHeader, BaseFooter, DownloadStore } from "../common";
 import { connect } from "react-redux";
@@ -19,7 +17,8 @@ class ResetPassword extends Component {
       form: {
         password: "",
         repeat_password: ""
-      }
+      },
+      token: null
     };
   }
 
@@ -51,8 +50,8 @@ class ResetPassword extends Component {
                   {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
+                    <img src={images.checked} alt={"checked"} />
+                  )}
                 </div>
                 <div className="form-group">
                   <Input
@@ -66,15 +65,15 @@ class ResetPassword extends Component {
                     onChange={this.handleChangeField}
                   />
                   {form.repeat_password.length === 0 ||
-                    form.password !== form.repeat_password ? (
-                      <img src={images.error} alt={"error"} />
-                    ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
+                  form.password !== form.repeat_password ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                    <img src={images.checked} alt={"checked"} />
+                  )}
                 </div>
                 <div className="form-group">
-                  <Button 
-                    className="blue_button" 
+                  <Button
+                    className="blue_button"
                     text={Translations.reset_password.send}
                   />
                 </div>
@@ -91,12 +90,19 @@ class ResetPassword extends Component {
   //logout user
   componentDidMount = () => {
     Auth.logoutUser();
+    if (this.props && this.props.location && this.props.location.pathname) {
+      let pathName = this.props.location.pathname;
+      let res = pathName.split("/");
+      if (res[2]) {
+        this.setState({ token: res[2] });
+      }
+    }
   };
 
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -108,7 +114,8 @@ class ResetPassword extends Component {
     }
     const data = {
       password: this.state.form.password,
-      repeatPassword: this.state.form.repeat_password
+      repeatPassword: this.state.form.repeat_password,
+      token: this.state.token
     };
     this.props.setNewPassword(data).then(() => {
       this.props.history.push(routes.ROOT_ROUTE);
@@ -131,7 +138,6 @@ class ResetPassword extends Component {
 
     return true;
   };
-
 }
 
 const mapStateToProps = state => ({
@@ -145,7 +151,8 @@ const mapDispatchToProps = {
 ResetPassword.propTypes = {
   setNewPassword: PropTypes.func.isRequired,
   // newPasswordData: PropTypes.object,
-  history: PropTypes.any
+  history: PropTypes.any,
+  location: PropTypes.any
 };
 
 export default connect(

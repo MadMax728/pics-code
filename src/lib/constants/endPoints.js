@@ -47,7 +47,7 @@ export const editCommentEndPoint = "/comments";
 export const newsEndPoint = "/newsfeeds/news-feeds";
 export const exploresEndPoint = "/newsfeeds/explore";
 export const participantsEndPoint = "/participants/";
-export const usersEndPoint = "/users/get-all-users";
+export const usersEndPoint = "/users/get-all-user"; // get-all-users
 export const picsEndPoint = "/images/get-pics";
 
 // hashTag service
@@ -55,7 +55,7 @@ export const hashTagsEndPoint = "/hashtags";
 export const addHashTagEndPoint = "/hashtags";
 
 // hastag User Service
-export const usernamesEndPoint = "/users/get-all-users";
+export const usernamesEndPoint = "/users/get-all-user"; // get-all-users
 
 // Like Service
 export const likeEndPoint = "/likes";
@@ -127,8 +127,8 @@ export const validateOTPEndPoint = "/auth/validate-otp";
 export const submitRegisterEndPoint = "/users";
 export const submitCompanyRegisterEndPoint = "/users/company/create";
 export const setNewPasswordEndPoint = "/users/set-password";
-export const submitResetPasswordEndPoint = "/users/forgot-password";
-export const getUserEndPoint = "/users/";
+export const submitResetPasswordEndPoint = "/auth/forgot-password";
+export const getUserEndPoint = "/users/"; // users
 export const uploadProfilePictureEndPoint = "/images/profile";
 export const updateUserProfileEndPoint = "/users";
 export const generateOTPEndPoint = "/auth/generate-otp";

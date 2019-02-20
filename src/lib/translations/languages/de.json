@@ -780,7 +780,12 @@
     "company": "Company",
     "user": "User",
     "free": "Register free as a",
-    "send": "Send"
+    "send": "Send",
+    "username_required": "Username is required.",
+    "email_required": "Email is required.",
+    "password_required": "Password is required.",
+    "email_valid": "Email should be valid.",
+    "password_match": "Password is not matching."
   },
 
   "login": {
@@ -825,7 +830,9 @@
 
   "reset_email": {
     "header": "Reset password",
-    "subheader": "We will send you an email to resetting your password."
+    "subheader": "We will send you an email to resetting your password.",
+    "email_required": "Email is required.",
+    "email_valid": "Email should be valid."
   },
 
   "placeholders": {
@@ -1120,5 +1127,9 @@
   "text_editor": {
     "image": "Please Upload Image Files",
     "video": "Please Upload Video Files"
+  },
+
+  "comman_error": {
+    "server_error": "Something went wrong"
   }
 }
