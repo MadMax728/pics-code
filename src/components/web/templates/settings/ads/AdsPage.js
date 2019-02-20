@@ -7,6 +7,18 @@ import { AdCard } from "../../../../misc";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class AdsPage extends Component {
+
+  render() {
+    const { adList, isLoading } = this.props;
+    
+    return (
+      <div className="padding-rl-10 middle-section">
+        {adList && !isLoading && this.renderAdList()}
+        {isLoading && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     this.props.getAds("getSettingsAds", "");
     window.scrollTo(0, 0);
@@ -26,35 +38,26 @@ class AdsPage extends Component {
   };
 
   renderAdList = () => {
-    const { adList } = this.props;
+    const { adList, handleModalShow } = this.props;
     return adList.map(ad => {
       return (
         <div key={ad.id}>
-          {ad.type === enumerations.contentTypes.ad && (
-            <AdCard item={ad} isDescription isInformation={false} isStatus />
+          {ad.mediaUrl && ad.postType && ad.postType.toLowerCase() === enumerations.contentTypes.ad && (
+            <AdCard item={ad} isDescription isInformation={false} isStatus handleModalShow={handleModalShow} />
           )}
         </div>
       );
     });
   };
 
-  render() {
-    const { adList, isLoading } = this.props;
-
-    return (
-      <div className="padding-rl-10 middle-section">
-        {adList && !isLoading && this.renderAdList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 AdsPage.propTypes = {
   getAds: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   adList: PropTypes.any,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

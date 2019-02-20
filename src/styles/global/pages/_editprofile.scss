@@ -1,5 +1,5 @@
 .edit-profile-form {
-  padding: 35px 100px 25px 100px;
+  padding: 35px 60px 25px 60px;
   background: $white_color;
   float: left;
   width: 100%;
@@ -61,6 +61,17 @@
         -moz-opacity: 0;
         filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
       }
+    }
+  }
+  .full-width-textarea {
+    width: 100%;
+    height: 150px;
+    resize: none;
+    outline: none;
+    padding: 10px;
+    border: 1px solid #000;
+    &:focus {
+      border: 1px solid #000;
     }
   }
 }

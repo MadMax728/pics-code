@@ -2,7 +2,23 @@
   "app_name": "Picstagraph",
 
   "date_format": {
-    "date": "MM/DD/YYYY"
+    "date": "MM/DD/YYYY",
+    "time": "LT"
+  },
+
+  "complete_date_format": {
+    "date": "YYYY-MM-DD HH:mm:ss",
+    "time": "LT"
+  },
+
+  "statistics_date_format": {
+    "date": "DD.MM.YYYY",
+    "time": "LT"
+  },
+
+  "campaign_post_date_format": {
+    "date": "MMMM Do YYYY",
+    "time": "LT"
   },
 
   "offen": "In der Picstagraph-App offenen",
@@ -20,14 +36,26 @@
   "upload_title_image": "Upload title image",
 
   "view_more_comments": "View more comments",
-
-  "apply_campaign": "Apply for this campaign",
-
+  "view_less_comments": "View less comments",
   "favourite_campaigns": "Favourite Campaigns",
+
+  "report_review": {
+    "date": "Date",
+    "reports": "Reports",
+    "status": "Status",
+    "start": "Start",
+    "end": "End",
+    "daily_budget": "Daily budget",
+    "clicks": "Clicks",
+    "views": "Views",
+    "applications": "Applications",
+    "statistics": "Statistics"
+  },
 
   "about": {
     "general_information": "General informations",
     "username": "User name",
+    "user": "Name",
     "name_company": "Name / Company",
     "date_of_birth": "Date of Birth",
     "gender": "Gender",
@@ -43,25 +71,45 @@
   },
 
   "upload_modal": {
-    "title_of_upload": "Title of Upload",
+    "title_of_upload": "Create an Upload",
+    "add_title": "Add Title",
     "add_location": "Add Location",
     "add_category": "Add Category",
     "add_description": "Add Description",
     "advertisement": "Label as advertisement",
-    "upload_file": "Upload File"
+    "upload_file": "Upload File",
+    "yes": "Yes",
+    "no": "No",
+    "upload_image": "Upload Image",
+    "upload_video": "Upload Video",
+    "title_of_image_upload": "Create an Image",
+    "title_of_video_upload": "Create a Video",
+    "add_image": "Add image",
+    "add_video": "Add Video",
+    "add_image_help_text": "Upload your image which you want to show the world.",
+    "add_video_help_text": "Upload your video which you want to show the world.",
+    "video_title_help_text": "You can add a title which users will give an impression about your video.",
+    "location_help_text": "Define where you are located",
+    "image_category_help_text": "Define a category in which your image belongs.",
+    "video_category_help_text": "Define a category in which your video belongs.",
+    "description_help_text": "Enter a description of what you want to tell your community.",
+    "image_label_advertisement_help_text": "Label your image as advertisement if you have a product placement.",
+    "video_label_advertisement_help_text": "Label your video as advertisement if you have a product placement."
   },
 
   "create_ads": {
+    "ad": "Ad",
     "runtime": "Runtime",
     "runtime_passed": "Runtime passed",
     "remaining_runtime": "Remaining runtime",
-    "title_of_ads": "Title of Ads",
+    "title_of_ads": "Start your advertisement",
+    "add_title_image": "Add title image / video",
     "add_title": "Add title",
-    "add_location": "Add Location",
-    "add_radius": "Add Radius",
-    "add_category": "Add Category",
-    "add_description": "Add Description",
-    "add_target_group": "Add Target group",
+    "add_location": "Add location",
+    "add_radius": "Add radius",
+    "add_category": "Add category",
+    "add_description": "Add description",
+    "add_target_group": "Add target group",
     "male_female": "Female & Male",
     "male": "Male",
     "female": "Female",
@@ -75,11 +123,12 @@
     "end": "End",
     "define_daily_budget": "Define daily budget",
     "maximum_number_of_clicks": "Maximum number of clicks",
+    "maximum_number_of_views": "Maximum number of views",
     "max_1200_clicks": "Max. 1200 clicks",
     "information_on_payment": "Information on payment",
     "actively_clicks": "You only have to pay when a user actively clicks on your ad on Picstagraph.",
     "cost_control": "100 % cost control",
-    "cost_per_Click": "Cost per Click: 1,00 €",
+    "cost_per_Click": "Cost per View: 0.20 €",
     "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
     "clicks": "Clicks",
@@ -89,80 +138,187 @@
     "status": "Status",
     "statistics": "Statistics",
     "total_budget": "Total budget",
+    "total_budget_spent": "Total budget spent",
+    "total_expense": "Total expenses",
     "budget_spent": "Budget spent",
     "remaining_Budget": "Remaining Budget",
     "daily_budget": "Daily budget",
     "daily_budget_spent": "Daily budget spent",
     "remaining_daily_budget": "Remaining daily budget",
-    "Performance": "Performance"
+    "Performance": "Performance",
+    "edit_ad": "Edit Ad",
+    "close_ad": "Close Ad",
+    "budget_runtime": "Budget & Runtime",
+    "DetailsonAd": "Details on ad",
+    "location": "Location",
+    "radius": "Radius",
+    "category": "Category",
+    "target_group": "Target Group",
+    "views_clicks": "Views / Clicks",
+    "ads_title_help_text": "You can add a title image / video which users will give an impression about your product or service",
+    "title_help_text": "Select a title in order to allow identify your ad for internal proposes.",
+    "location_help_text": "Define where you want to ad shown",
+    "radius_help_text": "Define with which radius you want to ad shown",
+    "category_help_text": "Select a category to which your target audience belongs",
+    "target_group_help_text": "Define the gender which your ad targets",
+    "description_help_text": "Enter a description of what your product or service offers",
+    "action_call_help_text": "Define a call to action button to define what is behind your link",
+    "link_help_text": "Set the link to which the user will be directed when clicking on your ad",
+    "create_ad": "Create Ad",
+    "what_are_ad": "What are ads?"
   },
 
   "create_campaigns": {
     "clicks": "Clicks",
     "views": "Views",
     "title_of_campaigns": "Title of campaigns",
-    "title": "Title",
+    "title": "Start your campaign",
     "add_title": "Add title",
+    "add_title_image": "Add title image",
     "inquiry_tag": "Inquiry tag",
     "select_inquiry": "Select Inquiry",
-    "inquiry": "Inquiry",
+    "inquiry": "Add inquiry",
     "offer_tag": "Offer tag",
     "select_offer": "Select offer",
-    "offer": "Offer",
+    "offer": "Add offer",
     "details_of_campaigns": "Details of campaigns",
     "male": "Male",
     "female": "Female",
     "male_female": "Female & Male",
     "company": "Company",
-    "target_group": "Target group",
+    "target_group": "Add target group",
     "image": "Image",
     "video": "Video",
-    "type": "Type",
+    "type": "Add type of application",
     "anonymous": "Anonymous",
     "public": "Public",
-    "procedure": "Procedure",
+    "procedure": "Add procedure",
     "application_criteria": "Application criteria",
     "select_category": "Select category",
-    "add_category": "Add Category",
-    "add_location": "Add Location",
+    "add_category": "Add category",
+    "add_location": "Add location",
+    "description_placeholder": "Write something..",
     "define_runtime_budget": "Define runtime & budget",
     "start": "Start",
     "end": "End",
     "define_daily_budget": "Define daily budget",
     "maximum_number_of_clicks": "Maximum number of clicks",
+    "maximum_number_of_applicants": "Maximum number of applicants",
     "max_1200_clicks": "Max. 1200 clicks",
     "information_on_payment": "Information on payment",
     "actively_clicks": "You only have to pay when a user actively clicks on your ad on Picstagraph.",
     "cost_control": "100 % cost control",
-    "cost_per_Click": "Cost per Click: 1,00 €",
-    "payment_only_after_ad_was_cloes": "Payment only after ad was cloes",
+    "start_fee": "Starting fee : 150 €",
+    "cost_per_Click": "Cost per application: 5,00 €",
+    "payment_only_after_ad_was_cloes": "Payment only after campaign was closed",
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
     "applications": "Applications",
+    "applicant": "Applicant",
     "status": "Status",
-    "statistics": "Statistics"
+    "statistics": "Statistics",
+    "serverError": "Something went wrong. Please Try Again",
+    "voucherCodeRequired": "If you have voucher code, then Please Enter Voucher Code (Otherwise, Ignore)",
+    "voucherCodeValid": "Please Enter Valid Voucher Code (Otherwise, Ignore)",
+    "CompletePaymentTransaction": "Complete payment transaction",
+    "BillingAddress": "Billing Address",
+    "PaymentMethod": "Payment method",
+    "NA": "N/A",
+    "Voucher": "Voucher",
+    "Redeem": "Redeem",
+    "OrderOverview": "Order overview",
+    "PreliminaryAmount": "Preliminary amount",
+    "Runtime": "Runtime",
+    "MaximumExpenses": "Maximum expenses",
+    "CommitToBuy": "Commit to buy",
+    "onClickRegister": "By clicking on register you agree to our",
+    "GenralTerms": "General Terms & Conditions",
+    "termsUse": "Terms of Use",
+    "dataProtection": "Data Protection",
+    "privacyPolicy": "Privacy Policy",
+    "FillProperData": "Please Fill proper Data",
+    "SelectProperMedia": "Please Select Proper Media",
+    "ImageAndVedio": "Please Select Image or Video",
+    "total_budget": "Total budget",
+    "budget_spent": "Budget spent",
+    "remaining_budget": "Remaining Budget",
+    "performance": "Performance",
+    "runtime_passed": "Runtime Passed",
+    "remaining_runtime": "Remaining runtime",
+    "edit_campaign": "Edit Campaign",
+    "close_campaign": "Close Campaign",
+    "budget_runtime": "Budget & Runtime",
+    "total_budget_spent": "Total budget spent",
+    "public_procedure_help_text": "Public : Everybody can see the content from your participants to get feedback",
+    "anonymous_proceture_help_text": "Non-public : Only you can see the content from your participants.",
+    "application_authorised": "Application authorised",
+    "application_removed": "Application you have removed",
+    "application_removed_by_applicant": "Application removed from applicant",
+    "campaign_title_help_text": "You can add a title image which users will give an impression about your campaign",
+    "title_help_text": "You can add a title which users will give an impression about your campaign",
+    "location_help_text": "Define where your campaign will take place or where you are located",
+    "radius_help_text": "Define with which radius you want to ad shown",
+    "category_help_text": "Define a category in which your campaign belongs",
+    "target_group_help_text": "Select whom your campaign addresses",
+    "type_help_text": "Select if the participant have to apply with an image or video",
+    "offer_help_text": "Use offers to indicate what you offer in return for doing the campaign",
+    "inquiry_help_text": "User inquiry to select what service you are looking for",
+    "create_campaign": "Create Campaign",
+    "what_are_campaign": "What are campaigns?"
+  },
+
+  "you_have": "You have",
+
+  "characters_left": "characters left",
+
+  "payment": {
+    "your": "Your",
+    "review": "is pending review whitin the next 48 hours."
+  },
+
+  "campaign_details": {
+    "start": "Start",
+    "end": "End",
+    "procedure": "Procedure",
+    "target_group": "Target Group",
+    "type": "Type",
+    "applications": "Applications",
+    "apply_campaign": "Apply for this campaign",
+    "send_message": "Send Message",
+    "campaign_success_apply": "You have successfully applied for this campaign",
+    "followers": "Followers",
+    "offer": "Offer",
+    "inquiry": "Inquiry"
   },
 
   "messages_modal": {
     "unknown": "Unknown",
     "messages": "Messages",
+    "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
+
+  "sure": "Are you want to sure?",
+
   "modal_header": {
     "cancle": "Cancel",
     "back": "Back",
     "preview": "Preview",
     "continue": "Continue",
     "create_campaign": "Create Campaign",
+    "edit_campaign": "Edit Campaign",
     "upload_image": "Upload image",
     "create_ad": "Create Ad",
-    "edit_profile_image": "Edit Profile Image"
+    "edit_ad": "Edit Ad",
+    "edit_profile_image": "Edit Profile Image",
+    "cms_preview": "CMS Preview"
   },
 
   "notification": {
     "subscribed_to_your_profile": "Subscribed to your profile",
     "notification": "Notifications",
     "like_you": "Like You",
-    "request": "Requests"
+    "request": "Requests",
+    "no_request_avail": "No Request Available"
   },
 
   "navigation": {
@@ -175,23 +331,73 @@
   },
 
   "information_menu": {
+    "menu_title": "Information",
     "our_vision": "Our Vision",
     "imprint": "Imprint",
     "campaigns": "Campaigns",
     "campaign_policy": "Campaign Policy",
     "advertising": "Advertising",
-    "advertising_policy": "Advertising Policy",
+    "advertising_policy": "Advertisment Policy",
     "general_terms_and_conditions": "General Terms and Conditions",
-    "data_protection_and_privacy_policy": "Data protection and privacy Policy",
-    "platform_policy": "Platform policy",
+    "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
+    "platform_policy": "Platform Policy",
     "cancellation_policy": "Cancellation Policy",
-    "terms_of_use": "Terms of use"
+    "terms_of_use": "Terms of use",
+    "cookie_guidelines": "Cookie Guidelines",
+    "community_guidelines": "Community Guidelines",
+    "branded_content_guidelines": "Branded Content Guidelines",
+    "business_terms_condition": "Business Terms and Conditions",
+    "payment_guidelines": "Payment Guidelines",
+    "community_payment_guidelines": "Community Payment Guidelines"
   },
+
+  "cms_menu": {
+    "about_us": "About us",
+    "about_us_information": "About us Information",
+    "advertising": "Advertising",
+    "campaign": "Campaign",
+    "cancellation_policy": "Cancellation Policy",
+    "cookies": "Cookies",
+    "data_download": "Data Download",
+    "delete_account_mb": "Delete Account MB",
+    "facebook_mb": "Facebook MB",
+    "law_enforcement_agency_mb": "Law Enforcement Agency MB",
+    "legal_notice": "Legal Notice",
+    "netzdg": "NetzDg",
+    "our_vision": "Our Vision",
+    "payment_method": "Payment Method",
+    "reported_content_mb": "Reported Content MB",
+    "report_problem": "Report Problem",
+    "support": "Support",
+    "terms_use": "Terms of Use",
+    "verification": "Verification"
+  },
+
+  "reply": "Reply",
+
+  "sponsored_in": "Sponsored in",
+
+  "in": "in",
 
   "tool_tips": {
     "report": "Report Post",
+    "unreport": "Unreport Post",
+    "report_comment": "Report Comment",
+    "unreport_comment": "Unreport Comment",
     "save": "Save Post",
-    "lock": "locks / unlocks content"
+    "unsave": "Unsave Post",
+    "lock": "Lock content",
+    "unlock": "Unlock content",
+    "do_not": "Do not lock content",
+    "edit": "Edit",
+    "edit_post": "Edit Post",
+    "delete": "Delete",
+    "block": "Block",
+    "unblock": "Unblock",
+    "report_user": "Report User",
+    "unreport_user": "Unreport User",
+    "remove_participant": "Remove Participant",
+    "locks_unlocks": "locks / unlocks content"
   },
 
   "back_office_menu": {
@@ -225,6 +431,13 @@
     }
   },
 
+  "select": "Select",
+  "showing": "Showing",
+  "to": "to",
+  "of": "of",
+  "results": "Results",
+  "table_empty": "Table is Empty",
+
   "reported_content_filter": {
     "relevance": {
       "name": "Relevance",
@@ -251,20 +464,104 @@
     "cookies": "Cookies"
   },
 
+  "cookies": {
+    "cookies": "Cookies",
+    "better_user": "For a better user experience we can use",
+    "agree": "By using picstagraph you do agree"
+  },
+
   "right_side_bar_statistics": {
     "all": "All",
     "outstanding": "Outstanding",
     "processed": "Processed",
-    "not_processed": "Not processed"
+    "not_processed": "Not Processed"
   },
 
   "service_menu": {
+    "menu_title": "Service",
     "support": "Support",
     "verification": "Verification",
     "feedback": "Feedback",
+    "report_problem": "Report a problem",
     "reported_content": "Reported Content",
     "delete_account": "Delete account",
     "law_enforcement_agency": "Law enforcement agency"
+  },
+
+  "service_feedback": {
+    "title": "Feedback",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "name": "Your name",
+    "username": "Your username",
+    "email": "Your email",
+    "subject": "subject",
+    "text": "Text",
+    "send": "Send",
+    "name_is_required": "Name is required",
+    "username_is_required": "Username is required",
+    "email_is_required": "Email is required",
+    "email_should_be_valid": "Email should be valid",
+    "subject_is_required": "Subject is required",
+    "text_is_required": "Text is required"
+  },
+
+  "service_report_problem": {
+    "title": "Reported Problem",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "name": "Your name",
+    "username": "Your username",
+    "email": "Your email",
+    "subject": "subject",
+    "text": "Text",
+    "account_reporting": "The account that you're reporting",
+    "upload": "Upload evidence (jpeg)",
+    "select_file": "Select File",
+    "send": "Send",
+    "name_is_required": "Name is required",
+    "username_is_required": "Username is required",
+    "email_is_required": "Email is required",
+    "email_should_be_valid": "Email should be valid",
+    "subject_is_required": "Subject is required",
+    "text_is_required": "Text is required",
+    "account_is_required": "Account is required",
+    "select_evidence": "Select Evidence in required format"
+  },
+
+  "service_delete_account": {
+    "title": "Delete Account",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "username": "Username / Email",
+    "password": "Password",
+    "repeat_password": "Repeat Password",
+    "delete_account": "Delete account",
+    "username_is_required": "Username is required",
+    "email_should_be_valid": "Email should be valid",
+    "password_required": "Password is required",
+    "repeat_password_is_required": "Repeat Password is required",
+    "password_is_not_matching": "Password is not matching",
+    "password_length_error": "Password Length should be greater than 8 characters"
+  },
+
+  "service_law_agency": {
+    "title": "Law Enforcement Agency",
+    "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
+    "name": "Your name",
+    "agency": "Your agency",
+    "email": "Your email",
+    "subject": "subject",
+    "text": "Text",
+    "account_reporting": "The account that you're reporting",
+    "upload": "Upload evidence (jpeg)",
+    "select_file": "Select File",
+    "send": "Send",
+    "name_is_required": "Name is required",
+    "agency_is_required": "Agency is required",
+    "email_is_required": "Email is required",
+    "email_should_be_valid": "Email should be valid",
+    "subject_is_required": "Subject is required",
+    "text_is_required": "Text is required",
+    "account_is_required": "Account is required",
+    "select_evidence": "Select Evidence in required format"
   },
 
   "left_sidebar_filter": {
@@ -272,12 +569,16 @@
       "name": "Language",
       "type": "radio"
     },
+    "radio_change_language": {
+      "name": "Language",
+      "type": "radio_change_language"
+    },
     "relevance": {
       "name": "Relevance",
       "type": "radio"
     },
     "location": {
-      "name": "Location",
+      "name": "Location / Radius",
       "type": "auto-complete"
     },
     "radius": {
@@ -293,7 +594,7 @@
       "type": "radio"
     },
     "content": {
-      "name": "Content",
+      "name": "Content Type",
       "type": "radio"
     },
     "target_group": {
@@ -326,8 +627,44 @@
     },
     "age": {
       "name": "Age",
+      "type": "age-select"
+    },
+    "hashtag": {
+      "name": "Hashtag",
       "type": "select"
+    },
+    "user_group": {
+      "name": "User Group",
+      "type": "radio"
     }
+  },
+
+  "user_group": {
+    "all_users": "All Users",
+    "subscribed": "Subscribed"
+  },
+
+  "offer": {
+    "payment": "Payment",
+    "products": "Products",
+    "premium_commission": "Premium/commission",
+    "cooperation": "Cooperation",
+    "other_incentive": "Other incentive"
+  },
+
+  "inquiry": {
+    "images": "Images",
+    "videos": "Videos",
+    "blogs": "Blogs",
+    "audio": "Audio",
+    "skills": "Skills",
+    "custom_work": "Custom Work"
+  },
+
+  "gender": {
+    "all": "All",
+    "male": "Male",
+    "female": "Female"
   },
 
   "target_group": {
@@ -335,6 +672,15 @@
     "female_and_male": "Female and Male",
     "female": "Female",
     "male": "Male"
+  },
+
+  "age": {
+    "0": "All",
+    "1": "0 - 18 years old",
+    "2": "19 - 25 years old",
+    "3": "26 - 35 years old",
+    "4": "36 - 55 years old",
+    "5": "56 + years old"
   },
 
   "message_module": {
@@ -357,6 +703,7 @@
   },
 
   "mobile_sidebar_services": {
+    "services": "Services",
     "terms_conditions": "General Terms and Conditions",
     "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
     "terms_use": "Terms of Use",
@@ -381,10 +728,28 @@
     "create_ad": "Create Ad",
     "subscriber": "Subscribers",
     "subscribed": "Subscribed",
+    "request_pending": "Pending",
     "posts": "Posts",
     "subscribe": "Subscribe",
     "message": "Message",
     "like_you": "Like You"
+  },
+
+  "top_bar_info_modal": {
+    "modal_title": "Subscribers / Subscribed / Likes",
+    "follow_btn": "Follow",
+    "subscribe_btn": "Subscribed",
+    "request_sent_btn": "Request Sent",
+    "no_data": "No Data Available",
+    "cancel": "Cancel"
+  },
+
+  "profile_community_right_sidebar": {
+    "community": "Community",
+    "serverError": "Something went wrong. Please Try Again",
+    "Subscribe": "Subscribe",
+    "Subscribed": "Subscribed",
+    "Pending": "Pending"
   },
 
   "left_sidebar": {
@@ -475,6 +840,7 @@
     "register": "Register",
     "agree": "By clicking on register you agree to our",
     "company": "Company",
+    "user": "User",
     "free": "Register free as a",
     "send": "Send"
   },
@@ -501,7 +867,8 @@
 
   "filter": {
     "reset_filter": "Reset filters",
-    "apply": "Apply"
+    "apply": "Apply",
+    "back": "Back"
   },
 
   "languages": {
@@ -550,7 +917,7 @@
       "type": "text"
     },
     "name_company": {
-      "name": "Name/Company",
+      "name": "Company",
       "type": "text"
     },
     "offer_tag": {
@@ -587,21 +954,35 @@
     }
   },
   "editProfile": {
+    "save": "Save",
     "username": "User name",
     "category": "Category",
     "email": "Email",
     "inquiry_tag": "Inquiry-tag",
     "location": "Location",
-    "name_company": "Name / Company",
+    "user": "Name",
+    "name_company": "Company",
     "offer_tag": "Offer-tag",
     "phone_number": "Phone number",
     "profile_description": "Profile description",
     "website": "Web site",
     "gender": "Gender",
     "D_O_B": "Date of birth",
+    "male": "Male",
+    "female": "Female",
+    "location": "Location",
     "general_information": "General Information",
     "Personal_interests": "Personal interests"
   },
+
+  "social": {
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "whatsapp": "Whatsapp",
+    "email": "Email",
+    "connect": "Connect"
+  },
+
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
@@ -659,7 +1040,7 @@
     "PDF": "PDF"
   },
   "data_download": {
-    "page_title": "Daten- Download",
+    "page_title": "Data - Download",
     "Email": "Email",
     "Password": "Password",
     "Download": "Download",
@@ -669,6 +1050,7 @@
   },
   "landing": {
     "Navigation": "Navigation",
+    "published_a_campaign": "Published a Campaign",
     "Review": "Review",
     "Key_statistics": "Key statistics",
     "Content_statistics": "Content statistics",
@@ -701,14 +1083,35 @@
     "Closed_Ads": "Closed Ads",
     "Ads_Temp_Closed": "Ads Temp Closed"
   },
+
+  "download_app": "Download App",
+
+  "user_pics": "User Pics",
+
+  "not_found": {
+    "not_available": "This page isn't available",
+    "remove_link": "The link you followed may be broken, or the page may have been removed"
+  },
+
   "cms": {
-    "Title_of_page": "Title of page",
-    "Language": "Language",
-    "Most_recent_change": "Most recent change",
-    "Created_by": "Created by",
-    "Options": "Options",
-    "Status": "Status",
-    "cms": "CMS management"
+    "create": "Create new CMS page",
+    "edit": "Edit CMS page",
+    "title_of_page": "Title of page",
+    "language": "Language",
+    "most_recent_change": "Most recent change",
+    "created_by": "Created by",
+    "options": "Options",
+    "status": "Status",
+    "cms": "CMS management",
+    "public": "Public",
+    "draft": "Draft",
+    "url": "Url",
+    "display_page": "Display page",
+    "cancle": "Cancel",
+    "preview": "Preview",
+    "save": "Save",
+    "update": "Update",
+    "description": "Description"
   },
   "admin": {
     "Add_admin": "Add admin",
@@ -718,11 +1121,11 @@
     "AdminStatus": "Admin Status",
     "Verification": "Add verification",
     "Remove_Verification": "Remove Verification",
-    "Period": "Period",
-    "amount": "amount",
-    "type": "type",
-    "Number": "Number",
-    "Code": "Code",
+    "period": "Period",
+    "amount": "Amount",
+    "type": "Type",
+    "number": "Number",
+    "code": "Code",
     "status": "status",
     "Add_voucher_code": "Add voucher code",
     "Data_download": "Data download",
@@ -740,6 +1143,21 @@
     "VATNO": "VAT Identification Number"
   },
 
+  "adminRole": {
+    "rank1": "rank1",
+    "rank2": "rank2",
+    "rank3": "rank3"
+  },
+
+  "call_to_action": "Select Call to Action",
+  "select_category": "Select Category",
+  "select_daily_budget": "Select Daily Budget",
+  "select_inquiry": "Select Inquiry",
+  "select_offer": "Select Offer",
+  "select_radius": "Select Radius",
+  "select_target_group": "Select Target Group",
+  "select_age": "Select Age",
+
   "error": {
     "create_modal": {
       "title": "Plaese Enter Title",
@@ -752,15 +1170,30 @@
       "radius": "Please Select Radius",
       "inquiryTag": "Please Enter Inquiry Tags",
       "description": "Please Enter Description",
-      "date" : "End Date must be greater than Start Date",
+      "date": "End Date must be greater than Start Date",
       "budget": "Please Select Budget",
-      "invoiceRecipient" : "Please Enter Invoice Recipient",
+      "invoiceRecipient": "Please Enter Invoice Recipient",
       "postalCode": "Please Enter Postal code",
       "city": "Please Enter City",
       "VATNO": "Please Enter VAT Identification Number",
       "country": "Please Enter Country",
       "streetNumber": "Please Enter Street,Number",
-      "insertLink": "Please Enter Inset Link" 
+      "insertLink": "Please Enter Inset Link",
+      "weekValidation": "Date range should be greater than 1 week",
+      "monthValidation": "Date range should be less than 3 Month"
     }
+  },
+
+  "admin_login": {
+    "send": "Send",
+    "send_password": "Send password to admin´s email address.",
+    "backoffice_login": "Backoffice log in",
+    "enter_password": "Please enter your password here.",
+    "proceed": "Processed ?"
+  },
+
+  "text_editor": {
+    "image": "Please Upload Image Files",
+    "video": "Please Upload Video Files"
   }
 }

@@ -1,44 +1,125 @@
 import React, { Component } from "react";
-import Comments from "./Comments";
-
-import * as images from "../../../../lib/constants/images";
 import { Translations } from "../../../../lib/translations";
-
 import { modalType } from "../../../../lib/constants/enumerations";
 import { RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
-import { getCampaignDetails } from "../../../../actions";
+import {
+  getCampaignDetails,
+  getSearch,
+  getComments,
+  setSavedPost,
+  like,
+  addReport
+} from "../../../../actions";
+import { getBackendPostType } from "../../../Factory";
 import { connect } from "react-redux";
-import { ThreeDots } from "../../../ui-kit";
+import { CampaignDetailsLoading } from "../../../ui-kit";
+import { CampaignDetailsCard } from "../../../misc";
+import * as routes from "../../../../lib/constants/routes";
 
 class InformationPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      isComments: false,
       campaignId: this.props.match.params.id,
+      comments: null,
       ReportTips: [
         {
-          name: "Report Post",
+          name: Translations.tool_tips.report,
           handleEvent: this.handleReportPost
         },
         {
-          name: "Save Post",
+          name: Translations.tool_tips.save,
           handleEvent: this.handleSavePost
         },
         {
-          name: "locks / unlocks content",
+          name: Translations.tool_tips.locks_unlocks,
           handleEvent: this.handleContent
         }
       ]
     };
   }
 
+  handeleShare = () => {
+    const { campaignId } = this.state;
+    const data = {
+      url: `${window.location.origin}${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaignId}`
+    }
+    this.props.handleModalInfoShow(modalType.share, data);
+  };
+
+  render() {
+    const { campaignDetails, isLoading } = this.props;
+    const { isComments, comments } = this.state;
+    return (
+      <div className="middle-section padding-rl-10">
+        {campaignDetails && !isLoading && (
+          <CampaignDetailsCard
+            campaignDetails={campaignDetails}
+            isComments={isComments}
+            comments={comments}
+            handleApplyParticipant={this.handleApplyParticipant}
+            handleCommentsSections={this.handleCommentsSections}
+            handleFavorite={this.handleFavorite}
+            handleOnKeyDown={this.handleOnKeyDown}
+            renderReportTips={this.renderReportTips}
+            handleComment={this.handleComment}
+            handeleShare={this.handeleShare}
+          />
+        )}
+        {isLoading && <CampaignDetailsLoading count={1} />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
+    this.getCampaignDetailsData();
+    this.handleCommentsSections();
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      this.props.getSearch(nextProps.searchData.searchKeyword);
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push("/campaign/company?search=" + searchKeyword);
+    }
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const campaignId = this.props.match.params.id;
+
+    if(campaignId !== prevState.campaignId) {
+      console.log("calling");
+      console.log(campaignId);
+      this.setState({
+        isComments: false,
+        campaignId: campaignId,
+        comments: null
+      }, ()=> {
+        this.getCampaignDetailsData();
+        this.handleCommentsSections();
+      })
+    }
+  }
+
+  getCampaignDetailsData = () => {
     const data = {
       id: this.state.campaignId
     };
-    this.props.getCampaignDetails(data);
+    this.props.getCampaignDetails(data).then(() => {
+      if (this.props.campaignDetails) {
+        this.setState({
+          campaignDetails: this.props.campaignDetails
+        });
+      }
+    });
   };
 
   handleFavorite = () => {
@@ -46,22 +127,99 @@ class InformationPage extends Component {
       campaignDetails: {
         ...this.props.campaignDetails,
         isSelfLike: !this.props.campaignDetails.isSelfLike,
-        like_count: this.props.campaignDetails.isSelfLike
-          ? this.props.campaignDetails.like_count - 1
-          : this.props.campaignDetails.like_count + 1
+        likeCount: this.props.campaignDetails.isSelfLike
+          ? this.props.campaignDetails.likeCount - 1
+          : this.props.campaignDetails.likeCount + 1
       }
     });
+    this.props.campaignDetails.isSelfLike = !this.props.campaignDetails
+      .isSelfLike;
+    this.props.campaignDetails.likeCount = this.props.campaignDetails.isSelfLike
+      ? this.props.campaignDetails.likeCount + 1
+      : this.props.campaignDetails.likeCount - 1;
+    const campeignLike = {
+      typeOfContent: "campaign",
+      typeId: this.state.campaignId
+    };
+    this.props.like(campeignLike);
   };
 
-  handleMessage = e => {
-    this.props.handleModalShow(modalType.messages, { id: e.target.id });
+  handleApplyParticipant = e => {
+    if (this.props.campaignDetails.userType === "company") {
+      this.props.handleModalShow(modalType.upload, {
+        campaignId: e.target.id,
+        campaignName: this.props.campaignDetails.campaignName,
+        campaignCreatedById: this.props.campaignDetails.createdBy
+      });
+    } else {
+      this.props.history.push(
+        routes.MESSAGES_ROUTE + "?new=" + this.props.campaignDetails.userName
+      );
+    }
+  };
+
+  handleComment = commet => {
+    const campaignDetails = this.props.campaignDetails;
+    campaignDetails.commentCount = commet
+      ? campaignDetails.commentCount + 1
+      : campaignDetails.commentCount - 1;
+    this.setState({ campaignDetails });
+  };
+
+  handleCommentsSections = () => {
+    console.log("ahi");
+    
+    const CampaignId = { typeId: this.props.match.params.id };
+    this.props.getComments(CampaignId).then(() => {
+      const totalComment = this.props.comments;
+      this.setState({
+        isComments: !this.state.isComments,
+        comments: this.props.comments,
+        totalCommentsCount: totalComment.length
+      });
+    });
   };
 
   handleOnKeyDown = () => {};
 
-  handleReportPost = () => {};
+  handleReportPost = e => {
+    const { campaignDetails } = this.state;
+    const data = {
+      typeContent: "Campaign",
+      typeId: e.target.id,
+      title: campaignDetails.title
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === campaignDetails.id
+      ) {
+        campaignDetails.isReported = !campaignDetails.isReported;
+        this.setState({ campaignDetails });
+      }
+    });
+  };
 
-  handleSavePost = () => {};
+  handleSavePost = e => {
+    const { campaignDetails } = this.state;
+    // const { isSavedPage } = this.props;
+    const data = {
+      typeId: e.target.id,
+      postType: getBackendPostType(campaignDetails)
+    };
+
+    this.props.setSavedPost(data).then(() => {
+      if (
+        this.props.savedData &&
+        this.props.savedData.saved &&
+        this.props.savedData.saved.typeId === campaignDetails.id
+      ) {
+        campaignDetails.isSavedPost = !campaignDetails.isSavedPost;
+        this.setState({ campaignDetails });
+      }
+    });
+  };
 
   handleContent = () => {};
 
@@ -69,251 +227,26 @@ class InformationPage extends Component {
    * Tooltp
    */
   renderReportTips = () => {
-    return (
-      <RenderToolTips
-        items={this.state.ReportTips}
-        id={this.props.campaignDetails.id}
-      />
-    );
+    let reportTips;
+    const { campaignDetails } = this.state;
+    if (campaignDetails) {
+      reportTips = [
+        {
+          name: campaignDetails.isReported
+            ? Translations.tool_tips.unreport
+            : Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: campaignDetails.isSavedPost
+            ? Translations.tool_tips.unsave
+            : Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+      return <RenderToolTips items={reportTips} id={campaignDetails.id} />;
+    }
   };
-
-  render() {
-    const { campaignDetails, isLoading } = this.props;
-    console.log(campaignDetails);
-
-    return (
-      <div className="padding-l-10 middle-section width-80">
-        {campaignDetails && !isLoading && (
-          <div className="information-wrapper ht100">
-            <div className="info-inner-wrapper col-xs-12">
-              <div className="info-main-title paddindLeft0">
-                {campaignDetails.title}
-              </div>
-              <div className="text">{campaignDetails.description}</div>
-              <img src={campaignDetails.profileImage} alt={"information"} />
-              <div className="text paddTop20">
-                {campaignDetails.description}
-              </div>
-              <button className="filled_button">
-                {Translations.apply_campaign}
-              </button>
-              <div className="feed_wrapper">
-                <div className="feed_header">
-                  <div className="no-padding profile_image">
-                    <img
-                      src={images.image}
-                      alt="circle-img-1"
-                      className="img-circle img-responsive"
-                    />
-                  </div>
-                  <div className="col-sm-9 col-xs-7 no-padding">
-                    <div className="normal_title">{campaignDetails.title}</div>
-                    <div className="secondary_title">
-                      {campaignDetails.userName}
-                    </div>
-                    <div className="grey_title">{campaignDetails.category}</div>
-                  </div>
-                  <div className="col-sm-2 col-xs-2 like_wrapper">
-                    {campaignDetails.isSelfLike ? (
-                      <img
-                        src={images.blue_heart}
-                        alt="like-1"
-                        className="pull-right"
-                        role="presentation"
-                        onClick={this.handleFavorite}
-                        id={campaignDetails.id}
-                        onKeyDown={this.handleOnKeyDown}
-                      />
-                    ) : (
-                      <img
-                        src={images.feed_like}
-                        alt="like"
-                        className="pull-right"
-                        role="presentation"
-                        onClick={this.handleFavorite}
-                        id={campaignDetails.id}
-                        onKeyDown={this.handleOnKeyDown}
-                      />
-                    )}
-                  </div>
-                </div>
-                <div className="feed_content col-xs-12">
-                  <div className="feed_description col-xs-12">
-                    <div className="col-sm-6 no-padding">
-                      <div className="info_wrapper">
-                        <span className="normal_title">Start: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.startDate}
-                        </span>
-                      </div>
-                      <div className="info_wrapper">
-                        <span className="normal_title">Procedure: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.procedure}
-                        </span>
-                      </div>
-                      <div className="info_wrapper">
-                        <span className="normal_title">Target group: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.target_group}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 no-padding">
-                      <div className="info_wrapper">
-                        <span className="normal_title">End: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.endDate}
-                        </span>
-                      </div>
-                      <div className="info_wrapper">
-                        <span className="normal_title">Type: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.type}
-                        </span>
-                      </div>
-                      <div className="info_wrapper">
-                        <span className="normal_title">Applications: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.applications}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 no-padding">
-                      <div className="info_wrapper">
-                        <span className="normal_title">Start: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.startDate}
-                        </span>
-                      </div>
-                      <div className="info_wrapper">
-                        <span className="normal_title">Procedure: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.procedure}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="col-sm-6 no-padding">
-                      <div className="info_wrapper">
-                        <span className="normal_title">End: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.endDate}
-                        </span>
-                      </div>
-                      <div className="info_wrapper">
-                        <span className="normal_title">Type: </span>
-                        <span className="secondary_title">
-                          {campaignDetails.type}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="feed_footer margin-t-15 margin-b-15 padding-lr-30">
-                  <div className="messages">
-                    <span className="count">{campaignDetails.msg_count}</span>
-                    <img
-                      src={images.feed_msg}
-                      alt={"feed_msg"}
-                      role="presentation"
-                      onClick={this.handleMessage}
-                      id={campaignDetails.createdBy}
-                      onKeyDown={this.handleOnKeyDown}
-                    />
-                  </div>
-                  <div className="likes">
-                    <span className="count">{campaignDetails.like_count}</span>
-                    {campaignDetails.isSelfLike ? (
-                      <img
-                        src={images.blue_heart}
-                        alt="like-1"
-                        className="pull-right"
-                        role="presentation"
-                        onClick={this.handleFavorite}
-                        id={campaignDetails.id}
-                        onKeyDown={this.handleOnKeyDown}
-                      />
-                    ) : (
-                      <img
-                        src={images.feed_like}
-                        alt="like"
-                        className="pull-right"
-                        role="presentation"
-                        onClick={this.handleFavorite}
-                        id={campaignDetails.id}
-                        onKeyDown={this.handleOnKeyDown}
-                      />
-                    )}
-                  </div>
-                  <div className="show_more_options">
-                    <ThreeDots
-                      id="report"
-                      role="button"
-                      dataTip="tooltip"
-                      dataClass="tooltip-wrapr"
-                      getContent={this.renderReportTips}
-                      effect="solid"
-                      delayHide={500}
-                      delayShow={500}
-                      delayUpdate={500}
-                      place={"left"}
-                      border
-                      type={"light"}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="feed_wrapper">
-              <div className="feed-comment">
-                {/* Comments Section */}
-                <Comments campaign={campaignDetails} />
-              </div>
-            </div>
-          </div>
-        )}
-        {isLoading && (
-          <div className="info-inner-wrapper col-xs-12 no-padding">
-            <div className="info-main-title paddindLeft0 gray_box" />
-            <div className="text gray_box" />
-            <img
-              src={images.placeholder_pic}
-              alt="information"
-              className="gray_img"
-            />
-            <div className="text gray_box" />
-            {/* <button class="filled_button">Apply for this campaign</button> */}
-            <div className="feed_wrapper">
-              <div className="feed_header feed_header_gray_box">
-                <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                  <img
-                    src={images.placeholder_pic}
-                    alt="circle-img-1"
-                    className="img-circle img-responsive"
-                  />
-                </div>
-                <div className="col-sm-9 col-xs-7 no-padding">
-                  <div className="normal_title gray_box" />
-                  <div className="secondary_title gray_box" />
-                  <div className="grey_title gray_box" />
-                </div>
-                <div className="col-sm-2 col-xs-2 like_wrapper">
-                  <img
-                    src="/global/picstagraph-web/images/feed_like.svg"
-                    alt="like"
-                    className="pull-right"
-                    role="presentation"
-                    id="1"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-    );
-  }
 }
 
 InformationPage.propTypes = {
@@ -321,18 +254,40 @@ InformationPage.propTypes = {
   match: PropTypes.any,
   getCampaignDetails: PropTypes.func.isRequired,
   campaignDetails: PropTypes.any,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  like: PropTypes.func.isRequired,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func.isRequired,
+  history: PropTypes.any,
+  getComments: PropTypes.func.isRequired,
+  comments: PropTypes.any,
+  reportedContentData: PropTypes.any,
+  savedData: PropTypes.any,
+  setSavedPost: PropTypes.func,
+  addReport: PropTypes.func,
+  handleModalInfoShow: PropTypes.func
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   campaignDetails: state.campaignData.campaign,
   isLoading: state.campaignData.isLoading,
-  error: state.campaignData.error
+  error: state.campaignData.error,
+  searchData: state.searchData,
+  comments: state.commentData.comments,
+  likeData: state.likeData,
+  savedData: state.savedData,
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
-  getCampaignDetails
+  getCampaignDetails,
+  like,
+  getSearch,
+  getComments,
+  addReport,
+  setSavedPost
 };
 
 export default connect(

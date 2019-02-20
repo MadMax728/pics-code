@@ -22,6 +22,27 @@ const adminReducer = (state = initialState.adminData, action) => {
         isLoading: false,
         error: action.payload
       };
+
+  // UPDATE ADMINS
+  case types.UPDATE_ADMIN_STARTED:
+    return {
+      ...state,
+      isLoading: true,
+      error: null
+    };
+  case types.UPDATE_ADMIN_SUCCEEDED:
+    return {
+      ...state,
+      admin: action.payload,
+      isLoading: false
+    };
+  case types.UPDATE_ADMIN_FAILED:
+    return {
+      ...state,
+      isLoading: false,
+      error: action.payload
+    };
+    
     default:
       return state;
   }

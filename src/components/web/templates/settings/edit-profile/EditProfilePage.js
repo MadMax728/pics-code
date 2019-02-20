@@ -4,18 +4,24 @@ import PropTypes from "prop-types";
 import { modalType, gender } from "../../../../../lib/constants/enumerations";
 import SocialNetworks from "./SocialNetworks";
 import {
-  Text,
   NumberInput,
-  RadioButton
-} from "../../../../ui-kit/CommonUIComponents";
+  RadioButton,
+  Input,
+  Button,
+  PlaceAutoCompleteLocation,
+  InlineLoading,
+  Label,
+  ErrorSpan,
+  Textarea
+} from "../../../../ui-kit";
 import { OfferTags, InquiryTags, SelectCategory } from "../../../../common";
 import { Translations } from "../../../../../lib/translations";
-import { PlaceAutoCompleteLocation, InlineLoading } from "../../../../ui-kit";
 import { getUser, updateUserProfile } from "../../../../../actions";
 import { connect } from "react-redux";
 import { Auth } from "../../../../../auth";
 import moment from "moment";
 import * as routes from "../../../../../lib/constants/routes";
+
 class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -24,6 +30,7 @@ class EditProfile extends Component {
       isLoading: false,
       userInfo: null,
       categoryList: [],
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
         image: this.props.image,
         username: "",
@@ -73,14 +80,14 @@ class EditProfile extends Component {
     }
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
     }
-  };
+    return null;
+  }
 
   handleOfferTagChange = (id, tag) => {
     const { form } = this.state;
@@ -166,9 +173,17 @@ class EditProfile extends Component {
           offer_tag: userData.offerTag ? userData.offerTag : [],
           inquiry_tag: userData.inquiryTag ? userData.inquiryTag : [],
           offerTagList:
-            userData.offerTagList.length === 0 ? userData.offerTagList : [],
+            userData.offerTagList &&
+            userData.offerTagList.length !== 0 &&
+            userData.offerTagList.length !== undefined
+              ? userData.offerTagList
+              : [],
           inquiryTagList:
-            userData.inquiryTagList.length === 0 ? userData.inquiryTagList : []
+            userData.inquiryTagList &&
+            userData.inquiryTagList.length !== 0 &&
+            userData.inquiryTagList.length !== undefined
+              ? userData.inquiryTagList
+              : []
         }
       });
     }
@@ -253,14 +268,14 @@ class EditProfile extends Component {
 
   handleCategory = (isFor, selected) => {
     const { form } = this.state;
-    form[isFor] = selected;
+    form[isFor] = selected.id;
     this.setState({ form });
   };
 
   render() {
-    const { form, isLoading } = this.state;
+    const { form, isLoading, userInfo, error } = this.state;
     const { image } = this.props;
-
+    const selectedUserType = "creator";
     return (
       <div className="padding-rl-10 middle-section width-80">
         {isLoading && <InlineLoading />}
@@ -303,19 +318,19 @@ class EditProfile extends Component {
             </div>
             <div className="general-information-wrapper">
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.username}
-                </span>
-                <label htmlFor="username">
-                  {Translations.editProfile.username}
-                </label>
-                <Text
+                <ErrorSpan value={error.username} />
+                <Label
+                  htmlFor="username"
+                  value={Translations.editProfile.username}
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="username"
                   name="username"
                   value={form.username}
                   onChange={this.handleChangeField}
+                  readOnly={form.username ? "readonly" : ""}
                 />
                 {form.username.length === 0 ? (
                   <img src={images.error} alt={"error"} />
@@ -324,13 +339,16 @@ class EditProfile extends Component {
                 )}
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.name_company}
-                </span>
-                <label htmlFor="name">
-                  {Translations.editProfile.name_company}
-                </label>
-                <Text
+                <ErrorSpan value={error.name_company} />
+                <Label
+                  htmlFor="name"
+                  value={
+                    userInfo && userInfo.userType === selectedUserType
+                      ? Translations.editProfile.user
+                      : Translations.editProfile.name_company
+                  }
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="name_company"
@@ -339,85 +357,96 @@ class EditProfile extends Component {
                   onChange={this.handleChangeField}
                 />
               </div>
-              <div className="col-2">
-                <div className="col-sm-6 padding-r-5">
-                  <div className="form-group margin-bottom-30">
-                    <label htmlFor="city">
-                      {Translations.editProfile.D_O_B}
-                    </label>
-                    <NumberInput
-                      type="number"
-                      name="day"
-                      value={form.birthDate.day}
-                      min="1"
-                      max="31"
-                      pattern="[0-9]*"
-                      onChange={this.handleChangeDOB}
-                    />
-                    <NumberInput
-                      type="number"
-                      name="mon"
-                      value={form.birthDate.mon}
-                      min="1"
-                      pattern="[0-9]*"
-                      max="12"
-                      onChange={this.handleChangeDOB}
-                    />
-                    <NumberInput
-                      type="number"
-                      name="year"
-                      value={form.birthDate.year}
-                      min="1950"
-                      pattern="[0-9]*"
-                      max="2050"
-                      onChange={this.handleChangeDOB}
-                    />
+              {userInfo && userInfo.userType === selectedUserType ? (
+                <div className="col-2">
+                  <div className="col-sm-6 padding-r-5">
+                    <div className="form-group margin-bottom-30">
+                      <Label
+                        htmlFor="city"
+                        value={Translations.editProfile.D_O_B}
+                      />
+                      <NumberInput
+                        type="number"
+                        name="day"
+                        value={form.birthDate.day}
+                        min="1"
+                        max="31"
+                        pattern="[0-9]*"
+                        onChange={this.handleChangeDOB}
+                      />
+                      <NumberInput
+                        type="number"
+                        name="mon"
+                        value={form.birthDate.mon}
+                        min="1"
+                        pattern="[0-9]*"
+                        max="12"
+                        onChange={this.handleChangeDOB}
+                      />
+                      <NumberInput
+                        type="number"
+                        name="year"
+                        value={form.birthDate.year}
+                        min="1950"
+                        pattern="[0-9]*"
+                        max="2050"
+                        onChange={this.handleChangeDOB}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-sm-6 padding-l-5">
+                    <div className="form-group margin-bottom-30">
+                      <Label
+                        htmlFor="country"
+                        value={Translations.editProfile.gender}
+                      />
+                      <ul className="options">
+                        <li>
+                          <RadioButton
+                            type="radio"
+                            id="male"
+                            name="gender"
+                            value="male"
+                            defaultChecked={
+                              form.gender.toLowerCase() === gender.male
+                            }
+                            className="black_button"
+                            onChange={this.handleChangeField}
+                          />
+                          <Label
+                            htmlFor="male"
+                            value={Translations.editProfile.male}
+                          />
+                        </li>
+                        <li>
+                          <RadioButton
+                            type="radio"
+                            id="female"
+                            value="female"
+                            name="gender"
+                            defaultChecked={
+                              form.gender.toLowerCase() === gender.female
+                            }
+                            onChange={this.handleChangeField}
+                          />
+                          <Label
+                            htmlFor="female"
+                            value={Translations.editProfile.female}
+                          />
+                        </li>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-                <div className="col-sm-6 padding-l-5">
-                  <div className="form-group margin-bottom-30">
-                    <label htmlFor="country">
-                      {Translations.editProfile.gender}
-                    </label>
-                    <ul className="options">
-                      <li>
-                        <RadioButton
-                          type="radio"
-                          id="male"
-                          name="gender"
-                          value="male"
-                          defaultChecked={
-                            form.gender.toLowerCase() === gender.male
-                          }
-                          className="black_button"
-                          onChange={this.handleChangeField}
-                        />
-                        <label htmlFor="male">Male</label>
-                      </li>
-                      <li>
-                        <RadioButton
-                          type="radio"
-                          id="female"
-                          value="female"
-                          name="gender"
-                          defaultChecked={
-                            form.gender.toLowerCase() === gender.female
-                          }
-                          onChange={this.handleChangeField}
-                        />
-                        <label htmlFor="female">Female</label>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              ) : (
+                ""
+              )}
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.category}
-                </span>
-                <label htmlFor="category">
-                  {Translations.editProfile.category}
-                </label>
+                <ErrorSpan value={error.category} />
+                <Label
+                  htmlFor="category"
+                  value={Translations.editProfile.category}
+                />
                 <SelectCategory
                   value={form.category}
                   className="form-control"
@@ -425,10 +454,11 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <label htmlFor="location" className="margin-bottom-13">
-                  Location
-                </label>
-
+                <Label
+                  htmlFor="location"
+                  className="margin-bottom-13"
+                  value={Translations.editProfile.location}
+                />
                 <PlaceAutoCompleteLocation
                   className="form-control"
                   handleLocation={this.handleLocation}
@@ -436,13 +466,12 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.phoneNumber}
-                </span>
-                <label htmlFor="phone-number">
-                  {Translations.editProfile.phone_number}
-                </label>
-                <Text
+                <ErrorSpan value={error.phoneNumber} />
+                <Label
+                  htmlFor="phone-number"
+                  value={Translations.editProfile.phone_number}
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="phoneNumber"
@@ -452,11 +481,9 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.email}
-                </span>
-                <label htmlFor="email">{Translations.editProfile.email}</label>
-                <Text
+                <ErrorSpan value={error.email} />
+                <Label htmlFor="email" value={Translations.editProfile.email} />
+                <Input
                   type="text"
                   className="form-control"
                   id="email"
@@ -466,13 +493,12 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.website}
-                </span>
-                <label htmlFor="website">
-                  {Translations.editProfile.website}
-                </label>
-                <Text
+                <ErrorSpan value={error.website} />
+                <Label
+                  htmlFor="website"
+                  value={Translations.editProfile.website}
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="website"
@@ -482,15 +508,13 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.profile_description}
-                </span>
-                <label htmlFor="description">
-                  {Translations.editProfile.profile_description}
-                </label>
-                <Text
-                  type="text"
-                  className="form-control"
+                <ErrorSpan value={error.profile_description} />
+                <Label
+                  htmlFor="description"
+                  value={Translations.editProfile.profile_description}
+                />
+                <Textarea
+                  className="form-control full-width-textarea"
                   id="profile_description"
                   name="profile_description"
                   value={form.profile_description}
@@ -503,13 +527,11 @@ class EditProfile extends Component {
             </div>
             <div className="personal-interests-wrapper">
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.offer_tag}
-                </span>
-                <label htmlFor="offer-tag">
-                  {Translations.editProfile.offer_tag}
-                </label>
-
+                <ErrorSpan value={error.offer_tag} />
+                <Label
+                  htmlFor="offer-tag"
+                  value={Translations.editProfile.offer_tag}
+                />
                 <OfferTags
                   value={this.state.form.offerTagList}
                   handleOfferTagChange={this.handleOfferTagChange}
@@ -517,13 +539,11 @@ class EditProfile extends Component {
                 />
               </div>
               <div className="form-group margin-bottom-30">
-                <span className="error-msg highlight">
-                  {this.state.error.inquiry_tag}
-                </span>
-                <label htmlFor="inquiry-tag">
-                  {Translations.editProfile.inquiry_tag}
-                </label>
-
+                <ErrorSpan value={error.inquiry_tag} />
+                <Label
+                  htmlFor="inquiry-tag"
+                  value={Translations.editProfile.inquiry_tag}
+                />
                 <InquiryTags
                   value={this.state.form.inquiryTagList}
                   handleInquiryTagChange={this.handleInquiryTagChange}
@@ -533,9 +553,11 @@ class EditProfile extends Component {
             </div>
             <SocialNetworks userId={"123"} isOwnerProfile />
             <div className="form-group margin-bottom-30">
-              <button className="black_button" type="submit">
-                save
-              </button>
+              <Button
+                className="black_button"
+                type="submit"
+                text={Translations.editProfile.save}
+              />
             </div>
           </form>
         </div>
@@ -562,7 +584,8 @@ EditProfile.propTypes = {
   profile: PropTypes.any,
   updateUserProfile: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  loginData: PropTypes.any
 };
 
 export default connect(

@@ -1,4 +1,9 @@
 export { default as InlineLoading } from "./InlineLoading";
 export { default as CampaignLoading } from "./CampaignLoading";
+export { default as CampaignDetailsLoading } from "./CampaignDetailsLoading";
 export { default as UserPicLoading } from "./UserPicLoading";
+export { default as RightSidebarLoading } from "./RightSidebarLoading";
+export { default as CustomeTableLoader } from "./CustomeTableLoader";
+export { default as UserImageItemLoader } from "./UserImageItemLoader";
+export { default as UserTitleItemLoader } from "./UserTitleItemLoader";
 export { default as Loader } from "./Loader";

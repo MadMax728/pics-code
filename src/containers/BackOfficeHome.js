@@ -3,17 +3,35 @@ import React, { Component } from "react";
 import {
   LeftSideBarBackOffice,
   BackOfficeHomeRoute,
-  RightSideBarBackOffice,
   InfoModal
 } from "../components/common";
+import { Auth } from "../auth";
+// import * as enumerations from "../lib/constants/enumerations";
 
 class BackOfficeHome extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       modalInfoShow: false,
-      modalInfoType: ""
+      modalInfoType: "",
+      modalInfo: null,
+      isRank: "",
+      userInfo: null,
+      statusCallback: () => { }
     };
+  }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) { 
+      this.setState({isRank: userInfo.role});
+      // this.setState({isRank: enumerations.adminRank.rank2});
+    }
   }
 
   handleModalInfoHide = () => {
@@ -24,6 +42,14 @@ class BackOfficeHome extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
+  handleModalInfoDetailsShow = (e, info) => {   
+    this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info });
+  };
+
+  handleModalInfoDetailsCallbackShow = (e, info, callback) => {   
+    this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info, statusCallback: callback });
+  };
+
   getFilter(filterData) {
     //list of array data as object & calling API
     console.log(filterData);
@@ -32,30 +58,32 @@ class BackOfficeHome extends Component {
   handleModalHide = () => {};
 
   render() {
+    const { modalInfo, modalInfoShow, modalInfoType, statusCallback, isRank} = this.state;
     return (
       <div>
         <section>
           <InfoModal
-            modalInfoShow={this.state.modalInfoShow}
+            modalInfoShow={modalInfoShow}
             handleModalInfoHide={this.handleModalInfoHide}
-            modalInfoType={this.state.modalInfoType}
+            modalInfoType={modalInfoType}
             handleModalHide={this.handleModalHide}
+            modalInfo={modalInfo}
+            statusCallback={statusCallback}
           />
 
           <div className="container">
             <div className="row">
               <div className="left_menu_second no-padding">
-                <LeftSideBarBackOffice getFilter={this.getFilter} />
+                <LeftSideBarBackOffice getFilter={this.getFilter} isRank={isRank} />
               </div>
 
               <div>
                 <BackOfficeHomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
+                  handleModalInfoDetailsShow={this.handleModalInfoDetailsShow}
+                  handleModalInfoDetailsCallbackShow={this.handleModalInfoDetailsCallbackShow}
+                  isRank={isRank}
                 />
-              </div>
-
-              <div className="right_bar no-padding">
-                <RightSideBarBackOffice />
               </div>
             </div>
           </div>

@@ -27,6 +27,14 @@ import reviewData from "./reviewReducer";
 import reportedContentData from "./reportedContentReducer";
 import businessProfileData from "./profileSettingsReducer";
 import searchData from "./searchReducer";
+import hashUserData from "./hashUserReducer";
+import subscribeData from "./subscribeReducer";
+import hashTagData from "./hashTagReducer";
+import messagesData from "./messageReducer";
+import lastEvaluatedKey from "./lastEvaluateKeyReducer";
+import notificationData from "./notificationReducer";
+import communityData from "./communityReducer";
+
 
 const rootReducer = combineReducers({
   loginData,
@@ -56,7 +64,14 @@ const rootReducer = combineReducers({
   reviewData,
   reportedContentData,
   businessProfileData,
-  searchData
+  searchData,
+  hashUserData,
+  subscribeData,
+  hashTagData,
+  messagesData,
+  lastEvaluatedKey,
+  notificationData,
+  communityData
 });
 
 export default rootReducer;

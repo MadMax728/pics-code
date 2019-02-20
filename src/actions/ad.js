@@ -2,6 +2,8 @@ import * as types from "../lib/constants/actionTypes";
 import * as adService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
+import * as _ from "lodash";
+import moment from "moment";
 
 // Get Ads
 const getAdsStarted = () => ({
@@ -28,7 +30,14 @@ export const getAds = (prop, provider) => {
     };
     return adService[prop](provider, headers).then(
       res => {
-        dispatch(getAdsSucceeded(res.data.data));
+        const ads = _.orderBy(
+          res.data.data,
+          function(o) {
+            return new moment(o.createdAt);
+          },
+          ["desc"]
+        );
+        dispatch(getAdsSucceeded(ads));
       },
       error => {
         dispatch(getAdsFailed(error.response));
@@ -58,21 +67,14 @@ export const getAdDetails = provider => {
   return dispatch => {
     dispatch(getAdDetailsStarted());
     const storage = Auth.extractJwtFromStorage();
-    const headers = {
-      Authorization: storage.accessToken
-    };
-    const params = { headers };
-
-    return adService.getAdDetails(params, provider).then(
+    const header = { Authorization: storage.accessToken };
+    return adService.getAdDetails(provider, header).then(
       res => {
         dispatch(getAdDetailsSucceeded(res.data.data));
       },
       error => {
         dispatch(getAdDetailsFailed(error.response));
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
+        logger.error({ description: error.toString(), fatal: true });
       }
     );
   };
@@ -109,6 +111,46 @@ export const createAd = provider => {
       },
       error => {
         dispatch(createAdFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+// Update Ad
+
+const updateAdStarted = () => ({
+  type: types.UPDATE_AD_STARTED
+});
+
+const updateAdSucceeded = data => ({
+  type: types.UPDATE_AD_SUCCEEDED,
+  payload: data
+});
+
+const updateAdFailed = error => ({
+  type: types.UPDATE_AD_FAILED,
+  payload: error,
+  error: true
+});
+
+export const updateAd = provider => {
+  return dispatch => {
+    dispatch(updateAdStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return adService.updateAd(provider, header).then(
+      res => {
+        dispatch(updateAdSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(updateAdFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

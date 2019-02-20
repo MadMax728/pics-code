@@ -13,9 +13,35 @@ export default class Mobile extends Component {
     this.state = {};
   }
 
+  render() {
+    return (
+      <div>
+        <Cookies />
+        <Header />
+        <section className="main-section">
+          <div className="container">
+            <div className="row">
+              <div>
+                <Switch>
+                  <Route exact path={routes.ROOT_ROUTE} component={Home} />
+
+                  <LeftSideBarMB />
+
+                  <Route component={Home} />
+                </Switch>
+              </div>
+            </div>
+          </div>
+        </section>
+        <Footer />
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     document.addEventListener("click", this.handleOutsideClick);
   };
+
   componenWillUnmount = () => {
     document.removeEventListener("click", this.handleOutsideClick);
   };
@@ -44,28 +70,4 @@ export default class Mobile extends Component {
     this.toggleUserNav();
   };
 
-  render() {
-    return (
-      <div>
-        <Cookies />
-        <Header />
-        <section>
-          <div className="container">
-            <div className="row">
-              <div>
-                <Switch>
-                  <Route exact path={routes.ROOT_ROUTE} component={Home} />
-
-                  <LeftSideBarMB />
-
-                  <Route component={Home} />
-                </Switch>
-              </div>
-            </div>
-          </div>
-        </section>
-        <Footer />
-      </div>
-    );
-  }
 }

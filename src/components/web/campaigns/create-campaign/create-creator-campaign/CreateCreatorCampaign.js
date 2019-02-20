@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
 import { Preview } from "../preview";
 import PropTypes from "prop-types";
-import {
-  PaymentStepOne,
-  PaymentStepTwo
-} from "../../../user/payment/steps";
+import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import * as images from "../../../../../lib/constants/images";
+import { Button } from "../../../../ui-kit";
 
 class CreateCreatorCampaign extends Component {
   constructor(props) {
@@ -17,14 +15,15 @@ class CreateCreatorCampaign extends Component {
   render() {
     const {
       stepIndex,
-      forThat,
-      handleModalInfoShow,
+      // forThat,
+      // handleModalInfoShow,
       isPreview,
-      handlePrivewClose,
+      // handlePrivewClose,
       form,
+      maxClicks,
       isFor,
       handleChangeField,
-      handleSubmit,
+      // handleSubmit,
       handleDate,
       handleContentChange,
       handleEditImage,
@@ -36,26 +35,17 @@ class CreateCreatorCampaign extends Component {
       handleInquiryTagChange,
       handleInquiryTagDelete,
       handleSelect,
-      handleVideo,
       userInfo,
-      handleAddress
+      // handleAddress,
+      // setVoucherData,
+      calculateMaxClicks,
+      // isLoading,
+      isEdit,
+      handleModalInfoMsgShow
     } = this.props;
 
     return (
       <div className="col-xs-12 no-padding">
-        {isPreview && <Preview form={form} />}
-        {isPreview && (
-          <button
-            onClick={handlePrivewClose}
-            className={"closeBtn right-side-close"}
-          >
-            <img
-              src={images.white_close}
-              alt={"cross"}
-              style={{ height: "10px", width: "10px" }}
-            />
-          </button>
-        )}
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
@@ -71,16 +61,18 @@ class CreateCreatorCampaign extends Component {
               handleOfferTagChange={handleOfferTagChange}
               handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
-              handleVideo={handleVideo}
               userInfo={userInfo}
+              isEdit={isEdit}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
-            <StepTwo 
-              handleChangeField={handleChangeField} 
+            <StepTwo
+              handleChangeField={handleChangeField}
               form={form}
               handleContentChange={handleContentChange}
+              userInfo={userInfo}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
             />
           ))}
         {!isPreview &&
@@ -90,27 +82,11 @@ class CreateCreatorCampaign extends Component {
               handleDate={handleDate}
               handleSelect={handleSelect}
               form={form}
+              userInfo={userInfo}
+              calculateMaxClicks={calculateMaxClicks}
+              maxClicks={maxClicks}
             />
           ))}
-        {!isPreview &&
-          (stepIndex === 3 && (
-            <PaymentStepOne
-              handleAddress={handleAddress}
-              forThat={forThat}
-              handleChangeField={handleChangeField}
-              form={form}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 4 && (
-            <PaymentStepTwo
-              forThat={forThat}
-              handleModalInfoShow={handleModalInfoShow}
-              handleChangeField={handleChangeField}
-              form={form}
-              handleSubmit={handleSubmit}
-            />
-        ))}
       </div>
     );
   }
@@ -137,9 +113,14 @@ CreateCreatorCampaign.propTypes = {
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
-  userInfo: PropTypes.object
+  userInfo: PropTypes.object,
+  setVoucherData: PropTypes.func,
+  calculateMaxClicks: PropTypes.func,
+  maxClicks: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired,
+  isEdit: PropTypes.bool.isRequired,
+  handleModalInfoMsgShow: PropTypes.func.isRequired
 };
 
 export default CreateCreatorCampaign;

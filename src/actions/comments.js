@@ -99,7 +99,9 @@ export const deleteComment = data => {
     const header = { Authorization: storage.accessToken };
     return commentService.deleteComment(data, header).then(
       res => {
-        dispatch(deleteCommentSucceeded(res.data.success ? res.data.data : null));
+        dispatch(
+          deleteCommentSucceeded(res.data.success ? res.data.data : null)
+        );
       },
       error => {
         dispatch(deleteCommentFailed(error.response));
@@ -111,7 +113,6 @@ export const deleteComment = data => {
     );
   };
 };
-
 
 // Edit Comment
 const editCommentStarted = () => ({

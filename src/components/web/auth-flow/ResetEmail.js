@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { submitResetPassword } from "../../../actions/forgotPassword";
 import { connect } from "react-redux";
 import { Auth } from "../../../auth";
+import { Input, Button, ErrorSpan } from "../../ui-kit";
 
 class ResetMail extends Component {
   constructor(props) {
@@ -19,6 +20,52 @@ class ResetMail extends Component {
       error: {}
     };
   }
+
+  render() {
+    const { form, error } = this.state;
+    return (
+      <div className="login-process">
+        <BaseHeader />
+        <section>
+          <div className="custom-container">
+            <div className="login-wrapper">
+              <h3 className="text-center">{Translations.reset_email.header}</h3>
+              <p>{Translations.reset_email.subheader}</p>
+              <form>
+                <ErrorSpan value={this.state.error.servererror} />
+                <div className="form-group">
+                  <Input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    placeholder={Translations.register.email}
+                    name="email"
+                    value={form.email ? form.email : ""}
+                    onChange={this.handleChangeField}
+                  />
+                  {form.email.length === 0 ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                      <img src={images.checked} alt={"checked"} />
+                    )}
+                  <ErrorSpan value={error.email} /> 
+                </div>
+                <div className="form-group">
+                  <Button 
+                    className="blue_button" 
+                    onClick={this.handleSubmit}
+                    text={Translations.register.send}
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </section>
+        <BaseFooter className={"custom-container"} />
+      </div>
+    );
+  }
+
   //logout user
   componentDidMount = () => {
     Auth.logoutUser();
@@ -81,50 +128,8 @@ class ResetMail extends Component {
       }
     });
   };
-
-  render() {
-    const { form } = this.state;
-    return (
-      <div className="login-process">
-        <BaseHeader />
-        <section>
-          <div className="custom-container">
-            <div className="login-wrapper">
-              <h3 className="text-center">{Translations.reset_email.header}</h3>
-              <p>{Translations.reset_email.subheader}</p>
-              <form>
-                <span className="error-msg highlight">{this.state.error.servererror}</span>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="email"
-                    placeholder={Translations.register.email}
-                    name="email"
-                    value={form.email ? form.email : ""}
-                    onChange={this.handleChangeField}
-                  />
-                  {form.email.length === 0 ? (
-                    <img src={images.error} alt={"error"} />
-                  ) : (
-                    <img src={images.checked} alt={"checked"} />
-                  )}
-                  <span className="error-msg highlight">{this.state.error.email}</span>
-                </div>
-                <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
-                    {Translations.register.send}
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </section>
-        <BaseFooter className={"custom-container"} />
-      </div>
-    );
-  }
 }
+
 const mapStateToProps = state => ({
   resetPasswordData: state.resetPasswordData
 });

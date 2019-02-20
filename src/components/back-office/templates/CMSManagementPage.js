@@ -1,25 +1,97 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as routes from "../../../lib/constants/routes";
-import { CustomBootstrapTable } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { getCMSManagement } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getCMSManagement } from "../../../actions";
+
+import { CustomeTableLoader, CustomBootstrapTable, Button } from "../../ui-kit";
+import { DateFormat } from "../../Factory";
+import { SelectLanguage } from "../../common";
+
+import { modalType } from "../../../lib/constants/enumerations";
+import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 class CMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      cmsManagement: null
+      cmsManagement: null,
+      searchKeyword: this.props.searchData.searchKeyword,
+      language: Translations.base_footer.language
     };
   }
 
+  render() {
+    const { cmsManagement, language } = this.state;
+    const { cmsManagementData } = this.props;
+
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+        <div className="dashboard-middle-section margin-bottom-50">
+          <div className="title_with_dropdown">
+            <span>{Translations.cms.cms}</span>
+            <Link to={routes.BACK_OFFICE_CREATE_CMS_ROUTE}>
+              <Button
+                className="expandDrop"
+                text={<i className="glyphicon glyphicon-plus-sign" />}
+              />
+            </Link>
+            <SelectLanguage value={language} handleSelect={this.handleSelect} />
+          </div>
+          {cmsManagement && this.renderCMSManagement()}
+          {!cmsManagement && cmsManagementData.isLoading && (
+            <CustomeTableLoader />
+          )}
+        </div>
+      </div>
+    );
+  }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    this.props.getCMSManagement("").then(() => {
+      const { cmsManagementData } = this.props;
+      if (cmsManagementData && cmsManagementData.cmsManagement) {
+        this.setState({
+          cmsManagement: cmsManagementData.cmsManagement
+        });
+      }
+    });
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
+
   optionsFormatter = (cell, row, rowIndex) => {
+    const data = {
+      title: row.title,
+      url: row.url,
+      pageLanguage: row.pageLanguage,
+      displayPage: row.displayPage,
+      description: row.description
+    };
+
     return (
       <div key={rowIndex}>
-        <Link to={""}>Edit</Link>
-        <Link to={""}>Preview</Link>
+        <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row.id}`}>
+          Edit
+        </Link>
+        <div
+          role="button"
+          tabIndex="0"
+          onKeyDown={() => this.handlePreview(data)}
+          onClick={() => this.handlePreview(data)}
+        >
+          Preview
+        </div>
       </div>
     );
   };
@@ -29,62 +101,62 @@ class CMSManagementPage extends Component {
   statusFormatter = (cell, row, rowIndex) => {
     return (
       <div key={rowIndex}>
-        <span className="green-circle" /> Active{" "}
+        <span className={`${row.status}-circle`} /> Active{" "}
       </div>
     );
   };
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.props.getCMSManagement().then(()=> {
-      if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
-        this.setState({
-          cmsManagement: this.props.cmsManagementData.cmsManagement
-        })
-      }
-    });
-  };
-
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size}{" "}
+      {Translations.results}
     </span>
   );
+
+  recentFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        {row.updatedAt &&
+          DateFormat(row.updatedAt, Translations.date_format.time, true)}
+      </div>
+    );
+  };
 
   renderCMSManagement = () => {
     const { cmsManagement } = this.state;
     const columns = [
       {
         dataField: "title",
-        text: Translations.cms.Title_of_page,
+        text: Translations.cms.title_of_page,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
-        dataField: "language",
-        text: Translations.cms.Language,
+        dataField: "pageLanguage",
+        text: Translations.cms.language,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "most_recent_change",
-        text: Translations.cms.Most_recent_change,
+        text: Translations.cms.most_recent_change,
         align: "left",
         headerAlign: "left",
-        sort: false
+        sort: false,
+        formatter: this.recentFormatter
       },
       {
-        dataField: "created_by",
-        text: Translations.cms.Created_by,
+        dataField: "username",
+        text: Translations.cms.created_by,
         align: "left",
         headerAlign: "left",
         sort: false
       },
       {
         dataField: "options",
-        text: Translations.cms.Options,
+        text: Translations.cms.options,
         align: "left",
         headerAlign: "left",
         sort: false,
@@ -92,7 +164,7 @@ class CMSManagementPage extends Component {
       },
       {
         dataField: "status",
-        text: Translations.cms.Status,
+        text: Translations.cms.status,
         align: "left",
         headerAlign: "left",
         sort: false,
@@ -146,41 +218,41 @@ class CMSManagementPage extends Component {
           condensed
           defaultSorted={defaultSorted}
           pagination={pagination}
-          noDataIndication="Table is Empty"
+          noDataIndication={Translations.table_empty}
           id={"title"}
         />
       </div>
-    )
-  }
-
-  render() {
-    const { cmsManagement } = this.state;
-
-    return (
-      <div className="padding-rl-10 middle-section width-80">
-       <div className="dashboard-middle-section margin-bottom-50">
-          <div className="title_with_dropdown">
-            <span>{Translations.cms.cms}</span>
-            <Link to={routes.BACK_OFFICE_CREATE_CMS_ROUTE}>
-              <button className="expandDrop">
-                <i className="glyphicon glyphicon-plus-sign" />
-              </button>{" "}
-            </Link>
-            <select>
-              <option>Language </option>
-              <option>Option 1 </option>
-              <option>Option 2 </option>
-            </select>
-          </div>
-          {cmsManagement && this.renderCMSManagement()}
-        </div>
-      </div>
     );
-  }
+  };
+
+  handleSelect = (isFor, selected) => {
+    this.setState({ language: selected.id });
+    if (this.state.language !== selected.id) {
+      const url =
+        selected.id === Translations.base_footer.language
+          ? ``
+          : `?language=${selected.id}`;
+      this.props.getCMSManagement(url).then(() => {
+        if (
+          this.props.cmsManagementData &&
+          this.props.cmsManagementData.cmsManagement
+        ) {
+          this.setState({
+            cmsManagement: this.props.cmsManagementData.cmsManagement
+          });
+        }
+      });
+    }
+  };
+
+  handlePreview = data => {
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview, data);
+  };
 }
 
 const mapStateToProps = state => ({
-  cmsManagementData: state.cmsManagementData
+  cmsManagementData: state.cmsManagementData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
@@ -190,10 +262,12 @@ const mapDispatchToProps = {
 CMSManagementPage.propTypes = {
   getCMSManagement: PropTypes.func.isRequired,
   cmsManagementData: PropTypes.object,
+  handleModalInfoDetailsShow: PropTypes.func.isRequired,
+  searchData: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CMSManagementPage);
-

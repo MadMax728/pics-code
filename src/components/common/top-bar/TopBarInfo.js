@@ -5,19 +5,6 @@ import { TopBarOwnerInfo, TopBarOtherInfo } from "./info";
 import PropTypes from "prop-types";
 
 class TopBarInfo extends Component {
-  TopBarOwnerInfo = () => {
-    return (
-      <TopBarOwnerInfo
-        handleModalShow={this.props.handleModalShow}
-        handleModalInfoShow={this.props.handleModalInfoShow}
-      />
-    );
-  };
-
-  TopBarOtherInfo = (match) => {    
-    return <TopBarOtherInfo handleModalShow={this.props.handleModalShow} match={match.match.params} />;
-  };
-
   render() {
     return (
       <div>
@@ -56,6 +43,26 @@ class TopBarInfo extends Component {
       </div>
     );
   }
+
+  TopBarOwnerInfo = () => {
+    return (
+      <TopBarOwnerInfo
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+      />
+    );
+  };
+
+  TopBarOtherInfo = match => {
+    return (
+      <TopBarOtherInfo
+        handleModalShow={this.props.handleModalShow}
+        handleModalInfoShow={this.props.handleModalInfoShow}
+        match={match.match.params}
+        history={match.history}
+      />
+    );
+  };
 }
 
 TopBarInfo.propTypes = {

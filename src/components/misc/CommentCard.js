@@ -1,18 +1,28 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import * as images from "../../lib/constants/images";
+import { Auth } from "../../auth";
 import { RenderToolTips, HashTagUsername } from "../common";
-import { ThreeDots, ReadMore } from "../ui-kit";
+import { ThreeDots, ReadMore, UserImageItem } from "../ui-kit";
 import { Translations } from "../../lib/translations";
-import { addComment, deleteComment, editComment } from "../../actions";
+import {
+  addComment,
+  deleteComment,
+  editComment,
+  addReport
+} from "../../actions";
 import { connect } from "react-redux";
 import { DateFormat } from "../Factory";
 import ReportCard from "./ReportCard";
-
+import * as enumerations from "../../lib/constants/enumerations";
+import "emoji-mart/css/emoji-mart.css";
+import { Picker } from "emoji-mart";
+const storage = Auth.extractJwtFromStorage();
+let userMentionList = [];
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
-
+    this.commentForm = React.createRef();
     this.state = {
       item: this.props.item,
       comments: this.props.item,
@@ -28,24 +38,30 @@ class CommentCard extends Component {
       updateForm: {
         comment: ""
       },
-      ReportTips: [
-        {
-          name: "Edit",
-          handleEvent: this.handleEditComment
-        },
-        {
-          name: "Report Comment",
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: "Delete",
-          handleEvent: this.handleDelete
-        }
-      ]
+      isEmoji: false,
+      commentMentionUserlist: null
     };
   }
 
-  handleReportPost = () => {};
+  handleReportPost = e => {
+    const { item } = this.state;
+    const comment = item[item.findIndex(i => i.id === e.target.id)];
+    const data = {
+      typeContent: "Comment",
+      typeId: e.target.id,
+      title: comment.comment
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === comment.id
+      ) {
+        comment.isReported = !comment.isReported;
+        this.setState({ item });
+      }
+    });
+  };
 
   componentDidMount = () => {
     const commentData = this.state.comments.slice(
@@ -61,6 +77,7 @@ class CommentCard extends Component {
       comment,
       typeOfContent,
       typeId: itemId
+      // mentionedUserId: []
     };
     this.props.addComment(data).then(() => {
       if (this.props.comment) {
@@ -98,6 +115,16 @@ class CommentCard extends Component {
     this.setState({ slicedCommentsData: commentData, maxRange: maxRangeValue });
   };
 
+  handleViewLessComment = () => {
+    const maxRangeValue = "2";
+    const commentData = this.state.comments.slice(0, maxRangeValue);
+    this.setState({
+      slicedCommentsData: commentData,
+      minRange: 0,
+      maxRange: maxRangeValue
+    });
+  };
+
   handleDelete = e => {
     const id = e.target.id;
     const { comments, slicedCommentsData } = this.state;
@@ -122,9 +149,50 @@ class CommentCard extends Component {
    * Tooltp
    */
   renderReportTips = id => {
+    let reportTips;
+    const { isBackOffice } = this.props;
+    const { item } = this.state;
+
+    if (isBackOffice) {
+      reportTips = [
+        {
+          name:
+            item[item.findIndex(i => i.id === id)].reportStatus ===
+            enumerations.reportType.lock
+              ? Translations.tool_tips.unlock
+              : Translations.tool_tips.lock,
+          handleEvent:
+            item.reportStatus === enumerations.reportType.lock
+              ? this.handleUnlockContent
+              : this.handleLockContent
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    } else {
+      reportTips = [
+        {
+          name: Translations.tool_tips.edit,
+          handleEvent: this.handleEditComment
+        },
+        {
+          name: item[item.findIndex(i => i.id === id)].isReported
+            ? Translations.tool_tips.unreport_comment
+            : Translations.tool_tips.report_comment,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: Translations.tool_tips.delete,
+          handleEvent: this.handleDelete
+        }
+      ];
+    }
+
     return (
       <RenderToolTips
-        items={this.state.ReportTips}
+        items={reportTips}
         id={id}
         isLoading={this.props.isLoading}
       />
@@ -140,7 +208,7 @@ class CommentCard extends Component {
     if (comment.id === updateForm.id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
-          <div className="col-sm-10 col-xs-7 no-padding">
+          <div>
             <div className="comment-input">
               <div className="form-group">
                 <HashTagUsername
@@ -172,16 +240,18 @@ class CommentCard extends Component {
         <div className="feed-comment">
           <div className="comment-wrapper">
             <div className="comment-header">
-              <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                <img
-                  src={comment.profileImage}
-                  alt={`comment-${comment.id}`}
-                  className="img-circle img-responsive ht45"
-                />
-              </div>
+              <UserImageItem
+                item={comment.profileImage}
+                customClass={`img-circle img-responsive`}
+              />
               <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-                <b>{comment.userName}</b> {DateFormat(comment.createdAt)}{" "}
-                <b>Reply</b>
+                <b>{comment.userName}</b>{" "}
+                {DateFormat(
+                  comment.createdAt,
+                  Translations.date_format.time,
+                  true
+                )}{" "}
+                <b>{Translations.reply}</b>
               </div>
               <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
                 <ThreeDots
@@ -211,19 +281,16 @@ class CommentCard extends Component {
   };
 
   renderComment = comment => {
-    console.log(comment);
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
-          <div className="col-sm-1 col-xs-1 no-padding profile_image">
-            <img
-              src={comment.profileImage}
-              alt={`comment-${comment.id}`}
-              className="img-circle img-responsive ht45"
-            />
-          </div>
+          <UserImageItem
+            item={comment.profileImage}
+            customClass={`img-circle img-responsive`}
+          />
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {DateFormat(comment.createdAt)}{" "}
+            <b>{comment.userName}</b>{" "}
+            {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
             <b>Reply</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
@@ -243,13 +310,82 @@ class CommentCard extends Component {
             />
           </div>
         </div>
-        <div className="comment-content">{this.renderEditComment(comment)}</div>
+        <div className="comment-content col-md-12 no-padding">
+          <div className="col-md-1" />
+          <div className="col-md-10 comment-content-div">
+            {this.renderEditComment(comment)}
+          </div>
+        </div>
       </div>
     );
   };
 
-  handleSetState = (value, cd) => {
-    this.setState({ form: { ...this.state.form, comment: value } }, () => cd());
+  handleSetState = (value, cd, id) => {
+    //console.log("description");
+    // console.log(value);
+
+    if (id) {
+      //console.log("id:", id);
+      userMentionList.push(id);
+    }
+    const { isBackOffice } = this.props;
+    if (isBackOffice) {
+      clearInterval(this.timer);
+      const { item } = this.state;
+      const comment = item[item.findIndex(i => i.id === value.typeId)];
+      comment.reportStatus = value.contentStatus;
+      this.setState({ item });
+      this.props.handleRemove(comment.id);
+    } else {
+      this.setState({ form: { ...this.state.form, comment: value } }, () =>
+        cd()
+      );
+    }
+  };
+
+  handleLockContent = e => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+      reportContent: "Comment"
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
+  };
+
+  handleDoNotContent = e => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+      reportContent: "Comment"
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
+  };
+
+  handleUnlockContent = e => {
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+      reportContent: "Comment"
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data, null);
+      }
+    );
   };
 
   handleUpdateSetState = (value, cd) => {
@@ -263,8 +399,7 @@ class CommentCard extends Component {
     e.preventDefault();
     if (this.state.form.comment !== "") {
       this.addComment(this.state.form.comment);
-      /* eslint-disable */
-      this.refs.commentForm.reset();
+      this.commentForm.current.reset();
       this.setState({ form: { ...this.state.form, comment: "" } });
     }
   };
@@ -285,27 +420,35 @@ class CommentCard extends Component {
     }
   };
 
+  /* Emoji */
+  addEmoji = emoji => {
+    const comment = this.state.form.comment;
+    const newComment = comment + emoji.native;
+    this.setState({ form: { comment: newComment } });
+    this.setState({ isEmoji: false });
+  };
+
+  onEmojiOpen = () => {
+    this.setState(prevState => ({
+      isEmoji: !prevState.isEmoji
+    }));
+  };
+
   render() {
-    const { item, form } = this.state;
+    const { item, form, isEmoji, isBackOffice } = this.state;
     const { isLoading, isReport } = this.props;
-    console.log("in comment");
-    console.log(item.id);
-    console.log(isReport);
-    console.log(this.props.totalCommentsCount);
-    console.log(this.state.slicedCommentsData);
+    const userInfo = storage ? JSON.parse(storage.userInfo) : null;
+    const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
       <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
         {!isReport && (
           <div className="comment-wrapper">
-            <form onSubmit={this.handleSubmit} ref="commentForm">
-              <div className="col-sm-1 col-xs-1 no-padding profile_image">
-                <img
-                  src={images.image}
-                  alt="image1"
-                  className="img-circle img-responsive"
-                />
-              </div>
-              <div className="col-sm-10 col-xs-7 no-padding">
+            <form onSubmit={this.handleSubmit} ref={this.commentForm}>
+              <UserImageItem
+                item={profileImage}
+                customClass={`img-circle img-responsive`}
+              />
+              <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
                 <div className="comment-input">
                   <div className="form-group">
                     <HashTagUsername
@@ -322,8 +465,25 @@ class CommentCard extends Component {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-1 col-xs-2 emoji_wrapper">
-                <img src={images.emoji} alt="like" className="pull-right" />
+              <div className="emoji_wrapper col-sm-2 col-xs-2 pull-right text-right">
+                <img
+                  role="presentation"
+                  className="pull-right"
+                  src={images.emoji}
+                  alt={"emoji1"}
+                  onKeyPress={this.onEmojiOpen}
+                  onClick={this.onEmojiOpen}
+                />
+                {isEmoji && (
+                  <Picker
+                    onSelect={this.addEmoji}
+                    style={{
+                      position: "absolute",
+                      bottom: "135px",
+                      right: "60px"
+                    }}
+                  />
+                )}
               </div>
               <input type="submit" hidden />
             </form>
@@ -331,11 +491,12 @@ class CommentCard extends Component {
         )}
 
         {isReport &&
-          this.props.totalCommentsCount !== 0 &&
-          this.state.slicedCommentsData &&
-          this.state.slicedCommentsData.map(this.renderBackOfficeComment)}
+          isBackOffice &&
+          item &&
+          item.map(this.renderBackOfficeComment)}
 
         {!isReport &&
+          !isBackOffice &&
           this.props.totalCommentsCount !== 0 &&
           this.state.slicedCommentsData &&
           this.state.slicedCommentsData.map(this.renderComment)}
@@ -349,6 +510,17 @@ class CommentCard extends Component {
             {Translations.view_more_comments}
           </div>
         )}
+
+        {!isReport &&
+          this.props.totalCommentsCount > 2 &&
+          this.props.totalCommentsCount < this.state.maxRange && (
+            <div
+              className="view-more-comments view-more-link"
+              onClick={this.handleViewLessComment}
+            >
+              {Translations.view_less_comments}
+            </div>
+          )}
       </div>
     );
   }
@@ -356,20 +528,22 @@ class CommentCard extends Component {
 
 const mapStateToProps = state => ({
   comment: state.commentData.comment,
-  isLoading: state.commentData.isLoading
+  isLoading: state.commentData.isLoading,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
   addComment,
   deleteComment,
-  editComment
+  editComment,
+  addReport
 };
 
 CommentCard.propTypes = {
   item: PropTypes.any,
   addComment: PropTypes.func.isRequired,
   deleteComment: PropTypes.func.isRequired,
-  handleComment: PropTypes.func.isRequired,
+  handleComment: PropTypes.func,
   editComment: PropTypes.func.isRequired,
   isReport: PropTypes.bool,
   comment: PropTypes.any,
@@ -377,7 +551,13 @@ CommentCard.propTypes = {
   isLoading: PropTypes.bool,
   itemId: PropTypes.any,
   maxLimit: PropTypes.any,
-  totalCommentsCount: PropTypes.any
+  totalCommentsCount: PropTypes.any,
+  isBackOffice: PropTypes.bool,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  isBackOffice: PropTypes.bool,
+  handleRemove: PropTypes.func
 };
 
 export default connect(

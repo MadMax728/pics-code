@@ -19,6 +19,7 @@ const initialState = {
   },
   registerData: {
     registeredUser: null,
+    registeredCompanyUser: null,
     isLoading: false,
     error: null
   },
@@ -43,7 +44,9 @@ const initialState = {
     campaign: null,
     favouriteCampaign: null,
     isLoading: false,
-    error: false
+    error: false,
+    isAddParticipant: null,
+    isRemoveParticipantData: null
   },
   adData: {
     ads: null,
@@ -58,17 +61,32 @@ const initialState = {
   },
   cmsManagementData: {
     cmsManagement: null,
+    cmsDetail: null,
     isLoading: false,
     error: false
   },
   dashboardData: {
-    news: null,
-    explores: null,
-    participants: null,
-    users: null,
-    pics: null,
     isLoading: false,
-    error: false
+
+    news: null,
+    isLoadingnews: false,
+    errornews: false,
+
+    explores: null,
+    isLoadingexplores: false,
+    errorexplores: false,
+
+    participants: null,
+    isLoadingparticipants: false,
+    errorparticipants: false,
+
+    users: null,
+    isLoadingusers: false,
+    errorusers: false,
+
+    pics: null,
+    isLoadingpics: false,
+    errorpics: false
   },
   aboutData: {
     about: null,
@@ -88,6 +106,11 @@ const initialState = {
   },
   likeData: {
     like: null,
+    isLoading: false,
+    error: false
+  },
+  notificationData: {
+    notification: null,
     isLoading: false,
     error: false
   },
@@ -119,11 +142,30 @@ const initialState = {
     radius: null,
     targetGroups: null,
     callToActions: null,
+    periods: null,
+    amounts: null,
+    types: null,
+    numbers: null,
+    languages: null,
+    age: null,
     isLoading: false,
     error: false
   },
   usersData: {
     users: [],
+    isLoading: false,
+    error: false,
+    isRequestSendData: null,
+    isUnsubscribedData: null,
+    userList: [],
+    pendingUserList: [],
+    isAcceptRequest: null,
+    BlockRequestResult: [],
+    isUnblock: null
+  },
+  subscribeData: {
+    subscriber: [],
+    subscribed: [],
     isLoading: false,
     error: false
   },
@@ -145,29 +187,46 @@ const initialState = {
   verificationData: {
     verifications: null,
     verification: null,
+    unverifiedUsers: null,
     isLoading: false,
     error: false
   },
   voucherData: {
     vouchers: null,
     voucher: null,
+    voucherExpiryResult: null,
     isLoading: false,
     error: false
   },
   reviewData: {
-    campaigns: null,
-    ads: null,
+    Campaigns: null,
+    Ads: null,
+
+    CampaignsStatistics: null,
+    AdvertisementStatistics: null,
+
     isLoading: false,
     error: false
   },
   reportedContentData: {
-    reportedContentImages: null,
-    reportedContentVideos: null,
-    reportedContentCampaigns: null,
-    reportedContentPics: null,
-    reportedContentAds: null,
-    reportedContentComments: null,
-    reportedContentUsers: null,
+    Image: null,
+    Videos: null,
+    Campaign: null,
+    Pics: null,
+    Ads: null,
+    Comments: null,
+    Users: null,
+
+    ImageStatistics: null,
+    VideosStatistics: null,
+    CampaignStatistics: null,
+    PicsStatistics: null,
+    AdsStatistics: null,
+    CommentsStatistics: null,
+    UsersStatistics: null,
+
+    addReport: null,
+
     isLoading: false,
     error: false
   },
@@ -182,6 +241,32 @@ const initialState = {
     searchKeyword: null,
     isLoading: false,
     error: false
+  },
+  communityData: {
+    userCommunity: null,
+    isLoading: false,
+    error: false
+  },
+  hashUserData: {
+    usernames: null,
+    hashTags: null,
+    isLoading: false,
+    error: false
+  },
+  hashTagData: {
+    hashTags: null,
+    addedHashTags: null,
+    isLoading: false,
+    error: false
+  },
+  messagesData: {
+    messages: [],
+    lastEvaluatedKeys: undefined,
+    isLoading: false,
+    error: false
+  },
+  lastEvaluatedKey: {
+    keys: null
   }
 };
 

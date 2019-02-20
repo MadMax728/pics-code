@@ -14,10 +14,42 @@ class EditProfileModal extends Component {
     super(props, context);
     this.imageCropper = React.createRef();
     this.state = {
+      isLoading: false,
       image: null,
       actual_img: null,
       scale: 1
     };
+  }
+
+  render() {
+    const { handleModalInfoHide, modalInfoShow } = this.props;
+    const { image, isLoading } = this.state;
+    return (
+      <CustomBootstrapModal
+        modalClassName={"modal fade create-campaign-modal edit-profile-modal"}
+        header
+        modalHeaderContent={
+          <EditProfilePicHeader
+            handleModalHide={this.props.handleModalInfoHide}
+            handleContinue={this.handleContinue}
+            isLoading={isLoading}
+          />
+        }
+        footer={false}
+        modalShow={modalInfoShow}
+        closeBtn={false}
+        handleModalHide={handleModalInfoHide}
+        modalBodyContent={
+          <EditProfilePic
+            image={image}
+            handleEditImage={this.handleEditImage}
+            ref={this.imageCropper}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
+          />
+        }
+      />
+    );
   }
 
   componentDidMount = () => {
@@ -43,6 +75,7 @@ class EditProfileModal extends Component {
     Data.append('typeImage','Original');
     Data.append('typeOfContent','profile');
     Data.append('coordinate', '50');
+    this.setState({isLoading: true});
     this.props.uploadProfilePicture(Data)
       .then(()=>{
         if (this.props.userDataByUsername.imageData)
@@ -80,6 +113,7 @@ class EditProfileModal extends Component {
                 this.props.handleProfile(this.props.userDataByUsername.imageData.data.id);
                 this.imageCropper.current.handleSave();
                 this.props.handleModalInfoHide();
+                this.setState({isLoading: false});
                 }  
               }
             })
@@ -88,35 +122,6 @@ class EditProfileModal extends Component {
       })
   };
 
-  render() {
-    const { handleModalInfoHide, modalInfoShow } = this.props;
-    const { image } = this.state;
-    return (
-      <CustomBootstrapModal
-        modalClassName={"modal fade create-campaign-modal"}
-        header
-        modalHeaderContent={
-          <EditProfilePicHeader
-            handleModalHide={this.props.handleModalInfoHide}
-            handleContinue={this.handleContinue}
-          />
-        }
-        footer={false}
-        modalShow={modalInfoShow}
-        closeBtn={false}
-        handleModalHide={handleModalInfoHide}
-        modalBodyContent={
-          <EditProfilePic
-            image={image}
-            handleEditImage={this.handleEditImage}
-            ref={this.imageCropper}
-            handleActualImg={this.handleActualImg}
-            handleScale={this.handleScale}
-          />
-        }
-      />
-    );
-  }
 }
 
 const mapStateToProps = state => ({

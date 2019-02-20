@@ -1,24 +1,36 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import * as images from "../../../lib/constants/images";
+import { Input, Button } from "../../ui-kit";
 
-const ReportedSearchBar = () => {
+const ReportedSearchBar = (e) => {
   return (
     <div className="middle-section-search">
-      <form>
+      <form onSubmit={e.handleSearch}>
         <div className="input-group search-input-group">
-          <input type="text" className="form-control" placeholder="Search" />
+          <Input type="text" 
+            name="search"
+            className="form-control" 
+            placeholder="Search" 
+            defaultValue={e.value}
+            onChange={e.handleSearch}
+          />
           <span className="input-group-addon">
-            <button type="submit">
+            <Button type="submit" text={
               <span className="search_icon">
                 <img src={images.search} alt="Search" />
-              </span>
-            </button>
+              </span>}
+            />
           </span>
         </div>
       </form>
     </div>
   );
+};
+
+ReportedSearchBar.propTypes = {
+  e: PropTypes.any
 };
 
 export default ReportedSearchBar;

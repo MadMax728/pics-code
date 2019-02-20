@@ -2,14 +2,50 @@ import React, { Component } from "react";
 import * as images from "../../../../../lib/constants/images";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { checkVoucherExpiry } from "../../../../../actions";
+import { connect } from "react-redux";
+import { Translations } from "../../../../../lib/translations";
 
 class PaymentStepThree extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      error: {}
+    };
   }
 
-  handleRedeemBtn = () => {};
+  handleRedeemBtn = () => {
+    const errors = {};
+    if (this.props.form.voucher) {
+      const voucherParams = {
+        code: this.props.form.voucher,
+        type: this.props.forThat
+      };
+      this.props.checkVoucherExpiry(voucherParams).then(() => {
+        const errors = {};
+        if (
+          this.props.voucherData.error &&
+          this.props.voucherData.error.status === 400
+        ) {
+          if (this.props.voucherData.voucherExpiryResult.length === 0) {
+            errors.voucherError =
+              Translations.create_campaigns.voucherCodeValid;
+          } else {
+            errors.voucherError = Translations.create_campaigns.serverError;
+          }
+          this.setState({ error: errors });
+        } else if (
+          this.props.voucherData &&
+          this.props.voucherData.voucherExpiryResult
+        ) {
+          console.log(this.props.voucherData);
+        }
+      });
+    } else {
+      errors.voucherError = Translations.create_campaigns.voucherCodeRequired;
+      this.setState({ error: errors });
+    }
+  };
 
   handleCommitToBuy = () => {
     this.props.handleSubmit();
@@ -45,6 +81,13 @@ class PaymentStepThree extends Component {
               <button className="blue_button" onClick={this.handleRedeemBtn}>
                 Redeem
               </button>
+              {this.state.error.voucherError ? (
+                <span className="error-msg highlight">
+                  {this.state.error.voucherError}
+                </span>
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className="history-content-wrapper">
@@ -142,11 +185,25 @@ class PaymentStepThree extends Component {
   }
 }
 
+const mapStateToProps = state => ({
+  voucherData: state.voucherData
+});
+
+const mapDispatchToProps = {
+  checkVoucherExpiry
+};
+
 PaymentStepThree.propTypes = {
   handleModalInfoShow: PropTypes.func,
   handleChangeField: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
-  form: PropTypes.any.isRequired
+  form: PropTypes.any.isRequired,
+  checkVoucherExpiry: PropTypes.func,
+  voucherData: PropTypes.any,
+  forThat: PropTypes.any
 };
 
-export default PaymentStepThree;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PaymentStepThree);

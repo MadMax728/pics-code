@@ -1,15 +1,18 @@
 import { api } from "../api";
+import { getAdminsEndPoint, updateAdminEndPoint } from "../lib/constants";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
-
-// const api = apiFactory(baseUrl);
 
 /**
  *
  * @param {*} payload
  */
 
-// BackOffice Dashboard API
+// BackOffice Get Admins API
 export const getAdmins = (payload, header = {}) =>
-  api(baseUrl, header).get("/users/admin/list");
+  api(baseUrl, header).get(getAdminsEndPoint);
+
+// BackOffice update Admin API
+export const updateAdmin = (payload, header = {}) =>
+  api(baseUrl, header).put(updateAdminEndPoint, payload);

@@ -1,9 +1,8 @@
 import { api } from "../api";
+import { getBackOfficeDashboardEndPoint } from "../lib/constants";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
-
-// const api = apiFactory(baseUrl);
 
 /**
  *
@@ -12,4 +11,4 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // BackOffice Dashboard API
 export const getBackOfficeDashboard = (payload, header = {}) =>
-  api(baseUrl, header).get("/newsfeeds/news-feeds");
+  api(baseUrl, header).get(getBackOfficeDashboardEndPoint);

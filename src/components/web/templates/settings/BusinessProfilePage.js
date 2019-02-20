@@ -4,9 +4,10 @@ import { Translations } from "../../../../lib/translations";
 import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { activateBusinessProfile } from "../../../../actions";
+import { activateBusinessProfile, getSearch } from "../../../../actions";
 import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
+import { Button } from "../../../ui-kit";
 
 class BusinessProfilePage extends Component {
   constructor(props) {
@@ -16,32 +17,6 @@ class BusinessProfilePage extends Component {
       userId: ""
     };
   }
-
-  componentDidMount = () => {
-    const storage = Auth.extractJwtFromStorage();
-    window.scrollTo(0, 0);
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    if (userInfo) {
-      this.setState({ userId: userInfo.id });
-    }
-  };
-
-  componentWillReceiveProps = nextProps => {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
-    }
-  };
-
-  handleActivationBusinessProfile = e => {
-    const paramData = { profileId: e.target.id };
-    this.props.activateBusinessProfile(paramData); // API Call
-  };
 
   render() {
     const { userId } = this.state;
@@ -90,13 +65,16 @@ class BusinessProfilePage extends Component {
             </div>
           </div>
           <div className="col-sm-12">
-            <button
+            <Button
               type="button"
               onClick={this.handleActivationBusinessProfile}
               className="gradient-button"
-            >
-              <span id={userId}>{Translations.Business_profile.Activate} </span>
-            </button>
+              text={
+                <span id={userId}>
+                  {Translations.Business_profile.Activate}{" "}
+                </span>
+              }
+            />
           </div>
           <div className="clearfix" />
           <div className="terms-conditions text-center">
@@ -118,6 +96,35 @@ class BusinessProfilePage extends Component {
       </div>
     );
   }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    window.scrollTo(0, 0);
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.setState({ userId: userInfo.id });
+    }
+  };
+
+  componentWillReceiveProps = nextProps => {
+    if (nextProps.searchData.searchKeyword) {
+      this.props.getSearch("");
+    }
+    if (
+      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
+    ) {
+      const searchKeyword = nextProps.searchData.searchKeyword;
+      this.props.history.push(routes.ROOT_ROUTE + "?search=" + searchKeyword);
+    }
+  };
+
+  handleActivationBusinessProfile = e => {
+    const paramData = { profileId: e.target.id };
+    this.props.activateBusinessProfile(paramData); // API Call
+  };
 }
 
 const mapStateToProps = state => ({
@@ -126,13 +133,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  activateBusinessProfile
+  activateBusinessProfile,
+  getSearch
 };
 
 BusinessProfilePage.propTypes = {
   activateBusinessProfile: PropTypes.func,
   searchData: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getSearch: PropTypes.func
 };
 
 export default connect(

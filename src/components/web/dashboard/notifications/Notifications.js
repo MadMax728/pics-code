@@ -1,19 +1,18 @@
 import React, { Component } from "react";
 import Tabs from "react-bootstrap/lib/Tabs";
 import Tab from "react-bootstrap/lib/Tab";
-import { LikeYou, Requests, NotificationsList } from "./notification";
+import { Requests, NotificationsList } from "./notification";
 import { Translations } from "../../../../lib/translations";
 import PropTypes from "prop-types";
 
 class Notifications extends Component {
   render() {
-    const { handleMessage } = this.props;
-
+    const { history, handleToggle } = this.props;
     return (
       <div className="notification-mega-wrapper">
         {" "}
         {/* you can change the className name if you want */}
-        <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
           {/* for Notification Tab */}
           <Tab
             tabClassName="tab-header"
@@ -24,20 +23,10 @@ class Notifications extends Component {
               </p>
             }
           >
-            <NotificationsList />
-          </Tab>
-          {/* for Like you tab */}
-          <Tab
-            tabClassName="tab-header"
-            eventKey={2}
-            title={
-              <p className="tab-title">{Translations.notification.like_you}</p>
-            }
-          >
-            <LikeYou handleMessage={handleMessage} />
+            <NotificationsList history={history} handleToggle={handleToggle} />
           </Tab>
           {/* for Requests tab */}
-          <Tab
+          {/* <Tab
             tabClassName="tab-header"
             eventKey={3}
             title={
@@ -45,7 +34,7 @@ class Notifications extends Component {
             }
           >
             <Requests />
-          </Tab>
+          </Tab> */}
         </Tabs>
       </div>
     );
@@ -53,7 +42,8 @@ class Notifications extends Component {
 }
 
 Notifications.propTypes = {
-  handleMessage: PropTypes.func.isRequired
+  history: PropTypes.any,
+  handleToggle: PropTypes.any
 };
 
 export default Notifications;

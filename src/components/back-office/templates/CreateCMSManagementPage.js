@@ -1,122 +1,254 @@
 import React, { Component } from "react";
-import "../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Link } from "react-router-dom";
-import * as routes from "../../../lib/constants/routes";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
+import { getCMSDetail, updateCMS, createCMS } from "../../../actions";
+
 import { TextEditor } from "../../ui-kit/text-editor";
+
+import { modalType } from "../../../lib/constants/enumerations";
+import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
+import InlineLoading from "../../ui-kit/loading-indicator/InlineLoading";
+import { Input, RadioButton, Button, Label } from "../../ui-kit";
+import { SelectLanguage } from "../../common";
 
 class CreateCMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
+      searchKeyword: this.props.searchData.searchKeyword,      
       form: {
+        id: "",
         title: "",
         url: "",
-        language: "",
-        displal_page: "public",
+        pageLanguage: Translations.languages.english,
+        displayPage: Translations.cms.public,
         description: ""
-      }
+      },
+      isEdit: false
     };
   }
 
-  handleChangeField = event => {
+  handleSelect = (isFor , selected) => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form.pageLanguage = selected.id
     this.setState({ form });
-  };
-
-  // handelSubmit called when click on submit
-  handleSubmit = e => {
-    e.preventDefault();
-  };
+  }
 
   render() {
-    const { form } = this.state;
+    const { form, isEdit } = this.state;
+    const { cmsManagementData } = this.props;
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="create-cms-page-wrapr">
           <div className="page-heading col-xs-12 mar-btm-5">
-            Create new CMS page
+            {isEdit ? Translations.cms.edit : Translations.cms.create}
           </div>
-          <form className="cms-form col-xs-12 ">
+          {
+            cmsManagementData && cmsManagementData.isLoading && <InlineLoading />
+          }
+          <form className="cms-form col-xs-12" onSubmit={this.handleSubmit}>
             <div className="form-row col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Title of page" className="col-xs">
-                  Title of page
-                </label>
-                <input
+                <Label htmlFor="Title of page" className="col-xs" value={Translations.cms.title_of_page} />
+                <Input
                   type="text"
                   name="title"
+                  value={form.title}
                   onChange={this.handleChangeField}
                 />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="URL">URL</label>
-                <input
+                <Label htmlFor="URL" value={Translations.cms.url} />
+                <Input
                   type="text"
                   name="url"
+                  value={form.url}
                   onChange={this.handleChangeField}
                 />
               </div>
             </div>
             <div className="form-row marBtm30 col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Language">Language</label>
-                <select name="language" id="" onBlur={this.handleChangeField}>
-                  <option value="">Item1</option>
-                  <option value="">Item2</option>
-                  <option value="">Item3</option>
-                </select>
+                <Label htmlFor="Language" value={Translations.cms.language} />
+                  <SelectLanguage
+                    value={form.language}
+                    handleSelect={this.handleSelect}
+                  />
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="Display page">Display page</label>
+                <Label htmlFor="Display page" value={Translations.cms.display_page} />
                 <div className="choice-wrapr">
-                  <div className="choice" onChange={this.handleChangeField}>
-                    <input
+                  <div className="choice">
+                    <RadioButton
                       type="radio"
-                      name="displal_page"
-                      value="public"
-                      defaultChecked={form.displal_page === "public"}
+                      name="displayPage"
+                      value={Translations.cms.public}
+                      defaultChecked={form.displayPage === Translations.cms.public}
+                      onChange={this.handleChangeField}
                     />
-                    <label htmlFor="Public">Public</label>
+                    <Label htmlFor="Public" value={Translations.cms.public} />
                   </div>
-                  <div className="choice" onChange={this.handleChangeField}>
-                    <input
+                  <div className="choice">
+                    <RadioButton
                       type="radio"
-                      name="displal_page"
-                      value="default"
-                      defaultChecked={form.displal_page === "default"}
-                    />
-                    <label htmlFor="Default">Default</label>
+                      name="displayPage"
+                      value={Translations.cms.draft}
+                      defaultChecked={form.displayPage === Translations.cms.draft}
+                      onChange={this.handleChangeField}
+                    />  
+                    <Label htmlFor="Draft" value={Translations.cms.draft} />
                   </div>
                 </div>
               </div>
             </div>
             <div className="form-row col-xs-12 res480">
-              <TextEditor />
+              <TextEditor
+                handleContentChange={this.handleContentChange}
+                contentText={form.description || ""}
+              />
             </div>
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
-                <button type="button" className="form-btn">
-                  Cancel
-                </button>
+                <Button 
+                  className="form-btn" 
+                  text={Translations.cms.cancle}
+                />
               </Link>
-              <button type="button" className="form-btn">
-                Preview
-              </button>
-              <button
-                type="button"
+              <Button 
+                className="form-btn" 
+                onClick={this.handlePreview}
+                text={Translations.cms.preview}
+              />
+              <Button 
+                type="submit" 
                 className="form-btn"
-                onClick={this.handleSubmit}
-              >
-                Save
-              </button>
+                text={isEdit ? Translations.cms.update : Translations.cms.save}
+              />
             </div>
           </form>
         </div>
       </div>
     );
   }
+
+  componentDidMount = () => {
+    const isEdit =
+      !!(this.props.match && this.props.match.params.id);
+    this.setState({ isEdit });
+    if (isEdit) {
+      this.props.getCMSDetail(this.props.match.params.id).then(() => {
+        if (
+          this.props.cmsManagementData &&
+          this.props.cmsManagementData.cmsDetail
+        ) {
+          this.setState({
+            form: {
+              ...this.state.form,
+              id: this.props.cmsManagementData.cmsDetail.id,
+              title: this.props.cmsManagementData.cmsDetail.title,
+              url: this.props.cmsManagementData.cmsDetail.url,
+              language: this.props.cmsManagementData.cmsDetail.pageLanguage,
+              display_page: this.props.cmsManagementData.cmsDetail.displayPage,
+              description: this.props.cmsManagementData.cmsDetail.description
+            }
+          });
+        }
+      });
+    }
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
+
+  handleChangeField = event => {
+    console.log(event.values);    
+    const { form } = this.state;
+    form[event.values.name] = event.values.val;
+    this.setState({ form });
+  };
+
+  validationForm = () => {
+    const { form } = this.state;
+    return form.title && form.pageLanguage && form.url && form.description;
+  }
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+    const { form, isEdit } = this.state;
+    if (this.validationForm()) {
+      if (isEdit) {
+        const data = {
+          id: form.id,
+          url: form.url,
+          description: form.description,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
+          title: form.title
+        };
+        this.props.updateCMS(data).then(() => {
+          this.props.history.goBack();
+        });
+      } else {
+        const data = {
+          url: form.url,
+          description: form.description,
+          displayPage: form.displayPage,
+          language: form.pageLanguage,
+          title: form.title
+        };
+        this.props.createCMS(data).then(() => {
+          this.props.history.goBack();
+        });
+      }
+    }
+  };
+
+  handleContentChange = text => {
+    const { form } = this.state;
+    form.description = text === "<p></p>" ? "" : text;;
+    this.setState({ form });
+  };
+
+  handlePreview = () => {
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview, this.state.form);
+  }
 }
 
-export default CreateCMSManagementPage;
+const mapStateToProps = state => ({
+  cmsManagementData: state.cmsManagementData,
+  searchData: state.searchData
+});
+
+const mapDispatchToProps = {
+  getCMSDetail,
+  updateCMS,
+  createCMS
+};
+
+CreateCMSManagementPage.propTypes = {
+  getCMSDetail: PropTypes.func.isRequired,
+  updateCMS: PropTypes.func.isRequired,
+  createCMS: PropTypes.func.isRequired,
+  handleModalInfoDetailsShow: PropTypes.func.isRequired,
+  cmsManagementData: PropTypes.object,
+  match: PropTypes.any,
+  history: PropTypes.any,
+  searchData: PropTypes.any
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateCMSManagementPage);

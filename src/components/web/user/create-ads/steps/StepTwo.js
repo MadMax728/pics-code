@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import * as images from "../../../../../lib/constants/images";
 import PropTypes from "prop-types";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import { Translations } from "../../../../../lib/translations";
+import { RightSidebarModal, Label, ErrorSpan } from "../../../../ui-kit";
 import { SelectDailyBudget } from "../../../../../components/common";
 
 class StepTwo extends Component {
@@ -11,22 +11,38 @@ class StepTwo extends Component {
     super(props);
     this.state = {
       startDate: moment(),
-      endDate: moment()
+      endDate: moment().add(7, "days"),
+      maxClicks: 0
     };
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { maxClicks } = this.props;
+    if (prevState.maxClicks !== maxClicks) {
+      this.setState({ maxClicks });
+    }
   }
 
   handleStartDateChange = date => {
     this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
+    // if (this.props.form.budget) {
+    //   this.props.calculateMaxClicks();
+    // }
   };
 
   handleEndDateChange = date => {
     this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
+    // if (this.props.form.budget) {
+    //   this.props.calculateMaxClicks();
+    // }
   };
 
   render() {
-    const {form, handleSelect } = this.props;
+    const { form, handleSelect, userInfo } = this.props;
+    const { maxClicks } = this.state;
+
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form">
@@ -36,7 +52,7 @@ class StepTwo extends Component {
           <div className="form-group">
             <ul className="options dates">
               <li>
-                <label htmlFor="Start">{Translations.create_ads.start}</label>
+                <Label htmlFor="Start" value={Translations.create_ads.start} />
                 <div className="input-group date">
                   <DatePicker
                     selected={form.startDate}
@@ -60,36 +76,62 @@ class StepTwo extends Component {
                 </div>
               </li>
             </ul>
-            {
-              form.error && form.endDate.diff(form.startDate, 'days') < 0 && (
-                <span className="error-msg highlight">{Translations.error.create_modal.date}</span>
-              )
-            }
-          </div>
-          <div className="form-group">
-            <label htmlFor="Define">
-              {Translations.create_ads.define_daily_budget}
-            </label>
-              <SelectDailyBudget 
-                value={form.budget? form.budget : ""}
-                className=""
-                handleSelect={handleSelect}
+            {form.error && form.endDate.diff(form.startDate, "days") < 0 ? (
+              <ErrorSpan value={Translations.error.create_modal.date} />
+            ) : form.error && form.endDate.diff(form.startDate, "week") <= 0 ? (
+              <ErrorSpan
+                value={Translations.error.create_modal.weekValidation}
               />
-              {
-                form.budget.length === 0 && form.error && (
-                  <span className="error-msg highlight">{Translations.error.create_modal.budget}</span>
-                  )
-              }
+            ) : (
+              form.error &&
+              form.endDate.diff(form.startDate, "month") > 3 && (
+                <ErrorSpan
+                  value={Translations.error.create_modal.monthValidation}
+                />
+              )
+            )}
           </div>
           <div className="form-group">
+            <Label
+              htmlFor="Define"
+              value={Translations.create_ads.define_daily_budget}
+            />
+            <SelectDailyBudget
+              value={form.budget || ""}
+              className=""
+              handleSelect={handleSelect}
+              isFor={"ad"}
+            />
+            {form.budget && form.budget.length === 0 && form.error && (
+              <ErrorSpan value={Translations.error.create_modal.budget} />
+            )}
+          </div>
+          {/* <div className="form-group">
             <label htmlFor="Maximum">
               {Translations.create_ads.maximum_number_of_clicks}
             </label>
             <div className="meter orange nostripes">
-              <span style={{ width: "157px" }} className="filled-strip" />
+              <span
+                style={{ width: `${maxClicks}px` }}
+                className="filled-strip"
+              />
               <span className="number-clicks">
                 {Translations.create_ads.max_1200_clicks}
               </span>
+            </div>
+          </div> */}
+          <div className="form-group">
+            <Label
+              htmlFor="Maximum"
+              value={Translations.create_ads.maximum_number_of_views}
+            />
+            <div className="meter orange nostripes">
+              <p className="applicant-block">
+                <span className="applicant-count">{maxClicks}</span>
+                <span className="applicant-label">
+                  {Translations.create_ads.views}
+                </span>
+              </p>
             </div>
           </div>
           <div className="subtitle">
@@ -103,58 +145,7 @@ class StepTwo extends Component {
             <li>{Translations.create_ads.total_budget_can_not_be_exceeded}</li>
           </ul>
         </div>
-        <div className="col-sm-7 disp-flex create-campaign-feed-wrapper">
-          <div className="feed_wrapper">
-            <div className="feed_header">
-              <div className="no-padding profile_image">
-                <img
-                  src={images.image}
-                  alt="image1"
-                  className="img-circle img-responsive"
-                />
-              </div>
-              <div className="no-padding titles_wrapper">
-                <div className="normal_title">Title of campaigns</div>
-                <div className="secondary_title">Santosh Shinde</div>
-                <div className="grey_title">01.01.2000 in Category</div>
-              </div>
-              <div className="like_wrapper">
-                <img
-                  src={images.blue_heart}
-                  alt={"blue_heart"}
-                  className="pull-right"
-                />
-              </div>
-            </div>
-            <div className="feed_content">
-              <div className="feed_image">
-                <div className="embed-responsive embed-responsive-16by9">
-                  <div className="img-responsive embed-responsive-item">
-                    <img src={images.image} alt="image2" />
-                  </div>
-                </div>
-              </div>
-              <div className="feed_description padding-15">
-                <span className="secondary_title">
-                  {`Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...`}
-                </span>
-              </div>
-            </div>
-            <div className="feed_footer padding-15">
-              <div className="messages">
-                <span className="count">12</span>
-                <img src={images.feed_msg} alt="feed_msg" />
-              </div>
-              <div className="likes">
-                <span className="count">12</span>
-                <img src={images.feed_like} alt="feed_like" />
-              </div>
-              <div className="show_more_options">
-                <div>• • •</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <RightSidebarModal userInfo={userInfo} form={form} isFor="Ads" />
       </div>
     );
   }
@@ -163,7 +154,10 @@ class StepTwo extends Component {
 StepTwo.propTypes = {
   handleDate: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired,
+  userInfo: PropTypes.any,
+  maxClicks: PropTypes.any,
+  calculateMaxClicks: PropTypes.func
 };
 
 export default StepTwo;

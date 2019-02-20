@@ -3,56 +3,50 @@ import MRightUserInput from './MRightUserInput';
 import MRightUserItem from './MRightUserItem';
 import MRightActiveChat from './MRightActiveChat';
 import PropTypes from "prop-types";
-import io from "socket.io-client";
+import * as websocket from '../../../../websocket';
 
 
 class MRightContainer extends Component {
-  
+
     constructor(props, context) {
         super(props, context);
         this.state = {
             message : ''
         }
-        this.socket = io(process.env.REACT_APP_AUTH_BASEURL);
-        //this.socket = io("http://localhost:3146");
-    }    
+    }
 
     onDeleteHistoryClick = () => {
     };
 
-    handleMessageClick = () => {
-    };
-    
     handleChange = e => {
         this.setState({ message: e.target.value });
     };
 
     onMessageSubmit = (content) => {
-        if(!content || !this.props.user || !this.props.user.id || !this.props.me) return;
-        this.socket.emit('communication-message-board-new-message', {
-            recipientId: this.props.user.id,
-            senderId: this.props.me,
-            content
-        });
+        const message =  content ? content.trim() : ''
+        const { user, me } = this.props;
+        if(!message || !user || !user.id || !me) return;
+        websocket.emit(this.props.me, this.props.user.id, message)
     }
 
+    
+
     render() {
+        const { user } = this.props;
         return (
             <div>
-                <MRightUserItem item={this.props.user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
-                <MRightActiveChat items={this.props.messages} user={this.props.user} me={this.props.me} handleMessageClick={this.handleMessageClick} />
-                <MRightUserInput item={this.props.user} onMessageSubmit={this.onMessageSubmit} />
+                <MRightUserItem item={user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
+                <MRightActiveChat user={user}/>
+                <MRightUserInput item={user} onMessageSubmit={this.onMessageSubmit} />
             </div>
         )
     }
 
 }
-  
+
 MRightContainer.propTypes = {
     user: PropTypes.any,
-    me: PropTypes.any,
-    messages: PropTypes.any,
+    me: PropTypes.any
 };
 
 export default MRightContainer;
-  

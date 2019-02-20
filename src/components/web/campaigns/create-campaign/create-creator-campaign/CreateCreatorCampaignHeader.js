@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
+import { Button } from "../../../../ui-kit";
 
 class CreateCreatorCampaignHeader extends Component {
   constructor(props) {
@@ -8,8 +9,46 @@ class CreateCreatorCampaignHeader extends Component {
     this.state = {};
   }
 
+  render() {
+    const { stepIndex, modalTitle, handleSubmit, isFor } = this.props;
+    return (
+      <div className="row">
+        <div className="col-sm-5 modal-title">{/* {modalTitle} */}</div>
+        <div className="col-sm-7 text-right">
+          <Button
+            className="black_button"
+            onClick={this.handleCancle}
+            text={Translations.modal_header.cancle}
+          />
+          {stepIndex !== 0 && (
+            <Button
+              className="black_button"
+              onClick={this.handleBack}
+              text={Translations.modal_header.back}
+            />
+          )}
+          {stepIndex !== 0 && stepIndex < 3 && (
+            <Button
+              className="black_button"
+              onClick={this.handlePreview}
+              text={Translations.modal_header.preview}
+            />
+          )}
+          {stepIndex <= 3 && (
+            <Button
+              className="black_button"
+              onClick={this.handleContinue}
+              text={Translations.modal_header.continue}
+            />
+          )}
+        </div>
+      </div>
+    );
+  }
+
   handleCancle = () => {
     this.props.handleModalHide();
+    this.props.handleResoreState();
   };
 
   handleBack = () => {
@@ -21,48 +60,21 @@ class CreateCreatorCampaignHeader extends Component {
   };
 
   handlePreview = () => {
-    this.props.handlePrivewOpen();
+    // this.props.handlePrivewOpen();
   };
 
   handleContinue = () => {
-    if (this.props.stepIndex < 5) {
+    const { stepIndex, isFor } = this.props;
+    if (stepIndex === 2 && !isFor) {
+      this.props.handleSubmit();
+    }
+    else if(this.props.stepIndex < 5) {
       this.props.handleNext();
-    } else {
+    } 
+    else {
       console.log("data saved code");
     }
   };
-
-  render() {
-    const { stepIndex } = this.props;
-    return (
-      <div className="row">
-        <div className="col-sm-5 modal-title">
-          {Translations.modal_header.create_campaign}
-        </div>
-        <div className="col-sm-7 text-right">
-          <button className="black_button" onClick={this.handleCancle}>
-            {Translations.modal_header.cancle}
-          </button>
-          {stepIndex !== 0 && (
-            <button className="black_button" onClick={this.handleBack}>
-              {Translations.modal_header.back}
-            </button>
-          )}
-          {stepIndex !== 0 &&
-            stepIndex < 3 && (
-              <button className="black_button" onClick={this.handlePreview}>
-                {Translations.modal_header.preview}
-              </button>
-            )}
-          {stepIndex <= 3 && (
-            <button className="black_button" onClick={this.handleContinue}>
-              {Translations.modal_header.continue}
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
 }
 
 CreateCreatorCampaignHeader.propTypes = {
@@ -70,7 +82,11 @@ CreateCreatorCampaignHeader.propTypes = {
   handlePrivewOpen: PropTypes.func.isRequired,
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
-  handlePrev: PropTypes.func
+  handlePrev: PropTypes.func,
+  handleResoreState: PropTypes.func.isRequired,
+  modalTitle: PropTypes.string,
+  handleSubmit: PropTypes.func,
+  isFor: PropTypes.bool
 };
 
 export default CreateCreatorCampaignHeader;

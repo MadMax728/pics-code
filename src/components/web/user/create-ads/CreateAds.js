@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo } from "./steps";
 import PropTypes from "prop-types";
-import {
-  PaymentStepOne,
-  PaymentStepTwo
-} from "../../user/payment/steps";
+import { PaymentStepOne, PaymentStepTwo } from "../../user/payment/steps";
 
 class CreateAds extends Component {
   constructor(props) {
@@ -18,6 +15,7 @@ class CreateAds extends Component {
       handleModalInfoShow,
       forThat,
       form,
+      maxClicks,
       handleChangeField,
       handleSubmit,
       handleDate,
@@ -28,7 +26,11 @@ class CreateAds extends Component {
       handleSelect,
       handleSetState,
       userInfo,
-      handleAddress
+      handleAddress,
+      setVoucherData,
+      calculateMaxClicks,
+      isLoading,
+      isEdit
     } = this.props;
 
     return (
@@ -51,6 +53,9 @@ class CreateAds extends Component {
             handleDate={handleDate}
             form={form}
             handleSelect={handleSelect}
+            userInfo={userInfo}
+            maxClicks={maxClicks}
+            calculateMaxClicks={calculateMaxClicks}
           />
         )}
         {stepIndex === 2 && (
@@ -59,6 +64,7 @@ class CreateAds extends Component {
             handleChangeField={handleChangeField}
             form={form}
             handleAddress={handleAddress}
+            userInfo={userInfo}
           />
         )}
         {stepIndex === 3 && (
@@ -68,6 +74,10 @@ class CreateAds extends Component {
             form={form}
             handleChangeField={handleChangeField}
             handleSubmit={handleSubmit}
+            setVoucherData={setVoucherData}
+            userInfo={userInfo}
+            isLoading={isLoading}
+            isEdit={isEdit}
           />
         )}
       </div>
@@ -90,7 +100,12 @@ CreateAds.propTypes = {
   handleSelect: PropTypes.func.isRequired,
   handleSetState: PropTypes.func.isRequired,
   userInfo: PropTypes.any,
-  handleAddress: PropTypes.func.isRequired
+  handleAddress: PropTypes.func.isRequired,
+  setVoucherData: PropTypes.func,
+  calculateMaxClicks: PropTypes.func,
+  maxClicks: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired,
+  isEdit: PropTypes.bool.isRequired
 };
 
 export default CreateAds;

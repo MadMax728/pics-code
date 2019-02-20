@@ -1,16 +1,23 @@
 import React, { Component } from "react";
-import { CustomBootstrapTable } from "../../ui-kit";
-import { Translations } from "../../../lib/translations";
-import { getVouchers } from "../../../actions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+
+import { getVouchers, addVoucher } from "../../../actions";
+
+import { CustomBootstrapTable, CustomeTableLoader, Input, Button } from "../../ui-kit";
+import { SelectPeriod, SelectAmount, SelectType, SelectNumber } from "../../common";
+
+import * as routes from "../../../lib/constants/routes";
+import { Translations } from "../../../lib/translations";
 
 class AddVoucherPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      vouchers: null,
+      voucherList: null,
+      searchKeyword: this.props.searchData.searchKeyword,      
       form: {
+        id: "",
         voucher_code: "",
         period: "",
         amount: "",
@@ -20,41 +27,134 @@ class AddVoucherPage extends Component {
     };
   }
 
+  render() {
+    const { voucherList } = this.state;
+    const { voucherData } = this.props;
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+        <div className="dashboard-middle-section margin-bottom-50">
+          <div className="normal_title padding-15">
+            {Translations.admin.Add_voucher_code}
+          </div>
+          {voucherList && this.renderVouchers()}
+          {!voucherList && voucherData.isLoading && <CustomeTableLoader />}
+        </div>
+      </div>
+    );
+  }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    this.props.getVouchers().then(() => {
+      if (this.props.voucherData && this.props.voucherData.vouchers) {
+        this.setState({
+          voucherList: this.props.voucherData.vouchers
+        })
+      }
+    });
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
+
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
+
+  validateForm = () => {
+    const { form } = this.state;
+    return form.voucher_code && form.period && form.amount && form.type && form.number
+  }
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
-    const voucher_data = this.state.vouchers;
-    const data = {
-      no: 1,
-      code: this.state.form.voucher_code,
-      period: this.state.form.period,
-      amount: this.state.form.amount,
-      type: this.state.form.type,
-      number: this.state.form.number
-    };
-    voucher_data.push(data);
-    this.setState({
-      vouchers: voucher_data
-    });
+    if (this.validateForm()) {
+      const { form, voucherList } = this.state;
+      const data = {
+        title: form.voucher_code,
+        voucherCode: form.voucher_code,
+        periodId: form.period,
+        typeId: form.type,
+        amountId: form.amount,
+        numberId: form.number
+      }
+
+      this.props.addVoucher(data).then(() => {
+        if (this.props.voucherData && this.props.voucherData.voucher) {
+          const dataAdd = this.props.voucherData.voucher;
+          const indexOf = voucherList.findIndex(voucher => {
+            return voucher.id === form.id;
+          });
+          if (indexOf === -1) {
+            voucherList.push(dataAdd);
+          } else {
+            voucherList.splice(indexOf, 1);
+            voucherList.push(dataAdd);
+          }
+          this.setState({ voucherList, form: { ...this.state.form, id: "", voucher_code: "", period: "", type: "", amount: "", number: "" } });
+        }
+      })
+    }
   };
+
+  handleSelect = (isFor, selected) => {
+    const { form } = this.state;
+    form[isFor] = selected.id;
+    this.setState({ form });
+  }
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        <span className="green-circle" /> Active{" "}
+        <span className={row.isActive ? "green-circle" : "red-circle"} /> Active{" "}
+      </div>
+    );
+  };
+
+  periodFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        {row.periodList && row.periodList.voucherPeriod}
+      </div>
+    );
+  };
+
+  amountFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        {row.amountList && row.amountList.voucherAmount}
+      </div>
+    );
+  };
+
+  numberFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        {row.numberList && row.numberList.voucherNumber}
+      </div>
+    );
+  };
+
+  typeFormatter = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <div key={rowIndex}>
+        {row.typeList && row.typeList.voucherType}
       </div>
     );
   };
 
   codeFormatter = (column, colIndex) => {
     return (
-      <input
+      <Input
         type="text"
         htmlFor="Voucher Code"
         className="res320"
@@ -65,116 +165,96 @@ class AddVoucherPage extends Component {
     );
   };
 
-  periodFormatter = (column, colIndex) => {
+  periodHeaderFormatter = (column, colIndex) => {
+    const { form } = this.state;
     return (
-      <select
-        name="period"
-        id=""
+      <SelectPeriod
+        value={form.period ? form.period : ""}
         className="res320"
-        onBlur={this.handleChangeField}
-      >
-        <option value="">{Translations.admin.Period}</option>
-        <option value="Item1">Item1</option>
-        <option value="Item2">Item2</option>
-      </select>
+        handleSelect={this.handleSelect}
+      />
     );
   };
 
-  amountFormatter = (column, colIndex) => {
+  amountHeaderFormatter = (column, colIndex) => {
+    const { form } = this.state;
     return (
-      <select
-        name="amount"
-        id=""
+      <SelectAmount
+        value={form.amount ? form.amount : ""}
         className="res320"
-        onBlur={this.handleChangeField}
-      >
-        <option value="">amount</option>
-        <option value="Item1">Item1</option>
-        <option value="Item2">Item2</option>
-      </select>
+        handleSelect={this.handleSelect}
+      />
     );
   };
 
-  typeFormatter = (column, colIndex) => {
+  typeHeaderFormatter = (column, colIndex) => {
+    const { form } = this.state;
     return (
-      <select
-        name="type"
-        id=""
+      <SelectType
+        value={form.type ? form.type : ""}
         className="res320"
-        onBlur={this.handleChangeField}
-      >
-        <option value="">{Translations.admin.type}</option>
-        <option value="Item1">Item1</option>
-        <option value="Item2">Item2</option>
-      </select>
+        handleSelect={this.handleSelect}
+      />
     );
   };
 
-  numberFormatter = (column, colIndex) => {
+  numberHeaderFormatter = (column, colIndex) => {
+    const { form } = this.state;
     return (
-      <select
-        name="number"
-        id=""
+      <SelectNumber
+        value={form.number ? form.number : ""}
         className="res320"
-        onBlur={this.handleChangeField}
-      >
-        <option value="">{Translations.admin.Number}</option>
-        <option value="Item1">Item1</option>
-        <option value="Item2">Item2</option>
-      </select>
+        handleSelect={this.handleSelect}
+      />
     );
   };
 
   addFormatter = (column, colIndex) => {
     return (
-      <button onClick={this.handleSubmit}>{Translations.admin.Add}</button>
+      <Button 
+        onClick={this.handleSubmit}
+        text={Translations.admin.Add}
+      />
     );
   };
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
     </span>
   );
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.props.getVouchers().then(()=> {
-      if(this.props.voucherData && this.props.voucherData.vouchers) {
-        this.setState({
-          vouchers: this.props.voucherData.vouchers
-        })
-      }
-    });
-  };
-
   renderVouchers = () => {
-    const { vouchers } = this.state;
+    const { voucherList } = this.state;
     const columns = [
       {
-        dataField: "code",
-        text: Translations.admin.Code,
+        dataField: "voucherCode",
+        text: Translations.admin.code,
         headerFormatter: this.codeFormatter
       },
       {
-        dataField: "period",
-        text: Translations.admin.Period,
-        headerFormatter: this.periodFormatter
+        dataField: "voucherPeriod",
+        text: Translations.admin.period,
+        headerFormatter: this.periodHeaderFormatter,
+        formatter: this.periodFormatter
       },
       {
-        dataField: "amount",
+        dataField: "voucherAmount",
         text: Translations.admin.amount,
-        headerFormatter: this.amountFormatter
+        headerFormatter: this.amountHeaderFormatter,
+        formatter: this.amountFormatter
       },
       {
-        dataField: "type",
+        dataField: "voucherType",
         text: Translations.admin.type,
-        headerFormatter: this.typeFormatter
+        headerFormatter: this.typeHeaderFormatter,
+        formatter: this.typeFormatter
       },
       {
-        dataField: "number",
-        text: Translations.admin.Number,
-        headerFormatter: this.numberFormatter
+        dataField: "voucherNumber",
+        text: Translations.admin.number,
+        headerFormatter: this.numberHeaderFormatter,
+        formatter: this.numberFormatter
       },
       {
         dataField: "status",
@@ -209,22 +289,22 @@ class AddVoucherPage extends Component {
         },
         {
           text: "All",
-          value: vouchers.length
+          value: voucherList.length
         }
       ]
     };
 
     const defaultSorted = [
       {
-        dataField: "username",
+        dataField: "voucherCode",
         order: "desc"
       }
     ];
 
     return (
-      <div className="dashboard-tbl">
+      <div className="dashboard-tbl voucher-table">
             <CustomBootstrapTable
-              data={vouchers}
+              data={voucherList}
               columns={columns}
               striped
               hover
@@ -232,39 +312,31 @@ class AddVoucherPage extends Component {
               condensed
               defaultSorted={defaultSorted}
               pagination={pagination}
-              noDataIndication="Table is Empty"
-              id={"code"}
+              noDataIndication={Translations.table_empty}
+              id={"voucherCode"}
             />
           </div>
     )
   }
 
-  render() {
-    const { vouchers } = this.state;
-    return (
-      <div className="padding-rl-10 middle-section width-80">
-        <div className="dashboard-middle-section margin-bottom-50">
-          <div className="normal_title padding-15">
-            {Translations.admin.Add_voucher_code}
-          </div>
-          {vouchers && this.renderVouchers()}
-        </div>
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({
-  voucherData: state.voucherData
+  voucherData: state.voucherData,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
-  getVouchers
+  getVouchers,
+  addVoucher
 };
 
 AddVoucherPage.propTypes = {
   getVouchers: PropTypes.func.isRequired,
+  addVoucher: PropTypes.func.isRequired,
   voucherData: PropTypes.object,
+  searchData: PropTypes.any,
+  history: PropTypes.any,
 };
 
 export default connect(

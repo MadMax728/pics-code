@@ -14,10 +14,34 @@ export const toTitleCase = str => {
     : "";
 };
 
-export const DateFormat = (date, formatStr = Translations.date_format.date) => {
-  if (date) {
+// call this function, passing-in your date
+function dateToFromNowDaily( myDate, formatStr ) {
+
+  // ensure the date is displayed with today and yesterday
+  return moment( myDate ).calendar( null, {
+      // when the date is closer, specify custom values
+      lastWeek: '[Last] dddd',
+      lastDay:  '[Yesterday]',
+      sameDay:  '[Today]',
+      nextDay:  '[Tomorrow]',
+      nextWeek: formatStr,
+      // when the date is further away, use from-now functionality             
+      sameElse: formatStr
+  });
+}
+
+export const DateFormat = (date, formatStr = Translations.date_format.date, shouldDateFormat = false) => {
+  
+  if(shouldDateFormat && date) {
+
     return moment(date).format(formatStr);
+
+  } else if (date) {
+
+    return dateToFromNowDaily(date, formatStr);
+    
   }
+
   return ""; //required for other components.
 };
 

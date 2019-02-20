@@ -1,11 +1,49 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
+import { Button } from "../../../../ui-kit";
 
 class CreateCompanyCampaignHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+  }
+
+  render() {
+    const { stepIndex, modalTitle } = this.props;
+    return (
+      <div className="row">
+        <div className="col-sm-5 modal-modalTitle">{/* {modalTitle} */}</div>
+        <div className="col-sm-7 text-right">
+          <Button
+            className="black_button"
+            onClick={this.handleCancle}
+            text={Translations.modal_header.cancle}
+          />
+          {stepIndex !== 0 && (
+            <Button
+              className="black_button"
+              onClick={this.handleBack}
+              text={Translations.modal_header.back}
+            />
+          )}
+          {stepIndex !== 0 && stepIndex < 3 && (
+            <Button
+              className="black_button"
+              onClick={this.handlePreview}
+              text={Translations.modal_header.preview}
+            />
+          )}
+          {stepIndex <= 3 && (
+            <Button
+              className="black_button"
+              onClick={this.handleContinue}
+              text={Translations.modal_header.continue}
+            />
+          )}
+        </div>
+      </div>
+    );
   }
 
   handleCancle = () => {
@@ -22,7 +60,7 @@ class CreateCompanyCampaignHeader extends Component {
   };
 
   handlePreview = () => {
-    this.props.handlePrivewOpen();
+    // this.props.handlePrivewOpen();
   };
 
   handleContinue = () => {
@@ -32,38 +70,6 @@ class CreateCompanyCampaignHeader extends Component {
       console.log("data saved code");
     }
   };
-
-  render() {
-    const { stepIndex } = this.props;
-    return (
-      <div className="row">
-        <div className="col-sm-5 modal-title">
-          {Translations.modal_header.create_campaign}
-        </div>
-        <div className="col-sm-7 text-right">
-          <button className="black_button" onClick={this.handleCancle}>
-            {Translations.modal_header.cancle}
-          </button>
-          {stepIndex !== 0 && (
-            <button className="black_button" onClick={this.handleBack}>
-              {Translations.modal_header.back}
-            </button>
-          )}
-          {stepIndex !== 0 &&
-            stepIndex < 3 && (
-              <button className="black_button" onClick={this.handlePreview}>
-                {Translations.modal_header.preview}
-              </button>
-            )}
-          {stepIndex <= 3 && (
-            <button className="black_button" onClick={this.handleContinue}>
-              {Translations.modal_header.continue}
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
 }
 
 CreateCompanyCampaignHeader.propTypes = {
@@ -72,7 +78,8 @@ CreateCompanyCampaignHeader.propTypes = {
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
-  handleResoreState: PropTypes.func.isRequired
+  handleResoreState: PropTypes.func.isRequired,
+  modalTitle: PropTypes.string.isRequired
 };
 
 export default CreateCompanyCampaignHeader;

@@ -22,6 +22,48 @@ const voucherReducer = (state = initialState.voucherData, action) => {
         isLoading: false,
         error: action.payload
       };
+
+    // ADD VOUCHER
+    case types.ADD_VOUCHER_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.ADD_VOUCHER_SUCCEEDED:
+      return {
+        ...state,
+        voucher: action.payload,
+        isLoading: false
+      };
+    case types.ADD_VOUCHER_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+
+    // CHECK EXPIRY VOUCHER
+    case types.CHECK_VOUCHER_EXPIRY_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.CHECK_VOUCHER_EXPIRY_SUCCEEDED:
+      return {
+        ...state,
+        voucherExpiryResult: action.payload,
+        isLoading: false
+      };
+    case types.CHECK_VOUCHER_EXPIRY_FAILED:
+      return {
+        ...state,
+        voucherExpiryResult: [],
+        isLoading: false,
+        error: action.payload
+      };
+
     default:
       return state;
   }

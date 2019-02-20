@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
-import { ThreeDots } from "../../ui-kit";
+import { ThreeDots, Button } from "../../ui-kit";
 import StatusCard from "../StatusCard";
 import ReportCard from "../ReportCard";
+import ReviewCard from "../ReviewCard";
 import BudgetCard from "../BudgetCard";
 
 const AdCardFooter = ({
@@ -15,40 +16,37 @@ const AdCardFooter = ({
   handleFavorite,
   isLoading,
   isBudget,
-  isReport
+  isReport,
+  isReview
 }) => {
   const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
         <span className="count">{ad.commentCount}</span>
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
           id={ad.createdBy}
-          onKeyDown={handleCommentsSections}
           disabled={isLoading}
-        >
-          <img
+          text={<img
             src={images.comment}
             alt="company-comments"
             role="presentation"
-          />
-        </button>
+          />}
+        />
       </div>
       <div className="likes" role="article">
         <span className="count">{ad.likeCount}</span>
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
           id={ad.id}
-          onKeyDown={handleFavorite}
           disabled={isLoading}
-        >
-          <img src={favorite_icon} alt="like" role="presentation" />
-        </button>
+          text={<img src={favorite_icon} alt="like" role="presentation" />}
+        />
       </div>
       <div className="show_more_options">
         <ThreeDots
@@ -70,10 +68,12 @@ const AdCardFooter = ({
         <StatusCard
           item={ad}
           route={`${routes.BASE_SETTINGS_AD_STATISTICS_ROUTE}`}
+          isFor="ad"
         />
       )}
       {ad && isBudget && <BudgetCard item={ad} />}
       {ad && isReport && <ReportCard item={ad} />}
+      {ad && isReview && <ReviewCard item={ad} />}
     </div>
   );
 };
@@ -86,7 +86,8 @@ AdCardFooter.propTypes = {
   renderReportTips: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   isBudget: PropTypes.bool,
-  isReport: PropTypes.bool
+  isReport: PropTypes.bool,
+  isReview: PropTypes.bool
 };
 
 export default AdCardFooter;

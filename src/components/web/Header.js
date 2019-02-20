@@ -5,12 +5,14 @@ import RouteNavItem from "../RouteNavItem";
 import * as routes from "../../lib/constants/routes";
 import { Link } from "react-router-dom";
 import NavDropdown from "react-bootstrap/lib/NavDropdown";
-import NavItem from "react-bootstrap/lib/NavItem";
 import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
 import { getSearch } from "../../actions";
 import { connect } from "react-redux";
+import * as websocket from "../../websocket";
+import { Auth } from "../../auth";
+import { Button, Input } from "../ui-kit";
 
 class Header extends Component {
   constructor(props) {
@@ -19,8 +21,24 @@ class Header extends Component {
       navExpanded: false,
       userNavExpanded: false,
       offsetHeight: 0,
-      searchText: ""
+      searchText: "",
+      messageCount: 0,
+      menuIsOpened: false
     };
+
+    this.handleToggle = this.handleToggle.bind(this);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo && userInfo.id) {
+      websocket.messagecount(userInfo.id, count => {
+        if (count && count.messageCount) {
+          this.setState({ messageCount: count.messageCount });
+        }
+      });
+    }
   }
 
   componentDidMount = () => {
@@ -33,6 +51,11 @@ class Header extends Component {
   }
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
+  };
+
+  handleToggle = () => {
+    const { menuIsOpened } = this.state;
+    this.setState({ menuIsOpened: !menuIsOpened });
   };
 
   toggleUserNav = () => {
@@ -76,7 +99,7 @@ class Header extends Component {
 
   onInputChange = e => {
     this.setState({
-      searchText: e.target.value
+      searchText: e.values.val
     });
   };
 
@@ -89,15 +112,125 @@ class Header extends Component {
   };
 
   render() {
+    const { messageCount, searchText } = this.state;
+
+    let messageCountView = messageCount;
+    if (messageCount < 100) {
+      messageCountView = messageCount;
+    } else if (messageCount > 99) {
+      messageCountView = "99+";
+    }
     return (
-      <header className={this.state.offsetHeight > 250 ? "fixed" : ""}>
+      // <header className={this.state.offsetHeight > 0 ? "fixed" : ""}>
+      //   <nav className="navbar navbar-default">
+      //     <div className="container">
+      //       <div className="row">
+      //         <div className="navbar-header">
+      //           <Button
+      //             type="button"
+      //             className="navbar-toggle collapsed"
+      //             text={<img src={images.menu} alt="Menu" />}
+      //           />
+      //           <Link to={routes.ROOT_ROUTE} className="navbar-brand">
+      //             <img src={images.headerLogo} alt="logo" />
+      //           </Link>
+      //         </div>
+      //         <div
+      //           className="collapse navbar-collapse"
+      //           id="bs-example-navbar-collapse-1"
+      //         >
+      //           <form className="navbar-form navbar-left">
+      //             <div className="input-group search-input-group">
+      //               <Input
+      //                 type="text"
+      //                 className="form-control"
+      //                 placeholder="Search"
+      //                 onChange={this.onInputChange}
+      //                 value={searchText}
+      //               />
+      //               <span className="input-group-addon">
+      //                 <Button
+      //                   onClick={this.onSearchClick}
+      //                   text={
+      //                     <span className="search_icon">
+      //                       <img src={images.search} alt="Search" />
+      //                     </span>
+      //                   }
+      //                 />
+      //               </span>
+      //             </div>
+      //           </form>
+      //           <ul className="nav navbar-nav pull-right">
+      //             <RouteNavItem
+      //               to={routes.ROOT_ROUTE}
+      //               className={`menu_home`}
+      //               activeAtRoot
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               <span>{Translations.navigation.home}</span>
+      //             </RouteNavItem>
+      //             <RouteNavItem
+      //               to={`/campaign/company`}
+      //               className={`menu_public`}
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               <span>{Translations.navigation.campaign}</span>
+      //             </RouteNavItem>
+
+      //             <RouteNavItem
+      //               to={routes.MESSAGES_ROUTE}
+      //               className={`menu_messages`}
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               {messageCount && messageCount > 0 ? (
+      //                 <span className="badge badge-danger">
+      //                   {messageCountView}
+      //                 </span>
+      //               ) : (
+      //                 ""
+      //               )}
+      //               <span>{Translations.navigation.messages}</span>
+      //             </RouteNavItem>
+
+      //             <NavDropdown
+      //               noCaret
+      //               title={<span>{Translations.navigation.notifications}</span>}
+      //               id="basic-nav-dropdown"
+      //               className={`menu_notifications`}
+      //               open={this.state.menuIsOpened}
+      //               onToggle={this.handleToggle}
+      //             >
+      //               <Notifications
+      //                 handleMessage={this.handleMessage}
+      //                 history={this.props.history}
+      //                 handleToggle={this.handleToggle}
+      //               />
+      //             </NavDropdown>
+
+      //             <RouteNavItem
+      //               to={routes.NEWS_FEED_ROUTE}
+      //               className={`menu_profile`}
+      //               closeMenu={this.toggleNav}
+      //             >
+      //               <span>{Translations.navigation.profile}</span>
+      //             </RouteNavItem>
+      //           </ul>
+      //         </div>
+      //       </div>
+      //     </div>
+      //   </nav>
+      // </header>
+
+      <header className="fixed">
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">
               <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed">
-                  <img src={images.menu} alt="Menu" />
-                </button>
+                <Button
+                  type="button"
+                  className="navbar-toggle collapsed"
+                  text={<img src={images.menu} alt="Menu" />}
+                />
                 <Link to={routes.ROOT_ROUTE} className="navbar-brand">
                   <img src={images.headerLogo} alt="logo" />
                 </Link>
@@ -108,19 +241,22 @@ class Header extends Component {
               >
                 <form className="navbar-form navbar-left">
                   <div className="input-group search-input-group">
-                    <input
+                    <Input
                       type="text"
                       className="form-control"
                       placeholder="Search"
                       onChange={this.onInputChange}
-                      value={this.state.searchText}
+                      value={searchText}
                     />
                     <span className="input-group-addon">
-                      <button onClick={this.onSearchClick}>
-                        <span className="search_icon">
-                          <img src={images.search} alt="Search" />
-                        </span>
-                      </button>
+                      <Button
+                        onClick={this.onSearchClick}
+                        text={
+                          <span className="search_icon">
+                            <img src={images.search} alt="Search" />
+                          </span>
+                        }
+                      />
                     </span>
                   </div>
                 </form>
@@ -141,22 +277,34 @@ class Header extends Component {
                     <span>{Translations.navigation.campaign}</span>
                   </RouteNavItem>
 
-                  <NavItem
+                  <RouteNavItem
+                    to={routes.MESSAGES_ROUTE}
                     className={`menu_messages`}
-                    nocaret={"true"}
-                    onClick={this.handleModalMessage}
+                    closeMenu={this.toggleNav}
                   >
-                    <span className="badge badge-danger">100</span>
+                    {messageCount && messageCount > 0 ? (
+                      <span className="badge badge-danger">
+                        {messageCountView}
+                      </span>
+                    ) : (
+                      ""
+                    )}
                     <span>{Translations.navigation.messages}</span>
-                  </NavItem>
+                  </RouteNavItem>
 
                   <NavDropdown
                     noCaret
                     title={<span>{Translations.navigation.notifications}</span>}
                     id="basic-nav-dropdown"
                     className={`menu_notifications`}
+                    open={this.state.menuIsOpened}
+                    onToggle={this.handleToggle}
                   >
-                    <Notifications handleMessage={this.handleMessage} />
+                    <Notifications
+                      handleMessage={this.handleMessage}
+                      history={this.props.history}
+                      handleToggle={this.handleToggle}
+                    />
                   </NavDropdown>
 
                   <RouteNavItem
@@ -172,6 +320,7 @@ class Header extends Component {
           </div>
         </nav>
       </header>
+      
     );
   }
 }

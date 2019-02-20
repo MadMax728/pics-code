@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Translations } from "../../../../lib/translations";
+import { Button } from "../../../ui-kit";
 
 class Error extends Component {
   constructor(props) {
@@ -19,9 +21,9 @@ class Error extends Component {
           {modalInfoMsg}
         </div>
         <div className="col-sm-12">
-          <button className="filled_button" onClick={this.handleModalHides}>
-            Continue
-          </button>
+          <Button className="filled_button" onClick={this.handleModalHides}
+            text={Translations.modal_header.continue}
+          />
         </div>
       </div>
     );
@@ -30,7 +32,6 @@ class Error extends Component {
 
 Error.propTypes = {
   handleModalInfoHide: PropTypes.func,
-  handleModalHide: PropTypes.func,
   modalInfoMsg: PropTypes.string
 };
 

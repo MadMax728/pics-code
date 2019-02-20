@@ -2,16 +2,32 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getNewsFeed, getUser } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard, AdCard, MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
 
 class NewsFeedPage extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      isPrivate: false
-    };
+    this.state = { isPrivate: false, newsFeedList: this.props };
+  }
+
+  render() {
+    const { isLoading } = this.props;
+    const { newsFeedList } = this.state; /* isPrivate*/
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {newsFeedList &&
+          newsFeedList.length > 0 &&
+          !isLoading &&
+          this.renderNewsFeedList()}
+        {isLoading && <CampaignLoading />}
+        {!isLoading &&
+          (!newsFeedList || (newsFeedList && newsFeedList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
+      </div>
+    );
   }
 
   componentDidMount = () => {
@@ -27,15 +43,23 @@ class NewsFeedPage extends Component {
             "getNewsFeedOther",
             this.props.userDataByUsername.user.data.id
           );
-          this.setState({
-            isPrivate: this.props.userDataByUsername.user.data.isPrivate
-              ? this.props.userDataByUsername.user.data.isPrivate
-              : false
-          });
+          // this.setState({
+          //   isPrivate: this.props.userDataByUsername.user.data.isPrivate
+          //     ? this.props.userDataByUsername.user.data.isPrivate
+          //     : false
+          // });
         }
       });
     } else {
-      this.props.getNewsFeed("getNewsFeedOwner");
+      this.props.getNewsFeed("getNewsFeedOwner").then(() => {
+        if (this.props.newsFeedList) {
+          this.setState({
+            newsFeedList: this.props.newsFeedList.filter(
+              e => e.isActive === true
+            )
+          });
+        }
+      });
     }
   };
 
@@ -53,21 +77,43 @@ class NewsFeedPage extends Component {
               "getNewsFeedOther",
               this.props.userDataByUsername.user.data.id
             );
-            this.setState({
-              isPrivate: this.props.userDataByUsername.user.data.isPrivate
-                ? this.props.userDataByUsername.user.data.isPrivate
-                : false
-            });
+            // this.setState({
+            //   isPrivate: this.props.userDataByUsername.user.data.isPrivate
+            //     ? this.props.userDataByUsername.user.data.isPrivate
+            //     : false
+            // });
           }
         });
       } else {
-        this.props.getNewsFeed("getNewsFeedOwner");
+        this.props.getNewsFeed("getNewsFeedOwner").then(() => {
+          if (this.props.newsFeedList) {
+            this.setState({
+              newsFeedList: this.props.newsFeedList.filter(
+                e => e.isActive === true
+              )
+            });
+          }
+        });
       }
     }
   }
 
+  handleRefresh = () => {};
+
+  handleParticipantFilterList = data => {
+    const { newsFeedList } = this.state;
+    if (newsFeedList) {
+      this.setState({
+        newsFeedList: newsFeedList.filter(
+          e => e.id !== data.id && e.isActive === true
+        )
+      });
+    }
+  };
+
   renderNewsFeedList = () => {
-    const { newsFeedList } = this.props;
+    const { newsFeedList } = this.state;
+    const { handleModalInfoShow, handleModalShow } = this.props;
     return newsFeedList.map(newsFeed => {
       return (
         <div key={newsFeed.id}>
@@ -75,9 +121,19 @@ class NewsFeedPage extends Component {
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.mediaPost && (
-              <MediaCard item={newsFeed} isParticipant={false} isDescription />
+              <MediaCard
+                item={newsFeed}
+                isParticipant={false}
+                handleFilterList={this.handleParticipantFilterList}
+                isDescription
+                handleModalShow={handleModalShow}
+              />
             )}
           {newsFeed.mediaUrl &&
+            newsFeed.postType &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign && (
@@ -88,9 +144,14 @@ class NewsFeedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
+            newsFeed.typeContent &&
+            newsFeed.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign && (
@@ -101,13 +162,21 @@ class NewsFeedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard item={newsFeed} isParticipant isDescription />
+              <MediaCard
+                item={newsFeed}
+                isParticipant
+                handleFilterList={this.handleParticipantFilterList}
+                isDescription
+                handleModalShow={handleModalShow}
+              />
             )}
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
@@ -118,23 +187,13 @@ class NewsFeedPage extends Component {
                 isDescription
                 isInformation={false}
                 isStatus={false}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>
       );
     });
   };
-
-  render() {
-    const { newsFeedList, isLoading } = this.props;
-    const { isPrivate } = this.state;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {newsFeedList && !isLoading && !isPrivate && this.renderNewsFeedList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 NewsFeedPage.propTypes = {
@@ -143,7 +202,9 @@ NewsFeedPage.propTypes = {
   getUser: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   newsFeedList: PropTypes.any,
-  userDataByUsername: PropTypes.any
+  userDataByUsername: PropTypes.any,
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

@@ -10,46 +10,25 @@ class ShareModal extends Component {
   }
 
   render() {
-    const { handleModalInfoHide, modalInfoShow } = this.props;
+    const { handleModalInfoHide, modalInfoShow, data } = this.props;
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade share-popup"}
         header={false}
         footer={false}
         modalShow={modalInfoShow}
-        closeBtn={false}
+        closeBtn
         handleModalHide={handleModalInfoHide}
-        modalBodyContent={<Share handleModalInfoHide={handleModalInfoHide} />}
+        modalBodyContent={<Share shareUrl={`${data.url}`} title={`Picstagraph`} handleModalInfoHide={handleModalInfoHide} />}
       />
-      // <ul className="share-side-popup">
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-facebook"></span>
-      //      </Link>
-      //   </li>
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-instagram"></span>
-      //      </Link>
-      //   </li>
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-youtube"></span>
-      //      </Link>
-      //   </li>
-      //   <li className="share-side-popup-item">
-      //     <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
-      //       <span className="fa fa-twitter"></span>
-      //      </Link>
-      //   </li>
-      // </ul>
     );
   }
 }
 
 ShareModal.propTypes = {
   handleModalInfoHide: PropTypes.func,
-  modalInfoShow: PropTypes.bool
+  modalInfoShow: PropTypes.bool,
+  data: PropTypes.any
 };
 
 export default ShareModal;

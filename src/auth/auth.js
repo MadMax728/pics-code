@@ -1,3 +1,5 @@
+import * as images from "../lib/constants/images";
+
 /**
  * check user is authenticated or not
  */
@@ -125,15 +127,17 @@ export const clearTokensFromStorage = () => {
  * save jwt in storage
  */
 export const saveJwtToStorage = authResponse => {
+
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
+
+  // Change due to reflected in back-office login
   if (
     authResponse.email &&
     authResponse.username &&
-    authResponse.language &&
     authResponse.id &&
-    authResponse.userType &&
+    authResponse.role &&
     authResponse.profileUrl
   ) {
     localStorage.setItem(
@@ -141,13 +145,15 @@ export const saveJwtToStorage = authResponse => {
       JSON.stringify({
         email: authResponse.email,
         username: authResponse.username,
-        language: authResponse.language,
-        profileUrl: authResponse.profileUrl,
-        userType: authResponse.userType,
+        language: authResponse.language || "English",
+        profileUrl:authResponse.profileUrl || images.image,
+        userType: authResponse.userType || "creator",
+        role: authResponse.role,
         id: authResponse.id
       })
     );
   }
+
 
   if (authResponse.hasOwnProperty("isAdmin")) {
     localStorage.setItem("is_admin", authResponse.isAdmin);

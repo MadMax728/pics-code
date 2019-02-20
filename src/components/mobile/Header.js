@@ -13,12 +13,36 @@ export default class Header extends Component {
     };
   }
 
+  render() {
+    return (
+      <header>
+        <div className="mobile_logo">
+          <Link to={routes.ROOT_ROUTE}>
+            <img
+              src={images.mobileHeaderLogo}
+              width="30"
+              height="30"
+              alt="logo"
+            />
+          </Link>
+        </div>
+
+        <div className="mobile_intro_text">
+          <p>{Translations.app_name}</p>
+          <p>{Translations.offen}</p>
+        </div>
+      </header>
+    );
+  }
+
   componentDidMount = () => {
     document.addEventListener("click", this.handleOutsideClick);
   };
+
   componenWillUnmount = () => {
     document.removeEventListener("click", this.handleOutsideClick);
   };
+
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
   };
@@ -47,25 +71,4 @@ export default class Header extends Component {
     this.toggleUserNav();
   };
 
-  render() {
-    return (
-      <header>
-        <div className="mobile_logo">
-          <Link to={routes.ROOT_ROUTE}>
-            <img
-              src={images.mobileHeaderLogo}
-              width="30"
-              height="30"
-              alt="logo"
-            />
-          </Link>
-        </div>
-
-        <div className="mobile_intro_text">
-          <p>{Translations.app_name}</p>
-          <p>{Translations.offen}</p>
-        </div>
-      </header>
-    );
-  }
 }

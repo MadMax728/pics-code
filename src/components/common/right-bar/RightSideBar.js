@@ -2,40 +2,18 @@ import React, { Component } from "react";
 import { Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
-import { Languages, RightAbout } from "./";
+import { RightAbout } from "./";
 import { FavouriteCampaigns } from "../../../components/web/campaigns";
 import { Community } from "../../../components/web/dashboard";
 import {
   SettingCampaignRight,
   SettingAdsRight
 } from "../../../components/web/templates/settings";
+import { Languages } from "../../common";
 
 class RightSideBar extends Component {
-  userLanguage = () => {
-    // here we have to switch language
-    return (
-      <div>
-        <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
-        <RightAbout />
-      </div>
-    );
-  };
-
-  SettingCampaignRight = () => {
-    return (
-      <SettingCampaignRight handleModalShow={this.props.handleModalShow} />
-    );
-  };
-
-  SettingAdsRight = () => {
-    return <SettingAdsRight handleModalShow={this.props.handleModalShow} />;
-  };
-
-  handleCommunity = () => {
-    return <Community handleMessageBar={this.props.handleMessageBar} />;
-  };
-
   render() {
+
     return (
       <div>
         {/* ,,,,,, FavouriteCampaigns ...... */}
@@ -58,8 +36,15 @@ class RightSideBar extends Component {
           exact
           component={FavouriteCampaigns}
         />
+
         <Route
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
+          exact
+          component={FavouriteCampaigns}
+        />
+
+        <Route
+          path={routes.CAMPAIGN_INFORMATION_ROUTE}
           exact
           component={FavouriteCampaigns}
         />
@@ -147,6 +132,31 @@ class RightSideBar extends Component {
       </div>
     );
   }
+
+  userLanguage = () => {
+    // here we have to switch language
+    return (
+          <div>
+              <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
+              <RightAbout />
+          </div>
+    
+    );
+  };
+
+  SettingCampaignRight = () => {
+    return (
+      <SettingCampaignRight handleModalShow={this.props.handleModalShow} />
+    );
+  };
+
+  SettingAdsRight = () => {
+    return <SettingAdsRight handleModalShow={this.props.handleModalShow} />;
+  };
+
+  handleCommunity = () => {
+    return <Community handleMessageBar={this.props.handleMessageBar} />;
+  };
 }
 
 RightSideBar.propTypes = {

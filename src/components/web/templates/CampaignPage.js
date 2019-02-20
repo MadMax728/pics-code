@@ -2,49 +2,91 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCampaigns, getSearch } from "../../../actions";
-import { CampaignLoading } from "../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../ui-kit";
 import { CampaignCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
+import { search } from "../../../lib/utils/helpers";
 
 class CampaignPage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      type: props.type
-    };
+    this.state = { type: props.type, campaignList: null };
+  }
+
+  render() {
+    let { campaignList } = this.state;
+    const { isLoading, searchData } = this.props;
+    campaignList = search(campaignList, "userName", searchData.searchKeyword);
+
+    return (
+      <div className={"padding-rl-10 middle-section"}>
+        {campaignList && !isLoading && this.renderCampaignList()}
+        {isLoading && <CampaignLoading />}
+        {!isLoading &&
+          (!campaignList || (campaignList && campaignList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
+      </div>
+    );
   }
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    const data = { userType: this.state.type };
-    this.props.getCampaigns("getCampaignType", data);
+    this.handleRefresh();
+    this.handleCampeignList();
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (this.state.type !== nextProps.type) {
-      const data = { userType: nextProps.type };
-      this.props.getCampaigns("getCampaignType", data);
-      this.setState({ type: nextProps.type });
-      if (nextProps.searchData.searchKeyword) {
-        this.props.getSearch("");
-      }
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.type !== prevState.type) {
+      return {
+        type: nextProps.type
+      };
     }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      const data = { userType: nextProps.type, isSearch: searchKeyword };
-      this.props.getCampaigns("getCampaignType", data);
-      this.setState({ type: nextProps.type });
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { type } = this.state;
+    if (prevState.type !== type) {
+      const data = { userType: type };
+      this.props.getCampaigns("getCampaignType", data).then(() => {
+        const { campaignList } = this.props;
+        this.setState({ campaignList });
+      });
+      this.props.getSearch("");
     }
   }
 
+  handleCampeignList = () => {
+    const data = {
+      userType: this.state.type
+    };
+    this.props.getCampaigns("getCampaignType", data).then(() => {
+      const { campaignList } = this.props;
+      this.setState({ campaignList });
+    });
+  };
+
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.handleCampeignList();
+    }
+  };
+
   renderCampaignList = () => {
-    const { campaignList } = this.props;
+    let { campaignList } = this.state;
+    const { searchData, handleModalInfoShow, handleModalShow } = this.props;
+    campaignList = search(campaignList, "userName", searchData.searchKeyword);
+
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
           {campaign.mediaUrl &&
+            campaign.typeContent &&
+            campaign.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video &&
             (campaign.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign ||
               campaign.postType.toLowerCase() ===
@@ -56,22 +98,14 @@ class CampaignPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>
       );
     });
   };
-
-  render() {
-    const { campaignList, isLoading } = this.props;
-    return (
-      <div className={"padding-rl-10 middle-section"}>
-        {campaignList && !isLoading && this.renderCampaignList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 CampaignPage.propTypes = {
@@ -80,7 +114,9 @@ CampaignPage.propTypes = {
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

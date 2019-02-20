@@ -59,6 +59,22 @@ export const placeholder_pic = `${
   process.env.REACT_APP_CDN_URL
 }/images/placeholder_pic.png`;
 
+export const no_data_pic = `${
+  process.env.REACT_APP_CDN_URL
+}/images/no-data.png`;
+
+export const no_community_pic = `${
+  process.env.REACT_APP_CDN_URL
+}/images/no-community.png`;
+
+export const no_campaign_pic = `${
+  process.env.REACT_APP_CDN_URL
+}/images/no-campaigns.png`;
+
+export const no_record_found = `${
+  process.env.REACT_APP_CDN_URL
+}/images/no-records.png`;
+
 export const campaign1 = `${process.env.REACT_APP_CDN_URL}/campaigns/1.jpg`;
 
 export const campaign2 = `${process.env.REACT_APP_CDN_URL}/campaigns/2.jpg`;

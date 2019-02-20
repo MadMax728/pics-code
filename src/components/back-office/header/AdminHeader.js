@@ -1,10 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 
-class AdminHeader extends Component {
-  render() {
+const AdminHeader = () => {
     return (
       <header>
         <div className="custom-container">
@@ -16,7 +15,6 @@ class AdminHeader extends Component {
         </div>
       </header>
     );
-  }
 }
 
 export default AdminHeader;

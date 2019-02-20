@@ -1,80 +1,52 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../../lib/constants/images";
-import { DateFormat } from "../../../Factory";
+import { Translations } from "../../../../lib/translations";
+import MessagesLazyList from './MessagesLazyList';
 
-const MRightActiveChat = (
-    { 
-        items,
-        user,
-        me,
-        handleMessageClick
-    }) => {
-        const renderMessages = () => {
-            
-            if(!items || !items.length){
-                return '';
-            }            
-            return items.map((item) => (
-                <div key={item.id}> 
-                    <div className="date">{ DateFormat(item.createdAt) }</div>
-                    <div>
-                    { me === item.senderId && (
-                        <div className="reply"
-                            role="presentation"
-                            onKeyPress={handleMessageClick}
-                            onClick={handleMessageClick}>
-                             { item.content }
-                             <span className="time">{ DateFormat(item.createdAt) }</span>
-                        </div>
-                    )}
+class MRightActiveChat extends Component { 
+    
+    constructor(){
+        super();
+        this.state = {
+            count : 0
+        }
+    }
 
-                     { me !== item.senderId && (
-                        <div className="response"
-                            role="presentation"
-                            onKeyPress={handleMessageClick}
-                            onClick={handleMessageClick}>
-                             { item.content }
-                             <span className="time">{ DateFormat(item.createdAt) }</span>
-                        </div>
-                    )}
-                </div>
-                </div>
-            ));
-        };
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.user !== this.props.user) {
+            this.setState({ count: 0 })
+        }
+    }
+    
+
+    trackScrolling = () => {
+        const wrappedElement = document.getElementById("header-chat-"+this.props.user.id);
+        if (wrappedElement && (wrappedElement.scrollTop === wrappedElement.scrollLeft)) {
+            this.setState({ count: this.state.count + 1 })
+        }
+    };
+
+    render() {
+        const { user } = this.props;
+        const { count } = this.state;
         return (
-            <div className={"active-chat"}>
-                {
-                    user && user.id ? (
-                        renderMessages()
-                    ) : (
-                        <div className="full-width">
-                            <div className="card">
-                               <h6>You are ready to chat ..</h6>
-                               <img src={images.profile_pic} alt="message"/>
-                             </div>
-                        </div>
-                    )
-                }
-            </div>
+            <div onScroll={this.trackScrolling} className={"active-chat"} id={"header-chat-"+user.id}>
+            {
+                user && user.id ? (
+                    <MessagesLazyList user={user} count={count}/>
+                ) : (
+                    <div className="full-width text-center">
+                         <h6>{Translations.messages_modal.ready}</h6>
+                    </div>
+                )
+            }
+        </div>
         )
-};
-
+    }
+} 
 
 MRightActiveChat.propTypes = {
-    items: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          content: PropTypes.any,
-          createdAt: PropTypes.any,
-          updatedAt: PropTypes.any,
-          recipientId: PropTypes.any,
-          senderId: PropTypes.any,
-        })
-    ),
-    handleMessageClick: PropTypes.func,
-    user:PropTypes.any,
-    me: PropTypes.string.isRequired,
+    user: PropTypes.any
 };
   
 export default MRightActiveChat;

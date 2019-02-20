@@ -15,20 +15,33 @@ class OfferTags extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({suggestionsOfferTagList: []})
+  render() {
+    const { suggestionsOfferTagList } = this.state;
+    const { value } = this.props;
+    return (
+      <Tags
+        value={value}
+        suggestion={suggestionsOfferTagList}
+        handleAddition={this.handleOfferTagChange}
+        handleDelete={this.handleOfferTagDelete}
+      />
+    );
   }
 
   componentDidMount = () => {
     this.props.getOfferTag().then(() => {
-      if(this.props.offerTags) {
+      if (this.props.offerTags) {
         this.setState({
           suggestionsOfferTagList: this.props.offerTags
         });
       }
     });
   }
-  
+
+  componentWillUnmount = () => {
+    this.setState({ suggestionsOfferTagList: [] })
+  }
+
   handleOfferTagDelete = id => {
     this.props.handleOfferTagDelete(id);
   };
@@ -43,8 +56,8 @@ class OfferTags extends Component {
       const tagName = {
         offerTagName: tag.text
       }
-      this.props.addOfferTag(tagName).then(()=> {
-        if(this.props.tags && this.props.tags.addedOfferTags) {
+      this.props.addOfferTag(tagName).then(() => {
+        if (this.props.tags && this.props.tags.addedOfferTags) {
           this.props.handleOfferTagChange(this.props.tags.addedOfferTags.id, this.props.tags.addedOfferTags)
         }
       })
@@ -53,18 +66,6 @@ class OfferTags extends Component {
     }
   };
 
-  render() {
-    const { suggestionsOfferTagList } = this.state;
-    const { value } = this.props;
-    return (
-        <Tags
-          value={value}
-          suggestion={suggestionsOfferTagList}
-          handleAddition={this.handleOfferTagChange}
-          handleDelete={this.handleOfferTagDelete}
-        />
-    );
-  }
 }
 
 const mapStateToProps = state => ({

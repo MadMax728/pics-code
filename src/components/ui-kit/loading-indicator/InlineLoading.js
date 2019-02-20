@@ -3,42 +3,18 @@ import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
 class InlineLoading extends React.Component {
-  static propTypes = {
-    message: PropTypes.string
-  };
-
-  static defaultProps = {
-    message: Translations.loading_messages.loading_with_ellipsis
-  };
-
+  
   state = {
     isVisible: false
   };
 
-  delayShowing = () => {
-    this.timeout = setTimeout(() => {
-      this.setState({ isVisible: true });
-    }, 250);
-  };
-
-  componentDidMount = () => {
-    this.delayShowing();
-  };
-
-  componentWillUnmount = () => {
-    if (this.timeout) {
-      clearInterval(this.timeout);
-    }
-  };
-
   render() {
-    const { message } = this.props;
     const { isVisible } = this.state;
 
     return (
       isVisible && (
         <span>
-          <section className="loader-wrapr">
+          <section className="loader-wrapr main-section">
             <div className="loader loader-14">
               <svg
                 version="1.1"
@@ -100,6 +76,32 @@ class InlineLoading extends React.Component {
       )
     );
   }
+
+  componentDidMount = () => {
+    this.delayShowing();
+  };
+
+  componentWillUnmount = () => {
+    if (this.timeout) {
+      clearInterval(this.timeout);
+    }
+  };
+
+
+  delayShowing = () => {
+    this.timeout = setTimeout(() => {
+      this.setState({ isVisible: true });
+    }, 250);
+  };
 }
+
+InlineLoading.propTypes = {
+  message: PropTypes.string
+};
+
+InlineLoading.defaultProps = {
+  message: Translations.loading_messages.loading_with_ellipsis
+};
+
 
 export default InlineLoading;

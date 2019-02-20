@@ -19,7 +19,13 @@ const LeftSidebarNav = ({ header, links, ulClassName }) => {
                 className={link.className}
                 activeClassName={link.activeClassName}
               >
-                <span className={classnames("", {"textBold" : link.text.toLowerCase() === 'logout'})}>{link.text}</span>
+                <span
+                  className={classnames("", {
+                    textBold: link.text.toLowerCase() === "logout"
+                  })}
+                >
+                  {link.text}
+                </span>
               </NavLink>
             </li>
           );

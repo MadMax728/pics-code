@@ -1,59 +1,97 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getDashboard } from "../../../actions";
+import { getDashboard, getSearch } from "../../../actions";
 import PropTypes from "prop-types";
-import { CampaignLoading } from "../../ui-kit";
+import { NoDataFoundCenterPage, CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 import * as enumerations from "../../../lib/constants/enumerations";
+import { search } from "../../../lib/utils/helpers";
 
 class ExploreRoot extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      exploreList: null
+    };
+  }
+
+  render() {
+    let { exploreList } = this.state;
+    const { isLoadingexplores, searchData } = this.props;
+    exploreList = search(exploreList, "userName", searchData.searchKeyword);
+
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        {exploreList && !isLoadingexplores && this.renderExploreList()}
+        {isLoadingexplores && <CampaignLoading />}
+        {!isLoadingexplores &&
+          (!exploreList || (exploreList && exploreList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
-    this.props.getDashboard("explores");
     window.scrollTo(0, 0);
+    this.handleRefresh();
+    this.handleSearch();
+  };
+
+  handleSearch = () => {
+    this.props.getDashboard("explores", "").then(() => {
+      const { exploreList } = this.props;
+      this.setState({ exploreList });
+    });
+  };
+
+  handleRefresh = () => {
+    const { searchData, getSearch } = this.props;
+    if (searchData.searchKeyword) {
+      getSearch("");
+      this.handleSearch();
+    }
   };
 
   renderExploreList = () => {
-    const { exploreList } = this.props;
+    let { exploreList } = this.state;
+    const { searchData, handleModalShow } = this.props;
+    exploreList = search(exploreList, "userName", searchData.searchKeyword);
     return exploreList.map(explore => {
       return (
         <div key={explore.id}>
           {explore.mediaUrl &&
             explore.postType === enumerations.contentTypes.mediaPost && (
-              <MediaCard item={explore} isDescription />
+              <MediaCard item={explore} isDescription handleModalShow={handleModalShow} />
             )}
         </div>
       );
     });
   };
-
-  render() {
-    const { exploreList, isLoading } = this.props;
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {exploreList && !isLoading && this.renderExploreList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 ExploreRoot.propTypes = {
   // remove when actual API Call
   getDashboard: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
-  exploreList: PropTypes.any
+  isLoadingexplores: PropTypes.bool,
+  exploreList: PropTypes.any,
+  searchData: PropTypes.any,
+  getSearch: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 
 const mapStateToProps = state => ({
   exploreList: state.dashboardData.explores,
-  isLoading: state.dashboardData.isLoading,
-  error: state.dashboardData.error
+  isLoadingexplores: state.dashboardData.isLoadingexplores,
+  error: state.dashboardData.error,
+  searchData: state.searchData
 });
 
 const mapDispatchToProps = {
   // remove when actual API Call
-  getDashboard
+  getDashboard,
+  getSearch
 };
 
 export default connect(

@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import { withRouter } from "react-router";
 import * as images from "../../../../lib/constants/images";
-import { Text } from "../../../ui-kit/CommonUIComponents";
+import {
+  Input,
+  Label,
+  ErrorSpan,
+  Button,
+  InlineLoading
+} from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
-import { Link } from "react-router-dom";
 import * as routes from "../../../../lib/constants/routes";
 import Switch from "react-switch";
 import {
@@ -34,13 +38,11 @@ if (storage) {
 }
 const switchOnColor = "#86d3ff";
 const switchOnHandleColor = "#2693e6";
-const switchHandleDiameter = "25";
 const switchUncheckedIcon = false;
 const switchCheckedIcon = false;
 const switchBoxShadow = "0px 1px 5px rgba(0, 0, 0, 0.6)";
 const switchActiveBoxShadow = "0px 0px 1px 10px rgba(0, 0, 0, 0.2)";
-const switchHeight = "25";
-const switchWidth = "25";
+
 class PrivacyPage extends Component {
   constructor(props) {
     super(props);
@@ -75,6 +77,476 @@ class PrivacyPage extends Component {
     };
   }
 
+  render() {
+    const {
+      change_email_form,
+      change_password_form,
+      change_invoicing_address_form
+    } = this.state;
+    const isInvoiceAddressLoading = this.props.profilePrivacyData.isLoading;
+
+    return (
+      <div className="padding-rl-10 middle-section width-80">
+        <div className="privacy-form">
+          <form action="">
+            <div className="form-title">
+              {Translations.left_sidebar_settings.privacy}
+            </div>
+
+            <div className="form-subtitle">
+              {Translations.privacy.limitations}
+            </div>
+            <div className="limitation-wrapper">
+              {/* <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.set_my_profile_to_private}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <div>
+                    <span className="error-msg highlight">
+                      {this.state.error.servererror}
+                    </span>
+                    <label className="switch" htmlFor={"Privacy"}>
+                      <Switch
+                        onChange={this.hanldeIsPrivate}
+                        checked={this.state.isPrivate}
+                        onColor={switchOnColor}
+                        onHandleColor={switchOnHandleColor}
+                        handleDiameter={25}
+                        uncheckedIcon={switchUncheckedIcon}
+                        checkedIcon={switchCheckedIcon}
+                        boxShadow={switchBoxShadow}
+                        activeBoxShadow={switchActiveBoxShadow}
+                        height={25}
+                        width={48}
+                        className="react-switch"
+                        id="material-switch"
+                      />
+                    </label>
+                  </div>
+                </div>
+              </div> */}
+              <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.social_share_function}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <div>
+                    <div className="switch" htmlFor={"SocialShare"}>
+                      <Switch
+                        onChange={this.hanldeIsSocialShare}
+                        checked={this.state.isSocialShare}
+                        onColor={switchOnColor}
+                        onHandleColor={switchOnHandleColor}
+                        handleDiameter={25}
+                        uncheckedIcon={false}
+                        checkedIcon={false}
+                        boxShadow={switchBoxShadow}
+                        activeBoxShadow={switchActiveBoxShadow}
+                        height={25}
+                        width={48}
+                        className="react-switch"
+                        id="material-switch"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.Personalized_advertising}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <div className="switch" htmlFor={"Personalized"}>
+                    <Switch
+                      onChange={this.hanldeIsPersonalized}
+                      checked={this.state.isPersonalized}
+                      onColor={switchOnColor}
+                      onHandleColor={switchOnHandleColor}
+                      handleDiameter={25}
+                      uncheckedIcon={false}
+                      checkedIcon={false}
+                      boxShadow={switchBoxShadow}
+                      activeBoxShadow={switchActiveBoxShadow}
+                      height={25}
+                      width={48}
+                      className="react-switch"
+                      id="material-switch"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-subtitle">
+              {Translations.privacy.Change_email}
+            </div>
+            <div className="change-email-wrapper">
+              <div className="form-group">
+                <Label
+                  htmlFor="email"
+                  value={Translations.privacy.Current_Email}
+                />
+                <Input
+                  type="email"
+                  className="form-control"
+                  id="current_email"
+                  name="current_email"
+                  autoComplete="current_email"
+                  value={
+                    change_email_form.current_email
+                      ? change_email_form.current_email
+                      : ""
+                  }
+                  onChange={this.handleFieldChangeEmail}
+                />
+                {change_email_form.current_email.length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_email_form_error.current_email}
+                />
+              </div>
+              <div className="form-group new-email">
+                <Label htmlFor="email" value={Translations.privacy.New_Email} />
+                <ErrorSpan
+                  value={
+                    Translations.privacy
+                      .Please_confirm_this_change_in_your_email_account
+                  }
+                />
+                <Input
+                  type="email"
+                  className="form-control"
+                  id="new_email"
+                  autoComplete="new_email"
+                  name="new_email"
+                  onChange={this.handleFieldChangeEmail}
+                  value={
+                    change_email_form.new_email
+                      ? change_email_form.new_email
+                      : ""
+                  }
+                />
+                {change_email_form.new_email.length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_email_form_error.new_email}
+                />
+                <ErrorSpan
+                  value={this.state.change_email_form_error.servererror}
+                />
+              </div>
+              <div className="form-group">
+                <Button
+                  className="black_button"
+                  onClick={this.handleSaveChangeEmail}
+                  text={Translations.privacy.save}
+                />
+              </div>
+            </div>
+
+            <div className="form-subtitle">
+              {Translations.privacy.Change_Password}
+            </div>
+            <div className="change-password-wrapper">
+              <div className="form-group">
+                <Label
+                  htmlFor="c-password"
+                  value={Translations.privacy.Current_Password}
+                />
+                <Input
+                  type="password"
+                  className="form-control"
+                  id="current_password"
+                  autoComplete="current_password"
+                  name="current_password"
+                  onChange={this.handleFieldChangePassword}
+                  value={
+                    change_password_form.current_password
+                      ? change_password_form.current_password
+                      : ""
+                  }
+                />
+                {change_password_form.current_password.length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_password_form_error.current_password}
+                />
+              </div>
+              <div className="form-group">
+                <Label
+                  htmlFor="n-password"
+                  value={Translations.privacy.New_Password}
+                />
+                <Input
+                  type="password"
+                  className="form-control"
+                  id="new_password"
+                  autoComplete="new_password"
+                  name="new_password"
+                  value={
+                    change_password_form.new_password
+                      ? change_password_form.new_password
+                      : ""
+                  }
+                  onChange={this.handleFieldChangePassword}
+                />
+                {change_password_form.new_password.length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_password_form_error.new_password}
+                />
+              </div>
+              <div className="form-group">
+                <Label
+                  htmlFor="r-password"
+                  value={Translations.privacy.Repeat_Password}
+                />
+                <Input
+                  type="password"
+                  className="form-control"
+                  id="repeat_password"
+                  name="repeat_password"
+                  autoComplete="repeat_password"
+                  value={
+                    change_password_form.repeat_password
+                      ? change_password_form.repeat_password
+                      : ""
+                  }
+                  onChange={this.handleFieldChangePassword}
+                />
+                {change_password_form.repeat_password.length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_password_form_error.repeat_password}
+                />
+              </div>
+              <div className="form-group">
+                <ErrorSpan
+                  value={this.state.change_password_form_error.servererror}
+                />
+                <Button
+                  className="black_button"
+                  onClick={this.handleSaveChangePassword}
+                  text={Translations.privacy.save}
+                />
+              </div>
+            </div>
+
+            {/* <div className="form-subtitle">
+              {Translations.privacy.Change_invoicing_address}
+            </div> */}
+            {/* <div className="change-invoiceadd-wrapper">
+              {isInvoiceAddressLoading && <InlineLoading />}
+              <div className="form-group">
+                <Label
+                  htmlFor="recipient"
+                  value={Translations.privacy.Invoice_recipient}
+                />
+                <Input
+                  type="text"
+                  className="form-control"
+                  id="invoice_recipient"
+                  name="invoice_recipient"
+                  value={
+                    change_invoicing_address_form.invoice_recipient
+                      ? change_invoicing_address_form.invoice_recipient
+                      : ""
+                  }
+                  onChange={this.handleFieldChangeInvoice}
+                />
+                {change_invoicing_address_form.invoice_recipient.length > 0 ? (
+                  <img src={images.checked} alt={"checked1"} />
+                ) : (
+                  <img src={images.error} alt={"error1"} />
+                )}
+              </div>
+              <div className="form-group">
+                <Label
+                  htmlFor="street"
+                  value={Translations.privacy.Street_number}
+                />
+                <Input
+                  type="text"
+                  className="form-control"
+                  id="street_number"
+                  name="street_number"
+                  value={
+                    change_invoicing_address_form.street_number
+                      ? change_invoicing_address_form.street_number
+                      : ""
+                  }
+                  onChange={this.handleFieldChangeInvoice}
+                />
+                {change_invoicing_address_form.street_number.length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+              </div>
+              <div className="form-group">
+                <Label
+                  htmlFor="postal"
+                  value={Translations.privacy.Postal_code}
+                />
+                <Input
+                  type="text"
+                  className="form-control"
+                  id="postal_code"
+                  name="postal_code"
+                  value={
+                    change_invoicing_address_form.postal_code
+                      ? change_invoicing_address_form.postal_code
+                      : ""
+                  }
+                  onChange={this.handleFieldChangeInvoice}
+                />
+                {change_invoicing_address_form.postal_code.length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+              </div>
+              <div className="col-2">
+                <div className="col-sm-6 padding-r-5">
+                  <div className="form-group">
+                    <Label htmlFor="city" value={Translations.privacy.city} />
+                    <Input
+                      type="text"
+                      className="form-control"
+                      id="city"
+                      name="city"
+                      onChange={this.handleFieldChangeInvoice}
+                      value={
+                        change_invoicing_address_form.city
+                          ? change_invoicing_address_form.city
+                          : ""
+                      }
+                    />
+                    {change_invoicing_address_form.city.length > 0 ? (
+                      <img src={images.checked} alt={"checked"} />
+                    ) : (
+                      <img src={images.error} alt={"error"} />
+                    )}
+                  </div>
+                </div>
+                <div className="col-sm-6 padding-l-5">
+                  <div className="form-group">
+                    <Label
+                      htmlFor="country"
+                      value={Translations.privacy.Country}
+                    />
+                    <Input
+                      type="text"
+                      className="form-control"
+                      id="country"
+                      name="country"
+                      value={
+                        change_invoicing_address_form.country
+                          ? change_invoicing_address_form.country
+                          : ""
+                      }
+                      onChange={this.handleFieldChangeInvoice}
+                    />
+                    {change_invoicing_address_form.country.length > 0 ? (
+                      <img src={images.checked} alt={"checked"} />
+                    ) : (
+                      <img src={images.error} alt={"error"} />
+                    )}
+                  </div>
+                </div>
+              </div>
+              <div className="form-group">
+                <Label
+                  htmlFor="vat"
+                  value={Translations.privacy.VAT_identification_number}
+                />
+                <Input
+                  type="text"
+                  className="form-control"
+                  id="vat_identification_number"
+                  name="vat_identification_number"
+                  value={
+                    change_invoicing_address_form.vat_identification_number
+                      ? change_invoicing_address_form.vat_identification_number
+                      : ""
+                  }
+                  onChange={this.handleFieldChangeInvoice}
+                />
+                {change_invoicing_address_form.vat_identification_number
+                  .length > 0 ? (
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
+              </div>
+              <div className="form-group">
+                <Button
+                  className="black_button"
+                  onClick={this.handleSaveChangeInvoice}
+                  text={Translations.privacy.save}
+                />
+              </div>
+            </div> */}
+
+            <div className="form-subtitle">{Translations.privacy.Actions}</div>
+            <div className="privacy-actions-wrapper">
+              <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.Delete_search_history}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <div
+                    className="action-btns"
+                    onClick={this.handleDeleteSearchHisory}
+                    id={"delete_search_history"}
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={this.handleKeyDown}
+                  >
+                    {Translations.privacy.Delete}
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-sm-6">
+                  {Translations.privacy.Deactivate_my_account}
+                </div>
+                <div className="col-sm-6 text-right">
+                  <div
+                    className="action-btns"
+                    onClick={this.handleDeactiveMyAccount}
+                    id={"deactivate_account"}
+                    role="button"
+                    tabIndex="0"
+                    onKeyDown={this.handleKeyDown}
+                  >
+                    {Translations.privacy.Deactivate}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     const storage = Auth.extractJwtFromStorage();
@@ -94,6 +566,10 @@ class PrivacyPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
+    // To to test this condition
+    // if (nextProps.searchData.searchKeyword) {
+    //   this.props.getSearch("");
+    // }
     if (
       nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
     ) {
@@ -402,483 +878,17 @@ class PrivacyPage extends Component {
       });
   };
 
-  handleDeleteSearchHisory = e => {
-    console.log("Delete History", e.target.id);
-    const paramData = { searchHistoryId: e.target.id };
+  handleDeleteSearchHisory = () => {
+    // const paramData = { searchHistoryId: e.target.id };
     this.props.handleModalInfoShow(modalType.confirmation);
     // this.props.deleteSearchHistory(paramData); // API Call
   };
 
-  handleDeactiveMyAccount = e => {
-    const modalForValue = e.target.id;
-    this.props.handleModalInfoShow(modalType.confirmation, value => {
-      console.log("In Privacy Value", value);
+  handleDeactiveMyAccount = () => {
+    this.props.handleModalShow(modalType.confirmation, {
+      id: "deactivateAccount"
     });
-    this.props.modalInfoShow = val => {
-      console.log(val);
-    };
   };
-
-  render() {
-    const {
-      change_email_form,
-      change_password_form,
-      change_invoicing_address_form,
-      userId
-    } = this.state;
-
-    return (
-      <div className="padding-rl-10 middle-section width-80">
-        <div className="privacy-form">
-          <form action="">
-            <div className="form-title">
-              {Translations.left_sidebar_settings.privacy}
-            </div>
-
-            <div className="form-subtitle">
-              {Translations.privacy.limitations}
-            </div>
-            <div className="limitation-wrapper">
-              <div className="row">
-                <div className="col-sm-6">
-                  {Translations.privacy.set_my_profile_to_private}
-                </div>
-                <div className="col-sm-6 text-right">
-                  <div>
-                    <span className="error-msg highlight">
-                      {this.state.error.servererror}
-                    </span>
-                    <label className="switch" htmlFor={"Privacy"}>
-                      <Switch
-                        onChange={this.hanldeIsPrivate}
-                        checked={this.state.isPrivate}
-                        onColor={switchOnColor}
-                        onHandleColor={switchOnHandleColor}
-                        handleDiameter={25}
-                        uncheckedIcon={switchUncheckedIcon}
-                        checkedIcon={switchCheckedIcon}
-                        boxShadow={switchBoxShadow}
-                        activeBoxShadow={switchActiveBoxShadow}
-                        height={25}
-                        width={48}
-                        className="react-switch"
-                        id="material-switch"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-6">
-                  {Translations.privacy.social_share_function}
-                </div>
-                <div className="col-sm-6 text-right">
-                  <div>
-                    <label className="switch" htmlFor={"SocialShare"}>
-                      <Switch
-                        onChange={this.hanldeIsSocialShare}
-                        checked={this.state.isSocialShare}
-                        onColor={switchOnColor}
-                        onHandleColor={switchOnHandleColor}
-                        handleDiameter={25}
-                        uncheckedIcon={false}
-                        checkedIcon={false}
-                        boxShadow={switchBoxShadow}
-                        activeBoxShadow={switchActiveBoxShadow}
-                        height={25}
-                        width={48}
-                        className="react-switch"
-                        id="material-switch"
-                      />
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-6">
-                  {Translations.privacy.Personalized_advertising}
-                </div>
-                <div className="col-sm-6 text-right">
-                  <label className="switch" htmlFor={"Personalized"}>
-                    <Switch
-                      onChange={this.hanldeIsPersonalized}
-                      checked={this.state.isPersonalized}
-                      onColor={switchOnColor}
-                      onHandleColor={switchOnHandleColor}
-                      handleDiameter={25}
-                      uncheckedIcon={false}
-                      checkedIcon={false}
-                      boxShadow={switchBoxShadow}
-                      activeBoxShadow={switchActiveBoxShadow}
-                      height={25}
-                      width={48}
-                      className="react-switch"
-                      id="material-switch"
-                    />
-                  </label>
-                </div>
-              </div>
-            </div>
-
-            <div className="form-subtitle">
-              {Translations.privacy.Change_email}
-            </div>
-            <div className="change-email-wrapper">
-              <div className="form-group">
-                <label htmlFor="email">
-                  {Translations.privacy.Current_Email}
-                </label>
-                <Text
-                  type="email"
-                  className="form-control"
-                  id="current_email"
-                  name="current_email"
-                  autoComplete="current_email"
-                  value={
-                    change_email_form.current_email
-                      ? change_email_form.current_email
-                      : ""
-                  }
-                  onChange={this.handleFieldChangeEmail}
-                />
-                {change_email_form.current_email.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_email_form_error.current_email}
-                </span>
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">{Translations.privacy.New_Email}</label>
-                <span className="error-msg pull-right">
-                  {
-                    Translations.privacy
-                      .Please_confirm_this_change_in_your_email_account
-                  }
-                </span>
-                <Text
-                  type="email"
-                  className="form-control"
-                  id="new_email"
-                  autoComplete="new_email"
-                  name="new_email"
-                  onChange={this.handleFieldChangeEmail}
-                  value={
-                    change_email_form.new_email
-                      ? change_email_form.new_email
-                      : ""
-                  }
-                />
-                {change_email_form.new_email.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_email_form_error.new_email}
-                </span>
-                <span className="error-msg highlight">
-                  {this.state.change_email_form_error.servererror}
-                </span>
-              </div>
-              <div className="form-group">
-                <button
-                  className="black_button"
-                  onClick={this.handleSaveChangeEmail}
-                >
-                  {Translations.privacy.save}
-                </button>
-              </div>
-            </div>
-
-            <div className="form-subtitle">
-              {Translations.privacy.Change_Password}
-            </div>
-            <div className="change-password-wrapper">
-              <div className="form-group">
-                <label htmlFor="c-password">
-                  {Translations.privacy.Current_Password}
-                </label>
-                <Text
-                  type="password"
-                  className="form-control"
-                  id="current_password"
-                  autoComplete="current_password"
-                  name="current_password"
-                  onChange={this.handleFieldChangePassword}
-                  value={
-                    change_password_form.current_password
-                      ? change_password_form.current_password
-                      : ""
-                  }
-                />
-                {change_password_form.current_password.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.current_password}
-                </span>
-              </div>
-              <div className="form-group">
-                <label htmlFor="n-password">
-                  {Translations.privacy.New_Password}
-                </label>
-                <Text
-                  type="password"
-                  className="form-control"
-                  id="new_password"
-                  autoComplete="new_password"
-                  name="new_password"
-                  value={
-                    change_password_form.new_password
-                      ? change_password_form.new_password
-                      : ""
-                  }
-                  onChange={this.handleFieldChangePassword}
-                />
-                {change_password_form.new_password.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.new_password}
-                </span>
-              </div>
-              <div className="form-group">
-                <label htmlFor="r-password">
-                  {Translations.privacy.Repeat_Password}
-                </label>
-                <Text
-                  type="password"
-                  className="form-control"
-                  id="repeat_password"
-                  name="repeat_password"
-                  autoComplete="repeat_password"
-                  value={
-                    change_password_form.repeat_password
-                      ? change_password_form.repeat_password
-                      : ""
-                  }
-                  onChange={this.handleFieldChangePassword}
-                />
-                {change_password_form.repeat_password.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.repeat_password}
-                </span>
-              </div>
-              <div className="form-group">
-                <span className="error-msg highlight">
-                  {this.state.change_password_form_error.servererror}
-                </span>
-                <button
-                  className="black_button"
-                  onClick={this.handleSaveChangePassword}
-                >
-                  {Translations.privacy.save}
-                </button>
-              </div>
-            </div>
-
-            <div className="form-subtitle">
-              {Translations.privacy.Change_invoicing_address}
-            </div>
-            <div className="change-invoiceadd-wrapper">
-              <div className="form-group">
-                <label htmlFor="recipient">
-                  {Translations.privacy.Invoice_recipient}
-                </label>
-                <Text
-                  type="text"
-                  className="form-control"
-                  id="invoice_recipient"
-                  name="invoice_recipient"
-                  value={
-                    change_invoicing_address_form.invoice_recipient
-                      ? change_invoicing_address_form.invoice_recipient
-                      : ""
-                  }
-                  onChange={this.handleFieldChangeInvoice}
-                />
-                {change_invoicing_address_form.invoice_recipient.length > 0 ? (
-                  <img src={images.checked} alt={"checked1"} />
-                ) : (
-                  <img src={images.error} alt={"error1"} />
-                )}
-              </div>
-              <div className="form-group">
-                <label htmlFor="street">
-                  {Translations.privacy.Street_number}
-                </label>
-                <Text
-                  type="text"
-                  className="form-control"
-                  id="street_number"
-                  name="street_number"
-                  value={
-                    change_invoicing_address_form.street_number
-                      ? change_invoicing_address_form.street_number
-                      : ""
-                  }
-                  onChange={this.handleFieldChangeInvoice}
-                />
-                {change_invoicing_address_form.street_number.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-              </div>
-              <div className="form-group">
-                <label htmlFor="postal">
-                  {Translations.privacy.Postal_code}
-                </label>
-                <Text
-                  type="text"
-                  className="form-control"
-                  id="postal_code"
-                  name="postal_code"
-                  value={
-                    change_invoicing_address_form.postal_code
-                      ? change_invoicing_address_form.postal_code
-                      : ""
-                  }
-                  onChange={this.handleFieldChangeInvoice}
-                />
-                {change_invoicing_address_form.postal_code.length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-              </div>
-              <div className="col-2">
-                <div className="col-sm-6 padding-r-5">
-                  <div className="form-group">
-                    <label htmlFor="city">{Translations.privacy.city}</label>
-                    <Text
-                      type="text"
-                      className="form-control"
-                      id="city"
-                      name="city"
-                      onChange={this.handleFieldChangeInvoice}
-                      value={
-                        change_invoicing_address_form.city
-                          ? change_invoicing_address_form.city
-                          : ""
-                      }
-                    />
-                    {change_invoicing_address_form.city.length > 0 ? (
-                      <img src={images.checked} alt={"checked"} />
-                    ) : (
-                      <img src={images.error} alt={"error"} />
-                    )}
-                  </div>
-                </div>
-                <div className="col-sm-6 padding-l-5">
-                  <div className="form-group">
-                    <label htmlFor="country">
-                      {Translations.privacy.Country}
-                    </label>
-                    <Text
-                      type="text"
-                      className="form-control"
-                      id="country"
-                      name="country"
-                      value={
-                        change_invoicing_address_form.country
-                          ? change_invoicing_address_form.country
-                          : ""
-                      }
-                      onChange={this.handleFieldChangeInvoice}
-                    />
-                    {change_invoicing_address_form.country.length > 0 ? (
-                      <img src={images.checked} alt={"checked"} />
-                    ) : (
-                      <img src={images.error} alt={"error"} />
-                    )}
-                  </div>
-                </div>
-              </div>
-              <div className="form-group">
-                <label htmlFor="vat">
-                  {Translations.privacy.VAT_identification_number}
-                </label>
-                <Text
-                  type="text"
-                  className="form-control"
-                  id="vat_identification_number"
-                  name="vat_identification_number"
-                  value={
-                    change_invoicing_address_form.vat_identification_number
-                      ? change_invoicing_address_form.vat_identification_number
-                      : ""
-                  }
-                  onChange={this.handleFieldChangeInvoice}
-                />
-                {change_invoicing_address_form.vat_identification_number
-                  .length > 0 ? (
-                  <img src={images.checked} alt={"checked"} />
-                ) : (
-                  <img src={images.error} alt={"error"} />
-                )}
-              </div>
-              <div className="form-group">
-                <button
-                  className="black_button"
-                  onClick={this.handleSaveChangeInvoice}
-                >
-                  {Translations.privacy.save}
-                </button>
-              </div>
-            </div>
-
-            <div className="form-subtitle">{Translations.privacy.Actions}</div>
-            <div className="privacy-actions-wrapper">
-              <div className="row">
-                <div className="col-sm-6">
-                  {Translations.privacy.Delete_search_history}
-                </div>
-                <div className="col-sm-6 text-right">
-                  <div
-                    onClick={this.handleDeleteSearchHisory}
-                    id={"delete_search_history"}
-                    role="button"
-                    tabIndex="0"
-                    onKeyDown={this.handleKeyDown}
-                  >
-                    {Translations.privacy.Delete}
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-6">
-                  {Translations.privacy.Deactivate_my_account}
-                </div>
-                <div className="col-sm-6 text-right">
-                  <div
-                    onClick={this.handleDeactiveMyAccount}
-                    id={"deactivate_account"}
-                    role="button"
-                    tabIndex="0"
-                    onKeyDown={this.handleKeyDown}
-                  >
-                    {Translations.privacy.Deactivate}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    );
-  }
 }
 
 const mapStateToProps = state => ({
@@ -910,6 +920,7 @@ PrivacyPage.propTypes = {
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func,
   profilePrivacyData: PropTypes.any,
   history: PropTypes.any,
   getUser: PropTypes.func,

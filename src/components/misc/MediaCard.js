@@ -5,10 +5,20 @@ import MediaCardHeader from "./headers/MediaCardHeader";
 import MediaCardFooter from "./footers/MediaCardFooter";
 import CommentCard from "./CommentCard";
 import { Translations } from "../../lib/translations";
+import * as enumerations from "../../lib/constants/enumerations";
 import { RenderToolTips } from "../common";
-import { getComments, like, setSavedPost } from "../../actions";
+import {
+  getComments,
+  like,
+  setSavedPost,
+  addReport,
+  removeParticipants,
+  getDashboard
+} from "../../actions";
 import { connect } from "react-redux";
 import { getBackendPostType } from "../Factory";
+import { modalType } from "../../lib/constants";
+import { Auth } from "../../auth";
 
 class MediaCard extends Component {
   constructor(props, context) {
@@ -21,41 +31,236 @@ class MediaCard extends Component {
     };
   }
 
-  renderReportTips = (id) => {
-    const reportTips = [
-      {
-        name: Translations.tool_tips.report,
-        handleEvent: this.handleReportPost
-      },
-      {
-        name: Translations.tool_tips.save,
-        handleEvent: this.handleSavePost
-      },
-      {
-        name: Translations.tool_tips.lock,
-        handleEvent: this.handleContent
+  render() {
+    const { isComments, item } = this.state;
+    const { isParticipant } = this.props;
+    const {
+      likeData,
+      isDescription,
+      isReport,
+      reportedContentData,
+      savedData
+    } = this.props;
+    return (
+      <div className="feed_wrapper">
+        <MediaCardHeader
+          item={item}
+          isParticipant={isParticipant}
+          handleFavorite={this.handleFavorite}
+          isLoading={likeData.isLoading}
+        />
+        <MediaCardBody
+          item={item}
+          isDescription={isDescription}
+          isLoading={reportedContentData.isLoading || savedData.isLoading}
+        />
+        <MediaCardFooter
+          isLoading={likeData.isLoading}
+          item={item}
+          handleCommentsSections={this.handleCommentsSections}
+          isComments={isComments}
+          /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
+          handleFavorite={this.handleFavorite}
+          isReport={isReport}
+        />
+        {isComments && (
+          <CommentCard
+            item={this.state.comments}
+            itemId={item.id}
+            typeContent={item.typeContent}
+            handleComment={this.handleComment}
+            totalCommentsCount={this.state.comments.length}
+          />
+        )}
+      </div>
+    );
+  }
+
+  handleLockContent = e => {
+    const { item } = this.state;
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.lock,
+      reportContent: item.typeContent
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
       }
-    ];
+    );
+  };
+
+  handleSetState = data => {
+    clearInterval(this.timer);
+    const { item } = this.state;
+    item.reportStatus = data.contentStatus;
+    this.setState({ item });
+    this.props.handleRemove(item.id);
+  };
+
+  handleDoNotContent = e => {
+    const { item } = this.state;
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.doNotLock,
+      reportContent: item.typeContent
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  handleUnlockContent = e => {
+    const { item } = this.state;
+    const data = {
+      typeId: e.target.id,
+      contentStatus: enumerations.reportType.unLock,
+      reportContent: item.typeContent
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  renderReportTips = id => {
+    let reportTips;
+    const { isBackOffice, isParticipant } = this.props;
+    const { item } = this.state;
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+
+    if (isBackOffice) {
+      reportTips = [
+        {
+          name:
+            item.reportStatus === enumerations.reportType.lock
+              ? Translations.tool_tips.unlock
+              : Translations.tool_tips.lock,
+          handleEvent:
+            item.reportStatus === enumerations.reportType.lock
+              ? this.handleUnlockContent
+              : this.handleLockContent
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    } else if (
+      isParticipant &&
+      (item.createdBy === userInfo.id || item.campaignCreatedBy === userInfo.id)
+    ) {
+      reportTips = [
+        {
+          name: item.isReported
+            ? Translations.tool_tips.unreport
+            : Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: item.isSavedPost
+            ? Translations.tool_tips.unsave
+            : Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        },
+        {
+          name: Translations.tool_tips.remove_participant,
+          handleEvent: this.handleRemoveParticipant
+        }
+      ];
+      if (item.userId === userInfo.id) {
+        const data = {
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
+        reportTips.push(data);
+      }
+    } else {
+      reportTips = [
+        {
+          name: item.isReported
+            ? Translations.tool_tips.unreport
+            : Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name: item.isSavedPost
+            ? Translations.tool_tips.unsave
+            : Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+      if (item.userId === userInfo.id) {
+        const data = {
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
+        reportTips.unshift(data);
+      }
+    }
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleReportPost = () => {};
-
-  handleSavePost = (e) => {
-    const item = this.state.item;
-    const data = {
-        typeId: e.target.id,
-        postType: getBackendPostType(item)
-      };
-
-    this.props.setSavedPost(data).then(()=> {
-      if(this.props.savedData){
-        console.log(this.props.savedData);
-      }
-    })
+  handleEditPost = e => {
+    const { item } = this.state;
+    this.props.handleModalShow(modalType.upload, item);
   };
 
-  handleContent = () => {};
+  handleReportPost = e => {
+    const { item } = this.state;
+    const data = {
+      typeContent: item.typeContent,
+      typeId: e.target.id,
+      title: item.title
+    };
+    this.props.addReport(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData &&
+        this.props.reportedContentData.addReport.typeId === item.id
+      ) {
+        item.isReported = !item.isReported;
+        this.setState({ item });
+      }
+    });
+  };
+
+  handleSavePost = e => {
+    const { isSavedPage } = this.props;
+    const item = this.state.item;
+    const data = {
+      typeId: e.target.id,
+      postType: getBackendPostType(item)
+    };
+
+    this.props.setSavedPost(data).then(() => {
+      if (
+        this.props.savedData &&
+        this.props.savedData.saved &&
+        this.props.savedData.saved.typeId === item.id
+      ) {
+        item.isSavedPost = !item.isSavedPost;
+        this.setState({ item });
+        if (isSavedPage && !this.state.item.isSavedPost) {
+          this.props.handleRemove(item.id);
+        }
+      }
+    });
+  };
 
   handleComment = commet => {
     const item = this.state.item;
@@ -84,60 +289,38 @@ class MediaCard extends Component {
       this.setState({
         isComments: !this.state.isComments,
         comments: this.props.comments,
-        totalCommentsCount: (this.props.comments).length
+        totalCommentsCount: this.props.comments.length
       });
     });
   };
 
-  render() {
-    const { isComments, item } = this.state;
-    const { likeData, isDescription, isReport } = this.props;
-    return (
-      <div className="feed_wrapper">
-        <MediaCardHeader
-          item={item}
-          handleFavorite={this.handleFavorite}
-          isLoading={likeData.isLoading}
-        />
-        <MediaCardBody 
-          item={item} 
-          isDescription={isDescription}
-        />
-        <MediaCardFooter
-          isLoading={likeData.isLoading}
-          item={item}
-          handleCommentsSections={this.handleCommentsSections}
-          isComments={isComments}
-          /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
-          handleFavorite={this.handleFavorite}
-          isReport={isReport}
-        />
-        {isComments && (
-          <CommentCard
-            item={this.state.comments}
-            itemId={item.id}
-            typeContent={item.typeContent}
-            handleComment={this.handleComment}
-            totalCommentsCount={(this.state.comments).length}
-          />
-        )}
-      </div>
-    );
-  }
+  handleRemoveParticipant = e => {
+    this.props.removeParticipants(e.target.id).then(() => {
+      if (this.props.campaignData.isRemoveParticipantData) {
+        this.props.handleFilterList(
+          this.props.campaignData.isRemoveParticipantData
+        );
+      }
+    });
+  };
 }
 
 const mapStateToProps = state => ({
   likeData: state.likeData,
   savedData: state.savedData,
   comments: state.commentData.comments,
-  totalCommentsCount: state.totalCommentsCount
+  totalCommentsCount: state.totalCommentsCount,
+  reportedContentData: state.reportedContentData,
+  campaignData: state.campaignData
 });
 
 const mapDispatchToProps = {
   like,
   getComments,
-  setSavedPost
+  setSavedPost,
+  addReport,
+  removeParticipants,
+  getDashboard
 };
 
 MediaCard.propTypes = {
@@ -150,7 +333,18 @@ MediaCard.propTypes = {
   isParticipant: PropTypes.bool,
   isReport: PropTypes.bool,
   isDescription: PropTypes.bool.isRequired,
-  likeData: PropTypes.any
+  likeData: PropTypes.any,
+  isBackOffice: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  addReport: PropTypes.func,
+  handleRemove: PropTypes.func,
+  reportedContentData: PropTypes.any,
+  isSavedPage: PropTypes.bool,
+  removeParticipants: PropTypes.func,
+  campaignData: PropTypes.any,
+  getDashboard: PropTypes.func,
+  handleFilterList: PropTypes.func,
+  handleModalShow: PropTypes.func
 };
 
 MediaCard.defaultProps = {

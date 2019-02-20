@@ -4,14 +4,14 @@ import { ImageItem, VideoItem, ReadMore } from "../../ui-kit";
 import * as enumerations from "../../../lib/constants/enumerations";
 import InformationCard from "../InformationCard";
 
-const AdCardBody = ({ ad, isDescription, isInformation }) => {
+const AdCardBody = ({ ad, isDescription, isInformation, isLoading }) => {
   return (
     <div className="feed_content">
       <div className="feed_image">
       {ad.typeContent &&
         ad.typeContent.toLowerCase() ===
           enumerations.mediaTypes.video && (
-            <VideoItem id={ad.id} item={ad.mediaUrl} />
+            <VideoItem id={ad.id} item={ad.mediaUrl} isLoading={isLoading} />
           )}
         {(!ad.typeContent ||
         (ad.typeContent &&
@@ -19,7 +19,10 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
             enumerations.mediaTypes.image)) && (
           <ImageItem
             item={ad.mediaUrl}
+            userName={ad.userName}
+            classNames={`embed-responsive embed-responsive-16by9`}
             isOtherCardExist={!isDescription && isInformation}
+            isLoading={isLoading}
           />
         )}
         <a
@@ -34,7 +37,7 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
       {ad &&
         isDescription &&
         ad.description && (
-          <div className="feed_description padding-10">
+          <div className="feed_description news-feed-data padding-10">
             <span className="secondary_title">
               <ReadMore
                 text={ad.description}
@@ -53,7 +56,8 @@ const AdCardBody = ({ ad, isDescription, isInformation }) => {
 AdCardBody.propTypes = {
   ad: PropTypes.object.isRequired,
   isDescription: PropTypes.bool.isRequired,
-  isInformation: PropTypes.bool.isRequired
+  isInformation: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired
 };
 
 export default AdCardBody;

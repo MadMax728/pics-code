@@ -1,5 +1,5 @@
-import React, { Component } from "react";
 import Header from "../components/web/Header";
+import React, { Component } from "react";
 import Footer from "../components/web/Footer";
 import { setCookie, getCookie } from "../lib/utils/helpers";
 import { Translations } from "../lib/translations";
@@ -13,6 +13,7 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
+import { Auth } from "../auth";
 
 class Home extends Component {
   constructor(props, context) {
@@ -26,8 +27,19 @@ class Home extends Component {
       message: "",
       image: null,
       profile: null,
-      data: null,
+      data: null
     };
+  }
+
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo){
+      this.setState({ image: userInfo.profileUrl})
+    }
   }
 
   handleModalHide = () => {
@@ -44,6 +56,10 @@ class Home extends Component {
 
   handleModalInfoShow = e => {
     this.setState({ modalInfoShow: true, modalInfoType: e });
+  };
+
+  handleModalInfoShow = (e, data) => {
+    this.setState({ modalInfoShow: true, modalInfoType: e, data });
   };
 
   handleModalInfoMsgShow = (e, forThat) => {
@@ -65,6 +81,7 @@ class Home extends Component {
    * Todo - We can modify cookie logic in production mode
    */
   handleLanguageSwitch = languageCode => {
+    // console.log(languageCode);
     // set cookie for default language
     setCookie("interfaceLanguage", languageCode, 90);
     // set language using language code
@@ -90,16 +107,19 @@ class Home extends Component {
   };
 
   render() {
-    const { message, image, profile } = this.state;
+    const { message, image, profile, data } = this.state;
+    const { history } = this.props;
+
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
+    
     return (
       <div>
         <Header
           handleModalShow={this.handleModalShow}
-          history={this.props.history}
+          history={history}
         />
-        <section>
+        <section className="main-section">
           <MessageBar message={message} />
 
           <CustomModal
@@ -109,6 +129,8 @@ class Home extends Component {
             handleModalInfoShow={this.handleModalInfoShow}
             modalInfoType={this.state.modalInfoType}
             handleModalInfoMsgShow={this.handleModalInfoMsgShow}
+            data={data}
+            history={this.props.history}
           />
 
           <InfoModal
@@ -119,7 +141,9 @@ class Home extends Component {
             modalInfoMsg={this.state.modalInfoMsg}
             handleEditImage={this.handleEditImage}
             handleProfile={this.handleProfile}
+            data={data}
             image={image}
+            history={this.props.history}
           />
 
           <div className="container">
@@ -129,11 +153,12 @@ class Home extends Component {
                 handleModalInfoShow={this.handleModalInfoShow}
               />
 
-              <div className="left_menu_second no-padding">
+              <div className="left_menu_second left-sidebar no-padding profile-img-wrapper">
                 <LeftSideBar getFilter={this.getFilter} />
               </div>
 
               <div>
+                {/* {isLoading || && <Loader />} */}
                 <HomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalShow={this.handleModalShow}
@@ -141,8 +166,7 @@ class Home extends Component {
                   profile={profile}
                 />
               </div>
-
-              <div className="right_bar no-padding">
+              <div className="right_bar right-sidebar no-padding">
                 <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
@@ -158,9 +182,7 @@ class Home extends Component {
   }
 }
 Home.propTypes = {
-  history: PropTypes.any,
+  history: PropTypes.any
 };
-
-
 
 export default Home;

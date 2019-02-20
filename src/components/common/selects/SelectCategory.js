@@ -2,34 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
       categoryList: []
-    }
+    };
   }
 
-
-  componentWillUnmount = () => {
-    this.setState({categoryList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getSelect("categories").then(() => {
-      if(this.props.categoryList){
-        this.setState({
-          categoryList: this.props.categoryList
-        });
-      }
-    });
-  }
-  
-  handleCategory = (event) => {
-    this.props.handleSelect("category",event.target.value);
-  }
-  
   render() {
     const { categoryList } = this.state;
     const { value, className } = this.props;
@@ -42,7 +24,7 @@ class SelectCategory extends Component {
         onBlur={this.handleCategory}
         options={categoryList}
       >
-        <option value="">{"Select Category"}</option>
+        <option value="">{Translations.select_category}</option>
         {categoryList.map(option => (
           <option value={option.id} key={option.id}>
             {option.categoryName}
@@ -51,6 +33,30 @@ class SelectCategory extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("categories").then(() => {
+      if (this.props.categoryList) {
+        this.setState({
+          categoryList: this.props.categoryList
+        });
+      }
+    });
+  };
+
+  // componentWillUnmount = () => {
+  //   this.setState({ categoryList: [] });
+  // };
+
+  handleCategory = event => {
+    const { categoryList } = this.props;
+    const name = categoryList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: (name.length !== 0) ?  name[0].categoryName : ""
+    }
+    this.props.handleSelect("category", data);
+  };
 }
 
 const mapStateToProps = state => ({
@@ -61,7 +67,6 @@ const mapDispatchToProps = {
   getSelect
 };
 
-
 const propTypes = {
   value: PropTypes.any,
   categoryList: PropTypes.any,
@@ -71,7 +76,6 @@ const propTypes = {
 };
 
 SelectCategory.propTypes = propTypes;
-
 
 export default connect(
   mapStateToProps,

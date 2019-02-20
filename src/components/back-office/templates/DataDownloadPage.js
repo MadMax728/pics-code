@@ -1,31 +1,22 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import { Translations } from "../../../lib/translations";
+import * as routes from "../../../lib/constants/routes";
+import { Input, Button } from "../../ui-kit";
 
 class DataDownloadPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      searchKeyword: this.props.searchData.searchKeyword,      
       form: {
-        username: ""
+        username: "",
       }
     };
   }
-
-  handleChangeField = event => {
-    const { form } = this.state;
-    form[event.target.name] = event.target.value;
-    this.setState({ form });
-  };
-
-  // handelSubmit called when click on submit
-  handleSubmit = e => {
-    e.preventDefault();
-  };
-
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-  };
 
   render() {
     return (
@@ -36,7 +27,7 @@ class DataDownloadPage extends Component {
           </div>
           <div className="user_download_wrapr">
             <div className="title_with_search_dropdown_button">
-              <input
+              <Input
                 type="search"
                 name="username"
                 id="username"
@@ -44,15 +35,56 @@ class DataDownloadPage extends Component {
                 className="flex2"
                 onChange={this.handleChangeField}
               />
-              <button className="wid30per" onClick={this.handleSubmit}>
-                {Translations.admin.Download}
-              </button>
+              <Button className="wid30per" onClick={this.handleSubmit}
+                text={Translations.admin.Download}
+              />
             </div>
           </div>
         </div>
       </div>
     );
   }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.searchData.searchKeyword !== prevState.searchKeyword) {
+      nextProps.history.push(
+        routes.ROOT_ROUTE + "?search=" + nextProps.searchData.searchKeyword
+      );
+    }
+    return null;
+  }
+  
+  handleChangeField = event => {
+    const { form } = this.state;
+    form[event.values.name] = event.values.val;
+    this.setState({ form });
+  };
+
+  // handelSubmit called when click on submit
+  handleSubmit = e => {
+    e.preventDefault();
+  };
+
 }
 
-export default DataDownloadPage;
+const mapStateToProps = state => ({
+  searchData: state.searchData
+});
+
+const mapDispatchToProps = {
+
+};
+
+DataDownloadPage.propTypes = {
+  searchData: PropTypes.any,
+  history: PropTypes.any,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DataDownloadPage);

@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { deactivateAccount } from "../../../../actions/privacy";
 import { connect } from "react-redux";
+import { Translations } from "../../../../lib/translations";
+import { Button } from "../../../ui-kit";
 
 class ActionConfirmation extends Component {
   constructor(props) {
@@ -11,33 +13,35 @@ class ActionConfirmation extends Component {
 
   handleModalHides = () => {
     this.props.handleModalHide();
-    this.props.handleModalInfoHide();
     this.props.handleConfirmation(true);
   };
 
   handleModalAction = () => {
     this.props.handleModalHide();
-    this.props.handleModalInfoHide();
     this.props.handleConfirmation(false);
   };
 
   render() {
     return (
       <div className={"col-xs-12 no-padding"}>
-        <div className="col-sm-12 margin-bottom-10">Are you want to sure ?</div>
+        <div className="col-sm-12 margin-bottom-10">{Translations.sure}</div>
         <div className="col-sm-12">
-          <button
-            className="filled_button col-sm-6"
-            onClick={this.handleModalHides}
-          >
-            Cancel
-          </button>
-          <button
-            className="filled_button col-sm-6"
-            onClick={this.handleModalAction}
-          >
-            Yes
-          </button>
+          <div className="row">
+            <div className="col-md-6">
+              <Button
+                className="filled_button col-sm-6"
+                onClick={this.handleModalHides}
+                text={Translations.modal_header.cancel}
+              />
+            </div>
+            <div className="col-md-6">
+              <Button
+                className="filled_button col-sm-6"
+                onClick={this.handleModalAction}
+                text={Translations.upload_modal.yes}
+              />
+            </div>
+          </div>
         </div>
       </div>
     );

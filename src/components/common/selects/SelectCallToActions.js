@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getSelect } from "../../../actions";
 import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class SelectCallToActions extends Component {
   constructor(props) {
@@ -11,24 +12,6 @@ class SelectCallToActions extends Component {
     }
   }
 
-  componentWillUnmount = () => {
-    this.setState({callToActionList: []});
-  }
-
-  componentDidMount = () => {
-    this.props.getSelect("callToActions").then(() => {
-      if(this.props.callToActionList){
-        this.setState({
-          callToActionList: this.props.callToActionList
-        });
-      }
-    });
-  }
-  
-  handleCallToActions = (event) => {
-    this.props.handleSelect("callToAction",event.target.value);
-  }
-  
   render() {
     const { callToActionList } = this.state;
     const { value, className } = this.props;
@@ -40,7 +23,7 @@ class SelectCallToActions extends Component {
         onBlur={this.handleCallToActions}
         options={callToActionList}
       >
-        <option value="">{"Select Call to Action"}</option>
+        <option value="">{Translations.call_to_action}</option>
         {callToActionList.map(option => (
           <option value={option.id} key={option.id}>
             {option.callToActionName}
@@ -49,6 +32,31 @@ class SelectCallToActions extends Component {
       </select>
     );
   }
+
+  componentDidMount = () => {
+    this.props.getSelect("callToActions").then(() => {
+      if (this.props.callToActionList) {
+        this.setState({
+          callToActionList: this.props.callToActionList
+        });
+      }
+    });
+  }
+
+
+  componentWillUnmount = () => {
+    this.setState({ callToActionList: [] });
+  }
+
+  handleCallToActions = (event) => {
+    const { callToActionList } = this.props;
+    const name = callToActionList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: (name.length !== 0) ?  name[0].callToActionName : ""
+    }
+    this.props.handleSelect("callToAction", data);
+  };
 }
 
 const mapStateToProps = state => ({

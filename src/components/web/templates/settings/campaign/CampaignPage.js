@@ -7,6 +7,17 @@ import { CampaignCard } from "../../../../misc";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 
 class SettingCampaignPage extends Component {
+  render() {
+    const { campaignList, isLoading } = this.props;
+
+    return (
+      <div className="padding-rl-10 middle-section">
+        {campaignList && !isLoading && this.renderCampaignList()}
+        {isLoading && <CampaignLoading />}
+      </div>
+    );
+  }
+
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.props.getCampaigns("getSettingsCampaigns", "");
@@ -26,42 +37,38 @@ class SettingCampaignPage extends Component {
   };
 
   renderCampaignList = () => {
-    const { campaignList } = this.props;
+    const { campaignList, handleModalInfoShow, handleModalShow } = this.props;
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {campaign.type === enumerations.contentTypes.campaign && (
-            <CampaignCard
-              item={campaign}
-              isDescription={false}
-              isInformation
-              isStatus
-              isBudget={false}
-              isReport={false}
-            />
-          )}
+          {campaign.type === enumerations.contentTypes.campaign &&
+            campaign.typeContent &&
+            campaign.typeContent.toLowerCase() !==
+              enumerations.mediaTypes.video && (
+              <CampaignCard
+                item={campaign}
+                isDescription={false}
+                isInformation
+                isStatus
+                isBudget={false}
+                isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
+              />
+            )}
         </div>
       );
     });
   };
-
-  render() {
-    const { campaignList, isLoading } = this.props;
-
-    return (
-      <div className="padding-rl-10 middle-section">
-        {campaignList && !isLoading && this.renderCampaignList()}
-        {isLoading && <CampaignLoading />}
-      </div>
-    );
-  }
 }
 
 SettingCampaignPage.propTypes = {
   getCampaigns: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   campaignList: PropTypes.any,
-  searchData: PropTypes.any
+  searchData: PropTypes.any,
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

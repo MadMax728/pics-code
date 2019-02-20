@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Link } from "react-router-dom";
+import { UserImageItem, Button } from "../../ui-kit";
 import classnames from "classnames";
+import { Translations } from "../../../lib/translations";
 
 const AdCardHeader = ({
   ad,
@@ -18,41 +20,33 @@ const AdCardHeader = ({
 
   const profile_route = ad.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${ad.createdBy}`;
+    : `${routes.NEWS_FEED_ROUTE}/${ad.userName}`;
   const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
-      <div className="profile_image padding-right-15">
-        <Link to={profile_route}>
-          <img
-            src={ad.profileImage}
-            alt="feed"
-            className="img-circle img-responsive"
-          />
-        </Link>
-      </div>
+      <Link to={profile_route}>
+          <UserImageItem item={ad.profileImage} customClass={`img-circle img-responsive padding-right-15`} />
+      </Link>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link to={profile_route}>
           <div className="normal_title">{ad.userName}</div>
         </Link>
         {ad.category && (
           <div className="grey_title">
-            Sponsored in{" "}
+            {Translations.sponsored_in}{" "}
             {ad.category[0].categoryName}
           </div>
         )}
       </div>
       <div className={like_wrapper} role="article">
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
           id={ad.id}
-          onKeyDown={handleFavorite}
           disabled={isLoading}
-        >
-          <img src={favorite_icon} alt="like" role="presentation" />
-        </button>
+          text={<img src={favorite_icon} alt="like" role="presentation" />}
+        />
       </div>
     </div>
   );

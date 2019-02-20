@@ -53,8 +53,27 @@ class ReviewFilter extends Component {
     super(props);
     this.state = {
       filterApply: false,
-      filData: []
+      filData: [],
     };
+  }
+
+  render() {
+    const { isRank } = this.props;
+    const { filterApply } = this.state;
+    return (
+        <div className="left-filters">
+          <LeftSidebarFilter
+            filters={Filters}
+            onChange={this.handleOnChange}
+            filterApply={filterApply}
+            handleSelect={this.handleSelect}
+            isRank={isRank}
+            handleResetFilterClick={this.handleResetFilterClick}
+            handleApplyClick={this.handleApplyClick}
+            isNotFilter
+          />
+        </div>
+    );
   }
 
   handleResetFilterClick = () => {
@@ -74,37 +93,13 @@ class ReviewFilter extends Component {
     this.setState({ filData: filterData });
   };
 
-  render() {
-    return (
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
-          handleSelect={this.handleSelect}
-        />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-        </div>
-      </div>
-    );
-  }
+
 }
 
 ReviewFilter.propTypes = {
   handleApplyClick: PropTypes.func,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  isRank: PropTypes.string
 };
 
 export default ReviewFilter;
