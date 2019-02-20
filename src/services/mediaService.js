@@ -13,11 +13,13 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 // export const getCategories = payload => api.get("/categories", payload);
 
 export const uploadMediaImage = (
+  postType,
   payload,
   header = { "Content-Type": "multipart/form-data" }
-) => api(baseUrl, header).post(uploadMediaImageEndPoint, payload);
+) => api(baseUrl, header).post(`${uploadMediaImageEndPoint}?postType=${postType}`, payload);
 
 export const uploadMediaVideo = (
+  postType,
   payload,
   header = { "Content-Type": "multipart/form-data" }
-) => api(baseUrl, header).post(uploadMediaVideoEndPoint, payload);
+) => api(baseUrl, header).post(`${uploadMediaVideoEndPoint}?postType=${postType}`, payload);

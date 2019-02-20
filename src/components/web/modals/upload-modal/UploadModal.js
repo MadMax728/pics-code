@@ -178,7 +178,7 @@ class UploadModal extends Component {
         }
         Data.append("postType", "mediapost");
         Data.append("location", JSON.stringify(form.add_location));
-        this.props.uploadMedia(Data, form.filetype).then(() => {
+        this.props.uploadMedia(Data, form.filetype, "mediapost").then(() => {
           this.setState(initialState);
           /* Add Participants */
           if (this.props.data) {
