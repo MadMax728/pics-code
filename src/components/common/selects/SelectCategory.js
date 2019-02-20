@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getSelect } from "../../../actions";
-import { connect } from "react-redux";
 import { Translations } from "../../../lib/translations";
+import { categoryList } from "../../../lib/constants/select";
 
 class SelectCategory extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryList: []
+      categoryList
     };
   }
 
@@ -27,57 +26,30 @@ class SelectCategory extends Component {
         <option value="">{Translations.select_category}</option>
         {categoryList.map(option => (
           <option value={option.id} key={option.id}>
-            {option.categoryName}
+            {option.value}
           </option>
         ))}
       </select>
     );
   }
 
-  componentDidMount = () => {
-    this.props.getSelect("categories").then(() => {
-      if (this.props.categoryList) {
-        this.setState({
-          categoryList: this.props.categoryList
-        });
-      }
-    });
-  };
-
-  // componentWillUnmount = () => {
-  //   this.setState({ categoryList: [] });
-  // };
-
   handleCategory = event => {
-    const { categoryList } = this.props;
+    const { categoryList } = this.state;
     const name = categoryList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: (name.length !== 0) ?  name[0].categoryName : ""
+      name: (name.length !== 0) ?  name[0].value : ""
     }
     this.props.handleSelect("category", data);
   };
 }
 
-const mapStateToProps = state => ({
-  categoryList: state.selectData.categories
-});
-
-const mapDispatchToProps = {
-  getSelect
-};
-
 const propTypes = {
   value: PropTypes.any,
-  categoryList: PropTypes.any,
   className: PropTypes.string,
-  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
 SelectCategory.propTypes = propTypes;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectCategory);
+export default SelectCategory;

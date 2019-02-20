@@ -121,7 +121,7 @@ class StepOne extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
-              {form.radius.length === 0 && form.error && (
+              {form.radius === "" && form.error && (
                 <ErrorSpan value={Translations.error.create_modal.radius} />
               )}
             </div>
@@ -136,7 +136,7 @@ class StepOne extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
-              {form.category.length === 0 && form.error && (
+              {form.category === "" && form.error && (
                 <ErrorSpan value={Translations.error.create_modal.category} />
               )}
             </div>
@@ -229,7 +229,7 @@ class StepOne extends Component {
                 className=""
                 handleSelect={handleSelect}
               />
-              {form.callToAction.length === 0 && form.error && (
+              {form.callToAction === "" && form.error && (
                 <ErrorSpan
                   value={Translations.error.create_modal.callToAction}
                 />
