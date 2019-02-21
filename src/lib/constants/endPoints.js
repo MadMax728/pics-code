@@ -58,7 +58,7 @@ export const addHashTagEndPoint = "/hashtags";
 export const usernamesEndPoint = "/users";
 
 // Like Service
-export const likeEndPoint = "/likes";
+export const likeEndPoint = "/like";
 
 // media services
 export const uploadMediaImageEndPoint = "/image/profile";

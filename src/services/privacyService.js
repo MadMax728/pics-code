@@ -40,4 +40,4 @@ export const deleteSearchHistory = (payload, header = {}) =>
   api(baseUrl, header).put(deleteSearchHistoryEndPoint, payload);
 
 export const deactivateAccount = (payload, header = {}) =>
-  api(baseUrl, header).put(deactivateAccountEndPoint, payload);
+  api(baseUrl, header).patch(deactivateAccountEndPoint, payload);
