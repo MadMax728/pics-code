@@ -649,13 +649,15 @@ class PrivacyPage extends Component {
       ) {
         errors.servererror = Translations.privacy.server_error;
         this.setState({ error: errors });
-      } else if (userInfo) {
-        const data = {
-          username: userInfo.username
-        };
-        this.props.getUser(data).then(() => {
-          this.setDataOnLoad();
-        });
+      } else {
+        if (
+          this.props.profilePrivacyData &&
+          this.props.profilePrivacyData.socialShareData
+        ) {
+          this.setState({
+            isSocialShare: this.props.profilePrivacyData.socialShareData
+          });
+        }
       }
     });
   };
@@ -672,11 +674,15 @@ class PrivacyPage extends Component {
       ) {
         errors.servererror = Translations.privacy.server_error;
         this.setState({ error: errors });
-      } else if (userInfo) {
-        const data = { username: userInfo.username };
-        this.props.getUser(data).then(() => {
-          this.setDataOnLoad();
-        });
+      } else {
+        if (
+          this.props.profilePrivacyData &&
+          this.props.profilePrivacyData.personalAdvertiseData
+        ) {
+          this.setState({
+            isPersonalized: this.props.profilePrivacyData.personalAdvertiseData
+          });
+        }
       }
     });
   };

@@ -30,9 +30,9 @@ class Messages extends Component {
 
   selectUser = newUser => {
     const { user } = this.state;
-    if (!newUser || !newUser.id || (user && user.id === newUser.id)) return;
+    if (!newUser || !newUser._id || (user && user._id === newUser._id)) return;
     this.setState({ user: newUser, messages: [] });
-    websocket.join(newUser.id, this.state.me);
+    websocket.join(newUser.id, this.state.me, this.state.me);
   };
 
   render() {

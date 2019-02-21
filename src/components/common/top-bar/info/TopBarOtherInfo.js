@@ -151,7 +151,7 @@ class TopBarOtherInfo extends Component {
     }
     // }
     const items = {
-      userid: this.props.userDataByUsername.user.data.id,
+      userid: this.props.userDataByUsername.user.data._id,
       username: this.props.userDataByUsername.user.data.username,
       private: this.props.userDataByUsername.user.data.isPrivate,
       more: true,
@@ -164,21 +164,21 @@ class TopBarOtherInfo extends Component {
           className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.subscriber,
           val: this.props.userDataByUsername.user.data.subscribersCount,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         },
         {
           className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.subscribed,
           val: this.props.userDataByUsername.user.data.subscribedCount,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         },
         {
           className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.posts,
           val: this.props.userDataByUsername.user.data.postCount,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         }
       ],
@@ -189,7 +189,7 @@ class TopBarOtherInfo extends Component {
           btnActiveClassName: subscribeBtnClass,
           btnText: subscribeBtnText,
           handeleEvent: this.handeleSubscribe,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         },
         {
@@ -198,7 +198,7 @@ class TopBarOtherInfo extends Component {
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.message,
           handeleEvent: this.handeleMessage,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         }
       ]
@@ -247,7 +247,9 @@ class TopBarOtherInfo extends Component {
   };
 
   handeleMessage = () => {
-    this.props.history.push(routes.MESSAGES_ROUTE);
+    console.log('this.props.userDataByUsername.user.data._id ', this.props.userDataByUsername.user.data._id);
+    const username = this.props.userDataByUsername.user.data.username;
+    this.props.history.push(`${routes.MESSAGES_ROUTE}?new=${username}`);
   };
 }
 

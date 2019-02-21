@@ -1,5 +1,5 @@
 // admin Services
-export const getAdminsEndPoint = "/users/admin/list?type=adminDashBoard";
+export const getAdminsEndPoint = "/users/admin?type=adminDashBoard";
 export const updateAdminEndPoint = "/users/set-isadmin";
 
 // ad Services
@@ -31,11 +31,11 @@ export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
 
 // CMS Management Service
-export const getCMSManagementEndPoint = "/cmspages";
-export const getCMSDetailEndPoint = "/cmspages/";
-export const getWebCMSDetailEndPoint = "/cmspages/cmspage";
-export const updateCMSEndPoint = "/cmspages/";
-export const createCMSEndPoint = "/cmspages/";
+export const getCMSManagementEndPoint = "/cmspage";
+export const getCMSDetailEndPoint = "/cmspage/";
+export const getWebCMSDetailEndPoint = "/cmspage/cmspage";
+export const updateCMSEndPoint = "/cmspage";
+export const createCMSEndPoint = "/cmspage/";
 
 // Comment Service
 export const getCommentsEndPoint = "/comment/";
@@ -142,7 +142,7 @@ export const getUserListSubscriberEndPoint =
 export const getUserListUnknownEndPoint = "/messages/userlist?type=unknown";
 export const getUserListLikeYouEndPoint = "/messages/userlist?type=likeYou";
 export const getUserListCompanyEndPoint = "/messages/userlist?type=company";
-export const sendRequestEndPoint = "/subscribe/send-request";
+export const sendRequestEndPoint = "/subscribe";
 export const getUnsubscribeEndPoint = "/subscribe/";
 export const getPendingUserListEndPoint = "/subscribe";
 export const acceptRequestEndPoint = "/subscribe/accept-request";

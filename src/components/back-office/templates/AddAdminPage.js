@@ -269,14 +269,6 @@ class AddAdminPage extends Component {
       {
         name: Translations.adminRole.rank1,
         value: Translations.adminRole.rank1
-      },
-      {
-        name: Translations.adminRole.rank2,
-        value: Translations.adminRole.rank2
-      },
-      {
-        name: Translations.adminRole.rank3,
-        value: Translations.adminRole.rank3
       }
     ];
 
