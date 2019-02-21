@@ -48,7 +48,7 @@ class MRightUserInput extends Component {
         return (
             <div className="write-chat">
                 {
-                    item && item.id && (
+                    item && item._id && (
                     <div>
                         <textarea type="text" placeholder="Write a message… " 
                             onChange={this.handleChange}

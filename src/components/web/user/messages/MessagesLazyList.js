@@ -31,7 +31,7 @@ class MessagesLazyList extends Component {
       if (
         user &&
         (me === data.recipientId || me === data.senderId) &&
-        (user.id === data.recipientId || user.id === data.senderId)
+        (user._id === data.recipientId || user._id === data.senderId)
       ) {
         this.setState({ messages: [...this.state.messages, data] });
       }
@@ -123,7 +123,7 @@ class MessagesLazyList extends Component {
     return (
       <div>
         {messages.map((item, key) => (
-          <div key={item.id}>
+          <div key={item._id}>
             {key === 0 && (
               <div className="date">{DateFormat(item.createdAt)}</div>
             )}

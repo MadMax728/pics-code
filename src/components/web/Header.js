@@ -33,6 +33,7 @@ class Header extends Component {
       userInfo = JSON.parse(storage.userInfo);
     }
     if (userInfo && userInfo.id) {
+      websocket.join(null, null, userInfo.id);
       websocket.messagecount(userInfo.id, count => {
         if (count && count.messageCount) {
           this.setState({ messageCount: count.messageCount });
@@ -287,8 +288,8 @@ class Header extends Component {
                         {messageCountView}
                       </span>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
 
@@ -320,7 +321,7 @@ class Header extends Component {
           </div>
         </nav>
       </header>
-      
+
     );
   }
 }
