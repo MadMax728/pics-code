@@ -17,6 +17,8 @@ import ReportCard from "./ReportCard";
 import * as enumerations from "../../lib/constants/enumerations";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
+import moment from "moment";
+
 const storage = Auth.extractJwtFromStorage();
 let userMentionList = [];
 class CommentCard extends Component {
@@ -80,14 +82,19 @@ class CommentCard extends Component {
       // mentionedUserId: []
     };
     this.props.addComment(data).then(() => {
-      if (this.props.comment) {
+      const { comment } = this.props;
+      console.log(comment);
+      
+      if (comment) {
         const commentData = {
-          id: this.props.comment.id,
-          comment: this.props.comment.comment,
-          username: this.props.comment.userName,
-          userId: this.props.comment.userId,
-          profileImage: this.props.comment.profileImage,
-          date: this.props.comment.createdAt
+          id: comment._id,
+          comment: comment.comment,
+          userId: comment.createdBy,
+          createdBy: {
+            profileUrl: comment.profileUrl,
+            username: comment.username,
+          },
+          date: comment.createdAt
         };
         comments.unshift(commentData);
         slicedCommentsData.unshift(commentData);
@@ -241,11 +248,11 @@ class CommentCard extends Component {
           <div className="comment-wrapper">
             <div className="comment-header">
               <UserImageItem
-                item={comment.profileImage}
+                item={comment.profileUrl}
                 customClass={`img-circle img-responsive`}
               />
               <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-                <b>{comment.userName}</b>{" "}
+                <b>{comment.username}</b>{" "}
                 {DateFormat(
                   comment.createdAt,
                   Translations.date_format.time,
@@ -281,17 +288,19 @@ class CommentCard extends Component {
   };
 
   renderComment = comment => {
+    console.log(comment);
+    
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">
           <UserImageItem
-            item={comment.profileImage}
+            item={comment.createdBy.profileUrl}
             customClass={`img-circle img-responsive`}
           />
           <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b>{" "}
+            <b>{comment.createdBy.username}</b>{" "}
             {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
-            <b>Reply</b>
+            <b>{Translations.reply}</b>
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
             <ThreeDots

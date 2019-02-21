@@ -38,10 +38,10 @@ export const updateCMSEndPoint = "/cmspages/";
 export const createCMSEndPoint = "/cmspages/";
 
 // Comment Service
-export const getCommentsEndPoint = "/comments/get-comment";
-export const addCommentEndPoint = "/comments";
-export const deleteCommentEndPoint = "/comments?id=";
-export const editCommentEndPoint = "/comments";
+export const getCommentsEndPoint = "/comment/";
+export const addCommentEndPoint = "/comment/";
+export const deleteCommentEndPoint = "/comment/";
+export const editCommentEndPoint = "/comment/";
 
 // Dashboard Service
 export const newsEndPoint = "/newsfeeds/news-feeds";
@@ -112,7 +112,7 @@ export const getNewsFeedOwnerEndPoint = "newsfeeds/own-news-feeds";
 export const getNewsFeedOtherEndPoint = "/newsfeeds/own-news-feeds?id=";
 export const getSavedOwnerEndPoint = "/saveposts";
 export const getAboutEndPoint = "/users/";
-export const setSavedPostEndPoint = "/saveposts/";
+export const setSavedPostEndPoint = "/savepost/";
 
 // tags service
 

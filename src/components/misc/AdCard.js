@@ -66,7 +66,7 @@ class AdCard extends Component {
           <CommentCard
             item={comments}
             itemId={item.id}
-            typeContent={item.typeContent}
+            typeContent={"Ads"}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
           />
@@ -291,15 +291,15 @@ class AdCard extends Component {
     const { isSavedPage } = this.props;
     const item = this.state.item;
     const data = {
-      typeId: e.target.id,
-      postType: getBackendPostType(item)
+      post: e.target.id,
+      postType: "advertisement"
     };
 
     this.props.setSavedPost(data).then(() => {
       if (
         this.props.savedData &&
         this.props.savedData.saved &&
-        this.props.savedData.saved.typeId === item.id
+        this.props.savedData.saved.post === item.id
       ) {
         item.isSavedPost = !item.isSavedPost;
         this.setState({ item });
