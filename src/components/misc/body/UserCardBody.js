@@ -1,87 +1,105 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
 import { Loader, ThreeDots, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 
-const UserCardBody = ({
-  user,
-  index,
-  handleSubscribed,
-  isReport,
-  isBackOffice,
-  renderReportTips,
-  isLoading
-}) => {
-  let classNameText = "filled_button";
-  let btnText = Translations.profile_community_right_sidebar.Subscribed;
-  // if (user.isPending) {
-  //   btnText = Translations.profile_community_right_sidebar.Pending;
-  //   classNameText = "filled_button";
-  // } else
-  if (user.isSubscribe) {
-    btnText = Translations.profile_community_right_sidebar.Subscribed;
-    classNameText = "filled_button";
-  } else {
-    btnText = Translations.profile_community_right_sidebar.Subscribe;
-    classNameText = "blue_button";
+class UserCardBody extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      user: this.props.user
+    };
   }
-  const actionButton = {
-    className: classNameText,
-    userId: user.username,
-    handleActionClick: handleSubscribed,
-    btnText,
-    isLoading
-  };
-  return (
-    <div
-      className={
-        index % 2 === 0 ? "col-sm-6 pic-left-block" : "col-sm-6 pic-right-block"
-      }
-    >
-      <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
-        <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
-          <div className="profile-img-wrapper">
-            <img src={user.profileUrl} alt={"pic-1"} />
-          </div>
-        </LazyLoad>
-        <div className="name-wrapper">
-          <div className="username">{user.username}</div>
-          {/* <div className="name">{user.name}</div> */}
-          {isBackOffice && (
-            <div className="show_more_options user">
-              <ThreeDots
-                id={`report-${user.id}`}
-                role="button"
-                dataTip="tooltip"
-                dataClass="tooltip-wrapr"
-                getContent={renderReportTips}
-                effect="solid"
-                delayHide={500}
-                delayShow={500}
-                delayUpdate={500}
-                place={"left"}
-                border
-                type={"light"}
-              />
+
+  render() {
+    const {
+      index,
+      handleSubscribed,
+      isReport,
+      isBackOffice,
+      renderReportTips,
+      isLoading
+    } = this.props;
+    const { user } = this.state;
+    let classNameText = "filled_button";
+    let btnText = Translations.profile_community_right_sidebar.Subscribed;
+    // if (user.isPending) {
+    //   btnText = Translations.profile_community_right_sidebar.Pending;
+    //   classNameText = "filled_button";
+    // } else
+    if (user.isSubscribe) {
+      btnText = Translations.profile_community_right_sidebar.Subscribed;
+      classNameText = "filled_button";
+    } else {
+      btnText = Translations.profile_community_right_sidebar.Subscribe;
+      classNameText = "blue_button";
+    }
+    const actionButton = {
+      className: classNameText,
+      userId: user.username,
+      handleActionClick: handleSubscribed,
+      btnText,
+      isLoading
+    };
+
+    return (
+      <div
+        className={
+          index % 2 === 0
+            ? "col-sm-6 pic-left-block"
+            : "col-sm-6 pic-right-block"
+        }
+      >
+        <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
+          <LazyLoad
+            height={200}
+            once
+            offset={[-200, 0]}
+            placeholder={<Loader />}
+          >
+            <div className="profile-img-wrapper">
+              <img src={user.profileUrl} alt={"pic-1"} />
             </div>
-          )}
-          {!isBackOffice && (
-            <Button
-              className={actionButton.className}
-              id={actionButton.userId}
-              onClick={actionButton.handleActionClick}
-              disabled={actionButton.isLoading}
-              text={actionButton.btnText}
-            />
-          )}
+          </LazyLoad>
+          <div className="name-wrapper">
+            <div className="username">{user.username}</div>
+            {/* <div className="name">{user.name}</div> */}
+            {isBackOffice && (
+              <div className="show_more_options user">
+                <ThreeDots
+                  id={`report-${user.id}`}
+                  role="button"
+                  dataTip="tooltip"
+                  dataClass="tooltip-wrapr"
+                  getContent={renderReportTips}
+                  effect="solid"
+                  delayHide={500}
+                  delayShow={500}
+                  delayUpdate={500}
+                  place={"left"}
+                  border
+                  type={"light"}
+                />
+              </div>
+            )}
+            {!isBackOffice && (
+              <Button
+                className={actionButton.className}
+                id={actionButton.userId}
+                onClick={actionButton.handleActionClick}
+                disabled={actionButton.isLoading}
+                text={actionButton.btnText}
+              />
+            )}
+          </div>
+          {user && isReport && <ReportCard item={user} />}
         </div>
-        {user && isReport && <ReportCard item={user} />}
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 UserCardBody.propTypes = {
   user: PropTypes.object.isRequired,

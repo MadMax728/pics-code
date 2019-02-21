@@ -225,7 +225,6 @@ class EditProfile extends Component {
     };
 
     const { userInfo } = this.state;
-    console.log(data);
     this.props.updateUserProfile(data).then(() => {
       this.setState({ isLoading: true });
       const errors = {};
@@ -473,7 +472,7 @@ class EditProfile extends Component {
                   value={Translations.editProfile.phone_number}
                 />
                 <Input
-                  type="number"
+                  type="tel"
                   className="form-control"
                   id="phoneNumber"
                   name="phoneNumber"
