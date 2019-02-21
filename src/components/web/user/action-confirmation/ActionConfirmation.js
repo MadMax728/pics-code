@@ -13,7 +13,7 @@ class ActionConfirmation extends Component {
 
   handleModalHides = () => {
     this.props.handleModalHide();
-    this.props.handleConfirmation(true);
+    // this.props.handleConfirmation(true);
   };
 
   handleModalAction = () => {
@@ -31,7 +31,7 @@ class ActionConfirmation extends Component {
               <Button
                 className="filled_button col-sm-6"
                 onClick={this.handleModalHides}
-                text={Translations.modal_header.cancel}
+                text={Translations.modal_header.cancle}
               />
             </div>
             <div className="col-md-6">
