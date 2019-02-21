@@ -55,11 +55,11 @@ class LeftSideBarBackOffice extends Component {
           component={SideBarBackOffice}
         />} */}
 
-        {isRank === enumerations.adminRank.rank1 && <Route
+        {/*isRank === enumerations.adminRank.rank1 && <Route
           path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
           exact
           component={SideBarBackOffice}
-        />}
+        />*/}
 
         {isRank === enumerations.adminRank.rank1 && <Route
           path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}
@@ -289,11 +289,11 @@ class LeftSideBarBackOffice extends Component {
           component={SideBarSettingBackOffice}
         />} */}
 
-       {isRank === enumerations.adminRank.rank1 && <Route
+       {/*isRank === enumerations.adminRank.rank1 && <Route
           path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
           exact
           component={SideBarSettingBackOffice}
-        />}
+       />*/}
 
         {isRank === enumerations.adminRank.rank1 && <Route
           path={routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE}

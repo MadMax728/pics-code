@@ -30,12 +30,12 @@ const Links = [
   //   activeClassName: "active",
   //   text: Translations.back_office_menu.add_verification
   // },
-  {
+  /*{
     to: routes.BACK_OFFICE_ADD_VOUCHER_ROUTE,
     className: "secondary_title",
     activeClassName: "active",
     text: Translations.back_office_menu.add_voucher
-  },
+  },*/
   {
     to: routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE,
     className: "secondary_title",

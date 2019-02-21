@@ -18,7 +18,7 @@ class CreateCMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      searchKeyword: this.props.searchData.searchKeyword,      
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
         id: "",
         title: "",
@@ -31,7 +31,7 @@ class CreateCMSManagementPage extends Component {
     };
   }
 
-  handleSelect = (isFor , selected) => {
+  handleSelect = (isFor, selected) => {
     const { form } = this.state;
     form.pageLanguage = selected.id
     this.setState({ form });
@@ -74,10 +74,10 @@ class CreateCMSManagementPage extends Component {
             <div className="form-row marBtm30 col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
                 <Label htmlFor="Language" value={Translations.cms.language} />
-                  <SelectLanguage
-                    value={form.language}
-                    handleSelect={this.handleSelect}
-                  />
+                <SelectLanguage
+                  value={form.pageLanguage}
+                  handleSelect={this.handleSelect}
+                />
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
@@ -100,7 +100,7 @@ class CreateCMSManagementPage extends Component {
                       value={Translations.cms.draft}
                       defaultChecked={form.displayPage === Translations.cms.draft}
                       onChange={this.handleChangeField}
-                    />  
+                    />
                     <Label htmlFor="Draft" value={Translations.cms.draft} />
                   </div>
                 </div>
@@ -114,18 +114,18 @@ class CreateCMSManagementPage extends Component {
             </div>
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
-                <Button 
-                  className="form-btn" 
+                <Button
+                  className="form-btn"
                   text={Translations.cms.cancle}
                 />
               </Link>
-              <Button 
-                className="form-btn" 
+              <Button
+                className="form-btn"
                 onClick={this.handlePreview}
                 text={Translations.cms.preview}
               />
-              <Button 
-                type="submit" 
+              <Button
+                type="submit"
                 className="form-btn"
                 text={isEdit ? Translations.cms.update : Translations.cms.save}
               />
@@ -149,10 +149,10 @@ class CreateCMSManagementPage extends Component {
           this.setState({
             form: {
               ...this.state.form,
-              id: this.props.cmsManagementData.cmsDetail.id,
+              id: this.props.cmsManagementData.cmsDetail._id,
               title: this.props.cmsManagementData.cmsDetail.title,
               url: this.props.cmsManagementData.cmsDetail.url,
-              language: this.props.cmsManagementData.cmsDetail.pageLanguage,
+              pageLanguage: this.props.cmsManagementData.cmsDetail.pageLanguage,
               display_page: this.props.cmsManagementData.cmsDetail.displayPage,
               description: this.props.cmsManagementData.cmsDetail.description
             }
@@ -172,7 +172,7 @@ class CreateCMSManagementPage extends Component {
   }
 
   handleChangeField = event => {
-    console.log(event.values);    
+    console.log(event.values);
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
@@ -194,7 +194,7 @@ class CreateCMSManagementPage extends Component {
           url: form.url,
           description: form.description,
           displayPage: form.displayPage,
-          language: form.pageLanguage,
+          pageLanguage: form.pageLanguage,
           title: form.title
         };
         this.props.updateCMS(data).then(() => {
@@ -205,7 +205,7 @@ class CreateCMSManagementPage extends Component {
           url: form.url,
           description: form.description,
           displayPage: form.displayPage,
-          language: form.pageLanguage,
+          pageLanguage: form.pageLanguage,
           title: form.title
         };
         this.props.createCMS(data).then(() => {

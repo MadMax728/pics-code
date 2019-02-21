@@ -234,13 +234,13 @@ class BackOfficeHomeRoute extends Component {
             />
           )} */}
 
-          {backoffice && (
+          {/*backoffice && (
             <Route
               path={routes.BACK_OFFICE_ADD_VOUCHER_ROUTE}
               exact
               component={this.handleAddVoucherPage}
             />
-          )}
+          )*/}
 
           {backoffice && (
             <Route

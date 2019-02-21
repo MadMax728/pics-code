@@ -136,7 +136,7 @@ export const reportType = {
 };
 
 export const adminRank = {
-  rank1: "rank1",
+  rank1: "admin",
   rank2: "rank2",
   rank3: "rank3"
 };

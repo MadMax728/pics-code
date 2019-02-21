@@ -32,7 +32,7 @@ class MRightActiveChat extends Component {
         return (
             <div onScroll={this.trackScrolling} className={"active-chat"} id={"header-chat-"+user.id}>
             {
-                user && user.id ? (
+                user && user._id ? (
                     <MessagesLazyList user={user} count={count}/>
                 ) : (
                     <div className="full-width text-center">
