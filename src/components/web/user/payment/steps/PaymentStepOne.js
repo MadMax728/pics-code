@@ -12,6 +12,8 @@ class PaymentStepOne extends Component {
 
   render() {
     const { handleAddress, form, userInfo, forThat } = this.props;
+    console.log(form.address);
+    
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">
@@ -31,7 +33,7 @@ class PaymentStepOne extends Component {
                 className="form-control"
                 id="invoiceRecipient"
                 name="invoiceRecipient"
-                defaultValue={form.address.invoiceRecipient}
+                value={form.address.invoiceRecipient}
                 onChange={handleAddress}
               />
               {form.address.invoiceRecipient.length === 0 && form.error && (
@@ -48,13 +50,13 @@ class PaymentStepOne extends Component {
               <Input
                 type="text"
                 name="street"
-                defaultValue={form.address.street}
+                value={form.address.street}
                 onChange={handleAddress}
               />
               <Input
                 type="text"
                 name="streetNumber"
-                defaultValue={form.address.streetNumber}
+                value={form.address.streetNumber}
                 onChange={handleAddress}
               />
               {form.address.street.length === 0 ||
@@ -72,7 +74,7 @@ class PaymentStepOne extends Component {
               <Input
                 type="text"
                 name="postalCode"
-                defaultValue={form.address.postalCode}
+                value={form.address.postalCode}
                 onChange={handleAddress}
               />
               {form.address.postalCode.length === 0 && form.error && (
@@ -84,7 +86,7 @@ class PaymentStepOne extends Component {
               <Input
                 type="text"
                 name="city"
-                defaultValue={form.address.city}
+                value={form.address.city}
                 onChange={handleAddress}
               />
               {form.address.city.length === 0 && form.error && (
@@ -99,7 +101,7 @@ class PaymentStepOne extends Component {
               <Input
                 type="text"
                 name="country"
-                defaultValue={form.address.country}
+                value={form.address.country}
                 onChange={handleAddress}
               />
               {form.address.country.length === 0 && form.error && (
@@ -110,7 +112,7 @@ class PaymentStepOne extends Component {
               <Label htmlFor="title" value={Translations.payment_modal.VATNO} />
               <Input
                 type="text"
-                defaultValue={form.address.VATNO}
+                value={form.address.VATNO}
                 name="VATNO"
                 onChange={handleAddress}
               />

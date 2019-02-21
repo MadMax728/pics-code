@@ -29,4 +29,4 @@ export const createAd = (payload, header = {}) =>
 
 // Update Ad
 export const updateAd = (payload, header = {}) =>
-  api(baseUrl, header).put(editAdEndPoint, payload);
+  api(baseUrl, header).put(`${editAdEndPoint}${payload.id}`, payload);
