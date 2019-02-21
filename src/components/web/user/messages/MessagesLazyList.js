@@ -96,8 +96,8 @@ class MessagesLazyList extends Component {
 
   getMessages = callback => {
     const { me, user, lastEvaluatedKeys, messages } = this.state;
-    if (!user || !user.id) return;
-    this.props.getMessages(me, user.id, lastEvaluatedKeys).then(() => {
+    if (!user || !user._id) return;
+    this.props.getMessages(me, user._id, lastEvaluatedKeys).then(() => {
       const { messagesData } = this.props;
       if (messagesData && !messagesData.isLoading && messagesData.messages) {
         const newMessages = [...messagesData.messages, ...messages];
