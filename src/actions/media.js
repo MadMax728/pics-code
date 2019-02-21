@@ -18,7 +18,7 @@ const uploadMediaFailed = error => ({
   error: true
 });
 
-export const uploadMedia = (provider, fileType) => {
+export const uploadMedia = (provider, fileType, postType) => {
   return dispatch => {
     dispatch(uploadMediaStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -27,8 +27,7 @@ export const uploadMedia = (provider, fileType) => {
     };
 
     if (fileType) {
-      console.log("image");
-      return mediaService.uploadMediaImage(provider, header).then(
+      return mediaService.uploadMediaImage(postType, provider, header).then(
         res => {
           dispatch(uploadMediaSucceeded(res.data.data));
         },
@@ -43,7 +42,7 @@ export const uploadMedia = (provider, fileType) => {
     }
     else if (!fileType) {
       console.log("video");
-      return mediaService.uploadMediaVideo(provider, header).then(
+      return mediaService.uploadMediaVideo(postType, provider, header).then(
         res => {
           dispatch(uploadMediaSucceeded(res.data.data));
         },

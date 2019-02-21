@@ -46,13 +46,13 @@ class ResetMail extends Component {
                   {form.email.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <ErrorSpan value={error.email} /> 
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan value={error.email} />
                 </div>
                 <div className="form-group">
-                  <Button 
-                    className="blue_button" 
+                  <Button
+                    className="blue_button"
                     onClick={this.handleSubmit}
                     text={Translations.register.send}
                   />
@@ -74,7 +74,7 @@ class ResetMail extends Component {
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
     this.formValid();
   };
@@ -86,13 +86,13 @@ class ResetMail extends Component {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (form.email.length === 0) {
-      errors.email = "Email is required.";
+      errors.email = Translations.reset_email.email_required;
       isFormValid = false;
     }
     const isValidemail = emailRegex.test(form.email);
     if (!isValidemail) {
       isFormValid = false;
-      errors.email = "Email ID should be valid.";
+      errors.email = Translations.reset_email.email_valid;
     }
     this.setState({ error: errors });
     return isFormValid;
@@ -121,7 +121,7 @@ class ResetMail extends Component {
         this.props.resetPasswordData.error &&
         this.props.resetPasswordData.error.status === 400
       ) {
-        errors.servererror = "Something went wrong";
+        errors.servererror = Translations.comman_error.server_error;
         this.setState({ error: errors });
       } else {
         this.props.history.push(routes.FORGOT_PASSWORD);

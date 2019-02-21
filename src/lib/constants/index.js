@@ -8,3 +8,4 @@ export * from "./inputMasks";
 export * from "./routes";
 export * from "./toolBarConfig";
 export * from "./videos";
+export * from "./select";

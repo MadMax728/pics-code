@@ -20,21 +20,21 @@ const AdCardHeader = ({
 
   const profile_route = ad.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${ad.userName}`;
+    : `${routes.NEWS_FEED_ROUTE}/${ad.username}`;
   const favorite_icon = ad.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
       <Link to={profile_route}>
-          <UserImageItem item={ad.profileImage} customClass={`img-circle img-responsive padding-right-15`} />
+          <UserImageItem item={ad.createdBy.profileUrl} customClass={`img-circle img-responsive padding-right-15`} />
       </Link>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link to={profile_route}>
-          <div className="normal_title">{ad.userName}</div>
+          <div className="normal_title">{ad.createdBy.username}</div>
         </Link>
         {ad.category && (
           <div className="grey_title">
             {Translations.sponsored_in}{" "}
-            {ad.category[0].categoryName}
+            {ad.category}
           </div>
         )}
       </div>

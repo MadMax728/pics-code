@@ -690,7 +690,8 @@
       "unknown": "Unknown",
       "like_you": "Like you",
       "companies": "Companies"
-    }
+    },
+    "no_msg": "No message yet..."
   },
 
   "mobile_sidebar_information": {
@@ -842,7 +843,12 @@
     "company": "Company",
     "user": "User",
     "free": "Register free as a",
-    "send": "Send"
+    "send": "Send",
+    "username_required": "Username is required.",
+    "email_required": "Email is required.",
+    "password_required": "Password is required.",
+    "email_valid": "Email should be valid.",
+    "password_match": "Password is not matching."
   },
 
   "login": {
@@ -888,7 +894,9 @@
 
   "reset_email": {
     "header": "Reset password",
-    "subheader": "We will send you an email to resetting your password."
+    "subheader": "We will send you an email to resetting your password.",
+    "email_required": "Email is required.",
+    "email_valid": "Email should be valid."
   },
 
   "placeholders": {
@@ -1195,5 +1203,54 @@
   "text_editor": {
     "image": "Please Upload Image Files",
     "video": "Please Upload Video Files"
+  },
+
+  "category": {
+    "craftmen": "Craftmen", 
+    "technology": "Technology", 
+    "travel": "Travel", 
+    "art_culture": "Art & Culture",
+    "beauty_cosmetics": "Beauty & Cosmetics", 
+    "sports_health": "Sports & Health",
+    "animals": "Animals", 
+    "other": "Other", 
+    "outdoor": "Outdoor", 
+    "family": "Family",
+    "automobiles": "Automobiles", 
+    "spirituality": "Spirituality", 
+    "fashion": "Fashion",
+    "charity": "Charity", 
+    "business": "Business", 
+    "movies_photography": "Movies & Photography",
+    "news_politics": "News & Politics", 
+    "entertainment": "Entertainment", 
+    "company": "Company",
+    "gaming": "Gaming", 
+    "education": "Education", 
+    "nature": "Nature", 
+    "food_drink": "Food & Drink",
+    "science": "Science", 
+    "music": "Music", 
+    "home_living": "Home & Living"
+  },
+  
+  "callToAction": {
+    "apply_now": "Apply now",
+    "register": "Register",
+    "more": "More",
+    "book_now": "Book now"
+  },
+
+  "radius": {
+    "off": "off",
+    "km50": "50km",
+    "km100": "100km",
+    "km200": "200km",
+    "km500": "500km",
+    "worldwide": "worldwide"
+  },
+  
+  "comman_error": {
+    "server_error": "Something went wrong"
   }
 }
