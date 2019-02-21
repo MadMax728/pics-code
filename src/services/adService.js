@@ -21,7 +21,7 @@ export const getSettingsAds = (payload, header = {}) =>
 
 // Ad Details
 export const getAdDetails = (payload, header = {}) =>
-  api(baseUrl, header).get(getAdsDetailsEndPoint + payload.id);
+  api(baseUrl, header).get(getAdsDetailsEndPoint + payload);
 
 // Create Ad
 export const createAd = (payload, header = {}) =>

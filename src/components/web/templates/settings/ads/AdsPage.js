@@ -5,6 +5,7 @@ import { getAds } from "../../../../../actions";
 import { CampaignLoading } from "../../../../ui-kit";
 import { AdCard } from "../../../../misc";
 import * as enumerations from "../../../../../lib/constants/enumerations";
+import { Auth } from "../../../../../auth";
 
 class AdsPage extends Component {
 
@@ -20,7 +21,15 @@ class AdsPage extends Component {
   }
 
   componentDidMount = () => {
-    this.props.getAds("getSettingsAds", "");
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      const data = `${userInfo.id}?type=User`;
+      this.props.getAds("getSettingsAds", data);
+    }
     window.scrollTo(0, 0);
   };
 
