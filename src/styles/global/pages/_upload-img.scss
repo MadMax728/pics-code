@@ -1,5 +1,4 @@
 .upload-image-modal {
-  background: #333;
   &.create-campaign-modal {
     .modal-body {
       & > div {
@@ -442,9 +441,30 @@
   }
 }
 
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  .btn {
+    padding: 8px 20px;
+    background-color: #fff;
+  }
+  input[type=file] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  i{
+    cursor: pointer;
+  }
+}
+
 .upload-file-format{
+  background: rgba(51,51,51,0.9) !important;
   .modal-dialog{
-    margin: 120px auto;
+    margin: 200px auto 100px;
     .modal-content{
       background-color: transparent;
       .closeBtn{
@@ -485,25 +505,5 @@
         }
       }
     }
-  }
-}
-
-.upload-btn-wrapper {
-  position: relative;
-  overflow: hidden;
-  display: inline-block;
-  .btn {
-    padding: 8px 20px;
-    background-color: #fff;
-  }
-  input[type=file] {
-    font-size: 100px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-  }
-  i{
-    cursor: pointer;
   }
 }

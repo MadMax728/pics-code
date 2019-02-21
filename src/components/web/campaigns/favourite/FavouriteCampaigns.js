@@ -23,7 +23,7 @@ class FavouriteCampaigns extends Component {
             {this.props.campaignData &&
             this.props.campaignData.favouriteCampaign &&
             this.props.campaignData.favouriteCampaign.length > 0 ? (
-              <Scrollbars style={{ height: `${height - 220}px` }}>
+              <Scrollbars style={{}} autoHeight autoHeightMin={0} autoHeightMax={500}>
                 {this.props.campaignData.favouriteCampaign.map(campaign => {
                   return (
                     <FavouriteCampaignItem
