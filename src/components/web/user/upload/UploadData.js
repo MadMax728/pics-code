@@ -29,7 +29,6 @@ const UploadData = ({
   isAdvertise,
   handleChangeField
 }) => {
-  console.log(form.image);
 
   return (
     <div className="col-sm-12 upload-form">

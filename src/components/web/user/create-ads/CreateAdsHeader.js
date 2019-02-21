@@ -66,7 +66,7 @@ CreateAdsHeader.propTypes = {
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
-  modalTitle: PropTypes.string.isRequired,
+  modalTitle: PropTypes.string,
   handleResetForm: PropTypes.func.isRequired
 };
 

@@ -5,7 +5,7 @@ export const updateAdminEndPoint = "/users/set-isadmin";
 // ad Services
 export const getSettingsAdsEndPoint = "/advertisement/";
 export const createAdEndPoint = "/advertisement";
-export const editAdEndPoint = "/advertisement";
+export const editAdEndPoint = "/advertisement/";
 export const getAdsDetailsEndPoint = "/advertisement/";
 
 // back-office dashboard service
@@ -38,10 +38,10 @@ export const updateCMSEndPoint = "/cmspage";
 export const createCMSEndPoint = "/cmspage/";
 
 // Comment Service
-export const getCommentsEndPoint = "/comment";
-export const addCommentEndPoint = "/comment";
-export const deleteCommentEndPoint = "/comment?id=";
-export const editCommentEndPoint = "/comment";
+export const getCommentsEndPoint = "/comment/";
+export const addCommentEndPoint = "/comment/";
+export const deleteCommentEndPoint = "/comment/";
+export const editCommentEndPoint = "/comment/";
 
 // Dashboard Service
 export const newsEndPoint = "/newsfeeds/news-feeds";
@@ -112,7 +112,7 @@ export const getNewsFeedOwnerEndPoint = "newsfeeds/own-news-feeds";
 export const getNewsFeedOtherEndPoint = "/newsfeeds/own-news-feeds?id=";
 export const getSavedOwnerEndPoint = "/saveposts";
 export const getAboutEndPoint = "/users/";
-export const setSavedPostEndPoint = "/saveposts/";
+export const setSavedPostEndPoint = "/savepost/";
 
 // tags service
 

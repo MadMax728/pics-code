@@ -32,11 +32,11 @@ class HashTag extends Component {
               <div
                 role="button"
                 tabIndex="0"
-                key={"Commnet_" + item.id}
+                key={"Commnet_" + item._id}
                 onClick={() => {
                   this._commentsCbHashTag(item);
                 }}
-                id={item.id}
+                id={item._id}
                 onKeyDown={this.onKeyHandle}
               >
                 <div>{item.hashTagName}</div>
@@ -58,7 +58,7 @@ class HashTag extends Component {
   _commentsCbHashTag = item => {
     const hashtag = item.hashTagName;
     //hashtag = hash_tag_list.filter
-    const id = item.id;
+    const id = item._id;
     let { value } = this.props;
     const commentArr = value.split(" ");
     commentArr.pop();
