@@ -1,5 +1,5 @@
 // admin Services
-export const getAdminsEndPoint = "/users/admin/list?type=adminDashBoard";
+export const getAdminsEndPoint = "/users/admin?type=adminDashBoard";
 export const updateAdminEndPoint = "/users/set-isadmin";
 
 // ad Services
