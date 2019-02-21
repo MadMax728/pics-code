@@ -262,7 +262,7 @@ class AdCard extends Component {
     this.setState({ item });
 
     const adLike = {
-      typeOfContent: "ad",
+      typeOfContent: "Ads",
       typeId: item.id
     };
     this.props.like(adLike);

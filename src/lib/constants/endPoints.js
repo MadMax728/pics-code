@@ -5,7 +5,7 @@ export const updateAdminEndPoint = "/users/set-isadmin";
 // ad Services
 export const getSettingsAdsEndPoint = "/advertisement/";
 export const createAdEndPoint = "/advertisement";
-export const editAdEndPoint = "/advertisement";
+export const editAdEndPoint = "/advertisement/";
 export const getAdsDetailsEndPoint = "/advertisement/";
 
 // back-office dashboard service
@@ -58,7 +58,7 @@ export const addHashTagEndPoint = "/hashtags";
 export const usernamesEndPoint = "/users";
 
 // Like Service
-export const likeEndPoint = "/likes";
+export const likeEndPoint = "/like";
 
 // media services
 export const uploadMediaImageEndPoint = "/image/profile";

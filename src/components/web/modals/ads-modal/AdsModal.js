@@ -211,7 +211,7 @@ class AdsModal extends Component {
     if (!nextProps.modalShow) {
       return { stepIndex: 0 };
     }
-    if (nextProps.data && nextProps.data.id) {
+    if (nextProps.data && nextProps.data.id && nextProps.data.id !== prevState.form.id) {
       return { modalTitle: Translations.modal_header.edit_ad, isEdit: true };
     }
     return null;
@@ -219,7 +219,7 @@ class AdsModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    if (data && data.id !== prevState.form.id) {
+    if (data && data.id !== prevState.form.id || !prevProps.modalShow) {
       this.handleFillState(data);
     }
   }
