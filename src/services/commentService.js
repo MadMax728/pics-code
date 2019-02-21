@@ -1,11 +1,16 @@
 import { api } from "../api";
-import { getCommentsEndPoint, addCommentEndPoint, deleteCommentEndPoint, editCommentEndPoint } from "../lib/constants/endPoints";
+import {
+  getCommentsEndPoint,
+  addCommentEndPoint,
+  deleteCommentEndPoint,
+  editCommentEndPoint
+} from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 export const getComments = (payload, header = {}) =>
-  api(baseUrl, header).post(getCommentsEndPoint, payload);
+  api(baseUrl, header).get(getCommentsEndPoint + "/:" + payload.typeId);
 
 export const addComment = (payload, header = {}) =>
   api(baseUrl, header).post(addCommentEndPoint, payload);

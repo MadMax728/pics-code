@@ -158,7 +158,7 @@ export const setSocialShare = data => {
     const header = { Authorization: storage.accessToken };
     return privacyService.setSocialShare(data, header).then(
       res => {
-        dispatch(setSocialShareSucceeded(res));
+        dispatch(setSocialShareSucceeded(res.data.success));
       },
       error => {
         dispatch(setSocialShareFailed(error.response));
@@ -175,7 +175,7 @@ export const setProfilePersonalizedAdvertise = data => {
     const header = { Authorization: storage.accessToken };
     return privacyService.setProfilePersonalizedAdvertise(data, header).then(
       res => {
-        dispatch(setProfilePersonalizedAdvertiseSucceeded(res));
+        dispatch(setProfilePersonalizedAdvertiseSucceeded(res.data.success));
       },
       error => {
         dispatch(setProfilePersonalizedAdvertiseFailed(error.response));

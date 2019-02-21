@@ -38,10 +38,10 @@ export const updateCMSEndPoint = "/cmspages/";
 export const createCMSEndPoint = "/cmspages/";
 
 // Comment Service
-export const getCommentsEndPoint = "/comments/get-comment";
-export const addCommentEndPoint = "/comments";
-export const deleteCommentEndPoint = "/comments?id=";
-export const editCommentEndPoint = "/comments";
+export const getCommentsEndPoint = "/comment";
+export const addCommentEndPoint = "/comment";
+export const deleteCommentEndPoint = "/comment?id=";
+export const editCommentEndPoint = "/comment";
 
 // Dashboard Service
 export const newsEndPoint = "/newsfeeds/news-feeds";
@@ -58,7 +58,7 @@ export const addHashTagEndPoint = "/hashtags";
 export const usernamesEndPoint = "/users";
 
 // Like Service
-export const likeEndPoint = "/likes";
+export const likeEndPoint = "/like";
 
 // media services
 export const uploadMediaImageEndPoint = "/image/profile";
@@ -142,7 +142,7 @@ export const getUserListSubscriberEndPoint =
 export const getUserListUnknownEndPoint = "/messages/userlist?type=unknown";
 export const getUserListLikeYouEndPoint = "/messages/userlist?type=likeYou";
 export const getUserListCompanyEndPoint = "/messages/userlist?type=company";
-export const sendRequestEndPoint = "/subscribe/send-request";
+export const sendRequestEndPoint = "/subscribe";
 export const getUnsubscribeEndPoint = "/subscribe/";
 export const getPendingUserListEndPoint = "/subscribe";
 export const acceptRequestEndPoint = "/subscribe/accept-request";

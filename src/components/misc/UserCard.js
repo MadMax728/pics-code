@@ -53,11 +53,12 @@ class UserCard extends Component {
       if (this.props.userDataByUsername.user.data) {
         // success
         const selectedUserList = this.props.userDataByUsername.user.data;
+        console.log(selectedUserList);
         // if (selectedUserList.isPending) {
         //   // To Do - On Pending request click
         // } else
         if (selectedUserList.isSubscribe === false) {
-          const requestData = { followers: selectedUserList.id };
+          const requestData = { followers: selectedUserList._id };
           this.props.sendRequest(requestData).then(() => {
             if (
               this.props.usersData.error &&

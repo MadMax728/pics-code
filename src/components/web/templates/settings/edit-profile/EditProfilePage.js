@@ -232,7 +232,7 @@ class EditProfile extends Component {
         this.props.userDataByUsername.error &&
         this.props.userDataByUsername.error.status === 400
       ) {
-        errors.servererror = "Something went wrong";
+        errors.servererror = Translations.comman_error.server_error;
         this.setState({ error: errors });
       } else if (userInfo) {
         const data = {
@@ -472,7 +472,7 @@ class EditProfile extends Component {
                   value={Translations.editProfile.phone_number}
                 />
                 <Input
-                  type="text"
+                  type="tel"
                   className="form-control"
                   id="phoneNumber"
                   name="phoneNumber"
@@ -490,6 +490,7 @@ class EditProfile extends Component {
                   name="email"
                   value={form.email}
                   onChange={this.handleChangeField}
+                  readOnly={form.email ? "readonly" : ""}
                 />
               </div>
               <div className="form-group margin-bottom-30">

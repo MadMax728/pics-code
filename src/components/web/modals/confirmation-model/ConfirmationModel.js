@@ -45,8 +45,6 @@ class ConfirmationModal extends Component {
           console.log("error");
           // To Do - Call back to Modal call - with error status
         } else {
-          console.log("Deactivate Accont");
-          console.log(this.props.profilePrivacyData);
           this.props.history.push(routes.LOGOUT_ROUTE);
           // To Do - Call back to Modal call - with success status
         }
