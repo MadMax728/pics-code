@@ -31,11 +31,11 @@ export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
 
 // CMS Management Service
-export const getCMSManagementEndPoint = "/cmspages";
-export const getCMSDetailEndPoint = "/cmspages/";
-export const getWebCMSDetailEndPoint = "/cmspages/cmspage";
-export const updateCMSEndPoint = "/cmspages/";
-export const createCMSEndPoint = "/cmspages/";
+export const getCMSManagementEndPoint = "/cmspage";
+export const getCMSDetailEndPoint = "/cmspage/";
+export const getWebCMSDetailEndPoint = "/cmspage/cmspage";
+export const updateCMSEndPoint = "/cmspage";
+export const createCMSEndPoint = "/cmspage/";
 
 // Comment Service
 export const getCommentsEndPoint = "/comments/get-comment";

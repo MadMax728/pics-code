@@ -81,7 +81,7 @@ class CMSManagementPage extends Component {
 
     return (
       <div key={rowIndex}>
-        <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row.id}`}>
+        <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row._id}`}>
           Edit
         </Link>
         <div
