@@ -276,7 +276,7 @@ class Feedback extends Component {
       errors.text = Translations.service_feedback.text_is_required;
       isFormValid = false;
     }
-    this.setState({ errors: errors });
+    this.setState({ errors });
     return isFormValid;
   };
 

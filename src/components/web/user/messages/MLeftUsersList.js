@@ -41,7 +41,7 @@ class MLeftUsersList extends Component {
   }
 
   componentDidMount() {
-    let username = "marc1";
+    const username = "marc1";
     if (username === "marc1") {
       this.scrollBottomOnNewMessage(username);
     }

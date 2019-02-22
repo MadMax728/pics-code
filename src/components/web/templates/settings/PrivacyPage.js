@@ -649,8 +649,7 @@ class PrivacyPage extends Component {
       ) {
         errors.servererror = Translations.privacy.server_error;
         this.setState({ error: errors });
-      } else {
-        if (
+      } else if (
           this.props.profilePrivacyData &&
           this.props.profilePrivacyData.socialShareData
         ) {
@@ -658,7 +657,6 @@ class PrivacyPage extends Component {
             isSocialShare: this.props.profilePrivacyData.socialShareData
           });
         }
-      }
     });
   };
 
@@ -674,8 +672,7 @@ class PrivacyPage extends Component {
       ) {
         errors.servererror = Translations.privacy.server_error;
         this.setState({ error: errors });
-      } else {
-        if (
+      } else if (
           this.props.profilePrivacyData &&
           this.props.profilePrivacyData.personalAdvertiseData
         ) {
@@ -683,7 +680,6 @@ class PrivacyPage extends Component {
             isPersonalized: this.props.profilePrivacyData.personalAdvertiseData
           });
         }
-      }
     });
   };
 

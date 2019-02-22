@@ -37,7 +37,7 @@ function join(senderId, recipientId, userId) {
     socket.emit('communication-message-board-join', {
         recipientId: senderId,
         senderId: recipientId,
-        userId: userId,
+        userId,
     }); 
 }
 

@@ -382,7 +382,7 @@ class LawEnforcementAgency extends Component {
       errors.text = Translations.service_law_agency.text_is_required;
       isFormValid = false;
     }
-    this.setState({ errors: errors });
+    this.setState({ errors });
     return isFormValid;
   };
 
