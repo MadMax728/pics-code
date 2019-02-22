@@ -20,7 +20,7 @@ import { Picker } from "emoji-mart";
 import moment from "moment";
 
 const storage = Auth.extractJwtFromStorage();
-let userMentionList = [];
+const userMentionList = [];
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);

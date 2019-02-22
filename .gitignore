@@ -1,6 +1,14 @@
 # ios stuff
 .DS_Store
 
+#v2 
+
+html-design
+html-design/*
+log-dashboard
+log-dashboard/*
+
+
 # node.js stuff
 bin/
 build/

@@ -54,7 +54,7 @@ class NewsRoot extends Component {
     ) {
       const { lastEvaluatedKey } = this.props;
       let payload = "?limit=10";
-      for (let i in lastEvaluatedKey) {
+      for (const i in lastEvaluatedKey) {
         payload += `&${i}=${lastEvaluatedKey[i]}`;
       }
       this.props.getDashboard("news", payload).then(() => {
