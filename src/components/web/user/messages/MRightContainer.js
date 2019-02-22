@@ -13,9 +13,15 @@ class MRightContainer extends Component {
         this.state = {
             message: ''
         }
+        this.messageListRef = null;
+    }
+
+    setMessageListRef = (ref) => {
+        this.messageListRef = ref;
     }
 
     onDeleteHistoryClick = () => {
+        this.messageListRef.clearMessages();
     };
 
     handleChange = e => {
@@ -37,7 +43,7 @@ class MRightContainer extends Component {
         return (
             <div>
                 <MRightUserItem item={user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
-                <MRightActiveChat user={user} />
+                <MRightActiveChat user={user} setMessageListRef={this.setMessageListRef} />
                 <MRightUserInput item={user} onMessageSubmit={this.onMessageSubmit} />
             </div>
         )

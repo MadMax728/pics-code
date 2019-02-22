@@ -91,7 +91,12 @@ class MessagesLazyList extends Component {
   };
 
   componentDidMount() {
+    this.props.setMessageListRef(this)
     this.getMessages(true);
+  }
+
+  clearMessages = () => {
+    this.setState({ messages: [] });
   }
 
   getMessages = callback => {
@@ -158,6 +163,7 @@ class MessagesLazyList extends Component {
 
 MessagesLazyList.propTypes = {
   getMessages: PropTypes.func.isRequired,
+  setMessageListRef: PropTypes.func,
   messagesData: PropTypes.any,
   user: PropTypes.any,
   count: PropTypes.number
