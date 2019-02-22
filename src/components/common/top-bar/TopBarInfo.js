@@ -44,11 +44,12 @@ class TopBarInfo extends Component {
     );
   }
 
-  TopBarOwnerInfo = () => {
+  TopBarOwnerInfo = match => {
     return (
       <TopBarOwnerInfo
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
+        history={match.history}
       />
     );
   };

@@ -20,7 +20,8 @@ class UserCardBody extends Component {
       isReport,
       isBackOffice,
       renderReportTips,
-      isLoading
+      isLoading,
+      isSubscribeStatus
     } = this.props;
     const { user } = this.state;
     let classNameText = "filled_button";
@@ -29,13 +30,25 @@ class UserCardBody extends Component {
     //   btnText = Translations.profile_community_right_sidebar.Pending;
     //   classNameText = "filled_button";
     // } else
-    if (user.isSubscribe) {
-      btnText = Translations.profile_community_right_sidebar.Subscribed;
-      classNameText = "filled_button";
+    if (isSubscribeStatus) {
+      if (isSubscribeStatus === "subscribe") {
+        btnText = Translations.profile_community_right_sidebar.Subscribed;
+        classNameText = "filled_button";
+      } else if (isSubscribeStatus === "unsubscribe") {
+        btnText = Translations.profile_community_right_sidebar.Subscribe;
+        classNameText = "blue_button";
+      }
     } else {
-      btnText = Translations.profile_community_right_sidebar.Subscribe;
-      classNameText = "blue_button";
+      console.log("subscribe");
+      if (user.isSubscribe) {
+        btnText = Translations.profile_community_right_sidebar.Subscribed;
+        classNameText = "filled_button";
+      } else {
+        btnText = Translations.profile_community_right_sidebar.Subscribe;
+        classNameText = "blue_button";
+      }
     }
+
     const actionButton = {
       className: classNameText,
       userId: user.username,
@@ -108,7 +121,8 @@ UserCardBody.propTypes = {
   isReport: PropTypes.bool,
   isBackOffice: PropTypes.bool,
   renderReportTips: PropTypes.any,
-  isLoading: PropTypes.any
+  isLoading: PropTypes.any,
+  isSubscribeStatus: PropTypes.any
 };
 
 export default UserCardBody;

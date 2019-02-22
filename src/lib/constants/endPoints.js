@@ -48,7 +48,7 @@ export const newsEndPoint = "/newsfeeds/news-feeds";
 export const exploresEndPoint = "/newsfeeds/explore";
 export const participantsEndPoint = "/participants/";
 export const usersEndPoint = "/users";
-export const picsEndPoint = "/images/get-pics";
+export const picsEndPoint = "/image/get-pics";
 
 // hashTag service
 export const hashTagsEndPoint = "/hashtags";
