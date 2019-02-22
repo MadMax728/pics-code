@@ -122,21 +122,29 @@ class MessagesLazyList extends Component {
     const { messages, me } = this.state;
     return (
       <div>
-        {messages.map((item, key) => (
-          <div key={item._id}>
-            {key === 0 && (
-              <div className="date">{DateFormat(item.createdAt)}</div>
-            )}
-            {key > 0 &&
-              DateFormat(messages[key - 1].createdAt) !==
-                DateFormat(item.createdAt) && (
-                <div className="date">{DateFormat(item.createdAt)}</div>
-              )}
-            <div>
-              <MessageItem me={me} item={item} />
-            </div>
-          </div>
-        ))}
+        {
+          messages.map(
+            (item, key) => {
+              if (item.deletedFor.find((userid) => (userid == me)) == undefined) {
+                return (
+                  <div key={item._id}>
+                    {key === 0 && (
+                      <div className="date">{DateFormat(item.createdAt)}</div>
+                    )}
+                    {key > 0 &&
+                      DateFormat(messages[key - 1].createdAt) !==
+                      DateFormat(item.createdAt) && (
+                        <div className="date">{DateFormat(item.createdAt)}</div>
+                      )}
+                    <div>
+                      <MessageItem me={me} item={item} />
+                    </div>
+                  </div>
+                )
+              }
+            }
+          )
+        }
         <div
           style={{ float: "left", clear: "both" }}
           ref={el => {
