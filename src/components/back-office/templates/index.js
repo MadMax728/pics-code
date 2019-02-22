@@ -9,11 +9,7 @@ export { default as ReportedSearchBar } from "./ReportedSearchBar";
 export { default as CMSPreview } from "./CMSPreview";
 export { default as CMSPreviewHeader } from "./CMSPreviewHeader";
 
-
-export { 
-  CampaignsPage,
-  AdsPage
-} from "./review";
+export { CampaignsPage, AdsPage } from "./review";
 
 export {
   ImagesBOPage,

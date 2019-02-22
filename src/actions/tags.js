@@ -78,7 +78,8 @@ export const addOfferTag = params => {
 
     return tagService.addOfferTag(params, header).then(
       res => {
-        if (res.data && res.data.data) dispatch(addOfferTagSucceeded(res.data.data));
+        if (res.data && res.data.data)
+          dispatch(addOfferTagSucceeded(res.data.data));
       },
 
       error => {

@@ -1,5 +1,8 @@
 import { api } from "../api";
-import { addVoucherEndPoint, getVouchersEndPoint } from "../lib/constants/endPoints";
+import {
+  addVoucherEndPoint,
+  getVouchersEndPoint
+} from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;

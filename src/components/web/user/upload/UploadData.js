@@ -29,7 +29,6 @@ const UploadData = ({
   isAdvertise,
   handleChangeField
 }) => {
-
   return (
     <div className="col-sm-12 upload-form">
       <div className="user-title">

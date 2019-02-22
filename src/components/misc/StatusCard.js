@@ -33,7 +33,7 @@ const StatusCard = ({ item, route, isFor }) => {
       </div> */}
       <div className="camp-statices-btn">
         <Link to={`${route}${item.id}`}>
-          <Button 
+          <Button
             className="blue_button"
             text={Translations.create_ads.statistics}
           />

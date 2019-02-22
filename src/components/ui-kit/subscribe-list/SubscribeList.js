@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ToolTip } from "..";
 
-
 class SubscribeList extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +44,6 @@ class SubscribeList extends Component {
     );
   }
 }
-
 
 const propTypes = {
   id: PropTypes.string.isRequired,

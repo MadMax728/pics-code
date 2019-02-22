@@ -56,7 +56,6 @@ class RadioBtn extends Component {
     data.values = { name: event.target.name, val: value };
     this.props.onChange(data);
   };
-
 }
 
 RadioBtn.propTypes = {

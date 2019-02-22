@@ -43,30 +43,29 @@ const adReducer = (state = initialState.adData, action) => {
         error: action.payload
       };
 
-  // Create Ad
-  case types.CREATE_AD_STARTED:
-    return {
-      ...state,
-      isLoading: true,
-      error: null
-    };
-  case types.CREATE_AD_SUCCEEDED:
-    return {
-      ...state,
-      ad: action.payload,
-      isLoading: false
-    };
-  case types.CREATE_AD_FAILED:
-    return {
-      ...state,
-      isLoading: false,
-      error: action.payload
-    };
-
+    // Create Ad
+    case types.CREATE_AD_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.CREATE_AD_SUCCEEDED:
+      return {
+        ...state,
+        ad: action.payload,
+        isLoading: false
+      };
+    case types.CREATE_AD_FAILED:
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
 
     // Update Ad
-  case types.UPDATE_AD_STARTED:
-    return {
+    case types.UPDATE_AD_STARTED:
+      return {
         ...state,
         isLoading: true,
         error: null

@@ -1,53 +1,60 @@
 import React, { Component } from "react";
-import MRightUserInput from './MRightUserInput';
-import MRightUserItem from './MRightUserItem';
-import MRightActiveChat from './MRightActiveChat';
+import MRightUserInput from "./MRightUserInput";
+import MRightUserItem from "./MRightUserItem";
+import MRightActiveChat from "./MRightActiveChat";
 import PropTypes from "prop-types";
-import * as websocket from '../../../../websocket';
-
+import * as websocket from "../../../../websocket";
 
 class MRightContainer extends Component {
-
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            message: ''
-        }
-    }
-
-    onDeleteHistoryClick = () => {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      message: ""
     };
+    this.messageListRef = null;
+  }
 
-    handleChange = e => {
-        this.setState({ message: e.target.value });
-    };
+  setMessageListRef = ref => {
+    this.messageListRef = ref;
+  };
 
-    onMessageSubmit = (content) => {
-        const message = content ? content.trim() : '';
-        const { user, me } = this.props;
-        console.log('user %o and me %o', user, me);
-        if (!message || !user || !user._id || !me) return;
-        websocket.emit(this.props.me, this.props.user._id, message)
-    }
+  onDeleteHistoryClick = () => {
+    this.messageListRef.clearMessages();
+  };
 
+  handleChange = e => {
+    this.setState({ message: e.target.value });
+  };
 
+  onMessageSubmit = content => {
+    const message = content ? content.trim() : "";
+    const { user, me } = this.props;
+    console.log("user %o and me %o", user, me);
+    if (!message || !user || !user._id || !me) return;
+    websocket.emit(this.props.me, this.props.user._id, message);
+  };
 
-    render() {
-        const { user } = this.props;
-        return (
-            <div>
-                <MRightUserItem item={user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
-                <MRightActiveChat user={user} />
-                <MRightUserInput item={user} onMessageSubmit={this.onMessageSubmit} />
-            </div>
-        )
-    }
-
+  render() {
+    const { user } = this.props;
+    return (
+      <div>
+        <MRightUserItem
+          item={user}
+          onDeleteHistoryClick={this.onDeleteHistoryClick}
+        />
+        <MRightActiveChat
+          user={user}
+          setMessageListRef={this.setMessageListRef}
+        />
+        <MRightUserInput item={user} onMessageSubmit={this.onMessageSubmit} />
+      </div>
+    );
+  }
 }
 
 MRightContainer.propTypes = {
-    user: PropTypes.any,
-    me: PropTypes.any
+  user: PropTypes.any,
+  me: PropTypes.any
 };
 
 export default MRightContainer;

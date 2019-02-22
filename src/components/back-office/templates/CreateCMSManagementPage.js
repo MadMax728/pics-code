@@ -33,9 +33,9 @@ class CreateCMSManagementPage extends Component {
 
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
-    form.pageLanguage = selected.id
+    form.pageLanguage = selected.id;
     this.setState({ form });
-  }
+  };
 
   render() {
     const { form, isEdit } = this.state;
@@ -47,13 +47,17 @@ class CreateCMSManagementPage extends Component {
           <div className="page-heading col-xs-12 mar-btm-5">
             {isEdit ? Translations.cms.edit : Translations.cms.create}
           </div>
-          {
-            cmsManagementData && cmsManagementData.isLoading && <InlineLoading />
-          }
+          {cmsManagementData && cmsManagementData.isLoading && (
+            <InlineLoading />
+          )}
           <form className="cms-form col-xs-12" onSubmit={this.handleSubmit}>
             <div className="form-row col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <Label htmlFor="Title of page" className="col-xs" value={Translations.cms.title_of_page} />
+                <Label
+                  htmlFor="Title of page"
+                  className="col-xs"
+                  value={Translations.cms.title_of_page}
+                />
                 <Input
                   type="text"
                   name="title"
@@ -81,14 +85,19 @@ class CreateCMSManagementPage extends Component {
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <Label htmlFor="Display page" value={Translations.cms.display_page} />
+                <Label
+                  htmlFor="Display page"
+                  value={Translations.cms.display_page}
+                />
                 <div className="choice-wrapr">
                   <div className="choice">
                     <RadioButton
                       type="radio"
                       name="displayPage"
                       value={Translations.cms.public}
-                      defaultChecked={form.displayPage === Translations.cms.public}
+                      defaultChecked={
+                        form.displayPage === Translations.cms.public
+                      }
                       onChange={this.handleChangeField}
                     />
                     <Label htmlFor="Public" value={Translations.cms.public} />
@@ -98,7 +107,9 @@ class CreateCMSManagementPage extends Component {
                       type="radio"
                       name="displayPage"
                       value={Translations.cms.draft}
-                      defaultChecked={form.displayPage === Translations.cms.draft}
+                      defaultChecked={
+                        form.displayPage === Translations.cms.draft
+                      }
                       onChange={this.handleChangeField}
                     />
                     <Label htmlFor="Draft" value={Translations.cms.draft} />
@@ -114,10 +125,7 @@ class CreateCMSManagementPage extends Component {
             </div>
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
-                <Button
-                  className="form-btn"
-                  text={Translations.cms.cancle}
-                />
+                <Button className="form-btn" text={Translations.cms.cancle} />
               </Link>
               <Button
                 className="form-btn"
@@ -137,8 +145,7 @@ class CreateCMSManagementPage extends Component {
   }
 
   componentDidMount = () => {
-    const isEdit =
-      !!(this.props.match && this.props.match.params.id);
+    const isEdit = !!(this.props.match && this.props.match.params.id);
     this.setState({ isEdit });
     if (isEdit) {
       this.props.getCMSDetail(this.props.match.params.id).then(() => {
@@ -181,7 +188,7 @@ class CreateCMSManagementPage extends Component {
   validationForm = () => {
     const { form } = this.state;
     return form.title && form.pageLanguage && form.url && form.description;
-  }
+  };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
@@ -217,13 +224,16 @@ class CreateCMSManagementPage extends Component {
 
   handleContentChange = text => {
     const { form } = this.state;
-    form.description = text === "<p></p>" ? "" : text;;
+    form.description = text === "<p></p>" ? "" : text;
     this.setState({ form });
   };
 
   handlePreview = () => {
-    this.props.handleModalInfoDetailsShow(modalType.cmsPreview, this.state.form);
-  }
+    this.props.handleModalInfoDetailsShow(
+      modalType.cmsPreview,
+      this.state.form
+    );
+  };
 }
 
 const mapStateToProps = state => ({

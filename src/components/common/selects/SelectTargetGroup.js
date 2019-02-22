@@ -17,11 +17,12 @@ class SelectTargetGroup extends Component {
         options={targetGroupList}
       >
         <option value="">{Translations.select_target_group}</option>
-        {targetGroupList && targetGroupList.map(option => (
-          <option value={option.id} key={option.id}>
-            {option.value}
-          </option>
-        ))}
+        {targetGroupList &&
+          targetGroupList.map(option => (
+            <option value={option.id} key={option.id}>
+              {option.value}
+            </option>
+          ))}
       </select>
     );
   }
@@ -35,8 +36,8 @@ class SelectTargetGroup extends Component {
     const name = targetGroupList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: (name.length !== 0) ?  name[0].value : ""
-    }
+      name: name.length !== 0 ? name[0].value : ""
+    };
     this.props.handleSelect("target_group", data);
   };
 }

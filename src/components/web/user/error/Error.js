@@ -17,11 +17,11 @@ class Error extends Component {
     const { modalInfoMsg } = this.props;
     return (
       <div className={"col-xs-12 no-padding"}>
-        <div className="col-sm-12 margin-bottom-10">
-          {modalInfoMsg}
-        </div>
+        <div className="col-sm-12 margin-bottom-10">{modalInfoMsg}</div>
         <div className="col-sm-12">
-          <Button className="filled_button" onClick={this.handleModalHides}
+          <Button
+            className="filled_button"
+            onClick={this.handleModalHides}
             text={Translations.modal_header.continue}
           />
         </div>

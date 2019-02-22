@@ -3,14 +3,23 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import ReactTooltip from "react-tooltip";
 
-import { getVerifications, getUnverifiedUsers, updateVerification } from "../../../actions";
+import {
+  getVerifications,
+  getUnverifiedUsers,
+  updateVerification
+} from "../../../actions";
 
-import { CustomBootstrapTable, ToolTip, CustomeTableLoader, Input, Button } from "../../ui-kit";
+import {
+  CustomBootstrapTable,
+  ToolTip,
+  CustomeTableLoader,
+  Input,
+  Button
+} from "../../ui-kit";
 import { UsernameList } from "../../common";
 
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
-
 
 class AddVerificationPage extends Component {
   constructor(props, context) {
@@ -18,7 +27,7 @@ class AddVerificationPage extends Component {
     this.username = React.createRef();
     this.state = {
       verifications: null,
-      searchKeyword: this.props.searchData.searchKeyword,      
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
         id: "",
         username: ""
@@ -43,33 +52,35 @@ class AddVerificationPage extends Component {
               placeholder={Translations.admin.Search_in_users}
               className="flex2"
               onChange={this.handleChangeUsername}
-              value={form.username? form.username : "" }
+              value={form.username ? form.username : ""}
             />
             <div
               data-for="username"
               role="button"
               data-tip="tooltip"
-              ref={username => this.username = username}
+              ref={username => (this.username = username)}
             />
-             <ToolTip
-                id="username"
-                getContent={this.renderUserNameTips}
-                effect="solid"
-                delayHide={0}
-                delayShow={0}
-                delayUpdate={0}
-                place={"bottom"}
-                border
-                type={"light"}
-              />
-            <Button 
-              className="wid30per" 
+            <ToolTip
+              id="username"
+              getContent={this.renderUserNameTips}
+              effect="solid"
+              delayHide={0}
+              delayShow={0}
+              delayUpdate={0}
+              place={"bottom"}
+              border
+              type={"light"}
+            />
+            <Button
+              className="wid30per"
               onClick={this.handleSubmit}
               text={Translations.admin.Add}
             />
           </div>
           {verifications && this.renderVerifications()}
-          {!verifications && verificationData.isLoading && <CustomeTableLoader />}
+          {!verifications && verificationData.isLoading && (
+            <CustomeTableLoader />
+          )}
         </div>
       </div>
     );
@@ -77,11 +88,14 @@ class AddVerificationPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getVerifications().then(()=> {
-      if(this.props.verificationData && this.props.verificationData.verifications) {
+    this.props.getVerifications().then(() => {
+      if (
+        this.props.verificationData &&
+        this.props.verificationData.verifications
+      ) {
         this.setState({
           verifications: this.props.verificationData.verifications
-        })
+        });
       }
     });
     this.props.getUnverifiedUsers();
@@ -104,25 +118,28 @@ class AddVerificationPage extends Component {
 
   validateForm = () => {
     const { form } = this.state;
-    return form.id && form.username
-  }
+    return form.id && form.username;
+  };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
     e.preventDefault();
 
-    if(this.validateForm()) {
+    if (this.validateForm()) {
       const { form, verifications } = this.state;
       const data = {
         userId: form.id,
         isVerifiedUser: true
-      }
-      this.props.updateVerification(data).then(()=> {
-        if(this.props.verificationData && this.props.verificationData.verification) { 
+      };
+      this.props.updateVerification(data).then(() => {
+        if (
+          this.props.verificationData &&
+          this.props.verificationData.verification
+        ) {
           const dataAdd = {
             id: this.props.verificationData.verification.id,
             username: this.props.verificationData.verification.username,
-            name: this.props.verificationData.verification.name,
+            name: this.props.verificationData.verification.name
           };
           const indexOf = verifications.findIndex(verification => {
             return verification.id === form.id;
@@ -133,9 +150,12 @@ class AddVerificationPage extends Component {
             verifications.splice(indexOf, 1);
             verifications.push(dataAdd);
           }
-          this.setState({ verifications, form: { ...this.state.form , id: "", username: ""}});
+          this.setState({
+            verifications,
+            form: { ...this.state.form, id: "", username: "" }
+          });
         }
-      })
+      });
     }
   };
 
@@ -145,11 +165,16 @@ class AddVerificationPage extends Component {
     const data = {
       userId: id,
       isVerifiedUser: false
-    }
-    this.props.updateVerification(data).then(()=> {
-      if(this.props.verificationData && this.props.verificationData.verification) { 
+    };
+    this.props.updateVerification(data).then(() => {
+      if (
+        this.props.verificationData &&
+        this.props.verificationData.verification
+      ) {
         const indexOf = verifications.findIndex(verification => {
-          return verification.id === this.props.verificationData.verification.id ;
+          return (
+            verification.id === this.props.verificationData.verification.id
+          );
         });
         if (indexOf !== -1) {
           verifications.splice(indexOf, 1);
@@ -162,9 +187,9 @@ class AddVerificationPage extends Component {
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        <Button 
-          name={row.name} 
-          id={row.id} 
+        <Button
+          name={row.name}
+          id={row.id}
           onClick={this.removeVerification}
           text={Translations.admin.Remove_Verification}
         />
@@ -174,7 +199,8 @@ class AddVerificationPage extends Component {
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size}{" "}
+      {Translations.results}
     </span>
   );
 
@@ -256,19 +282,19 @@ class AddVerificationPage extends Component {
           id={"username"}
         />
       </div>
-    )
-  }
+    );
+  };
 
-  handleSetSatetToolTipUsername = (id,username) => {   
+  handleSetSatetToolTipUsername = (id, username) => {
     const { form } = this.state;
     form.id = id;
-    form.username = username
+    form.username = username;
     this.setState({ form });
     this.usernameHide();
-  }
+  };
 
   renderUserNameTips = () => {
-    const { form }  = this.state;
+    const { form } = this.state;
     const { usersList } = this.props;
     return (
       <UsernameList
@@ -314,12 +340,10 @@ AddVerificationPage.propTypes = {
   updateVerification: PropTypes.func,
   usersList: PropTypes.any,
   searchData: PropTypes.any,
-  history: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddVerificationPage);
-
-

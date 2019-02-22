@@ -8,10 +8,9 @@ import * as enumerations from "../../../../../lib/constants/enumerations";
 import { Auth } from "../../../../../auth";
 
 class AdsPage extends Component {
-
   render() {
     const { adList, isLoading } = this.props;
-    
+
     return (
       <div className="padding-rl-10 middle-section">
         {adList && !isLoading && this.renderAdList()}
@@ -51,14 +50,21 @@ class AdsPage extends Component {
     return adList.map(ad => {
       return (
         <div key={ad.id}>
-          {ad.mediaUrl && ad.postType && ad.postType.toLowerCase() === enumerations.contentTypes.ad && (
-            <AdCard item={ad} isDescription isInformation={false} isStatus handleModalShow={handleModalShow} />
-          )}
+          {ad.mediaUrl &&
+            ad.postType &&
+            ad.postType.toLowerCase() === enumerations.contentTypes.ad && (
+              <AdCard
+                item={ad}
+                isDescription
+                isInformation={false}
+                isStatus
+                handleModalShow={handleModalShow}
+              />
+            )}
         </div>
       );
     });
   };
-
 }
 
 AdsPage.propTypes = {

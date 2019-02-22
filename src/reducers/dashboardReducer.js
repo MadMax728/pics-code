@@ -8,7 +8,7 @@ const dashboardReducer = (state = initialState.dashboardData, action) => {
       return {
         ...state,
         isLoading: true,
-        [`isLoading${ action.isFor}`]: true,
+        [`isLoading${action.isFor}`]: true,
         [`error${action.isFor}`]: null
       };
     case types.GET_DASHBOARD_SUCCEEDED:
@@ -16,14 +16,14 @@ const dashboardReducer = (state = initialState.dashboardData, action) => {
         ...state,
         isLoading: false,
         [action.isFor]: action.payload,
-        [`isLoading${ action.isFor}`]: false
+        [`isLoading${action.isFor}`]: false
       };
     case types.GET_DASHBOARD_FAILED:
       return {
         ...state,
         [action.isFor]: [],
         isLoading: false,
-        [`isLoading${ action.isFor}`]: false,
+        [`isLoading${action.isFor}`]: false,
         [`error${action.isFor}`]: action.payload
       };
     default:

@@ -911,4 +911,4 @@ export const back_office_dashboard = {
   content_statistics,
   campaign_statistics_company,
   ads_statisitcs
-}
+};

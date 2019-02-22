@@ -58,8 +58,8 @@ class SelectDailyBudget extends Component {
     const name = dailyBudgetList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: (name.length !== 0 )?  name[0].label : ""
-    }
+      name: name.length !== 0 ? name[0].label : ""
+    };
     this.props.handleSelect("budget", data);
   };
 }

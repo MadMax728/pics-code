@@ -53,7 +53,7 @@ class ReviewFilter extends Component {
     super(props);
     this.state = {
       filterApply: false,
-      filData: [],
+      filData: []
     };
   }
 
@@ -61,18 +61,18 @@ class ReviewFilter extends Component {
     const { isRank } = this.props;
     const { filterApply } = this.state;
     return (
-        <div className="left-filters">
-          <LeftSidebarFilter
-            filters={Filters}
-            onChange={this.handleOnChange}
-            filterApply={filterApply}
-            handleSelect={this.handleSelect}
-            isRank={isRank}
-            handleResetFilterClick={this.handleResetFilterClick}
-            handleApplyClick={this.handleApplyClick}
-            isNotFilter
-          />
-        </div>
+      <div className="left-filters">
+        <LeftSidebarFilter
+          filters={Filters}
+          onChange={this.handleOnChange}
+          filterApply={filterApply}
+          handleSelect={this.handleSelect}
+          isRank={isRank}
+          handleResetFilterClick={this.handleResetFilterClick}
+          handleApplyClick={this.handleApplyClick}
+          isNotFilter
+        />
+      </div>
     );
   }
 
@@ -92,8 +92,6 @@ class ReviewFilter extends Component {
   handleSelect = filterData => {
     this.setState({ filData: filterData });
   };
-
-
 }
 
 ReviewFilter.propTypes = {

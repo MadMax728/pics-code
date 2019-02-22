@@ -67,11 +67,9 @@ class CreateCreatorCampaignHeader extends Component {
     const { stepIndex, isFor } = this.props;
     if (stepIndex === 2 && !isFor) {
       this.props.handleSubmit();
-    }
-    else if(this.props.stepIndex < 5) {
+    } else if (this.props.stepIndex < 5) {
       this.props.handleNext();
-    } 
-    else {
+    } else {
       console.log("data saved code");
     }
   };

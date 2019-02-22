@@ -4,8 +4,18 @@ import PropTypes from "prop-types";
 
 import { getVouchers, addVoucher } from "../../../actions";
 
-import { CustomBootstrapTable, CustomeTableLoader, Input, Button } from "../../ui-kit";
-import { SelectPeriod, SelectAmount, SelectType, SelectNumber } from "../../common";
+import {
+  CustomBootstrapTable,
+  CustomeTableLoader,
+  Input,
+  Button
+} from "../../ui-kit";
+import {
+  SelectPeriod,
+  SelectAmount,
+  SelectType,
+  SelectNumber
+} from "../../common";
 
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
@@ -15,7 +25,7 @@ class AddVoucherPage extends Component {
     super(props, context);
     this.state = {
       voucherList: null,
-      searchKeyword: this.props.searchData.searchKeyword,      
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
         id: "",
         voucher_code: "",
@@ -49,7 +59,7 @@ class AddVoucherPage extends Component {
       if (this.props.voucherData && this.props.voucherData.vouchers) {
         this.setState({
           voucherList: this.props.voucherData.vouchers
-        })
+        });
       }
     });
   };
@@ -71,8 +81,14 @@ class AddVoucherPage extends Component {
 
   validateForm = () => {
     const { form } = this.state;
-    return form.voucher_code && form.period && form.amount && form.type && form.number
-  }
+    return (
+      form.voucher_code &&
+      form.period &&
+      form.amount &&
+      form.type &&
+      form.number
+    );
+  };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
@@ -86,7 +102,7 @@ class AddVoucherPage extends Component {
         typeId: form.type,
         amountId: form.amount,
         numberId: form.number
-      }
+      };
 
       this.props.addVoucher(data).then(() => {
         if (this.props.voucherData && this.props.voucherData.voucher) {
@@ -100,9 +116,20 @@ class AddVoucherPage extends Component {
             voucherList.splice(indexOf, 1);
             voucherList.push(dataAdd);
           }
-          this.setState({ voucherList, form: { ...this.state.form, id: "", voucher_code: "", period: "", type: "", amount: "", number: "" } });
+          this.setState({
+            voucherList,
+            form: {
+              ...this.state.form,
+              id: "",
+              voucher_code: "",
+              period: "",
+              type: "",
+              amount: "",
+              number: ""
+            }
+          });
         }
-      })
+      });
     }
   };
 
@@ -110,7 +137,7 @@ class AddVoucherPage extends Component {
     const { form } = this.state;
     form[isFor] = selected.id;
     this.setState({ form });
-  }
+  };
 
   statusFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
@@ -122,34 +149,24 @@ class AddVoucherPage extends Component {
 
   periodFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
-      <div key={rowIndex}>
-        {row.periodList && row.periodList.voucherPeriod}
-      </div>
+      <div key={rowIndex}>{row.periodList && row.periodList.voucherPeriod}</div>
     );
   };
 
   amountFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
-      <div key={rowIndex}>
-        {row.amountList && row.amountList.voucherAmount}
-      </div>
+      <div key={rowIndex}>{row.amountList && row.amountList.voucherAmount}</div>
     );
   };
 
   numberFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
-      <div key={rowIndex}>
-        {row.numberList && row.numberList.voucherNumber}
-      </div>
+      <div key={rowIndex}>{row.numberList && row.numberList.voucherNumber}</div>
     );
   };
 
   typeFormatter = (cell, row, rowIndex, formatExtraData) => {
-    return (
-      <div key={rowIndex}>
-        {row.typeList && row.typeList.voucherType}
-      </div>
-    );
+    return <div key={rowIndex}>{row.typeList && row.typeList.voucherType}</div>;
   };
 
   codeFormatter = (column, colIndex) => {
@@ -210,17 +227,13 @@ class AddVoucherPage extends Component {
   };
 
   addFormatter = (column, colIndex) => {
-    return (
-      <Button 
-        onClick={this.handleSubmit}
-        text={Translations.admin.Add}
-      />
-    );
+    return <Button onClick={this.handleSubmit} text={Translations.admin.Add} />;
   };
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size} {Translations.results}
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size}{" "}
+      {Translations.results}
     </span>
   );
 
@@ -303,22 +316,21 @@ class AddVoucherPage extends Component {
 
     return (
       <div className="dashboard-tbl voucher-table">
-            <CustomBootstrapTable
-              data={voucherList}
-              columns={columns}
-              striped
-              hover
-              bordered={false}
-              condensed
-              defaultSorted={defaultSorted}
-              pagination={pagination}
-              noDataIndication={Translations.table_empty}
-              id={"voucherCode"}
-            />
-          </div>
-    )
-  }
-
+        <CustomBootstrapTable
+          data={voucherList}
+          columns={columns}
+          striped
+          hover
+          bordered={false}
+          condensed
+          defaultSorted={defaultSorted}
+          pagination={pagination}
+          noDataIndication={Translations.table_empty}
+          id={"voucherCode"}
+        />
+      </div>
+    );
+  };
 }
 
 const mapStateToProps = state => ({
@@ -336,7 +348,7 @@ AddVoucherPage.propTypes = {
   addVoucher: PropTypes.func.isRequired,
   voucherData: PropTypes.object,
   searchData: PropTypes.any,
-  history: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(

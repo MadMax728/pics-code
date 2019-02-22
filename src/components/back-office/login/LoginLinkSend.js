@@ -18,11 +18,17 @@ class LoginLinkSend extends Component {
         <section className="main-section">
           <div className="custom-container">
             <div className="login-wrapper bkoffice-wrapper backoffice-login">
-              <h3 className="text-center">{Translations.admin_login.backoffice_login}</h3>
+              <h3 className="text-center">
+                {Translations.admin_login.backoffice_login}
+              </h3>
               <p>{Translations.admin_login.send_password} </p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <Button type="submit" className="blue_button" text={Translations.admin_login.send} />
+                  <Button
+                    type="submit"
+                    className="blue_button"
+                    text={Translations.admin_login.send}
+                  />
                 </div>
               </form>
             </div>
@@ -31,7 +37,7 @@ class LoginLinkSend extends Component {
       </div>
     );
   }
-  
+
   handleSubmit = e => {
     e.preventDefault();
     this.props.generateOTP().then(() => {
@@ -39,7 +45,6 @@ class LoginLinkSend extends Component {
         this.props.history.push(routes.LOGIN_PASSWORD_ROUTE);
     });
   };
-
 }
 
 const mapStateToProps = state => ({

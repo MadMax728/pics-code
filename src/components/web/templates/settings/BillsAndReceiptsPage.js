@@ -31,7 +31,6 @@ class BillsAndReceiptsPage extends Component {
     }
   };
 
-
   render() {
     const { dataDownload } = this.state;
     return (
@@ -81,7 +80,6 @@ class BillsAndReceiptsPage extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
   };
-
 }
 
 const mapStateToProps = state => ({
