@@ -125,7 +125,7 @@ class MessagesLazyList extends Component {
         {
           messages.map(
             (item, key) => {
-              if (item.deletedFor.find((userid) => (userid == me)) == undefined) {
+              if (item.deletedFor.find((userid) => (userid === me)) === undefined) {
                 return (
                   <div key={item._id}>
                     {key === 0 && (

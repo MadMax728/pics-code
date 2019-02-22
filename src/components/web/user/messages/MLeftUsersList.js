@@ -16,8 +16,8 @@ class MLeftUsersList extends Component {
           className={classnames("chat-wrapper", {
             new: !item.read
           })}
-          key={item.id}
-          data-id={item.id}
+          key={item._id}
+          data-_id={item._id}
           data-value={item.username}
           onClick={handleChatClick}
           onKeyDown={handleChatClick}
@@ -34,8 +34,8 @@ class MLeftUsersList extends Component {
         {items && items.length ? (
           latestUserList()
         ) : (
-          <div className="card">{Translations.message_module.no_msg}</div>
-        )}
+            <div className="card">{Translations.message_module.no_msg}</div>
+          )}
       </div>
     );
   }
