@@ -82,7 +82,8 @@
     "precommit": "lint-staged",
     "prepush": "yarn lint",
     "storybook": "yarn build-css && start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "deploy": "aws s3 cp --recursive ./build s3://picstagraph.com"
   },
   "devDependencies": {
     "@angular/language-service": "^7.2.0",
