@@ -12,6 +12,7 @@ import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
 import { Auth } from "../../auth";
+import { ReportTips } from "./items";
 
 class AdCard extends Component {
   constructor(props, context) {
@@ -32,7 +33,12 @@ class AdCard extends Component {
       isInformation,
       isReport,
       reportedContentData,
-      savedData
+      savedData,
+      isBackOffice,
+      handleModalInfoDetailsCallbackShow,
+      handleModalShow,
+      handleRemove,
+      isSavedPage
     } = this.props;
     const { isComments, item, comments } = this.state;
     return (
@@ -55,8 +61,11 @@ class AdCard extends Component {
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
           isStatus={isStatus}
-          /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          isBackOffice={isBackOffice}
+          handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+          handleModalShow={handleModalShow}
+          handleRemove={handleRemove}
+          isSavedPage={isSavedPage}
           handleFavorite={this.handleFavorite}
           isLoading={false}
           isReport={isReport}

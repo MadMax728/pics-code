@@ -14,7 +14,8 @@ import {
   typeContent,
   target_group,
   procedure,
-  budgetCalculation
+  budgetCalculation,
+  contentTypes
 } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 
@@ -75,14 +76,12 @@ const initialState = {
       country: "",
       streetNumber: ""
     },
-    voucher: "",
-    voucherAmount: "",
-    voucherCode: "",
     image: null,
     filetype: true,
     file: null,
     video: null,
     typeId: "",
+    fileName: "",
     maximumExpenses: "",
     error: false
   },
@@ -180,7 +179,6 @@ class CampaignModal extends Component {
               handleInquiryTagDelete={this.handleInquiryTagDelete}
               handleSelect={this.handleSelect}
               userInfo={userInfo}
-              setVoucherData={this.setVoucherData}
               calculateMaxClicks={this.calculateMaxClicks}
               isLoading={isLoading}
               isEdit={isEdit}
@@ -213,7 +211,6 @@ class CampaignModal extends Component {
                 handleInquiryTagDelete={this.handleInquiryTagDelete}
                 handleSelect={this.handleSelect}
                 userInfo={userInfo}
-                setVoucherData={this.setVoucherData}
                 calculateMaxClicks={this.calculateMaxClicks}
                 isLoading={isLoading}
                 isEdit={isEdit}
@@ -285,10 +282,9 @@ class CampaignModal extends Component {
       form.address.country = data.address.country;
       form.address.streetNumber = data.address.street;
     }
-    form.voucherAmount = data.voucherAmount;
-    form.voucherCode = data.voucherCode;
     form.maximumExpenses = data.maximumExpenses;
     form.typeId = data.typeId;
+    form.fileName = data.fileName;
     form.error = false;
     this.setState({ form, isNewFile: false });
     this.calculateMaxClicks();
@@ -340,16 +336,13 @@ class CampaignModal extends Component {
     form.address.VATNO = "";
     form.address.country = "";
     form.address.streetNumber = "";
-    form.voucher = "";
-    form.voucherAmount = "";
-    form.voucherCode = "";
     form.image = null;
     form.filetype = true;
     form.file = null;
     form.typeId = "";
     form.maximumExpenses = "";
     form.error = false;
-    this.setState({ form });
+    this.setState({ form, isEdit: false });
   };
 
   componentWillUnmount = () => {
@@ -384,13 +377,105 @@ class CampaignModal extends Component {
   };
 
   handleSubmit = () => {
-    const { isEdit} = this.state;
-    if (isEdit) {
-      this.handleUpdateCampaign();
-    } else {
+    const { isEdit, stepIndex, form } = this.state;
+    
+    if (!isEdit && stepIndex === 1 || !form.id) {
       this.handleCreateCampaign();
+    } else {
+      this.handleUpdateCampaign();
     }
   };
+
+  handleUpdateCampaign = () => {
+    const { form, isNewFile, isFor } = this.state;
+    if (this.validateFile()) { 
+      if(isNewFile) {
+        const Data = new FormData();
+        Data.append("image", form.file);
+        Data.append("postType", "campaign");
+        this.setState({ isLoading: true });
+        const postType = isFor? contentTypes.companyCampaign : contentTypes.creatorCampaign
+        this.props.uploadMedia(Data, form.filetype, postType).then(() => {
+        const { mediaData } = this.props;
+        if (mediaData && mediaData.media) {
+          form.typeId = mediaData.media.id;
+          form.fileName = mediaData.media.imageName;
+          form.file = mediaData.media.path;
+          form.image = mediaData.media.path;
+          if (!form.maximumExpenses) {
+            form.maximumExpenses = form.budget;
+          }
+          this.setState({ form, isNewFile: false }).then(()=> {
+            this.update();
+          });
+        }
+      });
+      }
+    }
+  }
+
+  handleCreateCampaign = () => {
+    const { form, isFor } = this.state;
+    if (this.validateFile()) { 
+      const Data = new FormData();
+      Data.append("image", form.file);
+      Data.append("postType", "campaign");
+      this.setState({ isLoading: true });
+      const postType = isFor? contentTypes.companyCampaign : contentTypes.creatorCampaign
+      this.props.uploadMedia(Data, form.filetype, postType).then(() => {
+        const { mediaData } = this.props;
+        if (mediaData && mediaData.media) {
+          form.typeId = mediaData.media.id;
+          form.fileName = mediaData.media.imageName;
+          form.file = mediaData.media.path;
+          form.image = mediaData.media.path;
+          if (!form.maximumExpenses) {
+            form.maximumExpenses = form.budget;
+          }
+          this.setState({ form, isNewFile: false }, () => {
+            this.create();
+          })
+        }
+      });
+    }
+  }
+
+  create = () => {
+    const { form } = this.state;
+    this.props.createCampaign(form).then(() => {
+      const { campaignData } = this.props;
+      if (
+        campaignData &&
+        campaignData.campaign &&
+        campaignData.campaign.id
+      ) {
+        this.handleSetstate(campaignData.campaign)
+        this.setState({ isLoading: false });
+      }
+    });
+  }
+
+  update = () => {
+    const { form, stepIndex, isFor } = this.state;
+    this.props.updateCampaign(form).then(() => {
+      const { campaignData } = this.props;
+      if (
+        campaignData &&
+        campaignData.campaign &&
+        campaignData.campaign.id
+      ) {
+
+        if(stepIndex === 2 && !isFor){
+          this.handleModalInfoShow();
+        }
+        if(isFor && stepIndex === 4){
+          this.handleModalInfoShow();            
+        }
+        this.handleSetstate(campaignData.campaign);
+        this.setState({ isLoading: false });
+      }
+    });
+  }
 
   validateFile = () => {
     const { form } = this.state;
@@ -404,78 +489,8 @@ class CampaignModal extends Component {
     return true;
   }
 
-  handleUploadMedia = () => {
-    const { form } = this.state;
-    const Data = new FormData();
-    Data.append("image", form.file);
-    Data.append("postType", "campaign");
-    this.setState({ isLoading: true });
-    this.props.uploadMedia(Data, form.filetype).then(() => {
-      const { mediaData } = this.props;
-      if (mediaData && mediaData.media) {
-        form.typeId = mediaData.media.id;
-        form.file = mediaData.media.path;
-        form.image = mediaData.media.path;
-        if (!form.maximumExpenses) {
-          form.maximumExpenses = form.budget;
-        }
-        this.setState({ form, isNewFile: false });
-      }
-    });
-  }
 
-  handleUpdateCampaign = () => {
-    const { form, isNewFile, stepIndex, isFor } = this.state;
-    if (this.validateFile()) {
-      this.setState({ isLoading: true });
-      if(isNewFile) {
-        this.handleUploadMedia();
-      }
-      this.props.updateCampaign(form).then(() => {
-        if (
-          this.props.campaignData &&
-          this.props.campaignData.campaign &&
-          this.props.campaignData.campaign.id
-        ) {
-          if(stepIndex === 2 && !isFor){
-            this.handleModalInfoShow();
-          }
-          if(isFor && stepIndex === 4){
-            this.handleModalInfoShow();            
-          }
-          this.setState({ isLoading: false });
-        }
-      });
-    }
-  }
-
-  handleCreateCampaign = () => {
-    const { form } = this.state;
-    if (this.validateFile()) {
-      this.handleUploadMedia();
-      this.props.createCampaign(form).then(() => {
-        if (
-          this.props.campaignData &&
-          this.props.campaignData.campaign &&
-          this.props.campaignData.campaign.id
-        ) {
-          // this.handleModalInfoShow();
-          this.setState({ isLoading: false });
-        }
-      });
-    }
-  }
-
-  setVoucherData = (code, voucher, maximumExpenses) => {
-    const { form } = this.state;
-    if (voucher && maximumExpenses) {
-      form.voucherCode = code;
-      form.voucherAmount = voucher;
-      form.maximumExpenses = maximumExpenses;
-      this.setState({ form });
-    }
-  };
-
+ /* eslint-disable */
   validateForm = (index) => {
     const { form } = this.state;
     if (index === 0) {
@@ -512,7 +527,7 @@ class CampaignModal extends Component {
         form.address.VATNO
       );
     }
-  };
+};
 
   handleCompanySubmit = () => {
     this.handleSubmit();
@@ -537,15 +552,10 @@ class CampaignModal extends Component {
   };
 
   handleNext = () => {
-    const { stepIndex, isEdit } = this.state;
+    const { stepIndex } = this.state;
     if (stepIndex < 4) {
       if (this.validateForm(stepIndex)) {
-        if ( isEdit ) {
-          this.handleUpdateCampaign();
-        }
-        else {
-          this.handleCreateCampaign();
-        }
+        this.handleSubmit();
         this.setState({
           stepIndex: stepIndex + 1,
           form: { ...this.state.form, error: false }
@@ -617,54 +627,6 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
-  handleOfferTagChange = (id, tag) => {
-    const { form } = this.state;
-    if (form.offerTag.length === 0) {
-      form.offerTag = [];
-    }
-    form.offerTag.push(id);
-    form.offerTagList.push(tag);
-    this.setState({ form });
-  };
-
-  handleInquiryTagDelete = id => {
-    const { form } = this.state;
-    this.setState({
-      form: {
-        ...this.state.form,
-        inquiryTag: form.inquiryTag.filter(
-          tag => tag !== form.inquiryTagList[id].id
-        ),
-        inquiryTagList: form.inquiryTagList.filter(
-          tag => tag.id !== form.inquiryTagList[id].id
-        )
-      }
-    });
-  };
-
-  handleOfferTagDelete = id => {
-    const { form } = this.state;
-    this.setState({
-      form: {
-        ...this.state.form,
-        offerTag: form.offerTag.filter(tag => tag !== form.offerTagList[id].id),
-        offerTagList: form.offerTagList.filter(
-          tag => tag.id !== form.offerTagList[id].id
-        )
-      }
-    });
-  };
-
-  handleInquiryTagChange = (id, tag) => {
-    const { form } = this.state;
-    if (form.inquiryTag.length === 0) {
-      form.inquiryTag = [];
-    }
-    form.inquiryTag.push(id);
-    form.inquiryTagList.push(tag);
-    this.setState({ form });
-  };
-
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
     if (isFor === "category") {
@@ -689,17 +651,6 @@ class CampaignModal extends Component {
     const CPC = budgetCalculation.CPC;
     const budgetValue = form.budget;
     const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
-
-    // Max Clicks calculation
-    // if (noOfDaysRuntime && budgetValue) {
-    //   maxClicksValue =
-    //     (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
-    //   if (maxClicksValue >= 1200) {
-    //     maxClicksValue = 1200;
-    //   }
-    //   maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
-    //   this.setState({ maxClicks: maxClicksValue });
-    // }
 
     if (budgetValue) {
       maxClicksValue =

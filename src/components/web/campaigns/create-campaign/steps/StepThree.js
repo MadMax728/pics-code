@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import DatePicker from "react-datepicker";
-import moment from "moment";
 import { Translations } from "../../../../../lib/translations";
 import { SelectDailyBudget } from "../../../../../components/common";
 import { RightSidebarModal, Label, ErrorSpan } from "../../../../ui-kit";
@@ -10,8 +9,6 @@ class StepThree extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      startDate: moment(),
-      endDate: moment().add(7, "days"),
       maxClicks: 0
     };
   }
@@ -96,20 +93,6 @@ class StepThree extends Component {
               <ErrorSpan value={Translations.error.create_modal.budget} />
             )}
           </div>
-          {/* <div className="form-group">
-            <label htmlFor="Maximum">
-              {Translations.create_campaigns.maximum_number_of_clicks}
-            </label>
-            <div className="meter orange nostripes">
-              <span
-                style={{ width: `${maxClicks}px` }}
-                className="filled-strip"
-              />
-              <span className="number-clicks">
-                {Translations.create_campaigns.max_1200_clicks}
-              </span>
-            </div>
-          </div> */}
           <div className="form-group">
             <Label
               htmlFor="Maximum"
@@ -150,19 +133,11 @@ class StepThree extends Component {
   }
 
   handleStartDateChange = date => {
-    this.setState({ startDate: date });
     this.props.handleDate(date, "startDate");
-    // if (this.props.form.budget) {
-    //   this.props.calculateMaxClicks();
-    // }
   };
 
   handleEndDateChange = date => {
-    this.setState({ endDate: date });
     this.props.handleDate(date, "endDate");
-    // if (this.props.form.budget) {
-    //   this.props.calculateMaxClicks();
-    // }
   };
 }
 
@@ -172,7 +147,6 @@ StepThree.propTypes = {
   handleSelect: PropTypes.func.isRequired,
   userInfo: PropTypes.any,
   maxClicks: PropTypes.any,
-  calculateMaxClicks: PropTypes.func
 };
 
 export default StepThree;
