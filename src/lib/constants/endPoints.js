@@ -1,11 +1,11 @@
 // admin Services
-export const getAdminsEndPoint = "/users/admin/list?type=adminDashBoard";
+export const getAdminsEndPoint = "/users/admin?type=adminDashBoard";
 export const updateAdminEndPoint = "/users/set-isadmin";
 
 // ad Services
 export const getSettingsAdsEndPoint = "/advertisement/";
 export const createAdEndPoint = "/advertisement";
-export const editAdEndPoint = "/advertisement";
+export const editAdEndPoint = "/advertisement/";
 export const getAdsDetailsEndPoint = "/advertisement/";
 
 // back-office dashboard service
@@ -31,17 +31,17 @@ export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
 
 // CMS Management Service
-export const getCMSManagementEndPoint = "/cmspages";
-export const getCMSDetailEndPoint = "/cmspages/";
-export const getWebCMSDetailEndPoint = "/cmspages/cmspage";
-export const updateCMSEndPoint = "/cmspages/";
-export const createCMSEndPoint = "/cmspages/";
+export const getCMSManagementEndPoint = "/cmspage";
+export const getCMSDetailEndPoint = "/cmspage/";
+export const getWebCMSDetailEndPoint = "/cmspage/cmspage";
+export const updateCMSEndPoint = "/cmspage";
+export const createCMSEndPoint = "/cmspage/";
 
 // Comment Service
-export const getCommentsEndPoint = "/comments/get-comment";
-export const addCommentEndPoint = "/comments";
-export const deleteCommentEndPoint = "/comments?id=";
-export const editCommentEndPoint = "/comments";
+export const getCommentsEndPoint = "/comment/";
+export const addCommentEndPoint = "/comment/";
+export const deleteCommentEndPoint = "/comment/";
+export const editCommentEndPoint = "/comment/";
 
 // Dashboard Service
 export const newsEndPoint = "/newsfeeds/news-feeds";
@@ -58,7 +58,7 @@ export const addHashTagEndPoint = "/hashtags";
 export const usernamesEndPoint = "/users";
 
 // Like Service
-export const likeEndPoint = "/likes";
+export const likeEndPoint = "/like";
 
 // media services
 export const uploadMediaImageEndPoint = "/image/profile";
@@ -112,7 +112,7 @@ export const getNewsFeedOwnerEndPoint = "newsfeeds/own-news-feeds";
 export const getNewsFeedOtherEndPoint = "/newsfeeds/own-news-feeds?id=";
 export const getSavedOwnerEndPoint = "/saveposts";
 export const getAboutEndPoint = "/users/";
-export const setSavedPostEndPoint = "/saveposts/";
+export const setSavedPostEndPoint = "/savepost/";
 
 // tags service
 
@@ -142,7 +142,7 @@ export const getUserListSubscriberEndPoint =
 export const getUserListUnknownEndPoint = "/messages/userlist?type=unknown";
 export const getUserListLikeYouEndPoint = "/messages/userlist?type=likeYou";
 export const getUserListCompanyEndPoint = "/messages/userlist?type=company";
-export const sendRequestEndPoint = "/subscribe/send-request";
+export const sendRequestEndPoint = "/subscribe";
 export const getUnsubscribeEndPoint = "/subscribe/";
 export const getPendingUserListEndPoint = "/subscribe";
 export const acceptRequestEndPoint = "/subscribe/accept-request";

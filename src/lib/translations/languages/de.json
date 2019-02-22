@@ -1,45 +1,43 @@
 {
   "app_name": "Picstagraph",
-
   "date_format": {
     "date": "MM/DD/YYYY",
     "time": "LT"
   },
-
   "complete_date_format": {
     "date": "YYYY-MM-DD HH:mm:ss",
     "time": "LT"
   },
-
   "statistics_date_format": {
     "date": "DD.MM.YYYY",
     "time": "LT"
   },
-
   "campaign_post_date_format": {
     "date": "MMMM Do YYYY",
     "time": "LT"
   },
-
   "offen": "In der Picstagraph-App offenen",
-
   "subscribe": "Subscribe",
-
   "subscribed": "Subscribed",
-
   "like": "Like",
-
   "like_you_too": "Like you too",
-
   "message": "Message",
-
   "upload_title_image": "Upload title image",
-
   "view_more_comments": "View more comments",
   "view_less_comments": "View less comments",
-
   "favourite_campaigns": "Favourite Campaigns",
-
+  "report_review": {
+    "date": "Date",
+    "reports": "Reports",
+    "status": "Status",
+    "start": "Start",
+    "end": "End",
+    "daily_budget": "Daily budget",
+    "clicks": "Clicks",
+    "views": "Views",
+    "applications": "Applications",
+    "statistics": "Statistics"
+  },
   "about": {
     "general_information": "General informations",
     "username": "User name",
@@ -57,7 +55,6 @@
     "offer_tag": "Offer tag",
     "inquiry_tag": "Inquiry tag"
   },
-
   "upload_modal": {
     "title_of_upload": "Create an Upload",
     "add_title": "Add Title",
@@ -68,12 +65,12 @@
     "upload_file": "Upload File",
     "yes": "Yes",
     "no": "No",
-    "add_image": "Add image",
-    "add_video": "Add Video",
     "upload_image": "Upload Image",
     "upload_video": "Upload Video",
     "title_of_image_upload": "Create an Image",
     "title_of_video_upload": "Create a Video",
+    "add_image": "Add image",
+    "add_video": "Add Video",
     "add_image_help_text": "Upload your image which you want to show the world.",
     "add_video_help_text": "Upload your video which you want to show the world.",
     "video_title_help_text": "You can add a title which users will give an impression about your video.",
@@ -84,7 +81,6 @@
     "image_label_advertisement_help_text": "Label your image as advertisement if you have a product placement.",
     "video_label_advertisement_help_text": "Label your video as advertisement if you have a product placement."
   },
-
   "create_ads": {
     "ad": "Ad",
     "runtime": "Runtime",
@@ -155,7 +151,6 @@
     "create_ad": "Create Ad",
     "what_are_ad": "What are ads?"
   },
-
   "create_campaigns": {
     "clicks": "Clicks",
     "views": "Views",
@@ -181,11 +176,11 @@
     "anonymous": "Anonymous",
     "public": "Public",
     "procedure": "Add procedure",
-    "description_placeholder": "Write something..",
     "application_criteria": "Application criteria",
     "select_category": "Select category",
     "add_category": "Add category",
     "add_location": "Add location",
+    "description_placeholder": "Write something..",
     "define_runtime_budget": "Define runtime & budget",
     "start": "Start",
     "end": "End",
@@ -195,8 +190,8 @@
     "max_1200_clicks": "Max. 1200 clicks",
     "information_on_payment": "Information on payment",
     "actively_clicks": "You only have to pay when a user actively clicks on your ad on Picstagraph.",
-    "start_fee": "Starting fee : 150 €",
     "cost_control": "100 % cost control",
+    "start_fee": "Starting fee : 150 €",
     "cost_per_Click": "Cost per application: 5,00 €",
     "payment_only_after_ad_was_cloes": "Payment only after campaign was closed",
     "total_budget_can_not_be_exceeded": "Total budget can not be exceeded",
@@ -253,7 +248,12 @@
     "create_campaign": "Create Campaign",
     "what_are_campaign": "What are campaigns?"
   },
-
+  "you_have": "You have",
+  "characters_left": "characters left",
+  "payment": {
+    "your": "Your",
+    "review": "is pending review whitin the next 48 hours."
+  },
   "campaign_details": {
     "start": "Start",
     "end": "End",
@@ -268,25 +268,26 @@
     "offer": "Offer",
     "inquiry": "Inquiry"
   },
-
   "messages_modal": {
     "unknown": "Unknown",
     "messages": "Messages",
     "ready": "You are ready to chat ..",
     "Companies": "Companies"
   },
+  "sure": "Are you want to sure?",
   "modal_header": {
     "cancle": "Cancel",
     "back": "Back",
     "preview": "Preview",
     "continue": "Continue",
     "create_campaign": "Create Campaign",
+    "edit_campaign": "Edit Campaign",
     "upload_image": "Upload image",
     "create_ad": "Create Ad",
+    "edit_ad": "Edit Ad",
     "edit_profile_image": "Edit Profile Image",
     "cms_preview": "CMS Preview"
   },
-
   "notification": {
     "subscribed_to_your_profile": "Subscribed to your profile",
     "notification": "Notifications",
@@ -294,7 +295,6 @@
     "request": "Requests",
     "no_request_avail": "No Request Available"
   },
-
   "navigation": {
     "home": "Home",
     "profile": "Profile",
@@ -303,7 +303,6 @@
     "notifications": "Notifications",
     "open": "Open"
   },
-
   "information_menu": {
     "menu_title": "Information",
     "our_vision": "Our Vision",
@@ -324,7 +323,6 @@
     "payment_guidelines": "Payment Guidelines",
     "community_payment_guidelines": "Community Payment Guidelines"
   },
-
   "cms_menu": {
     "about_us": "About us",
     "about_us_information": "About us Information",
@@ -346,7 +344,9 @@
     "terms_use": "Terms of Use",
     "verification": "Verification"
   },
-
+  "reply": "Reply",
+  "sponsored_in": "Sponsored in",
+  "in": "in",
   "tool_tips": {
     "report": "Report Post",
     "unreport": "Unreport Post",
@@ -364,9 +364,9 @@
     "unblock": "Unblock",
     "report_user": "Report User",
     "unreport_user": "Unreport User",
-    "remove_participant": "Remove Participant"
+    "remove_participant": "Remove Participant",
+    "locks_unlocks": "locks / unlocks content"
   },
-
   "back_office_menu": {
     "dashboard": "Dashboard",
     "cms_managment": "CMS Management",
@@ -375,12 +375,10 @@
     "add_voucher": "Add Voucher",
     "data_download": "Data Download"
   },
-
   "review_menu": {
     "campaigns": "Campaign",
     "ads": "Ads"
   },
-
   "review_content_menu": {
     "images": "Images",
     "videos": "Videos",
@@ -390,14 +388,18 @@
     "comments": "Comments",
     "user": "User"
   },
-
   "review_filter": {
     "status": {
       "name": "Status",
       "type": "select"
     }
   },
-
+  "select": "Select",
+  "showing": "Showing",
+  "to": "to",
+  "of": "of",
+  "results": "Results",
+  "table_empty": "Table is Empty",
   "reported_content_filter": {
     "relevance": {
       "name": "Relevance",
@@ -408,7 +410,6 @@
       "type": "select"
     }
   },
-
   "base_footer": {
     "support": "Support",
     "data_protection_and_privacy_policy": "Data Protehtion & Privacy Policy",
@@ -416,7 +417,6 @@
     "general_terms_and_conditions": "General terms & Conditions",
     "netzdg": "NETZDG",
     "language": "Language",
-    "language": "Sprache",
     "terms_of_use": "Terms of Use",
     "better": "For a better user experience we use ",
     "agree": "By using picstagraph you do agree",
@@ -424,14 +424,17 @@
     "terms_and_condition": "Terms & Condition",
     "cookies": "Cookies"
   },
-
+  "cookies": {
+    "cookies": "Cookies",
+    "better_user": "For a better user experience we can use",
+    "agree": "By using picstagraph you do agree"
+  },
   "right_side_bar_statistics": {
     "all": "All",
     "outstanding": "Outstanding",
     "processed": "Processed",
     "not_processed": "Not Processed"
   },
-
   "service_menu": {
     "menu_title": "Service",
     "support": "Support",
@@ -442,7 +445,6 @@
     "delete_account": "Delete account",
     "law_enforcement_agency": "Law enforcement agency"
   },
-
   "service_feedback": {
     "title": "Feedback",
     "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
@@ -459,7 +461,6 @@
     "subject_is_required": "Subject is required",
     "text_is_required": "Text is required"
   },
-
   "service_report_problem": {
     "title": "Reported Problem",
     "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
@@ -481,7 +482,6 @@
     "account_is_required": "Account is required",
     "select_evidence": "Select Evidence in required format"
   },
-
   "service_delete_account": {
     "title": "Delete Account",
     "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
@@ -496,7 +496,6 @@
     "password_is_not_matching": "Password is not matching",
     "password_length_error": "Password Length should be greater than 8 characters"
   },
-
   "service_law_agency": {
     "title": "Law Enforcement Agency",
     "content": "This text is an example text. This text is an example text.This text is an example text.This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text. This text is an example text.",
@@ -518,14 +517,13 @@
     "account_is_required": "Account is required",
     "select_evidence": "Select Evidence in required format"
   },
-
   "left_sidebar_filter": {
     "language": {
       "name": "Language",
       "type": "radio"
     },
     "radio_change_language": {
-      "name": "Sprache",
+      "name": "Sparache",
       "type": "radio_change_language"
     },
     "relevance": {
@@ -593,25 +591,36 @@
       "type": "radio"
     }
   },
-
   "user_group": {
     "all_users": "All Users",
     "subscribed": "Subscribed"
   },
-
+  "offer": {
+    "payment": "Payment",
+    "products": "Products",
+    "premium_commission": "Premium/commission",
+    "cooperation": "Cooperation",
+    "other_incentive": "Other incentive"
+  },
+  "inquiry": {
+    "images": "Images",
+    "videos": "Videos",
+    "blogs": "Blogs",
+    "audio": "Audio",
+    "skills": "Skills",
+    "custom_work": "Custom Work"
+  },
   "gender": {
     "all": "All",
     "male": "Male",
     "female": "Female"
   },
-
   "target_group": {
     "company": "Company",
     "female_and_male": "Female and Male",
     "female": "Female",
     "male": "Male"
   },
-
   "age": {
     "0": "All",
     "1": "0 - 18 years old",
@@ -620,7 +629,6 @@
     "4": "36 - 55 years old",
     "5": "56 + years old"
   },
-
   "message_module": {
     "name": "Message",
     "type": {
@@ -631,7 +639,6 @@
     },
     "no_msg": "No message yet..."
   },
-
   "mobile_sidebar_information": {
     "aboutus": "About Us",
     "legal_notice": "Legal Notice",
@@ -640,8 +647,8 @@
     "ads": "Ads",
     "verification": "Verification"
   },
-
   "mobile_sidebar_services": {
+    "services": "Services",
     "terms_conditions": "General Terms and Conditions",
     "data_protection_and_privacy_policy": "Data Protection and Privacy Policy",
     "terms_use": "Terms of Use",
@@ -659,7 +666,6 @@
     "cookies": "Cookies",
     "feedback": "Feedback"
   },
-
   "top_bar_info": {
     "upload": "Upload",
     "create_campaign": "Create Campaign",
@@ -672,7 +678,6 @@
     "message": "Message",
     "like_you": "Like You"
   },
-
   "top_bar_info_modal": {
     "modal_title": "Subscribers / Subscribed / Likes",
     "follow_btn": "Follow",
@@ -681,7 +686,6 @@
     "no_data": "No Data Available",
     "cancel": "Cancel"
   },
-
   "profile_community_right_sidebar": {
     "community": "Community",
     "serverError": "Something went wrong. Please Try Again",
@@ -689,7 +693,6 @@
     "Subscribed": "Subscribed",
     "Pending": "Pending"
   },
-
   "left_sidebar": {
     "news": "News",
     "explore": "Explore",
@@ -700,13 +703,11 @@
     "creator": "Creator",
     "information": "Information"
   },
-
   "left_sidebar_owner_menu": {
     "news_feed": " News Feed",
     "about": "About",
     "saved": "Saved"
   },
-
   "left_sidebar_settings": {
     "edit_profile": "Edit profile",
     "admin": "Admin",
@@ -718,17 +719,14 @@
     "data_download": "Data Download",
     "logout": "Logout"
   },
-
   "footer": {
     "copyright": " 2018 Picstagraph | All rights reserved ",
     "disclaimer": " Disclaimers and Other Legal Documents ",
     "privacy": " Privacy & Terms of Use "
   },
-
   "loading_messages": {
     "loading_with_ellipsis": "Loading..."
   },
-
   "user_profile": {
     "my_profile": "My Profile",
     "username": "username",
@@ -759,15 +757,12 @@
       "122": "Unable to update profile at this time.  Please try again. If you continue having problems, please contact UFG Help Desk at 800\u2011895\u20116253 or email helpdesk@unitedfiregroup.com. "
     }
   },
-
   "header": {
     "logout": "Logout"
   },
-
   "top_bar": {
     "private_profile": "Private Profile"
   },
-
   "register": {
     "username": "User name",
     "password": "Password",
@@ -787,7 +782,6 @@
     "email_valid": "Email should be valid.",
     "password_match": "Password is not matching."
   },
-
   "login": {
     "header": "Do what you love",
     "subheader": "Register for free",
@@ -797,7 +791,6 @@
     "password_required": "Password is required.",
     "invalid_credentials": "Username or password is wrong."
   },
-
   "forgot_password": {
     "email_account": "Check your email account.",
     "confirm_email": "We sent you a confirmation email with a link.",
@@ -807,17 +800,15 @@
     "click": "Click",
     "here": "Here"
   },
-
   "filter": {
     "reset_filter": "Reset filters",
-    "apply": "Apply"
+    "apply": "Apply",
+    "back": "Back"
   },
-
   "languages": {
     "german": "German",
     "english": "English"
   },
-
   "reset_password": {
     "header": "Reset password",
     "subheader": "Please enter your new password here.",
@@ -825,16 +816,13 @@
     "repeat_password": "Repeat password",
     "send": "Send"
   },
-
   "app_download": "App download",
-
   "reset_email": {
     "header": "Reset password",
     "subheader": "We will send you an email to resetting your password.",
     "email_required": "Email is required.",
     "email_valid": "Email should be valid."
   },
-
   "placeholders": {
     "username_email": "User name / Email",
     "password": "Password"
@@ -861,7 +849,7 @@
       "type": "text"
     },
     "name_company": {
-      "name": "Name/Company",
+      "name": "Company",
       "type": "text"
     },
     "offer_tag": {
@@ -918,7 +906,6 @@
     "general_information": "General Information",
     "Personal_interests": "Personal interests"
   },
-
   "social": {
     "facebook": "Facebook",
     "twitter": "Twitter",
@@ -926,7 +913,6 @@
     "email": "Email",
     "connect": "Connect"
   },
-
   "privacy": {
     "limitations": "Limitations",
     "set_my_profile_to_private": "Set my profile to private",
@@ -984,7 +970,7 @@
     "PDF": "PDF"
   },
   "data_download": {
-    "page_title": "Daten- Download",
+    "page_title": "Data - Download",
     "Email": "Email",
     "Password": "Password",
     "Download": "Download",
@@ -994,6 +980,7 @@
   },
   "landing": {
     "Navigation": "Navigation",
+    "published_a_campaign": "Published a Campaign",
     "Review": "Review",
     "Key_statistics": "Key statistics",
     "Content_statistics": "Content statistics",
@@ -1025,6 +1012,12 @@
     "Active_Ads": "Active Ads",
     "Closed_Ads": "Closed Ads",
     "Ads_Temp_Closed": "Ads Temp Closed"
+  },
+  "download_app": "Download App",
+  "user_pics": "User Pics",
+  "not_found": {
+    "not_available": "This page isn't available",
+    "remove_link": "The link you followed may be broken, or the page may have been removed"
   },
   "cms": {
     "create": "Create new CMS page",
@@ -1065,7 +1058,6 @@
     "Download": "Download",
     "Search_in_users": "Search in users"
   },
-
   "payment_modal": {
     "billing_address": "Billing Address",
     "invoice_recipient": "Invoice Recipient",
@@ -1075,13 +1067,11 @@
     "country": "Country",
     "VATNO": "VAT Identification Number"
   },
-
   "adminRole": {
     "rank1": "rank1",
     "rank2": "rank2",
     "rank3": "rank3"
   },
-
   "call_to_action": "Select Call to Action",
   "select_category": "Select Category",
   "select_daily_budget": "Select Daily Budget",
@@ -1090,7 +1080,6 @@
   "select_radius": "Select Radius",
   "select_target_group": "Select Target Group",
   "select_age": "Select Age",
-
   "error": {
     "create_modal": {
       "title": "Plaese Enter Title",
@@ -1123,12 +1112,52 @@
     "enter_password": "Please enter your password here.",
     "proceed": "Processed ?"
   },
-
   "text_editor": {
     "image": "Please Upload Image Files",
     "video": "Please Upload Video Files"
   },
-
+  "category": {
+    "craftmen": "Craftmen",
+    "technology": "Technology",
+    "travel": "Travel",
+    "art_culture": "Art & Culture",
+    "beauty_cosmetics": "Beauty & Cosmetics",
+    "sports_health": "Sports & Health",
+    "animals": "Animals",
+    "other": "Other",
+    "outdoor": "Outdoor",
+    "family": "Family",
+    "automobiles": "Automobiles",
+    "spirituality": "Spirituality",
+    "fashion": "Fashion",
+    "charity": "Charity",
+    "business": "Business",
+    "movies_photography": "Movies & Photography",
+    "news_politics": "News & Politics",
+    "entertainment": "Entertainment",
+    "company": "Company",
+    "gaming": "Gaming",
+    "education": "Education",
+    "nature": "Nature",
+    "food_drink": "Food & Drink",
+    "science": "Science",
+    "music": "Music",
+    "home_living": "Home & Living"
+  },
+  "callToAction": {
+    "apply_now": "Apply now",
+    "register": "Register",
+    "more": "More",
+    "book_now": "Book now"
+  },
+  "radius": {
+    "off": "off",
+    "km50": "50km",
+    "km100": "100km",
+    "km200": "200km",
+    "km500": "500km",
+    "worldwide": "worldwide"
+  },
   "comman_error": {
     "server_error": "Something went wrong"
   }

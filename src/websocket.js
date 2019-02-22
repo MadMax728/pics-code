@@ -33,18 +33,16 @@ function messagecount(userId, cb) {
 }
 
 
-function join(senderId, recipientId) {
+function join(senderId, recipientId, userId) {
     socket.emit('communication-message-board-join', {
         recipientId: senderId,
-        senderId: recipientId
-    });
-    socket.emit('communication-message-board-join', {
         senderId: recipientId,
-        recipientId: senderId
-    });
+        userId: userId,
+    }); 
 }
 
 function emit(senderId, recipientId, content) {
+    console.log('Calling emit')
     socket.emit('communication-message-board-new-message', {
         recipientId,
         senderId,

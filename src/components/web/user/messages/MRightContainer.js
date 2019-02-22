@@ -11,7 +11,7 @@ class MRightContainer extends Component {
     constructor(props, context) {
         super(props, context);
         this.state = {
-            message : ''
+            message: ''
         }
     }
 
@@ -23,20 +23,21 @@ class MRightContainer extends Component {
     };
 
     onMessageSubmit = (content) => {
-        const message =  content ? content.trim() : ''
+        const message = content ? content.trim() : '';
         const { user, me } = this.props;
-        if(!message || !user || !user.id || !me) return;
-        websocket.emit(this.props.me, this.props.user.id, message)
+        console.log('user %o and me %o', user, me);
+        if (!message || !user || !user._id || !me) return;
+        websocket.emit(this.props.me, this.props.user._id, message)
     }
 
-    
+
 
     render() {
         const { user } = this.props;
         return (
             <div>
                 <MRightUserItem item={user} onDeleteHistoryClick={this.onDeleteHistoryClick} />
-                <MRightActiveChat user={user}/>
+                <MRightActiveChat user={user} />
                 <MRightUserInput item={user} onMessageSubmit={this.onMessageSubmit} />
             </div>
         )

@@ -19,10 +19,10 @@ const MRightUserItem = ({ item, onDeleteHistoryClick }) => {
         <br />
         <span className="name">{item.name}</span>
       </div>
-      {item && item.id && (
+      {item && item._id && (
         <div
           className="delete"
-          data-id={item.id}
+          data-id={item._id}
           role="presentation"
           onClick={onDeleteHistoryClick}
           onKeyDown={onDeleteHistoryClick}
