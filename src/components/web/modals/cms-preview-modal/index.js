@@ -1,3 +1,1 @@
-export {
-  default as CMSPreviewModal
-} from "./CMSPreviewModal";
+export { default as CMSPreviewModal } from "./CMSPreviewModal";

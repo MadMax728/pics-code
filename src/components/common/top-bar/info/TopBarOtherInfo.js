@@ -247,7 +247,10 @@ class TopBarOtherInfo extends Component {
   };
 
   handeleMessage = () => {
-    console.log('this.props.userDataByUsername.user.data._id ', this.props.userDataByUsername.user.data._id);
+    console.log(
+      "this.props.userDataByUsername.user.data._id ",
+      this.props.userDataByUsername.user.data._id
+    );
     const username = this.props.userDataByUsername.user.data.username;
     this.props.history.push(`${routes.MESSAGES_ROUTE}?new=${username}`);
   };

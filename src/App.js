@@ -90,7 +90,7 @@ class App extends Component {
 
   backOfficeRender = () => {
     const root_route = routes.BACK_OFFICE_ROOT_ROUTE;
-    
+
     return (
       <Switch>
         <Route
@@ -103,10 +103,7 @@ class App extends Component {
           path={routes.LOGIN_PASSWORD_ROUTE}
           component={AdminLogin}
         />
-        <Route
-          path={root_route}
-          render={this.isAdminUserAuthenticated}
-        />
+        <Route path={root_route} render={this.isAdminUserAuthenticated} />
       </Switch>
     );
   };
@@ -166,13 +163,19 @@ class App extends Component {
         <Route render={this.webRender} />
         <CookieConsent
           buttonText="Got it!"
-          style={{ background: "white", border: "solid 1px #1f58a6", color:"black" }}
+          style={{
+            background: "white",
+            border: "solid 1px #1f58a6",
+            color: "black"
+          }}
           buttonStyle={{ float: "right" }}
         >
-          <p className="text-center">For a better user experience we use  
+          <p className="text-center">
+            For a better user experience we use
             <Link to={routes.COOKIES_ROUTE}>
               {Translations.base_footer.cookies}
-            </Link>. By using picstagraph you do agree.
+            </Link>
+            . By using picstagraph you do agree.
           </p>
         </CookieConsent>
       </div>

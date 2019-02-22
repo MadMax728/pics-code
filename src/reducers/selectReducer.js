@@ -37,8 +37,8 @@ const selectReducer = (state = initialState.selectData, action) => {
         ...state,
         offers: action.payload,
         isLoading: false
-    };  
-    
+      };
+
     // Static Data for Inquiry,  In future would remove as when require
     case types.GET_INQUIRY_SUCCEEDED:
       return {
@@ -46,7 +46,7 @@ const selectReducer = (state = initialState.selectData, action) => {
         inquiries: action.payload,
         isLoading: false
       };
-    
+
     // Static Data,  In future would remove as when require
     case types.GET_AGE_SUCCEEDED:
       return {

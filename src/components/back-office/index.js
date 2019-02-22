@@ -1,7 +1,7 @@
 export { LoginLinkSend, AdminLogin } from "./login";
 export { Processed } from "./processed";
 
-export { 
+export {
   DashboardPage,
   CMSManagementPage,
   CreateCMSManagementPage,

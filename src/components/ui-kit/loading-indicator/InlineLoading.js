@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
 class InlineLoading extends React.Component {
-  
   state = {
     isVisible: false
   };
@@ -87,7 +86,6 @@ class InlineLoading extends React.Component {
     }
   };
 
-
   delayShowing = () => {
     this.timeout = setTimeout(() => {
       this.setState({ isVisible: true });
@@ -102,6 +100,5 @@ InlineLoading.propTypes = {
 InlineLoading.defaultProps = {
   message: Translations.loading_messages.loading_with_ellipsis
 };
-
 
 export default InlineLoading;

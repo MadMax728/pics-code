@@ -29,35 +29,37 @@ class AboutPage extends Component {
     if (this.props.match.params.username) {
       const data = {
         username: this.props.match.params.username
-      }
+      };
       this.props.getAbout("getAbout", data).then(() => {
         console.log(this.props.aboutDetails);
         if (this.props.aboutDetails) {
-          this.setState({ isPrivate: this.props.aboutDetails.isPrivate ? this.props.aboutDetails.isPrivate : false })
+          this.setState({
+            isPrivate: this.props.aboutDetails.isPrivate
+              ? this.props.aboutDetails.isPrivate
+              : false
+          });
         }
       });
     } else {
       const extractData = Auth.extractJwtFromStorage();
       const data = {
         username: extractData.username
-      }
+      };
       this.props.getAbout("getAbout", data);
     }
-
   };
 
   renderAbout = () => {
     const { aboutDetails } = this.props;
     return <AboutCard about={aboutDetails} />;
   };
-
 }
 
 AboutPage.propTypes = {
   match: PropTypes.any.isRequired,
   getAbout: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  aboutDetails: PropTypes.any,
+  aboutDetails: PropTypes.any
   // error: PropTypes.any
 };
 

@@ -113,7 +113,7 @@
           width: 20px;
           padding-top: 16px;
         }
-        .emoji-mart{
+        .emoji-mart {
           bottom: 0 !important;
           right: 30px !important;
         }
@@ -128,11 +128,10 @@
           width: 45px;
           height: 45px;
         }
-        
       }
-      .comment-input{
-        .form-group{
-          .form-control{
+      .comment-input {
+        .form-group {
+          .form-control {
             width: 100%;
           }
         }
@@ -141,8 +140,8 @@
         p {
           padding-left: 70px;
         }
-        .comment-inner-wrap{
-          padding-left:45px;
+        .comment-inner-wrap {
+          padding-left: 45px;
         }
       }
       .show_more_options {
@@ -160,7 +159,7 @@
     }
     .view-more-comments {
       cursor: pointer;
-      a{
+      a {
         color: $silver_color;
       }
     }

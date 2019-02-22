@@ -13,7 +13,7 @@ class PaymentStepOne extends Component {
   render() {
     const { handleAddress, form, userInfo, forThat } = this.props;
     console.log(form.address);
-    
+
     return (
       <div className="col-xs-12 no-padding">
         <div className="col-sm-5 upload-form billing-add">

@@ -70,5 +70,4 @@ export default class Header extends Component {
   handleNavClick = () => {
     this.toggleUserNav();
   };
-
 }

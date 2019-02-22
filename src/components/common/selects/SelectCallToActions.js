@@ -8,7 +8,7 @@ class SelectCallToActions extends Component {
     super(props);
     this.state = {
       callToActionList
-    }
+    };
   }
 
   render() {
@@ -32,13 +32,13 @@ class SelectCallToActions extends Component {
     );
   }
 
-  handleCallToActions = (event) => {
+  handleCallToActions = event => {
     const { callToActionList } = this.state;
     const name = callToActionList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: (name.length !== 0) ?  name[0].value : ""
-    }
+      name: name.length !== 0 ? name[0].value : ""
+    };
     this.props.handleSelect("callToAction", data);
   };
 }
@@ -50,6 +50,5 @@ const propTypes = {
 };
 
 SelectCallToActions.propTypes = propTypes;
-
 
 export default SelectCallToActions;

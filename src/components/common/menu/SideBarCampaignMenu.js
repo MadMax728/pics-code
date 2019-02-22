@@ -7,7 +7,7 @@ import * as routes from "../../../lib/constants/routes";
 class SideBarCampaignMenu extends Component {
   constructor(props, context) {
     super(props, context);
-    let linkData = [
+    const linkData = [
       {
         to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
           this.props.match.params.type

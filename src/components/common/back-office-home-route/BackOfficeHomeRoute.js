@@ -175,12 +175,16 @@ class BackOfficeHomeRoute extends Component {
 
   render() {
     const { isRank } = this.props;
-    
-    const backoffice = (isRank === enumerations.adminRank.rank1);
-    
-    const review = (isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank2);
-    
-    const report = (isRank === enumerations.adminRank.rank1 || isRank === enumerations.adminRank.rank3);
+
+    const backoffice = isRank === enumerations.adminRank.rank1;
+
+    const review =
+      isRank === enumerations.adminRank.rank1 ||
+      isRank === enumerations.adminRank.rank2;
+
+    const report =
+      isRank === enumerations.adminRank.rank1 ||
+      isRank === enumerations.adminRank.rank3;
 
     return (
       <div>
@@ -252,8 +256,7 @@ class BackOfficeHomeRoute extends Component {
 
           {/*  Reviews Routes */}
 
-          {review && 
-          (
+          {review && (
             <Route
               path={routes.BACK_OFFICE_CAMPAIGNS_ROUTE}
               exact
@@ -276,8 +279,7 @@ class BackOfficeHomeRoute extends Component {
               exact
               component={this.handleImageBO}
             />
-            )
-          }
+          )}
 
           {report && (
             <Route
@@ -285,48 +287,42 @@ class BackOfficeHomeRoute extends Component {
               exact
               component={this.handleVideosBOPage}
             />
-            )
-          }
+          )}
           {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_CAMPAIGNS_ROUTE}
               exact
               component={this.handleReportedCampaignsPage}
             />
-            )
-          }
+          )}
           {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_PICS_ROUTE}
               exact
               component={this.handlePicsPage}
             />
-            )
-          }
+          )}
           {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_ADS_ROUTE}
               exact
               component={this.handleReportedAdsPage}
             />
-            )
-          }
+          )}
           {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_COMMENTS_ROUTE}
               exact
               component={this.handleCommentsPage}
             />
-            )
-          }
+          )}
           {report && (
             <Route
               path={routes.BACK_OFFICE_REPORTED_USER_ROUTE}
               exact
               component={this.handleUsersPage}
             />
-            )
-          }
+          )}
           <Route exact path="/*" component={this.handlePageNotFound} />
         </Switch>
       </div>

@@ -31,7 +31,13 @@ export const getNewsFeed = (prop, provider) => {
 
     return settingsService[prop](provider, header).then(
       res => {
-        const newsfeeds = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        const newsfeeds = _.orderBy(
+          res.data.data,
+          function(o) {
+            return new moment(o.createdAt);
+          },
+          ["desc"]
+        );
         dispatch(getNewsFeedSucceeded(newsfeeds));
       },
       error => {
@@ -110,7 +116,13 @@ export const getSaved = (prop, provider) => {
 
     return settingsService[prop](provider, header).then(
       res => {
-        const newsfeeds = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
+        const newsfeeds = _.orderBy(
+          res.data.data,
+          function(o) {
+            return new moment(o.createdAt);
+          },
+          ["desc"]
+        );
         dispatch(getSavedSucceeded(newsfeeds));
       },
       error => {
@@ -123,7 +135,6 @@ export const getSaved = (prop, provider) => {
     );
   };
 };
-
 
 // Set Saved
 const setSavedPostStarted = () => ({
@@ -141,7 +152,7 @@ const setSavedPostFailed = error => ({
   error: true
 });
 
-export const setSavedPost = (provider) => {
+export const setSavedPost = provider => {
   return dispatch => {
     dispatch(setSavedPostStarted());
     const storage = Auth.extractJwtFromStorage();

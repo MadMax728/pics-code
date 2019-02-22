@@ -42,10 +42,10 @@ const Links = [
     activeClassName: "active",
     text: Translations.back_office_menu.data_download
   }
-]
+];
 
 const SideBarBackOffice = () => {
-  return (    
+  return (
     <div>
       <LeftSidebarNav
         links={Links}

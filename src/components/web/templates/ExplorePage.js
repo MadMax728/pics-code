@@ -62,7 +62,11 @@ class ExploreRoot extends Component {
         <div key={explore.id}>
           {explore.mediaUrl &&
             explore.postType === enumerations.contentTypes.mediaPost && (
-              <MediaCard item={explore} isDescription handleModalShow={handleModalShow} />
+              <MediaCard
+                item={explore}
+                isDescription
+                handleModalShow={handleModalShow}
+              />
             )}
         </div>
       );

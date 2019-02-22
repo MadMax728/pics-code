@@ -37,10 +37,10 @@ class Home extends Component {
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-    if (userInfo){
-      this.setState({ image: userInfo.profileUrl})
+    if (userInfo) {
+      this.setState({ image: userInfo.profileUrl });
     }
-  }
+  };
 
   handleModalHide = () => {
     this.setState({ modalShow: false });
@@ -112,13 +112,10 @@ class Home extends Component {
 
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
-    
+
     return (
       <div>
-        <Header
-          handleModalShow={this.handleModalShow}
-          history={history}
-        />
+        <Header handleModalShow={this.handleModalShow} history={history} />
         <section className="main-section">
           <MessageBar message={message} />
 

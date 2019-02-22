@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
 
-class EditProfileCrop extends Component { 
+class EditProfileCrop extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,11 +71,15 @@ class EditProfileCrop extends Component {
   };
 
   render() {
+    const { image, isCircle } = this.props;
     const {
-      image,
-      isCircle,
-    } = this.props;
-    const { width, height, scale, position, borderRadius, allowZoomOut } = this.state;
+      width,
+      height,
+      scale,
+      position,
+      borderRadius,
+      allowZoomOut
+    } = this.state;
     return (
       <div>
         {image !== null && image !== undefined ? (
@@ -137,29 +141,29 @@ class EditProfileCrop extends Component {
             </div>
           </div>
         )}
-        {(image !== null && image !== undefined) &&
-        <div className="range-wrapr col-xs-12">
-          <img
-            src={images.crop_pic}
-            height="19"
-            width="19"
-            crossOrigin={`anonymous`}
-            className="min-profile-pic range-slider-pic"
-            alt={"crop-1"}
-          />
-          <div
-            className="runnable"
-            style={{
-              width:
-                scale === 0.1
-                  ? `0px`
-                  : scale === 1
+        {image !== null && image !== undefined && (
+          <div className="range-wrapr col-xs-12">
+            <img
+              src={images.crop_pic}
+              height="19"
+              width="19"
+              crossOrigin={`anonymous`}
+              className="min-profile-pic range-slider-pic"
+              alt={"crop-1"}
+            />
+            <div
+              className="runnable"
+              style={{
+                width:
+                  scale === 0.1
+                    ? `0px`
+                    : scale === 1
                     ? `${scale * 121.5}px`
                     : scale < 1
-                      ? `${scale * 120.5}px`
-                      : `${scale * 128}px`
-            }}
-          />
+                    ? `${scale * 120.5}px`
+                    : `${scale * 128}px`
+              }}
+            />
             <input
               name="scale"
               type="range"
@@ -171,15 +175,15 @@ class EditProfileCrop extends Component {
               defaultValue="1"
               disabled={!(image !== null && image !== undefined)}
             />
-          <img
-            src={images.crop_pic}
-            height="27"
-            alt={"crop-2"}
-            width="27"
-            crossOrigin={`anonymous`}
-            className="max-profile-pic range-slider-pic"
-          />
-           {/* <input
+            <img
+              src={images.crop_pic}
+              height="27"
+              alt={"crop-2"}
+              width="27"
+              crossOrigin={`anonymous`}
+              className="max-profile-pic range-slider-pic"
+            />
+            {/* <input
             type="file"
             className="img-upload"
             name="newImage"
@@ -189,8 +193,8 @@ class EditProfileCrop extends Component {
             onChange={handleNewImage}
           />
           <img src={images.plus_button} alt={"plus_button"} /> */}
-        </div>
-        }
+          </div>
+        )}
       </div>
     );
   }

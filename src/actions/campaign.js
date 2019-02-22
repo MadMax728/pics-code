@@ -103,7 +103,7 @@ const getFavouriteCampaignsFailed = error => ({
   error: true
 });
 
-export const getFavouriteCampaigns = (provider) => {
+export const getFavouriteCampaigns = provider => {
   return dispatch => {
     dispatch(getFavouriteCampaignsStarted());
     const storage = Auth.extractJwtFromStorage();
