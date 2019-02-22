@@ -17,7 +17,6 @@ class SubscriberTooltip extends Component {
     this.state = {};
   }
 
-
   render() {
     return (
       <div id="" className="subscriber-tooltip">
@@ -54,19 +53,25 @@ class SubscriberTooltip extends Component {
                               className="filled_button"
                               id={user.id}
                               onClick={this.handleSubscribed}
-                              text={Translations.profile_community_right_sidebar.Subscribed}
+                              text={
+                                Translations.profile_community_right_sidebar
+                                  .Subscribed
+                              }
                             />
                           </div>
                         ) : (
-                            <div className="community-subscribe">
-                              <Button
-                                className="blue_button"
-                                id={user.id}
-                                onClick={this.handleSubscribed}
-                                text={Translations.profile_community_right_sidebar.Subscribe}
-                              />
-                            </div>
-                          )}
+                          <div className="community-subscribe">
+                            <Button
+                              className="blue_button"
+                              id={user.id}
+                              onClick={this.handleSubscribed}
+                              text={
+                                Translations.profile_community_right_sidebar
+                                  .Subscribe
+                              }
+                            />
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -74,20 +79,18 @@ class SubscriberTooltip extends Component {
               );
             })
           ) : (
-              <div className="notification-with-subscribe notification-wrapper">
-                <div className="user-info">
-                  <div className="subtitle">
-                    {Translations.top_bar_info_modal.no_data}
-                  </div>
+            <div className="notification-with-subscribe notification-wrapper">
+              <div className="user-info">
+                <div className="subtitle">
+                  {Translations.top_bar_info_modal.no_data}
                 </div>
               </div>
-            )}
+            </div>
+          )}
         </div>
       </div>
     );
   }
-
-
 
   componentDidMount = () => {
     this.getTooltipUserList(this.props.userId);
@@ -107,8 +110,8 @@ class SubscriberTooltip extends Component {
       }
     }
   }
-  
-  handleKeyPress = () => { };
+
+  handleKeyPress = () => {};
 
   // Tooltip List
   getTooltipUserList = userId => {
@@ -172,7 +175,6 @@ class SubscriberTooltip extends Component {
       });
     }
   };
-
 }
 
 const mapStateToProps = state => ({

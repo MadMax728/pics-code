@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import * as enumerations from "../../../lib/constants/enumerations";
-import { Scrollbars } from 'react-custom-scrollbars';
+import { Scrollbars } from "react-custom-scrollbars";
 
 const relevanceItems = [
   { name: "all", className: "", value: "All" },
@@ -74,7 +74,7 @@ class ReportedContentFilter extends Component {
     const { isRank } = this.props;
     const { filterApply, height } = this.state;
     return (
-      <Scrollbars style={{ height: `${height - 220}px` }}>      
+      <Scrollbars style={{ height: `${height - 220}px` }}>
         <div className="left-filters">
           <LeftSidebarFilter
             filters={Filters}
@@ -107,8 +107,6 @@ class ReportedContentFilter extends Component {
   handleSelect = filterData => {
     this.setState({ filData: filterData });
   };
-
-
 }
 
 ReportedContentFilter.propTypes = {

@@ -10,7 +10,7 @@ class Text extends Component {
       value: ""
     };
   }
-  
+
   render() {
     const { name, className } = this.props;
     const { value } = this.state;
@@ -32,7 +32,6 @@ class Text extends Component {
     data.values = { name: this.state.name, val: event.target.value };
     this.props.onChange(data);
   };
-
 }
 
 Text.propTypes = {

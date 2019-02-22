@@ -1,5 +1,4 @@
-
-export const campaign_detail  = {
+export const campaign_detail = {
   inquiryTag: "abcd",
   typeId: "0ca18024-235e-48a5-ac29-681ff84cd3dd",
   userType: "company",
@@ -25,4 +24,4 @@ export const campaign_detail  = {
   profileImage:
     "https://picstagraph-dev.s3.us-east-2.amazonaws.com/1542870327787-IMG_0003.JPG",
   isSelfLike: false
-}
+};

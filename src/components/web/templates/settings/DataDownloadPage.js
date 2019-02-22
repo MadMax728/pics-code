@@ -20,7 +20,6 @@ class DataDownloadPage extends Component {
     };
   }
 
-
   render() {
     const { form, error } = this.state;
     return (
@@ -51,7 +50,10 @@ class DataDownloadPage extends Component {
             <form onSubmit={this.handleSubmit}>
               <div className="col-sm-5 padding-r-5 email-wrapper">
                 <div className="form-group">
-                  <Label htmlFor="email" value={Translations.data_download.Email} />
+                  <Label
+                    htmlFor="email"
+                    value={Translations.data_download.Email}
+                  />
                   <Input
                     type="text"
                     className="form-control"
@@ -64,14 +66,20 @@ class DataDownloadPage extends Component {
                   {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <ErrorSpan className="error-msg form-field-error" value={error.email} />
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan
+                    className="error-msg form-field-error"
+                    value={error.email}
+                  />
                 </div>
               </div>
               <div className="col-sm-5 padding-l-5 padding-r-5">
                 <div className="form-group">
-                  <Label htmlFor="password" value={Translations.data_download.Password} />
+                  <Label
+                    htmlFor="password"
+                    value={Translations.data_download.Password}
+                  />
                   <Input
                     type="password"
                     className="form-control"
@@ -84,14 +92,21 @@ class DataDownloadPage extends Component {
                   {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <ErrorSpan className="error-msg form-field-error" value={error.password} />
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan
+                    className="error-msg form-field-error"
+                    value={error.password}
+                  />
                 </div>
               </div>
               <div className="col-sm-2 padding-l-5 btn-wrapper">
                 <div className="form-group">
-                  <Button className="blue_button" type="submit" text={Translations.data_download.Download} />
+                  <Button
+                    className="blue_button"
+                    type="submit"
+                    text={Translations.data_download.Download}
+                  />
                 </div>
               </div>
             </form>
@@ -166,7 +181,6 @@ class DataDownloadPage extends Component {
       // To Do - On Download Data
     });
   };
-
 }
 
 const mapStateToProps = state => ({

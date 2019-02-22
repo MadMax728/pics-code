@@ -25,7 +25,7 @@ class TextEditor extends Component {
 
   imageHandler = value => {
     this.setState({ isMedia: true, mediaTypes: enumerations.mediaTypes.image });
-    this.upload.setAttribute('accept', 'image/x-png,image/gif,image/jpeg');
+    this.upload.setAttribute("accept", "image/x-png,image/gif,image/jpeg");
     this.upload.click();
   };
 
@@ -34,7 +34,7 @@ class TextEditor extends Component {
       isMedia: false,
       mediaTypes: enumerations.mediaTypes.video
     });
-    this.upload.setAttribute('accept', 'video/mp4,video/x-m4v,video/*');
+    this.upload.setAttribute("accept", "video/mp4,video/x-m4v,video/*");
     this.upload.click();
   };
 

@@ -1,7 +1,10 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const cmsManagementReducer = (state = initialState.cmsManagementData, action) => {
+const cmsManagementReducer = (
+  state = initialState.cmsManagementData,
+  action
+) => {
   switch (action.type) {
     // Get CMS_MANAGEMENT
     case types.GET_CMS_MANAGEMENT_STARTED:
@@ -23,7 +26,7 @@ const cmsManagementReducer = (state = initialState.cmsManagementData, action) =>
         isLoading: false,
         error: action.payload
       };
-    
+
     // Get CMS Detail
     case types.UPDATE_CMS_STARTED:
     case types.CREATE_CMS_STARTED:

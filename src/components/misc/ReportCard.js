@@ -9,7 +9,13 @@ const ReportCard = ({ item }) => {
     <div className="status backoffice-status">
       <div className="status-wrapper">
         <div className="title">{Translations.report_review.date}</div>
-        <div className="subtitle">{DateFormat(item.firstReportedDate, Translations.date_format.date, true)}</div>
+        <div className="subtitle">
+          {DateFormat(
+            item.firstReportedDate,
+            Translations.date_format.date,
+            true
+          )}
+        </div>
       </div>
       <div className="status-wrapper">
         <div className="title">{Translations.report_review.report}</div>
@@ -17,14 +23,16 @@ const ReportCard = ({ item }) => {
       </div>
       <div className="status-wrapper">
         <div className="title">{Translations.report_review.status}</div>
-        <div className="subtitle">{enumerations.reportStatusType[item.reportStatus]}</div>
+        <div className="subtitle">
+          {enumerations.reportStatusType[item.reportStatus]}
+        </div>
       </div>
     </div>
   );
 };
 
 ReportCard.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.object.isRequired
 };
 
 export default ReportCard;

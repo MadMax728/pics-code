@@ -84,7 +84,7 @@ class SelectAge extends Component {
     const data = {
       id: event.target.value,
       name: ageData.filter(c => c.value === event.target.value)[0].label
-    }
+    };
     this.props.handleSelect("age", data);
   };
 }

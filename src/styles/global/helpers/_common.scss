@@ -575,49 +575,49 @@ button:focus {
     }
   }
 }
-.preview-modal{
+.preview-modal {
   background: #333;
-  .modal-dialog{
+  .modal-dialog {
     width: 915px;
-    @media (min-width: 768px){
+    @media (min-width: 768px) {
       margin: 100px auto 30px;
     }
   }
-  .modal-content{
+  .modal-content {
     display: inline-block;
     width: 100%;
     padding: 20px;
-    .closeBtn{
+    .closeBtn {
       position: absolute;
       right: -40px;
       top: -25px;
       background: transparent;
       border: 0;
-      img{
+      img {
         height: 13px;
         width: 13px;
       }
     }
-    .modal-header{
+    .modal-header {
       padding: 5px 10px;
-      .modal-title{
+      .modal-title {
         font-size: 20px;
         margin-bottom: 0px;
         padding: 0 15px 10px;
       }
     }
-    .modal-body{
+    .modal-body {
       padding: 5px 10px;
-      .preview-content{
-        .preview-div-wrapper{
-           padding-top:10px;
-           padding-bottom: 10px;
-          .title-text{
+      .preview-content {
+        .preview-div-wrapper {
+          padding-top: 10px;
+          padding-bottom: 10px;
+          .title-text {
             color: #4a4a4a;
             font-family: "Helvetica-Bold";
             font-size: 14px;
           }
-          .content-text{
+          .content-text {
             font-family: "Helvetica";
             color: #4a4a4a;
             font-weight: normal;
@@ -983,7 +983,7 @@ section.loader-wrapr {
     }
   }
 }
-.__react_component_tooltip.type-light.border{
+.__react_component_tooltip.type-light.border {
   // .subscriber-tooltip{
   //   position: absolute;
   //   left: 0 !important;
@@ -1052,7 +1052,7 @@ section.loader-wrapr {
     top: 100%;
     left: 0;
     z-index: 999;
-    width:100%;
+    width: 100%;
     div {
       padding: 10px 20px;
       border-bottom: 1px solid #979797;
@@ -1158,25 +1158,25 @@ section.loader-wrapr {
   margin-top: 10px !important;
   min-height: 12px !important;
 }
-.descCompain{
+.descCompain {
   width: 30% !important;
-  margin-top: 20px !important; 
+  margin-top: 20px !important;
 }
-.lists{
+.lists {
   width: 50% !important;
 }
-.info-img{
+.info-img {
   width: 70%;
   overflow: hidden;
   max-height: 400px;
 }
-.padd-15{
+.padd-15 {
   padding: 15px !important;
 }
-.hr-color hr{
+.hr-color hr {
   border: 1px solid #eee;
 }
-.desc1sm{
+.desc1sm {
   width: 40% !important;
   margin-top: 8px !important;
   min-height: 5px !important;
@@ -1190,60 +1190,71 @@ section.loader-wrapr {
 .gray_box {
   position: relative;
   overflow: hidden;
-  width: 100%; 
+  width: 100%;
   background: #d3d3d3;
   width: 100%;
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     -webkit-animation-duration: 1s;
-	  animation-duration: 1s;
-	  -webkit-animation-fill-mode: forwards;
-	  animation-fill-mode: forwards;
-	  -webkit-animation-iteration-count: infinite;
-	  animation-iteration-count: infinite;
-	  -webkit-animation-name: placeHolderShimmer;
-	  animation-name: placeHolderShimmer;
-	  -webkit-animation-timing-function: linear;
-	  animation-timing-function: linear;
-	  background: #f6f7f8;
-	  background: #eeeeee;
-	  background: -webkit-gradient(linear, left top, right top, color-stop(8%, #eeeeee), color-stop(18%, #dddddd), color-stop(33%, #eeeeee));
-	  background: -webkit-linear-gradient(left, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-	  background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
-	  -webkit-background-size: 890px 100px;
-	  background-size: 890px 100px; 
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+    -webkit-animation-name: placeHolderShimmer;
+    animation-name: placeHolderShimmer;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    background: #f6f7f8;
+    background: #eeeeee;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      color-stop(8%, #eeeeee),
+      color-stop(18%, #dddddd),
+      color-stop(33%, #eeeeee)
+    );
+    background: -webkit-linear-gradient(
+      left,
+      #eeeeee 8%,
+      #dddddd 18%,
+      #eeeeee 33%
+    );
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    -webkit-background-size: 890px 100px;
+    background-size: 890px 100px;
   }
-    }
-    @-webkit-keyframes placeHolderShimmer {
-      0% {
-        background-position: -468px 0;
-      }
-      100% {
-    
-        background-position: 468px 0;
-      }
-    }
-    @-moz-keyframes placeHolderShimmer {
-      0% {
-        background-position: -468px 0;
-      }
-      100% {
-        background-position: 468px 0;
-      }
-    }
-    @keyframes placeHolderShimmer {
-      0% {
-        background-position: -468px 0;
-      }
-      100% {
-        background-position: 468px 0;
-      }
-    }
+}
+@-webkit-keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+@-moz-keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
 @keyframes move_gray_box {
   0% {
     left: 0;
@@ -1325,15 +1336,15 @@ section.loader-wrapr {
   }
   .modal-dialog {
     margin: 34vh auto;
-    width:300px;
+    width: 300px;
     // margin-left: 44vw;
-    .closeBtn{
+    .closeBtn {
       position: absolute;
       right: -38px;
       top: -38px;
       z-index: 9;
       background: none;
-      border:none;
+      border: none;
     }
   }
   .modal-content,
@@ -1353,17 +1364,19 @@ section.loader-wrapr {
         &:last-child {
           margin-bottom: 0;
         }
-        .social-link-title{
-          &:hover,&:focus{
-            border:none;
+        .social-link-title {
+          &:hover,
+          &:focus {
+            border: none;
             outline: none;
           }
-            >div{
-              &:hover,&:focus{
-                border:none;
-                outline: none;
-              }
+          > div {
+            &:hover,
+            &:focus {
+              border: none;
+              outline: none;
             }
+          }
         }
         .social-icon {
           display: inline-block;
@@ -1373,8 +1386,9 @@ section.loader-wrapr {
           position: relative;
           top: 5px;
           margin-right: 10px;
-          &:hover,&:focus{
-            border:none;
+          &:hover,
+          &:focus {
+            border: none;
           }
           &.icon-whatsapp {
             background: url("../images/facebook.png") no-repeat center;
@@ -1478,7 +1492,7 @@ section.loader-wrapr {
     span.tag-wrapper.ReactTags__tag.cursor-move {
       border: 1px solid #0f7aba;
       border-radius: 37.5px;
-      padding:4px 25px 2px;
+      padding: 4px 25px 2px;
       margin: 5px 5px;
       display: inline-block;
       a.ReactTags__remove {
@@ -1616,24 +1630,24 @@ section.loader-wrapr {
       line-height: 1.2em;
       max-height: 39px;
       padding: 5px 20px;
-     p{
-       padding: 5px 0 0 0;
-       margin: 0;
-      i{
-        margin: 0 10px 0 0;
-        color: #4a4a4a;
-        font-size: 18px;
+      p {
+        padding: 5px 0 0 0;
+        margin: 0;
+        i {
+          margin: 0 10px 0 0;
+          color: #4a4a4a;
+          font-size: 18px;
+        }
       }
-     }
     }
     .notfound-btn-wrapper {
       padding: 5px;
       border-left: 1px solid #ccc;
       text-align: center;
-      .data-btns{
-        border:none;
+      .data-btns {
+        border: none;
         background: transparent;
-        i{
+        i {
           color: #4a4a4a;
           font-size: 18px;
         }
@@ -1665,13 +1679,13 @@ section.loader-wrapr {
     display: inline-block;
     width: 100%;
     color: #4a4a4a;
-    span{
+    span {
       color: #029bd7;
       padding-right: 5px;
     }
   }
 }
-.pro-image{
+.pro-image {
   display: inline-block;
   height: 40px;
   width: 40px;
@@ -1680,57 +1694,57 @@ section.loader-wrapr {
   padding: 0 0px;
 }
 
-.feed_wrapper{
-  .feed_footer{
-    table{
-      thead{
-        th{
+.feed_wrapper {
+  .feed_footer {
+    table {
+      thead {
+        th {
           padding: 5px;
         }
       }
     }
   }
 }
-.width-70{
+.width-70 {
   width: 70% !important;
 }
-.padding-rl15{
+.padding-rl15 {
   padding: 0 15px;
 }
-.padding-left0{
+.padding-left0 {
   padding-left: 0 !important;
 }
-.margin-left0{
+.margin-left0 {
   margin-left: 0 !important;
 }
 .form-control {
   border-radius: 0;
 }
-.social-media-link:hover{ 
-    background-image: radial-gradient(circle at 0 100%, #029bd7, #1f58a6);
-    color: #fff;
+.social-media-link:hover {
+  background-image: radial-gradient(circle at 0 100%, #029bd7, #1f58a6);
+  color: #fff;
 }
-.social-media-link svg{ 
+.social-media-link svg {
   transform: scale(2.5);
   top: 9px !important;
 }
-.social-media-link{
+.social-media-link {
   overflow: hidden;
   padding: 0px 15px !important;
   height: 50px;
 }
-.social-media-link .social-link-title{
+.social-media-link .social-link-title {
   font-size: 16px;
   vertical-align: middle;
 }
-.no-data-css{
+.no-data-css {
   transform: scale(0.6);
 }
 .feed_wrapper {
-  .feed_header{
-     .like_wrapper img {
-        width: 24px !important;
-        margin-top: 11px !important;
+  .feed_header {
+    .like_wrapper img {
+      width: 24px !important;
+      margin-top: 11px !important;
     }
   }
 }

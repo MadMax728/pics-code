@@ -329,7 +329,7 @@
 .feed_wrapper {
   background-color: $white_color;
   margin-bottom: 2px;
-  
+
   @include float();
   .feed_header {
     padding: 10px;
@@ -338,7 +338,7 @@
       display: inline-block;
       float: left;
       margin-right: 16px;
-      &.wid45{
+      &.wid45 {
         width: 45px;
       }
       img {
@@ -363,7 +363,6 @@
     .feed_image {
       img {
         width: 100%;
-        
       }
     }
     .feed_description {
@@ -410,64 +409,63 @@
       float: left;
       width: 100%;
       padding: 10px;
+    }
+    &:first-child {
+      border-top: 1px solid #ededed;
+    }
+    textarea {
+      height: 38px;
+      border: 0;
+      resize: none;
+      box-shadow: none;
+    }
+    .emoji_wrapper {
+      padding-right: 0px;
+    }
+    .commenter-info {
+      b {
+        font-family: "Helvetica-Bold";
+        color: $charcoal_color;
+        font-size: 14px;
       }
-      &:first-child {
-        border-top: 1px solid #ededed;
-      }
-      textarea {
-        height: 38px;
-        border: 0;
-        resize: none;
-        box-shadow: none;
-      }
-      .emoji_wrapper {
-        padding-right: 0px;
-      }
-      .commenter-info {
-        b {
-          font-family: "Helvetica-Bold";
-          color: $charcoal_color;
-          font-size: 14px;
-        }
-        color: $silver_color;
-        font-size: 12px;
-      }
-      .show_more_options {
-        padding-right: 5px;
-        text-align: right;
-        a {
-          color: $charcoal_color;
-        }
-      }
-      .comment-content {
-        @media (max-width: 991px) {
-          float: left;
-        }
-        p {
-          color: $charcoal_color;
-          font-size: 14px;
-          padding-left: 68px;
-          @media (max-width: 991px) {
-            padding-left: 0px;
-          }
-          a {
-            color: $blue_color;
-          }
-          .read-more {
-            color: $silver_color;
-            font-size: 14px;
-          }
-        }
+      color: $silver_color;
+      font-size: 12px;
+    }
+    .show_more_options {
+      padding-right: 5px;
+      text-align: right;
+      a {
+        color: $charcoal_color;
       }
     }
-    .view-more-comments {
-      float: left;
-      width: 100%;
-      a {
-        padding: 13px;
-        display: block;
-        color: $silver_color;
+    .comment-content {
+      @media (max-width: 991px) {
+        float: left;
+      }
+      p {
+        color: $charcoal_color;
+        font-size: 14px;
+        padding-left: 68px;
+        @media (max-width: 991px) {
+          padding-left: 0px;
+        }
+        a {
+          color: $blue_color;
+        }
+        .read-more {
+          color: $silver_color;
+          font-size: 14px;
+        }
       }
     }
   }
-
+  .view-more-comments {
+    float: left;
+    width: 100%;
+    a {
+      padding: 13px;
+      display: block;
+      color: $silver_color;
+    }
+  }
+}

@@ -34,8 +34,8 @@ class MLeftUsersList extends Component {
         {items && items.length ? (
           latestUserList()
         ) : (
-            <div className="card">{Translations.message_module.no_msg}</div>
-          )}
+          <div className="card">{Translations.message_module.no_msg}</div>
+        )}
       </div>
     );
   }

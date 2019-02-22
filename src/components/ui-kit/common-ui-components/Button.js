@@ -1,29 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Button = (
-  {
-    className,
-    text,
-    tabIndex,
-    type,
-    onClick,
-    name,
-    disabled,
-    id
-  }
-) => {
+const Button = ({
+  className,
+  text,
+  tabIndex,
+  type,
+  onClick,
+  name,
+  disabled,
+  id
+}) => {
   return (
     <button
       className={className}
       onClick={onClick}
       tabIndex={tabIndex ? -1 : null}
-      type={type || ''}
+      type={type || ""}
       name={name}
       id={id}
       disabled={disabled}
     >
-     {text}
+      {text}
     </button>
   );
 };
