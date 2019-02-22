@@ -27,7 +27,6 @@ class MessageBar extends Component {
   componentDidMount = () => {
     // this.timer = setInterval(() =>  this.setState(prevState => ({ isView: !prevState.isView })), 2000);
   };
-
 }
 
 MessageBar.propTypes = {

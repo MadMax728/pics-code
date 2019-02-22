@@ -211,7 +211,11 @@ class AdsModal extends Component {
     if (!nextProps.modalShow) {
       return { stepIndex: 0 };
     }
-    if (nextProps.data && nextProps.data.id && nextProps.data.id !== prevState.form.id) {
+    if (
+      nextProps.data &&
+      nextProps.data.id &&
+      nextProps.data.id !== prevState.form.id
+    ) {
       return { modalTitle: Translations.modal_header.edit_ad, isEdit: true };
     }
     return null;
@@ -219,7 +223,7 @@ class AdsModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    if (data && data.id !== prevState.form.id || !prevProps.modalShow) {
+    if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
       this.handleFillState(data);
     }
   }
@@ -228,7 +232,7 @@ class AdsModal extends Component {
     const { form } = this.state;
     form.id = data.id;
     form.title = data.title;
-    
+
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;

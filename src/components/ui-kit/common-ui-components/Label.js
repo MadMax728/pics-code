@@ -1,18 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Label = (
-  {
-    htmlfor,
-    classNames,
-    value
-  }
-) => {
+const Label = ({ htmlfor, classNames, value }) => {
   return (
-    <label 
-      htmlFor={htmlfor}
-      className={classNames}
-      >
+    <label htmlFor={htmlfor} className={classNames}>
       {value}
     </label>
   );

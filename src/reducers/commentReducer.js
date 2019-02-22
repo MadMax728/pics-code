@@ -23,7 +23,7 @@ const commentReducer = (state = initialState.commentData, action) => {
         isLoading: false,
         error: action.payload
       };
-    
+
     //  Add Comments
     case types.ADD_COMMENT_STARTED:
       return {

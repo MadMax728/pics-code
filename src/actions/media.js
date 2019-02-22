@@ -39,8 +39,7 @@ export const uploadMedia = (provider, fileType, postType) => {
           });
         }
       );
-    }
-    else if (!fileType) {
+    } else if (!fileType) {
       console.log("video");
       return mediaService.uploadMediaVideo(postType, provider, header).then(
         res => {

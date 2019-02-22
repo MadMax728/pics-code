@@ -9,7 +9,7 @@
     padding: 11px;
     margin-bottom: 2px;
   }
- 
+
   ul {
     padding: 0;
     list-style: none;
@@ -20,11 +20,11 @@
       padding: 11px;
       display: inline-block;
       width: 100%;
-      .left-title{
+      .left-title {
         width: 40%;
         display: inline-block;
       }
-      .right-content{
+      .right-content {
         width: 60%;
         display: inline-block;
       }
@@ -142,13 +142,13 @@
         height: 25px;
         position: relative;
       }
-      .completed-count{
+      .completed-count {
         position: absolute;
         left: 50%;
         -webkit-transform: translateX(-50%);
         transform: translateX(-50%);
-        color:#fff;
-        top:3px;
+        color: #fff;
+        top: 3px;
       }
     }
   }

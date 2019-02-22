@@ -51,19 +51,19 @@ class RadioButtonLanguages extends Component {
           />
           <span>{"English"}</span>
         </div>
-          
-          <div className="">
-            <RadioButton
-              type="radio"
-              id="de"
-              name="language"
-              value="de"
-              defaultChecked={this.state.currentLanguage === "de"}
-              className="language-radio-input"
-              onChange={this.handleLanguage}
-            />
-            <span>{"German"}</span>
-          </div>
+
+        <div className="">
+          <RadioButton
+            type="radio"
+            id="de"
+            name="language"
+            value="de"
+            defaultChecked={this.state.currentLanguage === "de"}
+            className="language-radio-input"
+            onChange={this.handleLanguage}
+          />
+          <span>{"German"}</span>
+        </div>
       </div>
     );
   }

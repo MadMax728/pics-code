@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import LazyLoad from 'react-lazyload';
-import { Loader } from '../loading-indicator';
+import LazyLoad from "react-lazyload";
+import { Loader } from "../loading-indicator";
 import ImageGallery from "./ImageGallery";
 
 class ImageItem extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
       lightboxIsOpen: false
-    }
+    };
   }
 
   render() {
@@ -27,15 +26,18 @@ class ImageItem extends Component {
          */}
         <div className={`${classNames}`}>
           <div className={`img-responsive embed-responsive-item`}>
-              <LazyLoad height={400} once offset={[-400, 0]}>
-                {  item && <img src={item}
-                          alt="altmage"
-                          role="presentation"
-                          onClick={this.openLightbox}
-                          onKeyDown={this.openLightbox}
-                          className="img-responsive"/> 
-                }
-              </LazyLoad>
+            <LazyLoad height={400} once offset={[-400, 0]}>
+              {item && (
+                <img
+                  src={item}
+                  alt="altmage"
+                  role="presentation"
+                  onClick={this.openLightbox}
+                  onKeyDown={this.openLightbox}
+                  className="img-responsive"
+                />
+              )}
+            </LazyLoad>
           </div>
         </div>
         {/* {  
@@ -51,13 +53,12 @@ class ImageItem extends Component {
   }
 
   openLightbox = () => {
-    this.setState({lightboxIsOpen: true})
-  }
+    this.setState({ lightboxIsOpen: true });
+  };
 
   closeLightbox = () => {
-    this.setState({lightboxIsOpen: false})
-  }
-
+    this.setState({ lightboxIsOpen: false });
+  };
 }
 
 ImageItem.propTypes = {

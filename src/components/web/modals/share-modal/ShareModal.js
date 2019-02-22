@@ -19,7 +19,13 @@ class ShareModal extends Component {
         modalShow={modalInfoShow}
         closeBtn
         handleModalHide={handleModalInfoHide}
-        modalBodyContent={<Share shareUrl={`${data.url}`} title={`Picstagraph`} handleModalInfoHide={handleModalInfoHide} />}
+        modalBodyContent={
+          <Share
+            shareUrl={`${data.url}`}
+            title={`Picstagraph`}
+            handleModalInfoHide={handleModalInfoHide}
+          />
+        }
       />
     );
   }

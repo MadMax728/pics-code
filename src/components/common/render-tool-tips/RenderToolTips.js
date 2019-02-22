@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Button } from "../../ui-kit";
 
-
 class RenderToolTips extends Component {
   constructor(props) {
     super(props);
@@ -14,16 +13,16 @@ class RenderToolTips extends Component {
     return (
       <div className="post-action-links">
         {items.map(item => {
-          return (  
-              <Button
-                className="btn-comment-tooltip"
-                type="button"
-                disabled={isLoading}
-                onClick={item.handleEvent}
-                id={id}
-                text={item.name}
-                key={`${item.name}-${id}`}
-              />
+          return (
+            <Button
+              className="btn-comment-tooltip"
+              type="button"
+              disabled={isLoading}
+              onClick={item.handleEvent}
+              id={id}
+              text={item.name}
+              key={`${item.name}-${id}`}
+            />
           );
         })}
       </div>

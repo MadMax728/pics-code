@@ -20,8 +20,8 @@ class MLeftUserItem extends Component {
     websocket.connect(lastMessage => {
       if (
         item &&
-        (item.id === lastMessage.recipientId ||
-          item.id === lastMessage.senderId)
+        (item._id === lastMessage.recipientId ||
+          item._id === lastMessage.senderId)
       ) {
         this.setState({ lastMessage });
       }

@@ -20,7 +20,7 @@ import { Picker } from "emoji-mart";
 import moment from "moment";
 
 const storage = Auth.extractJwtFromStorage();
-let userMentionList = [];
+const userMentionList = [];
 class CommentCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -84,7 +84,7 @@ class CommentCard extends Component {
     this.props.addComment(data).then(() => {
       const { comment } = this.props;
       console.log(comment);
-      
+
       if (comment) {
         const commentData = {
           id: comment._id,
@@ -92,7 +92,7 @@ class CommentCard extends Component {
           userId: comment.createdBy,
           createdBy: {
             profileUrl: comment.profileUrl,
-            username: comment.username,
+            username: comment.username
           },
           date: comment.createdAt
         };
@@ -289,7 +289,7 @@ class CommentCard extends Component {
 
   renderComment = comment => {
     console.log(comment);
-    
+
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">

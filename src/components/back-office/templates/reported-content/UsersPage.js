@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+import {
+  getBackOfficeReportedContent,
+  getBackOfficeReportedStatistics,
+  getSearch
+} from "../../../../actions";
 
 import ReportedSearchBar from "../ReportedSearchBar";
-import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
+import {
+  CampaignLoading,
+  RightSidebarStatistics,
+  NoDataFoundCenterPage
+} from "../../../ui-kit";
 import { UserCard } from "../../../misc";
 
 import { Translations } from "../../../../lib/translations";
@@ -26,24 +34,49 @@ class UsersPage extends Component {
     const { searchData, reportedContentData } = this.props;
     let { userList } = this.state;
     const { form, isLoading } = this.state;
-    userList = search(userList, "username", form.search || searchData.searchKeyword);
+    userList = search(
+      userList,
+      "username",
+      form.search || searchData.searchKeyword
+    );
 
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-          { userList && !isLoading && this.renderUserList() }
-          { isLoading && <CampaignLoading />}
-          { !isLoading && userList && userList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+          <ReportedSearchBar
+            handleSearch={this.handleSearch}
+            value={form.search}
+          />
+          {userList && !isLoading && this.renderUserList()}
+          {isLoading && <CampaignLoading />}
+          {!isLoading && userList && userList.length === 0 && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
         </div>
         <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.user}`} 
-            handleEvent={this.handleReported} 
-            all={reportedContentData.UserStatistics? reportedContentData.UserStatistics.all : 0} 
-            outstanding={reportedContentData.UserStatistics? reportedContentData.UserStatistics.outstanding : 0}
-            processed={reportedContentData.UserStatistics? reportedContentData.UserStatistics.processed : 0} 
-            notProcessed={reportedContentData.UserStatistics? reportedContentData.UserStatistics.notProcessed : 0}
+          <RightSidebarStatistics
+            header={`Reported ${Translations.review_content_menu.user}`}
+            handleEvent={this.handleReported}
+            all={
+              reportedContentData.UserStatistics
+                ? reportedContentData.UserStatistics.all
+                : 0
+            }
+            outstanding={
+              reportedContentData.UserStatistics
+                ? reportedContentData.UserStatistics.outstanding
+                : 0
+            }
+            processed={
+              reportedContentData.UserStatistics
+                ? reportedContentData.UserStatistics.processed
+                : 0
+            }
+            notProcessed={
+              reportedContentData.UserStatistics
+                ? reportedContentData.UserStatistics.notProcessed
+                : 0
+            }
           />
         </div>
       </div>
@@ -54,8 +87,8 @@ class UsersPage extends Component {
     const data = {
       type: "get",
       reportContent: "User"
-    }
-    this.setState({isLoading: true});
+    };
+    this.setState({ isLoading: true });
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
     const { searchData, getSearch } = this.props;
@@ -64,71 +97,80 @@ class UsersPage extends Component {
     }
   };
 
-  getBackOfficeReportedContent = (data) => {
-    this.props.getBackOfficeReportedContent(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.User) {
+  getBackOfficeReportedContent = data => {
+    this.props.getBackOfficeReportedContent(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData.User
+      ) {
         this.setState({
           userList: this.props.reportedContentData.User,
           isLoading: this.props.reportedContentData.isLoading
-        })
+        });
       }
     });
-  }
+  };
 
-  getBackOfficeReportedStatistics = (data) => {
-    this.props.getBackOfficeReportedStatistics(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.UserStatistics) {
+  getBackOfficeReportedStatistics = data => {
+    this.props.getBackOfficeReportedStatistics(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData.UserStatistics
+      ) {
         // success
       }
     });
-  }
+  };
 
-  handleReported = (e) => {
+  handleReported = e => {
     let data;
-    if (e.target.id === "All")
-    {
-      data ={
+    if (e.target.id === "All") {
+      data = {
         type: "get",
         reportContent: "User"
-      }
-      this.setState({isSearch: false});
-    }
-    else {
+      };
+      this.setState({ isSearch: false });
+    } else {
       data = {
         type: "search",
         reportContent: "User",
         searchType: `${e.target.id}`
-      }
-      this.setState({isSearch: true});
+      };
+      this.setState({ isSearch: true });
     }
     this.getBackOfficeReportedContent(data);
-  }
-  
-  handleRemove = (data) => {
+  };
+
+  handleRemove = data => {
     const { userList, isSearch } = this.state;
-    if (isSearch)
-    {
-      this.setState({userList: userList.filter(e => e.id !== data)});
+    if (isSearch) {
+      this.setState({ userList: userList.filter(e => e.id !== data) });
     }
-  }
+  };
 
   renderUserList = () => {
     let { userList } = this.state;
     const { form } = this.state;
     const { searchData, handleModalInfoDetailsCallbackShow } = this.props;
-    userList = search(userList, "username", form.search || searchData.searchKeyword);
+    userList = search(
+      userList,
+      "username",
+      form.search || searchData.searchKeyword
+    );
 
     return userList.map((user, index) => {
       const clearfixDiv = index % 2 === 0 ? <div className="clearfix" /> : null;
       return (
         <div key={user.id}>
           {clearfixDiv}
-          <UserCard 
-            item={user} 
-            index={index} 
-            isReport 
-            isBackOffice 
-            handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+          <UserCard
+            item={user}
+            index={index}
+            isReport
+            isBackOffice
+            handleModalInfoDetailsCallbackShow={
+              handleModalInfoDetailsCallbackShow
+            }
             handleRemove={this.handleRemove}
           />
         </div>
@@ -136,12 +178,12 @@ class UsersPage extends Component {
     });
   };
 
-  handleSearch = (event) => {
+  handleSearch = event => {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
-  }
-  
+  };
+
   handleRefresh = () => {
     const { searchData, getSearch } = this.props;
 
@@ -150,12 +192,12 @@ class UsersPage extends Component {
       const data = {
         type: "get",
         reportContent: "User"
-      }
-      this.setState({isLoading: true});
+      };
+      this.setState({ isLoading: true });
       this.getBackOfficeReportedContent(data);
       this.getBackOfficeReportedStatistics(data);
     }
-  }
+  };
 }
 
 const mapStateToProps = state => ({

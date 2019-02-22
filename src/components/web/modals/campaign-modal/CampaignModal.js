@@ -96,7 +96,12 @@ class CampaignModal extends Component {
   }
 
   render() {
-    const { isFor, handleModalHide, modalShow, handleModalInfoMsgShow } = this.props;
+    const {
+      isFor,
+      handleModalHide,
+      modalShow,
+      handleModalInfoMsgShow
+    } = this.props;
     const {
       modalTitle,
       isEdit,
@@ -135,18 +140,18 @@ class CampaignModal extends Component {
               modalTitle={modalTitle}
             />
           ) : (
-              <CreateCreatorCampaignHeader
-                handleModalHide={handleModalHide}
-                handleNext={this.handleNext}
-                handlePrev={this.handlePrev}
-                stepIndex={stepIndex}
-                handlePrivewOpen={this.handlePrivewOpen}
-                handleResoreState={this.handleResoreState}
-                modalTitle={modalTitle}
-                handleSubmit={this.handleCreatorSubmit}
-                isFor={isFor}
-              />
-            )
+            <CreateCreatorCampaignHeader
+              handleModalHide={handleModalHide}
+              handleNext={this.handleNext}
+              handlePrev={this.handlePrev}
+              stepIndex={stepIndex}
+              handlePrivewOpen={this.handlePrivewOpen}
+              handleResoreState={this.handleResoreState}
+              modalTitle={modalTitle}
+              handleSubmit={this.handleCreatorSubmit}
+              isFor={isFor}
+            />
+          )
         }
         footer={false}
         modalShow={modalShow}
@@ -187,39 +192,39 @@ class CampaignModal extends Component {
               handleModalInfoMsgShow={handleModalInfoMsgShow}
             />
           ) : (
-              <CreateCreatorCampaign
-                stepIndex={stepIndex}
-                isFor={isFor}
-                forThat={"Campaigns"}
-                handleModalInfoShow={this.handleModalInfoShow}
-                handlePrivewClose={this.handlePrivewClose}
-                isPreview={isPreview}
-                handleChangeField={this.handleCompanyChangeField}
-                form={form}
-                maxClicks={maxClicks}
-                handleAddress={this.handleAddress}
-                handleContentChange={this.handleContentChange}
-                handleSubmit={this.handleCreatorSubmit}
-                handleDate={this.handleDate}
-                contentText={form.description}
-                handleEditImage={this.handleEditImage}
-                handleLocation={this.handleLocation}
-                ref={this.imageCropper}
-                handleActualImg={this.handleActualImg}
-                handleScale={this.handleScale}
-                handleOfferTagChange={this.handleOfferTagChange}
-                handleOfferTagDelete={this.handleOfferTagDelete}
-                handleInquiryTagChange={this.handleInquiryTagChange}
-                handleInquiryTagDelete={this.handleInquiryTagDelete}
-                handleSelect={this.handleSelect}
-                userInfo={userInfo}
-                setVoucherData={this.setVoucherData}
-                calculateMaxClicks={this.calculateMaxClicks}
-                isLoading={isLoading}
-                isEdit={isEdit}
-                handleModalInfoMsgShow={handleModalInfoMsgShow}
-              />
-            )
+            <CreateCreatorCampaign
+              stepIndex={stepIndex}
+              isFor={isFor}
+              forThat={"Campaigns"}
+              handleModalInfoShow={this.handleModalInfoShow}
+              handlePrivewClose={this.handlePrivewClose}
+              isPreview={isPreview}
+              handleChangeField={this.handleCompanyChangeField}
+              form={form}
+              maxClicks={maxClicks}
+              handleAddress={this.handleAddress}
+              handleContentChange={this.handleContentChange}
+              handleSubmit={this.handleCreatorSubmit}
+              handleDate={this.handleDate}
+              contentText={form.description}
+              handleEditImage={this.handleEditImage}
+              handleLocation={this.handleLocation}
+              ref={this.imageCropper}
+              handleActualImg={this.handleActualImg}
+              handleScale={this.handleScale}
+              handleOfferTagChange={this.handleOfferTagChange}
+              handleOfferTagDelete={this.handleOfferTagDelete}
+              handleInquiryTagChange={this.handleInquiryTagChange}
+              handleInquiryTagDelete={this.handleInquiryTagDelete}
+              handleSelect={this.handleSelect}
+              userInfo={userInfo}
+              setVoucherData={this.setVoucherData}
+              calculateMaxClicks={this.calculateMaxClicks}
+              isLoading={isLoading}
+              isEdit={isEdit}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
+            />
+          )
         }
       />
     );
@@ -384,7 +389,7 @@ class CampaignModal extends Component {
   };
 
   handleSubmit = () => {
-    const { isEdit} = this.state;
+    const { isEdit } = this.state;
     if (isEdit) {
       this.handleUpdateCampaign();
     } else {
@@ -394,7 +399,7 @@ class CampaignModal extends Component {
 
   validateFile = () => {
     const { form } = this.state;
-    if(!form.file){
+    if (!form.file) {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
@@ -402,7 +407,7 @@ class CampaignModal extends Component {
       return false;
     }
     return true;
-  }
+  };
 
   handleUploadMedia = () => {
     const { form } = this.state;
@@ -422,13 +427,13 @@ class CampaignModal extends Component {
         this.setState({ form, isNewFile: false });
       }
     });
-  }
+  };
 
   handleUpdateCampaign = () => {
     const { form, isNewFile, stepIndex, isFor } = this.state;
     if (this.validateFile()) {
       this.setState({ isLoading: true });
-      if(isNewFile) {
+      if (isNewFile) {
         this.handleUploadMedia();
       }
       this.props.updateCampaign(form).then(() => {
@@ -437,17 +442,17 @@ class CampaignModal extends Component {
           this.props.campaignData.campaign &&
           this.props.campaignData.campaign.id
         ) {
-          if(stepIndex === 2 && !isFor){
+          if (stepIndex === 2 && !isFor) {
             this.handleModalInfoShow();
           }
-          if(isFor && stepIndex === 4){
-            this.handleModalInfoShow();            
+          if (isFor && stepIndex === 4) {
+            this.handleModalInfoShow();
           }
           this.setState({ isLoading: false });
         }
       });
     }
-  }
+  };
 
   handleCreateCampaign = () => {
     const { form } = this.state;
@@ -464,7 +469,7 @@ class CampaignModal extends Component {
         }
       });
     }
-  }
+  };
 
   setVoucherData = (code, voucher, maximumExpenses) => {
     const { form } = this.state;
@@ -476,7 +481,7 @@ class CampaignModal extends Component {
     }
   };
 
-  validateForm = (index) => {
+  validateForm = index => {
     const { form } = this.state;
     if (index === 0) {
       return (
@@ -540,10 +545,9 @@ class CampaignModal extends Component {
     const { stepIndex, isEdit } = this.state;
     if (stepIndex < 4) {
       if (this.validateForm(stepIndex)) {
-        if ( isEdit ) {
+        if (isEdit) {
           this.handleUpdateCampaign();
-        }
-        else {
+        } else {
           this.handleCreateCampaign();
         }
         this.setState({
@@ -583,7 +587,7 @@ class CampaignModal extends Component {
     if (file.type.includes("image")) {
       const currentThis = this;
       reader.readAsDataURL(file);
-      reader.onloadend = function () {
+      reader.onloadend = function() {
         const { form } = currentThis.state;
         // form.typeContent = typeContent.image;
         form.image = reader.result;

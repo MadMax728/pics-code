@@ -69,5 +69,4 @@ export default class Mobile extends Component {
   handleNavClick = () => {
     this.toggleUserNav();
   };
-
 }

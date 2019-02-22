@@ -35,7 +35,6 @@ import lastEvaluatedKey from "./lastEvaluateKeyReducer";
 import notificationData from "./notificationReducer";
 import communityData from "./communityReducer";
 
-
 const rootReducer = combineReducers({
   loginData,
   userData,

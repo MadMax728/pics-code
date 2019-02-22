@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
 class BaseFooter extends Component {
-  
   render() {
     const { className } = this.props;
 

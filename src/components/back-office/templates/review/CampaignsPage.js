@@ -183,7 +183,6 @@ class CampaignsPage extends Component {
               handleRemove={this.handleRemove}
               handleModalInfoShow={handleModalInfoShow}
               handleModalShow={handleModalShow}
-              
             />
           )}
         </div>
