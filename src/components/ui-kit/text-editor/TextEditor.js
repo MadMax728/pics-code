@@ -44,17 +44,17 @@ class TextEditor extends Component {
     // var range = this.quillRef.getEditor().getSelection();
     // this.quillRef.getEditor().insertEmbed(range.index, 'image', file, "user");
 
-    let file = event.target.files[0];
+    const file = event.target.files[0];
     if (this.validation(file)) {
       const { mediaTypes, isMedia } = this.state;
       const Data = new FormData();
       Data.append(mediaTypes, file);
       this.props.uploadMedia(Data, isMedia).then(() => {
-        let range = this.quillRef.getEditor().getSelection();
+        const range = this.quillRef.getEditor().getSelection();
         const { mediaData } = this.props;
 
         if (mediaData && mediaData.media && mediaData.media.path) {
-          let value = mediaData.media.path;
+          const value = mediaData.media.path;
           if (value) {
             this.quillRef
               .getEditor()
@@ -91,7 +91,7 @@ class TextEditor extends Component {
     const { theme } = this.state;
     const { contentText } = this.props;
 
-    let modules = {
+    const modules = {
       toolbar: {
         container: [
           [{ header: "1" }, { header: "2" }],
@@ -113,7 +113,7 @@ class TextEditor extends Component {
       }
     };
 
-    let formats = [
+    const formats = [
       "video",
       "image",
       "link",

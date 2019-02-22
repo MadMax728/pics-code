@@ -100,7 +100,7 @@ class InformationPage extends Component {
       console.log(campaignId);
       this.setState({
         isComments: false,
-        campaignId: campaignId,
+        campaignId,
         comments: null
       }, ()=> {
         this.getCampaignDetailsData();

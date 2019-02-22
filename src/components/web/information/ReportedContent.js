@@ -379,7 +379,7 @@ class ReportedContent extends Component {
       errors.text = Translations.service_report_problem.text_is_required;
       isFormValid = false;
     }
-    this.setState({ errors: errors });
+    this.setState({ errors });
     return isFormValid;
   };
 

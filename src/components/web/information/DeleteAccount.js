@@ -241,7 +241,7 @@ class DeleteAccount extends Component {
       isFormValid = false;
     }
 
-    this.setState({ errors: errors });
+    this.setState({ errors });
     return isFormValid;
   };
 
