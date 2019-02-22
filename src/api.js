@@ -15,9 +15,10 @@ const apiFactory = baseUrl => {
         }
 
         if (
-          data &&
-          (data.message === "Invalid credentials" ||
-            data.error === "Error: Invalid credentials")
+          (data &&
+            (data.message === "Invalid credentials" ||
+              data.error === "Error: Invalid credentials")) ||
+          !data
         ) {
           Auth.logoutUser();
           window.location.reload("/");

@@ -45,10 +45,12 @@ export const getDashboard = (prop, provider) => {
           ["desc"]
         );
         dispatch(getDashboardSucceeded(campaigns, prop));
-        const lastEvaluatedKeys = res.data.lastEvaluatedKeys
-          ? res.data.lastEvaluatedKeys
-          : null;
-        dispatch(setLastEvaluatedKeys(lastEvaluatedKeys));
+        const keys = {
+          limit: res.data.limit,
+          page: res.data.page,
+          pages: res.data.pages
+        };
+        dispatch(setLastEvaluatedKeys(keys));
       },
       error => {
         dispatch(getDashboardFailed(error.response, prop));

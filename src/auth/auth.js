@@ -130,7 +130,6 @@ export const saveJwtToStorage = authResponse => {
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
-
   // Change due to reflected in back-office login
   if (
     authResponse.email &&

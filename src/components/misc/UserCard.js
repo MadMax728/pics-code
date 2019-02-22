@@ -20,12 +20,13 @@ class UserCard extends Component {
     this.state = {
       item: this.props.item,
       index: this.props.index,
-      subscribeResponse: null
+      subscribeResponse: null,
+      isSubscribeStatus: null
     };
   }
 
   render() {
-    const { item, index } = this.state;
+    const { item, index, isSubscribeStatus } = this.state;
     const { isReport, isBackOffice } = this.props;
     const requestLoading = this.props.usersData.isLoading;
     return (
@@ -35,6 +36,7 @@ class UserCard extends Component {
         handleSubscribed={this.handleSubscribed}
         isReport={isReport}
         isBackOffice={isBackOffice}
+        isSubscribeStatus={isSubscribeStatus}
         /* eslint-disable */ renderReportTips={() =>
           this.renderReportTips(item.id)
         }
@@ -53,12 +55,15 @@ class UserCard extends Component {
       if (this.props.userDataByUsername.user.data) {
         // success
         const selectedUserList = this.props.userDataByUsername.user.data;
-        console.log(selectedUserList);
         // if (selectedUserList.isPending) {
         //   // To Do - On Pending request click
         // } else
-        if (selectedUserList.isSubscribe === false) {
-          const requestData = { followers: selectedUserList._id };
+        // console.log(selectedUserList);
+        if (
+          !selectedUserList.isSubscribe ||
+          selectedUserList.isSubscribe === false
+        ) {
+          const requestData = { followers: selectedUserList.id };
           this.props.sendRequest(requestData).then(() => {
             if (
               this.props.usersData.error &&
@@ -67,7 +72,7 @@ class UserCard extends Component {
               // Error
             } else if (this.props.usersData.isRequestSendData) {
               // Success
-              this.props.getDashboard("users", "");
+              this.setState({ isSubscribeStatus: "subscribe" });
             }
           });
         } else {
@@ -80,7 +85,7 @@ class UserCard extends Component {
               // Error
             } else if (this.props.usersData.isUnsubscribedData) {
               // Success
-              this.props.getDashboard("users", "");
+              this.setState({ isSubscribeStatus: "unsubscribe" });
             }
           });
         }
