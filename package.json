@@ -74,8 +74,6 @@
     "build": "npm run build-css && react-scripts build",
     "clean": "rimraf {bin,build}",
     "clean-cdn": "rimraf build/global",
-    "octopack": "octo pack",
-    "octopush": "octo push",
     "test": "react-scripts test --env=jsdom",
     "format": "prettier --write \"src/**/*.{js,jsx,json,css,scss}\"",
     "lint": "eslint src",
