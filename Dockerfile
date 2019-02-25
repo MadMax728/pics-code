@@ -4,7 +4,6 @@ RUN mkdir -p /app/picstgraph_web
 
 WORKDIR /app/picstgraph_web
 
-
 # Install app dependencies
 COPY package.json /app/picstgraph_web
 #RUN npm cache clean --force && npm install
@@ -16,6 +15,6 @@ COPY . /app/picstgraph_web
 
 # Build the built version
 EXPOSE 8080
-#RUN npm run dev
+#RUN npm run serve
 
 CMD ["npm", "start"]
