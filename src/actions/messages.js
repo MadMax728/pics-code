@@ -64,3 +64,34 @@ export const getMessages = (
     );
   };
 };
+
+/**
+ *  DELETE MESSAGES FOR ME
+ *  
+ */
+export const deleteMessages = (userId, otherUserId) => {
+  return dispatch => {
+
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+
+    const params = {
+      userId,
+      otherUserId
+    };
+
+    return messagesService.deleteMessages(params, headers).then(
+      res => {
+        //For this nothing to update in redux
+      },
+      error => {
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};

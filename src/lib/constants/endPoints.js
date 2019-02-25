@@ -67,6 +67,8 @@ export const uploadMediaVideoEndPoint = "/video";
 // Message Service
 export const getMessagesEndPoint = "/messages?";
 
+export const deleteMessagesForMe = "/messages/for/";
+
 // Privacy Service
 export const setProfilePrivacyEndPoint = "/users/private";
 export const setSocialShareEndPoint = "/users/social-share";
