@@ -13,7 +13,7 @@ class ConfirmationModal extends Component {
   }
 
   render() {
-    const { handleModalHide } = this.props;
+    const { handleModalHide, handleModalConfirmation } = this.props;
     console.log(this.props);
     return (
       <CustomBootstrapModal
@@ -26,7 +26,7 @@ class ConfirmationModal extends Component {
         modalBodyContent={
           <ActionConfirmation
             handleModalHide={handleModalHide}
-            handleConfirmation={this.handleConfirmation}
+            handleConfirmation={handleModalConfirmation || this.handleConfirmation}
           />
         }
       />
@@ -66,6 +66,7 @@ const mapDispatchToProps = {
 ConfirmationModal.propTypes = {
   deactivateAccount: PropTypes.func,
   handleModalHide: PropTypes.func,
+  handleModalConfirmation: PropTypes.func,
   handleModalInfoHide: PropTypes.func,
   modalInfoShow: PropTypes.bool,
   modalInfoMsg: PropTypes.string,

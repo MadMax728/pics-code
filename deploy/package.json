@@ -1,0 +1,25 @@
+{
+  "name": "picstagraph-server",
+  "version": "1.0.0",
+  "description": "picstagraph-server",
+  "repository": "http://gitlab.neosofttech.in/JavaScript/picstagraph_backend",
+  "main": "server.js",
+  "scripts": {
+    "clean": "rm -rf build/",
+    "dev": "serve -s build",
+    "start": "node ./node_modules/pm2/bin/pm2 start server.js --name picstagraph-web",
+    "poststart": "node ./node_modules/pm2/bin/pm2 logs",
+    "start:local": "NODE_ENV=local && npm start",
+    "start:test": "NODE_ENV=development && npm start",
+    "start:staging": "NODE_ENV=staging && npm start",
+    "start:production": "NODE_ENV=production && npm start"
+  },
+  "author": "Santosh Shinde",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "pm2": "^3.3.1"
+  }
+}
