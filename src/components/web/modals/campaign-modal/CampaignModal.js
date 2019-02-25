@@ -260,9 +260,8 @@ class CampaignModal extends Component {
       form.location.longitude = data.location.longitude;
       form.location.address = data.location.address;
     }
-    if (data.category && data.category[0] && data.category[0].id) {
-      form.category = data.category[0].id;
-      form.categoryName = data.category[0].categoryName;
+    if (data.category && data.category) {
+      form.category = data.category;
     }
     if (data.offers) {
       form.offers = data.offers;
@@ -301,10 +300,15 @@ class CampaignModal extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
+
     if (!nextProps.modalShow) {
       return { stepIndex: 0, isPreview: false };
     }
-    if (nextProps.data && nextProps.data.id) {
+    if (
+      nextProps.data &&
+      nextProps.data.id &&
+      nextProps.data.id !== prevState.form.id
+    ) {
       return {
         modalTitle: Translations.modal_header.edit_campaign,
         isEdit: true
@@ -315,7 +319,13 @@ class CampaignModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    if (data && data.id !== prevState.form.id) {
+    console.log((data && data.id !== prevState.form.id) || !prevProps.modalShow);
+    console.log(!prevProps.modalShow);
+    console.log(prevState.form.id);
+    console.log(data);
+
+    if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
+      console.log("ahi che");    
       this.handleSetstate(data);
     }
   }
@@ -370,7 +380,6 @@ class CampaignModal extends Component {
   };
 
   handleCreatorSubmit = () => {
-    // console.log("handle creator submit");
     this.handleSubmit();
   };
 
@@ -426,6 +435,7 @@ class CampaignModal extends Component {
         });
       }
       else {
+        this.setState({ isLoading: true });
         this.update();
       }
     }
