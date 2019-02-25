@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../../lib/translations";
 import {
-  InlineLoading,
   RightSidebarModal,
   Button
 } from "../../../../ui-kit";
@@ -93,7 +92,6 @@ class PaymentStepTwo extends Component {
               onClick={this.handleCommitToBuy}
             />
           </div>
-          {isLoading && <InlineLoading />}
         </div>
         <RightSidebarModal userInfo={userInfo} form={form} isFor={forThat} />
       </div>

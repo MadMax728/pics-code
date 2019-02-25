@@ -43,6 +43,7 @@ const initialState = {
   maxClicks: 0,
   modalTitle: "",
   form: {
+    draft: false,
     id: "",
     title: "",
     location: {
@@ -137,6 +138,8 @@ class CampaignModal extends Component {
               handlePrivewOpen={this.handlePrivewOpen}
               handleResoreState={this.handleResoreState}
               modalTitle={modalTitle}
+              form={form}
+              isLoading={isLoading}
             />
           ) : (
             <CreateCreatorCampaignHeader
@@ -149,6 +152,8 @@ class CampaignModal extends Component {
               modalTitle={modalTitle}
               handleSubmit={this.handleCreatorSubmit}
               isFor={isFor}
+              form={form}
+              isLoading={isLoading}
             />
           )
         }
@@ -383,9 +388,13 @@ class CampaignModal extends Component {
 
   handleSubmit = () => {
     const { isEdit, stepIndex, form } = this.state;
-    
-    if (!isEdit && stepIndex === 1 || !form.id) {
-      this.handleCreateCampaign();
+    if (!isEdit && stepIndex === 0) {
+      if (!form.id) {
+        this.handleCreateCampaign();
+      }
+      else {
+        this.handleUpdateCampaign();
+      }
     } else {
       this.handleUpdateCampaign();
     }
@@ -410,11 +419,14 @@ class CampaignModal extends Component {
           if (!form.maximumExpenses) {
             form.maximumExpenses = form.budget;
           }
-          this.setState({ form, isNewFile: false }).then(()=> {
-            this.update();
-          });
-        }
-      });
+          this.setState({ form, isNewFile: false }, () => {
+              this.update();
+            });
+          }
+        });
+      }
+      else {
+        this.update();
       }
     }
   }
@@ -446,7 +458,7 @@ class CampaignModal extends Component {
   };
 
   create = () => {
-    const { form } = this.state;
+    const { form, stepIndex } = this.state;
     this.props.createCampaign(form).then(() => {
       const { campaignData } = this.props;
       if (
@@ -454,14 +466,31 @@ class CampaignModal extends Component {
         campaignData.campaign &&
         campaignData.campaign.id
       ) {
-        this.handleSetstate(campaignData.campaign)
+        this.handleSetstate(campaignData.campaign);
+        this.setState({ isLoading: false, stepIndex: stepIndex + 1 });
+      }     
+      if(campaignData && campaignData.error && campaignData.error.data && campaignData.error.data.message)
+      {
         this.setState({ isLoading: false });
+        this.handleResetForm();
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          campaignData.error.data.message
+        );
       }
     });
   }
 
   update = () => {
     const { form, stepIndex, isFor } = this.state;
+    if(stepIndex === 2 && !isFor){
+      form.draft = true;
+    }
+    if(isFor && stepIndex === 4){
+      form.draft = true;
+    }
+    this.setState({ form });
+
     this.props.updateCampaign(form).then(() => {
       const { campaignData } = this.props;
       if (
@@ -469,15 +498,25 @@ class CampaignModal extends Component {
         campaignData.campaign &&
         campaignData.campaign.id
       ) {
-
         if(stepIndex === 2 && !isFor){
           this.handleModalInfoShow();
+          return;
         }
         if(isFor && stepIndex === 4){
           this.handleModalInfoShow();            
+          return;
         }
         this.handleSetstate(campaignData.campaign);
+        this.setState({ isLoading: false, stepIndex: stepIndex + 1 });
+      }
+      if(campaignData && campaignData.error && campaignData.error.data && campaignData.error.data.message)
+      {
         this.setState({ isLoading: false });
+        this.handleResetForm();
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          campaignData.error.data.message
+        );
       }
     });
   }
@@ -562,7 +601,6 @@ class CampaignModal extends Component {
       if (this.validateForm(stepIndex)) {
         this.handleSubmit();
         this.setState({
-          stepIndex: stepIndex + 1,
           form: { ...this.state.form, error: false }
         });
       } else {

@@ -53,7 +53,7 @@ export const getCampaignType = (payload, header = {}) =>
 
 // Campaign Informatin API
 export const getCampaignDetails = (payload, header = {}) =>
-  api(baseUrl, header).get(getCampaignDetailsEndPoint + payload.id);
+  api(baseUrl, header).get(getCampaignDetailsEndPoint + payload);
 
 // Favourite Campaigns API
 export const getFavouriteCampaigns = (payload, header = {}) =>
@@ -65,7 +65,7 @@ export const createCampaign = (payload, header = {}) =>
 
 // Update Campaign
 export const updateCampaign = (payload, header = {}) =>
-  api(baseUrl, header).put(editCampaignEndPoint, payload);
+  api(baseUrl, header).put(`${editCampaignEndPoint}${payload.id}`, payload);
 
 // Add Participant
 export const addParticipants = (payload, header = {}) =>

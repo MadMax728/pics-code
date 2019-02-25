@@ -8,7 +8,6 @@ import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
 import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
-import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
 import { Auth } from "../../auth";
@@ -61,11 +60,20 @@ class AdCard extends Component {
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
           isStatus={isStatus}
-          isBackOffice={isBackOffice}
-          handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
-          handleModalShow={handleModalShow}
-          handleRemove={handleRemove}
-          isSavedPage={isSavedPage}
+          /* eslint-disable */
+          renderReportTips={() => this.renderReportTips(item.id)}
+          // renderReportTips={
+          //   <ReportTips 
+          //     item={item} 
+          //     isBackOffice={isBackOffice} 
+          //     isReview={isReview} 
+          //     handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+          //     handleModalShow={handleModalShow}
+          //     handleRemove={handleRemove}
+          //     isSavedPage={isSavedPage}
+          //     contentFor={"Ads"}
+          //   />
+          // }
           handleFavorite={this.handleFavorite}
           isLoading={false}
           isReport={isReport}
@@ -188,7 +196,7 @@ class AdCard extends Component {
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-
+    
     if (isBackOffice) {
       reportTips = [
         {
@@ -229,9 +237,9 @@ class AdCard extends Component {
       ];
       if (item.createdBy === userInfo.id) {
         const data = {
-          name: Translations.tool_tips.edit_post,
-          handleEvent: this.handleEditPost
-        };
+            name: Translations.tool_tips.edit_post,
+            handleEvent: this.handleEditPost
+        }
         reportTips.unshift(data);
       }
     }
@@ -240,8 +248,8 @@ class AdCard extends Component {
 
   handleEditPost = e => {
     const { item } = this.state;
-    this.props.handleModalShow(modalType.editAds, item);
-  };
+    this.props.handleModalShow(modalType.editAds , item);
+  }
 
   handleReportPost = e => {
     const { item } = this.state;

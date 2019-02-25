@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
 import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
+import { InlineLoading } from "../../../../ui-kit";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {
@@ -40,6 +41,7 @@ class CreateCompanyCampaign extends Component {
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
+          {isLoading && <InlineLoading />}
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
