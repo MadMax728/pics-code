@@ -1,2 +1,2 @@
 echo "Serving picstagraph-web!"
-serve -s build
+serve -s build 8080
