@@ -70,7 +70,7 @@
     "build-css": "node-sass-chokidar --include-path src src/styles/global/index.scss public/global/picstagraph-web/css/index.css --output-style compressed",
     "watch-css": "npm run build-css && node-sass-chokidar --watch --include-path src src/styles/global/index.scss public/global/picstagraph-web/css/index.css",
     "start-js": "react-scripts start",
-    "start": "pm2 start ./server.sh --name picstagraph-web",
+    "start": "pm2 start -f ./server.sh --name picstagraph-web",
     "dev": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "clean": "rimraf {bin,build}",

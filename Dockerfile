@@ -7,7 +7,7 @@ WORKDIR /app/picstgraph_web
 # Install app dependencies
 COPY package.json /app/picstgraph_web
 
-#RUN npm cache clean --force && npm install
+# RUN npm cache clean --force && npm install
 RUN npm install
 
 
