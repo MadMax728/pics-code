@@ -1,5 +1,16 @@
 import apiFactory, { api } from "../api";
-import { unblockUserRequestEndPoint, blockUserRequestEndPoint, acceptRequestEndPoint, getPendingUserListEndPoint, getUnsubscribeEndPoint, sendRequestEndPoint, getUserListCompanyEndPoint, getUserListLikeYouEndPoint, getUserListUnknownEndPoint, getUserListSubscriberEndPoint } from "../lib/constants/endPoints";
+import {
+  unblockUserRequestEndPoint,
+  blockUserRequestEndPoint,
+  acceptRequestEndPoint,
+  getPendingUserListEndPoint,
+  getUnsubscribeEndPoint,
+  sendRequestEndPoint,
+  getUserListCompanyEndPoint,
+  getUserListLikeYouEndPoint,
+  getUserListUnknownEndPoint,
+  getUserListSubscriberEndPoint
+} from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -44,7 +55,7 @@ export const sendRequest = (payload, header = {}) =>
   api(baseUrl, header).post(sendRequestEndPoint, payload);
 
 export const getUnsubscribe = (payload, id, header = {}) =>
-  api(baseUrl, header).delete( `${getUnsubscribeEndPoint}${id}`, payload);
+  api(baseUrl, header).delete(`${getUnsubscribeEndPoint}${id}`, payload);
 
 export const getPendingUserList = (payload, header = {}) =>
   api(baseUrl, header).get(getPendingUserListEndPoint);
@@ -53,7 +64,7 @@ export const acceptRequest = (payload, header = {}) =>
   api(baseUrl, header).put(acceptRequestEndPoint, payload);
 
 export const blockUserRequest = (payload, header = {}) =>
-  api(baseUrl, header).put( blockUserRequestEndPoint, payload);
+  api(baseUrl, header).put(blockUserRequestEndPoint, payload);
 
 export const unblockUserRequest = (payload, id, header = {}) =>
   api(baseUrl, header).delete(unblockUserRequestEndPoint + id, payload);

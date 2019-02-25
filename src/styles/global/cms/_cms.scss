@@ -20,10 +20,10 @@ header {
   .panel-wrapper {
     background: $white_color;
     margin-bottom: 10px;
-    .browse-file{
-      .inputfile{
+    .browse-file {
+      .inputfile {
         z-index: 9;
-        top:25px;
+        top: 25px;
       }
     }
     form {
@@ -78,13 +78,13 @@ header {
         width: 100%;
       }
     }
-    .cms-page-content{
-      height:100vh;
+    .cms-page-content {
+      height: 100vh;
       padding: 20px;
       background: #ffffff;
     }
-    .other-pages-content{
-      height:90vh;
+    .other-pages-content {
+      height: 90vh;
     }
   }
   .support-accordion {

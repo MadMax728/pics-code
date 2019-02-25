@@ -1,5 +1,9 @@
 import { api } from "../api";
-import { updateVerificationEndPoint, getUnverifiedUsersEndPoint, getVerificationsEndPoint } from "../lib/constants/endPoints";
+import {
+  updateVerificationEndPoint,
+  getUnverifiedUsersEndPoint,
+  getVerificationsEndPoint
+} from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -15,7 +19,6 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 export const getVerifications = (payload, header = {}) =>
   api(baseUrl, header).get(getVerificationsEndPoint);
 
-
 // unverifiedUser API
 export const getUnverifiedUsers = (payload, header = {}) =>
   api(baseUrl, header).get(getUnverifiedUsersEndPoint);
@@ -23,4 +26,3 @@ export const getUnverifiedUsers = (payload, header = {}) =>
 // BackOffice update Verification API
 export const updateVerification = (payload, header = {}) =>
   api(baseUrl, header).put(updateVerificationEndPoint, payload);
-  

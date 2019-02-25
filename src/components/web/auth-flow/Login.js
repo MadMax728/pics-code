@@ -45,7 +45,7 @@ class Login extends Component {
                     id="username"
                     name="username"
                     placeholder={Translations.placeholders.username_email}
-                    value={form.username? form.username : ""}
+                    value={form.username ? form.username : ""}
                     onChange={this.handleChangeField}
                   />
                   {form.username.length > 0 ? (
@@ -62,7 +62,7 @@ class Login extends Component {
                     id="password"
                     name="password"
                     placeholder={Translations.placeholders.password}
-                    value={form.password? form.password : ""}
+                    value={form.password ? form.password : ""}
                     onChange={this.handleChangeField}
                   />
                   {form.password.length > 0 ? (
@@ -134,7 +134,6 @@ class Login extends Component {
     form[event.values.name] = event.values.val;
     this.setState({ form });
     this.formValid();
-   
   };
 
   // handelSubmit called when click on submit
@@ -159,7 +158,6 @@ class Login extends Component {
         }
       });
   };
-
 }
 
 const mapStateToProps = state => ({

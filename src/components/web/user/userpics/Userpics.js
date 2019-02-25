@@ -31,27 +31,25 @@ class Userpics extends Component {
           {picsDataList && (
             <div className="user-pics-carousel row">
               <div className="left-arrow">
-                  <i className="fa fa-angle-left"></i>
+                <i className="fa fa-angle-left" />
               </div>
               <div className="right-arrow">
-                  <i className="fa fa-angle-right"></i>
+                <i className="fa fa-angle-right" />
               </div>
               <div className="user-pic-status">
-                <p></p>
-                <p></p>
-                <p></p>
+                <p />
+                <p />
+                <p />
               </div>
               <div className="user-pic-data">
-                  
-                  <div className="user-pic">
-                    <img src={images.profile_pic} alt="profilepic"/>
-                  </div>
-                  <div className="user-pic-name">
-                      <h4 className="username">username</h4>
-                      <p className="user-location">location</p>
-                      <p className="user-cata">01.01.2000 in category</p>
-                  </div>
-                 
+                <div className="user-pic">
+                  <img src={images.profile_pic} alt="profilepic" />
+                </div>
+                <div className="user-pic-name">
+                  <h4 className="username">username</h4>
+                  <p className="user-location">location</p>
+                  <p className="user-cata">01.01.2000 in category</p>
+                </div>
               </div>
               <Carousel
                 autoPlay
@@ -82,14 +80,18 @@ class Userpics extends Component {
                   );
                 })}
               </Carousel>
-              
+
               <div className="col-md-10 col-md-offset-1 col-sm-12 col-xs-12 user-pic-opt">
                 <div className="col-md-6 col-sm-6 col-xs-6 text-center">
-                  <p><i className="fa fa-eye" aria-hidden="true"></i></p>
+                  <p>
+                    <i className="fa fa-eye" aria-hidden="true" />
+                  </p>
                   <p className="option-text">0 views</p>
                 </div>
                 <div className="col-md-6 col-sm-6 col-xs-6 text-center">
-                  <p><i className="fa fa-trash" aria-hidden="true"></i></p>
+                  <p>
+                    <i className="fa fa-trash" aria-hidden="true" />
+                  </p>
                   <p className="option-text">delete</p>
                 </div>
               </div>

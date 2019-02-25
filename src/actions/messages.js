@@ -5,7 +5,6 @@ import { Auth } from "../auth";
 import * as _ from "lodash";
 import moment from "moment";
 
-
 const getMessagesListStarted = () => ({
   type: types.GET_MESSAGES_STARTED
 });
@@ -26,25 +25,34 @@ const getMessagesListFailed = error => ({
  *  GET MESSAGES
  *  @returns {dispatch} getMessages.
  */
-export const getMessages = (senderId, recipientId, lastEvaluatedKeys = undefined) => {
+export const getMessages = (
+  senderId,
+  recipientId,
+  lastEvaluatedKeys = undefined
+) => {
   return dispatch => {
     dispatch(getMessagesListStarted());
     const storage = Auth.extractJwtFromStorage();
     const headers = {
       Authorization: storage.accessToken
     };
-    const lastEvaluatedKey = lastEvaluatedKeys && lastEvaluatedKeys.id ?  lastEvaluatedKeys.id : undefined;
-    const params = { 
-        senderId,
-        recipientId,
-        strict: true,
-        lastEvaluatedKey
+    const lastEvaluatedKey =
+      lastEvaluatedKeys && lastEvaluatedKeys.id
+        ? lastEvaluatedKeys.id
+        : undefined;
+    const params = {
+      senderId,
+      recipientId,
+      strict: true,
+      lastEvaluatedKey
     };
 
     return messagesService.getMessages(params, headers).then(
       res => {
-        const messages =  _.orderBy(res.data.data, (o ) => moment(o.createdAt));
-        dispatch(getMessagesListSucceeded(messages, res.data.lastEvaluatedKeys));
+        const messages = _.orderBy(res.data.data, o => moment(o.createdAt));
+        dispatch(
+          getMessagesListSucceeded(messages, res.data.lastEvaluatedKeys)
+        );
       },
       error => {
         dispatch(getMessagesListFailed([]));

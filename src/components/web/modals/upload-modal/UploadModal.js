@@ -43,9 +43,7 @@ class UploadModal extends Component {
     const className = !fileUpdate ? "upload-file-format" : "";
     return (
       <CustomBootstrapModal
-        modalClassName={
-          `modal fade upload-image-modal upload-pic-modal create-campaign-modal ${className}` 
-        }
+        modalClassName={`modal fade upload-image-modal upload-pic-modal create-campaign-modal ${className}`}
         header={fileUpdate}
         modalHeaderContent={
           <UploadHeader

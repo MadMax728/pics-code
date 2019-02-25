@@ -30,8 +30,16 @@ class UploadHeader extends Component {
           {/* {Translations.modal_header.upload_image} */}
         </div>
         <div className="col-sm-offest-6 col-sm-6 text-right">
-          <Button className="black_button" onClick={this.handleModalHide} text={Translations.modal_header.cancle} />
-          <Button className="black_button" onClick={handleContinue} text={Translations.modal_header.continue} />
+          <Button
+            className="black_button"
+            onClick={this.handleModalHide}
+            text={Translations.modal_header.cancle}
+          />
+          <Button
+            className="black_button"
+            onClick={handleContinue}
+            text={Translations.modal_header.continue}
+          />
         </div>
       </div>
     );

@@ -34,7 +34,9 @@ const CampaignDetailsCard = ({
   return (
     <div className="information-wrapper ht100">
       <div className="info-inner-wrapper col-xs-12 padd-15">
-        <h3 className="no-padding no-margin capitalize">{campaignDetails.title}</h3>
+        <h3 className="no-padding no-margin capitalize">
+          {campaignDetails.title}
+        </h3>
         <div className="no-padding titles_wrapper">
           <div className="secondary_title">
             {campaignDetails.location &&
@@ -70,31 +72,33 @@ const CampaignDetailsCard = ({
                 id={campaignDetails.id}
                 item={campaignDetails.mediaUrl}
               />
-          )}
+            )}
         </div>
         <div className="margin-top-25">
           <DescriptionItem desc={campaignDetails.description} />
         </div>
         <div className="text paddTop20" />
-          {campaignDetails.isOwner ? (
-            ""
-          ) : campaignDetails.isAlreadyParticipant &&
-            campaignDetails.userType !== selectedUserType ? (
-            <Button 
-              className="blue_button" 
-              disabled 
-              text={Translations.campaign_details.campaign_success_apply}
-            />
-          ) : (
-            <Button
-              className="filled_button"
-              onClick={handleApplyParticipant}
-              id={campaignDetails.id}
-              text={campaignDetails && campaignDetails.userType === selectedUserType
+        {campaignDetails.isOwner ? (
+          ""
+        ) : campaignDetails.isAlreadyParticipant &&
+          campaignDetails.userType !== selectedUserType ? (
+          <Button
+            className="blue_button"
+            disabled
+            text={Translations.campaign_details.campaign_success_apply}
+          />
+        ) : (
+          <Button
+            className="filled_button"
+            onClick={handleApplyParticipant}
+            id={campaignDetails.id}
+            text={
+              campaignDetails && campaignDetails.userType === selectedUserType
                 ? Translations.campaign_details.send_message
-                : Translations.campaign_details.apply_campaign}
-            />
-          )}
+                : Translations.campaign_details.apply_campaign
+            }
+          />
+        )}
         <div className="feed_wrapper">
           <FeedHeader
             id={campaignDetails.id}

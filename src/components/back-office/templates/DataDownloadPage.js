@@ -11,9 +11,9 @@ class DataDownloadPage extends Component {
     super(props);
 
     this.state = {
-      searchKeyword: this.props.searchData.searchKeyword,      
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
-        username: "",
+        username: ""
       }
     };
   }
@@ -35,7 +35,9 @@ class DataDownloadPage extends Component {
                 className="flex2"
                 onChange={this.handleChangeField}
               />
-              <Button className="wid30per" onClick={this.handleSubmit}
+              <Button
+                className="wid30per"
+                onClick={this.handleSubmit}
                 text={Translations.admin.Download}
               />
             </div>
@@ -57,7 +59,7 @@ class DataDownloadPage extends Component {
     }
     return null;
   }
-  
+
   handleChangeField = event => {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
@@ -68,20 +70,17 @@ class DataDownloadPage extends Component {
   handleSubmit = e => {
     e.preventDefault();
   };
-
 }
 
 const mapStateToProps = state => ({
   searchData: state.searchData
 });
 
-const mapDispatchToProps = {
-
-};
+const mapDispatchToProps = {};
 
 DataDownloadPage.propTypes = {
   searchData: PropTypes.any,
-  history: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(

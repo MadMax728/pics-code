@@ -10,7 +10,7 @@ import { Translations } from "../../../lib/translations";
 const AdCardHeader = ({
   ad,
   isDescription,
-  isInformation,  
+  isInformation,
   handleFavorite,
   isLoading
 }) => {
@@ -25,7 +25,10 @@ const AdCardHeader = ({
   return (
     <div className="feed_header">
       <Link to={profile_route}>
-          <UserImageItem item={ad.createdBy.profileUrl} customClass={`img-circle img-responsive padding-right-15`} />
+        <UserImageItem
+          item={ad.createdBy.profileUrl}
+          customClass={`img-circle img-responsive padding-right-15`}
+        />
       </Link>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link to={profile_route}>
@@ -33,8 +36,7 @@ const AdCardHeader = ({
         </Link>
         {ad.category && (
           <div className="grey_title">
-            {Translations.sponsored_in}{" "}
-            {ad.category}
+            {Translations.sponsored_in} {ad.category}
           </div>
         )}
       </div>

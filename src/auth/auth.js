@@ -127,11 +127,9 @@ export const clearTokensFromStorage = () => {
  * save jwt in storage
  */
 export const saveJwtToStorage = authResponse => {
-
   if (authResponse.token) {
     localStorage.setItem("access_token", authResponse.token);
   }
-
   // Change due to reflected in back-office login
   if (
     authResponse.email &&
@@ -146,14 +144,13 @@ export const saveJwtToStorage = authResponse => {
         email: authResponse.email,
         username: authResponse.username,
         language: authResponse.language || "English",
-        profileUrl:authResponse.profileUrl || images.image,
+        profileUrl: authResponse.profileUrl || images.image,
         userType: authResponse.userType || "creator",
         role: authResponse.role,
         id: authResponse.id
       })
     );
   }
-
 
   if (authResponse.hasOwnProperty("isAdmin")) {
     localStorage.setItem("is_admin", authResponse.isAdmin);

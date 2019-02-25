@@ -3,7 +3,7 @@ import * as userService from "../services";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
 
-// get User 
+// get User
 const getUserStarted = () => ({
   type: types.GET_USER_STARTED
 });
@@ -79,7 +79,6 @@ export const updateUserProfile = data => {
     );
   };
 };
-
 
 // Upload Image
 const uploadImageStarted = () => ({

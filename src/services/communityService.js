@@ -5,4 +5,4 @@ import { getUserCommunityEndPoint } from "../lib/constants/endPoints";
 const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 export const getUserCommunity = (payload, header = {}) =>
-    api(baseUrl, header).get(getUserCommunityEndPoint + payload.id);
+  api(baseUrl, header).get(getUserCommunityEndPoint + payload.id);

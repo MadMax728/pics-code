@@ -26,7 +26,8 @@ export const getUserCommunity = params => {
     const header = { Authorization: storage.accessToken };
     return communityService.getUserCommunity(params, header).then(
       res => {
-        if (res.data && res.data.data) dispatch(getUserCommunitySucceeded(res.data.data));
+        if (res.data && res.data.data)
+          dispatch(getUserCommunitySucceeded(res.data.data));
       },
       error => {
         dispatch(getUserCommunityFailed(error.response));

@@ -188,7 +188,7 @@ class AdCard extends Component {
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-    
+
     if (isBackOffice) {
       reportTips = [
         {
@@ -229,9 +229,9 @@ class AdCard extends Component {
       ];
       if (item.createdBy === userInfo.id) {
         const data = {
-            name: Translations.tool_tips.edit_post,
-            handleEvent: this.handleEditPost
-        }
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
         reportTips.unshift(data);
       }
     }
@@ -240,8 +240,8 @@ class AdCard extends Component {
 
   handleEditPost = e => {
     const { item } = this.state;
-    this.props.handleModalShow(modalType.editAds , item);
-  }
+    this.props.handleModalShow(modalType.editAds, item);
+  };
 
   handleReportPost = e => {
     const { item } = this.state;

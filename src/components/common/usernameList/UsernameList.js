@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import * as images from "../../../lib/constants"
+import * as images from "../../../lib/constants";
 
 class UsernameList extends Component {
-
   render() {
     let { usersList } = this.props;
 
@@ -13,19 +12,23 @@ class UsernameList extends Component {
 
     const lastText = usernameArr[usernameArr.length - 1].substring(1);
 
-    usersList = usersList && usersList.filter(item => {
-      return !!(
-        lastText === "@" ||
-        lastText === "" ||
-        (item.username && item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1) ||
-        (item.name !== undefined && item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1)
-      );
-    });
+    usersList =
+      usersList &&
+      usersList.filter(item => {
+        return !!(
+          lastText === "@" ||
+          lastText === "" ||
+          (item.username &&
+            item.username.toLowerCase().indexOf(lastText.toLowerCase()) > -1) ||
+          (item.name !== undefined &&
+            item.name.toLowerCase().indexOf(lastText.toLowerCase()) > -1)
+        );
+      });
 
     return (
       <div>
         {usersList &&
-          usersList.map((item) => {
+          usersList.map(item => {
             return (
               /* eslint-disable */
               <div
@@ -64,14 +67,12 @@ class UsernameList extends Component {
     value = usernameArr.join(" ") + username;
     this.props.handleSetSatetToolTipUsername(id, value);
   };
-
 }
 
 UsernameList.propTypes = {
   usersList: PropTypes.any,
   value: PropTypes.any.isRequired,
-  handleSetSatetToolTipUsername: PropTypes.func.isRequired,
+  handleSetSatetToolTipUsername: PropTypes.func.isRequired
 };
-
 
 export default UsernameList;

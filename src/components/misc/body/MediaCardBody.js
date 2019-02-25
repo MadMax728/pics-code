@@ -9,30 +9,29 @@ const MediaCardBody = ({ item, isDescription, isLoading }) => {
       <div className="feed_image">
         {item.typeContent &&
           item.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
-          <ImageItem item={item.mediaUrl} 
-                  userName={item.userName} 
-                  isOtherCardExist={false} 
-                  isLoading={isLoading} />
+            <ImageItem
+              item={item.mediaUrl}
+              userName={item.userName}
+              isOtherCardExist={false}
+              isLoading={isLoading}
+            />
           )}
         {item.typeContent &&
           item.typeContent.toLowerCase() === enumerations.mediaTypes.video && (
-            <VideoItem id={item.id} item={item.mediaUrl} isLoading={isLoading} />
+            <VideoItem
+              id={item.id}
+              item={item.mediaUrl}
+              isLoading={isLoading}
+            />
           )}
       </div>
-      {item &&
-        isDescription &&
-        item.description && (
-          <div className="feed_description news-feed-data padding-15">
-            <span className="secondary_title">
-              <ReadMore
-                text={item.description}
-                min={50}
-                ideal={50}
-                max={50}
-              />
-            </span>
-          </div>
-        )}
+      {item && isDescription && item.description && (
+        <div className="feed_description news-feed-data padding-15">
+          <span className="secondary_title">
+            <ReadMore text={item.description} min={50} ideal={50} max={50} />
+          </span>
+        </div>
+      )}
     </div>
   );
 };

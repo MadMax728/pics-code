@@ -13,17 +13,31 @@ class Textarea extends Component {
 
   render() {
     const { name, className, id, placeholder, value } = this.props;
-
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
-      <textarea
-        name={name}
-        id={id}
-        className={className}
-        placeholder={placeholder}
-        onChange={this.handleChangeField}
-        defaultValue={value || ""}
-      />
+      <div>
+        {value ? (
+          <textarea
+            name={name}
+            id={id}
+            className={className}
+            placeholder={placeholder}
+            onChange={this.handleChangeField}
+          >
+            {value}
+          </textarea>
+        ) : (
+          <textarea
+            name={name}
+            id={id}
+            className={className}
+            placeholder={placeholder}
+            onChange={this.handleChangeField}
+          >
+            {""}
+          </textarea>
+        )}
+      </div>
     );
   }
 

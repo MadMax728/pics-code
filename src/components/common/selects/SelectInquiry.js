@@ -8,7 +8,7 @@ class SelectInquiry extends Component {
     super(props);
     this.state = {
       inquiryList
-    }
+    };
   }
   render() {
     const { inquiryList } = this.state;
@@ -22,22 +22,23 @@ class SelectInquiry extends Component {
         options={inquiryList}
       >
         <option value="">{Translations.select_inquiry}</option>
-        {inquiryList && inquiryList.map(option => (
-          <option value={option.id} key={option.id}>
-            {option.value}
-          </option>
-        ))}
+        {inquiryList &&
+          inquiryList.map(option => (
+            <option value={option.id} key={option.id}>
+              {option.value}
+            </option>
+          ))}
       </select>
     );
   }
 
-  handleInquiry = (event) => {
+  handleInquiry = event => {
     const { inquiryList } = this.state;
     const name = inquiryList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: (name.length !== 0) ? name[0].value : ""
-    }
+      name: name.length !== 0 ? name[0].value : ""
+    };
     this.props.handleSelect("inquiry", data);
   };
 }

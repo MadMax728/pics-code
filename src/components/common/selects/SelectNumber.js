@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getBackofficeSelect } from "../../../actions";
 import { connect } from "react-redux";
-import { Translations }  from "../../../lib/translations";
+import { Translations } from "../../../lib/translations";
 
 class SelectNumber extends Component {
   constructor(props) {
     super(props);
     this.state = {
       numberList: []
-    }
+    };
   }
 
   render() {
@@ -33,28 +33,28 @@ class SelectNumber extends Component {
       </select>
     );
   }
-  
+
   componentDidMount = () => {
     this.props.getBackofficeSelect("numbers").then(() => {
-      if(this.props.numberList){
+      if (this.props.numberList) {
         this.setState({
           numberList: this.props.numberList
         });
       }
     });
-  }
+  };
 
   componentWillUnmount = () => {
-    this.setState({numberList: []});
-  }
-  
-  handleNumber = (event) => {
+    this.setState({ numberList: [] });
+  };
+
+  handleNumber = event => {
     const { numberList } = this.props;
     const name = numberList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: (name.length !== 0) ? name[0].voucherNumber : ""
-    }
+      name: name.length !== 0 ? name[0].voucherNumber : ""
+    };
     this.props.handleSelect("number", data);
   };
 }
@@ -66,7 +66,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getBackofficeSelect
 };
-
 
 const propTypes = {
   value: PropTypes.any,

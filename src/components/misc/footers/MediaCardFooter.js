@@ -23,11 +23,13 @@ const MediaCardFooter = ({
           onClick={handleCommentsSections}
           id={item.createdBy}
           disabled={isLoading}
-          text={<img
-            src={images.comment}
-            alt="company-comments"
-            role="presentation"
-          />}
+          text={
+            <img
+              src={images.comment}
+              alt="company-comments"
+              role="presentation"
+            />
+          }
         />
       </div>
       <div className="likes" role="article">

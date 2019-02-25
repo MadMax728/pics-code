@@ -60,7 +60,10 @@ class Comments extends Component {
       <div className="feed-comment" id={campaign.id}>
         <div className="comment-wrapper">
           <form onSubmit={this.handleSubmit} ref={this.commentForm}>
-            <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
+            <UserImageItem
+              item={profileImage}
+              customClass={`img-circle img-responsive`}
+            />
             <div className="col-md-9 col-sm-7 col-xs-7 no-padding">
               <div className="comment-input">
                 <div className="form-group">
@@ -111,26 +114,24 @@ class Comments extends Component {
             id="7"
             onClick={this.handleViewComment}
             onKeyUp={this.handleViewComment}
-            role='button'
+            role="button"
             tabIndex="0"
           >
             {Translations.view_more_comments}
           </div>
         )}
 
-        {!isReport &&
-          totalCommentsCount > 2 &&
-          totalCommentsCount < maxRange && (
-            <div
-              className="view-more-comments view-more-link"
-              onClick={this.handleViewLessComment}
-              onKeyUp={this.handleViewLessComment}
-              role='button'
-              tabIndex="0"
-            >
-              {Translations.view_less_comments}
-            </div>
-          )}
+        {!isReport && totalCommentsCount > 2 && totalCommentsCount < maxRange && (
+          <div
+            className="view-more-comments view-more-link"
+            onClick={this.handleViewLessComment}
+            onKeyUp={this.handleViewLessComment}
+            role="button"
+            tabIndex="0"
+          >
+            {Translations.view_less_comments}
+          </div>
+        )}
       </div>
     );
   }
@@ -138,10 +139,7 @@ class Comments extends Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
     const { maxRange, minRange } = this.state;
-    const commentData = this.state.comments.slice(
-      minRange,
-      maxRange
-    );
+    const commentData = this.state.comments.slice(minRange, maxRange);
     this.setState({ slicedCommentsData: commentData, maxRange: 2 });
   };
 
@@ -348,9 +346,13 @@ class Comments extends Component {
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header">
-          <UserImageItem item={comment.profileImage} customClass={`img-circle img-responsive`} />
+          <UserImageItem
+            item={comment.profileImage}
+            customClass={`img-circle img-responsive`}
+          />
           <div className="col-sm-7 col-md-9 col-xs-7 commenter-info">
-            <b>{comment.userName}</b> {comment.createdAt} <b>{Translations.reply}</b>
+            <b>{comment.userName}</b> {comment.createdAt}{" "}
+            <b>{Translations.reply}</b>
           </div>
           <div className="col-sm-3 col-md-2 col-xs-2 show_more_options pull-right">
             <ThreeDots
@@ -372,7 +374,11 @@ class Comments extends Component {
           </div>
         </div>
         <div className="comment-content col-md-12 no-padding">
-          <div className="col-md-11"><div className="comment-inner-wrap">{this.renderEditComment(comment)}</div></div>
+          <div className="col-md-11">
+            <div className="comment-inner-wrap">
+              {this.renderEditComment(comment)}
+            </div>
+          </div>
         </div>
       </div>
     );
@@ -392,7 +398,6 @@ class Comments extends Component {
       });
     }
   };
-
 }
 
 const mapStateToProps = state => ({

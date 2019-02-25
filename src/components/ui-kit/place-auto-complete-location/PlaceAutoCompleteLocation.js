@@ -23,8 +23,13 @@ class PlaceAutoCompleteLocation extends Component {
           value={this.state.address}
           onChange={this.handleChange}
           onSelect={this.handleSelect}
-          >
-          {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+        >
+          {({
+            getInputProps,
+            suggestions,
+            getSuggestionItemProps,
+            loading
+          }) => (
             <div>
               <input
                 {...getInputProps({
@@ -33,7 +38,7 @@ class PlaceAutoCompleteLocation extends Component {
               />
               <div
                 className={
-                  suggestions.length !== 0 
+                  suggestions.length !== 0
                     ? "autocomplete-dropdown-container show"
                     : "autocomplete-dropdown-container"
                 }
@@ -67,11 +72,11 @@ class PlaceAutoCompleteLocation extends Component {
     );
   }
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps = nextProps => {
     if (nextProps.value) {
       this.setState({ address: nextProps.value });
     }
-  }
+  };
 
   handleChange = address => {
     this.getGeoLocation(address);

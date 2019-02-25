@@ -63,9 +63,9 @@ class MLeftContainer extends Component {
       case 2:
         this.getUserList("unknown");
         break;
-      case 3:
-        this.getUserList("likeYou");
-        break;
+      // case 3:
+      //   this.getUserList("likeYou");
+      //   break;
       case 4:
         this.getUserList("company");
         break;
@@ -106,13 +106,7 @@ class MLeftContainer extends Component {
 
   handleChatClick = e => {
     const { userList } = this.state;
-    const user = _.find(userList, { id: e.currentTarget.dataset.id });
-    this.props.selectUser(user);
-  };
-
-  handleChatClick = e => {
-    const { userList } = this.state;
-    const user = _.find(userList, { id: e.currentTarget.dataset.id });
+    const user = _.find(userList, { _id: e.currentTarget.dataset._id });
     this.props.selectUser(user);
   };
 

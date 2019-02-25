@@ -9,13 +9,13 @@ import { search } from "../../../lib/utils/helpers";
 class UsersRoot extends React.Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { usersList: null };
+    this.state = { usersList: null, currentPage: 1 };
   }
 
   render() {
-    //let { usersList } = this.state;
-    const { isLoadingusers, searchData, usersList } = this.props;
-    // usersList = search(usersList, "username", searchData.searchKeyword);
+    let { usersList } = this.state;
+    const { isLoadingusers, searchData } = this.props;
+    usersList = search(usersList, "username", searchData.searchKeyword);
     return (
       <div className="padding-rl-10 middle-section">
         {usersList && !isLoadingusers && this.renderuserList()}
@@ -32,6 +32,42 @@ class UsersRoot extends React.Component {
     window.scrollTo(0, 0);
     this.handleRefresh();
     this.handleSearch();
+    window.addEventListener("scroll", this.onScroll, false);
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.onScroll);
+  };
+
+  onScroll = () => {
+    const { usersList, currentPage } = this.state;
+    const currentScrollHeight = parseInt(window.innerHeight + window.scrollY);
+    // console.log(currentScrollHeight, (document.body.offsetHeight));
+    if (
+      usersList &&
+      currentScrollHeight + 1 >= document.body.offsetHeight &&
+      usersList.length
+    ) {
+      const { lastEvaluatedKey } = this.props;
+      let payload = "";
+      if (currentPage < lastEvaluatedKey.pages) {
+        for (let i in lastEvaluatedKey) {
+          if (i === "limit") {
+            payload += lastEvaluatedKey[i] && `?${i}=${lastEvaluatedKey[i]}`;
+          } else {
+            const currentPage = parseInt(lastEvaluatedKey[i]) + 1;
+            payload += lastEvaluatedKey[i] && `&${i}=${currentPage}`;
+            this.setState({ currentPage });
+          }
+        }
+        this.props.getDashboard("users", payload).then(() => {
+          const { usersList } = this.state;
+          this.setState({
+            usersList: usersList.concat(this.props.usersList)
+          });
+        });
+      }
+    }
   };
 
   handleSearch = () => {
@@ -50,16 +86,16 @@ class UsersRoot extends React.Component {
   };
 
   renderuserList = () => {
-    // let { usersList } = this.state;
-    const { searchData, isLoadingusers, usersList } = this.props;
-    // usersList = search(usersList, "username", searchData.searchKeyword);
+    let { usersList } = this.state;
+    const { searchData, isLoadingusers } = this.props;
+    usersList = search(usersList, "username", searchData.searchKeyword);
     return (
       <div className="user-wrapper">
         {usersList.map((user, index) => {
           const clearfixDiv =
             index % 2 === 0 ? <div className="clearfix" /> : null;
           return (
-            <div key={user.id}>
+            <div onScroll={this.trackScrolling} key={user.id}>
               {clearfixDiv}
               <UserCard item={user} index={index} isLoading={isLoadingusers} />
             </div>
@@ -75,7 +111,8 @@ UsersRoot.propTypes = {
   isLoadingusers: PropTypes.bool,
   usersList: PropTypes.any,
   searchData: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearch: PropTypes.func,
+  lastEvaluatedKey: PropTypes.any
   // errorusers: PropTypes.any
 };
 
@@ -83,7 +120,8 @@ const mapStateToProps = state => ({
   usersList: state.dashboardData.users,
   isLoadingusers: state.dashboardData.isLoadingusers,
   errorusers: state.dashboardData.errorusers,
-  searchData: state.searchData
+  searchData: state.searchData,
+  lastEvaluatedKey: state.lastEvaluatedKey.keys
 });
 
 const mapDispatchToProps = {

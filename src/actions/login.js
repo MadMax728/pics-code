@@ -35,11 +35,13 @@ const generateOTPFailed = error => ({
 export const submitLogin = params => {
   return dispatch => {
     dispatch(submitLoginStarted());
-     
+
     return userService.submitLogin(params).then(
       res => {
-        if (res.data && res.data.data) Auth.saveJwtToStorage(res.data.data);
-        dispatch(submitLoginSucceeded(res.data));
+        if (res.data && res.data.data) {
+          Auth.saveJwtToStorage(res.data.data);
+          dispatch(submitLoginSucceeded(res.data));
+        }
       },
       error => {
         dispatch(submitLoginFailed(error.response));

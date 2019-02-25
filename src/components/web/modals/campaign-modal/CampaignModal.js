@@ -95,7 +95,12 @@ class CampaignModal extends Component {
   }
 
   render() {
-    const { isFor, handleModalHide, modalShow, handleModalInfoMsgShow } = this.props;
+    const {
+      isFor,
+      handleModalHide,
+      modalShow,
+      handleModalInfoMsgShow
+    } = this.props;
     const {
       modalTitle,
       isEdit,
@@ -134,18 +139,18 @@ class CampaignModal extends Component {
               modalTitle={modalTitle}
             />
           ) : (
-              <CreateCreatorCampaignHeader
-                handleModalHide={handleModalHide}
-                handleNext={this.handleNext}
-                handlePrev={this.handlePrev}
-                stepIndex={stepIndex}
-                handlePrivewOpen={this.handlePrivewOpen}
-                handleResoreState={this.handleResoreState}
-                modalTitle={modalTitle}
-                handleSubmit={this.handleCreatorSubmit}
-                isFor={isFor}
-              />
-            )
+            <CreateCreatorCampaignHeader
+              handleModalHide={handleModalHide}
+              handleNext={this.handleNext}
+              handlePrev={this.handlePrev}
+              stepIndex={stepIndex}
+              handlePrivewOpen={this.handlePrivewOpen}
+              handleResoreState={this.handleResoreState}
+              modalTitle={modalTitle}
+              handleSubmit={this.handleCreatorSubmit}
+              isFor={isFor}
+            />
+          )
         }
         footer={false}
         modalShow={modalShow}
@@ -438,7 +443,7 @@ class CampaignModal extends Component {
         }
       });
     }
-  }
+  };
 
   create = () => {
     const { form } = this.state;
@@ -593,7 +598,7 @@ class CampaignModal extends Component {
     if (file.type.includes("image")) {
       const currentThis = this;
       reader.readAsDataURL(file);
-      reader.onloadend = function () {
+      reader.onloadend = function() {
         const { form } = currentThis.state;
         // form.typeContent = typeContent.image;
         form.image = reader.result;

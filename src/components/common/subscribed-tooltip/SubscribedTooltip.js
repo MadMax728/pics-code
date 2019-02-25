@@ -53,7 +53,10 @@ class SubscribedTooltip extends Component {
                               className="filled_button"
                               id={user.id}
                               onClick={this.handleSubscribed}
-                              text={Translations.profile_community_right_sidebar.Subscribed}
+                              text={
+                                Translations.profile_community_right_sidebar
+                                  .Subscribed
+                              }
                             />
                           </div>
                         ) : (
@@ -62,7 +65,10 @@ class SubscribedTooltip extends Component {
                               className="blue_button"
                               id={user.id}
                               onClick={this.handleSubscribed}
-                              text={Translations.profile_community_right_sidebar.Subscribe}
+                              text={
+                                Translations.profile_community_right_sidebar
+                                  .Subscribe
+                              }
                             />
                           </div>
                         )}

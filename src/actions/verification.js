@@ -26,12 +26,12 @@ export const getVerifications = () => {
       Authorization: storage.adminAccessToken
     };
 
-    return verificationService.getVerifications(null,header).then(
+    return verificationService.getVerifications(null, header).then(
       res => {
-          dispatch(getVerificationsSucceeded(res.data.data));
+        dispatch(getVerificationsSucceeded(res.data.data));
       },
       error => {
-        dispatch(getVerificationsFailed(error.response))
+        dispatch(getVerificationsFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -40,7 +40,6 @@ export const getVerifications = () => {
     );
   };
 };
-
 
 const getUnverifiedUsersStarted = () => ({
   type: types.GET_UNVERIFIED_USERS_STARTED
@@ -65,12 +64,12 @@ export const getUnverifiedUsers = () => {
       Authorization: storage.adminAccessToken
     };
 
-    return verificationService.getUnverifiedUsers(null,header).then(
+    return verificationService.getUnverifiedUsers(null, header).then(
       res => {
-          dispatch(getUnverifiedUsersSucceeded(res.data.data));
+        dispatch(getUnverifiedUsersSucceeded(res.data.data));
       },
       error => {
-        dispatch(getUnverifiedUsersFailed(error.response))
+        dispatch(getUnverifiedUsersFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true
@@ -97,15 +96,15 @@ const updateVerificationFailed = error => ({
   error: true
 });
 
-export const updateVerification = (provider) => {
+export const updateVerification = provider => {
   return dispatch => {
     dispatch(updateVerificationStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.adminAccessToken
     };
-  
-    return verificationService.updateVerification(provider,header).then(
+
+    return verificationService.updateVerification(provider, header).then(
       res => {
         dispatch(updateVerificationSucceeded(res.data.data));
       },
