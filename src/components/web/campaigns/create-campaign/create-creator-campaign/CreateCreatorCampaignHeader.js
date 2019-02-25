@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
 import { Button } from "../../../../ui-kit";
+import { BASE_CAMPAIGN_INFORMATION_ROUTE } from "../../../../../lib/constants";
 
 class CreateCreatorCampaignHeader extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class CreateCreatorCampaignHeader extends Component {
   }
 
   render() {
-    const { stepIndex, modalTitle, handleSubmit, isFor } = this.props;
+    const { stepIndex, form } = this.props;
     return (
       <div className="row">
         <div className="col-sm-5 modal-title">{/* {modalTitle} */}</div>
@@ -28,11 +29,17 @@ class CreateCreatorCampaignHeader extends Component {
             />
           )}
           {stepIndex !== 0 && stepIndex < 3 && (
-            <Button
-              className="black_button"
-              onClick={this.handlePreview}
-              text={Translations.modal_header.preview}
-            />
+            <a
+              href={`${BASE_CAMPAIGN_INFORMATION_ROUTE}creator/${form.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                className="black_button"
+                onClick={this.handlePreview}
+                text={Translations.modal_header.preview}
+              />
+            </a>
           )}
           {stepIndex <= 3 && (
             <Button
@@ -77,14 +84,15 @@ class CreateCreatorCampaignHeader extends Component {
 
 CreateCreatorCampaignHeader.propTypes = {
   handleModalHide: PropTypes.func,
-  handlePrivewOpen: PropTypes.func.isRequired,
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
   handleResoreState: PropTypes.func.isRequired,
   modalTitle: PropTypes.string,
   handleSubmit: PropTypes.func,
-  isFor: PropTypes.bool
+  isFor: PropTypes.bool,
+  form: PropTypes.any
+
 };
 
 export default CreateCreatorCampaignHeader;

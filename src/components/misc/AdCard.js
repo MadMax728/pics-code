@@ -8,10 +8,11 @@ import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
 import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
-import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
 import { Auth } from "../../auth";
+import { ReportTips } from "./items";
+import { getBackendPostType } from "../Factory";
 
 class AdCard extends Component {
   constructor(props, context) {
@@ -32,7 +33,12 @@ class AdCard extends Component {
       isInformation,
       isReport,
       reportedContentData,
-      savedData
+      savedData,
+      isBackOffice,
+      handleModalInfoDetailsCallbackShow,
+      handleModalShow,
+      handleRemove,
+      isSavedPage
     } = this.props;
     const { isComments, item, comments } = this.state;
     return (
@@ -57,6 +63,18 @@ class AdCard extends Component {
           isStatus={isStatus}
           /* eslint-disable */
           renderReportTips={() => this.renderReportTips(item.id)}
+          // renderReportTips={
+          //   <ReportTips 
+          //     item={item} 
+          //     isBackOffice={isBackOffice} 
+          //     isReview={isReview} 
+          //     handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+          //     handleModalShow={handleModalShow}
+          //     handleRemove={handleRemove}
+          //     isSavedPage={isSavedPage}
+          //     contentFor={"Advertisement"}
+          //   />
+          // }
           handleFavorite={this.handleFavorite}
           isLoading={false}
           isReport={isReport}
@@ -82,14 +100,14 @@ class AdCard extends Component {
       data = {
         id: e.target.id,
         contentStatus: enumerations.reportType.lock,
-        reportContent: "Advertisement",
+        reportContent: getBackendPostType(item),
         isReview
       };
     } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.lock,
-        reportContent: "Ads"
+        reportContent: getBackendPostType(item)
       };
     }
     this.props.handleModalInfoDetailsCallbackShow(
@@ -122,14 +140,14 @@ class AdCard extends Component {
       data = {
         id: e.target.id,
         contentStatus: enumerations.reportType.doNotLock,
-        reportContent: "Advertisement",
+        reportContent: getBackendPostType(item),
         isReview
       };
     } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.doNotLock,
-        reportContent: "Ads"
+        reportContent: getBackendPostType(item)
       };
     }
 
@@ -150,14 +168,14 @@ class AdCard extends Component {
       data = {
         id: e.target.id,
         contentStatus: enumerations.reportType.unLock,
-        reportContent: "Advertisement",
+        reportContent: getBackendPostType(item),
         isReview
       };
     } else {
       data = {
         typeId: e.target.id,
         contentStatus: enumerations.reportType.unLock,
-        reportContent: "Ads"
+        reportContent: getBackendPostType(item)
       };
     }
     this.props.handleModalInfoDetailsCallbackShow(
@@ -179,7 +197,7 @@ class AdCard extends Component {
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-
+    
     if (isBackOffice) {
       reportTips = [
         {
@@ -220,9 +238,9 @@ class AdCard extends Component {
       ];
       if (item.createdBy === userInfo.id) {
         const data = {
-          name: Translations.tool_tips.edit_post,
-          handleEvent: this.handleEditPost
-        };
+            name: Translations.tool_tips.edit_post,
+            handleEvent: this.handleEditPost
+        }
         reportTips.unshift(data);
       }
     }
@@ -231,13 +249,13 @@ class AdCard extends Component {
 
   handleEditPost = e => {
     const { item } = this.state;
-    this.props.handleModalShow(modalType.editAds, item);
-  };
+    this.props.handleModalShow(modalType.editAds , item);
+  }
 
   handleReportPost = e => {
     const { item } = this.state;
     const data = {
-      typeContent: "Ads",
+      typeContent: getBackendPostType(item),
       typeId: e.target.id,
       title: item.title
     };
@@ -245,6 +263,7 @@ class AdCard extends Component {
       if (
         this.props.reportedContentData &&
         this.props.reportedContentData &&
+        this.props.reportedContentData.addReport &&
         this.props.reportedContentData.addReport.typeId === item.id
       ) {
         item.isReported = !item.isReported;
@@ -262,7 +281,7 @@ class AdCard extends Component {
     this.setState({ item });
 
     const adLike = {
-      typeOfContent: "Ads",
+      typeOfContent: getBackendPostType(item),
       typeId: item.id
     };
     this.props.like(adLike);
@@ -292,7 +311,7 @@ class AdCard extends Component {
     const item = this.state.item;
     const data = {
       post: e.target.id,
-      postType: "advertisement"
+      postType: getBackendPostType(item)
     };
 
     this.props.setSavedPost(data).then(() => {

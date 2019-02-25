@@ -123,9 +123,8 @@ class SettingCampaignStatisticsPage extends Component {
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    const data = {
-      id: this.state.campaignId
-    };
+    const { campaignId } = this.state;
+    const data = `${campaignId}?type=Campaign`;
     this.props.getCampaignDetails(data).then(() => {
       if (this.props.campaignDetails) {
         this.setState({

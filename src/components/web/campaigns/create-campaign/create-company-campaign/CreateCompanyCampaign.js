@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
-import { Preview } from "../preview";
 import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
-import * as images from "../../../../../lib/constants/images";
-import { Button } from "../../../../ui-kit";
+import { InlineLoading } from "../../../../ui-kit";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {
@@ -18,7 +16,6 @@ class CreateCompanyCampaign extends Component {
       forThat,
       handleModalInfoShow,
       isPreview,
-      handlePrivewClose,
       form,
       maxClicks,
       isFor,
@@ -37,7 +34,6 @@ class CreateCompanyCampaign extends Component {
       handleSelect,
       userInfo,
       handleAddress,
-      setVoucherData,
       calculateMaxClicks,
       isLoading,
       isEdit,
@@ -45,20 +41,7 @@ class CreateCompanyCampaign extends Component {
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
-        {/* {isPreview && <Preview form={form} />} */}
-        {/* {isPreview && (
-          <Button
-            onClick={handlePrivewClose}
-            className={"closeBtn right-side-close"}
-            text={
-              <img
-                src={images.white_close}
-                alt={"cross"}
-                style={{ height: "10px", width: "10px" }}
-              />
-            }
-          />
-        )} */}
+          {isLoading && <InlineLoading />}
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
@@ -115,10 +98,8 @@ class CreateCompanyCampaign extends Component {
             <PaymentStepTwo
               forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
-              handleChangeField={handleChangeField}
               form={form}
               handleSubmit={handleSubmit}
-              setVoucherData={setVoucherData}
               userInfo={userInfo}
               isLoading={isLoading}
               isEdit={isEdit}
@@ -152,7 +133,6 @@ CreateCompanyCampaign.propTypes = {
   handleSelect: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
-  setVoucherData: PropTypes.func,
   calculateMaxClicks: PropTypes.func,
   maxClicks: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
