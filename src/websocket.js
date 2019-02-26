@@ -53,4 +53,22 @@ function emit(senderId, recipientId, content) {
   });
 }
 
-export { connect, socket, join, messagecount, emit };
+function subReqNotification(subscribedCallback, pendingCallback) {
+  //If I get subscription request which is allready accepted
+  socket.on("communication-notification-board-new-send-request-subscribe", request => {
+    subscribedCallback(request);
+  });
+
+  //If I get subscription request which is pending
+  socket.on("communication-notification-board-new-send-request-pending", request => {
+    pendingCallback(request);
+  });
+}
+
+function subAcceptNotification(cb) {
+  socket.on("communication-notification-board-accept-request", request => {
+    cb(request);
+  });
+}
+
+export { connect, socket, join, messagecount, emit, subReqNotification, subAcceptNotification };

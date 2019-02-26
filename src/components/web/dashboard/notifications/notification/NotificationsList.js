@@ -8,12 +8,65 @@ import { DateFormat } from "../../../../Factory";
 import { Button } from "../../../../ui-kit";
 import { Link } from "react-router-dom";
 import * as routes from "../../../../../lib/constants/routes";
+import * as websocket from "../../../../../websocket";
+import { Auth } from "../../../../../auth";
+
 class NotificationsList extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       notificationList: null
     };
+    // get  user from local storage
+    const storage = Auth.extractJwtFromStorage();
+    // parse the user info
+    const userInfo = JSON.parse(storage.userInfo) || {};
+    const me = userInfo.id;
+
+    //Someone has subscribed which is eigther auto accepted or Pending
+    websocket.subReqNotification(response => {
+      //check if following id is me then push to notification with auto accept mesage
+      if (response.following._id === me) {
+        this.setState({
+          notificationList: [...this.state.notificationList, {
+            id: response._id,
+            profileUrl: response.followers.profileUrl,
+            username: response.followers.username,
+            message: `${response.followers.username} has subscribed you.`,
+            createdAt: response.createdAt
+          }]
+        });
+      }
+    }, pendingResponse => {
+      //check if following id is me then push to notification with pending message
+      if (pendingResponse.following._id === me) {
+        this.setState({
+          notificationList: [...this.state.notificationList, {
+            id: pendingResponse._id,
+            profileUrl: pendingResponse.followers.profileUrl,
+            username: pendingResponse.followers.username,
+            message: `Subscription request from ${pendingResponse.followers.username} is pending.`,
+            createdAt: pendingResponse.createdAt
+          }]
+        });
+      }
+    })
+
+    //If someone has accepted your subscription request
+    websocket.subAcceptNotification(response => {
+      //check if follower id is me then push to notification with acceptance message
+      if (response.followers._id === me) {
+        this.setState({
+          notificationList: [...this.state.notificationList, {
+            id: response._id,
+            profileUrl: response.following.profileUrl,
+            username: response.following.username,
+            message: `${response.following.username} has accepted your subscription request.`,
+            createdAt: response.createdAt
+          }]
+        });
+      }
+    })
   }
 
   render() {
@@ -35,7 +88,7 @@ class NotificationsList extends Component {
                 >
                   <div className="notification-profile-img">
                     <img
-                      src={notification.profileImage}
+                      src={notification.profileUrl}
                       alt={"notification.id" + notification.id}
                       id={notification.id}
                     />
@@ -66,15 +119,15 @@ class NotificationsList extends Component {
                         />
                       </div>
                     ) : (
-                      <div className="subscribe-btn">
-                        <Button
-                          className="blue_button"
-                          id={notification.id}
-                          onClick={this.handleSubscribed}
-                          text={Translations.subscribed}
-                        />
-                      </div>
-                    ))}
+                        <div className="subscribe-btn">
+                          <Button
+                            className="blue_button"
+                            id={notification.id}
+                            onClick={this.handleSubscribed}
+                            text={Translations.subscribed}
+                          />
+                        </div>
+                      ))}
                   {notification.isImage && (
                     <div className="square-image">
                       <img
@@ -87,14 +140,14 @@ class NotificationsList extends Component {
               );
             })
           ) : (
-            <div className="notification-with-subscribe notification-wrapper">
-              <div className="user-info">
-                <div className="subtitle">
-                  {Translations.notification.no_request_avail}
+              <div className="notification-with-subscribe notification-wrapper">
+                <div className="user-info">
+                  <div className="subtitle">
+                    {Translations.notification.no_request_avail}
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
         </div>
       </div>
     );
@@ -127,7 +180,7 @@ class NotificationsList extends Component {
       ) {
         redirectUrl = `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
           selectedNotification.userType
-        }${"/"}${selectedNotification.typeId}`;
+          }${"/"}${selectedNotification.typeId}`;
       } else {
         redirectUrl = `/news-feed/${selectedNotification.username}`;
       }
