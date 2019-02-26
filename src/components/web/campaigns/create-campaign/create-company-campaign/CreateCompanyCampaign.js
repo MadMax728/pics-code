@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StepOne, StepTwo, StepThree } from "../steps";
+import { StepOne, StepTwo } from "../steps";
 import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
 import { InlineLoading } from "../../../../ui-kit";
@@ -27,17 +27,13 @@ class CreateCompanyCampaign extends Component {
       handleLocation,
       handleActualImg,
       handleScale,
-      handleOfferTagChange,
-      handleOfferTagDelete,
-      handleInquiryTagChange,
-      handleInquiryTagDelete,
       handleSelect,
       userInfo,
       handleAddress,
       calculateMaxClicks,
       isLoading,
       isEdit,
-      handleModalInfoMsgShow
+      handleSetState
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
@@ -53,27 +49,14 @@ class CreateCompanyCampaign extends Component {
               handleLocation={handleLocation}
               handleActualImg={handleActualImg}
               handleScale={handleScale}
-              handleInquiryTagChange={handleInquiryTagChange}
-              handleInquiryTagDelete={handleInquiryTagDelete}
-              handleOfferTagChange={handleOfferTagChange}
-              handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
               isEdit={isEdit}
+              handleSetState={handleSetState}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
             <StepTwo
-              handleChangeField={handleChangeField}
-              form={form}
-              handleContentChange={handleContentChange}
-              userInfo={userInfo}
-              handleModalInfoMsgShow={handleModalInfoMsgShow}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 2 && (
-            <StepThree
               handleChangeField={handleChangeField}
               form={form}
               handleDate={handleDate}
@@ -84,7 +67,7 @@ class CreateCompanyCampaign extends Component {
             />
           ))}
         {!isPreview &&
-          (stepIndex === 3 && (
+          (stepIndex === 2 && (
             <PaymentStepOne
               handleAddress={handleAddress}
               forThat={forThat}
@@ -94,7 +77,7 @@ class CreateCompanyCampaign extends Component {
             />
           ))}
         {!isPreview &&
-          (stepIndex === 4 && (
+          (stepIndex === 3 && (
             <PaymentStepTwo
               forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
@@ -115,7 +98,6 @@ CreateCompanyCampaign.propTypes = {
   forThat: PropTypes.string.isRequired,
   handleModalInfoShow: PropTypes.func.isRequired,
   isPreview: PropTypes.bool.isRequired,
-  handlePrivewClose: PropTypes.func.isRequired,
   handleChangeField: PropTypes.func.isRequired,
   isFor: PropTypes.bool.isRequired,
   form: PropTypes.any.isRequired,
@@ -126,10 +108,6 @@ CreateCompanyCampaign.propTypes = {
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,
   handleScale: PropTypes.func,
-  handleOfferTagChange: PropTypes.func.isRequired,
-  handleOfferTagDelete: PropTypes.func.isRequired,
-  handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
@@ -137,7 +115,7 @@ CreateCompanyCampaign.propTypes = {
   maxClicks: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
   isEdit: PropTypes.bool.isRequired,
-  handleModalInfoMsgShow: PropTypes.func.isRequired
+  handleSetState: PropTypes.func
 };
 
 export default CreateCompanyCampaign;

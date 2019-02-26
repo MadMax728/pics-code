@@ -118,9 +118,9 @@ class CampaignModal extends Component {
     if (stepIndex === 0) {
       modalClassName =
         "modal fade create-campaign-modal upload-pic-modal start-campaign-modal overflow-scroll ";
-    } else if (stepIndex !== 0 && stepIndex < 4) {
+    } else if (stepIndex !== 0 && stepIndex < 3) {
       modalClassName = "modal fade create-campaign-modal editor-modal";
-    } else if (stepIndex > 3 && stepIndex < 5) {
+    } else if (stepIndex > 2 && stepIndex < 4) {
       modalClassName = "modal fade payment-overview-modal";
     }
 
@@ -137,6 +137,7 @@ class CampaignModal extends Component {
               stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
               handleResoreState={this.handleResoreState}
+              handleSubmit={this.handleCompanySubmit}
               modalTitle={modalTitle}
               form={form}
               isLoading={isLoading}
@@ -183,16 +184,13 @@ class CampaignModal extends Component {
               ref={this.imageCropper}
               handleActualImg={this.handleActualImg}
               handleScale={this.handleScale}
-              handleOfferTagChange={this.handleOfferTagChange}
-              handleOfferTagDelete={this.handleOfferTagDelete}
-              handleInquiryTagChange={this.handleInquiryTagChange}
-              handleInquiryTagDelete={this.handleInquiryTagDelete}
               handleSelect={this.handleSelect}
               userInfo={userInfo}
               calculateMaxClicks={this.calculateMaxClicks}
               isLoading={isLoading}
               isEdit={isEdit}
               handleModalInfoMsgShow={handleModalInfoMsgShow}
+              handleSetState={this.handleSetState}
             />
           ) : (
               <CreateCreatorCampaign
@@ -215,16 +213,13 @@ class CampaignModal extends Component {
                 ref={this.imageCropper}
                 handleActualImg={this.handleActualImg}
                 handleScale={this.handleScale}
-                handleOfferTagChange={this.handleOfferTagChange}
-                handleOfferTagDelete={this.handleOfferTagDelete}
-                handleInquiryTagChange={this.handleInquiryTagChange}
-                handleInquiryTagDelete={this.handleInquiryTagDelete}
                 handleSelect={this.handleSelect}
                 userInfo={userInfo}
                 calculateMaxClicks={this.calculateMaxClicks}
                 isLoading={isLoading}
                 isEdit={isEdit}
                 handleModalInfoMsgShow={handleModalInfoMsgShow}
+                handleSetState={this.handleSetState}
               />
             )
         }
@@ -251,6 +246,12 @@ class CampaignModal extends Component {
     }
   };
 
+  handleSetState = (value, cd) => {
+    this.setState({ form: { ...this.state.form, description: value } }, () =>
+      cd()
+    );
+  };
+  
   handleSetstate = data => {
     const { form } = this.state;
     form.id = data.id;
@@ -279,8 +280,8 @@ class CampaignModal extends Component {
       form.targetGroup = target_group[data.targetGroup.toLowerCase()];
     }
     form.description = data.description;
-    form.startDate = moment.unix(data.startDate);
-    form.endDate = moment.unix(data.endDate);
+    form.startDate = moment(data.startDate);
+    form.endDate = moment(data.endDate);
     form.budget = data.budget;
     if (data.address) {
       form.address.invoiceRecipient = data.address.invoiceRecipient;
@@ -319,13 +320,7 @@ class CampaignModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    console.log((data && data.id !== prevState.form.id) || !prevProps.modalShow);
-    console.log(!prevProps.modalShow);
-    console.log(prevState.form.id);
-    console.log(data);
-
     if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
-      console.log("ahi che");    
       this.handleSetstate(data);
     }
   }
@@ -493,10 +488,10 @@ class CampaignModal extends Component {
 
   update = () => {
     const { form, stepIndex, isFor } = this.state;
-    if(stepIndex === 2 && !isFor){
+    if(stepIndex === 1 && !isFor){
       form.draft = true;
     }
-    if(isFor && stepIndex === 4){
+    if(isFor && stepIndex === 3){
       form.draft = true;
     }
     this.setState({ form });
@@ -508,11 +503,11 @@ class CampaignModal extends Component {
         campaignData.campaign &&
         campaignData.campaign.id
       ) {
-        if(stepIndex === 2 && !isFor){
+        if(stepIndex === 1 && !isFor){
           this.handleModalInfoShow();
           return;
         }
-        if(isFor && stepIndex === 4){
+        if(isFor && stepIndex === 3){
           this.handleModalInfoShow();            
           return;
         }
@@ -557,11 +552,10 @@ class CampaignModal extends Component {
         form.category &&
         form.file &&
         form.offers &&
-        form.inquiry
+        form.inquiry &&
+        form.description
       );
     } else if (index === 1) {
-      return form.description;
-    } else if (index === 2) {
       return (
         form.startDate &&
         form.endDate &&
@@ -570,7 +564,7 @@ class CampaignModal extends Component {
         form.endDate.diff(form.startDate, "month") <= 3 &&
         form.budget
       );
-    } else if (index === 3) {
+    } else if (index === 2) {
       return (
         form.address.invoiceRecipient &&
         form.address.street &&
@@ -607,7 +601,7 @@ class CampaignModal extends Component {
 
   handleNext = () => {
     const { stepIndex } = this.state;
-    if (stepIndex < 4) {
+    if (stepIndex < 3) {
       if (this.validateForm(stepIndex)) {
         this.handleSubmit();
         this.setState({

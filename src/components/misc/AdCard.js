@@ -3,16 +3,12 @@ import PropTypes from "prop-types";
 import AdCardHeader from "./headers/AdCardHeader";
 import AdCardBody from "./body/AdCardBody";
 import AdCardFooter from "./footers/AdCardFooter";
-import { Translations } from "../../lib/translations";
-import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
 import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
-import * as enumerations from "../../lib/constants/enumerations";
-import { modalType } from "../../lib/constants";
-import { Auth } from "../../auth";
 import { ReportTips } from "./items";
 import { getBackendPostType } from "../Factory";
+import { modalType } from "../../lib/constants";
 
 class AdCard extends Component {
   constructor(props, context) {
@@ -34,11 +30,6 @@ class AdCard extends Component {
       isReport,
       reportedContentData,
       savedData,
-      isBackOffice,
-      handleModalInfoDetailsCallbackShow,
-      handleModalShow,
-      handleRemove,
-      isSavedPage
     } = this.props;
     const { isComments, item, comments } = this.state;
     return (
@@ -62,19 +53,7 @@ class AdCard extends Component {
           isComments={isComments}
           isStatus={isStatus}
           /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
-          // renderReportTips={
-          //   <ReportTips 
-          //     item={item} 
-          //     isBackOffice={isBackOffice} 
-          //     isReview={isReview} 
-          //     handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
-          //     handleModalShow={handleModalShow}
-          //     handleRemove={handleRemove}
-          //     isSavedPage={isSavedPage}
-          //     contentFor={"Advertisement"}
-          //   />
-          // }
+          renderReportTips={() => this.renderReportTips(item)}
           handleFavorite={this.handleFavorite}
           isLoading={false}
           isReport={isReport}
@@ -93,186 +72,32 @@ class AdCard extends Component {
     );
   }
 
-  handleLockContent = e => {
-    const { isReview } = this.props;
-    let data;
-    if (isReview) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.lock,
-        reportContent: getBackendPostType(item),
-        isReview
-      };
-    } else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.lock,
-        reportContent: getBackendPostType(item)
-      };
-    }
-    this.props.handleModalInfoDetailsCallbackShow(
-      modalType.processed,
-      data,
-      () => {
-        this.handleSetState(data);
-      }
-    );
+  
+
+  renderReportTips = item => {
+    const {       
+            isReview,
+            isBackOffice,
+            handleModalInfoDetailsCallbackShow,
+            handleRemove,
+            isSavedPage 
+          } = this.props;
+          
+    return  <ReportTips 
+              item={item} 
+              isBackOffice={isBackOffice} 
+              isReview={isReview} 
+              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+              handleRemove={handleRemove}
+              isSavedPage={isSavedPage}
+              handleEdit={this.handleEditPost}
+            />
   };
 
-  handleSetState = data => {
-    clearInterval(this.timer);
-    const { item } = this.state;
-    const { isReview } = this.props;
-    if (isReview) {
-      item.contentStatus = data.contentStatus;
-    } else {
-      item.reportStatus = data.contentStatus;
-    }
-    this.setState({ item });
-    this.props.handleRemove(item.id);
-  };
-
-  handleDoNotContent = e => {
-    const { isReview } = this.props;
-    let data;
-
-    if (isReview) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.doNotLock,
-        reportContent: getBackendPostType(item),
-        isReview
-      };
-    } else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.doNotLock,
-        reportContent: getBackendPostType(item)
-      };
-    }
-
-    this.props.handleModalInfoDetailsCallbackShow(
-      modalType.processed,
-      data,
-      () => {
-        this.handleSetState(data);
-      }
-    );
-  };
-
-  handleUnlockContent = e => {
-    const { isReview } = this.props;
-    let data;
-
-    if (isReview) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.unLock,
-        reportContent: getBackendPostType(item),
-        isReview
-      };
-    } else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.unLock,
-        reportContent: getBackendPostType(item)
-      };
-    }
-    this.props.handleModalInfoDetailsCallbackShow(
-      modalType.processed,
-      data,
-      () => {
-        this.handleSetState(data);
-      }
-    );
-  };
-
-  renderReportTips = id => {
-    let reportTips;
-    const { isBackOffice, isReview } = this.props;
-    const { item } = this.state;
-
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    
-    if (isBackOffice) {
-      reportTips = [
-        {
-          name: isReview
-            ? item.contentStatus === enumerations.reportType.lock
-              ? Translations.tool_tips.unlock
-              : Translations.tool_tips.lock
-            : item.reportStatus === enumerations.reportType.lock
-            ? Translations.tool_tips.unlock
-            : Translations.tool_tips.lock,
-          handleEvent: isReview
-            ? item.contentStatus === enumerations.reportType.lock
-              ? this.handleUnlockContent
-              : this.handleLockContent
-            : item.reportStatus === enumerations.reportType.lock
-            ? this.handleUnlockContent
-            : this.handleLockContent
-        },
-        {
-          name: Translations.tool_tips.do_not,
-          handleEvent: this.handleDoNotContent
-        }
-      ];
-    } else {
-      reportTips = [
-        {
-          name: item.isReported
-            ? Translations.tool_tips.unreport
-            : Translations.tool_tips.report,
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: item.isSavedPost
-            ? Translations.tool_tips.unsave
-            : Translations.tool_tips.save,
-          handleEvent: this.handleSavePost
-        }
-      ];
-      if (item.createdBy === userInfo.id) {
-        const data = {
-            name: Translations.tool_tips.edit_post,
-            handleEvent: this.handleEditPost
-        }
-        reportTips.unshift(data);
-      }
-    }
-    return <RenderToolTips items={reportTips} id={id} />;
-  };
-
-  handleEditPost = e => {
+  handleEditPost = () => {
     const { item } = this.state;
     this.props.handleModalShow(modalType.editAds , item);
   }
-
-  handleReportPost = e => {
-    const { item } = this.state;
-    const data = {
-      typeContent: getBackendPostType(item),
-      typeId: e.target.id,
-      title: item.title
-    };
-    this.props.addReport(data).then(() => {
-      if (
-        this.props.reportedContentData &&
-        this.props.reportedContentData &&
-        this.props.reportedContentData.addReport &&
-        this.props.reportedContentData.addReport.typeId === item.id
-      ) {
-        item.isReported = !item.isReported;
-        this.setState({ item });
-      }
-    });
-  };
-
-  handleContent = () => {};
 
   handleFavorite = e => {
     const item = this.state.item;
@@ -303,29 +128,6 @@ class AdCard extends Component {
         comments: this.props.comments,
         totalCommentsCount: this.props.comments.length
       });
-    });
-  };
-
-  handleSavePost = e => {
-    const { isSavedPage } = this.props;
-    const item = this.state.item;
-    const data = {
-      post: e.target.id,
-      postType: getBackendPostType(item)
-    };
-
-    this.props.setSavedPost(data).then(() => {
-      if (
-        this.props.savedData &&
-        this.props.savedData.saved &&
-        this.props.savedData.saved.post === item.id
-      ) {
-        item.isSavedPost = !item.isSavedPost;
-        this.setState({ item });
-        if (isSavedPage && !this.state.item.isSavedPost) {
-          this.props.handleRemove(item.id);
-        }
-      }
     });
   };
 }
