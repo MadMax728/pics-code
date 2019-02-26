@@ -1,7 +1,10 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const reportedContentReducer = (state = initialState.reportedContentData, action) => {
+const reportedContentReducer = (
+  state = initialState.reportedContentData,
+  action
+) => {
   switch (action.type) {
     // Get BACK_OFFICE_REPORTED_CONTENT
     case types.GET_BACK_OFFICE_REPORTED_CONTENT_STARTED:
@@ -45,27 +48,26 @@ const reportedContentReducer = (state = initialState.reportedContentData, action
         error: action.payload
       };
 
-
-      // Add ADD_REPORT
-      case types.ADD_REPORT_STARTED:
-        return {
-          ...state,
-          isLoading: true,
-          error: null
-        };
-      case types.ADD_REPORT_SUCCEEDED:
-        return {
-          ...state,
-          addReport: action.payload,
-          isLoading: false
-        };
-      case types.ADD_REPORT_FAILED:
-        return {
-          ...state,
-          addReport: null,
-          isLoading: false,
-          error: action.payload
-        };
+    // Add ADD_REPORT
+    case types.ADD_REPORT_STARTED:
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case types.ADD_REPORT_SUCCEEDED:
+      return {
+        ...state,
+        addReport: action.payload,
+        isLoading: false
+      };
+    case types.ADD_REPORT_FAILED:
+      return {
+        ...state,
+        addReport: null,
+        isLoading: false,
+        error: action.payload
+      };
 
     // GET_BACK_OFFICE_REPORTED_STATISTICS
     case types.GET_BACK_OFFICE_REPORTED_STATISTICS_STARTED:

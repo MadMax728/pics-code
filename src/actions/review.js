@@ -30,7 +30,7 @@ export const getBackOfficeReview = (prop, provider) => {
 
     return reviewService[prop](provider, header).then(
       res => {
-          dispatch(getBackOfficeReviewSucceeded(res.data.data, prop));
+        dispatch(getBackOfficeReviewSucceeded(res.data.data, prop));
       },
       error => {
         dispatch(getBackOfficeReviewFailed(error.response));
@@ -42,7 +42,6 @@ export const getBackOfficeReview = (prop, provider) => {
     );
   };
 };
-
 
 // Get BackOffice Review Statistics
 const getBackOfficeReviewStatisticsStarted = () => ({
@@ -62,7 +61,7 @@ const getBackOfficeReviewStatisticsFailed = (error, isFor) => ({
   isFor
 });
 
-export const getBackOfficeReviewStatistics = (prop) => {
+export const getBackOfficeReviewStatistics = prop => {
   return dispatch => {
     dispatch(getBackOfficeReviewStatisticsStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -70,12 +69,22 @@ export const getBackOfficeReviewStatistics = (prop) => {
       Authorization: storage.adminAccessToken
     };
 
-    return  reviewService.getReviewStatistics(prop, header).then(
+    return reviewService.getReviewStatistics(prop, header).then(
       res => {
-          dispatch(getBackOfficeReviewStatisticsSucceeded(res.data.data, prop.reportContent));
+        dispatch(
+          getBackOfficeReviewStatisticsSucceeded(
+            res.data.data,
+            prop.reportContent
+          )
+        );
       },
       error => {
-        dispatch(getBackOfficeReviewStatisticsFailed(error.response, prop.reportContent))
+        dispatch(
+          getBackOfficeReviewStatisticsFailed(
+            error.response,
+            prop.reportContent
+          )
+        );
         logger.error({
           description: error.toString(),
           fatal: true
@@ -96,14 +105,14 @@ const updateBackOfficeReviewSucceeded = (data, isFor) => ({
   isFor
 });
 
-const updateBackOfficeReviewFailed = (error,isFor) => ({
+const updateBackOfficeReviewFailed = (error, isFor) => ({
   type: types.UPDATE_BACK_OFFICE_REVIEW_FAILED,
   payload: error,
   error: true,
   isFor
 });
 
-export const updateBackOfficeReview = (prop) => {
+export const updateBackOfficeReview = prop => {
   return dispatch => {
     dispatch(updateBackOfficeReviewStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -111,12 +120,16 @@ export const updateBackOfficeReview = (prop) => {
       Authorization: storage.adminAccessToken
     };
 
-    return  reviewService.updateBackOfficeReview(prop, header).then(
+    return reviewService.updateBackOfficeReview(prop, header).then(
       res => {
-          dispatch(updateBackOfficeReviewSucceeded(res.data.data, prop.reportContent));
+        dispatch(
+          updateBackOfficeReviewSucceeded(res.data.data, prop.reportContent)
+        );
       },
       error => {
-        dispatch(updateBackOfficeReviewFailed(error.response, prop.reportContent))
+        dispatch(
+          updateBackOfficeReviewFailed(error.response, prop.reportContent)
+        );
         logger.error({
           description: error.toString(),
           fatal: true

@@ -1,3 +1,1 @@
-export {
-  back_office_dashboard
-} from "./dashboardDetails";
+export { back_office_dashboard } from "./dashboardDetails";

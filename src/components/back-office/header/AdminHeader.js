@@ -4,17 +4,17 @@ import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 
 const AdminHeader = () => {
-    return (
-      <header>
-        <div className="custom-container">
-          <div className="login-logo">
-            <Link to={routes.ROOT_ROUTE}>
-              <img src={images.loginLogo} alt={"login"} />
-            </Link>
-          </div>
+  return (
+    <header>
+      <div className="custom-container">
+        <div className="login-logo">
+          <Link to={routes.ROOT_ROUTE}>
+            <img src={images.loginLogo} alt={"login"} />
+          </Link>
         </div>
-      </header>
-    );
-}
+      </div>
+    </header>
+  );
+};
 
 export default AdminHeader;

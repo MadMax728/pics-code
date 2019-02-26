@@ -14,7 +14,7 @@ class Tags extends Component {
     const { value, suggestion, handleAddition, handleDelete } = this.props;
     return (
       <div>
-        {value && 
+        {value && (
           <ReactTags
             // inline={false}
             tags={value.length !== undefined ? value : []}
@@ -23,7 +23,7 @@ class Tags extends Component {
             handleAddition={handleAddition}
             delimiters={delimiters}
           />
-        }
+        )}
       </div>
     );
   }

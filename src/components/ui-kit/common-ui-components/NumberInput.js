@@ -35,7 +35,6 @@ class NumberInput extends Component {
     data.values = { name: this.state.name, val: event.target.value };
     this.props.onChange(data);
   };
-
 }
 
 NumberInput.propTypes = {

@@ -211,7 +211,6 @@ class SocialNetworks extends Component {
       });
     }
   }
-
 }
 
 // Specifies the default values for props:

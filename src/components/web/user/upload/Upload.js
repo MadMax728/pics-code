@@ -62,32 +62,32 @@ class Upload extends Component {
   };
 
   render() {
-    const { form, handleSetState, handleLocation, handleSelect, fileUpdate } = this.props;
+    const {
+      form,
+      handleSetState,
+      handleLocation,
+      handleSelect,
+      fileUpdate
+    } = this.props;
     const { isInProgress, isAdvertise } = this.state;
     const userInfo = storage ? JSON.parse(storage.userInfo) : null;
 
     return (
       <div className="col-xs-12 no-padding">
-        {
-          !fileUpdate? (
-            <FileUpload 
-              handleUpload={this.handleUpload}
-            />
-          )
-          :
-          (
-            <UploadData 
-              form={form}
-              handleChangeField={this.handleChangeField}
-              handleSetState={handleSetState}
-              handleLocation={handleLocation}
-              handleSelect={handleSelect}
-              handleUpload={this.handleUpload}
-              isInProgress={isInProgress}
-              isAdvertise={isAdvertise}
-            />
-          )
-        }
+        {!fileUpdate ? (
+          <FileUpload handleUpload={this.handleUpload} />
+        ) : (
+          <UploadData
+            form={form}
+            handleChangeField={this.handleChangeField}
+            handleSetState={handleSetState}
+            handleLocation={handleLocation}
+            handleSelect={handleSelect}
+            handleUpload={this.handleUpload}
+            isInProgress={isInProgress}
+            isAdvertise={isAdvertise}
+          />
+        )}
       </div>
     );
   }

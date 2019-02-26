@@ -44,8 +44,10 @@ class InformationPage extends Component {
   handeleShare = () => {
     const { campaignId } = this.state;
     const data = {
-      url: `${window.location.origin}${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${campaignId}`
-    }
+      url: `${window.location.origin}${
+        routes.BASE_CAMPAIGN_INFORMATION_ROUTE
+      }${campaignId}`
+    };
     this.props.handleModalInfoShow(modalType.share, data);
   };
 
@@ -95,17 +97,20 @@ class InformationPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     const campaignId = this.props.match.params.id;
 
-    if(campaignId !== prevState.campaignId) {
+    if (campaignId !== prevState.campaignId) {
       console.log("calling");
       console.log(campaignId);
-      this.setState({
-        isComments: false,
-        campaignId: campaignId,
-        comments: null
-      }, ()=> {
-        this.getCampaignDetailsData();
-        this.handleCommentsSections();
-      })
+      this.setState(
+        {
+          isComments: false,
+          campaignId,
+          comments: null
+        },
+        () => {
+          this.getCampaignDetailsData();
+          this.handleCommentsSections();
+        }
+      );
     }
   }
 
@@ -168,7 +173,7 @@ class InformationPage extends Component {
 
   handleCommentsSections = () => {
     console.log("ahi");
-    
+
     const CampaignId = { typeId: this.props.match.params.id };
     this.props.getComments(CampaignId).then(() => {
       const totalComment = this.props.comments;

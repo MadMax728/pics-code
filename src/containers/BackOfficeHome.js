@@ -17,22 +17,22 @@ class BackOfficeHome extends Component {
       modalInfo: null,
       isRank: "",
       userInfo: null,
-      statusCallback: () => { }
+      statusCallback: () => {}
     };
   }
 
   componentDidMount = () => {
     const storage = Auth.extractJwtFromStorage();
     let userInfo = null;
-    
+
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-    if (userInfo) { 
-      this.setState({isRank: userInfo.role});
+    if (userInfo) {
+      this.setState({ isRank: userInfo.role });
       // this.setState({isRank: enumerations.adminRank.rank2});
     }
-  }
+  };
 
   handleModalInfoHide = () => {
     this.setState({ modalInfoShow: false });
@@ -42,12 +42,17 @@ class BackOfficeHome extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
-  handleModalInfoDetailsShow = (e, info) => {   
+  handleModalInfoDetailsShow = (e, info) => {
     this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info });
   };
 
-  handleModalInfoDetailsCallbackShow = (e, info, callback) => {   
-    this.setState({ modalInfoShow: true, modalInfoType: e, modalInfo: info, statusCallback: callback });
+  handleModalInfoDetailsCallbackShow = (e, info, callback) => {
+    this.setState({
+      modalInfoShow: true,
+      modalInfoType: e,
+      modalInfo: info,
+      statusCallback: callback
+    });
   };
 
   getFilter(filterData) {
@@ -58,7 +63,13 @@ class BackOfficeHome extends Component {
   handleModalHide = () => {};
 
   render() {
-    const { modalInfo, modalInfoShow, modalInfoType, statusCallback, isRank} = this.state;
+    const {
+      modalInfo,
+      modalInfoShow,
+      modalInfoType,
+      statusCallback,
+      isRank
+    } = this.state;
     return (
       <div>
         <section>
@@ -74,14 +85,19 @@ class BackOfficeHome extends Component {
           <div className="container">
             <div className="row">
               <div className="left_menu_second no-padding">
-                <LeftSideBarBackOffice getFilter={this.getFilter} isRank={isRank} />
+                <LeftSideBarBackOffice
+                  getFilter={this.getFilter}
+                  isRank={isRank}
+                />
               </div>
 
               <div>
                 <BackOfficeHomeRoute
                   handleModalInfoShow={this.handleModalInfoShow}
                   handleModalInfoDetailsShow={this.handleModalInfoDetailsShow}
-                  handleModalInfoDetailsCallbackShow={this.handleModalInfoDetailsCallbackShow}
+                  handleModalInfoDetailsCallbackShow={
+                    this.handleModalInfoDetailsCallbackShow
+                  }
                   isRank={isRank}
                 />
               </div>

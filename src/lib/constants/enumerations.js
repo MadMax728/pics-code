@@ -247,42 +247,41 @@ export const dailyBudgetForAds = [
   }
 ];
 
-
 export const category = {
-  craftmen: "Craftmen", 
-  technology: "Technology", 
-  travel: "Travel", 
+  craftmen: "Craftmen",
+  technology: "Technology",
+  travel: "Travel",
   art_culture: "Art & Culture",
-  beauty_cosmetics: "Beauty & Cosmetics", 
+  beauty_cosmetics: "Beauty & Cosmetics",
   sports_health: "Sports & Health",
-  animals: "Animals", 
-  other: "Other", 
-  outdoor: "Outdoor", 
+  animals: "Animals",
+  other: "Other",
+  outdoor: "Outdoor",
   family: "Family",
-  automobiles: "Automobiles", 
-  spirituality: "Spirituality", 
+  automobiles: "Automobiles",
+  spirituality: "Spirituality",
   fashion: "Fashion",
-  charity: "Charity", 
-  business: "Business", 
+  charity: "Charity",
+  business: "Business",
   movies_photography: "Movies & Photography",
-  news_politics: "News & Politics", 
-  entertainment: "Entertainment", 
+  news_politics: "News & Politics",
+  entertainment: "Entertainment",
   company: "Company",
-  gaming: "Gaming", 
-  education: "Education", 
-  nature: "Nature", 
+  gaming: "Gaming",
+  education: "Education",
+  nature: "Nature",
   food_drink: "Food & Drink",
-  science: "Science", 
-  music: "Music", 
+  science: "Science",
+  music: "Music",
   home_living: "Home & Living"
-}
+};
 
-export const callToAction =  {
+export const callToAction = {
   apply_now: "Apply now",
   register: "Register",
   more: "More",
   book_now: "Book now"
-}
+};
 
 export const radius = {
   off: "off",
@@ -291,4 +290,4 @@ export const radius = {
   km200: "km200",
   km500: "km500",
   worldwide: "worldwide"
-}
+};

@@ -10,21 +10,26 @@ class CMSPreviewModal extends Component {
   }
 
   render() {
-    const { handleModalInfoHide, handleModalHide, modalInfo, modalInfoShow } = this.props;
+    const {
+      handleModalInfoHide,
+      handleModalHide,
+      modalInfo,
+      modalInfoShow
+    } = this.props;
     return (
       <CustomBootstrapModal
-      modalClassName={"modal fade preview-modal cms-preview-modal"}
-      header
-      modalHeaderContent={
-        <CMSPreviewHeader
-          handleModalHide={handleModalInfoHide}
-          handleContinue={this.handleContinue}
-        />
-      }
-      footer={false}
-      modalShow={modalInfoShow}
-      closeBtn
-      handleModalHide={handleModalInfoHide}
+        modalClassName={"modal fade preview-modal cms-preview-modal"}
+        header
+        modalHeaderContent={
+          <CMSPreviewHeader
+            handleModalHide={handleModalInfoHide}
+            handleContinue={this.handleContinue}
+          />
+        }
+        footer={false}
+        modalShow={modalInfoShow}
+        closeBtn
+        handleModalHide={handleModalInfoHide}
         modalBodyContent={
           <CMSPreview
             handleModalInfoHide={handleModalInfoHide}

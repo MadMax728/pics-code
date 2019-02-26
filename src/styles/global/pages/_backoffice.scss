@@ -293,13 +293,13 @@
     font-size: 12px;
     color: $charcoal_color;
     tr {
-      th{
+      th {
         border-top: 1px solid $charcoal_color !important;
         padding: 10px 10px 15px !important;
       }
       td {
         border: 1px solid $charcoal_color;
-        
+
         padding: 10px;
         font-size: 12px;
         @media (max-width: 767px) {
@@ -493,13 +493,13 @@
     }
   }
 }
-.voucher-table{
+.voucher-table {
   .table {
-    thead{
-      th{
+    thead {
+      th {
         padding: 0 10px !important;
         vertical-align: middle;
-        &:last-of-type{
+        &:last-of-type {
           padding: 0 !important;
         }
       }

@@ -54,7 +54,7 @@ class NewsRoot extends Component {
     ) {
       const { lastEvaluatedKey } = this.props;
       let payload = "?limit=10";
-      for (let i in lastEvaluatedKey) {
+      for (const i in lastEvaluatedKey) {
         payload += `&${i}=${lastEvaluatedKey[i]}`;
       }
       this.props.getDashboard("news", payload).then(() => {
@@ -86,7 +86,12 @@ class NewsRoot extends Component {
             newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.mediaPost && (
-              <MediaCard item={newsFeed} isParticipant={false} isDescription handleModalShow={handleModalShow} />
+              <MediaCard
+                item={newsFeed}
+                isParticipant={false}
+                isDescription
+                handleModalShow={handleModalShow}
+              />
             )}
           {newsFeed.mediaUrl &&
             newsFeed.typeContent &&
@@ -129,7 +134,12 @@ class NewsRoot extends Component {
             newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard item={newsFeed} isParticipant isDescription handleModalShow={handleModalShow} />
+              <MediaCard
+                item={newsFeed}
+                isParticipant
+                isDescription
+                handleModalShow={handleModalShow}
+              />
             )}
           {newsFeed.mediaUrl &&
             newsFeed.postType &&

@@ -1,7 +1,10 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const backOfficeDashboardReducer = (state = initialState.backOfficeDashboardData, action) => {
+const backOfficeDashboardReducer = (
+  state = initialState.backOfficeDashboardData,
+  action
+) => {
   switch (action.type) {
     // Get BACK_OFFICE_DASHBOARD
     case types.GET_BACK_OFFICE_DASHBOARD_STARTED:

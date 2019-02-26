@@ -2,10 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { getBackOfficeReportedContent, getBackOfficeReportedStatistics, getSearch } from "../../../../actions";
+import {
+  getBackOfficeReportedContent,
+  getBackOfficeReportedStatistics,
+  getSearch
+} from "../../../../actions";
 
 import ReportedSearchBar from "../ReportedSearchBar";
-import { CampaignLoading, RightSidebarStatistics, NoDataFoundCenterPage } from "../../../ui-kit";
+import {
+  CampaignLoading,
+  RightSidebarStatistics,
+  NoDataFoundCenterPage
+} from "../../../ui-kit";
 import { CampaignCard } from "../../../misc";
 
 import * as enumerations from "../../../../lib/constants/enumerations";
@@ -22,15 +30,15 @@ class ReportedCampaignsPage extends Component {
       form: {
         search: ""
       }
-     };
+    };
   }
 
   componentDidMount = () => {
     const data = {
       type: "get",
       reportContent: "Campaign"
-    }
-    this.setState({isLoading: true});
+    };
+    this.setState({ isLoading: true });
     this.getBackOfficeReportedContent(data);
     this.getBackOfficeReportedStatistics(data);
     const { searchData, getSearch } = this.props;
@@ -39,90 +47,104 @@ class ReportedCampaignsPage extends Component {
     }
   };
 
-  getBackOfficeReportedContent = (data) => {
-    this.props.getBackOfficeReportedContent(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.Campaign) {
+  getBackOfficeReportedContent = data => {
+    this.props.getBackOfficeReportedContent(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData.Campaign
+      ) {
         this.setState({
           campaignList: this.props.reportedContentData.Campaign,
           isLoading: this.props.reportedContentData.isLoading
-        })
+        });
       }
     });
-  }
+  };
 
-  getBackOfficeReportedStatistics = (data) => {
-    this.props.getBackOfficeReportedStatistics(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData.CampaignStatistics) {
+  getBackOfficeReportedStatistics = data => {
+    this.props.getBackOfficeReportedStatistics(data).then(() => {
+      if (
+        this.props.reportedContentData &&
+        this.props.reportedContentData.CampaignStatistics
+      ) {
         // success
       }
     });
-  }
+  };
 
-  handleReported = (e) => {
+  handleReported = e => {
     let data;
-    if (e.target.id === "All")
-    {
-      data ={
+    if (e.target.id === "All") {
+      data = {
         type: "get",
         reportContent: "Campaign"
-      }
-      this.setState({isSearch: false});
-    }
-    else {
+      };
+      this.setState({ isSearch: false });
+    } else {
       data = {
         type: "search",
         reportContent: "Campaign",
         searchType: `${e.target.id}`
-      }
-      this.setState({isSearch: true});
+      };
+      this.setState({ isSearch: true });
     }
     this.getBackOfficeReportedContent(data);
-  }
-  
-  handleRemove = (data) => {
+  };
+
+  handleRemove = data => {
     const { campaignList, isSearch } = this.state;
-    if (isSearch)
-    {
-      this.setState({campaignList: campaignList.filter(e => e.id !== data)});
+    if (isSearch) {
+      this.setState({ campaignList: campaignList.filter(e => e.id !== data) });
     }
-  }
+  };
 
   rendercampaigns = () => {
     let { campaignList } = this.state;
     const { form } = this.state;
-    const { searchData, handleModalInfoDetailsCallbackShow, handleModalInfoShow } = this.props;
-    campaignList = search(campaignList, "userName", form.search  || searchData.searchKeyword);
-    
+    const {
+      searchData,
+      handleModalInfoDetailsCallbackShow,
+      handleModalInfoShow
+    } = this.props;
+    campaignList = search(
+      campaignList,
+      "userName",
+      form.search || searchData.searchKeyword
+    );
+
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
-          {campaign.postType && (campaign.postType.toLowerCase() === enumerations.contentTypes.companyCampaig ||
-          campaign.postType.toLowerCase() === enumerations.contentTypes.creatorCampaign)
-          &&
-          (
-            <CampaignCard 
-              item={campaign} 
-              isDescription={false}
-              isInformation
-              isStatus={false}
-              isBudget={false}
-              isReport
-              isBackOffice 
-              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
-              handleRemove={this.handleRemove}
-              handleModalInfoShow={handleModalInfoShow}
+          {campaign.postType &&
+            (campaign.postType.toLowerCase() ===
+              enumerations.contentTypes.companyCampaig ||
+              campaign.postType.toLowerCase() ===
+                enumerations.contentTypes.creatorCampaign) && (
+              <CampaignCard
+                item={campaign}
+                isDescription={false}
+                isInformation
+                isStatus={false}
+                isBudget={false}
+                isReport
+                isBackOffice
+                handleModalInfoDetailsCallbackShow={
+                  handleModalInfoDetailsCallbackShow
+                }
+                handleRemove={this.handleRemove}
+                handleModalInfoShow={handleModalInfoShow}
               />
-          )}
+            )}
         </div>
       );
     });
   };
 
-  handleSearch = (event) => {
+  handleSearch = event => {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
-  }
+  };
 
   handleRefresh = () => {
     const { searchData, getSearch } = this.props;
@@ -132,36 +154,61 @@ class ReportedCampaignsPage extends Component {
       const data = {
         type: "get",
         reportContent: "Campaign"
-      }
-      this.setState({isLoading: true});
+      };
+      this.setState({ isLoading: true });
       this.getBackOfficeReportedContent(data);
       this.getBackOfficeReportedStatistics(data);
     }
-  }
+  };
 
-  render(){
+  render() {
     let { campaignList } = this.state;
     const { form } = this.state;
     const { isLoading } = this.state;
     const { reportedContentData, searchData } = this.props;
-    campaignList = search(campaignList, "userName", form.search  || searchData.searchKeyword);
+    campaignList = search(
+      campaignList,
+      "userName",
+      form.search || searchData.searchKeyword
+    );
 
     return (
       <div>
         <div className="padding-rl-10 middle-section">
-          <ReportedSearchBar handleSearch={this.handleSearch} value={form.search} />
-            {campaignList && this.rendercampaigns()}
-            {!campaignList && isLoading && <CampaignLoading />}
-            {campaignList && campaignList.length === 0 && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+          <ReportedSearchBar
+            handleSearch={this.handleSearch}
+            value={form.search}
+          />
+          {campaignList && this.rendercampaigns()}
+          {!campaignList && isLoading && <CampaignLoading />}
+          {campaignList && campaignList.length === 0 && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
         </div>
         <div className="right_bar no-padding">
-          <RightSidebarStatistics 
-            header={`Reported ${Translations.review_content_menu.campaigns}`} 
-            handleEvent={this.handleReported} 
-            all={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.all : 0} 
-            outstanding={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.outstanding : 0}
-            processed={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.processed : 0} 
-            notProcessed={reportedContentData.CampaignStatistics? reportedContentData.CampaignStatistics.notProcessed : 0}
+          <RightSidebarStatistics
+            header={`Reported ${Translations.review_content_menu.campaigns}`}
+            handleEvent={this.handleReported}
+            all={
+              reportedContentData.CampaignStatistics
+                ? reportedContentData.CampaignStatistics.all
+                : 0
+            }
+            outstanding={
+              reportedContentData.CampaignStatistics
+                ? reportedContentData.CampaignStatistics.outstanding
+                : 0
+            }
+            processed={
+              reportedContentData.CampaignStatistics
+                ? reportedContentData.CampaignStatistics.processed
+                : 0
+            }
+            notProcessed={
+              reportedContentData.CampaignStatistics
+                ? reportedContentData.CampaignStatistics.notProcessed
+                : 0
+            }
           />
         </div>
       </div>

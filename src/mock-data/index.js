@@ -25,6 +25,4 @@ export { comments_list } from "./comments";
 export { hash_tag_list } from "./hash-tags";
 export { username_list } from "./username";
 
-export {
-  back_office_dashboard
-} from "./back-office-dashboard";
+export { back_office_dashboard } from "./back-office-dashboard";

@@ -288,8 +288,8 @@ class Header extends Component {
                         {messageCountView}
                       </span>
                     ) : (
-                        ""
-                      )}
+                      ""
+                    )}
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
 
@@ -321,7 +321,6 @@ class Header extends Component {
           </div>
         </nav>
       </header>
-
     );
   }
 }

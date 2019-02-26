@@ -56,7 +56,7 @@ class ParticipantsPage extends Component {
   handleSearch = () => {
     this.props.getDashboard("participants", "").then(() => {
       let { participantsList } = this.props;
-      if(participantsList) {
+      if (participantsList) {
         participantsList = participantsList.filter(
           participant =>
             participant.isActive &&

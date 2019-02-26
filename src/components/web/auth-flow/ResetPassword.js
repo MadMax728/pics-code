@@ -91,8 +91,8 @@ class ResetPassword extends Component {
   componentDidMount = () => {
     Auth.logoutUser();
     if (this.props && this.props.location && this.props.location.pathname) {
-      let pathName = this.props.location.pathname;
-      let res = pathName.split("/");
+      const pathName = this.props.location.pathname;
+      const res = pathName.split("/");
       if (res[2]) {
         this.setState({ token: res[2] });
       }

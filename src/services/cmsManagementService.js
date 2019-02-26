@@ -1,5 +1,11 @@
 import { api } from "../api";
-import { getCMSManagementEndPoint, getCMSDetailEndPoint, updateCMSEndPoint, createCMSEndPoint, getWebCMSDetailEndPoint } from "../lib/constants/endPoints";
+import {
+  getCMSManagementEndPoint,
+  getCMSDetailEndPoint,
+  updateCMSEndPoint,
+  createCMSEndPoint,
+  getWebCMSDetailEndPoint
+} from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -23,4 +29,8 @@ export const createCMS = (payload, header = {}) =>
   api(baseUrl, header).post(createCMSEndPoint, payload);
 
 export const getWebCMSManagement = (payload, header = {}) =>
-  api(baseUrl, header).get(`${getWebCMSDetailEndPoint}?title = ${payload.title}& language=${payload.language} `);
+  api(baseUrl, header).get(
+    `${getWebCMSDetailEndPoint}?title = ${payload.title}& language=${
+      payload.language
+    } `
+  );

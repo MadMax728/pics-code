@@ -8,7 +8,9 @@ class PageNotFound extends Component {
       <div className={className}>
         <section className="page-not-found">
           <div className="heading">{Translations.not_found.not_available}</div>
-          <div className="sub-heading">{Translations.not_found.remove_link}</div>
+          <div className="sub-heading">
+            {Translations.not_found.remove_link}
+          </div>
           <div className="logo-background" />
         </section>
       </div>

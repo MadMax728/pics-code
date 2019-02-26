@@ -16,8 +16,8 @@ class MLeftUsersList extends Component {
           className={classnames("chat-wrapper", {
             new: !item.read
           })}
-          key={item.id}
-          data-id={item.id}
+          key={item._id}
+          data-_id={item._id}
           data-value={item.username}
           onClick={handleChatClick}
           onKeyDown={handleChatClick}
@@ -41,7 +41,7 @@ class MLeftUsersList extends Component {
   }
 
   componentDidMount() {
-    let username = "marc1";
+    const username = "marc1";
     if (username === "marc1") {
       this.scrollBottomOnNewMessage(username);
     }

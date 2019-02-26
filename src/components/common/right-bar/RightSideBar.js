@@ -13,7 +13,6 @@ import { Languages } from "../../common";
 
 class RightSideBar extends Component {
   render() {
-
     return (
       <div>
         {/* ,,,,,, FavouriteCampaigns ...... */}
@@ -136,11 +135,10 @@ class RightSideBar extends Component {
   userLanguage = () => {
     // here we have to switch language
     return (
-          <div>
-              <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
-              <RightAbout />
-          </div>
-    
+      <div>
+        <Languages handleLanguageSwitch={this.props.handleLanguageSwitch} />
+        <RightAbout />
+      </div>
     );
   };
 

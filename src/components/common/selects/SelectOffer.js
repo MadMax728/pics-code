@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 import { offerList } from "../../../lib/constants";
 
-
 class SelectOffer extends Component {
   constructor(props) {
     super(props);
@@ -24,22 +23,23 @@ class SelectOffer extends Component {
         options={offerList}
       >
         <option value="">{Translations.select_offer}</option>
-        {offerList && offerList.map(option => (
-          <option value={option.id} key={option.id}>
-            {option.value}
-          </option>
-        ))}
+        {offerList &&
+          offerList.map(option => (
+            <option value={option.id} key={option.id}>
+              {option.value}
+            </option>
+          ))}
       </select>
     );
   }
 
-  handleOffer = (event) => {
+  handleOffer = event => {
     const { offerList } = this.state;
     const name = offerList.filter(c => c.id === event.target.value);
     const data = {
       id: event.target.value,
-      name: (name.length !== 0) ? name[0].value : ""
-    }
+      name: name.length !== 0 ? name[0].value : ""
+    };
     this.props.handleSelect("offers", data);
   };
 }
@@ -51,6 +51,5 @@ const propTypes = {
 };
 
 SelectOffer.propTypes = propTypes;
-
 
 export default SelectOffer;
