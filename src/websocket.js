@@ -38,6 +38,10 @@ function join(senderId, recipientId, userId) {
     senderId: recipientId,
     userId
   });
+  //Request to join for notification socket
+  socket.emit("communication-notification-board-join", {
+    userId
+  });
 }
 
 function emit(senderId, recipientId, content) {
