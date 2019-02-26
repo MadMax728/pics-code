@@ -78,22 +78,24 @@ class CampaignCard extends Component {
   }
 
   renderReportTips = item => {
-    const {       
-            isReview,
-            isBackOffice,
-            handleModalInfoDetailsCallbackShow,
-            handleRemove,
-            isSavedPage 
-          } = this.props;
-          
-    return  <ReportTips 
-              item={item} 
-              isBackOffice={isBackOffice} 
-              isReview={isReview} 
-              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
-              handleRemove={handleRemove}
-              isSavedPage={isSavedPage}
-            />
+    const {
+      isReview,
+      isBackOffice,
+      handleModalInfoDetailsCallbackShow,
+      handleRemove,
+      isSavedPage
+    } = this.props;
+
+    return (
+      <ReportTips
+        item={item}
+        isBackOffice={isBackOffice}
+        isReview={isReview}
+        handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+        handleRemove={handleRemove}
+        isSavedPage={isSavedPage}
+      />
+    );
   };
 
   handleEditPost = e => {

@@ -15,10 +15,9 @@ class AdsPage extends Component {
       <div className="padding-rl-10 middle-section">
         {adList && !isLoading && this.renderAdList()}
         {isLoading && <CampaignLoading />}
-        {!isLoading &&
-          (!adList || (adList && adList.length === 0)) && (
-            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
-          )}
+        {!isLoading && (!adList || (adList && adList.length === 0)) && (
+          <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+        )}
       </div>
     );
   }

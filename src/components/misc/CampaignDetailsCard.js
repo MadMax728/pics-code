@@ -51,7 +51,7 @@ const CampaignDetailsCard = ({
               id={campaignDetails.id}
               item={campaignDetails.mediaUrl}
             />
-        )}
+          )}
       </div>
       <div className="info-inner-wrapper col-xs-12 padd-15">
         <h3 className="no-padding margin-top-10 capitalize">

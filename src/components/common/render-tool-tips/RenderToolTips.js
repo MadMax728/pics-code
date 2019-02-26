@@ -5,8 +5,9 @@ import { Button } from "../../ui-kit";
 const RenderToolTips = ({ items, id, isLoading }) => {
   return (
     <div className="post-action-links">
-      {items && items.map(item => {
-        return (  
+      {items &&
+        items.map(item => {
+          return (
             <Button
               className="btn-comment-tooltip"
               type="button"
@@ -16,8 +17,8 @@ const RenderToolTips = ({ items, id, isLoading }) => {
               text={item.name}
               key={`${item.name}-${id}`}
             />
-        );
-      })}
+          );
+        })}
     </div>
   );
 };

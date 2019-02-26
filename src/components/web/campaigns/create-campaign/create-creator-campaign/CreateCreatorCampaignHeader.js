@@ -91,7 +91,6 @@ CreateCreatorCampaignHeader.propTypes = {
   handleSubmit: PropTypes.func,
   isFor: PropTypes.bool,
   form: PropTypes.any
-
 };
 
 export default CreateCreatorCampaignHeader;

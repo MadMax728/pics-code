@@ -104,12 +104,11 @@ class MLeftContainer extends Component {
           }
         });
       } else {
-        console.log('clean cheat');
+        console.log("clean cheat");
         this.getUserList();
       }
-
     } else {
-      //Search local only for unknown and company 
+      //Search local only for unknown and company
 
       if (search) {
         const filtered = userList.filter(u => {
@@ -147,7 +146,7 @@ class MLeftContainer extends Component {
         <div className="msgs-search-user">
           <div className="input-group search-input-group">
             <input
-              type='text'
+              type="text"
               className="form-control"
               placeholder="Search"
               onChange={this.handleChange}

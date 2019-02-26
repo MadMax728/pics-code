@@ -146,7 +146,7 @@ StepTwo.propTypes = {
   handleDate: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
   userInfo: PropTypes.any,
-  maxClicks: PropTypes.any,
+  maxClicks: PropTypes.any
 };
 
 export default StepTwo;

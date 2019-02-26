@@ -23,7 +23,7 @@ class SettingCampaignPage extends Component {
     );
   }
 
-  handleRefresh = () => {}
+  handleRefresh = () => {};
 
   componentDidMount = () => {
     const storage = Auth.extractJwtFromStorage();

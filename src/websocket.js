@@ -55,14 +55,20 @@ function emit(senderId, recipientId, content) {
 
 function subReqNotification(subscribedCallback, pendingCallback) {
   //If I get subscription request which is allready accepted
-  socket.on("communication-notification-board-new-send-request-subscribe", request => {
-    subscribedCallback(request);
-  });
+  socket.on(
+    "communication-notification-board-new-send-request-subscribe",
+    request => {
+      subscribedCallback(request);
+    }
+  );
 
   //If I get subscription request which is pending
-  socket.on("communication-notification-board-new-send-request-pending", request => {
-    pendingCallback(request);
-  });
+  socket.on(
+    "communication-notification-board-new-send-request-pending",
+    request => {
+      pendingCallback(request);
+    }
+  );
 }
 
 function subAcceptNotification(cb) {
@@ -71,4 +77,12 @@ function subAcceptNotification(cb) {
   });
 }
 
-export { connect, socket, join, messagecount, emit, subReqNotification, subAcceptNotification };
+export {
+  connect,
+  socket,
+  join,
+  messagecount,
+  emit,
+  subReqNotification,
+  subAcceptNotification
+};

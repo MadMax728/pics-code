@@ -49,7 +49,6 @@ export const getUserList = (type = "subscriber") => {
  */
 export const searchUsers = (keyword, page = 1, limit = 100) => {
   return dispatch => {
-
     const storage = Auth.extractJwtFromStorage();
     const headers = {
       Authorization: storage.accessToken

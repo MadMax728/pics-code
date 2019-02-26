@@ -224,7 +224,6 @@ class AdsModal extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
     if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
-      
       this.handleFillState(data);
     }
   }
@@ -414,7 +413,8 @@ class AdsModal extends Component {
     }
   };
 
- /* eslint-disable */  
+  /* eslint-disable */
+
   validateForm = index => {
     const { form } = this.state;
     if (index === 0) {

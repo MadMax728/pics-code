@@ -71,6 +71,7 @@ export const unblockUserRequest = (payload, id, header = {}) =>
   api(baseUrl, header).delete(unblockUserRequestEndPoint + id, payload);
 
 export const searchUsers = (keyword, page, limit, header = {}) => {
-  return api(baseUrl, header.headers).get(`${searchUsersEndpoint}?page=${page}&limit=${limit}&keyword=${keyword}`);
-}
-
+  return api(baseUrl, header.headers).get(
+    `${searchUsersEndpoint}?page=${page}&limit=${limit}&keyword=${keyword}`
+  );
+};
