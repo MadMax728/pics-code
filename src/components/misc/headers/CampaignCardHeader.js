@@ -30,13 +30,13 @@ const CampaignCardHeader = ({
     <div className="feed_header">
       <Link to={profile_route}>
         <UserImageItem
-          item={campaign.profileImage}
+          item={campaign.createdBy.profileUrl}
           customClass={`img-circle img-responsive padding-right-15`}
         />
       </Link>
       <div className="no-padding titles_wrapper col-sm-8 col-xs-7">
         <Link to={profile_route} className="">
-          <div className="normal_title">{campaign.userName}</div>
+          <div className="normal_title">{campaign.createdBy.username}</div>
         </Link>
         <div className="normal_sub_title ">
           {Translations.landing.published_a_campaign}
@@ -53,7 +53,7 @@ const CampaignCardHeader = ({
               Translations.date_format.time,
               true
             )}{" "}
-            {Translations.in} {campaign.category[0].categoryName}
+            {Translations.in} {campaign.category}
           </div>
         )}
       </div>

@@ -3,8 +3,6 @@ import PropTypes from "prop-types";
 import {
   CampaignAdCrop,
   PlaceAutoCompleteLocation,
-  // UserImageItem,
-  // UserTitleItem,
   Label,
   RadioButton,
   ErrorSpan,
@@ -13,19 +11,13 @@ import {
 import { Translations } from "../../../../../lib/translations";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
-  // OfferTags,
-  // InquiryTags,
   SelectCategory,
   SelectInquiry,
   SelectOffer
 } from "../../../../../components/common";
 
 class StepOne extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+  /* eslint-disable */
   render() {
     const {
       handleChangeField,
@@ -37,10 +29,6 @@ class StepOne extends Component {
       handleActualImg,
       handleSelect,
       userInfo,
-      // handleOfferTagChange,
-      // handleOfferTagDelete,
-      // handleInquiryTagChange,
-      // handleInquiryTagDelete,
       isEdit
     } = this.props;
     return (
@@ -345,8 +333,6 @@ class StepOne extends Component {
       </div>
     );
   }
-
-  componentDidMount = () => {};
 }
 
 StepOne.propTypes = {
@@ -359,10 +345,6 @@ StepOne.propTypes = {
   handleScale: PropTypes.func,
   handleSelect: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
-  handleOfferTagChange: PropTypes.func.isRequired,
-  handleOfferTagDelete: PropTypes.func.isRequired,
-  handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired,
   isEdit: PropTypes.any
 };
 

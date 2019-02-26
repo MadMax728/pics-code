@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 import { StepOne, StepTwo, StepThree } from "../steps";
-import { Preview } from "../preview";
 import PropTypes from "prop-types";
-import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
-import * as images from "../../../../../lib/constants/images";
-import { Button } from "../../../../ui-kit";
 
 class CreateCreatorCampaign extends Component {
   constructor(props) {
@@ -15,15 +11,11 @@ class CreateCreatorCampaign extends Component {
   render() {
     const {
       stepIndex,
-      // forThat,
-      // handleModalInfoShow,
       isPreview,
-      // handlePrivewClose,
       form,
       maxClicks,
       isFor,
       handleChangeField,
-      // handleSubmit,
       handleDate,
       handleContentChange,
       handleEditImage,
@@ -36,10 +28,7 @@ class CreateCreatorCampaign extends Component {
       handleInquiryTagDelete,
       handleSelect,
       userInfo,
-      // handleAddress,
-      // setVoucherData,
       calculateMaxClicks,
-      // isLoading,
       isEdit,
       handleModalInfoMsgShow
     } = this.props;
@@ -94,14 +83,10 @@ class CreateCreatorCampaign extends Component {
 
 CreateCreatorCampaign.propTypes = {
   stepIndex: PropTypes.any.isRequired,
-  forThat: PropTypes.string.isRequired,
-  handleModalInfoShow: PropTypes.func.isRequired,
   isPreview: PropTypes.bool.isRequired,
-  handlePrivewClose: PropTypes.func.isRequired,
   handleChangeField: PropTypes.func.isRequired,
   isFor: PropTypes.bool.isRequired,
   form: PropTypes.any.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
   handleDate: PropTypes.func.isRequired,
   handleContentChange: PropTypes.func.isRequired,
   handleEditImage: PropTypes.func.isRequired,
@@ -113,12 +98,9 @@ CreateCreatorCampaign.propTypes = {
   handleInquiryTagChange: PropTypes.func.isRequired,
   handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
-  setVoucherData: PropTypes.func,
   calculateMaxClicks: PropTypes.func,
   maxClicks: PropTypes.any,
-  isLoading: PropTypes.bool.isRequired,
   isEdit: PropTypes.bool.isRequired,
   handleModalInfoMsgShow: PropTypes.func.isRequired
 };

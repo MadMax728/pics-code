@@ -50,7 +50,7 @@ const CampaignDetailsCard = ({
                 Translations.date_format.campaign_post_date_format,
                 true
               )}{" "}
-              {Translations.in} {campaignDetails.category[0].categoryName}
+              {Translations.in} {campaignDetails.category}
             </div>
           )}
         </div>
@@ -108,8 +108,7 @@ const CampaignDetailsCard = ({
             title={campaignDetails.title}
             category={
               campaignDetails.category &&
-              campaignDetails.category[0] &&
-              campaignDetails.category[0].categoryName
+              campaignDetails.category
             }
             handleFavorite={handleFavorite}
           />
@@ -126,8 +125,7 @@ const CampaignDetailsCard = ({
 
                       <InfoWrapperItem
                         title={Translations.campaign_details.start}
-                        value={moment
-                          .unix(campaignDetails.startDate)
+                        value={moment(campaignDetails.startDate)
                           .format(Translations.campaign_post_date_format.date)}
                       />
                     </div>
@@ -139,8 +137,7 @@ const CampaignDetailsCard = ({
 
                       <InfoWrapperItem
                         title={Translations.campaign_details.end}
-                        value={moment
-                          .unix(campaignDetails.endDate)
+                        value={moment(campaignDetails.endDate)
                           .format(Translations.campaign_post_date_format.date)}
                       />
                     </div>
@@ -163,9 +160,7 @@ const CampaignDetailsCard = ({
                       title={Translations.campaign_details.offer}
                       value={
                         campaignDetails.offers &&
-                        campaignDetails.offersList &&
-                        campaignDetails.offersList[0].offerName &&
-                        campaignDetails.offersList[0].offerName
+                        campaignDetails.offers
                       }
                     />
                   )}
@@ -198,9 +193,7 @@ const CampaignDetailsCard = ({
                       title={Translations.campaign_details.inquiry}
                       value={
                         campaignDetails.inquiry &&
-                        campaignDetails.inquiryList &&
-                        campaignDetails.inquiryList[0].inquiryName &&
-                        campaignDetails.inquiryList[0].inquiryName
+                        campaignDetails.inquiry
                       }
                     />
                   )}

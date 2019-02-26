@@ -60,7 +60,7 @@ export const getBackendPostType = type => {
   ) {
     postType = "Participant";
   } else if (type.postType.toLowerCase() === enumerations.contentTypes.ad) {
-    postType = "Advertise";
+    postType = "Advertisement";
   } else if (
     type.postType.toLowerCase() === enumerations.contentTypes.mediaPost
   ) {
