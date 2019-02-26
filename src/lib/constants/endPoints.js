@@ -150,6 +150,7 @@ export const getPendingUserListEndPoint = "/subscribe";
 export const acceptRequestEndPoint = "/subscribe/accept-request";
 export const blockUserRequestEndPoint = "/subscribe/block-request";
 export const unblockUserRequestEndPoint = "/subscribe/";
+export const searchUsersEndpoint = "/users/search";
 
 // Verification Service
 export const getVerificationsEndPoint = "/users/admin/list?type=verifiedUser";

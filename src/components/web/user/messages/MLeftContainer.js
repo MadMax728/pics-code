@@ -6,7 +6,7 @@ import { Translations } from "../../../../lib/translations";
 import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from "./MLeftUsersList";
 import MLeftTabs from "./MLeftTabs";
-import { getUserList } from "../../../../actions";
+import { getUserList, searchUsers } from "../../../../actions";
 import { Button, Input } from "../../../ui-kit";
 
 class MLeftContainer extends Component {
@@ -85,21 +85,45 @@ class MLeftContainer extends Component {
 
   handleChange = e => {
     e.preventDefault();
+    const { activeIndex } = this.state;
+    let page = 1;
+    let limit = 100;
     const search = e.target.value;
     const { userList } = this.state;
     this.setState({ search: e.target.value });
-    if (search) {
-      const filtered = userList.filter(u => {
-        if (u.name && u.username.includes(search)) return true;
-        if (u.email && u.email.includes(search)) return true;
-        if (u.name && u.name.includes(search)) return true;
-        return false;
-      });
-      this.setState({ userList: filtered });
+    if (activeIndex === "1") {
+      //For subscrivers call API for search users,
+      //TODO: get api to only search subscribers not all
+      if (search) {
+        this.props.searchUsers(search, page, limit).then(() => {
+          const { usersData } = this.props;
+          if (!usersData.isLoading) {
+            this.setState({
+              userList: usersData.users
+            });
+          }
+        });
+      } else {
+        console.log('clean cheat');
+        this.getUserList();
+      }
+
     } else {
-      const { usersData } = this.props;
-      if (!usersData.isLoading) {
-        this.setState({ userList: usersData.users });
+      //Search local only for unknown and company 
+
+      if (search) {
+        const filtered = userList.filter(u => {
+          if (u.naem && u.username.includes(search)) return true;
+          if (u.email && u.email.includes(search)) return true;
+          if (u.name && u.name.includes(search)) return true;
+          return false;
+        });
+        this.setState({ userList: filtered });
+      } else {
+        const { usersData } = this.props;
+        if (!usersData.isLoading) {
+          this.setState({ userList: usersData.users });
+        }
       }
     }
   };
@@ -122,12 +146,12 @@ class MLeftContainer extends Component {
         </div>
         <div className="msgs-search-user">
           <div className="input-group search-input-group">
-            <Input
-              type="text"
-              value={search}
-              onChange={this.handleChange}
+            <input
+              type='text'
               className="form-control"
               placeholder="Search"
+              onChange={this.handleChange}
+              defaultValue={""}
             />
             <span className="input-group-addon">
               <Button
@@ -156,6 +180,7 @@ class MLeftContainer extends Component {
 
 MLeftContainer.propTypes = {
   getUserList: PropTypes.func.isRequired,
+  searchUsers: PropTypes.func.isRequired,
   me: PropTypes.string.isRequired,
   usersData: PropTypes.any,
   selectUser: PropTypes.func,
@@ -167,7 +192,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getUserList
+  getUserList,
+  searchUsers
 };
 
 export default connect(
