@@ -360,9 +360,7 @@ class Comments extends Component {
               role="button"
               dataTip="tooltip"
               dataClass="tooltip-wrapr"
-              /* eslint-disable */ getContent={() =>
-                this.renderReportTips(comment.id)
-              }
+              getContent={() => this.renderReportTips(comment.id)}
               effect="solid"
               delayHide={500}
               delayShow={500}

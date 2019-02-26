@@ -60,8 +60,9 @@ class UserCard extends Component {
         // } else
         // console.log(selectedUserList);
         if (
-          !selectedUserList.isSubscribe ||
-          selectedUserList.isSubscribe === false
+          (!selectedUserList.isSubscribe ||
+            selectedUserList.isSubscribe === false) &&
+          selectedUserList
         ) {
           const requestData = { followers: selectedUserList.id };
           this.props.sendRequest(requestData).then(() => {

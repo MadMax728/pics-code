@@ -81,8 +81,7 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.offer}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {item.offers &&
-                    item.offers }
+                  {item.offers && item.offers}
                 </span>
               </div>
             )}
@@ -115,8 +114,7 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.inquiry}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {item.inquiry &&
-                    item.inquiry }
+                  {item.inquiry && item.inquiry}
                 </span>
               </div>
             )}
