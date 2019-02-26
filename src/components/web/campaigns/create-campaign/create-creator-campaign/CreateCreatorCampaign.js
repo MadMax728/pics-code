@@ -22,10 +22,6 @@ class CreateCreatorCampaign extends Component {
       handleLocation,
       handleActualImg,
       handleScale,
-      handleOfferTagChange,
-      handleOfferTagDelete,
-      handleInquiryTagChange,
-      handleInquiryTagDelete,
       handleSelect,
       userInfo,
       calculateMaxClicks,
@@ -45,10 +41,6 @@ class CreateCreatorCampaign extends Component {
               handleLocation={handleLocation}
               handleActualImg={handleActualImg}
               handleScale={handleScale}
-              handleInquiryTagChange={handleInquiryTagChange}
-              handleInquiryTagDelete={handleInquiryTagDelete}
-              handleOfferTagChange={handleOfferTagChange}
-              handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
               userInfo={userInfo}
               isEdit={isEdit}
@@ -93,10 +85,6 @@ CreateCreatorCampaign.propTypes = {
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,
   handleScale: PropTypes.func,
-  handleOfferTagChange: PropTypes.func.isRequired,
-  handleOfferTagDelete: PropTypes.func.isRequired,
-  handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
   calculateMaxClicks: PropTypes.func,

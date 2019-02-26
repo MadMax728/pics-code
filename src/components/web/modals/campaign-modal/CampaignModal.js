@@ -183,10 +183,6 @@ class CampaignModal extends Component {
               ref={this.imageCropper}
               handleActualImg={this.handleActualImg}
               handleScale={this.handleScale}
-              handleOfferTagChange={this.handleOfferTagChange}
-              handleOfferTagDelete={this.handleOfferTagDelete}
-              handleInquiryTagChange={this.handleInquiryTagChange}
-              handleInquiryTagDelete={this.handleInquiryTagDelete}
               handleSelect={this.handleSelect}
               userInfo={userInfo}
               calculateMaxClicks={this.calculateMaxClicks}
@@ -215,10 +211,6 @@ class CampaignModal extends Component {
                 ref={this.imageCropper}
                 handleActualImg={this.handleActualImg}
                 handleScale={this.handleScale}
-                handleOfferTagChange={this.handleOfferTagChange}
-                handleOfferTagDelete={this.handleOfferTagDelete}
-                handleInquiryTagChange={this.handleInquiryTagChange}
-                handleInquiryTagDelete={this.handleInquiryTagDelete}
                 handleSelect={this.handleSelect}
                 userInfo={userInfo}
                 calculateMaxClicks={this.calculateMaxClicks}
@@ -319,13 +311,7 @@ class CampaignModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    console.log((data && data.id !== prevState.form.id) || !prevProps.modalShow);
-    console.log(!prevProps.modalShow);
-    console.log(prevState.form.id);
-    console.log(data);
-
     if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
-      console.log("ahi che");    
       this.handleSetstate(data);
     }
   }

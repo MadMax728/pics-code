@@ -27,10 +27,6 @@ class CreateCompanyCampaign extends Component {
       handleLocation,
       handleActualImg,
       handleScale,
-      handleOfferTagChange,
-      handleOfferTagDelete,
-      handleInquiryTagChange,
-      handleInquiryTagDelete,
       handleSelect,
       userInfo,
       handleAddress,
@@ -53,10 +49,6 @@ class CreateCompanyCampaign extends Component {
               handleLocation={handleLocation}
               handleActualImg={handleActualImg}
               handleScale={handleScale}
-              handleInquiryTagChange={handleInquiryTagChange}
-              handleInquiryTagDelete={handleInquiryTagDelete}
-              handleOfferTagChange={handleOfferTagChange}
-              handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
               isEdit={isEdit}
             />
@@ -115,7 +107,6 @@ CreateCompanyCampaign.propTypes = {
   forThat: PropTypes.string.isRequired,
   handleModalInfoShow: PropTypes.func.isRequired,
   isPreview: PropTypes.bool.isRequired,
-  handlePrivewClose: PropTypes.func.isRequired,
   handleChangeField: PropTypes.func.isRequired,
   isFor: PropTypes.bool.isRequired,
   form: PropTypes.any.isRequired,
@@ -126,10 +117,6 @@ CreateCompanyCampaign.propTypes = {
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,
   handleScale: PropTypes.func,
-  handleOfferTagChange: PropTypes.func.isRequired,
-  handleOfferTagDelete: PropTypes.func.isRequired,
-  handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
