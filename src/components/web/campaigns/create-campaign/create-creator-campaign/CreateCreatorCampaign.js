@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StepOne, StepTwo, StepThree } from "../steps";
+import { StepOne, StepTwo } from "../steps";
 import PropTypes from "prop-types";
 
 class CreateCreatorCampaign extends Component {
@@ -17,7 +17,6 @@ class CreateCreatorCampaign extends Component {
       isFor,
       handleChangeField,
       handleDate,
-      handleContentChange,
       handleEditImage,
       handleLocation,
       handleActualImg,
@@ -26,7 +25,7 @@ class CreateCreatorCampaign extends Component {
       userInfo,
       calculateMaxClicks,
       isEdit,
-      handleModalInfoMsgShow
+      handleSetState
     } = this.props;
 
     return (
@@ -44,21 +43,12 @@ class CreateCreatorCampaign extends Component {
               handleSelect={handleSelect}
               userInfo={userInfo}
               isEdit={isEdit}
+              handleSetState={handleSetState}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
             <StepTwo
-              handleChangeField={handleChangeField}
-              form={form}
-              handleContentChange={handleContentChange}
-              userInfo={userInfo}
-              handleModalInfoMsgShow={handleModalInfoMsgShow}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 2 && (
-            <StepThree
               handleChangeField={handleChangeField}
               handleDate={handleDate}
               handleSelect={handleSelect}
@@ -90,7 +80,7 @@ CreateCreatorCampaign.propTypes = {
   calculateMaxClicks: PropTypes.func,
   maxClicks: PropTypes.any,
   isEdit: PropTypes.bool.isRequired,
-  handleModalInfoMsgShow: PropTypes.func.isRequired
+  handleSetState: PropTypes.func
 };
 
 export default CreateCreatorCampaign;

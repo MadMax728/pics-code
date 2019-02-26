@@ -171,6 +171,7 @@
   "create_campaigns": {
     "clicks": "Clicks",
     "views": "Views",
+    "description": "Description",
     "title_of_campaigns": "Title of campaigns",
     "title": "Start your campaign",
     "add_title": "Add title",

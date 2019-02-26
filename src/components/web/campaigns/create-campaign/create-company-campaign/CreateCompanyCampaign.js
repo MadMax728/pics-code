@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StepOne, StepTwo, StepThree } from "../steps";
+import { StepOne, StepTwo } from "../steps";
 import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
 import { InlineLoading } from "../../../../ui-kit";
@@ -33,7 +33,7 @@ class CreateCompanyCampaign extends Component {
       calculateMaxClicks,
       isLoading,
       isEdit,
-      handleModalInfoMsgShow
+      handleSetState
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
@@ -51,21 +51,12 @@ class CreateCompanyCampaign extends Component {
               handleScale={handleScale}
               handleSelect={handleSelect}
               isEdit={isEdit}
+              handleSetState={handleSetState}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
             <StepTwo
-              handleChangeField={handleChangeField}
-              form={form}
-              handleContentChange={handleContentChange}
-              userInfo={userInfo}
-              handleModalInfoMsgShow={handleModalInfoMsgShow}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 2 && (
-            <StepThree
               handleChangeField={handleChangeField}
               form={form}
               handleDate={handleDate}
@@ -76,7 +67,7 @@ class CreateCompanyCampaign extends Component {
             />
           ))}
         {!isPreview &&
-          (stepIndex === 3 && (
+          (stepIndex === 2 && (
             <PaymentStepOne
               handleAddress={handleAddress}
               forThat={forThat}
@@ -86,7 +77,7 @@ class CreateCompanyCampaign extends Component {
             />
           ))}
         {!isPreview &&
-          (stepIndex === 4 && (
+          (stepIndex === 3 && (
             <PaymentStepTwo
               forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
@@ -124,7 +115,7 @@ CreateCompanyCampaign.propTypes = {
   maxClicks: PropTypes.any,
   isLoading: PropTypes.bool.isRequired,
   isEdit: PropTypes.bool.isRequired,
-  handleModalInfoMsgShow: PropTypes.func.isRequired
+  handleSetState: PropTypes.func
 };
 
 export default CreateCompanyCampaign;
