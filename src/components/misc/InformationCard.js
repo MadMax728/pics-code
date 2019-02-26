@@ -36,8 +36,9 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.start}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {moment(item.startDate)
-                    .format(Translations.campaign_post_date_format.date)}
+                  {moment(item.startDate).format(
+                    Translations.campaign_post_date_format.date
+                  )}
                 </span>
               </div>
             </div>
@@ -54,8 +55,9 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.end}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {moment(item.endDate)
-                    .format(Translations.campaign_post_date_format.date)}
+                  {moment(item.endDate).format(
+                    Translations.campaign_post_date_format.date
+                  )}
                 </span>
               </div>
             </div>

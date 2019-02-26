@@ -29,7 +29,7 @@ class AdCard extends Component {
       isInformation,
       isReport,
       reportedContentData,
-      savedData,
+      savedData
     } = this.props;
     const { isComments, item, comments } = this.state;
     return (
@@ -72,32 +72,32 @@ class AdCard extends Component {
     );
   }
 
-  
-
   renderReportTips = item => {
-    const {       
-            isReview,
-            isBackOffice,
-            handleModalInfoDetailsCallbackShow,
-            handleRemove,
-            isSavedPage 
-          } = this.props;
-          
-    return  <ReportTips 
-              item={item} 
-              isBackOffice={isBackOffice} 
-              isReview={isReview} 
-              handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
-              handleRemove={handleRemove}
-              isSavedPage={isSavedPage}
-              handleEdit={this.handleEditPost}
-            />
+    const {
+      isReview,
+      isBackOffice,
+      handleModalInfoDetailsCallbackShow,
+      handleRemove,
+      isSavedPage
+    } = this.props;
+
+    return (
+      <ReportTips
+        item={item}
+        isBackOffice={isBackOffice}
+        isReview={isReview}
+        handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+        handleRemove={handleRemove}
+        isSavedPage={isSavedPage}
+        handleEdit={this.handleEditPost}
+      />
+    );
   };
 
   handleEditPost = () => {
     const { item } = this.state;
-    this.props.handleModalShow(modalType.editAds , item);
-  }
+    this.props.handleModalShow(modalType.editAds, item);
+  };
 
   handleFavorite = e => {
     const item = this.state.item;

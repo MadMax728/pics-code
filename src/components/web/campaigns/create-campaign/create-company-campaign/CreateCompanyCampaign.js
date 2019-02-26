@@ -37,7 +37,7 @@ class CreateCompanyCampaign extends Component {
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
-          {isLoading && <InlineLoading />}
+        {isLoading && <InlineLoading />}
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne

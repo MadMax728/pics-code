@@ -193,35 +193,35 @@ class CampaignModal extends Component {
               handleSetState={this.handleSetState}
             />
           ) : (
-              <CreateCreatorCampaign
-                stepIndex={stepIndex}
-                isFor={isFor}
-                forThat={"Campaigns"}
-                handleModalInfoShow={this.handleModalInfoShow}
-                handlePrivewClose={this.handlePrivewClose}
-                isPreview={isPreview}
-                handleChangeField={this.handleCompanyChangeField}
-                form={form}
-                maxClicks={maxClicks}
-                handleAddress={this.handleAddress}
-                handleContentChange={this.handleContentChange}
-                handleSubmit={this.handleCreatorSubmit}
-                handleDate={this.handleDate}
-                contentText={form.description}
-                handleEditImage={this.handleEditImage}
-                handleLocation={this.handleLocation}
-                ref={this.imageCropper}
-                handleActualImg={this.handleActualImg}
-                handleScale={this.handleScale}
-                handleSelect={this.handleSelect}
-                userInfo={userInfo}
-                calculateMaxClicks={this.calculateMaxClicks}
-                isLoading={isLoading}
-                isEdit={isEdit}
-                handleModalInfoMsgShow={handleModalInfoMsgShow}
-                handleSetState={this.handleSetState}
-              />
-            )
+            <CreateCreatorCampaign
+              stepIndex={stepIndex}
+              isFor={isFor}
+              forThat={"Campaigns"}
+              handleModalInfoShow={this.handleModalInfoShow}
+              handlePrivewClose={this.handlePrivewClose}
+              isPreview={isPreview}
+              handleChangeField={this.handleCompanyChangeField}
+              form={form}
+              maxClicks={maxClicks}
+              handleAddress={this.handleAddress}
+              handleContentChange={this.handleContentChange}
+              handleSubmit={this.handleCreatorSubmit}
+              handleDate={this.handleDate}
+              contentText={form.description}
+              handleEditImage={this.handleEditImage}
+              handleLocation={this.handleLocation}
+              ref={this.imageCropper}
+              handleActualImg={this.handleActualImg}
+              handleScale={this.handleScale}
+              handleSelect={this.handleSelect}
+              userInfo={userInfo}
+              calculateMaxClicks={this.calculateMaxClicks}
+              isLoading={isLoading}
+              isEdit={isEdit}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
+              handleSetState={this.handleSetState}
+            />
+          )
         }
       />
     );
@@ -251,7 +251,7 @@ class CampaignModal extends Component {
       cd()
     );
   };
-  
+
   handleSetstate = data => {
     const { form } = this.state;
     form.id = data.id;
@@ -301,7 +301,6 @@ class CampaignModal extends Component {
   };
 
   static getDerivedStateFromProps(nextProps, prevState) {
-
     if (!nextProps.modalShow) {
       return { stepIndex: 0, isPreview: false };
     }
@@ -395,8 +394,7 @@ class CampaignModal extends Component {
     if (!isEdit && stepIndex === 0) {
       if (!form.id) {
         this.handleCreateCampaign();
-      }
-      else {
+      } else {
         this.handleUpdateCampaign();
       }
     } else {
@@ -406,44 +404,47 @@ class CampaignModal extends Component {
 
   handleUpdateCampaign = () => {
     const { form, isNewFile, isFor } = this.state;
-    if (this.validateFile()) { 
-      if(isNewFile) {
+    if (this.validateFile()) {
+      if (isNewFile) {
         const Data = new FormData();
         Data.append("image", form.file);
         Data.append("postType", "campaign");
         this.setState({ isLoading: true });
-        const postType = isFor? contentTypes.companyCampaign : contentTypes.creatorCampaign
+        const postType = isFor
+          ? contentTypes.companyCampaign
+          : contentTypes.creatorCampaign;
         this.props.uploadMedia(Data, form.filetype, postType).then(() => {
-        const { mediaData } = this.props;
-        if (mediaData && mediaData.media) {
-          form.typeId = mediaData.media.id;
-          form.fileName = mediaData.media.imageName;
-          form.file = mediaData.media.path;
-          form.image = mediaData.media.path;
-          if (!form.maximumExpenses) {
-            form.maximumExpenses = form.budget;
-          }
-          this.setState({ form, isNewFile: false }, () => {
+          const { mediaData } = this.props;
+          if (mediaData && mediaData.media) {
+            form.typeId = mediaData.media.id;
+            form.fileName = mediaData.media.imageName;
+            form.file = mediaData.media.path;
+            form.image = mediaData.media.path;
+            if (!form.maximumExpenses) {
+              form.maximumExpenses = form.budget;
+            }
+            this.setState({ form, isNewFile: false }, () => {
               this.update();
             });
           }
         });
-      }
-      else {
+      } else {
         this.setState({ isLoading: true });
         this.update();
       }
     }
-  }
+  };
 
   handleCreateCampaign = () => {
     const { form, isFor } = this.state;
-    if (this.validateFile()) { 
+    if (this.validateFile()) {
       const Data = new FormData();
       Data.append("image", form.file);
       Data.append("postType", "campaign");
       this.setState({ isLoading: true });
-      const postType = isFor? contentTypes.companyCampaign : contentTypes.creatorCampaign
+      const postType = isFor
+        ? contentTypes.companyCampaign
+        : contentTypes.creatorCampaign;
       this.props.uploadMedia(Data, form.filetype, postType).then(() => {
         const { mediaData } = this.props;
         if (mediaData && mediaData.media) {
@@ -456,7 +457,7 @@ class CampaignModal extends Component {
           }
           this.setState({ form, isNewFile: false }, () => {
             this.create();
-          })
+          });
         }
       });
     }
@@ -466,16 +467,16 @@ class CampaignModal extends Component {
     const { form, stepIndex } = this.state;
     this.props.createCampaign(form).then(() => {
       const { campaignData } = this.props;
-      if (
-        campaignData &&
-        campaignData.campaign &&
-        campaignData.campaign.id
-      ) {
+      if (campaignData && campaignData.campaign && campaignData.campaign.id) {
         this.handleSetstate(campaignData.campaign);
         this.setState({ isLoading: false, stepIndex: stepIndex + 1 });
-      }     
-      if(campaignData && campaignData.error && campaignData.error.data && campaignData.error.data.message)
-      {
+      }
+      if (
+        campaignData &&
+        campaignData.error &&
+        campaignData.error.data &&
+        campaignData.error.data.message
+      ) {
         this.setState({ isLoading: false });
         this.handleResetForm();
         this.props.handleModalInfoMsgShow(
@@ -484,38 +485,38 @@ class CampaignModal extends Component {
         );
       }
     });
-  }
+  };
 
   update = () => {
     const { form, stepIndex, isFor } = this.state;
-    if(stepIndex === 1 && !isFor){
+    if (stepIndex === 1 && !isFor) {
       form.draft = true;
     }
-    if(isFor && stepIndex === 3){
+    if (isFor && stepIndex === 3) {
       form.draft = true;
     }
     this.setState({ form });
 
     this.props.updateCampaign(form).then(() => {
       const { campaignData } = this.props;
-      if (
-        campaignData &&
-        campaignData.campaign &&
-        campaignData.campaign.id
-      ) {
-        if(stepIndex === 1 && !isFor){
+      if (campaignData && campaignData.campaign && campaignData.campaign.id) {
+        if (stepIndex === 1 && !isFor) {
           this.handleModalInfoShow();
           return;
         }
-        if(isFor && stepIndex === 3){
-          this.handleModalInfoShow();            
+        if (isFor && stepIndex === 3) {
+          this.handleModalInfoShow();
           return;
         }
         this.handleSetstate(campaignData.campaign);
         this.setState({ isLoading: false, stepIndex: stepIndex + 1 });
       }
-      if(campaignData && campaignData.error && campaignData.error.data && campaignData.error.data.message)
-      {
+      if (
+        campaignData &&
+        campaignData.error &&
+        campaignData.error.data &&
+        campaignData.error.data.message
+      ) {
         this.setState({ isLoading: false });
         this.handleResetForm();
         this.props.handleModalInfoMsgShow(
@@ -524,11 +525,11 @@ class CampaignModal extends Component {
         );
       }
     });
-  }
+  };
 
   validateFile = () => {
     const { form } = this.state;
-    if(!form.file){
+    if (!form.file) {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
@@ -536,11 +537,10 @@ class CampaignModal extends Component {
       return false;
     }
     return true;
-  }
+  };
 
-
- /* eslint-disable */
-  validateForm = (index) => {
+  /* eslint-disable */
+  validateForm = index => {
     const { form } = this.state;
     if (index === 0) {
       return (
@@ -575,7 +575,7 @@ class CampaignModal extends Component {
         form.address.VATNO
       );
     }
-};
+  };
 
   handleCompanySubmit = () => {
     this.handleSubmit();

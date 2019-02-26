@@ -21,7 +21,7 @@ class InformationPage extends Component {
     this.state = {
       isComments: false,
       campaignId: this.props.match.params.id,
-      comments: null,
+      comments: null
     };
   }
 
@@ -82,14 +82,17 @@ class InformationPage extends Component {
     const campaignId = this.props.match.params.id;
 
     if (campaignId !== prevState.campaignId) {
-      this.setState({
-        isComments: false,
-        campaignId,
-        comments: null
-      }, ()=> {
-        this.getCampaignDetailsData();
-        this.handleCommentsSections();
-      })
+      this.setState(
+        {
+          isComments: false,
+          campaignId,
+          comments: null
+        },
+        () => {
+          this.getCampaignDetailsData();
+          this.handleCommentsSections();
+        }
+      );
     }
   }
 
@@ -163,16 +166,16 @@ class InformationPage extends Component {
   };
 
   renderReportTips = () => {
-    const {     
-            campaignDetails,
-          } = this.props;
-          
-    return  <ReportTips 
-              item={campaignDetails} 
-              isBackOffice={false} 
-              isReview={false} 
-              isSavedPage={false}
-            />
+    const { campaignDetails } = this.props;
+
+    return (
+      <ReportTips
+        item={campaignDetails}
+        isBackOffice={false}
+        isReview={false}
+        isSavedPage={false}
+      />
+    );
   };
 }
 

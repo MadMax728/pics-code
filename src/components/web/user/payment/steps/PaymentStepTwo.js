@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Translations } from "../../../../../lib/translations";
-import {
-  RightSidebarModal,
-  Button
-} from "../../../../ui-kit";
+import { RightSidebarModal, Button } from "../../../../ui-kit";
 
 class PaymentStepTwo extends Component {
   handleCommitToBuy = () => {
@@ -13,13 +10,7 @@ class PaymentStepTwo extends Component {
   };
 
   render() {
-    const {
-      form,
-      userInfo,
-      isLoading,
-      isEdit,
-      forThat
-    } = this.props;
+    const { form, userInfo, isLoading, isEdit, forThat } = this.props;
     return (
       <div className="col-xs-12 no-padding" id={form.title}>
         <div className="col-sm-5 payment-history">
