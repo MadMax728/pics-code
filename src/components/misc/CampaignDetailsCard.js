@@ -29,7 +29,7 @@ const CampaignDetailsCard = ({
     : images.feed_like;
   const profile_route = campaignDetails.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${campaignDetails.userName}`;
+    : `${routes.NEWS_FEED_ROUTE}/${campaignDetails.username}`;
   const selectedUserType = "creator";
   return (
     <div className="information-wrapper ht100">
@@ -103,8 +103,8 @@ const CampaignDetailsCard = ({
           <FeedHeader
             id={campaignDetails.id}
             isSelfLike={campaignDetails.isSelfLike}
-            userName={campaignDetails.userName}
-            image={campaignDetails.profileImage}
+            userName={campaignDetails.createdBy.username}
+            image={campaignDetails.createdBy.profileUrl}
             title={campaignDetails.title}
             category={
               campaignDetails.category &&

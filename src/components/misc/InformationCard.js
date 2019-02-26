@@ -4,7 +4,7 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 import { Translations } from "../../lib/translations";
 import * as routes from "../../lib/constants/routes";
-import { DateFormat } from "../Factory";
+// import { DateFormat } from "../Factory";
 
 const InformationCard = ({ item, type }) => {
   const selectedUserType = "creator";
@@ -36,8 +36,7 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.start}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {moment
-                    .unix(item.startDate)
+                  {moment(item.startDate)
                     .format(Translations.campaign_post_date_format.date)}
                 </span>
               </div>
@@ -55,8 +54,7 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.end}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {moment
-                    .unix(item.endDate)
+                  {moment(item.endDate)
                     .format(Translations.campaign_post_date_format.date)}
                 </span>
               </div>
@@ -84,9 +82,7 @@ const InformationCard = ({ item, type }) => {
                 </span>
                 <span className="secondary_title">
                   {item.offers &&
-                    item.offersList &&
-                    item.offersList[0].offerName &&
-                    item.offersList[0].offerName}
+                    item.offers }
                 </span>
               </div>
             )}
@@ -120,9 +116,7 @@ const InformationCard = ({ item, type }) => {
                 </span>
                 <span className="secondary_title">
                   {item.inquiry &&
-                    item.inquiryList &&
-                    item.inquiryList[0].inquiryName &&
-                    item.inquiryList[0].inquiryName}
+                    item.inquiry }
                 </span>
               </div>
             )}

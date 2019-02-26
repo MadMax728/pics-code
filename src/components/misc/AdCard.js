@@ -79,7 +79,6 @@ class AdCard extends Component {
             isReview,
             isBackOffice,
             handleModalInfoDetailsCallbackShow,
-            handleModalShow,
             handleRemove,
             isSavedPage 
           } = this.props;
@@ -89,7 +88,6 @@ class AdCard extends Component {
               isBackOffice={isBackOffice} 
               isReview={isReview} 
               handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
-              handleModalShow={handleModalShow}
               handleRemove={handleRemove}
               isSavedPage={isSavedPage}
               handleEdit={this.handleEditPost}

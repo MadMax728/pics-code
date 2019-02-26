@@ -226,7 +226,7 @@ class ReportTips extends Component {
         }
 
         return (
-            <div className="post-action-links" > {item && <RenderToolTips items={reportTips} id={item.id} />}</div>
+            item && <RenderToolTips items={reportTips} id={item.id} />
         );
     }
 }

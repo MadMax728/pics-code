@@ -82,7 +82,6 @@ class CampaignCard extends Component {
             isReview,
             isBackOffice,
             handleModalInfoDetailsCallbackShow,
-            handleModalShow,
             handleRemove,
             isSavedPage 
           } = this.props;
@@ -92,7 +91,6 @@ class CampaignCard extends Component {
               isBackOffice={isBackOffice} 
               isReview={isReview} 
               handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
-              handleModalShow={handleModalShow}
               handleRemove={handleRemove}
               isSavedPage={isSavedPage}
             />
