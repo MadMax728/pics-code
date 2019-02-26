@@ -83,10 +83,7 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.offer}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {item.offers &&
-                    item.offersList &&
-                    item.offersList[0].offerName &&
-                    item.offersList[0].offerName}
+                  {item.offers && item.offers}
                 </span>
               </div>
             )}
@@ -119,10 +116,7 @@ const InformationCard = ({ item, type }) => {
                   {Translations.campaign_details.inquiry}:{" "}
                 </span>
                 <span className="secondary_title">
-                  {item.inquiry &&
-                    item.inquiryList &&
-                    item.inquiryList[0].inquiryName &&
-                    item.inquiryList[0].inquiryName}
+                  {item.inquiry && item.inquiry}
                 </span>
               </div>
             )}
