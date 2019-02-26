@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { Button } from "../../ui-kit";
 
 const RenderToolTips = ({ items, id, isLoading }) => {
-  return (
-    <div className="post-action-links">
-      {items && items.map(item => {
+      return items && items.map(item => {
         return (  
             <Button
               className="btn-comment-tooltip"
@@ -17,9 +15,7 @@ const RenderToolTips = ({ items, id, isLoading }) => {
               key={`${item.name}-${id}`}
             />
         );
-      })}
-    </div>
-  );
+    })
 };
 
 const propTypes = {
