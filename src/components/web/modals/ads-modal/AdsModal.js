@@ -224,6 +224,7 @@ class AdsModal extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
     if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
+      
       this.handleFillState(data);
     }
   }
@@ -261,14 +262,6 @@ class AdsModal extends Component {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
       form.image = data.mediaUrl;
       form.file = data.mediaUrl;
-      // form.fileType = typeContent.image.toLowerCase() === data.typeContent.toLowerCase();
-      // if (form.fileType) {
-      //   form.image = data.mediaUrl;
-      //   form.file = data.mediaUrl;
-      // } else if (!form.fileType) {
-      //   form.video = data.mediaUrl;
-      //   form.file = data.mediaUrl;
-      // }
     }
     if (data.address) {
       form.address.invoiceRecipient = data.address.invoiceRecipient;

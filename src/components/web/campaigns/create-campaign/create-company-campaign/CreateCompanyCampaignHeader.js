@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
-import { Button } from "../../../../ui-kit";
+import { Button, InlineLoading } from "../../../../ui-kit";
+import { BASE_CAMPAIGN_INFORMATION_ROUTE } from "../../../../../lib/constants";
 
 class CreateCompanyCampaignHeader extends Component {
   constructor(props) {
@@ -10,9 +11,10 @@ class CreateCompanyCampaignHeader extends Component {
   }
 
   render() {
-    const { stepIndex, modalTitle } = this.props;
+    const { stepIndex, form, isLoading } = this.props;
     return (
       <div className="row">
+        {isLoading && <InlineLoading />}
         <div className="col-sm-5 modal-modalTitle">{/* {modalTitle} */}</div>
         <div className="col-sm-7 text-right">
           <Button
@@ -28,11 +30,17 @@ class CreateCompanyCampaignHeader extends Component {
             />
           )}
           {stepIndex !== 0 && stepIndex < 3 && (
-            <Button
-              className="black_button"
-              onClick={this.handlePreview}
-              text={Translations.modal_header.preview}
-            />
+            <a
+              href={`${BASE_CAMPAIGN_INFORMATION_ROUTE}company/${form.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                className="black_button"
+                onClick={this.handlePreview}
+                text={Translations.modal_header.preview}
+              />
+            </a>
           )}
           {stepIndex <= 3 && (
             <Button
@@ -73,13 +81,13 @@ class CreateCompanyCampaignHeader extends Component {
 }
 
 CreateCompanyCampaignHeader.propTypes = {
-  handlePrivewOpen: PropTypes.func.isRequired,
   handleModalHide: PropTypes.func,
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
   handleResoreState: PropTypes.func.isRequired,
-  modalTitle: PropTypes.string.isRequired
+  form: PropTypes.any,
+  isLoading: PropTypes.bool
 };
 
 export default CreateCompanyCampaignHeader;

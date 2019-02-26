@@ -21,12 +21,12 @@ export const getNewsFeedCampaignsEndPoint =
 export const getUserProfileCampaignsEndPoint =
   "/campaigns/get-all-user-profile-campaigns";
 export const getSavedCampaignsEndPoint = "/campaigns/get-all-saved-campaigns";
-export const getSettingsCampaignsEndPoint = "/campaigns/get-user-campaigns";
+export const getSettingsCampaignsEndPoint = "/campaigns/";
 export const getCampaignTypeEndPoint = "/campaigns/list/";
 export const getCampaignDetailsEndPoint = "/campaigns/";
 export const getFavouriteCampaignsEndPoint = "/campaigns/favorite?favBy=";
 export const createCampaignEndPoint = "/campaigns";
-export const editCampaignEndPoint = "/campaigns";
+export const editCampaignEndPoint = "/campaigns/";
 export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
 
@@ -66,6 +66,8 @@ export const uploadMediaVideoEndPoint = "/video";
 
 // Message Service
 export const getMessagesEndPoint = "/messages?";
+
+export const deleteMessagesForMe = "/messages/for/";
 
 // Privacy Service
 export const setProfilePrivacyEndPoint = "/users/private";

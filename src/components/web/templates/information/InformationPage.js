@@ -115,9 +115,9 @@ class InformationPage extends Component {
   }
 
   getCampaignDetailsData = () => {
-    const data = {
-      id: this.state.campaignId
-    };
+    const { campaignId } = this.state;
+    const data = `${campaignId}?type=Campaign`;
+
     this.props.getCampaignDetails(data).then(() => {
       if (this.props.campaignDetails) {
         this.setState({
@@ -172,8 +172,6 @@ class InformationPage extends Component {
   };
 
   handleCommentsSections = () => {
-    console.log("ahi");
-
     const CampaignId = { typeId: this.props.match.params.id };
     this.props.getComments(CampaignId).then(() => {
       const totalComment = this.props.comments;

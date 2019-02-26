@@ -246,6 +246,7 @@ class CampaignCard extends Component {
       if (
         this.props.reportedContentData &&
         this.props.reportedContentData &&
+        this.props.reportedContentData.addReport &&
         this.props.reportedContentData.addReport.typeId === item.id
       ) {
         item.isReported = !item.isReported;
@@ -258,7 +259,7 @@ class CampaignCard extends Component {
     const { item } = this.state;
     const { isSavedPage } = this.props;
     const data = {
-      typeId: e.target.id,
+      post: e.target.id,
       postType: getBackendPostType(item)
     };
 
@@ -266,7 +267,7 @@ class CampaignCard extends Component {
       if (
         this.props.savedData &&
         this.props.savedData.saved &&
-        this.props.savedData.saved.typeId === item.id
+        this.props.savedData.saved.post === item.id
       ) {
         item.isSavedPost = !item.isSavedPost;
         this.setState({ item });

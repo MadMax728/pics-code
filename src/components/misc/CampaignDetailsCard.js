@@ -50,7 +50,7 @@ const CampaignDetailsCard = ({
                 Translations.date_format.campaign_post_date_format,
                 true
               )}{" "}
-              {Translations.in} {campaignDetails.category[0].categoryName}
+              {Translations.in} {campaignDetails.category}
             </div>
           )}
         </div>
@@ -106,11 +106,7 @@ const CampaignDetailsCard = ({
             userName={campaignDetails.userName}
             image={campaignDetails.profileImage}
             title={campaignDetails.title}
-            category={
-              campaignDetails.category &&
-              campaignDetails.category[0] &&
-              campaignDetails.category[0].categoryName
-            }
+            category={campaignDetails.category && campaignDetails.category}
             handleFavorite={handleFavorite}
           />
           <div className="feed_content col-xs-12">
@@ -126,9 +122,9 @@ const CampaignDetailsCard = ({
 
                       <InfoWrapperItem
                         title={Translations.campaign_details.start}
-                        value={moment
-                          .unix(campaignDetails.startDate)
-                          .format(Translations.campaign_post_date_format.date)}
+                        value={moment(campaignDetails.startDate).format(
+                          Translations.campaign_post_date_format.date
+                        )}
                       />
                     </div>
                     <div className="col-sm-6 no-padding">
@@ -139,9 +135,9 @@ const CampaignDetailsCard = ({
 
                       <InfoWrapperItem
                         title={Translations.campaign_details.end}
-                        value={moment
-                          .unix(campaignDetails.endDate)
-                          .format(Translations.campaign_post_date_format.date)}
+                        value={moment(campaignDetails.endDate).format(
+                          Translations.campaign_post_date_format.date
+                        )}
                       />
                     </div>
                   </div>
@@ -161,12 +157,7 @@ const CampaignDetailsCard = ({
                   {campaignDetails && campaignDetails.offers && (
                     <InfoWrapperItem
                       title={Translations.campaign_details.offer}
-                      value={
-                        campaignDetails.offers &&
-                        campaignDetails.offersList &&
-                        campaignDetails.offersList[0].offerName &&
-                        campaignDetails.offersList[0].offerName
-                      }
+                      value={campaignDetails.offers && campaignDetails.offers}
                     />
                   )}
                 </div>
@@ -196,12 +187,7 @@ const CampaignDetailsCard = ({
                   {campaignDetails && campaignDetails.inquiry && (
                     <InfoWrapperItem
                       title={Translations.campaign_details.inquiry}
-                      value={
-                        campaignDetails.inquiry &&
-                        campaignDetails.inquiryList &&
-                        campaignDetails.inquiryList[0].inquiryName &&
-                        campaignDetails.inquiryList[0].inquiryName
-                      }
+                      value={campaignDetails.inquiry && campaignDetails.inquiry}
                     />
                   )}
                 </div>
