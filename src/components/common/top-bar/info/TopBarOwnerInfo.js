@@ -145,7 +145,9 @@ class TopBarOwnerInfo extends Component {
       };
       const selectedUserType = "creator";
       this.setState({ isLoading: true });
-      this.props.getUserCommunity(data);
+      this.props.getUserCommunity(data).then(() => {
+        console.log(this.props.userCommunity);
+      });
       this.props.getUser(data).then(() => {
         if (
           this.props.userDataByUsername &&
@@ -242,8 +244,6 @@ class TopBarOwnerInfo extends Component {
           this.setState({ items });
         }
       });
-    } else {
-      this.props.history.push(routes.LOGOUT_ROUTE);
     }
   }
 
@@ -347,7 +347,8 @@ class TopBarOwnerInfo extends Component {
 }
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  usersData: state.usersData
+  usersData: state.usersData,
+  userCommunity: state.communityData.userCommunity
 });
 
 const mapDispatchToProps = {
@@ -364,7 +365,8 @@ TopBarOwnerInfo.propTypes = {
   getFollowUserList: PropTypes.func,
   usersData: PropTypes.object,
   getUserCommunity: PropTypes.func,
-  history: PropTypes.any
+  history: PropTypes.any,
+  userCommunity: PropTypes.any
 };
 
 export default connect(

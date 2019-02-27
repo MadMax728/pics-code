@@ -168,6 +168,7 @@ class Home extends Component {
                   handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
                   handleMessageBar={this.handleMessageBar}
+                  history={this.props.history}
                 />
               </div>
             </div>

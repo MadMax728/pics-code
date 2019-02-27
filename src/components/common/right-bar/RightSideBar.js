@@ -153,14 +153,20 @@ class RightSideBar extends Component {
   };
 
   handleCommunity = () => {
-    return <Community handleMessageBar={this.props.handleMessageBar} />;
+    return (
+      <Community
+        handleMessageBar={this.props.handleMessageBar}
+        history={this.props.history}
+      />
+    );
   };
 }
 
 RightSideBar.propTypes = {
   handleModalShow: PropTypes.func,
   handleMessageBar: PropTypes.func.isRequired,
-  handleLanguageSwitch: PropTypes.func.isRequired
+  handleLanguageSwitch: PropTypes.func.isRequired,
+  history: PropTypes.any
 };
 
 export default RightSideBar;

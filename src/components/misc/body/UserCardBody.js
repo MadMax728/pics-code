@@ -4,6 +4,7 @@ import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
 import { Loader, ThreeDots, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import * as images from "../../../lib/constants/images";
 
 class UserCardBody extends Component {
   constructor(props, context) {
@@ -38,15 +39,12 @@ class UserCardBody extends Component {
         btnText = Translations.profile_community_right_sidebar.Subscribe;
         classNameText = "blue_button";
       }
+    } else if (user.isSubscribe) {
+      btnText = Translations.profile_community_right_sidebar.Subscribed;
+      classNameText = "filled_button";
     } else {
-      console.log("subscribe");
-      if (user.isSubscribe) {
-        btnText = Translations.profile_community_right_sidebar.Subscribed;
-        classNameText = "filled_button";
-      } else {
-        btnText = Translations.profile_community_right_sidebar.Subscribe;
-        classNameText = "blue_button";
-      }
+      btnText = Translations.profile_community_right_sidebar.Subscribe;
+      classNameText = "blue_button";
     }
 
     const actionButton = {
@@ -73,7 +71,10 @@ class UserCardBody extends Component {
             placeholder={<Loader />}
           >
             <div className="profile-img-wrapper">
-              <img src={user.profileUrl} alt={"pic-1"} />
+              <img
+                src={user.profileUrl ? user.profileUrl : images.profile_pic}
+                alt={"pic-1"}
+              />
             </div>
           </LazyLoad>
           <div className="name-wrapper">

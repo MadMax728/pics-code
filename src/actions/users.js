@@ -164,7 +164,7 @@ export const getFollowUserList = (prop, requestData) => {
     };
     return subscribeService[prop](requestData, header).then(
       res => {
-        dispatch(getFollowUserListSucceeded(res.data.data, prop));
+        dispatch(getFollowUserListSucceeded(res.data, prop));
       },
       error => {
         dispatch(getFollowUserListFailed(error.response));
