@@ -103,7 +103,9 @@ class TextEditor extends Component {
             { indent: "-1" },
             { indent: "+1" }
           ],
-          ["link", "image", "video"],
+          // Remove as per Client Requriment
+          // ["link", "image", "video"],
+          ["image"],
           ["clean"]
         ],
         handlers: {

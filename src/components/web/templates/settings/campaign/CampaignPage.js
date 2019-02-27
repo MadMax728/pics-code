@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCampaigns } from "../../../../../actions";
-import { CampaignLoading } from "../../../../ui-kit";
+import { CampaignLoading, NoDataFoundCenterPage } from "../../../../ui-kit";
 import { CampaignCard } from "../../../../misc";
 import * as enumerations from "../../../../../lib/constants/enumerations";
 import { Auth } from "../../../../../auth";
@@ -15,9 +15,15 @@ class SettingCampaignPage extends Component {
       <div className="padding-rl-10 middle-section">
         {campaignList && !isLoading && this.renderCampaignList()}
         {isLoading && <CampaignLoading />}
+        {!isLoading &&
+          (!campaignList || (campaignList && campaignList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
       </div>
     );
   }
+
+  handleRefresh = () => {};
 
   componentDidMount = () => {
     const storage = Auth.extractJwtFromStorage();

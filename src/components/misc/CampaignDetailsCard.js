@@ -29,51 +29,34 @@ const CampaignDetailsCard = ({
     : images.feed_like;
   const profile_route = campaignDetails.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${campaignDetails.userName}`;
+    : `${routes.NEWS_FEED_ROUTE}/${campaignDetails.username}`;
   const selectedUserType = "creator";
   return (
     <div className="information-wrapper ht100">
+      <div className="no-padding no-margin">
+        {campaignDetails.typeContent &&
+          campaignDetails.typeContent.toLowerCase() ===
+            enumerations.mediaTypes.image && (
+            <ImageItem
+              item={campaignDetails.mediaUrl}
+              classNames={`embed-responsive embed-responsive-16by9`}
+              userName={campaignDetails.userName}
+              isOtherCardExist={false}
+            />
+          )}
+        {campaignDetails.typeContent &&
+          campaignDetails.typeContent.toLowerCase() ===
+            enumerations.mediaTypes.video && (
+            <VideoItem
+              id={campaignDetails.id}
+              item={campaignDetails.mediaUrl}
+            />
+          )}
+      </div>
       <div className="info-inner-wrapper col-xs-12 padd-15">
-        <h3 className="no-padding no-margin capitalize">
+        <h3 className="no-padding margin-top-10 capitalize">
           {campaignDetails.title}
         </h3>
-        <div className="no-padding titles_wrapper">
-          <div className="secondary_title">
-            {campaignDetails.location &&
-              campaignDetails.location.address &&
-              campaignDetails.location.address}
-          </div>
-          {campaignDetails.category && (
-            <div className="grey_title">
-              {DateFormat(
-                campaignDetails.createdAt,
-                Translations.date_format.campaign_post_date_format,
-                true
-              )}{" "}
-              {Translations.in} {campaignDetails.category}
-            </div>
-          )}
-        </div>
-        <div className="margin-top-25">
-          {campaignDetails.typeContent &&
-            campaignDetails.typeContent.toLowerCase() ===
-              enumerations.mediaTypes.image && (
-              <ImageItem
-                item={campaignDetails.mediaUrl}
-                classNames={`embed-responsive embed-responsive-16by9`}
-                userName={campaignDetails.userName}
-                isOtherCardExist={false}
-              />
-            )}
-          {campaignDetails.typeContent &&
-            campaignDetails.typeContent.toLowerCase() ===
-              enumerations.mediaTypes.video && (
-              <VideoItem
-                id={campaignDetails.id}
-                item={campaignDetails.mediaUrl}
-              />
-            )}
-        </div>
         <div className="margin-top-25">
           <DescriptionItem desc={campaignDetails.description} />
         </div>
@@ -103,8 +86,8 @@ const CampaignDetailsCard = ({
           <FeedHeader
             id={campaignDetails.id}
             isSelfLike={campaignDetails.isSelfLike}
-            userName={campaignDetails.userName}
-            image={campaignDetails.profileImage}
+            userName={campaignDetails.createdBy.username}
+            image={campaignDetails.createdBy.profileUrl}
             title={campaignDetails.title}
             category={campaignDetails.category && campaignDetails.category}
             handleFavorite={handleFavorite}

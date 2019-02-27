@@ -288,8 +288,6 @@ class CommentCard extends Component {
   };
 
   renderComment = comment => {
-    console.log(comment);
-
     return (
       <div className="comment-wrapper" key={comment.id}>
         <div className="comment-header col-xs-12 no-padding">

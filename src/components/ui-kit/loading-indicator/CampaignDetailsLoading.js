@@ -8,13 +8,6 @@ const CampaignDetailsLoading = ({ count }) => {
     .map((item, index) => {
       return (
         <div key={index} className="feed_wrapper padding-rl15">
-          <div className="feed_header width-70 padding-left0">
-            <div className="col-sm-12 no-padding">
-              <div className="normal_title gray_box descTitle" />
-              <div className="secondary_title gray_box desc1" />
-              <div className="grey_title" />
-            </div>
-          </div>
           <div className="feed_content">
             <div className="feed_image">
               <img
@@ -84,6 +77,13 @@ const CampaignDetailsLoading = ({ count }) => {
               <div className="feed_description">
                 <span className="secondary_title gray_box gray_box_big lists padding-left15" />
               </div>
+            </div>
+          </div>
+          <div className="feed_header width-70 padding-left0">
+            <div className="col-sm-12 no-padding">
+              <div className="normal_title gray_box descTitle" />
+              <div className="secondary_title gray_box desc1" />
+              <div className="grey_title" />
             </div>
           </div>
           <div className="feed_footer padding-15">

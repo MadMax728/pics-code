@@ -4,7 +4,7 @@ import MRightUserInput from "./MRightUserInput";
 import MRightUserItem from "./MRightUserItem";
 import MRightActiveChat from "./MRightActiveChat";
 import PropTypes from "prop-types";
-import { ConfirmationModal } from '../../modals/confirmation-model/';
+import { ConfirmationModal } from "../../modals/confirmation-model/";
 import { deleteMessages } from "../../../../actions";
 import * as websocket from "../../../../websocket";
 
@@ -14,9 +14,9 @@ class MRightContainer extends Component {
     this.state = {
       message: "",
       modalShow: false,
-      modalHeader: 'Modal Header Content',
-      modalBodyContent: 'Modal body Content',
-      modalFooterContent: 'Modal footer content',
+      modalHeader: "Modal Header Content",
+      modalBodyContent: "Modal body Content",
+      modalFooterContent: "Modal footer content",
       header: true
     };
     this.messageListRef = null;
@@ -25,19 +25,18 @@ class MRightContainer extends Component {
     //handle model hide here
     this.setState({
       modalShow: false
-    })
-  }
+    });
+  };
   handleConfirmation = () => {
     const { user, me } = this.props;
-    console.log('Me ', me);
-    console.log('other ', user._id);
+    console.log("Me ", me);
+    console.log("other ", user._id);
     //Hande API call
     //Send logged in and other user
     this.props.deleteMessages(me, user._id).then(() => {
       this.messageListRef.clearMessages();
     });
-
-  }
+  };
   setMessageListRef = ref => {
     this.messageListRef = ref;
   };
@@ -45,7 +44,7 @@ class MRightContainer extends Component {
   onDeleteHistoryClick = () => {
     this.setState({
       modalShow: true
-    })
+    });
   };
 
   handleChange = e => {
@@ -78,8 +77,7 @@ class MRightContainer extends Component {
           handleModalInfoMsgShow={this.state.modalBodyContent}
           handleModalHide={this.handleModalHide}
           handleModalConfirmation={this.handleConfirmation}
-          data={'test'}
-
+          data={"test"}
         />
       </div>
     );

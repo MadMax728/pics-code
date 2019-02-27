@@ -32,7 +32,7 @@ Button.propTypes = {
   type: PropTypes.string,
   tabIndex: PropTypes.string,
   className: PropTypes.string,
-  id: PropTypes.string,
+  id: PropTypes.any,
   name: PropTypes.string,
   disabled: PropTypes.bool
 };
