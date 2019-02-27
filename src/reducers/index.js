@@ -34,6 +34,7 @@ import messagesData from "./messageReducer";
 import lastEvaluatedKey from "./lastEvaluateKeyReducer";
 import notificationData from "./notificationReducer";
 import communityData from "./communityReducer";
+import exploreData from "./exploreReducer";
 
 const rootReducer = combineReducers({
   loginData,
@@ -70,7 +71,8 @@ const rootReducer = combineReducers({
   messagesData,
   lastEvaluatedKey,
   notificationData,
-  communityData
+  communityData,
+  exploreData,
 });
 
 export default rootReducer;

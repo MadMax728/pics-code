@@ -267,7 +267,14 @@ const initialState = {
   },
   lastEvaluatedKey: {
     keys: null
-  }
+  },
+  exploreData: {
+    items: [],
+    iPaginate: {},
+    vPaginate: {},
+    isLoading: false,
+    error: null
+  },
 };
 
 export default initialState;
