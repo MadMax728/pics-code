@@ -8,6 +8,7 @@ import { UserImageItem, Button } from "../../ui-kit";
 
 const MediaCardHeader = ({
   item,
+  user,
   handleFavorite,
   isLoading,
   isParticipant
@@ -20,7 +21,7 @@ const MediaCardHeader = ({
     <div className="feed_header">
       <Link to={profile_route}>
         <UserImageItem
-          item={item.profileImage}
+          item={user.profileUrl}
           isParticipant={isParticipant}
           campaignUserProfile={item.campaign}
           customClass={`img-circle img-responsive padding-right-15`}
@@ -28,14 +29,14 @@ const MediaCardHeader = ({
       </Link>
       <div className="col-sm-8 col-xs-7 no-padding">
         <Link to={profile_route}>
-          <div className="normal_title">{item.userName}</div>
+          <div className="normal_title">{user.username}</div>
         </Link>
         {item.location && (
           <div className="secondary_title">{item.location.address}</div>
         )}
-        {item.category && item.category.length && (
+        {item.createdAt && (
           <div className="grey_title">
-            {DateFormat(item.createdAt)} in {item.category[0].categoryName}
+            {DateFormat(item.createdAt)} in {item.category}
           </div>
         )}
       </div>
@@ -56,6 +57,7 @@ const MediaCardHeader = ({
 MediaCardHeader.propTypes = {
   handleFavorite: PropTypes.func.isRequired,
   item: PropTypes.object.isRequired,
+  user: PropTypes.any,
   isParticipant: PropTypes.bool,
   isLoading: PropTypes.bool
 };
