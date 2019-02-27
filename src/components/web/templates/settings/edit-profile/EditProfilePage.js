@@ -360,7 +360,7 @@ class EditProfile extends Component {
               {userInfo && userInfo.userType === selectedUserType ? (
                 <div className="col-2">
                   <div className="col-sm-6 padding-r-5">
-                    <div className="form-group margin-bottom-30">
+                    <div className="form-group margin-bottom-30 birth-date">
                       <Label
                         htmlFor="city"
                         value={Translations.editProfile.D_O_B}

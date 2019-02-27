@@ -23,7 +23,7 @@ const FeedHeader = ({
         item={profileImage}
         customClass={`img-circle img-responsive`}
       />
-      <div className="col-sm-9 col-xs-7">
+      <div className="col-sm-7 col-xs-7">
         <div className="normal_title">{title}</div>
         <Link to={profile_route} className="">
           <div className="secondary_title">{userName}</div>
