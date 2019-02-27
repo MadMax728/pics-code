@@ -6,255 +6,254 @@ import { RenderToolTips } from "../../common";
 import { Translations } from "../../../lib/translations";
 import { reportType, modalType } from "../../../lib/constants";
 import { like, getComments, setSavedPost, addReport } from "../../../actions";
+import { getBackendPostType } from "../../Factory";
 
 class ReportTips extends Component {
-    constructor(props, context) {
-        super(props, context);
-        this.state = {
-            item: null,
-            reportTips: null,
-        };
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      item: null,
+      userInfo: null
+    };
+  }
+
+  componentDidMount = () => {
+    const { item } = this.props;
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
     }
+    this.setState({ userInfo, item });
+  };
 
-    componentDidMount = () => {
-        let reportTips;
-        const { item, isBackOffice, isReview } = this.props;
+  handleEdit = () => {
+    this.props.handleEdit();
+  };
 
-        const storage = Auth.extractJwtFromStorage();
-        let userInfo = null;
-        if (storage) {
-            userInfo = JSON.parse(storage.userInfo);
-        }
-
-        if (isBackOffice) {
-            reportTips = [
-                {
-                    name: isReview
-                        ? item.contentStatus === reportType.lock
-                            ? Translations.tool_tips.unlock
-                            : Translations.tool_tips.lock
-                        : item.reportStatus === reportType.lock
-                            ? Translations.tool_tips.unlock
-                            : Translations.tool_tips.lock,
-                    handleEvent: isReview
-                        ? item.contentStatus === reportType.lock
-                            ? this.handleUnlockContent
-                            : this.handleLockContent
-                        : item.reportStatus === reportType.lock
-                            ? this.handleUnlockContent
-                            : this.handleLockContent
-                },
-                {
-                    name: Translations.tool_tips.do_not,
-                    handleEvent: this.handleDoNotContent
-                }
-            ];
-        } else {
-            reportTips = [
-                {
-                    name: item.isReported
-                        ? Translations.tool_tips.unreport
-                        : Translations.tool_tips.report,
-                    handleEvent: this.handleReportPost
-                },
-                {
-                    name: item.isSavedPost
-                        ? Translations.tool_tips.unsave
-                        : Translations.tool_tips.save,
-                    handleEvent: this.handleSavePost
-                }
-            ];
-            if (item.createdBy === userInfo.id) {
-                const data = {
-                    name: Translations.tool_tips.edit_post,
-                    handleEvent: this.handleEditPost
-                }
-                reportTips.unshift(data);
-            }
-        }
-        this.setState({ reportTips, item });
-    }
-
-    handleEditPost = () => {
-        const { item } = this.state;
-        this.props.handleModalShow(modalType.editAds, item);
-    }
-
-    handleSavePost = e => {
-        const { isSavedPage, contentFor } = this.props;
-        const { item } = this.state;
-        const data = {
-            post: e.target.id,
-            postType: contentFor
-        };
-
-        this.props.setSavedPost(data).then(() => {
-            const { savedData, handleRemove } = this.props;
-            if (
-                savedData &&
-                savedData.saved &&
-                savedData.saved.post === item.id
-            ) {
-                item.isSavedPost = !item.isSavedPost;
-                this.setState({ item });
-                if (isSavedPage && !item.isSavedPost) {
-                    handleRemove(item.id);
-                }
-            }
-        });
+  handleSavePost = e => {
+    const { isSavedPage } = this.props;
+    const { item } = this.state;
+    const data = {
+      post: e.target.id,
+      postType: getBackendPostType(item)
     };
 
-    handleSetState = data => {
-        clearInterval(this.timer);
-        const { item } = this.state;
-        const { isReview, handleRemove } = this.props;
-        if (isReview) {
-            item.contentStatus = data.contentStatus;
-        } else {
-            item.reportStatus = data.contentStatus;
-        }
+    this.props.setSavedPost(data).then(() => {
+      const { savedData, handleRemove } = this.props;
+      if (savedData && savedData.saved && savedData.saved.post === item.id) {
+        item.isSavedPost = !item.isSavedPost;
         this.setState({ item });
-        handleRemove(item.id);
-    };
-
-    handleDoNotContent = e => {
-        const { isReview, contentFor } = this.props;
-        let data;
-
-        if (isReview) {
-            data = {
-                id: e.target.id,
-                contentStatus: reportType.doNotLock,
-                reportContent: contentFor,
-                isReview
-            };
-        } else {
-            data = {
-                typeId: e.target.id,
-                contentStatus: reportType.doNotLock,
-                reportContent: contentFor
-            };
+        if (isSavedPage && !item.isSavedPost) {
+          handleRemove(item.id);
         }
+      }
+    });
+  };
 
-        this.props.handleModalInfoDetailsCallbackShow(
-            modalType.processed,
-            data,
-            () => {
-                this.handleSetState(data);
-            }
-        );
-    };
-
-    handleLockContent = e => {
-        const { isReview, contentFor } = this.props;
-        let data;
-        if (isReview) {
-            data = {
-                id: e.target.id,
-                contentStatus: reportType.lock,
-                reportContent: contentFor,
-                isReview
-            };
-        } else {
-            data = {
-                typeId: e.target.id,
-                contentStatus: reportType.lock,
-                reportContent: contentFor
-            };
-        }
-        this.props.handleModalInfoDetailsCallbackShow(
-            modalType.processed,
-            data,
-            () => {
-                this.handleSetState(data);
-            }
-        );
-    };
-
-    handleUnlockContent = e => {
-        const { isReview, contentFor } = this.props;
-        let data;
-
-        if (isReview) {
-            data = {
-                id: e.target.id,
-                contentStatus: reportType.unLock,
-                reportContent: contentFor,
-                isReview
-            };
-        } else {
-            data = {
-                typeId: e.target.id,
-                contentStatus: reportType.unLock,
-                reportContent: contentFor
-            };
-        }
-        this.props.handleModalInfoDetailsCallbackShow(
-            modalType.processed,
-            data,
-            () => {
-                this.handleSetState(data);
-            }
-        );
-    };
-
-    handleReportPost = e => {
-        const { item, contentFor } = this.state;
-        const data = {
-            typeContent: contentFor,
-            typeId: e.target.id,
-            title: item.title
-        };
-        this.props.addReport(data).then(() => {
-            const { reportedContentData } = this.props;
-            if (
-                reportedContentData &&
-                reportedContentData &&
-                reportedContentData.addReport.typeId === item.id
-            ) {
-                item.isReported = !item.isReported;
-                this.setState({ item });
-            }
-        });
-    };
-
-    render() {
-        const { item, reportTips } = this.state;
-        console.log(reportTips);
-        return (
-            <RenderToolTips items={reportTips} id={item.id} />
-        );
+  handleSetState = data => {
+    clearInterval(this.timer);
+    const { item } = this.state;
+    const { isReview, handleRemove } = this.props;
+    if (isReview) {
+      item.contentStatus = data.contentStatus;
+    } else {
+      item.reportStatus = data.contentStatus;
     }
+    this.setState({ item });
+    handleRemove(item.id);
+  };
+
+  handleDoNotContent = e => {
+    const { isReview } = this.props;
+    const { item } = this.state;
+
+    let data;
+
+    if (isReview) {
+      data = {
+        id: e.target.id,
+        contentStatus: reportType.doNotLock,
+        reportContent: getBackendPostType(item),
+        isReview
+      };
+    } else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: reportType.doNotLock,
+        reportContent: getBackendPostType(item)
+      };
+    }
+
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  handleLockContent = e => {
+    const { isReview } = this.props;
+    const { item } = this.state;
+    let data;
+    if (isReview) {
+      data = {
+        id: e.target.id,
+        contentStatus: reportType.lock,
+        reportContent: getBackendPostType(item),
+        isReview
+      };
+    } else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: reportType.lock,
+        reportContent: getBackendPostType(item)
+      };
+    }
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  handleUnlockContent = e => {
+    const { isReview } = this.props;
+    const { item } = this.state;
+    let data;
+
+    if (isReview) {
+      data = {
+        id: e.target.id,
+        contentStatus: reportType.unLock,
+        reportContent: getBackendPostType(item),
+        isReview
+      };
+    } else {
+      data = {
+        typeId: e.target.id,
+        contentStatus: reportType.unLock,
+        reportContent: getBackendPostType(item)
+      };
+    }
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
+
+  handleReportPost = e => {
+    const { item } = this.state;
+    const data = {
+      typeContent: getBackendPostType(item),
+      typeId: e.target.id,
+      title: item.title
+    };
+    this.props.addReport(data).then(() => {
+      const { reportedContentData } = this.props;
+      if (
+        reportedContentData &&
+        reportedContentData &&
+        reportedContentData.addReport &&
+        reportedContentData.addReport.typeId === item.id
+      ) {
+        item.isReported = !item.isReported;
+        this.setState({ item });
+      }
+    });
+  };
+
+  render() {
+    const { item, userInfo } = this.state;
+    const { isBackOffice, isReview } = this.props;
+    let reportTips;
+    if (isBackOffice) {
+      reportTips = [
+        {
+          name: isReview
+            ? item && item.contentStatus === reportType.lock
+              ? Translations.tool_tips.unlock
+              : Translations.tool_tips.lock
+            : item && item.reportStatus === reportType.lock
+            ? Translations.tool_tips.unlock
+            : Translations.tool_tips.lock,
+          handleEvent: isReview
+            ? item && item.contentStatus === reportType.lock
+              ? this.handleUnlockContent
+              : this.handleLockContent
+            : item && item.reportStatus === reportType.lock
+            ? this.handleUnlockContent
+            : this.handleLockContent
+        },
+        {
+          name: Translations.tool_tips.do_not,
+          handleEvent: this.handleDoNotContent
+        }
+      ];
+    } else {
+      reportTips = [
+        {
+          name:
+            item && item.isReported
+              ? Translations.tool_tips.unreport
+              : Translations.tool_tips.report,
+          handleEvent: this.handleReportPost
+        },
+        {
+          name:
+            item && item.isSavedPost
+              ? Translations.tool_tips.unsave
+              : Translations.tool_tips.save,
+          handleEvent: this.handleSavePost
+        }
+      ];
+      if (item && item.createdBy === userInfo.id) {
+        const data = {
+          name: Translations.tool_tips.edit_post,
+          handleEvent: this.handleEditPost
+        };
+        reportTips.unshift(data);
+      }
+    }
+
+    return item && <RenderToolTips items={reportTips} id={item.id} />;
+  }
 }
 
 ReportTips.propTypes = {
-    contentFor: PropTypes.string.isRequired,
-    item: PropTypes.object.isRequired,
-    isBackOffice: PropTypes.bool.isRequired,
-    isSavedPage: PropTypes.bool.isRequired,
-    isReview: PropTypes.bool,
-    handleModalInfoDetailsCallbackShow: PropTypes.func.isRequired,
-    addReport: PropTypes.func.isRequired,
-    reportedContentData: PropTypes.any,
-    handleRemove: PropTypes.func.isRequired,
-    setSavedPost: PropTypes.func.isRequired,
-    savedData: PropTypes.any,
-    handleModalShow: PropTypes.func.isRequired
+  item: PropTypes.object.isRequired,
+  isBackOffice: PropTypes.bool,
+  isSavedPage: PropTypes.bool,
+  isReview: PropTypes.bool,
+  handleModalInfoDetailsCallbackShow: PropTypes.func,
+  addReport: PropTypes.func.isRequired,
+  reportedContentData: PropTypes.any,
+  handleRemove: PropTypes.func,
+  setSavedPost: PropTypes.func.isRequired,
+  savedData: PropTypes.any,
+  handleEdit: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-    savedData: state.savedData,
-    reportedContentData: state.reportedContentData
+  savedData: state.savedData,
+  reportedContentData: state.reportedContentData
 });
 
 const mapDispatchToProps = {
-    like,
-    getComments,
-    setSavedPost,
-    addReport
+  like,
+  getComments,
+  setSavedPost,
+  addReport
 };
 
 export default connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(ReportTips);

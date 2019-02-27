@@ -28,7 +28,7 @@ class CreateCreatorCampaignHeader extends Component {
               text={Translations.modal_header.back}
             />
           )}
-          {stepIndex !== 0 && stepIndex < 3 && (
+          {stepIndex !== 0 && stepIndex < 2 && (
             <a
               href={`${BASE_CAMPAIGN_INFORMATION_ROUTE}creator/${form.id}`}
               target="_blank"
@@ -41,7 +41,7 @@ class CreateCreatorCampaignHeader extends Component {
               />
             </a>
           )}
-          {stepIndex <= 3 && (
+          {stepIndex <= 2 && (
             <Button
               className="black_button"
               onClick={this.handleContinue}
@@ -72,9 +72,9 @@ class CreateCreatorCampaignHeader extends Component {
 
   handleContinue = () => {
     const { stepIndex, isFor } = this.props;
-    if (stepIndex === 2 && !isFor) {
+    if (stepIndex === 1 && !isFor) {
       this.props.handleSubmit();
-    } else if (this.props.stepIndex < 5) {
+    } else if (this.props.stepIndex < 4) {
       this.props.handleNext();
     } else {
       console.log("data saved code");
@@ -88,11 +88,9 @@ CreateCreatorCampaignHeader.propTypes = {
   handleNext: PropTypes.func,
   handlePrev: PropTypes.func,
   handleResoreState: PropTypes.func.isRequired,
-  modalTitle: PropTypes.string,
   handleSubmit: PropTypes.func,
   isFor: PropTypes.bool,
   form: PropTypes.any
-
 };
 
 export default CreateCreatorCampaignHeader;

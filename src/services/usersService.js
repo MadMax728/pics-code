@@ -9,7 +9,8 @@ import {
   getUserListCompanyEndPoint,
   getUserListLikeYouEndPoint,
   getUserListUnknownEndPoint,
-  getUserListSubscriberEndPoint
+  getUserListSubscriberEndPoint,
+  searchUsersEndpoint
 } from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
@@ -68,3 +69,9 @@ export const blockUserRequest = (payload, header = {}) =>
 
 export const unblockUserRequest = (payload, id, header = {}) =>
   api(baseUrl, header).delete(unblockUserRequestEndPoint + id, payload);
+
+export const searchUsers = (keyword, page, limit, header = {}) => {
+  return api(baseUrl, header.headers).get(
+    `${searchUsersEndpoint}?page=${page}&limit=${limit}&keyword=${keyword}`
+  );
+};

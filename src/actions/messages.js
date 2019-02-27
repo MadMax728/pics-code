@@ -67,11 +67,10 @@ export const getMessages = (
 
 /**
  *  DELETE MESSAGES FOR ME
- *  
+ *
  */
 export const deleteMessages = (userId, otherUserId) => {
   return dispatch => {
-
     const storage = Auth.extractJwtFromStorage();
     const headers = {
       Authorization: storage.accessToken

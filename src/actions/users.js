@@ -42,6 +42,33 @@ export const getUserList = (type = "subscriber") => {
   };
 };
 
+/**
+ *  search user by keyword
+ * { keyword }
+ *  @returns {dispatch} searchUsers.
+ */
+export const searchUsers = (keyword, page = 1, limit = 100) => {
+  return dispatch => {
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+    return usersService.searchUsers(keyword, page, limit, params).then(
+      res => {
+        dispatch(getUserListSucceeded(res.data.data.docs));
+      },
+      error => {
+        dispatch(getUserListSucceeded([]));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
 /* SendRequest -  For Send request to other user
  */
 const sendRequestStarted = () => ({
