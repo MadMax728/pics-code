@@ -7,7 +7,8 @@ import {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard
+  getDashboard,
+  getUserCommunity
 } from "../../../../actions";
 import * as routes from "../../../../lib/constants/routes";
 import { modalType } from "../../../../lib/constants";
@@ -16,6 +17,8 @@ class TopBarOtherInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      subscribeId: "",
+      isSubscribeStatus: null,
       items: {
         userid: this.props.match.userid,
         username: this.props.match.username,
@@ -120,14 +123,13 @@ class TopBarOtherInfo extends Component {
         this.props.userDataByUsername.user &&
         this.props.userDataByUsername.user.data
       ) {
+        const communityData = {
+          username: this.props.userDataByUsername.user.data.username,
+          id: this.props.userDataByUsername.user.data.id
+        };
+        this.props.getUserCommunity(communityData);
         this.handleSetUserInfo();
       }
-    });
-  };
-
-  getUserDataList = () => {
-    this.props.getDashboard("users", "").then(() => {
-      // get user list
     });
   };
 
@@ -149,6 +151,7 @@ class TopBarOtherInfo extends Component {
       subscribeBtnClass = "blue_button";
       subscribeBtnText = Translations.top_bar_info.subscribe;
     }
+
     // }
     const items = {
       userid: this.props.userDataByUsername.user.data._id,
@@ -203,16 +206,15 @@ class TopBarOtherInfo extends Component {
         }
       ]
     };
-    this.setState({ items });
+    this.setState({
+      items
+    });
   };
 
   handeleSubscribe = () => {
     // To Do - Integration changed - according to backend API response
     const errors = {};
     const selectedUserList = this.props.userDataByUsername.user.data;
-    // if (selectedUserList.isPending) {
-    //   // To Do - On Pending request click
-    // } else
     if (selectedUserList.isSubscribe === false) {
       const requestData = { followers: selectedUserList.id };
       this.props.sendRequest(requestData).then(() => {
@@ -225,7 +227,6 @@ class TopBarOtherInfo extends Component {
           this.setState({ error: errors });
         } else if (this.props.usersData.isRequestSendData) {
           this.getUserData();
-          this.getUserDataList();
         }
       });
     } else {
@@ -240,7 +241,6 @@ class TopBarOtherInfo extends Component {
           this.setState({ error: errors });
         } else if (this.props.usersData.isUnsubscribedData) {
           this.getUserData();
-          this.getUserDataList();
         }
       });
     }
@@ -258,14 +258,16 @@ class TopBarOtherInfo extends Component {
 
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  usersData: state.usersData
+  usersData: state.usersData,
+  userCommunity: state.communityData.userCommunity
 });
 
 const mapDispatchToProps = {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard
+  getDashboard,
+  getUserCommunity
 };
 
 TopBarOtherInfo.propTypes = {
@@ -278,7 +280,8 @@ TopBarOtherInfo.propTypes = {
   getUnsubscribe: PropTypes.func,
   usersData: PropTypes.any,
   getDashboard: PropTypes.func,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getUserCommunity: PropTypes.func
 };
 
 export default connect(
