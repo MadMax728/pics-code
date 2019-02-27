@@ -18,7 +18,17 @@ class ExploreRoot extends Component {
     this.getExplore();
   };
 
-  getExplore = () => {
+  getExplore = (params = { iPage : 1, vPage: 1 }) => {
+    this.props.getExplore(params).then(() => {
+      const { items } = this.state;
+      const { exploreData } = this.props;
+      this.setState({
+        items: [...items, ...exploreData.items]
+      });
+    });
+  }
+
+  getMoreExplore = () => {
     const { exploreData } = this.props;
     let params = { iPage : 1, vPage: 1 };
     const vPaginate = exploreData.vPaginate;
@@ -36,13 +46,8 @@ class ExploreRoot extends Component {
       params.iPage =  0;
     }
 
-    this.props.getExplore(params).then(() => {
-      const { items } = this.state;
-      const { exploreData } = this.props;
-      this.setState({
-        items: [...items, ...exploreData.items]
-      });
-    });
+    this.getExplore(params);
+    
   };
 
   render() {
@@ -68,7 +73,7 @@ class ExploreRoot extends Component {
         { items && !isLoading && items.length && (
           <InfiniteScroll
               pageStart={0}
-              loadMore={this.getExplore}
+              loadMore={this.getMoreExplore}
               hasMore={hasMore}
               loader={<div className="loader">Loading ...</div>}>
               {this.renderExploreList()}
