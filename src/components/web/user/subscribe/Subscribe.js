@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { users_list } from "../../../../mock-data/users-list";
 import { Translations } from "../../../../lib/translations";
 import { Button } from "../../../ui-kit";
 
@@ -24,7 +23,7 @@ class Subscribe extends Component {
           {Translations.top_bar_info_modal.modal_title}
         </div>
         <div className="subscribe">
-          {users_list.map(user => {
+          {[].map(user => {
             const profile_route = "";
             return (
               <div className="subscribe_wrapper" key={user.id}>
