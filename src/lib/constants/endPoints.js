@@ -45,7 +45,7 @@ export const editCommentEndPoint = "/comment/";
 
 // Dashboard Service
 export const newsEndPoint = "/newsfeeds/news-feeds";
-export const exploresEndPoint = "/newsfeeds/explore";
+export const exploresEndPoint = "/explore?";
 export const participantsEndPoint = "/participants/";
 export const usersEndPoint = "/users";
 export const picsEndPoint = "/image/get-pics";
@@ -136,7 +136,7 @@ export const updateUserProfileEndPoint = "/users";
 export const generateOTPEndPoint = "/auth/generate-otp";
 export const logoutEndPoint = "/auth/logout";
 export const getSocialNetworkEndPoint = "/auth/social-network-details";
-export const getUserCommunityEndPoint = "/users/community?followerId=";
+export const getUserCommunityEndPoint = "/users/community?followers=";
 
 // Users Services
 export const getUserListSubscriberEndPoint =

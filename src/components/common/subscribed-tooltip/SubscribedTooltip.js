@@ -119,6 +119,7 @@ class SubscribedTooltip extends Component {
       const userRequestData = { id: userId, type: "followers" };
       this.props.getFollowUserList("subscribed", userRequestData).then(() => {
         // Success
+        //console.log("subscribed", this.props.subscribeData);
       });
     }
   };

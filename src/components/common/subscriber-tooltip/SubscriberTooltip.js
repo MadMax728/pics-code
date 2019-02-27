@@ -14,18 +14,21 @@ import { Button } from "../../ui-kit";
 class SubscriberTooltip extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      dataList: []
+    };
   }
 
   render() {
+    const { dataList } = this.state;
     return (
       <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>
         <div className="header-notifications">
-          {this.props.subscribeData.subscriber.length > 0 ? (
-            this.props.subscribeData.subscriber.map(user => {
+          {dataList.length > 0 ? (
+            dataList.map(user => {
               return (
                 <div
                   className="notification-with-subscribe notification-wrapper"
@@ -116,9 +119,18 @@ class SubscriberTooltip extends Component {
   // Tooltip List
   getTooltipUserList = userId => {
     if (userId) {
-      const userRequestData = { id: userId, type: "followings" };
+      const userRequestData = { id: userId, type: "following" };
       this.props.getFollowUserList("subscriber", userRequestData).then(() => {
         // Success
+        if (
+          this.props.subscribeData &&
+          this.props.subscribeData.subscriber &&
+          this.props.subscribeData.subscriber.data
+        ) {
+          this.setState({
+            dataList: this.props.subscribeData.subscriber.data
+          });
+        }
       });
     }
   };

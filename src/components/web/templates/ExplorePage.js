@@ -1,67 +1,96 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getDashboard, getSearch } from "../../../actions";
 import PropTypes from "prop-types";
+import InfiniteScroll from 'react-infinite-scroller'
+import { getExplore } from "../../../actions";
 import { NoDataFoundCenterPage, CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
-import * as enumerations from "../../../lib/constants/enumerations";
-import { search } from "../../../lib/utils/helpers";
 
 class ExploreRoot extends Component {
+
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      exploreList: null
-    };
-  }
-
-  render() {
-    let { exploreList } = this.state;
-    const { isLoadingexplores, searchData } = this.props;
-    exploreList = search(exploreList, "userName", searchData.searchKeyword);
-
-    return (
-      <div className={"middle-section padding-rl-10"}>
-        {exploreList && !isLoadingexplores && this.renderExploreList()}
-        {isLoadingexplores && <CampaignLoading />}
-        {!isLoadingexplores &&
-          (!exploreList || (exploreList && exploreList.length === 0)) && (
-            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
-          )}
-      </div>
-    );
+    this.state = { items: [] };
   }
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.handleRefresh();
-    this.handleSearch();
+    this.getExplore();
   };
 
-  handleSearch = () => {
-    this.props.getDashboard("explores", "").then(() => {
-      const { exploreList } = this.props;
-      this.setState({ exploreList });
+  getExplore = (params = { iPage : 1, vPage: 1 }) => {
+    this.props.getExplore(params).then(() => {
+      const { items } = this.state;
+      const { exploreData } = this.props;
+      this.setState({
+        items: [...items, ...exploreData.items]
+      });
     });
+  }
+
+  getMoreExplore = () => {
+    const { exploreData } = this.props;
+    let params = { iPage : 1, vPage: 1 };
+    const vPaginate = exploreData.vPaginate;
+    const iPaginate = exploreData.iPaginate;
+    
+    if(vPaginate && vPaginate.pages && vPaginate.page && parseInt(vPaginate.pages) > parseInt(vPaginate.page)) {
+      params.vPage =  parseInt(vPaginate.page) + 1;
+    } else {
+      params.vPage =  0;
+    }
+
+    if(iPaginate && iPaginate.pages && iPaginate.page && parseInt(iPaginate.pages) > parseInt(iPaginate.page)) {
+      params.iPage =  parseInt(iPaginate.page) + 1;
+    } else {
+      params.iPage =  0;
+    }
+
+    this.getExplore(params);
+    
   };
 
-  handleRefresh = () => {
-    const { searchData, getSearch } = this.props;
-    if (searchData.searchKeyword) {
-      getSearch("");
-      this.handleSearch();
+  render() {
+    const { exploreData } = this.props;
+    const isLoading = exploreData.isLoading;
+    const vPaginate = exploreData.vPaginate;
+    const iPaginate = exploreData.iPaginate;
+    const items = exploreData.items;
+    let hasMore =  false;
+    
+    if(vPaginate && vPaginate.pages && vPaginate.page && parseInt(vPaginate.pages) > parseInt(vPaginate.page)) {
+      hasMore = true;
     }
-  };
+
+    if(iPaginate && iPaginate.pages && iPaginate.page && parseInt(iPaginate.pages) > parseInt(iPaginate.page)) {
+      hasMore = true;
+    }
+
+    return (
+      <div className={"middle-section padding-rl-10"}>
+        { isLoading && <CampaignLoading /> }
+        { !isLoading && (!items || (items && items.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.getExplore} /> }
+        { items && !isLoading && items.length && (
+          <InfiniteScroll
+              pageStart={0}
+              loadMore={this.getMoreExplore}
+              hasMore={hasMore}
+              loader={<div className="loader">Loading ...</div>}>
+              {this.renderExploreList()}
+          </InfiniteScroll>
+        )}
+      </div>
+    );
+  }
 
   renderExploreList = () => {
-    let { exploreList } = this.state;
-    const { searchData, handleModalShow } = this.props;
-    exploreList = search(exploreList, "userName", searchData.searchKeyword);
-    return exploreList.map(explore => {
+    const { handleModalShow } = this.props;
+    const { items } = this.state;
+
+    return items.map(explore => {
       return (
         <div key={explore.id}>
-          {explore.mediaUrl &&
-            explore.postType === enumerations.contentTypes.mediaPost && (
+          {explore.mediaUrl && (
               <MediaCard
                 item={explore}
                 isDescription
@@ -75,27 +104,17 @@ class ExploreRoot extends Component {
 }
 
 ExploreRoot.propTypes = {
-  // remove when actual API Call
-  getDashboard: PropTypes.func.isRequired,
-  isLoadingexplores: PropTypes.bool,
-  exploreList: PropTypes.any,
-  searchData: PropTypes.any,
-  getSearch: PropTypes.func,
-  handleModalShow: PropTypes.func
-  // error: PropTypes.any
+  getExplore: PropTypes.func.isRequired,
+  handleModalShow: PropTypes.func,
+  exploreData: PropTypes.any,
 };
 
 const mapStateToProps = state => ({
-  exploreList: state.dashboardData.explores,
-  isLoadingexplores: state.dashboardData.isLoadingexplores,
-  error: state.dashboardData.error,
-  searchData: state.searchData
+  exploreData: state.exploreData,
 });
 
 const mapDispatchToProps = {
-  // remove when actual API Call
-  getDashboard,
-  getSearch
+  getExplore,
 };
 
 export default connect(
