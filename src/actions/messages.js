@@ -9,10 +9,11 @@ const getMessagesListStarted = () => ({
   type: types.GET_MESSAGES_STARTED
 });
 
-const getMessagesListSucceeded = (data, lastEvaluatedKeys = null) => ({
+const getMessagesListSucceeded = (data, fromTime, toTime) => ({
   type: types.GET_MESSAGES_SUCCEEDED,
   payload: data,
-  lastEvaluatedKeys
+  fromTime,
+  toTime
 });
 
 const getMessagesListFailed = error => ({
@@ -28,7 +29,8 @@ const getMessagesListFailed = error => ({
 export const getMessages = (
   senderId,
   recipientId,
-  lastEvaluatedKeys = undefined
+  fromTime,
+  toTime
 ) => {
   return dispatch => {
     dispatch(getMessagesListStarted());
@@ -36,22 +38,19 @@ export const getMessages = (
     const headers = {
       Authorization: storage.accessToken
     };
-    const lastEvaluatedKey =
-      lastEvaluatedKeys && lastEvaluatedKeys.id
-        ? lastEvaluatedKeys.id
-        : undefined;
     const params = {
       senderId,
       recipientId,
       strict: true,
-      lastEvaluatedKey
+      fromTime,
+      toTime
     };
 
     return messagesService.getMessages(params, headers).then(
       res => {
         const messages = _.orderBy(res.data.data, o => moment(o.createdAt));
         dispatch(
-          getMessagesListSucceeded(messages, res.data.lastEvaluatedKeys)
+          getMessagesListSucceeded(messages, res.data.fromTime, res.data.toTime)
         );
       },
       error => {
