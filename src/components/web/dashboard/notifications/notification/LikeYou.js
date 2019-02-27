@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { likeYou_list } from "../../../../../mock-data";
 import { Translations } from "../../../../../lib/translations";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -10,7 +9,7 @@ class LikeYou extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      likeYou_list
+      likeYou_list : []
     };
   }
 
@@ -18,7 +17,7 @@ class LikeYou extends Component {
     return (
       <div className="tab-pane fade active in" id="nav-like">
         <div className="header-notifications">
-          {likeYou_list.map(like_you => {
+          {[].map(like_you => {
             return (
               <div
                 className="notification-with-subscribe notification-wrapper"

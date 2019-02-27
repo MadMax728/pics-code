@@ -29,7 +29,7 @@ class CreateCompanyCampaignHeader extends Component {
               text={Translations.modal_header.back}
             />
           )}
-          {stepIndex !== 0 && stepIndex < 3 && (
+          {stepIndex !== 0 && stepIndex < 2 && (
             <a
               href={`${BASE_CAMPAIGN_INFORMATION_ROUTE}company/${form.id}`}
               target="_blank"
@@ -42,7 +42,7 @@ class CreateCompanyCampaignHeader extends Component {
               />
             </a>
           )}
-          {stepIndex <= 3 && (
+          {stepIndex <= 2 && (
             <Button
               className="black_button"
               onClick={this.handleContinue}
@@ -72,7 +72,10 @@ class CreateCompanyCampaignHeader extends Component {
   };
 
   handleContinue = () => {
-    if (this.props.stepIndex < 5) {
+    const { stepIndex, isFor } = this.props;
+    if (stepIndex === 1 && !isFor) {
+      this.props.handleSubmit();
+    } else if (this.props.stepIndex < 4) {
       this.props.handleNext();
     } else {
       console.log("data saved code");
@@ -87,6 +90,8 @@ CreateCompanyCampaignHeader.propTypes = {
   handlePrev: PropTypes.func,
   handleResoreState: PropTypes.func.isRequired,
   form: PropTypes.any,
+  handleSubmit: PropTypes.func,
+  isFor: PropTypes.bool,
   isLoading: PropTypes.bool
 };
 

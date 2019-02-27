@@ -16,27 +16,14 @@ class Textarea extends Component {
     return (
       //eslint-disable-next-line jsx-a11y/no-onchange
       <div>
-        {value ? (
-          <textarea
-            name={name}
-            id={id}
-            className={className}
-            placeholder={placeholder}
-            onChange={this.handleChangeField}
-          >
-            {value}
-          </textarea>
-        ) : (
-          <textarea
-            name={name}
-            id={id}
-            className={className}
-            placeholder={placeholder}
-            onChange={this.handleChangeField}
-          >
-            {""}
-          </textarea>
-        )}
+        <textarea
+          name={name}
+          id={id}
+          className={className}
+          placeholder={placeholder}
+          onChange={this.handleChangeField}
+          defaultValue={value || ""}
+        />
       </div>
     );
   }

@@ -2,7 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as profileSettingsService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import { dataDownload_list } from "../mock-data";
 
 // Activate Business Profile
 const activateBusinessProfileStarted = () => ({
@@ -82,7 +81,7 @@ export const getBills = params => {
       },
       error => {
         dispatch(getBillsFailed(error.response));
-        dispatch(getBillsSucceeded(dataDownload_list));
+        dispatch(getBillsSucceeded([]));
         logger.error({
           description: error.toString(),
           fatal: true

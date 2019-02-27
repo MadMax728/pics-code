@@ -13,7 +13,8 @@ import * as enumerations from "../../../../../lib/constants/enumerations";
 import {
   SelectCategory,
   SelectInquiry,
-  SelectOffer
+  SelectOffer,
+  HashTagUsername
 } from "../../../../../components/common";
 
 class StepOne extends Component {
@@ -29,7 +30,8 @@ class StepOne extends Component {
       handleActualImg,
       handleSelect,
       userInfo,
-      isEdit
+      isEdit,
+      handleSetState
     } = this.props;
     return (
       <div className="col-xs-12 no-padding">
@@ -302,6 +304,28 @@ class StepOne extends Component {
             </div>
             <div className="form-group">
               <Label
+                htmlFor="Description"
+                value={Translations.create_campaigns.desription}
+              />
+              <p className="form-help-text">
+                {Translations.create_ads.description_help_text}
+              </p>
+              <HashTagUsername
+                className="form-control"
+                type="text"
+                name="description"
+                handleSetState={handleSetState}
+                value={form.description ? form.description : ""}
+                isText={false}
+              />
+              {form.description.length === 0 && form.error && (
+                <ErrorSpan
+                  value={Translations.error.create_modal.description}
+                />
+              )}
+            </div>
+            <div className="form-group">
+              <Label
                 htmlFor="Offer"
                 value={Translations.create_campaigns.offer}
               />
@@ -345,7 +369,8 @@ StepOne.propTypes = {
   handleScale: PropTypes.func,
   handleSelect: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
-  isEdit: PropTypes.any
+  isEdit: PropTypes.any,
+  handleSetState: PropTypes.func
 };
 
 export default StepOne;

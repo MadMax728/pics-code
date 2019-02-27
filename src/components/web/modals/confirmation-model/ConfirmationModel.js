@@ -26,7 +26,9 @@ class ConfirmationModal extends Component {
         modalBodyContent={
           <ActionConfirmation
             handleModalHide={handleModalHide}
-            handleConfirmation={handleModalConfirmation || this.handleConfirmation}
+            handleConfirmation={
+              handleModalConfirmation || this.handleConfirmation
+            }
           />
         }
       />
