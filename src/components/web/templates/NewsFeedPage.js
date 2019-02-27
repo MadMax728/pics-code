@@ -9,19 +9,18 @@ import * as enumerations from "../../../lib/constants/enumerations";
 class NewsFeedPage extends Component {
   constructor(props, context) {
     super(props, context);
-    this.state = { isPrivate: false, newsFeedList: this.props };
+    this.state = { isPrivate: false, newsFeedList: null };
   }
 
   render() {
     const { isLoading } = this.props;
     const { newsFeedList } = this.state; /* isPrivate*/
+    console.log(!isLoading && (!newsFeedList || (newsFeedList && newsFeedList.length === 0)));
+    
     return (
       <div className={"middle-section padding-rl-10"}>
-        {newsFeedList &&
-          newsFeedList.length > 0 &&
-          !isLoading &&
-          this.renderNewsFeedList()}
-        {isLoading && <CampaignLoading />}
+        {newsFeedList && this.renderNewsFeedList()}
+        {!newsFeedList && isLoading && <CampaignLoading />}
         {!isLoading &&
           (!newsFeedList || (newsFeedList && newsFeedList.length === 0)) && (
             <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
@@ -43,11 +42,11 @@ class NewsFeedPage extends Component {
             "getNewsFeedOther",
             this.props.userDataByUsername.user.data.id
           );
-          // this.setState({
-          //   isPrivate: this.props.userDataByUsername.user.data.isPrivate
-          //     ? this.props.userDataByUsername.user.data.isPrivate
-          //     : false
-          // });
+          this.setState({
+            isPrivate: this.props.userDataByUsername.user.data.isPrivate
+              ? this.props.userDataByUsername.user.data.isPrivate
+              : false
+          });
         }
       });
     } else {
