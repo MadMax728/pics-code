@@ -14,7 +14,8 @@ const messageReducer = (state = initialState.messagesData, action) => {
       return {
         ...state,
         messages: action.payload,
-        lastEvaluatedKeys: action.lastEvaluatedKeys,
+        fromTime: action.fromTime,
+        toTime: action.toTime,
         isLoading: false
       };
     case types.GET_MESSAGES_FAILED:

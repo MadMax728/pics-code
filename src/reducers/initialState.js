@@ -262,6 +262,8 @@ const initialState = {
   messagesData: {
     messages: [],
     lastEvaluatedKeys: undefined,
+    fromTime: new Date().toISOString(),
+    toTime: new Date().toISOString(),
     isLoading: false,
     error: false
   },

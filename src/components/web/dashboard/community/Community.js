@@ -2,18 +2,30 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { sendRequest, getUnsubscribe } from "../../../../actions";
+import {
+  sendRequest,
+  getUnsubscribe,
+  getUserCommunity
+} from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 import {
   RightSidebarLoading,
   NoDataFoundRightSidebar,
   Button
 } from "../../../ui-kit";
+import { Auth } from "../../../../auth";
 
 class Community extends Component {
-  render() {
-    const { isLoading, userCommunity } = this.props;
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      userCommunityList: []
+    };
+  }
 
+  render() {
+    const { isLoading } = this.props;
+    const { userCommunityList } = this.state;
     return (
       <div>
         <div className="normal_title padding-15">
@@ -22,19 +34,14 @@ class Community extends Component {
 
         {!isLoading && (
           <div className="community">
-            {userCommunity && userCommunity.length > 0 ? (
-              userCommunity.map(user => {
+            {userCommunityList && userCommunityList.length > 0 ? (
+              userCommunityList.map(user => {
                 const profile_route = user.isOwner
                   ? `/news-feed`
                   : `/news-feed/${user.username}`;
                 let classNameText = "filled_button";
                 let btnText =
                   Translations.profile_community_right_sidebar.Subscribed;
-                // if (user.isPending) {
-                //   btnText =
-                //     Translations.profile_community_right_sidebar.Pending;
-                //   classNameText = "filled_button";
-                // } else
                 if (user.isSubscribe) {
                   btnText =
                     Translations.profile_community_right_sidebar.Subscribed;
@@ -64,10 +71,24 @@ class Community extends Component {
                         </Link>
                       </div>
                       <div className="community-user-name">
-                        <Link to={profile_route}>
-                          <div className="normal_title">{user.username}</div>
+                        {/* <Link to={profile_route}> */}
+                        <div
+                          id={user.id}
+                          onClick={this.handleUserListFilter}
+                          onKeyDown={this.keyDown}
+                          role="button"
+                          tabIndex="0"
+                        >
+                          <div
+                            className="normal_title"
+                            title={user.username}
+                            id={user.id}
+                          >
+                            {user.username}
+                          </div>
                           <div className="secondary_title">{user.name}</div>
-                        </Link>
+                        </div>
+                        {/* </Link> */}
                       </div>
                       <div className="community-subscribe">
                         <Button
@@ -93,14 +114,50 @@ class Community extends Component {
   }
 
   componentDidMount = () => {
-    // this.getUserData();
     window.scrollTo(0, 0);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.getCommunity(userInfo.id);
+    }
   };
 
-  getUserData = () => {
-    const { userCommunity } = this.props;
-    if (userCommunity) {
-      this.setState({ userCommunity });
+  componentWillReceiveProps = nextProps => {
+    if (this.props.userCommunity !== nextProps.userCommunity) {
+      this.setState({
+        userCommunityList: nextProps.userCommunity
+      });
+    }
+  };
+
+  getCommunity = userId => {
+    const data = { id: userId };
+    this.props.getUserCommunity(data).then(() => {
+      if (
+        this.props.userCommunity.error &&
+        this.props.userCommunity.error.status === 400
+      ) {
+        // error
+      } else if (this.props.userCommunity) {
+        this.setState({
+          userCommunityList: this.props.userCommunity
+        });
+      }
+    });
+  };
+
+  handleUserListFilter = e => {
+    const { userCommunityList } = this.state;
+    const selectedUserList = userCommunityList.filter(
+      user => user.id === e.target.id
+    );
+    if (selectedUserList) {
+      const profile_route = `/news-feed/${selectedUserList[0].username}`;
+      this.props.history.push(profile_route);
+      this.getCommunity(e.target.id);
     }
   };
 
@@ -110,6 +167,7 @@ class Community extends Component {
     const selectedUserList = userCommunity.find(
       user => user.id === e.target.id
     );
+    console.log(selectedUserList);
     console.log(e.target.id);
     // if (selectedUserList.isPending) {
     //   // To Do - On Pending request click
@@ -124,9 +182,9 @@ class Community extends Component {
         ) {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
-          this.setState({ error: errors });
+          this.setState({ errors });
         } else if (this.props.usersData.isRequestSendData) {
-          this.getUserData();
+          // this.getUserData();
         }
       });
     } else {
@@ -138,9 +196,9 @@ class Community extends Component {
         ) {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
-          this.setState({ error: errors });
+          this.setState({ errors });
         } else if (this.props.usersData.isUnsubscribedData) {
-          this.getUserData();
+          // this.getUserData();
         }
       });
     }
@@ -156,7 +214,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   sendRequest,
-  getUnsubscribe
+  getUnsubscribe,
+  getUserCommunity
 };
 
 Community.propTypes = {
@@ -165,7 +224,9 @@ Community.propTypes = {
   sendRequest: PropTypes.func,
   getUnsubscribe: PropTypes.func,
   usersData: PropTypes.any,
-  error: PropTypes.any
+  error: PropTypes.any,
+  history: PropTypes.any,
+  getUserCommunity: PropTypes.func
 };
 
 export default connect(
