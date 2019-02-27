@@ -15,8 +15,11 @@ class NewsFeedPage extends Component {
   render() {
     const { isLoading } = this.props;
     const { newsFeedList } = this.state; /* isPrivate*/
-    console.log(!isLoading && (!newsFeedList || (newsFeedList && newsFeedList.length === 0)));
-    
+    console.log(
+      !isLoading &&
+        (!newsFeedList || (newsFeedList && newsFeedList.length === 0))
+    );
+
     return (
       <div className={"middle-section padding-rl-10"}>
         {newsFeedList && this.renderNewsFeedList()}

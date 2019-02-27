@@ -72,7 +72,7 @@ const rootReducer = combineReducers({
   lastEvaluatedKey,
   notificationData,
   communityData,
-  exploreData,
+  exploreData
 });
 
 export default rootReducer;

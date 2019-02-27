@@ -6,7 +6,7 @@ import MessageItem from "./MessageItem";
 import { getMessages } from "../../../../actions";
 import * as websocket from "../../../../websocket";
 import PropTypes from "prop-types";
-import * as moment from 'moment';
+import * as moment from "moment";
 
 class MessagesLazyList extends Component {
   constructor(props, context) {
@@ -21,7 +21,9 @@ class MessagesLazyList extends Component {
       messages: [],
       lastEvaluatedKeys: null,
       lastEvaluatedPages: [],
-      fromTime: moment(new Date()).add(-12, 'hours').toISOString(),
+      fromTime: moment(new Date())
+        .add(-12, "hours")
+        .toISOString(),
       toTime: new Date().toISOString()
     };
 
@@ -50,7 +52,9 @@ class MessagesLazyList extends Component {
         user: props.user,
         lastEvaluatedKeys: undefined,
         lastEvaluatedPages: [],
-        fromTime: moment(new Date()).add(-12, 'hours').toISOString(),
+        fromTime: moment(new Date())
+          .add(-12, "hours")
+          .toISOString(),
         toTime: new Date().toISOString()
       };
     }
@@ -65,9 +69,7 @@ class MessagesLazyList extends Component {
     }
     const { lastEvaluatedKeys, lastEvaluatedPages } = this.state;
 
-    if (
-      prevProps.count !== this.props.count
-    ) {
+    if (prevProps.count !== this.props.count) {
       this.getMessages();
     }
   }
@@ -79,7 +81,7 @@ class MessagesLazyList extends Component {
   };
 
   componentDidMount() {
-    console.log('Default ', this.props);
+    console.log("Default ", this.props);
     this.props.setMessageListRef(this);
     this.getMessages(true);
   }
@@ -95,15 +97,20 @@ class MessagesLazyList extends Component {
       const { messagesData } = this.props;
       if (messagesData && !messagesData.isLoading && messagesData.messages) {
         const newMessages = [...messagesData.messages, ...messages];
-        this.setState({
-          messages: newMessages,
-          fromTime: moment(messagesData.fromTime).add(-12, 'hours').toISOString(),
-          toTime: messagesData.fromTime
-        }, () => {
-          if (callback) {
-            this.scrollBottomOnNewMessage();
+        this.setState(
+          {
+            messages: newMessages,
+            fromTime: moment(messagesData.fromTime)
+              .add(-12, "hours")
+              .toISOString(),
+            toTime: messagesData.fromTime
+          },
+          () => {
+            if (callback) {
+              this.scrollBottomOnNewMessage();
+            }
           }
-        });
+        );
       }
       if (
         messagesData &&
@@ -129,7 +136,7 @@ class MessagesLazyList extends Component {
                 )}
                 {key > 0 &&
                   DateFormat(messages[key - 1].createdAt) !==
-                  DateFormat(item.createdAt) && (
+                    DateFormat(item.createdAt) && (
                     <div className="date">{DateFormat(item.createdAt)}</div>
                   )}
                 <div>

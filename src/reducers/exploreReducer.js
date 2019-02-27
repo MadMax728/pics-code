@@ -5,26 +5,26 @@ const exploreReducer = (state = initialState.exploreData, action) => {
   switch (action.type) {
     // Get EXPLORE
     case types.GET_EXPLORES_STARTED:
-        return {
-            ...state,
-            isLoading: true,
-            error: null
-        };
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
     case types.GET_EXPLORES_SUCCEEDED:
-        return {
-            ...state,
-            items: action.payload.items,
-            iPaginate: action.payload.iPaginate,
-            vPaginate: action.payload.vPaginate,
-            isLoading: false
-        };
+      return {
+        ...state,
+        items: action.payload.items,
+        iPaginate: action.payload.iPaginate,
+        vPaginate: action.payload.vPaginate,
+        isLoading: false
+      };
     case types.GET_EXPLORE_FAILED:
-        return {
-            ...state,
-            items: [],
-            isLoading: false,
-            error: action.payload
-        };
+      return {
+        ...state,
+        items: [],
+        isLoading: false,
+        error: action.payload
+      };
     default:
       return state;
   }

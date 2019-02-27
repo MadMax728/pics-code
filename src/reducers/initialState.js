@@ -276,7 +276,7 @@ const initialState = {
     vPaginate: {},
     isLoading: false,
     error: null
-  },
+  }
 };
 
 export default initialState;

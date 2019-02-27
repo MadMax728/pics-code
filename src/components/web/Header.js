@@ -109,7 +109,7 @@ class Header extends Component {
       this.props.searchUsers(searchText, page, limit).then(() => {
         const { usersData } = this.props;
         if (!usersData.isLoading) {
-          console.log('Search results ', usersData.users);
+          console.log("Search results ", usersData.users);
           //Set state or use same in list
         }
       });
@@ -267,17 +267,12 @@ class Header extends Component {
                   </div>
                   <div>
                     <ul style={{ listStyleType: "none" }}>
-                      {
-                        usersData.users.map((user, key) => (
-                          <Link to={`/news-feed/${user.username}`} key={user._id}>
-                            <li>
-                              {user.username}
-                            </li>
-                          </Link>
-                        ))
-                      }
+                      {usersData.users.map((user, key) => (
+                        <Link to={`/news-feed/${user.username}`} key={user._id}>
+                          <li>{user.username}</li>
+                        </Link>
+                      ))}
                     </ul>
-
                   </div>
                 </form>
                 <ul className="nav navbar-nav pull-right">
@@ -307,8 +302,8 @@ class Header extends Component {
                         {messageCountView}
                       </span>
                     ) : (
-                        ""
-                      )}
+                      ""
+                    )}
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
 
@@ -359,7 +354,7 @@ Header.propTypes = {
   searchUsers: PropTypes.func.isRequired,
   history: PropTypes.any,
   getSearch: PropTypes.func,
-  usersData: PropTypes.any,
+  usersData: PropTypes.any
 };
 
 export default connect(

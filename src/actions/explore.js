@@ -24,7 +24,9 @@ export const getExplore = params => {
     dispatch(getExploreStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    const queryString = Object.keys(params).map(key => key + '=' + params[key]).join('&');
+    const queryString = Object.keys(params)
+      .map(key => key + "=" + params[key])
+      .join("&");
     return dashboardService.explores(queryString, header).then(
       res => {
         if (res.data && res.data.data)

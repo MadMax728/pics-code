@@ -26,12 +26,7 @@ const getMessagesListFailed = error => ({
  *  GET MESSAGES
  *  @returns {dispatch} getMessages.
  */
-export const getMessages = (
-  senderId,
-  recipientId,
-  fromTime,
-  toTime
-) => {
+export const getMessages = (senderId, recipientId, fromTime, toTime) => {
   return dispatch => {
     dispatch(getMessagesListStarted());
     const storage = Auth.extractJwtFromStorage();

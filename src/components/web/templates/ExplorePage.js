@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import InfiniteScroll from 'react-infinite-scroller'
+import InfiniteScroll from "react-infinite-scroller";
 import { getExplore } from "../../../actions";
 import { NoDataFoundCenterPage, CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 
 class ExploreRoot extends Component {
-
   constructor(props, context) {
     super(props, context);
     this.state = { items: [] };
@@ -18,7 +17,7 @@ class ExploreRoot extends Component {
     this.getExplore();
   };
 
-  getExplore = (params = { iPage : 1, vPage: 1 }) => {
+  getExplore = (params = { iPage: 1, vPage: 1 }) => {
     this.props.getExplore(params).then(() => {
       const { items } = this.state;
       const { exploreData } = this.props;
@@ -26,28 +25,37 @@ class ExploreRoot extends Component {
         items: [...items, ...exploreData.items]
       });
     });
-  }
+  };
 
   getMoreExplore = () => {
     const { exploreData } = this.props;
-    let params = { iPage : 1, vPage: 1 };
+    let params = { iPage: 1, vPage: 1 };
     const vPaginate = exploreData.vPaginate;
     const iPaginate = exploreData.iPaginate;
-    
-    if(vPaginate && vPaginate.pages && vPaginate.page && parseInt(vPaginate.pages) > parseInt(vPaginate.page)) {
-      params.vPage =  parseInt(vPaginate.page) + 1;
+
+    if (
+      vPaginate &&
+      vPaginate.pages &&
+      vPaginate.page &&
+      parseInt(vPaginate.pages) > parseInt(vPaginate.page)
+    ) {
+      params.vPage = parseInt(vPaginate.page) + 1;
     } else {
-      params.vPage =  0;
+      params.vPage = 0;
     }
 
-    if(iPaginate && iPaginate.pages && iPaginate.page && parseInt(iPaginate.pages) > parseInt(iPaginate.page)) {
-      params.iPage =  parseInt(iPaginate.page) + 1;
+    if (
+      iPaginate &&
+      iPaginate.pages &&
+      iPaginate.page &&
+      parseInt(iPaginate.pages) > parseInt(iPaginate.page)
+    ) {
+      params.iPage = parseInt(iPaginate.page) + 1;
     } else {
-      params.iPage =  0;
+      params.iPage = 0;
     }
 
     this.getExplore(params);
-    
   };
 
   render() {
@@ -56,27 +64,40 @@ class ExploreRoot extends Component {
     const vPaginate = exploreData.vPaginate;
     const iPaginate = exploreData.iPaginate;
     const items = exploreData.items;
-    let hasMore =  false;
-    
-    if(vPaginate && vPaginate.pages && vPaginate.page && parseInt(vPaginate.pages) > parseInt(vPaginate.page)) {
+    let hasMore = false;
+
+    if (
+      vPaginate &&
+      vPaginate.pages &&
+      vPaginate.page &&
+      parseInt(vPaginate.pages) > parseInt(vPaginate.page)
+    ) {
       hasMore = true;
     }
 
-    if(iPaginate && iPaginate.pages && iPaginate.page && parseInt(iPaginate.pages) > parseInt(iPaginate.page)) {
+    if (
+      iPaginate &&
+      iPaginate.pages &&
+      iPaginate.page &&
+      parseInt(iPaginate.pages) > parseInt(iPaginate.page)
+    ) {
       hasMore = true;
     }
 
     return (
       <div className={"middle-section padding-rl-10"}>
-        { isLoading && <CampaignLoading /> }
-        { !isLoading && (!items || (items && items.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.getExplore} /> }
-        { items && !isLoading && items.length && (
+        {isLoading && <CampaignLoading />}
+        {!isLoading && (!items || (items && items.length === 0)) && (
+          <NoDataFoundCenterPage handleRefresh={this.getExplore} />
+        )}
+        {items && !isLoading && items.length && (
           <InfiniteScroll
-              pageStart={0}
-              loadMore={this.getMoreExplore}
-              hasMore={hasMore}
-              loader={<div className="loader">Loading ...</div>}>
-              {this.renderExploreList()}
+            pageStart={0}
+            loadMore={this.getMoreExplore}
+            hasMore={hasMore}
+            loader={<div className="loader">Loading ...</div>}
+          >
+            {this.renderExploreList()}
           </InfiniteScroll>
         )}
       </div>
@@ -91,12 +112,12 @@ class ExploreRoot extends Component {
       return (
         <div key={explore.id}>
           {explore.mediaUrl && (
-              <MediaCard
-                item={explore}
-                isDescription
-                handleModalShow={handleModalShow}
-              />
-            )}
+            <MediaCard
+              item={explore}
+              isDescription
+              handleModalShow={handleModalShow}
+            />
+          )}
         </div>
       );
     });
@@ -106,15 +127,15 @@ class ExploreRoot extends Component {
 ExploreRoot.propTypes = {
   getExplore: PropTypes.func.isRequired,
   handleModalShow: PropTypes.func,
-  exploreData: PropTypes.any,
+  exploreData: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  exploreData: state.exploreData,
+  exploreData: state.exploreData
 });
 
 const mapDispatchToProps = {
-  getExplore,
+  getExplore
 };
 
 export default connect(
