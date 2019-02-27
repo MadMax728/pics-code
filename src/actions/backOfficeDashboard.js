@@ -2,7 +2,6 @@ import * as types from "../lib/constants/actionTypes";
 import * as backOfficeDashboardService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
-import { back_office_dashboard } from "../mock-data";
 
 const getBackOfficeDashboardStarted = () => ({
   type: types.GET_BACK_OFFICE_DASHBOARD_STARTED
@@ -33,7 +32,7 @@ export const getBackOfficeDashboard = () => {
       },
       error => {
         dispatch(getBackOfficeDashboardFailed(error.response));
-        dispatch(getBackOfficeDashboardSucceeded(back_office_dashboard));
+        dispatch(getBackOfficeDashboardSucceeded({}));
         logger.error({
           description: error.toString(),
           fatal: true

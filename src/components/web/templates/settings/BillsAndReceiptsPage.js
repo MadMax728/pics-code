@@ -6,13 +6,12 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getBills } from "../../../../actions";
 import * as images from "../../../../lib/constants/images";
-import { dataDownload_list } from "../../../../mock-data";
 
 class BillsAndReceiptsPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataDownload: dataDownload_list,
+      dataDownload: [],
       userId: ""
     };
   }
@@ -26,7 +25,7 @@ class BillsAndReceiptsPage extends Component {
     if (userInfo) {
       this.setState({ userId: userInfo.id });
       this.props.getBills().then(() => {
-        this.setState({ dataDownload: dataDownload_list });
+        this.setState({ dataDownload: [] });
       });
     }
   };
