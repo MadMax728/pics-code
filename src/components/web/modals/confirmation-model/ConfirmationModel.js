@@ -14,7 +14,6 @@ class ConfirmationModal extends Component {
 
   render() {
     const { handleModalHide, handleModalConfirmation } = this.props;
-    console.log(this.props);
     return (
       <CustomBootstrapModal
         modalClassName={"modal fade action-confirmation-modal"}

@@ -32,20 +32,22 @@ class SubscriberTooltip extends Component {
               return (
                 <div
                   className="notification-with-subscribe notification-wrapper"
-                  key={user.id}
+                  key={user._id}
                 >
                   <div className="row">
                     <div className="col-sm-3">
                       <img
-                        src={user.profileUrl}
+                        src={user.followers.profileUrl}
                         alt="campaign"
                         className="img-circle img-responsive"
                       />
                     </div>
                     <div className="col-sm-4">
                       <div className="user-info">
-                        <div className="username">{user.username}</div>
-                        <div className="subtitle">{user.name}</div>
+                        <div className="username">
+                          {user.followers.username}
+                        </div>
+                        <div className="subtitle">{user.followers.name}</div>
                       </div>
                     </div>
                     <div className="col-md-5">

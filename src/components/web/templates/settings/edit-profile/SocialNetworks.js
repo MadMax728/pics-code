@@ -9,7 +9,7 @@ import {
 import SocialProfileUrl from "./SocialProfileUrl";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
-
+import { Translations } from "../../../../../lib/translations";
 // const socialNetworksAll = [
 //   {
 //     socialNetworkType: "facebook",
@@ -43,12 +43,13 @@ class SocialNetworks extends Component {
     super(props);
     this.state = {
       isConnectInProgress: false,
-      socialNetworks: []
+      socialNetworks: [],
+      authUrl: null
     };
   }
 
   render() {
-    const { isOwnerProfile, userData } = this.props;
+    const { isOwnerProfile, userData, handleChangeField } = this.props;
     return (
       <div>
         {userData &&
@@ -57,7 +58,9 @@ class SocialNetworks extends Component {
           userData.socialNetworks &&
           userData.socialNetworks.length > 0 && (
             <div className="social-link-wrapr col-xs-12 no-padding">
-              <div className="form-subtitle">Social Network URL</div>
+              <div className="form-subtitle">
+                {Translations.social.social_network_url}
+              </div>
               <div className="personal-interests-wrapper col-xs-12 no-padding margin-b-25">
                 {userData.socialNetworks.map(socialNetwork => {
                   return (
@@ -68,9 +71,11 @@ class SocialNetworks extends Component {
                       icon={socialNetwork.icon}
                       publicUrl={socialNetwork.publicUrl}
                       isConnectInProgress={this.state.isConnectInProgress}
+                      authUrl={this.state.authUrl}
                       handleSocialConnect={this.handleSocialConnect}
                       handleSocialClear={this.handleSocialClear}
                       isOwnerProfile={isOwnerProfile}
+                      handleChangeField={handleChangeField}
                     />
                   );
                 })}
@@ -165,7 +170,7 @@ class SocialNetworks extends Component {
       default:
         authUrl = "";
     }
-    this.setState({ isConnectInProgress: true }, () => {
+    this.setState({ isConnectInProgress: true, authUrl }, () => {
       // open popup based on auth url
       if (authUrl) this.openPopup(authUrl, provider, 500, 500);
     });
@@ -175,7 +180,7 @@ class SocialNetworks extends Component {
    * on socail popup closed
    */
   socialPopoutClosed = () => {
-    this.setState({ isConnectInProgress: false });
+    this.setState({ isConnectInProgress: false, authUrl: null });
   };
 
   /**
@@ -231,7 +236,8 @@ SocialNetworks.propTypes = {
   getSocialNetwork: PropTypes.func.isRequired,
   disconnectNetwork: PropTypes.func,
   userData: PropTypes.object,
-  isOwnerProfile: PropTypes.bool
+  isOwnerProfile: PropTypes.bool,
+  handleChangeField: PropTypes.func
 };
 
 export default connect(

@@ -6,7 +6,8 @@ import {
   AdsModal,
   CampaignModal,
   ConfirmationModal,
-  PicsModal
+  PicsModal,
+  SubscribeModal
 } from "../../web/modals";
 import PropTypes from "prop-types";
 import { modalType, userType } from "../../../lib/constants/enumerations";
@@ -119,6 +120,18 @@ class CustomModal extends Component {
     );
   };
 
+  handleModalSubscribe = () => {
+    return (
+      <SubscribeModal
+        modalShow={this.props.modalShow}
+        handleModalHide={this.props.handleModalHide}
+        handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
+        data={this.props.data}
+        history={this.props.history}
+      />
+    );
+  };
+
   handleModalUserpics = () => {
     return (
       <PicsModal
@@ -144,6 +157,8 @@ class CustomModal extends Component {
           this.handleModalActionConfirmation()}
         {this.props.modalType === modalType.userpics &&
           this.handleModalUserpics()}
+        {this.props.modalType === modalType.subscribe &&
+          this.handleModalSubscribe()}
       </div>
     );
   };
