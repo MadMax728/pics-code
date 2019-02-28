@@ -136,12 +136,7 @@ class Community extends Component {
   getCommunity = userId => {
     const data = { id: userId };
     this.props.getUserCommunity(data).then(() => {
-      if (
-        this.props.userCommunity.error &&
-        this.props.userCommunity.error.status === 400
-      ) {
-        // error
-      } else if (this.props.userCommunity) {
+      if (this.props.userCommunity) {
         this.setState({
           userCommunityList: this.props.userCommunity
         });
