@@ -1,47 +1,80 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Subscribe } from "../../user";
+import PropTypes from "prop-types";
+import { deactivateAccount } from "../../../../actions/privacy";
+import { connect } from "react-redux";
+import * as routes from "../../../../lib/constants/routes";
 
 class SubscribeModal extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};
-    console.log(this.props);
   }
 
   render() {
-    const { handleModalInfoHide, handleModalHide, modalInfoMsg } = this.props;
+    const { handleModalHide, handleModalConfirmation } = this.props;
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade payment-confirmation-modal"}
+        modalClassName={"modal fade action-confirmation-modal"}
         header={false}
         footer={false}
-        modalShow={this.props.modalInfoShow}
+        modalShow={this.props.modalShow}
         closeBtn={false}
-        handleModalHide={this.props.handleModalInfoHide}
+        handleModalHide={this.props.handleModalHide}
         modalBodyContent={
           <Subscribe
-            handleModalInfoHide={handleModalInfoHide}
             handleModalHide={handleModalHide}
-            modalInfoMsg={modalInfoMsg}
+            isFor={this.props.data.type}
+            userId={this.props.data.userid}
           />
         }
       />
     );
   }
+
+  handleConfirmation = value => {
+    const paramData = { isActive: value };
+    console.log(paramData);
+    if (this.props.data.id === "deactivateAccount") {
+      this.props.deactivateAccount(paramData).then(() => {
+        if (
+          this.props.profilePrivacyData.error &&
+          this.props.profilePrivacyData.error.status === 400
+        ) {
+          console.log("error");
+          // To Do - Call back to Modal call - with error status
+        } else {
+          this.props.history.push(routes.LOGOUT_ROUTE);
+          // To Do - Call back to Modal call - with success status
+        }
+      });
+    } else {
+      console.log("delete History");
+    }
+  };
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  profilePrivacyData: state.profilePrivacyData
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  deactivateAccount
+};
 
 SubscribeModal.propTypes = {
+  deactivateAccount: PropTypes.func,
   handleModalHide: PropTypes.func,
+  handleModalConfirmation: PropTypes.func,
   handleModalInfoHide: PropTypes.func,
   modalInfoShow: PropTypes.bool,
-  modalInfoMsg: PropTypes.string
+  modalInfoMsg: PropTypes.string,
+  profilePrivacyData: PropTypes.any,
+  history: PropTypes.any,
+  handleModalShow: PropTypes.any,
+  modalShow: PropTypes.any,
+  data: PropTypes.any
 };
 
 export default connect(

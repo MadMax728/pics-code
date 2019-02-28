@@ -552,7 +552,11 @@ class EditProfile extends Component {
                 />
               </div>
             </div>
-            <SocialNetworks userId={"123"} isOwnerProfile />
+            <SocialNetworks
+              userId={"123"}
+              isOwnerProfile
+              handleChangeField={this.handleChangeField}
+            />
             <div className="form-group margin-bottom-30">
               <Button
                 className="black_button"

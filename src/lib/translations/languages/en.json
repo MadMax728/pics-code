@@ -985,6 +985,7 @@
   },
 
   "social": {
+    "social_network_url": "Social Network URL",
     "facebook": "Facebook",
     "twitter": "Twitter",
     "whatsapp": "Whatsapp",

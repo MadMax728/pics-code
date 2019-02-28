@@ -1,78 +1,175 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { Translations } from "../../../../lib/translations";
 import { Button } from "../../../ui-kit";
+import {
+  getFollowUserList,
+  sendRequest,
+  getUnsubscribe,
+  getDashboard,
+  getUser
+} from "../../../../actions";
 
 class Subscribe extends Component {
-  handleModalHide = () => {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataList: []
+    };
+  }
+
+  handleModalHides = () => {
     this.props.handleModalHide();
-    this.props.handleModalInfoHide();
+    // this.props.handleConfirmation(true);
   };
 
-  handleSubscribeAction = () => {
+  handleModalAction = () => {
     this.props.handleModalHide();
-    this.props.handleModalInfoHide();
+    this.props.handleConfirmation(false);
   };
 
   render() {
+    const { dataList } = this.state;
+    console.log(this.props);
     return (
-      <div className={"col-xs-12 no-padding"}>
-        <div className="col-sm-12 margin-bottom-10">
-          {Translations.top_bar_info_modal.modal_title}
-        </div>
-        <div className="subscribe">
-          {[].map(user => {
-            const profile_route = "";
-            return (
-              <div className="subscribe_wrapper" key={user.id}>
-                <div className="subscribe-user-image">
-                  <Link to={profile_route}>
-                    <img
-                      src={user.profileUrl}
-                      alt="campaign"
-                      className="img-circle img-responsive"
-                    />
-                  </Link>
-                </div>
-                <div className="subscribe-user-name">
-                  <Link to={profile_route}>
-                    <div className="normal_title">{user.username}</div>
-                    <div className="secondary_title">{"user.name"}</div>
-                  </Link>
-                </div>
-                <div className="subscribe-user-name">
-                  <Button
-                    className="filled_button"
-                    id={user.id}
-                    onClick={this.handleSubscribeAction}
-                    text={Translations.top_bar_info_modal.subscribe_btn}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="col-sm-12">
+      <div id="" className="subscriber-tooltip">
+        <div className="col-md-12">
           <Button
             className="filled_button col-sm-6"
-            onClick={this.handleModalHide}
-            text={Translations.top_bar_info_modal.cancel}
+            onClick={this.handleModalHides}
+            text={Translations.modal_header.cancle}
           />
+        </div>
+        <h4 className="normal_title">
+          {Translations.top_bar_info_modal.modal_title}
+        </h4>
+        <div className="header-notifications">
+          {dataList.length > 0 ? (
+            dataList.map(user => {
+              return (
+                <div
+                  className="notification-with-subscribe notification-wrapper"
+                  key={user._id}
+                >
+                  <div className="row">
+                    <div className="col-sm-3">
+                      <img
+                        src={user.followers.profileUrl}
+                        alt="campaign"
+                        className="img-circle img-responsive"
+                      />
+                    </div>
+                    <div className="col-sm-4">
+                      <div className="user-info">
+                        <div className="username">
+                          {user.followers.username}
+                        </div>
+                        <div className="subtitle">{user.followers.name}</div>
+                      </div>
+                    </div>
+                    <div className="col-md-5">
+                      <div className="subscribe-btn">
+                        {user.isSubscribe ? (
+                          <div className="community-subscribe">
+                            <Button
+                              className="filled_button"
+                              id={user.id}
+                              onClick={this.handleSubscribed}
+                              text={
+                                Translations.profile_community_right_sidebar
+                                  .Subscribed
+                              }
+                            />
+                          </div>
+                        ) : (
+                          <div className="community-subscribe">
+                            <Button
+                              className="blue_button"
+                              id={user.id}
+                              onClick={this.handleSubscribed}
+                              text={
+                                Translations.profile_community_right_sidebar
+                                  .Subscribe
+                              }
+                            />
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="notification-with-subscribe notification-wrapper">
+              <div className="user-info">
+                <div className="subtitle">
+                  {Translations.top_bar_info_modal.no_data}
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );
   }
+
+  componentDidMount = () => {
+    this.getTooltipUserList(this.props.userId);
+  };
+
+  // Tooltip List
+  getTooltipUserList = userId => {
+    if (userId) {
+      const userRequestData = { id: userId, type: "followers" };
+      this.props.getFollowUserList("subscriber", userRequestData).then(() => {
+        // Success
+        if (
+          this.props.subscribeData &&
+          this.props.subscribeData.subscriber &&
+          this.props.subscribeData.subscriber.data
+        ) {
+          this.setState({
+            dataList: this.props.subscribeData.subscriber.data
+          });
+        }
+      });
+    }
+  };
 }
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  subscribeData: state.subscribeData,
+  usersData: state.usersData,
+  usersList: state.dashboardData.users,
+  userDataByUsername: state.userDataByUsername
+});
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  getFollowUserList,
+  sendRequest,
+  getUnsubscribe,
+  getDashboard,
+  getUser
+};
 
 Subscribe.propTypes = {
+  type: PropTypes.any,
+  userId: PropTypes.any,
+  username: PropTypes.any,
+  getFollowUserList: PropTypes.func,
+  sendRequest: PropTypes.func,
+  getUnsubscribe: PropTypes.func,
+  subscribeData: PropTypes.any,
+  usersData: PropTypes.any,
+  getUserData: PropTypes.any,
+  getDashboard: PropTypes.func,
+  usersList: PropTypes.any,
+  userDataByUsername: PropTypes.any,
+  getUser: PropTypes.func,
   handleModalHide: PropTypes.func,
-  handleModalInfoHide: PropTypes.func
+  handleConfirmation: PropTypes.func
 };
 
 export default connect(

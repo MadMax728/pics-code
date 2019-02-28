@@ -99,6 +99,8 @@ class Home extends Component {
   };
 
   handleEditImage = image => {
+    console.log("jdsjk");
+
     this.setState({ image });
   };
 
