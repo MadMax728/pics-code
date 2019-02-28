@@ -240,7 +240,8 @@ const initialState = {
   searchData: {
     searchKeyword: null,
     isLoading: false,
-    error: false
+    error: false,
+    users: [],
   },
   communityData: {
     userCommunity: null,
