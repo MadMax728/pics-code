@@ -42,7 +42,7 @@ const initialState = {
   campaignData: {
     campaigns: null,
     campaign: null,
-    favouriteCampaign: null,
+    favouriteCampaign: [],
     isLoading: false,
     error: false,
     isAddParticipant: null,
