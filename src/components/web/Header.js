@@ -8,7 +8,7 @@ import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
-import { getSearch, searchUsers } from "../../actions";
+import { getSearchForHeader } from "../../actions";
 import { connect } from "react-redux";
 import * as websocket from "../../websocket";
 import { Auth } from "../../auth";
@@ -95,7 +95,7 @@ class Header extends Component {
     const path = "?search=" + this.state.searchText;
     this.props.history.push(path);
     this.setState({ searchText: "" });
-    this.props.getSearch(this.state.searchText);
+    this.props.getSearchForHeader(this.state.searchText);
   };
 
   onInputChange = e => {
@@ -106,16 +106,16 @@ class Header extends Component {
     let page = 1;
     let limit = 100;
     if (searchText) {
-      this.props.searchUsers(searchText, page, limit).then(() => {
-        const { usersData } = this.props;
-        if (!usersData.isLoading) {
-          console.log("Search results ", usersData.users);
+      this.props.getSearchForHeader(searchText, page, limit).then(() => {
+        const { searchData } = this.props;
+        if (!searchData.isLoading) {
+          console.log("Search results ", searchData.users);
           //Set state or use same in list
         }
       });
     } else {
       console.log("clean cheat");
-      this.props.usersData.users = [];
+      this.props.searchData.users = [];
     }
   };
 
@@ -129,7 +129,7 @@ class Header extends Component {
 
   render() {
     const { messageCount, searchText } = this.state;
-    const { usersData } = this.props;
+    const { searchData } = this.props;
     let messageCountView = messageCount;
     if (messageCount < 100) {
       messageCountView = messageCount;
@@ -267,7 +267,7 @@ class Header extends Component {
                   </div>
                   <div>
                     <ul style={{ listStyleType: "none" }}>
-                      {usersData.users.map((user, key) => (
+                      {searchData.users.map((user, key) => (
                         <Link to={`/news-feed/${user.username}`} key={user._id}>
                           <li>{user.username}</li>
                         </Link>
@@ -302,8 +302,8 @@ class Header extends Component {
                         {messageCountView}
                       </span>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
 
@@ -345,16 +345,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSearch,
-  searchUsers
+  getSearchForHeader  
 };
 
 Header.propTypes = {
   handleModalShow: PropTypes.func,
-  searchUsers: PropTypes.func.isRequired,
   history: PropTypes.any,
-  getSearch: PropTypes.func,
-  usersData: PropTypes.any
+  getSearchForHeader: PropTypes.func,
+  usersData: PropTypes.any,
+  searchData: PropTypes.any
 };
 
 export default connect(
