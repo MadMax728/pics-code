@@ -71,8 +71,9 @@ class EditProfileCrop extends Component {
   };
 
   render() {
-    const { image, isCircle } = this.props;
+    const { isCircle } = this.props;
     const {
+      image,
       width,
       height,
       scale,
@@ -183,16 +184,18 @@ class EditProfileCrop extends Component {
               crossOrigin={`anonymous`}
               className="max-profile-pic range-slider-pic"
             />
-            {/* <input
-            type="file"
-            className="img-upload"
-            name="newImage"
-            id="file-2"
-            data-multiple-caption="{count} files selected"
-            multiple=""
-            onChange={handleNewImage}
-          />
-          <img src={images.plus_button} alt={"plus_button"} /> */}
+            <div className="add-wrapper upload-wrapr heightAuto">
+              <input
+                type="file"
+                className="img-upload"
+                name="newImage"
+                id="file-2"
+                data-multiple-caption="{count} files selected"
+                multiple=""
+                onChange={this.handleNewImage}
+              />
+              <img src={images.plus_button} alt="plus button" />
+            </div>
           </div>
         )}
       </div>
