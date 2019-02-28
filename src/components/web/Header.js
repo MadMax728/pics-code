@@ -8,7 +8,7 @@ import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
-import { getSearch, searchUsers } from "../../actions";
+import { getSearchForHeader } from "../../actions";
 import { connect } from "react-redux";
 import * as websocket from "../../websocket";
 import { Auth } from "../../auth";
@@ -95,7 +95,7 @@ class Header extends Component {
     const path = "?search=" + this.state.searchText;
     this.props.history.push(path);
     this.setState({ searchText: "" });
-    this.props.getSearch(this.state.searchText);
+    this.props.getSearchForHeader(this.state.searchText);
   };
 
   onInputChange = e => {
@@ -106,7 +106,7 @@ class Header extends Component {
     let page = 1;
     let limit = 100;
     if (searchText) {
-      this.props.getSearch(searchText, page, limit).then(() => {
+      this.props.getSearchForHeader(searchText, page, limit).then(() => {
         const { searchData } = this.props;
         if (!searchData.isLoading) {
           console.log("Search results ", searchData.users);
@@ -345,15 +345,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSearch,
-  searchUsers
+  getSearchForHeader  
 };
 
 Header.propTypes = {
   handleModalShow: PropTypes.func,
-  searchUsers: PropTypes.func.isRequired,
   history: PropTypes.any,
-  getSearch: PropTypes.func,
+  getSearchForHeader: PropTypes.func,
   usersData: PropTypes.any,
   searchData: PropTypes.any
 };

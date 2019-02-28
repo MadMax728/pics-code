@@ -15,6 +15,11 @@ const getSearchStarted = () => ({
 
 export const getSearch = (keyword, page = 1, limit = 100) => {
   return dispatch => {
+  };
+};
+
+export const getSearchForHeader = (keyword, page = 1, limit = 100) => {
+  return dispatch => {
     dispatch(getSearchStarted());
     const storage = Auth.extractJwtFromStorage();
     const headers = {
