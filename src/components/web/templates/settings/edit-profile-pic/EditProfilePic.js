@@ -28,18 +28,6 @@ class EditProfilePic extends Component {
             handleActualImg={handleActualImg}
             handleScale={handleScale}
           />
-          {/* <div className="add-wrapper upload-wrapr heightAuto">
-            <input
-              type="file"
-              className="img-upload"
-              name="newImage"
-              id="file-2"
-              data-multiple-caption="{count} files selected"
-              multiple=""
-              onChange={handleUpload}
-            />
-            <img src={images.plus_button} alt="plus button" />
-          </div> */}
         </div>
       </div>
     );
@@ -50,7 +38,6 @@ class EditProfilePic extends Component {
   };
 
   handleSave = () => {
-    console.log("editSave");
     this.imageCrop.current.handleSave();
   };
 }

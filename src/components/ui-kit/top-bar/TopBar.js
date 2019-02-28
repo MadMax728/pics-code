@@ -20,6 +20,7 @@ import {
 } from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
 import { ThreeDots, UserProfileImage, Button } from "../../ui-kit";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class TopBar extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class TopBar extends Component {
 
   render() {
     const { items, handeleShare } = this.props;
+    console.log(this.props.items.userid);
     return (
       <div>
         <div className="user_info">
@@ -124,6 +126,13 @@ class TopBar extends Component {
     }
   };
 
+  handleSubscribeModal = e => {
+    this.props.handleModalShow(modalType.subscribe, {
+      type: e.target.id,
+      userid: this.props.items.userid
+    });
+  };
+
   renderReportTips = (type, userid, username) => {
     if (type !== "Posts") {
       if (type === "Subscribers") {
@@ -141,25 +150,16 @@ class TopBar extends Component {
   renderSlots = slot => {
     const userIsLoading = this.props.userDataByUsername.isLoading;
     return (
-      <div className={slot.className} key={`slot-${slot.name}`}>
-        <SubscribeList
-          id={`slot-${slot.name}`}
-          role="button"
-          dataTip=""
-          dataClass="tooltip-wrapr"
-          /* eslint-disable */ getContent={() =>
-            this.renderReportTips(slot.name, slot.userid, slot.username)
-          }
-          effect="solid"
-          delayHide={10}
-          delayShow={250}
-          delayUpdate={250}
-          place={"left"}
-          border={true}
-          type={"light"}
-          value={slot.val}
-          valueName={slot.name}
-        />
+      <div
+        className={slot.className}
+        key={`slot-${slot.name}`}
+        onClick={this.handleSubscribeModal}
+        id={slot.name}
+        role="button"
+      >
+        <span id={slot.name}>
+          {slot.val} {slot.name}
+        </span>
       </div>
     );
   };

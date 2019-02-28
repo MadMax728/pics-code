@@ -27,9 +27,9 @@ class SubscribeList extends Component {
     } = this.props;
 
     return (
-      <span data-for={id} role={role} data-tip={dataTip} data-class={dataClass}>
+      <span>
         {value} {valueName}
-        <ToolTip
+        {/* <ToolTip
           id={id}
           getContent={getContent}
           effect={effect}
@@ -39,7 +39,7 @@ class SubscribeList extends Component {
           place={place}
           border={border}
           type={type}
-        />
+        /> */}
       </span>
     );
   }
