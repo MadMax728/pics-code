@@ -10,8 +10,15 @@ import { Auth } from "../../../../auth";
 import { Scrollbars } from "react-custom-scrollbars";
 
 class FavouriteCampaigns extends Component {
+
+  componentDidMount = () => {
+    this.props.getFavouriteCampaigns();
+  };
+
   render() {
-    const { isLoading } = this.props;
+    const { campaignData, isLoading } = this.props;
+    const favouriteCampaign = campaignData && campaignData.favouriteCampaign ? campaignData.favouriteCampaign : [];
+    const favouriteCampaigns = favouriteCampaign.slice(0, 5);
     const height = window.innerHeight;
     return (
       <div>
@@ -20,16 +27,14 @@ class FavouriteCampaigns extends Component {
         </div>
         {!isLoading && (
           <div className="campaigns">
-            {this.props.campaignData &&
-            this.props.campaignData.favouriteCampaign &&
-            this.props.campaignData.favouriteCampaign.length > 0 ? (
+            {favouriteCampaigns.length > 0 ? (
               <Scrollbars
                 style={{}}
                 autoHeight
                 autoHeightMin={0}
                 autoHeightMax={500}
               >
-                {this.props.campaignData.favouriteCampaign.map(campaign => {
+                {favouriteCampaigns.map(campaign => {
                   return (
                     <FavouriteCampaignItem
                       campaign={campaign}
@@ -47,36 +52,11 @@ class FavouriteCampaigns extends Component {
       </div>
     );
   }
-
-  componentDidMount = () => {
-    const storage = Auth.extractJwtFromStorage();
-    let userInfo = null;
-    if (storage) {
-      userInfo = JSON.parse(storage.userInfo);
-    }
-    if (userInfo) {
-      const data = userInfo.id;
-      this.props.getFavouriteCampaigns(data);
-    }
-  };
-
-  // componentWillReceiveProps(nextProps) {
-  //   if (
-  //     nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-  //   ) {
-  //     const searchKeyword = nextProps.searchData.searchKeyword;
-  //     if (searchKeyword) {
-  //       const searchParam = "?isSearch=" + searchKeyword;
-  //       this.props.getFavouriteCampaigns("", searchParam);
-  //     }
-  //   }
-  // }
 }
 
 const mapStateToProps = state => ({
   campaignData: state.campaignData,
   isLoading: state.campaignData.isLoading,
-  // searchData: state.searchData,
   error: state.campaignData.error
 });
 
@@ -88,8 +68,6 @@ FavouriteCampaigns.propTypes = {
   getFavouriteCampaigns: PropTypes.func.isRequired,
   campaignData: PropTypes.object,
   isLoading: PropTypes.bool
-  // searchData: PropTypes.any
-  // error: PropTypes.any
 };
 
 export default connect(

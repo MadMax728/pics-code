@@ -93,18 +93,6 @@ class LeftSideBar extends Component {
         <Route
           path={routes.CAMPAIGN_INFORMATION_ROUTE}
           exact
-          component={SideBarCampaignMenuOnlyImage}
-        />
-
-        <Route
-          path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
-          exact
-          component={SideBarCampaignMenuOnlyImage}
-        />
-
-        <Route
-          path={routes.CAMPAIGN_INFORMATION_ROUTE}
-          exact
           component={this.handleSideBarCampaignMenu}
         />
 

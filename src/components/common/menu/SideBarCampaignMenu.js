@@ -5,27 +5,43 @@ import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 
 class SideBarCampaignMenu extends Component {
+
   constructor(props, context) {
     super(props, context);
-    const linkData = [
-      {
-        to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
-          this.props.match.params.type
-        }${"/"}${this.props.match.params.id}`,
-        className: "menu_information secondary_title",
-        activeClassName: "active",
-        text: Translations.left_sidebar.information
-      },
-      {
-        to: `${routes.BASE_CAMPAIGN_PARTICIPANT_ROUTE}${
-          this.props.match.params.type
-        }${"/"}${this.props.match.params.id}`,
-        className: "menu_participants secondary_title",
-        activeClassName: "active",
-        text: Translations.left_sidebar.participants
-      }
-    ];
-    this.state = { links: linkData };
+    const id = this.props.match.params.id;
+    const type = this.props.match.params.type;
+    const infoLink = {
+      to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${type}${"/"}${id}`,
+      className: "menu_information secondary_title",
+      activeClassName: "active",
+      text: Translations.left_sidebar.information
+    };
+    this.state = { links: [ infoLink ] };
+  }
+
+  handleMenu = () => {
+    const id = this.props.match.params.id;
+    const type = this.props.match.params.type;
+    const infoLink = {
+      to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${type}${"/"}${id}`,
+      className: "menu_information secondary_title",
+      activeClassName: "active",
+      text: Translations.left_sidebar.information
+    };
+    const participantsLink = {
+      to: `${routes.BASE_CAMPAIGN_PARTICIPANT_ROUTE}${type}${"/"}${id}`,
+      className: "menu_participants secondary_title",
+      activeClassName: "active",
+      text: Translations.left_sidebar.participants
+    }
+    const links = type === "company" ? [ infoLink , participantsLink ]  : [ infoLink ];
+    this.setState({ links : links });
+  }
+
+  componentDidUpdate(nextProps) {
+    if (this.props.match.params.type !== nextProps.match.params.type) {
+      this.handleMenu();
+    }
   }
 
   render() {
@@ -40,44 +56,6 @@ class SideBarCampaignMenu extends Component {
       </div>
     );
   }
-
-  componentWillMount = () => {
-    let linkData = (linkData = [
-      {
-        to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
-          this.props.match.params.type
-        }${"/"}${this.props.match.params.id}`,
-        className: "menu_information secondary_title",
-        activeClassName: "active",
-        text: Translations.left_sidebar.information
-      }
-    ]);
-    if (
-      this.props.match &&
-      this.props.match &&
-      this.props.match.params.type === "company"
-    ) {
-      linkData = [
-        {
-          to: `${routes.BASE_CAMPAIGN_INFORMATION_ROUTE}${
-            this.props.match.params.type
-          }${"/"}${this.props.match.params.id}`,
-          className: "menu_information secondary_title",
-          activeClassName: "active",
-          text: Translations.left_sidebar.information
-        },
-        {
-          to: `${routes.BASE_CAMPAIGN_PARTICIPANT_ROUTE}${
-            this.props.match.params.type
-          }${"/"}${this.props.match.params.id}`,
-          className: "menu_participants secondary_title",
-          activeClassName: "active",
-          text: Translations.left_sidebar.participants
-        }
-      ];
-    }
-    this.setState({ links: linkData });
-  };
 }
 
 SideBarCampaignMenu.propTypes = {
