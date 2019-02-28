@@ -15,4 +15,4 @@ export const getAdmins = (payload, header = {}) =>
 
 // BackOffice update Admin API
 export const updateAdmin = (payload, header = {}) =>
-  api(baseUrl, header).put(updateAdminEndPoint, payload);
+  api(baseUrl, header).put(`${updateAdminEndPoint}/${payload.id}`, payload);
