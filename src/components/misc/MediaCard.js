@@ -45,6 +45,7 @@ class MediaCard extends Component {
       <div className="feed_wrapper">
         <MediaCardHeader
           item={item}
+          user={item.createdBy}
           isParticipant={isParticipant}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}

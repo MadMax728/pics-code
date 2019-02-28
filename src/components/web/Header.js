@@ -8,7 +8,7 @@ import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
-import { getSearch } from "../../actions";
+import { getSearchForHeader } from "../../actions";
 import { connect } from "react-redux";
 import * as websocket from "../../websocket";
 import { Auth } from "../../auth";
@@ -95,13 +95,28 @@ class Header extends Component {
     const path = "?search=" + this.state.searchText;
     this.props.history.push(path);
     this.setState({ searchText: "" });
-    this.props.getSearch(this.state.searchText);
+    this.props.getSearchForHeader(this.state.searchText);
   };
 
   onInputChange = e => {
     this.setState({
       searchText: e.values.val
     });
+    const searchText = e.values.val;
+    let page = 1;
+    let limit = 100;
+    if (searchText) {
+      this.props.getSearchForHeader(searchText, page, limit).then(() => {
+        const { searchData } = this.props;
+        if (!searchData.isLoading) {
+          console.log("Search results ", searchData.users);
+          //Set state or use same in list
+        }
+      });
+    } else {
+      console.log("clean cheat");
+      this.props.searchData.users = [];
+    }
   };
 
   handleModalMessage = () => {
@@ -114,7 +129,7 @@ class Header extends Component {
 
   render() {
     const { messageCount, searchText } = this.state;
-
+    const { searchData } = this.props;
     let messageCountView = messageCount;
     if (messageCount < 100) {
       messageCountView = messageCount;
@@ -249,16 +264,15 @@ class Header extends Component {
                       onChange={this.onInputChange}
                       value={searchText}
                     />
-                    <span className="input-group-addon">
-                      <Button
-                        onClick={this.onSearchClick}
-                        text={
-                          <span className="search_icon">
-                            <img src={images.search} alt="Search" />
-                          </span>
-                        }
-                      />
-                    </span>
+                  </div>
+                  <div>
+                    <ul style={{ listStyleType: "none" }}>
+                      {searchData.users.map((user, key) => (
+                        <Link to={`/news-feed/${user.username}`} key={user._id}>
+                          <li>{user.username}</li>
+                        </Link>
+                      ))}
+                    </ul>
                   </div>
                 </form>
                 <ul className="nav navbar-nav pull-right">
@@ -288,8 +302,8 @@ class Header extends Component {
                         {messageCountView}
                       </span>
                     ) : (
-                      ""
-                    )}
+                        ""
+                      )}
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
 
@@ -326,17 +340,20 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  searchData: state.searchData
+  searchData: state.searchData,
+  usersData: state.usersData
 });
 
 const mapDispatchToProps = {
-  getSearch
+  getSearchForHeader  
 };
 
 Header.propTypes = {
   handleModalShow: PropTypes.func,
   history: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearchForHeader: PropTypes.func,
+  usersData: PropTypes.any,
+  searchData: PropTypes.any
 };
 
 export default connect(

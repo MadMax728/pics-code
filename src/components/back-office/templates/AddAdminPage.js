@@ -63,7 +63,7 @@ class AddAdminPage extends Component {
       this.props.updateAdmin(data).then(() => {
         if (this.props.adminData && this.props.adminData.admin) {
           const dataAdd = {
-            id: this.props.adminData.admin.id,
+            id: this.props.adminData.admin._id,
             username: this.props.adminData.admin.username,
             name: this.props.adminData.admin.name,
             role: form.role

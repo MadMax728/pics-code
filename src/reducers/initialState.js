@@ -240,7 +240,8 @@ const initialState = {
   searchData: {
     searchKeyword: null,
     isLoading: false,
-    error: false
+    error: false,
+    users: [],
   },
   communityData: {
     userCommunity: null,
@@ -262,11 +263,20 @@ const initialState = {
   messagesData: {
     messages: [],
     lastEvaluatedKeys: undefined,
+    fromTime: new Date().toISOString(),
+    toTime: new Date().toISOString(),
     isLoading: false,
     error: false
   },
   lastEvaluatedKey: {
     keys: null
+  },
+  exploreData: {
+    items: [],
+    iPaginate: {},
+    vPaginate: {},
+    isLoading: false,
+    error: null
   }
 };
 

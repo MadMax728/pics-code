@@ -6,6 +6,7 @@ import MessageItem from "./MessageItem";
 import { getMessages } from "../../../../actions";
 import * as websocket from "../../../../websocket";
 import PropTypes from "prop-types";
+import * as moment from "moment";
 
 class MessagesLazyList extends Component {
   constructor(props, context) {
@@ -19,7 +20,11 @@ class MessagesLazyList extends Component {
       me: userInfo.id,
       messages: [],
       lastEvaluatedKeys: null,
-      lastEvaluatedPages: []
+      lastEvaluatedPages: [],
+      fromTime: moment(new Date())
+        .add(-12, "hours")
+        .toISOString(),
+      toTime: new Date().toISOString()
     };
 
     // this.props.socket.on('communication-message-board-history', (data) => {
@@ -46,7 +51,11 @@ class MessagesLazyList extends Component {
       return {
         user: props.user,
         lastEvaluatedKeys: undefined,
-        lastEvaluatedPages: []
+        lastEvaluatedPages: [],
+        fromTime: moment(new Date())
+          .add(-12, "hours")
+          .toISOString(),
+        toTime: new Date().toISOString()
       };
     }
     return null;
@@ -60,27 +69,8 @@ class MessagesLazyList extends Component {
     }
     const { lastEvaluatedKeys, lastEvaluatedPages } = this.state;
 
-    if (
-      prevProps.count !== this.props.count &&
-      lastEvaluatedPages &&
-      lastEvaluatedKeys &&
-      lastEvaluatedKeys.id
-    ) {
-      const page = lastEvaluatedPages.find(x => x === lastEvaluatedKeys.id);
-
-      if (!page) {
-        this.setState(
-          {
-            lastEvaluatedPages: [
-              ...this.state.lastEvaluatedPages,
-              lastEvaluatedKeys.id
-            ]
-          },
-          () => {
-            this.getMessages();
-          }
-        );
-      }
+    if (prevProps.count !== this.props.count) {
+      this.getMessages();
     }
   }
 
@@ -91,6 +81,7 @@ class MessagesLazyList extends Component {
   };
 
   componentDidMount() {
+    console.log("Default ", this.props);
     this.props.setMessageListRef(this);
     this.getMessages(true);
   }
@@ -100,17 +91,26 @@ class MessagesLazyList extends Component {
   };
 
   getMessages = callback => {
-    const { me, user, lastEvaluatedKeys, messages } = this.state;
+    const { me, user, fromTime, toTime, messages } = this.state;
     if (!user || !user._id) return;
-    this.props.getMessages(me, user._id, lastEvaluatedKeys).then(() => {
+    this.props.getMessages(me, user._id, fromTime, toTime).then(() => {
       const { messagesData } = this.props;
       if (messagesData && !messagesData.isLoading && messagesData.messages) {
         const newMessages = [...messagesData.messages, ...messages];
-        this.setState({ messages: newMessages }, () => {
-          if (callback) {
-            this.scrollBottomOnNewMessage();
+        this.setState(
+          {
+            messages: newMessages,
+            fromTime: moment(messagesData.fromTime)
+              .add(-12, "hours")
+              .toISOString(),
+            toTime: messagesData.fromTime
+          },
+          () => {
+            if (callback) {
+              this.scrollBottomOnNewMessage();
+            }
           }
-        });
+        );
       }
       if (
         messagesData &&
@@ -166,7 +166,9 @@ MessagesLazyList.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  messagesData: state.messagesData
+  messagesData: state.messagesData,
+  fromTime: state.fromTime,
+  toTime: state.toTime
 });
 
 const mapDispatchToProps = {

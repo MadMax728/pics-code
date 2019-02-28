@@ -11,6 +11,7 @@ const MediaCardBody = ({ item, isDescription, isLoading }) => {
           item.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
             <ImageItem
               item={item.mediaUrl}
+              classNames={`img-responsive widthHeightAuto`}
               userName={item.userName}
               isOtherCardExist={false}
               isLoading={isLoading}

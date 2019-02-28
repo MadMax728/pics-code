@@ -1,24 +1,27 @@
 import * as types from "../lib/constants/actionTypes";
 import initialState from "./initialState";
 
-const searchReducer = (state = initialState.searchData, action) => {
+const exploreReducer = (state = initialState.exploreData, action) => {
   switch (action.type) {
-    case types.GET_SEARCH_STARTED:
+    // Get EXPLORE
+    case types.GET_EXPLORES_STARTED:
       return {
         ...state,
         isLoading: true,
         error: null
       };
-    case types.GET_SEARCH_SUCCEEDED:
+    case types.GET_EXPLORES_SUCCEEDED:
       return {
         ...state,
-        searchKeyword: action.keyword,
-        users: action.payload,
+        items: action.payload.items,
+        iPaginate: action.payload.iPaginate,
+        vPaginate: action.payload.vPaginate,
         isLoading: false
       };
-    case types.GET_SEARCH_FAILED:
+    case types.GET_EXPLORE_FAILED:
       return {
         ...state,
+        items: [],
         isLoading: false,
         error: action.payload
       };
@@ -27,4 +30,4 @@ const searchReducer = (state = initialState.searchData, action) => {
   }
 };
 
-export default searchReducer;
+export default exploreReducer;

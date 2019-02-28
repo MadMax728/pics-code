@@ -22,8 +22,10 @@ const SocialProfileUrl = ({
             <span className={`fa ${icon}`} />
             <span className="social-text">{title}</span>
             <div className="social-input-field">
-                <input className="form-control"/>
-                <button><i className="fa fa-edit"></i></button>
+              <input className="form-control" />
+              <button>
+                <i className="fa fa-edit" />
+              </button>
             </div>
             {!publicUrl && isOwnerProfile && (
               <Button

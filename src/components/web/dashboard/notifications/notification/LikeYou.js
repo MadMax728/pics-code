@@ -9,7 +9,7 @@ class LikeYou extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      likeYou_list : []
+      likeYou_list: []
     };
   }
 
