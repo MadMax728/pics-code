@@ -24,7 +24,7 @@ export const getSavedCampaignsEndPoint = "/campaigns/get-all-saved-campaigns";
 export const getSettingsCampaignsEndPoint = "/campaigns/";
 export const getCampaignTypeEndPoint = "/campaigns/list/";
 export const getCampaignDetailsEndPoint = "/campaigns/";
-export const getFavouriteCampaignsEndPoint = "/campaigns/favorite?favBy=";
+export const getFavouriteCampaignsEndPoint = "/campaigns/favorite";
 export const createCampaignEndPoint = "/campaigns";
 export const editCampaignEndPoint = "/campaigns/";
 export const addParticipantsEndPoint = "/participants/add-participant";
@@ -92,7 +92,7 @@ export const getReportedStatisticsEndPoint =
   "/reports/post-count?reportContent=";
 
 // review services
-export const CampaignsEndPoint = "/campaigns/get-all-campaigns";
+export const CampaignsEndPoint = "/campaigns/";
 export const AdsEndPoint = "/advertisement/list";
 export const getReviewStatisticsEndPoint = "/post-count";
 export const updateBackOfficeReviewEndPoint = "/update-status";
