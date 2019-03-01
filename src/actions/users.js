@@ -143,10 +143,14 @@ const getFollowUserListStarted = () => ({
   type: types.GET_FOLLOW_USER_LIST_STARTED
 });
 
-const getFollowUserListSucceeded = (data, isFor) => ({
+// const getFollowUserListSucceeded = (data, isFor) => ({
+//   type: types.GET_FOLLOW_USER_LIST_SUCCEEDED,
+//   payload: data,
+//   isFor
+// });
+const getFollowUserListSucceeded = data => ({
   type: types.GET_FOLLOW_USER_LIST_SUCCEEDED,
-  payload: data,
-  isFor
+  payload: data
 });
 
 const getFollowUserListFailed = error => ({
@@ -155,16 +159,35 @@ const getFollowUserListFailed = error => ({
   error: true
 });
 
-export const getFollowUserList = (prop, requestData) => {
+// export const getFollowUserList = (prop, requestData) => {
+//   return dispatch => {
+//     dispatch(getFollowUserListStarted());
+//     const storage = Auth.extractJwtFromStorage();
+//     const header = {
+//       Authorization: storage.accessToken
+//     };
+//     return subscribeService[prop](requestData, header).then(
+//       res => {
+//         dispatch(getFollowUserListSucceeded(res.data, prop));
+//       },
+//       error => {
+//         dispatch(getFollowUserListFailed(error.response));
+//         logger.error({ description: error.toString(), fatal: true });
+//       }
+//     );
+//   };
+// };
+
+export const getFollowUserList = requestData => {
   return dispatch => {
     dispatch(getFollowUserListStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.accessToken
     };
-    return subscribeService[prop](requestData, header).then(
+    return subscribeService.subscribe(requestData, header).then(
       res => {
-        dispatch(getFollowUserListSucceeded(res.data, prop));
+        dispatch(getFollowUserListSucceeded(res.data));
       },
       error => {
         dispatch(getFollowUserListFailed(error.response));
