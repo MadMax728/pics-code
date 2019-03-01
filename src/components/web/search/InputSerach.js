@@ -33,6 +33,7 @@ class InputSearch extends Component {
                 <div>
                     <SearchUsers 
                         users={users} 
+                        close={this.clearUserSearch}
                         isInfiniteLoading={isInfiniteLoading} 
                         onInfiniteLoad={this.handleInfiniteLoad}>
                     </SearchUsers>
@@ -64,6 +65,10 @@ class InputSearch extends Component {
         });
     };
 
+    clearUserSearch = () => {
+        this.setState({ searchText: "", users: []});
+    }
+
     /**
      * getSearchForHeader
      */
@@ -71,6 +76,7 @@ class InputSearch extends Component {
        const { searchText, users, page, limit } = this.state;
        
        if(!searchText) {
+           this.clearUserSearch()
            return;
        }
 

@@ -6,9 +6,9 @@ import * as images from "../../../lib/constants/images";
 import * as routes from "../../../lib/constants/routes";
 import { UserImageItem } from "../../ui-kit";
 
-const SearchUserItem = ( { item }) => {
+const SearchUserItem = ( { item, close }) => {
     return (
-      <Link to={`${routes.ABOUT_ROUTE}/${item.username}`} key={item._id}>
+      <Link to={`${routes.ABOUT_ROUTE}/${item.username}`} key={item._id} onClick={close}>
         <div className="search-user-image">
             <UserImageItem customClass={'img-circle img-responsive padding-right-15'} item={item.profileUrl}></UserImageItem>
         </div>
@@ -21,7 +21,8 @@ const SearchUserItem = ( { item }) => {
 };
   
 SearchUserItem.propTypes = {
-  item: PropTypes.any
+  item: PropTypes.any,
+  close: PropTypes.any
 };
 
 export default SearchUserItem;

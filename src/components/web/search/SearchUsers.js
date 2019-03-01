@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import * as Infinite from "react-infinite"
 import SearchUserItem from "./SearchUserItem";
 
-const SearchUsers = ( { users = [], isInfiniteLoading = false, onInfiniteLoad }) => {
+const SearchUsers = ( { users = [], isInfiniteLoading = false, onInfiniteLoad, close }) => {
     return (
         <div className="search-user">
             {
@@ -19,7 +19,7 @@ const SearchUsers = ( { users = [], isInfiniteLoading = false, onInfiniteLoad })
                                 if( user && user.id) {
                                     return (
                                         <div className="search-user-wrapper" key={user.id}>
-                                           <SearchUserItem item={user}></SearchUserItem>
+                                           <SearchUserItem item={user} close={close}></SearchUserItem>
                                        </div>
                                    )
                                 }
@@ -36,7 +36,8 @@ const SearchUsers = ( { users = [], isInfiniteLoading = false, onInfiniteLoad })
 SearchUsers.propTypes = {
     users: PropTypes.any,
     onInfiniteLoad: PropTypes.any,
-    isInfiniteLoading: PropTypes.bool
+    isInfiniteLoading: PropTypes.bool,
+    close: PropTypes.any
 };
   
 export default SearchUsers;
