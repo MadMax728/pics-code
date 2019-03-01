@@ -9,14 +9,16 @@ class InputSearch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            searchText: ""
+            searchText: "",
+            users: [],
+            page: 1,
+            pages: 1,
+            limit: 40
         }
     }
 
     render() {
-        const { searchText } = this.state;
-        const { searchData } = this.props;
-
+        const { searchText, isInfiniteLoading, users } = this.state;
         return (
             <form className="navbar-form navbar-left">
                 <div className="input-group search-input-group">
@@ -29,34 +31,57 @@ class InputSearch extends Component {
                     />
                 </div>
                 <div>
-                    <SearchUsers users={searchData.users}></SearchUsers>
+                    <SearchUsers 
+                        users={users} 
+                        isInfiniteLoading={isInfiniteLoading} 
+                        onInfiniteLoad={this.handleInfiniteLoad}>
+                    </SearchUsers>
                 </div>
             </form>
         );
 
     }
 
-    onInputChange = e => {
-        console.log('searching');
-        this.setState({
-            searchText: e.values.val
-        });
-        const searchText = e.values.val;
-        let page = 1;
-        let limit = 100;
-        if (searchText) {
-            this.props.getSearchForHeader(searchText, page, limit).then(() => {
-                const { searchData } = this.props;
-                if (!searchData.isLoading) {
-                    console.log("Search results ", searchData.users);
-                    //Set state or use same in list
-                }
+    /**
+     * handleInfiniteLoad
+     */
+    handleInfiniteLoad = () => {
+        let { page, pages } = this.state;
+        if(pages > page) {
+            this.setState({ isInfiniteLoading: true, page : page + 1 }, () => {
+                this.getSearchForHeader(true);
             });
-        } else {
-            console.log("clean cheat");
-            this.props.searchData.users = [];
         }
+        
+    }
+
+    /**
+     * onInputChange
+     */
+    onInputChange = (e) => {
+        this.setState({ searchText: e.values.val}, () => {
+            this.getSearchForHeader();
+        });
     };
+
+    /**
+     * getSearchForHeader
+     */
+    getSearchForHeader = (isConcat = false) => {
+       const { searchText, users, page, limit } = this.state;
+       this.props.getSearchForHeader(searchText, page, limit).then(() => {
+            const { searchData } = this.props;
+            const newUsers = isConcat ? [...users, ...searchData.users] : searchData.users;
+            if (!searchData.isLoading) {
+                this.setState({
+                    users: newUsers,
+                    page: searchData.page,
+                    pages: searchData.pages,
+                    isInfiniteLoading: false
+                });
+            }
+        });
+    }
 }
 
 
