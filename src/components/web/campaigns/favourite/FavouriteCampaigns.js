@@ -14,6 +14,10 @@ class FavouriteCampaigns extends Component {
     this.props.getFavouriteCampaigns();
   };
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
+
   render() {
     const { campaignData, isLoading } = this.props;
     const favouriteCampaign = campaignData && campaignData.favouriteCampaign ? campaignData.favouriteCampaign : [];

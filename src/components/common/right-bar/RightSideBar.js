@@ -17,35 +17,35 @@ class RightSideBar extends Component {
       <div>
         {/* ,,,,,, FavouriteCampaigns ...... */}
 
-        <Route path={routes.ROOT_ROUTE} exact component={FavouriteCampaigns} />
-        <Route path={routes.USERS_ROUTE} exact component={FavouriteCampaigns} />
-        <Route path={routes.PICS_ROUTE} exact component={FavouriteCampaigns} />
+        <Route path={routes.ROOT_ROUTE} exact render={this.favCampaigns} />
+        <Route path={routes.USERS_ROUTE} exact render={this.favCampaigns} />
+        <Route path={routes.PICS_ROUTE} exact render={this.favCampaigns} />
         <Route
           path={routes.PARTICIPANTS_ROUTE}
           exact
-          component={FavouriteCampaigns}
+          render={this.favCampaigns}
         />
         <Route
           path={routes.EXPLORE_ROUTE}
           exact
-          component={FavouriteCampaigns}
+          render={this.favCampaigns}
         />
         <Route
           path={routes.CAMPAIGN_ROUTE}
           exact
-          component={FavouriteCampaigns}
+          render={this.favCampaigns}
         />
 
         <Route
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact
-          component={FavouriteCampaigns}
+          render={this.favCampaigns}
         />
 
         <Route
           path={routes.CAMPAIGN_INFORMATION_ROUTE}
           exact
-          component={FavouriteCampaigns}
+          render={this.favCampaigns}
         />
 
         {/* ,,,,,, FavouriteCampaigns ...... */}
@@ -145,6 +145,12 @@ class RightSideBar extends Component {
   SettingCampaignRight = () => {
     return (
       <SettingCampaignRight handleModalShow={this.props.handleModalShow} />
+    );
+  };
+
+  favCampaigns = () => {
+    return (
+      <FavouriteCampaigns key={'fav-campaigns'} />
     );
   };
 
