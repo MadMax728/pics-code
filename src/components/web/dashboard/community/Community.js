@@ -42,7 +42,7 @@ class Community extends Component {
                 let classNameText = "filled_button";
                 let btnText =
                   Translations.profile_community_right_sidebar.Subscribed;
-                if (user.isSubscribe) {
+                if (user.subscribeId) {
                   btnText =
                     Translations.profile_community_right_sidebar.Subscribed;
                   classNameText = "filled_button";
@@ -168,6 +168,7 @@ class Community extends Component {
     //   // To Do - On Pending request click
     // } else
     if (selectedUserList.subscribeId === "") {
+      console.log("subscribe");
       const requestData = { followers: e.target.id };
 
       sendRequest(requestData).then(() => {
@@ -183,6 +184,7 @@ class Community extends Component {
         }
       });
     } else {
+      console.log("unsubscribe");
       const subscribedId = selectedUserList.subscribeId;
       getUnsubscribe(subscribedId).then(() => {
         if (

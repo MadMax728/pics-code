@@ -17,7 +17,8 @@ class Subscribe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataList: []
+      dataList: [],
+      currentPage: 1
     };
   }
 
@@ -32,52 +33,45 @@ class Subscribe extends Component {
   };
 
   render() {
-    const { dataList } = this.state;
-    const { isFor, username } = this.props;
+    const { dataList, currentPage } = this.state;
+    const { isFor, username, subscribeData } = this.props;
     const isLoading = this.props.subscribeData.isLoading;
-    // console.log(subscribeData.subscribeData);
-    // const subscribeData = subscribeData.subscribeData;
-    // const limit = subscribeData.limit;
-    // const page = subscribeData.page;
-
-    // let hasMore = false;
-
-    // if (
-    //   limit &&
-    //   subscribeData.pages &&
-    //   parseInt(subscribeData.pages) > parseInt(page)
-    // ) {
-    //   hasMore = true;
-    // }
-
-    // if (
-    //   page &&
-    //   subscribeData.pages &&
-    //   parseInt(subscribeData.pages) > parseInt(page)
-    // ) {
-    //   hasMore = true;
-    // }
+    let hasMore = false;
+    const userList = subscribeData.subscribeData;
+    const pages = userList.pages;
+    if (pages && parseInt(currentPage) < parseInt(pages)) {
+      hasMore = true;
+    }
 
     return (
       <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>
-        {isLoading && <InlineLoading />}
+
         <div className="header-notifications">
+          {/* style={{ height: "200px", overflow: "auto" }} */}
           {dataList.length > 0 ? (
-            dataList.map(user => {
-              return (
-                <div onScroll={this.trackScrolling} key={user._id}>
-                  <SubscribeUserCard
-                    item={user}
-                    isLoading={isLoading}
-                    isFor={isFor}
-                    username={username}
-                  />
-                </div>
-              );
-            })
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={this.getMoreUsers}
+              hasMore={false}
+              loader={<div className="loader">Loading ...</div>}
+            >
+              {dataList.map(user => {
+                return (
+                  <div key={user._id}>
+                    {isLoading && <InlineLoading />}
+                    <SubscribeUserCard
+                      item={user}
+                      isLoading={isLoading}
+                      isFor={isFor}
+                      username={username}
+                    />
+                  </div>
+                );
+              })}
+            </InfiniteScroll>
           ) : (
             <div className="notification-with-subscribe notification-wrapper">
               <div className="user-info">
@@ -102,59 +96,8 @@ class Subscribe extends Component {
     window.removeEventListener("scroll", this.onScroll);
   };
 
-  onScroll = () => {
-    console.log("dataScroll");
-    const { dataList, currentPage } = this.state;
-    const currentScrollHeight = parseInt(window.innerHeight + window.scrollY);
-    console.log(currentScrollHeight);
-    // console.log(currentScrollHeight, (document.body.offsetHeight));
-    if (
-      dataList &&
-      currentScrollHeight + 1 >= document.body.offsetHeight &&
-      dataList.length
-    ) {
-      const { lastEvaluatedKey } = this.props;
-      console.log("onScroll", lastEvaluatedKey);
-      let payload = "";
-      if (currentPage < lastEvaluatedKey.pages) {
-        for (let i in lastEvaluatedKey) {
-          if (i === "limit") {
-            payload += lastEvaluatedKey[i] && `&${i}=${lastEvaluatedKey[i]}`;
-          } else {
-            const currentPage = parseInt(lastEvaluatedKey[i]) + 1;
-            payload += lastEvaluatedKey[i] && `&${i}=${currentPage}`;
-            this.setState({ currentPage });
-          }
-        }
-        const userId = this.props.userId;
-        let userRequestData = {
-          id: userId,
-          type: "following",
-          params: payload
-        };
-        if (this.props.isFor === "Subscribers") {
-          userRequestData = {
-            id: userId,
-            type: "following",
-            params: payload
-          };
-        } else if (this.props.isFor === "Subscribed") {
-          userRequestData = {
-            id: userId,
-            type: "followers",
-            params: payload
-          };
-        }
-        this.props.getFollowUserList(userRequestData).then(() => {
-          const { dataList } = this.state;
-          this.setState({
-            dataList: dataList.concat(
-              this.props.subscribeData.subscribeData.data
-            )
-          });
-        });
-      }
-    }
+  getMoreUsers = () => {
+    console.log("inscroll");
   };
 
   // Tooltip List

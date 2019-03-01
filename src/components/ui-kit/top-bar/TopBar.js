@@ -129,11 +129,13 @@ class TopBar extends Component {
   };
 
   handleSubscribeModal = e => {
-    this.props.handleModalShow(modalType.subscribe, {
-      type: e.target.id,
-      userid: this.props.items.userid,
-      username: this.props.items.username
-    });
+    if (e.target.id !== "Posts") {
+      this.props.handleModalShow(modalType.subscribe, {
+        type: e.target.id,
+        userid: this.props.items.userid,
+        username: this.props.items.username
+      });
+    }
   };
 
   renderReportTips = (type, userid, username) => {
