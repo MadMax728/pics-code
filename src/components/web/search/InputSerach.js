@@ -69,6 +69,11 @@ class InputSearch extends Component {
      */
     getSearchForHeader = (isConcat = false) => {
        const { searchText, users, page, limit } = this.state;
+       
+       if(!searchText) {
+           return;
+       }
+
        this.props.getSearchForHeader(searchText, page, limit).then(() => {
             const { searchData } = this.props;
             const newUsers = isConcat ? [...users, ...searchData.users] : searchData.users;
