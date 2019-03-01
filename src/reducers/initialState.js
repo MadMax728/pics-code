@@ -239,7 +239,7 @@ const initialState = {
     error: false
   },
   searchData: {
-    searchKeyword: null,
+    searchKeyword: '',
     isLoading: false,
     error: false,
     users: [],

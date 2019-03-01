@@ -270,7 +270,9 @@ class CampaignModal extends Component {
     if (data.inquiry) {
       form.inquiry = data.inquiry;
     }
-    form.procedure = procedure[data.procedure];
+    if (data.procedure) {
+      form.procedure = procedure[data.procedure];
+    }
     if (data.typeContent) {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
       form.image = data.mediaUrl;
