@@ -33,7 +33,6 @@ class TopBar extends Component {
 
   render() {
     const { items, handeleShare } = this.props;
-    console.log(this.props.items.userid);
     return (
       <div>
         <div className="user_info">
@@ -99,6 +98,9 @@ class TopBar extends Component {
                       type={"light"}
                     />
                   </div>
+                  <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+                    <img src={images.settings} alt="settings" />
+                  </Link>
                 </div>
               )}
               <div className="clearfix" />
@@ -192,7 +194,6 @@ class TopBar extends Component {
         this.props.reportedContentData &&
         !this.props.reportedContentData.error
       ) {
-        console.log(this.props.reportedContentData.addReport.isReported);
         this.getUserInfo();
         this.getUserData();
         this.renderDotTips(this.props.items.userid);
