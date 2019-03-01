@@ -11,12 +11,14 @@ import {
   getUser
 } from "../../../../actions";
 import SubscribeUserCard from "./SubscribeUserCard";
+import InfiniteScroll from "react-infinite-scroller";
 
 class Subscribe extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dataList: []
+      dataList: [],
+      currentPage: 1
     };
   }
 
@@ -31,28 +33,45 @@ class Subscribe extends Component {
   };
 
   render() {
-    const { dataList } = this.state;
-    const { isFor } = this.props;
+    const { dataList, currentPage } = this.state;
+    const { isFor, username, subscribeData } = this.props;
     const isLoading = this.props.subscribeData.isLoading;
+    let hasMore = false;
+    const userList = subscribeData.subscribeData;
+    const pages = userList.pages;
+    if (pages && parseInt(currentPage) < parseInt(pages)) {
+      hasMore = true;
+    }
+
     return (
       <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>
-        {isLoading && <InlineLoading />}
+
         <div className="header-notifications">
+          {/* style={{ height: "200px", overflow: "auto" }} */}
           {dataList.length > 0 ? (
-            dataList.map(user => {
-              return (
-                <div key={user._id}>
-                  <SubscribeUserCard
-                    item={user}
-                    isLoading={isLoading}
-                    isFor={isFor}
-                  />
-                </div>
-              );
-            })
+            <InfiniteScroll
+              pageStart={0}
+              loadMore={this.getMoreUsers}
+              hasMore={false}
+              loader={<div className="loader">Loading ...</div>}
+            >
+              {dataList.map(user => {
+                return (
+                  <div key={user._id}>
+                    {isLoading && <InlineLoading />}
+                    <SubscribeUserCard
+                      item={user}
+                      isLoading={isLoading}
+                      isFor={isFor}
+                      username={username}
+                    />
+                  </div>
+                );
+              })}
+            </InfiniteScroll>
           ) : (
             <div className="notification-with-subscribe notification-wrapper">
               <div className="user-info">
@@ -68,17 +87,42 @@ class Subscribe extends Component {
   }
 
   componentDidMount = () => {
-    this.getTooltipUserList(this.props.userId);
+    const params = { limit: 10, page: 1 };
+    this.getTooltipUserList(this.props.userId, params);
+    window.addEventListener("scroll", this.onScroll, false);
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.onScroll);
+  };
+
+  getMoreUsers = () => {
+    console.log("inscroll");
   };
 
   // Tooltip List
-  getTooltipUserList = userId => {
+  getTooltipUserList = (userId, paginationParam) => {
     if (userId) {
-      let userRequestData = { id: userId, type: "following" };
+      const paginationParams =
+        "&limit=" + paginationParam.limit + "&page=" + paginationParam.page;
+      let userRequestData = {
+        id: userId,
+        type: "following",
+        params: paginationParams
+      };
+
       if (this.props.isFor === "Subscribers") {
-        userRequestData = { id: userId, type: "following" };
+        userRequestData = {
+          id: userId,
+          type: "following",
+          params: paginationParams
+        };
       } else if (this.props.isFor === "Subscribed") {
-        userRequestData = { id: userId, type: "followers" };
+        userRequestData = {
+          id: userId,
+          type: "followers",
+          params: paginationParams
+        };
       }
       this.props.getFollowUserList(userRequestData).then(() => {
         // Success
@@ -127,7 +171,8 @@ Subscribe.propTypes = {
   getUser: PropTypes.func,
   handleModalHide: PropTypes.func,
   handleConfirmation: PropTypes.func,
-  isFor: PropTypes.any
+  isFor: PropTypes.any,
+  lastEvaluatedKey: PropTypes.any
 };
 
 export default connect(

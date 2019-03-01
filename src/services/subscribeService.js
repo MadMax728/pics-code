@@ -17,4 +17,6 @@ const baseUrl = process.env.REACT_APP_API_BASEURL;
 
 // Get subscribed
 export const subscribe = (payload, header = {}) =>
-  api(baseUrl, header).get("/subscribe?requestType=" + payload.type);
+  api(baseUrl, header).get(
+    "/subscribe?requestType=" + payload.type + payload.params
+  );
