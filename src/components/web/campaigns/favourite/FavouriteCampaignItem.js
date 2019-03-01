@@ -7,9 +7,6 @@ import { DateFormat } from "../../../Factory";
 import { Translations } from "../../../../lib/translations";
 
 const FavouriteCampaignItem = ({ campaign }) => {
-  // const profile_route = campaign.isOwner
-  //   ? routes.NEWS_FEED_ROUTE
-  //   : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
   const profile_image = campaign.profileImage
     ? campaign.profileImage
     : images.image;

@@ -328,7 +328,7 @@ class LeftSideBar extends Component {
     );
   }
 
-  handleSideBarCampaignMenu = match => {
+  handleSideBarCampaignMenu = (match) => {
     return <SideBarCampaignMenu match={match.match} />;
   };
 

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
+import { Scrollbars } from "react-custom-scrollbars";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import FavouriteCampaignItem from "./FavouriteCampaignItem";
 import { Translations } from "../../../../lib/translations";
 // import * as enumerations from "../../../../lib/constants/enumerations";
 import { getFavouriteCampaigns } from "../../../../actions";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
-import { Auth } from "../../../../auth";
-import { Scrollbars } from "react-custom-scrollbars";
 
 class FavouriteCampaigns extends Component {
 
@@ -19,7 +18,6 @@ class FavouriteCampaigns extends Component {
     const { campaignData, isLoading } = this.props;
     const favouriteCampaign = campaignData && campaignData.favouriteCampaign ? campaignData.favouriteCampaign : [];
     const favouriteCampaigns = favouriteCampaign.slice(0, 5);
-    const height = window.innerHeight;
     return (
       <div>
         <div className="normal_title padding-15">
