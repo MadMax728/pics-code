@@ -58,7 +58,7 @@ class CampaignCard extends Component {
           isComments={isComments}
           isStatus={isStatus}
           isBudget={isBudget} /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          renderReportTips={() => this.renderReportTips(item._id)}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
@@ -66,7 +66,7 @@ class CampaignCard extends Component {
         {isComments && (
           <CommentCard
             item={comments}
-            itemId={item.id}
+            itemId={item._id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
@@ -111,7 +111,7 @@ class CampaignCard extends Component {
 
     const campaignLike = {
       typeOfContent: enumerations.likeContentTypes.campaign,
-      typeId: item.id
+      typeId: item._id
     };
     this.props.like(campaignLike);
   };
@@ -124,7 +124,7 @@ class CampaignCard extends Component {
 
   handleCommentsSections = () => {
     const CampaignId = {
-      typeId: this.state.item.id
+      typeId: this.state.item._id
     };
     this.props.getComments(CampaignId).then(() => {
       const totalComment = this.props.comments;
@@ -141,7 +141,7 @@ class CampaignCard extends Component {
     const data = {
       url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${
         item.userType
-      }${"/"}${item.id}`
+        }/${item._id}`
     };
     this.props.handleModalInfoShow(modalType.share, data);
   };
@@ -188,7 +188,7 @@ class CampaignCard extends Component {
         {isComments && (
           <CommentCard
             item={comments}
-            itemId={item.id}
+            itemId={item._id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}

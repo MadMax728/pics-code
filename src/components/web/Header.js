@@ -13,8 +13,7 @@ import { connect } from "react-redux";
 import * as websocket from "../../websocket";
 import { Auth } from "../../auth";
 import { Button, Input } from "../ui-kit";
-import SearchUsers from "./search/SearchUsers";
-
+import InputSerach from './search/InputSerach';
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -99,26 +98,7 @@ class Header extends Component {
     this.props.getSearchForHeader(this.state.searchText);
   };
 
-  onInputChange = e => {
-    this.setState({
-      searchText: e.values.val
-    });
-    const searchText = e.values.val;
-    let page = 1;
-    let limit = 100;
-    if (searchText) {
-      this.props.getSearchForHeader(searchText, page, limit).then(() => {
-        const { searchData } = this.props;
-        if (!searchData.isLoading) {
-          console.log("Search results ", searchData.users);
-          //Set state or use same in list
-        }
-      });
-    } else {
-      console.log("clean cheat");
-      this.props.searchData.users = [];
-    }
-  };
+
 
   handleModalMessage = () => {
     this.props.handleModalShow(modalType.messages);
@@ -129,8 +109,7 @@ class Header extends Component {
   };
 
   render() {
-    const { messageCount, searchText } = this.state;
-    const { searchData } = this.props;
+    const { messageCount } = this.state;
     let messageCountView = messageCount;
     if (messageCount < 100) {
       messageCountView = messageCount;
@@ -156,20 +135,7 @@ class Header extends Component {
                 className="collapse navbar-collapse"
                 id="bs-example-navbar-collapse-1"
               >
-                <form className="navbar-form navbar-left">
-                  <div className="input-group search-input-group">
-                    <Input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search"
-                      onChange={this.onInputChange}
-                      value={searchText}
-                    />
-                  </div>
-                  <div>
-                    <SearchUsers users={searchData.users}></SearchUsers>
-                  </div>
-                </form>
+                <InputSerach />
                 <ul className="nav navbar-nav pull-right">
                   <RouteNavItem
                     to={routes.ROOT_ROUTE}
@@ -240,7 +206,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getSearchForHeader  
+  getSearchForHeader
 };
 
 Header.propTypes = {
