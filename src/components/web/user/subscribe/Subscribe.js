@@ -36,18 +36,10 @@ class Subscribe extends Component {
     const isLoading = this.props.subscribeData.isLoading;
     return (
       <div id="" className="subscriber-tooltip">
-        <div className="col-md-12">
-          {isLoading && <InlineLoading />}
-          <Button
-            className="filled_button col-sm-6"
-            onClick={this.handleModalHides}
-            text={Translations.modal_header.cancle}
-          />
-        </div>
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>
-
+        {isLoading && <InlineLoading />}
         <div className="header-notifications">
           {dataList.length > 0 ? (
             dataList.map(user => {

@@ -21,7 +21,7 @@ class SubscribeUserCard extends Component {
     this.state = {
       item: this.props.item,
       subscribeId: this.props.item.subscribeId,
-      isSubscribeStatus: null
+      isSubscribeStatus: this.props.isFor
     };
   }
 
@@ -47,10 +47,9 @@ class SubscribeUserCard extends Component {
   };
 
   handleSubscribed = e => {
-    const selectedUserList = this.state.item;
-    const { subscribeId } = this.state;
-    if (!subscribeId) {
-      const requestData = { followers: selectedUserList.id };
+    const { isFor } = this.props;
+    if (isFor === "Subscribers") {
+      const requestData = { followers: e.target.id };
       this.props.sendRequest(requestData).then(() => {
         if (
           this.props.usersData.error &&
@@ -69,10 +68,7 @@ class SubscribeUserCard extends Component {
         }
       });
     } else {
-      const subscribedId = selectedUserList.subscribeId
-        ? selectedUserList.subscribeId
-        : this.state.subscribeId;
-      this.props.getUnsubscribe(subscribedId).then(() => {
+      this.props.getUnsubscribe(e.target.id).then(() => {
         if (
           this.props.usersData.error &&
           this.props.usersData.error.status === 400

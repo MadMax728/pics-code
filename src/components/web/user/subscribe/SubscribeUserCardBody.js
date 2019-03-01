@@ -20,28 +20,30 @@ class SubscribeUserCardBody extends Component {
       isFor
     } = this.props;
     const { user } = this.state;
-    console.log(user);
     let classNameText = "filled_button";
     let btnText = Translations.profile_community_right_sidebar.Subscribed;
-    if (isSubscribeStatus) {
-      if (isSubscribeStatus === "subscribe") {
-        btnText = Translations.profile_community_right_sidebar.Subscribed;
-        classNameText = "filled_button";
-      } else if (isSubscribeStatus === "unsubscribe") {
-        btnText = Translations.profile_community_right_sidebar.Subscribe;
-        classNameText = "blue_button";
-      }
-    } else if (user.isSubscribe) {
+    console.log("status", isSubscribeStatus);
+    console.log("followings", typeof user.followers);
+    const isfollower = typeof user.followers;
+    if (isfollower !== "string") {
       btnText = Translations.profile_community_right_sidebar.Subscribed;
       classNameText = "filled_button";
     } else {
       btnText = Translations.profile_community_right_sidebar.Subscribe;
       classNameText = "blue_button";
     }
+    let actionId = "";
+    if (isFor === "Subscribers") {
+      console.log("subscribe", user.followers);
+      actionId = user.followers;
+    } else {
+      console.log("unsubscribe", user._id);
+      actionId = user._id;
+    }
 
     const actionButton = {
       className: classNameText,
-      userId: user.username,
+      actionId: actionId,
       handleActionClick: handleSubscribed,
       btnText,
       isLoading
@@ -79,7 +81,7 @@ class SubscribeUserCardBody extends Component {
             <div className="subscribe-btn">
               <Button
                 className={actionButton.className}
-                id={actionButton.userId}
+                id={actionButton.actionId}
                 onClick={actionButton.handleActionClick}
                 disabled={actionButton.isLoading}
                 text={actionButton.btnText}
