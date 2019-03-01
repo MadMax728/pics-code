@@ -1755,6 +1755,7 @@ section.loader-wrapr {
     margin: 100px auto;
     .modal-content {
       // overflow: visible;
+      padding: 0 !important;
       .closeBtn {
         position: absolute;
         right: -38px;
@@ -1764,10 +1765,62 @@ section.loader-wrapr {
         border: none;
       }
       .subscriber-tooltip{
-        height: 60vh;
+        min-height: auto;
+        max-height: 60vh;
         overflow-y: auto;
         overflow-x: hidden;
+        .header-notifications{
+          .user-info{
+            .username{
+              font-weight: bold;
+            }
+          }
+        }
+        .normal_title{
+          margin-top: 0 !important;
+          padding-bottom: 15px;
+          margin-bottom: 15px;
+          border-bottom: 1px solid #000;
+        }
       }
+    }
+  }
+}
+
+.search-user{
+  position: absolute;
+  left: 0;
+  top:50px;
+  background-color: #fff;
+  width: 100%;
+  .search-user-wrapper{
+    display: inline-block;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding: 7px 30px;
+    &:last-child{
+      border-bottom: none;
+    }
+    .search-user-image{
+      display: inline-block;
+      float: left;
+      width:20%;
+      .profile_image{
+        height: 45px;
+        width:45px;
+        img{
+          height: 100%;
+          width:100%;
+          border-radius: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    .search-user-name{
+      display: inline-block;
+      float: left;
+      width:70%;
+      padding: 10px 0;
     }
   }
 }
