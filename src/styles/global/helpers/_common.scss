@@ -1748,3 +1748,26 @@ section.loader-wrapr {
     }
   }
 }
+
+.subscribe-modal{
+  background: rgba(51, 51, 51, 0.7) !important;
+  .modal-dialog {
+    margin: 100px auto;
+    .modal-content {
+      // overflow: visible;
+      .closeBtn {
+        position: absolute;
+        right: -38px;
+        top: -38px;
+        z-index: 9;
+        background-color: transparent;
+        border: none;
+      }
+      .subscriber-tooltip{
+        height: 60vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+      }
+    }
+  }
+}

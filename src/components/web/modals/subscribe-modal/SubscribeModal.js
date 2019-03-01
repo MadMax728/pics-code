@@ -16,11 +16,11 @@ class SubscribeModal extends Component {
     const { handleModalHide, handleModalConfirmation } = this.props;
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade action-confirmation-modal"}
+        modalClassName={"modal fade action-confirmation-modal subscribe-modal"}
         header={false}
         footer={false}
         modalShow={this.props.modalShow}
-        closeBtn={false}
+        closeBtn={true}
         handleModalHide={this.props.handleModalHide}
         modalBodyContent={
           <Subscribe
