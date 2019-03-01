@@ -4,10 +4,10 @@ import SearchUserItem from "./SearchUserItem";
 
 const SearchUsers = ( { users }) => {
     return (
-        <div className="community" style={{ position: "absolute" }}>
+        <div className="search-user">
            {
                users.map((user, key) => (
-                   <div className="community_wrapper" key={user._id}>
+                   <div className="search-user-wrapper" key={user._id}>
                         <SearchUserItem item={user}></SearchUserItem>
                    </div>
                 ))
