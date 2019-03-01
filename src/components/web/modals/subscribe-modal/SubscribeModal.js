@@ -32,27 +32,6 @@ class SubscribeModal extends Component {
       />
     );
   }
-
-  handleConfirmation = value => {
-    const paramData = { isActive: value };
-    console.log(paramData);
-    if (this.props.data.id === "deactivateAccount") {
-      this.props.deactivateAccount(paramData).then(() => {
-        if (
-          this.props.profilePrivacyData.error &&
-          this.props.profilePrivacyData.error.status === 400
-        ) {
-          console.log("error");
-          // To Do - Call back to Modal call - with error status
-        } else {
-          this.props.history.push(routes.LOGOUT_ROUTE);
-          // To Do - Call back to Modal call - with success status
-        }
-      });
-    } else {
-      console.log("delete History");
-    }
-  };
 }
 
 const mapStateToProps = state => ({

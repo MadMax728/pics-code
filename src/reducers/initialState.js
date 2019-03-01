@@ -166,6 +166,7 @@ const initialState = {
   subscribeData: {
     subscriber: [],
     subscribed: [],
+    subscribeData: [],
     isLoading: false,
     error: false
   },
@@ -241,7 +242,7 @@ const initialState = {
     searchKeyword: null,
     isLoading: false,
     error: false,
-    users: [],
+    users: []
   },
   communityData: {
     userCommunity: null,

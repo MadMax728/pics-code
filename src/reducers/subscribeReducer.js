@@ -10,10 +10,16 @@ const subscribeReducer = (state = initialState.subscribeData, action) => {
         isLoading: true,
         error: null
       };
+    // case types.GET_FOLLOW_USER_LIST_SUCCEEDED:
+    //   return {
+    //     ...state,
+    //     [action.isFor]: action.payload,
+    //     isLoading: false
+    //   };
     case types.GET_FOLLOW_USER_LIST_SUCCEEDED:
       return {
         ...state,
-        [action.isFor]: action.payload,
+        subscribeData: action.payload,
         isLoading: false
       };
     case types.GET_FOLLOW_USER_LIST_FAILED:
