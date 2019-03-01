@@ -242,7 +242,9 @@ const initialState = {
     searchKeyword: null,
     isLoading: false,
     error: false,
-    users: []
+    users: [],
+    page: 1,
+    pages: 1
   },
   communityData: {
     userCommunity: null,
