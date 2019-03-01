@@ -254,14 +254,18 @@ class CampaignModal extends Component {
 
   handleSetstate = data => {
     const { form } = this.state;
-    form.id = data.id;
-    form.title = data.title;
+    if (data.id) {
+      form.id = data.id;
+    }
+    if (data.title) {
+      form.title = data.title;
+    }
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
       form.location.address = data.location.address;
     }
-    if (data.category && data.category) {
+    if (data.category) {
       form.category = data.category;
     }
     if (data.offers) {
