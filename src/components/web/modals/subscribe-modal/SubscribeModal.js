@@ -27,6 +27,7 @@ class SubscribeModal extends Component {
             handleModalHide={handleModalHide}
             isFor={this.props.data.type}
             userId={this.props.data.userid}
+            username={this.props.data.username}
           />
         }
       />
