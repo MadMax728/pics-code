@@ -65,19 +65,6 @@ class InformationPage extends Component {
     this.handleCommentsSections();
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
-    }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      this.props.getSearch(nextProps.searchData.searchKeyword);
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push("/campaign/company?search=" + searchKeyword);
-    }
-  };
-
   componentDidUpdate(prevProps, prevState) {
     const campaignId = this.props.match.params.id;
 

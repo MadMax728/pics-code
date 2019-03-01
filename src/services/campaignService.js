@@ -57,7 +57,7 @@ export const getCampaignDetails = (payload, header = {}) =>
 
 // Favourite Campaigns API
 export const getFavouriteCampaigns = (payload, header = {}) =>
-  api(baseUrl, header).get(getFavouriteCampaignsEndPoint + payload);
+  api(baseUrl, header).get(getFavouriteCampaignsEndPoint);
 
 // Create Campaign
 export const createCampaign = (payload, header = {}) =>
