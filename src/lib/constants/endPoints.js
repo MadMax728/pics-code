@@ -92,7 +92,7 @@ export const getReportedStatisticsEndPoint =
   "/reports/post-count?reportContent=";
 
 // review services
-export const CampaignsEndPoint = "/campaigns/get-all-campaigns";
+export const CampaignsEndPoint = "/campaigns/";
 export const AdsEndPoint = "/advertisement/list";
 export const getReviewStatisticsEndPoint = "/post-count";
 export const updateBackOfficeReviewEndPoint = "/update-status";
