@@ -14,7 +14,7 @@ const SearchUserItem = ( { item }) => {
         </div>
         <div className="search-user-name">
           <div className="normal_title">{item.username}</div>
-          <div className="secondary_title">{item.name}</div>
+          <div className="secondary_title">{item.name || item.userType}</div>
         </div>
       </Link>
     );
