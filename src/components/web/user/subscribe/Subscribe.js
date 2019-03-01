@@ -11,6 +11,7 @@ import {
   getUser
 } from "../../../../actions";
 import SubscribeUserCard from "./SubscribeUserCard";
+import InfiniteScroll from "react-infinite-scroller";
 
 class Subscribe extends Component {
   constructor(props) {
@@ -32,8 +33,31 @@ class Subscribe extends Component {
 
   render() {
     const { dataList } = this.state;
-    const { isFor } = this.props;
+    const { isFor, username } = this.props;
     const isLoading = this.props.subscribeData.isLoading;
+    // console.log(subscribeData.subscribeData);
+    // const subscribeData = subscribeData.subscribeData;
+    // const limit = subscribeData.limit;
+    // const page = subscribeData.page;
+
+    // let hasMore = false;
+
+    // if (
+    //   limit &&
+    //   subscribeData.pages &&
+    //   parseInt(subscribeData.pages) > parseInt(page)
+    // ) {
+    //   hasMore = true;
+    // }
+
+    // if (
+    //   page &&
+    //   subscribeData.pages &&
+    //   parseInt(subscribeData.pages) > parseInt(page)
+    // ) {
+    //   hasMore = true;
+    // }
+
     return (
       <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
@@ -44,11 +68,12 @@ class Subscribe extends Component {
           {dataList.length > 0 ? (
             dataList.map(user => {
               return (
-                <div key={user._id}>
+                <div onScroll={this.trackScrolling} key={user._id}>
                   <SubscribeUserCard
                     item={user}
                     isLoading={isLoading}
                     isFor={isFor}
+                    username={username}
                   />
                 </div>
               );
@@ -68,17 +93,93 @@ class Subscribe extends Component {
   }
 
   componentDidMount = () => {
-    this.getTooltipUserList(this.props.userId);
+    const params = { limit: 10, page: 1 };
+    this.getTooltipUserList(this.props.userId, params);
+    window.addEventListener("scroll", this.onScroll, false);
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.onScroll);
+  };
+
+  onScroll = () => {
+    console.log("dataScroll");
+    const { dataList, currentPage } = this.state;
+    const currentScrollHeight = parseInt(window.innerHeight + window.scrollY);
+    console.log(currentScrollHeight);
+    // console.log(currentScrollHeight, (document.body.offsetHeight));
+    if (
+      dataList &&
+      currentScrollHeight + 1 >= document.body.offsetHeight &&
+      dataList.length
+    ) {
+      const { lastEvaluatedKey } = this.props;
+      console.log("onScroll", lastEvaluatedKey);
+      let payload = "";
+      if (currentPage < lastEvaluatedKey.pages) {
+        for (let i in lastEvaluatedKey) {
+          if (i === "limit") {
+            payload += lastEvaluatedKey[i] && `&${i}=${lastEvaluatedKey[i]}`;
+          } else {
+            const currentPage = parseInt(lastEvaluatedKey[i]) + 1;
+            payload += lastEvaluatedKey[i] && `&${i}=${currentPage}`;
+            this.setState({ currentPage });
+          }
+        }
+        const userId = this.props.userId;
+        let userRequestData = {
+          id: userId,
+          type: "following",
+          params: payload
+        };
+        if (this.props.isFor === "Subscribers") {
+          userRequestData = {
+            id: userId,
+            type: "following",
+            params: payload
+          };
+        } else if (this.props.isFor === "Subscribed") {
+          userRequestData = {
+            id: userId,
+            type: "followers",
+            params: payload
+          };
+        }
+        this.props.getFollowUserList(userRequestData).then(() => {
+          const { dataList } = this.state;
+          this.setState({
+            dataList: dataList.concat(
+              this.props.subscribeData.subscribeData.data
+            )
+          });
+        });
+      }
+    }
   };
 
   // Tooltip List
-  getTooltipUserList = userId => {
+  getTooltipUserList = (userId, paginationParam) => {
     if (userId) {
-      let userRequestData = { id: userId, type: "following" };
+      const paginationParams =
+        "&limit=" + paginationParam.limit + "&page=" + paginationParam.page;
+      let userRequestData = {
+        id: userId,
+        type: "following",
+        params: paginationParams
+      };
+
       if (this.props.isFor === "Subscribers") {
-        userRequestData = { id: userId, type: "following" };
+        userRequestData = {
+          id: userId,
+          type: "following",
+          params: paginationParams
+        };
       } else if (this.props.isFor === "Subscribed") {
-        userRequestData = { id: userId, type: "followers" };
+        userRequestData = {
+          id: userId,
+          type: "followers",
+          params: paginationParams
+        };
       }
       this.props.getFollowUserList(userRequestData).then(() => {
         // Success
@@ -127,7 +228,8 @@ Subscribe.propTypes = {
   getUser: PropTypes.func,
   handleModalHide: PropTypes.func,
   handleConfirmation: PropTypes.func,
-  isFor: PropTypes.any
+  isFor: PropTypes.any,
+  lastEvaluatedKey: PropTypes.any
 };
 
 export default connect(

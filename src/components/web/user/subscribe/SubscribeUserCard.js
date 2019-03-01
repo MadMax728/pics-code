@@ -21,13 +21,14 @@ class SubscribeUserCard extends Component {
     this.state = {
       item: this.props.item,
       subscribeId: this.props.item.subscribeId,
-      isSubscribeStatus: this.props.isFor
+      isSubscribeStatus: this.props.isFor,
+      isView: true
     };
   }
 
   render() {
-    const { item, isSubscribeStatus, subscribeId } = this.state;
-    const { isLoading, isFor } = this.props;
+    const { item, isSubscribeStatus, subscribeId, isView } = this.state;
+    const { isLoading, isFor, username } = this.props;
     return (
       <div>
         <SubscribeUserCardBody
@@ -37,6 +38,7 @@ class SubscribeUserCard extends Component {
           subscribeId={subscribeId}
           isLoading={isLoading}
           isFor={isFor}
+          isView={isView}
         />
       </div>
     );
@@ -48,6 +50,7 @@ class SubscribeUserCard extends Component {
 
   handleSubscribed = e => {
     const { isFor } = this.props;
+    const { item } = this.state;
     if (isFor === "Subscribers") {
       const requestData = { followers: e.target.id };
       this.props.sendRequest(requestData).then(() => {
@@ -60,11 +63,12 @@ class SubscribeUserCard extends Component {
           this.props.usersData &&
           this.props.usersData.isRequestSendData
         ) {
-          // Success
-          this.setState({
-            isSubscribeStatus: "subscribe",
-            subscribeId: this.props.usersData.isRequestSendData._id
-          });
+          const reponseId = this.props.usersData.isRequestSendData._id;
+          if (reponseId === item._id) {
+            this.setState({
+              isView: false
+            });
+          }
         }
       });
     } else {
@@ -78,11 +82,15 @@ class SubscribeUserCard extends Component {
           this.props.usersData &&
           this.props.usersData.isUnsubscribedData
         ) {
+          const reponseId = this.props.usersData.isUnsubscribedData._id;
           // Success
-          this.setState({
-            isSubscribeStatus: "unsubscribe",
-            subscribeId: ""
-          });
+          if (reponseId === item._id) {
+            this.setState({
+              isView: false
+            });
+            const data = { username: this.props.username };
+            this.props.getUser(data);
+          }
         }
       });
     }
@@ -111,7 +119,8 @@ SubscribeUserCard.propTypes = {
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.any,
   isLoading: PropTypes.any,
-  isFor: PropTypes.any
+  isFor: PropTypes.any,
+  username: PropTypes.any
 };
 
 export default connect(

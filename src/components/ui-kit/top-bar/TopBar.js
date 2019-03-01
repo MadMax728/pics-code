@@ -131,7 +131,8 @@ class TopBar extends Component {
   handleSubscribeModal = e => {
     this.props.handleModalShow(modalType.subscribe, {
       type: e.target.id,
-      userid: this.props.items.userid
+      userid: this.props.items.userid,
+      username: this.props.items.username
     });
   };
 
