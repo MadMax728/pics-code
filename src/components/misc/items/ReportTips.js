@@ -41,11 +41,11 @@ class ReportTips extends Component {
 
     this.props.setSavedPost(data).then(() => {
       const { savedData, handleRemove } = this.props;
-      if (savedData && savedData.saved && savedData.saved.post === item.id) {
+      if (savedData && savedData.saved && savedData.saved.post === item._id) {
         item.isSavedPost = !item.isSavedPost;
         this.setState({ item });
         if (isSavedPage && !item.isSavedPost) {
-          handleRemove(item.id);
+          handleRemove(item._id);
         }
       }
     });
@@ -61,7 +61,7 @@ class ReportTips extends Component {
       item.reportStatus = data.contentStatus;
     }
     this.setState({ item });
-    handleRemove(item.id);
+    handleRemove(item._id);
   };
 
   handleDoNotContent = e => {
@@ -162,7 +162,7 @@ class ReportTips extends Component {
         reportedContentData &&
         reportedContentData &&
         reportedContentData.addReport &&
-        reportedContentData.addReport.typeId === item.id
+        reportedContentData.addReport.typeId === item._id
       ) {
         item.isReported = !item.isReported;
         this.setState({ item });
@@ -223,7 +223,7 @@ class ReportTips extends Component {
       }
     }
 
-    return item && <RenderToolTips items={reportTips} id={item.id} />;
+    return item && <RenderToolTips items={reportTips} id={item._id} />;
   }
 }
 

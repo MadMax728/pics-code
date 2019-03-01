@@ -413,7 +413,7 @@ class CampaignModal extends Component {
         const postType = isFor
           ? contentTypes.companyCampaign
           : contentTypes.creatorCampaign;
-        this.props.uploadMedia(Data, form.filetype, postType).then(() => {
+        this.props.uploadMedia(Data, form.filetype, "campaign").then(() => {
           const { mediaData } = this.props;
           if (mediaData && mediaData.media) {
             form.typeId = mediaData.media.id;
@@ -445,7 +445,7 @@ class CampaignModal extends Component {
       const postType = isFor
         ? contentTypes.companyCampaign
         : contentTypes.creatorCampaign;
-      this.props.uploadMedia(Data, form.filetype, postType).then(() => {
+      this.props.uploadMedia(Data, form.filetype, "campaign").then(() => {
         const { mediaData } = this.props;
         if (mediaData && mediaData.media) {
           form.typeId = mediaData.media.id;
