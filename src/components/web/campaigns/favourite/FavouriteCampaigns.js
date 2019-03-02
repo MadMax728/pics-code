@@ -14,10 +14,6 @@ class FavouriteCampaigns extends Component {
     this.props.getFavouriteCampaigns();
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
-  }
-
   render() {
     const { campaignData, isLoading } = this.props;
     const favouriteCampaign = campaignData && campaignData.favouriteCampaign ? campaignData.favouriteCampaign : [];
@@ -54,6 +50,17 @@ class FavouriteCampaigns extends Component {
       </div>
     );
   }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const next = nextProps.campaignData;
+    const { campaignData } = this.props;
+    const favouriteCampaign = campaignData && campaignData.favouriteCampaign ? campaignData.favouriteCampaign : [];
+    if( next && next.favouriteCampaign && favouriteCampaign && JSON.stringify(next.favouriteCampaign) === JSON.stringify(favouriteCampaign)) {
+      return false;
+    }
+    return true;
+  }
+
 }
 
 const mapStateToProps = state => ({

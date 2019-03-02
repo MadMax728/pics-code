@@ -247,7 +247,7 @@ const initialState = {
     pages: 1
   },
   communityData: {
-    userCommunity: null,
+    userCommunity: [],
     isLoading: false,
     error: false
   },

@@ -136,7 +136,7 @@ export const updateUserProfileEndPoint = "/users";
 export const generateOTPEndPoint = "/auth/generate-otp";
 export const logoutEndPoint = "/auth/logout";
 export const getSocialNetworkEndPoint = "/auth/social-network-details";
-export const getUserCommunityEndPoint = "/users/community?followers=";
+export const getUserCommunityEndPoint = "/users/community";
 
 // Users Services
 export const getUserListSubscriberEndPoint =

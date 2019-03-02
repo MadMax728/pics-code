@@ -3,14 +3,18 @@ import PropTypes from "prop-types";
 
 class UserTitleItem extends PureComponent {
   render() {
-    const { title, username, date, category } = this.props;
+    const { title = '', username, date, category = '' } = this.props;
     return (
       <div className="titles_wrapper">
         <div className="normal_title">{title}</div>
         {username && <div className="secondary_title">{username}</div>}
         {date && (
-          <div className="grey_title">
-            {date} in {category || `Category`}
+          <div className="grey_title">{date}
+            {
+              category && (
+                <span> in {category}</span>
+              )
+            }
           </div>
         )}
       </div>
@@ -19,7 +23,7 @@ class UserTitleItem extends PureComponent {
 }
 
 UserTitleItem.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   username: PropTypes.string,
   date: PropTypes.string,
   category: PropTypes.string,

@@ -325,7 +325,7 @@ class CampaignModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
+    if ((data && prevState.form && prevState.form && data.id !== prevState.form.id) || !prevProps.modalShow) {
       this.handleSetstate(data);
     }
   }

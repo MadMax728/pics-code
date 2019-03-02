@@ -24,7 +24,6 @@ export {
   ImageItem,
   UserProfileImage,
   UserImageItem,
-  ParticipantUserImageItem,
   VideoItem,
   UserTitleItem,
   ImageGallery
