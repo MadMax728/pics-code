@@ -26,10 +26,10 @@ const CommunityItem = ({ user, handleSubscribe, handleUnSubscribe, isLoading = f
       </div>
       <div className="community-subscribe"> 
         {
-          user.isSubscribed ? (
+          user.isSubscribedTo ? (
             <Button
               className={`filled_button`}
-              id={user.subscribedId}
+              id={user.subscriberId}
               onClick={handleUnSubscribe}
               disabled={isLoading}
               text={Translations.profile_community_right_sidebar.Subscribed}

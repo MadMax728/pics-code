@@ -13,7 +13,7 @@ import {
 } from "../../../ui-kit";
 import CommunityItem from './CommunityItem';
 
-class Community extends PureComponent {
+class Community extends Component {
   
   render() {
     const { communityData, usersData } = this.props;
