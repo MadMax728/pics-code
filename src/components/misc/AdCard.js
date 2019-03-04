@@ -17,7 +17,8 @@ class AdCard extends Component {
       isComments: false,
       item: this.props.item,
       comments: "",
-      totalCommentsCount: ""
+      totalCommentsCount: "",
+      commentType: "advertisement"
     };
   }
 
@@ -31,7 +32,7 @@ class AdCard extends Component {
       reportedContentData,
       savedData
     } = this.props;
-    const { isComments, item, comments } = this.state;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <AdCardHeader
@@ -58,6 +59,7 @@ class AdCard extends Component {
           isLoading={false}
           isReport={isReport}
           isReview={isReview}
+          commentType={commentType}
         />
         {isComments && (
           <CommentCard
@@ -66,6 +68,7 @@ class AdCard extends Component {
             typeContent={"Ads"}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
+            commentType={commentType}
           />
         )}
       </div>
@@ -119,10 +122,13 @@ class AdCard extends Component {
   };
 
   handleCommentsSections = () => {
-    const AdId = {
-      typeId: this.state.item.id
-    };
-    this.props.getComments(AdId).then(() => {
+    // const AdId = {
+    //   typeId: this.state.item.id
+    // };
+    const AdId = this.state.item.id;
+    const commentType = this.state.commentType;
+    const getCommentEndPoint = commentType + "/" + AdId + "/comment/";
+    this.props.getComments(getCommentEndPoint).then(() => {
       this.setState({
         isComments: !this.state.isComments,
         comments: this.props.comments,

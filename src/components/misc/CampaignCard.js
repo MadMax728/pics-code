@@ -63,7 +63,7 @@ class CampaignCard extends Component {
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
-          commentType={"campaigns"}
+          commentType={commentType}
         />
         {isComments && (
           <CommentCard
@@ -130,8 +130,9 @@ class CampaignCard extends Component {
     //   typeId: this.state.item._id
     // };
     const CampaignId = this.state.item._id;
-    const getCampaignCommentEndPoint = "campaigns/" + CampaignId + "/comment/";
-    this.props.getComments(getCampaignCommentEndPoint).then(() => {
+    const commentType = this.state.commentType;
+    const getCommentEndPoint = commentType + "/" + CampaignId + "/comment/";
+    this.props.getComments(getCommentEndPoint).then(() => {
       const totalComment = this.props.comments;
       this.setState({
         isComments: !this.state.isComments,

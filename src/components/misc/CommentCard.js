@@ -18,6 +18,7 @@ import * as enumerations from "../../lib/constants/enumerations";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 import moment from "moment";
+import EmojiCard from "./EmojiCard";
 
 const storage = Auth.extractJwtFromStorage();
 const userMentionList = [];
@@ -53,7 +54,6 @@ class CommentCard extends Component {
       typeId: e.target.id,
       title: comment.comment
     };
-    console.log(data);
     this.props.addReport(data).then(() => {
       if (
         this.props.reportedContentData &&
@@ -450,6 +450,18 @@ class CommentCard extends Component {
     this.setState({ isEmoji: false });
   };
 
+  addCommentEmoji = emoji => {
+    console.log("inFun");
+    console.log("ee:", emoji);
+    if (emoji) {
+      const comment = this.state.form.comment;
+      const newComment = comment + emoji;
+      console.log(newComment);
+      this.setState({ form: { comment: newComment } });
+      this.setState({ isEmoji: false });
+    }
+  };
+
   onEmojiOpen = () => {
     this.setState(prevState => ({
       isEmoji: !prevState.isEmoji
@@ -487,7 +499,13 @@ class CommentCard extends Component {
                   </div>
                 </div>
               </div>
-              <div className="emoji_wrapper col-sm-2 col-xs-2 pull-right text-right">
+              <div>
+                <EmojiCard
+                  isEmoji={isEmoji}
+                  addCommentEmoji={this.addCommentEmoji}
+                />
+              </div>
+              {/* <div className="emoji_wrapper col-sm-2 col-xs-2 pull-right text-right">
                 <img
                   role="presentation"
                   className="pull-right"
@@ -506,7 +524,7 @@ class CommentCard extends Component {
                     }}
                   />
                 )}
-              </div>
+              </div> */}
               <input type="submit" hidden />
             </form>
           </div>
