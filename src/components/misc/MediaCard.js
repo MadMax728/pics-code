@@ -69,7 +69,7 @@ class MediaCard extends Component {
         {isComments && (
           <CommentCard
             item={this.state.comments}
-            itemId={item.id}
+            itemId={item._id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
             totalCommentsCount={this.state.comments.length}

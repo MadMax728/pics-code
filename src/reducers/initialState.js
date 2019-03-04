@@ -211,7 +211,7 @@ const initialState = {
   },
   reportedContentData: {
     image: null,
-    Videos: null,
+    videos: null,
     Campaign: null,
     Pics: null,
     Ads: null,
