@@ -86,7 +86,7 @@ class CommentCard extends Component {
       const { comment } = this.props;
       if (comment) {
         const commentData = {
-          id: comment._id,
+          _id: comment._id,
           comment: comment.comment,
           userId: comment.createdBy,
           createdBy: {
@@ -104,13 +104,13 @@ class CommentCard extends Component {
   };
 
   handleEditComment = e => {
-    const id = e.target.id;
+    const _id = e.target.id;
     const { comments } = this.state;
     this.setState({
       updateForm: {
         ...this.state.updateForm,
-        comment: comments[comments.findIndex(c => c._id === id)].comment,
-        id,
+        comment: comments[comments.findIndex(c => c._id === _id)].comment,
+        _id,
         mentionedUserId: []
       }
     });
@@ -211,13 +211,14 @@ class CommentCard extends Component {
   };
 
   renderEditComment = comment => {
+    // console.log("renderEditComment", comment);
     const { updateForm } = this.state;
     const { isLoading } = this.props;
     let html = (
       <ReadMore text={comment.comment} min={150} ideal={150} max={150} />
     );
-    const updateId = updateForm.id;
-    if (updateId && comment._id === updateForm.id) {
+    const updateId = updateForm._id;
+    if (updateId && comment._id === updateForm._id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
           <div>
@@ -429,14 +430,14 @@ class CommentCard extends Component {
     const { commentType } = this.props;
     if (updateForm.comment !== "") {
       const editCommentEndPoint =
-        commentType + "/" + itemId + "/comment/" + updateForm.id;
+        commentType + "/" + itemId + "/comment/" + updateForm._id;
       this.props.editComment(editCommentEndPoint, updateForm).then(() => {
-        comments[comments.findIndex(c => c._id === updateForm.id)].comment =
+        comments[comments.findIndex(c => c._id === updateForm._id)].comment =
           updateForm.comment;
         /* eslint-disable */
         this.setState({ comments });
         this.setState({
-          updateForm: { ...this.state.updateForm, comment: "", id: null }
+          updateForm: { ...this.state.updateForm, comment: "", _id: null }
         });
       });
     }
@@ -451,12 +452,9 @@ class CommentCard extends Component {
   };
 
   addCommentEmoji = emoji => {
-    console.log("inFun");
-    console.log("ee:", emoji);
     if (emoji) {
       const comment = this.state.form.comment;
       const newComment = comment + emoji;
-      console.log(newComment);
       this.setState({ form: { comment: newComment } });
       this.setState({ isEmoji: false });
     }
@@ -474,7 +472,7 @@ class CommentCard extends Component {
     const userInfo = storage ? JSON.parse(storage.userInfo) : null;
     const profileImage = userInfo ? userInfo.profileUrl : images.image;
     return (
-      <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item.id}>
+      <div className={isReport ? "feed_wrapper" : "feed-comment"} id={item._id}>
         {!isReport && (
           <div className="comment-wrapper">
             <form onSubmit={this.handleSubmit} ref={this.commentForm}>
@@ -529,18 +527,15 @@ class CommentCard extends Component {
             </form>
           </div>
         )}
-
         {isReport &&
           isBackOffice &&
           item &&
           item.map(this.renderBackOfficeComment)}
-
         {!isReport &&
           !isBackOffice &&
           this.props.totalCommentsCount !== 0 &&
           this.state.slicedCommentsData &&
           this.state.slicedCommentsData.map(this.renderComment)}
-
         {!isReport && this.props.totalCommentsCount > this.state.maxRange && (
           <div
             className="view-more-comments view-more-link"
@@ -550,7 +545,6 @@ class CommentCard extends Component {
             {Translations.view_more_comments}
           </div>
         )}
-
         {!isReport &&
           this.props.totalCommentsCount > 2 &&
           this.props.totalCommentsCount < this.state.maxRange && (
