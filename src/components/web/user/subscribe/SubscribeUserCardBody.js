@@ -77,7 +77,7 @@ class SubscribeUserCardBody extends Component {
               </div>
             </div>
           </div>
-          <div className="col-md-5">
+          <div className="col-md-4">
             <div className="subscribe-btn">
               <Button
                 className={actionButton.className}

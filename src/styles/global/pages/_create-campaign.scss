@@ -960,18 +960,28 @@
             margin: 0 25%;
             text-align: center;
             display: inline-block;
-            width: 50%;
-            padding: 0;
+            width: 52%;
+            padding: 0 40px;
             position: relative;
             height: 60px;
+            .add-wrapper.upload-wrapr{
+              height: auto;
+              background: transparent;
+              position: absolute;
+              right: -9px;
+              top: 2px;
+              img{
+                
+              }
+            }
             .min-profile-pic {
               position: absolute;
-              left: 30px;
+              left: 40px;
               z-index: 9;
             }
             img.max-profile-pic {
               position: absolute;
-              right: 30px;
+              right: 45px;
               z-index: 9;
               left: initial;
             }
@@ -979,7 +989,7 @@
               float: none;
             }
             .runnable {
-              left: 80px;
+              left: 48px;
             }
           }
         }

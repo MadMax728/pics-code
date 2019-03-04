@@ -39,8 +39,9 @@ class Subscribe extends Component {
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>
-        {isLoading && <InlineLoading />}
+        
         <div className="header-notifications">
+        {isLoading && <InlineLoading />}
           {dataList.length > 0 ? (
             dataList.map(user => {
               return (
