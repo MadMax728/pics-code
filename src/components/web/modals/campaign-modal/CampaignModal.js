@@ -325,7 +325,13 @@ class CampaignModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    if ((data && prevState.form && prevState.form && data.id !== prevState.form.id) || !prevProps.modalShow) {
+    if (
+      (data &&
+        prevState.form &&
+        prevState.form &&
+        data.id !== prevState.form.id) ||
+      !prevProps.modalShow
+    ) {
       this.handleSetstate(data);
     }
   }
@@ -548,6 +554,7 @@ class CampaignModal extends Component {
   /* eslint-disable */
   validateForm = index => {
     const { form } = this.state;
+    console.log(form);
     if (index === 0) {
       return (
         form.title &&

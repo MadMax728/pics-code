@@ -56,12 +56,12 @@ const addCommentFailed = error => ({
   error: true
 });
 
-export const addComment = data => {
+export const addComment = (endPoint, data) => {
   return dispatch => {
     dispatch(addCommentStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    return commentService.addComment(data, header).then(
+    return commentService.addComment(endPoint, data, header).then(
       res => {
         dispatch(addCommentSucceeded(res.data.success ? res.data.data : null));
       },
@@ -130,12 +130,12 @@ const editCommentFailed = error => ({
   error: true
 });
 
-export const editComment = data => {
+export const editComment = (endPoint, data) => {
   return dispatch => {
     dispatch(editCommentStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    return commentService.editComment(data, header).then(
+    return commentService.editComment(endPoint, data, header).then(
       res => {
         dispatch(editCommentSucceeded(res.data.success ? res.data.data : null));
       },

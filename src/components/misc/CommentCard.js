@@ -75,16 +75,14 @@ class CommentCard extends Component {
 
   addComment = comment => {
     const { comments, itemId, typeOfContent, slicedCommentsData } = this.state;
+    const { commentType } = this.props;
     const data = {
       comment,
-      typeOfContent,
-      typeId: itemId,
       mentionedUserId: []
     };
-    this.props.addComment(data).then(() => {
+    const addCommentEndPoint = commentType + "/" + itemId + "/comment/";
+    this.props.addComment(addCommentEndPoint, data).then(() => {
       const { comment } = this.props;
-      console.log(comment);
-
       if (comment) {
         const commentData = {
           id: comment._id,
@@ -110,8 +108,9 @@ class CommentCard extends Component {
     this.setState({
       updateForm: {
         ...this.state.updateForm,
-        comment: comments[comments.findIndex(c => c.id === id)].comment,
-        id
+        comment: comments[comments.findIndex(c => c._id === id)].comment,
+        id,
+        mentionedUserId: []
       }
     });
   };
@@ -164,7 +163,7 @@ class CommentCard extends Component {
       reportTips = [
         {
           name:
-            item[item.findIndex(i => i.id === id)].reportStatus ===
+            item[item.findIndex(i => i._id === id)].reportStatus ===
             enumerations.reportType.lock
               ? Translations.tool_tips.unlock
               : Translations.tool_tips.lock,
@@ -185,7 +184,7 @@ class CommentCard extends Component {
           handleEvent: this.handleEditComment
         },
         {
-          name: item[item.findIndex(i => i.id === id)].isReported
+          name: item[item.findIndex(i => i._id === id)].isReported
             ? Translations.tool_tips.unreport_comment
             : Translations.tool_tips.report_comment,
           handleEvent: this.handleReportPost
@@ -212,7 +211,8 @@ class CommentCard extends Component {
     let html = (
       <ReadMore text={comment.comment} min={150} ideal={150} max={150} />
     );
-    if (comment.id === updateForm.id) {
+    const updateId = updateForm.id;
+    if (updateId && comment._id === updateForm.id) {
       html = (
         <form onSubmit={this.handleUpdateSubmit}>
           <div>
@@ -243,7 +243,7 @@ class CommentCard extends Component {
   renderBackOfficeComment = comment => {
     const { isReport } = this.props;
     return (
-      <div key={comment.id}>
+      <div key={comment._id}>
         <div className="feed-comment">
           <div className="comment-wrapper">
             <div className="comment-header">
@@ -262,11 +262,11 @@ class CommentCard extends Component {
               </div>
               <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
                 <ThreeDots
-                  id={`comment-${comment.id}`}
+                  id={`comment-${comment._id}`}
                   role="button"
                   dataTip="tooltip"
                   dataClass="tooltip-wrapr" /* eslint-disable */
-                  getContent={() => this.renderReportTips(comment.id)}
+                  getContent={() => this.renderReportTips(comment._id)}
                   effect="solid"
                   delayHide={500}
                   delayShow={500}
@@ -289,7 +289,7 @@ class CommentCard extends Component {
 
   renderComment = comment => {
     return (
-      <div className="comment-wrapper" key={comment.id}>
+      <div className="comment-wrapper" key={comment._id}>
         <div className="comment-header col-xs-12 no-padding">
           <UserImageItem
             item={comment.createdBy.profileUrl}
@@ -302,11 +302,11 @@ class CommentCard extends Component {
           </div>
           <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
             <ThreeDots
-              id={`comment-${comment.id}`}
+              id={`comment-${comment._id}`}
               role="button"
               dataTip="tooltip"
               dataClass="tooltip-wrapr" /* eslint-disable */
-              getContent={() => this.renderReportTips(comment.id)}
+              getContent={() => this.renderReportTips(comment._id)}
               effect="solid"
               delayHide={500}
               delayShow={500}
@@ -320,6 +320,7 @@ class CommentCard extends Component {
         <div className="comment-content col-md-12 no-padding">
           <div className="col-md-1" />
           <div className="col-md-10 comment-content-div">
+            {/* {"test"} */}
             {this.renderEditComment(comment)}
           </div>
         </div>
@@ -397,7 +398,13 @@ class CommentCard extends Component {
 
   handleUpdateSetState = (value, cd) => {
     this.setState(
-      { updateForm: { ...this.state.updateForm, comment: value } },
+      {
+        updateForm: {
+          ...this.state.updateForm,
+          comment: value,
+          mentionedUserId: []
+        }
+      },
       () => cd()
     );
   };
@@ -413,10 +420,13 @@ class CommentCard extends Component {
 
   handleUpdateSubmit = e => {
     e.preventDefault();
-    const { comments, updateForm } = this.state;
+    const { comments, updateForm, itemId } = this.state;
+    const { commentType } = this.props;
     if (updateForm.comment !== "") {
-      this.props.editComment(updateForm).then(() => {
-        comments[comments.findIndex(c => c.id === updateForm.id)].comment =
+      const editCommentEndPoint =
+        commentType + "/" + itemId + "/comment/" + updateForm.id;
+      this.props.editComment(editCommentEndPoint, updateForm).then(() => {
+        comments[comments.findIndex(c => c._id === updateForm.id)].comment =
           updateForm.comment;
         /* eslint-disable */
         this.setState({ comments });
@@ -564,7 +574,8 @@ CommentCard.propTypes = {
   reportedContentData: PropTypes.any,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   isBackOffice: PropTypes.bool,
-  handleRemove: PropTypes.func
+  handleRemove: PropTypes.func,
+  commentType: PropTypes.any
 };
 
 export default connect(

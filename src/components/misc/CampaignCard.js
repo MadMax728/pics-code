@@ -21,7 +21,8 @@ class CampaignCard extends Component {
       item: this.props.item,
       comments: "",
       totalCommentsCount: "",
-      isEmoji: false
+      isEmoji: false,
+      commentType: "campaigns"
     };
   }
 
@@ -36,7 +37,7 @@ class CampaignCard extends Component {
       reportedContentData,
       savedData
     } = this.props;
-    const { isComments, item, comments } = this.state;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -62,6 +63,7 @@ class CampaignCard extends Component {
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
+          commentType={"campaigns"}
         />
         {isComments && (
           <CommentCard
@@ -71,6 +73,7 @@ class CampaignCard extends Component {
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
             isReport={isReport}
+            commentType={commentType}
           />
         )}
       </div>
@@ -123,10 +126,12 @@ class CampaignCard extends Component {
   };
 
   handleCommentsSections = () => {
-    const CampaignId = {
-      typeId: this.state.item._id
-    };
-    this.props.getComments(CampaignId).then(() => {
+    // const CampaignId = {
+    //   typeId: this.state.item._id
+    // };
+    const CampaignId = this.state.item._id;
+    const getCampaignCommentEndPoint = "campaigns/" + CampaignId + "/comment/";
+    this.props.getComments(getCampaignCommentEndPoint).then(() => {
       const totalComment = this.props.comments;
       this.setState({
         isComments: !this.state.isComments,
@@ -141,7 +146,7 @@ class CampaignCard extends Component {
     const data = {
       url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${
         item.userType
-        }/${item._id}`
+      }/${item._id}`
     };
     this.props.handleModalInfoShow(modalType.share, data);
   };
@@ -157,7 +162,7 @@ class CampaignCard extends Component {
       reportedContentData,
       savedData
     } = this.props;
-    const { isComments, item, comments } = this.state;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -193,6 +198,7 @@ class CampaignCard extends Component {
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
             isReport={isReport}
+            commentType={commentType}
           />
         )}
       </div>
