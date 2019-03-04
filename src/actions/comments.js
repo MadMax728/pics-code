@@ -92,12 +92,12 @@ const deleteCommentFailed = error => ({
   error: true
 });
 
-export const deleteComment = data => {
+export const deleteComment = (endPoint, data) => {
   return dispatch => {
     dispatch(deleteCommentStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = { Authorization: storage.accessToken };
-    return commentService.deleteComment(data, header).then(
+    return commentService.deleteComment(endPoint, data, header).then(
       res => {
         dispatch(
           deleteCommentSucceeded(res.data.success ? res.data.data : null)

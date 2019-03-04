@@ -28,7 +28,7 @@ export const addComment = (addCommentEndPoint, payload, header = {}) =>
   api(baseUrl, header).post(addCommentEndPoint, payload);
 
 export const deleteComment = (deleteCommentEndPoint, payload, header = {}) =>
-  api(baseUrl, header).delete(deleteCommentEndPoint + payload.id);
+  api(baseUrl, header).delete(deleteCommentEndPoint, payload);
 
 export const editComment = (editCommentEndPoint, payload, header = {}) =>
   api(baseUrl, header).put(editCommentEndPoint, payload);

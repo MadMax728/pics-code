@@ -47,17 +47,18 @@ class CommentCard extends Component {
 
   handleReportPost = e => {
     const { item } = this.state;
-    const comment = item[item.findIndex(i => i.id === e.target.id)];
+    const comment = item[item.findIndex(i => i._id === e.target.id)];
     const data = {
       typeContent: "Comment",
       typeId: e.target.id,
       title: comment.comment
     };
+    console.log(data);
     this.props.addReport(data).then(() => {
       if (
         this.props.reportedContentData &&
         this.props.reportedContentData &&
-        this.props.reportedContentData.addReport.typeId === comment.id
+        this.props.reportedContentData.addReport.typeId === comment._id
       ) {
         comment.isReported = !comment.isReported;
         this.setState({ item });
@@ -132,17 +133,21 @@ class CommentCard extends Component {
   };
 
   handleDelete = e => {
+    const { itemId } = this.state;
+    const { commentType } = this.props;
     const id = e.target.id;
     const { comments, slicedCommentsData } = this.state;
     const indexOf = comments.findIndex(c => {
-      return c.id === id;
+      return c._id === id;
     });
 
     if (indexOf !== -1) {
       const data = {
         id
       };
-      this.props.deleteComment(data).then(() => {
+      const deleteCommentEndPoint =
+        commentType + "/" + itemId + "/comment/" + data.id;
+      this.props.deleteComment(deleteCommentEndPoint, data).then(() => {
         comments.splice(indexOf, 1);
         slicedCommentsData.splice(indexOf, 1);
         this.setState({ comments, slicedCommentsData });
