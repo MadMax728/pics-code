@@ -15,7 +15,7 @@ const MediaCardHeader = ({
 }) => {
   const profile_route = item.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${item.userName}`;
+    : `${routes.NEWS_FEED_ROUTE}/${user.username}`;
   const favorite_icon = item.isSelfLike ? images.blue_heart : images.feed_like;
   return (
     <div className="feed_header">
@@ -30,17 +30,17 @@ const MediaCardHeader = ({
       <div className="col-sm-8 col-xs-7 no-padding">
         {
           user && (
-          <Link to={profile_route}>
-            <div className="normal_title">{user.username}</div>
-          </Link>
-          ) 
+            <Link to={profile_route}>
+              <div className="normal_title">{user.username}</div>
+            </Link>
+          )
         }
         {item.location && (
           <div className="secondary_title">{item.location.address}</div>
         )}
         {item.createdAt && (
           <div className="grey_title">
-            {DateFormat(item.createdAt)} in {item.category}
+            {DateFormat(item.createdAt)} in {item.typeId.typeContent}
           </div>
         )}
       </div>

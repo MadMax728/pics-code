@@ -210,7 +210,7 @@ const initialState = {
     error: false
   },
   reportedContentData: {
-    Image: null,
+    image: null,
     Videos: null,
     Campaign: null,
     Pics: null,

@@ -29,6 +29,7 @@ class MediaCard extends Component {
       comments: "",
       totalCommentsCount: ""
     };
+    console.log('this.props.item ', this.props.item);
   }
 
   render() {
@@ -45,7 +46,7 @@ class MediaCard extends Component {
       <div className="feed_wrapper">
         <MediaCardHeader
           item={item}
-          user={item.createdBy}
+          user={item.typeId.createdBy}
           isParticipant={isParticipant}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
@@ -61,7 +62,7 @@ class MediaCard extends Component {
           handleCommentsSections={this.handleCommentsSections}
           isComments={isComments}
           /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          renderReportTips={() => this.renderReportTips(item._id)}
           handleFavorite={this.handleFavorite}
           isReport={isReport}
         />
@@ -81,7 +82,7 @@ class MediaCard extends Component {
   handleLockContent = e => {
     const { item } = this.state;
     const data = {
-      typeId: e.target.id,
+      typeId: e.target._id,
       contentStatus: enumerations.reportType.lock,
       reportContent: item.typeContent
     };
@@ -99,13 +100,13 @@ class MediaCard extends Component {
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
     this.setState({ item });
-    this.props.handleRemove(item.id);
+    this.props.handleRemove(item._id);
   };
 
   handleDoNotContent = e => {
     const { item } = this.state;
     const data = {
-      typeId: e.target.id,
+      typeId: e.target._id,
       contentStatus: enumerations.reportType.doNotLock,
       reportContent: item.typeContent
     };
@@ -121,7 +122,7 @@ class MediaCard extends Component {
   handleUnlockContent = e => {
     const { item } = this.state;
     const data = {
-      typeId: e.target.id,
+      typeId: e.target._id,
       contentStatus: enumerations.reportType.unLock,
       reportContent: item.typeContent
     };
@@ -225,14 +226,14 @@ class MediaCard extends Component {
     const { item } = this.state;
     const data = {
       typeContent: item.typeContent,
-      typeId: e.target.id,
+      typeId: e.target._id,
       title: item.title
     };
     this.props.addReport(data).then(() => {
       if (
         this.props.reportedContentData &&
         this.props.reportedContentData &&
-        this.props.reportedContentData.addReport.typeId === item.id
+        this.props.reportedContentData.addReport.typeId === item._id
       ) {
         item.isReported = !item.isReported;
         this.setState({ item });
@@ -244,7 +245,7 @@ class MediaCard extends Component {
     const { isSavedPage } = this.props;
     const item = this.state.item;
     const data = {
-      typeId: e.target.id,
+      typeId: e.target._id,
       postType: getBackendPostType(item)
     };
 
@@ -252,12 +253,12 @@ class MediaCard extends Component {
       if (
         this.props.savedData &&
         this.props.savedData.saved &&
-        this.props.savedData.saved.typeId === item.id
+        this.props.savedData.saved.typeId === item._id
       ) {
         item.isSavedPost = !item.isSavedPost;
         this.setState({ item });
         if (isSavedPage && !this.state.item.isSavedPost) {
-          this.props.handleRemove(item.id);
+          this.props.handleRemove(item._id);
         }
       }
     });
@@ -277,14 +278,14 @@ class MediaCard extends Component {
 
     const mediaLike = {
       typeOfContent: "mediapost",
-      typeId: item.id
+      typeId: item._id
     };
     this.props.like(mediaLike);
   };
 
   handleCommentsSections = () => {
     const itemId = {
-      typeId: this.state.item.id
+      typeId: this.state.item._id
     };
     this.props.getComments(itemId).then(() => {
       this.setState({
@@ -296,7 +297,7 @@ class MediaCard extends Component {
   };
 
   handleRemoveParticipant = e => {
-    this.props.removeParticipants(e.target.id).then(() => {
+    this.props.removeParticipants(e.target._id).then(() => {
       if (this.props.campaignData.isRemoveParticipantData) {
         this.props.handleFilterList(
           this.props.campaignData.isRemoveParticipantData

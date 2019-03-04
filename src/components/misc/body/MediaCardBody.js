@@ -10,7 +10,7 @@ const MediaCardBody = ({ item, isDescription, isLoading }) => {
         {item.typeContent &&
           item.typeContent.toLowerCase() === enumerations.mediaTypes.image && (
             <ImageItem
-              item={item.mediaUrl}
+              item={item.typeId.mediaUrl}
               classNames={`img-responsive widthHeightAuto`}
               userName={item.userName}
               isOtherCardExist={false}
@@ -20,8 +20,8 @@ const MediaCardBody = ({ item, isDescription, isLoading }) => {
         {item.typeContent &&
           item.typeContent.toLowerCase() === enumerations.mediaTypes.video && (
             <VideoItem
-              id={item.id}
-              item={item.mediaUrl}
+              id={item._id}
+              item={item.typeId.mediaUrl}
               isLoading={isLoading}
             />
           )}
