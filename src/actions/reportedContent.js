@@ -85,7 +85,7 @@ export const getBackOfficeReportedStatistics = prop => {
       res => {
         dispatch(
           getBackOfficeReportedStatisticsSucceeded(
-            res.data.data,
+            res.data.data[0],
             prop.reportContent
           )
         );

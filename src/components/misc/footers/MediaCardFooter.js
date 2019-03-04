@@ -16,12 +16,12 @@ const MediaCardFooter = ({
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
-        <span className="count">{item.commentCount}</span>
+        <span className="count">{item.typeId.commentCount}</span>
         <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
-          id={item.createdBy}
+          id={item.typeId.createdBy}
           disabled={isLoading}
           text={
             <img
@@ -33,19 +33,19 @@ const MediaCardFooter = ({
         />
       </div>
       <div className="likes" role="article">
-        <span className="count">{item.likeCount}</span>
+        <span className="count">{item.typeId.likeCount}</span>
         <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
-          id={item.id}
+          id={item._id}
           disabled={isLoading}
           text={<img src={favorite_icon} alt="like" role="presentation" />}
         />
       </div>
       <div className="show_more_options">
         <ThreeDots
-          id={`report-${item.id}`}
+          id={`report-${item._id}`}
           role="button"
           dataTip="tooltip"
           dataClass="tooltip-wrapr"
