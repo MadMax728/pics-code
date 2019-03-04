@@ -36,7 +36,7 @@ class ReportedCampaignsPage extends Component {
   componentDidMount = () => {
     const data = {
       type: "get",
-      reportContent: "Campaign"
+      reportContent: "campaign"
     };
     this.setState({ isLoading: true });
     this.getBackOfficeReportedContent(data);
@@ -51,10 +51,10 @@ class ReportedCampaignsPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.Campaign
+        this.props.reportedContentData.campaign
       ) {
         this.setState({
-          campaignList: this.props.reportedContentData.Campaign,
+          campaignList: this.props.reportedContentData.campaign,
           isLoading: this.props.reportedContentData.isLoading
         });
       }
@@ -65,7 +65,7 @@ class ReportedCampaignsPage extends Component {
     this.props.getBackOfficeReportedStatistics(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.CampaignStatistics
+        this.props.reportedContentData.campaignStatistics
       ) {
         // success
       }
@@ -77,14 +77,14 @@ class ReportedCampaignsPage extends Component {
     if (e.target.id === "All") {
       data = {
         type: "get",
-        reportContent: "Campaign"
+        reportContent: "campaign"
       };
       this.setState({ isSearch: false });
     } else {
       data = {
         type: "search",
-        reportContent: "Campaign",
-        searchType: `${e.target.id}`
+        reportContent: "campaign",
+        searchType: `${e.target._id}`
       };
       this.setState({ isSearch: true });
     }
@@ -94,7 +94,7 @@ class ReportedCampaignsPage extends Component {
   handleRemove = data => {
     const { campaignList, isSearch } = this.state;
     if (isSearch) {
-      this.setState({ campaignList: campaignList.filter(e => e.id !== data) });
+      this.setState({ campaignList: campaignList.filter(e => e._id !== data) });
     }
   };
 
@@ -114,12 +114,11 @@ class ReportedCampaignsPage extends Component {
 
     return campaignList.map(campaign => {
       return (
-        <div key={campaign.id}>
-          {campaign.postType &&
+        <div key={campaign._id}>
+          {
             (campaign.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaig ||
-              campaign.postType.toLowerCase() ===
-                enumerations.contentTypes.creatorCampaign) && (
+              enumerations.contentTypes.creatorCampaign) && (
               <CampaignCard
                 item={campaign}
                 isDescription={false}
@@ -153,7 +152,7 @@ class ReportedCampaignsPage extends Component {
       getSearch("");
       const data = {
         type: "get",
-        reportContent: "Campaign"
+        reportContent: "campaign"
       };
       this.setState({ isLoading: true });
       this.getBackOfficeReportedContent(data);
@@ -190,23 +189,23 @@ class ReportedCampaignsPage extends Component {
             header={`Reported ${Translations.review_content_menu.campaigns}`}
             handleEvent={this.handleReported}
             all={
-              reportedContentData.CampaignStatistics
-                ? reportedContentData.CampaignStatistics.all
+              reportedContentData.campaignStatistics
+                ? reportedContentData.campaignStatistics.All
                 : 0
             }
             outstanding={
-              reportedContentData.CampaignStatistics
-                ? reportedContentData.CampaignStatistics.outstanding
+              reportedContentData.campaignStatistics
+                ? reportedContentData.campaignStatistics.Outstanding
                 : 0
             }
             processed={
-              reportedContentData.CampaignStatistics
-                ? reportedContentData.CampaignStatistics.processed
+              reportedContentData.campaignStatistics
+                ? reportedContentData.campaignStatistics.Processed
                 : 0
             }
             notProcessed={
-              reportedContentData.CampaignStatistics
-                ? reportedContentData.CampaignStatistics.notProcessed
+              reportedContentData.campaignStatistics
+                ? reportedContentData.campaignStatistics.NotProcessedSub
                 : 0
             }
           />
