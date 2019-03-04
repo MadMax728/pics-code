@@ -11,7 +11,7 @@ const ReportCard = ({ item }) => {
         <div className="title">{Translations.report_review.date}</div>
         <div className="subtitle">
           {DateFormat(
-            item.createdAt,
+            item.firstReportedDate,
             Translations.date_format.date,
             true
           )}

@@ -24,7 +24,7 @@ class ImagesBOPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      imageList: [],
+      imageList: null,
       isLoading: this.props.isLoading,
       isSearch: false,
       form: {
@@ -62,23 +62,23 @@ class ImagesBOPage extends Component {
             header={`Reported ${Translations.review_content_menu.images}`}
             handleEvent={this.handleReported}
             all={
-              reportedContentData.imageStatistics
-                ? reportedContentData.imageStatistics.All
+              reportedContentData.ImageStatistics
+                ? reportedContentData.ImageStatistics.all
                 : 0
             }
             outstanding={
-              reportedContentData.imageStatistics
-                ? reportedContentData.imageStatistics.Outstanding
+              reportedContentData.ImageStatistics
+                ? reportedContentData.ImageStatistics.outstanding
                 : 0
             }
             processed={
-              reportedContentData.imageStatistics
-                ? reportedContentData.imageStatistics.Processed
+              reportedContentData.ImageStatistics
+                ? reportedContentData.ImageStatistics.processed
                 : 0
             }
             notProcessed={
-              reportedContentData.imageStatistics
-                ? reportedContentData.imageStatistics.NotProcessedSub
+              reportedContentData.ImageStatistics
+                ? reportedContentData.ImageStatistics.notProcessed
                 : 0
             }
           />
@@ -90,7 +90,7 @@ class ImagesBOPage extends Component {
   componentDidMount = () => {
     const data = {
       type: "get",
-      reportContent: "image"
+      reportContent: "Image"
     };
     console.log("ahij");
 
@@ -107,10 +107,10 @@ class ImagesBOPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.image
+        this.props.reportedContentData.Image
       ) {
         this.setState({
-          imageList: this.props.reportedContentData.image,
+          imageList: this.props.reportedContentData.Image,
           isLoading: this.props.reportedContentData.isLoading
         });
       }
@@ -121,7 +121,7 @@ class ImagesBOPage extends Component {
     this.props.getBackOfficeReportedStatistics(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.imageStatistics
+        this.props.reportedContentData.ImageStatistics
       ) {
         // success
       }
@@ -133,14 +133,14 @@ class ImagesBOPage extends Component {
     if (e.target.id === "All") {
       data = {
         type: "get",
-        reportContent: "image"
+        reportContent: "Image"
       };
       this.setState({ isSearch: false });
     } else {
       data = {
         type: "search",
-        reportContent: "image",
-        searchType: `${e.target._id}`
+        reportContent: "Image",
+        searchType: `${e.target.id}`
       };
       this.setState({ isSearch: true });
     }
@@ -150,7 +150,7 @@ class ImagesBOPage extends Component {
   handleRemove = data => {
     const { imageList, isSearch } = this.state;
     if (isSearch) {
-      this.setState({ imageList: imageList.filter(e => e._id !== data) });
+      this.setState({ imageList: imageList.filter(e => e.id !== data) });
     }
   };
 
@@ -165,10 +165,11 @@ class ImagesBOPage extends Component {
     );
     return imageList.map(image => {
       return (
-        <div key={image._id}>
-          { image.typeContent &&
+        <div key={image.id}>
+          {image.postType === enumerations.contentTypes.mediaPost &&
+            image.typeContent &&
             image.typeContent.toLowerCase() ===
-            enumerations.mediaTypes.image && (
+              enumerations.mediaTypes.image && (
               <MediaCard
                 item={image}
                 isDescription
@@ -198,7 +199,7 @@ class ImagesBOPage extends Component {
       getSearch("");
       const data = {
         type: "get",
-        reportContent: "image"
+        reportContent: "Image"
       };
       this.setState({ isLoading: true });
       this.getBackOfficeReportedContent(data);
