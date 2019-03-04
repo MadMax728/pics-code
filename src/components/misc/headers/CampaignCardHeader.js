@@ -21,7 +21,7 @@ const CampaignCardHeader = ({
 
   const profile_route = campaign.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${campaign.userName}`;
+    : `${routes.NEWS_FEED_ROUTE}/${campaign.createdBy.username}`;
   const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
     : images.feed_like;
@@ -62,7 +62,7 @@ const CampaignCardHeader = ({
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
-          id={campaign.id}
+          id={campaign._id}
           disabled={isLoading}
           text={<img src={favorite_icon} alt="like" role="presentation" />}
         />

@@ -212,7 +212,7 @@ const initialState = {
   reportedContentData: {
     image: null,
     videos: null,
-    Campaign: null,
+    campaign: null,
     Pics: null,
     Ads: null,
     Comments: null,
