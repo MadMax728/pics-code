@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
-import { Loader, ThreeDots, Button } from "../../ui-kit";
+import { Loader, ThreeDots, UserCardImageItem, Button, UserImageItem } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import * as images from "../../../lib/constants/images";
 
@@ -64,22 +64,9 @@ class UserCardBody extends Component {
         }
       >
         <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
-          <LazyLoad
-            height={200}
-            once
-            offset={[-200, 0]}
-            placeholder={<Loader />}
-          >
-            <div className="profile-img-wrapper">
-              <img
-                src={user.profileUrl ? user.profileUrl : images.profile_pic}
-                alt={"pic-1"}
-              />
-            </div>
-          </LazyLoad>
+          <UserCardImageItem item={user.profileUrl}></UserCardImageItem>
           <div className="name-wrapper">
             <div className="username">{user.username}</div>
-            {/* <div className="name">{user.name}</div> */}
             {isBackOffice && (
               <div className="show_more_options user">
                 <ThreeDots
