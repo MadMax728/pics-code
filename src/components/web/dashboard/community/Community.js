@@ -1,6 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import {
   sendRequest,
@@ -11,19 +10,16 @@ import { Translations } from "../../../../lib/translations";
 import {
   RightSidebarLoading,
   NoDataFoundRightSidebar,
-  UserImageItem,
-  UserTitleItem,
-  Button
 } from "../../../ui-kit";
 import CommunityItem from './CommunityItem';
-import { Auth } from "../../../../auth";
 
 class Community extends Component {
   
   render() {
-    const { communityData } = this.props;
+    const { communityData, usersData } = this.props;
     const isLoading = communityData.isLoading;
-    const userCommunityList = communityData.userCommunityList;
+    const isSubscribeLoading = usersData.isLoading;
+    const userCommunityList = communityData.userCommunity || [];
     return (
       <div>
         <div className="normal_title padding-15">
@@ -34,26 +30,12 @@ class Community extends Component {
           <div className="community">
             {userCommunityList && userCommunityList.length > 0 ? (
               userCommunityList.map(user => {
-                let classNameText = "filled_button";
-                let btnText =
-                  Translations.profile_community_right_sidebar.Subscribed;
-                if (user.subscribeId) {
-                  btnText =
-                    Translations.profile_community_right_sidebar.Subscribed;
-                  classNameText = "filled_button";
-                } else {
-                  btnText =
-                    Translations.profile_community_right_sidebar.Subscribe;
-                  classNameText = "blue_button";
-                }
                 return (
                   <div key={user.id}>
                     <CommunityItem
                       user={user}
-                      classNames={classNameText}
                       handleActionClick={this.handleSubscribed}
-                      isLoading={isLoading}
-                      btnText={btnText}>
+                      isLoading={isSubscribeLoading}>
                     </CommunityItem>
                   </div>
                 );
@@ -72,46 +54,19 @@ class Community extends Component {
     this.props.getUserCommunity();
   };
 
-  handleSubscribed = e => {
-    const errors = {};
-    const { sendRequest, getUnsubscribe, communityData } = this.props;
-    const userCommunity = communityData.userCommunityList;
-    const selectedUserList = userCommunity.find(
-      user => user.id === e.target.id
-    );
-    if (selectedUserList.subscribeId === "") {
-      console.log("subscribe");
-      const requestData = { followers: e.target.id };
+  handleSubscribe = (e) => {
+    const requestData = { followers: e.target.id };
+    this.props.sendRequest(requestData).then(() => {
+      this.props.getUserCommunity();
+    });
+  } 
 
-      sendRequest(requestData).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          errors.servererror =
-            Translations.profile_community_right_sidebar.serverError;
-          this.setState({ errors });
-        } else if (this.props.usersData.isRequestSendData) {
-          // this.getUserData();
-        }
-      });
-    } else {
-      console.log("unsubscribe");
-      const subscribedId = selectedUserList.subscribeId;
-      getUnsubscribe(subscribedId).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          errors.servererror =
-            Translations.profile_community_right_sidebar.serverError;
-          this.setState({ errors });
-        } else if (this.props.usersData.isUnsubscribedData) {
-          // this.getUserData();
-        }
-      });
-    }
-  };
+  handleUnSubscribe = (e) => {
+    const subscribedId = e.target.id;
+    this.props.getUnsubscribe(subscribedId).then(() => {
+      this.props.getUserCommunity();
+    });
+  }
 }
 
 const mapStateToProps = state => ({
