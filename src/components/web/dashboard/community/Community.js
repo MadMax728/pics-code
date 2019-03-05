@@ -7,14 +7,10 @@ import {
   getUserCommunity
 } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
-import {
-  RightSidebarLoading,
-  NoDataFoundRightSidebar,
-} from "../../../ui-kit";
-import CommunityItem from './CommunityItem';
+import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
+import CommunityItem from "./CommunityItem";
 
 class Community extends Component {
-  
   render() {
     const { communityData, usersData } = this.props;
     const isLoading = communityData.isLoading;
@@ -34,9 +30,10 @@ class Community extends Component {
                   <div key={user.id}>
                     <CommunityItem
                       user={user}
-                      handleActionClick={this.handleSubscribed}
-                      isLoading={isSubscribeLoading}>
-                    </CommunityItem>
+                      handleSubscribeAction={this.handleSubscribe}
+                      handleUnsubscribeAction={this.handleUnSubscribe}
+                      isLoading={isSubscribeLoading}
+                    />
                   </div>
                 );
               })
@@ -54,19 +51,19 @@ class Community extends Component {
     this.props.getUserCommunity();
   };
 
-  handleSubscribe = (e) => {
+  handleSubscribe = e => {
     const requestData = { followers: e.target.id };
     this.props.sendRequest(requestData).then(() => {
       this.props.getUserCommunity();
     });
-  } 
+  };
 
-  handleUnSubscribe = (e) => {
+  handleUnSubscribe = e => {
     const subscribedId = e.target.id;
     this.props.getUnsubscribe(subscribedId).then(() => {
       this.props.getUserCommunity();
     });
-  }
+  };
 }
 
 const mapStateToProps = state => ({
