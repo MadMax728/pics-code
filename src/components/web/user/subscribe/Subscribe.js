@@ -18,7 +18,9 @@ class Subscribe extends Component {
     super(props);
     this.state = {
       dataList: [],
-      currentPage: 1
+      page: 1,
+      limit: 3,
+      hasMore: false
     };
   }
 
@@ -33,16 +35,22 @@ class Subscribe extends Component {
   };
 
   render() {
-    const { dataList, currentPage } = this.state;
+    const { dataList, page } = this.state;
     const { isFor, username, subscribeData } = this.props;
     const isLoading = this.props.subscribeData.isLoading;
     let hasMore = false;
     const userList = subscribeData.subscribeData;
-    const pages = userList.pages;
-    if (pages && parseInt(currentPage) < parseInt(pages)) {
-      hasMore = true;
+    if (userList) {
+      if (
+        userList.pages &&
+        userList.page &&
+        parseInt(userList.pages) > parseInt(userList.page)
+      ) {
+        hasMore = true;
+      } else {
+        hasMore = false;
+      }
     }
-
     return (
       <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
@@ -50,12 +58,13 @@ class Subscribe extends Component {
         </h4>
 
         <div className="header-notifications">
-          {/* style={{ height: "200px", overflow: "auto" }} */}
+          {/* style={{ height: "200px", overflow: "auto" }}*/}
+
           {dataList.length > 0 ? (
             <InfiniteScroll
               pageStart={0}
               loadMore={this.getMoreUsers}
-              hasMore={false}
+              hasMore={hasMore}
               loader={<div className="loader">Loading ...</div>}
             >
               {dataList.map(user => {
@@ -87,7 +96,8 @@ class Subscribe extends Component {
   }
 
   componentDidMount = () => {
-    const params = { limit: 10, page: 1 };
+    const { limit, page } = this.state;
+    const params = { limit, page };
     this.getTooltipUserList(this.props.userId, params);
     window.addEventListener("scroll", this.onScroll, false);
   };
@@ -98,10 +108,25 @@ class Subscribe extends Component {
 
   getMoreUsers = () => {
     console.log("inscroll");
+    const { subscribeData } = this.props;
+    const params = { limit: this.state.limit, page: 1 };
+    const userList = subscribeData.subscribeData;
+    if (
+      userList.pages &&
+      userList.page &&
+      parseInt(userList.pages) > parseInt(userList.page)
+    ) {
+      params.page = parseInt(userList.page) + 1;
+    } else {
+      params.page = 0;
+    }
+    console.log(params);
+    // this.getTooltipUserList(this.props.userId, params);
   };
 
   // Tooltip List
   getTooltipUserList = (userId, paginationParam) => {
+    console.log("params", paginationParam);
     if (userId) {
       const paginationParams =
         "&limit=" + paginationParam.limit + "&page=" + paginationParam.page;

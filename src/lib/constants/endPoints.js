@@ -29,6 +29,7 @@ export const createCampaignEndPoint = "/campaigns";
 export const editCampaignEndPoint = "/campaigns/";
 export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
+export const addCampaignComment = "campaigns/"; //5c750deebba3b10e6dfefbd4/comment/
 
 // CMS Management Service
 export const getCMSManagementEndPoint = "/cmspage";
