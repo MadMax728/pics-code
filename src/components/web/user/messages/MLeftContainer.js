@@ -6,7 +6,7 @@ import { Translations } from "../../../../lib/translations";
 import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from "./MLeftUsersList";
 import MLeftTabs from "./MLeftTabs";
-import { getUserList, searchUsers } from "../../../../actions";
+import { getUserList, searchSubscribedUsers } from "../../../../actions";
 import { Button, Input } from "../../../ui-kit";
 
 class MLeftContainer extends Component {
@@ -15,7 +15,8 @@ class MLeftContainer extends Component {
     this.state = {
       activeIndex: "1",
       search: "",
-      userList: []
+      userList: [],
+      toggleSearch: false
     };
   }
 
@@ -83,6 +84,15 @@ class MLeftContainer extends Component {
     }
   };
 
+  handleToggleSearch = e => {
+    const { toggleSearch } = this.state;
+    this.setState({
+      toggleSearch: !toggleSearch,
+      userList: [],
+      activeIndex: "1"
+    });
+  };
+
   handleChange = e => {
     e.preventDefault();
     const { activeIndex } = this.state;
@@ -91,59 +101,55 @@ class MLeftContainer extends Component {
     const search = e.target.value;
     const { userList } = this.state;
     this.setState({ search: e.target.value });
-    if (activeIndex === "1") {
-      //For subscrivers call API for search users,
-      //TODO: get api to only search subscribers not all
-      if (search) {
-        this.props.searchUsers(search, page, limit).then(() => {
-          const { usersData } = this.props;
-          if (!usersData.isLoading) {
-            this.setState({
-              userList: usersData.users
-            });
-          }
-        });
-      } else {
-        console.log("clean cheat");
-        this.getUserList();
-      }
-    } else {
-      //Search local only for unknown and company
-
-      if (search) {
-        const filtered = userList.filter(u => {
-          if (u.naem && u.username.includes(search)) return true;
-          if (u.email && u.email.includes(search)) return true;
-          if (u.name && u.name.includes(search)) return true;
-          return false;
-        });
-        this.setState({ userList: filtered });
-      } else {
+    if (search) {
+      this.setState({
+        userList: []
+      });
+      this.props.searchSubscribedUsers(search, page, limit).then(() => {
         const { usersData } = this.props;
         if (!usersData.isLoading) {
-          this.setState({ userList: usersData.users });
+          this.setState({
+            userList: usersData.users
+          });
         }
-      }
+      });
+    } else {
+      console.log("clean cheat");
+      this.getUserList();
     }
   };
 
   handleChatClick = e => {
-    const { userList } = this.state;
+    const { userList, toggleSearch } = this.state;
     const user = _.find(userList, { _id: e.currentTarget.dataset._id });
+    this.setState({
+      toggleSearch: !toggleSearch,
+      activeIndex: "1"
+    });
     this.props.selectUser(user);
   };
 
   render() {
-    const { activeIndex, userList, search } = this.state;
+    const { activeIndex, userList, search, toggleSearch } = this.state;
 
     return (
       <div>
         <div className="title-wrapper">
-          <div className="modal-title">
-            {Translations.messages_modal.messages}
+          <div className="row">
+            <div className="col-md-10">
+              <div className="modal-title">
+                {Translations.messages_modal.messages}
+              </div>
+            </div>
+            <div className="col-md-2">
+              <Button
+                onClick={this.handleToggleSearch}
+                text={`Edit`}
+              />
+            </div>
           </div>
         </div>
-        <div className="msgs-search-user">
+        {toggleSearch && <div className="msgs-search-user">
           <div className="input-group search-input-group">
             <input
               type="text"
@@ -163,11 +169,13 @@ class MLeftContainer extends Component {
               />
             </span>
           </div>
-        </div>
-        <MLeftTabs
-          activeIndex={activeIndex}
-          handleTypeClick={this.handleTypeClick}
-        />
+        </div>}
+        {
+          !toggleSearch && <MLeftTabs
+            activeIndex={activeIndex}
+            handleTypeClick={this.handleTypeClick}
+          />
+        }
         <MLeftUsersList
           items={userList}
           handleChatClick={this.handleChatClick}
@@ -179,7 +187,7 @@ class MLeftContainer extends Component {
 
 MLeftContainer.propTypes = {
   getUserList: PropTypes.func.isRequired,
-  searchUsers: PropTypes.func.isRequired,
+  searchSubscribedUsers: PropTypes.func.isRequired,
   me: PropTypes.string.isRequired,
   usersData: PropTypes.any,
   selectUser: PropTypes.func,
@@ -192,7 +200,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   getUserList,
-  searchUsers
+  searchSubscribedUsers
 };
 
 export default connect(
