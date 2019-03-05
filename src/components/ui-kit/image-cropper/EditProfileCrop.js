@@ -82,13 +82,13 @@ class EditProfileCrop extends Component {
       allowZoomOut
     } = this.state;
     return (
-      <div>
+      <div className="col-xs-12 no-padding create-campaign-crop-pic">
         {image !== null && image !== undefined ? (
           <Dropzone
             onDrop={this.handleDrop}
             disableClick
             multiple={false}
-            className="col-xs-12 uploaded-profile-pic"
+            className="col-xs-12 uploaded-profile-pic mar0padd0"
             style={{
               width,
               height,
@@ -111,7 +111,7 @@ class EditProfileCrop extends Component {
                 onImageReady={this.logCallback("onImageReady")}
                 image={image}
                 crossOrigin={`anonymous`}
-                className="editor-canvas"
+                className="editor-canvas wid100"
               />
             </div>
           </Dropzone>
@@ -143,7 +143,7 @@ class EditProfileCrop extends Component {
           </div>
         )}
         {image !== null && image !== undefined && (
-          <div className="range-wrapr col-xs-12">
+          <div className="range-wrapr col-xs-12 mar50 add-wrapper">
             <img
               src={images.crop_pic}
               height="19"

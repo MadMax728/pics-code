@@ -55,7 +55,7 @@ class UploadData extends Component {
           </div>
         </div>
         <form className="col-xs-12 no-padding">
-          <div className="form-group no-margin">
+          <div className="form-group">
             {!form.image && !form.video ? (
               <div className="box">
                 <input
@@ -225,7 +225,7 @@ class UploadData extends Component {
             )}
           </div>
 
-          <div className="form-group no-margin">
+          <div className="form-group">
             <Label
               htmlFor="label"
               value={Translations.upload_modal.advertisement}
