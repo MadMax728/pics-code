@@ -79,7 +79,6 @@ class CampaignPage extends Component {
     let { campaignList } = this.state;
     const { searchData, handleModalInfoShow, handleModalShow } = this.props;
     campaignList = search(campaignList, "userName", searchData.searchKeyword);
-
     return campaignList.map(campaign => {
       return (
         <div key={campaign.id}>
