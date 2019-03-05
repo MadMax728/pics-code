@@ -33,7 +33,8 @@ class UserCard extends Component {
       <UserCardBody
         user={item}
         index={index}
-        handleSubscribed={this.handleSubscribed}
+        handleSubscribe={this.handleSubscribe}
+        handleUnSubscribe={this.handleUnSubscribe}
         isReport={isReport}
         isBackOffice={isBackOffice}
         isSubscribeStatus={isSubscribeStatus}
@@ -50,50 +51,18 @@ class UserCard extends Component {
     window.scrollTo(0, 0);
   };
 
-  handleSubscribed = e => {
-    const selectedUserList = this.state.item;
-    const { subscribeId } = this.state;
-    if (!subscribeId) {
-      const requestData = { followers: selectedUserList.id };
-      this.props.sendRequest(requestData).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          // Error
-        } else if (
-          this.props.usersData &&
-          this.props.usersData.isRequestSendData
-        ) {
-          // Success
-          this.setState({
-            isSubscribeStatus: "subscribe",
-            subscribeId: this.props.usersData.isRequestSendData._id
-          });
-        }
-      });
-    } else {
-      const subscribedId = selectedUserList.subscribeId
-        ? selectedUserList.subscribeId
-        : this.state.subscribeId;
-      this.props.getUnsubscribe(subscribedId).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          // Error
-        } else if (
-          this.props.usersData &&
-          this.props.usersData.isUnsubscribedData
-        ) {
-          // Success
-          this.setState({
-            isSubscribeStatus: "unsubscribe",
-            subscribeId: ""
-          });
-        }
-      });
-    }
+  handleSubscribe = e => {
+    const requestData = { followers: e.target.id };
+    this.props.sendRequest(requestData).then(() => {
+      this.props.getDashboard("users", "");
+    });
+  };
+
+  handleUnSubscribe = e => {
+    const subscribedId = e.target.id;
+    this.props.getUnsubscribe(subscribedId).then(() => {
+      this.props.getDashboard("users", "");
+    });
   };
 
   renderReportTips = id => {
@@ -174,14 +143,16 @@ class UserCard extends Component {
 
 const mapStateToProps = state => ({
   usersData: state.usersData,
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  usersList: state.dashboardData.users
 });
 
 const mapDispatchToProps = {
   sendRequest,
   getUnsubscribe,
   getDashboard,
-  getUser
+  getUser,
+  getDashboard
 };
 
 UserCard.propTypes = {
@@ -197,7 +168,9 @@ UserCard.propTypes = {
   isBackOffice: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
   handleRemove: PropTypes.func,
-  isLoading: PropTypes.any
+  isLoading: PropTypes.any,
+  usersList: PropTypes.any,
+  getDashboard: PropTypes.func
 };
 
 export default connect(

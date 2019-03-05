@@ -24,35 +24,14 @@ class UserCardBody extends Component {
   render() {
     const {
       index,
-      handleSubscribed,
+      handleSubscribe,
+      handleUnSubscribe,
       isReport,
       isBackOffice,
       renderReportTips,
-      isLoading,
-      isSubscribeStatus
+      isLoading
     } = this.props;
     const { user } = this.state;
-    let classNameText = "filled_button";
-    let btnText = Translations.profile_community_right_sidebar.Subscribed;
-
-    if (
-      (isSubscribeStatus && isSubscribeStatus === "subscribe") ||
-      user.isSubscribe
-    ) {
-      btnText = Translations.profile_community_right_sidebar.Subscribed;
-      classNameText = "filled_button";
-    } else {
-      btnText = Translations.profile_community_right_sidebar.Subscribe;
-      classNameText = "blue_button";
-    }
-
-    const actionButton = {
-      className: classNameText,
-      userId: user.username,
-      handleActionClick: handleSubscribed,
-      btnText,
-      isLoading
-    };
 
     const pic_block = classnames("col-sm-6", {
       "pic-left-block": index % 2 === 0,
@@ -87,15 +66,24 @@ class UserCardBody extends Component {
                 />
               </div>
             )}
-            {!isBackOffice && (
-              <Button
-                className={actionButton.className}
-                id={actionButton.userId}
-                onClick={actionButton.handleActionClick}
-                disabled={actionButton.isLoading}
-                text={actionButton.btnText}
-              />
-            )}
+            {!isBackOffice &&
+              (user.isSubscribe ? (
+                <Button
+                  className={`filled_button`}
+                  id={user.subscriberId}
+                  onClick={handleUnSubscribe}
+                  disabled={isLoading}
+                  text={Translations.profile_community_right_sidebar.Subscribed}
+                />
+              ) : (
+                <Button
+                  className={`blue_button`}
+                  id={user.id}
+                  onClick={handleSubscribe}
+                  disabled={isLoading}
+                  text={Translations.profile_community_right_sidebar.Subscribe}
+                />
+              ))}
           </div>
           {user && isReport && <ReportCard item={user} />}
         </div>
@@ -106,7 +94,8 @@ class UserCardBody extends Component {
 
 UserCardBody.propTypes = {
   user: PropTypes.object.isRequired,
-  handleSubscribed: PropTypes.func.isRequired,
+  handleSubscribe: PropTypes.func.isRequired,
+  handleUnSubscribe: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isReport: PropTypes.bool,
   isBackOffice: PropTypes.bool,
