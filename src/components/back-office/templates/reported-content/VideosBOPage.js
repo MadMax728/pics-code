@@ -62,23 +62,23 @@ class VideosBOPage extends Component {
             header={`Reported ${Translations.review_content_menu.videos}`}
             handleEvent={this.handleReported}
             all={
-              reportedContentData.VideoStatistics
-                ? reportedContentData.VideoStatistics.all
+              reportedContentData.videoStatistics
+                ? reportedContentData.videoStatistics.All
                 : 0
             }
             outstanding={
-              reportedContentData.VideoStatistics
-                ? reportedContentData.VideoStatistics.outstanding
+              reportedContentData.videoStatistics
+                ? reportedContentData.videoStatistics.Outstanding
                 : 0
             }
             processed={
-              reportedContentData.VideoStatistics
-                ? reportedContentData.VideoStatistics.processed
+              reportedContentData.videoStatistics
+                ? reportedContentData.videoStatistics.Processed
                 : 0
             }
             notProcessed={
-              reportedContentData.VideoStatistics
-                ? reportedContentData.VideoStatistics.notProcessed
+              reportedContentData.videoStatistics
+                ? reportedContentData.videoStatistics.NotProcessedSub
                 : 0
             }
           />
@@ -90,7 +90,7 @@ class VideosBOPage extends Component {
   componentDidMount = () => {
     const data = {
       type: "get",
-      reportContent: "Video"
+      reportContent: "video"
     };
     this.setState({ isLoading: true });
     this.getBackOfficeReportedContent(data);
@@ -105,10 +105,10 @@ class VideosBOPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.Video
+        this.props.reportedContentData.video
       ) {
         this.setState({
-          videoList: this.props.reportedContentData.Video,
+          videoList: this.props.reportedContentData.video,
           isLoading: this.props.reportedContentData.isLoading
         });
       }
@@ -119,7 +119,7 @@ class VideosBOPage extends Component {
     this.props.getBackOfficeReportedStatistics(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.VideoStatistics
+        this.props.reportedContentData.videoStatistics
       ) {
         // success
       }
@@ -128,17 +128,17 @@ class VideosBOPage extends Component {
 
   handleReported = e => {
     let data;
-    if (e.target.id === "All") {
+    if (e.target._id === "All") {
       data = {
         type: "get",
-        reportContent: "Video"
+        reportContent: "video"
       };
       this.setState({ isSearch: false });
     } else {
       data = {
         type: "search",
-        reportContent: "Video",
-        searchType: `${e.target.id}`
+        reportContent: "video",
+        searchType: `${e.target._id}`
       };
       this.setState({ isSearch: true });
     }
@@ -158,11 +158,11 @@ class VideosBOPage extends Component {
 
     return videoList.map(video => {
       return (
-        <div key={video.id}>
-          {video.postType === enumerations.contentTypes.mediaPost &&
+        <div key={video._id}>
+          {
             video.typeContent &&
             video.typeContent.toLowerCase() ===
-              enumerations.mediaTypes.video && (
+            enumerations.mediaTypes.video && (
               <MediaCard
                 item={video}
                 isDescription
@@ -182,7 +182,7 @@ class VideosBOPage extends Component {
   handleRemove = data => {
     const { videoList, isSearch } = this.state;
     if (isSearch) {
-      this.setState({ videoList: videoList.filter(e => e.id !== data) });
+      this.setState({ videoList: videoList.filter(e => e._id !== data) });
     }
   };
 
@@ -199,7 +199,7 @@ class VideosBOPage extends Component {
       getSearch("");
       const data = {
         type: "get",
-        reportContent: "Video"
+        reportContent: "video"
       };
       this.setState({ isLoading: true });
       this.getBackOfficeReportedContent(data);

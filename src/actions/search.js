@@ -12,6 +12,12 @@ const getSearchStarted = () => ({
   type: types.GET_SEARCH_STARTED
 });
 
+const getSearchFailed = (data) => ({
+  type: types.GET_SEARCH_FAILED,
+  payload: data,
+  error: true
+});
+
 
 export const getSearch = (keyword, page = 1, limit = 100) => {
   return dispatch => {
@@ -28,9 +34,11 @@ export const getSearchForHeader = (keyword, page = 1, limit = 100) => {
     const params = { headers };
     return usersService.searchUsers(keyword, page, limit, params).then(
       res => {
-        dispatch(getSearchSucceeded(res.data.data.docs, keyword));
+        if (res.data && res.data.data)
+          dispatch(getSearchSucceeded(res.data.data, keyword));
       },
       error => {
+        dispatch(getSearchFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

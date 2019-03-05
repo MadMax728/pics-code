@@ -13,17 +13,10 @@ class SubscribeUserCardBody extends Component {
   }
 
   render() {
-    const {
-      handleSubscribed,
-      isLoading,
-      isSubscribeStatus,
-      isFor
-    } = this.props;
+    const { handleSubscribed, isLoading, isFor, isView } = this.props;
     const { user } = this.state;
     let classNameText = "filled_button";
     let btnText = Translations.profile_community_right_sidebar.Subscribed;
-    console.log("status", isSubscribeStatus);
-    console.log("followings", typeof user.followers);
     const isfollower = typeof user.followers;
     if (isfollower !== "string") {
       btnText = Translations.profile_community_right_sidebar.Subscribed;
@@ -34,10 +27,8 @@ class SubscribeUserCardBody extends Component {
     }
     let actionId = "";
     if (isFor === "Subscribers") {
-      console.log("subscribe", user.followers);
       actionId = user.followers;
     } else {
-      console.log("unsubscribe", user._id);
       actionId = user._id;
     }
 
@@ -51,29 +42,32 @@ class SubscribeUserCardBody extends Component {
 
     return (
       <div>
-        <div className="row">
-          <div className="col-sm-3">
-            <img
-              src={
-                isFor === "Subscribers"
-                  ? user.following.profileUrl
-                  : user.followers.profileUrl
-              }
-              alt="campaign"
-              className="img-circle img-responsive"
-            />
-          </div>
-          <div className="col-sm-4">
-            <div className="user-info">
-              <div className="username">
-                {isFor === "Subscribers"
-                  ? user.following.username
-                  : user.followers.username}
-              </div>
-              <div className="subtitle">
-                {isFor === "Subscribers"
-                  ? user.following.name
-                  : user.followers.name}
+        {isView && (
+          <div>
+          <div className="row">
+            <div className="col-sm-3">
+              <img
+                src={
+                  isFor === "Subscribers"
+                    ? user.following.profileUrl
+                    : user.followers.profileUrl
+                }
+                alt="campaign"
+                className="img-circle img-responsive"
+              />
+            </div>
+            <div className="col-sm-4">
+              <div className="user-info">
+                <div className="username">
+                  {isFor === "Subscribers"
+                    ? user.following.username
+                    : user.followers.username}
+                </div>
+                <div className="subtitle">
+                  {isFor === "Subscribers"
+                    ? user.following.name
+                    : user.followers.name}
+                </div>
               </div>
             </div>
           </div>
@@ -89,6 +83,7 @@ class SubscribeUserCardBody extends Component {
             </div>
           </div>
         </div>
+        )}
       </div>
     );
   }
@@ -99,7 +94,8 @@ SubscribeUserCardBody.propTypes = {
   handleSubscribed: PropTypes.func.isRequired,
   isLoading: PropTypes.any,
   isSubscribeStatus: PropTypes.any,
-  isFor: PropTypes.any
+  isFor: PropTypes.any,
+  isView: PropTypes.any
 };
 
 export default SubscribeUserCardBody;

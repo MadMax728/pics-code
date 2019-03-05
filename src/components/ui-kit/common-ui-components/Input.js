@@ -39,6 +39,7 @@ class Input extends Component {
         autoComplete={autoComplete}
         onChange={this.handleChangeField}
         defaultValue={value || ""}
+        value={value}
         readOnly={isReadonly}
       />
     );

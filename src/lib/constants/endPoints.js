@@ -29,6 +29,7 @@ export const createCampaignEndPoint = "/campaigns";
 export const editCampaignEndPoint = "/campaigns/";
 export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
+export const addCampaignComment = "campaigns/"; //5c750deebba3b10e6dfefbd4/comment/
 
 // CMS Management Service
 export const getCMSManagementEndPoint = "/cmspage";
@@ -92,7 +93,7 @@ export const getReportedStatisticsEndPoint =
   "/reports/post-count?reportContent=";
 
 // review services
-export const CampaignsEndPoint = "/campaigns/get-all-campaigns";
+export const CampaignsEndPoint = "/campaigns/";
 export const AdsEndPoint = "/advertisement/list";
 export const getReviewStatisticsEndPoint = "/post-count";
 export const updateBackOfficeReviewEndPoint = "/update-status";
@@ -136,7 +137,7 @@ export const updateUserProfileEndPoint = "/users";
 export const generateOTPEndPoint = "/auth/generate-otp";
 export const logoutEndPoint = "/auth/logout";
 export const getSocialNetworkEndPoint = "/auth/social-network-details";
-export const getUserCommunityEndPoint = "/users/community?followers=";
+export const getUserCommunityEndPoint = "/users/community";
 
 // Users Services
 export const getUserListSubscriberEndPoint =

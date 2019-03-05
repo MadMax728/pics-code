@@ -5,6 +5,7 @@ import * as routes from "../../../../lib/constants/routes";
 import * as images from "../../../../lib/constants/images";
 import { DateFormat } from "../../../Factory";
 import { Translations } from "../../../../lib/translations";
+import { UserImageItem, UserTitleItem } from "../../../ui-kit";
 
 const FavouriteCampaignItem = ({ campaign }) => {
   const profile_image = campaign.profileImage
@@ -18,23 +19,17 @@ const FavouriteCampaignItem = ({ campaign }) => {
     >
       <div className="campaign_wrapper">
         <div className="col-xs-3 col-md-2">
-          <img
-            src={profile_image}
-            alt="campaign"
-            className="img-circle img-responsive"
-          />
+          <UserImageItem 
+            customClass={'img-circle img-responsive'} 
+            item={profile_image}>
+          </UserImageItem>
         </div>
         <div className="col-xs-9 col-md-10">
-          <div className="normal_title">{campaign.title}</div>
-          <div className="secondary_title">{campaign.userName}</div>
-          <div className="grey_title">
-            {campaign.startDate &&
-              DateFormat(
-                campaign.startDate,
-                Translations.date_format.date,
-                true
-              )}
-          </div>
+          <UserTitleItem 
+              title={campaign.title} 
+              username={campaign.userName} 
+              date={ DateFormat( campaign.startDate, Translations.date_format.date,true) }>
+          </UserTitleItem>
         </div>
       </div>
     </Link>

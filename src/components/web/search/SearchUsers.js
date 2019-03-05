@@ -1,24 +1,43 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import * as Infinite from "react-infinite"
 import SearchUserItem from "./SearchUserItem";
 
-const SearchUsers = ( { users }) => {
+const SearchUsers = ( { users = [], isInfiniteLoading = false, onInfiniteLoad, close }) => {
     return (
         <div className="search-user">
-           {
-               users.map((user, key) => (
-                   <div className="search-user-wrapper" key={user._id}>
-                        <SearchUserItem item={user}></SearchUserItem>
-                   </div>
-                ))
-            } 
+            {
+                users && users.length > 0 && (
+                    <Infinite 
+                        containerHeight={400} 
+                        infiniteLoadBeginEdgeOffset={300} 
+                        elementHeight={40} 
+                        isInfiniteLoading={isInfiniteLoading}
+                        onInfiniteLoad={onInfiniteLoad}>
+                        {
+                            users.map((user, key) => {
+                                if( user && user.id) {
+                                    return (
+                                        <div className="search-user-wrapper" key={user.id}>
+                                           <SearchUserItem item={user} close={close}></SearchUserItem>
+                                       </div>
+                                   )
+                                }
+                            })
+                        } 
+                    </Infinite>
+                )
+            }
         </div>
     );
 };
 
 
 SearchUsers.propTypes = {
-    users: PropTypes.any
+    users: PropTypes.any,
+    onInfiniteLoad: PropTypes.any,
+    isInfiniteLoading: PropTypes.bool,
+    close: PropTypes.any
 };
   
 export default SearchUsers;

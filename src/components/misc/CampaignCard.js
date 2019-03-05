@@ -21,7 +21,8 @@ class CampaignCard extends Component {
       item: this.props.item,
       comments: "",
       totalCommentsCount: "",
-      isEmoji: false
+      isEmoji: false,
+      commentType: "campaigns"
     };
   }
 
@@ -36,7 +37,7 @@ class CampaignCard extends Component {
       reportedContentData,
       savedData
     } = this.props;
-    const { isComments, item, comments } = this.state;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -58,19 +59,21 @@ class CampaignCard extends Component {
           isComments={isComments}
           isStatus={isStatus}
           isBudget={isBudget} /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          renderReportTips={() => this.renderReportTips(item._id)}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
+          commentType={commentType}
         />
         {isComments && (
           <CommentCard
             item={comments}
-            itemId={item.id}
+            itemId={item._id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
             isReport={isReport}
+            commentType={commentType}
           />
         )}
       </div>
@@ -111,7 +114,7 @@ class CampaignCard extends Component {
 
     const campaignLike = {
       typeOfContent: enumerations.likeContentTypes.campaign,
-      typeId: item.id
+      typeId: item._id
     };
     this.props.like(campaignLike);
   };
@@ -123,10 +126,13 @@ class CampaignCard extends Component {
   };
 
   handleCommentsSections = () => {
-    const CampaignId = {
-      typeId: this.state.item.id
-    };
-    this.props.getComments(CampaignId).then(() => {
+    // const CampaignId = {
+    //   typeId: this.state.item._id
+    // };
+    const CampaignId = this.state.item._id;
+    const commentType = this.state.commentType;
+    const getCommentEndPoint = commentType + "/" + CampaignId + "/comment/";
+    this.props.getComments(getCommentEndPoint).then(() => {
       const totalComment = this.props.comments;
       this.setState({
         isComments: !this.state.isComments,
@@ -141,7 +147,7 @@ class CampaignCard extends Component {
     const data = {
       url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${
         item.userType
-      }${"/"}${item.id}`
+      }/${item._id}`
     };
     this.props.handleModalInfoShow(modalType.share, data);
   };
@@ -157,7 +163,7 @@ class CampaignCard extends Component {
       reportedContentData,
       savedData
     } = this.props;
-    const { isComments, item, comments } = this.state;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -188,11 +194,12 @@ class CampaignCard extends Component {
         {isComments && (
           <CommentCard
             item={comments}
-            itemId={item.id}
+            itemId={item._id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
             isReport={isReport}
+            commentType={commentType}
           />
         )}
       </div>

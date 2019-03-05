@@ -10,3 +10,4 @@ export { default as ReportCard } from "./ReportCard";
 export { default as CommentCard } from "./CommentCard";
 export { default as CampaignDetailsCard } from "./CampaignDetailsCard";
 export { default as FeedHeader } from "./headers/FeedHeader";
+export { default as EmojiCard } from "./EmojiCard";

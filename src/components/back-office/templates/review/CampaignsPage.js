@@ -164,7 +164,7 @@ class CampaignsPage extends Component {
     );
     return campaignList.map(campaign => {
       return (
-        <div key={campaign.id}>
+        <div key={campaign._id}>
           {(campaign.postType.toLowerCase() ===
             enumerations.contentTypes.companyCampaign ||
             campaign.postType.toLowerCase() ===
@@ -193,7 +193,7 @@ class CampaignsPage extends Component {
   handleRemove = data => {
     const { campaignList, isSearch } = this.state;
     if (isSearch) {
-      this.setState({ campaignList: campaignList.filter(e => e.id !== data) });
+      this.setState({ campaignList: campaignList.filter(e => e._id !== data) });
     }
   };
 

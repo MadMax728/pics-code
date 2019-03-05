@@ -239,13 +239,15 @@ const initialState = {
     error: false
   },
   searchData: {
-    searchKeyword: null,
+    searchKeyword: '',
     isLoading: false,
     error: false,
-    users: []
+    users: [],
+    page: 1,
+    pages: 1
   },
   communityData: {
-    userCommunity: null,
+    userCommunity: [],
     isLoading: false,
     error: false
   },

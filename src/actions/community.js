@@ -19,7 +19,7 @@ const getUserCommunityFailed = error => ({
   error: true
 });
 
-export const getUserCommunity = params => {
+export const getUserCommunity = (params = {}) => {
   return dispatch => {
     dispatch(getUserCommunityStarted());
     const storage = Auth.extractJwtFromStorage();

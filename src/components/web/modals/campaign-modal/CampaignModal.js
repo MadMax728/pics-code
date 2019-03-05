@@ -254,14 +254,18 @@ class CampaignModal extends Component {
 
   handleSetstate = data => {
     const { form } = this.state;
-    form.id = data.id;
-    form.title = data.title;
+    if (data.id) {
+      form.id = data.id;
+    }
+    if (data.title) {
+      form.title = data.title;
+    }
     if (data.location) {
       form.location.latitude = data.location.latitude;
       form.location.longitude = data.location.longitude;
       form.location.address = data.location.address;
     }
-    if (data.category && data.category) {
+    if (data.category) {
       form.category = data.category;
     }
     if (data.offers) {
@@ -270,7 +274,9 @@ class CampaignModal extends Component {
     if (data.inquiry) {
       form.inquiry = data.inquiry;
     }
-    form.procedure = procedure[data.procedure];
+    if (data.procedure) {
+      form.procedure = procedure[data.procedure];
+    }
     if (data.typeContent) {
       form.typeContent = typeContent[data.typeContent.toLowerCase()];
       form.image = data.mediaUrl;
@@ -319,7 +325,13 @@ class CampaignModal extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { data } = this.props;
-    if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
+    if (
+      (data &&
+        prevState.form &&
+        prevState.form &&
+        data.id !== prevState.form.id) ||
+      !prevProps.modalShow
+    ) {
       this.handleSetstate(data);
     }
   }
@@ -413,7 +425,7 @@ class CampaignModal extends Component {
         const postType = isFor
           ? contentTypes.companyCampaign
           : contentTypes.creatorCampaign;
-        this.props.uploadMedia(Data, form.filetype, postType).then(() => {
+        this.props.uploadMedia(Data, form.filetype, "campaign").then(() => {
           const { mediaData } = this.props;
           if (mediaData && mediaData.media) {
             form.typeId = mediaData.media.id;
@@ -445,7 +457,7 @@ class CampaignModal extends Component {
       const postType = isFor
         ? contentTypes.companyCampaign
         : contentTypes.creatorCampaign;
-      this.props.uploadMedia(Data, form.filetype, postType).then(() => {
+      this.props.uploadMedia(Data, form.filetype, "campaign").then(() => {
         const { mediaData } = this.props;
         if (mediaData && mediaData.media) {
           form.typeId = mediaData.media.id;
@@ -542,6 +554,7 @@ class CampaignModal extends Component {
   /* eslint-disable */
   validateForm = index => {
     const { form } = this.state;
+    console.log(form);
     if (index === 0) {
       return (
         form.title &&

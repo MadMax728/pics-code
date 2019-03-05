@@ -24,12 +24,12 @@ const CampaignCardFooter = ({
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
-        <span className="count">{campaign.commentCount}</span>
+        <span className="count">{campaign.typeId.commentCount}</span>
         <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
-          id={campaign.createdBy}
+          id={campaign.typeId.createdBy._id}
           disabled={isLoading}
           text={
             <img
@@ -46,7 +46,7 @@ const CampaignCardFooter = ({
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
-          id={campaign.id}
+          id={campaign._id}
           disabled={isLoading}
           text={<img src={favorite_icon} alt="like" role="presentation" />}
         />
@@ -63,7 +63,7 @@ const CampaignCardFooter = ({
         </div>
         <div className="social-media-wrapr" />
         <ThreeDots
-          id={`report-${campaign.id}`}
+          id={`report-${campaign._id}`}
           role="button"
           dataTip="tooltip"
           dataClass="tooltip-wrapr"

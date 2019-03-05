@@ -146,7 +146,7 @@ class TopBarOwnerInfo extends Component {
       const selectedUserType = "creator";
       this.setState({ isLoading: true });
       this.props.getUserCommunity(data).then(() => {
-        console.log(this.props.userCommunity);
+        // console.log(this.props.userCommunity);
       });
       this.props.getUser(data).then(() => {
         if (
@@ -251,8 +251,74 @@ class TopBarOwnerInfo extends Component {
     if (this.props.userDataByUsername.user) {
       if (
         this.props.userDataByUsername.user.data.subscribedCount !==
-        nextProps.userDataByUsername.user.data.subscribedCount
+          nextProps.userDataByUsername.user.data.subscribedCount ||
+        this.props.userDataByUsername.user.data.subscribersCount !==
+          nextProps.userDataByUsername.user.data.subscribersCount
       ) {
+        const subscribersCount =
+          nextProps.userDataByUsername.user.data.subscribersCount;
+
+        const subscribedCount =
+          nextProps.userDataByUsername.user.data.subscribedCount;
+
+        const selectedUserType = "creator";
+        let btnSlotsData = [];
+
+        if (
+          nextProps.userDataByUsername.user.data.userType === selectedUserType
+        ) {
+          btnSlotsData = [
+            {
+              name: Translations.top_bar_info.subscriber,
+              className: "col-sm-8 slot_one no-padding",
+              btnActiveClassName: "filled_button",
+              btnText: Translations.top_bar_info.upload,
+              handeleEvent: this.handeleUpload,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.subscribed,
+              className: "col-sm-4 slot_two no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_campaign,
+              handeleEvent: this.handeleCreateCampaign,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            }
+          ];
+        } else {
+          btnSlotsData = [
+            {
+              name: Translations.top_bar_info.subscriber,
+              className: "col-sm-4 slot_one no-padding",
+              btnActiveClassName: "filled_button",
+              btnText: Translations.top_bar_info.upload,
+              handeleEvent: this.handeleUpload,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.subscribed,
+              className: "col-sm-4 slot_two no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_campaign,
+              handeleEvent: this.handeleCreateCampaign,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.posts,
+              className: "col-sm-4 slot_two no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_ad,
+              handeleEvent: this.handeleCreateAd,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            }
+          ];
+        }
+
         const items = {
           userid: nextProps.userDataByUsername.user.data.id,
           username: nextProps.userDataByUsername.user.data.username,
@@ -263,14 +329,14 @@ class TopBarOwnerInfo extends Component {
           slots: [
             {
               name: Translations.top_bar_info.subscriber,
-              val: nextProps.userDataByUsername.user.data.subscribersCount,
+              val: subscribersCount,
               className: "col-sm-4 slot_one no-padding",
               userid: nextProps.userDataByUsername.user.data.id,
               username: nextProps.userDataByUsername.user.data.username
             },
             {
               name: Translations.top_bar_info.subscribed,
-              val: nextProps.userDataByUsername.user.data.subscribedCount,
+              val: subscribedCount,
               className: "col-sm-4 slot_two no-padding",
               userid: nextProps.userDataByUsername.user.data.id,
               username: nextProps.userDataByUsername.user.data.username
@@ -283,32 +349,7 @@ class TopBarOwnerInfo extends Component {
               username: nextProps.userDataByUsername.user.data.username
             }
           ],
-          btnSlots: [
-            {
-              name: Translations.top_bar_info.subscriber,
-              val: nextProps.userDataByUsername.user.data.subscribersCount,
-              className: "col-sm-4 slot_one no-padding",
-              btnActiveClassName: "filled_button",
-              userid: nextProps.userDataByUsername.user.data.id,
-              username: nextProps.userDataByUsername.user.data.username
-            },
-            {
-              name: Translations.top_bar_info.subscribed,
-              val: nextProps.userDataByUsername.user.data.subscribedCount,
-              className: "col-sm-4 slot_two no-padding",
-              btnActiveClassName: "black_button",
-              userid: nextProps.userDataByUsername.user.data.id,
-              username: nextProps.userDataByUsername.user.data.username
-            },
-            {
-              name: Translations.top_bar_info.posts,
-              val: nextProps.userDataByUsername.user.data.postCount,
-              className: "col-sm-4 slot_three no-padding",
-              btnActiveClassName: "black_button",
-              userid: nextProps.userDataByUsername.user.data.id,
-              username: nextProps.userDataByUsername.user.data.username
-            }
-          ]
+          btnSlots: btnSlotsData
         };
         this.setState({ items });
       }
@@ -348,7 +389,8 @@ class TopBarOwnerInfo extends Component {
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
   usersData: state.usersData,
-  userCommunity: state.communityData.userCommunity
+  userCommunity: state.communityData.userCommunity,
+  subscribeData: state.subscribeData
 });
 
 const mapDispatchToProps = {
@@ -366,7 +408,8 @@ TopBarOwnerInfo.propTypes = {
   usersData: PropTypes.object,
   getUserCommunity: PropTypes.func,
   history: PropTypes.any,
-  userCommunity: PropTypes.any
+  userCommunity: PropTypes.any,
+  subscribeData: PropTypes.any
 };
 
 export default connect(

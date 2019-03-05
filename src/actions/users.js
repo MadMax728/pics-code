@@ -159,6 +159,11 @@ const getFollowUserListFailed = error => ({
   error: true
 });
 
+const setLastEvaluatedKeys = data => ({
+  type: types.GET_LAST_EVALUATE_KEYS_SUCCEEDED,
+  payload: data
+});
+
 // export const getFollowUserList = (prop, requestData) => {
 //   return dispatch => {
 //     dispatch(getFollowUserListStarted());
@@ -188,6 +193,12 @@ export const getFollowUserList = requestData => {
     return subscribeService.subscribe(requestData, header).then(
       res => {
         dispatch(getFollowUserListSucceeded(res.data));
+        const keys = {
+          limit: res.data.limit,
+          page: res.data.page,
+          pages: res.data.pages
+        };
+        dispatch(setLastEvaluatedKeys(keys));
       },
       error => {
         dispatch(getFollowUserListFailed(error.response));
