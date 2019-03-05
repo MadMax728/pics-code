@@ -949,51 +949,100 @@
   }
 }
 
-.edit-profile-modal {
+.create-campaign-modal.edit-profile-modal {
   .modal-dialog {
     .modal-content {
       .modal-header {
       }
       .modal-body {
-        .upload-profile-wrapr {
-          .range-wrapr {
-            margin: 0 25%;
-            text-align: center;
-            display: inline-block;
-            width: 52%;
-            padding: 0 40px;
-            position: relative;
-            height: 60px;
-            .add-wrapper.upload-wrapr{
-              height: auto;
-              background: transparent;
-              position: absolute;
-              right: -9px;
-              top: 2px;
-              img{
+        .add-wrapper{
+          background: transparent;
+        }
+        .upload-form{
+          padding: 20px 190px;
+          overflow: initial;
+        // .upload-profile-wrapr {
+        //   .add-wrapper{
+        //     background: transparent;
+        //   }
+        //   .range-wrapr {
+        //     margin: 0 25%;
+        //     text-align: center;
+        //     display: inline-block;
+        //     width: 52%;
+        //     padding: 0 40px;
+        //     position: relative;
+        //     height: 60px;
+        //     .add-wrapper.upload-wrapr{
+        //       height: auto;
+        //       background: transparent;
+        //       position: absolute;
+        //       right: -9px;
+        //       top: 2px;
+        //       img{
                 
-              }
+        //       }
+        //     }
+        //     .min-profile-pic {
+        //       position: absolute;
+        //       left: 40px;
+        //       z-index: 9;
+        //     }
+        //     img.max-profile-pic {
+        //       position: absolute;
+        //       right: 45px;
+        //       z-index: 9;
+        //       left: initial;
+        //     }
+        //     input[type="range"] {
+        //       float: none;
+        //     }
+        //     .runnable {
+        //       left: 48px;
+        //     }
+        //   }
+        // }
+        .range-wrapr.add-wrapper {
+          position: relative;
+          padding: 0 50px;
+          .min-profile-pic {
+            width: 20px;
+            height: 20px;
+            left: 20px;
+            top: 18px;
+          }
+          input[type="range"] {
+            border: none;
+            margin: 15px 25px;
+          }
+          .runnable {
+            left: 55px;
+            top: 26px;
+          }
+          .max-profile-pic {
+            left: -7px;
+            top: 12px;
+          }
+          .add-wrapper.upload-wrapr {
+            position: absolute;
+            right: 0;
+            bottom: 55px;
+            width: 30px;
+            height: 20px;
+            background-color: transparent;
+            img {
+              top: 0;
+              right: 17px;
             }
-            .min-profile-pic {
-              position: absolute;
-              left: 40px;
-              z-index: 9;
-            }
-            img.max-profile-pic {
-              position: absolute;
-              right: 45px;
-              z-index: 9;
+            input[type="file"] {
+              top: 29px;
               left: initial;
-            }
-            input[type="range"] {
-              float: none;
-            }
-            .runnable {
-              left: 48px;
+              right: 16px;
             }
           }
         }
       }
+    }
     }
   }
 }

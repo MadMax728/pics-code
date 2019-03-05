@@ -45,7 +45,7 @@ class SubscribeUserCardBody extends Component {
         {isView && (
           <div>
           <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-4">
               <img
                 src={
                   isFor === "Subscribers"
@@ -70,16 +70,16 @@ class SubscribeUserCardBody extends Component {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col-md-4">
-            <div className="subscribe-btn">
-              <Button
-                className={actionButton.className}
-                id={actionButton.actionId}
-                onClick={actionButton.handleActionClick}
-                disabled={actionButton.isLoading}
-                text={actionButton.btnText}
-              />
+            <div className="col-md-4">
+              <div className="subscribe-btn">
+                <Button
+                  className={actionButton.className}
+                  id={actionButton.actionId}
+                  onClick={actionButton.handleActionClick}
+                  disabled={actionButton.isLoading}
+                  text={actionButton.btnText}
+                />
+              </div>
             </div>
           </div>
         </div>
