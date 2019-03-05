@@ -3,7 +3,13 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
 import ReportCard from "../ReportCard";
-import { Loader, ThreeDots, UserCardImageItem, Button, UserImageItem } from "../../ui-kit";
+import {
+  Loader,
+  ThreeDots,
+  UserCardImageItem,
+  Button,
+  UserImageItem
+} from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import * as routes from "../../../lib/constants/routes";
 
@@ -29,7 +35,10 @@ class UserCardBody extends Component {
     let classNameText = "filled_button";
     let btnText = Translations.profile_community_right_sidebar.Subscribed;
 
-    if((isSubscribeStatus && isSubscribeStatus === "subscribe") || (user.isSubscribe)) {
+    if (
+      (isSubscribeStatus && isSubscribeStatus === "subscribe") ||
+      user.isSubscribe
+    ) {
       btnText = Translations.profile_community_right_sidebar.Subscribed;
       classNameText = "filled_button";
     } else {
@@ -47,16 +56,16 @@ class UserCardBody extends Component {
 
     const pic_block = classnames("col-sm-6", {
       "pic-left-block": index % 2 === 0,
-      "pic-right-block": index % 2 !== 0,
+      "pic-right-block": index % 2 !== 0
     });
 
     return (
       <div className={`${pic_block}`}>
         <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
-            <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
-              <UserCardImageItem item={user.profileUrl}></UserCardImageItem>
-            </Link>
-            <div className="name-wrapper">
+          <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
+            <UserCardImageItem item={user.profileUrl} />
+          </Link>
+          <div className="name-wrapper">
             <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
               <div className="username">{user.username}</div>
             </Link>

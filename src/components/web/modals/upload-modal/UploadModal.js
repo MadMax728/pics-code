@@ -65,6 +65,7 @@ class UploadModal extends Component {
             handleUpload={this.handleUpload}
             handleSelect={this.handleSelect}
             fileUpdate={fileUpdate}
+            handleEditImage={this.props.handleEditImage}
           />
         }
       />
@@ -278,7 +279,8 @@ UploadModal.propTypes = {
   addParticipants: PropTypes.func,
   campaignData: PropTypes.any,
   getCampaignDetails: PropTypes.func,
-  mediaData: PropTypes.any
+  mediaData: PropTypes.any,
+  handleEditImage: PropTypes.func
 };
 
 const mapStateToProps = state => ({
