@@ -26,6 +26,7 @@ export {
   UserImageItem,
   VideoItem,
   UserTitleItem,
+  UserCardImageItem,
   ImageGallery
 } from "./items";
 export { ReadMore } from "./read-more";

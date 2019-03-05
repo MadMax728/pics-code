@@ -35,6 +35,7 @@ class CustomModal extends Component {
         handleModalHide={this.props.handleModalHide}
         handleModalInfoMsgShow={this.props.handleModalInfoMsgShow}
         data={this.props.data}
+        handleEditImage={this.props.handleEditImage}
       />
     );
   };
@@ -170,7 +171,8 @@ CustomModal.propTypes = {
   handleModalHide: PropTypes.func.isRequired,
   handleModalInfoMsgShow: PropTypes.func.isRequired,
   data: PropTypes.any,
-  history: PropTypes.any
+  history: PropTypes.any,
+  handleEditImage: PropTypes.func
 };
 
 export default CustomModal;
