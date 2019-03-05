@@ -31,7 +31,7 @@ class UsersRoot extends React.Component {
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.handleRefresh();
-    this.handleSearch();
+    this.getUserList();
     window.addEventListener("scroll", this.onScroll, false);
   };
 
@@ -70,11 +70,15 @@ class UsersRoot extends React.Component {
     }
   };
 
-  handleSearch = () => {
+  getUserList = () => {
     this.props.getDashboard("users", "").then(() => {
       const { usersList } = this.props;
       this.setState({ usersList });
     });
+  };
+
+  handleSearch = () => {
+    this.getUserList();
   };
 
   handleRefresh = () => {
@@ -112,7 +116,8 @@ UsersRoot.propTypes = {
   usersList: PropTypes.any,
   searchData: PropTypes.any,
   getSearch: PropTypes.func,
-  lastEvaluatedKey: PropTypes.any
+  lastEvaluatedKey: PropTypes.any,
+  getUserList: PropTypes.func
   // errorusers: PropTypes.any
 };
 

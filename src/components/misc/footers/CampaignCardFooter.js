@@ -24,12 +24,12 @@ const CampaignCardFooter = ({
   return (
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
-        <span className="count">{campaign.typeId.commentCount}</span>
+        <span className="count">{campaign.commentCount}</span>
         <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
-          id={campaign.typeId.createdBy._id}
+          id={campaign._id}
           disabled={isLoading}
           text={
             <img
