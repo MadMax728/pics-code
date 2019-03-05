@@ -20,13 +20,12 @@ class UserCard extends Component {
     this.state = {
       item: this.props.item,
       index: this.props.index,
-      subscribeId: this.props.item.subscribeId,
-      isSubscribeStatus: null
+      subscribeId: this.props.item.subscribeId
     };
   }
 
   render() {
-    const { item, index, isSubscribeStatus, subscribeId } = this.state;
+    const { item, index, subscribeId } = this.state;
     const { isReport, isBackOffice } = this.props;
     const requestLoading = this.props.usersData.isLoading;
     return (
@@ -37,7 +36,6 @@ class UserCard extends Component {
         handleUnSubscribe={this.handleUnSubscribe}
         isReport={isReport}
         isBackOffice={isBackOffice}
-        isSubscribeStatus={isSubscribeStatus}
         subscribeId={subscribeId}
         /* eslint-disable */ renderReportTips={() =>
           this.renderReportTips(item.id)
@@ -54,14 +52,22 @@ class UserCard extends Component {
   handleSubscribe = e => {
     const requestData = { followers: e.target.id };
     this.props.sendRequest(requestData).then(() => {
-      this.props.getDashboard("users", "");
+      if (this.props.usersData && this.props.usersData.isRequestSendData) {
+        this.setState({
+          subscribeId: this.props.usersData.isRequestSendData._id
+        });
+      }
     });
   };
 
   handleUnSubscribe = e => {
     const subscribedId = e.target.id;
     this.props.getUnsubscribe(subscribedId).then(() => {
-      this.props.getDashboard("users", "");
+      if (this.props.usersData && this.props.usersData.isUnsubscribedData) {
+        this.setState({
+          subscribeId: ""
+        });
+      }
     });
   };
 

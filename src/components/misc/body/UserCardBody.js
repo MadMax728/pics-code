@@ -3,13 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import classnames from "classnames";
 import ReportCard from "../ReportCard";
-import {
-  Loader,
-  ThreeDots,
-  UserCardImageItem,
-  Button,
-  UserImageItem
-} from "../../ui-kit";
+import { Loader, ThreeDots, UserCardImageItem, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import * as routes from "../../../lib/constants/routes";
 
@@ -29,10 +23,10 @@ class UserCardBody extends Component {
       isReport,
       isBackOffice,
       renderReportTips,
-      isLoading
+      isLoading,
+      subscribeId
     } = this.props;
     const { user } = this.state;
-
     const pic_block = classnames("col-sm-6", {
       "pic-left-block": index % 2 === 0,
       "pic-right-block": index % 2 !== 0
@@ -67,21 +61,21 @@ class UserCardBody extends Component {
               </div>
             )}
             {!isBackOffice &&
-              (user.isSubscribe ? (
-                <Button
-                  className={`filled_button`}
-                  id={user.subscriberId}
-                  onClick={handleUnSubscribe}
-                  disabled={isLoading}
-                  text={Translations.profile_community_right_sidebar.Subscribed}
-                />
-              ) : (
+              (subscribeId === "" ? (
                 <Button
                   className={`blue_button`}
                   id={user.id}
                   onClick={handleSubscribe}
                   disabled={isLoading}
                   text={Translations.profile_community_right_sidebar.Subscribe}
+                />
+              ) : (
+                <Button
+                  className={`filled_button`}
+                  id={subscribeId}
+                  onClick={handleUnSubscribe}
+                  disabled={isLoading}
+                  text={Translations.profile_community_right_sidebar.Subscribed}
                 />
               ))}
           </div>
@@ -101,7 +95,7 @@ UserCardBody.propTypes = {
   isBackOffice: PropTypes.bool,
   renderReportTips: PropTypes.any,
   isLoading: PropTypes.any,
-  isSubscribeStatus: PropTypes.any
+  subscribeId: PropTypes.any
 };
 
 export default UserCardBody;

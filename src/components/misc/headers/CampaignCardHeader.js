@@ -21,7 +21,7 @@ const CampaignCardHeader = ({
 
   const profile_route = campaign.isOwner
     ? routes.NEWS_FEED_ROUTE
-    : `${routes.NEWS_FEED_ROUTE}/${campaign.createdBy.username}`;
+    : `${routes.NEWS_FEED_ROUTE}/${campaign.username}`;
   const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
     : images.feed_like;
