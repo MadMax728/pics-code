@@ -3,15 +3,21 @@ import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
 import UploadData from "./UploadData";
 import FileUpload from "./FileUpload";
+import { b64toBlob } from "../../../../lib/utils/helpers";
 
 const storage = Auth.extractJwtFromStorage();
 
 class Upload extends Component {
   constructor(props) {
     super(props);
+    this.imageCrop = React.createRef();
+    this.imageCropper = React.createRef();
     this.state = {
       isInProgress: false,
-      isAdvertise: this.props.form.is_advertise_label
+      isAdvertise: this.props.form.is_advertise_label,
+      image: null,
+      actual_img: null,
+      scale: 1
     };
   }
 
@@ -33,6 +39,19 @@ class Upload extends Component {
 
   handleLengthField = event => {
     this.props.handleLengthField(event);
+  };
+
+  handleActualImg = actual_img => {
+    this.setState({ actual_img });
+  };
+
+  handleScale = scale => {
+    this.setState({ scale });
+  };
+
+  handleEditImage = image => {
+    this.setState({ image });
+    this.props.handleEditImage(image);
   };
 
   handleUpload = e => {
@@ -69,7 +88,7 @@ class Upload extends Component {
       handleSelect,
       fileUpdate
     } = this.props;
-    const { isInProgress, isAdvertise } = this.state;
+    const { isInProgress, isAdvertise, image } = this.state;
     const userInfo = storage ? JSON.parse(storage.userInfo) : null;
 
     return (
@@ -86,6 +105,11 @@ class Upload extends Component {
             handleUpload={this.handleUpload}
             isInProgress={isInProgress}
             isAdvertise={isAdvertise}
+            image={image}
+            handleEditImage={this.handleEditImage}
+            ref={this.imageCropper}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
           />
         )}
       </div>
@@ -101,7 +125,8 @@ Upload.propTypes = {
   form: PropTypes.any.isRequired,
   handleSelect: PropTypes.func.isRequired,
   is_advertise_label: PropTypes.any,
-  fileUpdate: PropTypes.bool
+  fileUpdate: PropTypes.bool,
+  handleEditImage: PropTypes.func
 };
 
 export default Upload;

@@ -99,8 +99,6 @@ class Home extends Component {
   };
 
   handleEditImage = image => {
-    console.log("jdsjk");
-
     this.setState({ image });
   };
 
@@ -130,6 +128,7 @@ class Home extends Component {
             handleModalInfoMsgShow={this.handleModalInfoMsgShow}
             data={data}
             history={this.props.history}
+            handleEditImage={this.handleEditImage}
           />
 
           <InfoModal
