@@ -6,11 +6,11 @@ import * as images from "../../../lib/constants/images";
 
 const UserCardImageItem = ( { item = images.profile_pic }) => {
   return (
-    <LazyLoad height={200} once offset={[-200, 0]}  placeholder={<UserImageItemLoader />}>
-        <div className="profile-img-wrapper">
+      <div className="profile-img-wrapper">
+        <LazyLoad height={200} once offset={[-200, 0]}  placeholder={<UserImageItemLoader />}>
             <img src={item} alt={"profile"} />
-        </div>
-    </LazyLoad>
+        </LazyLoad>
+      </div>
   );
 };
 
