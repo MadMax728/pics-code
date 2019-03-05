@@ -69,6 +69,37 @@ export const searchUsers = (keyword, page = 1, limit = 100) => {
   };
 };
 
+/**
+ *  search subscribed user by keyword
+ * { keyword }
+ *  @returns {dispatch} searchUsers.
+ */
+export const searchSubscribedUsers = (keyword, page = 1, limit = 100) => {
+  return dispatch => {
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+    return usersService.searchSubscribedUsers(keyword, page, limit, params).then(
+      res => {
+        const userList = [];
+        for (const user of res.data.data) {
+          userList.push(user.following);
+        }
+        dispatch(getUserListSucceeded(userList));
+      },
+      error => {
+        dispatch(getUserListSucceeded([]));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
 /* SendRequest -  For Send request to other user
  */
 const sendRequestStarted = () => ({

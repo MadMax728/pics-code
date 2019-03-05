@@ -9,33 +9,35 @@ class MLeftUsersList extends Component {
     const { items, handleChatClick } = this.props;
 
     const latestUserList = () => {
-      return items.map((item, key) => (
-        <div
-          role="button"
-          tabIndex={key}
-          className={classnames("chat-wrapper", {
-            new: !item.read
-          })}
-          key={item._id}
-          data-_id={item._id}
-          data-value={item.username}
-          onClick={handleChatClick}
-          onKeyDown={handleChatClick}
-          ref={el => {
-            this.messagesEnd = el;
-          }}
-        >
-          <MLeftUserItem key={key} item={item} message={item.lastMessage} />
-        </div>
-      ));
+      return items.map((item, key) => {
+        return (
+          <div
+            role="button"
+            tabIndex={key}
+            className={classnames("chat-wrapper", {
+              new: !item.read
+            })}
+            key={item._id}
+            data-_id={item._id}
+            data-value={item.username}
+            onClick={handleChatClick}
+            onKeyDown={handleChatClick}
+            ref={el => {
+              this.messagesEnd = el;
+            }}
+          >
+            <MLeftUserItem key={key} item={item} message={item.lastMessage} />
+          </div>
+        )
+      });
     };
     return (
       <div className="user-chat-wrapper">
         {items && items.length ? (
           latestUserList()
         ) : (
-          <div className="card">{Translations.message_module.no_msg}</div>
-        )}
+            <div className="card">{Translations.message_module.no_msg}</div>
+          )}
       </div>
     );
   }

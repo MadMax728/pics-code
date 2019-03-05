@@ -62,23 +62,23 @@ class ImagesBOPage extends Component {
             header={`Reported ${Translations.review_content_menu.images}`}
             handleEvent={this.handleReported}
             all={
-              reportedContentData.ImageStatistics
-                ? reportedContentData.ImageStatistics.all
+              reportedContentData.imageStatistics
+                ? reportedContentData.imageStatistics.All
                 : 0
             }
             outstanding={
-              reportedContentData.ImageStatistics
-                ? reportedContentData.ImageStatistics.outstanding
+              reportedContentData.imageStatistics
+                ? reportedContentData.imageStatistics.Outstanding
                 : 0
             }
             processed={
-              reportedContentData.ImageStatistics
-                ? reportedContentData.ImageStatistics.processed
+              reportedContentData.imageStatistics
+                ? reportedContentData.imageStatistics.Processed
                 : 0
             }
             notProcessed={
-              reportedContentData.ImageStatistics
-                ? reportedContentData.ImageStatistics.notProcessed
+              reportedContentData.imageStatistics
+                ? reportedContentData.imageStatistics.NotProcessedSub
                 : 0
             }
           />
@@ -90,7 +90,7 @@ class ImagesBOPage extends Component {
   componentDidMount = () => {
     const data = {
       type: "get",
-      reportContent: "Image"
+      reportContent: "image"
     };
     console.log("ahij");
 
@@ -107,10 +107,10 @@ class ImagesBOPage extends Component {
     this.props.getBackOfficeReportedContent(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.Image
+        this.props.reportedContentData.image
       ) {
         this.setState({
-          imageList: this.props.reportedContentData.Image,
+          imageList: this.props.reportedContentData.image,
           isLoading: this.props.reportedContentData.isLoading
         });
       }
@@ -121,7 +121,7 @@ class ImagesBOPage extends Component {
     this.props.getBackOfficeReportedStatistics(data).then(() => {
       if (
         this.props.reportedContentData &&
-        this.props.reportedContentData.ImageStatistics
+        this.props.reportedContentData.imageStatistics
       ) {
         // success
       }
@@ -133,13 +133,13 @@ class ImagesBOPage extends Component {
     if (e.target.id === "All") {
       data = {
         type: "get",
-        reportContent: "Image"
+        reportContent: "image"
       };
       this.setState({ isSearch: false });
     } else {
       data = {
         type: "search",
-        reportContent: "Image",
+        reportContent: "image",
         searchType: `${e.target.id}`
       };
       this.setState({ isSearch: true });
@@ -164,12 +164,20 @@ class ImagesBOPage extends Component {
       form.search || searchData.searchKeyword
     );
     return imageList.map(image => {
+      image.createdBy = image.typeId.createdBy;
+      image.userName = image.typeId.createdBy.username;
+      image.id = image.typeId._id;
+      image.mediaUrl = image.typeId.mediaUrl;
+      image.commentCount = image.typeId.commentCount;
+      image.likeCount = image.typeId.likeCount;
+      image.firstReportedDate = image.createdAt;
+      image.createdAt = image.typeId.createdAt;
       return (
         <div key={image.id}>
-          {image.postType === enumerations.contentTypes.mediaPost &&
+          {
             image.typeContent &&
             image.typeContent.toLowerCase() ===
-              enumerations.mediaTypes.image && (
+            enumerations.mediaTypes.image && (
               <MediaCard
                 item={image}
                 isDescription
@@ -199,7 +207,7 @@ class ImagesBOPage extends Component {
       getSearch("");
       const data = {
         type: "get",
-        reportContent: "Image"
+        reportContent: "image"
       };
       this.setState({ isLoading: true });
       this.getBackOfficeReportedContent(data);
