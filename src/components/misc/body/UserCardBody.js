@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classnames from "classnames";
 import ReportCard from "../ReportCard";
-import LazyLoad from "react-lazyload";
 import { Loader, ThreeDots, UserCardImageItem, Button, UserImageItem } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import * as images from "../../../lib/constants/images";
+import * as routes from "../../../lib/constants/routes";
 
 class UserCardBody extends Component {
   constructor(props, context) {
@@ -27,19 +28,8 @@ class UserCardBody extends Component {
     const { user } = this.state;
     let classNameText = "filled_button";
     let btnText = Translations.profile_community_right_sidebar.Subscribed;
-    // if (user.isPending) {
-    //   btnText = Translations.profile_community_right_sidebar.Pending;
-    //   classNameText = "filled_button";
-    // } else
-    if (isSubscribeStatus) {
-      if (isSubscribeStatus === "subscribe") {
-        btnText = Translations.profile_community_right_sidebar.Subscribed;
-        classNameText = "filled_button";
-      } else if (isSubscribeStatus === "unsubscribe") {
-        btnText = Translations.profile_community_right_sidebar.Subscribe;
-        classNameText = "blue_button";
-      }
-    } else if (user.isSubscribe) {
+
+    if((isSubscribeStatus && isSubscribeStatus === "subscribe") || (user.isSubscribe)) {
       btnText = Translations.profile_community_right_sidebar.Subscribed;
       classNameText = "filled_button";
     } else {
@@ -55,18 +45,21 @@ class UserCardBody extends Component {
       isLoading
     };
 
+    const pic_block = classnames("col-sm-6", {
+      "pic-left-block": index % 2 === 0,
+      "pic-right-block": index % 2 !== 0,
+    });
+
     return (
-      <div
-        className={
-          index % 2 === 0
-            ? "col-sm-6 pic-left-block"
-            : "col-sm-6 pic-right-block"
-        }
-      >
+      <div className={`${pic_block}`}>
         <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
-          <UserCardImageItem item={user.profileUrl}></UserCardImageItem>
-          <div className="name-wrapper">
-            <div className="username">{user.username}</div>
+            <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
+              <UserCardImageItem item={user.profileUrl}></UserCardImageItem>
+            </Link>
+            <div className="name-wrapper">
+            <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
+              <div className="username">{user.username}</div>
+            </Link>
             {isBackOffice && (
               <div className="show_more_options user">
                 <ThreeDots
