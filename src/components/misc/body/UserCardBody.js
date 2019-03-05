@@ -2,9 +2,16 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import ReportCard from "../ReportCard";
 import LazyLoad from "react-lazyload";
-import { Loader, ThreeDots, UserCardImageItem, Button, UserImageItem } from "../../ui-kit";
+import {
+  Loader,
+  ThreeDots,
+  UserCardImageItem,
+  Button,
+  UserImageItem
+} from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
-import * as images from "../../../lib/constants/images";
+import * as routes from "../../../lib/constants/routes";
+import { Link } from "react-router-dom";
 
 class UserCardBody extends Component {
   constructor(props, context) {
@@ -27,10 +34,6 @@ class UserCardBody extends Component {
     const { user } = this.state;
     let classNameText = "filled_button";
     let btnText = Translations.profile_community_right_sidebar.Subscribed;
-    // if (user.isPending) {
-    //   btnText = Translations.profile_community_right_sidebar.Pending;
-    //   classNameText = "filled_button";
-    // } else
     if (isSubscribeStatus) {
       if (isSubscribeStatus === "subscribe") {
         btnText = Translations.profile_community_right_sidebar.Subscribed;
@@ -64,9 +67,13 @@ class UserCardBody extends Component {
         }
       >
         <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
-          <UserCardImageItem item={user.profileUrl}></UserCardImageItem>
+          <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
+            <UserCardImageItem item={user.profileUrl} />
+          </Link>
           <div className="name-wrapper">
-            <div className="username">{user.username}</div>
+            <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
+              <div className="username">{user.username}</div>
+            </Link>
             {isBackOffice && (
               <div className="show_more_options user">
                 <ThreeDots
