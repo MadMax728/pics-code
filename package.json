@@ -114,6 +114,7 @@
     "pm2": "^3.3.1",
     "prettier": "^1.9.2",
     "react-test-renderer": "^16.2.0",
+    "redux-logger": "^3.0.6",
     "serve": "^10.1.2",
     "storybook-router": "^0.3.2",
     "uglify-js-brunch": "^2.10.0"
