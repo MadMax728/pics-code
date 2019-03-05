@@ -30,7 +30,7 @@ export default class MobileMenu extends Component {
               </div>
               <SideBarMBMenuInformation />
               <div className="normal_title padding-15">
-                {Translations.smobile_sidebar_services.ervices}
+                {Translations.mobile_sidebar_services.services}
               </div>
               <SideBarMBMenuServices />
             </div>
