@@ -54,12 +54,13 @@ class Subscribe extends Component {
     return (
       <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
-          {Translations.top_bar_info_modal.modal_title}
+          {isFor === "Subscribers"
+            ? Translations.top_bar_info_modal.subscriber_modal_title
+            : Translations.top_bar_info_modal.subscribed_modal_title}
         </h4>
-
+        
         <div className="header-notifications">
-          {/* style={{ height: "200px", overflow: "auto" }}*/}
-
+        {isLoading && <InlineLoading />}
           {dataList.length > 0 ? (
             <InfiniteScroll
               pageStart={0}
@@ -127,6 +128,7 @@ class Subscribe extends Component {
   // Tooltip List
   getTooltipUserList = (userId, paginationParam) => {
     console.log("params", paginationParam);
+    const { isFor } = this.props;
     if (userId) {
       const paginationParams =
         "&limit=" + paginationParam.limit + "&page=" + paginationParam.page;
@@ -136,13 +138,13 @@ class Subscribe extends Component {
         params: paginationParams
       };
 
-      if (this.props.isFor === "Subscribers") {
+      if (isFor === "Subscribers") {
         userRequestData = {
           id: userId,
           type: "following",
           params: paginationParams
         };
-      } else if (this.props.isFor === "Subscribed") {
+      } else if (isFor === "Subscribed") {
         userRequestData = {
           id: userId,
           type: "followers",

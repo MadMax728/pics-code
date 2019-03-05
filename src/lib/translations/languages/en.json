@@ -739,6 +739,8 @@
 
   "top_bar_info_modal": {
     "modal_title": "Subscribers / Subscribed / Likes",
+    "subscriber_modal_title": "Subscribe Users",
+    "subscribed_modal_title": "Subscribed Users",
     "follow_btn": "Follow",
     "subscribe_btn": "Subscribed",
     "request_sent_btn": "Request Sent",

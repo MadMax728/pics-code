@@ -275,6 +275,48 @@
       }
       .modal-body {
         height: 600px;
+        .range-wrapr.add-wrapper {
+          position: relative;
+          padding: 0 50px;
+          
+          .min-profile-pic {
+            width: 20px;
+            height: 20px;
+            left: 20px;
+            top: 18px;
+          }
+          input[type="range"] {
+            border: none;
+            margin: 15px 25px;
+          }
+          .runnable {
+            left: 55px;
+            top: 26px;
+          }
+          .max-profile-pic {
+            left: -7px;
+            top: 12px;
+          }
+          .add-wrapper{
+            border-top:none !important;
+          }
+          .add-wrapper.upload-wrapr {
+            position: absolute;
+            right: 0;
+            bottom: 55px;
+            width: 30px;
+            height: 20px;
+            background-color: transparent;
+            img {
+              top: 0;
+              position: relative;
+            }
+            input[type="file"] {
+              top: 33px;
+              left: 0;
+            }
+          }
+        }
         > div {
           height: 100%;
         }

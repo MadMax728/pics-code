@@ -43,8 +43,9 @@ class SubscribeUserCardBody extends Component {
     return (
       <div>
         {isView && (
+          <div>
           <div className="row">
-            <div className="col-sm-3">
+            <div className="col-sm-4">
               <img
                 src={
                   isFor === "Subscribers"
@@ -69,7 +70,7 @@ class SubscribeUserCardBody extends Component {
                 </div>
               </div>
             </div>
-            <div className="col-md-5">
+            <div className="col-md-4">
               <div className="subscribe-btn">
                 <Button
                   className={actionButton.className}
@@ -81,6 +82,7 @@ class SubscribeUserCardBody extends Component {
               </div>
             </div>
           </div>
+        </div>
         )}
       </div>
     );
