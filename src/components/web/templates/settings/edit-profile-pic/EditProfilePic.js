@@ -18,7 +18,10 @@ class EditProfilePic extends Component {
       handleUpload
     } = this.props;
     return (
-      <div className="col-xs-12 upload-profile-wrapr padding-b-25">
+      <div className="col-xs-12 no-padding">
+      <div className="col-sm-12 upload-form">
+      <div className="col-xs-12 no-padding create-campaign-crop-pic">
+      <div className="col-xs-12 uploaded-profile-pic mar0padd0">
         <div>
           <EditProfileCrop
             image={image}
@@ -29,6 +32,9 @@ class EditProfilePic extends Component {
             handleScale={handleScale}
           />
         </div>
+      </div>
+      </div>
+      </div>
       </div>
     );
   }

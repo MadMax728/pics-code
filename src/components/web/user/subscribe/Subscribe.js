@@ -58,10 +58,9 @@ class Subscribe extends Component {
             ? Translations.top_bar_info_modal.subscriber_modal_title
             : Translations.top_bar_info_modal.subscribed_modal_title}
         </h4>
-
+        
         <div className="header-notifications">
-          {/* style={{ height: "200px", overflow: "auto" }}*/}
-
+        {isLoading && <InlineLoading />}
           {dataList.length > 0 ? (
             <InfiniteScroll
               pageStart={0}
