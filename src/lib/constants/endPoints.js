@@ -62,8 +62,8 @@ export const usernamesEndPoint = "/users";
 export const likeEndPoint = "/like";
 
 // media services
-export const uploadMediaImageEndPoint = "/image/profile";
-export const uploadMediaVideoEndPoint = "/video";
+export const uploadMediaImageEndPoint = "/media";
+export const uploadMediaVideoEndPoint = "/media";
 
 // Message Service
 export const getMessagesEndPoint = "/messages?";

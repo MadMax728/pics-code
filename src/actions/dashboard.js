@@ -37,23 +37,13 @@ export const getDashboard = (prop, provider) => {
     };
     return dashboardService[prop](provider, header).then(
       res => {
-        // const campaigns = _.orderBy(
-        //   res,
-        //   function(o) {
-        //     return new moment(o.createdAt);
-        //   },
-        //   ["desc"]
-        // );
-        console.log("newsData", res);
-        // console.log("data", campaigns.data);
-        // console.log("pagination", campaigns.pagination);
-        // dispatch(getDashboardSucceeded(campaigns, prop));
-        // const keys = {
-        //   limit: res.data.limit,
-        //   page: res.data.page,
-        //   pages: res.data.pages
-        // };
-        // dispatch(setLastEvaluatedKeys(keys));
+        dispatch(getDashboardSucceeded(res.data.data, prop));
+        const paginationKeys = {
+          limit: res.data.pagination.limit,
+          page: res.data.pagination.page,
+          pages: res.data.pagination.pages
+        };
+        dispatch(setLastEvaluatedKeys(paginationKeys));
       },
       error => {
         dispatch(getDashboardFailed(error.response, prop));

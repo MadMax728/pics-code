@@ -102,14 +102,20 @@ export const tagsType = {
   offerTagList: "offerTagList"
 };
 
+// export const contentTypes = {
+//   companyCampaign: "companycampaign",
+//   creatorCampaign: "creatorcampaign",
+//   companyParticipantCampaign: "companyparticipantcampaign",
+//   ad: "ad",
+//   mediaPost: "mediapost",
+//   video: "video",
+//   image: "image"
+// };
+
 export const contentTypes = {
-  companyCampaign: "companycampaign",
-  creatorCampaign: "creatorcampaign",
-  companyParticipantCampaign: "companyparticipantcampaign",
-  ad: "ad",
-  mediaPost: "mediapost",
-  video: "video",
-  image: "image"
+  campaign: "Campaign",
+  ad: "Ad",
+  mediaPost: "Media"
 };
 
 export const gender = {
@@ -290,4 +296,8 @@ export const radius = {
   km200: "km200",
   km500: "km500",
   worldwide: "worldwide"
+};
+
+export const pagination = {
+  limit: "10"
 };
