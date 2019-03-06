@@ -30,7 +30,7 @@ export const getExplore = params => {
     return dashboardService.explores(queryString, header).then(
       res => {
         if (res.data && res.data.data)
-          dispatch(getExploreSucceeded(res.data.data));
+          dispatch(getExploreSucceeded(res.data));
       },
       error => {
         dispatch(getExploreFailed(error.response));
