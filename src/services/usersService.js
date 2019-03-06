@@ -75,3 +75,9 @@ export const searchUsers = (keyword, page, limit, header = {}) => {
     `${searchUsersEndpoint}?page=${page}&limit=${limit}&keyword=${keyword}`
   );
 };
+
+export const searchSubscribedUsers = (keyword, page, limit, header = {}) => {
+  return api(baseUrl, header.headers).get(
+    `${sendRequestEndPoint}?requestType=following&page=${page}&limit=${limit}&q=${keyword}`
+  );
+};

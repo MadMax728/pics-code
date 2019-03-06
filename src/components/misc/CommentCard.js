@@ -301,12 +301,12 @@ class CommentCard extends Component {
             item={comment.createdBy.profileUrl}
             customClass={`img-circle img-responsive`}
           />
-          <div className="col-sm-10 col-md-9 col-xs-7 commenter-info">
+          <div className="col-sm-6 col-md-8 col-xs-6 commenter-info xxx">
             <b>{comment.createdBy.username}</b>{" "}
             {DateFormat(comment.createdAt, Translations.date_format.time, true)}{" "}
             <b>{Translations.reply}</b>
           </div>
-          <div className="col-sm-12 col-md-2 col-xs-2 show_more_options">
+          <div className="col-sm-2 col-md-2 col-xs-3 show_more_options text-right">
             <ThreeDots
               id={`comment-${comment._id}`}
               role="button"
