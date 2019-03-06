@@ -13,15 +13,15 @@ const exploreReducer = (state = initialState.exploreData, action) => {
     case types.GET_EXPLORES_SUCCEEDED:
       return {
         ...state,
-        items: action.payload.items,
-        iPaginate: action.payload.iPaginate,
-        vPaginate: action.payload.vPaginate,
+        items: action.payload.data,
+        pagination: action.payload.pagination,
         isLoading: false
       };
     case types.GET_EXPLORE_FAILED:
       return {
         ...state,
         items: [],
+        pagination: {},
         isLoading: false,
         error: action.payload
       };

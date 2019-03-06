@@ -7,17 +7,20 @@ import { NoDataFoundCenterPage, CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
 
 class ExploreRoot extends Component {
+
+
   constructor(props, context) {
     super(props, context);
     this.state = { items: [] };
   }
 
+  // get the default explore list
   componentDidMount = () => {
     window.scrollTo(0, 0);
     this.getExplore();
   };
 
-  getExplore = (params = { iPage: 1, vPage: 1 }) => {
+  getExplore = (params = { page: 1, adCount: 0 }) => {
     this.props.getExplore(params).then(() => {
       const { items } = this.state;
       const { exploreData } = this.props;
@@ -29,30 +32,18 @@ class ExploreRoot extends Component {
 
   getMoreExplore = () => {
     const { exploreData } = this.props;
-    let params = { iPage: 1, vPage: 1 };
-    const vPaginate = exploreData.vPaginate;
-    const iPaginate = exploreData.iPaginate;
-
+    let params = { page: 1, adCount: 0 };
+    const pagination = exploreData.pagination || {};
+    params.adCount = pagination.adCount || 0;
     if (
-      vPaginate &&
-      vPaginate.pages &&
-      vPaginate.page &&
-      parseInt(vPaginate.pages) > parseInt(vPaginate.page)
+      pagination &&
+      pagination.pages &&
+      pagination.page &&
+      parseInt(pagination.pages) > parseInt(pagination.page)
     ) {
-      params.vPage = parseInt(vPaginate.page) + 1;
+      params.page = parseInt(pagination.page) + 1;
     } else {
-      params.vPage = 0;
-    }
-
-    if (
-      iPaginate &&
-      iPaginate.pages &&
-      iPaginate.page &&
-      parseInt(iPaginate.pages) > parseInt(iPaginate.page)
-    ) {
-      params.iPage = parseInt(iPaginate.page) + 1;
-    } else {
-      params.iPage = 0;
+      params.page = 0;
     }
 
     this.getExplore(params);
@@ -61,25 +52,15 @@ class ExploreRoot extends Component {
   render() {
     const { exploreData } = this.props;
     const isLoading = exploreData.isLoading;
-    const vPaginate = exploreData.vPaginate;
-    const iPaginate = exploreData.iPaginate;
+    const pagination = exploreData.pagination;
     const items = exploreData.items;
     let hasMore = false;
 
     if (
-      vPaginate &&
-      vPaginate.pages &&
-      vPaginate.page &&
-      parseInt(vPaginate.pages) > parseInt(vPaginate.page)
-    ) {
-      hasMore = true;
-    }
-
-    if (
-      iPaginate &&
-      iPaginate.pages &&
-      iPaginate.page &&
-      parseInt(iPaginate.pages) > parseInt(iPaginate.page)
+      pagination &&
+      pagination.pages &&
+      pagination.page &&
+      parseInt(pagination.pages) > parseInt(pagination.page)
     ) {
       hasMore = true;
     }

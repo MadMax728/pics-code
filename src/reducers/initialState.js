@@ -276,8 +276,7 @@ const initialState = {
   },
   exploreData: {
     items: [],
-    iPaginate: {},
-    vPaginate: {},
+    pagination: {},
     isLoading: false,
     error: null
   }

@@ -45,8 +45,8 @@ export const deleteCommentEndPoint = "/comment/";
 export const editCommentEndPoint = "/comment/";
 
 // Dashboard Service
-export const newsEndPoint = "/newsfeeds"; // "/newsfeeds/news-feeds";
-export const exploresEndPoint = "/explore?";
+export const newsEndPoint = "/newsfeeds";
+export const exploresEndPoint = "/media?";
 export const participantsEndPoint = "/participants/";
 export const usersEndPoint = "/users";
 export const picsEndPoint = "/image/get-pics";
