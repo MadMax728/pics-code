@@ -2,60 +2,89 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import { Translations } from "../../../lib/translations";
+import { DescriptionItem } from "../../misc/items";
+import { Label } from "../../ui-kit";
 
 class CMSPreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      form: this.props.modalInfo,
+      form: this.props.modalInfo
     };
   }
 
   render() {
     const { form } = this.state;
     return (
-        <div className="preview-content">
-            <div className="row">
-              <div className="col-xs-6 preview-div-wrapper">
-                <label htmlFor="Title of page" className="title-text">
-                {Translations.cms.title_of_page} :
-                </label>
-                <label htmlFor="Title of page" className="content-text">
-                  {form.title}
-                </label>
-              </div>
-              <div className="col-xs-6 preview-div-wrapper">
-                <label  className="title-text" htmlFor="URL">{Translations.cms.url}</label> :
-                <label className="content-text" htmlFor="Title of page">
-                  {form.url}
-                </label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-6 preview-div-wrapper">
-                <label className="title-text" htmlFor="Language">
-                {Translations.cms.language} :
-                </label>
-                <label htmlFor="language" className="content-text">
-                  {form.pageLanguage}
-                </label>
-              </div>
-              <div className="col-xs-6 preview-div-wrapper">
-                <label htmlFor="Display page" className="title-text">{Translations.cms.display_page}</label> :
-                <label htmlFor="display_page" className="content-text">
-                  {form.display_page}
-                </label>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-xs-6 preview-div-wrapper">
-                <label htmlFor="Display page" className="title-text">{Translations.cms.description}</label> :
-                <label htmlFor="description" className="content-text">
-                  {form.description}
-                </label>
-              </div>
-            </div>
+      <div className="preview-content">
+        <div className="row">
+          <div className="col-xs-6 preview-div-wrapper">
+            <Label
+              htmlFor="Title of page"
+              className="title-text"
+              value={Translations.cms.title_of_page}
+            />{" "}
+            :
+            <Label
+              htmlFor="Title of page"
+              className="content-text"
+              value={form.title}
+            />
+          </div>
+          <div className="col-xs-6 preview-div-wrapper">
+            <Label
+              className="title-text"
+              htmlFor="URL"
+              value={Translations.cms.url}
+            />{" "}
+            :
+            <Label
+              className="content-text"
+              htmlFor="Title of page"
+              value={form.url}
+            />
+          </div>
         </div>
+        <div className="row">
+          <div className="col-xs-6 preview-div-wrapper">
+            <Label
+              className="title-text"
+              htmlFor="Language"
+              value={Translations.cms.language}
+            />{" "}
+            :
+            <Label
+              htmlFor="language"
+              className="content-text"
+              value={form.pageLanguage}
+            />
+          </div>
+          <div className="col-xs-6 preview-div-wrapper">
+            <Label
+              htmlFor="Display page"
+              className="title-text"
+              value={Translations.cms.display_page}
+            />{" "}
+            :
+            <Label
+              htmlFor="display_page"
+              className="content-text"
+              value={form.display_page}
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-xs-6 preview-div-wrapper">
+            <Label
+              htmlFor="Display page"
+              className="title-text"
+              value={Translations.cms.description}
+            />{" "}
+            :
+            <DescriptionItem desc={form.description} />
+          </div>
+        </div>
+      </div>
     );
   }
 }

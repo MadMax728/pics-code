@@ -6,15 +6,17 @@ import { Translations } from "../../../../lib/translations";
 import * as images from "../../../../lib/constants/images";
 import MLeftUsersList from "./MLeftUsersList";
 import MLeftTabs from "./MLeftTabs";
-import { getUserList } from "../../../../actions";
+import { getUserList, searchSubscribedUsers } from "../../../../actions";
+import { Button, Input } from "../../../ui-kit";
 
 class MLeftContainer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       activeIndex: "1",
-      search: '',
-      userList: []
+      search: "",
+      userList: [],
+      toggleSearch: false
     };
   }
 
@@ -22,15 +24,37 @@ class MLeftContainer extends Component {
     this.handleUserListCase(1);
   }
 
-  getUserList = (type='subscribed') => {
-      this.setState({ userList : [] });
-      this.props.getUserList(type).then(() => {
-          const  { usersData } = this.props;
-          if(!usersData.isLoading) {
-              this.setState({ userList : usersData.users })
+  getUserList = (type = "subscribed") => {
+    this.setState({ userList: [] });
+    this.props.getUserList(type).then(() => {
+      const { usersData } = this.props;
+      console.log("type", type);
+      console.log("creator", this.props.isCreator);
+      if (!usersData.isLoading) {
+        if (this.props.isCreator) {
+          const { activeIndex } = this.state;
+          // For - Creator user not shown in list
+          // selectedUserList = usersData.users.filter(
+          //   user => user.username !== this.props.isCreator
+          // );
+          let selectedUserList = "";
+          selectedUserList = usersData.users.find(
+            user => user.username === this.props.isCreator
+          );
+          if (selectedUserList) {
+            this.setState({ activeIndex });
+          } else {
+            const indexCount = parseInt(activeIndex) + 1;
+            this.handleUserListCase(indexCount);
+            this.setState({ activeIndex: indexCount.toString() });
           }
-      });
-  }
+        }
+        this.setState({
+          userList: usersData.users
+        });
+      }
+    });
+  };
 
   handleUserListCase = activeIndex => {
     switch (activeIndex) {
@@ -40,92 +64,118 @@ class MLeftContainer extends Component {
       case 2:
         this.getUserList("unknown");
         break;
-      case 3:
-        this.getUserList("likeYou");
-        break;
+      // case 3:
+      //   this.getUserList("likeYou");
+      //   break;
       case 4:
         this.getUserList("company");
         break;
       default:
     }
-  }
+  };
 
-  handleTypeClick = (e) => {
-    const currentIndex = e.currentTarget.dataset.id
+  handleTypeClick = e => {
+    const currentIndex = e.currentTarget.dataset.id;
     const { activeIndex } = this.state;
-    if(currentIndex !== activeIndex) {
-        this.setState({ activeIndex: currentIndex });
-        this.handleUserListCase(parseInt(currentIndex));
-        this.props.selectUser({});
+    if (currentIndex !== activeIndex) {
+      this.setState({ activeIndex: currentIndex });
+      this.handleUserListCase(parseInt(currentIndex));
+      this.props.selectUser({});
     }
   };
 
-  handleChange = (e) => {
+  handleToggleSearch = e => {
+    const { toggleSearch } = this.state;
+    this.setState({
+      toggleSearch: !toggleSearch,
+      userList: [],
+      activeIndex: "1"
+    });
+  };
+
+  handleChange = e => {
     e.preventDefault();
+    const { activeIndex } = this.state;
+    let page = 1;
+    let limit = 100;
     const search = e.target.value;
     const { userList } = this.state;
     this.setState({ search: e.target.value });
-    if(search) {
-      const filtered = userList.filter( u => {
-        if(u.name && u.username.includes(search)) return true;
-        if(u.email && u.email.includes(search)) return true;
-        if(u.name && u.name.includes(search)) return true;
-        return false;
+    if (search) {
+      this.setState({
+        userList: []
       });
-      this.setState({ userList : filtered })
+      this.props.searchSubscribedUsers(search, page, limit).then(() => {
+        const { usersData } = this.props;
+        if (!usersData.isLoading) {
+          this.setState({
+            userList: usersData.users
+          });
+        }
+      });
     } else {
-          const  { usersData } = this.props;
-          if(!usersData.isLoading) {
-              this.setState({ userList : usersData.users })
-          }
+      console.log("clean cheat");
+      this.getUserList();
     }
   };
 
-  handleChatClick = (e) => {
-      const { userList } = this.state;
-      const user = _.find(userList, { id: e.currentTarget.dataset.id });
-      this.props.selectUser(user);
-  };
-
   handleChatClick = e => {
-    const { userList } = this.state;
-    const user = _.find(userList, { id: e.currentTarget.dataset.id });
+    const { userList, toggleSearch } = this.state;
+    const user = _.find(userList, { _id: e.currentTarget.dataset._id });
+    this.setState({
+      toggleSearch: !toggleSearch,
+      activeIndex: "1"
+    });
     this.props.selectUser(user);
   };
 
   render() {
-    const { activeIndex, userList, search } = this.state;
+    const { activeIndex, userList, search, toggleSearch } = this.state;
 
     return (
       <div>
         <div className="title-wrapper">
-          <div className="modal-title">
-            { Translations.messages_modal.messages }
-            {/* <span className="edit"></span> */}
-          </div>                    
+          <div className="row">
+            <div className="col-md-10">
+              <div className="modal-title">
+                {Translations.messages_modal.messages}
+              </div>
+            </div>
+            <div className="col-md-2">
+              <Button
+                onClick={this.handleToggleSearch}
+                text={`Edit`}
+              />
+            </div>
+          </div>
         </div>
-        <div className="msgs-search-user">
+        {toggleSearch && <div className="msgs-search-user">
           <div className="input-group search-input-group">
             <input
               type="text"
-              value={search}
-              onChange={this.handleChange}
               className="form-control"
               placeholder="Search"
+              onChange={this.handleChange}
+              defaultValue={""}
             />
             <span className="input-group-addon">
-              <button onClick={this.handleChange}>
-                <span className="search_icon">
-                  <img src={images.search} alt="Search" />
-                </span>
-              </button>
+              <Button
+                onClick={this.handleChange}
+                text={
+                  <span className="search_icon">
+                    <img src={images.search} alt="Search" />
+                  </span>
+                }
+              />
             </span>
           </div>
-        </div>
-        <MLeftTabs
-          activeIndex={activeIndex}
-          handleTypeClick={this.handleTypeClick}
-        />
+        </div>}
+        {
+          !toggleSearch && <MLeftTabs
+            activeIndex={activeIndex}
+            handleTypeClick={this.handleTypeClick}
+          />
+        }
         <MLeftUsersList
           items={userList}
           handleChatClick={this.handleChatClick}
@@ -137,9 +187,11 @@ class MLeftContainer extends Component {
 
 MLeftContainer.propTypes = {
   getUserList: PropTypes.func.isRequired,
+  searchSubscribedUsers: PropTypes.func.isRequired,
   me: PropTypes.string.isRequired,
   usersData: PropTypes.any,
-  selectUser: PropTypes.func
+  selectUser: PropTypes.func,
+  isCreator: PropTypes.any
 };
 
 const mapStateToProps = state => ({
@@ -147,7 +199,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  getUserList
+  getUserList,
+  searchSubscribedUsers
 };
 
 export default connect(

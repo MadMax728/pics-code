@@ -26,8 +26,8 @@ export const getAdmins = () => {
     const header = {
       Authorization: storage.adminAccessToken
     };
-  
-    return adminService.getAdmins(null,header).then(
+
+    return adminService.getAdmins(null, header).then(
       res => {
         dispatch(getAdminsSucceeded(res.data.data));
       },
@@ -59,15 +59,15 @@ const updateAdminFailed = error => ({
   error: true
 });
 
-export const updateAdmin = (provider) => {
+export const updateAdmin = provider => {
   return dispatch => {
     dispatch(updateAdminStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.adminAccessToken
     };
-  
-    return adminService.updateAdmin(provider,header).then(
+
+    return adminService.updateAdmin(provider, header).then(
       res => {
         dispatch(updateAdminSucceeded(res.data.data));
       },

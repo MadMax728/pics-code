@@ -3,15 +3,16 @@ import PropTypes from "prop-types";
 import CampaignCardHeader from "./headers/CampaignCardHeader";
 import CampaignCardBody from "./body/CampaignCardBody";
 import CampaignCardFooter from "./footers/CampaignCardFooter";
-import { Translations } from "../../lib/translations";
-import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
 import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
-import { getBackendPostType } from "../Factory";
 import * as enumerations from "../../lib/constants/enumerations";
-import { modalType } from "../../lib/constants";
+import {
+  modalType,
+  BASE_CAMPAIGN_INFORMATION_ROUTE
+} from "../../lib/constants";
 import "emoji-mart/css/emoji-mart.css";
+import { ReportTips } from "./items";
 class CampaignCard extends Component {
   constructor(props, context) {
     super(props, context);
@@ -20,7 +21,8 @@ class CampaignCard extends Component {
       item: this.props.item,
       comments: "",
       totalCommentsCount: "",
-      isEmoji: false
+      isEmoji: false,
+      commentType: "campaigns"
     };
   }
 
@@ -35,7 +37,7 @@ class CampaignCard extends Component {
       reportedContentData,
       savedData
     } = this.props;
-    const { isComments, item, comments } = this.state;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -57,205 +59,51 @@ class CampaignCard extends Component {
           isComments={isComments}
           isStatus={isStatus}
           isBudget={isBudget} /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          renderReportTips={() => this.renderReportTips(item._id)}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
+          commentType={commentType}
         />
         {isComments && (
           <CommentCard
             item={comments}
-            itemId={item.id}
+            itemId={item._id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
             isReport={isReport}
+            commentType={commentType}
           />
         )}
       </div>
     );
   }
 
-  handleLockContent = e => {
-    const { isBudget } = this.props;
-    let data;
-    if (isBudget) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.lock,
-        reportContent: "Campaigns",
-        isBudget
-      };
-    }
-    else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.lock,
-        reportContent: "Campaign"
-      };
-    }
-    this.props.handleModalInfoDetailsCallbackShow(
-      modalType.processed,
-      data,
-      () => {
-        this.handleSetState(data);
-      }
+  renderReportTips = item => {
+    const {
+      isReview,
+      isBackOffice,
+      handleModalInfoDetailsCallbackShow,
+      handleRemove,
+      isSavedPage
+    } = this.props;
+
+    return (
+      <ReportTips
+        item={item}
+        isBackOffice={isBackOffice}
+        isReview={isReview}
+        handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+        handleRemove={handleRemove}
+        isSavedPage={isSavedPage}
+      />
     );
   };
 
-  handleSetState = data => {
-    clearInterval(this.timer);
+  handleEditPost = e => {
     const { item } = this.state;
-    const { isBudget } = this.props;
-    if (isBudget) {
-      item.contentStatus = data.contentStatus;
-    }
-    else {
-      item.reportStatus = data.contentStatus;
-    }
-    this.setState({ item });
-    this.props.handleRemove(item.id);
-  };
-
-  handleDoNotContent = e => {
-    const { isBudget } = this.props;
-    let data;
-
-    if (isBudget) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.doNotLock,
-        reportContent: "Campaigns",
-        isBudget
-      };
-    }
-    else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.doNotLock,
-        reportContent: "Campaign"
-      };
-    }
-    this.props.handleModalInfoDetailsCallbackShow(
-      modalType.processed,
-      data,
-      () => {
-        this.handleSetState(data);
-      }
-    );
-  };
-
-  handleUnlockContent = e => {
-    const { isBudget } = this.props;
-    let data;
-    if (isBudget) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.unLock,
-        reportContent: "Campaigns",
-        isBudget
-      };
-    }
-    else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.unLock,
-        reportContent: "Campaign"
-      };
-    }
-    this.props.handleModalInfoDetailsCallbackShow(
-      modalType.processed,
-      data,
-      () => {
-        this.handleSetState(data);
-      }
-    );
-  };
-
-  renderReportTips = id => {
-    let reportTips;
-    const { isBackOffice, isBudget } = this.props;
-    const { item } = this.state;
-    if (isBackOffice) {
-      reportTips = [
-        {
-          name: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? Translations.tool_tips.unlock
-            : Translations.tool_tips.lock) :
-            (item.reportStatus === enumerations.reportType.lock
-              ? Translations.tool_tips.unlock
-              : Translations.tool_tips.lock),
-          handleEvent: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? this.handleUnlockContent
-            : this.handleLockContent) :
-            (item.reportStatus === enumerations.reportType.lock
-              ? this.handleUnlockContent
-              : this.handleLockContent)
-        },
-        {
-          name: Translations.tool_tips.do_not,
-          handleEvent: this.handleDoNotContent
-        }
-      ];
-    } else {
-      reportTips = [
-        {
-          name: item.isReported
-            ? Translations.tool_tips.unreport
-            : Translations.tool_tips.report,
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: item.isSavedPost
-            ? Translations.tool_tips.unsave
-            : Translations.tool_tips.save,
-          handleEvent: this.handleSavePost
-        }
-      ];
-    }
-    return <RenderToolTips items={reportTips} id={id} />;
-  };
-
-  handleReportPost = e => {
-    const { item } = this.state;
-    const data = {
-      typeContent: "Campaign",
-      typeId: e.target.id,
-      title: item.title
-    };
-    this.props.addReport(data).then(() => {
-      if (
-        this.props.reportedContentData &&
-        this.props.reportedContentData &&
-        this.props.reportedContentData.addReport.typeId === item.id
-      ) {
-        item.isReported = !item.isReported;
-        this.setState({ item });
-      }
-    });
-  };
-
-  handleSavePost = e => {
-    const { item } = this.state;
-    const { isSavedPage } = this.props;
-    const data = {
-      typeId: e.target.id,
-      postType: getBackendPostType(item)
-    };
-
-    this.props.setSavedPost(data).then(() => {
-      if (
-        this.props.savedData &&
-        this.props.savedData.saved &&
-        this.props.savedData.saved.typeId === item.id
-      ) {
-        item.isSavedPost = !item.isSavedPost;
-        this.setState({ item });
-        if (isSavedPage && !this.state.item.isSavedPost) {
-          this.props.handleRemove(item.id);
-        }
-      }
-    });
+    this.props.handleModalShow(modalType.editCampaign, item);
   };
 
   handleFavorite = () => {
@@ -265,8 +113,8 @@ class CampaignCard extends Component {
     this.setState({ item });
 
     const campaignLike = {
-      typeOfContent: "campaign",
-      typeId: item.id
+      typeOfContent: enumerations.likeContentTypes.campaign,
+      typeId: item._id
     };
     this.props.like(campaignLike);
   };
@@ -278,10 +126,13 @@ class CampaignCard extends Component {
   };
 
   handleCommentsSections = () => {
-    const CampaignId = {
-      typeId: this.state.item.id
-    };
-    this.props.getComments(CampaignId).then(() => {
+    // const CampaignId = {
+    //   typeId: this.state.item._id
+    // };
+    const CampaignId = this.state.item._id;
+    const commentType = this.state.commentType;
+    const getCommentEndPoint = commentType + "/" + CampaignId + "/comment/";
+    this.props.getComments(getCommentEndPoint).then(() => {
       const totalComment = this.props.comments;
       this.setState({
         isComments: !this.state.isComments,
@@ -289,6 +140,16 @@ class CampaignCard extends Component {
         totalCommentsCount: totalComment.length
       });
     });
+  };
+
+  handeleShare = () => {
+    const { item } = this.state;
+    const data = {
+      url: `${window.location.origin}${BASE_CAMPAIGN_INFORMATION_ROUTE}${
+        item.userType
+      }/${item._id}`
+    };
+    this.props.handleModalInfoShow(modalType.share, data);
   };
 
   render() {
@@ -302,7 +163,7 @@ class CampaignCard extends Component {
       reportedContentData,
       savedData
     } = this.props;
-    const { isComments, item, comments } = this.state;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <CampaignCardHeader
@@ -324,19 +185,21 @@ class CampaignCard extends Component {
           isComments={isComments}
           isStatus={isStatus}
           isBudget={isBudget} /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          renderReportTips={() => this.renderReportTips(item)}
           handleFavorite={this.handleFavorite}
           isLoading={likeData.isLoading}
           isReport={isReport}
+          handeleShare={this.handeleShare}
         />
         {isComments && (
           <CommentCard
             item={comments}
-            itemId={item.id}
+            itemId={item._id}
             typeContent={item.typeContent}
             handleComment={this.handleComment}
             totalCommentsCount={comments.length}
             isReport={isReport}
+            commentType={commentType}
           />
         )}
       </div>
@@ -377,7 +240,9 @@ CampaignCard.propTypes = {
   addReport: PropTypes.func.isRequired,
   reportedContentData: PropTypes.any,
   handleRemove: PropTypes.func,
-  isSavedPage: PropTypes.bool
+  isSavedPage: PropTypes.bool,
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
 };
 
 export default connect(

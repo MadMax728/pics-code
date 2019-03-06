@@ -3,13 +3,11 @@ import PropTypes from "prop-types";
 import AdCardHeader from "./headers/AdCardHeader";
 import AdCardBody from "./body/AdCardBody";
 import AdCardFooter from "./footers/AdCardFooter";
-import { Translations } from "../../lib/translations";
-import { RenderToolTips } from "../common";
 import CommentCard from "./CommentCard";
 import { like, getComments, setSavedPost, addReport } from "../../actions";
 import { connect } from "react-redux";
+import { ReportTips } from "./items";
 import { getBackendPostType } from "../Factory";
-import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
 
 class AdCard extends Component {
@@ -19,13 +17,22 @@ class AdCard extends Component {
       isComments: false,
       item: this.props.item,
       comments: "",
-      totalCommentsCount: ""
+      totalCommentsCount: "",
+      commentType: "advertisement"
     };
   }
 
   render() {
-    const { isReview, isStatus, isDescription, isInformation, isReport, reportedContentData, savedData} = this.props;
-    const { isComments, item, comments } = this.state;
+    const {
+      isReview,
+      isStatus,
+      isDescription,
+      isInformation,
+      isReport,
+      reportedContentData,
+      savedData
+    } = this.props;
+    const { isComments, item, comments, commentType } = this.state;
     return (
       <div className="feed_wrapper">
         <AdCardHeader
@@ -47,160 +54,53 @@ class AdCard extends Component {
           isComments={isComments}
           isStatus={isStatus}
           /* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          renderReportTips={() => this.renderReportTips(item)}
           handleFavorite={this.handleFavorite}
           isLoading={false}
           isReport={isReport}
           isReview={isReview}
+          commentType={commentType}
         />
-       {isComments && (
+        {isComments && (
           <CommentCard
             item={comments}
             itemId={item.id}
-            typeContent={item.typeContent}
+            typeContent={"Ads"}
             handleComment={this.handleComment}
-            totalCommentsCount={(comments).length}
+            totalCommentsCount={comments.length}
+            commentType={commentType}
           />
         )}
       </div>
     );
   }
 
-  handleLockContent = (e) => {
-    const { isReview } = this.props;
-    let data;
-    if (isReview) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.lock,
-        reportContent: "Advertisement",
-        isReview
-      }
-    }
-    else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.lock,
-        reportContent: "Ads"
-      }    
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
-  
-  handleSetState = (data) => {
-    clearInterval(this.timer);
-    const { item } = this.state;
-    const { isReview } = this.props;
-    if (isReview) {
-      item.contentStatus = data.contentStatus;
-    }
-    else {
-      item.reportStatus = data.contentStatus;
-    }
-    this.setState({item});
-    this.props.handleRemove(item.id)
-  }
+  renderReportTips = item => {
+    const {
+      isReview,
+      isBackOffice,
+      handleModalInfoDetailsCallbackShow,
+      handleRemove,
+      isSavedPage
+    } = this.props;
 
-  handleDoNotContent = (e) => {
-    const { isReview } = this.props;
-    let data;
-
-    if (isReview) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.doNotLock,
-        reportContent: "Advertisement",
-        isReview
-      }
-    }
-    else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.doNotLock,
-        reportContent: "Ads"
-      }    
-    }
-
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
-
-  handleUnlockContent= (e) => {
-    const { isReview } = this.props;
-    let data;
-
-    if (isReview) {
-      data = {
-        id: e.target.id,
-        contentStatus: enumerations.reportType.unLock,
-        reportContent: "Advertisement",
-        isReview
-      }
-    }
-    else {
-      data = {
-        typeId: e.target.id,
-        contentStatus: enumerations.reportType.unLock,
-        reportContent: "Ads"
-      }    
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
-
-  renderReportTips = (id) => {
-    let reportTips;
-    const { isBackOffice, isReview } = this.props;
-    const { item } = this.state;
-
-    if (isBackOffice){
-      reportTips = [
-        {
-          name: isReview? (item.contentStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock) : (item.reportStatus === enumerations.reportType.lock? Translations.tool_tips.unlock : Translations.tool_tips.lock) ,
-          handleEvent: isReview? (item.contentStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent) : (item.reportStatus === enumerations.reportType.lock? this.handleUnlockContent : this.handleLockContent),
-        },
-        {
-          name: Translations.tool_tips.do_not,
-          handleEvent: this.handleDoNotContent
-        }
-      ];
-    }
-    else {
-
-      reportTips = [
-        {
-          name: item.isReported? Translations.tool_tips.unreport : Translations.tool_tips.report,
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: item.isSavedPost? Translations.tool_tips.unsave : Translations.tool_tips.save,
-          handleEvent: this.handleSavePost
-        }
-      ];
-    }
-    return <RenderToolTips items={reportTips} id={id} />;
+    return (
+      <ReportTips
+        item={item}
+        isBackOffice={isBackOffice}
+        isReview={isReview}
+        handleModalInfoDetailsCallbackShow={handleModalInfoDetailsCallbackShow}
+        handleRemove={handleRemove}
+        isSavedPage={isSavedPage}
+        handleEdit={this.handleEditPost}
+      />
+    );
   };
 
-  handleReportPost = (e) => {
-    const  { item } = this.state;
-    const data = {
-      typeContent: "Ads",
-      typeId: e.target.id,
-      title: item.title
-    }    
-    this.props.addReport(data).then(()=> {
-      if(this.props.reportedContentData && this.props.reportedContentData && this.props.reportedContentData.addReport.typeId === item.id) {
-        item.isReported = !item.isReported;
-        this.setState({item});
-      }
-    });
+  handleEditPost = () => {
+    const { item } = this.state;
+    this.props.handleModalShow(modalType.editAds, item);
   };
-
-  handleContent = () => {};
 
   handleFavorite = e => {
     const item = this.state.item;
@@ -209,7 +109,7 @@ class AdCard extends Component {
     this.setState({ item });
 
     const adLike = {
-      typeOfContent: "ad",
+      typeOfContent: getBackendPostType(item),
       typeId: item.id
     };
     this.props.like(adLike);
@@ -222,37 +122,20 @@ class AdCard extends Component {
   };
 
   handleCommentsSections = () => {
-    const AdId = {
-      typeId: this.state.item.id
-    };
-    this.props.getComments(AdId).then(() => {
+    // const AdId = {
+    //   typeId: this.state.item.id
+    // };
+    const AdId = this.state.item.id;
+    const commentType = this.state.commentType;
+    const getCommentEndPoint = commentType + "/" + AdId + "/comment/";
+    this.props.getComments(getCommentEndPoint).then(() => {
       this.setState({
         isComments: !this.state.isComments,
         comments: this.props.comments,
-        totalCommentsCount: (this.props.comments).length
+        totalCommentsCount: this.props.comments.length
       });
     });
   };
-
-  handleSavePost = (e) => {
-    const { isSavedPage } = this.props;
-    const item = this.state.item;
-    const data = {
-        typeId: e.target.id,
-        postType: getBackendPostType(item)
-      };
-
-    this.props.setSavedPost(data).then(()=> {
-      if (this.props.savedData && this.props.savedData.saved && this.props.savedData.saved.typeId === item.id ) {
-        item.isSavedPost = !item.isSavedPost;
-        this.setState({item});
-        if(isSavedPage && !this.state.item.isSavedPost) {
-          this.props.handleRemove(item.id);
-        }
-      }
-    })
-  };
-
 }
 
 AdCard.propTypes = {
@@ -274,6 +157,7 @@ AdCard.propTypes = {
   isSavedPage: PropTypes.bool,
   isReview: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
+  handleModalShow: PropTypes.func
 };
 
 const mapStateToProps = state => ({

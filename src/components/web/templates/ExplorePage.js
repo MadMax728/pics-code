@@ -1,69 +1,104 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getDashboard, getSearch } from "../../../actions";
 import PropTypes from "prop-types";
+import InfiniteScroll from "react-infinite-scroller";
+import { getExplore } from "../../../actions";
 import { NoDataFoundCenterPage, CampaignLoading } from "../../ui-kit";
 import { MediaCard } from "../../misc";
-import * as enumerations from "../../../lib/constants/enumerations";
-import { search } from "../../../lib/utils/helpers";
 
 class ExploreRoot extends Component {
+
+
   constructor(props, context) {
     super(props, context);
-    this.state = {
-      exploreList: null
-    };
+    this.state = { items: [] };
   }
 
+  // get the default explore list
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    this.getExplore();
+  };
+
+  getExplore = (params = { page: 1, adCount: 0 }) => {
+    this.props.getExplore(params).then(() => {
+      const { items } = this.state;
+      const { exploreData } = this.props;
+      this.setState({
+        items: [...items, ...exploreData.items]
+      });
+    });
+  };
+
+  getMoreExplore = () => {
+    const { exploreData } = this.props;
+    let params = { page: 1, adCount: 0 };
+    const pagination = exploreData.pagination || {};
+    params.adCount = pagination.adCount || 0;
+    if (
+      pagination &&
+      pagination.pages &&
+      pagination.page &&
+      parseInt(pagination.pages) > parseInt(pagination.page)
+    ) {
+      params.page = parseInt(pagination.page) + 1;
+    } else {
+      params.page = 0;
+    }
+
+    this.getExplore(params);
+  };
+
   render() {
-    let { exploreList } = this.state;
-    const { isLoadingexplores, searchData } = this.props;
-    exploreList = search(exploreList, "userName", searchData.searchKeyword);
+    const { exploreData } = this.props;
+    const isLoading = exploreData.isLoading;
+    const pagination = exploreData.pagination;
+    const items = exploreData.items;
+    let hasMore = false;
+
+    if (
+      pagination &&
+      pagination.pages &&
+      pagination.page &&
+      parseInt(pagination.pages) > parseInt(pagination.page)
+    ) {
+      hasMore = true;
+    }
 
     return (
       <div className={"middle-section padding-rl-10"}>
-        {exploreList && !isLoadingexplores && this.renderExploreList()}
-        {isLoadingexplores && <CampaignLoading />}
-        {!isLoadingexplores &&
-          (!exploreList || (exploreList && exploreList.length === 0)) && (
-            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
-          )}
+        {isLoading && <CampaignLoading />}
+        {!isLoading && (!items || (items && items.length === 0)) && (
+          <NoDataFoundCenterPage handleRefresh={this.getExplore} />
+        )}
+        {items && !isLoading && items.length && (
+          <InfiniteScroll
+            pageStart={0}
+            loadMore={this.getMoreExplore}
+            hasMore={hasMore}
+            loader={<div className="loader">Loading ...</div>}
+          >
+            {this.renderExploreList()}
+          </InfiniteScroll>
+        )}
       </div>
     );
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.handleRefresh();
-    this.handleSearch();
-  };
-
-  handleSearch = () => {
-    this.props.getDashboard("explores", "").then(() => {
-      const { exploreList } = this.props;
-      this.setState({ exploreList });
-    });
-  };
-
-  handleRefresh = () => {
-    const { searchData, getSearch } = this.props;
-    if (searchData.searchKeyword) {
-      getSearch("");
-      this.handleSearch();
-    }
-  };
-
   renderExploreList = () => {
-    let { exploreList } = this.state;
-    const { searchData } = this.props;
-    exploreList = search(exploreList, "userName", searchData.searchKeyword);
-    return exploreList.map(explore => {
+    const { handleModalShow } = this.props;
+    const { items } = this.state;
+
+    return items.map(explore => {
       return (
         <div key={explore.id}>
-          {explore.mediaUrl &&
-            explore.postType === enumerations.contentTypes.mediaPost && (
-              <MediaCard item={explore} isDescription />
-            )}
+          {explore.mediaUrl && (
+            <MediaCard
+              item={explore}
+              isDescription
+              handleModalShow={handleModalShow}
+            />
+          )}
         </div>
       );
     });
@@ -71,26 +106,17 @@ class ExploreRoot extends Component {
 }
 
 ExploreRoot.propTypes = {
-  // remove when actual API Call
-  getDashboard: PropTypes.func.isRequired,
-  isLoadingexplores: PropTypes.bool,
-  exploreList: PropTypes.any,
-  searchData: PropTypes.any,
-  getSearch: PropTypes.func
-  // error: PropTypes.any
+  getExplore: PropTypes.func.isRequired,
+  handleModalShow: PropTypes.func,
+  exploreData: PropTypes.any
 };
 
 const mapStateToProps = state => ({
-  exploreList: state.dashboardData.explores,
-  isLoadingexplores: state.dashboardData.isLoadingexplores,
-  error: state.dashboardData.error,
-  searchData: state.searchData
+  exploreData: state.exploreData
 });
 
 const mapDispatchToProps = {
-  // remove when actual API Call
-  getDashboard,
-  getSearch
+  getExplore
 };
 
 export default connect(

@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getSelect } from "../../../actions";
-import { connect } from "react-redux";
 import { Translations } from "../../../lib/translations";
+import { radiusList } from "../../../lib/constants";
 
 class SelectRadius extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      radiusList: []
+      radiusList
     };
   }
 
@@ -27,52 +26,30 @@ class SelectRadius extends Component {
         <option value="">{Translations.select_radius}</option>
         {radiusList.map(option => (
           <option value={option.id} key={option.id}>
-            {option.radiusName}
+            {option.value}
           </option>
         ))}
       </select>
     );
   }
 
-  componentDidMount = () => {
-    this.props.getSelect("radius").then(() => {
-      if (this.props.radiusList && this.props.radiusList) {
-        this.setState({
-          radiusList: this.props.radiusList
-        });
-      }
-    });
-  };
-
-  componentWillUnmount = () => {
-    this.setState({ radiusList: [] });
-  };
-
   handleRadius = event => {
-    this.props.handleSelect("radius", event.target.value);
+    const { radiusList } = this.state;
+    const name = radiusList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: name.length !== 0 ? name[0].value : ""
+    };
+    this.props.handleSelect("radius", data);
   };
-
 }
-
-const mapStateToProps = state => ({
-  radiusList: state.selectData.radius
-});
-
-const mapDispatchToProps = {
-  getSelect
-};
 
 const propTypes = {
   value: PropTypes.any,
-  radiusList: PropTypes.any,
   className: PropTypes.string,
-  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
 SelectRadius.propTypes = propTypes;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectRadius);
+export default SelectRadius;

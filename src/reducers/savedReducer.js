@@ -23,7 +23,6 @@ const savedReducer = (state = initialState.savedData, action) => {
         error: action.payload
       };
 
-    
     // Set Saved
     case types.SET_SAVED_STARTED:
       return {
@@ -42,7 +41,7 @@ const savedReducer = (state = initialState.savedData, action) => {
         ...state,
         isLoading: false,
         error: action.payload
-      };  
+      };
     default:
       return state;
   }

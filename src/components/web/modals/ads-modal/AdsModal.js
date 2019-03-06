@@ -1,18 +1,21 @@
 import React, { Component } from "react";
 import { CustomBootstrapModal } from "../../../ui-kit";
+import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import moment from "moment";
+
+import { createAd, uploadMedia, updateAd } from "../../../../actions";
+
 import { CreateAds, CreateAdsHeader } from "../../user";
+
 import {
   modalType,
   target_group,
   typeContent,
   budgetCalculation
 } from "../../../../lib/constants/enumerations";
-import moment from "moment";
 import { Auth } from "../../../../auth";
 
-import { connect } from "react-redux";
-import { createAd, uploadMedia } from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 
 const storage = Auth.extractJwtFromStorage();
@@ -22,10 +25,15 @@ if (storage) {
 }
 
 const initialState = {
+  isNewFile: false,
+  isEdit: false,
   stepIndex: 0,
   userInfo: null,
+  isLoading: false,
   maxClicks: 0,
+  modalTitle: "",
   form: {
+    id: "",
     title: "",
     location: {
       latitude: "",
@@ -34,12 +42,14 @@ const initialState = {
     },
     radius: "",
     category: "",
+    categoryName: "",
     description: "",
     targetGroup: target_group.female_and_male,
     callToAction: "",
+    actionName: "",
     insertLink: "",
     startDate: moment(),
-    endDate: moment(),
+    endDate: moment().add(7, "days"),
     budget: "",
     address: {
       invoiceRecipient: "",
@@ -59,6 +69,7 @@ const initialState = {
     video: null,
     typeContent: typeContent.image,
     typeId: "",
+    fileName: "",
     maximumExpenses: "",
     error: false
   },
@@ -72,13 +83,22 @@ class AdsModal extends Component {
   }
 
   render() {
-    const { stepIndex, form, userInfo, maxClicks } = this.state;
+    const {
+      stepIndex,
+      form,
+      userInfo,
+      maxClicks,
+      isLoading,
+      isEdit,
+      modalTitle
+    } = this.state;
     const { handleModalHide, modalShow } = this.props;
 
     let modalClassName = "";
 
     if (stepIndex === 0) {
-      modalClassName = "modal fade create-ad-modal overflow-scroll";
+      modalClassName =
+        "modal fade create-ad-modal create-campaign-modal upload-pic-modal overflow-scroll";
     } else if (stepIndex !== 0 && stepIndex < 3) {
       modalClassName = "modal fade create-campaign-modal";
     } else if (stepIndex > 2 && stepIndex < 5) {
@@ -95,6 +115,8 @@ class AdsModal extends Component {
             handleNext={this.handleNext}
             handlePrev={this.handlePrev}
             stepIndex={stepIndex}
+            modalTitle={modalTitle}
+            handleResetForm={this.handleResetForm}
           />
         }
         footer={false}
@@ -121,6 +143,8 @@ class AdsModal extends Component {
             handleAddress={this.handleAddress}
             setVoucherData={this.setVoucherData}
             calculateMaxClicks={this.calculateMaxClicks}
+            isLoading={isLoading}
+            isEdit={isEdit}
           />
         }
       />
@@ -132,13 +156,130 @@ class AdsModal extends Component {
     if (userInfo) {
       this.setState({ userInfo });
     }
+    const { data } = this.props;
+    if (data && data.id) {
+      this.setState({
+        modalTitle: Translations.modal_header.edit_ad,
+        isEdit: true,
+        isNewFile: false
+      });
+      this.handleFillState(data);
+    } else {
+      this.handleResetForm();
+    }
   };
 
-  componentWillReceiveProps(nextProps) {
+  handleResetForm = () => {
+    const { form } = this.state;
+    form.title = "";
+    form.location.latitude = "";
+    form.location.longitude = "";
+    form.location.address = "";
+    form.category = "";
+    form.typeContent = typeContent.image;
+    form.targetGroup = target_group.female_and_male;
+    form.description = "";
+    form.radius = "";
+    form.callToAction = "";
+    form.actionName = "";
+    form.insertLink = "";
+    form.startDate = moment();
+    form.endDate = moment().add(7, "days");
+    form.budget = "";
+    form.address.invoiceRecipient = "";
+    form.address.street = "";
+    form.address.postalCode = "";
+    form.address.city = "";
+    form.address.VATNO = "";
+    form.address.country = "";
+    form.address.streetNumber = "";
+    form.voucher = "";
+    form.voucherAmount = "";
+    form.voucherCode = "";
+    form.image = null;
+    form.filetype = true;
+    form.file = null;
+    form.video = null;
+    form.typeId = "";
+    form.fileName = "";
+    form.maximumExpenses = "";
+    form.error = false;
+    this.setState({ form });
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
     if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 0 });
+      return { stepIndex: 0 };
+    }
+    if (
+      nextProps.data &&
+      nextProps.data.id &&
+      nextProps.data.id !== prevState.form.id
+    ) {
+      return { modalTitle: Translations.modal_header.edit_ad, isEdit: true };
+    }
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { data } = this.props;
+    if ((data && data.id !== prevState.form.id) || !prevProps.modalShow) {
+      this.handleFillState(data);
     }
   }
+
+  handleFillState = data => {
+    const { form } = this.state;
+    form.id = data.id;
+    form.title = data.title;
+
+    if (data.location) {
+      form.location.latitude = data.location.latitude;
+      form.location.longitude = data.location.longitude;
+      form.location.address = data.location.address;
+    }
+    if (data.category) {
+      form.category = data.category;
+      form.categoryName = data.category;
+    }
+    if (data.radius) {
+      form.radius = data.radius;
+    }
+    form.description = data.description;
+    if (data.targetGroup) {
+      form.targetGroup = target_group[data.targetGroup.toLowerCase()];
+    }
+    if (data.callToAction) {
+      form.callToAction = data.callToAction;
+      form.actionName = data.callToAction;
+    }
+    form.insertLink = data.insertLink;
+    form.startDate = moment(data.startDate);
+    form.endDate = moment(data.endDate);
+    form.budget = data.budget;
+    if (data.typeContent) {
+      form.typeContent = typeContent[data.typeContent.toLowerCase()];
+      form.image = data.mediaUrl;
+      form.file = data.mediaUrl;
+    }
+    if (data.address) {
+      form.address.invoiceRecipient = data.address.invoiceRecipient;
+      form.address.street = data.address.street;
+      form.address.postalCode = data.address.postalCode;
+      form.address.city = data.address.city;
+      form.address.VATNO = data.address.VATNO;
+      form.address.country = data.address.country;
+      form.address.streetNumber = data.address.street;
+    }
+    form.voucherAmount = data.voucherAmount;
+    form.voucherCode = data.voucherCode;
+    form.maximumExpenses = data.maximumExpenses;
+    form.typeId = data.typeId;
+    form.fileName = data.fileName;
+    form.error = false;
+    this.setState({ form, isNewFile: false });
+    this.calculateMaxClicks();
+  };
 
   componentWillUnmount = () => {
     this.setState(initialState);
@@ -155,19 +296,19 @@ class AdsModal extends Component {
   };
 
   handleSubmit = () => {
-    const { form } = this.state;
-    if (form.file) {
+    const { form, isEdit, isNewFile } = this.state;
+
+    if (form.file && isNewFile) {
       const Data = new FormData();
-      if (form.fileType) {
-        Data.append("image", form.file);
-      } else {
-        Data.append("video", form.file);
-      }
+      Data.append("image", form.file);
       Data.append("postType", "ad");
 
-      this.props.uploadMedia(Data, form.fileType).then(() => {
-        if (this.props.mediaData && this.props.mediaData.media) {
-          form.typeId = this.props.mediaData.media.id;
+      this.setState({ isLoading: true });
+      this.props.uploadMedia(Data, form.fileType, "advertise").then(() => {
+        const { mediaData } = this.props;
+        if (mediaData && mediaData.media) {
+          form.typeId = mediaData.media.id;
+          form.fileName = mediaData.media.imageName;
           form.file = null;
           form.image = null;
           form.video = null;
@@ -175,23 +316,47 @@ class AdsModal extends Component {
             form.maximumExpenses = form.budget;
           }
           this.setState({ form });
-          this.props.createAd(form).then(() => {
-            if (
-              this.props.adData &&
-              this.props.adData.ad &&
-              this.props.adData.ad.id
-            ) {
-              this.handleModalInfoShow();
-            }
-          });
+
+          if (isEdit) {
+            this.handleUpdateAd(form);
+          } else {
+            delete form.id;
+            this.props.createAd(form).then(() => {
+              if (
+                this.props.adData &&
+                this.props.adData.ad &&
+                this.props.adData.ad.id
+              ) {
+                this.handleModalInfoShow();
+                this.handleResetForm();
+              }
+            });
+          }
         }
       });
+    } else if (form.file && !isNewFile) {
+      this.handleUpdateAd(form);
     } else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
       );
     }
+  };
+
+  handleUpdateAd = form => {
+    this.setState({ isLoading: true });
+    this.props.updateAd(form).then(() => {
+      if (
+        this.props.adData &&
+        this.props.adData.ad &&
+        this.props.adData.ad.id
+      ) {
+        this.handleModalInfoShow();
+        this.handleResetForm();
+        this.setState({ isLoading: false });
+      }
+    });
   };
 
   handleDate = (date, forThat) => {
@@ -201,6 +366,7 @@ class AdsModal extends Component {
   };
 
   handleActualImg = e => {
+    this.setState({ isNewFile: true });
     const reader = new FileReader();
     const file = e;
 
@@ -212,20 +378,13 @@ class AdsModal extends Component {
         form.image = reader.result;
         form.file = file;
         form.fileType = true;
-        form.typeContent = typeContent.image;
         currentThis.setState({ form });
       };
     } else if (file.type.includes("video")) {
-      const currentThis = this;
-      reader.readAsDataURL(file);
-      reader.onloadend = function() {
-        const { form } = currentThis.state;
-        form.video = reader.result;
-        form.file = file;
-        form.fileType = false;
-        form.typeContent = typeContent.video;
-        currentThis.setState({ form });
-      };
+      this.props.handleModalInfoMsgShow(
+        modalType.error,
+        Translations.create_campaigns.SelectProperMedia
+      );
     } else {
       this.props.handleModalInfoMsgShow(
         modalType.error,
@@ -240,7 +399,7 @@ class AdsModal extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -254,12 +413,14 @@ class AdsModal extends Component {
     }
   };
 
+  /* eslint-disable */
+
   validateForm = index => {
     const { form } = this.state;
-    // console.log("form", form);
     if (index === 0) {
       return (
         form.title &&
+        form.location &&
         form.location.latitude &&
         form.location.longitude &&
         form.location.address &&
@@ -275,10 +436,13 @@ class AdsModal extends Component {
         form.startDate &&
         form.endDate &&
         form.endDate.diff(form.startDate, "days") >= 0 &&
+        form.endDate.diff(form.startDate, "week") >= 1 &&
+        form.endDate.diff(form.startDate, "month") <= 3 &&
         form.budget
       );
     } else if (index === 2) {
       return (
+        form.address &&
         form.address.invoiceRecipient &&
         form.address.street &&
         form.address.streetNumber &&
@@ -324,15 +488,20 @@ class AdsModal extends Component {
 
   handleLocation = (location, address) => {
     const { form } = this.state;
-    form.location.latitude = location.lat;
-    form.location.longitude = location.lng;
-    form.location.address = address;
+    if (form && form.location) {
+      form.location.latitude = location.lat;
+      form.location.longitude = location.lng;
+      form.location.address = address;
+    }
     this.setState({ form });
   };
 
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
-    form[isFor] = selected;
+    form[isFor] = selected.id;
+    if (isFor === "callToAction") {
+      form.actionName = selected.name;
+    }
     if (isFor === "budget") {
       this.calculateMaxClicks();
     }
@@ -342,23 +511,16 @@ class AdsModal extends Component {
   calculateMaxClicks = () => {
     const { form } = this.state;
     let maxClicksValue = 0;
-    const CPC = budgetCalculation.CPC;
     const budgetValue = form.budget;
-    const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
-    if (noOfDaysRuntime && budgetValue) {
-      maxClicksValue =
-        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
-      if (maxClicksValue > 1200) {
-        maxClicksValue = 1200;
-      }
-      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
-      this.setState({ maxClicks: maxClicksValue });
+    if (budgetValue) {
+      maxClicksValue = budgetValue / budgetCalculation.adsPerViewCost;
+      this.setState({ maxClicks: maxClicksValue.toLocaleString("en") });
     }
   };
 
   handleAddress = event => {
     const { form } = this.state;
-    form.address[event.target.name] = event.target.value;
+    form.address[event.values.name] = event.values.val;
     this.setState({ form });
   };
 }
@@ -372,7 +534,9 @@ AdsModal.propTypes = {
   mediaData: PropTypes.any,
   adData: PropTypes.any,
   maxClicks: PropTypes.any,
-  calculateMaxClicks: PropTypes.func
+  calculateMaxClicks: PropTypes.func,
+  updateAd: PropTypes.func.isRequired,
+  data: PropTypes.any
 };
 
 const mapStateToProps = state => ({
@@ -382,7 +546,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   createAd,
-  uploadMedia
+  uploadMedia,
+  updateAd
 };
 
 export default connect(

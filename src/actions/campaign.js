@@ -103,7 +103,7 @@ const getFavouriteCampaignsFailed = error => ({
   error: true
 });
 
-export const getFavouriteCampaigns = (prop, provider) => {
+export const getFavouriteCampaigns = provider => {
   return dispatch => {
     dispatch(getFavouriteCampaignsStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -177,7 +177,7 @@ const addParticipantsSucceeded = data => ({
 });
 
 const addParticipantsFailed = error => ({
-  type: types.ADD_COMMENT_FAILED,
+  type: types.ADD_PARTICIPANTS_FAILED,
   payload: error,
   error: true
 });
@@ -194,6 +194,83 @@ export const addParticipants = provider => {
       },
       error => {
         dispatch(addParticipantsFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+// Remove Participant
+const removeParticipantsStarted = () => ({
+  type: types.REMOVE_PARTICIPANT_STARTED
+});
+
+const removeParticipantsSucceeded = data => ({
+  type: types.REMOVE_PARTICIPANT_SUCCEEDED,
+  payload: data
+});
+
+const removeParticipantsFailed = error => ({
+  type: types.REMOVE_PARTICIPANT_FAILED,
+  payload: error,
+  error: true
+});
+
+export const removeParticipants = provider => {
+  return dispatch => {
+    dispatch(removeParticipantsStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = { Authorization: storage.accessToken };
+
+    return campaignService.removeParticipants(provider, header).then(
+      res => {
+        dispatch(removeParticipantsSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(removeParticipantsFailed(error.response));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+// Update Campaign
+
+const updateCampaignStarted = () => ({
+  type: types.UPDATE_CAMPAIGN_STARTED
+});
+
+const updateCampaignSucceeded = data => ({
+  type: types.UPDATE_CAMPAIGN_SUCCEEDED,
+  payload: data
+});
+
+const updateCampaignFailed = error => ({
+  type: types.UPDATE_CAMPAIGN_FAILED,
+  payload: error,
+  error: true
+});
+
+export const updateCampaign = provider => {
+  return dispatch => {
+    dispatch(updateCampaignStarted());
+    const storage = Auth.extractJwtFromStorage();
+    const header = {
+      Authorization: storage.accessToken
+    };
+
+    return campaignService.updateCampaign(provider, header).then(
+      res => {
+        dispatch(updateCampaignSucceeded(res.data.data));
+      },
+      error => {
+        dispatch(updateCampaignFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

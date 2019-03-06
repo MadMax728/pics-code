@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Auth } from "../../../../../auth";
 import { DateFormat } from "../../../../Factory";
 import { Translations } from "../../../../../lib/translations";
+import { DescriptionItem } from "../../../../misc/items";
 
 const storage = Auth.extractJwtFromStorage();
 let userInfo = null;
@@ -18,7 +19,6 @@ class Preview extends Component {
       userInfo: null
     };
   }
-
 
   render() {
     const { form } = this.props;
@@ -40,7 +40,9 @@ class Preview extends Component {
                 </video>
               )}
               <div className="text paddTop20">
-                {form.description && form.description}
+                {form.description && (
+                  <DescriptionItem desc={form.description} />
+                )}
               </div>
               <div className="feed_wrapper">
                 <div className="feed_header">
@@ -63,7 +65,12 @@ class Preview extends Component {
                       {userInfo && userInfo.username && userInfo.username}
                     </div>
                     <div className="grey_title">
-                      { todayDate && DateFormat(todayDate, Translations.date_format.date, true)}
+                      {todayDate &&
+                        DateFormat(
+                          todayDate,
+                          Translations.date_format.date,
+                          true
+                        )}
                       in Category
                     </div>
                   </div>
@@ -81,7 +88,12 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">Start: </span>
                         <span className="secondary_title">
-                          { form.startDate && DateFormat(form.startDate, Translations.date_format.date, true)}
+                          {form.startDate &&
+                            DateFormat(
+                              form.startDate,
+                              Translations.date_format.date,
+                              true
+                            )}
                         </span>
                       </div>
                       <div className="info_wrapper">
@@ -101,7 +113,12 @@ class Preview extends Component {
                       <div className="info_wrapper">
                         <span className="normal_title">End: </span>
                         <span className="secondary_title">
-                          { form.endDate && DateFormat(form.endDate, Translations.date_format.date, true)}
+                          {form.endDate &&
+                            DateFormat(
+                              form.endDate,
+                              Translations.date_format.date,
+                              true
+                            )}
                         </span>
                       </div>
                       <div className="info_wrapper">
@@ -126,7 +143,6 @@ class Preview extends Component {
       this.setState({ userInfo });
     }
   };
-
 }
 
 Preview.propTypes = {

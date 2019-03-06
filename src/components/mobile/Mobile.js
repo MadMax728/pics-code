@@ -18,7 +18,7 @@ export default class Mobile extends Component {
       <div>
         <Cookies />
         <Header />
-        <section>
+        <section className="main-section">
           <div className="container">
             <div className="row">
               <div>
@@ -69,5 +69,4 @@ export default class Mobile extends Component {
   handleNavClick = () => {
     this.toggleUserNav();
   };
-
 }

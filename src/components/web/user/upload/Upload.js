@@ -1,17 +1,23 @@
 import React, { Component } from "react";
-import * as images from "../../../../lib/constants/images";
 import { Auth } from "../../../../auth";
 import PropTypes from "prop-types";
-import { HashTagUsername, SelectCategory } from "../../../common";
-import { PlaceAutoCompleteLocation, UserImageItem } from "../../../ui-kit";
-import { Translations } from "../../../../lib/translations";
+import UploadData from "./UploadData";
+import FileUpload from "./FileUpload";
+import { b64toBlob } from "../../../../lib/utils/helpers";
+
 const storage = Auth.extractJwtFromStorage();
 
 class Upload extends Component {
   constructor(props) {
     super(props);
+    this.imageCrop = React.createRef();
+    this.imageCropper = React.createRef();
     this.state = {
-      isInProgress: false
+      isInProgress: false,
+      isAdvertise: this.props.form.is_advertise_label,
+      image: null,
+      actual_img: null,
+      scale: 1
     };
   }
 
@@ -20,11 +26,32 @@ class Upload extends Component {
   };
 
   handleChangeField = event => {
+    if (event.values.name === "is_advertise_label") {
+      let isLabel = false;
+      if (event.values.val === "yes") {
+        isLabel = true;
+      }
+      this.setState({ isAdvertise: isLabel });
+    }
+
     this.props.handleChangeField(event);
   };
 
   handleLengthField = event => {
     this.props.handleLengthField(event);
+  };
+
+  handleActualImg = actual_img => {
+    this.setState({ actual_img });
+  };
+
+  handleScale = scale => {
+    this.setState({ scale });
+  };
+
+  handleEditImage = image => {
+    this.setState({ image });
+    this.props.handleEditImage(image);
   };
 
   handleUpload = e => {
@@ -54,151 +81,37 @@ class Upload extends Component {
   };
 
   render() {
-    const { form, handleSetState, handleLocation, handleSelect } = this.props;
-    const { isInProgress } = this.state;
+    const {
+      form,
+      handleSetState,
+      handleLocation,
+      handleSelect,
+      fileUpdate
+    } = this.props;
+    const { isInProgress, isAdvertise, image } = this.state;
     const userInfo = storage ? JSON.parse(storage.userInfo) : null;
-    const profileImage = userInfo ? userInfo.profileUrl : images.image;
+
     return (
       <div className="col-xs-12 no-padding">
-        <div className="col-sm-6 upload-form height100">
-          <UserImageItem item={profileImage} customClass={`img-circle img-responsive`} />
-          <div className="user-title">
-            <div className="normal_title">
-              {Translations.upload_modal.title_of_upload}
-            </div>
-            <div className="secondary_title">User name</div>
-          </div>
-          <form className="col-xs-12 no-padding">
-            <div className="form-group">
-              <label htmlFor="Location">
-                {Translations.upload_modal.add_location}
-              </label>
-              <PlaceAutoCompleteLocation
-                className=""
-                handleLocation={handleLocation}
-                value={form.address}
-              />
-              {form.add_location.address.length === 0 &&
-                form.add_location.latitude.length === 0 &&
-                form.add_location.longitude.length === 0 &&
-                form.error && (
-                  <span className="error-msg highlight">
-                    {Translations.error.create_modal.location}
-                  </span>
-                )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="Category">
-                {Translations.upload_modal.add_category}
-              </label>
-              <SelectCategory
-                value={form.add_category ? form.add_category : ""}
-                className=""
-                handleSelect={handleSelect}
-              />
-              {form.add_category.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.category}
-                </span>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">
-                {Translations.upload_modal.add_description}
-              </label>
-              <HashTagUsername
-                className="form-control"
-                type="text"
-                name="add_description"
-                handleSetState={handleSetState}
-                value={form.add_description}
-                isText={false}
-              />
-              {form.add_description.length === 0 && form.error && (
-                <span className="error-msg highlight">
-                  {Translations.error.create_modal.description}
-                </span>
-              )}
-            </div>
-            <div className="form-group no-margin">
-              <label htmlFor="description" className="dispInline">
-                {Translations.upload_modal.advertisement}
-              </label>
-              <input
-                type="checkbox"
-                alt="isAdvertisement"
-                className="check"
-                name="is_advertise_label"
-                value={form.is_advertise_label}
-                onChange={this.handleChangeField}
-              />
-              {/* <div className="check-wrapr">
-                <img src={images.check} alt="share" className="check" />
-              </div> */}
-            </div>
-          </form>
-        </div>
-        <div className="col-sm-6 no-padding">
-          {!form.image && !form.video ? (
-            <div className="box">
-              <input
-                type="file"
-                name="newImage"
-                id="file-2"
-                className="inputfile inputfile-2"
-                data-multiple-caption="{count} files selected"
-                multiple=""
-                onChange={this.handleUpload}
-              />
-              <label htmlFor="file-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="17"
-                  viewBox="0 0 20 17"
-                >
-                  <path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
-                </svg>
-                <br /> <span>{Translations.upload_modal.upload_file}</span>
-              </label>
-            </div>
-          ) : form.filetype ? (
-            <img src={form.image} alt="upload" className="widthHeightAuto" />
-          ) : (
-            <video controls>
-              <track kind="captions" />
-              <source src={form.video} type={form.file.type} />
-            </video>
-          )}
-          {isInProgress && (
-            <div className="image-wrapper">
-              <div className="progress-bar-wrapper">
-                <div className="progress blue">
-                  <span className="progress-left">
-                    <span className="progress-bar" />
-                  </span>
-                  <span className="progress-right">
-                    <span className="progress-bar" />
-                  </span>
-                  <div className="progress-value">90%</div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className="add-wrapper upload-wrapr heightAuto">
-            <input
-              type="file"
-              className="img-upload"
-              name="newImage"
-              id="file-2"
-              data-multiple-caption="{count} files selected"
-              multiple=""
-              onChange={this.handleUpload}
-            />
-            <img src={images.plus_button} alt={"plus_button"} />
-          </div>
-        </div>
+        {!fileUpdate ? (
+          <FileUpload handleUpload={this.handleUpload} />
+        ) : (
+          <UploadData
+            form={form}
+            handleChangeField={this.handleChangeField}
+            handleSetState={handleSetState}
+            handleLocation={handleLocation}
+            handleSelect={handleSelect}
+            handleUpload={this.handleUpload}
+            isInProgress={isInProgress}
+            isAdvertise={isAdvertise}
+            image={image}
+            handleEditImage={this.handleEditImage}
+            ref={this.imageCropper}
+            handleActualImg={this.handleActualImg}
+            handleScale={this.handleScale}
+          />
+        )}
       </div>
     );
   }
@@ -210,7 +123,10 @@ Upload.propTypes = {
   handleSetState: PropTypes.func.isRequired,
   handleLocation: PropTypes.func.isRequired,
   form: PropTypes.any.isRequired,
-  handleSelect: PropTypes.func.isRequired
+  handleSelect: PropTypes.func.isRequired,
+  is_advertise_label: PropTypes.any,
+  fileUpdate: PropTypes.bool,
+  handleEditImage: PropTypes.func
 };
 
 export default Upload;

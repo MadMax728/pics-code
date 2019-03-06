@@ -8,9 +8,12 @@ import NavDropdown from "react-bootstrap/lib/NavDropdown";
 import PropTypes from "prop-types";
 import { Notifications } from "../web/dashboard";
 import { modalType } from "../../lib/constants/enumerations";
-import { getSearch } from "../../actions";
+import { getSearchForHeader } from "../../actions";
 import { connect } from "react-redux";
-
+import * as websocket from "../../websocket";
+import { Auth } from "../../auth";
+import { Button, Input } from "../ui-kit";
+import InputSerach from './search/InputSerach';
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -18,8 +21,25 @@ class Header extends Component {
       navExpanded: false,
       userNavExpanded: false,
       offsetHeight: 0,
-      searchText: ""
+      searchText: "",
+      messageCount: 0,
+      menuIsOpened: false
     };
+
+    this.handleToggle = this.handleToggle.bind(this);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo && userInfo.id) {
+      websocket.join(null, null, userInfo.id);
+      websocket.messagecount(userInfo.id, count => {
+        if (count && count.messageCount) {
+          this.setState({ messageCount: count.messageCount });
+        }
+      });
+    }
   }
 
   componentDidMount = () => {
@@ -32,6 +52,11 @@ class Header extends Component {
   }
   toggleNav = () => {
     this.setState({ navExpanded: !this.state.navExpanded });
+  };
+
+  handleToggle = () => {
+    const { menuIsOpened } = this.state;
+    this.setState({ menuIsOpened: !menuIsOpened });
   };
 
   toggleUserNav = () => {
@@ -70,14 +95,10 @@ class Header extends Component {
     const path = "?search=" + this.state.searchText;
     this.props.history.push(path);
     this.setState({ searchText: "" });
-    this.props.getSearch(this.state.searchText);
+    this.props.getSearchForHeader(this.state.searchText);
   };
 
-  onInputChange = e => {
-    this.setState({
-      searchText: e.target.value
-    });
-  };
+
 
   handleModalMessage = () => {
     this.props.handleModalShow(modalType.messages);
@@ -88,15 +109,24 @@ class Header extends Component {
   };
 
   render() {
+    const { messageCount } = this.state;
+    let messageCountView = messageCount;
+    if (messageCount < 100) {
+      messageCountView = messageCount;
+    } else if (messageCount > 99) {
+      messageCountView = "99+";
+    }
     return (
-      <header className={this.state.offsetHeight > 250 ? "fixed" : ""}>
+      <header className="fixed">
         <nav className="navbar navbar-default">
           <div className="container">
             <div className="row">
               <div className="navbar-header">
-                <button type="button" className="navbar-toggle collapsed">
-                  <img src={images.menu} alt="Menu" />
-                </button>
+                <Button
+                  type="button"
+                  className="navbar-toggle collapsed"
+                  text={<img src={images.menu} alt="Menu" />}
+                />
                 <Link to={routes.ROOT_ROUTE} className="navbar-brand">
                   <img src={images.headerLogo} alt="logo" />
                 </Link>
@@ -105,24 +135,7 @@ class Header extends Component {
                 className="collapse navbar-collapse"
                 id="bs-example-navbar-collapse-1"
               >
-                <form className="navbar-form navbar-left">
-                  <div className="input-group search-input-group">
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="Search"
-                      onChange={this.onInputChange}
-                      value={this.state.searchText}
-                    />
-                    <span className="input-group-addon">
-                      <button onClick={this.onSearchClick}>
-                        <span className="search_icon">
-                          <img src={images.search} alt="Search" />
-                        </span>
-                      </button>
-                    </span>
-                  </div>
-                </form>
+                <InputSerach />
                 <ul className="nav navbar-nav pull-right">
                   <RouteNavItem
                     to={routes.ROOT_ROUTE}
@@ -145,7 +158,13 @@ class Header extends Component {
                     className={`menu_messages`}
                     closeMenu={this.toggleNav}
                   >
-                    <span className="badge badge-danger">100</span>
+                    {messageCount && messageCount > 0 ? (
+                      <span className="badge badge-danger">
+                        {messageCountView}
+                      </span>
+                    ) : (
+                        ""
+                      )}
                     <span>{Translations.navigation.messages}</span>
                   </RouteNavItem>
 
@@ -154,8 +173,14 @@ class Header extends Component {
                     title={<span>{Translations.navigation.notifications}</span>}
                     id="basic-nav-dropdown"
                     className={`menu_notifications`}
+                    open={this.state.menuIsOpened}
+                    onToggle={this.handleToggle}
                   >
-                    <Notifications handleMessage={this.handleMessage} />
+                    <Notifications
+                      handleMessage={this.handleMessage}
+                      history={this.props.history}
+                      handleToggle={this.handleToggle}
+                    />
                   </NavDropdown>
 
                   <RouteNavItem
@@ -176,17 +201,20 @@ class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  searchData: state.searchData
+  searchData: state.searchData,
+  usersData: state.usersData
 });
 
 const mapDispatchToProps = {
-  getSearch
+  getSearchForHeader
 };
 
 Header.propTypes = {
   handleModalShow: PropTypes.func,
   history: PropTypes.any,
-  getSearch: PropTypes.func
+  getSearchForHeader: PropTypes.func,
+  usersData: PropTypes.any,
+  searchData: PropTypes.any
 };
 
 export default connect(

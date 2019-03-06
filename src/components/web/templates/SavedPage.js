@@ -21,45 +21,51 @@ class SavedPage extends Component {
       <div className={"middle-section padding-rl-10"}>
         {savedList && this.renderSavedList()}
         {!savedList && isLoading && <CampaignLoading />}
-        { !isLoading && ( !savedList || ( savedList && savedList.length === 0)) && <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />}
+        {!isLoading &&
+          (!savedList || (savedList && savedList.length === 0)) && (
+            <NoDataFoundCenterPage handleRefresh={this.handleRefresh} />
+          )}
       </div>
     );
   }
 
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getSaved("getSavedOwner").then(()=> {
-      if(this.props.savedList){
-        this.setState({savedList: this.props.savedList});
+    this.props.getSaved("getSavedOwner").then(() => {
+      if (this.props.savedList) {
+        this.setState({ savedList: this.props.savedList });
       }
     });
   };
 
-  handleRefresh = () => {
-  };
+  handleRefresh = () => {};
 
-  handleRemove = (id) => {
+  handleRemove = id => {
     const { savedList } = this.state;
-    this.setState({savedList: savedList.filter(e => e.id !== id)});
-  }
+    this.setState({ savedList: savedList.filter(e => e.id !== id) });
+  };
 
   renderSavedList = () => {
     const { savedList } = this.state;
+    const { handleModalInfoShow, handleModalShow } = this.props;
     return savedList.map(saved => {
       return (
         <div key={saved.id}>
           {saved.mediaUrl &&
             saved.postType.toLowerCase() ===
               enumerations.contentTypes.mediaPost && (
-              <MediaCard 
-                item={saved} 
-                isParticipant={false} 
-                isDescription 
+              <MediaCard
+                item={saved}
+                isParticipant={false}
+                isDescription
                 isSavedPage
                 handleRemove={this.handleRemove}
+                handleModalShow={handleModalShow}
               />
             )}
           {saved.mediaUrl &&
+            saved.typeContent &&
+            saved.typeContent.toLowerCase() !== enumerations.mediaTypes.video &&
             saved.postType.toLowerCase() ===
               enumerations.contentTypes.companyCampaign && (
               <CampaignCard
@@ -71,9 +77,13 @@ class SavedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {saved.mediaUrl &&
+            saved.typeContent &&
+            saved.typeContent.toLowerCase() !== enumerations.mediaTypes.video &&
             saved.postType.toLowerCase() ===
               enumerations.contentTypes.creatorCampaign && (
               <CampaignCard
@@ -85,16 +95,20 @@ class SavedPage extends Component {
                 isStatus={false}
                 isBudget={false}
                 isReport={false}
+                handleModalInfoShow={handleModalInfoShow}
+                handleModalShow={handleModalShow}
               />
             )}
           {saved.mediaUrl &&
             saved.postType.toLowerCase() ===
               enumerations.contentTypes.companyParticipantCampaign && (
-              <MediaCard 
-                item={saved} 
-                isParticipant 
-                isDescription                 isSavedPage
-                handleRemove={this.handleRemove} 
+              <MediaCard
+                item={saved}
+                isParticipant
+                isDescription
+                isSavedPage
+                handleRemove={this.handleRemove}
+                handleModalShow={handleModalShow}
               />
             )}
           {saved.mediaUrl &&
@@ -106,19 +120,21 @@ class SavedPage extends Component {
                 isStatus={false}
                 isSavedPage
                 handleRemove={this.handleRemove}
+                handleModalShow={handleModalShow}
               />
             )}
         </div>
       );
     });
   };
-
 }
 
 SavedPage.propTypes = {
   getSaved: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
-  savedList: PropTypes.any
+  savedList: PropTypes.any,
+  handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func
   // error: PropTypes.any
 };
 

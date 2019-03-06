@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Translations } from "../../../../lib/translations";
 import { modalType } from "../../../../lib/constants/enumerations";
-import { RenderToolTips } from "../../../common";
 import PropTypes from "prop-types";
 import {
   getCampaignDetails,
@@ -11,10 +9,11 @@ import {
   like,
   addReport
 } from "../../../../actions";
-import { getBackendPostType } from "../../../Factory";
 import { connect } from "react-redux";
 import { CampaignDetailsLoading } from "../../../ui-kit";
 import { CampaignDetailsCard } from "../../../misc";
+import * as routes from "../../../../lib/constants/routes";
+import { ReportTips } from "../../../misc/items";
 
 class InformationPage extends Component {
   constructor(props, context) {
@@ -22,40 +21,37 @@ class InformationPage extends Component {
     this.state = {
       isComments: false,
       campaignId: this.props.match.params.id,
-      comments: null,
-      ReportTips: [
-        {
-          name: "Report Post",
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: "Save Post",
-          handleEvent: this.handleSavePost
-        },
-        {
-          name: "locks / unlocks content",
-          handleEvent: this.handleContent
-        }
-      ]
+      comments: null
     };
   }
+
+  handeleShare = () => {
+    const { campaignId } = this.state;
+    const data = {
+      url: `${window.location.origin}${
+        routes.BASE_CAMPAIGN_INFORMATION_ROUTE
+      }${campaignId}`
+    };
+    this.props.handleModalInfoShow(modalType.share, data);
+  };
 
   render() {
     const { campaignDetails, isLoading } = this.props;
     const { isComments, comments } = this.state;
     return (
-      <div className="padding-l-10 middle-section width-80">
+      <div className="middle-section padding-rl-10">
         {campaignDetails && !isLoading && (
-          <CampaignDetailsCard 
-            campaignDetails={campaignDetails} 
-            isComments={isComments} 
-            comments={comments} 
-            handleApplyParticipant={this.handleApplyParticipant} 
+          <CampaignDetailsCard
+            campaignDetails={campaignDetails}
+            isComments={isComments}
+            comments={comments}
+            handleApplyParticipant={this.handleApplyParticipant}
             handleCommentsSections={this.handleCommentsSections}
             handleFavorite={this.handleFavorite}
             handleOnKeyDown={this.handleOnKeyDown}
             renderReportTips={this.renderReportTips}
             handleComment={this.handleComment}
+            handeleShare={this.handeleShare}
           />
         )}
         {isLoading && <CampaignDetailsLoading count={1} />}
@@ -69,23 +65,28 @@ class InformationPage extends Component {
     this.handleCommentsSections();
   };
 
-  componentWillReceiveProps = nextProps => {
-    if (nextProps.searchData.searchKeyword) {
-      this.props.getSearch("");
+  componentDidUpdate(prevProps, prevState) {
+    const campaignId = this.props.match.params.id;
+
+    if (campaignId !== prevState.campaignId) {
+      this.setState(
+        {
+          isComments: false,
+          campaignId,
+          comments: null
+        },
+        () => {
+          this.getCampaignDetailsData();
+          this.handleCommentsSections();
+        }
+      );
     }
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      this.props.getSearch(nextProps.searchData.searchKeyword);
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      this.props.history.push("/campaign/company?search=" + searchKeyword);
-    }
-  };
+  }
 
   getCampaignDetailsData = () => {
-    const data = {
-      id: this.state.campaignId
-    };
+    const { campaignId } = this.state;
+    const data = `${campaignId}?type=Campaign`;
+
     this.props.getCampaignDetails(data).then(() => {
       if (this.props.campaignDetails) {
         this.setState({
@@ -118,10 +119,17 @@ class InformationPage extends Component {
   };
 
   handleApplyParticipant = e => {
-    this.props.handleModalShow(modalType.upload, {
-      campaignId: e.target.id,
-      campaignName: this.props.campaignDetails.campaignName
-    });
+    if (this.props.campaignDetails.userType === "company") {
+      this.props.handleModalShow(modalType.upload, {
+        campaignId: e.target.id,
+        campaignName: this.props.campaignDetails.campaignName,
+        campaignCreatedById: this.props.campaignDetails.createdBy
+      });
+    } else {
+      this.props.history.push(
+        routes.MESSAGES_ROUTE + "?new=" + this.props.campaignDetails.userName
+      );
+    }
   };
 
   handleComment = commet => {
@@ -144,74 +152,18 @@ class InformationPage extends Component {
     });
   };
 
-  handleOnKeyDown = () => {};
-
-  handleReportPost = e => {
-    const { campaignDetails } = this.state;
-    const data = {
-      typeContent: "Campaign",
-      typeId: e.target.id,
-      title: campaignDetails.title
-    };
-    this.props.addReport(data).then(() => {
-      if (
-        this.props.reportedContentData &&
-        this.props.reportedContentData &&
-        this.props.reportedContentData.addReport.typeId === campaignDetails.id
-      ) {
-        campaignDetails.isReported = !campaignDetails.isReported;
-        this.setState({ campaignDetails });
-      }
-    });
-  };
-
-  handleSavePost = e => {
-    const { campaignDetails } = this.state;
-    // const { isSavedPage } = this.props;
-    const data = {
-      typeId: e.target.id,
-      postType: getBackendPostType(campaignDetails)
-    };
-
-    this.props.setSavedPost(data).then(() => {
-      if (
-        this.props.savedData &&
-        this.props.savedData.saved &&
-        this.props.savedData.saved.typeId === campaignDetails.id
-      ) {
-        campaignDetails.isSavedPost = !campaignDetails.isSavedPost;
-        this.setState({ campaignDetails });
-      }
-    });
-  };
-
-  handleContent = () => {};
-
-  /**
-   * Tooltp
-   */
   renderReportTips = () => {
-    let reportTips;
-    const { campaignDetails } = this.state;
-    if (campaignDetails) {
-      reportTips = [
-        {
-          name: campaignDetails.isReported
-            ? Translations.tool_tips.unreport
-            : Translations.tool_tips.report,
-          handleEvent: this.handleReportPost
-        },
-        {
-          name: campaignDetails.isSavedPost
-            ? Translations.tool_tips.unsave
-            : Translations.tool_tips.save,
-          handleEvent: this.handleSavePost
-        }
-      ];
-      return <RenderToolTips items={reportTips} id={campaignDetails.id} />;
-    }
-  };
+    const { campaignDetails } = this.props;
 
+    return (
+      <ReportTips
+        item={campaignDetails}
+        isBackOffice={false}
+        isReview={false}
+        isSavedPage={false}
+      />
+    );
+  };
 }
 
 InformationPage.propTypes = {
@@ -229,8 +181,8 @@ InformationPage.propTypes = {
   reportedContentData: PropTypes.any,
   savedData: PropTypes.any,
   setSavedPost: PropTypes.func,
-  addReport: PropTypes.func
-  // error: PropTypes.any
+  addReport: PropTypes.func,
+  handleModalInfoShow: PropTypes.func
 };
 
 const mapStateToProps = state => ({

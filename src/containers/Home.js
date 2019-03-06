@@ -13,6 +13,7 @@ import {
   MessageBar
 } from "../components/common";
 import PropTypes from "prop-types";
+import { Auth } from "../auth";
 
 class Home extends Component {
   constructor(props, context) {
@@ -30,6 +31,17 @@ class Home extends Component {
     };
   }
 
+  componentDidMount = () => {
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      this.setState({ image: userInfo.profileUrl });
+    }
+  };
+
   handleModalHide = () => {
     this.setState({ modalShow: false });
   };
@@ -46,6 +58,10 @@ class Home extends Component {
     this.setState({ modalInfoShow: true, modalInfoType: e });
   };
 
+  handleModalInfoShow = (e, data) => {
+    this.setState({ modalInfoShow: true, modalInfoType: e, data });
+  };
+
   handleModalInfoMsgShow = (e, forThat) => {
     this.setState({
       modalInfoShow: true,
@@ -55,8 +71,6 @@ class Home extends Component {
   };
 
   handleModalShow = (e, data) => {
-    console.log("call");
-
     this.setState({ modalShow: true, modalType: e, data });
   };
 
@@ -94,15 +108,15 @@ class Home extends Component {
 
   render() {
     const { message, image, profile, data } = this.state;
+    const { history } = this.props;
+
     // here get current language based on cookie inputs on home render
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
+
     return (
       <div>
-        <Header
-          handleModalShow={this.handleModalShow}
-          history={this.props.history}
-        />
-        <section>
+        <Header handleModalShow={this.handleModalShow} history={history} />
+        <section className="main-section">
           <MessageBar message={message} />
 
           <CustomModal
@@ -113,6 +127,8 @@ class Home extends Component {
             modalInfoType={this.state.modalInfoType}
             handleModalInfoMsgShow={this.handleModalInfoMsgShow}
             data={data}
+            history={this.props.history}
+            handleEditImage={this.handleEditImage}
           />
 
           <InfoModal
@@ -123,7 +139,9 @@ class Home extends Component {
             modalInfoMsg={this.state.modalInfoMsg}
             handleEditImage={this.handleEditImage}
             handleProfile={this.handleProfile}
+            data={data}
             image={image}
+            history={this.props.history}
           />
 
           <div className="container">
@@ -133,7 +151,7 @@ class Home extends Component {
                 handleModalInfoShow={this.handleModalInfoShow}
               />
 
-              <div className="left_menu_second no-padding profile-img-wrapper">
+              <div className="left_menu_second left-sidebar no-padding profile-img-wrapper">
                 <LeftSideBar getFilter={this.getFilter} />
               </div>
 
@@ -146,11 +164,12 @@ class Home extends Component {
                   profile={profile}
                 />
               </div>
-              <div className="right_bar no-padding">
+              <div className="right_bar right-sidebar no-padding">
                 <RightSideBar
                   handleLanguageSwitch={this.handleLanguageSwitch}
                   handleModalShow={this.handleModalShow}
                   handleMessageBar={this.handleMessageBar}
+                  history={this.props.history}
                 />
               </div>
             </div>

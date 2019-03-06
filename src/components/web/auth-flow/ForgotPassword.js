@@ -6,11 +6,11 @@ import { Link } from "react-router-dom";
 const ForgotPassword = () => (
   <div className="login-process">
     <BaseHeader />
-    <section>
+    <section className="main-section">
       <div className="custom-container">
         <div className="login-wrapper">
           <h3 className="text-center">
-            {Translations.forgot_password.email_account}{" "}
+            {Translations.forgot_password.email_account}
           </h3>
           <p>
             {Translations.forgot_password.confirm_email}

@@ -3,7 +3,9 @@ import { LeftSidebarFilter } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import * as routes from "../../../lib/constants";
+import * as routes from "../../../lib/constants/routes";
+import * as enumerations from "../../../lib/constants/enumerations";
+import { Scrollbars } from "react-custom-scrollbars";
 
 const relevanceItems = [
   { name: "all", className: "", value: "All" },
@@ -63,41 +65,29 @@ class ReportedContentFilter extends Component {
     super(props);
     this.state = {
       filterApply: false,
-      filData: []
+      filData: [],
+      height: window.innerHeight
     };
   }
 
   render() {
+    const { isRank } = this.props;
+    const { filterApply, height } = this.state;
     return (
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
-          handleSelect={this.handleSelect}
-        />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
-          <div className="filter-btn-wrapper">
-            <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
-              <button className="black_button" onClick={this.handleApplyClick}>
-                {Translations.filter.back}
-              </button>
-            </Link>
-          </div>
+      <Scrollbars style={{ height: `${height - 220}px` }}>
+        <div className="left-filters">
+          <LeftSidebarFilter
+            filters={Filters}
+            onChange={this.handleOnChange}
+            filterApply={filterApply}
+            handleSelect={this.handleSelect}
+            isRank={isRank}
+            handleResetFilterClick={this.handleResetFilterClick}
+            handleApplyClick={this.handleApplyClick}
+            isNotFilter
+          />
         </div>
-      </div>
+      </Scrollbars>
     );
   }
 
@@ -117,13 +107,12 @@ class ReportedContentFilter extends Component {
   handleSelect = filterData => {
     this.setState({ filData: filterData });
   };
-
-
 }
 
 ReportedContentFilter.propTypes = {
   handleApplyClick: PropTypes.func,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  isRank: PropTypes.string
 };
 
 export default ReportedContentFilter;

@@ -7,14 +7,18 @@ import {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard
+  getDashboard,
+  getUserCommunity
 } from "../../../../actions";
 import * as routes from "../../../../lib/constants/routes";
+import { modalType } from "../../../../lib/constants";
 
 class TopBarOtherInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      subscribeId: "",
+      isSubscribeStatus: null,
       items: {
         userid: this.props.match.userid,
         username: this.props.match.username,
@@ -26,7 +30,7 @@ class TopBarOtherInfo extends Component {
         userProfile: this.props.match.profileUrl,
         slots: [
           {
-            className: "col-sm-4 slot_one no-padding",
+            className: "col-sm-4 slot_one  no-padding",
             name: Translations.top_bar_info.subscriber,
             val: 0,
             userid: this.props.match.userid,
@@ -76,6 +80,7 @@ class TopBarOtherInfo extends Component {
     return (
       <TopBar
         items={this.state.items}
+        handeleShare={this.handeleShare}
         handleModalShow={this.props.handleModalShow}
         handleModalInfoShow={this.props.handleModalInfoShow}
         userDataByUsername={this.props.userDataByUsername}
@@ -103,6 +108,13 @@ class TopBarOtherInfo extends Component {
     }
   }
 
+  handeleShare = () => {
+    const data = {
+      url: `${window.location.href}`
+    };
+    this.props.handleModalInfoShow(modalType.share, data);
+  };
+
   getUserData = () => {
     const data = this.props.match;
     this.props.getUser(data).then(() => {
@@ -111,6 +123,11 @@ class TopBarOtherInfo extends Component {
         this.props.userDataByUsername.user &&
         this.props.userDataByUsername.user.data
       ) {
+        const communityData = {
+          username: this.props.userDataByUsername.user.data.username,
+          id: this.props.userDataByUsername.user.data.id
+        };
+        this.props.getUserCommunity(communityData);
         this.handleSetUserInfo();
       }
     });
@@ -122,21 +139,22 @@ class TopBarOtherInfo extends Component {
 
     let subscribeBtnClass = "filled_button";
     let subscribeBtnText = Translations.top_bar_info.subscribe;
-    if (isPending) {
-      subscribeBtnText = Translations.top_bar_info.request_pending;
+    // if (isPending) {
+    //   subscribeBtnText = Translations.top_bar_info.request_pending;
+    //   subscribeBtnClass = "filled_button";
+    // } else {
+    subscribeBtnClass = "filled_button";
+    if (isSubscribe) {
       subscribeBtnClass = "filled_button";
+      subscribeBtnText = Translations.top_bar_info.subscribed;
     } else {
-      subscribeBtnClass = "filled_button";
-      if (isSubscribe) {
-        subscribeBtnClass = "filled_button";
-        subscribeBtnText = Translations.top_bar_info.subscribed;
-      } else {
-        subscribeBtnClass = "blue_button";
-        subscribeBtnText = Translations.top_bar_info.subscribe;
-      }
+      subscribeBtnClass = "blue_button";
+      subscribeBtnText = Translations.top_bar_info.subscribe;
     }
+
+    // }
     const items = {
-      userid: this.props.userDataByUsername.user.data.id,
+      userid: this.props.userDataByUsername.user.data._id,
       username: this.props.userDataByUsername.user.data.username,
       private: this.props.userDataByUsername.user.data.isPrivate,
       more: true,
@@ -149,21 +167,21 @@ class TopBarOtherInfo extends Component {
           className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.subscriber,
           val: this.props.userDataByUsername.user.data.subscribersCount,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         },
         {
           className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.subscribed,
           val: this.props.userDataByUsername.user.data.subscribedCount,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         },
         {
           className: "col-sm-4 slot_one no-padding",
           name: Translations.top_bar_info.posts,
           val: this.props.userDataByUsername.user.data.postCount,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         }
       ],
@@ -174,7 +192,7 @@ class TopBarOtherInfo extends Component {
           btnActiveClassName: subscribeBtnClass,
           btnText: subscribeBtnText,
           handeleEvent: this.handeleSubscribe,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         },
         {
@@ -183,21 +201,21 @@ class TopBarOtherInfo extends Component {
           btnActiveClassName: "black_button",
           btnText: Translations.top_bar_info.message,
           handeleEvent: this.handeleMessage,
-          userid: this.props.userDataByUsername.user.data.id,
+          userid: this.props.userDataByUsername.user.data._id,
           username: this.props.userDataByUsername.user.data.username
         }
       ]
     };
-    this.setState({ items });
+    this.setState({
+      items
+    });
   };
 
   handeleSubscribe = () => {
     // To Do - Integration changed - according to backend API response
     const errors = {};
     const selectedUserList = this.props.userDataByUsername.user.data;
-    if (selectedUserList.isPending) {
-      // To Do - On Pending request click
-    } else if (selectedUserList.isSubscribe === false) {
+    if (selectedUserList.isSubscribe === false) {
       const requestData = { followers: selectedUserList.id };
       this.props.sendRequest(requestData).then(() => {
         if (
@@ -207,12 +225,11 @@ class TopBarOtherInfo extends Component {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (this.props.usersData.isRequestSend) {
+        } else if (this.props.usersData.isRequestSendData) {
           this.getUserData();
-          this.props.getDashboard("users");
         }
       });
-    } else if (selectedUserList.isSubscribe === true) {
+    } else {
       const subscribedId = selectedUserList.subscribeId;
       this.props.getUnsubscribe(subscribedId).then(() => {
         if (
@@ -222,30 +239,35 @@ class TopBarOtherInfo extends Component {
           errors.servererror =
             Translations.profile_community_right_sidebar.serverError;
           this.setState({ error: errors });
-        } else if (this.props.usersData.isUnsubscribed) {
+        } else if (this.props.usersData.isUnsubscribedData) {
           this.getUserData();
-          this.props.getDashboard("users");
         }
       });
     }
   };
 
   handeleMessage = () => {
-    this.props.history.push(routes.MESSAGES_ROUTE);
+    console.log(
+      "this.props.userDataByUsername.user.data._id ",
+      this.props.userDataByUsername.user.data._id
+    );
+    const username = this.props.userDataByUsername.user.data.username;
+    this.props.history.push(`${routes.MESSAGES_ROUTE}?new=${username}`);
   };
-
 }
 
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  usersData: state.usersData
+  usersData: state.usersData,
+  userCommunity: state.communityData.userCommunity
 });
 
 const mapDispatchToProps = {
   getUser,
   sendRequest,
   getUnsubscribe,
-  getDashboard
+  getDashboard,
+  getUserCommunity
 };
 
 TopBarOtherInfo.propTypes = {
@@ -258,7 +280,8 @@ TopBarOtherInfo.propTypes = {
   getUnsubscribe: PropTypes.func,
   usersData: PropTypes.any,
   getDashboard: PropTypes.func,
-  history: PropTypes.any
+  history: PropTypes.any,
+  getUserCommunity: PropTypes.func
 };
 
 export default connect(

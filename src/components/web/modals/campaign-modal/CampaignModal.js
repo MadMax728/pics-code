@@ -14,12 +14,17 @@ import {
   typeContent,
   target_group,
   procedure,
-  budgetCalculation
+  budgetCalculation,
+  contentTypes
 } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 
 import { connect } from "react-redux";
-import { createCampaign, uploadMedia } from "../../../../actions";
+import {
+  createCampaign,
+  uploadMedia,
+  updateCampaign
+} from "../../../../actions";
 import { Translations } from "../../../../lib/translations";
 
 const storage = Auth.extractJwtFromStorage();
@@ -29,11 +34,17 @@ if (storage) {
 }
 
 const initialState = {
+  isNewFile: false,
+  isEdit: false,
   stepIndex: 0,
+  isLoading: false,
   isPreview: false,
   userInfo: null,
   maxClicks: 0,
+  modalTitle: "",
   form: {
+    draft: false,
+    id: "",
     title: "",
     location: {
       latitude: "",
@@ -41,18 +52,21 @@ const initialState = {
       address: ""
     },
     category: "",
+    categoryName: "",
     procedure: procedure.public,
     typeContent: typeContent.image,
     targetGroup: target_group.company,
     offers: "",
+    offerName: "",
     offerTag: [],
     offerTagList: [],
     inquiry: "",
+    inquiryName: "",
     inquiryTag: [],
     inquiryTagList: [],
     description: "",
     startDate: moment(),
-    endDate: moment(),
+    endDate: moment().add(7, "days"),
     budget: "",
     address: {
       invoiceRecipient: "",
@@ -63,14 +77,12 @@ const initialState = {
       country: "",
       streetNumber: ""
     },
-    voucher: "",
-    voucherAmount: "",
-    voucherCode: "",
     image: null,
     filetype: true,
     file: null,
     video: null,
     typeId: "",
+    fileName: "",
     maximumExpenses: "",
     error: false
   },
@@ -84,16 +96,31 @@ class CampaignModal extends Component {
   }
 
   render() {
-    const { isFor, handleModalHide } = this.props;
-    const { stepIndex, isPreview, form, userInfo, maxClicks } = this.state;
+    const {
+      isFor,
+      handleModalHide,
+      modalShow,
+      handleModalInfoMsgShow
+    } = this.props;
+    const {
+      modalTitle,
+      isEdit,
+      stepIndex,
+      isPreview,
+      form,
+      userInfo,
+      maxClicks,
+      isLoading
+    } = this.state;
 
     let modalClassName = "";
 
     if (stepIndex === 0) {
-      modalClassName = "modal fade create-campaign-modal overflow-scroll ";
-    } else if (stepIndex !== 0 && stepIndex < 4) {
+      modalClassName =
+        "modal fade create-campaign-modal upload-pic-modal start-campaign-modal overflow-scroll ";
+    } else if (stepIndex !== 0 && stepIndex < 3) {
       modalClassName = "modal fade create-campaign-modal editor-modal";
-    } else if (stepIndex > 3 && stepIndex < 5) {
+    } else if (stepIndex > 2 && stepIndex < 4) {
       modalClassName = "modal fade payment-overview-modal";
     }
 
@@ -107,9 +134,13 @@ class CampaignModal extends Component {
               handleModalHide={handleModalHide}
               handleNext={this.handleNext}
               handlePrev={this.handlePrev}
-              stepIndex={this.state.stepIndex}
+              stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
               handleResoreState={this.handleResoreState}
+              handleSubmit={this.handleCompanySubmit}
+              modalTitle={modalTitle}
+              form={form}
+              isLoading={isLoading}
             />
           ) : (
             <CreateCreatorCampaignHeader
@@ -118,11 +149,17 @@ class CampaignModal extends Component {
               handlePrev={this.handlePrev}
               stepIndex={stepIndex}
               handlePrivewOpen={this.handlePrivewOpen}
+              handleResoreState={this.handleResoreState}
+              modalTitle={modalTitle}
+              handleSubmit={this.handleCreatorSubmit}
+              isFor={isFor}
+              form={form}
+              isLoading={isLoading}
             />
           )
         }
         footer={false}
-        modalShow={this.props.modalShow}
+        modalShow={modalShow}
         closeBtn={false}
         handleModalHide={handleModalHide}
         modalBodyContent={
@@ -147,15 +184,13 @@ class CampaignModal extends Component {
               ref={this.imageCropper}
               handleActualImg={this.handleActualImg}
               handleScale={this.handleScale}
-              handleOfferTagChange={this.handleOfferTagChange}
-              handleOfferTagDelete={this.handleOfferTagDelete}
-              handleInquiryTagChange={this.handleInquiryTagChange}
-              handleInquiryTagDelete={this.handleInquiryTagDelete}
               handleSelect={this.handleSelect}
-              handleVideo={this.handleVideo}
               userInfo={userInfo}
-              setVoucherData={this.setVoucherData}
               calculateMaxClicks={this.calculateMaxClicks}
+              isLoading={isLoading}
+              isEdit={isEdit}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
+              handleSetState={this.handleSetState}
             />
           ) : (
             <CreateCreatorCampaign
@@ -170,7 +205,7 @@ class CampaignModal extends Component {
               maxClicks={maxClicks}
               handleAddress={this.handleAddress}
               handleContentChange={this.handleContentChange}
-              handleSubmit={this.handleCompanySubmit}
+              handleSubmit={this.handleCreatorSubmit}
               handleDate={this.handleDate}
               contentText={form.description}
               handleEditImage={this.handleEditImage}
@@ -178,15 +213,13 @@ class CampaignModal extends Component {
               ref={this.imageCropper}
               handleActualImg={this.handleActualImg}
               handleScale={this.handleScale}
-              handleOfferTagChange={this.handleOfferTagChange}
-              handleOfferTagDelete={this.handleOfferTagDelete}
-              handleInquiryTagChange={this.handleInquiryTagChange}
-              handleInquiryTagDelete={this.handleInquiryTagDelete}
               handleSelect={this.handleSelect}
-              handleVideo={this.handleVideo}
               userInfo={userInfo}
-              setVoucherData={this.setVoucherData}
               calculateMaxClicks={this.calculateMaxClicks}
+              isLoading={isLoading}
+              isEdit={isEdit}
+              handleModalInfoMsgShow={handleModalInfoMsgShow}
+              handleSetState={this.handleSetState}
             />
           )
         }
@@ -199,16 +232,147 @@ class CampaignModal extends Component {
     if (userInfo) {
       this.setState({ userInfo });
     }
+    const { data } = this.props;
+
+    if (data && data.id) {
+      this.setState({
+        modalTitle: Translations.modal_header.edit_campaign,
+        isEdit: true,
+        isNewFile: false
+      });
+      this.handleSetstate(data);
+    } else {
+      this.handleResetForm();
+    }
   };
 
-  componentWillReceiveProps(nextProps) {
+  handleSetState = (value, cd) => {
+    this.setState({ form: { ...this.state.form, description: value } }, () =>
+      cd()
+    );
+  };
+
+  handleSetstate = data => {
+    const { form } = this.state;
+    if (data.id) {
+      form.id = data.id;
+    }
+    if (data.title) {
+      form.title = data.title;
+    }
+    if (data.location) {
+      form.location.latitude = data.location.latitude;
+      form.location.longitude = data.location.longitude;
+      form.location.address = data.location.address;
+    }
+    if (data.category) {
+      form.category = data.category;
+    }
+    if (data.offers) {
+      form.offers = data.offers;
+    }
+    if (data.inquiry) {
+      form.inquiry = data.inquiry;
+    }
+    if (data.procedure) {
+      form.procedure = procedure[data.procedure];
+    }
+    if (data.typeContent) {
+      form.typeContent = typeContent[data.typeContent.toLowerCase()];
+      form.image = data.mediaUrl;
+      form.file = data.mediaUrl;
+    }
+    if (data.targetGroup) {
+      form.targetGroup = target_group[data.targetGroup.toLowerCase()];
+    }
+    form.description = data.description;
+    form.startDate = moment(data.startDate);
+    form.endDate = moment(data.endDate);
+    form.budget = data.budget;
+    if (data.address) {
+      form.address.invoiceRecipient = data.address.invoiceRecipient;
+      form.address.street = data.address.street;
+      form.address.postalCode = data.address.postalCode;
+      form.address.city = data.address.city;
+      form.address.VATNO = data.address.VATNO;
+      form.address.country = data.address.country;
+      form.address.streetNumber = data.address.street;
+    }
+    form.maximumExpenses = data.maximumExpenses;
+    form.typeId = data.typeId;
+    form.fileName = data.fileName;
+    form.error = false;
+    this.setState({ form, isNewFile: false });
+    this.calculateMaxClicks();
+  };
+
+  static getDerivedStateFromProps(nextProps, prevState) {
     if (!nextProps.modalShow) {
-      this.setState({ stepIndex: 0, isPreview: false });
+      return { stepIndex: 0, isPreview: false };
+    }
+    if (
+      nextProps.data &&
+      nextProps.data.id &&
+      nextProps.data.id !== prevState.form.id
+    ) {
+      return {
+        modalTitle: Translations.modal_header.edit_campaign,
+        isEdit: true
+      };
+    }
+    return null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { data } = this.props;
+    if (
+      (data &&
+        prevState.form &&
+        prevState.form &&
+        data.id !== prevState.form.id) ||
+      !prevProps.modalShow
+    ) {
+      this.handleSetstate(data);
     }
   }
 
+  handleResetForm = () => {
+    const { form } = this.state;
+    form.title = "";
+    form.location = {};
+    form.location.latitude = "";
+    form.location.longitude = "";
+    form.location.address = "";
+    form.category = "";
+    form.categoryName = "";
+    form.offerName = "";
+    form.inquiryName = "";
+    form.procedure = procedure.public;
+    form.typeContent = typeContent.image;
+    form.targetGroup = target_group.company;
+    form.description = "";
+    form.startDate = moment();
+    form.endDate = moment().add(7, "days");
+    form.budget = "";
+    form.address = {};
+    form.address.invoiceRecipient = "";
+    form.address.street = "";
+    form.address.postalCode = "";
+    form.address.city = "";
+    form.address.VATNO = "";
+    form.address.country = "";
+    form.address.streetNumber = "";
+    form.image = null;
+    form.filetype = true;
+    form.file = null;
+    form.typeId = "";
+    form.maximumExpenses = "";
+    form.error = false;
+    this.setState({ form, isEdit: false });
+  };
+
   componentWillUnmount = () => {
-    this.setState(initialState);
+    this.handleResetForm();
   };
 
   handleEditImage = image => {
@@ -233,81 +397,187 @@ class CampaignModal extends Component {
 
   handleCreatorChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
   handleSubmit = () => {
-    const { form } = this.state;
-    if (form.file) {
-      const Data = new FormData();
-      if (form.filetype) {
-        Data.append("image", form.file);
+    const { isEdit, stepIndex, form } = this.state;
+    if (!isEdit && stepIndex === 0) {
+      if (!form.id) {
+        this.handleCreateCampaign();
       } else {
-        Data.append("video", form.file);
+        this.handleUpdateCampaign();
       }
-      Data.append("postType", "campaign");
+    } else {
+      this.handleUpdateCampaign();
+    }
+  };
 
-      this.props.uploadMedia(Data, form.filetype).then(() => {
-        if (this.props.mediaData && this.props.mediaData.media) {
-          form.typeId = this.props.mediaData.media.id;
-          form.file = null;
-          form.image = null;
-          form.video = null;
+  handleUpdateCampaign = () => {
+    const { form, isNewFile, isFor } = this.state;
+    if (this.validateFile()) {
+      if (isNewFile) {
+        const Data = new FormData();
+        Data.append("image", form.file);
+        Data.append("postType", "campaign");
+        this.setState({ isLoading: true });
+        const postType = isFor
+          ? contentTypes.companyCampaign
+          : contentTypes.creatorCampaign;
+        this.props.uploadMedia(Data, form.filetype, "campaign").then(() => {
+          const { mediaData } = this.props;
+          if (mediaData && mediaData.media) {
+            form.typeId = mediaData.media.id;
+            form.fileName = mediaData.media.imageName;
+            form.file = mediaData.media.path;
+            form.image = mediaData.media.path;
+            if (!form.maximumExpenses) {
+              form.maximumExpenses = form.budget;
+            }
+            this.setState({ form, isNewFile: false }, () => {
+              this.update();
+            });
+          }
+        });
+      } else {
+        this.setState({ isLoading: true });
+        this.update();
+      }
+    }
+  };
+
+  handleCreateCampaign = () => {
+    const { form, isFor } = this.state;
+    if (this.validateFile()) {
+      const Data = new FormData();
+      Data.append("image", form.file);
+      Data.append("postType", "campaign");
+      this.setState({ isLoading: true });
+      const postType = isFor
+        ? contentTypes.companyCampaign
+        : contentTypes.creatorCampaign;
+      this.props.uploadMedia(Data, form.filetype, "campaign").then(() => {
+        const { mediaData } = this.props;
+        if (mediaData && mediaData.media) {
+          form.typeId = mediaData.media.id;
+          form.fileName = mediaData.media.imageName;
+          form.file = mediaData.media.path;
+          form.image = mediaData.media.path;
           if (!form.maximumExpenses) {
             form.maximumExpenses = form.budget;
           }
-          this.setState({ form });
-          this.props.createCampaign(form).then(() => {
-            if (
-              this.props.campaignData &&
-              this.props.campaignData.campaign &&
-              this.props.campaignData.campaign.id
-            ) {
-              this.handleModalInfoShow();
-            }
+          this.setState({ form, isNewFile: false }, () => {
+            this.create();
           });
         }
       });
-    } else {
+    }
+  };
+
+  create = () => {
+    const { form, stepIndex } = this.state;
+    this.props.createCampaign(form).then(() => {
+      const { campaignData } = this.props;
+      if (campaignData && campaignData.campaign && campaignData.campaign.id) {
+        this.handleSetstate(campaignData.campaign);
+        this.setState({ isLoading: false, stepIndex: stepIndex + 1 });
+      }
+      if (
+        campaignData &&
+        campaignData.error &&
+        campaignData.error.data &&
+        campaignData.error.data.message
+      ) {
+        this.setState({ isLoading: false });
+        this.handleResetForm();
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          campaignData.error.data.message
+        );
+      }
+    });
+  };
+
+  update = () => {
+    const { form, stepIndex, isFor } = this.state;
+    if (stepIndex === 1 && !isFor) {
+      form.draft = true;
+    }
+    if (isFor && stepIndex === 3) {
+      form.draft = true;
+    }
+    this.setState({ form });
+
+    this.props.updateCampaign(form).then(() => {
+      const { campaignData } = this.props;
+      if (campaignData && campaignData.campaign && campaignData.campaign.id) {
+        if (stepIndex === 1 && !isFor) {
+          this.handleModalInfoShow();
+          return;
+        }
+        if (isFor && stepIndex === 3) {
+          this.handleModalInfoShow();
+          return;
+        }
+        this.handleSetstate(campaignData.campaign);
+        this.setState({ isLoading: false, stepIndex: stepIndex + 1 });
+      }
+      if (
+        campaignData &&
+        campaignData.error &&
+        campaignData.error.data &&
+        campaignData.error.data.message
+      ) {
+        this.setState({ isLoading: false });
+        this.handleResetForm();
+        this.props.handleModalInfoMsgShow(
+          modalType.error,
+          campaignData.error.data.message
+        );
+      }
+    });
+  };
+
+  validateFile = () => {
+    const { form } = this.state;
+    if (!form.file) {
       this.props.handleModalInfoMsgShow(
         modalType.error,
         Translations.create_campaigns.ImageAndVedio
       );
+      return false;
     }
+    return true;
   };
 
-  setVoucherData = (code, voucher, maximumExpenses) => {
-    const { form } = this.state;
-    if (voucher && maximumExpenses) {
-      form.voucherCode = code;
-      form.voucherAmount = voucher;
-      form.maximumExpenses = maximumExpenses;
-      this.setState({ form });
-    }
-  };
-
+  /* eslint-disable */
   validateForm = index => {
     const { form } = this.state;
+    console.log(form);
     if (index === 0) {
       return (
         form.title &&
+        form.location &&
         form.location.latitude &&
         form.location.longitude &&
         form.location.address &&
         form.category &&
-        form.file
+        form.file &&
+        form.offers &&
+        form.inquiry &&
+        form.description
       );
     } else if (index === 1) {
-      return form.description;
-    } else if (index === 2) {
       return (
         form.startDate &&
         form.endDate &&
         form.endDate.diff(form.startDate, "days") >= 0 &&
+        form.endDate.diff(form.startDate, "week") >= 1 &&
+        form.endDate.diff(form.startDate, "month") <= 3 &&
         form.budget
       );
-    } else if (index === 3) {
+    } else if (index === 2) {
       return (
         form.address.invoiceRecipient &&
         form.address.street &&
@@ -326,15 +596,14 @@ class CampaignModal extends Component {
 
   handleCompanyChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
   handleResoreState = () => {
-    this.setState({
-      form: {}
-    });
+    this.handleResetForm();
   };
+
   handlePrivewOpen = () => {
     this.setState({ isPreview: true });
   };
@@ -345,10 +614,10 @@ class CampaignModal extends Component {
 
   handleNext = () => {
     const { stepIndex } = this.state;
-    if (stepIndex < 4) {
+    if (stepIndex < 3) {
       if (this.validateForm(stepIndex)) {
+        this.handleSubmit();
         this.setState({
-          stepIndex: stepIndex + 1,
           form: { ...this.state.form, error: false }
         });
       } else {
@@ -378,12 +647,7 @@ class CampaignModal extends Component {
     );
   };
 
-  handleVideo = e => {
-    const file = e.target.files[0];
-    this.handleImageVideo(file);
-  };
-
-  handleImageVideo = file => {
+  handleImage = file => {
     const reader = new FileReader();
 
     if (file.type.includes("image")) {
@@ -391,21 +655,10 @@ class CampaignModal extends Component {
       reader.readAsDataURL(file);
       reader.onloadend = function() {
         const { form } = currentThis.state;
-        form.typeContent = typeContent.image;
+        // form.typeContent = typeContent.image;
         form.image = reader.result;
         form.file = file;
         form.fileType = true;
-        currentThis.setState({ form });
-      };
-    } else if (file.type.includes("video")) {
-      const currentThis = this;
-      reader.readAsDataURL(file);
-      reader.onloadend = function() {
-        const { form } = currentThis.state;
-        form.typeContent = typeContent.video;
-        form.video = reader.result;
-        form.file = file;
-        form.fileType = false;
         currentThis.setState({ form });
       };
     } else {
@@ -418,7 +671,8 @@ class CampaignModal extends Component {
 
   handleActualImg = e => {
     const file = e;
-    this.handleImageVideo(file);
+    this.setState({ isNewFile: true });
+    this.handleImage(file);
   };
 
   handleScale = scale => {
@@ -433,57 +687,18 @@ class CampaignModal extends Component {
     this.setState({ form });
   };
 
-  handleOfferTagChange = (id, tag) => {
-    const { form } = this.state;
-    if (form.offerTag.length === 0) {
-      form.offerTag = [];
-    }
-    form.offerTag.push(id);
-    form.offerTagList.push(tag);
-    this.setState({ form });
-  };
-
-  handleInquiryTagDelete = id => {
-    const { form } = this.state;
-    this.setState({
-      form: {
-        ...this.state.form,
-        inquiryTag: form.inquiryTag.filter(
-          tag => tag !== form.inquiryTagList[id].id
-        ),
-        inquiryTagList: form.inquiryTagList.filter(
-          tag => tag.id !== form.inquiryTagList[id].id
-        )
-      }
-    });
-  };
-
-  handleOfferTagDelete = id => {
-    const { form } = this.state;
-    this.setState({
-      form: {
-        ...this.state.form,
-        offerTag: form.offerTag.filter(tag => tag !== form.offerTagList[id].id),
-        offerTagList: form.offerTagList.filter(
-          tag => tag.id !== form.offerTagList[id].id
-        )
-      }
-    });
-  };
-
-  handleInquiryTagChange = (id, tag) => {
-    const { form } = this.state;
-    if (form.inquiryTag.length === 0) {
-      form.inquiryTag = [];
-    }
-    form.inquiryTag.push(id);
-    form.inquiryTagList.push(tag);
-    this.setState({ form });
-  };
-
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
-    form[isFor] = selected;
+    if (isFor === "category") {
+      form.categoryName = selected.name;
+    }
+    if (isFor === "offers") {
+      form.offerName = selected.name;
+    }
+    if (isFor === "inquiry") {
+      form.inquiryName = selected.name;
+    }
+    form[isFor] = selected.id;
     if (isFor === "budget") {
       this.calculateMaxClicks();
     }
@@ -493,23 +708,22 @@ class CampaignModal extends Component {
   calculateMaxClicks = () => {
     const { form } = this.state;
     let maxClicksValue = 0;
-    let CPC = budgetCalculation.CPC;
+    const CPC = budgetCalculation.CPC;
     const budgetValue = form.budget;
     const noOfDaysRuntime = form.endDate.diff(form.startDate, "days");
-    if (noOfDaysRuntime && budgetValue) {
+
+    if (budgetValue) {
       maxClicksValue =
-        (parseInt(budgetValue) / parseInt(CPC)) * parseInt(noOfDaysRuntime);
-      if (maxClicksValue > 1200) {
-        maxClicksValue = 1200;
-      }
-      maxClicksValue = Math.floor(parseInt(maxClicksValue) / 3.58);
+        parseInt(budgetValue) /
+        parseInt(budgetCalculation.campaignPerApplicationCost);
+      maxClicksValue = Math.floor(parseInt(maxClicksValue));
       this.setState({ maxClicks: maxClicksValue });
     }
   };
 
   handleAddress = event => {
     const { form } = this.state;
-    form.address[event.target.name] = event.target.value;
+    form.address[event.values.name] = event.values.val;
     this.setState({ form });
   };
 }
@@ -523,7 +737,9 @@ CampaignModal.propTypes = {
   uploadMedia: PropTypes.func.isRequired,
   mediaData: PropTypes.any,
   campaignData: PropTypes.any,
-  calculateMaxClicks: PropTypes.func
+  calculateMaxClicks: PropTypes.func,
+  updateCampaign: PropTypes.func.isRequired,
+  data: PropTypes.any
 };
 
 const mapStateToProps = state => ({
@@ -533,7 +749,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   createCampaign,
-  uploadMedia
+  uploadMedia,
+  updateCampaign
 };
 
 export default connect(

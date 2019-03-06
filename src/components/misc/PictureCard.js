@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import PictureCardBody from "./body/PictureCardBody";
 import * as enumerations from "../../lib/constants/enumerations";
 import { modalType } from "../../lib/constants";
-import {
-  addReport
-} from "../../actions";
+import { addReport } from "../../actions";
 import { connect } from "react-redux";
 import { Translations } from "../../lib/translations";
 import { RenderToolTips } from "../common";
@@ -21,17 +19,26 @@ class PictureCard extends Component {
 
   render() {
     const { item, index } = this.state;
-    const { isReport, history, reportedContentData, isBackOffice } = this.props;
+    const {
+      isReport,
+      history,
+      reportedContentData,
+      isBackOffice,
+      handleModalShow
+    } = this.props;
     return (
       <div>
         <PictureCardBody
           pic={item}
           index={index}
           isReport={isReport}
-          history={history}/* eslint-disable */
-          renderReportTips={() => this.renderReportTips(item.id)}
+          history={history}
+          /* eslint-disable */ renderReportTips={() =>
+            this.renderReportTips(item.id)
+          }
           isLoading={reportedContentData.isLoading}
           isBackOffice={isBackOffice}
+          handleModalShow={handleModalShow}
         />
       </div>
     );
@@ -44,18 +51,20 @@ class PictureCard extends Component {
     if (isBackOffice) {
       reportTips = [
         {
-          name: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? Translations.tool_tips.unlock
-            : Translations.tool_tips.lock) :
-            (item.reportStatus === enumerations.reportType.lock
+          name: isBudget
+            ? item.contentStatus === enumerations.reportType.lock
               ? Translations.tool_tips.unlock
-              : Translations.tool_tips.lock),
-          handleEvent: isBudget ? (item.contentStatus === enumerations.reportType.lock
-            ? this.handleUnlockContent
-            : this.handleLockContent) :
-            (item.reportStatus === enumerations.reportType.lock
+              : Translations.tool_tips.lock
+            : item.reportStatus === enumerations.reportType.lock
+            ? Translations.tool_tips.unlock
+            : Translations.tool_tips.lock,
+          handleEvent: isBudget
+            ? item.contentStatus === enumerations.reportType.lock
               ? this.handleUnlockContent
-              : this.handleLockContent)
+              : this.handleLockContent
+            : item.reportStatus === enumerations.reportType.lock
+            ? this.handleUnlockContent
+            : this.handleLockContent
         },
         {
           name: Translations.tool_tips.do_not,
@@ -75,47 +84,59 @@ class PictureCard extends Component {
     return <RenderToolTips items={reportTips} id={id} />;
   };
 
-  handleUnlockContent = (e) => {
+  handleUnlockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.unLock,
       reportContent: "Pics"
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  handleDoNotContent = (e) => {
+  handleDoNotContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.doNotLock,
       reportContent: "Pics"
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  handleLockContent = (e) => {
+  handleLockContent = e => {
     const data = {
       typeId: e.target.id,
       contentStatus: enumerations.reportType.lock,
       reportContent: "Pics"
-    }
-    this.props.handleModalInfoDetailsCallbackShow(modalType.processed, data, () => {
-      this.handleSetState(data)
-    });
-  }
+    };
+    this.props.handleModalInfoDetailsCallbackShow(
+      modalType.processed,
+      data,
+      () => {
+        this.handleSetState(data);
+      }
+    );
+  };
 
-  handleSetState = (data) => {
+  handleSetState = data => {
     clearInterval(this.timer);
     const { item } = this.state;
     item.reportStatus = data.contentStatus;
     this.setState({ item });
-    this.props.handleRemove(item.id)
-  }
-  
+    this.props.handleRemove(item.id);
+  };
+
   handleReportPost = e => {
     const { item } = this.state;
     const data = {
@@ -135,7 +156,6 @@ class PictureCard extends Component {
       }
     });
   };
-
 }
 
 PictureCard.propTypes = {
@@ -147,7 +167,8 @@ PictureCard.propTypes = {
   history: PropTypes.any,
   isBackOffice: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
-  handleRemove: PropTypes.func
+  handleRemove: PropTypes.func,
+  handleModalShow: PropTypes.any
 };
 
 const mapStateToProps = state => ({

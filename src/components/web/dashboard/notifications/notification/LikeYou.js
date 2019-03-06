@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import { likeYou_list } from "../../../../../mock-data";
 import { Translations } from "../../../../../lib/translations";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getFollowUserList } from "../../../../../actions";
+import { Button } from "../../../../ui-kit";
 
 class LikeYou extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      likeYou_list
+      likeYou_list: []
     };
   }
 
@@ -17,7 +17,7 @@ class LikeYou extends Component {
     return (
       <div className="tab-pane fade active in" id="nav-like">
         <div className="header-notifications">
-          {likeYou_list.map(like_you => {
+          {[].map(like_you => {
             return (
               <div
                 className="notification-with-subscribe notification-wrapper"
@@ -33,36 +33,33 @@ class LikeYou extends Component {
                 </div>
                 {like_you.isMessage && (
                   <div className="subscribe-btn">
-                    <button
+                    <Button
                       className="filled_button"
                       onClick={this.handleMessage}
                       onKeyDown={this.handleOnKeyDown}
                       id={like_you.user.id}
-                    >
-                      {Translations.message}
-                    </button>
+                      text={Translations.message}
+                    />
                   </div>
                 )}
                 {like_you.isLike &&
                   (like_you.user.isLikeToo ? (
                     <div className="subscribe-btn">
-                      <button
+                      <Button
                         className="filled_button"
                         id={like_you.id}
                         onClick={this.handleLike}
-                      >
-                        {Translations.like}
-                      </button>
+                        text={Translations.like}
+                      />
                     </div>
                   ) : (
                     <div className="subscribe-btn">
-                      <button
+                      <Button
                         className="blue_button"
                         id={like_you.id}
                         onClick={this.handleLike}
-                      >
-                        {Translations.like_you_too}
-                      </button>
+                        text={Translations.like_you_too}
+                      />
                     </div>
                   ))}
               </div>
@@ -104,7 +101,6 @@ class LikeYou extends Component {
   handleMessage = e => {
     this.props.handleMessage(e);
   };
-
 }
 
 LikeYou.propTypes = {

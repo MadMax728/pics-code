@@ -1,21 +1,19 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getSelect } from "../../../actions";
-import { connect } from "react-redux";
 import { Translations } from "../../../lib/translations";
+import { offerList } from "../../../lib/constants";
 
 class SelectOffer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      offerList: []
-    }
+      offerList
+    };
   }
 
   render() {
-    const { offerList } = this.state;
     const { value, className } = this.props;
-    
+    const { offerList } = this.state;
     return (
       <select
         value={value}
@@ -25,56 +23,33 @@ class SelectOffer extends Component {
         options={offerList}
       >
         <option value="">{Translations.select_offer}</option>
-        {offerList.map(option => (
-          <option value={option.id} key={option.id}>
-            {option.offerName}
-          </option>
-        ))}
+        {offerList &&
+          offerList.map(option => (
+            <option value={option.id} key={option.id}>
+              {option.value}
+            </option>
+          ))}
       </select>
     );
   }
 
-  componentDidMount = () => {
-    this.props.getSelect("offers").then(() => {
-      if(this.props.offerList){
-        this.setState({
-          offerList: this.props.offerList
-        });
-      }
-    });
-  }
-
-  componentWillUnmount = () => {
-    this.setState({offerList: []});
-  }
-  
-  handleOffer = (event) => {
-    this.props.handleSelect("offers",event.target.value);
-  }
-  
+  handleOffer = event => {
+    const { offerList } = this.state;
+    const name = offerList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: name.length !== 0 ? name[0].value : ""
+    };
+    this.props.handleSelect("offers", data);
+  };
 }
-
-const mapStateToProps = state => ({
-  offerList: state.selectData.offers
-});
-
-const mapDispatchToProps = {
-  getSelect
-};
-
 
 const propTypes = {
   value: PropTypes.any,
-  offerList: PropTypes.any,
   className: PropTypes.string,
-  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
 SelectOffer.propTypes = propTypes;
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectOffer);
+export default SelectOffer;

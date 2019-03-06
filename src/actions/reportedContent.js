@@ -1,5 +1,5 @@
 import * as types from "../lib/constants/actionTypes";
-import * as  reportedContentService from "../services";
+import * as reportedContentService from "../services";
 import { logger } from "../loggers";
 import { Auth } from "../auth";
 
@@ -20,7 +20,7 @@ const getBackOfficeReportedContentFailed = (error, isFor) => ({
   isFor
 });
 
-export const getBackOfficeReportedContent = (prop) => {
+export const getBackOfficeReportedContent = prop => {
   return dispatch => {
     dispatch(getBackOfficeReportedContentStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -28,21 +28,32 @@ export const getBackOfficeReportedContent = (prop) => {
       Authorization: storage.adminAccessToken
     };
 
-    return  reportedContentService.getReportedContent(prop, prop.type, header).then(
-      res => {
-          dispatch(getBackOfficeReportedContentSucceeded(res.data.data, prop.reportContent));
-      },
-      error => {
-        dispatch(getBackOfficeReportedContentFailed(error.response, prop.reportContent))
-        logger.error({
-          description: error.toString(),
-          fatal: true
-        });
-      }
-    );
+    return reportedContentService
+      .getReportedContent(prop, prop.type, header)
+      .then(
+        res => {
+          dispatch(
+            getBackOfficeReportedContentSucceeded(
+              res.data.data,
+              prop.reportContent
+            )
+          );
+        },
+        error => {
+          dispatch(
+            getBackOfficeReportedContentFailed(
+              error.response,
+              prop.reportContent
+            )
+          );
+          logger.error({
+            description: error.toString(),
+            fatal: true
+          });
+        }
+      );
   };
 };
-
 
 // Get BackOffice Reported Statistics
 const getBackOfficeReportedStatisticsStarted = () => ({
@@ -62,7 +73,7 @@ const getBackOfficeReportedStatisticsFailed = (error, isFor) => ({
   isFor
 });
 
-export const getBackOfficeReportedStatistics = (prop) => {
+export const getBackOfficeReportedStatistics = prop => {
   return dispatch => {
     dispatch(getBackOfficeReportedStatisticsStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -70,12 +81,22 @@ export const getBackOfficeReportedStatistics = (prop) => {
       Authorization: storage.adminAccessToken
     };
 
-    return  reportedContentService.getReportedStatistics(prop, header).then(
+    return reportedContentService.getReportedStatistics(prop, header).then(
       res => {
-          dispatch(getBackOfficeReportedStatisticsSucceeded(res.data.data, prop.reportContent));
+        dispatch(
+          getBackOfficeReportedStatisticsSucceeded(
+            res.data.data[0],
+            prop.reportContent
+          )
+        );
       },
       error => {
-        dispatch(getBackOfficeReportedStatisticsFailed(error.response, prop.reportContent))
+        dispatch(
+          getBackOfficeReportedStatisticsFailed(
+            error.response,
+            prop.reportContent
+          )
+        );
         logger.error({
           description: error.toString(),
           fatal: true
@@ -84,8 +105,6 @@ export const getBackOfficeReportedStatistics = (prop) => {
     );
   };
 };
-
-
 
 //  Update Back Office Report
 const updateBackOfficeReportStarted = () => ({
@@ -98,14 +117,14 @@ const updateBackOfficeReportSucceeded = (data, isFor) => ({
   isFor
 });
 
-const updateBackOfficeReportFailed = (error,isFor) => ({
+const updateBackOfficeReportFailed = (error, isFor) => ({
   type: types.UPDATE_BACK_OFFICE_REPORT_FAILED,
   payload: error,
   error: true,
   isFor
 });
 
-export const updateBackOfficeReport = (prop) => {
+export const updateBackOfficeReport = prop => {
   return dispatch => {
     dispatch(updateBackOfficeReportStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -113,12 +132,16 @@ export const updateBackOfficeReport = (prop) => {
       Authorization: storage.adminAccessToken
     };
 
-    return  reportedContentService.updateBackOfficeReport(prop, header).then(
+    return reportedContentService.updateBackOfficeReport(prop, header).then(
       res => {
-          dispatch(updateBackOfficeReportSucceeded(res.data.data, prop.reportContent));
+        dispatch(
+          updateBackOfficeReportSucceeded(res.data.data, prop.reportContent)
+        );
       },
       error => {
-        dispatch(updateBackOfficeReportFailed(error.response, prop.reportContent))
+        dispatch(
+          updateBackOfficeReportFailed(error.response, prop.reportContent)
+        );
         logger.error({
           description: error.toString(),
           fatal: true
@@ -128,24 +151,23 @@ export const updateBackOfficeReport = (prop) => {
   };
 };
 
-
 //  Add Report
 const addReportStarted = () => ({
   type: types.ADD_REPORT_STARTED
 });
 
-const addReportSucceeded = (data) => ({
+const addReportSucceeded = data => ({
   type: types.ADD_REPORT_SUCCEEDED,
   payload: data
 });
 
-const addReportFailed = (error) => ({
+const addReportFailed = error => ({
   type: types.ADD_REPORT_FAILED,
   payload: error,
   error: true
 });
 
-export const addReport = (prop) => {
+export const addReport = prop => {
   return dispatch => {
     dispatch(addReportStarted());
     const storage = Auth.extractJwtFromStorage();
@@ -153,12 +175,12 @@ export const addReport = (prop) => {
       Authorization: storage.accessToken
     };
 
-    return  reportedContentService.addReport(prop, header).then(
+    return reportedContentService.addReport(prop, header).then(
       res => {
-          dispatch(addReportSucceeded(res.data.data));
+        dispatch(addReportSucceeded(res.data.data));
       },
       error => {
-        dispatch(addReportFailed(error.response))
+        dispatch(addReportFailed(error.response));
         logger.error({
           description: error.toString(),
           fatal: true

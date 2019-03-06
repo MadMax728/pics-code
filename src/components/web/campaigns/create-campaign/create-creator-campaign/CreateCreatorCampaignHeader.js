@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../../../lib/translations";
+import { Button } from "../../../../ui-kit";
+import { BASE_CAMPAIGN_INFORMATION_ROUTE } from "../../../../../lib/constants";
 
 class CreateCreatorCampaignHeader extends Component {
   constructor(props) {
@@ -9,31 +11,42 @@ class CreateCreatorCampaignHeader extends Component {
   }
 
   render() {
-    const { stepIndex } = this.props;
+    const { stepIndex, form } = this.props;
     return (
       <div className="row">
-        <div className="col-sm-5 modal-title">
-          {Translations.modal_header.create_campaign}
-        </div>
+        <div className="col-sm-5 modal-title">{/* {modalTitle} */}</div>
         <div className="col-sm-7 text-right">
-          <button className="black_button" onClick={this.handleCancle}>
-            {Translations.modal_header.cancle}
-          </button>
+          <Button
+            className="black_button"
+            onClick={this.handleCancle}
+            text={Translations.modal_header.cancle}
+          />
           {stepIndex !== 0 && (
-            <button className="black_button" onClick={this.handleBack}>
-              {Translations.modal_header.back}
-            </button>
+            <Button
+              className="black_button"
+              onClick={this.handleBack}
+              text={Translations.modal_header.back}
+            />
           )}
-          {stepIndex !== 0 &&
-            stepIndex < 3 && (
-              <button className="black_button" onClick={this.handlePreview}>
-                {Translations.modal_header.preview}
-              </button>
-            )}
-          {stepIndex <= 3 && (
-            <button className="black_button" onClick={this.handleContinue}>
-              {Translations.modal_header.continue}
-            </button>
+          {stepIndex !== 0 && stepIndex < 2 && (
+            <a
+              href={`${BASE_CAMPAIGN_INFORMATION_ROUTE}creator/${form.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button
+                className="black_button"
+                onClick={this.handlePreview}
+                text={Translations.modal_header.preview}
+              />
+            </a>
+          )}
+          {stepIndex <= 2 && (
+            <Button
+              className="black_button"
+              onClick={this.handleContinue}
+              text={Translations.modal_header.continue}
+            />
           )}
         </div>
       </div>
@@ -42,6 +55,7 @@ class CreateCreatorCampaignHeader extends Component {
 
   handleCancle = () => {
     this.props.handleModalHide();
+    this.props.handleResoreState();
   };
 
   handleBack = () => {
@@ -53,26 +67,30 @@ class CreateCreatorCampaignHeader extends Component {
   };
 
   handlePreview = () => {
-    this.props.handlePrivewOpen();
+    // this.props.handlePrivewOpen();
   };
 
   handleContinue = () => {
-    if (this.props.stepIndex < 5) {
+    const { stepIndex, isFor } = this.props;
+    if (stepIndex === 1 && !isFor) {
+      this.props.handleSubmit();
+    } else if (this.props.stepIndex < 4) {
       this.props.handleNext();
     } else {
       console.log("data saved code");
     }
   };
-
-
 }
 
 CreateCreatorCampaignHeader.propTypes = {
   handleModalHide: PropTypes.func,
-  handlePrivewOpen: PropTypes.func.isRequired,
   stepIndex: PropTypes.any.isRequired,
   handleNext: PropTypes.func,
-  handlePrev: PropTypes.func
+  handlePrev: PropTypes.func,
+  handleResoreState: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func,
+  isFor: PropTypes.bool,
+  form: PropTypes.any
 };
 
 export default CreateCreatorCampaignHeader;

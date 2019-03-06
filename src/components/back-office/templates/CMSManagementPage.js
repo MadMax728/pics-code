@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 
 import { getCMSManagement } from "../../../actions";
 
-import { CustomeTableLoader, CustomBootstrapTable } from "../../ui-kit";
+import { CustomeTableLoader, CustomBootstrapTable, Button } from "../../ui-kit";
 import { DateFormat } from "../../Factory";
 import { SelectLanguage } from "../../common";
 
@@ -14,12 +14,11 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 
 class CMSManagementPage extends Component {
- 
   constructor(props, context) {
     super(props, context);
     this.state = {
       cmsManagement: null,
-      searchKeyword: this.props.searchData.searchKeyword,      
+      searchKeyword: this.props.searchData.searchKeyword,
       language: Translations.base_footer.language
     };
   }
@@ -30,35 +29,34 @@ class CMSManagementPage extends Component {
 
     return (
       <div className="padding-rl-10 middle-section width-80">
-       <div className="dashboard-middle-section margin-bottom-50">
+        <div className="dashboard-middle-section margin-bottom-50">
           <div className="title_with_dropdown">
             <span>{Translations.cms.cms}</span>
             <Link to={routes.BACK_OFFICE_CREATE_CMS_ROUTE}>
-              <button className="expandDrop">
-                <i className="glyphicon glyphicon-plus-sign" />
-              </button>{" "}
+              <Button
+                className="expandDrop"
+                text={<i className="glyphicon glyphicon-plus-sign" />}
+              />
             </Link>
-            <SelectLanguage 
-              value={language}
-              handleSelect={this.handleSelect}
-            />
+            <SelectLanguage value={language} handleSelect={this.handleSelect} />
           </div>
           {cmsManagement && this.renderCMSManagement()}
-          {cmsManagementData.isLoading && <CustomeTableLoader />}
+          {!cmsManagement && cmsManagementData.isLoading && (
+            <CustomeTableLoader />
+          )}
         </div>
       </div>
     );
   }
 
-
   componentDidMount = () => {
     window.scrollTo(0, 0);
-    this.props.getCMSManagement("").then(()=> {
+    this.props.getCMSManagement("").then(() => {
       const { cmsManagementData } = this.props;
-      if(cmsManagementData && cmsManagementData.cmsManagement) {
+      if (cmsManagementData && cmsManagementData.cmsManagement) {
         this.setState({
           cmsManagement: cmsManagementData.cmsManagement
-        })
+        });
       }
     });
   };
@@ -72,19 +70,28 @@ class CMSManagementPage extends Component {
     return null;
   }
 
-  optionsFormatter = (cell, row, rowIndex) => {   
-    const data = { 
+  optionsFormatter = (cell, row, rowIndex) => {
+    const data = {
       title: row.title,
       url: row.url,
       pageLanguage: row.pageLanguage,
       displayPage: row.displayPage,
       description: row.description
-    }
+    };
 
     return (
       <div key={rowIndex}>
-        <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row.id}`}>Edit</Link>
-        <div role="button" tabIndex="0" onKeyDown={() => this.handlePreview(data)}  onClick={() => this.handlePreview(data)}>Preview</div>
+        <Link to={`${routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}/${row._id}`}>
+          Edit
+        </Link>
+        <div
+          role="button"
+          tabIndex="0"
+          onKeyDown={() => this.handlePreview(data)}
+          onClick={() => this.handlePreview(data)}
+        >
+          Preview
+        </div>
       </div>
     );
   };
@@ -101,14 +108,16 @@ class CMSManagementPage extends Component {
 
   customTotal = (from, to, size) => (
     <span className="react-bootstrap-table-pagination-total">
-      Showing {from} to {to} of {size} Results
+      {Translations.show} {from} {Translations.to} {to} {Translations.of} {size}{" "}
+      {Translations.results}
     </span>
   );
 
-  recentFormatter  = (cell, row, rowIndex, formatExtraData) => {
+  recentFormatter = (cell, row, rowIndex, formatExtraData) => {
     return (
       <div key={rowIndex}>
-        {row.updatedAt && DateFormat(row.updatedAt, Translations.date_format.time, true)}
+        {row.updatedAt &&
+          DateFormat(row.updatedAt, Translations.date_format.time, true)}
       </div>
     );
   };
@@ -209,33 +218,36 @@ class CMSManagementPage extends Component {
           condensed
           defaultSorted={defaultSorted}
           pagination={pagination}
-          noDataIndication="Table is Empty"
+          noDataIndication={Translations.table_empty}
           id={"title"}
         />
       </div>
-    )
-  }
+    );
+  };
 
-  handleSelect = (isFor , selected) => {
-    this.setState({ language: selected });
-    if (this.state.language !== selected)
-    {
-      const url = selected === Translations.base_footer.language? `` : `?language=${selected}`;
-      this.props.getCMSManagement(url).then(()=> {
-        if(this.props.cmsManagementData && this.props.cmsManagementData.cmsManagement) {
+  handleSelect = (isFor, selected) => {
+    this.setState({ language: selected.id });
+    if (this.state.language !== selected.id) {
+      const url =
+        selected.id === Translations.base_footer.language
+          ? ``
+          : `?language=${selected.id}`;
+      this.props.getCMSManagement(url).then(() => {
+        if (
+          this.props.cmsManagementData &&
+          this.props.cmsManagementData.cmsManagement
+        ) {
           this.setState({
             cmsManagement: this.props.cmsManagementData.cmsManagement
-          })
+          });
         }
       });
     }
-  }
+  };
 
-  handlePreview = (data) => {
-    this.props.handleModalInfoDetailsShow(modalType.cmsPreview,data);
-  }
-
-
+  handlePreview = data => {
+    this.props.handleModalInfoDetailsShow(modalType.cmsPreview, data);
+  };
 }
 
 const mapStateToProps = state => ({
@@ -252,11 +264,10 @@ CMSManagementPage.propTypes = {
   cmsManagementData: PropTypes.object,
   handleModalInfoDetailsShow: PropTypes.func.isRequired,
   searchData: PropTypes.any,
-  history: PropTypes.any,
+  history: PropTypes.any
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(CMSManagementPage);
-

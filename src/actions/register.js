@@ -37,3 +37,35 @@ export const submitRegister = params => {
     );
   };
 };
+
+const submitCompanyRegisterStarted = () => ({
+  type: types.SUBMIT_COMPANY_REGISTER_STARTED
+});
+
+const submitCompanyRegisterSucceeded = data => ({
+  type: types.SUBMIT_COMPANY_REGISTER_SUCCEEDED,
+  payload: data
+});
+
+const submitCompanyRegisterFailed = error => ({
+  type: types.SUBMIT_COMPANY_REGISTER_FAILED,
+  payload: error,
+  error: true
+});
+
+export const submitCompanyRegister = params => {
+  return dispatch => {
+    dispatch(submitCompanyRegisterStarted());
+
+    return userService.submitCompanyRegister(params).then(
+      res => {
+        if (res.data && res.data.data) Auth.saveJwtToStorage(res.data.data);
+        dispatch(submitCompanyRegisterSucceeded(res.data));
+      },
+      error => {
+        dispatch(submitCompanyRegisterFailed(error.response));
+        logger.error({ description: error.toString(), fatal: true });
+      }
+    );
+  };
+};

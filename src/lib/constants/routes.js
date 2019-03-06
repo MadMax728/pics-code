@@ -50,13 +50,13 @@ export const BASE_AD_INFORMATION_ROUTE = "/ad/information/";
 export const BASE_IMAGE_INFORMATION_ROUTE = "/image/information/";
 export const BASE_VIDEO_INFORMATION_ROUTE = "/video/information/";
 export const BASE_CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/";
-export const CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/:id";
-export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/:id";
+export const CAMPAIGN_INFORMATION_ROUTE = "/campaign/information/:type/:id";
+export const CAMPAIGN_PARTICIPANT_ROUTE = "/campaign/participant/:type/:id";
 
 // settings routes
 export const SETTINGS_EDIT_PROFILE_ROUTE = "/settings/edit-profile";
 export const SETTINGS_PRIVACY_ROUTE = "/settings/privacy";
-export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness-profile";
+// export const SETTINGS_BUSSINESS_PROFILE_ROUTE = "/settings/bussiness-profile";
 export const SETTINGS_CAMPAIGN_ROUTE = "/settings/campaigns";
 export const BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE =
   "/settings/campaigns/statistics/";
@@ -102,11 +102,23 @@ export const INFORMATION_PLATFORM_POLICY_ROUTE = "/information/platform-policy";
 export const INFORMATION_CANCELLATION_POLICY_ROUTE =
   "/information/cancellation-policy";
 export const INFORMATION_TERMS_OF_USE_ROUTE = "/information/terms-of-use";
+export const INFORMATION_COOKIE_GUIDELINES_ROUTE =
+  "/information/cookie-guidelines";
+export const INFORMATION_COMMUNITY_GUIDELINES_ROUTE =
+  "/information/community-guidelines";
+export const INFORMATION_BRANDED_CONTENT_GUIDELINES_ROUTE =
+  "/information/branded-content-guidelines";
+export const INFORMATION_BUSINESS_TERMS_CONDITIONS_ROUTE =
+  "/information/business-terms-and-condition";
+export const INFORMATION_PAYMENT_GUIDELINES_ROUTE =
+  "/information/payment-guidelines";
+export const INFORMATION_COMMUNITY_PAYMENT_GUIDELINE_ROUTE =
+  "/information/community-payment-guidelines";
 
 export const SERVICE_SUPPORT_ROUTE = "/service/support";
 export const SERVICE_VERIFICATION_ROUTE = "/service/verification";
 export const SERVICE_FEEDBACK_ROUTE = "/service/feedback";
-export const SERVICE_REPORTED_CONTENT_ROUTE = "/service/reported-content";
+export const SERVICE_REPORTED_CONTENT_ROUTE = "/service/reported-problem";
 export const SERVICE_DELETE_ACCOUNT_ROUTE = "/service/delete-account";
 export const SERVICE_LAW_ENFORCEMENT_AGENCY_ROUTE =
   "/service/law-enforcement-agency";
@@ -127,8 +139,7 @@ export const BACK_OFFICE_CMS_MANAGMENT_ROUTE = "/back-office/cms-managment";
 export const BACK_OFFICE_CREATE_CMS_ROUTE = "/back-office/cms-managment/create";
 export const BACK_OFFICE_EDIT_CMS_ROUTE = "/back-office/cms-managment/:id";
 export const BACK_OFFICE_ADD_ADMIN_ROUTE = "/back-office/add-admin";
-export const BACK_OFFICE_ADD_VERIFICATION_ROUTE =
-  "/back-office/add-verification";
+// export const BACK_OFFICE_ADD_VERIFICATION_ROUTE =  "/back-office/add-verification";
 export const BACK_OFFICE_ADD_VOUCHER_ROUTE = "/back-office/add-voucher";
 export const BACK_OFFICE_DATA_DOWNLOAD_ROUTE = "/back-office/data-download";
 

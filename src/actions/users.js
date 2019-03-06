@@ -42,6 +42,64 @@ export const getUserList = (type = "subscriber") => {
   };
 };
 
+/**
+ *  search user by keyword
+ * { keyword }
+ *  @returns {dispatch} searchUsers.
+ */
+export const searchUsers = (keyword, page = 1, limit = 100) => {
+  return dispatch => {
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+    return usersService.searchUsers(keyword, page, limit, params).then(
+      res => {
+        dispatch(getUserListSucceeded(res.data.data.docs));
+      },
+      error => {
+        dispatch(getUserListSucceeded([]));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
+/**
+ *  search subscribed user by keyword
+ * { keyword }
+ *  @returns {dispatch} searchUsers.
+ */
+export const searchSubscribedUsers = (keyword, page = 1, limit = 100) => {
+  return dispatch => {
+    const storage = Auth.extractJwtFromStorage();
+    const headers = {
+      Authorization: storage.accessToken
+    };
+    const params = { headers };
+    return usersService.searchSubscribedUsers(keyword, page, limit, params).then(
+      res => {
+        const userList = [];
+        for (const user of res.data.data) {
+          userList.push(user.following);
+        }
+        dispatch(getUserListSucceeded(userList));
+      },
+      error => {
+        dispatch(getUserListSucceeded([]));
+        logger.error({
+          description: error.toString(),
+          fatal: true
+        });
+      }
+    );
+  };
+};
+
 /* SendRequest -  For Send request to other user
  */
 const sendRequestStarted = () => ({
@@ -116,10 +174,14 @@ const getFollowUserListStarted = () => ({
   type: types.GET_FOLLOW_USER_LIST_STARTED
 });
 
-const getFollowUserListSucceeded = (data, isFor) => ({
+// const getFollowUserListSucceeded = (data, isFor) => ({
+//   type: types.GET_FOLLOW_USER_LIST_SUCCEEDED,
+//   payload: data,
+//   isFor
+// });
+const getFollowUserListSucceeded = data => ({
   type: types.GET_FOLLOW_USER_LIST_SUCCEEDED,
-  payload: data,
-  isFor
+  payload: data
 });
 
 const getFollowUserListFailed = error => ({
@@ -128,16 +190,46 @@ const getFollowUserListFailed = error => ({
   error: true
 });
 
-export const getFollowUserList = (prop, requestData) => {
+const setLastEvaluatedKeys = data => ({
+  type: types.GET_LAST_EVALUATE_KEYS_SUCCEEDED,
+  payload: data
+});
+
+// export const getFollowUserList = (prop, requestData) => {
+//   return dispatch => {
+//     dispatch(getFollowUserListStarted());
+//     const storage = Auth.extractJwtFromStorage();
+//     const header = {
+//       Authorization: storage.accessToken
+//     };
+//     return subscribeService[prop](requestData, header).then(
+//       res => {
+//         dispatch(getFollowUserListSucceeded(res.data, prop));
+//       },
+//       error => {
+//         dispatch(getFollowUserListFailed(error.response));
+//         logger.error({ description: error.toString(), fatal: true });
+//       }
+//     );
+//   };
+// };
+
+export const getFollowUserList = requestData => {
   return dispatch => {
     dispatch(getFollowUserListStarted());
     const storage = Auth.extractJwtFromStorage();
     const header = {
       Authorization: storage.accessToken
     };
-    return subscribeService[prop](requestData, header).then(
+    return subscribeService.subscribe(requestData, header).then(
       res => {
-        dispatch(getFollowUserListSucceeded(res.data.data, prop));
+        dispatch(getFollowUserListSucceeded(res.data));
+        const keys = {
+          limit: res.data.limit,
+          page: res.data.page,
+          pages: res.data.pages
+        };
+        dispatch(setLastEvaluatedKeys(keys));
       },
       error => {
         dispatch(getFollowUserListFailed(error.response));
@@ -195,6 +287,7 @@ const getPendingUserListFailed = error => ({
   payload: error,
   error: true
 });
+
 export const getPendingUserList = requestData => {
   return dispatch => {
     dispatch(getPendingUserListStarted());

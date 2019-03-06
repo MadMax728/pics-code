@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { submitResetPassword } from "../../../actions/forgotPassword";
 import { connect } from "react-redux";
 import { Auth } from "../../../auth";
+import { Input, Button, ErrorSpan } from "../../ui-kit";
 
 class ResetMail extends Component {
   constructor(props) {
@@ -21,7 +22,7 @@ class ResetMail extends Component {
   }
 
   render() {
-    const { form } = this.state;
+    const { form, error } = this.state;
     return (
       <div className="login-process">
         <BaseHeader />
@@ -31,9 +32,9 @@ class ResetMail extends Component {
               <h3 className="text-center">{Translations.reset_email.header}</h3>
               <p>{Translations.reset_email.subheader}</p>
               <form>
-                <span className="error-msg highlight">{this.state.error.servererror}</span>
+                <ErrorSpan value={this.state.error.servererror} />
                 <div className="form-group">
-                  <input
+                  <Input
                     type="text"
                     className="form-control"
                     id="email"
@@ -45,14 +46,16 @@ class ResetMail extends Component {
                   {form.email.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <span className="error-msg highlight">{this.state.error.email}</span>
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan value={error.email} />
                 </div>
                 <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
-                    {Translations.register.send}
-                  </button>
+                  <Button
+                    className="blue_button"
+                    onClick={this.handleSubmit}
+                    text={Translations.register.send}
+                  />
                 </div>
               </form>
             </div>
@@ -71,7 +74,7 @@ class ResetMail extends Component {
   // handleChangeField which will be update every from value when change
   handleChangeField = event => {
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
     this.formValid();
   };
@@ -83,13 +86,13 @@ class ResetMail extends Component {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (form.email.length === 0) {
-      errors.email = "Email is required.";
+      errors.email = Translations.reset_email.email_required;
       isFormValid = false;
     }
     const isValidemail = emailRegex.test(form.email);
     if (!isValidemail) {
       isFormValid = false;
-      errors.email = "Email ID should be valid.";
+      errors.email = Translations.reset_email.email_valid;
     }
     this.setState({ error: errors });
     return isFormValid;
@@ -118,7 +121,7 @@ class ResetMail extends Component {
         this.props.resetPasswordData.error &&
         this.props.resetPasswordData.error.status === 400
       ) {
-        errors.servererror = "Something went wrong";
+        errors.servererror = Translations.comman_error.server_error;
         this.setState({ error: errors });
       } else {
         this.props.history.push(routes.FORGOT_PASSWORD);

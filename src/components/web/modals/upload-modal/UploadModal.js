@@ -12,6 +12,8 @@ import { modalType } from "../../../../lib/constants/enumerations";
 
 const initialState = {
   form: {
+    id: "",
+    add_title: "",
     add_location: {
       latitude: "",
       longitude: "",
@@ -25,7 +27,8 @@ const initialState = {
     video: null,
     filetype: true,
     error: false
-  }
+  },
+  fileUpdate: false
 };
 
 class UploadModal extends Component {
@@ -34,23 +37,24 @@ class UploadModal extends Component {
     this.state = initialState;
   }
 
-
   render() {
-    const { form } = this.state;
-
+    const { form, fileUpdate } = this.state;
+    const { modalShow } = this.props;
+    const className = !fileUpdate ? "upload-file-format" : "";
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade upload-image-modal create-campaign-modal"}
-        header
+        modalClassName={`modal fade upload-image-modal upload-pic-modal create-campaign-modal ${className}`}
+        header={fileUpdate}
         modalHeaderContent={
           <UploadHeader
             handleModalHide={this.handleModalHide}
             handleContinue={this.handleContinue}
+            handleResetForm={this.handleResetForm}
           />
         }
         footer={false}
-        closeBtn={false}
-        modalShow={this.props.modalShow}
+        closeBtn={!fileUpdate}
+        modalShow={modalShow}
         handleModalHide={this.handleModalHide}
         modalBodyContent={
           <Upload
@@ -60,11 +64,68 @@ class UploadModal extends Component {
             handleLocation={this.handleLocation}
             handleUpload={this.handleUpload}
             handleSelect={this.handleSelect}
+            fileUpdate={fileUpdate}
+            handleEditImage={this.props.handleEditImage}
           />
         }
       />
     );
   }
+
+  handleResetForm = () => {
+    const { form } = this.state;
+    form.add_location = {};
+    form.add_location.latitude = "";
+    form.add_location.longitude = "";
+    form.add_location.address = "";
+    form.add_category = "";
+    form.add_description = "";
+    form.add_title = "";
+    form.is_advertise_label = false;
+    form.image = null;
+    form.file = null;
+    form.video = null;
+    form.filetype = true;
+    form.error = false;
+    this.setState({ form });
+  };
+
+  componentDidMount = () => {
+    const { data } = this.props;
+    this.fillState(data);
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    const { data } = this.props;
+    if (data && data.id !== prevState.form.id) {
+      this.fillState(data);
+    }
+  }
+
+  fillState = data => {
+    const { form } = this.state;
+    if (data && data.id) {
+      form.id = data.id;
+      form.add_location = {};
+      form.add_location.latitude = data.location.latitude || "";
+      form.add_location.longitude = data.location.longitude || "";
+      form.add_location.address = data.location.address || "";
+      form.add_category = data.category || "";
+      form.add_description = data.description || "";
+      form.add_title = data.title || "";
+      form.is_advertise_label = data.is_advertise_label || false;
+      if (data.typeContent === "Image") {
+        form.image = data.mediaUrl;
+        form.filetype = true;
+      } else {
+        form.video = data.mediaUrl;
+        form.filetype = false;
+      }
+      form.file = data.path;
+      form.error = false;
+      this.setState({ form });
+    }
+  };
 
   componentWillUnmount = () => {
     this.setState(initialState);
@@ -73,11 +134,13 @@ class UploadModal extends Component {
   handleUpload = (imageVideo, file, filetype) => {
     if (filetype) {
       this.setState({
-        form: { ...this.state.form, image: imageVideo, file, filetype }
+        form: { ...this.state.form, image: imageVideo, file, filetype },
+        fileUpdate: true
       });
     } else {
       this.setState({
-        form: { ...this.state.form, video: imageVideo, file, filetype }
+        form: { ...this.state.form, video: imageVideo, file, filetype },
+        fileUpdate: true
       });
     }
   };
@@ -99,21 +162,28 @@ class UploadModal extends Component {
       const { form } = this.state;
       const Data = new FormData();
       if (form.file) {
+        let isLabel = false;
+        if (form.is_advertise_label === "yes") {
+          isLabel = true;
+        }
         Data.append("description", form.add_description);
-        Data.append("isAdvertiseLabel", form.is_advertise_label);
+        Data.append("title", form.add_title);
+        Data.append("isAdvertiseLabel", isLabel);
         Data.append("category", form.add_category);
         if (form.filetype) {
-          Data.append("image", form.file);
+          Data.append("media", form.file);
+          Data.append("typeContent", "image");
+          Data.append("typeImage", "Crop");
         } else {
-          Data.append("video", form.file);
+          Data.append("media", form.file);
+          Data.append("typeContent", "video");
         }
         Data.append("postType", "mediapost");
         Data.append("location", JSON.stringify(form.add_location));
-        this.props.uploadMedia(Data, form.filetype).then(() => {
+        this.props.uploadMedia(Data, form.filetype, "mediapost").then(() => {
           this.setState(initialState);
           /* Add Participants */
           if (this.props.data) {
-            console.log("if-participants");
             let typeOfContent = "";
             if (form.filetype) {
               typeOfContent = "Image";
@@ -124,17 +194,17 @@ class UploadModal extends Component {
               campaignId: this.props.data.campaignId,
               campaignName: this.props.data.campaignName,
               title: this.props.data.campaignName,
-              typeId: this.props.data.campaignId,
+              typeId: this.props.mediaData.media.id,
               typeContent: typeOfContent,
               description: form.add_description,
-              category: form.add_category
+              category: form.add_category,
+              campaignCreatedBy: this.props.data.campaignCreatedById
             };
             this.props.addParticipants(participantFormData).then(() => {
               if (
                 this.props.campaignData &&
                 this.props.campaignData.isAddParticipant
               ) {
-                console.log("participant added");
                 const data = { id: this.props.data.campaignId };
                 this.props.getCampaignDetails(data);
               }
@@ -168,11 +238,7 @@ class UploadModal extends Component {
 
   handleChangeField = event => {
     const { form } = this.state;
-    if (event.target.type === "checkbox") {
-      form[event.target.name] = event.target.checked;
-    } else {
-      form[event.target.name] = event.target.value;
-    }
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
@@ -186,7 +252,7 @@ class UploadModal extends Component {
 
   handleSelect = (isFor, selected) => {
     const { form } = this.state;
-    form.add_category = selected;
+    form.add_category = selected.id;
     this.setState({ form });
   };
 
@@ -205,7 +271,6 @@ class UploadModal extends Component {
       form.add_description
     );
   };
-
 }
 
 UploadModal.propTypes = {
@@ -216,11 +281,14 @@ UploadModal.propTypes = {
   data: PropTypes.any,
   addParticipants: PropTypes.func,
   campaignData: PropTypes.any,
-  getCampaignDetails: PropTypes.func
+  getCampaignDetails: PropTypes.func,
+  mediaData: PropTypes.any,
+  handleEditImage: PropTypes.func
 };
 
 const mapStateToProps = state => ({
-  campaignData: state.campaignData
+  campaignData: state.campaignData,
+  mediaData: state.mediaData
 });
 
 const mapDispatchToProps = {

@@ -162,24 +162,6 @@
           left: -2px;
         }
       }
-      input[type="file"] {
-        position: absolute;
-        top: -41px;
-        height: 30px;
-        opacity: 0;
-        z-index: 1;
-        left: calc(100% - 45px);
-        width: 30px;
-        @media (max-width: 915px) {
-          top: -35px;
-        }
-        @media (max-width: 815px) {
-          top: -32px;
-          width: 25px;
-          height: 25px;
-          left: calc(100% - 30px);
-        }
-      }
     }
   }
   .subtitle {
@@ -196,7 +178,7 @@
     // background-color: white;
     @media (max-width: 915px) {
       width: calc(100% - 4%);
-      margin: 30px 2%;
+      // margin: 30px 2%;
     }
   }
   .modal-content {
@@ -273,11 +255,12 @@
       }
       .profile_image {
         float: left;
-        &.wid45{
-          width: 55px;
+        &.wid45 {
+          width: 45px;
         }
         img {
           width: 45px;
+          height: 45px;
           margin-right: 10px;
         }
       }
@@ -428,4 +411,105 @@
 }
 a.more-strip.zIndex0 {
   z-index: 0;
+}
+.create-ad-modal.upload-pic-modal {
+  .modal-dialog {
+    width: 915px;
+    @media only screen and (max-width: 991px) {
+      width: 85%;
+      // margin: 0 auto;
+      // padding: 30px 0;
+    }
+    .modal-content {
+      text-align: center;
+      height: auto;
+      .modal-header {
+        text-align: right;
+      }
+      .modal-body {
+        height: 600px;
+        > div {
+          height: 100%;
+        }
+        .box {
+          padding: 12rem 1.25rem;
+          border: 1px solid #979797;
+          height: 300px;
+          .inputfile + label {
+            max-width: 100%;
+            margin: 0 auto;
+          }
+        }
+        .range-wrapr.add-wrapper {
+          position: relative;
+          padding: 0 50px;
+          .min-profile-pic {
+            width: 20px;
+            height: 20px;
+            left: 20px;
+            top: 18px;
+          }
+          input[type="range"] {
+            border: none;
+            margin: 15px 25px;
+          }
+          .runnable {
+            left: 55px;
+            top: 26px;
+          }
+          .max-profile-pic {
+            left: -7px;
+            top: 12px;
+          }
+          .add-wrapper.create-camp-ad-wrapr {
+            position: absolute;
+            right: 0;
+            bottom: 55px;
+            width: 30px;
+            height: 20px;
+            background-color: transparent;
+            img {
+              top: 33px;
+            }
+            input[type="file"] {
+              top: 33px;
+              left: 0;
+            }
+          }
+        }
+        .upload-form {
+          padding: 20px 190px;
+          @media only screen and (max-width: 991px) {
+            padding: 20px 40px;
+          }
+          .user-title {
+            .modal-title {
+              font-size: 24px;
+            }
+          }
+          .form-group {
+            label {
+              text-decoration: underline;
+              font-size: 18px;
+              font-family: "Helvetica";
+              font-weight: normal;
+            }
+            p {
+              margin: 5px 0 15px;
+              display: inline-block;
+              width: 100%;
+            }
+            .options {
+              label {
+                text-decoration: none;
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+      .add-wrapper.create-camp-ad-wrapr {
+      }
+    }
+  }
 }

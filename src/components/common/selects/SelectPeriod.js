@@ -9,7 +9,7 @@ class SelectPeriod extends Component {
     super(props);
     this.state = {
       periodList: []
-    }
+    };
   }
 
   render() {
@@ -42,16 +42,21 @@ class SelectPeriod extends Component {
         });
       }
     });
-  }
+  };
 
   componentWillUnmount = () => {
     this.setState({ periodList: [] });
-  }
+  };
 
-  handlePeriod = (event) => {
-    this.props.handleSelect("period", event.target.value);
-  }
-
+  handlePeriod = event => {
+    const { periodList } = this.props;
+    const name = periodList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: name.length !== 0 ? name[0].voucherPeriod : ""
+    };
+    this.props.handleSelect("period", data);
+  };
 }
 
 const mapStateToProps = state => ({
@@ -61,7 +66,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getBackofficeSelect
 };
-
 
 const propTypes = {
   value: PropTypes.any,

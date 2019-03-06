@@ -9,7 +9,7 @@ class SelectType extends Component {
     super(props);
     this.state = {
       typeList: []
-    }
+    };
   }
 
   render() {
@@ -42,17 +42,21 @@ class SelectType extends Component {
         });
       }
     });
-  }
+  };
 
   componentWillUnmount = () => {
     this.setState({ typeList: [] });
-  }
+  };
 
-
-  handleType = (event) => {
-    this.props.handleSelect("type", event.target.value);
-  }
-
+  handleType = event => {
+    const { typeList } = this.props;
+    const name = typeList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: name.length !== 0 ? name[0].voucherType : ""
+    };
+    this.props.handleSelect("type", data);
+  };
 }
 
 const mapStateToProps = state => ({
@@ -62,7 +66,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = {
   getBackofficeSelect
 };
-
 
 const propTypes = {
   value: PropTypes.any,

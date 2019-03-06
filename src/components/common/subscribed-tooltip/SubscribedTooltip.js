@@ -9,6 +9,7 @@ import {
   getDashboard,
   getUser
 } from "../../../actions";
+import { Button } from "../../ui-kit";
 
 class SubscribedTooltip extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class SubscribedTooltip extends Component {
 
   render() {
     return (
-      <div id="">
+      <div id="" className="subscriber-tooltip">
         <h4 className="normal_title">
           {Translations.top_bar_info_modal.modal_title}
         </h4>
@@ -48,29 +49,27 @@ class SubscribedTooltip extends Component {
                       <div className="subscribe-btn">
                         {user.isSubscribe ? (
                           <div className="community-subscribe">
-                            <button
+                            <Button
                               className="filled_button"
                               id={user.id}
                               onClick={this.handleSubscribed}
-                            >
-                              {
+                              text={
                                 Translations.profile_community_right_sidebar
                                   .Subscribed
                               }
-                            </button>
+                            />
                           </div>
                         ) : (
                           <div className="community-subscribe">
-                            <button
+                            <Button
                               className="blue_button"
                               id={user.id}
                               onClick={this.handleSubscribed}
-                            >
-                              {
+                              text={
                                 Translations.profile_community_right_sidebar
                                   .Subscribe
                               }
-                            </button>
+                            />
                           </div>
                         )}
                       </div>
@@ -83,7 +82,7 @@ class SubscribedTooltip extends Component {
             <div className="notification-with-subscribe notification-wrapper">
               <div className="user-info">
                 <div className="subtitle">
-                  {Translations.top_bar_info_modal.no_data}123
+                  {Translations.top_bar_info_modal.no_data}
                 </div>
               </div>
             </div>
@@ -92,7 +91,7 @@ class SubscribedTooltip extends Component {
       </div>
     );
   }
-  
+
   componentDidMount = () => {
     this.getTooltipUserList(this.props.userId);
   };
@@ -112,7 +111,7 @@ class SubscribedTooltip extends Component {
     }
   }
 
-  handleKeyPress = () => { };
+  handleKeyPress = () => {};
 
   // Tooltip List
   getTooltipUserList = userId => {
@@ -120,6 +119,7 @@ class SubscribedTooltip extends Component {
       const userRequestData = { id: userId, type: "followers" };
       this.props.getFollowUserList("subscribed", userRequestData).then(() => {
         // Success
+        //console.log("subscribed", this.props.subscribeData);
       });
     }
   };

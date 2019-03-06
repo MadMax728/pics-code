@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
 import { Translations } from "../../../lib/translations";
-import { BaseHeader, BaseFooter, Cookies, DownloadStore } from "../common";
-import { Text, RadioButton } from "../../ui-kit/CommonUIComponents";
+import { BaseHeader, BaseFooter, DownloadStore } from "../common";
+import { RadioButton, Button, Input, ErrorSpan } from "../../ui-kit";
 import PropTypes from "prop-types";
-import { submitRegister } from "../../../actions/register";
+import {
+  submitRegister,
+  submitCompanyRegister
+} from "../../../actions/register";
 import { Auth } from "../../../auth";
 import { connect } from "react-redux";
 
@@ -15,6 +18,7 @@ class Register extends Component {
     super(props);
 
     this.state = {
+      isUser: true,
       form: {
         gender: "male",
         username: "",
@@ -29,7 +33,7 @@ class Register extends Component {
   }
 
   render() {
-    const { form } = this.state;
+    const { form, isUser, error } = this.state;
 
     return (
       <div className="login-process">
@@ -41,10 +45,8 @@ class Register extends Component {
               <p>{Translations.login.subheader}</p>
               <form onSubmit={this.handleSubmit}>
                 <div className="form-group">
-                  <span className="error-msg highlight">
-                    {this.state.error.servererror}
-                  </span>
-                  <Text
+                  <ErrorSpan value={error.servererror} />
+                  <Input
                     type="text"
                     className="form-control"
                     id="username"
@@ -56,15 +58,13 @@ class Register extends Component {
                   {form.username.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <span className="error-msg highlight">
-                    {this.state.error.username}
-                  </span>
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan value={error.username} />
                 </div>
 
                 <div className="form-group">
-                  <Text
+                  <Input
                     type="email"
                     className="form-control"
                     id="email"
@@ -76,15 +76,13 @@ class Register extends Component {
                   {form.email.length === 0 || form.emailValid ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <span className="error-msg highlight">
-                    {this.state.error.email}
-                  </span>
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan value={error.email} />
                 </div>
 
                 <div className="form-group">
-                  <Text
+                  <Input
                     type="password"
                     className="form-control"
                     id="password"
@@ -97,14 +95,12 @@ class Register extends Component {
                   {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <span className="error-msg highlight">
-                    {this.state.error.password}
-                  </span>
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan value={error.password} />
                 </div>
                 <div className="form-group">
-                  <Text
+                  <Input
                     type="password"
                     className="form-control"
                     id="repeat-password"
@@ -115,48 +111,55 @@ class Register extends Component {
                     onChange={this.handleChangeField}
                   />
                   {form.repeat_password.length === 0 ||
-                    form.repeat_password !== form.password ? (
-                      <img src={images.error} alt={"error"} />
-                    ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <span className="error-msg highlight">
-                    {this.state.error.repeat_password}
-                  </span>
+                  form.repeat_password !== form.password ? (
+                    <img src={images.error} alt={"error"} />
+                  ) : (
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan value={error.repeat_password} />
                 </div>
+                {isUser ? (
+                  <div className="form-group">
+                    <ul className="options">
+                      <li>
+                        <RadioButton
+                          type="radio"
+                          id="male"
+                          name="gender"
+                          value="male"
+                          defaultChecked={form.gender === "male"}
+                          className="black_button"
+                          onChange={this.handleChangeField}
+                        />
+                        <label htmlFor="male">
+                          {Translations.register.male}
+                        </label>
+                      </li>
+                      <li>
+                        <RadioButton
+                          type="radio"
+                          id="female"
+                          value="female"
+                          name="gender"
+                          defaultChecked={form.gender === "female"}
+                          onChange={this.handleChangeField}
+                        />
+                        <label htmlFor="female">
+                          {Translations.register.female}
+                        </label>
+                      </li>
+                    </ul>
+                  </div>
+                ) : (
+                  ""
+                )}
+
                 <div className="form-group">
-                  <ul className="options">
-                    <li>
-                      <RadioButton
-                        type="radio"
-                        id="male"
-                        name="gender"
-                        value="male"
-                        defaultChecked={form.gender === "male"}
-                        className="black_button"
-                        onChange={this.handleChangeField}
-                      />
-                      <label htmlFor="male">{Translations.register.male}</label>
-                    </li>
-                    <li>
-                      <RadioButton
-                        type="radio"
-                        id="female"
-                        value="female"
-                        name="gender"
-                        defaultChecked={form.gender === "female"}
-                        onChange={this.handleChangeField}
-                      />
-                      <label htmlFor="female">
-                        {Translations.register.female}
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-                <div className="form-group">
-                  <button className="blue_button" type="submit">
-                    {Translations.register.register}
-                  </button>
+                  <Button
+                    className="blue_button"
+                    type="submit"
+                    text={Translations.register.register}
+                  />
                 </div>
               </form>
               <div>
@@ -181,16 +184,25 @@ class Register extends Component {
                   </Link>
                   .
                 </div>
+
                 <div className="free-register">
                   {Translations.register.free}{" "}
-                  <b>{Translations.register.company}</b>
+                  <b
+                    onClick={this.handleUserLogin}
+                    onKeyPress={this.onKeyHandle}
+                    role="button"
+                    tabIndex="0"
+                  >
+                    {isUser
+                      ? Translations.register.company
+                      : Translations.register.user}
+                  </b>
                 </div>
               </div>
               <DownloadStore />
             </div>
           </div>
         </section>
-        <Cookies />
         <BaseFooter className={"custom-container"} />
       </div>
     );
@@ -201,6 +213,10 @@ class Register extends Component {
     Auth.logoutUser();
   };
 
+  handleUserLogin = () => {
+    this.setState({ isUser: !this.state.isUser });
+  };
+
   formValid = () => {
     const errors = {};
     let isFormValid = true;
@@ -208,32 +224,32 @@ class Register extends Component {
     const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     if (form.username.length === 0) {
-      errors.username = "Username is required.";
+      errors.username = Translations.register.username_required;
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors.password = "Password is required.";
+      errors.password = Translations.register.password_required;
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors.email = "Email is required.";
+      errors.email = Translations.register.email_required;
       isFormValid = false;
     }
     const isValidemail = emailRegex.test(form.email);
     if (!isValidemail) {
       isFormValid = false;
-      errors.email = "Email ID should be valid.";
+      errors.email = Translations.register.email_valid;
     }
     if (form.password.length === 0) {
-      errors.repeat_password = "Password is required.";
+      errors.repeat_password = Translations.register.password_required;
       isFormValid = false;
     }
     if (form.password.length === 0) {
-      errors.password = "Password is required.";
+      errors.password = Translations.register.password_required;
       isFormValid = false;
     }
     if (form.password !== form.repeat_password) {
-      errors.repeat_password = "Password is not matching.";
+      errors.repeat_password = Translations.register.password_match;
       isFormValid = false;
     }
 
@@ -252,7 +268,6 @@ class Register extends Component {
     const { form } = this.state;
     form[event.values.name] = event.values.val;
     this.setState({ form });
-    console.log(this.state.form);
     this.formValid();
   };
 
@@ -270,12 +285,15 @@ class Register extends Component {
     const data = {
       username,
       email: form.email,
-      name: "abc",
-      gender: form.gender,
       password: form.password,
-      confirmPassword: form.repeat_password
+      confirm_password: form.repeat_password
     };
-
+    if (this.state.isUser) {
+      data.gender = form.gender;
+      data.userType = "creator";
+    } else {
+      data.userType = "company";
+    }
     this.props.submitRegister(data).then(() => {
       Auth.logoutUser();
       const errors = {};
@@ -283,19 +301,19 @@ class Register extends Component {
         this.props.registerData.error &&
         this.props.registerData.error.status === 400
       ) {
-        errors.servererror = "Something went wrong";
+        errors.servererror = Translations.comman_error.server_error;
         this.setState({ error: errors });
       } else {
         this.props.history.push(routes.ROOT_ROUTE);
       }
     });
   };
-
 }
 
 Register.propTypes = {
   history: PropTypes.any,
   submitRegister: PropTypes.func.isRequired,
+  submitCompanyRegister: PropTypes.func.isRequired,
   registerData: PropTypes.object
 };
 
@@ -304,7 +322,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  submitRegister
+  submitRegister,
+  submitCompanyRegister
 };
 
 export default connect(

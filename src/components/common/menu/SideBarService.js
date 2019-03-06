@@ -4,18 +4,18 @@ import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
 
 const Links = [
-  {
-    to: routes.SERVICE_SUPPORT_ROUTE,
-    className: "secondary_title",
-    activeClassName: "active",
-    text: Translations.service_menu.support
-  },
-  {
-    to: routes.SERVICE_VERIFICATION_ROUTE,
-    className: "secondary_title",
-    activeClassName: "active",
-    text: Translations.service_menu.verification
-  },
+  // {
+  //   to: routes.SERVICE_SUPPORT_ROUTE,
+  //   className: "secondary_title",
+  //   activeClassName: "active",
+  //   text: Translations.service_menu.support
+  // },
+  // {
+  //   to: routes.SERVICE_VERIFICATION_ROUTE,
+  //   className: "secondary_title",
+  //   activeClassName: "active",
+  //   text: Translations.service_menu.verification
+  // },
   {
     to: routes.SERVICE_FEEDBACK_ROUTE,
     className: "secondary_title",
@@ -26,7 +26,7 @@ const Links = [
     to: routes.SERVICE_REPORTED_CONTENT_ROUTE,
     className: "secondary_title",
     activeClassName: "active",
-    text: Translations.service_menu.reported_content
+    text: Translations.service_menu.report_problem
   },
   {
     to: routes.SERVICE_DELETE_ACCOUNT_ROUTE,
@@ -48,7 +48,7 @@ const SideBarService = () => {
       <div className="gap-10" />
       <LeftSidebarNav
         links={Links}
-        header={`Service`}
+        header={Translations.service_menu.menu_title}
         ulClassName={"nav navbar-nav pull-right settings-menu"}
       />
     </div>

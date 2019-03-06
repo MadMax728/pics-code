@@ -19,6 +19,7 @@ const initialState = {
   },
   registerData: {
     registeredUser: null,
+    registeredCompanyUser: null,
     isLoading: false,
     error: null
   },
@@ -41,10 +42,11 @@ const initialState = {
   campaignData: {
     campaigns: null,
     campaign: null,
-    favouriteCampaign: null,
+    favouriteCampaign: [],
     isLoading: false,
     error: false,
-    isAddParticipant: null
+    isAddParticipant: null,
+    isRemoveParticipantData: null
   },
   adData: {
     ads: null,
@@ -107,6 +109,11 @@ const initialState = {
     isLoading: false,
     error: false
   },
+  notificationData: {
+    notification: null,
+    isLoading: false,
+    error: false
+  },
   commentData: {
     comments: {},
     comment: null,
@@ -140,6 +147,7 @@ const initialState = {
     types: null,
     numbers: null,
     languages: null,
+    age: null,
     isLoading: false,
     error: false
   },
@@ -158,6 +166,7 @@ const initialState = {
   subscribeData: {
     subscriber: [],
     subscribed: [],
+    subscribeData: [],
     isLoading: false,
     error: false
   },
@@ -201,9 +210,9 @@ const initialState = {
     error: false
   },
   reportedContentData: {
-    Image: null,
-    Videos: null,
-    Campaign: null,
+    image: null,
+    videos: null,
+    campaign: null,
     Pics: null,
     Ads: null,
     Comments: null,
@@ -230,7 +239,15 @@ const initialState = {
     error: false
   },
   searchData: {
-    searchKeyword: null,
+    searchKeyword: '',
+    isLoading: false,
+    error: false,
+    users: [],
+    page: 1,
+    pages: 1
+  },
+  communityData: {
+    userCommunity: [],
     isLoading: false,
     error: false
   },
@@ -249,8 +266,19 @@ const initialState = {
   messagesData: {
     messages: [],
     lastEvaluatedKeys: undefined,
+    fromTime: new Date().toISOString(),
+    toTime: new Date().toISOString(),
     isLoading: false,
     error: false
+  },
+  lastEvaluatedKey: {
+    keys: null
+  },
+  exploreData: {
+    items: [],
+    pagination: {},
+    isLoading: false,
+    error: null
   }
 };
 

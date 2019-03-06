@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Tags from "./Tags";
-import {
-  getInquiryTag,
-  addInquiryTag
-} from "../../../actions";
+import { getInquiryTag, addInquiryTag } from "../../../actions";
 import { connect } from "react-redux";
 
 class InquiryTags extends Component {
@@ -12,7 +9,7 @@ class InquiryTags extends Component {
     super(props);
     this.state = {
       suggestionsInquiryTagList: []
-    }
+    };
   }
 
   render() {
@@ -20,28 +17,28 @@ class InquiryTags extends Component {
     const { value } = this.props;
 
     return (
-        <Tags
-          value={value}
-          suggestion={suggestionsInquiryTagList}
-          handleAddition={this.handleInquiryTagChange}
-          handleDelete={this.handleInquiryTagDelete}
-        />
+      <Tags
+        value={value}
+        suggestion={suggestionsInquiryTagList}
+        handleAddition={this.handleInquiryTagChange}
+        handleDelete={this.handleInquiryTagDelete}
+      />
     );
   }
-  
+
   componentDidMount = () => {
     this.props.getInquiryTag().then(() => {
-      if(this.props.inquiryTags) {
+      if (this.props.inquiryTags) {
         this.setState({
           suggestionsInquiryTagList: this.props.inquiryTags
         });
       }
     });
-  }
-  
+  };
+
   componentWillUnmount = () => {
-    this.setState({suggestionsInquiryTagList: []})
-  }
+    this.setState({ suggestionsInquiryTagList: [] });
+  };
 
   handleInquiryTagDelete = id => {
     this.props.handleInquiryTagDelete(id);
@@ -56,12 +53,19 @@ class InquiryTags extends Component {
     if (indexOf === -1) {
       const tagName = {
         inquiryTagName: tag.text
-      }
-      this.props.addInquiryTag(tagName).then(()=> {
-        if(this.props.tags && this.props.tags.addedInquiryTags && this.props.tags.addedInquiryTags) {
-          this.props.handleInquiryTagChange(this.props.tags.addedInquiryTags.data.id, this.props.tags.addedInquiryTags.data)
+      };
+      this.props.addInquiryTag(tagName).then(() => {
+        if (
+          this.props.tags &&
+          this.props.tags.addedInquiryTags &&
+          this.props.tags.addedInquiryTags
+        ) {
+          this.props.handleInquiryTagChange(
+            this.props.tags.addedInquiryTags.data.id,
+            this.props.tags.addedInquiryTags.data
+          );
         }
-      })
+      });
     } else {
       this.props.handleInquiryTagChange(tag.id, tag);
     }
@@ -70,14 +74,13 @@ class InquiryTags extends Component {
 
 const mapStateToProps = state => ({
   inquiryTags: state.tags.inquiryTags,
-  tags: state.tags,
+  tags: state.tags
 });
 
 const mapDispatchToProps = {
   getInquiryTag,
-  addInquiryTag,
+  addInquiryTag
 };
-
 
 const propTypes = {
   value: PropTypes.any,
@@ -86,11 +89,10 @@ const propTypes = {
   getInquiryTag: PropTypes.func.isRequired,
   addInquiryTag: PropTypes.func.isRequired,
   tags: PropTypes.any,
-  inquiryTags: PropTypes.any,
+  inquiryTags: PropTypes.any
 };
 
 InquiryTags.propTypes = propTypes;
-
 
 export default connect(
   mapStateToProps,

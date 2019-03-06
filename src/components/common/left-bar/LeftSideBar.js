@@ -6,7 +6,11 @@ import {
   CampaignCompanyFilter,
   CampaignCreatorFilter,
   DashboardFilter,
-  ParticipantsFilter
+  ParticipantsFilter,
+  DashboardExploreFilter,
+  DashboardUserFilter,
+  DashboardPicsFilter,
+  DashboardParticipantsFilter
 } from "../filters";
 
 import PropTypes from "prop-types";
@@ -21,7 +25,6 @@ import {
 } from "../menu";
 
 class LeftSideBar extends Component {
-
   render() {
     return (
       <div>
@@ -51,6 +54,26 @@ class LeftSideBar extends Component {
           exact
           component={this.handleDashboardFilter}
         />
+        <Route
+          path={routes.EXPLORE_ROUTE}
+          exact
+          component={this.handleExploreFilter}
+        />
+        <Route
+          path={routes.PARTICIPANTS_ROUTE}
+          exact
+          component={this.handleDashboardParticipantsFilter}
+        />
+        <Route
+          path={routes.USERS_ROUTE}
+          exact
+          component={this.handleUserFilter}
+        />
+        <Route
+          path={routes.PICS_ROUTE}
+          exact
+          component={this.handlePicsFilter}
+        />
 
         <Route
           path={`/campaign/company`}
@@ -70,25 +93,13 @@ class LeftSideBar extends Component {
         <Route
           path={routes.CAMPAIGN_INFORMATION_ROUTE}
           exact
-          component={SideBarCampaignMenuOnlyImage}
+          component={this.handleSideBarCampaignMenu}
         />
 
         <Route
           path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
           exact
-          component={SideBarCampaignMenuOnlyImage}
-        />
-
-        <Route
-          path={routes.CAMPAIGN_INFORMATION_ROUTE}
-          exact
-          component={SideBarCampaignMenu}
-        />
-
-        <Route
-          path={routes.CAMPAIGN_PARTICIPANT_ROUTE}
-          exact
-          component={SideBarCampaignMenu}
+          component={this.handleSideBarCampaignMenu}
         />
 
         <Route
@@ -141,11 +152,11 @@ class LeftSideBar extends Component {
           exact
           component={SideBarSetting}
         />
-        <Route
+        {/* <Route
           path={routes.SETTINGS_BUSSINESS_PROFILE_ROUTE}
           exact
           component={SideBarSetting}
-        />
+        /> */}
         <Route
           path={routes.SETTINGS_EDIT_PROFILE_ROUTE}
           exact
@@ -174,12 +185,6 @@ class LeftSideBar extends Component {
 
         <Route
           path={routes.SETTINGS_CAMPAIGN_STATISTICS_ROUTE}
-          exact
-          component={SideBarSetting}
-        />
-
-        <Route
-          path={routes.SETTINGS_ADS_STATISTICS_ROUTE}
           exact
           component={SideBarSetting}
         />
@@ -248,6 +253,41 @@ class LeftSideBar extends Component {
           render={this.renderInformationService}
         />
 
+        <Route
+          path={routes.INFORMATION_COOKIE_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_COMMUNITY_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_BRANDED_CONTENT_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_BUSINESS_TERMS_CONDITIONS_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_PAYMENT_GUIDELINES_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
+
+        <Route
+          path={routes.INFORMATION_COMMUNITY_PAYMENT_GUIDELINE_ROUTE}
+          exact
+          render={this.renderInformationService}
+        />
         {/* letf side bar information */}
 
         {/* letf side bar service */}
@@ -288,8 +328,30 @@ class LeftSideBar extends Component {
     );
   }
 
+  handleSideBarCampaignMenu = (match) => {
+    return <SideBarCampaignMenu match={match.match} />;
+  };
+
   handleDashboardFilter = () => {
     return <DashboardFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleExploreFilter = () => {
+    return <DashboardExploreFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handlePicsFilter = () => {
+    return <DashboardPicsFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleUserFilter = () => {
+    return <DashboardUserFilter handleApplyClick={this.props.getFilter} />;
+  };
+
+  handleDashboardParticipantsFilter = () => {
+    return (
+      <DashboardParticipantsFilter handleApplyClick={this.props.getFilter} />
+    );
   };
 
   handleCampaignCompanyFilter = () => {
@@ -312,7 +374,6 @@ class LeftSideBar extends Component {
       </div>
     );
   };
-
 }
 
 LeftSideBar.propTypes = {

@@ -14,6 +14,7 @@ class EditProfileModal extends Component {
     super(props, context);
     this.imageCropper = React.createRef();
     this.state = {
+      isLoading: false,
       image: null,
       actual_img: null,
       scale: 1
@@ -22,15 +23,16 @@ class EditProfileModal extends Component {
 
   render() {
     const { handleModalInfoHide, modalInfoShow } = this.props;
-    const { image } = this.state;
+    const { image, isLoading } = this.state;
     return (
       <CustomBootstrapModal
-        modalClassName={"modal fade create-campaign-modal"}
+        modalClassName={"modal fade create-campaign-modal edit-profile-modal"}
         header
         modalHeaderContent={
           <EditProfilePicHeader
             handleModalHide={this.props.handleModalInfoHide}
             handleContinue={this.handleContinue}
+            isLoading={isLoading}
           />
         }
         footer={false}
@@ -44,6 +46,7 @@ class EditProfileModal extends Component {
             ref={this.imageCropper}
             handleActualImg={this.handleActualImg}
             handleScale={this.handleScale}
+            handleUpload={this.handleUpload}
           />
         }
       />
@@ -67,57 +70,66 @@ class EditProfileModal extends Component {
     this.props.handleEditImage(image);
   };
 
-  handleContinue = () => {
-    const Data = new FormData();
-    Data.append('image',this.state.actual_img);
-    Data.append('typeImage','Original');
-    Data.append('typeOfContent','profile');
-    Data.append('coordinate', '50');
-    this.props.uploadProfilePicture(Data)
-      .then(()=>{
-        if (this.props.userDataByUsername.imageData)
-        {
-          // convert Base64 data
-          // https://ourcodeworld.com/articles/read/322/how-to-convert-a-base64-image-into-a-image-file-and-upload-it-with-an-asynchronous-form-using-jquery
-
-          const ImageURL = this.state.image;
-          // Split the base64 string in data and contentType
-          const block = ImageURL.split(";");
-          // Get the content type of the image
-          const contentType = block[0].split(":")[1];// In this case "image/gif"
-          // get the real base64 content of the file
-          const realData = block[1].split(",")[1];// In this case "R0lGODlhPQBEAPeoAJosM...."
-
-          // Convert it to a blob to upload
-          const blob = b64toBlob(realData, contentType);
-
-          const CropedData = new FormData();
-          if (this.state.scale === 1){
-            CropedData.append('image',this.state.actual_img);
-          }
-          else {
-            CropedData.append('image',blob);
-          }
-          CropedData.append('typeImage','Crop');
-          CropedData.append('typeOfContent','profile');
-          CropedData.append('coordinate', '50');
-          this.props.uploadProfilePicture(CropedData)
-            .then(()=>{
-              if (this.props.userDataByUsername.imageData)
-              {
-                const { imageData } = this.props.userDataByUsername;
-                if (imageData && imageData.data && imageData.data.id) {
-                this.props.handleProfile(this.props.userDataByUsername.imageData.data.id);
-                this.imageCropper.current.handleSave();
-                this.props.handleModalInfoHide();
-                }  
-              }
-            })
-        }
-
-      })
+  handleUpload = e => {
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    if (file.type.includes("image")) {
+      const currentThis = this;
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        currentThis.props.handleEditImage(file);
+      };
+    }
   };
 
+  handleContinue = () => {
+    const Data = new FormData();
+    Data.append("image", this.state.actual_img);
+    Data.append("typeImage", "Original");
+    Data.append("typeOfContent", "profile");
+    Data.append("coordinate", "50");
+    this.setState({ isLoading: true });
+    this.props.uploadProfilePicture(Data).then(() => {
+      if (this.props.userDataByUsername.imageData) {
+        // convert Base64 data
+        // https://ourcodeworld.com/articles/read/322/how-to-convert-a-base64-image-into-a-image-file-and-upload-it-with-an-asynchronous-form-using-jquery
+
+        const ImageURL = this.state.image;
+        // Split the base64 string in data and contentType
+        const block = ImageURL.split(";");
+        // Get the content type of the image
+        const contentType = block[0].split(":")[1]; // In this case "image/gif"
+        // get the real base64 content of the file
+        const realData = block[1].split(",")[1]; // In this case "R0lGODlhPQBEAPeoAJosM...."
+
+        // Convert it to a blob to upload
+        const blob = b64toBlob(realData, contentType);
+
+        const CropedData = new FormData();
+        if (this.state.scale === 1) {
+          CropedData.append("image", this.state.actual_img);
+        } else {
+          CropedData.append("image", blob);
+        }
+        CropedData.append("typeImage", "Crop");
+        CropedData.append("typeOfContent", "profile");
+        CropedData.append("coordinate", "50");
+        this.props.uploadProfilePicture(CropedData, "profile").then(() => {
+          if (this.props.userDataByUsername.imageData) {
+            const { imageData } = this.props.userDataByUsername;
+            if (imageData && imageData.data && imageData.data.id) {
+              this.props.handleProfile(
+                this.props.userDataByUsername.imageData.data.id
+              );
+              this.imageCropper.current.handleSave();
+              this.props.handleModalInfoHide();
+              this.setState({ isLoading: false });
+            }
+          }
+        });
+      }
+    });
+  };
 }
 
 const mapStateToProps = state => ({
@@ -135,7 +147,7 @@ EditProfileModal.propTypes = {
   image: PropTypes.any,
   uploadProfilePicture: PropTypes.any,
   handleProfile: PropTypes.func,
-  userDataByUsername: PropTypes.any,
+  userDataByUsername: PropTypes.any
 };
 
 export default connect(

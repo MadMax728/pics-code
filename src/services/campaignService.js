@@ -1,5 +1,19 @@
 import { api } from "../api";
-import { getCompanyCampaignsEndPoint, getCreatorCampaignsEndPoint, getNewsFeedCampaignsEndPoint, getUserProfileCampaignsEndPoint, getSavedCampaignsEndPoint, getSettingsCampaignsEndPoint, getCampaignTypeEndPoint, getCampaignDetailsEndPoint, getFavouriteCampaignsEndPoint, createCampaignEndPoint, addParticipantsEndPoint } from "../lib/constants/endPoints";
+import {
+  getCompanyCampaignsEndPoint,
+  getCreatorCampaignsEndPoint,
+  getNewsFeedCampaignsEndPoint,
+  getUserProfileCampaignsEndPoint,
+  getSavedCampaignsEndPoint,
+  getSettingsCampaignsEndPoint,
+  getCampaignTypeEndPoint,
+  getCampaignDetailsEndPoint,
+  getFavouriteCampaignsEndPoint,
+  createCampaignEndPoint,
+  addParticipantsEndPoint,
+  editCampaignEndPoint,
+  removeParticipantsEndPoint
+} from "../lib/constants/endPoints";
 
 // Developers can override this with an env.local file
 const baseUrl = process.env.REACT_APP_API_BASEURL;
@@ -39,16 +53,24 @@ export const getCampaignType = (payload, header = {}) =>
 
 // Campaign Informatin API
 export const getCampaignDetails = (payload, header = {}) =>
-  api(baseUrl, header).get(getCampaignDetailsEndPoint + payload.id);
+  api(baseUrl, header).get(getCampaignDetailsEndPoint + payload);
 
 // Favourite Campaigns API
 export const getFavouriteCampaigns = (payload, header = {}) =>
-  api(baseUrl, header).get(getFavouriteCampaignsEndPoint + payload);
+  api(baseUrl, header).get(getFavouriteCampaignsEndPoint);
 
 // Create Campaign
 export const createCampaign = (payload, header = {}) =>
   api(baseUrl, header).post(createCampaignEndPoint, payload);
 
+// Update Campaign
+export const updateCampaign = (payload, header = {}) =>
+  api(baseUrl, header).put(`${editCampaignEndPoint}${payload.id}`, payload);
+
 // Add Participant
 export const addParticipants = (payload, header = {}) =>
   api(baseUrl, header).post(addParticipantsEndPoint, payload);
+
+// Remove Participant
+export const removeParticipants = (payload, header = {}) =>
+  api(baseUrl, header).delete(removeParticipantsEndPoint + payload);

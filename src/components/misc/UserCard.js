@@ -19,21 +19,28 @@ class UserCard extends Component {
 
     this.state = {
       item: this.props.item,
-      index: this.props.index
+      index: this.props.index,
+      subscribeId: this.props.item.subscribeId
     };
   }
 
   render() {
-    const { item, index } = this.state;
+    const { item, index, subscribeId } = this.state;
     const { isReport, isBackOffice } = this.props;
+    const requestLoading = this.props.usersData.isLoading;
     return (
       <UserCardBody
         user={item}
         index={index}
-        handleSubscribed={this.handleSubscribed}
+        handleSubscribe={this.handleSubscribe}
+        handleUnSubscribe={this.handleUnSubscribe}
         isReport={isReport}
-        isBackOffice={isBackOffice} /* eslint-disable */
-        renderReportTips={() => this.renderReportTips(item.id)}
+        isBackOffice={isBackOffice}
+        subscribeId={subscribeId}
+        /* eslint-disable */ renderReportTips={() =>
+          this.renderReportTips(item.id)
+        }
+        isLoading={requestLoading}
       />
     );
   }
@@ -42,39 +49,24 @@ class UserCard extends Component {
     window.scrollTo(0, 0);
   };
 
-  handleSubscribed = e => {
-    const data = { username: e.target.id };
-    this.props.getUser(data).then(() => {
-      if (this.props.userDataByUsername.user.data) {
-        // success
-        const selectedUserList = this.props.userDataByUsername.user.data;
-        if (!selectedUserList.isSubscribe) {
-          const requestData = { followers: selectedUserList.id };
-          this.props.sendRequest(requestData).then(() => {
-            if (
-              this.props.usersData.error &&
-              this.props.usersData.error.status === 400
-            ) {
-              // Error
-            } else if (this.props.usersData.isRequestSend) {
-              // Success
-              this.props.getDashboard("users");
-            }
-          });
-        } else {
-          const subscribedId = selectedUserList.subscribeId;
-          this.props.getUnsubscribe(subscribedId).then(() => {
-            if (
-              this.props.usersData.error &&
-              this.props.usersData.error.status === 400
-            ) {
-              // Error
-            } else if (this.props.usersData.isUnsubscribed) {
-              // Success
-              this.props.getDashboard("users");
-            }
-          });
-        }
+  handleSubscribe = e => {
+    const requestData = { followers: e.target.id };
+    this.props.sendRequest(requestData).then(() => {
+      if (this.props.usersData && this.props.usersData.isRequestSendData) {
+        this.setState({
+          subscribeId: this.props.usersData.isRequestSendData._id
+        });
+      }
+    });
+  };
+
+  handleUnSubscribe = e => {
+    const subscribedId = e.target.id;
+    this.props.getUnsubscribe(subscribedId).then(() => {
+      if (this.props.usersData && this.props.usersData.isUnsubscribedData) {
+        this.setState({
+          subscribeId: ""
+        });
       }
     });
   };
@@ -157,14 +149,16 @@ class UserCard extends Component {
 
 const mapStateToProps = state => ({
   usersData: state.usersData,
-  userDataByUsername: state.userDataByUsername
+  userDataByUsername: state.userDataByUsername,
+  usersList: state.dashboardData.users
 });
 
 const mapDispatchToProps = {
   sendRequest,
   getUnsubscribe,
   getDashboard,
-  getUser
+  getUser,
+  getDashboard
 };
 
 UserCard.propTypes = {
@@ -179,7 +173,10 @@ UserCard.propTypes = {
   userDataByUsername: PropTypes.any,
   isBackOffice: PropTypes.bool,
   handleModalInfoDetailsCallbackShow: PropTypes.func,
-  handleRemove: PropTypes.func
+  handleRemove: PropTypes.func,
+  isLoading: PropTypes.any,
+  usersList: PropTypes.any,
+  getDashboard: PropTypes.func
 };
 
 export default connect(

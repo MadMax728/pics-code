@@ -1,7 +1,9 @@
 import React from "react";
 import { LeftSidebarNav } from "../../ui-kit";
 import * as routes from "../../../lib/constants/routes";
+import * as enumerations from "../../../lib/constants/enumerations";
 import { Translations } from "../../../lib/translations";
+import { Auth } from "../../../auth";
 
 const Links = [
   {
@@ -22,18 +24,18 @@ const Links = [
     activeClassName: "active",
     text: Translations.back_office_menu.add_admin
   },
-  {
-    to: routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE,
-    className: "secondary_title",
-    activeClassName: "active",
-    text: Translations.back_office_menu.add_verification
-  },
-  {
+  // {
+  //   to: routes.BACK_OFFICE_ADD_VERIFICATION_ROUTE,
+  //   className: "secondary_title",
+  //   activeClassName: "active",
+  //   text: Translations.back_office_menu.add_verification
+  // },
+  /*{
     to: routes.BACK_OFFICE_ADD_VOUCHER_ROUTE,
     className: "secondary_title",
     activeClassName: "active",
     text: Translations.back_office_menu.add_voucher
-  },
+  },*/
   {
     to: routes.BACK_OFFICE_DATA_DOWNLOAD_ROUTE,
     className: "secondary_title",

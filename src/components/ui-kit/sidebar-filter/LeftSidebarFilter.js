@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { RadioBtn, Select, Text } from "../CommonUIComponents";
+import { Link } from "react-router-dom";
+
+import { RadioBtn, Select, Input, Button } from "../common-ui-components";
 import { PlaceAutoCompleteLocation } from "../place-auto-complete-location";
 import { getCookie } from "../../../lib/utils/helpers";
 import {
@@ -11,9 +13,12 @@ import {
   InquiryTags,
   SelectRadius,
   SelectTargetGroup,
-  RadioButtonLanguages
+  RadioButtonLanguages,
+  SelectAge
 } from "../../common";
 import { Translations } from "../../../lib/translations";
+import * as enumerations from "../../../lib/constants/enumerations";
+import * as routes from "../../../lib/constants/routes";
 
 class LeftSidebarFilter extends Component {
   constructor(props) {
@@ -29,7 +34,14 @@ class LeftSidebarFilter extends Component {
   }
 
   render() {
-    const { filters } = this.props;
+    const {
+      filters,
+      handleResetFilterClick,
+      handleApplyClick,
+      filterApply,
+      isNotFilter,
+      isRank
+    } = this.props;
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
     return (
       <div>
@@ -62,11 +74,13 @@ class LeftSidebarFilter extends Component {
               )}
               {filter.type === "select" && (
                 <Select
-                  foruse={filter.name}
+                  // foruse={filter.name}
                   name={filter.name}
                   options={filter.items}
-                  defaultValue={"select"}
+                  defaultValue={Translations.select}
+                  value={Translations.select}
                   onChange={this.handleOnChange}
+                  className="drop-down"
                 />
               )}
               {filter.type === "select-category" && (
@@ -115,7 +129,8 @@ class LeftSidebarFilter extends Component {
                 />
               )}
               {filter.type === "text" && (
-                <Text
+                <Input
+                  type="text"
                   foruse={filter.name}
                   name={filter.name}
                   onChange={this.handleOnChange}
@@ -141,17 +156,52 @@ class LeftSidebarFilter extends Component {
                   handleInquiryTagDelete={this.handleInquiryTagDelete}
                 />
               )}
+              {filter.type === "age-select" && (
+                <SelectAge
+                  foruse={filter.name}
+                  name={filter.name}
+                  options={filter.items}
+                  defaultValue={"select"}
+                  handleSelect={this.handleSelectList}
+                />
+              )}
             </div>
           );
         })}
+        {isNotFilter && (
+          <div className="filter-btn-wrapper">
+            {filterApply ? (
+              <Button
+                className="black_button"
+                onClick={handleResetFilterClick}
+                text={Translations.filter.reset_filter}
+              />
+            ) : (
+              <Button
+                className="black_button"
+                onClick={handleApplyClick}
+                text={Translations.filter.apply}
+              />
+            )}
+
+            {isRank && isRank === enumerations.adminRank.rank1 && (
+              <div className="filter-btn-wrapper">
+                <Link to={routes.BACK_OFFICE_ROOT_ROUTE}>
+                  <Button
+                    className="black_button"
+                    text={Translations.filter.back}
+                  />
+                </Link>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     );
   }
 
   handleOnChange = filter => {
-    console.log(filter);
     const filterData = this.state.filterData;
-    console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
       return f.name === filter.values.name;
     });
@@ -171,15 +221,14 @@ class LeftSidebarFilter extends Component {
 
   handleSelectList = (isFor, selected) => {
     const filterData = this.state.filterData;
-    console.log("filterData", filterData);
     const indexOf = filterData.findIndex(f => {
       return f.name === isFor;
     });
     if (indexOf === -1) {
-      filterData.push({ name: isFor, val: selected });
+      filterData.push({ name: isFor, val: selected.id });
     } else {
       filterData.splice(indexOf, 1);
-      filterData.push({ name: isFor, val: selected });
+      filterData.push({ name: isFor, val: selected.id });
     }
     this.setState({ filterData });
     this.props.onChange(filterData);
@@ -316,7 +365,6 @@ class LeftSidebarFilter extends Component {
     // calling function
     this.props.onChange(filterData);
   };
-
 }
 
 LeftSidebarFilter.propTypes = {
@@ -329,11 +377,16 @@ LeftSidebarFilter.propTypes = {
     }).isRequired
   ).isRequired,
   onChange: PropTypes.func,
+  handleResetFilterClick: PropTypes.func,
+  handleApplyClick: PropTypes.func,
+  filterApply: PropTypes.bool,
+  handleLanguageSwitch: PropTypes.func,
+  isNotFilter: PropTypes.bool,
+  isRank: PropTypes.string
   // handleSelect: PropTypes.func,
   // handleOfferTagChange: PropTypes.func,
   // handleInquiryTagChange: PropTypes.func,
   // handleOfferTagDelete: PropTypes.func,
-  handleLanguageSwitch: PropTypes.func
 };
 
 export default LeftSidebarFilter;

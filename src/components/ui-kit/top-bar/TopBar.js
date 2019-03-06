@@ -19,7 +19,8 @@ import {
   getDashboard
 } from "../../../actions";
 import { SubscribeList } from "../subscribe-list";
-import { ThreeDots, UserProfileImage } from "../../ui-kit";
+import { ThreeDots, UserProfileImage, Button } from "../../ui-kit";
+import { modalType } from "../../../lib/constants/enumerations";
 
 class TopBar extends Component {
   constructor(props) {
@@ -35,27 +36,30 @@ class TopBar extends Component {
     return (
       <div>
         <div className="user_info">
-          <UserProfileImage item={items.userProfile ? items.userProfile : images.crop_pic} 
-            userName={items.username ? items.username : "Username"}/>
+          <UserProfileImage
+            item={items.userProfile ? items.userProfile : images.crop_pic}
+            userName={items.username ? items.username : "Username"}
+          />
           <div className="user-details no-padding-right padding-l-10">
             <div className="bg-white padding-25 user_details">
               <div className="user_name">
                 {items.username ? items.username : "Username"}
               </div>
-              {items.length !== 0 && items.private && (
+              {/* is Private Profile */}
+              {/* {items.length !== 0 && items.private && (
                 <img src={images.tick} alt="tick" className="tick" />
               )}
               {items.length !== 0 && items.private && (
                 <span className="profile-type">
                   {Translations.top_bar.private_profile}
                 </span>
-              )}
+              )} */}
               {items.length !== 0 && items.settings && (
                 <div className="settings">
                   <div
                     className="share-wrapr"
                     onClick={handeleShare}
-                    onKeyDown={this.handleKeyDown}
+                    onKeyDown={handeleShare}
                     role="button"
                     tabIndex="0"
                   >
@@ -68,21 +72,35 @@ class TopBar extends Component {
               )}
               {items.length !== 0 && items.more && (
                 <div className="settings">
-                  <ThreeDots
-                    id={`topbar-${items.userid}`}
+                  <div
+                    className="share-wrapr"
+                    onClick={handeleShare}
+                    onKeyDown={this.handleKeyDown}
                     role="button"
-                    dataTip="tooltip"
-                    dataClass="tooltip-wrapr"
-                    /* eslint-disable */
-                    getContent={() => this.renderDotTips(items.userid)}
-                    effect="solid"
-                    delayHide={500}
-                    delayShow={500}
-                    delayUpdate={500}
-                    place={"left"}
-                    border
-                    type={"light"}
-                  />
+                    tabIndex="0"
+                  >
+                    <img src={images.share} alt="share" />
+                  </div>
+                  <div className="tooltip-dot">
+                    <ThreeDots
+                      id={`topbar-${items.userid}`}
+                      role="button"
+                      dataTip="tooltip"
+                      dataClass="tooltip-wrapr"
+                      /* eslint-disable */
+                      getContent={() => this.renderDotTips(items.userid)}
+                      effect="solid"
+                      delayHide={500}
+                      delayShow={500}
+                      delayUpdate={500}
+                      place={"left"}
+                      border
+                      type={"light"}
+                    />
+                  </div>
+                  <Link to={routes.SETTINGS_EDIT_PROFILE_ROUTE}>
+                    <img src={images.settings} alt="settings" />
+                  </Link>
                 </div>
               )}
               <div className="clearfix" />
@@ -110,7 +128,15 @@ class TopBar extends Component {
     }
   };
 
-  handleKeyDown = () => { };
+  handleSubscribeModal = e => {
+    if (e.target.id !== "Posts") {
+      this.props.handleModalShow(modalType.subscribe, {
+        type: e.target.id,
+        userid: this.props.items.userid,
+        username: this.props.items.username
+      });
+    }
+  };
 
   renderReportTips = (type, userid, username) => {
     if (type !== "Posts") {
@@ -129,25 +155,16 @@ class TopBar extends Component {
   renderSlots = slot => {
     const userIsLoading = this.props.userDataByUsername.isLoading;
     return (
-      <div className={slot.className} key={`slot-${slot.name}`}>
-        <SubscribeList
-          id={`slot-${slot.name}`}
-          role="button"
-          dataTip=""
-          dataClass="tooltip-wrapr"
-          /* eslint-disable */ getContent={() =>
-            this.renderReportTips(slot.name, slot.userid, slot.username)
-          }
-          effect="solid"
-          delayHide={10}
-          delayShow={250}
-          delayUpdate={250}
-          place={"left"}
-          border={true}
-          type={"light"}
-          value={slot.val}
-          valueName={slot.name}
-        />
+      <div
+        className={slot.className}
+        key={`slot-${slot.name}`}
+        onClick={this.handleSubscribeModal}
+        id={slot.name}
+        role="button"
+      >
+        <span id={slot.name}>
+          {slot.val} {slot.name}
+        </span>
       </div>
     );
   };
@@ -157,14 +174,13 @@ class TopBar extends Component {
     return (
       <div className={btnSlot.className} key={`btnSlot-${btnSlot.name}`}>
         <div className="clearfix" />
-        <button
+        <Button
           className={btnSlot.btnActiveClassName}
           id={btnSlot.userid}
           onClick={btnSlot.handeleEvent}
           disabled={userIsLoading}
-        >
-          {btnSlot.btnText}
-        </button>
+          text={btnSlot.btnText}
+        />
       </div>
     );
   };
@@ -181,7 +197,6 @@ class TopBar extends Component {
         this.props.reportedContentData &&
         !this.props.reportedContentData.error
       ) {
-        console.log(this.props.reportedContentData.addReport.isReported);
         this.getUserInfo();
         this.getUserData();
         this.renderDotTips(this.props.items.userid);
@@ -279,7 +294,6 @@ class TopBar extends Component {
       />
     );
   };
-
 }
 
 const mapStateToProps = state => ({

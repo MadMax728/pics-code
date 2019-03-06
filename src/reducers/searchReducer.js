@@ -12,7 +12,10 @@ const searchReducer = (state = initialState.searchData, action) => {
     case types.GET_SEARCH_SUCCEEDED:
       return {
         ...state,
-        searchKeyword: action.payload,
+        searchKeyword: action.keyword,
+        users: action.payload.docs,
+        page: action.payload.page,
+        pages: action.payload.pages,
         isLoading: false
       };
     case types.GET_SEARCH_FAILED:

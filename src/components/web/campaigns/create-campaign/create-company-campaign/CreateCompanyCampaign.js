@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { StepOne, StepTwo, StepThree } from "../steps";
-import { Preview } from "../preview";
+import { StepOne, StepTwo } from "../steps";
 import { PaymentStepOne, PaymentStepTwo } from "../../../user/payment/steps";
 import PropTypes from "prop-types";
-import * as images from "../../../../../lib/constants/images";
+import { InlineLoading } from "../../../../ui-kit";
 
 class CreateCompanyCampaign extends Component {
   constructor(props) {
@@ -17,7 +16,6 @@ class CreateCompanyCampaign extends Component {
       forThat,
       handleModalInfoShow,
       isPreview,
-      handlePrivewClose,
       form,
       maxClicks,
       isFor,
@@ -29,33 +27,17 @@ class CreateCompanyCampaign extends Component {
       handleLocation,
       handleActualImg,
       handleScale,
-      handleOfferTagChange,
-      handleOfferTagDelete,
-      handleInquiryTagChange,
-      handleInquiryTagDelete,
       handleSelect,
-      handleVideo,
       userInfo,
       handleAddress,
-      setVoucherData,
-      calculateMaxClicks
+      calculateMaxClicks,
+      isLoading,
+      isEdit,
+      handleSetState
     } = this.props;
-    console.log("company", this.props);
     return (
       <div className="col-xs-12 no-padding">
-        {isPreview && <Preview form={form} />}
-        {isPreview && (
-          <button
-            onClick={handlePrivewClose}
-            className={"closeBtn right-side-close"}
-          >
-            <img
-              src={images.white_close}
-              alt={"cross"}
-              style={{ height: "10px", width: "10px" }}
-            />
-          </button>
-        )}
+        {isLoading && <InlineLoading />}
         {!isPreview &&
           (stepIndex === 0 && (
             <StepOne
@@ -67,26 +49,14 @@ class CreateCompanyCampaign extends Component {
               handleLocation={handleLocation}
               handleActualImg={handleActualImg}
               handleScale={handleScale}
-              handleInquiryTagChange={handleInquiryTagChange}
-              handleInquiryTagDelete={handleInquiryTagDelete}
-              handleOfferTagChange={handleOfferTagChange}
-              handleOfferTagDelete={handleOfferTagDelete}
               handleSelect={handleSelect}
-              handleVideo={handleVideo}
+              isEdit={isEdit}
+              handleSetState={handleSetState}
             />
           ))}
         {!isPreview &&
           (stepIndex === 1 && (
             <StepTwo
-              handleChangeField={handleChangeField}
-              form={form}
-              handleContentChange={handleContentChange}
-              userInfo={userInfo}
-            />
-          ))}
-        {!isPreview &&
-          (stepIndex === 2 && (
-            <StepThree
               handleChangeField={handleChangeField}
               form={form}
               handleDate={handleDate}
@@ -97,7 +67,7 @@ class CreateCompanyCampaign extends Component {
             />
           ))}
         {!isPreview &&
-          (stepIndex === 3 && (
+          (stepIndex === 2 && (
             <PaymentStepOne
               handleAddress={handleAddress}
               forThat={forThat}
@@ -107,15 +77,15 @@ class CreateCompanyCampaign extends Component {
             />
           ))}
         {!isPreview &&
-          (stepIndex === 4 && (
+          (stepIndex === 3 && (
             <PaymentStepTwo
               forThat={forThat}
               handleModalInfoShow={handleModalInfoShow}
-              handleChangeField={handleChangeField}
               form={form}
               handleSubmit={handleSubmit}
-              setVoucherData={setVoucherData}
               userInfo={userInfo}
+              isLoading={isLoading}
+              isEdit={isEdit}
             />
           ))}
       </div>
@@ -128,7 +98,6 @@ CreateCompanyCampaign.propTypes = {
   forThat: PropTypes.string.isRequired,
   handleModalInfoShow: PropTypes.func.isRequired,
   isPreview: PropTypes.bool.isRequired,
-  handlePrivewClose: PropTypes.func.isRequired,
   handleChangeField: PropTypes.func.isRequired,
   isFor: PropTypes.bool.isRequired,
   form: PropTypes.any.isRequired,
@@ -139,17 +108,14 @@ CreateCompanyCampaign.propTypes = {
   handleLocation: PropTypes.func.isRequired,
   handleActualImg: PropTypes.func,
   handleScale: PropTypes.func,
-  handleOfferTagChange: PropTypes.func.isRequired,
-  handleOfferTagDelete: PropTypes.func.isRequired,
-  handleInquiryTagChange: PropTypes.func.isRequired,
-  handleInquiryTagDelete: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired,
-  handleVideo: PropTypes.func.isRequired,
   handleAddress: PropTypes.func.isRequired,
   userInfo: PropTypes.object,
-  setVoucherData: PropTypes.func,
   calculateMaxClicks: PropTypes.func,
-  maxClicks: PropTypes.any
+  maxClicks: PropTypes.any,
+  isLoading: PropTypes.bool.isRequired,
+  isEdit: PropTypes.bool.isRequired,
+  handleSetState: PropTypes.func
 };
 
 export default CreateCompanyCampaign;

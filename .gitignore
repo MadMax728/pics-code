@@ -1,6 +1,12 @@
 # ios stuff
 .DS_Store
 
+#v2 
+
+html-design
+html-design/*
+
+
 # node.js stuff
 bin/
 build/
@@ -48,5 +54,9 @@ typings/
 .idea/
 *.sln.iml
 
-
+package-lock.json
 storybook-static/
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

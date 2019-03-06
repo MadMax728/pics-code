@@ -133,108 +133,102 @@ class DashboardFilter extends Component {
     const languageItem = languageItems;
 
     const Filters = [
-      {
-        name: Translations.left_sidebar_filter.radio_change_language.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radio_change_language.type,
-        items: languageItem
-      },
-      {
-        name: Translations.left_sidebar_filter.relevance.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.relevance.type,
-        items: relevanceItems
-      },
-      {
-        name: Translations.left_sidebar_filter.location.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.location.type,
-        items: []
-      },
-      {
-        name: Translations.left_sidebar_filter.radius.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radius.type,
-        items: radiusItems
-      },
-      {
-        name: Translations.left_sidebar_filter.category.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.category.type,
-        items: categoryItems
-      },
-      {
-        name: Translations.left_sidebar_filter.procedure.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.procedure.type,
-        items: procedureItems
-      },
-      {
-        name: Translations.left_sidebar_filter.content.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.content.type,
-        items: contentItems
-      },
-      {
-        name: Translations.left_sidebar_filter.target_group.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.target_group.type,
-        items: targetGroupOptions
-      },
-      {
-        name: Translations.left_sidebar_filter.offer.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer.type,
-        items: offerItems
-      },
-      {
-        name: Translations.left_sidebar_filter.offer_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.offer_tag.type,
-        items: []
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry.type,
-        items: inquiryItems
-      },
-      {
-        name: Translations.left_sidebar_filter.inquiry_tag.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.inquiry_tag.type,
-        items: []
-      }
+      // {
+      //   name: Translations.left_sidebar_filter.radio_change_language.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.radio_change_language.type,
+      //   items: languageItem
+      // }
+      // {
+      //   name: Translations.left_sidebar_filter.relevance.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.relevance.type,
+      //   items: relevanceItems
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.location.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.location.type,
+      //   items: []
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.radius.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.radius.type,
+      //   items: radiusItems
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.category.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.category.type,
+      //   items: categoryItems
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.procedure.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.procedure.type,
+      //   items: procedureItems
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.content.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.content.type,
+      //   items: contentItems
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.target_group.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.target_group.type,
+      //   items: targetGroupOptions
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.offer.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.offer.type,
+      //   items: offerItems
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.offer_tag.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.offer_tag.type,
+      //   items: []
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.inquiry.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.inquiry.type,
+      //   items: inquiryItems
+      // },
+      // {
+      //   name: Translations.left_sidebar_filter.inquiry_tag.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.inquiry_tag.type,
+      //   items: []
+      // }
     ];
     Translations.setLanguage(getCookie("interfaceLanguage") || "en");
+
     return (
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
-          handleSelect={this.handleSelect}
-          handleLanguageSwitch={this.handleLanguageSwitch}
-        />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-              <button className="black_button" onClick={this.handleApplyClick}>
-                {Translations.filter.apply}
-              </button>
-            )}
-        </div>
+      <div>
+        {Filters.length > 0 ? (
+          <div className="left-filters">
+            <LeftSidebarFilter
+              filters={Filters}
+              onChange={this.handleOnChange}
+              filterApply={this.state.filterApply}
+              handleSelect={this.handleSelect}
+              handleLanguageSwitch={this.handleLanguageSwitch}
+              isNotFilter={false}
+            />
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     );
   }
 
-  componentDidMount = () => { };
+  componentDidMount = () => {};
 
   handleResetFilterClick = () => {
     this.setState({ filterApply: false });
@@ -263,8 +257,6 @@ class DashboardFilter extends Component {
       currentLanguage: Translations.getLanguage()
     });
   };
-
-
 }
 
 const mapStateToProps = state => ({
@@ -277,7 +269,8 @@ const mapDispatchToProps = {};
 DashboardFilter.propTypes = {
   handleApplyClick: PropTypes.func,
   categoryList: PropTypes.any,
-  handleSelect: PropTypes.func
+  handleSelect: PropTypes.func,
+  route: PropTypes.any
 };
 
 export default connect(

@@ -7,9 +7,8 @@ import {
   ProcessedModal,
   EditProfileModal,
   ShareModal,
-  ConfirmationModal,
+  // ConfirmationModal,
   ErrorModal,
-  SubscribeModal,
   CMSPreviewModal
 } from "../../web/modals";
 import PropTypes from "prop-types";
@@ -72,28 +71,6 @@ class InfoModal extends Component {
     );
   };
 
-  handleModalActionConfirmation = () => {
-    return (
-      <ConfirmationModal
-        modalInfoShow={this.props.modalInfoShow}
-        handleModalInfoHide={this.props.handleModalInfoHide}
-        handleModalHide={this.props.handleModalHide}
-        modalInfoMsg={this.props.modalInfoMsg}
-      />
-    );
-  };
-
-  handleModalSubscribe = () => {
-    return (
-      <SubscribeModal
-        modalInfoShow={this.props.modalInfoShow}
-        handleModalInfoHide={this.props.handleModalInfoHide}
-        handleModalHide={this.props.handleModalHide}
-        modalInfoMsg={this.props.modalInfoMsg}
-      />
-    );
-  };
-
   handleModalEditProfile = () => {
     return (
       <EditProfileModal
@@ -112,6 +89,7 @@ class InfoModal extends Component {
       <ShareModal
         modalInfoShow={this.props.modalInfoShow}
         handleModalInfoHide={this.props.handleModalInfoHide}
+        data={this.props.data}
       />
     );
   };
@@ -123,8 +101,8 @@ class InfoModal extends Component {
         handleModalInfoHide={this.props.handleModalInfoHide}
         modalInfo={this.props.modalInfo}
       />
-    )
-  }
+    );
+  };
 
   handleModalRender = () => {
     return (
@@ -139,18 +117,13 @@ class InfoModal extends Component {
           this.handleModalEditProfile()}
         {this.props.modalInfoType === modalType.share &&
           this.handleModalShare()}
-        {this.props.modalInfoType === modalType.confirmation &&
-          this.handleModalActionConfirmation()}
         {this.props.modalInfoType === modalType.error &&
           this.handleModalError()}
-        {this.props.modalInfoType === modalType.subscribe &&
-          this.handleModalSubscribe()}
         {this.props.modalInfoType === modalType.cmsPreview &&
           this.handleModalCMSPreview()}
       </div>
     );
   };
-
 }
 
 InfoModal.propTypes = {
@@ -164,7 +137,8 @@ InfoModal.propTypes = {
   modalInfo: PropTypes.any,
   image: PropTypes.any,
   profile: PropTypes.any,
-  statusCallback: PropTypes.any
+  statusCallback: PropTypes.any,
+  data: PropTypes.any
 };
 
 export default InfoModal;

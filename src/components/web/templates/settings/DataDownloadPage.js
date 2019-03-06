@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text } from "../../../ui-kit/CommonUIComponents";
+import { Input, ErrorSpan, Label, Button } from "../../../ui-kit";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getDownloadData, getSearch } from "../../../../actions";
@@ -20,9 +20,8 @@ class DataDownloadPage extends Component {
     };
   }
 
-
   render() {
-    const { form } = this.state;
+    const { form, error } = this.state;
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="campaign-middle-section">
@@ -48,13 +47,14 @@ class DataDownloadPage extends Component {
               text is an example. This text is an example.{" "}
             </p>
 
-            <form>
+            <form onSubmit={this.handleSubmit}>
               <div className="col-sm-5 padding-r-5 email-wrapper">
                 <div className="form-group">
-                  <label htmlFor="email">
-                    {Translations.data_download.Email}
-                  </label>
-                  <Text
+                  <Label
+                    htmlFor="email"
+                    value={Translations.data_download.Email}
+                  />
+                  <Input
                     type="text"
                     className="form-control"
                     id="email"
@@ -66,19 +66,21 @@ class DataDownloadPage extends Component {
                   {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <span className="error-msg form-field-error">
-                    {this.state.error.email}
-                  </span>
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan
+                    className="error-msg form-field-error"
+                    value={error.email}
+                  />
                 </div>
               </div>
               <div className="col-sm-5 padding-l-5 padding-r-5">
                 <div className="form-group">
-                  <label htmlFor="password">
-                    {Translations.data_download.Password}
-                  </label>
-                  <Text
+                  <Label
+                    htmlFor="password"
+                    value={Translations.data_download.Password}
+                  />
+                  <Input
                     type="password"
                     className="form-control"
                     id="password"
@@ -90,18 +92,21 @@ class DataDownloadPage extends Component {
                   {form.password.length === 0 ? (
                     <img src={images.error} alt={"error"} />
                   ) : (
-                      <img src={images.checked} alt={"checked"} />
-                    )}
-                  <span className="error-msg form-field-error">
-                    {this.state.error.password}
-                  </span>
+                    <img src={images.checked} alt={"checked"} />
+                  )}
+                  <ErrorSpan
+                    className="error-msg form-field-error"
+                    value={error.password}
+                  />
                 </div>
               </div>
               <div className="col-sm-2 padding-l-5 btn-wrapper">
                 <div className="form-group">
-                  <button className="blue_button" onClick={this.handleSubmit}>
-                    {Translations.data_download.Download}
-                  </button>
+                  <Button
+                    className="blue_button"
+                    type="submit"
+                    text={Translations.data_download.Download}
+                  />
                 </div>
               </div>
             </form>
@@ -176,7 +181,6 @@ class DataDownloadPage extends Component {
       // To Do - On Download Data
     });
   };
-
 }
 
 const mapStateToProps = state => ({

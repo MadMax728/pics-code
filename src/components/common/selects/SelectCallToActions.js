@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { getSelect } from "../../../actions";
-import { connect } from "react-redux";
 import { Translations } from "../../../lib/translations";
+import { callToActionList } from "../../../lib/constants";
 
 class SelectCallToActions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      callToActionList: []
-    }
+      callToActionList
+    };
   }
 
   render() {
@@ -26,56 +25,30 @@ class SelectCallToActions extends Component {
         <option value="">{Translations.call_to_action}</option>
         {callToActionList.map(option => (
           <option value={option.id} key={option.id}>
-            {option.callToActionName}
+            {option.value}
           </option>
         ))}
       </select>
     );
   }
 
-  componentDidMount = () => {
-    this.props.getSelect("callToActions").then(() => {
-      if (this.props.callToActionList) {
-        this.setState({
-          callToActionList: this.props.callToActionList
-        });
-      }
-    });
-  }
-
-
-  componentWillUnmount = () => {
-    this.setState({ callToActionList: [] });
-  }
-
-  handleCallToActions = (event) => {
-    this.props.handleSelect("callToAction", event.target.value);
-  }
-
-
+  handleCallToActions = event => {
+    const { callToActionList } = this.state;
+    const name = callToActionList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: name.length !== 0 ? name[0].value : ""
+    };
+    this.props.handleSelect("callToAction", data);
+  };
 }
-
-const mapStateToProps = state => ({
-  callToActionList: state.selectData.callToActions
-});
-
-const mapDispatchToProps = {
-  getSelect
-};
-
 
 const propTypes = {
   value: PropTypes.any,
-  callToActionList: PropTypes.any,
   className: PropTypes.string,
-  getSelect: PropTypes.func.isRequired,
   handleSelect: PropTypes.func.isRequired
 };
 
 SelectCallToActions.propTypes = propTypes;
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SelectCallToActions);
+export default SelectCallToActions;

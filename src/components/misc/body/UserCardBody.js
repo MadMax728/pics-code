@@ -1,83 +1,101 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import classnames from "classnames";
 import ReportCard from "../ReportCard";
-import LazyLoad from "react-lazyload";
-import { Loader, ThreeDots } from "../../ui-kit";
+import { Loader, ThreeDots, UserCardImageItem, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
+import * as routes from "../../../lib/constants/routes";
 
-const UserCardBody = ({
-  user,
-  index,
-  handleSubscribed,
-  isReport,
-  isBackOffice,
-  renderReportTips
-}) => {
-  return (
-    <div
-      className={
-        index % 2 === 0 ? "col-sm-6 pic-left-block" : "col-sm-6 pic-right-block"
-      }
-    >
-      <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
-        <LazyLoad height={200} once offset={[-200, 0]} placeholder={<Loader />}>
-          <div className="profile-img-wrapper">
-            <img src={user.profileUrl} alt={"pic-1"} />
+class UserCardBody extends Component {
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      user: this.props.user
+    };
+  }
+
+  render() {
+    const {
+      index,
+      handleSubscribe,
+      handleUnSubscribe,
+      isReport,
+      isBackOffice,
+      renderReportTips,
+      isLoading,
+      subscribeId
+    } = this.props;
+    const { user } = this.state;
+    const pic_block = classnames("col-sm-6", {
+      "pic-left-block": index % 2 === 0,
+      "pic-right-block": index % 2 !== 0
+    });
+
+    return (
+      <div className={`${pic_block}`}>
+        <div className={isReport ? "backoffice-user pic-block" : "pic-block"}>
+          <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
+            <UserCardImageItem item={user.profileUrl} />
+          </Link>
+          <div className="name-wrapper">
+            <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
+              <div className="username">{user.username}</div>
+            </Link>
+            {isBackOffice && (
+              <div className="show_more_options user">
+                <ThreeDots
+                  id={`report-${user.id}`}
+                  role="button"
+                  dataTip="tooltip"
+                  dataClass="tooltip-wrapr"
+                  getContent={renderReportTips}
+                  effect="solid"
+                  delayHide={500}
+                  delayShow={500}
+                  delayUpdate={500}
+                  place={"left"}
+                  border
+                  type={"light"}
+                />
+              </div>
+            )}
+            {!isBackOffice &&
+              (subscribeId === "" ? (
+                <Button
+                  className={`blue_button`}
+                  id={user.id}
+                  onClick={handleSubscribe}
+                  disabled={isLoading}
+                  text={Translations.profile_community_right_sidebar.Subscribe}
+                />
+              ) : (
+                <Button
+                  className={`filled_button`}
+                  id={subscribeId}
+                  onClick={handleUnSubscribe}
+                  disabled={isLoading}
+                  text={Translations.profile_community_right_sidebar.Subscribed}
+                />
+              ))}
           </div>
-        </LazyLoad>
-        <div className="name-wrapper">
-          <div className="username">{user.username}</div>
-          <div className="name">{user.name}</div>
-          {isBackOffice && (
-            <div className="show_more_options user">
-              <ThreeDots
-                id={`report-${user.id}`}
-                role="button"
-                dataTip="tooltip"
-                dataClass="tooltip-wrapr"
-                getContent={renderReportTips}
-                effect="solid"
-                delayHide={500}
-                delayShow={500}
-                delayUpdate={500}
-                place={"left"}
-                border
-                type={"light"}
-              />
-            </div>
-          )}
-          {!isBackOffice && user.isSubscribe && (
-            <button
-              className="filled_button"
-              id={user.username}
-              onClick={handleSubscribed}
-            >
-              {Translations.profile_community_right_sidebar.Subscribed}
-            </button>
-          )}
-          {!isBackOffice && !user.isSubscribe && (
-            <button
-              className="blue_button"
-              id={user.username}
-              onClick={handleSubscribed}
-            >
-              {Translations.profile_community_right_sidebar.Subscribe}
-            </button>
-          )}
+          {user && isReport && <ReportCard item={user} />}
         </div>
-        {user && isReport && <ReportCard item={user} />}
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 UserCardBody.propTypes = {
   user: PropTypes.object.isRequired,
-  handleSubscribed: PropTypes.func.isRequired,
+  handleSubscribe: PropTypes.func.isRequired,
+  handleUnSubscribe: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   isReport: PropTypes.bool,
   isBackOffice: PropTypes.bool,
-  renderReportTips: PropTypes.any
+  renderReportTips: PropTypes.any,
+  isLoading: PropTypes.any,
+  subscribeId: PropTypes.any
 };
 
 export default UserCardBody;

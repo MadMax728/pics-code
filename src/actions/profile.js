@@ -3,6 +3,7 @@ import * as userService from "../services";
 import { Auth } from "../auth";
 import { logger } from "../loggers";
 
+// get User
 const getUserStarted = () => ({
   type: types.GET_USER_STARTED
 });
@@ -14,35 +15,6 @@ const getUserSucceeded = data => ({
 
 const getUserFailed = error => ({
   type: types.GET_USER_FAILED,
-  payload: error,
-  error: true
-});
-const updateUSerProfileStarted = () => ({
-  type: types.UPDATE_PROFILE_STARTED
-});
-
-const updateUSerProfileSucceeded = data => ({
-  type: types.UPDATE_PROFILE_SUCCEEDED,
-  payload: data
-});
-
-const updateUSerProfileFailed = error => ({
-  type: types.UPDATE_PROFILE_FAILED,
-  payload: error,
-  error: true
-});
-
-const uploadImageStarted = () => ({
-  type: types.UPLOAD_IMAGE_STARTED
-});
-
-const uploadImageSucceeded = data => ({
-  type: types.UPLOAD_IMAGE_SUCCEEDED,
-  payload: data
-});
-
-const uploadImageFailed = error => ({
-  type: types.UPLOAD_IMAGE_FAILED,
   payload: error,
   error: true
 });
@@ -66,6 +38,22 @@ export const getUser = params => {
     );
   };
 };
+
+// Update User Profile
+const updateUSerProfileStarted = () => ({
+  type: types.UPDATE_PROFILE_STARTED
+});
+
+const updateUSerProfileSucceeded = data => ({
+  type: types.UPDATE_PROFILE_SUCCEEDED,
+  payload: data
+});
+
+const updateUSerProfileFailed = error => ({
+  type: types.UPDATE_PROFILE_FAILED,
+  payload: error,
+  error: true
+});
 
 export const updateUserProfile = data => {
   return dispatch => {
@@ -91,6 +79,22 @@ export const updateUserProfile = data => {
     );
   };
 };
+
+// Upload Image
+const uploadImageStarted = () => ({
+  type: types.UPLOAD_IMAGE_STARTED
+});
+
+const uploadImageSucceeded = data => ({
+  type: types.UPLOAD_IMAGE_SUCCEEDED,
+  payload: data
+});
+
+const uploadImageFailed = error => ({
+  type: types.UPLOAD_IMAGE_FAILED,
+  payload: error,
+  error: true
+});
 
 export const uploadProfilePicture = params => {
   return dispatch => {

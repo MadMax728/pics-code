@@ -3,12 +3,12 @@ import * as images from "../../lib/constants/images";
 import { SideBarMBMenuInformation, SideBarMBMenuServices } from "../common";
 
 import PropTypes from "prop-types";
+import { Translations } from "../../lib/translations";
 
 export default class MobileMenu extends Component {
-
   render() {
     return (
-      <section>
+      <section className="main-section">
         <div className="container-fluid">
           <div className="row">
             <div
@@ -21,13 +21,17 @@ export default class MobileMenu extends Component {
             >
               <button type="button">
                 <img src={images.black_left_arrow} alt="left_arrow" />
-                Back
+                {Translations.modal_header.back}
               </button>
             </div>
             <div className="mobile_menu_wrapper">
-              <div className="normal_title padding-15">Information</div>
+              <div className="normal_title padding-15">
+                {Translations.left_sidebar.information}
+              </div>
               <SideBarMBMenuInformation />
-              <div className="normal_title padding-15">Services</div>
+              <div className="normal_title padding-15">
+                {Translations.mobile_sidebar_services.services}
+              </div>
               <SideBarMBMenuServices />
             </div>
           </div>
@@ -35,7 +39,7 @@ export default class MobileMenu extends Component {
       </section>
     );
   }
-  
+
   componentDidMount = () => {
     document.addEventListener("click", this.handleOutsideClick);
   };
@@ -73,7 +77,6 @@ export default class MobileMenu extends Component {
   };
 
   handleKeyPress = () => {};
-
 }
 
 MobileMenu.propTypes = {

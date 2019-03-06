@@ -2,83 +2,48 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { getTargetGroup } from "../../../actions";
 import { connect } from "react-redux";
-import * as enumerations from "../../../lib/constants/enumerations";
 import { Translations } from "../../../lib/translations";
-
-const targetGroupData = [
-  {
-    id: enumerations.target_group.company,
-    value: Translations.target_group.company
-  },
-  {
-    id: enumerations.target_group.female_and_male,
-    value: Translations.target_group.female_and_male
-  },
-  {
-    id: enumerations.target_group.female,
-    value: Translations.target_group.female
-  },
-  {
-    id: enumerations.target_group.male,
-    value: Translations.target_group.male
-  }
-];
+import { targetGroupData } from "../../../lib/constants/select";
 
 class SelectTargetGroup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      targetGroupList: []
-    };
-  }
-
-  componentWillMount = () => {
-    this.props.getTargetGroup(targetGroupData);
-  };
-
   render() {
-    const { value, className } = this.props;
+    const { value, className, targetGroupList } = this.props;
     return (
       <select
         value={value}
         className={className}
         onChange={this.handleTargetGroup}
         onBlur={this.handleTargetGroup}
-        options={targetGroupData}
+        options={targetGroupList}
       >
         <option value="">{Translations.select_target_group}</option>
-        {targetGroupData.map(option => (
-          <option value={option.id} key={option.id}>
-            {option.value}
-          </option>
-        ))}
+        {targetGroupList &&
+          targetGroupList.map(option => (
+            <option value={option.id} key={option.id}>
+              {option.value}
+            </option>
+          ))}
       </select>
     );
   }
 
   componentDidMount = () => {
-    if (
-      this.props.targetGroupList &&
-      this.props.targetGroupList.target_group_data
-    ) {
-      this.setState({
-        targetGroupList: this.props.targetGroupList.target_group_data
-      });
-    }
-  };
-
-  componentWillUnmount = () => {
-    this.setState({ targetGroupList: [] });
+    this.props.getTargetGroup(targetGroupData);
   };
 
   handleTargetGroup = event => {
-    this.props.handleSelect("target_group", event.target.value);
+    const { targetGroupList } = this.props;
+    const name = targetGroupList.filter(c => c.id === event.target.value);
+    const data = {
+      id: event.target.value,
+      name: name.length !== 0 ? name[0].value : ""
+    };
+    this.props.handleSelect("target_group", data);
   };
-
 }
 
 const mapStateToProps = state => ({
-  targetGroupList: state.selectData
+  targetGroupList: state.selectData.targetGroups
 });
 
 const mapDispatchToProps = {

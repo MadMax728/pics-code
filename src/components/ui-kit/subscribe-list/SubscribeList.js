@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ToolTip } from "..";
 
-
 class SubscribeList extends Component {
   constructor(props) {
     super(props);
@@ -28,9 +27,9 @@ class SubscribeList extends Component {
     } = this.props;
 
     return (
-      <span data-for={id} role={role} data-tip={dataTip} data-class={dataClass}>
+      <span>
         {value} {valueName}
-        <ToolTip
+        {/* <ToolTip
           id={id}
           getContent={getContent}
           effect={effect}
@@ -40,12 +39,11 @@ class SubscribeList extends Component {
           place={place}
           border={border}
           type={type}
-        />
+        /> */}
       </span>
     );
   }
 }
-
 
 const propTypes = {
   id: PropTypes.string.isRequired,
@@ -60,7 +58,7 @@ const propTypes = {
   place: PropTypes.string.isRequired,
   border: PropTypes.bool.isRequired,
   type: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
+  value: PropTypes.number,
   valueName: PropTypes.string.isRequired
 };
 

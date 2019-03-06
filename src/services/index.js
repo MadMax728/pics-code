@@ -20,3 +20,5 @@ export * from "./profileSettingsService";
 export * from "./hashUserService";
 export * from "./subscribeService";
 export * from "./hashTagService";
+export * from "./notificationService";
+export * from "./communityService";

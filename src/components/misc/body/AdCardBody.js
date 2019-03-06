@@ -8,18 +8,18 @@ const AdCardBody = ({ ad, isDescription, isInformation, isLoading }) => {
   return (
     <div className="feed_content">
       <div className="feed_image">
-      {ad.typeContent &&
-        ad.typeContent.toLowerCase() ===
-          enumerations.mediaTypes.video && (
+        {ad.typeContent &&
+          ad.typeContent.toLowerCase() === enumerations.mediaTypes.video && (
             <VideoItem id={ad.id} item={ad.mediaUrl} isLoading={isLoading} />
           )}
         {(!ad.typeContent ||
-        (ad.typeContent &&
-          ad.typeContent.toLowerCase() ===
-            enumerations.mediaTypes.image)) && (
+          (ad.typeContent &&
+            ad.typeContent.toLowerCase() ===
+              enumerations.mediaTypes.image)) && (
           <ImageItem
             item={ad.mediaUrl}
             userName={ad.userName}
+            classNames={`embed-responsive embed-responsive-16by9`}
             isOtherCardExist={!isDescription && isInformation}
             isLoading={isLoading}
           />
@@ -30,23 +30,16 @@ const AdCardBody = ({ ad, isDescription, isInformation, isLoading }) => {
           className="more-strip zIndex0"
           rel="noopener noreferrer"
         >
-          {ad.callToAction? ad.callToAction.callToActionName : "Ad"}
+          {ad.callToAction ? ad.callToAction : "Ad"}
         </a>
       </div>
-      {ad &&
-        isDescription &&
-        ad.description && (
-          <div className="feed_description padding-10">
-            <span className="secondary_title">
-              <ReadMore
-                text={ad.description}
-                min={50}
-                ideal={50}
-                max={50}
-              />
-            </span>
-          </div>
-        )}
+      {ad && isDescription && ad.description && (
+        <div className="feed_description news-feed-data padding-10">
+          <span className="secondary_title">
+            <ReadMore text={ad.description} min={50} ideal={50} max={50} />
+          </span>
+        </div>
+      )}
       {ad && isInformation && <InformationCard item={ad} />}
     </div>
   );

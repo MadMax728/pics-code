@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Translations } from "../../../../lib/translations";
+import { Button } from "../../../ui-kit";
 
 class PaymentConfirmation extends Component {
   constructor(props) {
@@ -17,12 +19,15 @@ class PaymentConfirmation extends Component {
     return (
       <div className={"col-xs-12 no-padding"}>
         <div className="col-sm-12 margin-bottom-10">
-          Your {modalInfoMsg} is pending review whitin the next 48 hours.
+          {Translations.payment.your} {modalInfoMsg}{" "}
+          {Translations.payment.review}
         </div>
         <div className="col-sm-12">
-          <button className="filled_button" onClick={this.handleModalHides}>
-            Continue
-          </button>
+          <Button
+            className="filled_button"
+            onClick={this.handleModalHides}
+            text={Translations.modal_header.continue}
+          />
         </div>
       </div>
     );

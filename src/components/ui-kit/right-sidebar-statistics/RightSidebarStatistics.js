@@ -2,9 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Translations } from "../../../lib/translations";
 
-const onKeyDown = () => { };
+const onKeyDown = () => {};
 
-const RightSidebarStatistics = ({ header, handleEvent, all, outstanding, processed, notProcessed }) => {
+const RightSidebarStatistics = ({
+  header,
+  handleEvent,
+  all,
+  outstanding,
+  processed,
+  notProcessed
+}) => {
   const statistics = [
     {
       name: Translations.right_side_bar_statistics.all,
@@ -26,18 +33,36 @@ const RightSidebarStatistics = ({ header, handleEvent, all, outstanding, process
       id: "NotProcessed",
       value: notProcessed
     }
-  ]
+  ];
 
   return (
     <div className="campaigns-right">
       <div className="normal_title padding-15">{header}</div>
       <ul className="campaign-right-options">
-        {statistics && statistics.map(statistic => (
-          <li key={statistic.name}>
-            <span id={statistic.id} onClick={handleEvent} role="button" tabIndex="0" onKeyDown={onKeyDown} >{statistic.name}</span>
-            <span id={statistic.id} onClick={handleEvent} role="button" tabIndex="0" onKeyDown={onKeyDown} className="pull-right">{statistic.value}</span>
-          </li>
-        ))}
+        {statistics &&
+          statistics.map(statistic => (
+            <li key={statistic.name}>
+              <span
+                id={statistic.id}
+                onClick={handleEvent}
+                role="button"
+                tabIndex="0"
+                onKeyDown={onKeyDown}
+              >
+                {statistic.name}
+              </span>
+              <span
+                id={statistic.id}
+                onClick={handleEvent}
+                role="button"
+                tabIndex="0"
+                onKeyDown={onKeyDown}
+                className="pull-right"
+              >
+                {statistic.value}
+              </span>
+            </li>
+          ))}
       </ul>
     </div>
   );

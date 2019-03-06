@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import * as routes from "../../../lib/constants/routes";
 import * as images from "../../../lib/constants/images";
-import { ThreeDots } from "../../ui-kit";
+import { ThreeDots, Button } from "../../ui-kit";
 import StatusCard from "../StatusCard";
 import BudgetCard from "../BudgetCard";
 import ReportCard from "../ReportCard";
@@ -15,7 +15,8 @@ const CampaignCardFooter = ({
   handleFavorite,
   isLoading,
   isBudget,
-  isReport
+  isReport,
+  handeleShare
 }) => {
   const favorite_icon = campaign.isSelfLike
     ? images.blue_heart
@@ -24,41 +25,45 @@ const CampaignCardFooter = ({
     <div className="feed_footer padding-15">
       <div className="messages" role="article">
         <span className="count">{campaign.commentCount}</span>
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleCommentsSections}
-          id={campaign.createdBy}
-          onKeyDown={handleCommentsSections}
+          id={campaign._id}
           disabled={isLoading}
-        >
-          <img
-            src={images.comment}
-            alt="company-comments"
-            role="presentation"
-          />
-        </button>
+          text={
+            <img
+              src={images.comment}
+              alt="company-comments"
+              role="presentation"
+            />
+          }
+        />
       </div>
       <div className="likes" role="article">
         <span className="count">{campaign.likeCount}</span>
-        <button
+        <Button
           type="button"
           className="pull-right no-btn"
           onClick={handleFavorite}
-          id={campaign.id}
-          onKeyDown={handleFavorite}
+          id={campaign._id}
           disabled={isLoading}
-        >
-          <img src={favorite_icon} alt="like" role="presentation" />
-        </button>
+          text={<img src={favorite_icon} alt="like" role="presentation" />}
+        />
       </div>
       <div className="show_more_options">
-        <div className="share-wrapr">
+        <div
+          className="share-wrapr"
+          onClick={handeleShare}
+          onKeyDown={handeleShare}
+          role="button"
+          tabIndex="0"
+        >
           <img src={images.share} alt="share" />
         </div>
         <div className="social-media-wrapr" />
         <ThreeDots
-          id={`report-${campaign.id}`}
+          id={`report-${campaign._id}`}
           role="button"
           dataTip="tooltip"
           dataClass="tooltip-wrapr"
@@ -76,6 +81,7 @@ const CampaignCardFooter = ({
         <StatusCard
           item={campaign}
           route={`${routes.BASE_SETTINGS_CAMPAIGN_STATISTICS_ROUTE}`}
+          isFor="campaign"
         />
       )}
       {campaign && isBudget && <BudgetCard item={campaign} />}
@@ -92,7 +98,8 @@ CampaignCardFooter.propTypes = {
   isBudget: PropTypes.bool.isRequired,
   isReport: PropTypes.bool.isRequired,
   renderReportTips: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
+  handeleShare: PropTypes.func
 };
 
 export default CampaignCardFooter;

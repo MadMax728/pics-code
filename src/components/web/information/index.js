@@ -1,24 +1,43 @@
-export { OurMission } from "./our-mission";
-export { Imprint } from "./imprint";
-export { Advertising } from "./advertising";
-export { Cookies } from "./cookies";
-export { Feedback } from "./feedback";
-export { LawEnforcementAgency } from "./law-enforcement-agency";
-export { AboutUsInformation } from "./about-us-information";
-export { AboutUs } from "./about-us";
-export { LegalNotice } from "./legal-notice";
-export { NetzDg } from "./netz-dg";
-export { Support } from "./support";
-export { GeneralTermsAndConditions } from "./general-terms-and-conditions";
-export { TermsOfUse } from "./terms-of-use";
-export { CampaignsInformation } from "./campaigns";
-export { Verification } from "./verification";
-export { ReportedContent } from "./reported-content";
-export { DeleteAccount } from "./delete-account";
+export { default as OurVision } from "./OurVision";
+export { default as Imprint } from "./Imprint";
+export { default as Advertising } from "./Advertising";
+export { default as Cookies } from "./Cookies";
+export { default as Feedback } from "./Feedback";
+export { default as LawEnforcementAgency } from "./LawEnforcementAgency";
+export { default as LawEnforcementAgencyMB } from "./LawEnforcementAgencyMB";
+export { default as AboutUsInformation } from "./AboutUsInformation";
+export { default as AboutUs } from "./AboutUs";
+export { default as LegalNotice } from "./LegalNotice";
+export { default as NetzDg } from "./NetzDg";
+export { default as Support } from "./Support";
 export {
-  CampaignPolicy,
-  AdvertisingPolicy,
-  DataProtectionAndPrivacyPolicy,
-  PlatformPolicy,
-  CancellationPolicy
-} from "./policy";
+  default as GeneralTermsAndConditions
+} from "./GeneralTermsAndConditions";
+export { default as TermsOfUse } from "./TermsOfUse";
+export { default as CampaignsInformation } from "./CampaignsInformation";
+export { default as Verification } from "./Verification";
+export { default as ReportedContent } from "./ReportedContent";
+export { default as DeleteAccount } from "./DeleteAccount";
+export { default as CampaignPolicy } from "./CampaignPolicy";
+export { default as AdvertisingPolicy } from "./AdvertisingPolicy";
+export {
+  default as DataProtectionAndPrivacyPolicy
+} from "./DataProtectionAndPrivacyPolicy";
+export { default as PlatformPolicy } from "./PlatformPolicy";
+export { default as CancellationPolicy } from "./CancellationPolicy";
+export { default as DeleteAccountMB } from "./DeleteAccountMB";
+export { default as FeedbackMB } from "./FeedbackMB";
+export { default as ReportProblem } from "./ReportProblem";
+export { default as DataDownload } from "./DataDownload";
+export { default as PaymentMethod } from "./PaymentMethod";
+export { default as ReportedContentMB } from "./ReportedContentMB";
+export { default as CookieGuidelines } from "./CookieGuidelines";
+export { default as CommunityGuidelines } from "./CommunityGuidelines";
+export {
+  default as BrandedContentGuidelines
+} from "./BrandedContentGuidelines";
+export { default as BusinessTermsCondition } from "./BusinessTermsCondition";
+export { default as PaymentGuidelines } from "./PaymentGuidelines";
+export {
+  default as CommunityPaymentGuidelines
+} from "./CommunityPaymentGuidelines";

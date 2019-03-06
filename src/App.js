@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import CookieConsent from "react-cookie-consent";
 import * as routes from "./lib/constants/routes";
 import { AdminLogin, LoginLinkSend } from "./components/back-office";
 import { Home, BackOfficeHome } from "./containers";
 import Mobile from "./components/mobile/Mobile";
+import { Translations } from "./lib/translations";
 import * as userService from "./services/userService";
 import { Auth } from "./auth";
-import PropTypes from "prop-types";
 import {
   Login,
   Register,
@@ -55,7 +57,7 @@ class App extends Component {
 
   isUserAuthenticated = () => {
     if (window.location.href.indexOf("back-office") === -1) {
-      localStorage.removeItem("admin_access_token");
+      //localStorage.removeItem("admin_access_token");
     }
     if (!Auth.isUserAuthenticated()) {
       return (
@@ -87,6 +89,8 @@ class App extends Component {
   };
 
   backOfficeRender = () => {
+    const root_route = routes.BACK_OFFICE_ROOT_ROUTE;
+
     return (
       <Switch>
         <Route
@@ -99,10 +103,7 @@ class App extends Component {
           path={routes.LOGIN_PASSWORD_ROUTE}
           component={AdminLogin}
         />
-        <Route
-          path={routes.BACK_OFFICE_ROOT_ROUTE}
-          render={this.isAdminUserAuthenticated}
-        />
+        <Route path={root_route} render={this.isAdminUserAuthenticated} />
       </Switch>
     );
   };
@@ -160,6 +161,23 @@ class App extends Component {
     return (
       <div>
         <Route render={this.webRender} />
+        <CookieConsent
+          buttonText="Got it!"
+          style={{
+            background: "white",
+            border: "solid 1px #1f58a6",
+            color: "black"
+          }}
+          buttonStyle={{ float: "right" }}
+        >
+          <p className="text-center">
+            For a better user experience we use
+            <Link to={routes.COOKIES_ROUTE}>
+              {Translations.base_footer.cookies}
+            </Link>
+            . By using picstagraph you do agree.
+          </p>
+        </CookieConsent>
       </div>
     );
   }

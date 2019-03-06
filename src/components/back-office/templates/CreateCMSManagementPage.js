@@ -10,12 +10,15 @@ import { TextEditor } from "../../ui-kit/text-editor";
 import { modalType } from "../../../lib/constants/enumerations";
 import * as routes from "../../../lib/constants/routes";
 import { Translations } from "../../../lib/translations";
+import InlineLoading from "../../ui-kit/loading-indicator/InlineLoading";
+import { Input, RadioButton, Button, Label } from "../../ui-kit";
+import { SelectLanguage } from "../../common";
 
 class CreateCMSManagementPage extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      searchKeyword: this.props.searchData.searchKeyword,      
+      searchKeyword: this.props.searchData.searchKeyword,
       form: {
         id: "",
         title: "",
@@ -28,66 +31,88 @@ class CreateCMSManagementPage extends Component {
     };
   }
 
+  handleSelect = (isFor, selected) => {
+    const { form } = this.state;
+    form.pageLanguage = selected.id;
+    this.setState({ form });
+  };
+
   render() {
     const { form, isEdit } = this.state;
+    const { cmsManagementData } = this.props;
+
     return (
       <div className="padding-rl-10 middle-section width-80">
         <div className="create-cms-page-wrapr">
           <div className="page-heading col-xs-12 mar-btm-5">
             {isEdit ? Translations.cms.edit : Translations.cms.create}
           </div>
+          {cmsManagementData && cmsManagementData.isLoading && (
+            <InlineLoading />
+          )}
           <form className="cms-form col-xs-12" onSubmit={this.handleSubmit}>
             <div className="form-row col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Title of page" className="col-xs">
-                  {Translations.cms.title_of_page}
-                </label>
-                <input
+                <Label
+                  htmlFor="Title of page"
+                  className="col-xs"
+                  value={Translations.cms.title_of_page}
+                />
+                <Input
                   type="text"
                   name="title"
-                  defaultValue={form.title}
+                  value={form.title}
                   onChange={this.handleChangeField}
                 />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="URL">{Translations.cms.url}</label>
-                <input
+                <Label htmlFor="URL" value={Translations.cms.url} />
+                <Input
                   type="text"
                   name="url"
-                  defaultValue={form.url}
+                  value={form.url}
                   onChange={this.handleChangeField}
                 />
               </div>
             </div>
             <div className="form-row marBtm30 col-xs-12">
               <div className="form-col col-xs-6 no-padding res480">
-                <label htmlFor="Language">{Translations.cms.language}</label>
-                <select name="language" id="" onBlur={this.handleChangeField} onChange={this.handleChangeField} value={form.pageLanguage} >
-                  <option value="English">English</option>
-                  <option value="German">German</option>
-                </select>
+                <Label htmlFor="Language" value={Translations.cms.language} />
+                <SelectLanguage
+                  value={form.pageLanguage}
+                  handleSelect={this.handleSelect}
+                />
                 <span className="glyphicon glyphicon-triangle-bottom" />
               </div>
               <div className="form-col col-xs-6 no-padding-right res480">
-                <label htmlFor="Display page">{Translations.cms.display_page}</label>
+                <Label
+                  htmlFor="Display page"
+                  value={Translations.cms.display_page}
+                />
                 <div className="choice-wrapr">
-                  <div className="choice" onChange={this.handleChangeField}>
-                    <input
+                  <div className="choice">
+                    <RadioButton
                       type="radio"
-                      name="display_page"
+                      name="displayPage"
                       value={Translations.cms.public}
-                      defaultChecked={form.displayPage === Translations.cms.public}
+                      defaultChecked={
+                        form.displayPage === Translations.cms.public
+                      }
+                      onChange={this.handleChangeField}
                     />
-                    <label htmlFor="Public">{Translations.cms.public}</label>
+                    <Label htmlFor="Public" value={Translations.cms.public} />
                   </div>
-                  <div className="choice" onChange={this.handleChangeField}>
-                    <input
+                  <div className="choice">
+                    <RadioButton
                       type="radio"
-                      name="display_page"
+                      name="displayPage"
                       value={Translations.cms.draft}
-                      defaultChecked={form.displayPage === Translations.cms.draft}
+                      defaultChecked={
+                        form.displayPage === Translations.cms.draft
+                      }
+                      onChange={this.handleChangeField}
                     />
-                    <label htmlFor="Draft">{Translations.cms.draft}</label>
+                    <Label htmlFor="Draft" value={Translations.cms.draft} />
                   </div>
                 </div>
               </div>
@@ -95,21 +120,23 @@ class CreateCMSManagementPage extends Component {
             <div className="form-row col-xs-12 res480">
               <TextEditor
                 handleContentChange={this.handleContentChange}
-                contentText={form.description}
+                contentText={form.description || ""}
               />
             </div>
             <div className="form-row col-xs-12 marBtm0">
               <Link to={routes.BACK_OFFICE_CMS_MANAGMENT_ROUTE}>
-                <button type="button" className="form-btn">
-                  {Translations.cms.cancle}
-                </button>
+                <Button className="form-btn" text={Translations.cms.cancle} />
               </Link>
-              <button type="button" className="form-btn" onClick={this.handlePreview}>
-                {Translations.cms.preview}
-              </button>
-              <button type="submit" className="form-btn">
-                {isEdit ? Translations.cms.update : Translations.cms.save}
-              </button>
+              <Button
+                className="form-btn"
+                onClick={this.handlePreview}
+                text={Translations.cms.preview}
+              />
+              <Button
+                type="submit"
+                className="form-btn"
+                text={isEdit ? Translations.cms.update : Translations.cms.save}
+              />
             </div>
           </form>
         </div>
@@ -118,8 +145,7 @@ class CreateCMSManagementPage extends Component {
   }
 
   componentDidMount = () => {
-    const isEdit =
-      !!(this.props.match && this.props.match.params.id);
+    const isEdit = !!(this.props.match && this.props.match.params.id);
     this.setState({ isEdit });
     if (isEdit) {
       this.props.getCMSDetail(this.props.match.params.id).then(() => {
@@ -130,10 +156,10 @@ class CreateCMSManagementPage extends Component {
           this.setState({
             form: {
               ...this.state.form,
-              id: this.props.cmsManagementData.cmsDetail.id,
+              id: this.props.cmsManagementData.cmsDetail._id,
               title: this.props.cmsManagementData.cmsDetail.title,
               url: this.props.cmsManagementData.cmsDetail.url,
-              language: this.props.cmsManagementData.cmsDetail.pageLanguage,
+              pageLanguage: this.props.cmsManagementData.cmsDetail.pageLanguage,
               display_page: this.props.cmsManagementData.cmsDetail.displayPage,
               description: this.props.cmsManagementData.cmsDetail.description
             }
@@ -153,15 +179,16 @@ class CreateCMSManagementPage extends Component {
   }
 
   handleChangeField = event => {
+    console.log(event.values);
     const { form } = this.state;
-    form[event.target.name] = event.target.value;
+    form[event.values.name] = event.values.val;
     this.setState({ form });
   };
 
   validationForm = () => {
     const { form } = this.state;
     return form.title && form.pageLanguage && form.url && form.description;
-  }
+  };
 
   // handelSubmit called when click on submit
   handleSubmit = e => {
@@ -174,7 +201,7 @@ class CreateCMSManagementPage extends Component {
           url: form.url,
           description: form.description,
           displayPage: form.displayPage,
-          language: form.pageLanguage,
+          pageLanguage: form.pageLanguage,
           title: form.title
         };
         this.props.updateCMS(data).then(() => {
@@ -185,7 +212,7 @@ class CreateCMSManagementPage extends Component {
           url: form.url,
           description: form.description,
           displayPage: form.displayPage,
-          language: form.pageLanguage,
+          pageLanguage: form.pageLanguage,
           title: form.title
         };
         this.props.createCMS(data).then(() => {
@@ -202,8 +229,11 @@ class CreateCMSManagementPage extends Component {
   };
 
   handlePreview = () => {
-    this.props.handleModalInfoDetailsShow(modalType.cmsPreview, this.state.form);
-  }
+    this.props.handleModalInfoDetailsShow(
+      modalType.cmsPreview,
+      this.state.form
+    );
+  };
 }
 
 const mapStateToProps = state => ({

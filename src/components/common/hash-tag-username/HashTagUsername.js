@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { HashTag } from "../hash-tag";
 import { Username } from "../username";
-import { ToolTip } from "../../ui-kit";
+import { ToolTip, Input } from "../../ui-kit";
 import ReactTooltip from "react-tooltip";
 import { getHashTag, addHashTag } from "../../../actions";
-import { connect } from "react-redux";
+import { Translations } from "../../../lib/translations";
 
 class HashTagUsername extends Component {
   constructor(props) {
@@ -46,30 +47,34 @@ class HashTagUsername extends Component {
   none = () => {};
 
   handleChangeField = e => {
-    const commentArr = e.target.value.split(" ");
+    const { isText } = this.props;
+    const value = isText ? e.values.val : e.target.value;
+    const commentArr = value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
     this.hashTagHide();
     this.usernameHide();
     if (lastText.charAt(0) === "#") {
-      this.props.handleSetState(e.target.value, this.hashTagShow);
+      this.props.handleSetState(value, this.hashTagShow);
       // this.handleAddHashTag(lastText);
     } else if (lastText.charAt(0) === "@") {
-      this.props.handleSetState(e.target.value, this.usernameShow);
+      this.props.handleSetState(value, this.usernameShow);
     } else {
-      this.props.handleSetState(e.target.value, this.none);
+      this.props.handleSetState(value, this.none);
     }
   };
 
   handleLengthField = e => {
-    let commentText = e.target.value;
+    const { isText } = this.props;
+    const value = isText ? e.values.val : e.target.value;
+    let commentText = value;
     let limitField;
-    const commentArr = e.target.value.split(" ");
+    const commentArr = value.split(" ");
     const lastText = commentArr[commentArr.length - 1];
 
     const keyCode = e.keyCode ? e.keyCode : e.which;
 
     if (lastText.charAt(0) === "#") {
-      this.props.handleSetState(e.target.value, this.hashTagShow);
+      this.props.handleSetState(value, this.hashTagShow);
       if (keyCode === 32) {
         this.handleAddHashTag(lastText);
       }
@@ -89,8 +94,8 @@ class HashTagUsername extends Component {
     this.props.handleSetState(value, this.hashTagHide);
   };
 
-  handleSetSatetToolTipUsername = value => {
-    this.props.handleSetState(value, this.usernameHide);
+  handleSetSatetToolTipUsername = (value, id) => {
+    this.props.handleSetState(value, this.usernameHide, id);
   };
 
   handleAddHashTag = value => {
@@ -133,24 +138,32 @@ class HashTagUsername extends Component {
   };
 
   render() {
-    const { value, placeholder, className, name, isText } = this.props;
+    const {
+      value,
+      placeholder,
+      className,
+      name,
+      isText,
+      maxLimit
+    } = this.props;
+    const { remainingLimitLength } = this.state;
     return (
       <div>
         {isText ? (
           <div>
-            <input
+            <Input
               className={className}
               placeholder={placeholder}
               type="text"
               name={name}
               onChange={this.handleChangeField}
               value={value}
-              maxLength={this.props.maxLimit}
+              maxLength={maxLimit}
             />
-            {this.state.remainingLimitLength > 0 &&
-            this.state.remainingLimitLength !== 1000 ? (
+            {remainingLimitLength > 0 && remainingLimitLength !== 1000 ? (
               <p className="commenter-info">
-                You have {this.state.remainingLimitLength} characters left{" "}
+                {Translations.you_have} {remainingLimitLength}{" "}
+                {Translations.characters_left}{" "}
               </p>
             ) : (
               ""
@@ -171,13 +184,13 @@ class HashTagUsername extends Component {
           data-for="hash_tag"
           role="button"
           data-tip="tooltip"
-          ref={hash_tag => this.hash_tag = hash_tag}
+          ref={hash_tag => (this.hash_tag = hash_tag)}
         />
         <div
           data-for="username"
           role="button"
           data-tip="tooltip"
-          ref={username => this.username = username}
+          ref={username => (this.username = username)}
         />
         <ToolTip
           id="hash_tag"

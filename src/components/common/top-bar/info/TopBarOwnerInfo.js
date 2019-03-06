@@ -5,51 +5,49 @@ import PropTypes from "prop-types";
 import { modalType } from "../../../../lib/constants/enumerations";
 import { Auth } from "../../../../auth";
 import { connect } from "react-redux";
-import { getUser, getFollowUserList } from "../../../../actions";
+import {
+  getUser,
+  getFollowUserList,
+  getUserCommunity
+} from "../../../../actions";
+import * as routes from "../../../../lib/constants/routes";
 
-const storage = Auth.extractJwtFromStorage();
 class TopBarOwnerInfo extends Component {
   constructor(props) {
     super(props);
 
+    const storage = Auth.extractJwtFromStorage();
     let userInfo = {};
     if (storage) {
       userInfo = JSON.parse(storage.userInfo);
     }
-    this.state = {
-      items: {
-        userid: userInfo.id,
-        username: userInfo.username,
-        private: userInfo.isPrivate,
-        more: true,
-        isSubscribe: userInfo.isSubscribe,
-        userProfile: userInfo.profileUrl,
-        isBlocked: userInfo.isBlocked,
-        blockId: userInfo.blockId,
-        slots: [
+
+    const selectedUserType = "creator";
+    let btnSlotsData = [];
+    if (userInfo) {
+      if (userInfo.userType === selectedUserType) {
+        btnSlotsData = [
           {
             name: Translations.top_bar_info.subscriber,
-            val: 0,
-            className: "col-sm-4 slot_one no-padding",
+            className: "col-sm-8 slot_one no-padding",
+            btnActiveClassName: "filled_button",
+            btnText: Translations.top_bar_info.upload,
+            handeleEvent: this.handeleUpload,
             userid: userInfo.id,
             username: userInfo.username
           },
           {
             name: Translations.top_bar_info.subscribed,
-            val: 0,
             className: "col-sm-4 slot_two no-padding",
-            userid: userInfo.id,
-            username: userInfo.username
-          },
-          {
-            name: Translations.top_bar_info.posts,
-            val: 0,
-            className: "col-sm-4 slot_three no-padding",
+            btnActiveClassName: "black_button",
+            btnText: Translations.top_bar_info.create_campaign,
+            handeleEvent: this.handeleCreateCampaign,
             userid: userInfo.id,
             username: userInfo.username
           }
-        ],
-        btnSlots: [
+        ];
+      } else {
+        btnSlotsData = [
           {
             name: Translations.top_bar_info.subscriber,
             className: "col-sm-4 slot_one no-padding",
@@ -70,16 +68,55 @@ class TopBarOwnerInfo extends Component {
           },
           {
             name: Translations.top_bar_info.posts,
-            className: "col-sm-4 slot_three no-padding",
+            className: "col-sm-4 slot_two no-padding",
             btnActiveClassName: "black_button",
             btnText: Translations.top_bar_info.create_ad,
             handeleEvent: this.handeleCreateAd,
             userid: userInfo.id,
             username: userInfo.username
           }
-        ]
+        ];
       }
-    };
+
+      this.state = {
+        items: {
+          userid: userInfo.id,
+          username: userInfo.username,
+          private: userInfo.isPrivate,
+          more: true,
+          isSubscribe: userInfo.isSubscribe,
+          userProfile: userInfo.profileUrl,
+          isBlocked: userInfo.isBlocked,
+          blockId: userInfo.blockId,
+          slots: [
+            {
+              name: Translations.top_bar_info.subscriber,
+              val: 0,
+              className: "col-sm-4 slot_one no-padding",
+              userid: userInfo.id,
+              username: userInfo.username
+            },
+            {
+              name: Translations.top_bar_info.subscribed,
+              val: 0,
+              className: "col-sm-4 slot_two no-padding",
+              userid: userInfo.id,
+              username: userInfo.username
+            },
+            {
+              name: Translations.top_bar_info.posts,
+              val: 0,
+              className: "col-sm-4 slot_three no-padding",
+              userid: userInfo.id,
+              username: userInfo.username
+            }
+          ],
+          btnSlots: btnSlotsData
+        }
+      };
+    } else {
+      this.props.history.push(routes.LOGOUT_ROUTE);
+    }
   }
 
   render() {
@@ -103,15 +140,75 @@ class TopBarOwnerInfo extends Component {
 
     if (userInfo) {
       const data = {
-        username: userInfo.username
+        username: userInfo.username,
+        id: userInfo.id
       };
+      const selectedUserType = "creator";
       this.setState({ isLoading: true });
+      this.props.getUserCommunity(data).then(() => {
+        // console.log(this.props.userCommunity);
+      });
       this.props.getUser(data).then(() => {
         if (
           this.props.userDataByUsername &&
           this.props.userDataByUsername.user &&
           this.props.userDataByUsername.user.data
         ) {
+          /* To set Create Campaign and Ad - on lodin user type */
+          let btnSlotsData = [];
+          if (userInfo && userInfo.userType === selectedUserType) {
+            btnSlotsData = [
+              {
+                name: Translations.top_bar_info.subscriber,
+                className: "col-sm-8 slot_one no-padding",
+                btnActiveClassName: "filled_button",
+                btnText: Translations.top_bar_info.upload,
+                handeleEvent: this.handeleUpload,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.subscribed,
+                className: "col-sm-4 slot_two no-padding",
+                btnActiveClassName: "black_button",
+                btnText: Translations.top_bar_info.create_campaign,
+                handeleEvent: this.handeleCreateCampaign,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              }
+            ];
+          } else {
+            btnSlotsData = [
+              {
+                name: Translations.top_bar_info.subscriber,
+                className: "col-sm-4 slot_one no-padding",
+                btnActiveClassName: "filled_button",
+                btnText: Translations.top_bar_info.upload,
+                handeleEvent: this.handeleUpload,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.subscribed,
+                className: "col-sm-4 slot_two no-padding",
+                btnActiveClassName: "black_button",
+                btnText: Translations.top_bar_info.create_campaign,
+                handeleEvent: this.handeleCreateCampaign,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              },
+              {
+                name: Translations.top_bar_info.posts,
+                className: "col-sm-4 slot_two no-padding",
+                btnActiveClassName: "black_button",
+                btnText: Translations.top_bar_info.create_ad,
+                handeleEvent: this.handeleCreateAd,
+                userid: this.props.userDataByUsername.user.data.id,
+                username: this.props.userDataByUsername.user.data.username
+              }
+            ];
+          }
+
           const items = {
             userid: this.props.userDataByUsername.user.data.id,
             username: this.props.userDataByUsername.user.data.username,
@@ -142,35 +239,7 @@ class TopBarOwnerInfo extends Component {
                 username: this.props.userDataByUsername.user.data.username
               }
             ],
-            btnSlots: [
-              {
-                name: Translations.top_bar_info.subscriber,
-                className: "col-sm-4 slot_one no-padding",
-                btnActiveClassName: "filled_button",
-                btnText: Translations.top_bar_info.upload,
-                handeleEvent: this.handeleUpload,
-                userid: this.props.userDataByUsername.user.data.id,
-                username: this.props.userDataByUsername.user.data.username
-              },
-              {
-                name: Translations.top_bar_info.subscribed,
-                className: "col-sm-4 slot_two no-padding",
-                btnActiveClassName: "black_button",
-                btnText: Translations.top_bar_info.create_campaign,
-                handeleEvent: this.handeleCreateCampaign,
-                userid: this.props.userDataByUsername.user.data.id,
-                username: this.props.userDataByUsername.user.data.username
-              },
-              {
-                name: Translations.top_bar_info.posts,
-                className: "col-sm-4 slot_three no-padding",
-                btnActiveClassName: "black_button",
-                btnText: Translations.top_bar_info.create_ad,
-                handeleEvent: this.handeleCreateAd,
-                userid: this.props.userDataByUsername.user.data.id,
-                username: this.props.userDataByUsername.user.data.username
-              }
-            ]
+            btnSlots: btnSlotsData
           };
           this.setState({ items });
         }
@@ -182,8 +251,74 @@ class TopBarOwnerInfo extends Component {
     if (this.props.userDataByUsername.user) {
       if (
         this.props.userDataByUsername.user.data.subscribedCount !==
-        nextProps.userDataByUsername.user.data.subscribedCount
+          nextProps.userDataByUsername.user.data.subscribedCount ||
+        this.props.userDataByUsername.user.data.subscribersCount !==
+          nextProps.userDataByUsername.user.data.subscribersCount
       ) {
+        const subscribersCount =
+          nextProps.userDataByUsername.user.data.subscribersCount;
+
+        const subscribedCount =
+          nextProps.userDataByUsername.user.data.subscribedCount;
+
+        const selectedUserType = "creator";
+        let btnSlotsData = [];
+
+        if (
+          nextProps.userDataByUsername.user.data.userType === selectedUserType
+        ) {
+          btnSlotsData = [
+            {
+              name: Translations.top_bar_info.subscriber,
+              className: "col-sm-8 slot_one no-padding",
+              btnActiveClassName: "filled_button",
+              btnText: Translations.top_bar_info.upload,
+              handeleEvent: this.handeleUpload,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.subscribed,
+              className: "col-sm-4 slot_two no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_campaign,
+              handeleEvent: this.handeleCreateCampaign,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            }
+          ];
+        } else {
+          btnSlotsData = [
+            {
+              name: Translations.top_bar_info.subscriber,
+              className: "col-sm-4 slot_one no-padding",
+              btnActiveClassName: "filled_button",
+              btnText: Translations.top_bar_info.upload,
+              handeleEvent: this.handeleUpload,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.subscribed,
+              className: "col-sm-4 slot_two no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_campaign,
+              handeleEvent: this.handeleCreateCampaign,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            },
+            {
+              name: Translations.top_bar_info.posts,
+              className: "col-sm-4 slot_two no-padding",
+              btnActiveClassName: "black_button",
+              btnText: Translations.top_bar_info.create_ad,
+              handeleEvent: this.handeleCreateAd,
+              userid: nextProps.userDataByUsername.user.data.id,
+              username: nextProps.userDataByUsername.user.data.username
+            }
+          ];
+        }
+
         const items = {
           userid: nextProps.userDataByUsername.user.data.id,
           username: nextProps.userDataByUsername.user.data.username,
@@ -194,14 +329,14 @@ class TopBarOwnerInfo extends Component {
           slots: [
             {
               name: Translations.top_bar_info.subscriber,
-              val: nextProps.userDataByUsername.user.data.subscribersCount,
+              val: subscribersCount,
               className: "col-sm-4 slot_one no-padding",
               userid: nextProps.userDataByUsername.user.data.id,
               username: nextProps.userDataByUsername.user.data.username
             },
             {
               name: Translations.top_bar_info.subscribed,
-              val: nextProps.userDataByUsername.user.data.subscribedCount,
+              val: subscribedCount,
               className: "col-sm-4 slot_two no-padding",
               userid: nextProps.userDataByUsername.user.data.id,
               username: nextProps.userDataByUsername.user.data.username
@@ -214,32 +349,7 @@ class TopBarOwnerInfo extends Component {
               username: nextProps.userDataByUsername.user.data.username
             }
           ],
-          btnSlots: [
-            {
-              name: Translations.top_bar_info.subscriber,
-              val: nextProps.userDataByUsername.user.data.subscribersCount,
-              className: "col-sm-4 slot_one no-padding",
-              btnActiveClassName: "filled_button",
-              userid: nextProps.userDataByUsername.user.data.id,
-              username: nextProps.userDataByUsername.user.data.username
-            },
-            {
-              name: Translations.top_bar_info.subscribed,
-              val: nextProps.userDataByUsername.user.data.subscribedCount,
-              className: "col-sm-4 slot_two no-padding",
-              btnActiveClassName: "black_button",
-              userid: nextProps.userDataByUsername.user.data.id,
-              username: nextProps.userDataByUsername.user.data.username
-            },
-            {
-              name: Translations.top_bar_info.posts,
-              val: nextProps.userDataByUsername.user.data.postCount,
-              className: "col-sm-4 slot_three no-padding",
-              btnActiveClassName: "black_button",
-              userid: nextProps.userDataByUsername.user.data.id,
-              username: nextProps.userDataByUsername.user.data.username
-            }
-          ]
+          btnSlots: btnSlotsData
         };
         this.setState({ items });
       }
@@ -263,18 +373,30 @@ class TopBarOwnerInfo extends Component {
   };
 
   handeleShare = () => {
-    this.props.handleModalInfoShow(modalType.share);
+    const storage = Auth.extractJwtFromStorage();
+    let userInfo = null;
+    if (storage) {
+      userInfo = JSON.parse(storage.userInfo);
+    }
+    if (userInfo) {
+      const data = {
+        url: `${window.location.href}/${userInfo.username}`
+      };
+      this.props.handleModalInfoShow(modalType.share, data);
+    }
   };
-
 }
 const mapStateToProps = state => ({
   userDataByUsername: state.userDataByUsername,
-  usersData: state.usersData
+  usersData: state.usersData,
+  userCommunity: state.communityData.userCommunity,
+  subscribeData: state.subscribeData
 });
 
 const mapDispatchToProps = {
   getUser,
-  getFollowUserList
+  getFollowUserList,
+  getUserCommunity
 };
 
 TopBarOwnerInfo.propTypes = {
@@ -283,7 +405,11 @@ TopBarOwnerInfo.propTypes = {
   getUser: PropTypes.func,
   userDataByUsername: PropTypes.object,
   getFollowUserList: PropTypes.func,
-  usersData: PropTypes.object
+  usersData: PropTypes.object,
+  getUserCommunity: PropTypes.func,
+  history: PropTypes.any,
+  userCommunity: PropTypes.any,
+  subscribeData: PropTypes.any
 };
 
 export default connect(

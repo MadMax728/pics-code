@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import * as images from "../../../../lib/constants/images";
-import { Text } from "../../../ui-kit/CommonUIComponents";
+import {
+  Input,
+  Label,
+  ErrorSpan,
+  Button,
+  InlineLoading
+} from "../../../ui-kit";
 import { Translations } from "../../../../lib/translations";
 import * as inputMask from "../../../../lib/constants/inputMasks";
 import { Auth } from "../../../../auth";
@@ -75,8 +81,9 @@ class PrivacyPage extends Component {
     const {
       change_email_form,
       change_password_form,
-      change_invoicing_address_form,
+      change_invoicing_address_form
     } = this.state;
+    const isInvoiceAddressLoading = this.props.profilePrivacyData.isLoading;
 
     return (
       <div className="padding-rl-10 middle-section width-80">
@@ -90,7 +97,7 @@ class PrivacyPage extends Component {
               {Translations.privacy.limitations}
             </div>
             <div className="limitation-wrapper">
-              <div className="row">
+              {/* <div className="row">
                 <div className="col-sm-6">
                   {Translations.privacy.set_my_profile_to_private}
                 </div>
@@ -118,14 +125,14 @@ class PrivacyPage extends Component {
                     </label>
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="row">
                 <div className="col-sm-6">
                   {Translations.privacy.social_share_function}
                 </div>
                 <div className="col-sm-6 text-right">
                   <div>
-                    <label className="switch" htmlFor={"SocialShare"}>
+                    <div className="switch" htmlFor={"SocialShare"}>
                       <Switch
                         onChange={this.hanldeIsSocialShare}
                         checked={this.state.isSocialShare}
@@ -141,7 +148,7 @@ class PrivacyPage extends Component {
                         className="react-switch"
                         id="material-switch"
                       />
-                    </label>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -150,7 +157,7 @@ class PrivacyPage extends Component {
                   {Translations.privacy.Personalized_advertising}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <label className="switch" htmlFor={"Personalized"}>
+                  <div className="switch" htmlFor={"Personalized"}>
                     <Switch
                       onChange={this.hanldeIsPersonalized}
                       checked={this.state.isPersonalized}
@@ -166,7 +173,7 @@ class PrivacyPage extends Component {
                       className="react-switch"
                       id="material-switch"
                     />
-                  </label>
+                  </div>
                 </div>
               </div>
             </div>
@@ -176,10 +183,11 @@ class PrivacyPage extends Component {
             </div>
             <div className="change-email-wrapper">
               <div className="form-group">
-                <label htmlFor="email">
-                  {Translations.privacy.Current_Email}
-                </label>
-                <Text
+                <Label
+                  htmlFor="email"
+                  value={Translations.privacy.Current_Email}
+                />
+                <Input
                   type="email"
                   className="form-control"
                   id="current_email"
@@ -195,21 +203,21 @@ class PrivacyPage extends Component {
                 {change_email_form.current_email.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_email_form_error.current_email}
-                </span>
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_email_form_error.current_email}
+                />
               </div>
               <div className="form-group new-email">
-                <label htmlFor="email">{Translations.privacy.New_Email}</label>
-                <span className="error-msg pull-right">
-                  {
+                <Label htmlFor="email" value={Translations.privacy.New_Email} />
+                <ErrorSpan
+                  value={
                     Translations.privacy
                       .Please_confirm_this_change_in_your_email_account
                   }
-                </span>
-                <Text
+                />
+                <Input
                   type="email"
                   className="form-control"
                   id="new_email"
@@ -225,22 +233,21 @@ class PrivacyPage extends Component {
                 {change_email_form.new_email.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_email_form_error.new_email}
-                </span>
-                <span className="error-msg highlight">
-                  {this.state.change_email_form_error.servererror}
-                </span>
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_email_form_error.new_email}
+                />
+                <ErrorSpan
+                  value={this.state.change_email_form_error.servererror}
+                />
               </div>
               <div className="form-group">
-                <button
+                <Button
                   className="black_button"
                   onClick={this.handleSaveChangeEmail}
-                >
-                  {Translations.privacy.save}
-                </button>
+                  text={Translations.privacy.save}
+                />
               </div>
             </div>
 
@@ -249,10 +256,11 @@ class PrivacyPage extends Component {
             </div>
             <div className="change-password-wrapper">
               <div className="form-group">
-                <label htmlFor="c-password">
-                  {Translations.privacy.Current_Password}
-                </label>
-                <Text
+                <Label
+                  htmlFor="c-password"
+                  value={Translations.privacy.Current_Password}
+                />
+                <Input
                   type="password"
                   className="form-control"
                   id="current_password"
@@ -268,17 +276,18 @@ class PrivacyPage extends Component {
                 {change_password_form.current_password.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.current_password}
-                </span>
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_password_form_error.current_password}
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="n-password">
-                  {Translations.privacy.New_Password}
-                </label>
-                <Text
+                <Label
+                  htmlFor="n-password"
+                  value={Translations.privacy.New_Password}
+                />
+                <Input
                   type="password"
                   className="form-control"
                   id="new_password"
@@ -294,17 +303,18 @@ class PrivacyPage extends Component {
                 {change_password_form.new_password.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.new_password}
-                </span>
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_password_form_error.new_password}
+                />
               </div>
               <div className="form-group">
-                <label htmlFor="r-password">
-                  {Translations.privacy.Repeat_Password}
-                </label>
-                <Text
+                <Label
+                  htmlFor="r-password"
+                  value={Translations.privacy.Repeat_Password}
+                />
+                <Input
                   type="password"
                   className="form-control"
                   id="repeat_password"
@@ -320,34 +330,35 @@ class PrivacyPage extends Component {
                 {change_password_form.repeat_password.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
-                <span className="error-msg form-field-error">
-                  {this.state.change_password_form_error.repeat_password}
-                </span>
+                  <img src={images.error} alt={"error"} />
+                )}
+                <ErrorSpan
+                  value={this.state.change_password_form_error.repeat_password}
+                />
               </div>
               <div className="form-group">
-                <span className="error-msg highlight">
-                  {this.state.change_password_form_error.servererror}
-                </span>
-                <button
+                <ErrorSpan
+                  value={this.state.change_password_form_error.servererror}
+                />
+                <Button
                   className="black_button"
                   onClick={this.handleSaveChangePassword}
-                >
-                  {Translations.privacy.save}
-                </button>
+                  text={Translations.privacy.save}
+                />
               </div>
             </div>
 
-            <div className="form-subtitle">
+            {/* <div className="form-subtitle">
               {Translations.privacy.Change_invoicing_address}
-            </div>
-            <div className="change-invoiceadd-wrapper">
+            </div> */}
+            {/* <div className="change-invoiceadd-wrapper">
+              {isInvoiceAddressLoading && <InlineLoading />}
               <div className="form-group">
-                <label htmlFor="recipient">
-                  {Translations.privacy.Invoice_recipient}
-                </label>
-                <Text
+                <Label
+                  htmlFor="recipient"
+                  value={Translations.privacy.Invoice_recipient}
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="invoice_recipient"
@@ -362,14 +373,15 @@ class PrivacyPage extends Component {
                 {change_invoicing_address_form.invoice_recipient.length > 0 ? (
                   <img src={images.checked} alt={"checked1"} />
                 ) : (
-                    <img src={images.error} alt={"error1"} />
-                  )}
+                  <img src={images.error} alt={"error1"} />
+                )}
               </div>
               <div className="form-group">
-                <label htmlFor="street">
-                  {Translations.privacy.Street_number}
-                </label>
-                <Text
+                <Label
+                  htmlFor="street"
+                  value={Translations.privacy.Street_number}
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="street_number"
@@ -384,14 +396,15 @@ class PrivacyPage extends Component {
                 {change_invoicing_address_form.street_number.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
               </div>
               <div className="form-group">
-                <label htmlFor="postal">
-                  {Translations.privacy.Postal_code}
-                </label>
-                <Text
+                <Label
+                  htmlFor="postal"
+                  value={Translations.privacy.Postal_code}
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="postal_code"
@@ -406,14 +419,14 @@ class PrivacyPage extends Component {
                 {change_invoicing_address_form.postal_code.length > 0 ? (
                   <img src={images.checked} alt={"checked"} />
                 ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.error} alt={"error"} />
+                )}
               </div>
               <div className="col-2">
                 <div className="col-sm-6 padding-r-5">
                   <div className="form-group">
-                    <label htmlFor="city">{Translations.privacy.city}</label>
-                    <Text
+                    <Label htmlFor="city" value={Translations.privacy.city} />
+                    <Input
                       type="text"
                       className="form-control"
                       id="city"
@@ -428,16 +441,17 @@ class PrivacyPage extends Component {
                     {change_invoicing_address_form.city.length > 0 ? (
                       <img src={images.checked} alt={"checked"} />
                     ) : (
-                        <img src={images.error} alt={"error"} />
-                      )}
+                      <img src={images.error} alt={"error"} />
+                    )}
                   </div>
                 </div>
                 <div className="col-sm-6 padding-l-5">
                   <div className="form-group">
-                    <label htmlFor="country">
-                      {Translations.privacy.Country}
-                    </label>
-                    <Text
+                    <Label
+                      htmlFor="country"
+                      value={Translations.privacy.Country}
+                    />
+                    <Input
                       type="text"
                       className="form-control"
                       id="country"
@@ -452,16 +466,17 @@ class PrivacyPage extends Component {
                     {change_invoicing_address_form.country.length > 0 ? (
                       <img src={images.checked} alt={"checked"} />
                     ) : (
-                        <img src={images.error} alt={"error"} />
-                      )}
+                      <img src={images.error} alt={"error"} />
+                    )}
                   </div>
                 </div>
               </div>
               <div className="form-group">
-                <label htmlFor="vat">
-                  {Translations.privacy.VAT_identification_number}
-                </label>
-                <Text
+                <Label
+                  htmlFor="vat"
+                  value={Translations.privacy.VAT_identification_number}
+                />
+                <Input
                   type="text"
                   className="form-control"
                   id="vat_identification_number"
@@ -475,20 +490,19 @@ class PrivacyPage extends Component {
                 />
                 {change_invoicing_address_form.vat_identification_number
                   .length > 0 ? (
-                    <img src={images.checked} alt={"checked"} />
-                  ) : (
-                    <img src={images.error} alt={"error"} />
-                  )}
+                  <img src={images.checked} alt={"checked"} />
+                ) : (
+                  <img src={images.error} alt={"error"} />
+                )}
               </div>
               <div className="form-group">
-                <button
+                <Button
                   className="black_button"
                   onClick={this.handleSaveChangeInvoice}
-                >
-                  {Translations.privacy.save}
-                </button>
+                  text={Translations.privacy.save}
+                />
               </div>
-            </div>
+            </div> */}
 
             <div className="form-subtitle">{Translations.privacy.Actions}</div>
             <div className="privacy-actions-wrapper">
@@ -497,7 +511,8 @@ class PrivacyPage extends Component {
                   {Translations.privacy.Delete_search_history}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <div className="action-btns"
+                  <div
+                    className="action-btns"
                     onClick={this.handleDeleteSearchHisory}
                     id={"delete_search_history"}
                     role="button"
@@ -513,7 +528,8 @@ class PrivacyPage extends Component {
                   {Translations.privacy.Deactivate_my_account}
                 </div>
                 <div className="col-sm-6 text-right">
-                  <div className="action-btns"
+                  <div
+                    className="action-btns"
                     onClick={this.handleDeactiveMyAccount}
                     id={"deactivate_account"}
                     role="button"
@@ -550,7 +566,7 @@ class PrivacyPage extends Component {
   };
 
   componentWillReceiveProps = nextProps => {
-    // To to test this condition 
+    // To to test this condition
     // if (nextProps.searchData.searchKeyword) {
     //   this.props.getSearch("");
     // }
@@ -562,7 +578,7 @@ class PrivacyPage extends Component {
     }
   };
 
-  onKeyPressHandler = () => { };
+  onKeyPressHandler = () => {};
 
   setDataOnLoad = () => {
     if (this.props.userDataByUsername.user) {
@@ -633,12 +649,12 @@ class PrivacyPage extends Component {
       ) {
         errors.servererror = Translations.privacy.server_error;
         this.setState({ error: errors });
-      } else if (userInfo) {
-        const data = {
-          username: userInfo.username
-        };
-        this.props.getUser(data).then(() => {
-          this.setDataOnLoad();
+      } else if (
+        this.props.profilePrivacyData &&
+        this.props.profilePrivacyData.socialShareData
+      ) {
+        this.setState({
+          isSocialShare: this.props.profilePrivacyData.socialShareData
         });
       }
     });
@@ -656,10 +672,12 @@ class PrivacyPage extends Component {
       ) {
         errors.servererror = Translations.privacy.server_error;
         this.setState({ error: errors });
-      } else if (userInfo) {
-        const data = { username: userInfo.username };
-        this.props.getUser(data).then(() => {
-          this.setDataOnLoad();
+      } else if (
+        this.props.profilePrivacyData &&
+        this.props.profilePrivacyData.personalAdvertiseData
+      ) {
+        this.setState({
+          isPersonalized: this.props.profilePrivacyData.personalAdvertiseData
         });
       }
     });
@@ -869,10 +887,10 @@ class PrivacyPage extends Component {
   };
 
   handleDeactiveMyAccount = () => {
-    // const modalForValue = e.target.id;
-    this.props.handleModalInfoShow(modalType.confirmation);
+    this.props.handleModalShow(modalType.confirmation, {
+      id: "deactivateAccount"
+    });
   };
-
 }
 
 const mapStateToProps = state => ({
@@ -904,6 +922,7 @@ PrivacyPage.propTypes = {
   deleteSearchHistory: PropTypes.func,
   deactivateAccount: PropTypes.func,
   handleModalInfoShow: PropTypes.func,
+  handleModalShow: PropTypes.func,
   profilePrivacyData: PropTypes.any,
   history: PropTypes.any,
   getUser: PropTypes.func,

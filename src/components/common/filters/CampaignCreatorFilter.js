@@ -1,8 +1,9 @@
 import React, { Component } from "react";
-import { LeftSidebarFilter } from "../../ui-kit";
+import { LeftSidebarFilter, Button } from "../../ui-kit";
 import { Translations } from "../../../lib/translations";
 import PropTypes from "prop-types";
 import { setCookie } from "../../../lib/utils/helpers";
+import { Scrollbars } from "react-custom-scrollbars";
 
 const staticData = [
   { name: "option1", className: "", value: "option1" },
@@ -50,18 +51,19 @@ class CampaignCreatorFilter extends Component {
     this.state = {
       filterApply: false,
       filData: [],
-      currentLanguage: Translations.getLanguage()
+      currentLanguage: Translations.getLanguage(),
+      height: window.innerHeight
     };
   }
 
   render() {
     const Filters = [
-      {
-        name: Translations.left_sidebar_filter.radio_change_language.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radio_change_language.type,
-        items: languageItem
-      },
+      // {
+      //   name: Translations.left_sidebar_filter.radio_change_language.name,
+      //   className: "filter-title",
+      //   type: Translations.left_sidebar_filter.radio_change_language.type,
+      //   items: languageItem
+      // },
       {
         name: Translations.left_sidebar_filter.relevance.name,
         className: "filter-title",
@@ -73,12 +75,6 @@ class CampaignCreatorFilter extends Component {
         className: "filter-title",
         type: Translations.left_sidebar_filter.location.type,
         items: []
-      },
-      {
-        name: Translations.left_sidebar_filter.radius.name,
-        className: "filter-title",
-        type: Translations.left_sidebar_filter.radius.type,
-        items: radiusItems
       },
       {
         name: Translations.left_sidebar_filter.category.name,
@@ -93,30 +89,24 @@ class CampaignCreatorFilter extends Component {
         items: targetGroupOptions
       }
     ];
+
+    const { filterApply, height } = this.state;
+
     return (
-      <div className="left-filters">
-        <LeftSidebarFilter
-          filters={Filters}
-          onChange={this.handleOnChange}
-          filterApply={this.state.filterApply}
-          handleSelect={this.handleSelect}
-          handleLanguageSwitch={this.handleLanguageSwitch}
-        />
-        <div className="filter-btn-wrapper">
-          {this.state.filterApply ? (
-            <button
-              className="black_button"
-              onClick={this.handleResetFilterClick}
-            >
-              {Translations.filter.reset_filter}
-            </button>
-          ) : (
-            <button className="black_button" onClick={this.handleApplyClick}>
-              {Translations.filter.apply}
-            </button>
-          )}
+      <Scrollbars style={{ height: `${height - 220}px` }}>
+        <div className="left-filters">
+          <LeftSidebarFilter
+            filters={Filters}
+            onChange={this.handleOnChange}
+            filterApply={filterApply}
+            handleSelect={this.handleSelect}
+            handleLanguageSwitch={this.handleLanguageSwitch}
+            handleResetFilterClick={this.handleResetFilterClick}
+            handleApplyClick={this.handleApplyClick}
+            isNotFilter
+          />
         </div>
-      </div>
+      </Scrollbars>
     );
   }
 

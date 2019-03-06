@@ -29,6 +29,13 @@ class BaseHeader extends Component {
             ) : (
               ""
             )}
+            {window.location.href.indexOf("register") !== -1 ? (
+              <li>
+                <Link to={routes.ROOT_ROUTE}>{Translations.login.login}</Link>
+              </li>
+            ) : (
+              ""
+            )}
           </ul>
         </div>
       </header>

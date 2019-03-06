@@ -1,69 +1,64 @@
 import React, { Component } from "react";
-import FavouriteCampaignItem from "./FavouriteCampaignItem";
-// import { campaignList && campaignList } from "../../../../mock-data";
-import { Translations } from "../../../../lib/translations";
-import * as enumerations from "../../../../lib/constants/enumerations";
-import { getFavouriteCampaigns } from "../../../../actions";
+import { Scrollbars } from "react-custom-scrollbars";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import FavouriteCampaignItem from "./FavouriteCampaignItem";
+import { Translations } from "../../../../lib/translations";
+// import * as enumerations from "../../../../lib/constants/enumerations";
+import { getFavouriteCampaigns } from "../../../../actions";
 import { RightSidebarLoading, NoDataFoundRightSidebar } from "../../../ui-kit";
 
 class FavouriteCampaigns extends Component {
 
+  componentDidMount = () => {
+    this.props.getFavouriteCampaigns();
+  };
+
   render() {
-    const { isLoading } = this.props;
+    const { campaignData, isLoading } = this.props;
+    const favouriteCampaign = campaignData && campaignData.favouriteCampaign ? campaignData.favouriteCampaign : [];
+    const favouriteCampaigns = favouriteCampaign.slice(0, 5);
     return (
       <div>
         <div className="normal_title padding-15">
           {Translations.favourite_campaigns}
         </div>
-        {
-          !isLoading && (
-            <div className="campaigns">
-              {
-                this.props.campaignData.favouriteCampaign ? (
-                this.props.campaignData.favouriteCampaign.map(campaign => {
+        {!isLoading && (
+          <div className="campaigns">
+            {favouriteCampaigns.length > 0 ? (
+              <Scrollbars
+                style={{}}
+                autoHeight
+                autoHeightMin={0}
+                autoHeightMax={500}
+              >
+                {favouriteCampaigns.map(campaign => {
                   return (
-                    ((campaign.postType &&
-                      campaign.postType.toLowerCase() ===
-                        enumerations.contentTypes.companyCampaign) ||
-                      campaign.postType.toLowerCase() ===
-                        enumerations.contentTypes.creatorCampaign) && (
-                      <FavouriteCampaignItem
-                        campaign={campaign}
-                        key={campaign.id}
-                      />
-                    )
+                    <FavouriteCampaignItem
+                      campaign={campaign}
+                      key={campaign.id}
+                    />
                   );
-                })): (<NoDataFoundRightSidebar />)
-              }
-            </div>
-          )
-        }
-        {
-          isLoading && (
-            <RightSidebarLoading />
-          )
-        }
-       
+                })}
+              </Scrollbars>
+            ) : (
+              <NoDataFoundRightSidebar />
+            )}
+          </div>
+        )}
+        {isLoading && <RightSidebarLoading />}
       </div>
     );
   }
-  
-  componentDidMount = () => {
-    this.props.getFavouriteCampaigns("", "");
-  };
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.searchData.searchKeyword !== this.props.searchData.searchKeyword
-    ) {
-      const searchKeyword = nextProps.searchData.searchKeyword;
-      if (searchKeyword) {
-        const searchParam = "?isSearch=" + searchKeyword;
-        this.props.getFavouriteCampaigns("", searchParam);
-      }
+  shouldComponentUpdate(nextProps, nextState) {
+    const next = nextProps.campaignData;
+    const { campaignData } = this.props;
+    const favouriteCampaign = campaignData && campaignData.favouriteCampaign ? campaignData.favouriteCampaign : [];
+    if( next && next.favouriteCampaign && favouriteCampaign && JSON.stringify(next.favouriteCampaign) === JSON.stringify(favouriteCampaign)) {
+      return false;
     }
+    return true;
   }
 
 }
@@ -71,7 +66,6 @@ class FavouriteCampaigns extends Component {
 const mapStateToProps = state => ({
   campaignData: state.campaignData,
   isLoading: state.campaignData.isLoading,
-  searchData: state.searchData,
   error: state.campaignData.error
 });
 
@@ -82,9 +76,7 @@ const mapDispatchToProps = {
 FavouriteCampaigns.propTypes = {
   getFavouriteCampaigns: PropTypes.func.isRequired,
   campaignData: PropTypes.object,
-  isLoading: PropTypes.bool,
-  searchData: PropTypes.any
-  // error: PropTypes.any
+  isLoading: PropTypes.bool
 };
 
 export default connect(

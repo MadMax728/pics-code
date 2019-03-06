@@ -1,9 +1,10 @@
 .edit-profile-form {
-  padding: 35px 100px 25px 100px;
+  padding: 35px 60px 25px 60px;
   background: $white_color;
   float: left;
   width: 100%;
   margin-bottom: 35px;
+
   .form-group {
     .options {
       li {
@@ -11,9 +12,14 @@
       }
     }
     input[type="number"] {
-      width: 32.33%;
+      width: 100%;
       float: left;
       margin-right: 1%;
+    }
+  }
+  .birth-date {
+    input[type="number"] {
+      width: 31%;
     }
   }
   .edit-profile-title-wrapr {
@@ -43,6 +49,7 @@
         // background: url("../images/pic-1.jpg") no-repeat center 100%;
         // background-size: contain;
       }
+
       a,
       label {
         font-size: 12px;
@@ -72,6 +79,43 @@
     border: 1px solid #000;
     &:focus {
       border: 1px solid #000;
+    }
+  }
+  .social-link-wrapr {
+    .social-link {
+      span.fa {
+        display: inline-block;
+        float: left;
+      }
+      .social-text {
+        display: inline-block;
+        float: left;
+        position: unset;
+        padding: 0 10px;
+        width: 15%;
+      }
+      .social-input-field {
+        display: inline-block;
+        float: left;
+        width: 70%;
+        padding: 0 10px;
+        input{
+          width:90%;
+          display: inline-block;
+          float: left;
+        }
+        button{
+          border:none;
+          background-color: transparent;
+          display: inline-block;
+          float: left;
+          width:10%;
+          text-align: right;
+          i {
+            font-size: 20px;
+          }
+        }
+      }
     }
   }
 }

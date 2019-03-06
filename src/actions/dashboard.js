@@ -5,7 +5,7 @@ import { Auth } from "../auth";
 import * as _ from "lodash";
 import moment from "moment";
 
-const getDashboardStarted = (isFor) => ({
+const getDashboardStarted = isFor => ({
   type: types.GET_DASHBOARD_STARTED,
   isFor
 });
@@ -23,6 +23,11 @@ const getDashboardFailed = (error, isFor) => ({
   isFor
 });
 
+const setLastEvaluatedKeys = data => ({
+  type: types.GET_LAST_EVALUATE_KEYS_SUCCEEDED,
+  payload: data
+});
+
 export const getDashboard = (prop, provider) => {
   return dispatch => {
     dispatch(getDashboardStarted(prop));
@@ -32,8 +37,13 @@ export const getDashboard = (prop, provider) => {
     };
     return dashboardService[prop](provider, header).then(
       res => {
-        const campaigns = _.orderBy(res.data.data, function(o) { return new moment(o.createdAt); }, ['desc']);
-        dispatch(getDashboardSucceeded(campaigns, prop));
+        dispatch(getDashboardSucceeded(res.data.data, prop));
+        const paginationKeys = {
+          limit: res.data.pagination.limit,
+          page: res.data.pagination.page,
+          pages: res.data.pagination.pages
+        };
+        dispatch(setLastEvaluatedKeys(paginationKeys));
       },
       error => {
         dispatch(getDashboardFailed(error.response, prop));

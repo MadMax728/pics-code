@@ -1,14 +1,13 @@
 .upload-image-modal {
-  background: #333;
   &.create-campaign-modal {
     .modal-body {
       & > div {
         height: auto;
         & > div.col-sm-6.no-padding:nth-child(2) {
           img.widthHeightAuto {
-            height: 378px;
-            max-height: calc(100% - 65px);
-            width: 100%;
+            // height: 378px;
+            // max-height: calc(100% - 65px);
+            // width: 100%;
           }
         }
       }
@@ -25,6 +24,11 @@
   }
   .modal-dialog {
     width: 915px;
+    @media only screen and (max-width: 1280px) {
+      width: 90%;
+      margin: 0 auto;
+      padding: 30px 0;
+    }
   }
   .modal-content {
     float: left;
@@ -49,18 +53,19 @@
       padding: 20px;
       .profile_image {
         float: left;
-        &.wid45{
-          width: 55px;
+        &.wid45 {
+          width: 45px;
         }
         img {
           width: 45px;
+          height: 45px;
           margin-right: 10px;
         }
-      }     
-      .dispInline{
+      }
+      .dispInline {
         width: calc(100% - 50px);
         margin-top: 4px;
-        &+input{
+        & + input {
           width: 20px;
           height: 30px;
           margin: auto;
@@ -68,7 +73,7 @@
           margin-left: 4px;
           margin-top: 1px;
         }
-      }      
+      }
       div.description {
         border: 1px solid #979797;
         height: auto;
@@ -252,5 +257,293 @@
 @media only screen and (max-width: 990px) {
   .progress {
     margin-bottom: 20px;
+  }
+}
+.upload-pic-modal.create-campaign-modal {
+  .modal-dialog {
+    width: 915px;
+    @media only screen and (max-width: 991px) {
+      width: 85%;
+      // margin: 0 auto;
+      // padding: 30px 0;
+    }
+    .modal-content {
+      text-align: center;
+      height: auto;
+      .modal-header {
+        text-align: right;
+      }
+      .modal-body {
+        height: 600px;
+        .range-wrapr.add-wrapper {
+          position: relative;
+          padding: 0 50px;
+          
+          .min-profile-pic {
+            width: 20px;
+            height: 20px;
+            left: 20px;
+            top: 18px;
+          }
+          input[type="range"] {
+            border: none;
+            margin: 15px 25px;
+          }
+          .runnable {
+            left: 55px;
+            top: 26px;
+          }
+          .max-profile-pic {
+            left: -7px;
+            top: 12px;
+          }
+          .add-wrapper{
+            border-top:none !important;
+          }
+          .add-wrapper.upload-wrapr {
+            position: absolute;
+            right: 0;
+            bottom: 55px;
+            width: 30px;
+            height: 20px;
+            background-color: transparent;
+            img {
+              top: 0;
+              position: relative;
+            }
+            input[type="file"] {
+              top: 33px;
+              left: 0;
+            }
+          }
+        }
+        > div {
+          height: 100%;
+        }
+        .box {
+          padding: 12rem 1.25rem;
+          border: 1px solid #979797;
+          width: 518px;
+          height: 300px;
+          .inputfile + label {
+            max-width: 100%;
+            margin: 0 auto;
+          }
+          & ~ .add-wrapper {
+            height: 55px;
+            border: 1px solid #979797;
+            margin-bottom: 30px;
+            padding: 12px 0 12px;
+          }
+        }
+        .upload-form {
+          padding: 20px 190px;
+          @media only screen and (max-width: 991px) {
+            padding: 20px 80px;
+          }
+          height: 100%;
+          border: none;
+          .user-title {
+            .modal-title {
+              font-size: 24px;
+            }
+          }
+          .form-group {
+            label {
+              text-decoration: underline;
+              font-size: 18px;
+              font-family: "Helvetica";
+            }
+            p {
+              margin: 5px 0 15px;
+              display: inline-block;
+              width: 100%;
+              &.form-help-text {
+                font-size: 15px;
+              }
+            }
+            .create-campaign-crop-pic {
+              .feed_image {
+                width: 520px;
+                height: 300px;
+                position: relative;
+                @media only screen and (max-width: 991px) {
+                  margin: 0 auto;
+                }
+                img {
+                  width: 100%;
+                  position: absolute;
+                  bottom: 0;
+                  right: 0;
+                  top: 0;
+                  height: 100%;
+                  object-fit: cover;
+                }
+              }
+            }
+            .options {
+              label {
+                text-decoration: none;
+                font-size: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.create-campaign-modal.start-campaign-modal {
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+      }
+      .modal-body {
+        .edit-profile-pic {
+          + .range-wrapr.add-wrapper {
+            float: none;
+          }
+        }
+        .create-campaign-crop-pic {
+          width: 518px;
+          @media only screen and (max-width: 991px) {
+            width: inherit;
+          }
+        }
+        .range-wrapr.add-wrapper {
+          position: relative;
+          padding: 0 50px;
+          width: 518px;
+          float: inherit;
+          margin: auto;
+          .min-profile-pic {
+            width: 20px;
+            height: 20px;
+            left: 20px;
+            top: 18px;
+          }
+          input[type="range"] {
+            border: none;
+            margin: 15px 25px;
+          }
+          .runnable {
+            left: 55px;
+            top: 26px;
+          }
+          .max-profile-pic {
+            left: -7px;
+            top: 12px;
+          }
+          .add-wrapper.create-camp-ad-wrapr {
+            position: absolute;
+            right: 0;
+            @media only screen and (max-width: 991px) {
+              right: 15px;
+            }
+            bottom: 55px;
+            width: 30px;
+            height: 20px;
+            background-color: transparent;
+            img {
+              top: 33px;
+            }
+            input[type="file"] {
+              top: 33px;
+              left: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.create-campaign-modal.editor-modal {
+  .modal-dialog {
+    .modal-content {
+      .modal-header {
+      }
+      .modal-body {
+        min-height: 400px;
+        .create-campaign-wrapper {
+          padding: 0 0px 25px;
+          .title {
+            padding: 15px 20px;
+            margin: 0;
+          }
+        }
+        .quill {
+          padding: 0 20px 20px;
+          height: 350px;
+        }
+      }
+    }
+  }
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  .btn {
+    padding: 8px 20px;
+    background-color: #fff;
+  }
+  input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+  i {
+    cursor: pointer;
+  }
+}
+
+.upload-file-format {
+  background: rgba(51, 51, 51, 0.9) !important;
+  .modal-dialog {
+    margin: 200px auto 100px;
+    .modal-content {
+      background-color: transparent;
+      .closeBtn {
+        position: absolute;
+        right: -38px;
+        top: -38px;
+        z-index: 9;
+        background: none;
+        border: none;
+      }
+      .modal-body {
+        height: auto !important;
+        .upload-format {
+          h4 {
+            color: #4a4a4a;
+            font-family: "Helvetica-Bold";
+            font-size: 14px;
+            text-transform: capitalize;
+            margin: 15px 0 20px;
+          }
+          .upload-div {
+            height: 200px;
+            width: 200px;
+            padding: 20px;
+            position: relative;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 10px auto;
+            i {
+              background: -webkit-radial-gradient(#1f58a6, #029bd7);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              font-size: 60px;
+              margin: 20px 0 10px;
+              // color: radial-gradient(circle at 0 100%, #1f58a6, #029bd7);
+            }
+          }
+        }
+      }
+    }
   }
 }

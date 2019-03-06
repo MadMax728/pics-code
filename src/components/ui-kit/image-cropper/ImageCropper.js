@@ -60,7 +60,7 @@ class ImageCropper extends Component {
 
   handleSave = () => {
     // todo fix
-    if(this.editor && this.editor.getImageScaledToCanvas()) {
+    if (this.editor && this.editor.getImageScaledToCanvas()) {
       const img = this.editor.getImageScaledToCanvas().toDataURL();
       this.setState({ preview: img });
       this.props.handleEditImage(img);
@@ -80,6 +80,8 @@ class ImageCropper extends Component {
     } = this.state;
 
     if (isCircle) {
+      console.log(image);
+
       return (
         <EditProfileCrop
           handleNewImage={this.handleNewImage}
@@ -115,6 +117,8 @@ class ImageCropper extends Component {
         allowZoomOut={allowZoomOut}
         logCallback={this.logCallback}
         isCircle={isCircle}
+        userInfo={this.props.userInfo}
+        isEdit={this.props.isEdit}
       />
     );
   }
@@ -126,8 +130,9 @@ const propTypes = {
   handleEditImage: PropTypes.func,
   isCircle: PropTypes.bool,
   handleActualImg: PropTypes.any,
+  userInfo: PropTypes.any,
+  isEdit: PropTypes.any
 };
-
 
 ImageCropper.propTypes = propTypes;
 
