@@ -37,20 +37,13 @@ export const getDashboard = (prop, provider) => {
     };
     return dashboardService[prop](provider, header).then(
       res => {
-        const campaigns = _.orderBy(
-          res.data.data,
-          function(o) {
-            return new moment(o.createdAt);
-          },
-          ["desc"]
-        );
-        dispatch(getDashboardSucceeded(campaigns, prop));
-        const keys = {
-          limit: res.data.limit,
-          page: res.data.page,
-          pages: res.data.pages
+        dispatch(getDashboardSucceeded(res.data.data, prop));
+        const paginationKeys = {
+          limit: res.data.pagination.limit,
+          page: res.data.pagination.page,
+          pages: res.data.pagination.pages
         };
-        dispatch(setLastEvaluatedKeys(keys));
+        dispatch(setLastEvaluatedKeys(paginationKeys));
       },
       error => {
         dispatch(getDashboardFailed(error.response, prop));

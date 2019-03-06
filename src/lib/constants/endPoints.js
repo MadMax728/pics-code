@@ -29,7 +29,7 @@ export const createCampaignEndPoint = "/campaigns";
 export const editCampaignEndPoint = "/campaigns/";
 export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
-export const addCampaignComment = "campaigns/"; //5c750deebba3b10e6dfefbd4/comment/
+export const addCampaignComment = "campaigns/";
 
 // CMS Management Service
 export const getCMSManagementEndPoint = "/cmspage";
@@ -45,7 +45,7 @@ export const deleteCommentEndPoint = "/comment/";
 export const editCommentEndPoint = "/comment/";
 
 // Dashboard Service
-export const newsEndPoint = "/newsfeeds/news-feeds";
+export const newsEndPoint = "/newsfeeds";
 export const exploresEndPoint = "/media?";
 export const participantsEndPoint = "/participants/";
 export const usersEndPoint = "/users";
@@ -62,8 +62,8 @@ export const usernamesEndPoint = "/users";
 export const likeEndPoint = "/like";
 
 // media services
-export const uploadMediaImageEndPoint = "/image/profile";
-export const uploadMediaVideoEndPoint = "/video";
+export const uploadMediaImageEndPoint = "/media";
+export const uploadMediaVideoEndPoint = "/media";
 
 // Message Service
 export const getMessagesEndPoint = "/messages?";
@@ -111,7 +111,7 @@ export const typesEndPoint = "/vouchers/?type=typeLists";
 export const numbersEndPoint = "/vouchers/?type=numberLists";
 
 // setting service
-export const getNewsFeedOwnerEndPoint = "newsfeeds/own-news-feeds";
+export const getNewsFeedOwnerEndPoint = "/newsfeeds/own-newsfeed";
 export const getNewsFeedOtherEndPoint = "/newsfeeds/own-news-feeds?id=";
 export const getSavedOwnerEndPoint = "/saveposts";
 export const getAboutEndPoint = "/users/";

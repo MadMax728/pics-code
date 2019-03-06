@@ -171,9 +171,12 @@ class UploadModal extends Component {
         Data.append("isAdvertiseLabel", isLabel);
         Data.append("category", form.add_category);
         if (form.filetype) {
-          Data.append("image", form.file);
+          Data.append("media", form.file);
+          Data.append("typeContent", "image");
+          Data.append("typeImage", "Crop");
         } else {
-          Data.append("video", form.file);
+          Data.append("media", form.file);
+          Data.append("typeContent", "video");
         }
         Data.append("postType", "mediapost");
         Data.append("location", JSON.stringify(form.add_location));

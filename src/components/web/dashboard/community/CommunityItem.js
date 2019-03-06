@@ -1,59 +1,81 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import CommunityBodyItem from "./CommunityBodyItem";
+import { sendRequest, getUnsubscribe } from "../../../../actions";
+import { connect } from "react-redux";
 import { Translations } from "../../../../lib/translations";
-import * as routes from "../../../../lib/constants/routes";
-import { UserImageItem, Button, UserTitleItem } from "../../../ui-kit";
 
-const CommunityItem = ({
-  user,
-  handleSubscribeAction,
-  handleUnsubscribeAction,
-  isLoading = false
-}) => {
-  return (
-    <div className="community_wrapper">
-      <div className="community-user-image">
-        <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
-          <UserImageItem
-            customClass={"img-circle img-responsive"}
-            item={user.profileUrl}
-          />
-        </Link>
-      </div>
-      <div className="community-user-name">
-        <Link to={`${routes.ABOUT_ROUTE}/${user.username}`}>
-          <UserTitleItem title={user.name} username={user.username} />
-        </Link>
-      </div>
-      <div className="community-subscribe">
-        {user.isSubscribedTo ? (
-          <Button
-            className={`filled_button`}
-            id={user.subscriberId}
-            onClick={handleUnsubscribeAction}
-            disabled={isLoading}
-            text={Translations.profile_community_right_sidebar.Subscribed}
-          />
-        ) : (
-          <Button
-            className={`blue_button`}
-            id={user.id}
-            onClick={handleSubscribeAction}
-            disabled={isLoading}
-            text={Translations.profile_community_right_sidebar.Subscribe}
-          />
-        )}
-      </div>
-    </div>
-  );
+class CommunityItem extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      item: this.props.user,
+      subscriberId: this.props.user.subscriberId
+    };
+  }
+
+  render() {
+    const { item, subscriberId } = this.state;
+    const requestLoading = this.props.usersData.isLoading;
+    return (
+      <CommunityBodyItem
+        user={item}
+        handleSubscribe={this.handleSubscribe}
+        handleUnSubscribe={this.handleUnSubscribe}
+        subscriberId={subscriberId}
+        isLoading={requestLoading}
+      />
+    );
+  }
+
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  };
+
+  handleSubscribe = e => {
+    const requestData = { followers: e.target.id };
+    this.props.sendRequest(requestData).then(() => {
+      if (this.props.usersData && this.props.usersData.isRequestSendData) {
+        this.setState({
+          subscriberId: this.props.usersData.isRequestSendData._id
+        });
+      }
+    });
+  };
+
+  handleUnSubscribe = e => {
+    const subscriberId = e.target.id;
+    this.props.getUnsubscribe(subscriberId).then(() => {
+      if (this.props.usersData && this.props.usersData.isUnsubscribedData) {
+        this.setState({
+          subscriberId: ""
+        });
+      }
+    });
+  };
+}
+
+const mapStateToProps = state => ({
+  usersData: state.usersData,
+  userDataByUsername: state.userDataByUsername,
+  usersList: state.dashboardData.users
+});
+
+const mapDispatchToProps = {
+  sendRequest,
+  getUnsubscribe
 };
 
 CommunityItem.propTypes = {
-  user: PropTypes.any,
-  handleSubscribeAction: PropTypes.any,
-  handleUnsubscribeAction: PropTypes.any,
-  isLoading: PropTypes.any
+  sendRequest: PropTypes.func,
+  getUnsubscribe: PropTypes.func,
+  usersData: PropTypes.any,
+  isLoading: PropTypes.any,
+  user: PropTypes.any
 };
 
-export default CommunityItem;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CommunityItem);

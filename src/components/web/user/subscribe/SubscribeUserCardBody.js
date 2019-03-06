@@ -13,33 +13,14 @@ class SubscribeUserCardBody extends Component {
   }
 
   render() {
-    const { handleSubscribed, isLoading, isFor, isView } = this.props;
+    const {
+      handleSubscribed,
+      handleUnSubscribed,
+      isLoading,
+      isFor,
+      isView
+    } = this.props;
     const { user } = this.state;
-    let classNameText = "filled_button";
-    let btnText = Translations.profile_community_right_sidebar.Subscribed;
-    const isfollower = typeof user.followers;
-    if (isfollower !== "string") {
-      btnText = Translations.profile_community_right_sidebar.Subscribed;
-      classNameText = "filled_button";
-    } else {
-      btnText = Translations.profile_community_right_sidebar.Subscribe;
-      classNameText = "blue_button";
-    }
-    let actionId = "";
-    if (isFor === "Subscribers") {
-      actionId = user.followers;
-    } else {
-      actionId = user._id;
-    }
-
-    const actionButton = {
-      className: classNameText,
-      actionId: actionId,
-      handleActionClick: handleSubscribed,
-      btnText,
-      isLoading
-    };
-
     return (
       <div>
         {isView && (
@@ -72,13 +53,27 @@ class SubscribeUserCardBody extends Component {
             </div>
             <div className="col-md-4">
               <div className="subscribe-btn">
-                <Button
-                  className={actionButton.className}
-                  id={actionButton.actionId}
-                  onClick={actionButton.handleActionClick}
-                  disabled={actionButton.isLoading}
-                  text={actionButton.btnText}
-                />
+                {isFor === "Subscribers" ? (
+                  <Button
+                    className={"blue_button"}
+                    id={user.following.id}
+                    onClick={handleSubscribed}
+                    disabled={isLoading}
+                    text={
+                      Translations.profile_community_right_sidebar.Subscribe
+                    }
+                  />
+                ) : (
+                  <Button
+                    className={"filled_button"}
+                    id={user._id}
+                    onClick={handleUnSubscribed}
+                    disabled={isLoading}
+                    text={
+                      Translations.profile_community_right_sidebar.Subscribed
+                    }
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -92,6 +87,7 @@ class SubscribeUserCardBody extends Component {
 SubscribeUserCardBody.propTypes = {
   user: PropTypes.object.isRequired,
   handleSubscribed: PropTypes.func.isRequired,
+  handleUnSubscribed: PropTypes.func.isRequired,
   isLoading: PropTypes.any,
   isSubscribeStatus: PropTypes.any,
   isFor: PropTypes.any,

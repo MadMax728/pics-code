@@ -58,9 +58,9 @@ class Subscribe extends Component {
             ? Translations.top_bar_info_modal.subscriber_modal_title
             : Translations.top_bar_info_modal.subscribed_modal_title}
         </h4>
-        
+
         <div className="header-notifications">
-        {isLoading && <InlineLoading />}
+          {isLoading && <InlineLoading />}
           {dataList.length > 0 ? (
             <InfiniteScroll
               pageStart={0}
@@ -68,10 +68,10 @@ class Subscribe extends Component {
               hasMore={hasMore}
               loader={<div className="loader">Loading ...</div>}
             >
+              {isLoading && <InlineLoading />}
               {dataList.map(user => {
                 return (
                   <div key={user._id}>
-                    {isLoading && <InlineLoading />}
                     <SubscribeUserCard
                       item={user}
                       isLoading={isLoading}
@@ -108,7 +108,6 @@ class Subscribe extends Component {
   };
 
   getMoreUsers = () => {
-    console.log("inscroll");
     const { subscribeData } = this.props;
     const params = { limit: this.state.limit, page: 1 };
     const userList = subscribeData.subscribeData;
@@ -121,38 +120,25 @@ class Subscribe extends Component {
     } else {
       params.page = 0;
     }
-    console.log(params);
     // this.getTooltipUserList(this.props.userId, params);
   };
 
-  // Tooltip List
   getTooltipUserList = (userId, paginationParam) => {
-    console.log("params", paginationParam);
     const { isFor } = this.props;
     if (userId) {
       const paginationParams =
         "&limit=" + paginationParam.limit + "&page=" + paginationParam.page;
-      let userRequestData = {
+      const userRequestData = {
         id: userId,
         type: "following",
         params: paginationParams
       };
-
       if (isFor === "Subscribers") {
-        userRequestData = {
-          id: userId,
-          type: "following",
-          params: paginationParams
-        };
+        userRequestData.type = "following";
       } else if (isFor === "Subscribed") {
-        userRequestData = {
-          id: userId,
-          type: "followers",
-          params: paginationParams
-        };
+        userRequestData.type = "followers";
       }
       this.props.getFollowUserList(userRequestData).then(() => {
-        // Success
         if (
           this.props.subscribeData &&
           this.props.subscribeData.subscribeData &&

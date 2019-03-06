@@ -28,12 +28,7 @@ class Community extends Component {
               userCommunityList.map(user => {
                 return (
                   <div key={user.id}>
-                    <CommunityItem
-                      user={user}
-                      handleSubscribeAction={this.handleSubscribe}
-                      handleUnsubscribeAction={this.handleUnSubscribe}
-                      isLoading={isSubscribeLoading}
-                    />
+                    <CommunityItem user={user} isLoading={isSubscribeLoading} />
                   </div>
                 );
               })
@@ -51,19 +46,19 @@ class Community extends Component {
     this.props.getUserCommunity();
   };
 
-  handleSubscribe = e => {
-    const requestData = { followers: e.target.id };
-    this.props.sendRequest(requestData).then(() => {
-      this.props.getUserCommunity();
-    });
-  };
+  // handleSubscribe = e => {
+  //   const requestData = { followers: e.target.id };
+  //   this.props.sendRequest(requestData).then(() => {
+  //     this.props.getUserCommunity();
+  //   });
+  // };
 
-  handleUnSubscribe = e => {
-    const subscribedId = e.target.id;
-    this.props.getUnsubscribe(subscribedId).then(() => {
-      this.props.getUserCommunity();
-    });
-  };
+  // handleUnSubscribe = e => {
+  //   const subscribedId = e.target.id;
+  //   this.props.getUnsubscribe(subscribedId).then(() => {
+  //     this.props.getUserCommunity();
+  //   });
+  // };
 }
 
 const mapStateToProps = state => ({

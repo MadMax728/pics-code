@@ -34,6 +34,7 @@ class SubscribeUserCard extends Component {
         <SubscribeUserCardBody
           user={item}
           handleSubscribed={this.handleSubscribed}
+          handleUnSubscribed={this.handleUnSubscribed}
           isSubscribeStatus={isSubscribeStatus}
           subscribeId={subscribeId}
           isLoading={isLoading}
@@ -49,52 +50,84 @@ class SubscribeUserCard extends Component {
   };
 
   handleSubscribed = e => {
-    const { isFor } = this.props;
     const { item } = this.state;
-    if (isFor === "Subscribers") {
-      const requestData = { followers: e.target.id };
-      this.props.sendRequest(requestData).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          // Error
-        } else if (
-          this.props.usersData &&
-          this.props.usersData.isRequestSendData
-        ) {
-          const reponseId = this.props.usersData.isRequestSendData._id;
-          if (reponseId === item._id) {
-            this.setState({
-              isView: false
-            });
-          }
+    console.log("subscribe", e.target.id);
+    const requestData = { followers: e.target.id };
+    this.props.sendRequest(requestData).then(() => {
+      if (this.props.usersData && this.props.usersData.isRequestSendData) {
+        const reponseId = this.props.usersData.isRequestSendData._id;
+        if (reponseId === item._id) {
+          this.setState({
+            isView: false
+          });
         }
-      });
-    } else {
-      this.props.getUnsubscribe(e.target.id).then(() => {
-        if (
-          this.props.usersData.error &&
-          this.props.usersData.error.status === 400
-        ) {
-          // Error
-        } else if (
-          this.props.usersData &&
-          this.props.usersData.isUnsubscribedData
-        ) {
-          const reponseId = this.props.usersData.isUnsubscribedData._id;
-          // Success
-          if (reponseId === item._id) {
-            this.setState({
-              isView: false
-            });
-            const data = { username: this.props.username };
-            this.props.getUser(data);
-          }
-        }
-      });
-    }
+      }
+    });
   };
+
+  handleUnSubscribed = e => {
+    console.log("unsubscribe", e.target.id);
+    const { item } = this.state;
+    this.props.getUnsubscribe(e.target.id).then(() => {
+      if (this.props.usersData && this.props.usersData.isUnsubscribedData) {
+        const reponseId = this.props.usersData.isUnsubscribedData._id;
+        if (reponseId === item._id) {
+          this.setState({
+            isView: false
+          });
+          const data = { username: this.props.username };
+          this.props.getUser(data);
+        }
+      }
+    });
+  };
+  // handleSubscribed = e => {
+  //   const { isFor } = this.props;
+  //   const { item } = this.state;
+  //   if (isFor === "Subscribers") {
+  //     const requestData = { followers: e.target.id };
+  //     this.props.sendRequest(requestData).then(() => {
+  //       if (
+  //         this.props.usersData.error &&
+  //         this.props.usersData.error.status === 400
+  //       ) {
+  //         // Error
+  //       } else if (
+  //         this.props.usersData &&
+  //         this.props.usersData.isRequestSendData
+  //       ) {
+  //         const reponseId = this.props.usersData.isRequestSendData._id;
+  //         if (reponseId === item._id) {
+  //           this.setState({
+  //             isView: false
+  //           });
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     this.props.getUnsubscribe(e.target.id).then(() => {
+  //       if (
+  //         this.props.usersData.error &&
+  //         this.props.usersData.error.status === 400
+  //       ) {
+  //         // Error
+  //       } else if (
+  //         this.props.usersData &&
+  //         this.props.usersData.isUnsubscribedData
+  //       ) {
+  //         const reponseId = this.props.usersData.isUnsubscribedData._id;
+  //         // Success
+  //         if (reponseId === item._id) {
+  //           this.setState({
+  //             isView: false
+  //           });
+  //           const data = { username: this.props.username };
+  //           this.props.getUser(data);
+  //         }
+  //       }
+  //     });
+  //   }
+  // };
 }
 
 const mapStateToProps = state => ({

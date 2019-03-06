@@ -11,15 +11,15 @@ class NewsRoot extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      newsFeedList: null
+      newsFeedList: null,
+      currentPage: 1,
+      limit: enumerations.pagination.limit
     };
   }
 
   render() {
-    let { newsFeedList } = this.state;
-    const { isLoadingnews, searchData } = this.props;
-    newsFeedList = search(newsFeedList, "userName", searchData.searchKeyword);
-
+    const { newsFeedList } = this.state;
+    const { isLoadingnews } = this.props;
     return (
       <div className={"middle-section padding-rl-10"}>
         {newsFeedList && this.renderNewsFeedList()}
@@ -32,58 +32,24 @@ class NewsRoot extends Component {
     );
   }
 
-  componentDidMount = () => {
-    window.scrollTo(0, 0);
-    this.handleRefresh();
-    this.handleSetNewsFeed("");
-    window.addEventListener("scroll", this.onScroll, false);
-  };
-
-  componentWillUnmount = () => {
-    window.removeEventListener("scroll", this.onScroll);
-  };
-
-  onScroll = () => {
-    const { newsFeedList } = this.state;
-    const currentScrollHeight = parseInt(window.innerHeight + window.scrollY);
-    // console.log(currentScrollHeight, (document.body.offsetHeight));
-    if (
-      newsFeedList &&
-      currentScrollHeight + 1 >= document.body.offsetHeight &&
-      newsFeedList.length
-    ) {
-      const { lastEvaluatedKey } = this.props;
-      let payload = "?limit=10";
-      for (const i in lastEvaluatedKey) {
-        payload += `&${i}=${lastEvaluatedKey[i]}`;
-      }
-      this.props.getDashboard("news", payload).then(() => {
-        const { newsFeedList } = this.state;
-        this.setState({
-          newsFeedList: newsFeedList.concat(this.props.newsFeedList)
-        });
-      });
-    }
-  };
-
-  handleSetNewsFeed = payload => {
-    this.props.getDashboard("news", payload).then(() => {
-      const { newsFeedList } = this.props;
-      this.setState({ newsFeedList });
-    });
-  };
-
   renderNewsFeedList = () => {
     let { newsFeedList } = this.state;
     const { searchData, handleModalInfoShow, handleModalShow } = this.props;
     newsFeedList = search(newsFeedList, "userName", searchData.searchKeyword);
-
     return newsFeedList.map(newsFeed => {
       return (
         <div onScroll={this.trackScrolling} key={newsFeed.id}>
+          {newsFeed.mediaUrl && (
+            <MediaCard
+              item={newsFeed}
+              isParticipant={false}
+              isDescription
+              handleModalShow={handleModalShow}
+            />
+          )}
+
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
-            newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.mediaPost && (
               <MediaCard
@@ -93,13 +59,14 @@ class NewsRoot extends Component {
                 handleModalShow={handleModalShow}
               />
             )}
+
           {newsFeed.mediaUrl &&
             newsFeed.typeContent &&
             newsFeed.typeContent.toLowerCase() !==
               enumerations.mediaTypes.video &&
             newsFeed.postType &&
             newsFeed.postType.toLowerCase() ===
-              enumerations.contentTypes.companyCampaign && (
+              enumerations.contentTypes.campaign && (
               <CampaignCard
                 item={newsFeed}
                 isDescription={false}
@@ -111,7 +78,7 @@ class NewsRoot extends Component {
                 handleModalShow={handleModalShow}
               />
             )}
-          {newsFeed.mediaUrl &&
+          {/* {newsFeed.mediaUrl &&
             newsFeed.typeContent &&
             newsFeed.typeContent.toLowerCase() !==
               enumerations.mediaTypes.video &&
@@ -128,7 +95,7 @@ class NewsRoot extends Component {
                 handleModalInfoShow={handleModalInfoShow}
                 handleModalShow={handleModalShow}
               />
-            )}
+            )} */}
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
             newsFeed.mediaUrl &&
@@ -143,7 +110,6 @@ class NewsRoot extends Component {
             )}
           {newsFeed.mediaUrl &&
             newsFeed.postType &&
-            newsFeed.mediaUrl &&
             newsFeed.postType.toLowerCase() ===
               enumerations.contentTypes.ad && (
               <AdCard
@@ -159,11 +125,64 @@ class NewsRoot extends Component {
     });
   };
 
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+    this.handleRefresh();
+    this.handleSetNewsFeed("");
+    window.addEventListener("scroll", this.onScroll, false);
+  };
+
+  componentWillUnmount = () => {
+    window.removeEventListener("scroll", this.onScroll);
+  };
+
   handleRefresh = () => {
     const { searchData, getSearch } = this.props;
     if (searchData.searchKeyword) {
       getSearch("");
       this.handleSetNewsFeed("");
+    }
+  };
+
+  handleSetNewsFeed = payload => {
+    const { limit, currentPage } = this.state;
+    if (payload === "") {
+      payload = "?limit=" + limit + "&page=" + currentPage;
+    }
+    this.props.getDashboard("news", payload).then(() => {
+      const { newsFeedList } = this.props;
+      this.setState({ newsFeedList });
+    });
+  };
+
+  onScroll = () => {
+    const { newsFeedList, currentPage } = this.state;
+    const currentScrollHeight = parseInt(window.innerHeight + window.scrollY);
+    if (
+      newsFeedList &&
+      currentScrollHeight + 1 >= document.body.offsetHeight &&
+      newsFeedList.length
+    ) {
+      const { lastEvaluatedKey } = this.props;
+      let payload = "";
+      if (currentPage < lastEvaluatedKey.pages) {
+        for (let i in lastEvaluatedKey) {
+          if (i === "limit") {
+            payload += lastEvaluatedKey[i] && `?${i}=${lastEvaluatedKey[i]}`;
+            this.setState({ limit: lastEvaluatedKey[i] });
+          } else {
+            const currentPage = parseInt(lastEvaluatedKey[i]) + 1;
+            payload += lastEvaluatedKey[i] && `&${i}=${currentPage}`;
+            this.setState({ currentPage });
+          }
+        }
+        this.props.getDashboard("news", payload).then(() => {
+          const { newsFeedList } = this.state;
+          this.setState({
+            newsFeedList: newsFeedList.concat(this.props.newsFeedList)
+          });
+        });
+      }
     }
   };
 }
