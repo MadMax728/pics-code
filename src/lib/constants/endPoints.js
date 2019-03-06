@@ -29,7 +29,7 @@ export const createCampaignEndPoint = "/campaigns";
 export const editCampaignEndPoint = "/campaigns/";
 export const addParticipantsEndPoint = "/participants/add-participant";
 export const removeParticipantsEndPoint = "/participants/";
-export const addCampaignComment = "campaigns/"; //5c750deebba3b10e6dfefbd4/comment/
+export const addCampaignComment = "campaigns/";
 
 // CMS Management Service
 export const getCMSManagementEndPoint = "/cmspage";
@@ -45,7 +45,7 @@ export const deleteCommentEndPoint = "/comment/";
 export const editCommentEndPoint = "/comment/";
 
 // Dashboard Service
-export const newsEndPoint = "/newsfeeds/news-feeds";
+export const newsEndPoint = "/newsfeeds"; // "/newsfeeds/news-feeds";
 export const exploresEndPoint = "/explore?";
 export const participantsEndPoint = "/participants/";
 export const usersEndPoint = "/users";
@@ -111,7 +111,7 @@ export const typesEndPoint = "/vouchers/?type=typeLists";
 export const numbersEndPoint = "/vouchers/?type=numberLists";
 
 // setting service
-export const getNewsFeedOwnerEndPoint = "newsfeeds/own-news-feeds";
+export const getNewsFeedOwnerEndPoint = "/newsfeeds/own-newsfeed";
 export const getNewsFeedOtherEndPoint = "/newsfeeds/own-news-feeds?id=";
 export const getSavedOwnerEndPoint = "/saveposts";
 export const getAboutEndPoint = "/users/";
